@@ -2,6 +2,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 import matter from 'gray-matter'
 import { compileMDX } from 'next-mdx-remote/rsc'
+import type { ReactNode } from 'react'
 
 type DocMeta = {
   slug: string
@@ -13,7 +14,9 @@ type DocMeta = {
   town?: string
   county?: string
   priority?: number
-  [key: string]: any
+  // allow extra front-matter keys without using `any`
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  [key: string]: unknown
 }
 
 const CONTENT_DIR = path.join(process.cwd(), 'content')
@@ -21,20 +24,22 @@ const CONTENT_DIR = path.join(process.cwd(), 'content')
 export async function getDoc(
   collection: 'services' | 'locations',
   slug: string
-): Promise<{ meta: DocMeta; content: React.ReactNode }> {
+): Promise<{ meta: DocMeta; content: ReactNode }> {
   const filePath = path.join(CONTENT_DIR, collection, `${slug}.mdx`)
   const raw = fs.readFileSync(filePath, 'utf8')
 
   const { content: body, data } = matter(raw)
+  const fm = data as Partial<DocMeta>
 
-  // compileMDX (RSC) returns { content, frontmatter }
+  // compileMDX returns { content, frontmatter }
   const { content: compiled, frontmatter } = await compileMDX({
     source: body,
   })
+  const fm2 = (frontmatter ?? {}) as Partial<DocMeta>
 
   return {
-    meta: { slug, ...(data as any), ...(frontmatter as any) },
-    content: compiled, // <— return only the ReactNode
+    meta: { slug, ...fm, ...fm2 } as DocMeta,
+    content: compiled,
   }
 }
 
@@ -57,6 +62,7 @@ export function getAllMeta(collection: 'services' | 'locations'): DocMeta[] {
       const slug = f.replace(/\.mdx$/, '')
       const raw = fs.readFileSync(path.join(dir, f), 'utf8')
       const { data } = matter(raw)
-      return { slug, ...(data as any) }
+      const fm = data as Partial<DocMeta>
+      return { slug, ...fm } as DocMeta
     })
 }
