@@ -15,7 +15,6 @@ type DocMeta = {
   county?: string
   priority?: number
   // allow extra front-matter keys without using `any`
-  // eslint-disable-next-line @typescript-eslint/ban-types
   [key: string]: unknown
 }
 
