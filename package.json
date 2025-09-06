@@ -9,6 +9,8 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@fontsource/cinzel": "^5.2.6",
+    "@fontsource/libre-caslon-display": "^5.2.6",
     "@mdx-js/react": "^3.1.1",
     "@next/mdx": "^15.5.2",
     "gray-matter": "^4.0.3",
