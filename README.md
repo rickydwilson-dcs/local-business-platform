@@ -1,36 +1,109 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+# TSX Index Pages + MDX Setup
 
-First, run the development server:
+## Included
+- `app/page.tsx` (Home)
+- `app/services/page.tsx` (Services index)
+- `app/locations/page.tsx` (Locations index)
+- `app/contact/page.tsx` (Contact as TSX with a basic form)
 
+## MDX in Next.js (App Router) — Setup
+1) Install MDX:
 ```bash
-npm run dev
+npm i @next/mdx @mdx-js/react
 # or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+yarn add @next/mdx @mdx-js/react
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2) Wrap your Next.js config with the MDX plugin.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+**next.config.mjs** (ESM)
+```js
+import createMDX from '@next/mdx';
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+const withMDX = createMDX({
+  // Optional: provide remark/rehype plugins here
+  // remarkPlugins: [],
+  // rehypePlugins: [],
+});
 
-## Learn More
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  // Any other config
+  pageExtensions: ['ts','tsx','md','mdx'], // allow MD/MDX as pages
+};
 
-To learn more about Next.js, take a look at the following resources:
+export default withMDX(nextConfig);
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3) (Optional) Provide an MDX provider for shortcodes/components.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+**app/providers.tsx**
+```tsx
+'use client';
+import * as React from 'react';
+import {{ MDXProvider }} from '@mdx-js/react';
 
-## Deploy on Vercel
+const components = {{
+  // Map markdown elements to custom components if you like
+}};
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+export default function Providers({{ children }}: {{ children: React.ReactNode }}) {{
+  return <MDXProvider components={components}>{'{'}children{'}'}</MDXProvider>;
+}}
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Then include `<Providers>` in your `app/layout.tsx` (client side only if needed).
+
+4) Keep MDX content under `/app/.../*.mdx` or a `/content` folder and render via route files.
+   - For content-heavy pages, prefer MDX.
+   - For index pages and app logic, prefer TSX.
+
+## Wiring TSX routes to MDX
+If you want `/services/[slug]` to render MDX by slug:
+- Put MDX files in `content/services/*.mdx` (slug = filename).
+- In `app/services/[slug]/page.tsx`, load the MDX via your loader (Contentlayer or a custom FS import).
+
+Contentlayer example (rough sketch):
+```ts
+// contentlayer.config.ts
+import {{ defineDocumentType, makeSource }} from 'contentlayer/source-files';
+
+export const Service = defineDocumentType(() => ({
+  name: 'Service',
+  filePathPattern: 'services/*.mdx',
+  contentType: 'mdx',
+  fields: {{
+    title: {{ type: 'string', required: true }},
+    description: {{ type: 'string', required: false }},
+    // etc...
+  }},
+  computedFields: {{
+    slug: {{ type: 'string', resolve: (doc) => doc._raw.flattenedPath.replace('services/','') }},
+  }},
+}));
+
+export default makeSource({{
+  contentDirPath: 'content',
+  documentTypes: [Service],
+}});
+```
+
+```tsx
+// app/services/[slug]/page.tsx
+import {{ allServices }} from 'contentlayer/generated';
+import {{ notFound }} from 'next/navigation';
+import {{ Mdx }} from '@/components/mdx'; // your MDX renderer
+
+export async function generateStaticParams() {{
+  return allServices.map((s) => ({{ slug: s.slug }}));
+}}
+
+export default function ServicePage({{ params }}: {{ params: {{ slug: string }} }}) {{
+  const service = allServices.find((s) => s.slug === params.slug);
+  if (!service) return notFound();
+  return <Mdx code={{service.body.code}} frontmatter={{service}} />;
+}}
+```
+
+You're set. Drop your MDX into `content/services` and `content/locations`, and use these TSX index pages for navigation.

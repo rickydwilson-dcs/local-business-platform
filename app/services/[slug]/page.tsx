@@ -1,27 +1,51 @@
-import { getAllSlugs, getDoc } from '@/src/lib/mdx'
-import type { Metadata } from 'next'
+import { notFound } from "next/navigation";
+import { listSlugs, loadMdx } from "@/lib/mdx";
 
-export const dynamicParams = false
+type Params = { slug: string };
 
-export function generateStaticParams() {
-  return getAllSlugs('services').map((slug) => ({ slug }))
+export async function generateStaticParams() {
+  const slugs = await listSlugs("services");
+  return slugs.map((slug) => ({ slug }));
 }
 
-export async function generateMetadata(
-  props: { params: Promise<{ slug: string }> }
-): Promise<Metadata> {
-  const { slug } = await props.params
-  const { meta } = await getDoc('services', slug)
-  return {
-    title: meta.seoTitle || meta.title,
-    description: meta.seoDescription,
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<Params>;
+}) {
+  const { slug } = await params;
+  try {
+    const { frontmatter } = await loadMdx({ baseDir: "services", slug });
+    return {
+      title: frontmatter.title ?? `Service: ${slug.replace(/-/g, " ")}`,
+      description:
+        frontmatter.description ??
+        `Information about ${slug.replace(/-/g, " ")}`,
+    };
+  } catch {
+    return {};
   }
 }
 
-export default async function ServicePage(
-  props: { params: Promise<{ slug: string }> }
-) {
-  const { slug } = await props.params
-  const { content } = await getDoc('services', slug)
-  return <article className="prose max-w-none">{content}</article>
+export default async function ServiceDetailPage({
+  params,
+}: {
+  params: Promise<Params>;
+}) {
+  const { slug } = await params;
+  try {
+    const { content, frontmatter } = await loadMdx({
+      baseDir: "services",
+      slug,
+    });
+    return (
+      <main className="container mx-auto px-4 py-10 prose">
+        {frontmatter.title ? <h1 className="!mb-2">{frontmatter.title}</h1> : null}
+        {frontmatter.description ? <p className="lead">{frontmatter.description}</p> : null}
+        {content}
+      </main>
+    );
+  } catch {
+    notFound();
+  }
 }

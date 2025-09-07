@@ -1,24 +1,32 @@
-import Link from 'next/link'
-import { getAllMeta } from '@/src/lib/mdx'
+// /app/locations/page.tsx
+import Link from "next/link";
+import { listSlugs, loadMdx } from "@/lib/mdx";
 
-export default function LocationsPage() {
-  const towns = getAllMeta('locations').sort(
-    (a, b) => (a.priority ?? 999) - (b.priority ?? 999)
-  )
+export default async function LocationsPage() {
+  const slugs = await listSlugs("locations");
+  const items = await Promise.all(
+    slugs.map(async (slug) => {
+      try {
+        const { frontmatter } = await loadMdx({ baseDir: "locations", slug });
+        return { slug, title: frontmatter.title ?? slug.replace(/-/g, " ") };
+      } catch {
+        return { slug, title: slug.replace(/-/g, " ") };
+      }
+    })
+  );
 
   return (
-    <div>
-      <h1 className="text-3xl font-bold mb-6">Areas We Cover</h1>
-      <ul className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
-        {towns.map((t) => (
-          <li key={t.slug} className="border rounded p-4">
-            <h2 className="font-semibold">{t.town ?? t.slug}</h2>
-            <Link className="underline" href={`/locations/${t.slug}`}>
-              Scaffolding in {t.town ?? t.slug}
+    <main className="container mx-auto px-4 py-10">
+      <h1 className="text-3xl font-bold mb-6">Locations</h1>
+      <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        {items.map(({ slug, title }) => (
+          <li key={slug} className="rounded-2xl shadow p-4 hover:shadow-md transition">
+            <Link href={`/locations/${slug}`} className="font-medium underline">
+              {title}
             </Link>
           </li>
         ))}
       </ul>
-    </div>
-  )
+    </main>
+  );
 }
