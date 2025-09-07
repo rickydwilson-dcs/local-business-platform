@@ -1,69 +1,62 @@
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import { listSlugs, loadMdx } from "@/lib/mdx";
 
 type Params = { slug: string };
+
+type Frontmatter = {
+  title?: string;
+  description?: string;
+  seoTitle?: string;
+  [key: string]: unknown;
+};
 
 export async function generateStaticParams() {
   const slugs = await listSlugs("locations");
   return slugs.map((slug) => ({ slug }));
 }
 
-function humanizeSlug(slug: string) {
-  return slug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
-}
-
-function normalizeTown(frontmatter: any, slug: string) {
-  const raw =
-    (frontmatter?.title as string | undefined)?.trim() ||
-    humanizeSlug(slug);
-  return raw.replace(/^Scaffolding in\s+/i, "").trim();
-}
-
-function buildPageTitle(frontmatter: any, slug: string) {
-  if (frontmatter?.seoTitle) return String(frontmatter.seoTitle).trim();
-  const town = normalizeTown(frontmatter, slug);
-  return `Scaffolding in ${town}`;
-}
-
-export async function generateMetadata({ params }: { params: Promise<Params> }) {
+export async function generateMetadata(
+  { params }: { params: Promise<Params> }
+): Promise<Metadata> {
   const { slug } = await params;
   try {
-    const { frontmatter } = await loadMdx({ baseDir: "locations", slug });
-    const title = buildPageTitle(frontmatter, slug);
-    const town = normalizeTown(frontmatter, slug);
-    const description =
-      frontmatter?.description ?? `Local scaffolding services in ${town}.`;
-
+    const { frontmatter } = await loadMdx<{ frontmatter: Frontmatter }>({
+      baseDir: "locations",
+      slug,
+    });
+    const titleFromFile = frontmatter.title?.trim();
+    const pageTitle = titleFromFile || slug.replace(/-/g, " ");
+    // Title should NOT prepend "Scaffolding in" here — content handles headings.
     return {
-      title,
-      description,
-      openGraph: { title, description },
-      twitter: { title, description },
+      title: frontmatter.seoTitle || `${pageTitle} | Colossus Scaffolding`,
+      description:
+        (frontmatter.description as string | undefined) ??
+        `Local scaffolding services in ${pageTitle}.`,
     };
   } catch {
     return {};
   }
 }
 
-export default async function LocationDetailPage({
-  params,
-}: {
-  params: Promise<Params>;
-}) {
+export default async function LocationDetailPage(
+  { params }: { params: Promise<Params> }
+) {
   const { slug } = await params;
   try {
-    const { content, frontmatter } = await loadMdx({
-      baseDir: "locations",
-      slug,
-    });
-    const town = normalizeTown(frontmatter, slug);
-    const h1 = `Scaffolding in ${town}`;
+    const { content, frontmatter } = await loadMdx<{
+      content: React.ReactNode;
+      frontmatter: Frontmatter;
+    }>({ baseDir: "locations", slug });
+
+    const titleFromFile = frontmatter.title?.trim();
+    const heading = titleFromFile || slug.replace(/-/g, " ");
 
     return (
       <main className="container mx-auto px-4 py-10 prose">
-        <h1 className="!mb-2">{h1}</h1>
-        {frontmatter?.description ? (
-          <p className="lead">{frontmatter.description}</p>
+        <h1 className="!mb-2">{heading}</h1>
+        {frontmatter.description ? (
+          <p className="lead">{String(frontmatter.description)}</p>
         ) : null}
         {content}
       </main>
