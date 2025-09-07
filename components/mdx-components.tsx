@@ -16,17 +16,21 @@ const mdxComponents: MDXMap = {
   p:  (p) => <p {...p} className={`my-4 ${p.className || ""}`} />,
   ul: (p) => <ul {...p} className={`list-disc pl-6 my-4 ${p.className || ""}`} />,
   ol: (p) => <ol {...p} className={`list-decimal pl-6 my-4 ${p.className || ""}`} />,
-
-  // Use Next/Image to avoid the no-img-element warning
   img: (p) => {
     const { src = "", alt = "", width, height, ...rest } = p;
-    // Provide sensible defaults if width/height are omitted in MDX
     const w = typeof width === "number" ? width : 1200;
     const h = typeof height === "number" ? height : 800;
     return <Image src={src} alt={alt} width={w} height={h} {...rest} className={`rounded-xl ${p.className || ""}`} />;
   },
-
+  // <-- This makes <Schema .../> usable directly in any MDX file
   Schema,
 };
 
+// Default export: used by next-mdx-remote pages (your [slug] routes)
 export default mdxComponents;
+
+// 👇 NEW: Hook for Next.js native MDX so app/*.mdx can see your components
+export function useMDXComponents(components: MDXMap): MDXMap {
+  // components = any MDX-level overrides; we merge them with our defaults
+  return { ...mdxComponents, ...components };
+}
