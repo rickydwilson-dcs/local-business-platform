@@ -33,25 +33,21 @@ export async function generateStaticParams() {
 export async function generateMetadata(
   { params }: { params: Promise<Params> }
 ): Promise<Metadata> {
-  const { slug } = await params; // Next 15: params is a Promise
+  const { slug } = await params;
   const { title, description } = await getMdx(slug);
-  return {
-    title,
-    description,
-    openGraph: { title, description },
-  };
+  return { title, description, openGraph: { title, description } };
 }
 
 export default async function Page(
   { params }: { params: Promise<Params> }
 ) {
-  const { slug } = await params; // Next 15: params is a Promise
+  const { slug } = await params;
   const { title, content } = await getMdx(slug);
 
   return (
     <main className="container mx-auto px-4 py-10 prose max-w-none">
       <h1>{title}</h1>
-      <MDXRemote source={content} components={mdxComponents as any} />
+      <MDXRemote source={content} components={mdxComponents} />
     </main>
   );
 }
