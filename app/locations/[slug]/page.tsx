@@ -5,14 +5,14 @@ import matter from "gray-matter";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import type { Metadata } from "next";
 
-import MDXComponents from "@/components/mdx-components";
+import mdxComponents from "@/components/mdx-components";
 
 export const dynamic = "force-static";
 export const dynamicParams = false;
 
-const DIR = path.join(process.cwd(), "content", "locations");
-
 type Params = { slug: string };
+
+const DIR = path.join(process.cwd(), "content", "locations");
 
 async function getMdx(slug: string) {
   const file = path.join(DIR, `${slug}.mdx`);
@@ -30,8 +30,11 @@ export async function generateStaticParams() {
     .map((f) => ({ slug: f.replace(/\.mdx$/i, "") }));
 }
 
-export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
-  const { title, description } = await getMdx(params.slug);
+export async function generateMetadata(
+  { params }: { params: Promise<Params> }
+): Promise<Metadata> {
+  const { slug } = await params; // Next 15: params is a Promise
+  const { title, description } = await getMdx(slug);
   return {
     title,
     description,
@@ -39,13 +42,16 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   };
 }
 
-export default async function Page({ params }: { params: Params }) {
-  const { title, content } = await getMdx(params.slug);
+export default async function Page(
+  { params }: { params: Promise<Params> }
+) {
+  const { slug } = await params; // Next 15: params is a Promise
+  const { title, content } = await getMdx(slug);
 
   return (
     <main className="container mx-auto px-4 py-10 prose max-w-none">
       <h1>{title}</h1>
-      <MDXRemote source={content} components={MDXComponents as any} />
+      <MDXRemote source={content} components={mdxComponents as any} />
     </main>
   );
 }
