@@ -1,77 +1,52 @@
-// app/services/page.tsx
-import Link from "next/link";
+// app/services/[slug]/page.tsx
 import path from "path";
 import { promises as fs } from "fs";
+import matter from "gray-matter";
+import { MDXRemote } from "next-mdx-remote/rsc";
+import type { Metadata } from "next";
+
+// If you have custom MDX components, import them here:
+import MDXComponents from "@/components/mdx-components";
 
 export const dynamic = "force-static";
+export const dynamicParams = false; // only build the slugs we generate
 
-type ServiceItem = {
-  name: string;
-  slug: string;
-};
+const DIR = path.join(process.cwd(), "content", "services");
 
-// Convert slug -> title (e.g. "crash-decks-crane-decks" → "Crash Decks & Crane Decks")
-function titleizeSlug(slug: string): string {
-  const overrides: Record<string, string> = {
-    "pavement-gantries-loading-bays": "Pavement Gantries & Loading Bays",
-    "crash-decks-crane-decks": "Crash Decks & Crane Decks",
-    "sheeting-netting-encapsulation": "Sheeting, Netting & Encapsulation",
-    "scaffolding-design-drawings": "Scaffolding Design & Drawings",
-    "scaffolding-inspections-maintenance": "Scaffolding Inspections & Maintenance",
-    "scaffold-towers-mast-systems": "Scaffold Towers & Mast Systems",
-  };
+type Params = { slug: string };
 
-  if (overrides[slug]) return overrides[slug];
-
-  return slug
-    .split("-")
-    .map((w) => (w.length ? w[0].toUpperCase() + w.slice(1) : w))
-    .join(" ");
+async function getMdx(slug: string) {
+  const file = path.join(DIR, `${slug}.mdx`);
+  const raw = await fs.readFile(file, "utf8");
+  const { data, content } = matter(raw);
+  const title = (data.title as string) || slug;
+  const description = (data.description as string) || "";
+  return { title, description, content };
 }
 
-async function getServices(): Promise<ServiceItem[]> {
-  const dir = path.join(process.cwd(), "content", "services");
-  const entries = await fs.readdir(dir);
-
-  const items = entries
+export async function generateStaticParams() {
+  const entries = await fs.readdir(DIR);
+  return entries
     .filter((f) => f.toLowerCase().endsWith(".mdx"))
-    .map((filename) => {
-      const slug = filename.replace(/\.mdx$/i, "");
-      return { slug, name: titleizeSlug(slug) };
-    })
-    .sort((a, b) => a.name.localeCompare(b.name));
-
-  return items;
+    .map((f) => ({ slug: f.replace(/\.mdx$/i, "") }));
 }
 
-export default async function ServicesPage() {
-  const services = await getServices();
+export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
+  const { title, description } = await getMdx(params.slug);
+  return {
+    title,
+    description,
+    openGraph: { title, description },
+  };
+}
+
+export default async function Page({ params }: { params: Params }) {
+  const { title, content } = await getMdx(params.slug);
 
   return (
-    <main className="container mx-auto px-4 py-10">
-      <h1 className="text-3xl font-bold mb-6">Services</h1>
-
-      {services.length === 0 ? (
-        <p className="text-gray-600">No services found.</p>
-      ) : (
-        <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {services.map(({ name, slug }) => (
-            <li
-              key={slug}
-              className="rounded-2xl shadow p-4 hover:shadow-md transition bg-white"
-            >
-              <h2 className="text-lg font-semibold mb-2">
-                <Link href={`/services/${slug}`} className="underline">
-                  {name}
-                </Link>
-              </h2>
-              <p className="text-sm text-gray-600">
-                Learn more about our {name.toLowerCase()} service.
-              </p>
-            </li>
-          ))}
-        </ul>
-      )}
+    <main className="container mx-auto px-4 py-10 prose max-w-none">
+      <h1>{title}</h1>
+      <MDXRemote source={content} components={MDXComponents as any} />
     </main>
   );
 }
