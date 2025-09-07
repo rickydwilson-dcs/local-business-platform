@@ -1,5 +1,4 @@
 // app/api/contact/route.tsx
-/* eslint-disable @typescript-eslint/consistent-type-definitions */
 
 export const runtime = "nodejs";            // Explicit runtime for Vercel/Next 15
 export const dynamic = "force-dynamic";     // Ensure the route always runs on request
