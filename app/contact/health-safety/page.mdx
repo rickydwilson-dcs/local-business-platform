@@ -4,11 +4,34 @@ description: "Our health & safety approach: TG20:21 compliance, qualified scaffo
 seoTitle: "Health & Safety | Colossus Scaffolding"
 ---
 
+export const service = {
+  id: "/health-safety#service",
+  url: "/health-safety",
+  name: "Health & Safety",
+  description:
+    "Health & safety practices for scaffolding projects — TG20:21 compliant with routine inspections.",
+  serviceType: "Health & Safety",
+  areaServed: ["South East UK"],
+};
+
+export const org = { name: "Colossus Scaffolding", url: "/", logo: "/static/logo.png" };
+
+export const faqs = [
+  {
+    question: "How often are scaffolds inspected?",
+    answer: "Every 7 days and after adverse weather or alterations.",
+  },
+  {
+    question: "Do you provide handover certificates?",
+    answer: "Yes, on every scaffold erected.",
+  },
+];
+
 # Health & Safety
 
 We take health & safety seriously. Our scaffolds are designed, erected and inspected to **TG20:21** standards by qualified teams.
 
----
+<hr />
 
 ## What You Can Expect
 - Regular inspections (at least every 7 days and after adverse weather or alterations).
@@ -16,36 +39,6 @@ We take health & safety seriously. Our scaffolds are designed, erected and inspe
 - £10m public liability insurance.
 - CHAS & Constructionline accreditation.
 
----
+<hr />
 
-## FAQs
-
-**Q: How often are scaffolds inspected?**
-A: Every 7 days and after adverse weather or alterations.
-
-**Q: Do you provide handover certificates?**
-A: Yes, on every scaffold erected.
-
----
-
-<Schema
-  service={{
-    id: "/health-safety#service",
-    url: "/health-safety",
-    name: "Health & Safety",
-    description: "Health & safety practices for scaffolding projects — TG20:21 compliant with routine inspections.",
-    serviceType: "Health & Safety",
-    areaServed: ["South East UK"]
-  }}
-  org={{ name: "Colossus Scaffolding", url: "/", logo: "/static/logo.png" }}
-  faqs={[
-    {
-      question: "How often are scaffolds inspected?",
-      answer: "Every 7 days and after adverse weather or alterations."
-    },
-    {
-      question: "Do you provide handover certificates?",
-      answer: "Yes, on every scaffold erected."
-    }
-  ]}
-/>
+<Schema service={service} org={org} faqs={faqs} />
