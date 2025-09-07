@@ -1,75 +1,51 @@
-// app/locations/page.tsx
-import Link from "next/link";
+// app/locations/[slug]/page.tsx
 import path from "path";
 import { promises as fs } from "fs";
+import matter from "gray-matter";
+import { MDXRemote } from "next-mdx-remote/rsc";
+import type { Metadata } from "next";
 
-// Optional: make this page fully static at build-time
+import MDXComponents from "@/components/mdx-components";
+
 export const dynamic = "force-static";
+export const dynamicParams = false;
 
-type LocationItem = {
-  name: string;
-  slug: string;
-};
+const DIR = path.join(process.cwd(), "content", "locations");
 
-// Title-case a slug like "east-sussex" -> "East Sussex"
-// with a couple of sensible overrides.
-function titleizeSlug(slug: string): string {
-  const overrides: Record<string, string> = {
-    "st-leonards-on-sea": "St Leonards-on-Sea",
-  };
-  if (overrides[slug]) return overrides[slug];
+type Params = { slug: string };
 
-  // Basic titleize for hyphenated slugs
-  return slug
-    .split("-")
-    .map((w) => (w.length ? w[0].toUpperCase() + w.slice(1) : w))
-    .join(" ");
+async function getMdx(slug: string) {
+  const file = path.join(DIR, `${slug}.mdx`);
+  const raw = await fs.readFile(file, "utf8");
+  const { data, content } = matter(raw);
+  const title = (data.title as string) || slug;
+  const description = (data.description as string) || "";
+  return { title, description, content };
 }
 
-async function getLocations(): Promise<LocationItem[]> {
-  const dir = path.join(process.cwd(), "content", "locations");
-  const entries = await fs.readdir(dir);
-
-  // Only .mdx files; map to slug + display name
-  const items = entries
+export async function generateStaticParams() {
+  const entries = await fs.readdir(DIR);
+  return entries
     .filter((f) => f.toLowerCase().endsWith(".mdx"))
-    .map((filename) => {
-      const slug = filename.replace(/\.mdx$/i, "");
-      return { slug, name: titleizeSlug(slug) };
-    })
-    .sort((a, b) => a.name.localeCompare(b.name));
-
-  return items;
+    .map((f) => ({ slug: f.replace(/\.mdx$/i, "") }));
 }
 
-export default async function LocationsPage() {
-  const locations = await getLocations();
+export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
+  const { title, description } = await getMdx(params.slug);
+  return {
+    title,
+    description,
+    openGraph: { title, description },
+  };
+}
+
+export default async function Page({ params }: { params: Params }) {
+  const { title, content } = await getMdx(params.slug);
 
   return (
-    <main className="container mx-auto px-4 py-10">
-      <h1 className="text-3xl font-bold mb-6">Locations</h1>
-
-      {locations.length === 0 ? (
-        <p className="text-gray-600">No locations found.</p>
-      ) : (
-        <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {locations.map(({ name, slug }) => (
-            <li
-              key={slug} // ✅ unique & stable
-              className="rounded-2xl shadow p-4 hover:shadow-md transition bg-white"
-            >
-              <h2 className="text-lg font-semibold mb-2">
-                <Link href={`/locations/${slug}`} className="underline">
-                  {name}
-                </Link>
-              </h2>
-              <p className="text-sm text-gray-600">
-                Professional scaffolding services available in {name}.
-              </p>
-            </li>
-          ))}
-        </ul>
-      )}
+    <main className="container mx-auto px-4 py-10 prose max-w-none">
+      <h1>{title}</h1>
+      <MDXRemote source={content} components={MDXComponents as any} />
     </main>
   );
 }
