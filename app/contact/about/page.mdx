@@ -1,22 +1,43 @@
-import Schema from "@/components/Schema"
-
 ---
-title: "About Us"
-description: "About Colossus Scaffolding — experience, safety and reliability."
-hero:
-  heading: "About Us"
-  subheading: ""
-  image: ""
-  cta:
-    label: "Request a Free Quote"
-    href: "/contact"
-breadcrumbs:
-  - { title: "Home", href: "/" }
-  - { title: "About Us", href: "/about" }
+title: "About Contacting Colossus Scaffolding"
+description: "Learn how to reach Colossus Scaffolding — safe and reliable scaffolding specialists in the South East UK."
+seoTitle: "Contact Information | Colossus Scaffolding"
 ---
 
-# About Us
+# About Contacting Us
 
-We’re an experienced team delivering safe access solutions with TG20:21-compliant designs, CISRS-qualified crews, and clear communication from quote to dismantle.
+Whether you need a quotation, urgent call-out, or general information, our team is ready to help.
 
-<Schema service={{ id: "/about#service", url: "/about", name: "About Colossus Scaffolding", description: "About our company and approach.", serviceType: "About" }} org={{ name: "Colossus Scaffolding", url: "/", logo: "/static/logo.png" }} />
+---
+
+## FAQs
+
+**Q: How can I request a quote?**
+A: Use our [contact form](/contact) or call our office for a free site survey.
+
+**Q: Do you provide emergency contact?**
+A: Yes. Subject to availability, we offer rapid attendance for urgent make-safe work.
+
+---
+
+<Schema
+  service={{
+    id: "/contact/about#service",
+    url: "/contact/about",
+    name: "About Contacting Colossus Scaffolding",
+    description: "How to contact Colossus Scaffolding for quotes and emergency services.",
+    serviceType: "Contact",
+    areaServed: ["South East UK"]
+  }}
+  org={{ name: "Colossus Scaffolding", url: "/", logo: "/static/logo.png" }}
+  faqs={[
+    {
+      question: "How can I request a quote?",
+      answer: "Use our contact form or call our office for a free site survey."
+    },
+    {
+      question: "Do you provide emergency contact?",
+      answer: "Yes. Subject to availability, we offer rapid attendance for urgent make-safe work."
+    }
+  ]}
+/>

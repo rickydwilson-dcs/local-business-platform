@@ -1,27 +1,44 @@
-import Schema from "@/components/Schema"
-
 ---
-title: "Areas We Cover"
-description: "Coverage map and locations served."
-hero:
-  heading: "Areas We Cover"
-  subheading: ""
-  image: ""
-  cta:
-    label: "Request a Free Quote"
-    href: "/contact"
-breadcrumbs:
-  - { title: "Home", href: "/" }
-  - { title: "Areas We Cover", href: "/areas" }
+title: "Contact Us About Coverage"
+description: "Get in touch with Colossus Scaffolding to discuss scaffolding coverage across the South East UK."
+seoTitle: "Contact Areas | Colossus Scaffolding"
 ---
 
-# Areas We Cover
+# Contact Us About Coverage
 
-We primarily cover London and the South East. Popular areas include:
-- [Hastings](/locations/hastings)
-- [St Leonards on Sea](/locations/st-leonards-on-sea)
-- [Bexhill](/locations/bexhill)
-- [Eastbourne](/locations/eastbourne)
-- [Lewes](/locations/lewes)
+Not sure if we cover your area?
+Contact us to confirm availability in your town or project site.
 
-<Schema service={{ id: "/areas#service", url: "/areas", name: "Areas We Cover", description: "Coverage map and locations served.", serviceType: "Coverage" }} org={{ name: "Colossus Scaffolding", url: "/", logo: "/static/logo.png" }} />
+---
+
+## FAQs
+
+**Q: Do you cover all towns in the South East?**
+A: Yes, we serve East Sussex, West Sussex, Kent, Surrey and London.
+
+**Q: Can you confirm coverage before booking?**
+A: Absolutely. Contact us to check your specific location.
+
+---
+
+<Schema
+  service={{
+    id: "/contact/areas#service",
+    url: "/contact/areas",
+    name: "Contact Us About Coverage",
+    description: "Colossus Scaffolding covers most towns across the South East UK.",
+    serviceType: "Coverage Contact",
+    areaServed: ["South East UK"]
+  }}
+  org={{ name: "Colossus Scaffolding", url: "/", logo: "/static/logo.png" }}
+  faqs={[
+    {
+      question: "Do you cover all towns in the South East?",
+      answer: "Yes, we serve East Sussex, West Sussex, Kent, Surrey and London."
+    },
+    {
+      question: "Can you confirm coverage before booking?",
+      answer: "Absolutely. Contact us to check your specific location."
+    }
+  ]}
+/>

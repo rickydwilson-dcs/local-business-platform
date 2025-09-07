@@ -1,22 +1,43 @@
-import Schema from "@/components/Schema"
-
 ---
-title: "Health & Safety"
-description: "Our approach to safety, compliance and temporary works."
-hero:
-  heading: "Health & Safety"
-  subheading: ""
-  image: ""
-  cta:
-    label: "Request a Free Quote"
-    href: "/contact"
-breadcrumbs:
-  - { title: "Home", href: "/" }
-  - { title: "Health & Safety", href: "/health-safety" }
+title: "Health & Safety Contact"
+description: "Contact Colossus Scaffolding to learn about our health & safety practices across the South East UK."
+seoTitle: "Contact Health & Safety | Colossus Scaffolding"
 ---
 
 # Health & Safety
 
-We follow TG20:21 and SG4:22 guidance, provide RAMS, and use CISRS-qualified teams. Temporary works are managed with appropriate design and inspection.
+We take health & safety seriously. Our scaffolds are designed, erected and inspected to TG20:21 standards.
 
-<Schema service={{ id: "/health-safety#service", url: "/health-safety", name: "Health & Safety", description: "Our approach to safety and compliance.", serviceType: "Policy" }} org={{ name: "Colossus Scaffolding", url: "/", logo: "/static/logo.png" }} />
+---
+
+## FAQs
+
+**Q: How often are scaffolds inspected?**
+A: Every 7 days and after adverse weather or alterations.
+
+**Q: Do you provide handover certificates?**
+A: Yes, on every scaffold erected.
+
+---
+
+<Schema
+  service={{
+    id: "/contact/health-safety#service",
+    url: "/contact/health-safety",
+    name: "Health & Safety Contact",
+    description: "Contact us to discuss health & safety practices and compliance for scaffolding projects.",
+    serviceType: "Health & Safety",
+    areaServed: ["South East UK"]
+  }}
+  org={{ name: "Colossus Scaffolding", url: "/", logo: "/static/logo.png" }}
+  faqs={[
+    {
+      question: "How often are scaffolds inspected?",
+      answer: "Every 7 days and after adverse weather or alterations."
+    },
+    {
+      question: "Do you provide handover certificates?",
+      answer: "Yes, on every scaffold erected."
+    }
+  ]}
+/>
