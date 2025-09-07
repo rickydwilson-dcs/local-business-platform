@@ -1,43 +1,45 @@
 ---
 title: "About Contacting Colossus Scaffolding"
-description: "Learn how to reach Colossus Scaffolding — safe and reliable scaffolding specialists in the South East UK."
+description: "How to get in touch with Colossus Scaffolding — quotes, surveys, and general enquiries across the South East UK."
 seoTitle: "Contact Information | Colossus Scaffolding"
 ---
 
+export const service = {
+  id: "/contact/about#service",
+  url: "/contact/about",
+  name: "About Contacting Colossus Scaffolding",
+  description:
+    "Ways to contact Colossus Scaffolding for quotes, site surveys, and general enquiries across the South East UK.",
+  serviceType: "Contact",
+  areaServed: ["South East UK"],
+};
+
+export const org = { name: "Colossus Scaffolding", url: "/", logo: "/static/logo.png" };
+
+export const faqs = [
+  {
+    question: "How can I request a quote?",
+    answer:
+      "Use our contact form or call us to arrange a free site survey and quotation.",
+  },
+  {
+    question: "Do you offer urgent attendance?",
+    answer:
+      "Subject to availability, we can arrange rapid make-safe attendance. Please call for urgent requests.",
+  },
+];
+
 # About Contacting Us
 
-Whether you need a quotation, urgent call-out, or general information, our team is ready to help.
+Whether you need pricing, availability, or a free site survey, our team is ready to help across the South East UK.
 
----
+<hr />
 
-## FAQs
+## How We Work
+- Free site surveys and fast quotations
+- TG20:21-compliant designs and documentation
+- Clear scheduling and on-site coordination
 
-**Q: How can I request a quote?**
-A: Use our [contact form](/contact) or call our office for a free site survey.
+<hr />
 
-**Q: Do you provide emergency contact?**
-A: Yes. Subject to availability, we offer rapid attendance for urgent make-safe work.
-
----
-
-<Schema
-  service={{
-    id: "/contact/about#service",
-    url: "/contact/about",
-    name: "About Contacting Colossus Scaffolding",
-    description: "How to contact Colossus Scaffolding for quotes and emergency services.",
-    serviceType: "Contact",
-    areaServed: ["South East UK"]
-  }}
-  org={{ name: "Colossus Scaffolding", url: "/", logo: "/static/logo.png" }}
-  faqs={[
-    {
-      question: "How can I request a quote?",
-      answer: "Use our contact form or call our office for a free site survey."
-    },
-    {
-      question: "Do you provide emergency contact?",
-      answer: "Yes. Subject to availability, we offer rapid attendance for urgent make-safe work."
-    }
-  ]}
-/>
+<Schema service={service} org={org} faqs={faqs} />
