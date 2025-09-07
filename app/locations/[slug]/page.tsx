@@ -1,27 +1,54 @@
-import { getAllSlugs, getDoc } from '@/src/lib/mdx'
-import type { Metadata } from 'next'
+import { notFound } from "next/navigation";
+import { listSlugs, loadMdx } from "@/lib/mdx";
 
-export const dynamicParams = false
+type Params = { slug: string };
 
-export function generateStaticParams() {
-  return getAllSlugs('locations').map((slug) => ({ slug }))
+export async function generateStaticParams() {
+  const slugs = await listSlugs("locations");
+  return slugs.map((slug) => ({ slug }));
 }
 
-export async function generateMetadata(
-  props: { params: Promise<{ slug: string }> }
-): Promise<Metadata> {
-  const { slug } = await props.params
-  const { meta } = await getDoc('locations', slug)
-  return {
-    title: meta.seoTitle || meta.title,
-    description: meta.seoDescription,
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<Params>;
+}) {
+  const { slug } = await params;
+  try {
+    const { frontmatter } = await loadMdx({ baseDir: "locations", slug });
+    const town = frontmatter.title ?? slug.replace(/-/g, " ");
+    return {
+      title: `Scaffolding in ${town}`,
+      description: frontmatter.description ?? `Local scaffolding services in ${town}.`,
+    };
+  } catch {
+    return {};
   }
 }
 
-export default async function LocationPage(
-  props: { params: Promise<{ slug: string }> }
-) {
-  const { slug } = await props.params
-  const { content } = await getDoc('locations', slug)
-  return <article className="prose max-w-none">{content}</article>
+export default async function LocationDetailPage({
+  params,
+}: {
+  params: Promise<Params>;
+}) {
+  const { slug } = await params;
+  try {
+    const { content, frontmatter } = await loadMdx({
+      baseDir: "locations",
+      slug,
+    });
+    return (
+      <main className="container mx-auto px-4 py-10 prose">
+        <h1 className="!mb-2">
+          {frontmatter.title
+            ? `Scaffolding in ${frontmatter.title}`
+            : `Scaffolding in ${slug.replace(/-/g, " ")}`}
+        </h1>
+        {frontmatter.description ? <p className="lead">{frontmatter.description}</p> : null}
+        {content}
+      </main>
+    );
+  } catch {
+    notFound();
+  }
 }

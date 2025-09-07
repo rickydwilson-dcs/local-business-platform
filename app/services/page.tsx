@@ -1,27 +1,32 @@
-import Link from 'next/link'
-import { getAllMeta } from '@/src/lib/mdx'
+// /app/services/page.tsx
+import Link from "next/link";
+import { listSlugs, loadMdx } from "@/lib/mdx";
 
-export default function ServicesPage() {
-  const items = getAllMeta('services').sort(
-    (a, b) => (a.order ?? 999) - (b.order ?? 999)
-  )
+export default async function ServicesPage() {
+  const slugs = await listSlugs("services");
+  const items = await Promise.all(
+    slugs.map(async (slug) => {
+      try {
+        const { frontmatter } = await loadMdx({ baseDir: "services", slug });
+        return { slug, title: frontmatter.title ?? slug.replace(/-/g, " ") };
+      } catch {
+        return { slug, title: slug.replace(/-/g, " ") };
+      }
+    })
+  );
 
   return (
-    <div>
+    <main className="container mx-auto px-4 py-10">
       <h1 className="text-3xl font-bold mb-6">Services</h1>
-      <ul className="grid sm:grid-cols-2 gap-4">
-        {items.map((s) => (
-          <li key={s.slug} className="border rounded p-4">
-            <h2 className="font-semibold text-lg mb-2">{s.title ?? s.slug}</h2>
-            {s.summary && (
-              <p className="text-sm text-slate-600 mb-3">{s.summary}</p>
-            )}
-            <Link className="underline" href={`/services/${s.slug}`}>
-              Learn more
+      <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        {items.map(({ slug, title }) => (
+          <li key={slug} className="rounded-2xl shadow p-4 hover:shadow-md transition">
+            <Link href={`/services/${slug}`} className="font-medium underline">
+              {title}
             </Link>
           </li>
         ))}
       </ul>
-    </div>
-  )
+    </main>
+  );
 }
