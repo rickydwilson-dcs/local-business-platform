@@ -1,109 +1,244 @@
+# Colossus Scaffolding Website
 
-# TSX Index Pages + MDX Setup
+A modern Next.js website for Colossus Scaffolding - professional scaffolding services across the South East UK. Built with React 19, Next.js 15, TypeScript, and Tailwind CSS for optimal SEO and lead generation.
 
-## Included
-- `app/page.tsx` (Home)
-- `app/services/page.tsx` (Services index)
-- `app/locations/page.tsx` (Locations index)
-- `app/contact/page.tsx` (Contact as TSX with a basic form)
+## 🏗️ Architecture
 
-## MDX in Next.js (App Router) — Setup
-1) Install MDX:
+### Page Structure
+- **`app/page.tsx`** - Homepage with service overview
+- **`app/services/page.tsx`** - Services index (dynamically lists all services)
+- **`app/locations/page.tsx`** - Locations index (dynamically lists all areas)
+- **`app/contact/page.mdx`** - Main contact page with form
+- **`app/contact/about/page.mdx`** - Contact information page
+- **Dynamic Routes:**
+  - `app/services/[slug]/page.tsx` - Individual service pages
+  - `app/locations/[slug]/page.tsx` - Individual location pages
+  - `app/contact/services/[slug]/page.tsx` - Service-specific contact pages
+  - `app/contact/locations/[slug]/page.tsx` - Location-specific contact pages
+
+### Content Management
+- **MDX Files:** Store content in `content/services/` and `content/locations/`
+- **Dynamic Loading:** Pages automatically discover and render MDX content
+- **Frontmatter Support:** Title, description, and custom fields
+- **Schema.org Integration:** Automatic structured data for SEO
+
+## 🚀 Tech Stack
+
+- **Framework:** Next.js 15.5.2 (App Router)
+- **React:** 19.1.0 with Server Components
+- **TypeScript:** Full type safety throughout
+- **Styling:** Tailwind CSS 3.4.17 with custom brand colors
+- **Content:** MDX with `next-mdx-remote` for flexible content management
+- **SEO:** Built-in metadata generation and Schema.org structured data
+- **Performance:** Static generation with dynamic imports
+
+## 🛠️ Setup & Development
+
+### Prerequisites
+- Node.js 18+
+- npm or yarn
+
+### Installation
 ```bash
-npm i @next/mdx @mdx-js/react
-# or
-yarn add @next/mdx @mdx-js/react
+# Clone and install dependencies
+npm install
+
+# Start development server
+npm run dev
+
+# Build for production
+npm run build
+
+# Start production server
+npm start
 ```
 
-2) Wrap your Next.js config with the MDX plugin.
-
-**next.config.mjs** (ESM)
-```js
-import createMDX from '@next/mdx';
-
-const withMDX = createMDX({
-  // Optional: provide remark/rehype plugins here
-  // remarkPlugins: [],
-  // rehypePlugins: [],
-});
-
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  // Any other config
-  pageExtensions: ['ts','tsx','md','mdx'], // allow MD/MDX as pages
-};
-
-export default withMDX(nextConfig);
+### Environment Variables
+Create `.env.local`:
+```env
+NEXT_PUBLIC_SITE_URL=https://yourdomain.com
 ```
 
-3) (Optional) Provide an MDX provider for shortcodes/components.
+## 📝 Content Management
 
-**app/providers.tsx**
-```tsx
-'use client';
-import * as React from 'react';
-import {{ MDXProvider }} from '@mdx-js/react';
+### Adding Services
+1. Create `content/services/your-service-slug.mdx`
+2. Add frontmatter:
+```mdx
+---
+title: "Your Service Name"
+description: "Brief description for SEO"
+---
 
-const components = {{
-  // Map markdown elements to custom components if you like
-}};
+# Your Service Content
 
-export default function Providers({{ children }}: {{ children: React.ReactNode }}) {{
-  return <MDXProvider components={components}>{'{'}children{'}'}</MDXProvider>;
-}}
+Your detailed service information here...
+
+<Schema
+  service={{
+    id: "/services/your-service-slug#service",
+    url: "/services/your-service-slug",
+    name: "Your Service Name",
+    description: "Detailed service description",
+    serviceType: "Scaffolding",
+    areaServed: ["South East UK"]
+  }}
+  org={{ name: "Colossus Scaffolding", url: "/", logo: "/logo-white.svg" }}
+  faqs={[
+    {
+      question: "Common question about this service?",
+      answer: "Detailed answer for SEO and user value."
+    }
+  ]}
+/>
 ```
 
-Then include `<Providers>` in your `app/layout.tsx` (client side only if needed).
+### Adding Locations
+1. Create `content/locations/location-slug.mdx`
+2. Follow similar pattern as services with location-specific content
+3. Include local SEO information and area-specific details
 
-4) Keep MDX content under `/app/.../*.mdx` or a `/content` folder and render via route files.
-   - For content-heavy pages, prefer MDX.
-   - For index pages and app logic, prefer TSX.
+### Content Best Practices
+- **SEO-First:** Every page should have unique title and description
+- **FAQ Integration:** Use the Schema component for rich snippets
+- **Local Focus:** Include location-specific information and keywords
+- **Call-to-Actions:** Clear paths to contact/quote requests
 
-## Wiring TSX routes to MDX
-If you want `/services/[slug]` to render MDX by slug:
-- Put MDX files in `content/services/*.mdx` (slug = filename).
-- In `app/services/[slug]/page.tsx`, load the MDX via your loader (Contentlayer or a custom FS import).
+## 🎨 Styling & Branding
 
-Contentlayer example (rough sketch):
-```ts
-// contentlayer.config.ts
-import {{ defineDocumentType, makeSource }} from 'contentlayer/source-files';
-
-export const Service = defineDocumentType(() => ({
-  name: 'Service',
-  filePathPattern: 'services/*.mdx',
-  contentType: 'mdx',
-  fields: {{
-    title: {{ type: 'string', required: true }},
-    description: {{ type: 'string', required: false }},
-    // etc...
-  }},
-  computedFields: {{
-    slug: {{ type: 'string', resolve: (doc) => doc._raw.flattenedPath.replace('services/','') }},
-  }},
-}));
-
-export default makeSource({{
-  contentDirPath: 'content',
-  documentTypes: [Service],
-}});
+### Brand Colors
+```css
+colors: {
+  brand: {
+    blue: '#4DB2E4',    /* Primary accent */
+    black: '#000000',   /* Headers and nav */
+    white: '#FFFFFF',   /* Clean backgrounds */
+  }
+}
 ```
 
-```tsx
-// app/services/[slug]/page.tsx
-import {{ allServices }} from 'contentlayer/generated';
-import {{ notFound }} from 'next/navigation';
-import {{ Mdx }} from '@/components/mdx'; // your MDX renderer
+### Typography
+- **Headings:** Libre Caslon Display (elegant serif)
+- **Body:** Arial/Helvetica (clean, readable)
 
-export async function generateStaticParams() {{
-  return allServices.map((s) => ({{ slug: s.slug }}));
-}}
+### Responsive Design
+- Mobile-first approach with Tailwind breakpoints
+- Optimized for lead generation on all devices
 
-export default function ServicePage({{ params }}: {{ params: {{ slug: string }} }}) {{
-  const service = allServices.find((s) => s.slug === params.slug);
-  if (!service) return notFound();
-  return <Mdx code={{service.body.code}} frontmatter={{service}} />;
-}}
+## 🔧 Configuration Files
+
+### Next.js Config (`next.config.ts`)
+- **TypeScript Configuration:** Full type safety with `NextConfig`
+- **MDX Integration:** Rust-based compiler for performance
+- **Security Headers:** Production-ready security
+- **Image Optimization:** SVG support and external domains
+
+### Tailwind Config (`tailwind.config.ts`)
+- **Custom Brand Colors:** Consistent color palette
+- **Typography Plugin:** Enhanced text styling
+- **Content Paths:** Includes all TypeScript and MDX files
+
+### TypeScript Config (`tsconfig.json`)
+- **Path Aliases:** `@/*` for clean imports
+- **Strict Mode:** Maximum type safety
+- **Next.js Integration:** Optimized for App Router
+
+## 📊 SEO Features
+
+### Built-in Optimizations
+- **Static Generation:** Fast loading times
+- **Meta Tags:** Dynamic title, description, and OpenGraph
+- **Structured Data:** Schema.org markup for services and FAQs
+- **Sitemap Ready:** Automatic route discovery
+- **Image Optimization:** WebP conversion and lazy loading
+
+### Local SEO
+- **Location Pages:** Individual pages for each service area
+- **Schema Markup:** LocalBusiness and Service structured data
+- **Contact Information:** Consistent NAP (Name, Address, Phone)
+
+## 🚀 Deployment
+
+### Vercel (Recommended)
+```bash
+# Deploy to Vercel
+vercel
+
+# Or connect GitHub repository for automatic deployments
 ```
 
-You're set. Drop your MDX into `content/services` and `content/locations`, and use these TSX index pages for navigation.
+### Other Platforms
+- **Netlify:** Works with static export
+- **AWS/DigitalOcean:** Standard Node.js deployment
+- **Self-hosted:** PM2 or Docker containerization
+
+### Build Optimization
+```bash
+# Analyze bundle size
+npm run build
+npm run start
+
+# Check for issues
+npm run lint
+```
+
+## 📞 Contact Form Integration
+
+The contact form at `/app/api/contact/route.tsx` is ready for:
+- **Email Services:** SendGrid, AWS SES, Resend
+- **CRM Integration:** HubSpot, Salesforce, Pipedrive  
+- **Form Analytics:** Track conversion rates and lead sources
+
+## 🔍 Content Strategy
+
+### Services Content
+Focus on these service pages with rich, SEO-optimized content:
+- Access Scaffolding
+- Facade Scaffolding  
+- Edge Protection
+- Scaffolding Inspections & Maintenance
+- Heavy Duty Industrial Scaffolding
+- Temporary Roof Systems
+
+### Location Content  
+Target these key areas in South East UK:
+- East Sussex (Brighton, Hastings, Eastbourne)
+- West Sussex (Chichester, Crawley)
+- Kent (Maidstone, Canterbury)
+- Surrey (Guildford, Woking)
+- London (South London boroughs)
+
+### Lead Generation Focus
+- **Free Quotes:** Prominent calls-to-action
+- **Case Studies:** Project galleries and testimonials
+- **Certifications:** TG20:21 compliance, CHAS accreditation
+- **Emergency Services:** 24/7 availability messaging
+
+## 🧪 Development Guidelines
+
+### Code Quality
+- **ESLint:** Strict linting with Next.js recommended rules
+- **TypeScript:** Strict mode enabled for type safety
+- **Prettier:** Consistent code formatting (add `.prettierrc` if needed)
+
+### Component Structure
+- **Server Components:** Default for better performance
+- **Client Components:** Only when interactivity needed (`'use client'`)
+- **Reusable Components:** Store in `/components` directory
+
+### Performance
+- **Image Optimization:** Use `next/image` for all images
+- **Font Loading:** Self-hosted fonts with `@fontsource`
+- **Bundle Analysis:** Regular size monitoring
+
+---
+
+## 🎯 Next Steps
+
+1. **Content Creation:** Add service and location MDX files
+2. **Visual Enhancement:** Improve homepage and styling
+3. **Form Integration:** Connect contact form to email service
+4. **Analytics:** Add Google Analytics/Tag Manager
+5. **Local SEO:** Submit to Google My Business and directories
+
+Built with ❤️ for Colossus Scaffolding - Professional scaffolding services across the South East UK.
