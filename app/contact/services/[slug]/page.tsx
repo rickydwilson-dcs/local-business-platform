@@ -1,28 +1,31 @@
-import { notFound } from "next/navigation";
+// app/contact/services/[slug]/page.tsx
+import type { Metadata } from "next";
 
-// Replace this with your real data source (e.g., Contentlayer allDocuments filter or FS map)
-const services = new Set([
-  "access-scaffolding","facade-scaffolding","temporary-roof-systems","suspended-scaffolding",
-  "public-access-staircases","pavement-gantries-loading-bays","heavy-duty-industrial-scaffolding",
-  "scaffold-towers-mast-systems","crash-decks-crane-decks","sheeting-netting-encapsulation",
-  "scaffolding-design-drawings","scaffolding-inspections-maintenance","edge-protection",
-  "birdcage-scaffolds","scaffold-alarms","staircase-towers"
-]);
+type Params = { slug: string };
 
-export async function generateStaticParams() {
-  return Array.from(services).map(slug => ({ slug }));
+// If you prebuild routes, keep your existing function here.
+// export async function generateStaticParams() { ... }
+
+export async function generateMetadata(
+  { params }: { params: Promise<Params> }
+): Promise<Metadata> {
+  const { slug } = await params; // ✅ Next 15 requires awaiting params
+  return {
+    title: `Contact – ${slug}`,
+    description: `Get in touch about our ${slug} service.`,
+    openGraph: { title: `Contact – ${slug}`, description: `Enquiry for ${slug}` },
+  };
 }
 
-export default function ServicePage({ params }: { params: { slug: string } }) {
-  const { slug } = params;
-  if (!services.has(slug)) notFound();
-  // Your MDX renderer should hydrate the MDX matching this slug in /content/services
+export default async function Page(
+  { params }: { params: Promise<Params> }
+) {
+  const { slug } = await params; // ✅ await it here too
+
   return (
     <main className="container mx-auto px-4 py-10">
-      <article className="prose">
-        <h1>Service: {{slug}}</h1>
-        <p>Render the MDX for this service slug here.</p>
-      </article>
+      <h1 className="text-3xl font-bold mb-6">Contact us about {slug}</h1>
+      {/* your existing form / content goes here */}
     </main>
   );
 }
