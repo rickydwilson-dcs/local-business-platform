@@ -2,13 +2,6 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { Metadata } from 'next';
-
-// Note: This would be in a separate file if we needed it as a server component
-// export const metadata: Metadata = {
-//   title: 'Contact Us | Colossus Scaffolding',
-//   description: 'Get in touch with Colossus Scaffolding for free quotes, site surveys and scaffolding services across the South East UK.',
-// };
 
 type FormData = {
   name: string;
@@ -34,7 +27,7 @@ export default function ContactPage() {
     location: '',
     message: '',
     projectType: 'residential',
-    urgency: 'standard'
+    urgency: ''
   });
 
   const [errors, setErrors] = useState<FormErrors>({});
@@ -104,12 +97,12 @@ export default function ContactPage() {
           location: '',
           message: '',
           projectType: 'residential',
-          urgency: 'standard'
+          urgency: ''
         });
       } else {
         setSubmitStatus('error');
       }
-    } catch (error) {
+    } catch {
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
@@ -149,7 +142,7 @@ export default function ContactPage() {
               <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg">
                 <h3 className="text-green-800 font-semibold mb-1">Thank you!</h3>
                 <p className="text-green-700">
-                  Your enquiry has been received. We'll get back to you within 24 hours with your free quote.
+                  Your enquiry has been received. We&apos;ll get back to you within 24 hours with your free quote.
                 </p>
               </div>
             )}
@@ -280,38 +273,19 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              <div className="grid md:grid-cols-2 gap-6">
-                <div>
-                  <label htmlFor="urgency" className="block text-sm font-medium text-gray-700 mb-2">
-                    Urgency
-                  </label>
-                  <select
-                    id="urgency"
-                    name="urgency"
-                    value={formData.urgency}
-                    onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-blue focus:border-brand-blue"
-                  >
-                    <option value="standard">Standard (5-7 days)</option>
-                    <option value="urgent">Urgent (2-3 days)</option>
-                    <option value="emergency">Emergency (Same day)</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
-                    Subject
-                  </label>
-                  <input
-                    type="text"
-                    id="subject"
-                    name="subject"
-                    value={formData.subject}
-                    onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-blue focus:border-brand-blue"
-                    placeholder="e.g. Quote for house renovation scaffolding"
-                  />
-                </div>
+              <div>
+                <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
+                  Subject
+                </label>
+                <input
+                  type="text"
+                  id="subject"
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-blue focus:border-brand-blue"
+                  placeholder="e.g. Quote for house renovation scaffolding"
+                />
               </div>
 
               {/* Message */}
@@ -343,7 +317,7 @@ export default function ContactPage() {
               </button>
 
               <p className="text-sm text-gray-600 text-center">
-                * Required fields. We'll respond within 24 hours with your free quote.
+                * Required fields. We&apos;ll respond within 24 hours with your free quote.
               </p>
             </form>
           </div>
@@ -360,8 +334,8 @@ export default function ContactPage() {
                 <div>
                   <h3 className="font-semibold text-gray-900 mb-2">📞 Phone</h3>
                   <p className="text-lg text-brand-blue font-semibold">
-                    <a href="tel:01424123456" className="hover:underline">
-                      01424 123 456
+                    <a href="tel:01424466661" className="hover:underline">
+                      01424 466 661
                     </a>
                   </p>
                   <p className="text-sm text-gray-600">
