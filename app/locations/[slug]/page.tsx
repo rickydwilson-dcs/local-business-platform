@@ -5,7 +5,7 @@ import matter from "gray-matter";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import type { Metadata } from "next";
 
-import mdxComponents from "@/mdx-components"; // <-- from project root
+import mdxComponents from "@/mdx-components"; // shared map at project root
 
 export const dynamic = "force-static";
 export const dynamicParams = false;
@@ -42,14 +42,12 @@ export default async function Page(
   { params }: { params: Promise<Params> }
 ) {
   const { slug } = await params;
-  const { title, content } = await getMdx(slug);
+  const { title, content } = await getMdx(slug); // ✅ defines `content`
 
   return (
     <main className="container mx-auto px-4 py-10 prose max-w-none">
       <h1>{title}</h1>
-      <MDXRemote source={content} components={mdxComponents} />
+      <MDXRemote source={content} components={mdxComponents} /> {/* ✅ uses defined `content` */}
     </main>
   );
 }
-
-<MDXRemote source={content} components={mdxComponents} />

@@ -5,7 +5,7 @@ import matter from "gray-matter";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import type { Metadata } from "next";
 
-import mdxComponents from "@/mdx-components"; // <-- from project root
+import mdxComponents from "@/mdx-components";
 
 export const dynamic = "force-static";
 export const dynamicParams = false;
@@ -33,7 +33,7 @@ export async function generateStaticParams() {
 export async function generateMetadata(
   { params }: { params: Promise<Params> }
 ): Promise<Metadata> {
-  const { slug } = await params; // Next 15: params is a Promise
+  const { slug } = await params;
   const { title, description } = await getMdx(slug);
   return { title, description, openGraph: { title, description } };
 }
@@ -41,7 +41,7 @@ export async function generateMetadata(
 export default async function Page(
   { params }: { params: Promise<Params> }
 ) {
-  const { slug } = await params; // Next 15: params is a Promise
+  const { slug } = await params;
   const { title, content } = await getMdx(slug);
 
   return (
@@ -51,5 +51,3 @@ export default async function Page(
     </main>
   );
 }
-
-<MDXRemote source={content} components={mdxComponents} />
