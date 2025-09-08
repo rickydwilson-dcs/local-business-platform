@@ -5,7 +5,7 @@ import matter from "gray-matter";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import type { Metadata } from "next";
 
-import mdxComponents from "@/components/mdx-components";
+import mdxComponents from "@/mdx-components"; // <-- from project root
 
 export const dynamic = "force-static";
 export const dynamicParams = false;
@@ -51,3 +51,5 @@ export default async function Page(
     </main>
   );
 }
+
+<MDXRemote source={content} components={mdxComponents} />
