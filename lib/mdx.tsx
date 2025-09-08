@@ -7,7 +7,7 @@ import remarkGfm from "remark-gfm";
 import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import type { ReactElement } from "react";
-import { mdxComponents } from "@/components/mdx-components";
+import mdxComponents from "@/mdx-components";
 
 type LoadOpts = {
   baseDir: "services" | "locations";
