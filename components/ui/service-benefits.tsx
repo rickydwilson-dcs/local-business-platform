@@ -1,26 +1,39 @@
 interface ServiceBenefitsProps {
   items: string[];
   title?: string;
+  description?: string;
 }
 
-export function ServiceBenefits({ items, title = "Why Choose Our Service?" }: ServiceBenefitsProps) {
+export function ServiceBenefits({ 
+  items, 
+  title = "Why Choose Our Service?", 
+  description 
+}: ServiceBenefitsProps) {
   return (
-    <section className="py-16 bg-gray-50">
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-serif font-bold text-gray-900 mb-8 text-center">
+    <section className="py-16 sm:py-20 bg-gray-50">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="max-w-4xl mx-auto text-center mb-12">
+          <h2 className="text-3xl sm:text-4xl font-serif font-bold text-gray-900 mb-4">
             {title}
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
-            {items.map((item, i) => (
-              <div key={i} className="flex items-start gap-3">
-                <svg className="h-6 w-6 text-green-600 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          {description && (
+            <p className="text-lg text-gray-600 leading-relaxed">
+              {description}
+            </p>
+          )}
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+          {items.map((item, i) => (
+            <div key={i} className="flex items-start gap-3 p-4 bg-white rounded-lg shadow-sm">
+              <div className="flex-shrink-0 w-6 h-6 bg-brand-blue rounded-full flex items-center justify-center mt-0.5">
+                <svg className="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
-                <span className="text-gray-900">{item}</span>
               </div>
-            ))}
-          </div>
+              <span className="text-gray-900 font-medium">{item}</span>
+            </div>
+          ))}
         </div>
       </div>
     </section>

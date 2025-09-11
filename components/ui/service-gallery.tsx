@@ -1,26 +1,56 @@
 import Image from "next/image";
 
 interface ServiceGalleryProps {
-  images: string[];
+  images?: string[];
   title?: string;
+  description?: string;
+  placeholderCount?: number;
 }
 
-export function ServiceGallery({ images, title = "Gallery" }: ServiceGalleryProps) {
+export function ServiceGallery({ 
+  images = [], 
+  title = "Project Gallery", 
+  description = "View our professional scaffolding installations and completed projects.",
+  placeholderCount = 6
+}: ServiceGalleryProps) {
+  // If no images provided, use placeholders
+  const displayImages = images.length > 0 ? images : Array(placeholderCount).fill(null);
+
   return (
-    <section className="py-16 bg-white">
-      <div className="max-w-6xl mx-auto px-6">
-        <h2 className="text-3xl font-serif font-bold text-gray-900 mb-8 text-center">
-          {title}
-        </h2>
+    <section className="py-16 sm:py-20 bg-white">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="max-w-4xl mx-auto text-center mb-12">
+          <h2 className="text-3xl sm:text-4xl font-serif font-bold text-gray-900 mb-4">
+            {title}
+          </h2>
+          {description && (
+            <p className="text-lg text-gray-600 leading-relaxed">
+              {description}
+            </p>
+          )}
+        </div>
+        
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {images.map((src, i) => (
-            <div key={i} className="relative h-64 rounded-lg overflow-hidden">
-              <Image
-                src={src}
-                alt={`Gallery image ${i + 1}`}
-                fill
-                className="object-cover hover:scale-105 transition-transform duration-300"
-              />
+          {displayImages.map((src, i) => (
+            <div key={i} className="relative h-64 rounded-2xl overflow-hidden bg-gray-200 shadow-lg group">
+              {src ? (
+                <Image
+                  src={src}
+                  alt={`Project gallery image ${i + 1}`}
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  className="object-cover group-hover:scale-110 transition-transform duration-300"
+                />
+              ) : (
+                <div className="h-full flex items-center justify-center">
+                  <div className="text-gray-400 text-center">
+                    <svg className="w-12 h-12 mx-auto mb-2" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd" />
+                    </svg>
+                    <span className="text-sm font-medium">Project Photo</span>
+                  </div>
+                </div>
+              )}
             </div>
           ))}
         </div>
