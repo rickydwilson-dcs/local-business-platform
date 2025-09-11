@@ -1,31 +1,46 @@
-import Link from "next/link";
+import { HeroSection } from "@/components/ui/hero-section"
+import { ServicesOverview } from "@/components/ui/services-overview"
+import { CoverageAreas } from "@/components/ui/coverage-areas"
 
 export default function HomePage() {
   return (
-    <main className="container mx-auto px-4 py-10 prose">
-      <h1 className="text-3xl font-bold mb-6">Colossus Scaffolding</h1>
-      <p className="lead">
-        Safe, reliable scaffolding services across the South East UK. Fully
-        insured, TG20:21 compliant, and CHAS accredited.
-      </p>
-
-      <section className="mt-10">
-        <h2 className="text-2xl font-semibold mb-4">Our Services</h2>
-        <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          <li className="rounded-2xl shadow p-4 hover:shadow-md transition bg-white">
-            <Link href="/services">View All Services</Link>
-          </li>
-        </ul>
+    <div className="relative">
+      <HeroSection />
+      <ServicesOverview />
+      <CoverageAreas 
+        areas={[
+          { name: "East Sussex", slug: "east-sussex" },
+          { name: "West Sussex", slug: "west-sussex" },
+          { name: "Kent", slug: "kent" },
+          { name: "Surrey", slug: "surrey" },
+          { name: "London", slug: "london" },
+          { name: "Essex", slug: "essex" }
+        ]}
+        phone="01424 466661"
+      />
+      {/* Trust Indicators Section */}
+      <section className="py-16 bg-gray-50">
+        <div className="mx-auto max-w-6xl px-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center justify-items-center">
+            <div className="text-center">
+              <div className="text-2xl md:text-3xl font-bold text-brand-blue mb-2">15+</div>
+              <div className="text-sm text-gray-600">Years Experience</div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl md:text-3xl font-bold text-brand-blue mb-2">£10M</div>
+              <div className="text-sm text-gray-600">Liability Insurance</div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl md:text-3xl font-bold text-brand-blue mb-2">TG20:21</div>
+              <div className="text-sm text-gray-600">Compliant</div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl md:text-3xl font-bold text-brand-blue mb-2">CHAS</div>
+              <div className="text-sm text-gray-600">Accredited</div>
+            </div>
+          </div>
+        </div>
       </section>
-
-      <section className="mt-10">
-        <h2 className="text-2xl font-semibold mb-4">Our Locations</h2>
-        <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          <li className="rounded-2xl shadow p-4 hover:shadow-md transition bg-white">
-            <Link href="/locations">View All Locations</Link>
-          </li>
-        </ul>
-      </section>
-    </main>
-  );
+    </div>
+  )
 }
