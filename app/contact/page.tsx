@@ -311,7 +311,7 @@ export default function ContactPage() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-brand-blue text-white font-semibold py-4 px-6 rounded-lg hover:bg-blue-600 focus:ring-2 focus:ring-brand-blue focus:ring-offset-2 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full bg-brand-blue text-white font-semibold py-4 px-6 rounded-lg hover:bg-brand-blue-hover focus:ring-2 focus:ring-brand-blue focus:ring-offset-2 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isSubmitting ? 'Sending...' : 'Send Enquiry'}
               </button>
