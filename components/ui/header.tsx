@@ -20,7 +20,7 @@ export function Header() {
         <div className="flex items-center justify-between">
           <Link href="/" className="flex items-center space-x-2">
             <Image
-              src="/Colossus-Scaffolding-logo.svg"
+              src="/Colossus-Scaffolding-Logo.svg"
               alt="Colossus Scaffolding"
               width={180}
               height={47}
