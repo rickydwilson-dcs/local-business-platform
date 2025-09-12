@@ -1,49 +1,32 @@
-import Link from "next/link";
-
-interface Area {
-  name: string;
-  slug: string;
+interface LocationCoverageProps {
+  location: string;
+  county: string;
+  projectTypes: string[];
+  coverageAreas: string[];
 }
 
-interface CoverageAreasProps {
-  areas: Area[];
-  phone?: string;
-  title?: string;
-  description?: string;
-  linkPrefix?: string;
-}
-
-export function CoverageAreas({ 
-  areas, 
-  phone = "01424 466661", 
-  title = "Professional Scaffolding Services Across the South East",
-  description = "Our expert team understands the unique architectural challenges across the South East, providing specialized scaffolding solutions for the region's distinctive building types and heritage properties.",
-  linkPrefix = "/locations"
-}: CoverageAreasProps) {
-  const projectTypes = [
-    "Historic seafront properties and coastal buildings",
-    "Traditional oast houses and countryside barns",
-    "Victorian and Georgian terraced properties",
-    "Medieval timber-framed heritage buildings",
-    "Modern commercial and residential developments",
-    "Industrial and warehouse complexes"
-  ];
-
+export function LocationCoverage({
+  location,
+  county,
+  projectTypes,
+  coverageAreas
+}: LocationCoverageProps) {
   return (
     <section className="py-16 sm:py-20 bg-white">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid lg:grid-cols-3 gap-12">
           <div className="lg:col-span-2">
             <h2 className="text-3xl sm:text-4xl font-serif font-bold text-gray-900 mb-6">
-              {title}
+              Professional Scaffolding Services Across {county}
             </h2>
             <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-              {description}
+              Our expert team understands the unique architectural challenges across {county}, 
+              providing specialized scaffolding solutions for the region's distinctive building types and heritage properties.
             </p>
             
             <div className="space-y-6">
               <h3 className="text-xl font-serif font-semibold text-gray-900">
-                Specialist Experience Across the Region
+                Specialist Experience in {location}
               </h3>
               <div className="grid md:grid-cols-2 gap-4">
                 {projectTypes.map((project, i) => (
@@ -70,7 +53,7 @@ export function CoverageAreas({
                       TG20:21 Compliant & Fully Insured
                     </h4>
                     <p className="text-gray-600 text-sm leading-relaxed">
-                      All our scaffolding installations across the South East meet the latest TG20:21 standards, 
+                      All our scaffolding installations across {county} meet the latest TG20:21 standards, 
                       with comprehensive £10M public liability insurance and CHAS accreditation for complete peace of mind.
                     </p>
                   </div>
@@ -85,18 +68,13 @@ export function CoverageAreas({
                 <svg className="h-5 w-5 text-brand-blue" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
                 </svg>
-                Coverage Areas
+                Areas Covered in {county}
               </h3>
               <div className="space-y-3">
-                {areas.map((area, i) => (
-                  <div key={area.slug} className="flex items-center gap-3 p-3 bg-white rounded-lg shadow-sm">
+                {coverageAreas.map((area, i) => (
+                  <div key={i} className="flex items-center gap-3 p-3 bg-white rounded-lg shadow-sm">
                     <div className="flex-shrink-0 w-2 h-2 bg-brand-blue rounded-full"></div>
-                    <Link 
-                      href={`${linkPrefix}/${area.slug}`} 
-                      className="text-gray-900 font-medium hover:text-brand-blue transition-colors"
-                    >
-                      {area.name}
-                    </Link>
+                    <span className="text-gray-900 font-medium">{area}</span>
                   </div>
                 ))}
               </div>
@@ -109,7 +87,7 @@ export function CoverageAreas({
                   Rapid Response Times
                 </div>
                 <p className="text-sm text-gray-600 mb-4">
-                  24-48 hour installation across all South East locations with emergency callout available.
+                  24-48 hour installation across all {county} locations with emergency callout available.
                 </p>
                 <a
                   href="/contact"

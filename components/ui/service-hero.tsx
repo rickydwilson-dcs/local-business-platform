@@ -79,10 +79,11 @@ export function ServiceHero(props: ServiceHeroProps) {
             {heroImage ? (
               <Image
                 src={heroImage}
-                alt={`${title} service image`}
+                alt={`Professional scaffolding installation for ${title.toLowerCase()} showing safe access solutions with TG20:21 compliant design`}
                 width={600}
-                height={500}
+                height={400}
                 className="rounded-2xl shadow-lg w-full object-cover"
+                priority
               />
             ) : (
               <div className="relative h-[400px] bg-gray-200 rounded-2xl shadow-lg flex items-center justify-center">
