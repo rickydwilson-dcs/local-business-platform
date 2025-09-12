@@ -26,19 +26,19 @@ function MobileNav() {
       </button>
       
       {isOpen && (
-        <>
+        <div className="fixed inset-0 z-40">
           {/* Dark backdrop overlay */}
           <div 
-            className="fixed inset-0 bg-black bg-opacity-50 z-30"
+            className="absolute inset-0 bg-black bg-opacity-50"
             onClick={() => setIsOpen(false)}
           />
           
           {/* White menu content */}
-          <div className="fixed inset-0 bg-white z-40 flex flex-col">
+          <div className="absolute inset-0 flex flex-col" style={{backgroundColor: 'rgba(255, 255, 255, 0.98)'}}>
             {/* Spacer for header */}
             <div className="h-16 sm:h-20"></div>
             
-            <div className="flex-1 flex flex-col justify-center items-center px-6 -mt-16">
+            <div className="flex-1 flex flex-col justify-center items-center px-6 -mt-16" style={{backgroundColor: 'white'}}>
               <nav className="space-y-8 text-center">
                 <Link 
                   href="/services" 
@@ -87,7 +87,7 @@ function MobileNav() {
               </div>
             </div>
           </div>
-        </>
+        </div>
       )}
     </div>
   );
