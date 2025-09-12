@@ -53,8 +53,8 @@ export function LocationServices({
                     href={service.href}
                     className="inline-flex items-center gap-2 text-brand-blue font-semibold text-sm hover:text-brand-blue-hover transition-colors"
                   >
-                    Learn More
-                    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    Learn About {service.name}
+                    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
                   </Link>

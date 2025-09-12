@@ -75,8 +75,8 @@ export function ServicesOverview() {
                   href={service.href}
                   className="inline-flex items-center justify-center gap-2 bg-transparent border border-gray-300 px-4 py-2 rounded-lg text-xs sm:text-sm hover:bg-brand-blue hover:text-white hover:border-brand-blue transition-all duration-300 group-hover:scale-105 mt-auto"
                 >
-                  <span>Learn More</span>
-                  <ArrowRight className="h-3 w-3 sm:h-4 sm:w-4 group-hover:translate-x-1 transition-transform duration-300" />
+                  <span>Learn About {service.title}</span>
+                  <ArrowRight className="h-3 w-3 sm:h-4 sm:w-4 group-hover:translate-x-1 transition-transform duration-300" aria-hidden="true" />
                 </Link>
               </div>
             </div>
@@ -88,7 +88,7 @@ export function ServicesOverview() {
             href="/services"
             className="inline-flex bg-brand-blue text-white px-6 py-3 rounded-lg hover:bg-brand-blue-hover hover:scale-105 transition-all duration-200 font-semibold"
           >
-            View All Services
+            View All Scaffolding Services
           </Link>
         </div>
       </div>

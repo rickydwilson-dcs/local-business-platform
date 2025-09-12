@@ -20,7 +20,7 @@ interface CardGridProps {
 export function CardGrid({
   items = [], // Default to empty array
   basePath,
-  linkText = "Learn More",
+  linkText = "Learn More About",
   showPlaceholderImage = true,
   imageIcon = "image"
 }: CardGridProps) {
@@ -103,7 +103,7 @@ export function CardGrid({
               href={item.href || `${basePath}/${item.slug}`}
               className="inline-flex items-center text-brand-blue hover:text-brand-blue-hover font-medium"
             >
-              {linkText} →
+              {linkText} {item.title} <span aria-hidden="true">→</span>
             </Link>
           </div>
         </div>

@@ -48,7 +48,7 @@ export function Footer() {
               </li>
               <li>
                 <Link href="/services" className="hover:text-brand-blue transition-colors">
-                  View All Services
+                  View All Scaffolding Services
                 </Link>
               </li>
             </ul>

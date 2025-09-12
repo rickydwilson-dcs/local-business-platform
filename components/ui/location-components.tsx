@@ -27,7 +27,7 @@ export function LocationServices({ services, title = "Popular Services" }: Locat
                 </div>
                 <div>
                   <h3 className="text-lg font-semibold text-gray-900 mb-2">{service.name}</h3>
-                  <span className="text-brand-blue font-medium">Learn More →</span>
+                  <span className="text-brand-blue font-medium">Learn About {service.name} <span aria-hidden="true">→</span></span>
                 </div>
               </div>
             </Link>

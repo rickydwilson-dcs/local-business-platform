@@ -362,7 +362,7 @@ export default function ContactPage() {
                   </p>
                   <p className="text-sm text-gray-600">
                     <Link href="/locations" className="text-brand-blue hover:underline">
-                      View all coverage areas →
+                      View All Coverage Areas
                     </Link>
                   </p>
                 </div>
@@ -394,7 +394,7 @@ export default function ContactPage() {
                     </li>
                     <li>
                       <Link href="/services" className="text-brand-blue hover:underline font-medium">
-                        View all services →
+                        View All Scaffolding Services
                       </Link>
                     </li>
                   </ul>
