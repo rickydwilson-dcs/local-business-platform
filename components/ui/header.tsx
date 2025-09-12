@@ -27,7 +27,10 @@ function MobileNav() {
       
       {isOpen && (
         <div className="fixed inset-0 bg-white z-40 flex flex-col">
-          <div className="flex-1 flex flex-col justify-center items-center px-6">
+          {/* Spacer for header */}
+          <div className="h-16 sm:h-20"></div>
+          
+          <div className="flex-1 flex flex-col justify-center items-center px-6 -mt-16">
             <nav className="space-y-8 text-center">
               <Link 
                 href="/services" 
