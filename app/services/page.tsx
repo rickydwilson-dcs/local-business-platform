@@ -62,32 +62,32 @@ function getServiceData(slug: string): Partial<ServiceItem> {
     "access-scaffolding": {
       description: "Safe, compliant access scaffolding for residential, commercial and industrial projects across the South East UK.",
       badge: "Most Popular",
-      image: "/access-scaffolding.jpg",
+      image: "/Access Scaffolding new build.png", // Using existing access scaffolding image
       features: ["TG20:21 Compliant", "CISRS Qualified Teams", "Full Insurance Coverage"]
     },
     "facade-scaffolding": {
       description: "Professional facade scaffolding solutions for building maintenance, renovation and construction projects.",
-      image: "/facade-scaffolding.jpg", 
+      // No image - will use placeholder
       features: ["Weatherproof Systems", "Load Bearing Design", "Planning Compliance"]
     },
     "edge-protection": {
       description: "Comprehensive edge protection systems ensuring maximum safety on construction and maintenance sites.",
-      image: "/edge-protection.jpg",
+      // No image - will use placeholder
       features: ["HSE Compliant", "Rapid Installation", "Adjustable Systems"]
     },
     "temporary-roof-systems": {
       description: "Weather protection and temporary roofing solutions for ongoing construction and maintenance work.",
-      image: "/temporary-roof.jpg",
+      // No image - will use placeholder
       features: ["Weatherproof", "Load Rated", "Quick Assembly"]
     },
     "birdcage-scaffolds": {
       description: "Independent scaffold structures providing comprehensive access for complex commercial and industrial projects.",
-      image: "/birdcage-scaffold.jpg",
+      // No image - will use placeholder
       features: ["Independent Structure", "Heavy Duty", "Complex Access"]
     },
     "scaffold-towers-mast-systems": {
       description: "Mobile and static scaffold towers for flexible access solutions on various project types.",
-      image: "/scaffold-towers.jpg",
+      // No image - will use placeholder
       features: ["Mobile & Static", "Height Adjustable", "Quick Setup"]
     }
   };
@@ -215,8 +215,8 @@ export default async function ServicesPage() {
                       href={`/services/${service.slug}`}
                       className="inline-flex items-center gap-2 text-brand-blue hover:text-brand-blue-hover font-semibold text-sm transition-colors mt-4"
                     >
-                      Learn More
-                      <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      Learn About {service.title}
+                      <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                       </svg>
                     </Link>
