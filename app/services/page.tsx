@@ -62,33 +62,58 @@ function getServiceData(slug: string): Partial<ServiceItem> {
     "access-scaffolding": {
       description: "Safe, compliant access scaffolding for residential, commercial and industrial projects across the South East UK.",
       badge: "Most Popular",
-      image: "/Access Scaffolding new build.png", // Using existing access scaffolding image
+      image: "/Access Scaffolding new build.png",
       features: ["TG20:21 Compliant", "CISRS Qualified Teams", "Full Insurance Coverage"]
     },
     "facade-scaffolding": {
       description: "Professional facade scaffolding solutions for building maintenance, renovation and construction projects.",
-      // No image - will use placeholder
+      image: "/Facade Scaffolding.png",
       features: ["Weatherproof Systems", "Load Bearing Design", "Planning Compliance"]
     },
     "edge-protection": {
       description: "Comprehensive edge protection systems ensuring maximum safety on construction and maintenance sites.",
-      // No image - will use placeholder
+      image: "/Edge Protection.png",
       features: ["HSE Compliant", "Rapid Installation", "Adjustable Systems"]
     },
     "temporary-roof-systems": {
       description: "Weather protection and temporary roofing solutions for ongoing construction and maintenance work.",
-      // No image - will use placeholder
+      // No specific image available - will use placeholder
       features: ["Weatherproof", "Load Rated", "Quick Assembly"]
     },
     "birdcage-scaffolds": {
       description: "Independent scaffold structures providing comprehensive access for complex commercial and industrial projects.",
-      // No image - will use placeholder
+      image: "/Birdcage scaffolding.png",
       features: ["Independent Structure", "Heavy Duty", "Complex Access"]
     },
     "scaffold-towers-mast-systems": {
       description: "Mobile and static scaffold towers for flexible access solutions on various project types.",
-      // No image - will use placeholder
+      // No specific image available - will use placeholder
       features: ["Mobile & Static", "Height Adjustable", "Quick Setup"]
+    },
+    "crash-decks-crane-decks": {
+      description: "Protective crash decks and crane decks ensuring safety during construction operations.",
+      image: "/Crash Decks & Crane Decks.png",
+      features: ["Load Bearing", "Safety Compliance", "Custom Design"]
+    },
+    "heavy-duty-industrial-scaffolding": {
+      description: "Heavy-duty scaffolding solutions for complex industrial projects and infrastructure work.",
+      image: "/Heavy Industrial Scaffolding.png",
+      features: ["Heavy Load Capacity", "Industrial Grade", "Complex Structures"]
+    },
+    "pavement-gantries-loading-bays": {
+      description: "Specialized pavement gantries and loading bay solutions for urban construction projects.",
+      image: "/Pavement Gantries Loading Bays.png",
+      features: ["Urban Solutions", "Pedestrian Safety", "Loading Access"]
+    },
+    "public-access-staircases": {
+      description: "Safe and compliant public access staircase systems for construction sites.",
+      image: "/Public Access Staircases.png",
+      features: ["Public Safety", "Accessible Design", "Code Compliant"]
+    },
+    "scaffold-alarms": {
+      description: "Advanced scaffold alarm systems for enhanced site security and safety monitoring.",
+      image: "/Scaffold Alarms.png",
+      features: ["24/7 Monitoring", "Instant Alerts", "Security Integration"]
     }
   };
 
