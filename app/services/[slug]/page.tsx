@@ -75,6 +75,7 @@ function getServiceData(slug: string): ServiceData {
     "facade-scaffolding": {
       title: "Facade Scaffolding Solutions",
       description: "Professional facade scaffolding for building maintenance, renovation, and construction projects. Weather-resistant systems with comprehensive access solutions.",
+      heroImage: "/Facade Scaffolding.png",
       benefits: [
         "Weatherproof scaffold systems",
         "Load-bearing structural design",
@@ -90,6 +91,7 @@ function getServiceData(slug: string): ServiceData {
     "edge-protection": {
       title: "Edge Protection Systems",
       description: "Comprehensive edge protection systems ensuring maximum safety on construction and maintenance sites. HSE compliant solutions for all project types.",
+      heroImage: "/Edge Protection.png",
       benefits: [
         "HSE compliant edge protection",
         "Rapid installation systems",
@@ -120,6 +122,7 @@ function getServiceData(slug: string): ServiceData {
     "birdcage-scaffolds": {
       title: "Birdcage Scaffold Systems",
       description: "Independent birdcage scaffold structures providing comprehensive access for complex commercial and industrial projects requiring extensive coverage.",
+      heroImage: "/Birdcage scaffolding.png",
       benefits: [
         "Independent structure design",
         "Heavy-duty load capacity",
@@ -146,6 +149,86 @@ function getServiceData(slug: string): ServiceData {
         "Transport and delivery available"
       ],
       faqs: getServiceFAQs("scaffold towers & mast systems")
+    },
+    "crash-decks-crane-decks": {
+      title: "Crash Decks & Crane Decks",
+      description: "Protective crash decks and crane decks ensuring safety during construction operations with load-bearing capabilities and professional installation.",
+      heroImage: "/Crash Decks & Crane Decks.png",
+      benefits: [
+        "Load-bearing deck systems",
+        "Professional safety compliance",
+        "Custom design solutions",
+        "Rapid installation service",
+        "Heavy-duty construction",
+        "Weather-resistant materials",
+        "Safety barrier integration",
+        "Expert engineering support"
+      ],
+      faqs: getServiceFAQs("crash decks & crane decks")
+    },
+    "heavy-duty-industrial-scaffolding": {
+      title: "Heavy Duty Industrial Scaffolding",
+      description: "Heavy-duty scaffolding solutions for complex industrial projects and infrastructure work with high load capacity and expert engineering.",
+      heroImage: "/Heavy Industrial Scaffolding.png",
+      benefits: [
+        "Heavy load capacity systems",
+        "Industrial-grade materials",
+        "Complex structure capability",
+        "Professional engineering design",
+        "Safety compliance guaranteed",
+        "Custom configuration options",
+        "Expert installation teams",
+        "Long-term project support"
+      ],
+      faqs: getServiceFAQs("heavy duty industrial scaffolding")
+    },
+    "pavement-gantries-loading-bays": {
+      title: "Pavement Gantries & Loading Bays",
+      description: "Specialized pavement gantries and loading bay solutions for urban construction projects with pedestrian safety and loading access.",
+      heroImage: "/Pavement Gantries Loading Bays.png",
+      benefits: [
+        "Urban construction solutions",
+        "Pedestrian safety priority",
+        "Loading access capability",
+        "Traffic management integration",
+        "Planning permission support",
+        "Professional installation",
+        "Safety barrier systems",
+        "Custom design solutions"
+      ],
+      faqs: getServiceFAQs("pavement gantries & loading bays")
+    },
+    "public-access-staircases": {
+      title: "Public Access Staircases",
+      description: "Safe and compliant public access staircase systems for construction sites with accessible design and code compliance.",
+      heroImage: "/Public Access Staircases.png",
+      benefits: [
+        "Public safety compliance",
+        "Accessible design standards",
+        "Building code compliant",
+        "Professional installation",
+        "Safety handrail systems",
+        "Weather-resistant construction",
+        "Custom configuration options",
+        "Regular safety inspections"
+      ],
+      faqs: getServiceFAQs("public access staircases")
+    },
+    "scaffold-alarms": {
+      title: "Scaffold Alarm Systems",
+      description: "Advanced scaffold alarm systems for enhanced site security and safety monitoring with 24/7 monitoring and instant alerts.",
+      heroImage: "/Scaffold Alarms.png",
+      benefits: [
+        "24/7 security monitoring",
+        "Instant alert systems",
+        "Security system integration",
+        "Professional installation",
+        "Remote monitoring capability",
+        "Theft prevention systems",
+        "Custom alarm configuration",
+        "Expert technical support"
+      ],
+      faqs: getServiceFAQs("scaffold alarm systems")
     }
   };
 
