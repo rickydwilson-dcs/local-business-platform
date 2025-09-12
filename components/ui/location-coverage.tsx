@@ -21,7 +21,7 @@ export function LocationCoverage({
             </h2>
             <p className="text-lg text-gray-600 mb-8 leading-relaxed">
               Our expert team understands the unique architectural challenges across {county}, 
-              providing specialized scaffolding solutions for the region's distinctive building types and heritage properties.
+              providing specialized scaffolding solutions for the region&apos;s distinctive building types and heritage properties.
             </p>
             
             <div className="space-y-6">

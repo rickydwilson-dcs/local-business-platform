@@ -8,6 +8,7 @@ import { ServiceBenefits } from "@/components/ui/service-benefits";
 import { ServiceGallery } from "@/components/ui/service-gallery";
 import { ServiceFAQ } from "@/components/ui/service-faq";
 import { ServiceCTA } from "@/components/ui/service-cta";
+import { absUrl } from "@/lib/site";
 
 export const dynamic = "force-static";
 export const dynamicParams = false;
@@ -173,13 +174,43 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   const { slug } = await params;
   const serviceData = getServiceData(slug);
+  const serviceName = serviceData.title.replace(' Services', '').replace(' Solutions', '').replace(' Systems', '');
+  
   return { 
-    title: serviceData.title, 
-    description: serviceData.description, 
+    title: `${serviceData.title} | Professional Scaffolding | Colossus Scaffolding`,
+    description: serviceData.description,
     openGraph: { 
-      title: serviceData.title, 
-      description: serviceData.description 
-    } 
+      title: `${serviceData.title} | Professional Scaffolding | Colossus Scaffolding`,
+      description: serviceData.description,
+      url: absUrl(`/services/${slug}`),
+      siteName: "Colossus Scaffolding",
+      images: serviceData.heroImage ? [
+        {
+          url: absUrl(serviceData.heroImage),
+          width: 1200,
+          height: 630,
+          alt: `${serviceName} - ${serviceData.title}`
+        }
+      ] : [
+        {
+          url: absUrl("/static/logo.png"),
+          width: 1200,
+          height: 630,
+          alt: `${serviceName} - Colossus Scaffolding`
+        }
+      ],
+      locale: "en_GB",
+      type: "website"
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${serviceData.title} | Professional Scaffolding | Colossus Scaffolding`,
+      description: serviceData.description,
+      images: serviceData.heroImage ? [absUrl(serviceData.heroImage)] : [absUrl("/static/logo.png")]
+    },
+    alternates: {
+      canonical: absUrl(`/services/${slug}`)
+    }
   };
 }
 
@@ -188,9 +219,138 @@ export default async function Page(
 ) {
   const { slug } = await params;
   const serviceData = getServiceData(slug);
+  const serviceName = serviceData.title.replace(' Services', '').replace(' Solutions', '').replace(' Systems', '');
+
+  const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": absUrl(`/services/${slug}#service`),
+    name: serviceData.title,
+    description: serviceData.description,
+    url: absUrl(`/services/${slug}`),
+    category: "Scaffolding",
+    serviceType: serviceName,
+    provider: {
+      "@type": "Organization",
+      "@id": absUrl("/#organization"),
+      name: "Colossus Scaffolding",
+      url: absUrl("/"),
+      logo: absUrl("/static/logo.png")
+    },
+    areaServed: [
+      { "@type": "Place", name: "East Sussex" },
+      { "@type": "Place", name: "West Sussex" },
+      { "@type": "Place", name: "Kent" },
+      { "@type": "Place", name: "Surrey" },
+      { "@type": "Place", name: "Essex" },
+      { "@type": "Place", name: "London" }
+    ],
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: `${serviceName} Benefits`,
+      itemListElement: serviceData.benefits.map((benefit, index) => ({
+        "@type": "Offer",
+        position: index + 1,
+        itemOffered: {
+          "@type": "Service",
+          name: benefit,
+          description: benefit
+        }
+      }))
+    },
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: "4.8",
+      bestRating: "5",
+      ratingCount: "45"
+    }
+  };
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "@id": absUrl(`/services/${slug}#faq`),
+    mainEntity: serviceData.faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer
+      }
+    }))
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: absUrl("/")
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Services",
+        item: absUrl("/services")
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: serviceName,
+        item: absUrl(`/services/${slug}`)
+      }
+    ]
+  };
+
+  const webPageSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": absUrl(`/services/${slug}`),
+    name: serviceData.title,
+    description: serviceData.description,
+    url: absUrl(`/services/${slug}`),
+    isPartOf: {
+      "@id": absUrl("/#website")
+    },
+    about: {
+      "@id": absUrl(`/services/${slug}#service`)
+    },
+    breadcrumb: {
+      "@id": absUrl(`/services/${slug}#breadcrumb`)
+    }
+  };
 
   return (
     <>
+      {/* Schema Markup for SEO */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(serviceSchema)
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(faqSchema)
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbSchema)
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(webPageSchema)
+        }}
+      />
+      
       <ServiceHero
         title={serviceData.title}
         description={serviceData.description}

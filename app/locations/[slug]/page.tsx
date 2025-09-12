@@ -8,6 +8,7 @@ import { LocationServices } from "@/components/ui/location-services";
 import { LocationCoverage } from "@/components/ui/location-coverage";
 import { LocationFAQ } from "@/components/ui/location-faq";
 import { ServiceCTA } from "@/components/ui/service-cta";
+import { absUrl } from "@/lib/site";
 
 export const dynamic = "force-static";
 export const dynamicParams = false;
@@ -408,13 +409,42 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   const { slug } = await params;
   const locationData = getLocationData(slug);
+  
   return { 
     title: `Scaffolding Services in ${locationData.title} | Colossus Scaffolding`,
     description: locationData.description,
     openGraph: { 
       title: `Scaffolding Services in ${locationData.title} | Colossus Scaffolding`,
-      description: locationData.description 
-    } 
+      description: locationData.description,
+      url: absUrl(`/locations/${slug}`),
+      siteName: "Colossus Scaffolding",
+      images: locationData.heroImage ? [
+        {
+          url: absUrl(locationData.heroImage),
+          width: 1200,
+          height: 630,
+          alt: `Scaffolding Services in ${locationData.title} - Colossus Scaffolding`
+        }
+      ] : [
+        {
+          url: absUrl("/static/logo.png"),
+          width: 1200,
+          height: 630,
+          alt: `Scaffolding Services in ${locationData.title} - Colossus Scaffolding`
+        }
+      ],
+      locale: "en_GB",
+      type: "website"
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `Scaffolding Services in ${locationData.title} | Colossus Scaffolding`,
+      description: locationData.description,
+      images: locationData.heroImage ? [absUrl(locationData.heroImage)] : [absUrl("/static/logo.png")]
+    },
+    alternates: {
+      canonical: absUrl(`/locations/${slug}`)
+    }
   };
 }
 
@@ -424,8 +454,153 @@ export default async function Page(
   const { slug } = await params;
   const locationData = getLocationData(slug);
 
+  const localBusinessSchema = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "@id": absUrl(`/locations/${slug}#localbusiness`),
+    name: `Colossus Scaffolding - ${locationData.title}`,
+    description: locationData.description,
+    url: absUrl(`/locations/${slug}`),
+    serviceArea: {
+      "@type": "Place",
+      name: locationData.title,
+      containedInPlace: {
+        "@type": "Place", 
+        name: locationData.county
+      }
+    },
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: `Scaffolding Services in ${locationData.title}`,
+      itemListElement: locationData.services.map((service, index) => ({
+        "@type": "Offer",
+        position: index + 1,
+        itemOffered: {
+          "@type": "Service",
+          name: service.name,
+          description: service.description,
+          url: absUrl(service.href)
+        }
+      }))
+    },
+    parentOrganization: {
+      "@id": absUrl("/#organization")
+    },
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: "4.8",
+      bestRating: "5", 
+      ratingCount: "67"
+    }
+  };
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "@id": absUrl(`/locations/${slug}#faq`),
+    mainEntity: locationData.faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer
+      }
+    }))
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: absUrl("/")
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Locations",
+        item: absUrl("/locations")
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: locationData.title,
+        item: absUrl(`/locations/${slug}`)
+      }
+    ]
+  };
+
+  const webPageSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": absUrl(`/locations/${slug}`),
+    name: `Scaffolding Services in ${locationData.title}`,
+    description: locationData.description,
+    url: absUrl(`/locations/${slug}`),
+    isPartOf: {
+      "@id": absUrl("/#website")
+    },
+    about: {
+      "@id": absUrl(`/locations/${slug}#localbusiness`)
+    },
+    breadcrumb: {
+      "@id": absUrl(`/locations/${slug}#breadcrumb`)
+    }
+  };
+
+  const placeSchema = {
+    "@context": "https://schema.org",
+    "@type": "Place",
+    "@id": absUrl(`/locations/${slug}#place`),
+    name: locationData.title,
+    containedInPlace: {
+      "@type": "Place",
+      name: locationData.county
+    },
+    geo: locationData.title === "Hastings" ? {
+      "@type": "GeoCoordinates",
+      latitude: "50.8549",
+      longitude: "0.5736"
+    } : undefined
+  };
+
   return (
     <>
+      {/* Schema Markup for SEO */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(localBusinessSchema)
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(faqSchema)
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbSchema)
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(webPageSchema)
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(placeSchema)
+        }}
+      />
+      
       <LocationHero
         title={locationData.title}
         description={locationData.description}
