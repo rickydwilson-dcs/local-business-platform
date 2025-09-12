@@ -35,12 +35,30 @@ async function getMdx(slug: string) {
   return { title, description, data };
 }
 
+// Generate location-specific FAQs for services
+function getServiceFAQs(serviceName: string): Array<{ question: string; answer: string }> {
+  const locationGroups = [
+    { locations: "Brighton, Lewes, Eastbourne", county: "East Sussex" },
+    { locations: "Crawley, Horsham, Worthing", county: "West Sussex" },
+    { locations: "Maidstone, Canterbury, Ashford", county: "Kent" },
+    { locations: "Guildford, Woking, Croydon", county: "Surrey" },
+    { locations: "Chelmsford, Colchester, Southend", county: "Essex" },
+    { locations: "Westminster, Camden, Southwark", county: "London" }
+  ];
+
+  return locationGroups.map(group => ({
+    question: `Do you provide ${serviceName.toLowerCase()} in ${group.locations.split(', ')[0]}?`,
+    answer: `Yes, we supply professional ${serviceName.toLowerCase()} services in ${group.locations}, fully compliant with UK safety standards.`
+  }));
+}
+
 function getServiceData(slug: string): ServiceData {
   const serviceDataMap: Record<string, ServiceData> = {
     "access-scaffolding": {
-      title: "Access Scaffolding Services",
+      title: "Access Scaffolding Services", 
       description: "Safe, TG20:21-compliant access scaffolding for residential, commercial, and industrial projects across the South East UK. Professional installation with full insurance coverage.",
       badge: "Most Popular",
+      heroImage: "/Access Scaffolding new build.png",
       benefits: [
         "TG20:21 compliant design and installation",
         "CISRS qualified and experienced scaffolders",
@@ -51,24 +69,7 @@ function getServiceData(slug: string): ServiceData {
         "Complete handover certificates provided",
         "Regular safety inspections included"
       ],
-      faqs: [
-        {
-          question: "How quickly can you install access scaffolding?",
-          answer: "For standard residential projects, we can typically install within 24-48 hours of confirmation. Larger commercial projects may require 2-3 days depending on complexity and design requirements."
-        },
-        {
-          question: "Do you provide scaffolding inspections?",
-          answer: "Yes, all scaffolding installations include a handover certificate and we conduct regular inspections at least every 7 days, after adverse weather, and following any modifications."
-        },
-        {
-          question: "Is your scaffolding compliant with safety regulations?",
-          answer: "All our scaffolding is designed and erected to TG20:21 standards, with CHAS accreditation and full compliance with HSE regulations. We're fully insured with £10M public liability coverage."
-        },
-        {
-          question: "Can you handle planning permissions for scaffolding?",
-          answer: "We assist with planning requirements and can handle license applications for scaffolding on public land. Our experienced team knows local authority requirements across the South East."
-        }
-      ]
+      faqs: getServiceFAQs("access scaffolding")
     },
     "facade-scaffolding": {
       title: "Facade Scaffolding Solutions",
@@ -83,20 +84,7 @@ function getServiceData(slug: string): ServiceData {
         "Access platforms and walkways",
         "Safety barriers included"
       ],
-      faqs: [
-        {
-          question: "What types of facade work can your scaffolding support?",
-          answer: "Our facade scaffolding supports all types of external building work including rendering, painting, window replacement, cladding, and general maintenance work on residential and commercial properties."
-        },
-        {
-          question: "Do you provide weather protection for facade scaffolding?",
-          answer: "Yes, we offer weather protection systems including scaffold sheeting, temporary roofs, and protective barriers to ensure work can continue in various weather conditions."
-        },
-        {
-          question: "How do you handle scaffolding around windows and architectural features?",
-          answer: "Our experienced team designs bespoke solutions to work around windows, bay windows, balconies, and other architectural features while maintaining full access and safety compliance."
-        }
-      ]
+      faqs: getServiceFAQs("facade scaffolding")
     },
     "edge-protection": {
       title: "Edge Protection Systems",
@@ -111,20 +99,7 @@ function getServiceData(slug: string): ServiceData {
         "Regular safety inspections",
         "Certified installation teams"
       ],
-      faqs: [
-        {
-          question: "What heights require edge protection?",
-          answer: "HSE regulations require edge protection for any working height above 2 meters where there's a risk of falling. We provide compliant systems for all heights and situations."
-        },
-        {
-          question: "Can edge protection be installed on existing structures?",
-          answer: "Yes, our edge protection systems can be retrofitted to existing buildings, scaffolding, and structures. We assess each situation to provide the most suitable solution."
-        },
-        {
-          question: "How quickly can edge protection be installed?",
-          answer: "Most edge protection systems can be installed within a few hours to a day, depending on the complexity and size of the area requiring protection."
-        }
-      ]
+      faqs: getServiceFAQs("edge protection")
     },
     "temporary-roof-systems": {
       title: "Temporary Roof Systems",
@@ -139,20 +114,7 @@ function getServiceData(slug: string): ServiceData {
         "Professional installation",
         "Dismantling service provided"
       ],
-      faqs: [
-        {
-          question: "How long can temporary roofs remain in place?",
-          answer: "Our temporary roof systems are designed for both short-term (weeks) and long-term (months) installations, depending on your project requirements and local authority permissions."
-        },
-        {
-          question: "Can temporary roofs support additional loads?",
-          answer: "Yes, our temporary roofs are engineered to specific load requirements and can support additional equipment, materials, and snow loads as required by your project."
-        },
-        {
-          question: "Do you provide drainage solutions for temporary roofs?",
-          answer: "All temporary roof installations include proper drainage systems with guttering and downpipes to effectively manage rainwater and prevent water damage."
-        }
-      ]
+      faqs: getServiceFAQs("temporary roof systems")
     },
     "birdcage-scaffolds": {
       title: "Birdcage Scaffold Systems",
@@ -167,20 +129,7 @@ function getServiceData(slug: string): ServiceData {
         "Safety compliance guaranteed",
         "Custom configuration options"
       ],
-      faqs: [
-        {
-          question: "What projects require birdcage scaffolding?",
-          answer: "Birdcage scaffolding is ideal for large commercial projects, industrial maintenance, ceiling work, and any project requiring extensive access coverage over a wide area."
-        },
-        {
-          question: "How much weight can birdcage scaffolding support?",
-          answer: "Our birdcage scaffolds are engineered to support specific loads including materials, equipment, and personnel. Load calculations are provided with each design."
-        },
-        {
-          question: "Can birdcage scaffolding be modified during a project?",
-          answer: "Yes, birdcage systems can be modified and extended as project requirements change. All modifications are properly engineered and certified."
-        }
-      ]
+      faqs: getServiceFAQs("birdcage scaffolds")
     },
     "scaffold-towers-mast-systems": {
       title: "Scaffold Towers & Mast Systems",
@@ -195,20 +144,7 @@ function getServiceData(slug: string): ServiceData {
         "Safety guardrails included",
         "Transport and delivery available"
       ],
-      faqs: [
-        {
-          question: "What's the maximum height for scaffold towers?",
-          answer: "Our scaffold towers can reach heights up to 12 meters for mobile towers and higher for static installations, all designed to relevant safety standards."
-        },
-        {
-          question: "Are scaffold towers suitable for outdoor use?",
-          answer: "Yes, our towers are designed for both indoor and outdoor use, with stabilization systems and weather-resistant components for safe outdoor operation."
-        },
-        {
-          question: "Can I hire towers for DIY projects?",
-          answer: "We provide towers for professional use only, with full installation, inspection, and safety certification included in our service."
-        }
-      ]
+      faqs: getServiceFAQs("scaffold towers & mast systems")
     }
   };
 
@@ -221,12 +157,7 @@ function getServiceData(slug: string): ServiceData {
       "Full insurance coverage",
       "Professional service guarantee"
     ],
-    faqs: [
-      {
-        question: "How can I get a quote for this service?",
-        answer: "Contact our team for a free, no-obligation quote. We'll assess your requirements and provide a detailed proposal within 24 hours."
-      }
-    ]
+    faqs: getServiceFAQs(slug.split("-").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" "))
   };
 }
 
