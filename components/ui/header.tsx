@@ -26,59 +26,68 @@ function MobileNav() {
       </button>
       
       {isOpen && (
-        <div className="fixed inset-0 bg-white z-40 flex flex-col">
-          {/* Spacer for header */}
-          <div className="h-16 sm:h-20"></div>
+        <>
+          {/* Dark backdrop overlay */}
+          <div 
+            className="fixed inset-0 bg-black bg-opacity-50 z-30"
+            onClick={() => setIsOpen(false)}
+          />
           
-          <div className="flex-1 flex flex-col justify-center items-center px-6 -mt-16">
-            <nav className="space-y-8 text-center">
-              <Link 
-                href="/services" 
-                className="block text-2xl font-medium text-gray-900 hover:text-brand-blue transition-colors"
-                onClick={() => setIsOpen(false)}
-              >
-                Services
-              </Link>
-              <Link 
-                href="/locations" 
-                className="block text-2xl font-medium text-gray-900 hover:text-brand-blue transition-colors"
-                onClick={() => setIsOpen(false)}
-              >
-                Locations
-              </Link>
-              <Link 
-                href="/about" 
-                className="block text-2xl font-medium text-gray-900 hover:text-brand-blue transition-colors"
-                onClick={() => setIsOpen(false)}
-              >
-                About
-              </Link>
-              <Link 
-                href="/contact" 
-                className="block text-2xl font-medium text-gray-900 hover:text-brand-blue transition-colors"
-                onClick={() => setIsOpen(false)}
-              >
-                Contact
-              </Link>
-            </nav>
+          {/* White menu content */}
+          <div className="fixed inset-0 bg-white z-40 flex flex-col">
+            {/* Spacer for header */}
+            <div className="h-16 sm:h-20"></div>
             
-            <div className="mt-12 text-center">
-              <div className="flex items-center justify-center space-x-2 text-gray-900 mb-6">
-                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                </svg>
-                <span className="font-semibold text-lg">01424 466 661</span>
+            <div className="flex-1 flex flex-col justify-center items-center px-6 -mt-16">
+              <nav className="space-y-8 text-center">
+                <Link 
+                  href="/services" 
+                  className="block text-2xl font-medium text-gray-900 hover:text-brand-blue transition-colors"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Services
+                </Link>
+                <Link 
+                  href="/locations" 
+                  className="block text-2xl font-medium text-gray-900 hover:text-brand-blue transition-colors"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Locations
+                </Link>
+                <Link 
+                  href="/about" 
+                  className="block text-2xl font-medium text-gray-900 hover:text-brand-blue transition-colors"
+                  onClick={() => setIsOpen(false)}
+                >
+                  About
+                </Link>
+                <Link 
+                  href="/contact" 
+                  className="block text-2xl font-medium text-gray-900 hover:text-brand-blue transition-colors"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Contact
+                </Link>
+              </nav>
+              
+              <div className="mt-12 text-center">
+                <div className="flex items-center justify-center space-x-2 text-gray-900 mb-6">
+                  <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                  </svg>
+                  <span className="font-semibold text-lg">01424 466 661</span>
+                </div>
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center justify-center px-8 py-3 bg-brand-blue text-white font-semibold rounded-lg hover:bg-brand-blue-hover transition-colors"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Get Free Quote
+                </Link>
               </div>
-              <Link
-                href="/contact"
-                className="inline-flex items-center justify-center px-8 py-3 bg-brand-blue text-white font-semibold rounded-lg hover:bg-brand-blue-hover transition-colors"
-                onClick={() => setIsOpen(false)}
-              >
-                Get Free Quote
-              </Link>
             </div>
           </div>
-        </div>
+        </>
       )}
     </div>
   );
