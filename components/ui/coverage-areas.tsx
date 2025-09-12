@@ -15,7 +15,6 @@ interface CoverageAreasProps {
 
 export function CoverageAreas({ 
   areas, 
-  phone = "01424 466661", 
   title = "Professional Scaffolding Services Across the South East",
   description = "Our expert team understands the unique architectural challenges across the South East, providing specialized scaffolding solutions for the region's distinctive building types and heritage properties.",
   linkPrefix = "/locations"
@@ -88,7 +87,7 @@ export function CoverageAreas({
                 Coverage Areas
               </h3>
               <div className="space-y-3">
-                {areas.map((area, i) => (
+                {areas.map((area) => (
                   <div key={area.slug} className="flex items-center gap-3 p-3 bg-white rounded-lg shadow-sm">
                     <div className="flex-shrink-0 w-2 h-2 bg-brand-blue rounded-full"></div>
                     <Link 

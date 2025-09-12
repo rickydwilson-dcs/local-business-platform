@@ -1,6 +1,5 @@
 import path from "path";
 import { promises as fs } from "fs";
-import matter from "gray-matter";
 import type { Metadata } from "next";
 
 import { LocationHero } from "@/components/ui/location-hero";
@@ -36,14 +35,6 @@ interface LocationData {
   }>;
 }
 
-async function getMdx(slug: string) {
-  const file = path.join(DIR, `${slug}.mdx`);
-  const raw = await fs.readFile(file, "utf8");
-  const { data } = matter(raw);
-  const title = (data.title as string) || slug;
-  const description = (data.description as string) || "";
-  return { title, description, data };
-}
 
 function getLocationData(slug: string): LocationData {
   const locationDataMap: Record<string, LocationData> = {
