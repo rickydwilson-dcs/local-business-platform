@@ -27,17 +27,16 @@ function MobileNav() {
       
       {isOpen && (
         <>
-          {/* Dark backdrop overlay */}
+          {/* Dark backdrop overlay - only covers left portion */}
           <div 
-            className="fixed inset-0 bg-black bg-opacity-60 z-30"
+            className="fixed top-0 left-0 h-full bg-black bg-opacity-60 z-30"
+            style={{width: '30%'}}
             onClick={() => setIsOpen(false)}
           />
           
           {/* Off-canvas menu sliding from right */}
           <div 
-            className={`fixed top-0 right-0 h-full bg-white shadow-2xl z-40 transform transition-transform duration-300 ease-in-out ${
-              isOpen ? 'translate-x-0' : 'translate-x-full'
-            }`}
+            className="fixed top-0 right-0 h-full bg-white shadow-2xl z-40"
             style={{width: '70%', backgroundColor: 'white'}}
           >
             <div className="flex flex-col h-full">
