@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Schema from "@/components/Schema";
 
 export const dynamic = "force-static";
 
@@ -61,7 +62,8 @@ const serviceHighlights = [
 
 export default function LocationsPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100">
+    <>
+      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100">
       {/* Hero Section */}
       <section className="py-16 sm:py-20 lg:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6">
@@ -231,6 +233,41 @@ export default function LocationsPage() {
           </div>
         </div>
       </section>
-    </div>
+      </div>
+
+      <Schema
+        service={{
+          id: "/locations#service",
+          url: "/locations",
+          name: "Scaffolding Service Areas",
+          description: "Professional scaffolding services available across multiple locations in the South East UK.",
+          serviceType: "Local Services",
+          areaServed: ["South East UK", "East Sussex", "West Sussex", "Kent", "Surrey", "London", "Essex"]
+        }}
+        org={{ 
+          name: "Colossus Scaffolding", 
+          url: "/", 
+          logo: "/Colossus-Scaffolding-Logo.svg" 
+        }}
+        faqs={[
+          {
+            question: "Which locations do you serve?",
+            answer: "We provide scaffolding services across the South East UK including East Sussex, West Sussex, Kent, Surrey, London, and Essex."
+          },
+          {
+            question: "Do you handle permits and street works?",
+            answer: "Yes, we manage all necessary permits and street works applications for scaffolding projects."
+          },
+          {
+            question: "Can you work in residential areas?",
+            answer: "Yes, we specialize in residential, commercial, and industrial scaffolding with minimal disruption."
+          },
+          {
+            question: "Do you have local teams in each area?",
+            answer: "Yes, we have experienced local teams with regional expertise and knowledge of local planning requirements."
+          }
+        ]}
+      />
+    </>
   );
 }

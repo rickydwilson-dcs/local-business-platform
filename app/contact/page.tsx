@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Schema from '@/components/Schema';
 
 type FormData = {
   name: string;
@@ -120,7 +121,8 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="container mx-auto px-4 py-10">
+    <>
+      <div className="container mx-auto px-4 py-10">
       {/* Header */}
       <div className="text-center mb-12">
         <h1 className="text-4xl font-heading font-bold text-gray-900 mb-4">
@@ -440,6 +442,41 @@ export default function ContactPage() {
           </div>
         </div>
       </div>
-    </div>
+      </div>
+
+      <Schema
+        service={{
+          id: "/contact#service",
+          url: "/contact",
+          name: "Contact Colossus Scaffolding",
+          description: "Get in touch for scaffolding quotes, site surveys, and general enquiries across the South East UK.",
+          serviceType: "Contact",
+          areaServed: ["South East UK", "East Sussex", "West Sussex", "Kent", "Surrey", "London", "Essex"]
+        }}
+        org={{ 
+          name: "Colossus Scaffolding", 
+          url: "/", 
+          logo: "/Colossus-Scaffolding-Logo.svg" 
+        }}
+        faqs={[
+          {
+            question: "How quickly can you provide a quote?",
+            answer: "We typically provide quotes within 24-48 hours after a free site survey."
+          },
+          {
+            question: "Do you offer emergency scaffolding?",
+            answer: "Yes, we provide emergency scaffolding services subject to availability for urgent make-safe work."
+          },
+          {
+            question: "What information do you need for a quote?",
+            answer: "We need project details including building height, access requirements, duration, and any special considerations."
+          },
+          {
+            question: "Are site surveys really free?",
+            answer: "Yes, we provide completely free, no-obligation site surveys and detailed quotations for all projects."
+          }
+        ]}
+      />
+    </>
   );
 }
