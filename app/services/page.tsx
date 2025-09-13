@@ -3,6 +3,7 @@ import Image from "next/image";
 import path from "path";
 import { promises as fs } from "fs";
 import matter from "gray-matter";
+import Schema from "@/components/Schema";
 
 export const dynamic = "force-static";
 
@@ -127,7 +128,8 @@ export default async function ServicesPage() {
   const services = await getServiceItems();
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100">
+    <>
+      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100">
       {/* Hero Section */}
       <section className="py-16 sm:py-20 lg:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6">
@@ -277,6 +279,41 @@ export default async function ServicesPage() {
           </div>
         </div>
       </section>
-    </div>
+      </div>
+
+      <Schema
+        service={{
+          id: "/services#service",
+          url: "/services",
+          name: "Scaffolding Services",
+          description: "Professional scaffolding solutions across the South East UK. TG20:21 compliant, fully insured, and CHAS accredited.",
+          serviceType: "Scaffolding Services",
+          areaServed: ["South East UK", "East Sussex", "West Sussex", "Kent", "Surrey", "London"]
+        }}
+        org={{ 
+          name: "Colossus Scaffolding", 
+          url: "/", 
+          logo: "/Colossus-Scaffolding-Logo.svg" 
+        }}
+        faqs={[
+          {
+            question: "What types of scaffolding services do you offer?",
+            answer: "We offer comprehensive scaffolding services including access scaffolding, facade scaffolding, temporary roof systems, edge protection, and industrial solutions."
+          },
+          {
+            question: "Are your scaffolds safety compliant?",
+            answer: "Yes, all scaffolds are TG20:21 compliant and installed by CISRS-qualified scaffolders with regular inspections."
+          },
+          {
+            question: "Which areas do you serve?",
+            answer: "We serve the South East UK including East Sussex, West Sussex, Kent, Surrey, and London."
+          },
+          {
+            question: "Do you provide free quotes?",
+            answer: "Yes, we provide free site surveys and detailed quotes for all scaffolding projects across our coverage areas."
+          }
+        ]}
+      />
+    </>
   );
 }
