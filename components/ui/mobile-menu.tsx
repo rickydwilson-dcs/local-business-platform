@@ -12,6 +12,7 @@ export default function MobileMenu({ phoneNumber }: MobileMenuProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
+    console.log('Mobile menu toggle clicked, current state:', isOpen);
     setIsOpen(!isOpen);
   };
 
@@ -23,10 +24,15 @@ export default function MobileMenu({ phoneNumber }: MobileMenuProps) {
     <>
       {/* Hamburger Button - Only visible on mobile/tablet */}
       <button
-        onClick={toggleMenu}
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          toggleMenu();
+        }}
         className="lg:hidden p-2 rounded-md hover:bg-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-brand-blue"
         aria-label="Toggle mobile menu"
         aria-expanded={isOpen}
+        type="button"
       >
         <div className="w-6 h-6 flex flex-col justify-center space-y-1">
           <span
