@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 interface MobileMenuProps {
   phoneNumber: string;
@@ -56,10 +57,12 @@ export default function MobileMenu({ phoneNumber }: MobileMenuProps) {
         <div className="flex items-center justify-between p-6 border-b border-gray-100">
           <Link href="/" onClick={closeMenu} className="flex items-center">
             <div style={{ position: "relative", width: 140, height: 36 }}>
-              <img
+              <Image
                 src="/Colossus-Scaffolding-Logo.svg"
                 alt="Colossus Scaffolding"
-                style={{ objectFit: "contain", width: "100%", height: "100%" }}
+                width={140}
+                height={36}
+                style={{ objectFit: "contain" }}
               />
             </div>
           </Link>
