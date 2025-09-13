@@ -12,7 +12,6 @@ export default function MobileMenu({ phoneNumber }: MobileMenuProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
-    console.log('Mobile menu toggle clicked, current state:', isOpen);
     setIsOpen(!isOpen);
   };
 
