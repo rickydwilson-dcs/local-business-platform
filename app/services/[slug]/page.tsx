@@ -3,6 +3,7 @@ import { promises as fs } from "fs";
 import type { Metadata } from "next";
 
 import { ServiceHero } from "@/components/ui/service-hero";
+import ServiceAbout from "@/components/ui/service-about";
 import { ServiceBenefits } from "@/components/ui/service-benefits";
 import { ServiceGallery } from "@/components/ui/service-gallery";
 import { ServiceFAQ } from "@/components/ui/service-faq";
@@ -430,6 +431,11 @@ export default async function Page(
         description={serviceData.description}
         badge={serviceData.badge}
         heroImage={serviceData.heroImage}
+      />
+      
+      <ServiceAbout
+        serviceName={serviceName}
+        slug={slug}
       />
       
       <ServiceBenefits
