@@ -99,6 +99,7 @@ function getServiceData(slug: string): ServiceData {
     "temporary-roof-systems": {
       title: "Temporary Roof Systems",
       description: "Weather protection and temporary roofing solutions for ongoing construction and maintenance work. Keep your project dry and on schedule.",
+      heroImage: "/Temporary Roof Systems.png",
       benefits: [
         "Complete weather protection",
         "Load-rated temporary roofs",
@@ -130,6 +131,7 @@ function getServiceData(slug: string): ServiceData {
     "scaffold-towers-mast-systems": {
       title: "Scaffold Towers & Mast Systems",
       description: "Mobile and static scaffold towers for flexible access solutions on various project types. Height-adjustable systems with quick setup capability.",
+      heroImage: "/Scaffold Towers & Mast Systems.png",
       benefits: [
         "Mobile and static options",
         "Height adjustable systems",
@@ -221,6 +223,86 @@ function getServiceData(slug: string): ServiceData {
         "Expert technical support"
       ],
       faqs: getServiceFAQs("scaffold alarm systems")
+    },
+    "scaffolding-design-drawings": {
+      title: "Scaffolding Design & Drawings",
+      description: "Professional scaffolding design and technical drawings ensuring structural integrity and compliance with all safety regulations.",
+      heroImage: "/Scaffolding Design & Drawings.png",
+      benefits: [
+        "Structural engineering analysis",
+        "CAD technical drawings",
+        "Load calculation reports",
+        "Safety compliance documentation",
+        "Planning permission support",
+        "Method statement preparation",
+        "Risk assessment inclusion",
+        "Professional certification"
+      ],
+      faqs: getServiceFAQs("scaffolding design & drawings")
+    },
+    "scaffolding-inspections-maintenance": {
+      title: "Scaffolding Inspections & Maintenance",
+      description: "Comprehensive scaffolding inspections and maintenance services ensuring ongoing safety compliance and structural integrity.",
+      heroImage: "/Scaffolding Inspections & Maintenance.png",
+      benefits: [
+        "Weekly safety inspections",
+        "Detailed inspection reports",
+        "Maintenance scheduling",
+        "Compliance certification",
+        "Emergency repair service",
+        "Documentation management",
+        "Safety standard updates",
+        "Professional inspector teams"
+      ],
+      faqs: getServiceFAQs("scaffolding inspections & maintenance")
+    },
+    "sheeting-netting-encapsulation": {
+      title: "Sheeting, Netting & Encapsulation",
+      description: "Weather protection and safety encapsulation systems including scaffolding sheeting, debris netting, and full encapsulation solutions.",
+      heroImage: "/Sheeting Netting Encapsulation.png",
+      benefits: [
+        "Weather protection systems",
+        "Debris containment netting",
+        "Full encapsulation solutions",
+        "Fire-retardant materials",
+        "UV-resistant sheeting",
+        "Custom fitting service",
+        "Professional installation",
+        "Maintenance support included"
+      ],
+      faqs: getServiceFAQs("sheeting, netting & encapsulation")
+    },
+    "staircase-towers": {
+      title: "Staircase Towers",
+      description: "Safe and compliant staircase tower systems providing secure vertical access for construction and maintenance projects.",
+      heroImage: "/Staircase Towers.png",
+      benefits: [
+        "Safe vertical access",
+        "Compliant stair design",
+        "Handrail safety systems",
+        "Multi-level capability",
+        "Quick assembly process",
+        "Weather-resistant construction",
+        "Load-bearing capacity",
+        "Professional installation"
+      ],
+      faqs: getServiceFAQs("staircase towers")
+    },
+    "suspended-scaffolding": {
+      title: "Suspended Scaffolding",
+      description: "Specialized suspended scaffolding systems for high-rise building maintenance and construction work requiring overhead access.",
+      heroImage: "/Suspended Scaffolding.png",
+      benefits: [
+        "High-rise access capability",
+        "Suspended platform systems",
+        "Safety harness integration",
+        "Load-tested equipment",
+        "Professional rigging service",
+        "Emergency descent systems",
+        "Weather monitoring inclusion",
+        "Certified operator training"
+      ],
+      faqs: getServiceFAQs("suspended scaffolding")
     }
   };
 
