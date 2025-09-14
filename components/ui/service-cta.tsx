@@ -21,9 +21,9 @@ export function ServiceCTA({
 }: ServiceCTAProps) {
   return (
     <section className="py-16 sm:py-20 bg-brand-blue text-white">
-      <div className="max-w-7xl mx-auto px-6 text-center">
+      <div className="mx-auto w-full lg:w-[90%] px-6 text-center">
         <h2 className="text-3xl sm:text-4xl font-serif font-bold mb-6">{title}</h2>
-        <p className="text-xl mb-8 max-w-2xl mx-auto opacity-90 leading-relaxed">
+        <p className="text-xl mb-8 mx-auto w-full lg:w-[90%] opacity-90 leading-relaxed">
           {description}
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">

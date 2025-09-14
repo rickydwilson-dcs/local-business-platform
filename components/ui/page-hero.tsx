@@ -19,8 +19,8 @@ export function PageHero({
 }: PageHeroProps) {
   return (
     <section className={`py-16 ${className}`}>
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="max-w-4xl mx-auto text-center">
+      <div className="mx-auto w-full lg:w-[90%] px-6">
+        <div className="mx-auto w-full lg:w-[90%] text-center">
           <h1 className="text-4xl md:text-5xl font-serif font-bold text-gray-900 mb-6">
             {title}
           </h1>

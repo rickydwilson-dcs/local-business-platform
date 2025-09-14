@@ -7,7 +7,7 @@ interface SectionWrapperProps {
 export function SectionWrapper({
   children,
   className = "py-16 bg-white",
-  containerClassName = "max-w-6xl mx-auto px-6"
+  containerClassName = "mx-auto w-full lg:w-[90%] px-6"
 }: SectionWrapperProps) {
   return (
     <section className={className}>

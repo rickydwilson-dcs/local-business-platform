@@ -20,7 +20,7 @@ export function LocationHero({
 }: LocationHeroProps) {
   return (
     <section className="py-16 sm:py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="mx-auto w-full lg:w-[90%] px-6">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-8">
             <div>

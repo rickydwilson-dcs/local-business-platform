@@ -6,13 +6,13 @@ import Link from "next/link"
 export function HeroSection() {
   return (
     <section className="relative bg-gradient-to-br from-gray-50 to-gray-100 py-16 sm:py-20 lg:py-32 overflow-hidden">
-      <div className="mx-auto max-w-7xl px-6 relative">
-        <div className="max-w-4xl mx-auto text-center">
+      <div className="mx-auto w-full lg:w-[90%] px-6 relative">
+        <div className="mx-auto w-full lg:w-[90%] text-center">
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-gray-900 mb-4 sm:mb-6 leading-tight">
             Professional Scaffolding Services Across the South East UK
           </h1>
 
-          <p className="text-lg sm:text-xl text-gray-600 mb-6 sm:mb-8 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-lg sm:text-xl text-gray-600 mb-6 sm:mb-8 mx-auto w-full lg:w-[90%] leading-relaxed">
             TG20:21 compliant scaffolding solutions for residential, commercial, and industrial projects. Fully insured
             with CHAS accreditation and £10M liability coverage.
           </p>

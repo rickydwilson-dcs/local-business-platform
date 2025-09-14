@@ -225,12 +225,12 @@ export default function HomePage() {
       />
       {/* Trust Indicators Section */}
       <section className="py-16 sm:py-20 bg-gradient-to-br from-gray-50 to-gray-100 border-t border-b border-gray-200">
-        <div className="mx-auto max-w-7xl px-6">
+        <div className="mx-auto w-full lg:w-[90%] px-6">
           <div className="text-center mb-12">
             <h2 className="text-2xl sm:text-3xl font-serif font-semibold text-gray-900 mb-4">
               Trusted by Customers Across the South East
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <p className="text-lg text-gray-600 mx-auto w-full lg:w-[90%]">
               Industry-leading certifications and proven track record you can rely on.
             </p>
           </div>

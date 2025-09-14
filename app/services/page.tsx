@@ -132,12 +132,12 @@ export default async function ServicesPage() {
       <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100">
       {/* Hero Section */}
       <section className="py-16 sm:py-20 lg:py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="max-w-4xl mx-auto text-center">
+        <div className="mx-auto w-full lg:w-[90%] px-6">
+          <div className="mx-auto w-full lg:w-[90%] text-center">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-gray-900 mb-6">
               Our Scaffolding Services
             </h1>
-            <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+            <p className="text-xl text-gray-600 mb-8 mx-auto w-full lg:w-[90%]">
               Professional scaffolding solutions across the South East UK. From residential repairs to large commercial projects, we deliver safe, compliant access solutions.
             </p>
             
@@ -182,7 +182,7 @@ export default async function ServicesPage() {
 
       {/* Services Grid */}
       <section className="py-16 sm:py-20">
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="mx-auto w-full lg:w-[90%] px-6">
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {services.map((service) => (
               <div
@@ -256,7 +256,7 @@ export default async function ServicesPage() {
 
       {/* Call to Action */}
       <section className="py-16 bg-white">
-        <div className="max-w-4xl mx-auto px-6 text-center">
+        <div className="mx-auto w-full lg:w-[90%] px-6 text-center">
           <h2 className="text-3xl font-serif font-bold text-gray-900 mb-4">
             Need a Custom Solution?
           </h2>

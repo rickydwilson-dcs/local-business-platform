@@ -4,7 +4,7 @@ import { Phone, Mail, MapPin, Shield, Award } from "lucide-react"
 export function Footer() {
   return (
     <footer className="bg-gray-900 text-white py-12 sm:py-16">
-      <div className="mx-auto max-w-6xl px-6">
+      <div className="mx-auto w-full lg:w-[90%] px-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mb-6 sm:mb-8">
           <div className="sm:col-span-2 lg:col-span-1">
             <h3 className="text-xl sm:text-2xl font-heading font-bold mb-4">Colossus Scaffolding</h3>
@@ -44,6 +44,11 @@ export function Footer() {
               <li>
                 <Link href="/services/birdcage-scaffolds" className="hover:text-brand-blue transition-colors">
                   Birdcage Scaffolds
+                </Link>
+              </li>
+              <li>
+                <Link href="/services/public-access-staircases" className="hover:text-brand-blue transition-colors">
+                  Public Access Staircases
                 </Link>
               </li>
               <li>
@@ -93,7 +98,7 @@ export function Footer() {
         </div>
 
         <div className="border-t border-gray-700 pt-6 sm:pt-8 text-center text-gray-400 text-xs sm:text-sm">
-          <p>&copy; 2024 Colossus Scaffolding. All rights reserved. | £10M Public Liability Insurance</p>
+          <p>&copy; 2025 Colossus Scaffolding. All rights reserved. | Built by <a href="https://www.digitalconsultingservices.co.uk" target="_blank" rel="noopener noreferrer" className="hover:text-brand-blue transition-colors">Digital Consulting Services</a></p>
         </div>
       </div>
     </footer>

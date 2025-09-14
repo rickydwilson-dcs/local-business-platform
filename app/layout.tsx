@@ -24,7 +24,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body className="min-h-screen bg-white text-slate-900 antialiased">
         <header className="border-b bg-white shadow-sm">
-          <div className="mx-auto max-w-7xl px-6 py-4 flex items-center justify-between">
+          <div className="mx-auto w-full lg:w-[90%] px-6 py-4 flex items-center justify-between">
             {/* Logo */}
             <Link href="/" className="flex items-center">
               <div style={{ position: "relative", width: 180, height: 48 }}>
@@ -79,7 +79,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </div>
         </header>
 
-        <main className="mx-auto max-w-6xl px-6 py-10">{children}</main>
+        <main className="mx-auto w-full lg:w-[90%] px-6 py-10">{children}</main>
         
         <Footer />
       </body>
