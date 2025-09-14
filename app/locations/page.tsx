@@ -1,55 +1,9 @@
 import Link from "next/link";
 import Schema from "@/components/Schema";
+import { ContentGrid } from "@/components/ui/content-grid";
+import { getContentItems } from "@/lib/content";
 
 export const dynamic = "force-static";
-
-type LocationArea = {
-  slug: string;
-  title: string;
-  towns: string[];
-  description: string;
-  isHeadquarters?: boolean;
-};
-
-const coverageAreas: LocationArea[] = [
-  {
-    slug: "east-sussex",
-    title: "East Sussex",
-    towns: ["Hastings", "Bexhill", "Eastbourne", "St Leonards", "Rye", "Battle"],
-    description: "Comprehensive scaffolding services across East Sussex with local expertise and rapid response times.",
-    isHeadquarters: true,
-  },
-  {
-    slug: "west-sussex",
-    title: "West Sussex",
-    towns: ["Brighton", "Crawley", "Worthing", "Chichester", "Horsham", "Burgess Hill"],
-    description: "Professional scaffolding solutions throughout West Sussex for all project types and sizes.",
-  },
-  {
-    slug: "kent",
-    title: "Kent",
-    towns: ["Canterbury", "Maidstone", "Dover", "Ashford", "Folkestone", "Tunbridge Wells"],
-    description: "Expert scaffolding services across Kent with full compliance and insurance coverage.",
-  },
-  {
-    slug: "surrey",
-    title: "Surrey",
-    towns: ["Guildford", "Woking", "Croydon", "Kingston", "Epsom", "Reigate"],
-    description: "Reliable scaffolding installations throughout Surrey for residential and commercial projects.",
-  },
-  {
-    slug: "london",
-    title: "London",
-    towns: ["All London Boroughs", "Central London", "Greater London"],
-    description: "Specialized urban scaffolding services across all London boroughs with traffic management expertise.",
-  },
-  {
-    slug: "essex",
-    title: "Essex",
-    towns: ["Chelmsford", "Colchester", "Southend", "Basildon", "Harlow", "Brentwood"],
-    description: "Complete scaffolding services across Essex with experienced local teams and competitive pricing.",
-  },
-];
 
 const serviceHighlights = [
   "TG20:21 compliant designs and installations",
@@ -60,7 +14,8 @@ const serviceHighlights = [
   "24/7 emergency call-out service",
 ];
 
-export default function LocationsPage() {
+export default async function LocationsPage() {
+  const locations = await getContentItems("locations");
   return (
     <>
       <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100">
@@ -134,58 +89,13 @@ export default function LocationsPage() {
       {/* Location Cards */}
       <section className="py-16 sm:py-20">
         <div className="mx-auto w-full lg:w-[90%] px-6">
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {coverageAreas.map((area) => (
-              <div
-                key={area.slug}
-                className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group relative"
-              >
-                {area.isHeadquarters && (
-                  <div className="absolute top-4 right-4 z-10">
-                    <span className="px-3 py-1 bg-brand-blue text-white text-sm font-medium rounded-full">
-                      Headquarters
-                    </span>
-                  </div>
-                )}
-                
-                <div className="p-6 flex flex-col h-full">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="p-2 bg-brand-blue/10 rounded-lg">
-                      <svg className="w-6 h-6 text-brand-blue" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
-                      </svg>
-                    </div>
-                    <h2 className="text-xl font-serif font-bold text-gray-900 line-clamp-1">
-                      {area.title}
-                    </h2>
-                  </div>
-                  
-                  <p className="text-gray-600 mb-4 text-sm leading-relaxed line-clamp-2 flex-grow-0">
-                    {area.description}
-                  </p>
-
-                  <ul className="space-y-2 mb-6 flex-grow">
-                    {area.towns.slice(0, 3).map((town, index) => (
-                      <li key={index} className="flex items-center gap-2 text-sm">
-                        <div className="w-1.5 h-1.5 bg-brand-blue rounded-full flex-shrink-0"></div>
-                        <span className="text-gray-700 line-clamp-1">{town}</span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  <Link
-                    href={`/locations/${area.slug}`}
-                    className="inline-flex items-center gap-2 text-brand-blue hover:text-brand-blue-hover font-semibold text-sm transition-colors mt-auto"
-                  >
-                    View Local Info
-                    <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </Link>
-                </div>
-              </div>
-            ))}
-          </div>
+          <ContentGrid
+            items={locations}
+            basePath="/locations"
+            emptyMessage="No locations available."
+            fallbackDescription={(title) => `Professional scaffolding services in ${title}.`}
+            contentType="locations"
+          />
         </div>
       </section>
 

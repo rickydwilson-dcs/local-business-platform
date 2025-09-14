@@ -271,27 +271,43 @@ export default function AboutPage() {
               Our Story
             </h2>
             
-            <div className="prose prose-lg mx-auto text-gray-600 leading-relaxed">
-              <p className="text-xl mb-6">
-                Founded in 2009, Colossus Scaffolding began as a vision to provide professional, 
-                safe, and reliable scaffolding services across the South East UK. What started with 
-                a single van and unwavering commitment to excellence has grown into one of the region&apos;s 
-                most trusted scaffolding contractors.
-              </p>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              {/* Text Content */}
+              <div className="prose prose-lg text-gray-600 leading-relaxed">
+                <p className="text-xl mb-6">
+                  Founded in 2009, Colossus Scaffolding began as a vision to provide professional, 
+                  safe, and reliable scaffolding services across the South East UK. What started with 
+                  a single van and unwavering commitment to excellence has grown into one of the region&apos;s 
+                  most trusted scaffolding contractors.
+                </p>
+                
+                <p className="mb-6">
+                  From our headquarters in Hastings, we&apos;ve built our reputation project by project, 
+                  always putting safety first and maintaining the highest professional standards. 
+                  Our CISRS qualified teams understand that every scaffold we erect supports not just 
+                  buildings, but the livelihoods and safety of the people who work on them.
+                </p>
+                
+                <p>
+                  Today, we&apos;re proud to serve homeowners, contractors, and businesses throughout 
+                  East Sussex, West Sussex, Kent, Surrey, Essex, and London. Our commitment to 
+                  local service, combined with our expertise in complex projects, makes us the 
+                  trusted choice for scaffolding solutions across the South East.
+                </p>
+              </div>
               
-              <p className="mb-6">
-                From our headquarters in Hastings, we&apos;ve built our reputation project by project, 
-                always putting safety first and maintaining the highest professional standards. 
-                Our CISRS qualified teams understand that every scaffold we erect supports not just 
-                buildings, but the livelihoods and safety of the people who work on them.
-              </p>
-              
-              <p>
-                Today, we&apos;re proud to serve homeowners, contractors, and businesses throughout 
-                East Sussex, West Sussex, Kent, Surrey, Essex, and London. Our commitment to 
-                local service, combined with our expertise in complex projects, makes us the 
-                trusted choice for scaffolding solutions across the South East.
-              </p>
+              {/* Image Placeholder */}
+              <div className="relative">
+                <div className="aspect-[4/3] bg-gray-200 rounded-2xl flex items-center justify-center">
+                  <div className="text-center text-gray-400">
+                    <svg className="w-16 h-16 mx-auto mb-4" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd" />
+                    </svg>
+                    <p className="text-lg font-medium">Our Story Image</p>
+                    <p className="text-sm">Company history photo placeholder</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

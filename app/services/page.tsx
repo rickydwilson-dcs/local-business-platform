@@ -1,131 +1,13 @@
 import Link from "next/link";
-import Image from "next/image";
-import path from "path";
-import { promises as fs } from "fs";
-import matter from "gray-matter";
 import Schema from "@/components/Schema";
+import { ContentGrid } from "@/components/ui/content-grid";
+import { getContentItems } from "@/lib/content";
 
 export const dynamic = "force-static";
 
-type ServiceItem = {
-  slug: string;
-  title: string;
-  description?: string;
-  badge?: string;
-  image?: string;
-  features?: string[];
-};
-
-async function getServiceItems(): Promise<ServiceItem[]> {
-  const dir = path.join(process.cwd(), "content", "services");
-
-  let files: string[] = [];
-  try {
-    files = await fs.readdir(dir);
-  } catch {
-    return [];
-  }
-
-  const items: ServiceItem[] = [];
-  for (const file of files) {
-    if (!file.toLowerCase().endsWith(".mdx")) continue;
-    const slug = file.replace(/\.mdx$/i, "");
-    const full = path.join(dir, file);
-    const raw = await fs.readFile(full, "utf8");
-    const { data } = matter(raw);
-
-    const title =
-      (typeof data.title === "string" && data.title.trim()) ||
-      slug
-        .split("-")
-        .map((w) => (w ? w[0].toUpperCase() + w.slice(1) : w))
-        .join(" ");
-
-    // Define service-specific features and images
-    const serviceData = getServiceData(slug);
-
-    items.push({
-      slug,
-      title,
-      description:
-        typeof data.description === "string" ? data.description.trim() : serviceData.description,
-      badge: serviceData.badge,
-      image: serviceData.image,
-      features: serviceData.features,
-    });
-  }
-
-  return items.sort((a, b) => a.title.localeCompare(b.title));
-}
-
-function getServiceData(slug: string): Partial<ServiceItem> {
-  const serviceMap: Record<string, Partial<ServiceItem>> = {
-    "access-scaffolding": {
-      description: "Safe, compliant access scaffolding for residential, commercial and industrial projects across the South East UK.",
-      badge: "Most Popular",
-      image: "/Access Scaffolding new build.png",
-      features: ["TG20:21 Compliant", "CISRS Qualified Teams", "Full Insurance Coverage"]
-    },
-    "facade-scaffolding": {
-      description: "Professional facade scaffolding solutions for building maintenance, renovation and construction projects.",
-      image: "/Facade Scaffolding.png",
-      features: ["Weatherproof Systems", "Load Bearing Design", "Planning Compliance"]
-    },
-    "edge-protection": {
-      description: "Comprehensive edge protection systems ensuring maximum safety on construction and maintenance sites.",
-      image: "/Edge Protection.png",
-      features: ["HSE Compliant", "Rapid Installation", "Adjustable Systems"]
-    },
-    "temporary-roof-systems": {
-      description: "Weather protection and temporary roofing solutions for ongoing construction and maintenance work.",
-      // No specific image available - will use placeholder
-      features: ["Weatherproof", "Load Rated", "Quick Assembly"]
-    },
-    "birdcage-scaffolds": {
-      description: "Independent scaffold structures providing comprehensive access for complex commercial and industrial projects.",
-      image: "/Birdcage scaffolding.png",
-      features: ["Independent Structure", "Heavy Duty", "Complex Access"]
-    },
-    "scaffold-towers-mast-systems": {
-      description: "Mobile and static scaffold towers for flexible access solutions on various project types.",
-      // No specific image available - will use placeholder
-      features: ["Mobile & Static", "Height Adjustable", "Quick Setup"]
-    },
-    "crash-decks-crane-decks": {
-      description: "Protective crash decks and crane decks ensuring safety during construction operations.",
-      image: "/Crash Decks & Crane Decks.png",
-      features: ["Load Bearing", "Safety Compliance", "Custom Design"]
-    },
-    "heavy-duty-industrial-scaffolding": {
-      description: "Heavy-duty scaffolding solutions for complex industrial projects and infrastructure work.",
-      image: "/Heavy Industrial Scaffolding.png",
-      features: ["Heavy Load Capacity", "Industrial Grade", "Complex Structures"]
-    },
-    "pavement-gantries-loading-bays": {
-      description: "Specialized pavement gantries and loading bay solutions for urban construction projects.",
-      image: "/Pavement Gantries Loading Bays.png",
-      features: ["Urban Solutions", "Pedestrian Safety", "Loading Access"]
-    },
-    "public-access-staircases": {
-      description: "Safe and compliant public access staircase systems for construction sites.",
-      image: "/Public Access Staircases.png",
-      features: ["Public Safety", "Accessible Design", "Code Compliant"]
-    },
-    "scaffold-alarms": {
-      description: "Advanced scaffold alarm systems for enhanced site security and safety monitoring.",
-      image: "/Scaffold Alarms.png",
-      features: ["24/7 Monitoring", "Instant Alerts", "Security Integration"]
-    }
-  };
-
-  return serviceMap[slug] || {
-    description: "Professional scaffolding solution with full compliance and safety standards.",
-    features: ["TG20:21 Compliant", "Fully Insured", "Professional Installation"]
-  };
-}
 
 export default async function ServicesPage() {
-  const services = await getServiceItems();
+  const services = await getContentItems("services");
 
   return (
     <>
@@ -183,74 +65,13 @@ export default async function ServicesPage() {
       {/* Services Grid */}
       <section className="py-16 sm:py-20">
         <div className="mx-auto w-full lg:w-[90%] px-6">
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {services.map((service) => (
-              <div
-                key={service.slug}
-                className="bg-white rounded-2xl shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 group relative"
-              >
-                {service.badge && (
-                  <div className="absolute top-4 right-4 z-10">
-                    <span className="px-3 py-1 bg-brand-blue text-white text-sm font-medium rounded-full">
-                      {service.badge}
-                    </span>
-                  </div>
-                )}
-                
-                <div className="relative h-48 bg-gray-200 rounded-t-2xl overflow-hidden">
-                  {service.image ? (
-                    <Image
-                      src={service.image}
-                      alt={service.title}
-                      fill
-                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      className="object-cover group-hover:scale-110 transition-transform duration-300"
-                    />
-                  ) : (
-                    <div className="h-full flex items-center justify-center">
-                      <div className="text-gray-400 text-center">
-                        <svg className="w-12 h-12 mx-auto mb-2" fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd" />
-                        </svg>
-                        <span className="text-sm">Service Image</span>
-                      </div>
-                    </div>
-                  )}
-                </div>
-
-                <div className="p-6 flex flex-col h-full">
-                  <h2 className="text-xl font-serif font-bold text-gray-900 mb-3 line-clamp-1">
-                    {service.title}
-                  </h2>
-                  
-                  <p className="text-gray-600 mb-4 text-sm leading-relaxed line-clamp-2 flex-grow-0">
-                    {service.description}
-                  </p>
-
-                  {service.features && (
-                    <ul className="space-y-2 mb-6">
-                      {service.features.slice(0, 3).map((feature, index) => (
-                        <li key={index} className="flex items-center gap-2 text-sm">
-                          <div className="w-1.5 h-1.5 bg-brand-blue rounded-full flex-shrink-0"></div>
-                          <span className="text-gray-700 line-clamp-1">{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-
-                  <Link
-                      href={`/services/${service.slug}`}
-                      className="inline-flex items-center gap-2 text-brand-blue hover:text-brand-blue-hover font-semibold text-sm transition-colors mt-4"
-                    >
-                      Learn About {service.title}
-                      <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
-                    </Link>
-                  </div>
-              </div>
-            ))}
-          </div>
+          <ContentGrid
+            items={services}
+            basePath="/services"
+            emptyMessage="No services available."
+            fallbackDescription={(title) => `Learn more about ${title.toLowerCase()}.`}
+            contentType="services"
+          />
         </div>
       </section>
 
