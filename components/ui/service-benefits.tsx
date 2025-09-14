@@ -11,8 +11,8 @@ export function ServiceBenefits({
 }: ServiceBenefitsProps) {
   return (
     <section className="py-16 sm:py-20 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="max-w-4xl mx-auto text-center mb-12">
+      <div className="mx-auto w-full lg:w-[90%] px-6">
+        <div className="mx-auto w-full lg:w-[90%] text-center mb-12">
           <h2 className="text-3xl sm:text-4xl font-serif font-bold text-gray-900 mb-4">
             {title}
           </h2>
@@ -23,7 +23,7 @@ export function ServiceBenefits({
           )}
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mx-auto w-full lg:w-[90%]">
           {items.map((item, i) => (
             <div key={i} className="flex items-start gap-3 p-4 bg-white rounded-lg shadow-sm">
               <div className="flex-shrink-0 w-6 h-6 bg-brand-blue rounded-full flex items-center justify-center mt-0.5">

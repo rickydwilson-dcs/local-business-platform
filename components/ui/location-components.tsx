@@ -8,7 +8,7 @@ interface LocationServicesProps {
 export function LocationServices({ services, title = "Popular Services" }: LocationServicesProps) {
   return (
     <div className="py-16 bg-white">
-      <div className="max-w-6xl mx-auto px-6">
+      <div className="mx-auto w-full lg:w-[90%] px-6">
         <h2 className="text-3xl font-serif font-bold text-gray-900 mb-8 text-center">
           {title}
         </h2>
@@ -46,7 +46,7 @@ interface LocationFeaturesProps {
 export function LocationFeatures({ features, title = "Why Choose Our Local Service?" }: LocationFeaturesProps) {
   return (
     <div className="py-16 bg-gray-50">
-      <div className="max-w-6xl mx-auto px-6">
+      <div className="mx-auto w-full lg:w-[90%] px-6">
         <h2 className="text-3xl font-serif font-bold text-gray-900 mb-8 text-center">
           {title}
         </h2>
@@ -78,7 +78,7 @@ interface LocationFAQProps {
 export function LocationFAQ({ items, title = "Frequently Asked Questions" }: LocationFAQProps) {
   return (
     <div className="py-16 bg-white">
-      <div className="max-w-4xl mx-auto px-6">
+      <div className="mx-auto w-full lg:w-[90%] px-6">
         <h2 className="text-3xl font-serif font-bold text-gray-900 mb-12 text-center">
           {title}
         </h2>
@@ -106,7 +106,7 @@ interface LocationCTAProps {
 export function LocationCTA({ title, description, phone }: LocationCTAProps) {
   return (
     <div className="py-16 bg-brand-blue text-white">
-      <div className="max-w-4xl mx-auto px-6 text-center">
+      <div className="mx-auto w-full lg:w-[90%] px-6 text-center">
         <h2 className="text-3xl font-serif font-bold mb-4">{title}</h2>
         <p className="text-xl mb-8 opacity-90">{description}</p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">

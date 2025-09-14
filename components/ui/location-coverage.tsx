@@ -13,7 +13,7 @@ export function LocationCoverage({
 }: LocationCoverageProps) {
   return (
     <section className="py-16 sm:py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="mx-auto w-full lg:w-[90%] px-6">
         <div className="grid lg:grid-cols-3 gap-12">
           <div className="lg:col-span-2">
             <h2 className="text-3xl sm:text-4xl font-serif font-bold text-gray-900 mb-6">

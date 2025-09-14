@@ -237,8 +237,8 @@ export default function AboutPage() {
       
       {/* Hero Section */}
       <section className="py-16 sm:py-20 bg-gradient-to-br from-gray-50 to-gray-100">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="max-w-4xl mx-auto text-center">
+        <div className="mx-auto w-full lg:w-[90%] px-6">
+          <div className="mx-auto w-full lg:w-[90%] text-center">
             <div className="flex flex-wrap justify-center gap-4 mb-8">
               <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-brand-blue/10 text-brand-blue border border-brand-blue/20">
                 Est. 2009
@@ -255,7 +255,7 @@ export default function AboutPage() {
               About Colossus Scaffolding
             </h1>
             
-            <p className="text-xl text-gray-600 leading-relaxed max-w-2xl mx-auto">
+            <p className="text-xl text-gray-600 leading-relaxed mx-auto w-full lg:w-[90%]">
               Professional scaffolding specialists serving the South East UK with TG20:21 compliant solutions, 
               CISRS qualified teams, and comprehensive insurance coverage.
             </p>
@@ -265,8 +265,8 @@ export default function AboutPage() {
 
       {/* Our Story Section */}
       <section className="py-16 sm:py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="max-w-4xl mx-auto">
+        <div className="mx-auto w-full lg:w-[90%] px-6">
+          <div className="mx-auto w-full lg:w-[90%]">
             <h2 className="text-3xl sm:text-4xl font-serif font-bold text-gray-900 mb-8 text-center">
               Our Story
             </h2>
@@ -299,12 +299,12 @@ export default function AboutPage() {
 
       {/* Track Record Section - Using improved homepage trust indicators */}
       <section className="py-16 sm:py-20 bg-gradient-to-br from-gray-50 to-gray-100 border-t border-b border-gray-200">
-        <div className="mx-auto max-w-7xl px-6">
+        <div className="mx-auto w-full lg:w-[90%] px-6">
           <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-serif font-bold text-gray-900 mb-4">
               Our Track Record Speaks for Itself
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <p className="text-lg text-gray-600 mx-auto w-full lg:w-[90%]">
               Over 15 years of professional scaffolding services with an unblemished safety record 
               and hundreds of successful projects across the South East.
             </p>
@@ -368,12 +368,12 @@ export default function AboutPage() {
 
       {/* Certifications Section */}
       <section className="py-16 sm:py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="mx-auto w-full lg:w-[90%] px-6">
           <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-serif font-bold text-gray-900 mb-4">
               Certifications & Accreditations
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <p className="text-lg text-gray-600 mx-auto w-full lg:w-[90%]">
               We maintain the highest industry standards with comprehensive certifications 
               and accreditations that demonstrate our commitment to safety and professionalism.
             </p>
@@ -425,12 +425,12 @@ export default function AboutPage() {
 
       {/* Our Values Section */}
       <section className="py-16 sm:py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="mx-auto w-full lg:w-[90%] px-6">
           <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-serif font-bold text-gray-900 mb-4">
               Our Values
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <p className="text-lg text-gray-600 mx-auto w-full lg:w-[90%]">
               These core principles guide everything we do, from the smallest residential project 
               to the largest commercial installation.
             </p>
@@ -483,18 +483,18 @@ export default function AboutPage() {
 
       {/* Why Choose Us Section */}
       <section className="py-16 sm:py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="mx-auto w-full lg:w-[90%] px-6">
           <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-serif font-bold text-gray-900 mb-4">
               Why Choose Colossus Scaffolding?
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <p className="text-lg text-gray-600 mx-auto w-full lg:w-[90%]">
               From small residential projects to complex commercial installations, 
               here&apos;s what sets us apart in the scaffolding industry.
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mx-auto w-full lg:w-[90%]">
             {[
               "TG20:21 compliant design and installation on every project",
               "CISRS qualified and experienced scaffolding professionals", 
@@ -522,11 +522,11 @@ export default function AboutPage() {
 
       {/* CTA Section */}
       <section className="py-16 sm:py-20 bg-brand-blue text-white">
-        <div className="max-w-7xl mx-auto px-6 text-center">
+        <div className="mx-auto w-full lg:w-[90%] px-6 text-center">
           <h2 className="text-3xl sm:text-4xl font-serif font-bold mb-6">
             Ready to Work with the South East&apos;s Trusted Scaffolding Specialists?
           </h2>
-          <p className="text-xl mb-8 max-w-2xl mx-auto opacity-90 leading-relaxed">
+          <p className="text-xl mb-8 mx-auto w-full lg:w-[90%] opacity-90 leading-relaxed">
             Get your free quote today and experience the professional difference that 15+ years 
             of expertise brings to your project.
           </p>

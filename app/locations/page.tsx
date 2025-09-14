@@ -66,12 +66,12 @@ export default function LocationsPage() {
       <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100">
       {/* Hero Section */}
       <section className="py-16 sm:py-20 lg:py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="max-w-4xl mx-auto text-center">
+        <div className="mx-auto w-full lg:w-[90%] px-6">
+          <div className="mx-auto w-full lg:w-[90%] text-center">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-gray-900 mb-6">
               Areas We Serve
             </h1>
-            <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+            <p className="text-xl text-gray-600 mb-8 mx-auto w-full lg:w-[90%]">
               Professional scaffolding services across the South East UK with local expertise, rapid response times, and comprehensive coverage from our experienced regional teams.
             </p>
             
@@ -110,8 +110,8 @@ export default function LocationsPage() {
 
       {/* Coverage Map */}
       <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="max-w-4xl mx-auto text-center mb-12">
+        <div className="mx-auto w-full lg:w-[90%] px-6">
+          <div className="mx-auto w-full lg:w-[90%] text-center mb-12">
             <h2 className="text-3xl font-serif font-bold text-gray-900 mb-4">Our Coverage Area</h2>
             <p className="text-lg text-gray-600">
               Serving the South East UK with professional scaffolding services and local expertise
@@ -133,7 +133,7 @@ export default function LocationsPage() {
 
       {/* Location Cards */}
       <section className="py-16 sm:py-20">
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="mx-auto w-full lg:w-[90%] px-6">
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {coverageAreas.map((area) => (
               <div
@@ -191,8 +191,8 @@ export default function LocationsPage() {
 
       {/* Service Highlights */}
       <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="max-w-4xl mx-auto">
+        <div className="mx-auto w-full lg:w-[90%] px-6">
+          <div className="mx-auto w-full lg:w-[90%]">
             <h2 className="text-3xl font-serif font-bold text-gray-900 mb-12 text-center">
               Why Choose Our Regional Service?
             </h2>
@@ -210,7 +210,7 @@ export default function LocationsPage() {
 
       {/* Call to Action */}
       <section className="py-16 sm:py-20">
-        <div className="max-w-4xl mx-auto px-6 text-center">
+        <div className="mx-auto w-full lg:w-[90%] px-6 text-center">
           <h2 className="text-3xl font-serif font-bold text-gray-900 mb-4">
             Not Sure If We Cover Your Area?
           </h2>

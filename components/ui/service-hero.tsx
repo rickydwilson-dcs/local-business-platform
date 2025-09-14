@@ -26,7 +26,7 @@ export function ServiceHero(props: ServiceHeroProps) {
 
   return (
     <section className="py-16 sm:py-20 lg:py-24 bg-white">
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="mx-auto w-full lg:w-[90%] px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
             {badge && (

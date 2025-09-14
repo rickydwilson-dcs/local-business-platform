@@ -128,7 +128,7 @@ export default function ContactPage() {
         <h1 className="text-4xl font-heading font-bold text-gray-900 mb-4">
           Contact Colossus Scaffolding
         </h1>
-        <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+        <p className="text-xl text-gray-600 mx-auto w-full lg:w-[90%]">
           Get a free quote today. Professional scaffolding services across the South East UK.
           TG20:21 compliant, fully insured, and CHAS accredited.
         </p>

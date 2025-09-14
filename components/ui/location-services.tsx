@@ -21,8 +21,8 @@ export function LocationServices({
 }: LocationServicesProps) {
   return (
     <section className="py-16 sm:py-20 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="max-w-4xl mx-auto text-center mb-12">
+      <div className="mx-auto w-full lg:w-[90%] px-6">
+        <div className="mx-auto w-full lg:w-[90%] text-center mb-12">
           <h2 className="text-3xl sm:text-4xl font-serif font-bold text-gray-900 mb-4">
             {title} in {location}
           </h2>
@@ -33,7 +33,7 @@ export function LocationServices({
           )}
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mx-auto w-full lg:w-[90%]">
           {services.map((service, i) => (
             <div key={i} className="bg-white rounded-2xl p-6 shadow-sm hover:shadow-lg transition-shadow group">
               <div className="flex items-start gap-4">
