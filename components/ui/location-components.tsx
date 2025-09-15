@@ -9,7 +9,7 @@ export function LocationServices({ services, title = "Popular Services" }: Locat
   return (
     <div className="py-16 bg-white">
       <div className="mx-auto w-full lg:w-[90%] px-6">
-        <h2 className="text-3xl font-serif font-bold text-gray-900 mb-8 text-center">
+        <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
           {title}
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -47,7 +47,7 @@ export function LocationFeatures({ features, title = "Why Choose Our Local Servi
   return (
     <div className="py-16 bg-gray-50">
       <div className="mx-auto w-full lg:w-[90%] px-6">
-        <h2 className="text-3xl font-serif font-bold text-gray-900 mb-8 text-center">
+        <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
           {title}
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -79,13 +79,13 @@ export function LocationFAQ({ items, title = "Frequently Asked Questions" }: Loc
   return (
     <div className="py-16 bg-white">
       <div className="mx-auto w-full lg:w-[90%] px-6">
-        <h2 className="text-3xl font-serif font-bold text-gray-900 mb-12 text-center">
+        <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">
           {title}
         </h2>
         <div className="space-y-6">
           {items.map((item, i) => (
             <div key={i} className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
-              <h3 className="text-lg font-serif font-semibold text-gray-900 mb-3">
+              <h3 className="text-lg font-semibold text-gray-900 mb-3">
                 {item.question}
               </h3>
               <p className="text-gray-600">{item.answer}</p>
@@ -107,7 +107,7 @@ export function LocationCTA({ title, description, phone }: LocationCTAProps) {
   return (
     <div className="py-16 bg-brand-blue text-white">
       <div className="mx-auto w-full lg:w-[90%] px-6 text-center">
-        <h2 className="text-3xl font-serif font-bold mb-4">{title}</h2>
+        <h2 className="text-3xl font-bold mb-4">{title}</h2>
         <p className="text-xl mb-8 opacity-90">{description}</p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link

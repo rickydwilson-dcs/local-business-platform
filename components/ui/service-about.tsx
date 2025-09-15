@@ -353,7 +353,7 @@ export default function ServiceAbout({ serviceName, slug }: ServiceAboutProps) {
       <div className="mx-auto w-full lg:w-[90%] px-6">
         <div className="grid lg:grid-cols-3 gap-12">
           <div className="lg:col-span-2">
-            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-gray-900 mb-6">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">
               Professional {serviceName} Services Across the South East
             </h2>
             <p className="text-lg text-gray-600 mb-8 leading-relaxed">
@@ -361,7 +361,7 @@ export default function ServiceAbout({ serviceName, slug }: ServiceAboutProps) {
             </p>
             
             <div className="space-y-6">
-              <h3 className="text-xl font-serif font-semibold text-gray-900">
+              <h3 className="text-xl font-semibold text-gray-900">
                 When You Need {serviceName}
               </h3>
               <div className="grid md:grid-cols-2 gap-4">
@@ -385,7 +385,7 @@ export default function ServiceAbout({ serviceName, slug }: ServiceAboutProps) {
                     </svg>
                   </div>
                   <div>
-                    <h4 className="font-serif font-semibold text-gray-900 mb-2">
+                    <h4 className="font-semibold text-gray-900 mb-2">
                       TG20:21 Compliant & Fully Insured
                     </h4>
                     <p className="text-gray-600 text-sm leading-relaxed">
@@ -399,7 +399,7 @@ export default function ServiceAbout({ serviceName, slug }: ServiceAboutProps) {
           
           <div className="lg:col-span-1">
             <div className="bg-gray-50 rounded-2xl p-6 border border-gray-200 sticky top-8">
-              <h3 className="text-xl font-serif font-semibold text-gray-900 mb-4 flex items-center gap-2">
+              <h3 className="text-xl font-semibold text-gray-900 mb-4 flex items-center gap-2">
                 <svg className="h-5 w-5 text-brand-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>

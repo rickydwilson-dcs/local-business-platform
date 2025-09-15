@@ -8,6 +8,8 @@ import { ServiceBenefits } from "@/components/ui/service-benefits";
 import { ServiceGallery } from "@/components/ui/service-gallery";
 import { ServiceFAQ } from "@/components/ui/service-faq";
 import { ServiceCTA } from "@/components/ui/service-cta";
+import Breadcrumbs from "@/components/ui/breadcrumbs";
+import Schema from "@/components/Schema";
 import { absUrl } from "@/lib/site";
 
 export const dynamic = "force-static";
@@ -378,165 +380,71 @@ export default async function Page(
   const serviceData = getServiceData(slug);
   const serviceName = serviceData.title.replace(' Services', '').replace(' Solutions', '').replace(' Systems', '');
 
-  const serviceSchema = {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    "@id": absUrl(`/services/${slug}#service`),
-    name: serviceData.title,
-    description: serviceData.description,
-    url: absUrl(`/services/${slug}`),
-    category: "Scaffolding",
-    serviceType: serviceName,
-    provider: {
-      "@type": "Organization",
-      "@id": absUrl("/#organization"),
-      name: "Colossus Scaffolding",
-      url: absUrl("/"),
-      logo: absUrl("/static/logo.png")
-    },
-    areaServed: [
-      { "@type": "Place", name: "East Sussex" },
-      { "@type": "Place", name: "West Sussex" },
-      { "@type": "Place", name: "Kent" },
-      { "@type": "Place", name: "Surrey" },
-      { "@type": "Place", name: "Essex" },
-      { "@type": "Place", name: "London" }
-    ],
-    hasOfferCatalog: {
-      "@type": "OfferCatalog",
-      name: `${serviceName} Benefits`,
-      itemListElement: serviceData.benefits.map((benefit, index) => ({
-        "@type": "Offer",
-        position: index + 1,
-        itemOffered: {
-          "@type": "Service",
-          name: benefit,
-          description: benefit
-        }
-      }))
-    },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.8",
-      bestRating: "5",
-      ratingCount: "45"
-    }
-  };
-
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "@id": absUrl(`/services/${slug}#faq`),
-    mainEntity: serviceData.faqs.map((faq) => ({
-      "@type": "Question",
-      name: faq.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: faq.answer
-      }
-    }))
-  };
-
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "Home",
-        item: absUrl("/")
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "Services",
-        item: absUrl("/services")
-      },
-      {
-        "@type": "ListItem",
-        position: 3,
-        name: serviceName,
-        item: absUrl(`/services/${slug}`)
-      }
-    ]
-  };
-
-  const webPageSchema = {
-    "@context": "https://schema.org",
-    "@type": "WebPage",
-    "@id": absUrl(`/services/${slug}`),
-    name: serviceData.title,
-    description: serviceData.description,
-    url: absUrl(`/services/${slug}`),
-    isPartOf: {
-      "@id": absUrl("/#website")
-    },
-    about: {
-      "@id": absUrl(`/services/${slug}#service`)
-    },
-    breadcrumb: {
-      "@id": absUrl(`/services/${slug}#breadcrumb`)
-    }
-  };
+  const breadcrumbItems = [
+    { name: "Services", href: "/services" },
+    { name: serviceName, href: `/services/${slug}`, current: true }
+  ];
 
   return (
     <>
-      {/* Schema Markup for SEO */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(serviceSchema)
-        }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(faqSchema)
-        }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(breadcrumbSchema)
-        }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(webPageSchema)
-        }}
-      />
-      
+      {/* Breadcrumbs */}
+      <div className="bg-gray-50 border-b">
+        <div className="mx-auto w-full lg:w-[90%] px-6 py-4">
+          <Breadcrumbs items={breadcrumbItems} />
+        </div>
+      </div>
+
       <ServiceHero
         title={serviceData.title}
         description={serviceData.description}
         badge={serviceData.badge}
         heroImage={serviceData.heroImage}
       />
-      
+
       <ServiceAbout
         serviceName={serviceName}
         slug={slug}
       />
-      
+
       <ServiceBenefits
         title="Why Choose Our Service?"
         description="Professional scaffolding with complete safety compliance and expert installation teams."
         items={serviceData.benefits}
       />
-      
+
       <ServiceGallery
         title="Project Gallery"
         description="View our professional scaffolding installations and completed projects."
         images={serviceData.galleryImages}
       />
-      
+
       <ServiceFAQ
         items={serviceData.faqs}
       />
-      
+
       <ServiceCTA />
+
+      <Schema
+        service={{
+          id: `/services/${slug}#service`,
+          url: `/services/${slug}`,
+          name: serviceData.title,
+          description: serviceData.description,
+          serviceType: serviceName,
+          areaServed: ["East Sussex", "West Sussex", "Kent", "Surrey", "Essex", "London"]
+        }}
+        org={{
+          name: "Colossus Scaffolding",
+          url: "/",
+          logo: "/Colossus-Scaffolding-Logo.svg"
+        }}
+        breadcrumbs={[
+          { name: "Home", url: "/" },
+          { name: "Services", url: "/services" },
+          { name: serviceName, url: `/services/${slug}` }
+        ]}
+        faqs={serviceData.faqs}
+      />
     </>
   );
 }

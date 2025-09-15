@@ -18,8 +18,7 @@ const config: Config = {
         },
       },
       fontFamily: {
-        heading: ['"Libre Caslon Display"', 'serif'],
-        sans: ['Arial', 'Helvetica', 'sans-serif'],
+        sans: ['GeistSans', 'Arial', 'Helvetica', 'sans-serif'],
       },
     },
   },

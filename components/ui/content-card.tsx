@@ -83,7 +83,7 @@ export function ContentCard({
           </div>
         )}
         
-        <h2 className={`font-serif font-bold text-gray-900 mb-3 line-clamp-1 ${contentType === 'locations' ? 'text-xl' : 'text-xl'}`}>
+        <h2 className={`font-bold text-gray-900 mb-3 line-clamp-1 ${contentType === 'locations' ? 'text-xl' : 'text-xl'}`}>
           {title}
         </h2>
         

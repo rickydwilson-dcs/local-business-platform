@@ -2,6 +2,7 @@ import Link from "next/link";
 import Schema from "@/components/Schema";
 import { ContentGrid } from "@/components/ui/content-grid";
 import { getContentItems } from "@/lib/content";
+import Breadcrumbs from "@/components/ui/breadcrumbs";
 
 export const dynamic = "force-static";
 
@@ -16,14 +17,26 @@ const serviceHighlights = [
 
 export default async function LocationsPage() {
   const locations = await getContentItems("locations");
+
+  const breadcrumbItems = [
+    { name: "Locations", href: "/locations", current: true }
+  ];
+
   return (
     <>
+      {/* Breadcrumbs */}
+      <div className="bg-gray-50 border-b">
+        <div className="mx-auto w-full lg:w-[90%] px-6 py-4">
+          <Breadcrumbs items={breadcrumbItems} />
+        </div>
+      </div>
+
       <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100">
       {/* Hero Section */}
       <section className="py-16 sm:py-20 lg:py-24 bg-white">
         <div className="mx-auto w-full lg:w-[90%] px-6">
           <div className="mx-auto w-full lg:w-[90%] text-center">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-gray-900 mb-6">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
               Areas We Serve
             </h1>
             <p className="text-xl text-gray-600 mb-8 mx-auto w-full lg:w-[90%]">
@@ -67,7 +80,7 @@ export default async function LocationsPage() {
       <section className="py-16 bg-white">
         <div className="mx-auto w-full lg:w-[90%] px-6">
           <div className="mx-auto w-full lg:w-[90%] text-center mb-12">
-            <h2 className="text-3xl font-serif font-bold text-gray-900 mb-4">Our Coverage Area</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Our Coverage Area</h2>
             <p className="text-lg text-gray-600">
               Serving the South East UK with professional scaffolding services and local expertise
             </p>
@@ -103,7 +116,7 @@ export default async function LocationsPage() {
       <section className="py-16 bg-white">
         <div className="mx-auto w-full lg:w-[90%] px-6">
           <div className="mx-auto w-full lg:w-[90%]">
-            <h2 className="text-3xl font-serif font-bold text-gray-900 mb-12 text-center">
+            <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">
               Why Choose Our Regional Service?
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -121,7 +134,7 @@ export default async function LocationsPage() {
       {/* Call to Action */}
       <section className="py-16 sm:py-20">
         <div className="mx-auto w-full lg:w-[90%] px-6 text-center">
-          <h2 className="text-3xl font-serif font-bold text-gray-900 mb-4">
+          <h2 className="text-3xl font-bold text-gray-900 mb-4">
             Not Sure If We Cover Your Area?
           </h2>
           <p className="text-xl text-gray-600 mb-8">
@@ -154,11 +167,15 @@ export default async function LocationsPage() {
           serviceType: "Local Services",
           areaServed: ["South East UK", "East Sussex", "West Sussex", "Kent", "Surrey", "London", "Essex"]
         }}
-        org={{ 
-          name: "Colossus Scaffolding", 
-          url: "/", 
-          logo: "/Colossus-Scaffolding-Logo.svg" 
+        org={{
+          name: "Colossus Scaffolding",
+          url: "/",
+          logo: "/Colossus-Scaffolding-Logo.svg"
         }}
+        breadcrumbs={[
+          { name: "Home", url: "/" },
+          { name: "Locations", url: "/locations" }
+        ]}
         faqs={[
           {
             question: "Which locations do you serve?",

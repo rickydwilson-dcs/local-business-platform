@@ -7,6 +7,7 @@ import { LocationServices } from "@/components/ui/location-services";
 import { LocationCoverage } from "@/components/ui/location-coverage";
 import { LocationFAQ } from "@/components/ui/location-faq";
 import { ServiceCTA } from "@/components/ui/service-cta";
+import Breadcrumbs from "@/components/ui/breadcrumbs";
 import { absUrl } from "@/lib/site";
 import { getLocationDataWithFallback, getAllLocations } from "@/lib/locations";
 
@@ -201,6 +202,11 @@ export default async function Page(
     } : undefined
   };
 
+  const breadcrumbItems = [
+    { name: "Locations", href: "/locations" },
+    { name: locationData.title, href: `/locations/${slug}`, current: true }
+  ];
+
   return (
     <>
       {/* Schema Markup for SEO */}
@@ -234,7 +240,14 @@ export default async function Page(
           __html: JSON.stringify(placeSchema)
         }}
       />
-      
+
+      {/* Breadcrumbs */}
+      <div className="bg-gray-50 border-b">
+        <div className="mx-auto w-full lg:w-[90%] px-6 py-4">
+          <Breadcrumbs items={breadcrumbItems} />
+        </div>
+      </div>
+
       <LocationHero
         title={locationData.title}
         description={locationData.description}

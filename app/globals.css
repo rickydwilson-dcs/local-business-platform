@@ -2,9 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-h1, h2, h3, h4, h5, h6 {
-  @apply font-heading;
-}
 
 /* Fix Lighthouse warning: Ensure h1 elements have consistent font-size in semantic elements */
 article h1, aside h1, nav h1, section h1 {

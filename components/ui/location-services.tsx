@@ -23,7 +23,7 @@ export function LocationServices({
     <section className="py-16 sm:py-20 bg-gray-50">
       <div className="mx-auto w-full lg:w-[90%] px-6">
         <div className="mx-auto w-full lg:w-[90%] text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl font-serif font-bold text-gray-900 mb-4">
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
             {title} in {location}
           </h2>
           {description && (
@@ -43,7 +43,7 @@ export function LocationServices({
                   </svg>
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-lg font-serif font-semibold text-gray-900 mb-2">
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">
                     {service.name}
                   </h3>
                   <p className="text-gray-600 mb-4 text-sm leading-relaxed">

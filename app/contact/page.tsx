@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import Schema from '@/components/Schema';
+import Breadcrumbs from '@/components/ui/breadcrumbs';
 
 type FormData = {
   name: string;
@@ -30,6 +31,10 @@ export default function ContactPage() {
     projectType: 'residential',
     urgency: ''
   });
+
+  const breadcrumbItems = [
+    { name: "Contact", href: "/contact", current: true }
+  ];
 
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -122,10 +127,17 @@ export default function ContactPage() {
 
   return (
     <>
+      {/* Breadcrumbs */}
+      <div className="bg-gray-50 border-b">
+        <div className="mx-auto w-full lg:w-[90%] px-6 py-4">
+          <Breadcrumbs items={breadcrumbItems} />
+        </div>
+      </div>
+
       <div className="container mx-auto px-4 py-10">
       {/* Header */}
       <div className="text-center mb-12">
-        <h1 className="text-4xl font-heading font-bold text-gray-900 mb-4">
+        <h1 className="text-4xl font-bold text-gray-900 mb-4">
           Contact Colossus Scaffolding
         </h1>
         <p className="text-xl text-gray-600 mx-auto w-full lg:w-[90%]">
@@ -453,11 +465,15 @@ export default function ContactPage() {
           serviceType: "Contact",
           areaServed: ["South East UK", "East Sussex", "West Sussex", "Kent", "Surrey", "London", "Essex"]
         }}
-        org={{ 
-          name: "Colossus Scaffolding", 
-          url: "/", 
-          logo: "/Colossus-Scaffolding-Logo.svg" 
+        org={{
+          name: "Colossus Scaffolding",
+          url: "/",
+          logo: "/Colossus-Scaffolding-Logo.svg"
         }}
+        breadcrumbs={[
+          { name: "Home", url: "/" },
+          { name: "Contact", url: "/contact" }
+        ]}
         faqs={[
           {
             question: "How quickly can you provide a quote?",
