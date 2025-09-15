@@ -29,7 +29,7 @@ export function LocationHero({
                   {badge}
                 </div>
               )}
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold text-gray-900 leading-tight">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
                 Scaffolding in {title}
               </h1>
               <p className="text-xl text-gray-600 mt-6 leading-relaxed">

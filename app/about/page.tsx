@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { absUrl } from "@/lib/site";
 import { Metadata } from "next";
+import Breadcrumbs from "@/components/ui/breadcrumbs";
 
 export const metadata: Metadata = {
   title: "About Colossus Scaffolding | Professional Scaffolding Specialists South East UK",
@@ -33,6 +34,9 @@ export const metadata: Metadata = {
 };
 
 export default function AboutPage() {
+  const breadcrumbItems = [
+    { name: "About", href: "/about", current: true }
+  ];
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
@@ -234,7 +238,14 @@ export default function AboutPage() {
           __html: JSON.stringify(faqSchema)
         }}
       />
-      
+
+      {/* Breadcrumbs */}
+      <div className="bg-gray-50 border-b">
+        <div className="mx-auto w-full lg:w-[90%] px-6 py-4">
+          <Breadcrumbs items={breadcrumbItems} />
+        </div>
+      </div>
+
       {/* Hero Section */}
       <section className="py-16 sm:py-20 bg-gradient-to-br from-gray-50 to-gray-100">
         <div className="mx-auto w-full lg:w-[90%] px-6">
@@ -251,7 +262,7 @@ export default function AboutPage() {
               </span>
             </div>
             
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold text-gray-900 leading-tight mb-6">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6">
               About Colossus Scaffolding
             </h1>
             
@@ -267,7 +278,7 @@ export default function AboutPage() {
       <section className="py-16 sm:py-20 bg-white">
         <div className="mx-auto w-full lg:w-[90%] px-6">
           <div className="mx-auto w-full lg:w-[90%]">
-            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-gray-900 mb-8 text-center">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-8 text-center">
               Our Story
             </h2>
             
@@ -317,7 +328,7 @@ export default function AboutPage() {
       <section className="py-16 sm:py-20 bg-gradient-to-br from-gray-50 to-gray-100 border-t border-b border-gray-200">
         <div className="mx-auto w-full lg:w-[90%] px-6">
           <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
               Our Track Record Speaks for Itself
             </h2>
             <p className="text-lg text-gray-600 mx-auto w-full lg:w-[90%]">
@@ -386,7 +397,7 @@ export default function AboutPage() {
       <section className="py-16 sm:py-20 bg-white">
         <div className="mx-auto w-full lg:w-[90%] px-6">
           <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
               Certifications & Accreditations
             </h2>
             <p className="text-lg text-gray-600 mx-auto w-full lg:w-[90%]">
@@ -402,7 +413,7 @@ export default function AboutPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
                 </svg>
               </div>
-              <h3 className="text-lg font-serif font-semibold text-gray-900 mb-2">TG20:21 Compliance</h3>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">TG20:21 Compliance</h3>
               <p className="text-gray-600 text-sm">Latest technical guidance for scaffold design and installation</p>
             </div>
             
@@ -412,7 +423,7 @@ export default function AboutPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                 </svg>
               </div>
-              <h3 className="text-lg font-serif font-semibold text-gray-900 mb-2">CHAS Accreditation</h3>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">CHAS Accreditation</h3>
               <p className="text-gray-600 text-sm">Health and safety assessment scheme approved contractor</p>
             </div>
             
@@ -422,7 +433,7 @@ export default function AboutPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                 </svg>
               </div>
-              <h3 className="text-lg font-serif font-semibold text-gray-900 mb-2">CISRS Qualified</h3>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">CISRS Qualified</h3>
               <p className="text-gray-600 text-sm">Construction Industry Scaffolders Record Scheme certified teams</p>
             </div>
             
@@ -432,7 +443,7 @@ export default function AboutPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                 </svg>
               </div>
-              <h3 className="text-lg font-serif font-semibold text-gray-900 mb-2">£10M Insured</h3>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">£10M Insured</h3>
               <p className="text-gray-600 text-sm">Comprehensive public liability insurance coverage</p>
             </div>
           </div>
@@ -443,7 +454,7 @@ export default function AboutPage() {
       <section className="py-16 sm:py-20 bg-gray-50">
         <div className="mx-auto w-full lg:w-[90%] px-6">
           <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
               Our Values
             </h2>
             <p className="text-lg text-gray-600 mx-auto w-full lg:w-[90%]">
@@ -459,7 +470,7 @@ export default function AboutPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-serif font-semibold text-gray-900 mb-3">Safety First</h3>
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">Safety First</h3>
               <p className="text-gray-600">Every scaffold designed and erected to TG20:21 standards with regular safety inspections and comprehensive risk assessments.</p>
             </div>
             
@@ -469,7 +480,7 @@ export default function AboutPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-serif font-semibold text-gray-900 mb-3">Professional Excellence</h3>
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">Professional Excellence</h3>
               <p className="text-gray-600">CISRS qualified teams delivering professional installations with attention to detail and commitment to quality craftsmanship.</p>
             </div>
             
@@ -479,7 +490,7 @@ export default function AboutPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-serif font-semibold text-gray-900 mb-3">Reliable Service</h3>
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">Reliable Service</h3>
               <p className="text-gray-600">On-time installations, clear communication, and 24/7 emergency response when you need us most across the South East.</p>
             </div>
             
@@ -490,7 +501,7 @@ export default function AboutPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-serif font-semibold text-gray-900 mb-3">Local Expertise</h3>
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">Local Expertise</h3>
               <p className="text-gray-600">Deep understanding of local regulations, planning requirements, and building styles across our South East service areas.</p>
             </div>
           </div>
@@ -501,7 +512,7 @@ export default function AboutPage() {
       <section className="py-16 sm:py-20 bg-white">
         <div className="mx-auto w-full lg:w-[90%] px-6">
           <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
               Why Choose Colossus Scaffolding?
             </h2>
             <p className="text-lg text-gray-600 mx-auto w-full lg:w-[90%]">
@@ -539,7 +550,7 @@ export default function AboutPage() {
       {/* CTA Section */}
       <section className="py-16 sm:py-20 bg-brand-blue text-white">
         <div className="mx-auto w-full lg:w-[90%] px-6 text-center">
-          <h2 className="text-3xl sm:text-4xl font-serif font-bold mb-6">
+          <h2 className="text-3xl sm:text-4xl font-bold mb-6">
             Ready to Work with the South East&apos;s Trusted Scaffolding Specialists?
           </h2>
           <p className="text-xl mb-8 mx-auto w-full lg:w-[90%] opacity-90 leading-relaxed">

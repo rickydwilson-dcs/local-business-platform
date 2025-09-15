@@ -119,7 +119,7 @@ export function Benefits({ items, title = "Why Choose Our Service?" }: BenefitsP
   return (
     <div className="py-16 bg-gray-50 -mx-4 px-4 mb-16 rounded-lg">
       <div className="mx-auto w-full lg:w-[90%]">
-        <h2 className="text-3xl font-serif font-bold text-gray-900 mb-8 text-center">
+        <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
           {title}
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
@@ -151,7 +151,7 @@ export function FAQ({ items }: FAQProps) {
     <div className="space-y-6 mb-16">
       {items.map((item, i) => (
         <div key={i} className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
-          <h3 className="text-lg font-serif font-semibold text-gray-900 mb-3">
+          <h3 className="text-lg font-semibold text-gray-900 mb-3">
             {item.question}
           </h3>
           <p className="text-gray-600">{item.answer}</p>
@@ -170,7 +170,7 @@ export function CoverageAreas({ areas, phone }: CoverageAreasProps) {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
       <div className="lg:col-span-2">
-        <h2 className="text-3xl font-serif font-bold text-gray-900 mb-6">
+        <h2 className="text-3xl font-bold text-gray-900 mb-6">
           Professional Service Across the South East
         </h2>
         <p className="text-lg text-gray-600 mb-6">
@@ -185,7 +185,7 @@ export function CoverageAreas({ areas, phone }: CoverageAreasProps) {
       </div>
 
       <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
-        <h3 className="text-lg font-serif font-semibold text-gray-900 mb-4">Coverage Areas</h3>
+        <h3 className="text-lg font-semibold text-gray-900 mb-4">Coverage Areas</h3>
         <ul className="space-y-2 text-sm">
           {areas.map(area => (
             <li key={area.slug}>
@@ -230,7 +230,7 @@ export function CTA({
 }: CTAProps) {
   return (
     <div className="py-16 bg-brand-blue text-white -mx-4 px-4 rounded-lg text-center">
-      <h2 className="text-3xl font-serif font-bold mb-4">{title}</h2>
+      <h2 className="text-3xl font-bold mb-4">{title}</h2>
       <p className="text-xl mb-8 mx-auto w-full lg:w-[90%] opacity-90">
         {description}
       </p>

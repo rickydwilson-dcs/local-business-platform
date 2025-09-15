@@ -3,6 +3,11 @@ import { absUrl } from "@/lib/site";
 
 type FAQ = { question: string; answer: string };
 
+type BreadcrumbItem = {
+  name: string;
+  url: string;
+};
+
 type Props = {
   service: {
     id: string;      // can be "/access-scaffolding#service" or absolute
@@ -14,9 +19,10 @@ type Props = {
   };
   faqs: FAQ[];
   org?: { name: string; url: string; logo?: string; id?: string };
+  breadcrumbs?: BreadcrumbItem[];
 };
 
-export default function Schema({ service, faqs, org }: Props) {
+export default function Schema({ service, faqs, org, breadcrumbs }: Props) {
   const graph = [
     {
       "@type": "Service",
@@ -49,6 +55,20 @@ export default function Schema({ service, faqs, org }: Props) {
       })),
     },
   ];
+
+  // Add breadcrumb schema if breadcrumbs are provided
+  if (breadcrumbs && breadcrumbs.length > 0) {
+    graph.push({
+      "@type": "BreadcrumbList",
+      "@id": absUrl(service.url + "#breadcrumb"),
+      itemListElement: breadcrumbs.map((breadcrumb, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        name: breadcrumb.name,
+        item: absUrl(breadcrumb.url),
+      })),
+    });
+  }
 
   return (
     <script

@@ -22,7 +22,7 @@ export function ServiceCTA({
   return (
     <section className="py-16 sm:py-20 bg-brand-blue text-white">
       <div className="mx-auto w-full lg:w-[90%] px-6 text-center">
-        <h2 className="text-3xl sm:text-4xl font-serif font-bold mb-6">{title}</h2>
+        <h2 className="text-3xl sm:text-4xl font-bold mb-6">{title}</h2>
         <p className="text-xl mb-8 mx-auto w-full lg:w-[90%] opacity-90 leading-relaxed">
           {description}
         </p>

@@ -21,7 +21,7 @@ export function LocationFAQ({
       <div className="mx-auto w-full lg:w-[90%] px-6">
         <div className="mx-auto w-full lg:w-[90%]">
           <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
               {title} About Scaffolding in {location}
             </h2>
             {description && (
@@ -34,7 +34,7 @@ export function LocationFAQ({
           <div className="space-y-6">
             {items.map((item, i) => (
               <div key={i} className="bg-gray-50 border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow">
-                <h3 className="text-lg font-serif font-semibold text-gray-900 mb-3 flex items-start gap-3">
+                <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-start gap-3">
                   <span className="flex-shrink-0 w-6 h-6 bg-brand-blue rounded-full flex items-center justify-center text-white text-sm font-bold">
                     Q
                   </span>
@@ -48,7 +48,7 @@ export function LocationFAQ({
           </div>
           
           <div className="text-center mt-12 p-8 bg-brand-blue/5 rounded-2xl border border-brand-blue/10">
-            <h3 className="text-xl font-serif font-semibold text-gray-900 mb-4">
+            <h3 className="text-xl font-semibold text-gray-900 mb-4">
               More Questions About Scaffolding in {location}?
             </h3>
             <p className="text-gray-600 mb-6">

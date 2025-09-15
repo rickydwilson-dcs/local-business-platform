@@ -7,7 +7,7 @@ export function Footer() {
       <div className="mx-auto w-full lg:w-[90%] px-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mb-6 sm:mb-8">
           <div className="sm:col-span-2 lg:col-span-1">
-            <h3 className="text-xl sm:text-2xl font-heading font-bold mb-4">Colossus Scaffolding</h3>
+            <h3 className="text-xl sm:text-2xl font-bold mb-4">Colossus Scaffolding</h3>
             <p className="text-gray-300 mb-4 text-sm sm:text-base">
               Professional scaffolding services across the South East UK. TG20:21 compliant, CHAS accredited.
             </p>

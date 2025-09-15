@@ -3,7 +3,6 @@ import Link from "next/link";
 import "./globals.css";
 import type { Metadata } from "next";
 import MobileMenu from "@/components/ui/mobile-menu";
-import { Footer } from "@/components/ui/footer";
 
 export const metadata: Metadata = {
   metadataBase: new URL(
@@ -79,9 +78,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </div>
         </header>
 
-        <main className="mx-auto w-full lg:w-[90%] px-6 py-10">{children}</main>
-        
-        <Footer />
+        {children}
       </body>
     </html>
   );
