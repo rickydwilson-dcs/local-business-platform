@@ -116,7 +116,7 @@ export function LargeFeatureCards({
                   <div className="mt-auto">
                     <Link
                       href={card.href}
-                      className="inline-flex items-center gap-2 bg-brand-blue text-white px-6 py-3 rounded-lg font-semibold hover:bg-brand-blue-hover group-hover:scale-105 transition-all duration-200 w-full justify-center sm:w-auto sm:justify-start"
+                      className="btn-primary gap-2 group-hover:scale-105 w-full justify-center sm:w-auto sm:justify-start"
                     >
                       <span>{card.ctaText || `Learn More`}</span>
                       <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />

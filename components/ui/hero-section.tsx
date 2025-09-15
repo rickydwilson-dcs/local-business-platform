@@ -40,7 +40,7 @@ export function HeroSection(props: HeroSectionProps) {
             <div className="flex flex-col sm:flex-row gap-4 mb-8">
               <Link
                 href={ctaUrl}
-                className="inline-flex items-center justify-center px-8 py-4 bg-brand-blue text-white font-semibold rounded-lg hover:bg-brand-blue-hover transition-colors"
+                className="btn-primary-lg"
               >
                 {ctaText}
               </Link>

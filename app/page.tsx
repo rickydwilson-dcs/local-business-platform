@@ -305,7 +305,7 @@ export default function HomePage() {
               </p>
               <a
                 href="/contact"
-                className="inline-flex items-center justify-center px-8 py-3 bg-brand-blue text-white font-semibold rounded-lg hover:bg-brand-blue-hover transition-colors"
+                className="btn-primary-lg"
               >
                 Request Free Quote
               </a>

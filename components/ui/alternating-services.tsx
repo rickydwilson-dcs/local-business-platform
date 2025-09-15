@@ -81,7 +81,7 @@ export function AlternatingServices({ title, description, services }: Alternatin
                   <div className="pt-4">
                     <Link
                       href={service.href}
-                      className="inline-flex items-center gap-2 bg-brand-blue text-white px-6 py-3 rounded-lg font-semibold hover:bg-brand-blue-hover hover:scale-105 transition-all duration-200"
+                      className="btn-primary gap-2 hover:scale-105"
                     >
                       <span>{service.ctaText || `Learn About ${service.title}`}</span>
                       <ArrowRight className="w-4 h-4" />
