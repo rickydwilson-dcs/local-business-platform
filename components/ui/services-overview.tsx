@@ -47,13 +47,13 @@ const services = [
 
 export function ServicesOverview() {
   return (
-    <section className="py-16 sm:py-20 bg-white">
-      <div className="mx-auto w-full lg:w-[90%] px-6">
-        <div className="text-center mb-12 sm:mb-16">
+    <section className="section-standard bg-white">
+      <div className="container-standard">
+        <div className="section-header">
           <h2 className="heading-section">
             Our Scaffolding Services
           </h2>
-          <p className="text-subtitle mx-auto w-full lg:w-[90%]">
+          <p className="text-subtitle mx-auto max-w-4xl">
             Professional, compliant scaffolding solutions for every project across the South East UK
           </p>
         </div>

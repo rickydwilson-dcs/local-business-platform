@@ -28,10 +28,10 @@ export function LocalAuthorityExpertise({
   const bgClass = backgroundColor === 'white' ? 'bg-white' : 'bg-gray-50'
 
   return (
-    <section className={`py-16 sm:py-20 ${bgClass}`}>
-      <div className="mx-auto w-full lg:w-[90%] px-6">
+    <section className={`section-standard ${bgClass}`}>
+      <div className="container-standard">
         {/* Section Header */}
-        <div className="text-center mb-12 sm:mb-16">
+        <div className="section-header">
           <h2 className="heading-section">
             {title}
           </h2>
@@ -51,7 +51,7 @@ export function LocalAuthorityExpertise({
           {/* Two Column Grid */}
           <div className="grid lg:grid-cols-2 gap-8">
             {/* Left Column - Local Authority Expertise */}
-            <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
+            <div className="card-simple">
               <p className="text-gray-600 mb-6 leading-relaxed">
                 Three decades working with {authorityName} means we understand the local requirements,
                 planning processes, and regulatory landscape.
@@ -68,7 +68,7 @@ export function LocalAuthorityExpertise({
             </div>
 
             {/* Right Column - Permit & Planning Support */}
-            <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
+            <div className="card-simple">
               <h4 className="font-semibold text-gray-900 mb-4">
                 Permit & Planning Support
               </h4>

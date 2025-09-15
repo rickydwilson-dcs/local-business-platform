@@ -39,10 +39,10 @@ export function LargeFeatureCards({
   }[columns]
 
   return (
-    <section className={`py-16 sm:py-20 ${bgClass}`}>
-      <div className="mx-auto w-full lg:w-[90%] px-6">
+    <section className={`section-standard ${bgClass}`}>
+      <div className="container-standard">
         {/* Section Header */}
-        <div className="text-center mb-12 sm:mb-16">
+        <div className="section-header">
           <h2 className="heading-section">
             {title}
           </h2>
@@ -54,11 +54,11 @@ export function LargeFeatureCards({
         </div>
 
         {/* Cards Grid */}
-        <div className={`grid ${gridClass} gap-6 lg:gap-8`}>
+        <div className={`grid-responsive ${gridClass}`}>
           {cards.map((card, index) => (
             <div
               key={index}
-              className="group relative bg-white rounded-2xl shadow-sm border border-gray-200 p-8 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 h-full flex flex-col"
+              className="card-interactive h-full flex flex-col"
             >
               {/* Badge */}
               {card.badge && (

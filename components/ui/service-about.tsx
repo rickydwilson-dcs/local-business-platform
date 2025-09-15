@@ -349,8 +349,8 @@ export default function ServiceAbout({ serviceName, slug }: ServiceAboutProps) {
   const content = getServiceContent(slug);
   
   return (
-    <section className="py-16 sm:py-20 bg-white">
-      <div className="mx-auto w-full lg:w-[90%] px-6">
+    <section className="section-standard bg-white">
+      <div className="container-standard">
         <div className="grid lg:grid-cols-3 gap-12">
           <div className="lg:col-span-2">
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">

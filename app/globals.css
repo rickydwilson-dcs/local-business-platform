@@ -52,7 +52,7 @@
 
   /* Statistics Numbers - Large branded numbers */
   .stat-number {
-    @apply text-3xl font-bold text-brand-blue mb-2;
+    @apply text-4xl font-extrabold text-brand-blue mb-3 tracking-tight;
   }
 
   /* Subtitle Text - Supporting text under headings */
@@ -84,6 +84,22 @@
   /* Section Header - Centered headers with consistent spacing */
   .section-header {
     @apply text-center mb-12 sm:mb-16;
+  }
+
+  /* Card System */
+  /* Interactive Card - Hover effects and animations */
+  .card-interactive {
+    @apply relative bg-white rounded-2xl shadow-sm border border-gray-200 p-8 hover:shadow-lg hover:-translate-y-1 transition-all duration-300;
+  }
+
+  /* Simple Card - Basic card styling */
+  .card-simple {
+    @apply bg-white rounded-xl border border-gray-200 p-6 shadow-sm;
+  }
+
+  /* Responsive Grid - Standard responsive grid */
+  .grid-responsive {
+    @apply grid gap-6 lg:gap-8;
   }
 }
 
