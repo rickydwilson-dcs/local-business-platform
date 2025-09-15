@@ -79,7 +79,7 @@ export function ServicesOverview() {
         <div className="text-center">
           <Link
             href="/services"
-            className="inline-flex bg-brand-blue text-white px-6 py-3 rounded-lg hover:bg-brand-blue-hover hover:scale-105 transition-all duration-200 font-semibold"
+            className="btn-primary hover:scale-105"
           >
             View All Scaffolding Services
           </Link>

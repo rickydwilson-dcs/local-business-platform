@@ -136,13 +136,13 @@ export function PricingPackages({ title, description, packages }: PricingPackage
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all h-9 px-8 py-3 bg-brand-blue text-white hover:bg-brand-blue-hover"
+                className="btn-primary gap-2 h-9 px-8"
               >
                 Request Detailed Quote
               </Link>
               <Link
                 href="tel:01424466661"
-                className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all border shadow-xs hover:bg-gray-200 h-9 px-8 py-3 bg-transparent text-gray-900"
+                className="btn-ghost gap-2 h-9 px-8"
               >
                 <PhoneIcon />
                 Call 01424 466661

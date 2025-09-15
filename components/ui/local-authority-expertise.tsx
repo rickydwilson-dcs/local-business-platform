@@ -94,7 +94,7 @@ export function LocalAuthorityExpertise({
         <div className="text-center mt-12">
           <Link
             href="/contact"
-            className="inline-flex items-center gap-2 bg-brand-blue text-white px-8 py-4 rounded-lg font-semibold hover:bg-brand-blue-hover transition-colors text-lg"
+            className="btn-primary-lg gap-2"
           >
             Get {locationName} Planning Support
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">

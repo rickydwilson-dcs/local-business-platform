@@ -46,7 +46,7 @@ export default async function LocationsPage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-center px-8 py-4 bg-brand-blue text-white font-semibold rounded-lg hover:bg-brand-blue-hover transition-colors"
+                className="btn-primary-lg"
               >
                 Get Local Quote
               </Link>
@@ -143,7 +143,7 @@ export default async function LocationsPage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center px-8 py-4 bg-brand-blue text-white font-semibold rounded-lg hover:bg-brand-blue-hover transition-colors"
+              className="btn-primary-lg"
             >
               Get Free Quote
             </Link>
