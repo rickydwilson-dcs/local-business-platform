@@ -50,10 +50,10 @@ export function ServicesOverview() {
     <section className="py-16 sm:py-20 bg-white">
       <div className="mx-auto w-full lg:w-[90%] px-6">
         <div className="text-center mb-12 sm:mb-16">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          <h2 className="heading-section">
             Our Scaffolding Services
           </h2>
-          <p className="text-lg sm:text-xl text-gray-600 mx-auto w-full lg:w-[90%]">
+          <p className="text-subtitle mx-auto w-full lg:w-[90%]">
             Professional, compliant scaffolding solutions for every project across the South East UK
           </p>
         </div>

@@ -29,7 +29,7 @@ export function HeroSection(props: HeroSectionProps) {
       <div className="mx-auto w-full lg:w-[90%] px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
+            <h1 className="heading-hero">
               {title}
             </h1>
 

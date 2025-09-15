@@ -241,14 +241,14 @@ export default function AboutPage() {
 
       {/* Breadcrumbs */}
       <div className="bg-gray-50 border-b">
-        <div className="mx-auto w-full lg:w-[90%] px-6 py-4">
+        <div className="container-standard py-4">
           <Breadcrumbs items={breadcrumbItems} />
         </div>
       </div>
 
       {/* Hero Section */}
-      <section className="py-16 sm:py-20 bg-gradient-to-br from-gray-50 to-gray-100">
-        <div className="mx-auto w-full lg:w-[90%] px-6">
+      <section className="section-standard bg-gradient-to-br from-gray-50 to-gray-100">
+        <div className="container-standard">
           <div className="mx-auto w-full lg:w-[90%] text-center">
             <div className="flex flex-wrap justify-center gap-4 mb-8">
               <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-brand-blue/10 text-brand-blue border border-brand-blue/20">
@@ -262,7 +262,7 @@ export default function AboutPage() {
               </span>
             </div>
             
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6">
+            <h1 className="heading-hero leading-tight">
               About Colossus Scaffolding
             </h1>
             
@@ -275,10 +275,10 @@ export default function AboutPage() {
       </section>
 
       {/* Our Story Section */}
-      <section className="py-16 sm:py-20 bg-white">
-        <div className="mx-auto w-full lg:w-[90%] px-6">
+      <section className="section-standard bg-white">
+        <div className="container-standard">
           <div className="mx-auto w-full lg:w-[90%]">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-8 text-center">
+            <h2 className="heading-section mb-8 text-center">
               Our Story
             </h2>
             
@@ -325,10 +325,10 @@ export default function AboutPage() {
       </section>
 
       {/* Track Record Section - Using improved homepage trust indicators */}
-      <section className="py-16 sm:py-20 bg-gradient-to-br from-gray-50 to-gray-100 border-t border-b border-gray-200">
-        <div className="mx-auto w-full lg:w-[90%] px-6">
+      <section className="section-standard bg-gradient-to-br from-gray-50 to-gray-100 border-t border-b border-gray-200">
+        <div className="container-standard">
           <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="heading-section">
               Our Track Record Speaks for Itself
             </h2>
             <p className="text-lg text-gray-600 mx-auto w-full lg:w-[90%]">
@@ -345,7 +345,7 @@ export default function AboutPage() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                   </svg>
                 </div>
-                <div className="text-3xl font-bold text-brand-blue mb-2">15+</div>
+                <div className="stat-number">15+</div>
                 <div className="text-gray-900 font-medium">Years Experience</div>
                 <div className="text-sm text-gray-500 mt-1">Serving the South East</div>
               </div>
@@ -358,7 +358,7 @@ export default function AboutPage() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                   </svg>
                 </div>
-                <div className="text-3xl font-bold text-brand-blue mb-2">500+</div>
+                <div className="stat-number">500+</div>
                 <div className="text-gray-900 font-medium">Projects Completed</div>
                 <div className="text-sm text-gray-500 mt-1">Successful Installations</div>
               </div>
@@ -371,7 +371,7 @@ export default function AboutPage() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </div>
-                <div className="text-3xl font-bold text-brand-blue mb-2">100%</div>
+                <div className="stat-number">100%</div>
                 <div className="text-gray-900 font-medium">CISRS Qualified</div>
                 <div className="text-sm text-gray-500 mt-1">All Scaffolding Teams</div>
               </div>
@@ -384,7 +384,7 @@ export default function AboutPage() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </div>
-                <div className="text-3xl font-bold text-brand-blue mb-2">24/7</div>
+                <div className="stat-number">24/7</div>
                 <div className="text-gray-900 font-medium">Emergency Response</div>
                 <div className="text-sm text-gray-500 mt-1">Available When Needed</div>
               </div>
@@ -394,10 +394,10 @@ export default function AboutPage() {
       </section>
 
       {/* Certifications Section */}
-      <section className="py-16 sm:py-20 bg-white">
-        <div className="mx-auto w-full lg:w-[90%] px-6">
+      <section className="section-standard bg-white">
+        <div className="container-standard">
           <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="heading-section">
               Certifications & Accreditations
             </h2>
             <p className="text-lg text-gray-600 mx-auto w-full lg:w-[90%]">
@@ -451,10 +451,10 @@ export default function AboutPage() {
       </section>
 
       {/* Our Values Section */}
-      <section className="py-16 sm:py-20 bg-gray-50">
-        <div className="mx-auto w-full lg:w-[90%] px-6">
+      <section className="section-standard bg-gray-50">
+        <div className="container-standard">
           <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="heading-section">
               Our Values
             </h2>
             <p className="text-lg text-gray-600 mx-auto w-full lg:w-[90%]">
@@ -509,10 +509,10 @@ export default function AboutPage() {
       </section>
 
       {/* Why Choose Us Section */}
-      <section className="py-16 sm:py-20 bg-white">
-        <div className="mx-auto w-full lg:w-[90%] px-6">
+      <section className="section-standard bg-white">
+        <div className="container-standard">
           <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="heading-section">
               Why Choose Colossus Scaffolding?
             </h2>
             <p className="text-lg text-gray-600 mx-auto w-full lg:w-[90%]">
@@ -548,8 +548,8 @@ export default function AboutPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 sm:py-20 bg-brand-blue text-white">
-        <div className="mx-auto w-full lg:w-[90%] px-6 text-center">
+      <section className="section-standard bg-brand-blue text-white">
+        <div className="container-standard text-center">
           <h2 className="text-3xl sm:text-4xl font-bold mb-6">
             Ready to Work with the South East&apos;s Trusted Scaffolding Specialists?
           </h2>

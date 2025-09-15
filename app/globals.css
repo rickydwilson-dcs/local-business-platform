@@ -23,6 +23,68 @@
   .btn-ghost {
     @apply inline-flex items-center justify-center px-6 py-3 bg-gray-100 text-gray-900 font-semibold rounded-lg transition-all duration-200 hover:bg-gray-200 focus:ring-2 focus:ring-gray-300 focus:ring-offset-2;
   }
+
+  /* Typography System */
+  /* Hero Headings - Large page titles */
+  .heading-hero {
+    @apply text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6;
+  }
+
+  /* Section Headings - Main section titles */
+  .heading-section {
+    @apply text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4;
+  }
+
+  /* Subsection Headings - Secondary section titles */
+  .heading-subsection {
+    @apply text-3xl font-bold text-gray-900 mb-4;
+  }
+
+  /* Card Headings - Component/card titles */
+  .heading-card {
+    @apply text-xl sm:text-2xl font-bold text-gray-900 mb-4;
+  }
+
+  /* Small Card Headings - Compact card titles */
+  .heading-card-sm {
+    @apply text-lg font-bold text-gray-900 mb-1;
+  }
+
+  /* Statistics Numbers - Large branded numbers */
+  .stat-number {
+    @apply text-3xl font-bold text-brand-blue mb-2;
+  }
+
+  /* Subtitle Text - Supporting text under headings */
+  .text-subtitle {
+    @apply text-lg sm:text-xl text-gray-600;
+  }
+
+  /* Body Text Large - Prominent body text */
+  .text-body-lg {
+    @apply text-lg text-gray-600 leading-relaxed;
+  }
+
+  /* Section Layout System */
+  /* Standard Section - Default section spacing */
+  .section-standard {
+    @apply py-16 sm:py-20;
+  }
+
+  /* Compact Section - Reduced spacing for dense layouts */
+  .section-compact {
+    @apply py-12 sm:py-16;
+  }
+
+  /* Standard Container - Responsive container with max width */
+  .container-standard {
+    @apply mx-auto w-full lg:w-[90%] px-6;
+  }
+
+  /* Section Header - Centered headers with consistent spacing */
+  .section-header {
+    @apply text-center mb-12 sm:mb-16;
+  }
 }
 
 /* Fix Lighthouse warning: Ensure h1 elements have consistent font-size in semantic elements */
