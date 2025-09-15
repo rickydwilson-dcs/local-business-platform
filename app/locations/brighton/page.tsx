@@ -8,7 +8,6 @@ import { PricingPackages } from "@/components/ui/pricing-packages"
 import { LocalAuthorityExpertise } from "@/components/ui/local-authority-expertise"
 import { LocationFAQ } from "@/components/ui/location-faq"
 import { CTASection } from "@/components/ui/cta-section"
-import { CustomFooter } from "@/components/ui/custom-footer"
 import Breadcrumbs from "@/components/ui/breadcrumbs"
 
 export const metadata: Metadata = {
