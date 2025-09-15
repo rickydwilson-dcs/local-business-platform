@@ -9,10 +9,32 @@ import { LocalAuthorityExpertise } from "@/components/ui/local-authority-experti
 import { LocationFAQ } from "@/components/ui/location-faq"
 import { CTASection } from "@/components/ui/cta-section"
 import Breadcrumbs from "@/components/ui/breadcrumbs"
+import Schema from "@/components/Schema"
 
 export const metadata: Metadata = {
   title: "Brighton Scaffolding Services | Colossus Scaffolding",
-  description: "Professional scaffolding in Brighton - seafront projects, Victorian terraces, commercial developments. TG20:21 compliant, fully insured. Free quotes 24/7."
+  description: "Professional scaffolding in Brighton - seafront projects, Victorian terraces, commercial developments. TG20:21 compliant, fully insured. Free quotes 24/7.",
+  keywords: "scaffolding brighton, brighton scaffolding hire, scaffolders in brighton, seafront scaffolding, victorian terrace scaffolding, heritage scaffolding brighton",
+  openGraph: {
+    title: "Professional Scaffolding Services in Brighton | Colossus Scaffolding",
+    description: "Expert scaffolding for Brighton's unique architectural challenges. From Victorian terraces to modern seafront developments. TG20:21 compliant, fully insured.",
+    url: "https://colossus-scaffolding.vercel.app/locations/brighton",
+    siteName: "Colossus Scaffolding",
+    images: [
+      {
+        url: "https://colossus-scaffolding.vercel.app/brighton-scaffolding.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Professional scaffolding services in Brighton - Victorian terraces and seafront properties"
+      }
+    ],
+    type: "website"
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Professional Scaffolding Services in Brighton | Colossus Scaffolding",
+    description: "Expert scaffolding for Brighton's unique architectural challenges. From Victorian terraces to modern seafront developments."
+  }
 }
 
 export default function BrightonPage() {
@@ -371,6 +393,18 @@ export default function BrightonPage() {
 
         <CTASection {...brightonCTA} />
       </div>
+      <Schema
+        service={{
+          id: "brighton-scaffolding",
+          name: "Brighton Scaffolding Services",
+          description: "Professional scaffolding services in Brighton covering seafront properties, Victorian terraces, and modern developments. TG20:21 compliant with full insurance coverage.",
+          url: "/locations/brighton",
+          serviceType: "Scaffolding Services",
+          areaServed: ["Brighton", "Brighton & Hove", "Hove", "Rottingdean", "Saltdean"]
+        }}
+        faqs={brightonFAQs.items}
+        breadcrumbs={breadcrumbs.map(b => ({ name: b.name, url: b.href }))}
+      />
     </PageLayout>
   )
 }
