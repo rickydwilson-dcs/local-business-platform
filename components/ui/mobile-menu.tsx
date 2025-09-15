@@ -28,7 +28,7 @@ export default function MobileMenu({ phoneNumber }: MobileMenuProps) {
           e.stopPropagation();
           toggleMenu();
         }}
-        className="lg:hidden p-2 rounded-md hover:bg-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-brand-blue"
+        className="lg:hidden p-2 rounded-md hover:bg-gray-200 transition-colors focus:outline-none focus:ring-2 focus:ring-brand-blue"
         aria-label="Toggle mobile menu"
         aria-expanded={isOpen}
         type="button"
