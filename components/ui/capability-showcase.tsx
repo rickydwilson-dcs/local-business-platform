@@ -15,15 +15,13 @@ interface CapabilityShowcaseProps {
   description?: string
   capabilities: CapabilityItem[]
   backgroundColor?: 'white' | 'gray'
-  showCTA?: boolean
 }
 
 export function CapabilityShowcase({
   title,
   description,
   capabilities,
-  backgroundColor = 'white',
-  showCTA = true
+  backgroundColor = 'white'
 }: CapabilityShowcaseProps) {
   const bgClass = backgroundColor === 'white' ? 'bg-white' : 'bg-gray-50'
 
