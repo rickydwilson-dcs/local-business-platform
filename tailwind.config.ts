@@ -11,8 +11,8 @@ const config: Config = {
     extend: {
       colors: {
         brand: {
-          blue: '#4DB2E4',
-          'blue-hover': '#4197C2',
+          blue: '#1A365D',
+          'blue-hover': '#2C5282',
           black: '#000000',
           white: '#FFFFFF',
         },
