@@ -116,7 +116,7 @@ export function PricingPackages({ title, description, packages }: PricingPackage
                   className={`inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all h-9 px-4 py-2 w-full ${
                     pkg.popular
                       ? 'bg-brand-blue text-white hover:bg-brand-blue-hover'
-                      : 'border bg-white shadow-xs hover:bg-gray-50 text-gray-900'
+                      : 'border bg-white shadow-xs hover:bg-gray-200 text-gray-900'
                   }`}
                 >
                   {pkg.ctaText}
@@ -142,7 +142,7 @@ export function PricingPackages({ title, description, packages }: PricingPackage
               </Link>
               <Link
                 href="tel:01424466661"
-                className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all border shadow-xs hover:bg-gray-50 h-9 px-8 py-3 bg-transparent text-gray-900"
+                className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all border shadow-xs hover:bg-gray-200 h-9 px-8 py-3 bg-transparent text-gray-900"
               >
                 <PhoneIcon />
                 Call 01424 466661
