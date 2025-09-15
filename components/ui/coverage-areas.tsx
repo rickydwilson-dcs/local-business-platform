@@ -33,10 +33,10 @@ export function CoverageAreas({
       <div className="mx-auto w-full lg:w-[90%] px-6">
         <div className="grid lg:grid-cols-3 gap-12">
           <div className="lg:col-span-2">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">
+            <h2 className="heading-section mb-6">
               {title}
             </h2>
-            <p className="text-lg text-gray-600 mb-8 leading-relaxed">
+            <p className="text-body-lg mb-8">
               {description}
             </p>
             

@@ -19,15 +19,15 @@ interface AlternatingServicesProps {
 
 export function AlternatingServices({ title, description, services }: AlternatingServicesProps) {
   return (
-    <section className="py-16 sm:py-20 bg-white">
-      <div className="mx-auto w-full lg:w-[90%] px-6">
+    <section className="section-standard bg-white">
+      <div className="container-standard">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          <h2 className="heading-section">
             {title}
           </h2>
           {description && (
-            <p className="text-lg sm:text-xl text-gray-600 mx-auto max-w-3xl">
+            <p className="text-subtitle mx-auto max-w-3xl">
               {description}
             </p>
           )}
@@ -59,10 +59,10 @@ export function AlternatingServices({ title, description, services }: Alternatin
                 {/* Content Section */}
                 <div className="w-full lg:w-1/2 space-y-6">
                   <div>
-                    <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 mb-4">
+                    <h3 className="heading-card">
                       {service.title}
                     </h3>
-                    <p className="text-lg text-gray-600 leading-relaxed">
+                    <p className="text-body-lg">
                       {service.description}
                     </p>
                   </div>

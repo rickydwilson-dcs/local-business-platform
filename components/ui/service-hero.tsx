@@ -37,7 +37,7 @@ export function ServiceHero(props: ServiceHeroProps) {
               </div>
             )}
 
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
+            <h1 className="heading-hero">
               {title}
             </h1>
 

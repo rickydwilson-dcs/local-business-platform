@@ -48,11 +48,11 @@ export function CapabilityShowcase({
       <div className="mx-auto w-full lg:w-[90%] px-6">
         {/* Section Header */}
         <div className="text-center mb-12 sm:mb-16">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          <h2 className="heading-section">
             {title}
           </h2>
           {description && (
-            <p className="text-lg sm:text-xl text-gray-600 mx-auto max-w-4xl">
+            <p className="text-subtitle mx-auto max-w-4xl">
               {description}
             </p>
           )}
@@ -77,7 +77,7 @@ export function CapabilityShowcase({
               {/* Content */}
               <div className="pt-2">
                 <div className="mb-4">
-                  <h3 className="text-lg font-bold text-gray-900 mb-1">
+                  <h3 className="heading-card-sm">
                     {capability.title}
                   </h3>
                   <p className="text-sm text-brand-blue font-medium">

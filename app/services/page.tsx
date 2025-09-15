@@ -28,7 +28,7 @@ export default async function ServicesPage() {
       <section className="py-16 sm:py-20 lg:py-24 bg-white">
         <div className="mx-auto w-full lg:w-[90%] px-6">
           <div className="mx-auto w-full lg:w-[90%] text-center">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
+            <h1 className="heading-hero">
               Our Scaffolding Services
             </h1>
             <p className="text-xl text-gray-600 mb-8 mx-auto w-full lg:w-[90%]">
@@ -90,7 +90,7 @@ export default async function ServicesPage() {
       {/* Call to Action */}
       <section className="py-16 bg-white">
         <div className="mx-auto w-full lg:w-[90%] px-6 text-center">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">
+          <h2 className="heading-subsection">
             Need a Custom Solution?
           </h2>
           <p className="text-xl text-gray-600 mb-8">

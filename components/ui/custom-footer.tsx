@@ -20,7 +20,7 @@ export function CustomFooter({
       {/* Main CTA Section */}
       <section className="py-16 sm:py-20 bg-brand-blue">
         <div className="mx-auto w-full lg:w-[90%] px-6 text-center">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4">
+          <h2 className="heading-section text-white">
             {ctaText}
           </h2>
           <p className="text-xl text-blue-100 mb-8 max-w-3xl mx-auto">

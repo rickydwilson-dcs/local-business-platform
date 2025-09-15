@@ -356,7 +356,7 @@ export default function ServiceAbout({ serviceName, slug }: ServiceAboutProps) {
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">
               Professional {serviceName} Services Across the South East
             </h2>
-            <p className="text-lg text-gray-600 mb-8 leading-relaxed">
+            <p className="text-body-lg mb-8">
               {content.whatIs}
             </p>
             

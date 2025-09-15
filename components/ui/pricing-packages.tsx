@@ -47,7 +47,7 @@ export function PricingPackages({ title, description, packages }: PricingPackage
     <section className="py-16 bg-gray-50">
       <div className="mx-auto w-full lg:w-[90%] px-6">
         <div className="text-center mb-12">
-          <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+          <h2 className="heading-section">
             {title}
           </h2>
           {description && (

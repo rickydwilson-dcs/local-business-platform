@@ -19,11 +19,11 @@ export function ServiceFAQ({
       <div className="mx-auto w-full lg:w-[90%] px-6">
         <div className="mx-auto w-full lg:w-[90%]">
           <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="heading-section">
               {title}
             </h2>
             {description && (
-              <p className="text-lg text-gray-600 leading-relaxed">
+              <p className="text-body-lg">
                 {description}
               </p>
             )}
