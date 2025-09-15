@@ -26,16 +26,16 @@ export default async function LocationsPage() {
     <>
       {/* Breadcrumbs */}
       <div className="bg-gray-50 border-b">
-        <div className="mx-auto w-full lg:w-[90%] px-6 py-4">
+        <div className="container-standard py-4">
           <Breadcrumbs items={breadcrumbItems} />
         </div>
       </div>
 
       <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100">
       {/* Hero Section */}
-      <section className="py-16 sm:py-20 lg:py-24 bg-white">
-        <div className="mx-auto w-full lg:w-[90%] px-6">
-          <div className="mx-auto w-full lg:w-[90%] text-center">
+      <section className="section-standard lg:py-24 bg-white">
+        <div className="container-standard">
+          <div className="text-center">
             <h1 className="heading-hero">
               Areas We Serve
             </h1>
@@ -77,9 +77,9 @@ export default async function LocationsPage() {
       </section>
 
       {/* Coverage Map */}
-      <section className="py-16 bg-white">
-        <div className="mx-auto w-full lg:w-[90%] px-6">
-          <div className="mx-auto w-full lg:w-[90%] text-center mb-12">
+      <section className="section-compact bg-white">
+        <div className="container-standard">
+          <div className="section-header">
             <h2 className="heading-subsection">Our Coverage Area</h2>
             <p className="text-lg text-gray-600">
               Serving the South East UK with professional scaffolding services and local expertise
@@ -100,8 +100,8 @@ export default async function LocationsPage() {
       </section>
 
       {/* Location Cards */}
-      <section className="py-16 sm:py-20">
-        <div className="mx-auto w-full lg:w-[90%] px-6">
+      <section className="section-standard">
+        <div className="container-standard">
           <ContentGrid
             items={locations}
             basePath="/locations"
@@ -113,9 +113,9 @@ export default async function LocationsPage() {
       </section>
 
       {/* Service Highlights */}
-      <section className="py-16 bg-white">
-        <div className="mx-auto w-full lg:w-[90%] px-6">
-          <div className="mx-auto w-full lg:w-[90%]">
+      <section className="section-compact bg-white">
+        <div className="container-standard">
+          <div className="max-w-4xl mx-auto">
             <h2 className="heading-subsection mb-12 text-center">
               Why Choose Our Regional Service?
             </h2>

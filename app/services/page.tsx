@@ -18,16 +18,16 @@ export default async function ServicesPage() {
     <>
       {/* Breadcrumbs */}
       <div className="bg-gray-50 border-b">
-        <div className="mx-auto w-full lg:w-[90%] px-6 py-4">
+        <div className="container-standard py-4">
           <Breadcrumbs items={breadcrumbItems} />
         </div>
       </div>
 
       <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100">
       {/* Hero Section */}
-      <section className="py-16 sm:py-20 lg:py-24 bg-white">
-        <div className="mx-auto w-full lg:w-[90%] px-6">
-          <div className="mx-auto w-full lg:w-[90%] text-center">
+      <section className="section-standard lg:py-24 bg-white">
+        <div className="container-standard">
+          <div className="text-center">
             <h1 className="heading-hero">
               Our Scaffolding Services
             </h1>
@@ -75,8 +75,8 @@ export default async function ServicesPage() {
       </section>
 
       {/* Services Grid */}
-      <section className="py-16 sm:py-20">
-        <div className="mx-auto w-full lg:w-[90%] px-6">
+      <section className="section-standard">
+        <div className="container-standard">
           <ContentGrid
             items={services}
             basePath="/services"
@@ -88,8 +88,8 @@ export default async function ServicesPage() {
       </section>
 
       {/* Call to Action */}
-      <section className="py-16 bg-white">
-        <div className="mx-auto w-full lg:w-[90%] px-6 text-center">
+      <section className="section-compact bg-white">
+        <div className="container-standard text-center">
           <h2 className="heading-subsection">
             Need a Custom Solution?
           </h2>

@@ -25,8 +25,8 @@ export function HeroSection(props: HeroSectionProps) {
   } = props;
 
   return (
-    <section className="py-16 sm:py-20 lg:py-24 bg-white">
-      <div className="mx-auto w-full lg:w-[90%] px-6">
+    <section className="section-standard lg:py-24 bg-white">
+      <div className="container-standard">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
             <h1 className="heading-hero">

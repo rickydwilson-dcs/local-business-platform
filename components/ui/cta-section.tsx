@@ -18,12 +18,12 @@ export function CTASection({
   trustBadges = ["TG20:21 Compliant", "CHAS Accredited", "£10M Insured"]
 }: CTASectionProps) {
   return (
-    <section className="py-16 sm:py-20 bg-brand-blue text-white">
-      <div className="mx-auto w-full lg:w-[90%] px-6 text-center">
+    <section className="section-standard bg-brand-blue text-white">
+      <div className="container-standard text-center">
         <h2 className="text-3xl sm:text-4xl font-bold mb-6">
           {title}
         </h2>
-        <p className="text-xl mb-8 mx-auto w-full lg:w-[90%] opacity-90 leading-relaxed">
+        <p className="text-xl mb-8 mx-auto max-w-4xl opacity-90 leading-relaxed">
           {description}
         </p>
 

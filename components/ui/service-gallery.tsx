@@ -17,8 +17,8 @@ export function ServiceGallery({
   const displayImages = images.length > 0 ? images : Array(placeholderCount).fill(null);
 
   return (
-    <section className="py-16 sm:py-20 bg-white">
-      <div className="mx-auto w-full lg:w-[90%] px-6">
+    <section className="section-standard bg-white">
+      <div className="container-standard">
         <div className="mx-auto w-full lg:w-[90%] text-center mb-12">
           <h2 className="heading-section">
             {title}

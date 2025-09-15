@@ -20,9 +20,9 @@ export function LocationServices({
   location
 }: LocationServicesProps) {
   return (
-    <section className="py-16 sm:py-20 bg-gray-50">
-      <div className="mx-auto w-full lg:w-[90%] px-6">
-        <div className="mx-auto w-full lg:w-[90%] text-center mb-12">
+    <section className="section-standard bg-gray-50">
+      <div className="container-standard">
+        <div className="section-header">
           <h2 className="heading-section">
             {title} in {location}
           </h2>

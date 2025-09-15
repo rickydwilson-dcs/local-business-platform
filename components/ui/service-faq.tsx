@@ -15,10 +15,10 @@ export function ServiceFAQ({
   description = "Get answers to common questions about our services and processes."
 }: ServiceFAQProps) {
   return (
-    <section className="py-16 sm:py-20 bg-gray-50">
-      <div className="mx-auto w-full lg:w-[90%] px-6">
+    <section className="section-standard bg-gray-50">
+      <div className="container-standard">
         <div className="mx-auto w-full lg:w-[90%]">
-          <div className="text-center mb-12">
+          <div className="section-header">
             <h2 className="heading-section">
               {title}
             </h2>

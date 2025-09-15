@@ -44,10 +44,10 @@ export function ServiceCards({
   }
 
   return (
-    <section className={`py-16 sm:py-20 ${bgClass}`}>
-      <div className="mx-auto w-full lg:w-[90%] px-6">
+    <section className={`section-standard ${bgClass}`}>
+      <div className="container-standard">
         {/* Section Header */}
-        <div className="text-center mb-12 sm:mb-16">
+        <div className="section-header">
           <h2 className="heading-section">
             {title}
           </h2>
@@ -59,7 +59,7 @@ export function ServiceCards({
         </div>
 
         {/* Cards Grid */}
-        <div className={`grid ${getGridClass(cards.length)} gap-6 lg:gap-8`}>
+        <div className={`grid-responsive ${getGridClass(cards.length)}`}>
           {cards.map((card, index) => {
             const isEven = index % 2 === 0
 
