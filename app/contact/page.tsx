@@ -56,8 +56,6 @@ export default function ContactPage() {
     'West Sussex',
     'Kent',
     'Surrey',
-    'London',
-    'Essex',
     'Other'
   ];
 
@@ -372,7 +370,7 @@ export default function ContactPage() {
                 <div>
                   <h3 className="font-semibold text-gray-900 mb-2">📍 Service Areas</h3>
                   <p className="text-gray-700">
-                    East Sussex, West Sussex, Kent, Surrey, London & Essex
+                    East Sussex, West Sussex, Kent & Surrey
                   </p>
                   <p className="text-sm text-gray-600">
                     <Link href="/locations" className="text-brand-blue hover:underline">
@@ -463,7 +461,7 @@ export default function ContactPage() {
           name: "Contact Colossus Scaffolding",
           description: "Get in touch for scaffolding quotes, site surveys, and general enquiries across the South East UK.",
           serviceType: "Contact",
-          areaServed: ["South East UK", "East Sussex", "West Sussex", "Kent", "Surrey", "London", "Essex"]
+          areaServed: ["South East UK", "East Sussex", "West Sussex", "Kent", "Surrey"]
         }}
         org={{
           name: "Colossus Scaffolding",

@@ -37,8 +37,6 @@ function getServiceFAQs(serviceName: string): Array<{ question: string; answer: 
     { locations: "Crawley, Horsham, Worthing", county: "West Sussex" },
     { locations: "Maidstone, Canterbury, Ashford", county: "Kent" },
     { locations: "Guildford, Woking, Croydon", county: "Surrey" },
-    { locations: "Chelmsford, Colchester, Southend", county: "Essex" },
-    { locations: "Westminster, Camden, Southwark", county: "London" }
   ];
 
   return locationGroups.map(group => ({
@@ -431,7 +429,7 @@ export default async function Page(
           name: serviceData.title,
           description: serviceData.description,
           serviceType: serviceName,
-          areaServed: ["East Sussex", "West Sussex", "Kent", "Surrey", "Essex", "London"]
+          areaServed: ["East Sussex", "West Sussex", "Kent", "Surrey"]
         }}
         org={{
           name: "Colossus Scaffolding",

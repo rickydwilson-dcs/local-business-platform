@@ -67,8 +67,6 @@ export default function HomePage() {
       { "@type": "Place", name: "West Sussex" },
       { "@type": "Place", name: "Kent" },
       { "@type": "Place", name: "Surrey" },
-      { "@type": "Place", name: "Essex" },
-      { "@type": "Place", name: "London" }
     ],
     hasCredential: [
       {
@@ -228,8 +226,6 @@ export default function HomePage() {
             { name: "West Sussex", slug: "west-sussex" },
             { name: "Kent", slug: "kent" },
             { name: "Surrey", slug: "surrey" },
-            { name: "London", slug: "london" },
-            { name: "Essex", slug: "essex" }
           ]}
           phone="01424 466661"
         />

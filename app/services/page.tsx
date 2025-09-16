@@ -121,7 +121,7 @@ export default async function ServicesPage() {
           name: "Scaffolding Services",
           description: "Professional scaffolding solutions across the South East UK. TG20:21 compliant, fully insured, and CHAS accredited.",
           serviceType: "Scaffolding Services",
-          areaServed: ["South East UK", "East Sussex", "West Sussex", "Kent", "Surrey", "London"]
+          areaServed: ["South East UK", "East Sussex", "West Sussex", "Kent", "Surrey"]
         }}
         org={{
           name: "Colossus Scaffolding",
@@ -143,7 +143,7 @@ export default async function ServicesPage() {
           },
           {
             question: "Which areas do you serve?",
-            answer: "We serve the South East UK including East Sussex, West Sussex, Kent, Surrey, and London."
+            answer: "We serve the South East UK including East Sussex, West Sussex, Kent, and Surrey."
           },
           {
             question: "Do you provide free quotes?",
