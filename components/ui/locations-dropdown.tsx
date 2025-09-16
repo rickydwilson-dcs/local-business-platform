@@ -60,16 +60,16 @@ export function LocationsDropdown() {
 
       {/* Dropdown Menu */}
       {isOpen && (
-        <div className="absolute top-full left-0 mt-2 w-[800px] bg-white border border-gray-200 rounded-lg shadow-xl z-50">
-          <div className="p-6">
+        <div className="absolute top-full left-0 mt-2 w-[900px] max-w-[90vw] bg-white border border-gray-200 rounded-lg shadow-xl z-50">
+          <div className="p-4 md:p-6">
             {/* Header */}
-            <div className="mb-6">
+            <div className="mb-4 md:mb-6">
               <h3 className="text-lg font-semibold text-gray-900 mb-2">Our Coverage Areas</h3>
               <p className="text-sm text-gray-600">Professional scaffolding services across the South East</p>
             </div>
 
             {/* Counties Grid */}
-            <div className="grid grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 xl:gap-8">
               {counties.map((county) => (
                 <div key={county.slug} className="space-y-3">
                   {/* County Header */}
@@ -107,8 +107,8 @@ export function LocationsDropdown() {
             </div>
 
             {/* Footer */}
-            <div className="mt-8 pt-6 border-t border-gray-200">
-              <div className="flex items-center justify-between">
+            <div className="mt-6 md:mt-8 pt-4 md:pt-6 border-t border-gray-200">
+              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 md:gap-0">
                 <div>
                   <p className="text-sm text-gray-600">
                     Can't find your area? We cover the entire South East region.
