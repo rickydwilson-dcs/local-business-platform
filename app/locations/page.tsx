@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { getAllCounties } from "@/lib/locations-dropdown";
 import { absUrl } from "@/lib/site";
+import { PageLayout } from "@/components/layouts/page-layout";
 import Breadcrumbs from "@/components/ui/breadcrumbs";
 import { CoverageStatsSection } from "@/components/ui/coverage-stats-section";
 import { TownFinderSection } from "@/components/ui/town-finder-section";
@@ -106,29 +107,30 @@ export default function LocationsPage() {
   };
 
   return (
-    <>
-      {/* Schema Markup */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(organizationSchema)
-        }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(breadcrumbSchema)
-        }}
-      />
+    <PageLayout>
+      <div className="relative -mt-10 -mx-6 lg:-mx-6">
+        {/* Schema Markup */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(organizationSchema)
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(breadcrumbSchema)
+          }}
+        />
 
-      {/* Breadcrumbs */}
-      <div className="bg-gray-50 border-b">
-        <div className="container-standard py-4">
-          <Breadcrumbs items={breadcrumbItems} />
+        {/* Breadcrumbs */}
+        <div className="bg-gray-50 border-b">
+          <div className="container-standard py-4">
+            <Breadcrumbs items={breadcrumbItems} />
+          </div>
         </div>
-      </div>
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100">
+        <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100">
         {/* Hero Section */}
         <section className="section-standard lg:py-24 bg-white">
           <div className="container-standard">
@@ -222,8 +224,8 @@ export default function LocationsPage() {
             </div>
           </div>
         </section>
+        </div>
       </div>
-
-    </>
+    </PageLayout>
   );
 }
