@@ -1,5 +1,7 @@
 'use client';
 
+import { CoverageMap } from '@/components/ui/coverage-map';
+
 export function CoverageMapSection() {
   return (
     <section className="section-standard bg-gradient-to-br from-gray-50 to-gray-100">
@@ -9,45 +11,43 @@ export function CoverageMapSection() {
             Interactive Coverage Map
           </h2>
           <p className="text-lg text-gray-600 mx-auto w-full lg:w-[85%]">
-            Explore our comprehensive coverage across the South East. Click on any town to learn about our local specialists and area expertise.
+            Explore our comprehensive coverage across the South East. Click on any town marker to learn about our local specialists and area expertise.
           </p>
         </div>
 
-        {/* Map Container - Ready for Leaflet.js integration */}
-        <div className="relative bg-white rounded-2xl shadow-sm border border-gray-200 p-8">
-          <div className="h-96 bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl flex items-center justify-center">
-            <div className="text-center">
-              <div className="w-16 h-16 bg-brand-blue/10 rounded-xl flex items-center justify-center mx-auto mb-4">
-                <svg className="w-8 h-8 text-brand-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                South East Coverage Map
-              </h3>
-              <p className="text-gray-600 mb-4">
-                Interactive map showing our 30+ towns across 4 counties
-              </p>
-              <div className="text-sm text-gray-500">
-                Map integration coming soon - use the town finder above to locate your area
-              </div>
-            </div>
-          </div>
+        {/* Interactive Map */}
+        <div className="relative bg-white rounded-2xl shadow-sm border border-gray-200 p-4 md:p-8">
+          <CoverageMap height="h-[500px] md:h-96" />
 
           {/* Map Legend */}
           <div className="mt-6 flex flex-wrap justify-center gap-4 text-sm">
             <div className="flex items-center gap-2">
-              <div className="w-3 h-3 bg-brand-blue rounded-full"></div>
-              <span className="text-gray-600">Specialist Coverage Towns</span>
+              <div className="w-3 h-3 bg-blue-600 rounded-full"></div>
+              <span className="text-gray-600">East Sussex</span>
             </div>
             <div className="flex items-center gap-2">
-              <div className="w-3 h-3 bg-gray-400 rounded-full"></div>
-              <span className="text-gray-600">County Overview Areas</span>
+              <div className="w-3 h-3 bg-emerald-600 rounded-full"></div>
+              <span className="text-gray-600">West Sussex</span>
             </div>
             <div className="flex items-center gap-2">
-              <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-              <span className="text-gray-600">Heritage Specialists</span>
+              <div className="w-3 h-3 bg-red-600 rounded-full"></div>
+              <span className="text-gray-600">Kent</span>
             </div>
+            <div className="flex items-center gap-2">
+              <div className="w-3 h-3 bg-purple-600 rounded-full"></div>
+              <span className="text-gray-600">Surrey</span>
+            </div>
+            <div className="flex items-center gap-2 ml-4">
+              <div className="w-3 h-3 bg-yellow-400 rounded-full"></div>
+              <span className="text-gray-600">Specialist Coverage</span>
+            </div>
+          </div>
+
+          {/* Mobile Map Instructions */}
+          <div className="mt-4 text-center md:hidden">
+            <p className="text-sm text-gray-500">
+              Tap any marker to view town details • Pinch to zoom • Drag to explore
+            </p>
           </div>
         </div>
 
