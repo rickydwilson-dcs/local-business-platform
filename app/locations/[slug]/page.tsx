@@ -2,7 +2,6 @@ import path from "path";
 import { promises as fs } from "fs";
 import type { Metadata } from "next";
 import matter from "gray-matter";
-import { MDXRemote } from "next-mdx-remote/rsc";
 
 import { PageLayout } from "@/components/layouts/page-layout";
 import { HeroSection } from "@/components/ui/hero-section";
@@ -36,22 +35,12 @@ async function getMDXContent(slug: string) {
     const raw = await fs.readFile(filePath, "utf8");
     const { data: frontmatter, content } = matter(raw);
     return { frontmatter, content, hasMDX: true };
-  } catch (error) {
+  } catch {
     // No MDX file found, will fallback to centralized data
     return { frontmatter: null, content: null, hasMDX: false };
   }
 }
 
-// Check if MDX file exists
-async function hasMDXFile(slug: string): Promise<boolean> {
-  try {
-    const filePath = path.join(DIR, `${slug}.mdx`);
-    await fs.access(filePath);
-    return true;
-  } catch {
-    return false;
-  }
-}
 
 export async function generateStaticParams() {
   // Generate params from both MDX files and centralized location data
@@ -155,7 +144,7 @@ export default async function Page(
   { params }: { params: Promise<Params> }
 ) {
   const { slug } = await params;
-  const { frontmatter, content, hasMDX } = await getMDXContent(slug);
+  const { frontmatter, hasMDX } = await getMDXContent(slug);
 
   // If we have MDX content, render it with Brighton-style components
   if (hasMDX && frontmatter) {
@@ -252,7 +241,7 @@ export default async function Page(
           <Schema
             service={schemaData.service}
             faqs={faqData}
-            breadcrumbs={breadcrumbData.map((b: any) => ({ name: b.name, url: b.href }))}
+            breadcrumbs={breadcrumbData.map((b: { name: string; href: string }) => ({ name: b.name, url: b.href }))}
           />
         )}
       </PageLayout>

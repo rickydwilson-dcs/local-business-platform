@@ -59,13 +59,6 @@ const RICH_TOWN_PAGES: LocationItem[] = [
   { name: "Camberley", slug: "camberley", href: "/locations/camberley", isRichContent: true },
 ];
 
-// County overview pages
-const COUNTY_PAGES: LocationItem[] = [
-  { name: "East Sussex", slug: "east-sussex", href: "/locations/east-sussex" },
-  { name: "West Sussex", slug: "west-sussex", href: "/locations/west-sussex" },
-  { name: "Kent", slug: "kent", href: "/locations/kent" },
-  { name: "Surrey", slug: "surrey", href: "/locations/surrey" },
-];
 
 // Organized dropdown structure
 export const LOCATIONS_DROPDOWN: County[] = [
