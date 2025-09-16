@@ -3,6 +3,7 @@ import Link from "next/link";
 import "./globals.css";
 import type { Metadata } from "next";
 import MobileMenu from "@/components/ui/mobile-menu";
+import { LocationsDropdown } from "@/components/ui/locations-dropdown";
 
 export const metadata: Metadata = {
   metadataBase: new URL(
@@ -43,9 +44,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <Link href="/services" className="text-slate-700 hover:text-brand-blue transition-colors">
                 Services
               </Link>
-              <Link href="/locations" className="text-slate-700 hover:text-brand-blue transition-colors">
-                Locations
-              </Link>
+              <LocationsDropdown />
               <Link href="/about" className="text-slate-700 hover:text-brand-blue transition-colors">
                 About
               </Link>

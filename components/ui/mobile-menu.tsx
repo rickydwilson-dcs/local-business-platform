@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { getAllCounties } from '@/lib/locations-dropdown';
 
 interface MobileMenuProps {
   phoneNumber: string;
@@ -10,13 +11,24 @@ interface MobileMenuProps {
 
 export default function MobileMenu({ phoneNumber }: MobileMenuProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const [locationsExpanded, setLocationsExpanded] = useState(false);
+  const counties = getAllCounties();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
+    // Reset locations when closing menu
+    if (isOpen) {
+      setLocationsExpanded(false);
+    }
   };
 
   const closeMenu = () => {
     setIsOpen(false);
+    setLocationsExpanded(false);
+  };
+
+  const toggleLocations = () => {
+    setLocationsExpanded(!locationsExpanded);
   };
 
   return (
@@ -102,13 +114,58 @@ export default function MobileMenu({ phoneNumber }: MobileMenuProps) {
           >
             Services
           </Link>
-          <Link
-            href="/locations"
-            onClick={closeMenu}
-            className="mobile-menu-link"
-          >
-            Locations
-          </Link>
+
+          {/* Locations Expandable Section */}
+          <div className="mobile-menu-locations">
+            <button
+              onClick={toggleLocations}
+              className="mobile-menu-link w-full flex items-center justify-between"
+            >
+              Locations
+              <svg
+                className={`w-5 h-5 transition-transform ${locationsExpanded ? 'rotate-180' : ''}`}
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+
+            {locationsExpanded && (
+              <div className="mobile-menu-locations-content">
+                {counties.map((county) => (
+                  <div key={county.slug} className="mobile-menu-county">
+                    <Link
+                      href={county.href}
+                      onClick={closeMenu}
+                      className="mobile-menu-county-link"
+                    >
+                      {county.name}
+                    </Link>
+                    <div className="mobile-menu-towns">
+                      {county.towns.slice(0, 4).map((town) => (
+                        <Link
+                          key={town.slug}
+                          href={town.href}
+                          onClick={closeMenu}
+                          className={`mobile-menu-town-link ${
+                            town.isRichContent ? 'rich-content' : ''
+                          }`}
+                        >
+                          {town.name}
+                          {town.isRichContent && (
+                            <span className="rich-indicator" />
+                          )}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
           <Link
             href="/about"
             onClick={closeMenu}

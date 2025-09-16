@@ -189,6 +189,39 @@
   .mobile-menu-cta {
     @apply block w-full bg-brand-blue text-white text-center py-4 px-6 rounded-lg hover:bg-brand-blue-hover transition-colors font-bold text-lg;
   }
+
+  /* Mobile Menu Locations Expandable Section */
+  .mobile-menu-locations {
+    @apply w-full;
+  }
+
+  .mobile-menu-locations-content {
+    @apply mt-4 space-y-6 pl-4 border-l-2 border-gray-200;
+  }
+
+  .mobile-menu-county {
+    @apply space-y-3;
+  }
+
+  .mobile-menu-county-link {
+    @apply block text-lg font-semibold text-brand-blue hover:text-brand-blue-hover transition-colors;
+  }
+
+  .mobile-menu-towns {
+    @apply space-y-2 pl-4;
+  }
+
+  .mobile-menu-town-link {
+    @apply block text-base text-slate-600 hover:text-slate-800 transition-colors py-1;
+  }
+
+  .mobile-menu-town-link.rich-content {
+    @apply text-slate-800 font-medium;
+  }
+
+  .mobile-menu-town-link .rich-indicator {
+    @apply inline-block w-1.5 h-1.5 bg-brand-blue rounded-full ml-2;
+  }
 }
 
 /* Fix Lighthouse warning: Ensure h1 elements have consistent font-size in semantic elements */
