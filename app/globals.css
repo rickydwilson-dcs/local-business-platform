@@ -132,7 +132,7 @@
 
   /* Mobile Menu Full Screen Overlay */
   .mobile-menu-overlay {
-    @apply fixed inset-0 bg-white z-50 transition-transform duration-300 ease-in-out lg:hidden;
+    @apply fixed inset-0 bg-white z-50 transition-transform duration-300 ease-in-out lg:hidden flex flex-col;
   }
 
   .mobile-menu-overlay.closed {
@@ -155,7 +155,7 @@
 
   /* Mobile Menu Navigation */
   .mobile-menu-nav {
-    @apply flex flex-col px-6 py-12 space-y-8;
+    @apply flex flex-col px-6 py-12 space-y-8 flex-1 overflow-y-auto;
   }
 
   /* Mobile Menu Nav Links */
@@ -165,7 +165,7 @@
 
   /* Mobile Menu Bottom Section */
   .mobile-menu-bottom {
-    @apply absolute bottom-0 left-0 right-0 p-6 space-y-6;
+    @apply p-6 space-y-6 flex-shrink-0;
   }
 
   /* Mobile Menu Phone Section */
