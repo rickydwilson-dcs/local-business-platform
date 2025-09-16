@@ -212,6 +212,7 @@ export default async function Page(
               title={pricingData.title}
               description={pricingData.description}
               packages={pricingData.packages}
+              location={frontmatter.title}
             />
           )}
 
