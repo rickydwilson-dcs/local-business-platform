@@ -139,7 +139,7 @@ export function LargeFeatureCards({
             </p>
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 bg-gray-900 text-white px-8 py-3 rounded-lg font-semibold hover:bg-gray-800 transition-colors"
+              className="btn-primary-lg gap-2"
             >
               Get Your Quote Today
               <ArrowRight className="w-4 h-4" />
