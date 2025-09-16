@@ -46,7 +46,7 @@ export function CoverageMap({ className = "", height = "h-96" }: CoverageMapProp
     });
   }, []);
 
-  const createCustomIcon = (leaflet: typeof import('leaflet'), county: string, isRichContent: boolean = false) => {
+  const createCustomIcon = (leaflet: typeof import('leaflet'), county: string) => {
     const colors: { [key: string]: string } = {
       'East Sussex': '#2563eb',
       'West Sussex': '#059669',
@@ -55,7 +55,7 @@ export function CoverageMap({ className = "", height = "h-96" }: CoverageMapProp
     };
 
     const color = colors[county] || '#4DB2E4';
-    const size = isRichContent ? 32 : 24;
+    const size = 28;
 
     return new leaflet.DivIcon({
       html: `
@@ -73,9 +73,6 @@ export function CoverageMap({ className = "", height = "h-96" }: CoverageMapProp
               <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
             </svg>
           </div>
-          ${isRichContent ? `
-            <div class="absolute -top-1 -right-1 w-3 h-3 bg-yellow-400 rounded-full border border-white"></div>
-          ` : ''}
         </div>
       `,
       className: 'custom-div-icon',
@@ -118,7 +115,7 @@ export function CoverageMap({ className = "", height = "h-96" }: CoverageMapProp
           <Marker
             key={location.name}
             position={location.coords}
-            icon={createCustomIcon(leafletModule, location.county, location.isRichContent)}
+            icon={createCustomIcon(leafletModule, location.county)}
             eventHandlers={{
               click: () => {
                 window.location.href = location.url;
@@ -131,9 +128,6 @@ export function CoverageMap({ className = "", height = "h-96" }: CoverageMapProp
                   <h3 className="font-semibold text-gray-900 text-lg">
                     {location.name}
                   </h3>
-                  {location.isRichContent && (
-                    <span className="ml-2 w-2 h-2 bg-yellow-400 rounded-full flex-shrink-0 mt-2" title="Specialist coverage"></span>
-                  )}
                 </div>
 
                 <div className="text-sm text-gray-600 mb-2">
