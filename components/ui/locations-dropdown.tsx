@@ -111,7 +111,7 @@ export function LocationsDropdown() {
               <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 md:gap-0">
                 <div>
                   <p className="text-sm text-gray-600">
-                    Can't find your area? We cover the entire South East region.
+                    Can&apos;t find your area? We cover the entire South East region.
                   </p>
                 </div>
                 <Link
