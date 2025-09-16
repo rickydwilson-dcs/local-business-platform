@@ -37,10 +37,6 @@ export function CoverageMapSection() {
               <div className="w-3 h-3 bg-purple-600 rounded-full"></div>
               <span className="text-gray-600">Surrey</span>
             </div>
-            <div className="flex items-center gap-2 ml-4">
-              <div className="w-3 h-3 bg-yellow-400 rounded-full"></div>
-              <span className="text-gray-600">Specialist Coverage</span>
-            </div>
           </div>
 
           {/* Mobile Map Instructions */}
