@@ -92,8 +92,6 @@ export default function ContactLayout({
       { "@type": "Place", name: "West Sussex" },
       { "@type": "Place", name: "Kent" },
       { "@type": "Place", name: "Surrey" },
-      { "@type": "Place", name: "Essex" },
-      { "@type": "Place", name: "London" }
     ]
   };
 

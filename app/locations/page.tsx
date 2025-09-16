@@ -165,7 +165,7 @@ export default async function LocationsPage() {
           name: "Scaffolding Service Areas",
           description: "Professional scaffolding services available across multiple locations in the South East UK.",
           serviceType: "Local Services",
-          areaServed: ["South East UK", "East Sussex", "West Sussex", "Kent", "Surrey", "London", "Essex"]
+          areaServed: ["South East UK", "East Sussex", "West Sussex", "Kent", "Surrey"]
         }}
         org={{
           name: "Colossus Scaffolding",
@@ -179,7 +179,7 @@ export default async function LocationsPage() {
         faqs={[
           {
             question: "Which locations do you serve?",
-            answer: "We provide scaffolding services across the South East UK including East Sussex, West Sussex, Kent, Surrey, London, and Essex."
+            answer: "We provide scaffolding services across the South East UK including East Sussex, West Sussex, Kent, and Surrey."
           },
           {
             question: "Do you handle permits and street works?",

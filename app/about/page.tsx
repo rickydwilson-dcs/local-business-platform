@@ -68,8 +68,6 @@ export default function AboutPage() {
       { "@type": "Place", name: "West Sussex" },
       { "@type": "Place", name: "Kent" },
       { "@type": "Place", name: "Surrey" },
-      { "@type": "Place", name: "Essex" },
-      { "@type": "Place", name: "London" }
     ],
     hasCredential: [
       {
@@ -203,7 +201,7 @@ export default function AboutPage() {
         name: "What areas do you serve?",
         acceptedAnswer: {
           "@type": "Answer", 
-          text: "We cover all of the South East of England, including East Sussex, West Sussex, Kent, Surrey, Essex, and London."
+          text: "We cover all of the South East of England, including East Sussex, West Sussex, Kent, and Surrey."
         }
       },
       {
@@ -301,7 +299,7 @@ export default function AboutPage() {
                 
                 <p>
                   Today, we&apos;re proud to serve homeowners, contractors, and businesses throughout 
-                  East Sussex, West Sussex, Kent, Surrey, Essex, and London. Our commitment to 
+                  East Sussex, West Sussex, Kent, and Surrey. Our commitment to 
                   local service, combined with our expertise in complex projects, makes us the 
                   trusted choice for scaffolding solutions across the South East.
                 </p>

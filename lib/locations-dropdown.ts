@@ -65,8 +65,6 @@ const COUNTY_PAGES: LocationItem[] = [
   { name: "West Sussex", slug: "west-sussex", href: "/locations/west-sussex" },
   { name: "Kent", slug: "kent", href: "/locations/kent" },
   { name: "Surrey", slug: "surrey", href: "/locations/surrey" },
-  { name: "London", slug: "london", href: "/locations/london" },
-  { name: "Essex", slug: "essex", href: "/locations/essex" },
 ];
 
 // Organized dropdown structure
@@ -131,32 +129,6 @@ export const LOCATIONS_DROPDOWN: County[] = [
       { name: "Kingston upon Thames", slug: "kingston-upon-thames", href: "/locations/kingston-upon-thames", isRichContent: true },
       { name: "Redhill", slug: "redhill", href: "/locations/redhill", isRichContent: true },
       { name: "Camberley", slug: "camberley", href: "/locations/camberley", isRichContent: true },
-    ]
-  },
-  {
-    name: "London",
-    slug: "london",
-    href: "/locations/london",
-    towns: [
-      { name: "South London", slug: "south-london", href: "/locations/london" },
-      { name: "West London", slug: "west-london", href: "/locations/london" },
-      { name: "East London", slug: "east-london", href: "/locations/london" },
-      { name: "Central London", slug: "central-london", href: "/locations/london" },
-      { name: "Croydon", slug: "croydon", href: "/locations/london" },
-      { name: "Bromley", slug: "bromley", href: "/locations/london" },
-    ]
-  },
-  {
-    name: "Essex",
-    slug: "essex",
-    href: "/locations/essex",
-    towns: [
-      { name: "Chelmsford", slug: "chelmsford", href: "/locations/essex" },
-      { name: "Southend-on-Sea", slug: "southend", href: "/locations/essex" },
-      { name: "Colchester", slug: "colchester", href: "/locations/essex" },
-      { name: "Basildon", slug: "basildon", href: "/locations/essex" },
-      { name: "Harlow", slug: "harlow", href: "/locations/essex" },
-      { name: "Brentwood", slug: "brentwood", href: "/locations/essex" },
     ]
   }
 ];
