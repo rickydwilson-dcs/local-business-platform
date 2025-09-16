@@ -42,8 +42,8 @@ export default function Breadcrumbs({ items, className = "" }: BreadcrumbsProps)
             </Link>
           </div>
         </li>
-        {items.map((item) => (
-          <li key={item.name}>
+        {items.map((item, index) => (
+          <li key={`${item.href}-${index}`}>
             <div className="flex items-center">
               <ChevronRightIcon />
               {item.current ? (
