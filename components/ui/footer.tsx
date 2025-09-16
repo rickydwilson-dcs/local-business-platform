@@ -66,8 +66,6 @@ export function Footer() {
               <li><Link href="/locations/west-sussex" className="hover:text-brand-blue transition-colors">West Sussex</Link></li>
               <li><Link href="/locations/kent" className="hover:text-brand-blue transition-colors">Kent</Link></li>
               <li><Link href="/locations/surrey" className="hover:text-brand-blue transition-colors">Surrey</Link></li>
-              <li><Link href="/locations/london" className="hover:text-brand-blue transition-colors">London</Link></li>
-              <li><Link href="/locations/essex" className="hover:text-brand-blue transition-colors">Essex</Link></li>
             </ul>
           </div>
 
