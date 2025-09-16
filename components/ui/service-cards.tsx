@@ -3,7 +3,7 @@ import Image from "next/image"
 
 interface ServiceCard {
   title: string
-  subtitle: string
+  subtitle: string | string[]
   description: string
   features: string[]
   href: string
@@ -93,11 +93,24 @@ export function ServiceCards({
                     </div>
                   )}
 
-                  {/* Subtitle overlay */}
+                  {/* Subtitle overlay - handles both string and string array */}
                   <div className="absolute top-4 left-4 right-4">
-                    <span className="inline-block px-3 py-1 bg-brand-blue/90 text-white text-sm font-medium rounded-full backdrop-blur-sm">
-                      {card.subtitle}
-                    </span>
+                    <div className="flex flex-wrap gap-2">
+                      {Array.isArray(card.subtitle) ? (
+                        card.subtitle.map((subtitle, subtitleIndex) => (
+                          <span
+                            key={subtitleIndex}
+                            className="inline-block px-3 py-1 bg-[#005A9E]/90 text-white text-sm font-semibold rounded-full backdrop-blur-sm shadow-sm"
+                          >
+                            {subtitle}
+                          </span>
+                        ))
+                      ) : (
+                        <span className="inline-block px-3 py-1 bg-[#005A9E]/90 text-white text-sm font-semibold rounded-full backdrop-blur-sm shadow-sm">
+                          {card.subtitle}
+                        </span>
+                      )}
+                    </div>
                   </div>
                 </div>
 
@@ -124,7 +137,8 @@ export function ServiceCards({
                   {/* CTA Button */}
                   <Link
                     href={card.href}
-                    className="inline-flex items-center justify-center w-full px-4 py-3 bg-brand-blue text-white font-semibold rounded-lg hover:bg-brand-blue-hover group-hover:scale-105 transition-all duration-200 text-sm"
+                    className="inline-flex items-center justify-center w-full px-4 py-3 bg-[#005A9E] text-white font-semibold rounded-lg hover:bg-[#004a85] group-hover:scale-105 transition-all duration-200 text-sm focus:ring-2 focus:ring-[#005A9E] focus:ring-offset-2"
+                    aria-label={`${card.ctaText} for ${card.title}`}
                   >
                     {card.ctaText}
                   </Link>

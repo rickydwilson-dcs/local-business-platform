@@ -105,7 +105,7 @@ export function CapabilityShowcase({
                 {capability.href && capability.ctaText && (
                   <Link
                     href={capability.href}
-                    className="inline-flex items-center justify-center w-full px-4 py-3 bg-gray-900 text-white font-semibold rounded-lg hover:bg-gray-800 group-hover:scale-105 transition-all duration-200 text-sm"
+                    className="btn-primary w-full justify-center group-hover:scale-105 text-sm"
                   >
                     {capability.ctaText}
                   </Link>
