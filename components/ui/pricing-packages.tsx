@@ -21,6 +21,7 @@ interface PricingPackagesProps {
   title: string
   description?: string
   packages: PricingPackage[]
+  location?: string
 }
 
 const ClockIcon = () => (
@@ -42,7 +43,7 @@ const PhoneIcon = () => (
   </svg>
 )
 
-export function PricingPackages({ title, description, packages }: PricingPackagesProps) {
+export function PricingPackages({ title, description, packages, location }: PricingPackagesProps) {
   return (
     <section className="py-16 bg-gray-50">
       <div className="mx-auto w-full lg:w-[90%] px-6">
@@ -131,7 +132,7 @@ export function PricingPackages({ title, description, packages }: PricingPackage
           <div className="bg-gray-50 rounded-lg p-8 max-w-4xl mx-auto">
             <h3 className="text-2xl font-bold text-gray-900 mb-4">Need a Custom Quote?</h3>
             <p className="text-gray-600 mb-6 text-lg">
-              Every Brighton project is unique. Get a detailed, no-obligation quote tailored to your specific requirements.
+              Every {location || ""} project is unique. Get a detailed, no-obligation quote tailored to your specific requirements.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
