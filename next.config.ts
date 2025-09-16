@@ -16,6 +16,16 @@ const nextConfig: NextConfig = {
   experimental: {
     mdxRs: true, // Use Rust-based MDX compiler for better performance
   },
+  // Webpack configuration for Leaflet and other client-side libraries
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        fs: false,
+      };
+    }
+    return config;
+  },
   // Image optimization domains (add your image domains here)
   images: {
     domains: [], // Add domains like ['example.com'] if you load external images
