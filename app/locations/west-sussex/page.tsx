@@ -62,7 +62,7 @@ const heroData = {
 const countyCapabilities = {
   title: "West Sussex Scaffolding Specialists",
   description: "Comprehensive county-wide capabilities with specialized expertise across West Sussex's diverse industrial, coastal, and heritage environments.",
-  columns: 3,
+  columns: 3 as const,
   backgroundColor: "gray" as const,
   showBottomCTA: false,
   cards: [
@@ -107,6 +107,7 @@ const countyServices = {
       title: "Commercial & Industrial",
       description: "Large-scale scaffolding for West Sussex's major commercial and industrial developments, from Gatwick area logistics to coastal manufacturing.",
       href: "/services/commercial-scaffolding",
+      ctaText: "Learn More",
       features: [
         "High-access solutions",
         "Industrial compliance",
@@ -118,6 +119,7 @@ const countyServices = {
       title: "Heritage Scaffolding",
       description: "Specialized systems for West Sussex's historic buildings, from Norman churches to Georgian market squares in Chichester and Horsham.",
       href: "/services/heritage-scaffolding",
+      ctaText: "Learn More",
       features: [
         "Cathedral expertise",
         "Listed building compliance",
@@ -129,6 +131,7 @@ const countyServices = {
       title: "Residential Development",
       description: "Supporting West Sussex's growing residential developments with scalable scaffolding solutions across multiple sites and project phases.",
       href: "/services/residential-scaffolding",
+      ctaText: "Learn More",
       features: [
         "Multi-phase coordination",
         "Development support",
@@ -230,7 +233,7 @@ export default function WestSussexPage() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {westSussexTowns.map((town) => (
                 <Link
                   key={town.slug}
