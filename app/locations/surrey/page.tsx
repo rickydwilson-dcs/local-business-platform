@@ -105,6 +105,7 @@ const countyServices = {
       title: "Premium Residential",
       description: "High-end scaffolding solutions for Surrey's prestigious residential areas, with discreet installations and premium service standards for luxury properties.",
       href: "/services/residential-scaffolding",
+      ctaText: "Learn More",
       features: [
         "Luxury property expertise",
         "Discreet installations",
@@ -116,6 +117,7 @@ const countyServices = {
       title: "Heritage Scaffolding",
       description: "Specialized systems for Surrey's historic buildings, from Norman churches to Georgian mansions, with expert knowledge of conservation requirements.",
       href: "/services/heritage-scaffolding",
+      ctaText: "Learn More",
       features: [
         "Cathedral expertise",
         "Listed building compliance",
@@ -127,6 +129,7 @@ const countyServices = {
       title: "Commercial & Business",
       description: "Professional scaffolding for Surrey's thriving business sector, from modern office developments to established business parks across the county.",
       href: "/services/commercial-scaffolding",
+      ctaText: "Learn More",
       features: [
         "Business park access",
         "Office developments",
