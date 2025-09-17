@@ -3,6 +3,7 @@
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 <!-- Test comment: GitHub Actions workflow test -->
+<!-- Second test: develop → staging automatic push -->
 
 ## Development Commands
 
