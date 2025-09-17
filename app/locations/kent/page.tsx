@@ -63,7 +63,7 @@ const heroData = {
 const countyCapabilities = {
   title: "Kent Scaffolding Specialists",
   description: "Comprehensive county-wide capabilities with specialized expertise across Kent's diverse heritage sites, modern infrastructure, and industrial developments.",
-  columns: 3,
+  columns: 3 as const,
   backgroundColor: "gray" as const,
   showBottomCTA: false,
   cards: [
@@ -108,6 +108,7 @@ const countyServices = {
       title: "Heritage Scaffolding",
       description: "Specialized systems for Kent's unparalleled heritage sites, from Norman cathedrals to medieval castles and Tudor buildings across the county.",
       href: "/services/heritage-scaffolding",
+      ctaText: "Learn More",
       features: [
         "Cathedral expertise",
         "Castle scaffolding",
@@ -119,6 +120,7 @@ const countyServices = {
       title: "Industrial & Port",
       description: "Heavy-duty scaffolding for Kent's industrial sites, port facilities, and logistics centers serving the Channel gateway infrastructure.",
       href: "/services/industrial-scaffolding",
+      ctaText: "Learn More",
       features: [
         "Port facility access",
         "Heavy industrial",
@@ -130,6 +132,7 @@ const countyServices = {
       title: "Transport Corridor",
       description: "Specialized scaffolding for projects along Kent's major transport arteries, including rail, highway, and Channel Tunnel periphery developments.",
       href: "/services/infrastructure-scaffolding",
+      ctaText: "Learn More",
       features: [
         "Rail corridor work",
         "Highway permits",

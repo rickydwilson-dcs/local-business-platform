@@ -60,7 +60,7 @@ const heroData = {
 const countyCapabilities = {
   title: "Surrey Scaffolding Specialists",
   description: "Comprehensive county-wide capabilities with specialized expertise across Surrey's affluent towns, heritage sites, and modern commercial developments.",
-  columns: 3,
+  columns: 3 as const,
   backgroundColor: "gray" as const,
   showBottomCTA: false,
   cards: [
