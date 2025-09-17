@@ -4,6 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 <!-- Test comment: GitHub Actions workflow test -->
 <!-- Second test: develop → staging automatic push -->
+<!-- Third test: modified approval rules -->
 
 ## Development Commands
 
