@@ -1,39 +1,45 @@
 # Development Workflow
 
-This document outlines the development workflow for the Colossus Scaffolding website to ensure code quality and prevent issues from reaching production.
+This document outlines the **enforced development workflow** for the Colossus Scaffolding website to ensure code quality and prevent issues from reaching production.
 
-## Branch Structure
+## Branch Structure (Protected)
 
-- **`dev`** - Development branch for all new features and bug fixes
-- **`staging`** - Staging branch connected to staging deployment
-- **`main`** - Main branch for production-ready code
+- **`develop`** - Development branch for all new features and bug fixes
+- **`staging`** - Staging branch connected to staging deployment (PR required)
+- **`main`** - Main branch for production-ready code (PR required + reviews)
 - **`production`** - Production branch connected to live website
+
+**🔒 All branches except `develop` are protected and require Pull Requests**
 
 ## Development Workflow
 
 ### 1. Development Phase
 
-Always work in the `dev` branch:
+Always work in the `develop` branch:
 
 ```bash
-git checkout dev
-git pull origin dev
+git checkout develop
+git pull origin develop
 
 # Make your changes
 # Test locally with: npm run dev
 ```
 
-### 2. Pre-commit Checks
+### 2. Automated Quality Checks
 
-Before every commit, automated checks run via Husky pre-commit hooks:
+**Pre-commit hooks (automatic on every commit):**
 
 - **ESLint** - Code linting and fixes
 - **Prettier** - Code formatting
-- **TypeScript** - Type checking (manual)
+
+**Pre-push hooks (automatic on every push):**
+
+- **TypeScript** - Type checking
+- **Build Test** - Production build verification
 
 ### 3. Manual Quality Checks
 
-Before pushing to staging, run these commands in the `dev` branch:
+Before creating PRs, run these commands in the `develop` branch:
 
 ```bash
 # Run all quality checks
@@ -47,34 +53,50 @@ npm run build         # Production build test
 npm run format        # Prettier formatting
 ```
 
-**⚠️ CRITICAL: Only push to staging if all these checks pass!**
+**⚠️ CRITICAL: All checks must pass before creating PRs!**
 
-### 4. Staging Deployment
+### 4. Staging Deployment (PR Required)
 
 Once development is complete and all checks pass:
 
 ```bash
-# Push dev changes to staging
-git checkout dev
-git push origin dev:staging
+# Push develop changes
+git push origin develop
+
+# Create Pull Request via GitHub UI:
+# develop → staging
 ```
 
-This triggers staging deployment on Vercel where you can:
+**GitHub Actions automatically run:**
 
-- Test the full application
-- Verify all features work
-- Check for any deployment-specific issues
+- ✅ ESLint validation
+- ✅ TypeScript check
+- ✅ Build test
+- ✅ Deployment readiness check
 
-### 5. Production Deployment
+**🚫 PR cannot be merged until all GitHub Actions pass!**
+
+### 5. Production Deployment (PR + Review Required)
 
 Only after staging is verified and working correctly:
 
+**Create Pull Request via GitHub UI:**
+
+- `staging → main`
+
+**Requirements before merge:**
+
+- ✅ All GitHub Actions must pass
+- ✅ At least 1 code review approval required
+- ✅ All conversations resolved
+- ✅ Branch must be up to date
+
+After merge to `main`, manually push to production:
+
 ```bash
-# Push staging to main and production
-git checkout staging
-git pull origin staging
-git push origin staging:main
-git push origin staging:production
+git checkout main
+git pull origin main
+git push origin main:production
 ```
 
 ## Available Scripts
@@ -89,102 +111,147 @@ npm run type-check       # Check TypeScript types
 npm run pre-commit-check # Run all quality checks
 ```
 
-## Pre-commit Hook Configuration
+## GitHub Actions Workflow
 
-The project uses Husky and lint-staged for automated pre-commit checks:
+The CI pipeline runs automatically on:
 
-- **Husky**: Manages git hooks
-- **lint-staged**: Runs linters on staged files only
-- **ESLint**: Catches code issues and enforces style
-- **Prettier**: Ensures consistent code formatting
+- Every push to `develop`, `staging`, `main`
+- Every PR to `staging`, `main`
+
+**Pipeline steps:**
+
+1. **Quality Checks** - ESLint, TypeScript, Build test
+2. **Build Test** - Verify production build works
+3. **Deployment Check** - Confirm readiness for deployment
+
+**Status checks are required** - PRs cannot be merged if any step fails.
 
 ## Quality Gates
 
 ### Development Quality Gates ✅
 
-- ESLint passing (no errors)
-- Prettier formatting applied
-- TypeScript compilation successful
+- Pre-commit hooks pass (ESLint + Prettier)
+- Pre-push hooks pass (TypeScript + Build)
 - Local development server running
-- Manual feature testing
+- Manual feature testing complete
 
 ### Staging Quality Gates ✅
 
-- All development checks passing
+- GitHub Actions passing (ESLint + TypeScript + Build)
 - Production build successful
-- No deployment errors on Vercel
+- No deployment errors on Vercel staging
 - Full application testing on staging URL
 - Cross-browser compatibility verified
 
 ### Production Quality Gates ✅
 
-- Staging fully tested and approved
-- All features working as expected
-- Performance metrics acceptable
-- SEO and accessibility verified
+- All staging tests passing
+- Code review approval obtained
+- All GitHub Action checks passing
+- All PR conversations resolved
+- Branch up to date with latest changes
+
+## Branch Protection Rules
+
+### Main Branch (Production)
+
+- 🔒 **PR required** with 1+ review approval
+- 🔒 **Status checks required** (GitHub Actions must pass)
+- 🔒 **Up-to-date branch required**
+- 🔒 **No force pushes allowed**
+- 🔒 **No direct commits allowed**
+
+### Staging Branch
+
+- 🔒 **Status checks required** (GitHub Actions must pass)
+- 🔒 **Up-to-date branch required**
+- 🔒 **No force pushes allowed**
+
+### Develop Branch
+
+- ✅ Direct pushes allowed
+- ✅ Status checks recommended but not enforced
 
 ## Emergency Hotfixes
 
 For critical production issues that need immediate deployment:
 
 ```bash
-# Create hotfix branch from production
-git checkout production
+# Create hotfix branch from main
+git checkout main
+git pull origin main
 git checkout -b hotfix/critical-fix
 
-# Make minimal changes
-# Test thoroughly
+# Make minimal changes and test thoroughly
 npm run pre-commit-check
 
-# Deploy through normal workflow
-git push origin hotfix/critical-fix:staging
-# Test staging, then:
-git push origin hotfix/critical-fix:main
-git push origin hotfix/critical-fix:production
+# Push and create emergency PR
+git push origin hotfix/critical-fix
+# Create PR: hotfix/critical-fix → main
+# Get emergency review approval
+# Merge after GitHub Actions pass
+
+# Sync hotfix back to develop
+git checkout develop
+git merge main
+git push origin develop
 ```
 
 ## Troubleshooting
 
-### Build Failures
+### GitHub Actions Failing
 
-- Check ESLint errors: `npm run lint`
-- Check TypeScript errors: `npm run type-check`
-- Clear Next.js cache: `rm -rf .next`
+- Check the Actions tab in GitHub for detailed error logs
+- Common issues:
+  - ESLint errors: `npm run lint:fix`
+  - TypeScript errors: `npm run type-check`
+  - Build failures: `npm run build`
 
 ### Pre-commit Hook Issues
 
 - Ensure Husky is installed: `npm run prepare`
-- Check hook permissions: `chmod +x .husky/pre-commit`
+- Check hook permissions: `chmod +x .husky/pre-commit .husky/pre-push`
+- Test hooks manually: `npx lint-staged`
 
-### Deployment Issues
+### PR Cannot Be Merged
 
-- Verify all environment variables are set in Vercel
-- Check build logs in Vercel dashboard
-- Ensure all dependencies are properly installed
+- Verify all GitHub Action checks are green
+- Ensure branch is up to date: `git pull origin staging`
+- Resolve all PR conversations
+- Get required code review approvals
+
+### Branch Protection Bypass (Emergency Only)
+
+1. **Contact repository admin** to temporarily disable protection
+2. **Make emergency fix** with proper documentation
+3. **Re-enable protection immediately**
+4. **Create follow-up PR** to document emergency change
 
 ## Best Practices
 
-1. **Never skip quality checks** - They prevent production issues
-2. **Test on staging first** - Always verify changes before production
-3. **Make small, focused commits** - Easier to review and rollback
-4. **Write descriptive commit messages** - Include what and why
-5. **Use feature branches** - For larger features, create feature branches from `dev`
-6. **Review changes** - Use GitHub PRs for team collaboration
-7. **Monitor deployments** - Check Vercel deployment status and logs
+1. **🚫 Never skip quality checks** - They prevent production issues
+2. **🔒 Always use PRs for protected branches** - Direct pushes are blocked
+3. **👥 Get code reviews** - Fresh eyes catch issues
+4. **📝 Write descriptive PR descriptions** - Include what, why, and how
+5. **🧪 Test on staging thoroughly** - Verify changes before production
+6. **🔄 Keep branches up to date** - Avoid merge conflicts
+7. **📋 Use PR templates** - Ensure consistent review process
+8. **🏗️ Make focused commits** - Easier to review and rollback
 
-## Rollback Procedure
+## Quick Reference
 
-If issues are discovered in production:
+**Development Flow:**
 
-```bash
-# Quick rollback to previous working commit
-git checkout production
-git reset --hard <previous-working-commit>
-git push origin production --force
+1. `develop` → Work and test locally
+2. `develop` → `staging` (via PR + GitHub Actions)
+3. `staging` → `main` (via PR + Review + GitHub Actions)
+4. `main` → `production` (manual push)
 
-# Or revert specific problematic commit
-git revert <problematic-commit-hash>
-git push origin production
-```
+**Quality Checkpoints:**
 
-Remember: Prevention is better than cure. Following this workflow prevents most issues from reaching production.
+- ✅ Pre-commit: ESLint + Prettier
+- ✅ Pre-push: TypeScript + Build
+- ✅ PR to staging: GitHub Actions
+- ✅ PR to main: GitHub Actions + Code Review
+
+This enforced workflow ensures **zero chance** of linting errors or broken builds reaching production.
