@@ -3,6 +3,7 @@
 ### **📁 FILE STRUCTURE & ORGANIZATION**
 
 **Strict Directory Structure:**
+
 ```
 /components/ui/          - All reusable UI components
 /content/locations/      - All location MDX files (.mdx only)
@@ -12,6 +13,7 @@
 ```
 
 **Rules:**
+
 - ❌ NO components outside `/components/ui/`
 - ❌ NO content files outside `/content/`
 - ❌ NO mixing .tsx and .mdx in same directories
@@ -20,12 +22,14 @@
 ### **🎨 STYLING STANDARDS**
 
 **Tailwind CSS Only:**
+
 - ✅ ALL styling via Tailwind utility classes
 - ❌ NO inline styles (style={{}} properties)
 - ❌ NO styled-components or CSS-in-JS
 - ❌ NO custom CSS files unless absolutely necessary
 
 **Maintainable Styling System:**
+
 - ✅ **REQUIRED**: All repeated styling patterns must be extracted to maintainable classes in `globals.css`
 - ✅ **PROCESS**: Before creating new styling elements, check if similar patterns exist
 - ✅ **APPROVAL**: New maintainable classes must be agreed upon and added to `globals.css` before use
@@ -33,14 +37,22 @@
 - ❌ **FORBIDDEN**: Custom styling without establishing reusable classes
 
 **Maintainable Class Examples:**
+
 ```css
 /* globals.css - Approved maintainable classes */
-.btn-primary { @apply inline-flex items-center px-6 py-3 bg-[#005A9E] text-white font-semibold rounded-lg hover:bg-[#004a85] transition-colors; }
-.card-interactive { @apply group relative bg-white rounded-2xl shadow-sm border border-gray-200 p-8 hover:shadow-lg hover:-translate-y-1 transition-all duration-300; }
-.section-standard { @apply py-16 lg:py-20; }
+.btn-primary {
+  @apply inline-flex items-center px-6 py-3 bg-[#005A9E] text-white font-semibold rounded-lg hover:bg-[#004a85] transition-colors;
+}
+.card-interactive {
+  @apply group relative bg-white rounded-2xl shadow-sm border border-gray-200 p-8 hover:shadow-lg hover:-translate-y-1 transition-all duration-300;
+}
+.section-standard {
+  @apply py-16 lg:py-20;
+}
 ```
 
 **Component Styling:**
+
 ```tsx
 // ✅ CORRECT - Maintainable classes
 <button className="btn-primary">Click me</button>
@@ -61,6 +73,7 @@ const StyledDiv = styled.div`background: blue;`
 ```
 
 **Styling Workflow:**
+
 1. **Check existing**: Search `globals.css` for similar patterns
 2. **Propose new class**: If pattern will be reused, propose maintainable class name
 3. **Add to globals.css**: Create the class with `@apply` Tailwind utilities
@@ -70,32 +83,37 @@ const StyledDiv = styled.div`background: blue;`
 ### **🧩 COMPONENT ARCHITECTURE**
 
 **UI Components:**
+
 - ✅ All reusable components in `/components/ui/`
 - ✅ Accept props for customization
 - ✅ Use TypeScript interfaces for all props
 - ✅ Export as named exports, not default
 
 **Component Props Pattern:**
+
 ```tsx
 // ✅ CORRECT
 interface ButtonProps {
-  variant: 'primary' | 'secondary'
-  children: React.ReactNode
-  className?: string
+  variant: "primary" | "secondary";
+  children: React.ReactNode;
+  className?: string;
 }
 
 export const Button = ({ variant, children, className }: ButtonProps) => {
   return (
-    <button className={`base-classes ${variant === 'primary' ? 'bg-[#005A9E]' : 'bg-gray-200'} ${className}`}>
+    <button
+      className={`base-classes ${variant === "primary" ? "bg-[#005A9E]" : "bg-gray-200"} ${className}`}
+    >
       {children}
     </button>
-  )
-}
+  );
+};
 ```
 
 ### **📂 CONTENT ARCHITECTURE PATTERNS - CRITICAL**
 
 **MANDATORY MDX-FIRST ARCHITECTURE:**
+
 ```
 ✅ REQUIRED - All content categories use MDX as PRIMARY source:
 /content/locations/[location].mdx     - Rich location content (PRIMARY)
@@ -104,6 +122,7 @@ export const Button = ({ variant, children, className }: ButtonProps) => {
 ```
 
 **MDX Content Priority System:**
+
 ```tsx
 // ✅ CORRECT - MDX First approach
 1. Check for /content/locations/[slug].mdx file
@@ -113,32 +132,35 @@ export const Button = ({ variant, children, className }: ButtonProps) => {
 ```
 
 **PROHIBITED CONTENT PATTERNS:**
+
 - ❌ Centralized data as primary content source
 - ❌ Individual page files per content item (/app/locations/brighton/page.tsx)
 - ❌ Content-specific loaders (/lib/brighton-content.ts)
 - ❌ Bypassing MDX content system
 
 **Dynamic Route Requirements:**
+
 ```tsx
 // ✅ REQUIRED in /app/locations/[slug]/page.tsx
 export default async function LocationPage({ params }: { params: { slug: string } }) {
   // 1. FIRST: Try to read MDX file
-  const mdxContent = await readMDXFile(`/content/locations/${params.slug}.mdx`)
+  const mdxContent = await readMDXFile(`/content/locations/${params.slug}.mdx`);
 
   if (mdxContent) {
     // Use rich MDX content with full component system
-    return renderMDXContent(mdxContent)
+    return renderMDXContent(mdxContent);
   }
 
   // 2. FALLBACK: Use centralized data only if no MDX
-  const fallbackData = getLocationFromCentralized(params.slug)
-  return renderFallbackContent(fallbackData)
+  const fallbackData = getLocationFromCentralized(params.slug);
+  return renderFallbackContent(fallbackData);
 }
 ```
 
 ### **📄 CONTENT MANAGEMENT**
 
 **MDX Files (Primary Content):**
+
 - ✅ ALL rich content in appropriate `/content/` subdirectories
 - ✅ Use comprehensive frontmatter for metadata
 - ✅ Full component-mappable structure
@@ -146,6 +168,7 @@ export default async function LocationPage({ params }: { params: { slug: string 
 - ❌ NO content hardcoded in components
 
 **Centralized Data (Fallback Only):**
+
 - ✅ Basic fallback data in `/lib/[category].ts`
 - ✅ Simple structure for locations without MDX
 - ❌ NOT primary content source
@@ -154,6 +177,7 @@ export default async function LocationPage({ params }: { params: { slug: string 
 ### **📝 CONTENT ACCURACY & CLAIMS**
 
 **CRITICAL: Truthful Content Standards**
+
 - ✅ **CAPABILITIES**: Use "We can scaffold...", "Our team can work on...", "We specialize in..."
 - ✅ **EXPERTISE**: Describe knowledge, understanding, and ability to handle specific challenges
 - ✅ **QUALIFICATIONS**: Reference actual certifications (TG20:21, CISRS, etc.)
@@ -161,21 +185,23 @@ export default async function LocationPage({ params }: { params: { slug: string 
 - ❌ **UNFOUNDED STATEMENTS**: Avoid "We've worked on...", "We regularly scaffold...", "We've completed..."
 
 **Content Language Guidelines:**
+
 ```tsx
 // ✅ CORRECT - Capability focused
-"We can scaffold everything from Victorian terraces to modern developments"
-"Our team can handle the access challenges of narrow streets"
-"We understand the requirements of conservation areas"
-"We're equipped to work on heritage buildings"
+"We can scaffold everything from Victorian terraces to modern developments";
+"Our team can handle the access challenges of narrow streets";
+"We understand the requirements of conservation areas";
+"We're equipped to work on heritage buildings";
 
 // ❌ WRONG - Unverified claims
-"We've scaffolded everything from Victorian terraces to modern developments"
-"Our team regularly works on narrow street projects"
-"We've completed hundreds of conservation area projects"
-"We've worked on heritage buildings across the city"
+"We've scaffolded everything from Victorian terraces to modern developments";
+"Our team regularly works on narrow street projects";
+"We've completed hundreds of conservation area projects";
+"We've worked on heritage buildings across the city";
 ```
 
 **Professional Positioning:**
+
 - ✅ Focus on **ability**, **knowledge**, **qualifications**, and **equipment**
 - ✅ Demonstrate **understanding** of local challenges and requirements
 - ✅ Highlight **compliance**, **certifications**, and **professional standards**
@@ -183,11 +209,13 @@ export default async function LocationPage({ params }: { params: { slug: string 
 - ❌ Avoid **specific claims** that cannot be substantiated
 
 **Enforcement:**
+
 - All content must be reviewed for unsubstantiated claims before publication
 - Any language suggesting completed work must be verified or changed to capability language
 - Location content should focus on area knowledge and ability to serve, not claimed work history
 
 **Frontmatter Standard:**
+
 ```yaml
 ---
 title: "Page Title"
@@ -210,6 +238,7 @@ pricing:
 ### **🔍 SEO STANDARDS**
 
 **Meta Data Requirements:**
+
 ```tsx
 // ✅ EVERY page must have
 export const metadata: Metadata = {
@@ -220,20 +249,21 @@ export const metadata: Metadata = {
     title: "Social sharing title",
     description: "Social description",
     images: ["/images/og-image.jpg"],
-    url: "https://domain.com/page-url"
+    url: "https://domain.com/page-url",
   },
   twitter: {
     card: "summary_large_image",
     title: "Twitter title",
-    description: "Twitter description"
+    description: "Twitter description",
   },
   alternates: {
-    canonical: "https://domain.com/page-url"
-  }
-}
+    canonical: "https://domain.com/page-url",
+  },
+};
 ```
 
 **SEO Content Rules:**
+
 - ✅ H1 tag must contain primary keyword
 - ✅ H2/H3 hierarchy must be logical and include related keywords
 - ✅ Meta descriptions 150-160 characters max
@@ -244,6 +274,7 @@ export const metadata: Metadata = {
 - ❌ NO duplicate content across pages
 
 **Local SEO Requirements:**
+
 ```tsx
 // ✅ For location pages, include
 title: "[Service] in [Location] | Company Name"
@@ -259,57 +290,59 @@ description: "Professional [service] in [location] - [key benefits]. [Credential
 ### **📊 SCHEMA MARKUP RULES**
 
 **Required Schema Types:**
+
 ```tsx
 // ✅ Local Business Schema (all location pages)
 const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
-  "name": "Colossus Scaffolding",
-  "description": "Professional scaffolding services in [location]",
-  "address": {
+  name: "Colossus Scaffolding",
+  description: "Professional scaffolding services in [location]",
+  address: {
     "@type": "PostalAddress",
-    "addressLocality": "[City]",
-    "addressRegion": "[County]",
-    "addressCountry": "GB"
+    addressLocality: "[City]",
+    addressRegion: "[County]",
+    addressCountry: "GB",
   },
-  "telephone": "+44-xxx-xxx-xxxx",
-  "url": "https://domain.com/locations/[location]",
-  "areaServed": "[Location] and surrounding areas",
-  "serviceType": "Scaffolding Services"
-}
+  telephone: "+44-xxx-xxx-xxxx",
+  url: "https://domain.com/locations/[location]",
+  areaServed: "[Location] and surrounding areas",
+  serviceType: "Scaffolding Services",
+};
 
 // ✅ FAQPage Schema (pages with FAQs)
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  "mainEntity": [
+  mainEntity: [
     {
       "@type": "Question",
-      "name": "Question text",
-      "acceptedAnswer": {
+      name: "Question text",
+      acceptedAnswer: {
         "@type": "Answer",
-        "text": "Answer text"
-      }
-    }
-  ]
-}
+        text: "Answer text",
+      },
+    },
+  ],
+};
 
 // ✅ BreadcrumbList Schema (all pages)
 const breadcrumbSchema = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
-  "itemListElement": [
+  itemListElement: [
     {
       "@type": "ListItem",
-      "position": 1,
-      "name": "Home",
-      "item": "https://domain.com/"
-    }
-  ]
-}
+      position: 1,
+      name: "Home",
+      item: "https://domain.com/",
+    },
+  ],
+};
 ```
 
 **Schema Implementation:**
+
 ```tsx
 // ✅ Add to page head
 <script
@@ -319,8 +352,9 @@ const breadcrumbSchema = {
 ```
 
 **Schema Rules:**
+
 - ✅ Every location page needs LocalBusiness schema
-- ✅ Pages with FAQs need FAQPage schema  
+- ✅ Pages with FAQs need FAQPage schema
 - ✅ All pages need Breadcrumb schema
 - ✅ Service pages need Service schema
 - ✅ Use structured data testing tool to validate
@@ -330,6 +364,7 @@ const breadcrumbSchema = {
 ### **🏷️ STRUCTURED DATA STANDARDS**
 
 **Image Requirements:**
+
 ```tsx
 // ✅ All images must have
 <img
@@ -342,6 +377,7 @@ const breadcrumbSchema = {
 ```
 
 **Heading Hierarchy:**
+
 ```tsx
 // ✅ CORRECT structure
 <h1>Main Page Topic</h1>
@@ -358,30 +394,32 @@ const breadcrumbSchema = {
 ### **⚛️ REACT PATTERNS**
 
 **Component Structure:**
+
 ```tsx
 // ✅ CORRECT - Clean, typed, reusable
 interface ComponentProps {
-  title: string
-  items: Array<{ name: string; value: string }>
+  title: string;
+  items: Array<{ name: string; value: string }>;
 }
 
 export const ComponentName = ({ title, items }: ComponentProps) => {
   return (
     <div className="container mx-auto p-6">
       <h2 className="text-2xl font-bold mb-4">{title}</h2>
-      {items.map(item => (
+      {items.map((item) => (
         <div key={item.name} className="mb-2">
           {item.name}: {item.value}
         </div>
       ))}
     </div>
-  )
-}
+  );
+};
 ```
 
 ### **🚫 WHAT NOT TO DO**
 
 **Banned Practices:**
+
 - ❌ Inline styles anywhere
 - ❌ Components outside `/components/ui/`
 - ❌ Hardcoded content in components
@@ -402,6 +440,7 @@ export const ComponentName = ({ title, items }: ComponentProps) => {
 ### **✅ QUALITY CHECKLIST**
 
 **Before completing any task, verify:**
+
 - [ ] All new components in `/components/ui/`
 - [ ] All styling uses Tailwind classes only
 - [ ] **Styling:** All repeated patterns extracted to maintainable classes in `globals.css`
@@ -425,6 +464,7 @@ export const ComponentName = ({ title, items }: ComponentProps) => {
 ### **🔄 REFACTORING PRIORITY**
 
 **When modifying existing code:**
+
 1. **Fix architecture first** - Ensure MDX-first pattern
 2. **Fix styling** - Remove inline styles, use Tailwind
 3. **Move components** - Relocate to `/components/ui/` if reusable
@@ -436,6 +476,7 @@ export const ComponentName = ({ title, items }: ComponentProps) => {
 ### **📋 EXAMPLE TASK COMPLETION**
 
 **When asked to "create location pages":**
+
 1. ✅ Create rich MDX content in `/content/locations/[location].mdx`
 2. ✅ Ensure dynamic route reads MDX files as primary source
 3. ✅ Use existing components with Tailwind classes only
@@ -450,6 +491,7 @@ export const ComponentName = ({ title, items }: ComponentProps) => {
 ### **🛠️ TESTING REQUIREMENTS**
 
 **Before marking task complete:**
+
 - [ ] **Lighthouse SEO score:** 95+
 - [ ] **Schema validation:** Pass Google's Rich Results Test
 - [ ] **Accessibility:** Pass WCAG AA (contrast, alt text, headings)
@@ -462,6 +504,7 @@ export const ComponentName = ({ title, items }: ComponentProps) => {
 ### **⚠️ CRITICAL ARCHITECTURE RULES**
 
 **MDX-FIRST CONTENT SYSTEM:**
+
 - ✅ **PRIMARY:** Rich MDX files with comprehensive local content
 - ✅ **SECONDARY:** Centralized data as fallback only
 - ✅ **DYNAMIC ROUTING:** Must read MDX first, fallback second
@@ -471,10 +514,14 @@ export const ComponentName = ({ title, items }: ComponentProps) => {
 
 **VIOLATION DETECTION:**
 Any of these files indicate architecture violations and must be deleted immediately:
+
 - `/app/locations/[specific-location]/page.tsx`
-- `/lib/[specific-location]-content.ts`  
+- `/lib/[specific-location]-content.ts`
 - Any location-specific routing or content files
 
 **ENFORCEMENT:**
 These rules are MANDATORY and NON-NEGOTIABLE. Any violations must be corrected immediately before proceeding with any other work.
+
+```
+
 ```
