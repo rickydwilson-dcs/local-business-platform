@@ -2,6 +2,7 @@ import path from "path";
 import { promises as fs } from "fs";
 import type { Metadata } from "next";
 import matter from "gray-matter";
+import { MDXRemote } from "next-mdx-remote/rsc";
 
 import { PageLayout } from "@/components/layouts/page-layout";
 import { HeroSection } from "@/components/ui/hero-section";
@@ -41,29 +42,24 @@ async function getMDXContent(slug: string) {
   }
 }
 
-
 export async function generateStaticParams() {
   // Generate params from both MDX files and centralized location data
   const mdxEntries = await fs.readdir(DIR).catch(() => []);
   const mdxParams = mdxEntries
     .filter((f) => f.toLowerCase().endsWith(".mdx"))
     .map((f) => ({ slug: f.replace(/\.mdx$/i, "") }));
-  
+
   // Add params from centralized location data
-  const locationParams = getAllLocations().map(location => ({ slug: location.slug }));
-  
+  const locationParams = getAllLocations().map((location) => ({ slug: location.slug }));
+
   // Combine and deduplicate
   const allParams = [...mdxParams, ...locationParams];
-  const uniqueParams = Array.from(
-    new Map(allParams.map(p => [p.slug, p])).values()
-  );
-  
+  const uniqueParams = Array.from(new Map(allParams.map((p) => [p.slug, p])).values());
+
   return uniqueParams;
 }
 
-export async function generateMetadata(
-  { params }: { params: Promise<Params> }
-): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
   const { slug } = await params;
   const { frontmatter } = await getMDXContent(slug);
 
@@ -72,7 +68,9 @@ export async function generateMetadata(
     return {
       title: frontmatter.seoTitle || `${frontmatter.title} | Colossus Scaffolding`,
       description: frontmatter.description,
-      keywords: Array.isArray(frontmatter.keywords) ? frontmatter.keywords.join(", ") : frontmatter.keywords,
+      keywords: Array.isArray(frontmatter.keywords)
+        ? frontmatter.keywords.join(", ")
+        : frontmatter.keywords,
       openGraph: {
         title: frontmatter.seoTitle || `${frontmatter.title} | Colossus Scaffolding`,
         description: frontmatter.description,
@@ -83,20 +81,20 @@ export async function generateMetadata(
             url: absUrl("/static/logo.png"),
             width: 1200,
             height: 630,
-            alt: `Professional scaffolding services in ${frontmatter.title} - Colossus Scaffolding`
-          }
+            alt: `Professional scaffolding services in ${frontmatter.title} - Colossus Scaffolding`,
+          },
         ],
         locale: "en_GB",
-        type: "website"
+        type: "website",
       },
       twitter: {
         card: "summary_large_image",
         title: frontmatter.seoTitle || `${frontmatter.title} | Colossus Scaffolding`,
-        description: frontmatter.description
+        description: frontmatter.description,
       },
       alternates: {
-        canonical: absUrl(`/locations/${slug}`)
-      }
+        canonical: absUrl(`/locations/${slug}`),
+      },
     };
   }
 
@@ -110,41 +108,43 @@ export async function generateMetadata(
       description: locationData.description,
       url: absUrl(`/locations/${slug}`),
       siteName: "Colossus Scaffolding",
-      images: locationData.heroImage ? [
-        {
-          url: absUrl(locationData.heroImage),
-          width: 1200,
-          height: 630,
-          alt: `Scaffolding Services in ${locationData.title} - Colossus Scaffolding`
-        }
-      ] : [
-        {
-          url: absUrl("/static/logo.png"),
-          width: 1200,
-          height: 630,
-          alt: `Scaffolding Services in ${locationData.title} - Colossus Scaffolding`
-        }
-      ],
+      images: locationData.heroImage
+        ? [
+            {
+              url: absUrl(locationData.heroImage),
+              width: 1200,
+              height: 630,
+              alt: `Scaffolding Services in ${locationData.title} - Colossus Scaffolding`,
+            },
+          ]
+        : [
+            {
+              url: absUrl("/static/logo.png"),
+              width: 1200,
+              height: 630,
+              alt: `Scaffolding Services in ${locationData.title} - Colossus Scaffolding`,
+            },
+          ],
       locale: "en_GB",
-      type: "website"
+      type: "website",
     },
     twitter: {
       card: "summary_large_image",
       title: `Scaffolding Services in ${locationData.title} | Colossus Scaffolding`,
       description: locationData.description,
-      images: locationData.heroImage ? [absUrl(locationData.heroImage)] : [absUrl("/static/logo.png")]
+      images: locationData.heroImage
+        ? [absUrl(locationData.heroImage)]
+        : [absUrl("/static/logo.png")],
     },
     alternates: {
-      canonical: absUrl(`/locations/${slug}`)
-    }
+      canonical: absUrl(`/locations/${slug}`),
+    },
   };
 }
 
-export default async function Page(
-  { params }: { params: Promise<Params> }
-) {
+export default async function Page({ params }: { params: Promise<Params> }) {
   const { slug } = await params;
-  const { frontmatter, hasMDX } = await getMDXContent(slug);
+  const { frontmatter, content, hasMDX } = await getMDXContent(slug);
 
   // If we have MDX content, render it with Brighton-style components
   if (hasMDX && frontmatter) {
@@ -183,7 +183,7 @@ export default async function Page(
               description={specialistsData.description}
               cards={specialistsData.cards}
               columns={specialistsData.columns || 2}
-              backgroundColor={specialistsData.backgroundColor || 'gray'}
+              backgroundColor={specialistsData.backgroundColor || "gray"}
               showBottomCTA={specialistsData.showBottomCTA || true}
             />
           )}
@@ -224,6 +224,17 @@ export default async function Page(
             />
           )}
 
+          {/* Render MDX content (service sections) */}
+          {content && (
+            <section className="section-standard bg-white">
+              <div className="container-standard">
+                <div className="prose prose-lg max-w-none">
+                  <MDXRemote source={content} />
+                </div>
+              </div>
+            </section>
+          )}
+
           {ctaData.title && (
             <CTASection
               title={ctaData.title}
@@ -241,7 +252,10 @@ export default async function Page(
           <Schema
             service={schemaData.service}
             faqs={faqData}
-            breadcrumbs={breadcrumbData.map((b: { name: string; href: string }) => ({ name: b.name, url: b.href }))}
+            breadcrumbs={breadcrumbData.map((b: { name: string; href: string }) => ({
+              name: b.name,
+              url: b.href,
+            }))}
           />
         )}
       </PageLayout>
@@ -263,8 +277,8 @@ export default async function Page(
       name: locationData.title,
       containedInPlace: {
         "@type": "Place",
-        name: locationData.county
-      }
+        name: locationData.county,
+      },
     },
     hasOfferCatalog: {
       "@type": "OfferCatalog",
@@ -276,19 +290,19 @@ export default async function Page(
           "@type": "Service",
           name: service.name,
           description: service.description,
-          url: absUrl(service.href)
-        }
-      }))
+          url: absUrl(service.href),
+        },
+      })),
     },
     parentOrganization: {
-      "@id": absUrl("/#organization")
+      "@id": absUrl("/#organization"),
     },
     aggregateRating: {
       "@type": "AggregateRating",
       ratingValue: "4.8",
       bestRating: "5",
-      ratingCount: "67"
-    }
+      ratingCount: "67",
+    },
   };
 
   const faqSchema = {
@@ -300,9 +314,9 @@ export default async function Page(
       name: faq.question,
       acceptedAnswer: {
         "@type": "Answer",
-        text: faq.answer
-      }
-    }))
+        text: faq.answer,
+      },
+    })),
   };
 
   const breadcrumbSchema = {
@@ -313,26 +327,26 @@ export default async function Page(
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: absUrl("/")
+        item: absUrl("/"),
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "Locations",
-        item: absUrl("/locations")
+        item: absUrl("/locations"),
       },
       {
         "@type": "ListItem",
         position: 3,
         name: locationData.title,
-        item: absUrl(`/locations/${slug}`)
-      }
-    ]
+        item: absUrl(`/locations/${slug}`),
+      },
+    ],
   };
 
   const breadcrumbItems = [
     { name: "Locations", href: "/locations" },
-    { name: locationData.title, href: `/locations/${slug}`, current: true }
+    { name: locationData.title, href: `/locations/${slug}`, current: true },
   ];
 
   return (
@@ -341,19 +355,19 @@ export default async function Page(
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(localBusinessSchema)
+          __html: JSON.stringify(localBusinessSchema),
         }}
       />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(faqSchema)
+          __html: JSON.stringify(faqSchema),
         }}
       />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(breadcrumbSchema)
+          __html: JSON.stringify(breadcrumbSchema),
         }}
       />
 
@@ -385,10 +399,7 @@ export default async function Page(
         coverageAreas={locationData.coverageAreas}
       />
 
-      <LocationFAQ
-        items={locationData.faqs}
-        location={locationData.title}
-      />
+      <LocationFAQ items={locationData.faqs} location={locationData.title} />
 
       <ServiceCTA
         title="Ready to Start Your Project?"
