@@ -433,6 +433,204 @@ function getServiceData(slug: string): ServiceData {
         },
       ],
     },
+    "commercial-scaffolding-brighton": {
+      title: "Commercial Scaffolding Brighton",
+      description:
+        "Professional commercial scaffolding in Brighton. Churchill Square, Brighton Marina, seafront properties. TG20:21 compliant, minimal disruption to business operations.",
+      badge: "Coastal Specialists",
+      benefits: [
+        "Brighton business district expertise",
+        "Churchill Square and marina experience",
+        "Coastal-grade wind-resistant systems",
+        "Heritage building compliance for The Lanes",
+        "Tourism-sensitive installation methods",
+        "Brighton City Council coordination",
+        "Pedestrian protection for high-footfall areas",
+        "Marine-grade corrosion protection",
+      ],
+      faqs: [
+        {
+          question: "Can you work around business hours in Brighton?",
+          answer:
+            "Yes, we offer flexible installation schedules including out-of-hours and weekend work to minimize disruption to Brighton businesses.",
+        },
+        {
+          question: "Do you handle Brighton City Council commercial permits?",
+          answer:
+            "Absolutely. We manage all necessary permits including highway licenses, planning applications, and conservation area approvals for Brighton commercial projects.",
+        },
+        {
+          question: "Can you work on seafront commercial buildings?",
+          answer:
+            "Certainly. Our scaffolding is specifically designed for Brighton's coastal commercial properties with enhanced wind loading and corrosion protection.",
+        },
+      ],
+    },
+    "commercial-scaffolding-canterbury": {
+      title: "Commercial Scaffolding Canterbury",
+      description:
+        "UNESCO-compliant commercial scaffolding in Canterbury. World Heritage Site expertise, University of Kent projects, cathedral precinct work with ecclesiastical coordination.",
+      badge: "UNESCO Compliant",
+      benefits: [
+        "World Heritage Site compliance protocols",
+        "Canterbury Cathedral precinct expertise",
+        "University of Kent coordination",
+        "UNESCO approval processes",
+        "Medieval city centre navigation",
+        "Ecclesiastical authority liaison",
+        "Tourist area consideration",
+        "Academic calendar coordination",
+      ],
+      faqs: [
+        {
+          question: "Can you work within Canterbury's World Heritage Site?",
+          answer:
+            "Yes, we specialize in World Heritage Site commercial projects with full UNESCO protocol compliance and heritage authority coordination.",
+        },
+        {
+          question: "Do you handle cathedral precinct commercial work?",
+          answer:
+            "Absolutely. We have extensive experience with commercial properties in Canterbury Cathedral's precinct, including ecclesiastical approval processes.",
+        },
+        {
+          question: "Can you coordinate with University of Kent schedules?",
+          answer:
+            "Certainly. We work closely with university operations to schedule commercial scaffolding around academic calendars and campus activities.",
+        },
+      ],
+    },
+    "commercial-scaffolding-hastings": {
+      title: "Commercial Scaffolding Hastings",
+      description:
+        "Heritage-compliant commercial scaffolding in Hastings. Old Town medieval buildings, St Leonards properties, seafront commercial with extreme coastal protection.",
+      badge: "Heritage Experts",
+      benefits: [
+        "Old Town medieval building expertise",
+        "St Leonards commercial property experience",
+        "Extreme coastal weather resistance",
+        "Heritage conservation compliance",
+        "Narrow medieval street navigation",
+        "Tourism operation coordination",
+        "Fishing industry consideration",
+        "Archaeological site protocols",
+      ],
+      faqs: [
+        {
+          question: "Can you work on medieval commercial buildings in the Old Town?",
+          answer:
+            "Yes, we specialize in medieval commercial properties with full heritage compliance and conservation area approval processes.",
+        },
+        {
+          question: "Do you handle extreme coastal weather conditions?",
+          answer:
+            "Absolutely. Our scaffolding is specifically engineered for Hastings' challenging seafront exposure with enhanced storm resistance.",
+        },
+        {
+          question: "Can you work around the fishing industry operations?",
+          answer:
+            "Certainly. We coordinate with harbour operations and fishing industry schedules to minimize disruption to marine commercial activities.",
+        },
+      ],
+    },
+    "residential-scaffolding-brighton": {
+      title: "Residential Scaffolding Brighton",
+      description:
+        "Professional residential scaffolding in Brighton. Victorian terraces, Regency properties, seafront homes. Family-friendly with minimal disruption to coastal living.",
+      badge: "Family Friendly",
+      benefits: [
+        "Victorian terrace expertise in The Lanes",
+        "Regency property restoration in Kemptown",
+        "Coastal home wind-resistant systems",
+        "Heritage-sensitive installation methods",
+        "Garden and driveway protection",
+        "School and family routine coordination",
+        "Brighton parking restriction management",
+        "Salt-resistant materials for seafront properties",
+      ],
+      faqs: [
+        {
+          question: "Will scaffolding damage my Brighton garden or driveway?",
+          answer:
+            "We use protective boards and matting to protect all surfaces. Our experienced teams take special care with Brighton's often limited garden spaces.",
+        },
+        {
+          question: "Can you work around my family's schedule in Brighton?",
+          answer:
+            "Absolutely. We understand Brighton family life and work flexibly around school runs, work schedules, and family routines to minimize disruption.",
+        },
+        {
+          question: "How do you handle Brighton's coastal weather?",
+          answer:
+            "Our scaffolding is designed for coastal conditions with enhanced tie-downs and weather monitoring. We adapt installation methods for Brighton's seaside environment.",
+        },
+      ],
+    },
+    "residential-scaffolding-canterbury": {
+      title: "Residential Scaffolding Canterbury",
+      description:
+        "Heritage-compliant residential scaffolding in Canterbury. Medieval properties, cathedral precinct homes, university housing with conservation compliance.",
+      badge: "Heritage Compliant",
+      benefits: [
+        "Medieval residential property expertise",
+        "Cathedral precinct proximity protocols",
+        "World Heritage Site compliance",
+        "University area coordination",
+        "Conservation area approval assistance",
+        "Archaeological consideration protocols",
+        "Ecclesiastical authority liaison",
+        "Academic term scheduling coordination",
+      ],
+      faqs: [
+        {
+          question: "Can you work on homes in Canterbury's World Heritage Site?",
+          answer:
+            "Yes, we specialize in World Heritage Site residential properties with full UNESCO compliance and heritage authority coordination.",
+        },
+        {
+          question: "Do you handle heritage approvals for residential work?",
+          answer:
+            "Absolutely. We assist with all heritage applications for residential properties, working directly with Canterbury's conservation officers and heritage authorities.",
+        },
+        {
+          question: "How do you coordinate with the cathedral authorities?",
+          answer:
+            "We maintain established relationships with Canterbury Cathedral's authorities and coordinate all residential work near the cathedral precinct.",
+        },
+      ],
+    },
+    "residential-scaffolding-hastings": {
+      title: "Residential Scaffolding Hastings",
+      description:
+        "Heritage-sensitive residential scaffolding in Hastings. Medieval cottages, Regency terraces, cliff-top homes with specialized terrain and coastal solutions.",
+      badge: "Coastal Heritage",
+      benefits: [
+        "Medieval cottage restoration expertise",
+        "Regency terrace specialist knowledge",
+        "Cliff-top property access solutions",
+        "Extreme coastal weather resistance",
+        "Old Town narrow alley navigation",
+        "Heritage conservation compliance",
+        "Archaeological site consideration",
+        "St Leonards period property experience",
+      ],
+      faqs: [
+        {
+          question: "Can you work on medieval cottages in the Old Town?",
+          answer:
+            "Yes, we specialize in medieval residential properties with full heritage compliance and conservation area approval coordination.",
+        },
+        {
+          question: "Do you handle cliff-top properties on East and West Hills?",
+          answer:
+            "Absolutely. We have extensive experience with challenging cliff-top terrain and provide specialized anchoring systems for elevated coastal properties.",
+        },
+        {
+          question: "Can you access properties through narrow Old Town alleys?",
+          answer:
+            "Certainly. We use specialized compact equipment and have extensive experience navigating Hastings' medieval street patterns and narrow residential access routes.",
+        },
+      ],
+    },
   };
 
   return (
