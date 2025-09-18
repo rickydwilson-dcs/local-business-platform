@@ -1,6 +1,7 @@
 import path from "path";
 import { promises as fs } from "fs";
 import type { Metadata } from "next";
+import Link from "next/link";
 
 import { ServiceHero } from "@/components/ui/service-hero";
 import ServiceAbout from "@/components/ui/service-about";
@@ -758,63 +759,7 @@ export async function generateStaticParams() {
   const entries = await fs.readdir(DIR);
   return entries
     .filter((f) => f.toLowerCase().endsWith(".mdx"))
-    .map((f) => f.replace(/\.mdx$/i, ""))
-    .filter((slug) => {
-      // Skip location-specific service files
-      return !(
-        slug.includes("-brighton") ||
-        slug.includes("-canterbury") ||
-        slug.includes("-hastings") ||
-        slug.includes("-ashford") ||
-        slug.includes("-maidstone") ||
-        slug.includes("-folkestone") ||
-        slug.includes("-dover") ||
-        slug.includes("-tunbridge-wells") ||
-        slug.includes("-sevenoaks") ||
-        slug.includes("-dartford") ||
-        slug.includes("-gravesend") ||
-        slug.includes("-medway") ||
-        slug.includes("-crawley") ||
-        slug.includes("-horsham") ||
-        slug.includes("-worthing") ||
-        slug.includes("-chichester") ||
-        slug.includes("-bognor-regis") ||
-        slug.includes("-littlehampton") ||
-        slug.includes("-east-grinstead") ||
-        slug.includes("-haywards-heath") ||
-        slug.includes("-burgess-hill") ||
-        slug.includes("-lewes") ||
-        slug.includes("-newhaven") ||
-        slug.includes("-seaford") ||
-        slug.includes("-eastbourne") ||
-        slug.includes("-hailsham") ||
-        slug.includes("-uckfield") ||
-        slug.includes("-heathfield") ||
-        slug.includes("-battle") ||
-        slug.includes("-rye") ||
-        slug.includes("-crowborough") ||
-        slug.includes("-wadhurst") ||
-        slug.includes("-ticehurst") ||
-        slug.includes("-robertsbridge") ||
-        slug.includes("-winchelsea") ||
-        slug.includes("-guildford") ||
-        slug.includes("-woking") ||
-        slug.includes("-farnham") ||
-        slug.includes("-camberley") ||
-        slug.includes("-staines") ||
-        slug.includes("-epsom") ||
-        slug.includes("-leatherhead") ||
-        slug.includes("-dorking") ||
-        slug.includes("-redhill") ||
-        slug.includes("-reigate") ||
-        slug.includes("-banstead") ||
-        slug.includes("-caterham") ||
-        slug.includes("-oxted") ||
-        slug.includes("-warlingham") ||
-        slug.includes("-godstone")
-      );
-    })
-    .map((slug) => ({ slug }));
+    .map((f) => ({ slug: f.replace(/\.mdx$/i, "") }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
@@ -938,10 +883,30 @@ export default async function Page({ params }: { params: Promise<Params> }) {
     .replace(" Solutions", "")
     .replace(" Systems", "");
 
-  const breadcrumbItems = [
-    { name: "Services", href: "/services" },
-    { name: serviceName, href: `/services/${slug}`, current: true },
-  ];
+  // Detect if this is a location-specific service
+  const isLocationSpecific =
+    slug.includes("-brighton") || slug.includes("-canterbury") || slug.includes("-hastings");
+  let locationName = "";
+  let locationSlug = "";
+
+  if (isLocationSpecific) {
+    const parts = slug.split("-");
+    const lastPart = parts[parts.length - 1];
+    locationName = lastPart.charAt(0).toUpperCase() + lastPart.slice(1);
+    locationSlug = lastPart;
+  }
+
+  // Build breadcrumbs based on location-specific or general service
+  const breadcrumbItems = isLocationSpecific
+    ? [
+        { name: "Locations", href: "/locations" },
+        { name: locationName, href: `/locations/${locationSlug}` },
+        { name: serviceName, href: `/services/${slug}`, current: true },
+      ]
+    : [
+        { name: "Services", href: "/services" },
+        { name: serviceName, href: `/services/${slug}`, current: true },
+      ];
 
   return (
     <>
@@ -951,6 +916,28 @@ export default async function Page({ params }: { params: Promise<Params> }) {
           <Breadcrumbs items={breadcrumbItems} />
         </div>
       </div>
+
+      {/* Location Services Button for location-specific services */}
+      {isLocationSpecific && (
+        <section className="bg-brand-blue/5 border-b">
+          <div className="mx-auto w-full lg:w-[90%] px-6 py-4">
+            <Link
+              href={`/locations/${locationSlug}`}
+              className="inline-flex items-center gap-2 text-brand-blue hover:text-brand-blue-hover font-medium transition-colors"
+            >
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M10 19l-7-7m0 0l7-7m-7 7h18"
+                />
+              </svg>
+              More scaffolding services in {locationName}
+            </Link>
+          </div>
+        </section>
+      )}
 
       <ServiceHero
         title={serviceData.title}
@@ -1033,11 +1020,20 @@ export default async function Page({ params }: { params: Promise<Params> }) {
           url: "/",
           logo: "/Colossus-Scaffolding-Logo.svg",
         }}
-        breadcrumbs={[
-          { name: "Home", url: "/" },
-          { name: "Services", url: "/services" },
-          { name: serviceName, url: `/services/${slug}` },
-        ]}
+        breadcrumbs={
+          isLocationSpecific
+            ? [
+                { name: "Home", url: "/" },
+                { name: "Locations", url: "/locations" },
+                { name: locationName, url: `/locations/${locationSlug}` },
+                { name: serviceName, url: `/services/${slug}` },
+              ]
+            : [
+                { name: "Home", url: "/" },
+                { name: "Services", url: "/services" },
+                { name: serviceName, url: `/services/${slug}` },
+              ]
+        }
         faqs={serviceData.faqs}
       />
     </>
