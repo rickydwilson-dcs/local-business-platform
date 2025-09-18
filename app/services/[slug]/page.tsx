@@ -758,7 +758,63 @@ export async function generateStaticParams() {
   const entries = await fs.readdir(DIR);
   return entries
     .filter((f) => f.toLowerCase().endsWith(".mdx"))
-    .map((f) => ({ slug: f.replace(/\.mdx$/i, "") }));
+    .map((f) => f.replace(/\.mdx$/i, ""))
+    .filter((slug) => {
+      // Skip location-specific service files
+      return !(
+        slug.includes("-brighton") ||
+        slug.includes("-canterbury") ||
+        slug.includes("-hastings") ||
+        slug.includes("-ashford") ||
+        slug.includes("-maidstone") ||
+        slug.includes("-folkestone") ||
+        slug.includes("-dover") ||
+        slug.includes("-tunbridge-wells") ||
+        slug.includes("-sevenoaks") ||
+        slug.includes("-dartford") ||
+        slug.includes("-gravesend") ||
+        slug.includes("-medway") ||
+        slug.includes("-crawley") ||
+        slug.includes("-horsham") ||
+        slug.includes("-worthing") ||
+        slug.includes("-chichester") ||
+        slug.includes("-bognor-regis") ||
+        slug.includes("-littlehampton") ||
+        slug.includes("-east-grinstead") ||
+        slug.includes("-haywards-heath") ||
+        slug.includes("-burgess-hill") ||
+        slug.includes("-lewes") ||
+        slug.includes("-newhaven") ||
+        slug.includes("-seaford") ||
+        slug.includes("-eastbourne") ||
+        slug.includes("-hailsham") ||
+        slug.includes("-uckfield") ||
+        slug.includes("-heathfield") ||
+        slug.includes("-battle") ||
+        slug.includes("-rye") ||
+        slug.includes("-crowborough") ||
+        slug.includes("-wadhurst") ||
+        slug.includes("-ticehurst") ||
+        slug.includes("-robertsbridge") ||
+        slug.includes("-winchelsea") ||
+        slug.includes("-guildford") ||
+        slug.includes("-woking") ||
+        slug.includes("-farnham") ||
+        slug.includes("-camberley") ||
+        slug.includes("-staines") ||
+        slug.includes("-epsom") ||
+        slug.includes("-leatherhead") ||
+        slug.includes("-dorking") ||
+        slug.includes("-redhill") ||
+        slug.includes("-reigate") ||
+        slug.includes("-banstead") ||
+        slug.includes("-caterham") ||
+        slug.includes("-oxted") ||
+        slug.includes("-warlingham") ||
+        slug.includes("-godstone")
+      );
+    })
+    .map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
