@@ -13,7 +13,7 @@ export function getServiceData(slug: string): ServiceData {
       description:
         "Professional commercial scaffolding for office buildings, retail developments, and business districts across the South East UK.",
       badge: "Business Focus",
-      image: "/Commercial Scaffolding.png",
+      image: "/Access Scaffolding new build.png",
       features: [
         "Business Continuity Planning",
         "Pedestrian Protection Systems",
@@ -26,7 +26,7 @@ export function getServiceData(slug: string): ServiceData {
       description:
         "Safe, reliable scaffolding for homes, extensions, and renovations. Family-friendly approach with minimal garden disruption.",
       badge: "Family Friendly",
-      image: "/Residential Scaffolding.png",
+      image: "/Access Scaffolding new build.png",
       features: [
         "Garden & Property Protection",
         "Family Schedule Coordination",
@@ -39,7 +39,7 @@ export function getServiceData(slug: string): ServiceData {
       description:
         "Heavy-duty scaffolding systems for industrial facilities, ports, and manufacturing sites. Engineered for complex structural challenges.",
       badge: "Heavy Duty",
-      image: "/Industrial Scaffolding.png",
+      image: "/Heavy Industrial Scaffolding.png",
       features: [
         "Heavy-duty Load Capacity",
         "Specialized Access Solutions",

@@ -32,7 +32,7 @@ export function ContentCard({
       href={href}
       className="bg-white rounded-2xl shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 group relative block cursor-pointer overflow-hidden"
     >
-      {(badge || isHeadquarters) && (
+      {(badge || isHeadquarters) && contentType !== "services" && (
         <div className="absolute top-4 right-4 z-10">
           <span className="px-3 py-1 bg-brand-blue text-white text-sm font-medium rounded-full">
             {badge || (isHeadquarters ? "Headquarters" : "")}
