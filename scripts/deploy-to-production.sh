@@ -56,17 +56,18 @@ fi
 echo ""
 echo "🚀 Deploying to production..."
 
-# Push staging to main (quality checks run automatically via pre-push hooks)
-echo "📤 Pushing staging to main..."
-git push origin staging:main
+# Switch to main and merge staging (quality checks run automatically)
+echo "📤 Switching to main branch and merging staging..."
+git checkout main
+git pull origin main
+git merge staging --no-edit
+git push origin main
 
 echo ""
 echo "✅ Successfully deployed to main branch!"
 echo "📤 Now deploying to production branch..."
 
-# Switch to main and push to production
-git checkout main
-git pull origin main
+# Push to production (already on main branch)
 git push origin main:production
 
 echo ""
