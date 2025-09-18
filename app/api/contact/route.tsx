@@ -1,7 +1,10 @@
 // app/api/contact/route.tsx
+import { Resend } from "resend";
 
-export const runtime = "nodejs";            // Explicit runtime for Vercel/Next 15
-export const dynamic = "force-dynamic";     // Ensure the route always runs on request
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
+
+const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
 
 type ContactPayload = {
   name: string;
@@ -9,12 +12,11 @@ type ContactPayload = {
   message: string;
   phone?: string;
   subject?: string;
-  service?: string;   // e.g., "access-scaffolding"
-  location?: string;  // e.g., "bexhill"
+  service?: string; // e.g., "access-scaffolding"
+  location?: string; // e.g., "bexhill"
 };
 
 function isValidEmail(email: string): boolean {
-  // Simple, safe email check (keeps ESLint happy; no heavy regex)
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
@@ -47,8 +49,7 @@ export async function POST(request: Request): Promise<Response> {
       return Response.json({ error: "Validation failed", details: errors }, { status: 422 });
     }
 
-    // TODO: hook in your mail/CRM provider here (e.g., SendGrid, SES, HubSpot, etc.)
-    // Example shape you might send downstream:
+    // Build submission data
     const submission = {
       name,
       email,
@@ -63,41 +64,149 @@ export async function POST(request: Request): Promise<Response> {
       ip: request.headers.get("x-forwarded-for") || null,
     };
 
-    // For now, just acknowledge. Avoid console.log in lambdas unless needed.
-    // If you want to debug locally, uncomment:
-    // console.log("Contact submission:", submission);
+    // Create email subject
+    const emailSubject =
+      subject ||
+      `New enquiry from ${name}${service ? ` - ${service}` : ""}${location ? ` (${location})` : ""}`;
 
-    return Response.json(
-      {
-        ok: true,
-        message: "Thanks! Your enquiry has been received.",
-        received: submission,
-      },
-      { status: 200 }
-    );
+    // Create email HTML content
+    const emailHtml = `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+        <h2 style="color: #5BC0EB; border-bottom: 2px solid #5BC0EB; padding-bottom: 10px;">
+          New Contact Form Submission
+        </h2>
+
+        <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
+          <h3 style="margin-top: 0; color: #333;">Contact Details</h3>
+          <p><strong>Name:</strong> ${name}</p>
+          <p><strong>Email:</strong> ${email}</p>
+          ${phone ? `<p><strong>Phone:</strong> ${phone}</p>` : ""}
+          ${service ? `<p><strong>Service:</strong> ${service}</p>` : ""}
+          ${location ? `<p><strong>Location:</strong> ${location}</p>` : ""}
+        </div>
+
+        <div style="margin: 20px 0;">
+          <h3 style="color: #333;">Message</h3>
+          <div style="background: white; padding: 20px; border-left: 4px solid #5BC0EB; white-space: pre-wrap;">${message}</div>
+        </div>
+
+        <div style="background: #f1f3f4; padding: 15px; border-radius: 4px; margin: 20px 0; font-size: 12px; color: #666;">
+          <p><strong>Submission Details:</strong></p>
+          <p>Received: ${new Date().toLocaleString("en-GB")}</p>
+          ${submission.referer ? `<p>From page: ${submission.referer}</p>` : ""}
+          ${submission.ip ? `<p>IP: ${submission.ip}</p>` : ""}
+        </div>
+
+        <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd; text-align: center; color: #666; font-size: 12px;">
+          <p>This email was sent from the Colossus Scaffolding contact form</p>
+        </div>
+      </div>
+    `;
+
+    // Send email via Resend
+    try {
+      // Check if Resend is configured
+      if (!resend || !process.env.BUSINESS_EMAIL || !process.env.BUSINESS_NAME) {
+        console.log("Email service not configured. Logging submission instead:");
+        console.log("Email Subject:", emailSubject);
+        console.log(
+          "Business Email would be sent to:",
+          process.env.BUSINESS_EMAIL || "Not configured"
+        );
+        console.log("Email HTML:", emailHtml);
+
+        return Response.json(
+          {
+            ok: true,
+            message: "Thanks! Your enquiry has been received.",
+            received: submission,
+          },
+          { status: 200 }
+        );
+      }
+
+      const emailResult = await resend.emails.send({
+        from: `${process.env.BUSINESS_NAME} <noreply@colossusscaffolding.co.uk>`,
+        to: [process.env.BUSINESS_EMAIL!],
+        replyTo: email, // Allow direct reply to customer
+        subject: emailSubject,
+        html: emailHtml,
+      });
+
+      console.log("Email sent successfully:", emailResult.data?.id);
+
+      // Send confirmation email to customer
+      const confirmationHtml = `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+          <h2 style="color: #5BC0EB;">Thank You for Your Enquiry</h2>
+
+          <p>Hi ${name},</p>
+
+          <p>Thank you for contacting Colossus Scaffolding. We have received your enquiry and will respond as soon as possible, typically within 24 hours.</p>
+
+          <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
+            <h3 style="margin-top: 0;">Your Enquiry Summary</h3>
+            ${service ? `<p><strong>Service:</strong> ${service}</p>` : ""}
+            ${location ? `<p><strong>Location:</strong> ${location}</p>` : ""}
+            <p><strong>Message:</strong></p>
+            <div style="white-space: pre-wrap; background: white; padding: 15px; border-radius: 4px;">${message}</div>
+          </div>
+
+          <div style="background: #5BC0EB; color: white; padding: 20px; border-radius: 8px; margin: 20px 0;">
+            <h3 style="margin-top: 0;">What Happens Next?</h3>
+            <ul style="padding-left: 20px;">
+              <li>We'll review your enquiry within 2-4 hours</li>
+              <li>One of our scaffolding experts will contact you</li>
+              <li>We'll arrange a free site survey if required</li>
+              <li>You'll receive a detailed quote</li>
+            </ul>
+          </div>
+
+          <p>For urgent enquiries, please call us directly.</p>
+
+          <p>Best regards,<br>
+          <strong>Colossus Scaffolding Team</strong></p>
+
+          <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd; text-align: center; color: #666; font-size: 12px;">
+            <p>Colossus Scaffolding - Professional Scaffolding Services across South East England</p>
+          </div>
+        </div>
+      `;
+
+      await resend.emails.send({
+        from: `${process.env.BUSINESS_NAME} <noreply@colossusscaffolding.co.uk>`,
+        to: [email],
+        subject: `Thank you for your enquiry - ${process.env.BUSINESS_NAME}`,
+        html: confirmationHtml,
+      });
+
+      return Response.json(
+        {
+          ok: true,
+          message: "Thanks! Your enquiry has been received. Check your email for confirmation.",
+          received: submission,
+        },
+        { status: 200 }
+      );
+    } catch (emailError) {
+      console.error("Email sending failed:", emailError);
+
+      // Still return success to user, but log the email failure
+      return Response.json(
+        {
+          ok: true,
+          message: "Thanks! Your enquiry has been received.",
+          received: submission,
+          warning: "Email notification may be delayed.",
+        },
+        { status: 200 }
+      );
+    }
   } catch (err) {
-    // Narrow error type without using `any`
     const message =
       err instanceof Error ? err.message : "Unexpected error while processing request.";
-    return Response.json(
-      { error: "Server error", details: message },
-      { status: 500 }
-    );
+    console.error("Contact form error:", err);
+
+    return Response.json({ error: "Server error", details: message }, { status: 500 });
   }
 }
-
-// Optional: allow preflight/CORS if you ever post from another origin.
-// Remove if not needed.
-/*
-export async function OPTIONS(): Promise<Response> {
-  return new Response(null, {
-    status: 204,
-    headers: {
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "POST, OPTIONS",
-      "Access-Control-Allow-Headers": "Content-Type, Authorization",
-      "Access-Control-Max-Age": "86400",
-    },
-  });
-}
-*/
