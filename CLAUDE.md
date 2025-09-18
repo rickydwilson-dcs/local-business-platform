@@ -2,6 +2,10 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+<!-- Test comment: GitHub Actions workflow test -->
+<!-- Second test: develop → staging automatic push -->
+<!-- Third test: modified approval rules -->
+
 ## Development Commands
 
 - `npm run dev` - Start development server (Next.js 15 with hot reload)
@@ -12,6 +16,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Architecture Overview
 
 This is a Next.js 15 scaffolding company website using:
+
 - **App Router** with TypeScript and React 19
 - **MDX Content Management** via `next-mdx-remote` and `@next/mdx`
 - **Dynamic Route Structure** for services and locations
@@ -29,6 +34,7 @@ This is a Next.js 15 scaffolding company website using:
 ### Content Architecture
 
 The site uses a content-driven architecture where:
+
 1. MDX files in `content/services/` and `content/locations/` drive dynamic pages
 2. Each MDX file includes frontmatter with title, description, and SEO metadata
 3. The `Schema` component automatically generates structured data for services and FAQs
@@ -52,8 +58,9 @@ The site uses a content-driven architecture where:
 ### Brand Configuration
 
 Colors defined in Tailwind config:
+
 - Primary: `brand-blue` (#4DB2E4)
-- Text/Headers: `brand-black` (#000000)  
+- Text/Headers: `brand-black` (#000000)
 - Backgrounds: `brand-white` (#FFFFFF)
 
 Typography: Libre Caslon Display for headings, Arial/Helvetica for body text.
