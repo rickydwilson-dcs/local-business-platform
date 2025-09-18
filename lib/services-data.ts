@@ -5,6 +5,7 @@ export interface ServiceData {
   badge?: string;
   image?: string;
   features?: string[];
+  subtitle?: string[];
 }
 
 export function getServiceData(slug: string): ServiceData {
@@ -14,12 +15,12 @@ export function getServiceData(slug: string): ServiceData {
         "Professional commercial scaffolding for office buildings, retail developments, and business districts across the South East UK.",
       badge: "Business Focus",
       image: "/Access Scaffolding new build.png",
+      subtitle: ["Office Buildings", "Retail Centers"],
       features: [
         "Business Continuity Planning",
         "Pedestrian Protection Systems",
         "Out-of-hours Installation",
         "Minimal Disruption Methods",
-        "Advanced Safety Systems",
       ],
     },
     "residential-scaffolding": {
@@ -27,12 +28,12 @@ export function getServiceData(slug: string): ServiceData {
         "Safe, reliable scaffolding for homes, extensions, and renovations. Family-friendly approach with minimal garden disruption.",
       badge: "Family Friendly",
       image: "/Access Scaffolding new build.png",
+      subtitle: ["Victorian Houses", "Modern Homes"],
       features: [
         "Garden & Property Protection",
         "Family Schedule Coordination",
         "Heritage Property Expertise",
         "TG20:21 Compliant",
-        "Full Insurance Coverage",
       ],
     },
     "industrial-scaffolding": {
@@ -40,12 +41,12 @@ export function getServiceData(slug: string): ServiceData {
         "Heavy-duty scaffolding systems for industrial facilities, ports, and manufacturing sites. Engineered for complex structural challenges.",
       badge: "Heavy Duty",
       image: "/Heavy Industrial Scaffolding.png",
+      subtitle: ["Manufacturing Sites", "Port Operations"],
       features: [
         "Heavy-duty Load Capacity",
         "Specialized Access Solutions",
         "Long-term Project Support",
         "Industrial Safety Compliance",
-        "24/7 Emergency Response",
       ],
     },
     "access-scaffolding": {

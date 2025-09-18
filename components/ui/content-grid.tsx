@@ -34,6 +34,7 @@ export function ContentGrid({
           image={(item.image as string) || (item.heroImage as string)}
           features={item.features as string[]}
           towns={item.towns as string[]}
+          subtitle={item.subtitle as string[]}
           isHeadquarters={item.isHeadquarters as boolean}
           contentType={contentType}
         />
