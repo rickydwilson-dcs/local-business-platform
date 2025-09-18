@@ -109,6 +109,7 @@ npm run lint:fix         # Run ESLint with auto-fix
 npm run format           # Format code with Prettier
 npm run type-check       # Check TypeScript types
 npm run pre-commit-check # Run all quality checks
+npm run deploy:production # Auto-create production deployment PR
 ```
 
 ## GitHub Actions Workflow
@@ -238,20 +239,56 @@ git push origin develop
 7. **📋 Use PR templates** - Ensure consistent review process
 8. **🏗️ Make focused commits** - Easier to review and rollback
 
+## Automated Production Deployment
+
+### Using the Deployment Script
+
+When ready to deploy staging to production:
+
+```bash
+npm run deploy:production
+```
+
+**What this script does:**
+
+1. ✅ Switches to staging branch and syncs with remote
+2. ✅ Analyzes commits since last production deployment
+3. ✅ Generates detailed PR description with change summary
+4. ✅ Creates PR from staging → main automatically
+5. ✅ Assigns PR to you and adds deployment labels
+6. ✅ Provides next steps for completion
+
+**Generated PR includes:**
+
+- **Commit summary** - All changes since last deployment
+- **Testing status** - Confirmation of staging verification
+- **Quality gates** - Pre-deployment checklist
+- **Post-deployment** - Instructions for final production push
+
+### Manual Production Push
+
+After the PR is approved and merged:
+
+```bash
+git checkout main
+git pull origin main
+git push origin main:production
+```
+
 ## Quick Reference
 
 **Development Flow:**
 
 1. `develop` → Work and test locally
-2. `develop` → `staging` (via PR + GitHub Actions)
-3. `staging` → `main` (via PR + Review + GitHub Actions)
-4. `main` → `production` (manual push)
+2. `develop` → `staging` (automatic push)
+3. `staging` → `main` (automated PR creation via `npm run deploy:production`)
+4. `main` → `production` (manual push after PR merge)
 
 **Quality Checkpoints:**
 
 - ✅ Pre-commit: ESLint + Prettier
 - ✅ Pre-push: TypeScript + Build
 - ✅ PR to staging: GitHub Actions
-- ✅ PR to main: GitHub Actions + Code Review
+- ✅ PR to main: GitHub Actions + Code Review (can self-approve)
 
 This enforced workflow ensures **zero chance** of linting errors or broken builds reaching production.
