@@ -229,7 +229,12 @@ export default async function Page({ params }: { params: Promise<Params> }) {
             <section className="section-standard bg-white">
               <div className="container-standard">
                 <div className="prose prose-lg max-w-none">
-                  <MDXRemote source={content} />
+                  <MDXRemote
+                    source={content}
+                    components={{
+                      Schema: Schema,
+                    }}
+                  />
                 </div>
               </div>
             </section>
