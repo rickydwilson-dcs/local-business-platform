@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Schema from "@/components/Schema";
-import { ContentGrid } from "@/components/ui/content-grid";
+import { SimpleServiceGrid } from "@/components/ui/simple-service-grid";
 import { getContentItems } from "@/lib/content";
 import Breadcrumbs from "@/components/ui/breadcrumbs";
 
@@ -89,15 +89,33 @@ export default async function ServicesPage() {
         </section>
 
         {/* Services Grid */}
-        <section className="section-standard">
+        <section className="section-standard bg-gray-50">
           <div className="container-standard">
-            <ContentGrid
-              items={services}
-              basePath="/services"
-              emptyMessage="No services available."
-              fallbackDescription={(title) => `Learn more about ${title.toLowerCase()}.`}
-              contentType="services"
+            <div className="section-header">
+              <h2 className="heading-section">Our Professional Scaffolding Services</h2>
+              <p className="text-body-lg">
+                Comprehensive scaffolding capabilities for every type of project, from heritage
+                restoration to major commercial developments.
+              </p>
+            </div>
+
+            <SimpleServiceGrid
+              services={services.map((service) => ({
+                title: service.title,
+                description: service.description,
+                href: `/services/${service.slug}`,
+                fallbackDescription: `Learn more about ${service.title.toLowerCase()}.`,
+              }))}
             />
+
+            <div className="text-center mt-12">
+              <p className="text-gray-600 mb-6">
+                Need a custom scaffolding solution for your project?
+              </p>
+              <Link href="/contact" className="btn-primary-lg">
+                Request Custom Quote
+              </Link>
+            </div>
           </div>
         </section>
 
