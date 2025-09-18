@@ -27,6 +27,20 @@ interface ServiceData {
   faqs: Array<{ question: string; answer: string }>;
   heroImage?: string;
   galleryImages?: string[];
+  businessHours?: {
+    monday: string;
+    tuesday: string;
+    wednesday: string;
+    thursday: string;
+    friday: string;
+    saturday: string;
+    sunday: string;
+  };
+  localContact?: {
+    phone: string;
+    email: string;
+    address?: string;
+  };
 }
 
 // Generate location-specific FAQs for services
@@ -438,6 +452,20 @@ function getServiceData(slug: string): ServiceData {
       description:
         "Professional commercial scaffolding in Brighton. Churchill Square, Brighton Marina, seafront properties. TG20:21 compliant, minimal disruption to business operations.",
       badge: "Coastal Specialists",
+      businessHours: {
+        monday: "07:00-17:00",
+        tuesday: "07:00-17:00",
+        wednesday: "07:00-17:00",
+        thursday: "07:00-17:00",
+        friday: "07:00-17:00",
+        saturday: "08:00-16:00",
+        sunday: "Emergency only",
+      },
+      localContact: {
+        phone: "01424 466 661",
+        email: "brighton@colossusscaffolding.com",
+        address: "Brighton & Hove Commercial Services",
+      },
       benefits: [
         "Brighton business district expertise",
         "Churchill Square and marina experience",
@@ -471,6 +499,20 @@ function getServiceData(slug: string): ServiceData {
       description:
         "UNESCO-compliant commercial scaffolding in Canterbury. World Heritage Site expertise, University of Kent projects, cathedral precinct work with ecclesiastical coordination.",
       badge: "UNESCO Compliant",
+      businessHours: {
+        monday: "07:00-17:00",
+        tuesday: "07:00-17:00",
+        wednesday: "07:00-17:00",
+        thursday: "07:00-17:00",
+        friday: "07:00-17:00",
+        saturday: "08:00-16:00",
+        sunday: "Emergency only",
+      },
+      localContact: {
+        phone: "01424 466 661",
+        email: "canterbury@colossusscaffolding.com",
+        address: "Canterbury Commercial Services",
+      },
       benefits: [
         "World Heritage Site compliance protocols",
         "Canterbury Cathedral precinct expertise",
@@ -504,6 +546,20 @@ function getServiceData(slug: string): ServiceData {
       description:
         "Heritage-compliant commercial scaffolding in Hastings. Old Town medieval buildings, St Leonards properties, seafront commercial with extreme coastal protection.",
       badge: "Heritage Experts",
+      businessHours: {
+        monday: "07:00-17:00",
+        tuesday: "07:00-17:00",
+        wednesday: "07:00-17:00",
+        thursday: "07:00-17:00",
+        friday: "07:00-17:00",
+        saturday: "08:00-16:00",
+        sunday: "Emergency only",
+      },
+      localContact: {
+        phone: "01424 466 661",
+        email: "hastings@colossusscaffolding.com",
+        address: "Hastings Commercial Services",
+      },
       benefits: [
         "Old Town medieval building expertise",
         "St Leonards commercial property experience",
@@ -537,6 +593,20 @@ function getServiceData(slug: string): ServiceData {
       description:
         "Professional residential scaffolding in Brighton. Victorian terraces, Regency properties, seafront homes. Family-friendly with minimal disruption to coastal living.",
       badge: "Family Friendly",
+      businessHours: {
+        monday: "07:00-17:00",
+        tuesday: "07:00-17:00",
+        wednesday: "07:00-17:00",
+        thursday: "07:00-17:00",
+        friday: "07:00-17:00",
+        saturday: "08:00-16:00",
+        sunday: "Emergency only",
+      },
+      localContact: {
+        phone: "01424 466 661",
+        email: "brighton@colossusscaffolding.com",
+        address: "Brighton & Hove Residential Services",
+      },
       benefits: [
         "Victorian terrace expertise in The Lanes",
         "Regency property restoration in Kemptown",
@@ -570,6 +640,20 @@ function getServiceData(slug: string): ServiceData {
       description:
         "Heritage-compliant residential scaffolding in Canterbury. Medieval properties, cathedral precinct homes, university housing with conservation compliance.",
       badge: "Heritage Compliant",
+      businessHours: {
+        monday: "07:00-17:00",
+        tuesday: "07:00-17:00",
+        wednesday: "07:00-17:00",
+        thursday: "07:00-17:00",
+        friday: "07:00-17:00",
+        saturday: "08:00-16:00",
+        sunday: "Emergency only",
+      },
+      localContact: {
+        phone: "01424 466 661",
+        email: "canterbury@colossusscaffolding.com",
+        address: "Canterbury Residential Services",
+      },
       benefits: [
         "Medieval residential property expertise",
         "Cathedral precinct proximity protocols",
@@ -603,6 +687,20 @@ function getServiceData(slug: string): ServiceData {
       description:
         "Heritage-sensitive residential scaffolding in Hastings. Medieval cottages, Regency terraces, cliff-top homes with specialized terrain and coastal solutions.",
       badge: "Coastal Heritage",
+      businessHours: {
+        monday: "07:00-17:00",
+        tuesday: "07:00-17:00",
+        wednesday: "07:00-17:00",
+        thursday: "07:00-17:00",
+        friday: "07:00-17:00",
+        saturday: "08:00-16:00",
+        sunday: "Emergency only",
+      },
+      localContact: {
+        phone: "01424 466 661",
+        email: "hastings@colossusscaffolding.com",
+        address: "Hastings Residential Services",
+      },
       benefits: [
         "Medieval cottage restoration expertise",
         "Regency terrace specialist knowledge",
@@ -671,12 +769,75 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
     .replace(" Solutions", "")
     .replace(" Systems", "");
 
+  // Enhanced local SEO for service-location combinations
+  const isLocationSpecific =
+    slug.includes("-brighton") || slug.includes("-canterbury") || slug.includes("-hastings");
+  let optimizedTitle = serviceData.title;
+  const optimizedDescription = serviceData.description;
+  let keywords: string[] = [];
+
+  if (isLocationSpecific) {
+    // Extract location from slug
+    const location = slug.split("-").pop();
+    const locationName = location?.charAt(0).toUpperCase() + location?.slice(1);
+
+    // Optimize title for local SEO (under 60 characters)
+    optimizedTitle = `${serviceData.title} | ${locationName} | Colossus Scaffolding`;
+
+    // Add location-specific keywords
+    if (location === "brighton") {
+      keywords = [
+        `${slug.replace("-", " ")}`,
+        `${locationName} scaffolding hire`,
+        `scaffolding ${locationName}`,
+        "coastal scaffolding",
+        "Victorian terrace scaffolding",
+        "Regency property scaffolding",
+        "Churchill Square scaffolding",
+        "Brighton Marina scaffolding",
+      ];
+    } else if (location === "canterbury") {
+      keywords = [
+        `${slug.replace("-", " ")}`,
+        `${locationName} scaffolding hire`,
+        `scaffolding ${locationName}`,
+        "World Heritage Site scaffolding",
+        "cathedral scaffolding",
+        "medieval building scaffolding",
+        "University of Kent scaffolding",
+        "UNESCO compliant scaffolding",
+      ];
+    } else if (location === "hastings") {
+      keywords = [
+        `${slug.replace("-", " ")}`,
+        `${locationName} scaffolding hire`,
+        `scaffolding ${locationName}`,
+        "Old Town scaffolding",
+        "medieval scaffolding",
+        "cliff top scaffolding",
+        "St Leonards scaffolding",
+        "heritage scaffolding",
+      ];
+    }
+  } else {
+    // General service keywords
+    keywords = [
+      serviceName.toLowerCase(),
+      `${serviceName.toLowerCase()} hire`,
+      "TG20:21 scaffolding",
+      "professional scaffolding",
+      "CISRS scaffolding",
+      "scaffolding services UK",
+    ];
+  }
+
   return {
-    title: `${serviceData.title} | Professional Scaffolding | Colossus Scaffolding`,
-    description: serviceData.description,
+    title: optimizedTitle,
+    description: optimizedDescription,
+    keywords: keywords,
     openGraph: {
-      title: `${serviceData.title} | Professional Scaffolding | Colossus Scaffolding`,
-      description: serviceData.description,
+      title: optimizedTitle,
+      description: optimizedDescription,
       url: absUrl(`/services/${slug}`),
       siteName: "Colossus Scaffolding",
       images: serviceData.heroImage
@@ -701,8 +862,8 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
     },
     twitter: {
       card: "summary_large_image",
-      title: `${serviceData.title} | Professional Scaffolding | Colossus Scaffolding`,
-      description: serviceData.description,
+      title: optimizedTitle,
+      description: optimizedDescription,
       images: serviceData.heroImage
         ? [absUrl(serviceData.heroImage)]
         : [absUrl("/static/logo.png")],
@@ -767,7 +928,49 @@ export default async function Page({ params }: { params: Promise<Params> }) {
           name: serviceData.title,
           description: serviceData.description,
           serviceType: serviceName,
-          areaServed: ["East Sussex", "West Sussex", "Kent", "Surrey"],
+          areaServed:
+            slug.includes("-brighton") || slug.includes("-canterbury") || slug.includes("-hastings")
+              ? (() => {
+                  const location = slug.split("-").pop();
+                  if (location === "brighton") {
+                    return [
+                      "Brighton",
+                      "Brighton & Hove",
+                      "Hove",
+                      "The Lanes",
+                      "Kemptown",
+                      "Churchill Square",
+                      "Brighton Marina",
+                      "North Laine",
+                      "Preston Park",
+                      "Fiveways",
+                    ];
+                  } else if (location === "canterbury") {
+                    return [
+                      "Canterbury",
+                      "Canterbury City Centre",
+                      "World Heritage Site Canterbury",
+                      "University of Kent",
+                      "Canterbury Cathedral Precinct",
+                      "Whitstable",
+                      "Herne Bay",
+                      "Faversham",
+                    ];
+                  } else if (location === "hastings") {
+                    return [
+                      "Hastings",
+                      "Old Town Hastings",
+                      "St Leonards",
+                      "East Hill",
+                      "West Hill",
+                      "Ore",
+                      "Hollington",
+                      "Silverhill",
+                    ];
+                  }
+                  return ["East Sussex", "West Sussex", "Kent", "Surrey"];
+                })()
+              : ["East Sussex", "West Sussex", "Kent", "Surrey"],
         }}
         org={{
           name: "Colossus Scaffolding",
