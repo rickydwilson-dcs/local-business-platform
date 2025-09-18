@@ -3,7 +3,6 @@ import Schema from "@/components/Schema";
 import { ContentGrid } from "@/components/ui/content-grid";
 import { getContentItems } from "@/lib/content";
 import Breadcrumbs from "@/components/ui/breadcrumbs";
-import { ServiceLocationMatrix } from "@/components/ui/service-location-matrix";
 
 export const dynamic = "force-static";
 
@@ -89,130 +88,9 @@ export default async function ServicesPage() {
           </div>
         </section>
 
-        {/* Main Service Categories */}
-        <section className="section-standard bg-white">
-          <div className="container-standard">
-            <div className="text-center mb-12">
-              <h2 className="heading-section">Main Service Categories</h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Professional scaffolding solutions designed for every type of project and
-                environment.
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-8 mb-16">
-              {/* Commercial Scaffolding */}
-              <div className="bg-blue-50 border-2 border-blue-200 rounded-2xl p-8 hover:bg-blue-100 transition-colors">
-                <div className="text-center">
-                  <div className="text-5xl mb-4">🏢</div>
-                  <h3 className="text-2xl font-bold text-blue-900 mb-4">Commercial Scaffolding</h3>
-                  <p className="text-gray-700 mb-6">
-                    Professional scaffolding for office buildings, retail developments, and business
-                    districts. Minimizing disruption while maintaining the highest safety standards.
-                  </p>
-                  <div className="space-y-2 mb-6">
-                    <div className="text-sm text-blue-800">✓ Business continuity planning</div>
-                    <div className="text-sm text-blue-800">✓ Pedestrian protection systems</div>
-                    <div className="text-sm text-blue-800">✓ Out-of-hours installation</div>
-                  </div>
-                  <Link
-                    href="/services/commercial-scaffolding"
-                    className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors"
-                  >
-                    Learn More
-                    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M9 5l7 7-7 7"
-                      />
-                    </svg>
-                  </Link>
-                </div>
-              </div>
-
-              {/* Residential Scaffolding */}
-              <div className="bg-green-50 border-2 border-green-200 rounded-2xl p-8 hover:bg-green-100 transition-colors">
-                <div className="text-center">
-                  <div className="text-5xl mb-4">🏠</div>
-                  <h3 className="text-2xl font-bold text-green-900 mb-4">
-                    Residential Scaffolding
-                  </h3>
-                  <p className="text-gray-700 mb-6">
-                    Safe, reliable scaffolding for homes, extensions, and renovations.
-                    Family-friendly approach with minimal garden disruption.
-                  </p>
-                  <div className="space-y-2 mb-6">
-                    <div className="text-sm text-green-800">✓ Garden and property protection</div>
-                    <div className="text-sm text-green-800">✓ Family schedule coordination</div>
-                    <div className="text-sm text-green-800">✓ Heritage property expertise</div>
-                  </div>
-                  <Link
-                    href="/services/residential-scaffolding"
-                    className="inline-flex items-center gap-2 px-6 py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-colors"
-                  >
-                    Learn More
-                    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M9 5l7 7-7 7"
-                      />
-                    </svg>
-                  </Link>
-                </div>
-              </div>
-
-              {/* Industrial Scaffolding */}
-              <div className="bg-orange-50 border-2 border-orange-200 rounded-2xl p-8 hover:bg-orange-100 transition-colors">
-                <div className="text-center">
-                  <div className="text-5xl mb-4">🏭</div>
-                  <h3 className="text-2xl font-bold text-orange-900 mb-4">
-                    Industrial Scaffolding
-                  </h3>
-                  <p className="text-gray-700 mb-6">
-                    Heavy-duty scaffolding systems for industrial facilities, ports, and
-                    manufacturing sites. Engineered for complex structural challenges.
-                  </p>
-                  <div className="space-y-2 mb-6">
-                    <div className="text-sm text-orange-800">✓ Heavy-duty load capacity</div>
-                    <div className="text-sm text-orange-800">✓ Specialized access solutions</div>
-                    <div className="text-sm text-orange-800">✓ Long-term project support</div>
-                  </div>
-                  <Link
-                    href="/services/industrial-scaffolding"
-                    className="inline-flex items-center gap-2 px-6 py-3 bg-orange-600 text-white font-semibold rounded-lg hover:bg-orange-700 transition-colors"
-                  >
-                    Learn More
-                    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M9 5l7 7-7 7"
-                      />
-                    </svg>
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Service-Location Matrix */}
-        <ServiceLocationMatrix />
-
-        {/* All Services Grid */}
+        {/* Services Grid */}
         <section className="section-standard">
           <div className="container-standard">
-            <div className="text-center mb-12">
-              <h2 className="heading-section">All Scaffolding Services</h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Comprehensive range of specialized scaffolding solutions for every requirement.
-              </p>
-            </div>
             <ContentGrid
               items={services}
               basePath="/services"
