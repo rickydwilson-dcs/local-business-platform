@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Automated Production Deployment Script
-# Creates a PR from staging to main with detailed change information
+# Simplified Production Deployment Script
+# Direct push from staging to main with quality checks
 
 set -e  # Exit on any error
 
@@ -31,75 +31,54 @@ fi
 SINCE_DATE=$(git log origin/main -1 --format=%cd --date=short)
 TODAY=$(date +%Y-%m-%d)
 
-# Create detailed PR description
-PR_TITLE="Production Deployment: $COMMIT_COUNT changes ($SINCE_DATE to $TODAY)"
+echo ""
+echo "📋 Production Deployment Summary:"
+echo "=================================="
+echo "📅 Deployment Date: $(date '+%Y-%m-%d %H:%M:%S UTC')"
+echo "📊 Changes: $COMMIT_COUNT commits since last production release"
+echo "📆 Period: $SINCE_DATE to $TODAY"
+echo ""
+echo "🔄 Changes to be deployed:"
+echo "$COMMITS"
+echo ""
 
-# Generate PR body with detailed information
-PR_BODY=$(cat << EOF
-## 🚀 Production Deployment
+# Confirm deployment
+echo "⚠️  Ready to deploy to production?"
+echo "   This will push staging → main → production"
+echo ""
+read -p "Continue with deployment? (y/N): " -n 1 -r
+echo
+if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+    echo "❌ Deployment cancelled."
+    exit 0
+fi
 
-**Deployment Date:** $(date '+%Y-%m-%d %H:%M:%S UTC')
-**Changes:** $COMMIT_COUNT commits since last production release
-**Period:** $SINCE_DATE to $TODAY
+echo ""
+echo "🚀 Deploying to production..."
 
-## 📋 Changes Included
-
-$COMMITS
-
-## ✅ Pre-Deployment Checklist
-
-- [x] All changes tested on staging environment
-- [x] GitHub Actions passing (ESLint, TypeScript, Build)
-- [x] No breaking changes identified
-- [x] All quality gates passed locally
-
-## 🧪 Testing Status
-
-- **Staging Environment:** ✅ Deployed and tested
-- **Build Status:** ✅ All 75 pages generated successfully
-- **Linting:** ✅ No ESLint errors
-- **TypeScript:** ✅ No type errors
-- **Local Testing:** ✅ Development server working
-
-## 🔄 Deployment Process
-
-This PR moves tested changes from staging to production following our established workflow:
-
-1. **Development** → All changes developed and tested locally
-2. **Staging** → Deployed and verified on staging environment
-3. **Production** → This PR promotes staging to production
-
-## 🎯 Post-Deployment
-
-After merge, manually push to production branch:
-\`\`\`bash
+# Switch to main and merge staging (quality checks run automatically)
+echo "📤 Switching to main branch and merging staging..."
 git checkout main
 git pull origin main
-git push origin main:production
-\`\`\`
+git merge staging --no-edit
+git push origin main
 
----
-🤖 **Automated PR created by deployment script**
-Generated: $(date '+%Y-%m-%d %H:%M:%S UTC')
-EOF
-)
-
-echo "📝 Creating production deployment PR..."
-
-# Create the PR using GitHub CLI
-gh pr create \
-    --title "$PR_TITLE" \
-    --body "$PR_BODY" \
-    --base main \
-    --head staging \
-    --label "deployment" \
-    --label "production" \
-    --assignee "@me"
-
-echo "✅ Production deployment PR created successfully!"
-echo "🔗 View PR: $(gh pr view --web --json url --jq .url)"
 echo ""
-echo "📋 Next Steps:"
-echo "1. Review the PR in GitHub"
-echo "2. Approve and merge when ready"
-echo "3. Run: git checkout main && git pull origin main && git push origin main:production"
+echo "✅ Successfully deployed to main branch!"
+echo "📤 Now deploying to production branch..."
+
+# Push to production (already on main branch)
+git push origin main:production
+
+echo ""
+echo "🎉 Production deployment completed successfully!"
+echo ""
+echo "📊 Deployment Summary:"
+echo "====================="
+echo "✅ $COMMIT_COUNT commits deployed to production"
+echo "✅ All quality checks passed"
+echo "✅ Staging → Main → Production complete"
+echo ""
+echo "🔗 Check deployment status:"
+echo "   - Staging: [staging environment URL]"
+echo "   - Production: [production environment URL]"

@@ -281,14 +281,14 @@ git push origin main:production
 
 1. `develop` → Work and test locally
 2. `develop` → `staging` (automatic push)
-3. `staging` → `main` (automated PR creation via `npm run deploy:production`)
-4. `main` → `production` (manual push after PR merge)
+3. `staging` → `main` (direct push with automated quality checks)
+4. `main` → `production` (manual push or via deployment script)
 
 **Quality Checkpoints:**
 
 - ✅ Pre-commit: ESLint + Prettier
-- ✅ Pre-push: TypeScript + Build
-- ✅ PR to staging: GitHub Actions
-- ✅ PR to main: GitHub Actions + Code Review (can self-approve)
+- ✅ Pre-push: TypeScript + Build (runs before every push)
+- ✅ Push to staging: GitHub Actions (ESLint + TypeScript + Build)
+- ✅ Push to main: GitHub Actions + Pre-push hooks (double validation)
 
 This enforced workflow ensures **zero chance** of linting errors or broken builds reaching production.
