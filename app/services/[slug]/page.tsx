@@ -779,7 +779,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   if (isLocationSpecific) {
     // Extract location from slug
     const location = slug.split("-").pop();
-    const locationName = location?.charAt(0).toUpperCase() + location?.slice(1);
+    const locationName = location ? location.charAt(0).toUpperCase() + location.slice(1) : "";
 
     // Optimize title for local SEO (under 60 characters)
     optimizedTitle = `${serviceData.title} | ${locationName} | Colossus Scaffolding`;
