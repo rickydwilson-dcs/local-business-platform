@@ -11,6 +11,7 @@
     "format": "prettier --write .",
     "type-check": "tsc --noEmit",
     "pre-commit-check": "npm run lint && npm run type-check && npm run build",
+    "deploy:production": "./scripts/deploy-to-production.sh",
     "prepare": "husky install"
   },
   "dependencies": {
