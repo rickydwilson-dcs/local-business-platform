@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Schema from "@/components/Schema";
-import { SimpleServiceGrid } from "@/components/ui/simple-service-grid";
+import { ContentGrid } from "@/components/ui/content-grid";
 import { getContentItems } from "@/lib/content";
 import Breadcrumbs from "@/components/ui/breadcrumbs";
 
@@ -99,13 +99,12 @@ export default async function ServicesPage() {
               </p>
             </div>
 
-            <SimpleServiceGrid
-              services={services.map((service) => ({
-                title: service.title,
-                description: service.description,
-                href: `/services/${service.slug}`,
-                fallbackDescription: `Learn more about ${service.title.toLowerCase()}.`,
-              }))}
+            <ContentGrid
+              items={services}
+              basePath="/services"
+              emptyMessage="No services available."
+              fallbackDescription={(title) => `Learn more about ${title.toLowerCase()}.`}
+              contentType="services"
             />
 
             <div className="text-center mt-12">

@@ -21,10 +21,11 @@ interface LocationData {
 }
 
 const locationDataMap: Record<string, LocationData> = {
-  "brighton": {
+  brighton: {
     slug: "brighton",
     title: "Brighton",
-    description: "Professional scaffolding services in Brighton with TG20:21 compliant installation, CISRS qualified teams, and comprehensive insurance coverage for residential, commercial, and heritage projects.",
+    description:
+      "Professional scaffolding services in Brighton with TG20:21 compliant installation, CISRS qualified teams, and comprehensive insurance coverage for residential, commercial, and heritage projects.",
     heroImage: "/Facade Scaffolding.png",
     county: "East Sussex",
     towns: ["Brighton", "Hove", "Portslade", "Saltdean", "Rottingdean", "Peacehaven"],
@@ -34,57 +35,66 @@ const locationDataMap: Record<string, LocationData> = {
       "Brighton Marina modern apartment developments",
       "The Lanes historic commercial buildings",
       "Brighton Pavilion area heritage properties",
-      "South Downs residential developments"
+      "South Downs residential developments",
     ],
     coverageAreas: ["Brighton", "Hove", "Portslade", "Saltdean", "Rottingdean", "Peacehaven"],
     services: [
       {
         name: "Access Scaffolding",
-        description: "Safe access scaffolding for construction and maintenance projects in Brighton.",
-        href: "/services/access-scaffolding"
+        description:
+          "Safe access scaffolding for construction and maintenance projects in Brighton.",
+        href: "/services/access-scaffolding",
       },
       {
         name: "Facade Scaffolding",
-        description: "Professional facade scaffolding for external building work throughout Brighton.",
-        href: "/services/facade-scaffolding"
+        description:
+          "Professional facade scaffolding for external building work throughout Brighton.",
+        href: "/services/facade-scaffolding",
       },
       {
         name: "Edge Protection",
         description: "HSE compliant edge protection systems for construction sites in Brighton.",
-        href: "/services/edge-protection"
-      }
+        href: "/services/edge-protection",
+      },
     ],
     faqs: [
       {
         question: "Do you handle permits in Brighton?",
-        answer: "Yes, we assist with all necessary permits and planning applications in Brighton, including seafront areas. Our team knows Brighton & Hove City Council processes."
+        answer:
+          "Yes, we assist with all necessary permits and planning applications in Brighton, including seafront areas. Our team knows Brighton & Hove City Council processes.",
       },
       {
         question: "Can you provide scaffolding for Regency buildings?",
-        answer: "Absolutely. We specialize in scaffolding Brighton's historic Regency terraces and crescents with heritage-appropriate solutions."
+        answer:
+          "Absolutely. We specialize in scaffolding Brighton's historic Regency terraces and crescents with heritage-appropriate solutions.",
       },
       {
         question: "Do you work in Brighton Marina?",
-        answer: "Yes, we provide scaffolding services for apartments and commercial buildings in Brighton Marina and surrounding waterfront areas."
+        answer:
+          "Yes, we provide scaffolding services for apartments and commercial buildings in Brighton Marina and surrounding waterfront areas.",
       },
       {
         question: "Can you scaffold in The Lanes area?",
-        answer: "Certainly. We have experience working in Brighton's historic Lanes quarter, managing narrow streets and heritage building requirements."
+        answer:
+          "Certainly. We have experience working in Brighton's historic Lanes quarter, managing narrow streets and heritage building requirements.",
       },
       {
         question: "Do you offer weekend installations in Brighton?",
-        answer: "Yes, we provide flexible scheduling including weekend installations to minimize disruption in busy Brighton locations."
+        answer:
+          "Yes, we provide flexible scheduling including weekend installations to minimize disruption in busy Brighton locations.",
       },
       {
         question: "Are scaffold inspections available in Brighton?",
-        answer: "Definitely. Our qualified team carries out regular scaffold inspections across Brighton, ensuring compliance with UK safety standards."
-      }
-    ]
+        answer:
+          "Definitely. Our qualified team carries out regular scaffold inspections across Brighton, ensuring compliance with UK safety standards.",
+      },
+    ],
   },
-  "eastbourne": {
+  eastbourne: {
     slug: "eastbourne",
     title: "Eastbourne",
-    description: "Professional scaffolding services in Eastbourne with TG20:21 compliant installation, CISRS qualified teams, and comprehensive insurance coverage for coastal, residential, and commercial projects.",
+    description:
+      "Professional scaffolding services in Eastbourne with TG20:21 compliant installation, CISRS qualified teams, and comprehensive insurance coverage for coastal, residential, and commercial projects.",
     heroImage: "/Access Scaffolding new build.png",
     county: "East Sussex",
     towns: ["Eastbourne", "Meads", "Sovereign Harbour", "Old Town", "Hampden Park", "Langney"],
@@ -94,57 +104,73 @@ const locationDataMap: Record<string, LocationData> = {
       "Meads area Edwardian villas and mansion blocks",
       "South Downs chalk cliff properties",
       "Eastbourne Pier and promenade structures",
-      "Coastal erosion protection works"
+      "Coastal erosion protection works",
     ],
-    coverageAreas: ["Eastbourne", "Meads", "Sovereign Harbour", "Old Town", "Hampden Park", "Langney"],
+    coverageAreas: [
+      "Eastbourne",
+      "Meads",
+      "Sovereign Harbour",
+      "Old Town",
+      "Hampden Park",
+      "Langney",
+    ],
     services: [
       {
         name: "Access Scaffolding",
-        description: "Safe access scaffolding for construction and maintenance projects in Eastbourne.",
-        href: "/services/access-scaffolding"
+        description:
+          "Safe access scaffolding for construction and maintenance projects in Eastbourne.",
+        href: "/services/access-scaffolding",
       },
       {
         name: "Facade Scaffolding",
-        description: "Professional facade scaffolding for external building work throughout Eastbourne.",
-        href: "/services/facade-scaffolding"
+        description:
+          "Professional facade scaffolding for external building work throughout Eastbourne.",
+        href: "/services/facade-scaffolding",
       },
       {
         name: "Edge Protection",
         description: "HSE compliant edge protection systems for construction sites in Eastbourne.",
-        href: "/services/edge-protection"
-      }
+        href: "/services/edge-protection",
+      },
     ],
     faqs: [
       {
         question: "Do you handle permits in Eastbourne?",
-        answer: "Yes, we assist with all necessary permits and planning applications in Eastbourne, including seafront and conservation areas. Our team knows Eastbourne Borough Council processes."
+        answer:
+          "Yes, we assist with all necessary permits and planning applications in Eastbourne, including seafront and conservation areas. Our team knows Eastbourne Borough Council processes.",
       },
       {
         question: "Can you work on Victorian seafront buildings?",
-        answer: "Absolutely. We specialize in scaffolding Eastbourne's Victorian seafront terraces and hotels with heritage-sensitive solutions."
+        answer:
+          "Absolutely. We specialize in scaffolding Eastbourne's Victorian seafront terraces and hotels with heritage-sensitive solutions.",
       },
       {
         question: "Do you work at Sovereign Harbour?",
-        answer: "Yes, we provide scaffolding services for residential and commercial buildings at Sovereign Harbour marina development."
+        answer:
+          "Yes, we provide scaffolding services for residential and commercial buildings at Sovereign Harbour marina development.",
       },
       {
         question: "Can you handle coastal wind conditions?",
-        answer: "Certainly. Our scaffolding is designed for coastal conditions with additional tie-ins and wind-resistant configurations for Eastbourne's seafront."
+        answer:
+          "Certainly. Our scaffolding is designed for coastal conditions with additional tie-ins and wind-resistant configurations for Eastbourne's seafront.",
       },
       {
         question: "Do you work in Meads conservation area?",
-        answer: "Yes, we have extensive experience in Meads conservation area, following all heritage building requirements and council guidelines."
+        answer:
+          "Yes, we have extensive experience in Meads conservation area, following all heritage building requirements and council guidelines.",
       },
       {
         question: "Are scaffold inspections available in Eastbourne?",
-        answer: "Definitely. Our qualified team carries out regular scaffold inspections across Eastbourne, ensuring compliance with UK safety standards."
-      }
-    ]
+        answer:
+          "Definitely. Our qualified team carries out regular scaffold inspections across Eastbourne, ensuring compliance with UK safety standards.",
+      },
+    ],
   },
-  "hastings": {
+  hastings: {
     slug: "hastings",
     title: "Hastings",
-    description: "Professional scaffolding services in Hastings with TG20:21 compliant installation, CISRS qualified teams, and comprehensive insurance coverage for heritage, residential, and commercial projects.",
+    description:
+      "Professional scaffolding services in Hastings with TG20:21 compliant installation, CISRS qualified teams, and comprehensive insurance coverage for heritage, residential, and commercial projects.",
     heroImage: "/Birdcage scaffolding.png",
     county: "East Sussex",
     towns: ["Hastings", "St Leonards", "Old Town", "West Hill", "East Hill", "Ore"],
@@ -154,57 +180,66 @@ const locationDataMap: Record<string, LocationData> = {
       "East and West Hill cliff-top properties",
       "Hastings Castle and heritage structures",
       "Victorian seaside architecture",
-      "Fishermen's Quarter historic buildings"
+      "Fishermen's Quarter historic buildings",
     ],
     coverageAreas: ["Hastings", "St Leonards", "Old Town", "West Hill", "East Hill", "Ore"],
     services: [
       {
         name: "Access Scaffolding",
-        description: "Safe access scaffolding for construction and maintenance projects in Hastings.",
-        href: "/services/access-scaffolding"
+        description:
+          "Safe access scaffolding for construction and maintenance projects in Hastings.",
+        href: "/services/access-scaffolding",
       },
       {
         name: "Facade Scaffolding",
-        description: "Professional facade scaffolding for external building work throughout Hastings.",
-        href: "/services/facade-scaffolding"
+        description:
+          "Professional facade scaffolding for external building work throughout Hastings.",
+        href: "/services/facade-scaffolding",
       },
       {
         name: "Edge Protection",
         description: "HSE compliant edge protection systems for construction sites in Hastings.",
-        href: "/services/edge-protection"
-      }
+        href: "/services/edge-protection",
+      },
     ],
     faqs: [
       {
         question: "Do you handle permits in Hastings?",
-        answer: "Yes, we assist with all necessary permits and planning applications in Hastings, including Old Town conservation areas. Our team knows Hastings Borough Council processes."
+        answer:
+          "Yes, we assist with all necessary permits and planning applications in Hastings, including Old Town conservation areas. Our team knows Hastings Borough Council processes.",
       },
       {
         question: "Can you scaffold medieval buildings?",
-        answer: "Absolutely. We specialize in scaffolding Hastings' medieval and Tudor buildings with heritage-appropriate techniques and materials."
+        answer:
+          "Absolutely. We specialize in scaffolding Hastings' medieval and Tudor buildings with heritage-appropriate techniques and materials.",
       },
       {
         question: "Do you work on cliff-top properties?",
-        answer: "Yes, we provide scaffolding for East and West Hill cliff-top properties with specialized anchor systems for challenging terrain."
+        answer:
+          "Yes, we provide scaffolding for East and West Hill cliff-top properties with specialized anchor systems for challenging terrain.",
       },
       {
         question: "Can you work in the Old Town?",
-        answer: "Certainly. We have extensive experience in Hastings Old Town, managing narrow streets and working around historic structures."
+        answer:
+          "Certainly. We have extensive experience in Hastings Old Town, managing narrow streets and working around historic structures.",
       },
       {
         question: "Do you scaffold fishing quarter buildings?",
-        answer: "Yes, we work throughout the Fishermen's Quarter, understanding the unique requirements of these historic working buildings."
+        answer:
+          "Yes, we work throughout the Fishermen's Quarter, understanding the unique requirements of these historic working buildings.",
       },
       {
         question: "Are scaffold inspections available in Hastings?",
-        answer: "Definitely. Our qualified team carries out regular scaffold inspections across Hastings, ensuring compliance with UK safety standards."
-      }
-    ]
+        answer:
+          "Definitely. Our qualified team carries out regular scaffold inspections across Hastings, ensuring compliance with UK safety standards.",
+      },
+    ],
   },
-  "crawley": {
+  crawley: {
     slug: "crawley",
     title: "Crawley",
-    description: "Professional scaffolding services in Crawley with TG20:21 compliant installation, CISRS qualified teams, and comprehensive insurance coverage for residential, commercial, and industrial projects.",
+    description:
+      "Professional scaffolding services in Crawley with TG20:21 compliant installation, CISRS qualified teams, and comprehensive insurance coverage for residential, commercial, and industrial projects.",
     heroImage: "/Heavy Industrial Scaffolding.png",
     county: "West Sussex",
     towns: ["Crawley", "Gatwick", "Three Bridges", "Pound Hill", "Langley Green", "Furnace Green"],
@@ -214,57 +249,73 @@ const locationDataMap: Record<string, LocationData> = {
       "Three Bridges railway infrastructure projects",
       "Pound Hill residential estates and schools",
       "Surrey/Sussex border countryside properties",
-      "Industrial warehouse and logistics facilities"
+      "Industrial warehouse and logistics facilities",
     ],
-    coverageAreas: ["Crawley", "Gatwick", "Three Bridges", "Pound Hill", "Langley Green", "Furnace Green"],
+    coverageAreas: [
+      "Crawley",
+      "Gatwick",
+      "Three Bridges",
+      "Pound Hill",
+      "Langley Green",
+      "Furnace Green",
+    ],
     services: [
       {
         name: "Access Scaffolding",
-        description: "Safe access scaffolding for construction and maintenance projects in Crawley.",
-        href: "/services/access-scaffolding"
+        description:
+          "Safe access scaffolding for construction and maintenance projects in Crawley.",
+        href: "/services/access-scaffolding",
       },
       {
         name: "Facade Scaffolding",
-        description: "Professional facade scaffolding for external building work throughout Crawley.",
-        href: "/services/facade-scaffolding"
+        description:
+          "Professional facade scaffolding for external building work throughout Crawley.",
+        href: "/services/facade-scaffolding",
       },
       {
         name: "Edge Protection",
         description: "HSE compliant edge protection systems for construction sites in Crawley.",
-        href: "/services/edge-protection"
-      }
+        href: "/services/edge-protection",
+      },
     ],
     faqs: [
       {
         question: "Do you handle permits in Crawley?",
-        answer: "Yes, we assist with all necessary permits and planning applications in Crawley. Our team knows Crawley Borough Council processes and requirements."
+        answer:
+          "Yes, we assist with all necessary permits and planning applications in Crawley. Our team knows Crawley Borough Council processes and requirements.",
       },
       {
         question: "Can you work near Gatwick Airport?",
-        answer: "Absolutely. We have experience working in Gatwick area with understanding of airport proximity requirements and height restrictions."
+        answer:
+          "Absolutely. We have experience working in Gatwick area with understanding of airport proximity requirements and height restrictions.",
       },
       {
         question: "Do you provide industrial scaffolding?",
-        answer: "Yes, we specialize in heavy-duty industrial scaffolding for warehouses, logistics facilities, and commercial buildings throughout Crawley."
+        answer:
+          "Yes, we specialize in heavy-duty industrial scaffolding for warehouses, logistics facilities, and commercial buildings throughout Crawley.",
       },
       {
         question: "Can you handle large residential developments?",
-        answer: "Certainly. We work on new build developments, housing estates, and apartment blocks across Crawley's residential areas."
+        answer:
+          "Certainly. We work on new build developments, housing estates, and apartment blocks across Crawley's residential areas.",
       },
       {
         question: "Do you work on railway projects?",
-        answer: "Yes, we have experience with railway-adjacent projects in Three Bridges area, following Network Rail safety protocols."
+        answer:
+          "Yes, we have experience with railway-adjacent projects in Three Bridges area, following Network Rail safety protocols.",
       },
       {
         question: "Are scaffold inspections available in Crawley?",
-        answer: "Definitely. Our qualified team carries out regular scaffold inspections across Crawley, ensuring compliance with UK safety standards."
-      }
-    ]
+        answer:
+          "Definitely. Our qualified team carries out regular scaffold inspections across Crawley, ensuring compliance with UK safety standards.",
+      },
+    ],
   },
-  "worthing": {
+  worthing: {
     slug: "worthing",
     title: "Worthing",
-    description: "Professional scaffolding services in Worthing with TG20:21 compliant installation, CISRS qualified teams, and comprehensive insurance coverage for coastal, residential, and commercial projects.",
+    description:
+      "Professional scaffolding services in Worthing with TG20:21 compliant installation, CISRS qualified teams, and comprehensive insurance coverage for coastal, residential, and commercial projects.",
     heroImage: "/Public Access Staircases.png",
     county: "West Sussex",
     towns: ["Worthing", "Lancing", "Sompting", "Goring", "Ferring", "East Worthing"],
@@ -274,57 +325,66 @@ const locationDataMap: Record<string, LocationData> = {
       "Worthing Pier and promenade structures",
       "Lancing College and institutional buildings",
       "Coastal retirement and care home developments",
-      "West Sussex seaside commercial properties"
+      "West Sussex seaside commercial properties",
     ],
     coverageAreas: ["Worthing", "Lancing", "Sompting", "Goring", "Ferring", "East Worthing"],
     services: [
       {
         name: "Access Scaffolding",
-        description: "Safe access scaffolding for construction and maintenance projects in Worthing.",
-        href: "/services/access-scaffolding"
+        description:
+          "Safe access scaffolding for construction and maintenance projects in Worthing.",
+        href: "/services/access-scaffolding",
       },
       {
         name: "Facade Scaffolding",
-        description: "Professional facade scaffolding for external building work throughout Worthing.",
-        href: "/services/facade-scaffolding"
+        description:
+          "Professional facade scaffolding for external building work throughout Worthing.",
+        href: "/services/facade-scaffolding",
       },
       {
         name: "Edge Protection",
         description: "HSE compliant edge protection systems for construction sites in Worthing.",
-        href: "/services/edge-protection"
-      }
+        href: "/services/edge-protection",
+      },
     ],
     faqs: [
       {
         question: "Do you handle permits in Worthing?",
-        answer: "Yes, we assist with all necessary permits and planning applications in Worthing, including seafront areas. Our team knows Worthing Borough Council processes."
+        answer:
+          "Yes, we assist with all necessary permits and planning applications in Worthing, including seafront areas. Our team knows Worthing Borough Council processes.",
       },
       {
         question: "Can you work on seafront buildings?",
-        answer: "Absolutely. We specialize in scaffolding Worthing's seafront Victorian and Edwardian buildings with coastal wind-resistant configurations."
+        answer:
+          "Absolutely. We specialize in scaffolding Worthing's seafront Victorian and Edwardian buildings with coastal wind-resistant configurations.",
       },
       {
         question: "Do you work in Lancing area?",
-        answer: "Yes, we provide scaffolding services throughout Lancing, including work on Lancing College and surrounding residential areas."
+        answer:
+          "Yes, we provide scaffolding services throughout Lancing, including work on Lancing College and surrounding residential areas.",
       },
       {
         question: "Can you handle retirement home projects?",
-        answer: "Certainly. We have extensive experience with care homes and retirement developments, ensuring minimal disruption to residents."
+        answer:
+          "Certainly. We have extensive experience with care homes and retirement developments, ensuring minimal disruption to residents.",
       },
       {
         question: "Do you work on South Downs properties?",
-        answer: "Yes, we scaffold properties on the South Downs above Worthing, with specialized equipment for challenging terrain access."
+        answer:
+          "Yes, we scaffold properties on the South Downs above Worthing, with specialized equipment for challenging terrain access.",
       },
       {
         question: "Are scaffold inspections available in Worthing?",
-        answer: "Definitely. Our qualified team carries out regular scaffold inspections across Worthing, ensuring compliance with UK safety standards."
-      }
-    ]
+        answer:
+          "Definitely. Our qualified team carries out regular scaffold inspections across Worthing, ensuring compliance with UK safety standards.",
+      },
+    ],
   },
-  "horsham": {
+  horsham: {
     slug: "horsham",
     title: "Horsham",
-    description: "Professional scaffolding services in Horsham with TG20:21 compliant installation, CISRS qualified teams, and comprehensive insurance coverage for residential, commercial, and heritage projects.",
+    description:
+      "Professional scaffolding services in Horsham with TG20:21 compliant installation, CISRS qualified teams, and comprehensive insurance coverage for residential, commercial, and heritage projects.",
     heroImage: "/Scaffold Towers & Mast Systems.png",
     county: "West Sussex",
     towns: ["Horsham", "Billingshurst", "Storrington", "Henfield", "Steyning", "Pulborough"],
@@ -334,57 +394,73 @@ const locationDataMap: Record<string, LocationData> = {
       "South Downs National Park properties",
       "Historic village churches and heritage buildings",
       "Rural estate and manor house projects",
-      "Horsham stone traditional architecture"
+      "Horsham stone traditional architecture",
     ],
-    coverageAreas: ["Horsham", "Billingshurst", "Storrington", "Henfield", "Steyning", "Pulborough"],
+    coverageAreas: [
+      "Horsham",
+      "Billingshurst",
+      "Storrington",
+      "Henfield",
+      "Steyning",
+      "Pulborough",
+    ],
     services: [
       {
         name: "Access Scaffolding",
-        description: "Safe access scaffolding for construction and maintenance projects in Horsham.",
-        href: "/services/access-scaffolding"
+        description:
+          "Safe access scaffolding for construction and maintenance projects in Horsham.",
+        href: "/services/access-scaffolding",
       },
       {
         name: "Facade Scaffolding",
-        description: "Professional facade scaffolding for external building work throughout Horsham.",
-        href: "/services/facade-scaffolding"
+        description:
+          "Professional facade scaffolding for external building work throughout Horsham.",
+        href: "/services/facade-scaffolding",
       },
       {
         name: "Edge Protection",
         description: "HSE compliant edge protection systems for construction sites in Horsham.",
-        href: "/services/edge-protection"
-      }
+        href: "/services/edge-protection",
+      },
     ],
     faqs: [
       {
         question: "Do you handle permits in Horsham?",
-        answer: "Yes, we assist with all necessary permits and planning applications in Horsham District. Our team knows local council processes and rural planning requirements."
+        answer:
+          "Yes, we assist with all necessary permits and planning applications in Horsham District. Our team knows local council processes and rural planning requirements.",
       },
       {
         question: "Can you work on heritage buildings?",
-        answer: "Absolutely. We specialize in scaffolding Georgian and Victorian buildings in Horsham with heritage-appropriate solutions."
+        answer:
+          "Absolutely. We specialize in scaffolding Georgian and Victorian buildings in Horsham with heritage-appropriate solutions.",
       },
       {
         question: "Do you work on barn conversions?",
-        answer: "Yes, we have extensive experience with barn conversions and rural property developments throughout the Sussex countryside."
+        answer:
+          "Yes, we have extensive experience with barn conversions and rural property developments throughout the Sussex countryside.",
       },
       {
         question: "Can you access remote rural properties?",
-        answer: "Certainly. We provide scaffolding access to rural properties, farmhouses, and estates with specialized transport for countryside locations."
+        answer:
+          "Certainly. We provide scaffolding access to rural properties, farmhouses, and estates with specialized transport for countryside locations.",
       },
       {
         question: "Do you work in the South Downs National Park?",
-        answer: "Yes, we work within the South Downs National Park area, following all environmental and heritage protection requirements."
+        answer:
+          "Yes, we work within the South Downs National Park area, following all environmental and heritage protection requirements.",
       },
       {
         question: "Are scaffold inspections available in Horsham?",
-        answer: "Definitely. Our qualified team carries out regular scaffold inspections across Horsham district, ensuring compliance with UK safety standards."
-      }
-    ]
+        answer:
+          "Definitely. Our qualified team carries out regular scaffold inspections across Horsham district, ensuring compliance with UK safety standards.",
+      },
+    ],
   },
-  "maidstone": {
+  maidstone: {
     slug: "maidstone",
     title: "Maidstone",
-    description: "Professional scaffolding services in Maidstone with TG20:21 compliant installation, CISRS qualified teams, and comprehensive insurance coverage for residential, commercial, and heritage projects.",
+    description:
+      "Professional scaffolding services in Maidstone with TG20:21 compliant installation, CISRS qualified teams, and comprehensive insurance coverage for residential, commercial, and heritage projects.",
     heroImage: "/Edge Protection Systems.png",
     county: "Kent",
     towns: ["Maidstone", "Medway", "Chatham", "Rochester", "Gillingham", "Strood"],
@@ -394,57 +470,66 @@ const locationDataMap: Record<string, LocationData> = {
       "Kent countryside oast houses and hop farms",
       "Rochester Cathedral and castle heritage structures",
       "Chatham Maritime modern developments",
-      "River Medway waterfront commercial properties"
+      "River Medway waterfront commercial properties",
     ],
     coverageAreas: ["Maidstone", "Medway", "Chatham", "Rochester", "Gillingham", "Strood"],
     services: [
       {
         name: "Access Scaffolding",
-        description: "Safe access scaffolding for construction and maintenance projects in Maidstone.",
-        href: "/services/access-scaffolding"
+        description:
+          "Safe access scaffolding for construction and maintenance projects in Maidstone.",
+        href: "/services/access-scaffolding",
       },
       {
         name: "Facade Scaffolding",
-        description: "Professional facade scaffolding for external building work throughout Maidstone.",
-        href: "/services/facade-scaffolding"
+        description:
+          "Professional facade scaffolding for external building work throughout Maidstone.",
+        href: "/services/facade-scaffolding",
       },
       {
         name: "Edge Protection",
         description: "HSE compliant edge protection systems for construction sites in Maidstone.",
-        href: "/services/edge-protection"
-      }
+        href: "/services/edge-protection",
+      },
     ],
     faqs: [
       {
         question: "Do you handle permits in Maidstone?",
-        answer: "Yes, we assist with all necessary permits and planning applications in Maidstone Borough and Medway. Our team knows local council processes."
+        answer:
+          "Yes, we assist with all necessary permits and planning applications in Maidstone Borough and Medway. Our team knows local council processes.",
       },
       {
         question: "Can you work on heritage naval buildings?",
-        answer: "Absolutely. We have experience with Historic Royal Palaces and heritage naval buildings in the Medway Towns area."
+        answer:
+          "Absolutely. We have experience with Historic Royal Palaces and heritage naval buildings in the Medway Towns area.",
       },
       {
         question: "Do you work on oast houses?",
-        answer: "Yes, we specialize in scaffolding Kent's traditional oast houses and agricultural buildings with appropriate heritage techniques."
+        answer:
+          "Yes, we specialize in scaffolding Kent's traditional oast houses and agricultural buildings with appropriate heritage techniques.",
       },
       {
         question: "Can you handle waterfront projects?",
-        answer: "Certainly. We work on River Medway waterfront properties and maritime developments with specialized waterside access."
+        answer:
+          "Certainly. We work on River Medway waterfront properties and maritime developments with specialized waterside access.",
       },
       {
         question: "Do you work at Rochester Cathedral?",
-        answer: "Yes, we have experience with cathedral and church scaffolding, following conservation requirements for historic religious buildings."
+        answer:
+          "Yes, we have experience with cathedral and church scaffolding, following conservation requirements for historic religious buildings.",
       },
       {
         question: "Are scaffold inspections available in Maidstone?",
-        answer: "Definitely. Our qualified team carries out regular scaffold inspections across Maidstone and Medway, ensuring compliance with UK safety standards."
-      }
-    ]
+        answer:
+          "Definitely. Our qualified team carries out regular scaffold inspections across Maidstone and Medway, ensuring compliance with UK safety standards.",
+      },
+    ],
   },
-  "canterbury": {
+  canterbury: {
     slug: "canterbury",
     title: "Canterbury",
-    description: "Professional scaffolding services in Canterbury with TG20:21 compliant installation, CISRS qualified teams, and comprehensive insurance coverage for heritage, residential, and commercial projects.",
+    description:
+      "Professional scaffolding services in Canterbury with TG20:21 compliant installation, CISRS qualified teams, and comprehensive insurance coverage for heritage, residential, and commercial projects.",
     heroImage: "/Heritage Scaffolding.png",
     county: "Kent",
     towns: ["Canterbury", "Whitstable", "Herne Bay", "Faversham", "Deal", "Sandwich"],
@@ -454,57 +539,66 @@ const locationDataMap: Record<string, LocationData> = {
       "University of Kent campus developments",
       "Whitstable coastal Victorian architecture",
       "Kent seaside resort buildings",
-      "Cinque Ports historic harbour structures"
+      "Cinque Ports historic harbour structures",
     ],
     coverageAreas: ["Canterbury", "Whitstable", "Herne Bay", "Faversham", "Deal", "Sandwich"],
     services: [
       {
         name: "Access Scaffolding",
-        description: "Safe access scaffolding for construction and maintenance projects in Canterbury.",
-        href: "/services/access-scaffolding"
+        description:
+          "Safe access scaffolding for construction and maintenance projects in Canterbury.",
+        href: "/services/access-scaffolding",
       },
       {
         name: "Facade Scaffolding",
-        description: "Professional facade scaffolding for external building work throughout Canterbury.",
-        href: "/services/facade-scaffolding"
+        description:
+          "Professional facade scaffolding for external building work throughout Canterbury.",
+        href: "/services/facade-scaffolding",
       },
       {
         name: "Edge Protection",
         description: "HSE compliant edge protection systems for construction sites in Canterbury.",
-        href: "/services/edge-protection"
-      }
+        href: "/services/edge-protection",
+      },
     ],
     faqs: [
       {
         question: "Do you handle permits in Canterbury?",
-        answer: "Yes, we assist with all necessary permits and planning applications in Canterbury, including World Heritage Site requirements. Our team knows Canterbury City Council processes."
+        answer:
+          "Yes, we assist with all necessary permits and planning applications in Canterbury, including World Heritage Site requirements. Our team knows Canterbury City Council processes.",
       },
       {
         question: "Can you work on Canterbury Cathedral?",
-        answer: "We have experience with cathedral and religious building scaffolding, working closely with conservation officers on heritage structures."
+        answer:
+          "We have experience with cathedral and religious building scaffolding, working closely with conservation officers on heritage structures.",
       },
       {
         question: "Do you work on medieval buildings?",
-        answer: "Absolutely. We specialize in scaffolding Canterbury's medieval buildings and city walls with heritage-appropriate conservation techniques."
+        answer:
+          "Absolutely. We specialize in scaffolding Canterbury's medieval buildings and city walls with heritage-appropriate conservation techniques.",
       },
       {
         question: "Can you work at the University of Kent?",
-        answer: "Yes, we provide scaffolding for university buildings and campus developments, understanding academic scheduling requirements."
+        answer:
+          "Yes, we provide scaffolding for university buildings and campus developments, understanding academic scheduling requirements.",
       },
       {
         question: "Do you work in coastal areas like Whitstable?",
-        answer: "Certainly. We work throughout coastal Kent including Whitstable, Herne Bay, and Deal with wind-resistant coastal configurations."
+        answer:
+          "Certainly. We work throughout coastal Kent including Whitstable, Herne Bay, and Deal with wind-resistant coastal configurations.",
       },
       {
         question: "Are scaffold inspections available in Canterbury?",
-        answer: "Definitely. Our qualified team carries out regular scaffold inspections across Canterbury and East Kent, ensuring compliance with UK safety standards."
-      }
-    ]
+        answer:
+          "Definitely. Our qualified team carries out regular scaffold inspections across Canterbury and East Kent, ensuring compliance with UK safety standards.",
+      },
+    ],
   },
   "tunbridge-wells": {
     slug: "tunbridge-wells",
     title: "Tunbridge Wells",
-    description: "Professional scaffolding services in Tunbridge Wells with TG20:21 compliant installation, CISRS qualified teams, and comprehensive insurance coverage for heritage, residential, and commercial projects.",
+    description:
+      "Professional scaffolding services in Tunbridge Wells with TG20:21 compliant installation, CISRS qualified teams, and comprehensive insurance coverage for heritage, residential, and commercial projects.",
     heroImage: "/Georgian Architecture Scaffolding.png",
     county: "Kent",
     towns: ["Tunbridge Wells", "Tonbridge", "Sevenoaks", "Edenbridge", "Paddock Wood", "Cranbrook"],
@@ -514,57 +608,74 @@ const locationDataMap: Record<string, LocationData> = {
       "Kent Weald countryside manor houses",
       "Tonbridge Castle and medieval structures",
       "High Weald Area of Outstanding Natural Beauty properties",
-      "Sevenoaks Knole House and stately home projects"
+      "Sevenoaks Knole House and stately home projects",
     ],
-    coverageAreas: ["Tunbridge Wells", "Tonbridge", "Sevenoaks", "Edenbridge", "Paddock Wood", "Cranbrook"],
+    coverageAreas: [
+      "Tunbridge Wells",
+      "Tonbridge",
+      "Sevenoaks",
+      "Edenbridge",
+      "Paddock Wood",
+      "Cranbrook",
+    ],
     services: [
       {
         name: "Access Scaffolding",
-        description: "Safe access scaffolding for construction and maintenance projects in Tunbridge Wells.",
-        href: "/services/access-scaffolding"
+        description:
+          "Safe access scaffolding for construction and maintenance projects in Tunbridge Wells.",
+        href: "/services/access-scaffolding",
       },
       {
         name: "Facade Scaffolding",
-        description: "Professional facade scaffolding for external building work throughout Tunbridge Wells.",
-        href: "/services/facade-scaffolding"
+        description:
+          "Professional facade scaffolding for external building work throughout Tunbridge Wells.",
+        href: "/services/facade-scaffolding",
       },
       {
         name: "Edge Protection",
-        description: "HSE compliant edge protection systems for construction sites in Tunbridge Wells.",
-        href: "/services/edge-protection"
-      }
+        description:
+          "HSE compliant edge protection systems for construction sites in Tunbridge Wells.",
+        href: "/services/edge-protection",
+      },
     ],
     faqs: [
       {
         question: "Do you handle permits in Tunbridge Wells?",
-        answer: "Yes, we assist with all necessary permits and planning applications in Tunbridge Wells Borough and Sevenoaks District. Our team knows local conservation requirements."
+        answer:
+          "Yes, we assist with all necessary permits and planning applications in Tunbridge Wells Borough and Sevenoaks District. Our team knows local conservation requirements.",
       },
       {
         question: "Can you work on The Pantiles?",
-        answer: "We have experience with heritage commercial areas and understand the requirements for working in Tunbridge Wells' historic Pantiles area."
+        answer:
+          "We have experience with heritage commercial areas and understand the requirements for working in Tunbridge Wells' historic Pantiles area.",
       },
       {
         question: "Do you work on Georgian buildings?",
-        answer: "Absolutely. We specialize in scaffolding Georgian and Regency architecture throughout Royal Tunbridge Wells with heritage-appropriate methods."
+        answer:
+          "Absolutely. We specialize in scaffolding Georgian and Regency architecture throughout Royal Tunbridge Wells with heritage-appropriate methods.",
       },
       {
         question: "Can you handle stately home projects?",
-        answer: "Yes, we work on large heritage properties, manor houses, and estates throughout the Kent Weald and High Weald areas."
+        answer:
+          "Yes, we work on large heritage properties, manor houses, and estates throughout the Kent Weald and High Weald areas.",
       },
       {
         question: "Do you work at Tonbridge Castle?",
-        answer: "We have experience with castle and medieval structure scaffolding, following English Heritage conservation requirements."
+        answer:
+          "We have experience with castle and medieval structure scaffolding, following English Heritage conservation requirements.",
       },
       {
         question: "Are scaffold inspections available in Tunbridge Wells?",
-        answer: "Definitely. Our qualified team carries out regular scaffold inspections across West Kent, ensuring compliance with UK safety standards."
-      }
-    ]
+        answer:
+          "Definitely. Our qualified team carries out regular scaffold inspections across West Kent, ensuring compliance with UK safety standards.",
+      },
+    ],
   },
-  "guildford": {
+  guildford: {
     slug: "guildford",
     title: "Guildford",
-    description: "Professional scaffolding services in Guildford with TG20:21 compliant installation, CISRS qualified teams, and comprehensive insurance coverage for heritage, residential, and commercial projects.",
+    description:
+      "Professional scaffolding services in Guildford with TG20:21 compliant installation, CISRS qualified teams, and comprehensive insurance coverage for heritage, residential, and commercial projects.",
     heroImage: "/Cathedral Scaffolding.png",
     county: "Surrey",
     towns: ["Guildford", "Woking", "Farnham", "Godalming", "Cranleigh", "Haslemere"],
@@ -574,57 +685,66 @@ const locationDataMap: Record<string, LocationData> = {
       "University of Surrey campus developments",
       "Historic Guildford High Street medieval buildings",
       "Thames-side Georgian and Victorian houses",
-      "North Downs chalk downland countryside estates"
+      "North Downs chalk downland countryside estates",
     ],
     coverageAreas: ["Guildford", "Woking", "Farnham", "Godalming", "Cranleigh", "Haslemere"],
     services: [
       {
         name: "Access Scaffolding",
-        description: "Safe access scaffolding for construction and maintenance projects in Guildford.",
-        href: "/services/access-scaffolding"
+        description:
+          "Safe access scaffolding for construction and maintenance projects in Guildford.",
+        href: "/services/access-scaffolding",
       },
       {
         name: "Facade Scaffolding",
-        description: "Professional facade scaffolding for external building work throughout Guildford.",
-        href: "/services/facade-scaffolding"
+        description:
+          "Professional facade scaffolding for external building work throughout Guildford.",
+        href: "/services/facade-scaffolding",
       },
       {
         name: "Edge Protection",
         description: "HSE compliant edge protection systems for construction sites in Guildford.",
-        href: "/services/edge-protection"
-      }
+        href: "/services/edge-protection",
+      },
     ],
     faqs: [
       {
         question: "Do you handle permits in Guildford?",
-        answer: "Yes, we assist with all necessary permits and planning applications in Guildford Borough and Waverley. Our team knows Surrey planning requirements."
+        answer:
+          "Yes, we assist with all necessary permits and planning applications in Guildford Borough and Waverley. Our team knows Surrey planning requirements.",
       },
       {
         question: "Can you work on Guildford Cathedral?",
-        answer: "We have experience with cathedral and modern religious building scaffolding, understanding the requirements for contemporary architectural heritage."
+        answer:
+          "We have experience with cathedral and modern religious building scaffolding, understanding the requirements for contemporary architectural heritage.",
       },
       {
         question: "Do you work on High Street historic buildings?",
-        answer: "Absolutely. We specialize in scaffolding Guildford's historic High Street medieval and Tudor buildings with conservation techniques."
+        answer:
+          "Absolutely. We specialize in scaffolding Guildford's historic High Street medieval and Tudor buildings with conservation techniques.",
       },
       {
         question: "Can you handle University of Surrey projects?",
-        answer: "Yes, we work on university buildings and campus developments, coordinating with academic schedules and student safety requirements."
+        answer:
+          "Yes, we work on university buildings and campus developments, coordinating with academic schedules and student safety requirements.",
       },
       {
         question: "Do you work in the Surrey Hills AONB?",
-        answer: "Certainly. We work throughout the Surrey Hills Area of Outstanding Natural Beauty, following environmental protection requirements."
+        answer:
+          "Certainly. We work throughout the Surrey Hills Area of Outstanding Natural Beauty, following environmental protection requirements.",
       },
       {
         question: "Are scaffold inspections available in Guildford?",
-        answer: "Definitely. Our qualified team carries out regular scaffold inspections across Surrey, ensuring compliance with UK safety standards."
-      }
-    ]
+        answer:
+          "Definitely. Our qualified team carries out regular scaffold inspections across Surrey, ensuring compliance with UK safety standards.",
+      },
+    ],
   },
   "east-sussex": {
     slug: "east-sussex",
     title: "East Sussex",
-    description: "Professional scaffolding services across East Sussex with TG20:21 compliant installation, CISRS qualified teams, and comprehensive insurance coverage for residential, commercial, and industrial projects.",
+    description:
+      "Professional scaffolding services across East Sussex with TG20:21 compliant installation, CISRS qualified teams, and comprehensive insurance coverage for residential, commercial, and industrial projects.",
     badge: "Our Headquarters",
     heroImage: "/Facade Scaffolding.png",
     county: "East Sussex",
@@ -636,73 +756,87 @@ const locationDataMap: Record<string, LocationData> = {
       "Battle Abbey and historic Norman architecture",
       "Rye medieval timber-framed buildings",
       "Bexhill Edwardian seaside villas",
-      "Sussex Downs rural farmhouses and barn conversions"
+      "Sussex Downs rural farmhouses and barn conversions",
     ],
     coverageAreas: ["Hastings", "Eastbourne", "Bexhill", "St Leonards", "Battle", "Rye"],
     services: [
       {
         name: "Access Scaffolding",
-        description: "Safe and compliant access scaffolding for building maintenance, construction, and renovation projects throughout East Sussex.",
-        href: "/services/access-scaffolding"
+        description:
+          "Safe and compliant access scaffolding for building maintenance, construction, and renovation projects throughout East Sussex.",
+        href: "/services/access-scaffolding",
       },
       {
-        name: "Facade Scaffolding", 
-        description: "Professional facade scaffolding solutions for external building work including rendering, painting, and cladding projects.",
-        href: "/services/facade-scaffolding"
+        name: "Facade Scaffolding",
+        description:
+          "Professional facade scaffolding solutions for external building work including rendering, painting, and cladding projects.",
+        href: "/services/facade-scaffolding",
       },
       {
         name: "Edge Protection Systems",
-        description: "HSE compliant edge protection for construction sites and roofing projects across East Sussex locations.",
-        href: "/services/edge-protection"
-      }
+        description:
+          "HSE compliant edge protection for construction sites and roofing projects across East Sussex locations.",
+        href: "/services/edge-protection",
+      },
     ],
     faqs: [
       {
         question: "Do you handle permits in Brighton?",
-        answer: "Yes, we assist with all necessary permits and planning applications in Brighton and Eastbourne, including seafront areas. Our team knows local council processes across Lewes, Hastings, and Bexhill."
+        answer:
+          "Yes, we assist with all necessary permits and planning applications in Brighton and Eastbourne, including seafront areas. Our team knows local council processes across Lewes, Hastings, and Bexhill.",
       },
       {
         question: "Can you provide temporary roof systems in Hastings?",
-        answer: "Absolutely. We install TG20:21-compliant temporary roof scaffolds in Hastings, Eastbourne, and Uckfield to protect worksites from rain and wind."
+        answer:
+          "Absolutely. We install TG20:21-compliant temporary roof scaffolds in Hastings, Eastbourne, and Uckfield to protect worksites from rain and wind.",
       },
       {
         question: "Do you offer residential scaffolding in Eastbourne?",
-        answer: "Yes, we provide scaffolding for homes, extensions, and renovations across Eastbourne, Bexhill, and Hailsham, with flexible hire periods."
+        answer:
+          "Yes, we provide scaffolding for homes, extensions, and renovations across Eastbourne, Bexhill, and Hailsham, with flexible hire periods.",
       },
       {
         question: "Can you supply crash decks for industrial projects in Newhaven?",
-        answer: "Certainly. We provide strong crash decks and loading platforms in Newhaven, Seaford, and Peacehaven, suitable for factories and warehouses."
+        answer:
+          "Certainly. We provide strong crash decks and loading platforms in Newhaven, Seaford, and Peacehaven, suitable for factories and warehouses.",
       },
       {
         question: "Do you offer facade scaffolding in Lewes?",
-        answer: "Yes, we install facade scaffolds for brickwork, painting, and roofing projects in Lewes, Hastings, and Rye, ensuring safe access."
+        answer:
+          "Yes, we install facade scaffolds for brickwork, painting, and roofing projects in Lewes, Hastings, and Rye, ensuring safe access.",
       },
       {
         question: "Are scaffold inspections available in East Sussex?",
-        answer: "Definitely. Our qualified team carries out regular scaffold inspections across East Sussex, ensuring compliance with UK safety standards."
+        answer:
+          "Definitely. Our qualified team carries out regular scaffold inspections across East Sussex, ensuring compliance with UK safety standards.",
       },
       {
         question: "Do you provide scaffold alarms in Hastings?",
-        answer: "Yes, we fit scaffold alarms in Hastings, Eastbourne, and Uckfield to secure sites against theft and vandalism."
+        answer:
+          "Yes, we fit scaffold alarms in Hastings, Eastbourne, and Uckfield to secure sites against theft and vandalism.",
       },
       {
         question: "Can you supply edge protection in Uckfield?",
-        answer: "Absolutely. We install edge protection systems for roof works and construction sites in Uckfield, Lewes, and Crowborough."
+        answer:
+          "Absolutely. We install edge protection systems for roof works and construction sites in Uckfield, Lewes, and Crowborough.",
       },
       {
         question: "Do you work on heritage sites in Rye?",
-        answer: "Yes, we have extensive experience scaffolding heritage properties in Rye, Lewes, and Battle, always following conservation guidelines."
+        answer:
+          "Yes, we have extensive experience scaffolding heritage properties in Rye, Lewes, and Battle, always following conservation guidelines.",
       },
       {
         question: "Can you provide loading bays in Bexhill?",
-        answer: "Certainly. We design and install scaffold loading bays for construction projects in Bexhill, Hastings, and Eastbourne."
-      }
-    ]
+        answer:
+          "Certainly. We design and install scaffold loading bays for construction projects in Bexhill, Hastings, and Eastbourne.",
+      },
+    ],
   },
   "west-sussex": {
     slug: "west-sussex",
     title: "West Sussex",
-    description: "Professional scaffolding solutions throughout West Sussex for all project types and sizes.",
+    description:
+      "Professional scaffolding solutions throughout West Sussex for all project types and sizes.",
     heroImage: "/Access Scaffolding new build.png",
     county: "West Sussex",
     towns: ["Brighton", "Crawley", "Worthing", "Chichester", "Horsham", "Burgess Hill"],
@@ -712,57 +846,66 @@ const locationDataMap: Record<string, LocationData> = {
       "Chichester cathedral quarter Georgian buildings",
       "Worthing pier and promenade Victorian architecture",
       "Gatwick airport commercial and industrial buildings",
-      "Sussex countryside oast houses and barn conversions"
+      "Sussex countryside oast houses and barn conversions",
     ],
     coverageAreas: ["Brighton", "Worthing", "Chichester", "Crawley", "Horsham", "Haywards Heath"],
     services: [
       {
         name: "Access Scaffolding",
-        description: "Safe access scaffolding for construction and maintenance projects in West Sussex.",
-        href: "/services/access-scaffolding"
+        description:
+          "Safe access scaffolding for construction and maintenance projects in West Sussex.",
+        href: "/services/access-scaffolding",
       },
       {
         name: "Facade Scaffolding",
-        description: "Professional facade scaffolding for external building work throughout West Sussex.",
-        href: "/services/facade-scaffolding"
+        description:
+          "Professional facade scaffolding for external building work throughout West Sussex.",
+        href: "/services/facade-scaffolding",
       },
       {
         name: "Edge Protection",
         description: "HSE compliant edge protection systems for construction sites in West Sussex.",
-        href: "/services/edge-protection"
-      }
+        href: "/services/edge-protection",
+      },
     ],
     faqs: [
-      { 
-        question: "Do you offer commercial scaffolding in Crawley?", 
-        answer: "Yes, our team delivers safe commercial scaffolding for offices, warehouses, and retail premises in Crawley, Horsham, and Gatwick." 
+      {
+        question: "Do you offer commercial scaffolding in Crawley?",
+        answer:
+          "Yes, our team delivers safe commercial scaffolding for offices, warehouses, and retail premises in Crawley, Horsham, and Gatwick.",
       },
-      { 
-        question: "Can you install scaffold towers for homes in Chichester?", 
-        answer: "Absolutely. We supply lightweight scaffold towers for painting, roofing, and extensions in Chichester, Bognor Regis, and Littlehampton." 
+      {
+        question: "Can you install scaffold towers for homes in Chichester?",
+        answer:
+          "Absolutely. We supply lightweight scaffold towers for painting, roofing, and extensions in Chichester, Bognor Regis, and Littlehampton.",
       },
-      { 
-        question: "Do you provide temporary roof scaffolds in Worthing?", 
-        answer: "Yes, we erect temporary roof systems in Worthing, Shoreham, and Lancing to protect building works from the weather." 
+      {
+        question: "Do you provide temporary roof scaffolds in Worthing?",
+        answer:
+          "Yes, we erect temporary roof systems in Worthing, Shoreham, and Lancing to protect building works from the weather.",
       },
-      { 
-        question: "Can you provide pavement gantries in Horsham?", 
-        answer: "Certainly. We build pavement gantries and access platforms in Horsham, Crawley, and Burgess Hill to keep pedestrian areas safe." 
+      {
+        question: "Can you provide pavement gantries in Horsham?",
+        answer:
+          "Certainly. We build pavement gantries and access platforms in Horsham, Crawley, and Burgess Hill to keep pedestrian areas safe.",
       },
-      { 
-        question: "Do you install public access staircases in Haywards Heath?", 
-        answer: "Yes, we design and fit public staircases in Haywards Heath, Burgess Hill, and East Grinstead for safe site access." 
+      {
+        question: "Do you install public access staircases in Haywards Heath?",
+        answer:
+          "Yes, we design and fit public staircases in Haywards Heath, Burgess Hill, and East Grinstead for safe site access.",
       },
-      { 
-        question: "Are scaffold inspections available in West Sussex?", 
-        answer: "Definitely. We offer weekly and ad-hoc scaffold inspections across West Sussex to ensure compliance with TG20:21 and HSE rules." 
-      }
-    ]
+      {
+        question: "Are scaffold inspections available in West Sussex?",
+        answer:
+          "Definitely. We offer weekly and ad-hoc scaffold inspections across West Sussex to ensure compliance with TG20:21 and HSE rules.",
+      },
+    ],
   },
-  "kent": {
+  kent: {
     slug: "kent",
     title: "Kent",
-    description: "Expert scaffolding services across Kent with full compliance and insurance coverage.",
+    description:
+      "Expert scaffolding services across Kent with full compliance and insurance coverage.",
     heroImage: "/Birdcage scaffolding.png",
     county: "Kent",
     towns: ["Canterbury", "Maidstone", "Dover", "Ashford", "Folkestone", "Tunbridge Wells"],
@@ -772,57 +915,64 @@ const locationDataMap: Record<string, LocationData> = {
       "Dover castle and coastal fortification structures",
       "Kentish ragstone farmhouses and cottages",
       "Channel Tunnel infrastructure and industrial buildings",
-      "Medway estuary maritime heritage structures"
+      "Medway estuary maritime heritage structures",
     ],
     coverageAreas: ["Canterbury", "Maidstone", "Ashford", "Dover", "Folkestone", "Tunbridge Wells"],
     services: [
       {
         name: "Access Scaffolding",
         description: "Safe access scaffolding for construction and maintenance projects in Kent.",
-        href: "/services/access-scaffolding"
+        href: "/services/access-scaffolding",
       },
       {
         name: "Facade Scaffolding",
         description: "Professional facade scaffolding for external building work throughout Kent.",
-        href: "/services/facade-scaffolding"
+        href: "/services/facade-scaffolding",
       },
       {
         name: "Edge Protection",
         description: "HSE compliant edge protection systems for construction sites in Kent.",
-        href: "/services/edge-protection"
-      }
+        href: "/services/edge-protection",
+      },
     ],
     faqs: [
-      { 
-        question: "Do you provide pavement gantries in Maidstone?", 
-        answer: "Yes, we design and install pavement gantries and loading bays in Maidstone, Ashford, and Sevenoaks, keeping pedestrians safe." 
+      {
+        question: "Do you provide pavement gantries in Maidstone?",
+        answer:
+          "Yes, we design and install pavement gantries and loading bays in Maidstone, Ashford, and Sevenoaks, keeping pedestrians safe.",
       },
-      { 
-        question: "Is edge protection available in Canterbury?", 
-        answer: "Absolutely. We supply edge protection systems for construction and roofing projects in Canterbury, Whitstable, and Herne Bay." 
+      {
+        question: "Is edge protection available in Canterbury?",
+        answer:
+          "Absolutely. We supply edge protection systems for construction and roofing projects in Canterbury, Whitstable, and Herne Bay.",
       },
-      { 
-        question: "Do you install temporary roof scaffolds in Tunbridge Wells?", 
-        answer: "Yes, we provide full temporary roofing in Tunbridge Wells, Tonbridge, and Paddock Wood to protect against bad weather." 
+      {
+        question: "Do you install temporary roof scaffolds in Tunbridge Wells?",
+        answer:
+          "Yes, we provide full temporary roofing in Tunbridge Wells, Tonbridge, and Paddock Wood to protect against bad weather.",
       },
-      { 
-        question: "Can you provide crash decks in Dartford?", 
-        answer: "Certainly. We supply crash decks and loading platforms for safe industrial and residential works in Dartford, Gravesend, and Bexley." 
+      {
+        question: "Can you provide crash decks in Dartford?",
+        answer:
+          "Certainly. We supply crash decks and loading platforms for safe industrial and residential works in Dartford, Gravesend, and Bexley.",
       },
-      { 
-        question: "Do you offer birdcage scaffolding in Ashford?", 
-        answer: "Yes, we erect birdcage scaffolds for interior works in Ashford, Folkestone, and Romney Marsh, ideal for ceilings and plastering." 
+      {
+        question: "Do you offer birdcage scaffolding in Ashford?",
+        answer:
+          "Yes, we erect birdcage scaffolds for interior works in Ashford, Folkestone, and Romney Marsh, ideal for ceilings and plastering.",
       },
-      { 
-        question: "Are scaffold inspections available in Kent?", 
-        answer: "Definitely. Our accredited inspectors provide weekly safety checks across Kent, including Maidstone, Canterbury, and Dover." 
-      }
-    ]
+      {
+        question: "Are scaffold inspections available in Kent?",
+        answer:
+          "Definitely. Our accredited inspectors provide weekly safety checks across Kent, including Maidstone, Canterbury, and Dover.",
+      },
+    ],
   },
-  "surrey": {
+  surrey: {
     slug: "surrey",
     title: "Surrey",
-    description: "Reliable scaffolding installations throughout Surrey for residential and commercial projects.",
+    description:
+      "Reliable scaffolding installations throughout Surrey for residential and commercial projects.",
     heroImage: "/Heavy Industrial Scaffolding.png",
     county: "Surrey",
     towns: ["Guildford", "Woking", "Croydon", "Kingston", "Epsom", "Reigate"],
@@ -832,57 +982,65 @@ const locationDataMap: Record<string, LocationData> = {
       "Guildford cathedral and university campus buildings",
       "London commuter belt residential developments",
       "North Downs chalk downland country houses",
-      "Surrey heathland Arts and Crafts movement buildings"
+      "Surrey heathland Arts and Crafts movement buildings",
     ],
     coverageAreas: ["Guildford", "Woking", "Croydon", "Kingston upon Thames", "Epsom", "Reigate"],
     services: [
       {
         name: "Access Scaffolding",
         description: "Safe access scaffolding for construction and maintenance projects in Surrey.",
-        href: "/services/access-scaffolding"
+        href: "/services/access-scaffolding",
       },
       {
         name: "Facade Scaffolding",
-        description: "Professional facade scaffolding for external building work throughout Surrey.",
-        href: "/services/facade-scaffolding"
+        description:
+          "Professional facade scaffolding for external building work throughout Surrey.",
+        href: "/services/facade-scaffolding",
       },
       {
         name: "Edge Protection",
         description: "HSE compliant edge protection systems for construction sites in Surrey.",
-        href: "/services/edge-protection"
-      }
+        href: "/services/edge-protection",
+      },
     ],
     faqs: [
-      { 
-        question: "Can you supply birdcage scaffolds in Guildford?", 
-        answer: "Yes, we provide birdcage scaffolding for interior work in Guildford, Woking, and Farnham, perfect for plastering and ceilings." 
+      {
+        question: "Can you supply birdcage scaffolds in Guildford?",
+        answer:
+          "Yes, we provide birdcage scaffolding for interior work in Guildford, Woking, and Farnham, perfect for plastering and ceilings.",
       },
-      { 
-        question: "Do you offer facade scaffolding in Woking?", 
-        answer: "Absolutely. We supply facade scaffolds for roofing and repairs in Woking, Walton-on-Thames, and Weybridge." 
+      {
+        question: "Do you offer facade scaffolding in Woking?",
+        answer:
+          "Absolutely. We supply facade scaffolds for roofing and repairs in Woking, Walton-on-Thames, and Weybridge.",
       },
-      { 
-        question: "Can you provide scaffold design drawings in Croydon?", 
-        answer: "Certainly. Our in-house design team prepares scaffold drawings for projects in Croydon, Epsom, and Redhill." 
+      {
+        question: "Can you provide scaffold design drawings in Croydon?",
+        answer:
+          "Certainly. Our in-house design team prepares scaffold drawings for projects in Croydon, Epsom, and Redhill.",
       },
-      { 
-        question: "Do you install public access staircases in Epsom?", 
-        answer: "Yes, we provide safe staircase scaffolds for public and workforce access in Epsom, Leatherhead, and Banstead." 
+      {
+        question: "Do you install public access staircases in Epsom?",
+        answer:
+          "Yes, we provide safe staircase scaffolds for public and workforce access in Epsom, Leatherhead, and Banstead.",
       },
-      { 
-        question: "Do you offer temporary roof scaffolding in Redhill?", 
-        answer: "Absolutely. We install weatherproof temporary roofs in Redhill, Reigate, and Caterham." 
+      {
+        question: "Do you offer temporary roof scaffolding in Redhill?",
+        answer:
+          "Absolutely. We install weatherproof temporary roofs in Redhill, Reigate, and Caterham.",
       },
-      { 
-        question: "Are scaffold inspections available in Surrey?", 
-        answer: "Definitely. We carry out full scaffold inspections across Surrey, including Guildford, Woking, and Croydon." 
-      }
-    ]
+      {
+        question: "Are scaffold inspections available in Surrey?",
+        answer:
+          "Definitely. We carry out full scaffold inspections across Surrey, including Guildford, Woking, and Croydon.",
+      },
+    ],
   },
-  "london": {
+  london: {
     slug: "london",
     title: "London",
-    description: "Specialized urban scaffolding services across all London boroughs with traffic management expertise.",
+    description:
+      "Specialized urban scaffolding services across all London boroughs with traffic management expertise.",
     heroImage: "/Public Access Staircases.png",
     county: "London",
     towns: ["All London Boroughs", "Central London", "Greater London"],
@@ -892,57 +1050,72 @@ const locationDataMap: Record<string, LocationData> = {
       "Historic churches and listed buildings",
       "Thames-side wharves and converted warehouses",
       "Art Deco and Edwardian mansion blocks",
-      "Contemporary glass and steel developments"
+      "Contemporary glass and steel developments",
     ],
-    coverageAreas: ["Central London", "North London", "South London", "East London", "West London", "Greater London"],
+    coverageAreas: [
+      "Central London",
+      "North London",
+      "South London",
+      "East London",
+      "West London",
+      "Greater London",
+    ],
     services: [
       {
         name: "Access Scaffolding",
         description: "Safe access scaffolding for construction and maintenance projects in London.",
-        href: "/services/access-scaffolding"
+        href: "/services/access-scaffolding",
       },
       {
         name: "Facade Scaffolding",
-        description: "Professional facade scaffolding for external building work throughout London.",
-        href: "/services/facade-scaffolding"
+        description:
+          "Professional facade scaffolding for external building work throughout London.",
+        href: "/services/facade-scaffolding",
       },
       {
         name: "Edge Protection",
         description: "HSE compliant edge protection systems for construction sites in London.",
-        href: "/services/edge-protection"
-      }
+        href: "/services/edge-protection",
+      },
     ],
     faqs: [
-      { 
-        question: "Do you provide public access staircases in Central London?", 
-        answer: "Yes, we design and install staircase scaffolds across Central London including Westminster, Camden, and Southwark." 
+      {
+        question: "Do you provide public access staircases in Central London?",
+        answer:
+          "Yes, we design and install staircase scaffolds across Central London including Westminster, Camden, and Southwark.",
       },
-      { 
-        question: "Are you experienced with heritage scaffolding in London?", 
-        answer: "Absolutely. We work on listed buildings in Greenwich, Islington, and Kensington, always following conservation rules." 
+      {
+        question: "Are you experienced with heritage scaffolding in London?",
+        answer:
+          "Absolutely. We work on listed buildings in Greenwich, Islington, and Kensington, always following conservation rules.",
       },
-      { 
-        question: "Do you install temporary roof scaffolds in North London?", 
-        answer: "Yes, we provide full weatherproof scaffolds in Enfield, Barnet, and Haringey for construction projects." 
+      {
+        question: "Do you install temporary roof scaffolds in North London?",
+        answer:
+          "Yes, we provide full weatherproof scaffolds in Enfield, Barnet, and Haringey for construction projects.",
       },
-      { 
-        question: "Can you provide birdcage scaffolds in South London?", 
-        answer: "Certainly. We install birdcage scaffolding for internal works in Croydon, Lewisham, and Bromley." 
+      {
+        question: "Can you provide birdcage scaffolds in South London?",
+        answer:
+          "Certainly. We install birdcage scaffolding for internal works in Croydon, Lewisham, and Bromley.",
       },
-      { 
-        question: "Do you fit scaffold alarms in East London?", 
-        answer: "Yes, we supply and install scaffold alarms in Hackney, Stratford, and Barking for site security." 
+      {
+        question: "Do you fit scaffold alarms in East London?",
+        answer:
+          "Yes, we supply and install scaffold alarms in Hackney, Stratford, and Barking for site security.",
       },
-      { 
-        question: "Are scaffold inspections available in London?", 
-        answer: "Certainly. We offer regular inspections across Greater London, ensuring compliance with TG20:21 and HSE rules." 
-      }
-    ]
+      {
+        question: "Are scaffold inspections available in London?",
+        answer:
+          "Certainly. We offer regular inspections across Greater London, ensuring compliance with TG20:21 and HSE rules.",
+      },
+    ],
   },
-  "essex": {
+  essex: {
     slug: "essex",
     title: "Essex",
-    description: "Complete scaffolding services across Essex with experienced local teams and competitive pricing.",
+    description:
+      "Complete scaffolding services across Essex with experienced local teams and competitive pricing.",
     heroImage: "/Scaffold Towers & Mast Systems.png",
     county: "Essex",
     towns: ["Chelmsford", "Colchester", "Southend", "Basildon", "Harlow", "Brentwood"],
@@ -952,53 +1125,59 @@ const locationDataMap: Record<string, LocationData> = {
       "Chelmsford cathedral quarter Georgian architecture",
       "Southend pier and seafront Victorian properties",
       "London commuter belt residential developments",
-      "Rural Essex oast houses and heritage buildings"
+      "Rural Essex oast houses and heritage buildings",
     ],
     coverageAreas: ["Chelmsford", "Southend", "Colchester", "Basildon", "Braintree", "Harlow"],
     services: [
       {
         name: "Access Scaffolding",
         description: "Safe access scaffolding for construction and maintenance projects in Essex.",
-        href: "/services/access-scaffolding"
+        href: "/services/access-scaffolding",
       },
       {
         name: "Facade Scaffolding",
         description: "Professional facade scaffolding for external building work throughout Essex.",
-        href: "/services/facade-scaffolding"
+        href: "/services/facade-scaffolding",
       },
       {
         name: "Edge Protection",
         description: "HSE compliant edge protection systems for construction sites in Essex.",
-        href: "/services/edge-protection"
-      }
+        href: "/services/edge-protection",
+      },
     ],
     faqs: [
-      { 
-        question: "Do you provide heavy-duty scaffolding in Chelmsford?", 
-        answer: "Yes, we supply heavy-duty industrial scaffolds in Chelmsford, Witham, and Maldon for large-scale construction projects." 
+      {
+        question: "Do you provide heavy-duty scaffolding in Chelmsford?",
+        answer:
+          "Yes, we supply heavy-duty industrial scaffolds in Chelmsford, Witham, and Maldon for large-scale construction projects.",
       },
-      { 
-        question: "Can you install scaffold alarms in Southend?", 
-        answer: "Absolutely. We fit scaffold alarm systems in Southend, Leigh-on-Sea, and Westcliff for 24/7 protection." 
+      {
+        question: "Can you install scaffold alarms in Southend?",
+        answer:
+          "Absolutely. We fit scaffold alarm systems in Southend, Leigh-on-Sea, and Westcliff for 24/7 protection.",
       },
-      { 
-        question: "Do you offer facade scaffolding in Colchester?", 
-        answer: "Yes, we provide facade scaffolding for residential and commercial buildings in Colchester, Braintree, and Clacton." 
+      {
+        question: "Do you offer facade scaffolding in Colchester?",
+        answer:
+          "Yes, we provide facade scaffolding for residential and commercial buildings in Colchester, Braintree, and Clacton.",
       },
-      { 
-        question: "Can you supply birdcage scaffolds in Basildon?", 
-        answer: "Certainly. We install interior birdcage scaffolds in Basildon, Wickford, and Pitsea, perfect for ceiling works." 
+      {
+        question: "Can you supply birdcage scaffolds in Basildon?",
+        answer:
+          "Certainly. We install interior birdcage scaffolds in Basildon, Wickford, and Pitsea, perfect for ceiling works.",
       },
-      { 
-        question: "Do you install temporary roofs in Brentwood?", 
-        answer: "Yes, we offer full temporary roof scaffolds in Brentwood, Shenfield, and Ingatestone to keep projects dry." 
+      {
+        question: "Do you install temporary roofs in Brentwood?",
+        answer:
+          "Yes, we offer full temporary roof scaffolds in Brentwood, Shenfield, and Ingatestone to keep projects dry.",
       },
-      { 
-        question: "Are scaffold inspections available in Essex?", 
-        answer: "Definitely. Our certified team inspects scaffolding across Essex towns including Chelmsford, Southend, and Colchester." 
-      }
-    ]
-  }
+      {
+        question: "Are scaffold inspections available in Essex?",
+        answer:
+          "Definitely. Our certified team inspects scaffolding across Essex towns including Chelmsford, Southend, and Colchester.",
+      },
+    ],
+  },
 };
 
 // Get all locations for the library page
@@ -1012,65 +1191,142 @@ export function getLocationData(slug: string): LocationData | undefined {
 }
 
 // Get location data with fallback for dynamic generation
+// Helper function to generate service links with location-specific pages when available
+function getServiceHref(serviceName: string, locationSlug: string): string {
+  const serviceMapping: Record<string, string> = {
+    "Commercial Scaffolding": "commercial-scaffolding",
+    "Residential Scaffolding": "residential-scaffolding",
+    "Industrial Scaffolding": "industrial-scaffolding",
+    "Access Scaffolding": "access-scaffolding",
+    "Facade Scaffolding": "facade-scaffolding",
+    "Edge Protection": "edge-protection",
+  };
+
+  const serviceSlug = serviceMapping[serviceName];
+  if (!serviceSlug) {
+    return "/services"; // fallback
+  }
+
+  // Define which location-specific service pages actually exist
+  const locationServicePages = {
+    brighton: ["commercial-scaffolding", "residential-scaffolding"],
+    canterbury: ["commercial-scaffolding", "residential-scaffolding"],
+    hastings: ["commercial-scaffolding", "residential-scaffolding"],
+  };
+
+  // Check if location-specific service page exists
+  if (
+    locationServicePages[locationSlug as keyof typeof locationServicePages]?.includes(serviceSlug)
+  ) {
+    return `/services/${serviceSlug}-${locationSlug}`;
+  }
+
+  // Default to generic service page
+  return `/services/${serviceSlug}`;
+}
+
 export function getLocationDataWithFallback(slug: string): LocationData {
   const locationData = locationDataMap[slug];
-  
+
   if (locationData) {
-    return locationData;
+    // Add main service categories as first 3 services for existing location data
+    const mainServices = [
+      {
+        name: "Commercial Scaffolding",
+        description: `Professional commercial scaffolding for office buildings, retail developments, and business districts in ${locationData.title}.`,
+        href: getServiceHref("Commercial Scaffolding", slug),
+      },
+      {
+        name: "Residential Scaffolding",
+        description: `Safe, reliable scaffolding for homes, extensions, and renovations in ${locationData.title}. Family-friendly approach with minimal disruption.`,
+        href: getServiceHref("Residential Scaffolding", slug),
+      },
+      {
+        name: "Industrial Scaffolding",
+        description: `Heavy-duty scaffolding systems for industrial facilities, ports, and manufacturing sites in ${locationData.title}. Engineered for complex challenges.`,
+        href: getServiceHref("Industrial Scaffolding", slug),
+      },
+    ];
+
+    return {
+      ...locationData,
+      services: [...mainServices, ...locationData.services],
+    };
   }
 
   // Generate default location data for unmapped slugs
-  const locationTitle = slug.split("-").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
-  
+  const locationTitle = slug
+    .split("-")
+    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+    .join(" ");
+
   return {
     slug,
     title: locationTitle,
     description: `Professional scaffolding services in ${locationTitle} with TG20:21 compliant installation, CISRS qualified teams, and comprehensive insurance coverage for all project types.`,
     county: locationTitle,
-    towns: [locationTitle, "Local Area", "Surrounding Towns", "Regional Coverage", "County Wide", "Adjacent Areas"],
+    towns: [
+      locationTitle,
+      "Local Area",
+      "Surrounding Towns",
+      "Regional Coverage",
+      "County Wide",
+      "Adjacent Areas",
+    ],
     projectTypes: [
       `Traditional ${locationTitle} period properties and heritage buildings`,
       `Modern residential developments throughout ${locationTitle}`,
       `Commercial and retail premises in ${locationTitle} town center`,
       `Industrial and warehouse buildings in ${locationTitle} area`,
       `Rural properties and barn conversions near ${locationTitle}`,
-      `Coastal or countryside properties around ${locationTitle}`
+      `Coastal or countryside properties around ${locationTitle}`,
     ],
-    coverageAreas: [locationTitle, "Local Area", "Surrounding Towns", "Regional Coverage", "County Wide", "Adjacent Areas"],
+    coverageAreas: [
+      locationTitle,
+      "Local Area",
+      "Surrounding Towns",
+      "Regional Coverage",
+      "County Wide",
+      "Adjacent Areas",
+    ],
     services: [
       {
         name: "Access Scaffolding",
         description: `Safe access scaffolding for construction and maintenance projects in ${locationTitle}.`,
-        href: "/services/access-scaffolding"
+        href: "/services/access-scaffolding",
       },
       {
         name: "Facade Scaffolding",
         description: `Professional facade scaffolding for external building work throughout ${locationTitle}.`,
-        href: "/services/facade-scaffolding"
+        href: "/services/facade-scaffolding",
       },
       {
         name: "Edge Protection",
         description: `HSE compliant edge protection systems for construction sites in ${locationTitle}.`,
-        href: "/services/edge-protection"
-      }
+        href: "/services/edge-protection",
+      },
     ],
     faqs: [
-      { 
-        question: "Do you handle permits in Brighton?", 
-        answer: "Yes, we assist with all necessary permits and planning applications in Brighton and Eastbourne, including seafront areas. Our team knows local council processes across Lewes, Hastings, and Bexhill." 
+      {
+        question: "Do you handle permits in Brighton?",
+        answer:
+          "Yes, we assist with all necessary permits and planning applications in Brighton and Eastbourne, including seafront areas. Our team knows local council processes across Lewes, Hastings, and Bexhill.",
       },
-      { 
-        question: "Can you provide temporary roof systems in Hastings?", 
-        answer: "Absolutely. We install TG20:21-compliant temporary roof scaffolds in Hastings, Eastbourne, and Uckfield to protect worksites from rain and wind." 
+      {
+        question: "Can you provide temporary roof systems in Hastings?",
+        answer:
+          "Absolutely. We install TG20:21-compliant temporary roof scaffolds in Hastings, Eastbourne, and Uckfield to protect worksites from rain and wind.",
       },
-      { 
-        question: "Do you offer residential scaffolding in Eastbourne?", 
-        answer: "Yes, we provide scaffolding for homes, extensions, and renovations across Eastbourne, Bexhill, and Hailsham, with flexible hire periods." 
+      {
+        question: "Do you offer residential scaffolding in Eastbourne?",
+        answer:
+          "Yes, we provide scaffolding for homes, extensions, and renovations across Eastbourne, Bexhill, and Hailsham, with flexible hire periods.",
       },
-      { 
-        question: "Are scaffold inspections available in East Sussex?", 
-        answer: "Definitely. Our qualified team carries out regular scaffold inspections across East Sussex, ensuring compliance with UK safety standards." 
-      }
-    ]
+      {
+        question: "Are scaffold inspections available in East Sussex?",
+        answer:
+          "Definitely. Our qualified team carries out regular scaffold inspections across East Sussex, ensuring compliance with UK safety standards.",
+      },
+    ],
   };
 }
