@@ -72,7 +72,7 @@ export async function POST(request: Request): Promise<Response> {
     // Create email HTML content
     const emailHtml = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-        <h2 style="color: #5BC0EB; border-bottom: 2px solid #5BC0EB; padding-bottom: 10px;">
+        <h2 style="color: #00607A; border-bottom: 2px solid #00607A; padding-bottom: 10px;">
           New Contact Form Submission
         </h2>
 
@@ -87,7 +87,7 @@ export async function POST(request: Request): Promise<Response> {
 
         <div style="margin: 20px 0;">
           <h3 style="color: #333;">Message</h3>
-          <div style="background: white; padding: 20px; border-left: 4px solid #5BC0EB; white-space: pre-wrap;">${message}</div>
+          <div style="background: white; padding: 20px; border-left: 4px solid #00607A; white-space: pre-wrap;">${message}</div>
         </div>
 
         <div style="background: #f1f3f4; padding: 15px; border-radius: 4px; margin: 20px 0; font-size: 12px; color: #666;">
@@ -138,7 +138,7 @@ export async function POST(request: Request): Promise<Response> {
       // Send confirmation email to customer
       const confirmationHtml = `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-          <h2 style="color: #5BC0EB;">Thank You for Your Enquiry</h2>
+          <h2 style="color: #00607A;">Thank You for Your Enquiry</h2>
 
           <p>Hi ${name},</p>
 
@@ -152,7 +152,7 @@ export async function POST(request: Request): Promise<Response> {
             <div style="white-space: pre-wrap; background: white; padding: 15px; border-radius: 4px;">${message}</div>
           </div>
 
-          <div style="background: #5BC0EB; color: white; padding: 20px; border-radius: 8px; margin: 20px 0;">
+          <div style="background: #00607A; color: white; padding: 20px; border-radius: 8px; margin: 20px 0;">
             <h3 style="margin-top: 0;">What Happens Next?</h3>
             <ul style="padding-left: 20px;">
               <li>We'll review your enquiry within 2-4 hours</li>
