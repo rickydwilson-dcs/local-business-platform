@@ -126,7 +126,7 @@ export async function POST(request: Request): Promise<Response> {
       }
 
       const emailResult = await resend.emails.send({
-        from: `${process.env.BUSINESS_NAME} <noreply@colossusscaffolding.co.uk>`,
+        from: `${process.env.BUSINESS_NAME} <noreply@colossus-scaffolding.co.uk>`,
         to: [process.env.BUSINESS_EMAIL!],
         replyTo: email, // Allow direct reply to customer
         subject: emailSubject,
@@ -174,7 +174,7 @@ export async function POST(request: Request): Promise<Response> {
       `;
 
       await resend.emails.send({
-        from: `${process.env.BUSINESS_NAME} <noreply@colossusscaffolding.co.uk>`,
+        from: `${process.env.BUSINESS_NAME} <noreply@colossus-scaffolding.co.uk>`,
         to: [email],
         subject: `Thank you for your enquiry - ${process.env.BUSINESS_NAME}`,
         html: confirmationHtml,
