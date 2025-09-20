@@ -101,7 +101,7 @@ export function ContentCard({
       <div className="p-6 flex flex-col flex-grow">
         <h3 className="text-xl font-bold text-gray-900 mb-3">{title}</h3>
 
-        <p className="text-gray-600 text-sm leading-relaxed mb-4">
+        <p className="text-gray-800 text-sm leading-relaxed mb-4">
           {description ?? fallbackDescription ?? `Learn more about ${title.toLowerCase()}.`}
         </p>
 
