@@ -18,7 +18,7 @@ export function ContentGrid({
   contentType = "services",
 }: ContentGridProps) {
   if (items.length === 0) {
-    return <p className="text-gray-600">{emptyMessage}</p>;
+    return <p className="text-gray-800">{emptyMessage}</p>;
   }
 
   return (

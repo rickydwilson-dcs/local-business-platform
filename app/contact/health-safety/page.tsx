@@ -51,7 +51,7 @@ export default function HealthSafetyPage() {
           <h1 className="text-4xl font-bold text-gray-900 mb-6">Health & Safety</h1>
 
           <div className="prose prose-lg max-w-none mb-12">
-            <p className="text-xl text-gray-600">
+            <p className="text-xl text-gray-800">
               We take health & safety seriously. Our scaffolds are designed, erected and inspected
               to <strong>TG20:21</strong> standards by qualified teams.
             </p>

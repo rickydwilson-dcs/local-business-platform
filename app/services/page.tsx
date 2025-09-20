@@ -26,7 +26,7 @@ export default async function ServicesPage() {
           <div className="container-standard">
             <div className="text-center">
               <h1 className="heading-hero">Our Scaffolding Services</h1>
-              <p className="text-xl text-gray-600 mb-8 mx-auto w-full lg:w-[90%]">
+              <p className="text-xl text-gray-800 mb-8 mx-auto w-full lg:w-[90%]">
                 Professional scaffolding solutions across the South East UK. From residential
                 repairs to large commercial projects, we deliver safe, compliant access solutions.
               </p>
@@ -108,7 +108,7 @@ export default async function ServicesPage() {
             />
 
             <div className="text-center mt-12">
-              <p className="text-gray-600 mb-6">
+              <p className="text-gray-800 mb-6">
                 Need a custom scaffolding solution for your project?
               </p>
               <Link href="/contact" className="btn-primary-lg">
@@ -122,7 +122,7 @@ export default async function ServicesPage() {
         <section className="section-compact bg-white">
           <div className="container-standard text-center">
             <h2 className="heading-subsection">Need a Custom Solution?</h2>
-            <p className="text-xl text-gray-600 mb-8">
+            <p className="text-xl text-gray-800 mb-8">
               Every project is unique. Contact our expert team to discuss your specific scaffolding
               requirements.
             </p>
