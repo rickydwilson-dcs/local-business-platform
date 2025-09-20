@@ -1,61 +1,55 @@
-import Link from "next/link"
+import Link from "next/link";
 
 interface CapabilityItem {
-  title: string
-  subtitle: string
-  description: string
-  duration?: string
-  features?: string[]
-  href?: string
-  ctaText?: string
+  title: string;
+  subtitle: string;
+  description: string;
+  duration?: string;
+  features?: string[];
+  href?: string;
+  ctaText?: string;
 }
 
 interface CapabilityShowcaseProps {
-  title: string
-  description?: string
-  capabilities: CapabilityItem[]
-  backgroundColor?: 'white' | 'gray'
+  title: string;
+  description?: string;
+  capabilities: CapabilityItem[];
+  backgroundColor?: "white" | "gray";
 }
 
 export function CapabilityShowcase({
   title,
   description,
   capabilities,
-  backgroundColor = 'white'
+  backgroundColor = "white",
 }: CapabilityShowcaseProps) {
-  const bgClass = backgroundColor === 'white' ? 'bg-white' : 'bg-gray-50'
+  const bgClass = backgroundColor === "white" ? "bg-white" : "bg-gray-50";
 
   // Dynamic grid classes based on number of capabilities
   const getGridClass = (itemCount: number) => {
     switch (itemCount) {
       case 2:
-        return 'grid-cols-1 md:grid-cols-2'
+        return "grid-cols-1 md:grid-cols-2";
       case 3:
-        return 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
+        return "grid-cols-1 md:grid-cols-2 lg:grid-cols-3";
       case 4:
-        return 'grid-cols-1 md:grid-cols-2 lg:grid-cols-4'
+        return "grid-cols-1 md:grid-cols-2 lg:grid-cols-4";
       case 5:
-        return 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5'
+        return "grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5";
       case 6:
-        return 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
+        return "grid-cols-1 md:grid-cols-2 lg:grid-cols-3";
       default:
-        return 'grid-cols-1 md:grid-cols-2 lg:grid-cols-4'
+        return "grid-cols-1 md:grid-cols-2 lg:grid-cols-4";
     }
-  }
+  };
 
   return (
     <section className={`section-standard ${bgClass}`}>
       <div className="container-standard">
         {/* Section Header */}
         <div className="section-header">
-          <h2 className="heading-section">
-            {title}
-          </h2>
-          {description && (
-            <p className="text-subtitle mx-auto max-w-4xl">
-              {description}
-            </p>
-          )}
+          <h2 className="heading-section">{title}</h2>
+          {description && <p className="text-subtitle mx-auto max-w-4xl">{description}</p>}
         </div>
 
         {/* Capabilities Grid */}
@@ -77,15 +71,11 @@ export function CapabilityShowcase({
               {/* Content */}
               <div className="pt-2">
                 <div className="mb-4">
-                  <h3 className="heading-card-sm">
-                    {capability.title}
-                  </h3>
-                  <p className="text-sm text-brand-blue font-medium">
-                    {capability.subtitle}
-                  </p>
+                  <h3 className="heading-card-sm">{capability.title}</h3>
+                  <p className="text-sm text-brand-blue font-medium">{capability.subtitle}</p>
                 </div>
 
-                <p className="text-gray-600 text-sm leading-relaxed mb-6">
+                <p className="text-gray-800 text-sm leading-relaxed mb-6">
                   {capability.description}
                 </p>
 
@@ -114,8 +104,7 @@ export function CapabilityShowcase({
             </div>
           ))}
         </div>
-
       </div>
     </section>
-  )
+  );
 }

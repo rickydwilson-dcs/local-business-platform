@@ -62,7 +62,7 @@ export function ServiceLocationMatrix({
       <div className="container-standard">
         <div className="text-center mb-12">
           <h2 className="heading-section">{title}</h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">{description}</p>
+          <p className="text-xl text-gray-800 max-w-3xl mx-auto">{description}</p>
         </div>
 
         <div className="grid lg:grid-cols-3 gap-8">
@@ -79,7 +79,7 @@ export function ServiceLocationMatrix({
                 >
                   {service.title}
                 </Link>
-                <p className="text-gray-600 mt-2 text-sm">{service.description}</p>
+                <p className="text-gray-800 mt-2 text-sm">{service.description}</p>
               </div>
 
               <div className="space-y-3">

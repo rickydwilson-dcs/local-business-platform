@@ -53,7 +53,7 @@ export default function ContactAreasPage() {
           <h1 className="text-4xl font-bold text-gray-900 mb-6">Contact Us About Coverage</h1>
 
           <div className="prose prose-lg max-w-none mb-12">
-            <p className="text-xl text-gray-600">
+            <p className="text-xl text-gray-800">
               Not sure if we cover your area? Get in touch and we&apos;ll confirm availability and
               timelines for your location.
             </p>
@@ -86,7 +86,7 @@ export default function ContactAreasPage() {
                     01424 466 661
                   </a>
                 </p>
-                <p className="text-sm text-gray-600">
+                <p className="text-sm text-gray-800">
                   Mon-Fri: 7:30am - 6:00pm
                   <br />
                   Sat: 8:00am - 4:00pm
@@ -100,7 +100,7 @@ export default function ContactAreasPage() {
                     info@colossusscaffolding.com
                   </a>
                 </p>
-                <p className="text-sm text-gray-600">We respond within 24 hours</p>
+                <p className="text-sm text-gray-800">We respond within 24 hours</p>
               </div>
             </div>
           </div>

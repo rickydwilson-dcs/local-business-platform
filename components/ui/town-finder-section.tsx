@@ -1,20 +1,20 @@
-'use client';
+"use client";
 
-import { useState, useMemo } from 'react';
-import Link from 'next/link';
-import { getAllCounties } from '@/lib/locations-dropdown';
+import { useState, useMemo } from "react";
+import Link from "next/link";
+import { getAllCounties } from "@/lib/locations-dropdown";
 
 export function TownFinderSection() {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [selectedCounty, setSelectedCounty] = useState('all');
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCounty, setSelectedCounty] = useState("all");
   const counties = getAllCounties();
 
   const allTowns = useMemo(() => {
-    return counties.flatMap(county =>
-      county.towns.map(town => ({
+    return counties.flatMap((county) =>
+      county.towns.map((town) => ({
         ...town,
         county: county.name,
-        countySlug: county.slug
+        countySlug: county.slug,
       }))
     );
   }, [counties]);
@@ -22,14 +22,15 @@ export function TownFinderSection() {
   const filteredTowns = useMemo(() => {
     let filtered = allTowns;
 
-    if (selectedCounty !== 'all') {
-      filtered = filtered.filter(town => town.countySlug === selectedCounty);
+    if (selectedCounty !== "all") {
+      filtered = filtered.filter((town) => town.countySlug === selectedCounty);
     }
 
     if (searchTerm) {
-      filtered = filtered.filter(town =>
-        town.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        town.county.toLowerCase().includes(searchTerm.toLowerCase())
+      filtered = filtered.filter(
+        (town) =>
+          town.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          town.county.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
 
@@ -40,11 +41,10 @@ export function TownFinderSection() {
     <section id="town-finder" className="section-standard bg-white">
       <div className="container-standard">
         <div className="text-center mb-12">
-          <h2 className="heading-section">
-            Find Your Local Scaffolding Specialist
-          </h2>
-          <p className="text-lg text-gray-600 mx-auto w-full lg:w-[85%]">
-            Enter your town name or select a county to connect with scaffolding experts who understand your local requirements.
+          <h2 className="heading-section">Find Your Local Scaffolding Specialist</h2>
+          <p className="text-lg text-gray-800 mx-auto w-full lg:w-[85%]">
+            Enter your town name or select a county to connect with scaffolding experts who
+            understand your local requirements.
           </p>
         </div>
 
@@ -57,8 +57,18 @@ export function TownFinderSection() {
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <svg className="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                  <svg
+                    className="h-5 w-5 text-gray-400"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                    />
                   </svg>
                 </div>
                 <input
@@ -83,7 +93,7 @@ export function TownFinderSection() {
                 onChange={(e) => setSelectedCounty(e.target.value)}
               >
                 <option value="all">All Counties</option>
-                {counties.map(county => (
+                {counties.map((county) => (
                   <option key={county.slug} value={county.slug}>
                     {county.name}
                   </option>
@@ -95,7 +105,7 @@ export function TownFinderSection() {
           {/* Results */}
           {filteredTowns.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {filteredTowns.map(town => (
+              {filteredTowns.map((town) => (
                 <Link
                   key={town.slug}
                   href={town.href}
@@ -106,16 +116,28 @@ export function TownFinderSection() {
                       <div className="font-semibold text-gray-900 group-hover:text-brand-blue transition-colors">
                         {town.name}
                       </div>
-                      <div className="text-sm text-gray-500">{town.county}</div>
+                      <div className="text-sm text-gray-700">{town.county}</div>
                       {town.isRichContent && (
                         <div className="inline-flex items-center gap-1 mt-1">
                           <span className="w-2 h-2 bg-brand-blue rounded-full"></span>
-                          <span className="text-xs text-brand-blue font-medium">Specialist Coverage</span>
+                          <span className="text-xs text-brand-blue font-medium">
+                            Specialist Coverage
+                          </span>
                         </div>
                       )}
                     </div>
-                    <svg className="w-5 h-5 text-gray-400 group-hover:text-brand-blue transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    <svg
+                      className="w-5 h-5 text-gray-400 group-hover:text-brand-blue transition-colors"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M9 5l7 7-7 7"
+                      />
                     </svg>
                   </div>
                 </Link>
@@ -123,28 +145,36 @@ export function TownFinderSection() {
             </div>
           ) : (
             <div className="text-center py-12">
-              <div className="text-gray-500 mb-4">
-                <svg className="w-12 h-12 mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              <div className="text-gray-700 mb-4">
+                <svg
+                  className="w-12 h-12 mx-auto mb-4"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                  />
                 </svg>
                 No towns found matching your search.
               </div>
-              <p className="text-gray-600 mb-6">
+              <p className="text-gray-800 mb-6">
                 We may still be able to help. Contact us to discuss your project location.
               </p>
-              <Link
-                href="/contact"
-                className="btn-primary"
-              >
+              <Link href="/contact" className="btn-primary">
                 Contact Our Team
               </Link>
             </div>
           )}
 
-          {searchTerm === '' && selectedCounty === 'all' && (
+          {searchTerm === "" && selectedCounty === "all" && (
             <div className="text-center mt-8">
-              <p className="text-gray-600 mb-4">
-                Showing a sample of our coverage areas. Use the search above to find your specific location.
+              <p className="text-gray-800 mb-4">
+                Showing a sample of our coverage areas. Use the search above to find your specific
+                location.
               </p>
               <Link
                 href="#county-gateways"

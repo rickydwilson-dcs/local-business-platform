@@ -97,7 +97,7 @@ export function HeroSection(props: HeroSectionProps) {
                     />
                   </svg>
                   <span className="text-lg font-medium">Hero Image</span>
-                  <p className="text-sm text-gray-500 mt-2">Professional scaffolding photography</p>
+                  <p className="text-sm text-gray-700 mt-2">Professional scaffolding photography</p>
                 </div>
               </div>
             )}

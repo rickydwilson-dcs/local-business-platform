@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useState, useRef, useEffect } from 'react';
-import Link from 'next/link';
-import { getAllCounties } from '@/lib/locations-dropdown';
+import { useState, useRef, useEffect } from "react";
+import Link from "next/link";
+import { getAllCounties } from "@/lib/locations-dropdown";
 
 export function LocationsDropdown() {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,23 +17,23 @@ export function LocationsDropdown() {
       }
     }
 
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
 
   // Close dropdown on escape key
   useEffect(() => {
     function handleEscape(event: KeyboardEvent) {
-      if (event.key === 'Escape') {
+      if (event.key === "Escape") {
         setIsOpen(false);
       }
     }
 
-    document.addEventListener('keydown', handleEscape);
+    document.addEventListener("keydown", handleEscape);
     return () => {
-      document.removeEventListener('keydown', handleEscape);
+      document.removeEventListener("keydown", handleEscape);
     };
   }, []);
 
@@ -49,7 +49,7 @@ export function LocationsDropdown() {
       >
         Locations
         <svg
-          className={`w-4 h-4 transition-transform ${isOpen ? 'rotate-180' : ''}`}
+          className={`w-4 h-4 transition-transform ${isOpen ? "rotate-180" : ""}`}
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -65,7 +65,9 @@ export function LocationsDropdown() {
             {/* Header */}
             <div className="mb-4 md:mb-6">
               <h3 className="text-lg font-semibold text-gray-900 mb-2">Our Coverage Areas</h3>
-              <p className="text-sm text-gray-600">Professional scaffolding services across the South East</p>
+              <p className="text-sm text-gray-800">
+                Professional scaffolding services across the South East
+              </p>
             </div>
 
             {/* Counties Grid */}
@@ -89,14 +91,17 @@ export function LocationsDropdown() {
                           href={town.href}
                           className={`block text-sm transition-colors ${
                             town.isRichContent
-                              ? 'text-gray-900 font-medium hover:text-brand-blue'
-                              : 'text-gray-600 hover:text-gray-800'
+                              ? "text-gray-900 font-medium hover:text-brand-blue"
+                              : "text-gray-800 hover:text-gray-800"
                           }`}
                           onClick={() => setIsOpen(false)}
                         >
                           {town.name}
                           {town.isRichContent && (
-                            <span className="ml-1 inline-block w-2 h-2 bg-brand-blue rounded-full" title="Detailed coverage" />
+                            <span
+                              className="ml-1 inline-block w-2 h-2 bg-brand-blue rounded-full"
+                              title="Detailed coverage"
+                            />
                           )}
                         </Link>
                       </li>
@@ -110,7 +115,7 @@ export function LocationsDropdown() {
             <div className="mt-6 md:mt-8 pt-4 md:pt-6 border-t border-gray-200">
               <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 md:gap-0">
                 <div>
-                  <p className="text-sm text-gray-600">
+                  <p className="text-sm text-gray-800">
                     Can&apos;t find your area? We cover the entire South East region.
                   </p>
                 </div>
@@ -121,7 +126,12 @@ export function LocationsDropdown() {
                 >
                   Get Free Quote
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M17 8l4 4m0 0l-4 4m4-4H3"
+                    />
                   </svg>
                 </Link>
               </div>

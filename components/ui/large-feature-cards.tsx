@@ -1,25 +1,25 @@
-import Link from "next/link"
-import Image from "next/image"
-import { ArrowRight } from "lucide-react"
+import Link from "next/link";
+import Image from "next/image";
+import { ArrowRight } from "lucide-react";
 
 interface FeatureCard {
-  title: string
-  description: string
-  details: string[]
-  image?: string
-  icon?: React.ReactNode
-  href?: string
-  ctaText?: string
-  badge?: string
+  title: string;
+  description: string;
+  details: string[];
+  image?: string;
+  icon?: React.ReactNode;
+  href?: string;
+  ctaText?: string;
+  badge?: string;
 }
 
 interface LargeFeatureCardsProps {
-  title: string
-  description?: string
-  cards: FeatureCard[]
-  columns?: 2 | 3 | 4
-  backgroundColor?: 'white' | 'gray'
-  showBottomCTA?: boolean
+  title: string;
+  description?: string;
+  cards: FeatureCard[];
+  columns?: 2 | 3 | 4;
+  backgroundColor?: "white" | "gray";
+  showBottomCTA?: boolean;
 }
 
 export function LargeFeatureCards({
@@ -27,39 +27,30 @@ export function LargeFeatureCards({
   description,
   cards,
   columns = 2,
-  backgroundColor = 'gray',
-  showBottomCTA = true
+  backgroundColor = "gray",
+  showBottomCTA = true,
 }: LargeFeatureCardsProps) {
-  const bgClass = backgroundColor === 'white' ? 'bg-white' : 'bg-gray-50'
-  
+  const bgClass = backgroundColor === "white" ? "bg-white" : "bg-gray-50";
+
   const gridClass = {
-    2: 'grid-cols-1 md:grid-cols-2',
-    3: 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3', 
-    4: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4'
-  }[columns]
+    2: "grid-cols-1 md:grid-cols-2",
+    3: "grid-cols-1 md:grid-cols-2 lg:grid-cols-3",
+    4: "grid-cols-1 sm:grid-cols-2 lg:grid-cols-4",
+  }[columns];
 
   return (
     <section className={`section-standard ${bgClass}`}>
       <div className="container-standard">
         {/* Section Header */}
         <div className="section-header">
-          <h2 className="heading-section">
-            {title}
-          </h2>
-          {description && (
-            <p className="text-subtitle mx-auto max-w-4xl">
-              {description}
-            </p>
-          )}
+          <h2 className="heading-section">{title}</h2>
+          {description && <p className="text-subtitle mx-auto max-w-4xl">{description}</p>}
         </div>
 
         {/* Cards Grid */}
         <div className={`grid-responsive ${gridClass}`}>
           {cards.map((card, index) => (
-            <div
-              key={index}
-              className="card-interactive h-full flex flex-col"
-            >
+            <div key={index} className="card-interactive h-full flex flex-col">
               {/* Badge */}
               {card.badge && (
                 <div className="absolute -top-3 left-6">
@@ -72,15 +63,10 @@ export function LargeFeatureCards({
               {/* Image or Icon */}
               {card.image && (
                 <div className="relative w-full h-48 mb-6 rounded-xl overflow-hidden bg-gray-100">
-                  <Image
-                    src={card.image}
-                    alt={card.title}
-                    fill
-                    className="object-cover"
-                  />
+                  <Image src={card.image} alt={card.title} fill className="object-cover" />
                 </div>
               )}
-              
+
               {card.icon && !card.image && (
                 <div className="flex justify-center mb-6">
                   <div className="w-16 h-16 bg-brand-blue bg-opacity-10 rounded-xl flex items-center justify-center text-brand-blue">
@@ -91,13 +77,9 @@ export function LargeFeatureCards({
 
               {/* Content */}
               <div className="flex-1 flex flex-col">
-                <h3 className="heading-card">
-                  {card.title}
-                </h3>
-                
-                <p className="text-body-lg mb-6">
-                  {card.description}
-                </p>
+                <h3 className="heading-card">{card.title}</h3>
+
+                <p className="text-body-lg mb-6">{card.description}</p>
 
                 {/* Details List */}
                 {card.details.length > 0 && (
@@ -131,16 +113,11 @@ export function LargeFeatureCards({
         {/* Bottom CTA */}
         {showBottomCTA && (
           <div className="text-center mt-16 pt-8 border-t border-gray-200">
-            <h3 className="text-xl font-semibold text-gray-900 mb-4">
-              Ready to Get Started?
-            </h3>
-            <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
+            <h3 className="text-xl font-semibold text-gray-900 mb-4">Ready to Get Started?</h3>
+            <p className="text-gray-800 mb-6 max-w-2xl mx-auto">
               Contact our expert team to discuss your project requirements and get a tailored quote.
             </p>
-            <Link
-              href="/contact"
-              className="btn-primary-lg gap-2"
-            >
+            <Link href="/contact" className="btn-primary-lg gap-2">
               Get Your Quote Today
               <ArrowRight className="w-4 h-4" />
             </Link>
@@ -148,5 +125,5 @@ export function LargeFeatureCards({
         )}
       </div>
     </section>
-  )
+  );
 }

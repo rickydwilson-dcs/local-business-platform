@@ -11,11 +11,14 @@ import { absUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Professional Scaffolding Across East Sussex | Colossus Scaffolding",
-  description: "Expert scaffolding services across all East Sussex towns. Local specialists covering Brighton, Eastbourne, Hastings, Lewes and 10+ locations with county-wide capabilities.",
-  keywords: "East Sussex scaffolding, county scaffolding services, Brighton scaffolding, Eastbourne scaffolding, Hastings scaffolding, heritage scaffolding",
+  description:
+    "Expert scaffolding services across all East Sussex towns. Local specialists covering Brighton, Eastbourne, Hastings, Lewes and 10+ locations with county-wide capabilities.",
+  keywords:
+    "East Sussex scaffolding, county scaffolding services, Brighton scaffolding, Eastbourne scaffolding, Hastings scaffolding, heritage scaffolding",
   openGraph: {
     title: "Professional Scaffolding Across East Sussex | Colossus Scaffolding",
-    description: "Expert scaffolding services across all East Sussex towns. Local specialists covering Brighton, Eastbourne, Hastings, Lewes and 10+ locations with county-wide capabilities.",
+    description:
+      "Expert scaffolding services across all East Sussex towns. Local specialists covering Brighton, Eastbourne, Hastings, Lewes and 10+ locations with county-wide capabilities.",
     url: absUrl("/locations/east-sussex"),
     siteName: "Colossus Scaffolding",
     images: [
@@ -23,140 +26,186 @@ export const metadata: Metadata = {
         url: absUrl("/static/logo.png"),
         width: 1200,
         height: 630,
-        alt: "Professional scaffolding services across East Sussex - Colossus Scaffolding"
-      }
+        alt: "Professional scaffolding services across East Sussex - Colossus Scaffolding",
+      },
     ],
     locale: "en_GB",
-    type: "website"
+    type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: "Professional Scaffolding Across East Sussex | Colossus Scaffolding",
-    description: "Expert scaffolding services across all East Sussex towns. Local specialists covering Brighton, Eastbourne, Hastings, Lewes and 10+ locations with county-wide capabilities."
+    description:
+      "Expert scaffolding services across all East Sussex towns. Local specialists covering Brighton, Eastbourne, Hastings, Lewes and 10+ locations with county-wide capabilities.",
   },
   alternates: {
-    canonical: absUrl("/locations/east-sussex")
-  }
+    canonical: absUrl("/locations/east-sussex"),
+  },
 };
 
 const eastSussexTowns = [
-  { name: "Brighton", slug: "brighton", description: "Seafront & heritage specialist", established: true },
-  { name: "Eastbourne", slug: "eastbourne", description: "Victorian & coastal projects", established: true },
-  { name: "Hastings", slug: "hastings", description: "Historic town & cliff projects", established: true },
+  {
+    name: "Brighton",
+    slug: "brighton",
+    description: "Seafront & heritage specialist",
+    established: true,
+  },
+  {
+    name: "Eastbourne",
+    slug: "eastbourne",
+    description: "Victorian & coastal projects",
+    established: true,
+  },
+  {
+    name: "Hastings",
+    slug: "hastings",
+    description: "Historic town & cliff projects",
+    established: true,
+  },
   { name: "Lewes", slug: "lewes", description: "County town & heritage sites", established: true },
-  { name: "Uckfield", slug: "uckfield", description: "Market town developments", established: true },
-  { name: "Hailsham", slug: "hailsham", description: "Residential & commercial", established: true },
-  { name: "Newhaven", slug: "newhaven", description: "Port & industrial projects", established: true },
+  {
+    name: "Uckfield",
+    slug: "uckfield",
+    description: "Market town developments",
+    established: true,
+  },
+  {
+    name: "Hailsham",
+    slug: "hailsham",
+    description: "Residential & commercial",
+    established: true,
+  },
+  {
+    name: "Newhaven",
+    slug: "newhaven",
+    description: "Port & industrial projects",
+    established: true,
+  },
   { name: "Seaford", slug: "seaford", description: "Coastal residential works", established: true },
   { name: "Battle", slug: "battle", description: "Historic conservation", established: true },
-  { name: "Crowborough", slug: "crowborough", description: "High Weald projects", established: true }
+  {
+    name: "Crowborough",
+    slug: "crowborough",
+    description: "High Weald projects",
+    established: true,
+  },
 ];
 
 const heroData = {
   title: "Professional Scaffolding Across East Sussex",
-  description: "County-wide scaffolding expertise covering 10+ East Sussex towns. From Brighton's seafront developments to Hastings' heritage projects, we deliver specialist solutions backed by local knowledge.",
+  description:
+    "County-wide scaffolding expertise covering 10+ East Sussex towns. From Brighton's seafront developments to Hastings' heritage projects, we deliver specialist solutions backed by local knowledge.",
   phone: "01424 466 661",
   trustBadges: ["TG20:21 Compliant", "Heritage Specialists", "County Coverage"],
   ctaText: "Get Your Free East Sussex Quote",
-  ctaUrl: "/contact"
+  ctaUrl: "/contact",
 };
 
 const countyCapabilities = {
   title: "East Sussex Scaffolding Specialists",
-  description: "Comprehensive county-wide capabilities with deep local expertise across East Sussex's diverse architectural and geographical challenges.",
+  description:
+    "Comprehensive county-wide capabilities with deep local expertise across East Sussex's diverse architectural and geographical challenges.",
   columns: 3 as const,
   backgroundColor: "gray" as const,
   showBottomCTA: false,
   cards: [
     {
       title: "Heritage & Conservation",
-      description: "Specialist scaffolding for East Sussex's extensive listed buildings, conservation areas, and UNESCO World Heritage sites including Battle Abbey and Brighton's Regency architecture.",
+      description:
+        "Specialist scaffolding for East Sussex's extensive listed buildings, conservation areas, and UNESCO World Heritage sites including Battle Abbey and Brighton's Regency architecture.",
       details: [
         "Listed building compliance",
         "Conservation area expertise",
         "Heritage planning permissions",
-        "Sensitive access solutions"
-      ]
+        "Sensitive access solutions",
+      ],
     },
     {
       title: "Coastal Engineering",
-      description: "Marine-grade scaffolding solutions designed for East Sussex's 40-mile coastline. Wind-resistant systems for seafront properties from Brighton to Rye.",
+      description:
+        "Marine-grade scaffolding solutions designed for East Sussex's 40-mile coastline. Wind-resistant systems for seafront properties from Brighton to Rye.",
       details: [
         "Salt corrosion protection",
         "High wind resistance",
         "Seafront specialists",
-        "Tidal access planning"
-      ]
+        "Tidal access planning",
+      ],
     },
     {
       title: "Council Relationships",
-      description: "Established working relationships with East Sussex County Council, Brighton & Hove, and district councils for streamlined permissions and compliance.",
+      description:
+        "Established working relationships with East Sussex County Council, Brighton & Hove, and district councils for streamlined permissions and compliance.",
       details: [
         "Planning permission support",
         "Highway permits handled",
         "Council liaison services",
-        "Compliance guarantee"
-      ]
-    }
-  ]
+        "Compliance guarantee",
+      ],
+    },
+  ],
 };
 
 const countyServices = {
   title: "County-Wide Project Capabilities",
-  description: "Specialist scaffolding services designed for East Sussex's unique project requirements and architectural heritage.",
+  description:
+    "Specialist scaffolding services designed for East Sussex's unique project requirements and architectural heritage.",
   cards: [
     {
       title: "Heritage Scaffolding",
-      description: "Specialist systems for East Sussex's extensive historic building stock, from medieval churches to Regency terraces.",
+      description:
+        "Specialist systems for East Sussex's extensive historic building stock, from medieval churches to Regency terraces.",
       href: "/services/access-scaffolding",
       ctaText: "Learn More",
       features: [
         "Listed building compliance",
         "Conservation area sensitivity",
         "Minimal building contact",
-        "Heritage planning support"
-      ]
+        "Heritage planning support",
+      ],
     },
     {
       title: "Coastal Scaffolding",
-      description: "Marine-grade scaffolding engineered for East Sussex's challenging coastal environment and high wind conditions.",
+      description:
+        "Marine-grade scaffolding engineered for East Sussex's challenging coastal environment and high wind conditions.",
       href: "/services/facade-scaffolding",
       ctaText: "Learn More",
       features: [
         "Salt corrosion resistance",
         "High wind capability",
         "Seafront access solutions",
-        "Tide-resistant installations"
-      ]
+        "Tide-resistant installations",
+      ],
     },
     {
       title: "Multi-Site Coordination",
-      description: "Cross-county project management for developers and contractors working across multiple East Sussex locations.",
+      description:
+        "Cross-county project management for developers and contractors working across multiple East Sussex locations.",
       href: "/services/temporary-roof-systems",
       ctaText: "Learn More",
       features: [
         "Multi-location planning",
         "Resource coordination",
         "Unified project management",
-        "Cost optimization"
-      ]
-    }
-  ]
+        "Cost optimization",
+      ],
+    },
+  ],
 };
 
 const ctaData = {
   title: "Ready to Start Your East Sussex Project?",
-  description: "Contact our East Sussex scaffolding specialists for expert solutions across the county. From heritage projects in Battle to seafront developments in Brighton.",
+  description:
+    "Contact our East Sussex scaffolding specialists for expert solutions across the county. From heritage projects in Battle to seafront developments in Brighton.",
   primaryButtonText: "Get Free East Sussex Quote",
   primaryButtonUrl: "/contact",
   secondaryButtonText: "View All Services",
   secondaryButtonUrl: "/services",
-  trustBadges: ["Free Quotes", "24/7 Support", "County Coverage"]
+  trustBadges: ["Free Quotes", "24/7 Support", "County Coverage"],
 };
 
 const breadcrumbItems = [
   { name: "Locations", href: "/locations" },
-  { name: "East Sussex", href: "/locations/east-sussex", current: true }
+  { name: "East Sussex", href: "/locations/east-sussex", current: true },
 ];
 
 const schemaData = {
@@ -164,29 +213,46 @@ const schemaData = {
     id: "/locations/east-sussex#service",
     url: "/locations/east-sussex",
     name: "Scaffolding Services in East Sussex",
-    description: "Professional scaffolding services across East Sussex including Brighton, Eastbourne, Hastings and 10+ locations. Heritage specialists with county-wide capabilities.",
+    description:
+      "Professional scaffolding services across East Sussex including Brighton, Eastbourne, Hastings and 10+ locations. Heritage specialists with county-wide capabilities.",
     serviceType: "Scaffolding",
-    areaServed: ["East Sussex", "Brighton", "Eastbourne", "Hastings", "Lewes", "Battle", "Crowborough", "Hailsham", "Newhaven", "Seaford", "Uckfield"]
-  }
+    areaServed: [
+      "East Sussex",
+      "Brighton",
+      "Eastbourne",
+      "Hastings",
+      "Lewes",
+      "Battle",
+      "Crowborough",
+      "Hailsham",
+      "Newhaven",
+      "Seaford",
+      "Uckfield",
+    ],
+  },
 };
 
 const faqData = [
   {
     question: "Which East Sussex towns do you cover?",
-    answer: "We provide scaffolding services across all major East Sussex towns including Brighton, Eastbourne, Hastings, Lewes, Battle, Crowborough, Hailsham, Newhaven, Seaford, and Uckfield. Full county coverage available."
+    answer:
+      "We provide scaffolding services across all major East Sussex towns including Brighton, Eastbourne, Hastings, Lewes, Battle, Crowborough, Hailsham, Newhaven, Seaford, and Uckfield. Full county coverage available.",
   },
   {
     question: "Do you handle heritage and listed building scaffolding in East Sussex?",
-    answer: "Yes, we specialize in heritage scaffolding across East Sussex's extensive historic building stock. Our team has extensive experience with conservation areas, listed buildings, and heritage planning requirements."
+    answer:
+      "Yes, we specialize in heritage scaffolding across East Sussex's extensive historic building stock. Our team has extensive experience with conservation areas, listed buildings, and heritage planning requirements.",
   },
   {
     question: "Can you coordinate projects across multiple East Sussex locations?",
-    answer: "Absolutely. We regularly manage multi-site projects across East Sussex, providing unified project management, resource coordination, and cost optimization for developers working county-wide."
+    answer:
+      "Absolutely. We regularly manage multi-site projects across East Sussex, providing unified project management, resource coordination, and cost optimization for developers working county-wide.",
   },
   {
     question: "Are you equipped for East Sussex's coastal conditions?",
-    answer: "Yes, our coastal scaffolding systems are specifically engineered for East Sussex's marine environment, featuring salt corrosion protection and high wind resistance for seafront properties."
-  }
+    answer:
+      "Yes, our coastal scaffolding systems are specifically engineered for East Sussex's marine environment, featuring salt corrosion protection and high wind resistance for seafront properties.",
+  },
 ];
 
 export default function EastSussexPage() {
@@ -230,8 +296,9 @@ export default function EastSussexPage() {
               <h2 className="text-3xl font-semibold text-gray-900 mb-4">
                 East Sussex Towns We Serve
               </h2>
-              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                Local specialists in every East Sussex town. Click through to your specific location for detailed local knowledge and project examples.
+              <p className="text-lg text-gray-800 max-w-3xl mx-auto">
+                Local specialists in every East Sussex town. Click through to your specific location
+                for detailed local knowledge and project examples.
               </p>
             </div>
 
@@ -245,15 +312,23 @@ export default function EastSussexPage() {
                   <h3 className="text-lg font-medium text-gray-900 group-hover:text-brand-blue mb-2">
                     {town.name}
                   </h3>
-                  <p className="text-sm text-gray-600 mb-3">
-                    {town.description}
-                  </p>
+                  <p className="text-sm text-gray-800 mb-3">{town.description}</p>
                   <div className="flex items-center justify-between">
                     <span className="text-xs px-2 py-1 bg-green-100 text-green-700 rounded-full">
                       Local Specialists
                     </span>
-                    <svg className="w-4 h-4 text-brand-blue group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    <svg
+                      className="w-4 h-4 text-brand-blue group-hover:translate-x-1 transition-transform"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M9 5l7 7-7 7"
+                      />
                     </svg>
                   </div>
                 </Link>
@@ -276,7 +351,7 @@ export default function EastSussexPage() {
       <Schema
         service={schemaData.service}
         faqs={faqData}
-        breadcrumbs={breadcrumbItems.map(b => ({ name: b.name, url: b.href }))}
+        breadcrumbs={breadcrumbItems.map((b) => ({ name: b.name, url: b.href }))}
       />
     </PageLayout>
   );

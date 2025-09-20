@@ -22,12 +22,12 @@ export function CardGrid({
   basePath,
   linkText = "Learn More About",
   showPlaceholderImage = true,
-  imageIcon = "image"
+  imageIcon = "image",
 }: CardGridProps) {
   // Return early if no items
   if (!items || items.length === 0) {
     return (
-      <div className="text-center text-gray-600">
+      <div className="text-center text-gray-800">
         <p>No items found.</p>
       </div>
     );
@@ -37,13 +37,21 @@ export function CardGrid({
     if (imageIcon === "location") {
       return (
         <svg className="w-12 h-12 mx-auto mb-2" fill="currentColor" viewBox="0 0 20 20">
-          <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+          <path
+            fillRule="evenodd"
+            d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+            clipRule="evenodd"
+          />
         </svg>
       );
     }
     return (
       <svg className="w-12 h-12 mx-auto mb-2" fill="currentColor" viewBox="0 0 20 20">
-        <path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd" />
+        <path
+          fillRule="evenodd"
+          d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
+          clipRule="evenodd"
+        />
       </svg>
     );
   };
@@ -82,7 +90,7 @@ export function CardGrid({
               </Link>
             </h2>
 
-            <p className="text-gray-600 mb-4">
+            <p className="text-gray-800 mb-4">
               {item.description || `Learn more about ${item.title.toLowerCase()}.`}
             </p>
 
@@ -91,7 +99,10 @@ export function CardGrid({
                 <h4 className="font-semibold text-sm text-gray-900 mb-2">Key Towns & Cities:</h4>
                 <div className="flex flex-wrap gap-1">
                   {item.towns.map((town, idx) => (
-                    <span key={idx} className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded border">
+                    <span
+                      key={idx}
+                      className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded border"
+                    >
                       {town}
                     </span>
                   ))}

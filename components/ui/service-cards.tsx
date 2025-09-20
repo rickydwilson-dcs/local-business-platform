@@ -1,73 +1,67 @@
-import Link from "next/link"
-import Image from "next/image"
+import Link from "next/link";
+import Image from "next/image";
 
 interface ServiceCard {
-  title: string
-  subtitle: string | string[]
-  description: string
-  features: string[]
-  href: string
-  ctaText: string
-  image?: string
-  icon?: React.ReactNode
+  title: string;
+  subtitle: string | string[];
+  description: string;
+  features: string[];
+  href: string;
+  ctaText: string;
+  image?: string;
+  icon?: React.ReactNode;
 }
 
 interface ServiceCardsProps {
-  title: string
-  description?: string
-  cards: ServiceCard[]
-  backgroundColor?: 'white' | 'gray'
+  title: string;
+  description?: string;
+  cards: ServiceCard[];
+  backgroundColor?: "white" | "gray";
 }
 
 export function ServiceCards({
   title,
   description,
   cards,
-  backgroundColor = 'white'
+  backgroundColor = "white",
 }: ServiceCardsProps) {
-  const bgClass = backgroundColor === 'white' ? 'bg-white' : 'bg-gray-50'
+  const bgClass = backgroundColor === "white" ? "bg-white" : "bg-gray-50";
 
   // Dynamic grid classes based on number of cards
   const getGridClass = (cardCount: number) => {
     switch (cardCount) {
       case 3:
-        return 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
+        return "grid-cols-1 md:grid-cols-2 lg:grid-cols-3";
       case 4:
-        return 'grid-cols-1 md:grid-cols-2 lg:grid-cols-4'
+        return "grid-cols-1 md:grid-cols-2 lg:grid-cols-4";
       case 5:
-        return 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5'
+        return "grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5";
       case 6:
-        return 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
+        return "grid-cols-1 md:grid-cols-2 lg:grid-cols-3";
       default:
-        return 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
+        return "grid-cols-1 md:grid-cols-2 lg:grid-cols-3";
     }
-  }
+  };
 
   return (
     <section className={`section-standard ${bgClass}`}>
       <div className="container-standard">
         {/* Section Header */}
         <div className="section-header">
-          <h2 className="heading-section">
-            {title}
-          </h2>
-          {description && (
-            <p className="text-subtitle mx-auto max-w-4xl">
-              {description}
-            </p>
-          )}
+          <h2 className="heading-section">{title}</h2>
+          {description && <p className="text-subtitle mx-auto max-w-4xl">{description}</p>}
         </div>
 
         {/* Cards Grid */}
         <div className={`grid-responsive ${getGridClass(cards.length)}`}>
           {cards.map((card, index) => {
-            const isEven = index % 2 === 0
+            const isEven = index % 2 === 0;
 
             return (
               <div
                 key={index}
                 className={`group relative rounded-2xl overflow-hidden shadow-sm border border-gray-200 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 ${
-                  isEven ? 'bg-white' : 'bg-gray-50'
+                  isEven ? "bg-white" : "bg-gray-50"
                 }`}
               >
                 {/* Header with Image/Icon */}
@@ -85,8 +79,18 @@ export function ServiceCards({
                     <div className="h-48 bg-gradient-to-br from-brand-blue/10 to-brand-blue/20 flex items-center justify-center">
                       {card.icon || (
                         <div className="w-12 h-12 bg-brand-blue/20 rounded-lg flex items-center justify-center">
-                          <svg className="w-6 h-6 text-brand-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                          <svg
+                            className="w-6 h-6 text-brand-blue"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
+                            />
                           </svg>
                         </div>
                       )}
@@ -116,13 +120,9 @@ export function ServiceCards({
 
                 {/* Content */}
                 <div className="p-6">
-                  <h3 className="text-xl font-bold text-gray-900 mb-3">
-                    {card.title}
-                  </h3>
+                  <h3 className="text-xl font-bold text-gray-900 mb-3">{card.title}</h3>
 
-                  <p className="text-gray-600 text-sm leading-relaxed mb-4">
-                    {card.description}
-                  </p>
+                  <p className="text-gray-800 text-sm leading-relaxed mb-4">{card.description}</p>
 
                   {/* Features List */}
                   <ul className="space-y-2 mb-6">
@@ -144,10 +144,10 @@ export function ServiceCards({
                   </Link>
                 </div>
               </div>
-            )
+            );
           })}
         </div>
       </div>
     </section>
-  )
+  );
 }

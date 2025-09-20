@@ -1,78 +1,72 @@
-import Link from "next/link"
-import Image from "next/image"
-import { ArrowRight } from "lucide-react"
+import Link from "next/link";
+import Image from "next/image";
+import { ArrowRight } from "lucide-react";
 
 interface ServiceItem {
-  title: string
-  subtitle?: string | string[]
-  description: string
-  features: string[]
-  href: string
-  ctaText: string
-  image?: string
-  icon?: React.ReactNode
+  title: string;
+  subtitle?: string | string[];
+  description: string;
+  features: string[];
+  href: string;
+  ctaText: string;
+  image?: string;
+  icon?: React.ReactNode;
 }
 
 interface ServiceShowcaseProps {
-  title: string
-  description?: string
-  services: ServiceItem[]
-  layout?: 'grid' | 'alternating'
-  backgroundColor?: 'white' | 'gray'
-  showBottomCTA?: boolean
+  title: string;
+  description?: string;
+  services: ServiceItem[];
+  layout?: "grid" | "alternating";
+  backgroundColor?: "white" | "gray";
+  showBottomCTA?: boolean;
 }
 
 export function ServiceShowcase({
   title,
   description,
   services,
-  layout = 'grid',
-  backgroundColor = 'white',
-  showBottomCTA = false
+  layout = "grid",
+  backgroundColor = "white",
+  showBottomCTA = false,
 }: ServiceShowcaseProps) {
-  const bgClass = backgroundColor === 'white' ? 'bg-white' : 'bg-gray-50'
+  const bgClass = backgroundColor === "white" ? "bg-white" : "bg-gray-50";
 
   // Dynamic grid classes based on number of services for grid layout
   const getGridClass = (serviceCount: number) => {
     switch (serviceCount) {
       case 3:
-        return 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
+        return "grid-cols-1 md:grid-cols-2 lg:grid-cols-3";
       case 4:
-        return 'grid-cols-1 md:grid-cols-2 lg:grid-cols-4'
+        return "grid-cols-1 md:grid-cols-2 lg:grid-cols-4";
       case 5:
-        return 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5'
+        return "grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5";
       case 6:
-        return 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
+        return "grid-cols-1 md:grid-cols-2 lg:grid-cols-3";
       default:
-        return 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
+        return "grid-cols-1 md:grid-cols-2 lg:grid-cols-3";
     }
-  }
+  };
 
-  if (layout === 'alternating') {
+  if (layout === "alternating") {
     return (
       <section className={`section-standard ${bgClass}`}>
         <div className="container-standard">
           {/* Section Header */}
           <div className="section-header">
-            <h2 className="heading-section">
-              {title}
-            </h2>
-            {description && (
-              <p className="text-subtitle mx-auto max-w-4xl">
-                {description}
-              </p>
-            )}
+            <h2 className="heading-section">{title}</h2>
+            {description && <p className="text-subtitle mx-auto max-w-4xl">{description}</p>}
           </div>
 
           {/* Alternating Services */}
           <div className="space-y-20">
             {services.map((service, index) => {
-              const isEven = index % 2 === 0
+              const isEven = index % 2 === 0;
               return (
                 <div
                   key={index}
                   className={`flex flex-col ${
-                    isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'
+                    isEven ? "lg:flex-row" : "lg:flex-row-reverse"
                   } items-center gap-8 lg:gap-16`}
                 >
                   {/* Image Section */}
@@ -89,8 +83,18 @@ export function ServiceShowcase({
                         <div className="h-full bg-gradient-to-br from-brand-blue/10 to-brand-blue/20 flex items-center justify-center">
                           {service.icon || (
                             <div className="w-16 h-16 bg-brand-blue/20 rounded-lg flex items-center justify-center">
-                              <svg className="w-8 h-8 text-brand-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                              <svg
+                                className="w-8 h-8 text-brand-blue"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth={2}
+                                  d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
+                                />
                               </svg>
                             </div>
                           )}
@@ -121,12 +125,8 @@ export function ServiceShowcase({
                           )}
                         </div>
                       )}
-                      <h3 className="heading-card">
-                        {service.title}
-                      </h3>
-                      <p className="text-body-lg">
-                        {service.description}
-                      </p>
+                      <h3 className="heading-card">{service.title}</h3>
+                      <p className="text-body-lg">{service.description}</p>
                     </div>
 
                     {/* Features List */}
@@ -152,7 +152,7 @@ export function ServiceShowcase({
                     </div>
                   </div>
                 </div>
-              )
+              );
             })}
           </div>
 
@@ -162,14 +162,11 @@ export function ServiceShowcase({
               <h3 className="text-xl font-semibold text-gray-900 mb-4">
                 Need Help Choosing the Right Service?
               </h3>
-              <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
-                Our experienced team can assess your project requirements and recommend
-                the most suitable scaffolding solution for your needs.
+              <p className="text-gray-800 mb-6 max-w-2xl mx-auto">
+                Our experienced team can assess your project requirements and recommend the most
+                suitable scaffolding solution for your needs.
               </p>
-              <Link
-                href="/contact"
-                className="btn-primary-lg gap-2"
-              >
+              <Link href="/contact" className="btn-primary-lg gap-2">
                 Get Expert Advice
                 <ArrowRight className="w-4 h-4" />
               </Link>
@@ -177,7 +174,7 @@ export function ServiceShowcase({
           )}
         </div>
       </section>
-    )
+    );
   }
 
   // Grid layout (default)
@@ -186,26 +183,20 @@ export function ServiceShowcase({
       <div className="container-standard">
         {/* Section Header */}
         <div className="section-header">
-          <h2 className="heading-section">
-            {title}
-          </h2>
-          {description && (
-            <p className="text-subtitle mx-auto max-w-4xl">
-              {description}
-            </p>
-          )}
+          <h2 className="heading-section">{title}</h2>
+          {description && <p className="text-subtitle mx-auto max-w-4xl">{description}</p>}
         </div>
 
         {/* Services Grid */}
         <div className={`grid-responsive ${getGridClass(services.length)}`}>
           {services.map((service, index) => {
-            const isEven = index % 2 === 0
+            const isEven = index % 2 === 0;
 
             return (
               <div
                 key={index}
                 className={`group relative rounded-2xl overflow-hidden shadow-sm border border-gray-200 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 ${
-                  isEven ? 'bg-white' : 'bg-gray-50'
+                  isEven ? "bg-white" : "bg-gray-50"
                 }`}
               >
                 {/* Header with Image/Icon */}
@@ -223,8 +214,18 @@ export function ServiceShowcase({
                     <div className="h-48 bg-gradient-to-br from-brand-blue/10 to-brand-blue/20 flex items-center justify-center">
                       {service.icon || (
                         <div className="w-12 h-12 bg-brand-blue/20 rounded-lg flex items-center justify-center">
-                          <svg className="w-6 h-6 text-brand-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                          <svg
+                            className="w-6 h-6 text-brand-blue"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
+                            />
                           </svg>
                         </div>
                       )}
@@ -256,11 +257,9 @@ export function ServiceShowcase({
 
                 {/* Content */}
                 <div className="p-6">
-                  <h3 className="text-xl font-bold text-gray-900 mb-3">
-                    {service.title}
-                  </h3>
+                  <h3 className="text-xl font-bold text-gray-900 mb-3">{service.title}</h3>
 
-                  <p className="text-gray-600 text-sm leading-relaxed mb-4">
+                  <p className="text-gray-800 text-sm leading-relaxed mb-4">
                     {service.description}
                   </p>
 
@@ -284,10 +283,10 @@ export function ServiceShowcase({
                   </Link>
                 </div>
               </div>
-            )
+            );
           })}
         </div>
       </div>
     </section>
-  )
+  );
 }
