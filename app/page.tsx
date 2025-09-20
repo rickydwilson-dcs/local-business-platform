@@ -266,7 +266,7 @@ export default function HomePage() {
                   </div>
                   <div className="stat-number">15+</div>
                   <div className="text-gray-900 font-medium">Years Experience</div>
-                  <div className="text-sm text-gray-500 mt-1">Serving the South East</div>
+                  <div className="text-sm text-gray-700 mt-1">Serving the South East</div>
                 </div>
               </div>
 
@@ -289,7 +289,7 @@ export default function HomePage() {
                   </div>
                   <div className="stat-number">£10M</div>
                   <div className="text-gray-900 font-medium">Liability Insurance</div>
-                  <div className="text-sm text-gray-500 mt-1">Comprehensive Coverage</div>
+                  <div className="text-sm text-gray-700 mt-1">Comprehensive Coverage</div>
                 </div>
               </div>
 
@@ -312,7 +312,7 @@ export default function HomePage() {
                   </div>
                   <div className="stat-number">TG20:21</div>
                   <div className="text-gray-900 font-medium">Compliant</div>
-                  <div className="text-sm text-gray-500 mt-1">Latest Safety Standards</div>
+                  <div className="text-sm text-gray-700 mt-1">Latest Safety Standards</div>
                 </div>
               </div>
 
@@ -335,7 +335,7 @@ export default function HomePage() {
                   </div>
                   <div className="stat-number">CHAS</div>
                   <div className="text-gray-900 font-medium">Accredited</div>
-                  <div className="text-sm text-gray-500 mt-1">Health & Safety Approved</div>
+                  <div className="text-sm text-gray-700 mt-1">Health & Safety Approved</div>
                 </div>
               </div>
             </div>
