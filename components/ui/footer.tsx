@@ -143,7 +143,7 @@ export function Footer() {
               href="https://www.digitalconsultingservices.co.uk"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-brand-blue transition-colors"
+              className="text-white hover:text-brand-blue transition-colors underline"
             >
               Digital Consulting Services
             </a>
