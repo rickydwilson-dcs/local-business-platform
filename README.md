@@ -196,12 +196,6 @@ vercel
 # Or connect GitHub repository for automatic deployments
 ```
 
-### Other Platforms
-
-- **Netlify:** Works with static export
-- **AWS/DigitalOcean:** Standard Node.js deployment
-- **Self-hosted:** PM2 or Docker containerization
-
 ### Build Optimization
 
 ```bash
@@ -288,7 +282,6 @@ Target these key areas in South East UK:
 
 1. **Analytics:** Add Google Analytics/Tag Manager
 2. **Local SEO:** Submit to Google My Business and directories
-3. **Performance:** Monitor Core Web Vitals and optimize further
-4. **Content Expansion:** Add more location-specific content
+3. **Content Expansion:** Add more location-specific content
 
 Built with ❤️ for Colossus Scaffolding - Professional scaffolding services across the South East UK.
