@@ -14,16 +14,27 @@ A modern Next.js website for Colossus Scaffolding - professional scaffolding ser
 - **`app/health-safety/page.tsx`** - Health & Safety information
 - **`app/projects/page.tsx`** - Projects showcase
 - **Dynamic Routes:**
-  - `app/services/[slug]/page.tsx` - Individual service pages
-  - `app/locations/[slug]/page.tsx` - Individual location pages
+  - `app/services/[slug]/page.tsx` - Individual service pages (dual architecture)
+  - `app/locations/[slug]/page.tsx` - **UNIFIED LOCATION TEMPLATE** - handles all locations
   - `app/contact/services/[slug]/page.tsx` - Service-specific contact pages
   - `app/contact/locations/[slug]/page.tsx` - Location-specific contact pages
 
 ### Content Management
 
-- **MDX Files:** Store content in `content/services/` and `content/locations/`
-- **Dynamic Loading:** Pages automatically discover and render MDX content
-- **Frontmatter Support:** Title, description, and custom fields
+**Two Different Architectures:**
+
+1. **Services (Dual Architecture):**
+   - Minimal MDX files in `content/services/` for route generation
+   - Rich content in `serviceDataMap` within `app/services/[slug]/page.tsx`
+   - Pattern: MDX provides routing, TypeScript provides content
+
+2. **Locations (Unified Template):**
+   - Rich MDX files in `content/locations/` with comprehensive frontmatter
+   - Single template `app/locations/[slug]/page.tsx` handles ALL locations
+   - Conditional rendering based on frontmatter (towns directory, pricing, etc.)
+   - Pattern: MDX-first with dynamic template features
+
+- **Dynamic Loading:** Pages automatically discover and render content
 - **Schema.org Integration:** Automatic structured data for SEO
 
 ## 🚀 Tech Stack
@@ -111,11 +122,44 @@ Your detailed service information here...
 />
 ```
 
-### Adding Locations
+### Adding Locations (Unified Template)
 
-1. Create `content/locations/location-slug.mdx`
-2. Follow similar pattern as services with location-specific content
-3. Include local SEO information and area-specific details
+1. Create `content/locations/location-slug.mdx` with comprehensive frontmatter
+2. Use structured frontmatter sections:
+
+```mdx
+---
+title: "Location Name"
+seoTitle: "Location Name Scaffolding Services | Colossus Scaffolding"
+description: "Professional scaffolding services in Location Name..."
+keywords: ["scaffolding location-name", "location scaffolding hire"]
+heroImage: "/Location-Scaffolding.png"
+hero:
+  title: "Professional Scaffolding in Location Name"
+  description: "Local expertise for unique challenges..."
+  phone: "01424 466 661"
+  trustBadges: ["TG20:21 Compliant", "CHAS Accredited"]
+specialists:
+  title: "Location Scaffolding Specialists"
+  cards: [...]
+services:
+  cards: [...]
+pricing: # Optional
+  packages: [...]
+towns: # For counties only
+  title: "County Towns We Serve"
+  townsList: [...]
+---
+
+# Markdown content here
+```
+
+3. **Key Features:**
+   - Automatic hero image display via `heroImage` frontmatter
+   - Conditional towns directory for counties (shows town grid with links)
+   - Structured sections render from frontmatter data
+   - No-wrap phone button styling built-in
+   - Single template handles both town and county content types
 
 ### Content Best Practices
 
@@ -277,11 +321,19 @@ Target these key areas in South East UK:
 3. **✅ Component Cleanup:** Removed unused components, improved reusability
 4. **✅ Brand Colors:** Updated to #00607A for improved accessibility
 5. **✅ Content Management:** Enhanced services data with categorization
+6. **✅ MAJOR: Unified Location Template:** Deleted static county pages, implemented single dynamic template
+   - Consolidated all locations to use `app/locations/[slug]/page.tsx`
+   - Added conditional towns directory rendering for counties
+   - Fixed hero image display issues
+   - Added no-wrap phone button styling
+   - Counties now show town grids with local specialist links
 
 ## 🎯 Next Steps
 
 1. **Analytics:** Add Google Analytics/Tag Manager
 2. **Local SEO:** Submit to Google My Business and directories
 3. **Content Expansion:** Add more location-specific content
+4. **Town Pages:** Create individual town pages that link from county directories
+5. **Service Integration:** Connect service and location content for better cross-linking
 
 Built with ❤️ for Colossus Scaffolding - Professional scaffolding services across the South East UK.
