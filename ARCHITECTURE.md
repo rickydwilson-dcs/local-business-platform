@@ -459,16 +459,18 @@ Before writing ANY code, confirm these critical patterns:
 # ❌ WRONG: Assuming services follow pure location patterns
 ```
 
-**Locations Architecture:**
+**Locations Architecture (UNIFIED TEMPLATE):**
 
 ```bash
-# ✅ CORRECT: Locations use MDX-first architecture
-# Location: content/locations/[location].mdx files
-# Pattern: Rich MDX content with frontmatter
-# Routing: app/locations/[slug]/page.tsx reads MDX files
+# ✅ CORRECT: Locations use unified dynamic template with MDX-first architecture
+# Content: Rich MDX files in content/locations/[location].mdx
+# Template: Single dynamic route app/locations/[slug]/page.tsx handles ALL locations
+# Features: Conditional rendering for towns directory, hero images, pricing, etc.
+# Data Flow: MDX frontmatter → props → conditional component rendering
 
-# ❌ WRONG: Using centralized data for locations
-# ❌ WRONG: Assuming locations follow service patterns
+# ❌ WRONG: Creating static pages like app/locations/surrey/page.tsx
+# ❌ WRONG: Using centralized data files for locations
+# ❌ WRONG: Individual location-specific components or routing
 ```
 
 ### **Phase 3: Implementation Path Confirmation (MANDATORY)**
@@ -521,8 +523,10 @@ This codebase uses **DIFFERENT PATTERNS** for different content types:
 
 - ❌ Adding location data to centralized TypeScript files
 - ❌ Assuming locations use data structures like services
-- ❌ Creating app/locations/[specific-town]/page.tsx files
-- ❌ Bypassing the MDX-first location architecture
+- ❌ Creating static page files like app/locations/surrey/page.tsx (DELETED - USE DYNAMIC ROUTING ONLY)
+- ❌ Bypassing the unified dynamic location template at app/locations/[slug]/page.tsx
+- ❌ Creating individual location-specific components or loaders
+- ❌ Hardcoding location data instead of using MDX frontmatter
 
 ## **🎯 CORRECT IMPLEMENTATION APPROACHES**
 
@@ -556,25 +560,49 @@ description: "Service description for SEO..."
 ---
 ```
 
-### **Adding New Locations (MDX File Pattern):**
+### **Adding New Locations (Unified Template Pattern):**
 
 ```mdx
 ## // ✅ CORRECT: Create content/locations/new-location.mdx
 
 title: "New Location"
-seoTitle: "New Location | Colossus Scaffolding"
+seoTitle: "New Location Scaffolding Services | Colossus Scaffolding"
 description: "Professional scaffolding services in New Location..."
 keywords: ["scaffolding new-location", "new-location scaffolding hire"]
+heroImage: "/New-Location-Scaffolding.png"
 hero:
-heading: "Scaffolding in New Location"
-subheading: "Local, safe and reliable scaffolding..."
+title: "Professional Scaffolding in New Location"
+description: "Local expertise for New Location's unique challenges..."
+phone: "01424 466 661"
+trustBadges: ["TG20:21 Compliant", "CHAS Accredited"]
+ctaText: "Get Your Free Quote"
+ctaUrl: "/contact"
+specialists:
+title: "New Location Scaffolding Specialists"
+cards: [...]
+services:
+cards: [...]
+pricing:
+packages: [...]
+
+# Towns directory for counties only
+
+towns:
+title: "New Location Towns We Serve"
+townsList: [...]
 
 ---
 
-## Local, Safe & Reliable
-
-Content for the new location...
+## Markdown content renders below structured sections
 ```
+
+**Key Features of Unified Template:**
+
+- ✅ Automatic hero image display via heroImage frontmatter
+- ✅ Conditional towns directory rendering for counties
+- ✅ Structured sections (specialists, services, pricing) via frontmatter
+- ✅ No-wrap phone button styling built-in
+- ✅ Single template handles both town and county content types
 
 ## **⚡ IMMEDIATE VIOLATION DETECTION**
 
@@ -771,11 +799,21 @@ This discovery protocol is **MORE IMPORTANT** than any feature request. If asked
 **VIOLATION DETECTION:**
 Any of these files indicate architecture violations and must be corrected immediately:
 
-- `/app/locations/[specific-location]/page.tsx`
-- `/lib/[specific-location]-content.ts`
-- Any location-specific routing or content files
+**Location Violations (DELETE IMMEDIATELY):**
+
+- `/app/locations/surrey/page.tsx` (DELETED)
+- `/app/locations/kent/page.tsx` (DELETED)
+- `/app/locations/east-sussex/page.tsx` (DELETED)
+- `/app/locations/west-sussex/page.tsx` (DELETED)
+- `/app/locations/[specific-location]/page.tsx` (any static location pages)
+- `/lib/[specific-location]-content.ts` (location-specific data files)
+- `/components/[location]-specific-component.tsx` (location-specific components)
+
+**Service Violations:**
+
 - Service architecture without both minimal MDX files AND serviceDataMap
 - Rich content in service MDX files instead of serviceDataMap
+- Deleting all service MDX files (breaks generateStaticParams)
 
 **ENFORCEMENT:**
 These rules are MANDATORY and NON-NEGOTIABLE. Any violations must be corrected immediately before proceeding with any other work. The Architecture Discovery Protocol MUST be completed before any implementation begins.
