@@ -91,9 +91,19 @@ export function LocationHero({
 
           <div className="lg:order-first">
             <div className="relative h-[400px] rounded-2xl shadow-lg overflow-hidden bg-gray-200">
-              {heroImage ? (
+              {true ? (
                 <Image
-                  src={heroImage}
+                  src={
+                    title === "East Sussex"
+                      ? "/East-Sussex-Scaffolding.png"
+                      : title === "West Sussex"
+                        ? "/West-Sussex-Scaffolding.png"
+                        : title === "Kent"
+                          ? "/Kent-Scaffolding.png"
+                          : title === "Surrey"
+                            ? "/Surrey-Scaffolding.png"
+                            : heroImage || "/Facade-Scaffolding.png"
+                  }
                   alt={`Scaffolding services in ${title}`}
                   fill
                   className="object-cover"

@@ -1,8 +1,9 @@
 import path from "path";
 import { promises as fs } from "fs";
 import type { Metadata } from "next";
+import Link from "next/link";
+import Image from "next/image";
 import matter from "gray-matter";
-import { MDXRemote } from "next-mdx-remote/rsc";
 
 import { PageLayout } from "@/components/layouts/page-layout";
 import { HeroSection } from "@/components/ui/hero-section";
@@ -22,8 +23,9 @@ import { ServiceCTA } from "@/components/ui/service-cta";
 import { absUrl } from "@/lib/site";
 import { getLocationDataWithFallback, getAllLocations } from "@/lib/locations";
 
-export const dynamic = "force-static";
-export const dynamicParams = false;
+export const dynamic = "force-dynamic";
+export const dynamicParams = true;
+export const revalidate = 0;
 
 type Params = { slug: string };
 
@@ -33,10 +35,14 @@ const DIR = path.join(process.cwd(), "content", "locations");
 async function getMDXContent(slug: string) {
   try {
     const filePath = path.join(DIR, `${slug}.mdx`);
+    console.log(`DEBUG: Attempting to read MDX file: ${filePath}`);
     const raw = await fs.readFile(filePath, "utf8");
+    console.log(`DEBUG: MDX file read successfully, length: ${raw.length}`);
     const { data: frontmatter, content } = matter(raw);
+    console.log(`DEBUG: Frontmatter parsed, keys: ${Object.keys(frontmatter)}`);
     return { frontmatter, content, hasMDX: true };
-  } catch {
+  } catch (error) {
+    console.log(`DEBUG: Failed to read MDX file: ${error}`);
     // No MDX file found, will fallback to centralized data
     return { frontmatter: null, content: null, hasMDX: false };
   }
@@ -55,6 +61,10 @@ export async function generateStaticParams() {
   // Combine and deduplicate
   const allParams = [...mdxParams, ...locationParams];
   const uniqueParams = Array.from(new Map(allParams.map((p) => [p.slug, p])).values());
+
+  console.log("DEBUG: generateStaticParams - MDX params:", mdxParams);
+  console.log("DEBUG: generateStaticParams - Location params:", locationParams);
+  console.log("DEBUG: generateStaticParams - All unique params:", uniqueParams);
 
   return uniqueParams;
 }
@@ -144,124 +154,171 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
 
 export default async function Page({ params }: { params: Promise<Params> }) {
   const { slug } = await params;
+
+  // Try to load MDX first for ALL locations
   const { frontmatter, content, hasMDX } = await getMDXContent(slug);
 
-  // If we have MDX content, render it with Brighton-style components
+  // UNIFIED TEMPLATE: Show sections based on what content exists
   if (hasMDX && frontmatter) {
-    // Transform frontmatter data for components
-    const heroData = frontmatter.hero || {};
-    const specialistsData = frontmatter.specialists || {};
-    const servicesData = frontmatter.services || {};
-    const pricingData = frontmatter.pricing || {};
-    const localAuthorityData = frontmatter.localAuthority || {};
-    const faqData = frontmatter.faqs || [];
-    const ctaData = frontmatter.cta || {};
-    const breadcrumbData = frontmatter.breadcrumbs || [];
-    const schemaData = frontmatter.schema || {};
+    console.log(`✅ SIMPLE FIX: Loading unified template for ${slug}`);
 
     return (
       <PageLayout>
         <div className="relative -mt-10 -mx-6 lg:-mx-6">
-          <div className="bg-gray-50 border-b">
-            <div className="container-standard py-4">
-              <Breadcrumbs items={breadcrumbData} />
+          {/* Breadcrumbs - always show if exists */}
+          {frontmatter.breadcrumbs && (
+            <div className="bg-gray-50 border-b">
+              <div className="container-standard py-4">
+                <Breadcrumbs items={frontmatter.breadcrumbs} />
+              </div>
             </div>
-          </div>
+          )}
 
+          {/* Hero - always show */}
           <HeroSection
-            title={heroData.title}
-            description={heroData.description}
-            phone={heroData.phone}
-            trustBadges={heroData.trustBadges}
+            title={frontmatter.hero?.title || `Professional Scaffolding in ${frontmatter.title}`}
+            description={frontmatter.hero?.description || frontmatter.description}
+            phone={frontmatter.hero?.phone || "01424 466 661"}
+            trustBadges={
+              frontmatter.hero?.trustBadges || [
+                "TG20:21 Compliant",
+                "CHAS Accredited",
+                "£10M Insured",
+              ]
+            }
             heroImage={frontmatter.heroImage}
-            ctaText={heroData.ctaText}
-            ctaUrl={heroData.ctaUrl}
+            ctaText={frontmatter.hero?.ctaText}
+            ctaUrl={frontmatter.hero?.ctaUrl}
           />
 
-          {specialistsData.title && (
+          {/* Specialists - only show if exists */}
+          {frontmatter.specialists?.title && (
             <LargeFeatureCards
-              title={specialistsData.title}
-              description={specialistsData.description}
-              cards={specialistsData.cards}
-              columns={specialistsData.columns || 2}
-              backgroundColor={specialistsData.backgroundColor || "gray"}
-              showBottomCTA={specialistsData.showBottomCTA || true}
+              title={frontmatter.specialists.title}
+              description={frontmatter.specialists.description}
+              cards={frontmatter.specialists.cards}
+              columns={frontmatter.specialists.columns || 3}
+              backgroundColor={frontmatter.specialists.backgroundColor || "gray"}
+              showBottomCTA={frontmatter.specialists.showBottomCTA || false}
             />
           )}
 
-          {servicesData.title && (
+          {/* Services - only show if exists */}
+          {frontmatter.services?.title && (
             <ServiceShowcase
-              title={servicesData.title}
-              description={servicesData.description}
-              services={servicesData.cards}
+              title={frontmatter.services.title}
+              description={frontmatter.services.description}
+              services={frontmatter.services.cards}
             />
           )}
 
-          {pricingData.title && (
+          {/* Pricing - only show if exists */}
+          {frontmatter.pricing?.title && (
             <PricingPackages
-              title={pricingData.title}
-              description={pricingData.description}
-              packages={pricingData.packages}
+              title={frontmatter.pricing.title}
+              description={frontmatter.pricing.description}
+              packages={frontmatter.pricing.packages}
               location={frontmatter.title}
             />
           )}
 
-          {localAuthorityData.title && (
+          {/* Local Authority - only show if exists */}
+          {frontmatter.localAuthority?.title && (
             <LocalAuthorityExpertise
-              title={localAuthorityData.title}
-              description={localAuthorityData.description}
-              locationName={localAuthorityData.locationName}
-              authorityName={localAuthorityData.authorityName}
-              expertiseItems={localAuthorityData.expertiseItems}
-              supportItems={localAuthorityData.supportItems}
+              title={frontmatter.localAuthority.title}
+              description={frontmatter.localAuthority.description}
+              locationName={frontmatter.localAuthority.locationName}
+              authorityName={frontmatter.localAuthority.authorityName}
+              expertiseItems={frontmatter.localAuthority.expertiseItems}
+              supportItems={frontmatter.localAuthority.supportItems}
             />
           )}
 
-          {faqData.length > 0 && (
+          {/* FAQs - only show if exists */}
+          {frontmatter.faqs?.length > 0 && (
             <LocationFAQ
               title={`${frontmatter.title} Scaffolding FAQ`}
               location={frontmatter.title}
-              items={faqData}
+              items={frontmatter.faqs}
             />
           )}
 
-          {/* Render MDX content (service sections) */}
-          {content && (
-            <section className="section-standard bg-white">
+          {/* Towns Directory - only show if exists */}
+          {frontmatter.towns?.title && (
+            <section className="py-16 bg-white">
               <div className="container-standard">
-                <div className="prose prose-lg max-w-none">
-                  <MDXRemote
-                    source={content}
-                    components={{
-                      Schema: Schema,
-                    }}
-                  />
+                <div className="text-center mb-12">
+                  <h2 className="text-3xl font-semibold text-gray-900 mb-4">
+                    {frontmatter.towns.title}
+                  </h2>
+                  <p className="text-lg text-gray-800 max-w-3xl mx-auto">
+                    {frontmatter.towns.description}
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {frontmatter.towns.townsList.map(
+                    (town: { slug: string; name: string; description: string }) => (
+                      <Link
+                        key={town.slug}
+                        href={`/locations/${town.slug}`}
+                        className="group p-6 bg-gray-50 rounded-lg border border-gray-200 hover:border-brand-blue hover:shadow-lg transition-all duration-200"
+                      >
+                        <h3 className="text-lg font-medium text-gray-900 group-hover:text-brand-blue mb-2">
+                          {town.name}
+                        </h3>
+                        <p className="text-sm text-gray-800 mb-3">{town.description}</p>
+                        <div className="flex items-center justify-between">
+                          <span className="text-xs px-2 py-1 bg-green-100 text-green-700 rounded-full">
+                            Local Specialists
+                          </span>
+                          <svg
+                            className="w-4 h-4 text-brand-blue group-hover:translate-x-1 transition-transform"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M9 5l7 7-7 7"
+                            />
+                          </svg>
+                        </div>
+                      </Link>
+                    )
+                  )}
                 </div>
               </div>
             </section>
           )}
 
-          {ctaData.title && (
+          {/* CTA - only show if exists */}
+          {frontmatter.cta?.title && (
             <CTASection
-              title={ctaData.title}
-              description={ctaData.description}
-              primaryButtonText={ctaData.primaryButtonText}
-              primaryButtonUrl={ctaData.primaryButtonUrl}
-              secondaryButtonText={ctaData.secondaryButtonText}
-              secondaryButtonUrl={ctaData.secondaryButtonUrl}
-              trustBadges={ctaData.trustBadges}
+              title={frontmatter.cta.title}
+              description={frontmatter.cta.description}
+              primaryButtonText={frontmatter.cta.primaryButtonText}
+              primaryButtonUrl={frontmatter.cta.primaryButtonUrl}
+              secondaryButtonText={frontmatter.cta.secondaryButtonText}
+              secondaryButtonUrl={frontmatter.cta.secondaryButtonUrl}
+              trustBadges={frontmatter.cta.trustBadges}
             />
           )}
         </div>
 
-        {schemaData.service && (
+        {/* Schema - only show if exists */}
+        {frontmatter.schema?.service && (
           <Schema
-            service={schemaData.service}
-            faqs={faqData}
-            breadcrumbs={breadcrumbData.map((b: { name: string; href: string }) => ({
-              name: b.name,
-              url: b.href,
-            }))}
+            service={frontmatter.schema.service}
+            faqs={frontmatter.faqs || []}
+            breadcrumbs={
+              frontmatter.breadcrumbs?.map((b: { name: string; href: string }) => ({
+                name: b.name,
+                url: b.href,
+              })) || []
+            }
           />
         )}
       </PageLayout>
@@ -356,7 +413,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
   ];
 
   return (
-    <>
+    <PageLayout>
       {/* Schema Markup for SEO */}
       <script
         type="application/ld+json"
@@ -377,40 +434,156 @@ export default async function Page({ params }: { params: Promise<Params> }) {
         }}
       />
 
-      {/* Breadcrumbs */}
-      <div className="bg-gray-50 border-b">
-        <div className="mx-auto w-full lg:w-[90%] px-6 py-4">
-          <Breadcrumbs items={breadcrumbItems} />
+      <div className="relative -mt-10 -mx-6 lg:-mx-6">
+        {/* Breadcrumbs */}
+        <div className="bg-gray-50 border-b">
+          <div className="container-standard py-4">
+            <Breadcrumbs items={breadcrumbItems} />
+          </div>
         </div>
+
+        {/* County Hero Section - Rebuilt from scratch */}
+        <section className="py-16 sm:py-20 bg-white">
+          <div className="mx-auto w-full lg:w-[90%] px-6">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              <div className="space-y-8">
+                <div>
+                  {locationData.badge && (
+                    <div className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-brand-blue/10 text-brand-blue border border-brand-blue/20 mb-4">
+                      {locationData.badge}
+                    </div>
+                  )}
+                  <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
+                    Scaffolding in {locationData.title}
+                  </h1>
+                  <p className="text-xl text-gray-800 mt-6 leading-relaxed">
+                    {locationData.description}
+                  </p>
+                </div>
+
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <Link href="/contact" className="btn-primary-lg">
+                    Get Free Quote
+                  </Link>
+                  <Link
+                    href="tel:01424466661"
+                    className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-gray-300 text-gray-900 font-semibold rounded-lg hover:bg-gray-200 transition-colors"
+                  >
+                    <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                      />
+                    </svg>
+                    Call: 01424 466661
+                  </Link>
+                </div>
+
+                <div className="flex flex-wrap gap-6 text-sm text-gray-800">
+                  <div className="flex items-center gap-2">
+                    <svg
+                      className="h-4 w-4 text-brand-blue"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                    TG20:21 Compliant
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <svg
+                      className="h-4 w-4 text-brand-blue"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                    CHAS Accredited
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <svg
+                      className="h-4 w-4 text-brand-blue"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                    £10M Insured
+                  </div>
+                </div>
+              </div>
+
+              <div className="lg:order-first">
+                <div className="relative h-[400px] rounded-2xl shadow-lg overflow-hidden bg-gray-200">
+                  {locationData.heroImage ? (
+                    <Image
+                      src={locationData.heroImage}
+                      alt={`Scaffolding services in ${locationData.title}`}
+                      fill
+                      className="object-cover"
+                      priority
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                    />
+                  ) : (
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="text-gray-400 text-center">
+                        <svg
+                          className="w-16 h-16 mx-auto mb-4"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                        <span className="text-lg font-medium">Location Hero Image</span>
+                        <p className="text-sm mt-1">{locationData.title} scaffolding project</p>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <LocationServices
+          title="Professional Scaffolding Services"
+          description="Comprehensive scaffolding solutions delivered by CISRS qualified teams with full TG20:21 compliance."
+          services={locationData.services}
+          location={locationData.title}
+        />
+
+        <LocationCoverage
+          location={locationData.title}
+          county={locationData.county}
+          projectTypes={locationData.projectTypes}
+          coverageAreas={locationData.coverageAreas}
+        />
+
+        <LocationFAQ items={locationData.faqs} location={locationData.title} />
+
+        <ServiceCTA
+          title="Ready to Start Your Project?"
+          description={`Contact our expert team for professional scaffolding services in ${locationData.title}. Free quotes and rapid response times across the area.`}
+        />
       </div>
-
-      <LocationHero
-        title={locationData.title}
-        description={locationData.description}
-        badge={locationData.badge}
-        heroImage={locationData.heroImage}
-      />
-
-      <LocationServices
-        title="Professional Scaffolding Services"
-        description="Comprehensive scaffolding solutions delivered by CISRS qualified teams with full TG20:21 compliance."
-        services={locationData.services}
-        location={locationData.title}
-      />
-
-      <LocationCoverage
-        location={locationData.title}
-        county={locationData.county}
-        projectTypes={locationData.projectTypes}
-        coverageAreas={locationData.coverageAreas}
-      />
-
-      <LocationFAQ items={locationData.faqs} location={locationData.title} />
-
-      <ServiceCTA
-        title="Ready to Start Your Project?"
-        description={`Contact our expert team for professional scaffolding services in ${locationData.title}. Free quotes and rapid response times across the area.`}
-      />
-    </>
+    </PageLayout>
   );
 }
