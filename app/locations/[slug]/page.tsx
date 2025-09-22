@@ -173,6 +173,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
             description={heroData.description}
             phone={heroData.phone}
             trustBadges={heroData.trustBadges}
+            heroImage={frontmatter.heroImage}
             ctaText={heroData.ctaText}
             ctaUrl={heroData.ctaUrl}
           />
