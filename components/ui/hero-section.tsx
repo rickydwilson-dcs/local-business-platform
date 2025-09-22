@@ -77,30 +77,34 @@ export function HeroSection(props: HeroSectionProps) {
           </div>
 
           <div className="relative">
-            {heroImage ? (
-              <Image
-                src={heroImage}
-                alt="Professional scaffolding installation by Colossus Scaffolding showing safe access solutions with TG20:21 compliant design"
-                width={600}
-                height={400}
-                className="rounded-2xl shadow-lg w-full object-cover"
-                priority
-              />
-            ) : (
-              <div className="relative h-[400px] bg-gray-200 rounded-2xl shadow-lg flex items-center justify-center">
-                <div className="text-gray-400 text-center">
-                  <svg className="w-16 h-16 mx-auto mb-4" fill="currentColor" viewBox="0 0 20 20">
-                    <path
-                      fillRule="evenodd"
-                      d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  <span className="text-lg font-medium">Hero Image</span>
-                  <p className="text-sm text-gray-700 mt-2">Professional scaffolding photography</p>
+            <div className="relative h-[400px] rounded-2xl shadow-lg overflow-hidden bg-gray-200">
+              {heroImage ? (
+                <Image
+                  src={heroImage}
+                  alt="Professional scaffolding installation by Colossus Scaffolding showing safe access solutions with TG20:21 compliant design"
+                  fill
+                  className="object-cover"
+                  priority
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+              ) : (
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="text-gray-400 text-center">
+                    <svg className="w-16 h-16 mx-auto mb-4" fill="currentColor" viewBox="0 0 20 20">
+                      <path
+                        fillRule="evenodd"
+                        d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                    <span className="text-lg font-medium">Hero Image</span>
+                    <p className="text-sm text-gray-700 mt-2">
+                      Professional scaffolding photography
+                    </p>
+                  </div>
                 </div>
-              </div>
-            )}
+              )}
+            </div>
           </div>
         </div>
       </div>
