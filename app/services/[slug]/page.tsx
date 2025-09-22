@@ -66,7 +66,7 @@ function getServiceData(slug: string): ServiceData {
       description:
         "Safe, TG20:21-compliant access scaffolding for residential, commercial, and industrial projects across the South East UK. Professional installation with full insurance coverage.",
       badge: "Most Popular",
-      heroImage: "/Access Scaffolding new build.png",
+      heroImage: "/Access-Scaffolding-new-build.png",
       benefits: [
         "TG20:21 compliant design and installation",
         "CISRS qualified and experienced scaffolders",
@@ -83,7 +83,7 @@ function getServiceData(slug: string): ServiceData {
       title: "Facade Scaffolding Solutions",
       description:
         "Professional facade scaffolding for building maintenance, renovation, and construction projects. Weather-resistant systems with comprehensive access solutions.",
-      heroImage: "/Facade Scaffolding.png",
+      heroImage: "/Facade-Scaffolding.png",
       benefits: [
         "Weatherproof scaffold systems",
         "Load-bearing structural design",
@@ -100,7 +100,7 @@ function getServiceData(slug: string): ServiceData {
       title: "Edge Protection Systems",
       description:
         "Comprehensive edge protection systems ensuring maximum safety on construction and maintenance sites. HSE compliant solutions for all project types.",
-      heroImage: "/Edge Protection.png",
+      heroImage: "/Edge-Protection.png",
       benefits: [
         "HSE compliant edge protection",
         "Rapid installation systems",
@@ -117,7 +117,7 @@ function getServiceData(slug: string): ServiceData {
       title: "Temporary Roof Systems",
       description:
         "Weather protection and temporary roofing solutions for ongoing construction and maintenance work. Keep your project dry and on schedule.",
-      heroImage: "/Temporary Roof Systems.png",
+      heroImage: "/Temporary-Roof-Systems.png",
       benefits: [
         "Complete weather protection",
         "Load-rated temporary roofs",
@@ -134,7 +134,7 @@ function getServiceData(slug: string): ServiceData {
       title: "Birdcage Scaffold Systems",
       description:
         "Independent birdcage scaffold structures providing comprehensive access for complex commercial and industrial projects requiring extensive coverage.",
-      heroImage: "/Birdcage scaffolding.png",
+      heroImage: "/Birdcage-scaffolding.png",
       benefits: [
         "Independent structure design",
         "Heavy-duty load capacity",
@@ -151,7 +151,7 @@ function getServiceData(slug: string): ServiceData {
       title: "Scaffold Towers & Mast Systems",
       description:
         "Mobile and static scaffold towers for flexible access solutions on various project types. Height-adjustable systems with quick setup capability.",
-      heroImage: "/Scaffold Towers & Mast Systems.png",
+      heroImage: "/Scaffold-Towers-&-Mast-Systems.png",
       benefits: [
         "Mobile and static options",
         "Height adjustable systems",
@@ -168,7 +168,7 @@ function getServiceData(slug: string): ServiceData {
       title: "Crash Decks & Crane Decks",
       description:
         "Protective crash decks and crane decks ensuring safety during construction operations with load-bearing capabilities and professional installation.",
-      heroImage: "/Crash Decks & Crane Decks.png",
+      heroImage: "/Crash-Decks-&-Crane-Decks.png",
       benefits: [
         "Load-bearing deck systems",
         "Professional safety compliance",
@@ -185,7 +185,7 @@ function getServiceData(slug: string): ServiceData {
       title: "Heavy Duty Industrial Scaffolding",
       description:
         "Heavy-duty scaffolding solutions for complex industrial projects and infrastructure work with high load capacity and expert engineering.",
-      heroImage: "/Heavy Industrial Scaffolding.png",
+      heroImage: "/Heavy-Industrial-Scaffolding.png",
       benefits: [
         "Heavy load capacity systems",
         "Industrial-grade materials",
@@ -202,7 +202,7 @@ function getServiceData(slug: string): ServiceData {
       title: "Pavement Gantries & Loading Bays",
       description:
         "Specialized pavement gantries and loading bay solutions for urban construction projects with pedestrian safety and loading access.",
-      heroImage: "/Pavement Gantries Loading Bays.png",
+      heroImage: "/Pavement-Gantries-Loading-Bays.png",
       benefits: [
         "Urban construction solutions",
         "Pedestrian safety priority",
@@ -219,7 +219,7 @@ function getServiceData(slug: string): ServiceData {
       title: "Public Access Staircases",
       description:
         "Safe and compliant public access staircase systems for construction sites with accessible design and code compliance.",
-      heroImage: "/Public Access Staircases.png",
+      heroImage: "/Public-Access-Staircases.png",
       benefits: [
         "Public safety compliance",
         "Accessible design standards",
@@ -236,7 +236,7 @@ function getServiceData(slug: string): ServiceData {
       title: "Scaffold Alarm Systems",
       description:
         "Advanced scaffold alarm systems for enhanced site security and safety monitoring with 24/7 monitoring and instant alerts.",
-      heroImage: "/Scaffold Alarms.png",
+      heroImage: "/Scaffold-Alarms.png",
       benefits: [
         "24/7 security monitoring",
         "Instant alert systems",
@@ -253,7 +253,7 @@ function getServiceData(slug: string): ServiceData {
       title: "Scaffolding Design & Drawings",
       description:
         "Professional scaffolding design and technical drawings ensuring structural integrity and compliance with all safety regulations.",
-      heroImage: "/Scaffolding Design & Drawings.png",
+      heroImage: "/Scaffolding-Design-&-Drawings.png",
       benefits: [
         "Structural engineering analysis",
         "CAD technical drawings",
@@ -270,7 +270,7 @@ function getServiceData(slug: string): ServiceData {
       title: "Scaffolding Inspections & Maintenance",
       description:
         "Comprehensive scaffolding inspections and maintenance services ensuring ongoing safety compliance and structural integrity.",
-      heroImage: "/Scaffolding Inspections & Maintenance.png",
+      heroImage: "/Scaffolding-Inspections-&-Maintenance.png",
       benefits: [
         "Weekly safety inspections",
         "Detailed inspection reports",
@@ -287,7 +287,7 @@ function getServiceData(slug: string): ServiceData {
       title: "Sheeting, Netting & Encapsulation",
       description:
         "Weather protection and safety encapsulation systems including scaffolding sheeting, debris netting, and full encapsulation solutions.",
-      heroImage: "/Sheeting Netting Encapsulation.png",
+      heroImage: "/Sheeting-Netting-Encapsulation.png",
       benefits: [
         "Weather protection systems",
         "Debris containment netting",
@@ -304,7 +304,7 @@ function getServiceData(slug: string): ServiceData {
       title: "Staircase Towers",
       description:
         "Safe and compliant staircase tower systems providing secure vertical access for construction and maintenance projects.",
-      heroImage: "/Staircase Towers.png",
+      heroImage: "/Staircase-Towers.png",
       benefits: [
         "Safe vertical access",
         "Compliant stair design",
@@ -321,7 +321,7 @@ function getServiceData(slug: string): ServiceData {
       title: "Suspended Scaffolding",
       description:
         "Specialized suspended scaffolding systems for high-rise building maintenance and construction work requiring overhead access.",
-      heroImage: "/Suspended Scaffolding.png",
+      heroImage: "/Suspended-Scaffolding.png",
       benefits: [
         "High-rise access capability",
         "Suspended platform systems",
