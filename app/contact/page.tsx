@@ -455,44 +455,6 @@ export default function ContactPage() {
                   </div>
                 </div>
               </div>
-
-              {/* Why Choose Us */}
-              <div className="bg-brand-black text-brand-white rounded-2xl shadow-lg p-8">
-                <h2 className="text-2xl font-semibold mb-6">Why Choose Colossus?</h2>
-
-                <ul className="space-y-4">
-                  <li className="flex items-start">
-                    <span className="text-brand-blue mr-3">✓</span>
-                    <div>
-                      <span className="font-semibold">TG20:21 Compliant</span>
-                      <p className="text-sm text-gray-300">
-                        All scaffolds meet latest safety standards
-                      </p>
-                    </div>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-brand-blue mr-3">✓</span>
-                    <div>
-                      <span className="font-semibold">Fully Insured</span>
-                      <p className="text-sm text-gray-300">£10M public liability coverage</p>
-                    </div>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-brand-blue mr-3">✓</span>
-                    <div>
-                      <span className="font-semibold">CHAS Accredited</span>
-                      <p className="text-sm text-gray-300">Proven health & safety record</p>
-                    </div>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-brand-blue mr-3">✓</span>
-                    <div>
-                      <span className="font-semibold">Free Site Surveys</span>
-                      <p className="text-sm text-gray-300">No-obligation quotes</p>
-                    </div>
-                  </li>
-                </ul>
-              </div>
             </div>
           </div>
         </div>

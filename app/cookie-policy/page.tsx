@@ -466,7 +466,7 @@ export default function CookiePolicyPage() {
                       <h4 className="font-semibold mb-2">Contact Details</h4>
                       <div className="text-gray-700 space-y-1">
                         <p>Phone: 01424 466 661</p>
-                        <p>Email: info@colossusscaffolding.co.uk</p>
+                        <p>Email: info@colossusscaffolding.com</p>
                         <p>
                           Privacy enquiries:{" "}
                           <Link href="/contact" className="text-brand-blue hover:underline">

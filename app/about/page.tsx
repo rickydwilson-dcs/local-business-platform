@@ -50,7 +50,7 @@ export default function AboutPage() {
       "Professional scaffolding specialists serving the South East UK with TG20:21 compliant solutions, CISRS qualified teams, and comprehensive insurance coverage.",
     foundingDate: "2009",
     numberOfEmployees: "10-50",
-    email: "info@colossusscaffolding.co.uk",
+    email: "info@colossusscaffolding.com",
     telephone: "+441424466661",
     address: {
       "@type": "PostalAddress",

@@ -124,7 +124,7 @@ export default function PrivacyPolicyPage() {
                       <strong>Phone:</strong> 01424 466 661
                     </p>
                     <p>
-                      <strong>Email:</strong> info@colossusscaffolding.co.uk
+                      <strong>Email:</strong> info@colossusscaffolding.com
                     </p>
                     <p>
                       <strong>Service Area:</strong> East Sussex, West Sussex, Kent, Surrey
@@ -794,7 +794,7 @@ export default function PrivacyPolicyPage() {
                         <strong>Phone:</strong> 01424 466 661
                       </p>
                       <p>
-                        <strong>Email:</strong> info@colossusscaffolding.co.uk
+                        <strong>Email:</strong> info@colossusscaffolding.com
                       </p>
                       <p>
                         <strong>Privacy Enquiries:</strong>{" "}
