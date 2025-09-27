@@ -10,14 +10,14 @@
  * - Lazy loading and progressive loading
  */
 
-// Default image quality for optimization (reduced from 75 to 65 for ~10% more compression)
-export const DEFAULT_IMAGE_QUALITY = 65;
+// Default image quality for optimization (reduced from 75 to 65 to 58 for ~20% total compression)
+export const DEFAULT_IMAGE_QUALITY = 58;
 
-// High quality setting for hero images and critical visuals
-export const HIGH_QUALITY = 80;
+// High quality setting for hero images and critical visuals (reduced from 80 to 72)
+export const HIGH_QUALITY = 72;
 
-// Low quality setting for thumbnails and non-critical images
-export const LOW_QUALITY = 50;
+// Low quality setting for thumbnails and non-critical images (reduced from 50 to 45)
+export const LOW_QUALITY = 45;
 
 // Common image sizes used throughout the application
 export const IMAGE_SIZES = {
