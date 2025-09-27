@@ -3,10 +3,12 @@ import { absUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Contact Colossus Scaffolding | Free Quotes & Professional Service",
-  description: "Contact Colossus Scaffolding for free quotes on professional scaffolding services across South East UK. TG20:21 compliant, CISRS qualified teams, rapid response.",
+  description:
+    "Contact Colossus Scaffolding for free quotes on professional scaffolding services across South East UK. TG20:21 compliant, CISRS qualified teams, rapid response.",
   openGraph: {
     title: "Contact Colossus Scaffolding | Free Quotes & Professional Service",
-    description: "Contact Colossus Scaffolding for free quotes on professional scaffolding services across South East UK. TG20:21 compliant, CISRS qualified teams.",
+    description:
+      "Contact Colossus Scaffolding for free quotes on professional scaffolding services across South East UK. TG20:21 compliant, CISRS qualified teams.",
     url: absUrl("/contact"),
     siteName: "Colossus Scaffolding",
     images: [
@@ -14,37 +16,35 @@ export const metadata: Metadata = {
         url: absUrl("/static/logo.png"),
         width: 1200,
         height: 630,
-        alt: "Contact Colossus Scaffolding - Professional Scaffolding Services"
-      }
+        alt: "Contact Colossus Scaffolding - Professional Scaffolding Services",
+      },
     ],
     locale: "en_GB",
-    type: "website"
+    type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: "Contact Colossus Scaffolding | Free Quotes & Professional Service",
-    description: "Contact Colossus Scaffolding for free quotes on professional scaffolding services across South East UK. TG20:21 compliant, CISRS qualified teams.",
-    images: [absUrl("/static/logo.png")]
+    description:
+      "Contact Colossus Scaffolding for free quotes on professional scaffolding services across South East UK. TG20:21 compliant, CISRS qualified teams.",
+    images: [absUrl("/static/logo.png")],
   },
   alternates: {
-    canonical: absUrl("/contact")
-  }
+    canonical: absUrl("/contact"),
+  },
 };
 
-export default function ContactLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function ContactLayout({ children }: { children: React.ReactNode }) {
   const contactPageSchema = {
     "@context": "https://schema.org",
     "@type": "ContactPage",
     "@id": absUrl("/contact"),
     name: "Contact Colossus Scaffolding",
-    description: "Contact Colossus Scaffolding for free quotes on professional scaffolding services across South East UK.",
+    description:
+      "Contact Colossus Scaffolding for free quotes on professional scaffolding services across South East UK.",
     url: absUrl("/contact"),
     mainEntity: {
-      "@id": absUrl("/#organization")
+      "@id": absUrl("/#organization"),
     },
     breadcrumb: {
       "@type": "BreadcrumbList",
@@ -53,16 +53,16 @@ export default function ContactLayout({
           "@type": "ListItem",
           position: 1,
           name: "Home",
-          item: absUrl("/")
+          item: absUrl("/"),
         },
         {
           "@type": "ListItem",
           position: 2,
           name: "Contact",
-          item: absUrl("/contact")
-        }
-      ]
-    }
+          item: absUrl("/contact"),
+        },
+      ],
+    },
   };
 
   const contactPointSchema = {
@@ -70,7 +70,7 @@ export default function ContactLayout({
     "@type": "ContactPoint",
     "@id": absUrl("/contact#contactpoint"),
     telephone: "+441424466661",
-    email: "info@colossusscaffolding.co.uk",
+    email: "info@colossusscaffolding.com",
     contactType: "customer service",
     availableLanguage: "English",
     hoursAvailable: [
@@ -78,21 +78,21 @@ export default function ContactLayout({
         "@type": "OpeningHoursSpecification",
         dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
         opens: "07:30",
-        closes: "18:00"
+        closes: "18:00",
       },
       {
-        "@type": "OpeningHoursSpecification", 
+        "@type": "OpeningHoursSpecification",
         dayOfWeek: "Saturday",
         opens: "08:00",
-        closes: "16:00"
-      }
+        closes: "16:00",
+      },
     ],
     areaServed: [
       { "@type": "Place", name: "East Sussex" },
       { "@type": "Place", name: "West Sussex" },
       { "@type": "Place", name: "Kent" },
       { "@type": "Place", name: "Surrey" },
-    ]
+    ],
   };
 
   return (
@@ -101,16 +101,16 @@ export default function ContactLayout({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(contactPageSchema)
+          __html: JSON.stringify(contactPageSchema),
         }}
       />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(contactPointSchema)
+          __html: JSON.stringify(contactPointSchema),
         }}
       />
-      
+
       {children}
     </>
   );

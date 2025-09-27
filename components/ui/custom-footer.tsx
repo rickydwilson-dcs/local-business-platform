@@ -160,10 +160,10 @@ export function CustomFooter({
                 <div>
                   <p className="font-semibold text-white mb-1">Email</p>
                   <a
-                    href="mailto:info@colossusscaffolding.co.uk"
+                    href="mailto:info@colossusscaffolding.com"
                     className="hover:text-white transition-colors"
                   >
-                    info@colossusscaffolding.co.uk
+                    info@colossusscaffolding.com
                   </a>
                 </div>
                 <div>
