@@ -2,6 +2,21 @@
 
 This document outlines the **enforced development workflow** for the Colossus Scaffolding website to ensure code quality and prevent issues from reaching production.
 
+## ⚠️ CRITICAL: Pre-Push Hooks Prevent Bad Code
+
+**🚫 Git pushes will be BLOCKED if:**
+
+- TypeScript compilation errors exist
+- Production build fails
+- Import/export issues prevent successful builds
+
+**💡 To avoid blocked pushes, run before committing:**
+
+```bash
+npm run type-check    # Check for TypeScript errors
+npm run build         # Verify production build works
+```
+
 ## Branch Structure (Protected)
 
 - **`develop`** - Development branch for all new features and bug fixes
@@ -31,29 +46,33 @@ git pull origin develop
 
 - **ESLint** - Code linting and fixes
 - **Prettier** - Code formatting
+- ⚠️ **Note**: TypeScript errors are NOT caught at commit time
 
 **Pre-push hooks (automatic on every push):**
 
-- **TypeScript** - Type checking
-- **Build Test** - Production build verification
+- **TypeScript** - Type checking (`npm run type-check`)
+- **Build Test** - Production build verification (`npm run build`)
+- 🚫 **CRITICAL**: Push will be blocked if TypeScript or build errors exist
 
 ### 3. Manual Quality Checks
 
-Before creating PRs, run these commands in the `develop` branch:
+Before committing or pushing to `develop`, run these commands:
 
 ```bash
-# Run all quality checks
+# RECOMMENDED: Run full quality check before any commit
 npm run pre-commit-check
 
 # Individual checks:
 npm run lint          # ESLint check
 npm run lint:fix      # ESLint with auto-fix
-npm run type-check    # TypeScript validation
-npm run build         # Production build test
+npm run type-check    # TypeScript validation ⚠️ CRITICAL
+npm run build         # Production build test ⚠️ CRITICAL
 npm run format        # Prettier formatting
 ```
 
-**⚠️ CRITICAL: All checks must pass before creating PRs!**
+**⚠️ CRITICAL: TypeScript and build errors will block pushes to any branch!**
+
+**💡 TIP: Run `npm run type-check` frequently during development to catch issues early**
 
 ### 4. Staging Deployment (PR Required)
 
@@ -132,9 +151,10 @@ The CI pipeline runs automatically on:
 ### Development Quality Gates ✅
 
 - Pre-commit hooks pass (ESLint + Prettier)
-- Pre-push hooks pass (TypeScript + Build)
-- Local development server running
+- 🔥 **Pre-push hooks pass (TypeScript + Build)** - BLOCKS PUSH IF FAILED
+- Local development server running (`npm run dev`)
 - Manual feature testing complete
+- **Recommended**: Run `npm run type-check` before every commit
 
 ### Staging Quality Gates ✅
 
@@ -196,6 +216,113 @@ git push origin hotfix/critical-fix
 git checkout develop
 git merge main
 git push origin develop
+```
+
+## Common Development Issues
+
+### TypeScript Errors During Push
+
+**Problem**: `git push` fails with TypeScript errors
+
+**Solution**:
+
+```bash
+# 1. Check for TypeScript errors
+npm run type-check
+
+# 2. Fix all reported errors in your code editor
+# 3. Common issues:
+#    - Missing type imports: import type { SomeType } from './types'
+#    - 'any' types: Replace with proper types or 'unknown'
+#    - Function ordering: useCallback functions used before declaration
+#    - Missing dependency arrays in React hooks
+
+# 4. Verify fix
+npm run type-check
+
+# 5. Now push will succeed
+git push origin develop
+```
+
+### Pre-Push Hook Failure
+
+**Problem**: Push blocked by pre-push hooks
+
+**Root Causes**:
+
+- TypeScript compilation errors
+- Production build failures
+- Import/export issues
+
+**Fix Process**:
+
+```bash
+# 1. Run the exact same checks as pre-push hook
+npm run type-check && npm run build
+
+# 2. Fix any errors shown
+# 3. Retry push
+```
+
+### Common TypeScript Issues
+
+**1. Missing Type Imports**
+
+```typescript
+// ❌ Error: Cannot find name 'ConsentState'
+function hasConsent(consent: ConsentState | null): boolean;
+
+// ✅ Fix: Add type import
+import type { ConsentState } from "@/lib/analytics/types";
+function hasConsent(consent: ConsentState | null): boolean;
+```
+
+**2. Function Declaration Ordering**
+
+```typescript
+// ❌ Error: Variable used before being assigned
+const parentFunction = useCallback(() => {
+  childFunction(); // Used before declaration
+}, [childFunction]);
+
+const childFunction = useCallback(() => {
+  // Implementation
+}, []);
+
+// ✅ Fix: Declare child functions first
+const childFunction = useCallback(() => {
+  // Implementation
+}, []);
+
+const parentFunction = useCallback(() => {
+  childFunction(); // Now available
+}, [childFunction]);
+```
+
+**3. 'any' Type Violations**
+
+```typescript
+// ❌ Error: TypeScript strict mode violation
+const data: any = getData();
+
+// ✅ Fix: Use proper types or 'unknown'
+const data: unknown = getData();
+const data: SomeInterface = getData();
+const data: Record<string, unknown> = getData();
+```
+
+**4. React Hook Dependencies**
+
+```typescript
+// ❌ Error: Missing dependencies in useCallback
+const callback = useCallback(() => {
+  someFunction();
+}, []); // Missing someFunction dependency
+
+// ✅ Fix: Add all dependencies
+const callback = useCallback(() => {
+  someFunction();
+}, [someFunction]);
 ```
 
 ## Troubleshooting
