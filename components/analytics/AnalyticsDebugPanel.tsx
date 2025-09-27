@@ -9,6 +9,15 @@ import { useState, useEffect, useCallback } from "react";
 import { useConsent } from "./ConsentManager";
 import { DebugPanelData } from "@/lib/analytics/types";
 
+interface TestResult {
+  test?: string;
+  success: boolean;
+  error?: string;
+  result?: {
+    platforms?: Record<string, { success: boolean }>;
+  };
+}
+
 interface AnalyticsDebugPanelProps {
   enabled?: boolean;
   className?: string;
@@ -21,7 +30,7 @@ export function AnalyticsDebugPanel({
   const [isOpen, setIsOpen] = useState(false);
   const [debugData, setDebugData] = useState<DebugPanelData | null>(null);
   const [loading, setLoading] = useState(false);
-  const [testResults, setTestResults] = useState<unknown[]>([]);
+  const [testResults, setTestResults] = useState<TestResult[]>([]);
   const { consent } = useConsent();
 
   // Load debug data from API

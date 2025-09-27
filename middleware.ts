@@ -4,6 +4,7 @@
  */
 
 import { NextRequest, NextResponse } from "next/server";
+import type { ConsentState } from "@/lib/analytics/types";
 
 // Feature flags for analytics control
 function getFeatureFlags() {

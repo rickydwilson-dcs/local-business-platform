@@ -51,6 +51,50 @@ export function Analytics({
     });
   }, []);
 
+  // Initialize GA4
+  const initializeGA4 = useCallback(() => {
+    if (!window.gtag || !gaId) return;
+
+    window.gtag("config", gaId, {
+      page_title: document.title,
+      page_location: window.location.href,
+      anonymize_ip: true,
+      allow_google_signals: consent?.marketing || false,
+      allow_ad_personalization_signals: consent?.marketing || false,
+    });
+
+    if (debugMode) {
+      console.log("GA4 initialized with ID:", gaId);
+    }
+  }, [gaId, consent, debugMode]);
+
+  // Initialize Facebook Pixel
+  const initializeFacebookPixel = useCallback(() => {
+    if (!window.fbq || !facebookPixelId) return;
+
+    window.fbq("init", facebookPixelId, {
+      external_id: undefined, // Could be set to user ID if available
+    });
+
+    // Track initial page view
+    window.fbq("track", "PageView");
+
+    if (debugMode) {
+      console.log("Facebook Pixel initialized with ID:", facebookPixelId);
+    }
+  }, [facebookPixelId, debugMode]);
+
+  // Initialize Google Ads
+  const initializeGoogleAds = useCallback(() => {
+    if (!window.gtag || !googleAdsId) return;
+
+    window.gtag("config", googleAdsId);
+
+    if (debugMode) {
+      console.log("Google Ads initialized with ID:", googleAdsId);
+    }
+  }, [googleAdsId, debugMode]);
+
   // Initialize analytics platforms
   const initializeAnalytics = useCallback(() => {
     if (!consent) return;
@@ -98,50 +142,6 @@ export function Analytics({
     initializeFacebookPixel,
     initializeGoogleAds,
   ]);
-
-  // Initialize GA4
-  const initializeGA4 = useCallback(() => {
-    if (!window.gtag || !gaId) return;
-
-    window.gtag("config", gaId, {
-      page_title: document.title,
-      page_location: window.location.href,
-      anonymize_ip: true,
-      allow_google_signals: consent?.marketing || false,
-      allow_ad_personalization_signals: consent?.marketing || false,
-    });
-
-    if (debugMode) {
-      console.log("GA4 initialized with ID:", gaId);
-    }
-  }, [gaId, consent, debugMode]);
-
-  // Initialize Facebook Pixel
-  const initializeFacebookPixel = useCallback(() => {
-    if (!window.fbq || !facebookPixelId) return;
-
-    window.fbq("init", facebookPixelId, {
-      external_id: undefined, // Could be set to user ID if available
-    });
-
-    // Track initial page view
-    window.fbq("track", "PageView");
-
-    if (debugMode) {
-      console.log("Facebook Pixel initialized with ID:", facebookPixelId);
-    }
-  }, [facebookPixelId, debugMode]);
-
-  // Initialize Google Ads
-  const initializeGoogleAds = useCallback(() => {
-    if (!window.gtag || !googleAdsId) return;
-
-    window.gtag("config", googleAdsId);
-
-    if (debugMode) {
-      console.log("Google Ads initialized with ID:", googleAdsId);
-    }
-  }, [googleAdsId, debugMode]);
 
   // Initialize analytics when consent is available
   useEffect(() => {
