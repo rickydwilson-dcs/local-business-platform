@@ -3,7 +3,7 @@
  * Uses Google Ads API for server-side conversion tracking
  */
 
-import { GoogleAdsConversion, ConversionEvent, AnalyticsEvent } from './types';
+import { GoogleAdsConversion, ConversionEvent } from "./types";
 
 export class GoogleAdsAnalytics {
   private customerId: string;
@@ -29,15 +29,15 @@ export class GoogleAdsAnalytics {
         conversion_action: `customers/${this.customerId}/conversionActions/${this.conversionActionId}`,
         conversion_date_time: new Date(conversion.timestamp || Date.now()).toISOString(),
         conversion_value: conversion.conversion_value || conversion.value,
-        currency_code: conversion.conversion_currency || conversion.currency || 'GBP',
+        currency_code: conversion.conversion_currency || conversion.currency || "GBP",
         order_id: orderId,
         gclid: gclid,
       };
 
       return await this.sendConversion(conversionData);
     } catch (error) {
-      console.error('Google Ads conversion tracking error:', error);
-      return { success: false, error: error instanceof Error ? error.message : 'Unknown error' };
+      console.error("Google Ads conversion tracking error:", error);
+      return { success: false, error: error instanceof Error ? error.message : "Unknown error" };
     }
   }
 
@@ -64,7 +64,7 @@ export class GoogleAdsAnalytics {
         conversion_action: `customers/${this.customerId}/conversionActions/${this.conversionActionId}`,
         conversion_date_time: new Date(conversion.timestamp || Date.now()).toISOString(),
         conversion_value: conversion.conversion_value || conversion.value,
-        currency_code: conversion.conversion_currency || conversion.currency || 'GBP',
+        currency_code: conversion.conversion_currency || conversion.currency || "GBP",
         order_id: orderId,
         gclid: gclid,
         user_identifiers: hashedCustomerData,
@@ -72,15 +72,17 @@ export class GoogleAdsAnalytics {
 
       return await this.sendConversion(conversionData);
     } catch (error) {
-      console.error('Google Ads enhanced conversion tracking error:', error);
-      return { success: false, error: error instanceof Error ? error.message : 'Unknown error' };
+      console.error("Google Ads enhanced conversion tracking error:", error);
+      return { success: false, error: error instanceof Error ? error.message : "Unknown error" };
     }
   }
 
   /**
    * Send conversion to Google Ads API (requires OAuth token)
    */
-  private async sendConversion(conversionData: any): Promise<{ success: boolean; error?: string }> {
+  private async sendConversion(
+    conversionData: Record<string, unknown>
+  ): Promise<{ success: boolean; error?: string }> {
     if (!this.accessToken) {
       // Fallback to gtag for client-side conversion tracking
       return this.sendClientSideConversion(conversionData);
@@ -90,11 +92,11 @@ export class GoogleAdsAnalytics {
 
     try {
       const response = await fetch(url, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Authorization': `Bearer ${this.accessToken}`,
-          'Content-Type': 'application/json',
-          'developer-token': process.env.GOOGLE_ADS_DEVELOPER_TOKEN || '',
+          Authorization: `Bearer ${this.accessToken}`,
+          "Content-Type": "application/json",
+          "developer-token": process.env.GOOGLE_ADS_DEVELOPER_TOKEN || "",
         },
         body: JSON.stringify({
           conversions: [conversionData],
@@ -108,74 +110,73 @@ export class GoogleAdsAnalytics {
       }
 
       const responseData = await response.json();
-      console.log('Google Ads conversion tracked successfully:', responseData);
+      console.log("Google Ads conversion tracked successfully:", responseData);
 
       return { success: true };
     } catch (error) {
-      console.error('Google Ads API request failed:', error);
-      return { success: false, error: error instanceof Error ? error.message : 'Network error' };
+      console.error("Google Ads API request failed:", error);
+      return { success: false, error: error instanceof Error ? error.message : "Network error" };
     }
   }
 
   /**
    * Fallback to client-side conversion tracking using gtag
    */
-  private async sendClientSideConversion(conversionData: any): Promise<{ success: boolean; error?: string }> {
+  private async sendClientSideConversion(
+    conversionData: Record<string, unknown>
+  ): Promise<{ success: boolean; error?: string }> {
     try {
       // This would be used client-side, but we can prepare the data for client-side tracking
       const conversionEvent = {
         send_to: `AW-${this.customerId}/${this.conversionActionId}`,
-        value: conversionData.conversion_value,
-        currency: conversionData.currency_code,
-        transaction_id: conversionData.order_id,
+        value: (conversionData as { conversion_value?: unknown }).conversion_value,
+        currency: (conversionData as { currency_code?: unknown }).currency_code,
+        transaction_id: (conversionData as { order_id?: unknown }).order_id,
       };
 
-      console.log('Prepared client-side conversion data:', conversionEvent);
+      console.log("Prepared client-side conversion data:", conversionEvent);
 
       // In a real implementation, this would be sent to a queue for client-side processing
       // or stored for the next page load to trigger via gtag
 
       return { success: true };
     } catch (error) {
-      console.error('Client-side conversion preparation failed:', error);
-      return { success: false, error: error instanceof Error ? error.message : 'Unknown error' };
+      console.error("Client-side conversion preparation failed:", error);
+      return { success: false, error: error instanceof Error ? error.message : "Unknown error" };
     }
   }
 
   /**
    * Hash customer data for enhanced conversions
    */
-  private hashCustomerData(customerData: {
+  private async hashCustomerData(customerData: {
     email?: string;
     phone?: string;
     firstName?: string;
     lastName?: string;
     postalCode?: string;
-  }): Array<{ hashed_email?: string; hashed_phone_number?: string }> {
-    const crypto = require('crypto');
-    const identifiers: Array<any> = [];
+  }): Promise<Array<{ hashed_email?: string; hashed_phone_number?: string }>> {
+    const crypto = await import("crypto");
+    const identifiers: Array<{ hashed_email?: string; hashed_phone_number?: string }> = [];
 
     if (customerData.email) {
       identifiers.push({
         hashed_email: crypto
-          .createHash('sha256')
+          .createHash("sha256")
           .update(customerData.email.toLowerCase().trim())
-          .digest('hex'),
+          .digest("hex"),
       });
     }
 
     if (customerData.phone) {
       // Remove all non-digit characters and add country code if missing
-      let phone = customerData.phone.replace(/\D/g, '');
-      if (!phone.startsWith('44') && phone.startsWith('0')) {
-        phone = '44' + phone.substring(1);
+      let phone = customerData.phone.replace(/\D/g, "");
+      if (!phone.startsWith("44") && phone.startsWith("0")) {
+        phone = "44" + phone.substring(1);
       }
 
       identifiers.push({
-        hashed_phone_number: crypto
-          .createHash('sha256')
-          .update(phone)
-          .digest('hex'),
+        hashed_phone_number: crypto.createHash("sha256").update(phone).digest("hex"),
       });
     }
 
@@ -186,8 +187,8 @@ export class GoogleAdsAnalytics {
    * Extract Google Click ID (gclid) from URL
    */
   static extractGclid(url: string): string | undefined {
-    const urlParams = new URLSearchParams(url.split('?')[1] || '');
-    return urlParams.get('gclid') || undefined;
+    const urlParams = new URLSearchParams(url.split("?")[1] || "");
+    return urlParams.get("gclid") || undefined;
   }
 
   /**
@@ -195,13 +196,13 @@ export class GoogleAdsAnalytics {
    */
   private mapConversionAction(action: string): string {
     const conversionMap: Record<string, string> = {
-      quote_request: 'Quote Request',
-      phone_call: 'Phone Call',
-      email_contact: 'Email Contact',
-      form_submit: 'Form Submission',
+      quote_request: "Quote Request",
+      phone_call: "Phone Call",
+      email_contact: "Email Contact",
+      form_submit: "Form Submission",
     };
 
-    return conversionMap[action] || 'Conversion';
+    return conversionMap[action] || "Conversion";
   }
 
   /**
@@ -209,10 +210,7 @@ export class GoogleAdsAnalytics {
    */
   static validateConfig(customerId?: string, conversionActionId?: string): boolean {
     return Boolean(
-      customerId &&
-        customerId.length > 0 &&
-        conversionActionId &&
-        conversionActionId.length > 0
+      customerId && customerId.length > 0 && conversionActionId && conversionActionId.length > 0
     );
   }
 
@@ -225,7 +223,7 @@ export class GoogleAdsAnalytics {
     const accessToken = process.env.GOOGLE_ADS_ACCESS_TOKEN;
 
     if (!this.validateConfig(customerId, conversionActionId)) {
-      console.warn('Google Ads configuration missing or invalid');
+      console.warn("Google Ads configuration missing or invalid");
       return null;
     }
 
@@ -236,43 +234,43 @@ export class GoogleAdsAnalytics {
 // Utility functions for common Google Ads conversions
 export const GoogleAdsEvents = {
   quoteRequest: (value?: number, service?: string, location?: string): ConversionEvent => ({
-    name: 'quote_request',
-    conversion_action: 'quote_request',
+    name: "quote_request",
+    conversion_action: "quote_request",
     conversion_value: value,
-    conversion_currency: 'GBP',
+    conversion_currency: "GBP",
     parameters: {
       service_type: service,
       location: location,
-      lead_type: 'quote_request',
+      lead_type: "quote_request",
     },
   }),
 
   phoneCall: (phoneNumber: string, callDuration?: number): ConversionEvent => ({
-    name: 'phone_call',
-    conversion_action: 'phone_call',
+    name: "phone_call",
+    conversion_action: "phone_call",
     parameters: {
       phone_number: phoneNumber,
       call_duration: callDuration,
-      lead_type: 'phone_call',
+      lead_type: "phone_call",
     },
   }),
 
   emailContact: (emailAddress?: string): ConversionEvent => ({
-    name: 'email_contact',
-    conversion_action: 'email_contact',
+    name: "email_contact",
+    conversion_action: "email_contact",
     parameters: {
       email_address: emailAddress,
-      lead_type: 'email_contact',
+      lead_type: "email_contact",
     },
   }),
 
   formSubmission: (formName: string, formLocation: string): ConversionEvent => ({
-    name: 'form_submit',
-    conversion_action: 'form_submit',
+    name: "form_submit",
+    conversion_action: "form_submit",
     parameters: {
       form_name: formName,
       form_location: formLocation,
-      lead_type: 'form_submission',
+      lead_type: "form_submission",
     },
   }),
 };
@@ -286,7 +284,7 @@ export const GtagConversions = {
     conversionId: string,
     conversionLabel: string,
     value?: number,
-    currency = 'GBP',
+    currency = "GBP",
     transactionId?: string
   ): string {
     return `
@@ -294,7 +292,7 @@ export const GtagConversions = {
         'send_to': 'AW-${conversionId}/${conversionLabel}',
         'value': ${value || 0},
         'currency': '${currency}',
-        'transaction_id': '${transactionId || ''}'
+        'transaction_id': '${transactionId || ""}'
       });
     `;
   },
@@ -313,7 +311,7 @@ export const GtagConversions = {
       postal_code?: string;
     },
     value?: number,
-    currency = 'GBP',
+    currency = "GBP",
     transactionId?: string
   ): string {
     return `
@@ -321,7 +319,7 @@ export const GtagConversions = {
         'send_to': 'AW-${conversionId}/${conversionLabel}',
         'value': ${value || 0},
         'currency': '${currency}',
-        'transaction_id': '${transactionId || ''}',
+        'transaction_id': '${transactionId || ""}',
         'user_data': ${JSON.stringify(customerData)}
       });
     `;

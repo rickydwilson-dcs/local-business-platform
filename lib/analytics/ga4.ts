@@ -3,7 +3,7 @@
  * Uses GA4 Measurement Protocol for server-side event tracking
  */
 
-import { GA4Event, PageViewEvent, AnalyticsEvent } from './types';
+import { GA4Event, PageViewEvent, AnalyticsEvent } from "./types";
 
 export class GA4Analytics {
   private measurementId: string;
@@ -38,12 +38,12 @@ export class GA4Analytics {
         timestamp_micros: Date.now() * 1000,
         events: [
           {
-            name: 'page_view',
+            name: "page_view",
             params: {
               page_location: pageView.page_location,
               page_title: pageView.page_title,
               page_referrer: pageView.page_referrer,
-              engagement_time_msec: '1',
+              engagement_time_msec: "1",
             },
           },
         ],
@@ -51,8 +51,8 @@ export class GA4Analytics {
 
       return await this.sendEvent(event);
     } catch (error) {
-      console.error('GA4 page view tracking error:', error);
-      return { success: false, error: error instanceof Error ? error.message : 'Unknown error' };
+      console.error("GA4 page view tracking error:", error);
+      return { success: false, error: error instanceof Error ? error.message : "Unknown error" };
     }
   }
 
@@ -83,8 +83,8 @@ export class GA4Analytics {
 
       return await this.sendEvent(ga4Event);
     } catch (error) {
-      console.error('GA4 event tracking error:', error);
-      return { success: false, error: error instanceof Error ? error.message : 'Unknown error' };
+      console.error("GA4 event tracking error:", error);
+      return { success: false, error: error instanceof Error ? error.message : "Unknown error" };
     }
   }
 
@@ -94,7 +94,7 @@ export class GA4Analytics {
   async trackConversion(
     conversionAction: string,
     value?: number,
-    currency = 'GBP',
+    currency = "GBP",
     clientId?: string,
     userId?: string
   ): Promise<{ success: boolean; error?: string }> {
@@ -105,12 +105,12 @@ export class GA4Analytics {
         timestamp_micros: Date.now() * 1000,
         events: [
           {
-            name: 'conversion',
+            name: "conversion",
             params: {
               conversion_action: conversionAction,
               value: value,
               currency: currency,
-              engagement_time_msec: '1',
+              engagement_time_msec: "1",
             },
           },
         ],
@@ -118,8 +118,8 @@ export class GA4Analytics {
 
       return await this.sendEvent(event);
     } catch (error) {
-      console.error('GA4 conversion tracking error:', error);
-      return { success: false, error: error instanceof Error ? error.message : 'Unknown error' };
+      console.error("GA4 conversion tracking error:", error);
+      return { success: false, error: error instanceof Error ? error.message : "Unknown error" };
     }
   }
 
@@ -135,20 +135,22 @@ export class GA4Analytics {
 
     try {
       const response = await fetch(url, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(event),
       });
 
       if (this.debugMode) {
         const responseData = await response.json();
-        console.log('GA4 Debug Response:', responseData);
+        console.log("GA4 Debug Response:", responseData);
 
         if (responseData.validationMessages?.length > 0) {
-          const errors = responseData.validationMessages.map((msg: any) => msg.description);
-          return { success: false, error: `Validation errors: ${errors.join(', ')}` };
+          const errors = responseData.validationMessages.map(
+            (msg: { description: string }) => msg.description
+          );
+          return { success: false, error: `Validation errors: ${errors.join(", ")}` };
         }
       }
 
@@ -158,8 +160,8 @@ export class GA4Analytics {
 
       return { success: true };
     } catch (error) {
-      console.error('GA4 API request failed:', error);
-      return { success: false, error: error instanceof Error ? error.message : 'Network error' };
+      console.error("GA4 API request failed:", error);
+      return { success: false, error: error instanceof Error ? error.message : "Network error" };
     }
   }
 
@@ -168,10 +170,7 @@ export class GA4Analytics {
    */
   static validateConfig(measurementId?: string, apiSecret?: string): boolean {
     return Boolean(
-      measurementId &&
-        measurementId.startsWith('G-') &&
-        apiSecret &&
-        apiSecret.length > 10
+      measurementId && measurementId.startsWith("G-") && apiSecret && apiSecret.length > 10
     );
   }
 
@@ -183,7 +182,7 @@ export class GA4Analytics {
     const apiSecret = process.env.GA4_API_SECRET;
 
     if (!this.validateConfig(measurementId, apiSecret)) {
-      console.warn('GA4 configuration missing or invalid');
+      console.warn("GA4 configuration missing or invalid");
       return null;
     }
 
@@ -194,7 +193,7 @@ export class GA4Analytics {
 // Utility functions for common GA4 events
 export const GA4Events = {
   pageView: (url: string, title: string, referrer?: string): AnalyticsEvent => ({
-    name: 'page_view',
+    name: "page_view",
     parameters: {
       page_location: url,
       page_title: title,
@@ -203,51 +202,51 @@ export const GA4Events = {
   }),
 
   quoteRequest: (service?: string, location?: string, value?: number): AnalyticsEvent => ({
-    name: 'quote_request',
+    name: "quote_request",
     parameters: {
-      event_category: 'engagement',
-      event_label: 'quote_request',
+      event_category: "engagement",
+      event_label: "quote_request",
       service_type: service,
       location: location,
     },
     value,
-    currency: 'GBP',
+    currency: "GBP",
   }),
 
   phoneCall: (phoneNumber: string): AnalyticsEvent => ({
-    name: 'phone_call',
+    name: "phone_call",
     parameters: {
-      event_category: 'engagement',
-      event_label: 'phone_call',
+      event_category: "engagement",
+      event_label: "phone_call",
       phone_number: phoneNumber,
     },
   }),
 
   formSubmit: (formName: string, formLocation: string): AnalyticsEvent => ({
-    name: 'form_submit',
+    name: "form_submit",
     parameters: {
-      event_category: 'engagement',
-      event_label: 'form_submit',
+      event_category: "engagement",
+      event_label: "form_submit",
       form_name: formName,
       form_location: formLocation,
     },
   }),
 
   serviceView: (serviceName: string, serviceCategory?: string): AnalyticsEvent => ({
-    name: 'service_view',
+    name: "service_view",
     parameters: {
-      event_category: 'content',
-      event_label: 'service_view',
+      event_category: "content",
+      event_label: "service_view",
       service_name: serviceName,
       service_category: serviceCategory,
     },
   }),
 
   locationView: (locationName: string, locationType?: string): AnalyticsEvent => ({
-    name: 'location_view',
+    name: "location_view",
     parameters: {
-      event_category: 'content',
-      event_label: 'location_view',
+      event_category: "content",
+      event_label: "location_view",
       location_name: locationName,
       location_type: locationType,
     },
