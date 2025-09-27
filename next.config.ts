@@ -31,10 +31,6 @@ const nextConfig: NextConfig = {
     domains: [], // Add domains like ['example.com'] if you load external images
     dangerouslyAllowSVG: true, // Allow SVG images (safe for your logo)
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
-    // Reduce quality from default 75 to 65 (approximately 10% more compression)
-    quality: 65,
-    // Enable modern formats for better compression
-    formats: ["image/webp", "image/avif"],
     // Standard responsive breakpoints
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
