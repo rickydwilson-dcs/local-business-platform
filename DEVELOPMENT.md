@@ -19,22 +19,34 @@ npm run build         # Verify production build works
 
 ## Branch Structure & Vercel Deployment Mapping
 
+### **CRITICAL: This is the ONLY correct branch structure for this project**
+
+**NEVER create new branches unless explicitly requested by the project owner.**
+
 ### **GitHub Branches:**
 
-- **`develop`** - Development branch for all new features and bug fixes
-- **`staging`** - Preview environment branch (Vercel Preview)
-- **`main`** - Production environment branch (Vercel Production)
+- **`develop`** - Development environment
+- **`staging`** - Preview environment
+- **`main`** - Production environment
 
 ### **Vercel Deployment Mapping:**
 
-- **Development**: `develop` branch → Local CLI only
-- **Preview**: `staging` branch → `preview-[hash].vercel.app`
-- **Production**: `main` branch → `colossus-scaffolding.vercel.app`
+- **Development Environment**: `develop` branch → Development URL
+- **Preview Environment**: `staging` branch → Preview URL
+- **Production Environment**: `main` branch → Production URL
+
+### **Deployment Rules:**
+
+1. **NEVER create new branches** unless explicitly requested
+2. **When deploying to "production"**, ALWAYS push to the `main` branch
+3. **When deploying to "preview"**, push to the `staging` branch
+4. **When deploying to "development"**, push to the `develop` branch
 
 ### **Terminology Reference:**
 
-- 🟡 **"Staging"** = Vercel Preview environment (`staging` branch)
-- 🔴 **"Production"** = Vercel Production environment (`main` branch)
+- 🟢 **"Development"** = Development environment (`develop` branch)
+- 🟡 **"Preview"** = Preview environment (`staging` branch)
+- 🔴 **"Production"** = Production environment (`main` branch)
 
 **🔒 `staging` and `main` branches are protected and require Pull Requests**
 
@@ -122,13 +134,7 @@ Only after staging is verified and working correctly:
 - ✅ All conversations resolved
 - ✅ Branch must be up to date
 
-After merge to `main`, manually push to production:
-
-```bash
-git checkout main
-git pull origin main
-git push origin main:production
-```
+After merge to `main`, the production deployment is automatic via Vercel.
 
 ## Available Scripts
 
@@ -404,24 +410,18 @@ npm run deploy:production
 - **Quality gates** - Pre-deployment checklist
 - **Post-deployment** - Instructions for final production push
 
-### Manual Production Push
+### Production Deployment
 
-After the PR is approved and merged:
-
-```bash
-git checkout main
-git pull origin main
-git push origin main:production
-```
+After the PR is approved and merged to `main`, Vercel automatically deploys to production.
 
 ## Quick Reference
 
 **Development Flow:**
 
 1. `develop` → Work and test locally
-2. `develop` → `staging` (automatic push)
-3. `staging` → `main` (direct push with automated quality checks)
-4. `main` → `production` (manual push or via deployment script)
+2. `develop` → `staging` (PR required)
+3. `staging` → `main` (PR required with review)
+4. `main` → Production deployment (automatic via Vercel)
 
 **Quality Checkpoints:**
 
