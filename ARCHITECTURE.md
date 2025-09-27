@@ -289,6 +289,114 @@ description: "Professional [service] in [location] - [key benefits]. [Credential
 - Local business information
 ```
 
+### **🖼️ IMAGE OPTIMIZATION STANDARDS**
+
+**Next.js 15 Image Configuration:**
+
+Our `next.config.ts` includes optimized image settings for the scaffolding business:
+
+```typescript
+// next.config.ts - Image optimization configuration
+images: {
+  domains: [], // Add external domains if needed
+  dangerouslyAllowSVG: true, // For logos and icons
+  contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+  deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840], // Responsive breakpoints
+  imageSizes: [16, 32, 48, 64, 96, 128, 256, 384], // Component-level sizes
+  minimumCacheTTL: 60 * 60 * 24 * 365, // 1-year cache for performance
+}
+```
+
+**Image Quality Configuration:**
+
+Use the centralized image quality settings from `/lib/image-config.ts`:
+
+```typescript
+// lib/image-config.ts - Quality settings for 10% better compression
+export const DEFAULT_IMAGE_QUALITY = 65; // Reduced from 75 for ~10% compression
+export const HIGH_QUALITY = 80; // Hero images and critical visuals
+export const LOW_QUALITY = 50; // Thumbnails and non-critical images
+
+// Business-specific configurations
+export const scaffoldingImageConfig = {
+  project: { quality: 65, sizes: "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" },
+  hero: { quality: 80, sizes: "100vw", priority: true },
+  service: { quality: 65, sizes: "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw" },
+  team: { quality: 65, sizes: "(max-width: 768px) 100vw, 300px" },
+};
+```
+
+**Image Component Usage:**
+
+```tsx
+// ✅ CORRECT - Using quality settings and proper sizing
+import Image from 'next/image';
+import { getImageQuality, scaffoldingImageConfig } from '@/lib/image-config';
+
+// Hero image with high quality
+<Image
+  src="/hero-scaffolding.jpg"
+  alt="Professional scaffolding services in Brighton"
+  width={1920}
+  height={1080}
+  quality={getImageQuality('hero')}
+  priority={true}
+  sizes={scaffoldingImageConfig.hero.sizes}
+  className="w-full h-auto"
+/>
+
+// Project gallery image with optimized quality
+<Image
+  src="/project-example.jpg"
+  alt="Residential scaffolding project in East Sussex"
+  width={800}
+  height={600}
+  quality={getImageQuality('content')}
+  sizes={scaffoldingImageConfig.project.sizes}
+  className="rounded-lg"
+/>
+
+// Thumbnail with low quality for faster loading
+<Image
+  src="/service-thumb.jpg"
+  alt="Access scaffolding service thumbnail"
+  width={300}
+  height={200}
+  quality={getImageQuality('thumbnail')}
+  sizes={scaffoldingImageConfig.service.sizes}
+  className="object-cover"
+/>
+```
+
+**Modern Format Support:**
+
+Next.js 15 automatically serves WebP and AVIF formats when browsers support them:
+
+- ✅ **WebP**: ~25-35% smaller than JPEG with same quality
+- ✅ **AVIF**: ~50% smaller than JPEG with better quality
+- ✅ **Automatic fallback**: JPEG for unsupported browsers
+- ✅ **Progressive loading**: Built-in blur placeholders
+
+**Image Optimization Rules:**
+
+- ✅ **Always use Next.js Image component** for all images
+- ✅ **Set explicit width/height** to prevent layout shift
+- ✅ **Use quality settings from lib/image-config.ts** consistently
+- ✅ **Add descriptive alt text** with keywords where natural
+- ✅ **Use priority={true}** for above-fold images only
+- ✅ **Configure responsive sizes** for different breakpoints
+- ❌ **NO direct img tags** except for external/unoptimized images
+- ❌ **NO hardcoded quality values** (use centralized config)
+- ❌ **NO missing alt text** on any images
+
+**Performance Benefits:**
+
+- **10% smaller files**: Quality reduced from 75 to 65
+- **Automatic format conversion**: WebP/AVIF when supported
+- **Responsive images**: Correct size served per device
+- **Lazy loading**: Images load as user scrolls
+- **1-year caching**: Faster repeat visits
+
 ### **📊 SCHEMA MARKUP RULES**
 
 **Required Schema Types:**
