@@ -15,15 +15,38 @@ const nextConfig: NextConfig = {
   // Enable experimental features for better performance
   experimental: {
     mdxRs: true, // Use Rust-based MDX compiler for better performance
+    // Modern browser optimizations
+    forceSwcTransforms: true, // Force SWC for all transforms
+    swcTraceProfiling: false, // Disable profiling in production
   },
-  // Webpack configuration for Leaflet and other client-side libraries
-  webpack: (config, { isServer }) => {
+  // Compiler optimizations for modern browsers
+  compiler: {
+    // Remove console.log in production
+    removeConsole: process.env.NODE_ENV === "production",
+    // Additional SWC optimizations
+    emotion: false, // Disable emotion if not used
+    styledComponents: false, // Disable styled-components if not used
+  },
+  // Webpack configuration for modern browsers and optimizations
+  webpack: (config, { isServer, dev }) => {
+    // Target modern browsers to eliminate polyfills
     if (!isServer) {
+      config.target = ["web", "es2022"];
       config.resolve.fallback = {
         ...config.resolve.fallback,
         fs: false,
       };
     }
+
+    // Optimization for production builds
+    if (!dev && !isServer) {
+      config.optimization = {
+        ...config.optimization,
+        usedExports: true,
+        sideEffects: false,
+      };
+    }
+
     return config;
   },
   // Image optimization configuration for better performance
