@@ -16,7 +16,6 @@ import { CTASection } from "@/components/ui/cta-section";
 import Breadcrumbs from "@/components/ui/breadcrumbs";
 import Schema from "@/components/Schema";
 
-import { LocationHero } from "@/components/ui/location-hero";
 import { LocationServices } from "@/components/ui/location-services";
 import { LocationCoverage } from "@/components/ui/location-coverage";
 import { ServiceCTA } from "@/components/ui/service-cta";
@@ -156,7 +155,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
   const { slug } = await params;
 
   // Try to load MDX first for ALL locations
-  const { frontmatter, content, hasMDX } = await getMDXContent(slug);
+  const { frontmatter, hasMDX } = await getMDXContent(slug);
 
   // UNIFIED TEMPLATE: Show sections based on what content exists
   if (hasMDX && frontmatter) {

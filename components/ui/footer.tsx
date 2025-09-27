@@ -132,6 +132,15 @@ export function Footer() {
                   <div>Professional Scaffolding Services</div>
                 </div>
               </div>
+              <div className="mt-4 pt-4 border-t border-gray-700 text-xs sm:text-sm">
+                <Link href="/privacy-policy" className="hover:text-brand-blue transition-colors">
+                  Privacy Policy
+                </Link>
+                <span className="mx-2 text-gray-500">|</span>
+                <Link href="/cookie-policy" className="hover:text-brand-blue transition-colors">
+                  Cookie Policy
+                </Link>
+              </div>
             </div>
           </div>
         </div>
