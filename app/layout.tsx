@@ -22,13 +22,164 @@ export const metadata: Metadata = {
 const PHONE_NUMBER = "01424 466 661";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const criticalStyles = `
+    /* Critical CSS for above-the-fold content */
+    body {
+      min-height: 100vh;
+      background-color: #ffffff;
+      color: #0f172a;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      font-family: 'GeistSans', Arial, Helvetica, sans-serif;
+    }
+
+    /* Header styles */
+    header {
+      border-bottom: 1px solid #e2e8f0;
+      background-color: #ffffff;
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    }
+
+    /* Header container */
+    header > div {
+      margin-left: auto;
+      margin-right: auto;
+      width: 100%;
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    @media (min-width: 1024px) {
+      header > div {
+        width: 90%;
+      }
+    }
+
+    /* Navigation styles */
+    nav {
+      display: none;
+      align-items: center;
+      gap: 2rem;
+      font-size: 1.125rem;
+      font-weight: 500;
+    }
+
+    @media (min-width: 1024px) {
+      nav {
+        display: flex;
+      }
+    }
+
+    /* Navigation links */
+    nav a {
+      color: #334155;
+      transition: color 0.2s ease-in-out;
+      text-decoration: none;
+    }
+
+    nav a:hover {
+      color: #005A9E;
+    }
+
+    /* Desktop phone and CTA container */
+    .desktop-actions {
+      display: none;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    @media (min-width: 1024px) {
+      .desktop-actions {
+        display: flex;
+      }
+    }
+
+    /* Phone link styles */
+    .phone-link {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #334155;
+      transition: color 0.2s ease-in-out;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .phone-link:hover {
+      color: #005A9E;
+    }
+
+    /* Primary button styles */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.75rem 1.5rem;
+      background-color: #005A9E;
+      color: #ffffff;
+      font-weight: 600;
+      border-radius: 0.5rem;
+      transition: all 0.2s ease-in-out;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary:hover {
+      background-color: #004d87;
+    }
+
+    .btn-primary:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px #005A9E, 0 0 0 4px rgba(0, 90, 158, 0.1);
+    }
+
+    /* Logo container */
+    .logo-container {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    /* Icon styles */
+    .phone-icon {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+
+    /* Main content container - matches PageLayout */
+    main {
+      margin-left: auto;
+      margin-right: auto;
+      width: 100%;
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+      padding-top: 2.5rem;
+      padding-bottom: 2.5rem;
+    }
+
+    @media (min-width: 1024px) {
+      main {
+        width: 90%;
+      }
+    }
+  `;
+
   return (
     <html lang="en">
+      <head>
+        <style dangerouslySetInnerHTML={{ __html: criticalStyles }} />
+      </head>
       <body className="min-h-screen bg-white text-slate-900 antialiased">
         <header className="border-b bg-white shadow-sm">
           <div className="mx-auto w-full lg:w-[90%] px-6 py-4 flex items-center justify-between">
             {/* Logo */}
-            <Link href="/" className="flex items-center">
+            <Link href="/" className="logo-container">
               <div style={{ position: "relative", width: 180, height: 48 }}>
                 <Image
                   src="/Colossus-Scaffolding-Logo.svg"
@@ -65,12 +216,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </nav>
 
             {/* Desktop Phone & CTA */}
-            <div className="hidden lg:flex items-center gap-4">
-              <a
-                href={`tel:${PHONE_NUMBER}`}
-                className="flex items-center gap-2 text-slate-700 hover:text-brand-blue transition-colors"
-              >
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+            <div className="desktop-actions">
+              <a href={`tel:${PHONE_NUMBER}`} className="phone-link">
+                <svg className="phone-icon" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
                 </svg>
                 <span className="font-medium">{PHONE_NUMBER}</span>
