@@ -5,7 +5,7 @@
 
 export interface AnalyticsEvent {
   name: string;
-  parameters?: Record<string, any>;
+  parameters?: Record<string, unknown>;
   value?: number;
   currency?: string;
   timestamp?: number;
@@ -22,7 +22,7 @@ export interface PageViewEvent {
 }
 
 export interface ConversionEvent extends AnalyticsEvent {
-  conversion_action: 'quote_request' | 'phone_call' | 'email_contact' | 'form_submit';
+  conversion_action: "quote_request" | "phone_call" | "email_contact" | "form_submit";
   conversion_label?: string;
   conversion_value?: number;
   conversion_currency?: string;
@@ -59,10 +59,10 @@ export interface GA4Event {
   client_id: string;
   user_id?: string;
   timestamp_micros?: number;
-  user_properties?: Record<string, { value: any }>;
+  user_properties?: Record<string, { value: unknown }>;
   events: Array<{
     name: string;
-    params?: Record<string, any>;
+    params?: Record<string, unknown>;
   }>;
 }
 
@@ -77,7 +77,7 @@ export interface FacebookPixelEvent {
       fbc?: string;
       fbp?: string;
     };
-    custom_data?: Record<string, any>;
+    custom_data?: Record<string, unknown>;
   }>;
   test_event_code?: string;
 }
@@ -101,7 +101,7 @@ export interface AnalyticsResponse {
   debug?: {
     consent_state?: ConsentState;
     feature_flags?: Partial<FeatureFlags>;
-    event_data?: any;
+    event_data?: unknown;
   };
 }
 
@@ -121,7 +121,7 @@ export interface DebugPanelData {
   };
 }
 
-export type ConsentLevel = 'strict' | 'functional' | 'analytics' | 'marketing';
+export type ConsentLevel = "strict" | "functional" | "analytics" | "marketing";
 
 export interface ConsentBannerConfig {
   title: string;
@@ -142,20 +142,20 @@ export interface AnalyticsClientOptions {
 
 // Utility types for type safety
 export type EventName =
-  | 'page_view'
-  | 'quote_request'
-  | 'phone_call'
-  | 'email_contact'
-  | 'form_submit'
-  | 'service_view'
-  | 'location_view'
-  | 'contact_form_start'
-  | 'contact_form_complete'
-  | 'download'
-  | 'search'
-  | 'error';
+  | "page_view"
+  | "quote_request"
+  | "phone_call"
+  | "email_contact"
+  | "form_submit"
+  | "service_view"
+  | "location_view"
+  | "contact_form_start"
+  | "contact_form_complete"
+  | "download"
+  | "search"
+  | "error";
 
-export type PlatformName = 'ga4' | 'facebook' | 'google_ads';
+export type PlatformName = "ga4" | "facebook" | "google_ads";
 
 // Environment variable validation
 export interface RequiredEnvVars {

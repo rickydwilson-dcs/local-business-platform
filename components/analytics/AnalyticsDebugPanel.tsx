@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
 /**
  * Analytics Debug Panel Component
  * Development tool for testing and debugging analytics implementation
  */
 
-import { useState, useEffect } from 'react';
-import { useConsent } from './ConsentManager';
-import { DebugPanelData, FeatureFlags } from '@/lib/analytics/types';
+import { useState, useEffect, useCallback } from "react";
+import { useConsent } from "./ConsentManager";
+import { DebugPanelData } from "@/lib/analytics/types";
 
 interface AnalyticsDebugPanelProps {
   enabled?: boolean;
@@ -15,45 +15,40 @@ interface AnalyticsDebugPanelProps {
 }
 
 export function AnalyticsDebugPanel({
-  enabled = process.env.NODE_ENV === 'development',
-  className = ''
+  enabled = process.env.NODE_ENV === "development",
+  className = "",
 }: AnalyticsDebugPanelProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [debugData, setDebugData] = useState<DebugPanelData | null>(null);
   const [loading, setLoading] = useState(false);
-  const [testResults, setTestResults] = useState<any[]>([]);
+  const [testResults, setTestResults] = useState<unknown[]>([]);
   const { consent } = useConsent();
 
-  // Don't render in production unless explicitly enabled
-  if (!enabled) {
-    return null;
-  }
-
   // Load debug data from API
-  const loadDebugData = async () => {
+  const loadDebugData = useCallback(async () => {
     setLoading(true);
     try {
-      const response = await fetch('/api/analytics/debug');
+      const response = await fetch("/api/analytics/debug");
       const data = await response.json();
       setDebugData(data.data);
     } catch (error) {
-      console.error('Failed to load debug data:', error);
+      console.error("Failed to load debug data:", error);
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   // Test page view tracking
   const testPageView = async () => {
     setLoading(true);
     try {
-      const response = await fetch('/api/analytics/debug', {
-        method: 'POST',
+      const response = await fetch("/api/analytics/debug", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          action: 'test_page_view',
+          action: "test_page_view",
           page_location: window.location.href,
           page_title: document.title,
           client_id: `debug.${Date.now()}`,
@@ -62,9 +57,9 @@ export function AnalyticsDebugPanel({
       });
 
       const result = await response.json();
-      setTestResults(prev => [result, ...prev.slice(0, 4)]); // Keep last 5 results
+      setTestResults((prev) => [result, ...prev.slice(0, 4)]); // Keep last 5 results
     } catch (error) {
-      console.error('Page view test failed:', error);
+      console.error("Page view test failed:", error);
     } finally {
       setLoading(false);
     }
@@ -74,13 +69,13 @@ export function AnalyticsDebugPanel({
   const testConversion = async () => {
     setLoading(true);
     try {
-      const response = await fetch('/api/analytics/debug', {
-        method: 'POST',
+      const response = await fetch("/api/analytics/debug", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          action: 'test_conversion',
+          action: "test_conversion",
           page_location: window.location.href,
           client_id: `debug.${Date.now()}`,
           base_url: window.location.origin,
@@ -88,9 +83,9 @@ export function AnalyticsDebugPanel({
       });
 
       const result = await response.json();
-      setTestResults(prev => [result, ...prev.slice(0, 4)]); // Keep last 5 results
+      setTestResults((prev) => [result, ...prev.slice(0, 4)]); // Keep last 5 results
     } catch (error) {
-      console.error('Conversion test failed:', error);
+      console.error("Conversion test failed:", error);
     } finally {
       setLoading(false);
     }
@@ -100,18 +95,18 @@ export function AnalyticsDebugPanel({
   const validateConfig = async () => {
     setLoading(true);
     try {
-      const response = await fetch('/api/analytics/debug', {
-        method: 'POST',
+      const response = await fetch("/api/analytics/debug", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify({ action: 'validate_config' }),
+        body: JSON.stringify({ action: "validate_config" }),
       });
 
       const result = await response.json();
-      setTestResults(prev => [result, ...prev.slice(0, 4)]); // Keep last 5 results
+      setTestResults((prev) => [result, ...prev.slice(0, 4)]); // Keep last 5 results
     } catch (error) {
-      console.error('Configuration validation failed:', error);
+      console.error("Configuration validation failed:", error);
     } finally {
       setLoading(false);
     }
@@ -127,7 +122,12 @@ export function AnalyticsDebugPanel({
     if (isOpen && !debugData) {
       loadDebugData();
     }
-  }, [isOpen]);
+  }, [isOpen, debugData, loadDebugData]);
+
+  // Don't render in production unless explicitly enabled
+  if (!enabled) {
+    return null;
+  }
 
   return (
     <div className={`fixed bottom-4 right-4 z-50 ${className}`}>
@@ -137,7 +137,7 @@ export function AnalyticsDebugPanel({
         className="bg-purple-600 text-white px-4 py-2 rounded-lg shadow-lg hover:bg-purple-700 transition-colors"
         title="Analytics Debug Panel"
       >
-        {isOpen ? '✕' : '📊'} Debug
+        {isOpen ? "✕" : "📊"} Debug
       </button>
 
       {/* Debug Panel */}
@@ -156,20 +156,38 @@ export function AnalyticsDebugPanel({
                 <div className="space-y-1 text-sm">
                   <div className="flex justify-between">
                     <span>Analytics Enabled:</span>
-                    <span className={debugData?.featureFlags.FEATURE_ANALYTICS_ENABLED ? 'text-green-600' : 'text-red-600'}>
-                      {debugData?.featureFlags.FEATURE_ANALYTICS_ENABLED ? 'Yes' : 'No'}
+                    <span
+                      className={
+                        debugData?.featureFlags.FEATURE_ANALYTICS_ENABLED
+                          ? "text-green-600"
+                          : "text-red-600"
+                      }
+                    >
+                      {debugData?.featureFlags.FEATURE_ANALYTICS_ENABLED ? "Yes" : "No"}
                     </span>
                   </div>
                   <div className="flex justify-between">
                     <span>Server Tracking:</span>
-                    <span className={debugData?.featureFlags.FEATURE_SERVER_TRACKING ? 'text-green-600' : 'text-red-600'}>
-                      {debugData?.featureFlags.FEATURE_SERVER_TRACKING ? 'Yes' : 'No'}
+                    <span
+                      className={
+                        debugData?.featureFlags.FEATURE_SERVER_TRACKING
+                          ? "text-green-600"
+                          : "text-red-600"
+                      }
+                    >
+                      {debugData?.featureFlags.FEATURE_SERVER_TRACKING ? "Yes" : "No"}
                     </span>
                   </div>
                   <div className="flex justify-between">
                     <span>Consent Banner:</span>
-                    <span className={debugData?.featureFlags.FEATURE_CONSENT_BANNER ? 'text-green-600' : 'text-red-600'}>
-                      {debugData?.featureFlags.FEATURE_CONSENT_BANNER ? 'Yes' : 'No'}
+                    <span
+                      className={
+                        debugData?.featureFlags.FEATURE_CONSENT_BANNER
+                          ? "text-green-600"
+                          : "text-red-600"
+                      }
+                    >
+                      {debugData?.featureFlags.FEATURE_CONSENT_BANNER ? "Yes" : "No"}
                     </span>
                   </div>
                 </div>
@@ -182,14 +200,14 @@ export function AnalyticsDebugPanel({
                   <div className="space-y-1 text-sm">
                     <div className="flex justify-between">
                       <span>Analytics:</span>
-                      <span className={consent.analytics ? 'text-green-600' : 'text-red-600'}>
-                        {consent.analytics ? 'Granted' : 'Denied'}
+                      <span className={consent.analytics ? "text-green-600" : "text-red-600"}>
+                        {consent.analytics ? "Granted" : "Denied"}
                       </span>
                     </div>
                     <div className="flex justify-between">
                       <span>Marketing:</span>
-                      <span className={consent.marketing ? 'text-green-600' : 'text-red-600'}>
-                        {consent.marketing ? 'Granted' : 'Denied'}
+                      <span className={consent.marketing ? "text-green-600" : "text-red-600"}>
+                        {consent.marketing ? "Granted" : "Denied"}
                       </span>
                     </div>
                     <div className="text-xs text-gray-600">
@@ -207,32 +225,50 @@ export function AnalyticsDebugPanel({
                 <div className="space-y-1 text-sm">
                   <div className="flex justify-between">
                     <span>GA4:</span>
-                    <span className={
-                      debugData?.platformStatus.ga4?.configured && debugData?.platformStatus.ga4?.enabled
-                        ? 'text-green-600' : 'text-yellow-600'
-                    }>
-                      {debugData?.platformStatus.ga4?.configured && debugData?.platformStatus.ga4?.enabled
-                        ? 'Ready' : 'Disabled/Misconfigured'}
+                    <span
+                      className={
+                        debugData?.platformStatus.ga4?.configured &&
+                        debugData?.platformStatus.ga4?.enabled
+                          ? "text-green-600"
+                          : "text-yellow-600"
+                      }
+                    >
+                      {debugData?.platformStatus.ga4?.configured &&
+                      debugData?.platformStatus.ga4?.enabled
+                        ? "Ready"
+                        : "Disabled/Misconfigured"}
                     </span>
                   </div>
                   <div className="flex justify-between">
                     <span>Facebook:</span>
-                    <span className={
-                      debugData?.platformStatus.facebook?.configured && debugData?.platformStatus.facebook?.enabled
-                        ? 'text-green-600' : 'text-yellow-600'
-                    }>
-                      {debugData?.platformStatus.facebook?.configured && debugData?.platformStatus.facebook?.enabled
-                        ? 'Ready' : 'Disabled/Misconfigured'}
+                    <span
+                      className={
+                        debugData?.platformStatus.facebook?.configured &&
+                        debugData?.platformStatus.facebook?.enabled
+                          ? "text-green-600"
+                          : "text-yellow-600"
+                      }
+                    >
+                      {debugData?.platformStatus.facebook?.configured &&
+                      debugData?.platformStatus.facebook?.enabled
+                        ? "Ready"
+                        : "Disabled/Misconfigured"}
                     </span>
                   </div>
                   <div className="flex justify-between">
                     <span>Google Ads:</span>
-                    <span className={
-                      debugData?.platformStatus.google_ads?.configured && debugData?.platformStatus.google_ads?.enabled
-                        ? 'text-green-600' : 'text-yellow-600'
-                    }>
-                      {debugData?.platformStatus.google_ads?.configured && debugData?.platformStatus.google_ads?.enabled
-                        ? 'Ready' : 'Disabled/Misconfigured'}
+                    <span
+                      className={
+                        debugData?.platformStatus.google_ads?.configured &&
+                        debugData?.platformStatus.google_ads?.enabled
+                          ? "text-green-600"
+                          : "text-yellow-600"
+                      }
+                    >
+                      {debugData?.platformStatus.google_ads?.configured &&
+                      debugData?.platformStatus.google_ads?.enabled
+                        ? "Ready"
+                        : "Disabled/Misconfigured"}
                     </span>
                   </div>
                 </div>
@@ -291,23 +327,23 @@ export function AnalyticsDebugPanel({
                     <div
                       key={index}
                       className={`p-2 rounded text-xs ${
-                        result.success ? 'bg-green-50 text-green-800' : 'bg-red-50 text-red-800'
+                        result.success ? "bg-green-50 text-green-800" : "bg-red-50 text-red-800"
                       }`}
                     >
                       <div className="font-medium">
-                        {result.test || 'Test'} - {result.success ? 'Success' : 'Failed'}
+                        {result.test || "Test"} - {result.success ? "Success" : "Failed"}
                       </div>
-                      {result.error && (
-                        <div className="mt-1 text-xs">{result.error}</div>
-                      )}
+                      {result.error && <div className="mt-1 text-xs">{result.error}</div>}
                       {result.result?.platforms && (
                         <div className="mt-1 space-y-1">
-                          {Object.entries(result.result.platforms).map(([platform, status]: [string, any]) => (
-                            <div key={platform} className="flex justify-between">
-                              <span>{platform}:</span>
-                              <span>{status.success ? '✓' : '✗'}</span>
-                            </div>
-                          ))}
+                          {Object.entries(result.result.platforms).map(
+                            ([platform, status]: [string, { success: boolean }]) => (
+                              <div key={platform} className="flex justify-between">
+                                <span>{platform}:</span>
+                                <span>{status.success ? "✓" : "✗"}</span>
+                              </div>
+                            )
+                          )}
                         </div>
                       )}
                     </div>
@@ -334,16 +370,16 @@ export function AnalyticsDebugPanel({
 export function AnalyticsStatus() {
   const { consent } = useConsent();
 
-  if (process.env.NODE_ENV !== 'development') {
+  if (process.env.NODE_ENV !== "development") {
     return null;
   }
 
   return (
     <div className="fixed top-4 right-4 bg-black bg-opacity-75 text-white text-xs p-2 rounded z-40">
-      Analytics: {consent ?
-        `A:${consent.analytics ? '✓' : '✗'} M:${consent.marketing ? '✓' : '✗'}` :
-        'No consent'
-      }
+      Analytics:{" "}
+      {consent
+        ? `A:${consent.analytics ? "✓" : "✗"} M:${consent.marketing ? "✓" : "✗"}`
+        : "No consent"}
     </div>
   );
 }

@@ -3,16 +3,16 @@
  * Handles consent-aware page view tracking and analytics processing
  */
 
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from "next/server";
 
 // Feature flags for analytics control
 function getFeatureFlags() {
   return {
-    FEATURE_ANALYTICS_ENABLED: process.env.FEATURE_ANALYTICS_ENABLED === 'true',
-    FEATURE_SERVER_TRACKING: process.env.FEATURE_SERVER_TRACKING === 'true',
-    FEATURE_GA4_ENABLED: process.env.FEATURE_GA4_ENABLED === 'true',
-    FEATURE_FACEBOOK_PIXEL: process.env.FEATURE_FACEBOOK_PIXEL === 'true',
-    FEATURE_GOOGLE_ADS: process.env.FEATURE_GOOGLE_ADS === 'true',
+    FEATURE_ANALYTICS_ENABLED: process.env.FEATURE_ANALYTICS_ENABLED === "true",
+    FEATURE_SERVER_TRACKING: process.env.FEATURE_SERVER_TRACKING === "true",
+    FEATURE_GA4_ENABLED: process.env.FEATURE_GA4_ENABLED === "true",
+    FEATURE_FACEBOOK_PIXEL: process.env.FEATURE_FACEBOOK_PIXEL === "true",
+    FEATURE_GOOGLE_ADS: process.env.FEATURE_GOOGLE_ADS === "true",
   };
 }
 
@@ -28,14 +28,14 @@ function parseConsent(cookieValue?: string) {
 }
 
 // Check if user has consented to analytics
-function hasAnalyticsConsent(consent: any): boolean {
+function hasAnalyticsConsent(consent: ConsentState | null): boolean {
   return consent?.analytics === true || consent?.marketing === true;
 }
 
 // Generate or extract client ID for tracking
 function getClientId(request: NextRequest): string {
   // Try to get existing client ID from cookie
-  const existingClientId = request.cookies.get('_ga_client_id')?.value;
+  const existingClientId = request.cookies.get("_ga_client_id")?.value;
   if (existingClientId) {
     return existingClientId;
   }
@@ -47,11 +47,12 @@ function getClientId(request: NextRequest): string {
 // Extract user agent and IP for tracking
 function extractUserData(request: NextRequest) {
   return {
-    userAgent: request.headers.get('user-agent') || undefined,
-    ip: request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
-        request.headers.get('x-real-ip') ||
-        undefined,
-    referrer: request.headers.get('referer') || undefined,
+    userAgent: request.headers.get("user-agent") || undefined,
+    ip:
+      request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+      request.headers.get("x-real-ip") ||
+      undefined,
+    referrer: request.headers.get("referer") || undefined,
   };
 }
 
@@ -61,12 +62,12 @@ async function sendAnalyticsEvent(
   title: string,
   clientId: string,
   userData: { userAgent?: string; ip?: string; referrer?: string },
-  consent: any
+  consent: ConsentState | null
 ) {
   try {
     // Build the analytics payload
     const payload = {
-      event: 'page_view',
+      event: "page_view",
       page_location: url,
       page_title: title,
       page_referrer: userData.referrer,
@@ -78,20 +79,20 @@ async function sendAnalyticsEvent(
     };
 
     // Send to our analytics API endpoint
-    const analyticsUrl = new URL('/api/analytics/track', url);
+    const analyticsUrl = new URL("/api/analytics/track", url);
 
     // Fire and forget - don't wait for response to avoid slowing down the request
     fetch(analyticsUrl.toString(), {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(payload),
     }).catch((error) => {
-      console.error('Analytics tracking failed:', error);
+      console.error("Analytics tracking failed:", error);
     });
   } catch (error) {
-    console.error('Analytics payload preparation failed:', error);
+    console.error("Analytics payload preparation failed:", error);
   }
 }
 
@@ -113,19 +114,19 @@ export async function middleware(request: NextRequest) {
   // - Next.js internals
   // - Favicon and robots.txt
   if (
-    pathname.startsWith('/api/') ||
-    pathname.startsWith('/_next/') ||
-    pathname.startsWith('/static/') ||
-    pathname.includes('.') && !pathname.endsWith('.html') ||
-    pathname === '/favicon.ico' ||
-    pathname === '/robots.txt' ||
-    pathname === '/sitemap.xml'
+    pathname.startsWith("/api/") ||
+    pathname.startsWith("/_next/") ||
+    pathname.startsWith("/static/") ||
+    (pathname.includes(".") && !pathname.endsWith(".html")) ||
+    pathname === "/favicon.ico" ||
+    pathname === "/robots.txt" ||
+    pathname === "/sitemap.xml"
   ) {
     return NextResponse.next();
   }
 
   // Parse consent from cookies
-  const consentCookie = request.cookies.get('analytics_consent')?.value;
+  const consentCookie = request.cookies.get("analytics_consent")?.value;
   const consent = parseConsent(consentCookie);
 
   // Check if user has consented to analytics tracking
@@ -142,12 +143,12 @@ export async function middleware(request: NextRequest) {
   const clientId = getClientId(request);
 
   // Set client ID cookie if it's new (expires in 2 years)
-  if (!request.cookies.get('_ga_client_id')?.value) {
-    response.cookies.set('_ga_client_id', clientId, {
+  if (!request.cookies.get("_ga_client_id")?.value) {
+    response.cookies.set("_ga_client_id", clientId, {
       maxAge: 2 * 365 * 24 * 60 * 60, // 2 years
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'lax',
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
     });
   }
 
@@ -167,13 +168,13 @@ export async function middleware(request: NextRequest) {
 // Generate page title based on pathname (fallback when we can't get the real title)
 function generatePageTitle(pathname: string): string {
   const titleMap: Record<string, string> = {
-    '/': 'Home - Colossus Scaffolding',
-    '/about': 'About - Colossus Scaffolding',
-    '/contact': 'Contact - Colossus Scaffolding',
-    '/services': 'Services - Colossus Scaffolding',
-    '/locations': 'Locations - Colossus Scaffolding',
-    '/projects': 'Projects - Colossus Scaffolding',
-    '/health-safety': 'Health & Safety - Colossus Scaffolding',
+    "/": "Home - Colossus Scaffolding",
+    "/about": "About - Colossus Scaffolding",
+    "/contact": "Contact - Colossus Scaffolding",
+    "/services": "Services - Colossus Scaffolding",
+    "/locations": "Locations - Colossus Scaffolding",
+    "/projects": "Projects - Colossus Scaffolding",
+    "/health-safety": "Health & Safety - Colossus Scaffolding",
   };
 
   // Check for exact matches first
@@ -182,23 +183,23 @@ function generatePageTitle(pathname: string): string {
   }
 
   // Handle dynamic routes
-  if (pathname.startsWith('/services/')) {
-    const service = pathname.split('/')[2]?.replace(/-/g, ' ') || 'Service';
+  if (pathname.startsWith("/services/")) {
+    const service = pathname.split("/")[2]?.replace(/-/g, " ") || "Service";
     return `${service.charAt(0).toUpperCase() + service.slice(1)} - Colossus Scaffolding`;
   }
 
-  if (pathname.startsWith('/locations/')) {
-    const location = pathname.split('/')[2]?.replace(/-/g, ' ') || 'Location';
+  if (pathname.startsWith("/locations/")) {
+    const location = pathname.split("/")[2]?.replace(/-/g, " ") || "Location";
     return `${location.charAt(0).toUpperCase() + location.slice(1)} Scaffolding - Colossus Scaffolding`;
   }
 
-  if (pathname.startsWith('/contact/')) {
-    const section = pathname.split('/')[2]?.replace(/-/g, ' ') || 'Contact';
+  if (pathname.startsWith("/contact/")) {
+    const section = pathname.split("/")[2]?.replace(/-/g, " ") || "Contact";
     return `${section.charAt(0).toUpperCase() + section.slice(1)} Contact - Colossus Scaffolding`;
   }
 
   // Fallback
-  return `${pathname.slice(1).charAt(0).toUpperCase() + pathname.slice(2).replace(/-/g, ' ')} - Colossus Scaffolding`;
+  return `${pathname.slice(1).charAt(0).toUpperCase() + pathname.slice(2).replace(/-/g, " ")} - Colossus Scaffolding`;
 }
 
 // Configure which paths the middleware should run on
@@ -212,6 +213,6 @@ export const config = {
      * - favicon.ico (favicon file)
      * - public folder files (images, etc.)
      */
-    '/((?!api|_next/static|_next/image|favicon.ico|public).*)',
+    "/((?!api|_next/static|_next/image|favicon.ico|public).*)",
   ],
 };
