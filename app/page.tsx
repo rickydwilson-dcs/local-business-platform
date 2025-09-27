@@ -55,10 +55,10 @@ export default function HomePage() {
     telephone: "+441424466661",
     address: {
       "@type": "PostalAddress",
-      streetAddress: "Unit 7, Ivyhouse Lane",
-      addressLocality: "Hastings",
+      streetAddress: "Office 7, 15-20 Gresley Road",
+      addressLocality: "St Leonards On Sea",
       addressRegion: "East Sussex",
-      postalCode: "TN35 4NN",
+      postalCode: "TN38 9PL",
       addressCountry: "GB",
     },
     geo: {

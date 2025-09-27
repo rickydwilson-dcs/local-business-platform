@@ -399,6 +399,15 @@ export default function ContactPage() {
                       </Link>
                     </p>
                   </div>
+
+                  <div>
+                    <h3 className="font-semibold text-gray-900 mb-2">🏢 Registered Office</h3>
+                    <div className="text-gray-700 space-y-1">
+                      <p>Office 7, 15-20 Gresley Road</p>
+                      <p>St Leonards On Sea</p>
+                      <p>East Sussex TN38 9PL</p>
+                    </div>
+                  </div>
                 </div>
               </div>
 
