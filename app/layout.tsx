@@ -4,6 +4,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import MobileMenu from "@/components/ui/mobile-menu";
 import { LocationsDropdown } from "@/components/ui/locations-dropdown";
+import { ConsentManager, Analytics, AnalyticsDebugPanel } from "@/components/analytics";
 
 export const metadata: Metadata = {
   metadataBase: new URL(
@@ -78,6 +79,29 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </header>
 
         {children}
+
+        {/* Analytics System */}
+        <ConsentManager
+          enabled={true}
+          config={{
+            title: "We value your privacy",
+            description: "We use cookies to provide better services and improve your experience. Choose which cookies to accept.",
+            privacyPolicyUrl: "/privacy-policy",
+            cookiePolicyUrl: "/cookie-policy",
+          }}
+          reloadOnConsent={false}
+        />
+
+        <Analytics
+          gaId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}
+          facebookPixelId={process.env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID}
+          googleAdsId={process.env.NEXT_PUBLIC_GOOGLE_ADS_CUSTOMER_ID}
+          debugMode={process.env.NODE_ENV === 'development'}
+        />
+
+        <AnalyticsDebugPanel
+          enabled={process.env.NODE_ENV === 'development'}
+        />
       </body>
     </html>
   );
