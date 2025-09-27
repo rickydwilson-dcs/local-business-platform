@@ -54,10 +54,10 @@ export default function AboutPage() {
     telephone: "+441424466661",
     address: {
       "@type": "PostalAddress",
-      streetAddress: "Unit 7, Ivyhouse Lane",
-      addressLocality: "Hastings",
+      streetAddress: "Office 7, 15-20 Gresley Road",
+      addressLocality: "St Leonards On Sea",
       addressRegion: "East Sussex",
-      postalCode: "TN35 4NN",
+      postalCode: "TN38 9PL",
       addressCountry: "GB",
     },
     geo: {
@@ -290,11 +290,11 @@ export default function AboutPage() {
                 </p>
 
                 <p className="mb-6">
-                  From our headquarters in Hastings, we&apos;ve built our reputation project by
-                  project, always putting safety first and maintaining the highest professional
-                  standards. Our CISRS qualified teams understand that every scaffold we erect
-                  supports not just buildings, but the livelihoods and safety of the people who work
-                  on them.
+                  From our registered office in St Leonards On Sea, we&apos;ve built our reputation
+                  project by project, always putting safety first and maintaining the highest
+                  professional standards. Our CISRS qualified teams understand that every scaffold
+                  we erect supports not just buildings, but the livelihoods and safety of the people
+                  who work on them.
                 </p>
 
                 <p>
@@ -321,6 +321,93 @@ export default function AboutPage() {
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Company Information Section */}
+      <section className="section-standard bg-white">
+        <div className="container-standard">
+          <div className="text-center mb-12">
+            <h2 className="heading-section">Company Information</h2>
+            <p className="text-lg text-gray-800 mx-auto w-full lg:w-[90%]">
+              Professional scaffolding specialists established in 2009, serving the South East UK
+              with integrity and expertise.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mx-auto w-full lg:w-[90%]">
+            <div className="text-center p-6 bg-gray-50 rounded-2xl">
+              <div className="w-16 h-16 bg-brand-blue rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg
+                  className="w-8 h-8 text-white"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
+                  />
+                </svg>
+              </div>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">Registered Office</h3>
+              <div className="text-gray-700 space-y-1">
+                <p>Office 7, 15-20 Gresley Road</p>
+                <p>St Leonards On Sea</p>
+                <p>East Sussex TN38 9PL</p>
+              </div>
+            </div>
+
+            <div className="text-center p-6 bg-gray-50 rounded-2xl">
+              <div className="w-16 h-16 bg-brand-blue rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg
+                  className="w-8 h-8 text-white"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              </div>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">Established</h3>
+              <p className="text-2xl font-bold text-brand-blue">2009</p>
+              <p className="text-gray-700">15+ Years Experience</p>
+            </div>
+
+            <div className="text-center p-6 bg-gray-50 rounded-2xl">
+              <div className="w-16 h-16 bg-brand-blue rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg
+                  className="w-8 h-8 text-white"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                  />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                  />
+                </svg>
+              </div>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">Service Coverage</h3>
+              <p className="text-gray-700">East & West Sussex</p>
+              <p className="text-gray-700">Kent & Surrey</p>
             </div>
           </div>
         </div>
