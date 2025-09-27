@@ -34,7 +34,7 @@ export class GoogleAdsAnalytics {
         gclid: gclid,
       };
 
-      return await this.sendConversion(conversionData);
+      return await this.sendConversion(conversionData as unknown as Record<string, unknown>);
     } catch (error) {
       console.error("Google Ads conversion tracking error:", error);
       return { success: false, error: error instanceof Error ? error.message : "Unknown error" };
@@ -70,7 +70,7 @@ export class GoogleAdsAnalytics {
         user_identifiers: hashedCustomerData,
       };
 
-      return await this.sendConversion(conversionData);
+      return await this.sendConversion(conversionData as unknown as Record<string, unknown>);
     } catch (error) {
       console.error("Google Ads enhanced conversion tracking error:", error);
       return { success: false, error: error instanceof Error ? error.message : "Unknown error" };

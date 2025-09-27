@@ -61,21 +61,6 @@ export function ConsentManager({
     });
   }, []);
 
-  // Load existing consent on mount
-  useEffect(() => {
-    if (!enabled) return;
-
-    const existingConsent = loadConsentFromStorage();
-
-    if (existingConsent) {
-      // Don't show banner if user has already consented
-      setShowBanner(false);
-    } else {
-      // Show banner if no consent found
-      setShowBanner(true);
-    }
-  }, [enabled, loadConsentFromStorage]);
-
   // Load consent from both cookie and localStorage
   const loadConsentFromStorage = useCallback((): ConsentState | null => {
     try {
@@ -98,6 +83,21 @@ export function ConsentManager({
 
     return null;
   }, []);
+
+  // Load existing consent on mount
+  useEffect(() => {
+    if (!enabled) return;
+
+    const existingConsent = loadConsentFromStorage();
+
+    if (existingConsent) {
+      // Don't show banner if user has already consented
+      setShowBanner(false);
+    } else {
+      // Show banner if no consent found
+      setShowBanner(true);
+    }
+  }, [enabled, loadConsentFromStorage]);
 
   // Save consent to both cookie and localStorage
   const saveConsentToStorage = useCallback((consent: ConsentState) => {

@@ -4,7 +4,7 @@
  */
 
 import { NextRequest, NextResponse } from "next/server";
-import { DebugPanelData, FeatureFlags } from "@/lib/analytics/types";
+import { DebugPanelData, FeatureFlags, ConsentState } from "@/lib/analytics/types";
 
 // Get feature flags from environment
 function getFeatureFlags(): FeatureFlags {
@@ -178,7 +178,7 @@ async function testPageViewTracking(testData: Record<string, unknown>) {
 
   try {
     const response = await fetch(
-      new URL("/api/analytics/track", testData.base_url || "http://localhost:3001"),
+      new URL("/api/analytics/track", (testData.base_url as string) || "http://localhost:3001"),
       {
         method: "POST",
         headers: {
@@ -232,7 +232,7 @@ async function testConversionTracking(testData: Record<string, unknown>) {
 
   try {
     const response = await fetch(
-      new URL("/api/analytics/track", testData.base_url || "http://localhost:3001"),
+      new URL("/api/analytics/track", (testData.base_url as string) || "http://localhost:3001"),
       {
         method: "POST",
         headers: {
@@ -310,7 +310,7 @@ async function validateAllConfigurations() {
 // Generate recommendations based on current state
 function generateRecommendations(
   flags: FeatureFlags,
-  platformStatus: Record<string, unknown>,
+  platformStatus: ReturnType<typeof checkPlatformConfigurations>,
   consentState: ConsentState | null
 ): string[] {
   const recommendations: string[] = [];
