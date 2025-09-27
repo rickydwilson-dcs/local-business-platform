@@ -397,6 +397,58 @@ Next.js 15 automatically serves WebP and AVIF formats when browsers support them
 - **Lazy loading**: Images load as user scrolls
 - **1-year caching**: Faster repeat visits
 
+## **⚡ PERFORMANCE OPTIMIZATION STANDARDS**
+
+### **Critical CSS Inlining**
+
+**Performance Strategy**: Critical above-the-fold CSS is inlined directly in `app/layout.tsx` to eliminate render-blocking CSS and reduce critical path latency by 100-150ms.
+
+**Critical CSS Implementation:**
+
+```typescript
+// app/layout.tsx - Critical CSS inlined in <head>
+const criticalStyles = `
+  /* Above-the-fold styles only */
+  body { /* Base styles */ }
+  header { /* Header container */ }
+  nav { /* Navigation */ }
+  .btn-primary { /* CTA buttons */ }
+  main { /* Content container */ }
+`;
+
+return (
+  <html lang="en">
+    <head>
+      <style dangerouslySetInnerHTML={{ __html: criticalStyles }} />
+    </head>
+    {/* ... rest of layout */}
+  </html>
+);
+```
+
+**Critical CSS Rules:**
+
+- ✅ **INLINE**: Above-the-fold styles (body, header, nav, main container, primary buttons)
+- ✅ **RESPONSIVE**: Include mobile/desktop breakpoints for critical elements
+- ✅ **EXACT MATCH**: Styles must match current Tailwind output exactly
+- ❌ **NON-CRITICAL**: Keep forms, utilities, page-specific styles in globals.css
+- ❌ **OVER-INLINING**: Only include styles visible before user interaction
+
+**Target Elements:**
+
+- Body base styles (background, text color, font smoothing)
+- Header layout and styling
+- Navigation container and links with hover states
+- Desktop phone/CTA container positioning
+- Main content container responsive layout
+- Primary button styling and interactions
+
+**Performance Impact:**
+
+- **Expected Reduction**: 100-150ms critical path latency
+- **Trade-off**: ~2KB additional inline CSS for faster initial render
+- **Benefit**: Above-the-fold content styled immediately without CSS blocking
+
 ### **📊 SCHEMA MARKUP RULES**
 
 **Required Schema Types:**
