@@ -17,14 +17,26 @@ npm run type-check    # Check for TypeScript errors
 npm run build         # Verify production build works
 ```
 
-## Branch Structure (Protected)
+## Branch Structure & Vercel Deployment Mapping
+
+### **GitHub Branches:**
 
 - **`develop`** - Development branch for all new features and bug fixes
-- **`staging`** - Staging branch connected to staging deployment (PR required)
-- **`main`** - Main branch for production-ready code (PR required + reviews)
-- **`production`** - Production branch connected to live website
+- **`staging`** - Preview environment branch (Vercel Preview)
+- **`main`** - Production environment branch (Vercel Production)
 
-**🔒 All branches except `develop` are protected and require Pull Requests**
+### **Vercel Deployment Mapping:**
+
+- **Development**: `develop` branch → Local CLI only
+- **Preview**: `staging` branch → `preview-[hash].vercel.app`
+- **Production**: `main` branch → `colossus-scaffolding.vercel.app`
+
+### **Terminology Reference:**
+
+- 🟡 **"Staging"** = Vercel Preview environment (`staging` branch)
+- 🔴 **"Production"** = Vercel Production environment (`main` branch)
+
+**🔒 `staging` and `main` branches are protected and require Pull Requests**
 
 ## Development Workflow
 
