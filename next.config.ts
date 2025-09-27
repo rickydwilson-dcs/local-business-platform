@@ -26,14 +26,20 @@ const nextConfig: NextConfig = {
     }
     return config;
   },
-  // Image optimization domains (add your image domains here)
+  // Image optimization configuration for better performance
   images: {
-    domains: [], // Add domains like ['example.com'] if you load external images
-    dangerouslyAllowSVG: true, // Allow SVG images (safe for your logo)
+    // External domains (add domains if loading external images)
+    domains: [],
+    // Allow SVG images (safe for logos and icons)
+    dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
-    // Standard responsive breakpoints
+    // Responsive breakpoints for different screen sizes
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    // Cache images for better performance
+    minimumCacheTTL: 60 * 60 * 24 * 365, // Cache for 1 year
+    // Default quality (can be overridden per image component)
+    // Note: Individual Image components can specify quality={65} for 10% more compression
   },
   // Ensure static exports work correctly
   trailingSlash: false,
