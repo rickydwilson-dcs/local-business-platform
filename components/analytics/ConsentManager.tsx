@@ -7,6 +7,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Shield, Settings, Check, X, Info, Cookie } from "lucide-react";
 import { ConsentState, ConsentBannerConfig, FeatureFlags } from "@/lib/analytics/types";
 
@@ -39,6 +40,7 @@ export function ConsentManager({
   className = "",
   reloadOnConsent = false,
 }: ConsentManagerProps) {
+  const pathname = usePathname();
   const [showBanner, setShowBanner] = useState(false);
   const [showCustomize, setShowCustomize] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -50,6 +52,9 @@ export function ConsentManager({
   });
 
   const mergedConfig = { ...defaultConfig, ...config };
+
+  // Don't show banner on privacy/cookie policy pages
+  const isOnPolicyPages = pathname === "/privacy-policy" || pathname === "/cookie-policy";
 
   // Load feature flags from environment
   useEffect(() => {
@@ -86,15 +91,9 @@ export function ConsentManager({
 
   // Load existing consent on mount
   useEffect(() => {
-    if (!enabled) return;
-
-    // Don't show banner on privacy/cookie policy pages to avoid blocking content
-    if (typeof window !== "undefined") {
-      const currentPath = window.location.pathname;
-      if (currentPath === "/privacy-policy" || currentPath === "/cookie-policy") {
-        setShowBanner(false);
-        return;
-      }
+    if (!enabled || isOnPolicyPages) {
+      setShowBanner(false);
+      return;
     }
 
     const existingConsent = loadConsentFromStorage();
@@ -106,7 +105,7 @@ export function ConsentManager({
       // Show banner if no consent found
       setShowBanner(true);
     }
-  }, [enabled, loadConsentFromStorage]);
+  }, [enabled, isOnPolicyPages, loadConsentFromStorage]);
 
   // Save consent to both cookie and localStorage
   const saveConsentToStorage = useCallback((consent: ConsentState) => {
