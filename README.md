@@ -330,8 +330,7 @@ Target these key areas in South East UK:
 
 ## 🎯 Next Steps
 
-1. **Analytics:** Add Google Analytics/Tag Manager
-2. **Local SEO:** Submit to Google My Business and directories
-3. **Location-Service Pages:** Monitor performance and usefulness of Brighton and Canterbury Location-Service pages and assess if worthwhile extending to other locations
+1. **Local SEO:** Submit to Google My Business and directories
+2. **Location-Service Pages:** Monitor performance and usefulness of Brighton and Canterbury Location-Service pages and assess if worthwhile extending to other locations
 
 Built with ❤️ for Colossus Scaffolding - Professional scaffolding services across the South East UK.
