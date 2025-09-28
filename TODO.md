@@ -140,13 +140,23 @@ Current outstanding tasks and business objectives.
 - ✅ **CSP Implementation** - Whitelist trusted domains for analytics while blocking malicious scripts
 - ✅ **Production Security** - Headers deployed across all environments for attack prevention
 
-## 🔄 **Future Security Enhancements**
+## 🔄 **Domain Migration & Security Transition**
 
-### **Post-Domain Migration (www.colossus-scaffolding.co.uk)**
+### **🚨 High Priority (Migration Day)**
 
-- [ ] **HSTS Implementation** - Add Strict-Transport-Security header after custom domain migration
-- [ ] **Domain Preload** - Submit domain to HSTS preload list for enhanced security
-- [ ] **SSL Certificate Management** - Ensure proper SSL configuration for custom domain
+- [ ] **Point DNS Records** - Configure A/CNAME records to point www.colossus-scaffolding.co.uk to Vercel
+- [ ] **SSL Auto-Provisioning** - Let Vercel automatically provision SSL certificate
+- [ ] **Environment Variables** - Update `NEXT_PUBLIC_SITE_URL=https://www.colossus-scaffolding.co.uk` in Vercel dashboard
+
+### **⚠️ Medium Priority (Within 1 Week)**
+
+- [ ] **HSTS Header** - Add Strict-Transport-Security header to next.config.ts
+- [ ] **CAA Records** - Set up Certificate Authority Authorization DNS records
+
+### **📋 Low Priority (Optional)**
+
+- [ ] **HSTS Preload** - Submit domain to browser HSTS preload list
+- [ ] **Additional Monitoring** - Set up domain-specific monitoring and alerts
 
 ## 📈 **Project Scale & Impact**
 
