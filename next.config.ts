@@ -89,10 +89,6 @@ const nextConfig: NextConfig = {
             value:
               "default-src 'self'; script-src 'self' 'unsafe-inline' *.googletagmanager.com *.google-analytics.com *.facebook.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self' *.google-analytics.com *.facebook.com; frame-ancestors 'none';",
           },
-          {
-            key: "Strict-Transport-Security",
-            value: "max-age=63072000; includeSubDomains; preload",
-          },
         ],
       },
     ];
