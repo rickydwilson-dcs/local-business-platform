@@ -639,6 +639,180 @@ export const ComponentName = ({ title, items }: ComponentProps) => {
 };
 ```
 
+## **📊 ANALYTICS & CONSENT MANAGEMENT STANDARDS**
+
+### **GDPR-Compliant Consent System**
+
+**Architecture Overview**: Professional consent management system ensuring GDPR compliance while enabling business analytics and marketing optimization.
+
+**Core Components:**
+
+```typescript
+// components/analytics/ConsentManager.tsx - Main consent banner
+// components/analytics/Analytics.tsx - Analytics initialization
+// lib/analytics/types.ts - Type definitions
+```
+
+**Feature Flag System:**
+
+```bash
+# Environment Variables (Server-Side)
+FEATURE_CONSENT_BANNER=true          # Shows/hides consent banner
+FEATURE_ANALYTICS_ENABLED=true       # Enables analytics system
+FEATURE_GA4_ENABLED=true            # Google Analytics 4
+FEATURE_SERVER_TRACKING=true        # Server-side tracking
+FEATURE_FACEBOOK_PIXEL=false        # Facebook/Meta Pixel
+FEATURE_GOOGLE_ADS=false            # Google Ads tracking
+
+# Public Variables (Client-Side)
+NEXT_PUBLIC_GA_MEASUREMENT_ID=G-XXXXXXXXXX
+NEXT_PUBLIC_FACEBOOK_PIXEL_ID=
+NEXT_PUBLIC_GOOGLE_ADS_ID=
+```
+
+### **Consent Banner Implementation**
+
+**Smart Page Detection**: Consent banner automatically hides on privacy/cookie policy pages to prevent content blocking.
+
+```typescript
+// ConsentManager component logic
+const pathname = usePathname();
+const isOnPolicyPages = pathname === "/privacy-policy" || pathname === "/cookie-policy";
+
+useEffect(() => {
+  if (!enabled || isOnPolicyPages) {
+    setShowBanner(false);
+    return;
+  }
+  // ... consent logic
+}, [enabled, isOnPolicyPages]);
+```
+
+**Consent Categories:**
+
+- **Essential**: Always required (functional cookies)
+- **Analytics**: Google Analytics 4, performance tracking
+- **Marketing**: Facebook Pixel, Google Ads (when enabled)
+
+### **GA4 Integration Standards**
+
+**Critical Fix - Single Page Visit Tracking**: Ensures users who accept cookies on first visit are tracked without requiring navigation.
+
+```typescript
+// Analytics.tsx - Manual page view after consent
+const initializeGA4 = useCallback(() => {
+  window.gtag("config", gaId, {
+    send_page_view: false, // Disable automatic page view
+  });
+
+  // Manually fire initial page view after consent
+  window.gtag("event", "page_view", {
+    page_title: document.title,
+    page_location: window.location.href,
+    page_referrer: document.referrer || undefined,
+  });
+}, [gaId, consent]);
+```
+
+**Event Tracking System:**
+
+```typescript
+// Available hooks and functions
+const { trackEvent, trackPageView, trackConversion } = useAnalytics();
+
+// Example usage
+trackConversion("quote_request", 150, "GBP", {
+  service_type: "residential",
+  location: "brighton",
+});
+```
+
+### **Privacy & Compliance**
+
+**Data Storage Strategy:**
+
+- **Consent Storage**: Cookie + localStorage (1 year retention)
+- **Analytics Data**: Google Analytics (26 months, configurable)
+- **Cookie Consent**: PECR compliant, user-controlled
+
+**GDPR Rights Implementation:**
+
+```typescript
+// Consent withdrawal
+const withdrawConsent = () => {
+  // Clear stored consent
+  // Stop analytics tracking
+  // Reload analytics with denied consent
+};
+
+// Data portability
+const exportUserData = () => {
+  // Return user's data in machine-readable format
+};
+```
+
+**Legal Pages Integration:**
+
+- `/privacy-policy` - Comprehensive GDPR privacy policy
+- `/cookie-policy` - Detailed cookie usage and controls
+- Automatic consent banner hiding on policy pages
+
+### **Performance Optimizations**
+
+**Lazy Loading Strategy**: Analytics scripts load only after consent acceptance, reducing initial bundle size.
+
+**Consent State Management**:
+
+```typescript
+// Efficient state synchronization
+const { consent, loading } = useConsent();
+
+// Global event system for consent updates
+window.dispatchEvent(new CustomEvent("consent-updated", { detail: consent }));
+```
+
+### **Development & Testing**
+
+**Debug Mode**: Comprehensive logging for development and production testing.
+
+```typescript
+// Enable debug logging
+debugMode={process.env.NODE_ENV === "development"}
+
+// Production testing with feature flags
+FEATURE_GA4_DEBUG=true  // Enables GA4 DebugView integration
+```
+
+**Testing Endpoints**:
+
+- `/api/analytics/debug` - Feature flag status and configuration
+- `/api/analytics/track` - Server-side event tracking endpoint
+
+### **Implementation Rules**
+
+**✅ REQUIRED:**
+
+- All analytics must respect user consent choices
+- Consent banner must not block policy pages
+- GA4 must fire initial page view after consent acceptance
+- Feature flags must control all analytics functionality
+- GDPR compliance must be maintained at all times
+
+**❌ FORBIDDEN:**
+
+- Loading analytics scripts before consent
+- Tracking users without explicit consent
+- Blocking policy pages with consent overlays
+- Hardcoded analytics IDs (use environment variables)
+- Analytics functionality without feature flag controls
+
+**🔧 MAINTENANCE:**
+
+- Regular consent system testing across all browsers
+- Quarterly GDPR compliance reviews
+- Analytics data retention policy enforcement
+- Performance impact monitoring and optimization
+
 ## **🚨 CRITICAL: ARCHITECTURE INVESTIGATION FIRST**
 
 **BEFORE implementing ANY feature, ALL developers (human or AI) MUST complete this mandatory investigation phase:**
