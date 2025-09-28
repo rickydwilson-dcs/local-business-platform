@@ -19,10 +19,11 @@ Go to: **Settings** → **Branches** → **Add rule**
 **Enable these settings:**
 
 - ✅ **Restrict pushes that create files larger than 100MB**
-- ✅ **Require a pull request before merging**
-  - ✅ **Require approvals:** 1 (minimum)
-  - ✅ **Dismiss stale PR approvals when new commits are pushed**
-  - ✅ **Require review from code owners** (if you have CODEOWNERS file)
+- ✅ **Restrict pushes that create files larger than 100MB** (enforced)
+- ❌ **Require a pull request before merging** (disabled for direct push workflow)
+- ❌ **Require approvals** (not applicable with direct push)
+- ❌ **Dismiss stale PR approvals** (not applicable with direct push)
+- ❌ **Require review from code owners** (not applicable with direct push)
 - ✅ **Require status checks to pass before merging**
   - ✅ **Require branches to be up to date before merging**
   - ✅ **Status checks:** (Select these after first GitHub Action runs)
@@ -65,16 +66,16 @@ The GitHub Actions workflow is automatically created in `.github/workflows/ci.ym
 **What it does:**
 
 - Runs on every push to `develop`, `staging`, `main`
-- Runs on every PR to `staging`, `main`
+- Runs on every push to `develop`, `staging`, `main`
 - Executes: ESLint → TypeScript check → Build test
 - Only allows merge if all checks pass
 
 **First run setup:**
 
 1. Push the workflow file to `develop` branch
-2. Create a test PR to `staging` to trigger the first run
-3. After first run, the status checks will appear in branch protection settings
-4. Add the status checks to branch protection rules
+2. Push changes to `staging` to trigger the first run
+3. Pre-push hooks will automatically run quality checks
+4. Quality checks prevent pushes if TypeScript or build errors exist
 
 ## 3. Vercel Deployment Settings
 
@@ -103,10 +104,10 @@ The GitHub Actions workflow is automatically created in `.github/workflows/ci.ym
 **Required Flow:** `develop` → `staging` → `main`
 
 1. **Develop** - Feature development and testing
-2. **Staging** - Preview environment for final testing
-3. **Main** - Production deployment
+2. **Staging** - Preview environment for final testing (push after explicit approval)
+3. **Main** - Production deployment (push after staging verification)
 
-**⚠️ Important:** Never push directly to production (`main`) - always follow the proper branch sequence.
+**⚠️ Important:** Always get explicit approval before pushing to `staging` or `main` - follow the proper testing sequence.
 
 ## 4. GitHub Repository Settings
 
@@ -115,9 +116,9 @@ The GitHub Actions workflow is automatically created in `.github/workflows/ci.ym
 - ✅ **Allow merge commits**
 - ✅ **Allow squash merging** (recommended for clean history)
 - ❌ **Allow rebase merging** (optional, can cause confusion)
-- ✅ **Always suggest updating pull request branches**
-- ✅ **Allow auto-merge**
-- ✅ **Automatically delete head branches** (cleans up after PR merge)
+- ✅ **Direct push workflow enabled**
+- ❌ **Auto-merge** (not applicable with direct push)
+- ❌ **Automatically delete head branches** (not applicable with direct push)
 
 ### Actions Settings
 
@@ -164,36 +165,30 @@ Create `.github/CODEOWNERS` file:
 *.md @documentation-team
 ```
 
-## 7. Issue and PR Templates (Optional)
+## 7. Quality Assurance Templates (Optional)
 
-### Pull Request Template
+### Pre-Push Checklist Template
 
-Create `.github/pull_request_template.md`:
+Create `PUSH_CHECKLIST.md`:
 
 ```markdown
-## Description
+## Pre-Push Quality Checklist
 
-Brief description of changes
-
-## Type of Change
-
-- [ ] Bug fix
-- [ ] New feature
-- [ ] Breaking change
-- [ ] Documentation update
-
-## Testing
+### Development to Staging
 
 - [ ] Local testing completed
-- [ ] All status checks passing
-- [ ] Staging deployment tested
+- [ ] TypeScript check passes (`npm run type-check`)
+- [ ] Build test passes (`npm run build`)
+- [ ] ESLint check passes (`npm run lint`)
+- [ ] Development environment tested
 
-## Checklist
+### Staging to Production
 
-- [ ] Code follows style guidelines
-- [ ] Self-review completed
-- [ ] Changes generate no new warnings
-- [ ] Any dependent changes have been merged
+- [ ] Staging deployment tested thoroughly
+- [ ] Cross-browser compatibility verified
+- [ ] All functionality working as expected
+- [ ] Explicit approval obtained from project owner
+- [ ] No critical issues identified
 ```
 
 ## 8. Verification Steps
@@ -209,16 +204,16 @@ After setup:
    git push origin develop
    ```
 
-2. **Create test PR:**
-   - Create PR from `develop` to `staging`
-   - Verify GitHub Actions run
-   - Verify status checks appear
-   - Test that PR cannot be merged if checks fail
+2. **Test direct push workflow:**
+   - Push from `develop` to `staging` directly
+   - Verify pre-push hooks run quality checks
+   - Test that pushes are blocked if TypeScript/build errors exist
+   - Verify deployment happens after successful push
 
 3. **Test branch protection:**
-   - Try to push directly to `main` (should fail)
-   - Try to push directly to `staging` (should fail)
-   - Verify only PRs can update protected branches
+   - Try to push to `main` without approval (should require explicit approval)
+   - Try to push to `staging` without testing (should require development verification)
+   - Verify pre-push hooks block pushes with quality issues
 
 4. **Test pre-push hooks locally:**
    ```bash
@@ -235,7 +230,7 @@ If you need to bypass protection rules in an emergency:
 1. **Temporarily disable branch protection**
 2. **Make emergency fix**
 3. **Re-enable branch protection immediately**
-4. **Create follow-up PR to document emergency change**
+4. **Create follow-up commit to document emergency change**
 
 ### Hotfix Process
 
@@ -246,7 +241,7 @@ git checkout main
 git checkout -b hotfix/critical-issue
 # Make minimal fix
 git push origin hotfix/critical-issue
-# Create PR to main (will run all checks)
+# Push to main after testing (will run all checks)
 # After merge, ensure fix is also in develop branch
 ```
 
