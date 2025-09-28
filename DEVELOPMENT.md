@@ -48,7 +48,7 @@ npm run build         # Verify production build works
 - 🟡 **"Preview"** = Preview environment (`staging` branch)
 - 🔴 **"Production"** = Production environment (`main` branch)
 
-**🔒 `staging` and `main` branches are protected and require Pull Requests**
+**🔒 `staging` and `main` branches are protected but use direct push workflow after explicit approval**
 
 ## Development Workflow
 
@@ -98,7 +98,7 @@ npm run format        # Prettier formatting
 
 **💡 TIP: Run `npm run type-check` frequently during development to catch issues early**
 
-### 4. Staging Deployment (PR Required)
+### 4. Staging Deployment (Direct Push After Testing)
 
 Once development is complete and all checks pass:
 
@@ -106,35 +106,42 @@ Once development is complete and all checks pass:
 # Push develop changes
 git push origin develop
 
-# Create Pull Request via GitHub UI:
-# develop → staging
+# Test thoroughly on development environment
+# Then push to staging after explicit approval:
+git checkout staging
+git merge develop
+git push origin staging
 ```
 
-**GitHub Actions automatically run:**
+**Pre-push hooks automatically run:**
 
 - ✅ ESLint validation
 - ✅ TypeScript check
 - ✅ Build test
 - ✅ Deployment readiness check
 
-**🚫 PR cannot be merged until all GitHub Actions pass!**
+**🚫 Push will be blocked until all quality checks pass!**
 
-### 5. Production Deployment (PR + Review Required)
+### 5. Production Deployment (Direct Push After Staging Verification)
 
 Only after staging is verified and working correctly:
 
-**Create Pull Request via GitHub UI:**
+```bash
+# After thorough testing on staging environment
+# Push to production after explicit approval:
+git checkout main
+git merge staging
+git push origin main
+```
 
-- `staging → main`
+**Requirements before push:**
 
-**Requirements before merge:**
-
-- ✅ All GitHub Actions must pass
-- ✅ At least 1 code review approval required
-- ✅ All conversations resolved
+- ✅ All pre-push hooks must pass
+- ✅ Staging environment fully tested
+- ✅ Explicit approval from project owner
 - ✅ Branch must be up to date
 
-After merge to `main`, the production deployment is automatic via Vercel.
+After push to `main`, the production deployment is automatic via Vercel.
 
 ## Available Scripts
 
@@ -194,17 +201,18 @@ The CI pipeline runs automatically on:
 
 ### Main Branch (Production)
 
-- 🔒 **PR required** with 1+ review approval
-- 🔒 **Status checks required** (GitHub Actions must pass)
+- 🔒 **Direct push after explicit approval**
+- 🔒 **Pre-push hooks required** (TypeScript + Build must pass)
 - 🔒 **Up-to-date branch required**
 - 🔒 **No force pushes allowed**
-- 🔒 **No direct commits allowed**
+- 🔒 **Staging verification required before push**
 
 ### Staging Branch
 
-- 🔒 **Status checks required** (GitHub Actions must pass)
+- 🔒 **Pre-push hooks required** (TypeScript + Build must pass)
 - 🔒 **Up-to-date branch required**
 - 🔒 **No force pushes allowed**
+- 🔒 **Development testing required before push**
 
 ### Develop Branch
 
@@ -376,12 +384,12 @@ const callback = useCallback(() => {
 ## Best Practices
 
 1. **🚫 Never skip quality checks** - They prevent production issues
-2. **🔒 Always use PRs for protected branches** - Direct pushes are blocked
-3. **👥 Get code reviews** - Fresh eyes catch issues
-4. **📝 Write descriptive PR descriptions** - Include what, why, and how
+2. **🔒 Always get explicit approval** - Direct pushes require owner approval
+3. **🧪 Test environments thoroughly** - Verify develop → staging → main flow
+4. **📝 Write descriptive commit messages** - Include what, why, and how
 5. **🧪 Test on staging thoroughly** - Verify changes before production
 6. **🔄 Keep branches up to date** - Avoid merge conflicts
-7. **📋 Use PR templates** - Ensure consistent review process
+7. **⚡ Follow direct push workflow** - develop → staging → main after approval
 8. **🏗️ Make focused commits** - Easier to review and rollback
 
 ## Automated Production Deployment
@@ -419,15 +427,15 @@ After the PR is approved and merged to `main`, Vercel automatically deploys to p
 **Development Flow:**
 
 1. `develop` → Work and test locally
-2. `develop` → `staging` (PR required)
-3. `staging` → `main` (PR required with review)
+2. `develop` → `staging` (Direct push after explicit approval)
+3. `staging` → `main` (Direct push after staging verification)
 4. `main` → Production deployment (automatic via Vercel)
 
 **Quality Checkpoints:**
 
 - ✅ Pre-commit: ESLint + Prettier
 - ✅ Pre-push: TypeScript + Build (runs before every push)
-- ✅ Push to staging: GitHub Actions (ESLint + TypeScript + Build)
-- ✅ Push to main: GitHub Actions + Pre-push hooks (double validation)
+- ✅ Push to staging: Pre-push hooks (ESLint + TypeScript + Build)
+- ✅ Push to main: Pre-push hooks + staging verification (double validation)
 
 This enforced workflow ensures **zero chance** of linting errors or broken builds reaching production.
