@@ -6,6 +6,11 @@ export const dynamic = "force-dynamic";
 
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
 
+// Simple rate limiting by IP
+const rateLimitMap = new Map();
+const RATE_LIMIT_WINDOW = 5 * 60 * 1000; // 5 minutes
+const RATE_LIMIT_MAX = 5; // 5 requests per window
+
 type ContactPayload = {
   name: string;
   email: string;
@@ -21,6 +26,35 @@ function isValidEmail(email: string): boolean {
 }
 
 export async function POST(request: Request): Promise<Response> {
+  // Rate limiting check
+  const ip =
+    request.headers.get("x-forwarded-for") || request.headers.get("cf-connecting-ip") || "unknown";
+  const now = Date.now();
+  const clientRequests = rateLimitMap.get(ip) || { count: 0, resetTime: now + RATE_LIMIT_WINDOW };
+
+  if (now > clientRequests.resetTime) {
+    clientRequests.count = 1;
+    clientRequests.resetTime = now + RATE_LIMIT_WINDOW;
+  } else {
+    clientRequests.count++;
+  }
+
+  rateLimitMap.set(ip, clientRequests);
+
+  if (clientRequests.count > RATE_LIMIT_MAX) {
+    return Response.json(
+      {
+        error: "Too many requests. Please wait before submitting again.",
+        retryAfter: Math.ceil((clientRequests.resetTime - now) / 1000),
+      },
+      {
+        status: 429,
+        headers: {
+          "Retry-After": Math.ceil((clientRequests.resetTime - now) / 1000).toString(),
+        },
+      }
+    );
+  }
   try {
     const body = (await request.json()) as Partial<ContactPayload> | null;
 
