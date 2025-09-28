@@ -88,6 +88,15 @@ export function ConsentManager({
   useEffect(() => {
     if (!enabled) return;
 
+    // Don't show banner on privacy/cookie policy pages to avoid blocking content
+    if (typeof window !== "undefined") {
+      const currentPath = window.location.pathname;
+      if (currentPath === "/privacy-policy" || currentPath === "/cookie-policy") {
+        setShowBanner(false);
+        return;
+      }
+    }
+
     const existingConsent = loadConsentFromStorage();
 
     if (existingConsent) {
