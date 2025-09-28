@@ -61,10 +61,18 @@ export function Analytics({
       anonymize_ip: true,
       allow_google_signals: consent?.marketing || false,
       allow_ad_personalization_signals: consent?.marketing || false,
+      send_page_view: false, // We'll manually send it after config
+    });
+
+    // Manually fire the initial page view after consent
+    window.gtag("event", "page_view", {
+      page_title: document.title,
+      page_location: window.location.href,
+      page_referrer: document.referrer || undefined,
     });
 
     if (debugMode) {
-      console.log("GA4 initialized with ID:", gaId);
+      console.log("GA4 initialized with ID:", gaId, "and initial page view sent");
     }
   }, [gaId, consent, debugMode]);
 
