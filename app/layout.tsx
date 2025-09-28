@@ -238,7 +238,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Footer - Global footer for all pages */}
         <Footer />
 
-        {/* Analytics System */}
+        {/* Analytics System - ConsentManager will handle page detection internally */}
         <ConsentManager
           enabled={process.env.FEATURE_CONSENT_BANNER === "true"}
           config={{
