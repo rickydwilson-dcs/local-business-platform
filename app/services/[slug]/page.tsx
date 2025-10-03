@@ -2,6 +2,7 @@ import path from "path";
 import { promises as fs } from "fs";
 import type { Metadata } from "next";
 import Link from "next/link";
+import matter from "gray-matter";
 
 import { ServiceHero } from "@/components/ui/service-hero";
 import ServiceAbout from "@/components/ui/service-about";
@@ -22,8 +23,10 @@ const DIR = path.join(process.cwd(), "content", "services");
 
 interface ServiceData {
   title: string;
+  seoTitle?: string;
   description: string;
   badge?: string;
+  keywords?: string[];
   benefits: string[];
   faqs: Array<{ question: string; answer: string }>;
   heroImage?: string;
@@ -44,715 +47,33 @@ interface ServiceData {
   };
 }
 
-// Generate location-specific FAQs for services
-function getServiceFAQs(serviceName: string): Array<{ question: string; answer: string }> {
-  const locationGroups = [
-    { locations: "Brighton, Lewes, Eastbourne", county: "East Sussex" },
-    { locations: "Crawley, Horsham, Worthing", county: "West Sussex" },
-    { locations: "Maidstone, Canterbury, Ashford", county: "Kent" },
-    { locations: "Guildford, Woking, Croydon", county: "Surrey" },
-  ];
+/**
+ * Read MDX file and parse frontmatter
+ */
+async function getServiceDataFromMDX(slug: string): Promise<ServiceData | null> {
+  try {
+    const filePath = path.join(DIR, `${slug}.mdx`);
+    const fileContent = await fs.readFile(filePath, "utf-8");
+    const { data } = matter(fileContent);
 
-  return locationGroups.map((group) => ({
-    question: `Do you provide ${serviceName.toLowerCase()} in ${group.locations.split(", ")[0]}?`,
-    answer: `Yes, we supply professional ${serviceName.toLowerCase()} services in ${group.locations}, fully compliant with UK safety standards.`,
-  }));
-}
-
-function getServiceData(slug: string): ServiceData {
-  const serviceDataMap: Record<string, ServiceData> = {
-    "access-scaffolding": {
-      title: "Access Scaffolding Services",
-      description:
-        "Safe, TG20:21-compliant access scaffolding for residential, commercial, and industrial projects across the South East UK. Professional installation with full insurance coverage.",
-      badge: "Most Popular",
-      heroImage: "/Access-Scaffolding-new-build.png",
-      benefits: [
-        "TG20:21 compliant design and installation",
-        "CISRS qualified and experienced scaffolders",
-        "£10 million public liability insurance",
-        "CHAS accredited safety standards",
-        "Free site surveys and quotations",
-        "Rapid response across South East UK",
-        "Complete handover certificates provided",
-        "Regular safety inspections included",
-      ],
-      faqs: getServiceFAQs("access scaffolding"),
-    },
-    "facade-scaffolding": {
-      title: "Facade Scaffolding Solutions",
-      description:
-        "Professional facade scaffolding for building maintenance, renovation, and construction projects. Weather-resistant systems with comprehensive access solutions.",
-      heroImage: "/Facade-Scaffolding.png",
-      benefits: [
-        "Weatherproof scaffold systems",
-        "Load-bearing structural design",
-        "Planning permission assistance",
-        "Professional installation teams",
-        "Weather protection options",
-        "Debris netting available",
-        "Access platforms and walkways",
-        "Safety barriers included",
-      ],
-      faqs: getServiceFAQs("facade scaffolding"),
-    },
-    "edge-protection": {
-      title: "Edge Protection Systems",
-      description:
-        "Comprehensive edge protection systems ensuring maximum safety on construction and maintenance sites. HSE compliant solutions for all project types.",
-      heroImage: "/Edge-Protection.png",
-      benefits: [
-        "HSE compliant edge protection",
-        "Rapid installation systems",
-        "Adjustable height options",
-        "Temporary and permanent solutions",
-        "Roof edge protection specialists",
-        "Fall arrest system integration",
-        "Regular safety inspections",
-        "Certified installation teams",
-      ],
-      faqs: getServiceFAQs("edge protection"),
-    },
-    "temporary-roof-systems": {
-      title: "Temporary Roof Systems",
-      description:
-        "Weather protection and temporary roofing solutions for ongoing construction and maintenance work. Keep your project dry and on schedule.",
-      heroImage: "/Temporary-Roof-Systems.png",
-      benefits: [
-        "Complete weather protection",
-        "Load-rated temporary roofs",
-        "Quick assembly systems",
-        "Custom design solutions",
-        "Gutter and drainage included",
-        "Access integration options",
-        "Professional installation",
-        "Dismantling service provided",
-      ],
-      faqs: getServiceFAQs("temporary roof systems"),
-    },
-    "birdcage-scaffolds": {
-      title: "Birdcage Scaffold Systems",
-      description:
-        "Independent birdcage scaffold structures providing comprehensive access for complex commercial and industrial projects requiring extensive coverage.",
-      heroImage: "/Birdcage-scaffolding.png",
-      benefits: [
-        "Independent structure design",
-        "Heavy-duty load capacity",
-        "Complex access solutions",
-        "Multi-level platforms",
-        "Equipment support capability",
-        "Professional engineering",
-        "Safety compliance guaranteed",
-        "Custom configuration options",
-      ],
-      faqs: getServiceFAQs("birdcage scaffolds"),
-    },
-    "scaffold-towers-mast-systems": {
-      title: "Scaffold Towers & Mast Systems",
-      description:
-        "Mobile and static scaffold towers for flexible access solutions on various project types. Height-adjustable systems with quick setup capability.",
-      heroImage: "/Scaffold-Towers-&-Mast-Systems.png",
-      benefits: [
-        "Mobile and static options",
-        "Height adjustable systems",
-        "Quick setup and dismantling",
-        "Lightweight aluminum construction",
-        "Narrow access capability",
-        "Professional grade equipment",
-        "Safety guardrails included",
-        "Transport and delivery available",
-      ],
-      faqs: getServiceFAQs("scaffold towers & mast systems"),
-    },
-    "crash-decks-crane-decks": {
-      title: "Crash Decks & Crane Decks",
-      description:
-        "Protective crash decks and crane decks ensuring safety during construction operations with load-bearing capabilities and professional installation.",
-      heroImage: "/Crash-Decks-&-Crane-Decks.png",
-      benefits: [
-        "Load-bearing deck systems",
-        "Professional safety compliance",
-        "Custom design solutions",
-        "Rapid installation service",
-        "Heavy-duty construction",
-        "Weather-resistant materials",
-        "Safety barrier integration",
-        "Expert engineering support",
-      ],
-      faqs: getServiceFAQs("crash decks & crane decks"),
-    },
-    "heavy-duty-industrial-scaffolding": {
-      title: "Heavy Duty Industrial Scaffolding",
-      description:
-        "Heavy-duty scaffolding solutions for complex industrial projects and infrastructure work with high load capacity and expert engineering.",
-      heroImage: "/Heavy-Industrial-Scaffolding.png",
-      benefits: [
-        "Heavy load capacity systems",
-        "Industrial-grade materials",
-        "Complex structure capability",
-        "Professional engineering design",
-        "Safety compliance guaranteed",
-        "Custom configuration options",
-        "Expert installation teams",
-        "Long-term project support",
-      ],
-      faqs: getServiceFAQs("heavy duty industrial scaffolding"),
-    },
-    "pavement-gantries-loading-bays": {
-      title: "Pavement Gantries & Loading Bays",
-      description:
-        "Specialized pavement gantries and loading bay solutions for urban construction projects with pedestrian safety and loading access.",
-      heroImage: "/Pavement-Gantries-Loading-Bays.png",
-      benefits: [
-        "Urban construction solutions",
-        "Pedestrian safety priority",
-        "Loading access capability",
-        "Traffic management integration",
-        "Planning permission support",
-        "Professional installation",
-        "Safety barrier systems",
-        "Custom design solutions",
-      ],
-      faqs: getServiceFAQs("pavement gantries & loading bays"),
-    },
-    "public-access-staircases": {
-      title: "Public Access Staircases",
-      description:
-        "Safe and compliant public access staircase systems for construction sites with accessible design and code compliance.",
-      heroImage: "/Public-Access-Staircases.png",
-      benefits: [
-        "Public safety compliance",
-        "Accessible design standards",
-        "Building code compliant",
-        "Professional installation",
-        "Safety handrail systems",
-        "Weather-resistant construction",
-        "Custom configuration options",
-        "Regular safety inspections",
-      ],
-      faqs: getServiceFAQs("public access staircases"),
-    },
-    "scaffold-alarms": {
-      title: "Scaffold Alarm Systems",
-      description:
-        "Advanced scaffold alarm systems for enhanced site security and safety monitoring with 24/7 monitoring and instant alerts.",
-      heroImage: "/Scaffold-Alarms.png",
-      benefits: [
-        "24/7 security monitoring",
-        "Instant alert systems",
-        "Security system integration",
-        "Professional installation",
-        "Remote monitoring capability",
-        "Theft prevention systems",
-        "Custom alarm configuration",
-        "Expert technical support",
-      ],
-      faqs: getServiceFAQs("scaffold alarm systems"),
-    },
-    "scaffolding-design-drawings": {
-      title: "Scaffolding Design & Drawings",
-      description:
-        "Professional scaffolding design and technical drawings ensuring structural integrity and compliance with all safety regulations.",
-      heroImage: "/Scaffolding-Design-&-Drawings.png",
-      benefits: [
-        "Structural engineering analysis",
-        "CAD technical drawings",
-        "Load calculation reports",
-        "Safety compliance documentation",
-        "Planning permission support",
-        "Method statement preparation",
-        "Risk assessment inclusion",
-        "Professional certification",
-      ],
-      faqs: getServiceFAQs("scaffolding design & drawings"),
-    },
-    "scaffolding-inspections-maintenance": {
-      title: "Scaffolding Inspections & Maintenance",
-      description:
-        "Comprehensive scaffolding inspections and maintenance services ensuring ongoing safety compliance and structural integrity.",
-      heroImage: "/Scaffolding-Inspections-&-Maintenance.png",
-      benefits: [
-        "Weekly safety inspections",
-        "Detailed inspection reports",
-        "Maintenance scheduling",
-        "Compliance certification",
-        "Emergency repair service",
-        "Documentation management",
-        "Safety standard updates",
-        "Professional inspector teams",
-      ],
-      faqs: getServiceFAQs("scaffolding inspections & maintenance"),
-    },
-    "sheeting-netting-encapsulation": {
-      title: "Sheeting, Netting & Encapsulation",
-      description:
-        "Weather protection and safety encapsulation systems including scaffolding sheeting, debris netting, and full encapsulation solutions.",
-      heroImage: "/Sheeting-Netting-Encapsulation.png",
-      benefits: [
-        "Weather protection systems",
-        "Debris containment netting",
-        "Full encapsulation solutions",
-        "Fire-retardant materials",
-        "UV-resistant sheeting",
-        "Custom fitting service",
-        "Professional installation",
-        "Maintenance support included",
-      ],
-      faqs: getServiceFAQs("sheeting, netting & encapsulation"),
-    },
-    "staircase-towers": {
-      title: "Staircase Towers",
-      description:
-        "Safe and compliant staircase tower systems providing secure vertical access for construction and maintenance projects.",
-      heroImage: "/Staircase-Towers.png",
-      benefits: [
-        "Safe vertical access",
-        "Compliant stair design",
-        "Handrail safety systems",
-        "Multi-level capability",
-        "Quick assembly process",
-        "Weather-resistant construction",
-        "Load-bearing capacity",
-        "Professional installation",
-      ],
-      faqs: getServiceFAQs("staircase towers"),
-    },
-    "suspended-scaffolding": {
-      title: "Suspended Scaffolding",
-      description:
-        "Specialized suspended scaffolding systems for high-rise building maintenance and construction work requiring overhead access.",
-      heroImage: "/Suspended-Scaffolding.png",
-      benefits: [
-        "High-rise access capability",
-        "Suspended platform systems",
-        "Safety harness integration",
-        "Load-tested equipment",
-        "Professional rigging service",
-        "Emergency descent systems",
-        "Weather monitoring inclusion",
-        "Certified operator training",
-      ],
-      faqs: getServiceFAQs("suspended scaffolding"),
-    },
-    "commercial-scaffolding": {
-      title: "Commercial Scaffolding Services",
-      description:
-        "Expert commercial scaffolding for businesses, developers, and contractors across the UK. From office buildings to retail spaces, we provide safe, compliant access solutions for all commercial projects.",
-      badge: "Business Focus",
-      benefits: [
-        "Business-focused approach with minimal disruption",
-        "Fully insured with £10 million liability coverage",
-        "Professional standards maintaining property appearance",
-        "Flexible scheduling including out-of-hours installation",
-        "Safety excellence with commercial environment protocols",
-        "Dedicated project management for larger developments",
-        "Enhanced security protocols for business environments",
-        "Comprehensive insurance and certification compliance",
-      ],
-      faqs: [
-        {
-          question: "How do you minimize disruption to our business operations?",
-          answer:
-            "We offer flexible scheduling including out-of-hours installation, phased access solutions, and can work around your peak business times. Our professional approach ensures minimal impact on your customers and staff.",
-        },
-        {
-          question: "What insurance coverage do you provide for commercial projects?",
-          answer:
-            "We carry comprehensive public liability insurance up to £5 million, plus employers' liability and professional indemnity insurance. All policies are specifically designed for commercial scaffolding work.",
-        },
-        {
-          question: "Can you work around our existing security systems?",
-          answer:
-            "Yes, we regularly work with commercial security systems and can coordinate with your security team to ensure all protocols are maintained while providing necessary access.",
-        },
-        {
-          question: "Do you provide project management for larger developments?",
-          answer:
-            "For medium and large commercial projects, we assign a dedicated project manager who coordinates with your construction team, handles scheduling, and ensures all safety and compliance requirements are met.",
-        },
-      ],
-    },
-    "industrial-scaffolding": {
-      title: "Industrial Scaffolding Services",
-      description:
-        "Professional industrial scaffolding for factories, manufacturing plants, and infrastructure projects. Heavy-duty systems engineered for specialist access, maintenance shutdowns, and extreme load requirements.",
-      badge: "Heavy Duty",
-      benefits: [
-        "Heavy load capacity systems up to 5.0kN/m²",
-        "Structural calculations by chartered engineers",
-        "24/7 emergency response for critical sites",
-        "CITB-trained industrial scaffolders with specialist certifications",
-        "CHAS and Constructionline accredited for major contracts",
-        "Coordinated shutdown scaffolding with tight timelines",
-        "Hazardous environment capability (ATEX zones)",
-        "Comprehensive RAMS and CDM compliance documentation",
-      ],
-      faqs: [
-        {
-          question: "What load capacities can your industrial scaffolding support?",
-          answer:
-            "Our engineered industrial scaffolds can support loads up to 5.0kN/m² (500kg/m²) with appropriate structural design and foundation preparations. Higher loads can be accommodated with specialist engineering calculations.",
-        },
-        {
-          question: "Do you provide structural calculations for industrial scaffolding?",
-          answer:
-            "Yes. All industrial scaffolds over standard loading receive full structural calculations from chartered engineers, complete with method statements and CAD drawings where required.",
-        },
-        {
-          question: "How quickly can you mobilize for emergency industrial access?",
-          answer:
-            "We maintain 24/7 emergency response capability for critical industrial sites. Emergency scaffolding can typically be mobilized within 4-6 hours, with full installation within 24-48 hours depending on complexity.",
-        },
-        {
-          question: "Can you provide scaffolding for hazardous industrial environments?",
-          answer:
-            "Yes. We can specify and install scaffolding systems suitable for ATEX zones, chemical environments, and other hazardous areas, with appropriate materials and component certifications.",
-        },
-      ],
-    },
-    "residential-scaffolding": {
-      title: "Residential Scaffolding Services",
-      description:
-        "Professional residential scaffolding for homeowners and contractors. House extensions, roof repairs, external painting, chimney work, loft conversions. Fully insured and TG20:21 compliant.",
-      badge: "Homeowner Friendly",
-      benefits: [
-        "TG20:21 compliant structures for guaranteed safety",
-        "Minimal disruption to family and neighbors",
-        "Property protection with boards and matting",
-        "£10 million public liability insurance coverage",
-        "CHAS and Constructionline accredited professionals",
-        "Flexible scheduling around family routines",
-        "Clear communication throughout projects",
-        "Free site surveys and quotations provided",
-      ],
-      faqs: [
-        {
-          question: "Will scaffolding damage my property or garden?",
-          answer:
-            "We take great care to protect your property using protective boards and matting. Our experienced teams minimize any impact on gardens, driveways, or external surfaces.",
-        },
-        {
-          question: "Do I need planning permission for residential scaffolding?",
-          answer:
-            "Scaffolding itself doesn't usually require planning permission, but we handle all necessary permits and highway licenses where required.",
-        },
-        {
-          question: "How much will residential scaffolding cost?",
-          answer:
-            "Most residential projects range from £800-£2,500 depending on size and duration. We provide detailed, no-obligation quotes after our free site survey.",
-        },
-        {
-          question: "Can you work around my family's daily routine?",
-          answer:
-            "Absolutely. We understand the importance of minimizing disruption to family life and will work with your schedule for installation and removal times.",
-        },
-      ],
-    },
-    "commercial-scaffolding-brighton": {
-      title: "Commercial Scaffolding Brighton",
-      description:
-        "Professional commercial scaffolding in Brighton. Churchill Square, Brighton Marina, seafront properties. TG20:21 compliant, minimal disruption to business operations.",
-      badge: "Coastal Specialists",
-      businessHours: {
-        monday: "07:00-17:00",
-        tuesday: "07:00-17:00",
-        wednesday: "07:00-17:00",
-        thursday: "07:00-17:00",
-        friday: "07:00-17:00",
-        saturday: "08:00-16:00",
-        sunday: "Emergency only",
-      },
-      localContact: {
-        phone: "01424 466 661",
-        email: "brighton@colossusscaffolding.com",
-        address: "Brighton & Hove Commercial Services",
-      },
-      benefits: [
-        "Brighton business district expertise",
-        "Churchill Square and marina experience",
-        "Coastal-grade wind-resistant systems",
-        "Heritage building compliance for The Lanes",
-        "Tourism-sensitive installation methods",
-        "Brighton City Council coordination",
-        "Pedestrian protection for high-footfall areas",
-        "Marine-grade corrosion protection",
-      ],
-      faqs: [
-        {
-          question: "Can you work around business hours in Brighton?",
-          answer:
-            "Yes, we offer flexible installation schedules including out-of-hours and weekend work to minimize disruption to Brighton businesses.",
-        },
-        {
-          question: "Do you handle Brighton City Council commercial permits?",
-          answer:
-            "Absolutely. We manage all necessary permits including highway licenses, planning applications, and conservation area approvals for Brighton commercial projects.",
-        },
-        {
-          question: "Can you work on seafront commercial buildings?",
-          answer:
-            "Certainly. Our scaffolding is specifically designed for Brighton's coastal commercial properties with enhanced wind loading and corrosion protection.",
-        },
-      ],
-    },
-    "commercial-scaffolding-canterbury": {
-      title: "Commercial Scaffolding Canterbury",
-      description:
-        "UNESCO-compliant commercial scaffolding in Canterbury. World Heritage Site expertise, University of Kent projects, cathedral precinct work with ecclesiastical coordination.",
-      badge: "UNESCO Compliant",
-      businessHours: {
-        monday: "07:00-17:00",
-        tuesday: "07:00-17:00",
-        wednesday: "07:00-17:00",
-        thursday: "07:00-17:00",
-        friday: "07:00-17:00",
-        saturday: "08:00-16:00",
-        sunday: "Emergency only",
-      },
-      localContact: {
-        phone: "01424 466 661",
-        email: "canterbury@colossusscaffolding.com",
-        address: "Canterbury Commercial Services",
-      },
-      benefits: [
-        "World Heritage Site compliance protocols",
-        "Canterbury Cathedral precinct expertise",
-        "University of Kent coordination",
-        "UNESCO approval processes",
-        "Medieval city centre navigation",
-        "Ecclesiastical authority liaison",
-        "Tourist area consideration",
-        "Academic calendar coordination",
-      ],
-      faqs: [
-        {
-          question: "Can you work within Canterbury's World Heritage Site?",
-          answer:
-            "Yes, we specialize in World Heritage Site commercial projects with full UNESCO protocol compliance and heritage authority coordination.",
-        },
-        {
-          question: "Do you handle cathedral precinct commercial work?",
-          answer:
-            "Absolutely. We have extensive experience with commercial properties in Canterbury Cathedral's precinct, including ecclesiastical approval processes.",
-        },
-        {
-          question: "Can you coordinate with University of Kent schedules?",
-          answer:
-            "Certainly. We work closely with university operations to schedule commercial scaffolding around academic calendars and campus activities.",
-        },
-      ],
-    },
-    "commercial-scaffolding-hastings": {
-      title: "Commercial Scaffolding Hastings",
-      description:
-        "Heritage-compliant commercial scaffolding in Hastings. Old Town medieval buildings, St Leonards properties, seafront commercial with extreme coastal protection.",
-      badge: "Heritage Experts",
-      businessHours: {
-        monday: "07:00-17:00",
-        tuesday: "07:00-17:00",
-        wednesday: "07:00-17:00",
-        thursday: "07:00-17:00",
-        friday: "07:00-17:00",
-        saturday: "08:00-16:00",
-        sunday: "Emergency only",
-      },
-      localContact: {
-        phone: "01424 466 661",
-        email: "hastings@colossusscaffolding.com",
-        address: "Hastings Commercial Services",
-      },
-      benefits: [
-        "Old Town medieval building expertise",
-        "St Leonards commercial property experience",
-        "Extreme coastal weather resistance",
-        "Heritage conservation compliance",
-        "Narrow medieval street navigation",
-        "Tourism operation coordination",
-        "Fishing industry consideration",
-        "Archaeological site protocols",
-      ],
-      faqs: [
-        {
-          question: "Can you work on medieval commercial buildings in the Old Town?",
-          answer:
-            "Yes, we specialize in medieval commercial properties with full heritage compliance and conservation area approval processes.",
-        },
-        {
-          question: "Do you handle extreme coastal weather conditions?",
-          answer:
-            "Absolutely. Our scaffolding is specifically engineered for Hastings' challenging seafront exposure with enhanced storm resistance.",
-        },
-        {
-          question: "Can you work around the fishing industry operations?",
-          answer:
-            "Certainly. We coordinate with harbour operations and fishing industry schedules to minimize disruption to marine commercial activities.",
-        },
-      ],
-    },
-    "residential-scaffolding-brighton": {
-      title: "Residential Scaffolding Brighton",
-      description:
-        "Professional residential scaffolding in Brighton. Victorian terraces, Regency properties, seafront homes. Family-friendly with minimal disruption to coastal living.",
-      badge: "Family Friendly",
-      businessHours: {
-        monday: "07:00-17:00",
-        tuesday: "07:00-17:00",
-        wednesday: "07:00-17:00",
-        thursday: "07:00-17:00",
-        friday: "07:00-17:00",
-        saturday: "08:00-16:00",
-        sunday: "Emergency only",
-      },
-      localContact: {
-        phone: "01424 466 661",
-        email: "brighton@colossusscaffolding.com",
-        address: "Brighton & Hove Residential Services",
-      },
-      benefits: [
-        "Victorian terrace expertise in The Lanes",
-        "Regency property restoration in Kemptown",
-        "Coastal home wind-resistant systems",
-        "Heritage-sensitive installation methods",
-        "Garden and driveway protection",
-        "School and family routine coordination",
-        "Brighton parking restriction management",
-        "Salt-resistant materials for seafront properties",
-      ],
-      faqs: [
-        {
-          question: "Will scaffolding damage my Brighton garden or driveway?",
-          answer:
-            "We use protective boards and matting to protect all surfaces. Our experienced teams take special care with Brighton's often limited garden spaces.",
-        },
-        {
-          question: "Can you work around my family's schedule in Brighton?",
-          answer:
-            "Absolutely. We understand Brighton family life and work flexibly around school runs, work schedules, and family routines to minimize disruption.",
-        },
-        {
-          question: "How do you handle Brighton's coastal weather?",
-          answer:
-            "Our scaffolding is designed for coastal conditions with enhanced tie-downs and weather monitoring. We adapt installation methods for Brighton's seaside environment.",
-        },
-      ],
-    },
-    "residential-scaffolding-canterbury": {
-      title: "Residential Scaffolding Canterbury",
-      description:
-        "Heritage-compliant residential scaffolding in Canterbury. Medieval properties, cathedral precinct homes, university housing with conservation compliance.",
-      badge: "Heritage Compliant",
-      businessHours: {
-        monday: "07:00-17:00",
-        tuesday: "07:00-17:00",
-        wednesday: "07:00-17:00",
-        thursday: "07:00-17:00",
-        friday: "07:00-17:00",
-        saturday: "08:00-16:00",
-        sunday: "Emergency only",
-      },
-      localContact: {
-        phone: "01424 466 661",
-        email: "canterbury@colossusscaffolding.com",
-        address: "Canterbury Residential Services",
-      },
-      benefits: [
-        "Medieval residential property expertise",
-        "Cathedral precinct proximity protocols",
-        "World Heritage Site compliance",
-        "University area coordination",
-        "Conservation area approval assistance",
-        "Archaeological consideration protocols",
-        "Ecclesiastical authority liaison",
-        "Academic term scheduling coordination",
-      ],
-      faqs: [
-        {
-          question: "Can you work on homes in Canterbury's World Heritage Site?",
-          answer:
-            "Yes, we specialize in World Heritage Site residential properties with full UNESCO compliance and heritage authority coordination.",
-        },
-        {
-          question: "Do you handle heritage approvals for residential work?",
-          answer:
-            "Absolutely. We assist with all heritage applications for residential properties, working directly with Canterbury's conservation officers and heritage authorities.",
-        },
-        {
-          question: "How do you coordinate with the cathedral authorities?",
-          answer:
-            "We maintain established relationships with Canterbury Cathedral's authorities and coordinate all residential work near the cathedral precinct.",
-        },
-      ],
-    },
-    "residential-scaffolding-hastings": {
-      title: "Residential Scaffolding Hastings",
-      description:
-        "Heritage-sensitive residential scaffolding in Hastings. Medieval cottages, Regency terraces, cliff-top homes with specialized terrain and coastal solutions.",
-      badge: "Coastal Heritage",
-      businessHours: {
-        monday: "07:00-17:00",
-        tuesday: "07:00-17:00",
-        wednesday: "07:00-17:00",
-        thursday: "07:00-17:00",
-        friday: "07:00-17:00",
-        saturday: "08:00-16:00",
-        sunday: "Emergency only",
-      },
-      localContact: {
-        phone: "01424 466 661",
-        email: "hastings@colossusscaffolding.com",
-        address: "Hastings Residential Services",
-      },
-      benefits: [
-        "Medieval cottage restoration expertise",
-        "Regency terrace specialist knowledge",
-        "Cliff-top property access solutions",
-        "Extreme coastal weather resistance",
-        "Old Town narrow alley navigation",
-        "Heritage conservation compliance",
-        "Archaeological site consideration",
-        "St Leonards period property experience",
-      ],
-      faqs: [
-        {
-          question: "Can you work on medieval cottages in the Old Town?",
-          answer:
-            "Yes, we specialize in medieval residential properties with full heritage compliance and conservation area approval coordination.",
-        },
-        {
-          question: "Do you handle cliff-top properties on East and West Hills?",
-          answer:
-            "Absolutely. We have extensive experience with challenging cliff-top terrain and provide specialized anchoring systems for elevated coastal properties.",
-        },
-        {
-          question: "Can you access properties through narrow Old Town alleys?",
-          answer:
-            "Certainly. We use specialized compact equipment and have extensive experience navigating Hastings' medieval street patterns and narrow residential access routes.",
-        },
-      ],
-    },
-  };
-
-  return (
-    serviceDataMap[slug] || {
-      title: slug
-        .split("-")
-        .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
-        .join(" "),
-      description: "Professional scaffolding solution with full compliance and safety standards.",
-      benefits: [
-        "TG20:21 compliant installation",
-        "CISRS qualified teams",
-        "Full insurance coverage",
-        "Professional service guarantee",
-      ],
-      faqs: getServiceFAQs(
-        slug
-          .split("-")
-          .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
-          .join(" ")
-      ),
-    }
-  );
+    // Map MDX frontmatter to ServiceData interface
+    return {
+      title: data.title,
+      seoTitle: data.seoTitle,
+      description: data.description,
+      badge: data.badge,
+      keywords: data.keywords,
+      benefits: data.benefits || [],
+      faqs: data.faqs || [],
+      heroImage: data.heroImage,
+      galleryImages: data.galleryImages,
+      businessHours: data.businessHours,
+      localContact: data.localContact,
+    };
+  } catch (error) {
+    console.error(`Error reading MDX for ${slug}:`, error);
+    return null;
+  }
 }
 
 export async function generateStaticParams() {
@@ -764,7 +85,15 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
   const { slug } = await params;
-  const serviceData = getServiceData(slug);
+  const serviceData = await getServiceDataFromMDX(slug);
+
+  if (!serviceData) {
+    return {
+      title: "Service Not Found | Colossus Scaffolding",
+      description: "The requested service page could not be found.",
+    };
+  }
+
   const serviceName = serviceData.title
     .replace(" Services", "")
     .replace(" Solutions", "")
@@ -773,9 +102,9 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   // Enhanced local SEO for service-location combinations
   const isLocationSpecific =
     slug.includes("-brighton") || slug.includes("-canterbury") || slug.includes("-hastings");
-  let optimizedTitle = serviceData.title;
+  let optimizedTitle = serviceData.seoTitle || `${serviceData.title} | Colossus Scaffolding`;
   const optimizedDescription = serviceData.description;
-  let keywords: string[] = [];
+  let keywords: string[] = serviceData.keywords || [];
 
   if (isLocationSpecific) {
     // Extract location from slug
@@ -783,53 +112,52 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
     const locationName = location ? location.charAt(0).toUpperCase() + location.slice(1) : "";
 
     // Optimize title for local SEO (under 60 characters)
-    optimizedTitle = `${serviceData.title} | ${locationName} | Colossus Scaffolding`;
+    optimizedTitle =
+      serviceData.seoTitle || `${serviceData.title} | ${locationName} | Colossus Scaffolding`;
 
-    // Add location-specific keywords
-    if (location === "brighton") {
-      keywords = [
-        `${slug.replace("-", " ")}`,
-        `${locationName} scaffolding hire`,
-        `scaffolding ${locationName}`,
-        "coastal scaffolding",
-        "Victorian terrace scaffolding",
-        "Regency property scaffolding",
-        "Churchill Square scaffolding",
-        "Brighton Marina scaffolding",
-      ];
-    } else if (location === "canterbury") {
-      keywords = [
-        `${slug.replace("-", " ")}`,
-        `${locationName} scaffolding hire`,
-        `scaffolding ${locationName}`,
-        "World Heritage Site scaffolding",
-        "cathedral scaffolding",
-        "medieval building scaffolding",
-        "University of Kent scaffolding",
-        "UNESCO compliant scaffolding",
-      ];
-    } else if (location === "hastings") {
-      keywords = [
-        `${slug.replace("-", " ")}`,
-        `${locationName} scaffolding hire`,
-        `scaffolding ${locationName}`,
-        "Old Town scaffolding",
-        "medieval scaffolding",
-        "cliff top scaffolding",
-        "St Leonards scaffolding",
-        "heritage scaffolding",
-      ];
+    // Add location-specific keywords if not already present
+    if (keywords.length === 0) {
+      if (location === "brighton") {
+        keywords = [
+          `${slug.replace("-", " ")}`,
+          `${locationName} scaffolding hire`,
+          `scaffolding ${locationName}`,
+          "coastal scaffolding",
+          "Victorian terrace scaffolding",
+          "Regency property scaffolding",
+        ];
+      } else if (location === "canterbury") {
+        keywords = [
+          `${slug.replace("-", " ")}`,
+          `${locationName} scaffolding hire`,
+          `scaffolding ${locationName}`,
+          "World Heritage Site scaffolding",
+          "cathedral scaffolding",
+          "medieval building scaffolding",
+        ];
+      } else if (location === "hastings") {
+        keywords = [
+          `${slug.replace("-", " ")}`,
+          `${locationName} scaffolding hire`,
+          `scaffolding ${locationName}`,
+          "Old Town scaffolding",
+          "medieval scaffolding",
+          "cliff top scaffolding",
+        ];
+      }
     }
   } else {
-    // General service keywords
-    keywords = [
-      serviceName.toLowerCase(),
-      `${serviceName.toLowerCase()} hire`,
-      "TG20:21 scaffolding",
-      "professional scaffolding",
-      "CISRS scaffolding",
-      "scaffolding services UK",
-    ];
+    // General service keywords if not provided
+    if (keywords.length === 0) {
+      keywords = [
+        serviceName.toLowerCase(),
+        `${serviceName.toLowerCase()} hire`,
+        "TG20:21 scaffolding",
+        "professional scaffolding",
+        "CISRS scaffolding",
+        "scaffolding services UK",
+      ];
+    }
   }
 
   return {
@@ -877,7 +205,20 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
 
 export default async function Page({ params }: { params: Promise<Params> }) {
   const { slug } = await params;
-  const serviceData = getServiceData(slug);
+  const serviceData = await getServiceDataFromMDX(slug);
+
+  if (!serviceData) {
+    return (
+      <div className="container-standard section-standard">
+        <h1 className="heading-hero">Service Not Found</h1>
+        <p className="text-body-lg">The requested service could not be found.</p>
+        <Link href="/services" className="btn-primary mt-8">
+          View All Services
+        </Link>
+      </div>
+    );
+  }
+
   const serviceName = serviceData.title
     .replace(" Services", "")
     .replace(" Solutions", "")
