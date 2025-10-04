@@ -67,6 +67,22 @@ export const ServiceFrontmatterSchema = z.object({
 
   benefits: z.array(z.string().min(10, "Benefits must be at least 10 characters")).optional(),
 
+  about: z
+    .object({
+      whatIs: z.string().min(50, "About 'whatIs' description must be at least 50 characters"),
+      whenNeeded: z
+        .array(z.string().min(10, "When needed item must be at least 10 characters"))
+        .min(4, "At least 4 'when needed' items required"),
+      whatAchieve: z
+        .array(z.string().min(10, "Achievement item must be at least 10 characters"))
+        .min(4, "At least 4 'what achieve' items required"),
+      keyPoints: z
+        .array(z.string().min(10, "Key point must be at least 10 characters"))
+        .min(3, "At least 3 key points required")
+        .optional(),
+    })
+    .optional(),
+
   heroImage: z.string().startsWith("/", "Hero image path must start with /").optional(),
 
   galleryImages: z
