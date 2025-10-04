@@ -28,10 +28,15 @@ npm run build
 Create `.env.local`:
 
 ```env
+# Email configuration
 RESEND_API_KEY=re_your_api_key_here
 BUSINESS_EMAIL=your-business@email.com
 BUSINESS_NAME=Colossus Scaffolding
 NEXT_PUBLIC_SITE_URL=https://yourdomain.com
+
+# Upstash Redis (for rate limiting)
+KV_REST_API_URL=https://your-database.upstash.io
+KV_REST_API_TOKEN=your-token-here
 ```
 
 ## 📝 Content Management
@@ -48,6 +53,28 @@ NEXT_PUBLIC_SITE_URL=https://yourdomain.com
 2. Add comprehensive frontmatter with hero, services, pricing sections
 3. Single template handles all locations automatically
 
+## ✅ Content Validation
+
+All MDX files are validated on commit:
+
+```bash
+# Validate all content
+npm run validate:content
+
+# Validate specific types
+npm run validate:services
+npm run validate:locations
+```
+
+Validation enforces:
+
+- Description lengths (50-200 characters)
+- FAQ requirements (3-15 per service)
+- YAML syntax correctness
+- Required frontmatter fields
+
+See `CONTENT_VALIDATION.md` for details.
+
 ## 🚀 Deployment
 
 Deploy to Vercel:
@@ -60,7 +87,9 @@ Or connect your GitHub repository for automatic deployments.
 
 ## 📞 Features
 
-- ✅ Contact form with email notifications
+- ✅ Contact form with Upstash rate limiting and email notifications
+- ✅ Zod-based content validation with pre-commit enforcement
+- ✅ Upstash Redis rate limiting (distributed, serverless-compatible)
 - ✅ SEO-optimized with structured data
 - ✅ Mobile-responsive design
 - ✅ Dynamic service and location pages

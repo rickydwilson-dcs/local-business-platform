@@ -159,6 +159,67 @@ export default async function LocationPage({ params }: { params: { slug: string 
 }
 ```
 
+### **✅ CONTENT VALIDATION STANDARDS**
+
+**Automated Content Quality Enforcement (January 2025):**
+
+All MDX content files are validated using Zod schemas to ensure consistency and quality before deployment.
+
+**Validation Architecture:**
+
+```typescript
+// lib/content-schemas.ts - Zod validation schemas
+- ServiceFrontmatterSchema: Validates all service MDX files
+- LocationFrontmatterSchema: Validates all location MDX files
+- scripts/validate-content.ts: CLI validation tool
+```
+
+**Validation Rules:**
+
+- ✅ **Description Length**: 50-200 characters for SEO optimization
+- ✅ **FAQ Requirements**: 3-15 FAQs per service (mandatory)
+- ✅ **YAML Syntax**: Proper array formatting and field structure
+- ✅ **Required Fields**: All mandatory frontmatter fields must be present
+- ✅ **Type Safety**: Validates data types and formats
+
+**npm Scripts:**
+
+```bash
+# Validate all content files (62 total)
+npm run validate:content
+
+# Validate services only (25 files)
+npm run validate:services
+
+# Validate locations only (37 files)
+npm run validate:locations
+```
+
+**Pre-Commit Enforcement:**
+
+Content validation runs automatically via Husky pre-commit hook:
+
+```bash
+# .husky/pre-commit
+npm run validate:content
+```
+
+**Validation catches errors before deployment:**
+
+- Invalid YAML syntax
+- Missing required fields
+- Description length violations
+- FAQ count violations
+- Type mismatches
+
+**Documentation:** See `CONTENT_VALIDATION.md` for detailed validation rules and troubleshooting.
+
+**Success Metrics:**
+
+- ✅ 62/62 content files passing validation
+- ✅ Zero runtime content errors
+- ✅ Automated quality enforcement at commit time
+
 ### **📄 CONTENT MANAGEMENT**
 
 **MDX Files (Primary Content):**
@@ -639,6 +700,81 @@ export const ComponentName = ({ title, items }: ComponentProps) => {
 };
 ```
 
+## **🔒 SECURITY STANDARDS**
+
+### **API Rate Limiting with Upstash Redis**
+
+**Distributed Rate Limiting (January 2025):**
+
+Contact form API protection using Upstash Redis for serverless-compatible, distributed rate limiting.
+
+**Architecture:**
+
+```typescript
+// lib/rate-limiter.ts - Upstash Redis rate limiter
+export async function checkRateLimit(
+  identifier: string,
+  limit: number = 5,
+  windowSeconds: number = 300
+): Promise<{ allowed: boolean; limit: number; remaining: number; resetAt: number }>;
+```
+
+**Environment Configuration:**
+
+```bash
+# Upstash Redis credentials (required)
+KV_REST_API_URL=https://your-database.upstash.io
+KV_REST_API_TOKEN=your-token-here
+```
+
+**Rate Limit Configuration:**
+
+- **Limit**: 5 requests per 5 minutes per IP address
+- **Window**: 300 seconds (5 minutes)
+- **Identifier**: Client IP address
+- **Fail-Open Design**: Allows requests if Redis is unavailable
+
+**Key Features:**
+
+- ✅ **Serverless Compatible**: HTTP REST API, no TCP connection pooling needed
+- ✅ **Distributed**: Works across multiple Lambda instances and deployments
+- ✅ **Persistent**: Rate limit counters survive cold starts and redeployments
+- ✅ **No Memory Leaks**: Replaced in-memory Map that reset on cold starts
+- ✅ **Auto-Expiry**: Redis TTL automatically clears old rate limit data
+
+**API Integration:**
+
+```typescript
+// app/api/contact/route.ts
+import { checkRateLimit } from "@/lib/rate-limiter";
+
+const ip = headers().get("x-forwarded-for") || headers().get("x-real-ip") || "unknown";
+const rateLimitResult = await checkRateLimit(ip);
+
+if (!rateLimitResult.allowed) {
+  return NextResponse.json(
+    { error: "Rate limit exceeded. Please try again later." },
+    {
+      status: 429,
+      headers: {
+        "X-RateLimit-Limit": rateLimitResult.limit.toString(),
+        "X-RateLimit-Remaining": rateLimitResult.remaining.toString(),
+        "X-RateLimit-Reset": rateLimitResult.resetAt.toString(),
+      },
+    }
+  );
+}
+```
+
+**Benefits Over Previous Implementation:**
+
+- ❌ **Old**: In-memory Map (reset on serverless cold starts)
+- ✅ **New**: Upstash Redis (persistent, distributed state)
+- ❌ **Old**: Memory leaks with Map growth
+- ✅ **New**: Automatic TTL-based cleanup
+- ❌ **Old**: Per-instance rate limiting (inconsistent)
+- ✅ **New**: Global rate limiting across all instances
+
 ## **📊 ANALYTICS & CONSENT MANAGEMENT STANDARDS**
 
 ### **GDPR-Compliant Consent System**
@@ -839,17 +975,25 @@ Before writing ANY code, confirm these critical patterns:
 **Services Architecture (Dual System):**
 
 ```bash
-# ✅ CORRECT: Services use DUAL ARCHITECTURE
-# Route Generation: Minimal MDX files in content/services/ (for generateStaticParams)
+# ✅ CORRECT: Services use DUAL ARCHITECTURE with MDX Frontmatter FAQs
+# Route Generation: MDX files in content/services/ (for generateStaticParams)
 # Content Source: Centralized serviceDataMap in app/services/[slug]/page.tsx
-# Pattern: MDX files provide routing structure, TypeScript provides content
+# FAQs: Stored in MDX frontmatter (migrated January 2025)
+# Pattern: MDX files provide routing structure + FAQs, TypeScript provides content
 
 # Structure:
-# content/services/[service].mdx        ← Minimal frontmatter only (routing)
+# content/services/[service].mdx        ← Frontmatter with FAQs (3-15 items)
 # app/services/[slug]/page.tsx          ← serviceDataMap + rendering logic
+# components/ServiceFAQ.tsx             ← Reads FAQs from data.faqs
 # generateStaticParams()                ← Reads MDX files to build routes
 
-# ❌ WRONG: Rich content in MDX files (content comes from serviceDataMap)
+# FAQ Migration (January 2025):
+# - All service FAQs moved from code to MDX frontmatter
+# - Each service has 3-15 unique, SEO-optimized FAQs
+# - FAQs now content-managed, not code-generated
+# - ServiceFAQ component reads from frontmatter: data.faqs
+
+# ❌ WRONG: Auto-generated location-based FAQs (removed)
 # ❌ WRONG: Deleting MDX files entirely (breaks route generation)
 # ❌ WRONG: Assuming services follow pure location patterns
 ```
