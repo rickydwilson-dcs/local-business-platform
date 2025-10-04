@@ -3,7 +3,6 @@ import fs from "fs/promises";
 import path from "path";
 import matter from "gray-matter";
 import { getServiceData } from "./services-data";
-import { getAllLocations } from "./locations";
 
 export type ContentType = "services" | "locations";
 
@@ -15,17 +14,6 @@ export type ContentItem = {
 };
 
 export async function getContentItems(contentType: ContentType): Promise<ContentItem[]> {
-  if (contentType === "locations") {
-    // For locations, use the centralized location data
-    return getAllLocations().map((location) => ({
-      ...location,
-      // Ensure these properties override any duplicates from spread
-      slug: location.slug,
-      title: location.title,
-      description: location.description,
-    }));
-  }
-
   const dir = path.join(process.cwd(), "content", contentType);
 
   let files: string[] = [];

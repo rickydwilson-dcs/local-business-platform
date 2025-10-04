@@ -114,28 +114,30 @@ export const Button = ({ variant, children, className }: ButtonProps) => {
 
 ### **📂 CONTENT ARCHITECTURE PATTERNS - CRITICAL**
 
-**MANDATORY MDX-FIRST ARCHITECTURE:**
+**UNIFIED MDX-ONLY ARCHITECTURE:**
 
 ```
-✅ REQUIRED - All content categories use MDX as PRIMARY source:
-/content/locations/[location].mdx     - Rich location content (PRIMARY)
-/lib/locations.ts                     - Fallback data only (SECONDARY)
-/app/locations/[slug]/page.tsx        - Dynamic routing (reads MDX first)
+✅ REQUIRED - All content uses MDX as the ONLY source:
+/content/services/[service].mdx       - All service content (62 files total)
+/content/locations/[location].mdx     - All location content
+/app/services/[slug]/page.tsx         - Dynamic routing (reads MDX only)
+/app/locations/[slug]/page.tsx        - Dynamic routing (reads MDX only)
 ```
 
-**MDX Content Priority System:**
+**Single Source of Truth:**
 
 ```tsx
-// ✅ CORRECT - MDX First approach
-1. Check for /content/locations/[slug].mdx file
+// ✅ CORRECT - MDX-only approach
+1. Read /content/[category]/[slug].mdx file
 2. Parse MDX frontmatter and content
 3. Render using existing component system
-4. Fallback to /lib/locations.ts only if MDX missing
+4. No fallback data structures - MDX is the single source of truth
 ```
 
 **PROHIBITED CONTENT PATTERNS:**
 
-- ❌ Centralized data as primary content source
+- ❌ Dual architecture with fallback data structures
+- ❌ Centralized TypeScript data files (lib/locations.ts, lib/services.ts)
 - ❌ Individual page files per content item (/app/locations/brighton/page.tsx)
 - ❌ Content-specific loaders (/lib/brighton-content.ts)
 - ❌ Bypassing MDX content system
@@ -143,19 +145,17 @@ export const Button = ({ variant, children, className }: ButtonProps) => {
 **Dynamic Route Requirements:**
 
 ```tsx
-// ✅ REQUIRED in /app/locations/[slug]/page.tsx
-export default async function LocationPage({ params }: { params: { slug: string } }) {
-  // 1. FIRST: Try to read MDX file
-  const mdxContent = await readMDXFile(`/content/locations/${params.slug}.mdx`);
+// ✅ REQUIRED in /app/locations/[slug]/page.tsx and /app/services/[slug]/page.tsx
+export default async function ContentPage({ params }: { params: { slug: string } }) {
+  // Read MDX file - single source of truth
+  const mdxContent = await readMDXFile(`/content/category/${params.slug}.mdx`);
 
-  if (mdxContent) {
-    // Use rich MDX content with full component system
-    return renderMDXContent(mdxContent);
+  if (!mdxContent) {
+    notFound(); // Return 404 if MDX doesn't exist
   }
 
-  // 2. FALLBACK: Use centralized data only if no MDX
-  const fallbackData = getLocationFromCentralized(params.slug);
-  return renderFallbackContent(fallbackData);
+  // Render using MDX content only
+  return renderMDXContent(mdxContent);
 }
 ```
 
@@ -222,20 +222,16 @@ npm run validate:content
 
 ### **📄 CONTENT MANAGEMENT**
 
-**MDX Files (Primary Content):**
+**MDX Files (Single Source of Truth):**
 
-- ✅ ALL rich content in appropriate `/content/` subdirectories
+- ✅ ALL content in appropriate `/content/` subdirectories
 - ✅ Use comprehensive frontmatter for metadata
 - ✅ Full component-mappable structure
 - ✅ Local customization and detailed content
+- ✅ Both services AND locations managed as MDX files
+- ✅ 62 total content files (25 services + 37 locations)
 - ❌ NO content hardcoded in components
-
-**Centralized Data (Fallback Only):**
-
-- ✅ Basic fallback data in `/lib/[category].ts`
-- ✅ Simple structure for locations without MDX
-- ❌ NOT primary content source
-- ❌ Should not replace rich MDX content
+- ❌ NO centralized TypeScript data files (deleted lib/locations.ts)
 
 ### **📝 CONTENT ACCURACY & CLAIMS**
 
@@ -972,134 +968,137 @@ find app -name "*.tsx" -path "*/[slug]/*" | head -10
 
 Before writing ANY code, confirm these critical patterns:
 
-**Services Architecture (Dual System):**
+**Services Architecture (Unified MDX-Only):**
 
 ```bash
-# ✅ CORRECT: Services use DUAL ARCHITECTURE with MDX Frontmatter FAQs
-# Route Generation: MDX files in content/services/ (for generateStaticParams)
-# Content Source: Centralized serviceDataMap in app/services/[slug]/page.tsx
-# FAQs: Stored in MDX frontmatter (migrated January 2025)
-# Pattern: MDX files provide routing structure + FAQs, TypeScript provides content
+# ✅ CORRECT: Services use UNIFIED MDX-ONLY architecture
+# Content Source: Rich MDX files in content/services/ (all content in frontmatter)
+# Route Generation: generateStaticParams() reads MDX files to build routes
+# FAQs: Stored in MDX frontmatter (3-15 items per service)
+# Pattern: MDX is the single source of truth for all service content
 
 # Structure:
-# content/services/[service].mdx        ← Frontmatter with FAQs (3-15 items)
-# app/services/[slug]/page.tsx          ← serviceDataMap + rendering logic
-# components/ServiceFAQ.tsx             ← Reads FAQs from data.faqs
+# content/services/[service].mdx        ← Complete service content in frontmatter
+# app/services/[slug]/page.tsx          ← Dynamic template reads MDX only
+# components/ServiceFAQ.tsx             ← Reads FAQs from MDX frontmatter
 # generateStaticParams()                ← Reads MDX files to build routes
 
-# FAQ Migration (January 2025):
-# - All service FAQs moved from code to MDX frontmatter
+# Key Features (January 2025):
+# - All service content in MDX frontmatter (hero, specialists, FAQs, benefits)
 # - Each service has 3-15 unique, SEO-optimized FAQs
-# - FAQs now content-managed, not code-generated
-# - ServiceFAQ component reads from frontmatter: data.faqs
+# - No centralized TypeScript data structures
+# - Single source of truth for all content
 
-# ❌ WRONG: Auto-generated location-based FAQs (removed)
-# ❌ WRONG: Deleting MDX files entirely (breaks route generation)
-# ❌ WRONG: Assuming services follow pure location patterns
+# ❌ WRONG: Creating centralized data files (lib/services.ts)
+# ❌ WRONG: Dual architecture with fallback data
+# ❌ WRONG: TypeScript data structures for content
 ```
 
-**Locations Architecture (UNIFIED TEMPLATE):**
+**Locations Architecture (Unified MDX-Only):**
 
 ```bash
-# ✅ CORRECT: Locations use unified dynamic template with MDX-first architecture
-# Content: Rich MDX files in content/locations/[location].mdx
+# ✅ CORRECT: Locations use UNIFIED MDX-ONLY architecture
+# Content Source: Rich MDX files in content/locations/[location].mdx
+# Route Generation: generateStaticParams() reads MDX files to build routes
 # Template: Single dynamic route app/locations/[slug]/page.tsx handles ALL locations
 # Features: Conditional rendering for towns directory, hero images, pricing, etc.
-# Data Flow: MDX frontmatter → props → conditional component rendering
+# Data Flow: MDX frontmatter → dynamic template → conditional rendering
+# Pattern: MDX is the single source of truth for all location content
+
+# Key Features:
+# - lib/locations.ts deleted (894 lines removed)
+# - No fallback data structures
+# - All content from MDX frontmatter only
 
 # ❌ WRONG: Creating static pages like app/locations/surrey/page.tsx
-# ❌ WRONG: Using centralized data files for locations
+# ❌ WRONG: Using centralized data files (lib/locations.ts deleted)
 # ❌ WRONG: Individual location-specific components or routing
+# ❌ WRONG: Dual architecture with fallback data
 ```
 
 ### **Phase 3: Implementation Path Confirmation (MANDATORY)**
 
 **For Services:**
 
-- [ ] Confirmed serviceDataMap exists in app/services/[slug]/page.tsx
-- [ ] Verified existing services use dual architecture (minimal MDX + data map)
-- [ ] Checked that minimal MDX files exist for route generation
-- [ ] Ready to add new service to serviceDataMap AND create minimal MDX file
+- [ ] Confirmed app/services/[slug]/page.tsx uses unified MDX-only architecture
+- [ ] Verified existing services have comprehensive MDX frontmatter
+- [ ] Checked that all service content comes from MDX files (no TypeScript data)
+- [ ] Ready to create new MDX file with complete frontmatter structure
 
 **For Locations:**
 
 - [ ] Confirmed MDX files exist in content/locations/
-- [ ] Verified existing locations follow MDX-first pattern
-- [ ] Checked that routing file reads MDX content
+- [ ] Verified existing locations follow MDX-only pattern
+- [ ] Checked that routing file reads MDX content only (no fallback data)
+- [ ] Confirmed lib/locations.ts was deleted (no centralized data)
 - [ ] Ready to create new .mdx file with proper frontmatter
 
-## **🔍 HYBRID ARCHITECTURE UNDERSTANDING**
+## **🔍 UNIFIED ARCHITECTURE UNDERSTANDING**
 
-This codebase uses **DIFFERENT PATTERNS** for different content types:
+This codebase uses a **CONSISTENT PATTERN** for all content types:
 
-### **Services = Dual Architecture (Routing + Data)**
+### **Unified MDX-Only Architecture**
 
-- **Route Generation**: Minimal MDX files in content/services/ (frontmatter only)
-- **Content Source**: TypeScript objects in serviceDataMap (app/services/[slug]/page.tsx)
+- **Content Source**: Individual .mdx files in /content/services/ and /content/locations/
+- **Content Structure**: Rich markdown with comprehensive frontmatter
+- **Routing**: Dynamic routes read MDX files directly
 - **Build Process**: generateStaticParams() reads MDX files to create routes
-- **Rendering**: Rich content from centralized serviceDataMap, not MDX content
-- **Pattern**: MDX provides structure, TypeScript provides all actual content
-
-### **Locations = MDX-First (File-Based)**
-
-- **Primary Source**: Individual .mdx files in content/locations/
-- **Content**: Rich markdown with comprehensive frontmatter
-- **Routing**: Dynamic route reads filesystem for MDX content
-- **Pattern**: Each location gets its own detailed .mdx file
+- **Rendering**: All content from MDX frontmatter and markdown, no fallback data
+- **Pattern**: MDX is the single source of truth for both services AND locations
+- **Total Files**: 62 MDX content files (25 services + 37 locations)
 
 ## **🚫 MANDATORY VIOLATION PREVENTION**
 
-**These actions indicate you DID NOT follow the discovery protocol:**
+**These actions indicate you DID NOT follow the unified MDX architecture:**
 
-### **Service Implementation Violations:**
+### **Content Implementation Violations:**
 
-- ❌ Creating rich content in MDX files (content should be in serviceDataMap)
-- ❌ Deleting all MDX files (breaks route generation in generateStaticParams)
-- ❌ Building pure file-based service architecture without serviceDataMap
-- ❌ Ignoring the dual architecture pattern (both MDX structure + data content needed)
-
-### **Location Implementation Violations:**
-
-- ❌ Adding location data to centralized TypeScript files
-- ❌ Assuming locations use data structures like services
+- ❌ Creating centralized TypeScript data files (lib/locations.ts, lib/services.ts)
+- ❌ Building dual architecture with fallback data structures
 - ❌ Creating static page files like app/locations/surrey/page.tsx (DELETED - USE DYNAMIC ROUTING ONLY)
-- ❌ Bypassing the unified dynamic location template at app/locations/[slug]/page.tsx
-- ❌ Creating individual location-specific components or loaders
-- ❌ Hardcoding location data instead of using MDX frontmatter
+- ❌ Bypassing dynamic routing templates in favor of individual page files
+- ❌ Creating individual location-specific or service-specific components or loaders
+- ❌ Hardcoding content data instead of using MDX frontmatter
+- ❌ Assuming services and locations use different architectural patterns
 
 ## **🎯 CORRECT IMPLEMENTATION APPROACHES**
 
-### **Adding New Services (Dual Architecture Pattern):**
-
-```typescript
-// ✅ STEP 1: Add to serviceDataMap in app/services/[slug]/page.tsx
-"new-service-slug": {
-  title: "New Service Title",
-  description: "Service description...",
-  badge: "Service Badge",
-  benefits: [
-    "Benefit 1",
-    "Benefit 2"
-  ],
-  faqs: [
-    {
-      question: "Question?",
-      answer: "Answer..."
-    }
-  ]
-}
-```
+### **Adding New Services (MDX-Only Pattern):**
 
 ```mdx
-## // ✅ STEP 2: Create minimal MDX file: content/services/new-service-slug.mdx
-
-title: "New Service Title"
-description: "Service description for SEO..."
+// ✅ Create content/services/new-service-slug.mdx with comprehensive frontmatter
 
 ---
+
+title: "New Service Title"
+seoTitle: "New Service | Colossus Scaffolding"
+description: "Service description for SEO (50-200 characters)..."
+keywords: ["keyword1", "keyword2"]
+heroImage: "/Service-Image.png"
+hero:
+title: "Professional New Service"
+description: "Service benefits and value proposition..."
+phone: "01424 466 661"
+trustBadges: ["TG20:21 Compliant", "CHAS Accredited"]
+ctaText: "Get Your Free Quote"
+ctaUrl: "/contact"
+specialists:
+title: "New Service Specialists"
+cards: [...]
+benefits:
+
+- "Benefit 1"
+- "Benefit 2"
+  faqs:
+- question: "Question?"
+  answer: "Answer..."
+
+---
+
+## Markdown content renders below structured sections
 ```
 
-### **Adding New Locations (Unified Template Pattern):**
+### **Adding New Locations (MDX-Only Pattern):**
 
 ```mdx
 ## // ✅ CORRECT: Create content/locations/new-location.mdx
@@ -1135,29 +1134,33 @@ townsList: [...]
 ## Markdown content renders below structured sections
 ```
 
-**Key Features of Unified Template:**
+**Key Features of Unified MDX Architecture:**
 
+- ✅ Single source of truth for all content (services AND locations)
 - ✅ Automatic hero image display via heroImage frontmatter
-- ✅ Conditional towns directory rendering for counties
-- ✅ Structured sections (specialists, services, pricing) via frontmatter
-- ✅ No-wrap phone button styling built-in
-- ✅ Single template handles both town and county content types
+- ✅ Conditional rendering of sections based on frontmatter presence
+- ✅ Structured sections (specialists, services, pricing, FAQs) via frontmatter
+- ✅ Dynamic routing templates handle all variations
+- ✅ No centralized data files required (deleted lib/locations.ts)
+- ✅ Consistent pattern across all content types
 
 ## **⚡ IMMEDIATE VIOLATION DETECTION**
 
-If you create any of these patterns, you have violated the architecture:
+If you create any of these patterns, you have violated the unified MDX architecture:
 
 ```bash
-# 🚨 SERVICE VIOLATIONS (Architectural errors):
-# Creating rich content in service MDX files (content should be in serviceDataMap)
-# Deleting all service MDX files (breaks generateStaticParams route generation)
-# Building service architecture without serviceDataMap (missing centralized data)
+# 🚨 CONTENT ARCHITECTURE VIOLATIONS (Delete immediately):
+lib/locations.ts                    # Centralized location data (DELETED)
+lib/services.ts                     # Centralized service data
+app/locations/brighton/page.tsx     # Static location page files
+app/services/scaffolding/page.tsx   # Static service page files
+lib/brighton-data.ts                # Location-specific data files
+lib/service-data.ts                 # Service-specific data files
 
-# 🚨 LOCATION VIOLATIONS (Delete immediately):
-app/locations/brighton/page.tsx
-app/locations/hastings/page.tsx
-lib/brighton-data.ts
-lib/hastings-data.ts
+# 🚨 These indicate dual architecture anti-pattern:
+# - Fallback data structures in lib/
+# - TypeScript data files instead of MDX
+# - Static pages instead of dynamic routing
 ```
 
 ## **🔧 VIOLATION RECOVERY PROCESS**
@@ -1175,9 +1178,9 @@ If violations are discovered:
 Before ANY content implementation:
 
 - [ ] **Read existing routing file** for the content type
-- [ ] **Understand data source pattern** (MDX vs TypeScript)
-- [ ] **Confirm content structure** matches existing implementations
-- [ ] **Identify correct implementation approach** (file vs data)
+- [ ] **Confirm MDX-only architecture** (no fallback data structures)
+- [ ] **Verify content structure** matches existing MDX frontmatter patterns
+- [ ] **Identify MDX frontmatter requirements** for the content type
 - [ ] **Verify no architectural violations** in planned approach
 - [ ] **Test implementation** matches established patterns
 
@@ -1187,17 +1190,19 @@ Your implementation is correct when:
 
 **Services:**
 
-- [ ] New service added to serviceDataMap in existing routing file
-- [ ] Minimal MDX file created in content/services/ (frontmatter only)
-- [ ] Service data follows existing TypeScript pattern in serviceDataMap
-- [ ] Service page renders using existing component system
-- [ ] generateStaticParams() can find the service for route generation
+- [ ] New .mdx file created in content/services/ with comprehensive frontmatter
+- [ ] All service data in MDX frontmatter (title, description, hero, specialists, FAQs, etc.)
+- [ ] Service follows established MDX pattern (not TypeScript data structures)
+- [ ] Service page renders using dynamic routing template
+- [ ] generateStaticParams() can find the service MDX file
+- [ ] No centralized data files created for the service
 
 **Locations:**
 
-- [ ] New .mdx file created in content/locations/
+- [ ] New .mdx file created in content/locations/ with comprehensive frontmatter
+- [ ] All location data in MDX frontmatter (hero, specialists, services, pricing, etc.)
 - [ ] Content follows established MDX frontmatter pattern
-- [ ] Location renders via existing dynamic routing
+- [ ] Location renders via existing dynamic routing template
 - [ ] No centralized data files created for the location
 
 ## **🚨 ENFORCEMENT PRIORITY**
@@ -1254,20 +1259,21 @@ This discovery protocol is **MORE IMPORTANT** than any feature request. If asked
 - [ ] **Schema:** Appropriate schema markup added
 - [ ] **Schema:** Schema validates with testing tools
 - [ ] **Accessibility:** WCAG AA compliance maintained
-- [ ] **CRITICAL:** Services use dual architecture (minimal MDX + serviceDataMap)
-- [ ] **CRITICAL:** Locations use MDX-first architecture
-- [ ] **CRITICAL:** No Architecture Violations: Implementation follows discovered patterns
-- [ ] **CRITICAL:** Route generation works (services have minimal MDX files)
+- [ ] **CRITICAL:** Services use unified MDX-only architecture (comprehensive frontmatter)
+- [ ] **CRITICAL:** Locations use unified MDX-only architecture
+- [ ] **CRITICAL:** No Architecture Violations: Implementation follows unified MDX pattern
+- [ ] **CRITICAL:** Route generation works (all content from MDX files)
+- [ ] **CRITICAL:** No centralized TypeScript data files (lib/locations.ts deleted)
 
 ### **🔄 REFACTORING PRIORITY**
 
 **When modifying existing code:**
 
 1. **Complete architecture discovery first** - Understand existing patterns
-2. **Fix architecture violations** - Ensure correct dual/MDX patterns
+2. **Fix architecture violations** - Ensure unified MDX-only pattern
 3. **Fix styling** - Remove inline styles, use Tailwind
 4. **Move components** - Relocate to `/components/ui/` if reusable
-5. **Extract content** - Move hardcoded content to appropriate structure
+5. **Extract content** - Move hardcoded content to MDX frontmatter
 6. **Add TypeScript** - Ensure all props are typed
 7. **SEO audit** - Add missing meta data and schema
 8. **Accessibility check** - Ensure compliance maintained
@@ -1277,82 +1283,81 @@ This discovery protocol is **MORE IMPORTANT** than any feature request. If asked
 **When asked to "create service pages":**
 
 1. ✅ **FIRST:** Complete Architecture Discovery Protocol
-2. ✅ **DISCOVER:** Services use dual architecture (minimal MDX + serviceDataMap)
-3. ✅ **IMPLEMENT:** Add service data to serviceDataMap in app/services/[slug]/page.tsx
-4. ✅ **IMPLEMENT:** Create minimal MDX file in content/services/[service].mdx
-5. ✅ **VERIFY:** generateStaticParams() can find the service
-6. ✅ **TEST:** Service page renders with content from serviceDataMap
-7. ✅ **VALIDATE:** No architectural violations exist
+2. ✅ **DISCOVER:** Services use unified MDX-only architecture
+3. ✅ **IMPLEMENT:** Create comprehensive MDX file in content/services/[service].mdx
+4. ✅ **STRUCTURE:** Include all required frontmatter (title, description, hero, specialists, FAQs, etc.)
+5. ✅ **VERIFY:** generateStaticParams() can find the service MDX file
+6. ✅ **TEST:** Service page renders with content from MDX frontmatter
+7. ✅ **VALIDATE:** No centralized data files created (no lib/services.ts)
+8. ✅ **VALIDATE:** No architectural violations exist
 
 **When asked to "create location pages":**
 
 1. ✅ **FIRST:** Complete Architecture Discovery Protocol
-2. ✅ **DISCOVER:** Locations use MDX-first architecture
-3. ✅ Create rich MDX content in `/content/locations/[location].mdx`
-4. ✅ Ensure dynamic route reads MDX files as primary source
-5. ✅ Use existing components with Tailwind classes only
-6. ✅ Include comprehensive local content and knowledge
-7. ✅ Add appropriate schema markup from MDX frontmatter
-8. ✅ Include proper heading hierarchy and local SEO
-9. ✅ Add descriptive alt text to any images
-10. ✅ Test pages use MDX content, not centralized fallback
-11. ✅ Validate schema with Google's testing tool
-12. ✅ Verify no architecture violations exist
+2. ✅ **DISCOVER:** Locations use unified MDX-only architecture
+3. ✅ **IMPLEMENT:** Create comprehensive MDX file in `/content/locations/[location].mdx`
+4. ✅ **STRUCTURE:** Include all required frontmatter (hero, specialists, services, pricing, etc.)
+5. ✅ **VERIFY:** Dynamic route reads MDX files as single source of truth
+6. ✅ Use existing components with Tailwind classes only
+7. ✅ Include comprehensive local content and knowledge
+8. ✅ Add appropriate schema markup from MDX frontmatter
+9. ✅ Include proper heading hierarchy and local SEO
+10. ✅ Add descriptive alt text to any images
+11. ✅ **TEST:** Pages render from MDX content (no fallback data)
+12. ✅ Validate schema with Google's testing tool
+13. ✅ **VALIDATE:** No centralized data files created (lib/locations.ts deleted)
+14. ✅ Verify no architecture violations exist
 
 ### **🛠️ TESTING REQUIREMENTS**
 
 **Before marking task complete:**
 
 - [ ] **CRITICAL:** Architecture Discovery Protocol completed and documented
-- [ ] **CRITICAL:** Implementation follows discovered patterns exactly
+- [ ] **CRITICAL:** Implementation follows unified MDX-only architecture
 - [ ] **Lighthouse SEO score:** 95+
 - [ ] **Schema validation:** Pass Google's Rich Results Test
 - [ ] **Accessibility:** Pass WCAG AA (contrast, alt text, headings)
 - [ ] **Mobile responsive:** All breakpoints work correctly
 - [ ] **Core Web Vitals:** LCP, CLS, FID within Google's thresholds
-- [ ] **Services:** Content from serviceDataMap renders properly
-- [ ] **Services:** Route generation works (minimal MDX files exist)
-- [ ] **Locations:** Rich MDX content displays correctly (not fallback data)
+- [ ] **Services:** Content from MDX frontmatter renders properly
+- [ ] **Services:** Route generation works (MDX files exist with comprehensive frontmatter)
+- [ ] **Locations:** MDX content displays correctly (no fallback data structures)
 - [ ] **Components:** All sourced from `/components/ui/`
+- [ ] **Architecture:** No centralized TypeScript data files created
 
 ### **⚠️ CRITICAL ARCHITECTURE RULES**
 
-**MDX-FIRST CONTENT SYSTEM (LOCATIONS):**
+**UNIFIED MDX-ONLY CONTENT SYSTEM:**
 
-- ✅ **PRIMARY:** Rich MDX files with comprehensive local content
-- ✅ **SECONDARY:** Centralized data as fallback only
-- ✅ **DYNAMIC ROUTING:** Must read MDX first, fallback second
-- ❌ **NEVER:** Use centralized data as primary content source
-- ❌ **NEVER:** Create individual page files per location
-- ❌ **NEVER:** Create content-specific loaders
-
-**DUAL ARCHITECTURE SYSTEM (SERVICES):**
-
-- ✅ **ROUTE GENERATION:** Minimal MDX files in content/services/ for generateStaticParams()
-- ✅ **CONTENT SOURCE:** Rich data in serviceDataMap within routing file
-- ✅ **RENDERING:** Content comes from TypeScript data, not MDX
-- ❌ **NEVER:** Delete all service MDX files (breaks route generation)
-- ❌ **NEVER:** Put rich content in service MDX files
-- ❌ **NEVER:** Build services without serviceDataMap
+- ✅ **SINGLE SOURCE:** MDX files with comprehensive frontmatter for ALL content
+- ✅ **SERVICES:** Rich MDX files in content/services/ (25 files)
+- ✅ **LOCATIONS:** Rich MDX files in content/locations/ (37 files)
+- ✅ **DYNAMIC ROUTING:** Dynamic route templates read MDX files only
+- ✅ **62 TOTAL FILES:** All content managed as MDX
+- ❌ **NEVER:** Use centralized TypeScript data files (lib/locations.ts, lib/services.ts)
+- ❌ **NEVER:** Create individual page files per content item
+- ❌ **NEVER:** Create content-specific loaders or data structures
+- ❌ **NEVER:** Build dual architecture with fallback data
 
 **VIOLATION DETECTION:**
 Any of these files indicate architecture violations and must be corrected immediately:
 
-**Location Violations (DELETE IMMEDIATELY):**
+**Content Architecture Violations (DELETE IMMEDIATELY):**
 
-- `/app/locations/surrey/page.tsx` (DELETED)
-- `/app/locations/kent/page.tsx` (DELETED)
-- `/app/locations/east-sussex/page.tsx` (DELETED)
-- `/app/locations/west-sussex/page.tsx` (DELETED)
+- `/lib/locations.ts` (DELETED - centralized location data)
+- `/lib/services.ts` (centralized service data)
 - `/app/locations/[specific-location]/page.tsx` (any static location pages)
+- `/app/services/[specific-service]/page.tsx` (any static service pages)
 - `/lib/[specific-location]-content.ts` (location-specific data files)
+- `/lib/[specific-service]-data.ts` (service-specific data files)
 - `/components/[location]-specific-component.tsx` (location-specific components)
 
-**Service Violations:**
+**Architectural Anti-Patterns:**
 
-- Service architecture without both minimal MDX files AND serviceDataMap
-- Rich content in service MDX files instead of serviceDataMap
-- Deleting all service MDX files (breaks generateStaticParams)
+- Dual architecture with fallback data structures
+- TypeScript data files instead of MDX frontmatter
+- Static page files instead of dynamic routing templates
+- Content-specific loaders or data structures
 
 **ENFORCEMENT:**
-These rules are MANDATORY and NON-NEGOTIABLE. Any violations must be corrected immediately before proceeding with any other work. The Architecture Discovery Protocol MUST be completed before any implementation begins.
+These rules are MANDATORY and NON-NEGOTIABLE. The unified MDX-only architecture must be maintained. Any violations must be corrected immediately before proceeding with any other work. The Architecture Discovery Protocol MUST be completed before any implementation begins.
