@@ -33,7 +33,7 @@ export async function POST(request: Request): Promise<Response> {
   if (!rateLimit.allowed) {
     return Response.json(
       {
-        error: "Too many requests. Please wait before submitting again.",
+        error: "Something went wrong. Please call us directly on the number below.",
         retryAfter: rateLimit.retryAfter,
       },
       {
