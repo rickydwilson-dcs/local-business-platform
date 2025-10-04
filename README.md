@@ -41,17 +41,21 @@ KV_REST_API_TOKEN=your-token-here
 
 ## 📝 Content Management
 
+**Unified MDX-Only Architecture** - All content managed exclusively through MDX frontmatter.
+
 ### Adding Services
 
 1. Create `content/services/service-name.mdx`
-2. Add basic frontmatter (title, description)
-3. Service details go in the page component's `serviceDataMap`
+2. Add comprehensive frontmatter (title, description, hero, specialists, FAQs, benefits)
+3. Dynamic template renders all content from MDX frontmatter
 
 ### Adding Locations
 
 1. Create `content/locations/location-name.mdx`
-2. Add comprehensive frontmatter with hero, services, pricing sections
-3. Single template handles all locations automatically
+2. Add comprehensive frontmatter (hero, services, pricing, FAQs sections)
+3. Dynamic template renders all content from MDX frontmatter
+
+**Total Content:** 62 MDX files (25 services + 37 locations) - single source of truth.
 
 ## ✅ Content Validation
 
