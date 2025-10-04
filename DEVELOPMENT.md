@@ -152,6 +152,10 @@ npm run lint             # Run ESLint
 npm run lint:fix         # Run ESLint with auto-fix
 npm run format           # Format code with Prettier
 npm run type-check       # Check TypeScript types
+npm run test             # Run test suite (68 tests)
+npm run test:watch       # Run tests in watch mode
+npm run test:coverage    # Generate test coverage report
+npm run validate:content # Validate all MDX content files
 npm run pre-commit-check # Run all quality checks
 npm run deploy:production # Auto-create production deployment PR
 ```
@@ -163,13 +167,18 @@ The CI pipeline runs automatically on:
 - Every push to `develop`, `staging`, `main`
 - Every PR to `staging`, `main`
 
-**Pipeline steps:**
+**Pipeline steps (Single Quality Checks Job):**
 
-1. **Quality Checks** - ESLint, TypeScript, Build test
-2. **Build Test** - Verify production build works
-3. **Deployment Check** - Confirm readiness for deployment
+1. **ESLint** - Code linting and quality checks
+2. **TypeScript** - Type checking and compilation validation
+3. **Content Validation** - MDX frontmatter validation (all 62 content files)
+4. **Tests** - Run full test suite (68 tests with Vitest)
+5. **Build** - Production build verification
+6. **Cache** - Build cache for faster subsequent runs
 
 **Status checks are required** - PRs cannot be merged if any step fails.
+
+**Optimization:** Consolidated from 3 separate jobs to 1 comprehensive job, reducing CI time by 4-6 minutes per run.
 
 ## Quality Gates
 

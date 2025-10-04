@@ -159,6 +159,60 @@ export default async function ContentPage({ params }: { params: { slug: string }
 }
 ```
 
+### **🧪 TESTING STANDARDS**
+
+**Comprehensive Testing Framework (January 2025):**
+
+Full test coverage using Vitest for unit and integration testing across critical application paths.
+
+**Testing Architecture:**
+
+```typescript
+// vitest.config.ts - Vitest configuration
+// vitest.setup.ts - Global test setup with jsdom
+// Test files: app/api/contact/__tests__/, lib/__tests__/
+```
+
+**Test Coverage:**
+
+- ✅ **Contact API Tests** (13 tests) - Form validation, email handling, rate limiting integration
+- ✅ **Rate Limiter Tests** (17 tests) - Redis mocking, IP isolation, error handling, fail-open design
+- ✅ **Content Schema Tests** (21 tests) - Zod validation for service/location frontmatter
+- ✅ **Location Utils Tests** (17 tests) - Location detection helpers and area served logic
+
+**Total: 68 passing tests** executing in ~2 seconds with ~95ms actual test time.
+
+**npm Scripts:**
+
+```bash
+# Run all tests
+npm test
+
+# Watch mode for development
+npm run test:watch
+
+# Generate coverage report
+npm run test:coverage
+
+# Interactive test UI
+npm run test:ui
+```
+
+**CI Integration:**
+
+Tests run automatically in GitHub Actions CI pipeline before every deployment, ensuring:
+
+- No regressions in contact form functionality
+- Rate limiting works correctly across environments
+- Content validation catches MDX errors
+- Location detection logic remains accurate
+
+**Mocking Strategy:**
+
+- **Upstash Redis**: Mocked for rate limiter tests
+- **Resend Email**: Mocked for contact API tests
+- **File System**: Mocked for content validation tests
+
 ### **✅ CONTENT VALIDATION STANDARDS**
 
 **Automated Content Quality Enforcement (January 2025):**
@@ -233,6 +287,33 @@ npm run validate:content
 - ❌ NO content hardcoded in components
 - ❌ NO centralized TypeScript data files (deleted lib/locations.ts)
 
+**ServiceAbout Content Migration (January 2025):**
+
+All ServiceAbout component content migrated from hardcoded TypeScript to MDX frontmatter:
+
+- ✅ **Migrated:** 200+ lines of hardcoded content from `components/ui/service-about.tsx`
+- ✅ **Added:** `about` section to 11 service MDX files with `whatIs`, `whenNeeded`, `whatAchieve`, `keyPoints`
+- ✅ **Refactored:** ServiceAbout component now reads from MDX `about` prop with fallback defaults
+- ✅ **Schema:** Added Zod validation for `about` field in ServiceFrontmatterSchema
+- ✅ **Benefits:** Content now editable by non-developers, follows MDX-first architecture
+
+**Example Service About Section:**
+
+```yaml
+about:
+  whatIs: "Access scaffolding is a temporary structure system designed to provide safe, stable working platforms..."
+  whenNeeded:
+    - "Building maintenance and exterior repairs"
+    - "Window cleaning and replacement projects"
+    - "Painting and rendering work on facades"
+  whatAchieve:
+    - "Safe working at height with full fall protection"
+    - "Improved productivity through stable working platforms"
+  keyPoints:
+    - "TG20:21 compliant design ensuring latest safety standards"
+    - "CISRS qualified scaffolders with extensive experience"
+```
+
 ### **📝 CONTENT ACCURACY & CLAIMS**
 
 **CRITICAL: Truthful Content Standards**
@@ -283,6 +364,17 @@ keywords: ["keyword1", "keyword2"]
 hero:
   title: "Hero Title"
   description: "Hero description"
+about:
+  whatIs: "Detailed service description..."
+  whenNeeded:
+    - "Use case 1"
+    - "Use case 2"
+  whatAchieve:
+    - "Benefit 1"
+    - "Benefit 2"
+  keyPoints:
+    - "Key point 1"
+    - "Key point 2"
 specialists:
   title: "Section Title"
   cards: [...]
