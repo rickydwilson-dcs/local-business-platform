@@ -32,6 +32,12 @@ interface ServiceData {
   faqs: Array<{ question: string; answer: string }>;
   heroImage?: string;
   galleryImages?: string[];
+  about?: {
+    whatIs: string;
+    whenNeeded: string[];
+    whatAchieve: string[];
+    keyPoints?: string[];
+  };
   businessHours?: {
     monday: string;
     tuesday: string;
@@ -68,6 +74,7 @@ async function getServiceDataFromMDX(slug: string): Promise<ServiceData | null> 
       faqs: data.faqs || [],
       heroImage: data.hero?.image || data.heroImage, // Read from hero.image or fallback to root heroImage
       galleryImages: data.galleryImages,
+      about: data.about,
       businessHours: data.businessHours,
       localContact: data.localContact,
     };
@@ -281,7 +288,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
         heroImage={serviceData.heroImage}
       />
 
-      <ServiceAbout serviceName={serviceName} slug={slug} />
+      <ServiceAbout serviceName={serviceName} slug={slug} about={serviceData.about} />
 
       <ServiceBenefits
         title="Why Choose Our Service?"
