@@ -1,4 +1,2 @@
 npx lint-staged
-# Note: Content validation temporarily informational only
-# TODO: Fix 9 content errors then uncomment to enforce
-# npm run validate:content
+npm run validate:content
