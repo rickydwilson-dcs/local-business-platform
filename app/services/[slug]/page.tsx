@@ -13,6 +13,7 @@ import { ServiceCTA } from "@/components/ui/service-cta";
 import Breadcrumbs from "@/components/ui/breadcrumbs";
 import Schema from "@/components/Schema";
 import { absUrl } from "@/lib/site";
+import { deriveLocationContext, getAreaServed } from "@/lib/location-utils";
 
 export const dynamic = "force-static";
 export const dynamicParams = false;
@@ -65,7 +66,7 @@ async function getServiceDataFromMDX(slug: string): Promise<ServiceData | null> 
       keywords: data.keywords,
       benefits: data.benefits || [],
       faqs: data.faqs || [],
-      heroImage: data.heroImage,
+      heroImage: data.hero?.image || data.heroImage, // Read from hero.image or fallback to root heroImage
       galleryImages: data.galleryImages,
       businessHours: data.businessHours,
       localContact: data.localContact,
@@ -100,16 +101,14 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
     .replace(" Systems", "");
 
   // Enhanced local SEO for service-location combinations
-  const isLocationSpecific =
-    slug.includes("-brighton") || slug.includes("-canterbury") || slug.includes("-hastings");
+  const locationContext = deriveLocationContext(slug);
+  const isLocationSpecific = locationContext !== null;
   let optimizedTitle = serviceData.seoTitle || `${serviceData.title} | Colossus Scaffolding`;
   const optimizedDescription = serviceData.description;
   let keywords: string[] = serviceData.keywords || [];
 
-  if (isLocationSpecific) {
-    // Extract location from slug
-    const location = slug.split("-").pop();
-    const locationName = location ? location.charAt(0).toUpperCase() + location.slice(1) : "";
+  if (isLocationSpecific && locationContext) {
+    const { locationName, location } = locationContext;
 
     // Optimize title for local SEO (under 60 characters)
     optimizedTitle =
@@ -225,29 +224,24 @@ export default async function Page({ params }: { params: Promise<Params> }) {
     .replace(" Systems", "");
 
   // Detect if this is a location-specific service
-  const isLocationSpecific =
-    slug.includes("-brighton") || slug.includes("-canterbury") || slug.includes("-hastings");
-  let locationName = "";
-  let locationSlug = "";
-
-  if (isLocationSpecific) {
-    const parts = slug.split("-");
-    const lastPart = parts[parts.length - 1];
-    locationName = lastPart.charAt(0).toUpperCase() + lastPart.slice(1);
-    locationSlug = lastPart;
-  }
+  const locationContext = deriveLocationContext(slug);
+  const isLocationSpecific = locationContext !== null;
 
   // Build breadcrumbs based on location-specific or general service
-  const breadcrumbItems = isLocationSpecific
-    ? [
-        { name: "Locations", href: "/locations" },
-        { name: locationName, href: `/locations/${locationSlug}` },
-        { name: serviceName, href: `/services/${slug}`, current: true },
-      ]
-    : [
-        { name: "Services", href: "/services" },
-        { name: serviceName, href: `/services/${slug}`, current: true },
-      ];
+  const breadcrumbItems =
+    isLocationSpecific && locationContext
+      ? [
+          { name: "Locations", href: "/locations" },
+          {
+            name: locationContext.locationName,
+            href: `/locations/${locationContext.locationSlug}`,
+          },
+          { name: serviceName, href: `/services/${slug}`, current: true },
+        ]
+      : [
+          { name: "Services", href: "/services" },
+          { name: serviceName, href: `/services/${slug}`, current: true },
+        ];
 
   return (
     <>
@@ -259,11 +253,11 @@ export default async function Page({ params }: { params: Promise<Params> }) {
       </div>
 
       {/* Location Services Button for location-specific services */}
-      {isLocationSpecific && (
+      {isLocationSpecific && locationContext && (
         <section className="bg-brand-blue/5 border-b">
           <div className="mx-auto w-full lg:w-[90%] px-6 py-4">
             <Link
-              href={`/locations/${locationSlug}`}
+              href={`/locations/${locationContext.locationSlug}`}
               className="inline-flex items-center gap-2 text-brand-blue hover:text-brand-blue-hover font-medium transition-colors"
             >
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -274,7 +268,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
                   d="M10 19l-7-7m0 0l7-7m-7 7h18"
                 />
               </svg>
-              More scaffolding services in {locationName}
+              More scaffolding services in {locationContext.locationName}
             </Link>
           </div>
         </section>
@@ -312,49 +306,9 @@ export default async function Page({ params }: { params: Promise<Params> }) {
           name: serviceData.title,
           description: serviceData.description,
           serviceType: serviceName,
-          areaServed:
-            slug.includes("-brighton") || slug.includes("-canterbury") || slug.includes("-hastings")
-              ? (() => {
-                  const location = slug.split("-").pop();
-                  if (location === "brighton") {
-                    return [
-                      "Brighton",
-                      "Brighton & Hove",
-                      "Hove",
-                      "The Lanes",
-                      "Kemptown",
-                      "Churchill Square",
-                      "Brighton Marina",
-                      "North Laine",
-                      "Preston Park",
-                      "Fiveways",
-                    ];
-                  } else if (location === "canterbury") {
-                    return [
-                      "Canterbury",
-                      "Canterbury City Centre",
-                      "World Heritage Site Canterbury",
-                      "University of Kent",
-                      "Canterbury Cathedral Precinct",
-                      "Whitstable",
-                      "Herne Bay",
-                      "Faversham",
-                    ];
-                  } else if (location === "hastings") {
-                    return [
-                      "Hastings",
-                      "Old Town Hastings",
-                      "St Leonards",
-                      "East Hill",
-                      "West Hill",
-                      "Ore",
-                      "Hollington",
-                      "Silverhill",
-                    ];
-                  }
-                  return ["East Sussex", "West Sussex", "Kent", "Surrey"];
-                })()
-              : ["East Sussex", "West Sussex", "Kent", "Surrey"],
+          areaServed: locationContext
+            ? getAreaServed(locationContext.location)
+            : ["East Sussex", "West Sussex", "Kent", "Surrey"],
         }}
         org={{
           name: "Colossus Scaffolding",
@@ -362,11 +316,14 @@ export default async function Page({ params }: { params: Promise<Params> }) {
           logo: "/Colossus-Scaffolding-Logo.svg",
         }}
         breadcrumbs={
-          isLocationSpecific
+          isLocationSpecific && locationContext
             ? [
                 { name: "Home", url: "/" },
                 { name: "Locations", url: "/locations" },
-                { name: locationName, url: `/locations/${locationSlug}` },
+                {
+                  name: locationContext.locationName,
+                  url: `/locations/${locationContext.locationSlug}`,
+                },
                 { name: serviceName, url: `/services/${slug}` },
               ]
             : [
