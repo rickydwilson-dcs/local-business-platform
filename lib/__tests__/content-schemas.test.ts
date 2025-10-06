@@ -130,6 +130,7 @@ describe("Content Schemas", () => {
 
     describe("Optional fields", () => {
       it("should allow service without description", () => {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const { description, ...withoutDescription } = validService;
         expect(() => ServiceFrontmatterSchema.parse(withoutDescription)).not.toThrow();
       });
@@ -230,6 +231,7 @@ describe("Content Schemas", () => {
 
     describe("Hero validation", () => {
       it("should require hero object", () => {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const { hero, ...withoutHero } = validLocation;
         expect(() => LocationFrontmatterSchema.parse(withoutHero)).toThrow();
       });
