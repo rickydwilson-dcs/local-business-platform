@@ -168,15 +168,28 @@ about:
 ### Direct Push Workflow (After Approval)
 
 ```bash
-# Development → Staging
+# Development
+git push origin develop
+
+# ⚠️ CRITICAL: Verify GitHub Actions CI passes
+gh run watch
+# OR: gh run list --branch develop --limit 1
+
+# Development → Staging (after CI passes ✅)
 git checkout staging
 git merge develop
-git push origin staging  # Pre-push hooks WILL block if errors exist
+git push origin staging
 
-# Staging → Production (after testing)
+# ⚠️ CRITICAL: Verify GitHub Actions CI passes
+gh run watch
+
+# Staging → Production (after CI passes ✅)
 git checkout main
 git merge staging
-git push origin main  # Automatic deployment via Vercel
+git push origin main
+
+# ⚠️ CRITICAL: Verify GitHub Actions CI passes
+gh run watch
 ```
 
 ### Pre-Push Hooks (BLOCKS PUSH IF FAILED)
@@ -194,6 +207,32 @@ npm run build       # Production build test
 ```bash
 npm run pre-commit-check  # Prevents push failures
 ```
+
+### Monitoring GitHub Actions CI (MANDATORY)
+
+**⚠️ RULE: Always verify CI passes after every push**
+
+```bash
+# Check CI status
+gh run list --branch develop --limit 1
+gh run watch              # Watch in real-time
+gh run view --web         # Open in browser
+```
+
+**Why CI verification is mandatory:**
+
+- Pre-push hooks run **locally** (can miss environment-specific issues)
+- CI runs in **isolated Node 20/Ubuntu container**
+- CI uses `npm ci` (clean install) vs `npm install` locally
+- Common CI-only failures: ESM/CommonJS compatibility, env differences, dependency versions
+
+**If CI fails:**
+
+1. Stop immediately - do not proceed to staging/production
+2. Check error logs: `gh run view` or visit Actions tab
+3. Reproduce locally: `npm ci && npm run lint && npm run type-check && npm test && npm run build`
+4. Fix the issue and push again
+5. Wait for CI to pass ✅ before proceeding
 
 ## Testing Infrastructure
 

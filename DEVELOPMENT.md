@@ -106,11 +106,19 @@ Once development is complete and all checks pass:
 # Push develop changes
 git push origin develop
 
+# ⚠️ CRITICAL: Verify GitHub Actions CI passes
+gh run list --branch develop --limit 1
+# OR visit: https://github.com/rickydwilson-dcs/colossus-scaffolding/actions
+# Wait for "Quality Checks" job to complete successfully
+
 # Test thoroughly on development environment
 # Then push to staging after explicit approval:
 git checkout staging
 git merge develop
 git push origin staging
+
+# ⚠️ CRITICAL: Verify GitHub Actions CI passes on staging
+gh run list --branch staging --limit 1
 ```
 
 **Pre-push hooks automatically run:**
@@ -122,6 +130,13 @@ git push origin staging
 
 **🚫 Push will be blocked until all quality checks pass!**
 
+**⚠️ IMPORTANT: Pre-push hooks ≠ GitHub Actions CI**
+
+- Pre-push hooks run locally (may miss environment-specific issues)
+- GitHub Actions runs in isolated CI environment (Node 20, Ubuntu)
+- **ALWAYS verify GitHub Actions passes after every push**
+- Common CI-only failures: ESM compatibility, environment differences, dependency issues
+
 ### 5. Production Deployment (Direct Push After Staging Verification)
 
 Only after staging is verified and working correctly:
@@ -132,6 +147,10 @@ Only after staging is verified and working correctly:
 git checkout main
 git merge staging
 git push origin main
+
+# ⚠️ CRITICAL: Verify GitHub Actions CI passes on main
+gh run list --branch main --limit 1
+# OR visit: https://github.com/rickydwilson-dcs/colossus-scaffolding/actions
 ```
 
 **Requirements before push:**
@@ -140,8 +159,13 @@ git push origin main
 - ✅ Staging environment fully tested
 - ✅ Explicit approval from project owner
 - ✅ Branch must be up to date
+- ✅ **GitHub Actions CI passed on staging branch**
 
-After push to `main`, the production deployment is automatic via Vercel.
+**After push to `main`:**
+
+- ✅ **Verify GitHub Actions CI passes on main**
+- ✅ Vercel automatic production deployment triggers
+- ✅ Monitor production deployment status
 
 ## Available Scripts
 
@@ -360,15 +384,107 @@ const callback = useCallback(() => {
 }, [someFunction]);
 ```
 
+## Monitoring GitHub Actions CI
+
+### How to Check CI Status
+
+**After every push, verify GitHub Actions passes:**
+
+```bash
+# Check latest workflow run status
+gh run list --branch develop --limit 1
+
+# View workflow run details
+gh run view
+
+# Watch a running workflow in real-time
+gh run watch
+
+# Open GitHub Actions page in browser
+gh run view --web
+```
+
+**Or visit manually:**
+
+- Development: https://github.com/rickydwilson-dcs/colossus-scaffolding/actions?query=branch:develop
+- Staging: https://github.com/rickydwilson-dcs/colossus-scaffolding/actions?query=branch:staging
+- Production: https://github.com/rickydwilson-dcs/colossus-scaffolding/actions?query=branch:main
+
+### CI Pipeline Steps
+
+The "Quality Checks" job runs automatically on every push:
+
+1. **ESLint** - Code linting and quality checks
+2. **TypeScript** - Type checking and compilation validation
+3. **Content Validation** - MDX frontmatter validation (62 files)
+4. **Tests** - Run full test suite (68 tests with Vitest)
+5. **Build** - Production build verification (86 pages)
+
+**All steps must pass ✅ before proceeding to next environment**
+
+### Why CI Might Fail When Local Passes
+
+**Environment differences:**
+
+- CI uses Node 20 on Ubuntu (isolated container)
+- Local uses your machine's Node version and OS
+- CI runs `npm ci` (clean install) vs `npm install` locally
+- CI has stricter module resolution (ESM vs CommonJS)
+
+**Common CI-only failures:**
+
+- ESM/CommonJS module compatibility issues
+- Missing environment variables (only affects runtime)
+- Platform-specific path issues (Windows vs Unix)
+- Dependency version mismatches
+- Race conditions in async tests
+
+**⚠️ RULE: If CI fails, deployment stops - even if local works**
+
 ## Troubleshooting
 
 ### GitHub Actions Failing
 
-- Check the Actions tab in GitHub for detailed error logs
-- Common issues:
-  - ESLint errors: `npm run lint:fix`
-  - TypeScript errors: `npm run type-check`
-  - Build failures: `npm run build`
+**Step 1: Identify the failure**
+
+```bash
+gh run list --branch develop --limit 3
+gh run view [run-id]  # Get detailed logs
+```
+
+**Step 2: Check error logs**
+
+- Visit GitHub Actions tab for full error output
+- Look for the specific step that failed (ESLint, TypeScript, Tests, Build)
+
+**Step 3: Reproduce locally**
+
+```bash
+# Run the exact same commands as CI
+npm ci                    # Clean install
+npm run lint             # ESLint check
+npm run type-check       # TypeScript check
+npm run validate:content # Content validation
+npm test                 # Run tests
+npm run build            # Production build
+```
+
+**Step 4: Common fixes**
+
+- ESLint errors: `npm run lint:fix`
+- TypeScript errors: `npm run type-check` and fix reported issues
+- Test failures: `npm test` and fix failing tests
+- Build failures: `npm run build` and check error output
+- Content validation: `npm run validate:content` and fix MDX errors
+
+**Step 5: Push fix and verify**
+
+```bash
+git add .
+git commit -m "Fix CI failure: [description]"
+git push origin develop
+gh run watch  # Watch the new run
+```
 
 ### Pre-commit Hook Issues
 
