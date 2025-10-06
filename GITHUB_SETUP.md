@@ -66,16 +66,51 @@ The GitHub Actions workflow is automatically created in `.github/workflows/ci.ym
 **What it does:**
 
 - Runs on every push to `develop`, `staging`, `main`
-- Runs on every push to `develop`, `staging`, `main`
-- Executes: ESLint → TypeScript check → Build test
+- Executes: ESLint → TypeScript check → Content Validation → Tests → Build
+- Uses Node 20 on Ubuntu (isolated CI environment)
 - Only allows merge if all checks pass
+
+**CI Pipeline Steps:**
+
+1. **ESLint** - Code linting and quality checks
+2. **TypeScript** - Type checking and compilation validation
+3. **Content Validation** - MDX frontmatter validation (62 files)
+4. **Tests** - Run full test suite (68 tests with Vitest)
+5. **Build** - Production build verification (86 pages)
+
+**⚠️ CRITICAL: Always verify CI passes after every push**
+
+```bash
+# Check CI status after pushing
+gh run list --branch develop --limit 1
+gh run watch              # Watch in real-time
+gh run view --web         # Open in browser
+
+# OR visit manually
+# https://github.com/rickydwilson-dcs/colossus-scaffolding/actions
+```
+
+**Why CI verification is mandatory:**
+
+- Pre-push hooks run locally (may miss environment-specific issues)
+- CI runs in isolated Node 20/Ubuntu container
+- CI uses `npm ci` (clean install) vs `npm install` locally
+- Common CI-only failures: ESM/CommonJS compatibility, env differences, dependency versions
+
+**If CI fails:**
+
+1. Stop immediately - do not proceed to staging/production
+2. Check error logs: `gh run view` or visit Actions tab
+3. Reproduce locally: `npm ci && npm run lint && npm run type-check && npm test && npm run build`
+4. Fix the issue and push again
+5. Wait for CI to pass ✅ before proceeding
 
 **First run setup:**
 
 1. Push the workflow file to `develop` branch
 2. Push changes to `staging` to trigger the first run
 3. Pre-push hooks will automatically run quality checks
-4. Quality checks prevent pushes if TypeScript or build errors exist
+4. **Verify GitHub Actions CI passes** before proceeding
 
 ## 3. Vercel Deployment Settings
 
@@ -104,10 +139,21 @@ The GitHub Actions workflow is automatically created in `.github/workflows/ci.ym
 **Required Flow:** `develop` → `staging` → `main`
 
 1. **Develop** - Feature development and testing
+   - ✅ Push to develop
+   - ⚠️ **Verify GitHub Actions CI passes** before proceeding
 2. **Staging** - Preview environment for final testing (push after explicit approval)
+   - ✅ Merge develop to staging after CI passes ✅
+   - ⚠️ **Verify GitHub Actions CI passes** before proceeding
 3. **Main** - Production deployment (push after staging verification)
+   - ✅ Merge staging to main after CI passes ✅
+   - ⚠️ **Verify GitHub Actions CI passes** on main
 
-**⚠️ Important:** Always get explicit approval before pushing to `staging` or `main` - follow the proper testing sequence.
+**⚠️ Important:**
+
+- Always get explicit approval before pushing to `staging` or `main`
+- **MANDATORY: Verify CI passes after every push**
+- Stop immediately if CI fails - do not proceed to next environment
+- Follow the proper testing sequence: develop → staging → main
 
 ## 4. GitHub Repository Settings
 
@@ -208,17 +254,40 @@ After setup:
    - Push from `develop` to `staging` directly
    - Verify pre-push hooks run quality checks
    - Test that pushes are blocked if TypeScript/build errors exist
+   - **Verify GitHub Actions CI passes** before proceeding
    - Verify deployment happens after successful push
 
 3. **Test branch protection:**
    - Try to push to `main` without approval (should require explicit approval)
    - Try to push to `staging` without testing (should require development verification)
    - Verify pre-push hooks block pushes with quality issues
+   - **Verify GitHub Actions CI passes** for each push
 
 4. **Test pre-push hooks locally:**
+
    ```bash
    git push origin develop
    # Should run TypeScript check and build before pushing
+
+   # ⚠️ CRITICAL: Verify CI passes
+   gh run watch
+   # OR: gh run list --branch develop --limit 1
+   ```
+
+5. **Test CI monitoring:**
+
+   ```bash
+   # Make a change that will fail CI (e.g., add TypeScript error)
+   git push origin develop
+
+   # Watch CI fail
+   gh run watch
+
+   # Fix the error and push again
+   git push origin develop
+
+   # Verify CI passes ✅
+   gh run watch
    ```
 
 ## Emergency Procedures
