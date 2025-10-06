@@ -15,6 +15,7 @@
 
 import fs from "fs";
 import path from "path";
+import { fileURLToPath } from "url";
 import matter from "gray-matter";
 import { ServiceFrontmatterSchema, LocationFrontmatterSchema } from "../lib/content-schemas";
 import { z } from "zod";
@@ -198,8 +199,12 @@ function main() {
   }
 }
 
-// Run if executed directly
-if (require.main === module) {
+// Run if executed directly (ESM compatible)
+const isMainModule =
+  import.meta.url === `file://${process.argv[1]}` ||
+  import.meta.url === fileURLToPath(process.argv[1]);
+
+if (isMainModule) {
   main();
 }
 
