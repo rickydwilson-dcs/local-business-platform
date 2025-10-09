@@ -6,12 +6,12 @@ import { test, expect } from "@playwright/test";
  * Ensures UI changes don't introduce unintended visual regressions
  */
 
-test.describe("Visual Regression Tests", () => {
-  // Configure screenshot comparison
-  test.use({
-    screenshot: "on",
-  });
+// Configure screenshot comparison - must be at top level
+test.use({
+  screenshot: "on",
+});
 
+test.describe("Visual Regression Tests", () => {
   test("homepage should match visual baseline", async ({ page }) => {
     await page.goto("/", { waitUntil: "networkidle" });
 
