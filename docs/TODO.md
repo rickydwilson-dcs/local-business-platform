@@ -1,6 +1,6 @@
 # Colossus Scaffolding - TODO List
 
-Outstanding tasks and business objectives. For completed work history, see [CHANGELOG.md](CHANGELOG.md).
+Outstanding tasks and business objectives. For completed work history, see [CHANGELOG.md](../CHANGELOG.md).
 
 ## 🎯 Marketing & SEO Tasks
 
@@ -57,4 +57,4 @@ Outstanding tasks and business objectives. For completed work history, see [CHAN
 
 ---
 
-_For complete project history and achievements, see [CHANGELOG.md](CHANGELOG.md)_
+_For complete project history and achievements, see [CHANGELOG.md](../CHANGELOG.md)_

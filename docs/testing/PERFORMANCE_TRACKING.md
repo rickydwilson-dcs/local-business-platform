@@ -289,8 +289,8 @@ ls -la test-results/performance/
 
 - [PERFORMANCE_TESTING.md](PERFORMANCE_TESTING.md) - Complete performance testing guide
 - [E2E_TESTING.md](E2E_TESTING.md) - E2E testing setup and usage
-- [performance-baseline.json](performance-baseline.json) - Threshold configuration
-- [test-results/performance/README.md](test-results/performance/README.md) - Results directory docs
+- [performance-baseline.json](../../performance-baseline.json) - Threshold configuration
+- [test-results/performance/README.md](../../test-results/performance/README.md) - Results directory docs
 
 ---
 
