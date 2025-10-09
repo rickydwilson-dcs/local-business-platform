@@ -174,8 +174,6 @@ function generatePageTitle(pathname: string): string {
     "/contact": "Contact - Colossus Scaffolding",
     "/services": "Services - Colossus Scaffolding",
     "/locations": "Locations - Colossus Scaffolding",
-    "/projects": "Projects - Colossus Scaffolding",
-    "/health-safety": "Health & Safety - Colossus Scaffolding",
   };
 
   // Check for exact matches first
@@ -192,11 +190,6 @@ function generatePageTitle(pathname: string): string {
   if (pathname.startsWith("/locations/")) {
     const location = pathname.split("/")[2]?.replace(/-/g, " ") || "Location";
     return `${location.charAt(0).toUpperCase() + location.slice(1)} Scaffolding - Colossus Scaffolding`;
-  }
-
-  if (pathname.startsWith("/contact/")) {
-    const section = pathname.split("/")[2]?.replace(/-/g, " ") || "Contact";
-    return `${section.charAt(0).toUpperCase() + section.slice(1)} Contact - Colossus Scaffolding`;
   }
 
   // Fallback
