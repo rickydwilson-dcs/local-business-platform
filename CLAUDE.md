@@ -50,9 +50,20 @@ npm run pre-commit-check # Full quality check (lint + type-check + validate + bu
 ### Testing
 
 ```bash
-npm test                 # Run full test suite (68 tests with Vitest)
+# Unit Tests (Vitest)
+npm test                 # Run full test suite (141 tests with Vitest)
 npm run test:watch       # Watch mode for development
 npm run test:coverage    # Generate coverage report
+
+# E2E Tests (Playwright)
+npm run test:e2e         # Run all E2E tests (99 tests)
+npm run test:e2e:ui      # Interactive UI mode
+npm run test:e2e:performance  # Performance tests with Core Web Vitals
+npm run test:e2e:accessibility # WCAG 2.1 AA accessibility tests
+npm run test:e2e:visual  # Visual regression tests
+
+# Performance Tracking
+npm run performance:report    # View historical performance data & trends
 ```
 
 ### Content Validation
@@ -401,6 +412,140 @@ npm run validate:content  # Verify fix
 - **Page view tracking** - Automatic tracking for all pages (excludes API routes)
 - **Feature flag controlled** - Respects `FEATURE_SERVER_TRACKING`
 
+## Documentation Maintenance (MANDATORY)
+
+**⚠️ CRITICAL RULE: Always update documentation after making changes**
+
+Documentation is a first-class citizen in this codebase. Keeping documentation up-to-date is **NOT optional** - it is a mandatory part of every change.
+
+### Documentation Files That Must Be Updated
+
+After making changes, you **MUST** review and update these files as needed:
+
+#### 1. **ARCHITECTURE.md** (1,456 lines)
+
+Update when you:
+
+- Add new architectural patterns or components
+- Create new styling classes or patterns
+- Change content structure or MDX frontmatter
+- Modify routing or page generation logic
+- Add new libraries or dependencies with architectural impact
+- Change SEO patterns or schema markup
+- Update image optimization or performance patterns
+
+#### 2. **DEVELOPMENT.md** (451 lines)
+
+Update when you:
+
+- Change git workflow or branch structure
+- Modify pre-commit/pre-push hooks
+- Add new scripts to package.json
+- Change deployment procedures
+- Update CI/CD pipeline or GitHub Actions
+- Modify quality gates or testing requirements
+- Add new development tools or commands
+
+#### 3. **CHANGELOG.md**
+
+Update **ALWAYS** when:
+
+- Making ANY change to the codebase
+- Adding new features or functionality
+- Fixing bugs or issues
+- Updating dependencies
+- Changing configuration or infrastructure
+- Format: Date, description, impact, files changed
+
+#### 4. **CLAUDE.md** (this file)
+
+Update when you:
+
+- Add new npm scripts or commands
+- Change project structure or file organization
+- Add new testing infrastructure
+- Update environment variables
+- Change development workflow
+- Add new libraries or tools
+- Modify architecture patterns
+
+#### 5. **Testing Documentation**
+
+- **E2E_TESTING.md** - Update when adding/changing E2E tests
+- **PERFORMANCE_TESTING.md** - Update when changing performance tests or thresholds
+- **PERFORMANCE_TRACKING.md** - Update when modifying tracking features
+
+#### 6. **GITHUB_SETUP.md**
+
+Update when you:
+
+- Change GitHub Actions workflows
+- Add new secrets or environment variables
+- Modify CI/CD pipeline
+- Change deployment process
+- Update branch protection rules
+
+#### 7. **CONTENT_VALIDATION.md**
+
+Update when you:
+
+- Change Zod schemas for content validation
+- Add new validation rules
+- Modify MDX frontmatter structure
+- Change content requirements
+
+#### 8. **AI_INSTRUCTIONS.md**
+
+Update when you:
+
+- Add new AI agent guidelines
+- Change content creation standards
+- Modify writing style requirements
+
+### Documentation Update Workflow
+
+**After completing ANY implementation:**
+
+1. **Review Impact** - Identify which documentation files are affected
+2. **Update Content** - Add/modify relevant sections with your changes
+3. **Update Examples** - If code examples exist, update them to match new implementation
+4. **Update Commands** - If new scripts or commands added, document them
+5. **Update Counts** - Update test counts, file counts, line counts if they changed
+6. **Verify Accuracy** - Ensure documentation accurately reflects current state
+7. **Check Cross-References** - Update links and references to other docs
+
+### Documentation Standards
+
+- ✅ **Be Specific** - Include exact file paths, line numbers when relevant
+- ✅ **Show Examples** - Provide code examples for new patterns
+- ✅ **Explain Why** - Document reasoning behind architectural decisions
+- ✅ **Keep Current** - Never leave outdated information
+- ✅ **Be Complete** - Cover all aspects of the change
+- ✅ **Use Formatting** - Markdown formatting for readability
+
+### Example Documentation Update
+
+```markdown
+# After adding performance tracking feature:
+
+Files to update:
+✅ CLAUDE.md - Added performance:report command to Testing section
+✅ PERFORMANCE_TESTING.md - Added tracking features section
+✅ PERFORMANCE_TRACKING.md - Created new comprehensive guide
+✅ CHANGELOG.md - Added entry with date, description, files changed
+✅ DEVELOPMENT.md - Added performance tracking to testing workflow
+```
+
+### Documentation as Code Review
+
+Treat documentation updates as part of your implementation:
+
+- Documentation updates are **required before considering a task complete**
+- Missing documentation updates = incomplete implementation
+- Documentation quality is as important as code quality
+
+---
+
 ## Before Implementation Checklist
 
 **CRITICAL**: Before implementing ANY feature:
@@ -413,6 +558,12 @@ npm run validate:content  # Verify fix
 6. ✅ Run `npm run pre-commit-check` before committing
 7. ✅ Ensure TypeScript compilation passes (`npm run type-check`)
 8. ✅ Verify production build succeeds (`npm run build`)
+
+**AFTER completing implementation:**
+
+9. ✅ **Update all relevant documentation files** (see Documentation Maintenance section above)
+10. ✅ Update CHANGELOG.md with change details
+11. ✅ Verify all documentation is accurate and current
 
 ## Quality Gates
 
