@@ -98,14 +98,14 @@ test.describe("Navigation", () => {
     await expect(page).toHaveURL(/.*east-sussex/);
   });
 
-  test("should have clickable logo that navigates home", async ({ page }) => {
+  test("should have clickable logo that navigates home", async ({ page, baseURL }) => {
     await page.goto("/services");
 
     const logoLink = page.locator('a[href="/"]').first();
     await expect(logoLink).toBeVisible();
     await logoLink.click();
 
-    await expect(page).toHaveURL(/^http:\/\/localhost:3000\/?$/);
+    await expect(page).toHaveURL(new RegExp(`^${baseURL}/?$`));
   });
 
   test("should have working phone link in header", async ({ page }) => {
@@ -126,7 +126,7 @@ test.describe("Navigation", () => {
     await expect(page).toHaveURL(/.*contact/);
   });
 
-  test("should navigate through breadcrumbs", async ({ page }) => {
+  test("should navigate through breadcrumbs", async ({ page, baseURL }) => {
     // Navigate to a service page
     await page.goto("/services/access-scaffolding");
 
@@ -138,7 +138,7 @@ test.describe("Navigation", () => {
     const homeBreadcrumb = breadcrumbs.locator('a[href="/"]');
     if (await homeBreadcrumb.isVisible()) {
       await homeBreadcrumb.click();
-      await expect(page).toHaveURL(/^http:\/\/localhost:3000\/?$/);
+      await expect(page).toHaveURL(new RegExp(`^${baseURL}/?$`));
     }
   });
 
