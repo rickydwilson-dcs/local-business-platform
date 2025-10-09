@@ -6,11 +6,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 **Before making ANY changes to this codebase, you MUST read these critical documentation files:**
 
-1. **[ARCHITECTURE.md](ARCHITECTURE.md)** - Complete architectural guidelines, styling standards, content patterns, and critical violation prevention rules (1,456 lines)
-2. **[DEVELOPMENT.md](DEVELOPMENT.md)** - Development workflow, git procedures, branch structure, pre-push hooks, and quality gates (451 lines)
+1. **[ARCHITECTURE.md](../architecture/ARCHITECTURE.md)** - Complete architectural guidelines, styling standards, content patterns, and critical violation prevention rules (1,456 lines)
+2. **[DEVELOPMENT.md](../development/DEVELOPMENT.md)** - Development workflow, git procedures, branch structure, pre-push hooks, and quality gates (451 lines)
 3. **[AI_INSTRUCTIONS.md](AI_INSTRUCTIONS.md)** - General AI agent instructions and content accuracy standards
-4. **[CONTENT_VALIDATION.md](CONTENT_VALIDATION.md)** - Content validation rules, Zod schemas, and troubleshooting
-5. **[CHANGELOG.md](CHANGELOG.md)** - Project change history and architectural decisions
+4. **[CONTENT_VALIDATION.md](../architecture/CONTENT_VALIDATION.md)** - Content validation rules, Zod schemas, and troubleshooting
+5. **[CHANGELOG.md](../../CHANGELOG.md)** - Project change history and architectural decisions
 
 **CRITICAL**: These files contain:
 
