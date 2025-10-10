@@ -1,17 +1,42 @@
-# 🚨 URGENT: Fix Branch Protection - Remove Legacy "Build Test"
+# 🚨 URGENT: Fix Branch Protection - Remove Legacy Checks
 
-## Problem
+## Problem - Current State
 
-Your staging branch (and possibly others) has a **legacy status check** that no longer exists:
+**✅ develop:** Correct (already fixed)
 
-- ❌ `Build Test` - This workflow job no longer exists
-- ✅ `Quality Checks` - This is correct and includes the build
+```
+- Quality Checks
+- Smoke Tests (Fast)
+```
+
+**❌ staging:** Has 1 legacy check
+
+```
+- Quality Checks ✅
+- Build Test ❌ REMOVE THIS
+- Smoke Tests (Fast) (needs to be added)
+```
+
+**❌ main:** Has 2 legacy checks
+
+```
+- Quality Checks ✅
+- Build Test ❌ REMOVE THIS
+- Deployment Readiness ❌ REMOVE THIS
+- Smoke Tests (Fast) (needs to be added)
+```
+
+### Legacy Checks (No Longer Exist)
+
+- ❌ `Build Test` - Consolidated into "Quality Checks"
+- ❌ `Deployment Readiness` - No longer exists in workflows
 
 ## Impact
 
-- GitHub is waiting for a check that will never complete
-- May block merges unnecessarily
+- GitHub is waiting for checks that will never complete
+- Blocks merges unnecessarily
 - Causes confusion in CI status
+- Wastes time debugging phantom failures
 
 ## Fix Now (2 minutes)
 
@@ -19,27 +44,46 @@ Your staging branch (and possibly others) has a **legacy status check** that no 
 
 Visit: https://github.com/rickydwilson-dcs/colossus-scaffolding/settings/branches
 
-### Step 2: Fix Each Branch
+### Step 2: Fix staging Branch
 
-For **each branch** (develop, staging, main):
-
-1. Click **"Edit"** on the branch rule
+1. Click **"Edit"** on the `staging` branch rule
 2. Scroll to **"Require status checks to pass before merging"**
 3. In the search box where it shows required checks:
-   - ❌ **REMOVE** `Build Test` (if present)
+   - ❌ **REMOVE** `Build Test`
    - ✅ **KEEP** `Quality Checks`
-   - ✅ **ADD** `Smoke Tests (Fast)` (if not already there)
+   - ✅ **ADD** `Smoke Tests (Fast)`
 4. Click **"Save changes"**
 
-### Step 3: Verify
+### Step 3: Fix main Branch
 
-Run this command to verify:
+1. Click **"Edit"** on the `main` branch rule
+2. Scroll to **"Require status checks to pass before merging"**
+3. In the search box where it shows required checks:
+   - ❌ **REMOVE** `Build Test`
+   - ❌ **REMOVE** `Deployment Readiness`
+   - ✅ **KEEP** `Quality Checks`
+   - ✅ **ADD** `Smoke Tests (Fast)`
+4. Click **"Save changes"**
+
+### Step 4: Leave develop Alone
+
+✅ **develop is already correct** - no changes needed
+
+### Step 5: Verify All Branches
+
+Run these commands to verify the fix:
 
 ```bash
-# Check staging (example)
+# Check develop (should already be correct)
+gh api repos/rickydwilson-dcs/colossus-scaffolding/branches/develop/protection/required_status_checks --jq '.contexts'
+
+# Check staging (after your fix)
 gh api repos/rickydwilson-dcs/colossus-scaffolding/branches/staging/protection/required_status_checks --jq '.contexts'
 
-# Expected output:
+# Check main (after your fix)
+gh api repos/rickydwilson-dcs/colossus-scaffolding/branches/main/protection/required_status_checks --jq '.contexts'
+
+# All three should return:
 # [
 #   "Quality Checks",
 #   "Smoke Tests (Fast)"
