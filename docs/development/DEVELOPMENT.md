@@ -100,33 +100,74 @@ npm run format        # Prettier formatting
 
 ### 4. Staging Deployment (Direct Push After Testing)
 
-Once development is complete and all checks pass:
+#### Pre-Promotion Checklist
+
+Before promoting develop → staging, verify ALL items:
+
+**CI Status:**
+
+- [ ] All CI checks passing on `develop` (green checkmarks)
+- [ ] No open test failure issues for `develop` branch
+- [ ] No recent test failures (check last 3 runs)
+- [ ] Pre-push hook passed locally
+
+**Test Coverage:**
+
+- [ ] Smoke tests passing (required)
+- [ ] Unit tests passing (required)
+- [ ] Standard E2E tests ran locally and passed
+- [ ] If UI changed: Visual regression tests ran and baselines updated
+
+**Investigation Complete:**
+
+- [ ] Any previous test failures investigated and resolved
+- [ ] No flaky tests detected (all tests pass consistently)
+- [ ] No "ignore this failure" comments in code
+
+**Code Quality:**
+
+- [ ] TypeScript compilation successful
+- [ ] ESLint warnings addressed
+- [ ] Content validation passed
+- [ ] Build successful locally and in CI
+
+**Verification Commands:**
 
 ```bash
-# Push develop changes
-git push origin develop
+# 1. Verify develop branch status
+npm run pre-commit-check              # Must pass
+git log --oneline -5                  # Review recent commits
+gh run list --branch develop --limit 3  # Check CI history
 
-# ⚠️ CRITICAL: Verify GitHub Actions CI passes
-gh run list --branch develop --limit 1
-# OR visit: https://github.com/rickydwilson-dcs/colossus-scaffolding/actions
-# Wait for "Quality Checks" job to complete successfully
+# 2. Check for open test failure issues
+gh issue list --label "test-failure" --label "develop"
+# ^ Must return empty!
 
-# Test thoroughly on development environment
-# Then push to staging after explicit approval:
+# 3. Promote to staging
 git checkout staging
 git merge develop
 git push origin staging
 
-# ⚠️ CRITICAL: Verify GitHub Actions CI passes on staging
-gh run list --branch staging --limit 1
+# 4. Monitor CI (MANDATORY - do not proceed without this)
+gh run watch  # Watch until complete - must show ✅ ALL GREEN
+
+# 5. Verify staging environment
+# Visit staging URL and spot-check critical pages
 ```
+
+**If ANY failures occur:**
+
+1. ⛔ **STOP immediately** - do not proceed to production
+2. Investigate via: `gh run view --web`
+3. Fix in develop branch
+4. Repeat checklist from step 1
 
 **Pre-push hooks automatically run:**
 
 - ✅ ESLint validation
 - ✅ TypeScript check
 - ✅ Build test
-- ✅ Deployment readiness check
+- ✅ Smoke tests (NEW - blocks push if fail)
 
 **🚫 Push will be blocked until all quality checks pass!**
 
@@ -139,24 +180,83 @@ gh run list --branch staging --limit 1
 
 ### 5. Production Deployment (Direct Push After Staging Verification)
 
-Only after staging is verified and working correctly:
+#### Pre-Promotion Checklist
+
+Before promoting staging → production, verify ALL items:
+
+**Extended Soak Time:**
+
+- [ ] Staging has been stable for at least **24 hours**
+- [ ] All CI passing on `staging` (no failures in last 24h)
+- [ ] No open test-failure issues
+- [ ] No user-reported bugs from staging environment
+
+**CI Status:**
+
+- [ ] All CI checks passing on `staging` (green checkmarks)
+- [ ] Performance baseline completed (Phase 3)
+- [ ] No flaky tests detected
+- [ ] All automated tests passed
+
+**Production Readiness:**
+
+- [ ] Staging environment thoroughly tested
+- [ ] Critical user flows verified (contact form, navigation)
+- [ ] Mobile responsiveness checked
+- [ ] Performance acceptable (CWV thresholds met)
+
+**Approval:**
+
+- [ ] **Explicit approval from project owner**
+- [ ] Rollback plan documented (if needed)
+- [ ] Team notified of production deployment
+
+**Verification Commands:**
 
 ```bash
-# After thorough testing on staging environment
-# Push to production after explicit approval:
+# 1. Verify staging branch status
+gh run list --branch staging --limit 5  # Check last 5 runs - all must pass
+gh issue list --label "test-failure"    # Must be empty
+
+# 2. Review recent changes
+git checkout staging
+git log --oneline main..staging         # What will be deployed
+
+# 3. Promote to production (requires PR approval)
 git checkout main
 git merge staging
+
+# 4. Push to production
 git push origin main
 
-# ⚠️ CRITICAL: Verify GitHub Actions CI passes on main
-gh run list --branch main --limit 1
-# OR visit: https://github.com/rickydwilson-dcs/colossus-scaffolding/actions
+# 5. Monitor CI (MANDATORY)
+gh run watch  # Must show ✅ ALL GREEN including Performance Baseline
+
+# 6. Verify production deployment
+# Visit production URL
+# Check Vercel deployment status
+# Monitor for errors in first 15 minutes
 ```
+
+**If ANY failures occur:**
+
+1. ⛔ **STOP immediately**
+2. **Rollback:** `git revert HEAD && git push origin main`
+3. Investigate in staging environment
+4. Fix and re-test before next attempt
+
+**Post-Deployment Monitoring:**
+
+- [ ] Production site loads correctly
+- [ ] No console errors in browser
+- [ ] Contact form functional
+- [ ] Analytics tracking working
+- [ ] Performance baseline metrics logged
 
 **Requirements before push:**
 
 - ✅ All pre-push hooks must pass
-- ✅ Staging environment fully tested
+- ✅ Staging environment fully tested (24h soak)
 - ✅ Explicit approval from project owner
 - ✅ Branch must be up to date
 - ✅ **GitHub Actions CI passed on staging branch**
@@ -164,8 +264,10 @@ gh run list --branch main --limit 1
 **After push to `main`:**
 
 - ✅ **Verify GitHub Actions CI passes on main**
+- ✅ Performance baseline test completes (Phase 3)
 - ✅ Vercel automatic production deployment triggers
 - ✅ Monitor production deployment status
+- ✅ Review performance metrics for regressions
 
 ## Available Scripts
 
