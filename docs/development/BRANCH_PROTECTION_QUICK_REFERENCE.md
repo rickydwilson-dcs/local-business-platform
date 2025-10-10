@@ -9,9 +9,18 @@
 
 These names must match exactly (case-sensitive):
 
-- ✅ `Quality Checks`
-- ✅ `Smoke Tests (Fast)`
-- ⏳ `Performance Baseline` (add in Phase 3)
+- ✅ `Quality Checks` (includes lint, type-check, tests, build, content validation)
+- ✅ `Smoke Tests (Fast)` (E2E smoke tests - 7 tests, ~3min)
+- ⏳ `Performance Baseline` (add in Phase 3 - main branch only)
+
+### ❌ Remove Old/Legacy Checks
+
+If you see these in existing branch protection, **REMOVE THEM**:
+
+- ❌ `Build Test` (LEGACY - now included in "Quality Checks")
+  - This check no longer exists in workflows
+  - Causes confusion and false failures
+  - Remove from all branches: develop, staging, main
 
 ---
 
