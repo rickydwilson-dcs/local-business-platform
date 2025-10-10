@@ -67,14 +67,14 @@ If you see these in existing branch protection, **REMOVE THEM**:
 ☐ ✅ Require status checks to pass before merging
 ☐ ✅ Require branches to be up to date
 ☐ Add checks: "Quality Checks", "Smoke Tests (Fast)"
-☐ ✅ Require pull requests before merging
-☐   ├── Required approvals: 1
-☐   └── Dismiss stale reviews: YES
+☐ ❌ Do NOT require pull requests (sole deployer - cannot self-approve)
 ☐ ✅ Do not allow force pushes
 ☐ ✅ Do not allow bypassing (enforce for admins)
-☐ ✅ Restrict who can push (recommended)
+☐ ⚪ Restrict who can push (optional)
 ☐ Save changes
 ```
+
+**Note:** All three branches use the **same direct push workflow** since you're the sole deployer.
 
 ---
 

@@ -117,13 +117,10 @@ Branch: staging
 
 ### Additional Settings
 
-- ✅ **Require a pull request before merging** (Production safety)
-  - Required approvals: 1
-  - Dismiss stale reviews: YES
-- ✅ **Require linear history**
-- ✅ **Do not allow bypassing the above settings**
-- ✅ **Restrict who can push to matching branches** (highly recommended)
-- ✅ **Allow only specific actors to dismiss reviews** (admins only)
+- ❌ **Do NOT require pull requests** (sole deployer - cannot self-approve)
+- ✅ **Require linear history** (optional but recommended)
+- ✅ **Do not allow bypassing the above settings** (enforce for admins)
+- ✅ **Restrict who can push to matching branches** (optional - limit to specific users)
 
 ### Rules Summary
 
@@ -134,11 +131,9 @@ Branch: main (Production)
 │   ├── Smoke Tests (Fast) (required)
 │   └── Performance Baseline (required - add in Phase 3)
 ├── Require branches up-to-date: YES
-├── Require pull requests: YES
-│   ├── Required approvals: 1
-│   └── Dismiss stale reviews: YES
+├── Require pull requests: NO (direct push workflow - sole deployer)
 ├── Allow force push: NO
-├── Restrict push access: YES (recommended)
+├── Restrict push access: OPTIONAL (can limit to specific users)
 └── Enforce for administrators: YES
 ```
 
@@ -239,7 +234,9 @@ git pull origin develop
 | ------- | --------- | --------------- | -------- |
 | develop | Direct    | Quality + Smoke | No       |
 | staging | Direct    | Quality + Smoke | No       |
-| main    | PR only   | Quality + Smoke | Yes (1)  |
+| main    | Direct    | Quality + Smoke | No       |
+
+**Note:** All branches use direct push workflow (sole deployer - cannot self-approve PRs)
 
 ### Future State (After Phase 3)
 
@@ -247,7 +244,7 @@ git pull origin develop
 | ------- | --------- | ----------------------------- | -------- |
 | develop | Direct    | Quality + Smoke               | No       |
 | staging | Direct    | Quality + Smoke               | No       |
-| main    | PR only   | Quality + Smoke + Performance | Yes (1)  |
+| main    | Direct    | Quality + Smoke + Performance | No       |
 
 ---
 
