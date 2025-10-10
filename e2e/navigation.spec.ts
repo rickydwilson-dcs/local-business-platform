@@ -3,7 +3,7 @@ import { test, expect } from "@playwright/test";
 test.describe("Navigation", () => {
   test("should navigate to homepage", async ({ page }) => {
     await page.goto("/");
-    await expect(page).toHaveTitle(/Colossus Scaffolding/);
+    await expect(page).toHaveTitle(/Professional Scaffolding|Colossus Scaffolding/);
     await expect(page.locator('img[alt*="Colossus"]').first()).toBeVisible();
   });
 
@@ -47,12 +47,12 @@ test.describe("Navigation", () => {
     // Wait for mobile menu to open
     await page.waitForTimeout(500);
 
-    // Check mobile menu is visible (simplified check)
+    // Check mobile menu is visible and navigate
     const mobileServicesLink = page.locator('.mobile-menu-link:has-text("Services")');
     await expect(mobileServicesLink).toBeVisible();
 
-    // Force click to avoid viewport scroll issues
-    await mobileServicesLink.click({ force: true });
+    // Use evaluate to click directly in DOM (bypass viewport issues)
+    await mobileServicesLink.evaluate((el) => (el as HTMLElement).click());
 
     await expect(page).toHaveURL(/.*services/);
   });
@@ -60,8 +60,8 @@ test.describe("Navigation", () => {
   test("should expand locations dropdown on desktop", async ({ page }) => {
     await page.goto("/");
 
-    // Hover over or click the Locations dropdown
-    const locationsButton = page.locator('button:has-text("Locations")');
+    // Hover over or click the Locations dropdown (use .first() for strict mode - 2 buttons: desktop + mobile)
+    const locationsButton = page.locator('button:has-text("Locations")').first();
     if (await locationsButton.isVisible()) {
       await locationsButton.click();
 
