@@ -142,9 +142,20 @@ npm run test:e2e:visual        # Visual regression only
 
 ## GitHub Actions Workflow
 
-### Automatic Triggers
+### Automatic Triggers (Branch-Specific)
 
-**Every push** to develop/staging/main runs **smoke tests only** (~30s + CI overhead)
+**Phase 2 Enhancement:** Tiered testing strategy based on branch importance
+
+| Branch    | Tests Run        | Duration | Purpose                          |
+| --------- | ---------------- | -------- | -------------------------------- |
+| `develop` | Smoke only       | ~30s     | Fast feedback for development    |
+| `staging` | Smoke + Standard | ~3-4min  | Functional validation pre-prod   |
+| `main`    | Smoke + Standard | ~3-4min  | Production deployment validation |
+
+**Test Jobs:**
+
+- **Smoke Tests (Fast)** - All branches (7 tests, Chromium only)
+- **Standard E2E Tests (Auto)** - staging/main only (51 tests, Chromium only)
 
 ### Manual Triggers
 
@@ -152,9 +163,9 @@ Navigate to: Actions → E2E Tests → Run workflow
 
 **Options:**
 
-1. **smoke** (default) - Fast validation
-2. **standard** - Functional tests
-3. **full** - Complete test suite
+1. **smoke** (default) - Fast validation (7 tests)
+2. **standard** - Functional tests (51 tests, all browsers)
+3. **full** - Complete test suite (92 tests, all browsers + performance/accessibility)
 
 ---
 

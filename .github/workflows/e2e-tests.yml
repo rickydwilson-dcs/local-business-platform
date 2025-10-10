@@ -55,8 +55,52 @@ jobs:
           path: test-results/
           retention-days: 7
 
-  standard-tests:
-    name: Standard E2E Tests
+  standard-tests-auto:
+    name: Standard E2E Tests (Auto)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    # Run automatically on staging/main pushes, skip on develop
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/staging' || github.ref == 'refs/heads/main')
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium
+
+      - name: Run standard E2E tests
+        run: npm run test:e2e:chromium
+        env:
+          CI: true
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: standard-test-report-${{ github.ref_name }}
+          path: playwright-report/
+          retention-days: 30
+
+      - name: Upload test videos
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: standard-test-videos-${{ github.ref_name }}
+          path: test-results/
+          retention-days: 7
+
+  standard-tests-manual:
+    name: Standard E2E Tests (Manual)
     runs-on: ubuntu-latest
     timeout-minutes: 10
     # Only run on manual trigger with standard or full
@@ -87,7 +131,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: playwright-report
+          name: manual-standard-test-report
           path: playwright-report/
           retention-days: 30
 
@@ -95,7 +139,7 @@ jobs:
         if: failure()
         uses: actions/upload-artifact@v4
         with:
-          name: test-videos
+          name: manual-standard-test-videos
           path: test-results/
           retention-days: 7
 

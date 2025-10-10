@@ -9,8 +9,17 @@
 
 These names must match exactly (case-sensitive):
 
+**All Branches:**
+
 - ✅ `Quality Checks` (includes lint, type-check, tests, build, content validation)
-- ✅ `Smoke Tests (Fast)` (E2E smoke tests - 7 tests, ~3min)
+- ✅ `Smoke Tests (Fast)` (E2E smoke tests - 7 tests, ~30s)
+
+**Staging & Main Only (Phase 2):**
+
+- ✅ `Standard E2E Tests (Auto)` (functional tests - 51 tests, ~2-3min)
+
+**Future (Phase 3):**
+
 - ⏳ `Performance Baseline` (add in Phase 3 - main branch only)
 
 ### ❌ Remove Old/Legacy Checks
@@ -52,7 +61,7 @@ If you see these in existing branch protection, **REMOVE THEM**:
 ☐ Branch name pattern: staging
 ☐ ✅ Require status checks to pass before merging
 ☐ ✅ Require branches to be up to date
-☐ Add checks: "Quality Checks", "Smoke Tests (Fast)"
+☐ Add checks: "Quality Checks", "Smoke Tests (Fast)", "Standard E2E Tests (Auto)"
 ☐ ❌ Do NOT require pull requests
 ☐ ✅ Do not allow force pushes
 ☐ ✅ Do not allow bypassing (enforce for admins)
@@ -66,7 +75,7 @@ If you see these in existing branch protection, **REMOVE THEM**:
 ☐ Branch name pattern: main
 ☐ ✅ Require status checks to pass before merging
 ☐ ✅ Require branches to be up to date
-☐ Add checks: "Quality Checks", "Smoke Tests (Fast)"
+☐ Add checks: "Quality Checks", "Smoke Tests (Fast)", "Standard E2E Tests (Auto)"
 ☐ ❌ Do NOT require pull requests (sole deployer - cannot self-approve)
 ☐ ✅ Do not allow force pushes
 ☐ ✅ Do not allow bypassing (enforce for admins)
@@ -93,10 +102,16 @@ gh api repos/rickydwilson-dcs/colossus-scaffolding/branches --jq '.[].name + " (
 gh api repos/rickydwilson-dcs/colossus-scaffolding/branches/develop/protection/required_status_checks --jq '.contexts'
 ```
 
-Expected output:
+Expected output for develop:
 
 ```json
 ["Quality Checks", "Smoke Tests (Fast)"]
+```
+
+Expected output for staging/main (Phase 2):
+
+```json
+["Quality Checks", "Smoke Tests (Fast)", "Standard E2E Tests (Auto)"]
 ```
 
 ---

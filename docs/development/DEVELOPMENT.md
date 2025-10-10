@@ -76,7 +76,22 @@ git pull origin develop
 
 - **TypeScript** - Type checking (`npm run type-check`)
 - **Build Test** - Production build verification (`npm run build`)
-- 🚫 **CRITICAL**: Push will be blocked if TypeScript or build errors exist
+- **Smoke Tests** - Minimal E2E validation (develop/staging/main branches)
+- 🚫 **CRITICAL**: Push will be blocked if TypeScript, build, or smoke tests fail
+
+**GitHub Actions CI (automatic after push):**
+
+**Phase 2: Tiered Testing Strategy**
+
+| Branch    | Tests Run        | Duration | Status Check Names                    |
+| --------- | ---------------- | -------- | ------------------------------------- |
+| `develop` | Smoke only       | ~30s     | Quality Checks, Smoke Tests (Fast)    |
+| `staging` | Smoke + Standard | ~3-4min  | Quality Checks, Smoke Tests, Standard |
+| `main`    | Smoke + Standard | ~3-4min  | Quality Checks, Smoke Tests, Standard |
+
+- **Quality Checks** - ESLint, TypeScript, Tests, Content Validation, Build
+- **Smoke Tests (Fast)** - 7 ultra-fast page load tests (all branches)
+- **Standard E2E Tests (Auto)** - 51 functional tests (staging/main only)
 
 ### 3. Manual Quality Checks
 
