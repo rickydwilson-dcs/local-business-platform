@@ -55,15 +55,19 @@ npm test                 # Run full test suite (141 tests with Vitest)
 npm run test:watch       # Watch mode for development
 npm run test:coverage    # Generate coverage report
 
-# E2E Tests (Playwright)
-npm run test:e2e         # Run all E2E tests (99 tests)
+# E2E Tests (Playwright) - TIERED STRATEGY
+npm run test:e2e:smoke   # FAST smoke tests (~15s) - USE THIS MOST
+npm run test:e2e         # Standard functional tests (2-3min)
+npm run test:e2e:full    # Comprehensive tests (10min+)
+
+# Specific E2E Test Suites
 npm run test:e2e:ui      # Interactive UI mode
-npm run test:e2e:performance  # Performance tests with Core Web Vitals
+npm run test:e2e:performance   # Performance tests with Core Web Vitals
 npm run test:e2e:accessibility # WCAG 2.1 AA accessibility tests
-npm run test:e2e:visual  # Visual regression tests
+npm run test:e2e:visual        # Visual regression tests
 
 # Performance Tracking
-npm run performance:report    # View historical performance data & trends
+npm run performance:report # View historical performance data & trends
 ```
 
 ### Content Validation
