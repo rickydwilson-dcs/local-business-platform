@@ -1,10 +1,31 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import Schema from "@/components/Schema";
 import { ContentGrid } from "@/components/ui/content-grid";
 import { getContentItems } from "@/lib/content";
 import Breadcrumbs from "@/components/ui/breadcrumbs";
 
 export const dynamic = "force-static";
+
+export const metadata: Metadata = {
+  title: "Professional Scaffolding Services South East UK",
+  description:
+    "Professional scaffolding solutions across the South East UK. TG20:21 compliant, fully insured, and CHAS accredited. From residential repairs to large commercial projects.",
+  keywords: [
+    "scaffolding services",
+    "professional scaffolding",
+    "TG20:21 compliant",
+    "CHAS accredited scaffolding",
+    "South East UK",
+  ],
+  openGraph: {
+    title: "Professional Scaffolding Services South East UK",
+    description:
+      "TG20:21 compliant scaffolding services for residential, commercial and industrial projects across the South East UK.",
+    url: "/services",
+    type: "website",
+  },
+};
 
 export default async function ServicesPage() {
   const services = await getContentItems("services");
@@ -20,7 +41,7 @@ export default async function ServicesPage() {
         </div>
       </div>
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100">
+      <main className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100">
         {/* Hero Section */}
         <section className="section-standard lg:py-24 bg-white">
           <div className="container-standard">
@@ -139,7 +160,7 @@ export default async function ServicesPage() {
             </div>
           </div>
         </section>
-      </div>
+      </main>
 
       <Schema
         service={{

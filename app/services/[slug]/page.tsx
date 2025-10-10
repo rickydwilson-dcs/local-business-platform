@@ -281,30 +281,32 @@ export default async function Page({ params }: { params: Promise<Params> }) {
         </section>
       )}
 
-      <ServiceHero
-        title={serviceData.title}
-        description={serviceData.description}
-        badge={serviceData.badge}
-        heroImage={serviceData.heroImage}
-      />
+      <main>
+        <ServiceHero
+          title={serviceData.title}
+          description={serviceData.description}
+          badge={serviceData.badge}
+          heroImage={serviceData.heroImage}
+        />
 
-      <ServiceAbout serviceName={serviceName} slug={slug} about={serviceData.about} />
+        <ServiceAbout serviceName={serviceName} slug={slug} about={serviceData.about} />
 
-      <ServiceBenefits
-        title="Why Choose Our Service?"
-        description="Professional scaffolding with complete safety compliance and expert installation teams."
-        items={serviceData.benefits}
-      />
+        <ServiceBenefits
+          title="Why Choose Our Service?"
+          description="Professional scaffolding with complete safety compliance and expert installation teams."
+          items={serviceData.benefits}
+        />
 
-      <ServiceGallery
-        title="Project Gallery"
-        description="View our professional scaffolding installations and completed projects."
-        images={serviceData.galleryImages}
-      />
+        <ServiceGallery
+          title="Project Gallery"
+          description="View our professional scaffolding installations and completed projects."
+          images={serviceData.galleryImages}
+        />
 
-      <ServiceFAQ items={serviceData.faqs} />
+        <ServiceFAQ items={serviceData.faqs} />
 
-      <ServiceCTA />
+        <ServiceCTA />
+      </main>
 
       <Schema
         service={{
