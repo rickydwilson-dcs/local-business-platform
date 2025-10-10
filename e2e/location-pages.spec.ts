@@ -225,8 +225,8 @@ test.describe("Location Pages", () => {
     const phoneCount = await phoneLinks.count();
     expect(phoneCount).toBeGreaterThan(0);
 
-    // All should have correct phone number
+    // All should have correct phone number (with or without spaces)
     const firstPhoneLink = phoneLinks.first();
-    await expect(firstPhoneLink).toHaveAttribute("href", /01424466661/);
+    await expect(firstPhoneLink).toHaveAttribute("href", /01424\s*466\s*661/);
   });
 });

@@ -91,7 +91,7 @@ test.describe("Service Pages", () => {
 
     const phoneLink = page.locator('a[href^="tel:"]').first();
     await expect(phoneLink).toBeVisible();
-    await expect(phoneLink).toHaveAttribute("href", /01424466661/);
+    await expect(phoneLink).toHaveAttribute("href", /01424\s*466\s*661/);
   });
 
   test("should display service images", async ({ page }) => {
