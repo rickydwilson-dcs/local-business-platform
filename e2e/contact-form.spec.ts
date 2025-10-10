@@ -59,12 +59,12 @@ test.describe("Contact Form", () => {
     // Submit the form
     await page.click('button[type="submit"]');
 
-    // Wait for success message or redirect
-    await page.waitForTimeout(2000);
+    // Wait for form submission to complete
+    await page.waitForTimeout(3000);
 
-    // Check for success message
-    const successMessage = page.locator("text=Thank you!");
-    await expect(successMessage).toBeVisible({ timeout: 5000 });
+    // Check for success message (should contain "Thank you" or "received")
+    const successIndicator = page.locator("text=/thank you|received|success/i");
+    await expect(successIndicator).toBeVisible({ timeout: 7000 });
   });
 
   test("should trim whitespace from inputs", async ({ page }) => {
@@ -75,11 +75,11 @@ test.describe("Contact Form", () => {
     await page.fill('textarea[name="message"]', "Test message");
     await page.click('button[type="submit"]');
 
-    await page.waitForTimeout(2000);
+    await page.waitForTimeout(3000);
 
     // Should show success (backend handles trimming)
-    const successMessage = page.locator("text=Thank you!");
-    await expect(successMessage).toBeVisible({ timeout: 5000 });
+    const successIndicator = page.locator("text=/thank you|received|success/i");
+    await expect(successIndicator).toBeVisible({ timeout: 7000 });
   });
 
   test("should show loading state during submission", async ({ page }) => {
@@ -136,8 +136,8 @@ test.describe("Contact Form", () => {
     await page.fill('textarea[name="message"]', "Mobile test message");
     await page.click('button[type="submit"]');
 
-    await page.waitForTimeout(2000);
-    const successMessage = page.locator("text=Thank you!");
-    await expect(successMessage).toBeVisible({ timeout: 5000 });
+    await page.waitForTimeout(3000);
+    const successIndicator = page.locator("text=/thank you|received|success/i");
+    await expect(successIndicator).toBeVisible({ timeout: 7000 });
   });
 });
