@@ -6,6 +6,38 @@ Complete project history and achievements organized by development phase.
 
 ## 📅 Recent Changes
 
+### **2025-10-10 - Phase 2: Tiered E2E Testing Strategy Implementation**
+
+**Added:**
+
+- ✅ **Branch-Specific Test Execution** - Automatic tiered testing based on branch importance
+- ✅ **Standard E2E Tests (Auto) Job** - New GitHub Actions job for functional validation on staging/main
+- ✅ **Conditional Test Logic** - Smart test selection: develop (smoke only) vs staging/main (smoke + standard)
+- ✅ **15-Minute Timeout** - Sufficient time for CI environment setup + 51 standard E2E tests
+- ✅ **Enhanced Documentation** - Updated E2E_TESTING_STRATEGY.md, DEVELOPMENT.md, branch protection docs
+
+**Testing Strategy:**
+
+| Branch    | Tests Run             | Duration | Purpose                          |
+| --------- | --------------------- | -------- | -------------------------------- |
+| `develop` | Smoke only (7)        | ~30s     | Fast feedback for development    |
+| `staging` | Smoke + Standard (58) | ~3-4min  | Functional validation pre-prod   |
+| `main`    | Smoke + Standard (58) | ~3-4min  | Production deployment validation |
+
+**Impact:**
+
+- **develop** remains fast (~30s CI) for rapid iteration
+- **staging/main** get comprehensive functional validation (contact forms, navigation, service/location pages)
+- Pre-production catches functional issues before deployment
+- No manual trigger needed for standard tests on staging/main
+- Reduced risk of functional regressions reaching production
+
+**Files Changed:**
+
+- Modified: `.github/workflows/e2e-tests.yml`, `docs/testing/E2E_TESTING_STRATEGY.md`, `docs/development/DEVELOPMENT.md`, `docs/development/BRANCH_PROTECTION_QUICK_REFERENCE.md`
+
+---
+
 ### **2025-10-09 - Performance Test Result Tracking Implementation**
 
 **Added:**
