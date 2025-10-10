@@ -1,5 +1,9 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 
+// Set environment variables BEFORE importing (rate limiter checks at module load)
+process.env.KV_REST_API_URL = "https://test-redis.upstash.io";
+process.env.KV_REST_API_TOKEN = "test-token";
+
 // Create mock functions
 const mockGet = vi.fn();
 const mockSet = vi.fn();
@@ -18,7 +22,7 @@ vi.mock("@upstash/redis", async () => {
   };
 });
 
-// Import after setting up mocks
+// Import after setting up mocks and env vars
 const { checkRateLimit } = await import("../rate-limiter");
 
 describe("Rate Limiter", () => {
