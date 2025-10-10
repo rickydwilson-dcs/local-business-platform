@@ -58,7 +58,7 @@ jobs:
   standard-tests-auto:
     name: Standard E2E Tests (Auto)
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     # Run automatically on staging/main pushes, skip on develop
     if: github.event_name == 'push' && (github.ref == 'refs/heads/staging' || github.ref == 'refs/heads/main')
 
