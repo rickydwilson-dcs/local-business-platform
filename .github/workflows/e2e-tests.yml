@@ -5,12 +5,62 @@ on:
     branches: [develop, staging, main]
   pull_request:
     branches: [develop, staging, main]
+  # Allow manual trigger with test suite choice
+  workflow_dispatch:
+    inputs:
+      test-suite:
+        description: "Test suite to run"
+        required: true
+        type: choice
+        default: "smoke"
+        options:
+          - smoke
+          - standard
+          - full
 
 jobs:
-  e2e-tests:
-    name: Playwright E2E Tests
+  smoke-tests:
+    name: Smoke Tests (Fast)
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 5
+    # Run smoke tests on push, or if manually selected
+    if: github.event_name != 'workflow_dispatch' || inputs.test-suite == 'smoke'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium
+
+      - name: Run smoke tests
+        run: npm run test:e2e:smoke
+        env:
+          CI: true
+
+      - name: Upload test results
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: smoke-test-results
+          path: test-results/
+          retention-days: 7
+
+  standard-tests:
+    name: Standard E2E Tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    # Only run on manual trigger with standard or full
+    if: github.event_name == 'workflow_dispatch' && (inputs.test-suite == 'standard' || inputs.test-suite == 'full')
 
     steps:
       - name: Checkout code
@@ -28,7 +78,7 @@ jobs:
       - name: Install Playwright browsers
         run: npx playwright install --with-deps
 
-      - name: Run E2E tests
+      - name: Run standard E2E tests
         run: npm run test:e2e
         env:
           CI: true
@@ -46,5 +96,49 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: test-videos
+          path: test-results/
+          retention-days: 7
+
+  full-tests:
+    name: Full E2E Test Suite
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    # Only run on manual trigger with full selected
+    if: github.event_name == 'workflow_dispatch' && inputs.test-suite == 'full'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps
+
+      - name: Run full E2E test suite
+        run: npm run test:e2e:full
+        env:
+          CI: true
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: full-test-report
+          path: playwright-report/
+          retention-days: 30
+
+      - name: Upload test videos
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: full-test-videos
           path: test-results/
           retention-days: 7
