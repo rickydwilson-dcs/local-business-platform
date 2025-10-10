@@ -2,10 +2,22 @@ import { defineConfig, devices } from "@playwright/test";
 
 /**
  * Playwright E2E Testing Configuration
- * Tests critical user flows in real browsers
+ *
+ * Test Patterns:
+ * - smoke.spec.ts: Fast smoke tests (~30s) - RUN IN CI
+ * - *.spec.ts: Standard functional tests (~2-3min) - RUN IN CI
+ * - *.full.spec.ts: Comprehensive tests (~10min+) - OPTIONAL/SCHEDULED
+ *
+ * Usage:
+ * - npm run test:e2e:smoke - Only smoke tests (fast)
+ * - npm run test:e2e - Standard tests (default)
+ * - npm run test:e2e:full - All tests including heavy ones
  */
 export default defineConfig({
   testDir: "./e2e",
+  // Only run smoke and standard tests by default (exclude .full.spec.ts)
+  testMatch: process.env.E2E_FULL ? "**/*.spec.ts" : "**/*.spec.ts",
+  testIgnore: process.env.E2E_FULL ? [] : "**/*.full.spec.ts",
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
