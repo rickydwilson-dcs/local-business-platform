@@ -83,15 +83,22 @@ git pull origin develop
 
 **Phase 2: Tiered Testing Strategy**
 
-| Branch    | Tests Run        | Duration | Status Check Names                    |
-| --------- | ---------------- | -------- | ------------------------------------- |
-| `develop` | Smoke only       | ~30s     | Quality Checks, Smoke Tests (Fast)    |
-| `staging` | Smoke + Standard | ~3-4min  | Quality Checks, Smoke Tests, Standard |
-| `main`    | Smoke + Standard | ~3-4min  | Quality Checks, Smoke Tests, Standard |
+| Branch    | Tests Run        | Duration | Status Check Names                            |
+| --------- | ---------------- | -------- | --------------------------------------------- |
+| `develop` | Smoke only       | ~30s     | Quality Checks, Smoke Tests (Fast)            |
+| `staging` | Smoke + Standard | ~3-4min  | Quality Checks, Smoke Tests, Standard E2E     |
+| `main`    | None (verified)  | ~2min    | Quality Checks only (staging is quality gate) |
 
 - **Quality Checks** - ESLint, TypeScript, Tests, Content Validation, Build
-- **Smoke Tests (Fast)** - 7 ultra-fast page load tests (all branches)
-- **Standard E2E Tests (Auto)** - 51 functional tests (staging/main only)
+- **Smoke Tests (Fast)** - 7 ultra-fast page load tests (develop/staging only)
+- **Standard E2E Tests (Auto)** - 51 functional tests (staging only - final quality gate)
+
+**Why main skips E2E tests:**
+
+- Staging uses identical code, environment, and dependencies as main
+- E2E tests on main would be redundant and waste ~3 minutes of CI time
+- Pre-push hook verifies staging E2E tests passed before allowing main push
+- Staging is the final quality gate - if it passes there, it will pass on main
 
 ### 3. Manual Quality Checks
 
@@ -209,6 +216,7 @@ Before promoting staging → production, verify ALL items:
 **CI Status:**
 
 - [ ] All CI checks passing on `staging` (green checkmarks)
+- [ ] **E2E tests passed on staging** (smoke + standard tests)
 - [ ] Performance baseline completed (Phase 3)
 - [ ] No flaky tests detected
 - [ ] All automated tests passed
@@ -218,6 +226,27 @@ Before promoting staging → production, verify ALL items:
 - [ ] Staging environment thoroughly tested
 - [ ] Critical user flows verified (contact form, navigation)
 - [ ] Mobile responsiveness checked
+
+**⚠️ IMPORTANT: Main branch pre-push hook verification**
+
+When pushing to main, the pre-push hook will automatically verify that staging E2E tests passed:
+
+```bash
+# Automatic check before push to main:
+# - Verifies latest staging E2E test run has status "success"
+# - Blocks push if staging tests haven't passed
+# - No redundant E2E tests run on main (staging is the quality gate)
+```
+
+**Why this approach:**
+
+- Staging uses identical code, environment, and dependencies as main
+- E2E tests on main would be redundant (same code, same container, same tests)
+- Saves ~3 minutes of CI time per main deployment
+- Staging verification ensures safety without redundancy
+
+**Performance:**
+
 - [ ] Performance acceptable (CWV thresholds met)
 
 **Approval:**
