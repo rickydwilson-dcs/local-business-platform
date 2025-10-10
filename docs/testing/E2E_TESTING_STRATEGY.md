@@ -12,27 +12,32 @@ Original E2E test suite was taking 10+ minutes to complete:
 
 ### Test Tiers
 
-#### 1. **Smoke Tests** (~30 seconds) ⚡️
+#### 1. **Smoke Tests** (~15 seconds local, ~3 minutes CI) ⚡️
 
-**Purpose:** Fast validation that pages render without crashing
+**Purpose:** Ultra-fast validation that pages render without crashing
 
 **What It Tests:**
 
-- Critical pages load (200 status)
-- No JavaScript console errors
-- Basic content is present (H1, CTAs exist)
-- Simple navigation works
+- Critical pages load (HTTP 200 status)
+- Basic content is present (H1 visible)
+
+**What It Does NOT Test:**
+
+- ❌ Navigation or interactions
+- ❌ Console errors (CSP warnings from analytics are expected)
+- ❌ Form elements or complex selectors
+- ❌ Mobile menu or responsive behavior
 
 **When To Run:**
 
-- ✅ **Every push** to develop/staging/main
+- ✅ **Every push** to develop/staging/main (automatic in CI)
 - ✅ Local development (`npm run test:e2e:smoke`)
 - ✅ Before commits
 
-**File:** `e2e/smoke.spec.ts` (12 tests)
+**File:** `e2e/smoke.spec.ts` (7 tests, 59 lines)
 
 ```bash
-npm run test:e2e:smoke  # Run smoke tests
+npm run test:e2e:smoke  # Run smoke tests (Chromium only)
 ```
 
 #### 2. **Standard Tests** (~2-3 minutes) 🔄
@@ -98,7 +103,7 @@ npm run test:e2e:full  # Run ALL tests including heavy ones
 ### Quick Commands
 
 ```bash
-# Fast smoke tests (30s) - USE THIS MOST OFTEN
+# Ultra-fast smoke tests (~15s) - USE THIS MOST OFTEN
 npm run test:e2e:smoke
 
 # Standard functional tests (2-3min)
@@ -165,19 +170,25 @@ Navigate to: Actions → E2E Tests → Run workflow
 
 ## Test Coverage Matrix
 
-### Smoke Tests (12 tests)
+### Smoke Tests (7 tests)
+
+**Pages Tested (HTTP 200 + H1 visible):**
 
 - [x] Homepage loads
-- [x] Contact page & form present
+- [x] Contact page loads
 - [x] Services overview loads
-- [x] Sample service page loads
+- [x] Sample service page loads (access-scaffolding)
 - [x] Locations overview loads
-- [x] Sample location page loads
+- [x] Sample location page loads (brighton)
 - [x] About page loads
-- [x] No console errors
-- [x] Header navigation works
-- [x] Mobile menu works
-- [x] Meta tags present
+
+**Intentionally Excluded:**
+
+- ❌ Console error checking (CSP warnings from GA4 are expected)
+- ❌ Navigation tests (moved to standard tests)
+- ❌ Mobile menu tests (moved to standard tests)
+- ❌ Form element checks (moved to standard tests)
+- ❌ Meta tag validation (moved to standard tests)
 
 ### Standard Tests (51 tests)
 
@@ -215,7 +226,7 @@ All standard tests +
 ### Before Committing
 
 ```bash
-npm run test:e2e:smoke  # Quick validation (30s)
+npm run test:e2e:smoke  # Quick validation (~15s)
 ```
 
 ### Before Pull Request
@@ -235,13 +246,21 @@ npm run performance:report  # Check performance trends
 
 ## Performance Impact
 
-| Test Tier    | Duration | Tests | CI Time             |
-| ------------ | -------- | ----- | ------------------- |
-| **Smoke**    | 30s      | 12    | ~2min (with setup)  |
-| **Standard** | 2-3min   | 51    | ~5min (with setup)  |
-| **Full**     | 10+min   | 92    | ~15min (with setup) |
+| Test Tier    | Duration (Local) | Duration (CI)       | Tests | Description                   |
+| ------------ | ---------------- | ------------------- | ----- | ----------------------------- |
+| **Smoke**    | ~15s             | ~3min (with setup)  | 7     | HTTP 200 + H1 checks only     |
+| **Standard** | ~2-3min          | ~5min (with setup)  | 51    | Functional user flows         |
+| **Full**     | ~10+min          | ~15min (with setup) | 92    | Performance/a11y/visual tests |
 
-**CI Speedup:** 15min → 2min (87% reduction) ⚡️
+**CI Speedup:** 15min → 3min (80% reduction) ⚡️
+
+**Note:** CI duration includes:
+
+- Installing Node.js and dependencies (~45s)
+- Installing Playwright Chromium browser (~60s)
+- Starting Next.js dev server (~30s)
+- Running tests (~15s for smoke tests)
+- Uploading results (~15s)
 
 ---
 

@@ -42,11 +42,18 @@ Development workflow, tools, and procedures.
 
 Testing infrastructure, guidelines, and performance monitoring.
 
+- **[E2E_TESTING_STRATEGY.md](testing/E2E_TESTING_STRATEGY.md)** - Tiered E2E testing strategy ⚡️
+  - Ultra-fast smoke tests (~15s local, ~3min CI)
+  - Standard functional tests (~2-3min)
+  - Comprehensive tests (~10min+)
+  - Test tier selection guide
+  - CI/CD workflow optimization
+
 - **[E2E_TESTING.md](testing/E2E_TESTING.md)** - End-to-end testing with Playwright
-  - Test suite overview (99 tests)
-  - Running tests
+  - Complete test suite overview (92 tests)
+  - Running tests locally
   - Writing new tests
-  - Accessibility testing
+  - Accessibility testing (WCAG 2.1 AA)
   - Visual regression testing
 
 - **[PERFORMANCE_TESTING.md](testing/PERFORMANCE_TESTING.md)** - Performance testing guide
@@ -99,7 +106,8 @@ Documentation for AI agents working with this codebase.
 
 **Adding tests?**
 
-- [E2E_TESTING.md](testing/E2E_TESTING.md) - E2E tests
+- [E2E_TESTING_STRATEGY.md](testing/E2E_TESTING_STRATEGY.md) - Tiered testing strategy
+- [E2E_TESTING.md](testing/E2E_TESTING.md) - E2E tests setup & writing
 - [PERFORMANCE_TESTING.md](testing/PERFORMANCE_TESTING.md) - Performance tests
 
 **Setting up GitHub?**
@@ -144,11 +152,11 @@ See [CLAUDE.md - Documentation Maintenance](ai/CLAUDE.md#documentation-maintenan
 
 ## 📊 Project Statistics
 
-- **Documentation Files:** 10 markdown files
-- **Total Lines:** ~4,500 lines of documentation
-- **Test Suite:** 141 unit tests + 99 E2E tests
+- **Documentation Files:** 11 markdown files
+- **Total Lines:** ~5,000+ lines of documentation
+- **Test Suite:** 141 unit tests + 92 E2E tests (7 smoke + 51 standard + 34 comprehensive)
 - **Content Files:** 62 MDX files (25 services + 37 locations)
-- **Code Quality:** ESLint + TypeScript + Pre-commit hooks
+- **Code Quality:** ESLint + TypeScript + Pre-commit/push hooks + CI/CD
 
 ---
 
