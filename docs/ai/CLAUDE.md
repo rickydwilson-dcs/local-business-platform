@@ -6,8 +6,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 **Before making ANY changes to this codebase, you MUST read these critical documentation files:**
 
-1. **[ARCHITECTURE.md](../architecture/ARCHITECTURE.md)** - Complete architectural guidelines, styling standards, content patterns, and critical violation prevention rules (1,456 lines)
-2. **[DEVELOPMENT.md](../development/DEVELOPMENT.md)** - Development workflow, git procedures, branch structure, pre-push hooks, and quality gates (451 lines)
+1. **[ARCHITECTURE.md](../architecture/ARCHITECTURE.md)** - Complete architectural guidelines, styling standards, content patterns, and critical violation prevention rules (1,455 lines)
+2. **[DEVELOPMENT.md](../development/DEVELOPMENT.md)** - Development workflow, git procedures, branch structure, pre-push hooks, and quality gates (683 lines)
 3. **[AI_INSTRUCTIONS.md](AI_INSTRUCTIONS.md)** - General AI agent instructions and content accuracy standards
 4. **[CONTENT_VALIDATION.md](../architecture/CONTENT_VALIDATION.md)** - Content validation rules, Zod schemas, and troubleshooting
 5. **[CHANGELOG.md](../../CHANGELOG.md)** - Project change history and architectural decisions
@@ -51,13 +51,13 @@ npm run pre-commit-check # Full quality check (lint + type-check + validate + bu
 
 ```bash
 # Unit Tests (Vitest)
-npm test                 # Run full test suite (141 tests with Vitest)
+npm test                 # Run full test suite (141 passing tests)
 npm run test:watch       # Watch mode for development
 npm run test:coverage    # Generate coverage report
 
 # E2E Tests (Playwright) - TIERED STRATEGY
-npm run test:e2e:smoke   # FAST smoke tests (~15s) - USE THIS MOST
-npm run test:e2e         # Standard functional tests (2-3min)
+npm run test:e2e:smoke   # FAST smoke tests (7 tests, ~30s) - USE THIS MOST
+npm run test:e2e         # Standard functional tests (51 tests, 2-3min)
 npm run test:e2e:full    # Comprehensive tests (10min+)
 
 # Specific E2E Test Suites
@@ -251,17 +251,27 @@ gh run view --web         # Open in browser
 
 ## Testing Infrastructure
 
-### Test Coverage (68 passing tests)
+### Unit Test Coverage (141 passing tests)
 
-- **Contact API Tests** (13 tests) - Form validation, email handling, rate limiting
-- **Rate Limiter Tests** (17 tests) - Upstash Redis mocking, IP isolation, fail-open design
-- **Content Schema Tests** (21 tests) - Zod validation for MDX frontmatter
-- **Location Utils Tests** (17 tests) - Location detection and area served logic
+- **Contact API Tests** - Form validation, email handling, rate limiting
+- **Rate Limiter Tests** - Upstash Redis mocking, IP isolation, fail-open design
+- **Content Schema Tests** - Zod validation for MDX frontmatter
+- **Location Utils Tests** - Location detection and area served logic
+- **Schema Tests** - JSON-LD schema generation
+- **Analytics Tests** - dataLayer implementation and tracking
+
+### E2E Test Strategy (Branch-Specific)
+
+| Branch    | Tests Run             | Duration | Purpose                          |
+| --------- | --------------------- | -------- | -------------------------------- |
+| `develop` | Smoke only (7 tests)  | ~30s     | Fast feedback for development    |
+| `staging` | Smoke + Standard (58) | ~3-4min  | Functional validation pre-prod   |
+| `main`    | Smoke + Standard (58) | ~3-4min  | Production deployment validation |
 
 ### Testing Commands
 
 ```bash
-npm test              # Run all 68 tests (~2 seconds)
+npm test              # Run all 141 unit tests (~2 seconds)
 npm run test:watch    # Watch mode for development
 npm run test:ui       # Interactive test UI
 ```
@@ -401,11 +411,20 @@ npm run validate:content  # Verify fix
 
 - `lib/rate-limiter.ts` - Upstash Redis rate limiting implementation
 - `lib/analytics/types.ts` - TypeScript types for analytics system
+- `lib/analytics/dataLayer.ts` - GTM dataLayer implementation
+- `lib/performance-tracker.ts` - Performance test result tracking and trend analysis
+
+### API Routes
+
+- `app/api/contact/route.ts` - Contact form submission with rate limiting and email
+- `app/api/analytics/track/route.ts` - Analytics event tracking endpoint
+- `app/api/analytics/debug/route.ts` - Analytics debugging endpoint
 
 ### Configuration
 
 - `lib/image-config.ts` - Centralized image quality settings
 - `lib/site.ts` - Site-wide configuration and utilities
+- `lib/schema.ts` - JSON-LD schema generation utilities
 
 ## Middleware
 
@@ -426,7 +445,7 @@ Documentation is a first-class citizen in this codebase. Keeping documentation u
 
 After making changes, you **MUST** review and update these files as needed:
 
-#### 1. **ARCHITECTURE.md** (1,456 lines)
+#### 1. **ARCHITECTURE.md** (1,455 lines)
 
 Update when you:
 
@@ -438,7 +457,7 @@ Update when you:
 - Change SEO patterns or schema markup
 - Update image optimization or performance patterns
 
-#### 2. **DEVELOPMENT.md** (451 lines)
+#### 2. **DEVELOPMENT.md** (683 lines)
 
 Update when you:
 
