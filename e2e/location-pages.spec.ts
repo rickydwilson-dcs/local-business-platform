@@ -5,7 +5,7 @@ test.describe("Location Pages", () => {
     await page.goto("/locations");
 
     await expect(page).toHaveTitle(/South East England.*Towns.*Colossus Scaffolding/);
-    await expect(page.locator("h1")).toContainText(/locations|areas|coverage/i);
+    await expect(page.locator("h1")).toContainText(/Professional Scaffolding|South East England/i);
 
     // Should show location cards or links
     const locationLinks = page.locator('a[href^="/locations/"]');
