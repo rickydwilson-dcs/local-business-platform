@@ -35,8 +35,11 @@ test.describe("Service Pages", () => {
       await expect(benefits).toBeVisible();
     }
 
-    // Check for FAQs section
-    const faqsHeading = page.locator("h2, h3").filter({ hasText: /faq|questions/i });
+    // Check for FAQs section (use .first() to avoid strict mode)
+    const faqsHeading = page
+      .locator("h2, h3")
+      .filter({ hasText: /faq|questions/i })
+      .first();
     await expect(faqsHeading).toBeVisible();
   });
 
@@ -107,15 +110,15 @@ test.describe("Service Pages", () => {
   test("should navigate between different service pages", async ({ page }) => {
     await page.goto("/services");
 
-    // Click on Access Scaffolding
-    await page.click('a[href="/services/access-scaffolding"]');
+    // Click on Access Scaffolding (use .first() to avoid strict mode)
+    await page.locator('a[href="/services/access-scaffolding"]').first().click();
     await expect(page).toHaveURL(/.*access-scaffolding/);
 
     // Go back to services
     await page.goBack();
 
-    // Click on Facade Scaffolding
-    const facadeLink = page.locator('a[href="/services/facade-scaffolding"]');
+    // Click on Facade Scaffolding (use .first() to avoid strict mode)
+    const facadeLink = page.locator('a[href="/services/facade-scaffolding"]').first();
     if (await facadeLink.isVisible()) {
       await facadeLink.click();
       await expect(page).toHaveURL(/.*facade-scaffolding/);

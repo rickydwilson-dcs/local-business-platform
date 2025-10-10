@@ -169,19 +169,17 @@ test.describe("Location Pages", () => {
   test("should navigate between county pages", async ({ page }) => {
     await page.goto("/locations");
 
-    // Navigate to East Sussex
-    await page.click('a[href="/locations/east-sussex"]');
+    // Navigate to East Sussex (use .first() to avoid strict mode)
+    await page.locator('a[href="/locations/east-sussex"]').first().click();
     await expect(page).toHaveURL(/.*east-sussex/);
 
     // Go back
     await page.goBack();
 
-    // Navigate to Kent
-    const kentLink = page.locator('a[href="/locations/kent"]');
-    if (await kentLink.isVisible()) {
-      await kentLink.click();
-      await expect(page).toHaveURL(/.*kent/);
-    }
+    // Navigate to Kent (use .first() to avoid strict mode with 5 links)
+    const kentLink = page.locator('a[href="/locations/kent"]').first();
+    await kentLink.click();
+    await expect(page).toHaveURL(/.*kent/);
   });
 
   test("should load sample location pages without errors", async ({ page }) => {

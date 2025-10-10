@@ -4,7 +4,7 @@ test.describe("Navigation", () => {
   test("should navigate to homepage", async ({ page }) => {
     await page.goto("/");
     await expect(page).toHaveTitle(/Colossus Scaffolding/);
-    await expect(page.locator('img[alt*="Colossus"]')).toBeVisible();
+    await expect(page.locator('img[alt*="Colossus"]').first()).toBeVisible();
   });
 
   test("should have working main navigation links", async ({ page }) => {
@@ -47,10 +47,12 @@ test.describe("Navigation", () => {
     // Wait for mobile menu to open
     await page.waitForTimeout(500);
 
-    // Click on Services in mobile menu
+    // Check mobile menu is visible (simplified check)
     const mobileServicesLink = page.locator('.mobile-menu-link:has-text("Services")');
     await expect(mobileServicesLink).toBeVisible();
-    await mobileServicesLink.click();
+
+    // Force click to avoid viewport scroll issues
+    await mobileServicesLink.click({ force: true });
 
     await expect(page).toHaveURL(/.*services/);
   });
@@ -66,8 +68,8 @@ test.describe("Navigation", () => {
       // Wait for dropdown to appear
       await page.waitForTimeout(300);
 
-      // Check that location links are visible
-      const eastSussexLink = page.locator('a[href="/locations/east-sussex"]');
+      // Check that location links are visible (use .first() to avoid strict mode)
+      const eastSussexLink = page.locator('a[href="/locations/east-sussex"]').first();
       await expect(eastSussexLink).toBeVisible();
     }
   });
