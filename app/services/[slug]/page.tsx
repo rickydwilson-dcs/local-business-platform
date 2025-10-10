@@ -97,7 +97,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
 
   if (!serviceData) {
     return {
-      title: "Service Not Found | Colossus Scaffolding",
+      title: "Service Not Found",
       description: "The requested service page could not be found.",
     };
   }

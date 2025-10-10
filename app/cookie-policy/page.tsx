@@ -4,11 +4,11 @@ import { Metadata } from "next";
 import Breadcrumbs from "@/components/ui/breadcrumbs";
 
 export const metadata: Metadata = {
-  title: "Cookie Policy | Colossus Scaffolding",
+  title: "Cookie Policy",
   description:
     "Learn about how Colossus Scaffolding uses cookies on our website. Comprehensive cookie policy covering analytics, marketing, and functional cookies with clear management instructions.",
   openGraph: {
-    title: "Cookie Policy | Colossus Scaffolding",
+    title: "Cookie Policy",
     description:
       "Comprehensive cookie policy for Colossus Scaffolding website. Learn about our use of analytics, marketing, and functional cookies.",
     url: absUrl("/cookie-policy"),

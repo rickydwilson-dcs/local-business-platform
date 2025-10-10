@@ -4,7 +4,7 @@ test.describe("Location Pages", () => {
   test("should display locations overview page", async ({ page }) => {
     await page.goto("/locations");
 
-    await expect(page).toHaveTitle(/Locations/);
+    await expect(page).toHaveTitle(/South East England.*Towns.*Colossus Scaffolding/);
     await expect(page.locator("h1")).toContainText(/locations|areas|coverage/i);
 
     // Should show location cards or links

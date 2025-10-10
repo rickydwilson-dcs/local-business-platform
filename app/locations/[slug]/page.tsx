@@ -160,7 +160,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
 
   if (!locationData) {
     return {
-      title: "Location Not Found | Colossus Scaffolding",
+      title: "Location Not Found",
       description: "The requested location page could not be found.",
     };
   }

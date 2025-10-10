@@ -4,11 +4,11 @@ import { Metadata } from "next";
 import Breadcrumbs from "@/components/ui/breadcrumbs";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | Colossus Scaffolding",
+  title: "Privacy Policy",
   description:
     "Colossus Scaffolding Privacy Policy - how we collect, use, and protect your personal data in compliance with UK GDPR. Learn about your rights and our data practices.",
   openGraph: {
-    title: "Privacy Policy | Colossus Scaffolding",
+    title: "Privacy Policy",
     description:
       "Comprehensive privacy policy for Colossus Scaffolding explaining our data practices and your rights under UK GDPR.",
     url: absUrl("/privacy-policy"),

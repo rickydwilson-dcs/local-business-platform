@@ -1,10 +1,14 @@
 import { Redis } from "@upstash/redis";
 
 // Initialize Redis client using Upstash-provided environment variables
-const redis = new Redis({
-  url: process.env.KV_REST_API_URL!,
-  token: process.env.KV_REST_API_TOKEN!,
-});
+// In test/development environments without Redis, rate limiting is disabled
+const redis =
+  process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN
+    ? new Redis({
+        url: process.env.KV_REST_API_URL,
+        token: process.env.KV_REST_API_TOKEN,
+      })
+    : null;
 
 // Rate limiting configuration
 const RATE_LIMIT_WINDOW = 300; // 5 minutes in seconds
@@ -13,6 +17,12 @@ const RATE_LIMIT_MAX = 5; // 5 requests per window
 export async function checkRateLimit(
   ip: string
 ): Promise<{ allowed: boolean; retryAfter?: number }> {
+  // If Redis is not configured, allow all requests (test/development mode)
+  if (!redis) {
+    console.log("[Rate Limiter] Redis not configured - allowing request (test/dev mode)");
+    return { allowed: true };
+  }
+
   const key = `rate-limit:contact:${ip}`;
 
   try {

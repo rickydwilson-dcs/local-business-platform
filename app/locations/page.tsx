@@ -13,8 +13,7 @@ import { CoverageMapSection } from "@/components/ui/coverage-map-section";
 export const dynamic = "force-static";
 
 export const metadata: Metadata = {
-  title:
-    "Professional Scaffolding Across South East England | 30+ Towns Covered | Colossus Scaffolding",
+  title: "Professional Scaffolding Across South East England | 30+ Towns Covered",
   description:
     "Professional scaffolding services across 30+ towns in East Sussex, West Sussex, Kent, and Surrey. Local specialists with heritage expertise and established council relationships.",
   openGraph: {
