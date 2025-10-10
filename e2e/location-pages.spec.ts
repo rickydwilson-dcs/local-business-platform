@@ -46,8 +46,11 @@ test.describe("Location Pages", () => {
   test("should show location-specific FAQs", async ({ page }) => {
     await page.goto("/locations/brighton");
 
-    // Check for FAQ section
-    const faqsHeading = page.locator("h2, h3").filter({ hasText: /faq|questions/i });
+    // Check for FAQ section (use .first() to handle multiple FAQ headings)
+    const faqsHeading = page
+      .locator("h2, h3")
+      .filter({ hasText: /faq|questions/i })
+      .first();
     await expect(faqsHeading).toBeVisible();
 
     // Should have at least 5 FAQs (per schema requirement)
