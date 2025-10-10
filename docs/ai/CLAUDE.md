@@ -186,7 +186,7 @@ about:
 # Development
 git push origin develop
 
-# ⚠️ CRITICAL: Verify GitHub Actions CI passes
+# ⚠️ CRITICAL: Verify GitHub Actions CI + E2E passes
 gh run watch
 # OR: gh run list --branch develop --limit 1
 
@@ -195,17 +195,26 @@ git checkout staging
 git merge develop
 git push origin staging
 
-# ⚠️ CRITICAL: Verify GitHub Actions CI passes
+# ⚠️ CRITICAL: Verify GitHub Actions CI + E2E passes (staging is final quality gate)
 gh run watch
 
-# Staging → Production (after CI passes ✅)
+# Staging → Production (after CI + E2E pass on staging ✅)
 git checkout main
 git merge staging
 git push origin main
 
-# ⚠️ CRITICAL: Verify GitHub Actions CI passes
+# ⚠️ Note: Main skips E2E tests - pre-push hook verifies staging E2E passed
+# Main runs only CI (ESLint, TypeScript, Tests, Build) - ~2min vs ~5min
 gh run watch
 ```
+
+**Why main skips E2E tests:**
+
+- Staging and main use identical code, environment, and dependencies
+- E2E tests on main would be redundant (same tests, same container, same results)
+- Pre-push hook automatically verifies staging E2E tests passed before allowing push
+- Saves ~3 minutes of CI time per production deployment
+- Staging is the final quality gate - if E2E passes there, it will pass on main
 
 ### Pre-Push Hooks (BLOCKS PUSH IF FAILED)
 

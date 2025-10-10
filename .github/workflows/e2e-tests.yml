@@ -23,8 +23,8 @@ jobs:
     name: Smoke Tests (Fast)
     runs-on: ubuntu-latest
     timeout-minutes: 5
-    # Run smoke tests on push, or if manually selected
-    if: github.event_name != 'workflow_dispatch' || inputs.test-suite == 'smoke'
+    # Run smoke tests on push to develop/staging only (skip main - staging is final gate)
+    if: (github.event_name == 'push' && (github.ref == 'refs/heads/develop' || github.ref == 'refs/heads/staging')) || (github.event_name == 'workflow_dispatch' && inputs.test-suite == 'smoke')
 
     steps:
       - name: Checkout code
@@ -59,8 +59,8 @@ jobs:
     name: Standard E2E Tests (Auto)
     runs-on: ubuntu-latest
     timeout-minutes: 15
-    # Run automatically on staging/main pushes, skip on develop
-    if: github.event_name == 'push' && (github.ref == 'refs/heads/staging' || github.ref == 'refs/heads/main')
+    # Run automatically on staging pushes only (staging is final quality gate before main)
+    if: github.event_name == 'push' && github.ref == 'refs/heads/staging'
 
     steps:
       - name: Checkout code

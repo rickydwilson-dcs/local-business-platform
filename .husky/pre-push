@@ -29,8 +29,45 @@ npm run build || {
   exit 1
 }
 
-# NEW: Run smoke tests for protected branches
-if [ "$BRANCH" = "develop" ] || [ "$BRANCH" = "staging" ] || [ "$BRANCH" = "main" ]; then
+# Branch-specific quality gates
+if [ "$BRANCH" = "main" ]; then
+  # For main: Verify staging tests passed (staging is the quality gate)
+  echo ""
+  echo "🔍 Verifying staging E2E tests passed..."
+  echo ""
+
+  # Check if gh CLI is available
+  if ! command -v gh &> /dev/null; then
+    echo "⚠️  Warning: gh CLI not found - skipping staging verification"
+    echo "   Install gh CLI to enable automatic staging test verification"
+    echo ""
+  else
+    # Get the latest E2E test run status on staging
+    STAGING_STATUS=$(gh run list --branch staging --workflow="E2E Tests" --limit 1 --json conclusion --jq '.[0].conclusion' 2>/dev/null)
+
+    if [ "$STAGING_STATUS" != "success" ]; then
+      echo ""
+      echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+      echo "❌ STAGING E2E TESTS MUST PASS FIRST"
+      echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+      echo ""
+      echo "Staging is the final quality gate before main."
+      echo "Current staging E2E status: $STAGING_STATUS"
+      echo ""
+      echo "🔧 Required steps:"
+      echo "  1. Ensure all changes are merged to staging"
+      echo "  2. Wait for staging E2E tests to pass"
+      echo "  3. Verify: gh run list --branch staging --workflow='E2E Tests' --limit 1"
+      echo "  4. Then push to main"
+      echo ""
+      exit 1
+    fi
+
+    echo "✅ Staging E2E tests passed - safe to deploy to main"
+  fi
+
+elif [ "$BRANCH" = "develop" ] || [ "$BRANCH" = "staging" ]; then
+  # For develop/staging: Run smoke tests locally
   echo ""
   echo "🎭 Running smoke tests (required for $BRANCH)..."
   echo ""
