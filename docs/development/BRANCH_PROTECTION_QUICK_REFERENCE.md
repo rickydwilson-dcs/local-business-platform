@@ -18,9 +18,14 @@ These names must match exactly (case-sensitive):
 If you see these in existing branch protection, **REMOVE THEM**:
 
 - ❌ `Build Test` (LEGACY - now included in "Quality Checks")
+  - Found on: staging, main
   - This check no longer exists in workflows
-  - Causes confusion and false failures
-  - Remove from all branches: develop, staging, main
+  - Remove immediately
+
+- ❌ `Deployment Readiness` (LEGACY - removed from workflows)
+  - Found on: main
+  - This check no longer exists
+  - Remove immediately
 
 ---
 
