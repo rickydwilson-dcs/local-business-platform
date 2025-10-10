@@ -38,6 +38,17 @@ Development workflow, tools, and procedures.
   - Environment variables
   - Secrets management
 
+- **[BRANCH_PROTECTION_SETUP.md](development/BRANCH_PROTECTION_SETUP.md)** - Branch protection configuration guide
+  - Complete setup instructions for all branches
+  - Required status check names
+  - Legacy check removal guide
+  - Verification commands
+
+- **[BRANCH_PROTECTION_QUICK_REFERENCE.md](development/BRANCH_PROTECTION_QUICK_REFERENCE.md)** - Branch protection quick reference
+  - Quick setup checklist
+  - Status check names (exact match required)
+  - Verification commands
+
 ### 🧪 Testing
 
 Testing infrastructure, guidelines, and performance monitoring.
