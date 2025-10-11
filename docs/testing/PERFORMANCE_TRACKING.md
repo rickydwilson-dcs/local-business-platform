@@ -1,5 +1,9 @@
 # Performance Test Result Tracking
 
+**For all sites in the Local Business Platform**
+
+> Performance tracking methodology for colossus-reference. Consider implementing centralized performance tracking across all 50 sites.
+
 ## Overview
 
 Automatic tracking and historical analysis of performance test results to catch regressions and monitor trends over time.

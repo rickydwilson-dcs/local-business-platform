@@ -1,5 +1,9 @@
 # End-to-End (E2E) Testing with Playwright
 
+**For all sites in the Local Business Platform**
+
+> Originally developed for colossus-reference, this E2E testing approach should be replicated for all client sites to ensure quality before deployment.
+
 ## Overview
 
 This project uses **Playwright** for automated end-to-end testing of critical user flows in real browsers. E2E tests complement the existing unit tests (Vitest) by testing the complete application from a user's perspective.

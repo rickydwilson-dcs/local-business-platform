@@ -1,5 +1,9 @@
 # Performance, Visual & Accessibility Testing
 
+**For all sites in the Local Business Platform**
+
+> Performance testing standards developed for colossus-reference. All client sites should meet these performance thresholds.
+
 ## Overview
 
 This project includes comprehensive testing to ensure high quality, fast performance, and accessibility:

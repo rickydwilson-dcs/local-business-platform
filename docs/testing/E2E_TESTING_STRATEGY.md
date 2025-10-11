@@ -1,5 +1,9 @@
 # E2E Testing Strategy
 
+**For all sites in the Local Business Platform**
+
+> This testing strategy was developed for colossus-reference and applies to all client sites. Each site should implement smoke tests for CI/CD integration.
+
 ## Problem: Tests Taking Too Long
 
 Original E2E test suite was taking 10+ minutes to complete:

@@ -1,53 +1,68 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides guidance to Claude Code (claude.ai/code) when working with the Local Business Platform monorepo.
 
 ## MANDATORY: Read These Documentation Files First
 
 **Before making ANY changes to this codebase, you MUST read these critical documentation files:**
 
-1. **[ARCHITECTURE.md](../architecture/ARCHITECTURE.md)** - Complete architectural guidelines, styling standards, content patterns, and critical violation prevention rules (1,455 lines)
-2. **[DEVELOPMENT.md](../development/DEVELOPMENT.md)** - Development workflow, git procedures, branch structure, pre-push hooks, and quality gates (683 lines)
-3. **[AI_INSTRUCTIONS.md](AI_INSTRUCTIONS.md)** - General AI agent instructions and content accuracy standards
-4. **[CONTENT_VALIDATION.md](../architecture/CONTENT_VALIDATION.md)** - Content validation rules, Zod schemas, and troubleshooting
-5. **[CHANGELOG.md](../../CHANGELOG.md)** - Project change history and architectural decisions
+1. **[WHITE_LABEL_PLATFORM_DESIGN.md](../WHITE_LABEL_PLATFORM_DESIGN.md)** - Complete 8-week implementation plan, business model, architecture decisions
+2. **[WEEK_1_COMPLETE.md](../WEEK_1_COMPLETE.md)** - Week 1 completion report, current status, monorepo structure
+3. **[TODO.md](../TODO.md)** - Current task list with 8-week roadmap (186+ tasks)
+4. **[ARCHITECTURE.md](../architecture/ARCHITECTURE.md)** - Architectural guidelines for all sites (1,455 lines)
+5. **[CONTENT_VALIDATION.md](../architecture/CONTENT_VALIDATION.md)** - Content validation rules and Zod schemas
+6. **[AI_INSTRUCTIONS.md](AI_INSTRUCTIONS.md)** - General AI agent instructions and content accuracy standards
 
 **CRITICAL**: These files contain:
 
-- Unified MDX-only architecture requirements (ARCHITECTURE.md)
-- Architecture violation detection and prevention (ARCHITECTURE.md)
-- Pre-push hooks that BLOCK pushes on errors (DEVELOPMENT.md)
-- Content accuracy and truthful claims standards (ARCHITECTURE.md)
-- Styling system rules and maintainable classes (ARCHITECTURE.md)
-- Branch structure and direct push workflow (DEVELOPMENT.md)
+- Monorepo structure (Option B - Root as Coordinator)
+- 8-week implementation roadmap (Week 1 complete)
+- Build performance targets (<30s per site)
+- Component variant system design
+- MDX-only architecture requirements
+- Content accuracy and truthful claims standards
+- Styling system rules and maintainable classes
 
-**Failure to read these files will result in architectural violations, blocked pushes, and inconsistent implementations.**
+**Failure to read these files will result in architectural violations and inconsistent implementations across the 50-site platform.**
 
 ---
 
 ## Project Overview
 
-Modern Next.js 15 website for Colossus Scaffolding - professional scaffolding services across South East England. Built with React 19, TypeScript, Tailwind CSS, and MDX for content management. Deployed on Vercel with automated CI/CD pipeline.
+**Local Business Platform** - White-label website generation platform for local service businesses (plumbers, gardeners, builders, roofers, scaffolders) targeting South East England.
+
+**Current Status:** Week 1 Complete (Monorepo Foundation)
+- Monorepo with Turborepo + pnpm workspaces
+- 1 site deployed: colossus-reference (reference implementation)
+- Target: 50 sites by end of Year 1
+- Build time: 26.88s for 77 pages ✅
+
+**Architecture:** Option B - Root as Coordinator
+- Root coordinates builds (no application code)
+- Sites in `sites/` directory (each deploys to separate Vercel project)
+- Shared components in `packages/core-components`
 
 ## Essential Development Commands
 
-### Development & Build
+### Monorepo Commands (Root Level)
 
 ```bash
-npm run dev              # Start development server (localhost:3000)
-npm run build            # Production build (required before push)
-npm run type-check       # TypeScript validation (required before push)
+pnpm build               # Build all sites with Turborepo (cached)
+pnpm lint                # Lint all workspaces
+pnpm type-check          # Type check all workspaces
+pnpm clean               # Clean all build artifacts
 ```
 
-### Quality Checks
+### Site Commands (In sites/colossus-reference/)
 
 ```bash
-npm run lint             # ESLint validation
-npm run lint:fix         # Auto-fix linting issues
-npm run pre-commit-check # Full quality check (lint + type-check + validate + build)
+pnpm dev                 # Start development server (localhost:3000)
+pnpm build               # Production build for this site
+pnpm type-check          # TypeScript validation for this site
+pnpm lint                # ESLint validation for this site
 ```
 
-### Testing
+### Testing (In sites/colossus-reference/)
 
 ```bash
 # Unit Tests (Vitest)

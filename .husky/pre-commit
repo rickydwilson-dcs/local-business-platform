@@ -1,2 +1,5 @@
 npx lint-staged
-npm run validate:content
+# Validate content for colossus-reference if it exists
+if [ -f "sites/colossus-reference/package.json" ]; then
+  cd sites/colossus-reference && pnpm run validate:content && cd ../..
+fi
