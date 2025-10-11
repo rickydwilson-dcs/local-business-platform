@@ -1,5 +1,5 @@
 npx lint-staged
-# Validate content for colossus-reference if it exists
-if [ -f "sites/colossus-reference/package.json" ]; then
+# Validate content for colossus-reference if content files changed
+if git diff --cached --name-only | grep -q "sites/colossus-reference/content/"; then
   cd sites/colossus-reference && pnpm run validate:content && cd ../..
 fi
