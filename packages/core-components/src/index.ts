@@ -1,3 +1,6 @@
+// Export Hero variants (NEW - Week 2)
+export * from './components/hero';
+
 // Export all UI components
 export * from './components/ui/hero-section';
 export * from './components/ui/footer';
@@ -8,7 +11,6 @@ export * from './components/ui/content-card';
 export * from './components/ui/card-grid';
 export * from './components/ui/coverage-map';
 export * from './components/ui/coverage-areas';
-export * from './components/ui/service-card';
 
 // Export schemas
 export * from './components/Schema';
