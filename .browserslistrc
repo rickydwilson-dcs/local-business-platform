@@ -1,0 +1,24 @@
+# Browsers that we support for modern JavaScript (eliminates 11.4 KiB of polyfills)
+
+# Global usage > 0.5%
+> 0.5%
+
+# Last 2 versions of major browsers
+last 2 Chrome versions
+last 2 Firefox versions
+last 2 Safari versions
+last 2 Edge versions
+
+# Exclude dead browsers
+not dead
+
+# Exclude Internet Explorer
+not ie 11
+not ie_mob 11
+
+# Support modern mobile browsers
+last 2 iOS versions
+last 2 Android versions
+
+# Exclude browsers that don't support ES2022 features
+not op_mini all
