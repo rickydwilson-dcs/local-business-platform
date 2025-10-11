@@ -1,14 +1,41 @@
-# Colossus Scaffolding - Documentation
+# Local Business Platform - Documentation
 
-Complete documentation for the Colossus Scaffolding Next.js website project.
+Complete documentation for the white-label website platform for local service businesses.
+
+---
 
 ## 📚 Documentation Structure
 
+### 🎯 Platform Overview
+
+Core platform documentation and strategic planning.
+
+- **[WHITE_LABEL_PLATFORM_DESIGN.md](WHITE_LABEL_PLATFORM_DESIGN.md)** - Complete 8-week implementation plan
+  - Business model and economics
+  - Architecture decision (Option B: Monorepo)
+  - Component variant system
+  - Image management strategy
+  - AI content generation
+  - Deployment pipeline
+  - 8-week roadmap
+
+- **[WEEK_1_COMPLETE.md](WEEK_1_COMPLETE.md)** - Week 1 milestone completion report
+  - Monorepo setup achievements
+  - Build performance metrics
+  - Technical accomplishments
+  - Architecture validation
+
+- **[MONOREPO_STATUS.md](MONOREPO_STATUS.md)** - Current monorepo state and decisions
+  - Architecture decision documentation
+  - Implementation status
+  - Remaining work
+  - Next steps
+
 ### 🏗️ Architecture
 
-Core architectural guidelines, patterns, and standards.
+Core architectural guidelines for the reference site (applies to all sites).
 
-- **[ARCHITECTURE.md](architecture/ARCHITECTURE.md)** - Complete architectural guidelines, styling standards, content patterns (1,456 lines)
+- **[ARCHITECTURE.md](architecture/ARCHITECTURE.md)** - Complete architectural guidelines
   - MDX-only content architecture
   - Styling system (Tailwind CSS)
   - Component organization
@@ -16,16 +43,16 @@ Core architectural guidelines, patterns, and standards.
   - Image optimization
   - Architecture violation detection
 
-- **[CONTENT_VALIDATION.md](architecture/CONTENT_VALIDATION.md)** - Content validation rules, Zod schemas, troubleshooting
-  - Validation schemas
+- **[CONTENT_VALIDATION.md](architecture/CONTENT_VALIDATION.md)** - Content validation rules
+  - Zod validation schemas
   - Common validation errors
   - Troubleshooting guide
 
 ### 🔧 Development
 
-Development workflow, tools, and procedures.
+Development workflow, tools, and procedures for the monorepo.
 
-- **[DEVELOPMENT.md](development/DEVELOPMENT.md)** - Development workflow, git procedures, branch structure (451 lines)
+- **[DEVELOPMENT.md](development/DEVELOPMENT.md)** - Development workflow
   - Git workflow & branch structure
   - Pre-commit/pre-push hooks
   - Quality gates
@@ -38,15 +65,15 @@ Development workflow, tools, and procedures.
   - Environment variables
   - Secrets management
 
-- **[BRANCH_PROTECTION_SETUP.md](development/BRANCH_PROTECTION_SETUP.md)** - Branch protection configuration guide
-  - Complete setup instructions for all branches
+- **[BRANCH_PROTECTION_SETUP.md](development/BRANCH_PROTECTION_SETUP.md)** - Branch protection guide
+  - Complete setup instructions
   - Required status check names
   - Legacy check removal guide
   - Verification commands
 
-- **[BRANCH_PROTECTION_QUICK_REFERENCE.md](development/BRANCH_PROTECTION_QUICK_REFERENCE.md)** - Branch protection quick reference
-  - Quick setup checklist
-  - Status check names (exact match required)
+- **[BRANCH_PROTECTION_QUICK_REFERENCE.md](development/BRANCH_PROTECTION_QUICK_REFERENCE.md)** - Quick reference
+  - Setup checklist
+  - Status check names
   - Verification commands
 
 ### 🧪 Testing
@@ -54,14 +81,14 @@ Development workflow, tools, and procedures.
 Testing infrastructure, guidelines, and performance monitoring.
 
 - **[E2E_TESTING_STRATEGY.md](testing/E2E_TESTING_STRATEGY.md)** - Tiered E2E testing strategy ⚡️
-  - Ultra-fast smoke tests (~15s local, ~3min CI)
-  - Standard functional tests (~2-3min)
-  - Comprehensive tests (~10min+)
+  - Ultra-fast smoke tests
+  - Standard functional tests
+  - Comprehensive tests
   - Test tier selection guide
   - CI/CD workflow optimization
 
 - **[E2E_TESTING.md](testing/E2E_TESTING.md)** - End-to-end testing with Playwright
-  - Complete test suite overview (92 tests)
+  - Complete test suite overview
   - Running tests locally
   - Writing new tests
   - Accessibility testing (WCAG 2.1 AA)
@@ -73,7 +100,7 @@ Testing infrastructure, guidelines, and performance monitoring.
   - Lighthouse integration
   - Performance optimization
 
-- **[PERFORMANCE_TRACKING.md](testing/PERFORMANCE_TRACKING.md)** - Performance test result tracking
+- **[PERFORMANCE_TRACKING.md](testing/PERFORMANCE_TRACKING.md)** - Performance tracking
   - Historical performance data
   - Trend analysis
   - Regression detection
@@ -98,32 +125,39 @@ Documentation for AI agents working with this codebase.
 ### 📋 Project Management
 
 - **[TODO.md](TODO.md)** - Current tasks and future planning
+  - Active tasks
+  - Completed milestones
+  - Future planning
 
 ---
 
 ## 🚀 Quick Start
 
-**New to this project?** Read these in order:
+### New to this project?
 
-1. ✅ [README.md](../README.md) - Project overview (root)
-2. ✅ [ARCHITECTURE.md](architecture/ARCHITECTURE.md) - Understand the architecture
-3. ✅ [DEVELOPMENT.md](development/DEVELOPMENT.md) - Learn the development workflow
-4. ✅ [CLAUDE.md](ai/CLAUDE.md) - Development commands and patterns
+Read these in order:
 
-**Working with AI agents?**
+1. ✅ [Root README.md](../README.md) - Project overview and monorepo structure
+2. ✅ [WHITE_LABEL_PLATFORM_DESIGN.md](WHITE_LABEL_PLATFORM_DESIGN.md) - Complete platform design
+3. ✅ [WEEK_1_COMPLETE.md](WEEK_1_COMPLETE.md) - Current implementation status
+4. ✅ [ARCHITECTURE.md](architecture/ARCHITECTURE.md) - Site architecture patterns
+5. ✅ [DEVELOPMENT.md](development/DEVELOPMENT.md) - Development workflow
+
+### Working with AI agents?
 
 - Start with [CLAUDE.md](ai/CLAUDE.md) for Claude Code
 - See [AI_INSTRUCTIONS.md](ai/AI_INSTRUCTIONS.md) for general AI guidelines
 
-**Adding tests?**
+### Building a new site?
 
-- [E2E_TESTING_STRATEGY.md](testing/E2E_TESTING_STRATEGY.md) - Tiered testing strategy
-- [E2E_TESTING.md](testing/E2E_TESTING.md) - E2E tests setup & writing
-- [PERFORMANCE_TESTING.md](testing/PERFORMANCE_TESTING.md) - Performance tests
+1. Review [WHITE_LABEL_PLATFORM_DESIGN.md](WHITE_LABEL_PLATFORM_DESIGN.md) - Component variant system
+2. Check [sites/colossus-reference/](../sites/colossus-reference/) - Reference implementation
+3. See [packages/core-components/](../packages/core-components/) - Shared components
 
-**Setting up GitHub?**
+### Setting up deployment?
 
 - [GITHUB_SETUP.md](development/GITHUB_SETUP.md) - Complete GitHub configuration
+- [DEVELOPMENT.md](development/DEVELOPMENT.md) - Deployment procedures
 
 ---
 
@@ -145,6 +179,8 @@ See [CLAUDE.md - Documentation Maintenance](ai/CLAUDE.md#documentation-maintenan
 
 ### By Topic
 
+- **Platform Strategy:** [WHITE_LABEL_PLATFORM_DESIGN.md](WHITE_LABEL_PLATFORM_DESIGN.md)
+- **Monorepo Status:** [WEEK_1_COMPLETE.md](WEEK_1_COMPLETE.md) + [MONOREPO_STATUS.md](MONOREPO_STATUS.md)
 - **Architecture & Patterns:** [architecture/](architecture/)
 - **Development Workflow:** [development/](development/)
 - **Testing:** [testing/](testing/)
@@ -152,34 +188,76 @@ See [CLAUDE.md - Documentation Maintenance](ai/CLAUDE.md#documentation-maintenan
 
 ### By Task
 
-- **Setting up development environment:** [DEVELOPMENT.md](development/DEVELOPMENT.md#essential-development-commands)
-- **Running tests:** [CLAUDE.md](ai/CLAUDE.md#testing)
-- **Deploying to production:** [DEVELOPMENT.md](development/DEVELOPMENT.md#git-workflow--branch-structure)
+- **Understanding the platform:** [WHITE_LABEL_PLATFORM_DESIGN.md](WHITE_LABEL_PLATFORM_DESIGN.md)
+- **Setting up development:** [DEVELOPMENT.md](development/DEVELOPMENT.md)
+- **Building sites:** [WEEK_1_COMPLETE.md](WEEK_1_COMPLETE.md#-final-monorepo-structure)
+- **Running tests:** [E2E_TESTING_STRATEGY.md](testing/E2E_TESTING_STRATEGY.md)
+- **Deploying:** [DEVELOPMENT.md](development/DEVELOPMENT.md#git-workflow--branch-structure)
 - **Validating content:** [CONTENT_VALIDATION.md](architecture/CONTENT_VALIDATION.md)
-- **Understanding MDX architecture:** [ARCHITECTURE.md](architecture/ARCHITECTURE.md#unified-mdx-only-content-architecture)
-- **Writing performance tests:** [PERFORMANCE_TESTING.md](testing/PERFORMANCE_TESTING.md)
+- **Component variants:** [WHITE_LABEL_PLATFORM_DESIGN.md](WHITE_LABEL_PLATFORM_DESIGN.md#component-variant-system)
 
 ---
 
 ## 📊 Project Statistics
 
-- **Documentation Files:** 11 markdown files
-- **Total Lines:** ~5,000+ lines of documentation
-- **Test Suite:** 141 unit tests + 92 E2E tests (7 smoke + 51 standard + 34 comprehensive)
+### Monorepo Structure
+- **Workspaces:** 3 (root + core-components + colossus-reference)
+- **Sites:** 1 (colossus-reference - reference implementation)
+- **Shared Packages:** 1 (@platform/core-components)
+- **Target:** 50 sites by end of Year 1
+
+### Documentation
+- **Documentation Files:** 18 markdown files
+- **Total Lines:** ~8,000+ lines of documentation
+- **Platform Design:** Complete 8-week roadmap
+- **Week 1 Status:** ✅ Complete
+
+### Reference Site (colossus-reference)
+- **Build Time:** 26.88 seconds (Turborepo)
+- **Pages Generated:** 77 static pages
 - **Content Files:** 62 MDX files (25 services + 37 locations)
+- **Test Suite:** 141 unit tests + 92 E2E tests
 - **Code Quality:** ESLint + TypeScript + Pre-commit/push hooks + CI/CD
+
+### Platform Economics
+- **Setup Fee:** £2,000-2,500 per site
+- **Monthly Fee:** £25 per site
+- **Infrastructure:** £50-75/month total (Vercel Pro + Cloudflare R2 + Claude API)
+- **Target Revenue (50 sites):** £115,000 Year 1
+- **Profit Margin:** 94-96%
 
 ---
 
 ## 🆘 Getting Help
 
-- **Documentation Issues:** Check the specific doc's troubleshooting section
-- **Build Failures:** See [DEVELOPMENT.md - Common Issues](development/DEVELOPMENT.md#common-development-issues)
-- **Content Validation:** See [CONTENT_VALIDATION.md](architecture/CONTENT_VALIDATION.md)
+- **Platform Questions:** See [WHITE_LABEL_PLATFORM_DESIGN.md](WHITE_LABEL_PLATFORM_DESIGN.md)
+- **Monorepo Setup:** See [WEEK_1_COMPLETE.md](WEEK_1_COMPLETE.md)
 - **Architecture Questions:** See [ARCHITECTURE.md](architecture/ARCHITECTURE.md)
+- **Build Failures:** See [DEVELOPMENT.md](development/DEVELOPMENT.md)
+- **Content Validation:** See [CONTENT_VALIDATION.md](architecture/CONTENT_VALIDATION.md)
+- **Test Issues:** See [E2E_TESTING_STRATEGY.md](testing/E2E_TESTING_STRATEGY.md)
 
 ---
 
-**Last Updated:** October 2025
+## 📍 Current Status
+
+**Week 1 Milestone:** ✅ COMPLETE (2025-10-11)
+- Monorepo foundation established
+- colossus-reference site building successfully (26.88s)
+- Turborepo + pnpm workspaces configured
+- Architecture validated (Option B: Root as Coordinator)
+
+**Next Milestone:** Week 2 - Component Versioning
+- Set up Vercel Pro team
+- Deploy colossus-reference
+- Create second test site
+- Add changesets for component versioning
+
+See [TODO.md](TODO.md) for complete task list.
+
+---
+
+**Last Updated:** 2025-10-11
 **Maintained by:** Development Team
-**Project:** Colossus Scaffolding Next.js Website
+**Project:** Local Business Platform - White-Label Website Generation
+**Status:** Week 1 Complete ✅
