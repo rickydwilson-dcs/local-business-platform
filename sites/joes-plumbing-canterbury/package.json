@@ -1,0 +1,49 @@
+{
+  "name": "joes-plumbing-canterbury",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Joe's Plumbing - Canterbury plumbing services",
+  "scripts": {
+    "dev": "next dev --port 3001",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "type-check": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "validate:content": "tsx ../../scripts/validate-content.ts all",
+    "clean": "rm -rf .next"
+  },
+  "dependencies": {
+    "@mdx-js/react": "^3.1.1",
+    "gray-matter": "^4.0.3",
+    "lucide-react": "^0.544.0",
+    "next": "15.5.2",
+    "next-mdx-remote": "^5.0.0",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "rehype-autolink-headings": "^7.1.0",
+    "rehype-slug": "^6.0.0",
+    "resend": "^6.1.0",
+    "zod": "^4.1.11"
+  },
+  "devDependencies": {
+    "@mdx-js/loader": "^3.1.1",
+    "@next/mdx": "^15.5.2",
+    "@tailwindcss/typography": "^0.5.16",
+    "@types/mdx": "^2.0.13",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "autoprefixer": "^10.4.21",
+    "eslint": "^9",
+    "eslint-config-next": "15.5.2",
+    "postcss": "^8.5.6",
+    "prettier": "^3.6.2",
+    "remark-frontmatter": "^5.0.0",
+    "remark-gfm": "^4.0.1",
+    "tailwindcss": "^3.4.17",
+    "tsx": "^4.20.6",
+    "typescript": "^5"
+  }
+}
