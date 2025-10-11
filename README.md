@@ -17,6 +17,7 @@ White-label website generation platform for local service businesses (plumbers, 
 ## 🏗 Architecture
 
 This is a **pnpm workspace + Turborepo monorepo** where:
+
 - Root coordinates builds and deployment (no application code)
 - Shared components live in `packages/core-components`
 - Each client site is a separate Next.js app in `sites/`
@@ -130,6 +131,7 @@ pnpm build
 ## 🎯 Business Model
 
 ### Pricing
+
 - **Setup Fee:** £2,000-2,500 per site (one-time)
 - **Maintenance:** £25/month per site
 - **Additional Pages:** £100 each
@@ -138,11 +140,13 @@ pnpm build
 ### Economics (50 Sites)
 
 **Revenue:**
+
 - Setup fees: £100,000 (one-time, Year 1)
 - Monthly recurring: £1,250/month (£15,000/year)
 - **Year 1 Total: ~£115,000**
 
 **Costs:**
+
 - Vercel Pro: £20/month
 - Cloudflare R2: £10/month
 - Claude API: £20/month
@@ -167,14 +171,14 @@ export const siteConfig = {
     email: "joe@joesplumbing.com",
   },
   components: {
-    hero: 'split',           // Uses HeroSplit variant
-    serviceCard: 'elevated',
-    contactForm: 'minimal',
+    hero: "split", // Uses HeroSplit variant
+    serviceCard: "elevated",
+    contactForm: "minimal",
   },
   theme: {
-    primary: '#1e40af',      // Blue
-    secondary: '#0f172a',     // Dark slate
-    accent: '#f59e0b',       // Amber
+    primary: "#1e40af", // Blue
+    secondary: "#0f172a", // Dark slate
+    accent: "#f59e0b", // Amber
   },
 };
 ```
@@ -190,6 +194,7 @@ export const siteConfig = {
 Images are stored in Cloudflare R2, not in this repository.
 
 **Why?**
+
 - ❌ Git doesn't scale with binary files
 - ❌ Repository would balloon to GB+ sizes
 - ✅ R2 provides global CDN + automatic optimization
@@ -295,6 +300,7 @@ pnpm deploy:batch                 # Phased deployment (all sites)
 ## 📊 Implementation Roadmap
 
 ### ✅ Week 1: Monorepo Foundation (COMPLETE)
+
 - ✅ Set up Turborepo + pnpm workspaces
 - ✅ Refactor root to pure coordinator (Option B)
 - ✅ Move code to sites/colossus-reference
@@ -304,6 +310,7 @@ pnpm deploy:batch                 # Phased deployment (all sites)
 - ⏳ Measure multi-site build times (Next)
 
 ### Week 2: Component Versioning
+
 - [ ] Set up Vercel Pro team
 - [ ] Deploy colossus-reference
 - [ ] Create second test site (plumbing)
@@ -312,35 +319,41 @@ pnpm deploy:batch                 # Phased deployment (all sites)
 - [ ] Test version migration
 
 ### Week 3: Image Storage (Cloudflare R2)
+
 - [ ] Set up R2 bucket
 - [ ] Build image processing pipeline (Sharp)
 - [ ] Create intake tool
 - [ ] Migrate test images
 
 ### Week 4: Deployment Pipeline (CRITICAL)
+
 - [ ] Build phased deployment scripts
 - [ ] Implement smoke tests
 - [ ] Automated rollback
 - [ ] Sentry integration
 
 ### Week 5: AI Content Generation
+
 - [ ] Claude API integration
 - [ ] Service/location generators
 - [ ] Internal uniqueness checking
 - [ ] Quality validators
 
 ### Week 6: Blog & Projects
+
 - [ ] Blog content type
 - [ ] Project portfolio type
 - [ ] AI generators for both
 
 ### Week 7: Registry & Monitoring
+
 - [ ] Supabase site registry
 - [ ] Management CLI tools
 - [ ] Monitoring dashboard
 - [ ] Automated alerts
 
 ### Week 8: Production Launch
+
 - [ ] Build industry libraries (plumbing, gardening)
 - [ ] End-to-end workflow
 - [ ] First real paying client
@@ -351,6 +364,7 @@ pnpm deploy:batch                 # Phased deployment (all sites)
 ## 🔧 Technologies
 
 **Core Stack:**
+
 - Next.js 15 (App Router)
 - React 19
 - TypeScript (Strict mode)
@@ -358,17 +372,20 @@ pnpm deploy:batch                 # Phased deployment (all sites)
 - MDX (Content)
 
 **Build System:**
+
 - Turborepo (caching & orchestration)
 - pnpm workspaces (dependency management)
 - SWC (Fast compilation)
 
 **Infrastructure:**
+
 - Vercel (hosting - £20/month for 50 sites)
 - Cloudflare R2 (image storage - £10/month)
 - Supabase (site registry - Free tier)
 - Sentry (monitoring - £0-25/month)
 
 **Content & Automation:**
+
 - Claude API (AI content generation)
 - Sharp (image processing)
 - Zod (content validation)
@@ -380,17 +397,20 @@ pnpm deploy:batch                 # Phased deployment (all sites)
 Comprehensive documentation in [/docs](./docs/):
 
 **Platform Strategy:**
+
 - [WHITE_LABEL_PLATFORM_DESIGN.md](./docs/WHITE_LABEL_PLATFORM_DESIGN.md) - Complete 8-week plan
 - [WEEK_1_COMPLETE.md](./docs/WEEK_1_COMPLETE.md) - Week 1 completion report
 - [MONOREPO_STATUS.md](./docs/MONOREPO_STATUS.md) - Architecture decisions
 
 **Development:**
+
 - [docs/README.md](./docs/README.md) - Documentation index
 - [ARCHITECTURE.md](./docs/architecture/ARCHITECTURE.md) - Architectural guidelines
 - [DEVELOPMENT.md](./docs/development/DEVELOPMENT.md) - Development workflow
 - [TESTING.md](./docs/testing/E2E_TESTING_STRATEGY.md) - Testing strategies
 
 **Quick Links:**
+
 - [TODO.md](./docs/TODO.md) - Current task list
 - [CLAUDE.md](./docs/ai/CLAUDE.md) - AI agent instructions
 
@@ -399,6 +419,7 @@ Comprehensive documentation in [/docs](./docs/):
 ## 🎯 Current Status & Next Steps
 
 ### ✅ Completed
+
 1. ✅ Monorepo structure established (Option B)
 2. ✅ Root refactored to pure coordinator
 3. ✅ colossus-reference site building successfully
@@ -406,6 +427,7 @@ Comprehensive documentation in [/docs](./docs/):
 5. ✅ Build performance: 26.88s for 77 pages
 
 ### 🎯 Next Steps (Week 2)
+
 1. Set up Vercel Pro team
 2. Deploy colossus-reference to Vercel
 3. Create second test site (plumbing business)
@@ -431,17 +453,20 @@ See [docs/TODO.md](./docs/TODO.md) for complete task list.
 ## 📊 Success Metrics
 
 ### Build Performance ✅
+
 - **Single site:** 26.88s (target: <30s) ✅
 - **Multi-site:** TBD (target: <5min for all 50 sites)
 - **Turborepo cache hit:** TBD (target: <10s)
 
 ### Code Quality ✅
+
 - TypeScript: Strict mode, zero errors ✅
 - ESLint: All rules passing ✅
 - Tests: 141 unit + 92 E2E tests ✅
 - Pre-commit hooks: Active ✅
 
 ### Business Metrics
+
 - **Sites deployed:** 1/50
 - **Revenue generated:** £0 (pre-launch)
 - **Target:** First client by Week 8
@@ -451,6 +476,7 @@ See [docs/TODO.md](./docs/TODO.md) for complete task list.
 ## 🤝 Contributing
 
 This is a commercial project. For questions or collaboration:
+
 - Email: webmaster@digitalconsultingservices.co.uk
 - GitHub Issues: For technical issues only
 
@@ -468,3 +494,5 @@ Proprietary - All Rights Reserved
 **Current Phase:** Week 1 Complete / Week 2 Starting
 **Build Time:** 26.88 seconds (77 static pages)
 **Architecture:** Option B - Root as Coordinator ✅
+
+# Test
