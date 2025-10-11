@@ -13,13 +13,17 @@
     "format": "prettier --write \"**/*.{ts,tsx,md,json}\"",
     "create:site": "tsx tools/create-site.ts",
     "deploy:site": "tsx tools/deploy-site.ts",
-    "deploy:batch": "tsx tools/deploy-batch.ts"
+    "deploy:batch": "tsx tools/deploy-batch.ts",
+    "changeset": "changeset",
+    "version-packages": "changeset version",
+    "release": "pnpm build && changeset publish"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.29.7",
     "@types/node": "^20",
     "prettier": "^3.6.2",
-    "turbo": "^2.4.3",
     "tsx": "^4.20.6",
+    "turbo": "^2.4.3",
     "typescript": "^5"
   },
   "engines": {
