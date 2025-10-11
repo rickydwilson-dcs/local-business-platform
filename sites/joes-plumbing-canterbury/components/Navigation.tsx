@@ -8,39 +8,39 @@ export default function Navigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <nav className="bg-blue-600 text-white sticky top-0 z-50 shadow-lg">
+    <nav className="bg-brand-primary text-white sticky top-0 z-50 shadow-lg">
       <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex justify-between items-center h-18">
           {/* Logo/Brand */}
-          <Link href="/" className="text-xl font-bold hover:text-blue-100">
-            {siteConfig.business.name}
+          <Link href="/" className="text-2xl font-bold hover:text-brand-light transition">
+            💧 {siteConfig.business.name}
           </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-6">
             <Link
               href="/"
-              className="hover:text-blue-100 transition font-medium"
+              className="hover:text-brand-light transition font-semibold"
             >
               Home
             </Link>
             <Link
               href="/services"
-              className="hover:text-blue-100 transition font-medium"
+              className="hover:text-brand-light transition font-semibold"
             >
               Services
             </Link>
             <Link
               href="/locations"
-              className="hover:text-blue-100 transition font-medium"
+              className="hover:text-brand-light transition font-semibold"
             >
               Areas We Serve
             </Link>
             <a
               href={`tel:${siteConfig.business.phone}`}
-              className="bg-white text-blue-600 px-4 py-2 rounded-lg font-semibold hover:bg-blue-50 transition"
+              className="bg-white text-brand-primary px-6 py-3 rounded-full font-bold hover:bg-brand-light hover:text-brand-secondary transition shadow-md"
             >
-              {siteConfig.business.phone}
+              📞 {siteConfig.business.phone}
             </a>
           </div>
 
@@ -77,34 +77,34 @@ export default function Navigation() {
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="md:hidden py-4 border-t border-blue-500">
+          <div className="md:hidden py-4 border-t border-brand-accent">
             <div className="flex flex-col gap-4">
               <Link
                 href="/"
-                className="hover:text-blue-100 transition font-medium"
+                className="hover:text-brand-light transition font-semibold"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Home
               </Link>
               <Link
                 href="/services"
-                className="hover:text-blue-100 transition font-medium"
+                className="hover:text-brand-light transition font-semibold"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Services
               </Link>
               <Link
                 href="/locations"
-                className="hover:text-blue-100 transition font-medium"
+                className="hover:text-brand-light transition font-semibold"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Areas We Serve
               </Link>
               <a
                 href={`tel:${siteConfig.business.phone}`}
-                className="bg-white text-blue-600 px-4 py-2 rounded-lg font-semibold hover:bg-blue-50 transition text-center"
+                className="bg-white text-brand-primary px-4 py-2 rounded-full font-bold hover:bg-brand-light transition text-center shadow-md"
               >
-                Call {siteConfig.business.phone}
+                📞 Call {siteConfig.business.phone}
               </a>
             </div>
           </div>

@@ -11,15 +11,12 @@ const config: Config = {
     extend: {
       colors: {
         brand: {
-          blue: '#005A9E',
-          'blue-hover': '#004d87',
-          'blue-light': '#0066b5',
-          black: '#000000',
-          white: '#FFFFFF',
+          primary: '#059669',      // Emerald green
+          secondary: '#047857',    // Darker green
+          accent: '#10b981',       // Lighter emerald
+          light: '#d1fae5',        // Very light green
+          background: '#f0fdf4',   // Light green tint
         },
-      },
-      fontFamily: {
-        sans: ['GeistSans', 'Arial', 'Helvetica', 'sans-serif'],
       },
     },
   },

@@ -2,42 +2,44 @@ import { siteConfig } from "../site.config";
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
+    <main className="min-h-screen bg-gradient-to-b from-brand-background to-white">
       <div className="container mx-auto px-4 py-16">
         {/* Hero Section */}
-        <div className="text-center mb-16">
-          <h1 className="text-5xl font-bold text-gray-900 mb-4">
+        <div className="text-center mb-16 bg-white p-12 rounded-2xl shadow-xl border-4 border-brand-primary">
+          <div className="text-6xl mb-4">💧🔧</div>
+          <h1 className="text-6xl font-bold text-brand-primary mb-4">
             {siteConfig.business.name}
           </h1>
-          <p className="text-xl text-gray-600 mb-8">
+          <p className="text-2xl text-gray-700 mb-8 font-medium">
             {siteConfig.description}
           </p>
-          <div className="flex justify-center gap-4">
+          <div className="flex flex-wrap justify-center gap-4">
             <a
               href={`tel:${siteConfig.business.phone}`}
-              className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition"
+              className="bg-brand-primary text-white px-10 py-4 rounded-full text-xl font-bold hover:bg-brand-secondary transition shadow-lg hover:shadow-xl transform hover:scale-105"
             >
-              Call Now: {siteConfig.business.phone}
+              📞 Call Now: {siteConfig.business.phone}
             </a>
             <a
-              href="/contact"
-              className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold border-2 border-blue-600 hover:bg-blue-50 transition"
+              href="/services"
+              className="bg-white text-brand-primary px-10 py-4 rounded-full text-xl font-bold border-4 border-brand-primary hover:bg-brand-light transition shadow-lg"
             >
-              Get a Quote
+              View Services →
             </a>
           </div>
         </div>
 
         {/* Services Section */}
         <div className="mb-16">
-          <h2 className="text-3xl font-bold text-center mb-8">Our Services</h2>
+          <h2 className="text-4xl font-bold text-center mb-2 text-brand-primary">Our Services</h2>
+          <p className="text-center text-gray-600 mb-8">Professional plumbing solutions for your home</p>
           <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-6">
             {siteConfig.services.primary.map((service) => (
               <div
                 key={service}
-                className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition"
+                className="bg-gradient-to-br from-brand-primary to-brand-secondary text-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition transform hover:scale-105"
               >
-                <h3 className="font-semibold text-lg text-gray-900 mb-2">
+                <h3 className="font-bold text-lg mb-2">
                   {service}
                 </h3>
               </div>
@@ -46,7 +48,7 @@ export default function HomePage() {
           <div className="text-center mt-8">
             <a
               href="/services"
-              className="text-blue-600 hover:text-blue-700 font-semibold text-lg"
+              className="text-brand-primary hover:text-brand-secondary font-bold text-xl underline"
             >
               View All Services →
             </a>
@@ -54,24 +56,25 @@ export default function HomePage() {
         </div>
 
         {/* Service Areas */}
-        <div className="mb-16">
-          <h2 className="text-3xl font-bold text-center mb-8">
+        <div className="mb-16 bg-white p-10 rounded-2xl shadow-xl">
+          <h2 className="text-4xl font-bold text-center mb-2 text-brand-primary">
             Areas We Serve
           </h2>
+          <p className="text-center text-gray-600 mb-8">Fast, reliable service across Kent</p>
           <div className="flex flex-wrap justify-center gap-4">
             {siteConfig.services.serviceArea.map((area) => (
               <span
                 key={area}
-                className="bg-blue-100 text-blue-800 px-4 py-2 rounded-full font-medium"
+                className="bg-brand-light text-brand-secondary px-6 py-3 rounded-full font-bold text-lg border-2 border-brand-primary"
               >
-                {area}
+                📍 {area}
               </span>
             ))}
           </div>
-          <div className="text-center mt-6">
+          <div className="text-center mt-8">
             <a
               href="/locations"
-              className="text-blue-600 hover:text-blue-700 font-semibold text-lg"
+              className="text-brand-primary hover:text-brand-secondary font-bold text-xl underline"
             >
               View All Locations →
             </a>
@@ -79,15 +82,15 @@ export default function HomePage() {
         </div>
 
         {/* Certifications */}
-        <div className="bg-white p-8 rounded-lg shadow-md">
-          <h2 className="text-2xl font-bold text-center mb-6">
-            Fully Certified & Insured
+        <div className="bg-gradient-to-br from-brand-primary to-brand-secondary text-white p-10 rounded-2xl shadow-2xl">
+          <h2 className="text-4xl font-bold text-center mb-6">
+            ✓ Fully Certified & Insured
           </h2>
-          <ul className="space-y-2">
+          <ul className="space-y-4 max-w-2xl mx-auto">
             {siteConfig.business.certifications.map((cert) => (
-              <li key={cert} className="flex items-center justify-center gap-2">
+              <li key={cert} className="flex items-center gap-3 bg-white/10 p-4 rounded-lg backdrop-blur">
                 <svg
-                  className="w-5 h-5 text-green-500"
+                  className="w-8 h-8 text-brand-light flex-shrink-0"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                 >
@@ -97,7 +100,7 @@ export default function HomePage() {
                     clipRule="evenodd"
                   />
                 </svg>
-                <span className="text-gray-700">{cert}</span>
+                <span className="text-white font-semibold text-lg">{cert}</span>
               </li>
             ))}
           </ul>
