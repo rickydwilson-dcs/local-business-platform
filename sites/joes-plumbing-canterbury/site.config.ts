@@ -49,9 +49,10 @@ export const siteConfig = {
     ],
   },
   theme: {
-    primary: "#1e40af", // Blue
-    secondary: "#0f172a", // Dark slate
-    accent: "#3b82f6", // Lighter blue
+    primary: "#059669", // Emerald green
+    secondary: "#047857", // Darker green
+    accent: "#10b981", // Lighter emerald
+    background: "#f0fdf4", // Light green tint
   },
   analytics: {
     googleAnalyticsId: process.env.NEXT_PUBLIC_GA_ID,
