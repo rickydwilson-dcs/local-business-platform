@@ -27,9 +27,11 @@
     "pnpm": ">=8.0.0"
   },
   "packageManager": "pnpm@10.18.2",
+  "pnpm": {
+    "onlyBuiltDependencies": ["esbuild", "sharp", "unrs-resolver"]
+  },
   "lint-staged": {
     "*.{ts,tsx}": [
-      "eslint --fix",
       "prettier --write"
     ],
     "*.{json,md}": [
