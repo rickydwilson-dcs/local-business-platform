@@ -43,6 +43,14 @@ export default function HomePage() {
               </div>
             ))}
           </div>
+          <div className="text-center mt-8">
+            <a
+              href="/services"
+              className="text-blue-600 hover:text-blue-700 font-semibold text-lg"
+            >
+              View All Services →
+            </a>
+          </div>
         </div>
 
         {/* Service Areas */}
@@ -59,6 +67,14 @@ export default function HomePage() {
                 {area}
               </span>
             ))}
+          </div>
+          <div className="text-center mt-6">
+            <a
+              href="/locations"
+              className="text-blue-600 hover:text-blue-700 font-semibold text-lg"
+            >
+              View All Locations →
+            </a>
           </div>
         </div>
 
