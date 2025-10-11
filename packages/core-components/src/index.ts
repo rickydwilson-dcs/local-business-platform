@@ -1,0 +1,25 @@
+// Export all UI components
+export * from './components/ui/hero-section';
+export * from './components/ui/footer';
+export * from './components/ui/custom-footer';
+export * from './components/ui/cta-section';
+export * from './components/ui/breadcrumbs';
+export * from './components/ui/content-card';
+export * from './components/ui/card-grid';
+export * from './components/ui/coverage-map';
+export * from './components/ui/coverage-areas';
+export * from './components/ui/service-card';
+
+// Export schemas
+export * from './components/Schema';
+
+// Export lib utilities
+export * from './lib/content';
+export * from './lib/content-schemas';
+export * from './lib/services';
+export * from './lib/site';
+export * from './lib/schema';
+
+// Re-export types
+export type { Service } from './lib/services';
+export type { SiteConfig } from './lib/site';
