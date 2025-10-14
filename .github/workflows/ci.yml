@@ -34,7 +34,7 @@ jobs:
         run: pnpm run type-check
 
       - name: Run Content Validation
-        run: pnpm run validate:content
+        run: pnpm --filter colossus-reference run validate:content
 
       - name: Run Tests
         run: pnpm test
