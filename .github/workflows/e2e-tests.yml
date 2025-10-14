@@ -43,7 +43,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Install Playwright browsers
-        run: npx playwright install --with-deps chromium
+        run: pnpm --filter colossus-reference exec playwright install --with-deps chromium
 
       - name: Run smoke tests
         run: pnpm run test:e2e:smoke
@@ -82,7 +82,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Install Playwright browsers
-        run: npx playwright install --with-deps chromium
+        run: pnpm --filter colossus-reference exec playwright install --with-deps chromium
 
       - name: Run standard E2E tests
         run: pnpm run test:e2e:chromium
@@ -129,7 +129,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Install Playwright browsers
-        run: npx playwright install --with-deps
+        run: pnpm --filter colossus-reference exec playwright install --with-deps
 
       - name: Run standard E2E tests
         run: pnpm run test:e2e
@@ -176,7 +176,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Install Playwright browsers
-        run: npx playwright install --with-deps
+        run: pnpm --filter colossus-reference exec playwright install --with-deps
 
       - name: Run full E2E test suite
         run: pnpm run test:e2e:full
