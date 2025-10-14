@@ -46,7 +46,7 @@ jobs:
         run: pnpm --filter colossus-reference exec playwright install --with-deps chromium
 
       - name: Run smoke tests
-        run: pnpm run test:e2e:smoke
+        run: pnpm --filter colossus-reference run test:e2e:smoke
         env:
           CI: true
 
@@ -85,7 +85,7 @@ jobs:
         run: pnpm --filter colossus-reference exec playwright install --with-deps chromium
 
       - name: Run standard E2E tests
-        run: pnpm run test:e2e:chromium
+        run: pnpm --filter colossus-reference run test:e2e:chromium
         env:
           CI: true
 
@@ -132,7 +132,7 @@ jobs:
         run: pnpm --filter colossus-reference exec playwright install --with-deps
 
       - name: Run standard E2E tests
-        run: pnpm run test:e2e
+        run: pnpm --filter colossus-reference run test:e2e
         env:
           CI: true
 
@@ -179,7 +179,7 @@ jobs:
         run: pnpm --filter colossus-reference exec playwright install --with-deps
 
       - name: Run full E2E test suite
-        run: pnpm run test:e2e:full
+        run: pnpm --filter colossus-reference run test:e2e:full
         env:
           CI: true
 
