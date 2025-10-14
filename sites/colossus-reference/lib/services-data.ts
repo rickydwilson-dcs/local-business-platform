@@ -83,13 +83,13 @@ export function getServiceData(slug: string): ServiceData {
     "scaffold-towers-mast-systems": {
       description:
         "Mobile and static scaffold towers for flexible access solutions on various project types.",
-      image: "/Scaffold-Towers-&-Mast-Systems.png",
+      image: "/Scaffold-Towers-and-Mast-Systems.png",
       features: ["Mobile & Static", "Height Adjustable", "Quick Setup"],
     },
     "crash-decks-crane-decks": {
       description:
         "Protective crash decks and crane decks ensuring safety during construction operations.",
-      image: "/Crash-Decks-&-Crane-Decks.png",
+      image: "/Crash-Decks-and-Crane-Decks.png",
       features: ["Load Bearing", "Safety Compliance", "Custom Design"],
     },
     "heavy-duty-industrial-scaffolding": {
@@ -118,13 +118,13 @@ export function getServiceData(slug: string): ServiceData {
     "scaffolding-design-drawings": {
       description:
         "Professional scaffolding design and technical drawings ensuring structural integrity and compliance with all safety regulations.",
-      image: "/Scaffolding-Design-&-Drawings.png",
+      image: "/Scaffolding-Design-and-Drawings.png",
       features: ["CAD Drawings", "Load Calculations", "Safety Compliance"],
     },
     "scaffolding-inspections-maintenance": {
       description:
         "Comprehensive scaffolding inspections and maintenance services ensuring ongoing safety compliance and structural integrity.",
-      image: "/Scaffolding-Inspections-&-Maintenance.png",
+      image: "/Scaffolding-Inspections-and-Maintenance.png",
       features: ["Weekly Inspections", "Detailed Reports", "Maintenance Scheduling"],
     },
     "sheeting-netting-encapsulation": {

@@ -162,7 +162,7 @@
 
   /* Mobile Menu Nav Links */
   .mobile-menu-link {
-    @apply text-xl font-medium text-slate-800 hover:text-brand-blue transition-colors py-4;
+    @apply block text-xl font-medium text-slate-800 hover:text-brand-blue transition-colors py-4 text-center;
   }
 
   /* Mobile Menu Bottom Section */
