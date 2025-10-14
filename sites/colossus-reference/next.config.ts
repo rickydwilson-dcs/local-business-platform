@@ -68,6 +68,12 @@ const nextConfig: NextConfig = {
   trailingSlash: false,
   // Security headers for production
   async headers() {
+    // In development, allow unsafe-eval for React dev mode
+    const scriptSrc =
+      process.env.NODE_ENV === "development"
+        ? "'self' 'unsafe-inline' 'unsafe-eval' *.googletagmanager.com *.google-analytics.com *.facebook.com"
+        : "'self' 'unsafe-inline' *.googletagmanager.com *.google-analytics.com *.facebook.com";
+
     return [
       {
         source: "/(.*)",
@@ -86,8 +92,7 @@ const nextConfig: NextConfig = {
           },
           {
             key: "Content-Security-Policy",
-            value:
-              "default-src 'self'; script-src 'self' 'unsafe-inline' *.googletagmanager.com *.google-analytics.com *.facebook.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self' *.google-analytics.com *.facebook.com; frame-ancestors 'none';",
+            value: `default-src 'self'; script-src ${scriptSrc}; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self' *.google-analytics.com *.facebook.com; frame-ancestors 'none';`,
           },
         ],
       },
