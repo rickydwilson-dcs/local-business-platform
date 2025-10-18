@@ -7,21 +7,25 @@ This file provides guidance to Claude Code (claude.ai/code) when working with th
 **Before making ANY changes to this codebase, you MUST read these critical documentation files:**
 
 1. **[WHITE_LABEL_PLATFORM_DESIGN.md](../WHITE_LABEL_PLATFORM_DESIGN.md)** - Complete 8-week implementation plan, business model, architecture decisions
-2. **[WEEK_1_COMPLETE.md](../WEEK_1_COMPLETE.md)** - Week 1 completion report, current status, monorepo structure
-3. **[TODO.md](../TODO.md)** - Current task list with 8-week roadmap (186+ tasks)
-4. **[ARCHITECTURE.md](../architecture/ARCHITECTURE.md)** - Architectural guidelines for all sites (1,455 lines)
-5. **[CONTENT_VALIDATION.md](../architecture/CONTENT_VALIDATION.md)** - Content validation rules and Zod schemas
-6. **[AI_INSTRUCTIONS.md](AI_INSTRUCTIONS.md)** - General AI agent instructions and content accuracy standards
+2. **[WEEK_2_COMPLETE.md](../WEEK_2_COMPLETE.md)** - Week 2 completion report (component versioning, multi-site builds)
+3. **[WEEK_1_COMPLETE.md](../WEEK_1_COMPLETE.md)** - Week 1 completion report (monorepo foundation)
+4. **[TODO.md](../TODO.md)** - Current task list with 8-week roadmap (186+ tasks)
+5. **[ARCHITECTURE.md](../architecture/ARCHITECTURE.md)** - Architectural guidelines for all sites (1,455 lines)
+6. **[CONTENT_VALIDATION.md](../architecture/CONTENT_VALIDATION.md)** - Content validation rules and Zod schemas
+7. **[VERSIONING_WORKFLOW.md](../component-versioning/VERSIONING_WORKFLOW.md)** - Component versioning with Changesets
+8. **[AI_INSTRUCTIONS.md](AI_INSTRUCTIONS.md)** - General AI agent instructions and content accuracy standards
 
 **CRITICAL**: These files contain:
 
 - Monorepo structure (Option B - Root as Coordinator)
-- 8-week implementation roadmap (Week 1 complete)
-- Build performance targets (<30s per site)
-- Component variant system design
+- 8-week implementation roadmap (Week 2 complete)
+- Build performance targets (<30s per site, 253ms cached)
+- Component versioning workflow (Changesets)
+- Component variant system design (3 Hero variants)
 - MDX-only architecture requirements
 - Content accuracy and truthful claims standards
 - Styling system rules and maintainable classes
+- Deployment configuration (Vercel monorepo)
 
 **Failure to read these files will result in architectural violations and inconsistent implementations across the 50-site platform.**
 
@@ -31,13 +35,19 @@ This file provides guidance to Claude Code (claude.ai/code) when working with th
 
 **Local Business Platform** - White-label website generation platform for local service businesses (plumbers, gardeners, builders, roofers, scaffolders) targeting South East England.
 
-**Current Status:** Week 1 Complete (Monorepo Foundation)
+**Current Status:** Week 2 Complete (Component Versioning & Multi-Site Validation)
+
 - Monorepo with Turborepo + pnpm workspaces
-- 1 site deployed: colossus-reference (reference implementation)
+- 2 sites deployed: colossus-reference (77 pages), joes-plumbing-canterbury (12 pages)
+- Component library: @platform/core-components v1.1.0
+  - ✅ **Hero variants implemented:** HeroV1, HeroV2, HeroV3 (fully typed, ready to use)
+  - ⏳ **Service card variants:** Deferred to Week 4+
+  - ⏳ **Contact form variants:** Deferred to Week 4+
 - Target: 50 sites by end of Year 1
-- Build time: 26.88s for 77 pages ✅
+- Build time: 44.4s from scratch | 253ms cached (176x faster!) ✅
 
 **Architecture:** Option B - Root as Coordinator
+
 - Root coordinates builds (no application code)
 - Sites in `sites/` directory (each deploys to separate Vercel project)
 - Shared components in `packages/core-components`
@@ -51,6 +61,11 @@ pnpm build               # Build all sites with Turborepo (cached)
 pnpm lint                # Lint all workspaces
 pnpm type-check          # Type check all workspaces
 pnpm clean               # Clean all build artifacts
+
+# Component Versioning with Changesets (Week 2)
+pnpm changeset           # Create a new changeset for component changes
+pnpm version-packages    # Bump versions and generate CHANGELOG.md
+pnpm release             # Build and publish packages (if needed)
 ```
 
 ### Site Commands (In sites/colossus-reference/)
