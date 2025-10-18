@@ -14,7 +14,7 @@ export function getServiceData(slug: string): ServiceData {
       description:
         "Professional commercial scaffolding for office buildings, retail developments, and business districts across the South East UK.",
       badge: "Business Focus",
-      image: "colossus-reference/hero/service/commercial-scaffolding_canterbury.webp",
+      image: "colossus-reference/hero/service/commercial-scaffolding_01.webp",
       subtitle: ["Office Buildings", "Retail Centers"],
       features: [
         "Business Continuity Planning",
@@ -27,7 +27,7 @@ export function getServiceData(slug: string): ServiceData {
       description:
         "Safe, reliable scaffolding for homes, extensions, and renovations. Family-friendly approach with minimal garden disruption.",
       badge: "Family Friendly",
-      image: "colossus-reference/hero/service/residential-scaffolding_canterbury.webp",
+      image: "colossus-reference/hero/service/residential-scaffolding_01.webp",
       subtitle: ["Victorian Houses", "Modern Homes"],
       features: [
         "Garden & Property Protection",
