@@ -14,7 +14,7 @@ export function getServiceData(slug: string): ServiceData {
       description:
         "Professional commercial scaffolding for office buildings, retail developments, and business districts across the South East UK.",
       badge: "Business Focus",
-      image: "/Access-Scaffolding-new-build.png",
+      image: "colossus-reference/hero/service/commercial-scaffolding_01.webp",
       subtitle: ["Office Buildings", "Retail Centers"],
       features: [
         "Business Continuity Planning",
@@ -27,7 +27,7 @@ export function getServiceData(slug: string): ServiceData {
       description:
         "Safe, reliable scaffolding for homes, extensions, and renovations. Family-friendly approach with minimal garden disruption.",
       badge: "Family Friendly",
-      image: "/Access-Scaffolding-new-build.png",
+      image: "colossus-reference/hero/service/residential-scaffolding_01.webp",
       subtitle: ["Victorian Houses", "Modern Homes"],
       features: [
         "Garden & Property Protection",
@@ -40,7 +40,7 @@ export function getServiceData(slug: string): ServiceData {
       description:
         "Heavy-duty scaffolding systems for industrial facilities, ports, and manufacturing sites. Engineered for complex structural challenges.",
       badge: "Heavy Duty",
-      image: "/Heavy-Industrial-Scaffolding.png",
+      image: "colossus-reference/hero/service/industrial-scaffolding_01.webp",
       subtitle: ["Manufacturing Sites", "Port Operations"],
       features: [
         "Heavy-duty Load Capacity",
@@ -53,96 +53,96 @@ export function getServiceData(slug: string): ServiceData {
       description:
         "Safe, compliant access scaffolding for residential, commercial and industrial projects across the South East UK.",
       badge: "Most Popular",
-      image: "/Access-Scaffolding-new-build.png",
+      image: "colossus-reference/hero/service/access-scaffolding_01.webp",
       features: ["TG20:21 Compliant", "CISRS Qualified Teams", "Full Insurance Coverage"],
     },
     "facade-scaffolding": {
       description:
         "Professional facade scaffolding solutions for building maintenance, renovation and construction projects.",
-      image: "/Facade-Scaffolding.png",
+      image: "colossus-reference/hero/service/facade-scaffolding_01.webp",
       features: ["Weatherproof Systems", "Load Bearing Design", "Planning Compliance"],
     },
     "edge-protection": {
       description:
         "Comprehensive edge protection systems ensuring maximum safety on construction and maintenance sites.",
-      image: "/Edge-Protection.png",
+      image: "colossus-reference/hero/service/edge-protection_01.webp",
       features: ["HSE Compliant", "Rapid Installation", "Adjustable Systems"],
     },
     "temporary-roof-systems": {
       description:
         "Weather protection and temporary roofing solutions for ongoing construction and maintenance work.",
-      image: "/Temporary-Roof-Systems.png",
+      image: "colossus-reference/hero/service/temporary-roof-systems_01.webp",
       features: ["Weatherproof", "Load Rated", "Quick Assembly"],
     },
     "birdcage-scaffolds": {
       description:
         "Independent scaffold structures providing comprehensive access for complex commercial and industrial projects.",
-      image: "/Birdcage-scaffolding.png",
+      image: "colossus-reference/hero/service/birdcage-scaffolds_01.webp",
       features: ["Independent Structure", "Heavy Duty", "Complex Access"],
     },
     "scaffold-towers-mast-systems": {
       description:
         "Mobile and static scaffold towers for flexible access solutions on various project types.",
-      image: "/Scaffold-Towers-and-Mast-Systems.png",
+      image: "colossus-reference/hero/service/scaffold-towers-mast-systems_02.webp",
       features: ["Mobile & Static", "Height Adjustable", "Quick Setup"],
     },
     "crash-decks-crane-decks": {
       description:
         "Protective crash decks and crane decks ensuring safety during construction operations.",
-      image: "/Crash-Decks-and-Crane-Decks.png",
+      image: "colossus-reference/hero/service/crash-decks-crane-decks_02.webp",
       features: ["Load Bearing", "Safety Compliance", "Custom Design"],
     },
     "heavy-duty-industrial-scaffolding": {
       description:
         "Heavy-duty scaffolding solutions for complex industrial projects and infrastructure work.",
-      image: "/Heavy-Industrial-Scaffolding.png",
+      image: "colossus-reference/hero/service/industrial-scaffolding_01.webp",
       features: ["Heavy Load Capacity", "Industrial Grade", "Complex Structures"],
     },
     "pavement-gantries-loading-bays": {
       description:
         "Specialized pavement gantries and loading bay solutions for urban construction projects.",
-      image: "/Pavement-Gantries-Loading-Bays.png",
+      image: "colossus-reference/hero/service/pavement-gantries-loading-bays_01.webp",
       features: ["Urban Solutions", "Pedestrian Safety", "Loading Access"],
     },
     "public-access-staircases": {
       description: "Safe and compliant public access staircase systems for construction sites.",
-      image: "/Public-Access-Staircases.png",
+      image: "colossus-reference/hero/service/public-access-staircases_01.webp",
       features: ["Public Safety", "Accessible Design", "Code Compliant"],
     },
     "scaffold-alarms": {
       description:
         "Advanced scaffold alarm systems for enhanced site security and safety monitoring.",
-      image: "/Scaffold-Alarms.png",
+      image: "colossus-reference/hero/service/scaffold-alarms_01.webp",
       features: ["24/7 Monitoring", "Instant Alerts", "Security Integration"],
     },
     "scaffolding-design-drawings": {
       description:
         "Professional scaffolding design and technical drawings ensuring structural integrity and compliance with all safety regulations.",
-      image: "/Scaffolding-Design-and-Drawings.png",
+      image: "colossus-reference/hero/service/scaffolding-design-drawings_01.webp",
       features: ["CAD Drawings", "Load Calculations", "Safety Compliance"],
     },
     "scaffolding-inspections-maintenance": {
       description:
         "Comprehensive scaffolding inspections and maintenance services ensuring ongoing safety compliance and structural integrity.",
-      image: "/Scaffolding-Inspections-and-Maintenance.png",
+      image: "colossus-reference/hero/service/scaffolding-inspections-maintenance_02.webp",
       features: ["Weekly Inspections", "Detailed Reports", "Maintenance Scheduling"],
     },
     "sheeting-netting-encapsulation": {
       description:
         "Weather protection and safety encapsulation systems including scaffolding sheeting, debris netting, and full encapsulation solutions.",
-      image: "/Sheeting-Netting-Encapsulation.png",
+      image: "colossus-reference/hero/service/sheeting-netting-encapsulation_01.webp",
       features: ["Weather Protection", "Debris Netting", "Fire-Retardant Materials"],
     },
     "staircase-towers": {
       description:
         "Safe and compliant staircase tower systems providing secure vertical access for construction and maintenance projects.",
-      image: "/Staircase-Towers.png",
+      image: "colossus-reference/hero/service/staircase-towers_01.webp",
       features: ["Safe Vertical Access", "Compliant Design", "Handrail Systems"],
     },
     "suspended-scaffolding": {
       description:
         "Specialized suspended scaffolding systems for high-rise building maintenance and construction work requiring overhead access.",
-      image: "/Suspended-Scaffolding.png",
+      image: "colossus-reference/hero/service/suspended-scaffolding_01.webp",
       features: ["High-Rise Access", "Suspended Platforms", "Safety Harness Integration"],
     },
   };
