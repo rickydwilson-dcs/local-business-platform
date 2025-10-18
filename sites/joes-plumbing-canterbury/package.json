@@ -10,6 +10,9 @@
     "lint": "next lint",
     "type-check": "tsc --noEmit",
     "test": "echo 'Skipping tests for joes-plumbing-canterbury (demo site)'",
+    "test:e2e": "echo 'Skipping E2E tests for joes-plumbing-canterbury (demo site)'",
+    "test:e2e:smoke": "echo 'Skipping E2E smoke tests for joes-plumbing-canterbury (demo site)'",
+    "test:e2e:ui": "echo 'Skipping E2E UI tests for joes-plumbing-canterbury (demo site)'",
     "validate:content": "tsx ../../scripts/validate-content.ts all",
     "clean": "rm -rf .next"
   },
