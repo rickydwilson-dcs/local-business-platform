@@ -25,6 +25,12 @@ Core platform documentation and strategic planning.
   - Technical accomplishments
   - Architecture validation
 
+- **[WEEK_2_COMPLETE.md](WEEK_2_COMPLETE.md)** - Week 2 milestone completion report
+  - Component versioning system implementation
+  - Second site deployment (joes-plumbing-canterbury)
+  - Multi-site build performance (176x faster with Turborepo cache!)
+  - Site customization demonstration
+
 - **[MONOREPO_STATUS.md](MONOREPO_STATUS.md)** - Current monorepo state and decisions
   - Architecture decision documentation
   - Implementation status
@@ -75,6 +81,28 @@ Development workflow, tools, and procedures for the monorepo.
   - Setup checklist
   - Status check names
   - Verification commands
+
+### 🚀 Deployment
+
+Deployment guides and troubleshooting for Vercel and multi-site monorepo.
+
+- **[VERCEL_DEPLOYMENT.md](deployment/VERCEL_DEPLOYMENT.md)** - Vercel deployment guide
+  - Monorepo deployment configuration
+  - Root Directory settings
+  - Build command configuration
+  - Common warnings and fixes
+  - Cost breakdown (£20/month for 50 sites)
+
+### 📦 Component Versioning
+
+Component library versioning workflow using Changesets.
+
+- **[VERSIONING_WORKFLOW.md](component-versioning/VERSIONING_WORKFLOW.md)** - Complete versioning guide
+  - 5-step versioning workflow
+  - Semantic versioning guidelines
+  - Component variant strategy
+  - Site upgrade process
+  - Best practices and troubleshooting
 
 ### 🧪 Testing
 
@@ -139,9 +167,10 @@ Read these in order:
 
 1. ✅ [Root README.md](../README.md) - Project overview and monorepo structure
 2. ✅ [WHITE_LABEL_PLATFORM_DESIGN.md](WHITE_LABEL_PLATFORM_DESIGN.md) - Complete platform design
-3. ✅ [WEEK_1_COMPLETE.md](WEEK_1_COMPLETE.md) - Current implementation status
-4. ✅ [ARCHITECTURE.md](architecture/ARCHITECTURE.md) - Site architecture patterns
-5. ✅ [DEVELOPMENT.md](development/DEVELOPMENT.md) - Development workflow
+3. ✅ [WEEK_1_COMPLETE.md](WEEK_1_COMPLETE.md) - Week 1 completion report
+4. ✅ [WEEK_2_COMPLETE.md](WEEK_2_COMPLETE.md) - Week 2 completion report (current)
+5. ✅ [ARCHITECTURE.md](architecture/ARCHITECTURE.md) - Site architecture patterns
+6. ✅ [DEVELOPMENT.md](development/DEVELOPMENT.md) - Development workflow
 
 ### Working with AI agents?
 
@@ -151,11 +180,14 @@ Read these in order:
 ### Building a new site?
 
 1. Review [WHITE_LABEL_PLATFORM_DESIGN.md](WHITE_LABEL_PLATFORM_DESIGN.md) - Component variant system
-2. Check [sites/colossus-reference/](../sites/colossus-reference/) - Reference implementation
-3. See [packages/core-components/](../packages/core-components/) - Shared components
+2. Check [sites/colossus-reference/](../sites/colossus-reference/) - Reference implementation (77 pages)
+3. Check [sites/joes-plumbing-canterbury/](../sites/joes-plumbing-canterbury/) - Simple plumbing site (12 pages)
+4. See [packages/core-components/](../packages/core-components/) - Shared components (v1.1.0)
+5. Review [VERSIONING_WORKFLOW.md](component-versioning/VERSIONING_WORKFLOW.md) - Component versioning
 
 ### Setting up deployment?
 
+- [VERCEL_DEPLOYMENT.md](deployment/VERCEL_DEPLOYMENT.md) - Vercel monorepo deployment
 - [GITHUB_SETUP.md](development/GITHUB_SETUP.md) - Complete GitHub configuration
 - [DEVELOPMENT.md](development/DEVELOPMENT.md) - Deployment procedures
 
@@ -180,9 +212,11 @@ See [CLAUDE.md - Documentation Maintenance](ai/CLAUDE.md#documentation-maintenan
 ### By Topic
 
 - **Platform Strategy:** [WHITE_LABEL_PLATFORM_DESIGN.md](WHITE_LABEL_PLATFORM_DESIGN.md)
-- **Monorepo Status:** [WEEK_1_COMPLETE.md](WEEK_1_COMPLETE.md) + [MONOREPO_STATUS.md](MONOREPO_STATUS.md)
+- **Monorepo Status:** [WEEK_2_COMPLETE.md](WEEK_2_COMPLETE.md) + [WEEK_1_COMPLETE.md](WEEK_1_COMPLETE.md) + [MONOREPO_STATUS.md](MONOREPO_STATUS.md)
 - **Architecture & Patterns:** [architecture/](architecture/)
 - **Development Workflow:** [development/](development/)
+- **Deployment:** [deployment/](deployment/)
+- **Component Versioning:** [component-versioning/](component-versioning/)
 - **Testing:** [testing/](testing/)
 - **AI Guidelines:** [ai/](ai/)
 
@@ -190,36 +224,57 @@ See [CLAUDE.md - Documentation Maintenance](ai/CLAUDE.md#documentation-maintenan
 
 - **Understanding the platform:** [WHITE_LABEL_PLATFORM_DESIGN.md](WHITE_LABEL_PLATFORM_DESIGN.md)
 - **Setting up development:** [DEVELOPMENT.md](development/DEVELOPMENT.md)
-- **Building sites:** [WEEK_1_COMPLETE.md](WEEK_1_COMPLETE.md#-final-monorepo-structure)
+- **Building sites:** [WEEK_2_COMPLETE.md](WEEK_2_COMPLETE.md) + [WEEK_1_COMPLETE.md](WEEK_1_COMPLETE.md#-final-monorepo-structure)
 - **Running tests:** [E2E_TESTING_STRATEGY.md](testing/E2E_TESTING_STRATEGY.md)
-- **Deploying:** [DEVELOPMENT.md](development/DEVELOPMENT.md#git-workflow--branch-structure)
+- **Deploying to Vercel:** [VERCEL_DEPLOYMENT.md](deployment/VERCEL_DEPLOYMENT.md)
+- **Versioning components:** [VERSIONING_WORKFLOW.md](component-versioning/VERSIONING_WORKFLOW.md)
 - **Validating content:** [CONTENT_VALIDATION.md](architecture/CONTENT_VALIDATION.md)
-- **Component variants:** [WHITE_LABEL_PLATFORM_DESIGN.md](WHITE_LABEL_PLATFORM_DESIGN.md#component-variant-system)
+- **Component variants:** [VERSIONING_WORKFLOW.md](component-versioning/VERSIONING_WORKFLOW.md#component-variant-strategy)
 
 ---
 
 ## 📊 Project Statistics
 
 ### Monorepo Structure
-- **Workspaces:** 3 (root + core-components + colossus-reference)
-- **Sites:** 1 (colossus-reference - reference implementation)
-- **Shared Packages:** 1 (@platform/core-components)
+
+- **Workspaces:** 4 (root + core-components + colossus-reference + joes-plumbing-canterbury)
+- **Sites:** 2 deployed (colossus-reference, joes-plumbing-canterbury)
+- **Shared Packages:** 1 (@platform/core-components v1.1.0)
 - **Target:** 50 sites by end of Year 1
 
 ### Documentation
-- **Documentation Files:** 18 markdown files
-- **Total Lines:** ~8,000+ lines of documentation
+
+- **Documentation Files:** 20+ markdown files
+- **Total Lines:** ~9,000+ lines of documentation
 - **Platform Design:** Complete 8-week roadmap
 - **Week 1 Status:** ✅ Complete
+- **Week 2 Status:** ✅ Complete
+
+### Build Performance
+
+- **Single site:** 26.88s for 77 pages (Turborepo)
+- **Multi-site from scratch:** 44.4s for 89 pages (2 sites)
+- **Turborepo cache hit:** 253ms (176x faster!)
+- **Pages Generated:** 89 static pages total (77 + 12)
+- **Target for 50 sites:** <5min ✅ (on track)
 
 ### Reference Site (colossus-reference)
-- **Build Time:** 26.88 seconds (Turborepo)
+
+- **Build Time:** 26.88 seconds
 - **Pages Generated:** 77 static pages
 - **Content Files:** 62 MDX files (25 services + 37 locations)
 - **Test Suite:** 141 unit tests + 92 E2E tests
 - **Code Quality:** ESLint + TypeScript + Pre-commit/push hooks + CI/CD
 
+### Test Site (joes-plumbing-canterbury)
+
+- **Pages Generated:** 12 static pages
+- **Content Files:** 6 MDX files (3 services + 3 locations)
+- **Theme:** Emerald green (vs blue reference site)
+- **Font:** Poppins (vs Inter reference site)
+
 ### Platform Economics
+
 - **Setup Fee:** £2,000-2,500 per site
 - **Monthly Fee:** £25 per site
 - **Infrastructure:** £50-75/month total (Vercel Pro + Cloudflare R2 + Claude API)
@@ -231,9 +286,11 @@ See [CLAUDE.md - Documentation Maintenance](ai/CLAUDE.md#documentation-maintenan
 ## 🆘 Getting Help
 
 - **Platform Questions:** See [WHITE_LABEL_PLATFORM_DESIGN.md](WHITE_LABEL_PLATFORM_DESIGN.md)
-- **Monorepo Setup:** See [WEEK_1_COMPLETE.md](WEEK_1_COMPLETE.md)
+- **Monorepo Setup:** See [WEEK_2_COMPLETE.md](WEEK_2_COMPLETE.md) + [WEEK_1_COMPLETE.md](WEEK_1_COMPLETE.md)
 - **Architecture Questions:** See [ARCHITECTURE.md](architecture/ARCHITECTURE.md)
 - **Build Failures:** See [DEVELOPMENT.md](development/DEVELOPMENT.md)
+- **Deployment Issues:** See [VERCEL_DEPLOYMENT.md](deployment/VERCEL_DEPLOYMENT.md)
+- **Versioning Questions:** See [VERSIONING_WORKFLOW.md](component-versioning/VERSIONING_WORKFLOW.md)
 - **Content Validation:** See [CONTENT_VALIDATION.md](architecture/CONTENT_VALIDATION.md)
 - **Test Issues:** See [E2E_TESTING_STRATEGY.md](testing/E2E_TESTING_STRATEGY.md)
 
@@ -241,23 +298,34 @@ See [CLAUDE.md - Documentation Maintenance](ai/CLAUDE.md#documentation-maintenan
 
 ## 📍 Current Status
 
+**Week 2 Milestone:** ✅ COMPLETE (2025-10-12)
+
+- Component versioning system implemented (Changesets)
+- @platform/core-components v1.1.0 with 3 Hero variants
+- Second site deployed (joes-plumbing-canterbury)
+- Multi-site build performance validated (253ms cached, 176x faster!)
+- Site customization demonstrated (different themes, fonts, styling)
+- Vercel monorepo deployment working perfectly
+
 **Week 1 Milestone:** ✅ COMPLETE (2025-10-11)
+
 - Monorepo foundation established
 - colossus-reference site building successfully (26.88s)
 - Turborepo + pnpm workspaces configured
 - Architecture validated (Option B: Root as Coordinator)
 
-**Next Milestone:** Week 2 - Component Versioning
-- Set up Vercel Pro team
-- Deploy colossus-reference
-- Create second test site
-- Add changesets for component versioning
+**Next Milestone:** Week 3 - Image Storage (Cloudflare R2)
+
+- Set up R2 bucket
+- Build image processing pipeline (Sharp)
+- Create image intake tool
+- Migrate test images to R2
 
 See [TODO.md](TODO.md) for complete task list.
 
 ---
 
-**Last Updated:** 2025-10-11
+**Last Updated:** 2025-10-12
 **Maintained by:** Development Team
 **Project:** Local Business Platform - White-Label Website Generation
-**Status:** Week 1 Complete ✅
+**Status:** Week 2 Complete ✅

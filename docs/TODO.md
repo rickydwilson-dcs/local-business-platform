@@ -2,14 +2,15 @@
 
 Outstanding tasks organized by 8-week implementation roadmap. Updated as tasks complete.
 
-**Last Updated:** 2025-10-11
-**Current Phase:** Week 1 Complete / Week 2 Starting
+**Last Updated:** 2025-10-12
+**Current Phase:** Week 2 Complete / Week 3 Starting
 
 ---
 
 ## ✅ Week 1: Monorepo Foundation (COMPLETE - 2025-10-11)
 
 ### Core Infrastructure
+
 - [x] Initialize Turborepo + pnpm workspaces
 - [x] Create packages/core-components structure
 - [x] Refactor root to pure coordinator (Option B)
@@ -20,6 +21,7 @@ Outstanding tasks organized by 8-week implementation roadmap. Updated as tasks c
 - [x] Create Week 1 completion report (WEEK_1_COMPLETE.md)
 
 ### Documentation
+
 - [x] Update docs/README.md for platform
 - [x] Update root README.md with monorepo structure
 - [x] Update TODO.md with 8-week roadmap
@@ -28,84 +30,109 @@ Outstanding tasks organized by 8-week implementation roadmap. Updated as tasks c
 - [x] Update WHITE_LABEL_PLATFORM_DESIGN.md
 
 ### Remaining Week 1 Tasks
-- [ ] Set up Vercel Pro team account
-- [ ] Deploy colossus-reference to Vercel
-- [ ] Measure multi-site build times with Turborepo caching
+
+- [x] Set up Vercel Pro team account (Completed Week 2)
+- [x] Deploy colossus-reference to Vercel (Completed Week 2)
+- [x] Measure multi-site build times with Turborepo caching (Completed Week 2)
 
 ---
 
-## 🎯 Week 2: Component Versioning & Second Test Site
+## ✅ Week 2: Component Versioning & Second Test Site (COMPLETE - 2025-10-12)
 
 ### Documentation (Week 2)
-- [ ] Create new DEVELOPMENT.md for monorepo workflow
+
+- [x] Create VERCEL_DEPLOYMENT.md for deployment guide
+- [x] Create VERSIONING_WORKFLOW.md for component versioning
+- [x] Create WEEK_2_COMPLETE.md completion report
+- [x] Update CLAUDE.md with Week 2 progress
+- [x] Update docs/README.md with Week 2 sections
+- [x] Update root README.md with Week 2 status
+- [ ] Create new DEVELOPMENT.md for monorepo workflow (Deferred to Week 3)
   - [ ] Turborepo build commands
   - [ ] Site-specific development
   - [ ] Testing procedures
   - [ ] Deployment workflow
-- [ ] Create GITHUB_SETUP.md for platform
+- [ ] Create GITHUB_SETUP.md for platform (Deferred to Week 3)
   - [ ] Monorepo CI/CD strategy
   - [ ] Per-site deployment triggers
   - [ ] Branch protection for monorepo
-- [ ] Update CLAUDE.md with Week 2 progress
 
 ### Vercel Setup
-- [ ] Upgrade to Vercel Pro team (£20/month)
-- [ ] Connect local-business-platform GitHub repo
-- [ ] Deploy colossus-reference site
-  - [ ] Configure environment variables
-  - [ ] Set up custom domain (if applicable)
-  - [ ] Verify deployment works
-  - [ ] Test all pages load correctly
+
+- [x] Upgrade to Vercel Pro team (£20/month)
+- [x] Connect local-business-platform GitHub repo
+- [x] Deploy colossus-reference site (77 pages)
+  - [x] Configure vercel.json with monorepo commands
+  - [x] Set Root Directory to sites/colossus-reference
+  - [x] Verify deployment works
+  - [x] Test all pages load correctly
+- [x] Deploy joes-plumbing-canterbury site (12 pages)
+  - [x] Configure vercel.json
+  - [x] Set Root Directory
+  - [x] Verify deployment works
 
 ### Second Test Site
-- [ ] Create sites/test-plumbing/ directory
-- [ ] Set up minimal site structure
-  - [ ] Copy minimal app structure
-  - [ ] Create site.config.ts with plumbing business details
-  - [ ] Create content/ with plumbing services (10 services)
-  - [ ] Create content/ with locations (15 locations)
-  - [ ] Copy necessary config files
-- [ ] Test imports from @platform/core-components
-- [ ] Build second site successfully
-- [ ] Deploy test-plumbing to Vercel
+
+- [x] Create sites/joes-plumbing-canterbury/ directory
+- [x] Set up site structure
+  - [x] Copy app structure from reference
+  - [x] Create site.config.ts with plumbing business details
+  - [x] Create content/ with plumbing services (3 services)
+  - [x] Create content/ with locations (3 locations)
+  - [x] Copy necessary config files (vercel.json, tsconfig, tailwind, etc.)
+  - [x] Create custom Navigation component
+  - [x] Create lib utilities (content.ts, mdx.tsx)
+- [x] Test imports from @platform/core-components
+- [x] Build second site successfully (12 pages)
+- [x] Deploy to Vercel
+- [x] Customize with emerald green theme
+- [x] Change font to Poppins
 
 ### Component Versioning
-- [ ] Add changesets package to monorepo
-- [ ] Configure changesets for version management
-- [ ] Document component versioning workflow
-- [ ] Create first changeset (initial component versions)
-- [ ] Test version bump workflow
+
+- [x] Add changesets package to monorepo (@changesets/cli)
+- [x] Configure changesets for version management
+- [x] Configure .changeset/config.json to ignore site packages
+- [x] Add changeset scripts to root package.json
+- [x] Document component versioning workflow (VERSIONING_WORKFLOW.md)
+- [x] Create first changeset (add-hero-variants.md)
+- [x] Test version bump workflow (1.0.0 → 1.1.0)
+- [x] Verify CHANGELOG.md auto-generation
 
 ### Component Variant System
-- [ ] Design variant system architecture
-- [ ] Create variant registry pattern
-- [ ] Implement 3 hero variants:
-  - [ ] hero-default (current)
-  - [ ] hero-split (image left, text right)
-  - [ ] hero-minimal (text only, centered)
-- [ ] Implement 3 service card variants:
+
+- [x] Design variant system architecture
+- [x] Implement 3 hero variants:
+  - [x] HeroV1 - Classic centered (traditional businesses)
+  - [x] HeroV2 - Split layout (modern businesses)
+  - [x] HeroV3 - Full-screen immersive (creative agencies)
+- [x] Export all variants from core-components
+- [x] Document variant usage in VERSIONING_WORKFLOW.md
+- [x] Bump version to 1.1.0 with changesets
+- [ ] Implement 3 service card variants (Deferred to Week 4+)
   - [ ] card-default (current)
   - [ ] card-elevated (shadow + hover effect)
   - [ ] card-compact (dense layout)
-- [ ] Implement 3 contact form variants:
+- [ ] Implement 3 contact form variants (Deferred to Week 4+)
   - [ ] form-default (current)
   - [ ] form-minimal (fewer fields)
   - [ ] form-detailed (more fields + preferences)
-- [ ] Document variant usage in site.config.ts
-- [ ] Test variant switching in test sites
+- [ ] Test variant switching in test sites (Deferred to Week 4+)
 
 ### Build Performance
-- [ ] Measure single site build time (baseline)
-- [ ] Measure two-site build time
-- [ ] Measure Turborepo cache hit time
-- [ ] Document build performance metrics
-- [ ] Optimize if needed (target: <5min for 50 sites)
+
+- [x] Measure single site build time (26.88s for 77 pages)
+- [x] Measure two-site build time (44.4s from scratch)
+- [x] Measure Turborepo cache hit time (253ms - 176x faster!)
+- [x] Document build performance metrics (WEEK_2_COMPLETE.md)
+- [x] Validate target: <5min for 50 sites (Projected <3min ✅)
 
 ---
 
 ## 🖼️ Week 3: Image Storage (Cloudflare R2)
 
 ### R2 Setup
+
 - [ ] Create Cloudflare account (if not exists)
 - [ ] Set up R2 bucket (one for all sites)
 - [ ] Configure bucket policies and CORS
@@ -114,6 +141,7 @@ Outstanding tasks organized by 8-week implementation roadmap. Updated as tasks c
 - [ ] Document R2 configuration
 
 ### Image Processing Pipeline
+
 - [ ] Install Sharp and dependencies
 - [ ] Create image optimization script
   - [ ] WebP conversion
@@ -125,6 +153,7 @@ Outstanding tasks organized by 8-week implementation roadmap. Updated as tasks c
 - [ ] Test image processing locally
 
 ### Image Intake Tool
+
 - [ ] Create tools/images-intake.ts script
 - [ ] Implement CLI interface
   - [ ] Site slug parameter
@@ -136,6 +165,7 @@ Outstanding tasks organized by 8-week implementation roadmap. Updated as tasks c
 - [ ] Test with sample images
 
 ### Migration
+
 - [ ] Migrate colossus-reference images to R2
 - [ ] Update image references in colossus-reference
 - [ ] Test all images load correctly
@@ -148,6 +178,7 @@ Outstanding tasks organized by 8-week implementation roadmap. Updated as tasks c
 ## 🚀 Week 4: Deployment Pipeline (CRITICAL)
 
 ### Deployment Scripts
+
 - [ ] Create tools/deploy-site.ts
   - [ ] Single site deployment
   - [ ] Vercel API integration
@@ -164,6 +195,7 @@ Outstanding tasks organized by 8-week implementation roadmap. Updated as tasks c
   - [ ] Previous deployment restoration
 
 ### Smoke Tests
+
 - [ ] Create smoke test suite
   - [ ] Homepage loads
   - [ ] Service pages load
@@ -174,6 +206,7 @@ Outstanding tasks organized by 8-week implementation roadmap. Updated as tasks c
 - [ ] Set up automatic abort on smoke test failure
 
 ### Monitoring Integration
+
 - [ ] Set up Sentry account
 - [ ] Configure Sentry for platform
 - [ ] Add Sentry to core-components
@@ -182,6 +215,7 @@ Outstanding tasks organized by 8-week implementation roadmap. Updated as tasks c
 - [ ] Set up Slack/email notifications
 
 ### Deployment Testing
+
 - [ ] Test single site deployment
 - [ ] Test phased batch deployment (with 2 sites)
 - [ ] Test rollback procedures
@@ -193,6 +227,7 @@ Outstanding tasks organized by 8-week implementation roadmap. Updated as tasks c
 ## 🤖 Week 5: AI Content Generation
 
 ### Claude API Setup
+
 - [ ] Set up Anthropic API account
 - [ ] Generate API keys
 - [ ] Configure environment variables
@@ -200,6 +235,7 @@ Outstanding tasks organized by 8-week implementation roadmap. Updated as tasks c
 - [ ] Implement cost tracking
 
 ### Service Page Generator
+
 - [ ] Create tools/generate-services.ts
 - [ ] Design service generation prompts
   - [ ] Service description
@@ -214,6 +250,7 @@ Outstanding tasks organized by 8-week implementation roadmap. Updated as tasks c
 - [ ] Generate services for test sites
 
 ### Location Page Generator
+
 - [ ] Create tools/generate-locations.ts
 - [ ] Design location generation prompts
   - [ ] Location intro
@@ -225,6 +262,7 @@ Outstanding tasks organized by 8-week implementation roadmap. Updated as tasks c
 - [ ] Generate locations for test sites
 
 ### Content Quality Validators
+
 - [ ] Create content quality checkers
   - [ ] Readability score
   - [ ] Keyword density
@@ -235,6 +273,7 @@ Outstanding tasks organized by 8-week implementation roadmap. Updated as tasks c
 - [ ] Create content review interface
 
 ### Testing & Refinement
+
 - [ ] Generate full site content (services + locations)
 - [ ] Manual quality review
 - [ ] Refine prompts based on output
@@ -246,6 +285,7 @@ Outstanding tasks organized by 8-week implementation roadmap. Updated as tasks c
 ## 📝 Week 6: Blog & Projects
 
 ### Blog Content Type
+
 - [ ] Design blog MDX schema
 - [ ] Create blog listing page template
 - [ ] Create blog post page template
@@ -254,6 +294,7 @@ Outstanding tasks organized by 8-week implementation roadmap. Updated as tasks c
 - [ ] Add RSS feed generation
 
 ### Blog AI Generator
+
 - [ ] Create tools/generate-blog.ts
 - [ ] Design blog post prompts
   - [ ] Industry tips
@@ -264,6 +305,7 @@ Outstanding tasks organized by 8-week implementation roadmap. Updated as tasks c
 - [ ] Test blog generation
 
 ### Project Portfolio Type
+
 - [ ] Design project MDX schema
 - [ ] Create projects listing page template
 - [ ] Create project detail page template
@@ -272,6 +314,7 @@ Outstanding tasks organized by 8-week implementation roadmap. Updated as tasks c
 - [ ] Add project filtering
 
 ### Projects AI Generator
+
 - [ ] Create tools/generate-projects.ts
 - [ ] Design project description prompts
 - [ ] Generate sample projects
@@ -279,17 +322,67 @@ Outstanding tasks organized by 8-week implementation roadmap. Updated as tasks c
 - [ ] Document project workflow
 
 ### Testing
+
 - [ ] Generate blog posts for test sites
 - [ ] Generate projects for test sites
 - [ ] Review content quality
 - [ ] Test SEO impact
 - [ ] Refine as needed
 
+### Testimonials & Reviews Component
+
+- [ ] Design testimonial component variants
+  - [ ] testimonial-card (single testimonial)
+  - [ ] testimonial-carousel (rotating testimonials)
+  - [ ] testimonial-grid (multiple testimonials)
+  - [ ] testimonial-featured (hero-style large testimonial)
+- [ ] Create testimonial MDX schema
+  - [ ] Customer name, role, company
+  - [ ] Rating (1-5 stars)
+  - [ ] Testimonial text
+  - [ ] Photo (optional)
+  - [ ] Date
+  - [ ] Service/project related to
+- [ ] Implement testimonial display components
+- [ ] Add testimonials to site.config.ts
+
+### Review Platform Integration
+
+- [ ] Research Google Reviews API
+  - [ ] Google My Business API setup
+  - [ ] Authentication flow
+  - [ ] Rate limits and quotas
+- [ ] Research Trustpilot API
+  - [ ] API access requirements
+  - [ ] Data fetching methods
+  - [ ] Terms of service review
+- [ ] Research Trustpilot alternatives (Reviews.io, Feefo, etc.)
+- [ ] Create review aggregation utility
+  - [ ] Fetch reviews from platforms
+  - [ ] Normalize review data structure
+  - [ ] Cache reviews (avoid API rate limits)
+  - [ ] Filter reviews by rating threshold
+- [ ] Implement review display components
+  - [ ] Review cards with platform badges
+  - [ ] Star ratings display
+  - [ ] Review schema markup (JSON-LD)
+  - [ ] "Read more" expandable text
+- [ ] Add review sections to pages
+  - [ ] Homepage featured reviews
+  - [ ] Service pages relevant reviews
+  - [ ] Dedicated reviews page
+- [ ] Test review integration
+  - [ ] Verify data fetching
+  - [ ] Test caching behavior
+  - [ ] Check SEO schema markup
+  - [ ] Validate responsive design
+
 ---
 
 ## 📊 Week 7: Registry & Monitoring
 
 ### Site Registry (Supabase)
+
 - [ ] Set up Supabase account (free tier)
 - [ ] Design site registry schema
   - [ ] Site metadata
@@ -301,6 +394,7 @@ Outstanding tasks organized by 8-week implementation roadmap. Updated as tasks c
 - [ ] Test CRUD operations
 
 ### Management CLI
+
 - [ ] Create tools/manage-sites.ts
 - [ ] Implement commands:
   - [ ] List all sites
@@ -312,6 +406,7 @@ Outstanding tasks organized by 8-week implementation roadmap. Updated as tasks c
 - [ ] Test CLI commands
 
 ### Monitoring Dashboard
+
 - [ ] Design dashboard UI (simple React app)
 - [ ] Implement site overview
   - [ ] Deployment status
@@ -323,6 +418,7 @@ Outstanding tasks organized by 8-week implementation roadmap. Updated as tasks c
 - [ ] Deploy dashboard
 
 ### Automated Alerts
+
 - [ ] Set up alert rules
   - [ ] Build failures
   - [ ] Deployment failures
@@ -339,6 +435,7 @@ Outstanding tasks organized by 8-week implementation roadmap. Updated as tasks c
 ## 🎉 Week 8: Production Launch
 
 ### Industry Libraries
+
 - [ ] Create plumbing service library (25 services)
 - [ ] Create gardening service library (25 services)
 - [ ] Create building service library (25 services)
@@ -346,6 +443,7 @@ Outstanding tasks organized by 8-week implementation roadmap. Updated as tasks c
 - [ ] Test libraries with AI generation
 
 ### End-to-End Workflow
+
 - [ ] Document complete site creation process
   1. Client intake form
   2. Site generation script
@@ -361,6 +459,7 @@ Outstanding tasks organized by 8-week implementation roadmap. Updated as tasks c
 - [ ] Optimize bottlenecks
 
 ### First Real Client
+
 - [ ] Identify first paying client
 - [ ] Conduct client intake
 - [ ] Generate site
@@ -372,6 +471,7 @@ Outstanding tasks organized by 8-week implementation roadmap. Updated as tasks c
 - [ ] Client handoff & training
 
 ### Documentation Finalization
+
 - [ ] Complete all technical documentation
 - [ ] Create client-facing documentation
 - [ ] Create sales materials
@@ -380,6 +480,7 @@ Outstanding tasks organized by 8-week implementation roadmap. Updated as tasks c
 - [ ] Prepare marketing website
 
 ### Launch Preparation
+
 - [ ] Set up payment processing
 - [ ] Create client onboarding process
 - [ ] Set up support email/system
@@ -392,24 +493,28 @@ Outstanding tasks organized by 8-week implementation roadmap. Updated as tasks c
 ## 📋 Ongoing Tasks (Post-Launch)
 
 ### Platform Maintenance
+
 - [ ] Weekly dependency updates
 - [ ] Monthly security audits
 - [ ] Quarterly performance reviews
 - [ ] Regular backup verification
 
 ### Client Acquisition
+
 - [ ] Reach target of 50 sites by end Year 1
 - [ ] Track client acquisition costs
 - [ ] Monitor churn rate
 - [ ] Collect client testimonials
 
 ### Feature Development
+
 - [ ] Gather client feature requests
 - [ ] Prioritize feature roadmap
 - [ ] Implement high-value features
 - [ ] A/B test new features
 
 ### Financial Management
+
 - [ ] Monthly revenue tracking
 - [ ] Expense monitoring
 - [ ] Profit margin analysis
@@ -420,6 +525,7 @@ Outstanding tasks organized by 8-week implementation roadmap. Updated as tasks c
 ## 🎯 Business Milestones
 
 ### Revenue Targets
+
 - [ ] First paid client (Week 8)
 - [ ] 10 sites deployed (Month 3)
 - [ ] 25 sites deployed (Month 6)
@@ -427,12 +533,14 @@ Outstanding tasks organized by 8-week implementation roadmap. Updated as tasks c
 - [ ] £100K+ revenue Year 1
 
 ### Technical Milestones
+
 - [ ] Sub-30s build times maintained
 - [ ] 99.9% uptime achieved
 - [ ] Zero critical security incidents
 - [ ] Fully automated deployment pipeline
 
 ### Product Milestones
+
 - [ ] 5 industry libraries created
 - [ ] 10 component variants available
 - [ ] Blog & projects features live
@@ -443,6 +551,7 @@ Outstanding tasks organized by 8-week implementation roadmap. Updated as tasks c
 ## 💡 Ideas & Future Enhancements
 
 ### Potential Features (Backlog)
+
 - [ ] Multi-language support
 - [ ] E-commerce integration
 - [ ] Booking/scheduling system
@@ -455,6 +564,7 @@ Outstanding tasks organized by 8-week implementation roadmap. Updated as tasks c
 - [ ] CRM integration
 
 ### Scaling Ideas
+
 - [ ] Franchise model for other regions
 - [ ] Partner with marketing agencies
 - [ ] Create reseller program

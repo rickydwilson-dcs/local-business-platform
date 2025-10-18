@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { getImageUrl } from "@/lib/image";
 
 interface HeroSectionProps {
   title: string;
@@ -85,7 +86,7 @@ export function HeroSection(props: HeroSectionProps) {
             <div className="relative h-[400px] rounded-2xl shadow-lg overflow-hidden bg-gray-200">
               {heroImage ? (
                 <Image
-                  src={heroImage}
+                  src={getImageUrl(heroImage)}
                   alt="Professional scaffolding installation by Colossus Scaffolding showing safe access solutions with TG20:21 compliant design"
                   fill
                   className="object-cover"

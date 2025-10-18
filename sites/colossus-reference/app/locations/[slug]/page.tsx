@@ -15,6 +15,7 @@ import { CTASection } from "@/components/ui/cta-section";
 import Breadcrumbs from "@/components/ui/breadcrumbs";
 import Schema from "@/components/Schema";
 import { absUrl } from "@/lib/site";
+import { getImageUrl } from "@/lib/image";
 
 export const dynamic = "force-static";
 export const dynamicParams = false;

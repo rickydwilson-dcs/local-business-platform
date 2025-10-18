@@ -14,6 +14,7 @@ import Breadcrumbs from "@/components/ui/breadcrumbs";
 import Schema from "@/components/Schema";
 import { absUrl } from "@/lib/site";
 import { deriveLocationContext, getAreaServed } from "@/lib/location-utils";
+import { getImageUrl } from "@/lib/image";
 
 export const dynamic = "force-static";
 export const dynamicParams = false;
@@ -178,7 +179,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
       images: serviceData.heroImage
         ? [
             {
-              url: absUrl(serviceData.heroImage),
+              url: getImageUrl(serviceData.heroImage),
               width: 1200,
               height: 630,
               alt: `${serviceName} - ${serviceData.title}`,
@@ -200,7 +201,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
       title: optimizedTitle,
       description: optimizedDescription,
       images: serviceData.heroImage
-        ? [absUrl(serviceData.heroImage)]
+        ? [getImageUrl(serviceData.heroImage)]
         : [absUrl("/static/logo.png")],
     },
     alternates: {

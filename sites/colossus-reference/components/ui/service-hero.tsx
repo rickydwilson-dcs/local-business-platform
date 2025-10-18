@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { getImageUrl } from "@/lib/image";
 
 interface ServiceHeroProps {
   badge?: string;
@@ -87,7 +88,7 @@ export function ServiceHero(props: ServiceHeroProps) {
           <div className="relative">
             {heroImage ? (
               <Image
-                src={heroImage}
+                src={getImageUrl(heroImage)}
                 alt={`Professional scaffolding installation for ${title.toLowerCase()} showing safe access solutions with TG20:21 compliant design`}
                 width={600}
                 height={400}
