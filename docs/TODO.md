@@ -2,8 +2,8 @@
 
 Outstanding tasks organized by 8-week implementation roadmap. Updated as tasks complete.
 
-**Last Updated:** 2025-10-12
-**Current Phase:** Week 2 Complete / Week 3 Starting
+**Last Updated:** 2025-10-18
+**Current Phase:** Week 3 In Progress
 
 ---
 
@@ -47,15 +47,14 @@ Outstanding tasks organized by 8-week implementation roadmap. Updated as tasks c
 - [x] Update CLAUDE.md with Week 2 progress
 - [x] Update docs/README.md with Week 2 sections
 - [x] Update root README.md with Week 2 status
-- [ ] Create new DEVELOPMENT.md for monorepo workflow (Deferred to Week 3)
-  - [ ] Turborepo build commands
-  - [ ] Site-specific development
-  - [ ] Testing procedures
-  - [ ] Deployment workflow
-- [ ] Create GITHUB_SETUP.md for platform (Deferred to Week 3)
-  - [ ] Monorepo CI/CD strategy
-  - [ ] Per-site deployment triggers
-  - [ ] Branch protection for monorepo
+- [x] Create new DEVELOPMENT.md for monorepo workflow
+  - [x] Turborepo build commands
+  - [x] Site-specific development
+  - [x] Testing procedures
+  - [x] Deployment workflow
+  - [x] Branch strategy (develop/staging/main)
+  - [x] Pre-push hooks documentation
+- [x] Create docs/troubleshooting/CORRUPTED_BUILD_CACHE.md
 
 ### Vercel Setup
 
@@ -129,49 +128,73 @@ Outstanding tasks organized by 8-week implementation roadmap. Updated as tasks c
 
 ---
 
-## 🖼️ Week 3: Image Storage (Cloudflare R2)
+## 🖼️ Week 3: Image Storage (Cloudflare R2) - IN PROGRESS
 
 ### R2 Setup
 
-- [ ] Create Cloudflare account (if not exists)
-- [ ] Set up R2 bucket (one for all sites)
-- [ ] Configure bucket policies and CORS
-- [ ] Set up custom domain for R2 (images.yourdomain.com)
-- [ ] Generate API tokens
-- [ ] Document R2 configuration
+- [x] Create Cloudflare account (via Vercel integration)
+- [x] Set up R2 bucket (one for all sites)
+- [x] Configure bucket policies and CORS
+- [x] Generate API tokens (via Vercel Blob)
+- [x] Document R2 configuration
+- [ ] Set up custom domain for R2 (images.yourdomain.com) - Optional for later
 
 ### Image Processing Pipeline
 
-- [ ] Install Sharp and dependencies
-- [ ] Create image optimization script
-  - [ ] WebP conversion
-  - [ ] AVIF conversion (optional)
-  - [ ] Responsive size generation (3-5 sizes)
-  - [ ] Quality optimization
-- [ ] Create naming convention validator
-- [ ] Create R2 upload utility
-- [ ] Test image processing locally
+- [x] Install Sharp and dependencies
+- [x] Create image optimization script
+  - [x] WebP conversion (85% quality)
+  - [x] Quality optimization
+  - [ ] AVIF conversion (optional) - Deferred
+  - [ ] Responsive size generation (3-5 sizes) - Deferred
+- [x] Create naming convention (location-slug_01.webp)
+- [x] Create R2 upload utility (using Vercel Blob SDK)
+- [x] Test image processing locally
 
 ### Image Intake Tool
 
-- [ ] Create tools/images-intake.ts script
-- [ ] Implement CLI interface
+- [x] Create ad-hoc upload scripts
+  - [x] tools/upload-location-images.ts
+  - [x] tools/convert-images.js (PNG to WebP)
+- [x] Implement batch processing (13 location images)
+- [x] Implement progress reporting
+- [x] Add error handling and validation
+- [x] Test with colossus-reference images
+- [ ] Create unified tools/images-intake.ts CLI - Future enhancement
   - [ ] Site slug parameter
   - [ ] Source directory parameter
   - [ ] Interactive mode for metadata
-- [ ] Implement batch processing
-- [ ] Implement progress reporting
-- [ ] Add error handling and validation
-- [ ] Test with sample images
 
 ### Migration
 
-- [ ] Migrate colossus-reference images to R2
-- [ ] Update image references in colossus-reference
-- [ ] Test all images load correctly
-- [ ] Remove images from Git repository
+- [x] Migrate colossus-reference hero images to R2
+  - [x] 13 location hero images uploaded
+  - [x] Brighton, Eastbourne, Hastings, Lewes (previously uploaded)
+  - [x] Bognor Regis, Burgess Hill, Chichester, Crowborough
+  - [x] East Sussex, Kent, Kingston-upon-Thames, Margate
+  - [x] Newhaven, Seaford, Surrey, West Sussex, Woking
+- [x] Update image references in colossus-reference MDX files
+- [x] Test all images load correctly (via smoke tests)
+- [ ] Remove old images from Git repository - In progress
 - [ ] Update .gitignore for images
-- [ ] Document image workflow
+- [ ] Document image workflow - Partially documented in DEVELOPMENT.md
+
+### Quality Assurance & Testing
+
+- [x] Set up E2E smoke tests with Playwright
+  - [x] Test homepage loads
+  - [x] Test service pages load
+  - [x] Test location pages load
+  - [x] Test contact page renders
+  - [x] Test about page loads
+- [x] Integrate smoke tests into pre-push hooks
+- [x] Fix corrupted build cache issues
+  - [x] Document troubleshooting steps
+  - [x] Add automatic .next cleanup to pre-push hook
+- [x] Set up branch-based deployment strategy
+  - [x] develop → Development environment
+  - [x] staging → Preview environment
+  - [x] main → Production environment
 
 ---
 
@@ -196,14 +219,18 @@ Outstanding tasks organized by 8-week implementation roadmap. Updated as tasks c
 
 ### Smoke Tests
 
-- [ ] Create smoke test suite
-  - [ ] Homepage loads
-  - [ ] Service pages load
-  - [ ] Location pages load
-  - [ ] Contact form renders
-  - [ ] Navigation works
-- [ ] Integrate smoke tests into deployment
-- [ ] Set up automatic abort on smoke test failure
+- [x] Create smoke test suite
+  - [x] Homepage loads (HTTP 200 + H1 check)
+  - [x] Service pages load
+  - [x] Location pages load
+  - [x] Contact form renders
+  - [x] About page loads
+- [x] Integrate smoke tests into pre-push hooks
+  - [x] Runs on develop and staging branches
+  - [x] Automatic abort on smoke test failure
+  - [x] Automatic .next cache cleanup before tests
+- [ ] Integrate smoke tests into CI/CD pipeline
+- [ ] Add smoke tests to Vercel deployment checks
 
 ### Monitoring Integration
 
@@ -575,17 +602,31 @@ Outstanding tasks organized by 8-week implementation roadmap. Updated as tasks c
 
 ## 📊 Current Progress
 
-**Completed Weeks:** 1/8 (12.5%)
-**Sites Deployed:** 0/50 (0%)
-**Revenue Generated:** £0
+**Completed Weeks:** 2.5/8 (31%)
+**Sites Deployed:** 2/50 (4%) - colossus-reference (77 pages), joes-plumbing-canterbury (12 pages)
+**Revenue Generated:** £0 (pre-launch)
 **Build Time:** 26.88 seconds (target: <30s) ✅
 
+**Recent Achievements:**
+
+- ✅ R2 image storage set up and working
+- ✅ 17 hero images migrated to R2
+- ✅ E2E smoke tests implemented with Playwright
+- ✅ Pre-push quality gates with automatic cache cleanup
+- ✅ Branch-based deployment strategy (develop/staging/main)
+- ✅ Troubleshooting documentation for build issues
+
 **On Track:** YES ✅
+**Current Focus:** Week 3 - Image Storage completion
 **Blockers:** None
-**Next Milestone:** Deploy colossus-reference to Vercel
+**Next Milestones:**
+
+1. Complete image migration to R2
+2. Begin Week 4 deployment automation
+3. Set up monitoring (Sentry)
 
 ---
 
-**Project Status:** Week 1 Complete / Week 2 Starting
-**Target Completion:** Week 8 (8 weeks from start)
+**Project Status:** Week 3 In Progress (Image Storage + QA Infrastructure)
+**Target Completion:** Week 8
 **First Client Target:** Week 8
