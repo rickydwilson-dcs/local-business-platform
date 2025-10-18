@@ -51,8 +51,13 @@ const nextConfig: NextConfig = {
   },
   // Image optimization configuration for better performance
   images: {
-    // External domains (add domains if loading external images)
-    domains: [],
+    // Remote patterns for Cloudflare R2
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**.r2.dev",
+      },
+    ],
     // Allow SVG images (safe for logos and icons)
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
@@ -68,6 +73,12 @@ const nextConfig: NextConfig = {
   trailingSlash: false,
   // Security headers for production
   async headers() {
+    // In development, allow unsafe-eval for React dev mode
+    const scriptSrc =
+      process.env.NODE_ENV === "development"
+        ? "'self' 'unsafe-inline' 'unsafe-eval' *.googletagmanager.com *.google-analytics.com *.facebook.com vercel.live *.vercel.live"
+        : "'self' 'unsafe-inline' *.googletagmanager.com *.google-analytics.com *.facebook.com vercel.live *.vercel.live";
+
     return [
       {
         source: "/(.*)",
@@ -86,8 +97,7 @@ const nextConfig: NextConfig = {
           },
           {
             key: "Content-Security-Policy",
-            value:
-              "default-src 'self'; script-src 'self' 'unsafe-inline' *.googletagmanager.com *.google-analytics.com *.facebook.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self' *.google-analytics.com *.facebook.com; frame-ancestors 'none';",
+            value: `default-src 'self'; script-src ${scriptSrc}; style-src 'self' 'unsafe-inline'; img-src 'self' data: *.r2.dev; connect-src 'self' *.google-analytics.com *.facebook.com vercel.live *.vercel.live; frame-ancestors 'none';`,
           },
         ],
       },
