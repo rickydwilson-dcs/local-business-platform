@@ -69,6 +69,14 @@ if [ "$BRANCH" = "main" ]; then
 elif [ "$BRANCH" = "develop" ] || [ "$BRANCH" = "staging" ]; then
   # For develop/staging: Run smoke tests locally
   echo ""
+  echo "🧹 Cleaning build cache to prevent corruption..."
+  echo ""
+
+  # Clean .next directories to prevent corrupted build cache issues
+  # This prevents 404/500 errors during smoke tests caused by stale webpack chunks
+  find sites -name ".next" -type d -exec rm -rf {} + 2>/dev/null || true
+
+  echo ""
   echo "🎭 Running smoke tests (required for $BRANCH)..."
   echo ""
 
@@ -88,6 +96,8 @@ elif [ "$BRANCH" = "develop" ] || [ "$BRANCH" = "staging" ]; then
     echo ""
     echo "💡 Tip: These are minimal tests (HTTP 200 + H1 checks)."
     echo "    If they fail, something fundamental is broken."
+    echo ""
+    echo "📚 See docs/troubleshooting/CORRUPTED_BUILD_CACHE.md for common issues"
     echo ""
     exit 1
   }
