@@ -92,6 +92,7 @@ export function ServiceHero(props: ServiceHeroProps) {
                 alt={`Professional scaffolding installation for ${title.toLowerCase()} showing safe access solutions with TG20:21 compliant design`}
                 width={600}
                 height={400}
+                sizes="(max-width: 768px) 100vw, 50vw"
                 className="rounded-2xl shadow-lg w-full object-cover"
                 priority
               />

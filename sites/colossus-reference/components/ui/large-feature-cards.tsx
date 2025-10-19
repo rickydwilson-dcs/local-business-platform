@@ -63,7 +63,13 @@ export function LargeFeatureCards({
               {/* Image or Icon */}
               {card.image && (
                 <div className="relative w-full h-48 mb-6 rounded-xl overflow-hidden bg-gray-100">
-                  <Image src={card.image} alt={card.title} fill className="object-cover" />
+                  <Image
+                    src={card.image}
+                    alt={card.title}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className="object-cover"
+                  />
                 </div>
               )}
 
