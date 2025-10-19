@@ -1,24 +1,25 @@
-# Browsers that we support for modern JavaScript (eliminates 11.4 KiB of polyfills)
+# Browserslist configuration for modern browsers only
+# Eliminates unnecessary polyfills and reduces bundle size
+# All these browsers support ES2022 features natively
 
-# Global usage > 0.5%
+# Modern Chrome, Edge, Safari, Firefox
 > 0.5%
-
-# Last 2 versions of major browsers
-last 2 Chrome versions
-last 2 Firefox versions
-last 2 Safari versions
-last 2 Edge versions
-
-# Exclude dead browsers
+last 2 versions
 not dead
-
-# Exclude Internet Explorer
-not ie 11
-not ie_mob 11
-
-# Support modern mobile browsers
-last 2 iOS versions
-last 2 Android versions
-
-# Exclude browsers that don't support ES2022 features
+not IE 11
 not op_mini all
+
+# Explicitly target browsers that support ES2022 features
+Chrome >= 94
+Edge >= 94
+Safari >= 15.4
+Firefox >= 93
+iOS >= 15.4
+Samsung >= 15
+
+# Exclude older browsers that need polyfills
+not Chrome < 94
+not Edge < 94
+not Safari < 15.4
+not Firefox < 93
+not iOS < 15.4

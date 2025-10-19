@@ -27,6 +27,8 @@ const nextConfig: NextConfig = {
     emotion: false, // Disable emotion if not used
     styledComponents: false, // Disable styled-components if not used
   },
+  // Use SWC minifier for better modern JS output (eliminates polyfills)
+  swcMinify: true,
   // Webpack configuration for modern browsers and optimizations
   webpack: (config, { isServer, dev }) => {
     // Target modern browsers to eliminate polyfills
