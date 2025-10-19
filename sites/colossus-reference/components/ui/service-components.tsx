@@ -92,6 +92,7 @@ export function ServiceHero({
             alt="Service hero image"
             width={600}
             height={500}
+            sizes="(max-width: 768px) 100vw, 50vw"
             className="rounded-lg shadow-lg w-full"
           />
         )}
@@ -113,6 +114,7 @@ export function Gallery({ images }: GalleryProps) {
             src={src}
             alt={`Gallery image ${i + 1}`}
             fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
             className="object-cover hover:scale-105 transition-transform duration-300"
           />
         </div>
