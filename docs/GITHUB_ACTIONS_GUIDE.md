@@ -326,11 +326,12 @@ Configure these secrets in GitHub repository settings:
 - **Get It:** R2 bucket settings in Cloudflare dashboard
 - **Format:** `https://pub-xxxxx.r2.dev`
 
-### 4. SENTRY_AUTH_TOKEN (Optional)
+### 4. NEW_RELIC_API_KEY (Optional)
 
-- **What:** Sentry API token for release tracking
-- **Get It:** Sentry → Settings → Auth Tokens → Create Token
-- **Scope:** project:releases
+- **What:** NewRelic API key for deployment tracking
+- **Get It:** NewRelic → Account Settings → API Keys → Create Key
+- **Type:** User API Key
+- **Scope:** Deployment marker creation
 
 ### Setting Secrets
 
@@ -564,9 +565,9 @@ gh workflow run deploy.yml \
 ### 3. Monitor After Deployment
 
 - Watch GitHub Actions logs during deployment
-- Check Sentry for errors in first 15 minutes
+- Check NewRelic for errors and performance in first 15 minutes
 - Verify key pages load correctly
-- Monitor Core Web Vitals in Vercel dashboard
+- Monitor Core Web Vitals in NewRelic Browser dashboard
 
 ### 4. Deploy During Low Traffic
 
@@ -589,7 +590,8 @@ gh release create v1.2.3 \
 ## 🔗 Related Documentation
 
 - [Deployment Guide](./DEPLOYMENT_GUIDE.md) - Using deployment tools locally
-- [Sentry Setup Guide](./SENTRY_SETUP_GUIDE.md) - Error monitoring setup
+- [NewRelic Setup Guide](./NEWRELIC_SETUP_GUIDE.md) - APM and error monitoring setup
+- [Monitoring Comparison](./MONITORING_COMPARISON.md) - NewRelic vs Sentry analysis
 - [Week 4 Strategy](./progress/WEEK_4_STRATEGY.md) - Overall deployment pipeline plan
 
 ---

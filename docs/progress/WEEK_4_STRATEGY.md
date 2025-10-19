@@ -40,7 +40,7 @@ Developer → Git Push → GitHub → Vercel Webhook → Automatic Build & Deplo
 2. **Batch Deployment Capability** - Deploy multiple sites in phases
 3. **Automated Rollback** - One-command rollback to previous version
 4. **Deployment Monitoring** - Real-time status tracking
-5. **Error Tracking** - Sentry integration for production errors
+5. **Error Tracking** - NewRelic integration for production monitoring
 
 ### Success Criteria
 
@@ -48,7 +48,7 @@ Developer → Git Push → GitHub → Vercel Webhook → Automatic Build & Deplo
 - [ ] Can deploy batch of sites with phased rollout
 - [ ] Can rollback single site in <1 minute
 - [ ] Can monitor deployment status programmatically
-- [ ] Sentry catches and reports production errors
+- [ ] NewRelic catches and reports production errors & performance
 
 ---
 
@@ -494,7 +494,8 @@ jobs:
 
 **Day 4:**
 
-- ✅ Create Sentry setup guide (manual installation)
+- ✅ Research and compare Sentry vs NewRelic
+- ✅ Create NewRelic setup guide (chose over Sentry)
 - ✅ Create GitHub Actions deployment workflow
 - ✅ Implement pre-deployment checks
 - ✅ Implement post-deployment validation
@@ -503,7 +504,7 @@ jobs:
 **Day 5:**
 
 - Optional: Test GitHub Actions workflow
-- Optional: Set up Sentry (requires account)
+- Optional: Set up NewRelic (requires account)
 - Update main README
 - Create Week 4 completion summary
 - Final review and wrap-up
@@ -514,7 +515,8 @@ jobs:
 
 - [Vercel CLI Documentation](https://vercel.com/docs/cli)
 - [Vercel API Reference](https://vercel.com/docs/rest-api)
-- [Sentry Next.js Integration](https://docs.sentry.io/platforms/javascript/guides/nextjs/)
+- [NewRelic Next.js Integration](https://docs.newrelic.com/docs/apm/agents/nodejs-agent/)
+- [NewRelic Free Tier](https://newrelic.com/pricing/free-tier)
 - [GitHub Actions Documentation](https://docs.github.com/en/actions)
 - [Playwright Documentation](https://playwright.dev/docs/intro)
 
@@ -528,7 +530,8 @@ jobs:
 - ✅ All three deployment tools built and tested
 - ✅ Comprehensive deployment documentation (DEPLOYMENT_GUIDE.md)
 - ✅ GitHub Actions deployment workflow (deploy.yml)
-- ✅ Sentry setup guide (SENTRY_SETUP_GUIDE.md)
+- ✅ NewRelic vs Sentry comparison (MONITORING_COMPARISON.md)
+- ✅ NewRelic setup guide (NEWRELIC_SETUP_GUIDE.md)
 - ✅ CI/CD usage guide (GITHUB_ACTIONS_GUIDE.md)
 - ✅ Pre-deployment and post-deployment checks
 - ✅ Emergency procedures documented
