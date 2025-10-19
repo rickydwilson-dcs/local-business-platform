@@ -1,0 +1,73 @@
+name: Keep Upstash Redis Active
+
+on:
+  schedule:
+    # Run daily at 9 AM UTC (keeps database active)
+    - cron: '0 9 * * *'
+  workflow_dispatch: # Allow manual triggering
+
+jobs:
+  ping-redis:
+    name: Ping Upstash Redis Database
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install @upstash/redis
+
+      - name: Ping Redis Database
+        env:
+          KV_REST_API_URL: ${{ secrets.KV_REST_API_URL }}
+          KV_REST_API_TOKEN: ${{ secrets.KV_REST_API_TOKEN }}
+        run: |
+          node -e "
+          const { Redis } = require('@upstash/redis');
+
+          async function pingRedis() {
+            try {
+              const redis = new Redis({
+                url: process.env.KV_REST_API_URL,
+                token: process.env.KV_REST_API_TOKEN,
+              });
+
+              // Simple PING command to keep database active
+              const result = await redis.ping();
+              console.log('✅ Redis PING successful:', result);
+
+              // Set a test key with 1-hour expiry
+              await redis.set('health-check', Date.now(), { ex: 3600 });
+              console.log('✅ Health check key set');
+
+              // Get the key to confirm
+              const value = await redis.get('health-check');
+              console.log('✅ Health check key retrieved:', value);
+
+              console.log('✅ Upstash Redis is active and healthy');
+            } catch (error) {
+              console.error('❌ Redis ping failed:', error.message);
+              process.exit(1);
+            }
+          }
+
+          pingRedis();
+          "
+
+      - name: Report Status
+        if: always()
+        run: |
+          if [ $? -eq 0 ]; then
+            echo "✅ Upstash Redis database is active"
+          else
+            echo "❌ Failed to ping Upstash Redis database"
+            echo "⚠️ Check KV_REST_API_URL and KV_REST_API_TOKEN secrets"
+            exit 1
+          fi
