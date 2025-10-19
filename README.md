@@ -6,13 +6,15 @@ White-label website generation platform for local service businesses (plumbers, 
 
 ## 📋 Project Status
 
-**Phase:** ✅ Week 2 Complete - Component Versioning & Multi-Site Validation
+**Phase:** ✅ Week 4 Complete - Deployment Pipeline & Monitoring
 **Architecture:** Option B - Root as Coordinator (Monorepo with Separate Vercel Projects)
 **Current Sites:** 2 (colossus-reference, joes-plumbing-canterbury)
 **Target:** 50 sites by end of Year 1
 **Last Build:** 44.4s from scratch | **253ms cached** (176x faster with Turborepo!)
 **Components:** @platform/core-components v1.1.0
 **Image Storage:** ✅ Cloudflare R2 (46 images uploaded, all code updated)
+**Deployment:** ✅ Automated CI/CD pipeline with GitHub Actions
+**Monitoring:** ✅ NewRelic APM ($0/month for 50+ sites)
 
 ---
 
@@ -76,10 +78,11 @@ local-business-platform/
 │       ├── site.config.ts        # Plumbing business config
 │       └── ... (same structure)
 │
-├── tools/                        # Automation scripts (Week 2+)
+├── tools/                        # Automation scripts (Week 2-4)
 │   ├── create-site.ts           # Interactive site generator
-│   ├── deploy-site.ts           # Single site deployment
-│   └── deploy-batch.ts          # Phased batch deployment
+│   ├── deploy-site.ts           # Single site deployment (Week 4)
+│   ├── deploy-batch.ts          # Phased batch deployment (Week 4)
+│   └── rollback.ts              # Quick rollback tool (Week 4)
 │
 ├── assets/                       # Image strategy docs
 │   └── README.md                # Cloudflare R2 strategy (Week 3)
@@ -87,12 +90,20 @@ local-business-platform/
 └── docs/                         # Complete documentation
     ├── README.md                # Documentation index
     ├── WHITE_LABEL_PLATFORM_DESIGN.md  # 8-week roadmap
+    ├── DEPLOYMENT_GUIDE.md      # Deployment tools guide (Week 4)
+    ├── NEWRELIC_SETUP_GUIDE.md  # APM monitoring setup (Week 4)
+    ├── GITHUB_ACTIONS_GUIDE.md  # CI/CD workflow guide (Week 4)
+    ├── MONITORING_COMPARISON.md # NewRelic vs Sentry analysis (Week 4)
     ├── architecture/            # Architectural guidelines
     ├── development/             # Development workflow
     ├── deployment/              # Vercel deployment guide
     ├── component-versioning/    # Changesets workflow
     ├── testing/                 # Testing strategies
-    └── ai/                      # AI agent guidelines
+    ├── ai/                      # AI agent guidelines
+    └── progress/                # Weekly progress tracking
+        ├── WEEK_4_COMPLETE.md   # Week 4 completion summary
+        ├── WEEK_4_STRATEGY.md   # Week 4 implementation strategy
+        └── ... (other weeks)
 ```
 
 ---
@@ -255,22 +266,43 @@ npm run generate:content joes-plumbing-canterbury
 
 ---
 
-## 📈 Deployment Strategy (Week 4)
+## 📈 Deployment Strategy (Week 4) ✅
 
-### Phased Rollout
+### Automated CI/CD Pipeline
 
-```
-Phase 1: Internal Test → Phase 2: Canary (5 sites) → Phase 3: Batched (45 sites)
-         ↓ Smoke tests                ↓ 1hr wait + monitoring      ↓ 10 at a time
-         ABORT if fails               ROLLBACK if errors           PAUSE on issues
-```
+**GitHub Actions workflows:**
 
-### Rollback Capability
+- **CI:** TypeScript + ESLint + Build + Tests on every push
+- **E2E Tests:** Smoke tests (develop/staging) + Full tests (staging gate)
+- **Deploy:** Automated deployment on `main` push with phased rollout
+
+### Deployment Tools
 
 ```bash
-npm run deploy:rollback site-1,site-2,site-3
-# Automatically reverts deployments in ~2 minutes
+# Single site deployment
+tsx tools/deploy-site.ts colossus-reference --env production
+
+# Batch deployment with phased rollout
+tsx tools/deploy-batch.ts --env production
+
+# Quick rollback
+tsx tools/rollback.ts colossus-reference
 ```
+
+### Phased Rollout Strategy
+
+```
+Phase 1: Canary (1 site)    → Wait 5 min  → Monitor NewRelic
+Phase 2: Small Batch (5)    → Wait 10 min → Check errors
+Phase 3: Medium Batch (10)  → Wait 15 min → Verify performance
+Phase 4: Remaining Sites    → Deploy all  → Final validation
+```
+
+### Monitoring & Rollback
+
+- **NewRelic APM:** Real-time error tracking + performance monitoring ($0/month)
+- **Automatic Rollback:** On failure detection during deployment
+- **Manual Rollback:** `tsx tools/rollback.ts` (< 1 minute)
 
 ---
 
