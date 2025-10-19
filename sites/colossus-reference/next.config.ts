@@ -57,6 +57,11 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "**.r2.dev",
       },
+      // Allow placehold.co for fallback images when R2 URL not configured
+      {
+        protocol: "https",
+        hostname: "placehold.co",
+      },
     ],
     // Allow SVG images (safe for logos and icons)
     dangerouslyAllowSVG: true,

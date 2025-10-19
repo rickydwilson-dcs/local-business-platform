@@ -49,6 +49,7 @@ jobs:
         run: pnpm --filter colossus-reference run test:e2e:smoke
         env:
           CI: true
+          NEXT_PUBLIC_R2_PUBLIC_URL: ${{ secrets.NEXT_PUBLIC_R2_PUBLIC_URL }}
 
       - name: Upload test results
         if: failure()
@@ -88,6 +89,7 @@ jobs:
         run: pnpm --filter colossus-reference run test:e2e:chromium
         env:
           CI: true
+          NEXT_PUBLIC_R2_PUBLIC_URL: ${{ secrets.NEXT_PUBLIC_R2_PUBLIC_URL }}
 
       - name: Upload test results
         if: always()
@@ -135,6 +137,7 @@ jobs:
         run: pnpm --filter colossus-reference run test:e2e
         env:
           CI: true
+          NEXT_PUBLIC_R2_PUBLIC_URL: ${{ secrets.NEXT_PUBLIC_R2_PUBLIC_URL }}
 
       - name: Upload test results
         if: always()
@@ -182,6 +185,7 @@ jobs:
         run: pnpm --filter colossus-reference run test:e2e:full
         env:
           CI: true
+          NEXT_PUBLIC_R2_PUBLIC_URL: ${{ secrets.NEXT_PUBLIC_R2_PUBLIC_URL }}
 
       - name: Upload test results
         if: always()
