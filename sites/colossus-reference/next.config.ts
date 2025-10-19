@@ -12,8 +12,6 @@ const withMDX = createMDX({
 
 const nextConfig: NextConfig = {
   pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
-  // Enable instrumentation for NewRelic monitoring
-  instrumentationHook: true,
   // Enable experimental features for better performance
   experimental: {
     mdxRs: true, // Use Rust-based MDX compiler for better performance
