@@ -1,5 +1,5 @@
-import type { Config } from "tailwindcss";
-import typography from "@tailwindcss/typography";
+import type { Config } from 'tailwindcss'
+import typography from '@tailwindcss/typography'
 
 const config: Config = {
   content: [
@@ -11,18 +11,18 @@ const config: Config = {
     extend: {
       colors: {
         brand: {
-          blue: "#005A9E",
-          "blue-hover": "#004d87",
-          "blue-light": "#0066b5",
-          black: "#000000",
-          white: "#FFFFFF",
+          blue: '#005A9E',
+          'blue-hover': '#004d87',
+          'blue-light': '#0066b5',
+          black: '#000000',
+          white: '#FFFFFF',
         },
       },
       fontFamily: {
-        sans: ["var(--font-inter)", "system-ui", "-apple-system", "sans-serif"],
+        sans: ['GeistSans', 'Arial', 'Helvetica', 'sans-serif'],
       },
     },
   },
   plugins: [typography],
-};
-export default config;
+}
+export default config

@@ -2,19 +2,10 @@ import Image from "next/image";
 import Link from "next/link";
 import "./globals.css";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import MobileMenu from "@/components/ui/mobile-menu";
 import { LocationsDropdown } from "@/components/ui/locations-dropdown";
 import { ConsentManager, Analytics, AnalyticsDebugPanel } from "@/components/analytics";
 import { Footer } from "@/components/ui/footer";
-
-// Optimize font loading with next/font
-const inter = Inter({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-inter",
-  preload: true,
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL(
@@ -39,7 +30,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       color: #0f172a;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
-      font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
+      font-family: 'GeistSans', Arial, Helvetica, sans-serif;
     }
 
     /* Header styles */
@@ -177,146 +168,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         width: 90%;
       }
     }
-
-    /* Hero Section Critical Styles (for LCP optimization) */
-    .hero-section {
-      padding: 4rem 0;
-      background-color: #ffffff;
-    }
-
-    @media (min-width: 1024px) {
-      .hero-section {
-        padding: 6rem 0;
-      }
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 3rem;
-      align-items: center;
-    }
-
-    @media (min-width: 1024px) {
-      .hero-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-
-    .hero-title {
-      font-size: 2.25rem;
-      font-weight: 700;
-      color: #111827;
-      margin-bottom: 1.5rem;
-      line-height: 1.2;
-    }
-
-    @media (min-width: 768px) {
-      .hero-title {
-        font-size: 3rem;
-      }
-    }
-
-    @media (min-width: 1024px) {
-      .hero-title {
-        font-size: 3.75rem;
-      }
-    }
-
-    .hero-description {
-      font-size: 1.25rem;
-      color: #1f2937;
-      margin-bottom: 2rem;
-      line-height: 1.75;
-    }
-
-    .hero-image-container {
-      position: relative;
-      height: 400px;
-      border-radius: 1rem;
-      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-      overflow: hidden;
-      background-color: #e5e7eb;
-    }
-
-    .hero-image {
-      object-fit: cover;
-      width: 100%;
-      height: 100%;
-    }
-
-    /* CTA Buttons */
-    .hero-cta-container {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      margin-bottom: 2rem;
-    }
-
-    @media (min-width: 640px) {
-      .hero-cta-container {
-        flex-direction: row;
-      }
-    }
-
-    /* Trust Badges */
-    .trust-badges {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-
-    @media (min-width: 640px) {
-      .trust-badges {
-        gap: 1rem;
-      }
-    }
-
-    .trust-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background-color: #f3f4f6;
-      padding: 0.5rem 0.75rem;
-      border-radius: 9999px;
-      font-size: 0.75rem;
-    }
-
-    @media (min-width: 640px) {
-      .trust-badge {
-        padding: 0.5rem 1rem;
-        font-size: 0.875rem;
-      }
-    }
-
-    .trust-icon {
-      width: 0.75rem;
-      height: 0.75rem;
-      color: #005A9E;
-    }
-
-    @media (min-width: 640px) {
-      .trust-icon {
-        width: 1rem;
-        height: 1rem;
-      }
-    }
   `;
 
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en">
       <head>
-        {/* Inline critical CSS for instant above-the-fold render */}
         <style dangerouslySetInnerHTML={{ __html: criticalStyles }} />
-        {/* Preload LCP hero image for parallel download */}
-        <link
-          rel="preload"
-          as="image"
-          href="https://pub-b08de0b7d5f742228cc9f399c6f9e0cb.r2.dev/colossus-reference/hero/home/main_01.webp"
-          imageSrcSet="https://pub-b08de0b7d5f742228cc9f399c6f9e0cb.r2.dev/colossus-reference/hero/home/main_01.webp 640w, https://pub-b08de0b7d5f742228cc9f399c6f9e0cb.r2.dev/colossus-reference/hero/home/main_01.webp 750w, https://pub-b08de0b7d5f742228cc9f399c6f9e0cb.r2.dev/colossus-reference/hero/home/main_01.webp 828w, https://pub-b08de0b7d5f742228cc9f399c6f9e0cb.r2.dev/colossus-reference/hero/home/main_01.webp 1080w"
-          imageSizes="(max-width: 768px) 100vw, 50vw"
-          fetchPriority="high"
-        />
       </head>
       <body className="min-h-screen bg-white text-slate-900 antialiased">
         <header className="border-b bg-white shadow-sm">
