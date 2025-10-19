@@ -95,6 +95,7 @@ export function ServiceHero(props: ServiceHeroProps) {
                 sizes="(max-width: 768px) 100vw, 50vw"
                 className="rounded-2xl shadow-lg w-full object-cover"
                 priority
+                quality={65}
               />
             ) : (
               <div className="relative h-[400px] bg-gray-200 rounded-2xl shadow-lg flex items-center justify-center">
