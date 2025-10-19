@@ -2,6 +2,75 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with the Local Business Platform monorepo.
 
+## ⚠️ CRITICAL: Git Workflow - MUST FOLLOW
+
+**ALL changes MUST follow this branching workflow. NO EXCEPTIONS.**
+
+```
+develop → staging → main
+```
+
+### Workflow Rules (MANDATORY):
+
+1. **ALWAYS start on `develop` branch** when making changes
+2. **NEVER push directly to `staging` or `main`**
+3. **Flow:**
+   - Work on `develop` → commit → push to `develop`
+   - Merge `develop` → `staging` → push to `staging`
+   - Merge `staging` → `main` → push to `main`
+
+4. **Branch Protection:**
+   - `develop` = Development environment (smoke tests required)
+   - `staging` = Preview/QA gate (smoke tests required)
+   - `main` = Production (requires staging CI passing)
+
+5. **Pre-Push Checks:**
+   - TypeScript validation (~3s)
+   - Production build (~45s)
+   - Cache cleanup (<1s)
+   - Smoke tests (~27s) - develop/staging only
+
+### Example Workflow:
+
+```bash
+# ✅ CORRECT:
+git checkout develop
+# make changes...
+git add .
+git commit -m "..."
+git push origin develop
+
+# Then merge up:
+git checkout staging
+git merge develop
+git push origin staging
+
+# Then merge to main:
+git checkout main
+git merge staging
+git push origin main
+
+# ❌ WRONG:
+git checkout staging  # Don't start here!
+# make changes...
+git push origin staging  # Skipped develop!
+```
+
+**Why This Matters:**
+
+- Skipping `develop` bypasses the first quality gate
+- Going directly to `staging` breaks the promotion flow
+- Changes should graduate: develop (test) → staging (verify) → main (deploy)
+- This prevents untested code from reaching production
+
+**If You Break This Rule:**
+
+- Stop immediately
+- Inform the user
+- Ask how to proceed (reset staging? or merge develop to catch up?)
+
+---
+
 ## MANDATORY: Read These Documentation Files First
 
 **Before making ANY changes to this codebase, you MUST read these critical documentation files:**
