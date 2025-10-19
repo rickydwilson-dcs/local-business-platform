@@ -1,5 +1,10 @@
 name: Deploy Sites
 
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
 on:
   # Manual deployment trigger
   workflow_dispatch:
@@ -135,7 +140,7 @@ jobs:
 
       - name: Deploy site
         run: |
-          tsx tools/deploy-site.ts ${{ inputs.site-name }} \
+          pnpm exec tsx tools/deploy-site.ts ${{ inputs.site-name }} \
             --env ${{ inputs.environment }} \
             ${{ inputs.skip-tests && '--skip-tests' || '' }} \
             ${{ inputs.dry-run && '--dry-run' || '' }}
@@ -189,7 +194,7 @@ jobs:
       - name: Deploy batch (production)
         if: inputs.environment == 'production' || github.ref == 'refs/heads/main'
         run: |
-          tsx tools/deploy-batch.ts \
+          pnpm exec tsx tools/deploy-batch.ts \
             --env production \
             ${{ inputs.dry-run && '--dry-run' || '' }}
         env:
@@ -199,7 +204,7 @@ jobs:
       - name: Deploy batch (other environments)
         if: inputs.environment != 'production' && github.ref != 'refs/heads/main'
         run: |
-          tsx tools/deploy-batch.ts \
+          pnpm exec tsx tools/deploy-batch.ts \
             --env ${{ inputs.environment }} \
             ${{ inputs.dry-run && '--dry-run' || '' }}
         env:
