@@ -9,6 +9,7 @@
 ## ✅ Completed
 
 ### Repository Setup
+
 - ✅ Separate repositories established:
   - `colossus-scaffolding` → Original Colossus Scaffolding website (preserved)
   - `local-business-platform` → White-label platform monorepo
@@ -16,6 +17,7 @@
 - ✅ colossus-scaffolding clean and deployable
 
 ### Monorepo Structure
+
 - ✅ pnpm workspaces configured ([pnpm-workspace.yaml](../pnpm-workspace.yaml))
 - ✅ Turborepo configured ([turbo.json](../turbo.json))
 - ✅ Directory structure created:
@@ -32,6 +34,7 @@
   ```
 
 ### Documentation
+
 - ✅ [WHITE_LABEL_PLATFORM_DESIGN.md](WHITE_LABEL_PLATFORM_DESIGN.md) - Complete 8-week plan
 - ✅ [assets/README.md](../assets/README.md) - Cloudflare R2 strategy
 - ✅ This status document
@@ -41,40 +44,49 @@
 ## ⚠️ In Progress / Issues
 
 ### 1. Root Site Build Configuration
+
 **Issue:** Root package.json was converted to monorepo coordinator but lost Next.js dependencies
 
 **Current State:**
+
 - Root has all original Colossus code (app/, components/, lib/, content/)
 - Root next.config.ts exists and is configured
 - Root package.json has scripts but missing dependencies
 
 **Solution Needed:**
+
 - Restore dependencies from colossus-scaffolding package.json
 - OR: Keep root minimal and move everything to packages/colossus-site/
 - Decide on architecture: Root as reference site vs. root as coordinator only
 
 ### 2. Test Sites
+
 **Issue:** test-site-internal was created but has import path issues
 
 **What Happened:**
+
 - Full Colossus codebase was copied to sites/test-site-internal/
 - Import paths still use `@/components/*` expecting local files
 - Should import from `@platform/core-components` instead
 
 **Solution Needed:**
+
 - Option A: Fix test-site-internal imports to use @platform/core-components
 - Option B: Remove test-site-internal and create minimal test sites from scratch
 - Recommendation: Option B - start fresh with minimal structure
 
 ### 3. Component Extraction
+
 **Issue:** Components exist in two places
 
 **Current State:**
+
 - Original components: `/components/`, `/lib/`
 - Extracted components: `/packages/core-components/src/components/`, `/packages/core-components/src/lib/`
 - Both copies exist, causing confusion
 
 **Solution Needed:**
+
 - Decision: Keep dual structure or consolidate?
 - If dual: Root serves as reference, package for sharing
 - If consolidate: Root imports from package (breaks if developing both)
@@ -83,13 +95,13 @@
 
 ## 🎯 Week 1 Goals (From Design Doc)
 
-| Task | Status | Notes |
-|------|--------|-------|
-| Set up Vercel Pro team | ❌ Not started | Need account setup |
-| Initialize Turborepo + pnpm workspaces | ✅ Complete | Configured and working |
-| Extract Colossus into core-components | ⚠️  Partial | Extracted but dual copies exist |
-| Deploy 2 test sites | ❌ Not started | Need working site first |
-| Measure build times | ❌ Not started | Depends on working builds |
+| Task                                   | Status         | Notes                           |
+| -------------------------------------- | -------------- | ------------------------------- |
+| Set up Vercel Pro team                 | ❌ Not started | Need account setup              |
+| Initialize Turborepo + pnpm workspaces | ✅ Complete    | Configured and working          |
+| Extract Colossus into core-components  | ⚠️ Partial     | Extracted but dual copies exist |
+| Deploy 2 test sites                    | ❌ Not started | Need working site first         |
+| Measure build times                    | ❌ Not started | Depends on working builds       |
 
 ---
 
@@ -142,6 +154,7 @@
 **Question:** Should the root of the monorepo be a working site or just a coordinator?
 
 ### Option A: Root as Working Site (Simpler)
+
 ```
 local-business-platform/
 ├── app/              # Colossus site code
@@ -155,17 +168,20 @@ local-business-platform/
 ```
 
 **Pros:**
+
 - Simpler initial setup
 - Root is working Colossus site
 - Easy to develop and test
 - Clear reference implementation
 
 **Cons:**
+
 - Mixes coordinator and site code
 - Root package.json has many dependencies
 - Less "pure" monorepo structure
 
 ### Option B: Root as Coordinator (Cleaner)
+
 ```
 local-business-platform/
 ├── package.json      # Minimal, just turbo/pnpm
@@ -177,12 +193,14 @@ local-business-platform/
 ```
 
 **Pros:**
+
 - Clean separation
 - Pure monorepo pattern
 - All sites treated equally
 - Easier to add more sites
 
 **Cons:**
+
 - More refactoring needed now
 - Colossus site moves from root
 - Extra nesting level
