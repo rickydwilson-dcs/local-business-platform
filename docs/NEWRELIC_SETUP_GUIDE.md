@@ -179,7 +179,10 @@ NEW_RELIC_LICENSE_KEY = your_license_key_here
 NEW_RELIC_APP_NAME = colossus-reference
 NEW_RELIC_LOG = stdout
 NEW_RELIC_DISTRIBUTED_TRACING_ENABLED = true
+NEW_RELIC_NO_CONFIG_FILE = true
 ```
+
+**⚠️ CRITICAL:** The `NEW_RELIC_NO_CONFIG_FILE=true` variable is **required** for Vercel deployments. Without it, NewRelic will fail silently and no data will be reported.
 
 ### 6. Update package.json Scripts
 
