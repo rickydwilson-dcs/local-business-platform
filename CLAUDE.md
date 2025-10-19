@@ -76,25 +76,31 @@ git push origin staging  # Skipped develop!
 **Before making ANY changes to this codebase, you MUST read these critical documentation files:**
 
 1. **[WHITE_LABEL_PLATFORM_DESIGN.md](../WHITE_LABEL_PLATFORM_DESIGN.md)** - Complete 8-week implementation plan, business model, architecture decisions
-2. **[WEEK_2_COMPLETE.md](../WEEK_2_COMPLETE.md)** - Week 2 completion report (component versioning, multi-site builds)
-3. **[WEEK_1_COMPLETE.md](../WEEK_1_COMPLETE.md)** - Week 1 completion report (monorepo foundation)
-4. **[TODO.md](../TODO.md)** - Current task list with 8-week roadmap (186+ tasks)
-5. **[ARCHITECTURE.md](../architecture/ARCHITECTURE.md)** - Architectural guidelines for all sites (1,455 lines)
-6. **[CONTENT_VALIDATION.md](../architecture/CONTENT_VALIDATION.md)** - Content validation rules and Zod schemas
-7. **[VERSIONING_WORKFLOW.md](../component-versioning/VERSIONING_WORKFLOW.md)** - Component versioning with Changesets
-8. **[AI_INSTRUCTIONS.md](AI_INSTRUCTIONS.md)** - General AI agent instructions and content accuracy standards
+2. **[WEEK_4_COMPLETE.md](../progress/WEEK_4_COMPLETE.md)** - Week 4 completion report (deployment pipeline, NewRelic monitoring) ⚡️ NEW
+3. **[WEEK_2_COMPLETE.md](../WEEK_2_COMPLETE.md)** - Week 2 completion report (component versioning, multi-site builds)
+4. **[WEEK_1_COMPLETE.md](../WEEK_1_COMPLETE.md)** - Week 1 completion report (monorepo foundation)
+5. **[TODO.md](../TODO.md)** - Current task list with 8-week roadmap
+6. **[ARCHITECTURE.md](../architecture/ARCHITECTURE.md)** - Architectural guidelines for all sites (1,700+ lines)
+7. **[DEPLOYMENT_GUIDE.md](../DEPLOYMENT_GUIDE.md)** - Deployment tools and procedures ⚡️ NEW
+8. **[GITHUB_ACTIONS_GUIDE.md](../GITHUB_ACTIONS_GUIDE.md)** - CI/CD workflow guide ⚡️ NEW
+9. **[NEWRELIC_SETUP_GUIDE.md](../NEWRELIC_SETUP_GUIDE.md)** - APM monitoring setup ⚡️ NEW
+10. **[CONTENT_VALIDATION.md](../architecture/CONTENT_VALIDATION.md)** - Content validation rules and Zod schemas
+11. **[VERSIONING_WORKFLOW.md](../component-versioning/VERSIONING_WORKFLOW.md)** - Component versioning with Changesets
+12. **[AI_INSTRUCTIONS.md](AI_INSTRUCTIONS.md)** - General AI agent instructions and content accuracy standards
 
 **CRITICAL**: These files contain:
 
 - Monorepo structure (Option B - Root as Coordinator)
-- 8-week implementation roadmap (Week 2 complete)
+- 8-week implementation roadmap (Week 4 complete)
 - Build performance targets (<30s per site, 253ms cached)
+- Deployment pipeline (3 tools + GitHub Actions CI/CD)
+- NewRelic APM monitoring ($0/month for 50+ sites)
 - Component versioning workflow (Changesets)
 - Component variant system design (3 Hero variants)
 - MDX-only architecture requirements
 - Content accuracy and truthful claims standards
 - Styling system rules and maintainable classes
-- Deployment configuration (Vercel monorepo)
+- Cloudflare R2 image storage strategy
 
 **Failure to read these files will result in architectural violations and inconsistent implementations across the 50-site platform.**
 
@@ -104,14 +110,17 @@ git push origin staging  # Skipped develop!
 
 **Local Business Platform** - White-label website generation platform for local service businesses (plumbers, gardeners, builders, roofers, scaffolders) targeting South East England.
 
-**Current Status:** Week 2 Complete (Component Versioning & Multi-Site Validation)
+**Current Status:** Week 4 Complete (Deployment Pipeline & Monitoring) ⚡️
 
 - Monorepo with Turborepo + pnpm workspaces
 - 2 sites deployed: colossus-reference (77 pages), joes-plumbing-canterbury (12 pages)
 - Component library: @platform/core-components v1.1.0
   - ✅ **Hero variants implemented:** HeroV1, HeroV2, HeroV3 (fully typed, ready to use)
-  - ⏳ **Service card variants:** Deferred to Week 4+
-  - ⏳ **Contact form variants:** Deferred to Week 4+
+  - ⏳ **Service card variants:** Deferred to Week 5+
+  - ⏳ **Contact form variants:** Deferred to Week 5+
+- Deployment pipeline: 3 CLI tools + GitHub Actions CI/CD
+- Monitoring: NewRelic APM ($0/month for 50+ sites)
+- Image storage: Cloudflare R2 (~$0-1/month)
 - Target: 50 sites by end of Year 1
 - Build time: 44.4s from scratch | 253ms cached (176x faster!) ✅
 
@@ -135,6 +144,11 @@ pnpm clean               # Clean all build artifacts
 pnpm changeset           # Create a new changeset for component changes
 pnpm version-packages    # Bump versions and generate CHANGELOG.md
 pnpm release             # Build and publish packages (if needed)
+
+# Deployment Tools (Week 4) - Run from root directory
+tsx tools/deploy-site.ts colossus-reference --env production  # Deploy single site
+tsx tools/deploy-batch.ts --env production                     # Deploy multiple sites (phased rollout)
+tsx tools/rollback.ts colossus-reference                       # Emergency rollback
 ```
 
 ### Site Commands (In sites/colossus-reference/)

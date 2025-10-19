@@ -31,6 +31,13 @@ Core platform documentation and strategic planning.
   - Multi-site build performance (176x faster with Turborepo cache!)
   - Site customization demonstration
 
+- **[progress/WEEK_4_COMPLETE.md](progress/WEEK_4_COMPLETE.md)** - Week 4 milestone completion report ⚡️ NEW
+  - Complete deployment pipeline (3 tools + GitHub Actions)
+  - NewRelic APM monitoring ($0/month for 50+ sites)
+  - 4,074 lines of production-ready code
+  - $2,880-5,760 cost savings over 3 years
+  - Comprehensive documentation (2,653+ lines)
+
 - **[MONOREPO_STATUS.md](MONOREPO_STATUS.md)** - Current monorepo state and decisions
   - Architecture decision documentation
   - Implementation status
@@ -82,9 +89,37 @@ Development workflow, tools, and procedures for the monorepo.
   - Status check names
   - Verification commands
 
-### 🚀 Deployment
+### 🚀 Deployment & Monitoring (Week 4)
 
-Deployment guides and troubleshooting for Vercel and multi-site monorepo.
+Complete deployment pipeline with automated CI/CD and monitoring.
+
+- **[DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md)** - Deployment tools guide ⚡️ NEW
+  - Single site deployment (deploy-site.ts)
+  - Batch deployment with phased rollout (deploy-batch.ts)
+  - Quick rollback (rollback.ts)
+  - Pre-deployment checklists
+  - Emergency procedures
+  - Troubleshooting guide
+
+- **[GITHUB_ACTIONS_GUIDE.md](GITHUB_ACTIONS_GUIDE.md)** - CI/CD workflow guide ⚡️ NEW
+  - CI workflow (TypeScript, ESLint, Build, Tests)
+  - E2E test workflow (Smoke, Standard, Full)
+  - Deploy workflow (Automated + Manual)
+  - Required secrets configuration
+  - Monitoring and debugging
+
+- **[NEWRELIC_SETUP_GUIDE.md](NEWRELIC_SETUP_GUIDE.md)** - APM monitoring setup ⚡️ NEW
+  - NewRelic installation (Next.js 15)
+  - Configuration for monorepo
+  - Custom instrumentation
+  - Alert setup
+  - Cost optimization ($0/month for 50+ sites)
+
+- **[MONITORING_COMPARISON.md](MONITORING_COMPARISON.md)** - NewRelic vs Sentry ⚡️ NEW
+  - Cost analysis ($2,880-5,760 savings over 3 years)
+  - Feature comparison
+  - Scaling considerations
+  - Recommendation rationale
 
 - **[VERCEL_DEPLOYMENT.md](deployment/VERCEL_DEPLOYMENT.md)** - Vercel deployment guide
   - Monorepo deployment configuration
@@ -298,6 +333,16 @@ See [CLAUDE.md - Documentation Maintenance](ai/CLAUDE.md#documentation-maintenan
 
 ## 📍 Current Status
 
+**Week 4 Milestone:** ✅ COMPLETE (2025-10-19) ⚡️ NEW
+
+- Complete deployment pipeline (deploy-site, deploy-batch, rollback tools)
+- GitHub Actions CI/CD (CI, E2E tests, automated deployment)
+- NewRelic APM monitoring ($0/month for 50+ sites)
+- 4,074 lines of production-ready code written
+- 2,653+ lines of comprehensive documentation
+- $2,880-5,760 cost savings over 3 years (vs Sentry)
+- All deployment tools tested and verified
+
 **Week 2 Milestone:** ✅ COMPLETE (2025-10-12)
 
 - Component versioning system implemented (Changesets)
@@ -314,18 +359,18 @@ See [CLAUDE.md - Documentation Maintenance](ai/CLAUDE.md#documentation-maintenan
 - Turborepo + pnpm workspaces configured
 - Architecture validated (Option B: Root as Coordinator)
 
-**Next Milestone:** Week 3 - Image Storage (Cloudflare R2)
+**Next Milestone:** Week 5 - Scaling to 50 Sites
 
-- Set up R2 bucket
-- Build image processing pipeline (Sharp)
-- Create image intake tool
-- Migrate test images to R2
+- Create additional client sites
+- Batch deployment of all sites
+- Performance optimization at scale
+- Client onboarding automation
 
 See [TODO.md](TODO.md) for complete task list.
 
 ---
 
-**Last Updated:** 2025-10-12
+**Last Updated:** 2025-10-19
 **Maintained by:** Development Team
 **Project:** Local Business Platform - White-Label Website Generation
-**Status:** Week 2 Complete ✅
+**Status:** Week 4 Complete ✅

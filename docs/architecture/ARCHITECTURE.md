@@ -548,6 +548,261 @@ Next.js 15 automatically serves WebP and AVIF formats when browsers support them
 - **Lazy loading**: Images load as user scrolls
 - **1-year caching**: Faster repeat visits
 
+### **☁️ CLOUDFLARE R2 IMAGE STORAGE**
+
+**Storage Strategy:**
+
+We use Cloudflare R2 for image storage instead of Git for several critical reasons:
+
+- ✅ **Cost-effective**: $0.015/GB storage (vs GitHub bandwidth limits)
+- ✅ **Performance**: Global CDN distribution with edge caching
+- ✅ **Scalability**: Unlimited storage without impacting Git repository size
+- ✅ **Repository hygiene**: Keep Git repository lightweight and fast
+- ✅ **Easy management**: Upload/replace images without Git commits
+- ❌ **NO images in Git**: Only placeholder images for development
+- ❌ **NO public directory bloat**: Production images served from R2
+
+**R2 Configuration in next.config.ts:**
+
+```typescript
+// next.config.ts - Cloudflare R2 remote patterns
+images: {
+  remotePatterns: [
+    {
+      protocol: "https",
+      hostname: "**.r2.dev",  // Allow all R2 subdomain buckets
+    },
+    {
+      protocol: "https",
+      hostname: "placehold.co",  // Fallback for development
+    },
+  ],
+  // ... rest of image config
+}
+```
+
+**Environment Variable Configuration:**
+
+Add to `.env.local` (development) and Vercel Dashboard (production):
+
+```bash
+# .env.example - R2 Configuration Section
+# ===== CLOUDFLARE R2 (IMAGE STORAGE) =====
+# R2 public URL for serving images
+# Get from: Cloudflare Dashboard → R2 → Settings → Public Access
+NEXT_PUBLIC_R2_PUBLIC_URL=https://pub-xxxxxxxxxxxx.r2.dev
+```
+
+**R2 Bucket Setup:**
+
+1. **Create R2 Bucket**:
+   - Go to Cloudflare Dashboard → R2
+   - Create new bucket (e.g., `colossus-images`)
+   - Enable public access for image serving
+
+2. **Configure Public Access**:
+   - R2 bucket → Settings → Public Access
+   - Enable "Allow Public Access"
+   - Copy the public URL: `https://pub-xxxxxxxx.r2.dev`
+   - Add to environment variables
+
+3. **Organize Images**:
+   ```
+   R2 Bucket Structure:
+   /hero-images/
+     - Brighton-Scaffolding.png
+     - Canterbury-Scaffolding.png
+   /service-images/
+     - residential-scaffolding.jpg
+     - commercial-scaffolding.jpg
+   /location-images/
+     - brighton-area.jpg
+     - eastbourne-area.jpg
+   /project-gallery/
+     - project-001.jpg
+     - project-002.jpg
+   ```
+
+**Image Usage with R2:**
+
+```tsx
+// ✅ CORRECT - Using R2 URL from environment variable
+import Image from 'next/image';
+
+const r2BaseUrl = process.env.NEXT_PUBLIC_R2_PUBLIC_URL;
+
+// Hero image from R2
+<Image
+  src={`${r2BaseUrl}/hero-images/Brighton-Scaffolding.png`}
+  alt="Professional scaffolding services in Brighton"
+  width={1920}
+  height={1080}
+  quality={80}
+  priority={true}
+  sizes="100vw"
+/>
+
+// Service image from R2
+<Image
+  src={`${r2BaseUrl}/service-images/residential-scaffolding.jpg`}
+  alt="Residential scaffolding installation"
+  width={800}
+  height={600}
+  quality={65}
+  sizes="(max-width: 768px) 100vw, 50vw"
+/>
+
+// ❌ WRONG - Hardcoding R2 URL
+<Image
+  src="https://pub-xxxxxxxx.r2.dev/hero-images/Brighton-Scaffolding.png"
+  // Bad: URL should come from environment variable
+/>
+
+// ✅ FALLBACK - Development placeholder when R2 not configured
+const imageUrl = r2BaseUrl
+  ? `${r2BaseUrl}/hero-images/Brighton-Scaffolding.png`
+  : 'https://placehold.co/1920x1080/3b82f6/ffffff?text=Brighton+Scaffolding';
+
+<Image src={imageUrl} alt="Brighton Scaffolding" ... />
+```
+
+**Image Naming Conventions:**
+
+Follow consistent naming for R2 images:
+
+```bash
+# Location hero images (kebab-case with capitalized location)
+Brighton-Scaffolding.png
+East-Sussex-Scaffolding.png
+West-Sussex-Scaffolding.png
+
+# Service images (kebab-case, descriptive)
+residential-scaffolding.jpg
+commercial-scaffolding.jpg
+industrial-scaffolding.jpg
+
+# Project gallery (numbered for sorting)
+project-001-residential-brighton.jpg
+project-002-commercial-eastbourne.jpg
+project-003-industrial-canterbury.jpg
+
+# Location area images (lowercase with hyphens)
+brighton-area.jpg
+eastbourne-area.jpg
+canterbury-area.jpg
+```
+
+**Uploading Images to R2:**
+
+```bash
+# Option 1: Cloudflare Dashboard (Recommended for initial setup)
+1. Go to Cloudflare Dashboard → R2 → Your Bucket
+2. Click "Upload" and select files
+3. Organize into folders as needed
+
+# Option 2: Wrangler CLI (For batch uploads)
+npm install -g wrangler
+wrangler login
+wrangler r2 object put colossus-images/hero-images/Brighton-Scaffolding.png \
+  --file=./Brighton-Scaffolding.png
+
+# Option 3: S3-compatible API (For automation)
+# Configure AWS CLI with R2 credentials
+# Use S3 commands with R2 endpoint
+```
+
+**Image Replacement Workflow:**
+
+When updating an image:
+
+1. Upload new image to R2 with same filename
+2. R2 automatically serves updated version
+3. No code changes needed
+4. No Git commits required
+5. Cache purges automatically (or wait for TTL)
+
+**Cost Analysis (Year 1 - 50 Sites):**
+
+```
+Storage: 50 sites × 50 images × 500KB = 1.25 GB
+Cost: 1.25 GB × $0.015/GB = $0.019/month
+
+Bandwidth: 50 sites × 1,000 views/month × 50 images × 500KB = 1.25 TB
+Cost: 1.25 TB × $0 (first 10 TB free) = $0/month
+
+Total R2 Cost: ~$0-1/month (effectively free for our scale)
+```
+
+**R2 vs Git Storage Comparison:**
+
+| Aspect              | Cloudflare R2         | Git Storage            |
+| ------------------- | --------------------- | ---------------------- |
+| **Cost**            | $0-1/month            | Included (but slow)    |
+| **Performance**     | Global CDN, instant   | GitHub servers, slower |
+| **Repository size** | Lightweight           | Bloated with images    |
+| **Updates**         | Upload new image      | Commit + push + CI/CD  |
+| **Bandwidth**       | 10 TB free/month      | Limited, metered       |
+| **Scalability**     | Unlimited             | Poor for images        |
+| **Verdict**         | ✅ Use for production | ❌ Development only    |
+
+**Security Considerations:**
+
+- ✅ Public read access enabled for serving images
+- ✅ Write access restricted (no public uploads)
+- ✅ HTTPS enforced automatically
+- ✅ CSP headers allow `*.r2.dev` domain
+- ✅ No API keys needed for public reads
+- ❌ NO sensitive data in image metadata
+
+**Development vs Production:**
+
+```typescript
+// lib/image-url.ts - Helper for image URLs
+export function getImageUrl(path: string): string {
+  const r2BaseUrl = process.env.NEXT_PUBLIC_R2_PUBLIC_URL;
+
+  // Production: Use R2
+  if (r2BaseUrl && process.env.NODE_ENV === 'production') {
+    return `${r2BaseUrl}${path}`;
+  }
+
+  // Development: Use placeholder
+  return `https://placehold.co/1920x1080/3b82f6/ffffff?text=Development+Image`;
+}
+
+// Usage in components
+import { getImageUrl } from '@/lib/image-url';
+
+<Image
+  src={getImageUrl('/hero-images/Brighton-Scaffolding.png')}
+  alt="Brighton Scaffolding"
+  width={1920}
+  height={1080}
+/>
+```
+
+**Troubleshooting:**
+
+| Issue              | Solution                                  |
+| ------------------ | ----------------------------------------- |
+| Images not loading | Check `NEXT_PUBLIC_R2_PUBLIC_URL` is set  |
+| 403 Forbidden      | Enable public access in R2 settings       |
+| 404 Not Found      | Verify image filename and path in R2      |
+| Slow loading       | Check R2 CDN distribution, verify caching |
+| Wrong image serves | Clear browser cache, check filename       |
+
+**Best Practices:**
+
+- ✅ **Always use environment variable** for R2 URL
+- ✅ **Organize images in folders** by category
+- ✅ **Use consistent naming** conventions
+- ✅ **Optimize before upload** (compress, resize)
+- ✅ **Test in development** with placeholder fallbacks
+- ✅ **Document image sources** for content team
+- ❌ **NO hardcoded R2 URLs** in components
+- ❌ **NO unoptimized images** uploaded to R2
+- ❌ **NO inconsistent naming** across sites
+
 ## **⚡ PERFORMANCE OPTIMIZATION STANDARDS**
 
 ### **Critical CSS Inlining**
@@ -1455,3 +1710,206 @@ Any of these files indicate architecture violations and must be corrected immedi
 
 **ENFORCEMENT:**
 These rules are MANDATORY and NON-NEGOTIABLE. The unified MDX-only architecture must be maintained. Any violations must be corrected immediately before proceeding with any other work. The Architecture Discovery Protocol MUST be completed before any implementation begins.
+
+---
+
+## **🚀 DEPLOYMENT & MONITORING (Week 4)**
+
+### **📦 Deployment Pipeline**
+
+**Automated CI/CD with GitHub Actions:**
+
+All sites follow a standardized deployment pipeline with three workflows:
+
+**1. CI Workflow (ci.yml)**
+
+- Runs on every push to develop, staging, main
+- Quality checks: TypeScript + ESLint + Build + Tests
+- Validates content (MDX files, location data)
+- Caches build artifacts for performance
+
+**2. E2E Tests Workflow (e2e-tests.yml)**
+
+- Smoke tests on develop/staging pushes (7 critical tests, ~2 min)
+- Full E2E tests on staging pushes (quality gate before main)
+- Manual trigger for comprehensive testing
+- Uploads test results and videos on failure
+
+**3. Deploy Workflow (deploy.yml)**
+
+- Automated deployment on main push (batch with phased rollout)
+- Manual single-site deployment
+- Pre-deployment checks (TypeScript, lint, build, smoke tests)
+- Post-deployment validation
+- Automatic GitHub issue creation on failure
+
+### **🛠️ Deployment Tools**
+
+**Three CLI tools for deployment management:**
+
+```bash
+# Single site deployment
+tsx tools/deploy-site.ts colossus-reference --env production
+
+# Batch deployment with phased rollout
+tsx tools/deploy-batch.ts --env production
+
+# Quick rollback (< 1 minute)
+tsx tools/rollback.ts colossus-reference
+```
+
+**Phased Rollout Strategy:**
+
+1. **Phase 1:** Canary (colossus-reference) → Wait 5 min → Monitor errors
+2. **Phase 2:** First batch (5 sites) → Wait 10 min → Check performance
+3. **Phase 3:** Second batch (10 sites) → Wait 15 min → Verify stability
+4. **Phase 4:** Remaining sites → Deploy all → Final validation
+
+**Tool Features:**
+
+- ✅ Pre-deployment validation (TypeScript, build, smoke tests)
+- ✅ Dry-run mode for safe testing
+- ✅ Colored console output for clarity
+- ✅ Git status and branch verification
+- ✅ Controlled concurrency (deploy N sites in parallel)
+- ✅ Automatic rollback on failure detection
+
+**Documentation:**
+
+- [Deployment Guide](../DEPLOYMENT_GUIDE.md) - Complete tool usage
+- [GitHub Actions Guide](../GITHUB_ACTIONS_GUIDE.md) - CI/CD workflows
+
+### **📊 Monitoring & Observability**
+
+**NewRelic APM Integration:**
+
+All sites use NewRelic for comprehensive monitoring at $0/month (100 GB free tier).
+
+**What's Monitored:**
+
+- ✅ **Errors:** All JavaScript errors, API errors, server errors
+- ✅ **Performance:** Response times, throughput, slow transactions
+- ✅ **Core Web Vitals:** LCP, FID, CLS (critical for SEO)
+- ✅ **Browser Metrics:** Frontend performance, AJAX calls
+- ✅ **Infrastructure:** Vercel function metrics, memory, CPU
+- ✅ **Transactions:** Request flow through application
+- ✅ **External Calls:** Third-party API performance
+
+**Configuration Required:**
+
+Each site needs these files:
+
+```typescript
+// newrelic.js - Configuration file
+exports.config = {
+  app_name: ["site-name"],
+  license_key: process.env.NEW_RELIC_LICENSE_KEY,
+  logging: { level: "info", filepath: "stdout" },
+  distributed_tracing: { enabled: true },
+  browser_monitoring: { enable: true },
+  error_collector: { enabled: true, ignore_status_codes: [404] },
+};
+
+// instrumentation.ts - Next.js 15 integration
+export async function register() {
+  if (process.env.NEXT_RUNTIME === "nodejs") {
+    await import("newrelic");
+  }
+}
+
+// next.config.ts - Enable instrumentation (Next.js 15.2+)
+const nextConfig: NextConfig = {
+  // Instrumentation is automatic in Next.js 15.2+
+  // Just include instrumentation.ts file
+};
+```
+
+**Environment Variables (Vercel):**
+
+```bash
+NEW_RELIC_LICENSE_KEY=your_license_key
+NEW_RELIC_APP_NAME=site-name
+NEW_RELIC_LOG=stdout
+NEW_RELIC_DISTRIBUTED_TRACING_ENABLED=true
+```
+
+**Cost Efficiency:**
+
+- **NewRelic:** $0/month for 50+ sites (within 100 GB free tier)
+- **Alternative (Sentry):** $80-160/month for same scale
+- **3-Year Savings:** $2,880-5,760
+
+**Documentation:**
+
+- [NewRelic Setup Guide](../NEWRELIC_SETUP_GUIDE.md) - Complete setup
+- [Monitoring Comparison](../MONITORING_COMPARISON.md) - Why NewRelic
+
+### **🔐 Deployment Security**
+
+**Git Workflow:**
+
+- develop → staging → main (protected branches)
+- Branch verification before deployment
+- Git status checks (clean working directory required)
+- Non-destructive rollback (git revert, not force push)
+
+**Environment Variables:**
+
+- License keys via environment variables only
+- Never commit secrets to Git
+- `.env.local` always in `.gitignore`
+- Vercel dashboard for production secrets
+
+**Safety Features:**
+
+- Interactive confirmation for destructive actions
+- Pre-deployment validation catches issues early
+- Automatic rollback on failure detection
+- Post-deployment smoke tests verify success
+- GitHub issues created automatically on failures
+
+### **📈 Scaling Considerations**
+
+**Multi-Site Deployment:**
+
+When deploying to 50+ sites:
+
+1. **Use batch deployment:** Phased rollout minimizes risk
+2. **Monitor NewRelic:** Watch for error spikes after each phase
+3. **Set wait times:** Allow monitoring between phases (5-15 min)
+4. **Controlled concurrency:** Max 5 sites deploying simultaneously
+5. **Rollback plan:** Have rollback command ready if needed
+
+**Performance Targets:**
+
+- Single site deployment: 5-10 minutes (with tests)
+- Batch deployment (50 sites): ~60 minutes total
+- Rollback execution: < 1 minute
+- NewRelic data latency: 1-2 minutes
+
+**Cost Management:**
+
+- NewRelic free tier: 100 GB/month
+- Estimated usage (50 sites): 2.5-5 GB/month
+- Stay within free tier: Monitor usage monthly
+- Optimize if needed: Reduce log forwarding, sample transactions
+
+### **🧪 Testing Requirements (Updated)**
+
+**Before deploying to production:**
+
+- [ ] All existing tests pass (architecture, content, E2E)
+- [ ] NewRelic configured and tested locally
+- [ ] Environment variables added to Vercel
+- [ ] Pre-deployment checks pass (TypeScript, lint, build)
+- [ ] Smoke tests pass (7 critical path tests)
+- [ ] Dry-run deployment successful
+- [ ] Rollback procedure tested (dry-run)
+
+**Post-deployment verification:**
+
+- [ ] Site loads successfully
+- [ ] NewRelic showing data (within 2 minutes)
+- [ ] No error spikes in NewRelic
+- [ ] Core Web Vitals within targets (LCP < 2.5s, CLS < 0.1, FID < 100ms)
+- [ ] All critical paths functional
