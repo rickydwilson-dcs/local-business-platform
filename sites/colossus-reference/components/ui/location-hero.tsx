@@ -109,6 +109,7 @@ export function LocationHero({
                   className="object-cover"
                   priority
                   sizes="(max-width: 768px) 100vw, 50vw"
+                  quality={65}
                 />
               ) : (
                 <div className="absolute inset-0 flex items-center justify-center">
