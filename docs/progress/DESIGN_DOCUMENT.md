@@ -11,6 +11,7 @@
 Building a white-label website generation platform for local service businesses (plumbers, gardeners, builders, roofers, scaffolders) targeting South East England, starting with Eastbourne/Polegate area.
 
 ### Business Model
+
 - **Setup Fee:** £2,000-2,500 per site (one-time)
 - **Maintenance:** £25/month per site
 - **Additional Pages:** £100 each
@@ -19,11 +20,13 @@ Building a white-label website generation platform for local service businesses 
 ### Economics (50 Sites)
 
 **Revenue:**
+
 - Setup fees: £100,000 (one-time)
 - Monthly recurring: £1,250/month (50 × £25)
 - Year 1 total: ~£115,000
 
 **Costs:**
+
 - Vercel Pro: £20/month (all 50 sites under one team!)
 - Cloudflare R2: £10/month (image storage)
 - Claude API: £20/month (content generation)
@@ -31,10 +34,12 @@ Building a white-label website generation platform for local service businesses 
 - **Total: £50-75/month**
 
 **Profit:**
+
 - Monthly: £1,175-1,200 (94-96% margin)
 - Year 1: ~£114,100 net profit
 
 ### Critical Correction
+
 **Initially thought:** Vercel Pro = £20/month per site = £1,000/month for 50 sites
 **Actually:** Vercel Pro = £20/month TOTAL for unlimited projects under one team
 **Impact:** Both architectural options economically viable, chose best technical approach
@@ -50,9 +55,11 @@ All under ONE Vercel Pro team (£20/month), but each site is an independent proj
 ### Why Option B Over Multi-Tenant?
 
 **Codex Recommendation:**
+
 > "Stick with Option B. Even if handoffs never happen, the isolation, phased deployments, and flexibility for bespoke tweaks match a managed-agency workflow far better than a multi-tenant app."
 
 **Key Reasons:**
+
 - ✅ Risk isolation (one site fails, others unaffected)
 - ✅ Phased deployment capability (canary → batches)
 - ✅ Per-site customization without conditional logic
@@ -164,6 +171,7 @@ joes-plumbing-canterbury_comparison_service_boiler-repair_after.jpg
 ```
 
 **Benefits:**
+
 - SEO-friendly (includes business name, keywords)
 - Component identification (know which uses image)
 - Multi-image support (numbered variants)
@@ -188,6 +196,7 @@ Cost: ~£10/month for 50GB
 ```
 
 **Why R2, not Git:**
+
 - Git doesn't scale with binary files
 - Repo would balloon to GB+ size
 - Clone times painful
@@ -236,6 +245,7 @@ npm run images:intake joes-plumbing-canterbury ~/client-images/joe-plumbing/
 ### The Challenge
 
 Multiple competing businesses in same town need unique content:
+
 - 5 plumbers in Canterbury
 - All need "Emergency Plumbing" page
 - Must be unique (SEO + client perception)
@@ -339,6 +349,7 @@ npm run rollback:batch site-1,site-2,site-3,...
 ### Real-World Scenarios
 
 **First Build (All 50 Sites):**
+
 ```bash
 turbo run build
 Time: ~20 minutes
@@ -346,6 +357,7 @@ Frequency: Once (initial setup)
 ```
 
 **Update Component (50 Sites Use It):**
+
 ```bash
 turbo run build --filter='...[HEAD^]'
 Time: ~5 minutes (Turborepo caches unchanged deps)
@@ -353,6 +365,7 @@ Frequency: Weekly
 ```
 
 **Update One Site Content:**
+
 ```bash
 turbo run build --filter=joes-plumbing-canterbury
 Time: ~30 seconds (one site only)
@@ -360,6 +373,7 @@ Frequency: Daily
 ```
 
 **New Variant (10 Sites Opt In):**
+
 ```bash
 turbo run build --filter='{site-1,...,site-10}'
 Time: ~2 minutes (10 sites only)
@@ -421,6 +435,7 @@ Sites can use different component versions:
 ## Implementation Roadmap (8 Weeks)
 
 ### Week 1: Monorepo Foundation
+
 - Set up Vercel Pro team
 - Initialize Turborepo + pnpm workspaces
 - Extract Colossus into core-components
@@ -428,41 +443,48 @@ Sites can use different component versions:
 - Measure build times
 
 ### Week 2: Component Versioning
+
 - Add changesets
 - Create variant system
 - Test version migration
 - 3 variants per major component
 
 ### Week 3: Image Storage (Cloudflare R2)
+
 - Set up R2 bucket
 - Build image processing pipeline (Sharp)
 - Create intake tool
 - Migrate test images
 
 ### Week 4: Deployment Pipeline (CRITICAL)
+
 - Build phased deployment scripts
 - Implement smoke tests
 - Automated rollback
 - Sentry integration
 
 ### Week 5: AI Content Generation
+
 - Claude API integration
 - Service/location generators
 - Internal uniqueness checking
 - Quality validators
 
 ### Week 6: Blog & Projects
+
 - Blog content type
 - Project portfolio type
 - AI generators for both
 
 ### Week 7: Registry & Monitoring
+
 - Supabase site registry
 - Management CLI tools
 - Monitoring dashboard
 - Automated alerts
 
 ### Week 8: Production Launch
+
 - Build industry libraries (plumbing, gardening)
 - End-to-end workflow
 - First real paying client
@@ -555,6 +577,7 @@ npm run deploy joes-plumbing-canterbury
 ## Key Metrics
 
 ### Technical
+
 - Build time: < 5 min (component updates)
 - Build time: < 30 sec (single site)
 - Deployment success: > 99%
@@ -562,6 +585,7 @@ npm run deploy joes-plumbing-canterbury
 - Image optimization: > 90% savings
 
 ### Business
+
 - New client deployment: 30-60 min
 - All sites update: 2-3 hours
 - Weekly maintenance: < 5 hours
@@ -569,6 +593,7 @@ npm run deploy joes-plumbing-canterbury
 - Client satisfaction: Sites feel independent
 
 ### Content Quality
+
 - AI uniqueness: < 70% similarity
 - UK spelling: 100% compliance
 - Tone: Professional but approachable
@@ -579,27 +604,33 @@ npm run deploy joes-plumbing-canterbury
 ## Watch Points (Codex Warnings)
 
 ### 1. Deployment Orchestration (Highest Priority)
+
 **Issue:** 50 sites need robust automation
 
 **Mitigation:**
+
 - Phased deployment pipeline (Week 4)
 - Automated health checks
 - Rollback capability
 - Comprehensive logging
 
 ### 2. Repo Hygiene
+
 **Issue:** Repo size with 50 sites
 
 **Mitigation:**
+
 - Images in R2 (not Git)
 - Aggressive .gitignore
 - Prune dead branches
 - Git LFS if needed later
 
 ### 3. Config Validation
+
 **Issue:** Invalid configs cause runtime errors
 
 **Mitigation:**
+
 - Zod schema validation
 - CI checks before deploy
 - Clear error messages
@@ -609,12 +640,15 @@ npm run deploy joes-plumbing-canterbury
 ## Risks & Mitigation
 
 ### Component Update Breaks Sites
+
 **Mitigation:** Phased deployment, automated rollback, versioning
 
 ### AI Content Quality Issues
+
 **Mitigation:** Automated validators, spot-checks, client review
 
 ### One Person Overwhelmed
+
 **Mitigation:** Heavy automation, clear playbooks, alerts
 
 ---
@@ -622,16 +656,19 @@ npm run deploy joes-plumbing-canterbury
 ## Scaling Path
 
 ### 50 Sites (Current Plan)
+
 - Monorepo works perfectly
 - £70/month costs, £1,180 profit
 - One person manageable
 
 ### 100 Sites
+
 - Consider splitting by industry
 - Same architecture works
 - May need part-time VA
 
 ### 200+ Sites
+
 - Definitely split monorepos
 - Hire support person
 - Build admin UI
@@ -642,22 +679,26 @@ npm run deploy joes-plumbing-canterbury
 ## Technologies
 
 ### Core Stack
+
 - Next.js 15, React 19, TypeScript
 - Tailwind CSS, MDX
 - Turborepo, pnpm
 
 ### Infrastructure
+
 - Vercel (£20/month)
 - Cloudflare R2 (£10/month)
 - Supabase (free tier)
 - Sentry (free tier or £25/month)
 
 ### Content & Images
+
 - Claude API (£20/month)
 - Sharp (image processing)
 - Zod (validation)
 
 ### Development
+
 - Changesets (versioning)
 - Vitest (unit tests)
 - Playwright (E2E tests)
@@ -669,21 +710,17 @@ npm run deploy joes-plumbing-canterbury
 ### If Starting Now:
 
 **Day 1:**
+
 1. Set up Vercel Pro team
 2. Initialize repository
 3. Set up Turborepo
 
-**Day 2:**
-4. Extract Colossus into packages
-5. Create site template
-6. Deploy test site
+**Day 2:** 4. Extract Colossus into packages 5. Create site template 6. Deploy test site
 
-**Day 3:**
-7. Create 2nd test site (plumbing)
-8. Test Turborepo caching
-9. Verify independence
+**Day 3:** 7. Create 2nd test site (plumbing) 8. Test Turborepo caching 9. Verify independence
 
 **Week 2+:**
+
 - Follow 8-week roadmap
 
 ---
