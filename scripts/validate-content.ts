@@ -17,8 +17,7 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath, pathToFileURL } from "url";
 import matter from "gray-matter";
-import { ServiceFrontmatterSchema, LocationFrontmatterSchema } from "../lib/content-schemas";
-import { z } from "zod";
+import { z, ZodSchema } from "zod";
 
 // ANSI color codes for terminal output
 const colors = {
@@ -41,7 +40,7 @@ interface ValidationResult {
  */
 function validateFile(
   filePath: string,
-  schema: typeof ServiceFrontmatterSchema | typeof LocationFrontmatterSchema,
+  schema: ZodSchema,
   type: "service" | "location"
 ): ValidationResult {
   const fileName = path.basename(filePath);
@@ -85,7 +84,7 @@ function validateFile(
  */
 function validateDirectory(
   dirPath: string,
-  schema: typeof ServiceFrontmatterSchema | typeof LocationFrontmatterSchema,
+  schema: ZodSchema,
   type: "service" | "location"
 ): ValidationResult[] {
   const files = fs
@@ -149,13 +148,18 @@ function printResults(results: ValidationResult[], type: string): boolean {
 /**
  * Main execution
  */
-function main() {
+async function main() {
   const args = process.argv.slice(2);
   const mode = args[0] || "all"; // 'all', 'services', or 'locations'
 
   const contentDir = path.join(process.cwd(), "content");
   const servicesDir = path.join(contentDir, "services");
   const locationsDir = path.join(contentDir, "locations");
+
+  // Dynamic import to load content-schemas from the current working directory (the site being validated)
+  // This allows the same validation script to be reused across all sites in the monorepo
+  const schemasPath = path.join(process.cwd(), "lib", "content-schemas");
+  const { ServiceFrontmatterSchema, LocationFrontmatterSchema } = await import(schemasPath);
 
   let allValid = true;
 
@@ -205,7 +209,10 @@ const isMainModule =
   import.meta.url === fileURLToPath(process.argv[1]);
 
 if (isMainModule) {
-  main();
+  main().catch((error) => {
+    console.error(`${colors.red}Error: ${error.message}${colors.reset}`);
+    process.exit(1);
+  });
 }
 
 export { validateFile, validateDirectory };
