@@ -1,12 +1,16 @@
 import { Redis } from "@upstash/redis";
 
 // Initialize Redis client using Upstash-provided environment variables
+// Supports both COL_KV_* (Colossus-specific) and KV_REST_API_* (legacy) naming
 // In test/development environments without Redis, rate limiting is disabled
+const redisUrl = process.env.COL_KV_REST_API_URL || process.env.KV_REST_API_URL;
+const redisToken = process.env.COL_KV_REST_API_TOKEN || process.env.KV_REST_API_TOKEN;
+
 const redis =
-  process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN
+  redisUrl && redisToken
     ? new Redis({
-        url: process.env.KV_REST_API_URL,
-        token: process.env.KV_REST_API_TOKEN,
+        url: redisUrl,
+        token: redisToken,
       })
     : null;
 
