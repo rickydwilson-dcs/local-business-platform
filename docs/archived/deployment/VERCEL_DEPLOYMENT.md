@@ -11,6 +11,7 @@ This monorepo deploys individual sites to Vercel. Each site in `sites/*` can be 
 ### Root Directory
 
 Each Vercel project should be configured with:
+
 - **Root Directory:** `sites/{site-name}` (e.g., `sites/colossus-reference`)
 - **Framework:** Next.js (auto-detected)
 - **Build Command:** Configured via `vercel.json` in each site
@@ -19,6 +20,7 @@ Each Vercel project should be configured with:
 ### Build Configuration
 
 Each site has a `vercel.json` that configures:
+
 ```json
 {
   "buildCommand": "cd ../.. && pnpm turbo run build --filter={site-name}",
@@ -27,6 +29,7 @@ Each site has a `vercel.json` that configures:
 ```
 
 This ensures:
+
 - ✅ Turborepo leverages caching
 - ✅ All workspace dependencies are installed
 - ✅ Only the target site is built
@@ -52,6 +55,7 @@ You may see this warning during deployment:
 #### Why This Appears
 
 pnpm v9+ introduced a security feature that warns about packages with install scripts. The packages listed (esbuild, sharp, unrs-resolver) are:
+
 - ✅ Legitimate packages from npm
 - ✅ Required by Next.js for builds and image optimization
 - ✅ Automatically approved in CI/CD environments
@@ -78,6 +82,7 @@ However, **this is not necessary** - the warning is purely informational.
 ### First Deployment
 
 1. **Create Vercel Project:**
+
    ```bash
    # In Vercel dashboard:
    # - Import from GitHub: local-business-platform
@@ -98,6 +103,7 @@ For each new site:
 4. Connect to same GitHub repository
 
 This allows:
+
 - 50 sites in one monorepo
 - £20/month total (Vercel Pro team)
 - Independent deployments
@@ -130,6 +136,7 @@ This allows:
 ## Performance
 
 Expected build times:
+
 - **First build:** ~30-40s (no cache)
 - **Cached build:** ~10-15s (with Turborepo cache)
 - **Per site:** 77 static pages in ~27s
@@ -139,12 +146,14 @@ Expected build times:
 ## Cost
 
 **Vercel Pro Team:** £20/month
+
 - Unlimited deployments
 - 50 projects (sites)
 - Automatic preview deployments
 - Zero-downtime deployments
 
 **Total infrastructure cost:** ~£50-75/month for 50 sites
+
 - Vercel: £20/month
 - Cloudflare R2: £10/month (Week 3)
 - Sentry: £0-25/month (optional)

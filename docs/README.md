@@ -2,375 +2,167 @@
 
 Complete documentation for the white-label website platform for local service businesses.
 
----
-
-## 📚 Documentation Structure
-
-### 🎯 Platform Overview
-
-Core platform documentation and strategic planning.
-
-- **[WHITE_LABEL_PLATFORM_DESIGN.md](WHITE_LABEL_PLATFORM_DESIGN.md)** - Complete 8-week implementation plan
-  - Business model and economics
-  - Architecture decision (Option B: Monorepo)
-  - Component variant system
-  - Image management strategy
-  - AI content generation
-  - Deployment pipeline
-  - 8-week roadmap
-
-- **[WEEK_1_COMPLETE.md](WEEK_1_COMPLETE.md)** - Week 1 milestone completion report
-  - Monorepo setup achievements
-  - Build performance metrics
-  - Technical accomplishments
-  - Architecture validation
-
-- **[WEEK_2_COMPLETE.md](WEEK_2_COMPLETE.md)** - Week 2 milestone completion report
-  - Component versioning system implementation
-  - Second site deployment (joes-plumbing-canterbury)
-  - Multi-site build performance (176x faster with Turborepo cache!)
-  - Site customization demonstration
-
-- **[progress/WEEK_4_COMPLETE.md](progress/WEEK_4_COMPLETE.md)** - Week 4 milestone completion report ⚡️ NEW
-  - Complete deployment pipeline (3 tools + GitHub Actions)
-  - NewRelic APM monitoring ($0/month for 50+ sites)
-  - 4,074 lines of production-ready code
-  - $2,880-5,760 cost savings over 3 years
-  - Comprehensive documentation (2,653+ lines)
-
-- **[MONOREPO_STATUS.md](MONOREPO_STATUS.md)** - Current monorepo state and decisions
-  - Architecture decision documentation
-  - Implementation status
-  - Remaining work
-  - Next steps
-
-### 🏗️ Architecture
-
-Core architectural guidelines for the reference site (applies to all sites).
-
-- **[ARCHITECTURE.md](architecture/ARCHITECTURE.md)** - Complete architectural guidelines
-  - MDX-only content architecture
-  - Styling system (Tailwind CSS)
-  - Component organization
-  - SEO & schema patterns
-  - Image optimization
-  - Architecture violation detection
-
-- **[CONTENT_VALIDATION.md](architecture/CONTENT_VALIDATION.md)** - Content validation rules
-  - Zod validation schemas
-  - Common validation errors
-  - Troubleshooting guide
-
-### 🔧 Development
-
-Development workflow, tools, and procedures for the monorepo.
-
-- **[DEVELOPMENT.md](development/DEVELOPMENT.md)** - Development workflow
-  - Git workflow & branch structure
-  - Pre-commit/pre-push hooks
-  - Quality gates
-  - CI/CD pipeline
-  - Deployment procedures
-
-- **[GITHUB_SETUP.md](development/GITHUB_SETUP.md)** - GitHub repository configuration
-  - Branch protection rules
-  - GitHub Actions setup
-  - Environment variables
-  - Secrets management
-
-- **[BRANCH_PROTECTION_SETUP.md](development/BRANCH_PROTECTION_SETUP.md)** - Branch protection guide
-  - Complete setup instructions
-  - Required status check names
-  - Legacy check removal guide
-  - Verification commands
-
-- **[BRANCH_PROTECTION_QUICK_REFERENCE.md](development/BRANCH_PROTECTION_QUICK_REFERENCE.md)** - Quick reference
-  - Setup checklist
-  - Status check names
-  - Verification commands
-
-### 🚀 Deployment & Monitoring (Week 4)
-
-Complete deployment pipeline with automated CI/CD and monitoring.
-
-- **[DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md)** - Deployment tools guide ⚡️ NEW
-  - Single site deployment (deploy-site.ts)
-  - Batch deployment with phased rollout (deploy-batch.ts)
-  - Quick rollback (rollback.ts)
-  - Pre-deployment checklists
-  - Emergency procedures
-  - Troubleshooting guide
-
-- **[GITHUB_ACTIONS_GUIDE.md](GITHUB_ACTIONS_GUIDE.md)** - CI/CD workflow guide ⚡️ NEW
-  - CI workflow (TypeScript, ESLint via `eslint .`, Build, Tests)
-  - E2E test workflow (Smoke, Standard, Full)
-  - Deploy workflow (Automated + Manual)
-  - Required secrets configuration
-  - Monitoring and debugging
-
-- **[NEWRELIC_SETUP_GUIDE.md](NEWRELIC_SETUP_GUIDE.md)** - APM monitoring setup ⚡️ NEW
-  - NewRelic installation (Next.js 16)
-  - Configuration for monorepo
-  - Custom instrumentation
-  - Alert setup
-  - Cost optimization ($0/month for 50+ sites)
-
-- **[MONITORING_COMPARISON.md](MONITORING_COMPARISON.md)** - NewRelic vs Sentry ⚡️ NEW
-  - Cost analysis ($2,880-5,760 savings over 3 years)
-  - Feature comparison
-  - Scaling considerations
-  - Recommendation rationale
-
-- **[VERCEL_DEPLOYMENT.md](deployment/VERCEL_DEPLOYMENT.md)** - Vercel deployment guide
-  - Monorepo deployment configuration
-  - Root Directory settings
-  - Build command configuration
-  - Common warnings and fixes
-  - Cost breakdown (£20/month for 50 sites)
-
-### 📦 Component Versioning
-
-Component library versioning workflow using Changesets.
-
-- **[VERSIONING_WORKFLOW.md](component-versioning/VERSIONING_WORKFLOW.md)** - Complete versioning guide
-  - 5-step versioning workflow
-  - Semantic versioning guidelines
-  - Component variant strategy
-  - Site upgrade process
-  - Best practices and troubleshooting
-
-### 🧪 Testing
-
-Testing infrastructure, guidelines, and performance monitoring.
-
-- **[E2E_TESTING_STRATEGY.md](testing/E2E_TESTING_STRATEGY.md)** - Tiered E2E testing strategy ⚡️
-  - Ultra-fast smoke tests
-  - Standard functional tests
-  - Comprehensive tests
-  - Test tier selection guide
-  - CI/CD workflow optimization
-
-- **[E2E_TESTING.md](testing/E2E_TESTING.md)** - End-to-end testing with Playwright
-  - Complete test suite overview
-  - Running tests locally
-  - Writing new tests
-  - Accessibility testing (WCAG 2.1 AA)
-  - Visual regression testing
-
-- **[PERFORMANCE_TESTING.md](testing/PERFORMANCE_TESTING.md)** - Performance testing guide
-  - Core Web Vitals monitoring
-  - Performance thresholds
-  - Lighthouse integration
-  - Performance optimization
-
-- **[PERFORMANCE_TRACKING.md](testing/PERFORMANCE_TRACKING.md)** - Performance tracking
-  - Historical performance data
-  - Trend analysis
-  - Regression detection
-  - Performance reports
-
-### 🤖 AI Guidelines
-
-Documentation for AI agents working with this codebase.
-
-- **[CLAUDE.md](ai/CLAUDE.md)** - Claude Code instructions and guidelines
-  - Mandatory reading list
-  - Development commands
-  - Architecture patterns
-  - Common issues
-  - Documentation maintenance
-
-- **[AI_INSTRUCTIONS.md](ai/AI_INSTRUCTIONS.md)** - General AI agent instructions
-  - Content accuracy standards
-  - Writing style requirements
-  - Implementation guidelines
-
-### 📋 Project Management
-
-- **[TODO.md](TODO.md)** - Current tasks and future planning
-  - Active tasks
-  - Completed milestones
-  - Future planning
+**Last Updated:** 2025-12-05
 
 ---
 
-## 🚀 Quick Start
+## Quick Navigation
+
+### Standards (Rules & Requirements)
+
+Focused reference documents defining how things should be done.
+
+| Standard                              | Description                                  |
+| ------------------------------------- | -------------------------------------------- |
+| [Styling](standards/styling.md)       | Tailwind CSS, maintainable classes           |
+| [Components](standards/components.md) | Component architecture, TypeScript props     |
+| [Content](standards/content.md)       | MDX-only architecture, frontmatter structure |
+| [SEO](standards/seo.md)               | Meta data, keywords, local SEO               |
+| [Images](standards/images.md)         | R2 storage, optimization, naming             |
+| [Schema](standards/schema.md)         | JSON-LD markup requirements                  |
+| [Testing](standards/testing.md)       | Unit tests, E2E tests, coverage              |
+| [Security](standards/security.md)     | Rate limiting, API security, GDPR            |
+| [Analytics](standards/analytics.md)   | Consent management, GA4                      |
+| [Deployment](standards/deployment.md) | CI/CD, monitoring, rollback                  |
+| [Quality](standards/quality.md)       | Quality gates, checklists                    |
+
+### Guides (How-To Procedures)
+
+Step-by-step instructions for common tasks.
+
+| Guide                                          | Purpose                  | Time      |
+| ---------------------------------------------- | ------------------------ | --------- |
+| [Adding a New Site](guides/adding-new-site.md) | Create a new client site | 30-60 min |
+| [Adding a Location](guides/adding-location.md) | Add location MDX file    | 15-20 min |
+| [Adding a Service](guides/adding-service.md)   | Add service MDX file     | 15-20 min |
+| [Deploying a Site](guides/deploying-site.md)   | Deployment procedures    | 10-15 min |
+| [Monitoring Setup](guides/monitoring-setup.md) | NewRelic configuration   | 20-30 min |
+| [GitHub Actions](guides/github-actions.md)     | CI/CD workflow guide     | 15-20 min |
+| [Git Workflow](guides/git-workflow.md)         | Branch workflow          | 5-10 min  |
+
+### Architecture
+
+System design and patterns.
+
+| Document                                                 | Description                               |
+| -------------------------------------------------------- | ----------------------------------------- |
+| [Architecture Overview](architecture/ARCHITECTURE.md)    | High-level architecture, technology stack |
+| [Content Validation](architecture/CONTENT_VALIDATION.md) | Zod validation schemas                    |
+
+### Progress Reports
+
+Weekly completion reports.
+
+| Week                                  | Status   | Focus                   |
+| ------------------------------------- | -------- | ----------------------- |
+| [Week 1](progress/WEEK_1_COMPLETE.md) | Complete | Monorepo foundation     |
+| [Week 2](progress/WEEK_2_COMPLETE.md) | Complete | Component versioning    |
+| [Week 3](progress/WEEK_3_COMPLETE.md) | Complete | Testing infrastructure  |
+| [Week 4](progress/WEEK_4_COMPLETE.md) | Complete | Deployment & monitoring |
+
+---
+
+## Documentation Structure
+
+```
+docs/
+├── standards/           # Standards reference documents
+│   ├── styling.md      # Tailwind, maintainable classes
+│   ├── components.md   # Component architecture
+│   ├── content.md      # MDX-only architecture
+│   ├── seo.md          # SEO requirements
+│   ├── images.md       # Image optimization, R2
+│   ├── schema.md       # JSON-LD markup
+│   ├── testing.md      # Testing standards
+│   ├── security.md     # Security, rate limiting
+│   ├── analytics.md    # Consent, GA4
+│   ├── deployment.md   # CI/CD, monitoring
+│   └── quality.md      # Quality gates
+│
+├── guides/              # How-to guides
+│   ├── adding-new-site.md
+│   ├── adding-location.md
+│   ├── adding-service.md
+│   ├── deploying-site.md
+│   ├── monitoring-setup.md
+│   ├── github-actions.md
+│   └── git-workflow.md
+│
+├── architecture/        # System design
+│   ├── ARCHITECTURE.md  # High-level overview
+│   └── CONTENT_VALIDATION.md
+│
+├── development/         # Development setup
+│   ├── DEVELOPMENT.md
+│   ├── GITHUB_SETUP.md
+│   └── BRANCH_PROTECTION_*.md
+│
+├── component-versioning/
+│   └── VERSIONING_WORKFLOW.md
+│
+├── progress/            # Weekly reports
+│   └── WEEK_*_COMPLETE.md
+│
+├── troubleshooting/     # Issue resolution
+│   └── CORRUPTED_BUILD_CACHE.md
+│
+└── archived/            # Historical docs
+    └── (old files)
+```
+
+---
+
+## Quick Start
 
 ### New to this project?
 
-Read these in order:
-
-1. ✅ [Root README.md](../README.md) - Project overview and monorepo structure
-2. ✅ [WHITE_LABEL_PLATFORM_DESIGN.md](WHITE_LABEL_PLATFORM_DESIGN.md) - Complete platform design
-3. ✅ [WEEK_1_COMPLETE.md](WEEK_1_COMPLETE.md) - Week 1 completion report
-4. ✅ [WEEK_2_COMPLETE.md](WEEK_2_COMPLETE.md) - Week 2 completion report (current)
-5. ✅ [ARCHITECTURE.md](architecture/ARCHITECTURE.md) - Site architecture patterns
-6. ✅ [DEVELOPMENT.md](development/DEVELOPMENT.md) - Development workflow
-
-### Working with AI agents?
-
-- Start with [CLAUDE.md](ai/CLAUDE.md) for Claude Code
-- See [AI_INSTRUCTIONS.md](ai/AI_INSTRUCTIONS.md) for general AI guidelines
+1. [README.md](../README.md) - Project overview
+2. [Architecture Overview](architecture/ARCHITECTURE.md) - System design
+3. [Content Standards](standards/content.md) - MDX architecture
+4. [Quality Standards](standards/quality.md) - Quality gates
 
 ### Building a new site?
 
-1. Review [WHITE_LABEL_PLATFORM_DESIGN.md](WHITE_LABEL_PLATFORM_DESIGN.md) - Component variant system
-2. Check [sites/colossus-reference/](../sites/colossus-reference/) - Reference implementation (77 pages)
-3. Check [sites/joes-plumbing-canterbury/](../sites/joes-plumbing-canterbury/) - Simple plumbing site (12 pages)
-4. See [packages/core-components/](../packages/core-components/) - Shared components (v1.1.0)
-5. Review [VERSIONING_WORKFLOW.md](component-versioning/VERSIONING_WORKFLOW.md) - Component versioning
+1. [Adding a New Site](guides/adding-new-site.md) - Complete guide
+2. [Adding Services](guides/adding-service.md) - Service MDX files
+3. [Adding Locations](guides/adding-location.md) - Location MDX files
 
-### Setting up deployment?
+### Deploying?
 
-- [VERCEL_DEPLOYMENT.md](deployment/VERCEL_DEPLOYMENT.md) - Vercel monorepo deployment
-- [GITHUB_SETUP.md](development/GITHUB_SETUP.md) - Complete GitHub configuration
-- [DEVELOPMENT.md](development/DEVELOPMENT.md) - Deployment procedures
+1. [Git Workflow](guides/git-workflow.md) - Branch workflow
+2. [Deploying a Site](guides/deploying-site.md) - Deployment procedures
+3. [GitHub Actions](guides/github-actions.md) - CI/CD pipeline
 
 ---
 
-## 📝 Documentation Standards
+## Project Statistics
 
-This project follows strict documentation standards:
+### Sites
 
-- ✅ **Always up-to-date** - Documentation is updated with every code change
-- ✅ **Comprehensive** - All features, patterns, and decisions documented
-- ✅ **Example-driven** - Code examples for all patterns
-- ✅ **Cross-referenced** - Links between related documentation
-- ✅ **Organized** - Logical directory structure by topic
-
-See [CLAUDE.md - Documentation Maintenance](ai/CLAUDE.md#documentation-maintenance-mandatory) for detailed documentation update requirements.
-
----
-
-## 🔍 Finding Documentation
-
-### By Topic
-
-- **Platform Strategy:** [WHITE_LABEL_PLATFORM_DESIGN.md](WHITE_LABEL_PLATFORM_DESIGN.md)
-- **Monorepo Status:** [WEEK_2_COMPLETE.md](WEEK_2_COMPLETE.md) + [WEEK_1_COMPLETE.md](WEEK_1_COMPLETE.md) + [MONOREPO_STATUS.md](MONOREPO_STATUS.md)
-- **Architecture & Patterns:** [architecture/](architecture/)
-- **Development Workflow:** [development/](development/)
-- **Deployment:** [deployment/](deployment/)
-- **Component Versioning:** [component-versioning/](component-versioning/)
-- **Testing:** [testing/](testing/)
-- **AI Guidelines:** [ai/](ai/)
-
-### By Task
-
-- **Understanding the platform:** [WHITE_LABEL_PLATFORM_DESIGN.md](WHITE_LABEL_PLATFORM_DESIGN.md)
-- **Setting up development:** [DEVELOPMENT.md](development/DEVELOPMENT.md)
-- **Building sites:** [WEEK_2_COMPLETE.md](WEEK_2_COMPLETE.md) + [WEEK_1_COMPLETE.md](WEEK_1_COMPLETE.md#-final-monorepo-structure)
-- **Running tests:** [E2E_TESTING_STRATEGY.md](testing/E2E_TESTING_STRATEGY.md)
-- **Deploying to Vercel:** [VERCEL_DEPLOYMENT.md](deployment/VERCEL_DEPLOYMENT.md)
-- **Versioning components:** [VERSIONING_WORKFLOW.md](component-versioning/VERSIONING_WORKFLOW.md)
-- **Validating content:** [CONTENT_VALIDATION.md](architecture/CONTENT_VALIDATION.md)
-- **Component variants:** [VERSIONING_WORKFLOW.md](component-versioning/VERSIONING_WORKFLOW.md#component-variant-strategy)
-
----
-
-## 📊 Project Statistics
-
-### Monorepo Structure
-
-- **Workspaces:** 4 (root + core-components + colossus-reference + joes-plumbing-canterbury)
-- **Sites:** 2 deployed (colossus-reference, joes-plumbing-canterbury)
-- **Shared Packages:** 1 (@platform/core-components v1.1.0)
+- **colossus-reference:** 77 pages (25 services + 37 locations)
+- **joes-plumbing-canterbury:** 12 pages (3 services + 3 locations)
 - **Target:** 50 sites by end of Year 1
 
 ### Documentation
 
-- **Documentation Files:** 20+ markdown files
-- **Total Lines:** ~9,000+ lines of documentation
-- **Platform Design:** Complete 8-week roadmap
-- **Week 1 Status:** ✅ Complete
-- **Week 2 Status:** ✅ Complete
+- **Standards:** 11 focused reference documents
+- **Guides:** 7 how-to procedures
+- **Total:** ~3,000+ lines of documentation
 
 ### Build Performance
 
-- **Single site:** 26.88s for 77 pages (Turborepo)
-- **Multi-site from scratch:** 44.4s for 89 pages (2 sites)
-- **Turborepo cache hit:** 253ms (176x faster!)
-- **Pages Generated:** 89 static pages total (77 + 12)
-- **Target for 50 sites:** <5min ✅ (on track)
-
-### Reference Site (colossus-reference)
-
-- **Build Time:** 26.88 seconds
-- **Pages Generated:** 77 static pages
-- **Content Files:** 62 MDX files (25 services + 37 locations)
-- **Test Suite:** 141 unit tests + 92 E2E tests
-- **Code Quality:** ESLint + TypeScript + Pre-commit/push hooks + CI/CD
-
-### Test Site (joes-plumbing-canterbury)
-
-- **Pages Generated:** 12 static pages
-- **Content Files:** 6 MDX files (3 services + 3 locations)
-- **Theme:** Emerald green (vs blue reference site)
-- **Font:** Poppins (vs Inter reference site)
-
-### Platform Economics
-
-- **Setup Fee:** £2,000-2,500 per site
-- **Monthly Fee:** £25 per site
-- **Infrastructure:** £50-75/month total (Vercel Pro + Cloudflare R2 + Claude API)
-- **Target Revenue (50 sites):** £115,000 Year 1
-- **Profit Margin:** 94-96%
+- Fresh build: 44.4s (2 sites)
+- Cached build: 253ms (176x faster)
+- Target for 50 sites: <5min
 
 ---
 
-## 🆘 Getting Help
+## Related Files
 
-- **Platform Questions:** See [WHITE_LABEL_PLATFORM_DESIGN.md](WHITE_LABEL_PLATFORM_DESIGN.md)
-- **Monorepo Setup:** See [WEEK_2_COMPLETE.md](WEEK_2_COMPLETE.md) + [WEEK_1_COMPLETE.md](WEEK_1_COMPLETE.md)
-- **Architecture Questions:** See [ARCHITECTURE.md](architecture/ARCHITECTURE.md)
-- **Build Failures:** See [DEVELOPMENT.md](development/DEVELOPMENT.md)
-- **Deployment Issues:** See [VERCEL_DEPLOYMENT.md](deployment/VERCEL_DEPLOYMENT.md)
-- **Versioning Questions:** See [VERSIONING_WORKFLOW.md](component-versioning/VERSIONING_WORKFLOW.md)
-- **Content Validation:** See [CONTENT_VALIDATION.md](architecture/CONTENT_VALIDATION.md)
-- **Test Issues:** See [E2E_TESTING_STRATEGY.md](testing/E2E_TESTING_STRATEGY.md)
+- [CLAUDE.md](../CLAUDE.md) - AI agent instructions
+- [TODO.md](TODO.md) - Task tracking
+- [WHITE_LABEL_PLATFORM_DESIGN.md](WHITE_LABEL_PLATFORM_DESIGN.md) - Business plan
 
 ---
 
-## 📍 Current Status
-
-**Week 4 Milestone:** ✅ COMPLETE (2025-10-19) ⚡️ NEW
-
-- Complete deployment pipeline (deploy-site, deploy-batch, rollback tools)
-- GitHub Actions CI/CD (CI, E2E tests, automated deployment)
-- NewRelic APM monitoring ($0/month for 50+ sites)
-- 4,074 lines of production-ready code written
-- 2,653+ lines of comprehensive documentation
-- $2,880-5,760 cost savings over 3 years (vs Sentry)
-- All deployment tools tested and verified
-
-**Week 2 Milestone:** ✅ COMPLETE (2025-10-12)
-
-- Component versioning system implemented (Changesets)
-- @platform/core-components v1.1.0 with 3 Hero variants
-- Second site deployed (joes-plumbing-canterbury)
-- Multi-site build performance validated (253ms cached, 176x faster!)
-- Site customization demonstrated (different themes, fonts, styling)
-- Vercel monorepo deployment working perfectly
-
-**Week 1 Milestone:** ✅ COMPLETE (2025-10-11)
-
-- Monorepo foundation established
-- colossus-reference site building successfully (26.88s)
-- Turborepo + pnpm workspaces configured
-- Architecture validated (Option B: Root as Coordinator)
-
-**Next Milestone:** Week 5 - Scaling to 50 Sites
-
-- Create additional client sites
-- Batch deployment of all sites
-- Performance optimization at scale
-- Client onboarding automation
-
-See [TODO.md](TODO.md) for complete task list.
-
----
-
-**Last Updated:** 2025-10-19
-**Maintained by:** Development Team
-**Project:** Local Business Platform - White-Label Website Generation
-**Status:** Week 4 Complete ✅
+**Maintained By:** Digital Consulting Services

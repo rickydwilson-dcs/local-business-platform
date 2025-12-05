@@ -75,34 +75,41 @@ git push origin staging  # Skipped develop!
 
 **Before making ANY changes to this codebase, you MUST read these critical documentation files:**
 
-1. **[WHITE_LABEL_PLATFORM_DESIGN.md](../WHITE_LABEL_PLATFORM_DESIGN.md)** - Complete 8-week implementation plan, business model, architecture decisions
-2. **[WEEK_4_COMPLETE.md](../progress/WEEK_4_COMPLETE.md)** - Week 4 completion report (deployment pipeline, NewRelic monitoring) ⚡️ NEW
-3. **[WEEK_2_COMPLETE.md](../WEEK_2_COMPLETE.md)** - Week 2 completion report (component versioning, multi-site builds)
-4. **[WEEK_1_COMPLETE.md](../WEEK_1_COMPLETE.md)** - Week 1 completion report (monorepo foundation)
-5. **[TODO.md](../TODO.md)** - Current task list with 8-week roadmap
-6. **[ARCHITECTURE.md](../architecture/ARCHITECTURE.md)** - Architectural guidelines for all sites (1,700+ lines)
-7. **[DEPLOYMENT_GUIDE.md](../DEPLOYMENT_GUIDE.md)** - Deployment tools and procedures ⚡️ NEW
-8. **[GITHUB_ACTIONS_GUIDE.md](../GITHUB_ACTIONS_GUIDE.md)** - CI/CD workflow guide ⚡️ NEW
-9. **[NEWRELIC_SETUP_GUIDE.md](../NEWRELIC_SETUP_GUIDE.md)** - APM monitoring setup ⚡️ NEW
-10. **[CONTENT_VALIDATION.md](../architecture/CONTENT_VALIDATION.md)** - Content validation rules and Zod schemas
-11. **[VERSIONING_WORKFLOW.md](../component-versioning/VERSIONING_WORKFLOW.md)** - Component versioning with Changesets
-12. **[AI_INSTRUCTIONS.md](AI_INSTRUCTIONS.md)** - General AI agent instructions and content accuracy standards
+### Architecture & Standards
+
+1. **[docs/architecture/ARCHITECTURE.md](docs/architecture/ARCHITECTURE.md)** - High-level architecture overview
+2. **[docs/standards/](docs/standards/)** - Focused standards reference:
+   - [content.md](docs/standards/content.md) - MDX-only architecture
+   - [styling.md](docs/standards/styling.md) - Tailwind CSS standards
+   - [components.md](docs/standards/components.md) - Component architecture
+   - [quality.md](docs/standards/quality.md) - Quality gates
+   - [testing.md](docs/standards/testing.md) - Testing requirements
+   - [deployment.md](docs/standards/deployment.md) - CI/CD pipeline
+   - [security.md](docs/standards/security.md) - Security standards
+
+### How-To Guides
+
+3. **[docs/guides/](docs/guides/)** - Step-by-step procedures:
+   - [adding-service.md](docs/guides/adding-service.md) - Add service MDX
+   - [adding-location.md](docs/guides/adding-location.md) - Add location MDX
+   - [git-workflow.md](docs/guides/git-workflow.md) - Branch workflow
+   - [deploying-site.md](docs/guides/deploying-site.md) - Deployment
+
+### Progress & Planning
+
+4. **[WHITE_LABEL_PLATFORM_DESIGN.md](WHITE_LABEL_PLATFORM_DESIGN.md)** - Business model, 8-week roadmap
+5. **[docs/progress/WEEK_4_COMPLETE.md](docs/progress/WEEK_4_COMPLETE.md)** - Latest completion report
+6. **[docs/TODO.md](docs/TODO.md)** - Current task list
 
 **CRITICAL**: These files contain:
 
 - Monorepo structure (Option B - Root as Coordinator)
-- 8-week implementation roadmap (Week 4 complete)
-- Build performance targets (<30s per site, 253ms cached)
-- Deployment pipeline (3 tools + GitHub Actions CI/CD)
-- NewRelic APM monitoring ($0/month for 50+ sites)
-- Component versioning workflow (Changesets)
-- Component variant system design (3 Hero variants)
-- MDX-only architecture requirements
-- Content accuracy and truthful claims standards
-- Styling system rules and maintainable classes
-- Cloudflare R2 image storage strategy
+- MDX-only content architecture (62 files)
+- Quality gates and pre-push checks
+- Deployment pipeline (develop → staging → main)
+- Testing requirements (141 unit tests + E2E)
 
-**Failure to read these files will result in architectural violations and inconsistent implementations across the 50-site platform.**
+**Failure to read these files will result in architectural violations.**
 
 ---
 
