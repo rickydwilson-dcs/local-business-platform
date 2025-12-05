@@ -7,7 +7,7 @@
     "dev": "next dev --port 3001",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint .",
     "type-check": "tsc --noEmit",
     "test": "echo 'Skipping tests for joes-plumbing-canterbury (demo site)'",
     "test:e2e": "echo 'Skipping E2E tests for joes-plumbing-canterbury (demo site)'",
@@ -32,6 +32,9 @@
     "zod": "^4.1.11"
   },
   "devDependencies": {
+    "@next/eslint-plugin-next": "^16.0.7",
+    "@typescript-eslint/eslint-plugin": "^8",
+    "@typescript-eslint/parser": "^8",
     "@mdx-js/loader": "^3.1.1",
     "@next/mdx": "^16.0.7",
     "@tailwindcss/typography": "^0.5.16",
@@ -41,7 +44,8 @@
     "@types/react-dom": "^19",
     "autoprefixer": "^10.4.21",
     "eslint": "^9",
-    "eslint-config-next": "16.0.7",
+    "eslint-plugin-react": "^7",
+    "eslint-plugin-react-hooks": "^5",
     "postcss": "^8.5.6",
     "prettier": "^3.6.2",
     "remark-frontmatter": "^5.0.0",
