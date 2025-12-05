@@ -1,6 +1,18 @@
 import { z } from "zod";
 
 /**
+ * Image path schema that supports both:
+ * - Local paths starting with / (e.g., /images/hero.webp)
+ * - R2 CDN paths without leading / (e.g., colossus-reference/hero/location/brighton.webp)
+ */
+const ImagePathSchema = z
+  .string()
+  .refine(
+    (val) => val.startsWith("/") || /^[\w-]+\//.test(val),
+    "Image path must start with / (local) or be a valid R2 path (site-name/...)"
+  );
+
+/**
  * Shared schemas used across different content types
  */
 const FaqSchema = z.object({
@@ -50,7 +62,7 @@ export const ServiceFrontmatterSchema = z.object({
     .object({
       heading: z.string().min(5, "Hero heading is required").optional(),
       subheading: z.string().min(10, "Hero subheading is required").optional(),
-      image: z.string().startsWith("/", "Hero image path must start with /"),
+      image: ImagePathSchema,
       cta: HeroCtaSchema.optional(),
     })
     .optional(),
@@ -83,11 +95,9 @@ export const ServiceFrontmatterSchema = z.object({
     })
     .optional(),
 
-  heroImage: z.string().startsWith("/", "Hero image path must start with /").optional(),
+  heroImage: ImagePathSchema.optional(),
 
-  galleryImages: z
-    .array(z.string().startsWith("/", "Gallery image paths must start with /"))
-    .optional(),
+  galleryImages: z.array(ImagePathSchema).optional(),
 
   businessHours: z
     .object({
@@ -135,7 +145,7 @@ export const LocationFrontmatterSchema = z.object({
     .min(3, "At least 3 keywords required")
     .optional(),
 
-  heroImage: z.string().startsWith("/", "Hero image path must start with /").optional(),
+  heroImage: ImagePathSchema.optional(),
 
   hero: z.object({
     title: z.string().min(5, "Hero title is required"),
