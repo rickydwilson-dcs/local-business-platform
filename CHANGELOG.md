@@ -6,6 +6,53 @@ Complete project history and achievements organized by development phase.
 
 ## 📅 Recent Changes
 
+### **2025-12-05 - Next.js 16.0.7 Upgrade & Build System Modernization**
+
+**Added:**
+
+- ✅ **Next.js 16.0.7** - Upgraded from 15.5.2 (major version bump)
+- ✅ **Turbopack Default Bundler** - Next.js 16 now uses Turbopack by default for faster builds
+- ✅ **Modern ESLint Flat Config** - Replaced eslint-config-next with native ESLint 9 flat config
+- ✅ **ESLint Plugins** - Added @next/eslint-plugin-next, @typescript-eslint/_, eslint-plugin-react_
+- ✅ **Build Dependencies** - Added @emotion/react, @react-email/render to fix build errors
+
+**Changed:**
+
+- ✅ **MDX Plugin Format** - Changed from function imports to string format for Turbopack serialization:
+  - Before: `remarkPlugins: [remarkGfm, remarkFrontmatter]`
+  - After: `remarkPlugins: ["remark-gfm", "remark-frontmatter"]`
+- ✅ **Lint Script** - Changed from `next lint` (removed in Next.js 16) to `eslint .`
+- ✅ **ESLint Configuration** - Complete migration from eslint-config-next to flat config system
+
+**Removed:**
+
+- ❌ **eslint-config-next** - Incompatible with ESLint 9 flat config
+- ❌ **Deprecated Experimental Options** - Removed mdxRs, forceSwcTransforms from next.config.ts
+
+**Impact:**
+
+- **Turbopack Faster Builds** - Default bundler provides improved build performance
+- **Modern ESLint** - Native flat config eliminates compatibility issues
+- **Better Type Safety** - Updated TypeScript definitions from Next.js 16
+- **Serialization Compatible** - MDX string format prevents Turbopack serialization errors
+- **All Sites Updated** - colossus-reference, joes-plumbing-canterbury, and packages/core-components
+
+**Sites Affected:**
+
+- ✅ sites/colossus-reference
+- ✅ sites/joes-plumbing-canterbury
+- ✅ packages/core-components
+
+**Files Changed:**
+
+- Modified: `sites/*/package.json` (Next.js 16.0.7, ESLint deps, lint script)
+- Modified: `sites/*/next.config.ts` (MDX plugin strings, removed deprecated options)
+- Created: `sites/*/eslint.config.mjs` (flat config with @next/eslint-plugin-next)
+- Removed: `sites/*/.eslintrc.json` (replaced by flat config)
+- Modified: All documentation files with version references
+
+---
+
 ### **2025-10-10 - Phase 2: Tiered E2E Testing Strategy Implementation**
 
 **Added:**

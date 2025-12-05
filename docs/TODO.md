@@ -2,8 +2,23 @@
 
 Outstanding tasks organized by 8-week implementation roadmap. Updated as tasks complete.
 
-**Last Updated:** 2025-10-19
+**Last Updated:** 2025-12-05
 **Current Phase:** Week 4 Complete / Week 5 Starting
+
+---
+
+## ✅ Infrastructure Updates (Ongoing)
+
+### Next.js 16 Upgrade (COMPLETE - 2025-12-05)
+
+- [x] Upgrade Next.js from 15.5.2 to 16.0.7
+- [x] Update all sites to use Turbopack (default bundler)
+- [x] Migrate MDX plugins to string format for Turbopack serialization
+- [x] Replace eslint-config-next with ESLint flat config
+- [x] Update lint scripts from `next lint` to `eslint .`
+- [x] Add required build dependencies (@emotion/react, @react-email/render)
+- [x] Remove deprecated experimental options (mdxRs, forceSwcTransforms)
+- [x] Update documentation to reflect Next.js 16 changes
 
 ---
 

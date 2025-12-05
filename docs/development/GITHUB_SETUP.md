@@ -102,6 +102,7 @@ gh run view --web         # Open in browser
 1. Stop immediately - do not proceed to staging/production
 2. Check error logs: `gh run view` or visit Actions tab
 3. Reproduce locally: `npm ci && npm run lint && npm run type-check && npm test && npm run build`
+   - Note: `npm run lint` uses `eslint .` (Next.js 16 removed `next lint` command)
 4. Fix the issue and push again
 5. Wait for CI to pass ✅ before proceeding
 
@@ -225,7 +226,7 @@ Create `PUSH_CHECKLIST.md`:
 - [ ] Local testing completed
 - [ ] TypeScript check passes (`npm run type-check`)
 - [ ] Build test passes (`npm run build`)
-- [ ] ESLint check passes (`npm run lint`)
+- [ ] ESLint check passes (`npm run lint` - uses `eslint .` in Next.js 16)
 - [ ] Development environment tested
 
 ### Staging to Production

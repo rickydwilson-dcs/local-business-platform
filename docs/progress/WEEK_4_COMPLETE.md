@@ -97,7 +97,7 @@ Week 4 goal was to build a **complete deployment pipeline** for scaling from 2 s
 - Automated deployment on `main` push
 - Manual single-site deployment
 - Manual batch deployment
-- Pre-deployment checks (TypeScript, lint, build, tests)
+- Pre-deployment checks (TypeScript, lint via `eslint .`, build, tests)
 - Post-deployment validation
 - Automatic GitHub issue creation on failure
 - Dry-run mode for testing

@@ -201,9 +201,9 @@ Modify your `package.json` to load NewRelic agent on startup:
 
 **Important:** The `NODE_OPTIONS='-r newrelic'` flag loads the NewRelic agent before Next.js starts.
 
-### 7. Create Instrumentation File (Next.js 15+)
+### 7. Create Instrumentation File (Next.js 15+/16)
 
-For Next.js 15 with App Router, create `instrumentation.ts` in the site root:
+For Next.js 15+ with App Router, create `instrumentation.ts` in the site root:
 
 ```typescript
 // sites/colossus-reference/instrumentation.ts
@@ -819,7 +819,7 @@ Use this checklist when adding NewRelic to a new site:
 - [ ] Get license key from account settings
 - [ ] Install `newrelic` package: `pnpm add newrelic`
 - [ ] Create `newrelic.js` config file
-- [ ] Create `instrumentation.ts` file (Next.js 15+)
+- [ ] Create `instrumentation.ts` file (Next.js 15+/16)
 - [ ] Add environment variables to `.env.local`
 - [ ] Update `package.json` scripts with `NODE_OPTIONS`
 - [ ] Test locally with `pnpm dev`

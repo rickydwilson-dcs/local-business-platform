@@ -252,9 +252,9 @@ You were absolutely right to choose Option B (clean refactor now) over Option A 
 
 When moving code between directories, import paths need careful attention. The `@/` alias is relative to the package root, not the monorepo root.
 
-### 3. Async Functions in Next.js 15
+### 3. Async Functions in Next.js 15+
 
-Next.js 15 requires proper async/await for data fetching functions like sitemap generation. Old synchronous patterns don't work.
+Next.js 15+ requires proper async/await for data fetching functions like sitemap generation. Old synchronous patterns don't work. (Note: Project upgraded to Next.js 16 in December 2025)
 
 ### 4. Type Definitions Matter
 

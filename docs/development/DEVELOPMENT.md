@@ -68,7 +68,7 @@ git pull origin develop
 
 **Pre-commit hooks (automatic on every commit):**
 
-- **ESLint** - Code linting and fixes
+- **ESLint** - Code linting and fixes (via `eslint .` - Next.js 16 removed `next lint`)
 - **Prettier** - Code formatting
 - ⚠️ **Note**: TypeScript errors are NOT caught at commit time
 
@@ -89,7 +89,7 @@ git pull origin develop
 | `staging` | Smoke + Standard | ~3-4min  | Quality Checks, Smoke Tests, Standard E2E     |
 | `main`    | None (verified)  | ~2min    | Quality Checks only (staging is quality gate) |
 
-- **Quality Checks** - ESLint, TypeScript, Tests, Content Validation, Build
+- **Quality Checks** - ESLint (via `eslint .`), TypeScript, Tests, Content Validation, Build
 - **Smoke Tests (Fast)** - 7 ultra-fast page load tests (develop/staging only)
 - **Standard E2E Tests (Auto)** - 51 functional tests (staging only - final quality gate)
 

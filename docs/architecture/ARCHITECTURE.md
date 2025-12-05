@@ -442,7 +442,7 @@ description: "Professional [service] in [location] - [key benefits]. [Credential
 
 ### **🖼️ IMAGE OPTIMIZATION STANDARDS**
 
-**Next.js 15 Image Configuration:**
+**Next.js 16 Image Configuration:**
 
 Our `next.config.ts` includes optimized image settings for the scaffolding business:
 
@@ -521,12 +521,13 @@ import { getImageQuality, scaffoldingImageConfig } from '@/lib/image-config';
 
 **Modern Format Support:**
 
-Next.js 15 automatically serves WebP and AVIF formats when browsers support them:
+Next.js 16 automatically serves WebP and AVIF formats when browsers support them:
 
 - ✅ **WebP**: ~25-35% smaller than JPEG with same quality
 - ✅ **AVIF**: ~50% smaller than JPEG with better quality
 - ✅ **Automatic fallback**: JPEG for unsupported browsers
 - ✅ **Progressive loading**: Built-in blur placeholders
+- ✅ **Turbopack**: Default bundler in Next.js 16 for faster builds
 
 **Image Optimization Rules:**
 
@@ -855,18 +856,37 @@ return (
 - **Trade-off**: ~2KB additional inline CSS for faster initial render
 - **Benefit**: Above-the-fold content styled immediately without CSS blocking
 
-### **Modern Browser Targeting**
+### **Next.js 16 Configuration & Modern Browser Targeting**
 
-**Build Optimization Strategy**: Target modern browsers (ES2022) to eliminate unnecessary JavaScript polyfills and reduce bundle size.
+**Next.js 16 Upgrade (December 2025):**
+
+We've upgraded from Next.js 15.5.2 to 16.0.7, bringing Turbopack as the default bundler and modern tooling improvements.
+
+**Key Changes in Next.js 16:**
+
+- ✅ **Turbopack Default**: Faster builds with Turbopack as default bundler
+- ✅ **MDX Plugin Serialization**: Plugins must be strings for Turbopack compatibility
+- ✅ **ESLint Flat Config**: Migrated from eslint-config-next to native flat config
+- ❌ **Removed**: `next lint` command (replaced with `eslint .`)
+- ❌ **Removed**: `mdxRs` and `forceSwcTransforms` experimental options
 
 **Modern Browser Configuration:**
 
 ```typescript
-// next.config.ts - Modern browser targeting
-const nextConfig: NextConfig = {
-  experimental: {
-    forceSwcTransforms: true, // Force SWC for all transforms
+// next.config.ts - Next.js 16 with modern browser targeting
+import createMDXPlugin from "@next/mdx";
+
+const withMDX = createMDXPlugin({
+  extension: /\.mdx?$/,
+  options: {
+    // IMPORTANT: Next.js 16 requires string format for Turbopack serialization
+    remarkPlugins: ["remark-gfm", "remark-frontmatter"],
+    rehypePlugins: [],
   },
+});
+
+const nextConfig: NextConfig = {
+  pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
   compiler: {
     removeConsole: process.env.NODE_ENV === "production",
     emotion: false,
@@ -879,6 +899,39 @@ const nextConfig: NextConfig = {
     return config;
   },
 };
+
+export default withMDX(nextConfig);
+```
+
+**ESLint Configuration (Next.js 16):**
+
+```javascript
+// eslint.config.mjs - ESLint 9 flat config
+import { FlatCompat } from "@eslint/eslintrc";
+import js from "@eslint/js";
+import typescriptPlugin from "@typescript-eslint/eslint-plugin";
+import typescriptParser from "@typescript-eslint/parser";
+import nextPlugin from "@next/eslint-plugin-next";
+
+const compat = new FlatCompat({
+  baseDirectory: import.meta.dirname,
+});
+
+const config = [
+  js.configs.recommended,
+  ...compat.extends("plugin:@typescript-eslint/recommended"),
+  {
+    plugins: {
+      "@next/next": nextPlugin,
+    },
+    rules: {
+      ...nextPlugin.configs.recommended.rules,
+      ...nextPlugin.configs["core-web-vitals"].rules,
+    },
+  },
+];
+
+export default config;
 ```
 
 **Browserslist Configuration:**

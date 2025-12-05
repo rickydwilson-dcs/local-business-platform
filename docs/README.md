@@ -102,14 +102,14 @@ Complete deployment pipeline with automated CI/CD and monitoring.
   - Troubleshooting guide
 
 - **[GITHUB_ACTIONS_GUIDE.md](GITHUB_ACTIONS_GUIDE.md)** - CI/CD workflow guide ⚡️ NEW
-  - CI workflow (TypeScript, ESLint, Build, Tests)
+  - CI workflow (TypeScript, ESLint via `eslint .`, Build, Tests)
   - E2E test workflow (Smoke, Standard, Full)
   - Deploy workflow (Automated + Manual)
   - Required secrets configuration
   - Monitoring and debugging
 
 - **[NEWRELIC_SETUP_GUIDE.md](NEWRELIC_SETUP_GUIDE.md)** - APM monitoring setup ⚡️ NEW
-  - NewRelic installation (Next.js 15)
+  - NewRelic installation (Next.js 16)
   - Configuration for monorepo
   - Custom instrumentation
   - Alert setup
