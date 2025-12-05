@@ -6,6 +6,31 @@ Complete project history and achievements organized by development phase.
 
 ## 📅 Recent Changes
 
+### **2025-12-05 - SECURITY: React 19.1.2 (CVE-2025-55182)**
+
+**🔒 Critical Security Fix:**
+
+- ✅ **React 19.1.2** - Upgraded from 19.1.0 to patch CVE-2025-55182
+- ✅ **Remote Code Execution Fix** - Patched critical vulnerability in React Server Components (CVSS 10.0)
+- ✅ **All Packages Updated** - colossus-reference, joes-plumbing-canterbury, core-components
+
+**Vulnerability Details:**
+
+- **CVE:** CVE-2025-55182
+- **CVSS Score:** 10.0 (Critical)
+- **Impact:** Unauthenticated remote code execution via React Server Components
+- **Affected Versions:** React 19.0, 19.1.0, 19.1.1, 19.2.0
+- **Fixed In:** React 19.1.2
+
+**Files Changed:**
+
+- Modified: `sites/colossus-reference/package.json`
+- Modified: `sites/joes-plumbing-canterbury/package.json`
+- Modified: `packages/core-components/package.json`
+- Modified: `pnpm-lock.yaml`
+
+---
+
 ### **2025-12-05 - Next.js 16.0.7 Upgrade & Build System Modernization**
 
 **Added:**
