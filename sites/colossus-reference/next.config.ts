@@ -1,11 +1,10 @@
 import createMDX from "@next/mdx";
-import remarkGfm from "remark-gfm";
-import remarkFrontmatter from "remark-frontmatter";
 import type { NextConfig } from "next";
 
+// Next.js 16 with Turbopack requires plugins as strings (not imported functions)
 const withMDX = createMDX({
   options: {
-    remarkPlugins: [remarkGfm, remarkFrontmatter],
+    remarkPlugins: ["remark-gfm", "remark-frontmatter"],
     rehypePlugins: [],
   },
 });
@@ -14,18 +13,13 @@ const nextConfig: NextConfig = {
   pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
   // Enable experimental features for better performance
   experimental: {
-    mdxRs: true, // Use Rust-based MDX compiler for better performance
-    // Modern browser optimizations
-    forceSwcTransforms: true, // Force SWC for all transforms
+    // Note: mdxRs and forceSwcTransforms removed for Next.js 16 compatibility
     swcTraceProfiling: false, // Disable profiling in production
   },
   // Compiler optimizations for modern browsers
   compiler: {
     // Remove console.log in production
     removeConsole: process.env.NODE_ENV === "production",
-    // Additional SWC optimizations
-    emotion: false, // Disable emotion if not used
-    styledComponents: false, // Disable styled-components if not used
   },
   // Webpack configuration for modern browsers and optimizations
   webpack: (config, { isServer, dev }) => {
