@@ -26,7 +26,7 @@ We have four main workflows:
 
 **What It Does:**
 
-1. ✅ Runs ESLint (code quality)
+1. ✅ Runs ESLint (code quality via `eslint .` - Next.js 16 removed `next lint`)
 2. ✅ Runs TypeScript type checking
 3. ✅ Validates content (MDX files, location data)
 4. ✅ Runs unit tests
@@ -56,7 +56,7 @@ We have four main workflows:
 
 **Fix Failures:**
 
-- **ESLint errors:** Run `pnpm run lint` locally, fix issues
+- **ESLint errors:** Run `pnpm run lint` locally (uses `eslint .` in Next.js 16), fix issues
 - **TypeScript errors:** Run `pnpm run type-check`, fix type issues
 - **Content errors:** Run `pnpm --filter colossus-reference run validate:content`
 - **Build errors:** Run `pnpm run build` and debug

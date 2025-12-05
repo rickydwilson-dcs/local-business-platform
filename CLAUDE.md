@@ -157,7 +157,7 @@ tsx tools/rollback.ts colossus-reference                       # Emergency rollb
 pnpm dev                 # Start development server (localhost:3000)
 pnpm build               # Production build for this site
 pnpm type-check          # TypeScript validation for this site
-pnpm lint                # ESLint validation for this site
+pnpm lint                # ESLint validation (via eslint . - Next.js 16 removed next lint)
 ```
 
 ### Testing (In sites/colossus-reference/)
@@ -368,6 +368,7 @@ gh run view --web         # Open in browser
 1. Stop immediately - do not proceed to staging/production
 2. Check error logs: `gh run view` or visit Actions tab
 3. Reproduce locally: `npm ci && npm run lint && npm run type-check && npm test && npm run build`
+   - Note: `npm run lint` uses `eslint .` (Next.js 16 removed `next lint` command)
 4. Fix the issue and push again
 5. Wait for CI to pass ✅ before proceeding
 

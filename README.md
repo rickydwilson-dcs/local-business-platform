@@ -59,7 +59,7 @@ local-business-platform/
 │
 ├── sites/                        # 50 separate Vercel projects
 │   ├── colossus-reference/       # Scaffolding business (77 pages)
-│   │   ├── app/                  # Next.js 15 app directory
+│   │   ├── app/                  # Next.js 16 app directory
 │   │   ├── components/           # Site-specific components
 │   │   ├── lib/                  # Site-specific utilities
 │   │   ├── content/              # MDX content (62 files)
@@ -71,7 +71,7 @@ local-business-platform/
 │   │   └── tsconfig.json         # TypeScript configuration
 │   │
 │   └── joes-plumbing-canterbury/ # Plumbing business (12 pages)
-│       ├── app/                  # Next.js 15 app directory
+│       ├── app/                  # Next.js 16 app directory
 │       ├── components/           # Navigation, etc
 │       ├── lib/                  # Content utilities
 │       ├── content/              # Services & locations
@@ -416,7 +416,7 @@ pnpm deploy:batch                 # Phased deployment (all sites)
 
 **Core Stack:**
 
-- Next.js 15 (App Router)
+- Next.js 16 (App Router with Turbopack)
 - React 19
 - TypeScript (Strict mode)
 - Tailwind CSS
@@ -424,6 +424,7 @@ pnpm deploy:batch                 # Phased deployment (all sites)
 
 **Build System:**
 
+- Turbopack (default in Next.js 16 - faster builds)
 - Turborepo (caching & orchestration)
 - pnpm workspaces (dependency management)
 - SWC (Fast compilation)
