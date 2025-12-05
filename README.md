@@ -416,8 +416,8 @@ pnpm deploy:batch                 # Phased deployment (all sites)
 
 **Core Stack:**
 
-- Next.js 16 (App Router with Turbopack)
-- React 19
+- Next.js 16.0.7 (App Router with Turbopack)
+- React 19.1.2 (patched for CVE-2025-55182)
 - TypeScript (Strict mode)
 - Tailwind CSS
 - MDX (Content)
