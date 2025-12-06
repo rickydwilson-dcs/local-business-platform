@@ -10,8 +10,8 @@
     "./lib/*": "./src/lib/*.ts"
   },
   "scripts": {
-    "lint": "echo 'Skipping lint for core-components (Week 2 task)'",
-    "type-check": "echo 'Skipping type-check for core-components (Week 2 task)'"
+    "lint": "eslint src/",
+    "type-check": "echo 'Type-check runs in consuming sites (uses @/ path aliases)'"
   },
   "keywords": [
     "components",
@@ -38,6 +38,11 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@typescript-eslint/eslint-plugin": "^8.48.1",
+    "@typescript-eslint/parser": "^8.48.1",
+    "eslint": "^9.37.0",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^5.2.0",
     "typescript": "^5"
   }
 }
