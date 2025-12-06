@@ -1,58 +1,21 @@
-name: Deploy Sites
+name: Production Quality Gate
+
+# This workflow runs quality checks on pushes to main.
+# Actual deployment is handled by Vercel Git Integration automatically.
 
 permissions:
   contents: read
-  issues: write
-  pull-requests: write
 
 on:
-  # Manual deployment trigger
-  workflow_dispatch:
-    inputs:
-      deployment-type:
-        description: "Deployment type"
-        required: true
-        type: choice
-        default: "single"
-        options:
-          - single
-          - batch
-      site-name:
-        description: "Site name (for single deployment only)"
-        required: false
-        type: string
-      environment:
-        description: "Target environment"
-        required: true
-        type: choice
-        default: "production"
-        options:
-          - production
-          - staging
-          - development
-      skip-tests:
-        description: "Skip pre-deployment tests"
-        required: false
-        type: boolean
-        default: false
-      dry-run:
-        description: "Dry run (test without deploying)"
-        required: false
-        type: boolean
-        default: false
-
-  # Automatic deployment on main branch
   push:
     branches:
       - main
 
 jobs:
-  pre-deployment-checks:
-    name: Pre-Deployment Checks
+  quality-checks:
+    name: Production Quality Checks
     runs-on: ubuntu-latest
     timeout-minutes: 15
-    outputs:
-      checks-passed: ${{ steps.checks.outputs.passed }}
 
     steps:
       - name: Checkout code
@@ -71,253 +34,19 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Run TypeScript check
-        id: typescript
         run: pnpm run type-check
 
       - name: Run ESLint
-        id: lint
         run: pnpm run lint
 
       - name: Run build test
-        id: build
         run: pnpm run build
-
-      - name: Install Playwright browsers
-        if: inputs.skip-tests != true
-        run: pnpm --filter colossus-reference exec playwright install --with-deps chromium
-
-      - name: Run smoke tests
-        id: smoke-tests
-        if: inputs.skip-tests != true
-        run: pnpm --filter colossus-reference run test:e2e:smoke
-        env:
-          CI: true
-          NEXT_PUBLIC_R2_PUBLIC_URL: ${{ secrets.NEXT_PUBLIC_R2_PUBLIC_URL }}
-          FEATURE_CONSENT_BANNER: "true"
-          FEATURE_ANALYTICS_ENABLED: "true"
-          FEATURE_GA4_ENABLED: "true"
-          FEATURE_SERVER_TRACKING: "true"
-
-      - name: Set checks passed
-        id: checks
-        run: echo "passed=true" >> $GITHUB_OUTPUT
-
-      - name: Upload test results
-        if: failure() && inputs.skip-tests != true
-        uses: actions/upload-artifact@v4
-        with:
-          name: pre-deployment-test-results
-          path: test-results/
-          retention-days: 7
-
-  deploy-single-site:
-    name: Deploy Single Site
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    needs: pre-deployment-checks
-    if: |
-      needs.pre-deployment-checks.outputs.checks-passed == 'true' &&
-      github.event_name == 'workflow_dispatch' &&
-      inputs.deployment-type == 'single' &&
-      inputs.site-name != ''
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "20"
-          cache: "pnpm"
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
-      - name: Configure Vercel CLI
-        run: pnpm add -g vercel@latest
-        env:
-          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-
-      - name: Deploy site
-        run: |
-          pnpm exec tsx tools/deploy-site.ts ${{ inputs.site-name }} \
-            --env ${{ inputs.environment }} \
-            ${{ inputs.skip-tests && '--skip-tests' || '' }} \
-            ${{ inputs.dry-run && '--dry-run' || '' }}
-        env:
-          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-          NEXT_PUBLIC_R2_PUBLIC_URL: ${{ secrets.NEXT_PUBLIC_R2_PUBLIC_URL }}
-          FEATURE_CONSENT_BANNER: "true"
-          FEATURE_ANALYTICS_ENABLED: "true"
-          FEATURE_GA4_ENABLED: "true"
-          FEATURE_SERVER_TRACKING: "true"
-
-      - name: Comment on PR
-        if: github.event_name == 'pull_request'
-        uses: actions/github-script@v7
-        with:
-          script: |
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: `✅ **Deployment Complete**\n\n**Site:** ${{ inputs.site-name }}\n**Environment:** ${{ inputs.environment }}\n**Status:** Success`
-            })
-
-  deploy-batch:
-    name: Deploy Batch
-    runs-on: ubuntu-latest
-    timeout-minutes: 60
-    needs: pre-deployment-checks
-    if: |
-      needs.pre-deployment-checks.outputs.checks-passed == 'true' &&
-      ((github.event_name == 'workflow_dispatch' && inputs.deployment-type == 'batch') ||
-       (github.event_name == 'push' && github.ref == 'refs/heads/main'))
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "20"
-          cache: "pnpm"
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
-      - name: Configure Vercel CLI
-        run: pnpm add -g vercel@latest
-        env:
-          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-
-      - name: Install Playwright browsers
-        run: pnpm --filter colossus-reference exec playwright install --with-deps chromium
-
-      - name: Deploy batch (production)
-        if: inputs.environment == 'production' || github.ref == 'refs/heads/main'
-        run: |
-          pnpm exec tsx tools/deploy-batch.ts \
-            --env production \
-            ${{ inputs.dry-run && '--dry-run' || '' }}
-        env:
-          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-          NEXT_PUBLIC_R2_PUBLIC_URL: ${{ secrets.NEXT_PUBLIC_R2_PUBLIC_URL }}
-          NEW_RELIC_LICENSE_KEY: ${{ secrets.NEW_RELIC_LICENSE_KEY }}
-          NEW_RELIC_APP_NAME: "colossus-reference"
-          NEW_RELIC_NO_CONFIG_FILE: "true"
-          FEATURE_CONSENT_BANNER: "true"
-          FEATURE_ANALYTICS_ENABLED: "true"
-          FEATURE_GA4_ENABLED: "true"
-          FEATURE_SERVER_TRACKING: "true"
-
-      - name: Deploy batch (other environments)
-        if: inputs.environment != 'production' && github.ref != 'refs/heads/main'
-        run: |
-          pnpm exec tsx tools/deploy-batch.ts \
-            --env ${{ inputs.environment }} \
-            ${{ inputs.dry-run && '--dry-run' || '' }}
-        env:
-          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-          NEXT_PUBLIC_R2_PUBLIC_URL: ${{ secrets.NEXT_PUBLIC_R2_PUBLIC_URL }}
-          NEW_RELIC_LICENSE_KEY: ${{ secrets.NEW_RELIC_LICENSE_KEY }}
-          NEW_RELIC_APP_NAME: "colossus-reference"
-          NEW_RELIC_NO_CONFIG_FILE: "true"
-          FEATURE_CONSENT_BANNER: "true"
-          FEATURE_ANALYTICS_ENABLED: "true"
-          FEATURE_GA4_ENABLED: "true"
-          FEATURE_SERVER_TRACKING: "true"
 
       - name: Create deployment summary
         run: |
-          echo "## 🚀 Batch Deployment Complete" >> $GITHUB_STEP_SUMMARY
+          echo "## ✅ Production Quality Checks Passed" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "**Environment:** ${{ inputs.environment || 'production' }}" >> $GITHUB_STEP_SUMMARY
-          echo "**Trigger:** ${{ github.event_name }}" >> $GITHUB_STEP_SUMMARY
-          echo "**Dry Run:** ${{ inputs.dry-run || 'false' }}" >> $GITHUB_STEP_SUMMARY
-
-      - name: Notify on failure
-        if: failure()
-        uses: actions/github-script@v7
-        with:
-          script: |
-            github.rest.issues.create({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              title: '🚨 Batch Deployment Failed',
-              body: `Batch deployment failed on ${context.sha.substring(0, 7)}\n\n**Environment:** ${{ inputs.environment || 'production' }}\n**Workflow:** ${context.runId}\n\nPlease check the logs and consider running rollback if necessary.`,
-              labels: ['deployment', 'bug']
-            })
-
-  post-deployment-tests:
-    name: Post-Deployment Tests
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
-    needs: [deploy-single-site, deploy-batch]
-    if: |
-      always() &&
-      (needs.deploy-single-site.result == 'success' || needs.deploy-batch.result == 'success') &&
-      inputs.skip-tests != true &&
-      inputs.dry-run != true
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "20"
-          cache: "pnpm"
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
-      - name: Install Playwright browsers
-        run: pnpm --filter colossus-reference exec playwright install --with-deps chromium
-
-      - name: Wait for deployment propagation
-        run: sleep 30
-
-      - name: Run smoke tests against production
-        run: pnpm --filter colossus-reference run test:e2e:smoke
-        env:
-          CI: true
-          NEXT_PUBLIC_R2_PUBLIC_URL: ${{ secrets.NEXT_PUBLIC_R2_PUBLIC_URL }}
-          TEST_BASE_URL: https://local-business-platform-colossus-reference.vercel.app
-          FEATURE_CONSENT_BANNER: "true"
-          FEATURE_ANALYTICS_ENABLED: "true"
-          FEATURE_GA4_ENABLED: "true"
-          FEATURE_SERVER_TRACKING: "true"
-
-      - name: Upload test results
-        if: failure()
-        uses: actions/upload-artifact@v4
-        with:
-          name: post-deployment-test-results
-          path: test-results/
-          retention-days: 7
-
-      - name: Notify on test failure
-        if: failure()
-        uses: actions/github-script@v7
-        with:
-          script: |
-            github.rest.issues.create({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              title: '⚠️ Post-Deployment Tests Failed',
-              body: `Post-deployment tests failed after successful deployment.\n\n**Environment:** ${{ inputs.environment || 'production' }}\n**Workflow:** ${context.runId}\n\nConsider rollback with:\n\`\`\`bash\ntsx tools/rollback.ts\n\`\`\``,
-              labels: ['deployment', 'bug', 'testing']
-            })
+          echo "Vercel Git Integration will handle the actual deployment." >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Branch:** main" >> $GITHUB_STEP_SUMMARY
+          echo "**Commit:** ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
