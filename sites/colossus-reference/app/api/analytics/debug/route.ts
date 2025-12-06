@@ -4,7 +4,8 @@
  */
 
 import { NextRequest, NextResponse } from "next/server";
-import { DebugPanelData, FeatureFlags, ConsentState } from "@/lib/analytics/types";
+import { DebugPanelData, FeatureFlags } from "@/lib/analytics/types";
+import { parseConsent, type ConsentState } from "@/lib/analytics/consent-schema";
 
 // Get feature flags from environment
 function getFeatureFlags(): FeatureFlags {
@@ -59,16 +60,7 @@ function checkPlatformConfigurations() {
   };
 }
 
-// Parse consent from cookie
-function parseConsent(cookieValue?: string) {
-  if (!cookieValue) return null;
-
-  try {
-    return JSON.parse(decodeURIComponent(cookieValue));
-  } catch {
-    return null;
-  }
-}
+// Note: parseConsent is imported from consent-schema.ts for Zod-validated parsing
 
 export async function GET(request: NextRequest) {
   // Only allow debug endpoint in development
