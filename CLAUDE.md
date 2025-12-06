@@ -1,8 +1,8 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with the Local Business Platform monorepo.
+Guidance for Claude Code when working with the Local Business Platform monorepo.
 
-## ⚠️ CRITICAL: Git Workflow - MUST FOLLOW
+## ⚠️ CRITICAL: Git Workflow
 
 **ALL changes MUST follow this branching workflow. NO EXCEPTIONS.**
 
@@ -10,735 +10,171 @@ This file provides guidance to Claude Code (claude.ai/code) when working with th
 develop → staging → main
 ```
 
-### Workflow Rules (MANDATORY):
-
-1. **ALWAYS start on `develop` branch** when making changes
+1. **ALWAYS start on `develop`** when making changes
 2. **NEVER push directly to `staging` or `main`**
-3. **Flow:**
-   - Work on `develop` → commit → push to `develop`
-   - Merge `develop` → `staging` → push to `staging`
-   - Merge `staging` → `main` → push to `main`
+3. **Flow:** develop → commit → push → merge to staging → push → merge to main → push
+4. **Verify CI passes** after each push: `gh run watch`
 
-4. **Branch Protection:**
-   - `develop` = Development environment (smoke tests required)
-   - `staging` = Preview/QA gate (smoke tests required)
-   - `main` = Production (requires staging CI passing)
+**If you break this rule:** Stop immediately, inform user, ask how to proceed.
 
-5. **Pre-Push Checks:**
-   - TypeScript validation (~3s)
-   - Production build (~45s)
-   - Cache cleanup (<1s)
-   - Smoke tests (~27s) - develop/staging only
-
-### Example Workflow:
-
-```bash
-# ✅ CORRECT:
-git checkout develop
-# make changes...
-git add .
-git commit -m "..."
-git push origin develop
-
-# Then merge up:
-git checkout staging
-git merge develop
-git push origin staging
-
-# Then merge to main:
-git checkout main
-git merge staging
-git push origin main
-
-# ❌ WRONG:
-git checkout staging  # Don't start here!
-# make changes...
-git push origin staging  # Skipped develop!
-```
-
-**Why This Matters:**
-
-- Skipping `develop` bypasses the first quality gate
-- Going directly to `staging` breaks the promotion flow
-- Changes should graduate: develop (test) → staging (verify) → main (deploy)
-- This prevents untested code from reaching production
-
-**If You Break This Rule:**
-
-- Stop immediately
-- Inform the user
-- Ask how to proceed (reset staging? or merge develop to catch up?)
+See [docs/guides/git-workflow.md](docs/guides/git-workflow.md) for detailed workflow.
 
 ---
 
-## MANDATORY: Read These Documentation Files First
+## Mandatory Documentation
 
-**Before making ANY changes to this codebase, you MUST read these critical documentation files:**
+Before making changes, read these files:
 
-### Architecture & Standards
-
-1. **[docs/architecture/ARCHITECTURE.md](docs/architecture/ARCHITECTURE.md)** - High-level architecture overview
-2. **[docs/standards/](docs/standards/)** - Focused standards reference:
-   - [content.md](docs/standards/content.md) - MDX-only architecture
-   - [styling.md](docs/standards/styling.md) - Tailwind CSS standards
-   - [components.md](docs/standards/components.md) - Component architecture
-   - [quality.md](docs/standards/quality.md) - Quality gates
-   - [testing.md](docs/standards/testing.md) - Testing requirements
-   - [deployment.md](docs/standards/deployment.md) - CI/CD pipeline
-   - [security.md](docs/standards/security.md) - Security standards
-
-### How-To Guides
-
-3. **[docs/guides/](docs/guides/)** - Step-by-step procedures:
-   - [adding-service.md](docs/guides/adding-service.md) - Add service MDX
-   - [adding-location.md](docs/guides/adding-location.md) - Add location MDX
-   - [git-workflow.md](docs/guides/git-workflow.md) - Branch workflow
-   - [deploying-site.md](docs/guides/deploying-site.md) - Deployment
-
-### Progress & Planning
-
-4. **[WHITE_LABEL_PLATFORM_DESIGN.md](WHITE_LABEL_PLATFORM_DESIGN.md)** - Business model, 8-week roadmap
-5. **[docs/progress/WEEK_4_COMPLETE.md](docs/progress/WEEK_4_COMPLETE.md)** - Latest completion report
-6. **[docs/TODO.md](docs/TODO.md)** - Current task list
-
-**CRITICAL**: These files contain:
-
-- Monorepo structure (Option B - Root as Coordinator)
-- MDX-only content architecture (62 files)
-- Quality gates and pre-push checks
-- Deployment pipeline (develop → staging → main)
-- Testing requirements (141 unit tests + E2E)
-
-**Failure to read these files will result in architectural violations.**
+| Document                                                               | Purpose                                         |
+| ---------------------------------------------------------------------- | ----------------------------------------------- |
+| [docs/architecture/ARCHITECTURE.md](docs/architecture/ARCHITECTURE.md) | Architecture overview                           |
+| [docs/standards/](docs/standards/)                                     | Content, styling, components, testing standards |
+| [docs/guides/](docs/guides/)                                           | How-to guides for common tasks                  |
+| [WHITE_LABEL_PLATFORM_DESIGN.md](WHITE_LABEL_PLATFORM_DESIGN.md)       | Business model & roadmap                        |
 
 ---
 
 ## Project Overview
 
-**Local Business Platform** - White-label website generation platform for local service businesses (plumbers, gardeners, builders, roofers, scaffolders) targeting South East England.
+White-label website platform for local service businesses. Monorepo with Turborepo + pnpm.
 
-**Current Status:** Week 4 Complete (Deployment Pipeline & Monitoring) ⚡️
+- **Sites:** `sites/` directory (each deploys to separate Vercel project)
+- **Components:** `packages/core-components` (@platform/core-components v1.1.0)
+- **Content:** MDX files only (62 total: 25 services + 37 locations)
 
-- Monorepo with Turborepo + pnpm workspaces
-- 2 sites deployed: colossus-reference (77 pages), joes-plumbing-canterbury (12 pages)
-- Component library: @platform/core-components v1.1.0
-  - ✅ **Hero variants implemented:** HeroV1, HeroV2, HeroV3 (fully typed, ready to use)
-  - ⏳ **Service card variants:** Deferred to Week 5+
-  - ⏳ **Contact form variants:** Deferred to Week 5+
-- Deployment pipeline: 3 CLI tools + GitHub Actions CI/CD
-- Monitoring: NewRelic APM ($0/month for 50+ sites)
-- Image storage: Cloudflare R2 (~$0-1/month)
-- Target: 50 sites by end of Year 1
-- Build time: 44.4s from scratch | 253ms cached (176x faster!) ✅
+---
 
-**Architecture:** Option B - Root as Coordinator
+## Essential Commands
 
-- Root coordinates builds (no application code)
-- Sites in `sites/` directory (each deploys to separate Vercel project)
-- Shared components in `packages/core-components`
-
-## Essential Development Commands
-
-### Monorepo Commands (Root Level)
+### Root Level (Monorepo)
 
 ```bash
-pnpm build               # Build all sites with Turborepo (cached)
-pnpm lint                # Lint all workspaces
-pnpm type-check          # Type check all workspaces
-pnpm clean               # Clean all build artifacts
-
-# Component Versioning with Changesets (Week 2)
-pnpm changeset           # Create a new changeset for component changes
-pnpm version-packages    # Bump versions and generate CHANGELOG.md
-pnpm release             # Build and publish packages (if needed)
-
-# Deployment Tools (Week 4) - Run from root directory
-tsx tools/deploy-site.ts colossus-reference --env production  # Deploy single site
-tsx tools/deploy-batch.ts --env production                     # Deploy multiple sites (phased rollout)
-tsx tools/rollback.ts colossus-reference                       # Emergency rollback
+pnpm build          # Build all sites (Turborepo cached)
+pnpm lint           # Lint all workspaces
+pnpm type-check     # Type check all workspaces
+pnpm clean          # Clean build artifacts
 ```
 
-### Site Commands (In sites/colossus-reference/)
+### Site Level (sites/colossus-reference/)
 
 ```bash
-pnpm dev                 # Start development server (localhost:3000)
-pnpm build               # Production build for this site
-pnpm type-check          # TypeScript validation for this site
-pnpm lint                # ESLint validation (via eslint . - Next.js 16 removed next lint)
-```
-
-### Testing (In sites/colossus-reference/)
-
-```bash
-# Unit Tests (Vitest)
-npm test                 # Run full test suite (141 passing tests)
-npm run test:watch       # Watch mode for development
-npm run test:coverage    # Generate coverage report
-
-# E2E Tests (Playwright) - TIERED STRATEGY
-npm run test:e2e:smoke   # FAST smoke tests (7 tests, ~30s) - USE THIS MOST
-npm run test:e2e         # Standard functional tests (51 tests, 2-3min)
-npm run test:e2e:full    # Comprehensive tests (10min+)
-
-# Specific E2E Test Suites
-npm run test:e2e:ui      # Interactive UI mode
-npm run test:e2e:performance   # Performance tests with Core Web Vitals
-npm run test:e2e:accessibility # WCAG 2.1 AA accessibility tests
-npm run test:e2e:visual        # Visual regression tests
-
-# Performance Tracking
-npm run performance:report # View historical performance data & trends
+npm run dev         # Dev server (localhost:3000)
+npm run build       # Production build
+npm test            # 141 unit tests (~2s)
+npm run test:e2e:smoke  # Fast E2E (~30s)
 ```
 
 ### Content Validation
 
 ```bash
-npm run validate:content # Validate all 62 MDX files (services + locations)
-npm run validate:services # Validate 25 service MDX files
-npm run validate:locations # Validate 37 location MDX files
+npm run validate:content   # All 62 MDX files
+npm run validate:services  # 25 service files
+npm run validate:locations # 37 location files
 ```
 
-## Architecture Patterns
+---
 
-### Unified MDX-Only Content System (CRITICAL)
+## Critical Architecture Rules
 
-**Single Source of Truth**: All content (services AND locations) managed exclusively through MDX files with comprehensive frontmatter. No centralized TypeScript data structures.
+### MDX-Only Content (CRITICAL)
 
-**Content Files**: 62 total MDX files
+All content managed through MDX files. **NEVER create:**
 
-- 25 service files in `content/services/`
-- 37 location files in `content/locations/`
-
-**Dynamic Routing**:
-
-- `app/services/[slug]/page.tsx` - Reads MDX files, renders all services dynamically
-- `app/locations/[slug]/page.tsx` - Reads MDX files, renders all locations dynamically
-
-**Route Generation**: `generateStaticParams()` reads MDX files to build routes at build time
-
-**NEVER Create**:
-
-- Individual static page files (e.g., `app/services/specific-service/page.tsx`)
-- Centralized TypeScript data files (e.g., `lib/locations.ts` - already deleted)
+- Individual static page files (`app/services/specific-service/page.tsx`)
+- Centralized TypeScript data files (`lib/locations.ts`)
 - Content-specific loaders or data structures
-- Dual architecture with fallback data
 
-### Content Reading Pattern
+### Styling
 
-```typescript
-// Reading service/location content from MDX
-import fs from "fs/promises";
-import path from "path";
-import matter from "gray-matter";
+- **Tailwind CSS ONLY** - No inline styles, no CSS-in-JS
+- Reusable classes in `app/globals.css` with `@apply`
 
-const filePath = path.join(process.cwd(), "content", "services", `${slug}.mdx`);
-const fileContent = await fs.readFile(filePath, "utf-8");
-const { data } = matter(fileContent); // data = frontmatter object
-```
+### Components
 
-### MDX Frontmatter Structure
+- All reusable components in `components/ui/`
+- TypeScript interfaces for all props
+- Named exports only (no default exports)
 
-All services and locations use comprehensive frontmatter with structured data:
+See [docs/architecture/ARCHITECTURE.md](docs/architecture/ARCHITECTURE.md) for details.
 
-```yaml
 ---
-title: "Service/Location Title"
-seoTitle: "SEO-optimized Title"
-description: "50-200 character description"
-keywords: ["keyword1", "keyword2"]
-heroImage: "/path-to-image.png"
-hero:
-  title: "Hero Title"
-  description: "Hero description"
-  phone: "01424 466 661"
-  trustBadges: ["TG20:21 Compliant", "CHAS Accredited"]
-benefits:
-  - "Benefit 1"
-  - "Benefit 2"
-faqs:
-  - question: "Question?"
-    answer: "Answer..."
-about:
-  whatIs: "Detailed description"
-  whenNeeded: ["Use case 1", "Use case 2"]
-  whatAchieve: ["Outcome 1", "Outcome 2"]
-  keyPoints: ["Point 1", "Point 2"]
----
-```
 
-## Critical Code Architecture Rules
-
-### Styling System
-
-- **Tailwind CSS ONLY** - No inline styles, no CSS-in-JS, no styled-components
-- **Maintainable Classes** - Repeated patterns extracted to `app/globals.css` with `@apply`
-- **Component Classes**: `.btn-primary`, `.card-interactive`, `.section-standard`, etc.
-
-### Component Organization
-
-- **All reusable components** in `components/ui/`
-- **TypeScript interfaces required** for all props
-- **Named exports only** (no default exports for UI components)
-
-### Content Management
-
-- **MDX files ONLY** - All content in `content/services/` and `content/locations/`
-- **NO hardcoded content** in components
-- **NO centralized data files** (lib/locations.ts deleted - NEVER recreate)
-
-### SEO & Schema
-
-- Every page requires proper `Metadata` export with title, description, keywords, openGraph
-- Schema markup required: Service schema, LocalBusiness schema (locations), FAQPage schema
-- Heading hierarchy must be semantic (H1 → H2 → H3, no skipping)
-
-## Git Workflow & Branch Structure
-
-### Branches (NEVER Create New Branches)
-
-- `develop` - Development environment
-- `staging` - Preview environment
-- `main` - Production environment
-
-### Direct Push Workflow (After Approval)
-
-```bash
-# Development
-git push origin develop
-
-# ⚠️ CRITICAL: Verify GitHub Actions CI + E2E passes
-gh run watch
-# OR: gh run list --branch develop --limit 1
-
-# Development → Staging (after CI passes ✅)
-git checkout staging
-git merge develop
-git push origin staging
-
-# ⚠️ CRITICAL: Verify GitHub Actions CI + E2E passes (staging is final quality gate)
-gh run watch
-
-# Staging → Production (after CI + E2E pass on staging ✅)
-git checkout main
-git merge staging
-git push origin main
-
-# ⚠️ Note: Main skips E2E tests - pre-push hook verifies staging E2E passed
-# Main runs only CI (ESLint, TypeScript, Tests, Build) - ~2min vs ~5min
-gh run watch
-```
-
-**Why main skips E2E tests:**
-
-- Staging and main use identical code, environment, and dependencies
-- E2E tests on main would be redundant (same tests, same container, same results)
-- Pre-push hook automatically verifies staging E2E tests passed before allowing push
-- Saves ~3 minutes of CI time per production deployment
-- Staging is the final quality gate - if E2E passes there, it will pass on main
-
-### Pre-Push Hooks (BLOCKS PUSH IF FAILED)
-
-**CRITICAL**: TypeScript and build errors will block ALL pushes
-
-```bash
-# Hooks automatically run before every push:
-npm run type-check  # TypeScript validation
-npm run build       # Production build test
-```
-
-**Always run before committing**:
-
-```bash
-npm run pre-commit-check  # Prevents push failures
-```
-
-### Monitoring GitHub Actions CI (MANDATORY)
-
-**⚠️ RULE: Always verify CI passes after every push**
-
-```bash
-# Check CI status
-gh run list --branch develop --limit 1
-gh run watch              # Watch in real-time
-gh run view --web         # Open in browser
-```
-
-**Why CI verification is mandatory:**
-
-- Pre-push hooks run **locally** (can miss environment-specific issues)
-- CI runs in **isolated Node 20/Ubuntu container**
-- CI uses `npm ci` (clean install) vs `npm install` locally
-- Common CI-only failures: ESM/CommonJS compatibility, env differences, dependency versions
-
-**If CI fails:**
-
-1. Stop immediately - do not proceed to staging/production
-2. Check error logs: `gh run view` or visit Actions tab
-3. Reproduce locally: `npm ci && npm run lint && npm run type-check && npm test && npm run build`
-   - Note: `npm run lint` uses `eslint .` (Next.js 16 removed `next lint` command)
-4. Fix the issue and push again
-5. Wait for CI to pass ✅ before proceeding
-
-## Testing Infrastructure
-
-### Unit Test Coverage (141 passing tests)
-
-- **Contact API Tests** - Form validation, email handling, rate limiting
-- **Rate Limiter Tests** - Upstash Redis mocking, IP isolation, fail-open design
-- **Content Schema Tests** - Zod validation for MDX frontmatter
-- **Location Utils Tests** - Location detection and area served logic
-- **Schema Tests** - JSON-LD schema generation
-- **Analytics Tests** - dataLayer implementation and tracking
-
-### E2E Test Strategy (Branch-Specific)
-
-| Branch    | Tests Run             | Duration | Purpose                          |
-| --------- | --------------------- | -------- | -------------------------------- |
-| `develop` | Smoke only (7 tests)  | ~30s     | Fast feedback for development    |
-| `staging` | Smoke + Standard (58) | ~3-4min  | Functional validation pre-prod   |
-| `main`    | Smoke + Standard (58) | ~3-4min  | Production deployment validation |
-
-### Testing Commands
-
-```bash
-npm test              # Run all 141 unit tests (~2 seconds)
-npm run test:watch    # Watch mode for development
-npm run test:ui       # Interactive test UI
-```
-
-## Security & Performance
-
-### Rate Limiting (Upstash Redis)
-
-- Contact form protected: 5 requests per 5 minutes per IP
-- Distributed rate limiting (serverless-compatible)
-- Fail-open design: allows requests if Redis unavailable
-- Environment variables: `KV_REST_API_URL`, `KV_REST_API_TOKEN`
-
-### Image Optimization
-
-- **Next.js Image component required** for all images
-- **Quality settings** from `lib/image-config.ts`:
-  - Hero images: `quality={80}`
-  - Content images: `quality={65}` (default)
-  - Thumbnails: `quality={50}`
-- **Automatic format conversion**: WebP/AVIF when supported
-- **Always set width/height** to prevent layout shift
-
-### Modern Browser Targeting
-
-- **ES2022 target** eliminates 11.4 KiB of polyfills
-- **Browserslist**: Last 2 versions of Chrome, Firefox, Safari, Edge (95%+ compatibility)
-- **No IE11 support**
-
-## Content Validation System
-
-### Automated Validation (Zod)
-
-All 62 MDX files validated on commit via Husky pre-commit hook:
-
-- **Description length**: 50-200 characters
-- **FAQ requirements**: 3-15 FAQs per service
-- **YAML syntax**: Proper formatting and structure
-- **Required fields**: All mandatory frontmatter present
-
-### Validation Schemas
-
-- `lib/content-schemas.ts` - Zod schemas for services and locations
-- `scripts/validate-content.ts` - CLI validation tool
-
-## Analytics & Consent Management
-
-### GDPR-Compliant System
-
-- **ConsentManager component** - Banner with consent categories
-- **Feature flags** control all analytics functionality:
-  - `FEATURE_CONSENT_BANNER` - Shows/hides banner
-  - `FEATURE_ANALYTICS_ENABLED` - Master switch
-  - `FEATURE_GA4_ENABLED` - Google Analytics 4
-- **Smart page detection** - Banner hidden on `/privacy-policy` and `/cookie-policy`
-
-### GA4 Integration
-
-- **Manual page view tracking** after consent (fixes single-page visit tracking)
-- **Server-side tracking** via middleware (consent-aware)
-- **Event tracking** available via `useAnalytics()` hook
-
-### Environment Variables
-
-```bash
-# Analytics (Public)
-NEXT_PUBLIC_GA_MEASUREMENT_ID=G-XXXXXXXXXX
-
-# Feature Flags (Server)
-FEATURE_CONSENT_BANNER=true
-FEATURE_ANALYTICS_ENABLED=true
-FEATURE_GA4_ENABLED=true
-
-# Rate Limiting (Server)
-KV_REST_API_URL=https://your-database.upstash.io
-KV_REST_API_TOKEN=your-token-here
-
-# Email (Server)
-RESEND_API_KEY=re_your_api_key_here
-BUSINESS_EMAIL=your-business@email.com
-NEXT_PUBLIC_SITE_URL=https://yourdomain.com
-```
-
-## Common Development Issues
+## Common Issues
 
 ### TypeScript Errors During Push
 
-**Problem**: `git push` fails with TypeScript errors
-
-**Solution**:
-
 ```bash
 npm run type-check  # Identify errors
-# Fix reported errors (missing types, function ordering, hook dependencies)
+# Fix errors
 npm run type-check  # Verify fix
-git push            # Now succeeds
+git push
 ```
 
-### Production Build Failures
-
-**Problem**: Pre-push hook blocks with build errors
-
-**Solution**:
+### Build Failures
 
 ```bash
-npm run build       # See exact error
-# Common issues: import/export errors, missing dependencies, MDX syntax
-npm run build       # Verify fix
+npm run build  # See exact error
+# Fix: import/export errors, missing deps, MDX syntax
+npm run build  # Verify fix
 ```
 
 ### Content Validation Failures
 
-**Problem**: Commit blocked due to invalid MDX
-
-**Solution**:
-
 ```bash
-npm run validate:content  # See validation errors
-# Fix: description length, FAQ count, YAML syntax, required fields
+npm run validate:content  # See errors
+# Fix: description length (50-200), FAQ count (3-15), YAML syntax
 npm run validate:content  # Verify fix
 ```
 
-## Key Library Files
+---
 
-### Content Management
+## Documentation Maintenance
 
-- `lib/content.ts` - MDX reading utilities, content item retrieval
-- `lib/content-schemas.ts` - Zod validation schemas for MDX frontmatter
+**IMPORTANT:** Update documentation after every change.
 
-### Location & Service Utilities
+### Files to Update
 
-- `lib/location-utils.ts` - Location detection, area served logic
-- `lib/services.ts` - Service categories and metadata
-- `lib/services-data.ts` - Service card data for listings
+| File                 | When to Update                           |
+| -------------------- | ---------------------------------------- |
+| CHANGELOG.md         | Every change (date, description, impact) |
+| ARCHITECTURE.md      | Architecture patterns, content structure |
+| docs/standards/\*.md | Standards changes                        |
+| This file            | Commands, workflow, tools                |
 
-### Rate Limiting & Analytics
+### Workflow
 
-- `lib/rate-limiter.ts` - Upstash Redis rate limiting implementation
-- `lib/analytics/types.ts` - TypeScript types for analytics system
-- `lib/analytics/dataLayer.ts` - GTM dataLayer implementation
-- `lib/performance-tracker.ts` - Performance test result tracking and trend analysis
-
-### API Routes
-
-- `app/api/contact/route.ts` - Contact form submission with rate limiting and email
-- `app/api/analytics/track/route.ts` - Analytics event tracking endpoint
-- `app/api/analytics/debug/route.ts` - Analytics debugging endpoint
-
-### Configuration
-
-- `lib/image-config.ts` - Centralized image quality settings
-- `lib/site.ts` - Site-wide configuration and utilities
-- `lib/schema.ts` - JSON-LD schema generation utilities
-
-## Middleware
-
-`middleware.ts` handles server-side analytics tracking:
-
-- **Consent-aware** - Respects user consent cookies
-- **Client ID generation** - Persistent tracking across sessions
-- **Page view tracking** - Automatic tracking for all pages (excludes API routes)
-- **Feature flag controlled** - Respects `FEATURE_SERVER_TRACKING`
-
-## Documentation Maintenance (MANDATORY)
-
-**⚠️ CRITICAL RULE: Always update documentation after making changes**
-
-Documentation is a first-class citizen in this codebase. Keeping documentation up-to-date is **NOT optional** - it is a mandatory part of every change.
-
-### Documentation Files That Must Be Updated
-
-After making changes, you **MUST** review and update these files as needed:
-
-#### 1. **ARCHITECTURE.md** (1,455 lines)
-
-Update when you:
-
-- Add new architectural patterns or components
-- Create new styling classes or patterns
-- Change content structure or MDX frontmatter
-- Modify routing or page generation logic
-- Add new libraries or dependencies with architectural impact
-- Change SEO patterns or schema markup
-- Update image optimization or performance patterns
-
-#### 2. **DEVELOPMENT.md** (683 lines)
-
-Update when you:
-
-- Change git workflow or branch structure
-- Modify pre-commit/pre-push hooks
-- Add new scripts to package.json
-- Change deployment procedures
-- Update CI/CD pipeline or GitHub Actions
-- Modify quality gates or testing requirements
-- Add new development tools or commands
-
-#### 3. **CHANGELOG.md**
-
-Update **ALWAYS** when:
-
-- Making ANY change to the codebase
-- Adding new features or functionality
-- Fixing bugs or issues
-- Updating dependencies
-- Changing configuration or infrastructure
-- Format: Date, description, impact, files changed
-
-#### 4. **CLAUDE.md** (this file)
-
-Update when you:
-
-- Add new npm scripts or commands
-- Change project structure or file organization
-- Add new testing infrastructure
-- Update environment variables
-- Change development workflow
-- Add new libraries or tools
-- Modify architecture patterns
-
-#### 5. **Testing Documentation**
-
-- **E2E_TESTING.md** - Update when adding/changing E2E tests
-- **PERFORMANCE_TESTING.md** - Update when changing performance tests or thresholds
-- **PERFORMANCE_TRACKING.md** - Update when modifying tracking features
-
-#### 6. **GITHUB_SETUP.md**
-
-Update when you:
-
-- Change GitHub Actions workflows
-- Add new secrets or environment variables
-- Modify CI/CD pipeline
-- Change deployment process
-- Update branch protection rules
-
-#### 7. **CONTENT_VALIDATION.md**
-
-Update when you:
-
-- Change Zod schemas for content validation
-- Add new validation rules
-- Modify MDX frontmatter structure
-- Change content requirements
-
-#### 8. **AI_INSTRUCTIONS.md**
-
-Update when you:
-
-- Add new AI agent guidelines
-- Change content creation standards
-- Modify writing style requirements
-
-### Documentation Update Workflow
-
-**After completing ANY implementation:**
-
-1. **Review Impact** - Identify which documentation files are affected
-2. **Update Content** - Add/modify relevant sections with your changes
-3. **Update Examples** - If code examples exist, update them to match new implementation
-4. **Update Commands** - If new scripts or commands added, document them
-5. **Update Counts** - Update test counts, file counts, line counts if they changed
-6. **Verify Accuracy** - Ensure documentation accurately reflects current state
-7. **Check Cross-References** - Update links and references to other docs
-
-### Documentation Standards
-
-- ✅ **Be Specific** - Include exact file paths, line numbers when relevant
-- ✅ **Show Examples** - Provide code examples for new patterns
-- ✅ **Explain Why** - Document reasoning behind architectural decisions
-- ✅ **Keep Current** - Never leave outdated information
-- ✅ **Be Complete** - Cover all aspects of the change
-- ✅ **Use Formatting** - Markdown formatting for readability
-
-### Example Documentation Update
-
-```markdown
-# After adding performance tracking feature:
-
-Files to update:
-✅ CLAUDE.md - Added performance:report command to Testing section
-✅ PERFORMANCE_TESTING.md - Added tracking features section
-✅ PERFORMANCE_TRACKING.md - Created new comprehensive guide
-✅ CHANGELOG.md - Added entry with date, description, files changed
-✅ DEVELOPMENT.md - Added performance tracking to testing workflow
-```
-
-### Documentation as Code Review
-
-Treat documentation updates as part of your implementation:
-
-- Documentation updates are **required before considering a task complete**
-- Missing documentation updates = incomplete implementation
-- Documentation quality is as important as code quality
+1. Review which docs are affected
+2. Update content and examples
+3. Verify accuracy
+4. Include in same commit
 
 ---
 
 ## Before Implementation Checklist
 
-**CRITICAL**: Before implementing ANY feature:
+**Before:**
 
-1. ✅ **Read mandatory documentation** - ARCHITECTURE.md and DEVELOPMENT.md (see top of this file)
-2. ✅ Read relevant existing code (services/locations routing files)
-3. ✅ Confirm MDX-only architecture pattern (detailed in ARCHITECTURE.md)
-4. ✅ Verify no architectural violations in planned approach (see ARCHITECTURE.md violation detection section)
-5. ✅ Check if similar patterns exist in globals.css (styling)
-6. ✅ Run `npm run pre-commit-check` before committing
-7. ✅ Ensure TypeScript compilation passes (`npm run type-check`)
-8. ✅ Verify production build succeeds (`npm run build`)
+- [ ] Read ARCHITECTURE.md and relevant standards
+- [ ] Confirm MDX-only pattern applies
+- [ ] Check existing patterns in globals.css
 
-**AFTER completing implementation:**
+**After:**
 
-9. ✅ **Update all relevant documentation files** (see Documentation Maintenance section above)
-10. ✅ Update CHANGELOG.md with change details
-11. ✅ Verify all documentation is accurate and current
-
-## Quality Gates
-
-### Development
-
-- Pre-commit hooks pass (ESLint + Prettier)
-- Pre-push hooks pass (TypeScript + Build) - **BLOCKS PUSH IF FAILED**
-- Content validation passes (MDX frontmatter)
-
-### Staging
-
-- All GitHub Actions passing (ESLint + TypeScript + Tests + Build + Content Validation)
-- Production build successful
-- Full application testing on staging URL
-
-### Production
-
-- Staging verification complete
-- All tests passing
-- Explicit approval obtained
-- Branch up to date with latest changes
+- [ ] `npm run type-check` passes
+- [ ] `npm run build` passes
+- [ ] Documentation updated
+- [ ] CHANGELOG.md updated
 
 ---
 
-**Remember**: This codebase uses a unified MDX-only architecture. NEVER create centralized TypeScript data files or individual static page files. All content managed through MDX with comprehensive frontmatter.
+## Quality Gates
+
+| Environment | Requirements                             |
+| ----------- | ---------------------------------------- |
+| develop     | Pre-push hooks pass (TypeScript + Build) |
+| staging     | CI passes + E2E tests                    |
+| main        | Staging CI must pass first               |
+
+---
+
+**Remember:** MDX-only architecture. No centralized data files. All content in MDX frontmatter.
