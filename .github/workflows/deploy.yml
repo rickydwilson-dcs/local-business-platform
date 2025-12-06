@@ -191,6 +191,9 @@ jobs:
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
 
+      - name: Install Playwright browsers
+        run: pnpm --filter colossus-reference exec playwright install --with-deps chromium
+
       - name: Deploy batch (production)
         if: inputs.environment == 'production' || github.ref == 'refs/heads/main'
         run: |
@@ -200,6 +203,9 @@ jobs:
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          NEXT_PUBLIC_R2_PUBLIC_URL: ${{ secrets.NEXT_PUBLIC_R2_PUBLIC_URL }}
+          NEW_RELIC_LICENSE_KEY: ${{ secrets.NEW_RELIC_LICENSE_KEY }}
+          NEW_RELIC_NO_CONFIG_FILE: "true"
 
       - name: Deploy batch (other environments)
         if: inputs.environment != 'production' && github.ref != 'refs/heads/main'
@@ -210,6 +216,9 @@ jobs:
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          NEXT_PUBLIC_R2_PUBLIC_URL: ${{ secrets.NEXT_PUBLIC_R2_PUBLIC_URL }}
+          NEW_RELIC_LICENSE_KEY: ${{ secrets.NEW_RELIC_LICENSE_KEY }}
+          NEW_RELIC_NO_CONFIG_FILE: "true"
 
       - name: Create deployment summary
         run: |
