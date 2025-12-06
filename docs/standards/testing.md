@@ -1,7 +1,7 @@
 # Testing Standards
 
-**Version:** 1.0.0
-**Last Updated:** 2025-12-05
+**Version:** 1.0.1
+**Last Updated:** 2025-12-06
 **Scope:** All sites in local-business-platform
 
 ---
@@ -212,25 +212,51 @@ npm run validate:locations
 
 ### GitHub Actions
 
+The CI/CD pipeline uses a branch-specific testing strategy to optimize speed and cost while maintaining quality confidence:
+
 ```yaml
-# Runs on every push
+# Development & Staging: Full Quality Gate
 - name: Run Unit Tests
   run: npm test
 
-- name: Run E2E Smoke Tests
+- name: Run E2E Smoke Tests (develop only)
   run: npm run test:e2e:smoke
+
+- name: Run E2E Smoke + Standard Tests (staging only)
+  run: npm run test:e2e
 
 - name: Validate Content
   run: npm run validate:content
+
+# Production: Quick Sanity Checks Only
+- name: TypeScript Check
+  run: npm run type-check
+
+- name: ESLint
+  run: npm run lint
+
+- name: Production Build
+  run: npm run build
 ```
 
-### Branch-Specific Tests
+### Branch-Specific Testing Strategy
 
-| Branch  | Tests Run                   |
-| ------- | --------------------------- |
-| develop | Smoke (7 tests)             |
-| staging | Smoke + Standard (58 tests) |
-| main    | Smoke + Standard (58 tests) |
+| Branch  | Tests Run                   | Rationale                                |
+| ------- | --------------------------- | ---------------------------------------- |
+| develop | Smoke (7 tests)             | Fast feedback during development         |
+| staging | Smoke + Standard (58 tests) | Final quality gate before production     |
+| main    | Skipped                     | Identical code already tested on staging |
+
+**Why main skips E2E tests:**
+
+- Staging and main deploy identical code from the same branch merge
+- E2E tests would run in identical containers with identical dependencies
+- Results would be deterministic - if tests pass on staging, they pass on main
+- Skipping E2E saves ~3 minutes of CI time per production deployment
+- Production Quality Gate on main runs fast sanity checks (TypeScript, ESLint, build) in ~2 minutes
+- Vercel Git Integration handles actual deployments automatically
+
+**Key principle:** Staging is the final quality gate. Once E2E tests pass there, we have full confidence in production deployment.
 
 ## What NOT to Do
 
