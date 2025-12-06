@@ -36,11 +36,8 @@ lerna-debug.log*
 !.env.example
 !.env.local.example
 
-# Vercel
+# Vercel - ignore entirely (CI creates .vercel dynamically)
 .vercel
-# Keep project.json for CI deployments (links to Vercel project)
-!.vercel/project.json
-!**/.vercel/project.json
 
 # Turborepo
 .turbo
