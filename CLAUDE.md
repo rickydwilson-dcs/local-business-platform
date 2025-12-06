@@ -44,6 +44,34 @@ White-label website platform for local service businesses. Monorepo with Turbore
 
 ---
 
+## Output Folder Guidance
+
+The `/output/` folder stores local session context and working notes for complex tasks.
+
+**When to create sessions:**
+
+- Research and analysis tasks (exploring codebase, understanding patterns)
+- Feature implementation notes (design decisions, code snippets, progress)
+- Bug investigation documentation (debugging steps, root cause analysis)
+- Architecture decisions (pros/cons, alternatives, rationale)
+- Any work that might need future reference or continuation
+
+**Session naming:** `YYYY-MM-DD_topic-description` (e.g., `2025-12-06_auth-refactor-analysis`)
+
+**What to include in session metadata:**
+
+- Objective/context
+- Key findings or decisions
+- Code references and file paths
+- Next steps (if incomplete)
+- Related issues/PRs
+
+**Important:** The `/output/` folder is gitignored and local-only. Never commit session files to the repository.
+
+See [output/README.md](output/README.md) for full documentation.
+
+---
+
 ## Essential Commands
 
 ### Root Level (Monorepo)
