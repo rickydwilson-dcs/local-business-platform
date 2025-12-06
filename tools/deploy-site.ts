@@ -127,6 +127,13 @@ function verifySiteExists(siteName: string): void {
 }
 
 /**
+ * Check if running in CI environment
+ */
+function isCI(): boolean {
+  return process.env.CI === "true" || !process.stdout.isTTY;
+}
+
+/**
  * Check git status - ensure no uncommitted changes
  */
 function checkGitStatus(): void {
@@ -140,7 +147,14 @@ function checkGitStatus(): void {
     console.log(status);
     log("\nConsider committing or stashing changes before deploying.", "yellow");
 
-    // Ask for confirmation
+    // In CI environments, skip the interactive prompt and continue
+    // (CI deployments should proceed even with uncommitted changes from tests/builds)
+    if (isCI()) {
+      log("\n✅ Running in CI - continuing without confirmation", "cyan");
+      return;
+    }
+
+    // Ask for confirmation in interactive mode
     const readline = require("readline").createInterface({
       input: process.stdin,
       output: process.stdout,
