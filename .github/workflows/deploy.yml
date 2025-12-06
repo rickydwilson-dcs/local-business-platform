@@ -270,7 +270,7 @@ jobs:
         env:
           CI: true
           NEXT_PUBLIC_R2_PUBLIC_URL: ${{ secrets.NEXT_PUBLIC_R2_PUBLIC_URL }}
-          TEST_BASE_URL: https://colossus.vercel.app
+          TEST_BASE_URL: https://local-business-platform-colossus-reference.vercel.app
 
       - name: Upload test results
         if: failure()
