@@ -6,6 +6,47 @@ Complete project history and achievements organized by development phase.
 
 ## 📅 Recent Changes
 
+### **2025-12-06 - CODE QUALITY: Core-Components Linting & Dynamic Location Discovery**
+
+**🔧 Code Quality Improvements:**
+
+Two significant code quality improvements implemented from code review:
+
+**1. @platform/core-components - Linting Enabled**
+
+- ✅ **ESLint v9 flat config** added (`eslint.config.mjs`)
+- ✅ **Plugins configured:** TypeScript, React, React Hooks
+- ✅ **React key anti-pattern fixed** in `ServiceCards.tsx` (`key={index}` → `key={card.href}`)
+- ✅ **Type-check runs in consuming sites** (uses `@/` path aliases that only exist in sites)
+
+**2. Dynamic Location Discovery**
+
+- ✅ **Created `lib/locations-config.ts`** for filesystem-based location slug discovery
+- ✅ **Refactored `lib/content.ts`** - replaced 51 hardcoded location patterns with 5 lines
+- ✅ **27.8% code reduction** (176 → 127 lines)
+- ✅ **Zero maintenance** - new location MDX files automatically included
+
+**Benefits:**
+
+- New locations automatically included without code changes
+- Single source of truth (MDX files drive filtering)
+- Build-time caching prevents redundant filesystem reads
+- Improved React key stability for list reconciliation
+
+**Files Created:**
+
+- `packages/core-components/eslint.config.mjs`
+- `sites/colossus-reference/lib/locations-config.ts`
+
+**Files Modified:**
+
+- `packages/core-components/package.json` - lint/type-check scripts + ESLint deps
+- `packages/core-components/src/components/ui/service-cards.tsx` - React key fix
+- `packages/core-components/tsconfig.json` - JSX support
+- `sites/colossus-reference/lib/content.ts` - Dynamic discovery import
+
+---
+
 ### **2025-12-06 - SECURITY: Comprehensive Security Audit Fixes**
 
 **🔒 Security Vulnerabilities Fixed:**
