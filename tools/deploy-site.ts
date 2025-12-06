@@ -280,11 +280,24 @@ function deployToVercel(siteName: string, environment: string, dryRun: boolean):
     const sitePath = join(process.cwd(), "sites", siteName);
     const prodFlag = environment === "production" ? "--prod" : "";
 
+    // Get Vercel token from environment - required for CI deployments
+    const vercelToken = process.env.VERCEL_TOKEN;
+    const tokenFlag = vercelToken ? `--token ${vercelToken}` : "";
+
+    if (!vercelToken && isCI()) {
+      log("⚠️  Warning: VERCEL_TOKEN not set in CI environment", "yellow");
+    }
+
     log(`Deploying from: ${sitePath}`, "cyan");
-    log(`Command: cd ${sitePath} && vercel deploy ${prodFlag}`, "cyan");
+    log(
+      `Command: cd ${sitePath} && vercel deploy ${prodFlag} ${tokenFlag ? "--token ***" : ""}`,
+      "cyan"
+    );
 
     // Change to site directory and deploy
-    const output = exec(`cd ${sitePath} && vercel deploy ${prodFlag} --yes`, { silent: true });
+    const output = exec(`cd ${sitePath} && vercel deploy ${prodFlag} ${tokenFlag} --yes`, {
+      silent: true,
+    });
 
     // Extract deployment URL from output
     const urlMatch = output.match(/https:\/\/[^\s]+/);
