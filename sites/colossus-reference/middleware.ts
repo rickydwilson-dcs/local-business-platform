@@ -4,7 +4,12 @@
  */
 
 import { NextRequest, NextResponse } from "next/server";
-import type { ConsentState } from "@/lib/analytics/types";
+import {
+  parseConsent,
+  hasAnalyticsConsent,
+  type ConsentState,
+} from "@/lib/analytics/consent-schema";
+import { extractClientIp } from "@/lib/security/ip-utils";
 
 // Feature flags for analytics control
 function getFeatureFlags() {
@@ -17,21 +22,8 @@ function getFeatureFlags() {
   };
 }
 
-// Parse consent from cookie
-function parseConsent(cookieValue?: string) {
-  if (!cookieValue) return null;
-
-  try {
-    return JSON.parse(decodeURIComponent(cookieValue));
-  } catch {
-    return null;
-  }
-}
-
-// Check if user has consented to analytics
-function hasAnalyticsConsent(consent: ConsentState | null): boolean {
-  return consent?.analytics === true || consent?.marketing === true;
-}
+// Note: parseConsent and hasAnalyticsConsent are imported from consent-schema.ts
+// which provides Zod-validated consent parsing for security
 
 // Generate or extract client ID for tracking
 function getClientId(request: NextRequest): string {
@@ -45,14 +37,12 @@ function getClientId(request: NextRequest): string {
   return `${Date.now()}.${Math.random().toString(36).substring(2, 15)}`;
 }
 
-// Extract user agent and IP for tracking
+// Extract user agent and IP for tracking (using secure IP extraction)
 function extractUserData(request: NextRequest) {
+  const ip = extractClientIp(request);
   return {
     userAgent: request.headers.get("user-agent") || undefined,
-    ip:
-      request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
-      request.headers.get("x-real-ip") ||
-      undefined,
+    ip: ip !== "unknown" ? ip : undefined,
     referrer: request.headers.get("referer") || undefined,
   };
 }

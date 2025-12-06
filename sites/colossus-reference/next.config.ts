@@ -73,11 +73,10 @@ const nextConfig: NextConfig = {
   trailingSlash: false,
   // Security headers for production
   async headers() {
-    // In development, allow unsafe-eval for React dev mode
+    // CSP script-src: unsafe-inline required for Next.js hydration
+    // Note: unsafe-eval removed from all environments for security
     const scriptSrc =
-      process.env.NODE_ENV === "development"
-        ? "'self' 'unsafe-inline' 'unsafe-eval' *.googletagmanager.com *.google-analytics.com *.facebook.com vercel.live *.vercel.live"
-        : "'self' 'unsafe-inline' *.googletagmanager.com *.google-analytics.com *.facebook.com vercel.live *.vercel.live";
+      "'self' 'unsafe-inline' *.googletagmanager.com *.google-analytics.com *.facebook.com vercel.live *.vercel.live";
 
     return [
       {
@@ -98,6 +97,21 @@ const nextConfig: NextConfig = {
           {
             key: "Content-Security-Policy",
             value: `default-src 'self'; script-src ${scriptSrc}; style-src 'self' 'unsafe-inline'; img-src 'self' data: *.r2.dev; connect-src 'self' *.google-analytics.com *.facebook.com vercel.live *.vercel.live; frame-src vercel.live *.vercel.live; frame-ancestors 'none';`,
+          },
+          // HSTS - enforce HTTPS for 1 year, include subdomains, allow preload
+          {
+            key: "Strict-Transport-Security",
+            value: "max-age=31536000; includeSubDomains; preload",
+          },
+          // Prevent resources from being loaded by other origins
+          {
+            key: "Cross-Origin-Resource-Policy",
+            value: "same-origin",
+          },
+          // Restrict browser features that aren't needed
+          {
+            key: "Permissions-Policy",
+            value: "camera=(), microphone=(), geolocation=()",
           },
         ],
       },

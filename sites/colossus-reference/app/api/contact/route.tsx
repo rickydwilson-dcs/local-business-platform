@@ -1,6 +1,8 @@
 // app/api/contact/route.tsx
 import { Resend } from "resend";
 import { checkRateLimit } from "@/lib/rate-limiter";
+import { escapeHtml } from "@/lib/security/html-escape";
+import { extractClientIp } from "@/lib/security/ip-utils";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -23,10 +25,8 @@ function isValidEmail(email: string): boolean {
 
 export async function POST(request: Request): Promise<Response> {
   // Rate limiting check using Upstash Redis
-  const ip =
-    request.headers.get("x-forwarded-for")?.split(",")[0].trim() ||
-    request.headers.get("cf-connecting-ip") ||
-    "unknown";
+  // Use secure IP extraction with validation
+  const ip = extractClientIp(request);
 
   const rateLimit = await checkRateLimit(ip);
 
@@ -84,7 +84,19 @@ export async function POST(request: Request): Promise<Response> {
       receivedAt: new Date().toISOString(),
       userAgent: request.headers.get("user-agent") || null,
       referer: request.headers.get("referer") || null,
-      ip: request.headers.get("x-forwarded-for") || null,
+      ip: ip !== "unknown" ? ip : null,
+    };
+
+    // HTML-escape all user inputs for email templates to prevent XSS
+    const safeInputs = {
+      name: escapeHtml(name),
+      email: escapeHtml(email),
+      phone: phone ? escapeHtml(phone) : null,
+      service: service ? escapeHtml(service) : null,
+      location: location ? escapeHtml(location) : null,
+      message: escapeHtml(message),
+      referer: submission.referer ? escapeHtml(submission.referer) : null,
+      ip: submission.ip ? escapeHtml(submission.ip) : null,
     };
 
     // Create email subject
@@ -92,7 +104,7 @@ export async function POST(request: Request): Promise<Response> {
       subject ||
       `New enquiry from ${name}${service ? ` - ${service}` : ""}${location ? ` (${location})` : ""}`;
 
-    // Create email HTML content
+    // Create email HTML content (using escaped inputs to prevent XSS)
     const emailHtml = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
         <h2 style="color: #00607A; border-bottom: 2px solid #00607A; padding-bottom: 10px;">
@@ -101,23 +113,23 @@ export async function POST(request: Request): Promise<Response> {
 
         <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
           <h3 style="margin-top: 0; color: #333;">Contact Details</h3>
-          <p><strong>Name:</strong> ${name}</p>
-          <p><strong>Email:</strong> ${email}</p>
-          ${phone ? `<p><strong>Phone:</strong> ${phone}</p>` : ""}
-          ${service ? `<p><strong>Service:</strong> ${service}</p>` : ""}
-          ${location ? `<p><strong>Location:</strong> ${location}</p>` : ""}
+          <p><strong>Name:</strong> ${safeInputs.name}</p>
+          <p><strong>Email:</strong> ${safeInputs.email}</p>
+          ${safeInputs.phone ? `<p><strong>Phone:</strong> ${safeInputs.phone}</p>` : ""}
+          ${safeInputs.service ? `<p><strong>Service:</strong> ${safeInputs.service}</p>` : ""}
+          ${safeInputs.location ? `<p><strong>Location:</strong> ${safeInputs.location}</p>` : ""}
         </div>
 
         <div style="margin: 20px 0;">
           <h3 style="color: #333;">Message</h3>
-          <div style="background: white; padding: 20px; border-left: 4px solid #00607A; white-space: pre-wrap;">${message}</div>
+          <div style="background: white; padding: 20px; border-left: 4px solid #00607A; white-space: pre-wrap;">${safeInputs.message}</div>
         </div>
 
         <div style="background: #f1f3f4; padding: 15px; border-radius: 4px; margin: 20px 0; font-size: 12px; color: #666;">
           <p><strong>Submission Details:</strong></p>
           <p>Received: ${new Date().toLocaleString("en-GB")}</p>
-          ${submission.referer ? `<p>From page: ${submission.referer}</p>` : ""}
-          ${submission.ip ? `<p>IP: ${submission.ip}</p>` : ""}
+          ${safeInputs.referer ? `<p>From page: ${safeInputs.referer}</p>` : ""}
+          ${safeInputs.ip ? `<p>IP: ${safeInputs.ip}</p>` : ""}
         </div>
 
         <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd; text-align: center; color: #666; font-size: 12px;">
@@ -158,21 +170,21 @@ export async function POST(request: Request): Promise<Response> {
 
       console.log("Email sent successfully:", emailResult.data?.id);
 
-      // Send confirmation email to customer
+      // Send confirmation email to customer (using escaped inputs)
       const confirmationHtml = `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <h2 style="color: #00607A;">Thank You for Your Enquiry</h2>
 
-          <p>Hi ${name},</p>
+          <p>Hi ${safeInputs.name},</p>
 
           <p>Thank you for contacting Colossus Scaffolding. We have received your enquiry and will respond as soon as possible, typically within 24 hours.</p>
 
           <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
             <h3 style="margin-top: 0;">Your Enquiry Summary</h3>
-            ${service ? `<p><strong>Service:</strong> ${service}</p>` : ""}
-            ${location ? `<p><strong>Location:</strong> ${location}</p>` : ""}
+            ${safeInputs.service ? `<p><strong>Service:</strong> ${safeInputs.service}</p>` : ""}
+            ${safeInputs.location ? `<p><strong>Location:</strong> ${safeInputs.location}</p>` : ""}
             <p><strong>Message:</strong></p>
-            <div style="white-space: pre-wrap; background: white; padding: 15px; border-radius: 4px;">${message}</div>
+            <div style="white-space: pre-wrap; background: white; padding: 15px; border-radius: 4px;">${safeInputs.message}</div>
           </div>
 
           <div style="background: #00607A; color: white; padding: 20px; border-radius: 8px; margin: 20px 0;">
