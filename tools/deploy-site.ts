@@ -262,6 +262,7 @@ function deployToVercel(siteName: string, environment: string, dryRun: boolean):
   logSection(`🚀 Deploying to Vercel (${environment})`);
 
   const startTime = Date.now();
+  const sitePath = join(process.cwd(), "sites", siteName);
 
   if (dryRun) {
     log("🔍 DRY RUN - No actual deployment will occur", "yellow");
@@ -277,7 +278,6 @@ function deployToVercel(siteName: string, environment: string, dryRun: boolean):
   }
 
   try {
-    const sitePath = join(process.cwd(), "sites", siteName);
     const prodFlag = environment === "production" ? "--prod" : "";
 
     // Get Vercel token from environment - required for CI deployments
@@ -288,15 +288,15 @@ function deployToVercel(siteName: string, environment: string, dryRun: boolean):
       log("⚠️  Warning: VERCEL_TOKEN not set in CI environment", "yellow");
     }
 
-    log(`Deploying from: ${sitePath}`, "cyan");
-    log(
-      `Command: cd ${sitePath} && vercel deploy ${prodFlag} ${tokenFlag ? "--token ***" : ""}`,
-      "cyan"
-    );
+    log(`Deploying site: ${siteName}`, "cyan");
+    log(`Site path: ${sitePath}`, "cyan");
+    log(`Command: vercel deploy ${prodFlag} ${tokenFlag ? "--token ***" : ""} --yes`, "cyan");
 
-    // Change to site directory and deploy
-    const output = exec(`cd ${sitePath} && vercel deploy ${prodFlag} ${tokenFlag} --yes`, {
-      silent: true,
+    // Deploy from the site directory (where .vercel/project.json is located)
+    const output = execSync(`vercel deploy ${prodFlag} ${tokenFlag} --yes`, {
+      encoding: "utf-8",
+      stdio: "pipe",
+      cwd: sitePath,
     });
 
     // Extract deployment URL from output

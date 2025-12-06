@@ -38,6 +38,9 @@ lerna-debug.log*
 
 # Vercel
 .vercel
+# Keep project.json for CI deployments (links to Vercel project)
+!.vercel/project.json
+!**/.vercel/project.json
 
 # Turborepo
 .turbo
