@@ -6,6 +6,80 @@ Complete project history and achievements organized by development phase.
 
 ## 📅 Recent Changes
 
+### **2025-12-06 - SECURITY: Comprehensive Security Audit Fixes**
+
+**🔒 Security Vulnerabilities Fixed:**
+
+All vulnerabilities identified in security audit have been addressed:
+
+| #   | Issue                    | Severity | Status        |
+| --- | ------------------------ | -------- | ------------- |
+| 1   | HTML injection in emails | HIGH     | ✅ Fixed      |
+| 2   | IP header spoofing       | HIGH     | ✅ Fixed      |
+| 3   | GA4 API secret logging   | MEDIUM   | ✅ Documented |
+| 4   | Consent state validation | MEDIUM   | ✅ Fixed      |
+| 5   | Missing security headers | MEDIUM   | ✅ Fixed      |
+| 6   | unsafe-eval in dev CSP   | LOW      | ✅ Fixed      |
+| 7   | Dependency updates       | LOW      | ✅ Fixed      |
+
+**New Security Utilities Created:**
+
+- ✅ **lib/security/html-escape.ts** - XSS prevention via HTML entity escaping
+- ✅ **lib/security/ip-utils.ts** - Secure IP extraction with validation (IPv4/IPv6)
+- ✅ **lib/analytics/consent-schema.ts** - Zod validation for consent cookies
+
+**Security Headers Added:**
+
+- ✅ **HSTS** - `Strict-Transport-Security: max-age=31536000; includeSubDomains; preload`
+- ✅ **CORP** - `Cross-Origin-Resource-Policy: same-origin`
+- ✅ **Permissions-Policy** - `camera=(), microphone=(), geolocation=()`
+
+**CSP Hardened:**
+
+- ✅ **Removed unsafe-eval** from all environments (was in development CSP)
+- ✅ **Maintained unsafe-inline** for Next.js hydration (required)
+
+**IP Extraction Security:**
+
+- ✅ **Priority 1:** Vercel `x-real-ip` (trusted proxy)
+- ✅ **Priority 2:** Cloudflare `cf-connecting-ip` (trusted proxy)
+- ✅ **Priority 3:** `x-forwarded-for` first IP only (validated)
+- ✅ **Fallback:** Returns "unknown" for invalid/missing IPs
+
+**Email Template Security:**
+
+- ✅ **HTML escaping** applied to all user inputs in email templates
+- ✅ **Prevents XSS** in business notification and customer confirmation emails
+- ✅ **Fields escaped:** name, email, phone, service, location, message, referer, ip
+
+**Dependencies Updated:**
+
+- ✅ **vite** - Added pnpm override `>=7.1.11` for security
+- ✅ **0 vulnerabilities** in `pnpm audit`
+
+**Pre-push Hook Updated:**
+
+- ✅ **Smoke tests now run in CI only** (not locally)
+- ✅ **Aligns with documented testing strategy** in docs/standards/testing.md
+
+**Files Created:**
+
+- `sites/colossus-reference/lib/security/html-escape.ts`
+- `sites/colossus-reference/lib/security/ip-utils.ts`
+- `sites/colossus-reference/lib/analytics/consent-schema.ts`
+
+**Files Modified:**
+
+- `sites/colossus-reference/app/api/contact/route.tsx` - HTML escaping + secure IP
+- `sites/colossus-reference/middleware.ts` - Secure IP + validated consent
+- `sites/colossus-reference/lib/analytics/ga4.ts` - Security documentation
+- `sites/colossus-reference/app/api/analytics/debug/route.ts` - Validated consent
+- `sites/colossus-reference/next.config.ts` - Security headers + CSP hardening
+- `.husky/pre-push` - Skip local smoke tests
+- `package.json` - pnpm override for vite
+
+---
+
 ### **2025-12-05 - SECURITY: React 19.1.2 (CVE-2025-55182)**
 
 **🔒 Critical Security Fix:**
