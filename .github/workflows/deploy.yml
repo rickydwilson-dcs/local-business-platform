@@ -93,6 +93,10 @@ jobs:
         env:
           CI: true
           NEXT_PUBLIC_R2_PUBLIC_URL: ${{ secrets.NEXT_PUBLIC_R2_PUBLIC_URL }}
+          FEATURE_CONSENT_BANNER: "true"
+          FEATURE_ANALYTICS_ENABLED: "true"
+          FEATURE_GA4_ENABLED: "true"
+          FEATURE_SERVER_TRACKING: "true"
 
       - name: Set checks passed
         id: checks
@@ -146,6 +150,11 @@ jobs:
             ${{ inputs.dry-run && '--dry-run' || '' }}
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          NEXT_PUBLIC_R2_PUBLIC_URL: ${{ secrets.NEXT_PUBLIC_R2_PUBLIC_URL }}
+          FEATURE_CONSENT_BANNER: "true"
+          FEATURE_ANALYTICS_ENABLED: "true"
+          FEATURE_GA4_ENABLED: "true"
+          FEATURE_SERVER_TRACKING: "true"
 
       - name: Comment on PR
         if: github.event_name == 'pull_request'
@@ -205,6 +214,10 @@ jobs:
           NEW_RELIC_LICENSE_KEY: ${{ secrets.NEW_RELIC_LICENSE_KEY }}
           NEW_RELIC_APP_NAME: "colossus-reference"
           NEW_RELIC_NO_CONFIG_FILE: "true"
+          FEATURE_CONSENT_BANNER: "true"
+          FEATURE_ANALYTICS_ENABLED: "true"
+          FEATURE_GA4_ENABLED: "true"
+          FEATURE_SERVER_TRACKING: "true"
 
       - name: Deploy batch (other environments)
         if: inputs.environment != 'production' && github.ref != 'refs/heads/main'
@@ -218,6 +231,10 @@ jobs:
           NEW_RELIC_LICENSE_KEY: ${{ secrets.NEW_RELIC_LICENSE_KEY }}
           NEW_RELIC_APP_NAME: "colossus-reference"
           NEW_RELIC_NO_CONFIG_FILE: "true"
+          FEATURE_CONSENT_BANNER: "true"
+          FEATURE_ANALYTICS_ENABLED: "true"
+          FEATURE_GA4_ENABLED: "true"
+          FEATURE_SERVER_TRACKING: "true"
 
       - name: Create deployment summary
         run: |
@@ -279,6 +296,10 @@ jobs:
           CI: true
           NEXT_PUBLIC_R2_PUBLIC_URL: ${{ secrets.NEXT_PUBLIC_R2_PUBLIC_URL }}
           TEST_BASE_URL: https://local-business-platform-colossus-reference.vercel.app
+          FEATURE_CONSENT_BANNER: "true"
+          FEATURE_ANALYTICS_ENABLED: "true"
+          FEATURE_GA4_ENABLED: "true"
+          FEATURE_SERVER_TRACKING: "true"
 
       - name: Upload test results
         if: failure()
