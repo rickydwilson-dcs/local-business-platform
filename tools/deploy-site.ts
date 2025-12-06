@@ -262,6 +262,7 @@ function deployToVercel(siteName: string, environment: string, dryRun: boolean):
   logSection(`🚀 Deploying to Vercel (${environment})`);
 
   const startTime = Date.now();
+  const sitePath = join(process.cwd(), "sites", siteName);
 
   if (dryRun) {
     log("🔍 DRY RUN - No actual deployment will occur", "yellow");
@@ -277,7 +278,6 @@ function deployToVercel(siteName: string, environment: string, dryRun: boolean):
   }
 
   try {
-    const siteRelPath = `sites/${siteName}`;
     const prodFlag = environment === "production" ? "--prod" : "";
 
     // Get Vercel token from environment - required for CI deployments
@@ -289,14 +289,14 @@ function deployToVercel(siteName: string, environment: string, dryRun: boolean):
     }
 
     log(`Deploying site: ${siteName}`, "cyan");
-    log(
-      `Command: vercel deploy --cwd ${siteRelPath} ${prodFlag} ${tokenFlag ? "--token ***" : ""}`,
-      "cyan"
-    );
+    log(`Site path: ${sitePath}`, "cyan");
+    log(`Command: vercel deploy ${prodFlag} ${tokenFlag ? "--token ***" : ""} --yes`, "cyan");
 
-    // Deploy from monorepo root with --cwd flag pointing to site directory
-    const output = exec(`vercel deploy --cwd ${siteRelPath} ${prodFlag} ${tokenFlag} --yes`, {
-      silent: true,
+    // Deploy from the site directory (where .vercel/project.json is located)
+    const output = execSync(`vercel deploy ${prodFlag} ${tokenFlag} --yes`, {
+      encoding: "utf-8",
+      stdio: "pipe",
+      cwd: sitePath,
     });
 
     // Extract deployment URL from output
