@@ -146,7 +146,6 @@ jobs:
             ${{ inputs.dry-run && '--dry-run' || '' }}
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
 
       - name: Comment on PR
         if: github.event_name == 'pull_request'
@@ -202,7 +201,6 @@ jobs:
             ${{ inputs.dry-run && '--dry-run' || '' }}
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           NEXT_PUBLIC_R2_PUBLIC_URL: ${{ secrets.NEXT_PUBLIC_R2_PUBLIC_URL }}
           NEW_RELIC_LICENSE_KEY: ${{ secrets.NEW_RELIC_LICENSE_KEY }}
           NEW_RELIC_APP_NAME: "colossus-reference"
@@ -216,7 +214,6 @@ jobs:
             ${{ inputs.dry-run && '--dry-run' || '' }}
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           NEXT_PUBLIC_R2_PUBLIC_URL: ${{ secrets.NEXT_PUBLIC_R2_PUBLIC_URL }}
           NEW_RELIC_LICENSE_KEY: ${{ secrets.NEW_RELIC_LICENSE_KEY }}
           NEW_RELIC_APP_NAME: "colossus-reference"
