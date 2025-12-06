@@ -146,7 +146,6 @@ jobs:
             ${{ inputs.dry-run && '--dry-run' || '' }}
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
 
       - name: Comment on PR
         if: github.event_name == 'pull_request'
@@ -199,7 +198,6 @@ jobs:
             ${{ inputs.dry-run && '--dry-run' || '' }}
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
 
       - name: Deploy batch (other environments)
         if: inputs.environment != 'production' && github.ref != 'refs/heads/main'
@@ -209,7 +207,6 @@ jobs:
             ${{ inputs.dry-run && '--dry-run' || '' }}
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
 
       - name: Create deployment summary
         run: |
