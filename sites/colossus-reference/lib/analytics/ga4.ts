@@ -125,12 +125,18 @@ export class GA4Analytics {
 
   /**
    * Send event to GA4 Measurement Protocol
+   *
+   * SECURITY NOTE: The api_secret in the URL is required by GA4 Measurement Protocol.
+   * This is Google's design - there is no header-based alternative.
+   * This code runs server-side only, so the secret is never exposed to browsers.
+   * Ensure this URL is never logged or exposed in error messages.
    */
   private async sendEvent(event: GA4Event): Promise<{ success: boolean; error?: string }> {
     const endpoint = this.debugMode
       ? `https://www.google-analytics.com/debug/mp/collect`
       : `https://www.google-analytics.com/mp/collect`;
 
+    // Note: api_secret in URL is required by GA4 Measurement Protocol (server-side only)
     const url = `${endpoint}?measurement_id=${this.measurementId}&api_secret=${this.apiSecret}`;
 
     try {
