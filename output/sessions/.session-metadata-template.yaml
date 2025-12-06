@@ -1,0 +1,82 @@
+# Session Metadata Template
+# Use this template to document Claude Code sessions for the Local Business Platform
+# File naming: YYYY-MM-DD_topic-description.yaml (e.g., 2025-12-06_feature-implementation.yaml)
+
+session:
+  # Unique session identifier in format YYYY-MM-DD_topic-description
+  # Example: 2025-12-06_auth-refactor or 2025-12-05_bug-investigation
+  id: YYYY-MM-DD_topic-description
+
+  # ISO 8601 timestamp when the session was created
+  # Example: 2025-12-06T14:30:45 or 2025-12-06T14:30:45Z
+  created: YYYY-MM-DDTHH:MM:SS
+
+  # Brief description of the primary goal or objective for this session
+  # Example: "Refactor authentication module to support OAuth2 flows"
+  # Keep to 1-2 sentences
+  purpose: Brief description of session goal
+
+context:
+  # Git branch where changes are being made
+  # Must follow workflow: develop → staging → main
+  # Typically "develop" for implementation work
+  branch: develop
+
+  # List of file paths related to this session
+  # Helps establish context and dependencies
+  # Example:
+  #   - src/auth/oauth.ts
+  #   - tests/auth/oauth.test.ts
+  #   - docs/architecture/auth.md
+  related_files: []
+
+  # Tags for categorizing and searching sessions
+  # Examples: feature, bugfix, refactor, research, documentation
+  # Can include domain tags like: auth, api, ui, content, testing
+  tags: []
+
+outputs:
+  # Array of artifacts/documents produced during this session
+  # Each output should represent a concrete deliverable
+
+  # Example entry:
+  # - file: 2025-12-06_oauth-implementation-plan.md
+  #   type: plan
+  #   summary: Implementation steps and technical considerations for OAuth2 integration
+
+  - file: filename.md
+    # Type of document: analysis | plan | research | notes | implementation
+    # - analysis: Investigation findings, code reviews, technical analysis
+    # - plan: Implementation roadmap, task breakdown
+    # - research: Spike investigations, feasibility studies
+    # - notes: Session notes, observations, decisions
+    # - implementation: Code changes, commits, PRs
+    type: analysis|plan|research|notes
+
+    # Concise summary of what this output contains
+    # Example: "Analysis of current auth implementation and OAuth2 compatibility"
+    summary: Brief description
+
+# Free-form text section for important decisions, insights, or context
+# Use this to document:
+# - Key architectural decisions made during the session
+# - Blockers or challenges encountered
+# - Important observations or learnings
+# - Next steps or follow-up items
+# - Links to PRs, issues, or related work
+# Example:
+# |
+#   Key Decision: Chose JWT tokens over session storage for stateless architecture
+#
+#   Blocker: Awaiting design approval on OAuth2 UI flow
+#
+#   Next Steps:
+#   - Complete security audit review
+#   - Implement rate limiting on OAuth endpoints
+#   - Update documentation with new auth flow diagrams
+#
+#   Links:
+#   - PR: https://github.com/org/repo/pull/123
+#   - Issue: https://github.com/org/repo/issues/456
+notes: |
+  Key decisions or insights from this session
