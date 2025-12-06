@@ -65,8 +65,9 @@ const nextConfig: NextConfig = {
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     // Cache images for better performance
     minimumCacheTTL: 60 * 60 * 24 * 365, // Cache for 1 year
-    // Note: Default quality is 75. Individual Image components should specify quality={65}
-    // for ~10-15% better compression (Lighthouse recommendation: saves ~23 KiB)
+    // Allowed quality values for Image component quality prop
+    // 50 = thumbnails, 65 = content images, 75 = default, 80 = hero images
+    qualities: [50, 65, 75, 80],
   },
   // Ensure static exports work correctly
   trailingSlash: false,
