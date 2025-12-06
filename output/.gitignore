@@ -1,0 +1,6 @@
+# Ignore all output content (local only)
+*
+
+# But track these documentation files
+!README.md
+!.gitignore

@@ -1,0 +1,168 @@
+{
+  "name": "Session Output Management System",
+  "epic_id": "OUT",
+  "description": "Implement a local output folder system for storing session-based context, memory, and documentation that is gitignored and organized by date and topic.",
+  "business_value": "Provides AI agents and developers with a structured, local workspace for session outputs without polluting the git repository or documentation system.",
+  "goals": [
+    "Create standardized folder structure at project root",
+    "Enable session-based organization of context and outputs",
+    "Maintain git repository cleanliness through proper ignore rules",
+    "Provide clear documentation and templates for consistent usage",
+    "Integrate guidance into existing AI agent documentation (CLAUDE.md)"
+  ],
+  "personas": [
+    {
+      "name": "developer",
+      "description": "Human developer using Claude Code to work on the codebase",
+      "needs": [
+        "Understand when and how to use the output folder",
+        "Have clear documentation and examples",
+        "Keep session data local and not tracked in git"
+      ]
+    },
+    {
+      "name": "ai_agent",
+      "description": "Claude or other AI agents working on the codebase through Claude Code",
+      "needs": [
+        "Structured location for session context and memory",
+        "Consistent metadata format for session documentation",
+        "Clear guidance on session management workflow"
+      ]
+    }
+  ],
+  "scope": {
+    "in_scope": [
+      "Creating /output/ directory structure",
+      "Session metadata YAML template",
+      "Comprehensive README documentation",
+      "Git ignore configuration",
+      "CLAUDE.md guidance integration",
+      "Session and archive folder organization",
+      "Current session pointer file"
+    ],
+    "out_of_scope": [
+      "Automated session management CLI tools",
+      "Integration with docs/ folder system",
+      "Multi-user session attribution",
+      "Session search or indexing features",
+      "AI agent memory persistence between sessions",
+      "Session backup or sync systems",
+      "Web interface for session management"
+    ]
+  },
+  "technical_requirements": [
+    {
+      "requirement": "Folder structure at project root",
+      "details": "Create /output/ with sessions/, archive/ subdirectories"
+    },
+    {
+      "requirement": "Git ignore rules",
+      "details": "Local .gitignore in /output/ ignoring all except README.md and .gitignore itself"
+    },
+    {
+      "requirement": "Session naming convention",
+      "details": "YYYY-MM-DD_topic-description format for chronological organization"
+    },
+    {
+      "requirement": "Metadata template",
+      "details": "YAML format with fields: session_id, date, topic, description, agent, goals, outcomes, files_modified, tags"
+    },
+    {
+      "requirement": "Current session tracking",
+      "details": ".current-session file containing active session folder name"
+    }
+  ],
+  "success_metrics": [
+    {
+      "metric": "Folder structure created and accessible",
+      "target": "100% - all directories and placeholder files exist"
+    },
+    {
+      "metric": "Git ignore effectiveness",
+      "target": "0 session files tracked in git (except README.md)"
+    },
+    {
+      "metric": "Documentation completeness",
+      "target": "README covers all aspects: purpose, structure, conventions, workflow, examples"
+    },
+    {
+      "metric": "CLAUDE.md integration",
+      "target": "New section added with clear guidance and link to full docs"
+    },
+    {
+      "metric": "Template usability",
+      "target": "Session metadata template is valid YAML with clear field descriptions"
+    }
+  ],
+  "assumptions": [
+    "Single developer/user environment (no collaboration on session data)",
+    "Session data is ephemeral and can be archived or deleted",
+    "Output folder is for local use only (not deployed)",
+    "Developers/agents will manually manage session lifecycle",
+    "No existing output folder system to migrate from"
+  ],
+  "risks": [
+    {
+      "risk": "Confusion with docs/ folder system",
+      "mitigation": "Clear documentation stating output/ is for local session data only",
+      "severity": "LOW"
+    },
+    {
+      "risk": "Developers accidentally commit session data",
+      "mitigation": "Robust .gitignore rules and testing",
+      "severity": "MEDIUM"
+    },
+    {
+      "risk": "Inconsistent session folder naming",
+      "mitigation": "Clear examples and template in documentation",
+      "severity": "LOW"
+    },
+    {
+      "risk": "Abandoned sessions accumulating",
+      "mitigation": "Archive/ folder and archiving guidelines in README",
+      "severity": "LOW"
+    }
+  ],
+  "dependencies": [
+    {
+      "dependency": "Git repository structure",
+      "description": "Must be implemented at project root, requires git repository"
+    },
+    {
+      "dependency": "CLAUDE.md format",
+      "description": "Must integrate with existing CLAUDE.md structure and conventions"
+    }
+  ],
+  "estimated_effort": {
+    "total_points": 17,
+    "total_stories": 5,
+    "sprints": 1,
+    "team_capacity": 20
+  },
+  "timeline": {
+    "sprint_1": {
+      "stories": ["OUT-001", "OUT-002", "OUT-003", "OUT-004", "OUT-005"],
+      "points": 17,
+      "duration": "1 sprint",
+      "deliverables": [
+        "Complete output folder structure",
+        "README documentation",
+        "Session metadata template",
+        "Git ignore configuration",
+        "CLAUDE.md integration"
+      ]
+    }
+  },
+  "priority": "MEDIUM",
+  "status": "PLANNED",
+  "created_date": "2025-12-06",
+  "target_completion": "Sprint 1",
+  "related_epics": [],
+  "tags": [
+    "infrastructure",
+    "documentation",
+    "developer-experience",
+    "ai-agent-tooling",
+    "session-management"
+  ]
+}

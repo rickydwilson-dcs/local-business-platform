@@ -75,3 +75,8 @@ client-images/
 # Lock files (keep pnpm-lock.yaml)
 package-lock.json
 yarn.lock
+
+# Output folder (local processing only)
+output/sessions/
+output/archive/
+output/.current-session
