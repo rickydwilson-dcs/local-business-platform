@@ -277,7 +277,7 @@ function deployToVercel(siteName: string, environment: string, dryRun: boolean):
   }
 
   try {
-    const sitePath = join(process.cwd(), "sites", siteName);
+    const siteRelPath = `sites/${siteName}`;
     const prodFlag = environment === "production" ? "--prod" : "";
 
     // Get Vercel token from environment - required for CI deployments
@@ -288,14 +288,14 @@ function deployToVercel(siteName: string, environment: string, dryRun: boolean):
       log("⚠️  Warning: VERCEL_TOKEN not set in CI environment", "yellow");
     }
 
-    log(`Deploying from: ${sitePath}`, "cyan");
+    log(`Deploying site: ${siteName}`, "cyan");
     log(
-      `Command: cd ${sitePath} && vercel deploy ${prodFlag} ${tokenFlag ? "--token ***" : ""}`,
+      `Command: vercel deploy --cwd ${siteRelPath} ${prodFlag} ${tokenFlag ? "--token ***" : ""}`,
       "cyan"
     );
 
-    // Change to site directory and deploy
-    const output = exec(`cd ${sitePath} && vercel deploy ${prodFlag} ${tokenFlag} --yes`, {
+    // Deploy from monorepo root with --cwd flag pointing to site directory
+    const output = exec(`vercel deploy --cwd ${siteRelPath} ${prodFlag} ${tokenFlag} --yes`, {
       silent: true,
     });
 
