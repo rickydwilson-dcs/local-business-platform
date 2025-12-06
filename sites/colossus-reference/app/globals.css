@@ -224,6 +224,103 @@
   .mobile-menu-town-link .rich-indicator {
     @apply inline-block w-1.5 h-1.5 bg-brand-blue rounded-full ml-2;
   }
+
+  /* Certificate Lightbox System */
+  /* Lightbox Overlay - Full screen semi-transparent backdrop */
+  .lightbox-overlay {
+    @apply fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4 sm:p-6 animate-fade-in;
+  }
+
+  /* Lightbox Content Container */
+  .lightbox-content {
+    @apply relative w-full max-w-6xl max-h-[95vh] bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col animate-scale-in;
+  }
+
+  /* Lightbox Header */
+  .lightbox-header {
+    @apply flex items-center justify-between p-4 sm:p-6 border-b border-gray-200 flex-shrink-0 bg-white;
+  }
+
+  .lightbox-header-title {
+    @apply flex-1 mr-4;
+  }
+
+  .lightbox-title {
+    @apply text-xl sm:text-2xl font-bold text-gray-900 mb-1;
+  }
+
+  .lightbox-position {
+    @apply text-sm text-gray-600 font-medium;
+  }
+
+  /* Lightbox Close Button */
+  .lightbox-close-button {
+    @apply flex-shrink-0 p-2 rounded-lg border-2 border-gray-300 text-gray-700 hover:bg-gray-100 hover:border-gray-400 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-brand-blue focus:ring-offset-2;
+  }
+
+  /* Lightbox Image Container */
+  .lightbox-image-container {
+    @apply relative flex-1 overflow-auto bg-gray-100 flex items-center justify-center p-4 sm:p-8;
+  }
+
+  .lightbox-image-wrapper {
+    @apply relative w-full h-full max-w-4xl max-h-[600px] mx-auto;
+  }
+
+  .lightbox-image {
+    @apply object-contain;
+  }
+
+  /* Lightbox Navigation Buttons */
+  .lightbox-nav-button {
+    @apply absolute top-1/2 -translate-y-1/2 p-3 sm:p-4 bg-white bg-opacity-90 hover:bg-opacity-100 rounded-full shadow-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-brand-blue focus:ring-offset-2 text-gray-900 hover:scale-110 z-10;
+  }
+
+  .lightbox-nav-button-left {
+    @apply left-2 sm:left-4;
+  }
+
+  .lightbox-nav-button-right {
+    @apply right-2 sm:right-4;
+  }
+
+  /* Lightbox Description */
+  .lightbox-description {
+    @apply p-4 sm:p-6 border-t border-gray-200 bg-gray-50 flex-shrink-0;
+  }
+
+  .lightbox-description p {
+    @apply text-base text-gray-700 text-center;
+  }
+}
+
+/* Lightbox Animations */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.2s ease-out;
+}
+
+.animate-scale-in {
+  animation: scale-in 0.2s ease-out;
 }
 
 /* Fix Lighthouse warning: Ensure h1 elements have consistent font-size in semantic elements */
