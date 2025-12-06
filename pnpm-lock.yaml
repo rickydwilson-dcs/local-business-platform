@@ -96,6 +96,21 @@ importers:
       '@types/react-dom':
         specifier: ^19
         version: 19.2.1(@types/react@19.2.2)
+      '@typescript-eslint/eslint-plugin':
+        specifier: ^8.48.1
+        version: 8.48.1(@typescript-eslint/parser@8.48.1(eslint@9.37.0(jiti@1.21.7))(typescript@5.9.3))(eslint@9.37.0(jiti@1.21.7))(typescript@5.9.3)
+      '@typescript-eslint/parser':
+        specifier: ^8.48.1
+        version: 8.48.1(eslint@9.37.0(jiti@1.21.7))(typescript@5.9.3)
+      eslint:
+        specifier: ^9.37.0
+        version: 9.37.0(jiti@1.21.7)
+      eslint-plugin-react:
+        specifier: ^7.37.5
+        version: 7.37.5(eslint@9.37.0(jiti@1.21.7))
+      eslint-plugin-react-hooks:
+        specifier: ^5.2.0
+        version: 5.2.0(eslint@9.37.0(jiti@1.21.7))
       typescript:
         specifier: ^5
         version: 5.9.3
