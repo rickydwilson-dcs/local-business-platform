@@ -97,10 +97,10 @@ function logSection(title: string): void {
 }
 
 /**
- * Execute command silently
+ * Execute command with output visible
  */
 function exec(command: string): string {
-  return execSync(command, { encoding: "utf-8", stdio: "pipe" });
+  return execSync(command, { encoding: "utf-8", stdio: "inherit" }) || "";
 }
 
 /**
