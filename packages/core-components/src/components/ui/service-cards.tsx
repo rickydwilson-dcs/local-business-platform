@@ -59,7 +59,7 @@ export function ServiceCards({
 
             return (
               <div
-                key={index}
+                key={card.href}
                 className={`group relative rounded-2xl overflow-hidden shadow-sm border border-gray-200 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 ${
                   isEven ? "bg-white" : "bg-gray-50"
                 }`}
