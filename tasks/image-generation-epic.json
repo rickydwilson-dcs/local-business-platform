@@ -1,0 +1,34 @@
+{
+  "name": "AI Image Generation Pipeline for Card Images",
+  "description": "Build a complete pipeline to automatically generate, manage, and deploy AI-generated images for 444 card components across the platform. This includes scanning MDX files to create an image manifest with AI prompts, generating images via Gemini 2.0 Flash, uploading to Cloudflare R2, and automatically updating MDX files with image references.",
+  "personas": ["developer", "end_user"],
+  "scope": [
+    "Scan MDX files and generate image manifest with AI prompts",
+    "Create shared TypeScript types for manifest schema",
+    "Generate images using Gemini 2.0 Flash API",
+    "Upload generated images to Cloudflare R2",
+    "Automatically update MDX files with image references",
+    "Fix card components to use getImageUrl() for R2 paths",
+    "Add npm scripts for pipeline automation",
+    "Document tools and usage in README"
+  ],
+  "technical_requirements": [
+    "Integrate with Gemini 2.0 Flash image generation API",
+    "Use existing R2Client for Cloudflare uploads",
+    "Parse and modify MDX frontmatter with gray-matter",
+    "Support --dry-run and --limit flags for safe batch processing",
+    "Handle API rate limits with exponential backoff",
+    "Generate images at 800x600px (4:3 aspect ratio) in WebP format"
+  ],
+  "dependencies": {
+    "existing": ["@aws-sdk/client-s3", "sharp", "dotenv", "gray-matter"],
+    "new": ["@google/generative-ai"]
+  },
+  "metrics": {
+    "total_images": 444,
+    "specialist_cards": 111,
+    "service_cards": 333,
+    "location_files": 37,
+    "estimated_points": 29
+  }
+}

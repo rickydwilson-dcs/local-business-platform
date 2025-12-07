@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useCallback, useRef } from "react";
+import { useEffect, useCallback, useRef, useState } from "react";
 import Image from "next/image";
 
 interface Certificate {
@@ -19,6 +19,8 @@ interface CertificateLightboxProps {
   onNavigate: (index: number) => void;
 }
 
+const ZOOM_LEVELS = [1, 1.5, 2, 2.5, 3];
+
 export function CertificateLightbox({
   certificates,
   selectedIndex,
@@ -28,7 +30,21 @@ export function CertificateLightbox({
 }: CertificateLightboxProps) {
   const triggerElementRef = useRef<HTMLElement | null>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const imageContainerRef = useRef<HTMLDivElement>(null);
   const selectedCertificate = certificates[selectedIndex];
+  const [zoomLevel, setZoomLevel] = useState(0);
+  const [panPosition, setPanPosition] = useState({ x: 0, y: 0 });
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
+
+  const isZoomed = zoomLevel > 0;
+  const currentZoom = ZOOM_LEVELS[zoomLevel];
+
+  // Reset zoom when changing certificates or closing
+  useEffect(() => {
+    setZoomLevel(0);
+    setPanPosition({ x: 0, y: 0 });
+  }, [selectedIndex, isOpen]);
 
   // Store the element that triggered the lightbox
   useEffect(() => {
@@ -36,6 +52,52 @@ export function CertificateLightbox({
       triggerElementRef.current = document.activeElement as HTMLElement;
     }
   }, [isOpen]);
+
+  // Zoom handlers
+  const handleZoomIn = useCallback(() => {
+    setZoomLevel((prev) => Math.min(prev + 1, ZOOM_LEVELS.length - 1));
+  }, []);
+
+  const handleZoomOut = useCallback(() => {
+    setZoomLevel((prev) => {
+      const newLevel = Math.max(prev - 1, 0);
+      if (newLevel === 0) {
+        setPanPosition({ x: 0, y: 0 });
+      }
+      return newLevel;
+    });
+  }, []);
+
+  const handleResetZoom = useCallback(() => {
+    setZoomLevel(0);
+    setPanPosition({ x: 0, y: 0 });
+  }, []);
+
+  // Pan handlers for dragging zoomed image
+  const handleMouseDown = useCallback(
+    (e: React.MouseEvent) => {
+      if (!isZoomed) return;
+      e.preventDefault();
+      setIsDragging(true);
+      setDragStart({ x: e.clientX - panPosition.x, y: e.clientY - panPosition.y });
+    },
+    [isZoomed, panPosition]
+  );
+
+  const handleMouseMove = useCallback(
+    (e: React.MouseEvent) => {
+      if (!isDragging || !isZoomed) return;
+      setPanPosition({
+        x: e.clientX - dragStart.x,
+        y: e.clientY - dragStart.y,
+      });
+    },
+    [isDragging, isZoomed, dragStart]
+  );
+
+  const handleMouseUp = useCallback(() => {
+    setIsDragging(false);
+  }, []);
 
   // Handle keyboard navigation
   const handleKeyDown = useCallback(
@@ -45,25 +107,52 @@ export function CertificateLightbox({
       switch (e.key) {
         case "Escape":
           e.preventDefault();
-          onClose();
+          if (isZoomed) {
+            handleResetZoom();
+          } else {
+            onClose();
+          }
           break;
         case "ArrowLeft":
           e.preventDefault();
-          if (selectedIndex > 0) {
+          if (!isZoomed && selectedIndex > 0) {
             onNavigate(selectedIndex - 1);
           }
           break;
         case "ArrowRight":
           e.preventDefault();
-          if (selectedIndex < certificates.length - 1) {
+          if (!isZoomed && selectedIndex < certificates.length - 1) {
             onNavigate(selectedIndex + 1);
           }
+          break;
+        case "+":
+        case "=":
+          e.preventDefault();
+          handleZoomIn();
+          break;
+        case "-":
+          e.preventDefault();
+          handleZoomOut();
+          break;
+        case "0":
+          e.preventDefault();
+          handleResetZoom();
           break;
         default:
           break;
       }
     },
-    [isOpen, selectedIndex, certificates.length, onClose, onNavigate]
+    [
+      isOpen,
+      isZoomed,
+      selectedIndex,
+      certificates.length,
+      onClose,
+      onNavigate,
+      handleZoomIn,
+      handleZoomOut,
+      handleResetZoom,
+    ]
   );
 
   // Set up keyboard event listeners
@@ -142,8 +231,57 @@ export function CertificateLightbox({
             <h2 className="lightbox-title">{selectedCertificate.name}</h2>
             <p className="lightbox-position" aria-live="polite" aria-atomic="true">
               {selectedIndex + 1} of {certificates.length}
+              {isZoomed && ` • ${Math.round(currentZoom * 100)}%`}
             </p>
           </div>
+
+          {/* Zoom Controls */}
+          <div className="flex items-center gap-2 mr-4">
+            <button
+              onClick={handleResetZoom}
+              className={`lightbox-zoom-button ${!isZoomed ? "invisible" : ""}`}
+              aria-label="Reset zoom"
+              type="button"
+              tabIndex={isZoomed ? 0 : -1}
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"
+                />
+              </svg>
+            </button>
+            <button
+              onClick={handleZoomOut}
+              className="lightbox-zoom-button"
+              aria-label="Zoom out"
+              type="button"
+              disabled={zoomLevel === 0}
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" />
+              </svg>
+            </button>
+            <button
+              onClick={handleZoomIn}
+              className="lightbox-zoom-button"
+              aria-label="Zoom in"
+              type="button"
+              disabled={zoomLevel === ZOOM_LEVELS.length - 1}
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M12 4v16m8-8H4"
+                />
+              </svg>
+            </button>
+          </div>
+
           <button
             ref={closeButtonRef}
             onClick={onClose}
@@ -169,8 +307,21 @@ export function CertificateLightbox({
         </div>
 
         {/* Certificate Image */}
-        <div className="lightbox-image-container">
-          <div className="lightbox-image-wrapper">
+        <div
+          ref={imageContainerRef}
+          className={`lightbox-image-container ${isZoomed ? "cursor-grab" : ""} ${isDragging ? "cursor-grabbing" : ""}`}
+          onMouseDown={handleMouseDown}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUp}
+          onMouseLeave={handleMouseUp}
+        >
+          <div
+            className="lightbox-image-wrapper"
+            style={{
+              transform: `scale(${currentZoom}) translate(${panPosition.x / currentZoom}px, ${panPosition.y / currentZoom}px)`,
+              transition: isDragging ? "none" : "transform 0.2s ease-out",
+            }}
+          >
             <Image
               src={selectedCertificate.fullImage}
               alt={selectedCertificate.name}
@@ -178,6 +329,7 @@ export function CertificateLightbox({
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
               className="lightbox-image"
               priority
+              draggable={false}
             />
           </div>
 

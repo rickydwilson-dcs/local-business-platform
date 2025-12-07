@@ -19,7 +19,7 @@ export function HeroSection(props: HeroSectionProps) {
     title,
     description,
     phone = "01424 466 661",
-    trustBadges = ["TG20:21 Compliant", "CHAS Accredited", "£10M Insured"],
+    trustBadges = ["Construction Line Gold", "CHAS Accredited", "TG20:21", "£10M Insured"],
     heroImage,
     ctaText = "Get Free Quote",
     ctaUrl = "/contact",
