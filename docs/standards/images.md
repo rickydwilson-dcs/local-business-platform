@@ -1,7 +1,7 @@
 # Image Standards
 
-**Version:** 1.0.0
-**Last Updated:** 2025-12-05
+**Version:** 1.1.0
+**Last Updated:** 2025-12-07
 **Scope:** All sites in local-business-platform
 
 ---
@@ -142,22 +142,53 @@ project-003-industrial-canterbury.jpg
 
 ## R2 Bucket Structure
 
+**IMPORTANT:** All images in R2 must be organized within site-specific folders. This ensures clear separation between sites and prevents naming conflicts.
+
 ```
 R2 Bucket/
-├── hero-images/
-│   ├── Brighton-Scaffolding.png
-│   ├── Canterbury-Scaffolding.png
+├── colossus-reference/           # Site-specific folder (REQUIRED)
+│   ├── hero/
+│   │   ├── location/            # Location hero images
+│   │   │   ├── Brighton-Scaffolding.webp
+│   │   │   ├── Canterbury-Scaffolding.webp
+│   │   │   └── ...
+│   │   └── service/             # Service hero images
+│   │       └── ...
+│   ├── certificates/            # Accreditation certificates
+│   │   ├── thumbs/
+│   │   │   ├── construction-line-gold-thumb.webp
+│   │   │   └── ...
+│   │   └── full/
+│   │       ├── construction-line-gold-full.webp
+│   │       └── ...
+│   ├── services/
+│   │   ├── residential-scaffolding.webp
+│   │   └── ...
+│   └── gallery/
+│       ├── project-001.webp
+│       └── ...
+├── another-site/                 # Another site's images
+│   ├── hero/
 │   └── ...
-├── service-images/
-│   ├── residential-scaffolding.jpg
-│   └── ...
-├── location-images/
-│   ├── brighton-area.jpg
-│   └── ...
-└── project-gallery/
-    ├── project-001.jpg
-    └── ...
+└── shared/                       # Only for truly shared assets
+    └── platform-logo.webp
 ```
+
+### Site Folder Naming
+
+Site folders should match the directory name in `sites/`:
+
+| Site Directory              | R2 Folder             |
+| --------------------------- | --------------------- |
+| `sites/colossus-reference/` | `colossus-reference/` |
+| `sites/example-plumber/`    | `example-plumber/`    |
+
+### Why Site-Specific Folders?
+
+1. **Prevents naming conflicts** - Each site can have `/hero/Brighton.webp` without collision
+2. **Clear ownership** - Easy to identify which images belong to which site
+3. **Simpler cleanup** - Delete a site's entire folder when decommissioning
+4. **Better caching** - Site-specific cache invalidation possible
 
 ## Development vs Production
 
