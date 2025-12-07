@@ -91,8 +91,9 @@ test.describe("Location Pages", () => {
   test("should display location hero image", async ({ page }) => {
     await page.goto("/locations/brighton");
 
-    // Check for hero image
-    const heroImage = page.locator('img[src*="brighton"], img[alt*="brighton" i]');
+    // Check for hero image - specifically target hero section images
+    // Hero images are in /hero/location/ path, use .first() to avoid strict mode with multiple images
+    const heroImage = page.locator('img[src*="hero/location/"]').first();
     if (await heroImage.isVisible()) {
       await expect(heroImage).toBeVisible();
     }
