@@ -1,6 +1,6 @@
 # Image Standards
 
-**Version:** 1.1.0
+**Version:** 1.2.0
 **Last Updated:** 2025-12-07
 **Scope:** All sites in local-business-platform
 
@@ -131,6 +131,20 @@ industrial-scaffolding.jpg
 access-scaffolding.jpg
 ```
 
+### Card Images (AI-Generated)
+
+```bash
+# Format: {site}/cards/{content-type}/{slug}/{card-type}-{card-slug}.webp
+
+# Specialist cards (3 per location)
+colossus-reference/cards/locations/battle/specialist-battle-abbey-heritage.webp
+colossus-reference/cards/locations/brighton/specialist-regency-heritage.webp
+
+# Service cards (9 per location)
+colossus-reference/cards/locations/battle/service-commercial-scaffolding.webp
+colossus-reference/cards/locations/battle/service-residential-scaffolding.webp
+```
+
 ### Project Gallery
 
 ```bash
@@ -153,6 +167,15 @@ R2 Bucket/
 │   │   │   ├── Canterbury-Scaffolding.webp
 │   │   │   └── ...
 │   │   └── service/             # Service hero images
+│   │       └── ...
+│   ├── cards/                   # AI-generated card images (800x600)
+│   │   └── locations/
+│   │       ├── battle/
+│   │       │   ├── specialist-battle-abbey-heritage.webp
+│   │       │   ├── service-commercial-scaffolding.webp
+│   │       │   └── ...
+│   │       ├── brighton/
+│   │       │   └── ...
 │   │       └── ...
 │   ├── certificates/            # Accreditation certificates
 │   │   ├── thumbs/
@@ -267,6 +290,92 @@ Before completing any image work:
 - [ ] Responsive sizes configured
 - [ ] Naming convention followed
 - [ ] Priority set for above-fold images only
+
+## AI Image Generation Pipeline
+
+The platform includes tools for AI-generated card images using Google's Gemini 3 Pro Image Preview model.
+
+### Image Types & Dimensions
+
+| Image Type   | Dimensions | Use Case                       |
+| ------------ | ---------- | ------------------------------ |
+| Hero images  | 1920×1080  | Page headers, banners          |
+| Card images  | 800×600    | Specialist & service cards     |
+| Thumbnails   | 300×200    | Gallery previews               |
+| Certificates | Various    | Full-size + thumbnail variants |
+
+### Pipeline Commands
+
+```bash
+# Full pipeline (manifest → generate → upload → update MDX)
+pnpm images:pipeline
+
+# Individual steps
+pnpm images:manifest       # Scan MDX, create image manifest with AI prompts
+pnpm images:generate       # Generate images via real-time Gemini API
+pnpm images:generate --limit 50  # Generate in batches (rate limit friendly)
+
+# Batch API (for high-volume generation)
+pnpm images:batch:create   # Create batch job (bypasses daily limits)
+pnpm images:batch:status   # Check batch progress
+pnpm images:batch:download # Download completed batch results
+
+# Upload and finalize
+pnpm images:upload         # Upload generated images to R2
+pnpm images:update-mdx     # Add image references to MDX frontmatter
+```
+
+### Pipeline Tools
+
+| Tool                         | Purpose                                     |
+| ---------------------------- | ------------------------------------------- |
+| `generate-image-manifest.ts` | Scans MDX, creates manifest with AI prompts |
+| `generate-images-ai.ts`      | Real-time Gemini API generation             |
+| `generate-images-batch.ts`   | Batch API for high-volume (2M token quota)  |
+| `upload-generated-images.ts` | Uploads to R2 with proper headers           |
+| `update-mdx-images.ts`       | Updates MDX frontmatter with image refs     |
+| `download-batch-images.sh`   | Shell script for large batch extraction     |
+
+### Image Manifest
+
+The manifest (`output/image-manifest.json`) tracks all images with status:
+
+```json
+{
+  "generated": "2025-12-07T10:00:00Z",
+  "totalImages": 444,
+  "images": [
+    {
+      "id": "loc-battle-specialist-battle-abbey-heritage",
+      "type": "specialist-card",
+      "location": "Battle",
+      "cardTitle": "Battle Abbey Heritage",
+      "r2Key": "colossus-reference/cards/locations/battle/specialist-battle-abbey-heritage.webp",
+      "dimensions": { "width": 800, "height": 600 },
+      "prompt": "Professional scaffolding around historic Battle Abbey ruins...",
+      "status": "complete"
+    }
+  ]
+}
+```
+
+**Status values:** `pending` → `generated` → `uploaded` → `complete`
+
+### Environment Variables
+
+```bash
+# .env.local
+GOOGLE_AI_API_KEY=your-gemini-api-key  # Required for AI generation
+```
+
+### Current Image Inventory
+
+| Category         | Per Location | Total (37 locations) |
+| ---------------- | ------------ | -------------------- |
+| Hero images      | 1            | 37                   |
+| Specialist cards | 3            | 111                  |
+| Service cards    | 9            | 333                  |
+| **Total**        | 13           | **481**              |
 
 ## Related Standards
 
