@@ -9,17 +9,21 @@ export function Footer() {
           <div className="sm:col-span-2 lg:col-span-1">
             <h3 className="text-xl sm:text-2xl font-bold mb-4">Colossus Scaffolding</h3>
             <p className="text-gray-300 mb-4 text-sm sm:text-base">
-              Professional scaffolding services across the South East UK. TG20:21 compliant, CHAS
-              accredited.
+              Professional scaffolding services across the South East UK. Construction Line Gold
+              approved, CHAS accredited, TG20:21 compliant.
             </p>
-            <div className="flex items-center gap-4">
+            <div className="flex flex-wrap items-center gap-3 sm:gap-4">
+              <div className="flex items-center gap-2 text-xs sm:text-sm">
+                <Award className="h-3 w-3 sm:h-4 sm:w-4 text-amber-400" />
+                <span>Construction Line Gold</span>
+              </div>
+              <div className="flex items-center gap-2 text-xs sm:text-sm">
+                <Shield className="h-3 w-3 sm:h-4 sm:w-4 text-green-400" />
+                <span>CHAS</span>
+              </div>
               <div className="flex items-center gap-2 text-xs sm:text-sm">
                 <Shield className="h-3 w-3 sm:h-4 sm:w-4 text-brand-blue" />
                 <span>TG20:21</span>
-              </div>
-              <div className="flex items-center gap-2 text-xs sm:text-sm">
-                <Award className="h-3 w-3 sm:h-4 sm:w-4 text-brand-blue" />
-                <span>CHAS</span>
               </div>
             </div>
           </div>

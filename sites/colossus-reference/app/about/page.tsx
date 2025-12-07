@@ -1,8 +1,10 @@
 import Link from "next/link";
+import Image from "next/image";
 import { absUrl } from "@/lib/site";
 import { Metadata } from "next";
 import Breadcrumbs from "@/components/ui/breadcrumbs";
 import { AccreditationSection } from "@/components/ui/accreditation-section";
+import { getImageUrl } from "@/lib/image";
 
 export const metadata: Metadata = {
   title: "About Colossus Scaffolding | Professional Scaffolding Specialists South East UK",
@@ -320,19 +322,44 @@ export default function AboutPage() {
                 </p>
               </div>
 
-              {/* Image Placeholder */}
+              {/* St Leonards On Sea / Hastings area image */}
               <div className="relative">
-                <div className="aspect-[4/3] bg-gray-200 rounded-2xl flex items-center justify-center">
-                  <div className="text-center text-gray-400">
-                    <svg className="w-16 h-16 mx-auto mb-4" fill="currentColor" viewBox="0 0 20 20">
-                      <path
-                        fillRule="evenodd"
-                        d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                    <p className="text-lg font-medium">Our Story Image</p>
-                    <p className="text-sm">Company history photo placeholder</p>
+                <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-lg">
+                  <Image
+                    src={getImageUrl("colossus-reference/hero/location/hastings_01.webp")}
+                    alt="St Leonards On Sea seafront - home of Colossus Scaffolding serving the South East UK"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
+                </div>
+                <div className="absolute -bottom-4 -right-4 bg-white rounded-xl shadow-lg p-4 border border-gray-100">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-brand-blue rounded-full flex items-center justify-center">
+                      <svg
+                        className="w-5 h-5 text-white"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                        />
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                        />
+                      </svg>
+                    </div>
+                    <div>
+                      <p className="font-semibold text-gray-900">Based in</p>
+                      <p className="text-sm text-gray-600">St Leonards On Sea</p>
+                    </div>
                   </div>
                 </div>
               </div>

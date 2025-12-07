@@ -6,6 +6,69 @@ Complete project history and achievements organized by development phase.
 
 ## 📅 Recent Changes
 
+### **2025-12-07 - AI IMAGE GENERATION: Complete Card Image Pipeline**
+
+**🎨 AI-Generated Card Images:**
+
+Implemented a complete AI image generation pipeline using Gemini 3 Pro Image Preview to generate professional scaffolding images for all 444 card components across 37 location pages.
+
+**New Tools Created:**
+
+- ✅ **generate-image-manifest.ts** - Scans MDX files and creates manifest with AI prompts
+- ✅ **generate-images-ai.ts** - Real-time Gemini API image generation with retry logic
+- ✅ **generate-images-batch.ts** - Batch API for high-volume generation (2M token quota)
+- ✅ **upload-generated-images.ts** - Uploads images to Cloudflare R2 CDN
+- ✅ **update-mdx-images.ts** - Updates MDX frontmatter with image references
+- ✅ **download-batch-images.sh** - Shell script for large batch result extraction
+
+**Images Generated:**
+
+| Type             | Per Location | Total   |
+| ---------------- | ------------ | ------- |
+| Specialist Cards | 3            | 111     |
+| Service Cards    | 9            | 333     |
+| **Total**        | 12           | **444** |
+
+**Technical Implementation:**
+
+- ✅ **Gemini 3 Pro Image Preview** - High-quality photorealistic scaffolding images
+- ✅ **Batch API** - Bypassed daily request limits using 2M token batch quota
+- ✅ **Parallel Extraction** - 4 workers for 4x faster image extraction from 1.5GB batch response
+- ✅ **R2 CDN Storage** - All images served from Cloudflare R2 with proper caching
+- ✅ **getImageUrl() Integration** - Components use existing image helper for CDN URLs
+
+**Package.json Scripts Added:**
+
+```bash
+pnpm images:manifest      # Generate image manifest from MDX
+pnpm images:generate      # Real-time API generation
+pnpm images:batch:create  # Create batch job
+pnpm images:batch:status  # Check batch status
+pnpm images:batch:download # Download batch results
+pnpm images:upload        # Upload to R2
+pnpm images:update-mdx    # Update MDX with image refs
+pnpm images:pipeline      # Full pipeline
+```
+
+**Files Created:**
+
+- `tools/generate-image-manifest.ts`
+- `tools/generate-images-ai.ts`
+- `tools/generate-images-batch.ts`
+- `tools/upload-generated-images.ts`
+- `tools/update-mdx-images.ts`
+- `tools/download-batch-images.sh`
+- `tools/lib/manifest-types.ts`
+- `output/image-manifest.json`
+
+**Files Modified:**
+
+- `package.json` - Added image pipeline scripts
+- `.gitignore` - Added `output/generated-images/`
+- 37 location MDX files - Added image references to specialist and service cards
+
+---
+
 ### **2025-12-06 - CODE QUALITY: Core-Components Linting & Dynamic Location Discovery**
 
 **🔧 Code Quality Improvements:**
