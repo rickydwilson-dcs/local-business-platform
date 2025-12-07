@@ -10,40 +10,40 @@ const certificates = [
   {
     id: "construction-line-gold",
     name: "Construction Line Gold",
-    thumbnail: `${R2_BASE_URL}/certificates/thumbs/construction-line-gold-thumb.webp`,
-    fullImage: `${R2_BASE_URL}/certificates/full/construction-line-gold-full.webp`,
+    thumbnail: `${R2_BASE_URL}/colossus-reference/certificates/thumbs/construction-line-gold-thumb.webp`,
+    fullImage: `${R2_BASE_URL}/colossus-reference/certificates/full/construction-line-gold-full.webp`,
     description:
       "Government-backed certification demonstrating supply chain excellence and compliance with rigorous standards for construction contractors.",
   },
   {
     id: "chas-premium-plus",
     name: "CHAS Premium Plus",
-    thumbnail: `${R2_BASE_URL}/certificates/thumbs/chas-membership-thumb.webp`,
-    fullImage: `${R2_BASE_URL}/certificates/full/chas-membership-full.webp`,
+    thumbnail: `${R2_BASE_URL}/colossus-reference/certificates/thumbs/chas-membership-thumb.webp`,
+    fullImage: `${R2_BASE_URL}/colossus-reference/certificates/full/chas-membership-full.webp`,
     description:
       "Contractors Health and Safety Assessment Scheme accreditation, demonstrating compliance with health and safety legislation.",
   },
   {
     id: "scaffolding-contractor",
     name: "Scaffolding Contractor Certificate",
-    thumbnail: `${R2_BASE_URL}/certificates/thumbs/scaffolding-contractor-thumb.webp`,
-    fullImage: `${R2_BASE_URL}/certificates/full/scaffolding-contractor-full.webp`,
+    thumbnail: `${R2_BASE_URL}/colossus-reference/certificates/thumbs/scaffolding-contractor-thumb.webp`,
+    fullImage: `${R2_BASE_URL}/colossus-reference/certificates/full/scaffolding-contractor-full.webp`,
     description:
       "Professional scaffolding contractor certification validating expertise and compliance with industry standards.",
   },
   {
     id: "iasme-cyber-essentials",
     name: "IASME Cyber Essentials",
-    thumbnail: `${R2_BASE_URL}/certificates/thumbs/iasme-cyber-essentials-thumb.webp`,
-    fullImage: `${R2_BASE_URL}/certificates/full/iasme-cyber-essentials-full.webp`,
+    thumbnail: `${R2_BASE_URL}/colossus-reference/certificates/thumbs/iasme-cyber-essentials-thumb.webp`,
+    fullImage: `${R2_BASE_URL}/colossus-reference/certificates/full/iasme-cyber-essentials-full.webp`,
     description:
       "Information security certification demonstrating commitment to protecting client data and business systems.",
   },
   {
     id: "business-registration",
     name: "Business Registration Certificate",
-    thumbnail: `${R2_BASE_URL}/certificates/thumbs/business-registration-thumb.webp`,
-    fullImage: `${R2_BASE_URL}/certificates/full/business-registration-full.webp`,
+    thumbnail: `${R2_BASE_URL}/colossus-reference/certificates/thumbs/business-registration-thumb.webp`,
+    fullImage: `${R2_BASE_URL}/colossus-reference/certificates/full/business-registration-full.webp`,
     description:
       "Official business registration certificate confirming legal status and company registration details.",
   },

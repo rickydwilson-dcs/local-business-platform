@@ -39,7 +39,7 @@ async function uploadCertificates() {
     const thumbPath = path.join(SOURCE_DIR, "thumbs", `${cert.slug}-thumb.webp`);
     if (fs.existsSync(thumbPath)) {
       const thumbBuffer = fs.readFileSync(thumbPath);
-      const thumbKey = `certificates/thumbs/${cert.slug}-thumb.webp`;
+      const thumbKey = `colossus-reference/certificates/thumbs/${cert.slug}-thumb.webp`;
       await r2.uploadBuffer(thumbBuffer, thumbKey, { contentType: "image/webp" });
       console.log(`   ✅ Thumbnail: ${thumbKey}`);
     } else {
@@ -50,7 +50,7 @@ async function uploadCertificates() {
     const fullPath = path.join(SOURCE_DIR, "full", `${cert.slug}-full.webp`);
     if (fs.existsSync(fullPath)) {
       const fullBuffer = fs.readFileSync(fullPath);
-      const fullKey = `certificates/full/${cert.slug}-full.webp`;
+      const fullKey = `colossus-reference/certificates/full/${cert.slug}-full.webp`;
       await r2.uploadBuffer(fullBuffer, fullKey, { contentType: "image/webp" });
       console.log(`   ✅ Full-size: ${fullKey}`);
     } else {
@@ -59,8 +59,8 @@ async function uploadCertificates() {
 
     results.push({
       name: cert.name,
-      thumbUrl: `certificates/thumbs/${cert.slug}-thumb.webp`,
-      fullUrl: `certificates/full/${cert.slug}-full.webp`,
+      thumbUrl: `colossus-reference/certificates/thumbs/${cert.slug}-thumb.webp`,
+      fullUrl: `colossus-reference/certificates/full/${cert.slug}-full.webp`,
     });
   }
 
