@@ -220,7 +220,7 @@ export default function HomePage() {
           description="TG20:21 compliant scaffolding solutions for residential, commercial, and industrial projects. Fully insured with CHAS accreditation and £10M liability coverage."
           heroImage="colossus-reference/hero/home/main_01.webp"
           phone="01424 466 661"
-          trustBadges={["TG20:21 Compliant", "CHAS Accredited", "£10M Insured"]}
+          trustBadges={["Construction Line Gold", "CHAS Accredited", "TG20:21", "£10M Insured"]}
           ctaText="Get Free Quote"
           ctaUrl="/contact"
         />

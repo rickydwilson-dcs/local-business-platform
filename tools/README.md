@@ -62,6 +62,136 @@ pnpm test:r2
 
 ---
 
+### 🎨 AI Image Generation
+
+#### `generate-image-manifest.ts`
+
+Scan MDX files and generate manifest of required images with AI prompts.
+
+```bash
+pnpm images:manifest [--dry-run]
+```
+
+**What it does:**
+
+- Scans all 37 location MDX files
+- Extracts specialist cards (3 per file) and service cards (9 per file)
+- Generates AI-friendly prompts for each card
+- Creates manifest at `output/image-manifest.json`
+- Tracks 444 total images needed
+
+---
+
+#### `generate-images-ai.ts`
+
+Generate images using Gemini 3 Pro Image Preview API (real-time).
+
+```bash
+pnpm images:generate [--dry-run] [--limit N]
+```
+
+**Options:**
+
+- `--dry-run` - Preview without API calls
+- `--limit N` - Generate only N images
+- `--no-continue` - Force regeneration of existing images
+
+**Environment:** Requires `GOOGLE_AI_API_KEY`
+
+---
+
+#### `upload-generated-images.ts`
+
+Upload generated images to Cloudflare R2.
+
+```bash
+pnpm images:upload [--dry-run] [--limit N] [--verify]
+```
+
+**Options:**
+
+- `--dry-run` - Preview uploads
+- `--limit N` - Upload only N images
+- `--verify` - Verify uploads exist in R2
+
+---
+
+#### `update-mdx-images.ts`
+
+Add image references to MDX card definitions.
+
+```bash
+pnpm images:update-mdx [--dry-run] [--limit N] [--no-backup]
+```
+
+**Options:**
+
+- `--dry-run` - Preview changes
+- `--limit N` - Update only N locations
+- `--no-backup` - Skip backup creation
+
+---
+
+#### `generate-images-batch.ts`
+
+Generate images using Gemini Batch API for high-volume processing.
+
+```bash
+pnpm images:batch:create   # Create batch job (submits all pending images)
+pnpm images:batch:status   # Check batch job progress
+pnpm images:batch:download # Download completed batch results
+```
+
+**Benefits:**
+
+- Bypasses daily request limits (uses 2M token batch quota)
+- Process 100+ images in a single batch job
+- Results typically available within 24 hours
+- More cost-effective for large batches
+
+**Environment:** Requires `GOOGLE_AI_API_KEY`
+
+---
+
+#### `download-batch-images.sh`
+
+Shell script for extracting images from large batch API responses.
+
+```bash
+bash tools/download-batch-images.sh
+```
+
+**What it does:**
+
+- Reads batch response JSON (can be 1GB+)
+- Extracts base64-encoded images
+- Saves to `output/generated-images/` with correct R2 key paths
+- Updates manifest status to "generated"
+- Supports parallel extraction for faster processing
+
+**Note:** Used when batch responses are too large for Node.js to handle in memory.
+
+---
+
+#### Full Pipeline
+
+Run the complete image generation pipeline:
+
+```bash
+pnpm images:pipeline
+```
+
+Or run steps individually:
+
+```bash
+pnpm images:manifest          # 1. Create manifest
+pnpm images:generate          # 2. Generate images with AI
+pnpm images:upload            # 3. Upload to R2
+pnpm images:update-mdx        # 4. Update MDX files
+```
+
+---
+
 ### 🚀 Deployment (Week 4)
 
 #### `deploy-site.ts` (Coming Soon)
@@ -214,6 +344,9 @@ R2_SECRET_ACCESS_KEY=...
 R2_BUCKET_NAME=local-business-platform
 NEXT_PUBLIC_R2_PUBLIC_URL=...
 
+# Required for AI image generation
+GOOGLE_AI_API_KEY=...
+
 # Required for deployment (Week 4)
 VERCEL_TOKEN=...
 VERCEL_ORG_ID=...
@@ -330,36 +463,27 @@ See [R2_SETUP.md](../docs/R2_SETUP.md) for detailed R2 troubleshooting.
 
 ## Roadmap
 
-### ✅ Week 3 (Current)
+### ✅ Completed
 
 - [x] Image intake tool
 - [x] R2 client wrapper
 - [x] Image processor
 - [x] R2 connection test
+- [x] AI Image Generation Pipeline (444 images)
+  - [x] Image manifest generator
+  - [x] Gemini real-time image generator
+  - [x] Gemini batch API generator
+  - [x] R2 uploader
+  - [x] MDX image updater
+  - [x] Batch extraction shell script
 
-### Week 4
+### Upcoming
 
 - [ ] Deployment scripts
-- [ ] Smoke test runner
-- [ ] Rollback utility
-
-### Week 5
-
 - [ ] AI content generators
-- [ ] Service page generator
-- [ ] Location page generator
-
-### Week 6
-
-- [ ] Blog post generator
-- [ ] Project generator
-
-### Week 7
-
 - [ ] Site registry management
-- [ ] Monitoring dashboard CLI
 
 ---
 
-**Last Updated:** 2025-10-18
-**Tools Count:** 2 (+ 2 utility libraries)
+**Last Updated:** 2025-12-07
+**Tools Count:** 14 (+ 3 utility libraries)

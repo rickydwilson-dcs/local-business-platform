@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
+import { getImageUrl } from "@/lib/image";
 
 interface ServiceItem {
   title: string;
@@ -74,7 +75,7 @@ export function ServiceShowcase({
                     <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-gray-100">
                       {service.image ? (
                         <Image
-                          src={service.image}
+                          src={getImageUrl(service.image)}
                           alt={service.title}
                           fill
                           sizes="(max-width: 1024px) 100vw, 50vw"
@@ -205,7 +206,7 @@ export function ServiceShowcase({
                   {service.image ? (
                     <div className="relative h-48 overflow-hidden">
                       <Image
-                        src={service.image}
+                        src={getImageUrl(service.image)}
                         alt={service.title}
                         fill
                         sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"

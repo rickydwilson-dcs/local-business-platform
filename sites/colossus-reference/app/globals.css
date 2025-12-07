@@ -258,13 +258,21 @@
     @apply flex-shrink-0 p-2 rounded-lg border-2 border-gray-300 text-gray-700 hover:bg-gray-100 hover:border-gray-400 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-brand-blue focus:ring-offset-2;
   }
 
+  /* Lightbox Zoom Button */
+  .lightbox-zoom-button {
+    @apply p-2 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-100 hover:border-gray-400 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-brand-blue focus:ring-offset-2 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:border-gray-300;
+  }
+
   /* Lightbox Image Container */
   .lightbox-image-container {
-    @apply relative flex-1 overflow-auto bg-gray-100 flex items-center justify-center p-4 sm:p-8;
+    @apply relative flex-1 overflow-hidden bg-gray-100 flex items-center justify-center p-4 sm:p-8 select-none;
   }
 
   .lightbox-image-wrapper {
-    @apply relative w-full h-full max-w-4xl max-h-[600px] mx-auto;
+    @apply relative w-full max-w-4xl mx-auto;
+    min-height: 400px;
+    height: 60vh;
+    max-height: 600px;
   }
 
   .lightbox-image {

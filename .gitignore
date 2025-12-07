@@ -80,3 +80,6 @@ yarn.lock
 output/sessions/
 output/archive/
 output/.current-session
+output/generated-images/
+output/mdx-backups/
+output/batch-*.json*
