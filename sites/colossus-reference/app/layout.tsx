@@ -240,7 +240,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
         {/* Analytics System - ConsentManager will handle page detection internally */}
         <ConsentManager
-          enabled={process.env.FEATURE_CONSENT_BANNER === "true"}
+          enabled={process.env.NEXT_PUBLIC_FEATURE_CONSENT_BANNER === "true"}
           config={{
             title: "We value your privacy",
             description:
