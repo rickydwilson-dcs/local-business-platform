@@ -76,10 +76,6 @@ client-images/
 package-lock.json
 yarn.lock
 
-# Output folder (local processing only)
-output/sessions/
-output/archive/
-output/.current-session
+# Output folder - temporary/generated files only
 output/generated-images/
-output/mdx-backups/
 output/batch-*.json*
