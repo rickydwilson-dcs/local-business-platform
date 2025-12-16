@@ -1,124 +1,129 @@
 import { absUrl } from "./site";
+import { colossusBusinessConfig, businessType } from "./business-config";
 
-export const getOrganizationSchema = () => ({
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "@id": absUrl("/#organization"),
-  name: "Colossus Scaffolding",
-  legalName: "Colossus Scaffolding Ltd",
-  url: absUrl("/"),
-  logo: absUrl("/static/logo.png"),
-  description:
-    "Professional scaffolding specialists serving the South East UK with TG20:21 compliant solutions, CISRS qualified teams, and comprehensive insurance coverage.",
-  foundingDate: "2009",
-  numberOfEmployees: "10-50",
-  email: "info@colossusscaffolding.com",
-  telephone: "+441424466661",
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "Office 7, 15-20 Gresley Road",
-    addressLocality: "St Leonards On Sea",
-    addressRegion: "East Sussex",
-    postalCode: "TN38 9PL",
-    addressCountry: "GB",
-  },
-  geo: {
-    "@type": "GeoCoordinates",
-    latitude: "50.8549",
-    longitude: "0.5736",
-  },
-  areaServed: [
-    { "@type": "Place", name: "East Sussex" },
-    { "@type": "Place", name: "West Sussex" },
-    { "@type": "Place", name: "Kent" },
-    { "@type": "Place", name: "Surrey" },
-    { "@type": "Place", name: "Essex" },
-    { "@type": "Place", name: "London" },
-  ],
-  hasCredential: [
-    {
-      "@type": "EducationalOccupationalCredential",
-      credentialCategory: "certification",
-      name: "CHAS Accreditation",
-      description: "Health and safety assessment scheme approved contractor",
+/**
+ * Generate LocalBusiness schema using the configured business type
+ * The business type is configured in business-config.ts and can vary per site
+ */
+export const getLocalBusinessSchema = () => {
+  const config = colossusBusinessConfig;
+
+  // Build base schema with required fields
+  const schema: Record<string, unknown> = {
+    "@context": "https://schema.org",
+    "@type": businessType,
+    "@id": absUrl("/#organization"),
+    name: config.name,
+    url: absUrl("/"),
+    logo: absUrl("/static/logo.png"),
+    description: config.description,
+    email: config.email,
+    telephone: config.telephone,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: config.address.streetAddress,
+      addressLocality: config.address.addressLocality,
+      addressRegion: config.address.addressRegion,
+      postalCode: config.address.postalCode,
+      addressCountry: config.address.addressCountry,
     },
-    {
-      "@type": "EducationalOccupationalCredential",
-      credentialCategory: "certification",
-      name: "CISRS Qualified Teams",
-      description: "Construction Industry Scaffolders Record Scheme certified scaffolders",
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: config.geo.latitude,
+      longitude: config.geo.longitude,
     },
-    {
+    areaServed: config.areaServed.map((area) => ({
+      "@type": "Place",
+      name: area,
+    })),
+  };
+
+  // Add optional fields only if provided
+  if (config.legalName) {
+    schema.legalName = config.legalName;
+  }
+
+  if (config.slogan) {
+    schema.slogan = config.slogan;
+  }
+
+  if (config.foundingDate) {
+    schema.foundingDate = config.foundingDate;
+  }
+
+  if (config.numberOfEmployees) {
+    schema.numberOfEmployees = config.numberOfEmployees;
+  }
+
+  if (config.priceRange) {
+    schema.priceRange = config.priceRange;
+  }
+
+  // Opening hours specification
+  if (config.openingHours && config.openingHours.length > 0) {
+    schema.openingHoursSpecification = config.openingHours.map((hours) => ({
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: hours.dayOfWeek,
+      opens: hours.opens,
+      closes: hours.closes,
+    }));
+  }
+
+  // Credentials and certifications
+  if (config.credentials && config.credentials.length > 0) {
+    schema.hasCredential = config.credentials.map((credential) => ({
       "@type": "EducationalOccupationalCredential",
-      credentialCategory: "compliance",
-      name: "TG20:21 Compliance",
-      description: "Latest technical guidance for scaffold design and installation compliance",
-    },
-  ],
-  slogan: "Safe, compliant and fully insured scaffolding specialists serving the South East UK",
-  knowsAbout: [
-    "Access Scaffolding",
-    "Facade Scaffolding",
-    "Industrial Scaffolding",
-    "Edge Protection",
-    "Scaffold Design",
-    "TG20:21 Compliance",
-    "Scaffold Inspections",
-    "Temporary Roof Systems",
-  ],
-  hasOfferCatalog: {
-    "@type": "OfferCatalog",
-    name: "Scaffolding Services",
-    itemListElement: [
-      {
+      credentialCategory: credential.category,
+      name: credential.name,
+      description: credential.description,
+    }));
+  }
+
+  // Social media profiles
+  if (config.socialProfiles && config.socialProfiles.length > 0) {
+    schema.sameAs = config.socialProfiles;
+  }
+
+  // Aggregate rating
+  if (config.aggregateRating) {
+    schema.aggregateRating = {
+      "@type": "AggregateRating",
+      ratingValue: config.aggregateRating.ratingValue,
+      bestRating: "5",
+      ratingCount: config.aggregateRating.ratingCount,
+    };
+  }
+
+  // Knowledge topics
+  if (config.knowsAbout && config.knowsAbout.length > 0) {
+    schema.knowsAbout = config.knowsAbout;
+  }
+
+  // Offer catalog
+  if (config.offerCatalog && config.offerCatalog.length > 0) {
+    schema.hasOfferCatalog = {
+      "@type": "OfferCatalog",
+      name: "Services",
+      itemListElement: config.offerCatalog.map((service) => ({
         "@type": "Offer",
         itemOffered: {
           "@type": "Service",
-          name: "Access Scaffolding",
-          description: "Professional access scaffolding for residential and commercial projects",
-          url: absUrl("/services/access-scaffolding"),
+          name: service.name,
+          description: service.description,
+          url: absUrl(service.url),
         },
-      },
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: "Facade Scaffolding",
-          description: "Specialist facade scaffolding for building maintenance and renovation",
-          url: absUrl("/services/facade-scaffolding"),
-        },
-      },
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: "Edge Protection",
-          description: "HSE compliant edge protection systems for construction sites",
-          url: absUrl("/services/edge-protection"),
-        },
-      },
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: "Temporary Roof Systems",
-          description: "Weather protection and temporary roofing solutions",
-          url: absUrl("/services/temporary-roof-systems"),
-        },
-      },
-    ],
-  },
-  aggregateRating: {
-    "@type": "AggregateRating",
-    ratingValue: "4.8",
-    bestRating: "5",
-    ratingCount: "127",
-  },
-  sameAs: [
-    "https://www.facebook.com/colossusscaffolding",
-    "https://www.linkedin.com/company/colossus-scaffolding",
-  ],
-});
+      })),
+    };
+  }
+
+  return schema;
+};
+
+/**
+ * Backward compatibility: Export as getOrganizationSchema
+ * This ensures existing code continues to work while we transition
+ */
+export const getOrganizationSchema = getLocalBusinessSchema;
 
 export const getWebSiteSchema = () => ({
   "@context": "https://schema.org",
@@ -168,4 +173,24 @@ export const getFAQSchema = (
       text: faq.answer,
     },
   })),
+});
+
+/**
+ * Generate ServiceArea schema for location pages
+ * Links the location to the parent organization
+ */
+export const getServiceAreaSchema = (locationName: string, locationSlug: string) => ({
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "@id": absUrl(`/locations/${locationSlug}#localbusiness`),
+  name: `Colossus Scaffolding - ${locationName}`,
+  areaServed: [
+    {
+      "@type": "City",
+      name: locationName,
+    },
+  ],
+  parentOrganization: {
+    "@id": absUrl("/#organization"),
+  },
 });

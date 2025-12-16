@@ -36,3 +36,29 @@ export function getImageUrl(path: string): string {
   // Construct full URL
   return `${baseUrl}/${cleanPath}`;
 }
+
+/**
+ * Generate SEO-optimized alt text for images
+ * @param serviceName - The name of the service (e.g., "Access Scaffolding")
+ * @param locationName - Optional location name for geographic context
+ * @param customAlt - Optional custom alt text that overrides auto-generation
+ * @returns SEO-optimized alt text string
+ */
+export function generateImageAlt(
+  serviceName: string,
+  locationName?: string,
+  customAlt?: string
+): string {
+  // Allow MDX override for custom descriptions
+  if (customAlt) {
+    return customAlt;
+  }
+
+  // Auto-generate with location context when available
+  if (locationName) {
+    return `${serviceName} in ${locationName} - Colossus Scaffolding`;
+  }
+
+  // Fallback to service name only
+  return `${serviceName} - Colossus Scaffolding`;
+}

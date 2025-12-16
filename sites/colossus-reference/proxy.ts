@@ -1,6 +1,9 @@
 /**
- * Next.js Middleware for Server-Side Analytics Tracking
+ * Next.js Proxy for Server-Side Analytics Tracking
  * Handles consent-aware page view tracking and analytics processing
+ *
+ * Note: Renamed from middleware.ts to proxy.ts per Next.js 16 convention
+ * @see https://nextjs.org/docs/messages/middleware-to-proxy
  */
 
 import { NextRequest, NextResponse } from "next/server";
@@ -87,7 +90,7 @@ async function sendAnalyticsEvent(
   }
 }
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   // Get feature flags
   const flags = getFeatureFlags();
 

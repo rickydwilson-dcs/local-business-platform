@@ -1,24 +1,29 @@
 import { describe, it, expect } from "vitest";
 import {
   getOrganizationSchema,
+  getLocalBusinessSchema,
   getWebSiteSchema,
   getBreadcrumbSchema,
   getFAQSchema,
 } from "../schema";
+import { businessType } from "../business-config";
+
+// Type helper for accessing nested schema properties
+type SchemaObject = Record<string, unknown>;
 
 describe("Schema.org Structured Data", () => {
-  describe("Organization Schema", () => {
-    it("should generate valid Organization schema", () => {
-      const schema = getOrganizationSchema();
+  describe("LocalBusiness Schema", () => {
+    it("should generate valid LocalBusiness schema with configured business type", () => {
+      const schema = getLocalBusinessSchema();
 
       expect(schema["@context"]).toBe("https://schema.org");
-      expect(schema["@type"]).toBe("Organization");
+      expect(schema["@type"]).toBe(businessType);
       expect(schema.name).toBe("Colossus Scaffolding");
       expect(schema.legalName).toBe("Colossus Scaffolding Ltd");
     });
 
     it("should include required organization fields", () => {
-      const schema = getOrganizationSchema();
+      const schema = getLocalBusinessSchema();
 
       expect(schema.url).toBeDefined();
       expect(schema.logo).toBeDefined();
@@ -28,73 +33,89 @@ describe("Schema.org Structured Data", () => {
     });
 
     it("should include valid postal address", () => {
-      const schema = getOrganizationSchema();
+      const schema = getLocalBusinessSchema();
+      const address = schema.address as SchemaObject;
 
-      expect(schema.address).toBeDefined();
-      expect(schema.address["@type"]).toBe("PostalAddress");
-      expect(schema.address.streetAddress).toBeDefined();
-      expect(schema.address.addressLocality).toBeDefined();
-      expect(schema.address.addressRegion).toBeDefined();
-      expect(schema.address.postalCode).toBeDefined();
-      expect(schema.address.addressCountry).toBe("GB");
+      expect(address).toBeDefined();
+      expect(address["@type"]).toBe("PostalAddress");
+      expect(address.streetAddress).toBeDefined();
+      expect(address.addressLocality).toBeDefined();
+      expect(address.addressRegion).toBeDefined();
+      expect(address.postalCode).toBeDefined();
+      expect(address.addressCountry).toBe("GB");
     });
 
     it("should include geo coordinates", () => {
-      const schema = getOrganizationSchema();
+      const schema = getLocalBusinessSchema();
+      const geo = schema.geo as SchemaObject;
 
-      expect(schema.geo).toBeDefined();
-      expect(schema.geo["@type"]).toBe("GeoCoordinates");
-      expect(schema.geo.latitude).toBeDefined();
-      expect(schema.geo.longitude).toBeDefined();
+      expect(geo).toBeDefined();
+      expect(geo["@type"]).toBe("GeoCoordinates");
+      expect(geo.latitude).toBeDefined();
+      expect(geo.longitude).toBeDefined();
     });
 
     it("should include area served with multiple locations", () => {
-      const schema = getOrganizationSchema();
+      const schema = getLocalBusinessSchema();
+      const areaServed = schema.areaServed as SchemaObject[];
 
-      expect(schema.areaServed).toBeDefined();
-      expect(Array.isArray(schema.areaServed)).toBe(true);
-      expect(schema.areaServed.length).toBeGreaterThan(0);
-      expect(schema.areaServed[0]["@type"]).toBe("Place");
+      expect(areaServed).toBeDefined();
+      expect(Array.isArray(areaServed)).toBe(true);
+      expect(areaServed.length).toBeGreaterThan(0);
+      expect(areaServed[0]["@type"]).toBe("Place");
     });
 
     it("should include credentials and certifications", () => {
-      const schema = getOrganizationSchema();
+      const schema = getLocalBusinessSchema();
+      const hasCredential = schema.hasCredential as SchemaObject[];
 
-      expect(schema.hasCredential).toBeDefined();
-      expect(Array.isArray(schema.hasCredential)).toBe(true);
-      expect(schema.hasCredential.length).toBeGreaterThanOrEqual(3);
+      expect(hasCredential).toBeDefined();
+      expect(Array.isArray(hasCredential)).toBe(true);
+      expect(hasCredential.length).toBeGreaterThanOrEqual(3);
 
-      const chasCredential = schema.hasCredential.find((c) => c.name === "CHAS Accreditation");
+      const chasCredential = hasCredential.find(
+        (c: SchemaObject) => c.name === "CHAS Accreditation"
+      );
       expect(chasCredential).toBeDefined();
       expect(chasCredential?.credentialCategory).toBe("certification");
     });
 
     it("should include offer catalog with services", () => {
-      const schema = getOrganizationSchema();
+      const schema = getLocalBusinessSchema();
+      const hasOfferCatalog = schema.hasOfferCatalog as SchemaObject;
 
-      expect(schema.hasOfferCatalog).toBeDefined();
-      expect(schema.hasOfferCatalog["@type"]).toBe("OfferCatalog");
-      expect(schema.hasOfferCatalog.itemListElement).toBeDefined();
-      expect(Array.isArray(schema.hasOfferCatalog.itemListElement)).toBe(true);
-      expect(schema.hasOfferCatalog.itemListElement.length).toBeGreaterThan(0);
+      expect(hasOfferCatalog).toBeDefined();
+      expect(hasOfferCatalog["@type"]).toBe("OfferCatalog");
+      expect(hasOfferCatalog.itemListElement).toBeDefined();
+      expect(Array.isArray(hasOfferCatalog.itemListElement)).toBe(true);
+      expect((hasOfferCatalog.itemListElement as unknown[]).length).toBeGreaterThan(0);
     });
 
     it("should include aggregate rating", () => {
-      const schema = getOrganizationSchema();
+      const schema = getLocalBusinessSchema();
+      const aggregateRating = schema.aggregateRating as SchemaObject;
 
-      expect(schema.aggregateRating).toBeDefined();
-      expect(schema.aggregateRating["@type"]).toBe("AggregateRating");
-      expect(schema.aggregateRating.ratingValue).toBeDefined();
-      expect(schema.aggregateRating.bestRating).toBe("5");
-      expect(schema.aggregateRating.ratingCount).toBeDefined();
+      expect(aggregateRating).toBeDefined();
+      expect(aggregateRating["@type"]).toBe("AggregateRating");
+      expect(aggregateRating.ratingValue).toBeDefined();
+      expect(aggregateRating.bestRating).toBe("5");
+      expect(aggregateRating.ratingCount).toBeDefined();
     });
 
     it("should include social media links", () => {
-      const schema = getOrganizationSchema();
+      const schema = getLocalBusinessSchema();
+      const sameAs = schema.sameAs as string[];
 
-      expect(schema.sameAs).toBeDefined();
-      expect(Array.isArray(schema.sameAs)).toBe(true);
-      expect(schema.sameAs.length).toBeGreaterThan(0);
+      expect(sameAs).toBeDefined();
+      expect(Array.isArray(sameAs)).toBe(true);
+      expect(sameAs.length).toBeGreaterThan(0);
+    });
+
+    it("should be accessible via legacy getOrganizationSchema alias", () => {
+      const legacySchema = getOrganizationSchema();
+      const newSchema = getLocalBusinessSchema();
+
+      expect(legacySchema).toEqual(newSchema);
     });
   });
 
@@ -249,7 +270,7 @@ describe("Schema.org Structured Data", () => {
 
   describe("Schema JSON-LD Validation", () => {
     it("should produce valid JSON when stringified", () => {
-      const schema = getOrganizationSchema();
+      const schema = getLocalBusinessSchema();
 
       expect(() => JSON.stringify(schema)).not.toThrow();
 
@@ -257,8 +278,8 @@ describe("Schema.org Structured Data", () => {
       expect(() => JSON.parse(jsonString)).not.toThrow();
     });
 
-    it("should not contain undefined values in Organization schema", () => {
-      const schema = getOrganizationSchema();
+    it("should not contain undefined values in LocalBusiness schema", () => {
+      const schema = getLocalBusinessSchema();
       const jsonString = JSON.stringify(schema);
 
       expect(jsonString).not.toContain("undefined");
@@ -273,7 +294,7 @@ describe("Schema.org Structured Data", () => {
     });
 
     it("should produce parseable JSON-LD for all schema types", () => {
-      const orgSchema = getOrganizationSchema();
+      const businessSchema = getLocalBusinessSchema();
       const webSchema = getWebSiteSchema();
       const breadcrumbSchema = getBreadcrumbSchema([
         { name: "Home", url: "/" },
@@ -284,7 +305,7 @@ describe("Schema.org Structured Data", () => {
         "/test"
       );
 
-      [orgSchema, webSchema, breadcrumbSchema, faqSchema].forEach((schema) => {
+      [businessSchema, webSchema, breadcrumbSchema, faqSchema].forEach((schema) => {
         const jsonString = JSON.stringify(schema);
         expect(() => JSON.parse(jsonString)).not.toThrow();
         expect(JSON.parse(jsonString)["@context"]).toBe("https://schema.org");
@@ -293,11 +314,11 @@ describe("Schema.org Structured Data", () => {
   });
 
   describe("Schema Required Fields Validation", () => {
-    it("Organization schema should have all Google required fields", () => {
-      const schema = getOrganizationSchema();
+    it("LocalBusiness schema should have all Google required fields", () => {
+      const schema = getLocalBusinessSchema();
 
-      // Required by Google for Organization
-      expect(schema["@type"]).toBe("Organization");
+      // Required by Google for LocalBusiness
+      expect(schema["@type"]).toBe(businessType);
       expect(schema.name).toBeDefined();
       expect(schema.url).toBeDefined();
 
