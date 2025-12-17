@@ -1,11 +1,73 @@
 import Link from "next/link";
 import { Phone, Mail, MapPin, Shield, Award } from "lucide-react";
+import { getContentItems } from "@/lib/content";
 
-export function Footer() {
+// Priority services to show first (most important for SEO)
+const PRIORITY_SERVICES = [
+  "residential-scaffolding",
+  "commercial-scaffolding",
+  "access-scaffolding",
+  "facade-scaffolding",
+  "industrial-scaffolding",
+  "edge-protection",
+  "temporary-roof-systems",
+  "birdcage-scaffolds",
+  "scaffolding-inspections-maintenance",
+  "scaffold-towers-mast-systems",
+];
+
+// Priority locations (counties first, then major towns)
+const PRIORITY_LOCATIONS = [
+  "east-sussex",
+  "west-sussex",
+  "kent",
+  "surrey",
+  "brighton",
+  "hastings",
+  "eastbourne",
+  "canterbury",
+  "maidstone",
+  "crawley",
+  "guildford",
+  "worthing",
+];
+
+export async function Footer() {
+  // Fetch all services and locations
+  const [allServices, allLocations] = await Promise.all([
+    getContentItems("services"),
+    getContentItems("locations"),
+  ]);
+
+  // Sort services by priority, then alphabetically
+  const sortedServices = [...allServices].sort((a, b) => {
+    const aIndex = PRIORITY_SERVICES.indexOf(a.slug);
+    const bIndex = PRIORITY_SERVICES.indexOf(b.slug);
+    if (aIndex !== -1 && bIndex !== -1) return aIndex - bIndex;
+    if (aIndex !== -1) return -1;
+    if (bIndex !== -1) return 1;
+    return a.title.localeCompare(b.title);
+  });
+
+  // Sort locations by priority, then alphabetically
+  const sortedLocations = [...allLocations].sort((a, b) => {
+    const aIndex = PRIORITY_LOCATIONS.indexOf(a.slug);
+    const bIndex = PRIORITY_LOCATIONS.indexOf(b.slug);
+    if (aIndex !== -1 && bIndex !== -1) return aIndex - bIndex;
+    if (aIndex !== -1) return -1;
+    if (bIndex !== -1) return 1;
+    return a.title.localeCompare(b.title);
+  });
+
+  // Take top items for footer display
+  const featuredServices = sortedServices.slice(0, 10);
+  const featuredLocations = sortedLocations.slice(0, 12);
+
   return (
     <footer className="bg-gray-900 text-white py-12 sm:py-16">
       <div className="mx-auto w-full lg:w-[90%] px-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mb-6 sm:mb-8">
+          {/* Column 1: About */}
           <div className="sm:col-span-2 lg:col-span-1">
             <h3 className="text-xl sm:text-2xl font-bold mb-4">Colossus Scaffolding</h3>
             <p className="text-gray-300 mb-4 text-sm sm:text-base">
@@ -28,89 +90,61 @@ export function Footer() {
             </div>
           </div>
 
+          {/* Column 2: Services */}
           <div>
-            <h4 className="text-base sm:text-lg font-semibold mb-4">Services</h4>
+            <h4 className="text-base sm:text-lg font-semibold mb-4">Our Services</h4>
             <ul className="space-y-2 text-gray-300 text-sm sm:text-base">
-              <li>
-                <Link
-                  href="/services/access-scaffolding"
-                  className="hover:text-brand-blue transition-colors"
-                >
-                  Access Scaffolding
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/services/facade-scaffolding"
-                  className="hover:text-brand-blue transition-colors"
-                >
-                  Facade Scaffolding
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/services/edge-protection"
-                  className="hover:text-brand-blue transition-colors"
-                >
-                  Edge Protection
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/services/birdcage-scaffolds"
-                  className="hover:text-brand-blue transition-colors"
-                >
-                  Birdcage Scaffolds
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/services/public-access-staircases"
-                  className="hover:text-brand-blue transition-colors"
-                >
-                  Public Access Staircases
-                </Link>
-              </li>
-              <li>
-                <Link href="/services" className="hover:text-brand-blue transition-colors">
-                  View All Scaffolding Services
-                </Link>
-              </li>
+              {featuredServices.map((service) => (
+                <li key={service.slug}>
+                  <Link
+                    href={`/services/${service.slug}`}
+                    className="hover:text-brand-blue transition-colors"
+                  >
+                    {service.title.replace(" Services", "")}
+                  </Link>
+                </li>
+              ))}
+              {allServices.length > 10 && (
+                <li>
+                  <Link
+                    href="/services"
+                    className="hover:text-brand-blue transition-colors font-semibold"
+                  >
+                    View All Services →
+                  </Link>
+                </li>
+              )}
             </ul>
           </div>
 
+          {/* Column 3: Locations */}
           <div>
-            <h4 className="text-base sm:text-lg font-semibold mb-4">Coverage Areas</h4>
+            <h4 className="text-base sm:text-lg font-semibold mb-4">Service Areas</h4>
             <ul className="space-y-2 text-gray-300 text-sm sm:text-base">
-              <li>
-                <Link
-                  href="/locations/east-sussex"
-                  className="hover:text-brand-blue transition-colors"
-                >
-                  East Sussex
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/locations/west-sussex"
-                  className="hover:text-brand-blue transition-colors"
-                >
-                  West Sussex
-                </Link>
-              </li>
-              <li>
-                <Link href="/locations/kent" className="hover:text-brand-blue transition-colors">
-                  Kent
-                </Link>
-              </li>
-              <li>
-                <Link href="/locations/surrey" className="hover:text-brand-blue transition-colors">
-                  Surrey
-                </Link>
-              </li>
+              {featuredLocations.map((location) => (
+                <li key={location.slug}>
+                  <Link
+                    href={`/locations/${location.slug}`}
+                    className="hover:text-brand-blue transition-colors"
+                  >
+                    {location.title}
+                  </Link>
+                </li>
+              ))}
+              {allLocations.length > 12 && (
+                <li>
+                  <Link
+                    href="/locations"
+                    className="hover:text-brand-blue transition-colors font-semibold"
+                  >
+                    View All Locations →
+                  </Link>
+                </li>
+              )}
             </ul>
           </div>
 
+          {/* Column 4: Contact */}
           <div>
             <h4 className="text-base sm:text-lg font-semibold mb-4">Contact Info</h4>
             <div className="space-y-3 text-gray-300 text-sm sm:text-base">
