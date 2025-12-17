@@ -51,6 +51,11 @@ export const ServiceFrontmatterSchema = z.object({
       heading: z.string().min(5, "Hero heading is required").optional(),
       subheading: z.string().min(10, "Hero subheading is required").optional(),
       image: z.string().startsWith("/", "Hero image path must start with /"),
+      alt: z
+        .string()
+        .min(20, "Alt text must be at least 20 characters for accessibility")
+        .max(125, "Alt text should be under 125 characters")
+        .optional(),
       cta: HeroCtaSchema.optional(),
     })
     .optional(),
@@ -84,6 +89,12 @@ export const ServiceFrontmatterSchema = z.object({
     .optional(),
 
   heroImage: z.string().startsWith("/", "Hero image path must start with /").optional(),
+
+  heroImageAlt: z
+    .string()
+    .min(20, "Hero image alt text must be at least 20 characters for accessibility")
+    .max(125, "Hero image alt text should be under 125 characters")
+    .optional(),
 
   galleryImages: z
     .array(z.string().startsWith("/", "Gallery image paths must start with /"))
@@ -137,10 +148,21 @@ export const LocationFrontmatterSchema = z.object({
 
   heroImage: z.string().startsWith("/", "Hero image path must start with /").optional(),
 
+  heroImageAlt: z
+    .string()
+    .min(20, "Hero image alt text must be at least 20 characters for accessibility")
+    .max(125, "Hero image alt text should be under 125 characters")
+    .optional(),
+
   hero: z.object({
     title: z.string().min(5, "Hero title is required"),
     description: z.string().min(20, "Hero description must be at least 20 characters"),
     phone: z.string().regex(/^[\d\s\+\-\(\)]+$/, "Phone must be valid"),
+    alt: z
+      .string()
+      .min(20, "Alt text must be at least 20 characters for accessibility")
+      .max(125, "Alt text should be under 125 characters")
+      .optional(),
     trustBadges: z
       .array(z.string().min(3, "Trust badge text too short"))
       .min(1, "At least 1 trust badge required")

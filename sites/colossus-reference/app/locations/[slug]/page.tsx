@@ -15,6 +15,7 @@ import { CTASection } from "@/components/ui/cta-section";
 import Breadcrumbs from "@/components/ui/breadcrumbs";
 import Schema from "@/components/Schema";
 import { absUrl } from "@/lib/site";
+import { getServiceAreaSchema } from "@/lib/schema";
 
 export const dynamic = "force-static";
 export const dynamicParams = false;
@@ -379,6 +380,14 @@ export default async function Page({ params }: { params: Promise<Params> }) {
           }
         />
       )}
+
+      {/* ServiceArea Schema for location-specific SEO */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(getServiceAreaSchema(locationData.title, slug)),
+        }}
+      />
     </PageLayout>
   );
 }
