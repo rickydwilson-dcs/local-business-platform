@@ -128,8 +128,10 @@ test.describe("Service Pages", () => {
   test("should show related services or next steps", async ({ page }) => {
     await page.goto("/services/access-scaffolding");
 
-    // Check for related services section
-    const relatedSection = page.locator("text=/related services|other services|similar services/i");
+    // Check for related services section (use .first() to handle MDX body content with multiple matches)
+    const relatedSection = page
+      .locator("text=/related services|other services|similar services/i")
+      .first();
     if (await relatedSection.isVisible()) {
       await expect(relatedSection).toBeVisible();
     }
