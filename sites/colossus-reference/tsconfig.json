@@ -19,7 +19,9 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],
+      "@platform/core-components": ["../../packages/core-components/src/index.ts"],
+      "@platform/core-components/*": ["../../packages/core-components/src/*"]
     }
   },
   "include": [
