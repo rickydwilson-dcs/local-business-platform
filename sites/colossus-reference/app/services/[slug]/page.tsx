@@ -299,9 +299,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
         {/* MDX Body Content - Process sections, location grids, related services */}
         <section className="section-standard bg-white">
           <div className="container-standard">
-            <div className="prose prose-lg max-w-none prose-headings:text-gray-900 prose-p:text-gray-700 prose-a:text-brand-blue hover:prose-a:text-brand-blue-hover prose-li:text-gray-700">
-              {mdxContent}
-            </div>
+            <div>{mdxContent}</div>
           </div>
         </section>
 
