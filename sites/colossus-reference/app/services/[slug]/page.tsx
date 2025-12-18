@@ -6,8 +6,6 @@ import matter from "gray-matter";
 
 import { ServiceHero } from "@/components/ui/service-hero";
 import ServiceAbout from "@/components/ui/service-about";
-import { ServiceBenefits } from "@/components/ui/service-benefits";
-import { ServiceGallery } from "@/components/ui/service-gallery";
 import { ServiceFAQ } from "@/components/ui/service-faq";
 import { ServiceCTA } from "@/components/ui/service-cta";
 import Breadcrumbs from "@/components/ui/breadcrumbs";
@@ -297,23 +295,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
         <ServiceAbout serviceName={serviceName} slug={slug} about={serviceData.about} />
 
         {/* MDX Body Content - Process sections, location grids, related services */}
-        <section className="section-standard bg-white">
-          <div className="container-standard">
-            <div>{mdxContent}</div>
-          </div>
-        </section>
-
-        <ServiceBenefits
-          title="Why Choose Our Service?"
-          description="Professional scaffolding with complete safety compliance and expert installation teams."
-          items={serviceData.benefits}
-        />
-
-        <ServiceGallery
-          title="Project Gallery"
-          description="View our professional scaffolding installations and completed projects."
-          images={serviceData.galleryImages}
-        />
+        {mdxContent}
 
         <ServiceFAQ items={serviceData.faqs} />
 
