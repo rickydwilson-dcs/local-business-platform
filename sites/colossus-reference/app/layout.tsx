@@ -152,21 +152,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       height: 1.25rem;
     }
 
-    /* Main content container - matches PageLayout */
+    /* Main content container - full width to allow sections to extend edge-to-edge */
     main {
-      margin-left: auto;
-      margin-right: auto;
       width: 100%;
-      padding-left: 1.5rem;
-      padding-right: 1.5rem;
-      padding-top: 2.5rem;
-      padding-bottom: 2.5rem;
-    }
-
-    @media (min-width: 1024px) {
-      main {
-        width: 90%;
-      }
     }
   `;
 
