@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import Schema from "@/components/Schema";
 import Breadcrumbs from "@/components/ui/breadcrumbs";
+import { PHONE_DISPLAY, PHONE_TEL, BUSINESS_EMAIL } from "@/lib/contact-info";
 
 type FormData = {
   name: string;
@@ -367,8 +368,8 @@ export default function ContactPage() {
                   <div>
                     <h3 className="font-semibold text-gray-900 mb-2">📞 Phone</h3>
                     <p className="text-lg text-brand-blue font-semibold">
-                      <a href="tel:01424466661" className="hover:underline">
-                        01424 466 661
+                      <a href={`tel:${PHONE_TEL}`} className="hover:underline">
+                        {PHONE_DISPLAY}
                       </a>
                     </p>
                     <p className="text-sm text-gray-800">
@@ -383,8 +384,8 @@ export default function ContactPage() {
                   <div>
                     <h3 className="font-semibold text-gray-900 mb-2">📧 Email</h3>
                     <p className="text-brand-blue">
-                      <a href="mailto:info@colossusscaffolding.com" className="hover:underline">
-                        info@colossusscaffolding.com
+                      <a href={`mailto:${BUSINESS_EMAIL}`} className="hover:underline">
+                        {BUSINESS_EMAIL}
                       </a>
                     </p>
                     <p className="text-sm text-gray-800">We respond within 24 hours</p>

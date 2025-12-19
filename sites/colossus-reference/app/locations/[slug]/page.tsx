@@ -16,6 +16,7 @@ import Breadcrumbs from "@/components/ui/breadcrumbs";
 import Schema from "@/components/Schema";
 import { absUrl } from "@/lib/site";
 import { getServiceAreaSchema } from "@/lib/schema";
+import { PHONE_DISPLAY } from "@/lib/contact-info";
 
 export const dynamic = "force-static";
 export const dynamicParams = false;
@@ -233,7 +234,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
         <HeroSection
           title={locationData.hero?.title || `Professional Scaffolding in ${locationData.title}`}
           description={locationData.hero?.description || locationData.description}
-          phone={locationData.hero?.phone || "01424 466 661"}
+          phone={locationData.hero?.phone || PHONE_DISPLAY}
           trustBadges={
             locationData.hero?.trustBadges || [
               "TG20:21 Compliant",

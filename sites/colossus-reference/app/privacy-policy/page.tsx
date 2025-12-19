@@ -2,6 +2,7 @@ import Link from "next/link";
 import { absUrl } from "@/lib/site";
 import { Metadata } from "next";
 import Breadcrumbs from "@/components/ui/breadcrumbs";
+import { PHONE_DISPLAY, BUSINESS_EMAIL, ADDRESS } from "@/lib/contact-info";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
@@ -117,14 +118,14 @@ export default function PrivacyPolicyPage() {
                       <strong>Business Name:</strong> Colossus Scaffolding
                     </p>
                     <p>
-                      <strong>Registered Office:</strong> Office 7, 15-20 Gresley Road, St Leonards
-                      On Sea, East Sussex, TN38 9PL
+                      <strong>Registered Office:</strong> {ADDRESS.street}, {ADDRESS.locality},{" "}
+                      {ADDRESS.region}, {ADDRESS.postalCode}
                     </p>
                     <p>
-                      <strong>Phone:</strong> 01424 466 661
+                      <strong>Phone:</strong> {PHONE_DISPLAY}
                     </p>
                     <p>
-                      <strong>Email:</strong> info@colossusscaffolding.com
+                      <strong>Email:</strong> {BUSINESS_EMAIL}
                     </p>
                     <p>
                       <strong>Service Area:</strong> East Sussex, West Sussex, Kent, Surrey
@@ -787,14 +788,16 @@ export default function PrivacyPolicyPage() {
                       <p>
                         <strong>Colossus Scaffolding</strong>
                       </p>
-                      <p>Office 7, 15-20 Gresley Road</p>
-                      <p>St Leonards On Sea</p>
-                      <p>East Sussex TN38 9PL</p>
+                      <p>{ADDRESS.street}</p>
+                      <p>{ADDRESS.locality}</p>
                       <p>
-                        <strong>Phone:</strong> 01424 466 661
+                        {ADDRESS.region} {ADDRESS.postalCode}
                       </p>
                       <p>
-                        <strong>Email:</strong> info@colossusscaffolding.com
+                        <strong>Phone:</strong> {PHONE_DISPLAY}
+                      </p>
+                      <p>
+                        <strong>Email:</strong> {BUSINESS_EMAIL}
                       </p>
                       <p>
                         <strong>Privacy Enquiries:</strong>{" "}

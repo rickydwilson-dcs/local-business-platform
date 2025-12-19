@@ -5,6 +5,7 @@ import { Metadata } from "next";
 import Breadcrumbs from "@/components/ui/breadcrumbs";
 import { AccreditationSection } from "@/components/ui/accreditation-section";
 import { getImageUrl } from "@/lib/image";
+import { PHONE_DISPLAY, PHONE_TEL } from "@/lib/contact-info";
 
 export const metadata: Metadata = {
   title: "About Colossus Scaffolding | Professional Scaffolding Specialists South East UK",
@@ -755,7 +756,7 @@ export default function AboutPage() {
               Get Free Quote
             </Link>
             <Link
-              href="tel:01424466661"
+              href={`tel:${PHONE_TEL}`}
               className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-white text-white font-semibold rounded-lg hover:bg-white hover:text-brand-blue transition-colors"
             >
               <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -766,7 +767,7 @@ export default function AboutPage() {
                   d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
                 />
               </svg>
-              Call: 01424 466661
+              Call: {PHONE_DISPLAY}
             </Link>
           </div>
         </div>
