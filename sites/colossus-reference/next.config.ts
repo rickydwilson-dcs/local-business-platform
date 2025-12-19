@@ -63,8 +63,8 @@ const nextConfig: NextConfig = {
     // Responsive breakpoints for different screen sizes
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    // Cache images for better performance
-    minimumCacheTTL: 60 * 60 * 24 * 365, // Cache for 1 year
+    // Cache images for 90 days (allows in-place image updates to propagate)
+    minimumCacheTTL: 60 * 60 * 24 * 90, // 90 days
     // Allowed quality values for Image component quality prop
     // 50 = thumbnails, 65 = content images, 75 = default, 80 = hero images
     qualities: [50, 65, 75, 80],
