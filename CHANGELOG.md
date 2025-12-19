@@ -6,6 +6,70 @@ Complete project history and achievements organized by development phase.
 
 ## 📅 Recent Changes
 
+### **2025-12-19 - SEO: Fix Anchor Text Over-Optimization (Issue 21)**
+
+**🔗 Anchor Text Variation:**
+
+- ✅ **New utility** - Created `lib/anchor-text.ts` with deterministic anchor text variation
+- ✅ **Footer services** - Varied anchor text using exact/partial/semantic/generic mix (40/30/20/10%)
+- ✅ **Footer locations** - Applied same variation pattern to location links
+- ✅ **Locations dropdown** - Updated county and town links with varied anchor text
+- ✅ **Mobile menu** - Applied variation to mobile navigation location links
+
+**Files Modified:**
+
+- `sites/colossus-reference/lib/anchor-text.ts` - NEW: Centralized anchor text variation utilities
+- `sites/colossus-reference/components/ui/footer.tsx` - Service and location link text variation
+- `sites/colossus-reference/components/ui/locations-dropdown.tsx` - County and town link variation
+- `sites/colossus-reference/components/ui/mobile-menu.tsx` - Mobile navigation link variation
+
+**Expected Impact:**
+
+- Reduced Google Penguin over-optimization penalty risk
+- More natural link profile with varied anchor text patterns
+- Maintained accessibility with meaningful link descriptions
+
+---
+
+### **2025-12-19 - SEO: Enhanced LocalBusiness Schema on Location Pages**
+
+**🔍 Schema Improvements:**
+
+- ✅ **telephone** - Added contact number to location page schemas
+- ✅ **priceRange** - Added price indicator (££) for better local search context
+- ✅ **hasOfferCatalog** - Added service catalog linking to all 4 core services
+
+**Files Modified:**
+
+- `sites/colossus-reference/lib/schema.ts` - Enhanced `getServiceAreaSchema` function
+
+**Expected Impact:**
+
+- Improved Google Local Pack visibility for location pages
+- Richer schema markup for better search engine understanding
+- Services now linked from location-specific LocalBusiness entities
+
+---
+
+### **2025-12-19 - PERFORMANCE: Resource Hints & Image Cache Optimization**
+
+**🚀 Performance Improvements:**
+
+- ✅ **Resource hints** - Added preconnect for R2 CDN and dns-prefetch for analytics domains
+- ✅ **Image cache TTL** - Reduced from 1 year to 90 days to support in-place image updates
+
+**Files Modified:**
+
+- `sites/colossus-reference/app/layout.tsx` - Added preconnect/dns-prefetch hints
+- `sites/colossus-reference/next.config.ts` - Reduced minimumCacheTTL to 90 days
+
+**Expected Impact:**
+
+- Faster LCP via early R2 CDN connection establishment
+- Reduced DNS lookup time for Google Analytics and Facebook Pixel
+
+---
+
 ### **2025-12-07 - AI IMAGE GENERATION: Complete Card Image Pipeline**
 
 **🎨 AI-Generated Card Images:**

@@ -11,7 +11,7 @@ interface ServiceFAQProps {
 
 export function ServiceFAQ({
   items,
-  title = "Frequently Asked Questions",
+  title = "Scaffolding FAQ - Your Questions Answered",
   description = "Get answers to common questions about our services and processes.",
 }: ServiceFAQProps) {
   return (

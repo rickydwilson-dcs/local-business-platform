@@ -160,6 +160,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en-GB">
       <head>
+        {/* Resource hints for faster external resource loading */}
+        <link rel="preconnect" href="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+        <link rel="dns-prefetch" href="https://connect.facebook.net" />
         {/* Geo meta tags for local SEO targeting */}
         <meta name="geo.region" content="GB-ESX" />
         <meta name="geo.placename" content="East Sussex" />

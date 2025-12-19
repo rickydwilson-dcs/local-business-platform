@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Phone, Mail, MapPin, Shield, Award } from "lucide-react";
 import { getContentItems } from "@/lib/content";
 import { PHONE_DISPLAY, PHONE_TEL, BUSINESS_EMAIL } from "@/lib/contact-info";
+import { getServiceAnchorText, getLocationAnchorText } from "@/lib/anchor-text";
 
 // Priority services to show first (most important for SEO)
 const PRIORITY_SERVICES = [
@@ -95,13 +96,18 @@ export async function Footer() {
           <div>
             <h4 className="text-base sm:text-lg font-semibold mb-4">Our Services</h4>
             <ul className="space-y-2 text-gray-300 text-sm sm:text-base">
-              {featuredServices.map((service) => (
+              {featuredServices.map((service, index) => (
                 <li key={service.slug}>
                   <Link
                     href={`/services/${service.slug}`}
                     className="hover:text-brand-blue transition-colors"
                   >
-                    {service.title.replace(" Services", "")}
+                    {getServiceAnchorText(
+                      service.title,
+                      service.slug,
+                      index,
+                      featuredServices.length
+                    )}
                   </Link>
                 </li>
               ))}
@@ -122,13 +128,18 @@ export async function Footer() {
           <div>
             <h4 className="text-base sm:text-lg font-semibold mb-4">Service Areas</h4>
             <ul className="space-y-2 text-gray-300 text-sm sm:text-base">
-              {featuredLocations.map((location) => (
+              {featuredLocations.map((location, index) => (
                 <li key={location.slug}>
                   <Link
                     href={`/locations/${location.slug}`}
                     className="hover:text-brand-blue transition-colors"
                   >
-                    {location.title}
+                    {getLocationAnchorText(
+                      location.title,
+                      location.slug,
+                      index,
+                      featuredLocations.length
+                    )}
                   </Link>
                 </li>
               ))}
