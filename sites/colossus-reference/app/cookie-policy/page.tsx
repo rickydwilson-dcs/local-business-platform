@@ -2,6 +2,7 @@ import Link from "next/link";
 import { absUrl } from "@/lib/site";
 import { Metadata } from "next";
 import Breadcrumbs from "@/components/ui/breadcrumbs";
+import { PHONE_DISPLAY, BUSINESS_EMAIL, ADDRESS } from "@/lib/contact-info";
 
 export const metadata: Metadata = {
   title: "Cookie Policy",
@@ -457,16 +458,18 @@ export default function CookiePolicyPage() {
                       <h4 className="font-semibold mb-2">Data Controller</h4>
                       <div className="text-gray-700 space-y-1">
                         <p>Colossus Scaffolding</p>
-                        <p>Office 7, 15-20 Gresley Road</p>
-                        <p>St Leonards On Sea</p>
-                        <p>East Sussex TN38 9PL</p>
+                        <p>{ADDRESS.street}</p>
+                        <p>{ADDRESS.locality}</p>
+                        <p>
+                          {ADDRESS.region} {ADDRESS.postalCode}
+                        </p>
                       </div>
                     </div>
                     <div>
                       <h4 className="font-semibold mb-2">Contact Details</h4>
                       <div className="text-gray-700 space-y-1">
-                        <p>Phone: 01424 466 661</p>
-                        <p>Email: info@colossusscaffolding.com</p>
+                        <p>Phone: {PHONE_DISPLAY}</p>
+                        <p>Email: {BUSINESS_EMAIL}</p>
                         <p>
                           Privacy enquiries:{" "}
                           <Link href="/contact" className="text-brand-blue hover:underline">

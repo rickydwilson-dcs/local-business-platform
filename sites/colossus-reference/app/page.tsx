@@ -3,6 +3,8 @@ import { ServicesOverview } from "@/components/ui/services-overview";
 import { CoverageAreas } from "@/components/ui/coverage-areas";
 import { PageLayout } from "@/components/layouts/page-layout";
 import { absUrl } from "@/lib/site";
+import { getLocalBusinessSchema } from "@/lib/schema";
+import { PHONE_DISPLAY, PHONE_TEL } from "@/lib/contact-info";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -39,123 +41,8 @@ export const metadata: Metadata = {
 };
 
 export default function HomePage() {
-  const organizationSchema = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "@id": absUrl("/#organization"),
-    name: "Colossus Scaffolding",
-    legalName: "Colossus Scaffolding Ltd",
-    url: absUrl("/"),
-    logo: absUrl("/static/logo.png"),
-    description:
-      "Professional scaffolding specialists serving the South East UK with TG20:21 compliant solutions, CISRS qualified teams, and comprehensive insurance coverage.",
-    foundingDate: "2009",
-    numberOfEmployees: "10-50",
-    email: "info@colossusscaffolding.com",
-    telephone: "+441424466661",
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: "Office 7, 15-20 Gresley Road",
-      addressLocality: "St Leonards On Sea",
-      addressRegion: "East Sussex",
-      postalCode: "TN38 9PL",
-      addressCountry: "GB",
-    },
-    geo: {
-      "@type": "GeoCoordinates",
-      latitude: "50.8549",
-      longitude: "0.5736",
-    },
-    areaServed: [
-      { "@type": "Place", name: "East Sussex" },
-      { "@type": "Place", name: "West Sussex" },
-      { "@type": "Place", name: "Kent" },
-      { "@type": "Place", name: "Surrey" },
-    ],
-    hasCredential: [
-      {
-        "@type": "EducationalOccupationalCredential",
-        credentialCategory: "certification",
-        name: "CHAS Accreditation",
-        description: "Health and safety assessment scheme approved contractor",
-      },
-      {
-        "@type": "EducationalOccupationalCredential",
-        credentialCategory: "certification",
-        name: "CISRS Qualified Teams",
-        description: "Construction Industry Scaffolders Record Scheme certified scaffolders",
-      },
-      {
-        "@type": "EducationalOccupationalCredential",
-        credentialCategory: "compliance",
-        name: "TG20:21 Compliance",
-        description: "Latest technical guidance for scaffold design and installation compliance",
-      },
-    ],
-    slogan: "Safe, compliant and fully insured scaffolding specialists serving the South East UK",
-    knowsAbout: [
-      "Access Scaffolding",
-      "Facade Scaffolding",
-      "Industrial Scaffolding",
-      "Edge Protection",
-      "Scaffold Design",
-      "TG20:21 Compliance",
-      "Scaffold Inspections",
-      "Temporary Roof Systems",
-    ],
-    hasOfferCatalog: {
-      "@type": "OfferCatalog",
-      name: "Scaffolding Services",
-      itemListElement: [
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: "Access Scaffolding",
-            description: "Professional access scaffolding for residential and commercial projects",
-            url: absUrl("/services/access-scaffolding"),
-          },
-        },
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: "Facade Scaffolding",
-            description: "Specialist facade scaffolding for building maintenance and renovation",
-            url: absUrl("/services/facade-scaffolding"),
-          },
-        },
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: "Edge Protection",
-            description: "HSE compliant edge protection systems for construction sites",
-            url: absUrl("/services/edge-protection"),
-          },
-        },
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: "Temporary Roof Systems",
-            description: "Weather protection and temporary roofing solutions",
-            url: absUrl("/services/temporary-roof-systems"),
-          },
-        },
-      ],
-    },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.8",
-      bestRating: "5",
-      ratingCount: "127",
-    },
-    sameAs: [
-      "https://www.facebook.com/colossusscaffolding",
-      "https://www.linkedin.com/company/colossus-scaffolding",
-    ],
-  };
+  // Use centralized LocalBusiness schema (HomeAndConstructionBusiness type)
+  const localBusinessSchema = getLocalBusinessSchema();
 
   const webSiteSchema = {
     "@context": "https://schema.org",
@@ -199,7 +86,7 @@ export default function HomePage() {
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(organizationSchema),
+            __html: JSON.stringify(localBusinessSchema),
           }}
         />
         <script
@@ -219,7 +106,7 @@ export default function HomePage() {
           title="Scaffolding Services Across Sussex and the South East"
           description="TG20:21 compliant scaffolding solutions for residential, commercial, and industrial projects. Fully insured with CHAS accreditation and £10M liability coverage."
           heroImage="colossus-reference/hero/home/main_01.webp"
-          phone="01424 466 661"
+          phone={PHONE_DISPLAY}
           trustBadges={["Construction Line Gold", "CHAS Accredited", "TG20:21", "£10M Insured"]}
           ctaText="Get Free Quote"
           ctaUrl="/contact"
@@ -232,7 +119,7 @@ export default function HomePage() {
             { name: "Kent", slug: "kent" },
             { name: "Surrey", slug: "surrey" },
           ]}
-          phone="01424 466661"
+          phone={PHONE_TEL}
         />
         {/* Trust Indicators Section */}
         <section className="section-standard bg-gradient-to-br from-gray-50 to-gray-100 border-t border-b border-gray-200">

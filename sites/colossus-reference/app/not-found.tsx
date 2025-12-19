@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { Home, ArrowLeft, Phone, Mail } from "lucide-react";
+import { PHONE_DISPLAY, PHONE_TEL } from "@/lib/contact-info";
 
 export default function NotFound() {
   return (
@@ -38,11 +39,11 @@ export default function NotFound() {
           <p className="text-gray-600 text-sm mb-4">Need help? Contact us directly:</p>
           <div className="space-y-2">
             <Link
-              href="tel:01424466661"
+              href={`tel:${PHONE_TEL}`}
               className="inline-flex items-center gap-2 text-colossus-blue hover:text-colossus-blue/80 transition-colors"
             >
               <Phone className="w-4 h-4" />
-              01424 466 661
+              {PHONE_DISPLAY}
             </Link>
             <div className="text-gray-400">•</div>
             <Link
