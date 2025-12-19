@@ -110,7 +110,8 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   // Enhanced local SEO for service-location combinations
   const locationContext = deriveLocationContext(slug);
   const isLocationSpecific = locationContext !== null;
-  let optimizedTitle = serviceData.seoTitle || `${serviceData.title} | Colossus Scaffolding`;
+  // SEO: Keep titles under 60 characters to prevent Google truncation
+  let optimizedTitle = serviceData.seoTitle || `${serviceName} | Colossus`;
   const optimizedDescription = serviceData.description;
   let keywords: string[] = serviceData.keywords || [];
 
@@ -118,8 +119,8 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
     const { locationName, location } = locationContext;
 
     // Optimize title for local SEO (under 60 characters)
-    optimizedTitle =
-      serviceData.seoTitle || `${serviceData.title} | ${locationName} | Colossus Scaffolding`;
+    // Pattern: "Commercial Scaffolding Brighton | Colossus" = ~41 chars
+    optimizedTitle = serviceData.seoTitle || `${serviceName} ${locationName} | Colossus`;
 
     // Add location-specific keywords if not already present
     if (keywords.length === 0) {

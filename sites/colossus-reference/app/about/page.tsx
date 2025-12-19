@@ -150,12 +150,6 @@ export default function AboutPage() {
         },
       ],
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.8",
-      bestRating: "5",
-      ratingCount: "127",
-    },
   };
 
   const aboutPageSchema = {
