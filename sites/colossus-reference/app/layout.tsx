@@ -6,6 +6,7 @@ import MobileMenu from "@/components/ui/mobile-menu";
 import { LocationsDropdown } from "@/components/ui/locations-dropdown";
 import { ConsentManager, Analytics, AnalyticsDebugPanel } from "@/components/analytics";
 import { Footer } from "@/components/ui/footer";
+import { PHONE_DISPLAY, PHONE_TEL } from "@/lib/contact-info";
 
 export const metadata: Metadata = {
   metadataBase: new URL(
@@ -18,8 +19,6 @@ export const metadata: Metadata = {
   },
   description: "Professional scaffolding services across the South East.",
 };
-
-const PHONE_NUMBER = "01424 466 661";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const criticalStyles = `
@@ -205,11 +204,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
             {/* Desktop Phone & CTA */}
             <div className="desktop-actions">
-              <a href={`tel:${PHONE_NUMBER}`} className="phone-link">
+              <a href={`tel:${PHONE_TEL}`} className="phone-link">
                 <svg className="phone-icon" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
                 </svg>
-                <span className="font-medium">{PHONE_NUMBER}</span>
+                <span className="font-medium">{PHONE_DISPLAY}</span>
               </a>
               <Link href="/contact" className="btn-primary">
                 Get Free Quote
@@ -217,7 +216,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </div>
 
             {/* Mobile Menu Component */}
-            <MobileMenu phoneNumber={PHONE_NUMBER} />
+            <MobileMenu phoneNumber={PHONE_DISPLAY} />
           </div>
         </header>
 

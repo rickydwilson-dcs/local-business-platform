@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Phone, Mail, MapPin, Shield, Award } from "lucide-react";
 import { getContentItems } from "@/lib/content";
+import { PHONE_DISPLAY, PHONE_TEL, BUSINESS_EMAIL } from "@/lib/contact-info";
 
 // Priority services to show first (most important for SEO)
 const PRIORITY_SERVICES = [
@@ -150,17 +151,17 @@ export async function Footer() {
             <div className="space-y-3 text-gray-300 text-sm sm:text-base">
               <div className="flex items-center gap-2">
                 <Phone className="h-3 w-3 sm:h-4 sm:w-4 text-brand-blue flex-shrink-0" />
-                <Link href="tel:01424466661" className="hover:text-brand-blue transition-colors">
-                  01424 466 661
+                <Link href={`tel:${PHONE_TEL}`} className="hover:text-brand-blue transition-colors">
+                  {PHONE_DISPLAY}
                 </Link>
               </div>
               <div className="flex items-center gap-2">
                 <Mail className="h-3 w-3 sm:h-4 sm:w-4 text-brand-blue flex-shrink-0" />
                 <Link
-                  href="mailto:info@colossusscaffolding.com"
+                  href={`mailto:${BUSINESS_EMAIL}`}
                   className="hover:text-brand-blue transition-colors"
                 >
-                  info@colossusscaffolding.com
+                  {BUSINESS_EMAIL}
                 </Link>
               </div>
               <div className="flex items-start gap-2">

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { getImageUrl } from "@/lib/image";
+import { PHONE_DISPLAY, PHONE_TEL } from "@/lib/contact-info";
 
 interface ServiceHeroProps {
   badge?: string;
@@ -18,12 +19,15 @@ export function ServiceHero(props: ServiceHeroProps) {
     badge,
     title,
     description,
-    phone = "01424 466661",
+    phone = PHONE_DISPLAY,
     trustBadges = ["TG20:21 Compliant", "CHAS Accredited", "£10M Insured"],
     heroImage,
     ctaText = "Get Free Quote",
     ctaUrl = "/contact",
   } = props;
+
+  // Format phone for tel: link (remove spaces if custom phone provided)
+  const phoneTel = phone === PHONE_DISPLAY ? PHONE_TEL : phone.replace(/\s/g, "");
 
   return (
     <section className="py-16 sm:py-20 lg:py-24 bg-white">
@@ -47,7 +51,7 @@ export function ServiceHero(props: ServiceHeroProps) {
                 {ctaText}
               </Link>
               <Link
-                href={`tel:${phone.replace(/\s/g, "")}`}
+                href={`tel:${phoneTel}`}
                 className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-200 transition-colors"
               >
                 <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
