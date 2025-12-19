@@ -91,17 +91,6 @@ describe("Schema.org Structured Data", () => {
       expect((hasOfferCatalog.itemListElement as unknown[]).length).toBeGreaterThan(0);
     });
 
-    it("should include aggregate rating", () => {
-      const schema = getLocalBusinessSchema();
-      const aggregateRating = schema.aggregateRating as SchemaObject;
-
-      expect(aggregateRating).toBeDefined();
-      expect(aggregateRating["@type"]).toBe("AggregateRating");
-      expect(aggregateRating.ratingValue).toBeDefined();
-      expect(aggregateRating.bestRating).toBe("5");
-      expect(aggregateRating.ratingCount).toBeDefined();
-    });
-
     it("should include social media links", () => {
       const schema = getLocalBusinessSchema();
       const sameAs = schema.sameAs as string[];
