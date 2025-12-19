@@ -77,10 +77,6 @@ export const colossusBusinessConfig: BusinessConfig = {
       category: "certification",
     },
   ],
-  aggregateRating: {
-    ratingValue: "4.8",
-    ratingCount: "127",
-  },
   socialProfiles: [
     "https://www.facebook.com/colossusscaffolding",
     "https://www.linkedin.com/company/colossus-scaffolding",

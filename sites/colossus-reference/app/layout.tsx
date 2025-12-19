@@ -158,8 +158,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   `;
 
   return (
-    <html lang="en">
+    <html lang="en-GB">
       <head>
+        {/* Geo meta tags for local SEO targeting */}
+        <meta name="geo.region" content="GB-ESX" />
+        <meta name="geo.placename" content="East Sussex" />
+        <meta name="geo.position" content="50.8570;0.5750" />
+        <meta name="ICBM" content="50.8570, 0.5750" />
         <style dangerouslySetInnerHTML={{ __html: criticalStyles }} />
       </head>
       <body className="min-h-screen bg-white text-slate-900 antialiased">

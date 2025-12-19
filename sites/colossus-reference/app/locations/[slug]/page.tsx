@@ -167,14 +167,18 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
     };
   }
 
+  // SEO: Keep titles under 60 characters to prevent Google truncation
+  // Pattern: "Scaffolding Brighton | Colossus" (~32 chars for most locations)
+  const optimizedTitle = locationData.seoTitle || `Scaffolding ${locationData.title} | Colossus`;
+
   return {
-    title: locationData.seoTitle || `${locationData.title} | Colossus Scaffolding`,
+    title: optimizedTitle,
     description: locationData.description,
     keywords: Array.isArray(locationData.keywords)
       ? locationData.keywords.join(", ")
       : locationData.keywords,
     openGraph: {
-      title: locationData.seoTitle || `${locationData.title} | Colossus Scaffolding`,
+      title: optimizedTitle,
       description: locationData.description,
       url: absUrl(`/locations/${slug}`),
       siteName: "Colossus Scaffolding",
@@ -183,7 +187,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
           url: absUrl("/static/logo.png"),
           width: 1200,
           height: 630,
-          alt: `Professional scaffolding services in ${locationData.title} - Colossus Scaffolding`,
+          alt: `Professional scaffolding services in ${locationData.title} - Colossus`,
         },
       ],
       locale: "en_GB",
@@ -191,7 +195,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
     },
     twitter: {
       card: "summary_large_image",
-      title: locationData.seoTitle || `${locationData.title} | Colossus Scaffolding`,
+      title: optimizedTitle,
       description: locationData.description,
     },
     alternates: {

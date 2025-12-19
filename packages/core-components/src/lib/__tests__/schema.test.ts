@@ -79,16 +79,6 @@ describe("Schema.org Structured Data", () => {
       expect(schema.hasOfferCatalog.itemListElement.length).toBeGreaterThan(0);
     });
 
-    it("should include aggregate rating", () => {
-      const schema = getOrganizationSchema();
-
-      expect(schema.aggregateRating).toBeDefined();
-      expect(schema.aggregateRating["@type"]).toBe("AggregateRating");
-      expect(schema.aggregateRating.ratingValue).toBeDefined();
-      expect(schema.aggregateRating.bestRating).toBe("5");
-      expect(schema.aggregateRating.ratingCount).toBeDefined();
-    });
-
     it("should include social media links", () => {
       const schema = getOrganizationSchema();
 
