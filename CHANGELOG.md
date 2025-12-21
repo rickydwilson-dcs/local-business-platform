@@ -6,6 +6,40 @@ Complete project history and achievements organized by development phase.
 
 ## 📅 Recent Changes
 
+### **2025-12-21 - SEO: Viewport Meta Tag & Image Alt Text Optimization**
+
+**📱 Viewport Configuration:**
+
+- ✅ **Next.js 15+ compliance** - Added explicit `viewport` export to layout.tsx
+- ✅ **Mobile optimization** - Configured width, initialScale, maximumScale, userScalable
+- ✅ **Notch support** - Added `viewportFit: "cover"` for modern mobile devices
+
+**🖼️ Image Alt Text Optimization:**
+
+- ✅ **ServiceGallery** - Now uses `generateImageAlt()` with service/location context
+- ✅ **ServiceShowcase** - Updated both grid and alternating layouts
+- ✅ **ContentCard** - Standardized alt text with company branding
+- ✅ **CertificateGallery** - Enhanced with proper certificate context
+- ✅ **CertificateLightbox** - Consistent alt text in lightbox view
+
+**Files Modified:**
+
+- `sites/colossus-reference/app/layout.tsx` - Added viewport export
+- `sites/colossus-reference/components/ui/service-gallery.tsx` - Alt text + new props
+- `sites/colossus-reference/components/ui/service-showcase.tsx` - Alt text optimization
+- `sites/colossus-reference/components/ui/content-card.tsx` - Alt text standardization
+- `sites/colossus-reference/components/ui/certificate-gallery.tsx` - Alt text enhancement
+- `sites/colossus-reference/components/ui/certificate-lightbox.tsx` - Alt text consistency
+
+**Expected Impact:**
+
+- Improved mobile SEO with explicit viewport configuration
+- Better image search rankings through consistent, SEO-optimized alt text
+- Enhanced accessibility for screen readers
+- Leverages existing `generateImageAlt()` utility that was previously unused
+
+---
+
 ### **2025-12-19 - SEO: Fix Anchor Text Over-Optimization (Issue 21)**
 
 **🔗 Anchor Text Variation:**
