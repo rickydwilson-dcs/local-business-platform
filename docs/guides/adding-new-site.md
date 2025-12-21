@@ -8,7 +8,7 @@
 
 ## Overview
 
-This guide walks you through creating a new client site in the Local Business Platform monorepo. Each site is an independent Next.js application that shares components from `@platform/core-components`.
+This guide walks you through creating a new client site in the Local Business Platform monorepo. Each site is an independent Next.js application that shares components from `@platform/core-components` and theming from `@platform/theme-system`.
 
 ## Prerequisites
 
@@ -16,89 +16,141 @@ This guide walks you through creating a new client site in the Local Business Pl
 - Vercel account with deployment access
 - pnpm installed globally
 - Domain or subdomain for the new site
-- Client business information (name, services, locations)
+- Client business information (name, services, locations, brand colors)
 
 ## Steps
 
-### Step 1: Create Site Directory
+### Step 1: Create Site Using the CLI Tool
+
+The platform includes a site creation tool that copies from `base-template` and customizes configuration:
 
 ```bash
 # From repository root
-mkdir -p sites/[client-slug]
+npx ts-node tools/create-site.ts <site-name>
 
 # Example: Joe's Plumbing in Canterbury
-mkdir -p sites/joes-plumbing-canterbury
+npx ts-node tools/create-site.ts joes-plumbing-canterbury
 ```
+
+The tool will prompt you for:
+
+- Business name
+- Phone number
+- Email address
+- Primary brand color (hex)
+- Primary hover color (hex)
+- Secondary color (hex)
 
 **Naming convention:** `[business-name]-[primary-location]` in lowercase with hyphens.
 
-### Step 2: Copy Reference Site Structure
+### Step 2: Review Generated Files
 
-```bash
-# Copy from colossus-reference (the template site)
-cp -r sites/colossus-reference/app sites/[client-slug]/
-cp -r sites/colossus-reference/components sites/[client-slug]/
-cp -r sites/colossus-reference/lib sites/[client-slug]/
-cp sites/colossus-reference/package.json sites/[client-slug]/
-cp sites/colossus-reference/tsconfig.json sites/[client-slug]/
-cp sites/colossus-reference/next.config.ts sites/[client-slug]/
-cp sites/colossus-reference/tailwind.config.ts sites/[client-slug]/
-cp sites/colossus-reference/postcss.config.js sites/[client-slug]/
+The tool creates these files in `sites/[client-slug]/`:
+
+```
+sites/[client-slug]/
+├── app/                  # Next.js app directory
+├── components/           # Site-specific components
+├── content/              # MDX content files
+│   ├── services/         # Service pages
+│   └── locations/        # Location pages
+├── lib/                  # Utilities and helpers
+├── public/               # Static assets
+├── package.json          # Dependencies (name updated)
+├── site.config.ts        # Business information
+├── theme.config.ts       # Brand colors and styling
+├── tailwind.config.ts    # Tailwind with theme plugin
+└── README.md             # Site-specific docs
 ```
 
-### Step 3: Create Content Directory
+### Step 3: Customize Theme Configuration
 
-```bash
-mkdir -p sites/[client-slug]/content/services
-mkdir -p sites/[client-slug]/content/locations
-```
-
-### Step 4: Update package.json
-
-Edit `sites/[client-slug]/package.json`:
-
-```json
-{
-  "name": "[client-slug]",
-  "version": "1.0.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
-    "type-check": "tsc --noEmit"
-  },
-  "dependencies": {
-    "@platform/core-components": "workspace:*",
-    "next": "16.0.7",
-    "react": "^19.1.2",
-    "react-dom": "^19.1.2"
-    // ... other dependencies
-  }
-}
-```
-
-### Step 5: Update Site Configuration
-
-Edit `sites/[client-slug]/lib/site.ts`:
+Edit `sites/[client-slug]/theme.config.ts` to fine-tune brand styling:
 
 ```typescript
-export const siteConfig = {
-  name: "Joe's Plumbing Canterbury",
-  description: "Professional plumbing services in Canterbury and surrounding areas",
-  phone: "01227 XXX XXX",
-  email: "info@joesplumbing.co.uk",
-  address: "123 High Street, Canterbury, Kent CT1 2XX",
-  serviceArea: ["Canterbury", "Whitstable", "Herne Bay"],
-  socialLinks: {
-    facebook: "https://facebook.com/joesplumbingcanterbury",
-    // ... other social links
+import type { ThemeConfig } from "@platform/theme-system";
+
+export const themeConfig: Partial<ThemeConfig> = {
+  colors: {
+    brand: {
+      primary: "#your-primary-color",
+      primaryHover: "#your-hover-color",
+      secondary: "#your-secondary-color",
+      accent: "#f59e0b", // Usually amber for highlights
+    },
+    // Surface and semantic colors use sensible defaults
+  },
+
+  typography: {
+    fontFamily: {
+      sans: ["Inter", "system-ui", "sans-serif"],
+      heading: ["Inter", "system-ui", "sans-serif"],
+    },
+  },
+
+  components: {
+    button: { borderRadius: "0.5rem", fontWeight: 600 },
+    card: { borderRadius: "1rem", shadow: "sm" },
+    hero: { variant: "centered" },
+    navigation: { style: "solid" },
   },
 };
 ```
 
-### Step 6: Create Service MDX Files
+See the [Theming Guide](./theming.md) for full documentation on theme tokens.
+
+### Step 4: Update Site Configuration
+
+Edit `sites/[client-slug]/site.config.ts` with complete business information:
+
+```typescript
+export const siteConfig: SiteConfig = {
+  name: "Joe's Plumbing Canterbury",
+  tagline: "Professional Plumbing Services",
+  url: process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
+
+  business: {
+    name: "Joe's Plumbing",
+    legalName: "Joe's Plumbing Ltd",
+    type: "HomeAndConstructionBusiness",
+    phone: "+44 1227 XXX XXX",
+    email: "info@joesplumbing.co.uk",
+    address: {
+      street: "123 High Street",
+      city: "Canterbury",
+      region: "Kent",
+      postalCode: "CT1 2XX",
+      country: "United Kingdom",
+    },
+    hours: {
+      monday: "8:00 AM - 6:00 PM",
+      tuesday: "8:00 AM - 6:00 PM",
+      // ... other days
+    },
+    socialMedia: {
+      facebook: "https://facebook.com/joesplumbingcanterbury",
+    },
+  },
+
+  serviceAreas: ["Canterbury", "Whitstable", "Herne Bay"],
+
+  services: [
+    { title: "Emergency Plumbing", slug: "emergency-plumbing", description: "..." },
+    { title: "Boiler Installation", slug: "boiler-installation", description: "..." },
+  ],
+
+  features: {
+    analytics: true,
+    consentBanner: true,
+    contactForm: true,
+    rateLimit: true,
+    testimonials: true,
+    blog: false,
+  },
+};
+```
+
+### Step 5: Create Service MDX Files
 
 Create service files in `sites/[client-slug]/content/services/`:
 
@@ -111,7 +163,7 @@ touch sites/[client-slug]/content/services/bathroom-installation.mdx
 
 See [Adding a Service](./adding-service.md) for MDX frontmatter template.
 
-### Step 7: Create Location MDX Files
+### Step 6: Create Location MDX Files
 
 Create location files in `sites/[client-slug]/content/locations/`:
 
@@ -124,29 +176,14 @@ touch sites/[client-slug]/content/locations/herne-bay.mdx
 
 See [Adding a Location](./adding-location.md) for MDX frontmatter template.
 
-### Step 8: Update Turborepo Configuration
-
-The root `turbo.json` automatically includes all sites in `sites/` directory. Verify it's configured:
-
-```json
-{
-  "pipeline": {
-    "build": {
-      "dependsOn": ["^build"],
-      "outputs": [".next/**", "!.next/cache/**"]
-    }
-  }
-}
-```
-
-### Step 9: Install Dependencies
+### Step 7: Install Dependencies
 
 ```bash
 # From repository root
 pnpm install
 ```
 
-### Step 10: Test Local Development
+### Step 8: Test Local Development
 
 ```bash
 # Start the new site
@@ -158,12 +195,20 @@ pnpm dev
 
 **Verify:**
 
-- Homepage loads
+- Homepage loads with correct brand colors
 - Services page works
 - Locations page works
 - Contact form displays
+- Theme colors apply correctly
 
-### Step 11: Configure Vercel Project
+### Step 9: Validate Content
+
+```bash
+# From site directory
+npm run validate:content
+```
+
+### Step 10: Configure Vercel Project
 
 1. Go to Vercel Dashboard
 2. Add New Project
@@ -174,7 +219,7 @@ pnpm dev
    - **Build Command:** `pnpm build`
    - **Output Directory:** `.next`
 
-### Step 12: Set Environment Variables
+### Step 11: Set Environment Variables
 
 In Vercel project settings, add:
 
@@ -196,14 +241,14 @@ FEATURE_CONSENT_BANNER=true
 FEATURE_ANALYTICS_ENABLED=true
 ```
 
-### Step 13: Configure Domain
+### Step 12: Configure Domain
 
-1. In Vercel, go to Project Settings → Domains
+1. In Vercel, go to Project Settings > Domains
 2. Add custom domain
 3. Configure DNS records as instructed
 4. Wait for SSL certificate provisioning
 
-### Step 14: Deploy
+### Step 13: Deploy
 
 ```bash
 # Commit changes
@@ -221,6 +266,7 @@ git push origin develop
 After deployment, verify:
 
 - [ ] Homepage loads at custom domain
+- [ ] Brand colors display correctly
 - [ ] All service pages accessible
 - [ ] All location pages accessible
 - [ ] Contact form submits successfully
@@ -239,7 +285,13 @@ Before considering a site complete:
 - [ ] All services have MDX files with 3-15 FAQs
 - [ ] All locations have MDX files
 - [ ] Hero images uploaded to R2
-- [ ] Site configuration updated
+- [ ] Site configuration complete
+
+### Theme
+
+- [ ] Brand colors set in theme.config.ts
+- [ ] Colors meet WCAG AA contrast (run `pnpm validate` in theme-system)
+- [ ] Typography configured if custom fonts needed
 
 ### Technical
 
@@ -262,11 +314,31 @@ Before considering a site complete:
 - [ ] No console errors
 - [ ] Lighthouse scores acceptable
 
+## Manual Site Creation (Alternative)
+
+If you prefer to create sites manually instead of using the CLI tool:
+
+```bash
+# Copy from base-template
+cp -r sites/base-template sites/[client-slug]
+
+# Update package.json name
+# Edit site.config.ts
+# Edit theme.config.ts
+```
+
 ## Troubleshooting
 
 ### Build fails with "workspace:\* not found"
 
 Run `pnpm install` from repository root to link workspaces.
+
+### Theme colors not applying
+
+1. Verify `theme.config.ts` exports correctly
+2. Check `tailwind.config.ts` uses `createThemePlugin(themeConfig)`
+3. Restart dev server
+4. Check browser devtools for CSS variable values
 
 ### Content not appearing
 
@@ -288,6 +360,7 @@ Run `pnpm install` from repository root to link workspaces.
 
 ## Related
 
+- [Theming Guide](./theming.md) - Complete theming documentation
 - [Adding a Service](./adding-service.md) - Service MDX creation
 - [Adding a Location](./adding-location.md) - Location MDX creation
 - [Deploying a Site](./deploying-site.md) - Deployment procedures
@@ -295,4 +368,4 @@ Run `pnpm install` from repository root to link workspaces.
 
 ---
 
-**Last Updated:** 2025-12-05
+**Last Updated:** 2025-12-21

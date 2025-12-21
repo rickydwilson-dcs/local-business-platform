@@ -14,11 +14,11 @@ export function Footer() {
             </p>
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-2 text-xs sm:text-sm">
-                <Shield className="h-3 w-3 sm:h-4 sm:w-4 text-brand-blue" />
+                <Shield className="h-3 w-3 sm:h-4 sm:w-4 text-brand-primary" />
                 <span>TG20:21</span>
               </div>
               <div className="flex items-center gap-2 text-xs sm:text-sm">
-                <Award className="h-3 w-3 sm:h-4 sm:w-4 text-brand-blue" />
+                <Award className="h-3 w-3 sm:h-4 sm:w-4 text-brand-primary" />
                 <span>CHAS</span>
               </div>
             </div>
@@ -30,7 +30,7 @@ export function Footer() {
               <li>
                 <Link
                   href="/services/access-scaffolding"
-                  className="hover:text-brand-blue transition-colors"
+                  className="hover:text-brand-primary transition-colors"
                 >
                   Access Scaffolding
                 </Link>
@@ -38,7 +38,7 @@ export function Footer() {
               <li>
                 <Link
                   href="/services/facade-scaffolding"
-                  className="hover:text-brand-blue transition-colors"
+                  className="hover:text-brand-primary transition-colors"
                 >
                   Facade Scaffolding
                 </Link>
@@ -46,7 +46,7 @@ export function Footer() {
               <li>
                 <Link
                   href="/services/edge-protection"
-                  className="hover:text-brand-blue transition-colors"
+                  className="hover:text-brand-primary transition-colors"
                 >
                   Edge Protection
                 </Link>
@@ -54,7 +54,7 @@ export function Footer() {
               <li>
                 <Link
                   href="/services/birdcage-scaffolds"
-                  className="hover:text-brand-blue transition-colors"
+                  className="hover:text-brand-primary transition-colors"
                 >
                   Birdcage Scaffolds
                 </Link>
@@ -62,13 +62,13 @@ export function Footer() {
               <li>
                 <Link
                   href="/services/public-access-staircases"
-                  className="hover:text-brand-blue transition-colors"
+                  className="hover:text-brand-primary transition-colors"
                 >
                   Public Access Staircases
                 </Link>
               </li>
               <li>
-                <Link href="/services" className="hover:text-brand-blue transition-colors">
+                <Link href="/services" className="hover:text-brand-primary transition-colors">
                   View All Scaffolding Services
                 </Link>
               </li>
@@ -81,7 +81,7 @@ export function Footer() {
               <li>
                 <Link
                   href="/locations/east-sussex"
-                  className="hover:text-brand-blue transition-colors"
+                  className="hover:text-brand-primary transition-colors"
                 >
                   East Sussex
                 </Link>
@@ -89,18 +89,21 @@ export function Footer() {
               <li>
                 <Link
                   href="/locations/west-sussex"
-                  className="hover:text-brand-blue transition-colors"
+                  className="hover:text-brand-primary transition-colors"
                 >
                   West Sussex
                 </Link>
               </li>
               <li>
-                <Link href="/locations/kent" className="hover:text-brand-blue transition-colors">
+                <Link href="/locations/kent" className="hover:text-brand-primary transition-colors">
                   Kent
                 </Link>
               </li>
               <li>
-                <Link href="/locations/surrey" className="hover:text-brand-blue transition-colors">
+                <Link
+                  href="/locations/surrey"
+                  className="hover:text-brand-primary transition-colors"
+                >
                   Surrey
                 </Link>
               </li>
@@ -111,33 +114,33 @@ export function Footer() {
             <h4 className="text-base sm:text-lg font-semibold mb-4">Contact Info</h4>
             <div className="space-y-3 text-gray-300 text-sm sm:text-base">
               <div className="flex items-center gap-2">
-                <Phone className="h-3 w-3 sm:h-4 sm:w-4 text-brand-blue flex-shrink-0" />
-                <Link href="tel:01424466661" className="hover:text-brand-blue transition-colors">
+                <Phone className="h-3 w-3 sm:h-4 sm:w-4 text-brand-primary flex-shrink-0" />
+                <Link href="tel:01424466661" className="hover:text-brand-primary transition-colors">
                   01424 466 661
                 </Link>
               </div>
               <div className="flex items-center gap-2">
-                <Mail className="h-3 w-3 sm:h-4 sm:w-4 text-brand-blue flex-shrink-0" />
+                <Mail className="h-3 w-3 sm:h-4 sm:w-4 text-brand-primary flex-shrink-0" />
                 <Link
                   href="mailto:info@colossusscaffolding.com"
-                  className="hover:text-brand-blue transition-colors"
+                  className="hover:text-brand-primary transition-colors"
                 >
                   info@colossusscaffolding.com
                 </Link>
               </div>
               <div className="flex items-start gap-2">
-                <MapPin className="h-3 w-3 sm:h-4 sm:w-4 text-brand-blue flex-shrink-0 mt-1" />
+                <MapPin className="h-3 w-3 sm:h-4 sm:w-4 text-brand-primary flex-shrink-0 mt-1" />
                 <div className="leading-relaxed">
                   <div>South East UK</div>
                   <div>Professional Scaffolding Services</div>
                 </div>
               </div>
               <div className="mt-4 pt-4 border-t border-gray-700 text-xs sm:text-sm">
-                <Link href="/privacy-policy" className="hover:text-brand-blue transition-colors">
+                <Link href="/privacy-policy" className="hover:text-brand-primary transition-colors">
                   Privacy Policy
                 </Link>
                 <span className="mx-2 text-gray-500">|</span>
-                <Link href="/cookie-policy" className="hover:text-brand-blue transition-colors">
+                <Link href="/cookie-policy" className="hover:text-brand-primary transition-colors">
                   Cookie Policy
                 </Link>
               </div>
@@ -152,7 +155,7 @@ export function Footer() {
               href="https://www.digitalconsultingservices.co.uk"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-white hover:text-brand-blue transition-colors underline"
+              className="text-white hover:text-brand-primary transition-colors underline"
             >
               Digital Consulting Services
             </a>

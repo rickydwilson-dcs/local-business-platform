@@ -65,7 +65,7 @@ export default function ServiceAbout({ serviceName, slug, about }: ServiceAboutP
               <div className="grid md:grid-cols-2 gap-4">
                 {content.whenNeeded.map((need, index) => (
                   <div key={index} className="flex items-start gap-3 p-4 bg-gray-50 rounded-lg">
-                    <div className="flex-shrink-0 w-6 h-6 bg-brand-blue rounded-full flex items-center justify-center mt-0.5">
+                    <div className="flex-shrink-0 w-6 h-6 bg-brand-primary rounded-full flex items-center justify-center mt-0.5">
                       <svg
                         className="h-4 w-4 text-white"
                         fill="none"
@@ -85,9 +85,9 @@ export default function ServiceAbout({ serviceName, slug, about }: ServiceAboutP
                 ))}
               </div>
 
-              <div className="mt-8 p-6 bg-brand-blue/5 rounded-2xl border border-brand-blue/10">
+              <div className="mt-8 p-6 bg-brand-primary/5 rounded-2xl border border-brand-primary/10">
                 <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0 w-12 h-12 bg-brand-blue rounded-lg flex items-center justify-center">
+                  <div className="flex-shrink-0 w-12 h-12 bg-brand-primary rounded-lg flex items-center justify-center">
                     <svg
                       className="h-6 w-6 text-white"
                       fill="none"
@@ -121,7 +121,7 @@ export default function ServiceAbout({ serviceName, slug, about }: ServiceAboutP
             <div className="bg-gray-50 rounded-2xl p-6 border border-gray-200 sticky top-8">
               <h3 className="text-xl font-semibold text-gray-900 mb-4 flex items-center gap-2">
                 <svg
-                  className="h-5 w-5 text-brand-blue"
+                  className="h-5 w-5 text-brand-primary"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -141,7 +141,7 @@ export default function ServiceAbout({ serviceName, slug, about }: ServiceAboutP
                     key={index}
                     className="flex items-center gap-3 p-3 bg-white rounded-lg shadow-sm"
                   >
-                    <div className="flex-shrink-0 w-2 h-2 bg-brand-blue rounded-full"></div>
+                    <div className="flex-shrink-0 w-2 h-2 bg-brand-primary rounded-full"></div>
                     <span className="text-gray-900 font-medium text-sm">{achievement}</span>
                   </div>
                 ))}
@@ -150,7 +150,7 @@ export default function ServiceAbout({ serviceName, slug, about }: ServiceAboutP
               <div className="mt-6 pt-6 border-t border-gray-200">
                 <div className="flex items-center gap-2 text-sm text-gray-800 mb-4">
                   <svg
-                    className="h-4 w-4 text-brand-blue"
+                    className="h-4 w-4 text-brand-primary"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -170,7 +170,7 @@ export default function ServiceAbout({ serviceName, slug, about }: ServiceAboutP
                 </p>
                 <a
                   href="/contact"
-                  className="w-full inline-flex items-center justify-center px-4 py-3 bg-brand-blue text-white font-semibold rounded-lg hover:bg-brand-blue-hover transition-colors text-sm"
+                  className="w-full inline-flex items-center justify-center px-4 py-3 bg-brand-primary text-white font-semibold rounded-lg hover:bg-brand-primary-hover transition-colors text-sm"
                 >
                   Get Free Quote
                 </a>
