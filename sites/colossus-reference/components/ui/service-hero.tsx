@@ -94,6 +94,7 @@ export function ServiceHero(props: ServiceHeroProps) {
               <Image
                 src={getImageUrl(heroImage)}
                 alt={`Professional scaffolding installation for ${title.toLowerCase()} showing safe access solutions with TG20:21 compliant design`}
+                title={`${title} services - Colossus Scaffolding`}
                 width={600}
                 height={400}
                 sizes="(max-width: 768px) 100vw, 50vw"

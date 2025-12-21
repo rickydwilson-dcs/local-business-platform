@@ -1,6 +1,8 @@
 # Ignore all output content (local only)
 *
 
-# But track these documentation files
+# But track these files and folders
 !README.md
 !.gitignore
+!sessions/
+!sessions/**

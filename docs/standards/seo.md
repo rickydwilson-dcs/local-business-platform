@@ -1,7 +1,7 @@
 # SEO Standards
 
-**Version:** 1.0.0
-**Last Updated:** 2025-12-05
+**Version:** 1.1.0
+**Last Updated:** 2025-12-21
 **Scope:** All sites in local-business-platform
 
 ---
@@ -162,15 +162,52 @@ description: "[Service] for [use cases]. [Key benefit]. [Credential].";
 ### Alt Text Requirements
 
 ```tsx
-// ✅ CORRECT - Descriptive alt text
+// ✅ CORRECT - Descriptive alt text with keywords
 <Image
-  alt="Professional scaffolding installation on Victorian terrace in Brighton"
+  alt="Professional scaffolding installation on Victorian terrace in Brighton - TG20:21 compliant design"
+  title="Scaffolding services in Brighton by Colossus Scaffolding"
   ...
 />
 
 // ❌ WRONG - Generic or missing
 <Image alt="scaffolding" ... />
 <Image alt="" ... />
+<Image alt={title} ... />  // Too minimal
+```
+
+### Title Attribute
+
+All images should include a `title` attribute for additional SEO value:
+
+```tsx
+// lib/image.ts provides helper functions:
+import { generateImageAlt, generateImageTitle } from "@/lib/image";
+
+<Image
+  alt={generateImageAlt(serviceName, locationName)}
+  title={generateImageTitle(serviceName, locationName)}
+  ...
+/>
+```
+
+### Image Sitemap
+
+Services and locations sitemaps automatically include hero images. The `getPageImage()` helper in `lib/mdx.tsx` extracts hero images from MDX frontmatter:
+
+```typescript
+// app/services/sitemap.ts
+const serviceEntries = await Promise.all(
+  serviceSlugs.map(async (slug) => {
+    const heroImage = await getPageImage("services", slug);
+    const imageUrl = heroImage ? getImageUrl(heroImage) : null;
+
+    return {
+      url: `${BASE_URL}/services/${slug}`,
+      lastModified: new Date(),
+      ...(imageUrl && { images: [imageUrl] }),
+    };
+  })
+);
 ```
 
 ## What NOT to Do
@@ -197,6 +234,81 @@ Before completing any page:
 - [ ] OpenGraph meta configured
 - [ ] Location pages mention local areas
 - [ ] Lighthouse SEO score 95+
+
+## Sitemap Architecture
+
+The platform uses a **modular sitemap architecture** where each top-level section has its own sitemap file. This ensures scalability and organization as the site grows.
+
+### Sitemap Structure
+
+| URL                      | Content                           | Location                         |
+| ------------------------ | --------------------------------- | -------------------------------- |
+| `/sitemap-index.xml`     | Index listing all sitemaps        | `app/sitemap-index.xml/route.ts` |
+| `/sitemap.xml`           | Core pages (home, about, contact) | `app/sitemap.ts`                 |
+| `/services/sitemap.xml`  | All service pages                 | `app/services/sitemap.ts`        |
+| `/locations/sitemap.xml` | All location pages                | `app/locations/sitemap.ts`       |
+
+### Adding New Section Sitemaps
+
+When adding a new top-level section (e.g., `/blog`, `/products`), create a sitemap file in that directory:
+
+```typescript
+// app/blog/sitemap.ts
+import type { MetadataRoute } from "next";
+
+const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://example.com";
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  // Fetch your content slugs
+  const blogSlugs = await listSlugs("blog");
+
+  const indexEntry = {
+    url: `${BASE_URL}/blog`,
+    lastModified: new Date(),
+    changeFrequency: "weekly" as const,
+    priority: 0.9,
+  };
+
+  const blogEntries = blogSlugs.map((slug) => ({
+    url: `${BASE_URL}/blog/${slug}`,
+    lastModified: new Date(),
+    changeFrequency: "weekly" as const,
+    priority: 0.7,
+  }));
+
+  return [indexEntry, ...blogEntries];
+}
+```
+
+Then register it in the sitemap index (`app/sitemap-index.xml/route.ts`):
+
+```typescript
+const SITEMAP_PATHS = [
+  "/sitemap.xml",
+  "/services/sitemap.xml",
+  "/locations/sitemap.xml",
+  "/blog/sitemap.xml", // Add new section here
+];
+```
+
+### Google Search Console
+
+Submit the sitemap index URL to Google Search Console:
+
+```
+https://yourdomain.com/sitemap-index.xml
+```
+
+Google will automatically discover and crawl all referenced sitemaps.
+
+### Benefits of Modular Sitemaps
+
+1. **Scalability** - Each section stays under Google's 50,000 URL limit
+2. **Organization** - Easy to find and manage section-specific URLs
+3. **Extensibility** - Adding new sections requires minimal changes
+4. **Debugging** - Isolate sitemap issues to specific sections
+
+See [Adding a Content Section](../guides/adding-content-section.md) for the complete guide.
 
 ## Related Standards
 
