@@ -40,6 +40,8 @@ White-label website platform for local service businesses. Monorepo with Turbore
 
 - **Sites:** `sites/` directory (each deploys to separate Vercel project)
 - **Components:** `packages/core-components` (@platform/core-components v1.1.0)
+- **Theme System:** `packages/theme-system` (@platform/theme-system) - CSS variables + Tailwind plugin
+- **Base Template:** `sites/base-template` - Gold-standard template for new sites
 - **Content:** MDX files only (62 total: 25 services + 37 locations)
 
 ---
@@ -100,6 +102,16 @@ npm run validate:services  # 25 service files
 npm run validate:locations # 37 location files
 ```
 
+### Theme System
+
+```bash
+# Validate theme contrast (from packages/theme-system)
+pnpm validate --config ../../sites/[site-name]/theme.config.ts
+
+# Create new site from base-template
+npx ts-node tools/create-site.ts [site-name]
+```
+
 ---
 
 ## Critical Architecture Rules
@@ -114,7 +126,9 @@ All content managed through MDX files. **NEVER create:**
 
 ### Styling
 
-- **Tailwind CSS ONLY** - No inline styles, no CSS-in-JS
+- **Tailwind CSS + Theme System** - No inline styles, no CSS-in-JS
+- Use theme tokens: `bg-brand-primary`, `text-surface-foreground`
+- ❌ Avoid hardcoded hex colors (`bg-[#005A9E]`) - use CSS variables
 - Reusable classes in `app/globals.css` with `@apply`
 
 ### Components

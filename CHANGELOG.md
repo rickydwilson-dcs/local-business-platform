@@ -6,6 +6,58 @@ Complete project history and achievements organized by development phase.
 
 ## 📅 Recent Changes
 
+### **2025-12-21 - Theme System Architecture & Base Template**
+
+**🎨 `@platform/theme-system` Package (NEW):**
+
+- ✅ **Centralized theming** - Design tokens with TypeScript types (`ThemeConfig`)
+- ✅ **CSS variable generation** - Automatic CSS custom property output
+- ✅ **Tailwind CSS plugin** - `createThemePlugin()` integrates tokens into Tailwind
+- ✅ **WCAG AA validation** - CLI tool validates color contrast ratios
+- ✅ **Zod schema validation** - Runtime validation for theme configurations
+- ✅ **Default theme** - Professional blue palette ready to customize
+
+**🏗️ `sites/base-template` (NEW):**
+
+- ✅ **Gold-standard template** - Copy-and-customize workflow for new client sites
+- ✅ **Theme integration** - Pre-configured with `theme.config.ts`
+- ✅ **Complete site structure** - App, components, content, lib directories
+- ✅ **Neutral branding** - Placeholder content ready for customization
+- ✅ **ESLint flat config** - Modern ESLint 9 configuration
+
+**🔧 Core-Components CSS Migration:**
+
+- ✅ **32+ UI components** migrated from hardcoded colors to CSS variables
+- ✅ **Semantic color tokens** - `brand-primary`, `surface-background`, etc.
+- ✅ **Legacy aliases** - `brand-blue` maps to `brand-primary` for compatibility
+- ✅ **ESLint rule** - Warns on raw hex colors in source files
+
+**📖 Documentation:**
+
+- ✅ **Theming guide** - Complete guide at `docs/guides/theming.md`
+- ✅ **Adding new site guide** - Updated with theme system integration
+- ✅ **Session notes** - Architecture decisions in `output/sessions/2025-12-21_theme-system-architecture/`
+
+**Files Created:**
+
+- `packages/theme-system/` - Complete theme system package
+- `sites/base-template/` - Base template site
+- `docs/guides/theming.md` - Theming documentation
+- `tools/create-site.ts` - Site creation tool (copies from base-template)
+
+**Files Modified:**
+
+- `packages/core-components/` - All UI components now use CSS variables
+- `sites/colossus-reference/theme.config.ts` - Colossus brand colors
+- `sites/colossus-reference/tailwind.config.ts` - Uses `createThemePlugin()`
+
+**Technical Notes:**
+
+- Upgraded vitest from v1.6.1 to v3.2.4 (fixes SSR export errors)
+- Migrated base-template ESLint from `.eslintrc.json` to flat config
+
+---
+
 ### **2025-12-21 - SEO: Viewport Meta Tag & Image Alt Text Optimization**
 
 **📱 Viewport Configuration:**
