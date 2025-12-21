@@ -1,7 +1,7 @@
 # Local Business Platform - Architecture Overview
 
-**Version:** 2.0.0
-**Last Updated:** 2025-12-05
+**Version:** 2.1.0
+**Last Updated:** 2025-12-21
 **Scope:** All sites in local-business-platform monorepo
 
 ---
@@ -16,10 +16,12 @@ The Local Business Platform is a white-label website generation system for local
 local-business-platform/
 ├── sites/                          # Client websites
 │   ├── colossus-reference/         # Reference implementation (77 pages)
-│   └── joes-plumbing-canterbury/   # Demo plumber site (12 pages)
+│   ├── joes-plumbing-canterbury/   # Demo plumber site (12 pages)
+│   └── base-template/              # Gold-standard template for new sites
 ├── packages/
-│   └── core-components/            # Shared component library (@platform/core-components)
-├── tools/                          # Deployment CLI tools
+│   ├── core-components/            # Shared component library (@platform/core-components)
+│   └── theme-system/               # Centralized theming (@platform/theme-system)
+├── tools/                          # Deployment & site creation CLI tools
 ├── docs/                           # Documentation
 │   ├── standards/                  # Standards reference documents
 │   ├── guides/                     # How-to guides
@@ -65,20 +67,48 @@ app/locations/[slug]/page.tsx  # Reads from content/locations/
 - Contact forms
 - Layout components
 
+### 5. Centralized Theme System
+
+`@platform/theme-system` provides centralized theming with CSS custom properties:
+
+- **Design tokens** - Colors, spacing, typography, shadows defined in TypeScript
+- **CSS variables** - Generated automatically and injected into Tailwind
+- **Tailwind plugin** - `createThemePlugin()` integrates theme into Tailwind config
+- **WCAG validation** - CLI tool checks color contrast ratios for accessibility
+- **Per-site configuration** - Each site has `theme.config.ts` for brand customization
+
+```typescript
+// theme.config.ts - Site-specific theming
+import type { ThemeConfig } from "@platform/theme-system";
+
+export const themeConfig: Partial<ThemeConfig> = {
+  colors: {
+    brand: {
+      primary: "#005A9E",
+      primaryHover: "#004d87",
+      secondary: "#0066b5",
+      accent: "#f59e0b",
+    },
+  },
+};
+```
+
+See [Theming Guide](../guides/theming.md) for complete documentation.
+
 ## Technology Stack
 
-| Category      | Technology                          |
-| ------------- | ----------------------------------- |
-| Framework     | Next.js 16.0.7 (Turbopack)          |
-| Language      | TypeScript (strict mode)            |
-| Styling       | Tailwind CSS (maintainable classes) |
-| Content       | MDX with gray-matter                |
-| Testing       | Vitest + Playwright                 |
-| Deployment    | Vercel                              |
-| Image Storage | Cloudflare R2                       |
-| Rate Limiting | Upstash Redis                       |
-| Monitoring    | NewRelic APM                        |
-| Analytics     | GA4 (consent-managed)               |
+| Category      | Technology                                  |
+| ------------- | ------------------------------------------- |
+| Framework     | Next.js 16.0.7 (Turbopack)                  |
+| Language      | TypeScript (strict mode)                    |
+| Styling       | Tailwind CSS + Theme System (CSS variables) |
+| Content       | MDX with gray-matter                        |
+| Testing       | Vitest + Playwright                         |
+| Deployment    | Vercel                                      |
+| Image Storage | Cloudflare R2                               |
+| Rate Limiting | Upstash Redis                               |
+| Monitoring    | NewRelic APM                                |
+| Analytics     | GA4 (consent-managed)                       |
 
 ## Content Flow
 
@@ -147,15 +177,16 @@ Detailed standards are documented in separate focused files:
 
 Step-by-step procedures for common tasks:
 
-| Guide                                             | Purpose                  |
-| ------------------------------------------------- | ------------------------ |
-| [Adding a New Site](../guides/adding-new-site.md) | Create a new client site |
-| [Adding a Location](../guides/adding-location.md) | Add location MDX file    |
-| [Adding a Service](../guides/adding-service.md)   | Add service MDX file     |
-| [Deploying a Site](../guides/deploying-site.md)   | Deployment procedures    |
-| [Monitoring Setup](../guides/monitoring-setup.md) | NewRelic configuration   |
-| [GitHub Actions](../guides/github-actions.md)     | CI/CD workflow guide     |
-| [Git Workflow](../guides/git-workflow.md)         | Branch workflow          |
+| Guide                                             | Purpose                    |
+| ------------------------------------------------- | -------------------------- |
+| [Adding a New Site](../guides/adding-new-site.md) | Create a new client site   |
+| [Theming](../guides/theming.md)                   | Theme system configuration |
+| [Adding a Location](../guides/adding-location.md) | Add location MDX file      |
+| [Adding a Service](../guides/adding-service.md)   | Add service MDX file       |
+| [Deploying a Site](../guides/deploying-site.md)   | Deployment procedures      |
+| [Monitoring Setup](../guides/monitoring-setup.md) | NewRelic configuration     |
+| [GitHub Actions](../guides/github-actions.md)     | CI/CD workflow guide       |
+| [Git Workflow](../guides/git-workflow.md)         | Branch workflow            |
 
 ## Architecture Violations
 

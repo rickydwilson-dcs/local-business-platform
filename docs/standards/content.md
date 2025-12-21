@@ -1,7 +1,7 @@
 # Content Standards
 
-**Version:** 1.0.0
-**Last Updated:** 2025-12-05
+**Version:** 1.0.1
+**Last Updated:** 2025-12-21
 **Scope:** All sites in local-business-platform
 
 ---
