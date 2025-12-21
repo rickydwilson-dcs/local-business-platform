@@ -192,30 +192,23 @@ npm run validate:content  # Verify fix
 
 ---
 
-## Before Implementation Checklist
+## Standards Reference
 
-**Before:**
+Detailed standards for each area of development:
 
-- [ ] Read ARCHITECTURE.md and relevant standards
-- [ ] Confirm MDX-only pattern applies
-- [ ] Check existing patterns in globals.css
-
-**After:**
-
-- [ ] `npm run type-check` passes
-- [ ] `npm run build` passes
-- [ ] Documentation updated
-- [ ] CHANGELOG.md updated
-
----
-
-## Quality Gates
-
-| Environment | Requirements                             |
-| ----------- | ---------------------------------------- |
-| develop     | Pre-push hooks pass (TypeScript + Build) |
-| staging     | CI passes + E2E tests                    |
-| main        | Staging CI must pass first               |
+| Standard                                   | Description                        |
+| ------------------------------------------ | ---------------------------------- |
+| [Styling](docs/standards/styling.md)       | Tailwind CSS, theme tokens         |
+| [Components](docs/standards/components.md) | Component architecture, TypeScript |
+| [Content](docs/standards/content.md)       | MDX-only architecture, frontmatter |
+| [SEO](docs/standards/seo.md)               | Meta data, keywords, local SEO     |
+| [Images](docs/standards/images.md)         | R2 storage, optimization, naming   |
+| [Schema](docs/standards/schema.md)         | JSON-LD markup requirements        |
+| [Testing](docs/standards/testing.md)       | Unit tests, E2E tests, coverage    |
+| [Security](docs/standards/security.md)     | Rate limiting, API security, GDPR  |
+| [Analytics](docs/standards/analytics.md)   | Consent management, GA4            |
+| [Deployment](docs/standards/deployment.md) | CI/CD, monitoring, rollback        |
+| [Quality](docs/standards/quality.md)       | Quality gates, checklists          |
 
 ---
 
