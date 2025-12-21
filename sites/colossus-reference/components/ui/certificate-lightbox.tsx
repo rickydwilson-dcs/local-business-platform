@@ -2,6 +2,7 @@
 
 import { useEffect, useCallback, useRef, useState } from "react";
 import Image from "next/image";
+import { generateImageAlt } from "@/lib/image";
 
 interface Certificate {
   id: string;
@@ -324,7 +325,7 @@ export function CertificateLightbox({
           >
             <Image
               src={selectedCertificate.fullImage}
-              alt={selectedCertificate.name}
+              alt={generateImageAlt(`${selectedCertificate.name} certificate`)}
               fill
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
               className="lightbox-image"
