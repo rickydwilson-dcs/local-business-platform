@@ -46,7 +46,7 @@ White-label website platform for local service businesses. Monorepo with Turbore
 
 ## Output Folder Guidance
 
-The `/output/` folder stores local session context and working notes for complex tasks.
+The `/output/` folder stores session context and working notes for complex tasks. The `sessions/` subfolder is **tracked in git**.
 
 **When to create sessions:**
 
@@ -66,7 +66,7 @@ The `/output/` folder stores local session context and working notes for complex
 - Next steps (if incomplete)
 - Related issues/PRs
 
-**Important:** The `/output/` folder is gitignored and local-only. Never commit session files to the repository.
+**Git tracking:** The `output/sessions/` folder is committed to the repository. Other output contents (generated images, batch files) remain gitignored.
 
 See [output/README.md](output/README.md) for full documentation.
 

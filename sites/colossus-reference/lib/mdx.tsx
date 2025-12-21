@@ -57,3 +57,30 @@ export async function loadMdx({
 
   return { frontmatter: (data as MdxFrontmatter) || {}, content: el };
 }
+
+/**
+ * Get the hero image path from a content file's frontmatter
+ * Used for sitemap image generation
+ * @param baseDir - The content directory ('services' or 'locations')
+ * @param slug - The slug of the content file
+ * @returns The hero image path or null if not found
+ */
+export async function getPageImage(
+  baseDir: LoadOpts["baseDir"],
+  slug: string
+): Promise<string | null> {
+  try {
+    const filePath = path.join(process.cwd(), "content", baseDir, `${slug}.mdx`);
+    const raw = await fs.readFile(filePath, "utf8");
+    const { data } = matter(raw);
+
+    // Services use hero.image, locations use heroImage
+    if (baseDir === "services") {
+      const heroData = data?.hero as { image?: string } | undefined;
+      return heroData?.image || null;
+    }
+    return (data?.heroImage as string) || null;
+  } catch {
+    return null;
+  }
+}

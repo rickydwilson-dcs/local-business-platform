@@ -11,6 +11,7 @@ export default function robots() {
 
   return {
     rules: [{ userAgent: "*", allow: isProd ? "/" : [], disallow: isProd ? [] : "/" }],
-    sitemap: isProd ? `${baseUrl}/sitemap.xml` : undefined,
+    // Point to sitemap index which lists all section sitemaps
+    sitemap: isProd ? `${baseUrl}/sitemap-index.xml` : undefined,
   };
 }

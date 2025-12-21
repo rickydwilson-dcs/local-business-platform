@@ -1,7 +1,7 @@
 # Image Standards
 
-**Version:** 1.2.0
-**Last Updated:** 2025-12-07
+**Version:** 1.3.0
+**Last Updated:** 2025-12-21
 **Scope:** All sites in local-business-platform
 
 ---
@@ -278,6 +278,58 @@ Bandwidth: First 10 TB free
 Total: ~$0-1/month (effectively free)
 ```
 
+## Image SEO Attributes
+
+### Alt Text and Title
+
+All images must include both `alt` and `title` attributes for SEO:
+
+```tsx
+import { generateImageAlt, generateImageTitle } from "@/lib/image";
+
+<Image
+  src={getImageUrl(heroImage)}
+  alt="Professional scaffolding installation for access scaffolding showing safe access solutions with TG20:21 compliant design"
+  title="Access Scaffolding services - Colossus Scaffolding"
+  ...
+/>
+```
+
+### Helper Functions
+
+The `lib/image.ts` file provides SEO helper functions:
+
+```typescript
+// Generate SEO-optimized alt text
+generateImageAlt(serviceName: string, locationName?: string, customAlt?: string): string
+
+// Generate SEO-optimized title attribute
+generateImageTitle(serviceName: string, locationName?: string, customTitle?: string): string
+
+// Examples:
+generateImageAlt("Access Scaffolding", "Brighton")
+// → "Access Scaffolding in Brighton - Colossus Scaffolding"
+
+generateImageTitle("Access Scaffolding", "Brighton")
+// → "Professional access scaffolding services in Brighton by Colossus Scaffolding"
+```
+
+### Image Sitemap Integration
+
+Hero images are automatically included in sitemaps. The `getPageImage()` helper extracts hero images from MDX frontmatter:
+
+```typescript
+// lib/mdx.tsx
+export async function getPageImage(
+  baseDir: "services" | "locations",
+  slug: string
+): Promise<string | null>;
+
+// Used in sitemaps:
+// - app/services/sitemap.ts
+// - app/locations/sitemap.ts
+```
+
 ## Verification Checklist
 
 Before completing any image work:
@@ -286,10 +338,12 @@ Before completing any image work:
 - [ ] Using `next/image` component
 - [ ] Width and height set explicitly
 - [ ] Quality from centralized config
-- [ ] Descriptive alt text included
+- [ ] Descriptive alt text included (not just `{title}`)
+- [ ] Title attribute included for SEO
 - [ ] Responsive sizes configured
 - [ ] Naming convention followed
 - [ ] Priority set for above-fold images only
+- [ ] Hero images referenced in MDX frontmatter (for sitemap)
 
 ## AI Image Generation Pipeline
 
