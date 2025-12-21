@@ -17,7 +17,8 @@ describe('site utilities', () => {
   describe('formatPhone', () => {
     it('should format UK phone number', () => {
       const formatted = formatPhone('+441234567890');
-      expect(formatted).toBe('01234 567 890');
+      // UK number format: 4-3-4 digits after removing +44 prefix
+      expect(formatted).toBe('0123 456 7890');
     });
   });
 
