@@ -73,13 +73,17 @@ export function CoverageMap({ className = "", height = "h-96" }: CoverageMapProp
   }, []);
 
   const createCustomIcon = (leaflet: typeof import("leaflet"), county: string) => {
+    // Regional map colors for geographic visualization - intentionally not using brand tokens
+    // as these need to be distinct per-county for map legend readability
+    // eslint-disable-next-line no-restricted-syntax
     const colors: { [key: string]: string } = {
-      "East Sussex": "#2563eb",
-      "West Sussex": "#059669",
-      Kent: "#dc2626",
-      Surrey: "#7c3aed",
+      "East Sussex": "#2563eb", // eslint-disable-line no-restricted-syntax
+      "West Sussex": "#059669", // eslint-disable-line no-restricted-syntax
+      Kent: "#dc2626", // eslint-disable-line no-restricted-syntax
+      Surrey: "#7c3aed", // eslint-disable-line no-restricted-syntax
     };
 
+    // eslint-disable-next-line no-restricted-syntax
     const color = colors[county] || "#4DB2E4";
     const size = 28;
 
@@ -114,8 +118,12 @@ export function CoverageMap({ className = "", height = "h-96" }: CoverageMapProp
         className={`${height} bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl flex items-center justify-center ${className}`}
       >
         <div className="text-center">
-          <div className="w-16 h-16 bg-brand-blue/10 rounded-xl flex items-center justify-center mx-auto mb-4">
-            <svg className="w-8 h-8 text-brand-blue animate-spin" fill="none" viewBox="0 0 24 24">
+          <div className="w-16 h-16 bg-brand-primary/10 rounded-xl flex items-center justify-center mx-auto mb-4">
+            <svg
+              className="w-8 h-8 text-brand-primary animate-spin"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
               <circle
                 className="opacity-25"
                 cx="12"
@@ -180,16 +188,18 @@ export function CoverageMap({ className = "", height = "h-96" }: CoverageMapProp
 
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-1">
+                    {/* Regional map colors match createCustomIcon for consistency */}
                     <div
                       className="w-3 h-3 rounded-full"
                       style={{
+                        // eslint-disable-next-line no-restricted-syntax
                         backgroundColor:
                           {
-                            "East Sussex": "#2563eb",
-                            "West Sussex": "#059669",
-                            Kent: "#dc2626",
-                            Surrey: "#7c3aed",
-                          }[location.county] || "#4DB2E4",
+                            "East Sussex": "#2563eb", // eslint-disable-line no-restricted-syntax
+                            "West Sussex": "#059669", // eslint-disable-line no-restricted-syntax
+                            Kent: "#dc2626", // eslint-disable-line no-restricted-syntax
+                            Surrey: "#7c3aed", // eslint-disable-line no-restricted-syntax
+                          }[location.county] || "#4DB2E4", // eslint-disable-line no-restricted-syntax
                       }}
                     ></div>
                     <span className="text-xs text-gray-700">{location.county}</span>
@@ -197,7 +207,7 @@ export function CoverageMap({ className = "", height = "h-96" }: CoverageMapProp
 
                   <button
                     onClick={() => (window.location.href = location.url)}
-                    className="text-xs bg-brand-blue text-white px-2 py-1 rounded hover:bg-brand-blue-hover transition-colors"
+                    className="text-xs bg-brand-primary text-white px-2 py-1 rounded hover:bg-brand-primary-hover transition-colors"
                     aria-label={`View ${location.name} details`}
                   >
                     View Details →

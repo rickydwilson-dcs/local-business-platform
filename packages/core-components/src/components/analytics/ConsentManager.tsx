@@ -280,7 +280,7 @@ export function ConsentManager({
             {/* Content */}
             <div className="flex-1 min-w-0">
               <div className="flex items-start gap-3 mb-4">
-                <div className="flex-shrink-0 w-8 h-8 bg-brand-blue rounded-full flex items-center justify-center mt-1">
+                <div className="flex-shrink-0 w-8 h-8 bg-brand-primary rounded-full flex items-center justify-center mt-1">
                   <Cookie className="w-4 h-4 text-white" />
                 </div>
                 <div className="flex-1">
@@ -291,14 +291,14 @@ export function ConsentManager({
                   <div className="flex flex-wrap gap-4 text-xs">
                     <Link
                       href={mergedConfig.privacyPolicyUrl}
-                      className="text-brand-blue hover:text-blue-800 underline font-medium"
+                      className="text-brand-primary hover:text-blue-800 underline font-medium"
                     >
                       <Info className="w-3 h-3 inline mr-1" />
                       Privacy Policy
                     </Link>
                     <Link
                       href={mergedConfig.cookiePolicyUrl}
-                      className="text-brand-blue hover:text-blue-800 underline font-medium"
+                      className="text-brand-primary hover:text-blue-800 underline font-medium"
                     >
                       <Shield className="w-3 h-3 inline mr-1" />
                       Cookie Policy
@@ -331,7 +331,7 @@ export function ConsentManager({
               <button
                 onClick={handleAcceptAll}
                 disabled={loading}
-                className="px-6 py-3 text-sm font-medium text-white bg-brand-blue rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-200 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                className="px-6 py-3 text-sm font-medium text-white bg-brand-primary rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-200 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                 aria-label="Accept all cookies"
               >
                 <Check className="w-4 h-4" />
@@ -347,7 +347,7 @@ export function ConsentManager({
         <div className="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
           <div className="bg-white rounded-xl shadow-2xl max-w-3xl w-full max-h-[90vh] overflow-hidden animate-in fade-in slide-in-from-bottom-8 duration-300">
             {/* Header */}
-            <div className="bg-gradient-to-r from-brand-blue to-blue-700 px-6 py-4">
+            <div className="bg-gradient-to-r from-brand-primary to-blue-700 px-6 py-4">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <div className="w-8 h-8 bg-white bg-opacity-20 rounded-lg flex items-center justify-center">
@@ -380,7 +380,7 @@ export function ConsentManager({
                     className={`relative border rounded-xl p-5 transition-all duration-200 ${
                       category.required
                         ? "bg-gray-50 border-gray-200"
-                        : "bg-white border-gray-200 hover:border-brand-blue hover:shadow-sm"
+                        : "bg-white border-gray-200 hover:border-brand-primary hover:shadow-sm"
                     }`}
                   >
                     <div className="flex items-start justify-between">
@@ -423,7 +423,7 @@ export function ConsentManager({
                               category.required
                                 ? "bg-green-400 cursor-not-allowed"
                                 : category.value
-                                  ? "bg-brand-blue peer-focus:ring-4 peer-focus:ring-blue-200"
+                                  ? "bg-brand-primary peer-focus:ring-4 peer-focus:ring-blue-200"
                                   : "bg-gray-300 peer-focus:ring-4 peer-focus:ring-gray-200"
                             } ${loading ? "opacity-50 cursor-not-allowed" : ""}`}
                           >
@@ -469,7 +469,7 @@ export function ConsentManager({
                 <button
                   onClick={handleSaveCustom}
                   disabled={loading}
-                  className="px-6 py-2.5 text-sm font-medium text-white bg-brand-blue rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-200 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                  className="px-6 py-2.5 text-sm font-medium text-white bg-brand-primary rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-200 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                 >
                   {loading ? (
                     <>

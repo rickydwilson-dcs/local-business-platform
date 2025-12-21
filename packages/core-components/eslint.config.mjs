@@ -38,6 +38,17 @@ export default [
       ],
       "@typescript-eslint/no-explicit-any": "warn",
       "react/jsx-key": "error",
+      "no-restricted-syntax": [
+        "error",
+        {
+          selector: "Literal[value=/^#[0-9a-fA-F]{3,8}$/]",
+          message: "Raw hex colors are forbidden. Use CSS variables via Tailwind classes (e.g., bg-brand-primary) or theme tokens.",
+        },
+        {
+          selector: "TemplateElement[value.raw=/^#[0-9a-fA-F]{3,8}$/]",
+          message: "Raw hex colors are forbidden in template literals. Use CSS variables via Tailwind classes (e.g., bg-brand-primary) or theme tokens.",
+        },
+      ],
     },
     settings: {
       react: {

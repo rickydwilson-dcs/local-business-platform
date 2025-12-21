@@ -54,7 +54,7 @@ export function LocalAuthorityExpertise({
               <ul className="space-y-3">
                 {expertiseItems.map((item, index) => (
                   <li key={index} className="flex items-start text-sm">
-                    <div className="w-1.5 h-1.5 bg-brand-blue rounded-full mr-3 mt-2 flex-shrink-0"></div>
+                    <div className="w-1.5 h-1.5 bg-brand-primary rounded-full mr-3 mt-2 flex-shrink-0"></div>
                     <span className="text-gray-900">{item.title}</span>
                   </li>
                 ))}

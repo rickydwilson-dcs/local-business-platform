@@ -80,11 +80,11 @@ export function ServiceShowcase({
                           className="object-cover"
                         />
                       ) : (
-                        <div className="h-full bg-gradient-to-br from-brand-blue/10 to-brand-blue/20 flex items-center justify-center">
+                        <div className="h-full bg-gradient-to-br from-brand-primary/10 to-brand-primary/20 flex items-center justify-center">
                           {service.icon || (
-                            <div className="w-16 h-16 bg-brand-blue/20 rounded-lg flex items-center justify-center">
+                            <div className="w-16 h-16 bg-brand-primary/20 rounded-lg flex items-center justify-center">
                               <svg
-                                className="w-8 h-8 text-brand-blue"
+                                className="w-8 h-8 text-brand-primary"
                                 fill="none"
                                 viewBox="0 0 24 24"
                                 stroke="currentColor"
@@ -113,13 +113,13 @@ export function ServiceShowcase({
                             service.subtitle.map((subtitle, subtitleIndex) => (
                               <span
                                 key={subtitleIndex}
-                                className="inline-block px-3 py-1 bg-[#005A9E]/90 text-white text-sm font-semibold rounded-full backdrop-blur-sm shadow-sm"
+                                className="inline-block px-3 py-1 bg-brand-primary/90 text-white text-sm font-semibold rounded-full backdrop-blur-sm shadow-sm"
                               >
                                 {subtitle}
                               </span>
                             ))
                           ) : (
-                            <span className="inline-block px-3 py-1 bg-[#005A9E]/90 text-white text-sm font-semibold rounded-full backdrop-blur-sm shadow-sm">
+                            <span className="inline-block px-3 py-1 bg-brand-primary/90 text-white text-sm font-semibold rounded-full backdrop-blur-sm shadow-sm">
                               {service.subtitle}
                             </span>
                           )}
@@ -133,7 +133,7 @@ export function ServiceShowcase({
                     <ul className="space-y-3">
                       {service.features.map((feature, featureIndex) => (
                         <li key={featureIndex} className="flex items-start gap-3">
-                          <div className="flex-shrink-0 w-2 h-2 bg-brand-blue rounded-full mt-3"></div>
+                          <div className="flex-shrink-0 w-2 h-2 bg-brand-primary rounded-full mt-3"></div>
                           <span className="text-gray-700">{feature}</span>
                         </li>
                       ))}
@@ -211,11 +211,11 @@ export function ServiceShowcase({
                       />
                     </div>
                   ) : (
-                    <div className="h-48 bg-gradient-to-br from-brand-blue/10 to-brand-blue/20 flex items-center justify-center">
+                    <div className="h-48 bg-gradient-to-br from-brand-primary/10 to-brand-primary/20 flex items-center justify-center">
                       {service.icon || (
-                        <div className="w-12 h-12 bg-brand-blue/20 rounded-lg flex items-center justify-center">
+                        <div className="w-12 h-12 bg-brand-primary/20 rounded-lg flex items-center justify-center">
                           <svg
-                            className="w-6 h-6 text-brand-blue"
+                            className="w-6 h-6 text-brand-primary"
                             fill="none"
                             viewBox="0 0 24 24"
                             stroke="currentColor"
@@ -240,13 +240,13 @@ export function ServiceShowcase({
                           service.subtitle.map((subtitle, subtitleIndex) => (
                             <span
                               key={subtitleIndex}
-                              className="inline-block px-3 py-1 bg-[#005A9E]/90 text-white text-sm font-semibold rounded-full backdrop-blur-sm shadow-sm"
+                              className="inline-block px-3 py-1 bg-brand-primary/90 text-white text-sm font-semibold rounded-full backdrop-blur-sm shadow-sm"
                             >
                               {subtitle}
                             </span>
                           ))
                         ) : (
-                          <span className="inline-block px-3 py-1 bg-[#005A9E]/90 text-white text-sm font-semibold rounded-full backdrop-blur-sm shadow-sm">
+                          <span className="inline-block px-3 py-1 bg-brand-primary/90 text-white text-sm font-semibold rounded-full backdrop-blur-sm shadow-sm">
                             {service.subtitle}
                           </span>
                         )}
@@ -267,7 +267,7 @@ export function ServiceShowcase({
                   <ul className="space-y-2 mb-6">
                     {service.features.map((feature, featureIndex) => (
                       <li key={featureIndex} className="flex items-start gap-2">
-                        <div className="flex-shrink-0 w-1.5 h-1.5 bg-brand-blue rounded-full mt-2"></div>
+                        <div className="flex-shrink-0 w-1.5 h-1.5 bg-brand-primary rounded-full mt-2"></div>
                         <span className="text-gray-700 text-sm">{feature}</span>
                       </li>
                     ))}
@@ -276,7 +276,7 @@ export function ServiceShowcase({
                   {/* CTA Button */}
                   <Link
                     href={service.href}
-                    className="inline-flex items-center justify-center w-full px-4 py-3 bg-[#005A9E] text-white font-semibold rounded-lg hover:bg-[#004a85] group-hover:scale-105 transition-all duration-200 text-sm focus:ring-2 focus:ring-[#005A9E] focus:ring-offset-2"
+                    className="inline-flex items-center justify-center w-full px-4 py-3 bg-brand-primary text-white font-semibold rounded-lg hover:bg-brand-primary-hover group-hover:scale-105 transition-all duration-200 text-sm focus:ring-2 focus:ring-brand-primary focus:ring-offset-2"
                     aria-label={`${service.ctaText} for ${service.title}`}
                   >
                     {service.ctaText}
