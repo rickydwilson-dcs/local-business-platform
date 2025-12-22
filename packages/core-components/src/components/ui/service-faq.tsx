@@ -30,7 +30,7 @@ export function ServiceFAQ({
                 className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow"
               >
                 <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-start gap-3">
-                  <span className="flex-shrink-0 w-6 h-6 bg-brand-blue rounded-full flex items-center justify-center text-white text-sm font-bold">
+                  <span className="flex-shrink-0 w-6 h-6 bg-brand-primary rounded-full flex items-center justify-center text-white text-sm font-bold">
                     Q
                   </span>
                   {item.question}

@@ -1,6 +1,6 @@
 # Output Folder
 
-This folder stores **local-only session artifacts**, context, and documentation. All contents are **gitignored** and never pushed to the remote repository.
+This folder stores session artifacts, context, and documentation. The `sessions/` subfolder is **tracked in git** for team visibility, while other contents (generated images, batch files) remain **gitignored**.
 
 ## Purpose
 
@@ -233,28 +233,30 @@ When a session is complete or no longer needed:
 - Archive sessions after 1 month of inactivity
 - Delete when historical context is no longer valuable
 
-## Important: This Folder is Gitignored
+## Git Tracking
 
-All files in the `output/` folder are **excluded from version control** and will never be committed to the repository.
+The `sessions/` folder is **tracked in git** and committed to the repository. Other contents remain gitignored.
 
-**Why:**
+**What's tracked:**
 
-- Session context is personal to your local workflow
-- Conversation history should not be in the repository
-- Build artifacts and logs are transient
-- Keeps repository clean and focused on production code
+- `sessions/` - All session folders and their contents (analysis, audits, research)
+- `README.md` - This documentation file
 
-**Consequences:**
+**What's gitignored:**
 
-- Contents are local-only and not synced to remote
-- If you switch machines, local output folder doesn't transfer
-- Use for temporary work and local documentation only
+- `generated-images/` - Temporary image processing outputs
+- `batch-*.json*` - Batch processing artifacts
 
-**For persistent documentation:**
+**Why track sessions:**
 
-- Move important findings to `docs/` folder
-- Update `ARCHITECTURE.md` or relevant standards files
-- Create issues or PRs for work that should be shared with the team
+- Preserves valuable research, audits, and analysis for future reference
+- Enables team collaboration on complex investigations
+- Creates a historical record of decisions and findings
+
+**For sensitive or personal notes:**
+
+- Use a separate local folder outside the repository
+- Or add specific files to `.gitignore` if needed
 
 ## Common Workflows
 

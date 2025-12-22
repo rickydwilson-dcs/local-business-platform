@@ -66,7 +66,8 @@ export function LargeFeatureCards({
                 <div className="relative w-full h-48 mb-6 rounded-xl overflow-hidden bg-gray-100">
                   <Image
                     src={getImageUrl(card.image)}
-                    alt={card.title}
+                    alt={`${card.title} - professional scaffolding solution by Colossus Scaffolding`}
+                    title={`${card.title} scaffolding services`}
                     fill
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     className="object-cover"

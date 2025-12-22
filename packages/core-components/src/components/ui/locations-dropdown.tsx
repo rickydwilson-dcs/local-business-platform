@@ -43,7 +43,7 @@ export function LocationsDropdown() {
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-1 text-slate-700 hover:text-brand-blue transition-colors text-lg font-medium"
+        className="flex items-center gap-1 text-slate-700 hover:text-brand-primary transition-colors text-lg font-medium"
         aria-expanded={isOpen}
         aria-haspopup="true"
       >
@@ -77,7 +77,7 @@ export function LocationsDropdown() {
                   {/* County Header */}
                   <Link
                     href={county.href}
-                    className="block text-base font-semibold text-brand-blue hover:text-brand-blue-hover transition-colors border-b border-gray-200 pb-2"
+                    className="block text-base font-semibold text-brand-primary hover:text-brand-primary-hover transition-colors border-b border-gray-200 pb-2"
                     onClick={() => setIsOpen(false)}
                   >
                     {county.name}
@@ -91,7 +91,7 @@ export function LocationsDropdown() {
                           href={town.href}
                           className={`block text-sm transition-colors ${
                             town.isRichContent
-                              ? "text-gray-900 font-medium hover:text-brand-blue"
+                              ? "text-gray-900 font-medium hover:text-brand-primary"
                               : "text-gray-800 hover:text-gray-800"
                           }`}
                           onClick={() => setIsOpen(false)}
@@ -99,7 +99,7 @@ export function LocationsDropdown() {
                           {town.name}
                           {town.isRichContent && (
                             <span
-                              className="ml-1 inline-block w-2 h-2 bg-brand-blue rounded-full"
+                              className="ml-1 inline-block w-2 h-2 bg-brand-primary rounded-full"
                               title="Detailed coverage"
                             />
                           )}
@@ -121,7 +121,7 @@ export function LocationsDropdown() {
                 </div>
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-2 text-sm font-medium text-brand-blue hover:text-brand-blue-hover"
+                  className="inline-flex items-center gap-2 text-sm font-medium text-brand-primary hover:text-brand-primary-hover"
                   onClick={() => setIsOpen(false)}
                 >
                   Get Free Quote

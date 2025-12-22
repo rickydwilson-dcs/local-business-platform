@@ -176,14 +176,17 @@ export const getFAQSchema = (
 });
 
 /**
- * Generate ServiceArea schema for location pages
- * Links the location to the parent organization
+ * Generate LocalBusiness schema for location pages
+ * Links the location to the parent organization with enhanced properties
+ * for better Google Local Pack visibility
  */
 export const getServiceAreaSchema = (locationName: string, locationSlug: string) => ({
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   "@id": absUrl(`/locations/${locationSlug}#localbusiness`),
   name: `Colossus Scaffolding - ${locationName}`,
+  telephone: colossusBusinessConfig.telephone,
+  priceRange: colossusBusinessConfig.priceRange,
   areaServed: [
     {
       "@type": "City",
@@ -192,5 +195,19 @@ export const getServiceAreaSchema = (locationName: string, locationSlug: string)
   ],
   parentOrganization: {
     "@id": absUrl("/#organization"),
+  },
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Scaffolding Services",
+    itemListElement:
+      colossusBusinessConfig.offerCatalog?.map((service) => ({
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: service.name,
+          description: service.description,
+          url: absUrl(service.url),
+        },
+      })) || [],
   },
 });

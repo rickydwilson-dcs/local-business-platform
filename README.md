@@ -38,11 +38,19 @@ local-business-platform/
 ├── pnpm-workspace.yaml           # Workspace configuration
 │
 ├── packages/
-│   └── core-components/          # Shared components (versioned)
+│   ├── core-components/          # Shared components (versioned)
+│   │   ├── src/
+│   │   │   ├── components/       # UI components
+│   │   │   ├── lib/              # Shared utilities
+│   │   │   └── index.ts          # Public exports
+│   │   └── package.json
+│   │
+│   └── theme-system/             # Centralized theming (@platform/theme-system)
 │       ├── src/
-│       │   ├── components/       # UI components
-│       │   ├── lib/              # Shared utilities
-│       │   └── index.ts          # Public exports
+│       │   ├── types.ts          # ThemeConfig interface
+│       │   ├── defaults.ts       # Default theme values
+│       │   ├── tailwind-plugin.ts # Tailwind CSS plugin
+│       │   └── validation.ts     # Zod schema validation
 │       └── package.json
 │
 ├── sites/                        # Individual client sites
@@ -54,10 +62,14 @@ local-business-platform/
 │   │   ├── site.config.ts        # Business customization
 │   │   └── ...
 │   │
-│   └── joes-plumbing-canterbury/ # Demo site (plumbing)
-│       └── ... (same structure)
+│   ├── joes-plumbing-canterbury/ # Demo site (plumbing)
+│   │   └── ... (same structure)
+│   │
+│   └── base-template/            # Template for new sites (copy-and-customize)
+│       └── ... (gold-standard template)
 │
 ├── tools/                        # Automation scripts
+│   ├── create-site.ts            # Create new site from base-template
 │   ├── deploy-site.ts            # Single site deployment
 │   ├── deploy-batch.ts           # Phased batch deployment
 │   └── rollback.ts               # Quick rollback tool
@@ -211,7 +223,7 @@ pnpm test:e2e:smoke   # Run smoke tests only
 - Next.js 16.0.7 (App Router with Turbopack)
 - React 19.1.2
 - TypeScript (Strict mode)
-- Tailwind CSS
+- Tailwind CSS + Theme System (CSS variables)
 - MDX (Content management)
 
 **Build System:**
@@ -241,6 +253,8 @@ See [/docs](./docs/) for comprehensive documentation:
 - [DEVELOPMENT.md](./docs/development/DEVELOPMENT.md) - Development workflow
 - [DEPLOYMENT_GUIDE.md](./docs/DEPLOYMENT_GUIDE.md) - Deployment procedures
 - [E2E_TESTING_STRATEGY.md](./docs/testing/E2E_TESTING_STRATEGY.md) - Testing approach
+- [Theming Guide](./docs/guides/theming.md) - Theme system and CSS variables
+- [Adding a New Site](./docs/guides/adding-new-site.md) - Create new client sites
 
 ## License
 

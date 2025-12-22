@@ -40,13 +40,15 @@ White-label website platform for local service businesses. Monorepo with Turbore
 
 - **Sites:** `sites/` directory (each deploys to separate Vercel project)
 - **Components:** `packages/core-components` (@platform/core-components v1.1.0)
+- **Theme System:** `packages/theme-system` (@platform/theme-system) - CSS variables + Tailwind plugin
+- **Base Template:** `sites/base-template` - Gold-standard template for new sites
 - **Content:** MDX files only (62 total: 25 services + 37 locations)
 
 ---
 
 ## Output Folder Guidance
 
-The `/output/` folder stores local session context and working notes for complex tasks.
+The `/output/` folder stores session context and working notes for complex tasks. The `sessions/` subfolder is **tracked in git**.
 
 **When to create sessions:**
 
@@ -66,7 +68,7 @@ The `/output/` folder stores local session context and working notes for complex
 - Next steps (if incomplete)
 - Related issues/PRs
 
-**Important:** The `/output/` folder is gitignored and local-only. Never commit session files to the repository.
+**Git tracking:** The `output/sessions/` folder is committed to the repository. Other output contents (generated images, batch files) remain gitignored.
 
 See [output/README.md](output/README.md) for full documentation.
 
@@ -100,6 +102,16 @@ npm run validate:services  # 25 service files
 npm run validate:locations # 37 location files
 ```
 
+### Theme System
+
+```bash
+# Validate theme contrast (from packages/theme-system)
+pnpm validate --config ../../sites/[site-name]/theme.config.ts
+
+# Create new site from base-template
+npx ts-node tools/create-site.ts [site-name]
+```
+
 ---
 
 ## Critical Architecture Rules
@@ -114,7 +126,9 @@ All content managed through MDX files. **NEVER create:**
 
 ### Styling
 
-- **Tailwind CSS ONLY** - No inline styles, no CSS-in-JS
+- **Tailwind CSS + Theme System** - No inline styles, no CSS-in-JS
+- Use theme tokens: `bg-brand-primary`, `text-surface-foreground`
+- ❌ Avoid hardcoded hex colors (`bg-[#005A9E]`) - use CSS variables
 - Reusable classes in `app/globals.css` with `@apply`
 
 ### Components
@@ -178,30 +192,23 @@ npm run validate:content  # Verify fix
 
 ---
 
-## Before Implementation Checklist
+## Standards Reference
 
-**Before:**
+Detailed standards for each area of development:
 
-- [ ] Read ARCHITECTURE.md and relevant standards
-- [ ] Confirm MDX-only pattern applies
-- [ ] Check existing patterns in globals.css
-
-**After:**
-
-- [ ] `npm run type-check` passes
-- [ ] `npm run build` passes
-- [ ] Documentation updated
-- [ ] CHANGELOG.md updated
-
----
-
-## Quality Gates
-
-| Environment | Requirements                             |
-| ----------- | ---------------------------------------- |
-| develop     | Pre-push hooks pass (TypeScript + Build) |
-| staging     | CI passes + E2E tests                    |
-| main        | Staging CI must pass first               |
+| Standard                                   | Description                        |
+| ------------------------------------------ | ---------------------------------- |
+| [Styling](docs/standards/styling.md)       | Tailwind CSS, theme tokens         |
+| [Components](docs/standards/components.md) | Component architecture, TypeScript |
+| [Content](docs/standards/content.md)       | MDX-only architecture, frontmatter |
+| [SEO](docs/standards/seo.md)               | Meta data, keywords, local SEO     |
+| [Images](docs/standards/images.md)         | R2 storage, optimization, naming   |
+| [Schema](docs/standards/schema.md)         | JSON-LD markup requirements        |
+| [Testing](docs/standards/testing.md)       | Unit tests, E2E tests, coverage    |
+| [Security](docs/standards/security.md)     | Rate limiting, API security, GDPR  |
+| [Analytics](docs/standards/analytics.md)   | Consent management, GA4            |
+| [Deployment](docs/standards/deployment.md) | CI/CD, monitoring, rollback        |
+| [Quality](docs/standards/quality.md)       | Quality gates, checklists          |
 
 ---
 

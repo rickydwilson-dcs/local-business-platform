@@ -1,7 +1,7 @@
 # Component Standards
 
-**Version:** 1.0.0
-**Last Updated:** 2025-12-05
+**Version:** 1.1.0
+**Last Updated:** 2025-12-21
 **Scope:** All sites in local-business-platform
 
 ---
@@ -37,7 +37,7 @@ All UI components in the Local Business Platform follow consistent patterns for 
 ### Component Props Pattern
 
 ```tsx
-// ✅ CORRECT - Typed props interface
+// ✅ CORRECT - Typed props interface with theme tokens
 interface ButtonProps {
   variant: "primary" | "secondary";
   children: React.ReactNode;
@@ -49,13 +49,15 @@ export const Button = ({ variant, children, className, onClick }: ButtonProps) =
   return (
     <button
       onClick={onClick}
-      className={`base-classes ${variant === "primary" ? "bg-[#005A9E]" : "bg-gray-200"} ${className}`}
+      className={`base-classes ${variant === "primary" ? "bg-brand-primary hover:bg-brand-primary-hover" : "bg-surface-muted"} ${className}`}
     >
       {children}
     </button>
   );
 };
 ```
+
+**Important:** Use theme tokens (`bg-brand-primary`) instead of hardcoded hex colors (`bg-[#005A9E]`) for white-label compatibility.
 
 ### Named Exports
 
@@ -116,13 +118,14 @@ Page-specific compositions:
 
 ## What NOT to Do
 
-| Anti-Pattern                      | Why It's Wrong          | Correct Approach          |
-| --------------------------------- | ----------------------- | ------------------------- |
-| Components outside `/components/` | Fragmented organization | Move to `/components/ui/` |
-| Default exports                   | Harder to refactor      | Named exports only        |
-| Missing TypeScript props          | No type safety          | Always define interface   |
-| Hardcoded content                 | Not reusable            | Accept content via props  |
-| Inline styles                     | Bypasses Tailwind       | Use className prop        |
+| Anti-Pattern                      | Why It's Wrong             | Correct Approach          |
+| --------------------------------- | -------------------------- | ------------------------- |
+| Components outside `/components/` | Fragmented organization    | Move to `/components/ui/` |
+| Default exports                   | Harder to refactor         | Named exports only        |
+| Missing TypeScript props          | No type safety             | Always define interface   |
+| Hardcoded content                 | Not reusable               | Accept content via props  |
+| Inline styles                     | Bypasses Tailwind          | Use className prop        |
+| Hardcoded hex colors              | Breaks white-label theming | Use theme tokens          |
 
 ## React Patterns
 

@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { getAllCounties } from "@/lib/locations-dropdown";
+import { getCountyAnchorText, getTownAnchorText } from "@/lib/anchor-text";
 
 export function LocationsDropdown() {
   const [isOpen, setIsOpen] = useState(false);
@@ -72,7 +73,7 @@ export function LocationsDropdown() {
 
             {/* Counties Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 xl:gap-8">
-              {counties.map((county) => (
+              {counties.map((county, countyIndex) => (
                 <div key={county.slug} className="space-y-3">
                   {/* County Header */}
                   <Link
@@ -80,12 +81,12 @@ export function LocationsDropdown() {
                     className="block text-base font-semibold text-brand-blue hover:text-brand-blue-hover transition-colors border-b border-gray-200 pb-2"
                     onClick={() => setIsOpen(false)}
                   >
-                    {county.name}
+                    {getCountyAnchorText(county.name, county.slug, countyIndex, counties.length)}
                   </Link>
 
                   {/* Towns List */}
                   <ul className="space-y-2">
-                    {county.towns.slice(0, 6).map((town) => (
+                    {county.towns.slice(0, 6).map((town, townIndex) => (
                       <li key={town.slug}>
                         <Link
                           href={town.href}
@@ -96,7 +97,7 @@ export function LocationsDropdown() {
                           }`}
                           onClick={() => setIsOpen(false)}
                         >
-                          {town.name}
+                          {getTownAnchorText(town.name, town.slug, countyIndex, townIndex)}
                           {town.isRichContent && (
                             <span
                               className="ml-1 inline-block w-2 h-2 bg-brand-blue rounded-full"

@@ -1,7 +1,7 @@
 // components/ui/content-card.tsx
 import Link from "next/link";
 import Image from "next/image";
-import { getImageUrl } from "@/lib/image";
+import { getImageUrl, generateImageAlt } from "@/lib/image";
 
 interface ContentCardProps {
   title: string;
@@ -90,7 +90,7 @@ export function ContentCard({
           <div className="absolute inset-0">
             <Image
               src={getImageUrl(image)}
-              alt={`${title} ${contentType === "services" ? "scaffolding services" : ""}`}
+              alt={generateImageAlt(title)}
               fill
               sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
               className="object-cover group-hover:scale-110 transition-transform duration-300"

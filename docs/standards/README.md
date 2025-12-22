@@ -1,7 +1,7 @@
 # Standards Documentation
 
-**Version:** 1.0.0
-**Last Updated:** 2025-12-05
+**Version:** 1.1.0
+**Last Updated:** 2025-12-21
 **Scope:** All sites in local-business-platform
 
 ---
@@ -14,7 +14,7 @@ This directory contains focused, single-topic standards documents for the Local 
 
 | Standard                      | Description                        | Key Rules                             |
 | ----------------------------- | ---------------------------------- | ------------------------------------- |
-| [Styling](./styling.md)       | Tailwind CSS, maintainable classes | No inline styles, use globals.css     |
+| [Styling](./styling.md)       | Tailwind CSS, theme tokens         | Use theme tokens, no hex colors       |
 | [Components](./components.md) | Component architecture, TypeScript | Named exports, typed props            |
 | [Content](./content.md)       | MDX-only architecture, frontmatter | Single source of truth                |
 | [SEO](./seo.md)               | Meta data, keywords, local SEO     | Title < 60 chars, description 150-160 |

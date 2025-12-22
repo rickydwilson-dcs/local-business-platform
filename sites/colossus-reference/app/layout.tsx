@@ -1,12 +1,20 @@
 import Image from "next/image";
 import Link from "next/link";
 import "./globals.css";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import MobileMenu from "@/components/ui/mobile-menu";
 import { LocationsDropdown } from "@/components/ui/locations-dropdown";
 import { ConsentManager, Analytics, AnalyticsDebugPanel } from "@/components/analytics";
 import { Footer } from "@/components/ui/footer";
 import { PHONE_DISPLAY, PHONE_TEL } from "@/lib/contact-info";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+  viewportFit: "cover",
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(
@@ -160,6 +168,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en-GB">
       <head>
+        {/* Resource hints for faster external resource loading */}
+        <link rel="preconnect" href="https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+        <link rel="dns-prefetch" href="https://connect.facebook.net" />
         {/* Geo meta tags for local SEO targeting */}
         <meta name="geo.region" content="GB-ESX" />
         <meta name="geo.placename" content="East Sussex" />

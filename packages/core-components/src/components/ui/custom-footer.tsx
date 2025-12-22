@@ -18,13 +18,13 @@ export function CustomFooter({
   return (
     <footer className="bg-gray-900 text-white">
       {/* Main CTA Section */}
-      <section className="py-16 sm:py-20 bg-brand-blue">
+      <section className="py-16 sm:py-20 bg-brand-primary">
         <div className="mx-auto w-full lg:w-[90%] px-6 text-center">
           <h2 className="heading-section text-white">{ctaText}</h2>
           <p className="text-xl text-blue-100 mb-8 max-w-3xl mx-auto">{ctaSubtext}</p>
           <Link
             href={ctaLink}
-            className="inline-flex items-center justify-center px-8 py-4 bg-white text-brand-blue font-semibold rounded-lg hover:bg-gray-200 transition-colors text-lg"
+            className="inline-flex items-center justify-center px-8 py-4 bg-white text-brand-primary font-semibold rounded-lg hover:bg-gray-200 transition-colors text-lg"
           >
             {ctaButtonText}
           </Link>

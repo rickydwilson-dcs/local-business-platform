@@ -104,7 +104,8 @@ export function LocationHero({
                             ? "/Surrey-Scaffolding.png"
                             : heroImage || "/Facade-Scaffolding.png"
                   }
-                  alt={`Scaffolding services in ${title}`}
+                  alt={`Professional scaffolding services in ${title} - TG20:21 compliant installations for residential and commercial projects`}
+                  title={`Scaffolding services in ${title} by Colossus Scaffolding`}
                   fill
                   className="object-cover"
                   priority
