@@ -62,3 +62,26 @@ export function generateImageAlt(
   // Fallback to service name only
   return `${serviceName} - Colossus Scaffolding`;
 }
+
+/**
+ * Generate SEO-optimized title attribute for images
+ * @param serviceName - The name of the service (e.g., "Access Scaffolding")
+ * @param locationName - Optional location name for geographic context
+ * @param customTitle - Optional custom title that overrides auto-generation
+ * @returns SEO-optimized title string
+ */
+export function generateImageTitle(
+  serviceName: string,
+  locationName?: string,
+  customTitle?: string
+): string {
+  if (customTitle) {
+    return customTitle;
+  }
+
+  if (locationName) {
+    return `Professional ${serviceName.toLowerCase()} services in ${locationName} by Colossus Scaffolding`;
+  }
+
+  return `Professional ${serviceName.toLowerCase()} services by Colossus Scaffolding`;
+}

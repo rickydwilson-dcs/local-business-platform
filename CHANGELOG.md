@@ -6,6 +6,156 @@ Complete project history and achievements organized by development phase.
 
 ## 📅 Recent Changes
 
+### **2025-12-21 - Theme System Architecture & Base Template**
+
+**🎨 `@platform/theme-system` Package (NEW):**
+
+- ✅ **Centralized theming** - Design tokens with TypeScript types (`ThemeConfig`)
+- ✅ **CSS variable generation** - Automatic CSS custom property output
+- ✅ **Tailwind CSS plugin** - `createThemePlugin()` integrates tokens into Tailwind
+- ✅ **WCAG AA validation** - CLI tool validates color contrast ratios
+- ✅ **Zod schema validation** - Runtime validation for theme configurations
+- ✅ **Default theme** - Professional blue palette ready to customize
+
+**🏗️ `sites/base-template` (NEW):**
+
+- ✅ **Gold-standard template** - Copy-and-customize workflow for new client sites
+- ✅ **Theme integration** - Pre-configured with `theme.config.ts`
+- ✅ **Complete site structure** - App, components, content, lib directories
+- ✅ **Neutral branding** - Placeholder content ready for customization
+- ✅ **ESLint flat config** - Modern ESLint 9 configuration
+
+**🔧 Core-Components CSS Migration:**
+
+- ✅ **32+ UI components** migrated from hardcoded colors to CSS variables
+- ✅ **Semantic color tokens** - `brand-primary`, `surface-background`, etc.
+- ✅ **Legacy aliases** - `brand-blue` maps to `brand-primary` for compatibility
+- ✅ **ESLint rule** - Warns on raw hex colors in source files
+
+**📖 Documentation:**
+
+- ✅ **Theming guide** - Complete guide at `docs/guides/theming.md`
+- ✅ **Adding new site guide** - Updated with theme system integration
+- ✅ **Session notes** - Architecture decisions in `output/sessions/2025-12-21_theme-system-architecture/`
+
+**Files Created:**
+
+- `packages/theme-system/` - Complete theme system package
+- `sites/base-template/` - Base template site
+- `docs/guides/theming.md` - Theming documentation
+- `tools/create-site.ts` - Site creation tool (copies from base-template)
+
+**Files Modified:**
+
+- `packages/core-components/` - All UI components now use CSS variables
+- `sites/colossus-reference/theme.config.ts` - Colossus brand colors
+- `sites/colossus-reference/tailwind.config.ts` - Uses `createThemePlugin()`
+
+**Technical Notes:**
+
+- Upgraded vitest from v1.6.1 to v3.2.4 (fixes SSR export errors)
+- Migrated base-template ESLint from `.eslintrc.json` to flat config
+
+---
+
+### **2025-12-21 - SEO: Viewport Meta Tag & Image Alt Text Optimization**
+
+**📱 Viewport Configuration:**
+
+- ✅ **Next.js 15+ compliance** - Added explicit `viewport` export to layout.tsx
+- ✅ **Mobile optimization** - Configured width, initialScale, maximumScale, userScalable
+- ✅ **Notch support** - Added `viewportFit: "cover"` for modern mobile devices
+
+**🖼️ Image Alt Text Optimization:**
+
+- ✅ **ServiceGallery** - Now uses `generateImageAlt()` with service/location context
+- ✅ **ServiceShowcase** - Updated both grid and alternating layouts
+- ✅ **ContentCard** - Standardized alt text with company branding
+- ✅ **CertificateGallery** - Enhanced with proper certificate context
+- ✅ **CertificateLightbox** - Consistent alt text in lightbox view
+
+**Files Modified:**
+
+- `sites/colossus-reference/app/layout.tsx` - Added viewport export
+- `sites/colossus-reference/components/ui/service-gallery.tsx` - Alt text + new props
+- `sites/colossus-reference/components/ui/service-showcase.tsx` - Alt text optimization
+- `sites/colossus-reference/components/ui/content-card.tsx` - Alt text standardization
+- `sites/colossus-reference/components/ui/certificate-gallery.tsx` - Alt text enhancement
+- `sites/colossus-reference/components/ui/certificate-lightbox.tsx` - Alt text consistency
+
+**Expected Impact:**
+
+- Improved mobile SEO with explicit viewport configuration
+- Better image search rankings through consistent, SEO-optimized alt text
+- Enhanced accessibility for screen readers
+- Leverages existing `generateImageAlt()` utility that was previously unused
+
+---
+
+### **2025-12-19 - SEO: Fix Anchor Text Over-Optimization (Issue 21)**
+
+**🔗 Anchor Text Variation:**
+
+- ✅ **New utility** - Created `lib/anchor-text.ts` with deterministic anchor text variation
+- ✅ **Footer services** - Varied anchor text using exact/partial/semantic/generic mix (40/30/20/10%)
+- ✅ **Footer locations** - Applied same variation pattern to location links
+- ✅ **Locations dropdown** - Updated county and town links with varied anchor text
+- ✅ **Mobile menu** - Applied variation to mobile navigation location links
+
+**Files Modified:**
+
+- `sites/colossus-reference/lib/anchor-text.ts` - NEW: Centralized anchor text variation utilities
+- `sites/colossus-reference/components/ui/footer.tsx` - Service and location link text variation
+- `sites/colossus-reference/components/ui/locations-dropdown.tsx` - County and town link variation
+- `sites/colossus-reference/components/ui/mobile-menu.tsx` - Mobile navigation link variation
+
+**Expected Impact:**
+
+- Reduced Google Penguin over-optimization penalty risk
+- More natural link profile with varied anchor text patterns
+- Maintained accessibility with meaningful link descriptions
+
+---
+
+### **2025-12-19 - SEO: Enhanced LocalBusiness Schema on Location Pages**
+
+**🔍 Schema Improvements:**
+
+- ✅ **telephone** - Added contact number to location page schemas
+- ✅ **priceRange** - Added price indicator (££) for better local search context
+- ✅ **hasOfferCatalog** - Added service catalog linking to all 4 core services
+
+**Files Modified:**
+
+- `sites/colossus-reference/lib/schema.ts` - Enhanced `getServiceAreaSchema` function
+
+**Expected Impact:**
+
+- Improved Google Local Pack visibility for location pages
+- Richer schema markup for better search engine understanding
+- Services now linked from location-specific LocalBusiness entities
+
+---
+
+### **2025-12-19 - PERFORMANCE: Resource Hints & Image Cache Optimization**
+
+**🚀 Performance Improvements:**
+
+- ✅ **Resource hints** - Added preconnect for R2 CDN and dns-prefetch for analytics domains
+- ✅ **Image cache TTL** - Reduced from 1 year to 90 days to support in-place image updates
+
+**Files Modified:**
+
+- `sites/colossus-reference/app/layout.tsx` - Added preconnect/dns-prefetch hints
+- `sites/colossus-reference/next.config.ts` - Reduced minimumCacheTTL to 90 days
+
+**Expected Impact:**
+
+- Faster LCP via early R2 CDN connection establishment
+- Reduced DNS lookup time for Google Analytics and Facebook Pixel
+
+---
+
 ### **2025-12-07 - AI IMAGE GENERATION: Complete Card Image Pipeline**
 
 **🎨 AI-Generated Card Images:**

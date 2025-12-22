@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { getAllCounties } from "@/lib/locations-dropdown";
+import { getCountyAnchorText, getTownAnchorText } from "@/lib/anchor-text";
 
 interface MobileMenuProps {
   phoneNumber: string;
@@ -115,17 +116,17 @@ export default function MobileMenu({ phoneNumber }: MobileMenuProps) {
 
             {locationsExpanded && (
               <div className="mobile-menu-locations-content">
-                {counties.map((county) => (
+                {counties.map((county, countyIndex) => (
                   <div key={county.slug} className="mobile-menu-county">
                     <Link
                       href={county.href}
                       onClick={closeMenu}
                       className="mobile-menu-county-link"
                     >
-                      {county.name}
+                      {getCountyAnchorText(county.name, county.slug, countyIndex, counties.length)}
                     </Link>
                     <div className="mobile-menu-towns">
-                      {county.towns.slice(0, 4).map((town) => (
+                      {county.towns.slice(0, 4).map((town, townIndex) => (
                         <Link
                           key={town.slug}
                           href={town.href}
@@ -134,7 +135,7 @@ export default function MobileMenu({ phoneNumber }: MobileMenuProps) {
                             town.isRichContent ? "rich-content" : ""
                           }`}
                         >
-                          {town.name}
+                          {getTownAnchorText(town.name, town.slug, countyIndex, townIndex)}
                           {town.isRichContent && <span className="rich-indicator" />}
                         </Link>
                       ))}

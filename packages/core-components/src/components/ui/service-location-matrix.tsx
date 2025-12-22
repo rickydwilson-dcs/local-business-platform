@@ -92,7 +92,7 @@ export function ServiceLocationMatrix({
                   >
                     <span className="font-medium text-gray-900">{location.name}</span>
                     <svg
-                      className="h-4 w-4 text-gray-400 group-hover:text-brand-blue transition-colors"
+                      className="h-4 w-4 text-gray-400 group-hover:text-brand-primary transition-colors"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -120,7 +120,7 @@ export function ServiceLocationMatrix({
         <div className="text-center mt-12">
           <Link
             href="/locations"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-brand-blue text-white font-semibold rounded-lg hover:bg-brand-blue-hover transition-colors"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-brand-primary text-white font-semibold rounded-lg hover:bg-brand-primary-hover transition-colors"
           >
             <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path

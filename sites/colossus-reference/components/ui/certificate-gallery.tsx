@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { generateImageAlt } from "@/lib/image";
 
 interface Certificate {
   id: string;
@@ -35,7 +36,7 @@ export function CertificateGallery({ certificates, onSelect }: CertificateGaller
           <div className="relative aspect-[3/4] w-full bg-gray-100">
             <Image
               src={certificate.thumbnail}
-              alt={certificate.name}
+              alt={generateImageAlt(`${certificate.name} certificate`)}
               fill
               sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 20vw"
               className="object-cover"

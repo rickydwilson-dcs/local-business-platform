@@ -54,7 +54,7 @@ export function LargeFeatureCards({
               {/* Badge */}
               {card.badge && (
                 <div className="absolute -top-3 left-6">
-                  <span className="inline-flex px-3 py-1 bg-brand-blue text-white text-sm font-semibold rounded-full">
+                  <span className="inline-flex px-3 py-1 bg-brand-primary text-white text-sm font-semibold rounded-full">
                     {card.badge}
                   </span>
                 </div>
@@ -69,7 +69,7 @@ export function LargeFeatureCards({
 
               {card.icon && !card.image && (
                 <div className="flex justify-center mb-6">
-                  <div className="w-16 h-16 bg-brand-blue bg-opacity-10 rounded-xl flex items-center justify-center text-brand-blue">
+                  <div className="w-16 h-16 bg-brand-primary bg-opacity-10 rounded-xl flex items-center justify-center text-brand-primary">
                     {card.icon}
                   </div>
                 </div>
@@ -86,7 +86,7 @@ export function LargeFeatureCards({
                   <ul className="space-y-3 mb-8 flex-1">
                     {card.details.map((detail, detailIndex) => (
                       <li key={detailIndex} className="flex items-start gap-3">
-                        <div className="flex-shrink-0 w-2 h-2 bg-brand-blue rounded-full mt-3"></div>
+                        <div className="flex-shrink-0 w-2 h-2 bg-brand-primary rounded-full mt-3"></div>
                         <span className="text-gray-700">{detail}</span>
                       </li>
                     ))}

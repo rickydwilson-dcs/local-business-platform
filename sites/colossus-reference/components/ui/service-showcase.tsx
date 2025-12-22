@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
-import { getImageUrl } from "@/lib/image";
+import { getImageUrl, generateImageAlt } from "@/lib/image";
 
 interface ServiceItem {
   title: string;
@@ -76,7 +76,7 @@ export function ServiceShowcase({
                       {service.image ? (
                         <Image
                           src={getImageUrl(service.image)}
-                          alt={service.title}
+                          alt={generateImageAlt(service.title)}
                           fill
                           sizes="(max-width: 1024px) 100vw, 50vw"
                           className="object-cover"
@@ -207,7 +207,7 @@ export function ServiceShowcase({
                     <div className="relative h-48 overflow-hidden">
                       <Image
                         src={getImageUrl(service.image)}
-                        alt={service.title}
+                        alt={generateImageAlt(service.title)}
                         fill
                         sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                         className="object-cover group-hover:scale-105 transition-transform duration-300"

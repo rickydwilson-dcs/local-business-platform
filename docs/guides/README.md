@@ -1,7 +1,7 @@
 # How-To Guides
 
-**Version:** 1.0.0
-**Last Updated:** 2025-12-05
+**Version:** 1.1.0
+**Last Updated:** 2025-12-21
 **Scope:** All sites in local-business-platform
 
 ---
@@ -14,11 +14,18 @@ This directory contains procedural, step-by-step guides for common tasks in the 
 
 ### Content Creation
 
-| Guide                                     | Purpose                               | Time      |
-| ----------------------------------------- | ------------------------------------- | --------- |
-| [Adding a New Site](./adding-new-site.md) | Create a new client site from scratch | 30-60 min |
-| [Adding a Location](./adding-location.md) | Add a new location MDX file           | 15-20 min |
-| [Adding a Service](./adding-service.md)   | Add a new service MDX file            | 15-20 min |
+| Guide                                                   | Purpose                                 | Time      |
+| ------------------------------------------------------- | --------------------------------------- | --------- |
+| [Adding a New Site](./adding-new-site.md)               | Create a new client site from scratch   | 30-60 min |
+| [Adding a Content Section](./adding-content-section.md) | Add a new content type (blog, products) | 30-45 min |
+| [Adding a Location](./adding-location.md)               | Add a new location MDX file             | 15-20 min |
+| [Adding a Service](./adding-service.md)                 | Add a new service MDX file              | 15-20 min |
+
+### Configuration
+
+| Guide                   | Purpose                                  | Time      |
+| ----------------------- | ---------------------------------------- | --------- |
+| [Theming](./theming.md) | Configure brand colors and design tokens | 15-30 min |
 
 ### Operations
 

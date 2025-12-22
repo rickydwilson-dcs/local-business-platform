@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/**
+ * Global CSS for Base Template Site
+ *
+ * Theme variables are automatically injected by @platform/theme-system
+ * and available as CSS custom properties (--color-brand-primary, etc.)
+ */
+
+@layer base {
+  :root {
+    /* Additional custom properties can be defined here */
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-white text-gray-900;
+    font-feature-settings: 'rlig' 1, 'calt' 1;
+  }
+}
+
+@layer components {
+  /* Reusable component classes using @apply */
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-lg;
+    @apply bg-blue-600 text-white font-semibold;
+    @apply hover:bg-blue-700 transition-colors;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-lg;
+    @apply bg-gray-100 text-gray-900 font-semibold;
+    @apply hover:bg-gray-200 transition-colors;
+  }
+
+  .card {
+    @apply bg-white border border-gray-200 rounded-xl p-6;
+    @apply shadow-sm hover:shadow-md transition-shadow;
+  }
+
+  .section {
+    @apply py-16 md:py-24;
+  }
+
+  .container-narrow {
+    @apply max-w-4xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+}
+
+@layer utilities {
+  /* Custom utility classes */
+
+  .text-balance {
+    text-wrap: balance;
+  }
+}
