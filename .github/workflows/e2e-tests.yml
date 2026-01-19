@@ -42,6 +42,9 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Build packages
+        run: pnpm --filter @platform/theme-system build
+
       - name: Install Playwright browsers
         run: pnpm --filter colossus-reference exec playwright install --with-deps chromium
 
@@ -81,6 +84,9 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+
+      - name: Build packages
+        run: pnpm --filter @platform/theme-system build
 
       - name: Install Playwright browsers
         run: pnpm --filter colossus-reference exec playwright install --with-deps chromium
@@ -130,6 +136,9 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Build packages
+        run: pnpm --filter @platform/theme-system build
+
       - name: Install Playwright browsers
         run: pnpm --filter colossus-reference exec playwright install --with-deps
 
@@ -177,6 +186,9 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+
+      - name: Build packages
+        run: pnpm --filter @platform/theme-system build
 
       - name: Install Playwright browsers
         run: pnpm --filter colossus-reference exec playwright install --with-deps
