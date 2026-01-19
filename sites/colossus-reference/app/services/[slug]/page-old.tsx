@@ -164,10 +164,10 @@ function getServiceData(slug: string): ServiceData {
       ],
       faqs: getServiceFAQs("scaffold towers & mast systems"),
     },
-    "crash-decks-crane-decks": {
-      title: "Crash Decks & Crane Decks",
+    "crash-decks": {
+      title: "Crash Decks",
       description:
-        "Protective crash decks and crane decks ensuring safety during construction operations with load-bearing capabilities and professional installation.",
+        "Protective crash decks ensuring safety during construction operations with load-bearing capabilities and professional installation.",
       heroImage: "colossus-reference/hero/service/crash-decks-crane-decks_02.webp",
       benefits: [
         "Load-bearing deck systems",

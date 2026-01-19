@@ -83,19 +83,18 @@ export function getServiceData(slug: string): ServiceData {
     "scaffold-towers-mast-systems": {
       description:
         "Mobile and static scaffold towers for flexible access solutions on various project types.",
-      image: "colossus-reference/hero/service/scaffold-towers-mast-systems_02.webp",
+      image: "colossus-reference/hero/service/scaffold-towers-mast-systems_01.webp",
       features: ["Mobile & Static", "Height Adjustable", "Quick Setup"],
     },
-    "crash-decks-crane-decks": {
-      description:
-        "Protective crash decks and crane decks ensuring safety during construction operations.",
-      image: "colossus-reference/hero/service/crash-decks-crane-decks_02.webp",
+    "crash-decks": {
+      description: "Protective crash decks ensuring safety during construction operations.",
+      image: "colossus-reference/hero/service/crash-decks_01.webp",
       features: ["Load Bearing", "Safety Compliance", "Custom Design"],
     },
     "heavy-duty-industrial-scaffolding": {
       description:
         "Heavy-duty scaffolding solutions for complex industrial projects and infrastructure work.",
-      image: "colossus-reference/hero/service/industrial-scaffolding_01.webp",
+      image: "colossus-reference/hero/service/heavy-duty-industrial-scaffolding_01.webp",
       features: ["Heavy Load Capacity", "Industrial Grade", "Complex Structures"],
     },
     "pavement-gantries-loading-bays": {
@@ -103,11 +102,6 @@ export function getServiceData(slug: string): ServiceData {
         "Specialized pavement gantries and loading bay solutions for urban construction projects.",
       image: "colossus-reference/hero/service/pavement-gantries-loading-bays_01.webp",
       features: ["Urban Solutions", "Pedestrian Safety", "Loading Access"],
-    },
-    "public-access-staircases": {
-      description: "Safe and compliant public access staircase systems for construction sites.",
-      image: "colossus-reference/hero/service/public-access-staircases_01.webp",
-      features: ["Public Safety", "Accessible Design", "Code Compliant"],
     },
     "scaffold-alarms": {
       description:
@@ -139,11 +133,11 @@ export function getServiceData(slug: string): ServiceData {
       image: "colossus-reference/hero/service/staircase-towers_01.webp",
       features: ["Safe Vertical Access", "Compliant Design", "Handrail Systems"],
     },
-    "suspended-scaffolding": {
+    "hangers-truss-outs-advanced-scaffolding": {
       description:
-        "Specialized suspended scaffolding systems for high-rise building maintenance and construction work requiring overhead access.",
-      image: "colossus-reference/hero/service/suspended-scaffolding_01.webp",
-      features: ["High-Rise Access", "Suspended Platforms", "Safety Harness Integration"],
+        "Specialized hanger systems, truss-outs, and advanced scaffolding solutions for complex structural access and cantilever requirements.",
+      image: "colossus-reference/hero/service/hangers-truss-outs_01.webp",
+      features: ["Hanger Systems", "Truss-out Solutions", "Cantilever Access"],
     },
   };
 

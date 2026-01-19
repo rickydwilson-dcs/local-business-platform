@@ -165,23 +165,22 @@ test.describe("Service Pages", () => {
     await expect(page.locator("main")).toBeVisible();
   });
 
-  test("should load all 25 service pages without errors", async ({ page }) => {
+  test("should load all service pages without errors", async ({ page }) => {
     const serviceSlugs = [
       "access-scaffolding",
       "birdcage-scaffolds",
-      "crash-decks-crane-decks",
+      "crash-decks",
       "edge-protection",
       "facade-scaffolding",
       "heavy-duty-industrial-scaffolding",
       "pavement-gantries-loading-bays",
-      "public-access-staircases",
       "scaffold-alarms",
       "scaffold-towers-mast-systems",
       "scaffolding-design-drawings",
       "scaffolding-inspections-maintenance",
       "sheeting-netting-encapsulation",
       "staircase-towers",
-      "suspended-scaffolding",
+      "hangers-truss-outs-advanced-scaffolding",
       "temporary-roof-systems",
     ];
 
