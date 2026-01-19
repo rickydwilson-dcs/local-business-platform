@@ -25,15 +25,14 @@ const SERVICE_SEMANTIC_MAP: Record<string, string> = {
   "birdcage-scaffolds": "Independent access structures",
   "scaffold-towers-mast-systems": "Mobile access towers",
   "scaffolding-inspections-maintenance": "Safety inspection services",
-  "crash-decks-crane-decks": "Protective deck systems",
+  "crash-decks": "Protective deck systems",
   "heavy-duty-industrial-scaffolding": "Large-scale access systems",
   "pavement-gantries-loading-bays": "Pedestrian protection systems",
-  "public-access-staircases": "Safe stairway solutions",
   "scaffold-alarms": "Site security systems",
   "scaffolding-design-drawings": "Technical design services",
   "sheeting-netting-encapsulation": "Site protection systems",
   "staircase-towers": "Vertical access solutions",
-  "suspended-scaffolding": "Hanging platform systems",
+  "hangers-truss-outs-advanced-scaffolding": "Advanced structural access systems",
 };
 
 // Location-specific semantic alternatives
