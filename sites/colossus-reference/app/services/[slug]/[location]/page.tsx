@@ -18,7 +18,7 @@ import { loadMdx } from "@/lib/mdx";
 export const dynamic = "force-static";
 export const dynamicParams = false;
 
-type Params = { service: string; location: string };
+type Params = { slug: string; location: string };
 
 /**
  * Location-specific service pages use nested URL pattern:
@@ -72,19 +72,16 @@ interface ServiceData {
 /**
  * Get the MDX file path for a service-location combination
  */
-function getContentPath(service: string, location: string): string {
-  return path.join(SERVICES_DIR, service, `${location}.mdx`);
+function getContentPath(slug: string, location: string): string {
+  return path.join(SERVICES_DIR, slug, `${location}.mdx`);
 }
 
 /**
  * Read MDX file and parse frontmatter
  */
-async function getServiceDataFromMDX(
-  service: string,
-  location: string
-): Promise<ServiceData | null> {
+async function getServiceDataFromMDX(slug: string, location: string): Promise<ServiceData | null> {
   try {
-    const filePath = getContentPath(service, location);
+    const filePath = getContentPath(slug, location);
     const fileContent = await fs.readFile(filePath, "utf-8");
     const { data } = matter(fileContent);
 
@@ -103,7 +100,7 @@ async function getServiceDataFromMDX(
       localContact: data.localContact,
     };
   } catch (error) {
-    console.error(`Error reading MDX for ${service}/${location}:`, error);
+    console.error(`Error reading MDX for ${slug}/${location}:`, error);
     return null;
   }
 }
@@ -114,9 +111,9 @@ async function getServiceDataFromMDX(
 export async function generateStaticParams() {
   const params: Params[] = [];
 
-  for (const [service, locations] of Object.entries(LOCATION_SERVICES)) {
+  for (const [slug, locations] of Object.entries(LOCATION_SERVICES)) {
     for (const location of locations) {
-      params.push({ service, location });
+      params.push({ slug, location });
     }
   }
 
@@ -124,8 +121,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
-  const { service, location } = await params;
-  const serviceData = await getServiceDataFromMDX(service, location);
+  const { slug, location } = await params;
+  const serviceData = await getServiceDataFromMDX(slug, location);
 
   if (!serviceData) {
     return {
@@ -140,11 +137,11 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
     .replace(" Systems", "");
 
   const locationName = location.charAt(0).toUpperCase() + location.slice(1);
-  const canonicalUrl = `/services/${service}/${location}`;
 
   // SEO: Keep titles under 60 characters to prevent Google truncation
   const optimizedTitle = serviceData.seoTitle || `${serviceName} ${locationName} | Colossus`;
   const optimizedDescription = serviceData.description;
+  const canonicalUrl = `/services/${slug}/${location}`;
 
   // Location-specific keywords
   let keywords: string[] = serviceData.keywords || [];
@@ -201,13 +198,13 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
 }
 
 export default async function Page({ params }: { params: Promise<Params> }) {
-  const { service, location } = await params;
-  const serviceData = await getServiceDataFromMDX(service, location);
+  const { slug, location } = await params;
+  const serviceData = await getServiceDataFromMDX(slug, location);
 
   // Load MDX content - use nested path format
   const { content: mdxContent } = await loadMdx({
     baseDir: "services",
-    slug: `${service}/${location}`,
+    slug: `${slug}/${location}`,
   });
 
   if (!serviceData) {
@@ -228,12 +225,12 @@ export default async function Page({ params }: { params: Promise<Params> }) {
     .replace(" Systems", "");
 
   const locationName = location.charAt(0).toUpperCase() + location.slice(1);
-  const canonicalUrl = `/services/${service}/${location}`;
+  const canonicalUrl = `/services/${slug}/${location}`;
 
   // Build breadcrumbs for location-specific service
   const breadcrumbItems = [
     { name: "Services", href: "/services" },
-    { name: serviceName.replace(` ${locationName}`, ""), href: `/services/${service}` },
+    { name: serviceName.replace(` ${locationName}`, ""), href: `/services/${slug}` },
     { name: locationName, href: canonicalUrl, current: true },
   ];
 
@@ -276,7 +273,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
 
         <ServiceAbout
           serviceName={serviceName}
-          slug={`${service}/${location}`}
+          slug={`${slug}/${location}`}
           about={serviceData.about}
         />
 
@@ -305,7 +302,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
         breadcrumbs={[
           { name: "Home", url: "/" },
           { name: "Services", url: "/services" },
-          { name: serviceName.replace(` ${locationName}`, ""), url: `/services/${service}` },
+          { name: serviceName.replace(` ${locationName}`, ""), url: `/services/${slug}` },
           { name: locationName, url: canonicalUrl },
         ]}
         faqs={serviceData.faqs}
