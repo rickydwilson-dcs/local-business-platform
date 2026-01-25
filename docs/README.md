@@ -64,12 +64,14 @@ System design and patterns.
 
 Weekly completion reports.
 
-| Week                                  | Status   | Focus                   |
-| ------------------------------------- | -------- | ----------------------- |
-| [Week 1](progress/WEEK_1_COMPLETE.md) | Complete | Monorepo foundation     |
-| [Week 2](progress/WEEK_2_COMPLETE.md) | Complete | Component versioning    |
-| [Week 3](progress/WEEK_3_COMPLETE.md) | Complete | Testing infrastructure  |
-| [Week 4](progress/WEEK_4_COMPLETE.md) | Complete | Deployment & monitoring |
+| Week                                     | Status      | Focus                        |
+| ---------------------------------------- | ----------- | ---------------------------- |
+| [Week 1](progress/WEEK_1_COMPLETE.md)    | Complete    | Monorepo foundation          |
+| [Week 2](progress/WEEK_2_COMPLETE.md)    | Complete    | Component versioning         |
+| [Week 3](progress/WEEK_3_COMPLETE.md)    | Complete    | Testing infrastructure       |
+| [Week 4](progress/WEEK_4_COMPLETE.md)    | Complete    | Deployment & monitoring      |
+| [Week 5](progress/WEEK_5_COMPLETE.md)    | Complete    | AI content generation        |
+| [Week 6](progress/WEEK_6_IN_PROGRESS.md) | In Progress | Blog, projects, testimonials |
 
 ---
 
@@ -150,7 +152,7 @@ docs/
 
 ### Sites
 
-- **colossus-reference:** 77 pages (25 services + 37 locations)
+- **colossus-reference:** 86 pages (25 services + 37 locations + blog + projects + reviews)
 - **joes-plumbing-canterbury:** 12 pages (3 services + 3 locations)
 - **Target:** 50 sites by end of Year 1
 

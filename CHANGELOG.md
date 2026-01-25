@@ -6,6 +6,62 @@ Complete project history and achievements organized by development phase.
 
 ## 📅 Recent Changes
 
+### **2025-01-25 - Week 6: Blog, Projects & Testimonials**
+
+**📝 Blog System (NEW):**
+
+- ✅ **MDX-based blog** - Full blog system with `content/blog/*.mdx` files
+- ✅ **Blog listing page** - `app/blog/page.tsx` with featured posts section
+- ✅ **Blog detail page** - `app/blog/[slug]/page.tsx` with author bio, related posts
+- ✅ **RSS feed** - `app/blog/rss.xml/route.ts` for syndication
+- ✅ **BlogFrontmatterSchema** - Zod validation for title, date, author, category, tags, excerpt
+- ✅ **Blog categories** - industry-tips, how-to-guide, case-study, seasonal, news
+- ✅ **Schema.org Article** - BlogPosting JSON-LD for SEO
+
+**🏗️ Projects Portfolio (NEW):**
+
+- ✅ **Projects system** - Case studies with `content/projects/*.mdx` files
+- ✅ **Projects listing page** - `app/projects/page.tsx` with stats display
+- ✅ **Project detail page** - `app/projects/[slug]/page.tsx` with gallery
+- ✅ **ProjectFrontmatterSchema** - Zod validation for projectType, services, client, results
+- ✅ **Image gallery support** - Multiple images with captions and ordering
+- ✅ **Client testimonial integration** - Inline testimonials on project pages
+
+**⭐ Testimonials & Reviews (NEW):**
+
+- ✅ **Testimonials system** - Reviews with `content/testimonials/*.mdx` files
+- ✅ **Reviews page** - `app/reviews/page.tsx` with aggregate rating display
+- ✅ **TestimonialFrontmatterSchema** - Zod validation for rating, service, location, platform
+- ✅ **Star rating component** - Visual 5-star rating display
+- ✅ **Aggregate rating calculation** - Average rating and count from all testimonials
+- ✅ **Schema.org Review** - Review and AggregateRating JSON-LD for rich snippets
+- ✅ **Platform support** - internal, google, trustpilot sources
+
+**🔧 Infrastructure Updates:**
+
+- ✅ **Extended content.ts** - Added `getBlogPosts()`, `getProjects()`, `getTestimonials()`, `calculateAggregateRating()`
+- ✅ **Extended mdx.tsx** - baseDir type now includes blog, projects, testimonials
+- ✅ **Extended Schema.tsx** - Added article, webpage, reviews, aggregateRating props
+- ✅ **Content schemas** - 3 new Zod schemas in `lib/content-schemas.ts`
+
+**Sample Content Created:**
+
+- `content/blog/scaffolding-safety-guide-winter.mdx`
+- `content/blog/choosing-right-scaffolding-for-your-project.mdx`
+- `content/projects/victorian-terrace-restoration-brighton.mdx`
+- `content/projects/commercial-office-development-canterbury.mdx`
+- `content/testimonials/john-smith-brighton-residential.mdx`
+- `content/testimonials/sarah-jones-canterbury-commercial.mdx`
+- `content/testimonials/mike-wilson-eastbourne-industrial.mdx`
+
+**Build Statistics:**
+
+- **86 pages generated** (up from 77)
+- **7 new content files** created
+- **3 new route handlers** (blog, projects, reviews)
+
+---
+
 ### **2025-01-25 - Week 5: AI Content Generation**
 
 **🤖 AI Provider Abstraction Layer (NEW):**
