@@ -2,8 +2,8 @@
 
 Outstanding tasks organized by 8-week implementation roadmap. Updated as tasks complete.
 
-**Last Updated:** 2025-12-05
-**Current Phase:** Week 4 Complete / Week 5 Starting
+**Last Updated:** 2026-01-24
+**Current Phase:** Week 4 Complete / Production Domain Configuration Complete
 
 ---
 
@@ -339,6 +339,18 @@ Outstanding tasks organized by 8-week implementation roadmap. Updated as tasks c
   - [x] Test health checks
 - [x] Document deployment procedures
 - [x] Create monitoring comparison report
+
+### Production Domain Configuration (2026-01-24)
+
+- [x] Configure custom domain (www.colossus-scaffolding.co.uk)
+- [x] Update environment variable (NEXT_PUBLIC_SITE_URL)
+- [x] Update all 33 location MDX schema URLs
+- [x] Update .env.example with production domain
+- [x] Fix Husky v9 deprecation warning
+- [x] Deploy to production (develop → staging → main)
+- [x] Verify sitemap URLs use www subdomain
+- [x] Configure domain redirects (apex → www)
+- [x] Verify SSL certificate provisioning
 
 ---
 
@@ -693,35 +705,36 @@ Outstanding tasks organized by 8-week implementation roadmap. Updated as tasks c
 
 ## 📊 Current Progress
 
-**Completed Weeks:** 3/8 (38%)
-**Sites Deployed:** 2/50 (4%) - colossus-reference (77 pages), joes-plumbing-canterbury (12 pages)
+**Completed Weeks:** 4/8 (50%)
+**Sites Deployed:** 2/50 (4%) - colossus-reference (78 pages - LIVE on www.colossus-scaffolding.co.uk), joes-plumbing-canterbury (12 pages)
 **Revenue Generated:** £0 (pre-launch)
-**Build Time:** 26.88 seconds (target: <30s) ✅
-**Test Suite:** 7 E2E smoke tests, 100% pass rate ✅
+**Build Time:** ~9s with Turbo cache (target: <30s) ✅
+**Test Suite:** E2E smoke tests + full test suite, 100% pass rate ✅
 
-**Recent Achievements (Week 3):**
+**Recent Achievements (2026-01-24):**
 
-- ✅ Week 3 COMPLETE - Image Storage & QA Infrastructure
-- ✅ R2 image storage via Vercel Blob (17 hero images)
-- ✅ Responsive image sizes across all components
-- ✅ E2E smoke tests with Playwright (7 tests)
-- ✅ Pre-push quality gates (TypeScript + Build + Smoke)
-- ✅ Automated build cache cleanup
-- ✅ Branch-based deployment (develop/staging/main)
-- ✅ Comprehensive troubleshooting documentation
-- ✅ Documentation reorganization (progress/, archived/)
+- ✅ Week 4 COMPLETE - Deployment Pipeline & Production Launch
+- ✅ Production domain configured (www.colossus-scaffolding.co.uk)
+- ✅ All schema URLs updated to production domain
+- ✅ Husky v9 deprecation fixed
+- ✅ Full git workflow (develop → staging → main)
+- ✅ CI/CD pipeline validated with production deployment
+- ✅ NewRelic APM monitoring active
+- ✅ GitHub Actions workflows operational
+- ✅ Site live on custom domain with SSL
 
 **On Track:** YES ✅
-**Current Focus:** Week 4 - Deployment Pipeline (CRITICAL)
+**Current Focus:** Week 5 - AI Content Generation
 **Blockers:** None
 **Next Milestones:**
 
-1. Complete image migration to R2
-2. Begin Week 4 deployment automation
-3. Set up monitoring (Sentry)
+1. Begin Week 5 - AI Content Generation setup
+2. Create service/location page generators
+3. Implement content quality validators
+4. Test AI generation for new sites
 
 ---
 
-**Project Status:** Week 3 In Progress (Image Storage + QA Infrastructure)
+**Project Status:** Week 4 Complete - Production Ready
 **Target Completion:** Week 8
 **First Client Target:** Week 8
