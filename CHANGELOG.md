@@ -6,6 +6,90 @@ Complete project history and achievements organized by development phase.
 
 ## 📅 Recent Changes
 
+### **2025-01-25 - Week 5: AI Content Generation**
+
+**🤖 AI Provider Abstraction Layer (NEW):**
+
+- ✅ **Dual provider support** - Both Claude (Anthropic) and Gemini (Google) with configurable abstraction
+- ✅ **Claude client** - `tools/lib/claude-client.ts` with rate limiting (1s between requests)
+- ✅ **Gemini client** - `tools/lib/gemini-client.ts` wrapping existing `@google/generative-ai`
+- ✅ **Structured output** - `generateStructured<T>()` for Zod-validated JSON generation
+- ✅ **Retry logic** - 3 attempts with exponential backoff (5s, 10s, 20s) for 429/529/5xx errors
+- ✅ **Singleton pattern** - Matches R2 client architecture
+
+**📝 Service Page Generator (NEW):**
+
+- ✅ **CLI tool** - `tools/generate-services.ts` with full argument support
+- ✅ **Options** - `--site`, `--context`, `--provider`, `--services`, `--dry-run`, `--force`, `--limit`
+- ✅ **MDX generation** - Frontmatter with SEO description, about section, FAQs
+- ✅ **Schema validation** - Validates against `ServiceFrontmatterSchema` with retry on failure
+- ✅ **Multi-stage prompts** - Separate prompts for description, about, FAQs, body content
+
+**📍 Location Page Generator (NEW):**
+
+- ✅ **CLI tool** - `tools/generate-locations.ts` with matching interface
+- ✅ **Section generation** - Hero, specialists, services, FAQs, pricing, coverage
+- ✅ **Location-specific prompts** - `tools/lib/location-prompts.ts` for local context
+- ✅ **Business context** - Loads from JSON config file (`tools/examples/colossus-context.json`)
+
+**✅ Content Quality Validators (NEW):**
+
+- ✅ **Readability validator** - Flesch-Kincaid score, sentence length, passive voice (READ_001-004)
+- ✅ **SEO validator** - Title/description length, keyword density, meta optimization (SEO_001-005)
+- ✅ **Uniqueness validator** - N-gram fingerprinting, Jaccard similarity detection (UNIQ_001-002)
+- ✅ **CLI orchestrator** - `scripts/validate-quality.ts` with `--validators`, `--json` options
+- ✅ **Validation framework** - Extensible interface for future AI-powered validators
+
+**Files Created:**
+
+- `tools/lib/ai-provider.ts` - Provider abstraction interface
+- `tools/lib/claude-client.ts` - Anthropic Claude implementation
+- `tools/lib/gemini-client.ts` - Google Gemini wrapper
+- `tools/lib/content-generator-types.ts` - Shared types for generators
+- `tools/lib/content-prompts.ts` - Service generation prompts
+- `tools/lib/location-prompts.ts` - Location generation prompts
+- `tools/lib/business-context.ts` - Business context loader
+- `tools/generate-services.ts` - Service page generator CLI
+- `tools/generate-locations.ts` - Location page generator CLI
+- `tools/test-ai-connection.ts` - AI provider connectivity test
+- `tools/examples/colossus-context.json` - Example business context
+- `sites/colossus-reference/lib/validators/types.ts` - Validation interfaces
+- `sites/colossus-reference/lib/validators/index.ts` - Validator registry
+- `sites/colossus-reference/lib/validators/readability-validator.ts`
+- `sites/colossus-reference/lib/validators/seo-validator.ts`
+- `sites/colossus-reference/lib/validators/uniqueness-validator.ts`
+- `sites/colossus-reference/scripts/validate-quality.ts` - Quality validator CLI
+
+**Files Modified:**
+
+- `package.json` - Added `@anthropic-ai/sdk`, new scripts
+- `.env.example` - Documented `ANTHROPIC_API_KEY`
+- `sites/colossus-reference/package.json` - Added `validate:quality` scripts
+
+**New npm Scripts:**
+
+```bash
+# Root level
+pnpm test:ai                    # Test AI provider connectivity
+pnpm test:ai:claude             # Test Claude specifically
+pnpm test:ai:gemini             # Test Gemini specifically
+pnpm content:generate:services  # Generate service pages
+pnpm content:generate:locations # Generate location pages
+
+# Site level (sites/colossus-reference/)
+npm run validate:quality        # Run all quality validators
+npm run validate:quality:ai     # Include AI-powered validators (future)
+```
+
+**Technical Notes:**
+
+- Default AI provider: Claude (claude-sonnet-4-20250514)
+- Gemini model: gemini-2.0-flash
+- Quality validators run on all 62 MDX files (25 services + 37 locations)
+- Uniqueness threshold: 0.6 Jaccard similarity for flagging duplicates
+
+---
+
 ### **2025-12-21 - Theme System Architecture & Base Template**
 
 **🎨 `@platform/theme-system` Package (NEW):**
