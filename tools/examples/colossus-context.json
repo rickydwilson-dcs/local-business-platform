@@ -1,0 +1,266 @@
+{
+  "business": {
+    "name": "Colossus Scaffolding",
+    "legalName": "Colossus Scaffolding Ltd",
+    "industry": "scaffolding",
+    "phone": "01424 466 661",
+    "email": "info@colossusscaffolding.co.uk",
+    "website": "https://www.colossus-scaffolding.co.uk"
+  },
+  "credentials": {
+    "certifications": [
+      "TG20:21 Compliant",
+      "CHAS Accredited",
+      "CISRS Qualified",
+      "Construction Line Gold"
+    ],
+    "insurance": "£10 million public liability insurance",
+    "teamQualifications": "All scaffolders are CISRS qualified with advanced training certifications"
+  },
+  "services": [
+    {
+      "slug": "commercial-scaffolding",
+      "title": "Commercial Scaffolding",
+      "category": "core",
+      "keyFeatures": ["Office buildings", "Retail developments", "Business continuity planning"],
+      "relatedServices": ["industrial-scaffolding", "facade-scaffolding"]
+    },
+    {
+      "slug": "residential-scaffolding",
+      "title": "Residential Scaffolding",
+      "category": "core",
+      "keyFeatures": ["House extensions", "Loft conversions", "Roof repairs"],
+      "relatedServices": ["temporary-roof", "staircase-tower"]
+    },
+    {
+      "slug": "industrial-scaffolding",
+      "title": "Industrial Scaffolding",
+      "category": "core",
+      "keyFeatures": ["Heavy-duty systems", "Factory access", "Warehouse maintenance"],
+      "relatedServices": ["commercial-scaffolding"]
+    },
+    {
+      "slug": "facade-scaffolding",
+      "title": "Facade Scaffolding",
+      "category": "specialist",
+      "keyFeatures": ["Building facades", "External cladding", "Cleaning access"],
+      "relatedServices": ["commercial-scaffolding"]
+    },
+    {
+      "slug": "temporary-roof",
+      "title": "Temporary Roof",
+      "category": "specialist",
+      "keyFeatures": ["Weather protection", "Roof replacement", "Storm damage"],
+      "relatedServices": ["residential-scaffolding"]
+    },
+    {
+      "slug": "staircase-tower",
+      "title": "Staircase Tower",
+      "category": "additional",
+      "keyFeatures": ["Safe access", "Multi-level buildings", "Temporary stairs"],
+      "relatedServices": ["commercial-scaffolding", "industrial-scaffolding"]
+    },
+    {
+      "slug": "pavement-gantry",
+      "title": "Pavement Gantry",
+      "category": "additional",
+      "keyFeatures": ["Pedestrian protection", "Public walkways", "High street works"],
+      "relatedServices": ["commercial-scaffolding"]
+    }
+  ],
+  "regions": [
+    {
+      "name": "East Sussex",
+      "slug": "east-sussex",
+      "locationDefinitions": [
+        {
+          "name": "Brighton",
+          "slug": "brighton",
+          "localAuthority": "Brighton & Hove City Council",
+          "type": "coastal",
+          "landmarks": ["Brighton Pier", "Royal Pavilion", "The Lanes", "Churchill Square"],
+          "buildingTypes": [
+            "Victorian terraces",
+            "Regency buildings",
+            "Modern seafront apartments"
+          ],
+          "neighborhoods": ["The Lanes", "North Laine", "Kemptown", "Hove", "Preston Park"],
+          "hasHeritage": true,
+          "isCoastal": true
+        },
+        {
+          "name": "Hastings",
+          "slug": "hastings",
+          "localAuthority": "Hastings Borough Council",
+          "type": "coastal",
+          "landmarks": ["Hastings Pier", "Old Town", "East Hill", "West Hill"],
+          "buildingTypes": ["Medieval buildings", "Regency terraces", "Victorian villas"],
+          "neighborhoods": ["Old Town", "St Leonards", "Ore", "Silverhill", "Hollington"],
+          "hasHeritage": true,
+          "isCoastal": true
+        },
+        {
+          "name": "Eastbourne",
+          "slug": "eastbourne",
+          "localAuthority": "Eastbourne Borough Council",
+          "type": "coastal",
+          "landmarks": ["Beachy Head", "Eastbourne Pier", "Devonshire Park"],
+          "buildingTypes": ["Victorian hotels", "Edwardian villas", "Art deco buildings"],
+          "neighborhoods": ["Town Centre", "Meads", "Old Town", "Sovereign Harbour"],
+          "hasHeritage": true,
+          "isCoastal": true
+        },
+        {
+          "name": "Battle",
+          "slug": "battle",
+          "localAuthority": "Rother District Council",
+          "type": "historic",
+          "landmarks": ["Battle Abbey", "1066 Battlefield", "Historic High Street"],
+          "buildingTypes": ["Medieval buildings", "Tudor properties", "Georgian townhouses"],
+          "neighborhoods": ["Town Centre", "Abbey Green", "Surrounding villages"],
+          "hasHeritage": true,
+          "isCoastal": false
+        },
+        {
+          "name": "Lewes",
+          "slug": "lewes",
+          "localAuthority": "Lewes District Council",
+          "type": "historic",
+          "landmarks": ["Lewes Castle", "Harvey's Brewery", "Cliffe High Street"],
+          "buildingTypes": ["Medieval buildings", "Georgian townhouses", "Flint cottages"],
+          "neighborhoods": ["Town Centre", "Cliffe", "South Malling", "Landport"],
+          "hasHeritage": true,
+          "isCoastal": false
+        }
+      ]
+    },
+    {
+      "name": "West Sussex",
+      "slug": "west-sussex",
+      "locationDefinitions": [
+        {
+          "name": "Chichester",
+          "slug": "chichester",
+          "localAuthority": "Chichester District Council",
+          "type": "historic",
+          "landmarks": ["Chichester Cathedral", "Festival Theatre", "Market Cross"],
+          "buildingTypes": ["Georgian townhouses", "Cathedral precincts", "Roman walls"],
+          "neighborhoods": ["City Centre", "Parklands", "Whyke", "Fishbourne"],
+          "hasHeritage": true,
+          "isCoastal": false
+        },
+        {
+          "name": "Crawley",
+          "slug": "crawley",
+          "localAuthority": "Crawley Borough Council",
+          "type": "urban",
+          "landmarks": ["County Mall", "Gatwick Airport", "Tilgate Park"],
+          "buildingTypes": ["New town housing", "Commercial buildings", "Industrial estates"],
+          "neighborhoods": ["Town Centre", "Three Bridges", "Ifield", "Langley Green"],
+          "hasHeritage": false,
+          "isCoastal": false
+        },
+        {
+          "name": "Worthing",
+          "slug": "worthing",
+          "localAuthority": "Worthing Borough Council",
+          "type": "coastal",
+          "landmarks": ["Worthing Pier", "Dome Cinema", "South Downs views"],
+          "buildingTypes": ["Victorian seafront", "Edwardian villas", "Art deco flats"],
+          "neighborhoods": ["Town Centre", "Tarring", "Broadwater", "West Worthing"],
+          "hasHeritage": true,
+          "isCoastal": true
+        }
+      ]
+    },
+    {
+      "name": "Kent",
+      "slug": "kent",
+      "locationDefinitions": [
+        {
+          "name": "Canterbury",
+          "slug": "canterbury",
+          "localAuthority": "Canterbury City Council",
+          "type": "historic",
+          "landmarks": ["Canterbury Cathedral", "Westgate Towers", "St Augustine's Abbey"],
+          "buildingTypes": ["Medieval buildings", "Tudor properties", "Georgian townhouses"],
+          "neighborhoods": ["City Centre", "Wincheap", "Northgate", "St Dunstans"],
+          "hasHeritage": true,
+          "isCoastal": false
+        },
+        {
+          "name": "Maidstone",
+          "slug": "maidstone",
+          "localAuthority": "Maidstone Borough Council",
+          "type": "urban",
+          "landmarks": ["Leeds Castle", "All Saints Church", "River Medway"],
+          "buildingTypes": ["Historic town centre", "Modern developments", "Industrial units"],
+          "neighborhoods": ["Town Centre", "Bearsted", "Loose", "Tovil"],
+          "hasHeritage": true,
+          "isCoastal": false
+        },
+        {
+          "name": "Dover",
+          "slug": "dover",
+          "localAuthority": "Dover District Council",
+          "type": "coastal",
+          "landmarks": ["Dover Castle", "White Cliffs", "Port of Dover"],
+          "buildingTypes": ["Historic fortifications", "Port buildings", "Cliff-top properties"],
+          "neighborhoods": ["Town Centre", "Buckland", "River", "St Margaret's"],
+          "hasHeritage": true,
+          "isCoastal": true
+        }
+      ]
+    },
+    {
+      "name": "Surrey",
+      "slug": "surrey",
+      "locationDefinitions": [
+        {
+          "name": "Guildford",
+          "slug": "guildford",
+          "localAuthority": "Guildford Borough Council",
+          "type": "urban",
+          "landmarks": ["Guildford Cathedral", "High Street", "University of Surrey"],
+          "buildingTypes": ["Historic high street", "University buildings", "Suburban homes"],
+          "neighborhoods": ["Town Centre", "Stoughton", "Onslow Village", "Park Barn"],
+          "hasHeritage": true,
+          "isCoastal": false
+        },
+        {
+          "name": "Woking",
+          "slug": "woking",
+          "localAuthority": "Woking Borough Council",
+          "type": "urban",
+          "landmarks": ["Shah Jahan Mosque", "Woking town centre", "Brookwood Cemetery"],
+          "buildingTypes": ["Modern town centre", "Victorian suburbs", "Commercial developments"],
+          "neighborhoods": ["Town Centre", "Knaphill", "Horsell", "Goldsworth Park"],
+          "hasHeritage": false,
+          "isCoastal": false
+        }
+      ]
+    }
+  ],
+  "pricing": {
+    "domestic": {
+      "min": 800,
+      "max": 1400,
+      "duration": "6-8 weeks typical"
+    },
+    "commercial": {
+      "min": 2000,
+      "max": 8000,
+      "duration": "8-16 weeks typical"
+    },
+    "specialist": {
+      "min": 1500,
+      "max": 6000,
+      "duration": "4-12 weeks typical"
+    }
+  },
+  "brandVoice": {
+    "tone": "Professional, approachable, knowledgeable, confident",
+    "avoidWords": ["cheap", "budget", "discount"],
+    "preferredTerms": ["professional", "expert", "qualified", "compliant", "safe"]
+  }
+}

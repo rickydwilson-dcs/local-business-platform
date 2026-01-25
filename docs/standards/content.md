@@ -1,14 +1,14 @@
 # Content Standards
 
-**Version:** 1.0.1
-**Last Updated:** 2025-12-21
+**Version:** 1.2.0
+**Last Updated:** 2025-01-25
 **Scope:** All sites in local-business-platform
 
 ---
 
 ## Overview
 
-The Local Business Platform uses a **Unified MDX-Only Architecture**. All content (services AND locations) is managed exclusively through MDX files with comprehensive frontmatter. There are no centralized TypeScript data structures - MDX is the single source of truth.
+The Local Business Platform uses a **Unified MDX-Only Architecture**. All content is managed exclusively through MDX files with comprehensive frontmatter. There are no centralized TypeScript data structures - MDX is the single source of truth.
 
 ## Core Principles
 
@@ -18,11 +18,16 @@ The Local Business Platform uses a **Unified MDX-Only Architecture**. All conten
 ✅ REQUIRED - All content uses MDX as the ONLY source:
 /content/services/[service].mdx       - All service content (25 files)
 /content/locations/[location].mdx     - All location content (37 files)
+/content/blog/[post].mdx              - Blog posts (Week 6)
+/content/projects/[project].mdx       - Project case studies (Week 6)
+/content/testimonials/[review].mdx    - Customer testimonials (Week 6)
 /app/services/[slug]/page.tsx         - Dynamic routing (reads MDX only)
 /app/locations/[slug]/page.tsx        - Dynamic routing (reads MDX only)
+/app/blog/[slug]/page.tsx             - Dynamic routing (reads MDX only)
+/app/projects/[slug]/page.tsx         - Dynamic routing (reads MDX only)
 ```
 
-**Total:** 62 MDX content files across all sites
+**Total:** 62+ MDX content files across all sites (services + locations + blog + projects + testimonials)
 
 ### 2. No Centralized Data Files
 
@@ -130,6 +135,96 @@ towns:
 Markdown content about Brighton.
 ```
 
+### Blog Frontmatter (Week 6)
+
+```yaml
+---
+title: "How to Choose the Right Scaffolding for Your Project"
+date: "2025-01-15"
+author:
+  name: "John Smith"
+  role: "Operations Director"
+category: "how-to-guide" # industry-tips | how-to-guide | case-study | seasonal | news
+tags:
+  - planning
+  - residential
+  - guide
+description: "Expert guide to selecting the right scaffolding type..."
+excerpt: "Selecting the right scaffolding can make the difference..."
+heroImage: "colossus-reference/blog/choosing-scaffolding.webp"
+featured: true
+relatedServices:
+  - residential-scaffolding
+  - commercial-scaffolding
+---
+Blog post content in markdown...
+```
+
+### Project Frontmatter (Week 6)
+
+```yaml
+---
+title: "Victorian Terrace Restoration - Brighton"
+description: "Complete scaffolding solution for a Grade II listed property..."
+projectType: "residential" # residential | commercial | industrial | heritage
+category: "heritage" # heritage | new-build | renovation | maintenance | emergency
+status: "featured" # completed | in-progress | featured
+location: "brighton"
+locationName: "Brighton"
+completionDate: "2024-09-15"
+year: 2024
+duration: "8 weeks"
+services:
+  - residential-scaffolding
+  - facade-scaffolding
+heroImage: "colossus-reference/projects/terrace-brighton/hero.webp"
+images:
+  - path: "colossus-reference/projects/terrace-brighton/01.webp"
+    caption: "Initial survey"
+    order: 1
+client:
+  type: "Private Homeowner" # Private Homeowner | Property Developer | Local Authority | Business
+  testimonial: "Excellent work on our historic property..."
+  rating: 5
+scope:
+  buildingType: "Victorian Terrace"
+  storeys: 3
+  challenges:
+    - "Grade II listed building constraints"
+    - "Narrow street access"
+results:
+  - "Full scaffold access for 3-storey facade"
+  - "Completed on schedule"
+faqs:
+  - question: "How did you protect the listed building?"
+    answer: "We used padded fixtures and non-invasive fixing methods..."
+---
+Project case study content in markdown...
+```
+
+### Testimonial Frontmatter (Week 6)
+
+```yaml
+---
+customerName: "John Smith"
+customerRole: "Homeowner"
+customerCompany: null # Optional
+rating: 5 # 1-5 stars
+text: "Colossus Scaffolding provided excellent service..."
+excerpt: "Excellent service for our renovation." # Optional short version
+photo: "colossus-reference/testimonials/john-smith.webp" # Optional
+date: "2024-11-15"
+service: "Residential Scaffolding"
+serviceSlug: "residential-scaffolding"
+location: "Brighton"
+locationSlug: "brighton"
+projectType: "residential" # residential | commercial | industrial
+featured: true
+verified: true
+platform: "internal" # internal | google | trustpilot | reviews.io
+---
+```
+
 ## Content Reading Pattern
 
 ```typescript
@@ -184,19 +279,57 @@ Content is validated using Zod schemas on every commit:
 - **Required fields**: All mandatory frontmatter present
 
 ```bash
-npm run validate:content    # Validate all 62 MDX files
-npm run validate:services   # Validate 25 service files
-npm run validate:locations  # Validate 37 location files
+npm run validate:content       # Validate all MDX files
+npm run validate:services      # Validate service files
+npm run validate:locations     # Validate location files
+npm run validate:blog          # Validate blog posts (Week 6)
+npm run validate:projects      # Validate projects (Week 6)
+npm run validate:testimonials  # Validate testimonials (Week 6)
 ```
+
+### Quality Validators
+
+Additional quality checks beyond schema validation:
+
+| Validator   | Type       | Checks                                               |
+| ----------- | ---------- | ---------------------------------------------------- |
+| Readability | Rule-based | Flesch-Kincaid score, sentence length, passive voice |
+| SEO         | Rule-based | Title/description length, keyword density            |
+| Uniqueness  | Rule-based | N-gram fingerprinting, similarity detection          |
+
+```bash
+npm run validate:quality      # Run all quality validators
+npm run validate:quality:ai   # Include AI-powered validators (future)
+```
+
+## AI Content Generation
+
+Service and location pages can be generated using AI:
+
+```bash
+# Generate services (from root)
+pnpm content:generate:services --site colossus-reference --context tools/examples/colossus-context.json
+
+# Generate locations (from root)
+pnpm content:generate:locations --site colossus-reference --context tools/examples/colossus-context.json
+
+# Preview without writing
+pnpm content:generate:services --dry-run
+```
+
+Supports both Claude (default) and Gemini via `--provider` flag. See [Adding a Service](../guides/adding-service.md) for details.
 
 ## Verification Checklist
 
 Before completing any content work:
 
-- [ ] Content is in MDX file in `/content/services/` or `/content/locations/`
-- [ ] All frontmatter fields are populated
+- [ ] Content is in MDX file in appropriate `/content/` subdirectory
+- [ ] All frontmatter fields are populated per schema requirements
 - [ ] Description is 50-200 characters
 - [ ] Services have 3-15 FAQs
+- [ ] Blog posts have category, tags, and excerpt
+- [ ] Projects have heroImage, services, and results
+- [ ] Testimonials have rating, date, and text
 - [ ] No centralized data files created
 - [ ] Dynamic routing template handles the content
 - [ ] `npm run validate:content` passes
@@ -211,6 +344,8 @@ Before completing any content work:
 
 - [Adding a Location](../guides/adding-location.md)
 - [Adding a Service](../guides/adding-service.md)
+- [Adding a Blog Post](../guides/adding-blog-post.md) (Week 6)
+- [Adding a Project](../guides/adding-project.md) (Week 6)
 
 ---
 

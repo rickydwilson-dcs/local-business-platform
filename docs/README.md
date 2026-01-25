@@ -2,7 +2,7 @@
 
 Complete documentation for the white-label website platform for local service businesses.
 
-**Last Updated:** 2025-12-05
+**Last Updated:** 2025-01-25
 
 ---
 
@@ -30,15 +30,26 @@ Focused reference documents defining how things should be done.
 
 Step-by-step instructions for common tasks.
 
-| Guide                                          | Purpose                  | Time      |
-| ---------------------------------------------- | ------------------------ | --------- |
-| [Adding a New Site](guides/adding-new-site.md) | Create a new client site | 30-60 min |
-| [Adding a Location](guides/adding-location.md) | Add location MDX file    | 15-20 min |
-| [Adding a Service](guides/adding-service.md)   | Add service MDX file     | 15-20 min |
-| [Deploying a Site](guides/deploying-site.md)   | Deployment procedures    | 10-15 min |
-| [Monitoring Setup](guides/monitoring-setup.md) | NewRelic configuration   | 20-30 min |
-| [GitHub Actions](guides/github-actions.md)     | CI/CD workflow guide     | 15-20 min |
-| [Git Workflow](guides/git-workflow.md)         | Branch workflow          | 5-10 min  |
+| Guide                                          | Purpose                  | Time                     |
+| ---------------------------------------------- | ------------------------ | ------------------------ |
+| [Adding a New Site](guides/adding-new-site.md) | Create a new client site | 30-60 min                |
+| [Adding a Location](guides/adding-location.md) | Add location MDX file    | 2-5 min (AI) / 15-20 min |
+| [Adding a Service](guides/adding-service.md)   | Add service MDX file     | 2-5 min (AI) / 15-20 min |
+| [Deploying a Site](guides/deploying-site.md)   | Deployment procedures    | 10-15 min                |
+| [Monitoring Setup](guides/monitoring-setup.md) | NewRelic configuration   | 20-30 min                |
+| [GitHub Actions](guides/github-actions.md)     | CI/CD workflow guide     | 15-20 min                |
+| [Git Workflow](guides/git-workflow.md)         | Branch workflow          | 5-10 min                 |
+
+### AI Content Generation (NEW)
+
+Generate service and location pages automatically using Claude or Gemini AI:
+
+```bash
+pnpm content:generate:services --site <site-name> --context <context.json>
+pnpm content:generate:locations --site <site-name> --context <context.json>
+```
+
+See [Adding a Service](guides/adding-service.md) and [Adding a Location](guides/adding-location.md) for details.
 
 ### Architecture
 
@@ -53,12 +64,14 @@ System design and patterns.
 
 Weekly completion reports.
 
-| Week                                  | Status   | Focus                   |
-| ------------------------------------- | -------- | ----------------------- |
-| [Week 1](progress/WEEK_1_COMPLETE.md) | Complete | Monorepo foundation     |
-| [Week 2](progress/WEEK_2_COMPLETE.md) | Complete | Component versioning    |
-| [Week 3](progress/WEEK_3_COMPLETE.md) | Complete | Testing infrastructure  |
-| [Week 4](progress/WEEK_4_COMPLETE.md) | Complete | Deployment & monitoring |
+| Week                                     | Status      | Focus                        |
+| ---------------------------------------- | ----------- | ---------------------------- |
+| [Week 1](progress/WEEK_1_COMPLETE.md)    | Complete    | Monorepo foundation          |
+| [Week 2](progress/WEEK_2_COMPLETE.md)    | Complete    | Component versioning         |
+| [Week 3](progress/WEEK_3_COMPLETE.md)    | Complete    | Testing infrastructure       |
+| [Week 4](progress/WEEK_4_COMPLETE.md)    | Complete    | Deployment & monitoring      |
+| [Week 5](progress/WEEK_5_COMPLETE.md)    | Complete    | AI content generation        |
+| [Week 6](progress/WEEK_6_IN_PROGRESS.md) | In Progress | Blog, projects, testimonials |
 
 ---
 
@@ -139,7 +152,7 @@ docs/
 
 ### Sites
 
-- **colossus-reference:** 77 pages (25 services + 37 locations)
+- **colossus-reference:** 86 pages (25 services + 37 locations + blog + projects + reviews)
 - **joes-plumbing-canterbury:** 12 pages (3 services + 3 locations)
 - **Target:** 50 sites by end of Year 1
 

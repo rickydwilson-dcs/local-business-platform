@@ -1,6 +1,6 @@
 # How to Add a New Location
 
-**Estimated Time:** 15-20 minutes
+**Estimated Time:** 15-20 minutes (manual) | 2-5 minutes (AI-generated)
 **Prerequisites:** Access to content/locations/ directory
 **Difficulty:** Beginner
 
@@ -9,6 +9,35 @@
 ## Overview
 
 This guide walks you through adding a new location (town, city, or county) to a site. All locations are MDX files with comprehensive frontmatter - no code changes required.
+
+## Quick Start: AI Generation (Recommended)
+
+For faster content creation, use the AI-powered location generator:
+
+```bash
+# Generate a single location using AI
+pnpm content:generate:locations --site colossus-reference --locations "worthing" --context tools/examples/colossus-context.json
+
+# Preview without writing (dry run)
+pnpm content:generate:locations --site colossus-reference --locations "worthing" --dry-run
+
+# Use a specific AI provider (default: Claude)
+pnpm content:generate:locations --site colossus-reference --locations "worthing" --provider=gemini
+```
+
+The generator creates complete MDX files with:
+
+- Location-specific hero section
+- Specialists cards highlighting local expertise
+- Service cards with localized descriptions
+- 5-20 location-specific FAQs
+- Pricing, coverage, and local authority info
+
+After generation, review and customize the content as needed, then continue from [Step 3: Add Hero Image](#step-3-add-hero-image-to-r2).
+
+---
+
+## Manual Method
 
 ## Prerequisites
 
@@ -221,7 +250,8 @@ npm run validate:locations
 - [Content Standards](../standards/content.md) - MDX frontmatter requirements
 - [SEO Standards](../standards/seo.md) - Location SEO requirements
 - [Images Standards](../standards/images.md) - Hero image requirements
+- [AI Content Generation](#quick-start-ai-generation-recommended) - Automated location page creation
 
 ---
 
-**Last Updated:** 2025-12-05
+**Last Updated:** 2025-01-25

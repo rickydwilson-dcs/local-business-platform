@@ -10,7 +10,7 @@ import type { ReactElement } from "react";
 import mdxComponents from "@/mdx-components";
 
 type LoadOpts = {
-  baseDir: "services" | "locations";
+  baseDir: "services" | "locations" | "blog" | "projects" | "testimonials";
   slug: string;
 };
 
@@ -74,11 +74,12 @@ export async function getPageImage(
     const raw = await fs.readFile(filePath, "utf8");
     const { data } = matter(raw);
 
-    // Services use hero.image, locations use heroImage
+    // Different content types store hero images in different fields
     if (baseDir === "services") {
       const heroData = data?.hero as { image?: string } | undefined;
       return heroData?.image || null;
     }
+    // Locations, blog, and projects use heroImage
     return (data?.heroImage as string) || null;
   } catch {
     return null;
