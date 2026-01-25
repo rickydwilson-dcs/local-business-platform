@@ -1,7 +1,7 @@
 # How-To Guides
 
-**Version:** 1.1.0
-**Last Updated:** 2025-12-21
+**Version:** 1.2.0
+**Last Updated:** 2025-01-25
 **Scope:** All sites in local-business-platform
 
 ---
@@ -14,12 +14,29 @@ This directory contains procedural, step-by-step guides for common tasks in the 
 
 ### Content Creation
 
-| Guide                                                   | Purpose                                 | Time      |
-| ------------------------------------------------------- | --------------------------------------- | --------- |
-| [Adding a New Site](./adding-new-site.md)               | Create a new client site from scratch   | 30-60 min |
-| [Adding a Content Section](./adding-content-section.md) | Add a new content type (blog, products) | 30-45 min |
-| [Adding a Location](./adding-location.md)               | Add a new location MDX file             | 15-20 min |
-| [Adding a Service](./adding-service.md)                 | Add a new service MDX file              | 15-20 min |
+| Guide                                                   | Purpose                                 | Time                     |
+| ------------------------------------------------------- | --------------------------------------- | ------------------------ |
+| [Adding a New Site](./adding-new-site.md)               | Create a new client site from scratch   | 30-60 min                |
+| [Adding a Content Section](./adding-content-section.md) | Add a new content type (blog, products) | 30-45 min                |
+| [Adding a Location](./adding-location.md)               | Add a new location MDX file             | 2-5 min (AI) / 15-20 min |
+| [Adding a Service](./adding-service.md)                 | Add a new service MDX file              | 2-5 min (AI) / 15-20 min |
+
+### AI Content Generation (NEW)
+
+Generate service and location pages automatically using Claude or Gemini AI:
+
+```bash
+# Generate service pages
+pnpm content:generate:services --site <site-name> --context <context.json>
+
+# Generate location pages
+pnpm content:generate:locations --site <site-name> --context <context.json>
+
+# Preview without writing
+pnpm content:generate:services --dry-run
+```
+
+See [Adding a Service](./adding-service.md) and [Adding a Location](./adding-location.md) for details.
 
 ### Configuration
 

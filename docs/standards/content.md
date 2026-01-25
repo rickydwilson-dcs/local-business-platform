@@ -1,7 +1,7 @@
 # Content Standards
 
-**Version:** 1.0.1
-**Last Updated:** 2025-12-21
+**Version:** 1.1.0
+**Last Updated:** 2025-01-25
 **Scope:** All sites in local-business-platform
 
 ---
@@ -188,6 +188,38 @@ npm run validate:content    # Validate all 62 MDX files
 npm run validate:services   # Validate 25 service files
 npm run validate:locations  # Validate 37 location files
 ```
+
+### Quality Validators
+
+Additional quality checks beyond schema validation:
+
+| Validator   | Type       | Checks                                               |
+| ----------- | ---------- | ---------------------------------------------------- |
+| Readability | Rule-based | Flesch-Kincaid score, sentence length, passive voice |
+| SEO         | Rule-based | Title/description length, keyword density            |
+| Uniqueness  | Rule-based | N-gram fingerprinting, similarity detection          |
+
+```bash
+npm run validate:quality      # Run all quality validators
+npm run validate:quality:ai   # Include AI-powered validators (future)
+```
+
+## AI Content Generation
+
+Service and location pages can be generated using AI:
+
+```bash
+# Generate services (from root)
+pnpm content:generate:services --site colossus-reference --context tools/examples/colossus-context.json
+
+# Generate locations (from root)
+pnpm content:generate:locations --site colossus-reference --context tools/examples/colossus-context.json
+
+# Preview without writing
+pnpm content:generate:services --dry-run
+```
+
+Supports both Claude (default) and Gemini via `--provider` flag. See [Adding a Service](../guides/adding-service.md) for details.
 
 ## Verification Checklist
 
