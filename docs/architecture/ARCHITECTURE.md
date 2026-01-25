@@ -1,7 +1,7 @@
 # Local Business Platform - Architecture Overview
 
-**Version:** 2.1.0
-**Last Updated:** 2025-12-21
+**Version:** 2.2.0
+**Last Updated:** 2025-01-25
 **Scope:** All sites in local-business-platform monorepo
 
 ---
@@ -39,23 +39,29 @@ local-business-platform/
 
 ### 2. Unified MDX-Only Content
 
-All content (services AND locations) is managed exclusively through MDX files with comprehensive frontmatter. There are no centralized TypeScript data structures.
+All content is managed exclusively through MDX files with comprehensive frontmatter. There are no centralized TypeScript data structures.
 
 ```
 content/
-├── services/    # 25 service MDX files
-└── locations/   # 37 location MDX files
+├── services/      # 25 service MDX files
+├── locations/     # 37 location MDX files
+├── blog/          # Blog posts (Week 6)
+├── projects/      # Project case studies (Week 6)
+└── testimonials/  # Customer testimonials (Week 6)
 ```
 
-**Key Principle:** MDX is the single source of truth. No `lib/locations.ts` or `lib/services.ts` files.
+**Key Principle:** MDX is the single source of truth. No centralized data files like `lib/locations.ts`.
 
 ### 3. Dynamic Routing
 
 All content pages use dynamic routing that reads MDX files directly:
 
 ```
-app/services/[slug]/page.tsx   # Reads from content/services/
-app/locations/[slug]/page.tsx  # Reads from content/locations/
+app/services/[slug]/page.tsx    # Reads from content/services/
+app/locations/[slug]/page.tsx   # Reads from content/locations/
+app/blog/[slug]/page.tsx        # Reads from content/blog/ (Week 6)
+app/projects/[slug]/page.tsx    # Reads from content/projects/ (Week 6)
+app/reviews/page.tsx            # Reads from content/testimonials/ (Week 6)
 ```
 
 ### 4. Shared Component Library
@@ -207,7 +213,50 @@ These patterns indicate architecture violations:
 | ------------ | ----------------------- |
 | Fresh build  | < 60s                   |
 | Cached build | < 1s                    |
-| Site pages   | 77 (colossus-reference) |
+| Site pages   | 86 (colossus-reference) |
+
+## Content Types (Week 6+)
+
+The platform now supports five content types, all following MDX-only architecture:
+
+| Content Type | Directory               | Schema                         | Page Routes                     |
+| ------------ | ----------------------- | ------------------------------ | ------------------------------- |
+| Services     | `content/services/`     | `ServiceFrontmatterSchema`     | `/services/[slug]`              |
+| Locations    | `content/locations/`    | `LocationFrontmatterSchema`    | `/locations/[slug]`             |
+| Blog         | `content/blog/`         | `BlogFrontmatterSchema`        | `/blog`, `/blog/[slug]`         |
+| Projects     | `content/projects/`     | `ProjectFrontmatterSchema`     | `/projects`, `/projects/[slug]` |
+| Testimonials | `content/testimonials/` | `TestimonialFrontmatterSchema` | `/reviews`                      |
+
+### Blog Content Type
+
+Blog posts support:
+
+- Author information (name, role, avatar)
+- Categories: `industry-tips`, `how-to-guide`, `case-study`, `seasonal`, `news`
+- Tags for cross-referencing
+- Related services and locations
+- RSS feed at `/blog/rss.xml`
+
+### Projects Content Type
+
+Project case studies support:
+
+- Project type: `residential`, `commercial`, `industrial`, `heritage`
+- Category: `heritage`, `new-build`, `renovation`, `maintenance`, `emergency`
+- Multiple images with captions
+- Client testimonial with rating
+- Scope details (building type, storeys, challenges)
+- Results list
+
+### Testimonials Content Type
+
+Customer testimonials support:
+
+- Rating (1-5 stars)
+- Platform source: `internal`, `google`, `trustpilot`, `reviews.io`
+- Verified badge
+- Related service/location linking
+- Aggregate rating calculation for Schema.org
 
 ## Related Documentation
 
