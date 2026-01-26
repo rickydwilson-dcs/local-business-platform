@@ -144,6 +144,7 @@ export default async function BlogPostPage({ params }: { params: Promise<Params>
         <article>
           {/* Hero Section - Matches ServiceHero pattern */}
           <BlogPostHero
+            variant="blog"
             title={frontmatter.title}
             excerpt={frontmatter.excerpt}
             category={frontmatter.category}
@@ -154,181 +155,74 @@ export default async function BlogPostPage({ params }: { params: Promise<Params>
             heroImage={frontmatter.heroImage}
           />
 
-          {/* Article Content - Two Column Layout */}
+          {/* Article Content - Single Column Layout */}
           <section className="section-standard bg-white">
             <div className="container-standard">
-              <div className="grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-8 lg:gap-12 max-w-7xl mx-auto">
-                {/* Main Content Column */}
-                <div className="min-w-0">
-                  {/* Prose Content */}
-                  <div className="prose prose-lg max-w-none prose-headings:text-gray-900 prose-p:text-gray-700 prose-a:text-brand-blue prose-a:no-underline hover:prose-a:underline prose-strong:text-gray-900 prose-li:text-gray-700 prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-6 prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-4">
-                    {mdxContent}
-                  </div>
-
-                  {/* Tags */}
-                  {frontmatter.tags && frontmatter.tags.length > 0 && (
-                    <div className="mt-12 pt-8 border-t border-gray-200">
-                      <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-4">
-                        Topics
-                      </h3>
-                      <div className="flex flex-wrap gap-2">
-                        {frontmatter.tags.map((tag) => (
-                          <span
-                            key={tag}
-                            className="bg-gray-100 text-gray-700 text-sm px-4 py-2 rounded-full hover:bg-gray-200 transition-colors"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Related Services */}
-                  {frontmatter.relatedServices && frontmatter.relatedServices.length > 0 && (
-                    <div className="mt-8 pt-8 border-t border-gray-200">
-                      <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-4">
-                        Related Services
-                      </h3>
-                      <div className="flex flex-wrap gap-3">
-                        {frontmatter.relatedServices.map((serviceSlug) => (
-                          <Link
-                            key={serviceSlug}
-                            href={`/services/${serviceSlug}`}
-                            className="inline-flex items-center gap-2 bg-brand-blue/10 text-brand-blue font-medium text-sm px-4 py-2 rounded-full hover:bg-brand-blue/20 transition-colors"
-                          >
-                            {serviceSlug
-                              .split("-")
-                              .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
-                              .join(" ")}
-                            <svg
-                              className="w-4 h-4"
-                              fill="none"
-                              viewBox="0 0 24 24"
-                              stroke="currentColor"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M9 5l7 7-7 7"
-                              />
-                            </svg>
-                          </Link>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Author Bio */}
-                  <div className="mt-12">
-                    <AuthorCard name={frontmatter.author.name} role={frontmatter.author.role} />
-                  </div>
+              <div className="max-w-4xl mx-auto">
+                {/* Prose Content */}
+                <div className="prose prose-lg max-w-none prose-headings:text-gray-900 prose-p:text-gray-700 prose-a:text-brand-blue prose-a:no-underline hover:prose-a:underline prose-strong:text-gray-900 prose-li:text-gray-700 prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-6 prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-4">
+                  {mdxContent}
                 </div>
 
-                {/* Sidebar Column - Sticky on Desktop */}
-                <aside className="hidden lg:block">
-                  <div className="sticky top-24 space-y-6">
-                    {/* CTA Card */}
-                    <div className="bg-gradient-to-br from-brand-blue to-brand-blue-hover rounded-2xl p-6 text-white shadow-lg">
-                      <h3 className="text-xl font-bold mb-3">Need Expert Scaffolding?</h3>
-                      <p className="text-sm text-white/90 mb-4 leading-relaxed">
-                        Get a free consultation and quote from our CISRS-qualified team across the
-                        South East.
-                      </p>
-                      <Link
-                        href="/contact"
-                        className="block w-full bg-white text-brand-blue text-center font-semibold py-3 px-4 rounded-lg hover:bg-gray-50 transition-colors"
-                      >
-                        Get Free Quote
-                      </Link>
-                      <Link
-                        href="/contact"
-                        className="block w-full mt-3 bg-white/10 text-white text-center font-semibold py-3 px-4 rounded-lg hover:bg-white/20 transition-colors border border-white/20"
-                      >
-                        Request Survey
-                      </Link>
-                    </div>
-
-                    {/* Quick Info Card */}
-                    <div className="bg-gray-50 rounded-2xl p-6 border border-gray-200">
-                      <h4 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
-                        <svg
-                          className="w-5 h-5 text-brand-blue"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
+                {/* Tags */}
+                {frontmatter.tags && frontmatter.tags.length > 0 && (
+                  <div className="mt-12 pt-8 border-t border-gray-200">
+                    <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-4">
+                      Topics
+                    </h3>
+                    <div className="flex flex-wrap gap-2">
+                      {frontmatter.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="bg-gray-100 text-gray-700 text-sm px-4 py-2 rounded-full hover:bg-gray-200 transition-colors"
                         >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                          />
-                        </svg>
-                        Why Choose Us
-                      </h4>
-                      <ul className="space-y-3 text-sm text-gray-700">
-                        <li className="flex items-start gap-2">
-                          <svg
-                            className="w-4 h-4 text-brand-blue mt-0.5 flex-shrink-0"
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
-                          >
-                            <path
-                              fillRule="evenodd"
-                              d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                              clipRule="evenodd"
-                            />
-                          </svg>
-                          <span>TG20:21 Compliant</span>
-                        </li>
-                        <li className="flex items-start gap-2">
-                          <svg
-                            className="w-4 h-4 text-brand-blue mt-0.5 flex-shrink-0"
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
-                          >
-                            <path
-                              fillRule="evenodd"
-                              d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                              clipRule="evenodd"
-                            />
-                          </svg>
-                          <span>£10M Public Liability</span>
-                        </li>
-                        <li className="flex items-start gap-2">
-                          <svg
-                            className="w-4 h-4 text-brand-blue mt-0.5 flex-shrink-0"
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
-                          >
-                            <path
-                              fillRule="evenodd"
-                              d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                              clipRule="evenodd"
-                            />
-                          </svg>
-                          <span>CHAS Accredited</span>
-                        </li>
-                        <li className="flex items-start gap-2">
-                          <svg
-                            className="w-4 h-4 text-brand-blue mt-0.5 flex-shrink-0"
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
-                          >
-                            <path
-                              fillRule="evenodd"
-                              d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                              clipRule="evenodd"
-                            />
-                          </svg>
-                          <span>Free Site Surveys</span>
-                        </li>
-                      </ul>
+                          {tag}
+                        </span>
+                      ))}
                     </div>
                   </div>
-                </aside>
+                )}
+
+                {/* Related Services */}
+                {frontmatter.relatedServices && frontmatter.relatedServices.length > 0 && (
+                  <div className="mt-8 pt-8 border-t border-gray-200">
+                    <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-4">
+                      Related Services
+                    </h3>
+                    <div className="flex flex-wrap gap-3">
+                      {frontmatter.relatedServices.map((serviceSlug) => (
+                        <Link
+                          key={serviceSlug}
+                          href={`/services/${serviceSlug}`}
+                          className="inline-flex items-center gap-2 bg-brand-blue/10 text-brand-blue font-medium text-sm px-4 py-2 rounded-full hover:bg-brand-blue/20 transition-colors"
+                        >
+                          {serviceSlug
+                            .split("-")
+                            .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+                            .join(" ")}
+                          <svg
+                            className="w-4 h-4"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M9 5l7 7-7 7"
+                            />
+                          </svg>
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Author Bio */}
+                <div className="mt-12">
+                  <AuthorCard name={frontmatter.author.name} role={frontmatter.author.role} />
+                </div>
               </div>
             </div>
           </section>
