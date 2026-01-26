@@ -382,7 +382,7 @@ Week 4 goal was to build a **complete deployment pipeline** for scaling from 2 s
 
 1. **Add NewRelic to Vercel**
    - Add environment variables to Vercel dashboard
-   - License key: `eu01xx6f831a3d097d26f11ecec56f98FFFFNRAL`
+   - License key: `<your-newrelic-license-key>` (get from NewRelic dashboard)
    - Redeploy to production
 
 2. **Test GitHub Actions Workflow**
