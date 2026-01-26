@@ -293,7 +293,7 @@ eb779f1 Update Week 4 progress - Day 3 complete
 
 1. **Add NewRelic to Vercel**
    - Add environment variables to Vercel dashboard
-   - License key: `eu01xx6f831a3d097d26f11ecec56f98FFFFNRAL`
+   - License key: `<your-newrelic-license-key>` (get from NewRelic dashboard)
    - Redeploy to production
 
 2. **Test GitHub Actions**

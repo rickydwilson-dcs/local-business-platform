@@ -1,9 +1,12 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import Image from "next/image";
 import type { Metadata } from "next";
 import Schema from "@/components/Schema";
 import Breadcrumbs from "@/components/ui/breadcrumbs";
+import { BlogPostHero } from "@/components/ui/blog-post-hero";
+import { BlogPostCard } from "@/components/ui/blog-post-card";
+import { AuthorCard } from "@/components/ui/author-card";
+import { ServiceCTA } from "@/components/ui/service-cta";
 import { getBlogPosts, getBlogPost, calculateReadingTime, type BlogPost } from "@/lib/content";
 import { getImageUrl } from "@/lib/image";
 import { absUrl } from "@/lib/site";
@@ -84,31 +87,25 @@ function RelatedPosts({ posts, currentSlug }: { posts: BlogPost[]; currentSlug: 
   return (
     <section className="section-standard bg-gray-50">
       <div className="container-standard">
-        <h2 className="heading-section mb-8">Related Articles</h2>
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="section-header">
+          <h2 className="heading-section">Related Articles</h2>
+          <p className="text-subtitle mx-auto max-w-2xl">
+            Continue reading with more expert insights and industry guidance
+          </p>
+        </div>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           {related.map((post) => (
-            <article
+            <BlogPostCard
               key={post.slug}
-              className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow"
-            >
-              {post.heroImage && (
-                <Link href={`/blog/${post.slug}`} className="block relative h-40 overflow-hidden">
-                  <Image
-                    src={getImageUrl(post.heroImage)}
-                    alt={post.title}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                  />
-                </Link>
-              )}
-              <div className="p-4">
-                <h3 className="font-bold text-gray-900 mb-2 line-clamp-2 hover:text-brand-blue transition-colors">
-                  <Link href={`/blog/${post.slug}`}>{post.title}</Link>
-                </h3>
-                <p className="text-sm text-gray-600 line-clamp-2">{post.excerpt}</p>
-              </div>
-            </article>
+              slug={post.slug}
+              title={post.title}
+              excerpt={post.excerpt}
+              heroImage={post.heroImage}
+              date={post.date}
+              readingTime={post.readingTime}
+              category={post.category}
+              categoryLabel={categoryLabels[post.category] || post.category}
+            />
           ))}
         </div>
       </div>
@@ -144,109 +141,120 @@ export default async function BlogPostPage({ params }: { params: Promise<Params>
       </div>
 
       <main>
-        {/* Hero Section */}
         <article>
-          <header className="section-standard bg-white">
-            <div className="container-standard max-w-4xl">
-              {/* Category Badge */}
-              <div className="mb-4">
-                <span className="bg-brand-blue text-white text-sm font-semibold px-4 py-1.5 rounded-full">
-                  {categoryLabels[frontmatter.category] || frontmatter.category}
-                </span>
-              </div>
+          {/* Hero Section - Matches ServiceHero pattern */}
+          <BlogPostHero
+            title={frontmatter.title}
+            excerpt={frontmatter.excerpt}
+            category={frontmatter.category}
+            categoryLabel={categoryLabels[frontmatter.category] || frontmatter.category}
+            date={frontmatter.date}
+            readingTime={readingTime}
+            author={frontmatter.author}
+            heroImage={frontmatter.heroImage}
+          />
 
-              {/* Title */}
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
-                {frontmatter.title}
-              </h1>
-
-              {/* Excerpt */}
-              <p className="text-xl text-gray-600 mb-8">{frontmatter.excerpt}</p>
-
-              {/* Meta Info */}
-              <div className="flex flex-wrap items-center gap-4 text-gray-600 mb-8">
-                <div className="flex items-center gap-2">
-                  <div className="w-10 h-10 bg-brand-blue rounded-full flex items-center justify-center text-white font-semibold">
-                    {frontmatter.author.name.charAt(0)}
+          {/* Article Content - Two Column Layout */}
+          <section className="section-standard bg-white">
+            <div className="container-standard">
+              <div className="grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-8 lg:gap-12 max-w-7xl mx-auto">
+                {/* Main Content Column */}
+                <div className="min-w-0">
+                  {/* Prose Content */}
+                  <div className="prose prose-lg max-w-none prose-headings:text-gray-900 prose-p:text-gray-700 prose-a:text-brand-blue prose-a:no-underline hover:prose-a:underline prose-strong:text-gray-900 prose-li:text-gray-700 prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-6 prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-4">
+                    {mdxContent}
                   </div>
-                  <div>
-                    <p className="font-medium text-gray-900">{frontmatter.author.name}</p>
-                    {frontmatter.author.role && (
-                      <p className="text-sm text-gray-500">{frontmatter.author.role}</p>
-                    )}
+
+                  {/* Tags */}
+                  {frontmatter.tags && frontmatter.tags.length > 0 && (
+                    <div className="mt-12 pt-8 border-t border-gray-200">
+                      <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-4">
+                        Topics
+                      </h3>
+                      <div className="flex flex-wrap gap-2">
+                        {frontmatter.tags.map((tag) => (
+                          <span
+                            key={tag}
+                            className="bg-gray-100 text-gray-700 text-sm px-4 py-2 rounded-full hover:bg-gray-200 transition-colors"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Related Services */}
+                  {frontmatter.relatedServices && frontmatter.relatedServices.length > 0 && (
+                    <div className="mt-8 pt-8 border-t border-gray-200">
+                      <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-4">
+                        Related Services
+                      </h3>
+                      <div className="flex flex-wrap gap-3">
+                        {frontmatter.relatedServices.map((serviceSlug) => (
+                          <Link
+                            key={serviceSlug}
+                            href={`/services/${serviceSlug}`}
+                            className="inline-flex items-center gap-2 bg-brand-blue/10 text-brand-blue font-medium text-sm px-4 py-2 rounded-full hover:bg-brand-blue/20 transition-colors"
+                          >
+                            {serviceSlug
+                              .split("-")
+                              .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+                              .join(" ")}
+                            <svg
+                              className="w-4 h-4"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M9 5l7 7-7 7"
+                              />
+                            </svg>
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Author Bio */}
+                  <div className="mt-12">
+                    <AuthorCard name={frontmatter.author.name} role={frontmatter.author.role} />
                   </div>
                 </div>
-                <span className="text-gray-300">|</span>
-                <time dateTime={frontmatter.date}>
-                  {new Date(frontmatter.date).toLocaleDateString("en-GB", {
-                    day: "numeric",
-                    month: "long",
-                    year: "numeric",
-                  })}
-                </time>
-                <span className="text-gray-300">|</span>
-                <span>{readingTime} min read</span>
-              </div>
 
-              {/* Hero Image */}
-              {frontmatter.heroImage && (
-                <div className="relative h-64 md:h-96 rounded-2xl overflow-hidden mb-8">
-                  <Image
-                    src={getImageUrl(frontmatter.heroImage)}
-                    alt={frontmatter.title}
-                    fill
-                    className="object-cover"
-                    priority
-                    sizes="(max-width: 768px) 100vw, 896px"
-                  />
-                </div>
-              )}
-            </div>
-          </header>
-
-          {/* Article Content */}
-          <section className="section-standard bg-white pt-0">
-            <div className="container-standard max-w-4xl">
-              <div className="prose prose-lg max-w-none prose-headings:text-gray-900 prose-p:text-gray-700 prose-a:text-brand-blue prose-a:no-underline hover:prose-a:underline prose-strong:text-gray-900 prose-li:text-gray-700">
-                {mdxContent}
-              </div>
-
-              {/* Tags */}
-              {frontmatter.tags && frontmatter.tags.length > 0 && (
-                <div className="mt-12 pt-8 border-t">
-                  <h3 className="text-sm font-semibold text-gray-500 uppercase mb-4">Tags</h3>
-                  <div className="flex flex-wrap gap-2">
-                    {frontmatter.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="bg-gray-100 text-gray-700 text-sm px-3 py-1 rounded-full"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* Related Services */}
-              {frontmatter.relatedServices && frontmatter.relatedServices.length > 0 && (
-                <div className="mt-8 pt-8 border-t">
-                  <h3 className="text-sm font-semibold text-gray-500 uppercase mb-4">
-                    Related Services
-                  </h3>
-                  <div className="flex flex-wrap gap-3">
-                    {frontmatter.relatedServices.map((serviceSlug) => (
+                {/* Sidebar Column - Sticky on Desktop */}
+                <aside className="hidden lg:block">
+                  <div className="sticky top-24 space-y-6">
+                    {/* CTA Card */}
+                    <div className="bg-gradient-to-br from-brand-blue to-brand-blue-hover rounded-2xl p-6 text-white shadow-lg">
+                      <h3 className="text-xl font-bold mb-3">Need Expert Scaffolding?</h3>
+                      <p className="text-sm text-white/90 mb-4 leading-relaxed">
+                        Get a free consultation and quote from our CISRS-qualified team across the
+                        South East.
+                      </p>
                       <Link
-                        key={serviceSlug}
-                        href={`/services/${serviceSlug}`}
-                        className="inline-flex items-center gap-2 bg-brand-blue/10 text-brand-blue font-medium text-sm px-4 py-2 rounded-full hover:bg-brand-blue/20 transition-colors"
+                        href="/contact"
+                        className="block w-full bg-white text-brand-blue text-center font-semibold py-3 px-4 rounded-lg hover:bg-gray-50 transition-colors"
                       >
-                        {serviceSlug
-                          .split("-")
-                          .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
-                          .join(" ")}
+                        Get Free Quote
+                      </Link>
+                      <Link
+                        href="/contact"
+                        className="block w-full mt-3 bg-white/10 text-white text-center font-semibold py-3 px-4 rounded-lg hover:bg-white/20 transition-colors border border-white/20"
+                      >
+                        Request Survey
+                      </Link>
+                    </div>
+
+                    {/* Quick Info Card */}
+                    <div className="bg-gray-50 rounded-2xl p-6 border border-gray-200">
+                      <h4 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
                         <svg
-                          className="w-4 h-4"
+                          className="w-5 h-5 text-brand-blue"
                           fill="none"
                           viewBox="0 0 24 24"
                           stroke="currentColor"
@@ -255,54 +263,83 @@ export default async function BlogPostPage({ params }: { params: Promise<Params>
                             strokeLinecap="round"
                             strokeLinejoin="round"
                             strokeWidth={2}
-                            d="M9 5l7 7-7 7"
+                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
                           />
                         </svg>
-                      </Link>
-                    ))}
+                        Why Choose Us
+                      </h4>
+                      <ul className="space-y-3 text-sm text-gray-700">
+                        <li className="flex items-start gap-2">
+                          <svg
+                            className="w-4 h-4 text-brand-blue mt-0.5 flex-shrink-0"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                          <span>TG20:21 Compliant</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <svg
+                            className="w-4 h-4 text-brand-blue mt-0.5 flex-shrink-0"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                          <span>£10M Public Liability</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <svg
+                            className="w-4 h-4 text-brand-blue mt-0.5 flex-shrink-0"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                          <span>CHAS Accredited</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <svg
+                            className="w-4 h-4 text-brand-blue mt-0.5 flex-shrink-0"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                          <span>Free Site Surveys</span>
+                        </li>
+                      </ul>
+                    </div>
                   </div>
-                </div>
-              )}
-
-              {/* Author Bio */}
-              <div className="mt-12 p-6 bg-gray-50 rounded-2xl">
-                <div className="flex items-start gap-4">
-                  <div className="w-16 h-16 bg-brand-blue rounded-full flex items-center justify-center text-white text-xl font-bold flex-shrink-0">
-                    {frontmatter.author.name.charAt(0)}
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-gray-900">{frontmatter.author.name}</h3>
-                    {frontmatter.author.role && (
-                      <p className="text-gray-600 mb-2">{frontmatter.author.role}</p>
-                    )}
-                    <p className="text-gray-600 text-sm">
-                      Our team of scaffolding professionals share their expertise to help you make
-                      informed decisions about your construction and maintenance projects.
-                    </p>
-                  </div>
-                </div>
+                </aside>
               </div>
             </div>
           </section>
 
-          {/* CTA Section */}
-          <section className="section-compact bg-brand-blue">
-            <div className="container-standard text-center">
-              <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
-                Need Professional Scaffolding Advice?
-              </h2>
-              <p className="text-blue-100 mb-8 max-w-2xl mx-auto">
-                Our expert team is ready to help with your scaffolding requirements across the South
-                East.
-              </p>
-              <Link
-                href="/contact"
-                className="inline-flex items-center justify-center px-8 py-4 bg-white text-brand-blue font-semibold rounded-lg hover:bg-gray-100 transition-colors"
-              >
-                Get Free Quote
-              </Link>
-            </div>
-          </section>
+          {/* CTA Section - Reusing ServiceCTA component */}
+          <ServiceCTA
+            title="Need Professional Scaffolding Advice?"
+            description="Our expert team is ready to help with your scaffolding requirements across the South East. Get a free consultation and quote today."
+            primaryAction="Get Free Quote"
+            primaryUrl="/contact"
+          />
         </article>
 
         {/* Related Posts */}
