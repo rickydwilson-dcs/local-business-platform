@@ -231,8 +231,10 @@ export default async function BlogPostPage({ params }: { params: Promise<Params>
           <ServiceCTA
             title="Need Professional Scaffolding Advice?"
             description="Our expert team is ready to help with your scaffolding requirements across the South East. Get a free consultation and quote today."
-            primaryAction="Get Free Quote"
+            primaryAction="Get a Free Quote"
             primaryUrl="/contact"
+            secondaryAction="Request a Site Survey"
+            secondaryUrl="/contact?type=survey"
           />
         </article>
 
