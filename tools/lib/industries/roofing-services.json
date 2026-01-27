@@ -1,0 +1,375 @@
+{
+  "industry": "roofing",
+  "version": "1.0.0",
+  "last_updated": "2026-01-27",
+  "total_services": 20,
+  "categories": ["Repairs", "Installation", "Maintenance", "Specialist", "Materials"],
+  "services": [
+    {
+      "slug": "roof-tile-replacement",
+      "title": "Roof Tile Replacement",
+      "description": "Expert replacement of broken, cracked, or missing roof tiles to prevent leaks and maintain roof integrity.",
+      "category": "Repairs",
+      "keywords": ["roof tile", "tile replacement", "broken tiles", "missing tiles", "roof repair"],
+      "typical_duration": "2-6 hours",
+      "price_range": "££",
+      "common_issues": [
+        "Tiles cracked from storm damage",
+        "Missing tiles leaving roof exposed",
+        "Slipped tiles after high winds"
+      ],
+      "related_services": ["roof-leak-repair", "ridge-tile-repair", "roof-inspection"]
+    },
+    {
+      "slug": "roof-leak-repair",
+      "title": "Roof Leak Repair",
+      "description": "Fast and effective leak detection and repair to stop water damage and protect your property interior.",
+      "category": "Repairs",
+      "keywords": [
+        "roof leak",
+        "leaking roof",
+        "water ingress",
+        "leak repair",
+        "roof waterproofing"
+      ],
+      "typical_duration": "2-8 hours",
+      "price_range": "££-£££",
+      "common_issues": [
+        "Water stains appearing on ceilings",
+        "Damp patches in loft space",
+        "Dripping during rainfall"
+      ],
+      "related_services": ["roof-tile-replacement", "flashing-repair", "roof-inspection"]
+    },
+    {
+      "slug": "flashing-repair",
+      "title": "Flashing Repair & Replacement",
+      "description": "Repair or replace lead and metal flashings around chimneys, walls, and roof joints to prevent water ingress.",
+      "category": "Repairs",
+      "keywords": [
+        "lead flashing",
+        "roof flashing",
+        "chimney flashing",
+        "lead work",
+        "flashing repair"
+      ],
+      "typical_duration": "2-6 hours",
+      "price_range": "££-£££",
+      "common_issues": [
+        "Gaps appearing around chimney base",
+        "Lead flashing lifting in wind",
+        "Corrosion on old flashing"
+      ],
+      "related_services": ["chimney-repairs", "roof-leak-repair", "leadwork"]
+    },
+    {
+      "slug": "ridge-tile-repair",
+      "title": "Ridge Tile Repair & Repointing",
+      "description": "Secure loose ridge tiles and repoint mortar beds to prevent water penetration along the roof apex.",
+      "category": "Repairs",
+      "keywords": ["ridge tiles", "ridge repair", "roof ridge", "ridge repointing", "loose tiles"],
+      "typical_duration": "3-6 hours",
+      "price_range": "££",
+      "common_issues": [
+        "Ridge tiles wobbling or loose",
+        "Mortar crumbling along ridge",
+        "Gap visible between ridge and tiles"
+      ],
+      "related_services": ["roof-tile-replacement", "dry-ridge-system", "roof-repointing"]
+    },
+    {
+      "slug": "emergency-roof-repair",
+      "title": "Emergency Roof Repair",
+      "description": "24/7 emergency response for storm damage, fallen trees, and urgent roof problems requiring immediate attention.",
+      "category": "Repairs",
+      "keywords": [
+        "emergency roofer",
+        "storm damage",
+        "urgent repair",
+        "roof emergency",
+        "24 hour roofing"
+      ],
+      "typical_duration": "2-8 hours",
+      "price_range": "£££",
+      "common_issues": [
+        "Storm causing major roof damage",
+        "Tree fallen onto roof",
+        "Severe leak during heavy rain"
+      ],
+      "related_services": ["roof-leak-repair", "temporary-roof-cover", "roof-tile-replacement"]
+    },
+    {
+      "slug": "new-roof-installation",
+      "title": "New Roof Installation",
+      "description": "Complete new roof construction for extensions, new builds, or total roof replacement with quality materials.",
+      "category": "Installation",
+      "keywords": [
+        "new roof",
+        "roof installation",
+        "roof construction",
+        "complete roof",
+        "roof build"
+      ],
+      "typical_duration": "1-3 weeks",
+      "price_range": "££££",
+      "common_issues": [
+        "Extension requiring new roof",
+        "New build project roofing",
+        "Complete roof structure replacement"
+      ],
+      "related_services": ["re-roofing", "roof-insulation", "roof-structure"]
+    },
+    {
+      "slug": "re-roofing",
+      "title": "Re-Roofing & Roof Replacement",
+      "description": "Strip and replace existing roof covering with new tiles or slates for a roof that will last decades.",
+      "category": "Installation",
+      "keywords": ["re-roof", "roof replacement", "new roof tiles", "roof strip", "roof renewal"],
+      "typical_duration": "3-7 days",
+      "price_range": "££££",
+      "common_issues": [
+        "Roof reached end of lifespan",
+        "Multiple persistent leaks",
+        "Extensive storm damage"
+      ],
+      "related_services": ["new-roof-installation", "roof-insulation", "fascias-soffits"]
+    },
+    {
+      "slug": "flat-roof-installation",
+      "title": "Flat Roof Installation",
+      "description": "Professional flat roof systems using felt, EPDM rubber, or GRP fibreglass for extensions and garages.",
+      "category": "Installation",
+      "keywords": ["flat roof", "EPDM roof", "GRP roof", "felt roof", "garage roof"],
+      "typical_duration": "1-3 days",
+      "price_range": "£££",
+      "common_issues": [
+        "Extension requiring flat roof",
+        "Garage roof replacement",
+        "Leaking existing flat roof"
+      ],
+      "related_services": ["flat-roof-repair", "roof-insulation", "fascias-soffits"]
+    },
+    {
+      "slug": "flat-roof-repair",
+      "title": "Flat Roof Repair",
+      "description": "Repair leaks, blisters, and damage on flat roofs to extend lifespan and prevent water damage.",
+      "category": "Installation",
+      "keywords": [
+        "flat roof repair",
+        "felt repair",
+        "roof blister",
+        "flat roof leak",
+        "rubber roof repair"
+      ],
+      "typical_duration": "2-6 hours",
+      "price_range": "££",
+      "common_issues": [
+        "Ponding water on flat roof",
+        "Blisters and bubbles in felt",
+        "Seams lifting or splitting"
+      ],
+      "related_services": ["flat-roof-installation", "roof-leak-repair", "roof-coating"]
+    },
+    {
+      "slug": "roof-inspection",
+      "title": "Roof Inspection & Survey",
+      "description": "Comprehensive roof inspection with detailed report identifying issues and recommended maintenance or repairs.",
+      "category": "Maintenance",
+      "keywords": [
+        "roof inspection",
+        "roof survey",
+        "roof check",
+        "roof assessment",
+        "roof report"
+      ],
+      "typical_duration": "1-2 hours",
+      "price_range": "£-££",
+      "common_issues": [
+        "Pre-purchase property inspection",
+        "Annual roof health check",
+        "Identifying source of leak"
+      ],
+      "related_services": ["roof-maintenance", "roof-leak-repair", "gutter-cleaning"]
+    },
+    {
+      "slug": "gutter-cleaning",
+      "title": "Gutter Cleaning",
+      "description": "Clear blocked gutters and downpipes to prevent water overflow and damage to walls and foundations.",
+      "category": "Maintenance",
+      "keywords": [
+        "gutter cleaning",
+        "blocked gutters",
+        "gutter clearance",
+        "downpipe cleaning",
+        "gutter maintenance"
+      ],
+      "typical_duration": "1-3 hours",
+      "price_range": "£-££",
+      "common_issues": [
+        "Gutters overflowing in rain",
+        "Plants growing from gutters",
+        "Water running down walls"
+      ],
+      "related_services": ["gutter-repair", "fascias-soffits", "roof-inspection"]
+    },
+    {
+      "slug": "moss-removal",
+      "title": "Roof Moss Removal",
+      "description": "Safe removal of moss, algae, and lichen from roof tiles to prevent damage and improve appearance.",
+      "category": "Maintenance",
+      "keywords": ["moss removal", "roof cleaning", "moss treatment", "algae removal", "roof moss"],
+      "typical_duration": "Half day - full day",
+      "price_range": "££-£££",
+      "common_issues": [
+        "Heavy moss growth lifting tiles",
+        "Green staining on roof",
+        "Moss blocking gutters"
+      ],
+      "related_services": ["roof-coating", "gutter-cleaning", "roof-inspection"]
+    },
+    {
+      "slug": "gutter-repair",
+      "title": "Gutter Repair & Replacement",
+      "description": "Fix leaking joints, sagging sections, and damaged guttering to ensure proper rainwater drainage.",
+      "category": "Maintenance",
+      "keywords": [
+        "gutter repair",
+        "leaking gutter",
+        "gutter replacement",
+        "gutter joints",
+        "gutter brackets"
+      ],
+      "typical_duration": "2-4 hours",
+      "price_range": "££",
+      "common_issues": [
+        "Joints leaking between sections",
+        "Gutters pulling away from fascia",
+        "Cracked or damaged sections"
+      ],
+      "related_services": ["gutter-cleaning", "fascias-soffits", "downpipe-replacement"]
+    },
+    {
+      "slug": "chimney-repairs",
+      "title": "Chimney Repairs",
+      "description": "Complete chimney maintenance including stack repointing, pot replacement, and cowl installation.",
+      "category": "Specialist",
+      "keywords": [
+        "chimney repair",
+        "chimney repointing",
+        "chimney pot",
+        "chimney cowl",
+        "chimney stack"
+      ],
+      "typical_duration": "Half day - 2 days",
+      "price_range": "££-£££",
+      "common_issues": [
+        "Crumbling mortar on chimney",
+        "Damaged or missing chimney pot",
+        "Birds nesting in chimney"
+      ],
+      "related_services": ["flashing-repair", "leadwork", "roof-tile-replacement"]
+    },
+    {
+      "slug": "skylight-installation",
+      "title": "Skylight & Roof Window Installation",
+      "description": "Install Velux and other roof windows to bring natural light into loft spaces and top floor rooms.",
+      "category": "Specialist",
+      "keywords": ["skylight", "Velux", "roof window", "loft window", "roof light"],
+      "typical_duration": "4-8 hours",
+      "price_range": "£££",
+      "common_issues": [
+        "Dark loft conversion needing light",
+        "Windowless top floor rooms",
+        "Replacing old, leaking skylights"
+      ],
+      "related_services": ["loft-conversion", "skylight-repair", "flashing-repair"]
+    },
+    {
+      "slug": "solar-panel-installation",
+      "title": "Solar Panel Roof Integration",
+      "description": "Roof preparation and mounting for solar panel installation, ensuring watertight integration with your roof.",
+      "category": "Specialist",
+      "keywords": [
+        "solar panels",
+        "PV installation",
+        "roof solar",
+        "solar mounting",
+        "renewable energy"
+      ],
+      "typical_duration": "1-2 days",
+      "price_range": "£££",
+      "common_issues": [
+        "Ensuring roof suitable for panels",
+        "Maintaining watertight roof",
+        "Optimising panel positioning"
+      ],
+      "related_services": ["roof-inspection", "roof-strengthening", "roof-tile-replacement"]
+    },
+    {
+      "slug": "leadwork",
+      "title": "Lead Roofing & Leadwork",
+      "description": "Specialist lead roofing for flat areas, valleys, and intricate details requiring traditional craftsmanship.",
+      "category": "Specialist",
+      "keywords": ["lead roofing", "lead work", "lead flashing", "lead valleys", "lead roof"],
+      "typical_duration": "1-5 days",
+      "price_range": "£££-££££",
+      "common_issues": [
+        "Bay window roof replacement",
+        "Lead valley repair",
+        "Period property restoration"
+      ],
+      "related_services": ["flashing-repair", "flat-roof-installation", "chimney-repairs"]
+    },
+    {
+      "slug": "slate-roofing",
+      "title": "Slate Roofing",
+      "description": "Traditional slate roofing installation and repair using natural or man-made slates for lasting quality.",
+      "category": "Materials",
+      "keywords": [
+        "slate roof",
+        "natural slate",
+        "slate tiles",
+        "slate repair",
+        "slate replacement"
+      ],
+      "typical_duration": "3-10 days",
+      "price_range": "££££",
+      "common_issues": [
+        "Heritage property requiring slate",
+        "Matching existing slate roof",
+        "Slate nails failing with age"
+      ],
+      "related_services": ["roof-tile-replacement", "re-roofing", "leadwork"]
+    },
+    {
+      "slug": "tile-roofing",
+      "title": "Tile Roofing",
+      "description": "Clay and concrete tile roofing for new installations and replacements with extensive colour and style options.",
+      "category": "Materials",
+      "keywords": ["roof tiles", "clay tiles", "concrete tiles", "tile roof", "roof tiling"],
+      "typical_duration": "3-7 days",
+      "price_range": "£££-££££",
+      "common_issues": [
+        "Choosing between tile types",
+        "Matching existing roof tiles",
+        "Upgrading from felt to tiles"
+      ],
+      "related_services": ["roof-tile-replacement", "re-roofing", "dry-ridge-system"]
+    },
+    {
+      "slug": "metal-roofing",
+      "title": "Metal Roofing",
+      "description": "Modern metal roofing systems including zinc, copper, and steel for contemporary and commercial applications.",
+      "category": "Materials",
+      "keywords": ["metal roof", "zinc roof", "copper roof", "standing seam", "steel roofing"],
+      "typical_duration": "3-10 days",
+      "price_range": "££££",
+      "common_issues": [
+        "Contemporary architectural design",
+        "Commercial building roofing",
+        "Low-pitch roof solutions"
+      ],
+      "related_services": ["flat-roof-installation", "leadwork", "cladding-installation"]
+    }
+  ]
+}
