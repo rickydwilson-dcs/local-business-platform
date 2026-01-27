@@ -36,6 +36,27 @@
     "setup:vercel-env-v2": "tsx tools/setup-vercel-env-v2.ts",
     "content:generate:services": "tsx tools/generate-services.ts",
     "content:generate:locations": "tsx tools/generate-locations.ts",
+    "sites:list": "tsx tools/manage-sites.ts list",
+    "sites:show": "tsx tools/manage-sites.ts show",
+    "sites:sync": "tsx tools/manage-sites.ts sync",
+    "sites:sync-all": "tsx tools/manage-sites.ts sync-all",
+    "sites:interactive": "tsx tools/manage-sites.ts interactive",
+    "registry": "tsx tools/manage-sites.ts",
+    "registry:list": "tsx tools/manage-sites.ts list",
+    "registry:sync": "tsx tools/manage-sites.ts sync-all",
+    "sync:vercel": "tsx tools/sync-external-services.ts sync-vercel",
+    "sync:vercel-all": "tsx tools/sync-external-services.ts sync-vercel-all",
+    "sync:newrelic": "tsx tools/sync-external-services.ts sync-newrelic",
+    "sync:newrelic-all": "tsx tools/sync-external-services.ts sync-newrelic-all",
+    "sync:all": "tsx tools/sync-external-services.ts sync-all",
+    "alerts": "tsx tools/alert-system.ts",
+    "alerts:check": "tsx tools/alert-system.ts check",
+    "alerts:check:dry": "tsx tools/alert-system.ts check --dry-run",
+    "alerts:list": "tsx tools/alert-system.ts list",
+    "alerts:ack": "tsx tools/alert-system.ts ack",
+    "alerts:resolve": "tsx tools/alert-system.ts resolve",
+    "alerts:notify": "tsx tools/alert-system.ts notify",
+    "alerts:cron": "tsx tools/alert-system.ts check --quiet && tsx tools/alert-system.ts notify --quiet",
     "changeset": "changeset",
     "version-packages": "changeset version",
     "release": "pnpm build && changeset publish"
@@ -46,6 +67,7 @@
     "@changesets/cli": "^2.29.8",
     "@eslint/eslintrc": "^3.3.3",
     "@google/generative-ai": "^0.24.1",
+    "@supabase/supabase-js": "^2.93.1",
     "@types/node": "^20",
     "dotenv": "^17.2.3",
     "glob": "^13.0.0",
@@ -74,5 +96,9 @@
     "overrides": {
       "vite": ">=7.1.11"
     }
+  },
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "commander": "^14.0.2"
   }
 }

@@ -1,0 +1,496 @@
+{
+  "industry": "building",
+  "version": "1.0.0",
+  "last_updated": "2026-01-27",
+  "total_services": 25,
+  "categories": ["Extensions", "Renovations", "Structural", "Exterior", "Commercial"],
+  "services": [
+    {
+      "slug": "single-storey-extension",
+      "title": "Single Storey Extension",
+      "description": "Professional single storey extensions to expand your living space with minimal disruption to your home.",
+      "category": "Extensions",
+      "keywords": [
+        "single storey extension",
+        "house extension",
+        "rear extension",
+        "side extension",
+        "home extension"
+      ],
+      "typical_duration": "8-12 weeks",
+      "price_range": "££££",
+      "common_issues": [
+        "Growing family needing more space",
+        "Kitchen too small for modern living",
+        "Wanting to add value to property"
+      ],
+      "related_services": ["double-storey-extension", "kitchen-renovation", "planning-permission"]
+    },
+    {
+      "slug": "double-storey-extension",
+      "title": "Double Storey Extension",
+      "description": "Comprehensive two-storey extensions providing maximum additional space and significant property value increase.",
+      "category": "Extensions",
+      "keywords": [
+        "double storey extension",
+        "two storey extension",
+        "house extension",
+        "home expansion",
+        "property extension"
+      ],
+      "typical_duration": "12-20 weeks",
+      "price_range": "££££",
+      "common_issues": [
+        "Need for both living space and bedrooms",
+        "Property too small but good location",
+        "Maximising available plot space"
+      ],
+      "related_services": ["single-storey-extension", "loft-conversion", "structural-alterations"]
+    },
+    {
+      "slug": "conservatory-construction",
+      "title": "Conservatory Construction",
+      "description": "Bespoke conservatory building to create bright, versatile living spaces connected to your garden.",
+      "category": "Extensions",
+      "keywords": ["conservatory", "sunroom", "garden room", "glass extension", "orangery"],
+      "typical_duration": "4-8 weeks",
+      "price_range": "£££-££££",
+      "common_issues": [
+        "Wanting connection between house and garden",
+        "Need for additional light in home",
+        "Cost-effective extension option"
+      ],
+      "related_services": ["single-storey-extension", "bi-fold-doors", "garden-room"]
+    },
+    {
+      "slug": "garden-room",
+      "title": "Garden Room & Home Office",
+      "description": "Custom garden rooms perfect for home offices, studios, or additional living space separate from main house.",
+      "category": "Extensions",
+      "keywords": ["garden room", "garden office", "home office", "garden studio", "outbuilding"],
+      "typical_duration": "2-6 weeks",
+      "price_range": "£££-££££",
+      "common_issues": [
+        "Need for dedicated home working space",
+        "Wanting private studio or gym",
+        "Guest accommodation requirements"
+      ],
+      "related_services": [
+        "conservatory-construction",
+        "garage-conversion",
+        "electrical-installation"
+      ]
+    },
+    {
+      "slug": "garage-conversion",
+      "title": "Garage Conversion",
+      "description": "Transform your garage into valuable living space with proper insulation, flooring, and finishing.",
+      "category": "Extensions",
+      "keywords": [
+        "garage conversion",
+        "garage to room",
+        "integral garage",
+        "garage renovation",
+        "living space"
+      ],
+      "typical_duration": "3-6 weeks",
+      "price_range": "£££",
+      "common_issues": [
+        "Garage unused for car storage",
+        "Need for extra bedroom or living room",
+        "Home office requirement"
+      ],
+      "related_services": ["loft-conversion", "single-storey-extension", "insulation"]
+    },
+    {
+      "slug": "kitchen-renovation",
+      "title": "Kitchen Renovation",
+      "description": "Complete kitchen renovations including layout changes, new units, worktops, and all plumbing and electrical work.",
+      "category": "Renovations",
+      "keywords": [
+        "kitchen renovation",
+        "kitchen refit",
+        "new kitchen",
+        "kitchen fitting",
+        "kitchen design"
+      ],
+      "typical_duration": "2-4 weeks",
+      "price_range": "£££-££££",
+      "common_issues": [
+        "Outdated kitchen needing modernisation",
+        "Poor layout affecting functionality",
+        "Extending kitchen into dining area"
+      ],
+      "related_services": ["kitchen-extension", "plumbing", "electrical-installation"]
+    },
+    {
+      "slug": "bathroom-renovation",
+      "title": "Bathroom Renovation",
+      "description": "Full bathroom renovations from design to completion, including tiling, plumbing, and luxury finishes.",
+      "category": "Renovations",
+      "keywords": [
+        "bathroom renovation",
+        "bathroom refit",
+        "new bathroom",
+        "bathroom fitting",
+        "ensuite"
+      ],
+      "typical_duration": "1-3 weeks",
+      "price_range": "£££-££££",
+      "common_issues": [
+        "Dated bathroom requiring update",
+        "Poor layout or lack of storage",
+        "Leaking or damaged fixtures"
+      ],
+      "related_services": ["ensuite-installation", "plumbing", "tiling"]
+    },
+    {
+      "slug": "loft-conversion",
+      "title": "Loft Conversion",
+      "description": "Expert loft conversions to create additional bedrooms, offices, or living space within your existing roofline.",
+      "category": "Renovations",
+      "keywords": ["loft conversion", "attic conversion", "loft room", "dormer", "velux"],
+      "typical_duration": "6-10 weeks",
+      "price_range": "££££",
+      "common_issues": [
+        "Need for extra bedroom without extending",
+        "Unused loft space going to waste",
+        "Growing family requiring more rooms"
+      ],
+      "related_services": ["dormer-construction", "ensuite-installation", "structural-alterations"]
+    },
+    {
+      "slug": "basement-conversion",
+      "title": "Basement Conversion",
+      "description": "Transform unused basement space into habitable rooms with proper tanking, ventilation, and finishing.",
+      "category": "Renovations",
+      "keywords": [
+        "basement conversion",
+        "cellar conversion",
+        "basement room",
+        "underground room",
+        "tanking"
+      ],
+      "typical_duration": "8-16 weeks",
+      "price_range": "££££",
+      "common_issues": [
+        "Damp basement unusable for storage",
+        "Need for additional living space",
+        "Property value increase opportunity"
+      ],
+      "related_services": ["damp-proofing", "tanking", "structural-alterations"]
+    },
+    {
+      "slug": "internal-alterations",
+      "title": "Internal Alterations & Remodelling",
+      "description": "Reconfigure internal layouts by removing or adding walls to create open-plan living or additional rooms.",
+      "category": "Renovations",
+      "keywords": [
+        "internal alterations",
+        "wall removal",
+        "open plan",
+        "remodelling",
+        "layout changes"
+      ],
+      "typical_duration": "1-4 weeks",
+      "price_range": "££-£££",
+      "common_issues": [
+        "Small, compartmentalised rooms",
+        "Dark hallways and corridors",
+        "Wanting modern open-plan living"
+      ],
+      "related_services": ["structural-alterations", "plastering", "electrical-installation"]
+    },
+    {
+      "slug": "foundation-work",
+      "title": "Foundation Work & Footings",
+      "description": "Professional foundation construction and repair for extensions, new builds, and structural support.",
+      "category": "Structural",
+      "keywords": [
+        "foundations",
+        "footings",
+        "ground work",
+        "concrete foundations",
+        "structural foundations"
+      ],
+      "typical_duration": "1-2 weeks",
+      "price_range": "£££-££££",
+      "common_issues": [
+        "Building extension requiring new foundations",
+        "Existing foundation settlement",
+        "Ground conditions requiring special solutions"
+      ],
+      "related_services": ["underpinning", "single-storey-extension", "drainage-installation"]
+    },
+    {
+      "slug": "damp-proofing",
+      "title": "Damp Proofing",
+      "description": "Comprehensive damp treatment including injection DPC, tanking, and remedial works to eliminate moisture problems.",
+      "category": "Structural",
+      "keywords": ["damp proofing", "rising damp", "DPC", "damp treatment", "moisture control"],
+      "typical_duration": "2-5 days",
+      "price_range": "££-£££",
+      "common_issues": [
+        "Rising damp affecting walls",
+        "Penetrating damp from outside",
+        "Damp smell and mould growth"
+      ],
+      "related_services": ["plastering", "basement-conversion", "wall-repointing"]
+    },
+    {
+      "slug": "underpinning",
+      "title": "Underpinning",
+      "description": "Strengthen existing foundations to address subsidence and allow for property alterations or load increases.",
+      "category": "Structural",
+      "keywords": [
+        "underpinning",
+        "subsidence",
+        "foundation repair",
+        "structural repair",
+        "ground movement"
+      ],
+      "typical_duration": "2-6 weeks",
+      "price_range": "££££",
+      "common_issues": [
+        "Cracks appearing in walls",
+        "Doors and windows not closing properly",
+        "Insurance company requiring works"
+      ],
+      "related_services": ["foundation-work", "structural-alterations", "crack-repair"]
+    },
+    {
+      "slug": "structural-alterations",
+      "title": "Structural Alterations",
+      "description": "Major structural changes including steel beam installation, load-bearing wall removal, and chimney breast removal.",
+      "category": "Structural",
+      "keywords": [
+        "structural alterations",
+        "steel beams",
+        "RSJ",
+        "load bearing",
+        "structural work"
+      ],
+      "typical_duration": "1-3 weeks",
+      "price_range": "£££-££££",
+      "common_issues": [
+        "Removing walls for open-plan living",
+        "Installing larger openings",
+        "Supporting new upper floor loads"
+      ],
+      "related_services": ["internal-alterations", "loft-conversion", "foundation-work"]
+    },
+    {
+      "slug": "chimney-repairs",
+      "title": "Chimney Repairs & Repointing",
+      "description": "Comprehensive chimney maintenance including repointing, rebuilding, lead work, and pot replacement.",
+      "category": "Structural",
+      "keywords": [
+        "chimney repair",
+        "chimney repointing",
+        "chimney stack",
+        "chimney pot",
+        "chimney rebuild"
+      ],
+      "typical_duration": "1-3 days",
+      "price_range": "££-£££",
+      "common_issues": [
+        "Crumbling mortar joints",
+        "Leaning or damaged stack",
+        "Water ingress through chimney"
+      ],
+      "related_services": ["roof-repairs", "wall-repointing", "leadwork"]
+    },
+    {
+      "slug": "rendering",
+      "title": "Rendering & External Wall Finishes",
+      "description": "High-quality rendering services including sand/cement, monocouche, and silicone renders for lasting protection.",
+      "category": "Exterior",
+      "keywords": ["rendering", "house render", "wall render", "external render", "monocouche"],
+      "typical_duration": "1-2 weeks",
+      "price_range": "£££",
+      "common_issues": [
+        "Cracked or falling render",
+        "Damp penetrating through walls",
+        "Wanting to update property appearance"
+      ],
+      "related_services": ["external-wall-insulation", "painting-decorating", "wall-repointing"]
+    },
+    {
+      "slug": "cladding-installation",
+      "title": "Cladding Installation",
+      "description": "External cladding installation using timber, composite, or other materials for improved aesthetics and insulation.",
+      "category": "Exterior",
+      "keywords": [
+        "cladding",
+        "external cladding",
+        "timber cladding",
+        "composite cladding",
+        "wall cladding"
+      ],
+      "typical_duration": "1-3 weeks",
+      "price_range": "£££-££££",
+      "common_issues": [
+        "Modernising dated property exterior",
+        "Adding insulation and weather protection",
+        "Covering poor quality brickwork"
+      ],
+      "related_services": ["rendering", "external-wall-insulation", "fascias-soffits"]
+    },
+    {
+      "slug": "fascias-soffits",
+      "title": "Fascias, Soffits & Guttering",
+      "description": "Replace or install fascia boards, soffits, and guttering to protect your roof edge and improve drainage.",
+      "category": "Exterior",
+      "keywords": ["fascias", "soffits", "guttering", "roofline", "UPVC fascias"],
+      "typical_duration": "1-3 days",
+      "price_range": "££-£££",
+      "common_issues": [
+        "Rotting timber fascias and soffits",
+        "Blocked or leaking gutters",
+        "Birds nesting in damaged roofline"
+      ],
+      "related_services": ["roof-repairs", "cladding-installation", "painting-decorating"]
+    },
+    {
+      "slug": "brickwork",
+      "title": "Brickwork & Blockwork",
+      "description": "Expert brickwork for extensions, garden walls, repairs, and decorative features with quality craftsmanship.",
+      "category": "Exterior",
+      "keywords": ["brickwork", "brick laying", "blockwork", "garden walls", "brick repairs"],
+      "typical_duration": "Varies by project",
+      "price_range": "££-££££",
+      "common_issues": [
+        "Extension requiring brick matching",
+        "Damaged brickwork needing repair",
+        "New garden or boundary walls"
+      ],
+      "related_services": ["wall-repointing", "rendering", "foundation-work"]
+    },
+    {
+      "slug": "wall-repointing",
+      "title": "Wall Repointing",
+      "description": "Restore mortar joints in brick and stonework to prevent water ingress and maintain structural integrity.",
+      "category": "Exterior",
+      "keywords": [
+        "repointing",
+        "mortar repair",
+        "brick pointing",
+        "stone pointing",
+        "joint repair"
+      ],
+      "typical_duration": "2-5 days",
+      "price_range": "££-£££",
+      "common_issues": [
+        "Crumbling mortar between bricks",
+        "Damp penetrating through joints",
+        "Poor previous pointing work"
+      ],
+      "related_services": ["brickwork", "damp-proofing", "chimney-repairs"]
+    },
+    {
+      "slug": "office-fit-out",
+      "title": "Office Fit-Out",
+      "description": "Complete office fit-out services from partitioning to electrical, creating productive working environments.",
+      "category": "Commercial",
+      "keywords": [
+        "office fit out",
+        "commercial fit out",
+        "office partitions",
+        "office refurbishment",
+        "workplace design"
+      ],
+      "typical_duration": "2-8 weeks",
+      "price_range": "££££",
+      "common_issues": [
+        "Moving to new office premises",
+        "Reconfiguring existing office layout",
+        "Upgrading dated office facilities"
+      ],
+      "related_services": ["retail-fit-out", "suspended-ceilings", "electrical-installation"]
+    },
+    {
+      "slug": "retail-fit-out",
+      "title": "Retail & Shop Fit-Out",
+      "description": "Transform retail spaces with custom shopfitting, displays, and fixtures to maximise customer engagement.",
+      "category": "Commercial",
+      "keywords": [
+        "shop fit out",
+        "retail fit out",
+        "shopfitting",
+        "retail refurbishment",
+        "store design"
+      ],
+      "typical_duration": "2-6 weeks",
+      "price_range": "£££-££££",
+      "common_issues": [
+        "Opening new retail location",
+        "Rebranding existing store",
+        "Improving customer flow and experience"
+      ],
+      "related_services": ["office-fit-out", "electrical-installation", "shop-front-installation"]
+    },
+    {
+      "slug": "suspended-ceilings",
+      "title": "Suspended Ceilings",
+      "description": "Commercial and residential suspended ceiling installation for improved acoustics and concealed services.",
+      "category": "Commercial",
+      "keywords": [
+        "suspended ceiling",
+        "drop ceiling",
+        "ceiling tiles",
+        "acoustic ceiling",
+        "commercial ceiling"
+      ],
+      "typical_duration": "2-5 days",
+      "price_range": "££-£££",
+      "common_issues": [
+        "Concealing services and pipework",
+        "Improving room acoustics",
+        "Creating modern ceiling finishes"
+      ],
+      "related_services": ["office-fit-out", "partitioning", "electrical-installation"]
+    },
+    {
+      "slug": "partitioning",
+      "title": "Partitioning & Stud Walls",
+      "description": "Create new rooms and divide spaces with professional stud wall and partition installation.",
+      "category": "Commercial",
+      "keywords": [
+        "partitioning",
+        "stud walls",
+        "room dividers",
+        "office partitions",
+        "plasterboard walls"
+      ],
+      "typical_duration": "2-5 days",
+      "price_range": "££-£££",
+      "common_issues": [
+        "Open plan needing private spaces",
+        "Creating additional rooms",
+        "Meeting room requirements"
+      ],
+      "related_services": ["office-fit-out", "internal-alterations", "plastering"]
+    },
+    {
+      "slug": "commercial-renovation",
+      "title": "Commercial Renovation",
+      "description": "Full commercial property renovations including structural, mechanical, electrical, and finishing works.",
+      "category": "Commercial",
+      "keywords": [
+        "commercial renovation",
+        "building refurbishment",
+        "commercial building",
+        "property renovation",
+        "building upgrade"
+      ],
+      "typical_duration": "4-16 weeks",
+      "price_range": "££££",
+      "common_issues": [
+        "Dated premises needing modernisation",
+        "Change of use requirements",
+        "Meeting current building regulations"
+      ],
+      "related_services": ["office-fit-out", "retail-fit-out", "structural-alterations"]
+    }
+  ]
+}
