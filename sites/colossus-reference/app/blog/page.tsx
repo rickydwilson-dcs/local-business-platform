@@ -1,8 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
-import Schema from "@/components/Schema";
-import Breadcrumbs from "@/components/ui/breadcrumbs";
+import { Schema } from "@/components/Schema";
+import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 import { getBlogPosts, type BlogPost } from "@/lib/content";
 import { getImageUrl } from "@/lib/image";
 import { absUrl } from "@/lib/site";

@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import Schema from "@/components/Schema";
-import Breadcrumbs from "@/components/ui/breadcrumbs";
+import { Schema } from "@/components/Schema";
+import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 import { PHONE_DISPLAY, PHONE_TEL, BUSINESS_EMAIL } from "@/lib/contact-info";
 
 type FormData = {
@@ -38,6 +38,24 @@ export default function ContactPage() {
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
+  const [csrfToken, setCsrfToken] = useState<string>("");
+
+  // Fetch CSRF token on component mount
+  useEffect(() => {
+    const fetchCsrfToken = async () => {
+      try {
+        const response = await fetch("/api/csrf-token");
+        if (response.ok) {
+          const data = await response.json();
+          setCsrfToken(data.token);
+        }
+      } catch (error) {
+        console.error("Failed to fetch CSRF token:", error);
+      }
+    };
+
+    fetchCsrfToken();
+  }, []);
 
   const services = [
     "Access Scaffolding",
@@ -79,11 +97,49 @@ export default function ContactPage() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "x-csrf-token": csrfToken,
         },
         body: JSON.stringify(formData),
       });
 
-      if (response.ok) {
+      // Handle CSRF token expiration
+      if (response.status === 403) {
+        // Token expired or invalid, fetch a new one and retry
+        const tokenResponse = await fetch("/api/csrf-token");
+        if (tokenResponse.ok) {
+          const data = await tokenResponse.json();
+          setCsrfToken(data.token);
+
+          // Retry the submission with the new token
+          const retryResponse = await fetch("/api/contact", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "x-csrf-token": data.token,
+            },
+            body: JSON.stringify(formData),
+          });
+
+          if (retryResponse.ok) {
+            setSubmitStatus("success");
+            setFormData({
+              name: "",
+              email: "",
+              phone: "",
+              subject: "",
+              service: "",
+              location: "",
+              message: "",
+              projectType: "residential",
+              urgency: "",
+            });
+          } else {
+            setSubmitStatus("error");
+          }
+        } else {
+          setSubmitStatus("error");
+        }
+      } else if (response.ok) {
         setSubmitStatus("success");
         setFormData({
           name: "",

@@ -96,7 +96,7 @@ type Props = {
   aggregateRating?: AggregateRatingSchema;
 };
 
-export default function Schema({
+export function Schema({
   service,
   faqs,
   org,

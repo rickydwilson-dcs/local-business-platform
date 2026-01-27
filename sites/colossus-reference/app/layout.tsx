@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import "./globals.css";
 import type { Metadata, Viewport } from "next";
-import MobileMenu from "@/components/ui/mobile-menu";
+import { MobileMenu } from "@/components/ui/mobile-menu";
 import { LocationsDropdown } from "@/components/ui/locations-dropdown";
 import { ConsentManager, Analytics, AnalyticsDebugPanel } from "@/components/analytics";
 import { Footer } from "@/components/ui/footer";

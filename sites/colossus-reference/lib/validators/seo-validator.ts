@@ -345,5 +345,3 @@ export const seoValidator: Validator = {
     };
   },
 };
-
-export default seoValidator;

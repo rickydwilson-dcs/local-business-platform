@@ -3,7 +3,7 @@ import Link from "next/link";
 import { getAllCounties } from "@/lib/locations-dropdown";
 import { absUrl } from "@/lib/site";
 import { PageLayout } from "@/components/layouts/page-layout";
-import Breadcrumbs from "@/components/ui/breadcrumbs";
+import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 import { CoverageStatsSection } from "@/components/ui/coverage-stats-section";
 import { TownFinderSection } from "@/components/ui/town-finder-section";
 import { CountyGatewayCards } from "@/components/ui/county-gateway-cards";
