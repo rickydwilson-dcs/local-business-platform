@@ -46,7 +46,7 @@ function getDefaultContent(slug: string): ServiceContent {
   };
 }
 
-export default function ServiceAbout({ serviceName, slug, about }: ServiceAboutProps) {
+export function ServiceAbout({ serviceName, slug, about }: ServiceAboutProps) {
   // Use about data from MDX if available, otherwise fall back to default content
   const content = about || getDefaultContent(slug);
 

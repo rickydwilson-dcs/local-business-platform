@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { absUrl } from "@/lib/site";
 import { Metadata } from "next";
-import Breadcrumbs from "@/components/ui/breadcrumbs";
+import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 import { AccreditationSection } from "@/components/ui/accreditation-section";
 import { getImageUrl } from "@/lib/image";
 import { PHONE_DISPLAY, PHONE_TEL } from "@/lib/contact-info";

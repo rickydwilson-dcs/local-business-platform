@@ -371,5 +371,3 @@ export const readabilityValidator: Validator = {
     };
   },
 };
-
-export default readabilityValidator;
