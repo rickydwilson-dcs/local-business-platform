@@ -1,0 +1,498 @@
+{
+  "industry": "gardening",
+  "version": "1.0.0",
+  "last_updated": "2026-01-27",
+  "total_services": 25,
+  "categories": ["Lawn Care", "Landscaping", "Tree Services", "Maintenance", "Seasonal Services"],
+  "services": [
+    {
+      "slug": "lawn-mowing",
+      "title": "Regular Lawn Mowing",
+      "description": "Professional lawn mowing service to keep your grass healthy, neat, and at the perfect height year-round.",
+      "category": "Lawn Care",
+      "keywords": [
+        "lawn mowing",
+        "grass cutting",
+        "lawn care",
+        "garden maintenance",
+        "lawn service"
+      ],
+      "typical_duration": "30 mins - 2 hours",
+      "price_range": "£-££",
+      "common_issues": [
+        "Lawn becoming overgrown between cuts",
+        "Uneven grass height after DIY mowing",
+        "Lack of time for regular garden maintenance"
+      ],
+      "related_services": ["lawn-edging", "lawn-fertilising", "lawn-treatment"]
+    },
+    {
+      "slug": "lawn-fertilising",
+      "title": "Lawn Fertilising & Treatment",
+      "description": "Professional fertiliser application to promote lush, green growth and strengthen your lawn against disease.",
+      "category": "Lawn Care",
+      "keywords": [
+        "lawn fertiliser",
+        "lawn feed",
+        "lawn treatment",
+        "green grass",
+        "lawn nutrition"
+      ],
+      "typical_duration": "1-2 hours",
+      "price_range": "££",
+      "common_issues": [
+        "Patchy or yellowing grass",
+        "Lawn not growing as thick as desired",
+        "Moss and weeds taking over"
+      ],
+      "related_services": ["lawn-mowing", "weed-control", "moss-treatment"]
+    },
+    {
+      "slug": "lawn-turfing",
+      "title": "Lawn Turfing & Installation",
+      "description": "Supply and lay quality turf to create an instant, beautiful lawn for your garden.",
+      "category": "Lawn Care",
+      "keywords": ["turf laying", "new lawn", "lawn installation", "turfing", "instant lawn"],
+      "typical_duration": "1-3 days",
+      "price_range": "£££-££££",
+      "common_issues": [
+        "Existing lawn beyond repair",
+        "New build property without lawn",
+        "Garden renovation requiring fresh start"
+      ],
+      "related_services": ["lawn-seeding", "soil-preparation", "lawn-levelling"]
+    },
+    {
+      "slug": "lawn-seeding",
+      "title": "Lawn Seeding & Overseeding",
+      "description": "Expert grass seeding to establish new lawns or repair bare patches for a thick, healthy coverage.",
+      "category": "Lawn Care",
+      "keywords": ["grass seed", "lawn seeding", "overseeding", "lawn repair", "bare patches"],
+      "typical_duration": "2-4 hours",
+      "price_range": "££",
+      "common_issues": [
+        "Bare patches from wear or pets",
+        "Thin lawn needing thickening",
+        "Cost-effective alternative to turfing"
+      ],
+      "related_services": ["lawn-turfing", "lawn-fertilising", "soil-preparation"]
+    },
+    {
+      "slug": "lawn-aeration",
+      "title": "Lawn Aeration",
+      "description": "Core aeration to reduce soil compaction, improve drainage, and promote deeper root growth.",
+      "category": "Lawn Care",
+      "keywords": [
+        "lawn aeration",
+        "core aeration",
+        "soil compaction",
+        "lawn health",
+        "grass roots"
+      ],
+      "typical_duration": "1-3 hours",
+      "price_range": "££",
+      "common_issues": [
+        "Waterlogged lawn after rain",
+        "Hard, compacted soil surface",
+        "Poor grass growth despite feeding"
+      ],
+      "related_services": ["lawn-scarifying", "lawn-fertilising", "lawn-treatment"]
+    },
+    {
+      "slug": "garden-design",
+      "title": "Garden Design & Planning",
+      "description": "Professional garden design service to transform your outdoor space with expert planning and planting schemes.",
+      "category": "Landscaping",
+      "keywords": [
+        "garden design",
+        "landscape design",
+        "garden planning",
+        "planting scheme",
+        "garden makeover"
+      ],
+      "typical_duration": "Consultation + design time",
+      "price_range": "£££-££££",
+      "common_issues": [
+        "Unsure how to improve garden layout",
+        "New property requiring complete garden",
+        "Existing garden feels tired and dated"
+      ],
+      "related_services": ["planting", "patio-installation", "garden-landscaping"]
+    },
+    {
+      "slug": "patio-installation",
+      "title": "Patio Installation",
+      "description": "Expert patio laying with quality materials and proper drainage for a stunning, long-lasting outdoor area.",
+      "category": "Landscaping",
+      "keywords": [
+        "patio installation",
+        "paving",
+        "patio laying",
+        "garden patio",
+        "outdoor paving"
+      ],
+      "typical_duration": "2-5 days",
+      "price_range": "£££-££££",
+      "common_issues": [
+        "Uneven or cracked existing patio",
+        "Garden lacking usable outdoor space",
+        "Poor drainage causing puddles"
+      ],
+      "related_services": ["decking-installation", "garden-landscaping", "garden-design"]
+    },
+    {
+      "slug": "decking-installation",
+      "title": "Decking Installation",
+      "description": "Custom decking solutions to create attractive, functional outdoor living spaces for entertaining.",
+      "category": "Landscaping",
+      "keywords": [
+        "decking",
+        "garden deck",
+        "timber decking",
+        "composite decking",
+        "outdoor decking"
+      ],
+      "typical_duration": "2-5 days",
+      "price_range": "£££-££££",
+      "common_issues": [
+        "Sloping garden difficult to use",
+        "Wanting outdoor entertainment area",
+        "Old decking rotting or unsafe"
+      ],
+      "related_services": ["patio-installation", "garden-landscaping", "fencing"]
+    },
+    {
+      "slug": "garden-landscaping",
+      "title": "Full Garden Landscaping",
+      "description": "Complete garden transformation including hard and soft landscaping to create your dream outdoor space.",
+      "category": "Landscaping",
+      "keywords": [
+        "landscaping",
+        "garden transformation",
+        "garden makeover",
+        "landscape gardening",
+        "garden renovation"
+      ],
+      "typical_duration": "1-4 weeks",
+      "price_range": "££££",
+      "common_issues": [
+        "Overgrown, neglected garden",
+        "Garden not suited to lifestyle needs",
+        "Moving into property with poor garden"
+      ],
+      "related_services": ["garden-design", "patio-installation", "planting"]
+    },
+    {
+      "slug": "fencing",
+      "title": "Fencing Installation & Repair",
+      "description": "Quality fence installation and repairs to provide security, privacy, and attractive garden boundaries.",
+      "category": "Landscaping",
+      "keywords": ["fencing", "garden fence", "fence installation", "fence repair", "fence panels"],
+      "typical_duration": "1-3 days",
+      "price_range": "££-£££",
+      "common_issues": [
+        "Storm-damaged fence panels",
+        "Rotten posts needing replacement",
+        "Need for increased privacy"
+      ],
+      "related_services": ["garden-landscaping", "gate-installation", "trellis-installation"]
+    },
+    {
+      "slug": "tree-pruning",
+      "title": "Tree Pruning & Shaping",
+      "description": "Expert tree pruning to maintain health, improve shape, and manage size while preserving tree structure.",
+      "category": "Tree Services",
+      "keywords": [
+        "tree pruning",
+        "tree trimming",
+        "tree shaping",
+        "crown reduction",
+        "tree maintenance"
+      ],
+      "typical_duration": "2-6 hours",
+      "price_range": "££-£££",
+      "common_issues": [
+        "Overgrown trees blocking light",
+        "Branches too close to property",
+        "Tree looking misshapen or unbalanced"
+      ],
+      "related_services": ["tree-removal", "hedge-trimming", "crown-lifting"]
+    },
+    {
+      "slug": "tree-removal",
+      "title": "Tree Removal & Felling",
+      "description": "Safe, professional tree removal including complete clearance of debris and optional stump removal.",
+      "category": "Tree Services",
+      "keywords": [
+        "tree removal",
+        "tree felling",
+        "tree cutting",
+        "tree surgeon",
+        "tree clearance"
+      ],
+      "typical_duration": "Half day - 2 days",
+      "price_range": "£££-££££",
+      "common_issues": [
+        "Dead or dying tree posing risk",
+        "Tree roots damaging foundations",
+        "Tree outgrown its space"
+      ],
+      "related_services": ["stump-grinding", "tree-pruning", "garden-clearance"]
+    },
+    {
+      "slug": "stump-grinding",
+      "title": "Stump Grinding & Removal",
+      "description": "Complete stump removal using specialist equipment to allow replanting or garden use of the area.",
+      "category": "Tree Services",
+      "keywords": [
+        "stump grinding",
+        "stump removal",
+        "tree stump",
+        "stump grinder",
+        "root removal"
+      ],
+      "typical_duration": "1-4 hours",
+      "price_range": "££-£££",
+      "common_issues": [
+        "Unsightly stump remaining after felling",
+        "Stump preventing lawn mowing",
+        "Wanting to use area for planting"
+      ],
+      "related_services": ["tree-removal", "garden-clearance", "lawn-turfing"]
+    },
+    {
+      "slug": "crown-lifting",
+      "title": "Crown Lifting",
+      "description": "Removal of lower branches to raise the crown, improving access and allowing more light into your garden.",
+      "category": "Tree Services",
+      "keywords": ["crown lifting", "branch removal", "tree lifting", "tree light", "low branches"],
+      "typical_duration": "2-4 hours",
+      "price_range": "££",
+      "common_issues": [
+        "Low branches obstructing pathways",
+        "Grass not growing under tree",
+        "Need for vehicle access below tree"
+      ],
+      "related_services": ["tree-pruning", "crown-thinning", "hedge-trimming"]
+    },
+    {
+      "slug": "hedge-trimming",
+      "title": "Hedge Trimming & Maintenance",
+      "description": "Professional hedge cutting to maintain shape, encourage dense growth, and keep boundaries tidy.",
+      "category": "Maintenance",
+      "keywords": [
+        "hedge trimming",
+        "hedge cutting",
+        "hedge maintenance",
+        "hedge shaping",
+        "privet hedge"
+      ],
+      "typical_duration": "1-4 hours",
+      "price_range": "££",
+      "common_issues": [
+        "Overgrown hedges blocking light",
+        "Hedges becoming patchy and thin",
+        "Neighbour disputes over boundary hedges"
+      ],
+      "related_services": ["tree-pruning", "hedge-planting", "garden-maintenance"]
+    },
+    {
+      "slug": "garden-maintenance",
+      "title": "Regular Garden Maintenance",
+      "description": "Ongoing garden care package including mowing, weeding, pruning, and general upkeep to keep your garden pristine.",
+      "category": "Maintenance",
+      "keywords": [
+        "garden maintenance",
+        "garden care",
+        "regular gardening",
+        "garden upkeep",
+        "garden service"
+      ],
+      "typical_duration": "2-4 hours per visit",
+      "price_range": "££",
+      "common_issues": [
+        "Lack of time for garden care",
+        "Garden getting out of control",
+        "Physical limitations preventing gardening"
+      ],
+      "related_services": ["lawn-mowing", "hedge-trimming", "weeding"]
+    },
+    {
+      "slug": "weeding",
+      "title": "Weeding & Weed Control",
+      "description": "Thorough weed removal from borders, beds, and paths with preventative treatments to stop regrowth.",
+      "category": "Maintenance",
+      "keywords": ["weeding", "weed control", "weed removal", "weed killer", "garden weeds"],
+      "typical_duration": "2-6 hours",
+      "price_range": "£-££",
+      "common_issues": [
+        "Weeds overtaking flower beds",
+        "Weeds growing through paving",
+        "Persistent weeds returning quickly"
+      ],
+      "related_services": ["garden-maintenance", "border-maintenance", "lawn-treatment"]
+    },
+    {
+      "slug": "planting",
+      "title": "Planting & Border Planting",
+      "description": "Expert plant selection and installation to create beautiful, thriving borders suited to your garden conditions.",
+      "category": "Maintenance",
+      "keywords": ["planting", "border planting", "flower beds", "shrub planting", "garden plants"],
+      "typical_duration": "Half day - 2 days",
+      "price_range": "££-£££",
+      "common_issues": [
+        "Empty borders needing colour",
+        "Wrong plants failing to thrive",
+        "Wanting low-maintenance planting"
+      ],
+      "related_services": ["garden-design", "border-maintenance", "garden-landscaping"]
+    },
+    {
+      "slug": "pressure-washing",
+      "title": "Pressure Washing & Cleaning",
+      "description": "High-pressure cleaning of patios, driveways, decking, and paths to remove dirt, moss, and stains.",
+      "category": "Maintenance",
+      "keywords": [
+        "pressure washing",
+        "jet washing",
+        "patio cleaning",
+        "driveway cleaning",
+        "path cleaning"
+      ],
+      "typical_duration": "2-6 hours",
+      "price_range": "££",
+      "common_issues": [
+        "Slippery, moss-covered patio",
+        "Stained and dirty driveway",
+        "Decking turning green with algae"
+      ],
+      "related_services": ["patio-installation", "decking-installation", "gutter-cleaning"]
+    },
+    {
+      "slug": "spring-garden-cleanup",
+      "title": "Spring Garden Cleanup",
+      "description": "Comprehensive spring preparation including pruning, clearing debris, and preparing beds for the growing season.",
+      "category": "Seasonal Services",
+      "keywords": [
+        "spring cleanup",
+        "spring gardening",
+        "garden preparation",
+        "spring tidy",
+        "garden clearance"
+      ],
+      "typical_duration": "Half day - full day",
+      "price_range": "££-£££",
+      "common_issues": [
+        "Garden neglected over winter",
+        "Dead plants needing removal",
+        "Beds needing preparation for planting"
+      ],
+      "related_services": ["garden-clearance", "planting", "lawn-treatment"]
+    },
+    {
+      "slug": "autumn-garden-prep",
+      "title": "Autumn Garden Preparation",
+      "description": "Prepare your garden for winter with leaf clearance, final cuts, bulb planting, and protection of tender plants.",
+      "category": "Seasonal Services",
+      "keywords": [
+        "autumn cleanup",
+        "fall gardening",
+        "leaf clearance",
+        "winter prep",
+        "bulb planting"
+      ],
+      "typical_duration": "Half day - full day",
+      "price_range": "££-£££",
+      "common_issues": [
+        "Fallen leaves smothering lawn",
+        "Tender plants needing protection",
+        "Preparing garden for dormant period"
+      ],
+      "related_services": ["leaf-clearance", "hedge-trimming", "lawn-treatment"]
+    },
+    {
+      "slug": "garden-clearance",
+      "title": "Garden Clearance",
+      "description": "Complete clearance of overgrown gardens, including removal of rubbish, debris, and unwanted vegetation.",
+      "category": "Seasonal Services",
+      "keywords": [
+        "garden clearance",
+        "garden rubbish",
+        "overgrown garden",
+        "garden waste",
+        "vegetation removal"
+      ],
+      "typical_duration": "1-3 days",
+      "price_range": "££-£££",
+      "common_issues": [
+        "Inherited overgrown garden",
+        "Garden neglected for years",
+        "Preparing for landscaping project"
+      ],
+      "related_services": ["garden-landscaping", "tree-removal", "spring-garden-cleanup"]
+    },
+    {
+      "slug": "leaf-clearance",
+      "title": "Leaf Clearance",
+      "description": "Efficient removal of fallen leaves from lawns, borders, and hard surfaces to prevent damage and mess.",
+      "category": "Seasonal Services",
+      "keywords": [
+        "leaf clearance",
+        "leaf removal",
+        "autumn leaves",
+        "leaf collection",
+        "lawn leaves"
+      ],
+      "typical_duration": "1-4 hours",
+      "price_range": "£-££",
+      "common_issues": [
+        "Leaves smothering and killing grass",
+        "Slippery leaves on paths and patios",
+        "Blocked drains from leaf buildup"
+      ],
+      "related_services": ["autumn-garden-prep", "garden-maintenance", "gutter-cleaning"]
+    },
+    {
+      "slug": "snow-clearance",
+      "title": "Snow & Ice Clearance",
+      "description": "Safe removal of snow and ice from driveways, paths, and steps to prevent accidents and ensure access.",
+      "category": "Seasonal Services",
+      "keywords": [
+        "snow clearance",
+        "ice removal",
+        "gritting",
+        "winter maintenance",
+        "path clearing"
+      ],
+      "typical_duration": "1-3 hours",
+      "price_range": "££",
+      "common_issues": [
+        "Icy paths creating slip hazards",
+        "Snow blocking driveway access",
+        "Need for emergency clearance"
+      ],
+      "related_services": ["garden-maintenance", "pressure-washing", "autumn-garden-prep"]
+    },
+    {
+      "slug": "irrigation-installation",
+      "title": "Irrigation System Installation",
+      "description": "Automated watering systems to keep your garden hydrated efficiently, saving time and water.",
+      "category": "Seasonal Services",
+      "keywords": [
+        "irrigation",
+        "garden watering",
+        "sprinkler system",
+        "automatic watering",
+        "drip irrigation"
+      ],
+      "typical_duration": "1-3 days",
+      "price_range": "£££-££££",
+      "common_issues": [
+        "Plants dying during holidays",
+        "Time-consuming manual watering",
+        "Uneven watering across garden"
+      ],
+      "related_services": ["garden-design", "planting", "garden-maintenance"]
+    }
+  ]
+}

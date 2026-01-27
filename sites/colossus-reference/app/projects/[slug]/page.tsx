@@ -18,11 +18,11 @@ export const dynamicParams = false;
 type Params = { slug: string };
 
 const categoryLabels: Record<string, string> = {
-  heritage: "Heritage project",
-  "new-build": "New Build project",
-  renovation: "Renovation project",
-  maintenance: "Maintenance project",
-  emergency: "Emergency project",
+  heritage: "Heritage Project",
+  "new-build": "New Build Project",
+  renovation: "Renovation Project",
+  maintenance: "Maintenance Project",
+  emergency: "Emergency Project",
 };
 
 export async function generateStaticParams() {
