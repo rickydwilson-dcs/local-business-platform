@@ -3,7 +3,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import type { MDXComponents as MDXMap } from "mdx/types";
-import Schema from "@/components/Schema";
+import { Schema } from "@/components/Schema";
 import { ServiceBenefits } from "@/components/ui/service-benefits";
 import { ContentCard } from "@/components/ui/content-card";
 

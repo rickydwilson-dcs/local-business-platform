@@ -338,5 +338,3 @@ export function clearUniquenessCache(): void {
 export function getUniquenesseCacheSize(): number {
   return contentFingerprintCache.size;
 }
-
-export default uniquenessValidator;

@@ -44,11 +44,51 @@ export default [
         { argsIgnorePattern: "^_", varsIgnorePattern: "^_" },
       ],
       "@typescript-eslint/no-explicit-any": "warn",
+      // Enforce named exports - codebase standard
+      "no-restricted-syntax": [
+        "error",
+        {
+          selector: "ExportDefaultDeclaration",
+          message:
+            "Default exports are not allowed. Use named exports instead (e.g., 'export function ComponentName' or 'export { ComponentName }').",
+        },
+      ],
     },
     settings: {
       react: {
         version: "detect",
       },
+    },
+  },
+  // Override for Next.js special files that REQUIRE default exports
+  {
+    files: [
+      "app/**/page.tsx",
+      "app/**/page-old.tsx", // Backup files with page structure
+      "app/**/layout.tsx",
+      "app/**/loading.tsx",
+      "app/**/error.tsx",
+      "app/**/not-found.tsx",
+      "app/**/template.tsx",
+      "app/**/default.tsx",
+      "app/sitemap.ts",
+      "app/**/sitemap.ts",
+      "app/robots.ts",
+      "app/manifest.ts",
+      "middleware.ts",
+      "next.config.ts",
+      "next.config.mjs",
+      "next.config.js",
+      "tailwind.config.ts",
+      "tailwind.config.js",
+      "postcss.config.mjs",
+      "postcss.config.js",
+      "vitest.config.ts",
+      "playwright.config.ts",
+      "mdx-components.tsx",
+    ],
+    rules: {
+      "no-restricted-syntax": "off",
     },
   },
 ];
