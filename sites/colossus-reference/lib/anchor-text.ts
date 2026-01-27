@@ -129,43 +129,27 @@ export function getLocationAnchorText(
 }
 
 /**
- * Generate anchor text for county links (more important, keep mostly exact)
+ * Generate anchor text for county links
+ * Returns just the county name for clean navigation
  */
 export function getCountyAnchorText(
   name: string,
-  slug: string,
-  index: number,
-  totalCounties: number
+  _slug: string,
+  _index: number,
+  _totalCounties: number
 ): string {
-  // Counties are important - 60% exact, 40% partial
-  if (index < Math.ceil(totalCounties * 0.6)) {
-    return name;
-  }
-  return LOCATION_SEMANTIC_MAP[slug] || `${name} coverage`;
+  return name;
 }
 
 /**
  * Generate anchor text for town links
+ * Returns just the town name for clean navigation
  */
 export function getTownAnchorText(
   name: string,
-  slug: string,
-  countyIndex: number,
-  townIndex: number
+  _slug: string,
+  _countyIndex: number,
+  _townIndex: number
 ): string {
-  // Alternate pattern based on position
-  const pattern = (countyIndex + townIndex) % 4;
-
-  switch (pattern) {
-    case 0:
-      return name; // Exact
-    case 1:
-      return `${name} scaffolding`; // Partial
-    case 2:
-      return LOCATION_SEMANTIC_MAP[slug] || name; // Semantic or exact
-    case 3:
-      return `Services in ${name}`; // Partial variant
-    default:
-      return name;
-  }
+  return name;
 }
