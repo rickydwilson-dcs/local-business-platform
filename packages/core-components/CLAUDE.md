@@ -42,10 +42,26 @@ Shared component library for the local business platform (`@platform/core-compon
 - Tailwind CSS only (no inline styles, no CSS-in-JS)
 - Use design tokens from consuming site's Tailwind config
 
-## Important Notes
+## Type-Checking
 
-**Type-check limitation:**
-Components use `@/` path aliases that only resolve in consuming sites. Type-check runs in consuming sites, not in this package directly.
+**Standalone type-check:**
+
+```bash
+pnpm run type-check  # Uses tsconfig.build.json
+```
+
+The package supports standalone type-checking via `tsconfig.build.json` which:
+
+- Maps `@/` path aliases to the package's `src/` directory
+- Excludes files that depend on site-specific implementations
+
+**Excluded from standalone type-check:**
+
+- `src/lib/mdx.tsx` - Depends on site's `mdx-components.tsx`
+- `src/lib/rate-limiter.ts` - Depends on `@upstash/redis` (site-provided)
+- `src/components/templates/content-page.tsx` - Depends on site's MDX config
+
+These files are still type-checked when building consuming sites.
 
 **Linting:**
 

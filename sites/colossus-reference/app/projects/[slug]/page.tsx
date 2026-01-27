@@ -1,8 +1,8 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
-import Schema from "@/components/Schema";
-import Breadcrumbs from "@/components/ui/breadcrumbs";
+import { Schema } from "@/components/Schema";
+import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 import { BlogPostHero } from "@/components/ui/blog-post-hero";
 import { ServiceFAQ } from "@/components/ui/service-faq";
 import { ServiceCTA } from "@/components/ui/service-cta";

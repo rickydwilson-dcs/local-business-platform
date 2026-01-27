@@ -3,6 +3,7 @@ import { Resend } from "resend";
 import { checkRateLimit } from "@/lib/rate-limiter";
 import { escapeHtml } from "@/lib/security/html-escape";
 import { extractClientIp } from "@/lib/security/ip-utils";
+import { validateCsrfToken } from "@/lib/security/csrf";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -24,6 +25,12 @@ function isValidEmail(email: string): boolean {
 }
 
 export async function POST(request: Request): Promise<Response> {
+  // CSRF token validation (prevents cross-site request forgery)
+  const csrfError = validateCsrfToken(request);
+  if (csrfError) {
+    return csrfError;
+  }
+
   // Rate limiting check using Upstash Redis
   // Use secure IP extraction with validation
   const ip = extractClientIp(request);

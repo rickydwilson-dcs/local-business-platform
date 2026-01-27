@@ -10,7 +10,7 @@ interface MobileMenuProps {
   phoneNumber: string;
 }
 
-export default function MobileMenu({ phoneNumber }: MobileMenuProps) {
+export function MobileMenu({ phoneNumber }: MobileMenuProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [locationsExpanded, setLocationsExpanded] = useState(false);
   const counties = getAllCounties();

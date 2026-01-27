@@ -11,7 +11,7 @@
   },
   "scripts": {
     "lint": "eslint src/",
-    "type-check": "echo 'Type-check runs in consuming sites (uses @/ path aliases)'"
+    "type-check": "tsc --project tsconfig.build.json --noEmit"
   },
   "keywords": [
     "components",

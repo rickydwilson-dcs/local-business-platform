@@ -94,7 +94,11 @@
   },
   "pnpm": {
     "overrides": {
-      "vite": ">=7.1.11"
+      "vite": ">=7.1.11",
+      "lodash": ">=4.17.23",
+      "next": ">=16.1.5",
+      "diff": ">=4.0.4",
+      "@smithy/config-resolver": ">=4.4.0"
     }
   },
   "dependencies": {

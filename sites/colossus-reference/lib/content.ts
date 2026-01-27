@@ -2,7 +2,6 @@
 import fs from "fs/promises";
 import path from "path";
 import matter from "gray-matter";
-import { getServiceData } from "./services-data";
 import { getLocationSlugs } from "./locations-config";
 import type {
   BlogFrontmatter,
@@ -17,6 +16,10 @@ export type ContentItem = {
   slug: string;
   title: string;
   description?: string;
+  badge?: string;
+  features?: string[];
+  subtitle?: string[];
+  image?: string;
   [key: string]: unknown;
 };
 
@@ -56,20 +59,24 @@ export async function getContentItems(contentType: ContentType): Promise<Content
         .map((w) => (w ? w[0].toUpperCase() + w.slice(1) : w))
         .join(" ");
 
-    // For services, merge with service data
-    const serviceData = contentType === "services" ? getServiceData(slug) : {};
+    // Extract service card display fields from MDX frontmatter
+    // (migrated from services-data.ts to comply with MDX-only architecture)
+    const badge = typeof data.badge === "string" ? data.badge : undefined;
+    const features = Array.isArray(data.features) ? data.features : undefined;
+    const subtitle = Array.isArray(data.subtitle) ? data.subtitle : undefined;
+
+    // Get hero image from frontmatter
+    const heroImage = data.hero?.image || data.heroImage;
 
     items.push({
       slug,
       title,
-      description:
-        serviceData.description ||
-        (typeof data.description === "string" ? data.description.trim() : undefined),
-      badge: serviceData.badge,
-      image: serviceData.image,
-      features: serviceData.features,
+      description: typeof data.description === "string" ? data.description.trim() : undefined,
+      badge,
+      features,
+      subtitle,
+      image: heroImage,
       ...data,
-      ...serviceData,
     });
   }
 

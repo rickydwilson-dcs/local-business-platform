@@ -1,4 +1,24 @@
-// lib/services-data.ts
+/**
+ * @deprecated This file is deprecated and will be removed in a future release.
+ *
+ * Service metadata (badge, features, subtitle) has been migrated to MDX frontmatter
+ * to comply with the MDX-only architecture principle documented in CLAUDE.md.
+ *
+ * Use the content.ts utilities instead:
+ *   import { getContentItems, getContentItem } from "@/lib/content"
+ *
+ * Service data is now read directly from:
+ *   content/services/{slug}.mdx frontmatter:
+ *     - badge: string (e.g., "Most Popular")
+ *     - features: string[] (e.g., ["TG20:21 Compliant", "CISRS Qualified"])
+ *     - subtitle: string[] (e.g., ["Office Buildings", "Retail Centers"])
+ *     - description: string (from MDX description)
+ *     - image: string (from hero.image)
+ *
+ * Migration completed: 2026-01-27
+ * @see /docs/architecture/ARCHITECTURE.md#mdx-only-architecture
+ * @see /sites/colossus-reference/CLAUDE.md
+ */
 
 export interface ServiceData {
   description?: string;
@@ -8,7 +28,17 @@ export interface ServiceData {
   subtitle?: string[];
 }
 
+/**
+ * @deprecated Use getContentItems("services") from "@/lib/content" instead.
+ * This function is kept temporarily for backward compatibility.
+ */
 export function getServiceData(slug: string): ServiceData {
+  console.warn(
+    `[DEPRECATED] getServiceData("${slug}") is deprecated. ` +
+      `Use getContentItems("services") from "@/lib/content" instead. ` +
+      `Service metadata now comes from MDX frontmatter.`
+  );
+
   const serviceMap: Record<string, ServiceData> = {
     "commercial-scaffolding": {
       description:

@@ -4,13 +4,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import { ServiceHero } from "@/components/ui/service-hero";
-import ServiceAbout from "@/components/ui/service-about";
+import { ServiceAbout } from "@/components/ui/service-about";
 import { ServiceBenefits } from "@/components/ui/service-benefits";
 import { ServiceGallery } from "@/components/ui/service-gallery";
 import { ServiceFAQ } from "@/components/ui/service-faq";
 import { ServiceCTA } from "@/components/ui/service-cta";
-import Breadcrumbs from "@/components/ui/breadcrumbs";
-import Schema from "@/components/Schema";
+import { Breadcrumbs } from "@/components/ui/breadcrumbs";
+import { Schema } from "@/components/Schema";
 import { absUrl } from "@/lib/site";
 
 export const dynamic = "force-static";

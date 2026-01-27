@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import Schema from "@/components/Schema";
-import Breadcrumbs from "@/components/ui/breadcrumbs";
+import { Schema } from "@/components/Schema";
+import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 import { getTestimonials, calculateAggregateRating, type Testimonial } from "@/lib/content";
 import { absUrl } from "@/lib/site";
 
