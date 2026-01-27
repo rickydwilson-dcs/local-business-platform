@@ -1,0 +1,530 @@
+{
+  "industry": "plumbing",
+  "version": "1.0.0",
+  "last_updated": "2026-01-27",
+  "total_services": 25,
+  "categories": [
+    "Emergency Services",
+    "Installation",
+    "Repairs",
+    "Maintenance",
+    "Specialist Services"
+  ],
+  "services": [
+    {
+      "slug": "emergency-burst-pipe-repair",
+      "title": "Emergency Burst Pipe Repair",
+      "description": "Rapid response burst pipe repair to minimise water damage and restore your plumbing system quickly.",
+      "category": "Emergency Services",
+      "keywords": ["burst pipe", "emergency plumber", "water leak", "pipe repair", "flood damage"],
+      "typical_duration": "1-3 hours",
+      "price_range": "££-£££",
+      "common_issues": [
+        "Water flooding through ceilings or walls",
+        "Frozen pipes bursting in winter",
+        "Sudden loss of water pressure"
+      ],
+      "related_services": ["water-leak-detection", "pipe-replacement", "emergency-plumbing-callout"]
+    },
+    {
+      "slug": "emergency-plumbing-callout",
+      "title": "24/7 Emergency Plumbing Callout",
+      "description": "Round-the-clock emergency plumbing service for urgent issues that cannot wait until morning.",
+      "category": "Emergency Services",
+      "keywords": [
+        "emergency plumber",
+        "24 hour plumber",
+        "urgent plumbing",
+        "out of hours",
+        "weekend plumber"
+      ],
+      "typical_duration": "1-4 hours",
+      "price_range": "£££",
+      "common_issues": [
+        "Blocked toilets causing flooding",
+        "No hot water during cold weather",
+        "Gas smell requiring immediate attention"
+      ],
+      "related_services": [
+        "emergency-burst-pipe-repair",
+        "blocked-drain-clearance",
+        "boiler-breakdown-repair"
+      ]
+    },
+    {
+      "slug": "water-leak-detection",
+      "title": "Water Leak Detection",
+      "description": "Professional leak detection using advanced equipment to locate hidden leaks without damaging your property.",
+      "category": "Emergency Services",
+      "keywords": [
+        "leak detection",
+        "water leak",
+        "hidden leak",
+        "damp investigation",
+        "thermal imaging"
+      ],
+      "typical_duration": "2-4 hours",
+      "price_range": "££-£££",
+      "common_issues": [
+        "Unexplained high water bills",
+        "Damp patches appearing on walls",
+        "Sound of running water when taps are off"
+      ],
+      "related_services": ["emergency-burst-pipe-repair", "pipe-replacement", "damp-proofing"]
+    },
+    {
+      "slug": "boiler-installation",
+      "title": "Boiler Installation",
+      "description": "Expert installation of energy-efficient boilers with full warranty and Gas Safe certification.",
+      "category": "Installation",
+      "keywords": [
+        "new boiler",
+        "boiler installation",
+        "combi boiler",
+        "gas boiler",
+        "boiler replacement"
+      ],
+      "typical_duration": "1-2 days",
+      "price_range": "£££-££££",
+      "common_issues": [
+        "Old boiler costing too much to run",
+        "Frequent breakdowns and repairs",
+        "Upgrading to a more efficient system"
+      ],
+      "related_services": [
+        "boiler-servicing",
+        "central-heating-installation",
+        "gas-safety-certificate"
+      ]
+    },
+    {
+      "slug": "toilet-installation",
+      "title": "Toilet Installation",
+      "description": "Professional toilet fitting and replacement, including removal of old unit and full testing.",
+      "category": "Installation",
+      "keywords": [
+        "toilet installation",
+        "new toilet",
+        "toilet replacement",
+        "WC fitting",
+        "bathroom plumbing"
+      ],
+      "typical_duration": "2-4 hours",
+      "price_range": "££",
+      "common_issues": [
+        "Cracked or damaged toilet bowl",
+        "Constant running or leaking cistern",
+        "Upgrading to a water-efficient model"
+      ],
+      "related_services": ["bathroom-plumbing", "toilet-repair", "bathroom-fitting"]
+    },
+    {
+      "slug": "sink-installation",
+      "title": "Sink Installation",
+      "description": "Expert fitting of kitchen and bathroom sinks with proper drainage and water supply connections.",
+      "category": "Installation",
+      "keywords": [
+        "sink installation",
+        "kitchen sink",
+        "bathroom sink",
+        "basin fitting",
+        "sink replacement"
+      ],
+      "typical_duration": "2-4 hours",
+      "price_range": "££",
+      "common_issues": [
+        "Replacing an old or damaged sink",
+        "Installing a new sink during renovation",
+        "Upgrading to a larger kitchen sink"
+      ],
+      "related_services": ["tap-installation", "kitchen-plumbing", "bathroom-plumbing"]
+    },
+    {
+      "slug": "tap-installation",
+      "title": "Tap Installation & Replacement",
+      "description": "Supply and fit new taps for kitchens and bathrooms, ensuring watertight seals and proper function.",
+      "category": "Installation",
+      "keywords": ["tap fitting", "new taps", "mixer tap", "kitchen tap", "bathroom tap"],
+      "typical_duration": "1-2 hours",
+      "price_range": "£-££",
+      "common_issues": [
+        "Old taps that are difficult to turn",
+        "Leaking tap bases or spouts",
+        "Upgrading to modern mixer taps"
+      ],
+      "related_services": ["tap-repair", "sink-installation", "kitchen-plumbing"]
+    },
+    {
+      "slug": "shower-installation",
+      "title": "Shower Installation",
+      "description": "Complete shower installation including electric, mixer, and power showers with waterproof sealing.",
+      "category": "Installation",
+      "keywords": [
+        "shower installation",
+        "electric shower",
+        "power shower",
+        "shower fitting",
+        "new shower"
+      ],
+      "typical_duration": "4-8 hours",
+      "price_range": "££-£££",
+      "common_issues": [
+        "Low water pressure affecting existing shower",
+        "Outdated shower unit needing replacement",
+        "Converting bath to shower enclosure"
+      ],
+      "related_services": ["bathroom-fitting", "shower-repair", "bathroom-plumbing"]
+    },
+    {
+      "slug": "central-heating-installation",
+      "title": "Central Heating Installation",
+      "description": "Full central heating system installation including boiler, radiators, and pipework throughout your home.",
+      "category": "Installation",
+      "keywords": [
+        "central heating",
+        "heating system",
+        "radiator installation",
+        "new heating",
+        "home heating"
+      ],
+      "typical_duration": "2-5 days",
+      "price_range": "££££",
+      "common_issues": [
+        "Property without existing central heating",
+        "Upgrading from storage heaters",
+        "Extending heating to new rooms"
+      ],
+      "related_services": ["boiler-installation", "radiator-installation", "underfloor-heating"]
+    },
+    {
+      "slug": "radiator-installation",
+      "title": "Radiator Installation",
+      "description": "Professional fitting of new radiators or replacement of existing units to improve heating efficiency.",
+      "category": "Installation",
+      "keywords": [
+        "radiator fitting",
+        "new radiator",
+        "radiator replacement",
+        "heating",
+        "designer radiator"
+      ],
+      "typical_duration": "2-4 hours",
+      "price_range": "££",
+      "common_issues": [
+        "Cold spots in certain rooms",
+        "Old radiators not heating efficiently",
+        "Adding radiators to extensions"
+      ],
+      "related_services": ["radiator-repair", "central-heating-installation", "power-flushing"]
+    },
+    {
+      "slug": "tap-repair",
+      "title": "Tap Repair",
+      "description": "Fix dripping, leaking, or faulty taps to stop water waste and annoying dripping sounds.",
+      "category": "Repairs",
+      "keywords": ["dripping tap", "tap repair", "leaking tap", "tap washer", "tap fix"],
+      "typical_duration": "30 mins - 1 hour",
+      "price_range": "£",
+      "common_issues": [
+        "Constant dripping when tap is closed",
+        "Difficulty turning tap on or off",
+        "Water spraying from tap base"
+      ],
+      "related_services": ["tap-installation", "kitchen-plumbing", "bathroom-plumbing"]
+    },
+    {
+      "slug": "blocked-drain-clearance",
+      "title": "Blocked Drain Clearance",
+      "description": "Fast and effective drain unblocking using professional equipment to restore proper drainage.",
+      "category": "Repairs",
+      "keywords": [
+        "blocked drain",
+        "drain unblocking",
+        "drain clearance",
+        "clogged drain",
+        "slow drain"
+      ],
+      "typical_duration": "1-2 hours",
+      "price_range": "££",
+      "common_issues": [
+        "Water draining slowly from sinks or baths",
+        "Unpleasant smells from drains",
+        "Toilet not flushing properly"
+      ],
+      "related_services": ["drain-jetting", "cctv-drain-survey", "toilet-repair"]
+    },
+    {
+      "slug": "toilet-repair",
+      "title": "Toilet Repair",
+      "description": "Expert repair of toilet flushing mechanisms, cisterns, and seals to restore proper function.",
+      "category": "Repairs",
+      "keywords": [
+        "toilet repair",
+        "cistern repair",
+        "toilet flush",
+        "running toilet",
+        "toilet leak"
+      ],
+      "typical_duration": "1-2 hours",
+      "price_range": "£-££",
+      "common_issues": [
+        "Toilet constantly running after flush",
+        "Weak or incomplete flush",
+        "Water leaking around base"
+      ],
+      "related_services": ["toilet-installation", "bathroom-plumbing", "blocked-drain-clearance"]
+    },
+    {
+      "slug": "radiator-repair",
+      "title": "Radiator Repair",
+      "description": "Diagnose and fix radiator problems including cold spots, leaks, and valve issues.",
+      "category": "Repairs",
+      "keywords": [
+        "radiator repair",
+        "cold radiator",
+        "radiator leak",
+        "radiator valve",
+        "bleeding radiators"
+      ],
+      "typical_duration": "1-2 hours",
+      "price_range": "£-££",
+      "common_issues": [
+        "Radiator cold at top or bottom",
+        "Leaking radiator valves",
+        "Radiator not heating at all"
+      ],
+      "related_services": ["radiator-installation", "power-flushing", "central-heating-repair"]
+    },
+    {
+      "slug": "pipe-replacement",
+      "title": "Pipe Replacement",
+      "description": "Replace old, corroded, or damaged pipes to prevent leaks and improve water flow throughout your property.",
+      "category": "Repairs",
+      "keywords": [
+        "pipe replacement",
+        "new pipes",
+        "copper pipes",
+        "lead pipe replacement",
+        "repiping"
+      ],
+      "typical_duration": "Half day - 2 days",
+      "price_range": "££-££££",
+      "common_issues": [
+        "Frequent leaks from old pipework",
+        "Discoloured water from corroded pipes",
+        "Lead pipes requiring replacement"
+      ],
+      "related_services": [
+        "emergency-burst-pipe-repair",
+        "water-leak-detection",
+        "bathroom-plumbing"
+      ]
+    },
+    {
+      "slug": "shower-repair",
+      "title": "Shower Repair",
+      "description": "Fix all types of shower problems from low pressure to temperature issues and leaks.",
+      "category": "Repairs",
+      "keywords": [
+        "shower repair",
+        "electric shower",
+        "shower leak",
+        "low pressure shower",
+        "shower fix"
+      ],
+      "typical_duration": "1-3 hours",
+      "price_range": "££",
+      "common_issues": [
+        "Shower not heating water properly",
+        "Low water pressure from showerhead",
+        "Water leaking from shower unit"
+      ],
+      "related_services": ["shower-installation", "bathroom-plumbing", "water-pressure-issues"]
+    },
+    {
+      "slug": "boiler-servicing",
+      "title": "Annual Boiler Service",
+      "description": "Comprehensive boiler service to maintain efficiency, safety, and extend your boiler's lifespan.",
+      "category": "Maintenance",
+      "keywords": [
+        "boiler service",
+        "annual service",
+        "boiler maintenance",
+        "gas service",
+        "boiler check"
+      ],
+      "typical_duration": "1 hour",
+      "price_range": "££",
+      "common_issues": [
+        "Warranty requirement for annual service",
+        "Boiler efficiency declining over time",
+        "Ensuring gas safety compliance"
+      ],
+      "related_services": [
+        "boiler-installation",
+        "gas-safety-certificate",
+        "boiler-breakdown-repair"
+      ]
+    },
+    {
+      "slug": "boiler-breakdown-repair",
+      "title": "Boiler Breakdown Repair",
+      "description": "Fast diagnosis and repair of boiler faults to restore heating and hot water to your home.",
+      "category": "Maintenance",
+      "keywords": [
+        "boiler repair",
+        "boiler breakdown",
+        "no hot water",
+        "heating repair",
+        "boiler fault"
+      ],
+      "typical_duration": "1-3 hours",
+      "price_range": "££-£££",
+      "common_issues": [
+        "Boiler not igniting or staying on",
+        "Error codes displaying on boiler",
+        "No heating or hot water"
+      ],
+      "related_services": ["boiler-servicing", "boiler-installation", "emergency-plumbing-callout"]
+    },
+    {
+      "slug": "power-flushing",
+      "title": "Central Heating Power Flush",
+      "description": "Deep clean your central heating system to remove sludge, rust, and debris for better efficiency.",
+      "category": "Maintenance",
+      "keywords": [
+        "power flush",
+        "central heating clean",
+        "radiator flush",
+        "system flush",
+        "heating efficiency"
+      ],
+      "typical_duration": "4-8 hours",
+      "price_range": "£££",
+      "common_issues": [
+        "Radiators slow to heat up",
+        "Cold spots on radiators",
+        "Noisy heating system"
+      ],
+      "related_services": ["radiator-repair", "boiler-servicing", "central-heating-repair"]
+    },
+    {
+      "slug": "drain-jetting",
+      "title": "High-Pressure Drain Jetting",
+      "description": "Professional drain cleaning using high-pressure water jets to clear stubborn blockages and buildup.",
+      "category": "Maintenance",
+      "keywords": [
+        "drain jetting",
+        "high pressure cleaning",
+        "drain cleaning",
+        "jet washing",
+        "sewer cleaning"
+      ],
+      "typical_duration": "1-3 hours",
+      "price_range": "££-£££",
+      "common_issues": [
+        "Recurring drain blockages",
+        "Tree roots in drainage system",
+        "Grease buildup in kitchen drains"
+      ],
+      "related_services": ["blocked-drain-clearance", "cctv-drain-survey", "drain-repair"]
+    },
+    {
+      "slug": "gas-safety-certificate",
+      "title": "Gas Safety Certificate (CP12)",
+      "description": "Legally required annual gas safety inspection for landlords, with official certificate provided.",
+      "category": "Specialist Services",
+      "keywords": ["gas safety", "CP12", "landlord certificate", "gas check", "gas inspection"],
+      "typical_duration": "30 mins - 1 hour",
+      "price_range": "££",
+      "common_issues": [
+        "Legal requirement for rental properties",
+        "Ensuring tenant safety",
+        "Annual renewal deadline approaching"
+      ],
+      "related_services": ["boiler-servicing", "boiler-installation", "gas-appliance-installation"]
+    },
+    {
+      "slug": "bathroom-fitting",
+      "title": "Complete Bathroom Fitting",
+      "description": "Full bathroom installation service including plumbing, fixtures, and finishing for a complete transformation.",
+      "category": "Specialist Services",
+      "keywords": [
+        "bathroom fitting",
+        "bathroom installation",
+        "new bathroom",
+        "bathroom renovation",
+        "bathroom refit"
+      ],
+      "typical_duration": "1-2 weeks",
+      "price_range": "££££",
+      "common_issues": [
+        "Outdated bathroom needing modernisation",
+        "Poor layout requiring redesign",
+        "Upgrading to accessible bathroom"
+      ],
+      "related_services": ["shower-installation", "toilet-installation", "bathroom-plumbing"]
+    },
+    {
+      "slug": "underfloor-heating",
+      "title": "Underfloor Heating Installation",
+      "description": "Efficient underfloor heating systems installed for comfortable, even warmth throughout your rooms.",
+      "category": "Specialist Services",
+      "keywords": [
+        "underfloor heating",
+        "floor heating",
+        "wet underfloor",
+        "radiant heating",
+        "UFH"
+      ],
+      "typical_duration": "2-5 days",
+      "price_range": "£££-££££",
+      "common_issues": [
+        "Cold floors in kitchens and bathrooms",
+        "Maximising space without radiators",
+        "Improving heating efficiency"
+      ],
+      "related_services": [
+        "central-heating-installation",
+        "boiler-installation",
+        "radiator-installation"
+      ]
+    },
+    {
+      "slug": "cctv-drain-survey",
+      "title": "CCTV Drain Survey",
+      "description": "Camera inspection of your drainage system to identify blockages, damage, or structural issues.",
+      "category": "Specialist Services",
+      "keywords": ["drain survey", "CCTV drain", "drain camera", "drain inspection", "pipe survey"],
+      "typical_duration": "1-2 hours",
+      "price_range": "££-£££",
+      "common_issues": [
+        "Unknown cause of recurring blockages",
+        "Pre-purchase property survey",
+        "Locating collapsed or damaged pipes"
+      ],
+      "related_services": ["blocked-drain-clearance", "drain-jetting", "drain-repair"]
+    },
+    {
+      "slug": "water-softener-installation",
+      "title": "Water Softener Installation",
+      "description": "Professional installation of water softening systems to eliminate limescale and protect appliances.",
+      "category": "Specialist Services",
+      "keywords": [
+        "water softener",
+        "limescale",
+        "hard water",
+        "water treatment",
+        "softener installation"
+      ],
+      "typical_duration": "3-5 hours",
+      "price_range": "£££",
+      "common_issues": [
+        "Heavy limescale buildup on taps",
+        "Appliances failing due to hard water",
+        "Dry skin and hair from hard water"
+      ],
+      "related_services": ["boiler-servicing", "kitchen-plumbing", "bathroom-plumbing"]
+    }
+  ]
+}

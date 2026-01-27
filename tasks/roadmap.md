@@ -2,8 +2,8 @@
 
 Strategic implementation roadmap for the white-label website platform. Updated as phases complete.
 
-**Last Updated:** 2026-01-26
-**Current Phase:** Week 6 Complete / Blog, Projects & Testimonials Content Types Live
+**Last Updated:** 2026-01-27
+**Current Phase:** Week 7 Complete / Site Registry & Monitoring
 
 > **Note:** For sprint-level task tracking, see [TODO.md](./TODO.md)
 
@@ -588,56 +588,91 @@ Strategic implementation roadmap for the white-label website platform. Updated a
 
 ---
 
-## 📊 Week 7: Registry & Monitoring
+## ✅ Week 7: Site Registry & Monitoring (COMPLETE - 2026-01-27)
 
 ### Site Registry (Supabase)
 
-- [ ] Set up Supabase account (free tier)
-- [ ] Design site registry schema
-  - [ ] Site metadata
-  - [ ] Deployment history
-  - [ ] Content generation logs
-  - [ ] Performance metrics
-- [ ] Create Supabase tables
-- [ ] Implement API client
-- [ ] Test CRUD operations
+- [x] Set up Supabase account (free tier)
+- [x] Design site registry schema
+  - [x] Site metadata (sites table)
+  - [x] Deployment history (deployments table)
+  - [x] Content generation logs (content_generations table)
+  - [x] Performance metrics (metrics, alerts tables)
+- [x] Create Supabase tables (tools/supabase-schema.sql - 370 lines)
+  - [x] 7 tables: sites, deployments, content_generations, metrics, alerts, activity_log, site_health
+  - [x] Row-level security policies
+  - [x] Indexes for performance
+  - [x] Foreign key relationships
+- [x] Implement API client (tools/lib/supabase-client.ts - 1,100 lines)
+  - [x] Full CRUD operations for all tables
+  - [x] Vercel deployment sync
+  - [x] NewRelic metrics sync
+  - [x] Health check aggregation
+  - [x] Alert management
+- [x] Test CRUD operations (tools/test-registry-client.ts - 100 lines)
 
 ### Management CLI
 
-- [ ] Create tools/manage-sites.ts
-- [ ] Implement commands:
-  - [ ] List all sites
-  - [ ] Show site details
-  - [ ] Update site config
-  - [ ] Sync site to registry
-  - [ ] Bulk operations
-- [ ] Add interactive mode
-- [ ] Test CLI commands
+- [x] Create tools/manage-sites.ts (650 lines)
+- [x] Implement commands:
+  - [x] `list` - List all sites with status
+  - [x] `show <site>` - Show site details
+  - [x] `sync <site>` - Sync site to registry
+  - [x] `sync-all` - Sync all sites
+  - [x] `set-status <site> <status>` - Update site status
+- [x] Add colored output and table formatting
+- [x] Test CLI commands
 
-### Monitoring Dashboard
+### Documentation (Week 7)
 
-- [ ] Design dashboard UI (simple React app)
-- [ ] Implement site overview
+- [x] Create tools/lib/REGISTRY_CLI.md (400 lines)
+  - [x] Complete command reference
+  - [x] Usage examples
+  - [x] Output format documentation
+- [x] Create tools/lib/REGISTRY_CLI_QUICKSTART.md (100 lines)
+  - [x] Quick setup guide
+  - [x] Common operations
+- [x] Create docs/guides/registry-setup.md (330 lines)
+  - [x] Supabase project setup
+  - [x] Environment configuration
+  - [x] Schema deployment instructions
+
+### External Service Integration
+
+- [x] Create tools/sync-external-services.ts (948 lines)
+  - [x] Vercel deployment sync
+  - [x] NewRelic metrics sync
+  - [x] Automated data refresh
+  - [x] CLI commands: sync:vercel, sync:newrelic, sync:all
+
+### Monitoring Dashboard (DEFERRED)
+
+- [ ] Design dashboard UI (simple React app) - Deferred to post-launch
+- [ ] Implement site overview - Deferred to post-launch
   - [ ] Deployment status
   - [ ] Build times
   - [ ] Error rates
   - [ ] Traffic metrics
-- [ ] Implement site detail view
-- [ ] Add performance charts
-- [ ] Deploy dashboard
+- [ ] Implement site detail view - Deferred to post-launch
+- [ ] Add performance charts - Deferred to post-launch
+- [ ] Deploy dashboard - Deferred to post-launch
+
+**Rationale:** Dashboard UI implementation deferred to post-launch. Design document complete at docs/architecture/MONITORING_DASHBOARD.md (860 lines). Can be built using Next.js + Supabase data when needed. CLI tools and alert system provide sufficient monitoring capabilities for launch.
 
 ### Automated Alerts
 
-- [ ] Set up alert rules
-  - [ ] Build failures
-  - [ ] Deployment failures
-  - [ ] High error rates
-  - [ ] Performance degradation
-- [ ] Configure notification channels
-  - [ ] Email
-  - [ ] Slack (optional)
-- [ ] Test alert system
-- [ ] Document alert procedures
+- [x] Create tools/alert-system.ts (1,112 lines)
+- [x] Set up alert rules
+  - [x] Build failures
+  - [x] Deployment failures
+  - [x] High error rates (>1%, >5% thresholds)
+  - [x] Performance degradation (>2000ms)
+- [x] Configure notification channels
+  - [x] Email (Resend API)
+  - [x] Slack (deferred)
+- [x] Test alert system
+- [x] Document alert procedures
+- [x] Create docs/architecture/MONITORING_DASHBOARD.md (860 lines)
 
 ---
 
@@ -784,13 +819,27 @@ Strategic implementation roadmap for the white-label website platform. Updated a
 
 ## 📊 Current Progress
 
-**Completed Weeks:** 6/8 (75%)
+**Completed Weeks:** 7/8 (87.5%)
 **Sites Deployed:** 2/50 (4%) - colossus-reference (86 pages - LIVE on www.colossus-scaffolding.co.uk), joes-plumbing-canterbury (12 pages)
 **Revenue Generated:** £0 (pre-launch)
 **Build Time:** ~9s with Turbo cache (target: <30s) ✅
 **Test Suite:** E2E smoke tests + full test suite, 100% pass rate ✅
 
-**Recent Achievements (2026-01-25 to 2026-01-26):**
+**Recent Achievements (2026-01-27):**
+
+- ✅ Week 7 COMPLETE - Site Registry & Monitoring
+  - ✅ Supabase registry database (7 tables, 370 lines schema)
+  - ✅ Registry API client (tools/lib/supabase-client.ts - 1,100 lines)
+  - ✅ Management CLI (tools/manage-sites.ts - 650 lines)
+  - ✅ CLI documentation (REGISTRY_CLI.md, REGISTRY_CLI_QUICKSTART.md)
+  - ✅ Setup guide (docs/guides/registry-setup.md)
+  - ✅ Connection test script (tools/test-registry-client.ts)
+  - ✅ External service sync (tools/sync-external-services.ts - 948 lines)
+  - ✅ Alert system (tools/alert-system.ts - 1,112 lines)
+  - ✅ Monitoring dashboard design (docs/architecture/MONITORING_DASHBOARD.md - 860 lines)
+  - ✅ Dashboard UI implementation deferred to post-launch
+
+**Previous Achievements (2026-01-25 to 2026-01-26):**
 
 - ✅ Week 5 COMPLETE - AI Content Generation Tools
   - ✅ AI provider abstraction (Claude + Gemini)
@@ -810,27 +859,27 @@ Strategic implementation roadmap for the white-label website platform. Updated a
   - ✅ Enhanced ServiceCTA component
   - ✅ Improved BlogPostHero component
 
-**On Track:** YES ✅ (AHEAD OF SCHEDULE - 75% complete)
-**Current Focus:** Week 7 - Registry & Monitoring
+**On Track:** YES ✅ (AHEAD OF SCHEDULE - 87.5% complete)
+**Current Focus:** Week 7 Complete - Moving to Week 8
 **Blockers:** None
 **Next Milestones:**
 
-1. Begin Week 7 - Site Registry & Management CLI
-2. Set up Supabase for site tracking
-3. Create management dashboard
-4. Implement automated alerts
-5. Week 8 - Production launch preparation
+1. Week 8 - Production launch preparation
+2. Industry libraries creation
+3. End-to-end workflow documentation
+4. First paying client onboarding
 
 ---
 
 ## 📈 Summary Statistics
 
-**Total Files Created/Modified (Weeks 5-6):**
+**Total Files Created/Modified (Weeks 5-7):**
 
 - Week 5: 28 files (7,945 lines added)
 - Week 6: 23 files (3,417 lines added)
 - Week 6 Refactor: 5 files (644 insertions, 551 deletions)
-- **Total New Code:** 11,362 lines
+- Week 7: 11 files (~4,970 lines added)
+- **Total New Code:** ~16,300 lines
 
 **New CLI Commands:**
 
@@ -838,6 +887,16 @@ Strategic implementation roadmap for the white-label website platform. Updated a
 - `pnpm content:generate:locations` - Generate location pages with AI
 - `pnpm test:ai` - Test AI provider connections
 - `npm run validate:quality` - Validate content quality (site level)
+- `npx ts-node tools/manage-sites.ts list` - List all registered sites
+- `npx ts-node tools/manage-sites.ts show <site>` - Show site details
+- `npx ts-node tools/manage-sites.ts sync <site>` - Sync site to registry
+- `npx ts-node tools/manage-sites.ts sync-all` - Sync all sites
+- `npx ts-node tools/manage-sites.ts set-status <site> <status>` - Update site status
+- `npx ts-node tools/sync-external-services.ts vercel` - Sync Vercel deployments
+- `npx ts-node tools/sync-external-services.ts newrelic` - Sync NewRelic metrics
+- `npx ts-node tools/sync-external-services.ts all` - Sync all external services
+- `npx ts-node tools/alert-system.ts check` - Check alert rules across all sites
+- `npx ts-node tools/alert-system.ts send <site>` - Send test alert for a site
 
 **New Routes Added:**
 
@@ -858,7 +917,7 @@ Strategic implementation roadmap for the white-label website platform. Updated a
 
 ---
 
-**Project Status:** Week 6 Complete - Content System Ready
+**Project Status:** Week 7 Complete - Site Registry & Monitoring
 **Target Completion:** Week 8
 **First Client Target:** Week 8
-**Progress:** 75% Complete (Ahead of Schedule)
+**Progress:** 87.5% Complete (Ahead of Schedule)
