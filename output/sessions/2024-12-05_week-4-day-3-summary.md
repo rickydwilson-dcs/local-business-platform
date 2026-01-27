@@ -107,6 +107,7 @@
    - ✅ Phased rollout simulation successful
 
 3. **Rollback**
+
    ```bash
    tsx tools/rollback.ts colossus-reference --list
    tsx tools/rollback.ts colossus-reference --dry-run
