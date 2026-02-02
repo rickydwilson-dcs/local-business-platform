@@ -16,6 +16,8 @@
     "test:e2e:chromium": "playwright test --project=chromium",
     "test:e2e:full": "E2E_FULL=1 playwright test",
     "validate:content": "tsx ../../scripts/validate-content.ts all",
+    "validate:quality": "tsx scripts/validate-quality.ts",
+    "validate:all": "npm run validate:content && npm run validate:quality",
     "clean": "rm -rf .next"
   },
   "dependencies": {
