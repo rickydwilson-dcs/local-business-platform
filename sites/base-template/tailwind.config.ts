@@ -18,8 +18,26 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      // Additional theme extensions can be added here
-      // The theme system plugin will merge these with the theme config
+      colors: {
+        // Brand colors mapped to theme system CSS variables
+        brand: {
+          primary: 'var(--color-brand-primary)',
+          'primary-hover': 'var(--color-brand-primary-hover)',
+          secondary: 'var(--color-brand-secondary)',
+          accent: 'var(--color-brand-accent)',
+        },
+        surface: {
+          background: 'var(--color-surface-background)',
+          foreground: 'var(--color-surface-foreground)',
+          muted: 'var(--color-surface-muted)',
+          'muted-foreground': 'var(--color-surface-muted-foreground)',
+          card: 'var(--color-surface-card)',
+          border: 'var(--color-surface-card-border)',
+          subtle: 'var(--color-surface-muted)',
+          inverse: 'var(--color-surface-foreground)',
+          'on-inverse': 'var(--color-surface-background)',
+        },
+      },
     },
   },
   plugins: [typography, createThemePlugin(themeConfig)],
