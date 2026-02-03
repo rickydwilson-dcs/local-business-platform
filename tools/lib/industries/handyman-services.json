@@ -1,0 +1,406 @@
+{
+  "industry": "handyman",
+  "version": "1.0.0",
+  "last_updated": "2026-02-03",
+  "total_services": 25,
+  "categories": [
+    "General Repairs",
+    "Assembly & Installation",
+    "Outdoor Maintenance",
+    "Home Improvements"
+  ],
+  "services": [
+    {
+      "slug": "flat-pack-assembly",
+      "title": "Flat Pack Furniture Assembly",
+      "description": "Professional assembly of flat pack furniture including wardrobes, beds, desks and storage units.",
+      "category": "Assembly & Installation",
+      "keywords": [
+        "flat pack",
+        "IKEA assembly",
+        "furniture assembly",
+        "flatpack",
+        "wardrobe assembly"
+      ],
+      "typical_duration": "1-4 hours",
+      "price_range": "£-££",
+      "common_issues": ["No time to assemble", "Complex instructions", "Missing or damaged parts"],
+      "related_services": ["furniture-moving", "shelf-installation", "wardrobe-fitting"]
+    },
+    {
+      "slug": "shelf-installation",
+      "title": "Shelf & Bracket Installation",
+      "description": "Secure installation of shelves, floating shelves and bracket systems on all wall types.",
+      "category": "Assembly & Installation",
+      "keywords": [
+        "shelf fitting",
+        "floating shelves",
+        "bracket installation",
+        "wall shelves",
+        "bookshelf"
+      ],
+      "typical_duration": "30 minutes - 2 hours",
+      "price_range": "£",
+      "common_issues": ["Don't know wall type", "Need secure fixing", "Heavy items to support"],
+      "related_services": ["tv-mounting", "picture-hanging", "curtain-pole-fitting"]
+    },
+    {
+      "slug": "tv-mounting",
+      "title": "TV Wall Mounting",
+      "description": "Safe and secure wall mounting of televisions including cable management and bracket installation.",
+      "category": "Assembly & Installation",
+      "keywords": [
+        "TV mounting",
+        "TV bracket",
+        "wall mount TV",
+        "television installation",
+        "cable hiding"
+      ],
+      "typical_duration": "1-2 hours",
+      "price_range": "£-££",
+      "common_issues": ["Finding wall studs", "Hiding cables neatly", "Choosing right bracket"],
+      "related_services": ["shelf-installation", "cable-management", "aerial-installation"]
+    },
+    {
+      "slug": "picture-hanging",
+      "title": "Picture & Mirror Hanging",
+      "description": "Professional hanging of pictures, mirrors and artwork including gallery walls and heavy items.",
+      "category": "Assembly & Installation",
+      "keywords": ["picture hanging", "mirror hanging", "artwork", "gallery wall", "heavy mirror"],
+      "typical_duration": "30 minutes - 2 hours",
+      "price_range": "£",
+      "common_issues": ["Heavy mirror safety", "Creating gallery wall", "Plaster or stud walls"],
+      "related_services": ["shelf-installation", "tv-mounting"]
+    },
+    {
+      "slug": "curtain-pole-fitting",
+      "title": "Curtain Pole & Blind Fitting",
+      "description": "Installation of curtain poles, tracks, roller blinds and venetian blinds to your windows.",
+      "category": "Assembly & Installation",
+      "keywords": [
+        "curtain pole",
+        "blind fitting",
+        "curtain rail",
+        "roller blind",
+        "venetian blind"
+      ],
+      "typical_duration": "30 minutes - 1 hour per window",
+      "price_range": "£",
+      "common_issues": ["Ensuring level fit", "Plaster crumbling", "Bay window fitting"],
+      "related_services": ["shelf-installation", "picture-hanging"]
+    },
+    {
+      "slug": "door-repairs",
+      "title": "Door Repairs & Adjustment",
+      "description": "Repair of sticking doors, loose hinges, faulty handles and door alignment issues.",
+      "category": "General Repairs",
+      "keywords": [
+        "door repair",
+        "sticking door",
+        "door adjustment",
+        "hinge repair",
+        "door handle"
+      ],
+      "typical_duration": "30 minutes - 2 hours",
+      "price_range": "£",
+      "common_issues": [
+        "Door won't close properly",
+        "Squeaky hinges",
+        "Dropped door scraping floor"
+      ],
+      "related_services": ["lock-repairs", "door-furniture-fitting", "draught-proofing"]
+    },
+    {
+      "slug": "lock-repairs",
+      "title": "Lock Repairs & Replacement",
+      "description": "Repair or replacement of door locks, window locks and broken lock mechanisms.",
+      "category": "General Repairs",
+      "keywords": ["lock repair", "lock replacement", "door lock", "window lock", "broken lock"],
+      "typical_duration": "30 minutes - 1 hour",
+      "price_range": "£",
+      "common_issues": [
+        "Key not turning smoothly",
+        "Lock mechanism jammed",
+        "Lost keys need lock change"
+      ],
+      "related_services": ["door-repairs", "door-furniture-fitting", "window-repairs"]
+    },
+    {
+      "slug": "window-repairs",
+      "title": "Window Repairs",
+      "description": "Repair of window handles, hinges, stays and mechanisms to restore proper operation.",
+      "category": "General Repairs",
+      "keywords": [
+        "window repair",
+        "window handle",
+        "window hinge",
+        "window lock",
+        "jammed window"
+      ],
+      "typical_duration": "30 minutes - 1 hour",
+      "price_range": "£",
+      "common_issues": [
+        "Window won't close properly",
+        "Broken handle",
+        "Stiff or jammed mechanism"
+      ],
+      "related_services": ["lock-repairs", "draught-proofing", "sealant-replacement"]
+    },
+    {
+      "slug": "sealant-replacement",
+      "title": "Sealant & Caulking",
+      "description": "Removal and replacement of old sealant around baths, showers, sinks and windows.",
+      "category": "General Repairs",
+      "keywords": [
+        "sealant",
+        "silicone",
+        "caulking",
+        "bathroom sealant",
+        "window sealant",
+        "mould"
+      ],
+      "typical_duration": "1-2 hours",
+      "price_range": "£",
+      "common_issues": ["Mouldy or discoloured sealant", "Leaking around bath", "Gaps appearing"],
+      "related_services": ["bathroom-repairs", "window-repairs", "grouting"]
+    },
+    {
+      "slug": "grouting",
+      "title": "Tile Regrouting",
+      "description": "Removal of old grout and regrouting of bathroom and kitchen tiles to refresh their appearance.",
+      "category": "General Repairs",
+      "keywords": ["grouting", "regrout", "tile grout", "grout repair", "bathroom tiles"],
+      "typical_duration": "2-4 hours",
+      "price_range": "£-££",
+      "common_issues": [
+        "Stained or mouldy grout",
+        "Crumbling grout",
+        "Want to change grout colour"
+      ],
+      "related_services": ["sealant-replacement", "bathroom-repairs", "tile-repairs"]
+    },
+    {
+      "slug": "tile-repairs",
+      "title": "Tile Repairs",
+      "description": "Replacement of cracked or damaged individual tiles and repair of loose tiles.",
+      "category": "General Repairs",
+      "keywords": ["tile repair", "cracked tile", "loose tile", "tile replacement", "chipped tile"],
+      "typical_duration": "1-2 hours",
+      "price_range": "£-££",
+      "common_issues": [
+        "Cracked tile from impact",
+        "Tiles coming loose",
+        "Matching replacement tiles"
+      ],
+      "related_services": ["grouting", "sealant-replacement", "bathroom-repairs"]
+    },
+    {
+      "slug": "bathroom-repairs",
+      "title": "Bathroom Repairs",
+      "description": "General bathroom repairs including toilet seats, towel rails, cabinet doors and accessories.",
+      "category": "General Repairs",
+      "keywords": [
+        "bathroom repair",
+        "toilet seat",
+        "towel rail",
+        "bathroom cabinet",
+        "bathroom accessories"
+      ],
+      "typical_duration": "30 minutes - 2 hours",
+      "price_range": "£",
+      "common_issues": ["Loose toilet seat", "Towel rail fallen off", "Cabinet door off hinges"],
+      "related_services": ["sealant-replacement", "grouting", "tap-repairs"]
+    },
+    {
+      "slug": "tap-repairs",
+      "title": "Tap Repairs",
+      "description": "Repair of dripping taps, stiff taps and replacement of washers and cartridges.",
+      "category": "General Repairs",
+      "keywords": ["tap repair", "dripping tap", "leaky tap", "tap washer", "stiff tap"],
+      "typical_duration": "30 minutes - 1 hour",
+      "price_range": "£",
+      "common_issues": ["Constant dripping", "Hard to turn on/off", "Tap leaking at base"],
+      "related_services": ["bathroom-repairs", "kitchen-repairs", "sealant-replacement"]
+    },
+    {
+      "slug": "kitchen-repairs",
+      "title": "Kitchen Repairs",
+      "description": "Repair of kitchen cabinets, drawers, hinges, handles and soft-close mechanisms.",
+      "category": "General Repairs",
+      "keywords": [
+        "kitchen repair",
+        "cabinet repair",
+        "drawer repair",
+        "kitchen hinge",
+        "soft close"
+      ],
+      "typical_duration": "30 minutes - 2 hours",
+      "price_range": "£",
+      "common_issues": ["Broken drawer runners", "Door hinges loose", "Soft-close not working"],
+      "related_services": ["door-furniture-fitting", "tap-repairs", "worktop-repairs"]
+    },
+    {
+      "slug": "door-furniture-fitting",
+      "title": "Door Furniture & Handle Fitting",
+      "description": "Installation of door handles, letter boxes, knockers, spy holes and door numbers.",
+      "category": "Assembly & Installation",
+      "keywords": ["door handle", "letter box", "door knocker", "spy hole", "door furniture"],
+      "typical_duration": "30 minutes - 1 hour",
+      "price_range": "£",
+      "common_issues": [
+        "Upgrading old handles",
+        "Adding security features",
+        "New door needs furniture"
+      ],
+      "related_services": ["door-repairs", "lock-repairs"]
+    },
+    {
+      "slug": "gutter-cleaning",
+      "title": "Gutter Cleaning",
+      "description": "Cleaning of gutters and downpipes to prevent blockages, overflows and water damage.",
+      "category": "Outdoor Maintenance",
+      "keywords": [
+        "gutter cleaning",
+        "blocked gutters",
+        "downpipe clearing",
+        "gutter clearance",
+        "leaf removal"
+      ],
+      "typical_duration": "1-3 hours",
+      "price_range": "£-££",
+      "common_issues": ["Overflowing in rain", "Plants growing in gutters", "Annual maintenance"],
+      "related_services": ["gutter-repairs", "pressure-washing", "roof-cleaning"]
+    },
+    {
+      "slug": "gutter-repairs",
+      "title": "Gutter Repairs",
+      "description": "Repair of leaking joints, sagging gutters, loose brackets and damaged downpipes.",
+      "category": "Outdoor Maintenance",
+      "keywords": [
+        "gutter repair",
+        "leaking gutter",
+        "sagging gutter",
+        "downpipe repair",
+        "gutter bracket"
+      ],
+      "typical_duration": "1-2 hours",
+      "price_range": "£-££",
+      "common_issues": [
+        "Water dripping between joints",
+        "Gutter pulling away from wall",
+        "Cracked or split guttering"
+      ],
+      "related_services": ["gutter-cleaning", "fascia-repairs"]
+    },
+    {
+      "slug": "pressure-washing",
+      "title": "Pressure Washing",
+      "description": "High-pressure cleaning of driveways, patios, decking, walls and outdoor surfaces.",
+      "category": "Outdoor Maintenance",
+      "keywords": [
+        "pressure washing",
+        "jet washing",
+        "driveway cleaning",
+        "patio cleaning",
+        "power washing"
+      ],
+      "typical_duration": "2-6 hours",
+      "price_range": "££",
+      "common_issues": ["Moss and algae growth", "Stained driveway", "Slippery patio"],
+      "related_services": ["patio-repairs", "decking-maintenance", "gutter-cleaning"]
+    },
+    {
+      "slug": "decking-maintenance",
+      "title": "Decking Maintenance",
+      "description": "Cleaning, treating and minor repairs to wooden decking to extend its life and appearance.",
+      "category": "Outdoor Maintenance",
+      "keywords": [
+        "decking maintenance",
+        "deck cleaning",
+        "deck treatment",
+        "deck oil",
+        "deck stain"
+      ],
+      "typical_duration": "2-4 hours",
+      "price_range": "£-££",
+      "common_issues": ["Slippery when wet", "Greying and weathering", "Loose or damaged boards"],
+      "related_services": ["pressure-washing", "fence-repairs", "garden-repairs"]
+    },
+    {
+      "slug": "fence-repairs",
+      "title": "Fence Repairs",
+      "description": "Repair of damaged fence panels, posts, rails and gates to restore security and privacy.",
+      "category": "Outdoor Maintenance",
+      "keywords": ["fence repair", "fence panel", "fence post", "blown down fence", "garden fence"],
+      "typical_duration": "1-4 hours",
+      "price_range": "£-££",
+      "common_issues": ["Storm damage", "Rotten posts", "Broken or missing panels"],
+      "related_services": ["gate-repairs", "decking-maintenance", "garden-repairs"]
+    },
+    {
+      "slug": "gate-repairs",
+      "title": "Gate Repairs & Adjustment",
+      "description": "Repair of garden gates, side gates and driveway gates including hinges, latches and alignment.",
+      "category": "Outdoor Maintenance",
+      "keywords": ["gate repair", "garden gate", "gate hinge", "gate latch", "sagging gate"],
+      "typical_duration": "1-2 hours",
+      "price_range": "£-££",
+      "common_issues": ["Gate dragging on ground", "Won't close properly", "Broken hinge or latch"],
+      "related_services": ["fence-repairs", "door-repairs", "lock-repairs"]
+    },
+    {
+      "slug": "draught-proofing",
+      "title": "Draught Proofing",
+      "description": "Installation of draught excluders on doors, windows and letter boxes to reduce heat loss.",
+      "category": "Home Improvements",
+      "keywords": [
+        "draught proofing",
+        "draft excluder",
+        "draught strip",
+        "door seal",
+        "window seal"
+      ],
+      "typical_duration": "1-3 hours",
+      "price_range": "£",
+      "common_issues": [
+        "Cold draughts from doors",
+        "Wind coming through windows",
+        "High heating bills"
+      ],
+      "related_services": ["door-repairs", "window-repairs", "loft-hatch-insulation"]
+    },
+    {
+      "slug": "loft-hatch-insulation",
+      "title": "Loft Hatch Insulation & Draught Proofing",
+      "description": "Insulation and sealing of loft hatches to prevent heat loss and improve energy efficiency.",
+      "category": "Home Improvements",
+      "keywords": ["loft hatch", "loft insulation", "attic hatch", "heat loss", "energy saving"],
+      "typical_duration": "1-2 hours",
+      "price_range": "£",
+      "common_issues": ["Cold air from loft", "Uninsulated hatch", "Poor fitting door"],
+      "related_services": ["draught-proofing", "loft-ladder-fitting"]
+    },
+    {
+      "slug": "loft-ladder-fitting",
+      "title": "Loft Ladder Installation",
+      "description": "Installation of folding loft ladders for safe and easy access to your loft space.",
+      "category": "Home Improvements",
+      "keywords": ["loft ladder", "attic ladder", "loft access", "folding ladder", "loft hatch"],
+      "typical_duration": "2-4 hours",
+      "price_range": "££",
+      "common_issues": ["No safe loft access", "Old ladder unsafe", "Creating storage space"],
+      "related_services": ["loft-hatch-insulation", "loft-boarding"]
+    },
+    {
+      "slug": "loft-boarding",
+      "title": "Loft Boarding",
+      "description": "Installation of loft boards to create storage space above your insulation.",
+      "category": "Home Improvements",
+      "keywords": ["loft boarding", "loft storage", "attic floor", "loft boards", "loft flooring"],
+      "typical_duration": "4-8 hours",
+      "price_range": "££-£££",
+      "common_issues": ["Need more storage", "Can't walk in loft", "Want to use loft space"],
+      "related_services": ["loft-ladder-fitting", "loft-hatch-insulation"]
+    }
+  ]
+}
