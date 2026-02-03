@@ -146,20 +146,207 @@ This generates CSS variables and Tailwind utilities based on your theme configur
 
 ```
 sites/base-template/
-├── app/                      # Next.js app directory (pages)
-├── components/               # Local component overrides
+├── app/                      # Next.js app directory
+│   ├── blog/                # Blog listing and posts
+│   ├── locations/           # Location listing and pages
+│   ├── projects/            # Projects/portfolio pages
+│   ├── reviews/             # Customer reviews page
+│   └── services/            # Service listing and pages
+├── components/
+│   ├── Schema.tsx           # Schema.org JSON-LD component
+│   └── ui/                  # Reusable UI components
 ├── content/                  # MDX content files
+│   ├── blog/                # Blog posts
+│   ├── locations/           # Location pages
+│   ├── projects/            # Project case studies
 │   ├── services/            # Service pages
-│   └── locations/           # Location pages
+│   └── testimonials/        # Customer testimonials
 ├── lib/                      # Utility functions
+│   ├── content.ts           # Content loading utilities
+│   ├── content-schemas.ts   # Zod validation schemas
+│   ├── image.ts             # Image URL utilities
+│   ├── mdx.tsx              # MDX rendering utilities
+│   ├── schema.ts            # Schema.org generators
+│   └── site.ts              # Site URL utilities
 ├── public/                   # Static assets
 ├── site.config.ts           # Business configuration
 ├── theme.config.ts          # Theme configuration
 ├── tailwind.config.ts       # Tailwind + theme system
+├── mdx-components.tsx       # Custom MDX components
 ├── next.config.ts           # Next.js configuration
 ├── tsconfig.json            # TypeScript configuration
-├── package.json             # Dependencies and scripts
-└── README.md                # This file
+└── package.json             # Dependencies and scripts
+```
+
+## UI Components
+
+The template includes a comprehensive UI component library in `components/ui/`:
+
+### Content Components
+
+- **Breadcrumbs** - Navigation breadcrumb trail
+- **BlogPostCard** - Blog post preview card
+- **BlogPostHero** - Blog/project hero section
+- **ArticleCallout** - Highlighted callout boxes
+- **AuthorCard** - Author bio card
+
+### Service/Location Components
+
+- **PageHero** - Generic page hero section
+- **ServiceHero** - Service-specific hero with CTA
+- **LocationHero** - Location-specific hero
+- **ServiceAbout** - Detailed service information
+- **ServiceBenefits** - Benefits grid
+- **FAQSection** - Accordion FAQ list
+- **CTASection** - Call-to-action banner
+
+### Testimonial Components
+
+- **StarRating** - Star rating display
+- **AggregateRatingDisplay** - Overall rating summary
+- **TestimonialCard** - Individual review card
+
+### Layout Components
+
+- **ContentCard** - Generic content card
+- **ContentGrid** - Responsive content grid
+- **CardGrid** - Simple card grid
+
+All components use theme CSS variables (`brand-primary`, `surface-foreground`, etc.) for consistent branding.
+
+## Content Schemas
+
+All content types have Zod validation schemas in `lib/content-schemas.ts`:
+
+### Service Frontmatter
+
+```yaml
+---
+title: 'Service Name'
+seoTitle: 'SEO Title | Business Name'
+description: '50-200 character description'
+keywords:
+  - keyword1
+  - keyword2
+badge: 'Optional Badge Text'
+hero:
+  image: '/images/service-hero.webp'
+benefits:
+  - 'Benefit 1'
+  - 'Benefit 2'
+about:
+  whatIs: 'What this service is...'
+  whenNeeded:
+    - 'Use case 1'
+    - 'Use case 2'
+  whatAchieve:
+    - 'Outcome 1'
+    - 'Outcome 2'
+faqs:
+  - question: 'Question?'
+    answer: 'Answer...'
+---
+```
+
+### Location Frontmatter
+
+```yaml
+---
+title: 'Location Name'
+seoTitle: 'Services in Location | Business Name'
+description: '50-200 character description'
+keywords:
+  - location keyword
+hero:
+  title: 'Custom Hero Title'
+  description: 'Hero description'
+  image: '/images/location.webp'
+  trustBadges:
+    - 'Licensed'
+    - 'Insured'
+towns:
+  - 'Town 1'
+  - 'Town 2'
+faqs:
+  - question: 'Location-specific question?'
+    answer: 'Answer...'
+---
+```
+
+### Blog Post Frontmatter
+
+```yaml
+---
+title: 'Post Title'
+seoTitle: 'SEO Title'
+description: 'Post excerpt'
+excerpt: 'Short excerpt for cards'
+date: '2025-01-15'
+category: 'industry-tips' # industry-tips, how-to-guide, case-study, seasonal, news
+author:
+  name: 'Author Name'
+  role: 'Author Role'
+heroImage: '/images/blog-post.webp'
+readingTime: 5
+featured: true
+tags:
+  - tag1
+  - tag2
+keywords:
+  - keyword1
+relatedServices:
+  - service-slug
+---
+```
+
+### Project Frontmatter
+
+```yaml
+---
+title: 'Project Title'
+seoTitle: 'SEO Title'
+description: 'Project description'
+keywords:
+  - keyword1
+heroImage: '/images/project.webp'
+projectType: 'residential' # residential, commercial, industrial, heritage
+category: 'renovation' # heritage, new-build, renovation, maintenance, emergency
+completionDate: '2025-01-15'
+year: 2025
+location: 'location-slug'
+locationName: 'Location Name'
+duration: '4 weeks'
+services:
+  - service-slug-1
+  - service-slug-2
+results:
+  - 'Outcome 1'
+  - 'Outcome 2'
+client:
+  type: 'Commercial Client'
+  testimonial: 'Great work...'
+  rating: 5
+status: 'completed' # completed, featured, draft
+---
+```
+
+### Testimonial Frontmatter
+
+```yaml
+---
+customerName: 'John Smith'
+customerRole: 'Homeowner'
+customerCompany: 'Optional Company'
+location: 'Location Name'
+locationSlug: 'location-slug'
+service: 'Service Name'
+serviceSlug: 'service-slug'
+rating: 5
+date: '2025-01-15'
+text: 'Full testimonial text...'
+featured: true
+verified: true
+---
 ```
 
 ## Content Guidelines
@@ -170,10 +357,11 @@ Each service MDX file should include:
 
 - Title, SEO title, description
 - Keywords for SEO
-- Hero section with heading, subheading, image, CTA
-- Breadcrumbs for navigation
+- Hero section with image
+- Benefits list (4-8 items)
+- About section with whenNeeded/whatAchieve
 - FAQs (minimum 3, recommended 8-12)
-- Main content with proper headings and structure
+- Main MDX content with proper headings
 
 ### Location Pages
 
@@ -182,9 +370,9 @@ Each location MDX file should include:
 - Location-specific title and description
 - Local keywords
 - Hero with location name
-- Information about service areas covered
-- Local contact information
+- Towns/areas served list
 - Location-specific FAQs
+- Main MDX content
 
 ## Available Scripts
 
@@ -214,6 +402,6 @@ For questions or issues:
 
 ---
 
-**Template Version:** 1.0.0
-**Created:** December 2025
-**Platform:** Local Business Platform v1.0
+**Template Version:** 2.0.0
+**Updated:** January 2026 (Migration from colossus-reference patterns)
+**Platform:** Local Business Platform v1.1
