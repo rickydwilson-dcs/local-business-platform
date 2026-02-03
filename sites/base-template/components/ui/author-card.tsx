@@ -1,0 +1,53 @@
+/**
+ * Author card props
+ */
+interface AuthorCardProps {
+  /** Author name */
+  name: string;
+  /** Author role/title */
+  role?: string;
+  /** Author bio/description */
+  bio?: string;
+}
+
+/**
+ * Author Card Component
+ *
+ * Displays author information typically shown at the end of blog posts.
+ * Shows avatar (initial), name, role, and bio.
+ *
+ * @example
+ * ```tsx
+ * <AuthorCard
+ *   name="John Smith"
+ *   role="Senior Expert"
+ *   bio="John has over 15 years of experience in the industry..."
+ * />
+ * ```
+ */
+export function AuthorCard({
+  name,
+  role,
+  bio = 'Our team of professionals share their expertise to help you make informed decisions.',
+}: AuthorCardProps) {
+  return (
+    <div className="bg-surface-subtle rounded-2xl p-6 sm:p-8 border border-surface-border">
+      <div className="flex items-start gap-4 sm:gap-6">
+        {/* Avatar */}
+        <div className="w-16 h-16 sm:w-20 sm:h-20 bg-brand-primary rounded-full flex items-center justify-center text-brand-on-primary text-xl sm:text-2xl font-bold flex-shrink-0">
+          {name.charAt(0)}
+        </div>
+
+        {/* Content */}
+        <div className="flex-1 min-w-0">
+          <p className="text-sm font-medium text-brand-primary uppercase tracking-wide mb-1">
+            About the Author
+          </p>
+          <h3 className="text-xl sm:text-2xl font-bold text-surface-foreground mb-1">{name}</h3>
+          {role && <p className="text-surface-muted font-medium mb-3">{role}</p>}
+          <p className="text-surface-muted-foreground leading-relaxed">{bio}</p>
+        </div>
+      </div>
+    </div>
+  );
+}
