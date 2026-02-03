@@ -1,18 +1,49 @@
-import Link from "next/link";
-import Image from "next/image";
-import { getImageUrl } from "@/lib/image";
+import Link from 'next/link';
+import Image from 'next/image';
+import { getImageUrl } from '@/lib/image';
 
+/**
+ * Blog post card props
+ */
 interface BlogPostCardProps {
+  /** URL slug for the blog post */
   slug: string;
+  /** Post title */
   title: string;
+  /** Post excerpt/summary */
   excerpt: string;
+  /** Hero image path (R2 path or full URL) */
   heroImage?: string;
+  /** Publication date (ISO string) */
   date: string;
+  /** Reading time in minutes */
   readingTime?: number;
+  /** Category slug */
   category?: string;
+  /** Category display label */
   categoryLabel?: string;
 }
 
+/**
+ * Blog Post Card Component
+ *
+ * Displays a blog post preview card with image, category badge, meta information,
+ * and call-to-action. Used in blog listing pages and featured post grids.
+ *
+ * @example
+ * ```tsx
+ * <BlogPostCard
+ *   slug="getting-started"
+ *   title="Getting Started Guide"
+ *   excerpt="Learn how to get started with our services..."
+ *   heroImage="blog/getting-started.webp"
+ *   date="2025-01-15"
+ *   readingTime={5}
+ *   category="guides"
+ *   categoryLabel="Guides"
+ * />
+ * ```
+ */
 export function BlogPostCard({
   slug,
   title,
@@ -23,19 +54,19 @@ export function BlogPostCard({
   category: _category,
   categoryLabel,
 }: BlogPostCardProps) {
-  const formattedDate = new Date(date).toLocaleDateString("en-GB", {
-    day: "numeric",
-    month: "short",
-    year: "numeric",
+  const formattedDate = new Date(date).toLocaleDateString('en-GB', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
   });
 
   return (
     <Link
       href={`/blog/${slug}`}
-      className="group relative bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col h-full"
+      className="group relative bg-surface-background rounded-2xl shadow-sm border border-surface-border overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col h-full"
     >
       {/* Image */}
-      <div className="relative h-48 overflow-hidden bg-gradient-to-br from-brand-blue/10 to-brand-blue/20">
+      <div className="relative h-48 overflow-hidden bg-gradient-to-br from-brand-primary/10 to-brand-primary/20">
         {heroImage ? (
           <Image
             src={getImageUrl(heroImage)}
@@ -46,9 +77,9 @@ export function BlogPostCard({
           />
         ) : (
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-12 h-12 bg-brand-blue/20 rounded-lg flex items-center justify-center">
+            <div className="w-12 h-12 bg-brand-primary/20 rounded-lg flex items-center justify-center">
               <svg
-                className="w-6 h-6 text-brand-blue"
+                className="w-6 h-6 text-brand-primary"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -67,7 +98,7 @@ export function BlogPostCard({
         {/* Category Badge */}
         {categoryLabel && (
           <div className="absolute top-4 left-4">
-            <span className="inline-block px-3 py-1 bg-brand-blue/90 text-white text-xs font-semibold rounded-full backdrop-blur-sm">
+            <span className="inline-block px-3 py-1 bg-brand-primary/90 text-brand-on-primary text-xs font-semibold rounded-full backdrop-blur-sm">
               {categoryLabel}
             </span>
           </div>
@@ -77,7 +108,7 @@ export function BlogPostCard({
       {/* Content */}
       <div className="p-6 flex flex-col flex-grow">
         {/* Meta */}
-        <div className="flex items-center gap-2 text-sm text-gray-500 mb-3">
+        <div className="flex items-center gap-2 text-sm text-surface-muted mb-3">
           <time dateTime={date}>{formattedDate}</time>
           {readingTime && (
             <>
@@ -88,18 +119,18 @@ export function BlogPostCard({
         </div>
 
         {/* Title */}
-        <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-brand-blue transition-colors line-clamp-2">
+        <h3 className="text-xl font-bold text-surface-foreground mb-3 group-hover:text-brand-primary transition-colors line-clamp-2">
           {title}
         </h3>
 
         {/* Excerpt */}
-        <p className="text-gray-700 text-sm leading-relaxed mb-4 line-clamp-3 flex-grow">
+        <p className="text-surface-muted-foreground text-sm leading-relaxed mb-4 line-clamp-3 flex-grow">
           {excerpt}
         </p>
 
         {/* CTA */}
         <div className="mt-auto">
-          <span className="inline-flex items-center text-brand-blue font-semibold text-sm group-hover:gap-2 transition-all">
+          <span className="inline-flex items-center text-brand-primary font-semibold text-sm group-hover:gap-2 transition-all">
             Read article
             <svg
               className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform"
