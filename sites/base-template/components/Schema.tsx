@@ -103,7 +103,7 @@ type ArticleSchema = {
 
 /** WebPage schema props */
 type WebpageSchema = {
-  '@type': 'WebPage' | 'Blog' | 'CollectionPage';
+  '@type': 'WebPage' | 'Blog' | 'CollectionPage' | 'AboutPage' | 'ContactPage';
   '@id': string;
   url: string;
   name: string;
