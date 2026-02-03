@@ -1,0 +1,554 @@
+{
+  "industry": "electrical",
+  "version": "1.0.0",
+  "last_updated": "2026-02-03",
+  "total_services": 25,
+  "categories": [
+    "Emergency Services",
+    "Installation",
+    "Repairs & Maintenance",
+    "Testing & Certification",
+    "Smart Home & Automation"
+  ],
+  "services": [
+    {
+      "slug": "emergency-electrical-callout",
+      "title": "24/7 Emergency Electrical Callout",
+      "description": "Round-the-clock emergency electrician service for urgent electrical issues that cannot wait until morning.",
+      "category": "Emergency Services",
+      "keywords": [
+        "emergency electrician",
+        "24 hour electrician",
+        "urgent electrical",
+        "out of hours",
+        "weekend electrician"
+      ],
+      "typical_duration": "1-3 hours",
+      "price_range": "££-£££",
+      "common_issues": [
+        "Complete power loss to property",
+        "Burning smell from electrical outlets",
+        "Sparking switches or sockets"
+      ],
+      "related_services": ["fault-finding", "fuse-board-repair", "socket-repair"]
+    },
+    {
+      "slug": "power-outage-restoration",
+      "title": "Power Outage Restoration",
+      "description": "Rapid diagnosis and restoration of power when your home or business experiences a sudden electrical outage.",
+      "category": "Emergency Services",
+      "keywords": [
+        "power outage",
+        "no electricity",
+        "power cut",
+        "tripped fuse",
+        "electrical failure"
+      ],
+      "typical_duration": "1-2 hours",
+      "price_range": "££",
+      "common_issues": [
+        "Tripped RCD or MCB",
+        "Faulty appliance causing trip",
+        "Overloaded circuit"
+      ],
+      "related_services": ["fault-finding", "consumer-unit-upgrade", "circuit-repair"]
+    },
+    {
+      "slug": "fault-finding",
+      "title": "Electrical Fault Finding",
+      "description": "Professional diagnostic service to locate and identify electrical faults causing problems in your property.",
+      "category": "Emergency Services",
+      "keywords": [
+        "electrical fault",
+        "fault finding",
+        "electrical diagnosis",
+        "circuit tracing",
+        "intermittent fault"
+      ],
+      "typical_duration": "1-4 hours",
+      "price_range": "££-£££",
+      "common_issues": [
+        "Intermittent power issues",
+        "Lights flickering",
+        "Circuit breakers repeatedly tripping"
+      ],
+      "related_services": ["power-outage-restoration", "rewiring", "consumer-unit-upgrade"]
+    },
+    {
+      "slug": "consumer-unit-upgrade",
+      "title": "Consumer Unit Upgrade",
+      "description": "Upgrade your old fuse box to a modern consumer unit with RCD protection for improved safety and compliance.",
+      "category": "Installation",
+      "keywords": [
+        "consumer unit",
+        "fuse box",
+        "fuse board",
+        "RCD",
+        "electrical panel",
+        "circuit breaker"
+      ],
+      "typical_duration": "4-8 hours",
+      "price_range": "£££",
+      "common_issues": [
+        "Old rewirable fuse box",
+        "No RCD protection",
+        "Insufficient circuits for modern living"
+      ],
+      "related_services": ["rewiring", "electrical-safety-certificate", "additional-circuits"]
+    },
+    {
+      "slug": "rewiring",
+      "title": "Full House Rewiring",
+      "description": "Complete electrical rewiring of your property to bring it up to current safety standards and meet modern demands.",
+      "category": "Installation",
+      "keywords": [
+        "rewiring",
+        "house rewire",
+        "electrical rewire",
+        "full rewire",
+        "property rewiring"
+      ],
+      "typical_duration": "3-7 days",
+      "price_range": "££££",
+      "common_issues": [
+        "Property over 30 years old with original wiring",
+        "Rubber or fabric cable insulation",
+        "Planning major renovation"
+      ],
+      "related_services": [
+        "consumer-unit-upgrade",
+        "electrical-safety-certificate",
+        "additional-sockets"
+      ]
+    },
+    {
+      "slug": "additional-sockets",
+      "title": "Additional Socket Installation",
+      "description": "Installation of new electrical sockets in convenient locations to meet your power needs.",
+      "category": "Installation",
+      "keywords": [
+        "extra sockets",
+        "new socket",
+        "socket installation",
+        "power point",
+        "plug socket"
+      ],
+      "typical_duration": "1-3 hours",
+      "price_range": "£-££",
+      "common_issues": [
+        "Not enough sockets in rooms",
+        "Overreliance on extension leads",
+        "Sockets in inconvenient locations"
+      ],
+      "related_services": [
+        "usb-socket-installation",
+        "outdoor-socket-installation",
+        "additional-circuits"
+      ]
+    },
+    {
+      "slug": "usb-socket-installation",
+      "title": "USB Socket Installation",
+      "description": "Replace standard sockets with USB-integrated sockets for convenient device charging without adaptors.",
+      "category": "Installation",
+      "keywords": [
+        "USB socket",
+        "USB outlet",
+        "charging socket",
+        "USB power point",
+        "phone charging socket"
+      ],
+      "typical_duration": "30-60 minutes",
+      "price_range": "£-££",
+      "common_issues": [
+        "Too many device chargers needed",
+        "Cluttered cables",
+        "Shortage of available sockets"
+      ],
+      "related_services": ["additional-sockets", "socket-replacement"]
+    },
+    {
+      "slug": "outdoor-socket-installation",
+      "title": "Outdoor Socket Installation",
+      "description": "Weatherproof external socket installation for gardens, garages and outdoor power needs.",
+      "category": "Installation",
+      "keywords": [
+        "outdoor socket",
+        "external socket",
+        "garden socket",
+        "weatherproof socket",
+        "outside power"
+      ],
+      "typical_duration": "2-4 hours",
+      "price_range": "££",
+      "common_issues": [
+        "Need power for garden tools",
+        "Christmas lights without extension leads",
+        "Hot tub or pond pump power supply"
+      ],
+      "related_services": ["garden-lighting", "ev-charger-installation", "additional-circuits"]
+    },
+    {
+      "slug": "ev-charger-installation",
+      "title": "EV Charger Installation",
+      "description": "Professional installation of electric vehicle charging points at your home with OZEV grant assistance where eligible.",
+      "category": "Installation",
+      "keywords": [
+        "EV charger",
+        "electric car charger",
+        "home charger",
+        "car charging point",
+        "OZEV grant"
+      ],
+      "typical_duration": "3-5 hours",
+      "price_range": "£££",
+      "common_issues": [
+        "New electric vehicle purchase",
+        "Slow charging from standard socket",
+        "Need dedicated charging circuit"
+      ],
+      "related_services": [
+        "consumer-unit-upgrade",
+        "additional-circuits",
+        "electrical-safety-certificate"
+      ]
+    },
+    {
+      "slug": "lighting-installation",
+      "title": "Lighting Installation",
+      "description": "Professional installation of all types of lighting including downlights, pendants, wall lights and feature lighting.",
+      "category": "Installation",
+      "keywords": [
+        "lighting",
+        "light fitting",
+        "downlights",
+        "spotlights",
+        "pendant light",
+        "ceiling light"
+      ],
+      "typical_duration": "1-4 hours",
+      "price_range": "£-££",
+      "common_issues": [
+        "Outdated light fittings",
+        "Insufficient lighting in rooms",
+        "Upgrading to LED lighting"
+      ],
+      "related_services": ["led-lighting-upgrade", "dimmer-switch-installation", "garden-lighting"]
+    },
+    {
+      "slug": "led-lighting-upgrade",
+      "title": "LED Lighting Upgrade",
+      "description": "Upgrade your existing lighting to energy-efficient LED to reduce electricity bills and improve light quality.",
+      "category": "Installation",
+      "keywords": [
+        "LED lighting",
+        "LED upgrade",
+        "energy efficient lighting",
+        "LED conversion",
+        "LED downlights"
+      ],
+      "typical_duration": "2-6 hours",
+      "price_range": "££",
+      "common_issues": [
+        "High electricity bills from old bulbs",
+        "Frequent bulb replacements",
+        "Poor quality light"
+      ],
+      "related_services": ["lighting-installation", "dimmer-switch-installation", "smart-lighting"]
+    },
+    {
+      "slug": "garden-lighting",
+      "title": "Garden Lighting Installation",
+      "description": "Transform your outdoor space with professionally installed garden lighting for ambience and security.",
+      "category": "Installation",
+      "keywords": [
+        "garden lights",
+        "outdoor lighting",
+        "landscape lighting",
+        "pathway lights",
+        "security lighting"
+      ],
+      "typical_duration": "4-8 hours",
+      "price_range": "££-£££",
+      "common_issues": [
+        "Dark garden at night",
+        "Security concerns",
+        "Want to enjoy garden in evenings"
+      ],
+      "related_services": [
+        "outdoor-socket-installation",
+        "security-lighting",
+        "led-lighting-upgrade"
+      ]
+    },
+    {
+      "slug": "dimmer-switch-installation",
+      "title": "Dimmer Switch Installation",
+      "description": "Installation of dimmer switches to control lighting levels and create the perfect ambience in any room.",
+      "category": "Installation",
+      "keywords": [
+        "dimmer switch",
+        "light dimmer",
+        "dimmer control",
+        "mood lighting",
+        "adjustable lighting"
+      ],
+      "typical_duration": "30-60 minutes per switch",
+      "price_range": "£",
+      "common_issues": [
+        "Lights too bright",
+        "Want adjustable mood lighting",
+        "Energy saving on lighting"
+      ],
+      "related_services": ["lighting-installation", "smart-lighting", "led-lighting-upgrade"]
+    },
+    {
+      "slug": "socket-repair",
+      "title": "Socket Repair & Replacement",
+      "description": "Repair or replacement of faulty, damaged or outdated electrical sockets to restore safe operation.",
+      "category": "Repairs & Maintenance",
+      "keywords": [
+        "socket repair",
+        "broken socket",
+        "loose socket",
+        "socket replacement",
+        "faulty socket"
+      ],
+      "typical_duration": "30-60 minutes",
+      "price_range": "£",
+      "common_issues": [
+        "Socket not working",
+        "Cracked or damaged faceplate",
+        "Loose or wobbly socket"
+      ],
+      "related_services": ["additional-sockets", "usb-socket-installation", "fault-finding"]
+    },
+    {
+      "slug": "light-switch-repair",
+      "title": "Light Switch Repair & Replacement",
+      "description": "Repair or replacement of faulty light switches including upgrades to modern styles.",
+      "category": "Repairs & Maintenance",
+      "keywords": [
+        "light switch",
+        "switch repair",
+        "broken switch",
+        "switch replacement",
+        "faulty switch"
+      ],
+      "typical_duration": "30-60 minutes",
+      "price_range": "£",
+      "common_issues": [
+        "Switch not working properly",
+        "Flickering when switch touched",
+        "Outdated switch style"
+      ],
+      "related_services": ["dimmer-switch-installation", "smart-lighting", "fault-finding"]
+    },
+    {
+      "slug": "circuit-repair",
+      "title": "Circuit Repair",
+      "description": "Diagnosis and repair of faulty electrical circuits to restore safe and reliable power supply.",
+      "category": "Repairs & Maintenance",
+      "keywords": [
+        "circuit repair",
+        "electrical circuit",
+        "faulty circuit",
+        "circuit fault",
+        "wiring repair"
+      ],
+      "typical_duration": "1-4 hours",
+      "price_range": "££-£££",
+      "common_issues": ["Circuit keeps tripping", "Partial power loss", "Damaged cable"],
+      "related_services": ["fault-finding", "rewiring", "consumer-unit-upgrade"]
+    },
+    {
+      "slug": "extractor-fan-installation",
+      "title": "Extractor Fan Installation",
+      "description": "Installation of extractor fans in bathrooms, kitchens and utility rooms to improve ventilation and reduce damp.",
+      "category": "Installation",
+      "keywords": [
+        "extractor fan",
+        "bathroom fan",
+        "kitchen extractor",
+        "ventilation fan",
+        "humidity control"
+      ],
+      "typical_duration": "2-4 hours",
+      "price_range": "££",
+      "common_issues": [
+        "Condensation and mould in bathroom",
+        "Cooking smells lingering",
+        "Old fan not working"
+      ],
+      "related_services": ["lighting-installation", "additional-circuits"]
+    },
+    {
+      "slug": "electrical-safety-certificate",
+      "title": "Electrical Installation Condition Report (EICR)",
+      "description": "Comprehensive inspection and testing of your electrical installation with a formal safety certificate.",
+      "category": "Testing & Certification",
+      "keywords": [
+        "EICR",
+        "electrical certificate",
+        "landlord certificate",
+        "electrical safety",
+        "periodic inspection"
+      ],
+      "typical_duration": "2-4 hours",
+      "price_range": "££",
+      "common_issues": [
+        "Required for rental properties",
+        "Buying or selling property",
+        "Property over 10 years since last test"
+      ],
+      "related_services": ["consumer-unit-upgrade", "rewiring", "fault-finding"]
+    },
+    {
+      "slug": "pat-testing",
+      "title": "PAT Testing",
+      "description": "Portable Appliance Testing for businesses and landlords to ensure electrical equipment is safe to use.",
+      "category": "Testing & Certification",
+      "keywords": [
+        "PAT testing",
+        "appliance testing",
+        "portable appliance test",
+        "electrical safety test",
+        "workplace testing"
+      ],
+      "typical_duration": "Varies by quantity",
+      "price_range": "£-££",
+      "common_issues": [
+        "Insurance requirements",
+        "Health and safety compliance",
+        "Annual testing due"
+      ],
+      "related_services": ["electrical-safety-certificate", "emergency-lighting-testing"]
+    },
+    {
+      "slug": "emergency-lighting-testing",
+      "title": "Emergency Lighting Testing",
+      "description": "Regular testing and maintenance of emergency lighting systems to ensure compliance with fire safety regulations.",
+      "category": "Testing & Certification",
+      "keywords": [
+        "emergency lighting",
+        "exit signs",
+        "fire safety",
+        "emergency exit lights",
+        "safety lighting"
+      ],
+      "typical_duration": "1-3 hours",
+      "price_range": "££",
+      "common_issues": [
+        "Annual compliance requirement",
+        "Faulty emergency lights",
+        "Fire safety audit"
+      ],
+      "related_services": ["fire-alarm-installation", "electrical-safety-certificate"]
+    },
+    {
+      "slug": "smart-lighting",
+      "title": "Smart Lighting Installation",
+      "description": "Installation and setup of smart lighting systems you can control from your phone or voice assistants.",
+      "category": "Smart Home & Automation",
+      "keywords": [
+        "smart lighting",
+        "Philips Hue",
+        "smart bulbs",
+        "app controlled lights",
+        "voice controlled lights"
+      ],
+      "typical_duration": "2-4 hours",
+      "price_range": "££-£££",
+      "common_issues": [
+        "Want remote lighting control",
+        "Setting schedules for security",
+        "Integration with smart home"
+      ],
+      "related_services": [
+        "dimmer-switch-installation",
+        "smart-home-wiring",
+        "led-lighting-upgrade"
+      ]
+    },
+    {
+      "slug": "smart-home-wiring",
+      "title": "Smart Home Wiring",
+      "description": "Future-proof your home with structured cabling and wiring for smart home devices and automation.",
+      "category": "Smart Home & Automation",
+      "keywords": [
+        "smart home",
+        "home automation",
+        "structured cabling",
+        "Cat6 wiring",
+        "network cabling"
+      ],
+      "typical_duration": "1-3 days",
+      "price_range": "£££-££££",
+      "common_issues": [
+        "Planning smart home installation",
+        "Poor WiFi coverage",
+        "New build or renovation"
+      ],
+      "related_services": ["smart-lighting", "ev-charger-installation", "consumer-unit-upgrade"]
+    },
+    {
+      "slug": "security-lighting",
+      "title": "Security Lighting Installation",
+      "description": "Installation of motion-sensor security lights to deter intruders and improve safety around your property.",
+      "category": "Smart Home & Automation",
+      "keywords": [
+        "security lights",
+        "motion sensor lights",
+        "PIR lights",
+        "floodlights",
+        "dusk to dawn lights"
+      ],
+      "typical_duration": "1-3 hours",
+      "price_range": "£-££",
+      "common_issues": ["Dark areas around property", "Security concerns", "Deterring intruders"],
+      "related_services": ["garden-lighting", "outdoor-socket-installation", "smart-lighting"]
+    },
+    {
+      "slug": "fire-alarm-installation",
+      "title": "Smoke & Fire Alarm Installation",
+      "description": "Installation of smoke detectors, heat detectors and carbon monoxide alarms to protect your family.",
+      "category": "Testing & Certification",
+      "keywords": [
+        "smoke alarm",
+        "fire alarm",
+        "smoke detector",
+        "carbon monoxide alarm",
+        "heat detector"
+      ],
+      "typical_duration": "1-3 hours",
+      "price_range": "£-££",
+      "common_issues": [
+        "No smoke alarms installed",
+        "Old alarms need replacing",
+        "Rental property compliance"
+      ],
+      "related_services": ["emergency-lighting-testing", "electrical-safety-certificate"]
+    },
+    {
+      "slug": "additional-circuits",
+      "title": "Additional Circuit Installation",
+      "description": "Installation of new dedicated electrical circuits for high-power appliances or to distribute load safely.",
+      "category": "Installation",
+      "keywords": [
+        "new circuit",
+        "additional circuit",
+        "dedicated circuit",
+        "spur",
+        "radial circuit"
+      ],
+      "typical_duration": "2-4 hours",
+      "price_range": "££",
+      "common_issues": [
+        "New high-power appliance",
+        "Overloaded existing circuits",
+        "Home office setup"
+      ],
+      "related_services": ["consumer-unit-upgrade", "additional-sockets", "ev-charger-installation"]
+    }
+  ]
+}
