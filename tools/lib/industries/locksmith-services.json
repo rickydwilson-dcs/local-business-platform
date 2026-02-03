@@ -1,0 +1,242 @@
+{
+  "industry": "locksmith",
+  "version": "1.0.0",
+  "last_updated": "2026-02-03",
+  "total_services": 15,
+  "categories": ["Emergency Locksmith", "Lock Installation", "Security Upgrades", "Safe Services"],
+  "services": [
+    {
+      "slug": "emergency-lockout",
+      "title": "Emergency Lockout Service",
+      "description": "24/7 emergency lockout assistance to gain entry when you're locked out of your home or business.",
+      "category": "Emergency Locksmith",
+      "keywords": [
+        "locked out",
+        "lockout",
+        "emergency locksmith",
+        "24 hour locksmith",
+        "lost keys"
+      ],
+      "typical_duration": "30-60 minutes",
+      "price_range": "££-£££",
+      "common_issues": ["Keys locked inside", "Lost keys", "Broken key in lock"],
+      "related_services": ["lock-replacement", "key-cutting", "lock-repair"]
+    },
+    {
+      "slug": "lock-replacement",
+      "title": "Lock Replacement",
+      "description": "Professional replacement of door locks following break-in, lost keys or security upgrade.",
+      "category": "Emergency Locksmith",
+      "keywords": ["lock change", "new locks", "lock replacement", "change locks", "replace lock"],
+      "typical_duration": "30-60 minutes per lock",
+      "price_range": "££",
+      "common_issues": ["After burglary", "Lost or stolen keys", "Tenant change"],
+      "related_services": ["emergency-lockout", "high-security-locks", "door-lock-installation"]
+    },
+    {
+      "slug": "lock-repair",
+      "title": "Lock Repair",
+      "description": "Repair of stiff, jammed or malfunctioning locks to restore smooth operation.",
+      "category": "Emergency Locksmith",
+      "keywords": ["lock repair", "stiff lock", "jammed lock", "lock mechanism", "lock service"],
+      "typical_duration": "30-60 minutes",
+      "price_range": "£-££",
+      "common_issues": ["Key hard to turn", "Lock mechanism jammed", "Lock not engaging properly"],
+      "related_services": ["lock-replacement", "key-cutting", "door-lock-installation"]
+    },
+    {
+      "slug": "door-lock-installation",
+      "title": "Door Lock Installation",
+      "description": "Professional fitting of new door locks to internal and external doors.",
+      "category": "Lock Installation",
+      "keywords": ["lock fitting", "new lock", "door lock", "mortice lock", "rim lock"],
+      "typical_duration": "30-90 minutes",
+      "price_range": "£-££",
+      "common_issues": [
+        "New door needs locks",
+        "Adding additional security",
+        "Upgrading existing locks"
+      ],
+      "related_services": [
+        "lock-replacement",
+        "high-security-locks",
+        "multipoint-lock-installation"
+      ]
+    },
+    {
+      "slug": "multipoint-lock-installation",
+      "title": "Multipoint Lock Installation",
+      "description": "Installation and repair of multipoint locking systems for UPVC and composite doors.",
+      "category": "Lock Installation",
+      "keywords": [
+        "multipoint lock",
+        "UPVC lock",
+        "composite door lock",
+        "multi-lock",
+        "euro cylinder"
+      ],
+      "typical_duration": "1-2 hours",
+      "price_range": "££-£££",
+      "common_issues": [
+        "Door not locking properly",
+        "Handle not lifting",
+        "Security upgrade needed"
+      ],
+      "related_services": ["euro-cylinder-upgrade", "door-lock-installation", "lock-repair"]
+    },
+    {
+      "slug": "euro-cylinder-upgrade",
+      "title": "Euro Cylinder Upgrade",
+      "description": "Replacement of standard euro cylinders with anti-snap, anti-pick security cylinders.",
+      "category": "Security Upgrades",
+      "keywords": ["euro cylinder", "anti-snap", "anti-pick", "security cylinder", "UPVC security"],
+      "typical_duration": "15-30 minutes per lock",
+      "price_range": "£-££",
+      "common_issues": [
+        "Standard cylinder vulnerable",
+        "Insurance requirement",
+        "Security upgrade"
+      ],
+      "related_services": [
+        "multipoint-lock-installation",
+        "high-security-locks",
+        "lock-replacement"
+      ]
+    },
+    {
+      "slug": "high-security-locks",
+      "title": "High Security Lock Installation",
+      "description": "Installation of British Standard BS3621 and insurance-approved high security locks.",
+      "category": "Security Upgrades",
+      "keywords": ["high security", "BS3621", "insurance approved", "5 lever", "Chubb", "Yale"],
+      "typical_duration": "1-2 hours",
+      "price_range": "££-£££",
+      "common_issues": [
+        "Insurance compliance",
+        "Maximum security needed",
+        "Upgrading home security"
+      ],
+      "related_services": ["door-lock-installation", "euro-cylinder-upgrade", "lock-replacement"]
+    },
+    {
+      "slug": "smart-lock-installation",
+      "title": "Smart Lock Installation",
+      "description": "Installation and setup of keyless entry and smart lock systems with app control.",
+      "category": "Security Upgrades",
+      "keywords": ["smart lock", "keyless entry", "digital lock", "keypad lock", "app controlled"],
+      "typical_duration": "1-2 hours",
+      "price_range": "£££",
+      "common_issues": [
+        "Want keyless convenience",
+        "Remote access needed",
+        "Holiday home management"
+      ],
+      "related_services": ["door-lock-installation", "high-security-locks", "intercom-installation"]
+    },
+    {
+      "slug": "window-lock-installation",
+      "title": "Window Lock Installation",
+      "description": "Fitting of window locks, restrictors and security devices to all window types.",
+      "category": "Security Upgrades",
+      "keywords": [
+        "window locks",
+        "window security",
+        "window restrictor",
+        "sash lock",
+        "casement lock"
+      ],
+      "typical_duration": "15-30 minutes per window",
+      "price_range": "£",
+      "common_issues": [
+        "Windows have no locks",
+        "Child safety restrictors",
+        "Insurance requirement"
+      ],
+      "related_services": ["door-lock-installation", "high-security-locks"]
+    },
+    {
+      "slug": "key-cutting",
+      "title": "Key Cutting",
+      "description": "Precision cutting of spare keys for all types of locks including security keys.",
+      "category": "Lock Installation",
+      "keywords": ["key cutting", "spare keys", "key copy", "duplicate key", "key replacement"],
+      "typical_duration": "5-15 minutes",
+      "price_range": "£",
+      "common_issues": ["Need spare keys", "Only one key remaining", "Keys for family members"],
+      "related_services": ["lock-replacement", "lock-repair"]
+    },
+    {
+      "slug": "garage-door-locks",
+      "title": "Garage Door Locks",
+      "description": "Installation and repair of garage door locks, handles and security devices.",
+      "category": "Lock Installation",
+      "keywords": [
+        "garage lock",
+        "garage door",
+        "up and over lock",
+        "garage security",
+        "garage defender"
+      ],
+      "typical_duration": "30-90 minutes",
+      "price_range": "£-££",
+      "common_issues": ["Garage not secure", "Lock broken or stiff", "Want better security"],
+      "related_services": ["door-lock-installation", "high-security-locks"]
+    },
+    {
+      "slug": "safe-opening",
+      "title": "Safe Opening",
+      "description": "Professional safe opening service for lost combinations, broken locks or forgotten codes.",
+      "category": "Safe Services",
+      "keywords": [
+        "safe opening",
+        "locked safe",
+        "safe lockout",
+        "combination lost",
+        "safe cracking"
+      ],
+      "typical_duration": "1-4 hours",
+      "price_range": "£££-££££",
+      "common_issues": ["Forgotten combination", "Inherited safe", "Lock malfunction"],
+      "related_services": ["safe-installation", "safe-repair"]
+    },
+    {
+      "slug": "safe-installation",
+      "title": "Safe Installation",
+      "description": "Professional installation and securing of domestic and commercial safes.",
+      "category": "Safe Services",
+      "keywords": ["safe fitting", "safe installation", "home safe", "floor safe", "wall safe"],
+      "typical_duration": "1-3 hours",
+      "price_range": "££-£££",
+      "common_issues": ["New safe purchase", "Insurance requirement", "Secure valuable storage"],
+      "related_services": ["safe-opening", "safe-repair", "high-security-locks"]
+    },
+    {
+      "slug": "safe-repair",
+      "title": "Safe Repair & Servicing",
+      "description": "Repair and servicing of safe locks, mechanisms and combination changes.",
+      "category": "Safe Services",
+      "keywords": [
+        "safe repair",
+        "safe service",
+        "combination change",
+        "safe maintenance",
+        "safe lock"
+      ],
+      "typical_duration": "1-2 hours",
+      "price_range": "££-£££",
+      "common_issues": ["Lock stiff or jamming", "Want combination changed", "Regular maintenance"],
+      "related_services": ["safe-opening", "safe-installation"]
+    },
+    {
+      "slug": "intercom-installation",
+      "title": "Door Entry & Intercom Systems",
+      "description": "Installation of door entry systems, video intercoms and access control.",
+      "category": "Security Upgrades",
+      "keywords": ["intercom", "door entry", "video doorbell", "access control", "entry system"],
+      "typical_duration": "2-4 hours",
+      "price_range": "££-£££",
+      "common_issues": ["Want to see visitors", "Flat or apartment entry", "Remote door release"],
+      "related_services": ["smart-lock-installation", "door-lock-installation"]
+    }
+  ]
+}

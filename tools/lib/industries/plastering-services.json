@@ -1,0 +1,374 @@
+{
+  "industry": "plastering",
+  "version": "1.0.0",
+  "last_updated": "2026-02-03",
+  "total_services": 20,
+  "categories": [
+    "Internal Plastering",
+    "External Rendering",
+    "Dry Lining",
+    "Repairs & Restoration"
+  ],
+  "services": [
+    {
+      "slug": "ceiling-plastering",
+      "title": "Ceiling Plastering",
+      "description": "Professional plastering of ceilings including skimming, replastering and smooth finishing.",
+      "category": "Internal Plastering",
+      "keywords": [
+        "ceiling plastering",
+        "ceiling skim",
+        "plaster ceiling",
+        "ceiling repair",
+        "artex covering"
+      ],
+      "typical_duration": "1-2 days",
+      "price_range": "££",
+      "common_issues": [
+        "Artex ceiling needs covering",
+        "Cracks in ceiling plaster",
+        "Textured ceiling removal"
+      ],
+      "related_services": ["wall-skimming", "artex-removal", "plaster-repairs"]
+    },
+    {
+      "slug": "wall-skimming",
+      "title": "Wall Skimming",
+      "description": "Application of a smooth skim coat of plaster over existing walls or plasterboard for a perfect finish.",
+      "category": "Internal Plastering",
+      "keywords": ["wall skimming", "skim coat", "plaster skim", "wall plastering", "smooth walls"],
+      "typical_duration": "1-2 days per room",
+      "price_range": "££",
+      "common_issues": [
+        "Walls not smooth enough for painting",
+        "Old wallpaper removed",
+        "New plasterboard needs finishing"
+      ],
+      "related_services": ["ceiling-plastering", "plasterboard-installation", "plaster-repairs"]
+    },
+    {
+      "slug": "full-room-plastering",
+      "title": "Full Room Plastering",
+      "description": "Complete plastering service for an entire room including walls and ceiling to create a flawless finish.",
+      "category": "Internal Plastering",
+      "keywords": [
+        "room plastering",
+        "full room plaster",
+        "complete replaster",
+        "walls and ceiling"
+      ],
+      "typical_duration": "2-3 days",
+      "price_range": "££-£££",
+      "common_issues": [
+        "Complete room renovation",
+        "Major damp damage repair",
+        "Converting garage or outbuilding"
+      ],
+      "related_services": ["wall-skimming", "ceiling-plastering", "plasterboard-installation"]
+    },
+    {
+      "slug": "new-build-plastering",
+      "title": "New Build Plastering",
+      "description": "First-fix and second-fix plastering for new build properties and major extensions.",
+      "category": "Internal Plastering",
+      "keywords": [
+        "new build",
+        "first fix plastering",
+        "second fix",
+        "extension plastering",
+        "developer"
+      ],
+      "typical_duration": "3-7 days",
+      "price_range": "£££-££££",
+      "common_issues": [
+        "New extension needing plastering",
+        "Self-build project",
+        "Developer contract work"
+      ],
+      "related_services": [
+        "full-room-plastering",
+        "plasterboard-installation",
+        "external-rendering"
+      ]
+    },
+    {
+      "slug": "plasterboard-installation",
+      "title": "Plasterboard Installation",
+      "description": "Supply and fitting of plasterboard to walls and ceilings ready for skimming or taping.",
+      "category": "Dry Lining",
+      "keywords": ["plasterboard", "dry lining", "drywall", "gypsum board", "boarding out"],
+      "typical_duration": "1-3 days",
+      "price_range": "££",
+      "common_issues": [
+        "Stud wall construction",
+        "Covering old brick walls",
+        "Loft conversion boarding"
+      ],
+      "related_services": ["wall-skimming", "stud-wall-construction", "insulated-dry-lining"]
+    },
+    {
+      "slug": "stud-wall-construction",
+      "title": "Stud Wall Construction",
+      "description": "Building of timber or metal stud partition walls including plasterboarding and plastering.",
+      "category": "Dry Lining",
+      "keywords": ["stud wall", "partition wall", "room divider", "new wall", "internal wall"],
+      "typical_duration": "1-2 days",
+      "price_range": "££-£££",
+      "common_issues": ["Creating new room", "Dividing large space", "Building en-suite"],
+      "related_services": ["plasterboard-installation", "wall-skimming", "soundproofing"]
+    },
+    {
+      "slug": "insulated-dry-lining",
+      "title": "Insulated Dry Lining",
+      "description": "Installation of insulated plasterboard to external walls to improve thermal efficiency.",
+      "category": "Dry Lining",
+      "keywords": [
+        "insulated dry lining",
+        "thermal board",
+        "insulated plasterboard",
+        "cold wall",
+        "IWI"
+      ],
+      "typical_duration": "1-3 days per room",
+      "price_range": "££-£££",
+      "common_issues": [
+        "Cold external walls",
+        "Condensation problems",
+        "Improving energy efficiency"
+      ],
+      "related_services": ["plasterboard-installation", "wall-skimming", "damp-proofing"]
+    },
+    {
+      "slug": "soundproofing",
+      "title": "Acoustic Soundproofing",
+      "description": "Installation of acoustic plasterboard and soundproofing systems to reduce noise transfer.",
+      "category": "Dry Lining",
+      "keywords": [
+        "soundproofing",
+        "acoustic plasterboard",
+        "noise reduction",
+        "sound insulation",
+        "party wall"
+      ],
+      "typical_duration": "2-4 days",
+      "price_range": "£££",
+      "common_issues": ["Noisy neighbours", "Home studio setup", "Party wall noise"],
+      "related_services": [
+        "stud-wall-construction",
+        "plasterboard-installation",
+        "ceiling-plastering"
+      ]
+    },
+    {
+      "slug": "external-rendering",
+      "title": "External Rendering",
+      "description": "Application of render to external walls for a fresh appearance and weather protection.",
+      "category": "External Rendering",
+      "keywords": [
+        "rendering",
+        "external render",
+        "house render",
+        "cement render",
+        "sand and cement"
+      ],
+      "typical_duration": "3-7 days",
+      "price_range": "£££-££££",
+      "common_issues": [
+        "Tired or cracked render",
+        "Bare brick needing protection",
+        "Improving kerb appeal"
+      ],
+      "related_services": ["silicone-render", "monocouche-render", "pebbledash-removal"]
+    },
+    {
+      "slug": "silicone-render",
+      "title": "Silicone Render",
+      "description": "Application of modern silicone-based render systems for a durable, low-maintenance finish.",
+      "category": "External Rendering",
+      "keywords": ["silicone render", "K-Rend", "Weber", "coloured render", "self-cleaning render"],
+      "typical_duration": "3-7 days",
+      "price_range": "££££",
+      "common_issues": [
+        "Want low maintenance finish",
+        "Specific colour required",
+        "External wall insulation covering"
+      ],
+      "related_services": ["external-rendering", "monocouche-render", "external-wall-insulation"]
+    },
+    {
+      "slug": "monocouche-render",
+      "title": "Monocouche Render",
+      "description": "Single-coat through-coloured render system for a consistent, long-lasting external finish.",
+      "category": "External Rendering",
+      "keywords": [
+        "monocouche",
+        "one coat render",
+        "through colour",
+        "coloured render",
+        "self-coloured"
+      ],
+      "typical_duration": "3-5 days",
+      "price_range": "£££-££££",
+      "common_issues": ["Want coloured render", "Don't want to repaint", "New build finishing"],
+      "related_services": ["external-rendering", "silicone-render"]
+    },
+    {
+      "slug": "pebbledash-removal",
+      "title": "Pebbledash Removal",
+      "description": "Removal of old pebbledash render and replacement with a modern smooth finish.",
+      "category": "External Rendering",
+      "keywords": [
+        "pebbledash removal",
+        "roughcast removal",
+        "render removal",
+        "pebbledash replacement"
+      ],
+      "typical_duration": "4-7 days",
+      "price_range": "££££",
+      "common_issues": ["Dated appearance", "Pebbledash falling off", "Want modern look"],
+      "related_services": ["external-rendering", "silicone-render", "render-repairs"]
+    },
+    {
+      "slug": "render-repairs",
+      "title": "Render Repairs",
+      "description": "Patch repairs to damaged, cracked or blown render on external walls.",
+      "category": "External Rendering",
+      "keywords": [
+        "render repair",
+        "patch repair",
+        "cracked render",
+        "blown render",
+        "render crack"
+      ],
+      "typical_duration": "1-2 days",
+      "price_range": "£-££",
+      "common_issues": ["Cracks appearing", "Render falling off", "Damp penetration"],
+      "related_services": ["external-rendering", "silicone-render", "damp-proofing"]
+    },
+    {
+      "slug": "plaster-repairs",
+      "title": "Plaster Repairs & Patching",
+      "description": "Repair of damaged, cracked or blown plaster including matching existing textures.",
+      "category": "Repairs & Restoration",
+      "keywords": [
+        "plaster repair",
+        "patch repair",
+        "plaster damage",
+        "blown plaster",
+        "plaster crack"
+      ],
+      "typical_duration": "2-6 hours",
+      "price_range": "£-££",
+      "common_issues": ["Water damage repair", "Holes from removed fixtures", "Cracks spreading"],
+      "related_services": ["wall-skimming", "ceiling-plastering", "damp-proofing"]
+    },
+    {
+      "slug": "artex-removal",
+      "title": "Artex & Textured Ceiling Removal",
+      "description": "Safe removal or covering of textured artex finishes to create smooth modern surfaces.",
+      "category": "Repairs & Restoration",
+      "keywords": [
+        "artex removal",
+        "textured ceiling",
+        "stipple removal",
+        "artex covering",
+        "popcorn ceiling"
+      ],
+      "typical_duration": "1-2 days per room",
+      "price_range": "££-£££",
+      "common_issues": [
+        "Dated textured finish",
+        "Want smooth ceiling",
+        "Asbestos concerns (pre-1985)"
+      ],
+      "related_services": ["ceiling-plastering", "wall-skimming"]
+    },
+    {
+      "slug": "coving-fitting",
+      "title": "Coving & Cornice Installation",
+      "description": "Installation of decorative coving and cornices to add character to rooms.",
+      "category": "Repairs & Restoration",
+      "keywords": ["coving", "cornice", "ceiling coving", "plaster coving", "decorative moulding"],
+      "typical_duration": "1-2 days",
+      "price_range": "£-££",
+      "common_issues": [
+        "Want period features",
+        "Hiding wall/ceiling joint",
+        "Matching existing coving"
+      ],
+      "related_services": ["ceiling-plastering", "wall-skimming", "coving-repair"]
+    },
+    {
+      "slug": "coving-repair",
+      "title": "Coving & Cornice Repair",
+      "description": "Repair of damaged coving and cornices including matching profiles and seamless finishing.",
+      "category": "Repairs & Restoration",
+      "keywords": [
+        "coving repair",
+        "cornice repair",
+        "damaged coving",
+        "coving damage",
+        "ceiling rose repair"
+      ],
+      "typical_duration": "2-4 hours",
+      "price_range": "£",
+      "common_issues": ["Cracks in coving", "Sections fallen off", "Water damage"],
+      "related_services": ["coving-fitting", "plaster-repairs", "ceiling-plastering"]
+    },
+    {
+      "slug": "damp-proofing",
+      "title": "Damp Proofing Plaster",
+      "description": "Application of specialist damp-proof plaster systems following damp treatment.",
+      "category": "Repairs & Restoration",
+      "keywords": [
+        "damp proof plaster",
+        "renovating plaster",
+        "salt resistant",
+        "damp walls",
+        "basement plastering"
+      ],
+      "typical_duration": "2-4 days",
+      "price_range": "££-£££",
+      "common_issues": ["Rising damp treatment", "Basement conversion", "Salt damage to walls"],
+      "related_services": ["plaster-repairs", "wall-skimming", "tanking"]
+    },
+    {
+      "slug": "tanking",
+      "title": "Basement Tanking",
+      "description": "Waterproofing and tanking of basement walls to prevent water ingress and damp.",
+      "category": "Repairs & Restoration",
+      "keywords": [
+        "tanking",
+        "basement waterproofing",
+        "cellar tanking",
+        "damp basement",
+        "water ingress"
+      ],
+      "typical_duration": "3-7 days",
+      "price_range": "£££-££££",
+      "common_issues": [
+        "Wet basement",
+        "Water coming through walls",
+        "Converting basement to living space"
+      ],
+      "related_services": ["damp-proofing", "plasterboard-installation", "wall-skimming"]
+    },
+    {
+      "slug": "venetian-plaster",
+      "title": "Venetian Plaster & Polished Plaster",
+      "description": "Application of decorative polished plaster finishes for a luxurious marble-like appearance.",
+      "category": "Internal Plastering",
+      "keywords": [
+        "venetian plaster",
+        "polished plaster",
+        "decorative plaster",
+        "marble effect",
+        "luxury finish"
+      ],
+      "typical_duration": "2-4 days",
+      "price_range": "££££",
+      "common_issues": ["Want luxury finish", "Feature wall creation", "High-end renovation"],
+      "related_services": ["wall-skimming", "full-room-plastering"]
+    }
+  ]
+}

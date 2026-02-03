@@ -1,0 +1,62 @@
+{
+  "name": "@platform/intake-system",
+  "version": "1.0.0",
+  "description": "Multi-channel customer intake system for site generation",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
+    "./schemas": {
+      "types": "./dist/schemas/index.d.ts",
+      "import": "./dist/schemas/index.mjs",
+      "require": "./dist/schemas/index.js"
+    },
+    "./chat-intake": {
+      "types": "./dist/chat-intake/index.d.ts",
+      "import": "./dist/chat-intake/index.mjs",
+      "require": "./dist/chat-intake/index.js"
+    },
+    "./theme-extraction": {
+      "types": "./dist/theme-extraction/index.d.ts",
+      "import": "./dist/theme-extraction/index.mjs",
+      "require": "./dist/theme-extraction/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "type-check": "tsc --noEmit",
+    "test": "vitest run",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "sharp": "^0.33.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^20.17.9",
+    "tsup": "^8.3.5",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "keywords": [
+    "intake",
+    "site-generation",
+    "project-file",
+    "business-context",
+    "white-label",
+    "claude",
+    "chat-intake",
+    "theme-extraction",
+    "color-analysis"
+  ],
+  "license": "MIT"
+}

@@ -1,0 +1,377 @@
+{
+  "industry": "painting-decorating",
+  "version": "1.0.0",
+  "last_updated": "2026-02-03",
+  "total_services": 20,
+  "categories": [
+    "Interior Painting",
+    "Exterior Painting",
+    "Specialist Finishes",
+    "Preparation & Repairs"
+  ],
+  "services": [
+    {
+      "slug": "interior-room-painting",
+      "title": "Interior Room Painting",
+      "description": "Professional painting of interior rooms including walls, ceilings and woodwork to transform your living spaces.",
+      "category": "Interior Painting",
+      "keywords": [
+        "room painting",
+        "interior painting",
+        "wall painting",
+        "ceiling painting",
+        "home decoration"
+      ],
+      "typical_duration": "1-2 days per room",
+      "price_range": "££",
+      "common_issues": [
+        "Tired or dated decor",
+        "Scuff marks and stains",
+        "Moving into new property"
+      ],
+      "related_services": ["ceiling-painting", "woodwork-painting", "wallpaper-hanging"]
+    },
+    {
+      "slug": "whole-house-painting",
+      "title": "Whole House Interior Painting",
+      "description": "Complete interior painting service for your entire home, ensuring consistent quality and colour throughout.",
+      "category": "Interior Painting",
+      "keywords": [
+        "whole house painting",
+        "full house decoration",
+        "complete interior",
+        "house makeover"
+      ],
+      "typical_duration": "5-10 days",
+      "price_range": "£££-££££",
+      "common_issues": [
+        "Major renovation or refurbishment",
+        "Preparing to sell property",
+        "Moving into new home"
+      ],
+      "related_services": ["interior-room-painting", "woodwork-painting", "ceiling-painting"]
+    },
+    {
+      "slug": "ceiling-painting",
+      "title": "Ceiling Painting",
+      "description": "Expert ceiling painting including preparation, filling cracks and achieving a perfect finish.",
+      "category": "Interior Painting",
+      "keywords": ["ceiling painting", "white ceiling", "textured ceiling", "ceiling refresh"],
+      "typical_duration": "2-4 hours per room",
+      "price_range": "£-££",
+      "common_issues": ["Yellowed or stained ceiling", "Cracks appearing", "Smoke or water damage"],
+      "related_services": ["interior-room-painting", "artex-removal", "crack-repair"]
+    },
+    {
+      "slug": "woodwork-painting",
+      "title": "Woodwork & Trim Painting",
+      "description": "Professional painting of skirting boards, door frames, architraves and window frames.",
+      "category": "Interior Painting",
+      "keywords": ["skirting boards", "door frames", "architraves", "woodwork", "gloss painting"],
+      "typical_duration": "1-2 days",
+      "price_range": "££",
+      "common_issues": [
+        "Chipped or peeling paint",
+        "Yellowed white gloss",
+        "Updating colour scheme"
+      ],
+      "related_services": ["interior-room-painting", "door-painting", "window-painting"]
+    },
+    {
+      "slug": "door-painting",
+      "title": "Door Painting",
+      "description": "Interior and exterior door painting including preparation, priming and finishing to a high standard.",
+      "category": "Interior Painting",
+      "keywords": [
+        "door painting",
+        "front door",
+        "interior doors",
+        "door refresh",
+        "door makeover"
+      ],
+      "typical_duration": "2-4 hours per door",
+      "price_range": "£-££",
+      "common_issues": [
+        "Faded or peeling paint",
+        "Want to change colour",
+        "Scratches and wear marks"
+      ],
+      "related_services": ["woodwork-painting", "front-door-painting", "window-painting"]
+    },
+    {
+      "slug": "wallpaper-hanging",
+      "title": "Wallpaper Hanging",
+      "description": "Expert wallpaper hanging service including feature walls and full room papering with perfect pattern matching.",
+      "category": "Interior Painting",
+      "keywords": [
+        "wallpaper",
+        "wallpaper hanging",
+        "feature wall",
+        "wall covering",
+        "paper hanging"
+      ],
+      "typical_duration": "1-2 days per room",
+      "price_range": "££-£££",
+      "common_issues": ["Want a feature wall", "Complex pattern matching", "Awkward spaces"],
+      "related_services": ["wallpaper-stripping", "interior-room-painting", "wall-preparation"]
+    },
+    {
+      "slug": "wallpaper-stripping",
+      "title": "Wallpaper Stripping",
+      "description": "Professional wallpaper removal service including preparation of walls ready for new decoration.",
+      "category": "Preparation & Repairs",
+      "keywords": ["wallpaper removal", "stripping wallpaper", "wallpaper steam", "wall prep"],
+      "typical_duration": "4-8 hours per room",
+      "price_range": "£-££",
+      "common_issues": [
+        "Multiple layers of old paper",
+        "Stubborn or painted-over wallpaper",
+        "Damage to walls beneath"
+      ],
+      "related_services": ["wall-preparation", "interior-room-painting", "wallpaper-hanging"]
+    },
+    {
+      "slug": "exterior-house-painting",
+      "title": "Exterior House Painting",
+      "description": "Complete exterior painting of your property including walls, render, pebbledash and cladding.",
+      "category": "Exterior Painting",
+      "keywords": [
+        "exterior painting",
+        "house painting",
+        "outside walls",
+        "render painting",
+        "masonry painting"
+      ],
+      "typical_duration": "3-7 days",
+      "price_range": "£££-££££",
+      "common_issues": [
+        "Faded or weathered paint",
+        "Damp patches showing through",
+        "Tired kerb appeal"
+      ],
+      "related_services": ["exterior-wall-repair", "front-door-painting", "window-painting"]
+    },
+    {
+      "slug": "front-door-painting",
+      "title": "Front Door Painting",
+      "description": "Transform your entrance with professional front door painting using durable exterior paints.",
+      "category": "Exterior Painting",
+      "keywords": ["front door", "door painting", "entrance door", "composite door refresh"],
+      "typical_duration": "4-6 hours",
+      "price_range": "£-££",
+      "common_issues": [
+        "Faded colour from sun",
+        "Peeling or flaking paint",
+        "Want a bold new colour"
+      ],
+      "related_services": ["door-painting", "window-painting", "exterior-house-painting"]
+    },
+    {
+      "slug": "window-painting",
+      "title": "Window Frame Painting",
+      "description": "Exterior and interior window frame painting including proper preparation to prevent peeling.",
+      "category": "Exterior Painting",
+      "keywords": ["window frames", "window painting", "sash windows", "casement windows"],
+      "typical_duration": "2-4 hours per window",
+      "price_range": "£-££",
+      "common_issues": [
+        "Peeling or flaking paint",
+        "Rotting wood needing treatment",
+        "Updating from white to colour"
+      ],
+      "related_services": ["woodwork-painting", "exterior-house-painting", "wood-repair"]
+    },
+    {
+      "slug": "fence-painting",
+      "title": "Fence & Shed Painting",
+      "description": "Painting and staining of garden fences, sheds, decking and other outdoor timber structures.",
+      "category": "Exterior Painting",
+      "keywords": [
+        "fence painting",
+        "shed painting",
+        "fence staining",
+        "decking stain",
+        "garden woodwork"
+      ],
+      "typical_duration": "1-2 days",
+      "price_range": "£-££",
+      "common_issues": [
+        "Weathered and grey timber",
+        "Annual maintenance due",
+        "Want a colour change"
+      ],
+      "related_services": ["decking-staining", "exterior-house-painting"]
+    },
+    {
+      "slug": "spray-painting",
+      "title": "Spray Painting",
+      "description": "Professional spray painting for large areas, kitchens, furniture and surfaces requiring a flawless finish.",
+      "category": "Specialist Finishes",
+      "keywords": [
+        "spray painting",
+        "HVLP",
+        "kitchen spraying",
+        "furniture spraying",
+        "spray finish"
+      ],
+      "typical_duration": "Varies by project",
+      "price_range": "££-£££",
+      "common_issues": ["Kitchen cabinet refresh", "Large wall areas", "Commercial painting"],
+      "related_services": ["kitchen-cabinet-painting", "interior-room-painting"]
+    },
+    {
+      "slug": "kitchen-cabinet-painting",
+      "title": "Kitchen Cabinet Painting",
+      "description": "Transform your kitchen with professionally painted cabinets at a fraction of replacement cost.",
+      "category": "Specialist Finishes",
+      "keywords": [
+        "kitchen cabinets",
+        "cabinet painting",
+        "kitchen makeover",
+        "cupboard painting",
+        "kitchen refresh"
+      ],
+      "typical_duration": "3-5 days",
+      "price_range": "£££",
+      "common_issues": [
+        "Dated kitchen appearance",
+        "Can't afford new kitchen",
+        "Want colour update"
+      ],
+      "related_services": ["spray-painting", "woodwork-painting"]
+    },
+    {
+      "slug": "furniture-painting",
+      "title": "Furniture Painting",
+      "description": "Professional painting of furniture including wardrobes, chests of drawers and upcycling projects.",
+      "category": "Specialist Finishes",
+      "keywords": [
+        "furniture painting",
+        "upcycling",
+        "wardrobe painting",
+        "chest painting",
+        "furniture makeover"
+      ],
+      "typical_duration": "1-3 days",
+      "price_range": "£-££",
+      "common_issues": [
+        "Old furniture needs refresh",
+        "Want to match new decor",
+        "Upcycling project"
+      ],
+      "related_services": ["spray-painting", "chalk-paint-finish"]
+    },
+    {
+      "slug": "chalk-paint-finish",
+      "title": "Chalk Paint & Shabby Chic Finishes",
+      "description": "Decorative chalk paint finishes and distressed shabby chic effects for furniture and interiors.",
+      "category": "Specialist Finishes",
+      "keywords": [
+        "chalk paint",
+        "shabby chic",
+        "distressed finish",
+        "Annie Sloan",
+        "vintage look"
+      ],
+      "typical_duration": "1-2 days",
+      "price_range": "££",
+      "common_issues": [
+        "Want vintage or rustic look",
+        "Furniture transformation",
+        "Feature piece creation"
+      ],
+      "related_services": ["furniture-painting", "woodwork-painting"]
+    },
+    {
+      "slug": "wall-preparation",
+      "title": "Wall Preparation & Making Good",
+      "description": "Professional wall preparation including filling, sanding and priming for a perfect paint finish.",
+      "category": "Preparation & Repairs",
+      "keywords": ["wall prep", "filling", "sanding", "priming", "making good"],
+      "typical_duration": "1-2 days",
+      "price_range": "£-££",
+      "common_issues": ["Damaged walls from shelves", "Cracks and holes", "Poor previous finish"],
+      "related_services": ["crack-repair", "interior-room-painting", "plaster-repair"]
+    },
+    {
+      "slug": "crack-repair",
+      "title": "Crack Repair & Filling",
+      "description": "Repair of cracks in walls and ceilings including structural crack treatment and seamless finishing.",
+      "category": "Preparation & Repairs",
+      "keywords": [
+        "crack repair",
+        "wall cracks",
+        "ceiling cracks",
+        "filling cracks",
+        "crack treatment"
+      ],
+      "typical_duration": "2-4 hours",
+      "price_range": "£",
+      "common_issues": [
+        "Settlement cracks appearing",
+        "Hairline cracks spreading",
+        "Cracks reappearing after painting"
+      ],
+      "related_services": ["wall-preparation", "ceiling-painting", "plaster-repair"]
+    },
+    {
+      "slug": "plaster-repair",
+      "title": "Plaster Repair & Patching",
+      "description": "Small-scale plaster repairs including patching damaged areas ready for decoration.",
+      "category": "Preparation & Repairs",
+      "keywords": [
+        "plaster repair",
+        "patch repair",
+        "blown plaster",
+        "plaster damage",
+        "skim patch"
+      ],
+      "typical_duration": "2-6 hours",
+      "price_range": "£-££",
+      "common_issues": [
+        "Damaged plaster from leaks",
+        "Blown or loose plaster",
+        "Holes from removed fixtures"
+      ],
+      "related_services": ["wall-preparation", "crack-repair", "interior-room-painting"]
+    },
+    {
+      "slug": "artex-removal",
+      "title": "Artex Removal & Covering",
+      "description": "Safe removal or covering of textured artex ceilings and walls for a modern smooth finish.",
+      "category": "Preparation & Repairs",
+      "keywords": [
+        "artex removal",
+        "textured ceiling",
+        "artex covering",
+        "stipple ceiling",
+        "popcorn ceiling"
+      ],
+      "typical_duration": "1-2 days per room",
+      "price_range": "££-£££",
+      "common_issues": [
+        "Dated textured ceilings",
+        "Want smooth modern finish",
+        "Painting over artex"
+      ],
+      "related_services": ["ceiling-painting", "wall-preparation", "plaster-repair"]
+    },
+    {
+      "slug": "wood-repair",
+      "title": "Wood Repair & Treatment",
+      "description": "Repair of damaged woodwork including filling rot, treating wood and preparing for painting.",
+      "category": "Preparation & Repairs",
+      "keywords": [
+        "wood repair",
+        "wood filler",
+        "rot treatment",
+        "wood restoration",
+        "window repair"
+      ],
+      "typical_duration": "2-4 hours",
+      "price_range": "£-££",
+      "common_issues": ["Rotting window frames", "Damaged skirting boards", "Wood decay"],
+      "related_services": ["woodwork-painting", "window-painting", "door-painting"]
+    }
+  ]
+}
