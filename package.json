@@ -15,6 +15,7 @@
     "clean": "turbo run clean && rm -rf node_modules",
     "format": "prettier --write \"**/*.{ts,tsx,md,json}\"",
     "create:site": "tsx tools/create-site.ts",
+    "create:site-from-project": "tsx tools/create-site-from-project.ts",
     "deploy:site": "tsx tools/deploy-site.ts",
     "deploy:batch": "tsx tools/deploy-batch.ts",
     "images:manifest": "tsx tools/generate-image-manifest.ts",

@@ -680,10 +680,29 @@ Strategic implementation roadmap for the white-label website platform. Updated a
 
 ### Industry Libraries
 
-- [ ] Create plumbing service library (25 services)
-- [ ] Create gardening service library (25 services)
-- [ ] Create building service library (25 services)
-- [ ] Create roofing service library (20 services)
+**Phase 1 - Original Libraries (Complete):**
+
+- [x] Create plumbing service library (25 services)
+- [x] Create gardening service library (25 services)
+- [x] Create building service library (25 services)
+- [x] Create roofing service library (20 services)
+
+**Phase 2 - Additional Trades (2026-02-03):**
+Target: Independent tradespeople/sole traders less likely to have professional websites
+
+- [x] Create electrical service library (25 services)
+- [x] Create painting & decorating service library (20 services)
+- [x] Create handyman service library (25 services)
+- [x] Create plastering service library (20 services)
+- [x] Create fencing & decking service library (15 services)
+- [x] Create flooring service library (15 services)
+- [x] Create locksmith service library (15 services)
+- [x] Create tiling service library (15 services)
+- [x] Create chimney & stove service library (12 services)
+- [x] Create driveway & patio service library (15 services)
+
+**Total:** 14 industry libraries (~277 services)
+
 - [ ] Test libraries with AI generation
 
 ### End-to-End Workflow
@@ -785,7 +804,7 @@ Strategic implementation roadmap for the white-label website platform. Updated a
 
 ### Product Milestones
 
-- [ ] 5 industry libraries created
+- [x] 14 industry libraries created (target was 5)
 - [ ] 10 component variants available
 - [ ] Blog & projects features live
 - [ ] Client self-service portal

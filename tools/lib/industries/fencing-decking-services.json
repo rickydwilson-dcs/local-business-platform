@@ -1,0 +1,264 @@
+{
+  "industry": "fencing-decking",
+  "version": "1.0.0",
+  "last_updated": "2026-02-03",
+  "total_services": 15,
+  "categories": ["Fence Installation", "Fence Repairs", "Decking", "Garden Structures"],
+  "services": [
+    {
+      "slug": "fence-panel-installation",
+      "title": "Fence Panel Installation",
+      "description": "Professional installation of fence panels including posts, gravel boards and all fixings.",
+      "category": "Fence Installation",
+      "keywords": [
+        "fence panels",
+        "garden fence",
+        "fence installation",
+        "lap panels",
+        "closeboard fence"
+      ],
+      "typical_duration": "1-3 days",
+      "price_range": "££-£££",
+      "common_issues": ["Old fence needs replacing", "Storm damage", "New build garden"],
+      "related_services": [
+        "fence-post-installation",
+        "gravel-board-installation",
+        "gate-installation"
+      ]
+    },
+    {
+      "slug": "closeboard-fencing",
+      "title": "Closeboard Fencing",
+      "description": "Installation of traditional closeboard featheredge fencing for maximum privacy and durability.",
+      "category": "Fence Installation",
+      "keywords": [
+        "closeboard",
+        "featheredge",
+        "hit and miss",
+        "privacy fence",
+        "traditional fence"
+      ],
+      "typical_duration": "2-4 days",
+      "price_range": "£££",
+      "common_issues": [
+        "Want strong durable fence",
+        "Maximum privacy needed",
+        "Exposed or windy location"
+      ],
+      "related_services": [
+        "fence-panel-installation",
+        "fence-post-installation",
+        "gate-installation"
+      ]
+    },
+    {
+      "slug": "fence-post-installation",
+      "title": "Fence Post Installation",
+      "description": "Installation of concrete or timber fence posts using concrete or post spikes for stability.",
+      "category": "Fence Installation",
+      "keywords": ["fence posts", "concrete posts", "timber posts", "post holes", "post spikes"],
+      "typical_duration": "1-2 days",
+      "price_range": "££",
+      "common_issues": ["Rotten timber posts", "Leaning fence", "Posts blown over"],
+      "related_services": ["fence-panel-installation", "closeboard-fencing", "fence-repairs"]
+    },
+    {
+      "slug": "gravel-board-installation",
+      "title": "Gravel Board Installation",
+      "description": "Installation of concrete or timber gravel boards to protect fence panels from ground moisture.",
+      "category": "Fence Installation",
+      "keywords": [
+        "gravel boards",
+        "kick boards",
+        "fence base",
+        "panel protection",
+        "rot prevention"
+      ],
+      "typical_duration": "1-2 days",
+      "price_range": "£-££",
+      "common_issues": [
+        "Fence panels rotting at bottom",
+        "Ground contact damage",
+        "Upgrading existing fence"
+      ],
+      "related_services": ["fence-panel-installation", "fence-repairs"]
+    },
+    {
+      "slug": "fence-repairs",
+      "title": "Fence Repairs",
+      "description": "Repair of damaged fence panels, posts, rails and fittings to restore security and appearance.",
+      "category": "Fence Repairs",
+      "keywords": [
+        "fence repair",
+        "broken fence",
+        "storm damage",
+        "fence panel replacement",
+        "post repair"
+      ],
+      "typical_duration": "2-6 hours",
+      "price_range": "£-££",
+      "common_issues": ["Panels blown out", "Rotten sections", "Broken rails or fixings"],
+      "related_services": ["fence-panel-installation", "fence-post-installation", "fence-treatment"]
+    },
+    {
+      "slug": "fence-treatment",
+      "title": "Fence Treatment & Staining",
+      "description": "Application of wood preserver, stain or paint to protect and enhance your fence.",
+      "category": "Fence Repairs",
+      "keywords": [
+        "fence treatment",
+        "fence stain",
+        "fence paint",
+        "wood preserver",
+        "fence maintenance"
+      ],
+      "typical_duration": "1-2 days",
+      "price_range": "£-££",
+      "common_issues": ["Grey weathered timber", "Annual maintenance", "Want to change colour"],
+      "related_services": ["fence-repairs", "decking-treatment"]
+    },
+    {
+      "slug": "gate-installation",
+      "title": "Garden Gate Installation",
+      "description": "Installation of side gates, garden gates and driveway gates including posts and hardware.",
+      "category": "Fence Installation",
+      "keywords": ["garden gate", "side gate", "driveway gate", "wooden gate", "gate fitting"],
+      "typical_duration": "2-6 hours",
+      "price_range": "££-£££",
+      "common_issues": ["No side access gate", "Old gate rotted away", "Security improvement"],
+      "related_services": ["fence-panel-installation", "gate-repairs", "fence-post-installation"]
+    },
+    {
+      "slug": "gate-repairs",
+      "title": "Gate Repairs & Adjustment",
+      "description": "Repair of sagging, sticking or damaged gates including hinges, latches and structural repairs.",
+      "category": "Fence Repairs",
+      "keywords": ["gate repair", "sagging gate", "gate hinges", "gate latch", "gate adjustment"],
+      "typical_duration": "1-3 hours",
+      "price_range": "£",
+      "common_issues": [
+        "Gate dragging on ground",
+        "Won't close properly",
+        "Broken hinges or latch"
+      ],
+      "related_services": ["gate-installation", "fence-repairs"]
+    },
+    {
+      "slug": "decking-installation",
+      "title": "Decking Installation",
+      "description": "Professional installation of timber or composite decking to create an outdoor living space.",
+      "category": "Decking",
+      "keywords": [
+        "decking",
+        "timber decking",
+        "composite decking",
+        "deck installation",
+        "garden deck"
+      ],
+      "typical_duration": "2-5 days",
+      "price_range": "£££-££££",
+      "common_issues": ["Want outdoor entertaining space", "Uneven garden", "Replace old patio"],
+      "related_services": ["decking-repairs", "decking-treatment", "deck-balustrade"]
+    },
+    {
+      "slug": "decking-repairs",
+      "title": "Decking Repairs",
+      "description": "Repair and replacement of damaged decking boards, joists and supports.",
+      "category": "Decking",
+      "keywords": [
+        "decking repair",
+        "deck repair",
+        "rotten boards",
+        "deck restoration",
+        "joist repair"
+      ],
+      "typical_duration": "2-6 hours",
+      "price_range": "£-££",
+      "common_issues": ["Rotten or warped boards", "Loose or bouncy boards", "Structural damage"],
+      "related_services": ["decking-installation", "decking-treatment"]
+    },
+    {
+      "slug": "decking-treatment",
+      "title": "Decking Treatment & Staining",
+      "description": "Cleaning, treating and staining of timber decking to protect and restore its appearance.",
+      "category": "Decking",
+      "keywords": [
+        "deck treatment",
+        "deck stain",
+        "deck oil",
+        "decking maintenance",
+        "deck cleaning"
+      ],
+      "typical_duration": "1-2 days",
+      "price_range": "££",
+      "common_issues": ["Grey and weathered deck", "Slippery when wet", "Annual maintenance"],
+      "related_services": ["decking-repairs", "fence-treatment"]
+    },
+    {
+      "slug": "deck-balustrade",
+      "title": "Deck Balustrade & Handrails",
+      "description": "Installation of balustrades, handrails and spindles for raised decking safety and aesthetics.",
+      "category": "Decking",
+      "keywords": [
+        "deck balustrade",
+        "deck handrail",
+        "deck spindles",
+        "deck railing",
+        "safety rail"
+      ],
+      "typical_duration": "1-2 days",
+      "price_range": "££-£££",
+      "common_issues": [
+        "Raised deck needs rails",
+        "Building regulations compliance",
+        "Upgrade existing railings"
+      ],
+      "related_services": ["decking-installation", "decking-repairs"]
+    },
+    {
+      "slug": "pergola-installation",
+      "title": "Pergola Installation",
+      "description": "Construction and installation of wooden pergolas for garden shade and climbing plants.",
+      "category": "Garden Structures",
+      "keywords": ["pergola", "garden pergola", "wooden pergola", "arbour", "garden shade"],
+      "typical_duration": "1-3 days",
+      "price_range": "££-£££",
+      "common_issues": [
+        "Create shaded seating area",
+        "Support climbing plants",
+        "Define outdoor space"
+      ],
+      "related_services": [
+        "decking-installation",
+        "trellis-installation",
+        "fence-panel-installation"
+      ]
+    },
+    {
+      "slug": "trellis-installation",
+      "title": "Trellis Installation",
+      "description": "Installation of trellis panels for climbing plants, privacy screens and fence height extensions.",
+      "category": "Garden Structures",
+      "keywords": ["trellis", "garden trellis", "trellis panel", "privacy screen", "fence topper"],
+      "typical_duration": "2-6 hours",
+      "price_range": "£-££",
+      "common_issues": ["Support climbing plants", "Increase privacy", "Extend fence height"],
+      "related_services": ["fence-panel-installation", "pergola-installation"]
+    },
+    {
+      "slug": "shed-base-installation",
+      "title": "Shed Base Installation",
+      "description": "Preparation and installation of solid bases for sheds, summerhouses and garden buildings.",
+      "category": "Garden Structures",
+      "keywords": ["shed base", "shed foundation", "concrete base", "slab base", "eco base"],
+      "typical_duration": "1-2 days",
+      "price_range": "££",
+      "common_issues": [
+        "Need level shed base",
+        "Soft or uneven ground",
+        "New shed being delivered"
+      ],
+      "related_services": ["decking-installation", "fence-panel-installation"]
+    }
+  ]
+}
