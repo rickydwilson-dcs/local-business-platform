@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { HeroSection } from "@/components/ui/hero-section";
 import { ServicesOverview } from "@/components/ui/services-overview";
 import { CoverageAreas } from "@/components/ui/coverage-areas";
@@ -231,9 +232,9 @@ export default function HomePage() {
               <p className="text-gray-800 mb-6">
                 Get professional scaffolding services from the team you can trust.
               </p>
-              <a href="/contact" className="btn-primary-lg">
+              <Link href="/contact" className="btn-primary-lg">
                 Request Free Quote
-              </a>
+              </Link>
             </div>
           </div>
         </section>
