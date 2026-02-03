@@ -1,0 +1,196 @@
+{
+  "industry": "chimney-stove",
+  "version": "1.0.0",
+  "last_updated": "2026-02-03",
+  "total_services": 12,
+  "categories": [
+    "Chimney Sweeping",
+    "Stove Installation",
+    "Repairs & Maintenance",
+    "Safety Inspections"
+  ],
+  "services": [
+    {
+      "slug": "chimney-sweeping",
+      "title": "Chimney Sweeping",
+      "description": "Professional chimney sweeping to remove soot, debris and blockages for safe and efficient operation.",
+      "category": "Chimney Sweeping",
+      "keywords": [
+        "chimney sweep",
+        "chimney cleaning",
+        "flue sweep",
+        "soot removal",
+        "chimney maintenance"
+      ],
+      "typical_duration": "45-90 minutes",
+      "price_range": "£",
+      "common_issues": ["Annual maintenance", "Before winter season", "Smoke coming into room"],
+      "related_services": ["chimney-inspection", "bird-guard-installation", "cowl-fitting"]
+    },
+    {
+      "slug": "chimney-inspection",
+      "title": "Chimney Inspection & CCTV Survey",
+      "description": "Comprehensive chimney inspection using CCTV cameras to assess condition and identify problems.",
+      "category": "Safety Inspections",
+      "keywords": [
+        "chimney inspection",
+        "CCTV survey",
+        "chimney camera",
+        "flue inspection",
+        "condition report"
+      ],
+      "typical_duration": "1-2 hours",
+      "price_range": "££",
+      "common_issues": [
+        "Buying or selling property",
+        "Before installing new stove",
+        "Suspected damage or cracks"
+      ],
+      "related_services": ["chimney-sweeping", "chimney-lining", "chimney-repairs"]
+    },
+    {
+      "slug": "wood-burner-installation",
+      "title": "Wood Burning Stove Installation",
+      "description": "HETAS registered installation of wood burning stoves including flue connection and hearth construction.",
+      "category": "Stove Installation",
+      "keywords": ["wood burner", "log burner", "wood stove", "HETAS", "stove fitting"],
+      "typical_duration": "1-2 days",
+      "price_range": "£££-££££",
+      "common_issues": [
+        "Want cosy heating option",
+        "Reducing heating bills",
+        "Feature for living room"
+      ],
+      "related_services": ["chimney-lining", "hearth-construction", "stove-commissioning"]
+    },
+    {
+      "slug": "multifuel-stove-installation",
+      "title": "Multi-Fuel Stove Installation",
+      "description": "HETAS registered installation of multi-fuel stoves capable of burning wood and solid fuels.",
+      "category": "Stove Installation",
+      "keywords": ["multi-fuel stove", "coal stove", "solid fuel", "HETAS", "flex fuel"],
+      "typical_duration": "1-2 days",
+      "price_range": "£££-££££",
+      "common_issues": [
+        "Want fuel flexibility",
+        "Rural property heating",
+        "Replacing old fireplace"
+      ],
+      "related_services": ["wood-burner-installation", "chimney-lining", "hearth-construction"]
+    },
+    {
+      "slug": "chimney-lining",
+      "title": "Chimney Lining",
+      "description": "Installation of flexible stainless steel chimney liners for safe and efficient flue operation.",
+      "category": "Stove Installation",
+      "keywords": [
+        "chimney liner",
+        "flue liner",
+        "stainless liner",
+        "chimney relining",
+        "flexible liner"
+      ],
+      "typical_duration": "4-8 hours",
+      "price_range": "£££",
+      "common_issues": [
+        "Old chimney unsuitable for stove",
+        "Damaged existing liner",
+        "Required for new stove"
+      ],
+      "related_services": ["wood-burner-installation", "chimney-inspection", "cowl-fitting"]
+    },
+    {
+      "slug": "hearth-construction",
+      "title": "Hearth Construction",
+      "description": "Construction of fire-safe hearths to building regulations for stove installation.",
+      "category": "Stove Installation",
+      "keywords": ["hearth", "fireplace hearth", "slate hearth", "granite hearth", "building regs"],
+      "typical_duration": "1 day",
+      "price_range": "££-£££",
+      "common_issues": ["No existing hearth", "Hearth too small", "Non-compliant hearth"],
+      "related_services": ["wood-burner-installation", "multifuel-stove-installation"]
+    },
+    {
+      "slug": "stove-servicing",
+      "title": "Stove Servicing & Maintenance",
+      "description": "Annual servicing of wood burning and multi-fuel stoves to ensure safe and efficient operation.",
+      "category": "Repairs & Maintenance",
+      "keywords": [
+        "stove service",
+        "stove maintenance",
+        "annual service",
+        "stove check",
+        "efficiency"
+      ],
+      "typical_duration": "1-2 hours",
+      "price_range": "£-££",
+      "common_issues": [
+        "Annual maintenance due",
+        "Stove not burning well",
+        "Insurance requirement"
+      ],
+      "related_services": ["chimney-sweeping", "stove-glass-replacement", "stove-repairs"]
+    },
+    {
+      "slug": "stove-repairs",
+      "title": "Stove Repairs",
+      "description": "Repair of stove components including fire rope seals, baffle plates, grates and air controls.",
+      "category": "Repairs & Maintenance",
+      "keywords": ["stove repair", "fire rope", "baffle plate", "grate replacement", "air control"],
+      "typical_duration": "1-3 hours",
+      "price_range": "£-££",
+      "common_issues": ["Seals worn out", "Poor combustion", "Parts needing replacement"],
+      "related_services": ["stove-servicing", "stove-glass-replacement"]
+    },
+    {
+      "slug": "stove-glass-replacement",
+      "title": "Stove Glass Replacement",
+      "description": "Replacement of cracked, broken or clouded stove glass with correct heat-resistant glass.",
+      "category": "Repairs & Maintenance",
+      "keywords": [
+        "stove glass",
+        "fire glass",
+        "glass replacement",
+        "cracked glass",
+        "heat resistant glass"
+      ],
+      "typical_duration": "30-60 minutes",
+      "price_range": "£-££",
+      "common_issues": ["Cracked from impact", "Clouded or discoloured", "Seal failure"],
+      "related_services": ["stove-repairs", "stove-servicing"]
+    },
+    {
+      "slug": "bird-guard-installation",
+      "title": "Bird Guard Installation",
+      "description": "Fitting of bird guards and mesh caps to prevent birds and debris entering your chimney.",
+      "category": "Repairs & Maintenance",
+      "keywords": ["bird guard", "chimney cap", "bird cage", "mesh guard", "chimney protection"],
+      "typical_duration": "30-60 minutes",
+      "price_range": "£",
+      "common_issues": ["Birds nesting in chimney", "Debris falling down", "Prevent blockages"],
+      "related_services": ["cowl-fitting", "chimney-sweeping"]
+    },
+    {
+      "slug": "cowl-fitting",
+      "title": "Chimney Cowl Fitting",
+      "description": "Installation of chimney cowls to improve draught, prevent downdraught and protect flue.",
+      "category": "Repairs & Maintenance",
+      "keywords": ["chimney cowl", "pot cowl", "anti-downdraught", "spinner cowl", "rain cowl"],
+      "typical_duration": "30-90 minutes",
+      "price_range": "£-££",
+      "common_issues": ["Downdraught problems", "Smoke blowing back", "Rain entering chimney"],
+      "related_services": ["bird-guard-installation", "chimney-sweeping", "chimney-repairs"]
+    },
+    {
+      "slug": "chimney-repairs",
+      "title": "Chimney Repairs",
+      "description": "Repair of chimney pots, flaunching, pointing and stack restoration work.",
+      "category": "Repairs & Maintenance",
+      "keywords": ["chimney repair", "repointing", "flaunching", "chimney pot", "stack repair"],
+      "typical_duration": "2-6 hours",
+      "price_range": "££-£££",
+      "common_issues": ["Cracked flaunching", "Loose chimney pot", "Deteriorated pointing"],
+      "related_services": ["chimney-inspection", "cowl-fitting", "chimney-lining"]
+    }
+  ]
+}

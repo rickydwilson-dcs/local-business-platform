@@ -1,0 +1,240 @@
+{
+  "industry": "driveway-patio",
+  "version": "1.0.0",
+  "last_updated": "2026-02-03",
+  "total_services": 15,
+  "categories": ["Block Paving", "Resin & Tarmac", "Patios & Pathways", "Cleaning & Restoration"],
+  "services": [
+    {
+      "slug": "block-paving-driveways",
+      "title": "Block Paving Driveway Installation",
+      "description": "Professional installation of block paved driveways with proper sub-base and drainage.",
+      "category": "Block Paving",
+      "keywords": [
+        "block paving",
+        "driveway paving",
+        "brick driveway",
+        "paved driveway",
+        "permeable paving"
+      ],
+      "typical_duration": "3-7 days",
+      "price_range": "£££-££££",
+      "common_issues": [
+        "Cracked concrete driveway",
+        "Want better kerb appeal",
+        "More parking space needed"
+      ],
+      "related_services": ["patio-block-paving", "driveway-edging", "driveway-sealing"]
+    },
+    {
+      "slug": "patio-block-paving",
+      "title": "Block Paved Patio",
+      "description": "Creation of block paved patios and outdoor living areas with decorative patterns.",
+      "category": "Block Paving",
+      "keywords": [
+        "patio paving",
+        "block paved patio",
+        "garden paving",
+        "outdoor entertaining",
+        "paved area"
+      ],
+      "typical_duration": "2-5 days",
+      "price_range": "££-£££",
+      "common_issues": ["Create outdoor living space", "Replace old patio", "Level garden area"],
+      "related_services": ["block-paving-driveways", "pathway-installation", "patio-restoration"]
+    },
+    {
+      "slug": "driveway-edging",
+      "title": "Driveway Edging & Borders",
+      "description": "Installation of edging kerbs and decorative borders to define and protect driveways.",
+      "category": "Block Paving",
+      "keywords": ["edging", "kerbing", "driveway border", "edge restraint", "decorative edging"],
+      "typical_duration": "1-2 days",
+      "price_range": "£-££",
+      "common_issues": ["Paving spreading", "Define driveway edge", "Decorative finish"],
+      "related_services": ["block-paving-driveways", "block-paving-repairs"]
+    },
+    {
+      "slug": "block-paving-repairs",
+      "title": "Block Paving Repairs",
+      "description": "Repair of sunken, loose or damaged block paving including re-sanding and re-levelling.",
+      "category": "Block Paving",
+      "keywords": [
+        "paving repair",
+        "sunken blocks",
+        "loose paving",
+        "block replacement",
+        "paving maintenance"
+      ],
+      "typical_duration": "2-6 hours",
+      "price_range": "£-££",
+      "common_issues": ["Sunken areas", "Weeds growing through", "Loose or wobbly blocks"],
+      "related_services": ["driveway-cleaning", "driveway-sealing", "re-sanding"]
+    },
+    {
+      "slug": "resin-bound-driveway",
+      "title": "Resin Bound Driveway",
+      "description": "Installation of permeable resin bound surfacing for a smooth, low-maintenance driveway.",
+      "category": "Resin & Tarmac",
+      "keywords": [
+        "resin bound",
+        "resin driveway",
+        "permeable driveway",
+        "gravel resin",
+        "SuDS compliant"
+      ],
+      "typical_duration": "2-4 days",
+      "price_range": "£££-££££",
+      "common_issues": [
+        "Want low maintenance surface",
+        "Drainage requirements",
+        "Modern clean appearance"
+      ],
+      "related_services": ["resin-bound-patio", "resin-repairs", "driveway-preparation"]
+    },
+    {
+      "slug": "resin-bound-patio",
+      "title": "Resin Bound Patio",
+      "description": "Installation of resin bound surfacing for patios and garden areas.",
+      "category": "Resin & Tarmac",
+      "keywords": [
+        "resin patio",
+        "resin bound patio",
+        "decorative resin",
+        "garden surface",
+        "smooth patio"
+      ],
+      "typical_duration": "1-3 days",
+      "price_range": "£££",
+      "common_issues": ["Want seamless surface", "Wheelchair accessible", "Low maintenance garden"],
+      "related_services": ["resin-bound-driveway", "pathway-installation"]
+    },
+    {
+      "slug": "tarmac-driveway",
+      "title": "Tarmac Driveway Installation",
+      "description": "Professional laying of tarmac driveways with proper preparation and finishing.",
+      "category": "Resin & Tarmac",
+      "keywords": ["tarmac", "tarmac driveway", "asphalt", "blacktop", "macadam"],
+      "typical_duration": "1-3 days",
+      "price_range": "££-£££",
+      "common_issues": ["Cost-effective solution", "Quick installation", "Replace damaged surface"],
+      "related_services": ["tarmac-repairs", "driveway-edging"]
+    },
+    {
+      "slug": "tarmac-repairs",
+      "title": "Tarmac Repairs & Patching",
+      "description": "Repair of potholes, cracks and damaged areas in existing tarmac surfaces.",
+      "category": "Resin & Tarmac",
+      "keywords": [
+        "tarmac repair",
+        "pothole repair",
+        "tarmac patch",
+        "asphalt repair",
+        "crack filling"
+      ],
+      "typical_duration": "2-6 hours",
+      "price_range": "£-££",
+      "common_issues": ["Potholes forming", "Cracking surface", "Edges crumbling"],
+      "related_services": ["tarmac-driveway", "driveway-cleaning"]
+    },
+    {
+      "slug": "natural-stone-patio",
+      "title": "Natural Stone Patio",
+      "description": "Installation of natural stone patios using sandstone, limestone, slate or granite.",
+      "category": "Patios & Pathways",
+      "keywords": ["natural stone", "sandstone patio", "indian stone", "limestone", "flagstone"],
+      "typical_duration": "3-7 days",
+      "price_range": "£££-££££",
+      "common_issues": [
+        "Want premium appearance",
+        "Period property matching",
+        "Durable long-lasting patio"
+      ],
+      "related_services": ["pathway-installation", "patio-restoration", "patio-sealing"]
+    },
+    {
+      "slug": "porcelain-paving",
+      "title": "Porcelain Paving Installation",
+      "description": "Installation of low-maintenance porcelain paving slabs for patios and outdoor areas.",
+      "category": "Patios & Pathways",
+      "keywords": [
+        "porcelain paving",
+        "porcelain tiles",
+        "outdoor porcelain",
+        "modern patio",
+        "low maintenance"
+      ],
+      "typical_duration": "2-5 days",
+      "price_range": "£££",
+      "common_issues": ["Want modern look", "Low maintenance required", "Indoor-outdoor flow"],
+      "related_services": ["natural-stone-patio", "patio-block-paving"]
+    },
+    {
+      "slug": "pathway-installation",
+      "title": "Garden Pathway Installation",
+      "description": "Creation of garden paths using paving, gravel, stepping stones or decorative materials.",
+      "category": "Patios & Pathways",
+      "keywords": ["garden path", "pathway", "stepping stones", "gravel path", "walkway"],
+      "typical_duration": "1-3 days",
+      "price_range": "££",
+      "common_issues": ["No clear garden access", "Muddy route to shed", "Define garden areas"],
+      "related_services": ["patio-block-paving", "natural-stone-patio", "step-construction"]
+    },
+    {
+      "slug": "step-construction",
+      "title": "Garden Step Construction",
+      "description": "Building of garden steps to navigate level changes safely and attractively.",
+      "category": "Patios & Pathways",
+      "keywords": ["garden steps", "outdoor steps", "patio steps", "brick steps", "stone steps"],
+      "typical_duration": "1-3 days",
+      "price_range": "££-£££",
+      "common_issues": ["Sloped garden access", "Replace wooden steps", "Level change safety"],
+      "related_services": ["pathway-installation", "natural-stone-patio", "retaining-walls"]
+    },
+    {
+      "slug": "driveway-cleaning",
+      "title": "Driveway & Patio Cleaning",
+      "description": "Professional pressure washing and cleaning of driveways, patios and outdoor surfaces.",
+      "category": "Cleaning & Restoration",
+      "keywords": [
+        "pressure washing",
+        "jet washing",
+        "driveway cleaning",
+        "patio cleaning",
+        "power washing"
+      ],
+      "typical_duration": "2-6 hours",
+      "price_range": "£-££",
+      "common_issues": ["Moss and algae buildup", "Oil stains", "General dirt and grime"],
+      "related_services": ["patio-restoration", "driveway-sealing", "re-sanding"]
+    },
+    {
+      "slug": "patio-restoration",
+      "title": "Patio Restoration",
+      "description": "Restoration of tired patios including cleaning, re-pointing and repairs.",
+      "category": "Cleaning & Restoration",
+      "keywords": [
+        "patio restoration",
+        "patio repair",
+        "re-pointing",
+        "patio refurbishment",
+        "slab repair"
+      ],
+      "typical_duration": "1-3 days",
+      "price_range": "££",
+      "common_issues": ["Crumbling pointing", "Weeds throughout", "Sunken or loose slabs"],
+      "related_services": ["driveway-cleaning", "patio-sealing", "natural-stone-patio"]
+    },
+    {
+      "slug": "driveway-sealing",
+      "title": "Driveway & Patio Sealing",
+      "description": "Application of protective sealants to enhance appearance and extend the life of surfaces.",
+      "category": "Cleaning & Restoration",
+      "keywords": ["sealing", "sealant", "block paving seal", "stone sealer", "surface protection"],
+      "typical_duration": "4-8 hours",
+      "price_range": "££",
+      "common_issues": ["Protect new installation", "Prevent weed growth", "Enhance colour"],
+      "related_services": ["driveway-cleaning", "block-paving-repairs", "patio-restoration"]
+    }
+  ]
+}

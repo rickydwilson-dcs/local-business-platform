@@ -1,0 +1,230 @@
+{
+  "metadata": {
+    "projectId": "550e8400-e29b-41d4-a716-446655440000",
+    "version": "1.0.0",
+    "status": "approved",
+    "intakeChannel": "manual_entry",
+    "createdAt": "2026-02-03T10:00:00Z",
+    "updatedAt": "2026-02-03T10:00:00Z"
+  },
+
+  "business": {
+    "name": "Smith's Electrical Services",
+    "legalName": "Smith's Electrical Ltd",
+    "industry": "electrical",
+    "type": "limited_company",
+    "phone": "01234 567890",
+    "email": "info@smithselectrical.co.uk",
+    "website": "https://smithselectrical.co.uk",
+    "address": {
+      "line1": "45 High Street",
+      "city": "Cambridge",
+      "county": "Cambridgeshire",
+      "postcode": "CB2 1LA",
+      "country": "United Kingdom"
+    },
+    "hours": {
+      "regular": [
+        { "day": "monday", "isOpen": true, "slots": [{ "open": "08:00", "close": "18:00" }] },
+        { "day": "tuesday", "isOpen": true, "slots": [{ "open": "08:00", "close": "18:00" }] },
+        { "day": "wednesday", "isOpen": true, "slots": [{ "open": "08:00", "close": "18:00" }] },
+        { "day": "thursday", "isOpen": true, "slots": [{ "open": "08:00", "close": "18:00" }] },
+        { "day": "friday", "isOpen": true, "slots": [{ "open": "08:00", "close": "18:00" }] },
+        { "day": "saturday", "isOpen": true, "slots": [{ "open": "09:00", "close": "13:00" }] },
+        { "day": "sunday", "isOpen": false, "displayText": "Closed" }
+      ],
+      "emergency24h": true,
+      "emergencyPhone": "07700 900123"
+    },
+    "socialMedia": {
+      "facebook": "https://facebook.com/smithselectrical",
+      "instagram": "https://instagram.com/smithselectrical"
+    },
+    "geo": {
+      "headquarters": {
+        "latitude": 52.2053,
+        "longitude": 0.1218
+      },
+      "serviceRadiusMiles": 25
+    }
+  },
+
+  "credentials": {
+    "yearEstablished": 2010,
+    "certifications": [
+      { "name": "NICEIC Approved Contractor", "issuedBy": "NICEIC" },
+      { "name": "Part P Registered", "issuedBy": "Part P Scheme" },
+      { "name": "TrustMark", "issuedBy": "TrustMark" }
+    ],
+    "insurance": [
+      {
+        "type": "Public Liability",
+        "coverageAmount": 5000000,
+        "currency": "GBP",
+        "provider": "Hiscox"
+      },
+      { "type": "Professional Indemnity", "coverageAmount": 1000000, "currency": "GBP" }
+    ],
+    "teamQualifications": "Fully qualified electricians with City & Guilds certifications and 15+ years combined experience",
+    "memberships": ["Federation of Master Builders", "Electrical Safety First"]
+  },
+
+  "services": [
+    {
+      "slug": "domestic-electrical",
+      "title": "Domestic Electrical Services",
+      "category": "core",
+      "shortDescription": "Complete electrical services for homes across Cambridgeshire",
+      "keyFeatures": [
+        "Full house rewiring",
+        "Consumer unit upgrades",
+        "Additional sockets and lighting",
+        "Fault finding and repairs"
+      ],
+      "relatedServices": ["eicr-testing", "smart-home"],
+      "includeInGeneration": true
+    },
+    {
+      "slug": "eicr-testing",
+      "title": "EICR Testing & Certification",
+      "category": "core",
+      "shortDescription": "Electrical Installation Condition Reports for landlords and homeowners",
+      "keyFeatures": [
+        "Landlord certificates",
+        "Homebuyer reports",
+        "Periodic inspection",
+        "Remedial work"
+      ],
+      "relatedServices": ["domestic-electrical"],
+      "includeInGeneration": true
+    },
+    {
+      "slug": "ev-charger-installation",
+      "title": "EV Charger Installation",
+      "category": "specialist",
+      "shortDescription": "Electric vehicle charging point installation for homes and businesses",
+      "keyFeatures": [
+        "Home charging points",
+        "Workplace charging",
+        "OZEV grant approved",
+        "All major brands"
+      ],
+      "relatedServices": ["domestic-electrical"],
+      "includeInGeneration": true
+    },
+    {
+      "slug": "smart-home",
+      "title": "Smart Home Installation",
+      "category": "additional",
+      "shortDescription": "Transform your home with smart lighting and automation",
+      "keyFeatures": [
+        "Smart lighting",
+        "Home automation",
+        "Security systems",
+        "Voice control setup"
+      ],
+      "relatedServices": ["domestic-electrical"],
+      "includeInGeneration": true
+    }
+  ],
+
+  "regions": [
+    {
+      "name": "Cambridgeshire",
+      "slug": "cambridgeshire",
+      "locations": [
+        {
+          "name": "Cambridge",
+          "slug": "cambridge",
+          "type": "urban",
+          "localAuthority": "Cambridge City Council",
+          "hasHeritage": true,
+          "neighborhoods": ["City Centre", "Newnham", "Trumpington", "Cherry Hinton"],
+          "includeInGeneration": true
+        },
+        {
+          "name": "Ely",
+          "slug": "ely",
+          "type": "historic",
+          "localAuthority": "East Cambridgeshire District Council",
+          "hasHeritage": true,
+          "landmarks": ["Ely Cathedral"],
+          "includeInGeneration": true
+        },
+        {
+          "name": "Huntingdon",
+          "slug": "huntingdon",
+          "type": "mixed",
+          "localAuthority": "Huntingdonshire District Council",
+          "includeInGeneration": true
+        }
+      ]
+    }
+  ],
+
+  "pricing": {
+    "domestic": {
+      "min": 85,
+      "max": 150,
+      "unit": "per hour",
+      "currency": "GBP"
+    },
+    "commercial": {
+      "min": 350,
+      "max": 1500,
+      "unit": "per day",
+      "currency": "GBP"
+    },
+    "freeQuote": true,
+    "notes": "All quotes include a full written breakdown with no hidden costs"
+  },
+
+  "brandVoice": {
+    "tone": "Professional, friendly, and trustworthy",
+    "preferredTerms": ["qualified", "certified", "reliable", "experienced"],
+    "avoidWords": ["cheap", "budget", "discount"],
+    "targetAudience": "Homeowners and landlords in Cambridgeshire",
+    "usps": ["NICEIC Approved", "24/7 Emergency Service", "15+ Years Experience", "Free Quotes"],
+    "tagline": "Cambridge's Trusted Electricians"
+  },
+
+  "theme": {
+    "colors": {
+      "brand": {
+        "primary": "#2563eb",
+        "secondary": "#1e40af",
+        "accent": "#f59e0b"
+      },
+      "surface": {
+        "background": "#ffffff",
+        "foreground": "#1f2937",
+        "muted": "#f3f4f6",
+        "card": "#ffffff"
+      }
+    },
+    "typography": {
+      "fontFamily": "Inter",
+      "headingFontFamily": "Inter",
+      "baseFontSize": 16
+    },
+    "components": {
+      "buttonRadius": "0.5rem",
+      "cardRadius": "1rem",
+      "useShadows": true
+    }
+  },
+
+  "deployment": {
+    "siteName": "smiths-electrical-cambridge",
+    "domain": "smithselectrical.co.uk",
+    "features": {
+      "contactForm": true,
+      "quoteForm": true,
+      "blog": false,
+      "reviews": true,
+      "liveChat": false,
+      "booking": false,
+      "gallery": true
+    }
+  }
+}
