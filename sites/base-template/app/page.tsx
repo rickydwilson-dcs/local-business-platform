@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { siteConfig } from '@/site.config';
 
 export default function HomePage() {
@@ -13,12 +14,12 @@ export default function HomePage() {
             {siteConfig.tagline}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="/contact" className="btn-primary">
+            <Link href="/contact" className="btn-primary">
               Get Started
-            </a>
-            <a href="/services" className="btn-secondary">
+            </Link>
+            <Link href="/services" className="btn-secondary">
               Our Services
-            </a>
+            </Link>
           </div>
         </div>
       </section>
@@ -29,12 +30,12 @@ export default function HomePage() {
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Our Services</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {siteConfig.services.map((service) => (
-              <a key={service.slug} href={`/services/${service.slug}`} className="card group">
+              <Link key={service.slug} href={`/services/${service.slug}`} className="card group">
                 <h3 className="text-xl font-semibold mb-3 group-hover:text-blue-600 transition-colors">
                   {service.title}
                 </h3>
                 <p className="text-gray-600">{service.description}</p>
-              </a>
+              </Link>
             ))}
           </div>
         </div>
@@ -61,9 +62,9 @@ export default function HomePage() {
           <p className="text-xl text-gray-600 mb-8">
             Contact us today for a free consultation and quote
           </p>
-          <a href="/contact" className="btn-primary">
+          <Link href="/contact" className="btn-primary">
             Contact Us
-          </a>
+          </Link>
         </div>
       </section>
     </div>

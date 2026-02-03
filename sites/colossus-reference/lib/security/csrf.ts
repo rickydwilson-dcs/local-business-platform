@@ -54,7 +54,7 @@ interface TokenPayload {
  * const token = generateCsrfToken();
  * // Returns: "a1b2c3...xyz.1234567890.d4e5f6...abc"
  */
-export function generateCsrfToken(expiresIn: number = 3600): string {
+export function generateCsrfToken(_expiresIn: number = 3600): string {
   const value = crypto.randomBytes(32).toString("hex");
   const timestamp = Math.floor(Date.now() / 1000);
 
@@ -132,7 +132,7 @@ export function verifyCsrfToken(token: string, maxAge: number = 3600): boolean {
 
   try {
     return crypto.timingSafeEqual(Buffer.from(signature), Buffer.from(expectedSignature));
-  } catch (error) {
+  } catch {
     // timingSafeEqual throws if buffers have different lengths
     return false;
   }

@@ -354,14 +354,18 @@ export default async function ReviewsPage() {
           description:
             "Read what our customers say about Colossus Scaffolding. Trusted by homeowners and businesses across the South East.",
         }}
-        aggregateRating={{
-          "@type": "AggregateRating",
-          "@id": absUrl("/reviews#aggregaterating"),
-          ratingValue: average,
-          bestRating: 5,
-          worstRating: 1,
-          ratingCount: count,
-        }}
+        aggregateRating={
+          count > 0
+            ? {
+                "@type": "AggregateRating",
+                "@id": absUrl("/reviews#aggregaterating"),
+                ratingValue: average,
+                bestRating: 5,
+                worstRating: 1,
+                ratingCount: count,
+              }
+            : undefined
+        }
       />
     </>
   );
