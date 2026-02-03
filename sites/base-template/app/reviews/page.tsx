@@ -10,7 +10,6 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 import { Schema } from '@/components/Schema';
 import { Breadcrumbs } from '@/components/ui/breadcrumbs';
-import { StarRating } from '@/components/ui/star-rating';
 import { AggregateRatingDisplay } from '@/components/ui/aggregate-rating-display';
 import { TestimonialCard } from '@/components/ui/testimonial-card';
 import { getTestimonials, calculateAggregateRating } from '@/lib/content';
@@ -260,14 +259,18 @@ export default async function ReviewsPage() {
           name: 'Customer Reviews',
           description: `Read what our customers say about ${siteConfig.business.name}. Trusted by homeowners and businesses.`,
         }}
-        aggregateRating={{
-          '@type': 'AggregateRating',
-          '@id': absUrl('/reviews#aggregaterating'),
-          ratingValue: average,
-          bestRating: 5,
-          worstRating: 1,
-          ratingCount: count,
-        }}
+        aggregateRating={
+          count > 0
+            ? {
+                '@type': 'AggregateRating',
+                '@id': absUrl('/reviews#aggregaterating'),
+                ratingValue: average,
+                bestRating: 5,
+                worstRating: 1,
+                ratingCount: count,
+              }
+            : undefined
+        }
       />
     </>
   );

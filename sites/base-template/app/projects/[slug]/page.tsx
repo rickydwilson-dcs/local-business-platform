@@ -8,6 +8,7 @@
 
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import type { Metadata } from 'next';
 import { Schema } from '@/components/Schema';
 import { Breadcrumbs } from '@/components/ui/breadcrumbs';
@@ -200,10 +201,12 @@ function RelatedProjects({ projects, currentSlug }: { projects: Project[]; curre
                 href={`/projects/${project.slug}`}
                 className="block relative h-56 overflow-hidden"
               >
-                <img
+                <Image
                   src={getImageUrl(project.heroImage)}
                   alt={project.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  className="object-cover group-hover:scale-105 transition-transform duration-300"
                 />
               </Link>
               <div className="p-6">

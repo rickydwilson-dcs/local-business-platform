@@ -20,7 +20,7 @@ export function BlogPostCard({
   heroImage,
   date,
   readingTime,
-  category,
+  category: _category,
   categoryLabel,
 }: BlogPostCardProps) {
   const formattedDate = new Date(date).toLocaleDateString("en-GB", {
