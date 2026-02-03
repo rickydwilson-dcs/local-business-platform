@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
-import { TOWN_LOCATIONS, MAP_CENTER, MAP_ZOOM, type TownLocation } from "@/lib/town-locations";
+import { TOWN_LOCATIONS, MAP_CENTER, MAP_ZOOM, type TownLocation } from "../../lib/town-locations";
 
 // Dynamically import the MapContainer to avoid SSR issues
 const MapContainer = dynamic(() => import("react-leaflet").then((mod) => mod.MapContainer), {
