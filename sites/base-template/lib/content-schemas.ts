@@ -231,9 +231,12 @@ export const ServiceFrontmatterSchema = z.object({
  * seoTitle: "Professional Services in Canterbury | Your Business"
  * description: "Trusted local services in Canterbury and surrounding areas."
  * hero:
- *   title: "Your Trusted Canterbury Experts"
- *   description: "Serving Canterbury and Kent for over 20 years"
- *   phone: "01234 567890"
+ *   heading: "Your Trusted Canterbury Experts"
+ *   subheading: "Serving Canterbury and Kent for over 20 years"
+ *   image: "placeholder/hero-canterbury.webp"
+ *   cta:
+ *     label: "Get Your Canterbury Quote"
+ *     href: "/contact"
  * ---
  */
 export const LocationFrontmatterSchema = z.object({
@@ -265,23 +268,28 @@ export const LocationFrontmatterSchema = z.object({
   heroImage: ImagePathSchema.optional(),
 
   /** Hero section configuration */
-  hero: z.object({
-    /** Main heading - typically includes location name */
-    title: z.string().min(5, 'Hero title is required'),
-    /** Location-specific value proposition */
-    description: z.string().min(20, 'Hero description must be at least 20 characters'),
-    /** Local contact phone number */
-    phone: z.string().regex(/^[\d\s\+\-\(\)]+$/, 'Phone must be valid'),
-    /** Trust signals specific to this location */
-    trustBadges: z
-      .array(z.string().min(3, 'Trust badge text too short'))
-      .min(1, 'At least 1 trust badge required')
-      .optional(),
-    /** CTA button text */
-    ctaText: z.string().min(5, 'CTA text is required').optional(),
-    /** CTA button destination */
-    ctaUrl: z.string().startsWith('/', 'CTA URL must start with /').optional(),
-  }),
+  hero: z
+    .object({
+      /** Main heading - typically includes location name */
+      heading: z.string().min(5, 'Hero heading is required'),
+      /** Location-specific value proposition */
+      subheading: z.string().min(20, 'Hero subheading must be at least 20 characters'),
+      /** Hero background or feature image */
+      image: ImagePathSchema.optional(),
+      /** Optional call-to-action button */
+      cta: HeroCtaSchema.optional(),
+      /** Local contact phone number */
+      phone: z
+        .string()
+        .regex(/^[\d\s\+\-\(\)]+$/, 'Phone must be valid')
+        .optional(),
+      /** Trust signals specific to this location */
+      trustBadges: z
+        .array(z.string().min(3, 'Trust badge text too short'))
+        .min(1, 'At least 1 trust badge required')
+        .optional(),
+    })
+    .optional(),
 
   /** Team/specialists section for location-specific staff */
   specialists: z
