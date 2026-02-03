@@ -41,6 +41,7 @@ const FILES_TO_COPY = [
   ".eslintrc.json",
   ".gitignore",
   ".prettierrc",
+  "mdx-components.tsx",
   "middleware.ts",
   "next.config.ts",
   "package.json",
@@ -50,8 +51,9 @@ const FILES_TO_COPY = [
   "vitest.config.ts",
 ];
 
-// Files to exclude from copy
-const EXCLUDE_PATTERNS = ["node_modules", ".next", "dist", ".turbo", ".env.local", "*.log"];
+// Files to exclude from copy (exact match or glob patterns)
+const EXCLUDE_PATTERNS = ["node_modules", ".next", "dist", ".turbo", ".env.local"];
+const EXCLUDE_EXTENSIONS = [".log"];
 
 // ============================================================================
 // Types
@@ -166,8 +168,12 @@ function copyRecursive(src: string, dest: string): string[] {
   if (stat.isDirectory()) {
     fs.mkdirSync(dest, { recursive: true });
     for (const item of fs.readdirSync(src)) {
-      // Skip excluded patterns
-      if (EXCLUDE_PATTERNS.some((pattern) => item.match(pattern.replace("*", ".*")))) {
+      // Skip excluded directories/files (exact match)
+      if (EXCLUDE_PATTERNS.includes(item)) {
+        continue;
+      }
+      // Skip excluded extensions
+      if (EXCLUDE_EXTENSIONS.some((ext) => item.endsWith(ext))) {
         continue;
       }
       const subFiles = copyRecursive(path.join(src, item), path.join(dest, item));
@@ -262,6 +268,10 @@ function slugify(text: string): string {
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/(^-|-$)/g, "");
+}
+
+function escapeForSingleQuote(text: string): string {
+  return text.replace(/'/g, "\\'");
 }
 
 // ============================================================================
@@ -543,7 +553,7 @@ export const siteConfig: SiteConfig = {
     showLocations: true,
     maxServices: 10,
     maxLocations: 12,
-    copyright: '${new Date().getFullYear()} ${project.business.name}. All rights reserved.',
+    copyright: '${new Date().getFullYear()} ${escapeForSingleQuote(project.business.name)}. All rights reserved.',
     builtBy: {
       name: 'Digital Consulting Services',
       url: 'https://www.digitalconsultingservices.co.uk',
