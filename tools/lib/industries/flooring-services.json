@@ -1,0 +1,284 @@
+{
+  "industry": "flooring",
+  "version": "1.0.0",
+  "last_updated": "2026-02-03",
+  "total_services": 15,
+  "categories": ["Carpet Fitting", "Laminate & Wood", "Vinyl & LVT", "Floor Preparation"],
+  "services": [
+    {
+      "slug": "carpet-fitting",
+      "title": "Carpet Fitting",
+      "description": "Professional fitting of carpets including gripper installation, underlay and seamless finishing.",
+      "category": "Carpet Fitting",
+      "keywords": [
+        "carpet fitting",
+        "carpet installation",
+        "carpet layer",
+        "new carpet",
+        "bedroom carpet"
+      ],
+      "typical_duration": "2-4 hours per room",
+      "price_range": "£-££",
+      "common_issues": [
+        "New carpet needs fitting",
+        "Moving home with carpets",
+        "Carpet replacement"
+      ],
+      "related_services": ["underlay-installation", "carpet-stretching", "stair-carpet-fitting"]
+    },
+    {
+      "slug": "stair-carpet-fitting",
+      "title": "Stair Carpet Fitting",
+      "description": "Expert fitting of carpet to stairs and landings including winders and awkward turns.",
+      "category": "Carpet Fitting",
+      "keywords": [
+        "stair carpet",
+        "staircase carpet",
+        "landing carpet",
+        "carpet stairs",
+        "carpet runner"
+      ],
+      "typical_duration": "2-4 hours",
+      "price_range": "££",
+      "common_issues": [
+        "Worn stair carpet",
+        "Complex staircase shape",
+        "Carpet runner installation"
+      ],
+      "related_services": ["carpet-fitting", "underlay-installation"]
+    },
+    {
+      "slug": "underlay-installation",
+      "title": "Underlay Installation",
+      "description": "Supply and fitting of carpet underlay to improve comfort, insulation and carpet lifespan.",
+      "category": "Carpet Fitting",
+      "keywords": [
+        "underlay",
+        "carpet underlay",
+        "foam underlay",
+        "acoustic underlay",
+        "insulation"
+      ],
+      "typical_duration": "1-2 hours per room",
+      "price_range": "£",
+      "common_issues": ["Old underlay worn out", "Want better comfort", "Improved soundproofing"],
+      "related_services": ["carpet-fitting", "laminate-flooring"]
+    },
+    {
+      "slug": "carpet-stretching",
+      "title": "Carpet Stretching & Re-fitting",
+      "description": "Re-stretching of loose or wrinkled carpet to restore a smooth, taut finish.",
+      "category": "Carpet Fitting",
+      "keywords": [
+        "carpet stretching",
+        "loose carpet",
+        "wrinkled carpet",
+        "carpet repair",
+        "carpet re-fitting"
+      ],
+      "typical_duration": "1-3 hours",
+      "price_range": "£-££",
+      "common_issues": [
+        "Ripples and waves in carpet",
+        "Carpet come loose",
+        "Poor original fitting"
+      ],
+      "related_services": ["carpet-fitting", "underlay-installation"]
+    },
+    {
+      "slug": "laminate-flooring",
+      "title": "Laminate Flooring Installation",
+      "description": "Professional installation of laminate flooring including underlay, trims and finishing.",
+      "category": "Laminate & Wood",
+      "keywords": [
+        "laminate flooring",
+        "laminate fitting",
+        "click flooring",
+        "floating floor",
+        "wood effect"
+      ],
+      "typical_duration": "1-2 days per room",
+      "price_range": "££",
+      "common_issues": ["Want hard wearing floor", "Replacing old carpet", "Modern update needed"],
+      "related_services": ["underlay-installation", "door-trimming", "floor-levelling"]
+    },
+    {
+      "slug": "engineered-wood-flooring",
+      "title": "Engineered Wood Flooring",
+      "description": "Installation of engineered wood flooring for a real wood appearance with excellent stability.",
+      "category": "Laminate & Wood",
+      "keywords": ["engineered wood", "real wood floor", "oak flooring", "parquet", "herringbone"],
+      "typical_duration": "2-3 days per room",
+      "price_range": "£££",
+      "common_issues": [
+        "Want real wood appearance",
+        "Underfloor heating compatibility",
+        "High-end renovation"
+      ],
+      "related_services": ["laminate-flooring", "floor-sanding", "floor-levelling"]
+    },
+    {
+      "slug": "floor-sanding",
+      "title": "Floor Sanding & Restoration",
+      "description": "Sanding and refinishing of existing wooden floors to restore their original beauty.",
+      "category": "Laminate & Wood",
+      "keywords": [
+        "floor sanding",
+        "wood floor restoration",
+        "floor refinishing",
+        "lacquer",
+        "wood oil"
+      ],
+      "typical_duration": "1-3 days per room",
+      "price_range": "££-£££",
+      "common_issues": [
+        "Worn or scratched floor",
+        "Want to change floor colour",
+        "Restoring original floors"
+      ],
+      "related_services": ["engineered-wood-flooring", "floor-repairs"]
+    },
+    {
+      "slug": "vinyl-flooring",
+      "title": "Vinyl Flooring Installation",
+      "description": "Professional installation of vinyl sheet flooring for kitchens, bathrooms and utility rooms.",
+      "category": "Vinyl & LVT",
+      "keywords": [
+        "vinyl flooring",
+        "vinyl sheet",
+        "cushion floor",
+        "kitchen vinyl",
+        "bathroom vinyl"
+      ],
+      "typical_duration": "2-4 hours per room",
+      "price_range": "£-££",
+      "common_issues": [
+        "Water resistant floor needed",
+        "Budget-friendly option",
+        "Easy clean surface"
+      ],
+      "related_services": ["lvt-flooring", "floor-levelling"]
+    },
+    {
+      "slug": "lvt-flooring",
+      "title": "LVT Flooring Installation",
+      "description": "Installation of luxury vinyl tiles (LVT) for a realistic wood or stone appearance.",
+      "category": "Vinyl & LVT",
+      "keywords": ["LVT", "luxury vinyl tile", "vinyl plank", "Karndean", "Amtico"],
+      "typical_duration": "1-2 days per room",
+      "price_range": "££-£££",
+      "common_issues": [
+        "Want wood look without wood problems",
+        "High traffic areas",
+        "Kitchen or bathroom floor"
+      ],
+      "related_services": ["vinyl-flooring", "floor-levelling", "door-trimming"]
+    },
+    {
+      "slug": "safety-flooring",
+      "title": "Safety Flooring Installation",
+      "description": "Installation of non-slip safety flooring for wet areas, commercial and healthcare settings.",
+      "category": "Vinyl & LVT",
+      "keywords": [
+        "safety flooring",
+        "non-slip",
+        "wet room flooring",
+        "commercial vinyl",
+        "healthcare flooring"
+      ],
+      "typical_duration": "1-2 days",
+      "price_range": "££-£££",
+      "common_issues": [
+        "Wet room or shower area",
+        "Elderly or mobility concerns",
+        "Commercial requirements"
+      ],
+      "related_services": ["vinyl-flooring", "floor-levelling"]
+    },
+    {
+      "slug": "floor-levelling",
+      "title": "Floor Levelling & Screeding",
+      "description": "Levelling of uneven floors using self-levelling compound ready for new flooring.",
+      "category": "Floor Preparation",
+      "keywords": [
+        "floor levelling",
+        "self levelling",
+        "screed",
+        "uneven floor",
+        "floor preparation"
+      ],
+      "typical_duration": "1-2 days",
+      "price_range": "££",
+      "common_issues": ["Uneven subfloor", "Bumpy concrete floor", "Preparation for new flooring"],
+      "related_services": ["laminate-flooring", "lvt-flooring", "floor-repairs"]
+    },
+    {
+      "slug": "floor-repairs",
+      "title": "Floor Repairs",
+      "description": "Repair of damaged floorboards, squeaky floors and structural floor issues.",
+      "category": "Floor Preparation",
+      "keywords": [
+        "floor repair",
+        "floorboard repair",
+        "squeaky floor",
+        "loose boards",
+        "floor damage"
+      ],
+      "typical_duration": "2-6 hours",
+      "price_range": "£-££",
+      "common_issues": ["Squeaky floorboards", "Damaged or rotting boards", "Gaps between boards"],
+      "related_services": ["floor-sanding", "floor-levelling", "subfloor-installation"]
+    },
+    {
+      "slug": "subfloor-installation",
+      "title": "Subfloor Installation",
+      "description": "Installation of plywood or hardboard subfloor over existing floors for a stable base.",
+      "category": "Floor Preparation",
+      "keywords": ["subfloor", "plywood overlay", "hardboard", "floor base", "floor preparation"],
+      "typical_duration": "1-2 days",
+      "price_range": "££",
+      "common_issues": [
+        "Poor condition existing floor",
+        "Level base needed",
+        "Preparing for vinyl or LVT"
+      ],
+      "related_services": ["floor-levelling", "floor-repairs", "vinyl-flooring"]
+    },
+    {
+      "slug": "door-trimming",
+      "title": "Door Trimming for New Floors",
+      "description": "Trimming of doors to accommodate new flooring height and ensure smooth operation.",
+      "category": "Floor Preparation",
+      "keywords": [
+        "door trimming",
+        "door planing",
+        "door adjustment",
+        "floor height",
+        "door scraping"
+      ],
+      "typical_duration": "15-30 minutes per door",
+      "price_range": "£",
+      "common_issues": [
+        "Doors scraping on new floor",
+        "Floor height increased",
+        "Underlay added height"
+      ],
+      "related_services": ["laminate-flooring", "lvt-flooring", "carpet-fitting"]
+    },
+    {
+      "slug": "threshold-trim-fitting",
+      "title": "Threshold & Trim Fitting",
+      "description": "Installation of door thresholds, scotia, beading and edging trims for a professional finish.",
+      "category": "Floor Preparation",
+      "keywords": ["threshold", "door bar", "scotia", "beading", "floor trim", "edging"],
+      "typical_duration": "1-2 hours",
+      "price_range": "£",
+      "common_issues": [
+        "Transition between floor types",
+        "Neat edge at doorways",
+        "Cover expansion gap"
+      ],
+      "related_services": ["laminate-flooring", "lvt-flooring", "vinyl-flooring"]
+    }
+  ]
+}

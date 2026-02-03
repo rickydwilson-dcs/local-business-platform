@@ -1,0 +1,256 @@
+{
+  "industry": "tiling",
+  "version": "1.0.0",
+  "last_updated": "2026-02-03",
+  "total_services": 15,
+  "categories": ["Wall Tiling", "Floor Tiling", "Specialist Materials", "Repairs & Grouting"],
+  "services": [
+    {
+      "slug": "bathroom-wall-tiling",
+      "title": "Bathroom Wall Tiling",
+      "description": "Professional tiling of bathroom walls including splash areas, full height tiling and feature walls.",
+      "category": "Wall Tiling",
+      "keywords": [
+        "bathroom tiles",
+        "wall tiles",
+        "bathroom tiling",
+        "shower tiles",
+        "bath surround"
+      ],
+      "typical_duration": "1-3 days",
+      "price_range": "££-£££",
+      "common_issues": ["Bathroom renovation", "Replacing old tiles", "Creating walk-in shower"],
+      "related_services": ["shower-tiling", "floor-tiling-bathroom", "tile-removal"]
+    },
+    {
+      "slug": "kitchen-wall-tiling",
+      "title": "Kitchen Wall Tiling",
+      "description": "Installation of kitchen wall tiles including splashbacks and full-height feature areas.",
+      "category": "Wall Tiling",
+      "keywords": ["kitchen tiles", "splashback", "kitchen wall", "behind hob", "worktop tiles"],
+      "typical_duration": "1-2 days",
+      "price_range": "££",
+      "common_issues": [
+        "New kitchen installation",
+        "Updating splashback",
+        "Grease and splash protection"
+      ],
+      "related_services": ["floor-tiling-kitchen", "glass-splashback", "tile-removal"]
+    },
+    {
+      "slug": "shower-tiling",
+      "title": "Shower Enclosure Tiling",
+      "description": "Specialist tiling of shower enclosures, wet rooms and walk-in showers with proper waterproofing.",
+      "category": "Wall Tiling",
+      "keywords": [
+        "shower tiling",
+        "wet room tiles",
+        "walk-in shower",
+        "shower enclosure",
+        "waterproof tiling"
+      ],
+      "typical_duration": "2-4 days",
+      "price_range": "£££",
+      "common_issues": ["Wet room conversion", "Leaking shower area", "New shower installation"],
+      "related_services": ["bathroom-wall-tiling", "wet-room-tanking", "floor-tiling-bathroom"]
+    },
+    {
+      "slug": "feature-wall-tiling",
+      "title": "Feature Wall Tiling",
+      "description": "Creation of decorative feature walls using tiles, mosaics or 3D textured tiles.",
+      "category": "Wall Tiling",
+      "keywords": ["feature wall", "accent wall", "decorative tiles", "3D tiles", "textured tiles"],
+      "typical_duration": "1-2 days",
+      "price_range": "££-£££",
+      "common_issues": ["Want design focal point", "Fireplace surround", "Entrance or hallway"],
+      "related_services": ["mosaic-tiling", "bathroom-wall-tiling"]
+    },
+    {
+      "slug": "floor-tiling-bathroom",
+      "title": "Bathroom Floor Tiling",
+      "description": "Installation of bathroom floor tiles including non-slip options and underfloor heating preparation.",
+      "category": "Floor Tiling",
+      "keywords": [
+        "bathroom floor",
+        "floor tiles",
+        "non-slip tiles",
+        "wet room floor",
+        "underfloor heating"
+      ],
+      "typical_duration": "1-2 days",
+      "price_range": "££",
+      "common_issues": [
+        "Bathroom renovation",
+        "Water damage repair",
+        "Installing underfloor heating"
+      ],
+      "related_services": ["bathroom-wall-tiling", "floor-preparation", "wet-room-tanking"]
+    },
+    {
+      "slug": "floor-tiling-kitchen",
+      "title": "Kitchen Floor Tiling",
+      "description": "Professional laying of kitchen floor tiles built to withstand heavy use and spills.",
+      "category": "Floor Tiling",
+      "keywords": [
+        "kitchen floor",
+        "floor tiles",
+        "porcelain tiles",
+        "ceramic floor",
+        "durable tiles"
+      ],
+      "typical_duration": "1-3 days",
+      "price_range": "££-£££",
+      "common_issues": ["Kitchen renovation", "Replacing worn floor", "Open plan living space"],
+      "related_services": ["kitchen-wall-tiling", "floor-preparation", "underfloor-heating-tiling"]
+    },
+    {
+      "slug": "hallway-floor-tiling",
+      "title": "Hallway & Entrance Floor Tiling",
+      "description": "Hard-wearing floor tiling for hallways, entrances and high-traffic areas.",
+      "category": "Floor Tiling",
+      "keywords": ["hallway tiles", "entrance tiles", "porch tiles", "vestibule", "durable floor"],
+      "typical_duration": "1-2 days",
+      "price_range": "££",
+      "common_issues": ["High traffic wear", "Muddy entrance", "Want low maintenance"],
+      "related_services": ["floor-tiling-kitchen", "floor-preparation", "external-tiling"]
+    },
+    {
+      "slug": "external-tiling",
+      "title": "External & Patio Tiling",
+      "description": "Installation of frost-resistant outdoor tiles for patios, balconies and external areas.",
+      "category": "Floor Tiling",
+      "keywords": [
+        "patio tiles",
+        "outdoor tiles",
+        "balcony tiles",
+        "frost proof",
+        "external porcelain"
+      ],
+      "typical_duration": "2-4 days",
+      "price_range": "£££",
+      "common_issues": [
+        "Create outdoor living space",
+        "Replace cracked paving",
+        "Matching indoor-outdoor flow"
+      ],
+      "related_services": ["floor-preparation", "floor-tiling-kitchen"]
+    },
+    {
+      "slug": "mosaic-tiling",
+      "title": "Mosaic Tiling",
+      "description": "Installation of mosaic tiles for decorative borders, feature areas and intricate designs.",
+      "category": "Specialist Materials",
+      "keywords": [
+        "mosaic tiles",
+        "glass mosaic",
+        "decorative tiles",
+        "border tiles",
+        "tile design"
+      ],
+      "typical_duration": "1-3 days",
+      "price_range": "£££",
+      "common_issues": ["Decorative accent needed", "Shower niche feature", "Unique design wanted"],
+      "related_services": ["feature-wall-tiling", "bathroom-wall-tiling", "shower-tiling"]
+    },
+    {
+      "slug": "natural-stone-tiling",
+      "title": "Natural Stone Tiling",
+      "description": "Expert installation of natural stone tiles including marble, slate, travertine and limestone.",
+      "category": "Specialist Materials",
+      "keywords": ["natural stone", "marble tiles", "slate tiles", "travertine", "limestone"],
+      "typical_duration": "2-4 days",
+      "price_range": "£££-££££",
+      "common_issues": [
+        "High-end renovation",
+        "Matching existing stone",
+        "Period property restoration"
+      ],
+      "related_services": ["floor-tiling-bathroom", "floor-tiling-kitchen", "stone-sealing"]
+    },
+    {
+      "slug": "large-format-tiling",
+      "title": "Large Format Tile Installation",
+      "description": "Specialist installation of large format tiles requiring precision levelling and handling.",
+      "category": "Specialist Materials",
+      "keywords": ["large tiles", "large format", "big tiles", "minimal grout", "levelling system"],
+      "typical_duration": "2-4 days",
+      "price_range": "£££",
+      "common_issues": [
+        "Want minimal grout lines",
+        "Modern contemporary look",
+        "Floor perfectly level required"
+      ],
+      "related_services": ["floor-preparation", "floor-tiling-bathroom", "floor-tiling-kitchen"]
+    },
+    {
+      "slug": "tile-removal",
+      "title": "Tile Removal",
+      "description": "Careful removal of existing wall and floor tiles with minimal damage to substrate.",
+      "category": "Repairs & Grouting",
+      "keywords": [
+        "tile removal",
+        "strip tiles",
+        "remove old tiles",
+        "tile demolition",
+        "tile lifting"
+      ],
+      "typical_duration": "1-2 days",
+      "price_range": "£-££",
+      "common_issues": [
+        "Preparation for new tiles",
+        "Full bathroom renovation",
+        "Damaged tiles throughout"
+      ],
+      "related_services": ["floor-preparation", "bathroom-wall-tiling", "floor-tiling-bathroom"]
+    },
+    {
+      "slug": "regrouting",
+      "title": "Tile Regrouting",
+      "description": "Removal of old grout and application of new grout to refresh and restore tiled areas.",
+      "category": "Repairs & Grouting",
+      "keywords": [
+        "regrouting",
+        "grout renewal",
+        "grout repair",
+        "grout refresh",
+        "grout replacement"
+      ],
+      "typical_duration": "4-8 hours",
+      "price_range": "£-££",
+      "common_issues": ["Discoloured or mouldy grout", "Crumbling grout", "Change grout colour"],
+      "related_services": ["tile-repairs", "silicone-replacement", "grout-sealing"]
+    },
+    {
+      "slug": "tile-repairs",
+      "title": "Tile Repairs & Replacement",
+      "description": "Replacement of cracked, chipped or damaged individual tiles matching existing design.",
+      "category": "Repairs & Grouting",
+      "keywords": [
+        "tile repair",
+        "cracked tile",
+        "broken tile",
+        "tile replacement",
+        "matching tiles"
+      ],
+      "typical_duration": "1-4 hours",
+      "price_range": "£-££",
+      "common_issues": ["Cracked from impact", "Loose or hollow tiles", "Single tile replacement"],
+      "related_services": ["regrouting", "silicone-replacement"]
+    },
+    {
+      "slug": "floor-preparation",
+      "title": "Floor Preparation for Tiling",
+      "description": "Substrate preparation including levelling, priming and waterproofing ready for tile installation.",
+      "category": "Repairs & Grouting",
+      "keywords": ["floor prep", "substrate", "levelling", "screeding", "tanking", "priming"],
+      "typical_duration": "1-2 days",
+      "price_range": "££",
+      "common_issues": [
+        "Uneven floor surface",
+        "Wet area waterproofing",
+        "Poor existing substrate"
+      ],
+      "related_services": ["wet-room-tanking", "floor-tiling-bathroom", "floor-tiling-kitchen"]
+    }
+  ]
+}
