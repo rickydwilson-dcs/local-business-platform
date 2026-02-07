@@ -12,11 +12,11 @@ export function AuthorCard({
   return (
     <div className="bg-gray-50 rounded-2xl p-6 sm:p-8 border border-gray-100">
       <div className="flex items-start gap-4 sm:gap-6">
-        <div className="w-16 h-16 sm:w-20 sm:h-20 bg-brand-blue rounded-full flex items-center justify-center text-white text-xl sm:text-2xl font-bold flex-shrink-0">
+        <div className="w-16 h-16 sm:w-20 sm:h-20 bg-brand-primary rounded-full flex items-center justify-center text-white text-xl sm:text-2xl font-bold flex-shrink-0">
           {name.charAt(0)}
         </div>
         <div className="flex-1 min-w-0">
-          <p className="text-sm font-medium text-brand-blue uppercase tracking-wide mb-1">
+          <p className="text-sm font-medium text-brand-primary uppercase tracking-wide mb-1">
             About the Author
           </p>
           <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-1">{name}</h3>

@@ -116,8 +116,12 @@ export function CoverageMap({ className = "", height = "h-96" }: CoverageMapProp
         className={`${height} bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl flex items-center justify-center ${className}`}
       >
         <div className="text-center">
-          <div className="w-16 h-16 bg-brand-blue/10 rounded-xl flex items-center justify-center mx-auto mb-4">
-            <svg className="w-8 h-8 text-brand-blue animate-spin" fill="none" viewBox="0 0 24 24">
+          <div className="w-16 h-16 bg-brand-primary/10 rounded-xl flex items-center justify-center mx-auto mb-4">
+            <svg
+              className="w-8 h-8 text-brand-primary animate-spin"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
               <circle
                 className="opacity-25"
                 cx="12"
@@ -201,7 +205,7 @@ export function CoverageMap({ className = "", height = "h-96" }: CoverageMapProp
 
                   <button
                     onClick={() => (window.location.href = location.url)}
-                    className="text-xs bg-brand-blue text-white px-2 py-1 rounded hover:bg-brand-blue-hover transition-colors"
+                    className="text-xs bg-brand-primary text-white px-2 py-1 rounded hover:bg-brand-primary-hover transition-colors"
                     aria-label={`View ${location.name} details`}
                   >
                     View Details →

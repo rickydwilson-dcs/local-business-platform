@@ -82,11 +82,11 @@ export function ServiceShowcase({
                           className="object-cover"
                         />
                       ) : (
-                        <div className="h-full bg-gradient-to-br from-brand-blue/10 to-brand-blue/20 flex items-center justify-center">
+                        <div className="h-full bg-gradient-to-br from-brand-primary/10 to-brand-primary/20 flex items-center justify-center">
                           {service.icon || (
-                            <div className="w-16 h-16 bg-brand-blue/20 rounded-lg flex items-center justify-center">
+                            <div className="w-16 h-16 bg-brand-primary/20 rounded-lg flex items-center justify-center">
                               <svg
-                                className="w-8 h-8 text-brand-blue"
+                                className="w-8 h-8 text-brand-primary"
                                 fill="none"
                                 viewBox="0 0 24 24"
                                 stroke="currentColor"
@@ -135,7 +135,7 @@ export function ServiceShowcase({
                     <ul className="space-y-3">
                       {service.features.map((feature, featureIndex) => (
                         <li key={featureIndex} className="flex items-start gap-3">
-                          <div className="flex-shrink-0 w-2 h-2 bg-brand-blue rounded-full mt-3"></div>
+                          <div className="flex-shrink-0 w-2 h-2 bg-brand-primary rounded-full mt-3"></div>
                           <span className="text-gray-700">{feature}</span>
                         </li>
                       ))}
@@ -214,11 +214,11 @@ export function ServiceShowcase({
                       />
                     </div>
                   ) : (
-                    <div className="h-48 bg-gradient-to-br from-brand-blue/10 to-brand-blue/20 flex items-center justify-center">
+                    <div className="h-48 bg-gradient-to-br from-brand-primary/10 to-brand-primary/20 flex items-center justify-center">
                       {service.icon || (
-                        <div className="w-12 h-12 bg-brand-blue/20 rounded-lg flex items-center justify-center">
+                        <div className="w-12 h-12 bg-brand-primary/20 rounded-lg flex items-center justify-center">
                           <svg
-                            className="w-6 h-6 text-brand-blue"
+                            className="w-6 h-6 text-brand-primary"
                             fill="none"
                             viewBox="0 0 24 24"
                             stroke="currentColor"
@@ -270,7 +270,7 @@ export function ServiceShowcase({
                   <ul className="space-y-2 mb-6">
                     {service.features.map((feature, featureIndex) => (
                       <li key={featureIndex} className="flex items-start gap-2">
-                        <div className="flex-shrink-0 w-1.5 h-1.5 bg-brand-blue rounded-full mt-2"></div>
+                        <div className="flex-shrink-0 w-1.5 h-1.5 bg-brand-primary rounded-full mt-2"></div>
                         <span className="text-gray-700 text-sm">{feature}</span>
                       </li>
                     ))}

@@ -59,10 +59,10 @@ const variantStyles = {
   },
   quote: {
     container: "bg-gray-50 rounded-r-xl",
-    border: "border-l-4 border-brand-blue",
+    border: "border-l-4 border-brand-primary",
   },
   marketing: {
-    container: "bg-gradient-to-br from-brand-blue to-brand-blue-hover text-white shadow-lg",
+    container: "bg-gradient-to-br from-brand-primary to-brand-primary-hover text-white shadow-lg",
   },
 };
 
@@ -178,7 +178,7 @@ export function ArticleCallout(props: ArticleCalloutProps) {
           &ldquo;{quote}&rdquo;
         </div>
         <footer className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-brand-blue rounded-full flex items-center justify-center text-white font-semibold">
+          <div className="w-10 h-10 bg-brand-primary rounded-full flex items-center justify-center text-white font-semibold">
             {author.charAt(0)}
           </div>
           <div>
@@ -225,7 +225,7 @@ export function ArticleCallout(props: ArticleCalloutProps) {
           {primaryAction && (
             <Link
               href={primaryAction.href}
-              className="block w-full bg-white text-brand-blue text-center font-semibold py-3 px-4 rounded-lg hover:bg-gray-50 transition-colors"
+              className="block w-full bg-white text-brand-primary text-center font-semibold py-3 px-4 rounded-lg hover:bg-gray-50 transition-colors"
             >
               {primaryAction.label}
             </Link>

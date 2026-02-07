@@ -260,11 +260,11 @@ export default async function Page({ params }: { params: Promise<Params> }) {
       </div>
 
       {/* Location Services Button */}
-      <section className="bg-brand-blue/5 border-b">
+      <section className="bg-brand-primary/5 border-b">
         <div className="mx-auto w-full lg:w-[90%] px-6 py-4">
           <Link
             href={`/locations/${location}`}
-            className="inline-flex items-center gap-2 text-brand-blue hover:text-brand-blue-hover font-medium transition-colors"
+            className="inline-flex items-center gap-2 text-brand-primary hover:text-brand-primary-hover font-medium transition-colors"
           >
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path

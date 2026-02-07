@@ -48,12 +48,12 @@ export function BlogPostHero(props: ContentHeroProps) {
               {props.variant === "blog" ? (
                 <Link
                   href={`/blog?category=${category}`}
-                  className="inline-block px-4 py-2 bg-brand-blue text-white text-sm font-medium rounded-full hover:bg-brand-blue-hover transition-colors"
+                  className="inline-block px-4 py-2 bg-brand-primary text-white text-sm font-medium rounded-full hover:bg-brand-primary-hover transition-colors"
                 >
                   {categoryLabel}
                 </Link>
               ) : (
-                <span className="inline-block px-4 py-2 bg-brand-blue text-white text-sm font-medium rounded-full">
+                <span className="inline-block px-4 py-2 bg-brand-primary text-white text-sm font-medium rounded-full">
                   {categoryLabel}
                 </span>
               )}
@@ -73,7 +73,7 @@ export function BlogPostHero(props: ContentHeroProps) {
                 <>
                   {/* Author */}
                   <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 bg-brand-blue rounded-full flex items-center justify-center text-white font-bold text-lg">
+                    <div className="w-12 h-12 bg-brand-primary rounded-full flex items-center justify-center text-white font-bold text-lg">
                       {props.author.name.charAt(0)}
                     </div>
                     <div>
@@ -205,7 +205,7 @@ export function BlogPostHero(props: ContentHeroProps) {
                 quality={65}
               />
             ) : (
-              <div className="relative h-[400px] bg-gradient-to-br from-brand-blue/10 to-brand-blue/20 rounded-2xl shadow-lg flex items-center justify-center">
+              <div className="relative h-[400px] bg-gradient-to-br from-brand-primary/10 to-brand-primary/20 rounded-2xl shadow-lg flex items-center justify-center">
                 <div className="text-gray-400 text-center">
                   <svg className="w-16 h-16 mx-auto mb-4" fill="currentColor" viewBox="0 0 20 20">
                     <path

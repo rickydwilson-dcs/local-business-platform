@@ -263,13 +263,13 @@ export default function AboutPage() {
         <div className="container-standard">
           <div className="mx-auto w-full lg:w-[90%] text-center">
             <div className="flex flex-wrap justify-center gap-4 mb-8">
-              <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-brand-blue/10 text-brand-blue border border-brand-blue/20">
+              <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-brand-primary/10 text-brand-primary border border-brand-primary/20">
                 Est. 2009
               </span>
-              <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-brand-blue/10 text-brand-blue border border-brand-blue/20">
+              <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-brand-primary/10 text-brand-primary border border-brand-primary/20">
                 Family Business
               </span>
-              <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-brand-blue/10 text-brand-blue border border-brand-blue/20">
+              <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-brand-primary/10 text-brand-primary border border-brand-primary/20">
                 Local Experts
               </span>
             </div>
@@ -329,7 +329,7 @@ export default function AboutPage() {
                 </div>
                 <div className="absolute -bottom-4 -right-4 bg-white rounded-xl shadow-lg p-4 border border-gray-100">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-brand-blue rounded-full flex items-center justify-center">
+                    <div className="w-10 h-10 bg-brand-primary rounded-full flex items-center justify-center">
                       <svg
                         aria-hidden="true"
                         className="w-5 h-5 text-white"
@@ -376,7 +376,7 @@ export default function AboutPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mx-auto w-full lg:w-[90%]">
             <div className="text-center p-6 bg-gray-50 rounded-2xl">
-              <div className="w-16 h-16 bg-brand-blue rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-brand-primary rounded-full flex items-center justify-center mx-auto mb-4">
                 <svg
                   aria-hidden="true"
                   className="w-8 h-8 text-white"
@@ -401,7 +401,7 @@ export default function AboutPage() {
             </div>
 
             <div className="text-center p-6 bg-gray-50 rounded-2xl">
-              <div className="w-16 h-16 bg-brand-blue rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-brand-primary rounded-full flex items-center justify-center mx-auto mb-4">
                 <svg
                   aria-hidden="true"
                   className="w-8 h-8 text-white"
@@ -418,12 +418,12 @@ export default function AboutPage() {
                 </svg>
               </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-2">Established</h3>
-              <p className="text-2xl font-bold text-brand-blue">2009</p>
+              <p className="text-2xl font-bold text-brand-primary">2009</p>
               <p className="text-gray-700">15+ Years Experience</p>
             </div>
 
             <div className="text-center p-6 bg-gray-50 rounded-2xl">
-              <div className="w-16 h-16 bg-brand-blue rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-brand-primary rounded-full flex items-center justify-center mx-auto mb-4">
                 <svg
                   aria-hidden="true"
                   className="w-8 h-8 text-white"
@@ -470,7 +470,7 @@ export default function AboutPage() {
                 <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mx-auto mb-4">
                   <svg
                     aria-hidden="true"
-                    className="w-6 h-6 text-brand-blue"
+                    className="w-6 h-6 text-brand-primary"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -494,7 +494,7 @@ export default function AboutPage() {
                 <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mx-auto mb-4">
                   <svg
                     aria-hidden="true"
-                    className="w-6 h-6 text-brand-blue"
+                    className="w-6 h-6 text-brand-primary"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -518,7 +518,7 @@ export default function AboutPage() {
                 <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mx-auto mb-4">
                   <svg
                     aria-hidden="true"
-                    className="w-6 h-6 text-brand-blue"
+                    className="w-6 h-6 text-brand-primary"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -542,7 +542,7 @@ export default function AboutPage() {
                 <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mx-auto mb-4">
                   <svg
                     aria-hidden="true"
-                    className="w-6 h-6 text-brand-blue"
+                    className="w-6 h-6 text-brand-primary"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -592,7 +592,7 @@ export default function AboutPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div className="text-center">
-              <div className="w-16 h-16 bg-brand-blue rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-brand-primary rounded-full flex items-center justify-center mx-auto mb-4">
                 <svg
                   aria-hidden="true"
                   className="w-8 h-8 text-white"
@@ -616,7 +616,7 @@ export default function AboutPage() {
             </div>
 
             <div className="text-center">
-              <div className="w-16 h-16 bg-brand-blue rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-brand-primary rounded-full flex items-center justify-center mx-auto mb-4">
                 <svg
                   aria-hidden="true"
                   className="w-8 h-8 text-white"
@@ -640,7 +640,7 @@ export default function AboutPage() {
             </div>
 
             <div className="text-center">
-              <div className="w-16 h-16 bg-brand-blue rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-brand-primary rounded-full flex items-center justify-center mx-auto mb-4">
                 <svg
                   aria-hidden="true"
                   className="w-8 h-8 text-white"
@@ -664,7 +664,7 @@ export default function AboutPage() {
             </div>
 
             <div className="text-center">
-              <div className="w-16 h-16 bg-brand-blue rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-brand-primary rounded-full flex items-center justify-center mx-auto mb-4">
                 <svg
                   aria-hidden="true"
                   className="w-8 h-8 text-white"
@@ -721,7 +721,7 @@ export default function AboutPage() {
               "Local expertise with regional planning knowledge",
             ].map((benefit, i) => (
               <div key={i} className="flex items-start gap-3 p-4 bg-gray-50 rounded-lg">
-                <div className="flex-shrink-0 w-6 h-6 bg-brand-blue rounded-full flex items-center justify-center mt-0.5">
+                <div className="flex-shrink-0 w-6 h-6 bg-brand-primary rounded-full flex items-center justify-center mt-0.5">
                   <svg
                     aria-hidden="true"
                     className="h-4 w-4 text-white"
@@ -745,7 +745,7 @@ export default function AboutPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="section-standard bg-brand-blue text-white">
+      <section className="section-standard bg-brand-primary text-white">
         <div className="container-standard text-center">
           <h2 className="text-3xl sm:text-4xl font-bold mb-6">
             Ready to Work with the South East&apos;s Trusted Scaffolding Specialists?
@@ -757,13 +757,13 @@ export default function AboutPage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center px-8 py-4 bg-white text-brand-blue font-semibold rounded-lg hover:bg-gray-200 transition-colors"
+              className="inline-flex items-center justify-center px-8 py-4 bg-white text-brand-primary font-semibold rounded-lg hover:bg-gray-200 transition-colors"
             >
               Get Free Quote
             </Link>
             <Link
               href={`tel:${PHONE_TEL}`}
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-white text-white font-semibold rounded-lg hover:bg-white hover:text-brand-blue transition-colors"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-white text-white font-semibold rounded-lg hover:bg-white hover:text-brand-primary transition-colors"
             >
               <svg
                 aria-hidden="true"

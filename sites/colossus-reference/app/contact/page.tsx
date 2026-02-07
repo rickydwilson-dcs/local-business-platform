@@ -236,7 +236,7 @@ export default function ContactPage() {
                       aria-required="true"
                       aria-invalid={!!errors.name}
                       aria-describedby={errors.name ? "name-error" : undefined}
-                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-brand-blue focus:border-brand-blue ${
+                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-brand-primary ${
                         errors.name ? "border-red-500" : "border-gray-300"
                       }`}
                       placeholder="Your full name"
@@ -261,7 +261,7 @@ export default function ContactPage() {
                       aria-required="true"
                       aria-invalid={!!errors.email}
                       aria-describedby={errors.email ? "email-error" : undefined}
-                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-brand-blue focus:border-brand-blue ${
+                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-brand-primary ${
                         errors.email ? "border-red-500" : "border-gray-300"
                       }`}
                       placeholder="your.email@example.com"
@@ -285,7 +285,7 @@ export default function ContactPage() {
                       name="phone"
                       value={formData.phone}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-blue focus:border-brand-blue"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-brand-primary"
                       placeholder="01234 567890"
                     />
                   </div>
@@ -302,7 +302,7 @@ export default function ContactPage() {
                       name="projectType"
                       value={formData.projectType}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-blue focus:border-brand-blue"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-brand-primary"
                     >
                       <option value="residential">Residential</option>
                       <option value="commercial">Commercial</option>
@@ -325,7 +325,7 @@ export default function ContactPage() {
                       name="service"
                       value={formData.service}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-blue focus:border-brand-blue"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-brand-primary"
                     >
                       <option value="">Select a service...</option>
                       {services.map((service) => (
@@ -348,7 +348,7 @@ export default function ContactPage() {
                       name="location"
                       value={formData.location}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-blue focus:border-brand-blue"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-brand-primary"
                     >
                       <option value="">Select location...</option>
                       {locations.map((location) => (
@@ -370,7 +370,7 @@ export default function ContactPage() {
                     name="subject"
                     value={formData.subject}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-blue focus:border-brand-blue"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-brand-primary"
                     placeholder="e.g. Quote for house renovation scaffolding"
                   />
                 </div>
@@ -389,7 +389,7 @@ export default function ContactPage() {
                     aria-required="true"
                     aria-invalid={!!errors.message}
                     aria-describedby={errors.message ? "message-error" : undefined}
-                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-brand-blue focus:border-brand-blue ${
+                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-brand-primary ${
                       errors.message ? "border-red-500" : "border-gray-300"
                     }`}
                     placeholder="Tell us about your project: building height, access requirements, duration, special considerations, etc."
@@ -405,7 +405,7 @@ export default function ContactPage() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full bg-brand-blue text-white font-semibold py-4 px-6 rounded-lg hover:bg-brand-blue-hover focus:ring-2 focus:ring-brand-blue focus:ring-offset-2 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full bg-brand-primary text-white font-semibold py-4 px-6 rounded-lg hover:bg-brand-primary-hover focus:ring-2 focus:ring-brand-primary focus:ring-offset-2 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {isSubmitting ? "Sending..." : "Send Enquiry"}
                 </button>
@@ -446,7 +446,7 @@ export default function ContactPage() {
                 <div className="space-y-6">
                   <div>
                     <h3 className="font-semibold text-gray-900 mb-2">📞 Phone</h3>
-                    <p className="text-lg text-brand-blue font-semibold">
+                    <p className="text-lg text-brand-primary font-semibold">
                       <a href={`tel:${PHONE_TEL}`} className="hover:underline">
                         {PHONE_DISPLAY}
                       </a>
@@ -462,7 +462,7 @@ export default function ContactPage() {
 
                   <div>
                     <h3 className="font-semibold text-gray-900 mb-2">📧 Email</h3>
-                    <p className="text-brand-blue">
+                    <p className="text-brand-primary">
                       <a href={`mailto:${BUSINESS_EMAIL}`} className="hover:underline">
                         {BUSINESS_EMAIL}
                       </a>
@@ -474,7 +474,7 @@ export default function ContactPage() {
                     <h3 className="font-semibold text-gray-900 mb-2">📍 Service Areas</h3>
                     <p className="text-gray-700">East Sussex, West Sussex, Kent & Surrey</p>
                     <p className="text-sm text-gray-800">
-                      <Link href="/locations" className="text-brand-blue hover:underline">
+                      <Link href="/locations" className="text-brand-primary hover:underline">
                         View All Coverage Areas
                       </Link>
                     </p>
@@ -502,7 +502,7 @@ export default function ContactPage() {
                       <li>
                         <Link
                           href="/services/access-scaffolding"
-                          className="text-brand-blue hover:underline"
+                          className="text-brand-primary hover:underline"
                         >
                           Access Scaffolding
                         </Link>
@@ -510,7 +510,7 @@ export default function ContactPage() {
                       <li>
                         <Link
                           href="/services/facade-scaffolding"
-                          className="text-brand-blue hover:underline"
+                          className="text-brand-primary hover:underline"
                         >
                           Facade Scaffolding
                         </Link>
@@ -518,7 +518,7 @@ export default function ContactPage() {
                       <li>
                         <Link
                           href="/services/edge-protection"
-                          className="text-brand-blue hover:underline"
+                          className="text-brand-primary hover:underline"
                         >
                           Edge Protection
                         </Link>
@@ -526,7 +526,7 @@ export default function ContactPage() {
                       <li>
                         <Link
                           href="/services"
-                          className="text-brand-blue hover:underline font-medium"
+                          className="text-brand-primary hover:underline font-medium"
                         >
                           View All Scaffolding Services
                         </Link>
