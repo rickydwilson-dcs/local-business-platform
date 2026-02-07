@@ -62,7 +62,7 @@ local-business-platform/
 │   │   ├── site.config.ts        # Business customization
 │   │   └── ...
 │   │
-│   ├── joes-plumbing-canterbury/ # Demo site (plumbing)
+│   ├── smiths-electrical-cambridge/ # Demo site (electrical)
 │   │   └── ... (same structure)
 │   │
 │   └── base-template/            # Template for new sites (copy-and-customize)
@@ -251,8 +251,8 @@ See [/docs](./docs/) for comprehensive documentation:
 
 - [ARCHITECTURE.md](./docs/architecture/ARCHITECTURE.md) - Architectural guidelines
 - [DEVELOPMENT.md](./docs/development/DEVELOPMENT.md) - Development workflow
-- [DEPLOYMENT_GUIDE.md](./docs/DEPLOYMENT_GUIDE.md) - Deployment procedures
-- [E2E_TESTING_STRATEGY.md](./docs/testing/E2E_TESTING_STRATEGY.md) - Testing approach
+- [Deploying a Site](./docs/guides/deploying-site.md) - Deployment procedures
+- [Testing](./docs/standards/testing.md) - Testing approach
 - [Theming Guide](./docs/guides/theming.md) - Theme system and CSS variables
 - [Adding a New Site](./docs/guides/adding-new-site.md) - Create new client sites
 
