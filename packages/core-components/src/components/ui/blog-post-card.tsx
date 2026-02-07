@@ -35,7 +35,7 @@ export function BlogPostCard({
       className="group relative bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col h-full"
     >
       {/* Image */}
-      <div className="relative h-48 overflow-hidden bg-gradient-to-br from-brand-blue/10 to-brand-blue/20">
+      <div className="relative h-48 overflow-hidden bg-gradient-to-br from-brand-primary/10 to-brand-primary/20">
         {heroImage ? (
           <Image
             src={getImageUrl(heroImage)}
@@ -46,9 +46,9 @@ export function BlogPostCard({
           />
         ) : (
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-12 h-12 bg-brand-blue/20 rounded-lg flex items-center justify-center">
+            <div className="w-12 h-12 bg-brand-primary/20 rounded-lg flex items-center justify-center">
               <svg
-                className="w-6 h-6 text-brand-blue"
+                className="w-6 h-6 text-brand-primary"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -67,7 +67,7 @@ export function BlogPostCard({
         {/* Category Badge */}
         {categoryLabel && (
           <div className="absolute top-4 left-4">
-            <span className="inline-block px-3 py-1 bg-brand-blue/90 text-white text-xs font-semibold rounded-full backdrop-blur-sm">
+            <span className="inline-block px-3 py-1 bg-brand-primary/90 text-white text-xs font-semibold rounded-full backdrop-blur-sm">
               {categoryLabel}
             </span>
           </div>
@@ -88,7 +88,7 @@ export function BlogPostCard({
         </div>
 
         {/* Title */}
-        <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-brand-blue transition-colors line-clamp-2">
+        <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-brand-primary transition-colors line-clamp-2">
           {title}
         </h3>
 
@@ -99,7 +99,7 @@ export function BlogPostCard({
 
         {/* CTA */}
         <div className="mt-auto">
-          <span className="inline-flex items-center text-brand-blue font-semibold text-sm group-hover:gap-2 transition-all">
+          <span className="inline-flex items-center text-brand-primary font-semibold text-sm group-hover:gap-2 transition-all">
             Read article
             <svg
               className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform"

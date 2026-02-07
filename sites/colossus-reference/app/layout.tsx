@@ -219,20 +219,20 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             <nav className="hidden lg:flex items-center gap-8 text-lg font-medium">
               <Link
                 href="/services"
-                className="text-slate-700 hover:text-brand-blue transition-colors"
+                className="text-slate-700 hover:text-brand-primary transition-colors"
               >
                 Services
               </Link>
               <LocationsDropdown locations={locationItems} counties={counties} />
               <Link
                 href="/about"
-                className="text-slate-700 hover:text-brand-blue transition-colors"
+                className="text-slate-700 hover:text-brand-primary transition-colors"
               >
                 About
               </Link>
               <Link
                 href="/contact"
-                className="text-slate-700 hover:text-brand-blue transition-colors"
+                className="text-slate-700 hover:text-brand-primary transition-colors"
               >
                 Contact
               </Link>

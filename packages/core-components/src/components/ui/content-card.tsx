@@ -37,7 +37,7 @@ export function ContentCard({
     >
       {(badge || isHeadquarters) && contentType !== "services" && (
         <div className="absolute top-4 right-4 z-10">
-          <span className="px-3 py-1 bg-brand-blue text-white text-sm font-medium rounded-full">
+          <span className="px-3 py-1 bg-brand-primary text-white text-sm font-medium rounded-full">
             {badge || (isHeadquarters ? "Headquarters" : "")}
           </span>
         </div>
@@ -46,7 +46,7 @@ export function ContentCard({
       <div
         className={`relative h-48 rounded-t-2xl overflow-hidden flex items-center justify-center ${
           !(image && contentType === "services")
-            ? "bg-gradient-to-br from-brand-blue/10 to-brand-blue/20"
+            ? "bg-gradient-to-br from-brand-primary/10 to-brand-primary/20"
             : ""
         }`}
       >
@@ -68,9 +68,9 @@ export function ContentCard({
 
         {/* Centered icon - only show when no image for services */}
         {!(image && contentType === "services") && (
-          <div className="w-12 h-12 bg-brand-blue/20 rounded-lg flex items-center justify-center">
+          <div className="w-12 h-12 bg-brand-primary/20 rounded-lg flex items-center justify-center">
             <svg
-              className="w-6 h-6 text-brand-blue"
+              className="w-6 h-6 text-brand-primary"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -110,7 +110,7 @@ export function ContentCard({
           <ul className="space-y-2 mb-6 flex-grow">
             {(features || towns)?.slice(0, 3).map((item, index) => (
               <li key={index} className="flex items-center gap-2 text-sm">
-                <div className="w-1.5 h-1.5 bg-brand-blue rounded-full flex-shrink-0"></div>
+                <div className="w-1.5 h-1.5 bg-brand-primary rounded-full flex-shrink-0"></div>
                 <span className="text-gray-700 line-clamp-1">{item}</span>
               </li>
             ))}

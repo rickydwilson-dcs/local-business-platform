@@ -29,7 +29,7 @@ export function CertificateGallery({ certificates, onSelect }: CertificateGaller
         <button
           key={certificate.id}
           onClick={() => onSelect(certificate)}
-          className="group relative bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-lg hover:scale-[1.02] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-brand-blue focus:ring-offset-2 cursor-pointer"
+          className="group relative bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-lg hover:scale-[1.02] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2 cursor-pointer"
           aria-label={`View ${certificate.name} certificate details`}
           type="button"
         >
@@ -46,7 +46,7 @@ export function CertificateGallery({ certificates, onSelect }: CertificateGaller
           </div>
 
           <div className="p-4">
-            <h3 className="text-sm font-semibold text-gray-900 text-center line-clamp-2 group-hover:text-brand-blue transition-colors duration-200">
+            <h3 className="text-sm font-semibold text-gray-900 text-center line-clamp-2 group-hover:text-brand-primary transition-colors duration-200">
               {certificate.name}
             </h3>
           </div>

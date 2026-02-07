@@ -174,7 +174,7 @@ export default function LocationsPage() {
                 <div className="flex flex-wrap justify-center gap-2 sm:gap-4">
                   <div className="inline-flex items-center gap-2 bg-gray-100 px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm">
                     <svg
-                      className="h-3 w-3 sm:h-4 sm:w-4 text-brand-blue"
+                      className="h-3 w-3 sm:h-4 sm:w-4 text-brand-primary"
                       fill="currentColor"
                       viewBox="0 0 20 20"
                     >
@@ -188,7 +188,7 @@ export default function LocationsPage() {
                   </div>
                   <div className="inline-flex items-center gap-2 bg-gray-100 px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm">
                     <svg
-                      className="h-3 w-3 sm:h-4 sm:w-4 text-brand-blue"
+                      className="h-3 w-3 sm:h-4 sm:w-4 text-brand-primary"
                       fill="currentColor"
                       viewBox="0 0 20 20"
                     >

@@ -39,7 +39,7 @@ export function CoverageStatsSection() {
           {stats.map((stat, index) => (
             <div key={index} className="text-center">
               <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
-                <div className="stat-number text-brand-blue mb-2">{stat.number}</div>
+                <div className="stat-number text-brand-primary mb-2">{stat.number}</div>
                 <div className="text-gray-900 font-semibold text-lg mb-2">{stat.label}</div>
                 <div className="text-sm text-gray-800">{stat.description}</div>
               </div>

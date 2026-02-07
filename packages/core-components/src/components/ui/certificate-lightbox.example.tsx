@@ -96,7 +96,7 @@ export function CertificateGalleryExample() {
                   className="object-contain"
                 />
               </div>
-              <h3 className="text-sm sm:text-base font-semibold text-gray-900 text-center group-hover:text-brand-blue transition-colors">
+              <h3 className="text-sm sm:text-base font-semibold text-gray-900 text-center group-hover:text-brand-primary transition-colors">
                 {cert.name}
               </h3>
             </button>

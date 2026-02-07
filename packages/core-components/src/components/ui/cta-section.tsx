@@ -18,14 +18,14 @@ export function CTASection({
   trustBadges = ["TG20:21 Compliant", "CHAS Accredited", "£10M Insured"],
 }: CTASectionProps) {
   return (
-    <section className="section-standard bg-brand-blue text-white">
+    <section className="section-standard bg-brand-primary text-white">
       <div className="container-standard text-center">
         <h2 className="text-3xl sm:text-4xl font-bold mb-6">{title}</h2>
         <p className="text-xl mb-8 mx-auto max-w-4xl opacity-90 leading-relaxed">{description}</p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
           <a
-            className="inline-flex items-center justify-center px-8 py-4 bg-white text-brand-blue font-semibold rounded-lg hover:bg-gray-200 transition-colors"
+            className="inline-flex items-center justify-center px-8 py-4 bg-white text-brand-primary font-semibold rounded-lg hover:bg-gray-200 transition-colors"
             href={primaryButtonUrl}
           >
             {primaryButtonText}
@@ -33,7 +33,7 @@ export function CTASection({
 
           {secondaryButtonText && secondaryButtonUrl && (
             <a
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-white text-white font-semibold rounded-lg hover:bg-white hover:text-brand-blue transition-colors"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-white text-white font-semibold rounded-lg hover:bg-white hover:text-brand-primary transition-colors"
               href={secondaryButtonUrl}
             >
               <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">

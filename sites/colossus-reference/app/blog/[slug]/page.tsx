@@ -162,7 +162,7 @@ export default async function BlogPostPage({ params }: { params: Promise<Params>
             <div className="container-standard">
               <div className="max-w-4xl mx-auto">
                 {/* Prose Content */}
-                <div className="prose prose-lg max-w-none prose-headings:text-gray-900 prose-p:text-gray-700 prose-a:text-brand-blue prose-a:no-underline hover:prose-a:underline prose-strong:text-gray-900 prose-li:text-gray-700 prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-6 prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-4">
+                <div className="prose prose-lg max-w-none prose-headings:text-gray-900 prose-p:text-gray-700 prose-a:text-brand-primary prose-a:no-underline hover:prose-a:underline prose-strong:text-gray-900 prose-li:text-gray-700 prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-6 prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-4">
                   {mdxContent}
                 </div>
 
@@ -196,7 +196,7 @@ export default async function BlogPostPage({ params }: { params: Promise<Params>
                         <Link
                           key={serviceSlug}
                           href={`/services/${serviceSlug}`}
-                          className="inline-flex items-center gap-2 bg-brand-blue/10 text-brand-blue font-medium text-sm px-4 py-2 rounded-full hover:bg-brand-blue/20 transition-colors"
+                          className="inline-flex items-center gap-2 bg-brand-primary/10 text-brand-primary font-medium text-sm px-4 py-2 rounded-full hover:bg-brand-primary/20 transition-colors"
                         >
                           {serviceSlug
                             .split("-")

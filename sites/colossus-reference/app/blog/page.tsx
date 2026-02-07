@@ -54,7 +54,7 @@ function BlogCard({ post }: { post: BlogPost }) {
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
           <div className="absolute top-4 left-4">
-            <span className="bg-brand-blue text-white text-xs font-semibold px-3 py-1 rounded-full">
+            <span className="bg-brand-primary text-white text-xs font-semibold px-3 py-1 rounded-full">
               {categoryLabels[post.category] || post.category}
             </span>
           </div>
@@ -76,20 +76,20 @@ function BlogCard({ post }: { post: BlogPost }) {
             </>
           )}
         </div>
-        <h2 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-brand-blue transition-colors">
+        <h2 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-brand-primary transition-colors">
           <Link href={`/blog/${post.slug}`}>{post.title}</Link>
         </h2>
         <p className="text-gray-600 mb-4 line-clamp-3">{post.excerpt}</p>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-brand-blue rounded-full flex items-center justify-center text-white text-sm font-semibold">
+            <div className="w-8 h-8 bg-brand-primary rounded-full flex items-center justify-center text-white text-sm font-semibold">
               {post.author.name.charAt(0)}
             </div>
             <span className="text-sm text-gray-600">{post.author.name}</span>
           </div>
           <Link
             href={`/blog/${post.slug}`}
-            className="text-brand-blue font-medium text-sm hover:underline inline-flex items-center gap-1"
+            className="text-brand-primary font-medium text-sm hover:underline inline-flex items-center gap-1"
           >
             Read more
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -131,7 +131,7 @@ export default async function BlogPage() {
 
               <Link
                 href="/blog/rss.xml"
-                className="inline-flex items-center gap-2 text-brand-blue hover:text-brand-blue-hover font-medium"
+                className="inline-flex items-center gap-2 text-brand-primary hover:text-brand-primary-hover font-medium"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M5 3a1 1 0 000 2c5.523 0 10 4.477 10 10a1 1 0 102 0C17 8.373 11.627 3 5 3z" />

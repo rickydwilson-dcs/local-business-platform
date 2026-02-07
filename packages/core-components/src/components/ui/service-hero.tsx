@@ -36,7 +36,7 @@ export function ServiceHero(props: ServiceHeroProps) {
           <div>
             {badge && (
               <div className="mb-6">
-                <span className="px-4 py-2 bg-brand-blue text-white text-sm font-medium rounded-full">
+                <span className="px-4 py-2 bg-brand-primary text-white text-sm font-medium rounded-full">
                   {badge}
                 </span>
               </div>
@@ -80,7 +80,7 @@ export function ServiceHero(props: ServiceHeroProps) {
                 >
                   <svg
                     aria-hidden="true"
-                    className="h-3 w-3 sm:h-4 sm:w-4 text-brand-blue"
+                    className="h-3 w-3 sm:h-4 sm:w-4 text-brand-primary"
                     fill="currentColor"
                     viewBox="0 0 20 20"
                   >

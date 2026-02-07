@@ -75,7 +75,7 @@ export function TownFinderSection() {
                   id="town-search"
                   type="text"
                   placeholder="Enter town name or postcode..."
-                  className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-blue focus:border-transparent"
+                  className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-transparent"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                 />
@@ -88,7 +88,7 @@ export function TownFinderSection() {
               </label>
               <select
                 id="county-filter"
-                className="block w-full py-3 px-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-blue focus:border-transparent"
+                className="block w-full py-3 px-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-transparent"
                 value={selectedCounty}
                 onChange={(e) => setSelectedCounty(e.target.value)}
               >
@@ -109,25 +109,25 @@ export function TownFinderSection() {
                 <Link
                   key={town.slug}
                   href={town.href}
-                  className="block p-4 border border-gray-200 rounded-lg hover:border-brand-blue hover:shadow-md transition-all group"
+                  className="block p-4 border border-gray-200 rounded-lg hover:border-brand-primary hover:shadow-md transition-all group"
                 >
                   <div className="flex items-center justify-between">
                     <div>
-                      <div className="font-semibold text-gray-900 group-hover:text-brand-blue transition-colors">
+                      <div className="font-semibold text-gray-900 group-hover:text-brand-primary transition-colors">
                         {town.name}
                       </div>
                       <div className="text-sm text-gray-700">{town.county}</div>
                       {town.isRichContent && (
                         <div className="inline-flex items-center gap-1 mt-1">
-                          <span className="w-2 h-2 bg-brand-blue rounded-full"></span>
-                          <span className="text-xs text-brand-blue font-medium">
+                          <span className="w-2 h-2 bg-brand-primary rounded-full"></span>
+                          <span className="text-xs text-brand-primary font-medium">
                             Specialist Coverage
                           </span>
                         </div>
                       )}
                     </div>
                     <svg
-                      className="w-5 h-5 text-gray-400 group-hover:text-brand-blue transition-colors"
+                      className="w-5 h-5 text-gray-400 group-hover:text-brand-primary transition-colors"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -178,7 +178,7 @@ export function TownFinderSection() {
               </p>
               <Link
                 href="#county-gateways"
-                className="text-brand-blue hover:text-brand-blue-hover font-medium"
+                className="text-brand-primary hover:text-brand-primary-hover font-medium"
               >
                 Browse by County →
               </Link>

@@ -57,7 +57,7 @@ function ProjectCard({ project }: { project: Project }) {
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
         <div className="absolute bottom-4 left-4 right-4">
           <div className="flex gap-2 mb-2">
-            <span className="bg-brand-blue text-white text-xs font-semibold px-2 py-1 rounded">
+            <span className="bg-brand-primary text-white text-xs font-semibold px-2 py-1 rounded">
               {projectTypeLabels[project.projectType] || project.projectType}
             </span>
             <span className="bg-white/90 text-gray-800 text-xs font-medium px-2 py-1 rounded">
@@ -126,7 +126,7 @@ function ProjectCard({ project }: { project: Project }) {
 
         <Link
           href={`/projects/${project.slug}`}
-          className="inline-flex items-center gap-1 text-brand-blue font-medium text-sm hover:underline"
+          className="inline-flex items-center gap-1 text-brand-primary font-medium text-sm hover:underline"
         >
           View Project
           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -171,15 +171,15 @@ export default async function ProjectsPage() {
               {/* Stats */}
               <div className="flex flex-wrap justify-center gap-8 mb-8">
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-brand-blue">{totalProjects}+</div>
+                  <div className="text-3xl font-bold text-brand-primary">{totalProjects}+</div>
                   <div className="text-sm text-gray-600">Completed Projects</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-brand-blue">{uniqueLocations}</div>
+                  <div className="text-3xl font-bold text-brand-primary">{uniqueLocations}</div>
                   <div className="text-sm text-gray-600">Locations Served</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-brand-blue">100%</div>
+                  <div className="text-3xl font-bold text-brand-primary">100%</div>
                   <div className="text-sm text-gray-600">Client Satisfaction</div>
                 </div>
               </div>
