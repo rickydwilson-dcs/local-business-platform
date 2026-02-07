@@ -56,34 +56,15 @@ git status --porcelain
 
 If no changes were made (all findings were stale, skipped, or failed), inform the user and STOP. Nothing to deploy.
 
-If changes were made, read the `fixes-applied.md` to summarize what was fixed, then commit:
-
-```bash
-git add -A
-```
-
-Create a commit message that summarizes the fixes applied. Format:
-
-```
-fix: apply code review findings ([N] fixed, [N] skipped, [N] failed)
-
-Applied findings from /review.code session:
-- [list domains with fix counts, e.g., "Security: 3 fixed"]
-- [e.g., "Code Quality: 2 fixed, 1 failed"]
-- [e.g., "Architecture: 4 fixed"]
-
-Verification: type-check PASS, lint PASS, build PASS
-
-Co-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>
-```
-
-Use a HEREDOC for the commit message to preserve formatting.
-
 ## Phase 3: Deploy
 
-Run `/deploy.changes` to push through develop → staging → main.
+Run `/deploy.changes` to commit and push through develop → staging → main.
 
-This will run `/update.docs` automatically as its first step.
+`/deploy.changes` handles everything from here:
+
+1. Runs `/update.docs` to verify documentation
+2. Commits all uncommitted changes (the fixes from Phase 2)
+3. Pushes through develop → staging → main with CI checks
 
 ## Phase 4: Report
 

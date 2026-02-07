@@ -1,31 +1,53 @@
 # Deploy
 
-Push all committed changes through the full git workflow: develop → staging → main.
+Commit (if needed) and push all changes through the full git workflow: develop → staging → main.
 
 **This skill runs `/update.docs` first** to verify documentation is accurate before deploying.
 
 ## Steps
 
-### Step 1: Verify Documentation
-
-Run the `/update.docs` verification. If issues are found, fix them and commit to develop before proceeding.
-
-### Step 2: Verify Branch State
+### Step 1: Verify Branch
 
 ```bash
-# Must be on develop branch
 git branch --show-current
+```
 
-# Must have no uncommitted changes
-git status
+Must be on `develop`. If not, STOP and inform the user. Never push from the wrong branch.
 
-# Must be ahead of remote or in sync
+### Step 2: Verify Documentation
+
+Run the `/update.docs` verification. If issues are found, fix them before proceeding (they'll be included in the commit).
+
+### Step 3: Commit if Needed
+
+```bash
+git status --porcelain
+```
+
+If there are uncommitted changes (staged or unstaged):
+
+1. Stage all changes: `git add -A`
+2. Review what's staged with `git diff --cached --stat`
+3. Generate a commit message that summarizes the changes. Use a HEREDOC:
+
+```bash
+git commit -m "$(cat <<'EOF'
+[summary of changes]
+
+Co-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>
+EOF
+)"
+```
+
+If the working tree is already clean, check there are commits ahead of remote:
+
+```bash
 git log origin/develop..HEAD --oneline
 ```
 
-If not on develop, STOP and inform the user. Never push from the wrong branch.
+If nothing to commit AND nothing ahead of remote, STOP: "Nothing to deploy."
 
-### Step 3: Push to Develop
+### Step 4: Push to Develop
 
 ```bash
 git push origin develop
@@ -37,9 +59,9 @@ Wait for CI to pass:
 gh run watch
 ```
 
-If CI fails, STOP. Diagnose the failure, fix it, commit to develop, and restart from Step 3.
+If CI fails, STOP. Diagnose the failure, fix it, commit to develop, and restart from Step 4.
 
-### Step 4: Merge to Staging
+### Step 5: Merge to Staging
 
 ```bash
 git checkout staging
@@ -55,7 +77,7 @@ gh run watch
 
 If CI fails, STOP and diagnose. Do not proceed to main with failing CI.
 
-### Step 5: Merge to Main
+### Step 6: Merge to Main
 
 ```bash
 git checkout main
@@ -69,13 +91,13 @@ Wait for CI:
 gh run watch
 ```
 
-### Step 6: Return to Develop
+### Step 7: Return to Develop
 
 ```bash
 git checkout develop
 ```
 
-### Step 7: Report
+### Step 8: Report
 
 Report the final state:
 
