@@ -1,86 +1,90 @@
 # Core Components Package
 
-Shared component library for the local business platform (`@platform/core-components`).
+Shared component library for the Local Business Platform (`@platform/core-components`).
 
-## Available Components
+## How It Works
 
-### Hero Variants
+This package exports raw TypeScript source — it has **no build step**. When a site imports `@platform/core-components`, Next.js compiles the TypeScript directly during the site's build. This means changes are reflected immediately in dev mode via HMR, with no "rebuild the package" step.
 
-- `HeroV1` - Classic centered hero with trust badges
-- `HeroV2` - Split layout with image
-- `HeroV3` - Minimal with gradient background
+Sites resolve imports via TypeScript path mapping in their `tsconfig.json`:
 
-### UI Components
+```json
+"@platform/core-components": ["../../packages/core-components/src/index.ts"]
+```
 
-- `ServiceCards` - Grid of service cards with icons
-- `CoverageMap` - Leaflet map showing service areas
-- `Footer` - Site footer with contact info
-- `MobileMenu` - Responsive mobile navigation
-- `LocationsDropdown` - Locations navigation dropdown
+## What's In Here
 
-### Analytics
+### Components (`src/components/`)
 
-- `ConsentManager` - GDPR consent banner
-- `Analytics` - GA4/Facebook/Google Ads wrapper
-- `AnalyticsDebugPanel` - Development debugging
+**Hero Variants** — different hero section layouts for the top of pages:
+
+- `HeroV1` — Classic centered hero with trust badges
+- `HeroV2` — Split layout with image on one side
+- `HeroV3` — Minimal with gradient background
+
+**Exported UI Components** (via `index.ts`):
+
+- `HeroSection` — generic hero wrapper
+- `Footer` / `CustomFooter` — site footer with contact info and navigation
+- `CTASection` — call-to-action blocks
+- `Breadcrumbs` — breadcrumb navigation
+- `ContentCard` / `CardGrid` — content display cards
+- `CoverageMap` / `CoverageAreas` — service area visualization
+
+**Additional UI Components** (available via subpath imports):
+
+- `MobileMenu` — responsive mobile navigation
+- `LocationsDropdown` — locations navigation dropdown
+- `ServiceCards` — grid of service cards with icons
+- Many more service and location components in `src/components/ui/`
+
+**Analytics** (in `src/components/analytics/`, not exported from root):
+
+- `ConsentManager` — GDPR consent banner
+- `Analytics` — GA4/Facebook/Google Ads wrapper
+- `AnalyticsDebugPanel` — development debugging tool
+
+**Schema** — JSON-LD structured data generation
+
+### Lib Utilities (`src/lib/`)
+
+- `content.ts` — generic MDX content reading functions
+- `content-schemas.ts` — Zod schemas for MDX frontmatter validation
+- `services.ts` — service-specific data types and helpers
+- `site.ts` — site configuration utilities
+- `schema.ts` / `schema-types.ts` — JSON-LD schema generation
 
 ## Conventions
 
-**Component Organization:**
+- All components in `src/components/ui/`, one directory per component with `index.tsx`
+- **Named exports only** (no default exports)
+- TypeScript interfaces for all props (avoid `any`)
+- **Tailwind CSS only** for styling — components use theme tokens (`bg-brand-primary`, `text-surface-foreground`) so they work with any site's theme
+- Components must be theme-agnostic: never hardcode colors, always use CSS variable-based classes
 
-- All components in `src/components/ui/`
-- One component per directory with `index.tsx`
-- Named exports only (no default exports)
+## Importing
 
-**TypeScript:**
+```typescript
+// From a site:
+import { HeroV1 } from "@platform/core-components";
+import { ServiceCards } from "@platform/core-components";
 
-- Interfaces required for all props
-- Strict typing (avoid `any`)
+// Subpath imports for lib utilities:
+import { getServices } from "@platform/core-components/lib/content";
+```
 
-**Styling:**
+## Adding a New Component
 
-- Tailwind CSS only (no inline styles, no CSS-in-JS)
-- Use design tokens from consuming site's Tailwind config
+1. Create directory: `src/components/ui/my-component/`
+2. Create `index.tsx` with named export and TypeScript props interface
+3. Add export to `src/index.ts`
+4. Use only Tailwind theme token classes for styling
+5. The component is immediately available to all sites
 
 ## Type-Checking
 
-**Standalone type-check:**
-
 ```bash
-pnpm run type-check  # Uses tsconfig.build.json
+pnpm run type-check    # Uses tsconfig.build.json (standalone check)
 ```
 
-The package supports standalone type-checking via `tsconfig.build.json` which:
-
-- Maps `@/` path aliases to the package's `src/` directory
-- Excludes files that depend on site-specific implementations
-
-**Excluded from standalone type-check:**
-
-- `src/lib/mdx.tsx` - Depends on site's `mdx-components.tsx`
-- `src/lib/rate-limiter.ts` - Depends on `@upstash/redis` (site-provided)
-- `src/components/templates/content-page.tsx` - Depends on site's MDX config
-
-These files are still type-checked when building consuming sites.
-
-**Linting:**
-
-```bash
-pnpm lint  # ESLint v9 flat config
-```
-
-**Exports:**
-
-```typescript
-// Import in consuming sites:
-import { HeroV1 } from "@platform/core-components";
-import { ServiceCards } from "@platform/core-components";
-```
-
-## Adding New Components
-
-1. Create directory: `src/components/ui/my-component/`
-2. Create `index.tsx` with named export
-3. Add export to `src/index.ts`
-4. Use TypeScript interface for props
-5. Style with Tailwind classes only
+Some files are excluded from standalone type-check because they depend on site-specific implementations (MDX config, Upstash Redis). These are still type-checked when building consuming sites.
