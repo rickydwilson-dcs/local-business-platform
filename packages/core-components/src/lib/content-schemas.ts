@@ -1,6 +1,18 @@
 import { z } from "zod";
 
 /**
+ * Image path schema that supports both:
+ * - Local paths starting with / (e.g., /images/hero.webp)
+ * - R2 CDN paths without leading / (e.g., colossus-reference/hero/location/brighton.webp)
+ */
+const ImagePathSchema = z
+  .string()
+  .refine(
+    (val) => val.startsWith("/") || /^[\w-]+\//.test(val),
+    "Image path must start with / (local) or be a valid R2 path (site-name/...)"
+  );
+
+/**
  * Shared schemas used across different content types
  */
 const FaqSchema = z.object({
@@ -50,12 +62,7 @@ export const ServiceFrontmatterSchema = z.object({
     .object({
       heading: z.string().min(5, "Hero heading is required").optional(),
       subheading: z.string().min(10, "Hero subheading is required").optional(),
-      image: z.string().startsWith("/", "Hero image path must start with /"),
-      alt: z
-        .string()
-        .min(20, "Alt text must be at least 20 characters for accessibility")
-        .max(125, "Alt text should be under 125 characters")
-        .optional(),
+      image: ImagePathSchema,
       cta: HeroCtaSchema.optional(),
     })
     .optional(),
@@ -88,17 +95,9 @@ export const ServiceFrontmatterSchema = z.object({
     })
     .optional(),
 
-  heroImage: z.string().startsWith("/", "Hero image path must start with /").optional(),
+  heroImage: ImagePathSchema.optional(),
 
-  heroImageAlt: z
-    .string()
-    .min(20, "Hero image alt text must be at least 20 characters for accessibility")
-    .max(125, "Hero image alt text should be under 125 characters")
-    .optional(),
-
-  galleryImages: z
-    .array(z.string().startsWith("/", "Gallery image paths must start with /"))
-    .optional(),
+  galleryImages: z.array(ImagePathSchema).optional(),
 
   businessHours: z
     .object({
@@ -146,23 +145,26 @@ export const LocationFrontmatterSchema = z.object({
     .min(3, "At least 3 keywords required")
     .optional(),
 
-  heroImage: z.string().startsWith("/", "Hero image path must start with /").optional(),
+  // Geographic and county metadata (for map markers and navigation)
+  county: z.enum(["East Sussex", "West Sussex", "Kent", "Surrey"]).optional(),
 
-  heroImageAlt: z
+  coords: z.tuple([z.number().min(-90).max(90), z.number().min(-180).max(180)]).optional(),
+
+  mapDescription: z.string().max(100, "Map description should be under 100 characters").optional(),
+
+  countyDescription: z
     .string()
-    .min(20, "Hero image alt text must be at least 20 characters for accessibility")
-    .max(125, "Hero image alt text should be under 125 characters")
+    .max(300, "County description should be under 300 characters")
     .optional(),
+
+  countyHighlights: z.array(z.string()).optional(),
+
+  heroImage: ImagePathSchema.optional(),
 
   hero: z.object({
     title: z.string().min(5, "Hero title is required"),
     description: z.string().min(20, "Hero description must be at least 20 characters"),
     phone: z.string().regex(/^[\d\s\+\-\(\)]+$/, "Phone must be valid"),
-    alt: z
-      .string()
-      .min(20, "Alt text must be at least 20 characters for accessibility")
-      .max(125, "Alt text should be under 125 characters")
-      .optional(),
     trustBadges: z
       .array(z.string().min(3, "Trust badge text too short"))
       .min(1, "At least 1 trust badge required")
@@ -219,8 +221,247 @@ export const LocationFrontmatterSchema = z.object({
 });
 
 /**
+ * Blog MDX frontmatter schema
+ * Used to validate all files in content/blog/
+ */
+const BlogAuthorSchema = z.object({
+  name: z.string().min(2, "Author name must be at least 2 characters"),
+  role: z.string().optional(),
+  avatar: ImagePathSchema.optional(),
+});
+
+export const BlogCategory = z.enum([
+  "industry-tips",
+  "how-to-guide",
+  "case-study",
+  "seasonal",
+  "news",
+]);
+
+export const BlogFrontmatterSchema = z.object({
+  title: z
+    .string()
+    .min(10, "Blog title must be at least 10 characters")
+    .max(100, "Blog title must be less than 100 characters"),
+
+  slug: z
+    .string()
+    .regex(/^[a-z0-9-]+$/, "Slug must be lowercase with hyphens")
+    .optional(), // Can be derived from filename
+
+  date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Date must be YYYY-MM-DD format"),
+
+  author: BlogAuthorSchema,
+
+  seoTitle: z
+    .string()
+    .min(10, "SEO title must be at least 10 characters")
+    .max(60, "SEO title should be under 60 characters")
+    .optional(),
+
+  description: z
+    .string()
+    .min(50, "Description must be at least 50 characters")
+    .max(200, "Description should be under 200 characters"),
+
+  keywords: z
+    .array(z.string().min(2, "Keywords must be at least 2 characters"))
+    .min(3, "At least 3 keywords required")
+    .max(10, "Maximum 10 keywords")
+    .optional(),
+
+  category: BlogCategory,
+
+  tags: z
+    .array(z.string().min(2, "Tag must be at least 2 characters"))
+    .min(1, "At least 1 tag required")
+    .max(10, "Maximum 10 tags"),
+
+  heroImage: ImagePathSchema.optional(),
+
+  readingTime: z.number().int().positive().optional(),
+
+  excerpt: z
+    .string()
+    .min(50, "Excerpt must be at least 50 characters")
+    .max(300, "Excerpt should be under 300 characters"),
+
+  featured: z.boolean().optional().default(false),
+
+  relatedServices: z.array(z.string()).optional(),
+
+  relatedLocations: z.array(z.string()).optional(),
+});
+
+/**
+ * Project MDX frontmatter schema
+ * Used to validate all files in content/projects/
+ */
+const ProjectImageSchema = z.object({
+  path: ImagePathSchema,
+  caption: z.string().min(5, "Caption must be at least 5 characters"),
+  order: z.number().int().positive(),
+});
+
+const ProjectClientSchema = z.object({
+  type: z.enum(["Private Homeowner", "Property Developer", "Local Authority", "Business"]),
+  industry: z.string().optional(),
+  testimonial: z.string().min(20, "Testimonial must be at least 20 characters").optional(),
+  rating: z.number().int().min(1).max(5).optional(),
+});
+
+const ProjectScopeSchema = z.object({
+  buildingType: z.string().min(3, "Building type is required"),
+  storeys: z.number().int().positive().optional(),
+  squareMetres: z.number().int().positive().optional(),
+  challenges: z.array(z.string().min(5, "Challenge must be at least 5 characters")).optional(),
+});
+
+export const ProjectType = z.enum(["residential", "commercial", "industrial", "heritage"]);
+
+export const ProjectCategory = z.enum([
+  "heritage",
+  "new-build",
+  "renovation",
+  "maintenance",
+  "emergency",
+]);
+
+export const ProjectFrontmatterSchema = z.object({
+  title: z
+    .string()
+    .min(10, "Project title must be at least 10 characters")
+    .max(100, "Project title must be less than 100 characters"),
+
+  slug: z
+    .string()
+    .regex(/^[a-z0-9-]+$/, "Slug must be lowercase with hyphens")
+    .optional(),
+
+  description: z
+    .string()
+    .min(50, "Description must be at least 50 characters")
+    .max(200, "Description should be under 200 characters"),
+
+  seoTitle: z
+    .string()
+    .min(10, "SEO title must be at least 10 characters")
+    .max(70, "SEO title should be under 70 characters")
+    .optional(),
+
+  keywords: z
+    .array(z.string().min(2, "Keywords must be at least 2 characters"))
+    .min(3, "At least 3 keywords required")
+    .max(10, "Maximum 10 keywords")
+    .optional(),
+
+  projectType: ProjectType,
+
+  category: ProjectCategory,
+
+  status: z.enum(["completed", "in-progress", "featured"]).optional().default("completed"),
+
+  location: z.string().min(2, "Location slug is required"),
+
+  locationName: z.string().min(2, "Location name is required"),
+
+  region: z.string().min(2, "Region is required").optional(),
+
+  address: z.string().optional(),
+
+  completionDate: z
+    .string()
+    .regex(/^\d{4}-\d{2}-\d{2}$/, "Completion date must be YYYY-MM-DD format"),
+
+  year: z.number().int().min(2000).max(2100),
+
+  duration: z.string().optional(),
+
+  services: z
+    .array(z.string().min(2, "Service slug must be at least 2 characters"))
+    .min(1, "At least 1 service required"),
+
+  client: ProjectClientSchema.optional(),
+
+  scope: ProjectScopeSchema.optional(),
+
+  heroImage: ImagePathSchema,
+
+  images: z.array(ProjectImageSchema).min(1, "At least 1 project image required").optional(),
+
+  results: z
+    .array(z.string().min(10, "Result must be at least 10 characters"))
+    .min(1, "At least 1 result required")
+    .optional(),
+
+  faqs: z.array(FaqSchema).optional(),
+});
+
+/**
+ * Testimonial MDX frontmatter schema
+ * Used to validate all files in content/testimonials/
+ */
+export const TestimonialPlatform = z.enum(["internal", "google", "trustpilot", "reviews.io"]);
+
+export const TestimonialFrontmatterSchema = z.object({
+  customerName: z
+    .string()
+    .min(2, "Customer name must be at least 2 characters")
+    .max(100, "Customer name must be less than 100 characters"),
+
+  customerRole: z.string().max(100, "Role must be less than 100 characters").optional(),
+
+  customerCompany: z.string().max(100, "Company name must be less than 100 characters").optional(),
+
+  rating: z.number().int().min(1, "Rating must be at least 1").max(5, "Rating must be at most 5"),
+
+  text: z
+    .string()
+    .min(20, "Testimonial text must be at least 20 characters")
+    .max(1000, "Testimonial text must be less than 1000 characters"),
+
+  excerpt: z.string().max(200, "Excerpt must be less than 200 characters").optional(),
+
+  photo: ImagePathSchema.optional(),
+
+  date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Date must be YYYY-MM-DD format"),
+
+  service: z.string().min(2, "Service name must be at least 2 characters").optional(),
+
+  serviceSlug: z
+    .string()
+    .regex(/^[a-z0-9-]+$/, "Service slug must be lowercase with hyphens")
+    .optional(),
+
+  location: z.string().min(2, "Location must be at least 2 characters").optional(),
+
+  locationSlug: z
+    .string()
+    .regex(/^[a-z0-9-]+$/, "Location slug must be lowercase with hyphens")
+    .optional(),
+
+  projectType: z.enum(["residential", "commercial", "industrial"]).optional(),
+
+  featured: z.boolean().default(false),
+
+  verified: z.boolean().default(true),
+
+  platform: TestimonialPlatform.default("internal"),
+});
+
+/**
  * Type exports for TypeScript usage
  */
 export type ServiceFrontmatter = z.infer<typeof ServiceFrontmatterSchema>;
 export type LocationFrontmatter = z.infer<typeof LocationFrontmatterSchema>;
 export type FAQ = z.infer<typeof FaqSchema>;
+export type BlogFrontmatter = z.infer<typeof BlogFrontmatterSchema>;
+export type BlogAuthor = z.infer<typeof BlogAuthorSchema>;
+export type BlogCategoryType = z.infer<typeof BlogCategory>;
+export type ProjectFrontmatter = z.infer<typeof ProjectFrontmatterSchema>;
+export type ProjectImage = z.infer<typeof ProjectImageSchema>;
+export type ProjectClient = z.infer<typeof ProjectClientSchema>;
+export type ProjectTypeValue = z.infer<typeof ProjectType>;
+export type ProjectCategoryValue = z.infer<typeof ProjectCategory>;
+export type TestimonialFrontmatter = z.infer<typeof TestimonialFrontmatterSchema>;
+export type TestimonialPlatformType = z.infer<typeof TestimonialPlatform>;

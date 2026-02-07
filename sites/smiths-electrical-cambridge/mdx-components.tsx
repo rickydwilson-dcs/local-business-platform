@@ -14,8 +14,7 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import type { MDXComponents as MDXMap } from 'mdx/types';
-import { Schema } from '@/components/Schema';
-import { ArticleCallout } from '@/components/ui/article-callout';
+import { Schema, ArticleCallout } from '@platform/core-components';
 
 // ============================================================================
 // Custom MDX Components

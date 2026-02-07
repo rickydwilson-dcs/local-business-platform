@@ -4,12 +4,14 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import matter from "gray-matter";
 
-import { ServiceHero } from "@/components/ui/service-hero";
-import { ServiceAbout } from "@/components/ui/service-about";
-import { ServiceFAQ } from "@/components/ui/service-faq";
-import { ServiceCTA } from "@/components/ui/service-cta";
-import { Breadcrumbs } from "@/components/ui/breadcrumbs";
-import { Schema } from "@/components/Schema";
+import {
+  ServiceHero,
+  ServiceAbout,
+  ServiceFAQ,
+  ServiceCTA,
+  Breadcrumbs,
+  Schema,
+} from "@platform/core-components";
 import { absUrl } from "@/lib/site";
 import { getAreaServed } from "@/lib/location-utils";
 import { getImageUrl } from "@/lib/image";
@@ -30,12 +32,6 @@ type Params = { slug: string; location: string };
  */
 
 const SERVICES_DIR = path.join(process.cwd(), "content", "services");
-
-// Define valid service-location combinations
-const LOCATION_SERVICES: Record<string, string[]> = {
-  "commercial-scaffolding": ["brighton", "canterbury", "hastings"],
-  "residential-scaffolding": ["brighton", "canterbury", "hastings"],
-};
 
 interface ServiceData {
   title: string;
@@ -106,18 +102,38 @@ async function getServiceDataFromMDX(slug: string, location: string): Promise<Se
 }
 
 /**
- * Generate static params for all service-location combinations
+ * Dynamically discover all service-location combinations by scanning
+ * content/services/ for subdirectories containing .mdx files.
  */
-export async function generateStaticParams() {
+async function discoverLocationServices(): Promise<Params[]> {
   const params: Params[] = [];
+  const entries = await fs.readdir(SERVICES_DIR, { withFileTypes: true });
 
-  for (const [slug, locations] of Object.entries(LOCATION_SERVICES)) {
-    for (const location of locations) {
-      params.push({ slug, location });
+  for (const entry of entries) {
+    if (!entry.isDirectory()) continue;
+
+    const serviceSlug = entry.name;
+    const serviceDir = path.join(SERVICES_DIR, serviceSlug);
+    const files = await fs.readdir(serviceDir);
+
+    for (const file of files) {
+      if (file.toLowerCase().endsWith(".mdx")) {
+        params.push({
+          slug: serviceSlug,
+          location: file.replace(/\.mdx$/i, ""),
+        });
+      }
     }
   }
 
   return params;
+}
+
+/**
+ * Generate static params for all service-location combinations
+ */
+export async function generateStaticParams() {
+  return discoverLocationServices();
 }
 
 export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
@@ -244,11 +260,11 @@ export default async function Page({ params }: { params: Promise<Params> }) {
       </div>
 
       {/* Location Services Button */}
-      <section className="bg-brand-blue/5 border-b">
+      <section className="bg-brand-primary/5 border-b">
         <div className="mx-auto w-full lg:w-[90%] px-6 py-4">
           <Link
             href={`/locations/${location}`}
-            className="inline-flex items-center gap-2 text-brand-blue hover:text-brand-blue-hover font-medium transition-colors"
+            className="inline-flex items-center gap-2 text-brand-primary hover:text-brand-primary-hover font-medium transition-colors"
           >
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path
@@ -263,7 +279,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
         </div>
       </section>
 
-      <main>
+      <div>
         <ServiceHero
           title={serviceData.title}
           description={serviceData.description}
@@ -283,7 +299,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
         <ServiceFAQ items={serviceData.faqs} />
 
         <ServiceCTA />
-      </main>
+      </div>
 
       <Schema
         service={{

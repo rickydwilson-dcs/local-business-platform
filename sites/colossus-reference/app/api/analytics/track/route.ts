@@ -248,6 +248,10 @@ export async function POST(request: NextRequest) {
 }
 
 export async function GET() {
+  if (process.env.NODE_ENV !== "development") {
+    return NextResponse.json({ status: "Analytics API is running" }, { status: 200 });
+  }
+
   const flags = getFeatureFlags();
 
   return NextResponse.json({

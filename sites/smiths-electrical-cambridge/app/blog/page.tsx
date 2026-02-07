@@ -9,8 +9,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import type { Metadata } from 'next';
-import { Schema } from '@/components/Schema';
-import { Breadcrumbs } from '@/components/ui/breadcrumbs';
+import { Schema, Breadcrumbs } from '@platform/core-components';
 import { getBlogPosts, type BlogPost } from '@/lib/content';
 import { getImageUrl } from '@/lib/image';
 import { absUrl } from '@/lib/site';
@@ -28,14 +27,6 @@ export const metadata: Metadata = {
     url: '/blog',
     type: 'website',
   },
-  // Only include RSS link in metadata if blog feature is enabled
-  ...(siteConfig.features.blog && {
-    alternates: {
-      types: {
-        'application/rss+xml': '/blog/rss.xml',
-      },
-    },
-  }),
 };
 
 const categoryLabels: Record<string, string> = {
@@ -133,20 +124,6 @@ export default async function BlogPage() {
                 Professional guidance, tips, and industry news from our experienced team. Stay
                 informed with the latest insights from {siteConfig.business.name}.
               </p>
-
-              {/* Only show RSS link if blog feature is enabled */}
-              {siteConfig.features.blog && (
-                <Link
-                  href="/blog/rss.xml"
-                  className="inline-flex items-center gap-2 text-brand-primary hover:text-brand-primary-hover font-medium"
-                >
-                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M5 3a1 1 0 000 2c5.523 0 10 4.477 10 10a1 1 0 102 0C17 8.373 11.627 3 5 3z" />
-                    <path d="M4 9a1 1 0 011-1 7 7 0 017 7 1 1 0 11-2 0 5 5 0 00-5-5 1 1 0 01-1-1zM3 15a2 2 0 114 0 2 2 0 01-4 0z" />
-                  </svg>
-                  Subscribe via RSS
-                </Link>
-              )}
             </div>
           </div>
         </section>

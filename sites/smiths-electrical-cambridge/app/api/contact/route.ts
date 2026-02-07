@@ -7,7 +7,7 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import { validateCSRFToken, escapeHtml, getClientIP } from '@/lib/csrf';
-import { rateLimitMiddleware } from '@/lib/rate-limiter';
+import { rateLimitMiddleware } from '@platform/core-components/lib/rate-limiter';
 import { siteConfig } from '@/site.config';
 import { BUSINESS_EMAIL, BUSINESS_NAME } from '@/lib/contact-info';
 
@@ -73,15 +73,27 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Validate required fields
+    // Validate required fields with length limits
     const { name, email, message } = body;
 
     if (!name?.trim()) {
       return NextResponse.json({ error: 'Name is required', field: 'name' }, { status: 400 });
     }
+    if (name.length > 100) {
+      return NextResponse.json(
+        { error: 'Name must be 100 characters or less', field: 'name' },
+        { status: 400 }
+      );
+    }
 
     if (!email?.trim()) {
       return NextResponse.json({ error: 'Email is required', field: 'email' }, { status: 400 });
+    }
+    if (email.length > 254) {
+      return NextResponse.json(
+        { error: 'Email must be 254 characters or less', field: 'email' },
+        { status: 400 }
+      );
     }
 
     if (!EMAIL_REGEX.test(email)) {
@@ -93,6 +105,24 @@ export async function POST(request: NextRequest) {
 
     if (!message?.trim()) {
       return NextResponse.json({ error: 'Message is required', field: 'message' }, { status: 400 });
+    }
+    if (message.length > 2000) {
+      return NextResponse.json(
+        { error: 'Message must be 2000 characters or less', field: 'message' },
+        { status: 400 }
+      );
+    }
+    if (body.phone && body.phone.length > 30) {
+      return NextResponse.json(
+        { error: 'Phone must be 30 characters or less', field: 'phone' },
+        { status: 400 }
+      );
+    }
+    if (body.subject && body.subject.length > 200) {
+      return NextResponse.json(
+        { error: 'Subject must be 200 characters or less', field: 'subject' },
+        { status: 400 }
+      );
     }
 
     // Sanitize and prepare submission data

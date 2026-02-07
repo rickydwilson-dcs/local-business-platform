@@ -1,165 +1,211 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 
-// Set environment variables BEFORE importing (rate limiter checks at module load)
-process.env.KV_REST_API_URL = "https://test-redis.upstash.io";
-process.env.KV_REST_API_TOKEN = "test-token";
+// Mock RPC function
+const mockRpc = vi.fn();
 
-// Create mock functions
-const mockGet = vi.fn();
-const mockSet = vi.fn();
-const mockIncr = vi.fn();
-const mockTtl = vi.fn();
+// Mock @supabase/supabase-js BEFORE importing
+vi.mock("@supabase/supabase-js", () => ({
+  createClient: vi.fn(() => ({
+    rpc: mockRpc,
+  })),
+}));
 
-// Mock Upstash Redis BEFORE importing
-vi.mock("@upstash/redis", async () => {
-  return {
-    Redis: vi.fn().mockImplementation(() => ({
-      get: mockGet,
-      set: mockSet,
-      incr: mockIncr,
-      ttl: mockTtl,
-    })),
-  };
-});
+// Set env vars so the client is created
+process.env.SUPABASE_URL = "https://test.supabase.co";
+process.env.SUPABASE_SERVICE_KEY = "test-service-key";
 
-// Import after setting up mocks and env vars
-const { checkRateLimit } = await import("../rate-limiter");
+// Import after mocks are set up
+const { checkRateLimit, rateLimitMiddleware } = await import("../rate-limiter");
 
-describe("Rate Limiter", () => {
+describe("Rate Limiter (Supabase)", () => {
   beforeEach(() => {
     vi.clearAllMocks();
   });
 
-  describe("First request", () => {
+  describe("checkRateLimit", () => {
     it("should allow first request from new IP", async () => {
-      mockGet.mockResolvedValue(null);
-
-      const result = await checkRateLimit("192.168.1.1");
-
-      expect(result.allowed).toBe(true);
-      expect(mockSet).toHaveBeenCalledWith("rate-limit:contact:192.168.1.1", 1, {
-        ex: 300,
+      mockRpc.mockResolvedValue({
+        data: { request_count: 1, allowed: true },
+        error: null,
       });
-    });
-  });
-
-  describe("Subsequent requests", () => {
-    it("should allow requests under limit", async () => {
-      mockGet.mockResolvedValue(3); // 3 requests so far
-
-      const result = await checkRateLimit("192.168.1.1");
-
-      expect(result.allowed).toBe(true);
-      expect(mockIncr).toHaveBeenCalledWith("rate-limit:contact:192.168.1.1");
-    });
-
-    it("should block requests at limit", async () => {
-      mockGet.mockResolvedValue(5); // Already at limit
-      mockTtl.mockResolvedValue(240); // 4 minutes remaining
-
-      const result = await checkRateLimit("192.168.1.1");
-
-      expect(result.allowed).toBe(false);
-      expect(result.retryAfter).toBe(240);
-      expect(mockIncr).not.toHaveBeenCalled();
-    });
-
-    it("should block requests over limit", async () => {
-      mockGet.mockResolvedValue(10); // Way over limit
-      mockTtl.mockResolvedValue(120);
-
-      const result = await checkRateLimit("192.168.1.1");
-
-      expect(result.allowed).toBe(false);
-      expect(result.retryAfter).toBe(120);
-    });
-  });
-
-  describe("TTL handling", () => {
-    it("should use TTL for retry-after when available", async () => {
-      mockGet.mockResolvedValue(5);
-      mockTtl.mockResolvedValue(180);
-
-      const result = await checkRateLimit("192.168.1.1");
-
-      expect(result.retryAfter).toBe(180);
-    });
-
-    it("should fallback to window duration if TTL invalid", async () => {
-      mockGet.mockResolvedValue(5);
-      mockTtl.mockResolvedValue(-1); // Invalid TTL
-
-      const result = await checkRateLimit("192.168.1.1");
-
-      expect(result.retryAfter).toBe(300); // Default window
-    });
-  });
-
-  describe("IP isolation", () => {
-    it("should track different IPs separately", async () => {
-      mockGet.mockResolvedValue(null);
-
-      await checkRateLimit("192.168.1.1");
-      await checkRateLimit("192.168.1.2");
-
-      expect(mockSet).toHaveBeenCalledWith("rate-limit:contact:192.168.1.1", 1, {
-        ex: 300,
-      });
-      expect(mockSet).toHaveBeenCalledWith("rate-limit:contact:192.168.1.2", 1, {
-        ex: 300,
-      });
-    });
-  });
-
-  describe("Error handling", () => {
-    it("should fail open when Redis errors", async () => {
-      mockGet.mockRejectedValue(new Error("Redis connection failed"));
 
       const result = await checkRateLimit("192.168.1.1");
 
       expect(result.allowed).toBe(true);
       expect(result.retryAfter).toBeUndefined();
+      expect(mockRpc).toHaveBeenCalledWith(
+        "increment_rate_limit",
+        expect.objectContaining({
+          p_identifier: "192.168.1.1",
+          p_endpoint: "/api/contact",
+          p_max_requests: 5,
+        })
+      );
     });
 
-    it("should fail open when Redis times out", async () => {
-      mockGet.mockRejectedValue(new Error("ETIMEDOUT"));
+    it("should allow requests under limit", async () => {
+      mockRpc.mockResolvedValue({
+        data: { request_count: 3, allowed: true },
+        error: null,
+      });
 
       const result = await checkRateLimit("192.168.1.1");
 
       expect(result.allowed).toBe(true);
     });
-  });
 
-  describe("Edge cases", () => {
-    it("should handle exactly at limit (5th request)", async () => {
-      mockGet.mockResolvedValue(4); // 4 requests so far, this is 5th
+    it("should allow the 5th request (at limit)", async () => {
+      mockRpc.mockResolvedValue({
+        data: { request_count: 5, allowed: true },
+        error: null,
+      });
 
       const result = await checkRateLimit("192.168.1.1");
 
       expect(result.allowed).toBe(true);
-      expect(mockIncr).toHaveBeenCalled();
     });
 
-    it("should handle empty IP string", async () => {
-      mockGet.mockResolvedValue(null);
+    it("should block the 6th request (over limit)", async () => {
+      mockRpc.mockResolvedValue({
+        data: { request_count: 6, allowed: false },
+        error: null,
+      });
 
-      const result = await checkRateLimit("");
+      const result = await checkRateLimit("192.168.1.1");
+
+      expect(result.allowed).toBe(false);
+      expect(result.retryAfter).toBeGreaterThan(0);
+      expect(result.retryAfter).toBeLessThanOrEqual(300);
+    });
+
+    it("should block requests way over limit", async () => {
+      mockRpc.mockResolvedValue({
+        data: { request_count: 50, allowed: false },
+        error: null,
+      });
+
+      const result = await checkRateLimit("10.0.0.1");
+
+      expect(result.allowed).toBe(false);
+      expect(result.retryAfter).toBeGreaterThan(0);
+    });
+
+    it("should fail open when Supabase RPC errors", async () => {
+      mockRpc.mockResolvedValue({
+        data: null,
+        error: { message: "Connection refused", code: "PGRST301" },
+      });
+
+      const result = await checkRateLimit("192.168.1.1");
 
       expect(result.allowed).toBe(true);
-      expect(mockSet).toHaveBeenCalledWith("rate-limit:contact:", 1, { ex: 300 });
+    });
+
+    it("should fail open when RPC throws", async () => {
+      mockRpc.mockRejectedValue(new Error("Network error"));
+
+      const result = await checkRateLimit("192.168.1.1");
+
+      expect(result.allowed).toBe(true);
+    });
+
+    it("should track different IPs separately", async () => {
+      mockRpc.mockResolvedValue({
+        data: { request_count: 1, allowed: true },
+        error: null,
+      });
+
+      await checkRateLimit("192.168.1.1");
+      await checkRateLimit("192.168.1.2");
+
+      expect(mockRpc).toHaveBeenCalledTimes(2);
+      expect(mockRpc).toHaveBeenCalledWith(
+        "increment_rate_limit",
+        expect.objectContaining({ p_identifier: "192.168.1.1" })
+      );
+      expect(mockRpc).toHaveBeenCalledWith(
+        "increment_rate_limit",
+        expect.objectContaining({ p_identifier: "192.168.1.2" })
+      );
     });
 
     it("should handle IPv6 addresses", async () => {
-      mockGet.mockResolvedValue(null);
+      mockRpc.mockResolvedValue({
+        data: { request_count: 1, allowed: true },
+        error: null,
+      });
 
       const result = await checkRateLimit("2001:0db8:85a3:0000:0000:8a2e:0370:7334");
 
       expect(result.allowed).toBe(true);
-      expect(mockSet).toHaveBeenCalledWith(
-        "rate-limit:contact:2001:0db8:85a3:0000:0000:8a2e:0370:7334",
-        1,
-        { ex: 300 }
+      expect(mockRpc).toHaveBeenCalledWith(
+        "increment_rate_limit",
+        expect.objectContaining({
+          p_identifier: "2001:0db8:85a3:0000:0000:8a2e:0370:7334",
+        })
       );
+    });
+
+    it("should accept custom options", async () => {
+      mockRpc.mockResolvedValue({
+        data: { request_count: 1, allowed: true },
+        error: null,
+      });
+
+      await checkRateLimit("10.0.0.1", {
+        endpoint: "/api/quote",
+        maxRequests: 10,
+        windowSeconds: 60,
+        siteSlug: "smiths-electrical",
+      });
+
+      expect(mockRpc).toHaveBeenCalledWith(
+        "increment_rate_limit",
+        expect.objectContaining({
+          p_identifier: "10.0.0.1",
+          p_endpoint: "/api/quote",
+          p_max_requests: 10,
+          p_site_slug: "smiths-electrical",
+        })
+      );
+    });
+  });
+
+  describe("rateLimitMiddleware", () => {
+    it("should return null when request is allowed", async () => {
+      mockRpc.mockResolvedValue({
+        data: { request_count: 1, allowed: true },
+        error: null,
+      });
+
+      const response = await rateLimitMiddleware("192.168.1.1");
+
+      expect(response).toBeNull();
+    });
+
+    it("should return 429 Response when rate limited", async () => {
+      mockRpc.mockResolvedValue({
+        data: { request_count: 6, allowed: false },
+        error: null,
+      });
+
+      const response = await rateLimitMiddleware("192.168.1.1");
+
+      expect(response).not.toBeNull();
+      expect(response!.status).toBe(429);
+      expect(response!.headers.get("Retry-After")).toBeTruthy();
+
+      const body = await response!.json();
+      expect(body.error).toBe("Too many requests. Please try again later.");
+      expect(body.retryAfter).toBeGreaterThan(0);
+    });
+
+    it("should return null when Supabase errors (fail open)", async () => {
+      mockRpc.mockRejectedValue(new Error("timeout"));
+
+      const response = await rateLimitMiddleware("192.168.1.1");
+
+      expect(response).toBeNull();
     });
   });
 });

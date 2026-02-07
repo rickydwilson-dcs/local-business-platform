@@ -1,181 +1,78 @@
-# Local Business Platform - Documentation
+# Documentation
 
-Complete documentation for the white-label website platform for local service businesses.
-
-**Last Updated:** 2025-01-25
+Navigation index for the Local Business Platform docs.
 
 ---
 
-## Quick Navigation
+## Architecture
 
-### Standards (Rules & Requirements)
+How the platform's core systems work.
 
-Focused reference documents defining how things should be done.
+| Document                                                                 | Teaches                                           |
+| ------------------------------------------------------------------------ | ------------------------------------------------- |
+| [Architecture Overview](architecture/architecture.md)                    | High-level system design and repository structure |
+| [How Dynamic Routing Works](architecture/how-dynamic-routing-works.md)   | MDX files become pages via `[slug]` routes        |
+| [How the Theme System Works](architecture/how-theme-system-works.md)     | Config to CSS variables to Tailwind classes       |
+| [How the Build Pipeline Works](architecture/how-build-pipeline-works.md) | Turborepo orchestration, packages, caching        |
+| [How Site Creation Works](architecture/how-site-creation-works.md)       | Intake to project file to deployed site           |
+| [Content Validation](architecture/content-validation.md)                 | Zod schemas for MDX frontmatter                   |
+| [Monitoring Dashboard](architecture/monitoring-dashboard.md)             | Dashboard design and implementation plan          |
 
-| Standard                              | Description                                  |
-| ------------------------------------- | -------------------------------------------- |
-| [Styling](standards/styling.md)       | Tailwind CSS, maintainable classes           |
-| [Components](standards/components.md) | Component architecture, TypeScript props     |
-| [Content](standards/content.md)       | MDX-only architecture, frontmatter structure |
-| [SEO](standards/seo.md)               | Meta data, keywords, local SEO               |
-| [Images](standards/images.md)         | R2 storage, optimization, naming             |
-| [Schema](standards/schema.md)         | JSON-LD markup requirements                  |
-| [Testing](standards/testing.md)       | Unit tests, E2E tests, coverage              |
-| [Security](standards/security.md)     | Rate limiting, API security, GDPR            |
-| [Analytics](standards/analytics.md)   | Consent management, GA4                      |
-| [Deployment](standards/deployment.md) | CI/CD, monitoring, rollback                  |
-| [Quality](standards/quality.md)       | Quality gates, checklists                    |
+## Standards
 
-### Guides (How-To Procedures)
+Rules and requirements for how things should be done.
+
+| Standard                                    | Covers                                       |
+| ------------------------------------------- | -------------------------------------------- |
+| [Styling](standards/styling.md)             | Tailwind CSS, theme tokens                   |
+| [Components](standards/components.md)       | Component architecture, TypeScript props     |
+| [Content](standards/content.md)             | MDX-only architecture, frontmatter structure |
+| [SEO](standards/seo.md)                     | Meta data, keywords, local SEO               |
+| [Images](standards/images.md)               | R2 storage, optimisation, naming             |
+| [Schema](standards/schema.md)               | JSON-LD structured data                      |
+| [Testing](standards/testing.md)             | Unit tests, E2E tests                        |
+| [Security](standards/security.md)           | Rate limiting, API security, GDPR            |
+| [Analytics](standards/analytics.md)         | Consent management, GA4                      |
+| [Deployment](standards/deployment.md)       | CI/CD, monitoring, rollback                  |
+| [Quality](standards/quality.md)             | Quality gates, checklists                    |
+| [Documentation](standards/documentation.md) | Doc standards, naming, templates             |
+
+## Guides
 
 Step-by-step instructions for common tasks.
 
-| Guide                                          | Purpose                  | Time                     |
-| ---------------------------------------------- | ------------------------ | ------------------------ |
-| [Adding a New Site](guides/adding-new-site.md) | Create a new client site | 30-60 min                |
-| [Adding a Location](guides/adding-location.md) | Add location MDX file    | 2-5 min (AI) / 15-20 min |
-| [Adding a Service](guides/adding-service.md)   | Add service MDX file     | 2-5 min (AI) / 15-20 min |
-| [Deploying a Site](guides/deploying-site.md)   | Deployment procedures    | 10-15 min                |
-| [Monitoring Setup](guides/monitoring-setup.md) | NewRelic configuration   | 20-30 min                |
-| [GitHub Actions](guides/github-actions.md)     | CI/CD workflow guide     | 15-20 min                |
-| [Git Workflow](guides/git-workflow.md)         | Branch workflow          | 5-10 min                 |
-
-### AI Content Generation (NEW)
-
-Generate service and location pages automatically using Claude or Gemini AI:
-
-```bash
-pnpm content:generate:services --site <site-name> --context <context.json>
-pnpm content:generate:locations --site <site-name> --context <context.json>
-```
-
-See [Adding a Service](guides/adding-service.md) and [Adding a Location](guides/adding-location.md) for details.
-
-### Architecture
-
-System design and patterns.
-
-| Document                                                 | Description                               |
-| -------------------------------------------------------- | ----------------------------------------- |
-| [Architecture Overview](architecture/ARCHITECTURE.md)    | High-level architecture, technology stack |
-| [Content Validation](architecture/CONTENT_VALIDATION.md) | Zod validation schemas                    |
-
-### Progress Reports
-
-Weekly completion reports.
-
-| Week                                     | Status      | Focus                        |
-| ---------------------------------------- | ----------- | ---------------------------- |
-| [Week 1](progress/WEEK_1_COMPLETE.md)    | Complete    | Monorepo foundation          |
-| [Week 2](progress/WEEK_2_COMPLETE.md)    | Complete    | Component versioning         |
-| [Week 3](progress/WEEK_3_COMPLETE.md)    | Complete    | Testing infrastructure       |
-| [Week 4](progress/WEEK_4_COMPLETE.md)    | Complete    | Deployment & monitoring      |
-| [Week 5](progress/WEEK_5_COMPLETE.md)    | Complete    | AI content generation        |
-| [Week 6](progress/WEEK_6_IN_PROGRESS.md) | In Progress | Blog, projects, testimonials |
+| Guide                                                        | Purpose                                       |
+| ------------------------------------------------------------ | --------------------------------------------- |
+| [Adding a New Site](guides/adding-new-site.md)               | Create a new client site from base-template   |
+| [Adding a Service](guides/adding-service.md)                 | Add service MDX content                       |
+| [Adding a Location](guides/adding-location.md)               | Add location MDX content                      |
+| [Adding a Content Section](guides/adding-content-section.md) | Add a new content type (blog, projects, etc.) |
+| [Theming](guides/theming.md)                                 | Configure site theme and brand colours        |
+| [Component Versioning](guides/component-versioning.md)       | Changesets workflow for core-components       |
+| [Git Workflow](guides/git-workflow.md)                       | Branch workflow (develop to staging to main)  |
+| [GitHub Actions](guides/github-actions.md)                   | CI/CD pipeline configuration                  |
+| [Deploying a Site](guides/deploying-site.md)                 | Deployment procedures                         |
+| [Monitoring Setup](guides/monitoring-setup.md)               | NewRelic configuration                        |
+| [Registry Setup](guides/registry-setup.md)                   | Component registry configuration              |
+| [End-to-End Workflow](guides/end-to-end-workflow.md)         | Complete workflow from intake to deployment   |
 
 ---
 
-## Documentation Structure
+## Quick Start Paths
 
-```
-docs/
-├── standards/           # Standards reference documents
-│   ├── styling.md      # Tailwind, maintainable classes
-│   ├── components.md   # Component architecture
-│   ├── content.md      # MDX-only architecture
-│   ├── seo.md          # SEO requirements
-│   ├── images.md       # Image optimization, R2
-│   ├── schema.md       # JSON-LD markup
-│   ├── testing.md      # Testing standards
-│   ├── security.md     # Security, rate limiting
-│   ├── analytics.md    # Consent, GA4
-│   ├── deployment.md   # CI/CD, monitoring
-│   └── quality.md      # Quality gates
-│
-├── guides/              # How-to guides
-│   ├── adding-new-site.md
-│   ├── adding-location.md
-│   ├── adding-service.md
-│   ├── deploying-site.md
-│   ├── monitoring-setup.md
-│   ├── github-actions.md
-│   └── git-workflow.md
-│
-├── architecture/        # System design
-│   ├── ARCHITECTURE.md  # High-level overview
-│   └── CONTENT_VALIDATION.md
-│
-├── development/         # Development setup
-│   ├── DEVELOPMENT.md
-│   ├── GITHUB_SETUP.md
-│   └── BRANCH_PROTECTION_*.md
-│
-├── component-versioning/
-│   └── VERSIONING_WORKFLOW.md
-│
-├── progress/            # Weekly reports
-│   └── WEEK_*_COMPLETE.md
-│
-├── troubleshooting/     # Issue resolution
-│   └── CORRUPTED_BUILD_CACHE.md
-│
-└── archived/            # Historical docs
-    └── (old files)
-```
+**New to the project?**
 
----
+1. [Root README](../README.md) — project overview
+2. [Architecture Overview](architecture/architecture.md) — system design
+3. [Content Standards](standards/content.md) — MDX architecture
 
-## Quick Start
+**Building a new site?**
 
-### New to this project?
+1. [Adding a New Site](guides/adding-new-site.md)
+2. [Adding Services](guides/adding-service.md)
+3. [Adding Locations](guides/adding-location.md)
 
-1. [README.md](../README.md) - Project overview
-2. [Architecture Overview](architecture/ARCHITECTURE.md) - System design
-3. [Content Standards](standards/content.md) - MDX architecture
-4. [Quality Standards](standards/quality.md) - Quality gates
+**Deploying?**
 
-### Building a new site?
-
-1. [Adding a New Site](guides/adding-new-site.md) - Complete guide
-2. [Adding Services](guides/adding-service.md) - Service MDX files
-3. [Adding Locations](guides/adding-location.md) - Location MDX files
-
-### Deploying?
-
-1. [Git Workflow](guides/git-workflow.md) - Branch workflow
-2. [Deploying a Site](guides/deploying-site.md) - Deployment procedures
-3. [GitHub Actions](guides/github-actions.md) - CI/CD pipeline
-
----
-
-## Project Statistics
-
-### Sites
-
-- **colossus-reference:** 86 pages (25 services + 37 locations + blog + projects + reviews)
-- **joes-plumbing-canterbury:** 12 pages (3 services + 3 locations)
-- **Target:** 50 sites by end of Year 1
-
-### Documentation
-
-- **Standards:** 11 focused reference documents
-- **Guides:** 7 how-to procedures
-- **Total:** ~3,000+ lines of documentation
-
-### Build Performance
-
-- Fresh build: 44.4s (2 sites)
-- Cached build: 253ms (176x faster)
-- Target for 50 sites: <5min
-
----
-
-## Related Files
-
-- [CLAUDE.md](../CLAUDE.md) - AI agent instructions
-- [TODO.md](TODO.md) - Task tracking
-- [WHITE_LABEL_PLATFORM_DESIGN.md](WHITE_LABEL_PLATFORM_DESIGN.md) - Business plan
-
----
-
-**Maintained By:** Digital Consulting Services
+1. [Git Workflow](guides/git-workflow.md)
+2. [Deploying a Site](guides/deploying-site.md)

@@ -216,17 +216,6 @@ bg-semantic-error, text-semantic-error
 bg-semantic-info, text-semantic-info
 ```
 
-### Legacy Compatibility
-
-For backward compatibility, these aliases are available:
-
-```css
-/* These map to brand-primary */
-bg-brand-blue       → bg-brand-primary
-text-brand-blue     → text-brand-primary
-border-brand-blue   → border-brand-primary
-```
-
 ## Tailwind Configuration
 
 Your `tailwind.config.ts` should use the theme plugin:

@@ -6,11 +6,19 @@
   "types": "./src/index.ts",
   "exports": {
     ".": "./src/index.ts",
+    "./components/ui/footer": "./src/components/ui/footer.tsx",
+    "./components/ui/services-overview": "./src/components/ui/services-overview.tsx",
+    "./components/analytics/ConsentManager": "./src/components/analytics/ConsentManager.tsx",
+    "./components/analytics/Analytics": "./src/components/analytics/Analytics.tsx",
+    "./components/analytics/AnalyticsDebugPanel": "./src/components/analytics/AnalyticsDebugPanel.tsx",
+    "./components/ui/town-finder-section": "./src/components/ui/town-finder-section.tsx",
+    "./components/ui/county-gateway-cards": "./src/components/ui/county-gateway-cards.tsx",
     "./components/*": "./src/components/*/index.tsx",
     "./lib/*": "./src/lib/*.ts"
   },
   "scripts": {
     "lint": "eslint src/",
+    "test": "vitest run",
     "type-check": "tsc --project tsconfig.build.json --noEmit"
   },
   "keywords": [
@@ -21,6 +29,7 @@
   ],
   "dependencies": {
     "@mdx-js/react": "^3.1.1",
+    "@supabase/supabase-js": "^2.50.0",
     "@types/leaflet": "^1.9.20",
     "gray-matter": "^4.0.3",
     "leaflet": "^1.9.4",
@@ -43,6 +52,7 @@
     "eslint": "^9.37.0",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^5.2.0",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^3.2.4"
   }
 }

@@ -247,4 +247,3 @@ Check for:
 | `/blog`                       | Blog listing page    |
 | `/blog/[slug]`                | Individual blog post |
 | `/blog?category=how-to-guide` | Filtered by category |
-| `/blog/rss.xml`               | RSS feed             |

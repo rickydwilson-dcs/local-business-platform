@@ -160,9 +160,9 @@ RESEND_API_KEY=re_xxxxxxxxx
 CONTACT_EMAIL_TO=info@yourbusiness.com
 CONTACT_EMAIL_FROM=noreply@yourbusiness.com
 
-# Rate Limiting (optional)
-UPSTASH_REDIS_REST_URL=https://your-redis.upstash.io
-UPSTASH_REDIS_REST_TOKEN=your-token
+# Rate Limiting (Supabase — required for contact form protection)
+SUPABASE_URL=https://your-project.supabase.co
+SUPABASE_SERVICE_KEY=your-service-role-key
 
 # Image CDN (optional)
 NEXT_PUBLIC_R2_PUBLIC_URL=https://your-bucket.r2.dev

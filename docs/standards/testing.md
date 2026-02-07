@@ -93,17 +93,16 @@ describe("Contact API", () => {
 
 ### Mocking Strategy
 
-- **Upstash Redis:** Mocked for rate limiter tests
+- **Supabase:** Mocked for rate limiter tests
 - **Resend Email:** Mocked for contact API tests
 - **File System:** Mocked for content validation tests
 
 ```typescript
-// Example: Redis mock
-vi.mock("@upstash/redis", () => ({
-  Redis: vi.fn().mockImplementation(() => ({
-    incr: vi.fn().mockResolvedValue(1),
-    expire: vi.fn().mockResolvedValue(1),
-  })),
+// Example: Supabase rate limiter mock
+vi.mock("@supabase/supabase-js", () => ({
+  createClient: vi.fn().mockReturnValue({
+    rpc: vi.fn().mockResolvedValue({ data: 1, error: null }),
+  }),
 }));
 ```
 
