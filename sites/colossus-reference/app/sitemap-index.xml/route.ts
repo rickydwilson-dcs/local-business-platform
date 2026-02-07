@@ -15,15 +15,21 @@ const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://colossus-scaffoldi
  * - /sitemap.xml (core pages)
  * - /services/sitemap.xml
  * - /locations/sitemap.xml
- * - /blog/sitemap.xml (when added)
- * - /products/sitemap.xml (when added)
+ * - /blog/sitemap.xml
+ * - /projects/sitemap.xml
  *
  * Submit this URL to Google Search Console: /sitemap-index.xml
  */
 
 // Known sitemap paths - automatically detected at build time
 // Add new section sitemaps here as they're created
-const SITEMAP_PATHS = ["/sitemap.xml", "/services/sitemap.xml", "/locations/sitemap.xml"];
+const SITEMAP_PATHS = [
+  "/sitemap.xml",
+  "/services/sitemap.xml",
+  "/locations/sitemap.xml",
+  "/blog/sitemap.xml",
+  "/projects/sitemap.xml",
+];
 
 // Dynamically discover additional sitemaps from the app directory
 async function discoverSitemaps(): Promise<string[]> {

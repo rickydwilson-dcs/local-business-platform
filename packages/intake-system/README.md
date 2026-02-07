@@ -105,7 +105,7 @@ tools/create-site-from-project.ts → consumes project file
 New site in sites/ directory
 ```
 
-See [How Site Creation Works](../../docs/architecture/HOW_SITE_CREATION_WORKS.md) for the full pipeline documentation.
+See [How Site Creation Works](../../docs/architecture/how-site-creation-works.md) for the full pipeline documentation.
 
 ## Build
 

@@ -6,9 +6,8 @@ import './globals.css';
 import { siteConfig } from '@/site.config';
 import { PHONE_DISPLAY, PHONE_TEL } from '@/lib/contact-info';
 import { getContentItems } from '@/lib/content';
-import { Footer } from '@/components/ui/footer';
-import { MobileMenu } from '@/components/ui/mobile-menu';
-import { LocationsDropdown } from '@/components/ui/locations-dropdown';
+import { MobileMenu, LocationsDropdown } from '@platform/core-components';
+import { Footer } from '@platform/core-components/components/ui/footer';
 
 export const metadata: Metadata = {
   title: {
@@ -39,7 +38,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   }));
 
   return (
-    <html lang="en">
+    <html lang="en-GB">
       <head>
         {/* Geo meta tags for local SEO */}
         {siteConfig.business.geo && (
@@ -57,6 +56,13 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         )}
       </head>
       <body className="min-h-screen flex flex-col">
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:bg-brand-primary focus:text-white focus:px-4 focus:py-2 focus:rounded"
+        >
+          Skip to main content
+        </a>
+
         {/* Header */}
         <header className="sticky top-0 z-40 bg-white border-b border-gray-200">
           <div className="mx-auto w-full lg:w-[90%] px-4 lg:px-6">
@@ -121,13 +127,19 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                 phoneDisplay={PHONE_DISPLAY}
                 phoneTel={PHONE_TEL}
                 locations={locationItems}
+                siteName={siteConfig.name}
+                navigation={siteConfig.navigation.main}
+                showPhone={siteConfig.cta.phone.show}
+                primaryCta={siteConfig.cta.primary}
               />
             </div>
           </div>
         </header>
 
         {/* Main Content */}
-        <main className="flex-1">{children}</main>
+        <main id="main-content" className="flex-1">
+          {children}
+        </main>
 
         {/* Footer */}
         <Footer />

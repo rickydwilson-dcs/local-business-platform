@@ -1,8 +1,21 @@
 "use client";
 
-import { CoverageMap } from "@/components/ui/coverage-map";
+import { CoverageMap, type TownLocation } from "./coverage-map";
 
-export function CoverageMapSection() {
+interface CountySummary {
+  name: string;
+  slug: string;
+  townCount: number;
+}
+
+interface CoverageMapSectionProps {
+  locations: TownLocation[];
+  counties: CountySummary[];
+  center?: [number, number];
+  zoom?: number;
+}
+
+export function CoverageMapSection({ locations, counties, center, zoom }: CoverageMapSectionProps) {
   return (
     <section className="section-standard bg-gradient-to-br from-gray-50 to-gray-100">
       <div className="container-standard">
@@ -16,7 +29,12 @@ export function CoverageMapSection() {
 
         {/* Interactive Map */}
         <div className="relative bg-white rounded-2xl shadow-sm border border-gray-200 p-4 md:p-8">
-          <CoverageMap height="h-[500px] md:h-96" />
+          <CoverageMap
+            locations={locations}
+            center={center}
+            zoom={zoom}
+            height="h-[500px] md:h-96"
+          />
 
           {/* Map Legend */}
           <div className="mt-6 flex flex-wrap justify-center gap-4 text-sm">
@@ -48,12 +66,7 @@ export function CoverageMapSection() {
 
         {/* Quick Access Counties */}
         <div className="mt-8 grid grid-cols-2 lg:grid-cols-4 gap-4">
-          {[
-            { name: "East Sussex", slug: "east-sussex", towns: 10 },
-            { name: "West Sussex", slug: "west-sussex", towns: 8 },
-            { name: "Kent", slug: "kent", towns: 7 },
-            { name: "Surrey", slug: "surrey", towns: 5 },
-          ].map((county) => (
+          {counties.map((county) => (
             <a
               key={county.slug}
               href={`/locations/${county.slug}`}
@@ -63,7 +76,7 @@ export function CoverageMapSection() {
                 <div className="font-semibold text-gray-900 group-hover:text-brand-primary transition-colors">
                   {county.name}
                 </div>
-                <div className="text-sm text-gray-700 mt-1">{county.towns} towns covered</div>
+                <div className="text-sm text-gray-700 mt-1">{county.townCount} towns covered</div>
               </div>
             </a>
           ))}

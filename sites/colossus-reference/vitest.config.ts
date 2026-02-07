@@ -34,6 +34,8 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": resolve(__dirname, "./"),
+      "@platform/core-components": resolve(__dirname, "../../packages/core-components/src"),
+      "@platform/theme-system": resolve(__dirname, "../../packages/theme-system/src"),
     },
   },
 });

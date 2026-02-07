@@ -145,6 +145,20 @@ export const LocationFrontmatterSchema = z.object({
     .min(3, "At least 3 keywords required")
     .optional(),
 
+  // Geographic and county metadata (for map markers and navigation)
+  county: z.enum(["East Sussex", "West Sussex", "Kent", "Surrey"]).optional(),
+
+  coords: z.tuple([z.number().min(-90).max(90), z.number().min(-180).max(180)]).optional(),
+
+  mapDescription: z.string().max(100, "Map description should be under 100 characters").optional(),
+
+  countyDescription: z
+    .string()
+    .max(300, "County description should be under 300 characters")
+    .optional(),
+
+  countyHighlights: z.array(z.string()).optional(),
+
   heroImage: ImagePathSchema.optional(),
 
   hero: z.object({

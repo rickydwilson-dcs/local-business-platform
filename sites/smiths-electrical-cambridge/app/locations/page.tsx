@@ -6,9 +6,7 @@
  */
 
 import type { Metadata } from 'next';
-import { Schema } from '@/components/Schema';
-import { Breadcrumbs } from '@/components/ui/breadcrumbs';
-import { ContentGrid } from '@/components/ui/content-grid';
+import { Schema, ContentGrid, Breadcrumbs } from '@platform/core-components';
 import { getLocations } from '@/lib/content';
 import { absUrl } from '@/lib/site';
 import { siteConfig } from '@/site.config';

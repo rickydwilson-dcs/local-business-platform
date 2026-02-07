@@ -1,8 +1,6 @@
 import Link from "next/link";
-import { HeroSection } from "@/components/ui/hero-section";
-import { ServicesOverview } from "@/components/ui/services-overview";
-import { CoverageAreas } from "@/components/ui/coverage-areas";
-import { PageLayout } from "@/components/layouts/page-layout";
+import { HeroSection, CoverageAreas, PageLayout } from "@platform/core-components";
+import { ServicesOverview } from "@platform/core-components/components/ui/services-overview";
 import { absUrl } from "@/lib/site";
 import { getLocalBusinessSchema } from "@/lib/schema";
 import { PHONE_DISPLAY, PHONE_TEL } from "@/lib/contact-info";
@@ -139,7 +137,8 @@ export default function HomePage() {
                 <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
                   <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mx-auto mb-4">
                     <svg
-                      className="w-6 h-6 text-brand-blue"
+                      aria-hidden="true"
+                      className="w-6 h-6 text-brand-primary"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -162,7 +161,8 @@ export default function HomePage() {
                 <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
                   <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mx-auto mb-4">
                     <svg
-                      className="w-6 h-6 text-brand-blue"
+                      aria-hidden="true"
+                      className="w-6 h-6 text-brand-primary"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -185,7 +185,8 @@ export default function HomePage() {
                 <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
                   <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mx-auto mb-4">
                     <svg
-                      className="w-6 h-6 text-brand-blue"
+                      aria-hidden="true"
+                      className="w-6 h-6 text-brand-primary"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -208,7 +209,8 @@ export default function HomePage() {
                 <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
                   <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mx-auto mb-4">
                     <svg
-                      className="w-6 h-6 text-brand-blue"
+                      aria-hidden="true"
+                      className="w-6 h-6 text-brand-primary"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"

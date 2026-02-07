@@ -4,12 +4,14 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import matter from "gray-matter";
 
-import { ServiceHero } from "@/components/ui/service-hero";
-import { ServiceAbout } from "@/components/ui/service-about";
-import { ServiceFAQ } from "@/components/ui/service-faq";
-import { ServiceCTA } from "@/components/ui/service-cta";
-import { Breadcrumbs } from "@/components/ui/breadcrumbs";
-import { Schema } from "@/components/Schema";
+import {
+  ServiceHero,
+  ServiceAbout,
+  ServiceFAQ,
+  ServiceCTA,
+  Breadcrumbs,
+  Schema,
+} from "@platform/core-components";
 import { absUrl } from "@/lib/site";
 import { deriveLocationContext, getAreaServed } from "@/lib/location-utils";
 import { getImageUrl } from "@/lib/image";
@@ -265,11 +267,11 @@ export default async function Page({ params }: { params: Promise<Params> }) {
 
       {/* Location Services Button for location-specific services */}
       {isLocationSpecific && locationContext && (
-        <section className="bg-brand-blue/5 border-b">
+        <section className="bg-brand-primary/5 border-b">
           <div className="mx-auto w-full lg:w-[90%] px-6 py-4">
             <Link
               href={`/locations/${locationContext.locationSlug}`}
-              className="inline-flex items-center gap-2 text-brand-blue hover:text-brand-blue-hover font-medium transition-colors"
+              className="inline-flex items-center gap-2 text-brand-primary hover:text-brand-primary-hover font-medium transition-colors"
             >
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path
@@ -285,7 +287,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
         </section>
       )}
 
-      <main>
+      <div>
         <ServiceHero
           title={serviceData.title}
           description={serviceData.description}
@@ -301,7 +303,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
         <ServiceFAQ items={serviceData.faqs} />
 
         <ServiceCTA />
-      </main>
+      </div>
 
       <Schema
         service={{

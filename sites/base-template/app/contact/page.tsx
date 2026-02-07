@@ -11,7 +11,7 @@ import Link from 'next/link';
 import { Phone, Mail, MapPin, Clock, CheckCircle, AlertCircle } from 'lucide-react';
 import { siteConfig } from '@/site.config';
 import { PHONE_DISPLAY, PHONE_TEL, BUSINESS_EMAIL, ADDRESS } from '@/lib/contact-info';
-import { Breadcrumbs } from '@/components/ui/breadcrumbs';
+import { Breadcrumbs } from '@platform/core-components';
 
 interface FormData {
   name: string;

@@ -229,9 +229,9 @@ NEXT_PUBLIC_SITE_URL=https://[domain].com
 RESEND_API_KEY=re_xxx
 BUSINESS_EMAIL=client@email.com
 
-# Rate Limiting
-KV_REST_API_URL=https://xxx.upstash.io
-KV_REST_API_TOKEN=xxx
+# Rate Limiting (Supabase)
+SUPABASE_URL=https://your-project.supabase.co
+SUPABASE_SERVICE_KEY=your-service-role-key
 
 # Analytics (optional)
 NEXT_PUBLIC_GA_MEASUREMENT_ID=G-XXXXXXXXXX

@@ -1,7 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { Schema } from "@/components/Schema";
-import { Breadcrumbs } from "@/components/ui/breadcrumbs";
+import { Schema, Breadcrumbs } from "@platform/core-components";
 import { getTestimonials, calculateAggregateRating, type Testimonial } from "@/lib/content";
 import { absUrl } from "@/lib/site";
 
@@ -53,7 +52,7 @@ function StarRating({ rating, size = "md" }: { rating: number; size?: "sm" | "md
 function AggregateRatingDisplay({ average, count }: { average: number; count: number }) {
   return (
     <div className="bg-white rounded-2xl shadow-lg p-8 text-center">
-      <div className="text-5xl font-bold text-brand-blue mb-2">{average.toFixed(1)}</div>
+      <div className="text-5xl font-bold text-brand-primary mb-2">{average.toFixed(1)}</div>
       <StarRating rating={Math.round(average)} size="lg" />
       <p className="text-gray-600 mt-2">Based on {count} reviews</p>
 
@@ -89,7 +88,7 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
       {/* Header */}
       <div className="flex items-start justify-between mb-4">
         <div className="flex items-center gap-3">
-          <div className="w-12 h-12 bg-brand-blue rounded-full flex items-center justify-center text-white text-lg font-bold">
+          <div className="w-12 h-12 bg-brand-primary rounded-full flex items-center justify-center text-white text-lg font-bold">
             {testimonial.customerName.charAt(0)}
           </div>
           <div>
@@ -136,7 +135,7 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
             <span>·</span>
             <Link
               href={`/services/${testimonial.serviceSlug}`}
-              className="text-brand-blue hover:underline"
+              className="text-brand-primary hover:underline"
             >
               {testimonial.service}
             </Link>
@@ -147,7 +146,7 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
             <span>·</span>
             <Link
               href={`/locations/${testimonial.locationSlug}`}
-              className="text-brand-blue hover:underline"
+              className="text-brand-primary hover:underline"
             >
               {testimonial.location}
             </Link>
@@ -174,7 +173,7 @@ export default async function ReviewsPage() {
         </div>
       </div>
 
-      <main className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100">
+      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100">
         {/* Hero Section */}
         <section className="section-standard lg:py-24 bg-white">
           <div className="container-standard">
@@ -200,9 +199,9 @@ export default async function ReviewsPage() {
                   <h2 className="text-xl font-bold text-gray-900 mb-4">Why Choose Us?</h2>
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div className="flex items-start gap-3">
-                      <div className="w-10 h-10 bg-brand-blue/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <div className="w-10 h-10 bg-brand-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
                         <svg
-                          className="w-5 h-5 text-brand-blue"
+                          className="w-5 h-5 text-brand-primary"
                           fill="currentColor"
                           viewBox="0 0 20 20"
                         >
@@ -219,9 +218,9 @@ export default async function ReviewsPage() {
                       </div>
                     </div>
                     <div className="flex items-start gap-3">
-                      <div className="w-10 h-10 bg-brand-blue/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <div className="w-10 h-10 bg-brand-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
                         <svg
-                          className="w-5 h-5 text-brand-blue"
+                          className="w-5 h-5 text-brand-primary"
                           fill="currentColor"
                           viewBox="0 0 20 20"
                         >
@@ -234,9 +233,9 @@ export default async function ReviewsPage() {
                       </div>
                     </div>
                     <div className="flex items-start gap-3">
-                      <div className="w-10 h-10 bg-brand-blue/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <div className="w-10 h-10 bg-brand-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
                         <svg
-                          className="w-5 h-5 text-brand-blue"
+                          className="w-5 h-5 text-brand-primary"
                           fill="currentColor"
                           viewBox="0 0 20 20"
                         >
@@ -253,9 +252,9 @@ export default async function ReviewsPage() {
                       </div>
                     </div>
                     <div className="flex items-start gap-3">
-                      <div className="w-10 h-10 bg-brand-blue/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <div className="w-10 h-10 bg-brand-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
                         <svg
-                          className="w-5 h-5 text-brand-blue"
+                          className="w-5 h-5 text-brand-primary"
                           fill="currentColor"
                           viewBox="0 0 20 20"
                         >
@@ -317,7 +316,7 @@ export default async function ReviewsPage() {
         </section>
 
         {/* CTA Section */}
-        <section className="section-compact bg-brand-blue">
+        <section className="section-compact bg-brand-primary">
           <div className="container-standard text-center">
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
               Ready to Experience Our Service?
@@ -328,13 +327,13 @@ export default async function ReviewsPage() {
             </p>
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center px-8 py-4 bg-white text-brand-blue font-semibold rounded-lg hover:bg-gray-100 transition-colors"
+              className="inline-flex items-center justify-center px-8 py-4 bg-white text-brand-primary font-semibold rounded-lg hover:bg-gray-100 transition-colors"
             >
               Get Free Quote
             </Link>
           </div>
         </section>
-      </main>
+      </div>
 
       <Schema
         org={{

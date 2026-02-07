@@ -71,9 +71,39 @@ Claude automatically loads subdirectory CLAUDE.md files when working in those pa
 **Don't:**
 
 - Inline full code examples (link to files instead)
-- Repeat information from ARCHITECTURE.md
+- Repeat information from architecture docs
 - Include environment-specific details in root
 - Add comprehensive troubleshooting (keep brief)
+
+---
+
+## Changelog Standards
+
+The platform uses a three-tier changelog system. Each tier serves a different audience and follows a different update cadence.
+
+### Root `CHANGELOG.md` — Platform Capabilities
+
+Tracks changes to shared infrastructure: packages, tooling, architecture, build pipeline. Uses **date-based entries** (not semver) since the platform deploys continuously.
+
+**Categories:** Platform, Packages, Tooling, Architecture, Infrastructure
+
+**When to update:** When merging platform-level changes to main. Focus on capabilities, architectural decisions, and infrastructure changes — not every commit.
+
+### Package CHANGELOGs — Automated via Changesets
+
+Each package in `packages/` has its own CHANGELOG.md managed by the changeset system. These use semver and follow [Keep a Changelog](https://keepachangelog.com/) format.
+
+**When to update:** Run `pnpm changeset` when making changes to a package. The system handles versioning and CHANGELOG entries on release.
+
+### Site CHANGELOGs — Deployment Milestones
+
+Each site in `sites/` has its own CHANGELOG.md tracking client-facing milestones. Uses **date-based entries** — sites are deployed websites, not versioned packages.
+
+**Categories:** Launch, Content, Design, Features
+
+**When to update:** On significant site events — go-live, content launches, major redesigns, new feature rollouts. Not every deploy or bug fix.
+
+**What NOT to include:** every minor commit, technical jargon clients wouldn't understand, duplicated details from package CHANGELOGs.
 
 ---
 
@@ -84,7 +114,7 @@ Claude automatically loads subdirectory CLAUDE.md files when working in those pa
 ```
 README.md           # Project overview
 CLAUDE.md           # AI context
-CHANGELOG.md        # Version history
+CHANGELOG.md        # Platform change history
 LICENSE             # License file
 ```
 
@@ -100,7 +130,7 @@ docs/
 │   ├── adding-service.md
 │   └── git-workflow.md
 └── architecture/
-    └── ARCHITECTURE.md    # Major reference (UPPERCASE)
+    └── architecture.md    # High-level overview
 ```
 
 ---
@@ -153,7 +183,7 @@ description: "Description"
 ```markdown
 # Internal links (relative paths)
 
-[Architecture](../architecture/ARCHITECTURE.md)
+[Architecture](../architecture/architecture.md)
 
 # Link to heading
 
@@ -170,12 +200,13 @@ See `lib/content.ts` for implementation details.
 
 ### Files That Must Stay Current
 
-| File                 | Update When          | Purpose               |
-| -------------------- | -------------------- | --------------------- |
-| CHANGELOG.md         | Every change         | Version history       |
-| README.md            | Major features       | Project overview      |
-| CLAUDE.md            | Architecture changes | AI context            |
-| docs/standards/\*.md | Standards change     | Development standards |
+| File                  | Update When                     | Purpose                 |
+| --------------------- | ------------------------------- | ----------------------- |
+| CHANGELOG.md          | Platform changes merged to main | Platform change history |
+| sites/\*/CHANGELOG.md | Site milestones                 | Deployment history      |
+| README.md             | Major features                  | Project overview        |
+| CLAUDE.md             | Architecture changes            | AI context              |
+| docs/standards/\*.md  | Standards change                | Development standards   |
 
 ### Update Triggers
 
@@ -186,12 +217,18 @@ See `lib/content.ts` for implementation details.
 - Architecture patterns change
 - New "NEVER do X" rules needed
 
-**Update CHANGELOG.md when:**
+**Update root CHANGELOG.md when:**
 
-- Any code change committed
-- Documentation improvements
-- Dependencies updated
-- Bug fixes applied
+- Platform capabilities added or changed
+- Shared packages updated
+- Architecture decisions made
+- Infrastructure or CI/CD changes deployed
+
+**Update site CHANGELOG.md when:**
+
+- Site goes live or launches on a new domain
+- Significant content added (new service pages, blog posts, location pages)
+- Major design or feature changes deployed
 
 ---
 
@@ -339,6 +376,4 @@ How to verify success.
 - Duplicate content across files
 
 ---
-
-**Updated:** December 2025
 ```

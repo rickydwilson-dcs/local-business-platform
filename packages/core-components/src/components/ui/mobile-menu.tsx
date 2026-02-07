@@ -1,80 +1,150 @@
 "use client";
 
-import { useState } from "react";
+/**
+ * Mobile Menu Component
+ *
+ * Full-screen mobile navigation with animated hamburger toggle.
+ * All configuration is passed via props for cross-site compatibility.
+ */
+
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { getAllCounties } from "@/lib/locations-dropdown";
+import { useFocusTrap } from "../../hooks/useFocusTrap";
 
-interface MobileMenuProps {
-  phoneNumber: string;
+interface LocationItem {
+  name: string;
+  slug: string;
 }
 
-export default function MobileMenu({ phoneNumber }: MobileMenuProps) {
+interface NavItem {
+  label: string;
+  href: string;
+  hasDropdown?: boolean;
+}
+
+export interface MobileMenuProps {
+  /** Formatted phone number for display */
+  phoneDisplay: string;
+  /** Phone number for tel: link (digits only) */
+  phoneTel: string;
+  /** Locations to show in expandable section */
+  locations?: LocationItem[];
+  /** Site name for logo alt text */
+  siteName?: string;
+  /** Navigation items (defaults to standard nav if not provided) */
+  navigation?: NavItem[];
+  /** Whether to show the phone CTA */
+  showPhone?: boolean;
+  /** Primary CTA button config */
+  primaryCta?: {
+    label: string;
+    href: string;
+  };
+}
+
+export function MobileMenu({
+  phoneDisplay,
+  phoneTel,
+  locations = [],
+  siteName = "",
+  navigation,
+  showPhone = true,
+  primaryCta = { label: "Get Free Quote", href: "/contact" },
+}: MobileMenuProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [locationsExpanded, setLocationsExpanded] = useState(false);
-  const counties = getAllCounties();
-
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-    // Reset locations when closing menu
-    if (isOpen) {
-      setLocationsExpanded(false);
-    }
-  };
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
 
   const closeMenu = () => {
     setIsOpen(false);
     setLocationsExpanded(false);
   };
 
-  const toggleLocations = () => {
-    setLocationsExpanded(!locationsExpanded);
-  };
+  const { containerRef: menuRef } = useFocusTrap({
+    isOpen,
+    onEscape: closeMenu,
+    initialFocusRef: closeButtonRef,
+  });
+
+  // Prevent body scroll when menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
+
+  const hasLocations = locations.length > 0;
+
+  // Default navigation items if none provided
+  const navItems: NavItem[] = navigation || [
+    { label: "Home", href: "/" },
+    { label: "Services", href: "/services" },
+    { label: "Locations", href: "/locations", hasDropdown: true },
+    { label: "Blog", href: "/blog" },
+    { label: "About", href: "/about" },
+    { label: "Contact", href: "/contact" },
+  ];
 
   return (
     <>
-      {/* Hamburger Button - Only visible on mobile/tablet */}
+      {/* Hamburger Button */}
       <button
-        onClick={(e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          toggleMenu();
-        }}
-        className="mobile-menu-toggle"
-        aria-label="Toggle mobile menu"
+        onClick={() => setIsOpen(!isOpen)}
+        className="lg:hidden p-2 rounded-md hover:bg-gray-200 transition-colors"
+        aria-label={isOpen ? "Close menu" : "Open menu"}
         aria-expanded={isOpen}
-        type="button"
       >
-        <div className="mobile-menu-icon">
-          <span className={`mobile-menu-line ${isOpen ? "top-open" : ""}`} />
-          <span className={`mobile-menu-line ${isOpen ? "middle-open" : ""}`} />
-          <span className={`mobile-menu-line ${isOpen ? "bottom-open" : ""}`} />
+        <div className="w-6 h-5 flex flex-col justify-between">
+          <span
+            className={`block h-0.5 bg-gray-800 transition-all duration-300 ${
+              isOpen ? "rotate-45 translate-y-2" : ""
+            }`}
+          />
+          <span
+            className={`block h-0.5 bg-gray-800 transition-all duration-300 ${
+              isOpen ? "opacity-0" : ""
+            }`}
+          />
+          <span
+            className={`block h-0.5 bg-gray-800 transition-all duration-300 ${
+              isOpen ? "-rotate-45 -translate-y-2" : ""
+            }`}
+          />
         </div>
       </button>
 
-      {/* Full Screen Overlay Menu - Matches the prototype exactly */}
-      <div className={`mobile-menu-overlay ${isOpen ? "open" : "closed"}`}>
-        {/* Header with Logo and Close Button */}
-        <div className="mobile-menu-header">
-          <Link href="/" onClick={closeMenu} className="flex items-center">
-            <div className="relative w-[140px] h-[36px]">
-              <Image
-                src="/Colossus-Scaffolding-Logo.svg"
-                alt="Colossus Scaffolding"
-                width={140}
-                height={36}
-                className="object-contain"
-              />
-            </div>
+      {/* Mobile Menu Overlay */}
+      <div
+        ref={menuRef}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Mobile navigation menu"
+        className={`fixed inset-0 bg-white z-50 lg:hidden transition-transform duration-300 ${
+          isOpen ? "translate-x-0" : "translate-x-full"
+        }`}
+      >
+        {/* Header */}
+        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200">
+          <Link href="/" onClick={closeMenu} className="relative h-10 w-36">
+            <Image
+              src="/logo.svg"
+              alt={siteName || "Home"}
+              fill
+              className="object-contain object-left"
+              sizes="144px"
+            />
           </Link>
-          <button onClick={closeMenu} className="mobile-menu-close" aria-label="Close mobile menu">
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
+          <button
+            ref={closeButtonRef}
+            onClick={closeMenu}
+            className="p-2 rounded-md hover:bg-gray-200 transition-colors"
+            aria-label="Close menu"
+          >
+            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -85,92 +155,113 @@ export default function MobileMenu({ phoneNumber }: MobileMenuProps) {
           </button>
         </div>
 
-        {/* Navigation Links - Large vertical layout */}
-        <nav className="mobile-menu-nav">
-          <Link href="/services" onClick={closeMenu} className="mobile-menu-link">
-            Services
-          </Link>
+        {/* Navigation Links */}
+        <nav className="px-6 py-6">
+          <ul className="space-y-4">
+            {navItems.map((item: NavItem) => {
+              // Handle locations dropdown separately
+              if (item.hasDropdown && hasLocations) {
+                return (
+                  <li key={item.href}>
+                    <button
+                      onClick={() => setLocationsExpanded(!locationsExpanded)}
+                      className="flex items-center justify-between w-full text-xl font-medium text-slate-800 py-2"
+                    >
+                      <span>{item.label}</span>
+                      <svg
+                        className={`w-5 h-5 transition-transform duration-200 ${
+                          locationsExpanded ? "rotate-180" : ""
+                        }`}
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M19 9l-7 7-7-7"
+                        />
+                      </svg>
+                    </button>
+                    {locationsExpanded && (
+                      <div className="mt-2 ml-4 space-y-2 border-l-2 border-gray-200 pl-4">
+                        <Link
+                          href="/locations"
+                          onClick={closeMenu}
+                          className="block text-base text-brand-primary font-semibold py-1"
+                        >
+                          View All Locations
+                        </Link>
+                        {locations.slice(0, 8).map((location: LocationItem) => (
+                          <Link
+                            key={location.slug}
+                            href={`/locations/${location.slug}`}
+                            onClick={closeMenu}
+                            className="block text-base text-slate-600 hover:text-brand-primary py-1"
+                          >
+                            {location.name}
+                          </Link>
+                        ))}
+                        {locations.length > 8 && (
+                          <Link
+                            href="/locations"
+                            onClick={closeMenu}
+                            className="block text-sm text-brand-primary py-1"
+                          >
+                            + {locations.length - 8} more areas
+                          </Link>
+                        )}
+                      </div>
+                    )}
+                  </li>
+                );
+              }
 
-          {/* Locations Expandable Section */}
-          <div className="mobile-menu-locations">
-            <button
-              onClick={toggleLocations}
-              className="mobile-menu-link w-full flex items-center justify-center gap-2"
+              return (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    onClick={closeMenu}
+                    className="block text-xl font-medium text-slate-800 py-2 hover:text-brand-primary transition-colors"
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </nav>
+
+        {/* Bottom CTA Section */}
+        <div className="absolute bottom-0 left-0 right-0 px-6 py-6 border-t border-gray-200 bg-gray-50">
+          {showPhone && (
+            <Link
+              href={`tel:${phoneTel}`}
+              className="flex items-center justify-center gap-2 text-2xl font-bold text-slate-800 mb-4"
             >
-              Locations
               <svg
-                className={`w-5 h-5 transition-transform ${locationsExpanded ? "rotate-180" : ""}`}
+                className="w-6 h-6 text-brand-primary"
                 fill="none"
-                stroke="currentColor"
                 viewBox="0 0 24 24"
+                stroke="currentColor"
               >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth={2}
-                  d="M19 9l-7 7-7-7"
+                  d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
                 />
               </svg>
-            </button>
-
-            {locationsExpanded && (
-              <div className="mobile-menu-locations-content">
-                {counties.map((county) => (
-                  <div key={county.slug} className="mobile-menu-county">
-                    <Link
-                      href={county.href}
-                      onClick={closeMenu}
-                      className="mobile-menu-county-link"
-                    >
-                      {county.name}
-                    </Link>
-                    <div className="mobile-menu-towns">
-                      {county.towns.slice(0, 4).map((town) => (
-                        <Link
-                          key={town.slug}
-                          href={town.href}
-                          onClick={closeMenu}
-                          className={`mobile-menu-town-link ${
-                            town.isRichContent ? "rich-content" : ""
-                          }`}
-                        >
-                          {town.name}
-                          {town.isRichContent && <span className="rich-indicator" />}
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-
-          <Link href="/about" onClick={closeMenu} className="mobile-menu-link">
-            About
-          </Link>
-          <Link href="/contact" onClick={closeMenu} className="mobile-menu-link">
-            Contact
-          </Link>
-        </nav>
-
-        {/* Bottom Section with Phone and CTA */}
-        <div className="mobile-menu-bottom">
-          {/* Phone Number Section */}
-          <div className="mobile-menu-phone">
-            <div className="mobile-menu-phone-container">
-              <svg className="w-6 h-6 text-brand-primary" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
-              </svg>
-              <a href={`tel:${phoneNumber}`} className="mobile-menu-phone-link" onClick={closeMenu}>
-                {phoneNumber}
-              </a>
-            </div>
-            <p className="mobile-menu-phone-text">24/7 Emergency</p>
-          </div>
-
-          {/* Get Free Quote Button */}
-          <Link href="/contact" onClick={closeMenu} className="mobile-menu-cta">
-            Get Free Quote
+              {phoneDisplay}
+            </Link>
+          )}
+          <Link
+            href={primaryCta.href}
+            onClick={closeMenu}
+            className="block w-full bg-brand-primary text-white text-center py-3 px-6 rounded-lg font-semibold hover:bg-brand-primary-hover transition-colors"
+          >
+            {primaryCta.label}
           </Link>
         </div>
       </div>

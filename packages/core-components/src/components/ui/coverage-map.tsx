@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
-import { TOWN_LOCATIONS, MAP_CENTER, MAP_ZOOM, type TownLocation } from "../../lib/town-locations";
 
 // Dynamically import the MapContainer to avoid SSR issues
 const MapContainer = dynamic(() => import("react-leaflet").then((mod) => mod.MapContainer), {
@@ -21,12 +20,29 @@ const Popup = dynamic(() => import("react-leaflet").then((mod) => mod.Popup), {
   ssr: false,
 });
 
+export interface TownLocation {
+  name: string;
+  coords: [number, number];
+  county: string;
+  url: string;
+  description?: string;
+}
+
 interface CoverageMapProps {
+  locations: TownLocation[];
+  center?: [number, number];
+  zoom?: number;
   className?: string;
   height?: string;
 }
 
-export function CoverageMap({ className = "", height = "h-96" }: CoverageMapProps) {
+export function CoverageMap({
+  locations,
+  center = [51.0, 0.5],
+  zoom = 9,
+  className = "",
+  height = "h-96",
+}: CoverageMapProps) {
   const [isClient, setIsClient] = useState(false);
   const [leafletModule, setLeafletModule] = useState<typeof import("leaflet") | null>(null);
 
@@ -73,18 +89,16 @@ export function CoverageMap({ className = "", height = "h-96" }: CoverageMapProp
   }, []);
 
   const createCustomIcon = (leaflet: typeof import("leaflet"), county: string) => {
-    // Regional map colors for geographic visualization - intentionally not using brand tokens
-    // as these need to be distinct per-county for map legend readability
-    // eslint-disable-next-line no-restricted-syntax
+    /* eslint-disable no-restricted-syntax -- Leaflet map markers require inline hex colors */
     const colors: { [key: string]: string } = {
-      "East Sussex": "#2563eb", // eslint-disable-line no-restricted-syntax
-      "West Sussex": "#059669", // eslint-disable-line no-restricted-syntax
-      Kent: "#dc2626", // eslint-disable-line no-restricted-syntax
-      Surrey: "#7c3aed", // eslint-disable-line no-restricted-syntax
+      "East Sussex": "#2563eb",
+      "West Sussex": "#059669",
+      Kent: "#dc2626",
+      Surrey: "#7c3aed",
     };
 
-    // eslint-disable-next-line no-restricted-syntax
     const color = colors[county] || "#4DB2E4";
+    /* eslint-enable no-restricted-syntax */
     const size = 28;
 
     return new leaflet.DivIcon({
@@ -150,8 +164,8 @@ export function CoverageMap({ className = "", height = "h-96" }: CoverageMapProp
       className={`${height} bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden ${className}`}
     >
       <MapContainer
-        center={MAP_CENTER}
-        zoom={MAP_ZOOM}
+        center={center}
+        zoom={zoom}
         style={{ height: "100%", width: "100%" }}
         className="z-10"
       >
@@ -160,7 +174,7 @@ export function CoverageMap({ className = "", height = "h-96" }: CoverageMapProp
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
 
-        {TOWN_LOCATIONS.map((location: TownLocation) => (
+        {locations.map((location: TownLocation) => (
           <Marker
             key={location.name}
             position={location.coords}
@@ -188,19 +202,19 @@ export function CoverageMap({ className = "", height = "h-96" }: CoverageMapProp
 
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-1">
-                    {/* Regional map colors match createCustomIcon for consistency */}
                     <div
                       className="w-3 h-3 rounded-full"
+                      /* eslint-disable no-restricted-syntax -- Map legend requires inline hex colors */
                       style={{
-                        // eslint-disable-next-line no-restricted-syntax
                         backgroundColor:
                           {
-                            "East Sussex": "#2563eb", // eslint-disable-line no-restricted-syntax
-                            "West Sussex": "#059669", // eslint-disable-line no-restricted-syntax
-                            Kent: "#dc2626", // eslint-disable-line no-restricted-syntax
-                            Surrey: "#7c3aed", // eslint-disable-line no-restricted-syntax
-                          }[location.county] || "#4DB2E4", // eslint-disable-line no-restricted-syntax
+                            "East Sussex": "#2563eb",
+                            "West Sussex": "#059669",
+                            Kent: "#dc2626",
+                            Surrey: "#7c3aed",
+                          }[location.county] || "#4DB2E4",
                       }}
+                      /* eslint-enable no-restricted-syntax */
                     ></div>
                     <span className="text-xs text-gray-700">{location.county}</span>
                   </div>
