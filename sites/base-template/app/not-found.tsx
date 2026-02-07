@@ -8,7 +8,6 @@
 
 import Link from 'next/link';
 import { Home, ArrowLeft, Phone, Mail } from 'lucide-react';
-import { siteConfig } from '@/site.config';
 import { PHONE_DISPLAY, PHONE_TEL, BUSINESS_EMAIL } from '@/lib/contact-info';
 
 export default function NotFound() {

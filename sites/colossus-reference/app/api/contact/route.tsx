@@ -68,12 +68,19 @@ export async function POST(request: Request): Promise<Response> {
     const service = body.service?.toString().trim();
     const location = body.location?.toString().trim();
 
-    // Basic validation
+    // Validation with length limits
     const errors: string[] = [];
     if (!name) errors.push("Name is required.");
+    if (name.length > 100) errors.push("Name must be 100 characters or less.");
     if (!email) errors.push("Email is required.");
+    if (email.length > 254) errors.push("Email must be 254 characters or less.");
     if (email && !isValidEmail(email)) errors.push("Email format looks invalid.");
     if (!message) errors.push("Message is required.");
+    if (message.length > 2000) errors.push("Message must be 2000 characters or less.");
+    if (phone && phone.length > 30) errors.push("Phone must be 30 characters or less.");
+    if (subject && subject.length > 200) errors.push("Subject must be 200 characters or less.");
+    if (service && service.length > 100) errors.push("Service must be 100 characters or less.");
+    if (location && location.length > 100) errors.push("Location must be 100 characters or less.");
 
     if (errors.length) {
       return Response.json({ error: "Validation failed", details: errors }, { status: 422 });
@@ -161,7 +168,6 @@ export async function POST(request: Request): Promise<Response> {
           {
             ok: true,
             message: "Thanks! Your enquiry has been received.",
-            received: submission,
           },
           { status: 200 }
         );
@@ -226,7 +232,6 @@ export async function POST(request: Request): Promise<Response> {
         {
           ok: true,
           message: "Thanks! Your enquiry has been received. Check your email for confirmation.",
-          received: submission,
         },
         { status: 200 }
       );
@@ -238,17 +243,13 @@ export async function POST(request: Request): Promise<Response> {
         {
           ok: true,
           message: "Thanks! Your enquiry has been received.",
-          received: submission,
-          warning: "Email notification may be delayed.",
         },
         { status: 200 }
       );
     }
-  } catch (err) {
-    const message =
-      err instanceof Error ? err.message : "Unexpected error while processing request.";
-    console.error("Contact form error:", err);
+  } catch (error) {
+    console.error("Contact form error:", error);
 
-    return Response.json({ error: "Server error", details: message }, { status: 500 });
+    return Response.json({ error: "An unexpected error occurred" }, { status: 500 });
   }
 }
