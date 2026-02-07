@@ -23,7 +23,7 @@ The platform demonstrates solid security foundations with CSRF protection implem
 - **File:** `sites/base-template/lib/rate-limiter.ts` (lines 1-37)
 - **Issue:** The base-template ships with a stub rate limiter that always returns `{ success: true, remaining: 999 }` and never blocks requests. The `checkRateLimit()` and `rateLimitMiddleware()` functions are no-ops. Any site created from the base template inherits no rate limiting protection unless the file is manually replaced with the real implementation.
 - **Impact:** Contact form endpoints on base-template-derived sites are completely unprotected against abuse. An attacker can submit unlimited form submissions causing email spam, Resend API quota exhaustion, and potential service disruption.
-- **Fix:** Replace the stub implementation with the real Upstash Redis rate limiter from `sites/colossus-reference/lib/rate-limiter.ts`. Update the site creation documentation to highlight that Upstash credentials must be configured. At minimum, add an in-memory fallback rate limiter so that sites have basic protection even without Redis.
+- **Fix:** Implement rate limiting using Supabase (the platform backend). The colossus-reference site currently uses Upstash Redis (`@upstash/redis`) but this should be migrated to Supabase to simplify infrastructure — Redis keep-alive was unreliable, causing intermittent rate-limit failures. Use a Supabase table with TTL-based cleanup for rate-limit counters. Apply the same Supabase-based implementation across all sites.
 - **Effort:** small
 
 ### [HIGH] SEC-003: smiths-electrical-cambridge Uses Stub Rate Limiter
@@ -31,7 +31,7 @@ The platform demonstrates solid security foundations with CSRF protection implem
 - **File:** `sites/smiths-electrical-cambridge/lib/rate-limiter.ts` (lines 1-37)
 - **Issue:** This production site has an identical stub rate limiter to base-template. The `rateLimitMiddleware()` always returns `null` (allow request) regardless of how many requests are made. If `siteConfig.features.rateLimit` is `true`, the code path enters rate limiting but the check always passes.
 - **Impact:** This site has zero rate limiting protection. Contact form abuse is possible at scale.
-- **Fix:** Copy the real rate limiter implementation from `sites/colossus-reference/lib/rate-limiter.ts` and configure the Upstash Redis environment variables (`KV_REST_API_URL`, `KV_REST_API_TOKEN`).
+- **Fix:** Implement Supabase-based rate limiting (same as SEC-002 fix). The current colossus-reference Upstash Redis implementation should be migrated to Supabase to simplify infrastructure and resolve Redis keep-alive failures.
 - **Effort:** small
 
 ### [HIGH] SEC-004: Analytics GET Endpoint Exposes Configuration in Production
