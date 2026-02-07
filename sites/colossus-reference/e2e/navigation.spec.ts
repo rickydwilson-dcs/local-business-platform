@@ -48,16 +48,16 @@ test.describe("Navigation", () => {
     // Click to open the menu
     await menuButton.click();
 
-    // Verify the menu opened — the aria-label changes to "Close menu" when open
-    const closeButton = page.locator('button[aria-label="Close menu"]');
-    await expect(closeButton).toBeVisible({ timeout: 5000 });
+    // Verify the menu opened — check the dialog has the open state class.
+    // Two "Close menu" buttons exist (hamburger + dialog X), so use the dialog directly.
+    const mobileMenu = page.locator('[role="dialog"][aria-label="Mobile navigation menu"]');
+    await expect(mobileMenu).toHaveClass(/translate-x-0/, { timeout: 5000 });
 
     // Wait for the 300ms CSS slide-in transition to complete
     await page.waitForTimeout(500);
 
     // Navigate via mobile menu — use force:true because Playwright may still
     // consider the translated element as not fully "visible" during animation
-    const mobileMenu = page.locator('[role="dialog"][aria-label="Mobile navigation menu"]');
     const mobileServicesLink = mobileMenu.locator('a[href="/services"]');
     await mobileServicesLink.click({ force: true });
     await expect(page).toHaveURL(/.*services/);
