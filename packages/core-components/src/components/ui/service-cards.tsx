@@ -56,9 +56,10 @@ export function ServiceCards({
         <div className={`grid-responsive ${getGridClass(cards.length)}`}>
           {cards.map((card, index) => {
             const isEven = index % 2 === 0;
+
             return (
               <div
-                key={card.href}
+                key={index}
                 className={`group relative rounded-2xl overflow-hidden shadow-sm border border-gray-200 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 ${
                   isEven ? "bg-white" : "bg-gray-50"
                 }`}
@@ -69,17 +70,19 @@ export function ServiceCards({
                     <div className="relative h-48 overflow-hidden">
                       <Image
                         src={card.image}
-                        alt={card.title}
+                        alt={`${card.title} scaffolding services - professional installation by Colossus Scaffolding`}
+                        title={`${card.title} - Learn more about our scaffolding services`}
                         fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                         className="object-cover group-hover:scale-105 transition-transform duration-300"
                       />
                     </div>
                   ) : (
-                    <div className="h-48 bg-gradient-to-br from-brand-primary/10 to-brand-primary/20 flex items-center justify-center">
+                    <div className="h-48 bg-gradient-to-br from-brand-blue/10 to-brand-blue/20 flex items-center justify-center">
                       {card.icon || (
-                        <div className="w-12 h-12 bg-brand-primary/20 rounded-lg flex items-center justify-center">
+                        <div className="w-12 h-12 bg-brand-blue/20 rounded-lg flex items-center justify-center">
                           <svg
-                            className="w-6 h-6 text-brand-primary"
+                            className="w-6 h-6 text-brand-blue"
                             fill="none"
                             viewBox="0 0 24 24"
                             stroke="currentColor"
@@ -120,13 +123,14 @@ export function ServiceCards({
                 {/* Content */}
                 <div className="p-6">
                   <h3 className="text-xl font-bold text-gray-900 mb-3">{card.title}</h3>
+
                   <p className="text-gray-800 text-sm leading-relaxed mb-4">{card.description}</p>
 
                   {/* Features List */}
                   <ul className="space-y-2 mb-6">
                     {card.features.map((feature, featureIndex) => (
                       <li key={featureIndex} className="flex items-start gap-2">
-                        <div className="flex-shrink-0 w-1.5 h-1.5 bg-brand-primary rounded-full mt-2"></div>
+                        <div className="flex-shrink-0 w-1.5 h-1.5 bg-brand-blue rounded-full mt-2"></div>
                         <span className="text-gray-700 text-sm">{feature}</span>
                       </li>
                     ))}

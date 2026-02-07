@@ -2,11 +2,14 @@ import Image from "next/image";
 import Link from "next/link";
 import "./globals.css";
 import type { Metadata, Viewport } from "next";
-import { MobileMenu } from "@/components/ui/mobile-menu";
-import { LocationsDropdown } from "@/components/ui/locations-dropdown";
-import { ConsentManager, Analytics, AnalyticsDebugPanel } from "@/components/analytics";
-import { Footer } from "@/components/ui/footer";
+import { MobileMenu, LocationsDropdown } from "@platform/core-components";
+import { Footer } from "@platform/core-components/components/ui/footer";
+import { ConsentManager } from "@platform/core-components/components/analytics/ConsentManager";
+import { Analytics } from "@platform/core-components/components/analytics/Analytics";
+import { AnalyticsDebugPanel } from "@platform/core-components/components/analytics/AnalyticsDebugPanel";
 import { PHONE_DISPLAY, PHONE_TEL } from "@/lib/contact-info";
+import { getContentItems } from "@/lib/content";
+import { getAllCounties } from "@/lib/locations-dropdown";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -28,7 +31,15 @@ export const metadata: Metadata = {
   description: "Professional scaffolding services across the South East.",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  // Fetch locations for navigation
+  const allLocations = await getContentItems("locations");
+  const locationItems = allLocations.map((loc) => ({
+    name: loc.title,
+    slug: loc.slug,
+  }));
+  const counties = getAllCounties();
+
   const criticalStyles = `
     /* Critical CSS for above-the-fold content */
     body {
@@ -212,7 +223,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               >
                 Services
               </Link>
-              <LocationsDropdown />
+              <LocationsDropdown locations={locationItems} counties={counties} />
               <Link
                 href="/about"
                 className="text-slate-700 hover:text-brand-blue transition-colors"
@@ -246,7 +257,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </div>
 
             {/* Mobile Menu Component */}
-            <MobileMenu phoneNumber={PHONE_DISPLAY} />
+            <MobileMenu
+              phoneDisplay={PHONE_DISPLAY}
+              phoneTel={PHONE_TEL}
+              locations={locationItems}
+            />
           </div>
         </header>
 

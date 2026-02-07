@@ -10,8 +10,7 @@ import { Shield, Award, Users, Clock, CheckCircle, Phone } from 'lucide-react';
 import { siteConfig } from '@/site.config';
 import { PHONE_DISPLAY, PHONE_TEL } from '@/lib/contact-info';
 import { absUrl } from '@/lib/site';
-import { Breadcrumbs } from '@/components/ui/breadcrumbs';
-import { Schema } from '@/components/Schema';
+import { Breadcrumbs, Schema } from '@platform/core-components';
 
 export const metadata: Metadata = {
   title: `About Us | ${siteConfig.business.name}`,

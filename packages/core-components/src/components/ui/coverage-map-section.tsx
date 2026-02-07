@@ -1,6 +1,6 @@
 "use client";
 
-import { CoverageMap } from "@/components/ui/coverage-map";
+import { CoverageMap } from "./coverage-map";
 
 export function CoverageMapSection() {
   return (
@@ -57,10 +57,10 @@ export function CoverageMapSection() {
             <a
               key={county.slug}
               href={`/locations/${county.slug}`}
-              className="block bg-white rounded-lg p-4 border border-gray-200 hover:border-brand-primary hover:shadow-md transition-all group"
+              className="block bg-white rounded-lg p-4 border border-gray-200 hover:border-brand-blue hover:shadow-md transition-all group"
             >
               <div className="text-center">
-                <div className="font-semibold text-gray-900 group-hover:text-brand-primary transition-colors">
+                <div className="font-semibold text-gray-900 group-hover:text-brand-blue transition-colors">
                   {county.name}
                 </div>
                 <div className="text-sm text-gray-700 mt-1">{county.towns} towns covered</div>

@@ -36,7 +36,7 @@ export function LocationServices({
               className="bg-white rounded-2xl p-6 shadow-sm hover:shadow-lg transition-shadow group"
             >
               <div className="flex items-start gap-4">
-                <div className="flex-shrink-0 w-12 h-12 bg-brand-primary rounded-lg flex items-center justify-center group-hover:bg-brand-primary-hover transition-colors">
+                <div className="flex-shrink-0 w-12 h-12 bg-brand-blue rounded-lg flex items-center justify-center group-hover:bg-brand-blue-hover transition-colors">
                   <svg
                     className="h-6 w-6 text-white"
                     fill="none"
@@ -58,7 +58,7 @@ export function LocationServices({
                   </p>
                   <Link
                     href={service.href}
-                    className="inline-flex items-center gap-2 text-brand-primary font-semibold text-sm hover:text-brand-primary-hover transition-colors"
+                    className="inline-flex items-center gap-2 text-brand-blue font-semibold text-sm hover:text-brand-blue-hover transition-colors"
                   >
                     Learn About {service.name}
                     <svg

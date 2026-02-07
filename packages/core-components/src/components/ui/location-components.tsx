@@ -20,7 +20,7 @@ export function LocationServices({ services, title = "Popular Services" }: Locat
               <div className="flex items-start gap-4">
                 <div className="p-3 bg-blue-100 rounded-lg flex-shrink-0">
                   <svg
-                    className="h-6 w-6 text-brand-primary"
+                    className="h-6 w-6 text-brand-blue"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -35,7 +35,7 @@ export function LocationServices({ services, title = "Popular Services" }: Locat
                 </div>
                 <div>
                   <h3 className="text-lg font-semibold text-gray-900 mb-2">{service.name}</h3>
-                  <span className="text-brand-primary font-medium">
+                  <span className="text-brand-blue font-medium">
                     Learn About {service.name} <span aria-hidden="true">→</span>
                   </span>
                 </div>
@@ -122,21 +122,21 @@ interface LocationCTAProps {
 
 export function LocationCTA({ title, description, phone }: LocationCTAProps) {
   return (
-    <div className="py-16 bg-brand-primary text-white">
+    <div className="py-16 bg-brand-blue text-white">
       <div className="mx-auto w-full lg:w-[90%] px-6 text-center">
         <h2 className="text-3xl font-bold mb-4">{title}</h2>
         <p className="text-xl mb-8 opacity-90">{description}</p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link
             href="/contact"
-            className="inline-flex items-center justify-center px-8 py-4 bg-white text-brand-primary font-semibold rounded-lg hover:bg-gray-200 transition-colors"
+            className="inline-flex items-center justify-center px-8 py-4 bg-white text-brand-blue font-semibold rounded-lg hover:bg-gray-200 transition-colors"
           >
             Get Free Quote
           </Link>
           {phone && (
             <a
               href={`tel:${phone.replace(/\s/g, "")}`}
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-white text-white font-semibold rounded-lg hover:bg-white hover:text-brand-primary transition-colors"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-white text-white font-semibold rounded-lg hover:bg-white hover:text-brand-blue transition-colors"
             >
               <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path

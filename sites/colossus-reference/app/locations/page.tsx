@@ -2,13 +2,15 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { getAllCounties } from "@/lib/locations-dropdown";
 import { absUrl } from "@/lib/site";
-import { PageLayout } from "@/components/layouts/page-layout";
-import { Breadcrumbs } from "@/components/ui/breadcrumbs";
-import { CoverageStatsSection } from "@/components/ui/coverage-stats-section";
-import { TownFinderSection } from "@/components/ui/town-finder-section";
-import { CountyGatewayCards } from "@/components/ui/county-gateway-cards";
-import { LocalSpecialistsBenefits } from "@/components/ui/local-specialists-benefits";
-import { CoverageMapSection } from "@/components/ui/coverage-map-section";
+import {
+  PageLayout,
+  Breadcrumbs,
+  CoverageStatsSection,
+  LocalSpecialistsBenefits,
+  CoverageMapSection,
+} from "@platform/core-components";
+import { TownFinderSection } from "@platform/core-components/components/ui/town-finder-section";
+import { CountyGatewayCards } from "@platform/core-components/components/ui/county-gateway-cards";
 import { PHONE_DISPLAY, PHONE_TEL } from "@/lib/contact-info";
 
 export const dynamic = "force-static";

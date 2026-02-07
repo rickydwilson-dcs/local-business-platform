@@ -6,9 +6,8 @@ import './globals.css';
 import { siteConfig } from '@/site.config';
 import { PHONE_DISPLAY, PHONE_TEL } from '@/lib/contact-info';
 import { getContentItems } from '@/lib/content';
-import { Footer } from '@/components/ui/footer';
-import { MobileMenu } from '@/components/ui/mobile-menu';
-import { LocationsDropdown } from '@/components/ui/locations-dropdown';
+import { MobileMenu, LocationsDropdown } from '@platform/core-components';
+import { Footer } from '@platform/core-components/components/ui/footer';
 
 export const metadata: Metadata = {
   title: {

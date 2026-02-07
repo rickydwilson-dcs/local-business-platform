@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { absUrl } from "@/lib/site";
 import { Metadata } from "next";
-import { Breadcrumbs } from "@/components/ui/breadcrumbs";
+import { Breadcrumbs } from "@platform/core-components";
 import { PHONE_DISPLAY, BUSINESS_EMAIL, ADDRESS } from "@/lib/contact-info";
 
 export const metadata: Metadata = {

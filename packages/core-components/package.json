@@ -6,6 +6,13 @@
   "types": "./src/index.ts",
   "exports": {
     ".": "./src/index.ts",
+    "./components/ui/footer": "./src/components/ui/footer.tsx",
+    "./components/ui/services-overview": "./src/components/ui/services-overview.tsx",
+    "./components/analytics/ConsentManager": "./src/components/analytics/ConsentManager.tsx",
+    "./components/analytics/Analytics": "./src/components/analytics/Analytics.tsx",
+    "./components/analytics/AnalyticsDebugPanel": "./src/components/analytics/AnalyticsDebugPanel.tsx",
+    "./components/ui/town-finder-section": "./src/components/ui/town-finder-section.tsx",
+    "./components/ui/county-gateway-cards": "./src/components/ui/county-gateway-cards.tsx",
     "./components/*": "./src/components/*/index.tsx",
     "./lib/*": "./src/lib/*.ts"
   },

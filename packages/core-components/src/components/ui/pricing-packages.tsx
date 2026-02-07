@@ -53,7 +53,7 @@ const CheckIcon = () => (
     strokeWidth="2"
     strokeLinecap="round"
     strokeLinejoin="round"
-    className="w-4 h-4 text-brand-primary mr-2 mt-0.5 flex-shrink-0"
+    className="w-4 h-4 text-brand-blue mr-2 mt-0.5 flex-shrink-0"
   >
     <path d="M20 6 9 17l-5-5"></path>
   </svg>
@@ -90,13 +90,13 @@ export function PricingPackages({ title, description, packages, location }: Pric
             <div
               key={index}
               className={`relative bg-white rounded-xl border shadow-sm py-6 flex flex-col ${
-                pkg.popular ? "ring-2 ring-brand-primary" : "border-gray-200"
+                pkg.popular ? "ring-2 ring-brand-blue" : "border-gray-200"
               }`}
             >
               {/* Popular Badge */}
               {pkg.popular && (
                 <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                  <span className="inline-flex items-center justify-center rounded-md border px-2 py-0.5 text-xs font-medium bg-brand-primary text-white">
+                  <span className="inline-flex items-center justify-center rounded-md border px-2 py-0.5 text-xs font-medium bg-brand-blue text-white">
                     Most Popular
                   </span>
                 </div>
@@ -106,7 +106,7 @@ export function PricingPackages({ title, description, packages, location }: Pric
               <div className="px-6 pb-4 text-center">
                 <div className="font-semibold text-xl text-gray-900 mb-2">{pkg.name}</div>
                 <div className="mt-2">
-                  <span className="text-3xl font-bold text-brand-primary">{pkg.price}</span>
+                  <span className="text-3xl font-bold text-brand-blue">{pkg.price}</span>
                   <div className="flex items-center justify-center mt-2 text-sm text-gray-800">
                     <ClockIcon />
                     {pkg.duration}
@@ -133,7 +133,7 @@ export function PricingPackages({ title, description, packages, location }: Pric
                   href={pkg.ctaUrl}
                   className={`inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all h-9 px-4 py-2 w-full ${
                     pkg.popular
-                      ? "bg-brand-primary text-white hover:bg-brand-primary-hover"
+                      ? "bg-brand-blue text-white hover:bg-brand-blue-hover"
                       : "border bg-white shadow-xs hover:bg-gray-200 text-gray-900"
                   }`}
                 >

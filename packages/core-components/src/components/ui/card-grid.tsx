@@ -64,7 +64,7 @@ export function CardGrid({
           className="bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-md transition-shadow relative group"
         >
           {item.isHeadquarters && (
-            <span className="absolute -top-2 -right-2 px-2 py-1 bg-brand-primary text-white text-xs rounded-full z-10">
+            <span className="absolute -top-2 -right-2 px-2 py-1 bg-brand-blue text-white text-xs rounded-full z-10">
               Headquarters
             </span>
           )}
@@ -84,7 +84,7 @@ export function CardGrid({
             <h2 className="text-xl font-semibold text-gray-900 mb-3">
               <Link
                 href={item.href || `${basePath}/${item.slug}`}
-                className="hover:text-brand-primary transition-colors"
+                className="hover:text-brand-blue transition-colors"
               >
                 {item.title}
               </Link>
@@ -112,7 +112,7 @@ export function CardGrid({
 
             <Link
               href={item.href || `${basePath}/${item.slug}`}
-              className="inline-flex items-center text-brand-primary hover:text-brand-primary-hover font-medium"
+              className="inline-flex items-center text-brand-blue hover:text-brand-blue-hover font-medium"
             >
               {linkText} {item.title} <span aria-hidden="true">→</span>
             </Link>

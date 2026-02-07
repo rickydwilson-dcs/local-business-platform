@@ -4,12 +4,14 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import matter from "gray-matter";
 
-import { ServiceHero } from "@/components/ui/service-hero";
-import { ServiceAbout } from "@/components/ui/service-about";
-import { ServiceFAQ } from "@/components/ui/service-faq";
-import { ServiceCTA } from "@/components/ui/service-cta";
-import { Breadcrumbs } from "@/components/ui/breadcrumbs";
-import { Schema } from "@/components/Schema";
+import {
+  ServiceHero,
+  ServiceAbout,
+  ServiceFAQ,
+  ServiceCTA,
+  Breadcrumbs,
+  Schema,
+} from "@platform/core-components";
 import { absUrl } from "@/lib/site";
 import { getAreaServed } from "@/lib/location-utils";
 import { getImageUrl } from "@/lib/image";

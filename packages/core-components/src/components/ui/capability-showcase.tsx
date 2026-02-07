@@ -62,7 +62,7 @@ export function CapabilityShowcase({
               {/* Duration Badge */}
               {capability.duration && (
                 <div className="absolute -top-3 left-6">
-                  <span className="inline-flex px-3 py-1 bg-brand-primary text-white text-sm font-semibold rounded-full">
+                  <span className="inline-flex px-3 py-1 bg-brand-blue text-white text-sm font-semibold rounded-full">
                     {capability.duration}
                   </span>
                 </div>
@@ -72,7 +72,7 @@ export function CapabilityShowcase({
               <div className="pt-2">
                 <div className="mb-4">
                   <h3 className="heading-card-sm">{capability.title}</h3>
-                  <p className="text-sm text-brand-primary font-medium">{capability.subtitle}</p>
+                  <p className="text-sm text-brand-blue font-medium">{capability.subtitle}</p>
                 </div>
 
                 <p className="text-gray-800 text-sm leading-relaxed mb-6">
@@ -84,7 +84,7 @@ export function CapabilityShowcase({
                   <ul className="space-y-2 mb-6">
                     {capability.features.map((feature, featureIndex) => (
                       <li key={featureIndex} className="flex items-start gap-2">
-                        <div className="flex-shrink-0 w-1.5 h-1.5 bg-brand-primary rounded-full mt-2"></div>
+                        <div className="flex-shrink-0 w-1.5 h-1.5 bg-brand-blue rounded-full mt-2"></div>
                         <span className="text-gray-700 text-sm">{feature}</span>
                       </li>
                     ))}

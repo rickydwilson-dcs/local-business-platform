@@ -2,8 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Schema } from "@/components/Schema";
-import { Breadcrumbs } from "@/components/ui/breadcrumbs";
+import { Schema, Breadcrumbs } from "@platform/core-components";
 import { PHONE_DISPLAY, PHONE_TEL, BUSINESS_EMAIL } from "@/lib/contact-info";
 
 type FormData = {

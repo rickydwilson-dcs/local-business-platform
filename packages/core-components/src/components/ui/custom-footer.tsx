@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { PHONE_DISPLAY, PHONE_TEL, BUSINESS_EMAIL, ADDRESS } from "@/lib/contact-info";
 
 interface CustomFooterProps {
   townName: string;
@@ -18,13 +19,13 @@ export function CustomFooter({
   return (
     <footer className="bg-gray-900 text-white">
       {/* Main CTA Section */}
-      <section className="py-16 sm:py-20 bg-brand-primary">
+      <section className="py-16 sm:py-20 bg-brand-blue">
         <div className="mx-auto w-full lg:w-[90%] px-6 text-center">
           <h2 className="heading-section text-white">{ctaText}</h2>
           <p className="text-xl text-blue-100 mb-8 max-w-3xl mx-auto">{ctaSubtext}</p>
           <Link
             href={ctaLink}
-            className="inline-flex items-center justify-center px-8 py-4 bg-white text-brand-primary font-semibold rounded-lg hover:bg-gray-200 transition-colors text-lg"
+            className="inline-flex items-center justify-center px-8 py-4 bg-white text-brand-blue font-semibold rounded-lg hover:bg-gray-200 transition-colors text-lg"
           >
             {ctaButtonText}
           </Link>
@@ -43,9 +44,11 @@ export function CustomFooter({
                 compliant, fully insured, CHAS accredited.
               </p>
               <div className="space-y-2">
-                <p className="text-gray-300">Office 7, 15-20 Gresley Road</p>
-                <p className="text-gray-300">St Leonards On Sea, East Sussex</p>
-                <p className="text-gray-300">TN38 9PL</p>
+                <p className="text-gray-300">{ADDRESS.street}</p>
+                <p className="text-gray-300">
+                  {ADDRESS.locality}, {ADDRESS.region}
+                </p>
+                <p className="text-gray-300">{ADDRESS.postalCode}</p>
               </div>
             </div>
 
@@ -153,17 +156,17 @@ export function CustomFooter({
               <div className="space-y-4 text-gray-300">
                 <div>
                   <p className="font-semibold text-white mb-1">Phone</p>
-                  <a href="tel:01424466661" className="hover:text-white transition-colors">
-                    01424 466 661
+                  <a href={`tel:${PHONE_TEL}`} className="hover:text-white transition-colors">
+                    {PHONE_DISPLAY}
                   </a>
                 </div>
                 <div>
                   <p className="font-semibold text-white mb-1">Email</p>
                   <a
-                    href="mailto:info@colossusscaffolding.com"
+                    href={`mailto:${BUSINESS_EMAIL}`}
                     className="hover:text-white transition-colors"
                   >
-                    info@colossusscaffolding.com
+                    {BUSINESS_EMAIL}
                   </a>
                 </div>
                 <div>

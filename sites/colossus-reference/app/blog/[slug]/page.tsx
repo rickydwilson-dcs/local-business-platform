@@ -1,12 +1,14 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { Schema } from "@/components/Schema";
-import { Breadcrumbs } from "@/components/ui/breadcrumbs";
-import { BlogPostHero } from "@/components/ui/blog-post-hero";
-import { BlogPostCard } from "@/components/ui/blog-post-card";
-import { AuthorCard } from "@/components/ui/author-card";
-import { ServiceCTA } from "@/components/ui/service-cta";
+import {
+  Schema,
+  Breadcrumbs,
+  BlogPostHero,
+  BlogPostCard,
+  AuthorCard,
+  ServiceCTA,
+} from "@platform/core-components";
 import { getBlogPosts, getBlogPost, calculateReadingTime, type BlogPost } from "@/lib/content";
 import { getImageUrl } from "@/lib/image";
 import { absUrl } from "@/lib/site";
