@@ -12,7 +12,7 @@ Security is critical for protecting customer data and maintaining business reput
 
 ## Core Principles
 
-### 1. Rate Limiting (Upstash Redis)
+### 1. Rate Limiting (Supabase)
 
 All public-facing APIs must be rate limited to prevent abuse.
 
@@ -372,7 +372,7 @@ interface ConsentState {
 | Anti-Pattern                | Why It's Wrong     | Correct Approach       |
 | --------------------------- | ------------------ | ---------------------- |
 | API keys in code            | Security breach    | Environment variables  |
-| No rate limiting            | DDoS vulnerability | Upstash Redis limiting |
+| No rate limiting            | DDoS vulnerability | Supabase rate limiting |
 | No input validation         | Injection attacks  | Zod schema validation  |
 | Tracking without consent    | GDPR violation     | Consent-first approach |
 | Storing passwords plaintext | Data breach risk   | Never store passwords  |
