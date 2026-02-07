@@ -39,20 +39,19 @@ test.describe("Navigation", () => {
     await page.setViewportSize({ width: 375, height: 667 });
     await page.goto("/", { waitUntil: "networkidle" });
 
-    // Find hamburger button (has aria-label containing "menu" and lg:hidden)
+    // Find hamburger button
     const menuButton = page.locator('button[aria-label*="menu" i]').first();
     await expect(menuButton).toBeVisible();
+    await menuButton.click();
 
-    // Click and verify the dialog opens — retry click if first attempt is pre-hydration
+    // The mobile menu uses translate-x CSS transform to slide in.
+    // Playwright considers off-screen elements (translate-x-full) as "hidden",
+    // so we wait for the translate-x-0 class to appear on the dialog.
     const mobileMenu = page.locator('[role="dialog"][aria-label="Mobile navigation menu"]');
+    await expect(mobileMenu).toHaveClass(/translate-x-0/, { timeout: 10000 });
+
+    // Now navigate via mobile menu
     const mobileServicesLink = mobileMenu.locator('a[href="/services"]');
-
-    // Use expect.toPass for automatic retry: click the button, then check visibility
-    await expect(async () => {
-      await menuButton.click();
-      await expect(mobileServicesLink).toBeVisible({ timeout: 2000 });
-    }).toPass({ timeout: 15000 });
-
     await mobileServicesLink.click();
     await expect(page).toHaveURL(/.*services/);
   });
