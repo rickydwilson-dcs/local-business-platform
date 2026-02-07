@@ -42,7 +42,7 @@ const VERCEL_TEAM_ID = process.env.VERCEL_TEAM_ID; // Optional for team accounts
 // Sites to configure (update this as you add more sites)
 const SITES = [
   "colossus-reference",
-  "joes-plumbing-canterbury",
+  "smiths-electrical-cambridge",
   // Add more sites here as you create them
 ];
 
@@ -321,9 +321,3 @@ main().catch((error) => {
   console.error("\n❌ Fatal error:", error.message);
   process.exit(1);
 });
-
-const SITES = [
-  "colossus-reference",
-  "joes-plumbing-canterbury",
-  // ... all 50 sites
-];

@@ -76,13 +76,13 @@ export function CoverageMap({ className = "", height = "h-96" }: CoverageMapProp
     // Regional map colors for geographic visualization - intentionally not using brand tokens
     // as these need to be distinct per-county for map legend readability
     const colors: { [key: string]: string } = {
-      "East Sussex": "#2563eb",
-      "West Sussex": "#059669",
-      Kent: "#dc2626",
-      Surrey: "#7c3aed",
+      "East Sussex": "#2563eb", // eslint-disable-line no-restricted-syntax
+      "West Sussex": "#059669", // eslint-disable-line no-restricted-syntax
+      Kent: "#dc2626", // eslint-disable-line no-restricted-syntax
+      Surrey: "#7c3aed", // eslint-disable-line no-restricted-syntax
     };
 
-    const color = colors[county] || "#4DB2E4";
+    const color = colors[county] || "#4DB2E4"; // eslint-disable-line no-restricted-syntax
     const size = 28;
 
     return new leaflet.DivIcon({
@@ -192,11 +192,11 @@ export function CoverageMap({ className = "", height = "h-96" }: CoverageMapProp
                       style={{
                         backgroundColor:
                           {
-                            "East Sussex": "#2563eb",
-                            "West Sussex": "#059669",
-                            Kent: "#dc2626",
-                            Surrey: "#7c3aed",
-                          }[location.county] || "#4DB2E4",
+                            "East Sussex": "#2563eb", // eslint-disable-line no-restricted-syntax
+                            "West Sussex": "#059669", // eslint-disable-line no-restricted-syntax
+                            Kent: "#dc2626", // eslint-disable-line no-restricted-syntax
+                            Surrey: "#7c3aed", // eslint-disable-line no-restricted-syntax
+                          }[location.county] || "#4DB2E4", // eslint-disable-line no-restricted-syntax
                       }}
                     ></div>
                     <span className="text-xs text-gray-700">{location.county}</span>
