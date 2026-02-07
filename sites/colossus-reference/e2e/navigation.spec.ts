@@ -39,17 +39,18 @@ test.describe("Navigation", () => {
     await page.setViewportSize({ width: 375, height: 667 });
     await page.goto("/", { waitUntil: "networkidle" });
 
-    // Wait for React hydration — the hamburger button gets aria-expanded
-    // only after React hydrates the client component
-    const menuButton = page.locator("button[aria-expanded]").first();
+    // Target the hamburger button specifically by its aria-label.
+    // Note: button[aria-expanded].first() matches the desktop Locations dropdown
+    // which is hidden at mobile viewport, so we must be specific.
+    const menuButton = page.locator('button[aria-label="Open menu"]');
     await expect(menuButton).toBeVisible({ timeout: 10000 });
-    await expect(menuButton).toHaveAttribute("aria-expanded", "false", { timeout: 5000 });
 
     // Click to open the menu
     await menuButton.click();
 
-    // Verify the button state changed (confirms React handled the click)
-    await expect(menuButton).toHaveAttribute("aria-expanded", "true", { timeout: 5000 });
+    // Verify the menu opened — the aria-label changes to "Close menu" when open
+    const closeButton = page.locator('button[aria-label="Close menu"]');
+    await expect(closeButton).toBeVisible({ timeout: 5000 });
 
     // Wait for the 300ms CSS slide-in transition to complete
     await page.waitForTimeout(500);
