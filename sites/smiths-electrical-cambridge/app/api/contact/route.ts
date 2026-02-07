@@ -7,7 +7,7 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import { validateCSRFToken, escapeHtml, getClientIP } from '@/lib/csrf';
-import { rateLimitMiddleware } from '@/lib/rate-limiter';
+import { rateLimitMiddleware } from '@platform/core-components/lib/rate-limiter';
 import { siteConfig } from '@/site.config';
 import { BUSINESS_EMAIL, BUSINESS_NAME } from '@/lib/contact-info';
 

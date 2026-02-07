@@ -326,6 +326,34 @@ $$ LANGUAGE plpgsql;
 COMMENT ON FUNCTION cleanup_expired_rate_limits IS 'Delete rate limit records older than 1 hour. Call via Edge Function cron.';
 
 -- =========================================
+-- RATE LIMIT INCREMENT FUNCTION
+-- Atomic upsert + check for rate limiting
+-- =========================================
+
+CREATE OR REPLACE FUNCTION increment_rate_limit(
+  p_identifier TEXT,
+  p_endpoint TEXT,
+  p_site_slug TEXT,
+  p_window_start TIMESTAMPTZ,
+  p_window_end TIMESTAMPTZ,
+  p_max_requests INTEGER
+) RETURNS JSON AS $$
+DECLARE
+  v_count INTEGER;
+BEGIN
+  INSERT INTO rate_limits (identifier, endpoint, site_slug, request_count, window_start, window_end)
+  VALUES (p_identifier, p_endpoint, p_site_slug, 1, p_window_start, p_window_end)
+  ON CONFLICT (identifier, endpoint, window_start)
+  DO UPDATE SET request_count = rate_limits.request_count + 1, updated_at = NOW()
+  RETURNING request_count INTO v_count;
+
+  RETURN json_build_object('request_count', v_count, 'allowed', v_count <= p_max_requests);
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
+
+COMMENT ON FUNCTION increment_rate_limit IS 'Atomic rate limit check: upsert counter and return whether request is allowed.';
+
+-- =========================================
 -- VERIFICATION QUERIES
 -- Run these to verify setup
 -- =========================================

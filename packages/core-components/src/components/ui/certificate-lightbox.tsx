@@ -3,6 +3,7 @@
 import { useEffect, useCallback, useRef, useState } from "react";
 import Image from "next/image";
 import { generateImageAlt } from "@/lib/image";
+import { useFocusTrap } from "../../hooks/useFocusTrap";
 
 interface Certificate {
   id: string;
@@ -29,7 +30,6 @@ export function CertificateLightbox({
   onClose,
   onNavigate,
 }: CertificateLightboxProps) {
-  const triggerElementRef = useRef<HTMLElement | null>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const imageContainerRef = useRef<HTMLDivElement>(null);
   const selectedCertificate = certificates[selectedIndex];
@@ -41,18 +41,18 @@ export function CertificateLightbox({
   const isZoomed = zoomLevel > 0;
   const currentZoom = ZOOM_LEVELS[zoomLevel];
 
+  // Focus trap handles: trigger capture, focus-on-open, Tab trapping, focus-return-on-close.
+  // Escape is NOT handled by the hook — the component's handleKeyDown has zoom-aware Escape logic.
+  const { containerRef: lightboxRef } = useFocusTrap({
+    isOpen,
+    initialFocusRef: closeButtonRef,
+  });
+
   // Reset zoom when changing certificates or closing
   useEffect(() => {
     setZoomLevel(0);
     setPanPosition({ x: 0, y: 0 });
   }, [selectedIndex, isOpen]);
-
-  // Store the element that triggered the lightbox
-  useEffect(() => {
-    if (isOpen && !triggerElementRef.current) {
-      triggerElementRef.current = document.activeElement as HTMLElement;
-    }
-  }, [isOpen]);
 
   // Zoom handlers
   const handleZoomIn = useCallback(() => {
@@ -156,28 +156,16 @@ export function CertificateLightbox({
     ]
   );
 
-  // Set up keyboard event listeners
+  // Set up keyboard event listeners (arrow keys, zoom keys, Escape)
   useEffect(() => {
     if (isOpen) {
       document.addEventListener("keydown", handleKeyDown);
-      // Focus close button when lightbox opens
-      setTimeout(() => {
-        closeButtonRef.current?.focus();
-      }, 100);
     }
 
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
     };
   }, [isOpen, handleKeyDown]);
-
-  // Return focus to trigger element when closing
-  useEffect(() => {
-    if (!isOpen && triggerElementRef.current) {
-      triggerElementRef.current.focus();
-      triggerElementRef.current = null;
-    }
-  }, [isOpen]);
 
   // Prevent body scroll when lightbox is open
   useEffect(() => {
@@ -218,6 +206,7 @@ export function CertificateLightbox({
 
   return (
     <div
+      ref={lightboxRef}
       className="lightbox-overlay"
       onClick={handleBackdropClick}
       role="dialog"

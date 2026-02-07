@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
-import { TOWN_LOCATIONS, MAP_CENTER, MAP_ZOOM, type TownLocation } from "@/lib/town-locations";
 
 // Dynamically import the MapContainer to avoid SSR issues
 const MapContainer = dynamic(() => import("react-leaflet").then((mod) => mod.MapContainer), {
@@ -21,12 +20,29 @@ const Popup = dynamic(() => import("react-leaflet").then((mod) => mod.Popup), {
   ssr: false,
 });
 
+export interface TownLocation {
+  name: string;
+  coords: [number, number];
+  county: string;
+  url: string;
+  description?: string;
+}
+
 interface CoverageMapProps {
+  locations: TownLocation[];
+  center?: [number, number];
+  zoom?: number;
   className?: string;
   height?: string;
 }
 
-export function CoverageMap({ className = "", height = "h-96" }: CoverageMapProps) {
+export function CoverageMap({
+  locations,
+  center = [51.0, 0.5],
+  zoom = 9,
+  className = "",
+  height = "h-96",
+}: CoverageMapProps) {
   const [isClient, setIsClient] = useState(false);
   const [leafletModule, setLeafletModule] = useState<typeof import("leaflet") | null>(null);
 
@@ -148,8 +164,8 @@ export function CoverageMap({ className = "", height = "h-96" }: CoverageMapProp
       className={`${height} bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden ${className}`}
     >
       <MapContainer
-        center={MAP_CENTER}
-        zoom={MAP_ZOOM}
+        center={center}
+        zoom={zoom}
         style={{ height: "100%", width: "100%" }}
         className="z-10"
       >
@@ -158,7 +174,7 @@ export function CoverageMap({ className = "", height = "h-96" }: CoverageMapProp
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
 
-        {TOWN_LOCATIONS.map((location: TownLocation) => (
+        {locations.map((location: TownLocation) => (
           <Marker
             key={location.name}
             position={location.coords}

@@ -7,9 +7,10 @@
  * All configuration is passed via props for cross-site compatibility.
  */
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useFocusTrap } from "../../hooks/useFocusTrap";
 
 interface LocationItem {
   name: string;
@@ -53,30 +54,28 @@ export function MobileMenu({
 }: MobileMenuProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [locationsExpanded, setLocationsExpanded] = useState(false);
-
-  // Close menu on escape key
-  useEffect(() => {
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        setIsOpen(false);
-      }
-    };
-
-    if (isOpen) {
-      document.addEventListener("keydown", handleEscape);
-      document.body.style.overflow = "hidden";
-    }
-
-    return () => {
-      document.removeEventListener("keydown", handleEscape);
-      document.body.style.overflow = "";
-    };
-  }, [isOpen]);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
 
   const closeMenu = () => {
     setIsOpen(false);
     setLocationsExpanded(false);
   };
+
+  const { containerRef: menuRef } = useFocusTrap({
+    isOpen,
+    onEscape: closeMenu,
+    initialFocusRef: closeButtonRef,
+  });
+
+  // Prevent body scroll when menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
 
   const hasLocations = locations.length > 0;
 
@@ -120,6 +119,10 @@ export function MobileMenu({
 
       {/* Mobile Menu Overlay */}
       <div
+        ref={menuRef}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Mobile navigation menu"
         className={`fixed inset-0 bg-white z-50 lg:hidden transition-transform duration-300 ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
@@ -136,6 +139,7 @@ export function MobileMenu({
             />
           </Link>
           <button
+            ref={closeButtonRef}
             onClick={closeMenu}
             className="p-2 rounded-md hover:bg-gray-200 transition-colors"
             aria-label="Close menu"
