@@ -44,7 +44,13 @@ export function ServiceFAQ({
         <div className="text-center mt-12">
           <p className="text-gray-800 mb-4">Still have questions?</p>
           <a href="tel:01424466661" className="btn-primary gap-2">
-            <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg
+              aria-hidden="true"
+              className="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"

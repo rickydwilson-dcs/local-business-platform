@@ -285,7 +285,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
         </section>
       )}
 
-      <main>
+      <div>
         <ServiceHero
           title={serviceData.title}
           description={serviceData.description}
@@ -301,7 +301,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
         <ServiceFAQ items={serviceData.faqs} />
 
         <ServiceCTA />
-      </main>
+      </div>
 
       <Schema
         service={{

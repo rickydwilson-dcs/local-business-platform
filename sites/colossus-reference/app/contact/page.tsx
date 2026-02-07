@@ -200,7 +200,10 @@ export default function ContactPage() {
               <h2 className="text-2xl font-semibold mb-6">Request a Free Quote</h2>
 
               {submitStatus === "success" && (
-                <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg">
+                <div
+                  role="alert"
+                  className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg"
+                >
                   <h3 className="text-green-800 font-semibold mb-1">Thank you!</h3>
                   <p className="text-green-700">
                     Your enquiry has been received. We&apos;ll get back to you within 24 hours with
@@ -210,7 +213,7 @@ export default function ContactPage() {
               )}
 
               {submitStatus === "error" && (
-                <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
+                <div role="alert" className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
                   <h3 className="text-red-800 font-semibold mb-1">Something went wrong</h3>
                   <p className="text-red-700">
                     Please try again or call us directly on the number below.
@@ -231,12 +234,19 @@ export default function ContactPage() {
                       name="name"
                       value={formData.name}
                       onChange={handleInputChange}
+                      aria-required="true"
+                      aria-invalid={!!errors.name}
+                      aria-describedby={errors.name ? "name-error" : undefined}
                       className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-brand-blue focus:border-brand-blue ${
                         errors.name ? "border-red-500" : "border-gray-300"
                       }`}
                       placeholder="Your full name"
                     />
-                    {errors.name && <p className="mt-1 text-sm text-red-600">{errors.name}</p>}
+                    {errors.name && (
+                      <p id="name-error" role="alert" className="mt-1 text-sm text-red-600">
+                        {errors.name}
+                      </p>
+                    )}
                   </div>
 
                   <div>
@@ -249,12 +259,19 @@ export default function ContactPage() {
                       name="email"
                       value={formData.email}
                       onChange={handleInputChange}
+                      aria-required="true"
+                      aria-invalid={!!errors.email}
+                      aria-describedby={errors.email ? "email-error" : undefined}
                       className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-brand-blue focus:border-brand-blue ${
                         errors.email ? "border-red-500" : "border-gray-300"
                       }`}
                       placeholder="your.email@example.com"
                     />
-                    {errors.email && <p className="mt-1 text-sm text-red-600">{errors.email}</p>}
+                    {errors.email && (
+                      <p id="email-error" role="alert" className="mt-1 text-sm text-red-600">
+                        {errors.email}
+                      </p>
+                    )}
                   </div>
                 </div>
 
@@ -370,12 +387,19 @@ export default function ContactPage() {
                     rows={5}
                     value={formData.message}
                     onChange={handleInputChange}
+                    aria-required="true"
+                    aria-invalid={!!errors.message}
+                    aria-describedby={errors.message ? "message-error" : undefined}
                     className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-brand-blue focus:border-brand-blue ${
                       errors.message ? "border-red-500" : "border-gray-300"
                     }`}
                     placeholder="Tell us about your project: building height, access requirements, duration, special considerations, etc."
                   />
-                  {errors.message && <p className="mt-1 text-sm text-red-600">{errors.message}</p>}
+                  {errors.message && (
+                    <p id="message-error" role="alert" className="mt-1 text-sm text-red-600">
+                      {errors.message}
+                    </p>
+                  )}
                 </div>
 
                 {/* Submit Button */}
@@ -388,7 +412,7 @@ export default function ContactPage() {
                 </button>
 
                 {submitStatus === "success" && (
-                  <div className="p-4 bg-green-50 border border-green-200 rounded-lg">
+                  <div role="alert" className="p-4 bg-green-50 border border-green-200 rounded-lg">
                     <h3 className="text-green-800 font-semibold mb-1">Thank you!</h3>
                     <p className="text-green-700">
                       Your enquiry has been received. We&apos;ll get back to you within 24 hours
@@ -398,7 +422,7 @@ export default function ContactPage() {
                 )}
 
                 {submitStatus === "error" && (
-                  <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
+                  <div role="alert" className="p-4 bg-red-50 border border-red-200 rounded-lg">
                     <h3 className="text-red-800 font-semibold mb-1">Something went wrong</h3>
                     <p className="text-red-700">
                       Please try again or call us directly on the number below.

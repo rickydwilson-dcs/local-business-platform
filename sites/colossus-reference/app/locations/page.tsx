@@ -14,11 +14,11 @@ import { PHONE_DISPLAY, PHONE_TEL } from "@/lib/contact-info";
 export const dynamic = "force-static";
 
 export const metadata: Metadata = {
-  title: "Professional Scaffolding Across South East England | 30+ Towns Covered",
+  title: "Scaffolding Across South East | 30+ Towns",
   description:
     "Professional scaffolding services across 30+ towns in East Sussex, West Sussex, Kent, and Surrey. Local specialists with heritage expertise and established council relationships.",
   openGraph: {
-    title: "Professional Scaffolding Across South East England | 30+ Towns Covered",
+    title: "Scaffolding Across South East | 30+ Towns",
     description:
       "From Brighton's seafront heritage to Canterbury's World Heritage sites, we provide expert scaffolding with genuine local knowledge and established council relationships.",
     url: absUrl("/locations"),
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Professional Scaffolding Across South East England | 30+ Towns Covered",
+    title: "Scaffolding Across South East | 30+ Towns",
     description:
       "Local scaffolding specialists with heritage expertise and council relationships across the South East.",
     images: [absUrl("/static/logo.png")],

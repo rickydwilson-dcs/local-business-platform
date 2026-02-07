@@ -10,8 +10,8 @@ type BreadcrumbItem = {
 
 type Props = {
   service: {
-    id: string;      // can be "/access-scaffolding#service" or absolute
-    url: string;     // can be "/access-scaffolding" or absolute
+    id: string; // can be "/access-scaffolding#service" or absolute
+    url: string; // can be "/access-scaffolding" or absolute
     name: string;
     description: string;
     serviceType: string;
@@ -22,7 +22,7 @@ type Props = {
   breadcrumbs?: BreadcrumbItem[];
 };
 
-export default function Schema({ service, faqs, org, breadcrumbs }: Props) {
+export function Schema({ service, faqs, org, breadcrumbs }: Props) {
   const graph = [
     {
       "@type": "Service",
@@ -61,11 +61,11 @@ export default function Schema({ service, faqs, org, breadcrumbs }: Props) {
     (graph as Array<Record<string, unknown>>).push({
       "@type": "BreadcrumbList",
       "@id": absUrl(service.url + "#breadcrumb"),
-      "itemListElement": breadcrumbs.map((breadcrumb, index) => ({
+      itemListElement: breadcrumbs.map((breadcrumb, index) => ({
         "@type": "ListItem",
-        "position": index + 1,
-        "name": breadcrumb.name,
-        "item": absUrl(breadcrumb.url),
+        position: index + 1,
+        name: breadcrumb.name,
+        item: absUrl(breadcrumb.url),
       })),
     });
   }

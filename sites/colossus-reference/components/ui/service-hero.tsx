@@ -54,7 +54,13 @@ export function ServiceHero(props: ServiceHeroProps) {
                 href={`tel:${phoneTel}`}
                 className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-200 transition-colors"
               >
-                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg
+                  aria-hidden="true"
+                  className="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -73,6 +79,7 @@ export function ServiceHero(props: ServiceHeroProps) {
                   className="inline-flex items-center gap-2 bg-gray-100 px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm"
                 >
                   <svg
+                    aria-hidden="true"
                     className="h-3 w-3 sm:h-4 sm:w-4 text-brand-blue"
                     fill="currentColor"
                     viewBox="0 0 20 20"
@@ -105,7 +112,12 @@ export function ServiceHero(props: ServiceHeroProps) {
             ) : (
               <div className="relative h-[400px] bg-gray-200 rounded-2xl shadow-lg flex items-center justify-center">
                 <div className="text-gray-400 text-center">
-                  <svg className="w-16 h-16 mx-auto mb-4" fill="currentColor" viewBox="0 0 20 20">
+                  <svg
+                    aria-hidden="true"
+                    className="w-16 h-16 mx-auto mb-4"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
                     <path
                       fillRule="evenodd"
                       d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"

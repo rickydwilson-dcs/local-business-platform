@@ -244,7 +244,7 @@ export default async function ProjectPage({ params }: { params: Promise<Params> 
         </div>
       </div>
 
-      <main>
+      <div>
         <article>
           {/* Hero Section - Reusing BlogPostHero */}
           <BlogPostHero
@@ -304,7 +304,7 @@ export default async function ProjectPage({ params }: { params: Promise<Params> 
 
         {/* Related Projects */}
         <RelatedProjects projects={allProjects} currentSlug={slug} />
-      </main>
+      </div>
 
       <Schema
         org={{

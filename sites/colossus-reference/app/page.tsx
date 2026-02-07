@@ -139,6 +139,7 @@ export default function HomePage() {
                 <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
                   <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mx-auto mb-4">
                     <svg
+                      aria-hidden="true"
                       className="w-6 h-6 text-brand-blue"
                       fill="none"
                       viewBox="0 0 24 24"
@@ -162,6 +163,7 @@ export default function HomePage() {
                 <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
                   <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mx-auto mb-4">
                     <svg
+                      aria-hidden="true"
                       className="w-6 h-6 text-brand-blue"
                       fill="none"
                       viewBox="0 0 24 24"
@@ -185,6 +187,7 @@ export default function HomePage() {
                 <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
                   <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mx-auto mb-4">
                     <svg
+                      aria-hidden="true"
                       className="w-6 h-6 text-brand-blue"
                       fill="none"
                       viewBox="0 0 24 24"
@@ -208,6 +211,7 @@ export default function HomePage() {
                 <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
                   <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mx-auto mb-4">
                     <svg
+                      aria-hidden="true"
                       className="w-6 h-6 text-brand-blue"
                       fill="none"
                       viewBox="0 0 24 24"
