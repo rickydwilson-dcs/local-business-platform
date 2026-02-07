@@ -70,9 +70,9 @@ GA4_API_SECRET=your-secret
 FEATURE_CONSENT_BANNER=true
 FEATURE_ANALYTICS_ENABLED=true
 
-# Rate Limiting (Upstash Redis)
-KV_REST_API_URL=https://your-database.upstash.io
-KV_REST_API_TOKEN=your-token
+# Rate Limiting (Supabase)
+SUPABASE_URL=https://your-project.supabase.co
+SUPABASE_SERVICE_KEY=your-service-role-key
 
 # Email (Resend)
 RESEND_API_KEY=re_your_api_key

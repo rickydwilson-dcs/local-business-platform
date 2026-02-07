@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { getAllCounties } from "@/lib/locations-dropdown";
+import { getAllCounties, getAllTownLocations, MAP_CENTER, MAP_ZOOM } from "@/lib/locations";
 import { absUrl } from "@/lib/site";
 import {
   PageLayout,
@@ -48,8 +48,9 @@ export const metadata: Metadata = {
   },
 };
 
-export default function LocationsPage() {
-  const counties = getAllCounties();
+export default async function LocationsPage() {
+  const counties = await getAllCounties();
+  const townLocations = await getAllTownLocations();
 
   const breadcrumbItems = [{ name: "Locations", href: "/locations", current: true }];
 
@@ -212,16 +213,25 @@ export default function LocationsPage() {
           <CoverageStatsSection />
 
           {/* Town Finder */}
-          <TownFinderSection />
+          <TownFinderSection counties={counties} />
 
           {/* County Gateway Cards */}
-          <CountyGatewayCards />
+          <CountyGatewayCards counties={counties} />
 
           {/* Local Specialists Benefits */}
           <LocalSpecialistsBenefits />
 
           {/* Coverage Map */}
-          <CoverageMapSection />
+          <CoverageMapSection
+            locations={townLocations}
+            counties={counties.map((c) => ({
+              name: c.name,
+              slug: c.slug,
+              townCount: c.towns.length,
+            }))}
+            center={MAP_CENTER}
+            zoom={MAP_ZOOM}
+          />
 
           {/* Final CTA */}
           <section className="section-standard bg-white">

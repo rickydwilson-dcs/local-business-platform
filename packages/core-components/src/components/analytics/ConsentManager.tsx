@@ -5,11 +5,12 @@
  * Handles user consent for analytics, marketing, and functional cookies
  */
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Shield, Settings, Check, X, Info, Cookie } from "lucide-react";
 import { ConsentState, ConsentBannerConfig, FeatureFlags } from "@/lib/analytics/types";
+import { useFocusTrap } from "../../hooks/useFocusTrap";
 
 interface ConsentManagerProps {
   enabled?: boolean;
@@ -49,6 +50,21 @@ export function ConsentManager({
     analytics: false,
     marketing: false,
     functional: true, // Functional cookies are required
+  });
+
+  const rejectButtonRef = useRef<HTMLButtonElement>(null);
+  const closeCustomizeRef = useRef<HTMLButtonElement>(null);
+
+  const { containerRef: bannerRef } = useFocusTrap({
+    isOpen: showBanner && !showCustomize,
+    initialFocusRef: rejectButtonRef,
+    restoreFocus: false, // Banner auto-appears on page load, no trigger element
+  });
+
+  const { containerRef: customizeRef } = useFocusTrap({
+    isOpen: showCustomize,
+    onEscape: () => setShowCustomize(false),
+    initialFocusRef: closeCustomizeRef,
   });
 
   const mergedConfig = { ...defaultConfig, ...config };
@@ -273,6 +289,10 @@ export function ConsentManager({
 
       {/* Main consent banner */}
       <div
+        ref={bannerRef}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Cookie consent"
         className={`fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-2xl z-50 ${className}`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
@@ -311,6 +331,7 @@ export function ConsentManager({
             {/* Actions */}
             <div className="flex flex-col sm:flex-row gap-3 lg:ml-8 lg:flex-shrink-0">
               <button
+                ref={rejectButtonRef}
                 onClick={handleRejectAll}
                 disabled={loading}
                 className="px-6 py-3 text-sm font-medium text-gray-700 bg-gray-50 border border-gray-300 rounded-lg hover:bg-gray-100 hover:border-gray-400 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
@@ -344,7 +365,13 @@ export function ConsentManager({
 
       {/* Customize modal */}
       {showCustomize && (
-        <div className="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div
+          ref={customizeRef}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Cookie preferences"
+          className="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+        >
           <div className="bg-white rounded-xl shadow-2xl max-w-3xl w-full max-h-[90vh] overflow-hidden animate-in fade-in slide-in-from-bottom-8 duration-300">
             {/* Header */}
             <div className="bg-gradient-to-r from-brand-primary to-blue-700 px-6 py-4">
@@ -356,6 +383,7 @@ export function ConsentManager({
                   <h2 className="text-xl font-semibold text-white">Cookie Preferences</h2>
                 </div>
                 <button
+                  ref={closeCustomizeRef}
                   onClick={() => setShowCustomize(false)}
                   disabled={loading}
                   className="w-8 h-8 bg-white bg-opacity-20 hover:bg-opacity-30 rounded-lg flex items-center justify-center text-white transition-all duration-200 disabled:opacity-50"

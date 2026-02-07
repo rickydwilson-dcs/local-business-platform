@@ -55,18 +55,20 @@ export * from "./components/ui/service-showcase";
 export * from "./components/ui/star-rating";
 export * from "./components/ui/testimonial-card";
 
-// Site-specific components (depend on site-specific @/lib/ modules):
-// - county-gateway-cards: requires @/lib/locations-dropdown
-// - coverage-map: requires @/lib/town-locations
-// - town-finder-section: requires @/lib/locations-dropdown
-// Import these directly from their files if needed:
-//   import { CountyGatewayCards } from "@platform/core-components/src/components/ui/county-gateway-cards";
+// Location components — props-based, no site-specific imports needed
+export * from "./components/ui/county-gateway-cards";
+export * from "./components/ui/coverage-map";
+export * from "./components/ui/coverage-map-section";
+export * from "./components/ui/town-finder-section";
 
 // Export Schema component
 export * from "./components/Schema";
 
 // Export layout components
 export { PageLayout } from "./components/layouts/page-layout";
+
+// Export hooks
+export * from "./hooks";
 
 // Export type-only utilities from lib (no fs/server dependencies)
 export * from "./lib/content-schemas";

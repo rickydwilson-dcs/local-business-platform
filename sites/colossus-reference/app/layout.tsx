@@ -9,7 +9,7 @@ import { Analytics } from "@platform/core-components/components/analytics/Analyt
 import { AnalyticsDebugPanel } from "@platform/core-components/components/analytics/AnalyticsDebugPanel";
 import { PHONE_DISPLAY, PHONE_TEL } from "@/lib/contact-info";
 import { getContentItems } from "@/lib/content";
-import { getAllCounties } from "@/lib/locations-dropdown";
+import { getAllCounties } from "@/lib/locations";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -38,7 +38,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     name: loc.title,
     slug: loc.slug,
   }));
-  const counties = getAllCounties();
+  const counties = await getAllCounties();
 
   const criticalStyles = `
     /* Critical CSS for above-the-fold content */

@@ -1,6 +1,6 @@
 // app/api/contact/route.tsx
 import { Resend } from "resend";
-import { checkRateLimit } from "@/lib/rate-limiter";
+import { checkRateLimit } from "@platform/core-components/lib/rate-limiter";
 import { escapeHtml } from "@/lib/security/html-escape";
 import { extractClientIp } from "@/lib/security/ip-utils";
 import { validateCsrfToken } from "@/lib/security/csrf";
