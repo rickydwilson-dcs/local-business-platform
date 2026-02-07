@@ -94,5 +94,5 @@ NEXT_PUBLIC_SITE_URL=https://colossusscaffolding.co.uk
 | `lib/content.ts`           | MDX reading utilities           |
 | `lib/locations-config.ts`  | Dynamic location discovery      |
 | `lib/content-schemas.ts`   | Zod validation schemas          |
-| `lib/rate-limiter.ts`      | Upstash Redis rate limiting     |
+| `lib/rate-limiter.ts`      | Supabase rate limiting          |
 | `app/api/contact/route.ts` | Contact form with rate limiting |

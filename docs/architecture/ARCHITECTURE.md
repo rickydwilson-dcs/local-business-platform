@@ -98,7 +98,7 @@ Drop a new MDX file in the right directory, build, and a new page appears. No co
 | Testing       | Vitest + Playwright                         |
 | Deployment    | Vercel                                      |
 | Image Storage | Cloudflare R2                               |
-| Rate Limiting | Upstash Redis                               |
+| Rate Limiting | Supabase                                    |
 | Monitoring    | NewRelic APM                                |
 | Analytics     | GA4 (consent-managed)                       |
 | Backend       | Supabase                                    |

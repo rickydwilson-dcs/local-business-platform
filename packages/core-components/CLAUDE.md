@@ -87,4 +87,4 @@ import { getServices } from "@platform/core-components/lib/content";
 pnpm run type-check    # Uses tsconfig.build.json (standalone check)
 ```
 
-Some files are excluded from standalone type-check because they depend on site-specific implementations (MDX config, Upstash Redis). These are still type-checked when building consuming sites.
+Some files are excluded from standalone type-check because they depend on site-specific implementations (MDX config, Supabase). These are still type-checked when building consuming sites.

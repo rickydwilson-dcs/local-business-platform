@@ -31,7 +31,7 @@ export async function POST(request: Request): Promise<Response> {
     return csrfError;
   }
 
-  // Rate limiting check using Upstash Redis
+  // Rate limiting check using Supabase
   // Use secure IP extraction with validation
   const ip = extractClientIp(request);
 
