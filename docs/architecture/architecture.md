@@ -12,10 +12,10 @@ For detailed explanations of how each system works, see:
 
 | Deep Dive                                                   | What It Teaches                                                             |
 | ----------------------------------------------------------- | --------------------------------------------------------------------------- |
-| [How Dynamic Routing Works](HOW_DYNAMIC_ROUTING_WORKS.md)   | How MDX files become pages via `[slug]` routes and `generateStaticParams()` |
-| [How the Theme System Works](HOW_THEME_SYSTEM_WORKS.md)     | How `theme.config.ts` → CSS variables → Tailwind classes                    |
-| [How the Build Pipeline Works](HOW_BUILD_PIPELINE_WORKS.md) | How Turborepo orchestrates packages and sites                               |
-| [How Site Creation Works](HOW_SITE_CREATION_WORKS.md)       | How new business clients become deployed websites                           |
+| [How Dynamic Routing Works](how-dynamic-routing-works.md)   | How MDX files become pages via `[slug]` routes and `generateStaticParams()` |
+| [How the Theme System Works](how-theme-system-works.md)     | How `theme.config.ts` → CSS variables → Tailwind classes                    |
+| [How the Build Pipeline Works](how-build-pipeline-works.md) | How Turborepo orchestrates packages and sites                               |
+| [How Site Creation Works](how-site-creation-works.md)       | How new business clients become deployed websites                           |
 
 ## Repository Structure
 
@@ -178,4 +178,4 @@ bg-[#005A9E]               # Hardcoded color (use theme tokens instead)
 ## Related Documentation
 
 - [CLAUDE.md](../../CLAUDE.md) - AI agent instructions and architectural briefing
-- [CONTENT_VALIDATION.md](./CONTENT_VALIDATION.md) - Validation schemas
+- [content-validation.md](./content-validation.md) - Validation schemas
