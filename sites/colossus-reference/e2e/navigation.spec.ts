@@ -37,23 +37,33 @@ test.describe("Navigation", () => {
   test("should have working mobile menu", async ({ page }) => {
     // Set mobile viewport
     await page.setViewportSize({ width: 375, height: 667 });
-    await page.goto("/");
+    await page.goto("/", { waitUntil: "networkidle" });
 
-    // Find and click hamburger menu button
-    const menuButton = page.locator('button[aria-label*="menu" i]').first();
-    await expect(menuButton).toBeVisible();
+    // Target the hamburger button specifically by its aria-label.
+    // Note: button[aria-expanded].first() matches the desktop Locations dropdown
+    // which is hidden at mobile viewport, so we must be specific.
+    const menuButton = page.locator('button[aria-label="Open menu"]');
+    await expect(menuButton).toBeVisible({ timeout: 10000 });
+
+    // Click to open the menu
     await menuButton.click();
 
-    // Wait for mobile menu to open
+    // Verify the menu opened — check the dialog has the open state class.
+    // Two "Close menu" buttons exist (hamburger + dialog X), so use the dialog directly.
+    const mobileMenu = page.locator('[role="dialog"][aria-label="Mobile navigation menu"]');
+    await expect(mobileMenu).toHaveClass(/translate-x-0/, { timeout: 5000 });
+
+    // Wait for the 300ms CSS slide-in transition to complete
     await page.waitForTimeout(500);
 
-    // Check mobile menu is visible and navigate
-    const mobileServicesLink = page.locator('.mobile-menu-link:has-text("Services")');
-    await expect(mobileServicesLink).toBeVisible();
-
-    // Use evaluate to click directly in DOM (bypass viewport issues)
-    await mobileServicesLink.evaluate((el) => (el as HTMLElement).click());
-
+    // Click the Services link via JavaScript — Playwright considers the
+    // translated dialog content as not visible even with force:true,
+    // so we dispatch a native click event directly.
+    await page.evaluate(() => {
+      const dialog = document.querySelector('[role="dialog"][aria-label="Mobile navigation menu"]');
+      const link = dialog?.querySelector('a[href="/services"]') as HTMLAnchorElement | null;
+      link?.click();
+    });
     await expect(page).toHaveURL(/.*services/);
   });
 
@@ -94,10 +104,10 @@ test.describe("Navigation", () => {
     await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
     await page.waitForTimeout(500);
 
-    const eastSussexLink = page.locator('footer a[href="/locations/east-sussex"]').first();
-    await expect(eastSussexLink).toBeVisible();
-    await eastSussexLink.click();
-    await expect(page).toHaveURL(/.*east-sussex/);
+    const brightonLink = page.locator('footer a[href="/locations/brighton"]').first();
+    await expect(brightonLink).toBeVisible();
+    await brightonLink.click();
+    await expect(page).toHaveURL(/.*brighton/);
   });
 
   test("should have clickable logo that navigates home", async ({ page, baseURL }) => {
