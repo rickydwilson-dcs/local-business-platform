@@ -8,7 +8,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Shield, Award, Users, Clock, CheckCircle, Phone } from 'lucide-react';
 import { siteConfig } from '@/site.config';
-import { PHONE_DISPLAY, PHONE_TEL, formatAddressSingleLine } from '@/lib/contact-info';
+import { PHONE_DISPLAY, PHONE_TEL } from '@/lib/contact-info';
 import { absUrl } from '@/lib/site';
 import { Breadcrumbs } from '@/components/ui/breadcrumbs';
 import { Schema } from '@/components/Schema';

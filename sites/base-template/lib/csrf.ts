@@ -64,16 +64,25 @@ export async function validateCSRFToken(token: string): Promise<boolean> {
   try {
     const storedData: CSRFTokenData = JSON.parse(storedValue);
 
-    // Check if token matches
-    if (storedData.token !== token) {
-      return false;
-    }
-
     // Check if token has expired
     if (Date.now() > storedData.expires) {
+      await clearCSRFToken();
       return false;
     }
 
+    // Timing-safe comparison to prevent side-channel attacks
+    const storedBuf = Buffer.from(storedData.token);
+    const providedBuf = Buffer.from(token);
+    if (storedBuf.length !== providedBuf.length) {
+      return false;
+    }
+    const { timingSafeEqual } = await import('crypto');
+    if (!timingSafeEqual(storedBuf, providedBuf)) {
+      return false;
+    }
+
+    // Invalidate token after successful use (single-use)
+    await clearCSRFToken();
     return true;
   } catch {
     return false;
