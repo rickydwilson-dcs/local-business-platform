@@ -47,10 +47,12 @@ test.describe("Navigation", () => {
     // Wait for mobile menu to open
     await page.waitForTimeout(500);
 
-    // Check mobile menu is visible and navigate
-    const mobileServicesLink = page.locator('a[href="/services"]').first();
-    await expect(mobileServicesLink).toBeVisible();
+    // Check mobile menu is visible and navigate — scope to dialog overlay
+    const mobileMenu = page.locator('[role="dialog"][aria-label="Mobile navigation menu"]');
+    await expect(mobileMenu).toBeVisible();
 
+    const mobileServicesLink = mobileMenu.locator('a[href="/services"]');
+    await expect(mobileServicesLink).toBeVisible();
     await mobileServicesLink.click();
 
     await expect(page).toHaveURL(/.*services/);
