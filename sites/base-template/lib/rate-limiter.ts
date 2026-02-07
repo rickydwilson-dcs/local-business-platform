@@ -4,10 +4,10 @@
  * This is a stub implementation for the base template.
  * Rate limiting is disabled by default and all requests are allowed.
  *
- * To enable rate limiting:
- * 1. Install packages: npm install @upstash/ratelimit @upstash/redis
- * 2. Set environment variables: UPSTASH_REDIS_REST_URL, UPSTASH_REDIS_REST_TOKEN
- * 3. Replace this file with the full implementation from colossus-reference
+ * TODO: Replace this stub with Supabase-based rate limiting.
+ * The colossus-reference site currently uses Upstash Redis but this is being
+ * migrated to Supabase to simplify infrastructure (Redis keep-alive was unreliable).
+ * Use a Supabase table with TTL-based cleanup for rate-limit counters.
  */
 
 export interface RateLimitResult {
