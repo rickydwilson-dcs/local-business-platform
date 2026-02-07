@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { absUrl } from "@/lib/site";
 import { Metadata } from "next";
-import { Breadcrumbs } from "@/components/ui/breadcrumbs";
+import { Breadcrumbs } from "@platform/core-components";
 import { PHONE_DISPLAY, BUSINESS_EMAIL, ADDRESS } from "@/lib/contact-info";
 
 export const metadata: Metadata = {
@@ -63,40 +63,40 @@ export default function PrivacyPolicyPage() {
             <div className="bg-gray-50 rounded-2xl p-8 mb-12">
               <h2 className="text-xl font-semibold mb-4">Table of Contents</h2>
               <nav className="grid md:grid-cols-2 gap-2">
-                <a href="#data-controller" className="text-brand-blue hover:underline">
+                <a href="#data-controller" className="text-brand-primary hover:underline">
                   1. Data Controller Information
                 </a>
-                <a href="#data-we-collect" className="text-brand-blue hover:underline">
+                <a href="#data-we-collect" className="text-brand-primary hover:underline">
                   2. Data We Collect
                 </a>
-                <a href="#how-we-use-data" className="text-brand-blue hover:underline">
+                <a href="#how-we-use-data" className="text-brand-primary hover:underline">
                   3. How We Use Your Data
                 </a>
-                <a href="#legal-basis" className="text-brand-blue hover:underline">
+                <a href="#legal-basis" className="text-brand-primary hover:underline">
                   4. Legal Basis for Processing
                 </a>
-                <a href="#data-sharing" className="text-brand-blue hover:underline">
+                <a href="#data-sharing" className="text-brand-primary hover:underline">
                   5. Data Sharing & Third Parties
                 </a>
-                <a href="#data-retention" className="text-brand-blue hover:underline">
+                <a href="#data-retention" className="text-brand-primary hover:underline">
                   6. Data Retention
                 </a>
-                <a href="#your-rights" className="text-brand-blue hover:underline">
+                <a href="#your-rights" className="text-brand-primary hover:underline">
                   7. Your Rights
                 </a>
-                <a href="#international-transfers" className="text-brand-blue hover:underline">
+                <a href="#international-transfers" className="text-brand-primary hover:underline">
                   8. International Transfers
                 </a>
-                <a href="#security" className="text-brand-blue hover:underline">
+                <a href="#security" className="text-brand-primary hover:underline">
                   9. Data Security
                 </a>
-                <a href="#cookies" className="text-brand-blue hover:underline">
+                <a href="#cookies" className="text-brand-primary hover:underline">
                   10. Cookies
                 </a>
-                <a href="#contact-complaints" className="text-brand-blue hover:underline">
+                <a href="#contact-complaints" className="text-brand-primary hover:underline">
                   11. Contact & Complaints
                 </a>
-                <a href="#changes" className="text-brand-blue hover:underline">
+                <a href="#changes" className="text-brand-primary hover:underline">
                   12. Changes to This Policy
                 </a>
               </nav>
@@ -194,7 +194,7 @@ export default function PrivacyPolicyPage() {
                       <li>
                         <strong>Cookie Data:</strong> Analytics cookies, consent preferences (see
                         our{" "}
-                        <Link href="/cookie-policy" className="text-brand-blue hover:underline">
+                        <Link href="/cookie-policy" className="text-brand-primary hover:underline">
                           Cookie Policy
                         </Link>
                         )
@@ -767,7 +767,7 @@ export default function PrivacyPolicyPage() {
                 </ul>
                 <p>
                   Please see our comprehensive{" "}
-                  <Link href="/cookie-policy" className="text-brand-blue hover:underline">
+                  <Link href="/cookie-policy" className="text-brand-primary hover:underline">
                     Cookie Policy
                   </Link>
                   .
@@ -801,7 +801,7 @@ export default function PrivacyPolicyPage() {
                       </p>
                       <p>
                         <strong>Privacy Enquiries:</strong>{" "}
-                        <Link href="/contact" className="text-brand-blue hover:underline">
+                        <Link href="/contact" className="text-brand-primary hover:underline">
                           Contact Form
                         </Link>
                       </p>
@@ -827,7 +827,7 @@ export default function PrivacyPolicyPage() {
                         <strong>Website:</strong>{" "}
                         <a
                           href="https://ico.org.uk"
-                          className="text-brand-blue hover:underline"
+                          className="text-brand-primary hover:underline"
                           target="_blank"
                           rel="noopener noreferrer"
                         >
@@ -838,7 +838,7 @@ export default function PrivacyPolicyPage() {
                         <strong>Online:</strong>{" "}
                         <a
                           href="https://ico.org.uk/make-a-complaint/"
-                          className="text-brand-blue hover:underline"
+                          className="text-brand-primary hover:underline"
                           target="_blank"
                           rel="noopener noreferrer"
                         >

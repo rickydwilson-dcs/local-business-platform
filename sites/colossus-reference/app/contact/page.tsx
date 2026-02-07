@@ -2,8 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Schema } from "@/components/Schema";
-import { Breadcrumbs } from "@/components/ui/breadcrumbs";
+import { Schema, Breadcrumbs } from "@platform/core-components";
 import { PHONE_DISPLAY, PHONE_TEL, BUSINESS_EMAIL } from "@/lib/contact-info";
 
 type FormData = {
@@ -200,7 +199,10 @@ export default function ContactPage() {
               <h2 className="text-2xl font-semibold mb-6">Request a Free Quote</h2>
 
               {submitStatus === "success" && (
-                <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg">
+                <div
+                  role="alert"
+                  className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg"
+                >
                   <h3 className="text-green-800 font-semibold mb-1">Thank you!</h3>
                   <p className="text-green-700">
                     Your enquiry has been received. We&apos;ll get back to you within 24 hours with
@@ -210,7 +212,7 @@ export default function ContactPage() {
               )}
 
               {submitStatus === "error" && (
-                <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
+                <div role="alert" className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
                   <h3 className="text-red-800 font-semibold mb-1">Something went wrong</h3>
                   <p className="text-red-700">
                     Please try again or call us directly on the number below.
@@ -231,12 +233,19 @@ export default function ContactPage() {
                       name="name"
                       value={formData.name}
                       onChange={handleInputChange}
-                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-brand-blue focus:border-brand-blue ${
+                      aria-required="true"
+                      aria-invalid={!!errors.name}
+                      aria-describedby={errors.name ? "name-error" : undefined}
+                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-brand-primary ${
                         errors.name ? "border-red-500" : "border-gray-300"
                       }`}
                       placeholder="Your full name"
                     />
-                    {errors.name && <p className="mt-1 text-sm text-red-600">{errors.name}</p>}
+                    {errors.name && (
+                      <p id="name-error" role="alert" className="mt-1 text-sm text-red-600">
+                        {errors.name}
+                      </p>
+                    )}
                   </div>
 
                   <div>
@@ -249,12 +258,19 @@ export default function ContactPage() {
                       name="email"
                       value={formData.email}
                       onChange={handleInputChange}
-                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-brand-blue focus:border-brand-blue ${
+                      aria-required="true"
+                      aria-invalid={!!errors.email}
+                      aria-describedby={errors.email ? "email-error" : undefined}
+                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-brand-primary ${
                         errors.email ? "border-red-500" : "border-gray-300"
                       }`}
                       placeholder="your.email@example.com"
                     />
-                    {errors.email && <p className="mt-1 text-sm text-red-600">{errors.email}</p>}
+                    {errors.email && (
+                      <p id="email-error" role="alert" className="mt-1 text-sm text-red-600">
+                        {errors.email}
+                      </p>
+                    )}
                   </div>
                 </div>
 
@@ -269,7 +285,7 @@ export default function ContactPage() {
                       name="phone"
                       value={formData.phone}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-blue focus:border-brand-blue"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-brand-primary"
                       placeholder="01234 567890"
                     />
                   </div>
@@ -286,7 +302,7 @@ export default function ContactPage() {
                       name="projectType"
                       value={formData.projectType}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-blue focus:border-brand-blue"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-brand-primary"
                     >
                       <option value="residential">Residential</option>
                       <option value="commercial">Commercial</option>
@@ -309,7 +325,7 @@ export default function ContactPage() {
                       name="service"
                       value={formData.service}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-blue focus:border-brand-blue"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-brand-primary"
                     >
                       <option value="">Select a service...</option>
                       {services.map((service) => (
@@ -332,7 +348,7 @@ export default function ContactPage() {
                       name="location"
                       value={formData.location}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-blue focus:border-brand-blue"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-brand-primary"
                     >
                       <option value="">Select location...</option>
                       {locations.map((location) => (
@@ -354,7 +370,7 @@ export default function ContactPage() {
                     name="subject"
                     value={formData.subject}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-blue focus:border-brand-blue"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-brand-primary"
                     placeholder="e.g. Quote for house renovation scaffolding"
                   />
                 </div>
@@ -370,25 +386,32 @@ export default function ContactPage() {
                     rows={5}
                     value={formData.message}
                     onChange={handleInputChange}
-                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-brand-blue focus:border-brand-blue ${
+                    aria-required="true"
+                    aria-invalid={!!errors.message}
+                    aria-describedby={errors.message ? "message-error" : undefined}
+                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-brand-primary ${
                       errors.message ? "border-red-500" : "border-gray-300"
                     }`}
                     placeholder="Tell us about your project: building height, access requirements, duration, special considerations, etc."
                   />
-                  {errors.message && <p className="mt-1 text-sm text-red-600">{errors.message}</p>}
+                  {errors.message && (
+                    <p id="message-error" role="alert" className="mt-1 text-sm text-red-600">
+                      {errors.message}
+                    </p>
+                  )}
                 </div>
 
                 {/* Submit Button */}
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full bg-brand-blue text-white font-semibold py-4 px-6 rounded-lg hover:bg-brand-blue-hover focus:ring-2 focus:ring-brand-blue focus:ring-offset-2 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full bg-brand-primary text-white font-semibold py-4 px-6 rounded-lg hover:bg-brand-primary-hover focus:ring-2 focus:ring-brand-primary focus:ring-offset-2 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {isSubmitting ? "Sending..." : "Send Enquiry"}
                 </button>
 
                 {submitStatus === "success" && (
-                  <div className="p-4 bg-green-50 border border-green-200 rounded-lg">
+                  <div role="alert" className="p-4 bg-green-50 border border-green-200 rounded-lg">
                     <h3 className="text-green-800 font-semibold mb-1">Thank you!</h3>
                     <p className="text-green-700">
                       Your enquiry has been received. We&apos;ll get back to you within 24 hours
@@ -398,7 +421,7 @@ export default function ContactPage() {
                 )}
 
                 {submitStatus === "error" && (
-                  <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
+                  <div role="alert" className="p-4 bg-red-50 border border-red-200 rounded-lg">
                     <h3 className="text-red-800 font-semibold mb-1">Something went wrong</h3>
                     <p className="text-red-700">
                       Please try again or call us directly on the number below.
@@ -423,7 +446,7 @@ export default function ContactPage() {
                 <div className="space-y-6">
                   <div>
                     <h3 className="font-semibold text-gray-900 mb-2">📞 Phone</h3>
-                    <p className="text-lg text-brand-blue font-semibold">
+                    <p className="text-lg text-brand-primary font-semibold">
                       <a href={`tel:${PHONE_TEL}`} className="hover:underline">
                         {PHONE_DISPLAY}
                       </a>
@@ -439,7 +462,7 @@ export default function ContactPage() {
 
                   <div>
                     <h3 className="font-semibold text-gray-900 mb-2">📧 Email</h3>
-                    <p className="text-brand-blue">
+                    <p className="text-brand-primary">
                       <a href={`mailto:${BUSINESS_EMAIL}`} className="hover:underline">
                         {BUSINESS_EMAIL}
                       </a>
@@ -451,7 +474,7 @@ export default function ContactPage() {
                     <h3 className="font-semibold text-gray-900 mb-2">📍 Service Areas</h3>
                     <p className="text-gray-700">East Sussex, West Sussex, Kent & Surrey</p>
                     <p className="text-sm text-gray-800">
-                      <Link href="/locations" className="text-brand-blue hover:underline">
+                      <Link href="/locations" className="text-brand-primary hover:underline">
                         View All Coverage Areas
                       </Link>
                     </p>
@@ -479,7 +502,7 @@ export default function ContactPage() {
                       <li>
                         <Link
                           href="/services/access-scaffolding"
-                          className="text-brand-blue hover:underline"
+                          className="text-brand-primary hover:underline"
                         >
                           Access Scaffolding
                         </Link>
@@ -487,7 +510,7 @@ export default function ContactPage() {
                       <li>
                         <Link
                           href="/services/facade-scaffolding"
-                          className="text-brand-blue hover:underline"
+                          className="text-brand-primary hover:underline"
                         >
                           Facade Scaffolding
                         </Link>
@@ -495,7 +518,7 @@ export default function ContactPage() {
                       <li>
                         <Link
                           href="/services/edge-protection"
-                          className="text-brand-blue hover:underline"
+                          className="text-brand-primary hover:underline"
                         >
                           Edge Protection
                         </Link>
@@ -503,7 +526,7 @@ export default function ContactPage() {
                       <li>
                         <Link
                           href="/services"
-                          className="text-brand-blue hover:underline font-medium"
+                          className="text-brand-primary hover:underline font-medium"
                         >
                           View All Scaffolding Services
                         </Link>

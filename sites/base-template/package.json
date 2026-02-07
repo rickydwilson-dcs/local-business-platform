@@ -26,7 +26,6 @@
     "@platform/theme-system": "workspace:*",
     "@react-email/render": "^2.0.0",
     "@types/leaflet": "^1.9.20",
-    "@upstash/redis": "^1.35.4",
     "gray-matter": "^4.0.3",
     "leaflet": "^1.9.4",
     "lucide-react": "^0.544.0",

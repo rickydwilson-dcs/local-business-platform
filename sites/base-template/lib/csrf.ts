@@ -64,16 +64,25 @@ export async function validateCSRFToken(token: string): Promise<boolean> {
   try {
     const storedData: CSRFTokenData = JSON.parse(storedValue);
 
-    // Check if token matches
-    if (storedData.token !== token) {
-      return false;
-    }
-
     // Check if token has expired
     if (Date.now() > storedData.expires) {
+      await clearCSRFToken();
       return false;
     }
 
+    // Timing-safe comparison to prevent side-channel attacks
+    const storedBuf = Buffer.from(storedData.token);
+    const providedBuf = Buffer.from(token);
+    if (storedBuf.length !== providedBuf.length) {
+      return false;
+    }
+    const { timingSafeEqual } = await import('crypto');
+    if (!timingSafeEqual(storedBuf, providedBuf)) {
+      return false;
+    }
+
+    // Invalidate token after successful use (single-use)
+    await clearCSRFToken();
     return true;
   } catch {
     return false;
@@ -103,26 +112,64 @@ export function escapeHtml(text: string): string {
   return text.replace(/[&<>"']/g, (char) => htmlEscapes[char] || char);
 }
 
+// IPv4 pattern: 0-255.0-255.0-255.0-255
+const IPV4_PATTERN =
+  /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+
+// IPv6 pattern: valid hex groups separated by colons
+const IPV6_PATTERN = /^(?:[0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}$/;
+
+// IPv6 compressed pattern: allows :: for zero compression
+const IPV6_COMPRESSED_PATTERN =
+  /^((?:[0-9a-fA-F]{1,4}:)*)?::((?:[0-9a-fA-F]{1,4}:)*[0-9a-fA-F]{1,4})?$/;
+
+/**
+ * Validates if a string looks like a valid IPv4 or IPv6 address
+ */
+function isValidIp(ip: string): boolean {
+  if (!ip || typeof ip !== 'string') return false;
+
+  const trimmed = ip.trim();
+
+  if (IPV4_PATTERN.test(trimmed)) return true;
+  if (IPV6_PATTERN.test(trimmed) || IPV6_COMPRESSED_PATTERN.test(trimmed)) return true;
+
+  // IPv4-mapped IPv6 (e.g., ::ffff:192.168.1.1)
+  if (trimmed.toLowerCase().startsWith('::ffff:')) {
+    const ipv4Part = trimmed.substring(7);
+    return IPV4_PATTERN.test(ipv4Part);
+  }
+
+  return false;
+}
+
 /**
  * Extract client IP from request headers
+ *
+ * Prioritizes trusted proxy headers over x-forwarded-for to prevent
+ * IP spoofing. Validates extracted values against IP address patterns.
  */
 export function getClientIP(headers: Headers): string {
-  // Check common proxy headers
+  // Priority 1: x-real-ip — set by Vercel from the actual client connection
+  const realIP = headers.get('x-real-ip');
+  if (realIP && isValidIp(realIP)) {
+    return realIP.trim();
+  }
+
+  // Priority 2: cf-connecting-ip — set by Cloudflare from the client connection
+  const cfIP = headers.get('cf-connecting-ip');
+  if (cfIP && isValidIp(cfIP)) {
+    return cfIP.trim();
+  }
+
+  // Priority 3: x-forwarded-for — can be spoofed, checked last
+  // Take only the first IP (leftmost = original client)
   const forwardedFor = headers.get('x-forwarded-for');
   if (forwardedFor) {
-    // Take the first IP if multiple are present
-    return forwardedFor.split(',')[0].trim();
-  }
-
-  const realIP = headers.get('x-real-ip');
-  if (realIP) {
-    return realIP;
-  }
-
-  // Vercel-specific header
-  const vercelIP = headers.get('x-vercel-forwarded-for');
-  if (vercelIP) {
-    return vercelIP.split(',')[0].trim();
+    const firstIp = forwardedFor.split(',')[0].trim();
+    if (isValidIp(firstIp)) {
+      return firstIp;
+    }
   }
 
   return 'unknown';

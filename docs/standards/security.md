@@ -12,7 +12,7 @@ Security is critical for protecting customer data and maintaining business reput
 
 ## Core Principles
 
-### 1. Rate Limiting (Upstash Redis)
+### 1. Rate Limiting (Supabase)
 
 All public-facing APIs must be rate limited to prevent abuse.
 
@@ -34,39 +34,26 @@ Client IP addresses must be extracted from trusted headers only, with validation
 
 ## Rate Limiting
 
-### Implementation (Upstash Redis)
+### Implementation (Supabase)
+
+Rate limiting uses the `rate_limits` table in Supabase with an atomic RPC function. The implementation lives in `packages/core-components/src/lib/rate-limiter.ts` and is shared across all sites.
 
 ```typescript
-// lib/rate-limiter.ts
-import { Redis } from "@upstash/redis";
+// Import from core-components
+import { checkRateLimit, rateLimitMiddleware } from "@platform/core-components/lib/rate-limiter";
 
-const redis = new Redis({
-  url: process.env.KV_REST_API_URL!,
-  token: process.env.KV_REST_API_TOKEN!,
-});
-
-export async function checkRateLimit(
-  identifier: string,
-  limit: number = 5,
-  windowSeconds: number = 300
-): Promise<{ allowed: boolean; limit: number; remaining: number; resetAt: number }> {
-  const key = `rate_limit:${identifier}`;
-  const current = await redis.incr(key);
-
-  if (current === 1) {
-    await redis.expire(key, windowSeconds);
-  }
-
-  const ttl = await redis.ttl(key);
-
-  return {
-    allowed: current <= limit,
-    limit,
-    remaining: Math.max(0, limit - current),
-    resetAt: Date.now() + ttl * 1000,
-  };
+// Direct check (colossus pattern)
+const result = await checkRateLimit(ip);
+if (!result.allowed) {
+  /* return 429 */
 }
+
+// Middleware wrapper (base-template/smiths pattern)
+const response = await rateLimitMiddleware(ip);
+if (response) return response; // 429
 ```
+
+Fails open if Supabase is unavailable (allows request, logs error).
 
 ### Configuration
 
@@ -226,9 +213,9 @@ export function isValidIp(ip: string): boolean {
 ### Required Secrets
 
 ```bash
-# Rate Limiting (Upstash Redis)
-KV_REST_API_URL=https://your-database.upstash.io
-KV_REST_API_TOKEN=your-token-here
+# Rate Limiting (Supabase)
+SUPABASE_URL=https://your-project.supabase.co
+SUPABASE_SERVICE_KEY=your-service-role-key
 
 # Email (Resend)
 RESEND_API_KEY=re_your_api_key_here
@@ -385,7 +372,7 @@ interface ConsentState {
 | Anti-Pattern                | Why It's Wrong     | Correct Approach       |
 | --------------------------- | ------------------ | ---------------------- |
 | API keys in code            | Security breach    | Environment variables  |
-| No rate limiting            | DDoS vulnerability | Upstash Redis limiting |
+| No rate limiting            | DDoS vulnerability | Supabase rate limiting |
 | No input validation         | Injection attacks  | Zod schema validation  |
 | Tracking without consent    | GDPR violation     | Consent-first approach |
 | Storing passwords plaintext | Data breach risk   | Never store passwords  |

@@ -2,11 +2,11 @@ import { Metadata } from "next";
 import { absUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Contact Colossus Scaffolding | Free Quotes & Professional Service",
+  title: "Contact Colossus Scaffolding | Free Quotes",
   description:
     "Contact Colossus Scaffolding for free quotes on professional scaffolding services across South East UK. TG20:21 compliant, CISRS qualified teams, rapid response.",
   openGraph: {
-    title: "Contact Colossus Scaffolding | Free Quotes & Professional Service",
+    title: "Contact Colossus Scaffolding | Free Quotes",
     description:
       "Contact Colossus Scaffolding for free quotes on professional scaffolding services across South East UK. TG20:21 compliant, CISRS qualified teams.",
     url: absUrl("/contact"),
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Contact Colossus Scaffolding | Free Quotes & Professional Service",
+    title: "Contact Colossus Scaffolding | Free Quotes",
     description:
       "Contact Colossus Scaffolding for free quotes on professional scaffolding services across South East UK. TG20:21 compliant, CISRS qualified teams.",
     images: [absUrl("/static/logo.png")],

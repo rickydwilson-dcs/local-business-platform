@@ -3,9 +3,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import type { MDXComponents as MDXMap } from "mdx/types";
-import { Schema } from "@/components/Schema";
-import { ServiceBenefits } from "@/components/ui/service-benefits";
-import { ContentCard } from "@/components/ui/content-card";
+import { Schema, ServiceBenefits, ContentCard } from "@platform/core-components";
 
 // ============================================================================
 // MDX Wrapper Components for reusing existing UI components
@@ -141,7 +139,7 @@ const CoverageSection: React.FC<CoverageSectionProps> = ({
         {/* Badge */}
         {badge && (
           <div className="flex justify-center mb-6">
-            <span className="inline-flex items-center gap-2 px-4 py-2 bg-brand-blue/10 text-brand-blue text-sm font-medium rounded-full">
+            <span className="inline-flex items-center gap-2 px-4 py-2 bg-brand-primary/10 text-brand-primary text-sm font-medium rounded-full">
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path
                   strokeLinecap="round"
@@ -167,7 +165,7 @@ const CoverageSection: React.FC<CoverageSectionProps> = ({
           {titleHighlight && (
             <>
               <br />
-              <span className="text-brand-blue">{titleHighlight}</span>
+              <span className="text-brand-primary">{titleHighlight}</span>
             </>
           )}
         </h2>
@@ -183,9 +181,9 @@ const CoverageSection: React.FC<CoverageSectionProps> = ({
             <div key={idx} className="bg-white rounded-2xl p-6 shadow-sm">
               {/* Region Header */}
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 bg-brand-blue/10 rounded-full flex items-center justify-center">
+                <div className="w-10 h-10 bg-brand-primary/10 rounded-full flex items-center justify-center">
                   <svg
-                    className="w-5 h-5 text-brand-blue"
+                    className="w-5 h-5 text-brand-primary"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -213,7 +211,7 @@ const CoverageSection: React.FC<CoverageSectionProps> = ({
                   <Link
                     key={locIdx}
                     href={loc.href}
-                    className="px-4 py-2 bg-gray-100 hover:ring-2 hover:ring-brand-blue text-gray-700 text-sm font-medium rounded-full transition-all"
+                    className="px-4 py-2 bg-gray-100 hover:ring-2 hover:ring-brand-primary text-gray-700 text-sm font-medium rounded-full transition-all"
                   >
                     {loc.name}
                   </Link>
@@ -227,7 +225,7 @@ const CoverageSection: React.FC<CoverageSectionProps> = ({
         <div className="flex justify-center">
           <Link
             href={ctaHref}
-            className="inline-flex items-center gap-2 px-8 py-4 bg-brand-blue text-white font-semibold rounded-xl hover:bg-brand-blue-hover transition-colors"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-brand-primary text-white font-semibold rounded-xl hover:bg-brand-primary-hover transition-colors"
           >
             {ctaText}
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -304,7 +302,7 @@ const ServiceIntro: React.FC<ServiceIntroProps> = ({
           <div className="bg-gray-50 rounded-2xl p-6 border border-gray-200 h-fit">
             <h3 className="text-xl font-semibold text-gray-900 mb-4 flex items-center gap-2">
               <svg
-                className="h-5 w-5 text-brand-blue"
+                className="h-5 w-5 text-brand-primary"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -324,7 +322,7 @@ const ServiceIntro: React.FC<ServiceIntroProps> = ({
                   key={index}
                   className="flex items-center gap-3 p-3 bg-white rounded-lg shadow-sm"
                 >
-                  <div className="flex-shrink-0 w-2 h-2 bg-brand-blue rounded-full"></div>
+                  <div className="flex-shrink-0 w-2 h-2 bg-brand-primary rounded-full"></div>
                   <span className="text-gray-900 font-medium text-sm">{item}</span>
                 </div>
               ))}
@@ -333,7 +331,7 @@ const ServiceIntro: React.FC<ServiceIntroProps> = ({
             <div className="mt-6 pt-6 border-t border-gray-200">
               <div className="flex items-center gap-2 text-sm text-gray-800 mb-4">
                 <svg
-                  className="h-4 w-4 text-brand-blue"
+                  className="h-4 w-4 text-brand-primary"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -352,7 +350,7 @@ const ServiceIntro: React.FC<ServiceIntroProps> = ({
               </p>
               <a
                 href="/contact"
-                className="w-full inline-flex items-center justify-center px-4 py-3 bg-brand-blue text-white font-semibold rounded-lg hover:bg-brand-blue-hover transition-colors text-sm"
+                className="w-full inline-flex items-center justify-center px-4 py-3 bg-brand-primary text-white font-semibold rounded-lg hover:bg-brand-primary-hover transition-colors text-sm"
               >
                 {sidebarCta}
               </a>
@@ -372,7 +370,7 @@ const ServiceIntro: React.FC<ServiceIntroProps> = ({
               <div className="grid md:grid-cols-2 gap-4">
                 {processSteps.map((step, index) => (
                   <div key={index} className="flex items-start gap-3 p-4 bg-gray-50 rounded-lg">
-                    <div className="flex-shrink-0 w-6 h-6 bg-brand-blue rounded-full flex items-center justify-center mt-0.5">
+                    <div className="flex-shrink-0 w-6 h-6 bg-brand-primary rounded-full flex items-center justify-center mt-0.5">
                       <svg
                         className="h-4 w-4 text-white"
                         fill="none"
@@ -393,9 +391,9 @@ const ServiceIntro: React.FC<ServiceIntroProps> = ({
               </div>
 
               {/* TG20:21 Compliance callout */}
-              <div className="mt-8 mb-8 p-6 bg-brand-blue/5 rounded-2xl border border-brand-blue/10">
+              <div className="mt-8 mb-8 p-6 bg-brand-primary/5 rounded-2xl border border-brand-primary/10">
                 <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0 w-12 h-12 bg-brand-blue rounded-lg flex items-center justify-center">
+                  <div className="flex-shrink-0 w-12 h-12 bg-brand-primary rounded-lg flex items-center justify-center">
                     <svg
                       className="h-6 w-6 text-white"
                       fill="none"
@@ -596,9 +594,9 @@ const FeatureCard: React.FC<FeatureCardProps> = ({ title, icon = "scaffold", chi
   return (
     <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm hover:shadow-md transition-shadow">
       <div className="flex items-start gap-4">
-        <div className="flex-shrink-0 w-12 h-12 bg-brand-blue/10 rounded-xl flex items-center justify-center">
+        <div className="flex-shrink-0 w-12 h-12 bg-brand-primary/10 rounded-xl flex items-center justify-center">
           <svg
-            className="w-6 h-6 text-brand-blue"
+            className="w-6 h-6 text-brand-primary"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -718,10 +716,10 @@ const CheckList: React.FC<CheckListProps> = ({ title, type = "check", children }
                 </svg>
               )}
               {type === "bullet" && (
-                <span className="w-2 h-2 bg-brand-blue rounded-full flex-shrink-0 mt-2" />
+                <span className="w-2 h-2 bg-brand-primary rounded-full flex-shrink-0 mt-2" />
               )}
               {type === "number" && (
-                <span className="w-6 h-6 bg-brand-blue text-white text-sm font-semibold rounded-full flex items-center justify-center flex-shrink-0">
+                <span className="w-6 h-6 bg-brand-primary text-white text-sm font-semibold rounded-full flex items-center justify-center flex-shrink-0">
                   {idx + 1}
                 </span>
               )}
@@ -742,11 +740,11 @@ interface QuoteBlockProps {
 }
 const QuoteBlock: React.FC<QuoteBlockProps> = ({ author, role, children }) => {
   return (
-    <blockquote className="my-8 border-l-4 border-brand-blue bg-gray-50 rounded-r-xl p-6">
+    <blockquote className="my-8 border-l-4 border-brand-primary bg-gray-50 rounded-r-xl p-6">
       <div className="text-gray-800 text-lg italic leading-relaxed mb-4">{children}</div>
       {author && (
         <footer className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-brand-blue rounded-full flex items-center justify-center text-white font-semibold">
+          <div className="w-10 h-10 bg-brand-primary rounded-full flex items-center justify-center text-white font-semibold">
             {author.charAt(0)}
           </div>
           <div>
@@ -821,7 +819,7 @@ const StepByStep: React.FC<StepByStepProps> = ({ title, children }) => {
         {steps.map((step, idx) => (
           <div key={idx} className="flex gap-4">
             <div className="flex-shrink-0">
-              <div className="w-10 h-10 bg-brand-blue text-white rounded-full flex items-center justify-center font-bold text-lg">
+              <div className="w-10 h-10 bg-brand-primary text-white rounded-full flex items-center justify-center font-bold text-lg">
                 {idx + 1}
               </div>
             </div>
@@ -851,7 +849,7 @@ const mdxComponents: MDXMap = {
       return (
         <Link
           href={href}
-          className="text-brand-blue hover:text-brand-blue-hover font-medium underline underline-offset-2 transition-colors"
+          className="text-brand-primary hover:text-brand-primary-hover font-medium underline underline-offset-2 transition-colors"
         >
           {props.children}
         </Link>
@@ -860,7 +858,7 @@ const mdxComponents: MDXMap = {
     return (
       <a
         {...props}
-        className="text-brand-blue hover:text-brand-blue-hover font-medium underline underline-offset-2 transition-colors"
+        className="text-brand-primary hover:text-brand-primary-hover font-medium underline underline-offset-2 transition-colors"
       />
     );
   },
@@ -897,7 +895,7 @@ const mdxComponents: MDXMap = {
   // List item - card with blue dot indicator
   li: (p) => (
     <li className="flex items-start gap-3 p-4 bg-gray-50 rounded-lg list-none">
-      <div className="flex-shrink-0 w-2 h-2 bg-brand-blue rounded-full mt-2" />
+      <div className="flex-shrink-0 w-2 h-2 bg-brand-primary rounded-full mt-2" />
       <div className="text-gray-800">{p.children}</div>
     </li>
   ),

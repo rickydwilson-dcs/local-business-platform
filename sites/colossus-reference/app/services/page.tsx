@@ -1,9 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { Schema } from "@/components/Schema";
-import { ContentGrid } from "@/components/ui/content-grid";
+import { Schema, ContentGrid, Breadcrumbs } from "@platform/core-components";
 import { getContentItems } from "@/lib/content";
-import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 import { PHONE_DISPLAY, PHONE_TEL } from "@/lib/contact-info";
 
 export const dynamic = "force-static";
@@ -42,7 +40,7 @@ export default async function ServicesPage() {
         </div>
       </div>
 
-      <main className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100">
+      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100">
         {/* Hero Section */}
         <section className="section-standard lg:py-24 bg-white">
           <div className="container-standard">
@@ -76,7 +74,7 @@ export default async function ServicesPage() {
               <div className="flex flex-wrap justify-center gap-2 sm:gap-4">
                 <div className="inline-flex items-center gap-2 bg-gray-100 px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm">
                   <svg
-                    className="h-3 w-3 sm:h-4 sm:w-4 text-brand-blue"
+                    className="h-3 w-3 sm:h-4 sm:w-4 text-brand-primary"
                     fill="currentColor"
                     viewBox="0 0 20 20"
                   >
@@ -90,7 +88,7 @@ export default async function ServicesPage() {
                 </div>
                 <div className="inline-flex items-center gap-2 bg-gray-100 px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm">
                   <svg
-                    className="h-3 w-3 sm:h-4 sm:w-4 text-brand-blue"
+                    className="h-3 w-3 sm:h-4 sm:w-4 text-brand-primary"
                     fill="currentColor"
                     viewBox="0 0 20 20"
                   >
@@ -161,7 +159,7 @@ export default async function ServicesPage() {
             </div>
           </div>
         </section>
-      </main>
+      </div>
 
       <Schema
         service={{

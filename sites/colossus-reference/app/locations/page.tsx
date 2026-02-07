@@ -1,24 +1,26 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { getAllCounties } from "@/lib/locations-dropdown";
+import { getAllCounties, getAllTownLocations, MAP_CENTER, MAP_ZOOM } from "@/lib/locations";
 import { absUrl } from "@/lib/site";
-import { PageLayout } from "@/components/layouts/page-layout";
-import { Breadcrumbs } from "@/components/ui/breadcrumbs";
-import { CoverageStatsSection } from "@/components/ui/coverage-stats-section";
-import { TownFinderSection } from "@/components/ui/town-finder-section";
-import { CountyGatewayCards } from "@/components/ui/county-gateway-cards";
-import { LocalSpecialistsBenefits } from "@/components/ui/local-specialists-benefits";
-import { CoverageMapSection } from "@/components/ui/coverage-map-section";
+import {
+  PageLayout,
+  Breadcrumbs,
+  CoverageStatsSection,
+  LocalSpecialistsBenefits,
+  CoverageMapSection,
+} from "@platform/core-components";
+import { TownFinderSection } from "@platform/core-components/components/ui/town-finder-section";
+import { CountyGatewayCards } from "@platform/core-components/components/ui/county-gateway-cards";
 import { PHONE_DISPLAY, PHONE_TEL } from "@/lib/contact-info";
 
 export const dynamic = "force-static";
 
 export const metadata: Metadata = {
-  title: "Professional Scaffolding Across South East England | 30+ Towns Covered",
+  title: "Scaffolding Across South East | 30+ Towns",
   description:
     "Professional scaffolding services across 30+ towns in East Sussex, West Sussex, Kent, and Surrey. Local specialists with heritage expertise and established council relationships.",
   openGraph: {
-    title: "Professional Scaffolding Across South East England | 30+ Towns Covered",
+    title: "Scaffolding Across South East | 30+ Towns",
     description:
       "From Brighton's seafront heritage to Canterbury's World Heritage sites, we provide expert scaffolding with genuine local knowledge and established council relationships.",
     url: absUrl("/locations"),
@@ -36,7 +38,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Professional Scaffolding Across South East England | 30+ Towns Covered",
+    title: "Scaffolding Across South East | 30+ Towns",
     description:
       "Local scaffolding specialists with heritage expertise and council relationships across the South East.",
     images: [absUrl("/static/logo.png")],
@@ -46,8 +48,9 @@ export const metadata: Metadata = {
   },
 };
 
-export default function LocationsPage() {
-  const counties = getAllCounties();
+export default async function LocationsPage() {
+  const counties = await getAllCounties();
+  const townLocations = await getAllTownLocations();
 
   const breadcrumbItems = [{ name: "Locations", href: "/locations", current: true }];
 
@@ -172,7 +175,7 @@ export default function LocationsPage() {
                 <div className="flex flex-wrap justify-center gap-2 sm:gap-4">
                   <div className="inline-flex items-center gap-2 bg-gray-100 px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm">
                     <svg
-                      className="h-3 w-3 sm:h-4 sm:w-4 text-brand-blue"
+                      className="h-3 w-3 sm:h-4 sm:w-4 text-brand-primary"
                       fill="currentColor"
                       viewBox="0 0 20 20"
                     >
@@ -186,7 +189,7 @@ export default function LocationsPage() {
                   </div>
                   <div className="inline-flex items-center gap-2 bg-gray-100 px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm">
                     <svg
-                      className="h-3 w-3 sm:h-4 sm:w-4 text-brand-blue"
+                      className="h-3 w-3 sm:h-4 sm:w-4 text-brand-primary"
                       fill="currentColor"
                       viewBox="0 0 20 20"
                     >
@@ -210,16 +213,25 @@ export default function LocationsPage() {
           <CoverageStatsSection />
 
           {/* Town Finder */}
-          <TownFinderSection />
+          <TownFinderSection counties={counties} />
 
           {/* County Gateway Cards */}
-          <CountyGatewayCards />
+          <CountyGatewayCards counties={counties} />
 
           {/* Local Specialists Benefits */}
           <LocalSpecialistsBenefits />
 
           {/* Coverage Map */}
-          <CoverageMapSection />
+          <CoverageMapSection
+            locations={townLocations}
+            counties={counties.map((c) => ({
+              name: c.name,
+              slug: c.slug,
+              townCount: c.towns.length,
+            }))}
+            center={MAP_CENTER}
+            zoom={MAP_ZOOM}
+          />
 
           {/* Final CTA */}
           <section className="section-standard bg-white">

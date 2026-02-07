@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
+import { getImageUrl } from "@/lib/image";
 
 interface FeatureCard {
   title: string;
@@ -63,7 +64,14 @@ export function LargeFeatureCards({
               {/* Image or Icon */}
               {card.image && (
                 <div className="relative w-full h-48 mb-6 rounded-xl overflow-hidden bg-gray-100">
-                  <Image src={card.image} alt={card.title} fill className="object-cover" />
+                  <Image
+                    src={getImageUrl(card.image)}
+                    alt={`${card.title} - professional scaffolding solution by Colossus Scaffolding`}
+                    title={`${card.title} scaffolding services`}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className="object-cover"
+                  />
                 </div>
               )}
 

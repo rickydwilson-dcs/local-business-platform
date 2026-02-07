@@ -22,7 +22,7 @@ export function LocationFAQ({
         <div className="mx-auto w-full lg:w-[90%]">
           <div className="text-center mb-12">
             <h2 className="heading-section">
-              {title} About Scaffolding in {location}
+              {location} Scaffolding FAQ - {title}
             </h2>
             {description && <p className="text-body-lg">{description}</p>}
           </div>
@@ -59,7 +59,13 @@ export function LocationFAQ({
                 Get Expert Advice
               </a>
               <a href="tel:01424466661" className="btn-secondary gap-2">
-                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg
+                  aria-hidden="true"
+                  className="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"

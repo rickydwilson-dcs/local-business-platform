@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { absUrl } from "@/lib/site";
 import { Metadata } from "next";
-import { Breadcrumbs } from "@/components/ui/breadcrumbs";
+import { Breadcrumbs } from "@platform/core-components";
 import { PHONE_DISPLAY, BUSINESS_EMAIL, ADDRESS } from "@/lib/contact-info";
 
 export const metadata: Metadata = {
@@ -59,22 +59,22 @@ export default function CookiePolicyPage() {
             <div className="bg-gray-50 rounded-2xl p-8 mb-12">
               <h2 className="text-xl font-semibold mb-4">Table of Contents</h2>
               <nav className="grid md:grid-cols-2 gap-2">
-                <a href="#what-are-cookies" className="text-brand-blue hover:underline">
+                <a href="#what-are-cookies" className="text-brand-primary hover:underline">
                   1. What are Cookies?
                 </a>
-                <a href="#how-we-use-cookies" className="text-brand-blue hover:underline">
+                <a href="#how-we-use-cookies" className="text-brand-primary hover:underline">
                   2. How We Use Cookies
                 </a>
-                <a href="#cookie-categories" className="text-brand-blue hover:underline">
+                <a href="#cookie-categories" className="text-brand-primary hover:underline">
                   3. Cookie Categories
                 </a>
-                <a href="#managing-cookies" className="text-brand-blue hover:underline">
+                <a href="#managing-cookies" className="text-brand-primary hover:underline">
                   4. Managing Your Cookies
                 </a>
-                <a href="#third-party-cookies" className="text-brand-blue hover:underline">
+                <a href="#third-party-cookies" className="text-brand-primary hover:underline">
                   5. Third-Party Cookies
                 </a>
-                <a href="#contact-us" className="text-brand-blue hover:underline">
+                <a href="#contact-us" className="text-brand-primary hover:underline">
                   6. Contact Us
                 </a>
               </nav>
@@ -395,7 +395,7 @@ export default function CookiePolicyPage() {
                       Privacy Policy:{" "}
                       <a
                         href="https://policies.google.com/privacy"
-                        className="text-brand-blue hover:underline"
+                        className="text-brand-primary hover:underline"
                         target="_blank"
                         rel="noopener noreferrer"
                       >
@@ -414,7 +414,7 @@ export default function CookiePolicyPage() {
                       Privacy Policy:{" "}
                       <a
                         href="https://www.facebook.com/privacy/policy/"
-                        className="text-brand-blue hover:underline"
+                        className="text-brand-primary hover:underline"
                         target="_blank"
                         rel="noopener noreferrer"
                       >
@@ -433,7 +433,7 @@ export default function CookiePolicyPage() {
                       Privacy Policy:{" "}
                       <a
                         href="https://policies.google.com/privacy"
-                        className="text-brand-blue hover:underline"
+                        className="text-brand-primary hover:underline"
                         target="_blank"
                         rel="noopener noreferrer"
                       >
@@ -472,7 +472,7 @@ export default function CookiePolicyPage() {
                         <p>Email: {BUSINESS_EMAIL}</p>
                         <p>
                           Privacy enquiries:{" "}
-                          <Link href="/contact" className="text-brand-blue hover:underline">
+                          <Link href="/contact" className="text-brand-primary hover:underline">
                             Contact Form
                           </Link>
                         </p>
@@ -485,7 +485,7 @@ export default function CookiePolicyPage() {
                   <p className="text-sm text-blue-800">
                     <strong>Your Rights:</strong> You have rights under UK data protection law
                     regarding your personal data. Please see our{" "}
-                    <Link href="/privacy-policy" className="text-brand-blue hover:underline">
+                    <Link href="/privacy-policy" className="text-brand-primary hover:underline">
                       Privacy Policy
                     </Link>{" "}
                     for full details of your rights and how to exercise them.

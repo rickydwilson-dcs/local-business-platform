@@ -2,12 +2,26 @@
 
 import { useState, useMemo } from "react";
 import Link from "next/link";
-import { getAllCounties } from "@/lib/locations-dropdown";
 
-export function TownFinderSection() {
+interface Town {
+  name: string;
+  slug: string;
+  href: string;
+}
+
+interface County {
+  name: string;
+  slug: string;
+  towns: Town[];
+}
+
+interface TownFinderSectionProps {
+  counties: County[];
+}
+
+export function TownFinderSection({ counties }: TownFinderSectionProps) {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCounty, setSelectedCounty] = useState("all");
-  const counties = getAllCounties();
 
   const allTowns = useMemo(() => {
     return counties.flatMap((county) =>
@@ -117,14 +131,6 @@ export function TownFinderSection() {
                         {town.name}
                       </div>
                       <div className="text-sm text-gray-700">{town.county}</div>
-                      {town.isRichContent && (
-                        <div className="inline-flex items-center gap-1 mt-1">
-                          <span className="w-2 h-2 bg-brand-primary rounded-full"></span>
-                          <span className="text-xs text-brand-primary font-medium">
-                            Specialist Coverage
-                          </span>
-                        </div>
-                      )}
                     </div>
                     <svg
                       className="w-5 h-5 text-gray-400 group-hover:text-brand-primary transition-colors"

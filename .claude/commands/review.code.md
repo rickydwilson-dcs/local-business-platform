@@ -295,10 +295,10 @@ Task tool parameters:
 > **Step 1: Read the project architecture docs**
 > Read these files — they describe how the system is designed to work:
 >
-> - `docs/architecture/ARCHITECTURE.md` — high-level system overview
-> - `docs/architecture/HOW_DYNAMIC_ROUTING_WORKS.md` — MDX → static pages via [slug] routes
-> - `docs/architecture/HOW_THEME_SYSTEM_WORKS.md` — config → CSS variables → Tailwind classes
-> - `docs/architecture/HOW_BUILD_PIPELINE_WORKS.md` — Turborepo, packages, workspace linking
+> - `docs/architecture/architecture.md` — high-level system overview
+> - `docs/architecture/how-dynamic-routing-works.md` — MDX → static pages via [slug] routes
+> - `docs/architecture/how-theme-system-works.md` — config → CSS variables → Tailwind classes
+> - `docs/architecture/how-build-pipeline-works.md` — Turborepo, packages, workspace linking
 >
 > Also read the project root `CLAUDE.md` for the key architecture rules.
 >
