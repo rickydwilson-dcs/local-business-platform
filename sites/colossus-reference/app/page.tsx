@@ -1,8 +1,6 @@
 import Link from "next/link";
-import { HeroSection } from "@/components/ui/hero-section";
-import { ServicesOverview } from "@/components/ui/services-overview";
-import { CoverageAreas } from "@/components/ui/coverage-areas";
-import { PageLayout } from "@/components/layouts/page-layout";
+import { HeroSection, CoverageAreas, PageLayout } from "@platform/core-components";
+import { ServicesOverview } from "@platform/core-components/components/ui/services-overview";
 import { absUrl } from "@/lib/site";
 import { getLocalBusinessSchema } from "@/lib/schema";
 import { PHONE_DISPLAY, PHONE_TEL } from "@/lib/contact-info";

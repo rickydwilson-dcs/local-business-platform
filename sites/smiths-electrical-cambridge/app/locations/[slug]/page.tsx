@@ -8,11 +8,14 @@
 
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
-import { Schema } from '@/components/Schema';
-import { Breadcrumbs } from '@/components/ui/breadcrumbs';
-import { LocationHero } from '@/components/ui/location-hero';
-import { FAQSection, type FAQItem } from '@/components/ui/faq-section';
-import { CTASection } from '@/components/ui/cta-section';
+import {
+  Schema,
+  Breadcrumbs,
+  LocationHero,
+  FAQSection,
+  CTASection,
+  type FAQItem,
+} from '@platform/core-components';
 import { getLocations, getLocation } from '@/lib/content';
 import { loadMdx } from '@/lib/mdx';
 import { getImageUrl } from '@/lib/image';

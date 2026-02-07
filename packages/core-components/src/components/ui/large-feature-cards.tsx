@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
+import { getImageUrl } from "@/lib/image";
 
 interface FeatureCard {
   title: string;
@@ -54,7 +55,7 @@ export function LargeFeatureCards({
               {/* Badge */}
               {card.badge && (
                 <div className="absolute -top-3 left-6">
-                  <span className="inline-flex px-3 py-1 bg-brand-primary text-white text-sm font-semibold rounded-full">
+                  <span className="inline-flex px-3 py-1 bg-brand-blue text-white text-sm font-semibold rounded-full">
                     {card.badge}
                   </span>
                 </div>
@@ -63,13 +64,20 @@ export function LargeFeatureCards({
               {/* Image or Icon */}
               {card.image && (
                 <div className="relative w-full h-48 mb-6 rounded-xl overflow-hidden bg-gray-100">
-                  <Image src={card.image} alt={card.title} fill className="object-cover" />
+                  <Image
+                    src={getImageUrl(card.image)}
+                    alt={`${card.title} - professional scaffolding solution by Colossus Scaffolding`}
+                    title={`${card.title} scaffolding services`}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className="object-cover"
+                  />
                 </div>
               )}
 
               {card.icon && !card.image && (
                 <div className="flex justify-center mb-6">
-                  <div className="w-16 h-16 bg-brand-primary bg-opacity-10 rounded-xl flex items-center justify-center text-brand-primary">
+                  <div className="w-16 h-16 bg-brand-blue bg-opacity-10 rounded-xl flex items-center justify-center text-brand-blue">
                     {card.icon}
                   </div>
                 </div>
@@ -86,7 +94,7 @@ export function LargeFeatureCards({
                   <ul className="space-y-3 mb-8 flex-1">
                     {card.details.map((detail, detailIndex) => (
                       <li key={detailIndex} className="flex items-start gap-3">
-                        <div className="flex-shrink-0 w-2 h-2 bg-brand-primary rounded-full mt-3"></div>
+                        <div className="flex-shrink-0 w-2 h-2 bg-brand-blue rounded-full mt-3"></div>
                         <span className="text-gray-700">{detail}</span>
                       </li>
                     ))}

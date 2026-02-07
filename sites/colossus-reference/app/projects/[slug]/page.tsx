@@ -2,12 +2,14 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
-import { Schema } from "@/components/Schema";
-import { Breadcrumbs } from "@/components/ui/breadcrumbs";
-import { BlogPostHero } from "@/components/ui/blog-post-hero";
-import { ServiceFAQ } from "@/components/ui/service-faq";
-import { ServiceCTA } from "@/components/ui/service-cta";
-import { ArticleCallout } from "@/components/ui/article-callout";
+import {
+  Schema,
+  Breadcrumbs,
+  BlogPostHero,
+  ServiceFAQ,
+  ServiceCTA,
+  ArticleCallout,
+} from "@platform/core-components";
 import { getProjects, getProject, type Project } from "@/lib/content";
 import { getImageUrl } from "@/lib/image";
 import { absUrl } from "@/lib/site";

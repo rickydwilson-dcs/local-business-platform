@@ -84,7 +84,7 @@ export function LocalSpecialistsBenefits() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
           {benefits.map((benefit, index) => (
             <div key={index} className="flex items-start gap-4">
-              <div className="flex-shrink-0 w-16 h-16 bg-gray-100 rounded-xl flex items-center justify-center text-brand-primary">
+              <div className="flex-shrink-0 w-16 h-16 bg-gray-100 rounded-xl flex items-center justify-center text-brand-blue">
                 {iconComponents[benefit.icon as keyof typeof iconComponents]}
               </div>
               <div className="flex-1">

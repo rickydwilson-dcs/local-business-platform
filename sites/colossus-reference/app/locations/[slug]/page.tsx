@@ -4,16 +4,18 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import matter from "gray-matter";
 
-import { PageLayout } from "@/components/layouts/page-layout";
-import { HeroSection } from "@/components/ui/hero-section";
-import { LargeFeatureCards } from "@/components/ui/large-feature-cards";
-import { ServiceShowcase } from "@/components/ui/service-showcase";
-import { PricingPackages } from "@/components/ui/pricing-packages";
-import { LocalAuthorityExpertise } from "@/components/ui/local-authority-expertise";
-import { LocationFAQ } from "@/components/ui/location-faq";
-import { CTASection } from "@/components/ui/cta-section";
-import { Breadcrumbs } from "@/components/ui/breadcrumbs";
-import { Schema } from "@/components/Schema";
+import {
+  PageLayout,
+  HeroSection,
+  LargeFeatureCards,
+  ServiceShowcase,
+  PricingPackages,
+  LocalAuthorityExpertise,
+  LocationFAQ,
+  CTASection,
+  Breadcrumbs,
+  Schema,
+} from "@platform/core-components";
 import { absUrl } from "@/lib/site";
 import { getServiceAreaSchema } from "@/lib/schema";
 import { PHONE_DISPLAY } from "@/lib/contact-info";

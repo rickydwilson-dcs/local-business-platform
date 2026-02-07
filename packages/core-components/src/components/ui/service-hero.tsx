@@ -1,5 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
+import { getImageUrl } from "@/lib/image";
+import { PHONE_DISPLAY, PHONE_TEL } from "@/lib/contact-info";
 
 interface ServiceHeroProps {
   badge?: string;
@@ -17,12 +19,15 @@ export function ServiceHero(props: ServiceHeroProps) {
     badge,
     title,
     description,
-    phone = "01424 466661",
+    phone = PHONE_DISPLAY,
     trustBadges = ["TG20:21 Compliant", "CHAS Accredited", "£10M Insured"],
     heroImage,
     ctaText = "Get Free Quote",
     ctaUrl = "/contact",
   } = props;
+
+  // Format phone for tel: link (remove spaces if custom phone provided)
+  const phoneTel = phone === PHONE_DISPLAY ? PHONE_TEL : phone.replace(/\s/g, "");
 
   return (
     <section className="py-16 sm:py-20 lg:py-24 bg-white">
@@ -31,7 +36,7 @@ export function ServiceHero(props: ServiceHeroProps) {
           <div>
             {badge && (
               <div className="mb-6">
-                <span className="px-4 py-2 bg-brand-primary text-white text-sm font-medium rounded-full">
+                <span className="px-4 py-2 bg-brand-blue text-white text-sm font-medium rounded-full">
                   {badge}
                 </span>
               </div>
@@ -46,10 +51,16 @@ export function ServiceHero(props: ServiceHeroProps) {
                 {ctaText}
               </Link>
               <Link
-                href={`tel:${phone.replace(/\s/g, "")}`}
+                href={`tel:${phoneTel}`}
                 className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-200 transition-colors"
               >
-                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg
+                  aria-hidden="true"
+                  className="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -68,7 +79,8 @@ export function ServiceHero(props: ServiceHeroProps) {
                   className="inline-flex items-center gap-2 bg-gray-100 px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm"
                 >
                   <svg
-                    className="h-3 w-3 sm:h-4 sm:w-4 text-brand-primary"
+                    aria-hidden="true"
+                    className="h-3 w-3 sm:h-4 sm:w-4 text-brand-blue"
                     fill="currentColor"
                     viewBox="0 0 20 20"
                   >
@@ -87,17 +99,25 @@ export function ServiceHero(props: ServiceHeroProps) {
           <div className="relative">
             {heroImage ? (
               <Image
-                src={heroImage}
+                src={getImageUrl(heroImage)}
                 alt={`Professional scaffolding installation for ${title.toLowerCase()} showing safe access solutions with TG20:21 compliant design`}
+                title={`${title} services - Colossus Scaffolding`}
                 width={600}
                 height={400}
+                sizes="(max-width: 768px) 100vw, 50vw"
                 className="rounded-2xl shadow-lg w-full object-cover"
                 priority
+                quality={65}
               />
             ) : (
               <div className="relative h-[400px] bg-gray-200 rounded-2xl shadow-lg flex items-center justify-center">
                 <div className="text-gray-400 text-center">
-                  <svg className="w-16 h-16 mx-auto mb-4" fill="currentColor" viewBox="0 0 20 20">
+                  <svg
+                    aria-hidden="true"
+                    className="w-16 h-16 mx-auto mb-4"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
                     <path
                       fillRule="evenodd"
                       d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"

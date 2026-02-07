@@ -2,11 +2,14 @@ import { Redis } from "@upstash/redis";
 
 // Initialize Redis client using Upstash-provided environment variables
 // In test/development environments without Redis, rate limiting is disabled
+const redisUrl = process.env.KV_REST_API_URL;
+const redisToken = process.env.KV_REST_API_TOKEN;
+
 const redis =
-  process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN
+  redisUrl && redisToken
     ? new Redis({
-        url: process.env.KV_REST_API_URL,
-        token: process.env.KV_REST_API_TOKEN,
+        url: redisUrl,
+        token: redisToken,
       })
     : null;
 

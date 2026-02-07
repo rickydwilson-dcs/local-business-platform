@@ -1,9 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { Schema } from "@/components/Schema";
-import { ContentGrid } from "@/components/ui/content-grid";
+import { Schema, ContentGrid, Breadcrumbs } from "@platform/core-components";
 import { getContentItems } from "@/lib/content";
-import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 import { PHONE_DISPLAY, PHONE_TEL } from "@/lib/contact-info";
 
 export const dynamic = "force-static";

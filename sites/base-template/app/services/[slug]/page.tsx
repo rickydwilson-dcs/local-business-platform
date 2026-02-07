@@ -8,13 +8,17 @@
 
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
-import { Schema } from '@/components/Schema';
-import { Breadcrumbs } from '@/components/ui/breadcrumbs';
-import { ServiceHero } from '@/components/ui/service-hero';
-import { ServiceAbout, type AboutContent } from '@/components/ui/service-about';
-import { ServiceBenefits } from '@/components/ui/service-benefits';
-import { FAQSection, type FAQItem } from '@/components/ui/faq-section';
-import { CTASection } from '@/components/ui/cta-section';
+import {
+  Schema,
+  Breadcrumbs,
+  ServiceHero,
+  ServiceAbout,
+  ServiceBenefits,
+  FAQSection,
+  CTASection,
+  type FAQItem,
+  type AboutContent,
+} from '@platform/core-components';
 import { getServices, getService } from '@/lib/content';
 import { loadMdx } from '@/lib/mdx';
 import { getImageUrl } from '@/lib/image';

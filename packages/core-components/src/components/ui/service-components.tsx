@@ -27,7 +27,7 @@ export function ServiceHero({
         <div className="flex items-center gap-3 mb-4">
           <div className="p-3 bg-blue-100 rounded-lg">
             <svg
-              className="h-8 w-8 text-brand-primary"
+              className="h-8 w-8 text-brand-blue"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -92,6 +92,7 @@ export function ServiceHero({
             alt="Service hero image"
             width={600}
             height={500}
+            sizes="(max-width: 768px) 100vw, 50vw"
             className="rounded-lg shadow-lg w-full"
           />
         )}
@@ -113,6 +114,7 @@ export function Gallery({ images }: GalleryProps) {
             src={src}
             alt={`Gallery image ${i + 1}`}
             fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
             className="object-cover hover:scale-105 transition-transform duration-300"
           />
         </div>
@@ -206,7 +208,7 @@ export function CoverageAreas({ areas, phone }: CoverageAreasProps) {
         <ul className="space-y-2 text-sm">
           {areas.map((area) => (
             <li key={area.slug}>
-              <Link href={`/locations/${area.slug}`} className="text-brand-primary hover:underline">
+              <Link href={`/locations/${area.slug}`} className="text-brand-blue hover:underline">
                 {area.name}
               </Link>
             </li>
@@ -217,7 +219,7 @@ export function CoverageAreas({ areas, phone }: CoverageAreasProps) {
             <p className="text-sm text-gray-800 mb-3">Need immediate assistance?</p>
             <a
               href={`tel:${phone.replace(/\s/g, "")}`}
-              className="inline-flex items-center justify-center w-full px-4 py-2 bg-brand-primary text-white font-medium rounded-md hover:bg-brand-primary-hover transition-colors"
+              className="inline-flex items-center justify-center w-full px-4 py-2 bg-brand-blue text-white font-medium rounded-md hover:bg-brand-blue-hover transition-colors"
             >
               Call Now: {phone}
             </a>
@@ -246,20 +248,20 @@ export function CTA({
   secondaryUrl,
 }: CTAProps) {
   return (
-    <div className="py-16 bg-brand-primary text-white -mx-4 px-4 rounded-lg text-center">
+    <div className="py-16 bg-brand-blue text-white -mx-4 px-4 rounded-lg text-center">
       <h2 className="text-3xl font-bold mb-4">{title}</h2>
       <p className="text-xl mb-8 mx-auto w-full lg:w-[90%] opacity-90">{description}</p>
       <div className="flex flex-col sm:flex-row gap-4 justify-center">
         <Link
           href={primaryUrl}
-          className="inline-flex items-center justify-center px-8 py-4 bg-white text-brand-primary font-semibold rounded-lg hover:bg-gray-200 transition-colors"
+          className="inline-flex items-center justify-center px-8 py-4 bg-white text-brand-blue font-semibold rounded-lg hover:bg-gray-200 transition-colors"
         >
           {primaryAction}
         </Link>
         {secondaryAction && secondaryUrl && (
           <Link
             href={secondaryUrl}
-            className="inline-flex items-center justify-center px-8 py-4 border border-white text-white font-semibold rounded-lg hover:bg-white hover:text-brand-primary transition-colors"
+            className="inline-flex items-center justify-center px-8 py-4 border border-white text-white font-semibold rounded-lg hover:bg-white hover:text-brand-blue transition-colors"
           >
             {secondaryAction}
           </Link>

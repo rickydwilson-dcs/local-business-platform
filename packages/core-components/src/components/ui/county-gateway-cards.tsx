@@ -85,7 +85,7 @@ export function CountyGatewayCards() {
                   </div>
                   <Link
                     href={`/locations/${county.slug}`}
-                    className="text-brand-primary hover:text-brand-primary-hover"
+                    className="text-brand-blue hover:text-brand-blue-hover"
                     aria-label={`View ${county.name} locations`}
                   >
                     <svg
@@ -113,7 +113,7 @@ export function CountyGatewayCards() {
                   <div className="space-y-2">
                     {county.highlights.map((highlight, index) => (
                       <div key={index} className="flex items-center gap-2">
-                        <div className="w-1.5 h-1.5 bg-brand-primary rounded-full flex-shrink-0"></div>
+                        <div className="w-1.5 h-1.5 bg-brand-blue rounded-full flex-shrink-0"></div>
                         <span className="text-sm text-gray-700">{highlight}</span>
                       </div>
                     ))}
@@ -128,12 +128,12 @@ export function CountyGatewayCards() {
                       <Link
                         key={town.slug}
                         href={town.href}
-                        className="text-sm text-gray-800 hover:text-brand-primary transition-colors flex items-center gap-1"
+                        className="text-sm text-gray-800 hover:text-brand-blue transition-colors flex items-center gap-1"
                       >
                         {town.name}
                         {town.isRichContent && (
                           <span
-                            className="w-1.5 h-1.5 bg-brand-primary rounded-full"
+                            className="w-1.5 h-1.5 bg-brand-blue rounded-full"
                             title="Specialist coverage"
                           ></span>
                         )}
@@ -143,7 +143,7 @@ export function CountyGatewayCards() {
                   {countyInfo && countyInfo.towns.length > 6 && (
                     <Link
                       href={`/locations/${county.slug}`}
-                      className="text-sm text-brand-primary hover:text-brand-primary-hover font-medium mt-2 inline-block"
+                      className="text-sm text-brand-blue hover:text-brand-blue-hover font-medium mt-2 inline-block"
                     >
                       +{countyInfo.towns.length - 6} more towns →
                     </Link>

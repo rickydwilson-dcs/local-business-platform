@@ -22,7 +22,7 @@ export function LocationFAQ({
         <div className="mx-auto w-full lg:w-[90%]">
           <div className="text-center mb-12">
             <h2 className="heading-section">
-              {title} About Scaffolding in {location}
+              {location} Scaffolding FAQ - {title}
             </h2>
             {description && <p className="text-body-lg">{description}</p>}
           </div>
@@ -34,7 +34,7 @@ export function LocationFAQ({
                 className="bg-gray-50 border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow"
               >
                 <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-start gap-3">
-                  <span className="flex-shrink-0 w-6 h-6 bg-brand-primary rounded-full flex items-center justify-center text-white text-sm font-bold">
+                  <span className="flex-shrink-0 w-6 h-6 bg-brand-blue rounded-full flex items-center justify-center text-white text-sm font-bold">
                     Q
                   </span>
                   {item.question}
@@ -46,7 +46,7 @@ export function LocationFAQ({
             ))}
           </div>
 
-          <div className="text-center mt-12 p-8 bg-brand-primary/5 rounded-2xl border border-brand-primary/10">
+          <div className="text-center mt-12 p-8 bg-brand-blue/5 rounded-2xl border border-brand-blue/10">
             <h3 className="text-xl font-semibold text-gray-900 mb-4">
               More Questions About Scaffolding in {location}?
             </h3>
@@ -59,7 +59,13 @@ export function LocationFAQ({
                 Get Expert Advice
               </a>
               <a href="tel:01424466661" className="btn-secondary gap-2">
-                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg
+                  aria-hidden="true"
+                  className="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
