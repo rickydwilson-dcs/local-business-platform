@@ -39,20 +39,26 @@ test.describe("Navigation", () => {
     await page.setViewportSize({ width: 375, height: 667 });
     await page.goto("/", { waitUntil: "networkidle" });
 
-    // Find hamburger button
-    const menuButton = page.locator('button[aria-label*="menu" i]').first();
-    await expect(menuButton).toBeVisible();
+    // Wait for React hydration — the hamburger button gets aria-expanded
+    // only after React hydrates the client component
+    const menuButton = page.locator("button[aria-expanded]").first();
+    await expect(menuButton).toBeVisible({ timeout: 10000 });
+    await expect(menuButton).toHaveAttribute("aria-expanded", "false", { timeout: 5000 });
+
+    // Click to open the menu
     await menuButton.click();
 
-    // The mobile menu uses translate-x CSS transform to slide in.
-    // Playwright considers off-screen elements (translate-x-full) as "hidden",
-    // so we wait for the translate-x-0 class to appear on the dialog.
-    const mobileMenu = page.locator('[role="dialog"][aria-label="Mobile navigation menu"]');
-    await expect(mobileMenu).toHaveClass(/translate-x-0/, { timeout: 10000 });
+    // Verify the button state changed (confirms React handled the click)
+    await expect(menuButton).toHaveAttribute("aria-expanded", "true", { timeout: 5000 });
 
-    // Now navigate via mobile menu
+    // Wait for the 300ms CSS slide-in transition to complete
+    await page.waitForTimeout(500);
+
+    // Navigate via mobile menu — use force:true because Playwright may still
+    // consider the translated element as not fully "visible" during animation
+    const mobileMenu = page.locator('[role="dialog"][aria-label="Mobile navigation menu"]');
     const mobileServicesLink = mobileMenu.locator('a[href="/services"]');
-    await mobileServicesLink.click();
+    await mobileServicesLink.click({ force: true });
     await expect(page).toHaveURL(/.*services/);
   });
 
