@@ -8,17 +8,17 @@
 @layer components {
   /* Primary Button - Brand Blue */
   .btn-primary {
-    @apply inline-flex items-center justify-center px-6 py-3 bg-brand-blue text-white font-semibold rounded-lg transition-all duration-200 hover:bg-brand-blue-hover focus:ring-2 focus:ring-brand-blue focus:ring-offset-2;
+    @apply inline-flex items-center justify-center px-6 py-3 bg-brand-primary text-white font-semibold rounded-lg transition-all duration-200 hover:bg-brand-primary-hover focus:ring-2 focus:ring-brand-primary focus:ring-offset-2;
   }
 
   /* Primary Button Large */
   .btn-primary-lg {
-    @apply inline-flex items-center justify-center px-8 py-4 bg-brand-blue text-white font-semibold rounded-lg transition-all duration-200 hover:bg-brand-blue-hover focus:ring-2 focus:ring-brand-blue focus:ring-offset-2 text-lg;
+    @apply inline-flex items-center justify-center px-8 py-4 bg-brand-primary text-white font-semibold rounded-lg transition-all duration-200 hover:bg-brand-primary-hover focus:ring-2 focus:ring-brand-primary focus:ring-offset-2 text-lg;
   }
 
   /* Secondary Button - White with Border */
   .btn-secondary {
-    @apply inline-flex items-center justify-center px-6 py-3 bg-white text-brand-blue border border-brand-blue font-semibold rounded-lg transition-all duration-200 hover:bg-gray-50 focus:ring-2 focus:ring-brand-blue focus:ring-offset-2;
+    @apply inline-flex items-center justify-center px-6 py-3 bg-white text-brand-primary border border-brand-primary font-semibold rounded-lg transition-all duration-200 hover:bg-gray-50 focus:ring-2 focus:ring-brand-primary focus:ring-offset-2;
   }
 
   /* Ghost Button - Light Background */
@@ -107,7 +107,7 @@
   /* Mobile Menu System */
   /* Mobile Menu Toggle Button */
   .mobile-menu-toggle {
-    @apply lg:hidden p-2 rounded-md hover:bg-gray-200 transition-colors focus:outline-none focus:ring-2 focus:ring-brand-blue;
+    @apply lg:hidden p-2 rounded-md hover:bg-gray-200 transition-colors focus:outline-none focus:ring-2 focus:ring-brand-primary;
   }
 
   /* Mobile Menu Hamburger Icon Container */
@@ -152,7 +152,7 @@
 
   /* Mobile Menu Close Button */
   .mobile-menu-close {
-    @apply p-2 rounded-lg border-2 border-brand-blue text-brand-blue hover:bg-brand-blue hover:text-white transition-colors focus:outline-none;
+    @apply p-2 rounded-lg border-2 border-brand-primary text-brand-primary hover:bg-brand-primary hover:text-white transition-colors focus:outline-none;
   }
 
   /* Mobile Menu Navigation */
@@ -162,7 +162,7 @@
 
   /* Mobile Menu Nav Links */
   .mobile-menu-link {
-    @apply block text-xl font-medium text-slate-800 hover:text-brand-blue transition-colors py-4 text-center;
+    @apply block text-xl font-medium text-slate-800 hover:text-brand-primary transition-colors py-4 text-center;
   }
 
   /* Mobile Menu Bottom Section */
@@ -180,7 +180,7 @@
   }
 
   .mobile-menu-phone-link {
-    @apply text-2xl font-bold text-slate-800 hover:text-brand-blue transition-colors;
+    @apply text-2xl font-bold text-slate-800 hover:text-brand-primary transition-colors;
   }
 
   .mobile-menu-phone-text {
@@ -189,7 +189,7 @@
 
   /* Mobile Menu CTA Button */
   .mobile-menu-cta {
-    @apply block w-full bg-brand-blue text-white text-center py-4 px-6 rounded-lg hover:bg-brand-blue-hover transition-colors font-bold text-lg;
+    @apply block w-full bg-brand-primary text-white text-center py-4 px-6 rounded-lg hover:bg-brand-primary-hover transition-colors font-bold text-lg;
   }
 
   /* Mobile Menu Locations Expandable Section */
@@ -206,7 +206,7 @@
   }
 
   .mobile-menu-county-link {
-    @apply block text-lg font-semibold text-brand-blue hover:text-brand-blue-hover transition-colors;
+    @apply block text-lg font-semibold text-brand-primary hover:text-brand-primary-hover transition-colors;
   }
 
   .mobile-menu-towns {
@@ -222,7 +222,7 @@
   }
 
   .mobile-menu-town-link .rich-indicator {
-    @apply inline-block w-1.5 h-1.5 bg-brand-blue rounded-full ml-2;
+    @apply inline-block w-1.5 h-1.5 bg-brand-primary rounded-full ml-2;
   }
 
   /* Certificate Lightbox System */
@@ -255,12 +255,12 @@
 
   /* Lightbox Close Button */
   .lightbox-close-button {
-    @apply flex-shrink-0 p-2 rounded-lg border-2 border-gray-300 text-gray-700 hover:bg-gray-100 hover:border-gray-400 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-brand-blue focus:ring-offset-2;
+    @apply flex-shrink-0 p-2 rounded-lg border-2 border-gray-300 text-gray-700 hover:bg-gray-100 hover:border-gray-400 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2;
   }
 
   /* Lightbox Zoom Button */
   .lightbox-zoom-button {
-    @apply p-2 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-100 hover:border-gray-400 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-brand-blue focus:ring-offset-2 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:border-gray-300;
+    @apply p-2 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-100 hover:border-gray-400 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:border-gray-300;
   }
 
   /* Lightbox Image Container */
@@ -281,7 +281,7 @@
 
   /* Lightbox Navigation Buttons */
   .lightbox-nav-button {
-    @apply absolute top-1/2 -translate-y-1/2 p-3 sm:p-4 bg-white bg-opacity-90 hover:bg-opacity-100 rounded-full shadow-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-brand-blue focus:ring-offset-2 text-gray-900 hover:scale-110 z-10;
+    @apply absolute top-1/2 -translate-y-1/2 p-3 sm:p-4 bg-white bg-opacity-90 hover:bg-opacity-100 rounded-full shadow-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2 text-gray-900 hover:scale-110 z-10;
   }
 
   .lightbox-nav-button-left {

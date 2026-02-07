@@ -8,10 +8,12 @@
 
 import Link from 'next/link';
 import type { Metadata } from 'next';
-import { Schema } from '@/components/Schema';
-import { Breadcrumbs } from '@/components/ui/breadcrumbs';
-import { AggregateRatingDisplay } from '@/components/ui/aggregate-rating-display';
-import { TestimonialCard } from '@/components/ui/testimonial-card';
+import {
+  Schema,
+  Breadcrumbs,
+  AggregateRatingDisplay,
+  TestimonialCard,
+} from '@platform/core-components';
 import { getTestimonials, calculateAggregateRating } from '@/lib/content';
 import { absUrl } from '@/lib/site';
 import { siteConfig } from '@/site.config';

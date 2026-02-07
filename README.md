@@ -1,83 +1,25 @@
 # Local Business Platform
 
-A white-label website generation platform for local service businesses (plumbers, gardeners, builders, roofers, scaffolders) targeting South East England.
+A white-label website platform for local service businesses (plumbers, electricians, builders, scaffolders, gardeners) targeting South East England. Each client gets a fully customised, SEO-optimised Next.js website — deployed independently but sharing a common component library and theme system.
 
-## What It Does
-
-This platform enables rapid deployment of professional, SEO-optimized websites for local service businesses. Each site is:
-
-- **Fully customizable** via configuration (no code changes needed per site)
-- **SEO-optimized** with proper schema markup, meta tags, and structured content
-- **Performance-focused** with Next.js 16, Turbopack, and optimized images
-- **Content-rich** with service pages, location pages, and dynamic routing
-
-## Architecture
-
-This is a **pnpm workspace + Turborepo monorepo** where:
-
-- Root coordinates builds and deployment (no application code)
-- Shared components live in `packages/core-components`
-- Each client site is a separate Next.js app in `sites/`
-- Each site deploys to its own Vercel project
-
-### Key Benefits
-
-- **Clean Separation** - Root coordinates, sites are independent
-- **Risk Isolation** - One site fails, others unaffected
-- **Phased Deployment** - Canary testing before full rollout
-- **Per-Site Customization** - Via config, not conditional logic
-- **Fast Builds** - Turborepo caching provides 176x faster incremental builds
-- **Scalable** - Add sites without changing infrastructure
+The monorepo uses Turborepo + pnpm workspaces. Shared code lives in `packages/`, individual client websites live in `sites/`, and automation scripts live in `tools/`. Content is managed entirely through MDX files with YAML frontmatter — no hardcoded data files, no per-page route files.
 
 ## Repository Structure
 
 ```
 local-business-platform/
-├── package.json                  # Root coordinator
-├── turbo.json                    # Turborepo build orchestration
-├── pnpm-workspace.yaml           # Workspace configuration
-│
 ├── packages/
-│   ├── core-components/          # Shared components (versioned)
-│   │   ├── src/
-│   │   │   ├── components/       # UI components
-│   │   │   ├── lib/              # Shared utilities
-│   │   │   └── index.ts          # Public exports
-│   │   └── package.json
-│   │
-│   └── theme-system/             # Centralized theming (@platform/theme-system)
-│       ├── src/
-│       │   ├── types.ts          # ThemeConfig interface
-│       │   ├── defaults.ts       # Default theme values
-│       │   ├── tailwind-plugin.ts # Tailwind CSS plugin
-│       │   └── validation.ts     # Zod schema validation
-│       └── package.json
+│   ├── core-components/       # Shared UI components (versioned with Changesets)
+│   ├── theme-system/          # Tailwind plugin + CSS variable generation
+│   └── intake-system/         # Client onboarding automation
 │
-├── sites/                        # Individual client sites
-│   ├── colossus-reference/       # Reference implementation (scaffolding)
-│   │   ├── app/                  # Next.js 16 app directory
-│   │   ├── components/           # Site-specific components
-│   │   ├── lib/                  # Site-specific utilities
-│   │   ├── content/              # MDX content files
-│   │   ├── site.config.ts        # Business customization
-│   │   └── ...
-│   │
-│   ├── smiths-electrical-cambridge/ # Demo site (electrical)
-│   │   └── ... (same structure)
-│   │
-│   └── base-template/            # Template for new sites (copy-and-customize)
-│       └── ... (gold-standard template)
+├── sites/
+│   ├── colossus-reference/    # Reference implementation (scaffolding business)
+│   ├── smiths-electrical-cambridge/  # Demo site (electrical business)
+│   └── base-template/         # Gold-standard template for new sites
 │
-├── tools/                        # Automation scripts
-│   ├── create-site.ts            # Create new site from base-template
-│   ├── deploy-site.ts            # Single site deployment
-│   ├── deploy-batch.ts           # Phased batch deployment
-│   └── rollback.ts               # Quick rollback tool
-│
-└── docs/                         # Documentation
-    ├── architecture/             # Architectural guidelines
-    ├── development/              # Development workflow
-    └── testing/                  # Testing strategies
+├── tools/                     # Site creation, image management, deployment scripts
+└── docs/                      # Architecture, standards, and how-to guides
 ```
 
 ## Quick Start
@@ -87,176 +29,60 @@ local-business-platform/
 - Node.js 18+
 - pnpm 8+
 
-### Installation
+### Setup
 
 ```bash
-# Clone the repository
 git clone https://github.com/rickydwilson-dcs/local-business-platform.git
 cd local-business-platform
-
-# Install dependencies for all workspaces
 pnpm install
-
-# Build all sites
 pnpm build
-
-# Run linting
-pnpm lint
 ```
 
 ### Development
 
 ```bash
-# Run a site in development mode
+# Run a site locally
 cd sites/colossus-reference
 pnpm dev
 # Visit http://localhost:3000
-
-# Build a specific site
-pnpm build
-
-# Build all sites (from root)
-cd ../..
-pnpm build
 ```
 
-## Site Customization
-
-Each site is customized via `site.config.ts`:
-
-```typescript
-export const siteConfig = {
-  name: "Joe's Plumbing Canterbury",
-  business: {
-    name: "Joe's Plumbing",
-    phone: "01227 123456",
-    email: "joe@joesplumbing.com",
-  },
-  components: {
-    hero: "split",
-    serviceCard: "elevated",
-    contactForm: "minimal",
-  },
-  theme: {
-    primary: "#1e40af",
-    secondary: "#0f172a",
-    accent: "#f59e0b",
-  },
-};
-```
-
-No per-site code duplication - just configuration changes.
-
-## Image Management
-
-Images are stored in Cloudflare R2 (not in the repository) for scalability and performance.
-
-**Naming Convention:**
-
-```
-{site-slug}_{component}_{page-type}_{page-slug}_{variant}.{ext}
-
-Examples:
-joes-plumbing-canterbury_hero_service_emergency-plumbing_01.webp
-colossus-reference_hero_location_brighton_01.webp
-```
-
-## Deployment
-
-### CI/CD Pipeline
-
-- **GitHub Actions** runs on every push: TypeScript, ESLint, Build, Tests
-- **E2E Tests** run on staging before production deployment
-- **Automated deployment** on `main` branch with phased rollout
-
-### Deployment Commands
+### Common Commands
 
 ```bash
-# Single site deployment
-tsx tools/deploy-site.ts colossus-reference --env production
+# Root level (Turborepo — runs across all workspaces)
+pnpm build          # Build packages then sites (cached)
+pnpm lint           # ESLint all workspaces
+pnpm type-check     # TypeScript strict mode check
+pnpm clean          # Remove build artifacts
 
-# Batch deployment with phased rollout
-tsx tools/deploy-batch.ts --env production
-
-# Quick rollback
-tsx tools/rollback.ts colossus-reference
+# Site level (run from within a site directory)
+pnpm dev            # Next.js dev server
+pnpm build          # Production build
+pnpm test           # Unit tests (Vitest)
+pnpm test:e2e:smoke # Smoke tests (Playwright)
 ```
 
-### Phased Rollout
+## Tech Stack
 
-Deployments follow a staged approach:
+**Core:** Next.js (App Router), React, TypeScript, Tailwind CSS, MDX
 
-1. **Canary** - Deploy to 1 site, monitor for issues
-2. **Small Batch** - Deploy to next 5 sites
-3. **Medium Batch** - Deploy to next 10 sites
-4. **Full Rollout** - Deploy to remaining sites
+**Build:** Turborepo, pnpm workspaces, Changesets
 
-## Development Commands
+**Infrastructure:** Vercel, Cloudflare R2, Supabase
 
-### Root Level (Turborepo)
-
-```bash
-pnpm build            # Build all sites (cached)
-pnpm lint             # Lint all workspaces
-pnpm type-check       # Type check all workspaces
-pnpm clean            # Clean all build artifacts
-pnpm test             # Run all tests
-```
-
-### Site Level
-
-```bash
-cd sites/colossus-reference
-pnpm dev              # Development server
-pnpm build            # Production build
-pnpm lint             # Lint this site
-pnpm type-check       # Type check this site
-pnpm test             # Run unit tests
-pnpm test:e2e         # Run E2E tests
-pnpm test:e2e:smoke   # Run smoke tests only
-```
-
-## Technology Stack
-
-**Core:**
-
-- Next.js 16.0.7 (App Router with Turbopack)
-- React 19.1.2
-- TypeScript (Strict mode)
-- Tailwind CSS + Theme System (CSS variables)
-- MDX (Content management)
-
-**Build System:**
-
-- Turbopack (default bundler in Next.js 16)
-- Turborepo (caching & orchestration)
-- pnpm workspaces (dependency management)
-
-**Infrastructure:**
-
-- Vercel (hosting)
-- Cloudflare R2 (image storage)
-- NewRelic APM (monitoring)
-
-**Quality:**
-
-- ESLint 9 (flat config)
-- Vitest (unit tests)
-- Playwright (E2E tests)
-- Zod (content validation)
+**Quality:** ESLint, Vitest, Playwright, Zod content validation
 
 ## Documentation
 
-See [/docs](./docs/) for comprehensive documentation:
+| Section                            | What It Covers                                                       |
+| ---------------------------------- | -------------------------------------------------------------------- |
+| [Architecture](docs/architecture/) | How dynamic routing, theming, builds, and site creation work         |
+| [Standards](docs/standards/)       | Styling, components, content, SEO, security, testing, deployment     |
+| [Guides](docs/guides/)             | Adding sites, services, locations; git workflow; theming; deployment |
 
-- [ARCHITECTURE.md](./docs/architecture/ARCHITECTURE.md) - Architectural guidelines
-- [DEVELOPMENT.md](./docs/development/DEVELOPMENT.md) - Development workflow
-- [Deploying a Site](./docs/guides/deploying-site.md) - Deployment procedures
-- [Testing](./docs/standards/testing.md) - Testing approach
-- [Theming Guide](./docs/guides/theming.md) - Theme system and CSS variables
-- [Adding a New Site](./docs/guides/adding-new-site.md) - Create new client sites
+See [CLAUDE.md](CLAUDE.md) for AI-specific context and key architecture rules.
 
 ## License
 
-Proprietary - All Rights Reserved
-© 2025 Digital Consulting Services
+Proprietary — All Rights Reserved

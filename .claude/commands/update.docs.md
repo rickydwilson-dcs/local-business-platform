@@ -8,10 +8,10 @@ Verify and update documentation to accurately reflect how the codebase actually 
 
 Read the "How It Works" docs and verify they describe current patterns:
 
-- [docs/architecture/HOW_DYNAMIC_ROUTING_WORKS.md](docs/architecture/HOW_DYNAMIC_ROUTING_WORKS.md) — Does the described routing pattern match the actual `[slug]/page.tsx` files? Check `sites/base-template/app/` for any new dynamic routes not documented.
-- [docs/architecture/HOW_THEME_SYSTEM_WORKS.md](docs/architecture/HOW_THEME_SYSTEM_WORKS.md) — Does the pipeline description match `packages/theme-system/src/`? Check for new tokens, changed defaults, or modified plugin behavior.
-- [docs/architecture/HOW_BUILD_PIPELINE_WORKS.md](docs/architecture/HOW_BUILD_PIPELINE_WORKS.md) — Does the build order match `turbo.json`? Check for new packages, changed dependencies, or modified scripts.
-- [docs/architecture/HOW_SITE_CREATION_WORKS.md](docs/architecture/HOW_SITE_CREATION_WORKS.md) — Does the site creation flow match `tools/create-site-from-project.ts`? Check for new steps or changed behavior.
+- [docs/architecture/how-dynamic-routing-works.md](docs/architecture/how-dynamic-routing-works.md) — Does the described routing pattern match the actual `[slug]/page.tsx` files? Check `sites/base-template/app/` for any new dynamic routes not documented.
+- [docs/architecture/how-theme-system-works.md](docs/architecture/how-theme-system-works.md) — Does the pipeline description match `packages/theme-system/src/`? Check for new tokens, changed defaults, or modified plugin behavior.
+- [docs/architecture/how-build-pipeline-works.md](docs/architecture/how-build-pipeline-works.md) — Does the build order match `turbo.json`? Check for new packages, changed dependencies, or modified scripts.
+- [docs/architecture/how-site-creation-works.md](docs/architecture/how-site-creation-works.md) — Does the site creation flow match `tools/create-site-from-project.ts`? Check for new steps or changed behavior.
 
 ### 2. CLAUDE.md is Instructionally Accurate
 
@@ -29,12 +29,12 @@ Read the "How It Works" docs and verify they describe current patterns:
 Check that all markdown links in these files point to real files:
 
 - `CLAUDE.md`
-- `docs/architecture/ARCHITECTURE.md`
+- `docs/architecture/architecture.md`
 - `README.md`
 
 ### 5. Repository Structure is Current
 
-- Does `ARCHITECTURE.md`'s repository structure tree match the actual `sites/` directory?
+- Does `architecture.md`'s repository structure tree match the actual `sites/` directory?
 - Are all packages listed?
 
 ## How to Fix Issues

@@ -56,9 +56,10 @@ export function ServiceCards({
         <div className={`grid-responsive ${getGridClass(cards.length)}`}>
           {cards.map((card, index) => {
             const isEven = index % 2 === 0;
+
             return (
               <div
-                key={card.href}
+                key={index}
                 className={`group relative rounded-2xl overflow-hidden shadow-sm border border-gray-200 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 ${
                   isEven ? "bg-white" : "bg-gray-50"
                 }`}
@@ -69,8 +70,10 @@ export function ServiceCards({
                     <div className="relative h-48 overflow-hidden">
                       <Image
                         src={card.image}
-                        alt={card.title}
+                        alt={`${card.title} scaffolding services - professional installation by Colossus Scaffolding`}
+                        title={`${card.title} - Learn more about our scaffolding services`}
                         fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                         className="object-cover group-hover:scale-105 transition-transform duration-300"
                       />
                     </div>
@@ -120,6 +123,7 @@ export function ServiceCards({
                 {/* Content */}
                 <div className="p-6">
                   <h3 className="text-xl font-bold text-gray-900 mb-3">{card.title}</h3>
+
                   <p className="text-gray-800 text-sm leading-relaxed mb-4">{card.description}</p>
 
                   {/* Features List */}

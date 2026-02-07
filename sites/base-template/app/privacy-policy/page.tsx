@@ -9,7 +9,7 @@ import Link from 'next/link';
 import { siteConfig } from '@/site.config';
 import { PHONE_DISPLAY, BUSINESS_EMAIL, formatAddressSingleLine } from '@/lib/contact-info';
 import { absUrl } from '@/lib/site';
-import { Breadcrumbs } from '@/components/ui/breadcrumbs';
+import { Breadcrumbs } from '@platform/core-components';
 
 export const metadata: Metadata = {
   title: `Privacy Policy | ${siteConfig.business.name}`,

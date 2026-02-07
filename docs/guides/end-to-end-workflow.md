@@ -621,9 +621,9 @@ NEXT_PUBLIC_SITE_URL=https://acme-plumbing-canterbury.vercel.app
 RESEND_API_KEY=re_xxx
 BUSINESS_EMAIL=info@acme-plumbing.co.uk
 
-# Rate Limiting (Vercel KV)
-KV_REST_API_URL=https://xxx.upstash.io
-KV_REST_API_TOKEN=xxx
+# Rate Limiting (Supabase)
+SUPABASE_URL=https://your-project.supabase.co
+SUPABASE_SERVICE_KEY=your-service-role-key
 
 # Analytics
 NEXT_PUBLIC_GA_MEASUREMENT_ID=G-XXXXXXXXXX

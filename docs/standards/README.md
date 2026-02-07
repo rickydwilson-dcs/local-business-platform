@@ -21,7 +21,7 @@ This directory contains focused, single-topic standards documents for the Local 
 | [Images](./images.md)         | Image optimization, R2 storage     | Quality settings, naming conventions  |
 | [Schema](./schema.md)         | JSON-LD schema markup              | LocalBusiness, FAQPage, Breadcrumb    |
 | [Testing](./testing.md)       | Unit tests, E2E tests              | 141+ tests, tiered strategy           |
-| [Security](./security.md)     | Rate limiting, API security        | Upstash Redis, GDPR compliance        |
+| [Security](./security.md)     | Rate limiting, API security        | Supabase, GDPR compliance             |
 | [Analytics](./analytics.md)   | Consent management, GA4            | Feature flags, privacy-first          |
 | [Deployment](./deployment.md) | Pipeline, tools, monitoring        | Phased rollout, NewRelic APM          |
 | [Quality](./quality.md)       | Quality gates, checklists          | Pre-commit, pre-push hooks            |

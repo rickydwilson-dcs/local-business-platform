@@ -4,16 +4,18 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import matter from "gray-matter";
 
-import { PageLayout } from "@/components/layouts/page-layout";
-import { HeroSection } from "@/components/ui/hero-section";
-import { LargeFeatureCards } from "@/components/ui/large-feature-cards";
-import { ServiceShowcase } from "@/components/ui/service-showcase";
-import { PricingPackages } from "@/components/ui/pricing-packages";
-import { LocalAuthorityExpertise } from "@/components/ui/local-authority-expertise";
-import { LocationFAQ } from "@/components/ui/location-faq";
-import { CTASection } from "@/components/ui/cta-section";
-import { Breadcrumbs } from "@/components/ui/breadcrumbs";
-import { Schema } from "@/components/Schema";
+import {
+  PageLayout,
+  HeroSection,
+  LargeFeatureCards,
+  ServiceShowcase,
+  PricingPackages,
+  LocalAuthorityExpertise,
+  LocationFAQ,
+  CTASection,
+  Breadcrumbs,
+  Schema,
+} from "@platform/core-components";
 import { absUrl } from "@/lib/site";
 import { getServiceAreaSchema } from "@/lib/schema";
 import { PHONE_DISPLAY } from "@/lib/contact-info";
@@ -326,9 +328,9 @@ export default async function Page({ params }: { params: Promise<Params> }) {
                     <Link
                       key={town.slug}
                       href={`/locations/${town.slug}`}
-                      className="group p-6 bg-gray-50 rounded-lg border border-gray-200 hover:border-brand-blue hover:shadow-lg transition-all duration-200"
+                      className="group p-6 bg-gray-50 rounded-lg border border-gray-200 hover:border-brand-primary hover:shadow-lg transition-all duration-200"
                     >
-                      <h3 className="text-lg font-medium text-gray-900 group-hover:text-brand-blue mb-2">
+                      <h3 className="text-lg font-medium text-gray-900 group-hover:text-brand-primary mb-2">
                         {town.name}
                       </h3>
                       <p className="text-sm text-gray-800 mb-3">{town.description}</p>
@@ -337,7 +339,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
                           Local Specialists
                         </span>
                         <svg
-                          className="w-4 h-4 text-brand-blue group-hover:translate-x-1 transition-transform"
+                          className="w-4 h-4 text-brand-primary group-hover:translate-x-1 transition-transform"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"

@@ -1,8 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
-import { Schema } from "@/components/Schema";
-import { Breadcrumbs } from "@/components/ui/breadcrumbs";
+import { Schema, Breadcrumbs } from "@platform/core-components";
 import { getBlogPosts, type BlogPost } from "@/lib/content";
 import { getImageUrl } from "@/lib/image";
 import { absUrl } from "@/lib/site";
@@ -27,11 +26,6 @@ export const metadata: Metadata = {
     url: "/blog",
     type: "website",
   },
-  alternates: {
-    types: {
-      "application/rss+xml": "/blog/rss.xml",
-    },
-  },
 };
 
 const categoryLabels: Record<string, string> = {
@@ -55,7 +49,7 @@ function BlogCard({ post }: { post: BlogPost }) {
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
           <div className="absolute top-4 left-4">
-            <span className="bg-brand-blue text-white text-xs font-semibold px-3 py-1 rounded-full">
+            <span className="bg-brand-primary text-white text-xs font-semibold px-3 py-1 rounded-full">
               {categoryLabels[post.category] || post.category}
             </span>
           </div>
@@ -77,20 +71,20 @@ function BlogCard({ post }: { post: BlogPost }) {
             </>
           )}
         </div>
-        <h2 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-brand-blue transition-colors">
+        <h2 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-brand-primary transition-colors">
           <Link href={`/blog/${post.slug}`}>{post.title}</Link>
         </h2>
         <p className="text-gray-600 mb-4 line-clamp-3">{post.excerpt}</p>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-brand-blue rounded-full flex items-center justify-center text-white text-sm font-semibold">
+            <div className="w-8 h-8 bg-brand-primary rounded-full flex items-center justify-center text-white text-sm font-semibold">
               {post.author.name.charAt(0)}
             </div>
             <span className="text-sm text-gray-600">{post.author.name}</span>
           </div>
           <Link
             href={`/blog/${post.slug}`}
-            className="text-brand-blue font-medium text-sm hover:underline inline-flex items-center gap-1"
+            className="text-brand-primary font-medium text-sm hover:underline inline-flex items-center gap-1"
           >
             Read more
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -119,7 +113,7 @@ export default async function BlogPage() {
         </div>
       </div>
 
-      <main className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100">
+      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100">
         {/* Hero Section */}
         <section className="section-standard lg:py-24 bg-white">
           <div className="container-standard">
@@ -129,17 +123,6 @@ export default async function BlogPage() {
                 Professional scaffolding guidance, safety tips, and industry news from our
                 experienced team. Stay informed with the latest insights from Colossus Scaffolding.
               </p>
-
-              <Link
-                href="/blog/rss.xml"
-                className="inline-flex items-center gap-2 text-brand-blue hover:text-brand-blue-hover font-medium"
-              >
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M5 3a1 1 0 000 2c5.523 0 10 4.477 10 10a1 1 0 102 0C17 8.373 11.627 3 5 3z" />
-                  <path d="M4 9a1 1 0 011-1 7 7 0 017 7 1 1 0 11-2 0 5 5 0 00-5-5 1 1 0 01-1-1zM3 15a2 2 0 114 0 2 2 0 01-4 0z" />
-                </svg>
-                Subscribe via RSS
-              </Link>
             </div>
           </div>
         </section>
@@ -189,7 +172,7 @@ export default async function BlogPage() {
             </div>
           </div>
         </section>
-      </main>
+      </div>
 
       <Schema
         org={{

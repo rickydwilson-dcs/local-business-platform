@@ -1,30 +1,46 @@
-interface ServiceAboutProps {
-  serviceName: string;
-  slug: string;
-  about?: {
-    whatIs: string;
-    whenNeeded: string[];
-    whatAchieve: string[];
-    keyPoints?: string[];
-  };
-}
+import Link from "next/link";
 
-interface ServiceContent {
+/**
+ * About section content interface
+ */
+export interface AboutContent {
+  /** Description of what the service is */
   whatIs: string;
+  /** When/why customers need this service */
   whenNeeded: string[];
+  /** What customers achieve with this service */
   whatAchieve: string[];
+  /** Optional key points */
   keyPoints?: string[];
 }
 
-function getDefaultContent(slug: string): ServiceContent {
-  // Fallback content for services without about section
+/**
+ * Service about props
+ */
+interface ServiceAboutProps {
+  /** Service name for display */
+  serviceName: string;
+  /** Service slug for fallback content */
+  slug: string;
+  /** Optional about content from MDX */
+  about?: AboutContent;
+  /** Contact URL */
+  contactUrl?: string;
+  /** Trust badges for the compliance section */
+  trustBadges?: string[];
+}
+
+/**
+ * Generate default content for services without about section
+ */
+function getDefaultContent(slug: string): AboutContent {
+  const formattedName = slug
+    .split("-")
+    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+    .join(" ");
+
   return {
-    whatIs: `${slug
-      .split("-")
-      .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
-      .join(
-        " "
-      )} is a professional scaffolding solution designed to provide safe, compliant access for construction and maintenance work.`,
+    whatIs: `${formattedName} is a professional solution designed to provide safe, compliant access for your project needs.`,
     whenNeeded: [
       "Construction and building work",
       "Maintenance and repair projects",
@@ -32,7 +48,7 @@ function getDefaultContent(slug: string): ServiceContent {
       "Professional installation needs",
     ],
     whatAchieve: [
-      "Safe working at height",
+      "Safe working conditions",
       "Regulatory compliance",
       "Professional results",
       "Improved safety standards",
@@ -46,28 +62,58 @@ function getDefaultContent(slug: string): ServiceContent {
   };
 }
 
-export default function ServiceAbout({ serviceName, slug, about }: ServiceAboutProps) {
-  // Use about data from MDX if available, otherwise fall back to default content
+/**
+ * Service About Component
+ *
+ * Detailed service information section with two-column layout.
+ * Shows what the service is, when it's needed, and what customers achieve.
+ *
+ * @example
+ * ```tsx
+ * <ServiceAbout
+ *   serviceName="Commercial Services"
+ *   slug="commercial-services"
+ *   about={{
+ *     whatIs: "Our commercial services provide...",
+ *     whenNeeded: ["Large projects", "Corporate clients"],
+ *     whatAchieve: ["Professional results", "Cost savings"]
+ *   }}
+ * />
+ * ```
+ */
+export function ServiceAbout({
+  serviceName,
+  slug,
+  about,
+  contactUrl = "/contact",
+  trustBadges = [],
+}: ServiceAboutProps) {
   const content = about || getDefaultContent(slug);
 
   return (
-    <section className="section-standard bg-white">
-      <div className="container-standard">
+    <section className="py-16 sm:py-20 bg-surface-background">
+      <div className="mx-auto w-full lg:w-[90%] px-6">
         <div className="grid lg:grid-cols-3 gap-12">
+          {/* Main Content */}
           <div className="lg:col-span-2">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">
-              Professional {serviceName} Services Across the South East
+            <h2 className="text-3xl sm:text-4xl font-bold text-surface-foreground mb-6">
+              Professional {serviceName} Services
             </h2>
             <p className="text-body-lg mb-8">{content.whatIs}</p>
 
             <div className="space-y-6">
-              <h3 className="text-xl font-semibold text-gray-900">When You Need {serviceName}</h3>
+              <h3 className="text-xl font-semibold text-surface-foreground">
+                When You Need {serviceName}
+              </h3>
               <div className="grid md:grid-cols-2 gap-4">
-                {content.whenNeeded.map((need, index) => (
-                  <div key={index} className="flex items-start gap-3 p-4 bg-gray-50 rounded-lg">
+                {content.whenNeeded.map((need: string, index: number) => (
+                  <div
+                    key={index}
+                    className="flex items-start gap-3 p-4 bg-surface-subtle rounded-lg"
+                  >
                     <div className="flex-shrink-0 w-6 h-6 bg-brand-primary rounded-full flex items-center justify-center mt-0.5">
                       <svg
-                        className="h-4 w-4 text-white"
+                        className="h-4 w-4 text-brand-on-primary"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -80,46 +126,50 @@ export default function ServiceAbout({ serviceName, slug, about }: ServiceAboutP
                         />
                       </svg>
                     </div>
-                    <span className="text-gray-900 font-medium text-sm">{need}</span>
+                    <span className="text-surface-foreground font-medium text-sm">{need}</span>
                   </div>
                 ))}
               </div>
 
-              <div className="mt-8 p-6 bg-brand-primary/5 rounded-2xl border border-brand-primary/10">
-                <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0 w-12 h-12 bg-brand-primary rounded-lg flex items-center justify-center">
-                    <svg
-                      className="h-6 w-6 text-white"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                      />
-                    </svg>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-gray-900 mb-2">
-                      TG20:21 Compliant & Fully Insured
-                    </h4>
-                    <p className="text-gray-800 text-sm leading-relaxed">
-                      All our {serviceName.toLowerCase()} installations across the South East meet
-                      the latest TG20:21 standards, with comprehensive £10M public liability
-                      insurance and CHAS accreditation for complete peace of mind.
-                    </p>
+              {/* Trust/Compliance Box */}
+              {trustBadges.length > 0 && (
+                <div className="mt-8 p-6 bg-brand-primary/5 rounded-2xl border border-brand-primary/10">
+                  <div className="flex items-start gap-4">
+                    <div className="flex-shrink-0 w-12 h-12 bg-brand-primary rounded-lg flex items-center justify-center">
+                      <svg
+                        className="h-6 w-6 text-brand-on-primary"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                      </svg>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-surface-foreground mb-2">
+                        Certified & Fully Insured
+                      </h4>
+                      <p className="text-surface-muted-foreground text-sm leading-relaxed">
+                        All our {serviceName.toLowerCase()} services meet industry standards with
+                        comprehensive insurance coverage for complete peace of mind.
+                        {trustBadges.length > 0 && ` ${trustBadges.join(" \u2022 ")}`}
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </div>
+              )}
             </div>
           </div>
 
+          {/* Sidebar */}
           <div className="lg:col-span-1">
-            <div className="bg-gray-50 rounded-2xl p-6 border border-gray-200 sticky top-8">
-              <h3 className="text-xl font-semibold text-gray-900 mb-4 flex items-center gap-2">
+            <div className="bg-surface-subtle rounded-2xl p-6 border border-surface-border sticky top-8">
+              <h3 className="text-xl font-semibold text-surface-foreground mb-4 flex items-center gap-2">
                 <svg
                   className="h-5 w-5 text-brand-primary"
                   fill="none"
@@ -136,19 +186,21 @@ export default function ServiceAbout({ serviceName, slug, about }: ServiceAboutP
                 What You Achieve
               </h3>
               <div className="space-y-3">
-                {content.whatAchieve.map((achievement, index) => (
+                {content.whatAchieve.map((achievement: string, index: number) => (
                   <div
                     key={index}
-                    className="flex items-center gap-3 p-3 bg-white rounded-lg shadow-sm"
+                    className="flex items-center gap-3 p-3 bg-surface-background rounded-lg shadow-sm"
                   >
                     <div className="flex-shrink-0 w-2 h-2 bg-brand-primary rounded-full"></div>
-                    <span className="text-gray-900 font-medium text-sm">{achievement}</span>
+                    <span className="text-surface-foreground font-medium text-sm">
+                      {achievement}
+                    </span>
                   </div>
                 ))}
               </div>
 
-              <div className="mt-6 pt-6 border-t border-gray-200">
-                <div className="flex items-center gap-2 text-sm text-gray-800 mb-4">
+              <div className="mt-6 pt-6 border-t border-surface-border">
+                <div className="flex items-center gap-2 text-sm text-surface-foreground mb-4">
                   <svg
                     className="h-4 w-4 text-brand-primary"
                     fill="none"
@@ -164,16 +216,16 @@ export default function ServiceAbout({ serviceName, slug, about }: ServiceAboutP
                   </svg>
                   Professional Installation
                 </div>
-                <p className="text-sm text-gray-800 mb-4">
-                  Expert CISRS-qualified teams ensuring safe, compliant installation with full
+                <p className="text-sm text-surface-muted-foreground mb-4">
+                  Expert qualified teams ensuring safe, compliant installation with full
                   certification.
                 </p>
-                <a
-                  href="/contact"
-                  className="w-full inline-flex items-center justify-center px-4 py-3 bg-brand-primary text-white font-semibold rounded-lg hover:bg-brand-primary-hover transition-colors text-sm"
+                <Link
+                  href={contactUrl}
+                  className="w-full inline-flex items-center justify-center px-4 py-3 bg-brand-primary text-brand-on-primary font-semibold rounded-lg hover:bg-brand-primary-hover transition-colors text-sm"
                 >
                   Get Free Quote
-                </a>
+                </Link>
               </div>
             </div>
           </div>

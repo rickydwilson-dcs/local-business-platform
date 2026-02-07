@@ -2,12 +2,14 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
-import { Schema } from "@/components/Schema";
-import { Breadcrumbs } from "@/components/ui/breadcrumbs";
-import { BlogPostHero } from "@/components/ui/blog-post-hero";
-import { ServiceFAQ } from "@/components/ui/service-faq";
-import { ServiceCTA } from "@/components/ui/service-cta";
-import { ArticleCallout } from "@/components/ui/article-callout";
+import {
+  Schema,
+  Breadcrumbs,
+  BlogPostHero,
+  ServiceFAQ,
+  ServiceCTA,
+  ArticleCallout,
+} from "@platform/core-components";
 import { getProjects, getProject, type Project } from "@/lib/content";
 import { getImageUrl } from "@/lib/image";
 import { absUrl } from "@/lib/site";
@@ -126,7 +128,7 @@ function ProjectSummary({ project }: { project: Project }) {
               <Link
                 key={serviceSlug}
                 href={`/services/${serviceSlug}`}
-                className="text-xs bg-brand-blue/10 text-brand-blue px-2 py-1 rounded-full hover:bg-brand-blue/20 transition-colors"
+                className="text-xs bg-brand-primary/10 text-brand-primary px-2 py-1 rounded-full hover:bg-brand-primary/20 transition-colors"
               >
                 {serviceSlug
                   .split("-")
@@ -142,7 +144,7 @@ function ProjectSummary({ project }: { project: Project }) {
             <dd className="space-y-1">
               {project.scope.challenges.map((challenge, idx) => (
                 <div key={idx} className="flex items-start gap-2 text-gray-700">
-                  <span className="text-brand-blue mt-0.5">•</span>
+                  <span className="text-brand-primary mt-0.5">•</span>
                   <span>{challenge}</span>
                 </div>
               ))}
@@ -203,7 +205,7 @@ function RelatedProjects({ projects, currentSlug }: { projects: Project[]; curre
                 />
               </Link>
               <div className="p-6">
-                <h3 className="font-bold text-gray-900 mb-2 line-clamp-2 hover:text-brand-blue transition-colors">
+                <h3 className="font-bold text-gray-900 mb-2 line-clamp-2 hover:text-brand-primary transition-colors">
                   <Link href={`/projects/${project.slug}`}>{project.title}</Link>
                 </h3>
                 <p className="text-sm text-gray-600">
@@ -244,7 +246,7 @@ export default async function ProjectPage({ params }: { params: Promise<Params> 
         </div>
       </div>
 
-      <main>
+      <div>
         <article>
           {/* Hero Section - Reusing BlogPostHero */}
           <BlogPostHero
@@ -267,7 +269,7 @@ export default async function ProjectPage({ params }: { params: Promise<Params> 
                 <ProjectSummary project={frontmatter} />
 
                 {/* Prose Content */}
-                <div className="prose prose-lg max-w-none prose-headings:text-gray-900 prose-p:text-gray-700 prose-a:text-brand-blue prose-a:no-underline hover:prose-a:underline prose-strong:text-gray-900 prose-li:text-gray-700 prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-6 prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-4">
+                <div className="prose prose-lg max-w-none prose-headings:text-gray-900 prose-p:text-gray-700 prose-a:text-brand-primary prose-a:no-underline hover:prose-a:underline prose-strong:text-gray-900 prose-li:text-gray-700 prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-6 prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-4">
                   {mdxContent}
                 </div>
 
@@ -304,7 +306,7 @@ export default async function ProjectPage({ params }: { params: Promise<Params> 
 
         {/* Related Projects */}
         <RelatedProjects projects={allProjects} currentSlug={slug} />
-      </main>
+      </div>
 
       <Schema
         org={{

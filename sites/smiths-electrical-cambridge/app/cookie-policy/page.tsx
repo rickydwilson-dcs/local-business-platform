@@ -9,7 +9,7 @@ import Link from 'next/link';
 import { siteConfig } from '@/site.config';
 import { BUSINESS_EMAIL } from '@/lib/contact-info';
 import { absUrl } from '@/lib/site';
-import { Breadcrumbs } from '@/components/ui/breadcrumbs';
+import { Breadcrumbs } from '@platform/core-components';
 
 export const metadata: Metadata = {
   title: `Cookie Policy | ${siteConfig.business.name}`,

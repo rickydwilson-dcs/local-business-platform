@@ -14,7 +14,6 @@
       "app/api/csrf-token/route.ts",
       "app/blog/[slug]/page.tsx",
       "app/blog/page.tsx",
-      "app/blog/rss.xml/route.ts",
       "app/contact/page.tsx",
       "app/cookie-policy/page.tsx",
       "app/globals.css",

@@ -36,10 +36,10 @@ This is a **white-label website platform** for local service businesses. The bus
 
 For deep dives into each system, see:
 
-- [How Dynamic Routing Works](docs/architecture/HOW_DYNAMIC_ROUTING_WORKS.md)
-- [How the Theme System Works](docs/architecture/HOW_THEME_SYSTEM_WORKS.md)
-- [How the Build Pipeline Works](docs/architecture/HOW_BUILD_PIPELINE_WORKS.md)
-- [How Site Creation Works](docs/architecture/HOW_SITE_CREATION_WORKS.md)
+- [How Dynamic Routing Works](docs/architecture/how-dynamic-routing-works.md)
+- [How the Theme System Works](docs/architecture/how-theme-system-works.md)
+- [How the Build Pipeline Works](docs/architecture/how-build-pipeline-works.md)
+- [How Site Creation Works](docs/architecture/how-site-creation-works.md)
 
 ---
 
@@ -138,11 +138,11 @@ npm run validate:content  # Shows which MDX files fail and why
 
 | Document                                                                      | Teaches                                    |
 | ----------------------------------------------------------------------------- | ------------------------------------------ |
-| [How Dynamic Routing Works](docs/architecture/HOW_DYNAMIC_ROUTING_WORKS.md)   | MDX file → static page via `[slug]` routes |
-| [How the Theme System Works](docs/architecture/HOW_THEME_SYSTEM_WORKS.md)     | Config → CSS variables → Tailwind classes  |
-| [How the Build Pipeline Works](docs/architecture/HOW_BUILD_PIPELINE_WORKS.md) | Turborepo, packages, workspace linking     |
-| [How Site Creation Works](docs/architecture/HOW_SITE_CREATION_WORKS.md)       | Intake → project file → new site → deploy  |
-| [Architecture Overview](docs/architecture/ARCHITECTURE.md)                    | High-level system overview                 |
+| [How Dynamic Routing Works](docs/architecture/how-dynamic-routing-works.md)   | MDX file → static page via `[slug]` routes |
+| [How the Theme System Works](docs/architecture/how-theme-system-works.md)     | Config → CSS variables → Tailwind classes  |
+| [How the Build Pipeline Works](docs/architecture/how-build-pipeline-works.md) | Turborepo, packages, workspace linking     |
+| [How Site Creation Works](docs/architecture/how-site-creation-works.md)       | Intake → project file → new site → deploy  |
+| [Architecture Overview](docs/architecture/architecture.md)                    | High-level system overview                 |
 
 ### Standards (How to Do It Right)
 

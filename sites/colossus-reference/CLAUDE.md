@@ -70,9 +70,9 @@ GA4_API_SECRET=your-secret
 FEATURE_CONSENT_BANNER=true
 FEATURE_ANALYTICS_ENABLED=true
 
-# Rate Limiting (Upstash Redis)
-KV_REST_API_URL=https://your-database.upstash.io
-KV_REST_API_TOKEN=your-token
+# Rate Limiting (Supabase)
+SUPABASE_URL=https://your-project.supabase.co
+SUPABASE_SERVICE_KEY=your-service-role-key
 
 # Email (Resend)
 RESEND_API_KEY=re_your_api_key
@@ -94,5 +94,5 @@ NEXT_PUBLIC_SITE_URL=https://colossusscaffolding.co.uk
 | `lib/content.ts`           | MDX reading utilities           |
 | `lib/locations-config.ts`  | Dynamic location discovery      |
 | `lib/content-schemas.ts`   | Zod validation schemas          |
-| `lib/rate-limiter.ts`      | Upstash Redis rate limiting     |
+| `lib/rate-limiter.ts`      | Supabase rate limiting          |
 | `app/api/contact/route.ts` | Contact form with rate limiting |

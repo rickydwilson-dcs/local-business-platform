@@ -48,19 +48,12 @@ export function HeroV3({
       )}
 
       {/* Overlay */}
-      <div
-        className="absolute inset-0 bg-black"
-        style={{ opacity: overlayOpacity }}
-      />
+      <div className="absolute inset-0 bg-black" style={{ opacity: overlayOpacity }} />
 
       {/* Content */}
       <div className="relative z-10 text-center px-4 max-w-5xl">
-        <h1 className="text-6xl md:text-8xl font-bold text-white mb-6 drop-shadow-2xl">
-          {title}
-        </h1>
-        <p className="text-2xl md:text-3xl text-white mb-12 drop-shadow-lg">
-          {subtitle}
-        </p>
+        <h1 className="text-6xl md:text-8xl font-bold text-white mb-6 drop-shadow-2xl">{title}</h1>
+        <p className="text-2xl md:text-3xl text-white mb-12 drop-shadow-lg">{subtitle}</p>
         <a
           href={ctaHref}
           className="inline-block bg-white text-gray-900 px-12 py-5 rounded-full text-xl font-bold hover:bg-gray-100 transition shadow-2xl transform hover:scale-105"
@@ -72,12 +65,7 @@ export function HeroV3({
       {/* Scroll Indicator */}
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10">
         <div className="animate-bounce">
-          <svg
-            className="w-8 h-8 text-white"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
+          <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -90,5 +78,3 @@ export function HeroV3({
     </section>
   );
 }
-
-export default HeroV3;
