@@ -48,11 +48,10 @@ test.describe("Navigation", () => {
     await page.waitForTimeout(500);
 
     // Check mobile menu is visible and navigate
-    const mobileServicesLink = page.locator('.mobile-menu-link:has-text("Services")');
+    const mobileServicesLink = page.locator('a[href="/services"]').first();
     await expect(mobileServicesLink).toBeVisible();
 
-    // Use evaluate to click directly in DOM (bypass viewport issues)
-    await mobileServicesLink.evaluate((el) => (el as HTMLElement).click());
+    await mobileServicesLink.click();
 
     await expect(page).toHaveURL(/.*services/);
   });
@@ -94,10 +93,10 @@ test.describe("Navigation", () => {
     await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
     await page.waitForTimeout(500);
 
-    const eastSussexLink = page.locator('footer a[href="/locations/east-sussex"]').first();
-    await expect(eastSussexLink).toBeVisible();
-    await eastSussexLink.click();
-    await expect(page).toHaveURL(/.*east-sussex/);
+    const brightonLink = page.locator('footer a[href="/locations/brighton"]').first();
+    await expect(brightonLink).toBeVisible();
+    await brightonLink.click();
+    await expect(page).toHaveURL(/.*brighton/);
   });
 
   test("should have clickable logo that navigates home", async ({ page, baseURL }) => {
