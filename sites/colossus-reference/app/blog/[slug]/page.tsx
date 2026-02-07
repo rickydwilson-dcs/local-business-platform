@@ -140,7 +140,7 @@ export default async function BlogPostPage({ params }: { params: Promise<Params>
         </div>
       </div>
 
-      <main>
+      <div>
         <article>
           {/* Hero Section - Matches ServiceHero pattern */}
           <BlogPostHero
@@ -240,7 +240,7 @@ export default async function BlogPostPage({ params }: { params: Promise<Params>
 
         {/* Related Posts */}
         <RelatedPosts posts={allPosts} currentSlug={slug} />
-      </main>
+      </div>
 
       <Schema
         org={{

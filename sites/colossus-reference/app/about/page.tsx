@@ -8,7 +8,7 @@ import { getImageUrl } from "@/lib/image";
 import { PHONE_DISPLAY, PHONE_TEL } from "@/lib/contact-info";
 
 export const metadata: Metadata = {
-  title: "About Colossus Scaffolding | Professional Scaffolding Specialists South East UK",
+  title: "About Colossus Scaffolding | South East Specialists",
   description:
     "Learn about Colossus Scaffolding — established 2009, CISRS qualified teams, TG20:21 compliant, £10M insured. Professional scaffolding across South East England.",
   openGraph: {
@@ -332,6 +332,7 @@ export default function AboutPage() {
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 bg-brand-blue rounded-full flex items-center justify-center">
                       <svg
+                        aria-hidden="true"
                         className="w-5 h-5 text-white"
                         fill="none"
                         viewBox="0 0 24 24"
@@ -378,6 +379,7 @@ export default function AboutPage() {
             <div className="text-center p-6 bg-gray-50 rounded-2xl">
               <div className="w-16 h-16 bg-brand-blue rounded-full flex items-center justify-center mx-auto mb-4">
                 <svg
+                  aria-hidden="true"
                   className="w-8 h-8 text-white"
                   fill="none"
                   viewBox="0 0 24 24"
@@ -402,6 +404,7 @@ export default function AboutPage() {
             <div className="text-center p-6 bg-gray-50 rounded-2xl">
               <div className="w-16 h-16 bg-brand-blue rounded-full flex items-center justify-center mx-auto mb-4">
                 <svg
+                  aria-hidden="true"
                   className="w-8 h-8 text-white"
                   fill="none"
                   viewBox="0 0 24 24"
@@ -423,6 +426,7 @@ export default function AboutPage() {
             <div className="text-center p-6 bg-gray-50 rounded-2xl">
               <div className="w-16 h-16 bg-brand-blue rounded-full flex items-center justify-center mx-auto mb-4">
                 <svg
+                  aria-hidden="true"
                   className="w-8 h-8 text-white"
                   fill="none"
                   viewBox="0 0 24 24"
@@ -466,6 +470,7 @@ export default function AboutPage() {
               <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
                 <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mx-auto mb-4">
                   <svg
+                    aria-hidden="true"
                     className="w-6 h-6 text-brand-blue"
                     fill="none"
                     viewBox="0 0 24 24"
@@ -489,6 +494,7 @@ export default function AboutPage() {
               <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
                 <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mx-auto mb-4">
                   <svg
+                    aria-hidden="true"
                     className="w-6 h-6 text-brand-blue"
                     fill="none"
                     viewBox="0 0 24 24"
@@ -512,6 +518,7 @@ export default function AboutPage() {
               <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
                 <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mx-auto mb-4">
                   <svg
+                    aria-hidden="true"
                     className="w-6 h-6 text-brand-blue"
                     fill="none"
                     viewBox="0 0 24 24"
@@ -535,6 +542,7 @@ export default function AboutPage() {
               <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
                 <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mx-auto mb-4">
                   <svg
+                    aria-hidden="true"
                     className="w-6 h-6 text-brand-blue"
                     fill="none"
                     viewBox="0 0 24 24"
@@ -587,6 +595,7 @@ export default function AboutPage() {
             <div className="text-center">
               <div className="w-16 h-16 bg-brand-blue rounded-full flex items-center justify-center mx-auto mb-4">
                 <svg
+                  aria-hidden="true"
                   className="w-8 h-8 text-white"
                   fill="none"
                   viewBox="0 0 24 24"
@@ -610,6 +619,7 @@ export default function AboutPage() {
             <div className="text-center">
               <div className="w-16 h-16 bg-brand-blue rounded-full flex items-center justify-center mx-auto mb-4">
                 <svg
+                  aria-hidden="true"
                   className="w-8 h-8 text-white"
                   fill="none"
                   viewBox="0 0 24 24"
@@ -633,6 +643,7 @@ export default function AboutPage() {
             <div className="text-center">
               <div className="w-16 h-16 bg-brand-blue rounded-full flex items-center justify-center mx-auto mb-4">
                 <svg
+                  aria-hidden="true"
                   className="w-8 h-8 text-white"
                   fill="none"
                   viewBox="0 0 24 24"
@@ -656,6 +667,7 @@ export default function AboutPage() {
             <div className="text-center">
               <div className="w-16 h-16 bg-brand-blue rounded-full flex items-center justify-center mx-auto mb-4">
                 <svg
+                  aria-hidden="true"
                   className="w-8 h-8 text-white"
                   fill="none"
                   viewBox="0 0 24 24"
@@ -712,6 +724,7 @@ export default function AboutPage() {
               <div key={i} className="flex items-start gap-3 p-4 bg-gray-50 rounded-lg">
                 <div className="flex-shrink-0 w-6 h-6 bg-brand-blue rounded-full flex items-center justify-center mt-0.5">
                   <svg
+                    aria-hidden="true"
                     className="h-4 w-4 text-white"
                     fill="none"
                     viewBox="0 0 24 24"
@@ -753,7 +766,13 @@ export default function AboutPage() {
               href={`tel:${PHONE_TEL}`}
               className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-white text-white font-semibold rounded-lg hover:bg-white hover:text-brand-blue transition-colors"
             >
-              <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg
+                aria-hidden="true"
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"

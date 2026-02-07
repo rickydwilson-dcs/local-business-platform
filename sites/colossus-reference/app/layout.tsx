@@ -181,6 +181,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <style dangerouslySetInnerHTML={{ __html: criticalStyles }} />
       </head>
       <body className="min-h-screen bg-white text-slate-900 antialiased">
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:bg-brand-primary focus:text-white focus:px-4 focus:py-2 focus:rounded"
+        >
+          Skip to main content
+        </a>
+
         <header className="border-b bg-white shadow-sm">
           <div className="mx-auto w-full lg:w-[90%] px-6 py-4 flex items-center justify-between">
             {/* Logo */}
@@ -223,7 +230,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             {/* Desktop Phone & CTA */}
             <div className="desktop-actions">
               <a href={`tel:${PHONE_TEL}`} className="phone-link">
-                <svg className="phone-icon" fill="currentColor" viewBox="0 0 20 20">
+                <svg
+                  aria-hidden="true"
+                  className="phone-icon"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
                   <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
                 </svg>
                 <span className="font-medium">{PHONE_DISPLAY}</span>
@@ -238,7 +250,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </div>
         </header>
 
-        {children}
+        <main id="main-content">{children}</main>
 
         {/* Footer - Global footer for all pages */}
         <Footer />

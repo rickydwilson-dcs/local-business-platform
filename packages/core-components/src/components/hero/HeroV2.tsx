@@ -82,11 +82,7 @@ export function HeroV2({
           {/* Right Column - Image/Visual */}
           <div>
             {imageUrl ? (
-              <img
-                src={imageUrl}
-                alt={title}
-                className="w-full h-auto rounded-2xl shadow-2xl"
-              />
+              <img src={imageUrl} alt={title} className="w-full h-auto rounded-2xl shadow-2xl" />
             ) : (
               <div className="w-full aspect-square bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl shadow-2xl flex items-center justify-center text-white text-6xl font-bold">
                 ✨
@@ -98,5 +94,3 @@ export function HeroV2({
     </section>
   );
 }
-
-export default HeroV2;

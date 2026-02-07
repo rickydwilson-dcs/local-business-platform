@@ -106,13 +106,13 @@ export function ServiceCards({
                         card.subtitle.map((subtitle, subtitleIndex) => (
                           <span
                             key={subtitleIndex}
-                            className="inline-block px-3 py-1 bg-[#005A9E]/90 text-white text-sm font-semibold rounded-full backdrop-blur-sm shadow-sm"
+                            className="inline-block px-3 py-1 bg-brand-primary/90 text-white text-sm font-semibold rounded-full backdrop-blur-sm shadow-sm"
                           >
                             {subtitle}
                           </span>
                         ))
                       ) : (
-                        <span className="inline-block px-3 py-1 bg-[#005A9E]/90 text-white text-sm font-semibold rounded-full backdrop-blur-sm shadow-sm">
+                        <span className="inline-block px-3 py-1 bg-brand-primary/90 text-white text-sm font-semibold rounded-full backdrop-blur-sm shadow-sm">
                           {card.subtitle}
                         </span>
                       )}
@@ -139,7 +139,7 @@ export function ServiceCards({
                   {/* CTA Button */}
                   <Link
                     href={card.href}
-                    className="inline-flex items-center justify-center w-full px-4 py-3 bg-[#005A9E] text-white font-semibold rounded-lg hover:bg-[#004a85] group-hover:scale-105 transition-all duration-200 text-sm focus:ring-2 focus:ring-[#005A9E] focus:ring-offset-2"
+                    className="inline-flex items-center justify-center w-full px-4 py-3 bg-brand-primary text-white font-semibold rounded-lg hover:bg-brand-primary-hover group-hover:scale-105 transition-all duration-200 text-sm focus:ring-2 focus:ring-brand-primary focus:ring-offset-2"
                     aria-label={`${card.ctaText} for ${card.title}`}
                   >
                     {card.ctaText}

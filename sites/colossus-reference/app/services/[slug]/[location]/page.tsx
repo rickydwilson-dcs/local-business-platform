@@ -31,12 +31,6 @@ type Params = { slug: string; location: string };
 
 const SERVICES_DIR = path.join(process.cwd(), "content", "services");
 
-// Define valid service-location combinations
-const LOCATION_SERVICES: Record<string, string[]> = {
-  "commercial-scaffolding": ["brighton", "canterbury", "hastings"],
-  "residential-scaffolding": ["brighton", "canterbury", "hastings"],
-};
-
 interface ServiceData {
   title: string;
   seoTitle?: string;
@@ -106,18 +100,38 @@ async function getServiceDataFromMDX(slug: string, location: string): Promise<Se
 }
 
 /**
- * Generate static params for all service-location combinations
+ * Dynamically discover all service-location combinations by scanning
+ * content/services/ for subdirectories containing .mdx files.
  */
-export async function generateStaticParams() {
+async function discoverLocationServices(): Promise<Params[]> {
   const params: Params[] = [];
+  const entries = await fs.readdir(SERVICES_DIR, { withFileTypes: true });
 
-  for (const [slug, locations] of Object.entries(LOCATION_SERVICES)) {
-    for (const location of locations) {
-      params.push({ slug, location });
+  for (const entry of entries) {
+    if (!entry.isDirectory()) continue;
+
+    const serviceSlug = entry.name;
+    const serviceDir = path.join(SERVICES_DIR, serviceSlug);
+    const files = await fs.readdir(serviceDir);
+
+    for (const file of files) {
+      if (file.toLowerCase().endsWith(".mdx")) {
+        params.push({
+          slug: serviceSlug,
+          location: file.replace(/\.mdx$/i, ""),
+        });
+      }
     }
   }
 
   return params;
+}
+
+/**
+ * Generate static params for all service-location combinations
+ */
+export async function generateStaticParams() {
+  return discoverLocationServices();
 }
 
 export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
@@ -263,7 +277,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
         </div>
       </section>
 
-      <main>
+      <div>
         <ServiceHero
           title={serviceData.title}
           description={serviceData.description}
@@ -283,7 +297,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
         <ServiceFAQ items={serviceData.faqs} />
 
         <ServiceCTA />
-      </main>
+      </div>
 
       <Schema
         service={{

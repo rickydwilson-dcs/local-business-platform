@@ -57,7 +57,7 @@ export function ContentCard({
               {subtitle.map((item, index) => (
                 <span
                   key={index}
-                  className="inline-block px-3 py-1 bg-[#005A9E]/90 text-white text-sm font-semibold rounded-full backdrop-blur-sm shadow-sm"
+                  className="inline-block px-3 py-1 bg-brand-primary/90 text-white text-sm font-semibold rounded-full backdrop-blur-sm shadow-sm"
                 >
                   {item}
                 </span>
@@ -118,7 +118,7 @@ export function ContentCard({
         )}
 
         <div className="mt-auto">
-          <div className="inline-flex items-center justify-center w-full px-4 py-3 bg-[#005A9E] text-white font-semibold rounded-lg hover:bg-[#004a85] group-hover:scale-105 transition-all duration-200 text-sm focus:ring-2 focus:ring-[#005A9E] focus:ring-offset-2">
+          <div className="inline-flex items-center justify-center w-full px-4 py-3 bg-brand-primary text-white font-semibold rounded-lg hover:bg-brand-primary-hover group-hover:scale-105 transition-all duration-200 text-sm focus:ring-2 focus:ring-brand-primary focus:ring-offset-2">
             {contentType === "services" ? "Learn More" : "View Location Info"}
           </div>
         </div>
