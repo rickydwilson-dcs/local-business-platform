@@ -37,24 +37,23 @@ test.describe("Navigation", () => {
   test("should have working mobile menu", async ({ page }) => {
     // Set mobile viewport
     await page.setViewportSize({ width: 375, height: 667 });
-    await page.goto("/");
+    await page.goto("/", { waitUntil: "networkidle" });
 
-    // Find and click hamburger menu button
+    // Find hamburger button (has aria-label containing "menu" and lg:hidden)
     const menuButton = page.locator('button[aria-label*="menu" i]').first();
     await expect(menuButton).toBeVisible();
-    await menuButton.click();
 
-    // Wait for mobile menu to open
-    await page.waitForTimeout(500);
-
-    // Check mobile menu is visible and navigate — scope to dialog overlay
+    // Click and verify the dialog opens — retry click if first attempt is pre-hydration
     const mobileMenu = page.locator('[role="dialog"][aria-label="Mobile navigation menu"]');
-    await expect(mobileMenu).toBeVisible();
-
     const mobileServicesLink = mobileMenu.locator('a[href="/services"]');
-    await expect(mobileServicesLink).toBeVisible();
-    await mobileServicesLink.click();
 
+    // Use expect.toPass for automatic retry: click the button, then check visibility
+    await expect(async () => {
+      await menuButton.click();
+      await expect(mobileServicesLink).toBeVisible({ timeout: 2000 });
+    }).toPass({ timeout: 15000 });
+
+    await mobileServicesLink.click();
     await expect(page).toHaveURL(/.*services/);
   });
 
