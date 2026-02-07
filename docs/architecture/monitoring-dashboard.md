@@ -851,7 +851,7 @@ apps/
 
 ## Related Documentation
 
-- [ARCHITECTURE.md](./ARCHITECTURE.md) - Platform architecture overview
+- [architecture.md](./architecture.md) - Platform architecture overview
 - [Registry CLI Documentation](../../tools/lib/REGISTRY_CLI.md) - CLI tool reference
 - [Supabase Schema](../../tools/supabase-schema.sql) - Database schema
 - [Supabase Client](../../tools/lib/supabase-client.ts) - TypeScript client
