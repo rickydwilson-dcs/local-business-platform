@@ -3,12 +3,12 @@ import { POST } from "../route";
 
 // Mock CSRF validation - always passes for unit tests
 // CSRF protection has its own dedicated test suite
-vi.mock("@/lib/security/csrf", () => ({
+vi.mock("@platform/core-components/lib/security/csrf", () => ({
   validateCsrfToken: vi.fn(() => null), // null = validation passed
 }));
 
 // Mock rate limiter
-vi.mock("@/lib/rate-limiter", () => ({
+vi.mock("@platform/core-components/lib/rate-limiter", () => ({
   checkRateLimit: vi.fn(() => Promise.resolve({ allowed: true })),
 }));
 
