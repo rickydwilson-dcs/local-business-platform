@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { ServiceFrontmatterSchema, LocationFrontmatterSchema } from "../content-schemas";
+import { ServiceFrontmatterSchema, LocationFrontmatterSchema } from "@platform/core-components";
 
 describe("Content Schemas", () => {
   describe("ServiceFrontmatterSchema", () => {
@@ -230,10 +230,10 @@ describe("Content Schemas", () => {
     });
 
     describe("Hero validation", () => {
-      it("should require hero object", () => {
+      it("should accept location without hero object", () => {
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const { hero, ...withoutHero } = validLocation;
-        expect(() => LocationFrontmatterSchema.parse(withoutHero)).toThrow();
+        expect(() => LocationFrontmatterSchema.parse(withoutHero)).not.toThrow();
       });
     });
 

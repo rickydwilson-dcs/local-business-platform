@@ -2,7 +2,7 @@
  * Location-specific service utilities
  *
  * Handles detection and context extraction for location-specific services
- * (e.g., commercial-scaffolding-brighton, residential-scaffolding-canterbury)
+ * (e.g., commercial-plumbing-brighton, residential-electrical-canterbury)
  *
  * This module is generic and does not hardcode any location data. Callers must
  * provide known location slugs and area maps from their own content or config.
@@ -18,16 +18,16 @@ export interface LocationContext {
 /**
  * Extracts location context from a service slug by matching against known locations.
  *
- * @param slug - Service slug (e.g., "commercial-scaffolding-brighton")
+ * @param slug - Service slug (e.g., "commercial-plumbing-brighton")
  * @param knownLocations - Array of known location slugs (e.g., ["brighton", "canterbury", "hastings"])
  * @returns LocationContext or null if not location-specific
  *
  * @example
- * deriveLocationContext("commercial-scaffolding-brighton", ["brighton", "canterbury"])
+ * deriveLocationContext("commercial-plumbing-brighton", ["brighton", "canterbury"])
  * // Returns: { isLocationSpecific: true, location: "brighton", locationName: "Brighton", locationSlug: "brighton" }
  *
  * @example
- * deriveLocationContext("access-scaffolding", ["brighton", "canterbury"])
+ * deriveLocationContext("emergency-plumbing", ["brighton", "canterbury"])
  * // Returns: null
  */
 export function deriveLocationContext(

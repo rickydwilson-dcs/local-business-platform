@@ -1,8 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { CertificateGallery } from "./certificate-gallery";
-import { CertificateLightbox } from "./certificate-lightbox";
+import { CertificateGallery, CertificateLightbox } from "@platform/core-components";
 
 const R2_BASE_URL = "https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev";
 

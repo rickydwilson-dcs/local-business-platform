@@ -26,7 +26,7 @@ export function LocationFAQ({
         <div className="mx-auto w-full lg:w-[90%]">
           <div className="text-center mb-12">
             <h2 className="heading-section">
-              {location} Scaffolding FAQ - {title}
+              {location} FAQ - {title}
             </h2>
             {description && <p className="text-body-lg">{description}</p>}
           </div>
@@ -52,7 +52,7 @@ export function LocationFAQ({
 
           <div className="text-center mt-12 p-8 bg-brand-primary/5 rounded-2xl border border-brand-primary/10">
             <h3 className="text-xl font-semibold text-gray-900 mb-4">
-              More Questions About Scaffolding in {location}?
+              More Questions About Our Services in {location}?
             </h3>
             <p className="text-gray-800 mb-6">
               Our local team knows {location} regulations and requirements inside out. Get expert

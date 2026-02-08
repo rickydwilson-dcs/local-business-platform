@@ -4,6 +4,15 @@ Template site used as the gold-standard starting point for new client sites. Cha
 
 ---
 
+## 2026-02-08
+
+### Content
+
+- Content schemas now imported from @platform/core-components (deduplication completed)
+- Location MDX frontmatter aligned to canonical schema (heading→title, subheading→description, cta→ctaText/ctaUrl)
+
+---
+
 ## 2026-02-07
 
 ### Features
@@ -15,7 +24,6 @@ Template site used as the gold-standard starting point for new client sites. Cha
 ### Content
 
 - Location data moved to MDX frontmatter (coordinates, region, isCounty)
-- Content schemas imported from @platform/core-components
 
 ---
 

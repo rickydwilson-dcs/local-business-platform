@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { render, waitFor } from "@testing-library/react";
 import { Analytics, useAnalytics } from "../Analytics";
@@ -11,7 +10,17 @@ vi.mock("../ConsentManager", () => ({
 
 // Mock Next.js Script component
 vi.mock("next/script", () => ({
-  default: ({ id, children, dangerouslySetInnerHTML, onLoad }: any) => {
+  default: ({
+    id,
+    children,
+    dangerouslySetInnerHTML,
+    onLoad,
+  }: {
+    id?: string;
+    children?: React.ReactNode;
+    dangerouslySetInnerHTML?: { __html: string };
+    onLoad?: () => void;
+  }) => {
     // Simulate script loading
     if (onLoad && typeof onLoad === "function") {
       setTimeout(() => onLoad(), 0);
@@ -32,9 +41,9 @@ vi.mock("next/script", () => ({
 describe("Analytics Component", () => {
   beforeEach(() => {
     // Reset window.gtag and window.dataLayer before each test
-    delete (window as any).gtag;
-    delete (window as any).dataLayer;
-    delete (window as any).fbq;
+    delete (window as Record<string, unknown>).gtag;
+    delete (window as Record<string, unknown>).dataLayer;
+    delete (window as Record<string, unknown>).fbq;
 
     // Set default environment variables
     process.env.NEXT_PUBLIC_FEATURE_ANALYTICS_ENABLED = "true";
@@ -74,7 +83,7 @@ describe("Analytics Component", () => {
 
     it("should not reinitialize existing dataLayer", async () => {
       // Pre-populate dataLayer
-      (window as any).dataLayer = [{ event: "existing_event" }];
+      (window as Record<string, unknown>).dataLayer = [{ event: "existing_event" }];
 
       vi.mocked(ConsentManager.useConsent).mockReturnValue({
         consent: {
@@ -91,7 +100,7 @@ describe("Analytics Component", () => {
 
       await waitFor(() => {
         expect(window.dataLayer).toBeDefined();
-        expect((window.dataLayer as any)[0].event).toBe("existing_event");
+        expect((window.dataLayer as Array<{ event: string }>)[0].event).toBe("existing_event");
       });
     });
   });
@@ -276,7 +285,7 @@ describe("Analytics Component", () => {
 
 describe("useAnalytics Hook", () => {
   beforeEach(() => {
-    delete (window as any).trackAnalyticsEvent;
+    delete (window as Record<string, unknown>).trackAnalyticsEvent;
 
     vi.mocked(ConsentManager.useConsent).mockReturnValue({
       consent: {

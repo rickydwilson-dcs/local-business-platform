@@ -11,8 +11,8 @@ import {
   parseConsent,
   hasAnalyticsConsent,
   type ConsentState,
-} from "@/lib/analytics/consent-schema";
-import { extractClientIp } from "@/lib/security/ip-utils";
+} from "@platform/core-components/lib/analytics/consent-schema";
+import { extractClientIp } from "@platform/core-components/lib/security/ip-utils";
 
 // Feature flags for analytics control
 function getFeatureFlags() {
@@ -98,7 +98,6 @@ export async function proxy(request: NextRequest) {
   const addSecurityHeaders = (res: NextResponse) => {
     res.headers.set("X-Content-Type-Options", "nosniff");
     res.headers.set("X-Frame-Options", "DENY");
-    res.headers.set("X-XSS-Protection", "1; mode=block");
     res.headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
     return res;
   };

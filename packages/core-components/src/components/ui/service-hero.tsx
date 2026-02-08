@@ -20,7 +20,7 @@ export function ServiceHero(props: ServiceHeroProps) {
     title,
     description,
     phone = PHONE_DISPLAY,
-    trustBadges = ["TG20:21 Compliant", "CHAS Accredited", "£10M Insured"],
+    trustBadges = ["Industry Certified", "Fully Accredited", "Fully Insured"],
     heroImage,
     ctaText = "Get Free Quote",
     ctaUrl = "/contact",
@@ -100,7 +100,7 @@ export function ServiceHero(props: ServiceHeroProps) {
             {heroImage ? (
               <Image
                 src={getImageUrl(heroImage)}
-                alt={`Professional scaffolding installation for ${title.toLowerCase()} showing safe access solutions with TG20:21 compliant design`}
+                alt={`Professional ${title.toLowerCase()} showing high-quality workmanship`}
                 title={`${title} services`}
                 width={600}
                 height={400}
@@ -125,7 +125,7 @@ export function ServiceHero(props: ServiceHeroProps) {
                     />
                   </svg>
                   <span className="text-lg font-medium">Service Hero Image</span>
-                  <p className="text-sm text-gray-700 mt-2">Professional scaffolding photography</p>
+                  <p className="text-sm text-gray-700 mt-2">Professional service photography</p>
                 </div>
               </div>
             )}

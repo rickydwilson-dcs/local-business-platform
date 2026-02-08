@@ -17,7 +17,7 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 import matter from "gray-matter";
-import { ServiceFrontmatterSchema, LocationFrontmatterSchema } from "../lib/content-schemas";
+import { ServiceFrontmatterSchema, LocationFrontmatterSchema } from "@platform/core-components";
 import { z } from "zod";
 
 // ANSI color codes for terminal output

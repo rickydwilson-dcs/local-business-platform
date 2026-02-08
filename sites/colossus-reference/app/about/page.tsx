@@ -2,12 +2,13 @@ import Link from "next/link";
 import Image from "next/image";
 import { absUrl } from "@/lib/site";
 import { Metadata } from "next";
-import { Breadcrumbs, AccreditationSection } from "@platform/core-components";
+import { Breadcrumbs } from "@platform/core-components";
+import { AccreditationSection } from "@/components/ui/accreditation-section";
 import { getImageUrl } from "@/lib/image";
 import { PHONE_DISPLAY, PHONE_TEL } from "@/lib/contact-info";
 
 export const metadata: Metadata = {
-  title: "About Colossus Scaffolding | South East Specialists",
+  title: "About Us | South East Scaffolding Specialists",
   description:
     "Learn about Colossus Scaffolding — established 2009, CISRS qualified teams, TG20:21 compliant, £10M insured. Professional scaffolding across South East England.",
   openGraph: {
@@ -363,6 +364,7 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* Rest of the page remains unchanged - Company Information, Track Record, etc. */}
       {/* Company Information Section */}
       <section className="section-standard bg-white">
         <div className="container-standard">
@@ -453,7 +455,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Track Record Section - Using improved homepage trust indicators */}
+      {/* Track Record Section */}
       <section className="section-standard bg-gradient-to-br from-gray-50 to-gray-100 border-t border-b border-gray-200">
         <div className="container-standard">
           <div className="text-center mb-12">

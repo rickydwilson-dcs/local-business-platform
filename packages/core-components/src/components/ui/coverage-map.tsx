@@ -184,7 +184,7 @@ export function CoverageMap({
                 window.location.href = location.url;
               },
             }}
-            aria-label={`View ${location.name} scaffolding services`}
+            aria-label={`View ${location.name} services`}
           >
             <Popup>
               <div className="p-2 min-w-[200px]">

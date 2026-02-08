@@ -161,17 +161,23 @@ export const LocationFrontmatterSchema = z.object({
 
   heroImage: ImagePathSchema.optional(),
 
-  hero: z.object({
-    title: z.string().min(5, "Hero title is required"),
-    description: z.string().min(20, "Hero description must be at least 20 characters"),
-    phone: z.string().regex(/^[\d\s\+\-\(\)]+$/, "Phone must be valid"),
-    trustBadges: z
-      .array(z.string().min(3, "Trust badge text too short"))
-      .min(1, "At least 1 trust badge required")
-      .optional(),
-    ctaText: z.string().min(5, "CTA text is required").optional(),
-    ctaUrl: z.string().startsWith("/", "CTA URL must start with /").optional(),
-  }),
+  hero: z
+    .object({
+      title: z.string().min(5, "Hero title is required").optional(),
+      description: z.string().min(20, "Hero description must be at least 20 characters").optional(),
+      image: ImagePathSchema.optional(),
+      phone: z
+        .string()
+        .regex(/^[\d\s\+\-\(\)]+$/, "Phone must be valid")
+        .optional(),
+      trustBadges: z
+        .array(z.string().min(3, "Trust badge text too short"))
+        .min(1, "At least 1 trust badge required")
+        .optional(),
+      ctaText: z.string().min(5, "CTA text is required").optional(),
+      ctaUrl: z.string().startsWith("/", "CTA URL must start with /").optional(),
+    })
+    .optional(),
 
   specialists: z
     .object({
