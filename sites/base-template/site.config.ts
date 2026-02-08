@@ -254,7 +254,7 @@ export const siteConfig: SiteConfig = {
     analytics: false,
     consentBanner: false,
     contactForm: true,
-    rateLimit: false,
+    rateLimit: true,
     testimonials: true,
     blog: false,
   },

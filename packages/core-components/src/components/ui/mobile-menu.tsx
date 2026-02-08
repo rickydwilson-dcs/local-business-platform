@@ -165,10 +165,12 @@ export function MobileMenu({
                   <li key={item.href}>
                     <button
                       onClick={() => setLocationsExpanded(!locationsExpanded)}
+                      aria-expanded={locationsExpanded}
                       className="flex items-center justify-between w-full text-xl font-medium text-slate-800 py-2"
                     >
                       <span>{item.label}</span>
                       <svg
+                        aria-hidden="true"
                         className={`w-5 h-5 transition-transform duration-200 ${
                           locationsExpanded ? "rotate-180" : ""
                         }`}

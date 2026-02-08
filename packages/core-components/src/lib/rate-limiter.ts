@@ -81,7 +81,9 @@ export async function checkRateLimit(
   const supabase = getSupabase();
 
   if (!supabase) {
-    console.log("[Rate Limiter] Supabase not configured — allowing request");
+    if (process.env.NODE_ENV === "development") {
+      console.log("[Rate Limiter] Supabase not configured — allowing request");
+    }
     return { allowed: true };
   }
 

@@ -82,8 +82,12 @@ function hasValidConsent(consent: ConsentState | null): boolean {
 export async function POST(request: NextRequest) {
   try {
     // Rate limiting
-    const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
-    if (!checkRateLimit(ip)) {
+    const clientIP =
+      request.headers.get("x-real-ip") ||
+      request.headers.get("cf-connecting-ip") ||
+      request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+      "unknown";
+    if (!checkRateLimit(clientIP)) {
       return NextResponse.json(
         { success: false, error: "Rate limit exceeded" },
         { status: 429, headers: { "Retry-After": "60" } }

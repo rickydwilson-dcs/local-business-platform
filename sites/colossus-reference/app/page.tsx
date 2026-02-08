@@ -7,11 +7,11 @@ import { PHONE_DISPLAY, PHONE_TEL } from "@/lib/contact-info";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Professional Scaffolding Services South East UK",
+  title: "Scaffolding Services South East UK",
   description:
     "TG20:21 compliant scaffolding services across South East England. CISRS qualified teams, £10M insured, CHAS accredited. Access scaffolding, facade work & more.",
   openGraph: {
-    title: "Professional Scaffolding Services South East UK",
+    title: "Scaffolding Services South East UK",
     description:
       "TG20:21 compliant scaffolding services across South East England. CISRS qualified teams, £10M insured, CHAS accredited.",
     url: absUrl("/"),
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Professional Scaffolding Services South East UK",
+    title: "Scaffolding Services South East UK",
     description:
       "TG20:21 compliant scaffolding services across South East England. CISRS qualified teams, £10M insured, CHAS accredited.",
     images: [absUrl("/static/logo.png")],
