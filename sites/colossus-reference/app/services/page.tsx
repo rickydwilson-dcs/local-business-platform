@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Schema, ContentGrid, Breadcrumbs } from "@platform/core-components";
 import { getContentItems } from "@/lib/content";
 import { PHONE_DISPLAY, PHONE_TEL } from "@/lib/contact-info";
+import { absUrl } from "@/lib/site";
 
 export const dynamic = "force-static";
 
@@ -21,8 +22,11 @@ export const metadata: Metadata = {
     title: "Professional Scaffolding Services South East UK",
     description:
       "TG20:21 compliant scaffolding services for residential, commercial and industrial projects across the South East UK.",
-    url: "/services",
+    url: absUrl("/services"),
     type: "website",
+  },
+  alternates: {
+    canonical: absUrl("/services"),
   },
 };
 
@@ -34,7 +38,7 @@ export default async function ServicesPage() {
   return (
     <>
       {/* Breadcrumbs */}
-      <div className="bg-gray-50 border-b">
+      <div className="bg-surface-muted border-b">
         <div className="container-standard py-4">
           <Breadcrumbs items={breadcrumbItems} />
         </div>
@@ -109,7 +113,7 @@ export default async function ServicesPage() {
         </section>
 
         {/* Services Grid */}
-        <section className="section-standard bg-gray-50">
+        <section className="section-standard bg-surface-muted">
           <div className="container-standard">
             <div className="section-header">
               <h2 className="heading-section">Our Professional Scaffolding Services</h2>

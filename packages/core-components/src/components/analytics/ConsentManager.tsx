@@ -432,6 +432,7 @@ export function ConsentManager({
                             className="sr-only peer"
                             checked={category.value}
                             disabled={category.required || loading}
+                            aria-label={`${category.title} cookies`}
                             onChange={(e) => {
                               if (category.id === "analytics") {
                                 setCustomConsent((prev) => ({

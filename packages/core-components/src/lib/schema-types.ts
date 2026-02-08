@@ -4,10 +4,10 @@
  */
 
 export interface BusinessConfig {
-  /** Business name (e.g., "Colossus Scaffolding") */
+  /** Business name (e.g., "Acme Services") */
   name: string;
 
-  /** Legal business name (e.g., "Colossus Scaffolding Ltd") */
+  /** Legal business name (e.g., "Acme Services Ltd") */
   legalName?: string;
 
   /** Business description for SEO and schema markup */

@@ -44,6 +44,7 @@ export function HeroV3({
           style={{
             backgroundImage: `url(${backgroundImage || "https://images.unsplash.com/photo-1497366216548-37526070297c"})`,
           }}
+          aria-hidden="true"
         />
       )}
 
@@ -56,7 +57,7 @@ export function HeroV3({
         <p className="text-2xl md:text-3xl text-white mb-12 drop-shadow-lg">{subtitle}</p>
         <a
           href={ctaHref}
-          className="inline-block bg-white text-gray-900 px-12 py-5 rounded-full text-xl font-bold hover:bg-gray-100 transition shadow-2xl transform hover:scale-105"
+          className="inline-block bg-surface-background text-surface-foreground px-12 py-5 rounded-full text-xl font-bold hover:bg-surface-muted transition shadow-2xl transform hover:scale-105"
         >
           {ctaText}
         </a>

@@ -234,7 +234,7 @@ export function MobileMenu({
         </nav>
 
         {/* Bottom CTA Section */}
-        <div className="absolute bottom-0 left-0 right-0 px-6 py-6 border-t border-gray-200 bg-gray-50">
+        <div className="absolute bottom-0 left-0 right-0 px-6 py-6 border-t border-gray-200 bg-surface-muted">
           {showPhone && (
             <Link
               href={`tel:${phoneTel}`}

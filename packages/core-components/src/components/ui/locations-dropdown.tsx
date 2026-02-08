@@ -50,12 +50,14 @@ export function LocationsDropdown({
 }: LocationsDropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
   // Close on click outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setIsOpen(false);
+        buttonRef.current?.focus();
       }
     };
 
@@ -73,6 +75,7 @@ export function LocationsDropdown({
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         setIsOpen(false);
+        buttonRef.current?.focus();
       }
     };
 
@@ -101,6 +104,7 @@ export function LocationsDropdown({
   return (
     <div ref={dropdownRef} className="relative">
       <button
+        ref={buttonRef}
         onClick={() => setIsOpen(!isOpen)}
         className="flex items-center gap-1 text-gray-700 hover:text-brand-primary transition-colors font-medium"
         aria-expanded={isOpen}
@@ -166,7 +170,7 @@ function SimpleDropdown({
       </div>
 
       {/* Footer */}
-      <div className="px-4 py-3 border-t border-gray-100 bg-gray-50 rounded-b-lg">
+      <div className="px-4 py-3 border-t border-gray-100 bg-surface-muted rounded-b-lg">
         <Link
           href="/locations"
           onClick={onClose}

@@ -93,9 +93,9 @@ npm test            # Unit tests (Vitest)
 npm run test:e2e:smoke  # Fast E2E tests (Playwright)
 
 # Content validation — checks MDX frontmatter against Zod schemas
-npm run validate:content   # All MDX files
-npm run validate:services  # Service files only
-npm run validate:locations # Location files only
+npm run validate:content                          # All MDX files
+npx tsx ../../scripts/validate-content.ts services   # Service files only
+npx tsx ../../scripts/validate-content.ts locations  # Location files only
 
 # Theme validation — WCAG contrast checking
 pnpm validate --config ../../sites/[site-name]/theme.config.ts

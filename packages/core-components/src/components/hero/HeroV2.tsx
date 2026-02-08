@@ -28,15 +28,15 @@ export function HeroV2({
   features = [],
 }: HeroV2Props) {
   return (
-    <section className="bg-white py-20">
+    <section className="bg-surface-background py-20">
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           {/* Left Column - Content */}
           <div>
-            <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+            <h1 className="text-5xl md:text-6xl font-bold text-surface-foreground mb-6 leading-tight">
               {title}
             </h1>
-            <p className="text-xl text-gray-600 mb-8">{subtitle}</p>
+            <p className="text-xl text-surface-muted-foreground mb-8">{subtitle}</p>
 
             {/* Features List */}
             {features.length > 0 && (
@@ -44,7 +44,7 @@ export function HeroV2({
                 {features.map((feature, index) => (
                   <li key={index} className="flex items-center gap-3">
                     <svg
-                      className="w-6 h-6 text-green-500 flex-shrink-0"
+                      className="w-6 h-6 text-brand-primary flex-shrink-0"
                       fill="currentColor"
                       viewBox="0 0 20 20"
                     >
@@ -54,7 +54,7 @@ export function HeroV2({
                         clipRule="evenodd"
                       />
                     </svg>
-                    <span className="text-gray-700">{feature}</span>
+                    <span className="text-surface-foreground">{feature}</span>
                   </li>
                 ))}
               </ul>
@@ -64,14 +64,14 @@ export function HeroV2({
             <div className="flex flex-wrap gap-4">
               <a
                 href={ctaHref}
-                className="bg-blue-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-blue-700 transition shadow-lg"
+                className="bg-brand-primary text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-brand-primary-hover transition shadow-lg"
               >
                 {ctaText}
               </a>
               {secondaryCtaText && secondaryCtaHref && (
                 <a
                   href={secondaryCtaHref}
-                  className="bg-white text-blue-600 px-8 py-4 rounded-lg text-lg font-semibold border-2 border-blue-600 hover:bg-blue-50 transition"
+                  className="bg-surface-background text-brand-primary px-8 py-4 rounded-lg text-lg font-semibold border-2 border-brand-primary hover:bg-brand-primary/10 transition"
                 >
                   {secondaryCtaText}
                 </a>
@@ -84,7 +84,7 @@ export function HeroV2({
             {imageUrl ? (
               <img src={imageUrl} alt={title} className="w-full h-auto rounded-2xl shadow-2xl" />
             ) : (
-              <div className="w-full aspect-square bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl shadow-2xl flex items-center justify-center text-white text-6xl font-bold">
+              <div className="w-full aspect-square bg-gradient-to-br from-brand-primary to-brand-secondary rounded-2xl shadow-2xl flex items-center justify-center text-white text-6xl font-bold">
                 ✨
               </div>
             )}

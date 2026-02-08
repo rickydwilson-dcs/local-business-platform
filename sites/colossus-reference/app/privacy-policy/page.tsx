@@ -35,7 +35,7 @@ export default function PrivacyPolicyPage() {
   return (
     <div className="relative">
       {/* Breadcrumbs */}
-      <div className="bg-gray-50 border-b">
+      <div className="bg-surface-muted border-b">
         <div className="container-standard py-4">
           <Breadcrumbs items={breadcrumbItems} />
         </div>
@@ -60,7 +60,7 @@ export default function PrivacyPolicyPage() {
             </div>
 
             {/* Table of Contents */}
-            <div className="bg-gray-50 rounded-2xl p-8 mb-12">
+            <div className="bg-surface-muted rounded-2xl p-8 mb-12">
               <h2 className="text-xl font-semibold mb-4">Table of Contents</h2>
               <nav className="grid md:grid-cols-2 gap-2">
                 <a href="#data-controller" className="text-brand-primary hover:underline">
@@ -849,7 +849,7 @@ export default function PrivacyPolicyPage() {
                   </div>
                 </div>
 
-                <div className="p-4 bg-gray-50 border border-gray-200 rounded-lg">
+                <div className="p-4 bg-surface-muted border border-gray-200 rounded-lg">
                   <p className="text-sm text-gray-700">
                     <strong>Response Times:</strong> We aim to respond to all privacy-related
                     inquiries within 5 working days, and formal data subject requests within one
@@ -874,7 +874,7 @@ export default function PrivacyPolicyPage() {
                   <li>Displaying a notice on our website for significant changes</li>
                 </ul>
 
-                <div className="bg-gray-50 rounded-lg p-6">
+                <div className="bg-surface-muted rounded-lg p-6">
                   <h3 className="font-semibold mb-2">Current Version Information:</h3>
                   <div className="grid md:grid-cols-3 gap-4 text-sm text-gray-600">
                     <div>

@@ -20,6 +20,8 @@ interface ContactFormData {
   location?: string;
   message: string;
   csrfToken: string;
+  /** Honeypot field — if filled, submission is from a bot */
+  website?: string;
 }
 
 interface ContactSubmission {
@@ -58,6 +60,11 @@ export async function POST(request: NextRequest) {
       body = await request.json();
     } catch {
       return NextResponse.json({ error: 'Invalid request body' }, { status: 400 });
+    }
+
+    // Honeypot: silently reject bots that fill hidden fields
+    if (body.website) {
+      return NextResponse.json({ success: true, message: 'Thank you for your message.' });
     }
 
     // Validate CSRF token

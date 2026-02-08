@@ -176,7 +176,7 @@ export default function ContactPage() {
   return (
     <>
       {/* Breadcrumbs */}
-      <div className="bg-gray-50 border-b">
+      <div className="bg-surface-muted border-b">
         <div className="mx-auto w-full lg:w-[90%] px-6 py-4">
           <Breadcrumbs items={breadcrumbItems} />
         </div>
