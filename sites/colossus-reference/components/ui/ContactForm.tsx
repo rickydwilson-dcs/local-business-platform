@@ -370,25 +370,6 @@ export function ContactForm() {
           {isSubmitting ? "Sending..." : "Send Enquiry"}
         </button>
 
-        {submitStatus === "success" && (
-          <div role="alert" className="p-4 bg-green-50 border border-green-200 rounded-lg">
-            <h3 className="text-green-800 font-semibold mb-1">Thank you!</h3>
-            <p className="text-green-700">
-              Your enquiry has been received. We&apos;ll get back to you within 24 hours with your
-              free quote.
-            </p>
-          </div>
-        )}
-
-        {submitStatus === "error" && (
-          <div role="alert" className="p-4 bg-red-50 border border-red-200 rounded-lg">
-            <h3 className="text-red-800 font-semibold mb-1">Something went wrong</h3>
-            <p className="text-red-700">
-              Please try again or call us directly on the number below.
-            </p>
-          </div>
-        )}
-
         <p className="text-sm text-gray-800 text-center">
           * Required fields. We&apos;ll respond within 24 hours with your free quote.
         </p>
