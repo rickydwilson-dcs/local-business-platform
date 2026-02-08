@@ -10,7 +10,7 @@ export function AuthorCard({
   bio = "Our team of scaffolding professionals share their expertise to help you make informed decisions about your construction and maintenance projects.",
 }: AuthorCardProps) {
   return (
-    <div className="bg-gray-50 rounded-2xl p-6 sm:p-8 border border-gray-100">
+    <div className="bg-surface-muted rounded-2xl p-6 sm:p-8 border border-gray-100">
       <div className="flex items-start gap-4 sm:gap-6">
         <div className="w-16 h-16 sm:w-20 sm:h-20 bg-brand-primary rounded-full flex items-center justify-center text-white text-xl sm:text-2xl font-bold flex-shrink-0">
           {name.charAt(0)}

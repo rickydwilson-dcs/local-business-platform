@@ -10,6 +10,7 @@ interface HeroSectionProps {
   phone?: string;
   trustBadges?: string[];
   heroImage?: string;
+  heroAlt?: string;
   ctaText?: string;
   ctaUrl?: string;
 }
@@ -23,6 +24,7 @@ export function HeroSection(props: HeroSectionProps) {
     heroImage,
     ctaText = "Get Free Quote",
     ctaUrl = "/contact",
+    heroAlt,
   } = props;
 
   return (
@@ -89,7 +91,8 @@ export function HeroSection(props: HeroSectionProps) {
               {heroImage ? (
                 <Image
                   src={getImageUrl(heroImage)}
-                  alt="Professional scaffolding installation by Colossus Scaffolding showing safe access solutions with TG20:21 compliant design"
+                  alt={heroAlt || `Professional ${title.toLowerCase()} services`}
+                  title={`${title} - Professional services`}
                   fill
                   className="object-cover"
                   priority

@@ -130,7 +130,7 @@ export default async function LocationsPage() {
         />
 
         {/* Breadcrumbs */}
-        <div className="bg-gray-50 border-b">
+        <div className="bg-surface-muted border-b">
           <div className="container-standard py-4">
             <Breadcrumbs items={breadcrumbItems} />
           </div>

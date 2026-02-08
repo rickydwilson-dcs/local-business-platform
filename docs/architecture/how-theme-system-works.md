@@ -160,7 +160,7 @@ const config: Config = {
 
 - **Brand:** `bg-brand-primary`, `bg-brand-secondary`, `bg-brand-accent`, `text-brand-primary`, `border-brand-primary`
 - **Surface:** `bg-surface-background`, `bg-surface-muted`, `bg-surface-card`, `text-surface-foreground`, `text-surface-muted-foreground`
-- **Semantic:** `bg-success`, `bg-warning`, `bg-error`, `text-success`, `text-error`
+- **Semantic:** `bg-success`, `bg-warning`, `bg-error`, `bg-info`, `text-success`, `text-error`, `text-info`
 
 ### Typography Scale
 
@@ -171,7 +171,7 @@ const config: Config = {
 
 - `rounded-button`, `rounded-card` — component-specific border radii
 - `shadow-card` — component-specific shadow
-- `h-nav`, `pt-nav` — navigation height utilities
+- `h-nav`, `pt-nav`, `mt-nav` — navigation height utilities
 - `p-xs` through `p-4xl` — theme spacing scale
 
 ### Transitions

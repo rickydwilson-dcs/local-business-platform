@@ -151,7 +151,7 @@ export default async function ProjectsPage() {
   return (
     <>
       {/* Breadcrumbs */}
-      <div className="bg-gray-50 border-b">
+      <div className="bg-surface-muted border-b">
         <div className="container-standard py-4">
           <Breadcrumbs items={breadcrumbItems} />
         </div>
@@ -202,7 +202,7 @@ export default async function ProjectsPage() {
         )}
 
         {/* All Projects */}
-        <section className="section-standard bg-gray-50">
+        <section className="section-standard bg-surface-muted">
           <div className="container-standard">
             <h2 className="heading-section mb-8">
               {featuredProjects.length > 0 ? "All Projects" : "Our Projects"}

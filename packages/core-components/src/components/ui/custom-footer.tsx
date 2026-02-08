@@ -7,6 +7,7 @@ interface CustomFooterProps {
   ctaSubtext: string;
   ctaButtonText: string;
   ctaLink: string;
+  businessName?: string;
 }
 
 export function CustomFooter({
@@ -15,6 +16,7 @@ export function CustomFooter({
   ctaSubtext,
   ctaButtonText,
   ctaLink,
+  businessName = "Our Company",
 }: CustomFooterProps) {
   return (
     <footer className="bg-gray-900 text-white">
@@ -38,7 +40,7 @@ export function CustomFooter({
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
             {/* Company Info */}
             <div className="lg:col-span-1">
-              <h3 className="text-xl font-bold mb-6">Colossus Scaffolding</h3>
+              <h3 className="text-xl font-bold mb-6">{businessName}</h3>
               <p className="text-gray-300 mb-6">
                 Professional scaffolding services in {townName} and across the South East. TG20:21
                 compliant, fully insured, CHAS accredited.
@@ -182,8 +184,8 @@ export function CustomFooter({
           <div className="border-t border-gray-700 pt-8 text-center">
             <div className="text-gray-300 text-sm">
               <p>
-                &copy; 2025 Colossus Scaffolding. All rights reserved. | Built by Digital Consulting
-                Services.
+                &copy; {new Date().getFullYear()} {businessName}. All rights reserved. | Built by
+                Digital Consulting Services.
               </p>
             </div>
           </div>

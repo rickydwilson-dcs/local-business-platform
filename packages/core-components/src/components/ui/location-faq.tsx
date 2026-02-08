@@ -8,6 +8,8 @@ interface LocationFAQProps {
   title?: string;
   description?: string;
   location: string;
+  phoneDisplay?: string;
+  phoneTel?: string;
 }
 
 export function LocationFAQ({
@@ -15,6 +17,8 @@ export function LocationFAQ({
   title = "Frequently Asked Questions",
   description,
   location,
+  phoneDisplay = "01424 466661",
+  phoneTel = "01424466661",
 }: LocationFAQProps) {
   return (
     <section className="py-16 sm:py-20 bg-white">
@@ -31,7 +35,7 @@ export function LocationFAQ({
             {items.map((item, i) => (
               <div
                 key={i}
-                className="bg-gray-50 border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow"
+                className="bg-surface-muted border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow"
               >
                 <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-start gap-3">
                   <span className="flex-shrink-0 w-6 h-6 bg-brand-primary rounded-full flex items-center justify-center text-white text-sm font-bold">
@@ -58,7 +62,7 @@ export function LocationFAQ({
               <a href="/contact" className="btn-primary">
                 Get Expert Advice
               </a>
-              <a href="tel:01424466661" className="btn-secondary gap-2">
+              <a href={`tel:${phoneTel}`} className="btn-secondary gap-2">
                 <svg
                   aria-hidden="true"
                   className="h-5 w-5"
@@ -73,7 +77,7 @@ export function LocationFAQ({
                     d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
                   />
                 </svg>
-                Call: 01424 466661
+                Call: {phoneDisplay}
               </a>
             </div>
           </div>
