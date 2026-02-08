@@ -4,8 +4,11 @@
  */
 
 import { NextRequest, NextResponse } from "next/server";
-import { DebugPanelData, FeatureFlags } from "@/lib/analytics/types";
-import { parseConsent, type ConsentState } from "@/lib/analytics/consent-schema";
+import { DebugPanelData, FeatureFlags } from "@platform/core-components/lib/analytics/types";
+import {
+  parseConsent,
+  type ConsentState,
+} from "@platform/core-components/lib/analytics/consent-schema";
 
 // Get feature flags from environment
 function getFeatureFlags(): FeatureFlags {

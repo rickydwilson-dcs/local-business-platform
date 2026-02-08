@@ -20,7 +20,15 @@ Client site for Smith's Electrical, serving the Cambridge area.
 ### Content
 
 - Location data moved to MDX frontmatter
-- Content schemas now imported from @platform/core-components
+
+---
+
+## 2026-02-08
+
+### Content
+
+- Content schemas now imported from @platform/core-components (deduplication completed)
+- Location MDX frontmatter aligned to canonical schema (heading→title, subheading→description, cta→ctaText/ctaUrl)
 
 ---
 

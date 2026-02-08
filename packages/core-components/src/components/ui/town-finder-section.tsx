@@ -55,10 +55,10 @@ export function TownFinderSection({ counties }: TownFinderSectionProps) {
     <section id="town-finder" className="section-standard bg-white">
       <div className="container-standard">
         <div className="text-center mb-12">
-          <h2 className="heading-section">Find Your Local Scaffolding Specialist</h2>
+          <h2 className="heading-section">Find Your Local Specialist</h2>
           <p className="text-lg text-gray-800 mx-auto w-full lg:w-[85%]">
-            Enter your town name or select a county to connect with scaffolding experts who
-            understand your local requirements.
+            Enter your town name or select a county to connect with local experts who understand
+            your requirements.
           </p>
         </div>
 

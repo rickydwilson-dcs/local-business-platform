@@ -2,7 +2,6 @@
 export * from "./components/hero";
 
 // Export all UI components (generic, usable across all sites)
-export * from "./components/ui/accreditation-section";
 export * from "./components/ui/aggregate-rating-display";
 export * from "./components/ui/article-callout";
 export * from "./components/ui/author-card";
@@ -19,7 +18,6 @@ export * from "./components/ui/coverage-areas";
 export * from "./components/ui/coverage-map-section";
 export * from "./components/ui/coverage-stats-section";
 export * from "./components/ui/cta-section";
-export * from "./components/ui/custom-footer";
 export * from "./components/ui/faq-section";
 // Note: footer.tsx imports getContentItems (@/lib/content → fs/promises) — server-only async component.
 // Cannot be in barrel because client components also import from this barrel.
@@ -48,10 +46,7 @@ export * from "./components/ui/service-cta";
 export * from "./components/ui/service-faq";
 export * from "./components/ui/service-gallery";
 export * from "./components/ui/service-hero";
-export * from "./components/ui/service-location-matrix";
 export * from "./components/ui/service-showcase";
-// Note: services-overview.tsx imports getContentItems and has hardcoded colossus slugs — server-only.
-// Import directly: import { ServicesOverview } from "@platform/core-components/src/components/ui/services-overview";
 export * from "./components/ui/star-rating";
 export * from "./components/ui/testimonial-card";
 

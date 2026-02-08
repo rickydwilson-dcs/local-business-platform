@@ -13,9 +13,9 @@ interface ServiceGalleryProps {
 export function ServiceGallery({
   images = [],
   title = "Project Gallery",
-  description = "View our professional scaffolding installations and completed projects.",
+  description = "View our professional installations and completed projects.",
   placeholderCount = 6,
-  serviceName = "Scaffolding project",
+  serviceName = "Project",
   locationName,
 }: ServiceGalleryProps) {
   // If no images provided, use placeholders

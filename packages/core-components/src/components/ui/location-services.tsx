@@ -83,9 +83,7 @@ export function LocationServices({
         </div>
 
         <div className="text-center mt-12">
-          <p className="text-gray-800 mb-6">
-            Need a custom scaffolding solution for your {location} project?
-          </p>
+          <p className="text-gray-800 mb-6">Need a custom solution for your {location} project?</p>
           <Link href="/contact" className="btn-primary-lg">
             Request Custom Quote
           </Link>

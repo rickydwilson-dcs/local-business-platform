@@ -15,8 +15,8 @@ interface CoverageAreasProps {
 
 export function CoverageAreas({
   areas,
-  title = "Professional Scaffolding Services Across the South East",
-  description = "Our expert team understands the unique architectural challenges across the South East, providing specialized scaffolding solutions for the region's distinctive building types and heritage properties.",
+  title = "Professional Services Across Our Service Area",
+  description = "Our expert team understands the unique challenges across the region, providing specialized solutions for the area's distinctive building types and heritage properties.",
   linkPrefix = "/locations",
 }: CoverageAreasProps) {
   const projectTypes = [
@@ -81,13 +81,11 @@ export function CoverageAreas({
                     </svg>
                   </div>
                   <div>
-                    <h4 className="font-semibold text-gray-900 mb-2">
-                      TG20:21 Compliant & Fully Insured
-                    </h4>
+                    <h4 className="font-semibold text-gray-900 mb-2">Fully Certified & Insured</h4>
                     <p className="text-gray-800 text-sm leading-relaxed">
-                      All our scaffolding installations across the South East meet the latest
-                      TG20:21 standards, with comprehensive £10M public liability insurance and CHAS
-                      accreditation for complete peace of mind.
+                      All our installations across the region meet the latest industry standards,
+                      with comprehensive insurance coverage and professional accreditation for
+                      complete peace of mind.
                     </p>
                   </div>
                 </div>

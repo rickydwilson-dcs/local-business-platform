@@ -4,10 +4,14 @@
  */
 
 import { NextRequest, NextResponse } from "next/server";
-import { GA4Analytics } from "@/lib/analytics/ga4";
-import { FacebookPixelAnalytics } from "@/lib/analytics/facebook";
-import { GoogleAdsAnalytics } from "@/lib/analytics/google-ads";
-import { AnalyticsResponse, FeatureFlags, ConsentState } from "@/lib/analytics/types";
+import { GA4Analytics } from "@platform/core-components/lib/analytics/ga4";
+import { FacebookPixelAnalytics } from "@platform/core-components/lib/analytics/facebook";
+import { GoogleAdsAnalytics } from "@platform/core-components/lib/analytics/google-ads";
+import {
+  AnalyticsResponse,
+  FeatureFlags,
+  ConsentState,
+} from "@platform/core-components/lib/analytics/types";
 
 // In-memory rate limiter: 30 requests per minute per IP
 const RATE_LIMIT_WINDOW_MS = 60 * 1000;

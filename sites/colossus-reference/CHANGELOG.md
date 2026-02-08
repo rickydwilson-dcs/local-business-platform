@@ -21,7 +21,14 @@ Reference implementation site for the platform. Serves as the working proof-of-c
 ### Content
 
 - Location data moved to MDX frontmatter (no more hardcoded TS files)
-- Content schemas now imported from @platform/core-components
+
+---
+
+## 2026-02-08
+
+### Content
+
+- Content schemas now imported from @platform/core-components (deduplication completed)
 
 ---
 

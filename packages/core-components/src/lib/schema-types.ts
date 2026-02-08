@@ -91,7 +91,7 @@ export interface LocalBusinessSchemaOptions {
    * Type of business for schema.org @type
    * Common types:
    * - LocalBusiness: Generic local business
-   * - HomeAndConstructionBusiness: Construction, renovation, scaffolding
+   * - HomeAndConstructionBusiness: Construction, renovation, trades
    * - ProfessionalService: Consulting, legal, accounting
    * - Plumber: Plumbing services
    * - Electrician: Electrical services
