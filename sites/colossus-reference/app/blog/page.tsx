@@ -23,8 +23,11 @@ export const metadata: Metadata = {
     title: "Scaffolding Blog | Industry Insights & Expert Tips",
     description:
       "Expert scaffolding insights, safety tips, and industry guidance from the Colossus Scaffolding team.",
-    url: "/blog",
+    url: absUrl("/blog"),
     type: "website",
+  },
+  alternates: {
+    canonical: absUrl("/blog"),
   },
 };
 
@@ -43,7 +46,7 @@ function BlogCard({ post }: { post: BlogPost }) {
         <Link href={`/blog/${post.slug}`} className="block relative h-48 overflow-hidden">
           <Image
             src={getImageUrl(post.heroImage)}
-            alt={post.title}
+            alt={`Featured image for: ${post.title}`}
             fill
             className="object-cover group-hover:scale-105 transition-transform duration-300"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -107,7 +110,7 @@ export default async function BlogPage() {
   return (
     <>
       {/* Breadcrumbs */}
-      <div className="bg-gray-50 border-b">
+      <div className="bg-surface-muted border-b">
         <div className="container-standard py-4">
           <Breadcrumbs items={breadcrumbItems} />
         </div>
@@ -142,7 +145,7 @@ export default async function BlogPage() {
         )}
 
         {/* All Posts */}
-        <section className="section-standard bg-gray-50">
+        <section className="section-standard bg-surface-muted">
           <div className="container-standard">
             <h2 className="heading-section mb-8">
               {featuredPosts.length > 0 ? "Latest Articles" : "All Articles"}

@@ -25,7 +25,7 @@ export function ServiceCards({
   cards,
   backgroundColor = "white",
 }: ServiceCardsProps) {
-  const bgClass = backgroundColor === "white" ? "bg-white" : "bg-gray-50";
+  const bgClass = backgroundColor === "white" ? "bg-white" : "bg-surface-muted";
 
   // Dynamic grid classes based on number of cards
   const getGridClass = (cardCount: number) => {
@@ -61,7 +61,7 @@ export function ServiceCards({
               <div
                 key={index}
                 className={`group relative rounded-2xl overflow-hidden shadow-sm border border-gray-200 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 ${
-                  isEven ? "bg-white" : "bg-gray-50"
+                  isEven ? "bg-white" : "bg-surface-muted"
                 }`}
               >
                 {/* Header with Image/Icon */}
@@ -70,7 +70,7 @@ export function ServiceCards({
                     <div className="relative h-48 overflow-hidden">
                       <Image
                         src={card.image}
-                        alt={`${card.title} scaffolding services - professional installation by Colossus Scaffolding`}
+                        alt={`${card.title} - professional service installation`}
                         title={`${card.title} - Learn more about our scaffolding services`}
                         fill
                         sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"

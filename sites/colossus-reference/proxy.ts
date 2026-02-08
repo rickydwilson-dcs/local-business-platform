@@ -94,9 +94,18 @@ export async function proxy(request: NextRequest) {
   // Get feature flags
   const flags = getFeatureFlags();
 
+  // Helper to add security headers to any response
+  const addSecurityHeaders = (res: NextResponse) => {
+    res.headers.set("X-Content-Type-Options", "nosniff");
+    res.headers.set("X-Frame-Options", "DENY");
+    res.headers.set("X-XSS-Protection", "1; mode=block");
+    res.headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
+    return res;
+  };
+
   // Early return if analytics is completely disabled
   if (!flags.FEATURE_ANALYTICS_ENABLED || !flags.FEATURE_SERVER_TRACKING) {
-    return NextResponse.next();
+    return addSecurityHeaders(NextResponse.next());
   }
 
   // Only track page views (not API routes, static assets, etc.)
@@ -116,7 +125,7 @@ export async function proxy(request: NextRequest) {
     pathname === "/robots.txt" ||
     pathname === "/sitemap.xml"
   ) {
-    return NextResponse.next();
+    return addSecurityHeaders(NextResponse.next());
   }
 
   // Parse consent from cookies
@@ -127,11 +136,11 @@ export async function proxy(request: NextRequest) {
   if (!hasAnalyticsConsent(consent)) {
     // User hasn't consented or consent is unknown
     // Still allow the request to proceed, but don't track
-    return NextResponse.next();
+    return addSecurityHeaders(NextResponse.next());
   }
 
-  // Generate response
-  const response = NextResponse.next();
+  // Generate response with security headers
+  const response = addSecurityHeaders(NextResponse.next());
 
   // Get or generate client ID
   const clientId = getClientId(request);

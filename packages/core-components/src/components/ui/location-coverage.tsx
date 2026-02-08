@@ -31,7 +31,7 @@ export function LocationCoverage({
               </h3>
               <div className="grid md:grid-cols-2 gap-4">
                 {projectTypes.map((project, i) => (
-                  <div key={i} className="flex items-start gap-3 p-4 bg-gray-50 rounded-lg">
+                  <div key={i} className="flex items-start gap-3 p-4 bg-surface-muted rounded-lg">
                     <div className="flex-shrink-0 w-6 h-6 bg-brand-primary rounded-full flex items-center justify-center mt-0.5">
                       <svg
                         className="h-4 w-4 text-white"
@@ -85,7 +85,7 @@ export function LocationCoverage({
           </div>
 
           <div className="lg:col-span-1">
-            <div className="bg-gray-50 rounded-2xl p-6 border border-gray-200 sticky top-8">
+            <div className="bg-surface-muted rounded-2xl p-6 border border-gray-200 sticky top-8">
               <h3 className="text-xl font-semibold text-gray-900 mb-4 flex items-center gap-2">
                 <svg className="h-5 w-5 text-brand-primary" fill="currentColor" viewBox="0 0 20 20">
                   <path

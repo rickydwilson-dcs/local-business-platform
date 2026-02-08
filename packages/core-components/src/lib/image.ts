@@ -56,11 +56,11 @@ export function generateImageAlt(
 
   // Auto-generate with location context when available
   if (locationName) {
-    return `${serviceName} in ${locationName} - Colossus Scaffolding`;
+    return `${serviceName} in ${locationName} - Professional Services`;
   }
 
   // Fallback to service name only
-  return `${serviceName} - Colossus Scaffolding`;
+  return `${serviceName} - Professional Services`;
 }
 
 /**
@@ -80,8 +80,8 @@ export function generateImageTitle(
   }
 
   if (locationName) {
-    return `Professional ${serviceName.toLowerCase()} services in ${locationName} by Colossus Scaffolding`;
+    return `Professional ${serviceName.toLowerCase()} services in ${locationName} by our professional team`;
   }
 
-  return `Professional ${serviceName.toLowerCase()} services by Colossus Scaffolding`;
+  return `Professional ${serviceName.toLowerCase()} services by our professional team`;
 }

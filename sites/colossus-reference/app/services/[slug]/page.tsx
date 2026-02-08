@@ -14,6 +14,7 @@ import {
 } from "@platform/core-components";
 import { absUrl } from "@/lib/site";
 import { deriveLocationContext, getAreaServed } from "@/lib/location-utils";
+import { getLocationSlugs } from "@/lib/locations-config";
 import { getImageUrl } from "@/lib/image";
 import { loadMdx } from "@/lib/mdx";
 
@@ -23,6 +24,9 @@ export const dynamicParams = false;
 type Params = { slug: string };
 
 const DIR = path.join(process.cwd(), "content", "services");
+
+/** Default region-level areas for non-location-specific services */
+const DEFAULT_AREAS = ["East Sussex", "West Sussex", "Kent", "Surrey"];
 
 interface ServiceData {
   title: string;
@@ -110,7 +114,8 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
     .replace(" Systems", "");
 
   // Enhanced local SEO for service-location combinations
-  const locationContext = deriveLocationContext(slug);
+  const knownLocations = await getLocationSlugs();
+  const locationContext = deriveLocationContext(slug, knownLocations);
   const isLocationSpecific = locationContext !== null;
   // SEO: Keep titles under 60 characters to prevent Google truncation
   let optimizedTitle = serviceData.seoTitle || `${serviceName} | Colossus`;
@@ -118,7 +123,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   let keywords: string[] = serviceData.keywords || [];
 
   if (isLocationSpecific && locationContext) {
-    const { locationName, location } = locationContext;
+    const { locationName } = locationContext;
 
     // Optimize title for local SEO (under 60 characters)
     // Pattern: "Commercial Scaffolding Brighton | Colossus" = ~41 chars
@@ -126,34 +131,12 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
 
     // Add location-specific keywords if not already present
     if (keywords.length === 0) {
-      if (location === "brighton") {
-        keywords = [
-          `${slug.replace("-", " ")}`,
-          `${locationName} scaffolding hire`,
-          `scaffolding ${locationName}`,
-          "coastal scaffolding",
-          "Victorian terrace scaffolding",
-          "Regency property scaffolding",
-        ];
-      } else if (location === "canterbury") {
-        keywords = [
-          `${slug.replace("-", " ")}`,
-          `${locationName} scaffolding hire`,
-          `scaffolding ${locationName}`,
-          "World Heritage Site scaffolding",
-          "cathedral scaffolding",
-          "medieval building scaffolding",
-        ];
-      } else if (location === "hastings") {
-        keywords = [
-          `${slug.replace("-", " ")}`,
-          `${locationName} scaffolding hire`,
-          `scaffolding ${locationName}`,
-          "Old Town scaffolding",
-          "medieval scaffolding",
-          "cliff top scaffolding",
-        ];
-      }
+      keywords = [
+        `${slug.replace("-", " ")}`,
+        `${locationName} scaffolding hire`,
+        `scaffolding ${locationName}`,
+        `${serviceName.toLowerCase()} ${locationName}`,
+      ];
     }
   } else {
     // General service keywords if not provided
@@ -237,7 +220,8 @@ export default async function Page({ params }: { params: Promise<Params> }) {
     .replace(" Systems", "");
 
   // Detect if this is a location-specific service
-  const locationContext = deriveLocationContext(slug);
+  const knownLocations = await getLocationSlugs();
+  const locationContext = deriveLocationContext(slug, knownLocations);
   const isLocationSpecific = locationContext !== null;
 
   // Build breadcrumbs based on location-specific or general service
@@ -259,7 +243,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
   return (
     <>
       {/* Breadcrumbs */}
-      <div className="bg-gray-50 border-b">
+      <div className="bg-surface-muted border-b">
         <div className="mx-auto w-full lg:w-[90%] px-6 py-4">
           <Breadcrumbs items={breadcrumbItems} />
         </div>
@@ -312,9 +296,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
           name: serviceData.title,
           description: serviceData.description,
           serviceType: serviceName,
-          areaServed: locationContext
-            ? getAreaServed(locationContext.location)
-            : ["East Sussex", "West Sussex", "Kent", "Surrey"],
+          areaServed: locationContext ? getAreaServed(locationContext.location) : DEFAULT_AREAS,
         }}
         org={{
           name: "Colossus Scaffolding",

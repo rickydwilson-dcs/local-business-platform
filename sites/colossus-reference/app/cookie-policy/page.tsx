@@ -35,7 +35,7 @@ export default function CookiePolicyPage() {
   return (
     <div className="relative">
       {/* Breadcrumbs */}
-      <div className="bg-gray-50 border-b">
+      <div className="bg-surface-muted border-b">
         <div className="container-standard py-4">
           <Breadcrumbs items={breadcrumbItems} />
         </div>
@@ -56,7 +56,7 @@ export default function CookiePolicyPage() {
             </div>
 
             {/* Table of Contents */}
-            <div className="bg-gray-50 rounded-2xl p-8 mb-12">
+            <div className="bg-surface-muted rounded-2xl p-8 mb-12">
               <h2 className="text-xl font-semibold mb-4">Table of Contents</h2>
               <nav className="grid md:grid-cols-2 gap-2">
                 <a href="#what-are-cookies" className="text-brand-primary hover:underline">
@@ -452,7 +452,7 @@ export default function CookiePolicyPage() {
                   contact us:
                 </p>
 
-                <div className="bg-gray-50 rounded-lg p-6">
+                <div className="bg-surface-muted rounded-lg p-6">
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
                       <h4 className="font-semibold mb-2">Data Controller</h4>
@@ -502,7 +502,7 @@ export default function CookiePolicyPage() {
                   any material changes by posting the new policy on this page with an updated
                   &quot;Last Modified&quot; date.
                 </p>
-                <div className="bg-gray-50 rounded-lg p-4">
+                <div className="bg-surface-muted rounded-lg p-4">
                   <p className="text-sm text-gray-600">
                     <strong>Last updated:</strong> {lastUpdated}
                     <br />

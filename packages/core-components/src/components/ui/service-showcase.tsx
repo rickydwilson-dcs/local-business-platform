@@ -31,7 +31,7 @@ export function ServiceShowcase({
   backgroundColor = "white",
   showBottomCTA = false,
 }: ServiceShowcaseProps) {
-  const bgClass = backgroundColor === "white" ? "bg-white" : "bg-gray-50";
+  const bgClass = backgroundColor === "white" ? "bg-white" : "bg-surface-muted";
 
   // Dynamic grid classes based on number of services for grid layout
   const getGridClass = (serviceCount: number) => {
@@ -198,7 +198,7 @@ export function ServiceShowcase({
               <div
                 key={index}
                 className={`group relative rounded-2xl overflow-hidden shadow-sm border border-gray-200 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 ${
-                  isEven ? "bg-white" : "bg-gray-50"
+                  isEven ? "bg-white" : "bg-surface-muted"
                 }`}
               >
                 {/* Header with Image/Icon */}

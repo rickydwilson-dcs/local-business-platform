@@ -6,7 +6,7 @@ import { PHONE_DISPLAY, PHONE_TEL } from "@/lib/contact-info";
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
+    <div className="min-h-screen bg-surface-muted flex items-center justify-center px-4">
       <div className="max-w-md w-full text-center">
         <div className="mb-8">
           <div className="text-6xl font-bold text-colossus-blue mb-4">404</div>
