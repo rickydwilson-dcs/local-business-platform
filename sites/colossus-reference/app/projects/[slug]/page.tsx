@@ -178,7 +178,7 @@ function RelatedProjects({ projects, currentSlug }: { projects: Project[]; curre
   if (related.length === 0) return null;
 
   return (
-    <section className="section-standard bg-gray-50">
+    <section className="section-standard bg-surface-muted">
       <div className="container-standard">
         <div className="section-header">
           <h2 className="heading-section">Related Projects</h2>
@@ -240,7 +240,7 @@ export default async function ProjectPage({ params }: { params: Promise<Params> 
   return (
     <>
       {/* Breadcrumbs */}
-      <div className="bg-gray-50 border-b">
+      <div className="bg-surface-muted border-b">
         <div className="container-standard py-4">
           <Breadcrumbs items={breadcrumbItems} />
         </div>

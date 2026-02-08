@@ -27,10 +27,10 @@ export async function getLocationSlugs(): Promise<string[]> {
 }
 
 /**
- * Check if a service slug contains a location suffix
+ * Check if a service slug ends with a location suffix
  * Used to filter location-specific services from main listing
  */
 export async function hasLocationSuffix(slug: string): Promise<boolean> {
   const locationSlugs = await getLocationSlugs();
-  return locationSlugs.some((loc) => slug.includes(`-${loc}`));
+  return locationSlugs.some((loc) => slug.endsWith(`-${loc}`));
 }

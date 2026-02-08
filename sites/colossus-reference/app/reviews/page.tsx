@@ -167,7 +167,7 @@ export default async function ReviewsPage() {
   return (
     <>
       {/* Breadcrumbs */}
-      <div className="bg-gray-50 border-b">
+      <div className="bg-surface-muted border-b">
         <div className="container-standard py-4">
           <Breadcrumbs items={breadcrumbItems} />
         </div>
@@ -188,7 +188,7 @@ export default async function ReviewsPage() {
         </section>
 
         {/* Aggregate Rating */}
-        <section className="section-standard bg-gray-50">
+        <section className="section-standard bg-surface-muted">
           <div className="container-standard">
             <div className="grid lg:grid-cols-3 gap-8">
               <div className="lg:col-span-1">
@@ -293,7 +293,7 @@ export default async function ReviewsPage() {
         )}
 
         {/* All Reviews */}
-        <section className="section-standard bg-gray-50">
+        <section className="section-standard bg-surface-muted">
           <div className="container-standard">
             <h2 className="heading-section mb-8">
               {featuredTestimonials.length > 0 ? "All Reviews" : "Customer Reviews"}

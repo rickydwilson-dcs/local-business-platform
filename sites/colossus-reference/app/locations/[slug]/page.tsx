@@ -17,6 +17,7 @@ import {
   Schema,
 } from "@platform/core-components";
 import { absUrl } from "@/lib/site";
+import { getImageUrl } from "@/lib/image";
 import { getServiceAreaSchema } from "@/lib/schema";
 import { PHONE_DISPLAY } from "@/lib/contact-info";
 
@@ -186,7 +187,9 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
       siteName: "Colossus Scaffolding",
       images: [
         {
-          url: absUrl("/static/logo.png"),
+          url: locationData.heroImage
+            ? getImageUrl(locationData.heroImage)
+            : absUrl("/static/logo.png"),
           width: 1200,
           height: 630,
           alt: `Professional scaffolding services in ${locationData.title} - Colossus`,
@@ -229,7 +232,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
       <div className="relative -mt-10 -mx-6 lg:-mx-6">
         {/* Breadcrumbs - always show if exists */}
         {locationData.breadcrumbs && (
-          <div className="bg-gray-50 border-b">
+          <div className="bg-surface-muted border-b">
             <div className="container-standard py-4">
               <Breadcrumbs items={locationData.breadcrumbs} />
             </div>
@@ -258,8 +261,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
           <LargeFeatureCards
             title={locationData.specialists.title}
             description={locationData.specialists.description}
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            cards={locationData.specialists.cards as any}
+            cards={locationData.specialists.cards.map((c) => ({ ...c, details: c.details || [] }))}
             columns={locationData.specialists.columns || 3}
             backgroundColor={locationData.specialists.backgroundColor || "gray"}
             showBottomCTA={locationData.specialists.showBottomCTA || false}
@@ -271,8 +273,11 @@ export default async function Page({ params }: { params: Promise<Params> }) {
           <ServiceShowcase
             title={locationData.services.title}
             description={locationData.services.description}
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            services={locationData.services.cards as any}
+            services={locationData.services.cards.map((c) => ({
+              ...c,
+              features: c.features || [],
+              ctaText: c.ctaText || "Learn More",
+            }))}
           />
         )}
 
@@ -281,8 +286,17 @@ export default async function Page({ params }: { params: Promise<Params> }) {
           <PricingPackages
             title={locationData.pricing.title}
             description={locationData.pricing.description}
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            packages={locationData.pricing.packages as any}
+            packages={locationData.pricing.packages.map((p) => ({
+              ...p,
+              price: p.price || p.priceRange || "Contact us",
+              duration: p.duration || "per project",
+              features: p.features.map((f) =>
+                typeof f === "string" ? { text: f, included: true } : f
+              ),
+              ctaText: p.ctaText || "Get Quote",
+              ctaUrl: p.ctaUrl || "/contact",
+              popular: p.highlighted || false,
+            }))}
             location={locationData.title}
           />
         )}
@@ -294,8 +308,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
             description={locationData.localAuthority.description}
             locationName={locationData.localAuthority.locationName}
             authorityName={locationData.localAuthority.authorityName}
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            expertiseItems={locationData.localAuthority.expertiseItems as any}
+            expertiseItems={locationData.localAuthority.expertiseItems}
             supportItems={locationData.localAuthority.supportItems}
           />
         )}
@@ -328,7 +341,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
                     <Link
                       key={town.slug}
                       href={`/locations/${town.slug}`}
-                      className="group p-6 bg-gray-50 rounded-lg border border-gray-200 hover:border-brand-primary hover:shadow-lg transition-all duration-200"
+                      className="group p-6 bg-surface-muted rounded-lg border border-gray-200 hover:border-brand-primary hover:shadow-lg transition-all duration-200"
                     >
                       <h3 className="text-lg font-medium text-gray-900 group-hover:text-brand-primary mb-2">
                         {town.name}
@@ -374,8 +387,8 @@ export default async function Page({ params }: { params: Promise<Params> }) {
         )}
       </div>
 
-      {/* Schema - only show if exists */}
-      {locationData.schema?.service && (
+      {/* Schema - service schema when available, always render breadcrumbs */}
+      {locationData.schema?.service ? (
         <Schema
           service={locationData.schema.service}
           faqs={locationData.faqs || []}
@@ -386,7 +399,25 @@ export default async function Page({ params }: { params: Promise<Params> }) {
             })) || []
           }
         />
-      )}
+      ) : locationData.breadcrumbs?.length ? (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              itemListElement: locationData.breadcrumbs.map(
+                (b: { name: string; href: string }, i: number) => ({
+                  "@type": "ListItem",
+                  position: i + 1,
+                  name: b.name,
+                  item: absUrl(b.href),
+                })
+              ),
+            }),
+          }}
+        />
+      ) : null}
 
       {/* ServiceArea Schema for location-specific SEO */}
       <script

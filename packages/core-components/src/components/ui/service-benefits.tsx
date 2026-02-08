@@ -10,7 +10,7 @@ export function ServiceBenefits({
   description,
 }: ServiceBenefitsProps) {
   return (
-    <section className="section-standard bg-gray-50">
+    <section className="section-standard bg-surface-muted">
       <div className="container-standard">
         <div className="mx-auto w-full lg:w-[90%] text-center mb-12">
           <h2 className="heading-section">{title}</h2>

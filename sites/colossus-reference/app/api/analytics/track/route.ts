@@ -9,6 +9,41 @@ import { FacebookPixelAnalytics } from "@/lib/analytics/facebook";
 import { GoogleAdsAnalytics } from "@/lib/analytics/google-ads";
 import { AnalyticsResponse, FeatureFlags, ConsentState } from "@/lib/analytics/types";
 
+// In-memory rate limiter: 30 requests per minute per IP
+const RATE_LIMIT_WINDOW_MS = 60 * 1000;
+const RATE_LIMIT_MAX = 30;
+const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
+
+function checkRateLimit(ip: string): boolean {
+  const now = Date.now();
+  const entry = rateLimitMap.get(ip);
+
+  if (!entry || now > entry.resetAt) {
+    rateLimitMap.set(ip, { count: 1, resetAt: now + RATE_LIMIT_WINDOW_MS });
+    return true;
+  }
+
+  if (entry.count >= RATE_LIMIT_MAX) {
+    return false;
+  }
+
+  entry.count++;
+  return true;
+}
+
+// Clean up stale entries every 5 minutes
+if (typeof globalThis !== "undefined") {
+  const cleanup = () => {
+    const now = Date.now();
+    for (const [ip, entry] of rateLimitMap) {
+      if (now > entry.resetAt) {
+        rateLimitMap.delete(ip);
+      }
+    }
+  };
+  setInterval(cleanup, 5 * 60 * 1000);
+}
+
 // Get feature flags from environment
 function getFeatureFlags(): FeatureFlags {
   return {
@@ -42,6 +77,15 @@ function hasValidConsent(consent: ConsentState | null): boolean {
 
 export async function POST(request: NextRequest) {
   try {
+    // Rate limiting
+    const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
+    if (!checkRateLimit(ip)) {
+      return NextResponse.json(
+        { success: false, error: "Rate limit exceeded" },
+        { status: 429, headers: { "Retry-After": "60" } }
+      );
+    }
+
     const flags = getFeatureFlags();
 
     // Early return if analytics is disabled

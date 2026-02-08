@@ -25,7 +25,7 @@ export function LocalAuthorityExpertise({
   supportItems,
   backgroundColor = "gray",
 }: LocalAuthorityExpertiseProps) {
-  const bgClass = backgroundColor === "white" ? "bg-white" : "bg-gray-50";
+  const bgClass = backgroundColor === "white" ? "bg-white" : "bg-surface-muted";
 
   return (
     <section className={`section-standard ${bgClass}`}>
