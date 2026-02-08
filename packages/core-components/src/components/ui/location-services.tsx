@@ -20,7 +20,7 @@ export function LocationServices({
   location,
 }: LocationServicesProps) {
   return (
-    <section className="section-standard bg-gray-50">
+    <section className="section-standard bg-surface-muted">
       <div className="container-standard">
         <div className="section-header">
           <h2 className="heading-section">

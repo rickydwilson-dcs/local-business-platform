@@ -1,5 +1,5 @@
 /**
- * Image optimization configuration for Colossus Scaffolding
+ * Image optimization configuration
  *
  * This file contains image optimization settings that can be used
  * across the application to ensure consistent image quality and performance.

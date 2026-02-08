@@ -31,7 +31,7 @@ export function LargeFeatureCards({
   backgroundColor = "gray",
   showBottomCTA = true,
 }: LargeFeatureCardsProps) {
-  const bgClass = backgroundColor === "white" ? "bg-white" : "bg-gray-50";
+  const bgClass = backgroundColor === "white" ? "bg-white" : "bg-surface-muted";
 
   const gridClass = {
     2: "grid-cols-1 md:grid-cols-2",
@@ -66,7 +66,7 @@ export function LargeFeatureCards({
                 <div className="relative w-full h-48 mb-6 rounded-xl overflow-hidden bg-gray-100">
                   <Image
                     src={getImageUrl(card.image)}
-                    alt={`${card.title} - professional scaffolding solution by Colossus Scaffolding`}
+                    alt={`${card.title} - professional service solution`}
                     title={`${card.title} scaffolding services`}
                     fill
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"

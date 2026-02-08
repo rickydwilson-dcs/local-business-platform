@@ -15,15 +15,31 @@
 
 import crypto from "crypto";
 
-// CSRF secret from environment variable or generated fallback
+// CSRF secret — resolved lazily to avoid build-time errors
 // IMPORTANT: Set CSRF_SECRET in production environment variables
-const CSRF_SECRET = process.env.CSRF_SECRET || crypto.randomBytes(32).toString("hex");
+let _csrfSecret: string | null = null;
 
-// Warn if using generated secret (not persistent across restarts)
-if (!process.env.CSRF_SECRET && process.env.NODE_ENV === "production") {
-  console.warn(
-    "WARNING: CSRF_SECRET not set in environment variables. Using generated secret which will not persist across restarts."
-  );
+function getCsrfSecret(): string {
+  if (_csrfSecret) {
+    return _csrfSecret;
+  }
+
+  if (process.env.CSRF_SECRET) {
+    _csrfSecret = process.env.CSRF_SECRET;
+    return _csrfSecret;
+  }
+
+  if (process.env.NODE_ENV === "production") {
+    console.error(
+      "CSRF_SECRET environment variable is not set. " +
+        "CSRF tokens will not persist across serverless cold starts. " +
+        "Set CSRF_SECRET in your deployment environment (e.g., Vercel dashboard)."
+    );
+  }
+
+  // Fallback: generate per-instance secret (won't persist across cold starts)
+  _csrfSecret = crypto.randomBytes(32).toString("hex");
+  return _csrfSecret;
 }
 
 /**
@@ -32,6 +48,27 @@ if (!process.env.CSRF_SECRET && process.env.NODE_ENV === "production") {
  * - timestamp: Unix timestamp in seconds
  * - signature: HMAC-SHA256 of randomValue + timestamp
  */
+
+// Single-use token enforcement: track used tokens to prevent replay attacks
+const usedTokens = new Set<string>();
+
+// Clean up expired tokens periodically (every 5 minutes)
+const CLEANUP_INTERVAL_MS = 5 * 60 * 1000;
+let lastCleanup = Date.now();
+
+function cleanupUsedTokens(maxAge: number): void {
+  const now = Math.floor(Date.now() / 1000);
+  for (const token of usedTokens) {
+    const parts = token.split(".");
+    if (parts.length >= 2) {
+      const timestamp = parseInt(parts[1], 10);
+      if (!isNaN(timestamp) && now - timestamp > maxAge) {
+        usedTokens.delete(token);
+      }
+    }
+  }
+  lastCleanup = Date.now();
+}
 
 interface TokenPayload {
   value: string;
@@ -59,7 +96,7 @@ export function generateCsrfToken(_expiresIn: number = 3600): string {
   const timestamp = Math.floor(Date.now() / 1000);
 
   const payload = `${value}.${timestamp}`;
-  const signature = crypto.createHmac("sha256", CSRF_SECRET).update(payload).digest("hex");
+  const signature = crypto.createHmac("sha256", getCsrfSecret()).update(payload).digest("hex");
 
   return `${value}.${timestamp}.${signature}`;
 }
@@ -128,14 +165,37 @@ export function verifyCsrfToken(token: string, maxAge: number = 3600): boolean {
 
   // Verify signature using timing-safe comparison
   const payload = `${value}.${timestamp}`;
-  const expectedSignature = crypto.createHmac("sha256", CSRF_SECRET).update(payload).digest("hex");
+  const expectedSignature = crypto
+    .createHmac("sha256", getCsrfSecret())
+    .update(payload)
+    .digest("hex");
 
+  let signatureValid: boolean;
   try {
-    return crypto.timingSafeEqual(Buffer.from(signature), Buffer.from(expectedSignature));
+    signatureValid = crypto.timingSafeEqual(Buffer.from(signature), Buffer.from(expectedSignature));
   } catch {
     // timingSafeEqual throws if buffers have different lengths
     return false;
   }
+
+  if (!signatureValid) {
+    return false;
+  }
+
+  // Single-use enforcement: reject already-used tokens
+  if (usedTokens.has(token)) {
+    return false;
+  }
+
+  // Mark token as used
+  usedTokens.add(token);
+
+  // Periodically clean up expired tokens
+  if (Date.now() - lastCleanup > CLEANUP_INTERVAL_MS) {
+    cleanupUsedTokens(maxAge);
+  }
+
+  return true;
 }
 
 /**

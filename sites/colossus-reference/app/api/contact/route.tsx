@@ -58,6 +58,11 @@ export async function POST(request: Request): Promise<Response> {
       return Response.json({ error: "Invalid JSON body." }, { status: 400 });
     }
 
+    // Honeypot: silently reject bots that fill hidden fields
+    if ((body as Record<string, unknown>).website) {
+      return Response.json({ success: true, message: "Thank you for your message." });
+    }
+
     const name = (body.name ?? "").toString().trim();
     const email = (body.email ?? "").toString().trim().toLowerCase();
     const message = (body.message ?? "").toString().trim();

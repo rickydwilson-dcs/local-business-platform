@@ -78,7 +78,7 @@ const PhoneIcon = () => (
 
 export function PricingPackages({ title, description, packages, location }: PricingPackagesProps) {
   return (
-    <section className="py-16 bg-gray-50">
+    <section className="py-16 bg-surface-muted">
       <div className="mx-auto w-full lg:w-[90%] px-6">
         <div className="text-center mb-12">
           <h2 className="heading-section">{title}</h2>
@@ -146,7 +146,7 @@ export function PricingPackages({ title, description, packages, location }: Pric
 
         {/* Bottom CTA */}
         <div className="text-center">
-          <div className="bg-gray-50 rounded-lg p-8 max-w-4xl mx-auto">
+          <div className="bg-surface-muted rounded-lg p-8 max-w-4xl mx-auto">
             <h3 className="text-2xl font-bold text-gray-900 mb-4">Need a Custom Quote?</h3>
             <p className="text-gray-800 mb-6 text-lg">
               Every {location || ""} project is unique. Get a detailed, no-obligation quote tailored

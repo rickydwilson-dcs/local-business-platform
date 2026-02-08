@@ -96,14 +96,13 @@ export function LocalSpecialistsBenefits() {
         </div>
 
         <div className="mt-12 text-center">
-          <div className="bg-gray-50 rounded-xl p-6 lg:p-8">
+          <div className="bg-surface-muted rounded-xl p-6 lg:p-8">
             <h3 className="text-xl font-semibold text-gray-900 mb-4">The Local Difference</h3>
             <p className="text-gray-800 mb-6 max-w-3xl mx-auto">
-              When you choose Colossus Scaffolding, you&apos;re not just getting scaffolding
-              services - you&apos;re partnering with experts who understand your specific
-              location&apos;s challenges, regulations, and opportunities. From coastal wind loading
-              in Brighton to heritage requirements in Canterbury, we bring the right expertise to
-              your project.
+              When you choose a local specialist, you&apos;re not just getting scaffolding services
+              - you&apos;re partnering with experts who understand your specific location&apos;s
+              challenges, regulations, and opportunities. From coastal wind loading to heritage
+              requirements, we bring the right expertise to your project.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a href="#town-finder" className="btn-primary">

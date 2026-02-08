@@ -23,7 +23,7 @@ export function CapabilityShowcase({
   capabilities,
   backgroundColor = "white",
 }: CapabilityShowcaseProps) {
-  const bgClass = backgroundColor === "white" ? "bg-white" : "bg-gray-50";
+  const bgClass = backgroundColor === "white" ? "bg-white" : "bg-surface-muted";
 
   // Dynamic grid classes based on number of capabilities
   const getGridClass = (itemCount: number) => {
@@ -57,7 +57,7 @@ export function CapabilityShowcase({
           {capabilities.map((capability, index) => (
             <div
               key={index}
-              className="group relative bg-gray-50 rounded-2xl shadow-sm border border-gray-200 p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+              className="group relative bg-surface-muted rounded-2xl shadow-sm border border-gray-200 p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
             >
               {/* Duration Badge */}
               {capability.duration && (
