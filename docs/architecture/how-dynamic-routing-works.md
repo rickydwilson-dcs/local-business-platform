@@ -157,7 +157,7 @@ const mdxComponents = {
 
 ### 5. Content Validation
 
-MDX frontmatter is validated against Zod schemas (`lib/content-schemas.ts`):
+MDX frontmatter is validated against Zod schemas (`@platform/core-components/lib/content-schemas`):
 
 ```typescript
 export const ServiceFrontmatterSchema = z.object({
