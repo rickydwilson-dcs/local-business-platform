@@ -230,10 +230,10 @@ describe("Content Schemas", () => {
     });
 
     describe("Hero validation", () => {
-      it("should require hero object", () => {
+      it("should accept location without hero (hero is optional)", () => {
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const { hero, ...withoutHero } = validLocation;
-        expect(() => LocationFrontmatterSchema.parse(withoutHero)).toThrow();
+        expect(() => LocationFrontmatterSchema.parse(withoutHero)).not.toThrow();
       });
     });
 
