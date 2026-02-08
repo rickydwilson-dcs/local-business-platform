@@ -98,7 +98,6 @@ export async function proxy(request: NextRequest) {
   const addSecurityHeaders = (res: NextResponse) => {
     res.headers.set("X-Content-Type-Options", "nosniff");
     res.headers.set("X-Frame-Options", "DENY");
-    res.headers.set("X-XSS-Protection", "1; mode=block");
     res.headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
     return res;
   };
