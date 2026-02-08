@@ -6,11 +6,20 @@ Notable platform-level changes to the Local Business Platform. Site-specific cha
 
 ---
 
+## 2026-02-08
+
+### Architecture
+
+- Completed content-schemas deduplication — deleted site-specific copies, all sites now import from `@platform/core-components`
+- Unified `LocationFrontmatterSchema` — resolved structural divergence between colossus and base-template/smiths hero fields
+- Fixed location MDX frontmatter to use canonical field names (`title`/`description` instead of `heading`/`subheading`)
+
+---
+
 ## 2026-02-07
 
 ### Architecture
 
-- Deduplicated `content-schemas.ts` — canonical source now in `@platform/core-components`, sites re-export
 - Moved location data (coordinates, region, isCounty) into MDX frontmatter — deleted hardcoded TS data files
 - Migrated `brand-blue` to `brand-primary` theme tokens across all shared components
 - Added `useFocusTrap` hook to `@platform/core-components` for mobile-menu and ConsentManager

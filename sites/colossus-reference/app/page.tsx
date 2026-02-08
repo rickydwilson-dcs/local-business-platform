@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { HeroSection, CoverageAreas, PageLayout } from "@platform/core-components";
-import { ServicesOverview } from "@platform/core-components/components/ui/services-overview";
+import { ServicesOverview } from "@/components/ui/services-overview";
 import { absUrl } from "@/lib/site";
 import { getLocalBusinessSchema } from "@/lib/schema";
 import { PHONE_DISPLAY, PHONE_TEL } from "@/lib/contact-info";

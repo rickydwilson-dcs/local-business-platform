@@ -133,13 +133,17 @@ export function trackFormSubmission(
 /**
  * Track service view
  */
-export function trackServiceView(serviceName: string, serviceSlug: string): void {
+export function trackServiceView(
+  serviceName: string,
+  serviceSlug: string,
+  category?: string
+): void {
   pushToDataLayer({
     event: "service_view",
     service: {
       name: serviceName,
       slug: serviceSlug,
-      category: "scaffolding",
+      category: category || "services",
     },
     timestamp: new Date().toISOString(),
   });

@@ -27,7 +27,7 @@ const exampleCertificates = [
     thumbnail: "/certificates/tg20-thumb.jpg",
     fullImage: "/certificates/tg20-full.jpg",
     description:
-      "TG20:21 compliance certificate showing adherence to the latest scaffolding design guidance.",
+      "Industry compliance certificate showing adherence to the latest professional standards and guidelines.",
   },
   {
     id: "cert-3",

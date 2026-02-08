@@ -80,28 +80,6 @@ export async function getContentItems(contentType: ContentType): Promise<Content
     });
   }
 
-  // For services, sort with main categories first
-  if (contentType === "services") {
-    const mainCategories = [
-      "Commercial Scaffolding",
-      "Residential Scaffolding",
-      "Industrial Scaffolding",
-    ];
-
-    return items.sort((a, b) => {
-      const aIsMain = mainCategories.includes(a.title);
-      const bIsMain = mainCategories.includes(b.title);
-
-      if (aIsMain && !bIsMain) return -1;
-      if (!aIsMain && bIsMain) return 1;
-      if (aIsMain && bIsMain) {
-        return mainCategories.indexOf(a.title) - mainCategories.indexOf(b.title);
-      }
-
-      return a.title.localeCompare(b.title);
-    });
-  }
-
   return items.sort((a, b) => a.title.localeCompare(b.title));
 }
 

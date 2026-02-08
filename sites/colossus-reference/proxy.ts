@@ -11,8 +11,8 @@ import {
   parseConsent,
   hasAnalyticsConsent,
   type ConsentState,
-} from "@/lib/analytics/consent-schema";
-import { extractClientIp } from "@/lib/security/ip-utils";
+} from "@platform/core-components/lib/analytics/consent-schema";
+import { extractClientIp } from "@platform/core-components/lib/security/ip-utils";
 
 // Feature flags for analytics control
 function getFeatureFlags() {
