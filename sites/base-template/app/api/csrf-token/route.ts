@@ -1,23 +1,39 @@
 /**
- * CSRF Token API Endpoint
+ * CSRF Token Generation API
  *
- * GET /api/csrf-token
- * Returns a new CSRF token for form submissions.
+ * Generates CSRF tokens for client-side use in forms and API requests.
+ * Tokens are required for all state-changing operations to prevent CSRF attacks.
+ *
+ * @endpoint GET /api/csrf-token
+ * @returns JSON with CSRF token and expiration time
  */
 
-import { NextResponse } from 'next/server';
-import { generateCSRFToken } from '@/lib/csrf';
+import { generateCsrfToken } from '@platform/core-components/lib/security/csrf';
 
-export async function GET() {
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
+
+export async function GET(): Promise<Response> {
   try {
-    const tokenData = await generateCSRFToken();
+    // Generate token with 1 hour expiration
+    const token = generateCsrfToken(3600);
 
-    return NextResponse.json({
-      token: tokenData.token,
-      expires: tokenData.expires,
-    });
+    return Response.json(
+      {
+        token,
+        expiresIn: 3600,
+        expiresAt: new Date(Date.now() + 3600 * 1000).toISOString(),
+      },
+      {
+        status: 200,
+        headers: {
+          'Cache-Control': 'no-store, no-cache, must-revalidate',
+          Pragma: 'no-cache',
+        },
+      }
+    );
   } catch (error) {
-    console.error('Failed to generate CSRF token:', error);
-    return NextResponse.json({ error: 'Failed to generate token' }, { status: 500 });
+    console.error('CSRF token generation error:', error);
+    return Response.json({ error: 'Failed to generate CSRF token' }, { status: 500 });
   }
 }

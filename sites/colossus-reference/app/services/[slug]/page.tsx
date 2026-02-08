@@ -13,7 +13,7 @@ import {
   Schema,
 } from "@platform/core-components";
 import { absUrl } from "@/lib/site";
-import { deriveLocationContext, getAreaServed } from "@/lib/location-utils";
+import { deriveLocationContext, getAreaServed } from "@platform/core-components/lib/location-utils";
 import { getLocationSlugs } from "@/lib/locations-config";
 import { getImageUrl } from "@/lib/image";
 import { loadMdx } from "@/lib/mdx";
@@ -257,7 +257,13 @@ export default async function Page({ params }: { params: Promise<Params> }) {
               href={`/locations/${locationContext.locationSlug}`}
               className="inline-flex items-center gap-2 text-brand-primary hover:text-brand-primary-hover font-medium transition-colors"
             >
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg
+                aria-hidden="true"
+                className="w-4 h-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"

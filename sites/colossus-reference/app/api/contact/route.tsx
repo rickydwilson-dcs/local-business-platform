@@ -1,9 +1,9 @@
 // app/api/contact/route.tsx
 import { Resend } from "resend";
 import { checkRateLimit } from "@platform/core-components/lib/rate-limiter";
-import { escapeHtml } from "@/lib/security/html-escape";
-import { extractClientIp } from "@/lib/security/ip-utils";
-import { validateCsrfToken } from "@/lib/security/csrf";
+import { escapeHtml } from "@platform/core-components/lib/security/html-escape";
+import { extractClientIp } from "@platform/core-components/lib/security/ip-utils";
+import { validateCsrfToken } from "@platform/core-components/lib/security/csrf";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";

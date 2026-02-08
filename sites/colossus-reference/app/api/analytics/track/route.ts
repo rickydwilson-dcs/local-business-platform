@@ -4,10 +4,14 @@
  */
 
 import { NextRequest, NextResponse } from "next/server";
-import { GA4Analytics } from "@/lib/analytics/ga4";
-import { FacebookPixelAnalytics } from "@/lib/analytics/facebook";
-import { GoogleAdsAnalytics } from "@/lib/analytics/google-ads";
-import { AnalyticsResponse, FeatureFlags, ConsentState } from "@/lib/analytics/types";
+import { GA4Analytics } from "@platform/core-components/lib/analytics/ga4";
+import { FacebookPixelAnalytics } from "@platform/core-components/lib/analytics/facebook";
+import { GoogleAdsAnalytics } from "@platform/core-components/lib/analytics/google-ads";
+import {
+  AnalyticsResponse,
+  FeatureFlags,
+  ConsentState,
+} from "@platform/core-components/lib/analytics/types";
 
 // In-memory rate limiter: 30 requests per minute per IP
 const RATE_LIMIT_WINDOW_MS = 60 * 1000;
@@ -78,8 +82,12 @@ function hasValidConsent(consent: ConsentState | null): boolean {
 export async function POST(request: NextRequest) {
   try {
     // Rate limiting
-    const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
-    if (!checkRateLimit(ip)) {
+    const clientIP =
+      request.headers.get("x-real-ip") ||
+      request.headers.get("cf-connecting-ip") ||
+      request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+      "unknown";
+    if (!checkRateLimit(clientIP)) {
       return NextResponse.json(
         { success: false, error: "Rate limit exceeded" },
         { status: 429, headers: { "Retry-After": "60" } }

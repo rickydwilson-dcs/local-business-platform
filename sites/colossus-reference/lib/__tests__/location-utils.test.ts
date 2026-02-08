@@ -1,5 +1,9 @@
 import { describe, it, expect } from "vitest";
-import { deriveLocationContext, isLocationSpecificService, getAreaServed } from "../location-utils";
+import {
+  deriveLocationContext,
+  isLocationSpecificService,
+  getAreaServed,
+} from "@platform/core-components/lib/location-utils";
 
 const KNOWN_LOCATIONS = ["brighton", "canterbury", "hastings"];
 

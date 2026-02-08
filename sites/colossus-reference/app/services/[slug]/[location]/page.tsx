@@ -13,7 +13,7 @@ import {
   Schema,
 } from "@platform/core-components";
 import { absUrl } from "@/lib/site";
-import { getAreaServed } from "@/lib/location-utils";
+import { getAreaServed } from "@platform/core-components/lib/location-utils";
 import { getImageUrl } from "@/lib/image";
 import { loadMdx } from "@/lib/mdx";
 

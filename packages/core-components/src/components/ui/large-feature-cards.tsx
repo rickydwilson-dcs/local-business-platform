@@ -67,7 +67,7 @@ export function LargeFeatureCards({
                   <Image
                     src={getImageUrl(card.image)}
                     alt={`${card.title} - professional service solution`}
-                    title={`${card.title} scaffolding services`}
+                    title={`${card.title}`}
                     fill
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     className="object-cover"

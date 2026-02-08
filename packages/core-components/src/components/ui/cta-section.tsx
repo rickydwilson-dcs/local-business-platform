@@ -15,7 +15,7 @@ export function CTASection({
   primaryButtonUrl,
   secondaryButtonText,
   secondaryButtonUrl,
-  trustBadges = ["TG20:21 Compliant", "CHAS Accredited", "£10M Insured"],
+  trustBadges = ["Industry Certified", "Fully Accredited", "Fully Insured"],
 }: CTASectionProps) {
   return (
     <section className="section-standard bg-brand-primary text-white">

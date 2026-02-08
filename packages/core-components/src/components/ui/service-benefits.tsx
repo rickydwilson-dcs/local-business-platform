@@ -6,7 +6,7 @@ interface ServiceBenefitsProps {
 
 export function ServiceBenefits({
   items,
-  title = "Why Choose Our Scaffolding Services",
+  title = "Why Choose Our Services",
   description,
 }: ServiceBenefitsProps) {
   return (

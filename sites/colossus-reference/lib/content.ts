@@ -8,7 +8,7 @@ import type {
   ProjectFrontmatter,
   TestimonialFrontmatter,
   BlogCategoryType,
-} from "./content-schemas";
+} from "@platform/core-components";
 
 export type ContentType = "services" | "locations" | "blog" | "projects" | "testimonials";
 
