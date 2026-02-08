@@ -156,9 +156,17 @@ async function main() {
   const servicesDir = path.join(contentDir, "services");
   const locationsDir = path.join(contentDir, "locations");
 
-  // Dynamic import to load content-schemas from the current working directory (the site being validated)
-  // This allows the same validation script to be reused across all sites in the monorepo
-  const schemasPath = path.join(process.cwd(), "lib", "content-schemas");
+  // Import content-schemas from the canonical source in core-components
+  const schemasPath = path.join(
+    process.cwd(),
+    "..",
+    "..",
+    "packages",
+    "core-components",
+    "src",
+    "lib",
+    "content-schemas"
+  );
   const { ServiceFrontmatterSchema, LocationFrontmatterSchema } = await import(schemasPath);
 
   let allValid = true;
