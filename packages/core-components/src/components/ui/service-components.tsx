@@ -130,7 +130,7 @@ interface BenefitsProps {
 
 export function Benefits({ items, title = "Why Choose Our Service?" }: BenefitsProps) {
   return (
-    <div className="py-16 bg-gray-50 -mx-4 px-4 mb-16 rounded-lg">
+    <div className="py-16 bg-surface-muted -mx-4 px-4 mb-16 rounded-lg">
       <div className="mx-auto w-full lg:w-[90%]">
         <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">{title}</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">

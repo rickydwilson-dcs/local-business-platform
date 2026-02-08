@@ -28,7 +28,8 @@ export const metadata: Metadata = {
     default: "Colossus Scaffolding",
     template: "%s | Colossus Scaffolding",
   },
-  description: "Professional scaffolding services across the South East.",
+  description:
+    "Professional scaffolding services across South East England. TG20:21 compliant, CISRS qualified teams with over 15 years experience. Free quotes available.",
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
@@ -101,7 +102,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     }
 
     nav a:hover {
-      color: #005A9E;
+      color: var(--color-brand-primary);
     }
 
     /* Desktop phone and CTA container */
@@ -129,7 +130,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     }
 
     .phone-link:hover {
-      color: #005A9E;
+      color: var(--color-brand-primary);
     }
 
     /* Primary button styles */
@@ -138,7 +139,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       align-items: center;
       justify-content: center;
       padding: 0.75rem 1.5rem;
-      background-color: #005A9E;
+      background-color: var(--color-brand-primary);
       color: #ffffff;
       font-weight: 600;
       border-radius: 0.5rem;
@@ -149,12 +150,12 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     }
 
     .btn-primary:hover {
-      background-color: #004d87;
+      background-color: var(--color-brand-primary-hover);
     }
 
     .btn-primary:focus {
       outline: none;
-      box-shadow: 0 0 0 2px #005A9E, 0 0 0 4px rgba(0, 90, 158, 0.1);
+      box-shadow: 0 0 0 2px var(--color-brand-primary), 0 0 0 4px rgba(0, 90, 158, 0.1);
     }
 
     /* Logo container */

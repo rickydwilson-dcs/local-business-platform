@@ -58,7 +58,7 @@ export function ServiceLocationMatrix({
   ];
 
   return (
-    <section className={`section-standard bg-gray-50 ${className}`}>
+    <section className={`section-standard bg-surface-muted ${className}`}>
       <div className="container-standard">
         <div className="text-center mb-12">
           <h2 className="heading-section">{title}</h2>

@@ -58,7 +58,7 @@ export function LocationFeatures({
   title = "Why Choose Our Local Service?",
 }: LocationFeaturesProps) {
   return (
-    <div className="py-16 bg-gray-50">
+    <div className="py-16 bg-surface-muted">
       <div className="mx-auto w-full lg:w-[90%] px-6">
         <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">{title}</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

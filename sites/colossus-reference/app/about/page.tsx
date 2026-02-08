@@ -252,7 +252,7 @@ export default function AboutPage() {
       />
 
       {/* Breadcrumbs */}
-      <div className="bg-gray-50 border-b">
+      <div className="bg-surface-muted border-b">
         <div className="container-standard py-4">
           <Breadcrumbs items={breadcrumbItems} />
         </div>
@@ -375,7 +375,7 @@ export default function AboutPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mx-auto w-full lg:w-[90%]">
-            <div className="text-center p-6 bg-gray-50 rounded-2xl">
+            <div className="text-center p-6 bg-surface-muted rounded-2xl">
               <div className="w-16 h-16 bg-brand-primary rounded-full flex items-center justify-center mx-auto mb-4">
                 <svg
                   aria-hidden="true"
@@ -400,7 +400,7 @@ export default function AboutPage() {
               </div>
             </div>
 
-            <div className="text-center p-6 bg-gray-50 rounded-2xl">
+            <div className="text-center p-6 bg-surface-muted rounded-2xl">
               <div className="w-16 h-16 bg-brand-primary rounded-full flex items-center justify-center mx-auto mb-4">
                 <svg
                   aria-hidden="true"
@@ -422,7 +422,7 @@ export default function AboutPage() {
               <p className="text-gray-700">15+ Years Experience</p>
             </div>
 
-            <div className="text-center p-6 bg-gray-50 rounded-2xl">
+            <div className="text-center p-6 bg-surface-muted rounded-2xl">
               <div className="w-16 h-16 bg-brand-primary rounded-full flex items-center justify-center mx-auto mb-4">
                 <svg
                   aria-hidden="true"
@@ -580,7 +580,7 @@ export default function AboutPage() {
       </section>
 
       {/* Our Values Section */}
-      <section className="section-standard bg-gray-50">
+      <section className="section-standard bg-surface-muted">
         <div className="container-standard">
           <div className="text-center mb-12">
             <h2 className="heading-section">Our Values</h2>
@@ -720,7 +720,7 @@ export default function AboutPage() {
               "Emergency callout service available 24/7",
               "Local expertise with regional planning knowledge",
             ].map((benefit, i) => (
-              <div key={i} className="flex items-start gap-3 p-4 bg-gray-50 rounded-lg">
+              <div key={i} className="flex items-start gap-3 p-4 bg-surface-muted rounded-lg">
                 <div className="flex-shrink-0 w-6 h-6 bg-brand-primary rounded-full flex items-center justify-center mt-0.5">
                   <svg
                     aria-hidden="true"

@@ -1,16 +1,86 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { siteConfig } from '@/site.config';
 import { getLocations } from '@/lib/content';
-import { slugify } from '@/lib/site';
+import { absUrl, slugify } from '@/lib/site';
 import { PHONE_DISPLAY, PHONE_TEL } from '@/lib/contact-info';
+import { getLocalBusinessSchema, getWebSiteSchema, getBreadcrumbSchema } from '@/lib/schema';
 import { Phone } from 'lucide-react';
+
+export const metadata: Metadata = {
+  title: `${siteConfig.name} | ${siteConfig.tagline}`,
+  description:
+    'Professional electrical services in Cambridge and Cambridgeshire. NICEIC approved, Part P registered electricians for domestic, commercial, and emergency work.',
+  keywords: [
+    'electrician Cambridge',
+    'electrical services Cambridgeshire',
+    'NICEIC approved electrician',
+    'Part P registered',
+    'domestic electrician Cambridge',
+    'EICR testing Cambridge',
+    'EV charger installation Cambridge',
+    'emergency electrician Cambridge',
+  ],
+  openGraph: {
+    title: `${siteConfig.name} | ${siteConfig.tagline}`,
+    description:
+      'Professional electrical services in Cambridge and Cambridgeshire. NICEIC approved, Part P registered electricians.',
+    url: absUrl('/'),
+    siteName: siteConfig.name,
+    images: [
+      {
+        url: absUrl('/static/logo.png'),
+        width: 1200,
+        height: 630,
+        alt: `${siteConfig.name} - ${siteConfig.tagline}`,
+      },
+    ],
+    locale: 'en_GB',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: `${siteConfig.name} | ${siteConfig.tagline}`,
+    description:
+      'Professional electrical services in Cambridge and Cambridgeshire. NICEIC approved, Part P registered electricians.',
+    images: [absUrl('/static/logo.png')],
+  },
+  alternates: {
+    canonical: absUrl('/'),
+  },
+};
 
 export default async function HomePage() {
   // Fetch actual locations from content
   const locations = await getLocations();
 
+  // Generate JSON-LD structured data
+  const localBusinessSchema = getLocalBusinessSchema();
+  const webSiteSchema = getWebSiteSchema();
+  const breadcrumbSchema = getBreadcrumbSchema([{ name: 'Home', url: '/' }]);
+
   return (
     <div className="min-h-screen">
+      {/* JSON-LD Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(localBusinessSchema),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(webSiteSchema),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbSchema),
+        }}
+      />
+
       {/* Hero Section */}
       <section className="section bg-gradient-to-b from-brand-primary/5 to-white">
         <div className="container-narrow text-center">

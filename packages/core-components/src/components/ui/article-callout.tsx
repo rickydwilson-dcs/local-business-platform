@@ -58,7 +58,7 @@ const variantStyles = {
     titleColor: "text-emerald-900",
   },
   quote: {
-    container: "bg-gray-50 rounded-r-xl",
+    container: "bg-surface-muted rounded-r-xl",
     border: "border-l-4 border-brand-primary",
   },
   marketing: {
