@@ -110,7 +110,9 @@ export class GoogleAdsAnalytics {
       }
 
       const responseData = await response.json();
-      console.log("Google Ads conversion tracked successfully:", responseData);
+      if (process.env.NODE_ENV === "development") {
+        console.log("Google Ads conversion tracked successfully:", responseData);
+      }
 
       return { success: true };
     } catch (error) {
@@ -134,7 +136,9 @@ export class GoogleAdsAnalytics {
         transaction_id: (conversionData as { order_id?: unknown }).order_id,
       };
 
-      console.log("Prepared client-side conversion data:", conversionEvent);
+      if (process.env.NODE_ENV === "development") {
+        console.log("Prepared client-side conversion data:", conversionEvent);
+      }
 
       // In a real implementation, this would be sent to a queue for client-side processing
       // or stored for the next page load to trigger via gtag

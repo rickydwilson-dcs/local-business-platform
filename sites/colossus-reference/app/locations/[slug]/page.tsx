@@ -316,7 +316,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
         {/* FAQs - only show if exists */}
         {locationData.faqs?.length > 0 && (
           <LocationFAQ
-            title={`${locationData.title} Scaffolding FAQ`}
+            title="Frequently Asked Questions"
             location={locationData.title}
             items={locationData.faqs}
           />
@@ -352,6 +352,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
                           Local Specialists
                         </span>
                         <svg
+                          aria-hidden="true"
                           className="w-4 h-4 text-brand-primary group-hover:translate-x-1 transition-transform"
                           fill="none"
                           stroke="currentColor"

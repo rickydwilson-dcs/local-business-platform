@@ -8,7 +8,7 @@
  * @returns JSON with CSRF token and expiration time
  */
 
-import { generateCsrfToken } from "@/lib/security/csrf";
+import { generateCsrfToken } from "@platform/core-components/lib/security/csrf";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";

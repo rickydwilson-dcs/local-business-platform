@@ -8,7 +8,7 @@ import { absUrl } from "@/lib/site";
 export const dynamic = "force-static";
 
 export const metadata: Metadata = {
-  title: "Professional Scaffolding Services South East UK",
+  title: "Our Scaffolding Services | Full Range",
   description:
     "Professional scaffolding solutions across the South East UK. TG20:21 compliant, fully insured, and CHAS accredited. From residential repairs to large commercial projects.",
   keywords: [
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     "South East UK",
   ],
   openGraph: {
-    title: "Professional Scaffolding Services South East UK",
+    title: "Our Scaffolding Services | Full Range",
     description:
       "TG20:21 compliant scaffolding services for residential, commercial and industrial projects across the South East UK.",
     url: absUrl("/services"),
@@ -63,7 +63,13 @@ export default async function ServicesPage() {
                   href={`tel:${PHONE_TEL}`}
                   className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-200 transition-colors"
                 >
-                  <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg
+                    aria-hidden="true"
+                    className="h-5 w-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -78,6 +84,7 @@ export default async function ServicesPage() {
               <div className="flex flex-wrap justify-center gap-2 sm:gap-4">
                 <div className="inline-flex items-center gap-2 bg-gray-100 px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm">
                   <svg
+                    aria-hidden="true"
                     className="h-3 w-3 sm:h-4 sm:w-4 text-brand-primary"
                     fill="currentColor"
                     viewBox="0 0 20 20"
@@ -92,6 +99,7 @@ export default async function ServicesPage() {
                 </div>
                 <div className="inline-flex items-center gap-2 bg-gray-100 px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm">
                   <svg
+                    aria-hidden="true"
                     className="h-3 w-3 sm:h-4 sm:w-4 text-brand-primary"
                     fill="currentColor"
                     viewBox="0 0 20 20"

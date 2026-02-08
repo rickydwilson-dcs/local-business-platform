@@ -203,6 +203,7 @@ export default async function BlogPostPage({ params }: { params: Promise<Params>
                             .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
                             .join(" ")}
                           <svg
+                            aria-hidden="true"
                             className="w-4 h-4"
                             fill="none"
                             viewBox="0 0 24 24"

@@ -166,7 +166,7 @@ export function ServiceShowcase({
               </h3>
               <p className="text-gray-800 mb-6 max-w-2xl mx-auto">
                 Our experienced team can assess your project requirements and recommend the most
-                suitable scaffolding solution for your needs.
+                suitable solution for your needs.
               </p>
               <Link href="/contact" className="btn-primary-lg gap-2">
                 Get Expert Advice

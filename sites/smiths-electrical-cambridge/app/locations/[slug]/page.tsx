@@ -14,30 +14,13 @@ import {
   LocationHero,
   FAQSection,
   CTASection,
-  type FAQItem,
+  type LocationFrontmatter,
 } from '@platform/core-components';
 import { getLocations, getLocation } from '@/lib/content';
 import { loadMdx } from '@/lib/mdx';
 import { getImageUrl } from '@/lib/image';
 import { absUrl } from '@/lib/site';
 import { siteConfig } from '@/site.config';
-
-/** Location frontmatter shape */
-interface LocationFrontmatter {
-  title: string;
-  seoTitle?: string;
-  description?: string;
-  keywords?: string[];
-  hero?: {
-    title?: string;
-    description?: string;
-    image?: string;
-    trustBadges?: string[];
-  };
-  heroImage?: string;
-  faqs?: FAQItem[];
-  towns?: string[];
-}
 
 export const dynamic = 'force-static';
 export const dynamicParams = false;
@@ -60,7 +43,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
     };
   }
 
-  const fm = result.frontmatter as LocationFrontmatter;
+  const fm = result.frontmatter as unknown as LocationFrontmatter;
   const title = fm.seoTitle || `Services in ${fm.title} | ${siteConfig.business.name}`;
   const description =
     fm.description || `Professional services in ${fm.title} from ${siteConfig.business.name}.`;
@@ -107,13 +90,12 @@ export default async function LocationPage({ params }: { params: Promise<Params>
     notFound();
   }
 
-  const fm = result.frontmatter as LocationFrontmatter;
+  const fm = result.frontmatter as unknown as LocationFrontmatter;
   const { content: mdxContent } = await loadMdx({ baseDir: 'locations', slug });
 
   const locationName = fm.title;
   const heroImage = fm.hero?.image || fm.heroImage;
   const faqs = fm.faqs || [];
-  const towns = fm.towns || [];
 
   const breadcrumbItems = [
     { name: 'Locations', href: '/locations' },
@@ -149,25 +131,6 @@ export default async function LocationPage({ params }: { params: Promise<Params>
             </div>
           </div>
         </section>
-
-        {/* Towns/Areas Served */}
-        {towns.length > 0 && (
-          <section className="section-standard bg-surface-subtle">
-            <div className="container-standard">
-              <h2 className="heading-section mb-8 text-center">Areas We Serve in {locationName}</h2>
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                {towns.map((town, index) => (
-                  <div
-                    key={index}
-                    className="bg-surface-background rounded-lg p-4 text-center border border-surface-border"
-                  >
-                    <span className="text-surface-foreground font-medium">{town}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </section>
-        )}
 
         {/* FAQs */}
         {faqs.length > 0 && (

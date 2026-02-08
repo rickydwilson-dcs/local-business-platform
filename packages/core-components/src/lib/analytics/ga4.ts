@@ -144,7 +144,9 @@ export class GA4Analytics {
 
       if (this.debugMode) {
         const responseData = await response.json();
-        console.log("GA4 Debug Response:", responseData);
+        if (process.env.NODE_ENV === "development") {
+          console.log("GA4 Debug Response:", responseData);
+        }
 
         if (responseData.validationMessages?.length > 0) {
           const errors = responseData.validationMessages.map(

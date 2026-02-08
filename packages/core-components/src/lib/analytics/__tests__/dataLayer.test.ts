@@ -195,7 +195,7 @@ describe("DataLayer Management", () => {
       expect(events[0].service).toBeDefined();
       expect((events[0].service as any).name).toBe("Access Scaffolding");
       expect((events[0].service as any).slug).toBe("access-scaffolding");
-      expect((events[0].service as any).category).toBe("scaffolding");
+      expect((events[0].service as any).category).toBe("services");
     });
   });
 

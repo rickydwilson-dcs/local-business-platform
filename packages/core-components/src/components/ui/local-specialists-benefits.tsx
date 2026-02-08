@@ -74,7 +74,7 @@ export function LocalSpecialistsBenefits() {
     <section className="section-standard bg-white">
       <div className="container-standard">
         <div className="text-center mb-12">
-          <h2 className="heading-section">Why Local Scaffolding Specialists Matter</h2>
+          <h2 className="heading-section">Why Local Specialists Matter</h2>
           <p className="text-lg text-gray-800 mx-auto w-full lg:w-[85%]">
             Unlike companies that cover &apos;the South East&apos; generically, our town-by-town
             approach means genuine local expertise.
@@ -99,8 +99,8 @@ export function LocalSpecialistsBenefits() {
           <div className="bg-surface-muted rounded-xl p-6 lg:p-8">
             <h3 className="text-xl font-semibold text-gray-900 mb-4">The Local Difference</h3>
             <p className="text-gray-800 mb-6 max-w-3xl mx-auto">
-              When you choose a local specialist, you&apos;re not just getting scaffolding services
-              - you&apos;re partnering with experts who understand your specific location&apos;s
+              When you choose a local specialist, you&apos;re not just getting services -
+              you&apos;re partnering with experts who understand your specific location&apos;s
               challenges, regulations, and opportunities. From coastal wind loading to heritage
               requirements, we bring the right expertise to your project.
             </p>

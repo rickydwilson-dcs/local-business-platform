@@ -121,7 +121,7 @@ export class FacebookPixelAnalytics {
             custom_data: {
               value: conversion.conversion_value || conversion.value,
               currency: conversion.conversion_currency || conversion.currency || "GBP",
-              content_category: "Scaffolding Services",
+              content_category: "Services",
               ...conversion.parameters,
             },
           },
@@ -285,7 +285,7 @@ export const FacebookEvents = {
   lead: (service?: string, location?: string, value?: number): AnalyticsEvent => ({
     name: "quote_request",
     parameters: {
-      content_category: "Scaffolding Services",
+      content_category: "Services",
       content_name: service,
       content_type: "service",
       location: location,
@@ -307,7 +307,7 @@ export const FacebookEvents = {
     parameters: {
       content_type: contentType,
       content_name: contentName,
-      content_category: contentType === "service" ? "Scaffolding Services" : "Service Areas",
+      content_category: contentType === "service" ? "Services" : "Service Areas",
     },
   }),
 };

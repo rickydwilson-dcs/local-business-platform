@@ -6,7 +6,9 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { validateCSRFToken, escapeHtml, getClientIP } from '@/lib/csrf';
+import { validateCsrfToken } from '@platform/core-components/lib/security/csrf';
+import { escapeHtml } from '@platform/core-components/lib/security/html-escape';
+import { extractClientIp } from '@platform/core-components/lib/security/ip-utils';
 import { rateLimitMiddleware } from '@platform/core-components/lib/rate-limiter';
 import { siteConfig } from '@/site.config';
 import { BUSINESS_EMAIL, BUSINESS_NAME } from '@/lib/contact-info';
@@ -19,7 +21,6 @@ interface ContactFormData {
   service?: string;
   location?: string;
   message: string;
-  csrfToken: string;
   /** Honeypot field — if filled, submission is from a bot */
   website?: string;
 }
@@ -43,8 +44,14 @@ const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export async function POST(request: NextRequest) {
   try {
+    // CSRF token validation (prevents cross-site request forgery)
+    const csrfError = validateCsrfToken(request);
+    if (csrfError) {
+      return csrfError;
+    }
+
     // Get client IP for rate limiting
-    const clientIP = getClientIP(request.headers);
+    const clientIP = extractClientIp(request);
 
     // Check rate limit
     if (siteConfig.features.rateLimit) {
@@ -65,19 +72,6 @@ export async function POST(request: NextRequest) {
     // Honeypot: silently reject bots that fill hidden fields
     if (body.website) {
       return NextResponse.json({ success: true, message: 'Thank you for your message.' });
-    }
-
-    // Validate CSRF token
-    if (!body.csrfToken) {
-      return NextResponse.json({ error: 'Missing CSRF token' }, { status: 403 });
-    }
-
-    const isValidToken = await validateCSRFToken(body.csrfToken);
-    if (!isValidToken) {
-      return NextResponse.json(
-        { error: 'Invalid or expired CSRF token', code: 'CSRF_INVALID' },
-        { status: 403 }
-      );
     }
 
     // Validate required fields with length limits

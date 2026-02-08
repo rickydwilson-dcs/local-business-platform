@@ -49,8 +49,8 @@ export const getImageQuality = (type: "hero" | "content" | "thumbnail" = "conten
   }
 };
 
-// Scaffolding business specific image configurations
-export const scaffoldingImageConfig = {
+// Business image configurations
+export const businessImageConfig = {
   // Project photos and gallery images
   project: {
     quality: DEFAULT_IMAGE_QUALITY,
