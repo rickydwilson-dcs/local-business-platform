@@ -22,37 +22,44 @@ Sites resolve imports via TypeScript path mapping in their `tsconfig.json`:
 - `HeroV2` — Split layout with image on one side
 - `HeroV3` — Minimal with gradient background
 
-**Exported UI Components** (via `index.ts`):
+**Exported UI Components** (via `index.ts`) — includes service, location, blog, and general UI components. Selected examples:
 
-- `HeroSection` — generic hero wrapper
-- `Footer` / `CustomFooter` — site footer with contact info and navigation
-- `CTASection` — call-to-action blocks
+- `HeroSection`, `PageHero`, `ServiceHero`, `LocationHero`, `BlogPostHero` — various hero layouts
+- `CTASection`, `ServiceCTA` — call-to-action blocks
 - `Breadcrumbs` — breadcrumb navigation
-- `ContentCard` / `CardGrid` — content display cards
-- `CoverageMap` / `CoverageAreas` — service area visualization
-
-**Additional UI Components** (available via subpath imports):
-
+- `ContentCard`, `CardGrid`, `ContentGrid` — content display
+- `CoverageMap`, `CoverageAreas`, `CoverageMapSection`, `CoverageStatsSection` — service area visualization
+- `ServiceCards`, `ServiceBenefits`, `ServiceAbout`, `ServiceShowcase`, `ServiceGallery`, `ServiceFaq` — service page sections
+- `LocationServices`, `LocationFaq`, `LocationCoverage` — location page sections
 - `MobileMenu` — responsive mobile navigation
 - `LocationsDropdown` — locations navigation dropdown
-- `ServiceCards` — grid of service cards with icons
-- Many more service and location components in `src/components/ui/`
+- `TestimonialCard`, `StarRating`, `AggregateRatingDisplay` — reviews
+- `PageLayout` — shared page layout wrapper
+- `Schema` — JSON-LD structured data generation
 
-**Analytics** (in `src/components/analytics/`, not exported from root):
+See `src/index.ts` for the full list of exports.
 
-- `ConsentManager` — GDPR consent banner
-- `Analytics` — GA4/Facebook/Google Ads wrapper
-- `AnalyticsDebugPanel` — development debugging tool
+**Not exported from root** (import via subpath due to server/site-specific dependencies):
 
-**Schema** — JSON-LD structured data generation
+- `Footer` — uses `fs/promises`, import directly from `@platform/core-components/src/components/ui/footer`
+- `ConsentManager`, `Analytics`, `AnalyticsDebugPanel` — depend on site-specific `@/lib/analytics/types`
 
 ### Lib Utilities (`src/lib/`)
 
-- `content.ts` — generic MDX content reading functions
-- `content-schemas.ts` — Zod schemas for MDX frontmatter validation
+- `content.ts` — generic MDX content reading functions (server-only, uses `fs/promises`)
+- `content-schemas.ts` — Zod schemas for MDX frontmatter validation (exported from root)
 - `services.ts` — service-specific data types and helpers
 - `site.ts` — site configuration utilities
-- `schema.ts` / `schema-types.ts` — JSON-LD schema generation
+- `schema.ts` / `schema-types.ts` — JSON-LD schema generation (exported from root)
+- `rate-limiter.ts` — Supabase-backed rate limiting (import via `@platform/core-components/lib/rate-limiter`)
+- `security/csrf.ts` — HMAC-signed CSRF token validation
+- `security/ip-utils.ts` — IP extraction and validation from request headers
+- `validators/` — input validation (contact form, email, phone, etc.)
+- `image.ts` — image path utilities and validation
+
+### Hooks (`src/hooks/`)
+
+- `useFocusTrap` — keyboard focus trapping for modals and menus
 
 ## Conventions
 
