@@ -47,12 +47,37 @@ Write `session.md`:
 | Architecture        | Pending | findings-architecture.md      |
 ```
 
+## Step 1.5: Check for Previously Fixed Findings
+
+Look for the most recent `fixes-applied.md` from a previous `/fix.findings` run:
+
+```bash
+find output/sessions -name "fixes-applied.md" -type f 2>/dev/null | sort -r | head -1
+```
+
+If found, read it and extract the list of finding IDs that were successfully applied (from the "Applied" sections). Build a short summary like:
+
+```
+Previously fixed finding IDs: SEC-001, SEC-004, CQ-001, CQ-002, ARCH-001, ARCH-002, ARCH-005, A11Y-001, A11Y-002, SEO-002
+```
+
+Also check the most recent `aggregated-report.md` for the previous finding descriptions, so agents understand what was already addressed.
+
+This context will be injected into each agent's prompt below.
+
 ## Step 2: Spawn Parallel Review Agents
 
 Use the **Task tool** to spawn the agents below. Launch all applicable agents in a **single message** with `run_in_background: true` so they execute in parallel.
 
 If `$ARGUMENTS` is a domain name, spawn only that domain's agent.
 If `$ARGUMENTS` is a path, include `SCOPE: Only examine files under [path]` in each agent's prompt.
+
+**If previously fixed findings were found in Step 1.5**, append the following to **each** agent's prompt:
+
+> **Previously fixed findings (do NOT re-report these):**
+> [list of finding IDs and one-line descriptions]
+>
+> These findings were addressed in a prior fix session. Only re-report a previously fixed finding if the fix was incomplete or introduced a new issue. In that case, use a NEW finding ID and reference the old one (e.g., "SEC-010: Incomplete fix for SEC-001 — ...").
 
 ---
 
@@ -460,6 +485,17 @@ Findings flagged by 2+ agents targeting the same file (within 5 lines), merged u
 ### Next Sprint (Technical Debt)
 
 3. [finding] — _reason_
+
+---
+
+## Previously Fixed (Excluded from Counts)
+
+[If Step 1.5 found previously fixed findings, list them here. Otherwise omit this section.]
+
+| ID      | Original Issue                             | Status                 |
+| ------- | ------------------------------------------ | ---------------------- |
+| SEC-001 | IP extraction prioritizes spoofable header | Fixed in prior session |
+| ...     | ...                                        | ...                    |
 
 ---
 
