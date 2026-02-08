@@ -858,6 +858,8 @@ const mdxComponents: MDXMap = {
     return (
       <a
         {...props}
+        target="_blank"
+        rel="noopener noreferrer"
         className="text-brand-primary hover:text-brand-primary-hover font-medium underline underline-offset-2 transition-colors"
       />
     );

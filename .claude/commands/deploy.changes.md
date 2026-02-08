@@ -18,7 +18,25 @@ Must be on `develop`. If not, STOP and inform the user. Never push from the wron
 
 Run the `/update.docs` verification. If issues are found, fix them before proceeding (they'll be included in the commit).
 
-### Step 3: Commit if Needed
+### Step 3: Pre-commit Verification
+
+Before committing anything, verify the codebase is healthy:
+
+```bash
+pnpm type-check && pnpm lint && pnpm build
+```
+
+If any step fails, STOP. Report the failure and do NOT commit broken code. The user should fix the issue first.
+
+If there are test scripts available, also run:
+
+```bash
+pnpm test
+```
+
+Only proceed to committing once all verification passes.
+
+### Step 4: Commit if Needed
 
 ```bash
 git status --porcelain
@@ -47,7 +65,7 @@ git log origin/develop..HEAD --oneline
 
 If nothing to commit AND nothing ahead of remote, STOP: "Nothing to deploy."
 
-### Step 4: Push to Develop
+### Step 5: Push to Develop
 
 ```bash
 git push origin develop
@@ -59,9 +77,9 @@ Wait for CI to pass:
 gh run watch
 ```
 
-If CI fails, STOP. Diagnose the failure, fix it, commit to develop, and restart from Step 4.
+If CI fails, STOP. Diagnose the failure, fix it, commit to develop, and restart from Step 5.
 
-### Step 5: Merge to Staging
+### Step 6: Merge to Staging
 
 ```bash
 git checkout staging
@@ -77,7 +95,7 @@ gh run watch
 
 If CI fails, STOP and diagnose. Do not proceed to main with failing CI.
 
-### Step 6: Merge to Main
+### Step 7: Merge to Main
 
 ```bash
 git checkout main
@@ -91,13 +109,13 @@ Wait for CI:
 gh run watch
 ```
 
-### Step 7: Return to Develop
+### Step 8: Return to Develop
 
 ```bash
 git checkout develop
 ```
 
-### Step 8: Report
+### Step 9: Report
 
 Report the final state:
 
