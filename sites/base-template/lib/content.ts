@@ -20,7 +20,7 @@ import type {
   TestimonialFrontmatter,
   BlogCategoryType,
   ProjectTypeValue,
-} from './content-schemas';
+} from '@platform/core-components';
 
 // ============================================================================
 // TYPES

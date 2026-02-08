@@ -3,7 +3,7 @@ import { test, expect } from "@playwright/test";
 test.describe("Navigation", () => {
   test("should navigate to homepage", async ({ page }) => {
     await page.goto("/");
-    await expect(page).toHaveTitle(/Professional Scaffolding|Colossus Scaffolding/);
+    await expect(page).toHaveTitle(/Scaffolding Services|Colossus Scaffolding/);
     await expect(page.locator('img[alt*="Colossus"]').first()).toBeVisible();
   });
 

@@ -20,7 +20,7 @@ export function HeroSection(props: HeroSectionProps) {
     title,
     description,
     phone = "01424 466 661",
-    trustBadges = ["Construction Line Gold", "CHAS Accredited", "TG20:21", "£10M Insured"],
+    trustBadges = ["Industry Certified", "Fully Accredited", "Fully Insured"],
     heroImage,
     ctaText = "Get Free Quote",
     ctaUrl = "/contact",
@@ -115,9 +115,7 @@ export function HeroSection(props: HeroSectionProps) {
                       />
                     </svg>
                     <span className="text-lg font-medium">Hero Image</span>
-                    <p className="text-sm text-gray-700 mt-2">
-                      Professional scaffolding photography
-                    </p>
+                    <p className="text-sm text-gray-700 mt-2">Professional service photography</p>
                   </div>
                 </div>
               )}

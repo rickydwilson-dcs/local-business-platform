@@ -12,14 +12,14 @@ interface ServiceCTAProps {
 }
 
 export function ServiceCTA({
-  title = "Get Your Free Scaffolding Quote",
-  description = "Contact our expert team today for a free quote and professional consultation on your scaffolding requirements.",
+  title = "Get Your Free Quote",
+  description = "Contact our expert team today for a free quote and professional consultation on your project requirements.",
   primaryAction = "Get Free Quote",
   primaryUrl = "/contact",
   secondaryAction,
   secondaryUrl,
   phone = "01424 466661",
-  trustBadges = ["TG20:21 Compliant", "CHAS Accredited", "£10M Insured"],
+  trustBadges = ["Industry Certified", "Fully Accredited", "Fully Insured"],
 }: ServiceCTAProps) {
   // Determine secondary button based on props
   const finalSecondaryAction = secondaryAction || `Call: ${phone}`;

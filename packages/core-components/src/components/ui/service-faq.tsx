@@ -13,7 +13,7 @@ interface ServiceFAQProps {
 
 export function ServiceFAQ({
   items,
-  title = "Scaffolding FAQ - Your Questions Answered",
+  title = "FAQ - Your Questions Answered",
   description = "Get answers to common questions about our services and processes.",
   phoneDisplay = "01424 466661",
   phoneTel = "01424466661",

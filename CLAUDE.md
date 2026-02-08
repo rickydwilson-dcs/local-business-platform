@@ -97,8 +97,8 @@ npm run validate:content                          # All MDX files
 npx tsx ../../scripts/validate-content.ts services   # Service files only
 npx tsx ../../scripts/validate-content.ts locations  # Location files only
 
-# Theme validation — WCAG contrast checking
-pnpm validate --config ../../sites/[site-name]/theme.config.ts
+# Theme validation — WCAG contrast checking (run from packages/theme-system/)
+pnpm --filter @platform/theme-system validate --config ../../sites/[site-name]/theme.config.ts
 
 # Site creation
 npx tsx tools/create-site-from-project.ts --project [project-file.json]

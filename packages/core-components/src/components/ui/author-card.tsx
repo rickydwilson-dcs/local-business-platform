@@ -7,7 +7,7 @@ interface AuthorCardProps {
 export function AuthorCard({
   name,
   role,
-  bio = "Our team of scaffolding professionals share their expertise to help you make informed decisions about your construction and maintenance projects.",
+  bio = "Our team of industry professionals share their expertise to help you make informed decisions about your construction and maintenance projects.",
 }: AuthorCardProps) {
   return (
     <div className="bg-surface-muted rounded-2xl p-6 sm:p-8 border border-gray-100">

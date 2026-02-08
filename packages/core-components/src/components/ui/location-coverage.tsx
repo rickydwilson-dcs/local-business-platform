@@ -16,13 +16,11 @@ export function LocationCoverage({
       <div className="mx-auto w-full lg:w-[90%] px-6">
         <div className="grid lg:grid-cols-3 gap-12">
           <div className="lg:col-span-2">
-            <h2 className="heading-section mb-6">
-              Professional Scaffolding Services Across {county}
-            </h2>
+            <h2 className="heading-section mb-6">Professional Services Across {county}</h2>
             <p className="text-body-lg mb-8">
               Our expert team understands the unique architectural challenges across {county},
-              providing specialized scaffolding solutions for the region&apos;s distinctive building
-              types and heritage properties.
+              providing specialized solutions for the region&apos;s distinctive building types and
+              heritage properties.
             </p>
 
             <div className="space-y-6">
@@ -70,13 +68,11 @@ export function LocationCoverage({
                     </svg>
                   </div>
                   <div>
-                    <h4 className="font-semibold text-gray-900 mb-2">
-                      TG20:21 Compliant & Fully Insured
-                    </h4>
+                    <h4 className="font-semibold text-gray-900 mb-2">Fully Certified & Insured</h4>
                     <p className="text-gray-800 text-sm leading-relaxed">
-                      All our scaffolding installations across {county} meet the latest TG20:21
-                      standards, with comprehensive £10M public liability insurance and CHAS
-                      accreditation for complete peace of mind.
+                      All our installations across {county} meet the latest industry standards, with
+                      comprehensive insurance coverage and professional accreditation for complete
+                      peace of mind.
                     </p>
                   </div>
                 </div>

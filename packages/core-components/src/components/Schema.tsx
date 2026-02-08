@@ -52,7 +52,7 @@ type ArticleSchema = {
 };
 
 type WebpageSchema = {
-  "@type": "WebPage" | "AboutPage" | "Blog" | "CollectionPage";
+  "@type": "WebPage" | "AboutPage" | "ContactPage" | "Blog" | "CollectionPage";
   "@id": string;
   url: string;
   name: string;

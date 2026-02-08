@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ContentCard } from "./content-card";
+import { ContentCard } from "@platform/core-components";
 import { getContentItems } from "@/lib/content";
 
 // Static list of services to display on home page

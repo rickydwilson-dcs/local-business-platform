@@ -15,7 +15,7 @@ import {
   getDataLayerEventsByType,
   clearDataLayer,
   initializeDataLayer,
-} from "../dataLayer";
+} from "@platform/core-components/lib/analytics/dataLayer";
 
 // Mock window.gtag
 declare global {

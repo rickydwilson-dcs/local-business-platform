@@ -23,7 +23,7 @@ import {
   type AggregatedResults,
   type ValidationResult,
   type ValidationIssue,
-} from '../lib/validators';
+} from '@platform/core-components/lib/validators';
 
 // ANSI color codes for terminal output
 const colors = {
