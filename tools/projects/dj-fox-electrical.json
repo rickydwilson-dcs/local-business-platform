@@ -1,0 +1,383 @@
+{
+  "metadata": {
+    "projectId": "550e8400-e29b-41d4-a716-446655440015",
+    "version": "1.0.0",
+    "status": "approved",
+    "intakeChannel": "manual_entry",
+    "createdAt": "2026-02-15T10:00:00Z",
+    "updatedAt": "2026-02-15T10:00:00Z"
+  },
+
+  "business": {
+    "name": "D J Fox Electrical",
+    "legalName": "D J Fox Electrical Ltd",
+    "industry": "electrical",
+    "type": "limited_company",
+    "phone": "[PLACEHOLDER]",
+    "email": "info@djfoxelectrical.com",
+    "website": "https://djfoxelectrical.com",
+    "address": {
+      "line1": "Mobile Service",
+      "city": "Eastbourne",
+      "county": "East Sussex",
+      "postcode": "BN21 1XX",
+      "country": "United Kingdom"
+    },
+    "hours": {
+      "regular": [],
+      "emergency24h": true,
+      "emergencyPhone": "[PLACEHOLDER]"
+    },
+    "socialMedia": {
+      "facebook": "https://facebook.com/djfoxelectrical",
+      "instagram": "https://instagram.com/djfoxelectrical"
+    },
+    "geo": {
+      "headquarters": {
+        "latitude": 50.7604,
+        "longitude": 0.2799
+      },
+      "serviceRadiusMiles": 25
+    }
+  },
+
+  "credentials": {
+    "yearEstablished": 2025,
+    "certifications": [
+      { "name": "NICEIC Approved Contractor", "issuedBy": "NICEIC" },
+      { "name": "Part P Registered Electrician", "issuedBy": "Part P Scheme" },
+      { "name": "TrustMark Government Endorsed Scheme", "issuedBy": "TrustMark" }
+    ],
+    "insurance": [
+      {
+        "type": "Public Liability",
+        "coverageAmount": 5000000,
+        "currency": "GBP",
+        "provider": "[To be confirmed]"
+      },
+      {
+        "type": "Professional Indemnity",
+        "coverageAmount": 2000000,
+        "currency": "GBP"
+      }
+    ],
+    "teamQualifications": "Director Daniel Fox brings 15+ years of professional electrical expertise to every job, backed by full NICEIC approval and Part P registration.",
+    "memberships": ["NICEIC", "TrustMark", "Electrical Safety First"]
+  },
+
+  "services": [
+    {
+      "slug": "emergency-electrical-callout",
+      "title": "24/7 Emergency Electrical Callout",
+      "category": "core",
+      "shortDescription": "Round-the-clock emergency electrician service for urgent electrical issues across East Sussex.",
+      "keyFeatures": [
+        "24/7 availability",
+        "1-2 hour response time",
+        "Fault diagnosis and repairs",
+        "Power restoration"
+      ],
+      "relatedServices": ["fault-finding", "power-outage-restoration"],
+      "includeInGeneration": true
+    },
+    {
+      "slug": "electrical-safety-certificate",
+      "title": "EICR Testing & Certification",
+      "category": "core",
+      "shortDescription": "Comprehensive electrical safety certificates for landlords, homeowners, and businesses.",
+      "keyFeatures": [
+        "Landlord compliance certificates",
+        "Homebuyer reports",
+        "5-year periodic inspection",
+        "Full remedial work service"
+      ],
+      "relatedServices": ["consumer-unit-upgrade", "rewiring"],
+      "includeInGeneration": true
+    },
+    {
+      "slug": "consumer-unit-upgrade",
+      "title": "Consumer Unit Upgrade",
+      "category": "core",
+      "shortDescription": "Upgrade old fuse boxes to modern consumer units with RCD protection for enhanced safety.",
+      "keyFeatures": [
+        "Modern RCD protection",
+        "Surge protection devices",
+        "Compliant with 18th Edition",
+        "Same-day installation available"
+      ],
+      "relatedServices": ["rewiring", "electrical-safety-certificate"],
+      "includeInGeneration": true
+    },
+    {
+      "slug": "rewiring",
+      "title": "Full House Rewiring",
+      "category": "core",
+      "shortDescription": "Complete electrical rewiring bringing your property up to current safety standards.",
+      "keyFeatures": [
+        "Full house rewiring",
+        "Partial rewiring available",
+        "Minimal disruption approach",
+        "Certification included"
+      ],
+      "relatedServices": ["consumer-unit-upgrade", "additional-sockets"],
+      "includeInGeneration": true
+    },
+    {
+      "slug": "ev-charger-installation",
+      "title": "EV Charger Installation",
+      "category": "specialist",
+      "shortDescription": "Professional EV charging point installation with grant assistance where eligible.",
+      "keyFeatures": [
+        "Home charging points (7kW & 22kW)",
+        "OZEV grant assistance",
+        "All major brands installed",
+        "Smart charging options"
+      ],
+      "relatedServices": ["consumer-unit-upgrade", "additional-circuits"],
+      "includeInGeneration": true
+    },
+    {
+      "slug": "fault-finding",
+      "title": "Electrical Fault Finding",
+      "category": "core",
+      "shortDescription": "Professional diagnostic service to locate and resolve electrical faults quickly.",
+      "keyFeatures": [
+        "Advanced testing equipment",
+        "Circuit tracing",
+        "Intermittent fault diagnosis",
+        "Comprehensive reporting"
+      ],
+      "relatedServices": ["emergency-electrical-callout", "circuit-repair"],
+      "includeInGeneration": true
+    },
+    {
+      "slug": "additional-sockets",
+      "title": "Additional Socket Installation",
+      "category": "additional",
+      "shortDescription": "Installation of new electrical sockets and USB charging points throughout your property.",
+      "keyFeatures": [
+        "Extra power sockets",
+        "USB socket upgrades",
+        "Outdoor sockets",
+        "Minimal disruption"
+      ],
+      "relatedServices": ["usb-socket-installation", "outdoor-socket-installation"],
+      "includeInGeneration": true
+    },
+    {
+      "slug": "lighting-installation",
+      "title": "Lighting Installation",
+      "category": "additional",
+      "shortDescription": "Professional installation of all types of lighting including LED upgrades and smart lighting.",
+      "keyFeatures": [
+        "LED lighting upgrades",
+        "Downlights and spotlights",
+        "Outdoor lighting",
+        "Dimmer switches"
+      ],
+      "relatedServices": ["led-lighting-upgrade", "smart-lighting"],
+      "includeInGeneration": true
+    },
+    {
+      "slug": "pat-testing",
+      "title": "PAT Testing",
+      "category": "specialist",
+      "shortDescription": "Portable Appliance Testing for businesses ensuring electrical equipment safety compliance.",
+      "keyFeatures": [
+        "Health & Safety compliance",
+        "Detailed testing records",
+        "Annual testing contracts",
+        "Certificate of testing"
+      ],
+      "relatedServices": ["electrical-safety-certificate", "commercial-maintenance-contracts"],
+      "includeInGeneration": true
+    },
+    {
+      "slug": "smart-lighting",
+      "title": "Smart Home & Lighting",
+      "category": "specialist",
+      "shortDescription": "Smart lighting and home automation installation for modern, connected living.",
+      "keyFeatures": [
+        "Philips Hue installation",
+        "Voice control setup",
+        "App-controlled lighting",
+        "Security automation"
+      ],
+      "relatedServices": ["lighting-installation", "smart-home-wiring"],
+      "includeInGeneration": true
+    },
+    {
+      "slug": "fire-alarm-installation",
+      "title": "Smoke & Fire Alarm Installation",
+      "category": "additional",
+      "shortDescription": "Installation of smoke detectors, heat detectors and carbon monoxide alarms for safety.",
+      "keyFeatures": [
+        "Mains-powered smoke alarms",
+        "Carbon monoxide detectors",
+        "Heat detectors",
+        "Landlord compliance"
+      ],
+      "relatedServices": ["electrical-safety-certificate"],
+      "includeInGeneration": true
+    }
+  ],
+
+  "regions": [
+    {
+      "name": "East Sussex",
+      "slug": "east-sussex",
+      "locations": [
+        {
+          "name": "Eastbourne",
+          "slug": "eastbourne",
+          "type": "coastal",
+          "localAuthority": "Eastbourne Borough Council",
+          "hasHeritage": true,
+          "neighborhoods": ["Town Centre", "Meads", "Old Town", "Langney"],
+          "includeInGeneration": true
+        },
+        {
+          "name": "Brighton & Hove",
+          "slug": "brighton-hove",
+          "type": "coastal",
+          "localAuthority": "Brighton & Hove City Council",
+          "hasHeritage": true,
+          "landmarks": ["Royal Pavilion", "Brighton Pier"],
+          "includeInGeneration": true
+        },
+        {
+          "name": "Hastings",
+          "slug": "hastings",
+          "type": "coastal",
+          "localAuthority": "Hastings Borough Council",
+          "hasHeritage": true,
+          "neighborhoods": ["Old Town", "St Leonards"],
+          "includeInGeneration": true
+        },
+        {
+          "name": "Bexhill",
+          "slug": "bexhill",
+          "type": "coastal",
+          "localAuthority": "Rother District Council",
+          "hasHeritage": true,
+          "includeInGeneration": true
+        },
+        {
+          "name": "Lewes",
+          "slug": "lewes",
+          "type": "historic",
+          "localAuthority": "Lewes District Council",
+          "hasHeritage": true,
+          "landmarks": ["Lewes Castle"],
+          "includeInGeneration": true
+        },
+        {
+          "name": "Seaford",
+          "slug": "seaford",
+          "type": "coastal",
+          "localAuthority": "Lewes District Council",
+          "includeInGeneration": true
+        },
+        {
+          "name": "Newhaven",
+          "slug": "newhaven",
+          "type": "coastal",
+          "localAuthority": "Lewes District Council",
+          "includeInGeneration": true
+        },
+        {
+          "name": "Hailsham",
+          "slug": "hailsham",
+          "type": "mixed",
+          "localAuthority": "Wealden District Council",
+          "includeInGeneration": true
+        },
+        {
+          "name": "Polegate",
+          "slug": "polegate",
+          "type": "mixed",
+          "localAuthority": "Wealden District Council",
+          "includeInGeneration": true
+        },
+        {
+          "name": "Crowborough",
+          "slug": "crowborough",
+          "type": "rural",
+          "localAuthority": "Wealden District Council",
+          "includeInGeneration": true
+        }
+      ]
+    }
+  ],
+
+  "pricing": {
+    "domestic": {
+      "min": 40,
+      "max": 60,
+      "unit": "per hour",
+      "currency": "GBP"
+    },
+    "callout": {
+      "standard": 50,
+      "emergency": 100,
+      "currency": "GBP"
+    },
+    "freeQuote": true,
+    "notes": "All quotes include full written breakdown. No hidden costs. Fixed prices available for common jobs."
+  },
+
+  "brandVoice": {
+    "tone": "Professional, reliable, and safety-focused",
+    "preferredTerms": ["qualified", "certified", "NICEIC approved", "experienced", "professional"],
+    "avoidWords": ["cheap", "budget", "discount"],
+    "targetAudience": "Homeowners, landlords, and businesses in East Sussex",
+    "usps": [
+      "15+ Years Electrical Expertise",
+      "NICEIC Approved",
+      "24/7 Emergency Service",
+      "Free Quotes",
+      "New Business with Experienced Leadership"
+    ],
+    "tagline": "Your trusted electrical experts in Eastbourne"
+  },
+
+  "theme": {
+    "colors": {
+      "brand": {
+        "primary": "#db0b0b",
+        "secondary": "#b00909",
+        "accent": "#fbbf24"
+      },
+      "surface": {
+        "background": "#ffffff",
+        "foreground": "#1f2937",
+        "muted": "#f3f4f6",
+        "card": "#ffffff"
+      }
+    },
+    "typography": {
+      "fontFamily": "Inter",
+      "headingFontFamily": "Inter",
+      "baseFontSize": 16
+    },
+    "components": {
+      "buttonRadius": "0.5rem",
+      "cardRadius": "1rem",
+      "useShadows": true
+    }
+  },
+
+  "deployment": {
+    "siteName": "dj-fox-electrical",
+    "domain": "djfoxelectrical.com",
+    "features": {
+      "contactForm": true,
+      "quoteForm": true,
+      "blog": true,
+      "reviews": true,
+      "liveChat": false,
+      "booking": false,
+      "gallery": false
+    }
+  }
+}

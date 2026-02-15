@@ -105,8 +105,10 @@ Edit `sites/[client-slug]/site.config.ts` with complete business information:
 
 ```typescript
 export const siteConfig: SiteConfig = {
+  slug: "joes-plumbing-canterbury", // Required for rate limiting isolation
   name: "Joe's Plumbing Canterbury",
   tagline: "Professional Plumbing Services",
+  domain: "joesplumbing.co.uk",
   url: process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
 
   business: {
@@ -149,6 +151,8 @@ export const siteConfig: SiteConfig = {
   },
 };
 ```
+
+**Important:** The `slug` and `domain` fields are **required**. The `slug` is used for rate limiting isolation (each site gets independent rate limit counters), and `domain` is used for production URLs.
 
 ### Step 5: Create Service MDX Files
 
@@ -229,7 +233,7 @@ NEXT_PUBLIC_SITE_URL=https://[domain].com
 RESEND_API_KEY=re_xxx
 BUSINESS_EMAIL=client@email.com
 
-# Rate Limiting (Supabase)
+# Rate Limiting (Shared Supabase - same for all sites)
 SUPABASE_URL=https://your-project.supabase.co
 SUPABASE_SERVICE_KEY=your-service-role-key
 
@@ -240,6 +244,8 @@ NEXT_PUBLIC_GA_MEASUREMENT_ID=G-XXXXXXXXXX
 FEATURE_CONSENT_BANNER=true
 FEATURE_ANALYTICS_ENABLED=true
 ```
+
+**Note on Rate Limiting:** All sites share the same Supabase database for rate limiting. Use the same `SUPABASE_URL` and `SUPABASE_SERVICE_KEY` for all client sites. Each site automatically gets isolated rate limit counters based on the `slug` field in `site.config.ts` — no additional setup required.
 
 ### Step 12: Configure Domain
 
@@ -270,7 +276,7 @@ After deployment, verify:
 - [ ] All service pages accessible
 - [ ] All location pages accessible
 - [ ] Contact form submits successfully
-- [ ] Rate limiting works
+- [ ] Rate limiting works (try submitting 5+ forms to trigger 429 response)
 - [ ] Analytics tracking (if enabled)
 - [ ] Mobile responsive
 - [ ] SSL certificate active

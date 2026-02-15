@@ -5,6 +5,7 @@
  *
  * Full-screen mobile navigation with animated hamburger toggle.
  * All configuration is passed via props for cross-site compatibility.
+ * Supports both light and dark theme variants.
  */
 
 import { useState, useEffect, useRef } from "react";
@@ -41,6 +42,8 @@ export interface MobileMenuProps {
     label: string;
     href: string;
   };
+  /** Theme variant - controls hamburger and header background colors */
+  variant?: "light" | "dark";
 }
 
 export function MobileMenu({
@@ -51,6 +54,7 @@ export function MobileMenu({
   navigation,
   showPhone = true,
   primaryCta = { label: "Get Free Quote", href: "/contact" },
+  variant = "light",
 }: MobileMenuProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [locationsExpanded, setLocationsExpanded] = useState(false);
@@ -89,28 +93,36 @@ export function MobileMenu({
     { label: "Contact", href: "/contact" },
   ];
 
+  // Theme-specific classes
+  const isDark = variant === "dark";
+  const hamburgerColor = isDark ? "bg-white" : "bg-gray-800";
+  const menuBg = isDark ? "bg-black" : "bg-white";
+  const menuTextColor = isDark ? "text-white" : "text-slate-800";
+  const menuBorderColor = isDark ? "border-gray-800" : "border-gray-200";
+  const hoverBg = isDark ? "hover:bg-gray-900" : "hover:bg-gray-200";
+
   return (
     <>
       {/* Hamburger Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="lg:hidden p-2 rounded-md hover:bg-gray-200 transition-colors"
+        className={`lg:hidden p-2 rounded-md transition-colors ${hoverBg}`}
         aria-label={isOpen ? "Close menu" : "Open menu"}
         aria-expanded={isOpen}
       >
         <div className="w-6 h-5 flex flex-col justify-between">
           <span
-            className={`block h-0.5 bg-gray-800 transition-all duration-300 ${
+            className={`block h-0.5 ${hamburgerColor} transition-all duration-300 ${
               isOpen ? "rotate-45 translate-y-2" : ""
             }`}
           />
           <span
-            className={`block h-0.5 bg-gray-800 transition-all duration-300 ${
+            className={`block h-0.5 ${hamburgerColor} transition-all duration-300 ${
               isOpen ? "opacity-0" : ""
             }`}
           />
           <span
-            className={`block h-0.5 bg-gray-800 transition-all duration-300 ${
+            className={`block h-0.5 ${hamburgerColor} transition-all duration-300 ${
               isOpen ? "-rotate-45 -translate-y-2" : ""
             }`}
           />
@@ -123,12 +135,12 @@ export function MobileMenu({
         role="dialog"
         aria-modal="true"
         aria-label="Mobile navigation menu"
-        className={`fixed inset-0 bg-white z-50 lg:hidden transition-transform duration-300 ${
+        className={`fixed inset-0 ${menuBg} z-50 lg:hidden transition-transform duration-300 ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200">
+        <div className={`flex items-center justify-between px-6 py-4 border-b ${menuBorderColor}`}>
           <Link href="/" onClick={closeMenu} className="relative h-10 w-36">
             <Image
               src="/logo.svg"
@@ -141,10 +153,15 @@ export function MobileMenu({
           <button
             ref={closeButtonRef}
             onClick={closeMenu}
-            className="p-2 rounded-md hover:bg-gray-200 transition-colors"
+            className={`p-2 rounded-md transition-colors ${hoverBg}`}
             aria-label="Close menu"
           >
-            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg
+              className={`w-6 h-6 ${menuTextColor}`}
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -166,7 +183,7 @@ export function MobileMenu({
                     <button
                       onClick={() => setLocationsExpanded(!locationsExpanded)}
                       aria-expanded={locationsExpanded}
-                      className="flex items-center justify-between w-full text-xl font-medium text-slate-800 py-2"
+                      className={`flex items-center justify-between w-full text-xl font-medium ${menuTextColor} py-2`}
                     >
                       <span>{item.label}</span>
                       <svg
@@ -187,7 +204,9 @@ export function MobileMenu({
                       </svg>
                     </button>
                     {locationsExpanded && (
-                      <div className="mt-2 ml-4 space-y-2 border-l-2 border-gray-200 pl-4">
+                      <div
+                        className={`mt-2 ml-4 space-y-2 border-l-2 ${isDark ? "border-gray-800" : "border-gray-200"} pl-4`}
+                      >
                         <Link
                           href="/locations"
                           onClick={closeMenu}
@@ -200,7 +219,7 @@ export function MobileMenu({
                             key={location.slug}
                             href={`/locations/${location.slug}`}
                             onClick={closeMenu}
-                            className="block text-base text-slate-600 hover:text-brand-primary py-1"
+                            className={`block text-base py-1 hover:text-brand-primary ${isDark ? "text-gray-300" : "text-slate-600"}`}
                           >
                             {location.name}
                           </Link>
@@ -225,7 +244,7 @@ export function MobileMenu({
                   <Link
                     href={item.href}
                     onClick={closeMenu}
-                    className="block text-xl font-medium text-slate-800 py-2 hover:text-brand-primary transition-colors"
+                    className={`block text-xl font-medium ${menuTextColor} py-2 hover:text-brand-primary transition-colors`}
                   >
                     {item.label}
                   </Link>
@@ -236,11 +255,13 @@ export function MobileMenu({
         </nav>
 
         {/* Bottom CTA Section */}
-        <div className="absolute bottom-0 left-0 right-0 px-6 py-6 border-t border-gray-200 bg-surface-muted">
+        <div
+          className={`absolute bottom-0 left-0 right-0 px-6 py-6 border-t ${menuBorderColor} ${isDark ? "bg-gray-900" : "bg-surface-muted"}`}
+        >
           {showPhone && (
             <Link
               href={`tel:${phoneTel}`}
-              className="flex items-center justify-center gap-2 text-2xl font-bold text-slate-800 mb-4"
+              className={`flex items-center justify-center gap-2 text-2xl font-bold ${menuTextColor} mb-4`}
             >
               <svg
                 className="w-6 h-6 text-brand-primary"

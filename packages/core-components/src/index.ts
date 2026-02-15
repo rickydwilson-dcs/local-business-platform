@@ -2,6 +2,7 @@
 export * from "./components/hero";
 
 // Export all UI components (generic, usable across all sites)
+export * from "./components/ui/accent-underline";
 export * from "./components/ui/aggregate-rating-display";
 export * from "./components/ui/article-callout";
 export * from "./components/ui/author-card";
