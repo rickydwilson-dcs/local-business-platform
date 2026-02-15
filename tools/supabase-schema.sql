@@ -164,26 +164,31 @@ COMMENT ON TABLE content_generations IS 'AI content generation logs with cost tr
 COMMENT ON COLUMN content_generations.quality_scores IS 'Content quality metrics: { readability: 75, seo: 88, uniqueness: 92 }';
 
 -- =========================================
--- TABLE 7: RATE_LIMITS ⭐ NEW
--- Rate limiting (replaces Upstash Redis)
+-- TABLE 7: RATE_LIMITS
+-- Multi-tenant rate limiting (replaces Upstash Redis)
+-- Rate limits are isolated per-site via the
+-- (identifier, endpoint, site_slug, window_start)
+-- UNIQUE constraint. Each client site gets independent
+-- counters so cross-site pollution cannot occur.
 -- =========================================
 
 CREATE TABLE IF NOT EXISTS rate_limits (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
   identifier TEXT NOT NULL,
   endpoint TEXT NOT NULL,
-  site_slug TEXT,
+  site_slug TEXT NOT NULL,
   request_count INTEGER DEFAULT 1,
   window_start TIMESTAMPTZ NOT NULL,
   window_end TIMESTAMPTZ NOT NULL,
   created_at TIMESTAMPTZ DEFAULT NOW(),
   updated_at TIMESTAMPTZ DEFAULT NOW(),
-  UNIQUE(identifier, endpoint, window_start)
+  UNIQUE(identifier, endpoint, site_slug, window_start)
 );
 
-COMMENT ON TABLE rate_limits IS 'Rate limiting for contact forms and API endpoints (replaces Redis)';
+COMMENT ON TABLE rate_limits IS 'Per-site rate limiting for contact forms and API endpoints (replaces Redis)';
 COMMENT ON COLUMN rate_limits.identifier IS 'IP address or user identifier';
 COMMENT ON COLUMN rate_limits.endpoint IS 'API endpoint: /api/contact, /api/analytics/track';
+COMMENT ON COLUMN rate_limits.site_slug IS 'Site identifier for multi-tenant isolation (e.g. smiths-electrical-cambridge)';
 COMMENT ON COLUMN rate_limits.window_end IS 'End of rate limit window (for auto-cleanup)';
 
 -- =========================================
@@ -284,13 +289,13 @@ CREATE POLICY "Service role has full access to rate_limits" ON rate_limits
 -- =========================================
 
 -- Function to update updated_at timestamp
-CREATE OR REPLACE FUNCTION update_updated_at_column()
+CREATE OR REPLACE FUNCTION public.update_updated_at_column()
 RETURNS TRIGGER AS $$
 BEGIN
   NEW.updated_at = NOW();
   RETURN NEW;
 END;
-$$ LANGUAGE plpgsql;
+$$ LANGUAGE plpgsql SET search_path = '';
 
 -- Apply trigger to sites table
 CREATE TRIGGER update_sites_updated_at
@@ -310,27 +315,28 @@ CREATE TRIGGER update_rate_limits_updated_at
 -- =========================================
 
 -- Function to clean up expired rate limits
-CREATE OR REPLACE FUNCTION cleanup_expired_rate_limits()
+CREATE OR REPLACE FUNCTION public.cleanup_expired_rate_limits()
 RETURNS INTEGER AS $$
 DECLARE
   deleted_count INTEGER;
 BEGIN
-  DELETE FROM rate_limits
+  DELETE FROM public.rate_limits
   WHERE window_end < NOW() - INTERVAL '1 hour';
 
   GET DIAGNOSTICS deleted_count = ROW_COUNT;
   RETURN deleted_count;
 END;
-$$ LANGUAGE plpgsql;
+$$ LANGUAGE plpgsql SET search_path = '';
 
 COMMENT ON FUNCTION cleanup_expired_rate_limits IS 'Delete rate limit records older than 1 hour. Call via Edge Function cron.';
 
 -- =========================================
 -- RATE LIMIT INCREMENT FUNCTION
 -- Atomic upsert + check for rate limiting
+-- Supports multi-tenant isolation via site_slug
 -- =========================================
 
-CREATE OR REPLACE FUNCTION increment_rate_limit(
+CREATE OR REPLACE FUNCTION public.increment_rate_limit(
   p_identifier TEXT,
   p_endpoint TEXT,
   p_site_slug TEXT,
@@ -341,17 +347,71 @@ CREATE OR REPLACE FUNCTION increment_rate_limit(
 DECLARE
   v_count INTEGER;
 BEGIN
-  INSERT INTO rate_limits (identifier, endpoint, site_slug, request_count, window_start, window_end)
+  -- Validate site_slug: must not be NULL or empty.
+  -- This prevents callers from bypassing per-site isolation.
+  IF p_site_slug IS NULL OR p_site_slug = '' THEN
+    RAISE EXCEPTION 'site_slug cannot be NULL or empty';
+  END IF;
+
+  INSERT INTO public.rate_limits (identifier, endpoint, site_slug, request_count, window_start, window_end)
   VALUES (p_identifier, p_endpoint, p_site_slug, 1, p_window_start, p_window_end)
-  ON CONFLICT (identifier, endpoint, window_start)
-  DO UPDATE SET request_count = rate_limits.request_count + 1, updated_at = NOW()
+  ON CONFLICT (identifier, endpoint, site_slug, window_start)
+  DO UPDATE SET request_count = public.rate_limits.request_count + 1, updated_at = NOW()
   RETURNING request_count INTO v_count;
 
   RETURN json_build_object('request_count', v_count, 'allowed', v_count <= p_max_requests);
 END;
-$$ LANGUAGE plpgsql SECURITY DEFINER;
+$$ LANGUAGE plpgsql SECURITY DEFINER SET search_path = '';
 
-COMMENT ON FUNCTION increment_rate_limit IS 'Atomic rate limit check: upsert counter and return whether request is allowed.';
+COMMENT ON FUNCTION increment_rate_limit IS 'Atomic rate limit check: upsert counter and return whether request is allowed. Validates site_slug to enforce multi-tenant isolation.';
+
+-- =========================================
+-- MIGRATION: Multi-Tenant Rate Limiting
+-- Zero-downtime migration for EXISTING databases
+-- =========================================
+--
+-- If you are setting up a NEW database, the table definition
+-- above already includes the correct UNIQUE constraint and
+-- NOT NULL site_slug. You can skip this section.
+--
+-- For EXISTING databases that have the old schema
+-- (site_slug nullable, UNIQUE missing site_slug), run
+-- these steps IN ORDER in the Supabase SQL Editor.
+--
+-- IMPORTANT: Step 3 uses CREATE INDEX CONCURRENTLY which
+-- cannot run inside a transaction. In Supabase SQL Editor,
+-- run each step separately, or run the entire block (the
+-- editor executes statements outside a transaction by default
+-- when CONCURRENTLY is used).
+-- =========================================
+
+-- Step 1: Backfill existing NULL site_slug values with 'legacy'.
+-- These rows will expire naturally (rate limit windows are 5-15 min)
+-- but they must have a value before we can set NOT NULL.
+UPDATE rate_limits SET site_slug = 'legacy' WHERE site_slug IS NULL;
+
+-- Step 2: Make site_slug NOT NULL to prevent future NULL bypass.
+-- (In SQL, NULL != NULL, so a nullable column in a UNIQUE constraint
+-- allows unlimited NULL rows -- effectively disabling rate limiting.)
+ALTER TABLE rate_limits ALTER COLUMN site_slug SET NOT NULL;
+
+-- Step 3: Create new UNIQUE index WITHOUT blocking writes.
+-- CONCURRENTLY builds the index in the background while the table
+-- remains fully available for reads and writes.
+CREATE UNIQUE INDEX CONCURRENTLY IF NOT EXISTS
+  idx_rate_limits_identifier_endpoint_site_slug_window
+  ON rate_limits(identifier, endpoint, site_slug, window_start);
+
+-- Step 4: Promote the index to a proper UNIQUE constraint.
+-- This is a metadata-only operation (instant) because the index
+-- already enforces uniqueness.
+ALTER TABLE rate_limits
+  ADD CONSTRAINT rate_limits_identifier_endpoint_site_slug_window_key
+  UNIQUE USING INDEX idx_rate_limits_identifier_endpoint_site_slug_window;
+
+-- Step 5: Drop the OLD constraint/index that lacked site_slug.
+-- CONCURRENTLY avoids blocking writes during drop.
+DROP INDEX CONCURRENTLY IF EXISTS rate_limits_identifier_endpoint_window_start_key;
 
 -- =========================================
 -- VERIFICATION QUERIES
@@ -385,14 +445,30 @@ WHERE schemaname = 'public'
   AND tablename IN ('sites', 'deployments', 'builds', 'metrics', 'alerts', 'content_generations', 'rate_limits')
 ORDER BY tablename;
 
+-- Verify multi-tenant rate limiting schema
+-- site_slug should be NOT NULL and UNIQUE constraint should include it
+SELECT column_name, is_nullable, data_type
+FROM information_schema.columns
+WHERE table_name = 'rate_limits' AND column_name = 'site_slug';
+
+SELECT conname, contype
+FROM pg_constraint
+WHERE conrelid = 'rate_limits'::regclass
+  AND conname = 'rate_limits_identifier_endpoint_site_slug_window_key';
+
 -- =========================================
--- SETUP COMPLETE ✅
+-- SETUP COMPLETE
 -- =========================================
 --
 -- Next steps:
 -- 1. Verify tables created: SELECT * FROM sites;
--- 2. Create Supabase service role key (Project Settings → API → service_role)
+-- 2. Create Supabase service role key (Project Settings > API > service_role)
 -- 3. Add credentials to .env.local
 -- 4. Test connection with tools/test-registry.ts
+--
+-- For existing databases, verify the migration:
+-- 5. Confirm site_slug is NOT NULL (see verification query above)
+-- 6. Confirm UNIQUE constraint includes site_slug
+-- 7. Confirm RPC function validates site_slug (test with empty string)
 --
 -- =========================================

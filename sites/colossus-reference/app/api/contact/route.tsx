@@ -4,6 +4,7 @@ import { checkRateLimit } from "@platform/core-components/lib/rate-limiter";
 import { escapeHtml } from "@platform/core-components/lib/security/html-escape";
 import { extractClientIp } from "@platform/core-components/lib/security/ip-utils";
 import { validateCsrfToken } from "@platform/core-components/lib/security/csrf";
+import { siteConfig } from "@/site.config";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -35,7 +36,10 @@ export async function POST(request: Request): Promise<Response> {
   // Use secure IP extraction with validation
   const ip = extractClientIp(request);
 
-  const rateLimit = await checkRateLimit(ip);
+  const rateLimit = await checkRateLimit(ip, {
+    endpoint: "/api/contact",
+    siteSlug: siteConfig.slug,
+  });
 
   if (!rateLimit.allowed) {
     return Response.json(

@@ -55,7 +55,9 @@ export async function POST(request: NextRequest) {
 
     // Check rate limit
     if (siteConfig.features.rateLimit) {
-      const rateLimitResponse = await rateLimitMiddleware(clientIP);
+      const rateLimitResponse = await rateLimitMiddleware(clientIP, {
+        siteSlug: siteConfig.slug,
+      });
       if (rateLimitResponse) {
         return rateLimitResponse;
       }

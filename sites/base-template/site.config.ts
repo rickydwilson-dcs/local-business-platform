@@ -6,6 +6,8 @@
  * with actual business information.
  */
 
+import type { BaseSiteConfig } from '@platform/core-components/types/site-config';
+
 export interface NavItem {
   label: string;
   href: string;
@@ -63,7 +65,7 @@ export interface ServiceAreaRegion {
   towns: Array<{ name: string; slug: string }>;
 }
 
-export interface SiteConfig {
+export interface SiteConfig extends BaseSiteConfig {
   /** Site name and branding */
   name: string;
   tagline: string;
@@ -143,6 +145,8 @@ export interface SiteConfig {
 }
 
 export const siteConfig: SiteConfig = {
+  slug: 'base-template',
+  domain: 'localhost',
   name: 'Base Template Site',
   tagline: 'Professional Local Services',
   url: process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000',

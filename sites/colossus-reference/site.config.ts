@@ -5,6 +5,8 @@
  * for the Colossus Scaffolding website.
  */
 
+import type { BaseSiteConfig } from "@platform/core-components/types/site-config";
+
 export interface NavItem {
   label: string;
   href: string;
@@ -62,7 +64,7 @@ export interface ServiceAreaRegion {
   towns: Array<{ name: string; slug: string }>;
 }
 
-export interface SiteConfig {
+export interface SiteConfig extends BaseSiteConfig {
   /** Site name and branding */
   name: string;
   tagline: string;
@@ -142,6 +144,8 @@ export interface SiteConfig {
 }
 
 export const siteConfig: SiteConfig = {
+  slug: "colossus-reference",
+  domain: "colossusscaffolding.com",
   name: "Colossus Scaffolding",
   tagline: "Safe, compliant and fully insured scaffolding specialists serving the South East UK",
   url: process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
