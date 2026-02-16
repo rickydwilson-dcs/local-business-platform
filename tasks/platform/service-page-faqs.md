@@ -1,6 +1,6 @@
 # Service Page FAQs - Structure Issue
 
-**Status:** Backlog
+**Status:** ✅ Completed (2026-02-16)
 **Priority:** Medium
 **Created:** 2026-02-15
 **Site:** DJ Fox Electrical
@@ -177,6 +177,43 @@ If choosing Option A:
 - Location pages already use structured frontmatter FAQs (working correctly)
 - Schema: `packages/core-components/src/lib/content-schemas.ts` - `ServiceFrontmatterSchema`
 - Content standard: `docs/standards/content.md`
+
+## Completion Summary
+
+**Completed:** 2026-02-16
+
+**Solution Implemented:** Hybrid approach - extracted FAQs from markdown to frontmatter for files that had them, made `faqs` field optional in schema for files without them.
+
+**Results:**
+
+- Created automated extraction script: `tools/extract-service-faqs.ts`
+- Successfully extracted FAQs from 14 service files (5-8 FAQs each)
+- Made `faqs` field optional in `ServiceFrontmatterSchema` (packages/core-components/src/lib/content-schemas.ts)
+- All 48 service files now pass content validation
+- All 23 location files continue to pass validation
+- Build successful - all pages rendering correctly
+- FAQs display properly in built HTML with JSON-LD schema markup
+
+**Files Modified:**
+
+- `packages/core-components/src/lib/content-schemas.ts` - Made faqs optional
+- 14 service MDX files - FAQs moved from body to frontmatter:
+  - access-control-systems.mdx (7 FAQs)
+  - additional-circuits.mdx (5 FAQs)
+  - cctv-installation.mdx (6 FAQs)
+  - commercial-fire-alarm-systems.mdx (7 FAQs)
+  - commercial-maintenance-contracts.mdx (6 FAQs)
+  - data-network-cabling.mdx (7 FAQs)
+  - electric-gates.mdx (8 FAQs)
+  - intruder-alarm-installation.mdx (7 FAQs)
+  - kitchen-bathroom-electrical.mdx (6 FAQs)
+  - new-build-electrical.mdx (7 FAQs)
+  - office-fitout-electrical.mdx (6 FAQs)
+  - storage-heater-installation.mdx (8 FAQs)
+  - three-phase-installation.mdx (7 FAQs)
+  - underfloor-heating-electric.mdx (8 FAQs)
+
+**Note:** Task description mentioned "all 43 service pages have FAQ content" but only 14 files actually had FAQ sections. The remaining 34 files were either stub/template files or didn't include FAQs.
 
 ## Notes
 
