@@ -16,7 +16,10 @@
         "FEATURE_GOOGLE_ADS",
         "FEATURE_ANALYTICS_ENABLED",
         "FEATURE_SERVER_TRACKING",
-        "CSRF_SECRET"
+        "CSRF_SECRET",
+        "BUSINESS_NAME",
+        "BUSINESS_EMAIL",
+        "R2_BUCKET_NAME"
       ]
     },
     "dev": {
