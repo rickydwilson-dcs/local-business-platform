@@ -3,14 +3,13 @@
 import { useState, useEffect } from 'react';
 import { CheckCircle, AlertCircle } from 'lucide-react';
 
-interface ServiceOption {
+interface LocationOption {
+  name: string;
   slug: string;
-  title: string;
 }
 
 interface ContactFormProps {
-  services: ServiceOption[];
-  serviceAreas: string[];
+  locations: LocationOption[];
   darkMode?: boolean;
 }
 
@@ -19,7 +18,6 @@ interface FormData {
   email: string;
   phone: string;
   subject: string;
-  service: string;
   location: string;
   message: string;
 }
@@ -30,13 +28,12 @@ interface FormErrors {
   message?: string;
 }
 
-export function ContactForm({ services, serviceAreas, darkMode = false }: ContactFormProps) {
+export function ContactForm({ locations, darkMode = false }: ContactFormProps) {
   const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
     phone: '',
     subject: '',
-    service: '',
     location: '',
     message: '',
   });
@@ -127,7 +124,6 @@ export function ContactForm({ services, serviceAreas, darkMode = false }: Contac
           email: '',
           phone: '',
           subject: '',
-          service: '',
           location: '',
           message: '',
         });
@@ -256,46 +252,6 @@ export function ContactForm({ services, serviceAreas, darkMode = false }: Contac
           />
         </div>
 
-        {/* Subject */}
-        <div>
-          <label htmlFor="subject" className={`block text-sm font-medium ${labelClass} mb-2`}>
-            Subject
-          </label>
-          <input
-            type="text"
-            id="subject"
-            name="subject"
-            value={formData.subject}
-            onChange={handleChange}
-            className={`w-full px-4 py-3 rounded-lg border ${inputBorderClass} ${inputBgClass} focus:outline-none focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary`}
-            placeholder="What is this regarding?"
-          />
-        </div>
-
-        {/* Service */}
-        <div>
-          <label htmlFor="service" className={`block text-sm font-medium ${labelClass} mb-2`}>
-            Service
-          </label>
-          <select
-            id="service"
-            name="service"
-            value={formData.service}
-            onChange={handleChange}
-            className={`w-full px-4 py-3 rounded-lg border ${inputBorderClass} ${
-              darkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-900'
-            } focus:outline-none focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary`}
-          >
-            <option value="">Select a service</option>
-            {services.map((service) => (
-              <option key={service.slug} value={service.title}>
-                {service.title}
-              </option>
-            ))}
-            <option value="Other">Other</option>
-          </select>
-        </div>
-
         {/* Location */}
         <div>
           <label htmlFor="location" className={`block text-sm font-medium ${labelClass} mb-2`}>
@@ -310,14 +266,30 @@ export function ContactForm({ services, serviceAreas, darkMode = false }: Contac
               darkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-900'
             } focus:outline-none focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary`}
           >
-            <option value="">Select your area</option>
-            {serviceAreas.map((area) => (
-              <option key={area} value={area}>
-                {area}
+            <option value="">Select your town</option>
+            {locations.map((location) => (
+              <option key={location.slug} value={location.name}>
+                {location.name}
               </option>
             ))}
             <option value="Other">Other</option>
           </select>
+        </div>
+
+        {/* Subject */}
+        <div>
+          <label htmlFor="subject" className={`block text-sm font-medium ${labelClass} mb-2`}>
+            Subject
+          </label>
+          <input
+            type="text"
+            id="subject"
+            name="subject"
+            value={formData.subject}
+            onChange={handleChange}
+            className={`w-full px-4 py-3 rounded-lg border ${inputBorderClass} ${inputBgClass} focus:outline-none focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary`}
+            placeholder="What is this regarding?"
+          />
         </div>
       </div>
 

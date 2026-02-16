@@ -80,8 +80,7 @@ export default function ContactPage() {
                 needs.
               </p>
               <ContactForm
-                services={siteConfig.services}
-                serviceAreas={siteConfig.serviceAreas}
+                locations={siteConfig.serviceAreaRegions?.[0]?.towns || []}
                 darkMode={true}
               />
             </div>
