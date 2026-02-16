@@ -17,7 +17,7 @@ export default async function HomePage() {
     <div className="min-h-screen">
       {/* Hero Section - Full-width image with accent */}
       <HeroWithImage
-        imageSrc="placeholder/hero-electrical.webp"
+        imageSrc="djfoxelectrical/hero/hero-electrician-work.jpg"
         imageAlt="Professional electrician working on electrical panel in Eastbourne"
         overlay="darker"
         heading={
@@ -81,21 +81,21 @@ export default async function HomePage() {
           </p>
           <div className="grid md:grid-cols-3 gap-6">
             <ImageOverlayCard
-              imageSrc="placeholder/category-installation.webp"
+              imageSrc="djfoxelectrical/categories/installation-work.jpg"
               imageAlt="Electrical installation services"
               category="Installation"
               title="New Installations"
               href="/services#installation"
             />
             <ImageOverlayCard
-              imageSrc="placeholder/category-maintenance.webp"
+              imageSrc="djfoxelectrical/categories/maintenance-work.jpg"
               imageAlt="Electrical maintenance services"
               category="Maintenance"
               title="Regular Maintenance"
               href="/services#maintenance"
             />
             <ImageOverlayCard
-              imageSrc="placeholder/category-repair.webp"
+              imageSrc="djfoxelectrical/categories/repair-work.jpg"
               imageAlt="Electrical repair services"
               category="Repair"
               title="Expert Repairs"
