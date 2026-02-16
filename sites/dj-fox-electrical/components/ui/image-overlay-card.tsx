@@ -51,8 +51,8 @@ export function ImageOverlayCard({
       href={href}
       className="group relative block overflow-hidden rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300"
     >
-      {/* Image Container with aspect ratio */}
-      <div className="relative aspect-[16/9] w-full overflow-hidden">
+      {/* Image Container with aspect ratio - taller on desktop */}
+      <div className="relative aspect-[16/9] md:aspect-[4/5] w-full overflow-hidden">
         <Image
           src={getImageUrl(imageSrc)}
           alt={imageAlt}
