@@ -63,6 +63,7 @@ title: "Access Scaffolding"
 seoTitle: "Access Scaffolding Services | Colossus Scaffolding"
 description: "Professional access scaffolding services for safe working at height. TG20:21 compliant systems."
 keywords: ["access scaffolding", "scaffolding hire", "scaffolding services"]
+category: "installation" # Optional: installation | maintenance | repair (used for category-based filtering)
 heroImage: "/Access-Scaffolding.png"
 hero:
   title: "Professional Access Scaffolding"
