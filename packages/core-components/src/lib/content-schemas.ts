@@ -75,7 +75,8 @@ export const ServiceFrontmatterSchema = z.object({
   faqs: z
     .array(FaqSchema)
     .min(3, "At least 3 FAQs required for good SEO")
-    .max(15, "Maximum 15 FAQs recommended for page performance"),
+    .max(15, "Maximum 15 FAQs recommended for page performance")
+    .optional(),
 
   benefits: z.array(z.string().min(10, "Benefits must be at least 10 characters")).optional(),
 

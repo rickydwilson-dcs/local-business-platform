@@ -5,14 +5,21 @@
  * for atomic, fixed-window rate limiting. Fails open (allows requests)
  * when Supabase is unavailable or not configured.
  *
- * Usage (colossus pattern — direct check):
+ * Multi-tenant behaviour:
+ *   - `siteSlug` is REQUIRED for per-site rate limit isolation.
+ *   - In production, a missing `siteSlug` will **fail closed** (block the
+ *     request) to prevent accidental cross-site rate limit pollution.
+ *   - In development, a missing `siteSlug` will **fail open** with a
+ *     console warning so local dev is not disrupted.
+ *
+ * Usage (colossus pattern -- direct check):
  *   import { checkRateLimit } from '@platform/core-components/lib/rate-limiter';
- *   const result = await checkRateLimit(ip);
+ *   const result = await checkRateLimit(ip, { siteSlug: siteConfig.slug });
  *   if (!result.allowed) return Response(429);
  *
- * Usage (base-template/smiths pattern — middleware wrapper):
+ * Usage (base-template/smiths pattern -- middleware wrapper):
  *   import { rateLimitMiddleware } from '@platform/core-components/lib/rate-limiter';
- *   const response = await rateLimitMiddleware(ip);
+ *   const response = await rateLimitMiddleware(ip, { siteSlug: siteConfig.slug });
  *   if (response) return response; // 429
  */
 
@@ -32,6 +39,7 @@ export interface RateLimitOptions {
 export interface RateLimitCheckResult {
   allowed: boolean;
   retryAfter?: number;
+  error?: string;
 }
 
 // Legacy interface kept for backward-compatible imports
@@ -78,20 +86,48 @@ export async function checkRateLimit(
   identifier: string,
   options: RateLimitOptions = {}
 ): Promise<RateLimitCheckResult> {
+  // -------------------------------------------------------------------------
+  // Runtime validation: siteSlug must be present for multi-tenant isolation
+  // -------------------------------------------------------------------------
+  const siteSlug = options.siteSlug?.trim() || "";
+
+  if (!siteSlug) {
+    if (process.env.NODE_ENV === "production") {
+      console.error("[Rate Limiter] CRITICAL: Missing siteSlug in production - failing closed", {
+        identifier,
+        endpoint: options.endpoint ?? DEFAULTS.endpoint,
+        timestamp: new Date().toISOString(),
+      });
+      return {
+        allowed: false,
+        remaining: 0,
+        error: "Configuration error: missing site identifier",
+      } as RateLimitCheckResult;
+    } else {
+      console.warn("[Rate Limiter] Missing siteSlug in development - allowing request");
+      return { allowed: true };
+    }
+  }
+
+  // -------------------------------------------------------------------------
+  // Supabase availability check
+  // -------------------------------------------------------------------------
   const supabase = getSupabase();
 
   if (!supabase) {
     if (process.env.NODE_ENV === "development") {
-      console.log("[Rate Limiter] Supabase not configured — allowing request");
+      console.log("[Rate Limiter] Supabase not configured - allowing request");
     }
     return { allowed: true };
   }
 
+  // -------------------------------------------------------------------------
+  // Rate limit check via Supabase RPC
+  // -------------------------------------------------------------------------
   const {
     endpoint = DEFAULTS.endpoint,
     maxRequests = DEFAULTS.maxRequests,
     windowSeconds = DEFAULTS.windowSeconds,
-    siteSlug = null,
   } = options;
 
   try {
@@ -113,6 +149,17 @@ export async function checkRateLimit(
 
     if (!data.allowed) {
       const retryAfter = Math.ceil((windowEnd.getTime() - now.getTime()) / 1000);
+
+      // Structured logging for rate limit denials
+      console.log("[Rate Limiter] Request denied", {
+        siteSlug,
+        identifier,
+        endpoint,
+        requestCount: data.request_count,
+        maxRequests,
+        timestamp: new Date().toISOString(),
+      });
+
       return { allowed: false, retryAfter };
     }
 
@@ -134,19 +181,17 @@ export async function rateLimitMiddleware(
   const result = await checkRateLimit(identifier, options);
 
   if (!result.allowed) {
-    return new Response(
-      JSON.stringify({
-        error: "Too many requests. Please try again later.",
-        retryAfter: result.retryAfter,
-      }),
-      {
-        status: 429,
-        headers: {
-          "Content-Type": "application/json",
-          "Retry-After": result.retryAfter?.toString() || "300",
-        },
-      }
-    );
+    const body = result.error
+      ? { error: result.error }
+      : { error: "Too many requests. Please try again later.", retryAfter: result.retryAfter };
+
+    return new Response(JSON.stringify(body), {
+      status: result.error ? 503 : 429,
+      headers: {
+        "Content-Type": "application/json",
+        ...(result.retryAfter ? { "Retry-After": result.retryAfter.toString() } : {}),
+      },
+    });
   }
 
   return null;

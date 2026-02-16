@@ -87,21 +87,32 @@ Drop a new MDX file in the right directory, build, and a new page appears. No co
 
 `@platform/intake-system` automates new client onboarding: collects business data via chat/forms, validates against Zod schemas, applies industry templates, extracts brand colors, and produces a project file that drives automated site generation.
 
+### 7. Rate Limiting (Multi-Tenant)
+
+All sites share a single Supabase database for rate limiting, with per-site isolation via `site_slug`. This architecture:
+
+- **Cost-efficient:** One database serves all clients (no per-site infrastructure)
+- **Isolated:** Each site has independent rate limit counters (same IP limited on Site A can still submit on Site B)
+- **Automatic:** New sites inherit rate limiting by simply setting the `slug` field in `site.config.ts`
+- **Secure:** Fail-closed behavior in production if site slug is missing
+
+The implementation uses database-level UNIQUE constraints on `(identifier, endpoint, site_slug, window_start)` to enforce true isolation, with runtime validation and structured logging for observability.
+
 ## Technology Stack
 
-| Category      | Technology                                  |
-| ------------- | ------------------------------------------- |
-| Framework     | Next.js (App Router, Turbopack)             |
-| Language      | TypeScript (strict mode)                    |
-| Styling       | Tailwind CSS + Theme System (CSS variables) |
-| Content       | MDX with gray-matter                        |
-| Testing       | Vitest + Playwright                         |
-| Deployment    | Vercel                                      |
-| Image Storage | Cloudflare R2                               |
-| Rate Limiting | Supabase                                    |
-| Monitoring    | NewRelic APM                                |
-| Analytics     | GA4 (consent-managed)                       |
-| Backend       | Supabase                                    |
+| Category      | Technology                                     |
+| ------------- | ---------------------------------------------- |
+| Framework     | Next.js (App Router, Turbopack)                |
+| Language      | TypeScript (strict mode)                       |
+| Styling       | Tailwind CSS + Theme System (CSS variables)    |
+| Content       | MDX with gray-matter                           |
+| Testing       | Vitest + Playwright                            |
+| Deployment    | Vercel                                         |
+| Image Storage | Cloudflare R2                                  |
+| Rate Limiting | Supabase (shared database, per-site isolation) |
+| Monitoring    | NewRelic APM                                   |
+| Analytics     | GA4 (consent-managed)                          |
+| Backend       | Supabase                                       |
 
 ## Content Flow
 

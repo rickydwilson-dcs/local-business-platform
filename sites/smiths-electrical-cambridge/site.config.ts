@@ -5,6 +5,8 @@
  * Generated at: 2026-02-03T13:53:41.050Z
  */
 
+import type { BaseSiteConfig } from '@platform/core-components/types/site-config';
+
 export interface NavItem {
   label: string;
   href: string;
@@ -62,7 +64,7 @@ export interface ServiceAreaRegion {
   towns: Array<{ name: string; slug: string }>;
 }
 
-export interface SiteConfig {
+export interface SiteConfig extends BaseSiteConfig {
   /** Site name and branding */
   name: string;
   tagline: string;
@@ -142,6 +144,8 @@ export interface SiteConfig {
 }
 
 export const siteConfig: SiteConfig = {
+  slug: 'smiths-electrical-cambridge',
+  domain: 'smithselectrical.co.uk',
   name: "Smith's Electrical Services",
   tagline: "Cambridge's Trusted Electricians",
   url: process.env.NEXT_PUBLIC_SITE_URL || 'https://smithselectrical.co.uk',

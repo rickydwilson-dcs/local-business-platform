@@ -1,0 +1,57 @@
+import type { DeepPartialThemeConfig } from '@platform/theme-system';
+
+/**
+ * D J Fox Electrical - Theme Configuration
+ *
+ * Generated from project file: 550e8400-e29b-41d4-a716-446655440015
+ * Generated at: 2026-02-15T19:18:53.726Z
+ */
+export const themeConfig: DeepPartialThemeConfig = {
+  colors: {
+    brand: {
+      primary: '#db0b0b',
+      primaryHover: '#ba0909',
+      secondary: '#b00909',
+      accent: '#fbbf24',
+    },
+    surface: {
+      background: '#ffffff',
+      foreground: '#1f2937',
+      muted: '#f3f4f6',
+      mutedForeground: '#6b7280',
+      card: '#ffffff',
+      cardBorder: '#e5e7eb',
+    },
+    semantic: {
+      success: '#10b981',
+      warning: '#f59e0b',
+      error: '#ef4444',
+      info: '#3b82f6',
+    },
+  },
+
+  typography: {
+    fontFamily: {
+      sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+      heading: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+    },
+    // Typography scale uses defaults from theme-system
+  },
+
+  components: {
+    button: {
+      borderRadius: '0.5rem',
+      fontWeight: 600,
+    },
+    card: {
+      borderRadius: '1rem',
+      shadow: 'sm',
+    },
+    hero: {
+      variant: 'centered',
+    },
+    navigation: {
+      style: 'solid',
+    },
+  },
+};
