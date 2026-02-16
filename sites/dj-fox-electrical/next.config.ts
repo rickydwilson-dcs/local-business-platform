@@ -79,7 +79,9 @@ const nextConfig: NextConfig = {
       "'self' 'unsafe-inline' *.googletagmanager.com *.google-analytics.com *.facebook.com vercel.live *.vercel.live";
 
     // CORS: restrict API routes to same-origin requests only
-    const allowedOrigin = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+    const allowedOrigin =
+      process.env.NEXT_PUBLIC_SITE_URL ||
+      (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000');
 
     return [
       // CORS headers for API routes (SEC-010)

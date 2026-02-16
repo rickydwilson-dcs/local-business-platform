@@ -1,7 +1,7 @@
 /**
- * Next.js Middleware Template
+ * Next.js Proxy Template (Next.js 16+)
  *
- * This is a minimal middleware template for new sites.
+ * This is a minimal proxy template for new sites.
  * Customize this file based on your site's needs:
  * - Analytics tracking
  * - Rate limiting
@@ -12,13 +12,13 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   // Default behavior: pass through all requests
   // Uncomment and customize the sections below as needed
 
   const { pathname } = request.nextUrl;
 
-  // Skip middleware for static assets and internal routes
+  // Skip proxy for static assets and internal routes
   if (
     pathname.startsWith('/api/') ||
     pathname.startsWith('/_next/') ||
@@ -30,7 +30,7 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // Add custom middleware logic here
+  // Add custom proxy logic here
   // Example: Add security headers
   const response = NextResponse.next();
 
@@ -43,7 +43,7 @@ export async function middleware(request: NextRequest) {
   return response;
 }
 
-// Configure which paths the middleware should run on
+// Configure which paths the proxy should run on
 export const config = {
   matcher: [
     /*
