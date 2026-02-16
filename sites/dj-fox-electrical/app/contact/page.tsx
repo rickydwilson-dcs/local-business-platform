@@ -6,7 +6,6 @@
  */
 
 import type { Metadata } from 'next';
-import Image from 'next/image';
 import Link from 'next/link';
 import { Phone, Mail, MapPin, Clock } from 'lucide-react';
 import { siteConfig } from '@/site.config';
@@ -16,7 +15,6 @@ import { Schema, AccentUnderline } from '@platform/core-components';
 import { PageHero } from '@/components/ui/page-hero';
 import { InfoCard } from '@/components/ui/info-card';
 import { ContactForm } from '@/components/ui/ContactForm';
-import { getImageUrl } from '@/lib/image';
 
 export const metadata: Metadata = {
   title: `Contact Us | ${siteConfig.business.name}`,
