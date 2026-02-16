@@ -5,7 +5,16 @@
     "build": {
       "dependsOn": ["^build"],
       "outputs": [".next/**", "!.next/cache/**", "dist/**"],
-      "env": ["NODE_ENV"]
+      "env": [
+        "NODE_ENV",
+        "RESEND_API_KEY",
+        "FEATURE_GA4_ENABLED",
+        "FEATURE_FACEBOOK_PIXEL",
+        "FEATURE_GOOGLE_ADS",
+        "FEATURE_ANALYTICS_ENABLED",
+        "FEATURE_SERVER_TRACKING",
+        "CSRF_SECRET"
+      ]
     },
     "dev": {
       "cache": false,
