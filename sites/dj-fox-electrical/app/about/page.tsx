@@ -142,55 +142,6 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* Team Section for Daniel Fox */}
-        <section className="section bg-surface-subtle py-16 md:py-24">
-          <div className="container-narrow">
-            <h2 className="heading-section text-center mb-12">
-              <AccentUnderline as="span" className="heading-section">
-                Meet **Our Team**
-              </AccentUnderline>
-            </h2>
-            <div className="max-w-sm mx-auto">
-              <div className="card text-center">
-                {/* Circular Image */}
-                <div className="relative w-48 h-48 mx-auto mb-6">
-                  <Image
-                    src={getImageUrl('djfoxelectrical/team/daniel-fox.jpg')}
-                    alt="Daniel Fox - Director"
-                    fill
-                    className="object-cover rounded-full"
-                    sizes="192px"
-                  />
-                </div>
-
-                {/* Name and Role */}
-                <h3 className="text-2xl font-bold text-surface-foreground mb-2">Daniel Fox</h3>
-                <p className="text-brand-primary font-semibold mb-4">Director & Lead Electrician</p>
-
-                {/* Bio Text */}
-                <p className="text-surface-muted-foreground mb-6">
-                  With over 15 years of experience in the electrical industry, Daniel founded D J
-                  Fox Electrical to provide honest, professional electrical services across East
-                  Sussex.
-                </p>
-
-                {/* Certification Badges */}
-                <div className="flex flex-wrap gap-2 justify-center">
-                  <span className="inline-block px-3 py-1 bg-brand-primary/10 text-brand-primary text-sm font-medium rounded-full">
-                    NICEIC Approved
-                  </span>
-                  <span className="inline-block px-3 py-1 bg-brand-primary/10 text-brand-primary text-sm font-medium rounded-full">
-                    Part P Certified
-                  </span>
-                  <span className="inline-block px-3 py-1 bg-brand-primary/10 text-brand-primary text-sm font-medium rounded-full">
-                    TrustMark
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
         {/* Core Values */}
         <section className="section bg-white py-16 md:py-24">
           <div className="container-narrow">

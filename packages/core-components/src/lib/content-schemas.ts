@@ -119,6 +119,8 @@ export const ServiceFrontmatterSchema = z.object({
       address: z.string().optional(),
     })
     .optional(),
+
+  category: z.enum(["installation", "maintenance", "repair"]).optional(),
 });
 
 /**
