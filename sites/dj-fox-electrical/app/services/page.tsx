@@ -33,6 +33,12 @@ export const metadata: Metadata = {
 export default async function ServicesPage() {
   const services = await getServices();
 
+  // Filter services by category
+  const installationServices = services.filter((s) => s.category === 'installation');
+  const maintenanceServices = services.filter((s) => s.category === 'maintenance');
+  const repairServices = services.filter((s) => s.category === 'repair');
+  const uncategorizedServices = services.filter((s) => !s.category);
+
   const breadcrumbItems = [
     { name: 'Home', href: '/' },
     { name: 'Services', href: '/services', current: true },
@@ -50,8 +56,8 @@ export default async function ServicesPage() {
       />
 
       <main className="min-h-screen">
-        {/* Featured Services Section - Overlaps Hero */}
-        <section className="section bg-white -mt-16 relative z-10">
+        {/* Featured Services Section */}
+        <section className="section bg-white">
           <div className="container-narrow">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
@@ -89,57 +95,125 @@ export default async function ServicesPage() {
           <div className="container-narrow">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
-                Check Your Electrical Needs
+                Browse Services by Type
               </h2>
+              <p className="text-lg text-surface-foreground max-w-2xl mx-auto mt-4">
+                Explore our comprehensive range of electrical services organized by category.
+              </p>
             </div>
             <div className="grid md:grid-cols-3 gap-6">
               <ImageOverlayCard
                 imageSrc="djfoxelectrical/categories/installation-category.jpg"
-                imageAlt="Electrical installations"
+                imageAlt="New electrical installations"
                 category="Installation"
-                title="New Installations"
-                href="#installation"
+                title="Installation Services"
+                href="#installation-services"
               />
               <ImageOverlayCard
                 imageSrc="djfoxelectrical/categories/maintenance-category.jpg"
-                imageAlt="Maintenance services"
+                imageAlt="Electrical maintenance and upgrades"
                 category="Maintenance"
-                title="Regular Servicing"
-                href="#maintenance"
+                title="Maintenance & Upgrades"
+                href="#maintenance-services"
               />
               <ImageOverlayCard
                 imageSrc="djfoxelectrical/categories/repair-category.jpg"
-                imageAlt="Repair services"
+                imageAlt="Emergency electrical repairs"
                 category="Repair"
-                title="Fast Repairs"
-                href="#repair"
+                title="Repair & Emergency"
+                href="#repair-services"
               />
             </div>
           </div>
         </section>
 
-        {/* All Services Grid */}
-        <section className="section bg-white">
+        {/* Installation Services Section */}
+        <section id="installation-services" className="section bg-white scroll-mt-20">
           <div className="container-narrow">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                All Our Services
+                Installation Services
               </h2>
               <p className="text-lg text-surface-foreground max-w-2xl mx-auto">
-                Explore our complete range of professional electrical services
+                Professional installation of new electrical systems, equipment, and appliances
               </p>
             </div>
             <ContentGrid
-              items={services}
+              items={installationServices}
               basePath="/services"
               contentType="services"
-              emptyMessage="No services available yet. Check back soon."
+              emptyMessage="No installation services available."
               fallbackDescription={(title) =>
-                `Learn more about our ${title.toLowerCase()} services.`
+                `Professional ${title.toLowerCase()} installation services.`
               }
             />
           </div>
         </section>
+
+        {/* Maintenance Services Section */}
+        <section id="maintenance-services" className="section bg-surface-subtle scroll-mt-20">
+          <div className="container-narrow">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                Maintenance & Upgrades
+              </h2>
+              <p className="text-lg text-surface-foreground max-w-2xl mx-auto">
+                Regular maintenance, safety inspections, and system upgrades
+              </p>
+            </div>
+            <ContentGrid
+              items={maintenanceServices}
+              basePath="/services"
+              contentType="services"
+              emptyMessage="No maintenance services available."
+              fallbackDescription={(title) =>
+                `Professional ${title.toLowerCase()} maintenance services.`
+              }
+            />
+          </div>
+        </section>
+
+        {/* Repair & Emergency Services Section */}
+        <section id="repair-services" className="section bg-white scroll-mt-20">
+          <div className="container-narrow">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                Repair & Emergency Services
+              </h2>
+              <p className="text-lg text-surface-foreground max-w-2xl mx-auto">
+                24/7 emergency callouts, fault finding, and electrical repairs
+              </p>
+            </div>
+            <ContentGrid
+              items={repairServices}
+              basePath="/services"
+              contentType="services"
+              emptyMessage="No repair services available."
+              fallbackDescription={(title) =>
+                `Professional ${title.toLowerCase()} repair services.`
+              }
+            />
+          </div>
+        </section>
+
+        {/* Optional: Uncategorized Services (remove once all categorized) */}
+        {uncategorizedServices.length > 0 && (
+          <section className="section bg-surface-subtle">
+            <div className="container-narrow">
+              <div className="text-center mb-12">
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                  Other Services
+                </h2>
+              </div>
+              <ContentGrid
+                items={uncategorizedServices}
+                basePath="/services"
+                contentType="services"
+                emptyMessage="No other services available."
+              />
+            </div>
+          </section>
+        )}
       </main>
 
       <Schema

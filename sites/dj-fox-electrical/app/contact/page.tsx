@@ -44,8 +44,8 @@ export default function ContactPage() {
       />
 
       <main className="min-h-screen">
-        {/* Info Cards Section - Overlaps Hero */}
-        <section className="section bg-white -mt-16 relative z-10">
+        {/* Info Cards Section */}
+        <section className="section bg-white pt-16">
           <div className="container-narrow">
             <div className="grid md:grid-cols-3 gap-8">
               <InfoCard
@@ -67,37 +67,23 @@ export default function ContactPage() {
           </div>
         </section>
 
-        {/* Contact Form & Image Section */}
+        {/* Contact Form Section */}
         <section className="section bg-surface-subtle">
-          <div className="container-narrow">
-            <div className="grid md:grid-cols-2 gap-12 items-center">
-              {/* Image */}
-              <div className="relative h-96 order-2 md:order-1">
-                <Image
-                  src={getImageUrl('djfoxelectrical/sections/electrician-portrait.jpg')}
-                  alt="D J Fox Electrical"
-                  fill
-                  className="object-cover rounded-lg"
-                  priority={false}
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                />
-              </div>
-
-              {/* Dark Form */}
-              <div className="bg-black p-8 rounded-lg order-1 md:order-2">
-                <h2 className="text-3xl font-bold text-white mb-2">
-                  Write to us for <AccentUnderline as="span">Fast</AccentUnderline> Feedback
-                </h2>
-                <p className="text-gray-300 mb-6">
-                  Our team will get back to you as soon as possible with a tailored solution for
-                  your needs.
-                </p>
-                <ContactForm
-                  services={siteConfig.services}
-                  serviceAreas={siteConfig.serviceAreas}
-                  darkMode={true}
-                />
-              </div>
+          <div className="container-narrow max-w-3xl">
+            {/* Dark Form */}
+            <div className="bg-black p-8 md:p-12 rounded-lg">
+              <h2 className="text-3xl font-bold text-white mb-2">
+                Write to us for <AccentUnderline as="span">Fast</AccentUnderline> Feedback
+              </h2>
+              <p className="text-gray-300 mb-6">
+                Our team will get back to you as soon as possible with a tailored solution for your
+                needs.
+              </p>
+              <ContactForm
+                services={siteConfig.services}
+                serviceAreas={siteConfig.serviceAreas}
+                darkMode={true}
+              />
             </div>
           </div>
         </section>

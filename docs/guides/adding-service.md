@@ -70,6 +70,7 @@ keywords:
   - "staircase tower scaffolding"
   - "internal scaffolding"
   - "stair tower hire"
+category: "installation"  # Optional: installation | maintenance | repair (for category-based filtering)
 heroImage: "/Staircase-Towers.png"
 hero:
   title: "Professional Staircase Tower Solutions"
