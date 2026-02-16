@@ -152,7 +152,7 @@ export const siteConfig: SiteConfig = {
     name: 'D J Fox Electrical',
     legalName: 'D J Fox Electrical Ltd',
     type: 'HomeAndConstructionBusiness',
-    phone: '[PLACEHOLDER]',
+    phone: '01323 123456',
     email: 'info@djfoxelectrical.com',
     address: {
       street: 'Mobile Service',
