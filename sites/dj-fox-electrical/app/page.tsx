@@ -11,7 +11,22 @@ import { getServiceIcon } from '@/lib/service-icons';
 
 export default async function HomePage() {
   // Fetch actual locations from content
-  const locations = await getLocations();
+  const allLocations = await getLocations();
+
+  // Select the 6 main towns for homepage display (largest in East Sussex)
+  const priorityLocationSlugs = [
+    'eastbourne',
+    'hastings',
+    'bexhill-on-sea',
+    'brighton',
+    'lewes',
+    'hailsham',
+  ];
+
+  // Filter and sort locations by priority
+  const locations = allLocations
+    .filter((loc) => priorityLocationSlugs.includes(loc.slug))
+    .sort((a, b) => priorityLocationSlugs.indexOf(a.slug) - priorityLocationSlugs.indexOf(b.slug));
 
   return (
     <div className="min-h-screen">

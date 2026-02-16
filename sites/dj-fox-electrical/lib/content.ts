@@ -97,8 +97,8 @@ export async function getContentItems(contentType: ContentType): Promise<Content
     const features = Array.isArray(data.features) ? data.features : undefined;
     const subtitle = Array.isArray(data.subtitle) ? data.subtitle : undefined;
 
-    // Get hero image from frontmatter (supports both formats)
-    const heroImage = data.hero?.image || data.heroImage;
+    // Get image from frontmatter (supports multiple formats: image, hero.image, or heroImage)
+    const imageUrl = data.image || data.hero?.image || data.heroImage;
 
     items.push({
       slug,
@@ -107,7 +107,8 @@ export async function getContentItems(contentType: ContentType): Promise<Content
       badge,
       features,
       subtitle,
-      image: heroImage,
+      image: imageUrl,
+      heroImage: imageUrl,
       ...data,
     });
   }
