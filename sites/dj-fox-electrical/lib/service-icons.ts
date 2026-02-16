@@ -11,14 +11,32 @@ import {
   Sun,
   Car,
   Settings,
+  Search,
+  CircuitBoard,
   type LucideIcon,
 } from 'lucide-react';
 
 /**
  * Map service slugs to appropriate Lucide icons
  * Returns a default icon (Zap) if no match is found
+ *
+ * Note: The order of conditions matters - more specific checks should come first
  */
 export function getServiceIcon(slug: string): LucideIcon {
+  // Exact slug matches for homepage services (first 6)
+  const slugMap: Record<string, LucideIcon> = {
+    'emergency-electrical-callout': Zap,
+    'power-outage-restoration': CircuitBoard,
+    'fault-finding': Search,
+    'consumer-unit-upgrade': Settings,
+    rewiring: Home,
+    'additional-sockets': Plug,
+  };
+
+  if (slugMap[slug]) {
+    return slugMap[slug];
+  }
+
   // Emergency services
   if (slug.includes('emergency') || slug.includes('outage')) {
     return Zap;
@@ -43,6 +61,11 @@ export function getServiceIcon(slug: string): LucideIcon {
   // Testing & Certification
   if (slug.includes('testing') || slug.includes('certificate') || slug.includes('inspection')) {
     return Shield;
+  }
+
+  // Fault finding / diagnostics
+  if (slug.includes('fault') || slug.includes('diagnostic')) {
+    return Search;
   }
 
   // Lighting

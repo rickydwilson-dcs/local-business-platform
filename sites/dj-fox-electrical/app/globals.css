@@ -241,7 +241,7 @@
 
   /* Dark section with red accents */
   .section-dark-accent {
-    @apply bg-black text-white;
+    @apply bg-black text-white py-20 md:py-28;
   }
 
   .section-dark-accent h1,

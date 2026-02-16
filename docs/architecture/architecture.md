@@ -22,9 +22,10 @@ For detailed explanations of how each system works, see:
 ```
 local-business-platform/
 ├── sites/                          # Client websites
+│   ├── base-template/              # Gold-standard template for new sites
 │   ├── colossus-reference/         # Reference implementation (scaffolding)
-│   ├── smiths-electrical-cambridge/# Demo site (electrical)
-│   └── base-template/              # Gold-standard template for new sites
+│   ├── dj-fox-electrical/          # Production site (electrical)
+│   └── smiths-electrical-cambridge/# Demo site (electrical)
 ├── packages/
 │   ├── core-components/            # Shared UI components (@platform/core-components)
 │   ├── theme-system/               # Theming engine (@platform/theme-system)

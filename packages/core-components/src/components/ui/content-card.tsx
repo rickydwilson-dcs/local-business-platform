@@ -45,9 +45,7 @@ export function ContentCard({
 
       <div
         className={`relative h-48 rounded-t-2xl overflow-hidden flex items-center justify-center ${
-          !(image && contentType === "services")
-            ? "bg-gradient-to-br from-brand-primary/10 to-brand-primary/20"
-            : ""
+          !image ? "bg-gradient-to-br from-brand-primary/10 to-brand-primary/20" : ""
         }`}
       >
         {/* Subtitle pills at top */}
@@ -66,8 +64,8 @@ export function ContentCard({
           </div>
         )}
 
-        {/* Centered icon - only show when no image for services */}
-        {!(image && contentType === "services") && (
+        {/* Centered icon - only show when no image */}
+        {!image && (
           <div className="w-12 h-12 bg-brand-primary/20 rounded-lg flex items-center justify-center">
             <svg
               className="w-6 h-6 text-brand-primary"
@@ -85,8 +83,8 @@ export function ContentCard({
           </div>
         )}
 
-        {/* Background image with overlay for services that have images */}
-        {image && contentType === "services" && (
+        {/* Background image for both services and locations */}
+        {image && (
           <div className="absolute inset-0">
             <Image
               src={getImageUrl(image)}
