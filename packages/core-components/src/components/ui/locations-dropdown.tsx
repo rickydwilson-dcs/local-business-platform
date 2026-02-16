@@ -40,6 +40,8 @@ export interface LocationsDropdownProps {
   label?: string;
   /** Maximum towns to show per county in mega-menu */
   maxTownsPerCounty?: number;
+  /** Theme variant - controls button text color */
+  variant?: "light" | "dark";
 }
 
 export function LocationsDropdown({
@@ -47,6 +49,7 @@ export function LocationsDropdown({
   counties,
   label = "Locations",
   maxTownsPerCounty = 6,
+  variant = "light",
 }: LocationsDropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -89,10 +92,11 @@ export function LocationsDropdown({
   }, [isOpen]);
 
   if (locations.length === 0 && (!counties || counties.length === 0)) {
+    const linkTextColor = variant === "dark" ? "text-white" : "text-gray-700";
     return (
       <Link
         href="/locations"
-        className="text-gray-700 hover:text-brand-primary transition-colors font-medium"
+        className={`${linkTextColor} hover:text-brand-primary transition-colors font-medium`}
       >
         {label}
       </Link>
@@ -100,13 +104,14 @@ export function LocationsDropdown({
   }
 
   const useMegaMenu = counties && counties.length > 0;
+  const buttonTextColor = variant === "dark" ? "text-white" : "text-gray-700";
 
   return (
     <div ref={dropdownRef} className="relative">
       <button
         ref={buttonRef}
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-1 text-gray-700 hover:text-brand-primary transition-colors font-medium"
+        className={`flex items-center gap-1 ${buttonTextColor} hover:text-brand-primary transition-colors font-medium`}
         aria-expanded={isOpen}
         aria-haspopup="true"
       >

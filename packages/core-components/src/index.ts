@@ -2,6 +2,7 @@
 export * from "./components/hero";
 
 // Export all UI components (generic, usable across all sites)
+export * from "./components/ui/accent-underline";
 export * from "./components/ui/aggregate-rating-display";
 export * from "./components/ui/article-callout";
 export * from "./components/ui/author-card";
@@ -69,6 +70,9 @@ export * from "./hooks";
 export * from "./lib/content-schemas";
 export * from "./lib/schema";
 export * from "./lib/schema-types";
+
+// Export platform-level types
+export * from "./types/site-config";
 
 // Server-only lib modules (use fs/promises) are NOT exported from barrel.
 // Import directly from site-local @/lib/ modules or from subpaths:

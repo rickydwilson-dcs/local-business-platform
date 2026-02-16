@@ -1,14 +1,17 @@
 {
   "industry": "electrical",
-  "version": "1.0.0",
-  "last_updated": "2026-02-03",
-  "total_services": 25,
+  "version": "1.1.0",
+  "last_updated": "2026-02-14",
+  "total_services": 43,
   "categories": [
     "Emergency Services",
     "Installation",
     "Repairs & Maintenance",
     "Testing & Certification",
-    "Smart Home & Automation"
+    "Smart Home & Automation",
+    "Commercial Services",
+    "Green Energy",
+    "Security Systems"
   ],
   "services": [
     {
@@ -549,6 +552,487 @@
         "Home office setup"
       ],
       "related_services": ["consumer-unit-upgrade", "additional-sockets", "ev-charger-installation"]
+    },
+    {
+      "slug": "electric-shower-installation",
+      "title": "Electric Shower Installation",
+      "description": "Professional installation of electric shower units with dedicated circuits and appropriate electrical protection.",
+      "category": "Installation",
+      "keywords": [
+        "electric shower",
+        "shower installation",
+        "power shower",
+        "instant shower",
+        "shower wiring"
+      ],
+      "typical_duration": "3-5 hours",
+      "price_range": "££-£££",
+      "common_issues": [
+        "Installing new electric shower",
+        "Upgrading old shower unit",
+        "Need higher power shower"
+      ],
+      "related_services": [
+        "additional-circuits",
+        "consumer-unit-upgrade",
+        "electrical-safety-certificate"
+      ]
+    },
+    {
+      "slug": "electric-cooker-installation",
+      "title": "Electric Cooker Installation",
+      "description": "Safe installation and wiring of electric cookers, ovens, hobs and ranges with appropriate circuit protection.",
+      "category": "Installation",
+      "keywords": [
+        "cooker installation",
+        "oven installation",
+        "electric hob",
+        "cooker wiring",
+        "range cooker",
+        "kitchen appliance"
+      ],
+      "typical_duration": "2-4 hours",
+      "price_range": "££",
+      "common_issues": [
+        "New cooker installation",
+        "Upgrading to higher power cooker",
+        "Cooker circuit inadequate"
+      ],
+      "related_services": [
+        "additional-circuits",
+        "kitchen-bathroom-electrical",
+        "consumer-unit-upgrade"
+      ]
+    },
+    {
+      "slug": "kitchen-bathroom-electrical",
+      "title": "Kitchen & Bathroom Electrical Work",
+      "description": "Complete electrical services for kitchen and bathroom renovations including rewiring, new circuits and appliance installation.",
+      "category": "Installation",
+      "keywords": [
+        "kitchen rewire",
+        "bathroom electrical",
+        "kitchen renovation",
+        "bathroom refurb",
+        "kitchen lighting",
+        "bathroom wiring"
+      ],
+      "typical_duration": "1-3 days",
+      "price_range": "£££-££££",
+      "common_issues": [
+        "Kitchen renovation",
+        "Bathroom refurbishment",
+        "Need more power points",
+        "Outdated wiring in wet areas"
+      ],
+      "related_services": [
+        "rewiring",
+        "extractor-fan-installation",
+        "electric-cooker-installation",
+        "electric-shower-installation"
+      ]
+    },
+    {
+      "slug": "landlord-safety-package",
+      "title": "Landlord Safety Package",
+      "description": "Comprehensive electrical safety package for landlords including EICR, smoke alarms, CO detectors and compliance certification.",
+      "category": "Testing & Certification",
+      "keywords": [
+        "landlord certificate",
+        "rental property electrical",
+        "landlord compliance",
+        "HMO electrical",
+        "rental safety check",
+        "tenant safety"
+      ],
+      "typical_duration": "3-5 hours",
+      "price_range": "££-£££",
+      "common_issues": [
+        "Legal compliance for rental properties",
+        "New tenancy requirements",
+        "HMO licensing",
+        "Insurance requirements"
+      ],
+      "related_services": [
+        "electrical-safety-certificate",
+        "fire-alarm-installation",
+        "pat-testing"
+      ]
+    },
+    {
+      "slug": "solar-panel-installation",
+      "title": "Solar Panel Installation",
+      "description": "Design and installation of solar PV systems to generate renewable electricity and reduce energy bills.",
+      "category": "Green Energy",
+      "keywords": [
+        "solar panels",
+        "solar PV",
+        "photovoltaic",
+        "renewable energy",
+        "solar power",
+        "green energy",
+        "solar installation"
+      ],
+      "typical_duration": "1-2 days",
+      "price_range": "££££",
+      "common_issues": [
+        "High electricity bills",
+        "Want renewable energy",
+        "Reduce carbon footprint",
+        "Energy independence"
+      ],
+      "related_services": [
+        "consumer-unit-upgrade",
+        "ev-charger-installation",
+        "battery-storage-installation"
+      ]
+    },
+    {
+      "slug": "battery-storage-installation",
+      "title": "Battery Storage Installation",
+      "description": "Installation of home battery storage systems to store solar energy or use cheaper off-peak electricity.",
+      "category": "Green Energy",
+      "keywords": [
+        "battery storage",
+        "home battery",
+        "energy storage",
+        "solar battery",
+        "Tesla Powerwall",
+        "backup power"
+      ],
+      "typical_duration": "1 day",
+      "price_range": "££££",
+      "common_issues": [
+        "Want to store solar energy",
+        "Reduce peak electricity costs",
+        "Backup power during outages",
+        "Maximise solar investment"
+      ],
+      "related_services": [
+        "solar-panel-installation",
+        "ev-charger-installation",
+        "consumer-unit-upgrade"
+      ]
+    },
+    {
+      "slug": "cctv-installation",
+      "title": "CCTV Installation",
+      "description": "Professional installation of CCTV security camera systems for residential and commercial properties.",
+      "category": "Security Systems",
+      "keywords": [
+        "CCTV",
+        "security cameras",
+        "surveillance",
+        "IP cameras",
+        "home security",
+        "business security",
+        "video surveillance"
+      ],
+      "typical_duration": "4-8 hours",
+      "price_range": "££-£££",
+      "common_issues": [
+        "Security concerns",
+        "Previous break-in",
+        "Monitor property remotely",
+        "Insurance requirements"
+      ],
+      "related_services": [
+        "security-lighting",
+        "intruder-alarm-installation",
+        "access-control-systems"
+      ]
+    },
+    {
+      "slug": "intruder-alarm-installation",
+      "title": "Intruder Alarm Installation",
+      "description": "Installation of burglar alarm systems with motion sensors, door contacts and remote monitoring capabilities.",
+      "category": "Security Systems",
+      "keywords": [
+        "burglar alarm",
+        "intruder alarm",
+        "security alarm",
+        "motion sensor",
+        "alarm system",
+        "home alarm"
+      ],
+      "typical_duration": "4-6 hours",
+      "price_range": "££-£££",
+      "common_issues": [
+        "Security concerns",
+        "Insurance discount",
+        "Previous break-in",
+        "Remote monitoring needed"
+      ],
+      "related_services": ["cctv-installation", "security-lighting", "smart-home-wiring"]
+    },
+    {
+      "slug": "access-control-systems",
+      "title": "Access Control Systems",
+      "description": "Installation of electronic access control including keypad entry, card readers, fob systems and intercom integration.",
+      "category": "Security Systems",
+      "keywords": [
+        "access control",
+        "keypad entry",
+        "card reader",
+        "fob system",
+        "door entry",
+        "intercom",
+        "Paxton"
+      ],
+      "typical_duration": "1-2 days",
+      "price_range": "£££-££££",
+      "common_issues": [
+        "Need keyless entry",
+        "Multiple user access",
+        "Commercial premises security",
+        "Remote access control"
+      ],
+      "related_services": ["cctv-installation", "intruder-alarm-installation", "electric-gates"]
+    },
+    {
+      "slug": "commercial-maintenance-contracts",
+      "title": "Commercial Maintenance Contracts",
+      "description": "Ongoing electrical maintenance contracts for businesses including regular inspections, testing and priority callouts.",
+      "category": "Commercial Services",
+      "keywords": [
+        "commercial maintenance",
+        "business electrician",
+        "office electrical",
+        "maintenance contract",
+        "preventive maintenance",
+        "commercial electrical"
+      ],
+      "typical_duration": "Ongoing",
+      "price_range": "£££-££££",
+      "common_issues": [
+        "Need reliable electrical support",
+        "Prevent unexpected failures",
+        "Comply with regulations",
+        "Planned maintenance schedule"
+      ],
+      "related_services": [
+        "pat-testing",
+        "emergency-lighting-testing",
+        "electrical-safety-certificate"
+      ]
+    },
+    {
+      "slug": "commercial-fire-alarm-systems",
+      "title": "Commercial Fire Alarm Systems",
+      "description": "Design, installation and maintenance of fire alarm systems to BS 5839 standards for commercial premises.",
+      "category": "Commercial Services",
+      "keywords": [
+        "fire alarm",
+        "BS 5839",
+        "commercial fire alarm",
+        "fire detection",
+        "fire safety",
+        "smoke detection",
+        "fire panel"
+      ],
+      "typical_duration": "1-5 days",
+      "price_range": "£££-££££",
+      "common_issues": [
+        "Legal compliance requirement",
+        "Building regulations",
+        "Fire risk assessment",
+        "Insurance requirements"
+      ],
+      "related_services": [
+        "emergency-lighting-testing",
+        "fire-alarm-installation",
+        "commercial-maintenance-contracts"
+      ]
+    },
+    {
+      "slug": "three-phase-installation",
+      "title": "Three-Phase Installation",
+      "description": "Installation of three-phase electrical systems for industrial machinery, commercial equipment and high-power applications.",
+      "category": "Commercial Services",
+      "keywords": [
+        "three phase",
+        "industrial electrical",
+        "3 phase",
+        "commercial power",
+        "machinery installation",
+        "industrial wiring"
+      ],
+      "typical_duration": "1-3 days",
+      "price_range": "£££-££££",
+      "common_issues": [
+        "Industrial machinery installation",
+        "High power equipment",
+        "Workshop setup",
+        "Commercial kitchen equipment"
+      ],
+      "related_services": [
+        "commercial-maintenance-contracts",
+        "office-fitout-electrical",
+        "consumer-unit-upgrade"
+      ]
+    },
+    {
+      "slug": "office-fitout-electrical",
+      "title": "Office Fit-Out Electrical",
+      "description": "Complete electrical design and installation for office fit-outs including lighting, power, data and emergency systems.",
+      "category": "Commercial Services",
+      "keywords": [
+        "office fitout",
+        "office electrical",
+        "commercial fitout",
+        "workspace electrical",
+        "office lighting",
+        "office wiring"
+      ],
+      "typical_duration": "1-4 weeks",
+      "price_range": "££££",
+      "common_issues": [
+        "New office space",
+        "Office refurbishment",
+        "Open plan conversion",
+        "Meeting room setup"
+      ],
+      "related_services": [
+        "data-network-cabling",
+        "emergency-lighting-testing",
+        "commercial-maintenance-contracts"
+      ]
+    },
+    {
+      "slug": "data-network-cabling",
+      "title": "Data & Network Cabling",
+      "description": "Installation of structured data cabling including Cat6, Cat6a, fiber optic and network infrastructure for reliable connectivity.",
+      "category": "Commercial Services",
+      "keywords": [
+        "data cabling",
+        "network cabling",
+        "Cat6",
+        "Cat6a",
+        "fiber optic",
+        "structured cabling",
+        "ethernet"
+      ],
+      "typical_duration": "1-3 days",
+      "price_range": "££-£££",
+      "common_issues": [
+        "Poor network performance",
+        "Office setup",
+        "Need wired connections",
+        "Future-proof infrastructure"
+      ],
+      "related_services": [
+        "office-fitout-electrical",
+        "smart-home-wiring",
+        "commercial-maintenance-contracts"
+      ]
+    },
+    {
+      "slug": "new-build-electrical",
+      "title": "New Build Electrical Installation",
+      "description": "Complete electrical installations for new construction projects from first fix through to final testing and certification.",
+      "category": "Commercial Services",
+      "keywords": [
+        "new build",
+        "first fix",
+        "second fix",
+        "new construction",
+        "building electrical",
+        "electrical contractor"
+      ],
+      "typical_duration": "2-8 weeks",
+      "price_range": "££££",
+      "common_issues": [
+        "New house build",
+        "Extension construction",
+        "Commercial new build",
+        "Development project"
+      ],
+      "related_services": [
+        "consumer-unit-upgrade",
+        "smart-home-wiring",
+        "electrical-safety-certificate"
+      ]
+    },
+    {
+      "slug": "electric-gates",
+      "title": "Electric Gate Installation",
+      "description": "Installation of automated electric gate systems including sliding gates, swing gates and remote access controls.",
+      "category": "Installation",
+      "keywords": [
+        "electric gates",
+        "automatic gates",
+        "gate automation",
+        "driveway gates",
+        "remote gates",
+        "gate motor"
+      ],
+      "typical_duration": "1-2 days",
+      "price_range": "£££-££££",
+      "common_issues": [
+        "Want automated entry",
+        "Security enhancement",
+        "Convenience for driveway",
+        "Remote gate control"
+      ],
+      "related_services": [
+        "access-control-systems",
+        "outdoor-socket-installation",
+        "security-lighting"
+      ]
+    },
+    {
+      "slug": "underfloor-heating-electric",
+      "title": "Electric Underfloor Heating",
+      "description": "Installation of electric underfloor heating systems for comfortable, energy-efficient warmth in any room.",
+      "category": "Installation",
+      "keywords": [
+        "underfloor heating",
+        "electric heating",
+        "floor heating",
+        "radiant heating",
+        "bathroom heating",
+        "UFH"
+      ],
+      "typical_duration": "1-2 days",
+      "price_range": "££-£££",
+      "common_issues": [
+        "Cold bathroom floors",
+        "Energy efficient heating",
+        "Renovation project",
+        "Comfortable heating solution"
+      ],
+      "related_services": [
+        "kitchen-bathroom-electrical",
+        "additional-circuits",
+        "consumer-unit-upgrade"
+      ]
+    },
+    {
+      "slug": "storage-heater-installation",
+      "title": "Storage Heater Installation",
+      "description": "Installation and replacement of electric storage heaters for efficient Economy 7 heating solutions.",
+      "category": "Installation",
+      "keywords": [
+        "storage heaters",
+        "night storage",
+        "Economy 7",
+        "electric heating",
+        "heater installation",
+        "off-peak heating"
+      ],
+      "typical_duration": "2-4 hours per unit",
+      "price_range": "££",
+      "common_issues": [
+        "Old storage heaters failing",
+        "Economy 7 tariff",
+        "Need efficient heating",
+        "Replacing old units"
+      ],
+      "related_services": [
+        "additional-circuits",
+        "consumer-unit-upgrade",
+        "electrical-safety-certificate"
+      ]
     }
   ]
 }
