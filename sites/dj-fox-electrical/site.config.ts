@@ -146,7 +146,7 @@ export const siteConfig: SiteConfig = {
   name: 'D J Fox Electrical',
   slug: 'dj-fox-electrical',
   tagline: 'Your trusted electrical experts in Eastbourne',
-  url: process.env.NEXT_PUBLIC_SITE_URL || 'https://djfoxelectrical.com',
+  url: process.env.NEXT_PUBLIC_SITE_URL || 'https://www.djfoxelectrical.com',
 
   business: {
     name: 'D J Fox Electrical',

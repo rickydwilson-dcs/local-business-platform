@@ -18,7 +18,7 @@ export const themeConfig: DeepPartialThemeConfig = {
       background: '#ffffff',
       foreground: '#1f2937',
       muted: '#f3f4f6',
-      mutedForeground: '#6b7280',
+      mutedForeground: '#5b6370',
       card: '#ffffff',
       cardBorder: '#e5e7eb',
     },
