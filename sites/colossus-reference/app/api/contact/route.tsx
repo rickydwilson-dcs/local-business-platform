@@ -5,6 +5,20 @@ import { escapeHtml } from "@platform/core-components/lib/security/html-escape";
 import { extractClientIp } from "@platform/core-components/lib/security/ip-utils";
 import { validateCsrfToken } from "@platform/core-components/lib/security/csrf";
 import { siteConfig } from "@/site.config";
+import { themeConfig } from "@/theme.config";
+
+/**
+ * Extract theme colors for email templates
+ * Colors must flow through theme system, not be hardcoded
+ */
+function getEmailColors() {
+  return {
+    brandPrimary: themeConfig.colors?.brand?.primary ?? "#005A9E",
+    textPrimary: themeConfig.colors?.surface?.foreground ?? "#374151",
+    background: themeConfig.colors?.surface?.muted ?? "#f9fafb",
+    textMuted: themeConfig.colors?.surface?.mutedForeground ?? "#6b7280",
+  };
+}
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -110,6 +124,9 @@ export async function POST(request: Request): Promise<Response> {
       ip: ip !== "unknown" ? ip : null,
     };
 
+    // Get theme colors for email templates
+    const colors = getEmailColors();
+
     // HTML-escape all user inputs for email templates to prevent XSS
     const safeInputs = {
       name: escapeHtml(name),
@@ -130,11 +147,11 @@ export async function POST(request: Request): Promise<Response> {
     // Create email HTML content (using escaped inputs to prevent XSS)
     const emailHtml = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-        <h2 style="color: #00607A; border-bottom: 2px solid #00607A; padding-bottom: 10px;">
+        <h2 style="color: ${colors.brandPrimary}; border-bottom: 2px solid ${colors.brandPrimary}; padding-bottom: 10px;">
           New Contact Form Submission
         </h2>
 
-        <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
+        <div style="background: ${colors.background}; padding: 20px; border-radius: 8px; margin: 20px 0;">
           <h3 style="margin-top: 0; color: #333;">Contact Details</h3>
           <p><strong>Name:</strong> ${safeInputs.name}</p>
           <p><strong>Email:</strong> ${safeInputs.email}</p>
@@ -145,17 +162,17 @@ export async function POST(request: Request): Promise<Response> {
 
         <div style="margin: 20px 0;">
           <h3 style="color: #333;">Message</h3>
-          <div style="background: white; padding: 20px; border-left: 4px solid #00607A; white-space: pre-wrap;">${safeInputs.message}</div>
+          <div style="background: white; padding: 20px; border-left: 4px solid ${colors.brandPrimary}; white-space: pre-wrap;">${safeInputs.message}</div>
         </div>
 
-        <div style="background: #f1f3f4; padding: 15px; border-radius: 4px; margin: 20px 0; font-size: 12px; color: #666;">
+        <div style="background: ${colors.background}; padding: 15px; border-radius: 4px; margin: 20px 0; font-size: 12px; color: ${colors.textMuted};">
           <p><strong>Submission Details:</strong></p>
           <p>Received: ${new Date().toLocaleString("en-GB")}</p>
           ${safeInputs.referer ? `<p>From page: ${safeInputs.referer}</p>` : ""}
           ${safeInputs.ip ? `<p>IP: ${safeInputs.ip}</p>` : ""}
         </div>
 
-        <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd; text-align: center; color: #666; font-size: 12px;">
+        <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd; text-align: center; color: ${colors.textMuted}; font-size: 12px;">
           <p>This email was sent from the Colossus Scaffolding contact form</p>
         </div>
       </div>
@@ -195,13 +212,13 @@ export async function POST(request: Request): Promise<Response> {
       // Send confirmation email to customer (using escaped inputs)
       const confirmationHtml = `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-          <h2 style="color: #00607A;">Thank You for Your Enquiry</h2>
+          <h2 style="color: ${colors.brandPrimary};">Thank You for Your Enquiry</h2>
 
           <p>Hi ${safeInputs.name},</p>
 
           <p>Thank you for contacting Colossus Scaffolding. We have received your enquiry and will respond as soon as possible, typically within 24 hours.</p>
 
-          <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
+          <div style="background: ${colors.background}; padding: 20px; border-radius: 8px; margin: 20px 0;">
             <h3 style="margin-top: 0;">Your Enquiry Summary</h3>
             ${safeInputs.service ? `<p><strong>Service:</strong> ${safeInputs.service}</p>` : ""}
             ${safeInputs.location ? `<p><strong>Location:</strong> ${safeInputs.location}</p>` : ""}
@@ -209,7 +226,7 @@ export async function POST(request: Request): Promise<Response> {
             <div style="white-space: pre-wrap; background: white; padding: 15px; border-radius: 4px;">${safeInputs.message}</div>
           </div>
 
-          <div style="background: #00607A; color: white; padding: 20px; border-radius: 8px; margin: 20px 0;">
+          <div style="background: ${colors.brandPrimary}; color: white; padding: 20px; border-radius: 8px; margin: 20px 0;">
             <h3 style="margin-top: 0;">What Happens Next?</h3>
             <ul style="padding-left: 20px;">
               <li>We'll review your enquiry within 2-4 hours</li>
@@ -224,7 +241,7 @@ export async function POST(request: Request): Promise<Response> {
           <p>Best regards,<br>
           <strong>Colossus Scaffolding Team</strong></p>
 
-          <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd; text-align: center; color: #666; font-size: 12px;">
+          <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd; text-align: center; color: ${colors.textMuted}; font-size: 12px;">
             <p>Colossus Scaffolding - Professional Scaffolding Services across South East England</p>
           </div>
         </div>

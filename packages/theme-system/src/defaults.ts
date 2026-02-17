@@ -27,6 +27,11 @@ export const defaultTheme: ThemeConfig = {
       error: "#ef4444",
       info: "#3b82f6",
     },
+    overlay: {
+      dark: "rgba(0, 0, 0, 0.8)",
+      light: "rgba(255, 255, 255, 0.8)",
+      primary: "rgba(59, 130, 246, 0.8)",
+    },
   },
   spacing: {
     xs: "0.25rem",
