@@ -12,6 +12,20 @@ import { extractClientIp } from '@platform/core-components/lib/security/ip-utils
 import { rateLimitMiddleware } from '@platform/core-components/lib/rate-limiter';
 import { siteConfig } from '@/site.config';
 import { BUSINESS_EMAIL, BUSINESS_NAME } from '@/lib/contact-info';
+import { themeConfig } from '@/theme.config';
+
+/**
+ * Extract theme colors for email templates
+ * Colors must flow through theme system, not be hardcoded
+ */
+function getEmailColors() {
+  return {
+    brandPrimary: themeConfig.colors?.brand?.primary ?? '#3b82f6',
+    textPrimary: themeConfig.colors?.surface?.foreground ?? '#374151',
+    background: themeConfig.colors?.surface?.muted ?? '#f9fafb',
+    textMuted: themeConfig.colors?.surface?.mutedForeground ?? '#6b7280',
+  };
+}
 
 interface ContactFormData {
   name: string;
@@ -179,6 +193,9 @@ async function sendContactEmail(submission: ContactSubmission): Promise<boolean>
   }
 
   try {
+    // Get theme colors for email templates
+    const colors = getEmailColors();
+
     // Send notification email to business
     const businessEmailHtml = `
 <!DOCTYPE html>
@@ -188,7 +205,7 @@ async function sendContactEmail(submission: ContactSubmission): Promise<boolean>
   <title>New Contact Form Submission</title>
 </head>
 <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px;">
-  <h1 style="color: #2563eb; border-bottom: 2px solid #2563eb; padding-bottom: 10px;">New Contact Form Submission</h1>
+  <h1 style="color: ${colors.brandPrimary}; border-bottom: 2px solid ${colors.brandPrimary}; padding-bottom: 10px;">New Contact Form Submission</h1>
 
   <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
     <tr>
@@ -241,12 +258,12 @@ async function sendContactEmail(submission: ContactSubmission): Promise<boolean>
     }
   </table>
 
-  <h2 style="color: #374151; margin-top: 30px;">Message:</h2>
-  <div style="background: #f9fafb; padding: 15px; border-radius: 8px; white-space: pre-wrap;">${submission.message}</div>
+  <h2 style="color: ${colors.textPrimary}; margin-top: 30px;">Message:</h2>
+  <div style="background: ${colors.background}; padding: 15px; border-radius: 8px; white-space: pre-wrap;">${submission.message}</div>
 
   <hr style="margin: 30px 0; border: none; border-top: 1px solid #eee;">
 
-  <p style="font-size: 12px; color: #6b7280;">
+  <p style="font-size: 12px; color: ${colors.textMuted};">
     Received: ${new Date(submission.receivedAt).toLocaleString('en-GB')}<br>
     IP: ${submission.ip}
   </p>
@@ -282,13 +299,13 @@ async function sendContactEmail(submission: ContactSubmission): Promise<boolean>
   <title>Thank You for Contacting Us</title>
 </head>
 <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px;">
-  <h1 style="color: #2563eb;">Thank You for Contacting ${BUSINESS_NAME}</h1>
+  <h1 style="color: ${colors.brandPrimary};">Thank You for Contacting ${BUSINESS_NAME}</h1>
 
   <p>Dear ${submission.name},</p>
 
   <p>Thank you for getting in touch with us. We have received your message and will respond within 24 hours.</p>
 
-  <h2 style="color: #374151; margin-top: 30px;">What Happens Next?</h2>
+  <h2 style="color: ${colors.textPrimary}; margin-top: 30px;">What Happens Next?</h2>
   <ol>
     <li>Our team will review your enquiry</li>
     <li>We'll prepare a tailored response or quote</li>
@@ -299,7 +316,7 @@ async function sendContactEmail(submission: ContactSubmission): Promise<boolean>
 
   <hr style="margin: 30px 0; border: none; border-top: 1px solid #eee;">
 
-  <p style="font-size: 14px; color: #6b7280;">
+  <p style="font-size: 14px; color: ${colors.textMuted};">
     This is an automated confirmation email. Please do not reply directly to this message.
   </p>
 </body>

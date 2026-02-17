@@ -104,6 +104,28 @@ export function createThemePlugin(userConfig: DeepPartialThemeConfig = {}) {
           color: "var(--color-info)",
         },
 
+        // Overlay color utilities
+        ".bg-overlay-dark": {
+          backgroundColor: "var(--color-overlay-dark)",
+        },
+        ".bg-overlay-light": {
+          backgroundColor: "var(--color-overlay-light)",
+        },
+        ".bg-overlay-primary": {
+          backgroundColor: "var(--color-overlay-primary)",
+        },
+
+        // Opacity utilities
+        ".opacity-disabled": {
+          opacity: "var(--opacity-disabled)",
+        },
+        ".opacity-muted": {
+          opacity: "var(--opacity-muted)",
+        },
+        ".opacity-overlay": {
+          opacity: "var(--opacity-overlay)",
+        },
+
         // Transition utilities
         ".transition-fast": {
           transitionDuration: "150ms",
@@ -204,6 +226,11 @@ export function createThemePlugin(userConfig: DeepPartialThemeConfig = {}) {
               warning: "var(--color-warning)",
               error: "var(--color-error)",
               info: "var(--color-info)",
+            },
+            overlay: {
+              dark: "var(--color-overlay-dark)",
+              light: "var(--color-overlay-light)",
+              primary: "var(--color-overlay-primary)",
             },
           },
           fontFamily: {

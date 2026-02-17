@@ -64,6 +64,14 @@ export interface ThemeConfig {
       error: string;
       info: string;
     };
+    overlay: {
+      /** Dark overlay for light/colorful content (hero images) */
+      dark: string;
+      /** Light overlay for dark content */
+      light: string;
+      /** Brand-tinted overlay for brand-forward designs */
+      primary: string;
+    };
   };
 
   /**
@@ -240,6 +248,7 @@ export type DeepPartialThemeConfig = {
     brand?: Partial<ThemeConfig["colors"]["brand"]>;
     surface?: Partial<ThemeConfig["colors"]["surface"]>;
     semantic?: Partial<ThemeConfig["colors"]["semantic"]>;
+    overlay?: Partial<ThemeConfig["colors"]["overlay"]>;
   };
   spacing?: Partial<ThemeConfig["spacing"]>;
   radii?: Partial<ThemeConfig["radii"]>;
@@ -307,6 +316,11 @@ export const ThemeConfigSchema = z.object({
       warning: z.string().regex(/^#[0-9A-Fa-f]{6}$/, "Must be a valid hex color"),
       error: z.string().regex(/^#[0-9A-Fa-f]{6}$/, "Must be a valid hex color"),
       info: z.string().regex(/^#[0-9A-Fa-f]{6}$/, "Must be a valid hex color"),
+    }),
+    overlay: z.object({
+      dark: z.string().regex(/^rgba?\(/, "Must be a valid rgb/rgba color"),
+      light: z.string().regex(/^rgba?\(/, "Must be a valid rgb/rgba color"),
+      primary: z.string().regex(/^rgba?\(/, "Must be a valid rgb/rgba color"),
     }),
   }),
   spacing: z.object({

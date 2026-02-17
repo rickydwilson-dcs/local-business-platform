@@ -4,6 +4,59 @@
 @tailwind components;
 @tailwind utilities;
 
+/**
+ * Critical CSS for above-the-fold content
+ * Moved from inline styles in layout.tsx to use theme tokens
+ */
+@layer base {
+  body {
+    @apply min-h-screen bg-surface-background text-surface-foreground;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  header {
+    @apply border-b bg-surface-background;
+    border-color: var(--color-surface-card-border);
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  }
+
+  nav a {
+    @apply text-surface-foreground transition-colors;
+    transition-duration: 200ms;
+  }
+
+  nav a:hover {
+    @apply text-brand-primary;
+  }
+
+  .desktop-actions {
+    display: none;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  @media (min-width: 1024px) {
+    .desktop-actions {
+      display: flex;
+    }
+  }
+
+  .phone-link {
+    @apply flex items-center gap-2 text-surface-foreground transition-colors font-medium;
+    transition-duration: 200ms;
+  }
+
+  .phone-link:hover {
+    @apply text-brand-primary;
+  }
+
+  .phone-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+}
+
 /* Maintainable Button Components */
 @layer components {
   /* Primary Button - Brand Blue */
