@@ -31,6 +31,11 @@ export function generateCssVariables(config: ThemeConfig): Record<string, string
   vars["--color-error"] = config.colors.semantic.error;
   vars["--color-info"] = config.colors.semantic.info;
 
+  // Overlay Colors
+  vars["--color-overlay-dark"] = config.colors.overlay.dark;
+  vars["--color-overlay-light"] = config.colors.overlay.light;
+  vars["--color-overlay-primary"] = config.colors.overlay.primary;
+
   // Spacing
   vars["--spacing-xs"] = config.spacing.xs;
   vars["--spacing-sm"] = config.spacing.sm;

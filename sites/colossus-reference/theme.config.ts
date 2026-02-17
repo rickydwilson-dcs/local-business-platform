@@ -28,6 +28,11 @@ export const themeConfig: DeepPartialThemeConfig = {
       error: "#ef4444",
       info: "#005A9E", // Use brand blue for info
     },
+    overlay: {
+      dark: "rgba(0, 0, 0, 0.8)",
+      light: "rgba(255, 255, 255, 0.8)",
+      primary: "rgba(0, 90, 158, 0.8)", // Brand blue with opacity
+    },
   },
 
   typography: {
