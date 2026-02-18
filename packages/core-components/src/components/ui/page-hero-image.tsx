@@ -1,12 +1,18 @@
 /**
- * PageHero Component
+ * PageHeroImage Component
  *
- * Shorter hero section for interior pages with background image overlay.
+ * Shorter hero section for interior pages with a background image overlay.
  * Designed for service pages, location pages, and content pages.
+ * Part of the Orion theme component set.
+ *
+ * Distinct from PageHero (gradient, no image). This variant uses a full
+ * background image with a dark overlay — ideal for media-rich layouts.
  *
  * @example
  * ```tsx
- * <PageHero
+ * import { PageHeroImage } from "@platform/core-components";
+ *
+ * <PageHeroImage
  *   title="Electrical Services"
  *   subtitle="Professional electrical services across East Sussex"
  *   imageSrc="/images/services-hero.jpg"
@@ -19,11 +25,11 @@
  * ```
  */
 
-import Link from 'next/link';
-import Image from 'next/image';
-import { getImageUrl } from '@/lib/image';
+import Link from "next/link";
+import Image from "next/image";
+import { getImageUrl } from "@/lib/image";
 
-export interface PageHeroProps {
+export interface PageHeroImageProps {
   /** Page title displayed as h1 */
   title: string;
   /** Optional subtitle text */
@@ -33,23 +39,19 @@ export interface PageHeroProps {
   /** Alt text for background image */
   imageAlt: string;
   /** Optional breadcrumb navigation */
-  breadcrumbs?: Array<{
-    name: string;
-    href: string;
-    current?: boolean;
-  }>;
-  /** Custom minimum height (default: min-h-[30vh]) */
+  breadcrumbs?: Array<{ name: string; href: string; current?: boolean }>;
+  /** Custom minimum height. Defaults to 'min-h-[30vh]'. */
   minHeight?: string;
 }
 
-export function PageHero({
+export function PageHeroImage({
   title,
   subtitle,
   imageSrc,
   imageAlt,
   breadcrumbs,
-  minHeight = 'min-h-[30vh]',
-}: PageHeroProps) {
+  minHeight = "min-h-[30vh]",
+}: PageHeroImageProps) {
   return (
     <section className={`relative ${minHeight} flex items-center justify-center overflow-hidden`}>
       {/* Background Image */}
@@ -110,7 +112,9 @@ export function PageHero({
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">{title}</h1>
 
           {/* Subtitle */}
-          {subtitle && <p className="text-lg md:text-xl text-white/90 font-medium">{subtitle}</p>}
+          {subtitle && (
+            <p className="text-lg md:text-xl text-white/90 font-medium">{subtitle}</p>
+          )}
         </div>
       </div>
     </section>

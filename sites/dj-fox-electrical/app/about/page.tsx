@@ -12,9 +12,7 @@ import { Shield, Award, Users, CheckCircle, Phone } from 'lucide-react';
 import { siteConfig } from '@/site.config';
 import { PHONE_DISPLAY, PHONE_TEL } from '@/lib/contact-info';
 import { absUrl } from '@/lib/site';
-import { Schema, AccentUnderline } from '@platform/core-components';
-import { PageHero } from '@/components/ui/page-hero';
-import { DarkStatCard } from '@/components/ui/dark-stat-card';
+import { Schema, AccentUnderline, PageHeroImage, DarkStatCard } from '@platform/core-components';
 import { getImageUrl } from '@/lib/image';
 
 export const metadata: Metadata = {
@@ -72,7 +70,7 @@ export default function AboutPage() {
     <>
       <main className="min-h-screen bg-surface-background">
         {/* Full-Width Hero with Breadcrumbs */}
-        <PageHero
+        <PageHeroImage
           title="About D J Fox Electrical"
           subtitle="Serving Eastbourne & East Sussex since 2025"
           imageSrc="djfoxelectrical/hero/about-hero.jpg"

@@ -423,6 +423,51 @@ This checks:
 
 Contrast ratios must meet WCAG AA: 4.5:1 for normal text, 3:1 for large text.
 
+## Named Themes
+
+Beyond CSS variables, the platform has two named visual identities — **orion** and **vega** — each packaged in `packages/themes/`.
+
+### What a Named Theme Provides
+
+- **CSS utilities** (`packages/themes/orion/globals.css`, `packages/themes/vega/globals.css`) — pre-written component classes (`btn-primary`, `card-interactive`, `mobile-menu-overlay`, `lightbox-content`, etc.) written as plain CSS with `@apply`. Each site's `globals.css` imports its theme's CSS before the `@tailwind` directives.
+- **`ComponentRegistry`** — a TypeScript object exported from the theme package (`orionRegistry`, `vegaRegistry`) that maps `heroVariant`, `headerVariant`, `cardVariant`, and `sectionVariant` slots to concrete component names. Sites include this in `theme.config.ts` under `componentRegistry`.
+
+### The Two Identities
+
+| Theme | Visual Identity | Typical Use |
+|-------|-----------------|-------------|
+| **orion** | Dark header, full-bleed hero, red brand accent, circular icon cards, dark stat cards | Trade/electrical sites (e.g. DJ Fox) |
+| **vega** | Light header, split hero, standard card grid, clean typography | Professional services, reference sites |
+
+### Wiring It Up
+
+```typescript
+// sites/my-site/app/globals.css
+@import "../../../packages/themes/orion/globals.css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+// sites/my-site/theme.config.ts
+import { orionRegistry } from "@platform/themes/orion";
+export const themeConfig: DeepPartialThemeConfig = {
+  componentRegistry: orionRegistry,
+  colors: { ... },
+};
+
+// sites/my-site/app/layout.tsx
+import { ThemeProvider } from "@platform/core-components";
+import { orionRegistry } from "@platform/themes/orion";
+// ...
+<ThemeProvider theme="orion" registry={orionRegistry}>
+  <PageShell ...>{children}</PageShell>
+</ThemeProvider>
+```
+
+### AI Theme Generation
+
+`tools/generate-theme-from-reference.ts` generates a complete `theme.config.ts` from a URL or image — it extracts brand colors, classifies the layout pattern (orion vs vega) using Claude Haiku, and injects the appropriate `componentRegistry`. `tools/apply-theme.ts` switches a site between named themes (updates both `globals.css` import and `theme.config.ts` registry).
+
 ## Changing a Site's Theme
 
 1. Edit `theme.config.ts` -- change colors, typography, or component tokens

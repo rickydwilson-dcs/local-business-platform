@@ -11,9 +11,7 @@ import { Phone, Mail, MapPin, Clock } from 'lucide-react';
 import { siteConfig } from '@/site.config';
 import { PHONE_DISPLAY, PHONE_TEL, BUSINESS_EMAIL, ADDRESS } from '@/lib/contact-info';
 import { absUrl } from '@/lib/site';
-import { Schema, AccentUnderline } from '@platform/core-components';
-import { PageHero } from '@/components/ui/page-hero';
-import { InfoCard } from '@/components/ui/info-card';
+import { Schema, AccentUnderline, PageHeroImage, InfoCard } from '@platform/core-components';
 import { ContactForm } from '@/components/ui/ContactForm';
 
 export const metadata: Metadata = {
@@ -33,7 +31,7 @@ export default function ContactPage() {
   return (
     <>
       {/* Hero Section */}
-      <PageHero
+      <PageHeroImage
         title="Contact Us"
         subtitle="Get in touch for a free quote"
         imageSrc="djfoxelectrical/hero/contact-hero.jpg"

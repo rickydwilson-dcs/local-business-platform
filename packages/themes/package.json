@@ -1,0 +1,10 @@
+{
+  "name": "@platform/themes",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Named visual theme packages for the Local Business Platform",
+  "exports": {
+    "./orion": "./orion/index.ts",
+    "./vega": "./vega/index.ts"
+  }
+}

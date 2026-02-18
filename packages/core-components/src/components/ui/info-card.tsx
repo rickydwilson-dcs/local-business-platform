@@ -1,31 +1,17 @@
-import type { LucideIcon } from 'lucide-react';
-
-export interface InfoCardProps {
-  icon: LucideIcon;
-  heading: string;
-  text: string;
-}
-
 /**
  * InfoCard Component
  *
  * Clean informational card with icon, heading, and text.
  * White background with subtle shadow and hover lift effect.
- * Matches Electro WordPress theme feature card design.
+ * Part of the Orion theme component set.
  *
- * Features:
- * - White background with subtle shadow
- * - Centered layout
- * - Red icon at top
- * - Heading (text-xl font-semibold)
- * - Body text below
- * - Hover: slight lift (-translate-y-2) and shadow increase
- * - Uses .card-interactive from globals.css for hover effects
+ * CSS requirement: `.card-interactive` must be defined in the consuming site's
+ * globals.css (or the orion theme globals.css once Step 4 is complete).
  *
  * @example
  * ```tsx
- * import { Shield } from 'lucide-react';
- * import { InfoCard } from '@/components/ui/info-card';
+ * import { Shield } from "lucide-react";
+ * import { InfoCard } from "@platform/core-components";
  *
  * <InfoCard
  *   icon={Shield}
@@ -34,6 +20,15 @@ export interface InfoCardProps {
  * />
  * ```
  */
+
+import type { LucideIcon } from "lucide-react";
+
+export interface InfoCardProps {
+  icon: LucideIcon;
+  heading: string;
+  text: string;
+}
+
 export function InfoCard({ icon: Icon, heading, text }: InfoCardProps) {
   return (
     <div className="card-interactive text-center">

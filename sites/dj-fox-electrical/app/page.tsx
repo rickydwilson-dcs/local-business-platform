@@ -3,10 +3,7 @@ import { siteConfig } from '@/site.config';
 import { getLocations } from '@/lib/content';
 import { PHONE_DISPLAY, PHONE_TEL } from '@/lib/contact-info';
 import { Phone, Shield, Clock, Award, Users } from 'lucide-react';
-import { HeroWithImage } from '@/components/ui/hero-with-image';
-import { InfoCard } from '@/components/ui/info-card';
-import { CircularIconCard } from '@/components/ui/circular-icon-card';
-import { ImageOverlayCard } from '@/components/ui/image-overlay-card';
+import { HeroWithImage, InfoCard, CircularIconCard, ImageOverlayCard } from '@platform/core-components';
 import { getServiceIcon } from '@/lib/service-icons';
 
 export default async function HomePage() {

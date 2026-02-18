@@ -1,31 +1,16 @@
-import Link from 'next/link';
-import type { LucideIcon } from 'lucide-react';
-
-export interface CircularIconCardProps {
-  icon: LucideIcon;
-  title: string;
-  description: string;
-  linkText?: string;
-  linkHref?: string;
-}
-
 /**
  * CircularIconCard Component
  *
- * Large circular red icon with title, description, and optional link.
- * Matches Electro WordPress theme design pattern.
+ * Large circular brand-colour icon with title, description, and optional link.
+ * Part of the Orion theme component set (industrial/trade aesthetic).
  *
- * Features:
- * - Large circular red background (w-24 h-24) with white icon
- * - Title below icon (text-xl font-semibold)
- * - Description text
- * - Optional "View More" link in red
- * - Hover effects: circle shadow, link underline
+ * CSS requirement: `.icon-circle-lg` must be defined in the consuming site's
+ * globals.css (or the orion theme globals.css once Step 4 is complete).
  *
  * @example
  * ```tsx
- * import { Zap } from 'lucide-react';
- * import { CircularIconCard } from '@/components/ui/circular-icon-card';
+ * import { Zap } from "lucide-react";
+ * import { CircularIconCard } from "@platform/core-components";
  *
  * <CircularIconCard
  *   icon={Zap}
@@ -36,6 +21,18 @@ export interface CircularIconCardProps {
  * />
  * ```
  */
+
+import Link from "next/link";
+import type { LucideIcon } from "lucide-react";
+
+export interface CircularIconCardProps {
+  icon: LucideIcon;
+  title: string;
+  description: string;
+  linkText?: string;
+  linkHref?: string;
+}
+
 export function CircularIconCard({
   icon: Icon,
   title,
@@ -45,7 +42,7 @@ export function CircularIconCard({
 }: CircularIconCardProps) {
   return (
     <div className="flex flex-col items-center text-center group">
-      {/* Circular Icon Container - uses .icon-circle-lg from globals.css */}
+      {/* Circular Icon Container — .icon-circle-lg defined in orion/globals.css */}
       <div className="icon-circle-lg mb-6">
         <Icon className="w-12 h-12" aria-hidden="true" />
       </div>
@@ -62,7 +59,7 @@ export function CircularIconCard({
           href={linkHref}
           className="text-brand-primary font-semibold hover:underline hover:text-brand-primary-hover transition-colors duration-200"
         >
-          {linkText} →
+          {linkText} &rarr;
         </Link>
       )}
     </div>

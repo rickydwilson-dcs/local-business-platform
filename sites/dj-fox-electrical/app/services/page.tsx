@@ -8,10 +8,7 @@
 
 import type { Metadata } from 'next';
 import { Zap, Shield, Settings } from 'lucide-react';
-import { Schema, AccentUnderline, ContentGrid } from '@platform/core-components';
-import { PageHero } from '@/components/ui/page-hero';
-import { CircularIconCard } from '@/components/ui/circular-icon-card';
-import { ImageOverlayCard } from '@/components/ui/image-overlay-card';
+import { Schema, AccentUnderline, ContentGrid, PageHeroImage, CircularIconCard, ImageOverlayCard } from '@platform/core-components';
 import { getServices } from '@/lib/content';
 import { absUrl } from '@/lib/site';
 import { siteConfig } from '@/site.config';
@@ -47,7 +44,7 @@ export default async function ServicesPage() {
   return (
     <>
       {/* Hero Section */}
-      <PageHero
+      <PageHeroImage
         title="Our Services"
         subtitle="Professional electrical services across Eastbourne & East Sussex"
         imageSrc="djfoxelectrical/hero/services-hero.jpg"

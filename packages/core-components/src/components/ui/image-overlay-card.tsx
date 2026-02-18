@@ -1,34 +1,12 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import { getImageUrl } from '@/lib/image';
-
-export interface ImageOverlayCardProps {
-  imageSrc: string;
-  imageAlt: string;
-  category?: string;
-  title: string;
-  href: string;
-}
-
 /**
  * ImageOverlayCard Component
  *
- * Interactive image card with dark gradient and red hover overlay.
- * Matches Electro WordPress theme service/project card design.
- *
- * Features:
- * - Image with aspect ratio container (16:9)
- * - Dark gradient overlay (always visible)
- * - Red overlay on hover (opacity 80%)
- * - White text on overlay
- * - Category badge (small, red background)
- * - Title in white
- * - "View More" indicator
- * - Smooth transitions
+ * Interactive image card with dark gradient and brand-colour hover overlay.
+ * Part of the Orion theme component set.
  *
  * @example
  * ```tsx
- * import { ImageOverlayCard } from '@/components/ui/image-overlay-card';
+ * import { ImageOverlayCard } from "@platform/core-components";
  *
  * <ImageOverlayCard
  *   imageSrc="/images/services/installation.jpg"
@@ -39,6 +17,19 @@ export interface ImageOverlayCardProps {
  * />
  * ```
  */
+
+import Image from "next/image";
+import Link from "next/link";
+import { getImageUrl } from "@/lib/image";
+
+export interface ImageOverlayCardProps {
+  imageSrc: string;
+  imageAlt: string;
+  category?: string;
+  title: string;
+  href: string;
+}
+
 export function ImageOverlayCard({
   imageSrc,
   imageAlt,
@@ -51,7 +42,7 @@ export function ImageOverlayCard({
       href={href}
       className="group relative block overflow-hidden rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300"
     >
-      {/* Image Container with aspect ratio - taller on desktop */}
+      {/* Image Container with aspect ratio */}
       <div className="relative aspect-[16/9] md:aspect-[4/5] w-full overflow-hidden">
         <Image
           src={getImageUrl(imageSrc)}
@@ -64,10 +55,10 @@ export function ImageOverlayCard({
         {/* Dark gradient overlay (always visible) */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
 
-        {/* Red overlay on hover */}
+        {/* Brand-colour overlay on hover */}
         <div className="absolute inset-0 bg-brand-primary opacity-0 group-hover:opacity-80 transition-opacity duration-300" />
 
-        {/* Content - stays above overlays */}
+        {/* Content — sits above overlays */}
         <div className="absolute inset-0 flex flex-col justify-end p-6 z-10">
           {/* Category Badge */}
           {category && (
@@ -81,19 +72,10 @@ export function ImageOverlayCard({
             {title}
           </h3>
 
-          {/* View More Indicator */}
-          <div className="flex items-center text-white font-medium text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            <span>View More</span>
-            <svg
-              className="ml-2 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              aria-hidden="true"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
-          </div>
+          {/* View More indicator */}
+          <span className="text-sm text-white/80 group-hover:text-white transition-colors duration-300">
+            View More &rarr;
+          </span>
         </div>
       </div>
     </Link>

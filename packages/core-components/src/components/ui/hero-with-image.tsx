@@ -3,17 +3,18 @@
  *
  * Full-width background image hero with dark overlay and centered content.
  * Designed for homepage and major landing pages.
+ * Part of the Orion theme component set.
  *
  * @example
  * ```tsx
- * import { AccentUnderline } from "@platform/core-components";
+ * import { HeroWithImage, AccentUnderline } from "@platform/core-components";
  *
  * <HeroWithImage
  *   imageSrc="/images/electrician-hero.jpg"
  *   imageAlt="Professional electrician working on electrical panel"
  *   heading={
  *     <AccentUnderline as="h1" className="text-5xl md:text-6xl font-bold text-white">
- *       High Quality **Electrical** Services
+ *       High Quality Electrical Services
  *     </AccentUnderline>
  *   }
  *   subheading="NICEIC Approved Contractor in Eastbourne"
@@ -24,41 +25,31 @@
  * ```
  */
 
-'use client';
+"use client";
 
-import Link from 'next/link';
-import Image from 'next/image';
-import { ReactNode } from 'react';
-import { getImageUrl } from '@/lib/image';
+import Link from "next/link";
+import Image from "next/image";
+import { ReactNode } from "react";
+import { getImageUrl } from "@/lib/image";
 
 export interface HeroWithImageProps {
   /** Path to hero background image (relative to R2 bucket root) */
   imageSrc: string;
   /** Alt text for background image (important for accessibility) */
   imageAlt: string;
-  /** Main heading - can include AccentUnderline component for emphasis */
+  /** Main heading — can include AccentUnderline for emphasis */
   heading: ReactNode;
   /** Subheading text displayed below main heading */
   subheading?: string;
-  /** Primary CTA button (typically "Get Quote" or "Contact Us") */
-  ctaPrimary?: {
-    label: string;
-    href: string;
-  };
-  /** Secondary CTA button (typically "Learn More" or "View Services") */
-  ctaSecondary?: {
-    label: string;
-    href: string;
-  };
-  /** Overlay darkness: 'dark' = rgba(0,0,0,0.5), 'darker' = rgba(0,0,0,0.7), 'red' = rgba(219,11,11,0.3) */
-  overlay?: 'dark' | 'darker' | 'red';
-  /** Optional breadcrumb navigation displayed at bottom of hero */
-  breadcrumbs?: Array<{
-    name: string;
-    href: string;
-    current?: boolean;
-  }>;
-  /** Minimum height of hero section */
+  /** Primary CTA button */
+  ctaPrimary?: { label: string; href: string };
+  /** Secondary CTA button */
+  ctaSecondary?: { label: string; href: string };
+  /** Overlay darkness: 'dark' = black/50, 'darker' = black/70, 'red' = brand/30 */
+  overlay?: "dark" | "darker" | "red";
+  /** Optional breadcrumb navigation at bottom of hero */
+  breadcrumbs?: Array<{ name: string; href: string; current?: boolean }>;
+  /** Minimum height of hero section. Defaults to 'min-h-[60vh]'. */
   minHeight?: string;
 }
 
@@ -69,15 +60,14 @@ export function HeroWithImage({
   subheading,
   ctaPrimary,
   ctaSecondary,
-  overlay = 'dark',
+  overlay = "dark",
   breadcrumbs,
-  minHeight = 'min-h-[60vh]',
+  minHeight = "min-h-[60vh]",
 }: HeroWithImageProps) {
-  // Overlay color mapping
   const overlayClasses = {
-    dark: 'bg-black/50',
-    darker: 'bg-black/70',
-    red: 'bg-brand-primary/30',
+    dark: "bg-black/50",
+    darker: "bg-black/70",
+    red: "bg-brand-primary/30",
   };
 
   return (
