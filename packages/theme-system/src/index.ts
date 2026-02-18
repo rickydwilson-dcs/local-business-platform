@@ -6,6 +6,8 @@
 // Types
 export type {
   ThemeConfig,
+  ThemeName,
+  ComponentRegistry,
   PartialThemeConfig,
   DeepPartialThemeConfig,
   TypographyScaleEntry,
@@ -13,7 +15,7 @@ export type {
   ValidatedThemeConfig,
 } from "./types";
 
-export { ThemeConfigSchema } from "./types";
+export { ThemeConfigSchema, ThemeNameSchema, ComponentRegistrySchema } from "./types";
 
 // Default theme
 export { defaultTheme } from "./defaults";

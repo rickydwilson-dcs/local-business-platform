@@ -124,6 +124,7 @@ export const defaultTheme: ThemeConfig = {
     },
     navigation: {
       style: "solid",
+      appearance: "light",
       height: "4rem",
     },
     section: {
