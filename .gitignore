@@ -55,11 +55,11 @@ Thumbs.db
 *~
 
 # Images - These go to Cloudflare R2, not Git
-assets/*.jpg
-assets/*.jpeg
-assets/*.png
-assets/*.webp
-assets/*.gif
+**/*.jpg
+**/*.jpeg
+**/*.png
+**/*.webp
+**/*.gif
 # Keep the directory structure examples
 !assets/.gitkeep
 !assets/README.md
