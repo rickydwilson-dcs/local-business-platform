@@ -212,13 +212,15 @@ export interface ThemeConfig {
     };
     hero: {
       /** Hero layout variant */
-      variant: "centered" | "split" | "fullscreen";
+      variant: "centered" | "split" | "fullscreen" | "full-bleed";
       /** Minimum height */
       minHeight: string;
     };
     navigation: {
       /** Header style */
       style: "transparent" | "solid" | "blur";
+      /** Header appearance (dark = black bg, light = white bg). Defaults to "light". */
+      appearance?: "dark" | "light";
       /** Header height */
       height: string;
     };
@@ -229,6 +231,40 @@ export interface ThemeConfig {
       paddingYCompact: string;
     };
   };
+
+  /**
+   * Component registry — which named theme this site uses.
+   * Optional. If omitted the vega (light/professional) theme is assumed.
+   * Used as metadata by tooling; component selection is via static imports.
+   */
+  componentRegistry?: ComponentRegistry;
+}
+
+// ─── Named theme types ────────────────────────────────────────────────────────
+
+/**
+ * Named theme identifiers — each maps to packages/themes/[name]
+ * - orion: dark header, full-bleed hero, circular icons (industrial style)
+ * - vega:  light header, split hero, card grid (professional style)
+ */
+export type ThemeName = "orion" | "vega";
+
+/**
+ * Component registry — maps a named theme to its component variant choices.
+ * Themes export concrete components as static imports (build-time, server-safe,
+ * zero hydration cost). This registry is metadata consumed by tooling only.
+ */
+export interface ComponentRegistry {
+  /** The named theme this site uses */
+  theme: ThemeName;
+  /** Hero component variant */
+  heroVariant: "image-overlay" | "split" | "minimal";
+  /** Header appearance */
+  headerVariant: "dark" | "light";
+  /** Card style */
+  cardVariant: "icon-circle" | "standard" | "overlay";
+  /** Dark section accent style */
+  sectionVariant: "dark-accent" | "gradient" | "standard";
 }
 
 /**
@@ -276,9 +312,20 @@ export type DeepPartialThemeConfig = {
     navigation?: Partial<ThemeConfig["components"]["navigation"]>;
     section?: Partial<ThemeConfig["components"]["section"]>;
   };
+  componentRegistry?: Partial<ComponentRegistry>;
 };
 
 // Zod Schemas for validation
+
+export const ThemeNameSchema = z.enum(["orion", "vega"]);
+
+export const ComponentRegistrySchema = z.object({
+  theme: ThemeNameSchema,
+  heroVariant: z.enum(["image-overlay", "split", "minimal"]),
+  headerVariant: z.enum(["dark", "light"]),
+  cardVariant: z.enum(["icon-circle", "standard", "overlay"]),
+  sectionVariant: z.enum(["dark-accent", "gradient", "standard"]),
+});
 
 const typographyScaleEntrySchema = z.object({
   size: z.string(),
@@ -410,11 +457,12 @@ export const ThemeConfigSchema = z.object({
       padding: z.string(),
     }),
     hero: z.object({
-      variant: z.enum(["centered", "split", "fullscreen"]),
+      variant: z.enum(["centered", "split", "fullscreen", "full-bleed"]),
       minHeight: z.string(),
     }),
     navigation: z.object({
       style: z.enum(["transparent", "solid", "blur"]),
+      appearance: z.enum(["dark", "light"]).optional(),
       height: z.string(),
     }),
     section: z.object({
@@ -422,6 +470,7 @@ export const ThemeConfigSchema = z.object({
       paddingYCompact: z.string(),
     }),
   }),
+  componentRegistry: ComponentRegistrySchema.optional(),
 });
 
 export type ValidatedThemeConfig = z.infer<typeof ThemeConfigSchema>;

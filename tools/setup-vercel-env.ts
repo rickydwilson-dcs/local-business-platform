@@ -42,7 +42,6 @@ const VERCEL_TEAM_ID = process.env.VERCEL_TEAM_ID; // Optional for team accounts
 // Sites to configure (update this as you add more sites)
 const SITES = [
   "colossus-reference",
-  "smiths-electrical-cambridge",
   // Add more sites here as you create them
 ];
 

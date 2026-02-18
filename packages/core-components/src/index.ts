@@ -1,6 +1,14 @@
 // Export Hero variants
 export * from "./components/hero";
 
+// Orion theme components (migrated from dj-fox-electrical)
+export * from "./components/ui/hero-with-image";
+export * from "./components/ui/page-hero-image";
+export * from "./components/ui/circular-icon-card";
+export * from "./components/ui/info-card";
+export * from "./components/ui/dark-stat-card";
+export * from "./components/ui/image-overlay-card";
+
 // Export all UI components (generic, usable across all sites)
 export * from "./components/ui/accent-underline";
 export * from "./components/ui/aggregate-rating-display";
@@ -62,6 +70,11 @@ export * from "./components/Schema";
 
 // Export layout components
 export { PageLayout } from "./components/layouts/page-layout";
+export * from "./components/ui/site-header";
+export * from "./components/ui/page-shell";
+
+// Export theme context (client-side atoms)
+export * from "./context/theme-context";
 
 // Export hooks
 export * from "./hooks";

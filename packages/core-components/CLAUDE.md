@@ -57,6 +57,11 @@ See `src/index.ts` for the full list of exports.
 - `validators/` — input validation (contact form, email, phone, etc.)
 - `image.ts` — image path utilities and validation
 
+### Context (`src/context/`)
+
+- `ThemeProvider` — `'use client'` wrapper that provides `ThemeName` and `ComponentRegistry` to client components; wrap `PageShell` in each site's `layout.tsx`
+- `useTheme()` — hook returning `{ theme: ThemeName, registry: ComponentRegistry | null }`
+
 ### Hooks (`src/hooks/`)
 
 - `useFocusTrap` — keyboard focus trapping for modals and menus
