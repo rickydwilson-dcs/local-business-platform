@@ -5,9 +5,7 @@
  * Copy-paste these examples into your pages.
  */
 
-import { HeroWithImage } from './hero-with-image';
-import { PageHero } from './page-hero';
-import { AccentUnderline } from '@platform/core-components';
+import { HeroWithImage, PageHeroImage, AccentUnderline } from '@platform/core-components';
 
 // ============================================================================
 // HOMEPAGE HERO EXAMPLES
@@ -113,7 +111,7 @@ export function AboutUsHeroExample() {
  */
 export function ServicePageHeroExample() {
   return (
-    <PageHero
+    <PageHeroImage
       title="Electrical Installation Services"
       subtitle="Professional installation services across East Sussex"
       imageSrc="/images/electrical-installation.jpg"
@@ -133,7 +131,7 @@ export function ServicePageHeroExample() {
  */
 export function LocationPageHeroExample() {
   return (
-    <PageHero
+    <PageHeroImage
       title="Electrician in Eastbourne"
       subtitle="Trusted electrical services throughout Eastbourne and surrounding areas"
       imageSrc="/images/eastbourne-electrical-services.jpg"
@@ -154,7 +152,7 @@ export function LocationPageHeroExample() {
  */
 export function BlogPostHeroExample() {
   return (
-    <PageHero
+    <PageHeroImage
       title="Understanding EICR Certificates"
       subtitle="A complete guide to Electrical Installation Condition Reports"
       imageSrc="/images/eicr-certificate-guide.jpg"
@@ -175,7 +173,7 @@ export function BlogPostHeroExample() {
  */
 export function ContactPageHeroExample() {
   return (
-    <PageHero
+    <PageHeroImage
       title="Contact DJ Fox Electrical"
       subtitle="Get in touch for a free, no-obligation quote"
       imageSrc="/images/contact-us.jpg"
@@ -333,7 +331,7 @@ export function CompleteServicePageExample() {
   return (
     <>
       {/* Page Hero */}
-      <PageHero
+      <PageHeroImage
         title="Electrical Installation Services"
         subtitle="Professional installation services across East Sussex"
         imageSrc="/images/electrical-installation.jpg"

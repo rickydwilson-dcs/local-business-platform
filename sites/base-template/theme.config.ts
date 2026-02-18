@@ -1,4 +1,5 @@
 import type { DeepPartialThemeConfig } from '@platform/theme-system';
+import { vegaRegistry } from '@platform/themes/vega';
 
 /**
  * Base Template Theme Configuration
@@ -7,6 +8,8 @@ import type { DeepPartialThemeConfig } from '@platform/theme-system';
  * Copy this file when creating a new site and customize colors, typography, and components.
  */
 export const themeConfig: DeepPartialThemeConfig = {
+  componentRegistry: vegaRegistry,
+
   colors: {
     brand: {
       primary: '#3b82f6', // Neutral professional blue

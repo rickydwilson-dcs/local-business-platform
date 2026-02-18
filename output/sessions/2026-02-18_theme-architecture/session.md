@@ -23,13 +23,13 @@ packages/
   theme-system/       ← tokens + Tailwind plugin (existing, extended)
   core-components/    ← component primitives with variant props (server-safe)
   themes/             ← NEW: named themes
-    electro/          ← dark header, full-bleed hero, circular icons (DJ Fox)
-    professional/     ← light header, split hero, card grid (Colossus/base-template)
+    orion/            ← dark header, full-bleed hero, circular icons (DJ Fox)
+    vega/             ← light header, split hero, card grid (Colossus/base-template)
 
 sites/
-  base-template/      ← professional theme + blue tokens
-  dj-fox-electrical/  ← electro theme + red tokens
-  colossus-reference/ ← professional theme + navy tokens
+  base-template/      ← vega theme + blue tokens
+  dj-fox-electrical/  ← orion theme + red tokens
+  colossus-reference/ ← vega theme + navy tokens
 ```
 
 ---
@@ -46,7 +46,7 @@ sites/
 
 5. **CSS migration is explicit**: Each DJ Fox component has an explicit list of CSS utility classes that must migrate with it — without this, styling silently breaks.
 
-6. **Initial themes**: `electro` + `professional` only. The AI generation tool (Step 6) is how new themes are added going forward.
+6. **Initial themes**: `orion` + `vega` only. The AI generation tool (Step 6) is how new themes are added going forward.
 
 7. **Tailwind v4**: Deferred until after all 6 steps are stable.
 
@@ -75,7 +75,7 @@ DJ Fox variants → `core-components` with CSS utilities migrated together:
 - Agent C: `DarkStatCard` + `ImageOverlayCard`
 
 ### Step 4: Theme packages *(single agent)*
-- Create `packages/themes/electro/` and `packages/themes/professional/`
+- Create `packages/themes/orion/` and `packages/themes/vega/`
 - Switch sites to import from theme packages
 - Slim per-site `globals.css` to ~20 lines
 
@@ -101,13 +101,13 @@ DJ Fox variants → `core-components` with CSS utilities migrated together:
 | 5 | Lighthouse scores unchanged, no hydration errors |
 | 6 | Generate test theme, build test site, confirm valid output |
 
-**Portability proof**: Create `sites/demo-electro/` with the electro theme + different brand tokens. If it builds correctly, the architecture works.
+**Portability proof**: Create `sites/demo-orion/` with the orion theme + different brand tokens. If it builds correctly, the architecture works.
 
 ---
 
 ## CSS Migration Map
 
-### Theme-level (moves to `packages/themes/[name]/globals.css`)
+### Theme-level (moves to `packages/themes/orion/globals.css` or `vega/globals.css`)
 `section-dark`, `section-dark-accent`, `section-gradient`, `btn-primary`, `btn-secondary`, `btn-ghost`, `btn-primary-lg`, `card-interactive`, `card-overlay`, `card-overlay-hover`, `icon-circle-lg`, `icon-circle-sm`, `stat-card-dark`, `stat-card-accent`, `accent-underline`, `accent-border-left`, `section-standard`, `container-standard`, `heading-section`
 
 ### Site-specific (stays in `sites/[name]/app/globals.css`)
@@ -123,7 +123,7 @@ Leaflet CSS import, mega-menu z-index fix, licensed font-face declarations, site
 | 1B | `sites/*/tailwind.config.ts`, `sites/*/package.json`, `pnpm-workspace.yaml` |
 | 2 | `packages/core-components/src/components/ui/` (new: SiteHeader, PageShell), `sites/*/app/layout.tsx` |
 | 3 | `sites/dj-fox-electrical/components/ui/` (6 files → core), `sites/dj-fox-electrical/app/globals.css` |
-| 4 | `packages/themes/electro/` (new), `packages/themes/professional/` (new), `sites/*/theme.config.ts`, `sites/*/app/globals.css` |
+| 4 | `packages/themes/orion/` (new), `packages/themes/vega/` (new), `sites/*/theme.config.ts`, `sites/*/app/globals.css` |
 | 5 | `packages/core-components/src/context/theme-context.tsx` (new), `packages/core-components/src/index.ts` |
 | 6 | `tools/generate-theme-from-reference.ts` (new), `tools/apply-theme.ts` (new) |
 

@@ -1,4 +1,5 @@
 import type { DeepPartialThemeConfig } from '@platform/theme-system';
+import { orionRegistry } from '@platform/themes/orion';
 
 /**
  * D J Fox Electrical - Theme Configuration
@@ -7,6 +8,8 @@ import type { DeepPartialThemeConfig } from '@platform/theme-system';
  * Generated at: 2026-02-15T19:18:53.726Z
  */
 export const themeConfig: DeepPartialThemeConfig = {
+  componentRegistry: orionRegistry,
+
   colors: {
     brand: {
       primary: '#db0b0b',
