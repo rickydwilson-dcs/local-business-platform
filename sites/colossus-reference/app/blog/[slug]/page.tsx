@@ -13,6 +13,7 @@ import { getBlogPosts, getBlogPost, calculateReadingTime, type BlogPost } from "
 import { getImageUrl } from "@/lib/image";
 import { absUrl } from "@/lib/site";
 import { loadMdx } from "@/lib/mdx";
+import { siteConfig } from "@/site.config";
 
 export const dynamic = "force-static";
 export const dynamicParams = false;
@@ -46,7 +47,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   const { frontmatter } = post;
 
   return {
-    title: frontmatter.seoTitle || `${frontmatter.title} | Colossus Scaffolding Blog`,
+    title: frontmatter.seoTitle || `${frontmatter.title} | ${siteConfig.business.name} Blog`,
     description: frontmatter.description,
     keywords: frontmatter.keywords,
     authors: [{ name: frontmatter.author.name }],
@@ -54,7 +55,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
       title: frontmatter.title,
       description: frontmatter.description,
       url: absUrl(`/blog/${slug}`),
-      siteName: "Colossus Scaffolding",
+      siteName: siteConfig.business.name,
       type: "article",
       publishedTime: frontmatter.date,
       authors: [frontmatter.author.name],
@@ -247,9 +248,9 @@ export default async function BlogPostPage({ params }: { params: Promise<Params>
 
       <Schema
         org={{
-          name: "Colossus Scaffolding",
+          name: siteConfig.business.name,
           url: "/",
-          logo: "/Colossus-Scaffolding-Logo.svg",
+          logo: "/logo.svg",
         }}
         breadcrumbs={[
           { name: "Home", url: "/" },
@@ -271,10 +272,10 @@ export default async function BlogPostPage({ params }: { params: Promise<Params>
           },
           publisher: {
             "@type": "Organization",
-            name: "Colossus Scaffolding",
+            name: siteConfig.business.name,
             logo: {
               "@type": "ImageObject",
-              url: absUrl("/Colossus-Scaffolding-Logo.svg"),
+              url: absUrl("/logo.svg"),
             },
           },
           mainEntityOfPage: {

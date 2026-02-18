@@ -145,11 +145,18 @@ Turborepo's `"dependsOn": ["^build"]` ensures these build before any site that i
     },
     "test:e2e": {
       "dependsOn": ["build"],
-      "cache": false
+      "cache": false,
+      "outputs": ["playwright-report/**", "test-results/**"]
     },
     "test:e2e:smoke": {
       "dependsOn": ["build"],
-      "cache": false
+      "cache": false,
+      "outputs": ["playwright-report/**", "test-results/**"]
+    },
+    "test:e2e:ui": {
+      "dependsOn": ["build"],
+      "cache": false,
+      "persistent": true
     },
     "clean": {
       "cache": false

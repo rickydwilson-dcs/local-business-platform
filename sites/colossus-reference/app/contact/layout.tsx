@@ -1,22 +1,23 @@
 import { Metadata } from "next";
 import { absUrl } from "@/lib/site";
+import { siteConfig } from "@/site.config";
 
 export const metadata: Metadata = {
-  title: "Contact Colossus Scaffolding | Free Quotes",
+  title: `Contact ${siteConfig.business.name} | Free Quotes`,
   description:
-    "Contact Colossus Scaffolding for free quotes on professional scaffolding services across South East UK. TG20:21 compliant, CISRS qualified teams, rapid response.",
+    `Contact ${siteConfig.business.name} for free quotes on professional scaffolding services across South East UK. TG20:21 compliant, CISRS qualified teams, rapid response.`,
   openGraph: {
-    title: "Contact Colossus Scaffolding | Free Quotes",
+    title: `Contact ${siteConfig.business.name} | Free Quotes`,
     description:
-      "Contact Colossus Scaffolding for free quotes on professional scaffolding services across South East UK. TG20:21 compliant, CISRS qualified teams.",
+      `Contact ${siteConfig.business.name} for free quotes on professional scaffolding services across South East UK. TG20:21 compliant, CISRS qualified teams.`,
     url: absUrl("/contact"),
-    siteName: "Colossus Scaffolding",
+    siteName: siteConfig.business.name,
     images: [
       {
-        url: absUrl("/static/logo.png"),
+        url: absUrl("/logo.svg"),
         width: 1200,
         height: 630,
-        alt: "Contact Colossus Scaffolding - Professional Scaffolding Services",
+        alt: `Contact ${siteConfig.business.name} - Professional Scaffolding Services`,
       },
     ],
     locale: "en_GB",
@@ -24,10 +25,10 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Contact Colossus Scaffolding | Free Quotes",
+    title: `Contact ${siteConfig.business.name} | Free Quotes`,
     description:
-      "Contact Colossus Scaffolding for free quotes on professional scaffolding services across South East UK. TG20:21 compliant, CISRS qualified teams.",
-    images: [absUrl("/static/logo.png")],
+      `Contact ${siteConfig.business.name} for free quotes on professional scaffolding services across South East UK. TG20:21 compliant, CISRS qualified teams.`,
+    images: [absUrl("/logo.svg")],
   },
   alternates: {
     canonical: absUrl("/contact"),
@@ -39,9 +40,9 @@ export default function ContactLayout({ children }: { children: React.ReactNode 
     "@context": "https://schema.org",
     "@type": "ContactPage",
     "@id": absUrl("/contact"),
-    name: "Contact Colossus Scaffolding",
+    name: `Contact ${siteConfig.business.name}`,
     description:
-      "Contact Colossus Scaffolding for free quotes on professional scaffolding services across South East UK.",
+      `Contact ${siteConfig.business.name} for free quotes on professional scaffolding services across South East UK.`,
     url: absUrl("/contact"),
     mainEntity: {
       "@id": absUrl("/#organization"),
@@ -69,8 +70,8 @@ export default function ContactLayout({ children }: { children: React.ReactNode 
     "@context": "https://schema.org",
     "@type": "ContactPoint",
     "@id": absUrl("/contact#contactpoint"),
-    telephone: "+441424466661",
-    email: "info@colossusscaffolding.com",
+    telephone: siteConfig.business.phone,
+    email: siteConfig.business.email,
     contactType: "customer service",
     availableLanguage: "English",
     hoursAvailable: [
@@ -87,12 +88,10 @@ export default function ContactLayout({ children }: { children: React.ReactNode 
         closes: "16:00",
       },
     ],
-    areaServed: [
-      { "@type": "Place", name: "East Sussex" },
-      { "@type": "Place", name: "West Sussex" },
-      { "@type": "Place", name: "Kent" },
-      { "@type": "Place", name: "Surrey" },
-    ],
+    areaServed: siteConfig.serviceAreas.map((area) => ({
+      "@type": "Place",
+      name: area,
+    })),
   };
 
   return (

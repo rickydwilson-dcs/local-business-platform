@@ -10,6 +10,7 @@ import { AnalyticsDebugPanel } from "@platform/core-components/components/analyt
 import { PHONE_DISPLAY, PHONE_TEL } from "@/lib/contact-info";
 import { getContentItems } from "@/lib/content";
 import { getAllCounties } from "@/lib/locations";
+import { siteConfig } from "@/site.config";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -25,8 +26,8 @@ export const metadata: Metadata = {
       (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000")
   ),
   title: {
-    default: "Colossus Scaffolding",
-    template: "%s | Colossus Scaffolding",
+    default: siteConfig.business.name,
+    template: `%s | ${siteConfig.business.name}`,
   },
   description:
     "Professional scaffolding services across South East England. TG20:21 compliant, CISRS qualified teams with over 15 years experience. Free quotes available.",
@@ -69,8 +70,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             <Link href="/" className="logo-container">
               <div style={{ position: "relative", width: 180, height: 48 }}>
                 <Image
-                  src="/Colossus-Scaffolding-Logo.svg"
-                  alt="Colossus Scaffolding"
+                  src="/logo.svg"
+                  alt={siteConfig.business.name}
                   fill
                   sizes="180px"
                   priority

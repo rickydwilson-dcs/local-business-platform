@@ -4,6 +4,7 @@ import { Schema, ContentGrid, Breadcrumbs } from "@platform/core-components";
 import { getContentItems } from "@/lib/content";
 import { PHONE_DISPLAY, PHONE_TEL } from "@/lib/contact-info";
 import { absUrl } from "@/lib/site";
+import { siteConfig } from "@/site.config";
 
 export const dynamic = "force-static";
 
@@ -184,9 +185,9 @@ export default async function ServicesPage() {
           areaServed: ["South East UK", "East Sussex", "West Sussex", "Kent", "Surrey"],
         }}
         org={{
-          name: "Colossus Scaffolding",
+          name: siteConfig.business.name,
           url: "/",
-          logo: "/Colossus-Scaffolding-Logo.svg",
+          logo: "/logo.svg",
         }}
         breadcrumbs={[
           { name: "Home", url: "/" },

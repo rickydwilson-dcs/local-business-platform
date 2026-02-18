@@ -141,6 +141,21 @@ export interface SiteConfig extends BaseSiteConfig {
     testimonials: boolean;
     blog: boolean;
   };
+
+  /** Optional rich about page content */
+  about?: {
+    /** Short badges/tags shown in the hero (e.g. "Est. 2009", "Family Business") */
+    heroBadges?: string[];
+    /** Company founding narrative — each string is a paragraph */
+    story?: string[];
+    /** Why-choose-us bullet points */
+    whyChooseUs?: string[];
+    /** Company values shown as a card grid */
+    values?: Array<{
+      title: string;
+      description: string;
+    }>;
+  };
 }
 
 export const siteConfig: SiteConfig = {
@@ -292,5 +307,48 @@ export const siteConfig: SiteConfig = {
     rateLimit: true,
     testimonials: true,
     blog: true,
+  },
+
+  about: {
+    heroBadges: ["Est. 2009", "Family Business", "Local Experts"],
+    story: [
+      "Founded in 2009, Colossus Scaffolding began as a vision to provide professional, safe, and reliable scaffolding services across the South East UK. What started with a single van and unwavering commitment to excellence has grown into one of the region's most trusted scaffolding contractors.",
+      "From our registered office in St Leonards On Sea, we've built our reputation project by project, always putting safety first and maintaining the highest professional standards. Our CISRS qualified teams understand that every scaffold we erect supports not just buildings, but the livelihoods and safety of the people who work on them.",
+      "Today, we're proud to serve homeowners, contractors, and businesses throughout East Sussex, West Sussex, Kent, and Surrey. Our commitment to local service, combined with our expertise in complex projects, makes us the trusted choice for scaffolding solutions across the South East.",
+    ],
+    whyChooseUs: [
+      "TG20:21 compliant design and installation on every project",
+      "CISRS qualified and experienced scaffolding professionals",
+      "£10 million public liability insurance for complete protection",
+      "CHAS accredited with proven health and safety record",
+      "Free site surveys and detailed quotations provided",
+      "Rapid response times across South East England",
+      "Complete handover certificates and documentation",
+      "Regular safety inspections and maintenance included",
+      "Emergency callout service available 24/7",
+      "Local expertise with regional planning knowledge",
+    ],
+    values: [
+      {
+        title: "Safety First",
+        description:
+          "Every scaffold designed and erected to TG20:21 standards with regular safety inspections and comprehensive risk assessments.",
+      },
+      {
+        title: "Professional Excellence",
+        description:
+          "CISRS qualified teams delivering professional installations with attention to detail and commitment to quality craftsmanship.",
+      },
+      {
+        title: "Reliable Service",
+        description:
+          "On-time installations, clear communication, and 24/7 emergency response when you need us most across the South East.",
+      },
+      {
+        title: "Local Expertise",
+        description:
+          "Deep understanding of local regulations, planning requirements, and building styles across our South East service areas.",
+      },
+    ],
   },
 };

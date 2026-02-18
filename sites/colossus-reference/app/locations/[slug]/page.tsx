@@ -20,6 +20,7 @@ import { absUrl } from "@/lib/site";
 import { getImageUrl } from "@/lib/image";
 import { getServiceAreaSchema } from "@/lib/schema";
 import { PHONE_DISPLAY } from "@/lib/contact-info";
+import { siteConfig } from "@/site.config";
 
 export const dynamic = "force-static";
 export const dynamicParams = false;
@@ -184,15 +185,15 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
       title: optimizedTitle,
       description: locationData.description,
       url: absUrl(`/locations/${slug}`),
-      siteName: "Colossus Scaffolding",
+      siteName: siteConfig.business.name,
       images: [
         {
           url: locationData.heroImage
             ? getImageUrl(locationData.heroImage)
-            : absUrl("/static/logo.png"),
+            : absUrl("/logo.svg"),
           width: 1200,
           height: 630,
-          alt: `Professional scaffolding services in ${locationData.title} - Colossus`,
+          alt: `Professional scaffolding services in ${locationData.title} - ${siteConfig.business.name}`,
         },
       ],
       locale: "en_GB",

@@ -5,6 +5,7 @@ import { Schema, Breadcrumbs } from "@platform/core-components";
 import { getProjects, type Project } from "@/lib/content";
 import { getImageUrl } from "@/lib/image";
 import { absUrl } from "@/lib/site";
+import { siteConfig } from "@/site.config";
 
 export const dynamic = "force-static";
 
@@ -236,9 +237,9 @@ export default async function ProjectsPage() {
 
       <Schema
         org={{
-          name: "Colossus Scaffolding",
+          name: siteConfig.business.name,
           url: "/",
-          logo: "/Colossus-Scaffolding-Logo.svg",
+          logo: "/logo.svg",
         }}
         breadcrumbs={[
           { name: "Home", url: "/" },
@@ -248,7 +249,7 @@ export default async function ProjectsPage() {
           "@type": "CollectionPage",
           "@id": absUrl("/projects#collection"),
           url: absUrl("/projects"),
-          name: "Colossus Scaffolding Projects",
+          name: `${siteConfig.business.name} Projects`,
           description:
             "Portfolio of scaffolding projects across Sussex, Kent, and Surrey. From heritage restorations to commercial developments.",
         }}

@@ -14,6 +14,7 @@ import { getProjects, getProject, type Project } from "@/lib/content";
 import { getImageUrl } from "@/lib/image";
 import { absUrl } from "@/lib/site";
 import { loadMdx } from "@/lib/mdx";
+import { siteConfig } from "@/site.config";
 
 export const dynamic = "force-static";
 export const dynamicParams = false;
@@ -47,14 +48,14 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   const { frontmatter } = project;
 
   return {
-    title: frontmatter.seoTitle || `${frontmatter.title} | Colossus Scaffolding`,
+    title: frontmatter.seoTitle || `${frontmatter.title} | ${siteConfig.business.name}`,
     description: frontmatter.description,
     keywords: frontmatter.keywords,
     openGraph: {
       title: frontmatter.title,
       description: frontmatter.description,
       url: absUrl(`/projects/${slug}`),
-      siteName: "Colossus Scaffolding",
+      siteName: siteConfig.business.name,
       type: "article",
       images: [
         {
@@ -310,9 +311,9 @@ export default async function ProjectPage({ params }: { params: Promise<Params> 
 
       <Schema
         org={{
-          name: "Colossus Scaffolding",
+          name: siteConfig.business.name,
           url: "/",
-          logo: "/Colossus-Scaffolding-Logo.svg",
+          logo: "/logo.svg",
         }}
         breadcrumbs={[
           { name: "Home", url: "/" },
