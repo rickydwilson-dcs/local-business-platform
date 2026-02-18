@@ -1,7 +1,8 @@
 import "./globals.css";
 import type { Metadata, Viewport } from "next";
-import { SiteHeader, PageShell } from "@platform/core-components";
+import { SiteHeader, PageShell, ThemeProvider } from "@platform/core-components";
 import { Footer } from "@platform/core-components/components/ui/footer";
+import { vegaRegistry } from "@platform/themes/vega";
 import { ConsentManager } from "@platform/core-components/components/analytics/ConsentManager";
 import { Analytics } from "@platform/core-components/components/analytics/Analytics";
 import { AnalyticsDebugPanel } from "@platform/core-components/components/analytics/AnalyticsDebugPanel";
@@ -55,27 +56,29 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <meta name="ICBM" content="50.8570, 0.5750" />
       </head>
       <body className="min-h-screen bg-white text-slate-900 antialiased">
-        <PageShell
-          header={
-            <SiteHeader
-              appearance="light"
-              sticky={false}
-              siteName={siteConfig.business.name}
-              phoneDisplay={PHONE_DISPLAY}
-              phoneTel={PHONE_TEL}
-              showPhone={siteConfig.cta.phone.show}
-              primaryCta={siteConfig.cta.primary}
-              navigation={siteConfig.navigation.main}
-              counties={counties}
-              locations={locationItems}
-              logoWidth={180}
-              logoHeight={48}
-            />
-          }
-          footer={<Footer />}
-        >
-          {children}
-        </PageShell>
+        <ThemeProvider theme="vega" registry={vegaRegistry}>
+          <PageShell
+            header={
+              <SiteHeader
+                appearance="light"
+                sticky={false}
+                siteName={siteConfig.business.name}
+                phoneDisplay={PHONE_DISPLAY}
+                phoneTel={PHONE_TEL}
+                showPhone={siteConfig.cta.phone.show}
+                primaryCta={siteConfig.cta.primary}
+                navigation={siteConfig.navigation.main}
+                counties={counties}
+                locations={locationItems}
+                logoWidth={180}
+                logoHeight={48}
+              />
+            }
+            footer={<Footer />}
+          >
+            {children}
+          </PageShell>
+        </ThemeProvider>
 
         {/* Analytics System - ConsentManager will handle page detection internally */}
         <ConsentManager

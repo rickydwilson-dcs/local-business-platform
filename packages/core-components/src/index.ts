@@ -73,6 +73,9 @@ export { PageLayout } from "./components/layouts/page-layout";
 export * from "./components/ui/site-header";
 export * from "./components/ui/page-shell";
 
+// Export theme context (client-side atoms)
+export * from "./context/theme-context";
+
 // Export hooks
 export * from "./hooks";
 

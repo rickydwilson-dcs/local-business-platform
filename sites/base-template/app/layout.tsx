@@ -3,8 +3,9 @@ import './globals.css';
 import { siteConfig } from '@/site.config';
 import { PHONE_DISPLAY, PHONE_TEL } from '@/lib/contact-info';
 import { getContentItems } from '@/lib/content';
-import { SiteHeader, PageShell } from '@platform/core-components';
+import { SiteHeader, PageShell, ThemeProvider } from '@platform/core-components';
 import { Footer } from '@platform/core-components/components/ui/footer';
+import { vegaRegistry } from '@platform/themes/vega';
 import { ConsentManager } from "@platform/core-components/components/analytics/ConsentManager";
 import { Analytics } from "@platform/core-components/components/analytics/Analytics";
 import { AnalyticsDebugPanel } from "@platform/core-components/components/analytics/AnalyticsDebugPanel";
@@ -56,23 +57,25 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         )}
       </head>
       <body className="min-h-screen flex flex-col">
-        <PageShell
-          header={
-            <SiteHeader
-              appearance="light"
-              siteName={siteConfig.name}
-              phoneDisplay={PHONE_DISPLAY}
-              phoneTel={PHONE_TEL}
-              showPhone={siteConfig.cta.phone.show}
-              primaryCta={siteConfig.cta.primary}
-              navigation={siteConfig.navigation.main}
-              locations={locationItems}
-            />
-          }
-          footer={<Footer />}
-        >
-          {children}
-        </PageShell>
+        <ThemeProvider theme="vega" registry={vegaRegistry}>
+          <PageShell
+            header={
+              <SiteHeader
+                appearance="light"
+                siteName={siteConfig.name}
+                phoneDisplay={PHONE_DISPLAY}
+                phoneTel={PHONE_TEL}
+                showPhone={siteConfig.cta.phone.show}
+                primaryCta={siteConfig.cta.primary}
+                navigation={siteConfig.navigation.main}
+                locations={locationItems}
+              />
+            }
+            footer={<Footer />}
+          >
+            {children}
+          </PageShell>
+        </ThemeProvider>
 
         <ConsentManager
           enabled={process.env.NEXT_PUBLIC_FEATURE_CONSENT_BANNER === 'true'}
