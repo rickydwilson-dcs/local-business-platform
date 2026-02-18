@@ -3,24 +3,25 @@ import type { Metadata } from "next";
 import { Schema, Breadcrumbs } from "@platform/core-components";
 import { getTestimonials, calculateAggregateRating, type Testimonial } from "@/lib/content";
 import { absUrl } from "@/lib/site";
+import { siteConfig } from "@/site.config";
 
 export const dynamic = "force-static";
 
 export const metadata: Metadata = {
   title: "Customer Reviews | What Our Clients Say",
   description:
-    "Read what our customers say about Colossus Scaffolding. Trusted by homeowners and businesses across Sussex, Kent, and Surrey for professional scaffolding services.",
+    `Read what our customers say about ${siteConfig.business.name}. Trusted by homeowners and businesses across Sussex, Kent, and Surrey for professional scaffolding services.`,
   keywords: [
     "scaffolding reviews",
     "scaffolding testimonials",
-    "Colossus Scaffolding reviews",
+    `${siteConfig.business.name} reviews`,
     "scaffolding company reviews",
     "customer testimonials",
   ],
   openGraph: {
     title: "Customer Reviews | What Our Clients Say",
     description:
-      "Read what our customers say about Colossus Scaffolding. Trusted by homeowners and businesses across the South East.",
+      `Read what our customers say about ${siteConfig.business.name}. Trusted by homeowners and businesses across the South East.`,
     url: absUrl("/reviews"),
     type: "website",
   },
@@ -351,9 +352,9 @@ export default async function ReviewsPage() {
 
       <Schema
         org={{
-          name: "Colossus Scaffolding",
+          name: siteConfig.business.name,
           url: "/",
-          logo: "/Colossus-Scaffolding-Logo.svg",
+          logo: "/logo.svg",
         }}
         breadcrumbs={[
           { name: "Home", url: "/" },
@@ -365,7 +366,7 @@ export default async function ReviewsPage() {
           url: absUrl("/reviews"),
           name: "Customer Reviews",
           description:
-            "Read what our customers say about Colossus Scaffolding. Trusted by homeowners and businesses across the South East.",
+            `Read what our customers say about ${siteConfig.business.name}. Trusted by homeowners and businesses across the South East.`,
         }}
         aggregateRating={
           count > 0

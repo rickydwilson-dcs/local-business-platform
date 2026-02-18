@@ -5,13 +5,14 @@ import { Schema, Breadcrumbs } from "@platform/core-components";
 import { getBlogPosts, type BlogPost } from "@/lib/content";
 import { getImageUrl } from "@/lib/image";
 import { absUrl } from "@/lib/site";
+import { siteConfig } from "@/site.config";
 
 export const dynamic = "force-static";
 
 export const metadata: Metadata = {
   title: "Scaffolding Blog | Industry Insights & Expert Tips",
   description:
-    "Expert scaffolding insights, safety tips, and industry guidance from the Colossus Scaffolding team. Stay informed with our professional advice.",
+    `Expert scaffolding insights, safety tips, and industry guidance from the ${siteConfig.business.name} team. Stay informed with our professional advice.`,
   keywords: [
     "scaffolding blog",
     "scaffolding tips",
@@ -22,7 +23,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Scaffolding Blog | Industry Insights & Expert Tips",
     description:
-      "Expert scaffolding insights, safety tips, and industry guidance from the Colossus Scaffolding team.",
+      `Expert scaffolding insights, safety tips, and industry guidance from the ${siteConfig.business.name} team.`,
     url: absUrl("/blog"),
     type: "website",
   },
@@ -124,7 +125,7 @@ export default async function BlogPage() {
               <h1 className="heading-hero">Industry Insights & Expert Tips</h1>
               <p className="text-xl text-gray-800 mb-8 mx-auto max-w-3xl">
                 Professional scaffolding guidance, safety tips, and industry news from our
-                experienced team. Stay informed with the latest insights from Colossus Scaffolding.
+                experienced team. Stay informed with the latest insights from {siteConfig.business.name}.
               </p>
             </div>
           </div>
@@ -179,9 +180,9 @@ export default async function BlogPage() {
 
       <Schema
         org={{
-          name: "Colossus Scaffolding",
+          name: siteConfig.business.name,
           url: "/",
-          logo: "/Colossus-Scaffolding-Logo.svg",
+          logo: "/logo.svg",
         }}
         breadcrumbs={[
           { name: "Home", url: "/" },
@@ -191,9 +192,9 @@ export default async function BlogPage() {
           "@type": "Blog",
           "@id": absUrl("/blog#blog"),
           url: absUrl("/blog"),
-          name: "Colossus Scaffolding Blog",
+          name: `${siteConfig.business.name} Blog`,
           description:
-            "Expert scaffolding insights, safety tips, and industry guidance from the Colossus Scaffolding team.",
+            `Expert scaffolding insights, safety tips, and industry guidance from the ${siteConfig.business.name} team.`,
         }}
       />
     </>

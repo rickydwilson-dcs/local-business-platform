@@ -21,6 +21,7 @@ import type {
   BlogCategoryType,
   ProjectTypeValue,
 } from '@platform/core-components';
+import { getLocationSlugs } from '@/lib/locations-config';
 
 // ============================================================================
 // TYPES
@@ -74,12 +75,21 @@ export async function getContentItems(contentType: ContentType): Promise<Content
     return [];
   }
 
+  // For services, filter out location-specific slugs (e.g. primary-service-main-area)
+  const locationSlugs = contentType === 'services' ? await getLocationSlugs() : [];
+
   const items: ContentItem[] = [];
 
   for (const file of files) {
     if (!file.toLowerCase().endsWith('.mdx')) continue;
 
     const slug = file.replace(/\.mdx$/i, '');
+
+    // Skip location-specific service slugs from the main services listing
+    if (contentType === 'services' && locationSlugs.some((loc) => slug.endsWith(`-${loc}`))) {
+      continue;
+    }
+
     const filePath = path.join(dir, file);
     const raw = await fs.readFile(filePath, 'utf8');
     const { data } = matter(raw);

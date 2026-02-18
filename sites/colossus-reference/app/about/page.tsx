@@ -1,39 +1,27 @@
+/**
+ * About Page
+ *
+ * All content driven from siteConfig — no hardcoded business data.
+ */
+
+import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
-import { absUrl } from "@/lib/site";
-import { Metadata } from "next";
-import { Breadcrumbs } from "@platform/core-components";
-import { AccreditationSection } from "@/components/ui/accreditation-section";
-import { getImageUrl } from "@/lib/image";
+import { Shield, Award, CheckCircle, Phone } from "lucide-react";
+import { siteConfig } from "@/site.config";
 import { PHONE_DISPLAY, PHONE_TEL } from "@/lib/contact-info";
+import { absUrl } from "@/lib/site";
+import { Breadcrumbs, Schema } from "@platform/core-components";
 
 export const metadata: Metadata = {
-  title: "About Us | South East Scaffolding Specialists",
-  description:
-    "Learn about Colossus Scaffolding — established 2009, CISRS qualified teams, TG20:21 compliant, £10M insured. Professional scaffolding across South East England.",
+  title: `About Us | ${siteConfig.business.name}`,
+  description: `Learn about ${siteConfig.business.name} — established ${siteConfig.credentials.yearEstablished}. ${siteConfig.tagline}.`,
   openGraph: {
-    title: "About Colossus Scaffolding | Professional Scaffolding Specialists",
-    description:
-      "Professional scaffolding specialists serving South East UK since 2009. CISRS qualified, TG20:21 compliant, fully insured.",
+    title: `About ${siteConfig.business.name}`,
+    description: `${siteConfig.tagline}. Established ${siteConfig.credentials.yearEstablished}.`,
     url: absUrl("/about"),
-    siteName: "Colossus Scaffolding",
-    images: [
-      {
-        url: absUrl("/static/logo.png"),
-        width: 1200,
-        height: 630,
-        alt: "Colossus Scaffolding - Professional Scaffolding Specialists",
-      },
-    ],
+    siteName: siteConfig.business.name,
     locale: "en_GB",
     type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "About Colossus Scaffolding | Professional Scaffolding Specialists",
-    description:
-      "Professional scaffolding specialists serving South East UK since 2009. CISRS qualified, TG20:21 compliant, fully insured.",
-    images: [absUrl("/static/logo.png")],
   },
   alternates: {
     canonical: absUrl("/about"),
@@ -42,216 +30,10 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   const breadcrumbItems = [{ name: "About", href: "/about", current: true }];
-  const organizationSchema = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "@id": absUrl("/#organization"),
-    name: "Colossus Scaffolding",
-    legalName: "Colossus Scaffolding Ltd",
-    url: absUrl("/"),
-    logo: absUrl("/static/logo.png"),
-    description:
-      "Professional scaffolding specialists serving the South East UK with TG20:21 compliant solutions, CISRS qualified teams, and comprehensive insurance coverage.",
-    foundingDate: "2009",
-    numberOfEmployees: "10-50",
-    email: "info@colossusscaffolding.com",
-    telephone: "+441424466661",
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: "Office 7, 15-20 Gresley Road",
-      addressLocality: "St Leonards On Sea",
-      addressRegion: "East Sussex",
-      postalCode: "TN38 9PL",
-      addressCountry: "GB",
-    },
-    geo: {
-      "@type": "GeoCoordinates",
-      latitude: "50.8549",
-      longitude: "0.5736",
-    },
-    areaServed: [
-      { "@type": "Place", name: "East Sussex" },
-      { "@type": "Place", name: "West Sussex" },
-      { "@type": "Place", name: "Kent" },
-      { "@type": "Place", name: "Surrey" },
-    ],
-    hasCredential: [
-      {
-        "@type": "EducationalOccupationalCredential",
-        credentialCategory: "certification",
-        name: "Construction Line Gold",
-        description:
-          "Government-backed certification for supply chain excellence and compliance with rigorous construction industry standards",
-      },
-      {
-        "@type": "EducationalOccupationalCredential",
-        credentialCategory: "certification",
-        name: "CHAS Premium Plus",
-        description: "Contractors Health and Safety Assessment Scheme registered contractor",
-      },
-      {
-        "@type": "EducationalOccupationalCredential",
-        credentialCategory: "certification",
-        name: "CISRS Qualified Teams",
-        description: "Construction Industry Scaffolders Record Scheme certified scaffolders",
-      },
-      {
-        "@type": "EducationalOccupationalCredential",
-        credentialCategory: "compliance",
-        name: "TG20:21 Compliance",
-        description: "Latest technical guidance for scaffold design and installation compliance",
-      },
-      {
-        "@type": "EducationalOccupationalCredential",
-        credentialCategory: "certification",
-        name: "IASME Cyber Essentials",
-        description:
-          "Information security certification demonstrating commitment to protecting client data",
-      },
-    ],
-    slogan: "Safe, compliant and fully insured scaffolding specialists serving the South East UK",
-    knowsAbout: [
-      "Access Scaffolding",
-      "Facade Scaffolding",
-      "Industrial Scaffolding",
-      "Edge Protection",
-      "Scaffold Design",
-      "TG20:21 Compliance",
-      "Scaffold Inspections",
-      "Temporary Roof Systems",
-    ],
-    hasOfferCatalog: {
-      "@type": "OfferCatalog",
-      name: "Scaffolding Services",
-      itemListElement: [
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: "Access Scaffolding",
-            description: "Professional access scaffolding for residential and commercial projects",
-          },
-        },
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: "Facade Scaffolding",
-            description: "Specialist facade scaffolding for building maintenance and renovation",
-          },
-        },
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: "Industrial Scaffolding",
-            description: "Heavy-duty industrial scaffolding for complex commercial projects",
-          },
-        },
-      ],
-    },
-  };
-
-  const aboutPageSchema = {
-    "@context": "https://schema.org",
-    "@type": "AboutPage",
-    "@id": absUrl("/about"),
-    name: "About Colossus Scaffolding",
-    description:
-      "Learn more about Colossus Scaffolding — safe, compliant and fully insured scaffolding specialists serving the South East UK.",
-    url: absUrl("/about"),
-    mainEntity: {
-      "@id": absUrl("/#organization"),
-    },
-    breadcrumb: {
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        {
-          "@type": "ListItem",
-          position: 1,
-          name: "Home",
-          item: absUrl("/"),
-        },
-        {
-          "@type": "ListItem",
-          position: 2,
-          name: "About",
-          item: absUrl("/about"),
-        },
-      ],
-    },
-  };
-
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "@id": absUrl("/about#faq"),
-    mainEntity: [
-      {
-        "@type": "Question",
-        name: "How long has Colossus Scaffolding been in business?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Colossus Scaffolding was founded in 2009 and has been serving the South East UK for over 15 years with professional scaffolding services.",
-        },
-      },
-      {
-        "@type": "Question",
-        name: "Are your scaffolders qualified?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Yes, all our scaffolders are CISRS (Construction Industry Scaffolders Record Scheme) qualified and experienced professionals.",
-        },
-      },
-      {
-        "@type": "Question",
-        name: "Do you provide insurance coverage?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Every project is backed by £10 million public liability insurance for complete protection and peace of mind.",
-        },
-      },
-      {
-        "@type": "Question",
-        name: "What areas do you serve?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "We cover all of the South East of England, including East Sussex, West Sussex, Kent, and Surrey.",
-        },
-      },
-      {
-        "@type": "Question",
-        name: "Are your scaffolds compliant with current standards?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Yes, all our scaffolds are designed and erected to TG20:21 standards with regular safety inspections and comprehensive risk assessments.",
-        },
-      },
-    ],
-  };
+  const { about, credentials, business, serviceAreas, name, tagline } = siteConfig;
 
   return (
-    <div className="relative">
-      {/* Schema Markup for SEO */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(organizationSchema),
-        }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(aboutPageSchema),
-        }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(faqSchema),
-        }}
-      />
-
+    <>
       {/* Breadcrumbs */}
       <div className="bg-surface-muted border-b">
         <div className="container-standard py-4">
@@ -259,533 +41,247 @@ export default function AboutPage() {
         </div>
       </div>
 
-      {/* Hero Section */}
-      <section className="section-standard bg-gradient-to-br from-gray-50 to-gray-100">
-        <div className="container-standard">
-          <div className="mx-auto w-full lg:w-[90%] text-center">
-            <div className="flex flex-wrap justify-center gap-4 mb-8">
-              <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-brand-primary/10 text-brand-primary border border-brand-primary/20">
-                Est. 2009
-              </span>
-              <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-brand-primary/10 text-brand-primary border border-brand-primary/20">
-                Family Business
-              </span>
-              <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-brand-primary/10 text-brand-primary border border-brand-primary/20">
-                Local Experts
-              </span>
+      <main className="min-h-screen bg-surface-background">
+        {/* Hero Section */}
+        <section className="section-standard bg-gradient-to-br from-gray-50 to-gray-100">
+          <div className="container-standard">
+            <div className="mx-auto w-full lg:w-[90%] text-center">
+              {about?.heroBadges && about.heroBadges.length > 0 && (
+                <div className="flex flex-wrap justify-center gap-4 mb-8">
+                  {about.heroBadges.map((badge, index) => (
+                    <span
+                      key={index}
+                      className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-brand-primary/10 text-brand-primary border border-brand-primary/20"
+                    >
+                      {badge}
+                    </span>
+                  ))}
+                </div>
+              )}
+              <h1 className="heading-hero leading-tight">About {name}</h1>
+              <p className="text-xl text-gray-800 leading-relaxed mx-auto w-full lg:w-[90%] mt-6">
+                {tagline}
+              </p>
             </div>
-
-            <h1 className="heading-hero leading-tight">About Colossus Scaffolding</h1>
-
-            <p className="text-xl text-gray-800 leading-relaxed mx-auto w-full lg:w-[90%]">
-              Professional scaffolding specialists serving the South East UK with TG20:21 compliant
-              solutions, CISRS qualified teams, and comprehensive insurance coverage.
-            </p>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Our Story Section */}
-      <section className="section-standard bg-white">
-        <div className="container-standard">
-          <div className="mx-auto w-full lg:w-[90%]">
-            <h2 className="heading-section mb-8 text-center">Our Story</h2>
+        {/* Our Story Section */}
+        {about?.story && about.story.length > 0 && (
+          <section className="section-standard bg-white">
+            <div className="container-standard">
+              <div className="mx-auto w-full lg:w-[90%]">
+                <h2 className="heading-section mb-8 text-center">Our Story</h2>
+                <div className="max-w-3xl mx-auto prose prose-lg text-gray-800 leading-relaxed">
+                  {about.story.map((paragraph, index) => (
+                    <p key={index} className={index === 0 ? "text-xl mb-6" : "mb-6"}>
+                      {paragraph}
+                    </p>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              {/* Text Content */}
-              <div className="prose prose-lg text-gray-800 leading-relaxed">
-                <p className="text-xl mb-6">
-                  Founded in 2009, Colossus Scaffolding began as a vision to provide professional,
-                  safe, and reliable scaffolding services across the South East UK. What started
-                  with a single van and unwavering commitment to excellence has grown into one of
-                  the region&apos;s most trusted scaffolding contractors.
-                </p>
-
-                <p className="mb-6">
-                  From our registered office in St Leonards On Sea, we&apos;ve built our reputation
-                  project by project, always putting safety first and maintaining the highest
-                  professional standards. Our CISRS qualified teams understand that every scaffold
-                  we erect supports not just buildings, but the livelihoods and safety of the people
-                  who work on them.
-                </p>
-
-                <p>
-                  Today, we&apos;re proud to serve homeowners, contractors, and businesses
-                  throughout East Sussex, West Sussex, Kent, and Surrey. Our commitment to local
-                  service, combined with our expertise in complex projects, makes us the trusted
-                  choice for scaffolding solutions across the South East.
+        {/* Company Info Cards */}
+        <section className="section-standard bg-white">
+          <div className="container-standard">
+            <div className="text-center mb-12">
+              <h2 className="heading-section">Company Information</h2>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mx-auto w-full lg:w-[90%]">
+              <div className="text-center p-6 bg-surface-muted rounded-2xl">
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">Registered Name</h3>
+                <p className="text-gray-700">{business.legalName}</p>
+              </div>
+              <div className="text-center p-6 bg-surface-muted rounded-2xl">
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">Established</h3>
+                <p className="text-2xl font-bold text-brand-primary">
+                  {credentials.yearEstablished}
                 </p>
               </div>
+              <div className="text-center p-6 bg-surface-muted rounded-2xl">
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">Service Coverage</h3>
+                <p className="text-gray-700">{serviceAreas.join(", ")}</p>
+              </div>
+            </div>
+          </div>
+        </section>
 
-              {/* St Leonards On Sea / Hastings area image */}
-              <div className="relative">
-                <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-lg">
-                  <Image
-                    src={getImageUrl("colossus-reference/hero/location/hastings_01.webp")}
-                    alt="St Leonards On Sea seafront - home of Colossus Scaffolding serving the South East UK"
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                  />
-                </div>
-                <div className="absolute -bottom-4 -right-4 bg-white rounded-xl shadow-lg p-4 border border-gray-100">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-brand-primary rounded-full flex items-center justify-center">
-                      <svg
-                        aria-hidden="true"
-                        className="w-5 h-5 text-white"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                        />
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                        />
-                      </svg>
-                    </div>
-                    <div>
-                      <p className="font-semibold text-gray-900">Based in</p>
-                      <p className="text-sm text-gray-600">St Leonards On Sea</p>
+        {/* Stats Section */}
+        {credentials.stats.length > 0 && (
+          <section className="section-standard bg-gradient-to-br from-gray-50 to-gray-100 border-t border-b border-gray-200">
+            <div className="container-standard">
+              <div className="text-center mb-12">
+                <h2 className="heading-section">Our Track Record Speaks for Itself</h2>
+              </div>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                {credentials.stats.map((stat, index) => (
+                  <div key={index} className="text-center">
+                    <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
+                      <div className="text-4xl font-bold text-brand-primary mb-2">{stat.value}</div>
+                      <div className="text-gray-900 font-medium">{stat.label}</div>
+                      {stat.description && (
+                        <div className="text-sm text-gray-700 mt-1">{stat.description}</div>
+                      )}
                     </div>
                   </div>
-                </div>
+                ))}
               </div>
             </div>
-          </div>
-        </div>
-      </section>
+          </section>
+        )}
 
-      {/* Rest of the page remains unchanged - Company Information, Track Record, etc. */}
-      {/* Company Information Section */}
-      <section className="section-standard bg-white">
-        <div className="container-standard">
-          <div className="text-center mb-12">
-            <h2 className="heading-section">Company Information</h2>
-            <p className="text-lg text-gray-800 mx-auto w-full lg:w-[90%]">
-              Professional scaffolding specialists established in 2009, serving the South East UK
-              with integrity and expertise.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mx-auto w-full lg:w-[90%]">
-            <div className="text-center p-6 bg-surface-muted rounded-2xl">
-              <div className="w-16 h-16 bg-brand-primary rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg
-                  aria-hidden="true"
-                  className="w-8 h-8 text-white"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
-                  />
-                </svg>
+        {/* Certifications Section */}
+        {credentials.certifications.length > 0 && (
+          <section className="section-standard bg-white">
+            <div className="container-standard">
+              <div className="text-center mb-12">
+                <h2 className="heading-section">Certifications &amp; Accreditations</h2>
+                <p className="text-lg text-gray-800 mx-auto w-full lg:w-[90%] mt-4">
+                  We maintain the highest industry standards with comprehensive certifications and
+                  accreditations.
+                </p>
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Registered Office</h3>
-              <div className="text-gray-700 space-y-1">
-                <p>Office 7, 15-20 Gresley Road</p>
-                <p>St Leonards On Sea</p>
-                <p>East Sussex TN38 9PL</p>
-              </div>
-            </div>
-
-            <div className="text-center p-6 bg-surface-muted rounded-2xl">
-              <div className="w-16 h-16 bg-brand-primary rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg
-                  aria-hidden="true"
-                  className="w-8 h-8 text-white"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
-              </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Established</h3>
-              <p className="text-2xl font-bold text-brand-primary">2009</p>
-              <p className="text-gray-700">15+ Years Experience</p>
-            </div>
-
-            <div className="text-center p-6 bg-surface-muted rounded-2xl">
-              <div className="w-16 h-16 bg-brand-primary rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg
-                  aria-hidden="true"
-                  className="w-8 h-8 text-white"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                  />
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                  />
-                </svg>
-              </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Service Coverage</h3>
-              <p className="text-gray-700">East & West Sussex</p>
-              <p className="text-gray-700">Kent & Surrey</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Track Record Section */}
-      <section className="section-standard bg-gradient-to-br from-gray-50 to-gray-100 border-t border-b border-gray-200">
-        <div className="container-standard">
-          <div className="text-center mb-12">
-            <h2 className="heading-section">Our Track Record Speaks for Itself</h2>
-            <p className="text-lg text-gray-800 mx-auto w-full lg:w-[90%]">
-              Over 15 years of professional scaffolding services with an unblemished safety record
-              and hundreds of successful projects across the South East.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            <div className="text-center">
-              <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
-                <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mx-auto mb-4">
-                  <svg
-                    aria-hidden="true"
-                    className="w-6 h-6 text-brand-primary"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {credentials.certifications.map((cert, index) => (
+                  <div
+                    key={index}
+                    className="bg-surface-muted rounded-lg p-6 flex items-start gap-4"
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M13 10V3L4 14h7v7l9-11h-7z"
-                    />
-                  </svg>
-                </div>
-                <div className="stat-number">15+</div>
-                <div className="text-gray-900 font-medium">Years Experience</div>
-                <div className="text-sm text-gray-700 mt-1">Serving the South East</div>
+                    <div className="bg-brand-primary/10 rounded-full p-3 flex-shrink-0">
+                      <Award className="w-6 h-6 text-brand-primary" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-gray-900">{cert.name}</h3>
+                      <p className="text-sm text-gray-700">{cert.description}</p>
+                    </div>
+                  </div>
+                ))}
+                {credentials.insurance && (
+                  <div className="bg-surface-muted rounded-lg p-6 flex items-start gap-4">
+                    <div className="bg-green-100 rounded-full p-3 flex-shrink-0">
+                      <Shield className="w-6 h-6 text-green-600" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-gray-900">
+                        {credentials.insurance.amount} Insurance
+                      </h3>
+                      <p className="text-sm text-gray-700">{credentials.insurance.type}</p>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
+          </section>
+        )}
 
-            <div className="text-center">
-              <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
-                <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mx-auto mb-4">
-                  <svg
-                    aria-hidden="true"
-                    className="w-6 h-6 text-brand-primary"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
+        {/* Values Section */}
+        {about?.values && about.values.length > 0 && (
+          <section className="section-standard bg-surface-muted">
+            <div className="container-standard">
+              <div className="text-center mb-12">
+                <h2 className="heading-section">Our Values</h2>
+                <p className="text-lg text-gray-800 mx-auto w-full lg:w-[90%] mt-4">
+                  These core principles guide everything we do, from the smallest residential project
+                  to the largest commercial installation.
+                </p>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                {about.values.map((value, index) => (
+                  <div key={index} className="text-center">
+                    <div className="w-16 h-16 bg-brand-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                      <Award className="w-8 h-8 text-white" />
+                    </div>
+                    <h3 className="text-xl font-semibold text-gray-900 mb-3">{value.title}</h3>
+                    <p className="text-gray-800">{value.description}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* Why Choose Us Section */}
+        {about?.whyChooseUs && about.whyChooseUs.length > 0 && (
+          <section className="section-standard bg-white">
+            <div className="container-standard">
+              <div className="text-center mb-12">
+                <h2 className="heading-section">Why Choose {name}?</h2>
+                <p className="text-lg text-gray-800 mx-auto w-full lg:w-[90%] mt-4">
+                  From small residential projects to complex commercial installations, here&apos;s
+                  what sets us apart.
+                </p>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mx-auto w-full lg:w-[90%]">
+                {about.whyChooseUs.map((benefit, index) => (
+                  <div
+                    key={index}
+                    className="flex items-start gap-3 p-4 bg-surface-muted rounded-lg"
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
-                    />
-                  </svg>
-                </div>
-                <div className="stat-number">500+</div>
-                <div className="text-gray-900 font-medium">Projects Completed</div>
-                <div className="text-sm text-gray-700 mt-1">Successful Installations</div>
+                    <div className="flex-shrink-0 w-6 h-6 bg-brand-primary rounded-full flex items-center justify-center mt-0.5">
+                      <CheckCircle className="h-4 w-4 text-white" />
+                    </div>
+                    <span className="text-gray-900 font-medium">{benefit}</span>
+                  </div>
+                ))}
               </div>
             </div>
+          </section>
+        )}
 
-            <div className="text-center">
-              <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
-                <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mx-auto mb-4">
-                  <svg
-                    aria-hidden="true"
-                    className="w-6 h-6 text-brand-primary"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
-                </div>
-                <div className="stat-number">100%</div>
-                <div className="text-gray-900 font-medium">CISRS Qualified</div>
-                <div className="text-sm text-gray-700 mt-1">All Scaffolding Teams</div>
-              </div>
-            </div>
-
-            <div className="text-center">
-              <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
-                <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mx-auto mb-4">
-                  <svg
-                    aria-hidden="true"
-                    className="w-6 h-6 text-brand-primary"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
-                </div>
-                <div className="stat-number">24/7</div>
-                <div className="text-gray-900 font-medium">Emergency Response</div>
-                <div className="text-sm text-gray-700 mt-1">Available When Needed</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Certifications & Accreditations Section */}
-      <section className="section-standard bg-white">
-        <div className="container-standard">
-          <div className="text-center mb-12">
-            <h2 className="heading-section">Certifications & Accreditations</h2>
-            <p className="text-lg text-gray-800 mx-auto w-full lg:w-[90%]">
-              We maintain the highest industry standards with comprehensive certifications and
-              accreditations that demonstrate our commitment to safety and professionalism.
+        {/* CTA Section */}
+        <section className="section-standard bg-brand-primary text-white">
+          <div className="container-standard text-center">
+            <h2 className="text-3xl sm:text-4xl font-bold mb-6">
+              Ready to Work with {name}?
+            </h2>
+            <p className="text-xl mb-8 mx-auto w-full lg:w-[90%] opacity-90 leading-relaxed">
+              Get your free quote today and experience the professional difference that{" "}
+              {credentials.yearEstablished
+                ? `${new Date().getFullYear() - parseInt(credentials.yearEstablished)}+ years of`
+                : "our"}{" "}
+              expertise brings to your project.
             </p>
-          </div>
-
-          <AccreditationSection />
-        </div>
-      </section>
-
-      {/* Our Values Section */}
-      <section className="section-standard bg-surface-muted">
-        <div className="container-standard">
-          <div className="text-center mb-12">
-            <h2 className="heading-section">Our Values</h2>
-            <p className="text-lg text-gray-800 mx-auto w-full lg:w-[90%]">
-              These core principles guide everything we do, from the smallest residential project to
-              the largest commercial installation.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="text-center">
-              <div className="w-16 h-16 bg-brand-primary rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg
-                  aria-hidden="true"
-                  className="w-8 h-8 text-white"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
-                  />
-                </svg>
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">Safety First</h3>
-              <p className="text-gray-800">
-                Every scaffold designed and erected to TG20:21 standards with regular safety
-                inspections and comprehensive risk assessments.
-              </p>
-            </div>
-
-            <div className="text-center">
-              <div className="w-16 h-16 bg-brand-primary rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg
-                  aria-hidden="true"
-                  className="w-8 h-8 text-white"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
-                  />
-                </svg>
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">Professional Excellence</h3>
-              <p className="text-gray-800">
-                CISRS qualified teams delivering professional installations with attention to detail
-                and commitment to quality craftsmanship.
-              </p>
-            </div>
-
-            <div className="text-center">
-              <div className="w-16 h-16 bg-brand-primary rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg
-                  aria-hidden="true"
-                  className="w-8 h-8 text-white"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">Reliable Service</h3>
-              <p className="text-gray-800">
-                On-time installations, clear communication, and 24/7 emergency response when you
-                need us most across the South East.
-              </p>
-            </div>
-
-            <div className="text-center">
-              <div className="w-16 h-16 bg-brand-primary rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg
-                  aria-hidden="true"
-                  className="w-8 h-8 text-white"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                  />
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                  />
-                </svg>
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">Local Expertise</h3>
-              <p className="text-gray-800">
-                Deep understanding of local regulations, planning requirements, and building styles
-                across our South East service areas.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Why Choose Us Section */}
-      <section className="section-standard bg-white">
-        <div className="container-standard">
-          <div className="text-center mb-12">
-            <h2 className="heading-section">Why Choose Colossus Scaffolding?</h2>
-            <p className="text-lg text-gray-800 mx-auto w-full lg:w-[90%]">
-              From small residential projects to complex commercial installations, here&apos;s what
-              sets us apart in the scaffolding industry.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mx-auto w-full lg:w-[90%]">
-            {[
-              "TG20:21 compliant design and installation on every project",
-              "CISRS qualified and experienced scaffolding professionals",
-              "£10 million public liability insurance for complete protection",
-              "CHAS accredited with proven health and safety record",
-              "Free site surveys and detailed quotations provided",
-              "Rapid response times across South East England",
-              "Complete handover certificates and documentation",
-              "Regular safety inspections and maintenance included",
-              "Emergency callout service available 24/7",
-              "Local expertise with regional planning knowledge",
-            ].map((benefit, i) => (
-              <div key={i} className="flex items-start gap-3 p-4 bg-surface-muted rounded-lg">
-                <div className="flex-shrink-0 w-6 h-6 bg-brand-primary rounded-full flex items-center justify-center mt-0.5">
-                  <svg
-                    aria-hidden="true"
-                    className="h-4 w-4 text-white"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M5 13l4 4L19 7"
-                    />
-                  </svg>
-                </div>
-                <span className="text-gray-900 font-medium">{benefit}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="section-standard bg-brand-primary text-white">
-        <div className="container-standard text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold mb-6">
-            Ready to Work with the South East&apos;s Trusted Scaffolding Specialists?
-          </h2>
-          <p className="text-xl mb-8 mx-auto w-full lg:w-[90%] opacity-90 leading-relaxed">
-            Get your free quote today and experience the professional difference that 15+ years of
-            expertise brings to your project.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="/contact"
-              className="inline-flex items-center justify-center px-8 py-4 bg-white text-brand-primary font-semibold rounded-lg hover:bg-gray-200 transition-colors"
-            >
-              Get Free Quote
-            </Link>
-            <Link
-              href={`tel:${PHONE_TEL}`}
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-white text-white font-semibold rounded-lg hover:bg-white hover:text-brand-primary transition-colors"
-            >
-              <svg
-                aria-hidden="true"
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link
+                href="/contact"
+                className="inline-flex items-center justify-center px-8 py-4 bg-white text-brand-primary font-semibold rounded-lg hover:bg-gray-200 transition-colors"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-                />
-              </svg>
-              Call: {PHONE_DISPLAY}
-            </Link>
+                Get Free Quote
+              </Link>
+              <Link
+                href={`tel:${PHONE_TEL}`}
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-white text-white font-semibold rounded-lg hover:bg-white hover:text-brand-primary transition-colors"
+              >
+                <Phone className="h-5 w-5" />
+                Call: {PHONE_DISPLAY}
+              </Link>
+            </div>
           </div>
-        </div>
-      </section>
-    </div>
+        </section>
+      </main>
+
+      {/* Schema Markup */}
+      <Schema
+        org={{
+          name: business.name,
+          url: "/",
+          logo: "/logo.svg",
+        }}
+        breadcrumbs={[
+          { name: "Home", url: "/" },
+          { name: "About", url: "/about" },
+        ]}
+        webpage={{
+          "@type": "AboutPage",
+          "@id": absUrl("/about#aboutpage"),
+          url: absUrl("/about"),
+          name: `About ${business.name}`,
+          description: `Learn about ${business.name} — professional services since ${credentials.yearEstablished}.`,
+        }}
+      />
+    </>
   );
 }

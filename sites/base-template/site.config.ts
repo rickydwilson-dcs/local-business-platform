@@ -142,6 +142,21 @@ export interface SiteConfig extends BaseSiteConfig {
     testimonials: boolean;
     blog: boolean;
   };
+
+  /** Optional rich about page content */
+  about?: {
+    /** Short badges/tags shown in the hero (e.g. "Est. 2009", "Family Business") */
+    heroBadges?: string[];
+    /** Company founding narrative — each string is a paragraph */
+    story?: string[];
+    /** Why-choose-us bullet points */
+    whyChooseUs?: string[];
+    /** Company values shown as a card grid */
+    values?: Array<{
+      title: string;
+      description: string;
+    }>;
+  };
 }
 
 export const siteConfig: SiteConfig = {
@@ -261,5 +276,46 @@ export const siteConfig: SiteConfig = {
     rateLimit: true,
     testimonials: true,
     blog: false,
+  },
+
+  about: {
+    heroBadges: ['Est. 2020', 'Local Experts', 'Fully Insured'],
+    story: [
+      'Founded in 2020, Your Business Name was built on a simple promise: deliver professional, reliable service that our customers can count on every time.',
+      'From our base in City Name, we serve residential and commercial clients across Main Area, North Region, and South Region. Every project, large or small, receives the same dedication to quality.',
+      'Today we are proud to be a trusted local business — known for honest pricing, skilled workmanship, and the kind of service that earns referrals from neighbours and friends.',
+    ],
+    whyChooseUs: [
+      'Fully insured with comprehensive public liability cover',
+      'Free quotes and consultations',
+      'Competitive, transparent pricing',
+      'Quality workmanship guaranteed',
+      'Professional, uniformed team',
+      'Clear communication throughout',
+      'Flexible scheduling to suit you',
+      'Comprehensive aftercare and support',
+    ],
+    values: [
+      {
+        title: 'Quality First',
+        description:
+          'We maintain the highest standards in everything we do, ensuring exceptional results for every project.',
+      },
+      {
+        title: 'Professional Excellence',
+        description:
+          'Our team is fully qualified and continuously trained to deliver professional service.',
+      },
+      {
+        title: 'Reliable Service',
+        description:
+          'We arrive on time, complete projects efficiently, and communicate clearly throughout.',
+      },
+      {
+        title: 'Customer Focus',
+        description:
+          'Your satisfaction is our priority. We listen to your needs and deliver tailored solutions.',
+      },
+    ],
   },
 };

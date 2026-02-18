@@ -3,17 +3,18 @@ import { absUrl } from "@/lib/site";
 import { Metadata } from "next";
 import { Breadcrumbs } from "@platform/core-components";
 import { PHONE_DISPLAY, BUSINESS_EMAIL, ADDRESS } from "@/lib/contact-info";
+import { siteConfig } from "@/site.config";
 
 export const metadata: Metadata = {
   title: "Cookie Policy",
   description:
-    "Learn about how Colossus Scaffolding uses cookies on our website. Comprehensive cookie policy covering analytics, marketing, and functional cookies with clear management instructions.",
+    `Learn about how ${siteConfig.business.name} uses cookies on our website. Comprehensive cookie policy covering analytics, marketing, and functional cookies with clear management instructions.`,
   openGraph: {
     title: "Cookie Policy",
     description:
-      "Comprehensive cookie policy for Colossus Scaffolding website. Learn about our use of analytics, marketing, and functional cookies.",
+      `Comprehensive cookie policy for ${siteConfig.business.name} website. Learn about our use of analytics, marketing, and functional cookies.`,
     url: absUrl("/cookie-policy"),
-    siteName: "Colossus Scaffolding",
+    siteName: siteConfig.business.name,
     locale: "en_GB",
     type: "website",
   },
@@ -84,7 +85,7 @@ export default function CookiePolicyPage() {
               {/* Introduction */}
               <section className="mb-12">
                 <p className="text-xl text-gray-700 leading-relaxed">
-                  This Cookie Policy explains how Colossus Scaffolding (&quot;we&quot;,
+                  This Cookie Policy explains how {siteConfig.business.name} (&quot;we&quot;,
                   &quot;us&quot;, or &quot;our&quot;) uses cookies and similar tracking technologies
                   on our website. We are committed to transparency about how we collect and use your
                   information.
@@ -457,7 +458,7 @@ export default function CookiePolicyPage() {
                     <div>
                       <h4 className="font-semibold mb-2">Data Controller</h4>
                       <div className="text-gray-700 space-y-1">
-                        <p>Colossus Scaffolding</p>
+                        <p>{siteConfig.business.name}</p>
                         <p>{ADDRESS.street}</p>
                         <p>{ADDRESS.locality}</p>
                         <p>

@@ -16,6 +16,7 @@ import { absUrl } from "@/lib/site";
 import { getAreaServed } from "@platform/core-components/lib/location-utils";
 import { getImageUrl } from "@/lib/image";
 import { loadMdx } from "@/lib/mdx";
+import { siteConfig } from "@/site.config";
 
 export const dynamic = "force-static";
 export const dynamicParams = false;
@@ -178,7 +179,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
       title: optimizedTitle,
       description: optimizedDescription,
       url: absUrl(canonicalUrl),
-      siteName: "Colossus Scaffolding",
+      siteName: siteConfig.business.name,
       images: serviceData.heroImage
         ? [
             {
@@ -190,10 +191,10 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
           ]
         : [
             {
-              url: absUrl("/static/logo.png"),
+              url: absUrl("/logo.svg"),
               width: 1200,
               height: 630,
-              alt: `${serviceName} - Colossus Scaffolding`,
+              alt: `${serviceName} - ${siteConfig.business.name}`,
             },
           ],
       locale: "en_GB",
@@ -205,7 +206,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
       description: optimizedDescription,
       images: serviceData.heroImage
         ? [getImageUrl(serviceData.heroImage)]
-        : [absUrl("/static/logo.png")],
+        : [absUrl("/logo.svg")],
     },
     alternates: {
       canonical: absUrl(canonicalUrl),
@@ -311,9 +312,9 @@ export default async function Page({ params }: { params: Promise<Params> }) {
           areaServed: getAreaServed(location),
         }}
         org={{
-          name: "Colossus Scaffolding",
+          name: siteConfig.business.name,
           url: "/",
-          logo: "/Colossus-Scaffolding-Logo.svg",
+          logo: "/logo.svg",
         }}
         breadcrumbs={[
           { name: "Home", url: "/" },

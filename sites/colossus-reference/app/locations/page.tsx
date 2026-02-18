@@ -12,6 +12,7 @@ import {
 import { TownFinderSection } from "@platform/core-components/components/ui/town-finder-section";
 import { CountyGatewayCards } from "@platform/core-components/components/ui/county-gateway-cards";
 import { PHONE_DISPLAY, PHONE_TEL } from "@/lib/contact-info";
+import { siteConfig } from "@/site.config";
 
 export const dynamic = "force-static";
 
@@ -24,13 +25,13 @@ export const metadata: Metadata = {
     description:
       "From Brighton's seafront heritage to Canterbury's World Heritage sites, we provide expert scaffolding with genuine local knowledge and established council relationships.",
     url: absUrl("/locations"),
-    siteName: "Colossus Scaffolding",
+    siteName: siteConfig.business.name,
     images: [
       {
-        url: absUrl("/static/logo.png"),
+        url: absUrl("/logo.svg"),
         width: 1200,
         height: 630,
-        alt: "Colossus Scaffolding - Professional Scaffolding Across South East England",
+        alt: `${siteConfig.business.name} - Professional Scaffolding Across South East England`,
       },
     ],
     locale: "en_GB",
@@ -41,7 +42,7 @@ export const metadata: Metadata = {
     title: "Scaffolding Across South East | 30+ Towns",
     description:
       "Local scaffolding specialists with heritage expertise and council relationships across the South East.",
-    images: [absUrl("/static/logo.png")],
+    images: [absUrl("/logo.svg")],
   },
   alternates: {
     canonical: absUrl("/locations"),
@@ -58,9 +59,9 @@ export default async function LocationsPage() {
     "@context": "https://schema.org",
     "@type": "Organization",
     "@id": absUrl("/locations#organization"),
-    name: "Colossus Scaffolding",
+    name: siteConfig.business.name,
     url: absUrl("/"),
-    logo: absUrl("/static/logo.png"),
+    logo: absUrl("/logo.svg"),
     description:
       "Professional scaffolding specialists serving 30+ towns across South East England with local expertise and heritage building specialists.",
     areaServed: counties.map((county) => ({
