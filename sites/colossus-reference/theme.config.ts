@@ -1,4 +1,5 @@
 import type { DeepPartialThemeConfig } from "@platform/theme-system";
+import { vegaRegistry } from "@platform/themes/vega";
 
 /**
  * Colossus Scaffolding Theme Configuration
@@ -7,6 +8,8 @@ import type { DeepPartialThemeConfig } from "@platform/theme-system";
  * Uses the theme system for consistent CSS variable generation.
  */
 export const themeConfig: DeepPartialThemeConfig = {
+  componentRegistry: vegaRegistry,
+
   colors: {
     brand: {
       primary: "#005A9E", // Colossus brand blue

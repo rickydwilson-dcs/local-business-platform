@@ -2,7 +2,559 @@
  * Orion Theme — Global CSS Utilities
  *
  * Theme-level utility classes shared by all Orion sites.
- * Imported in each Orion site's app/globals.css.
+ * Import this file at the top of your site's app/globals.css:
  *
- * Placeholder — populated in Step 4 when CSS migration runs.
+ *   @import "../../packages/themes/orion/globals.css";
+ *   @tailwind base;
+ *   @tailwind components;
+ *   @tailwind utilities;
+ *
+ * Orion visual identity: dark header, full-bleed hero, red brand accent,
+ * circular icon cards, dark stat cards, black CTA sections.
  */
+
+@layer components {
+  /* ==========================================
+     BUTTONS
+     ========================================== */
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-lg;
+    @apply bg-brand-primary text-white font-semibold;
+    @apply hover:bg-brand-primary-hover transition-all duration-200;
+    @apply focus:ring-2 focus:ring-brand-primary focus:ring-offset-2;
+    @apply shadow-sm hover:shadow-md;
+  }
+
+  .btn-primary-lg {
+    @apply inline-flex items-center justify-center px-8 py-4 rounded-lg;
+    @apply bg-brand-primary text-white font-semibold text-lg;
+    @apply hover:bg-brand-primary-hover transition-all duration-200;
+    @apply focus:ring-2 focus:ring-brand-primary focus:ring-offset-2;
+    @apply shadow-md hover:shadow-lg;
+  }
+
+  /* White background, brand-coloured border and text */
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-lg;
+    @apply bg-white text-brand-primary border-2 border-brand-primary font-semibold;
+    @apply hover:bg-brand-primary hover:text-white transition-all duration-200;
+    @apply focus:ring-2 focus:ring-brand-primary focus:ring-offset-2;
+  }
+
+  /* Black background, brand-coloured border, white text — Orion-specific */
+  .btn-tertiary {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-lg;
+    @apply bg-black text-white border-2 border-brand-primary font-semibold;
+    @apply hover:bg-brand-primary transition-all duration-200;
+    @apply focus:ring-2 focus:ring-brand-primary focus:ring-offset-2;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-lg;
+    @apply bg-gray-100 text-gray-900 font-semibold;
+    @apply hover:bg-gray-200 transition-all duration-200;
+    @apply focus:ring-2 focus:ring-gray-300 focus:ring-offset-2;
+  }
+
+  /* ==========================================
+     ACCENT UNDERLINES — Orion-specific
+     ========================================== */
+
+  .accent-underline {
+    text-decoration: underline;
+    text-decoration-color: theme('colors.brand.primary');
+    text-decoration-thickness: 4px;
+    text-underline-offset: 8px;
+  }
+
+  .accent-underline-hover {
+    position: relative;
+    display: inline-block;
+  }
+
+  .accent-underline-hover::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 0;
+    height: 4px;
+    background-color: theme('colors.brand.primary');
+    transition: width 0.3s ease-in-out;
+  }
+
+  .accent-underline-hover:hover::after {
+    width: 100%;
+  }
+
+  /* ==========================================
+     CARDS
+     ========================================== */
+
+  .card {
+    @apply bg-white border border-gray-200 rounded-xl p-6;
+    @apply shadow-sm hover:shadow-md transition-shadow;
+  }
+
+  /* Interactive card with dramatic lift — Orion variant */
+  .card-interactive {
+    @apply relative bg-white rounded-2xl shadow-sm border border-gray-200 p-8;
+    @apply hover:shadow-xl hover:-translate-y-2 transition-all duration-300;
+  }
+
+  .card-hover-accent {
+    @apply relative bg-white rounded-2xl shadow-sm border border-gray-200 p-8;
+    @apply hover:shadow-xl hover:-translate-y-2 hover:border-brand-primary;
+    @apply transition-all duration-300;
+  }
+
+  .card-simple {
+    @apply bg-white rounded-xl border border-gray-200 p-6 shadow-sm;
+  }
+
+  .card-dark {
+    @apply bg-gray-900 border border-gray-800 rounded-xl p-6;
+    @apply shadow-sm hover:shadow-md transition-shadow;
+  }
+
+  /* ==========================================
+     CIRCULAR ICON CONTAINERS — Orion-specific
+     ========================================== */
+
+  .icon-circle-lg {
+    @apply w-24 h-24 rounded-full flex items-center justify-center;
+    @apply bg-brand-primary text-white;
+    @apply shadow-md hover:shadow-lg transition-shadow duration-300;
+  }
+
+  .icon-circle-md {
+    @apply w-16 h-16 rounded-full flex items-center justify-center;
+    @apply bg-brand-primary text-white;
+    @apply shadow-md hover:shadow-lg transition-shadow duration-300;
+  }
+
+  .icon-circle-sm {
+    @apply w-12 h-12 rounded-full flex items-center justify-center;
+    @apply bg-brand-primary text-white;
+    @apply shadow-sm hover:shadow-md transition-shadow duration-300;
+  }
+
+  /* ==========================================
+     IMAGE OVERLAYS — Orion-specific
+     ========================================== */
+
+  .image-overlay-dark {
+    @apply relative;
+  }
+
+  .image-overlay-dark::after {
+    content: '';
+    @apply absolute inset-0;
+    background: linear-gradient(
+      to top,
+      var(--color-overlay-dark) 0%,
+      color-mix(in srgb, var(--color-overlay-dark) 50%, transparent) 50%,
+      transparent 100%
+    );
+  }
+
+  .image-overlay-red-hover {
+    @apply relative overflow-hidden;
+  }
+
+  .image-overlay-red-hover::after {
+    content: '';
+    @apply absolute inset-0 bg-brand-primary opacity-0;
+    @apply transition-opacity duration-300;
+  }
+
+  .image-overlay-red-hover:hover::after {
+    @apply opacity-80;
+  }
+
+  .image-overlay-content {
+    @apply relative z-10;
+  }
+
+  /* ==========================================
+     DARK SECTIONS — Orion-specific
+     ========================================== */
+
+  .section-dark {
+    @apply bg-gray-900 text-white;
+  }
+
+  .section-dark h1,
+  .section-dark h2,
+  .section-dark h3,
+  .section-dark h4 {
+    @apply text-white;
+  }
+
+  .section-dark p {
+    @apply text-gray-300;
+  }
+
+  /* Black background with brand-colour accents — Orion CTA sections */
+  .section-dark-accent {
+    @apply bg-black text-white py-20 md:py-28;
+  }
+
+  .section-dark-accent h1,
+  .section-dark-accent h2,
+  .section-dark-accent h3 {
+    @apply text-white;
+  }
+
+  .section-dark-accent .accent {
+    @apply text-brand-primary;
+  }
+
+  /* ==========================================
+     SECTIONS
+     ========================================== */
+
+  .section {
+    @apply py-16 md:py-24;
+  }
+
+  .section-standard {
+    @apply py-16 sm:py-20;
+  }
+
+  .section-compact {
+    @apply py-12 sm:py-16;
+  }
+
+  .section-header {
+    @apply text-center mb-12 sm:mb-16;
+  }
+
+  /* ==========================================
+     CONTAINERS
+     ========================================== */
+
+  .container-narrow {
+    @apply max-w-4xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .container-standard {
+    @apply mx-auto w-full lg:w-[90%] px-6;
+  }
+
+  /* ==========================================
+     GRID SYSTEM
+     ========================================== */
+
+  .grid-responsive {
+    @apply grid gap-6 lg:gap-8;
+  }
+
+  .grid-services {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8;
+  }
+
+  .grid-features {
+    @apply grid grid-cols-1 md:grid-cols-2 gap-8;
+  }
+
+  /* ==========================================
+     TYPOGRAPHY
+     ========================================== */
+
+  .heading-hero {
+    @apply text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6;
+  }
+
+  .heading-section {
+    @apply text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4;
+  }
+
+  .heading-subsection {
+    @apply text-3xl font-bold text-gray-900 mb-4;
+  }
+
+  .heading-card {
+    @apply text-xl sm:text-2xl font-bold text-gray-900 mb-4;
+  }
+
+  .heading-card-sm {
+    @apply text-lg font-bold text-gray-900 mb-1;
+  }
+
+  .stat-number {
+    @apply text-4xl font-extrabold text-gray-900 mb-3 tracking-tight;
+  }
+
+  .text-subtitle {
+    @apply text-lg sm:text-xl text-gray-800;
+  }
+
+  .text-body-lg {
+    @apply text-lg text-gray-800 leading-relaxed;
+  }
+
+  /* ==========================================
+     STATS — Orion-specific
+     ========================================== */
+
+  .stat-card-accent {
+    @apply relative bg-white rounded-xl p-6 shadow-sm;
+    @apply border-l-4 border-brand-primary;
+  }
+
+  .stat-card-dark {
+    @apply relative bg-gray-900 rounded-xl p-6 shadow-md;
+    @apply border-l-4 border-brand-primary;
+  }
+
+  .stat-card-dark .stat-number {
+    @apply text-white;
+  }
+
+  .stat-card-dark p {
+    @apply text-gray-300;
+  }
+
+  /* ==========================================
+     MOBILE MENU SYSTEM
+     ========================================== */
+
+  .mobile-menu-toggle {
+    @apply lg:hidden p-2 rounded-md hover:bg-gray-200 transition-colors;
+    @apply focus:outline-none focus:ring-2 focus:ring-brand-primary;
+  }
+
+  .mobile-menu-icon {
+    @apply w-6 h-6 flex flex-col justify-center space-y-1;
+  }
+
+  .mobile-menu-line {
+    @apply block h-0.5 w-6 bg-slate-700 transition-transform duration-300 ease-in-out;
+  }
+
+  .mobile-menu-line.top-open {
+    @apply rotate-45 translate-y-1.5;
+  }
+
+  .mobile-menu-line.middle-open {
+    @apply opacity-0;
+  }
+
+  .mobile-menu-line.bottom-open {
+    @apply -rotate-45 -translate-y-1.5;
+  }
+
+  .mobile-menu-overlay {
+    @apply fixed inset-0 bg-white z-50 transition-transform duration-300 ease-in-out lg:hidden flex flex-col;
+  }
+
+  .mobile-menu-overlay.closed {
+    @apply translate-x-full;
+  }
+
+  .mobile-menu-overlay.open {
+    @apply translate-x-0;
+  }
+
+  .mobile-menu-header {
+    @apply flex items-center justify-between p-6 border-b border-gray-100;
+  }
+
+  .mobile-menu-close {
+    @apply p-2 rounded-lg border-2 border-brand-primary text-brand-primary;
+    @apply hover:bg-brand-primary hover:text-white transition-colors focus:outline-none;
+  }
+
+  .mobile-menu-nav {
+    @apply flex flex-col px-6 py-12 space-y-8 flex-1 overflow-y-auto;
+  }
+
+  .mobile-menu-link {
+    @apply block text-xl font-medium text-slate-800 hover:text-brand-primary transition-colors py-4 text-center;
+  }
+
+  .mobile-menu-bottom {
+    @apply p-6 space-y-6 flex-shrink-0;
+  }
+
+  .mobile-menu-phone {
+    @apply text-center;
+  }
+
+  .mobile-menu-phone-container {
+    @apply flex items-center justify-center gap-3 mb-2;
+  }
+
+  .mobile-menu-phone-link {
+    @apply text-2xl font-bold text-slate-800 hover:text-brand-primary transition-colors;
+  }
+
+  .mobile-menu-phone-text {
+    @apply text-lg text-slate-600;
+  }
+
+  .mobile-menu-cta {
+    @apply block w-full bg-brand-primary text-white text-center py-4 px-6 rounded-lg;
+    @apply hover:bg-brand-primary-hover transition-colors font-bold text-lg;
+  }
+
+  .mobile-menu-locations {
+    @apply w-full;
+  }
+
+  .mobile-menu-locations-content {
+    @apply mt-4 space-y-6 pl-4 border-l-2 border-gray-200;
+  }
+
+  .mobile-menu-county {
+    @apply space-y-3;
+  }
+
+  .mobile-menu-county-link {
+    @apply block text-lg font-semibold text-brand-primary hover:text-brand-primary-hover transition-colors;
+  }
+
+  .mobile-menu-towns {
+    @apply space-y-2 pl-4;
+  }
+
+  .mobile-menu-town-link {
+    @apply block text-base text-slate-600 hover:text-slate-800 transition-colors py-1;
+  }
+
+  .mobile-menu-town-link.rich-content {
+    @apply text-slate-800 font-medium;
+  }
+
+  .mobile-menu-town-link .rich-indicator {
+    @apply inline-block w-1.5 h-1.5 bg-brand-primary rounded-full ml-2;
+  }
+
+  /* ==========================================
+     LIGHTBOX SYSTEM
+     ========================================== */
+
+  .lightbox-overlay {
+    @apply fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4 sm:p-6 animate-fade-in;
+  }
+
+  .lightbox-content {
+    @apply relative w-full max-w-6xl max-h-[95vh] bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col animate-scale-in;
+  }
+
+  .lightbox-header {
+    @apply flex items-center justify-between p-4 sm:p-6 border-b border-gray-200 flex-shrink-0 bg-white;
+  }
+
+  .lightbox-header-title {
+    @apply flex-1 mr-4;
+  }
+
+  .lightbox-title {
+    @apply text-xl sm:text-2xl font-bold text-gray-900 mb-1;
+  }
+
+  .lightbox-position {
+    @apply text-sm text-gray-600 font-medium;
+  }
+
+  .lightbox-close-button {
+    @apply flex-shrink-0 p-2 rounded-lg border-2 border-gray-300 text-gray-700;
+    @apply hover:bg-gray-100 hover:border-gray-400 transition-all duration-200;
+    @apply focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2;
+  }
+
+  .lightbox-zoom-button {
+    @apply p-2 rounded-lg border border-gray-300 text-gray-700;
+    @apply hover:bg-gray-100 hover:border-gray-400 transition-all duration-200;
+    @apply focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2;
+    @apply disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:border-gray-300;
+  }
+
+  .lightbox-image-container {
+    @apply relative flex-1 overflow-hidden bg-gray-100 flex items-center justify-center p-4 sm:p-8 select-none;
+  }
+
+  .lightbox-image-wrapper {
+    @apply relative w-full max-w-4xl mx-auto;
+    min-height: 400px;
+    height: 60vh;
+    max-height: 600px;
+  }
+
+  .lightbox-image {
+    @apply object-contain;
+  }
+
+  .lightbox-nav-button {
+    @apply absolute top-1/2 -translate-y-1/2 p-3 sm:p-4;
+    @apply bg-white bg-opacity-90 hover:bg-opacity-100 rounded-full shadow-lg;
+    @apply transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2;
+    @apply text-gray-900 hover:scale-110 z-10;
+  }
+
+  .lightbox-nav-button-left {
+    @apply left-2 sm:left-4;
+  }
+
+  .lightbox-nav-button-right {
+    @apply right-2 sm:right-4;
+  }
+
+  .lightbox-description {
+    @apply p-4 sm:p-6 border-t border-gray-200 bg-gray-50 flex-shrink-0;
+  }
+
+  .lightbox-description p {
+    @apply text-base text-gray-700 text-center;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .checkmark-red {
+    @apply text-brand-primary;
+  }
+}
+
+/* ==========================================
+   ANIMATIONS
+   ========================================== */
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.2s ease-out;
+}
+
+.animate-scale-in {
+  animation: scale-in 0.2s ease-out;
+}
+
+/* Ensure consistent h1 font-size in semantic sectioning elements (Lighthouse) */
+article h1,
+aside h1,
+nav h1,
+section h1 {
+  font-size: 2rem;
+  line-height: 1.2;
+}
