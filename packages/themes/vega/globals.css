@@ -13,10 +13,9 @@
  * clean typography, minimal decoration.
  */
 
-@layer components {
-  /* ==========================================
-     BUTTONS
-     ========================================== */
+/* ==========================================
+   BUTTONS
+   ========================================== */
 
   .btn-primary {
     @apply inline-flex items-center justify-center px-6 py-3 rounded-lg;
@@ -343,12 +342,9 @@
   .lightbox-description p {
     @apply text-base text-gray-700 text-center;
   }
-}
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+.text-balance {
+  text-wrap: balance;
 }
 
 /* ==========================================

@@ -13,10 +13,9 @@
  * circular icon cards, dark stat cards, black CTA sections.
  */
 
-@layer components {
-  /* ==========================================
-     BUTTONS
-     ========================================== */
+/* ==========================================
+   BUTTONS
+   ========================================== */
 
   .btn-primary {
     @apply inline-flex items-center justify-center px-6 py-3 rounded-lg;
@@ -510,16 +509,13 @@
   .lightbox-description p {
     @apply text-base text-gray-700 text-center;
   }
+
+.text-balance {
+  text-wrap: balance;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-
-  .checkmark-red {
-    @apply text-brand-primary;
-  }
+.checkmark-red {
+  @apply text-brand-primary;
 }
 
 /* ==========================================
