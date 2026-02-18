@@ -11,23 +11,24 @@ import { Schema, Breadcrumbs } from "@platform/core-components";
 import { absUrl } from "@/lib/site";
 import { PHONE_DISPLAY, PHONE_TEL, BUSINESS_EMAIL } from "@/lib/contact-info";
 import { ContactForm } from "@/components/ui/ContactForm";
+import { siteConfig } from "@/site.config";
 
 export const metadata: Metadata = {
-  title: "Contact Colossus Scaffolding | Free Quote",
+  title: `Contact ${siteConfig.business.name} | Free Quote`,
   description:
-    "Get a free scaffolding quote from Colossus Scaffolding. Professional scaffolding services across South East UK. TG20:21 compliant, fully insured, CHAS accredited.",
+    `Get a free scaffolding quote from ${siteConfig.business.name}. Professional scaffolding services across South East UK. TG20:21 compliant, fully insured, CHAS accredited.`,
   openGraph: {
-    title: "Contact Colossus Scaffolding | Get a Free Quote",
+    title: `Contact ${siteConfig.business.name} | Get a Free Quote`,
     description:
       "Get in touch for scaffolding quotes, site surveys, and general enquiries across the South East UK.",
     url: absUrl("/contact"),
-    siteName: "Colossus Scaffolding",
+    siteName: siteConfig.business.name,
     locale: "en_GB",
     type: "website",
   },
   twitter: {
     card: "summary",
-    title: "Contact Colossus Scaffolding | Get a Free Quote",
+    title: `Contact ${siteConfig.business.name} | Get a Free Quote`,
     description:
       "Get in touch for scaffolding quotes, site surveys, and general enquiries across the South East UK.",
   },
@@ -51,7 +52,7 @@ export default function ContactPage() {
       <div className="container mx-auto px-4 py-10">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Contact Colossus Scaffolding</h1>
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">Contact {siteConfig.business.name}</h1>
           <p className="text-xl text-gray-800 mx-auto w-full lg:w-[90%]">
             Get a free quote today. Professional scaffolding services across the South East UK.
             TG20:21 compliant, fully insured, and CHAS accredited.
@@ -111,9 +112,9 @@ export default function ContactPage() {
                   <div>
                     <h3 className="font-semibold text-gray-900 mb-2">Registered Office</h3>
                     <div className="text-gray-700 space-y-1">
-                      <p>Office 7, 15-20 Gresley Road</p>
-                      <p>St Leonards On Sea</p>
-                      <p>East Sussex TN38 9PL</p>
+                      <p>{siteConfig.business.address.street}</p>
+                      <p>{siteConfig.business.address.city}</p>
+                      <p>{siteConfig.business.address.region} {siteConfig.business.address.postalCode}</p>
                     </div>
                   </div>
                 </div>
@@ -172,16 +173,16 @@ export default function ContactPage() {
         service={{
           id: "/contact#service",
           url: "/contact",
-          name: "Contact Colossus Scaffolding",
+          name: `Contact ${siteConfig.business.name}`,
           description:
             "Get in touch for scaffolding quotes, site surveys, and general enquiries across the South East UK.",
           serviceType: "Contact",
           areaServed: ["South East UK", "East Sussex", "West Sussex", "Kent", "Surrey"],
         }}
         org={{
-          name: "Colossus Scaffolding",
+          name: siteConfig.business.name,
           url: "/",
-          logo: "/Colossus-Scaffolding-Logo.svg",
+          logo: "/logo.svg",
         }}
         breadcrumbs={[
           { name: "Home", url: "/" },
@@ -191,7 +192,7 @@ export default function ContactPage() {
           "@type": "ContactPage",
           "@id": absUrl("/contact#contactpage"),
           url: absUrl("/contact"),
-          name: "Contact Colossus Scaffolding",
+          name: `Contact ${siteConfig.business.name}`,
           description:
             "Get in touch for scaffolding quotes, site surveys, and general enquiries across the South East UK.",
         }}

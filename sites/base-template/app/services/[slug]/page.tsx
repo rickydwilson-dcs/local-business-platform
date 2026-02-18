@@ -4,10 +4,12 @@
  *
  * Individual service page with MDX content rendering.
  * Features hero, benefits, about section, FAQs, and CTA.
+ * Supports location-specific service pages with location-aware breadcrumbs and schema.
  */
 
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import {
   Schema,
   Breadcrumbs,
@@ -19,7 +21,9 @@ import {
   type FAQItem,
   type AboutContent,
 } from '@platform/core-components';
+import { deriveLocationContext, getAreaServed } from '@platform/core-components/lib/location-utils';
 import { getServices, getService } from '@/lib/content';
+import { getLocationSlugs } from '@/lib/locations-config';
 import { loadMdx } from '@/lib/mdx';
 import { getImageUrl } from '@/lib/image';
 import { absUrl } from '@/lib/site';
@@ -61,7 +65,20 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   }
 
   const fm = result.frontmatter as ServiceFrontmatter;
-  const title = fm.seoTitle || `${fm.title} | ${siteConfig.business.name}`;
+  const serviceName = fm.title
+    .replace(' Services', '')
+    .replace(' Solutions', '')
+    .replace(' Systems', '');
+
+  // Location-aware title generation
+  const knownLocations = await getLocationSlugs();
+  const locationContext = deriveLocationContext(slug, knownLocations);
+
+  let title = fm.seoTitle || `${fm.title} | ${siteConfig.business.name}`;
+  if (locationContext && locationContext.isLocationSpecific) {
+    title = fm.seoTitle || `${serviceName} ${locationContext.locationName} | ${siteConfig.business.name}`;
+  }
+
   const description = fm.description || `Learn about our ${fm.title} services.`;
   const heroImage = fm.hero?.image || fm.heroImage;
 
@@ -119,10 +136,27 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
   const faqs = fm.faqs || [];
   const about = fm.about;
 
-  const breadcrumbItems = [
-    { name: 'Services', href: '/services' },
-    { name: serviceName, href: `/services/${slug}`, current: true },
-  ];
+  // Detect if this is a location-specific service
+  const knownLocations = await getLocationSlugs();
+  const locationContext = deriveLocationContext(slug, knownLocations);
+  const isLocationSpecific = locationContext !== null && locationContext.isLocationSpecific;
+
+  // Build location-aware breadcrumbs
+  const breadcrumbItems = isLocationSpecific && locationContext
+    ? [
+        { name: 'Locations', href: '/locations' },
+        { name: locationContext.locationName, href: `/locations/${locationContext.locationSlug}` },
+        { name: serviceName, href: `/services/${slug}`, current: true },
+      ]
+    : [
+        { name: 'Services', href: '/services' },
+        { name: serviceName, href: `/services/${slug}`, current: true },
+      ];
+
+  // Build location-aware areaServed for Schema
+  const areaServed = isLocationSpecific && locationContext
+    ? getAreaServed(locationContext.location)
+    : siteConfig.serviceAreas;
 
   return (
     <>
@@ -132,6 +166,34 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
           <Breadcrumbs items={breadcrumbItems} />
         </div>
       </div>
+
+      {/* Back-link banner for location-specific pages */}
+      {isLocationSpecific && locationContext && (
+        <section className="bg-brand-primary/5 border-b">
+          <div className="container-standard py-4">
+            <Link
+              href={`/locations/${locationContext.locationSlug}`}
+              className="inline-flex items-center gap-2 text-brand-primary hover:text-brand-primary-hover font-medium transition-colors"
+            >
+              <svg
+                aria-hidden="true"
+                className="w-4 h-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M10 19l-7-7m0 0l7-7m-7 7h18"
+                />
+              </svg>
+              More services in {locationContext.locationName}
+            </Link>
+          </div>
+        </section>
+      )}
 
       <main>
         {/* Hero Section */}
@@ -186,18 +248,27 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
           url: '/',
           logo: '/logo.svg',
         }}
-        breadcrumbs={[
-          { name: 'Home', url: '/' },
-          { name: 'Services', url: '/services' },
-          { name: serviceName, url: `/services/${slug}` },
-        ]}
+        breadcrumbs={
+          isLocationSpecific && locationContext
+            ? [
+                { name: 'Home', url: '/' },
+                { name: 'Locations', url: '/locations' },
+                { name: locationContext.locationName, url: `/locations/${locationContext.locationSlug}` },
+                { name: serviceName, url: `/services/${slug}` },
+              ]
+            : [
+                { name: 'Home', url: '/' },
+                { name: 'Services', url: '/services' },
+                { name: serviceName, url: `/services/${slug}` },
+              ]
+        }
         service={{
           id: `/services/${slug}#service`,
           url: `/services/${slug}`,
           name: fm.title,
           description: fm.description || '',
           serviceType: serviceName,
-          areaServed: siteConfig.serviceAreas,
+          areaServed,
         }}
         faqs={faqs}
       />

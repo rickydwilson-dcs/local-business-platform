@@ -3,17 +3,18 @@ import { absUrl } from "@/lib/site";
 import { Metadata } from "next";
 import { Breadcrumbs } from "@platform/core-components";
 import { PHONE_DISPLAY, BUSINESS_EMAIL, ADDRESS } from "@/lib/contact-info";
+import { siteConfig } from "@/site.config";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
   description:
-    "Colossus Scaffolding Privacy Policy - how we collect, use, and protect your personal data in compliance with UK GDPR. Learn about your rights and our data practices.",
+    `${siteConfig.business.name} Privacy Policy - how we collect, use, and protect your personal data in compliance with UK GDPR. Learn about your rights and our data practices.`,
   openGraph: {
     title: "Privacy Policy",
     description:
-      "Comprehensive privacy policy for Colossus Scaffolding explaining our data practices and your rights under UK GDPR.",
+      `Comprehensive privacy policy for ${siteConfig.business.name} explaining our data practices and your rights under UK GDPR.`,
     url: absUrl("/privacy-policy"),
-    siteName: "Colossus Scaffolding",
+    siteName: siteConfig.business.name,
     locale: "en_GB",
     type: "website",
   },
@@ -54,7 +55,7 @@ export default function PrivacyPolicyPage() {
                 <span>Version: {version}</span>
               </div>
               <p className="text-lg text-gray-700 mt-6 max-w-3xl mx-auto">
-                This Privacy Policy explains how Colossus Scaffolding collects, uses, and protects
+                This Privacy Policy explains how {siteConfig.business.name} collects, uses, and protects
                 your personal data in accordance with UK data protection laws.
               </p>
             </div>
@@ -107,7 +108,7 @@ export default function PrivacyPolicyPage() {
               <section id="data-controller" className="mb-12">
                 <h2 className="text-3xl font-semibold mb-6">1. Data Controller Information</h2>
                 <p className="mb-6">
-                  Colossus Scaffolding is the data controller for your personal information. We are
+                  {siteConfig.business.name} is the data controller for your personal information. We are
                   a professional scaffolding company providing commercial, industrial, and
                   residential scaffolding services across the South East UK.
                 </p>
@@ -115,7 +116,7 @@ export default function PrivacyPolicyPage() {
                   <h3 className="font-semibold mb-2">Company Details:</h3>
                   <div className="space-y-1 text-gray-700">
                     <p>
-                      <strong>Business Name:</strong> Colossus Scaffolding
+                      <strong>Business Name:</strong> {siteConfig.business.legalName}
                     </p>
                     <p>
                       <strong>Registered Office:</strong> {ADDRESS.street}, {ADDRESS.locality},{" "}
@@ -128,7 +129,7 @@ export default function PrivacyPolicyPage() {
                       <strong>Email:</strong> {BUSINESS_EMAIL}
                     </p>
                     <p>
-                      <strong>Service Area:</strong> East Sussex, West Sussex, Kent, Surrey
+                      <strong>Service Area:</strong> {siteConfig.serviceAreas.join(", ")}
                     </p>
                   </div>
                 </div>
@@ -320,6 +321,7 @@ export default function PrivacyPolicyPage() {
                 </div>
               </section>
 
+              {/* Sections 4-12 remain largely the same as they don't contain hardcoded business names */}
               {/* Legal Basis */}
               <section id="legal-basis" className="mb-12">
                 <h2 className="text-3xl font-semibold mb-6">4. Legal Basis for Processing</h2>
@@ -786,7 +788,7 @@ export default function PrivacyPolicyPage() {
                     </p>
                     <div className="space-y-2 text-sm text-gray-700">
                       <p>
-                        <strong>Colossus Scaffolding</strong>
+                        <strong>{siteConfig.business.legalName}</strong>
                       </p>
                       <p>{ADDRESS.street}</p>
                       <p>{ADDRESS.locality}</p>

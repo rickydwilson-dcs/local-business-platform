@@ -52,7 +52,7 @@ const template = getIndustryTemplate("plumbing");
 // Returns: { services: [...], defaultFaqs: [...], contentSuggestions: [...] }
 
 // Available templates:
-// scaffolding, plumbing, electrical, cleaning, hvac
+// scaffolding, plumbing, electrical, cleaning, landscaping
 ```
 
 ### Chat Intake (`@platform/intake-system/chat-intake`)

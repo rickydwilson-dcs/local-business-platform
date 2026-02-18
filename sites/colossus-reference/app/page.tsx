@@ -4,6 +4,7 @@ import { ServicesOverview } from "@/components/ui/services-overview";
 import { absUrl } from "@/lib/site";
 import { getLocalBusinessSchema } from "@/lib/schema";
 import { PHONE_DISPLAY, PHONE_TEL } from "@/lib/contact-info";
+import { siteConfig } from "@/site.config";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -15,13 +16,13 @@ export const metadata: Metadata = {
     description:
       "TG20:21 compliant scaffolding services across South East England. CISRS qualified teams, £10M insured, CHAS accredited.",
     url: absUrl("/"),
-    siteName: "Colossus Scaffolding",
+    siteName: siteConfig.business.name,
     images: [
       {
-        url: absUrl("/static/logo.png"),
+        url: absUrl("/logo.svg"),
         width: 1200,
         height: 630,
-        alt: "Colossus Scaffolding - Professional Scaffolding Services South East UK",
+        alt: `${siteConfig.business.name} - Professional Scaffolding Services South East UK`,
       },
     ],
     locale: "en_GB",
@@ -32,7 +33,7 @@ export const metadata: Metadata = {
     title: "Scaffolding Services South East UK",
     description:
       "TG20:21 compliant scaffolding services across South East England. CISRS qualified teams, £10M insured, CHAS accredited.",
-    images: [absUrl("/static/logo.png")],
+    images: [absUrl("/logo.svg")],
   },
   alternates: {
     canonical: absUrl("/"),
@@ -47,7 +48,7 @@ export default function HomePage() {
     "@context": "https://schema.org",
     "@type": "WebSite",
     "@id": absUrl("/#website"),
-    name: "Colossus Scaffolding",
+    name: siteConfig.business.name,
     url: absUrl("/"),
     description:
       "Professional scaffolding services across South East England with TG20:21 compliance and CISRS qualified teams.",
@@ -78,6 +79,14 @@ export default function HomePage() {
     ],
   };
 
+  // Derive trust badges from siteConfig credentials
+  const trustBadges = [
+    ...siteConfig.credentials.certifications.map((cert) => cert.name),
+    ...(siteConfig.credentials.insurance
+      ? [`${siteConfig.credentials.insurance.amount} Insured`]
+      : []),
+  ];
+
   return (
     <PageLayout>
       <div className="relative -mt-10 -mx-6 lg:-mx-6">
@@ -106,7 +115,7 @@ export default function HomePage() {
           description="TG20:21 compliant scaffolding solutions for residential, commercial, and industrial projects. Fully insured with CHAS accreditation and £10M liability coverage."
           heroImage="colossus-reference/hero/home/main_01.webp"
           phone={PHONE_DISPLAY}
-          trustBadges={["Construction Line Gold", "CHAS Accredited", "TG20:21", "£10M Insured"]}
+          trustBadges={trustBadges}
           ctaText="Get Free Quote"
           ctaUrl="/contact"
         />
