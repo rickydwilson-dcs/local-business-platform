@@ -62,6 +62,8 @@ export * from "./components/Schema";
 
 // Export layout components
 export { PageLayout } from "./components/layouts/page-layout";
+export * from "./components/ui/site-header";
+export * from "./components/ui/page-shell";
 
 // Export hooks
 export * from "./hooks";

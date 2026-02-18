@@ -1,8 +1,6 @@
-import Image from "next/image";
-import Link from "next/link";
 import "./globals.css";
 import type { Metadata, Viewport } from "next";
-import { MobileMenu, LocationsDropdown } from "@platform/core-components";
+import { SiteHeader, PageShell } from "@platform/core-components";
 import { Footer } from "@platform/core-components/components/ui/footer";
 import { ConsentManager } from "@platform/core-components/components/analytics/ConsentManager";
 import { Analytics } from "@platform/core-components/components/analytics/Analytics";
@@ -57,83 +55,27 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <meta name="ICBM" content="50.8570, 0.5750" />
       </head>
       <body className="min-h-screen bg-white text-slate-900 antialiased">
-        <a
-          href="#main-content"
-          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:bg-brand-primary focus:text-white focus:px-4 focus:py-2 focus:rounded"
-        >
-          Skip to main content
-        </a>
-
-        <header className="border-b bg-white shadow-sm">
-          <div className="mx-auto w-full lg:w-[90%] px-6 py-4 flex items-center justify-between">
-            {/* Logo */}
-            <Link href="/" className="logo-container">
-              <div style={{ position: "relative", width: 180, height: 48 }}>
-                <Image
-                  src="/logo.svg"
-                  alt={siteConfig.business.name}
-                  fill
-                  sizes="180px"
-                  priority
-                  style={{ objectFit: "contain" }}
-                />
-              </div>
-            </Link>
-
-            {/* Desktop Navigation - Centered */}
-            <nav className="hidden lg:flex items-center gap-8 text-lg font-medium">
-              <Link
-                href="/services"
-                className="text-slate-700 hover:text-brand-primary transition-colors"
-              >
-                Services
-              </Link>
-              <LocationsDropdown locations={locationItems} counties={counties} />
-              <Link
-                href="/about"
-                className="text-slate-700 hover:text-brand-primary transition-colors"
-              >
-                About
-              </Link>
-              <Link
-                href="/contact"
-                className="text-slate-700 hover:text-brand-primary transition-colors"
-              >
-                Contact
-              </Link>
-            </nav>
-
-            {/* Desktop Phone & CTA */}
-            <div className="desktop-actions">
-              <a href={`tel:${PHONE_TEL}`} className="phone-link">
-                <svg
-                  aria-hidden="true"
-                  className="phone-icon"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
-                </svg>
-                <span className="font-medium">{PHONE_DISPLAY}</span>
-              </a>
-              <Link href="/contact" className="btn-primary">
-                Get Free Quote
-              </Link>
-            </div>
-
-            {/* Mobile Menu Component */}
-            <MobileMenu
+        <PageShell
+          header={
+            <SiteHeader
+              appearance="light"
+              sticky={false}
+              siteName={siteConfig.business.name}
               phoneDisplay={PHONE_DISPLAY}
               phoneTel={PHONE_TEL}
+              showPhone={siteConfig.cta.phone.show}
+              primaryCta={siteConfig.cta.primary}
+              navigation={siteConfig.navigation.main}
+              counties={counties}
               locations={locationItems}
+              logoWidth={180}
+              logoHeight={48}
             />
-          </div>
-        </header>
-
-        <main id="main-content">{children}</main>
-
-        {/* Footer - Global footer for all pages */}
-        <Footer />
+          }
+          footer={<Footer />}
+        >
+          {children}
+        </PageShell>
 
         {/* Analytics System - ConsentManager will handle page detection internally */}
         <ConsentManager
