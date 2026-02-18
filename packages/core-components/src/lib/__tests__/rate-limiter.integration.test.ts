@@ -62,21 +62,21 @@ describe("Multi-tenant rate limiting integration", () => {
   });
 
   it("should isolate rate limits per site", async () => {
-    // Exhaust Smith's rate limit (5 requests)
+    // Exhaust dj-fox's rate limit (5 requests)
     for (let i = 0; i < 5; i++) {
       await checkRateLimit(testIP, {
-        siteSlug: "smiths-electrical-cambridge",
+        siteSlug: "dj-fox-electrical",
         maxRequests: 5,
       });
     }
 
-    // Smith's 6th request should be blocked
-    const smithsBlocked = await checkRateLimit(testIP, {
-      siteSlug: "smiths-electrical-cambridge",
+    // dj-fox's 6th request should be blocked
+    const djFoxBlocked = await checkRateLimit(testIP, {
+      siteSlug: "dj-fox-electrical",
       maxRequests: 5,
     });
-    expect(smithsBlocked.allowed).toBe(false);
-    expect(smithsBlocked.retryAfter).toBeGreaterThan(0);
+    expect(djFoxBlocked.allowed).toBe(false);
+    expect(djFoxBlocked.retryAfter).toBeGreaterThan(0);
 
     // Colossus should NOT be blocked for the same IP (independent counter)
     const colossusAllowed = await checkRateLimit(testIP, {
@@ -87,13 +87,13 @@ describe("Multi-tenant rate limiting integration", () => {
     expect(colossusAllowed.retryAfter).toBeUndefined();
 
     // Verify the RPC received distinct site slugs proving isolation
-    const smithsCalls = mockRpc.mock.calls.filter(
-      ([, params]) => params.p_site_slug === "smiths-electrical-cambridge"
+    const djFoxCalls = mockRpc.mock.calls.filter(
+      ([, params]) => params.p_site_slug === "dj-fox-electrical"
     );
     const colossusCalls = mockRpc.mock.calls.filter(
       ([, params]) => params.p_site_slug === "colossus-reference"
     );
-    expect(smithsCalls).toHaveLength(6); // 5 allowed + 1 blocked
+    expect(djFoxCalls).toHaveLength(6); // 5 allowed + 1 blocked
     expect(colossusCalls).toHaveLength(1); // 1 allowed
   });
 
