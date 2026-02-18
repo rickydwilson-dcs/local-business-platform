@@ -10,11 +10,11 @@ import { siteConfig } from '@/site.config';
 export default function robots(): MetadataRoute.Robots {
   const baseUrl = siteConfig.url;
 
-  // Check if we're in production (allow indexing) or development (block indexing)
+  // VERCEL_ENV === 'production' on Vercel production deployments;
+  // fallback for self-hosted: NODE_ENV production + NEXT_PUBLIC_SITE_URL set
   const isProduction =
-    process.env.NODE_ENV === 'production' &&
-    !baseUrl.includes('localhost') &&
-    !baseUrl.includes('vercel.app');
+    process.env.VERCEL_ENV === 'production' ||
+    (process.env.NODE_ENV === 'production' && !!process.env.NEXT_PUBLIC_SITE_URL);
 
   if (!isProduction) {
     // Block all indexing for development/preview
@@ -35,6 +35,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ['/api/', '/admin/', '/_next/'],
       },
     ],
-    sitemap: `${baseUrl}/sitemap.xml`,
+    sitemap: `${baseUrl}/sitemap-index.xml`,
   };
 }

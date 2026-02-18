@@ -111,7 +111,22 @@ Turborepo's `"dependsOn": ["^build"]` ensures these build before any site that i
     "build": {
       "dependsOn": ["^build"], // Build dependencies first
       "outputs": [".next/**", "!.next/cache/**", "dist/**"], // Cache these outputs
-      "env": ["NODE_ENV"]
+      "env": [
+        "NODE_ENV",
+        "NEXT_PUBLIC_SITE_URL",
+        "SUPABASE_URL",
+        "SUPABASE_SERVICE_KEY",
+        "RESEND_API_KEY",
+        "FEATURE_GA4_ENABLED",
+        "FEATURE_FACEBOOK_PIXEL",
+        "FEATURE_GOOGLE_ADS",
+        "FEATURE_ANALYTICS_ENABLED",
+        "FEATURE_SERVER_TRACKING",
+        "CSRF_SECRET",
+        "BUSINESS_NAME",
+        "BUSINESS_EMAIL",
+        "R2_BUCKET_NAME"
+      ]
     },
     "dev": {
       "cache": false, // Never cache dev server
@@ -127,6 +142,17 @@ Turborepo's `"dependsOn": ["^build"]` ensures these build before any site that i
     "test": {
       "dependsOn": ["build"], // Tests need built code
       "outputs": ["coverage/**"]
+    },
+    "test:e2e": {
+      "dependsOn": ["build"],
+      "cache": false
+    },
+    "test:e2e:smoke": {
+      "dependsOn": ["build"],
+      "cache": false
+    },
+    "clean": {
+      "cache": false
     }
   }
 }
