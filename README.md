@@ -16,6 +16,7 @@ local-business-platform/
 ├── sites/
 │   ├── colossus-reference/    # Reference implementation (scaffolding business)
 │   ├── smiths-electrical-cambridge/  # Demo site (electrical business)
+│   ├── dj-fox-electrical/     # Demo site (electrical business)
 │   └── base-template/         # Gold-standard template for new sites
 │
 ├── tools/                     # Site creation, image management, deployment scripts
@@ -57,10 +58,10 @@ pnpm type-check     # TypeScript strict mode check
 pnpm clean          # Remove build artifacts
 
 # Site level (run from within a site directory)
-pnpm dev            # Next.js dev server
-pnpm build          # Production build
-pnpm test           # Unit tests (Vitest)
-pnpm test:e2e:smoke # Smoke tests (Playwright)
+npm run dev         # Next.js dev server
+npm run build       # Production build
+npm test            # Unit tests (Vitest)
+npm run test:e2e:smoke # Smoke tests (Playwright)
 ```
 
 ## Tech Stack
