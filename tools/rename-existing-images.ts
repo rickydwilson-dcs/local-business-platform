@@ -9,7 +9,7 @@
  *   pnpm rename:images <site-slug>
  *
  * Example:
- *   pnpm rename:images colossus-reference
+ *   pnpm rename:images colossus-scaffolding
  */
 
 import * as fs from "fs";
@@ -548,7 +548,7 @@ async function main() {
   if (args.length < 1) {
     console.log("Usage: pnpm rename:images <site-slug>");
     console.log("\nExample:");
-    console.log("  pnpm rename:images colossus-reference");
+    console.log("  pnpm rename:images colossus-scaffolding");
     process.exit(1);
   }
 

@@ -8,7 +8,7 @@
  *   pnpm update:r2-urls <site-slug>
  *
  * Example:
- *   pnpm update:r2-urls colossus-reference
+ *   pnpm update:r2-urls colossus-scaffolding
  */
 
 import * as fs from "fs";
@@ -284,7 +284,7 @@ async function main() {
   if (args.length < 1) {
     console.log("Usage: pnpm update:r2-urls <site-slug>");
     console.log("\nExample:");
-    console.log("  pnpm update:r2-urls colossus-reference");
+    console.log("  pnpm update:r2-urls colossus-scaffolding");
     process.exit(1);
   }
 

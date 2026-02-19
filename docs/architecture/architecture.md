@@ -23,7 +23,7 @@ For detailed explanations of how each system works, see:
 local-business-platform/
 ├── sites/                          # Client websites
 │   ├── base-template/              # Gold-standard template for new sites
-│   ├── colossus-reference/         # Reference implementation (scaffolding)
+│   ├── colossus-scaffolding/         # Reference implementation (scaffolding)
 │   └── dj-fox-electrical/          # Production site (electrical)
 ├── packages/
 │   ├── core-components/            # Shared UI components (@platform/core-components)

@@ -18,7 +18,7 @@ Phase 1: Build packages (parallel, no interdependencies)
     ↓
 Phase 2: Build sites (parallel, after packages complete)
     ├── sites/base-template                → next build
-    ├── sites/colossus-reference           → next build
+    ├── sites/colossus-scaffolding           → next build
     └── sites/smiths-electrical-cambridge  → next build
     ↓
 Each next build:

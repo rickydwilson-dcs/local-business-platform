@@ -99,7 +99,7 @@ gh run watch
 tsx tools/deploy-site.ts [site-name] --env [environment]
 
 # Examples:
-tsx tools/deploy-site.ts colossus-reference --env production
+tsx tools/deploy-site.ts colossus-scaffolding --env production
 tsx tools/deploy-site.ts joes-plumbing-canterbury --env staging
 ```
 
@@ -110,7 +110,7 @@ tsx tools/deploy-site.ts joes-plumbing-canterbury --env staging
 tsx tools/deploy-batch.ts --env production
 
 # Specify sites
-tsx tools/deploy-batch.ts --sites colossus-reference,joes-plumbing-canterbury --env production
+tsx tools/deploy-batch.ts --sites colossus-scaffolding,joes-plumbing-canterbury --env production
 ```
 
 **Phased Rollout Strategy:**
@@ -127,7 +127,7 @@ tsx tools/deploy-batch.ts --sites colossus-reference,joes-plumbing-canterbury --
 tsx tools/rollback.ts [site-name]
 
 # Example:
-tsx tools/rollback.ts colossus-reference
+tsx tools/rollback.ts colossus-scaffolding
 ```
 
 ## GitHub Actions CI/CD

@@ -6,12 +6,12 @@
  * Uses structured output for reliable content generation.
  *
  * Usage:
- *   tsx tools/generate-services.ts --site colossus-reference --context context.json
- *   tsx tools/generate-services.ts --site colossus-reference --context context.json --provider=gemini
- *   tsx tools/generate-services.ts --site colossus-reference --services "residential-scaffolding,commercial-scaffolding"
- *   tsx tools/generate-services.ts --site colossus-reference --context context.json --dry-run
- *   tsx tools/generate-services.ts --site colossus-reference --context context.json --force
- *   tsx tools/generate-services.ts --site colossus-reference --context context.json --limit 3
+ *   tsx tools/generate-services.ts --site colossus-scaffolding --context context.json
+ *   tsx tools/generate-services.ts --site colossus-scaffolding --context context.json --provider=gemini
+ *   tsx tools/generate-services.ts --site colossus-scaffolding --services "residential-scaffolding,commercial-scaffolding"
+ *   tsx tools/generate-services.ts --site colossus-scaffolding --context context.json --dry-run
+ *   tsx tools/generate-services.ts --site colossus-scaffolding --context context.json --force
+ *   tsx tools/generate-services.ts --site colossus-scaffolding --context context.json --limit 3
  *
  * Environment Variables:
  *   ANTHROPIC_API_KEY - Required for Claude provider
@@ -555,7 +555,7 @@ ${COLORS.cyan}Usage:${COLORS.reset}
   tsx tools/generate-services.ts --site <site> --context <path> [options]
 
 ${COLORS.cyan}Required:${COLORS.reset}
-  --site <name>        Site directory name (e.g., "colossus-reference")
+  --site <name>        Site directory name (e.g., "colossus-scaffolding")
   --context <path>     Path to business context JSON file
 
 ${COLORS.cyan}Options:${COLORS.reset}
@@ -568,17 +568,17 @@ ${COLORS.cyan}Options:${COLORS.reset}
 
 ${COLORS.cyan}Examples:${COLORS.reset}
   # Generate all services using Claude
-  tsx tools/generate-services.ts --site colossus-reference --context context.json
+  tsx tools/generate-services.ts --site colossus-scaffolding --context context.json
 
   # Generate specific services
-  tsx tools/generate-services.ts --site colossus-reference \\
+  tsx tools/generate-services.ts --site colossus-scaffolding \\
     --services "residential-scaffolding,commercial-scaffolding"
 
   # Preview what would be generated
-  tsx tools/generate-services.ts --site colossus-reference --context context.json --dry-run
+  tsx tools/generate-services.ts --site colossus-scaffolding --context context.json --dry-run
 
   # Use Gemini instead of Claude
-  tsx tools/generate-services.ts --site colossus-reference --context context.json --provider=gemini
+  tsx tools/generate-services.ts --site colossus-scaffolding --context context.json --provider=gemini
 
 ${COLORS.cyan}Environment Variables:${COLORS.reset}
   ANTHROPIC_API_KEY    Required for Claude provider

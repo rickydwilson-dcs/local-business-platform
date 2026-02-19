@@ -280,7 +280,7 @@ interface DeploymentTimelineProps {
 +--------------------------------------------------+
 |  RECENT DEPLOYMENTS                              |
 |--------------------------------------------------|
-|  [CHECK] main - colossus-reference               |
+|  [CHECK] main - colossus-scaffolding               |
 |  |      Ready in 15.3s - 2 hours ago             |
 |  |      dpl_abc123 -> example.com                |
 |  |                                               |
@@ -508,7 +508,7 @@ apps/
 |  [LOGO] Platform Monitor    [ALERTS: 2]  [SETTINGS]  [USER]      |
 +------------------------------------------------------------------+
 |         |                                                         |
-| [D] Dash|  CRITICAL ALERT: colossus-reference build failed        |
+| [D] Dash|  CRITICAL ALERT: colossus-scaffolding build failed        |
 | [S] Sites|  TypeScript errors detected - 5 minutes ago [VIEW]     |
 | [!] Alerts|                                                       |
 | [M] Metrics|----------------------------------------------------- |
@@ -534,7 +534,7 @@ apps/
 |         |  +--------------------+ +--------------------+          |
 |         |                                                         |
 |         |  RECENT ACTIVITY                                        |
-|         |  | [CHECK] Deploy ready - colossus-reference - 2h     | |
+|         |  | [CHECK] Deploy ready - colossus-scaffolding - 2h     | |
 |         |  | [X] Build failed - abc-roofing - 5m                | |
 |         |  | [CHECK] Deploy ready - elite-electrical - 6h       | |
 |         |  | [!] Alert: high_error_rate - joes-plumbing - 15m   | |

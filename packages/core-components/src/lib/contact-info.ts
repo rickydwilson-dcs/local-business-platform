@@ -9,7 +9,7 @@
  *
  * WHY THIS IS A STUB (not shared logic):
  * Each site reads contact data from a different config source:
- * - colossus-reference: imports from ./business-config.ts (+44 international format)
+ * - colossus-scaffolding: imports from ./business-config.ts (+44 international format)
  * - base-template/smiths: imports from @/site.config (raw phone string)
  * The formatting logic differs because the input formats differ.
  * The exported API surface is identical across all sites.

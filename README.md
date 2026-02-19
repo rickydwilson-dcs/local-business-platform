@@ -14,7 +14,7 @@ local-business-platform/
 │   └── intake-system/         # Client onboarding automation
 │
 ├── sites/
-│   ├── colossus-reference/    # Reference implementation (scaffolding business)
+│   ├── colossus-scaffolding/    # Reference implementation (scaffolding business)
 │   ├── smiths-electrical-cambridge/  # Demo site (electrical business)
 │   ├── dj-fox-electrical/     # Demo site (electrical business)
 │   └── base-template/         # Gold-standard template for new sites
@@ -43,7 +43,7 @@ pnpm build
 
 ```bash
 # Run a site locally
-cd sites/colossus-reference
+cd sites/colossus-scaffolding
 pnpm dev
 # Visit http://localhost:3000
 ```

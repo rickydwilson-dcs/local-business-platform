@@ -57,7 +57,7 @@ npm run test:ui
 ### Test File Structure
 
 ```
-sites/colossus-reference/
+sites/colossus-scaffolding/
 ├── app/api/contact/__tests__/
 │   └── route.test.ts
 ├── lib/__tests__/

@@ -53,7 +53,7 @@ All content is managed through MDX files with YAML frontmatter. **Never create:*
 | Site | Domain | Theme |
 |------|--------|-------|
 | `sites/dj-fox-electrical` | djfoxelectrical.com | orion (red) |
-| `sites/colossus-reference` | — | vega (navy) |
+| `sites/colossus-scaffolding` | — | vega (navy) |
 | `sites/base-template` | — | vega (blue) — gold-standard template |
 
 ## Key Commands
