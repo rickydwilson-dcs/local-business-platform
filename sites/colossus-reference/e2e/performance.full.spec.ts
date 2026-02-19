@@ -4,7 +4,7 @@ import {
   compareWithBaseline,
   generatePerformanceReport,
   type PerformanceResult,
-} from "../lib/performance-tracker";
+} from "@platform/core-components/lib/performance-tracker";
 
 /**
  * Performance Testing Suite

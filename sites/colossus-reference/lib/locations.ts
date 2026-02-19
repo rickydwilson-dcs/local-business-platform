@@ -32,9 +32,6 @@ export interface CountyInfo {
 export const MAP_CENTER: [number, number] = [51.0, 0.5];
 export const MAP_ZOOM = 9;
 
-// County page slugs — used to distinguish county vs town pages
-const COUNTY_PAGE_SLUGS = ["east-sussex", "west-sussex", "kent", "surrey"];
-
 // Build-time cache
 let cachedTowns: TownLocation[] | null = null;
 let cachedCounties: CountyInfo[] | null = null;
@@ -55,7 +52,7 @@ export async function getAllTownLocations(): Promise<TownLocation[]> {
         loc.county &&
         loc.coords &&
         Array.isArray(loc.coords) &&
-        !COUNTY_PAGE_SLUGS.includes(loc.slug)
+        loc.slug !== loc.countySlug // exclude county overview pages
     )
     .map((loc) => ({
       name: loc.title,
@@ -82,11 +79,14 @@ export async function getAllCounties(): Promise<CountyInfo[]> {
 
   const counties: CountyInfo[] = [];
 
-  for (const countySlug of COUNTY_PAGE_SLUGS) {
-    const countyData = locations.find((loc) => loc.slug === countySlug);
-    if (!countyData) continue;
+  // County pages are those where slug === countySlug (set during MDX back-fill)
+  const countyPages = locations.filter(
+    (loc) => loc.countySlug && loc.slug === loc.countySlug
+  );
 
+  for (const countyData of countyPages) {
     const countyName = (countyData.county as string) || countyData.title;
+    const countySlug = countyData.slug;
 
     // Get towns belonging to this county
     const countyTowns = allTowns
@@ -97,19 +97,16 @@ export async function getAllCounties(): Promise<CountyInfo[]> {
         href: t.url,
       }));
 
-    // Special case: Hove redirects to Brighton (part of Brighton & Hove)
-    if (countySlug === "east-sussex") {
-      countyTowns.push({
-        name: "Hove",
-        slug: "hove",
-        href: "/locations/brighton",
-      });
+    // Append any redirect towns defined in frontmatter
+    const redirectTowns = (countyData.redirectTowns as Array<{name: string; slug: string; redirectTo: string}>) || [];
+    for (const rt of redirectTowns) {
+      countyTowns.push({ name: rt.name, slug: rt.slug, href: rt.redirectTo });
     }
 
     counties.push({
       name: countyData.title,
-      slug: countyData.slug,
-      href: `/locations/${countyData.slug}`,
+      slug: countySlug,
+      href: `/locations/${countySlug}`,
       description: (countyData.countyDescription as string) || countyData.description || "",
       highlights: (countyData.countyHighlights as string[]) || [],
       towns: countyTowns,

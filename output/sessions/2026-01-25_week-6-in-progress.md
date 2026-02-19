@@ -1,6 +1,6 @@
 # Week 6 Progress Report: Blog, Projects & Testimonials
 
-**Status:** In Progress
+**Status:** Superseded — see 2026-01-25_blog-projects-testimonials-week6.md for completion record
 **Started:** 2025-01-25
 **Target Completion:** Week 6
 

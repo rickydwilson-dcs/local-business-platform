@@ -26,7 +26,7 @@ export function LocationFAQ({
         <div className="mx-auto w-full lg:w-[90%]">
           <div className="text-center mb-12">
             <h2 className="heading-section">
-              {location} FAQ - {title}
+              {title}
             </h2>
             {description && <p className="text-body-lg">{description}</p>}
           </div>

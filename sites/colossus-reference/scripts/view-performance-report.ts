@@ -5,7 +5,7 @@
  * Displays the latest performance test results and historical trends
  */
 
-import { generatePerformanceReport, getPerformanceHistory } from "../lib/performance-tracker";
+import { generatePerformanceReport, getPerformanceHistory } from "@platform/core-components/lib/performance-tracker";
 
 async function main() {
   console.log("=".repeat(80));

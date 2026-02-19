@@ -8,7 +8,7 @@ import { siteConfig } from "@/site.config";
 export const dynamic = "force-static";
 
 export const metadata: Metadata = {
-  title: "Customer Reviews | What Our Clients Say",
+  title: "Customer Reviews",
   description:
     `Read what our customers say about ${siteConfig.business.name}. Trusted by homeowners and businesses across Sussex, Kent, and Surrey for professional scaffolding services.`,
   keywords: [
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     "customer testimonials",
   ],
   openGraph: {
-    title: "Customer Reviews | What Our Clients Say",
+    title: "Customer Reviews",
     description:
       `Read what our customers say about ${siteConfig.business.name}. Trusted by homeowners and businesses across the South East.`,
     url: absUrl("/reviews"),

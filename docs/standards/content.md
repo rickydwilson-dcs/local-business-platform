@@ -106,6 +106,8 @@ seoTitle: "Brighton Scaffolding Services | Colossus Scaffolding"
 description: "Professional scaffolding services in Brighton. Local expertise for all scaffolding requirements."
 keywords: ["scaffolding brighton", "brighton scaffolding hire"]
 heroImage: "/Brighton-Scaffolding.png"
+county: "East Sussex"
+countySlug: "east-sussex"  # URL-safe slug — must match the county overview page slug
 hero:
   title: "Professional Scaffolding in Brighton"
   description: "Local expertise for Brighton's unique challenges..."

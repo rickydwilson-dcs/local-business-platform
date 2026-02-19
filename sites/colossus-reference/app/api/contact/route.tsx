@@ -182,13 +182,15 @@ export async function POST(request: Request): Promise<Response> {
     try {
       // Check if Resend is configured
       if (!resend || !process.env.BUSINESS_EMAIL || !process.env.BUSINESS_NAME) {
-        console.log("Email service not configured. Logging submission instead:");
-        console.log("Email Subject:", emailSubject);
-        console.log(
-          "Business Email would be sent to:",
-          process.env.BUSINESS_EMAIL || "Not configured"
-        );
-        console.log("Email HTML:", emailHtml);
+        if (process.env.NODE_ENV === 'development') {
+          console.log("Email service not configured. Logging submission instead:");
+          console.log("Email Subject:", emailSubject);
+          console.log(
+            "Business Email would be sent to:",
+            process.env.BUSINESS_EMAIL || "Not configured"
+          );
+          console.log("Email HTML:", emailHtml);
+        }
 
         return Response.json(
           {
@@ -207,7 +209,9 @@ export async function POST(request: Request): Promise<Response> {
         html: emailHtml,
       });
 
-      console.log("Email sent successfully:", emailResult.data?.id);
+      if (process.env.NODE_ENV === 'development') {
+        console.log("Email sent successfully:", emailResult.data?.id);
+      }
 
       // Send confirmation email to customer (using escaped inputs)
       const confirmationHtml = `
