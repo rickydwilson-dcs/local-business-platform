@@ -2,7 +2,7 @@
 
 **Date:** 2026-02-15
 **Purpose:** Configure Cloudflare R2 for DJ Fox Electrical image hosting
-**Status:** Ready for setup
+**Status:** Reference guide — R2 bucket setup is a manual task performed in Cloudflare dashboard
 
 ---
 

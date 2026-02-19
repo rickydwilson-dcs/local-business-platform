@@ -64,25 +64,20 @@ Note: `smiths-electrical-cambridge` has been replaced by `dj-fox-electrical` as 
 | SEO-003 | MEDIUM | A11y/SEO | Reviews page title shortened to `"Customer Reviews"` (39 chars with template) |
 | SEO-005 | MEDIUM | A11y/SEO | LocationFAQ heading now renders just `{title}` — redundant `{location} FAQ -` prefix removed |
 | SEO-015 | LOW | A11y/SEO | Keywords passed as array directly (removed `.join(", ")`) |
+| CQ-013 | MEDIUM | Code Quality | `sites/colossus-reference/scripts/validate-quality.ts` — synced to match base-template: single quotes, removed unused `fileURLToPath` import, updated example path |
+| A11Y-010 | LOW | A11y/SEO | `packages/core-components/src/components/ui/footer.tsx` — `aria-hidden="true"` added to Phone, Mail, MapPin, Award, Shield Lucide icons |
+| CQ-012 | MEDIUM | Code Quality | `packages/core-components/src/components/hero/HeroV3.tsx` — eslint-disable-next-line comments added to both inline styles (dynamic background-image URL and opacity); CoverageMap inline style already had correct disable comment |
+| ARCH-010 | MEDIUM | Architecture | `sites/colossus-reference/lib/locations.ts` — COUNTY_PAGE_SLUGS removed; getAllTownLocations() uses `loc.slug !== loc.countySlug`; getAllCounties() iterates content-driven county pages; Hove redirect moved to east-sussex.mdx `redirectTowns` field |
 
 ---
 
-## Still Open 🔴 (5 findings remaining)
-
-### MEDIUM Priority
-
-| ID | Severity | Domain | File | Issue | Effort |
-|----|----------|--------|------|-------|--------|
-| CQ-012 | MEDIUM | Code Quality | `packages/core-components/src/components/hero/HeroV3.tsx` (lines 44, 52), `packages/core-components/src/components/ui/coverage-map.tsx` (lines 169, 208) | Inline `style={{}}` attributes — background-image URL and opacity (HeroV3), dimensions (CoverageMap) | small |
-| CQ-013 | MEDIUM | Code Quality | `sites/colossus-reference/scripts/validate-quality.ts`, `sites/base-template/scripts/validate-quality.ts` | Substantial duplication (400+ lines each) with only minor cosmetic differences (quote style, one example path) | small |
-| ARCH-010 | MEDIUM | Architecture | `sites/colossus-reference/lib/locations.ts` (line 36, 101) | `COUNTY_PAGE_SLUGS = ["east-sussex", "west-sussex", "kent", "surrey"]` hardcoded; Hove→Brighton redirect hardcoded | medium |
+## Still Open 🔴 (1 finding remaining)
 
 ### LOW Priority
 
 | ID | Severity | Domain | File | Issue | Effort |
 |----|----------|--------|------|-------|--------|
 | CQ-017 | LOW | Code Quality | `sites/colossus-reference/mdx-components.tsx` | 955 lines — component definitions should be extracted to separate files | medium |
-| A11Y-010 | LOW | A11y/SEO | `packages/core-components/src/components/ui/footer.tsx` | Lucide icons (Phone, Mail, MapPin, Shield, Award) — verify aria-hidden default | trivial |
 
 ---
 
@@ -91,10 +86,10 @@ Note: `smiths-electrical-cambridge` has been replaced by `dj-fox-electrical` as 
 | | Count |
 |---|---|
 | Originally reported | 59 |
-| Fixed since review | **48** |
-| Confirmed still open | **5** |
+| Fixed since review | **52** |
+| Confirmed still open | **1** |
 | N/A (smiths replaced by dj-fox) | **2** (SEC-004 smiths, SEO-006) |
 | Misidentified as open (ARCH-013) | **1** |
 | Accounted for | **56** (3 unaccounted — likely double-counted in original review) |
 
-**Open by severity:** 0 HIGH · 3 MEDIUM · 2 LOW
+**Open by severity:** 0 HIGH · 0 MEDIUM · 1 LOW

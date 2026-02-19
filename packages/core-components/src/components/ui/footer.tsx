@@ -48,9 +48,9 @@ export async function Footer() {
                     (cert: { name: string; description: string; icon?: string }, index: number) => (
                       <div key={index} className="flex items-center gap-2 text-xs sm:text-sm">
                         {index === 0 ? (
-                          <Award className="h-3 w-3 sm:h-4 sm:w-4 text-amber-400" />
+                          <Award className="h-3 w-3 sm:h-4 sm:w-4 text-amber-400" aria-hidden="true" />
                         ) : (
-                          <Shield className="h-3 w-3 sm:h-4 sm:w-4 text-green-400" />
+                          <Shield className="h-3 w-3 sm:h-4 sm:w-4 text-green-400" aria-hidden="true" />
                         )}
                         <span>{cert.name}</span>
                       </div>
@@ -123,7 +123,7 @@ export async function Footer() {
             <h3 className="text-base sm:text-lg font-semibold mb-4 text-white">Contact Info</h3>
             <div className="space-y-3 text-gray-300 text-sm sm:text-base">
               <div className="flex items-center gap-2">
-                <Phone className="h-3 w-3 sm:h-4 sm:w-4 text-brand-primary flex-shrink-0" />
+                <Phone className="h-3 w-3 sm:h-4 sm:w-4 text-brand-primary flex-shrink-0" aria-hidden="true" />
                 <Link
                   href={`tel:${PHONE_TEL}`}
                   className="hover:text-brand-primary transition-colors"
@@ -132,7 +132,7 @@ export async function Footer() {
                 </Link>
               </div>
               <div className="flex items-center gap-2">
-                <Mail className="h-3 w-3 sm:h-4 sm:w-4 text-brand-primary flex-shrink-0" />
+                <Mail className="h-3 w-3 sm:h-4 sm:w-4 text-brand-primary flex-shrink-0" aria-hidden="true" />
                 <Link
                   href={`mailto:${BUSINESS_EMAIL}`}
                   className="hover:text-brand-primary transition-colors"
@@ -141,7 +141,7 @@ export async function Footer() {
                 </Link>
               </div>
               <div className="flex items-start gap-2">
-                <MapPin className="h-3 w-3 sm:h-4 sm:w-4 text-brand-primary flex-shrink-0 mt-1" />
+                <MapPin className="h-3 w-3 sm:h-4 sm:w-4 text-brand-primary flex-shrink-0 mt-1" aria-hidden="true" />
                 <div className="leading-relaxed">
                   <div>{ADDRESS.locality}</div>
                   <div>{ADDRESS.region}</div>
