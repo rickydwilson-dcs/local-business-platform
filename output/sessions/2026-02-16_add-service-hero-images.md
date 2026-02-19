@@ -1,6 +1,7 @@
 # Add Hero Images to DJ Fox Services
 
 **Date:** 2026-02-16
+**Status:** Completed
 **Issue:** Service cards on `/services` page and hero images on `/services/[slug]` pages were showing placeholder icons instead of images.
 
 ## Root Cause

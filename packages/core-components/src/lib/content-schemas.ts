@@ -148,8 +148,14 @@ export const LocationFrontmatterSchema = z.object({
     .min(3, "At least 3 keywords required")
     .optional(),
 
-  // Geographic and county metadata (for map markers and navigation)
-  county: z.enum(["East Sussex", "West Sussex", "Kent", "Surrey"]).optional(),
+  // ---------------------------------------------------------------------------
+  // Geographic fields
+  // ---------------------------------------------------------------------------
+  /** Human-readable county or region label (e.g. "East Sussex"). Free-form — not constrained to any geographic region. */
+  county: z.string().min(2, "County/region name must be at least 2 characters").optional(),
+
+  /** URL-safe county/region slug for grouping and routing (e.g. "east-sussex"). Must be lowercase with hyphens only. */
+  countySlug: z.string().regex(/^[a-z0-9-]+$/, "County slug must be lowercase letters, numbers, and hyphens only").optional(),
 
   coords: z.tuple([z.number().min(-90).max(90), z.number().min(-180).max(180)]).optional(),
 
@@ -164,19 +170,34 @@ export const LocationFrontmatterSchema = z.object({
 
   heroImage: ImagePathSchema.optional(),
 
+  // ---------------------------------------------------------------------------
+  // Hero section — all fields optional. Legacy colossus fields (phone, trustBadges)
+  // coexist with generic alternatives (primaryActionLabel, highlightItems).
+  // New sites should use the generic fields; colossus can migrate gradually.
+  // ---------------------------------------------------------------------------
   hero: z
     .object({
       title: z.string().min(5, "Hero title is required").optional(),
       description: z.string().min(20, "Hero description must be at least 20 characters").optional(),
       image: ImagePathSchema.optional(),
+      // --- Legacy colossus fields (scaffolding-industry origin) ---
+      /** Primary contact phone. Colossus-origin field — omit for industries where phone is not a primary hero CTA. */
       phone: z
         .string()
         .regex(/^[\d\s\+\-\(\)]+$/, "Phone must be valid")
         .optional(),
+      /** Credential/trust badges. Colossus-origin field — use for any short credential labels. */
       trustBadges: z
         .array(z.string().min(3, "Trust badge text too short"))
         .min(1, "At least 1 trust badge required")
         .optional(),
+      // --- Generic fields for all site types ---
+      /** Generic primary CTA label (e.g. "Get a Free Quote", "Book a Consultation"). */
+      primaryActionLabel: z.string().min(3, "Primary action label must be at least 3 characters").optional(),
+      /** Generic primary CTA href. Must be a relative path. */
+      primaryActionHref: z.string().regex(/^\/[A-Za-z0-9\/_-]*$/, "Primary action href must be a relative path").optional(),
+      /** Generic highlight items (replaces trustBadges for non-scaffolding sites). */
+      highlightItems: z.array(z.string().min(3, "Highlight item text too short")).min(1).optional(),
       ctaText: z.string().min(5, "CTA text is required").optional(),
       ctaUrl: z.string().startsWith("/", "CTA URL must start with /").optional(),
     })
@@ -213,7 +234,7 @@ export const LocationFrontmatterSchema = z.object({
           z.object({
             title: z.string().min(3, "Service title is required"),
             description: z.string().min(20, "Service description is required"),
-            link: z.string().startsWith("/services/", "Service link must start with /services/"),
+            link: z.string().regex(/^\/[A-Za-z0-9\/_-]+$/, "Service link must be a relative path (e.g. /services/my-service)"),
             icon: z.string().optional(),
           })
         )

@@ -72,6 +72,8 @@ keywords:
   - "worthing scaffolding hire"
   - "scaffolders worthing"
 heroImage: "/Worthing-Scaffolding.png"
+county: "West Sussex"
+countySlug: "west-sussex"  # URL-safe slug — must match the county overview page slug
 hero:
   title: "Professional Scaffolding in Worthing"
   description: "Expert scaffolding solutions for Worthing's residential and commercial properties. Our local team understands the unique requirements of coastal properties."

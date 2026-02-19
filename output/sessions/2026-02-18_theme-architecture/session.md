@@ -1,7 +1,7 @@
 # Session: 2026-02-18_theme-architecture
 
 **Start Date:** 2026-02-18
-**Status:** Active — Ready for implementation
+**Status:** Completed — all 6 steps implemented and merged to main (commit 50797fa)
 **Objective:** Redesign the platform's theme system from colour-only customisation to a library of named visual themes with distinct layouts, component variants, and an AI-assisted theme generation workflow.
 
 ---

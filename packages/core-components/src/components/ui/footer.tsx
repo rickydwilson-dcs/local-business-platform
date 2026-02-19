@@ -36,9 +36,9 @@ export async function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mb-6 sm:mb-8">
           {/* Column 1: About */}
           <div className="sm:col-span-2 lg:col-span-1">
-            <h3 className="text-xl sm:text-2xl font-bold mb-4 text-white">
+            <h2 className="text-xl sm:text-2xl font-bold mb-4 text-white">
               {siteConfig.business.name}
-            </h3>
+            </h2>
             <p className="text-gray-300 mb-4 text-sm sm:text-base">{siteConfig.tagline}</p>
             {siteConfig.credentials.certifications.length > 0 && (
               <div className="flex flex-wrap items-center gap-3 sm:gap-4">
@@ -48,9 +48,9 @@ export async function Footer() {
                     (cert: { name: string; description: string; icon?: string }, index: number) => (
                       <div key={index} className="flex items-center gap-2 text-xs sm:text-sm">
                         {index === 0 ? (
-                          <Award className="h-3 w-3 sm:h-4 sm:w-4 text-amber-400" />
+                          <Award className="h-3 w-3 sm:h-4 sm:w-4 text-amber-400" aria-hidden="true" />
                         ) : (
-                          <Shield className="h-3 w-3 sm:h-4 sm:w-4 text-green-400" />
+                          <Shield className="h-3 w-3 sm:h-4 sm:w-4 text-green-400" aria-hidden="true" />
                         )}
                         <span>{cert.name}</span>
                       </div>
@@ -63,7 +63,7 @@ export async function Footer() {
           {/* Column 2: Services */}
           {siteConfig.footer.showServices && sortedServices.length > 0 && (
             <div>
-              <h4 className="text-base sm:text-lg font-semibold mb-4 text-white">Our Services</h4>
+              <h3 className="text-base sm:text-lg font-semibold mb-4 text-white">Our Services</h3>
               <ul className="space-y-2 text-gray-300 text-sm sm:text-base">
                 {sortedServices.map((service: { slug: string; title: string }) => (
                   <li key={service.slug}>
@@ -92,7 +92,7 @@ export async function Footer() {
           {/* Column 3: Locations */}
           {siteConfig.footer.showLocations && sortedLocations.length > 0 && (
             <div>
-              <h4 className="text-base sm:text-lg font-semibold mb-4 text-white">Service Areas</h4>
+              <h3 className="text-base sm:text-lg font-semibold mb-4 text-white">Service Areas</h3>
               <ul className="space-y-2 text-gray-300 text-sm sm:text-base">
                 {sortedLocations.map((location: { slug: string; title: string }) => (
                   <li key={location.slug}>
@@ -120,10 +120,10 @@ export async function Footer() {
 
           {/* Column 4: Contact */}
           <div>
-            <h4 className="text-base sm:text-lg font-semibold mb-4 text-white">Contact Info</h4>
+            <h3 className="text-base sm:text-lg font-semibold mb-4 text-white">Contact Info</h3>
             <div className="space-y-3 text-gray-300 text-sm sm:text-base">
               <div className="flex items-center gap-2">
-                <Phone className="h-3 w-3 sm:h-4 sm:w-4 text-brand-primary flex-shrink-0" />
+                <Phone className="h-3 w-3 sm:h-4 sm:w-4 text-brand-primary flex-shrink-0" aria-hidden="true" />
                 <Link
                   href={`tel:${PHONE_TEL}`}
                   className="hover:text-brand-primary transition-colors"
@@ -132,7 +132,7 @@ export async function Footer() {
                 </Link>
               </div>
               <div className="flex items-center gap-2">
-                <Mail className="h-3 w-3 sm:h-4 sm:w-4 text-brand-primary flex-shrink-0" />
+                <Mail className="h-3 w-3 sm:h-4 sm:w-4 text-brand-primary flex-shrink-0" aria-hidden="true" />
                 <Link
                   href={`mailto:${BUSINESS_EMAIL}`}
                   className="hover:text-brand-primary transition-colors"
@@ -141,7 +141,7 @@ export async function Footer() {
                 </Link>
               </div>
               <div className="flex items-start gap-2">
-                <MapPin className="h-3 w-3 sm:h-4 sm:w-4 text-brand-primary flex-shrink-0 mt-1" />
+                <MapPin className="h-3 w-3 sm:h-4 sm:w-4 text-brand-primary flex-shrink-0 mt-1" aria-hidden="true" />
                 <div className="leading-relaxed">
                   <div>{ADDRESS.locality}</div>
                   <div>{ADDRESS.region}</div>

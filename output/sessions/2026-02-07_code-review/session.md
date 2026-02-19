@@ -23,3 +23,15 @@
 | Medium    | 24     |
 | Low       | 17     |
 | **Total** | **59** |
+
+## Remediation Status (audited 2026-02-19)
+
+| | Count |
+|---|---|
+| Fixed | **35** |
+| Still open | **14** |
+| N/A (smiths → dj-fox) | **2** |
+
+**Open by severity:** 1 HIGH · 7 MEDIUM · 6 LOW
+
+See `remediation-audit.md` for full per-finding status.

@@ -114,6 +114,7 @@ export function LocationsDropdown({
         className={`flex items-center gap-1 ${buttonTextColor} hover:text-brand-primary transition-colors font-medium`}
         aria-expanded={isOpen}
         aria-haspopup="true"
+        aria-controls="locations-dropdown-menu"
       >
         {label}
         <svg
@@ -130,12 +131,13 @@ export function LocationsDropdown({
       {isOpen &&
         (useMegaMenu ? (
           <MegaMenuDropdown
+            id="locations-dropdown-menu"
             counties={counties}
             maxTownsPerCounty={maxTownsPerCounty}
             onClose={() => setIsOpen(false)}
           />
         ) : (
-          <SimpleDropdown locations={locations} onClose={() => setIsOpen(false)} />
+          <SimpleDropdown id="locations-dropdown-menu" locations={locations} onClose={() => setIsOpen(false)} />
         ))}
     </div>
   );
@@ -143,9 +145,11 @@ export function LocationsDropdown({
 
 /** Simple grid dropdown for sites with few locations */
 function SimpleDropdown({
+  id,
   locations,
   onClose,
 }: {
+  id: string;
   locations: LocationItem[];
   onClose: () => void;
 }) {
@@ -153,7 +157,7 @@ function SimpleDropdown({
     locations.length > 8 ? "grid-cols-3" : locations.length > 4 ? "grid-cols-2" : "grid-cols-1";
 
   return (
-    <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 bg-white rounded-lg shadow-lg border border-gray-200 z-50 min-w-[200px] max-w-[600px]">
+    <div id={id} className="absolute top-full left-1/2 -translate-x-1/2 mt-2 bg-white rounded-lg shadow-lg border border-gray-200 z-50 min-w-[200px] max-w-[600px]">
       {/* Header */}
       <div className="px-4 py-3 border-b border-gray-100">
         <h3 className="font-semibold text-gray-900">Service Areas</h3>
@@ -190,16 +194,18 @@ function SimpleDropdown({
 
 /** Mega-menu dropdown for sites with county-grouped locations */
 function MegaMenuDropdown({
+  id,
   counties,
   maxTownsPerCounty,
   onClose,
 }: {
+  id: string;
   counties: CountyGroup[];
   maxTownsPerCounty: number;
   onClose: () => void;
 }) {
   return (
-    <div className="absolute top-full left-0 mt-2 w-[900px] max-w-[90vw] bg-white border border-gray-200 rounded-lg shadow-xl z-50">
+    <div id={id} className="absolute top-full left-0 mt-2 w-[900px] max-w-[90vw] bg-white border border-gray-200 rounded-lg shadow-xl z-50">
       <div className="p-4 md:p-6">
         {/* Header */}
         <div className="mb-4 md:mb-6">

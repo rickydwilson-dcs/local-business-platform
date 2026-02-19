@@ -1,6 +1,7 @@
 # Service Page FAQs Refactor
 
 **Date:** 2026-02-16
+**Status:** Completed
 **Task:** [tasks/platform/service-page-faqs.md](../../tasks/platform/service-page-faqs.md)
 **Site:** DJ Fox Electrical
 

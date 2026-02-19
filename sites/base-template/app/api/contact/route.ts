@@ -160,15 +160,10 @@ export async function POST(request: NextRequest) {
     // Send email (if Resend is configured)
     const emailSent = await sendContactEmail(submission);
 
-    // Log submission for debugging
-    console.log('Contact form submission:', {
-      name: submission.name,
-      email: submission.email,
-      service: submission.service,
-      location: submission.location,
-      receivedAt: submission.receivedAt,
-      emailSent,
-    });
+    // Log submission for debugging (no PII in production)
+    if (process.env.NODE_ENV === 'development') {
+      console.log('Contact form submission received', { receivedAt: submission.receivedAt, emailSent });
+    }
 
     return NextResponse.json({
       success: true,
@@ -187,8 +182,10 @@ async function sendContactEmail(submission: ContactSubmission): Promise<boolean>
   const resendApiKey = process.env.RESEND_API_KEY;
 
   if (!resendApiKey) {
-    console.log('Resend not configured - email not sent. Submission logged to console.');
-    console.log('Contact submission details:', submission);
+    if (process.env.NODE_ENV === 'development') {
+      console.log('Resend not configured - email not sent. Submission logged to console.');
+      console.log('Contact submission details:', submission);
+    }
     return false;
   }
 
