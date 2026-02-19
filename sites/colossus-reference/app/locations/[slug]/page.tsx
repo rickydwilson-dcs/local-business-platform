@@ -178,9 +178,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   return {
     title: optimizedTitle,
     description: locationData.description,
-    keywords: Array.isArray(locationData.keywords)
-      ? locationData.keywords.join(", ")
-      : locationData.keywords,
+    keywords: locationData.keywords,
     openGraph: {
       title: optimizedTitle,
       description: locationData.description,
