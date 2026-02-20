@@ -14,9 +14,8 @@ import type { ElementDefinition } from './index';
 /**
  * Load ElementDefinition entries from pipeline-generated theme manifests.
  *
- * As new themes are generated, add their showcase registry imports here:
- *   import { novaElements } from '@platform/themes/nova/showcase';
- *   ...and merge into the returned array.
+ * As new themes are generated, add their showcase registry imports here
+ * and merge into the returned array.
  */
 export function loadThemeManifestElements(): ElementDefinition[] {
   // Pipeline-generated themes will be added here as they're created.
