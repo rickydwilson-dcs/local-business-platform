@@ -119,7 +119,7 @@ export function ArticleCallout(props: ArticleCalloutProps) {
           </div>
           <div className="flex-1">
             <h4 className={`font-semibold mb-3 ${styles.titleColor}`}>{title}</h4>
-            <div className="text-sm text-gray-700">{children}</div>
+            <div className="text-sm text-surface-secondary">{children}</div>
           </div>
         </div>
       </div>
@@ -140,7 +140,7 @@ export function ArticleCallout(props: ArticleCalloutProps) {
             <h4 className={`font-semibold mb-3 ${styles.titleColor}`}>{title}</h4>
             <ul className="space-y-2">
               {items.map((item, idx) => (
-                <li key={idx} className="flex items-start gap-2 text-sm text-gray-700">
+                <li key={idx} className="flex items-start gap-2 text-sm text-surface-secondary">
                   <span className={styles.iconColor}>
                     <CheckIcon />
                   </span>
@@ -165,7 +165,7 @@ export function ArticleCallout(props: ArticleCalloutProps) {
             {[...Array(5)].map((_, i) => (
               <svg
                 key={i}
-                className={`w-5 h-5 ${i < rating ? "text-yellow-400" : "text-gray-200"}`}
+                className={`w-5 h-5 ${i < rating ? "text-yellow-400" : "text-surface-subtle"}`}
                 fill="currentColor"
                 viewBox="0 0 20 20"
               >
@@ -174,16 +174,16 @@ export function ArticleCallout(props: ArticleCalloutProps) {
             ))}
           </div>
         )}
-        <div className="text-gray-800 text-lg italic leading-relaxed mb-4">
+        <div className="text-surface-foreground text-lg italic leading-relaxed mb-4">
           &ldquo;{quote}&rdquo;
         </div>
         <footer className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-brand-primary rounded-full flex items-center justify-center text-white font-semibold">
+          <div className="w-10 h-10 bg-brand-primary rounded-full flex items-center justify-center text-on-brand-primary font-semibold">
             {author.charAt(0)}
           </div>
           <div>
-            <p className="font-semibold text-gray-900">{author}</p>
-            {authorTitle && <p className="text-sm text-gray-600">{authorTitle}</p>}
+            <p className="font-semibold text-surface-foreground">{author}</p>
+            {authorTitle && <p className="text-sm text-surface-tertiary">{authorTitle}</p>}
           </div>
         </footer>
       </blockquote>
@@ -225,7 +225,7 @@ export function ArticleCallout(props: ArticleCalloutProps) {
           {primaryAction && (
             <Link
               href={primaryAction.href}
-              className="block w-full bg-white text-brand-primary text-center font-semibold py-3 px-4 rounded-lg hover:bg-gray-50 transition-colors"
+              className="block w-full bg-surface-card text-brand-primary text-center font-semibold py-3 px-4 rounded-lg hover:bg-surface-subtle transition-colors"
             >
               {primaryAction.label}
             </Link>
