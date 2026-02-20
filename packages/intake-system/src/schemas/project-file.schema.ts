@@ -450,6 +450,8 @@ export const ThemeSchema = z.object({
   typography: TypographySchema.optional(),
   /** Component style overrides */
   components: ComponentStylesSchema.optional(),
+  /** Theme variant: orion (dark/bold) or vega (light/clean) */
+  themeVariant: z.enum(['orion', 'vega']).optional(),
   /** Logo URL */
   logoUrl: z.string().url().optional(),
   /** Favicon URL */

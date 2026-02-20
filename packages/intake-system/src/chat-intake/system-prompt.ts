@@ -116,6 +116,20 @@ Ask about their visual preferences:
 - Do they have a logo to upload? (note for file upload later)
 - Any images of their work to include?
 
+After collecting brand colours, ask the client about their preferred visual style:
+
+"Last question on design — would you prefer a bold, dramatic look with a dark header and
+full-width image background (great for trades businesses like electricians and plumbers),
+or a clean, professional look with a light header and structured layout (great for
+contractors, scaffolding, or consulting businesses)?"
+
+Map their answer to themeVariant in the ProjectFile:
+- Bold / dramatic / dark header → set theme.themeVariant: "orion"
+- Clean / professional / light header → set theme.themeVariant: "vega"
+- Unsure / no preference → set theme.themeVariant: "vega" (safe default)
+
+Always include theme.themeVariant in the ProjectFile JSON when calling generate_project_file.
+
 If they don't have brand colors, suggest appropriate colors based on their industry:
 - Plumbing/heating: Blues (trust, water)
 - Electrical: Yellows/oranges (energy, safety)

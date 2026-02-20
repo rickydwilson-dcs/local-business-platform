@@ -192,29 +192,8 @@ function generateEnrichedThemeConfig(
   layout: LayoutClassification,
   themeName: string
 ): string {
-  // Get base config from intake-system generator
-  const baseConfig = generateThemeConfigContent(suggestion, themeName);
-
-  // Inject componentRegistry import and field
-  const registryImport =
-    layout.theme === "orion"
-      ? `import { orionRegistry } from '@platform/themes/orion';`
-      : `import { vegaRegistry } from '@platform/themes/vega';`;
-
-  const registryRef = layout.theme === "orion" ? "orionRegistry" : "vegaRegistry";
-
-  // Insert the import after the theme-system import line and add componentRegistry to config
-  const withImport = baseConfig.replace(
-    /import type \{ DeepPartialThemeConfig \} from '@platform\/theme-system';/,
-    `import type { DeepPartialThemeConfig } from '@platform/theme-system';\n${registryImport}`
-  );
-
-  const withRegistry = withImport.replace(
-    /export const themeConfig: DeepPartialThemeConfig = \{/,
-    `export const themeConfig: DeepPartialThemeConfig = {\n  componentRegistry: ${registryRef},\n`
-  );
-
-  return withRegistry;
+  // Pass themeVariant directly — generateThemeConfigContent now emits complete output
+  return generateThemeConfigContent(suggestion, themeName, layout.theme);
 }
 
 // ============================================================================
