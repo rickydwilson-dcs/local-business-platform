@@ -92,7 +92,7 @@ export function LocationsDropdown({
   }, [isOpen]);
 
   if (locations.length === 0 && (!counties || counties.length === 0)) {
-    const linkTextColor = variant === "dark" ? "text-white" : "text-gray-700";
+    const linkTextColor = variant === "dark" ? "text-white" : "text-surface-secondary";
     return (
       <Link
         href="/locations"
@@ -104,7 +104,7 @@ export function LocationsDropdown({
   }
 
   const useMegaMenu = counties && counties.length > 0;
-  const buttonTextColor = variant === "dark" ? "text-white" : "text-gray-700";
+  const buttonTextColor = variant === "dark" ? "text-white" : "text-surface-secondary";
 
   return (
     <div ref={dropdownRef} className="relative">
@@ -157,11 +157,11 @@ function SimpleDropdown({
     locations.length > 8 ? "grid-cols-3" : locations.length > 4 ? "grid-cols-2" : "grid-cols-1";
 
   return (
-    <div id={id} className="absolute top-full left-1/2 -translate-x-1/2 mt-2 bg-white rounded-lg shadow-lg border border-gray-200 z-50 min-w-[200px] max-w-[600px]">
+    <div id={id} className="absolute top-full left-1/2 -translate-x-1/2 mt-2 bg-surface-card rounded-lg shadow-lg border border-surface-subtle z-50 min-w-[200px] max-w-[600px]">
       {/* Header */}
-      <div className="px-4 py-3 border-b border-gray-100">
-        <h3 className="font-semibold text-gray-900">Service Areas</h3>
-        <p className="text-sm text-gray-500">We proudly serve these locations</p>
+      <div className="px-4 py-3 border-b border-surface-subtle">
+        <h3 className="font-semibold text-surface-foreground">Service Areas</h3>
+        <p className="text-sm text-surface-muted-foreground">We proudly serve these locations</p>
       </div>
 
       {/* Locations Grid */}
@@ -171,7 +171,7 @@ function SimpleDropdown({
             key={location.slug}
             href={`/locations/${location.slug}`}
             onClick={onClose}
-            className="px-3 py-2 rounded-md text-sm text-gray-700 hover:bg-brand-primary/10 hover:text-brand-primary transition-colors"
+            className="px-3 py-2 rounded-md text-sm text-surface-secondary hover:bg-brand-primary/10 hover:text-brand-primary transition-colors"
           >
             {location.name}
           </Link>
@@ -179,7 +179,7 @@ function SimpleDropdown({
       </div>
 
       {/* Footer */}
-      <div className="px-4 py-3 border-t border-gray-100 bg-surface-muted rounded-b-lg">
+      <div className="px-4 py-3 border-t border-surface-subtle bg-surface-muted rounded-b-lg">
         <Link
           href="/locations"
           onClick={onClose}
@@ -205,12 +205,12 @@ function MegaMenuDropdown({
   onClose: () => void;
 }) {
   return (
-    <div id={id} className="absolute top-full left-0 mt-2 w-[900px] max-w-[90vw] bg-white border border-gray-200 rounded-lg shadow-xl z-50">
+    <div id={id} className="absolute top-full left-0 mt-2 w-[900px] max-w-[90vw] bg-surface-card border border-surface-subtle rounded-lg shadow-xl z-50">
       <div className="p-4 md:p-6">
         {/* Header */}
         <div className="mb-4 md:mb-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-2">Our Coverage Areas</h3>
-          <p className="text-sm text-gray-800">Professional services across the region</p>
+          <h3 className="text-lg font-semibold text-surface-foreground mb-2">Our Coverage Areas</h3>
+          <p className="text-sm text-surface-foreground">Professional services across the region</p>
         </div>
 
         {/* Counties Grid */}
@@ -220,7 +220,7 @@ function MegaMenuDropdown({
               {/* County Header */}
               <Link
                 href={county.href}
-                className="block text-base font-semibold text-brand-primary hover:text-brand-primary-hover transition-colors border-b border-gray-200 pb-2"
+                className="block text-base font-semibold text-brand-primary hover:text-brand-primary-hover transition-colors border-b border-surface-subtle pb-2"
                 onClick={onClose}
               >
                 {county.name}
@@ -234,8 +234,8 @@ function MegaMenuDropdown({
                       href={town.href}
                       className={`block text-sm transition-colors ${
                         town.isRichContent
-                          ? "text-gray-900 font-medium hover:text-brand-primary"
-                          : "text-gray-800 hover:text-gray-900"
+                          ? "text-surface-foreground font-medium hover:text-brand-primary"
+                          : "text-surface-foreground hover:text-surface-foreground"
                       }`}
                       onClick={onClose}
                     >
@@ -255,9 +255,9 @@ function MegaMenuDropdown({
         </div>
 
         {/* Footer */}
-        <div className="mt-6 md:mt-8 pt-4 md:pt-6 border-t border-gray-200">
+        <div className="mt-6 md:mt-8 pt-4 md:pt-6 border-t border-surface-subtle">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 md:gap-0">
-            <p className="text-sm text-gray-800">
+            <p className="text-sm text-surface-foreground">
               Can&apos;t find your area? We cover the entire region.
             </p>
             <Link

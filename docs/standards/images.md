@@ -203,7 +203,7 @@ Site folders should match the directory name in `sites/`:
 
 | Site Directory              | R2 Folder             |
 | --------------------------- | --------------------- |
-| `sites/colossus-reference/` | `colossus-reference/` |
+| `sites/colossus-scaffolding/` | `colossus-reference/` |
 | `sites/example-plumber/`    | `example-plumber/`    |
 
 ### Why Site-Specific Folders?

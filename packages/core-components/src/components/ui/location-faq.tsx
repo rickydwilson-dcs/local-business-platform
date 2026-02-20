@@ -21,7 +21,7 @@ export function LocationFAQ({
   phoneTel = "01424466661",
 }: LocationFAQProps) {
   return (
-    <section className="py-16 sm:py-20 bg-white">
+    <section className="py-16 sm:py-20 bg-surface-background">
       <div className="mx-auto w-full lg:w-[90%] px-6">
         <div className="mx-auto w-full lg:w-[90%]">
           <div className="text-center mb-12">
@@ -35,26 +35,26 @@ export function LocationFAQ({
             {items.map((item, i) => (
               <div
                 key={i}
-                className="bg-surface-muted border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow"
+                className="bg-surface-muted border border-surface-subtle rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow"
               >
-                <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-start gap-3">
+                <h3 className="text-lg font-semibold text-surface-foreground mb-3 flex items-start gap-3">
                   <span className="flex-shrink-0 w-6 h-6 bg-brand-primary rounded-full flex items-center justify-center text-white text-sm font-bold">
                     Q
                   </span>
                   {item.question}
                 </h3>
                 <div className="ml-9">
-                  <p className="text-gray-800 leading-relaxed">{item.answer}</p>
+                  <p className="text-surface-foreground leading-relaxed">{item.answer}</p>
                 </div>
               </div>
             ))}
           </div>
 
           <div className="text-center mt-12 p-8 bg-brand-primary/5 rounded-2xl border border-brand-primary/10">
-            <h3 className="text-xl font-semibold text-gray-900 mb-4">
+            <h3 className="text-xl font-semibold text-surface-foreground mb-4">
               More Questions About Our Services in {location}?
             </h3>
-            <p className="text-gray-800 mb-6">
+            <p className="text-surface-foreground mb-6">
               Our local team knows {location} regulations and requirements inside out. Get expert
               advice for your project.
             </p>

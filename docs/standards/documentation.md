@@ -43,7 +43,7 @@ Use subdirectory CLAUDE.md files for context-specific information:
 
 ```
 CLAUDE.md                           # Root (~180 lines) - universal rules
-sites/colossus-reference/CLAUDE.md  # Site-specific context
+sites/colossus-scaffolding/CLAUDE.md  # Site-specific context
 packages/core-components/CLAUDE.md  # Package-specific context
 ```
 

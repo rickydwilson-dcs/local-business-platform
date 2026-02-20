@@ -52,11 +52,11 @@ export function TownFinderSection({ counties }: TownFinderSectionProps) {
   }, [allTowns, searchTerm, selectedCounty]);
 
   return (
-    <section id="town-finder" className="section-standard bg-white">
+    <section id="town-finder" className="section-standard bg-surface-background">
       <div className="container-standard">
         <div className="text-center mb-12">
           <h2 className="heading-section">Find Your Local Specialist</h2>
-          <p className="text-lg text-gray-800 mx-auto w-full lg:w-[85%]">
+          <p className="text-lg text-surface-foreground mx-auto w-full lg:w-[85%]">
             Enter your town name or select a county to connect with local experts who understand
             your requirements.
           </p>
@@ -72,7 +72,7 @@ export function TownFinderSection({ counties }: TownFinderSectionProps) {
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <svg
-                    className="h-5 w-5 text-gray-400"
+                    className="h-5 w-5 text-surface-muted-foreground"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -89,7 +89,7 @@ export function TownFinderSection({ counties }: TownFinderSectionProps) {
                   id="town-search"
                   type="text"
                   placeholder="Enter town name or postcode..."
-                  className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-transparent"
+                  className="block w-full pl-10 pr-3 py-3 border border-surface-subtle rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-transparent"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                 />
@@ -102,7 +102,7 @@ export function TownFinderSection({ counties }: TownFinderSectionProps) {
               </label>
               <select
                 id="county-filter"
-                className="block w-full py-3 px-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-transparent"
+                className="block w-full py-3 px-3 border border-surface-subtle rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-transparent"
                 value={selectedCounty}
                 onChange={(e) => setSelectedCounty(e.target.value)}
               >
@@ -123,17 +123,17 @@ export function TownFinderSection({ counties }: TownFinderSectionProps) {
                 <Link
                   key={town.slug}
                   href={town.href}
-                  className="block p-4 border border-gray-200 rounded-lg hover:border-brand-primary hover:shadow-md transition-all group"
+                  className="block p-4 border border-surface-subtle rounded-lg hover:border-brand-primary hover:shadow-md transition-all group"
                 >
                   <div className="flex items-center justify-between">
                     <div>
-                      <div className="font-semibold text-gray-900 group-hover:text-brand-primary transition-colors">
+                      <div className="font-semibold text-surface-foreground group-hover:text-brand-primary transition-colors">
                         {town.name}
                       </div>
-                      <div className="text-sm text-gray-700">{town.county}</div>
+                      <div className="text-sm text-surface-secondary">{town.county}</div>
                     </div>
                     <svg
-                      className="w-5 h-5 text-gray-400 group-hover:text-brand-primary transition-colors"
+                      className="w-5 h-5 text-surface-muted-foreground group-hover:text-brand-primary transition-colors"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -151,7 +151,7 @@ export function TownFinderSection({ counties }: TownFinderSectionProps) {
             </div>
           ) : (
             <div className="text-center py-12">
-              <div className="text-gray-700 mb-4">
+              <div className="text-surface-secondary mb-4">
                 <svg
                   className="w-12 h-12 mx-auto mb-4"
                   fill="none"
@@ -167,7 +167,7 @@ export function TownFinderSection({ counties }: TownFinderSectionProps) {
                 </svg>
                 No towns found matching your search.
               </div>
-              <p className="text-gray-800 mb-6">
+              <p className="text-surface-foreground mb-6">
                 We may still be able to help. Contact us to discuss your project location.
               </p>
               <Link href="/contact" className="btn-primary">
@@ -178,7 +178,7 @@ export function TownFinderSection({ counties }: TownFinderSectionProps) {
 
           {searchTerm === "" && selectedCounty === "all" && (
             <div className="text-center mt-8">
-              <p className="text-gray-800 mb-4">
+              <p className="text-surface-foreground mb-4">
                 Showing a sample of our coverage areas. Use the search above to find your specific
                 location.
               </p>

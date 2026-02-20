@@ -33,11 +33,11 @@ export function ContentCard({
   return (
     <Link
       href={href}
-      className="bg-white rounded-2xl shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 group relative block cursor-pointer overflow-hidden h-full flex flex-col"
+      className="bg-surface-card rounded-2xl shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 group relative block cursor-pointer overflow-hidden h-full flex flex-col"
     >
       {(badge || isHeadquarters) && contentType !== "services" && (
         <div className="absolute top-4 right-4 z-10">
-          <span className="px-3 py-1 bg-brand-primary text-white text-sm font-medium rounded-full">
+          <span className="px-3 py-1 bg-brand-primary text-on-brand-primary text-sm font-medium rounded-full">
             {badge || (isHeadquarters ? "Headquarters" : "")}
           </span>
         </div>
@@ -55,7 +55,7 @@ export function ContentCard({
               {subtitle.map((item, index) => (
                 <span
                   key={index}
-                  className="inline-block px-3 py-1 bg-brand-primary/90 text-white text-sm font-semibold rounded-full backdrop-blur-sm shadow-sm"
+                  className="inline-block px-3 py-1 bg-brand-primary/90 text-on-brand-primary text-sm font-semibold rounded-full backdrop-blur-sm shadow-sm"
                 >
                   {item}
                 </span>
@@ -98,9 +98,9 @@ export function ContentCard({
       </div>
 
       <div className="p-6 flex flex-col flex-grow">
-        <h3 className="text-xl font-bold text-gray-900 mb-3">{title}</h3>
+        <h3 className="text-xl font-bold text-surface-foreground mb-3">{title}</h3>
 
-        <p className="text-gray-800 text-sm leading-relaxed mb-4">
+        <p className="text-surface-foreground text-sm leading-relaxed mb-4">
           {description ?? fallbackDescription ?? `Learn more about ${title.toLowerCase()}.`}
         </p>
 
@@ -109,14 +109,14 @@ export function ContentCard({
             {(features || towns)?.slice(0, 3).map((item, index) => (
               <li key={index} className="flex items-center gap-2 text-sm">
                 <div className="w-1.5 h-1.5 bg-brand-primary rounded-full flex-shrink-0"></div>
-                <span className="text-gray-700 line-clamp-1">{item}</span>
+                <span className="text-surface-secondary line-clamp-1">{item}</span>
               </li>
             ))}
           </ul>
         )}
 
         <div className="mt-auto">
-          <div className="inline-flex items-center justify-center w-full px-4 py-3 bg-brand-primary text-white font-semibold rounded-lg hover:bg-brand-primary-hover group-hover:scale-105 transition-all duration-200 text-sm focus:ring-2 focus:ring-brand-primary focus:ring-offset-2">
+          <div className="inline-flex items-center justify-center w-full px-4 py-3 bg-brand-primary text-on-brand-primary font-semibold rounded-lg hover:bg-brand-primary-hover group-hover:scale-105 transition-all duration-200 text-sm focus:ring-2 focus:ring-brand-primary focus:ring-offset-2">
             {contentType === "services" ? "Learn More" : "View Location Info"}
           </div>
         </div>

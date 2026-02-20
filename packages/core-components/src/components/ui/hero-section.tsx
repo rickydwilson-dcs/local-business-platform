@@ -28,13 +28,13 @@ export function HeroSection(props: HeroSectionProps) {
   } = props;
 
   return (
-    <section className="section-standard lg:py-24 bg-white">
+    <section className="section-standard lg:py-24 bg-surface-background">
       <div className="container-standard">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
             <h1 className="heading-hero">{title}</h1>
 
-            <p className="text-xl text-gray-800 mb-8 leading-relaxed">{description}</p>
+            <p className="text-xl text-surface-foreground mb-8 leading-relaxed">{description}</p>
 
             <div className="flex flex-col sm:flex-row gap-4 mb-8">
               <Link href={ctaUrl} className="btn-primary-lg">
@@ -42,7 +42,7 @@ export function HeroSection(props: HeroSectionProps) {
               </Link>
               <Link
                 href={`tel:${phone.replace(/\s/g, "")}`}
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-200 transition-colors whitespace-nowrap"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-surface-subtle text-surface-secondary font-semibold rounded-lg hover:bg-surface-subtle transition-colors whitespace-nowrap"
               >
                 <svg
                   aria-hidden="true"
@@ -66,7 +66,7 @@ export function HeroSection(props: HeroSectionProps) {
               {trustBadges.map((badgeText, index) => (
                 <div
                   key={index}
-                  className="inline-flex items-center gap-2 bg-gray-100 px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm"
+                  className="inline-flex items-center gap-2 bg-surface-subtle px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm"
                 >
                   <svg
                     aria-hidden="true"
@@ -87,7 +87,7 @@ export function HeroSection(props: HeroSectionProps) {
           </div>
 
           <div className="relative">
-            <div className="relative h-[400px] rounded-2xl shadow-lg overflow-hidden bg-gray-200">
+            <div className="relative h-[400px] rounded-2xl shadow-lg overflow-hidden bg-surface-subtle">
               {heroImage ? (
                 <Image
                   src={getImageUrl(heroImage)}
@@ -101,7 +101,7 @@ export function HeroSection(props: HeroSectionProps) {
                 />
               ) : (
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-gray-400 text-center">
+                  <div className="text-surface-muted-foreground text-center">
                     <svg
                       aria-hidden="true"
                       className="w-16 h-16 mx-auto mb-4"
@@ -115,7 +115,7 @@ export function HeroSection(props: HeroSectionProps) {
                       />
                     </svg>
                     <span className="text-lg font-medium">Hero Image</span>
-                    <p className="text-sm text-gray-700 mt-2">Professional service photography</p>
+                    <p className="text-sm text-surface-secondary mt-2">Professional service photography</p>
                   </div>
                 </div>
               )}

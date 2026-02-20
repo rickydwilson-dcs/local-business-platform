@@ -153,7 +153,7 @@ export function CoverageMap({
               ></path>
             </svg>
           </div>
-          <div className="text-gray-800">Loading interactive map...</div>
+          <div className="text-surface-foreground">Loading interactive map...</div>
         </div>
       </div>
     );
@@ -161,7 +161,7 @@ export function CoverageMap({
 
   return (
     <div
-      className={`${height} bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden ${className}`}
+      className={`${height} bg-surface-card rounded-xl shadow-sm border border-surface-subtle overflow-hidden ${className}`}
     >
       <MapContainer
         center={center}
@@ -189,13 +189,13 @@ export function CoverageMap({
             <Popup>
               <div className="p-2 min-w-[200px]">
                 <div className="flex items-start justify-between mb-2">
-                  <h3 className="font-semibold text-gray-900 text-lg">{location.name}</h3>
+                  <h3 className="font-semibold text-surface-foreground text-lg">{location.name}</h3>
                 </div>
 
-                <div className="text-sm text-gray-800 mb-2">{location.county}</div>
+                <div className="text-sm text-surface-foreground mb-2">{location.county}</div>
 
                 {location.description && (
-                  <p className="text-sm text-gray-700 mb-3 leading-relaxed">
+                  <p className="text-sm text-surface-secondary mb-3 leading-relaxed">
                     {location.description}
                   </p>
                 )}
@@ -216,7 +216,7 @@ export function CoverageMap({
                       }}
                       /* eslint-enable no-restricted-syntax */
                     ></div>
-                    <span className="text-xs text-gray-700">{location.county}</span>
+                    <span className="text-xs text-surface-secondary">{location.county}</span>
                   </div>
 
                   <button

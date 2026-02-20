@@ -25,11 +25,11 @@ export function CoverageStatsSection() {
   ];
 
   return (
-    <section className="section-standard bg-gradient-to-br from-gray-50 to-gray-100">
+    <section className="section-standard bg-gradient-to-br from-surface-subtle to-surface-subtle">
       <div className="container-standard">
         <div className="text-center mb-12">
           <h2 className="heading-section">Comprehensive South East Coverage</h2>
-          <p className="text-lg text-gray-800 mx-auto w-full lg:w-[85%]">
+          <p className="text-lg text-surface-foreground mx-auto w-full lg:w-[85%]">
             Unlike generic regional companies, we provide dedicated local specialists with genuine
             area expertise.
           </p>
@@ -38,10 +38,10 @@ export function CoverageStatsSection() {
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
           {stats.map((stat, index) => (
             <div key={index} className="text-center">
-              <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
+              <div className="bg-surface-card rounded-xl p-6 shadow-sm border border-surface-subtle hover:shadow-md transition-shadow">
                 <div className="stat-number text-brand-primary mb-2">{stat.number}</div>
-                <div className="text-gray-900 font-semibold text-lg mb-2">{stat.label}</div>
-                <div className="text-sm text-gray-800">{stat.description}</div>
+                <div className="text-surface-foreground font-semibold text-lg mb-2">{stat.label}</div>
+                <div className="text-sm text-surface-foreground">{stat.description}</div>
               </div>
             </div>
           ))}

@@ -7,6 +7,7 @@
 export type {
   ThemeConfig,
   ThemeName,
+  ComponentCategory,
   ComponentRegistry,
   PartialThemeConfig,
   DeepPartialThemeConfig,
@@ -15,7 +16,7 @@ export type {
   ValidatedThemeConfig,
 } from "./types";
 
-export { ThemeConfigSchema, ThemeNameSchema, ComponentRegistrySchema } from "./types";
+export { THEME_NAMES, ThemeConfigSchema, ThemeNameSchema, ComponentRegistrySchema } from "./types";
 
 // Default theme
 export { defaultTheme } from "./defaults";
@@ -30,6 +31,10 @@ export {
 
 // Tailwind plugin
 export { createThemePlugin } from "./tailwind-plugin";
+
+// Theme registry
+export { registerTheme, getRegisteredThemes } from "./theme-registry";
+export type { ThemeRegistryEntry } from "./theme-registry";
 
 // Utilities
 export {

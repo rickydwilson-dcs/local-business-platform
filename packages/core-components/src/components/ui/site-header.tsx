@@ -93,13 +93,13 @@ export function SiteHeader({
   const headerClasses = [
     sticky ? "sticky top-0" : "",
     "z-40",
-    isDark ? "bg-black border-b border-gray-800" : "bg-white border-b border-gray-200",
+    isDark ? "bg-surface-inverse border-b border-surface-subtle" : "bg-surface-card border-b border-surface-subtle",
   ]
     .filter(Boolean)
     .join(" ");
 
-  const navLinkClasses = `${isDark ? "text-white" : "text-gray-700"} hover:text-brand-primary transition-colors font-medium`;
-  const phoneClasses = `flex items-center gap-2 ${isDark ? "text-white" : "text-gray-700"} hover:text-brand-primary transition-colors`;
+  const navLinkClasses = `${isDark ? "text-white" : "text-surface-secondary"} hover:text-brand-primary transition-colors font-medium`;
+  const phoneClasses = `flex items-center gap-2 ${isDark ? "text-white" : "text-surface-secondary"} hover:text-brand-primary transition-colors`;
 
   return (
     <header className={headerClasses}>
@@ -154,7 +154,7 @@ export function SiteHeader({
             )}
             <Link
               href={primaryCta.href}
-              className="bg-brand-primary text-white px-5 py-2.5 rounded-lg font-semibold hover:bg-brand-primary-hover transition-colors"
+              className="bg-brand-primary text-on-brand-primary px-5 py-2.5 rounded-lg font-semibold hover:bg-brand-primary-hover transition-colors"
             >
               {primaryCta.label}
             </Link>

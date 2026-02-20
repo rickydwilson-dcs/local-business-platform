@@ -40,10 +40,10 @@ export function InfoCard({ icon: Icon, heading, text }: InfoCardProps) {
       </div>
 
       {/* Heading */}
-      <h3 className="text-xl font-semibold text-gray-900 mb-3">{heading}</h3>
+      <h3 className="text-xl font-semibold text-surface-foreground mb-3">{heading}</h3>
 
       {/* Text */}
-      <p className="text-gray-700 leading-relaxed">{text}</p>
+      <p className="text-surface-secondary leading-relaxed">{text}</p>
     </div>
   );
 }

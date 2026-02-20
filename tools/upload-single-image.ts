@@ -65,7 +65,7 @@ const r2Path = process.argv[3];
 if (!filePath || !r2Path) {
   console.error("Usage: tsx upload-single-image.ts <local-file-path> <r2-path>");
   console.error(
-    "Example: tsx upload-single-image.ts image.png colossus-reference/hero/service/image_01"
+    "Example: tsx upload-single-image.ts image.png colossus-scaffolding/hero/service/image_01"
   );
   process.exit(1);
 }

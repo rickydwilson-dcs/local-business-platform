@@ -32,7 +32,7 @@ export function BlogPostCard({
   return (
     <Link
       href={`/blog/${slug}`}
-      className="group relative bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col h-full"
+      className="group relative bg-surface-card rounded-2xl shadow-sm border border-surface-subtle overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col h-full"
     >
       {/* Image */}
       <div className="relative h-48 overflow-hidden bg-gradient-to-br from-brand-primary/10 to-brand-primary/20">
@@ -77,7 +77,7 @@ export function BlogPostCard({
       {/* Content */}
       <div className="p-6 flex flex-col flex-grow">
         {/* Meta */}
-        <div className="flex items-center gap-2 text-sm text-gray-500 mb-3">
+        <div className="flex items-center gap-2 text-sm text-surface-muted-foreground mb-3">
           <time dateTime={date}>{formattedDate}</time>
           {readingTime && (
             <>
@@ -88,12 +88,12 @@ export function BlogPostCard({
         </div>
 
         {/* Title */}
-        <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-brand-primary transition-colors line-clamp-2">
+        <h3 className="text-xl font-bold text-surface-foreground mb-3 group-hover:text-brand-primary transition-colors line-clamp-2">
           {title}
         </h3>
 
         {/* Excerpt */}
-        <p className="text-gray-700 text-sm leading-relaxed mb-4 line-clamp-3 flex-grow">
+        <p className="text-surface-secondary text-sm leading-relaxed mb-4 line-clamp-3 flex-grow">
           {excerpt}
         </p>
 

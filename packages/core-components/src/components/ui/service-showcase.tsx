@@ -31,7 +31,7 @@ export function ServiceShowcase({
   backgroundColor = "white",
   showBottomCTA = false,
 }: ServiceShowcaseProps) {
-  const bgClass = backgroundColor === "white" ? "bg-white" : "bg-surface-muted";
+  const bgClass = backgroundColor === "white" ? "bg-surface-background" : "bg-surface-muted";
 
   // Dynamic grid classes based on number of services for grid layout
   const getGridClass = (serviceCount: number) => {
@@ -72,7 +72,7 @@ export function ServiceShowcase({
                 >
                   {/* Image Section */}
                   <div className="w-full lg:w-1/2">
-                    <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-gray-100">
+                    <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-surface-subtle">
                       {service.image ? (
                         <Image
                           src={getImageUrl(service.image)}
@@ -136,7 +136,7 @@ export function ServiceShowcase({
                       {service.features.map((feature, featureIndex) => (
                         <li key={featureIndex} className="flex items-start gap-3">
                           <div className="flex-shrink-0 w-2 h-2 bg-brand-primary rounded-full mt-3"></div>
-                          <span className="text-gray-700">{feature}</span>
+                          <span className="text-surface-secondary">{feature}</span>
                         </li>
                       ))}
                     </ul>
@@ -160,11 +160,11 @@ export function ServiceShowcase({
 
           {/* Bottom CTA for alternating layout */}
           {showBottomCTA && (
-            <div className="text-center mt-16 pt-8 border-t border-gray-200">
-              <h3 className="text-xl font-semibold text-gray-900 mb-4">
+            <div className="text-center mt-16 pt-8 border-t border-surface-subtle">
+              <h3 className="text-xl font-semibold text-surface-foreground mb-4">
                 Need Help Choosing the Right Service?
               </h3>
-              <p className="text-gray-800 mb-6 max-w-2xl mx-auto">
+              <p className="text-surface-foreground mb-6 max-w-2xl mx-auto">
                 Our experienced team can assess your project requirements and recommend the most
                 suitable solution for your needs.
               </p>
@@ -197,8 +197,8 @@ export function ServiceShowcase({
             return (
               <div
                 key={index}
-                className={`group relative rounded-2xl overflow-hidden shadow-sm border border-gray-200 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 ${
-                  isEven ? "bg-white" : "bg-surface-muted"
+                className={`group relative rounded-2xl overflow-hidden shadow-sm border border-surface-subtle hover:shadow-lg hover:-translate-y-1 transition-all duration-300 ${
+                  isEven ? "bg-surface-card" : "bg-surface-muted"
                 }`}
               >
                 {/* Header with Image/Icon */}
@@ -260,9 +260,9 @@ export function ServiceShowcase({
 
                 {/* Content */}
                 <div className="p-6">
-                  <h3 className="text-xl font-bold text-gray-900 mb-3">{service.title}</h3>
+                  <h3 className="text-xl font-bold text-surface-foreground mb-3">{service.title}</h3>
 
-                  <p className="text-gray-800 text-sm leading-relaxed mb-4">
+                  <p className="text-surface-foreground text-sm leading-relaxed mb-4">
                     {service.description}
                   </p>
 
@@ -271,7 +271,7 @@ export function ServiceShowcase({
                     {service.features.map((feature, featureIndex) => (
                       <li key={featureIndex} className="flex items-start gap-2">
                         <div className="flex-shrink-0 w-1.5 h-1.5 bg-brand-primary rounded-full mt-2"></div>
-                        <span className="text-gray-700 text-sm">{feature}</span>
+                        <span className="text-surface-secondary text-sm">{feature}</span>
                       </li>
                     ))}
                   </ul>

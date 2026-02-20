@@ -29,7 +29,7 @@ export function CoverageAreas({
   ];
 
   return (
-    <section className="section-standard bg-white">
+    <section className="section-standard bg-surface-background">
       <div className="container-standard">
         <div className="grid lg:grid-cols-3 gap-12">
           <div className="lg:col-span-2">
@@ -37,7 +37,7 @@ export function CoverageAreas({
             <p className="text-body-lg mb-8">{description}</p>
 
             <div className="space-y-6">
-              <h3 className="text-xl font-semibold text-gray-900">
+              <h3 className="text-xl font-semibold text-surface-foreground">
                 Specialist Experience Across the Region
               </h3>
               <div className="grid md:grid-cols-2 gap-4">
@@ -58,7 +58,7 @@ export function CoverageAreas({
                         />
                       </svg>
                     </div>
-                    <span className="text-gray-900 font-medium text-sm">{project}</span>
+                    <span className="text-surface-foreground font-medium text-sm">{project}</span>
                   </div>
                 ))}
               </div>
@@ -81,8 +81,8 @@ export function CoverageAreas({
                     </svg>
                   </div>
                   <div>
-                    <h4 className="font-semibold text-gray-900 mb-2">Fully Certified & Insured</h4>
-                    <p className="text-gray-800 text-sm leading-relaxed">
+                    <h4 className="font-semibold text-surface-foreground mb-2">Fully Certified & Insured</h4>
+                    <p className="text-surface-foreground text-sm leading-relaxed">
                       All our installations across the region meet the latest industry standards,
                       with comprehensive insurance coverage and professional accreditation for
                       complete peace of mind.
@@ -94,8 +94,8 @@ export function CoverageAreas({
           </div>
 
           <div className="lg:col-span-1">
-            <div className="bg-surface-muted rounded-2xl p-6 border border-gray-200 sticky top-8">
-              <h3 className="text-xl font-semibold text-gray-900 mb-4 flex items-center gap-2">
+            <div className="bg-surface-muted rounded-2xl p-6 border border-surface-subtle sticky top-8">
+              <h3 className="text-xl font-semibold text-surface-foreground mb-4 flex items-center gap-2">
                 <svg className="h-5 w-5 text-brand-primary" fill="currentColor" viewBox="0 0 20 20">
                   <path
                     fillRule="evenodd"
@@ -109,12 +109,12 @@ export function CoverageAreas({
                 {areas.map((area) => (
                   <div
                     key={area.slug}
-                    className="flex items-center gap-3 p-3 bg-white rounded-lg shadow-sm"
+                    className="flex items-center gap-3 p-3 bg-surface-card rounded-lg shadow-sm"
                   >
                     <div className="flex-shrink-0 w-2 h-2 bg-brand-primary rounded-full"></div>
                     <Link
                       href={`${linkPrefix}/${area.slug}`}
-                      className="text-gray-900 font-medium hover:text-brand-primary transition-colors"
+                      className="text-surface-foreground font-medium hover:text-brand-primary transition-colors"
                     >
                       {area.name}
                     </Link>
@@ -122,8 +122,8 @@ export function CoverageAreas({
                 ))}
               </div>
 
-              <div className="mt-6 pt-6 border-t border-gray-200">
-                <div className="flex items-center gap-2 text-sm text-gray-800 mb-4">
+              <div className="mt-6 pt-6 border-t border-surface-subtle">
+                <div className="flex items-center gap-2 text-sm text-surface-foreground mb-4">
                   <svg
                     className="h-4 w-4 text-brand-primary"
                     fill="none"
@@ -139,7 +139,7 @@ export function CoverageAreas({
                   </svg>
                   Rapid Response Times
                 </div>
-                <p className="text-sm text-gray-800 mb-4">
+                <p className="text-sm text-surface-foreground mb-4">
                   24-48 hour installation across all South East locations with emergency callout
                   available.
                 </p>

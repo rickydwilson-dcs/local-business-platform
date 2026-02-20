@@ -17,18 +17,18 @@ interface CoverageMapSectionProps {
 
 export function CoverageMapSection({ locations, counties, center, zoom }: CoverageMapSectionProps) {
   return (
-    <section className="section-standard bg-gradient-to-br from-gray-50 to-gray-100">
+    <section className="section-standard bg-gradient-to-br from-surface-subtle to-surface-subtle">
       <div className="container-standard">
         <div className="text-center mb-12">
           <h2 className="heading-section">Interactive Coverage Map</h2>
-          <p className="text-lg text-gray-800 mx-auto w-full lg:w-[85%]">
+          <p className="text-lg text-surface-foreground mx-auto w-full lg:w-[85%]">
             Explore our comprehensive coverage across the South East. Click on any town marker to
             learn about our local specialists and area expertise.
           </p>
         </div>
 
         {/* Interactive Map */}
-        <div className="relative bg-white rounded-2xl shadow-sm border border-gray-200 p-4 md:p-8">
+        <div className="relative bg-surface-card rounded-2xl shadow-sm border border-surface-subtle p-4 md:p-8">
           <CoverageMap
             locations={locations}
             center={center}
@@ -40,25 +40,25 @@ export function CoverageMapSection({ locations, counties, center, zoom }: Covera
           <div className="mt-6 flex flex-wrap justify-center gap-4 text-sm">
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 bg-blue-600 rounded-full"></div>
-              <span className="text-gray-800">East Sussex</span>
+              <span className="text-surface-foreground">East Sussex</span>
             </div>
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 bg-emerald-600 rounded-full"></div>
-              <span className="text-gray-800">West Sussex</span>
+              <span className="text-surface-foreground">West Sussex</span>
             </div>
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 bg-red-600 rounded-full"></div>
-              <span className="text-gray-800">Kent</span>
+              <span className="text-surface-foreground">Kent</span>
             </div>
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 bg-purple-600 rounded-full"></div>
-              <span className="text-gray-800">Surrey</span>
+              <span className="text-surface-foreground">Surrey</span>
             </div>
           </div>
 
           {/* Mobile Map Instructions */}
           <div className="mt-4 text-center md:hidden">
-            <p className="text-sm text-gray-700">
+            <p className="text-sm text-surface-secondary">
               Tap any marker to view town details • Pinch to zoom • Drag to explore
             </p>
           </div>
@@ -70,13 +70,13 @@ export function CoverageMapSection({ locations, counties, center, zoom }: Covera
             <a
               key={county.slug}
               href={`/locations/${county.slug}`}
-              className="block bg-white rounded-lg p-4 border border-gray-200 hover:border-brand-primary hover:shadow-md transition-all group"
+              className="block bg-surface-card rounded-lg p-4 border border-surface-subtle hover:border-brand-primary hover:shadow-md transition-all group"
             >
               <div className="text-center">
-                <div className="font-semibold text-gray-900 group-hover:text-brand-primary transition-colors">
+                <div className="font-semibold text-surface-foreground group-hover:text-brand-primary transition-colors">
                   {county.name}
                 </div>
-                <div className="text-sm text-gray-700 mt-1">{county.townCount} towns covered</div>
+                <div className="text-sm text-surface-secondary mt-1">{county.townCount} towns covered</div>
               </div>
             </a>
           ))}

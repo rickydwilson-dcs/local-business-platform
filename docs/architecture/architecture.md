@@ -23,8 +23,9 @@ For detailed explanations of how each system works, see:
 local-business-platform/
 ├── sites/                          # Client websites
 │   ├── base-template/              # Gold-standard template for new sites
-│   ├── colossus-reference/         # Reference implementation (scaffolding)
-│   └── dj-fox-electrical/          # Production site (electrical)
+│   ├── colossus-scaffolding/       # Reference implementation (scaffolding)
+│   ├── dj-fox-electrical/          # Production site (electrical)
+│   └── showcase/                   # Internal component/theme showcase
 ├── packages/
 │   ├── core-components/            # Shared UI components (@platform/core-components)
 │   ├── theme-system/               # Theming engine (@platform/theme-system)

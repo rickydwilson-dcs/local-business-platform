@@ -16,13 +16,13 @@ For faster content creation, use the AI-powered location generator:
 
 ```bash
 # Generate a single location using AI
-pnpm content:generate:locations --site colossus-reference --locations "worthing" --context tools/examples/colossus-context.json
+pnpm content:generate:locations --site colossus-scaffolding --locations "worthing" --context tools/examples/colossus-context.json
 
 # Preview without writing (dry run)
-pnpm content:generate:locations --site colossus-reference --locations "worthing" --dry-run
+pnpm content:generate:locations --site colossus-scaffolding --locations "worthing" --dry-run
 
 # Use a specific AI provider (default: Claude)
-pnpm content:generate:locations --site colossus-reference --locations "worthing" --provider=gemini
+pnpm content:generate:locations --site colossus-scaffolding --locations "worthing" --provider=gemini
 ```
 
 The generator creates complete MDX files with:

@@ -22,7 +22,7 @@ export function ServiceGallery({
   const displayImages = images.length > 0 ? images : Array(placeholderCount).fill(null);
 
   return (
-    <section className="section-standard bg-white">
+    <section className="section-standard bg-surface-background">
       <div className="container-standard">
         <div className="mx-auto w-full lg:w-[90%] text-center mb-12">
           <h2 className="heading-section">{title}</h2>
@@ -33,7 +33,7 @@ export function ServiceGallery({
           {displayImages.map((src, i) => (
             <div
               key={i}
-              className="relative h-64 rounded-2xl overflow-hidden bg-gray-200 shadow-lg group"
+              className="relative h-64 rounded-2xl overflow-hidden bg-surface-subtle shadow-lg group"
             >
               {src ? (
                 <Image
@@ -45,7 +45,7 @@ export function ServiceGallery({
                 />
               ) : (
                 <div className="h-full flex items-center justify-center">
-                  <div className="text-gray-400 text-center">
+                  <div className="text-surface-muted-foreground text-center">
                     <svg className="w-12 h-12 mx-auto mb-2" fill="currentColor" viewBox="0 0 20 20">
                       <path
                         fillRule="evenodd"

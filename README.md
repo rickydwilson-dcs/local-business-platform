@@ -9,15 +9,16 @@ The monorepo uses Turborepo + pnpm workspaces. Shared code lives in `packages/`,
 ```
 local-business-platform/
 ├── packages/
-│   ├── core-components/       # Shared UI components (versioned with Changesets)
+│   ├── core-components/       # Shared UI components
 │   ├── theme-system/          # Tailwind plugin + CSS variable generation
+│   ├── themes/                # Named theme CSS packages (orion, vega, nova)
 │   └── intake-system/         # Client onboarding automation
 │
 ├── sites/
-│   ├── colossus-reference/    # Reference implementation (scaffolding business)
-│   ├── smiths-electrical-cambridge/  # Demo site (electrical business)
-│   ├── dj-fox-electrical/     # Demo site (electrical business)
-│   └── base-template/         # Gold-standard template for new sites
+│   ├── base-template/         # Gold-standard template for new sites
+│   ├── colossus-scaffolding/  # Reference implementation (scaffolding business)
+│   ├── dj-fox-electrical/     # Production site (electrical business)
+│   └── showcase/              # Internal component/theme showcase
 │
 ├── tools/                     # Site creation, image management, deployment scripts
 └── docs/                      # Architecture, standards, and how-to guides
@@ -43,7 +44,7 @@ pnpm build
 
 ```bash
 # Run a site locally
-cd sites/colossus-reference
+cd sites/colossus-scaffolding
 pnpm dev
 # Visit http://localhost:3000
 ```

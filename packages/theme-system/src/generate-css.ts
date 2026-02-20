@@ -16,14 +16,20 @@ export function generateCssVariables(config: ThemeConfig): Record<string, string
   vars["--color-brand-primary-hover"] = config.colors.brand.primaryHover;
   vars["--color-brand-secondary"] = config.colors.brand.secondary;
   vars["--color-brand-accent"] = config.colors.brand.accent;
+  vars["--color-brand-on-primary"] = config.colors.brand.onPrimary;
 
   // Surface Colors
   vars["--color-surface-background"] = config.colors.surface.background;
   vars["--color-surface-foreground"] = config.colors.surface.foreground;
+  vars["--color-surface-secondary-foreground"] = config.colors.surface.secondaryForeground;
+  vars["--color-surface-tertiary-foreground"] = config.colors.surface.tertiaryForeground;
   vars["--color-surface-muted"] = config.colors.surface.muted;
   vars["--color-surface-muted-foreground"] = config.colors.surface.mutedForeground;
   vars["--color-surface-card"] = config.colors.surface.card;
   vars["--color-surface-card-border"] = config.colors.surface.cardBorder;
+  vars["--color-surface-subtle"] = config.colors.surface.subtle;
+  vars["--color-surface-subtle-border"] = config.colors.surface.subtleBorder;
+  vars["--color-surface-inverse"] = config.colors.surface.inverse;
 
   // Semantic Colors
   vars["--color-success"] = config.colors.semantic.success;

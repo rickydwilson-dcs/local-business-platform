@@ -6,6 +6,14 @@
 import { z } from "zod";
 
 /**
+ * Component categories for section blueprints.
+ * Used by the ingestion pipeline and theme manifests.
+ */
+export type ComponentCategory =
+  | "Hero" | "Navigation" | "Cards" | "CTA" | "Content"
+  | "Social Proof" | "Blog" | "Stats" | "Footer" | "Custom";
+
+/**
  * Typography scale entry with size, lineHeight, letterSpacing, and weight
  */
 export interface TypographyScaleEntry {
@@ -43,12 +51,18 @@ export interface ThemeConfig {
       secondary: string;
       /** Accent color for highlights */
       accent: string;
+      /** Contrast-safe text on brand-primary backgrounds */
+      onPrimary: string;
     };
     surface: {
       /** Page background color */
       background: string;
       /** Primary text color */
       foreground: string;
+      /** Mid-tone text (replaces text-gray-700) */
+      secondaryForeground: string;
+      /** Lighter text (replaces text-gray-600) */
+      tertiaryForeground: string;
       /** Muted/secondary backgrounds */
       muted: string;
       /** Muted text color */
@@ -57,6 +71,12 @@ export interface ThemeConfig {
       card: string;
       /** Card border */
       cardBorder: string;
+      /** Very light background (replaces bg-gray-50/100) */
+      subtle: string;
+      /** Light border (replaces border-gray-200/300) */
+      subtleBorder: string;
+      /** Dark section background (replaces bg-black) */
+      inverse: string;
     };
     semantic: {
       success: string;
@@ -246,8 +266,10 @@ export interface ThemeConfig {
  * Named theme identifiers — each maps to packages/themes/[name]
  * - orion: dark header, full-bleed hero, circular icons (industrial style)
  * - vega:  light header, split hero, card grid (professional style)
+ * - nova:  reference-driven scaffold (generated from site analysis)
  */
-export type ThemeName = "orion" | "vega";
+export const THEME_NAMES = ["orion", "vega", "nova"] as const;
+export type ThemeName = (typeof THEME_NAMES)[number];
 
 /**
  * Component registry — maps a named theme to its component variant choices.
@@ -264,7 +286,7 @@ export interface ComponentRegistry {
   /** Card style */
   cardVariant: "icon-circle" | "standard" | "overlay";
   /** Dark section accent style */
-  sectionVariant: "dark-accent" | "gradient" | "standard";
+  sectionVariant: "dark-accent" | "gradient" | "standard" | "banded";
 }
 
 /**
@@ -317,14 +339,14 @@ export type DeepPartialThemeConfig = {
 
 // Zod Schemas for validation
 
-export const ThemeNameSchema = z.enum(["orion", "vega"]);
+export const ThemeNameSchema = z.enum(THEME_NAMES);
 
 export const ComponentRegistrySchema = z.object({
   theme: ThemeNameSchema,
   heroVariant: z.enum(["image-overlay", "split", "minimal"]),
   headerVariant: z.enum(["dark", "light"]),
   cardVariant: z.enum(["icon-circle", "standard", "overlay"]),
-  sectionVariant: z.enum(["dark-accent", "gradient", "standard"]),
+  sectionVariant: z.enum(["dark-accent", "gradient", "standard", "banded"]),
 });
 
 const typographyScaleEntrySchema = z.object({
@@ -349,14 +371,20 @@ export const ThemeConfigSchema = z.object({
       primaryHover: z.string().regex(/^#[0-9A-Fa-f]{6}$/, "Must be a valid hex color"),
       secondary: z.string().regex(/^#[0-9A-Fa-f]{6}$/, "Must be a valid hex color"),
       accent: z.string().regex(/^#[0-9A-Fa-f]{6}$/, "Must be a valid hex color"),
+      onPrimary: z.string().regex(/^#[0-9A-Fa-f]{6}$/, "Must be a valid hex color"),
     }),
     surface: z.object({
       background: z.string().regex(/^#[0-9A-Fa-f]{6}$/, "Must be a valid hex color"),
       foreground: z.string().regex(/^#[0-9A-Fa-f]{6}$/, "Must be a valid hex color"),
+      secondaryForeground: z.string().regex(/^#[0-9A-Fa-f]{6}$/, "Must be a valid hex color"),
+      tertiaryForeground: z.string().regex(/^#[0-9A-Fa-f]{6}$/, "Must be a valid hex color"),
       muted: z.string().regex(/^#[0-9A-Fa-f]{6}$/, "Must be a valid hex color"),
       mutedForeground: z.string().regex(/^#[0-9A-Fa-f]{6}$/, "Must be a valid hex color"),
       card: z.string().regex(/^#[0-9A-Fa-f]{6}$/, "Must be a valid hex color"),
       cardBorder: z.string().regex(/^#[0-9A-Fa-f]{6}$/, "Must be a valid hex color"),
+      subtle: z.string().regex(/^#[0-9A-Fa-f]{6}$/, "Must be a valid hex color"),
+      subtleBorder: z.string().regex(/^#[0-9A-Fa-f]{6}$/, "Must be a valid hex color"),
+      inverse: z.string().regex(/^#[0-9A-Fa-f]{6}$/, "Must be a valid hex color"),
     }),
     semantic: z.object({
       success: z.string().regex(/^#[0-9A-Fa-f]{6}$/, "Must be a valid hex color"),

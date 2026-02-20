@@ -30,23 +30,23 @@ export function ServiceFAQ({
           {items.map((item, i) => (
             <div
               key={i}
-              className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow"
+              className="bg-surface-card border border-surface-subtle rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow"
             >
-              <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-start gap-3">
+              <h3 className="text-lg font-semibold text-surface-foreground mb-3 flex items-start gap-3">
                 <span className="flex-shrink-0 w-6 h-6 bg-brand-primary rounded-full flex items-center justify-center text-white text-sm font-bold">
                   Q
                 </span>
                 {item.question}
               </h3>
               <div className="ml-9">
-                <p className="text-gray-800 leading-relaxed">{item.answer}</p>
+                <p className="text-surface-foreground leading-relaxed">{item.answer}</p>
               </div>
             </div>
           ))}
         </div>
 
         <div className="text-center mt-12">
-          <p className="text-gray-800 mb-4">Still have questions?</p>
+          <p className="text-surface-foreground mb-4">Still have questions?</p>
           <a href={`tel:${phoneTel}`} className="btn-primary gap-2">
             <svg
               aria-hidden="true"

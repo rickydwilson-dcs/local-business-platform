@@ -25,7 +25,7 @@ export function LocalAuthorityExpertise({
   supportItems,
   backgroundColor = "gray",
 }: LocalAuthorityExpertiseProps) {
-  const bgClass = backgroundColor === "white" ? "bg-white" : "bg-surface-muted";
+  const bgClass = backgroundColor === "white" ? "bg-surface-background" : "bg-surface-muted";
 
   return (
     <section className={`section-standard ${bgClass}`}>
@@ -38,7 +38,7 @@ export function LocalAuthorityExpertise({
 
         {/* Local Authority Expertise Section */}
         <div className="mb-16">
-          <h3 className="text-2xl font-semibold text-gray-900 mb-8 text-center">
+          <h3 className="text-2xl font-semibold text-surface-foreground mb-8 text-center">
             Local Authority Expertise
           </h3>
 
@@ -46,7 +46,7 @@ export function LocalAuthorityExpertise({
           <div className="grid lg:grid-cols-2 gap-8">
             {/* Left Column - Local Authority Expertise */}
             <div className="card-simple">
-              <p className="text-gray-800 mb-6 leading-relaxed">
+              <p className="text-surface-foreground mb-6 leading-relaxed">
                 Three decades working with {authorityName} means we understand the local
                 requirements, planning processes, and regulatory landscape.
               </p>
@@ -55,7 +55,7 @@ export function LocalAuthorityExpertise({
                 {expertiseItems.map((item, index) => (
                   <li key={index} className="flex items-start text-sm">
                     <div className="w-1.5 h-1.5 bg-brand-primary rounded-full mr-3 mt-2 flex-shrink-0"></div>
-                    <span className="text-gray-900">{item.title}</span>
+                    <span className="text-surface-foreground">{item.title}</span>
                   </li>
                 ))}
               </ul>
@@ -63,8 +63,8 @@ export function LocalAuthorityExpertise({
 
             {/* Right Column - Permit & Planning Support */}
             <div className="card-simple">
-              <h4 className="font-semibold text-gray-900 mb-4">Permit & Planning Support</h4>
-              <p className="text-gray-800 mb-6 leading-relaxed">
+              <h4 className="font-semibold text-surface-foreground mb-4">Permit & Planning Support</h4>
+              <p className="text-surface-foreground mb-6 leading-relaxed">
                 We handle all permit applications, planning submissions, and council liaison work,
                 saving you time and ensuring compliance with local regulations.
               </p>
@@ -72,8 +72,8 @@ export function LocalAuthorityExpertise({
               <div className="space-y-4">
                 {supportItems.map((item, index) => (
                   <div key={index}>
-                    <h5 className="font-semibold text-gray-900 mb-2">{item.title}</h5>
-                    <p className="text-gray-800 leading-relaxed">{item.description}</p>
+                    <h5 className="font-semibold text-surface-foreground mb-2">{item.title}</h5>
+                    <p className="text-surface-foreground leading-relaxed">{item.description}</p>
                   </div>
                 ))}
               </div>

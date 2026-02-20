@@ -1,4 +1,3 @@
-#!/usr/bin/env ts-node
 /**
  * Theme Validation CLI
  * Validates theme configurations for correctness and accessibility

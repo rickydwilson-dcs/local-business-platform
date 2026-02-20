@@ -191,18 +191,18 @@ Complete project history and achievements organized by development phase.
 - `tools/generate-locations.ts` - Location page generator CLI
 - `tools/test-ai-connection.ts` - AI provider connectivity test
 - `tools/examples/colossus-context.json` - Example business context
-- `sites/colossus-reference/lib/validators/types.ts` - Validation interfaces
-- `sites/colossus-reference/lib/validators/index.ts` - Validator registry
-- `sites/colossus-reference/lib/validators/readability-validator.ts`
-- `sites/colossus-reference/lib/validators/seo-validator.ts`
-- `sites/colossus-reference/lib/validators/uniqueness-validator.ts`
-- `sites/colossus-reference/scripts/validate-quality.ts` - Quality validator CLI
+- `sites/colossus-scaffolding/lib/validators/types.ts` - Validation interfaces
+- `sites/colossus-scaffolding/lib/validators/index.ts` - Validator registry
+- `sites/colossus-scaffolding/lib/validators/readability-validator.ts`
+- `sites/colossus-scaffolding/lib/validators/seo-validator.ts`
+- `sites/colossus-scaffolding/lib/validators/uniqueness-validator.ts`
+- `sites/colossus-scaffolding/scripts/validate-quality.ts` - Quality validator CLI
 
 **Files Modified:**
 
 - `package.json` - Added `@anthropic-ai/sdk`, new scripts
 - `.env.example` - Documented `ANTHROPIC_API_KEY`
-- `sites/colossus-reference/package.json` - Added `validate:quality` scripts
+- `sites/colossus-scaffolding/package.json` - Added `validate:quality` scripts
 
 **New npm Scripts:**
 
@@ -214,7 +214,7 @@ pnpm test:ai:gemini             # Test Gemini specifically
 pnpm content:generate:services  # Generate service pages
 pnpm content:generate:locations # Generate location pages
 
-# Site level (sites/colossus-reference/)
+# Site level (sites/colossus-scaffolding/)
 npm run validate:quality        # Run all quality validators
 npm run validate:quality:ai     # Include AI-powered validators (future)
 ```
@@ -270,8 +270,8 @@ npm run validate:quality:ai     # Include AI-powered validators (future)
 **Files Modified:**
 
 - `packages/core-components/` - All UI components now use CSS variables
-- `sites/colossus-reference/theme.config.ts` - Colossus brand colors
-- `sites/colossus-reference/tailwind.config.ts` - Uses `createThemePlugin()`
+- `sites/colossus-scaffolding/theme.config.ts` - Colossus brand colors
+- `sites/colossus-scaffolding/tailwind.config.ts` - Uses `createThemePlugin()`
 
 **Technical Notes:**
 
@@ -298,12 +298,12 @@ npm run validate:quality:ai     # Include AI-powered validators (future)
 
 **Files Modified:**
 
-- `sites/colossus-reference/app/layout.tsx` - Added viewport export
-- `sites/colossus-reference/components/ui/service-gallery.tsx` - Alt text + new props
-- `sites/colossus-reference/components/ui/service-showcase.tsx` - Alt text optimization
-- `sites/colossus-reference/components/ui/content-card.tsx` - Alt text standardization
-- `sites/colossus-reference/components/ui/certificate-gallery.tsx` - Alt text enhancement
-- `sites/colossus-reference/components/ui/certificate-lightbox.tsx` - Alt text consistency
+- `sites/colossus-scaffolding/app/layout.tsx` - Added viewport export
+- `sites/colossus-scaffolding/components/ui/service-gallery.tsx` - Alt text + new props
+- `sites/colossus-scaffolding/components/ui/service-showcase.tsx` - Alt text optimization
+- `sites/colossus-scaffolding/components/ui/content-card.tsx` - Alt text standardization
+- `sites/colossus-scaffolding/components/ui/certificate-gallery.tsx` - Alt text enhancement
+- `sites/colossus-scaffolding/components/ui/certificate-lightbox.tsx` - Alt text consistency
 
 **Expected Impact:**
 
@@ -326,10 +326,10 @@ npm run validate:quality:ai     # Include AI-powered validators (future)
 
 **Files Modified:**
 
-- `sites/colossus-reference/lib/anchor-text.ts` - NEW: Centralized anchor text variation utilities
-- `sites/colossus-reference/components/ui/footer.tsx` - Service and location link text variation
-- `sites/colossus-reference/components/ui/locations-dropdown.tsx` - County and town link variation
-- `sites/colossus-reference/components/ui/mobile-menu.tsx` - Mobile navigation link variation
+- `sites/colossus-scaffolding/lib/anchor-text.ts` - NEW: Centralized anchor text variation utilities
+- `sites/colossus-scaffolding/components/ui/footer.tsx` - Service and location link text variation
+- `sites/colossus-scaffolding/components/ui/locations-dropdown.tsx` - County and town link variation
+- `sites/colossus-scaffolding/components/ui/mobile-menu.tsx` - Mobile navigation link variation
 
 **Expected Impact:**
 
@@ -349,7 +349,7 @@ npm run validate:quality:ai     # Include AI-powered validators (future)
 
 **Files Modified:**
 
-- `sites/colossus-reference/lib/schema.ts` - Enhanced `getServiceAreaSchema` function
+- `sites/colossus-scaffolding/lib/schema.ts` - Enhanced `getServiceAreaSchema` function
 
 **Expected Impact:**
 
@@ -368,8 +368,8 @@ npm run validate:quality:ai     # Include AI-powered validators (future)
 
 **Files Modified:**
 
-- `sites/colossus-reference/app/layout.tsx` - Added preconnect/dns-prefetch hints
-- `sites/colossus-reference/next.config.ts` - Reduced minimumCacheTTL to 90 days
+- `sites/colossus-scaffolding/app/layout.tsx` - Added preconnect/dns-prefetch hints
+- `sites/colossus-scaffolding/next.config.ts` - Reduced minimumCacheTTL to 90 days
 
 **Expected Impact:**
 
@@ -471,14 +471,14 @@ Two significant code quality improvements implemented from code review:
 **Files Created:**
 
 - `packages/core-components/eslint.config.mjs`
-- `sites/colossus-reference/lib/locations-config.ts`
+- `sites/colossus-scaffolding/lib/locations-config.ts`
 
 **Files Modified:**
 
 - `packages/core-components/package.json` - lint/type-check scripts + ESLint deps
 - `packages/core-components/src/components/ui/service-cards.tsx` - React key fix
 - `packages/core-components/tsconfig.json` - JSX support
-- `sites/colossus-reference/lib/content.ts` - Dynamic discovery import
+- `sites/colossus-scaffolding/lib/content.ts` - Dynamic discovery import
 
 ---
 
@@ -540,17 +540,17 @@ All vulnerabilities identified in security audit have been addressed:
 
 **Files Created:**
 
-- `sites/colossus-reference/lib/security/html-escape.ts`
-- `sites/colossus-reference/lib/security/ip-utils.ts`
-- `sites/colossus-reference/lib/analytics/consent-schema.ts`
+- `sites/colossus-scaffolding/lib/security/html-escape.ts`
+- `sites/colossus-scaffolding/lib/security/ip-utils.ts`
+- `sites/colossus-scaffolding/lib/analytics/consent-schema.ts`
 
 **Files Modified:**
 
-- `sites/colossus-reference/app/api/contact/route.tsx` - HTML escaping + secure IP
-- `sites/colossus-reference/middleware.ts` - Secure IP + validated consent
-- `sites/colossus-reference/lib/analytics/ga4.ts` - Security documentation
-- `sites/colossus-reference/app/api/analytics/debug/route.ts` - Validated consent
-- `sites/colossus-reference/next.config.ts` - Security headers + CSP hardening
+- `sites/colossus-scaffolding/app/api/contact/route.tsx` - HTML escaping + secure IP
+- `sites/colossus-scaffolding/middleware.ts` - Secure IP + validated consent
+- `sites/colossus-scaffolding/lib/analytics/ga4.ts` - Security documentation
+- `sites/colossus-scaffolding/app/api/analytics/debug/route.ts` - Validated consent
+- `sites/colossus-scaffolding/next.config.ts` - Security headers + CSP hardening
 - `.husky/pre-push` - Skip local smoke tests
 - `package.json` - pnpm override for vite
 
@@ -562,7 +562,7 @@ All vulnerabilities identified in security audit have been addressed:
 
 - ✅ **React 19.1.2** - Upgraded from 19.1.0 to patch CVE-2025-55182
 - ✅ **Remote Code Execution Fix** - Patched critical vulnerability in React Server Components (CVSS 10.0)
-- ✅ **All Packages Updated** - colossus-reference, joes-plumbing-canterbury, core-components
+- ✅ **All Packages Updated** - colossus-scaffolding, joes-plumbing-canterbury, core-components
 
 **Vulnerability Details:**
 
@@ -574,7 +574,7 @@ All vulnerabilities identified in security audit have been addressed:
 
 **Files Changed:**
 
-- Modified: `sites/colossus-reference/package.json`
+- Modified: `sites/colossus-scaffolding/package.json`
 - Modified: `sites/joes-plumbing-canterbury/package.json`
 - Modified: `packages/core-components/package.json`
 - Modified: `pnpm-lock.yaml`
@@ -610,11 +610,11 @@ All vulnerabilities identified in security audit have been addressed:
 - **Modern ESLint** - Native flat config eliminates compatibility issues
 - **Better Type Safety** - Updated TypeScript definitions from Next.js 16
 - **Serialization Compatible** - MDX string format prevents Turbopack serialization errors
-- **All Sites Updated** - colossus-reference, joes-plumbing-canterbury, and packages/core-components
+- **All Sites Updated** - colossus-scaffolding, joes-plumbing-canterbury, and packages/core-components
 
 **Sites Affected:**
 
-- ✅ sites/colossus-reference
+- ✅ sites/colossus-scaffolding
 - ✅ sites/joes-plumbing-canterbury
 - ✅ packages/core-components
 

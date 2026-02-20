@@ -29,7 +29,7 @@ export function CountyGatewayCards({ counties }: CountyGatewayCardsProps) {
       <div className="container-standard">
         <div className="text-center mb-12">
           <h2 className="heading-section">Explore Our County Coverage</h2>
-          <p className="text-lg text-gray-800 mx-auto w-full lg:w-[85%]">
+          <p className="text-lg text-surface-foreground mx-auto w-full lg:w-[85%]">
             Each county has unique challenges and requirements. Our local teams understand the
             specific needs of your area.
           </p>
@@ -39,12 +39,12 @@ export function CountyGatewayCards({ counties }: CountyGatewayCardsProps) {
           {counties.map((county) => (
             <div
               key={county.slug}
-              className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow"
+              className="bg-surface-card rounded-xl shadow-sm border border-surface-subtle p-6 hover:shadow-md transition-shadow"
             >
               <div className="flex items-start justify-between mb-4">
                 <div>
-                  <h3 className="text-2xl font-bold text-gray-900 mb-2">{county.name}</h3>
-                  <div className="text-sm text-gray-700 mb-3">
+                  <h3 className="text-2xl font-bold text-surface-foreground mb-2">{county.name}</h3>
+                  <div className="text-sm text-surface-secondary mb-3">
                     {county.towns.length} towns covered
                   </div>
                 </div>
@@ -70,17 +70,17 @@ export function CountyGatewayCards({ counties }: CountyGatewayCardsProps) {
                 </Link>
               </div>
 
-              <p className="text-gray-800 mb-6">{county.description}</p>
+              <p className="text-surface-foreground mb-6">{county.description}</p>
 
               {/* Highlights */}
               {county.highlights.length > 0 && (
                 <div className="mb-6">
-                  <h4 className="font-semibold text-gray-900 mb-3">Our Specialties:</h4>
+                  <h4 className="font-semibold text-surface-foreground mb-3">Our Specialties:</h4>
                   <div className="space-y-2">
                     {county.highlights.map((highlight, index) => (
                       <div key={index} className="flex items-center gap-2">
                         <div className="w-1.5 h-1.5 bg-brand-primary rounded-full flex-shrink-0"></div>
-                        <span className="text-sm text-gray-700">{highlight}</span>
+                        <span className="text-sm text-surface-secondary">{highlight}</span>
                       </div>
                     ))}
                   </div>
@@ -89,13 +89,13 @@ export function CountyGatewayCards({ counties }: CountyGatewayCardsProps) {
 
               {/* Towns Grid */}
               <div className="mb-6">
-                <h4 className="font-semibold text-gray-900 mb-3">Towns Covered:</h4>
+                <h4 className="font-semibold text-surface-foreground mb-3">Towns Covered:</h4>
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                   {county.towns.slice(0, 6).map((town) => (
                     <Link
                       key={town.slug}
                       href={town.href}
-                      className="text-sm text-gray-800 hover:text-brand-primary transition-colors flex items-center gap-1"
+                      className="text-sm text-surface-foreground hover:text-brand-primary transition-colors flex items-center gap-1"
                     >
                       {town.name}
                     </Link>

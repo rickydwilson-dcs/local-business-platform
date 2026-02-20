@@ -15,8 +15,8 @@
  *
  * Usage:
  *   pnpm sites:list
- *   pnpm sites:show colossus-reference
- *   pnpm sites:sync colossus-reference
+ *   pnpm sites:show colossus-scaffolding
+ *   pnpm sites:sync colossus-scaffolding
  *   pnpm sites:sync-all
  *   pnpm sites:interactive
  */

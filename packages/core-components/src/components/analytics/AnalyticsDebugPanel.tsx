@@ -151,17 +151,17 @@ export function AnalyticsDebugPanel({
 
       {/* Debug Panel */}
       {isOpen && (
-        <div className="absolute bottom-12 right-0 w-96 max-h-96 bg-white border border-gray-200 rounded-lg shadow-xl overflow-hidden">
-          <div className="p-4 bg-gray-50 border-b border-gray-200">
-            <h3 className="font-semibold text-gray-900">Analytics Debug Panel</h3>
-            <p className="text-xs text-gray-600 mt-1">Development Mode Only</p>
+        <div className="absolute bottom-12 right-0 w-96 max-h-96 bg-surface-card border border-surface-subtle rounded-lg shadow-xl overflow-hidden">
+          <div className="p-4 bg-surface-subtle border-b border-surface-subtle">
+            <h3 className="font-semibold text-surface-foreground">Analytics Debug Panel</h3>
+            <p className="text-xs text-surface-tertiary mt-1">Development Mode Only</p>
           </div>
 
           <div className="max-h-80 overflow-y-auto">
             {/* Status Overview */}
             <div className="p-4 space-y-3">
               <div>
-                <h4 className="font-medium text-gray-900 mb-2">System Status</h4>
+                <h4 className="font-medium text-surface-foreground mb-2">System Status</h4>
                 <div className="space-y-1 text-sm">
                   <div className="flex justify-between">
                     <span>Analytics Enabled:</span>
@@ -204,7 +204,7 @@ export function AnalyticsDebugPanel({
 
               {/* Consent Status */}
               <div>
-                <h4 className="font-medium text-gray-900 mb-2">Consent Status</h4>
+                <h4 className="font-medium text-surface-foreground mb-2">Consent Status</h4>
                 {consent ? (
                   <div className="space-y-1 text-sm">
                     <div className="flex justify-between">
@@ -219,18 +219,18 @@ export function AnalyticsDebugPanel({
                         {consent.marketing ? "Granted" : "Denied"}
                       </span>
                     </div>
-                    <div className="text-xs text-gray-600">
+                    <div className="text-xs text-surface-tertiary">
                       Version: {consent.version} | {new Date(consent.timestamp).toLocaleString()}
                     </div>
                   </div>
                 ) : (
-                  <div className="text-sm text-gray-600">No consent recorded</div>
+                  <div className="text-sm text-surface-tertiary">No consent recorded</div>
                 )}
               </div>
 
               {/* Platform Status */}
               <div>
-                <h4 className="font-medium text-gray-900 mb-2">Platform Status</h4>
+                <h4 className="font-medium text-surface-foreground mb-2">Platform Status</h4>
                 <div className="space-y-1 text-sm">
                   <div className="flex justify-between">
                     <span>GA4:</span>
@@ -285,8 +285,8 @@ export function AnalyticsDebugPanel({
             </div>
 
             {/* Test Actions */}
-            <div className="border-t border-gray-200 p-4">
-              <h4 className="font-medium text-gray-900 mb-3">Test Actions</h4>
+            <div className="border-t border-surface-subtle p-4">
+              <h4 className="font-medium text-surface-foreground mb-3">Test Actions</h4>
               <div className="space-y-2">
                 <button
                   onClick={testPageView}
@@ -312,7 +312,7 @@ export function AnalyticsDebugPanel({
                 <button
                   onClick={loadDebugData}
                   disabled={loading}
-                  className="w-full px-3 py-2 text-sm bg-gray-500 text-white rounded hover:bg-gray-600 disabled:opacity-50 transition-colors"
+                  className="w-full px-3 py-2 text-sm bg-surface-tertiary text-white rounded hover:bg-surface-foreground disabled:opacity-50 transition-colors"
                 >
                   Refresh Data
                 </button>
@@ -321,12 +321,12 @@ export function AnalyticsDebugPanel({
 
             {/* Test Results */}
             {testResults.length > 0 && (
-              <div className="border-t border-gray-200 p-4">
+              <div className="border-t border-surface-subtle p-4">
                 <div className="flex items-center justify-between mb-3">
-                  <h4 className="font-medium text-gray-900">Recent Tests</h4>
+                  <h4 className="font-medium text-surface-foreground">Recent Tests</h4>
                   <button
                     onClick={clearResults}
-                    className="text-xs text-gray-500 hover:text-gray-700"
+                    className="text-xs text-surface-muted-foreground hover:text-surface-secondary"
                   >
                     Clear
                   </button>
@@ -363,9 +363,9 @@ export function AnalyticsDebugPanel({
 
             {/* Loading State */}
             {loading && (
-              <div className="border-t border-gray-200 p-4 text-center">
+              <div className="border-t border-surface-subtle p-4 text-center">
                 <div className="inline-block animate-spin rounded-full h-4 w-4 border-b-2 border-purple-600"></div>
-                <span className="ml-2 text-sm text-gray-600">Loading...</span>
+                <span className="ml-2 text-sm text-surface-tertiary">Loading...</span>
               </div>
             )}
           </div>

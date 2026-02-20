@@ -71,7 +71,7 @@ export function CertificateGalleryExample() {
   };
 
   return (
-    <section className="section-standard bg-white">
+    <section className="section-standard bg-surface-background">
       <div className="container-standard">
         <div className="section-header">
           <h2 className="heading-section">Our Certifications & Accreditations</h2>
@@ -96,7 +96,7 @@ export function CertificateGalleryExample() {
                   className="object-contain"
                 />
               </div>
-              <h3 className="text-sm sm:text-base font-semibold text-gray-900 text-center group-hover:text-brand-primary transition-colors">
+              <h3 className="text-sm sm:text-base font-semibold text-surface-foreground text-center group-hover:text-brand-primary transition-colors">
                 {cert.name}
               </h3>
             </button>

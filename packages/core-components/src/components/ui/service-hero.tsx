@@ -30,13 +30,13 @@ export function ServiceHero(props: ServiceHeroProps) {
   const phoneTel = phone === PHONE_DISPLAY ? PHONE_TEL : phone.replace(/\s/g, "");
 
   return (
-    <section className="py-16 sm:py-20 lg:py-24 bg-white">
+    <section className="py-16 sm:py-20 lg:py-24 bg-surface-background">
       <div className="mx-auto w-full lg:w-[90%] px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
             {badge && (
               <div className="mb-6">
-                <span className="px-4 py-2 bg-brand-primary text-white text-sm font-medium rounded-full">
+                <span className="px-4 py-2 bg-brand-primary text-on-brand-primary text-sm font-medium rounded-full">
                   {badge}
                 </span>
               </div>
@@ -44,7 +44,7 @@ export function ServiceHero(props: ServiceHeroProps) {
 
             <h1 className="heading-hero">{title}</h1>
 
-            <p className="text-xl text-gray-800 mb-8 leading-relaxed">{description}</p>
+            <p className="text-xl text-surface-foreground mb-8 leading-relaxed">{description}</p>
 
             <div className="flex flex-col sm:flex-row gap-4 mb-8">
               <Link href={ctaUrl} className="btn-primary-lg">
@@ -52,7 +52,7 @@ export function ServiceHero(props: ServiceHeroProps) {
               </Link>
               <Link
                 href={`tel:${phoneTel}`}
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-200 transition-colors"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-surface-subtle text-surface-secondary font-semibold rounded-lg hover:bg-surface-subtle transition-colors"
               >
                 <svg
                   aria-hidden="true"
@@ -76,7 +76,7 @@ export function ServiceHero(props: ServiceHeroProps) {
               {trustBadges.map((badgeText, index) => (
                 <div
                   key={index}
-                  className="inline-flex items-center gap-2 bg-gray-100 px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm"
+                  className="inline-flex items-center gap-2 bg-surface-subtle px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm"
                 >
                   <svg
                     aria-hidden="true"
@@ -110,8 +110,8 @@ export function ServiceHero(props: ServiceHeroProps) {
                 quality={65}
               />
             ) : (
-              <div className="relative h-[400px] bg-gray-200 rounded-2xl shadow-lg flex items-center justify-center">
-                <div className="text-gray-400 text-center">
+              <div className="relative h-[400px] bg-surface-subtle rounded-2xl shadow-lg flex items-center justify-center">
+                <div className="text-surface-muted-foreground text-center">
                   <svg
                     aria-hidden="true"
                     className="w-16 h-16 mx-auto mb-4"
@@ -125,7 +125,7 @@ export function ServiceHero(props: ServiceHeroProps) {
                     />
                   </svg>
                   <span className="text-lg font-medium">Service Hero Image</span>
-                  <p className="text-sm text-gray-700 mt-2">Professional service photography</p>
+                  <p className="text-sm text-surface-secondary mt-2">Professional service photography</p>
                 </div>
               </div>
             )}
