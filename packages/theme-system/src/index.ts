@@ -31,6 +31,10 @@ export {
 // Tailwind plugin
 export { createThemePlugin } from "./tailwind-plugin";
 
+// Theme registry
+export { registerTheme, getRegisteredThemes } from "./theme-registry";
+export type { ThemeRegistryEntry } from "./theme-registry";
+
 // Utilities
 export {
   deepMerge,

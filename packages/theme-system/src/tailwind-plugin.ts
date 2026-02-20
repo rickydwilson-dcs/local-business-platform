@@ -13,7 +13,12 @@ import type { DeepPartialThemeConfig } from "./types";
 /**
  * Create a Tailwind plugin from theme config
  */
-export function createThemePlugin(userConfig: DeepPartialThemeConfig = {}) {
+export function createThemePlugin(
+  userConfig: DeepPartialThemeConfig = {},
+  options: { selector?: string } = {}
+) {
+  const selector = options.selector ?? ':root';
+
   // Deep merge user config with defaults
   const config = deepMerge(
     defaultTheme as unknown as Record<string, unknown>,
@@ -22,9 +27,9 @@ export function createThemePlugin(userConfig: DeepPartialThemeConfig = {}) {
 
   return plugin(
     ({ addBase, addUtilities }) => {
-      // Inject CSS variables into :root
+      // Inject CSS variables into the specified selector
       addBase({
-        ":root": generateCssVariables(config),
+        [selector]: generateCssVariables(config),
       });
 
       // Add custom utilities that use CSS variables
@@ -71,11 +76,40 @@ export function createThemePlugin(userConfig: DeepPartialThemeConfig = {}) {
         ".text-surface-foreground": {
           color: "var(--color-surface-foreground)",
         },
+        ".text-surface-secondary": {
+          color: "var(--color-surface-secondary-foreground)",
+        },
+        ".text-surface-tertiary": {
+          color: "var(--color-surface-tertiary-foreground)",
+        },
         ".text-surface-muted-foreground": {
           color: "var(--color-surface-muted-foreground)",
         },
         ".border-surface-card-border": {
           borderColor: "var(--color-surface-card-border)",
+        },
+        ".bg-surface-subtle": {
+          backgroundColor: "var(--color-surface-subtle)",
+        },
+        ".bg-surface-inverse": {
+          backgroundColor: "var(--color-surface-inverse)",
+        },
+        ".border-surface-subtle": {
+          borderColor: "var(--color-surface-subtle-border)",
+        },
+        ".text-on-brand-primary": {
+          color: "var(--color-brand-on-primary)",
+        },
+
+        // Backward-compatibility aliases
+        ".text-brand-on-primary": {
+          color: "var(--color-brand-on-primary)",
+        },
+        ".border-surface-border": {
+          borderColor: "var(--color-surface-subtle-border)",
+        },
+        ".text-surface-muted": {
+          color: "var(--color-surface-muted-foreground)",
         },
 
         // Semantic color utilities
@@ -212,14 +246,20 @@ export function createThemePlugin(userConfig: DeepPartialThemeConfig = {}) {
               "primary-hover": "var(--color-brand-primary-hover)",
               secondary: "var(--color-brand-secondary)",
               accent: "var(--color-brand-accent)",
+              "on-primary": "var(--color-brand-on-primary)",
             },
             surface: {
               background: "var(--color-surface-background)",
               foreground: "var(--color-surface-foreground)",
+              "secondary-foreground": "var(--color-surface-secondary-foreground)",
+              "tertiary-foreground": "var(--color-surface-tertiary-foreground)",
               muted: "var(--color-surface-muted)",
               "muted-foreground": "var(--color-surface-muted-foreground)",
               card: "var(--color-surface-card)",
               "card-border": "var(--color-surface-card-border)",
+              subtle: "var(--color-surface-subtle)",
+              "subtle-border": "var(--color-surface-subtle-border)",
+              inverse: "var(--color-surface-inverse)",
             },
             semantic: {
               success: "var(--color-success)",

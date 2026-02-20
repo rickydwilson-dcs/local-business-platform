@@ -43,12 +43,18 @@ export interface ThemeConfig {
       secondary: string;
       /** Accent color for highlights */
       accent: string;
+      /** Contrast-safe text on brand-primary backgrounds */
+      onPrimary: string;
     };
     surface: {
       /** Page background color */
       background: string;
       /** Primary text color */
       foreground: string;
+      /** Mid-tone text (replaces text-gray-700) */
+      secondaryForeground: string;
+      /** Lighter text (replaces text-gray-600) */
+      tertiaryForeground: string;
       /** Muted/secondary backgrounds */
       muted: string;
       /** Muted text color */
@@ -57,6 +63,12 @@ export interface ThemeConfig {
       card: string;
       /** Card border */
       cardBorder: string;
+      /** Very light background (replaces bg-gray-50/100) */
+      subtle: string;
+      /** Light border (replaces border-gray-200/300) */
+      subtleBorder: string;
+      /** Dark section background (replaces bg-black) */
+      inverse: string;
     };
     semantic: {
       success: string;
@@ -349,14 +361,20 @@ export const ThemeConfigSchema = z.object({
       primaryHover: z.string().regex(/^#[0-9A-Fa-f]{6}$/, "Must be a valid hex color"),
       secondary: z.string().regex(/^#[0-9A-Fa-f]{6}$/, "Must be a valid hex color"),
       accent: z.string().regex(/^#[0-9A-Fa-f]{6}$/, "Must be a valid hex color"),
+      onPrimary: z.string().regex(/^#[0-9A-Fa-f]{6}$/, "Must be a valid hex color"),
     }),
     surface: z.object({
       background: z.string().regex(/^#[0-9A-Fa-f]{6}$/, "Must be a valid hex color"),
       foreground: z.string().regex(/^#[0-9A-Fa-f]{6}$/, "Must be a valid hex color"),
+      secondaryForeground: z.string().regex(/^#[0-9A-Fa-f]{6}$/, "Must be a valid hex color"),
+      tertiaryForeground: z.string().regex(/^#[0-9A-Fa-f]{6}$/, "Must be a valid hex color"),
       muted: z.string().regex(/^#[0-9A-Fa-f]{6}$/, "Must be a valid hex color"),
       mutedForeground: z.string().regex(/^#[0-9A-Fa-f]{6}$/, "Must be a valid hex color"),
       card: z.string().regex(/^#[0-9A-Fa-f]{6}$/, "Must be a valid hex color"),
       cardBorder: z.string().regex(/^#[0-9A-Fa-f]{6}$/, "Must be a valid hex color"),
+      subtle: z.string().regex(/^#[0-9A-Fa-f]{6}$/, "Must be a valid hex color"),
+      subtleBorder: z.string().regex(/^#[0-9A-Fa-f]{6}$/, "Must be a valid hex color"),
+      inverse: z.string().regex(/^#[0-9A-Fa-f]{6}$/, "Must be a valid hex color"),
     }),
     semantic: z.object({
       success: z.string().regex(/^#[0-9A-Fa-f]{6}$/, "Must be a valid hex color"),
