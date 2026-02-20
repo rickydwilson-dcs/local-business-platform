@@ -19,7 +19,7 @@
 
   .btn-primary {
     @apply inline-flex items-center justify-center px-6 py-3 rounded-lg;
-    @apply bg-brand-primary text-white font-semibold;
+    @apply bg-brand-primary text-on-brand-primary font-semibold;
     @apply hover:bg-brand-primary-hover transition-all duration-200;
     @apply focus:ring-2 focus:ring-brand-primary focus:ring-offset-2;
     @apply shadow-sm hover:shadow-md;
@@ -27,7 +27,7 @@
 
   .btn-primary-lg {
     @apply inline-flex items-center justify-center px-8 py-4 rounded-lg;
-    @apply bg-brand-primary text-white font-semibold text-lg;
+    @apply bg-brand-primary text-on-brand-primary font-semibold text-lg;
     @apply hover:bg-brand-primary-hover transition-all duration-200;
     @apply focus:ring-2 focus:ring-brand-primary focus:ring-offset-2;
     @apply shadow-md hover:shadow-lg;
@@ -36,24 +36,24 @@
   /* White background, brand-coloured border and text */
   .btn-secondary {
     @apply inline-flex items-center justify-center px-6 py-3 rounded-lg;
-    @apply bg-white text-brand-primary border-2 border-brand-primary font-semibold;
-    @apply hover:bg-brand-primary hover:text-white transition-all duration-200;
+    @apply bg-surface-card text-brand-primary border-2 border-brand-primary font-semibold;
+    @apply hover:bg-brand-primary hover:text-on-brand-primary transition-all duration-200;
     @apply focus:ring-2 focus:ring-brand-primary focus:ring-offset-2;
   }
 
   /* Black background, brand-coloured border, white text — Orion-specific */
   .btn-tertiary {
     @apply inline-flex items-center justify-center px-6 py-3 rounded-lg;
-    @apply bg-black text-white border-2 border-brand-primary font-semibold;
+    @apply bg-surface-inverse text-on-brand-primary border-2 border-brand-primary font-semibold;
     @apply hover:bg-brand-primary transition-all duration-200;
     @apply focus:ring-2 focus:ring-brand-primary focus:ring-offset-2;
   }
 
   .btn-ghost {
     @apply inline-flex items-center justify-center px-6 py-3 rounded-lg;
-    @apply bg-gray-100 text-gray-900 font-semibold;
-    @apply hover:bg-gray-200 transition-all duration-200;
-    @apply focus:ring-2 focus:ring-gray-300 focus:ring-offset-2;
+    @apply bg-surface-subtle text-surface-foreground font-semibold;
+    @apply hover:bg-surface-subtle transition-all duration-200;
+    @apply focus:ring-2 focus:ring-surface-subtle-border focus:ring-offset-2;
   }
 
   /* ==========================================
@@ -92,28 +92,28 @@
      ========================================== */
 
   .card {
-    @apply bg-white border border-gray-200 rounded-xl p-6;
+    @apply bg-surface-card border border-surface-subtle rounded-xl p-6;
     @apply shadow-sm hover:shadow-md transition-shadow;
   }
 
   /* Interactive card with dramatic lift — Orion variant */
   .card-interactive {
-    @apply relative bg-white rounded-2xl shadow-sm border border-gray-200 p-8;
+    @apply relative bg-surface-card rounded-2xl shadow-sm border border-surface-subtle p-8;
     @apply hover:shadow-xl hover:-translate-y-2 transition-all duration-300;
   }
 
   .card-hover-accent {
-    @apply relative bg-white rounded-2xl shadow-sm border border-gray-200 p-8;
+    @apply relative bg-surface-card rounded-2xl shadow-sm border border-surface-subtle p-8;
     @apply hover:shadow-xl hover:-translate-y-2 hover:border-brand-primary;
     @apply transition-all duration-300;
   }
 
   .card-simple {
-    @apply bg-white rounded-xl border border-gray-200 p-6 shadow-sm;
+    @apply bg-surface-card rounded-xl border border-surface-subtle p-6 shadow-sm;
   }
 
   .card-dark {
-    @apply bg-gray-900 border border-gray-800 rounded-xl p-6;
+    @apply bg-surface-inverse border border-surface-subtle rounded-xl p-6;
     @apply shadow-sm hover:shadow-md transition-shadow;
   }
 
@@ -123,19 +123,19 @@
 
   .icon-circle-lg {
     @apply w-24 h-24 rounded-full flex items-center justify-center;
-    @apply bg-brand-primary text-white;
+    @apply bg-brand-primary text-on-brand-primary;
     @apply shadow-md hover:shadow-lg transition-shadow duration-300;
   }
 
   .icon-circle-md {
     @apply w-16 h-16 rounded-full flex items-center justify-center;
-    @apply bg-brand-primary text-white;
+    @apply bg-brand-primary text-on-brand-primary;
     @apply shadow-md hover:shadow-lg transition-shadow duration-300;
   }
 
   .icon-circle-sm {
     @apply w-12 h-12 rounded-full flex items-center justify-center;
-    @apply bg-brand-primary text-white;
+    @apply bg-brand-primary text-on-brand-primary;
     @apply shadow-sm hover:shadow-md transition-shadow duration-300;
   }
 
@@ -181,7 +181,7 @@
      ========================================== */
 
   .section-dark {
-    @apply bg-gray-900 text-white;
+    @apply bg-surface-inverse text-white;
   }
 
   .section-dark h1,
@@ -192,12 +192,12 @@
   }
 
   .section-dark p {
-    @apply text-gray-300;
+    @apply text-surface-muted-foreground;
   }
 
   /* Black background with brand-colour accents — Orion CTA sections */
   .section-dark-accent {
-    @apply bg-black text-white py-20 md:py-28;
+    @apply bg-surface-inverse text-white py-20 md:py-28;
   }
 
   .section-dark-accent h1,
@@ -263,35 +263,35 @@
      ========================================== */
 
   .heading-hero {
-    @apply text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6;
+    @apply text-4xl md:text-5xl lg:text-6xl font-bold text-surface-foreground mb-6;
   }
 
   .heading-section {
-    @apply text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4;
+    @apply text-2xl sm:text-3xl md:text-4xl font-bold text-surface-foreground mb-4;
   }
 
   .heading-subsection {
-    @apply text-3xl font-bold text-gray-900 mb-4;
+    @apply text-3xl font-bold text-surface-foreground mb-4;
   }
 
   .heading-card {
-    @apply text-xl sm:text-2xl font-bold text-gray-900 mb-4;
+    @apply text-xl sm:text-2xl font-bold text-surface-foreground mb-4;
   }
 
   .heading-card-sm {
-    @apply text-lg font-bold text-gray-900 mb-1;
+    @apply text-lg font-bold text-surface-foreground mb-1;
   }
 
   .stat-number {
-    @apply text-4xl font-extrabold text-gray-900 mb-3 tracking-tight;
+    @apply text-4xl font-extrabold text-surface-foreground mb-3 tracking-tight;
   }
 
   .text-subtitle {
-    @apply text-lg sm:text-xl text-gray-800;
+    @apply text-lg sm:text-xl text-surface-foreground;
   }
 
   .text-body-lg {
-    @apply text-lg text-gray-800 leading-relaxed;
+    @apply text-lg text-surface-foreground leading-relaxed;
   }
 
   /* ==========================================
@@ -299,12 +299,12 @@
      ========================================== */
 
   .stat-card-accent {
-    @apply relative bg-white rounded-xl p-6 shadow-sm;
+    @apply relative bg-surface-card rounded-xl p-6 shadow-sm;
     @apply border-l-4 border-brand-primary;
   }
 
   .stat-card-dark {
-    @apply relative bg-gray-900 rounded-xl p-6 shadow-md;
+    @apply relative bg-surface-inverse rounded-xl p-6 shadow-md;
     @apply border-l-4 border-brand-primary;
   }
 
@@ -313,7 +313,7 @@
   }
 
   .stat-card-dark p {
-    @apply text-gray-300;
+    @apply text-surface-muted-foreground;
   }
 
   /* ==========================================
@@ -321,7 +321,7 @@
      ========================================== */
 
   .mobile-menu-toggle {
-    @apply lg:hidden p-2 rounded-md hover:bg-gray-200 transition-colors;
+    @apply lg:hidden p-2 rounded-md hover:bg-surface-subtle transition-colors;
     @apply focus:outline-none focus:ring-2 focus:ring-brand-primary;
   }
 
@@ -330,7 +330,7 @@
   }
 
   .mobile-menu-line {
-    @apply block h-0.5 w-6 bg-slate-700 transition-transform duration-300 ease-in-out;
+    @apply block h-0.5 w-6 bg-surface-secondary-foreground transition-transform duration-300 ease-in-out;
   }
 
   .mobile-menu-line.top-open {
@@ -346,7 +346,7 @@
   }
 
   .mobile-menu-overlay {
-    @apply fixed inset-0 bg-white z-50 transition-transform duration-300 ease-in-out lg:hidden flex flex-col;
+    @apply fixed inset-0 bg-surface-card z-50 transition-transform duration-300 ease-in-out lg:hidden flex flex-col;
   }
 
   .mobile-menu-overlay.closed {
@@ -358,12 +358,12 @@
   }
 
   .mobile-menu-header {
-    @apply flex items-center justify-between p-6 border-b border-gray-100;
+    @apply flex items-center justify-between p-6 border-b border-surface-subtle;
   }
 
   .mobile-menu-close {
     @apply p-2 rounded-lg border-2 border-brand-primary text-brand-primary;
-    @apply hover:bg-brand-primary hover:text-white transition-colors focus:outline-none;
+    @apply hover:bg-brand-primary hover:text-on-brand-primary transition-colors focus:outline-none;
   }
 
   .mobile-menu-nav {
@@ -371,7 +371,7 @@
   }
 
   .mobile-menu-link {
-    @apply block text-xl font-medium text-slate-800 hover:text-brand-primary transition-colors py-4 text-center;
+    @apply block text-xl font-medium text-surface-foreground hover:text-brand-primary transition-colors py-4 text-center;
   }
 
   .mobile-menu-bottom {
@@ -387,15 +387,15 @@
   }
 
   .mobile-menu-phone-link {
-    @apply text-2xl font-bold text-slate-800 hover:text-brand-primary transition-colors;
+    @apply text-2xl font-bold text-surface-foreground hover:text-brand-primary transition-colors;
   }
 
   .mobile-menu-phone-text {
-    @apply text-lg text-slate-600;
+    @apply text-lg text-surface-tertiary;
   }
 
   .mobile-menu-cta {
-    @apply block w-full bg-brand-primary text-white text-center py-4 px-6 rounded-lg;
+    @apply block w-full bg-brand-primary text-on-brand-primary text-center py-4 px-6 rounded-lg;
     @apply hover:bg-brand-primary-hover transition-colors font-bold text-lg;
   }
 
@@ -404,7 +404,7 @@
   }
 
   .mobile-menu-locations-content {
-    @apply mt-4 space-y-6 pl-4 border-l-2 border-gray-200;
+    @apply mt-4 space-y-6 pl-4 border-l-2 border-surface-subtle;
   }
 
   .mobile-menu-county {
@@ -420,11 +420,11 @@
   }
 
   .mobile-menu-town-link {
-    @apply block text-base text-slate-600 hover:text-slate-800 transition-colors py-1;
+    @apply block text-base text-surface-tertiary hover:text-surface-foreground transition-colors py-1;
   }
 
   .mobile-menu-town-link.rich-content {
-    @apply text-slate-800 font-medium;
+    @apply text-surface-foreground font-medium;
   }
 
   .mobile-menu-town-link .rich-indicator {
@@ -440,11 +440,11 @@
   }
 
   .lightbox-content {
-    @apply relative w-full max-w-6xl max-h-[95vh] bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col animate-scale-in;
+    @apply relative w-full max-w-6xl max-h-[95vh] bg-surface-card rounded-2xl shadow-2xl overflow-hidden flex flex-col animate-scale-in;
   }
 
   .lightbox-header {
-    @apply flex items-center justify-between p-4 sm:p-6 border-b border-gray-200 flex-shrink-0 bg-white;
+    @apply flex items-center justify-between p-4 sm:p-6 border-b border-surface-subtle flex-shrink-0 bg-surface-card;
   }
 
   .lightbox-header-title {
@@ -452,28 +452,28 @@
   }
 
   .lightbox-title {
-    @apply text-xl sm:text-2xl font-bold text-gray-900 mb-1;
+    @apply text-xl sm:text-2xl font-bold text-surface-foreground mb-1;
   }
 
   .lightbox-position {
-    @apply text-sm text-gray-600 font-medium;
+    @apply text-sm text-surface-tertiary font-medium;
   }
 
   .lightbox-close-button {
-    @apply flex-shrink-0 p-2 rounded-lg border-2 border-gray-300 text-gray-700;
-    @apply hover:bg-gray-100 hover:border-gray-400 transition-all duration-200;
+    @apply flex-shrink-0 p-2 rounded-lg border-2 border-surface-subtle text-surface-secondary;
+    @apply hover:bg-surface-subtle hover:border-surface-subtle transition-all duration-200;
     @apply focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2;
   }
 
   .lightbox-zoom-button {
-    @apply p-2 rounded-lg border border-gray-300 text-gray-700;
-    @apply hover:bg-gray-100 hover:border-gray-400 transition-all duration-200;
+    @apply p-2 rounded-lg border border-surface-subtle text-surface-secondary;
+    @apply hover:bg-surface-subtle hover:border-surface-subtle transition-all duration-200;
     @apply focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2;
-    @apply disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:border-gray-300;
+    @apply disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:border-surface-subtle;
   }
 
   .lightbox-image-container {
-    @apply relative flex-1 overflow-hidden bg-gray-100 flex items-center justify-center p-4 sm:p-8 select-none;
+    @apply relative flex-1 overflow-hidden bg-surface-subtle flex items-center justify-center p-4 sm:p-8 select-none;
   }
 
   .lightbox-image-wrapper {
@@ -489,9 +489,9 @@
 
   .lightbox-nav-button {
     @apply absolute top-1/2 -translate-y-1/2 p-3 sm:p-4;
-    @apply bg-white bg-opacity-90 hover:bg-opacity-100 rounded-full shadow-lg;
+    @apply bg-surface-card bg-opacity-90 hover:bg-opacity-100 rounded-full shadow-lg;
     @apply transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2;
-    @apply text-gray-900 hover:scale-110 z-10;
+    @apply text-surface-foreground hover:scale-110 z-10;
   }
 
   .lightbox-nav-button-left {
@@ -503,11 +503,11 @@
   }
 
   .lightbox-description {
-    @apply p-4 sm:p-6 border-t border-gray-200 bg-gray-50 flex-shrink-0;
+    @apply p-4 sm:p-6 border-t border-surface-subtle bg-surface-subtle flex-shrink-0;
   }
 
   .lightbox-description p {
-    @apply text-base text-gray-700 text-center;
+    @apply text-base text-surface-secondary text-center;
   }
 
 .text-balance {
