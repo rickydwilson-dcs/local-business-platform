@@ -7,6 +7,7 @@
 export type {
   ThemeConfig,
   ThemeName,
+  ComponentCategory,
   ComponentRegistry,
   PartialThemeConfig,
   DeepPartialThemeConfig,

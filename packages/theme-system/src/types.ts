@@ -6,6 +6,14 @@
 import { z } from "zod";
 
 /**
+ * Component categories for section blueprints.
+ * Used by the ingestion pipeline and theme manifests.
+ */
+export type ComponentCategory =
+  | "Hero" | "Navigation" | "Cards" | "CTA" | "Content"
+  | "Social Proof" | "Blog" | "Stats" | "Footer" | "Custom";
+
+/**
  * Typography scale entry with size, lineHeight, letterSpacing, and weight
  */
 export interface TypographyScaleEntry {
