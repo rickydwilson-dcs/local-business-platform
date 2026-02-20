@@ -258,8 +258,10 @@ export interface ThemeConfig {
  * Named theme identifiers — each maps to packages/themes/[name]
  * - orion: dark header, full-bleed hero, circular icons (industrial style)
  * - vega:  light header, split hero, card grid (professional style)
+ * - nova:  reference-driven scaffold (generated from site analysis)
  */
-export type ThemeName = "orion" | "vega";
+export const THEME_NAMES = ["orion", "vega", "nova"] as const;
+export type ThemeName = (typeof THEME_NAMES)[number];
 
 /**
  * Component registry — maps a named theme to its component variant choices.
@@ -276,7 +278,7 @@ export interface ComponentRegistry {
   /** Card style */
   cardVariant: "icon-circle" | "standard" | "overlay";
   /** Dark section accent style */
-  sectionVariant: "dark-accent" | "gradient" | "standard";
+  sectionVariant: "dark-accent" | "gradient" | "standard" | "banded";
 }
 
 /**
@@ -329,14 +331,14 @@ export type DeepPartialThemeConfig = {
 
 // Zod Schemas for validation
 
-export const ThemeNameSchema = z.enum(["orion", "vega"]);
+export const ThemeNameSchema = z.enum(THEME_NAMES);
 
 export const ComponentRegistrySchema = z.object({
   theme: ThemeNameSchema,
   heroVariant: z.enum(["image-overlay", "split", "minimal"]),
   headerVariant: z.enum(["dark", "light"]),
   cardVariant: z.enum(["icon-circle", "standard", "overlay"]),
-  sectionVariant: z.enum(["dark-accent", "gradient", "standard"]),
+  sectionVariant: z.enum(["dark-accent", "gradient", "standard", "banded"]),
 });
 
 const typographyScaleEntrySchema = z.object({

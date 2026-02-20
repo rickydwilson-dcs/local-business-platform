@@ -12,10 +12,12 @@
  *   npx tsx tools/generate-theme-from-reference.ts --image ./logo.png
  *   npx tsx tools/generate-theme-from-reference.ts --url https://example.com --image ./logo.png --name my-client
  *   npx tsx tools/generate-theme-from-reference.ts --url https://example.com --dry-run
+ *   npx tsx tools/generate-theme-from-reference.ts --url https://example.com --image ./screenshot.png --analyse
  *
  * Output:
  *   Writes theme.config.ts content to stdout (or --output path).
  *   Writes component registry choice (orion|vega) to stdout.
+ *   With --analyse: also writes reference-analysis.json and reference-analysis.md.
  */
 
 import * as fs from "fs";
@@ -36,6 +38,8 @@ import {
   extractStylesFromUrl,
 } from "../packages/intake-system/src/theme-extraction/index";
 import type { ThemeSuggestion } from "../packages/intake-system/src/theme-extraction/types";
+import type { ReferenceAnalysis } from "./lib/reference-analysis-types";
+import { REFERENCE_ANALYSIS_PROMPT } from "./lib/reference-analysis-prompts";
 
 // ============================================================================
 // Types
@@ -47,6 +51,7 @@ interface ThemeGenerationInput {
   themeName?: string;
   outputPath?: string;
   dryRun?: boolean;
+  analyse?: boolean;
 }
 
 interface LayoutClassification {
@@ -89,6 +94,8 @@ function parseArgs(argv: string[]): ThemeGenerationInput {
       i++;
     } else if (arg === "--dry-run") {
       args.dryRun = true;
+    } else if (arg === "--analyse" || arg === "--analyze") {
+      args.analyse = true;
     }
   }
 
@@ -197,6 +204,276 @@ function generateEnrichedThemeConfig(
 }
 
 // ============================================================================
+// Vision-based reference analysis
+// ============================================================================
+
+async function analyseWithVision(
+  screenshotPath: string,
+  url: string | undefined,
+  suggestion: ThemeSuggestion
+): Promise<ReferenceAnalysis> {
+  const apiKey = process.env.ANTHROPIC_API_KEY;
+  if (!apiKey) {
+    console.warn("  [Warning] ANTHROPIC_API_KEY not set — returning minimal analysis.");
+    return createMinimalAnalysis(url, screenshotPath);
+  }
+
+  const client = new Anthropic({ apiKey });
+
+  try {
+    const imageBuffer = fs.readFileSync(screenshotPath);
+    const base64Image = imageBuffer.toString("base64");
+
+    // Detect media type from extension
+    const ext = path.extname(screenshotPath).toLowerCase();
+    const mediaType = ext === ".jpg" || ext === ".jpeg" ? "image/jpeg" : "image/png";
+
+    const contextNote = [
+      url ? `Reference URL: ${url}` : null,
+      `Screenshot path: ${screenshotPath}`,
+      `Extracted primary colour: ${suggestion.colors.brand.primary}`,
+      `Style category: ${suggestion.style}`,
+    ]
+      .filter(Boolean)
+      .join("\n");
+
+    const response = await client.messages.create({
+      model: "claude-sonnet-4-6",
+      max_tokens: 8192,
+      temperature: 0,
+      messages: [
+        {
+          role: "user",
+          content: [
+            {
+              type: "image",
+              source: {
+                type: "base64",
+                media_type: mediaType,
+                data: base64Image,
+              },
+            },
+            {
+              type: "text",
+              text: `${REFERENCE_ANALYSIS_PROMPT}\n\nAdditional context:\n${contextNote}`,
+            },
+          ],
+        },
+      ],
+    });
+
+    const text = response.content.find((b) => b.type === "text");
+    if (!text || text.type !== "text") throw new Error("No text response from Claude");
+
+    const jsonMatch = text.text.match(/\{[\s\S]*\}/);
+    if (!jsonMatch) throw new Error("No JSON object found in Claude response");
+
+    const parsed = JSON.parse(jsonMatch[0]) as ReferenceAnalysis;
+    // Ensure version is set
+    parsed.analysisVersion = "1";
+    parsed.reference = {
+      ...parsed.reference,
+      url: url ?? parsed.reference.url,
+      screenshotPath,
+    };
+    return parsed;
+  } catch (err) {
+    console.warn(`  [Warning] Vision analysis failed: ${err}. Returning minimal analysis.`);
+    return createMinimalAnalysis(url, screenshotPath);
+  }
+}
+
+function createMinimalAnalysis(
+  url: string | undefined,
+  screenshotPath: string
+): ReferenceAnalysis {
+  return {
+    analysisVersion: "1",
+    reference: {
+      url,
+      screenshotPath,
+      capturedAt: new Date().toISOString(),
+    },
+    visualLanguage: {
+      palette: {
+        background: "#FFFFFF",
+        foreground: "#000000",
+        primary: "#000000",
+        secondary: "#666666",
+        accent: "#333333",
+        additional: [],
+        confidence: "low",
+      },
+      typography: {
+        headingWeight: "bold",
+        bodyWeight: "normal",
+        headingStyle: "sans",
+        usesInlineColourHighlights: false,
+      },
+      heroPattern: {
+        type: "centered",
+        hasBackgroundImage: false,
+        headerDark: false,
+      },
+      spacingDensity: "standard",
+    },
+    detectedSections: [],
+    componentMappings: [],
+    newComponentBacklog: [],
+    registryRecommendation: {
+      themeName: "nova",
+      heroVariant: "minimal",
+      headerVariant: "light",
+      cardVariant: "standard",
+      sectionVariant: "standard",
+      confidence: "low",
+      reasoning: "Minimal analysis — vision call failed.",
+    },
+    themeTokenRecommendations: {
+      brand: {
+        primary: "#000000",
+        primaryHover: "#333333",
+        secondary: "#666666",
+        accent: "#999999",
+      },
+      surface: {
+        background: "#FFFFFF",
+        foreground: "#111111",
+        muted: "#F5F5F5",
+      },
+      typography: {
+        fontFamilySans: ["system-ui", "sans-serif"],
+        fontFamilyHeading: ["system-ui", "sans-serif"],
+      },
+    },
+  };
+}
+
+// ============================================================================
+// Markdown report generation
+// ============================================================================
+
+function generateMarkdownReport(analysis: ReferenceAnalysis): string {
+  const lines: string[] = [];
+
+  lines.push("# Reference Analysis Report");
+  lines.push("");
+  lines.push(`**Analysis Version:** ${analysis.analysisVersion}`);
+  if (analysis.reference.url) lines.push(`**Reference URL:** ${analysis.reference.url}`);
+  if (analysis.reference.screenshotPath) lines.push(`**Screenshot:** ${analysis.reference.screenshotPath}`);
+  lines.push(`**Captured:** ${analysis.reference.capturedAt}`);
+  lines.push("");
+
+  // Palette
+  lines.push("## Palette");
+  lines.push("");
+  lines.push("| Token | Hex |");
+  lines.push("|-------|-----|");
+  const p = analysis.visualLanguage.palette;
+  lines.push(`| Background | ${p.background} |`);
+  lines.push(`| Foreground | ${p.foreground} |`);
+  lines.push(`| Primary | ${p.primary} |`);
+  lines.push(`| Secondary | ${p.secondary} |`);
+  lines.push(`| Accent | ${p.accent} |`);
+  for (const c of p.additional) {
+    lines.push(`| Additional | ${c} |`);
+  }
+  lines.push("");
+  lines.push(`**Confidence:** ${p.confidence}`);
+  lines.push("");
+
+  // Typography & Hero
+  lines.push("## Visual Language");
+  lines.push("");
+  const t = analysis.visualLanguage.typography;
+  lines.push(`- Heading weight: ${t.headingWeight}`);
+  lines.push(`- Body weight: ${t.bodyWeight}`);
+  lines.push(`- Heading style: ${t.headingStyle}`);
+  lines.push(`- Inline colour highlights: ${t.usesInlineColourHighlights ? "yes" : "no"}`);
+  lines.push(`- Hero pattern: ${analysis.visualLanguage.heroPattern.type}`);
+  lines.push(`- Spacing density: ${analysis.visualLanguage.spacingDensity}`);
+  lines.push("");
+
+  // Section inventory
+  lines.push("## Detected Sections");
+  lines.push("");
+  lines.push("| # | Name | Background | Layout | Purpose | Notes |");
+  lines.push("|---|------|------------|--------|---------|-------|");
+  analysis.detectedSections.forEach((s, i) => {
+    lines.push(`| ${i + 1} | ${s.name} | ${s.background} | ${s.layoutType} | ${s.purpose} | ${s.notes} |`);
+  });
+  lines.push("");
+
+  // Component mappings
+  lines.push("## Component Mappings");
+  lines.push("");
+  lines.push("| Section | Status | Existing Component | Notes | Confidence |");
+  lines.push("|---------|--------|-------------------|-------|------------|");
+  for (const m of analysis.componentMappings) {
+    lines.push(`| ${m.section} | ${m.status} | ${m.existingComponent ?? "—"} | ${m.notes} | ${m.confidence} |`);
+  }
+  lines.push("");
+
+  // Gap components
+  if (analysis.newComponentBacklog.length > 0) {
+    lines.push("## New Component Backlog");
+    lines.push("");
+    for (const comp of analysis.newComponentBacklog) {
+      lines.push(`### ${comp.name}`);
+      lines.push("");
+      lines.push(comp.description);
+      lines.push("");
+      lines.push(`**Reference section:** ${comp.referenceSection}`);
+      lines.push("");
+      lines.push("**Props contract:**");
+      lines.push("```typescript");
+      lines.push(comp.propsContract);
+      lines.push("```");
+      lines.push("");
+      lines.push(`**Token constraints:** ${comp.tokenConstraints}`);
+      lines.push("");
+      lines.push("**Acceptance criteria:**");
+      for (const ac of comp.acceptanceCriteria) {
+        lines.push(`- ${ac}`);
+      }
+      lines.push("");
+    }
+  }
+
+  // Registry recommendation
+  lines.push("## Registry Recommendation");
+  lines.push("");
+  const r = analysis.registryRecommendation;
+  lines.push(`- Theme: ${r.themeName}`);
+  lines.push(`- Hero variant: ${r.heroVariant}`);
+  lines.push(`- Header variant: ${r.headerVariant}`);
+  lines.push(`- Card variant: ${r.cardVariant}`);
+  lines.push(`- Section variant: ${r.sectionVariant}`);
+  lines.push(`- Confidence: ${r.confidence}`);
+  lines.push(`- Reasoning: ${r.reasoning}`);
+  lines.push("");
+
+  // Theme token recommendations
+  lines.push("## Theme Token Recommendations");
+  lines.push("");
+  const tk = analysis.themeTokenRecommendations;
+  lines.push("| Token | Value |");
+  lines.push("|-------|-------|");
+  lines.push(`| brand.primary | ${tk.brand.primary} |`);
+  lines.push(`| brand.primaryHover | ${tk.brand.primaryHover} |`);
+  lines.push(`| brand.secondary | ${tk.brand.secondary} |`);
+  lines.push(`| brand.accent | ${tk.brand.accent} |`);
+  lines.push(`| surface.background | ${tk.surface.background} |`);
+  lines.push(`| surface.foreground | ${tk.surface.foreground} |`);
+  lines.push(`| surface.muted | ${tk.surface.muted} |`);
+  lines.push(`| typography.sans | ${tk.typography.fontFamilySans.join(", ")} |`);
+  lines.push(`| typography.heading | ${tk.typography.fontFamilyHeading.join(", ")} |`);
+  lines.push("");
+
+  return lines.join("\n");
+}
+
+// ============================================================================
 // Main
 // ============================================================================
 
@@ -232,7 +509,7 @@ async function main() {
     });
 
     if (imageAnalysis && websiteStyles) {
-      suggestion = generateCompleteTheme(imageAnalysis, websiteStyles);
+      suggestion = await generateCompleteTheme(imageAnalysis, websiteStyles);
     } else if (imageAnalysis) {
       suggestion = generateThemeFromImage(imageAnalysis);
     } else if (websiteStyles) {
@@ -271,6 +548,33 @@ async function main() {
   console.log(`  ✓ Hero: ${layout.heroVariant}`);
   console.log(`  ✓ Reasoning: ${layout.reasoning}`);
 
+  // ── Step 2b: Vision-based reference analysis (--analyse) ─────────────────
+
+  if (args.analyse) {
+    if (!args.imagePath) {
+      console.warn("\n  [Warning] --analyse requires --image <screenshot>. Skipping analysis.");
+    } else {
+      console.log("\n  Running vision-based reference analysis...");
+      const analysis = await analyseWithVision(args.imagePath, args.url, suggestion);
+
+      const outputDir = args.outputPath ?? "./";
+      fs.mkdirSync(outputDir, { recursive: true });
+
+      const jsonPath = path.join(outputDir, "reference-analysis.json");
+      fs.writeFileSync(jsonPath, JSON.stringify(analysis, null, 2), "utf8");
+      console.log(`  ✓ Written: ${jsonPath}`);
+
+      const mdReport = generateMarkdownReport(analysis);
+      const mdPath = path.join(outputDir, "reference-analysis.md");
+      fs.writeFileSync(mdPath, mdReport, "utf8");
+      console.log(`  ✓ Written: ${mdPath}`);
+
+      console.log(`  ✓ Sections: ${analysis.detectedSections.length}`);
+      console.log(`  ✓ Component mappings: ${analysis.componentMappings.length}`);
+      console.log(`  ✓ Gap components: ${analysis.newComponentBacklog.length}`);
+    }
+  }
+
   // ── Step 3: Generate theme.config.ts content ─────────────────────────────
 
   const configContent = generateEnrichedThemeConfig(suggestion, layout, themeName);
@@ -282,9 +586,13 @@ async function main() {
   console.log("─────────────────────────────────────────────────────────────────\n");
 
   if (!args.dryRun && args.outputPath) {
-    fs.mkdirSync(path.dirname(args.outputPath), { recursive: true });
-    fs.writeFileSync(args.outputPath, configContent, "utf8");
-    console.log(`  ✓ Written to: ${args.outputPath}`);
+    // In --analyse mode, outputPath is a directory; write theme.config.ts inside it
+    const outputFile = args.analyse
+      ? path.join(args.outputPath, "theme.config.ts")
+      : args.outputPath;
+    fs.mkdirSync(path.dirname(outputFile), { recursive: true });
+    fs.writeFileSync(outputFile, configContent, "utf8");
+    console.log(`  ✓ Written to: ${outputFile}`);
   } else if (args.dryRun) {
     console.log("  [dry-run] Output not written to disk.");
   } else {

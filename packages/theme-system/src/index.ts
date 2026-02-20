@@ -15,7 +15,7 @@ export type {
   ValidatedThemeConfig,
 } from "./types";
 
-export { ThemeConfigSchema, ThemeNameSchema, ComponentRegistrySchema } from "./types";
+export { THEME_NAMES, ThemeConfigSchema, ThemeNameSchema, ComponentRegistrySchema } from "./types";
 
 // Default theme
 export { defaultTheme } from "./defaults";
