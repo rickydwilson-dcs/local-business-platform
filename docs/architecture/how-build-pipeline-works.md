@@ -14,12 +14,14 @@ pnpm build (root)
 Phase 1: Build packages (parallel, no interdependencies)
     ├── packages/theme-system     → tsc (TypeScript → dist/)
     ├── packages/intake-system    → tsup (TypeScript → dist/, dual CJS + ESM)
+    ├── packages/themes/          → NO BUILD (CSS-only, imported by sites)
     └── packages/core-components  → NO BUILD (source-only, compiled by sites)
     ↓
 Phase 2: Build sites (parallel, after packages complete)
-    ├── sites/base-template                → next build
-    ├── sites/colossus-scaffolding           → next build
-    └── sites/smiths-electrical-cambridge  → next build
+    ├── sites/base-template        → next build
+    ├── sites/colossus-scaffolding → next build
+    ├── sites/dj-fox-electrical    → next build
+    └── sites/showcase             → next build
     ↓
 Each next build:
     1. Loads theme.config.ts → runs createThemePlugin() → generates CSS variables
