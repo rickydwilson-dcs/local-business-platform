@@ -6,7 +6,7 @@ interface SectionWrapperProps {
 
 export function SectionWrapper({
   children,
-  className = "py-16 bg-white",
+  className = "py-16 bg-surface-background",
   containerClassName = "mx-auto w-full lg:w-[90%] px-6"
 }: SectionWrapperProps) {
   return (

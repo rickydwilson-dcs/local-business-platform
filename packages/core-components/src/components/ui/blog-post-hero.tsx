@@ -38,7 +38,7 @@ export function BlogPostHero(props: ContentHeroProps) {
   const { title, category, categoryLabel, heroImage } = props;
 
   return (
-    <section className="py-16 sm:py-20 lg:py-24 bg-white">
+    <section className="py-16 sm:py-20 lg:py-24 bg-surface-background">
       <div className="mx-auto w-full lg:w-[90%] px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Content Side */}
@@ -63,7 +63,7 @@ export function BlogPostHero(props: ContentHeroProps) {
             <h1 className="heading-hero">{title}</h1>
 
             {/* Description/Excerpt */}
-            <p className="text-xl text-gray-800 mb-8 leading-relaxed">
+            <p className="text-xl text-surface-foreground mb-8 leading-relaxed">
               {props.variant === "blog" ? props.excerpt : props.description}
             </p>
 
@@ -77,17 +77,17 @@ export function BlogPostHero(props: ContentHeroProps) {
                       {props.author.name.charAt(0)}
                     </div>
                     <div>
-                      <p className="font-semibold text-gray-900">{props.author.name}</p>
+                      <p className="font-semibold text-surface-foreground">{props.author.name}</p>
                       {props.author.role && (
-                        <p className="text-sm text-gray-600">{props.author.role}</p>
+                        <p className="text-sm text-surface-tertiary">{props.author.role}</p>
                       )}
                     </div>
                   </div>
 
-                  <span className="hidden sm:block text-gray-300">|</span>
+                  <span className="hidden sm:block text-surface-muted-foreground">|</span>
 
                   {/* Date & Reading Time */}
-                  <div className="flex items-center gap-4 text-gray-600">
+                  <div className="flex items-center gap-4 text-surface-tertiary">
                     <div className="flex items-center gap-2">
                       <svg
                         className="w-5 h-5"
@@ -131,7 +131,7 @@ export function BlogPostHero(props: ContentHeroProps) {
               ) : (
                 <>
                   {/* Location */}
-                  <div className="flex items-center gap-2 text-gray-600">
+                  <div className="flex items-center gap-2 text-surface-tertiary">
                     <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path
                         strokeLinecap="round"
@@ -149,10 +149,10 @@ export function BlogPostHero(props: ContentHeroProps) {
                     <span>{props.locationName}</span>
                   </div>
 
-                  <span className="hidden sm:block text-gray-300">|</span>
+                  <span className="hidden sm:block text-surface-muted-foreground">|</span>
 
                   {/* Year */}
-                  <div className="flex items-center gap-2 text-gray-600">
+                  <div className="flex items-center gap-2 text-surface-tertiary">
                     <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path
                         strokeLinecap="round"
@@ -167,8 +167,8 @@ export function BlogPostHero(props: ContentHeroProps) {
                   {/* Duration (if provided) */}
                   {props.duration && (
                     <>
-                      <span className="hidden sm:block text-gray-300">|</span>
-                      <div className="flex items-center gap-2 text-gray-600">
+                      <span className="hidden sm:block text-surface-muted-foreground">|</span>
+                      <div className="flex items-center gap-2 text-surface-tertiary">
                         <svg
                           className="w-5 h-5"
                           fill="none"
@@ -206,7 +206,7 @@ export function BlogPostHero(props: ContentHeroProps) {
               />
             ) : (
               <div className="relative h-[400px] bg-gradient-to-br from-brand-primary/10 to-brand-primary/20 rounded-2xl shadow-lg flex items-center justify-center">
-                <div className="text-gray-400 text-center">
+                <div className="text-surface-muted-foreground text-center">
                   <svg className="w-16 h-16 mx-auto mb-4" fill="currentColor" viewBox="0 0 20 20">
                     <path
                       fillRule="evenodd"

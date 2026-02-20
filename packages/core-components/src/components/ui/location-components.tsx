@@ -7,15 +7,15 @@ interface LocationServicesProps {
 
 export function LocationServices({ services, title = "Popular Services" }: LocationServicesProps) {
   return (
-    <div className="py-16 bg-white">
+    <div className="py-16 bg-surface-background">
       <div className="mx-auto w-full lg:w-[90%] px-6">
-        <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">{title}</h2>
+        <h2 className="text-3xl font-bold text-surface-foreground mb-8 text-center">{title}</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((service, i) => (
             <Link
               key={i}
               href={service.url}
-              className="block p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow"
+              className="block p-6 bg-surface-card border border-surface-subtle rounded-lg shadow-sm hover:shadow-md transition-shadow"
             >
               <div className="flex items-start gap-4">
                 <div className="p-3 bg-blue-100 rounded-lg flex-shrink-0">
@@ -34,7 +34,7 @@ export function LocationServices({ services, title = "Popular Services" }: Locat
                   </svg>
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">{service.name}</h3>
+                  <h3 className="text-lg font-semibold text-surface-foreground mb-2">{service.name}</h3>
                   <span className="text-brand-primary font-medium">
                     Learn About {service.name} <span aria-hidden="true">→</span>
                   </span>
@@ -60,7 +60,7 @@ export function LocationFeatures({
   return (
     <div className="py-16 bg-surface-muted">
       <div className="mx-auto w-full lg:w-[90%] px-6">
-        <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">{title}</h2>
+        <h2 className="text-3xl font-bold text-surface-foreground mb-8 text-center">{title}</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {features.map((feature, i) => (
             <div key={i} className="flex items-start gap-3">
@@ -77,7 +77,7 @@ export function LocationFeatures({
                   d="M5 13l4 4L19 7"
                 />
               </svg>
-              <span className="text-gray-900">{feature}</span>
+              <span className="text-surface-foreground">{feature}</span>
             </div>
           ))}
         </div>
@@ -98,14 +98,14 @@ interface LocationFAQProps {
 
 export function LocationFAQ({ items, title = "Frequently Asked Questions" }: LocationFAQProps) {
   return (
-    <div className="py-16 bg-white">
+    <div className="py-16 bg-surface-background">
       <div className="mx-auto w-full lg:w-[90%] px-6">
-        <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">{title}</h2>
+        <h2 className="text-3xl font-bold text-surface-foreground mb-12 text-center">{title}</h2>
         <div className="space-y-6">
           {items.map((item, i) => (
-            <div key={i} className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
-              <h3 className="text-lg font-semibold text-gray-900 mb-3">{item.question}</h3>
-              <p className="text-gray-800">{item.answer}</p>
+            <div key={i} className="bg-surface-card border border-surface-subtle rounded-lg p-6 shadow-sm">
+              <h3 className="text-lg font-semibold text-surface-foreground mb-3">{item.question}</h3>
+              <p className="text-surface-foreground">{item.answer}</p>
             </div>
           ))}
         </div>
@@ -129,7 +129,7 @@ export function LocationCTA({ title, description, phone }: LocationCTAProps) {
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link
             href="/contact"
-            className="inline-flex items-center justify-center px-8 py-4 bg-white text-brand-primary font-semibold rounded-lg hover:bg-gray-200 transition-colors"
+            className="inline-flex items-center justify-center px-8 py-4 bg-white text-brand-primary font-semibold rounded-lg hover:bg-surface-subtle transition-colors"
           >
             Get Free Quote
           </Link>

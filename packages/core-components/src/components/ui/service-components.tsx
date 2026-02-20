@@ -41,13 +41,13 @@ export function ServiceHero({
             </svg>
           </div>
           {badge && (
-            <span className="px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-sm font-medium">
+            <span className="px-3 py-1 bg-surface-subtle text-surface-foreground rounded-full text-sm font-medium">
               {badge}
             </span>
           )}
         </div>
 
-        {description && <p className="text-xl text-gray-800 mb-8">{description}</p>}
+        {description && <p className="text-xl text-surface-foreground mb-8">{description}</p>}
 
         <div className="flex flex-col sm:flex-row gap-4 mb-8">
           <Link href={ctaUrl} className="btn-primary-lg">
@@ -56,7 +56,7 @@ export function ServiceHero({
           {phone && (
             <a
               href={`tel:${phone.replace(/\s/g, "")}`}
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-200 transition-colors"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-surface-subtle text-surface-secondary font-semibold rounded-lg hover:bg-surface-subtle transition-colors"
             >
               <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path
@@ -132,7 +132,7 @@ export function Benefits({ items, title = "Why Choose Our Service?" }: BenefitsP
   return (
     <div className="py-16 bg-surface-muted -mx-4 px-4 mb-16 rounded-lg">
       <div className="mx-auto w-full lg:w-[90%]">
-        <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">{title}</h2>
+        <h2 className="text-3xl font-bold text-surface-foreground mb-8 text-center">{title}</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
           {items.map((item, i) => (
             <div key={i} className="flex items-start gap-3">
@@ -149,7 +149,7 @@ export function Benefits({ items, title = "Why Choose Our Service?" }: BenefitsP
                   d="M5 13l4 4L19 7"
                 />
               </svg>
-              <span className="text-gray-900">{item}</span>
+              <span className="text-surface-foreground">{item}</span>
             </div>
           ))}
         </div>
@@ -171,9 +171,9 @@ export function FAQ({ items }: FAQProps) {
   return (
     <div className="space-y-6 mb-16">
       {items.map((item, i) => (
-        <div key={i} className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
-          <h3 className="text-lg font-semibold text-gray-900 mb-3">{item.question}</h3>
-          <p className="text-gray-800">{item.answer}</p>
+        <div key={i} className="bg-surface-card border border-surface-subtle rounded-lg p-6 shadow-sm">
+          <h3 className="text-lg font-semibold text-surface-foreground mb-3">{item.question}</h3>
+          <p className="text-surface-foreground">{item.answer}</p>
         </div>
       ))}
     </div>
@@ -189,22 +189,22 @@ export function CoverageAreas({ areas, phone }: CoverageAreasProps) {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
       <div className="lg:col-span-2">
-        <h2 className="text-3xl font-bold text-gray-900 mb-6">
+        <h2 className="text-3xl font-bold text-surface-foreground mb-6">
           Professional Service Across the South East
         </h2>
-        <p className="text-lg text-gray-800 mb-6">
+        <p className="text-lg text-surface-foreground mb-6">
           Our services are available throughout the South East UK, with local teams familiar with
           regional planning requirements and building regulations. We provide rapid response times
           and competitive pricing for all project sizes.
         </p>
-        <p className="text-gray-800">
+        <p className="text-surface-foreground">
           From small residential projects to large commercial developments, our experienced team
           delivers safe, compliant solutions that meet your specific requirements and timeline.
         </p>
       </div>
 
-      <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">Coverage Areas</h3>
+      <div className="bg-surface-card border border-surface-subtle rounded-lg p-6 shadow-sm">
+        <h3 className="text-lg font-semibold text-surface-foreground mb-4">Coverage Areas</h3>
         <ul className="space-y-2 text-sm">
           {areas.map((area) => (
             <li key={area.slug}>
@@ -215,8 +215,8 @@ export function CoverageAreas({ areas, phone }: CoverageAreasProps) {
           ))}
         </ul>
         {phone && (
-          <div className="mt-6 pt-4 border-t border-gray-200">
-            <p className="text-sm text-gray-800 mb-3">Need immediate assistance?</p>
+          <div className="mt-6 pt-4 border-t border-surface-subtle">
+            <p className="text-sm text-surface-foreground mb-3">Need immediate assistance?</p>
             <a
               href={`tel:${phone.replace(/\s/g, "")}`}
               className="inline-flex items-center justify-center w-full px-4 py-2 bg-brand-primary text-white font-medium rounded-md hover:bg-brand-primary-hover transition-colors"
@@ -254,7 +254,7 @@ export function CTA({
       <div className="flex flex-col sm:flex-row gap-4 justify-center">
         <Link
           href={primaryUrl}
-          className="inline-flex items-center justify-center px-8 py-4 bg-white text-brand-primary font-semibold rounded-lg hover:bg-gray-200 transition-colors"
+          className="inline-flex items-center justify-center px-8 py-4 bg-white text-brand-primary font-semibold rounded-lg hover:bg-surface-subtle transition-colors"
         >
           {primaryAction}
         </Link>

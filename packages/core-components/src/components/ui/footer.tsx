@@ -31,7 +31,7 @@ export async function Footer() {
     .slice(0, siteConfig.footer.maxLocations);
 
   return (
-    <footer className="bg-gray-900 text-white py-12 sm:py-16">
+    <footer className="bg-surface-inverse text-white py-12 sm:py-16">
       <div className="mx-auto w-full lg:w-[90%] px-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mb-6 sm:mb-8">
           {/* Column 1: About */}
@@ -39,7 +39,7 @@ export async function Footer() {
             <h2 className="text-xl sm:text-2xl font-bold mb-4 text-white">
               {siteConfig.business.name}
             </h2>
-            <p className="text-gray-300 mb-4 text-sm sm:text-base">{siteConfig.tagline}</p>
+            <p className="text-surface-muted-foreground mb-4 text-sm sm:text-base">{siteConfig.tagline}</p>
             {siteConfig.credentials.certifications.length > 0 && (
               <div className="flex flex-wrap items-center gap-3 sm:gap-4">
                 {siteConfig.credentials.certifications
@@ -64,7 +64,7 @@ export async function Footer() {
           {siteConfig.footer.showServices && sortedServices.length > 0 && (
             <div>
               <h3 className="text-base sm:text-lg font-semibold mb-4 text-white">Our Services</h3>
-              <ul className="space-y-2 text-gray-300 text-sm sm:text-base">
+              <ul className="space-y-2 text-surface-muted-foreground text-sm sm:text-base">
                 {sortedServices.map((service: { slug: string; title: string }) => (
                   <li key={service.slug}>
                     <Link
@@ -93,7 +93,7 @@ export async function Footer() {
           {siteConfig.footer.showLocations && sortedLocations.length > 0 && (
             <div>
               <h3 className="text-base sm:text-lg font-semibold mb-4 text-white">Service Areas</h3>
-              <ul className="space-y-2 text-gray-300 text-sm sm:text-base">
+              <ul className="space-y-2 text-surface-muted-foreground text-sm sm:text-base">
                 {sortedLocations.map((location: { slug: string; title: string }) => (
                   <li key={location.slug}>
                     <Link
@@ -121,7 +121,7 @@ export async function Footer() {
           {/* Column 4: Contact */}
           <div>
             <h3 className="text-base sm:text-lg font-semibold mb-4 text-white">Contact Info</h3>
-            <div className="space-y-3 text-gray-300 text-sm sm:text-base">
+            <div className="space-y-3 text-surface-muted-foreground text-sm sm:text-base">
               <div className="flex items-center gap-2">
                 <Phone className="h-3 w-3 sm:h-4 sm:w-4 text-brand-primary flex-shrink-0" aria-hidden="true" />
                 <Link
@@ -147,11 +147,11 @@ export async function Footer() {
                   <div>{ADDRESS.region}</div>
                 </div>
               </div>
-              <div className="mt-4 pt-4 border-t border-gray-700 text-xs sm:text-sm">
+              <div className="mt-4 pt-4 border-t border-surface-subtle text-xs sm:text-sm">
                 <Link href="/privacy-policy" className="hover:text-brand-primary transition-colors">
                   Privacy Policy
                 </Link>
-                <span className="mx-2 text-gray-500">|</span>
+                <span className="mx-2 text-surface-muted-foreground">|</span>
                 <Link href="/cookie-policy" className="hover:text-brand-primary transition-colors">
                   Cookie Policy
                 </Link>
@@ -160,7 +160,7 @@ export async function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-gray-700 pt-6 sm:pt-8 text-center text-gray-300 text-xs sm:text-sm">
+        <div className="border-t border-surface-subtle pt-6 sm:pt-8 text-center text-surface-muted-foreground text-xs sm:text-sm">
           <p>
             &copy; {siteConfig.footer.copyright}
             {siteConfig.footer.builtBy && (

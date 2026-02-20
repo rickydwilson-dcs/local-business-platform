@@ -82,15 +82,15 @@ export function PricingPackages({ title, description, packages, location }: Pric
       <div className="mx-auto w-full lg:w-[90%] px-6">
         <div className="text-center mb-12">
           <h2 className="heading-section">{title}</h2>
-          {description && <p className="text-lg text-gray-800 max-w-2xl mx-auto">{description}</p>}
+          {description && <p className="text-lg text-surface-foreground max-w-2xl mx-auto">{description}</p>}
         </div>
 
         <div className="grid lg:grid-cols-3 gap-8 mb-12">
           {packages.map((pkg, index) => (
             <div
               key={index}
-              className={`relative bg-white rounded-xl border shadow-sm py-6 flex flex-col ${
-                pkg.popular ? "ring-2 ring-brand-primary" : "border-gray-200"
+              className={`relative bg-surface-card rounded-xl border shadow-sm py-6 flex flex-col ${
+                pkg.popular ? "ring-2 ring-brand-primary" : "border-surface-subtle"
               }`}
             >
               {/* Popular Badge */}
@@ -104,10 +104,10 @@ export function PricingPackages({ title, description, packages, location }: Pric
 
               {/* Package Header */}
               <div className="px-6 pb-4 text-center">
-                <div className="font-semibold text-xl text-gray-900 mb-2">{pkg.name}</div>
+                <div className="font-semibold text-xl text-surface-foreground mb-2">{pkg.name}</div>
                 <div className="mt-2">
                   <span className="text-3xl font-bold text-brand-primary">{pkg.price}</span>
-                  <div className="flex items-center justify-center mt-2 text-sm text-gray-800">
+                  <div className="flex items-center justify-center mt-2 text-sm text-surface-foreground">
                     <ClockIcon />
                     {pkg.duration}
                   </div>
@@ -116,14 +116,14 @@ export function PricingPackages({ title, description, packages, location }: Pric
 
               {/* Package Content */}
               <div className="px-6 pt-0 flex-1 flex flex-col">
-                <p className="text-sm text-gray-800 mb-6">{pkg.description}</p>
+                <p className="text-sm text-surface-foreground mb-6">{pkg.description}</p>
 
                 {/* Features List */}
                 <ul className="space-y-3 mb-6 flex-1">
                   {pkg.features.map((feature, featureIndex) => (
                     <li key={featureIndex} className="flex items-start text-sm">
                       <CheckIcon />
-                      <span className="text-gray-900">{feature.text}</span>
+                      <span className="text-surface-foreground">{feature.text}</span>
                     </li>
                   ))}
                 </ul>
@@ -134,7 +134,7 @@ export function PricingPackages({ title, description, packages, location }: Pric
                   className={`inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all h-9 px-4 py-2 w-full ${
                     pkg.popular
                       ? "bg-brand-primary text-white hover:bg-brand-primary-hover"
-                      : "border bg-white shadow-xs hover:bg-gray-200 text-gray-900"
+                      : "border bg-surface-card shadow-xs hover:bg-surface-subtle text-surface-foreground"
                   }`}
                 >
                   {pkg.ctaText}
@@ -147,8 +147,8 @@ export function PricingPackages({ title, description, packages, location }: Pric
         {/* Bottom CTA */}
         <div className="text-center">
           <div className="bg-surface-muted rounded-lg p-8 max-w-4xl mx-auto">
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">Need a Custom Quote?</h3>
-            <p className="text-gray-800 mb-6 text-lg">
+            <h3 className="text-2xl font-bold text-surface-foreground mb-4">Need a Custom Quote?</h3>
+            <p className="text-surface-foreground mb-6 text-lg">
               Every {location || ""} project is unique. Get a detailed, no-obligation quote tailored
               to your specific requirements.
             </p>

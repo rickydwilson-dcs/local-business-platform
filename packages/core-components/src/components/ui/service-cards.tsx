@@ -25,7 +25,7 @@ export function ServiceCards({
   cards,
   backgroundColor = "white",
 }: ServiceCardsProps) {
-  const bgClass = backgroundColor === "white" ? "bg-white" : "bg-surface-muted";
+  const bgClass = backgroundColor === "white" ? "bg-surface-background" : "bg-surface-muted";
 
   // Dynamic grid classes based on number of cards
   const getGridClass = (cardCount: number) => {
@@ -60,8 +60,8 @@ export function ServiceCards({
             return (
               <div
                 key={index}
-                className={`group relative rounded-2xl overflow-hidden shadow-sm border border-gray-200 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 ${
-                  isEven ? "bg-white" : "bg-surface-muted"
+                className={`group relative rounded-2xl overflow-hidden shadow-sm border border-surface-subtle hover:shadow-lg hover:-translate-y-1 transition-all duration-300 ${
+                  isEven ? "bg-surface-card" : "bg-surface-muted"
                 }`}
               >
                 {/* Header with Image/Icon */}
@@ -122,16 +122,16 @@ export function ServiceCards({
 
                 {/* Content */}
                 <div className="p-6">
-                  <h3 className="text-xl font-bold text-gray-900 mb-3">{card.title}</h3>
+                  <h3 className="text-xl font-bold text-surface-foreground mb-3">{card.title}</h3>
 
-                  <p className="text-gray-800 text-sm leading-relaxed mb-4">{card.description}</p>
+                  <p className="text-surface-foreground text-sm leading-relaxed mb-4">{card.description}</p>
 
                   {/* Features List */}
                   <ul className="space-y-2 mb-6">
                     {card.features.map((feature, featureIndex) => (
                       <li key={featureIndex} className="flex items-start gap-2">
                         <div className="flex-shrink-0 w-1.5 h-1.5 bg-brand-primary rounded-full mt-2"></div>
-                        <span className="text-gray-700 text-sm">{feature}</span>
+                        <span className="text-surface-secondary text-sm">{feature}</span>
                       </li>
                     ))}
                   </ul>

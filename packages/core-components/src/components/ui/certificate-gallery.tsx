@@ -17,7 +17,7 @@ interface CertificateGalleryProps {
 export function CertificateGallery({ certificates, onSelect }: CertificateGalleryProps) {
   if (!certificates || certificates.length === 0) {
     return (
-      <div className="text-center text-gray-800 py-12">
+      <div className="text-center text-surface-foreground py-12">
         <p>No certificates available.</p>
       </div>
     );
@@ -29,11 +29,11 @@ export function CertificateGallery({ certificates, onSelect }: CertificateGaller
         <button
           key={certificate.id}
           onClick={() => onSelect(certificate)}
-          className="group relative bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-lg hover:scale-[1.02] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2 cursor-pointer"
+          className="group relative bg-surface-card rounded-lg border border-surface-subtle overflow-hidden hover:shadow-lg hover:scale-[1.02] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2 cursor-pointer"
           aria-label={`View ${certificate.name} certificate details`}
           type="button"
         >
-          <div className="relative aspect-[3/4] w-full bg-gray-100">
+          <div className="relative aspect-[3/4] w-full bg-surface-subtle">
             <Image
               src={certificate.thumbnail}
               alt={generateImageAlt(`${certificate.name} certificate`)}
@@ -46,7 +46,7 @@ export function CertificateGallery({ certificates, onSelect }: CertificateGaller
           </div>
 
           <div className="p-4">
-            <h3 className="text-sm font-semibold text-gray-900 text-center line-clamp-2 group-hover:text-brand-primary transition-colors duration-200">
+            <h3 className="text-sm font-semibold text-surface-foreground text-center line-clamp-2 group-hover:text-brand-primary transition-colors duration-200">
               {certificate.name}
             </h3>
           </div>

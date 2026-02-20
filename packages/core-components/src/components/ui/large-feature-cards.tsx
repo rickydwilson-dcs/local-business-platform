@@ -31,7 +31,7 @@ export function LargeFeatureCards({
   backgroundColor = "gray",
   showBottomCTA = true,
 }: LargeFeatureCardsProps) {
-  const bgClass = backgroundColor === "white" ? "bg-white" : "bg-surface-muted";
+  const bgClass = backgroundColor === "white" ? "bg-surface-background" : "bg-surface-muted";
 
   const gridClass = {
     2: "grid-cols-1 md:grid-cols-2",
@@ -63,7 +63,7 @@ export function LargeFeatureCards({
 
               {/* Image or Icon */}
               {card.image && (
-                <div className="relative w-full h-48 mb-6 rounded-xl overflow-hidden bg-gray-100">
+                <div className="relative w-full h-48 mb-6 rounded-xl overflow-hidden bg-surface-subtle">
                   <Image
                     src={getImageUrl(card.image)}
                     alt={`${card.title} - professional service solution`}
@@ -95,7 +95,7 @@ export function LargeFeatureCards({
                     {card.details.map((detail, detailIndex) => (
                       <li key={detailIndex} className="flex items-start gap-3">
                         <div className="flex-shrink-0 w-2 h-2 bg-brand-primary rounded-full mt-3"></div>
-                        <span className="text-gray-700">{detail}</span>
+                        <span className="text-surface-secondary">{detail}</span>
                       </li>
                     ))}
                   </ul>
@@ -120,9 +120,9 @@ export function LargeFeatureCards({
 
         {/* Bottom CTA */}
         {showBottomCTA && (
-          <div className="text-center mt-16 pt-8 border-t border-gray-200">
-            <h3 className="text-xl font-semibold text-gray-900 mb-4">Ready to Get Started?</h3>
-            <p className="text-gray-800 mb-6 max-w-2xl mx-auto">
+          <div className="text-center mt-16 pt-8 border-t border-surface-subtle">
+            <h3 className="text-xl font-semibold text-surface-foreground mb-4">Ready to Get Started?</h3>
+            <p className="text-surface-foreground mb-6 max-w-2xl mx-auto">
               Contact our expert team to discuss your project requirements and get a tailored quote.
             </p>
             <Link href="/contact" className="btn-primary-lg gap-2">

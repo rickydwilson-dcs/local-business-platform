@@ -33,7 +33,7 @@ export function LocationServices({
           {services.map((service, i) => (
             <div
               key={i}
-              className="bg-white rounded-2xl p-6 shadow-sm hover:shadow-lg transition-shadow group"
+              className="bg-surface-card rounded-2xl p-6 shadow-sm hover:shadow-lg transition-shadow group"
             >
               <div className="flex items-start gap-4">
                 <div className="flex-shrink-0 w-12 h-12 bg-brand-primary rounded-lg flex items-center justify-center group-hover:bg-brand-primary-hover transition-colors">
@@ -52,8 +52,8 @@ export function LocationServices({
                   </svg>
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">{service.name}</h3>
-                  <p className="text-gray-800 mb-4 text-sm leading-relaxed">
+                  <h3 className="text-lg font-semibold text-surface-foreground mb-2">{service.name}</h3>
+                  <p className="text-surface-foreground mb-4 text-sm leading-relaxed">
                     {service.description}
                   </p>
                   <Link
@@ -83,7 +83,7 @@ export function LocationServices({
         </div>
 
         <div className="text-center mt-12">
-          <p className="text-gray-800 mb-6">Need a custom solution for your {location} project?</p>
+          <p className="text-surface-foreground mb-6">Need a custom solution for your {location} project?</p>
           <Link href="/contact" className="btn-primary-lg">
             Request Custom Quote
           </Link>
