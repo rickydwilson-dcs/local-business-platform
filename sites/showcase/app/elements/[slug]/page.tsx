@@ -4,6 +4,7 @@ import { elements, elementsBySlug } from '@/registry';
 import { ThemeFrame } from '@/components/ThemeFrame';
 import { BrandInjectorModal } from '@/components/BrandInjectorModal';
 import { CustomBrandProvider } from '@/components/CustomBrandProvider';
+import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
 
@@ -39,7 +40,7 @@ export default async function ElementDetailPage({ params, searchParams }: Elemen
     <div className="p-8">
       <div className="mb-8 flex items-start justify-between">
         <div>
-          <a href="/" className="text-sm text-gray-500 hover:text-gray-700 transition-colors">&larr; Back to browse</a>
+          <Link href="/" className="text-sm text-gray-500 hover:text-gray-700 transition-colors">&larr; Back to browse</Link>
           <h1 className="text-2xl font-bold text-gray-900 mt-2">{element.name}</h1>
           <div className="flex items-center gap-3 mt-1">
             <span className="text-xs px-2 py-0.5 bg-gray-100 text-gray-600 rounded-full">{element.category}</span>
