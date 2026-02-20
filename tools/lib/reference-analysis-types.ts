@@ -5,8 +5,27 @@
  * of a reference website screenshot.
  */
 
+export type ComponentCategory =
+  | "Hero" | "Navigation" | "Cards" | "CTA" | "Content"
+  | "Social Proof" | "Blog" | "Stats" | "Footer" | "Custom";
+
+export interface SectionBlueprint {
+  id: string;                    // unique slug, e.g. "hero-full-bleed"
+  name: string;                  // PascalCase component name, e.g. "HeroFullBleed"
+  category: ComponentCategory;
+  purpose: string;               // what this section does
+  layoutPattern: string;         // structural description: "full-bleed with overlay" / "2-col grid" / etc.
+  contentSlots: string[];        // named content areas: ["heading", "subheading", "ctaButtons", "backgroundImage"]
+  interactionNeeds: "none" | "minimal" | "stateful";  // drives Server vs Client Component decision
+  componentFileName: string;     // kebab-case: "hero-full-bleed.tsx"
+  componentExportName: string;   // PascalCase: "HeroFullBleed"
+  tokenUsageHints: string[];     // ["bg-brand-primary", "text-surface-foreground", ...]
+  confidence: "high" | "medium" | "low";
+  referenceSection: string;      // which detectedSection this maps to
+}
+
 export interface ReferenceAnalysis {
-  analysisVersion: "1";
+  analysisVersion: "1" | "2";
   reference: {
     url?: string;
     screenshotPath?: string;
@@ -42,27 +61,9 @@ export interface ReferenceAnalysis {
     purpose: "cta" | "info" | "blog" | "about" | "testimonial" | "nav" | "footer" | "sponsor" | "newsletter" | "hero" | "custom";
     notes: string;
   }>;
-  componentMappings: Array<{
-    section: string;
-    status: "REUSE" | "ADAPT" | "NEW";
-    existingComponent: string | null;
-    notes: string;
-    confidence: "high" | "medium" | "low";
-  }>;
-  newComponentBacklog: Array<{
-    name: string;
-    description: string;
-    propsContract: string;
-    tokenConstraints: string;
-    acceptanceCriteria: string[];
-    referenceSection: string;
-  }>;
+  sectionBlueprints: SectionBlueprint[];
   registryRecommendation: {
     themeName: string;
-    heroVariant: "image-overlay" | "split" | "minimal";
-    headerVariant: "dark" | "light";
-    cardVariant: "icon-circle" | "standard" | "overlay";
-    sectionVariant: "dark-accent" | "gradient" | "standard" | "banded";
     confidence: "high" | "medium" | "low";
     reasoning: string;
   };

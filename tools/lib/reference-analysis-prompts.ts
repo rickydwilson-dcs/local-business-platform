@@ -2,7 +2,7 @@
  * Reference Analysis Prompts
  *
  * Vision prompt template for Claude to analyse a reference website screenshot
- * and produce structured JSON matching the ReferenceAnalysis schema.
+ * and produce structured JSON matching the ReferenceAnalysis v2 schema.
  */
 
 export const REFERENCE_ANALYSIS_PROMPT = `You are analysing a screenshot of a reference website to extract visual design patterns for a white-label website platform.
@@ -12,7 +12,7 @@ This screenshot may have been captured at a different time than today. Analyse w
 Return ONLY a JSON object (no prose, no markdown fences) matching this exact schema:
 
 {
-  "analysisVersion": "1",
+  "analysisVersion": "2",
   "reference": {
     "url": "<url if provided, otherwise null>",
     "screenshotPath": "<path if provided, otherwise null>",
@@ -50,31 +50,24 @@ Return ONLY a JSON object (no prose, no markdown fences) matching this exact sch
       "notes": "<brief description of what this section contains>"
     }
   ],
-  "componentMappings": [
+  "sectionBlueprints": [
     {
-      "section": "<section name from detectedSections>",
-      "status": "REUSE" | "ADAPT" | "NEW",
-      "existingComponent": "<component name or null>",
-      "notes": "<how to use/adapt, or what new component is needed>",
-      "confidence": "high" | "medium" | "low"
-    }
-  ],
-  "newComponentBacklog": [
-    {
-      "name": "<PascalCase component name>",
-      "description": "<what it does>",
-      "propsContract": "<TypeScript interface as a string>",
-      "tokenConstraints": "<which theme tokens it must use>",
-      "acceptanceCriteria": ["<criterion 1>", ...],
-      "referenceSection": "<which detected section this maps to>"
+      "id": "<unique slug, e.g. hero-full-bleed>",
+      "name": "<PascalCase component name, e.g. HeroFullBleed>",
+      "category": "Hero" | "Navigation" | "Cards" | "CTA" | "Content" | "Social Proof" | "Blog" | "Stats" | "Footer" | "Custom",
+      "purpose": "<what this section does>",
+      "layoutPattern": "<structural description: full-bleed with overlay / 2-col grid / etc.>",
+      "contentSlots": ["<named content area>", ...],
+      "interactionNeeds": "none" | "minimal" | "stateful",
+      "componentFileName": "<kebab-case.tsx>",
+      "componentExportName": "<PascalCase>",
+      "tokenUsageHints": ["bg-brand-primary", "text-surface-foreground", ...],
+      "confidence": "high" | "medium" | "low",
+      "referenceSection": "<which detectedSection name this maps to>"
     }
   ],
   "registryRecommendation": {
     "themeName": "<suggested theme slug>",
-    "heroVariant": "image-overlay" | "split" | "minimal",
-    "headerVariant": "dark" | "light",
-    "cardVariant": "icon-circle" | "standard" | "overlay",
-    "sectionVariant": "dark-accent" | "gradient" | "standard" | "banded",
     "confidence": "high" | "medium" | "low",
     "reasoning": "<brief explanation>"
   },
@@ -100,8 +93,11 @@ Return ONLY a JSON object (no prose, no markdown fences) matching this exact sch
 IMPORTANT INSTRUCTIONS:
 1. For palette colours, sample the ACTUAL pixel colours from the screenshot. Use hex values, not colour names.
 2. List sections in order from top to bottom of the page.
-3. For componentMappings, map each detected section to one of these known components if possible:
-   hero-section, hero-with-image, cta-section, blog-post-card, blog-post-hero, site-header, footer, service-about, service-hero, service-benefits, service-faq, faq-section, testimonial-card, pricing-packages, circular-icon-card, content-card, card-grid
-4. If a section has NO matching existing component, set status to "NEW" and include a TypeScript props interface draft in the propsContract field of the newComponentBacklog entry.
-5. For registryRecommendation, choose the variant values that best describe the overall visual pattern.
-6. Return ONLY the JSON object. No explanation, no markdown fences, no commentary.`;
+3. For each detected section, produce a sectionBlueprint with all fields above. Do NOT match against existing components. Every section gets its own blueprint — this theme will have its own complete set of components.
+4. The "id" should be a unique kebab-case slug derived from the section's category and layout (e.g. "hero-full-bleed", "cards-icon-grid", "cta-dark-band").
+5. The "name" and "componentExportName" should be PascalCase (e.g. "HeroFullBleed").
+6. The "componentFileName" should be the kebab-case version with .tsx extension (e.g. "hero-full-bleed.tsx").
+7. The "contentSlots" should list all named content areas the component needs (e.g. ["heading", "subheading", "ctaButtons", "backgroundImage"]).
+8. Set "interactionNeeds" to "stateful" only if the section clearly requires client-side state (accordion, carousel, tabs). Use "none" for static content, "minimal" for hover effects or simple transitions.
+9. The "tokenUsageHints" should list Tailwind theme token classes the component should use (e.g. "bg-brand-primary", "text-surface-foreground").
+10. Return ONLY the JSON object. No explanation, no markdown fences, no commentary.`;

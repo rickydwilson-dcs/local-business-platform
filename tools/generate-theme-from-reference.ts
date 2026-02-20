@@ -3,20 +3,16 @@
  * Generate Theme from Reference
  *
  * Analyses a reference website URL or local logo image to generate a
- * platform-compatible theme package. Uses the existing intake-system
- * theme-extraction utilities for colour analysis and Claude for layout
- * pattern classification → Orion or Vega ComponentRegistry.
+ * platform-compatible theme package with per-theme component blueprints.
  *
  * Usage:
  *   npx tsx tools/generate-theme-from-reference.ts --url https://example.com
  *   npx tsx tools/generate-theme-from-reference.ts --image ./logo.png
- *   npx tsx tools/generate-theme-from-reference.ts --url https://example.com --image ./logo.png --name my-client
+ *   npx tsx tools/generate-theme-from-reference.ts --url https://example.com --image ./screenshot.png --name my-client
  *   npx tsx tools/generate-theme-from-reference.ts --url https://example.com --dry-run
- *   npx tsx tools/generate-theme-from-reference.ts --url https://example.com --image ./screenshot.png --analyse
  *
  * Output:
  *   Writes theme.config.ts content to stdout (or --output path).
- *   Writes component registry choice (orion|vega) to stdout.
  *   With --analyse: also writes reference-analysis.json and reference-analysis.md.
  */
 
@@ -54,21 +50,6 @@ interface ThemeGenerationInput {
   analyse?: boolean;
 }
 
-interface LayoutClassification {
-  /** Which named theme best matches this business's visual style */
-  theme: "orion" | "vega";
-  /** Hero pattern detected */
-  heroVariant: "image-overlay" | "split" | "centered";
-  /** Header style */
-  headerVariant: "dark" | "light";
-  /** Primary card style */
-  cardVariant: "icon-circle" | "standard" | "image-overlay";
-  /** Primary section dark/light style */
-  sectionVariant: "dark-accent" | "standard";
-  /** Reasoning from Claude */
-  reasoning: string;
-}
-
 // ============================================================================
 // CLI argument parsing
 // ============================================================================
@@ -100,107 +81,6 @@ function parseArgs(argv: string[]): ThemeGenerationInput {
   }
 
   return args;
-}
-
-// ============================================================================
-// Layout classification via Claude
-// ============================================================================
-
-async function classifyLayoutPattern(
-  websiteUrl: string | undefined,
-  imagePath: string | undefined,
-  suggestion: ThemeSuggestion
-): Promise<LayoutClassification> {
-  const apiKey = process.env.ANTHROPIC_API_KEY;
-  if (!apiKey) {
-    console.warn(
-      "  [Warning] ANTHROPIC_API_KEY not set — defaulting to Vega theme without AI classification."
-    );
-    return {
-      theme: "vega",
-      heroVariant: "centered",
-      headerVariant: "light",
-      cardVariant: "standard",
-      sectionVariant: "standard",
-      reasoning: "Defaulted to Vega (no ANTHROPIC_API_KEY set).",
-    };
-  }
-
-  const client = new Anthropic({ apiKey });
-
-  const colorContext = `
-Brand primary colour: ${suggestion.colors.brand.primary}
-Style category: ${suggestion.style}
-Confidence: ${Math.round(suggestion.confidence * 100)}%
-`.trim();
-
-  const websiteContext = websiteUrl
-    ? `Reference website URL: ${websiteUrl}`
-    : "No reference website URL provided.";
-
-  const prompt = `You are classifying a local service business's visual style to choose the best theme from our platform.
-
-We have two named themes:
-- **Orion**: Dark header, full-bleed image hero, circular icon cards, dark black CTA sections. Best for: trades businesses (electrical, plumbing, construction), dramatic / bold brands, dark colour schemes, businesses that want a powerful premium feel.
-- **Vega**: Light header, standard card grid, clean and minimal. Best for: professional services, scaffolding, consulting, any brand with a blue/navy/green palette, businesses that want a clean approachable feel.
-
-Business brand analysis:
-${colorContext}
-${websiteContext}
-
-Based on this information, classify the most appropriate theme and component variants.
-
-Respond with a JSON object matching this schema:
-{
-  "theme": "orion" | "vega",
-  "heroVariant": "image-overlay" | "split" | "centered",
-  "headerVariant": "dark" | "light",
-  "cardVariant": "icon-circle" | "standard" | "image-overlay",
-  "sectionVariant": "dark-accent" | "standard",
-  "reasoning": "Brief explanation of why you chose this theme"
-}`;
-
-  try {
-    const response = await client.messages.create({
-      model: "claude-haiku-4-5-20251001",
-      max_tokens: 512,
-      temperature: 0,
-      messages: [{ role: "user", content: prompt }],
-    });
-
-    const text = response.content.find((b) => b.type === "text");
-    if (!text || text.type !== "text") throw new Error("No text response from Claude");
-
-    // Extract JSON from response (may have markdown fences)
-    const jsonMatch = text.text.match(/\{[\s\S]*\}/);
-    if (!jsonMatch) throw new Error("No JSON object found in Claude response");
-
-    const parsed = JSON.parse(jsonMatch[0]) as LayoutClassification;
-    return parsed;
-  } catch (err) {
-    console.warn(`  [Warning] Layout classification failed: ${err}. Defaulting to Vega.`);
-    return {
-      theme: "vega",
-      heroVariant: "centered",
-      headerVariant: "light",
-      cardVariant: "standard",
-      sectionVariant: "standard",
-      reasoning: `Defaulted to Vega due to classification error: ${err}`,
-    };
-  }
-}
-
-// ============================================================================
-// Generate theme.config.ts content with componentRegistry
-// ============================================================================
-
-function generateEnrichedThemeConfig(
-  suggestion: ThemeSuggestion,
-  layout: LayoutClassification,
-  themeName: string
-): string {
-  // Pass themeVariant directly — generateThemeConfigContent now emits complete output
-  return generateThemeConfigContent(suggestion, themeName, layout.theme);
 }
 
 // ============================================================================
@@ -270,7 +150,7 @@ async function analyseWithVision(
 
     const parsed = JSON.parse(jsonMatch[0]) as ReferenceAnalysis;
     // Ensure version is set
-    parsed.analysisVersion = "1";
+    parsed.analysisVersion = "2";
     parsed.reference = {
       ...parsed.reference,
       url: url ?? parsed.reference.url,
@@ -288,7 +168,7 @@ function createMinimalAnalysis(
   screenshotPath: string
 ): ReferenceAnalysis {
   return {
-    analysisVersion: "1",
+    analysisVersion: "2",
     reference: {
       url,
       screenshotPath,
@@ -318,14 +198,9 @@ function createMinimalAnalysis(
       spacingDensity: "standard",
     },
     detectedSections: [],
-    componentMappings: [],
-    newComponentBacklog: [],
+    sectionBlueprints: [],
     registryRecommendation: {
       themeName: "nova",
-      heroVariant: "minimal",
-      headerVariant: "light",
-      cardVariant: "standard",
-      sectionVariant: "standard",
       confidence: "low",
       reasoning: "Minimal analysis — vision call failed.",
     },
@@ -404,40 +279,30 @@ function generateMarkdownReport(analysis: ReferenceAnalysis): string {
   });
   lines.push("");
 
-  // Component mappings
-  lines.push("## Component Mappings");
+  // Section blueprints
+  lines.push("## Section Blueprints");
   lines.push("");
-  lines.push("| Section | Status | Existing Component | Notes | Confidence |");
-  lines.push("|---------|--------|-------------------|-------|------------|");
-  for (const m of analysis.componentMappings) {
-    lines.push(`| ${m.section} | ${m.status} | ${m.existingComponent ?? "—"} | ${m.notes} | ${m.confidence} |`);
-  }
+  lines.push("| # | Name | Category | Layout Pattern | Interaction | Confidence |");
+  lines.push("|---|------|----------|---------------|-------------|------------|");
+  analysis.sectionBlueprints.forEach((bp, i) => {
+    lines.push(`| ${i + 1} | ${bp.name} | ${bp.category} | ${bp.layoutPattern} | ${bp.interactionNeeds} | ${bp.confidence} |`);
+  });
   lines.push("");
 
-  // Gap components
-  if (analysis.newComponentBacklog.length > 0) {
-    lines.push("## New Component Backlog");
+  for (const bp of analysis.sectionBlueprints) {
+    lines.push(`### ${bp.name}`);
     lines.push("");
-    for (const comp of analysis.newComponentBacklog) {
-      lines.push(`### ${comp.name}`);
-      lines.push("");
-      lines.push(comp.description);
-      lines.push("");
-      lines.push(`**Reference section:** ${comp.referenceSection}`);
-      lines.push("");
-      lines.push("**Props contract:**");
-      lines.push("```typescript");
-      lines.push(comp.propsContract);
-      lines.push("```");
-      lines.push("");
-      lines.push(`**Token constraints:** ${comp.tokenConstraints}`);
-      lines.push("");
-      lines.push("**Acceptance criteria:**");
-      for (const ac of comp.acceptanceCriteria) {
-        lines.push(`- ${ac}`);
-      }
-      lines.push("");
-    }
+    lines.push(`- **ID:** ${bp.id}`);
+    lines.push(`- **File:** ${bp.componentFileName}`);
+    lines.push(`- **Export:** ${bp.componentExportName}`);
+    lines.push(`- **Category:** ${bp.category}`);
+    lines.push(`- **Purpose:** ${bp.purpose}`);
+    lines.push(`- **Layout:** ${bp.layoutPattern}`);
+    lines.push(`- **Interaction:** ${bp.interactionNeeds}`);
+    lines.push(`- **Content slots:** ${bp.contentSlots.join(", ")}`);
+    lines.push(`- **Token hints:** ${bp.tokenUsageHints.join(", ")}`);
+    lines.push(`- **Reference section:** ${bp.referenceSection}`);
+    lines.push("");
   }
 
   // Registry recommendation
@@ -445,10 +310,6 @@ function generateMarkdownReport(analysis: ReferenceAnalysis): string {
   lines.push("");
   const r = analysis.registryRecommendation;
   lines.push(`- Theme: ${r.themeName}`);
-  lines.push(`- Hero variant: ${r.heroVariant}`);
-  lines.push(`- Header variant: ${r.headerVariant}`);
-  lines.push(`- Card variant: ${r.cardVariant}`);
-  lines.push(`- Section variant: ${r.sectionVariant}`);
   lines.push(`- Confidence: ${r.confidence}`);
   lines.push(`- Reasoning: ${r.reasoning}`);
   lines.push("");
@@ -540,63 +401,78 @@ async function main() {
   console.log(`  ✓ Style category: ${suggestion.style}`);
   console.log(`  ✓ Confidence: ${Math.round(suggestion.confidence * 100)}%`);
 
-  // ── Step 2: Classify layout pattern via Claude ───────────────────────────
+  // ── Step 2: Vision-based reference analysis ─────────────────────────────
 
-  console.log("\n  Classifying layout pattern...");
-  const layout = await classifyLayoutPattern(args.url, args.imagePath, suggestion);
-  console.log(`  ✓ Theme: ${layout.theme}`);
-  console.log(`  ✓ Hero: ${layout.heroVariant}`);
-  console.log(`  ✓ Reasoning: ${layout.reasoning}`);
+  let visionAnalysis: ReferenceAnalysis | null = null;
 
-  // ── Step 2b: Vision-based reference analysis (--analyse) ─────────────────
+  if (args.imagePath) {
+    console.log("\n  Running vision-based reference analysis...");
+    visionAnalysis = await analyseWithVision(args.imagePath, args.url, suggestion);
 
-  if (args.analyse) {
-    if (!args.imagePath) {
-      console.warn("\n  [Warning] --analyse requires --image <screenshot>. Skipping analysis.");
-    } else {
-      console.log("\n  Running vision-based reference analysis...");
-      const analysis = await analyseWithVision(args.imagePath, args.url, suggestion);
+    const outputDir = args.outputPath ?? "./";
+    fs.mkdirSync(outputDir, { recursive: true });
 
-      const outputDir = args.outputPath ?? "./";
-      fs.mkdirSync(outputDir, { recursive: true });
+    const jsonPath = path.join(outputDir, "reference-analysis.json");
+    fs.writeFileSync(jsonPath, JSON.stringify(visionAnalysis, null, 2), "utf8");
+    console.log(`  ✓ Written: ${jsonPath}`);
 
-      const jsonPath = path.join(outputDir, "reference-analysis.json");
-      fs.writeFileSync(jsonPath, JSON.stringify(analysis, null, 2), "utf8");
-      console.log(`  ✓ Written: ${jsonPath}`);
+    const mdReport = generateMarkdownReport(visionAnalysis);
+    const mdPath = path.join(outputDir, "reference-analysis.md");
+    fs.writeFileSync(mdPath, mdReport, "utf8");
+    console.log(`  ✓ Written: ${mdPath}`);
 
-      const mdReport = generateMarkdownReport(analysis);
-      const mdPath = path.join(outputDir, "reference-analysis.md");
-      fs.writeFileSync(mdPath, mdReport, "utf8");
-      console.log(`  ✓ Written: ${mdPath}`);
-
-      console.log(`  ✓ Sections: ${analysis.detectedSections.length}`);
-      console.log(`  ✓ Component mappings: ${analysis.componentMappings.length}`);
-      console.log(`  ✓ Gap components: ${analysis.newComponentBacklog.length}`);
-    }
+    console.log(`  ✓ Sections: ${visionAnalysis.detectedSections.length}`);
+    console.log(`  ✓ Blueprints: ${visionAnalysis.sectionBlueprints.length}`);
   }
 
-  // ── Step 3: Generate theme.config.ts content ─────────────────────────────
+  // ── Step 3: Token reconciliation ────────────────────────────────────────
+  // When vision analysis is available, use its token recommendations — they're
+  // more accurate than the URL-based extraction since they come from the actual
+  // screenshot rather than scraped CSS.
 
-  const configContent = generateEnrichedThemeConfig(suggestion, layout, themeName);
+  if (visionAnalysis && visionAnalysis.visualLanguage.palette.confidence !== "low") {
+    const tokens = visionAnalysis.themeTokenRecommendations;
+    suggestion.colors.brand = {
+      ...suggestion.colors.brand,
+      primary: tokens.brand.primary,
+      primaryHover: tokens.brand.primaryHover,
+      secondary: tokens.brand.secondary,
+      accent: tokens.brand.accent,
+    };
+    suggestion.colors.surface = {
+      ...suggestion.colors.surface,
+      background: tokens.surface.background,
+      foreground: tokens.surface.foreground,
+      muted: tokens.surface.muted,
+    };
+    if (!suggestion.typography) {
+      suggestion.typography = { fontFamily: { sans: [], heading: [] } };
+    }
+    suggestion.typography.fontFamily = {
+      sans: tokens.typography.fontFamilySans,
+      heading: tokens.typography.fontFamilyHeading,
+    };
+    console.log("  ✓ Overrode theme tokens with vision analysis results");
+  }
 
-  // ── Step 4: Output ───────────────────────────────────────────────────────
+  // ── Step 4: Generate theme.config.ts content ─────────────────────────────
+
+  // Default to vega theme variant for config generation
+  const configContent = generateThemeConfigContent(suggestion, themeName, "vega");
 
   console.log("\n─── Generated theme.config.ts ───────────────────────────────────\n");
   console.log(configContent);
   console.log("─────────────────────────────────────────────────────────────────\n");
 
   if (!args.dryRun && args.outputPath) {
-    // In --analyse mode, outputPath is a directory; write theme.config.ts inside it
-    const outputFile = args.analyse
-      ? path.join(args.outputPath, "theme.config.ts")
-      : args.outputPath;
+    const outputFile = path.join(args.outputPath, "theme.config.ts");
     fs.mkdirSync(path.dirname(outputFile), { recursive: true });
     fs.writeFileSync(outputFile, configContent, "utf8");
     console.log(`  ✓ Written to: ${outputFile}`);
   } else if (args.dryRun) {
     console.log("  [dry-run] Output not written to disk.");
   } else {
-    console.log("  Tip: Pass --output ./path/to/theme.config.ts to write to disk.");
+    console.log("  Tip: Pass --output ./path/to/output/ to write to disk.");
   }
 
   console.log("\n✅ Theme generation complete.\n");
