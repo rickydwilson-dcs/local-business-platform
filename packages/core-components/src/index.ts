@@ -27,6 +27,7 @@ export * from "./components/ui/coverage-areas";
 export * from "./components/ui/coverage-map-section";
 export * from "./components/ui/coverage-stats-section";
 export * from "./components/ui/cta-section";
+export * from "./components/ui/event-details-band";
 export * from "./components/ui/faq-section";
 // Note: footer.tsx imports getContentItems (@/lib/content → fs/promises) — server-only async component.
 // Cannot be in barrel because client components also import from this barrel.
@@ -43,7 +44,9 @@ export * from "./components/ui/location-hero";
 export * from "./components/ui/location-services";
 export * from "./components/ui/locations-dropdown";
 export * from "./components/ui/mobile-menu";
+export * from "./components/ui/newsletter-signup";
 export * from "./components/ui/page-hero";
+export * from "./components/ui/photo-strip";
 export * from "./components/ui/pricing-packages";
 export * from "./components/ui/section-wrapper";
 export * from "./components/ui/service-about";
