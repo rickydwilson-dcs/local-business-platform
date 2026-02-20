@@ -1,0 +1,61 @@
+/**
+ * Constellation namespace — the full pool of approved names for themes.
+ *
+ * When creating a new theme, pick the next unused name from this list.
+ * The `THEME_NAMES` array in types.ts tracks only *implemented* themes;
+ * this list is the master reservation of all available names.
+ */
+export const CONSTELLATION_NAMES = [
+  "orion",
+  "vega",
+  "lyra",
+  "atlas",
+  "nova",
+  "rigel",
+  "cygnus",
+  "polaris",
+  "castor",
+  "altair",
+  "sirius",
+  "deneb",
+  "aquila",
+  "antares",
+  "pollux",
+  "arcturus",
+  "perseus",
+  "andromeda",
+  "capella",
+  "auriga",
+  "scorpius",
+  "gemini",
+  "hydra",
+  "corvus",
+  "centaurus",
+  "lupus",
+  "phoenix",
+  "draco",
+  "vulcan",
+  "aquarius",
+  "cetus",
+  "fornax",
+  "hercules",
+  "indus",
+  "lacerta",
+  "lepus",
+  "lynx",
+  "mensa",
+  "musca",
+  "norma",
+  "octans",
+  "pavo",
+  "pictor",
+  "puppis",
+  "pyxis",
+  "reticulum",
+  "sculptor",
+  "serpens",
+  "tucana",
+  "volans",
+] as const;
+
+export type ConstellationName = (typeof CONSTELLATION_NAMES)[number];
