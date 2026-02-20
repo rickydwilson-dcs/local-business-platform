@@ -11,7 +11,7 @@ local-business-platform/
 ├── packages/
 │   ├── core-components/       # Shared UI components
 │   ├── theme-system/          # Tailwind plugin + CSS variable generation
-│   ├── themes/                # Named theme CSS packages (orion, vega, nova)
+│   ├── themes/                # Named theme CSS packages (orion, vega)
 │   └── intake-system/         # Client onboarding automation
 │
 ├── sites/

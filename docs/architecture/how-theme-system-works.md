@@ -494,6 +494,8 @@ packages/theme-system/src/
 ├── defaults.ts           # Default values for every token
 ├── generate-css.ts       # Config -> CSS variable map
 ├── tailwind-plugin.ts    # The Tailwind plugin (addBase + addUtilities + theme.extend)
+├── theme-names.ts        # Constellation namespace — pool of approved theme names
+├── theme-registry.ts     # Runtime registry for theme auto-discovery
 ├── utils.ts              # Deep merge, hex-to-RGB, contrast ratio, WCAG checks
 └── cli/
     └── validate.ts       # CLI tool for contrast validation
