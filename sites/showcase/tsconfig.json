@@ -46,9 +46,6 @@
       ],
       "@platform/themes/vega": [
         "../../packages/themes/vega/index.ts"
-      ],
-      "@platform/themes/nova": [
-        "../../packages/themes/nova/index.ts"
       ]
     }
   },

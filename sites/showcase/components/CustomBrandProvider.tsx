@@ -4,7 +4,9 @@ interface CustomBrandOverrides {
   primary?: string;
   secondary?: string;
   accent?: string;
-  fontFamily?: string;
+  fontSans?: string;
+  fontHeading?: string;
+  fontSize?: string;
 }
 
 interface CustomBrandProviderProps {
@@ -20,7 +22,9 @@ export function CustomBrandProvider({ baseTheme, overrides, children }: CustomBr
     brand_primary: overrides.primary,
     brand_secondary: overrides.secondary,
     brand_accent: overrides.accent,
-    font_sans: overrides.fontFamily,
+    font_sans: overrides.fontSans,
+    font_heading: overrides.fontHeading,
+    font_size: overrides.fontSize,
   };
 
   const partialConfig = overridesToConfig(brandOverrides);

@@ -1,7 +1,9 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
+import { getCategories, getFontsByCategory, loadGoogleFont, preloadAllFonts } from '@/lib/google-fonts';
+import { FONT_SCALE_FACTORS } from '@/lib/brand-vars';
 
 interface ThemeOption {
   name: string;
@@ -10,6 +12,33 @@ interface ThemeOption {
 
 interface BrandInjectorModalProps {
   themes: ThemeOption[];
+}
+
+function FontSelect({ value, onChange, label }: { value: string; onChange: (v: string) => void; label: string }) {
+  const categories = getCategories();
+  return (
+    <label className="block">
+      <span className="text-xs text-gray-500 mb-1 block">{label}</span>
+      <select
+        value={value}
+        onChange={e => {
+          const family = e.target.value;
+          onChange(family);
+          if (family) loadGoogleFont(family);
+        }}
+        className="w-full h-10 px-3 text-sm border border-gray-200 rounded-lg bg-white"
+      >
+        <option value="">Theme default</option>
+        {categories.map(cat => (
+          <optgroup key={cat} label={cat.charAt(0).toUpperCase() + cat.slice(1)}>
+            {getFontsByCategory(cat).map(f => (
+              <option key={f.family} value={f.family}>{f.family}</option>
+            ))}
+          </optgroup>
+        ))}
+      </select>
+    </label>
+  );
 }
 
 export function BrandInjectorModal({ themes }: BrandInjectorModalProps) {
@@ -29,9 +58,13 @@ export function BrandInjectorModal({ themes }: BrandInjectorModalProps) {
   const [accent, setAccent] = useState(
     searchParams.get('brand_accent') ? `#${searchParams.get('brand_accent')}` : '#f59e0b'
   );
-  const [fontFamily, setFontFamily] = useState(
-    searchParams.get('font_family') ?? ''
-  );
+  const [fontSans, setFontSans] = useState(searchParams.get('font_sans') ?? '');
+  const [fontHeading, setFontHeading] = useState(searchParams.get('font_heading') ?? '');
+  const [fontSize, setFontSize] = useState(searchParams.get('font_size') ?? '');
+
+  useEffect(() => {
+    if (isOpen) preloadAllFonts();
+  }, [isOpen]);
 
   const handleApply = useCallback(() => {
     const params = new URLSearchParams();
@@ -39,17 +72,21 @@ export function BrandInjectorModal({ themes }: BrandInjectorModalProps) {
     params.set('brand_primary', primary.replace('#', ''));
     params.set('brand_secondary', secondary.replace('#', ''));
     params.set('brand_accent', accent.replace('#', ''));
-    if (fontFamily) params.set('font_family', fontFamily);
+    if (fontSans) params.set('font_sans', fontSans);
+    if (fontHeading) params.set('font_heading', fontHeading);
+    if (fontSize) params.set('font_size', fontSize);
     router.replace(`?${params.toString()}`);
     setIsOpen(false);
-  }, [baseTheme, primary, secondary, accent, fontFamily, router]);
+  }, [baseTheme, primary, secondary, accent, fontSans, fontHeading, fontSize, router]);
 
   const handleReset = useCallback(() => {
     router.replace(window.location.pathname);
     setPrimary('#3b82f6');
     setSecondary('#1e40af');
     setAccent('#f59e0b');
-    setFontFamily('');
+    setFontSans('');
+    setFontHeading('');
+    setFontSize('');
     setBaseTheme(themes[0]?.name ?? 'orion');
     setIsOpen(false);
   }, [router, themes]);
@@ -58,7 +95,7 @@ export function BrandInjectorModal({ themes }: BrandInjectorModalProps) {
     <>
       <button
         onClick={() => setIsOpen(true)}
-        className="text-sm px-4 py-2 bg-brand-primary text-white rounded-lg hover:bg-brand-primary-hover transition-colors font-medium"
+        className="text-sm px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors font-medium"
       >
         Customise
       </button>
@@ -70,7 +107,7 @@ export function BrandInjectorModal({ themes }: BrandInjectorModalProps) {
             if (e.target === e.currentTarget) setIsOpen(false);
           }}
         >
-          <div className="bg-white rounded-xl shadow-2xl max-w-md w-full mx-4 p-6">
+          <div className="bg-white rounded-xl shadow-2xl max-w-md w-full mx-4 p-6 max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-lg font-bold text-gray-900">Customise Theme</h2>
               <button
@@ -93,7 +130,7 @@ export function BrandInjectorModal({ themes }: BrandInjectorModalProps) {
                       value={t.name}
                       checked={baseTheme === t.name}
                       onChange={() => setBaseTheme(t.name)}
-                      className="text-brand-primary"
+                      className="text-indigo-600"
                     />
                     <span className="text-sm text-gray-700">{t.label}</span>
                   </label>
@@ -102,53 +139,68 @@ export function BrandInjectorModal({ themes }: BrandInjectorModalProps) {
             </fieldset>
 
             {/* Colours */}
-            <div className="grid grid-cols-3 gap-4 mb-6">
-              <label className="block">
-                <span className="text-xs text-gray-500 mb-1 block">Primary</span>
-                <input
-                  type="color"
-                  value={primary}
-                  onChange={e => setPrimary(e.target.value)}
-                  className="w-full h-10 rounded cursor-pointer border border-gray-200"
-                />
-              </label>
-              <label className="block">
-                <span className="text-xs text-gray-500 mb-1 block">Secondary</span>
-                <input
-                  type="color"
-                  value={secondary}
-                  onChange={e => setSecondary(e.target.value)}
-                  className="w-full h-10 rounded cursor-pointer border border-gray-200"
-                />
-              </label>
-              <label className="block">
-                <span className="text-xs text-gray-500 mb-1 block">Accent</span>
-                <input
-                  type="color"
-                  value={accent}
-                  onChange={e => setAccent(e.target.value)}
-                  className="w-full h-10 rounded cursor-pointer border border-gray-200"
-                />
-              </label>
+            <div className="mb-6">
+              <p className="text-sm font-semibold text-gray-700 mb-2">Colours</p>
+              <div className="grid grid-cols-3 gap-4">
+                <label className="block">
+                  <span className="text-xs text-gray-500 mb-1 block">Primary</span>
+                  <input
+                    type="color"
+                    value={primary}
+                    onChange={e => setPrimary(e.target.value)}
+                    className="w-full h-10 rounded cursor-pointer border border-gray-200"
+                  />
+                </label>
+                <label className="block">
+                  <span className="text-xs text-gray-500 mb-1 block">Secondary</span>
+                  <input
+                    type="color"
+                    value={secondary}
+                    onChange={e => setSecondary(e.target.value)}
+                    className="w-full h-10 rounded cursor-pointer border border-gray-200"
+                  />
+                </label>
+                <label className="block">
+                  <span className="text-xs text-gray-500 mb-1 block">Accent</span>
+                  <input
+                    type="color"
+                    value={accent}
+                    onChange={e => setAccent(e.target.value)}
+                    className="w-full h-10 rounded cursor-pointer border border-gray-200"
+                  />
+                </label>
+              </div>
             </div>
 
-            {/* Font */}
-            <label className="block mb-6">
-              <span className="text-xs text-gray-500 mb-1 block">Font Family</span>
-              <input
-                type="text"
-                value={fontFamily}
-                onChange={e => setFontFamily(e.target.value)}
-                placeholder="e.g. Inter, Roboto"
-                className="w-full h-10 px-3 text-sm border border-gray-200 rounded-lg bg-white"
-              />
-            </label>
+            {/* Typography */}
+            <div className="mb-6">
+              <p className="text-sm font-semibold text-gray-700 mb-2">Typography</p>
+              <div className="space-y-3">
+                <FontSelect label="Body Font" value={fontSans} onChange={setFontSans} />
+                <FontSelect label="Heading Font" value={fontHeading} onChange={setFontHeading} />
+                <label className="block">
+                  <span className="text-xs text-gray-500 mb-1 block">Font Scale</span>
+                  <select
+                    value={fontSize}
+                    onChange={e => setFontSize(e.target.value)}
+                    className="w-full h-10 px-3 text-sm border border-gray-200 rounded-lg bg-white"
+                  >
+                    <option value="">Default (100%)</option>
+                    {Object.entries(FONT_SCALE_FACTORS).map(([key, factor]) => (
+                      <option key={key} value={key}>
+                        {key.charAt(0).toUpperCase() + key.slice(1)} ({Math.round(factor * 100)}%)
+                      </option>
+                    ))}
+                  </select>
+                </label>
+              </div>
+            </div>
 
             {/* Actions */}
             <div className="flex gap-3">
               <button
                 onClick={handleApply}
-                className="flex-1 px-4 py-2 bg-brand-primary text-white rounded-lg font-medium hover:bg-brand-primary-hover transition-colors"
+                className="flex-1 px-4 py-2 bg-indigo-600 text-white rounded-lg font-medium hover:bg-indigo-700 transition-colors"
               >
                 Apply
               </button>

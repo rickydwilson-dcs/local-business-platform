@@ -21,7 +21,7 @@ import * as path from "path";
 // Types
 // ============================================================================
 
-type ThemeName = "orion" | "vega" | "nova";
+type ThemeName = "orion" | "vega";
 
 interface ApplyThemeInput {
   sitePath?: string;
