@@ -12,7 +12,7 @@ import matter from "gray-matter";
 import type { ImageManifest, ImageEntry, CardType } from "./lib/manifest-types";
 
 // Configuration
-const LOCATIONS_DIR = path.join(process.cwd(), "sites/colossus-reference/content/locations");
+const LOCATIONS_DIR = path.join(process.cwd(), "sites/colossus-scaffolding/content/locations");
 const OUTPUT_FILE = path.join(process.cwd(), "output/image-manifest.json");
 const IMAGE_DIMENSIONS = { width: 800, height: 600 };
 const MANIFEST_VERSION = "1.0.0";

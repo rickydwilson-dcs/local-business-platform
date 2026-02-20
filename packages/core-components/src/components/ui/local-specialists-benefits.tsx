@@ -71,11 +71,11 @@ export function LocalSpecialistsBenefits() {
   };
 
   return (
-    <section className="section-standard bg-white">
+    <section className="section-standard bg-surface-background">
       <div className="container-standard">
         <div className="text-center mb-12">
           <h2 className="heading-section">Why Local Specialists Matter</h2>
-          <p className="text-lg text-gray-800 mx-auto w-full lg:w-[85%]">
+          <p className="text-lg text-surface-foreground mx-auto w-full lg:w-[85%]">
             Unlike companies that cover &apos;the South East&apos; generically, our town-by-town
             approach means genuine local expertise.
           </p>
@@ -84,12 +84,12 @@ export function LocalSpecialistsBenefits() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
           {benefits.map((benefit, index) => (
             <div key={index} className="flex items-start gap-4">
-              <div className="flex-shrink-0 w-16 h-16 bg-gray-100 rounded-xl flex items-center justify-center text-brand-primary">
+              <div className="flex-shrink-0 w-16 h-16 bg-surface-subtle rounded-xl flex items-center justify-center text-brand-primary">
                 {iconComponents[benefit.icon as keyof typeof iconComponents]}
               </div>
               <div className="flex-1">
-                <h3 className="text-xl font-semibold text-gray-900 mb-3">{benefit.title}</h3>
-                <p className="text-gray-800 leading-relaxed">{benefit.description}</p>
+                <h3 className="text-xl font-semibold text-surface-foreground mb-3">{benefit.title}</h3>
+                <p className="text-surface-foreground leading-relaxed">{benefit.description}</p>
               </div>
             </div>
           ))}
@@ -97,8 +97,8 @@ export function LocalSpecialistsBenefits() {
 
         <div className="mt-12 text-center">
           <div className="bg-surface-muted rounded-xl p-6 lg:p-8">
-            <h3 className="text-xl font-semibold text-gray-900 mb-4">The Local Difference</h3>
-            <p className="text-gray-800 mb-6 max-w-3xl mx-auto">
+            <h3 className="text-xl font-semibold text-surface-foreground mb-4">The Local Difference</h3>
+            <p className="text-surface-foreground mb-6 max-w-3xl mx-auto">
               When you choose a local specialist, you&apos;re not just getting services -
               you&apos;re partnering with experts who understand your specific location&apos;s
               challenges, regulations, and opportunities. From coastal wind loading to heritage
@@ -110,7 +110,7 @@ export function LocalSpecialistsBenefits() {
               </a>
               <a
                 href="tel:01424466661"
-                className="inline-flex items-center justify-center px-6 py-3 border border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-100 transition-colors"
+                className="inline-flex items-center justify-center px-6 py-3 border border-surface-subtle text-surface-secondary font-semibold rounded-lg hover:bg-surface-subtle transition-colors"
               >
                 Call: 01424 466 661
               </a>

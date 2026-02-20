@@ -233,7 +233,7 @@ function validateBrandVoice(data: unknown): BrandVoice | undefined {
  *
  * @example
  * ```typescript
- * const context = loadBusinessContext('./sites/colossus-reference/context.json');
+ * const context = loadBusinessContext('./sites/colossus-scaffolding/context.json');
  * console.log(context.business.name); // "Colossus Scaffolding"
  * ```
  */

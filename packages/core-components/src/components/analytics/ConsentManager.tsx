@@ -293,7 +293,7 @@ export function ConsentManager({
         role="dialog"
         aria-modal="true"
         aria-label="Cookie consent"
-        className={`fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-2xl z-50 ${className}`}
+        className={`fixed bottom-0 left-0 right-0 bg-surface-card border-t border-surface-subtle shadow-2xl z-50 ${className}`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6">
@@ -304,8 +304,8 @@ export function ConsentManager({
                   <Cookie className="w-4 h-4 text-white" />
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">{mergedConfig.title}</h3>
-                  <p className="text-sm text-gray-700 leading-relaxed mb-3">
+                  <h3 className="text-xl font-semibold text-surface-foreground mb-2">{mergedConfig.title}</h3>
+                  <p className="text-sm text-surface-secondary leading-relaxed mb-3">
                     {mergedConfig.description}
                   </p>
                   <div className="flex flex-wrap gap-4 text-xs">
@@ -334,7 +334,7 @@ export function ConsentManager({
                 ref={rejectButtonRef}
                 onClick={handleRejectAll}
                 disabled={loading}
-                className="px-6 py-3 text-sm font-medium text-gray-700 bg-gray-50 border border-gray-300 rounded-lg hover:bg-gray-100 hover:border-gray-400 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                className="px-6 py-3 text-sm font-medium text-surface-secondary bg-surface-subtle border border-surface-subtle rounded-lg hover:bg-surface-subtle hover:border-surface-foreground transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                 aria-label="Reject all non-essential cookies"
               >
                 <X className="w-4 h-4" />
@@ -343,7 +343,7 @@ export function ConsentManager({
               <button
                 onClick={handleCustomize}
                 disabled={loading}
-                className="px-6 py-3 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 hover:border-gray-400 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                className="px-6 py-3 text-sm font-medium text-surface-secondary bg-surface-card border border-surface-subtle rounded-lg hover:bg-surface-subtle hover:border-surface-foreground transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                 aria-label="Customize cookie preferences"
               >
                 <Settings className="w-4 h-4" />
@@ -372,7 +372,7 @@ export function ConsentManager({
           aria-label="Cookie preferences"
           className="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm z-50 flex items-center justify-center p-4"
         >
-          <div className="bg-white rounded-xl shadow-2xl max-w-3xl w-full max-h-[90vh] overflow-hidden animate-in fade-in slide-in-from-bottom-8 duration-300">
+          <div className="bg-surface-card rounded-xl shadow-2xl max-w-3xl w-full max-h-[90vh] overflow-hidden animate-in fade-in slide-in-from-bottom-8 duration-300">
             {/* Header */}
             <div className="bg-gradient-to-r from-brand-primary to-blue-700 px-6 py-4">
               <div className="flex items-center justify-between">
@@ -396,7 +396,7 @@ export function ConsentManager({
 
             {/* Content */}
             <div className="p-6 overflow-y-auto max-h-[calc(90vh-200px)]">
-              <p className="text-gray-600 mb-6">
+              <p className="text-surface-tertiary mb-6">
                 Choose which cookies you&apos;d like to accept. You can change these settings at any
                 time.
               </p>
@@ -407,21 +407,21 @@ export function ConsentManager({
                     key={category.id}
                     className={`relative border rounded-xl p-5 transition-all duration-200 ${
                       category.required
-                        ? "bg-gray-50 border-gray-200"
-                        : "bg-white border-gray-200 hover:border-brand-primary hover:shadow-sm"
+                        ? "bg-surface-subtle border-surface-subtle"
+                        : "bg-surface-card border-surface-subtle hover:border-brand-primary hover:shadow-sm"
                     }`}
                   >
                     <div className="flex items-start justify-between">
                       <div className="flex-1 pr-4">
                         <div className="flex items-center gap-2 mb-2">
-                          <h3 className="font-semibold text-gray-900">{category.title}</h3>
+                          <h3 className="font-semibold text-surface-foreground">{category.title}</h3>
                           {category.required && (
                             <span className="text-xs px-2 py-1 bg-green-100 text-green-700 rounded-full font-medium">
                               Required
                             </span>
                           )}
                         </div>
-                        <p className="text-sm text-gray-600 leading-relaxed">
+                        <p className="text-sm text-surface-tertiary leading-relaxed">
                           {category.description}
                         </p>
                       </div>
@@ -453,7 +453,7 @@ export function ConsentManager({
                                 ? "bg-green-400 cursor-not-allowed"
                                 : category.value
                                   ? "bg-brand-primary peer-focus:ring-4 peer-focus:ring-blue-200"
-                                  : "bg-gray-300 peer-focus:ring-4 peer-focus:ring-gray-200"
+                                  : "bg-surface-muted-foreground peer-focus:ring-4 peer-focus:ring-gray-200"
                             } ${loading ? "opacity-50 cursor-not-allowed" : ""}`}
                           >
                             <div
@@ -486,12 +486,12 @@ export function ConsentManager({
             </div>
 
             {/* Footer */}
-            <div className="border-t border-gray-200 px-6 py-4 bg-gray-50">
+            <div className="border-t border-surface-subtle px-6 py-4 bg-surface-subtle">
               <div className="flex flex-col-reverse sm:flex-row gap-3 sm:justify-between">
                 <button
                   onClick={() => setShowCustomize(false)}
                   disabled={loading}
-                  className="px-6 py-2.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 hover:border-gray-400 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="px-6 py-2.5 text-sm font-medium text-surface-secondary bg-surface-card border border-surface-subtle rounded-lg hover:bg-surface-subtle hover:border-surface-foreground transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   Cancel
                 </button>

@@ -91,6 +91,15 @@ const theme = await generateThemeFromWebsite("https://existing-site.com");
 const passes = checkContrast("#ffffff", "#3b82f6"); // true (4.5:1+)
 ```
 
+### `theme.themeVariant` (optional)
+
+Controls which component registry the generated site uses:
+- `"orion"` — Dark header, full-bleed image hero, circular icon cards. Best for trades businesses (electrical, plumbing, construction).
+- `"vega"` — Light header, split hero, card grid. Best for professional services (scaffolding, consulting).
+- Omitted — defaults to `"vega"`.
+
+Set during intake via the style preference question, or manually in the project file.
+
 ## How It Fits in the Pipeline
 
 ```

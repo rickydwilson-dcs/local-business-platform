@@ -142,6 +142,7 @@ npm run validate:content  # Shows which MDX files fail and why
 | [How the Theme System Works](docs/architecture/how-theme-system-works.md)     | Config → CSS variables → Tailwind classes  |
 | [How the Build Pipeline Works](docs/architecture/how-build-pipeline-works.md) | Turborepo, packages, workspace linking     |
 | [How Site Creation Works](docs/architecture/how-site-creation-works.md)       | Intake → project file → new site → deploy  |
+| [How the Ingestion Pipeline Works](docs/architecture/how-ingestion-pipeline-works.md) | Screenshot → analysis → components → theme package |
 | [Architecture Overview](docs/architecture/architecture.md)                    | High-level system overview                 |
 
 ### Standards (How to Do It Right)

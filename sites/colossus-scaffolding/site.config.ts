@@ -159,7 +159,7 @@ export interface SiteConfig extends BaseSiteConfig {
 }
 
 export const siteConfig: SiteConfig = {
-  slug: "colossus-reference",
+  slug: "colossus-scaffolding",
   domain: "colossusscaffolding.com",
   name: "Colossus Scaffolding",
   tagline: "Safe, compliant and fully insured scaffolding specialists serving the South East UK",

@@ -23,7 +23,7 @@ export function CapabilityShowcase({
   capabilities,
   backgroundColor = "white",
 }: CapabilityShowcaseProps) {
-  const bgClass = backgroundColor === "white" ? "bg-white" : "bg-surface-muted";
+  const bgClass = backgroundColor === "white" ? "bg-surface-background" : "bg-surface-muted";
 
   // Dynamic grid classes based on number of capabilities
   const getGridClass = (itemCount: number) => {
@@ -57,7 +57,7 @@ export function CapabilityShowcase({
           {capabilities.map((capability, index) => (
             <div
               key={index}
-              className="group relative bg-surface-muted rounded-2xl shadow-sm border border-gray-200 p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+              className="group relative bg-surface-muted rounded-2xl shadow-sm border border-surface-subtle p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
             >
               {/* Duration Badge */}
               {capability.duration && (
@@ -75,7 +75,7 @@ export function CapabilityShowcase({
                   <p className="text-sm text-brand-primary font-medium">{capability.subtitle}</p>
                 </div>
 
-                <p className="text-gray-800 text-sm leading-relaxed mb-6">
+                <p className="text-surface-foreground text-sm leading-relaxed mb-6">
                   {capability.description}
                 </p>
 
@@ -85,7 +85,7 @@ export function CapabilityShowcase({
                     {capability.features.map((feature, featureIndex) => (
                       <li key={featureIndex} className="flex items-start gap-2">
                         <div className="flex-shrink-0 w-1.5 h-1.5 bg-brand-primary rounded-full mt-2"></div>
-                        <span className="text-gray-700 text-sm">{feature}</span>
+                        <span className="text-surface-secondary text-sm">{feature}</span>
                       </li>
                     ))}
                   </ul>

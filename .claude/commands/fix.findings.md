@@ -229,7 +229,7 @@ Write `output/sessions/[session-name]/fixes-applied.md`:
 
 | ID      | Severity | Effort  | File                                                      | Notes                       |
 | ------- | -------- | ------- | --------------------------------------------------------- | --------------------------- |
-| SEC-004 | HIGH     | trivial | sites/colossus-reference/app/api/analytics/track/route.ts | Restricted GET to dev env   |
+| SEC-004 | HIGH     | trivial | sites/colossus-scaffolding/app/api/analytics/track/route.ts | Restricted GET to dev env   |
 | SEC-005 | MEDIUM   | trivial | sites/base-template/lib/csrf.ts                           | Added clearCSRFToken() call |
 
 ## Applied (Large Fixes via Sub-Agent)
@@ -291,5 +291,5 @@ Present a concise summary:
 - **Verify code is current** before fixing — if lines don't match the finding, mark as "stale" and skip
 - Follow the project's change philosophy: minimal targeted changes, never remove features
 - **Never modify test files** unless the finding specifically targets a test
-- When a finding says "copy from colossus-reference", read the source file first to verify it exists and matches
+- When a finding says "copy from colossus-scaffolding", read the source file first to verify it exists and matches
 - Replace `YYYY-MM-DD` and `[session-name]` with actual values

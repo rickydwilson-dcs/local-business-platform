@@ -457,7 +457,7 @@ export interface LocationFrontmatter {
  * Command line options for generate-services.ts
  */
 export interface GenerateServicesOptions {
-  /** Site directory name (e.g., "colossus-reference") */
+  /** Site directory name (e.g., "colossus-scaffolding") */
   site: string;
   /** Path to business context JSON file */
   context: string;
@@ -477,7 +477,7 @@ export interface GenerateServicesOptions {
  * Command line options for generate-locations.ts
  */
 export interface GenerateLocationsOptions {
-  /** Site directory name (e.g., "colossus-reference") */
+  /** Site directory name (e.g., "colossus-scaffolding") */
   site: string;
   /** Path to business context JSON file */
   context: string;

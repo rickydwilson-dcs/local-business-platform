@@ -22,7 +22,7 @@
  */
 export interface BaseSiteConfig {
   /** Unique site identifier used for rate limiting isolation.
-   *  Must match the site's directory name (e.g., "colossus-reference"). */
+   *  Must match the site's directory name (e.g., "colossus-scaffolding"). */
   slug: string;
 
   /** Display name of the site / business. */

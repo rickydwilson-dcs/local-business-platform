@@ -12,7 +12,7 @@ import matter from "gray-matter";
 import type { ImageManifest, ImageEntry } from "./lib/manifest-types";
 
 const MANIFEST_PATH = "output/image-manifest.json";
-const LOCATIONS_DIR = "sites/colossus-reference/content/locations";
+const LOCATIONS_DIR = "sites/colossus-scaffolding/content/locations";
 const BACKUP_DIR = "output/mdx-backups";
 
 // Command line flags

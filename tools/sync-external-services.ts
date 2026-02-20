@@ -21,9 +21,9 @@
  * - SUPABASE_SERVICE_KEY   - Supabase service role key
  *
  * Usage:
- *   pnpm sync:vercel colossus-reference
+ *   pnpm sync:vercel colossus-scaffolding
  *   pnpm sync:vercel-all
- *   pnpm sync:newrelic colossus-reference
+ *   pnpm sync:newrelic colossus-scaffolding
  *   pnpm sync:newrelic-all
  *   pnpm sync:all
  *   pnpm sync:all --dry-run

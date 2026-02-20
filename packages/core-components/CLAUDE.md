@@ -100,3 +100,26 @@ pnpm run type-check    # Uses tsconfig.build.json (standalone check)
 ```
 
 Some files are excluded from standalone type-check because they depend on site-specific implementations (MDX config, Supabase). These are still type-checked when building consuming sites.
+
+## Cross-Theme Component Propagation
+
+When adding a new component identified via reference analysis (`newComponentBacklog` in `reference-analysis.json`):
+
+### Checklist
+- [ ] Named export only (no default export)
+- [ ] TypeScript interface for all props
+- [ ] Server Component — no `'use client'`, no React hooks, no context imports
+- [ ] Token-only Tailwind classes (`bg-brand-primary`, `text-surface-foreground`, etc.)
+- [ ] No hardcoded hex colours
+- [ ] Exported from `packages/core-components/src/index.ts`
+- [ ] If MDX-driven: schema added to `packages/core-components/src/lib/content-schemas.ts`
+- [ ] `pnpm type-check` passes
+- [ ] `pnpm --filter @platform/core-components build` passes
+- [ ] Visual check in `sites/base-template` (vega) dev server
+- [ ] Visual check in `sites/dj-fox-electrical` (orion) dev server if practical
+
+### Why core-components first?
+Components use theme tokens → single implementation adapts to every theme's colour palette automatically. No per-theme duplication needed.
+
+### Gap component briefs
+Run `tools/generate-theme-from-reference.ts --analyse` → `newComponentBacklog` in `reference-analysis.json` contains props contract, token constraints, and acceptance criteria for each gap component.

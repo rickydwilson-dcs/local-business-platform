@@ -396,10 +396,20 @@ export function generateDefaultTheme(options: ThemeGenerationOptions = {}): Them
 /**
  * Generate theme.config.ts content from a theme suggestion
  */
-export function generateThemeConfigContent(suggestion: ThemeSuggestion, siteName: string): string {
+export function generateThemeConfigContent(
+  suggestion: ThemeSuggestion,
+  siteName: string,
+  themeVariant: 'orion' | 'vega' = 'vega'
+): string {
   const { colors, typography, style } = suggestion;
 
-  const config = `import { defineTheme } from '@platform/theme-system';
+  const registryImport = themeVariant === 'orion'
+    ? `import { orionRegistry } from '@platform/themes/orion';`
+    : `import { vegaRegistry } from '@platform/themes/vega';`;
+  const registryRef = themeVariant === 'orion' ? 'orionRegistry' : 'vegaRegistry';
+
+  const config = `import type { DeepPartialThemeConfig } from '@platform/theme-system';
+${registryImport}
 
 /**
  * Theme configuration for ${siteName}
@@ -407,8 +417,9 @@ export function generateThemeConfigContent(suggestion: ThemeSuggestion, siteName
  * Style: ${style}
  * Confidence: ${Math.round(suggestion.confidence * 100)}%
  */
-export default defineTheme({
-  name: '${siteName}',
+export const themeConfig: DeepPartialThemeConfig = {
+  componentRegistry: ${registryRef},
+
   colors: {
     brand: {
       primary: '${colors.brand.primary}',
@@ -435,7 +446,7 @@ export default defineTheme({
   },`
       : ""
   }
-});
+};
 `;
 
   return config;

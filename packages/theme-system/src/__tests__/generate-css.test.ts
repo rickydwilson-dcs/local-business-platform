@@ -16,8 +16,16 @@ describe("CSS Generation", () => {
       // Surface colors
       expect(vars["--color-surface-background"]).toBe("#ffffff");
       expect(vars["--color-surface-foreground"]).toBe("#111827");
+      expect(vars["--color-surface-secondary-foreground"]).toBe("#374151");
+      expect(vars["--color-surface-tertiary-foreground"]).toBe("#4b5563");
       expect(vars["--color-surface-muted"]).toBe("#f3f4f6");
       expect(vars["--color-surface-muted-foreground"]).toBe("#6b7280");
+      expect(vars["--color-surface-subtle"]).toBe("#f9fafb");
+      expect(vars["--color-surface-subtle-border"]).toBe("#e5e7eb");
+      expect(vars["--color-surface-inverse"]).toBe("#111827");
+
+      // Brand on-primary
+      expect(vars["--color-brand-on-primary"]).toBe("#ffffff");
 
       // Semantic colors
       expect(vars["--color-success"]).toBe("#10b981");
@@ -44,6 +52,7 @@ describe("CSS Generation", () => {
             primaryHover: "#cc0000",
             secondary: "#00ff00",
             accent: "#0000ff",
+            onPrimary: "#ffffff",
           },
         },
       };

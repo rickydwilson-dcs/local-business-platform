@@ -38,6 +38,15 @@ Before writing anything, explore the relevant parts of the codebase:
 
 ### Step 4: Write the Problem Brief (`codex-prompt.md`)
 
+**Check for a clarified brief first:**
+
+```bash
+ls $FOLDER/brief.md 2>/dev/null
+```
+
+- **If `brief.md` exists**: read it and use its Problem Statement, Goals, Non-Goals, Acceptance Criteria, and Constraints sections as the primary source for the prompt below. Do not re-derive these from arguments.
+- **If `brief.md` does not exist**: derive the content from `$ARGUMENTS` as before, and add this note in the prompt: "Note: no clarified brief was produced for this topic. Challenge assumptions accordingly and flag any scope gaps you identify."
+
 Write `$FOLDER/codex-prompt.md` as a **ready-to-paste Codex prompt** — not just the brief content. The file should open with the exact text the user pastes into Codex, including the slash command to use, the file to read, and where to save the output. Structure:
 
 ```markdown
@@ -66,15 +75,23 @@ When done, tell the user to run `/plan.with.codex synthesise` in Claude Code.
 
 ### Problem Statement
 
-[Clear, neutral description of the problem to solve — 2-4 paragraphs. No proposed solution yet.]
+[From brief.md if present, otherwise derived from arguments]
+
+### Goals
+
+[From brief.md if present — what success looks like]
+
+### Non-Goals
+
+[From brief.md if present — what is explicitly out of scope]
+
+### Acceptance Criteria
+
+[From brief.md if present — concrete, testable criteria]
 
 ### Constraints
 
-[Hard constraints the solution must respect — things that are non-negotiable given the current architecture. Be specific.]
-
-- [Constraint 1]
-- [Constraint 2]
-- ...
+[Hard constraints from brief.md plus any architecture-specific constraints discovered during codebase research]
 
 ### Relevant Architecture
 
@@ -86,7 +103,7 @@ When done, tell the user to run `/plan.with.codex synthesise` in Claude Code.
 
 ### What a Good Plan Should Cover
 
-[The questions the plan needs to answer — not the answers themselves.]
+[The questions the plan needs to answer — not the answers themselves. Pull open questions from brief.md if present.]
 
 ---
 

@@ -95,11 +95,11 @@ export function MobileMenu({
 
   // Theme-specific classes
   const isDark = variant === "dark";
-  const hamburgerColor = isDark ? "bg-white" : "bg-gray-800";
-  const menuBg = isDark ? "bg-black" : "bg-white";
-  const menuTextColor = isDark ? "text-white" : "text-slate-800";
-  const menuBorderColor = isDark ? "border-gray-800" : "border-gray-200";
-  const hoverBg = isDark ? "hover:bg-gray-900" : "hover:bg-gray-200";
+  const hamburgerColor = isDark ? "bg-white" : "bg-surface-foreground";
+  const menuBg = isDark ? "bg-surface-inverse" : "bg-surface-card";
+  const menuTextColor = isDark ? "text-white" : "text-surface-foreground";
+  const menuBorderColor = isDark ? "border-surface-subtle" : "border-surface-subtle";
+  const hoverBg = isDark ? "hover:bg-surface-inverse" : "hover:bg-surface-subtle";
 
   return (
     <>
@@ -205,7 +205,7 @@ export function MobileMenu({
                     </button>
                     {locationsExpanded && (
                       <div
-                        className={`mt-2 ml-4 space-y-2 border-l-2 ${isDark ? "border-gray-800" : "border-gray-200"} pl-4`}
+                        className={`mt-2 ml-4 space-y-2 border-l-2 border-surface-subtle pl-4`}
                       >
                         <Link
                           href="/locations"
@@ -219,7 +219,7 @@ export function MobileMenu({
                             key={location.slug}
                             href={`/locations/${location.slug}`}
                             onClick={closeMenu}
-                            className={`block text-base py-1 hover:text-brand-primary ${isDark ? "text-gray-300" : "text-slate-600"}`}
+                            className={`block text-base py-1 hover:text-brand-primary ${isDark ? "text-surface-muted-foreground" : "text-surface-tertiary"}`}
                           >
                             {location.name}
                           </Link>
@@ -256,7 +256,7 @@ export function MobileMenu({
 
         {/* Bottom CTA Section */}
         <div
-          className={`absolute bottom-0 left-0 right-0 px-6 py-6 border-t ${menuBorderColor} ${isDark ? "bg-gray-900" : "bg-surface-muted"}`}
+          className={`absolute bottom-0 left-0 right-0 px-6 py-6 border-t ${menuBorderColor} ${isDark ? "bg-surface-inverse" : "bg-surface-muted"}`}
         >
           {showPhone && (
             <Link
@@ -282,7 +282,7 @@ export function MobileMenu({
           <Link
             href={primaryCta.href}
             onClick={closeMenu}
-            className="block w-full bg-brand-primary text-white text-center py-3 px-6 rounded-lg font-semibold hover:bg-brand-primary-hover transition-colors"
+            className="block w-full bg-brand-primary text-on-brand-primary text-center py-3 px-6 rounded-lg font-semibold hover:bg-brand-primary-hover transition-colors"
           >
             {primaryCta.label}
           </Link>

@@ -16,13 +16,13 @@ For faster content creation, use the AI-powered service generator:
 
 ```bash
 # Generate a single service using AI
-pnpm content:generate:services --site colossus-reference --services "staircase-towers" --context tools/examples/colossus-context.json
+pnpm content:generate:services --site colossus-scaffolding --services "staircase-towers" --context tools/examples/colossus-context.json
 
 # Preview without writing (dry run)
-pnpm content:generate:services --site colossus-reference --services "staircase-towers" --dry-run
+pnpm content:generate:services --site colossus-scaffolding --services "staircase-towers" --dry-run
 
 # Use a specific AI provider (default: Claude)
-pnpm content:generate:services --site colossus-reference --services "staircase-towers" --provider=gemini
+pnpm content:generate:services --site colossus-scaffolding --services "staircase-towers" --provider=gemini
 ```
 
 The generator creates complete MDX files with:

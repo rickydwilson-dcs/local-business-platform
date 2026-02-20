@@ -306,10 +306,10 @@ Service and location pages can be generated using AI instead of manual creation:
 
 ```bash
 # Generate service pages (from root)
-pnpm content:generate:services --site colossus-reference --context tools/examples/colossus-context.json
+pnpm content:generate:services --site colossus-scaffolding --context tools/examples/colossus-context.json
 
 # Generate location pages (from root)
-pnpm content:generate:locations --site colossus-reference --context tools/examples/colossus-context.json
+pnpm content:generate:locations --site colossus-scaffolding --context tools/examples/colossus-context.json
 
 # Preview without writing
 pnpm content:generate:services --dry-run

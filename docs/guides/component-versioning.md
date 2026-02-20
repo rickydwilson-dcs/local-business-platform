@@ -100,7 +100,7 @@ Sites are excluded from version bumps in `.changeset/config.json` because they c
 
 ```json
 {
-  "ignore": ["colossus-reference", "smiths-electrical-cambridge"]
+  "ignore": ["colossus-scaffolding", "smiths-electrical-cambridge"]
 }
 ```
 

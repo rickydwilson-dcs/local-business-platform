@@ -48,10 +48,10 @@ export function CircularIconCard({
       </div>
 
       {/* Title */}
-      <h3 className="text-xl font-semibold text-gray-900 mb-3">{title}</h3>
+      <h3 className="text-xl font-semibold text-surface-foreground mb-3">{title}</h3>
 
       {/* Description */}
-      <p className="text-gray-700 leading-relaxed mb-4">{description}</p>
+      <p className="text-surface-secondary leading-relaxed mb-4">{description}</p>
 
       {/* Optional Link */}
       {linkText && linkHref && (

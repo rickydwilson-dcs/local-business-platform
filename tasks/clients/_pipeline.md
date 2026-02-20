@@ -8,7 +8,7 @@ All clients tracked from prospect through to live site.
 
 | Client               | Trade       | Stage | Site Folder                         | Domain                         | Assets        | Brief                            |
 | -------------------- | ----------- | ----- | ----------------------------------- | ------------------------------ | ------------- | -------------------------------- |
-| Colossus Scaffolding | Scaffolding | LIVE  | `sites/colossus-reference`          | www.colossus-scaffolding.co.uk | [GDrive](TBD) | [Brief](colossus-scaffolding.md) |
+| Colossus Scaffolding | Scaffolding | LIVE  | `sites/colossus-scaffolding`          | www.colossus-scaffolding.co.uk | [GDrive](TBD) | [Brief](colossus-scaffolding.md) |
 | Smith's Electrical   | Electrical  | BUILD | `sites/smiths-electrical-cambridge` | smithselectrical.co.uk         | [GDrive](TBD) | [Brief](smiths-electrical.md)    |
 
 ---

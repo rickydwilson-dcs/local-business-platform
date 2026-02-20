@@ -1,6 +1,6 @@
 # Colossus Scaffolding
 
-**Stage:** LIVE | **Trade:** Scaffolding | **Site:** `sites/colossus-reference`
+**Stage:** LIVE | **Trade:** Scaffolding | **Site:** `sites/colossus-scaffolding`
 
 ---
 
@@ -24,7 +24,7 @@
 | -------------- | ------------------------------ |
 | Domain         | www.colossus-scaffolding.co.uk |
 | Status         | LIVE on Vercel                 |
-| Vercel Project | colossus-reference             |
+| Vercel Project | colossus-scaffolding             |
 | SSL            | Active                         |
 
 ## Certifications

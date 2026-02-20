@@ -623,6 +623,11 @@ function determineBusinessType(
 
 function generateThemeConfig(project: ProjectFile): string {
   const theme = project.theme;
+  const themeVariant = theme?.themeVariant ?? 'vega';
+  const registryImport = themeVariant === 'orion'
+    ? `import { orionRegistry } from '@platform/themes/orion';`
+    : `import { vegaRegistry } from '@platform/themes/vega';`;
+  const registryRef = themeVariant === 'orion' ? 'orionRegistry' : 'vegaRegistry';
 
   // Default theme values
   const defaultColors = {
@@ -681,6 +686,7 @@ function generateThemeConfig(project: ProjectFile): string {
   const cardRadius = theme?.components?.cardRadius || "1rem";
 
   const config = `import type { DeepPartialThemeConfig } from '@platform/theme-system';
+${registryImport}
 
 /**
  * ${project.business.name} - Theme Configuration
@@ -689,6 +695,8 @@ function generateThemeConfig(project: ProjectFile): string {
  * Generated at: ${new Date().toISOString()}
  */
 export const themeConfig: DeepPartialThemeConfig = {
+  componentRegistry: ${registryRef},
+
   colors: {
     brand: {
       primary: '${colors.brand.primary}',
@@ -1024,6 +1032,9 @@ async function main(): Promise<void> {
   if (!options.dryRun) {
     fs.writeFileSync(themeConfigPath, themeConfigContent);
     console.log(`  Generated theme.config.ts`);
+    const themeVariantUsed = project.theme?.themeVariant ?? 'vega';
+    const registryRefUsed = themeVariantUsed === 'orion' ? 'orionRegistry' : 'vegaRegistry';
+    console.log(`  \u2713 Theme variant: ${themeVariantUsed} (${registryRefUsed})`);
   } else {
     console.log(`  [DRY RUN] Would generate theme.config.ts`);
   }

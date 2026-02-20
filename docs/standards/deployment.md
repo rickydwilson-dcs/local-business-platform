@@ -65,10 +65,10 @@ Runs on every push to develop, staging, main:
 
 ```bash
 # Deploy single site
-tsx tools/deploy-site.ts colossus-reference --env production
+tsx tools/deploy-site.ts colossus-scaffolding --env production
 
 # Dry run (preview)
-tsx tools/deploy-site.ts colossus-reference --env production --dry-run
+tsx tools/deploy-site.ts colossus-scaffolding --env production --dry-run
 ```
 
 ### Batch Deployment
@@ -85,17 +85,17 @@ tsx tools/deploy-batch.ts --env production --dry-run
 
 ```bash
 # Quick rollback (< 1 minute)
-tsx tools/rollback.ts colossus-reference
+tsx tools/rollback.ts colossus-scaffolding
 
 # Dry run rollback
-tsx tools/rollback.ts colossus-reference --dry-run
+tsx tools/rollback.ts colossus-scaffolding --dry-run
 ```
 
 ## Phased Rollout Strategy
 
 ### Phase 1: Canary
 
-1. Deploy to colossus-reference only
+1. Deploy to colossus-scaffolding only
 2. Wait 5 minutes
 3. Monitor NewRelic for errors
 4. If errors > threshold, stop and rollback
@@ -217,7 +217,7 @@ Each site has its own Vercel project:
 
 ```bash
 # Link site to Vercel
-cd sites/colossus-reference
+cd sites/colossus-scaffolding
 vercel link
 
 # Deploy preview
