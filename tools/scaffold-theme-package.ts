@@ -399,4 +399,8 @@ function main() {
   console.log("\n✅ Scaffold complete.\n");
 }
 
-main();
+// Only run CLI when this file is the entry point
+const isDirectRun = require.main === module || process.argv[1]?.includes("scaffold-theme-package");
+if (isDirectRun) {
+  main();
+}

@@ -36,6 +36,8 @@ import {
 import type { ThemeSuggestion } from "../packages/intake-system/src/theme-extraction/types";
 import type { ReferenceAnalysis } from "./lib/reference-analysis-types";
 import { REFERENCE_ANALYSIS_PROMPT } from "./lib/reference-analysis-prompts";
+import { generateThemeComponents } from "./lib/theme-component-generator";
+import { scaffoldThemePackage } from "./scaffold-theme-package";
 
 // ============================================================================
 // Types
@@ -408,19 +410,6 @@ async function main() {
   if (args.imagePath) {
     console.log("\n  Running vision-based reference analysis...");
     visionAnalysis = await analyseWithVision(args.imagePath, args.url, suggestion);
-
-    const outputDir = args.outputPath ?? "./";
-    fs.mkdirSync(outputDir, { recursive: true });
-
-    const jsonPath = path.join(outputDir, "reference-analysis.json");
-    fs.writeFileSync(jsonPath, JSON.stringify(visionAnalysis, null, 2), "utf8");
-    console.log(`  ✓ Written: ${jsonPath}`);
-
-    const mdReport = generateMarkdownReport(visionAnalysis);
-    const mdPath = path.join(outputDir, "reference-analysis.md");
-    fs.writeFileSync(mdPath, mdReport, "utf8");
-    console.log(`  ✓ Written: ${mdPath}`);
-
     console.log(`  ✓ Sections: ${visionAnalysis.detectedSections.length}`);
     console.log(`  ✓ Blueprints: ${visionAnalysis.sectionBlueprints.length}`);
   }
@@ -455,9 +444,56 @@ async function main() {
     console.log("  ✓ Overrode theme tokens with vision analysis results");
   }
 
-  // ── Step 4: Generate theme.config.ts content ─────────────────────────────
+  // ── Step 4: Write reference-analysis.json + .md report ─────────────────
 
-  // Default to vega theme variant for config generation
+  const outputDir = args.outputPath ?? "./";
+  fs.mkdirSync(outputDir, { recursive: true });
+
+  if (visionAnalysis) {
+    const jsonPath = path.join(outputDir, "reference-analysis.json");
+    fs.writeFileSync(jsonPath, JSON.stringify(visionAnalysis, null, 2), "utf8");
+    console.log(`  ✓ Written: ${jsonPath}`);
+
+    const mdReport = generateMarkdownReport(visionAnalysis);
+    const mdPath = path.join(outputDir, "reference-analysis.md");
+    fs.writeFileSync(mdPath, mdReport, "utf8");
+    console.log(`  ✓ Written: ${mdPath}`);
+  }
+
+  // ── Step 5: Component generation ────────────────────────────────────────
+
+  if (visionAnalysis && visionAnalysis.sectionBlueprints.length > 0 && !args.dryRun) {
+    const themesDir = path.resolve(__dirname, "../packages/themes");
+    const componentsDir = path.join(themesDir, themeName, "components");
+
+    console.log("\n  Generating per-theme components...");
+    const genResult = await generateThemeComponents(
+      visionAnalysis.sectionBlueprints,
+      componentsDir
+    );
+
+    console.log(`  ✓ Generated ${genResult.components.length} components`);
+    if (genResult.warnings.length > 0) {
+      console.log("  Warnings:");
+      for (const w of genResult.warnings) {
+        console.log(`    - ${w}`);
+      }
+    }
+
+    // ── Step 6: Scaffold theme package ──────────────────────────────────────
+
+    console.log("\n  Scaffolding theme package...");
+    scaffoldThemePackage(visionAnalysis, themeName);
+  } else if (args.dryRun) {
+    console.log("\n  [dry-run] Skipping component generation and scaffolding.");
+  } else if (!visionAnalysis) {
+    console.log("\n  [Warning] No vision analysis available — skipping component generation.");
+  } else {
+    console.log("\n  [Warning] No blueprints in analysis — skipping component generation.");
+  }
+
+  // ── Step 7: Generate theme.config.ts ──────────────────────────────────
+
   const configContent = generateThemeConfigContent(suggestion, themeName, "vega");
 
   console.log("\n─── Generated theme.config.ts ───────────────────────────────────\n");
