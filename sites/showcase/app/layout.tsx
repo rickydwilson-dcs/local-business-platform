@@ -21,14 +21,14 @@ export function RootLayout({ children }: RootLayoutProps) {
           <nav className="w-56 shrink-0 border-r border-gray-200 bg-white p-6 sticky top-0 h-screen overflow-y-auto">
             <p className="text-sm font-bold uppercase tracking-wider text-gray-500 mb-6">Showcase</p>
             <ul className="space-y-2 text-sm">
-              <li><Link href="/" className="block py-1 text-gray-700 hover:text-brand-primary font-medium">Browse</Link></li>
-              <li><Link href="/compare" className="block py-1 text-gray-700 hover:text-brand-primary font-medium">Compare</Link></li>
+              <li><Link href="/" className="block py-1 text-gray-700 hover:text-indigo-600 font-medium">Browse</Link></li>
+              <li><Link href="/compare" className="block py-1 text-gray-700 hover:text-indigo-600 font-medium">Compare</Link></li>
               <li className="mt-4">
                 <p className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Themes</p>
                 <ul className="space-y-1">
                   {getRegisteredThemes().map(t => (
                     <li key={t.name}>
-                      <Link href={`/themes/${t.name}`} className="block py-1 text-gray-700 hover:text-brand-primary font-medium">
+                      <Link href={`/themes/${t.name}`} className="block py-1 text-gray-700 hover:text-indigo-600 font-medium">
                         {t.label}
                       </Link>
                     </li>

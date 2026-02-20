@@ -31,9 +31,11 @@ export default async function ElementDetailPage({ params, searchParams }: Elemen
   const brand_primary = sp.brand_primary;
   const brand_secondary = sp.brand_secondary;
   const brand_accent = sp.brand_accent;
-  const font_family = sp.font_family;
+  const font_sans = sp.font_sans;
+  const font_heading = sp.font_heading;
+  const font_size = sp.font_size;
 
-  const hasCustomParams = !!(base_theme || brand_primary || brand_secondary || brand_accent || font_family);
+  const hasCustomParams = !!(base_theme || brand_primary || brand_secondary || brand_accent || font_sans || font_heading || font_size);
   const baseThemeLabel = themes.find(t => t.name === base_theme)?.label ?? themes[0]?.label ?? 'Custom';
 
   return (
@@ -60,7 +62,7 @@ export default async function ElementDetailPage({ params, searchParams }: Elemen
           return (
             <div key={t.name}>
               <div className="flex items-center gap-2 mb-3">
-                <div className="w-3 h-3 rounded-full bg-brand-primary" />
+                <div className="w-3 h-3 rounded-full bg-gray-400" />
                 <h2 className="text-sm font-semibold text-gray-700 uppercase tracking-wider">{t.label}</h2>
               </div>
               <ThemeFrame
@@ -88,7 +90,9 @@ export default async function ElementDetailPage({ params, searchParams }: Elemen
                 primary: brand_primary,
                 secondary: brand_secondary,
                 accent: brand_accent,
-                fontFamily: font_family,
+                fontSans: font_sans,
+                fontHeading: font_heading,
+                fontSize: font_size,
               }}
             >
               {element.renders[base_theme ?? themes[0]?.name ?? 'orion']?.()}
