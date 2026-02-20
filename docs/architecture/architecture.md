@@ -16,6 +16,7 @@ For detailed explanations of how each system works, see:
 | [How the Theme System Works](how-theme-system-works.md)     | How `theme.config.ts` → CSS variables → Tailwind classes                    |
 | [How the Build Pipeline Works](how-build-pipeline-works.md) | How Turborepo orchestrates packages and sites                               |
 | [How Site Creation Works](how-site-creation-works.md)       | How new business clients become deployed websites                           |
+| [How the Ingestion Pipeline Works](how-ingestion-pipeline-works.md) | How screenshots become analysed components and theme packages               |
 
 ## Repository Structure
 
