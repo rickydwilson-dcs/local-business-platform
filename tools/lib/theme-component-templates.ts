@@ -115,13 +115,13 @@ ${jsxBody}
 }
 
 /**
- * Generate Client Component shell ('use client' + useState import).
+ * Generate Client Component shell ("use client" + useState import).
  */
 export function clientComponentShell(blueprint: SectionBlueprint, jsxBody: string): string {
   const propsInterface = generatePropsInterface(blueprint);
   const interfaceName = `${blueprint.componentExportName}Props`;
 
-  return `'use client';
+  return `"use client";
 
 /**
  * ${blueprint.componentExportName}
@@ -131,7 +131,7 @@ export function clientComponentShell(blueprint: SectionBlueprint, jsxBody: strin
  * Category: ${blueprint.category}
  */
 
-import { useState } from 'react';
+import { useState } from "react";
 
 ${propsInterface}
 

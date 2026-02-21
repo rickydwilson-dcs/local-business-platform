@@ -115,7 +115,7 @@ describe("placeholderComponent", () => {
 
     const result = placeholderComponent(bp);
 
-    expect(result).toContain("'use client'");
+    expect(result).toContain('"use client"');
   });
 
   test("returns 'use client' for form-related purposes", () => {
@@ -126,7 +126,7 @@ describe("placeholderComponent", () => {
 
     const result = placeholderComponent(bp);
 
-    expect(result).toContain("'use client'");
+    expect(result).toContain('"use client"');
   });
 
   test("returns 'use client' for newsletter-related purposes", () => {
@@ -137,7 +137,7 @@ describe("placeholderComponent", () => {
 
     const result = placeholderComponent(bp);
 
-    expect(result).toContain("'use client'");
+    expect(result).toContain('"use client"');
   });
 
   test("returns 'use client' for stateful interactionNeeds", () => {
@@ -147,7 +147,7 @@ describe("placeholderComponent", () => {
 
     const result = placeholderComponent(bp);
 
-    expect(result).toContain("'use client'");
+    expect(result).toContain('"use client"');
   });
 
   test("does NOT return 'use client' for non-interactive server content", () => {
@@ -159,7 +159,7 @@ describe("placeholderComponent", () => {
 
     const result = placeholderComponent(bp);
 
-    expect(result).not.toContain("'use client'");
+    expect(result).not.toContain('"use client"');
   });
 });
 
@@ -176,7 +176,7 @@ describe("serverComponentShell", () => {
 
     const result = serverComponentShell(bp, "  return <div>hello</div>;");
 
-    expect(result).not.toContain("'use client'");
+    expect(result).not.toContain('"use client"');
     expect(result).not.toContain('"use client"');
     expect(result).toContain("export function InfoBlock(");
     expect(result).toContain("InfoBlockProps");
@@ -192,8 +192,8 @@ describe("clientComponentShell", () => {
 
     const result = clientComponentShell(bp, "  return <div>hello</div>;");
 
-    expect(result).toContain("'use client'");
-    expect(result).toContain("import { useState } from 'react'");
+    expect(result).toContain('"use client"');
+    expect(result).toContain('import { useState } from "react"');
     expect(result).toContain("export function InteractiveWidget(");
     expect(result).toContain("InteractiveWidgetProps");
   });
