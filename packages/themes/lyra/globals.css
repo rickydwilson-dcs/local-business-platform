@@ -2,16 +2,67 @@
  * Lyra Theme — Global CSS Utilities
  *
  * Reference site: https://colorcode.events/
- * Capture date: 2026-02-21T08:23:13.752Z
+ * Capture date: 2026-02-21T18:34:48.273Z
  *
- * This file is intentionally minimal. Theme tokens are defined in index.ts
- * and consumed via Tailwind utility classes. Add theme-specific utility
- * classes here only when needed.
- *
- * Import this file at the top of your site's app/globals.css:
+ * Standard utility classes using @apply with theme tokens.
+ * Import this file in your site's app/globals.css:
  *
  *   @import "../../packages/themes/lyra/globals.css";
- *   @tailwind base;
- *   @tailwind components;
- *   @tailwind utilities;
  */
+
+/* Buttons */
+.btn-primary {
+  @apply bg-brand-primary text-on-brand-primary px-6 py-3 rounded-lg font-semibold
+    hover:opacity-90 transition-all duration-200;
+}
+
+.btn-secondary {
+  @apply bg-brand-secondary text-surface-foreground px-6 py-3 rounded-lg font-semibold
+    hover:opacity-90 transition-all duration-200;
+}
+
+.btn-ghost {
+  @apply bg-transparent text-brand-primary px-6 py-3 rounded-lg font-semibold
+    border border-brand-primary hover:bg-surface-muted transition-colors duration-200;
+}
+
+/* Cards */
+.card {
+  @apply bg-surface-background border border-surface-muted rounded-xl p-6 shadow-sm;
+}
+
+.card-interactive {
+  @apply bg-surface-background border border-surface-muted rounded-xl p-6 shadow-sm
+    hover:shadow-md hover:border-brand-primary transition-all duration-200;
+}
+
+/* Sections */
+.section {
+  @apply py-16 md:py-24 px-4;
+}
+
+.section-compact {
+  @apply py-8 md:py-12 px-4;
+}
+
+/* Containers */
+.container-narrow {
+  @apply max-w-3xl mx-auto;
+}
+
+.container-standard {
+  @apply max-w-7xl mx-auto;
+}
+
+/* Headings */
+.heading-hero {
+  @apply text-h1 font-bold text-surface-foreground;
+}
+
+.heading-section {
+  @apply text-h2 font-bold text-surface-foreground;
+}
+
+.heading-card {
+  @apply text-h3 font-semibold text-surface-foreground;
+}

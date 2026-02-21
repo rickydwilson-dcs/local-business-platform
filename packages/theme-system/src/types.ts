@@ -267,7 +267,7 @@ export interface ThemeConfig {
  * - orion: dark header, full-bleed hero, circular icons (industrial style)
  * - vega:  light header, split hero, card grid (professional style)
  */
-export const THEME_NAMES = ["orion", "vega"] as const;
+export const THEME_NAMES = ["orion", "vega", "lyra"] as const;
 export type ThemeName = (typeof THEME_NAMES)[number];
 
 /**
