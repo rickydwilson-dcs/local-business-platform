@@ -101,3 +101,150 @@ IMPORTANT INSTRUCTIONS:
 8. Set "interactionNeeds" to "stateful" only if the section clearly requires client-side state (accordion, carousel, tabs). Use "none" for static content, "minimal" for hover effects or simple transitions.
 9. The "tokenUsageHints" should list Tailwind theme token classes the component should use (e.g. "bg-brand-primary", "text-surface-foreground").
 10. Return ONLY the JSON object. No explanation, no markdown fences, no commentary.`;
+
+export const PAGE_LAYOUT_ANALYSIS_PROMPT = `You are analysing a screenshot of a single page from a multi-page website.
+
+Context:
+- Page type: {{pageType}}
+- URL path: {{path}}
+- HTML structure hints are provided below as JSON.
+
+Analyse the screenshot and HTML hints together. Identify every visual section from top to bottom.
+
+Return ONLY a JSON object (no prose, no markdown fences) matching this schema:
+
+{
+  "pageType": "{{pageType}}",
+  "path": "{{path}}",
+  "title": "<page title from content>",
+  "sections": [
+    {
+      "order": 1,
+      "blueprintId": "<unique kebab-case slug, e.g. hero-full-bleed>",
+      "name": "<PascalCase component name>",
+      "category": "Hero" | "Navigation" | "Cards" | "CTA" | "Content" | "Social Proof" | "Blog" | "Stats" | "Footer" | "Custom",
+      "purpose": "<what this section does>",
+      "layoutPattern": "<structural description>",
+      "contentSlots": ["<named content area>", ...],
+      "interactionNeeds": "none" | "minimal" | "stateful",
+      "tokenUsageHints": ["bg-brand-primary", ...],
+      "confidence": "high" | "medium" | "low",
+      "isShared": false
+    }
+  ],
+  "visualLanguage": {
+    "palette": {
+      "background": "<hex>",
+      "foreground": "<hex>",
+      "primary": "<hex>",
+      "secondary": "<hex>",
+      "accent": "<hex>",
+      "additional": [],
+      "confidence": "high" | "medium" | "low"
+    },
+    "typography": {
+      "headingWeight": "bold" | "extrabold" | "black",
+      "bodyWeight": "normal" | "medium",
+      "headingStyle": "sans" | "serif" | "display",
+      "usesInlineColourHighlights": true | false
+    },
+    "heroPattern": {
+      "type": "dark-full-bleed" | "split" | "centered" | "light",
+      "hasBackgroundImage": true | false,
+      "headerDark": true | false
+    },
+    "spacingDensity": "compact" | "standard" | "spacious"
+  },
+  "confidence": "high" | "medium" | "low"
+}
+
+INSTRUCTIONS:
+1. Sample ACTUAL pixel colours from the screenshot. Use hex values.
+2. List sections in order from top to bottom.
+3. Mark header and footer sections as "isShared": true.
+4. The "blueprintId" should be unique kebab-case combining category and layout.
+5. Return ONLY the JSON object.`;
+
+export const SITE_SYNTHESIS_PROMPT = `You are consolidating per-page analysis results from a multi-page website into a unified site analysis.
+
+Input: JSON array of per-page analysis results.
+
+Tasks:
+1. Identify shared sections that appear on every/most pages (header, footer, CTA bands). Mark them and deduplicate.
+2. Deduplicate section blueprints across pages — same hero pattern on home + about = one blueprint.
+3. Resolve conflicting color readings between pages. Prefer the homepage palette when confidence is equal.
+4. Produce consolidated themeTokenRecommendations (single palette for the whole site).
+5. Determine registryRecommendation: which existing theme family (orion = dark header + full-bleed hero + circular icons, vega = light header + split hero + card grid) is the closest match.
+
+Return ONLY a JSON object (no prose, no markdown fences):
+
+{
+  "sharedSections": ["<blueprintId>", ...],
+  "deduplicatedBlueprints": [
+    {
+      "id": "<unique kebab-case slug>",
+      "name": "<PascalCase>",
+      "category": "<ComponentCategory>",
+      "purpose": "<what this section does>",
+      "layoutPattern": "<structural description>",
+      "contentSlots": ["<slot>", ...],
+      "interactionNeeds": "none" | "minimal" | "stateful",
+      "componentFileName": "<kebab-case.tsx>",
+      "componentExportName": "<PascalCase>",
+      "tokenUsageHints": ["<token>", ...],
+      "confidence": "high" | "medium" | "low",
+      "referenceSection": "<source page type + section name>"
+    }
+  ],
+  "visualLanguage": {
+    "palette": {
+      "background": "<hex>",
+      "foreground": "<hex>",
+      "primary": "<hex>",
+      "secondary": "<hex>",
+      "accent": "<hex>",
+      "additional": [],
+      "confidence": "high" | "medium" | "low"
+    },
+    "typography": {
+      "headingWeight": "bold" | "extrabold" | "black",
+      "bodyWeight": "normal" | "medium",
+      "headingStyle": "sans" | "serif" | "display",
+      "usesInlineColourHighlights": false
+    },
+    "heroPattern": {
+      "type": "dark-full-bleed" | "split" | "centered" | "light",
+      "hasBackgroundImage": true | false,
+      "headerDark": true | false
+    },
+    "spacingDensity": "compact" | "standard" | "spacious"
+  },
+  "themeTokenRecommendations": {
+    "brand": {
+      "primary": "<hex>",
+      "primaryHover": "<hex>",
+      "secondary": "<hex>",
+      "accent": "<hex>"
+    },
+    "surface": {
+      "background": "<hex>",
+      "foreground": "<hex>",
+      "muted": "<hex>"
+    },
+    "typography": {
+      "fontFamilySans": ["<font>", "system-ui", "sans-serif"],
+      "fontFamilyHeading": ["<font>", "system-ui", "sans-serif"]
+    }
+  },
+  "registryRecommendation": {
+    "themeName": "orion" | "vega",
+    "confidence": "high" | "medium" | "low",
+    "reasoning": "<explanation>"
+  }
+}
+
+INSTRUCTIONS:
+1. Merge colour palettes by averaging and preferring high-confidence values.
+2. Deduplicate blueprints by category + layoutPattern similarity.
+3. Keep the most detailed version of each blueprint.
+4. Return ONLY the JSON object.`;
