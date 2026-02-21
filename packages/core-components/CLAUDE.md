@@ -62,6 +62,24 @@ See `src/index.ts` for the full list of exports.
 - `ThemeProvider` — `'use client'` wrapper that provides `ThemeName` and `ComponentRegistry` to client components; wrap `PageShell` in each site's `layout.tsx`
 - `useTheme()` — hook returning `{ theme: ThemeName, registry: ComponentRegistry | null }`
 
+### Animation Primitives (`src/components/animation/`)
+
+Client components for scroll-triggered animation. Import via subpath (not from barrel — they are `"use client"` components):
+
+```typescript
+import { RevealOnScroll } from "@platform/core-components/src/components/animation";
+import { Carousel } from "@platform/core-components/src/components/animation";
+import { ParallaxSection } from "@platform/core-components/src/components/animation";
+import { useScrollParallax } from "@platform/core-components/src/components/animation";
+```
+
+- `RevealOnScroll` — IntersectionObserver-based scroll reveal wrapper. Variants: `fade-up`, `fade-in`, `fade-down`, `slide-left`, `slide-right`, `scale-up`. SSR-safe (starts visible on server). Respects `prefers-reduced-motion`.
+- `Carousel` — Embla-backed carousel with auto-play, dot/arrow navigation, touch/swipe. Children-based API.
+- `ParallaxSection` — scroll-speed parallax wrapper for background sections.
+- `useScrollParallax` — hook for custom parallax effects. RAF-throttled, IntersectionObserver-gated.
+
+Shared CSS keyframes are in `src/styles/animations.css` (imported by theme globals).
+
 ### Hooks (`src/hooks/`)
 
 - `useFocusTrap` — keyboard focus trapping for modals and menus
