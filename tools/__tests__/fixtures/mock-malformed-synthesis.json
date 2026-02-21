@@ -1,0 +1,22 @@
+{
+  "sharedSections": "should-be-an-array",
+  "deduplicatedBlueprints": [
+    {
+      "id": "hero-missing-fields",
+      "name": "HeroBroken"
+    }
+  ],
+  "visualLanguage": {
+    "palette": {
+      "background": "#FFFFFF"
+    }
+  },
+  "themeTokenRecommendations": {
+    "brand": {
+      "primary": "#005A9E"
+    }
+  },
+  "registryRecommendation": {
+    "themeName": "test"
+  }
+}

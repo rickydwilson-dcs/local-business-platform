@@ -1,0 +1,8 @@
+{
+  "sharedSections": ["nav"],
+  "visualLanguage": {
+    "palette": {
+      "primary": "#E63946"
+    }
+  }
+}

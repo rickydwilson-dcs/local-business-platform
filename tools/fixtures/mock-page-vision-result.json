@@ -1,0 +1,83 @@
+{
+  "pageType": "home",
+  "path": "/",
+  "title": "Welcome to ColorCode Events",
+  "sections": [
+    {
+      "order": 0,
+      "blueprintId": "navigation-top-bar",
+      "name": "NavigationTopBar",
+      "category": "Navigation",
+      "purpose": "Sticky top navigation bar with logo, main nav links, and ticket purchase CTA button",
+      "layoutPattern": "horizontal bar, logo-left, links-center, cta-right",
+      "contentSlots": ["logoImage", "navLinks", "ctaButton"],
+      "interactionNeeds": "stateful",
+      "tokenUsageHints": ["bg-surface-background", "text-surface-foreground", "text-brand-primary"],
+      "confidence": "high",
+      "isShared": true
+    },
+    {
+      "order": 1,
+      "blueprintId": "hero-full-bleed",
+      "name": "HeroFullBleed",
+      "category": "Hero",
+      "purpose": "Full-width hero banner with vivid background image, headline overlay, and dual CTA buttons",
+      "layoutPattern": "full-bleed with overlay",
+      "contentSlots": ["heading", "subheading", "ctaButtons", "backgroundImage"],
+      "interactionNeeds": "none",
+      "tokenUsageHints": ["bg-brand-primary", "text-surface-background", "text-h1"],
+      "confidence": "high",
+      "isShared": false
+    },
+    {
+      "order": 2,
+      "blueprintId": "events-cards-grid",
+      "name": "EventsCardsGrid",
+      "category": "Cards",
+      "purpose": "Responsive grid of upcoming event cards with date badges, thumbnails, and descriptions",
+      "layoutPattern": "3-col grid with image cards",
+      "contentSlots": ["cardImage", "cardTitle", "cardDate", "cardDescription", "cardLink"],
+      "interactionNeeds": "minimal",
+      "tokenUsageHints": ["bg-surface-background", "text-surface-foreground", "border-brand-secondary"],
+      "confidence": "high",
+      "isShared": false
+    },
+    {
+      "order": 3,
+      "blueprintId": "footer-main",
+      "name": "FooterMain",
+      "category": "Footer",
+      "purpose": "Multi-column footer with navigation links, social icons, and copyright notice",
+      "layoutPattern": "4-col grid, dark background",
+      "contentSlots": ["navLinks", "socialLinks", "copyrightText", "logoImage"],
+      "interactionNeeds": "none",
+      "tokenUsageHints": ["bg-surface-foreground", "text-surface-background"],
+      "confidence": "high",
+      "isShared": true
+    }
+  ],
+  "visualLanguage": {
+    "palette": {
+      "background": "#FFFFFF",
+      "foreground": "#1D3557",
+      "primary": "#E63946",
+      "secondary": "#457B9D",
+      "accent": "#F4A261",
+      "additional": ["#A8DADC", "#F1FAEE"],
+      "confidence": "high"
+    },
+    "typography": {
+      "headingWeight": "extrabold",
+      "bodyWeight": "normal",
+      "headingStyle": "sans",
+      "usesInlineColourHighlights": true
+    },
+    "heroPattern": {
+      "type": "dark-full-bleed",
+      "hasBackgroundImage": true,
+      "headerDark": true
+    },
+    "spacingDensity": "spacious"
+  },
+  "confidence": "high"
+}

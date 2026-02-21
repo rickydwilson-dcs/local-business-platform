@@ -63,7 +63,11 @@ You are doing an independent architectural peer review. Read the brief below, th
 Save your plan as `codex-plan.md` in this folder:
 `output/sessions/codex-peer-review/[DATE_TOPIC]/`
 
-When done, tell the user to run `/plan.with.codex synthesise` in Claude Code.
+When done, output this exact command so the user can copy-paste it into Claude Code:
+
+```
+/plan.with.codex synthesise output/sessions/codex-peer-review/[DATE_TOPIC]/
+```
 
 ---
 
@@ -116,6 +120,9 @@ Produce a numbered implementation plan with:
 - Any risks or trade-offs worth calling out
 
 Save your response as `codex-plan.md` in `output/sessions/codex-peer-review/[DATE_TOPIC]/`.
+
+Then output this command for the user to copy-paste into Claude Code:
+`/plan.with.codex synthesise output/sessions/codex-peer-review/[DATE_TOPIC]/`
 ```
 
 ### Step 5: Write Claude's Plan (`claude-plan.md`)

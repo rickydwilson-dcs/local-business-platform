@@ -8,8 +8,9 @@
 
 import * as fs from "fs";
 import * as path from "path";
+import * as ts from "typescript";
 import Anthropic from "@anthropic-ai/sdk";
-import type { SectionBlueprint } from "./reference-analysis-types";
+import type { SectionBlueprint, ComponentMatch } from "./reference-analysis-types";
 import {
   serverComponentShell,
   clientComponentShell,
@@ -17,6 +18,7 @@ import {
   buildComponentGenerationPrompt,
   generatePropsInterface,
 } from "./theme-component-templates";
+import { isAllowedClass, looksLikeColorClass } from "./token-class-allowlist";
 
 // ============================================================================
 // Types
@@ -38,10 +40,9 @@ export interface GenerationResult {
 // Hex literal scanner
 // ============================================================================
 
-const HEX_LITERAL_REGEX = /#[0-9A-Fa-f]{3,8}/g;
-
 function scanForHexLiterals(tsx: string): string[] {
-  const matches = tsx.match(HEX_LITERAL_REGEX);
+  const hexRegex = /#[0-9A-Fa-f]{3,8}/g;
+  const matches = tsx.match(hexRegex);
   return matches ?? [];
 }
 
@@ -52,6 +53,105 @@ function scanForHexLiterals(tsx: string): string[] {
 function verifyNamedExport(content: string, expectedName: string): boolean {
   const exportRegex = new RegExp(`export\\s+function\\s+${expectedName}\\b`);
   return exportRegex.test(content);
+}
+
+// ============================================================================
+// TypeScript syntax validation
+// ============================================================================
+
+function validateTypeScriptSyntax(content: string, fileName: string): string[] {
+  const sourceFile = ts.createSourceFile(
+    fileName,
+    content,
+    ts.ScriptTarget.Latest,
+    true,
+    ts.ScriptKind.TSX,
+  );
+  const errors: string[] = [];
+  const diagnostics = (sourceFile as unknown as { parseDiagnostics?: ts.Diagnostic[] }).parseDiagnostics;
+  if (diagnostics) {
+    for (const d of diagnostics) {
+      errors.push(ts.flattenDiagnosticMessageText(d.messageText, "\n"));
+    }
+  }
+  return errors;
+}
+
+// ============================================================================
+// Token class validation
+// ============================================================================
+
+/** Common non-standard patterns and their replacements. */
+const CLASS_REPLACEMENTS: Record<string, string> = {
+  "bg-brand-dark": "bg-brand-primary",
+  "bg-brand-light": "bg-surface-muted",
+  "text-brand-dark": "text-brand-primary",
+  "text-brand-light": "text-brand-secondary",
+  "bg-accent": "bg-brand-accent",
+  "text-accent": "text-brand-accent",
+  "border-accent": "border-brand-accent",
+  "bg-primary": "bg-brand-primary",
+  "text-primary": "text-brand-primary",
+  "bg-secondary": "bg-brand-secondary",
+  "text-secondary": "text-brand-secondary",
+  "bg-muted": "bg-surface-muted",
+  "text-muted": "text-surface-muted-foreground",
+};
+
+function validateAndFixTokenClasses(content: string): { content: string; violations: string[] } {
+  const violations: string[] = [];
+  let fixed = content;
+
+  // Extract all className values
+  const classNameRegex = /className="([^"]*)"/g;
+  let match: RegExpExecArray | null;
+  classNameRegex.lastIndex = 0;
+
+  while ((match = classNameRegex.exec(fixed)) !== null) {
+    const classes = match[1].split(/\s+/);
+    for (const cls of classes) {
+      if (!cls) continue;
+      if (!isAllowedClass(cls)) {
+        violations.push(cls);
+        // Try auto-replacement
+        const stripped = cls.replace(/^(?:sm:|md:|lg:|xl:|2xl:|hover:|focus:|active:|dark:)+/, "");
+        const prefix = cls.slice(0, cls.length - stripped.length);
+        if (CLASS_REPLACEMENTS[stripped]) {
+          fixed = fixed.replace(
+            new RegExp(`\\b${cls.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\b`, "g"),
+            `${prefix}${CLASS_REPLACEMENTS[stripped]}`
+          );
+        }
+      }
+    }
+    // Reset lastIndex to avoid state leak
+    classNameRegex.lastIndex = match.index + match[0].length;
+  }
+
+  return { content: fixed, violations };
+}
+
+// ============================================================================
+// "use client" directive detection
+// ============================================================================
+
+const CLIENT_PATTERNS = /\b(useState|useEffect|useRef|useCallback|useMemo|onClick|onChange|onSubmit|onKeyDown|onMouseEnter|onFocus|onBlur|RevealOnScroll|Carousel|ParallaxSection|useScrollParallax|IntersectionObserver)\b|<form\b/;
+
+/**
+ * Determine if a component needs "use client" directive.
+ * Returns true when ANY of:
+ * - interactionNeeds === "stateful"
+ * - Category is "Navigation" (mobile menu toggle)
+ * - Category is "Forms" or "Newsletter"
+ * - JSX body contains interactive hooks/handlers
+ */
+export function needsUseClient(blueprint: SectionBlueprint, jsxBody: string): boolean {
+  if (blueprint.interactionNeeds === "stateful") return true;
+  if (blueprint.category === "Navigation") return true;
+  const purpose = blueprint.purpose.toLowerCase();
+  if (purpose.includes("form") || purpose.includes("newsletter")) return true;
+  if (CLIENT_PATTERNS.test(jsxBody)) return true;
+  return false;
 }
 
 // ============================================================================
@@ -114,14 +214,51 @@ async function generateSingleComponent(
   let usedAI = false;
 
   if (client) {
-    const jsxBody = await generateJSXBody(client, blueprint);
+    let jsxBody = await generateJSXBody(client, blueprint);
 
     if (jsxBody) {
-      const isClient = blueprint.interactionNeeds === "stateful";
-      content = isClient
+      const needsClient = needsUseClient(blueprint, jsxBody);
+      content = needsClient
         ? clientComponentShell(blueprint, jsxBody)
         : serverComponentShell(blueprint, jsxBody);
       usedAI = true;
+
+      // Post-generation: TypeScript syntax check
+      const syntaxErrors = validateTypeScriptSyntax(content, blueprint.componentFileName);
+      if (syntaxErrors.length > 0) {
+        warnings.push(`${blueprint.name}: TS syntax errors: ${syntaxErrors.join("; ")}`);
+        // Retry once
+        jsxBody = await generateJSXBody(client, blueprint);
+        if (jsxBody) {
+          content = needsClient
+            ? clientComponentShell(blueprint, jsxBody)
+            : serverComponentShell(blueprint, jsxBody);
+          const retryErrors = validateTypeScriptSyntax(content, blueprint.componentFileName);
+          if (retryErrors.length > 0) {
+            warnings.push(`${blueprint.name}: Retry also failed — using placeholder`);
+            content = placeholderComponent(blueprint);
+            usedAI = false;
+          }
+        } else {
+          content = placeholderComponent(blueprint);
+          usedAI = false;
+        }
+      }
+
+      // Post-generation: Token class validation with auto-replace
+      if (usedAI) {
+        const { content: fixedContent, violations } = validateAndFixTokenClasses(content);
+        if (violations.length > 0) {
+          warnings.push(`${blueprint.name}: Non-standard colour classes auto-fixed: ${violations.join(", ")}`);
+          content = fixedContent;
+          // Re-check syntax after auto-fix
+          const fixSyntaxErrors = validateTypeScriptSyntax(content, blueprint.componentFileName);
+          if (fixSyntaxErrors.length > 0) {
+            content = placeholderComponent(blueprint);
+            usedAI = false;
+          }
+        }
+      }
     } else {
       content = placeholderComponent(blueprint);
       warnings.push(`${blueprint.name}: AI generation failed, using placeholder`);
@@ -159,13 +296,19 @@ async function generateSingleComponent(
 /**
  * Generate component files for all section blueprints.
  *
+ * When componentMatches is provided (v3 pipeline), blueprints with an "exact"
+ * or "close" match are skipped — they reuse existing core-components.
+ * Only unmatched or "partial" match blueprints get generated.
+ *
  * @param blueprints - Section blueprints from the analysis
  * @param outputDir - Directory to write component files to
+ * @param componentMatches - Optional map of blueprint ID to ComponentMatch (v3 pipeline)
  * @returns Generation result with component metadata and warnings
  */
 export async function generateThemeComponents(
   blueprints: SectionBlueprint[],
-  outputDir: string
+  outputDir: string,
+  componentMatches?: Map<string, ComponentMatch | null>,
 ): Promise<GenerationResult> {
   const allComponents: GeneratedComponent[] = [];
   const allWarnings: string[] = [];
@@ -182,9 +325,21 @@ export async function generateThemeComponents(
     console.warn("  [Warning] ANTHROPIC_API_KEY not set — generating placeholder components.");
   }
 
-  console.log(`  Generating ${blueprints.length} components...`);
+  // Filter blueprints: skip those with "exact" or "close" matches
+  const blueprintsToGenerate = componentMatches
+    ? blueprints.filter((bp) => {
+        const match = componentMatches.get(bp.id);
+        if (match && (match.matchConfidence === "exact" || match.matchConfidence === "close")) {
+          console.log(`    ✓ ${bp.componentExportName} → reusing ${match.componentName} (${match.matchConfidence})`);
+          return false;
+        }
+        return true;
+      })
+    : blueprints;
 
-  for (const blueprint of blueprints) {
+  console.log(`  Generating ${blueprintsToGenerate.length} components (${blueprints.length - blueprintsToGenerate.length} reused from core)...`);
+
+  for (const blueprint of blueprintsToGenerate) {
     console.log(`    ${blueprint.componentExportName} (${blueprint.category})...`);
     const { component, warnings } = await generateSingleComponent(client, blueprint, outputDir);
 
@@ -212,67 +367,22 @@ export async function generateThemeComponents(
  * Returns class names that aren't standard Tailwind or known theme tokens.
  */
 function scanForCustomClasses(components: GeneratedComponent[]): string[] {
-  // Known theme token prefixes
-  const themeTokenPrefixes = [
-    "bg-brand-", "text-brand-", "border-brand-",
-    "bg-surface-", "text-surface-", "border-surface-",
-    "text-h1", "text-h2", "text-h3", "text-h4", "text-hero",
-    "text-body", "text-small", "text-caption",
-    "text-on-brand-", "bg-success", "bg-warning", "bg-error", "bg-info",
-    "btn-primary", "btn-secondary", "btn-ghost",
-    "heading-section", "text-subtitle",
-  ];
-
-  // className extraction regex
-  const classNameRegex = /className="([^"]*)"/g;
   const customClasses = new Set<string>();
 
   for (const comp of components) {
+    const classNameRegex = /className="([^"]*)"/g;
+    classNameRegex.lastIndex = 0;
     let match: RegExpExecArray | null;
     while ((match = classNameRegex.exec(comp.content)) !== null) {
       const classes = match[1].split(/\s+/);
       for (const cls of classes) {
-        // Skip empty, standard Tailwind patterns, and theme tokens
         if (!cls) continue;
-        if (isStandardTailwind(cls)) continue;
-        if (themeTokenPrefixes.some((prefix) => cls.startsWith(prefix))) continue;
-        customClasses.add(cls);
+        if (!isAllowedClass(cls)) {
+          customClasses.add(cls);
+        }
       }
     }
   }
 
   return [...customClasses];
-}
-
-/**
- * Simple heuristic to detect standard Tailwind utility classes.
- */
-function isStandardTailwind(cls: string): boolean {
-  // Strip responsive/state prefixes
-  const stripped = cls.replace(/^(sm:|md:|lg:|xl:|2xl:|hover:|focus:|active:|group-hover:|dark:)+/, "");
-
-  // Common Tailwind prefixes
-  const standardPrefixes = [
-    "p-", "px-", "py-", "pt-", "pb-", "pl-", "pr-",
-    "m-", "mx-", "my-", "mt-", "mb-", "ml-", "mr-",
-    "w-", "h-", "min-w-", "min-h-", "max-w-", "max-h-",
-    "flex", "grid", "block", "inline", "hidden",
-    "items-", "justify-", "gap-", "space-",
-    "text-", "font-", "leading-", "tracking-",
-    "bg-", "border", "rounded", "shadow",
-    "absolute", "relative", "fixed", "sticky",
-    "top-", "bottom-", "left-", "right-",
-    "z-", "overflow-", "opacity-",
-    "transition", "duration-", "ease-",
-    "col-", "row-", "grid-cols-", "grid-rows-",
-    "aspect-", "object-", "cursor-",
-    "divide-", "ring-", "outline-",
-    "sr-only", "not-sr-only",
-    "container", "mx-auto",
-    "line-clamp-", "truncate",
-    "transform", "scale-", "rotate-", "translate-",
-    "animate-", "whitespace-", "break-",
-  ];
-
-  return standardPrefixes.some((prefix) => stripped.startsWith(prefix)) || stripped === "flex" || stripped === "grid" || stripped === "hidden" || stripped === "container";
 }
