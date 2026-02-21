@@ -591,13 +591,13 @@ export async function analyzeMultiplePages(
   screenshotMap: Map<string, string>,
 ): Promise<{ perPage: PerPageAnalysis[]; synthesis: Record<string, unknown> }> {
   const apiKey = process.env.ANTHROPIC_API_KEY;
-  if (!apiKey) {
-    throw new Error(
-      "ANTHROPIC_API_KEY environment variable is required for multi-page analysis",
+  const client = apiKey ? new Anthropic({ apiKey }) : null;
+
+  if (!client) {
+    console.warn(
+      "  [Warning] ANTHROPIC_API_KEY not set — using HTML-only analysis for all pages.",
     );
   }
-
-  const client = new Anthropic({ apiKey });
 
   // Sort pages by vision priority, then by remaining pages
   const priorityIndex = (pageType: PageType): number => {
@@ -616,7 +616,7 @@ export async function analyzeMultiplePages(
 
   for (const page of sortedPages) {
     const hasScreenshot = screenshotMap.has(page.pageType);
-    if (hasScreenshot && visionCallCount < MAX_VISION_CALLS) {
+    if (client && hasScreenshot && visionCallCount < MAX_VISION_CALLS) {
       visionPages.push(page);
       visionCallCount++;
     } else {
@@ -639,7 +639,7 @@ export async function analyzeMultiplePages(
 
     try {
       const result = await analyzePageWithVision(
-        client,
+        client!,
         page,
         screenshotPath,
         htmlHints,
@@ -666,7 +666,7 @@ export async function analyzeMultiplePages(
 
   // Run site synthesis across all per-page results
   let synthesis: Record<string, unknown> = {};
-  if (perPageResults.length > 0) {
+  if (client && perPageResults.length > 0) {
     try {
       synthesis = await synthesizeSiteAnalysis(client, perPageResults);
     } catch (err) {

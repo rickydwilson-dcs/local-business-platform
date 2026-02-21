@@ -58,9 +58,12 @@ export async function captureScreenshots(
         });
 
         await browserPage.goto(page.url, {
-          waitUntil: "networkidle",
+          waitUntil: "domcontentloaded",
           timeout: NAVIGATION_TIMEOUT_MS,
         });
+
+        // Give JS-heavy pages time to render
+        await browserPage.waitForTimeout(2000);
 
         await browserPage.screenshot({
           path: screenshotPath,

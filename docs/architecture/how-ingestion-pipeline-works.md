@@ -99,3 +99,85 @@ npx tsx tools/generate-theme-from-reference.ts \
 ## Showcase Integration
 
 Generated themes automatically integrate with the showcase site through the manifest-driven loader in `sites/showcase/registry/from-theme-manifest.ts`. Each theme's `showcase-registry.tsx` provides render functions that appear alongside existing theme entries.
+
+## v2 Multi-Page Pipeline
+
+The v2 pipeline (`tools/analyse-site.ts`) extends the original single-screenshot workflow with automated multi-page crawling, per-page layout analysis, component matching, and example page generation. The user provides just a URL; everything else is automated.
+
+### CLI Usage
+
+```bash
+npx tsx tools/analyse-site.ts --url https://example.com/
+```
+
+Flags:
+- `--url <website>` (required) — website to analyse
+- `--name <slug>` (optional) — theme name, auto-assigned from constellation namespace if omitted
+- `--output <dir>` (optional) — output directory, default: `./output/<theme-name>/`
+- `--max-pages <n>` (optional) — max pages to discover, default: 10
+- `--dry-run` — analysis only, no file generation
+- `--skip-examples` — skip example page generation
+
+### Pipeline Steps
+
+The v2 pipeline runs 14 steps in order:
+
+1. **Parse args, determine theme name** — auto-assigned from constellation namespace
+2. **Discover pages** — sitemap.xml, nav parsing, path probing
+3. **Fetch HTML** — all discovered pages
+4. **Capture screenshots** — Playwright headless Chromium (1440x900)
+5. **HTML structural analysis** — deterministic section detection
+6. **Colour extraction** — CSS scraping from homepage
+7. **Per-page vision analysis** — Claude Sonnet vision calls (cap at 6)
+8. **Site synthesis** — cross-page consolidation
+9. **Component matching** — map sections to core-components
+10. **Token reconciliation** — vision overrides scraped if confident
+11. **Write analysis files** — `site-analysis.json` + `site-analysis.md`
+12. **Component generation** — unmatched sections only
+13. **Example page generation** — TSX files from PageBlueprints
+14. **Scaffold theme package** — `packages/themes/<name>/`
+
+### Page Discovery Strategies
+
+Three strategies in priority order:
+1. **Sitemap.xml** — fetch and parse `<loc>` URLs, recurse indexes
+2. **Navigation parsing** — extract links from `<nav>`, `<header>`, `<footer>`
+3. **Common path probing** — probe `/about`, `/services`, `/blog`, `/contact`, etc.
+
+### Screenshot Automation
+
+Playwright captures full-page screenshots:
+- Headless Chromium, 1440x900 viewport
+- Single browser instance, one tab per page
+- Pages that fail to load are skipped
+
+### Component Matching
+
+The component matcher scores each section blueprint against the core-component catalog using:
+- Category match (must match to score at all)
+- Content slots overlap (Jaccard similarity)
+- Layout pattern keyword matching
+
+Confidence thresholds: >0.7 = exact match (reuse directly), 0.4-0.7 = close match (minor adaptation), <0.4 = no match (generate new).
+
+### Example Page Generation
+
+For each PageBlueprint, a TSX file is generated that imports matched core-components and generated theme components. Detail pages (service-detail, blog-post, location-detail) are NOT generated — they use `[slug]/page.tsx` dynamic routes.
+
+### Relationship to v1
+
+The original single-screenshot pipeline (`tools/generate-theme-from-reference.ts`) is untouched and still works. The v2 pipeline is a superset that produces a `SiteAnalysis` (v3 schema) instead of a `ReferenceAnalysis` (v2 schema).
+
+### Key Files (v2)
+
+| File | Purpose |
+|------|---------|
+| `tools/analyse-site.ts` | v2 pipeline entry point |
+| `tools/lib/site-discovery.ts` | Page discovery (sitemap, nav, probing) |
+| `tools/lib/screenshot-capture.ts` | Playwright screenshot capture |
+| `tools/lib/html-structure-analyzer.ts` | Deterministic HTML section detection |
+| `tools/lib/multi-page-analyzer.ts` | Per-page vision + site synthesis |
+| `tools/lib/core-component-catalog.ts` | Core component metadata |
+| `tools/lib/component-matcher.ts` | Section → component matching |
+| `tools/lib/page-template-generator.ts` | Example page TSX generation |
+| `tools/lib/theme-name-picker.ts` | Auto theme name from constellation namespace |

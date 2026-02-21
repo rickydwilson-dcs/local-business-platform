@@ -1,0 +1,17 @@
+/*
+ * Lyra Theme — Global CSS Utilities
+ *
+ * Reference site: https://colorcode.events/
+ * Capture date: 2026-02-21T08:23:13.752Z
+ *
+ * This file is intentionally minimal. Theme tokens are defined in index.ts
+ * and consumed via Tailwind utility classes. Add theme-specific utility
+ * classes here only when needed.
+ *
+ * Import this file at the top of your site's app/globals.css:
+ *
+ *   @import "../../packages/themes/lyra/globals.css";
+ *   @tailwind base;
+ *   @tailwind components;
+ *   @tailwind utilities;
+ */
