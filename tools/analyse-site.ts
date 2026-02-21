@@ -239,7 +239,7 @@ async function main() {
   const themeName = args.name ?? pickNextThemeName();
   const outputDir = args.output
     ? path.resolve(args.output)
-    : path.resolve(`./output/${themeName}/`);
+    : path.resolve(`./output/ingestion/${themeName}/`);
   fs.mkdirSync(outputDir, { recursive: true });
   console.log(`  Theme: ${themeName}`);
   console.log(`  Output: ${outputDir}`);
