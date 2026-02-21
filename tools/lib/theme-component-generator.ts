@@ -9,7 +9,7 @@
 import * as fs from "fs";
 import * as path from "path";
 import Anthropic from "@anthropic-ai/sdk";
-import type { SectionBlueprint } from "./reference-analysis-types";
+import type { SectionBlueprint, ComponentMatch } from "./reference-analysis-types";
 import {
   serverComponentShell,
   clientComponentShell,
@@ -159,13 +159,19 @@ async function generateSingleComponent(
 /**
  * Generate component files for all section blueprints.
  *
+ * When componentMatches is provided (v3 pipeline), blueprints with an "exact"
+ * or "close" match are skipped — they reuse existing core-components.
+ * Only unmatched or "partial" match blueprints get generated.
+ *
  * @param blueprints - Section blueprints from the analysis
  * @param outputDir - Directory to write component files to
+ * @param componentMatches - Optional map of blueprint ID to ComponentMatch (v3 pipeline)
  * @returns Generation result with component metadata and warnings
  */
 export async function generateThemeComponents(
   blueprints: SectionBlueprint[],
-  outputDir: string
+  outputDir: string,
+  componentMatches?: Map<string, ComponentMatch | null>,
 ): Promise<GenerationResult> {
   const allComponents: GeneratedComponent[] = [];
   const allWarnings: string[] = [];
@@ -182,9 +188,21 @@ export async function generateThemeComponents(
     console.warn("  [Warning] ANTHROPIC_API_KEY not set — generating placeholder components.");
   }
 
-  console.log(`  Generating ${blueprints.length} components...`);
+  // Filter blueprints: skip those with "exact" or "close" matches
+  const blueprintsToGenerate = componentMatches
+    ? blueprints.filter((bp) => {
+        const match = componentMatches.get(bp.id);
+        if (match && (match.matchConfidence === "exact" || match.matchConfidence === "close")) {
+          console.log(`    ✓ ${bp.componentExportName} → reusing ${match.componentName} (${match.matchConfidence})`);
+          return false;
+        }
+        return true;
+      })
+    : blueprints;
 
-  for (const blueprint of blueprints) {
+  console.log(`  Generating ${blueprintsToGenerate.length} components (${blueprints.length - blueprintsToGenerate.length} reused from core)...`);
+
+  for (const blueprint of blueprintsToGenerate) {
     console.log(`    ${blueprint.componentExportName} (${blueprint.category})...`);
     const { component, warnings } = await generateSingleComponent(client, blueprint, outputDir);
 

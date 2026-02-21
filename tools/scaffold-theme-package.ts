@@ -20,7 +20,7 @@
 
 import * as fs from "fs";
 import * as path from "path";
-import type { ReferenceAnalysis } from "./lib/reference-analysis-types";
+import type { ReferenceAnalysis, SiteAnalysis } from "./lib/reference-analysis-types";
 
 // ============================================================================
 // CLI argument parsing
@@ -70,7 +70,7 @@ function toCamelCase(slug: string): string {
 // File generators
 // ============================================================================
 
-function generateIndexTs(name: string, analysis: ReferenceAnalysis): string {
+function generateIndexTs(name: string, analysis: ReferenceAnalysis | SiteAnalysis): string {
   const pascal = toPascalCase(name);
   const camel = toCamelCase(name);
   const tokens = analysis.themeTokenRecommendations;
@@ -111,7 +111,7 @@ registerTheme({ name: "${name}", label: "${pascal}", config: ${camel}DefaultConf
 `;
 }
 
-function generateManifestTs(name: string, analysis: ReferenceAnalysis): string {
+function generateManifestTs(name: string, analysis: ReferenceAnalysis | SiteAnalysis): string {
   const lines: string[] = [];
   const pascal = toPascalCase(name);
 
@@ -150,7 +150,7 @@ function generateManifestTs(name: string, analysis: ReferenceAnalysis): string {
   return lines.join("\n");
 }
 
-function generateShowcaseRegistryTsx(name: string, analysis: ReferenceAnalysis): string {
+function generateShowcaseRegistryTsx(name: string, analysis: ReferenceAnalysis | SiteAnalysis): string {
   const pascal = toPascalCase(name);
   const camel = toCamelCase(name);
   const lines: string[] = [];
@@ -196,7 +196,7 @@ function generateShowcaseRegistryTsx(name: string, analysis: ReferenceAnalysis):
   return lines.join("\n");
 }
 
-function generateGlobalsCss(name: string, analysis: ReferenceAnalysis): string {
+function generateGlobalsCss(name: string, analysis: ReferenceAnalysis | SiteAnalysis): string {
   return `/*
  * ${toPascalCase(name)} Theme — Global CSS Utilities
  *
@@ -217,7 +217,7 @@ function generateGlobalsCss(name: string, analysis: ReferenceAnalysis): string {
 `;
 }
 
-function generateReadme(name: string, analysis: ReferenceAnalysis): string {
+function generateReadme(name: string, analysis: ReferenceAnalysis | SiteAnalysis): string {
   const lines: string[] = [];
   const pascal = toPascalCase(name);
 
@@ -299,7 +299,7 @@ function appendThemeName(name: string): void {
 // Main
 // ============================================================================
 
-export function scaffoldThemePackage(analysis: ReferenceAnalysis, name: string): string {
+export function scaffoldThemePackage(analysis: ReferenceAnalysis | SiteAnalysis, name: string): string {
   const pascal = toPascalCase(name);
 
   // Version gate
@@ -309,6 +309,10 @@ export function scaffoldThemePackage(analysis: ReferenceAnalysis, name: string):
       `Re-run the analysis pipeline to produce a v2 analysis with sectionBlueprints.`
     );
   }
+
+  // For v3 SiteAnalysis, use its deduplicated sectionBlueprints directly.
+  // The rest of the scaffold uses the same fields (sectionBlueprints, themeTokenRecommendations, etc.)
+  // which exist on both ReferenceAnalysis and SiteAnalysis.
 
   console.log(`\nScaffolding theme package: ${pascal} (${name})`);
 
