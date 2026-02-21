@@ -439,6 +439,31 @@ function appendThemeName(name: string): void {
 
   fs.writeFileSync(typesPath, content, "utf8");
   console.log(`  ✓ Appended "${name}" to THEME_NAMES`);
+
+  // Also update ThemeName union in theme-context.tsx (structurally duplicated type)
+  const contextPath = path.resolve(__dirname, "../packages/core-components/src/context/theme-context.tsx");
+  if (!fs.existsSync(contextPath)) {
+    console.warn(`  [Warning] Could not find ${contextPath} — skipping ThemeName sync.`);
+    return;
+  }
+
+  let contextContent = fs.readFileSync(contextPath, "utf8");
+  if (contextContent.includes(`"${name}"`)) {
+    console.log(`  ✓ "${name}" already in ThemeName union`);
+    return;
+  }
+
+  const themeNameRegex = /export type ThemeName = ([^;]+);/;
+  const themeNameMatch = contextContent.match(themeNameRegex);
+  if (!themeNameMatch) {
+    console.warn("  [Warning] Could not find ThemeName type — skipping sync.");
+    return;
+  }
+
+  const updatedUnion = `${themeNameMatch[1]} | "${name}"`;
+  contextContent = contextContent.replace(themeNameRegex, `export type ThemeName = ${updatedUnion};`);
+  fs.writeFileSync(contextPath, contextContent, "utf8");
+  console.log(`  ✓ Synced "${name}" to ThemeName union in theme-context.tsx`);
 }
 
 // ============================================================================
