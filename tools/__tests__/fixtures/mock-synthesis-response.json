@@ -1,0 +1,78 @@
+{
+  "sharedSections": ["navigation-main", "footer-standard"],
+  "deduplicatedBlueprints": [
+    {
+      "id": "hero-full-bleed",
+      "name": "HeroFullBleed",
+      "category": "Hero",
+      "purpose": "Primary hero with background image",
+      "layoutPattern": "full-bleed with overlay",
+      "contentSlots": ["heading", "subheading", "ctaButtons", "backgroundImage"],
+      "interactionNeeds": "none",
+      "componentFileName": "hero-full-bleed.tsx",
+      "componentExportName": "HeroFullBleed",
+      "tokenUsageHints": ["bg-brand-primary", "text-surface-foreground"],
+      "confidence": "high",
+      "referenceSection": "Hero Section"
+    },
+    {
+      "id": "navigation-main",
+      "name": "NavigationMain",
+      "category": "Navigation",
+      "purpose": "Primary site navigation with mobile menu",
+      "layoutPattern": "horizontal nav bar",
+      "contentSlots": ["logo", "navLinks", "ctaButton"],
+      "interactionNeeds": "stateful",
+      "componentFileName": "navigation-main.tsx",
+      "componentExportName": "NavigationMain",
+      "tokenUsageHints": ["bg-surface-background", "text-surface-foreground"],
+      "confidence": "high",
+      "referenceSection": "Navigation"
+    }
+  ],
+  "visualLanguage": {
+    "palette": {
+      "background": "#FFFFFF",
+      "foreground": "#1A1A2E",
+      "primary": "#005A9E",
+      "secondary": "#2D8CFF",
+      "accent": "#FF6B35",
+      "additional": ["#F0F4F8"],
+      "confidence": "high"
+    },
+    "typography": {
+      "headingWeight": "bold",
+      "bodyWeight": "normal",
+      "headingStyle": "sans",
+      "usesInlineColourHighlights": false
+    },
+    "heroPattern": {
+      "type": "dark-full-bleed",
+      "hasBackgroundImage": true,
+      "headerDark": true
+    },
+    "spacingDensity": "standard"
+  },
+  "themeTokenRecommendations": {
+    "brand": {
+      "primary": "#005A9E",
+      "primaryHover": "#004A8E",
+      "secondary": "#2D8CFF",
+      "accent": "#FF6B35"
+    },
+    "surface": {
+      "background": "#FFFFFF",
+      "foreground": "#1A1A2E",
+      "muted": "#F0F4F8"
+    },
+    "typography": {
+      "fontFamilySans": ["Inter", "sans-serif"],
+      "fontFamilyHeading": ["Inter", "sans-serif"]
+    }
+  },
+  "registryRecommendation": {
+    "themeName": "aurora",
+    "confidence": "high",
+    "reasoning": "Clean professional layout matches aurora theme pattern"
+  }
+}

@@ -1,0 +1,106 @@
+{
+  "sharedSections": ["navigation-top-bar", "footer-main"],
+  "deduplicatedBlueprints": [
+    {
+      "id": "hero-full-bleed",
+      "name": "HeroFullBleed",
+      "category": "Hero",
+      "purpose": "Full-width hero banner with vivid background image, headline overlay, and dual CTA buttons for the events landing page",
+      "layoutPattern": "full-bleed with overlay",
+      "contentSlots": ["heading", "subheading", "ctaButtons", "backgroundImage"],
+      "interactionNeeds": "none",
+      "componentFileName": "hero-full-bleed.tsx",
+      "componentExportName": "HeroFullBleed",
+      "tokenUsageHints": ["bg-brand-primary", "text-surface-background", "text-h1"],
+      "confidence": "high",
+      "referenceSection": "home - Hero"
+    },
+    {
+      "id": "events-cards-grid",
+      "name": "EventsCardsGrid",
+      "category": "Cards",
+      "purpose": "Responsive grid of upcoming event cards with date badges, thumbnail images, and short descriptions",
+      "layoutPattern": "3-col grid with image cards",
+      "contentSlots": ["cardImage", "cardTitle", "cardDate", "cardDescription", "cardLink"],
+      "interactionNeeds": "minimal",
+      "componentFileName": "events-cards-grid.tsx",
+      "componentExportName": "EventsCardsGrid",
+      "tokenUsageHints": ["bg-surface-background", "text-surface-foreground", "border-brand-secondary"],
+      "confidence": "high",
+      "referenceSection": "home - Upcoming Events"
+    },
+    {
+      "id": "cta-band-vibrant",
+      "name": "CtaBandVibrant",
+      "category": "CTA",
+      "purpose": "Full-width call-to-action band with bold background color, headline, and single action button to drive ticket purchases",
+      "layoutPattern": "full-bleed, dark-band, centered, brand-background",
+      "contentSlots": ["heading", "description", "ctaButton"],
+      "interactionNeeds": "none",
+      "componentFileName": "cta-band-vibrant.tsx",
+      "componentExportName": "CtaBandVibrant",
+      "tokenUsageHints": ["bg-brand-accent", "text-surface-background", "bg-brand-primary"],
+      "confidence": "medium",
+      "referenceSection": "home - Call to Action"
+    },
+    {
+      "id": "footer-multi-column",
+      "name": "FooterMultiColumn",
+      "category": "Footer",
+      "purpose": "Multi-column footer with navigation links, social media icons, newsletter signup, and copyright notice",
+      "layoutPattern": "4-col grid, dark background",
+      "contentSlots": ["navLinks", "socialLinks", "newsletterForm", "copyrightText", "logoImage"],
+      "interactionNeeds": "minimal",
+      "componentFileName": "footer-multi-column.tsx",
+      "componentExportName": "FooterMultiColumn",
+      "tokenUsageHints": ["bg-surface-foreground", "text-surface-background", "text-brand-accent"],
+      "confidence": "high",
+      "referenceSection": "shared - Footer"
+    }
+  ],
+  "visualLanguage": {
+    "palette": {
+      "background": "#FFFFFF",
+      "foreground": "#1D3557",
+      "primary": "#E63946",
+      "secondary": "#457B9D",
+      "accent": "#F4A261",
+      "additional": ["#A8DADC", "#F1FAEE"],
+      "confidence": "high"
+    },
+    "typography": {
+      "headingWeight": "extrabold",
+      "bodyWeight": "normal",
+      "headingStyle": "sans",
+      "usesInlineColourHighlights": true
+    },
+    "heroPattern": {
+      "type": "dark-full-bleed",
+      "hasBackgroundImage": true,
+      "headerDark": true
+    },
+    "spacingDensity": "spacious"
+  },
+  "themeTokenRecommendations": {
+    "brand": {
+      "primary": "#E63946",
+      "primaryHover": "#C62D39",
+      "secondary": "#457B9D",
+      "accent": "#F4A261"
+    },
+    "surface": {
+      "background": "#FFFFFF",
+      "foreground": "#1D3557",
+      "muted": "#F1FAEE"
+    },
+    "typography": {
+      "fontFamilySans": ["Inter", "system-ui", "sans-serif"],
+      "fontFamilyHeading": ["Montserrat", "Inter", "sans-serif"]
+    }
+  },
+  "registryRecommendation": {
+    "themeName": "vega",
+    "confidence": "medium",
+    "reasoning": "Vega theme provides bold full-bleed hero sections and vibrant CTA bands that align well with the colorful, high-energy visual language of this events site. The dark hero pattern and spacious layout density are a natural fit."
+  }
+}
