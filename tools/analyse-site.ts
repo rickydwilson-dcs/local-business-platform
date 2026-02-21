@@ -17,6 +17,7 @@
  *   --skip-examples      (optional) Skip example page generation
  */
 
+import "dotenv/config";
 import * as fs from "fs";
 import * as path from "path";
 import type {
@@ -25,6 +26,10 @@ import type {
   ComponentMatch,
   DiscoveredPage,
 } from "./lib/reference-analysis-types";
+import {
+  SiteSynthesisResponseSchema,
+  type SiteSynthesisResponse,
+} from "./lib/analysis-schemas";
 import { discoverPages } from "./lib/site-discovery";
 import { captureScreenshots } from "./lib/screenshot-capture";
 import { pickNextThemeName } from "./lib/theme-name-picker";
@@ -201,6 +206,11 @@ async function main() {
   const args = parseArgs(process.argv);
   const pipelineStart = Date.now();
 
+  // Preflight: API key check
+  if (!process.env.ANTHROPIC_API_KEY) {
+    console.warn("⚠ ANTHROPIC_API_KEY not set — running in HTML-only mode");
+  }
+
   console.log("\n╔══════════════════════════════════════════════════╗");
   console.log("║       Ingestion Pipeline v2 — analyse-site      ║");
   console.log("╚══════════════════════════════════════════════════╝\n");
@@ -298,6 +308,7 @@ async function main() {
     discoveredPages,
     htmlMap,
     screenshotMap,
+    outputDir,
   );
   console.log(`  Analysed ${perPage.length} pages`);
   console.log(`  Done (${elapsed(stepStart)})\n`);
@@ -320,59 +331,127 @@ async function main() {
   // ── Step 10: Token reconciliation ──
   stepStart = Date.now();
   console.log("[10/14] Reconciling tokens...");
-  // Use synthesis tokens if available, fall back to scraped
-  const synthTokens = (synthesis as Record<string, unknown>).themeTokenRecommendations as SiteAnalysis["themeTokenRecommendations"] | undefined;
-  const synthVisual = (synthesis as Record<string, unknown>).visualLanguage as SiteAnalysis["visualLanguage"] | undefined;
-  const synthRegistry = (synthesis as Record<string, unknown>).registryRecommendation as SiteAnalysis["registryRecommendation"] | undefined;
 
-  const themeTokens: SiteAnalysis["themeTokenRecommendations"] = synthTokens ?? {
-    brand: {
-      primary: scrapedStyles?.colors.primary ?? "#3B82F6",
-      primaryHover: scrapedStyles?.colors.primary ?? "#2563EB",
-      secondary: scrapedStyles?.colors.secondary ?? "#6B7280",
-      accent: scrapedStyles?.colors.primary ?? "#F59E0B",
-    },
-    surface: {
-      background: scrapedStyles?.colors.background ?? "#FFFFFF",
-      foreground: scrapedStyles?.colors.text ?? "#111827",
-      muted: "#F3F4F6",
-    },
-    typography: {
-      fontFamilySans: [scrapedStyles?.fonts.body ?? "Inter", "system-ui", "sans-serif"],
-      fontFamilyHeading: [scrapedStyles?.fonts.heading ?? "Inter", "system-ui", "sans-serif"],
-    },
-  };
+  // Validate synthesis with Zod
+  const synthValidation = SiteSynthesisResponseSchema.safeParse(synthesis);
+  const validatedSynthesis: SiteSynthesisResponse | null = synthValidation.success
+    ? synthValidation.data
+    : null;
 
-  const visualLanguage: SiteAnalysis["visualLanguage"] = synthVisual ?? {
-    palette: {
-      background: themeTokens.surface.background,
-      foreground: themeTokens.surface.foreground,
-      primary: themeTokens.brand.primary,
-      secondary: themeTokens.brand.secondary,
-      accent: themeTokens.brand.accent,
-      additional: [],
+  // Find homepage vision palette (fallback source #2)
+  const homepageVision = perPage.find(
+    (p) => p.page.pageType === "home" && p.visualLanguage,
+  );
+  const visionPalette = homepageVision?.visualLanguage?.palette;
+  const hasVisionPalette = visionPalette &&
+    (visionPalette.confidence === "high" || visionPalette.confidence === "medium");
+
+  // Check if CSS-scraped values are non-default
+  const hasCssValues = scrapedStyles &&
+    scrapedStyles.colors.primary &&
+    scrapedStyles.colors.primary !== "#000000";
+
+  // Determine token source using fallback chain:
+  // 1. Synthesis tokens (Zod validated) → 2. Homepage vision palette → 3. CSS-scraped → 4. Defaults
+  let tokenSource: "synthesis" | "vision" | "css" | "defaults";
+  let themeTokens: SiteAnalysis["themeTokenRecommendations"];
+
+  if (validatedSynthesis) {
+    tokenSource = "synthesis";
+    themeTokens = validatedSynthesis.themeTokenRecommendations;
+  } else if (hasVisionPalette && visionPalette) {
+    tokenSource = "vision";
+    themeTokens = {
+      brand: {
+        primary: visionPalette.primary,
+        primaryHover: visionPalette.primary,
+        secondary: visionPalette.secondary,
+        accent: visionPalette.accent,
+      },
+      surface: {
+        background: visionPalette.background,
+        foreground: visionPalette.foreground,
+        muted: "#F3F4F6",
+      },
+      typography: {
+        fontFamilySans: [scrapedStyles?.fonts.body ?? "Inter", "system-ui", "sans-serif"],
+        fontFamilyHeading: [scrapedStyles?.fonts.heading ?? "Inter", "system-ui", "sans-serif"],
+      },
+    };
+  } else if (hasCssValues && scrapedStyles) {
+    tokenSource = "css";
+    themeTokens = {
+      brand: {
+        primary: scrapedStyles.colors.primary ?? "#3B82F6",
+        primaryHover: scrapedStyles.colors.primary ?? "#2563EB",
+        secondary: scrapedStyles.colors.secondary ?? "#6B7280",
+        accent: scrapedStyles.colors.primary ?? "#F59E0B",
+      },
+      surface: {
+        background: scrapedStyles.colors.background ?? "#FFFFFF",
+        foreground: scrapedStyles.colors.text ?? "#111827",
+        muted: "#F3F4F6",
+      },
+      typography: {
+        fontFamilySans: [scrapedStyles.fonts.body ?? "Inter", "system-ui", "sans-serif"],
+        fontFamilyHeading: [scrapedStyles.fonts.heading ?? "Inter", "system-ui", "sans-serif"],
+      },
+    };
+  } else {
+    tokenSource = "defaults";
+    themeTokens = {
+      brand: {
+        primary: "#3B82F6",
+        primaryHover: "#2563EB",
+        secondary: "#6B7280",
+        accent: "#F59E0B",
+      },
+      surface: {
+        background: "#FFFFFF",
+        foreground: "#111827",
+        muted: "#F3F4F6",
+      },
+      typography: {
+        fontFamilySans: ["Inter", "system-ui", "sans-serif"],
+        fontFamilyHeading: ["Inter", "system-ui", "sans-serif"],
+      },
+    };
+  }
+
+  const visualLanguage: SiteAnalysis["visualLanguage"] = validatedSynthesis?.visualLanguage
+    ?? (homepageVision?.visualLanguage as SiteAnalysis["visualLanguage"] | undefined)
+    ?? {
+      palette: {
+        background: themeTokens.surface.background,
+        foreground: themeTokens.surface.foreground,
+        primary: themeTokens.brand.primary,
+        secondary: themeTokens.brand.secondary,
+        accent: themeTokens.brand.accent,
+        additional: [],
+        confidence: "low" as const,
+      },
+      typography: {
+        headingWeight: "bold" as const,
+        bodyWeight: "normal" as const,
+        headingStyle: "sans" as const,
+        usesInlineColourHighlights: false,
+      },
+      heroPattern: {
+        type: "centered" as const,
+        hasBackgroundImage: false,
+        headerDark: false,
+      },
+      spacingDensity: "standard" as const,
+    };
+
+  const registryRecommendation: SiteAnalysis["registryRecommendation"] =
+    validatedSynthesis?.registryRecommendation ?? {
+      themeName: "vega",
       confidence: "low" as const,
-    },
-    typography: {
-      headingWeight: "bold" as const,
-      bodyWeight: "normal" as const,
-      headingStyle: "sans" as const,
-      usesInlineColourHighlights: false,
-    },
-    heroPattern: {
-      type: "centered" as const,
-      hasBackgroundImage: false,
-      headerDark: false,
-    },
-    spacingDensity: "standard" as const,
-  };
+      reasoning: "Default fallback — insufficient data for confident match",
+    };
 
-  const registryRecommendation: SiteAnalysis["registryRecommendation"] = synthRegistry ?? {
-    themeName: "vega",
-    confidence: "low" as const,
-    reasoning: "Default fallback — insufficient data for confident match",
-  };
-
+  console.log(`  TOKEN_SOURCE: ${tokenSource}`);
   console.log(`  Primary: ${themeTokens.brand.primary}`);
   console.log(`  Registry: ${registryRecommendation.themeName} (${registryRecommendation.confidence})`);
   console.log(`  Done (${elapsed(stepStart)})\n`);
@@ -386,7 +465,7 @@ async function main() {
   const deduplicatedBlueprints: SectionBlueprint[] = [];
 
   // Use synthesis deduplicated blueprints if available
-  const synthBlueprints = (synthesis as Record<string, unknown>).deduplicatedBlueprints as SectionBlueprint[] | undefined;
+  const synthBlueprints = validatedSynthesis?.deduplicatedBlueprints as SectionBlueprint[] | undefined;
   if (synthBlueprints && Array.isArray(synthBlueprints)) {
     for (const bp of synthBlueprints) {
       if (!seenIds.has(bp.id)) {

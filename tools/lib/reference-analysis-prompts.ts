@@ -22,31 +22,31 @@ Return ONLY a JSON object (no prose, no markdown fences) matching this exact sch
     "palette": {
       "background": "<hex>",
       "foreground": "<hex>",
-      "primary": "<hex — sample the actual dominant brand colour pixel>",
-      "secondary": "<hex — sample secondary brand colour>",
-      "accent": "<hex — sample accent/highlight colour>",
-      "additional": ["<hex>", ...],
-      "confidence": "high" | "medium" | "low"
+      "primary": "<hex — sample the actual dominant brand colour pixel, NEVER #000000 or #FFFFFF>",
+      "secondary": "<hex — sample secondary brand colour, NEVER #000000 or #FFFFFF>",
+      "accent": "<hex — sample accent/highlight colour, NEVER #000000 or #FFFFFF>",
+      "additional": ["<hex>"],
+      "confidence": "<one of: high, medium, low>"
     },
     "typography": {
-      "headingWeight": "bold" | "extrabold" | "black",
-      "bodyWeight": "normal" | "medium",
-      "headingStyle": "sans" | "serif" | "display",
-      "usesInlineColourHighlights": true | false
+      "headingWeight": "<one of: bold, extrabold, black>",
+      "bodyWeight": "<one of: normal, medium>",
+      "headingStyle": "<one of: sans, serif, display>",
+      "usesInlineColourHighlights": "<boolean — true if headings use coloured spans or gradient text>"
     },
     "heroPattern": {
-      "type": "dark-full-bleed" | "split" | "centered" | "light",
-      "hasBackgroundImage": true | false,
-      "headerDark": true | false
+      "type": "<one of: dark-full-bleed, split, centered, light>",
+      "hasBackgroundImage": "<boolean>",
+      "headerDark": "<boolean>"
     },
-    "spacingDensity": "compact" | "standard" | "spacious"
+    "spacingDensity": "<one of: compact, standard, spacious>"
   },
   "detectedSections": [
     {
       "name": "<descriptive name>",
       "background": "<hex or description>",
-      "layoutType": "full-bleed-band" | "contained" | "split" | "grid" | "strip",
-      "purpose": "cta" | "info" | "blog" | "about" | "testimonial" | "nav" | "footer" | "sponsor" | "newsletter" | "hero" | "custom",
+      "layoutType": "<one of: full-bleed-band, contained, split, grid, strip>",
+      "purpose": "<one of: cta, info, blog, about, testimonial, nav, footer, sponsor, newsletter, hero, custom>",
       "notes": "<brief description of what this section contains>"
     }
   ],
@@ -54,21 +54,21 @@ Return ONLY a JSON object (no prose, no markdown fences) matching this exact sch
     {
       "id": "<unique slug, e.g. hero-full-bleed>",
       "name": "<PascalCase component name, e.g. HeroFullBleed>",
-      "category": "Hero" | "Navigation" | "Cards" | "CTA" | "Content" | "Social Proof" | "Blog" | "Stats" | "Footer" | "Custom",
+      "category": "<one of: Hero, Navigation, Cards, CTA, Content, Social Proof, Blog, Stats, Footer, Custom>",
       "purpose": "<what this section does>",
       "layoutPattern": "<structural description: full-bleed with overlay / 2-col grid / etc.>",
-      "contentSlots": ["<named content area>", ...],
-      "interactionNeeds": "none" | "minimal" | "stateful",
+      "contentSlots": ["<named content area>"],
+      "interactionNeeds": "<one of: none, minimal, stateful>",
       "componentFileName": "<kebab-case.tsx>",
       "componentExportName": "<PascalCase>",
-      "tokenUsageHints": ["bg-brand-primary", "text-surface-foreground", ...],
-      "confidence": "high" | "medium" | "low",
+      "tokenUsageHints": ["bg-brand-primary", "text-surface-foreground"],
+      "confidence": "<one of: high, medium, low>",
       "referenceSection": "<which detectedSection name this maps to>"
     }
   ],
   "registryRecommendation": {
-    "themeName": "<suggested theme slug>",
-    "confidence": "high" | "medium" | "low",
+    "themeName": "<pick from constellation namespace: orion, vega, lyra, atlas, nova, etc.>",
+    "confidence": "<one of: high, medium, low>",
     "reasoning": "<brief explanation>"
   },
   "themeTokenRecommendations": {
@@ -111,7 +111,9 @@ Context:
 
 Analyse the screenshot and HTML hints together. Identify every visual section from top to bottom.
 
-Return ONLY a JSON object (no prose, no markdown fences) matching this schema:
+Return ONLY valid JSON. No markdown fences. No commentary.
+
+Schema:
 
 {
   "pageType": "{{pageType}}",
@@ -122,13 +124,13 @@ Return ONLY a JSON object (no prose, no markdown fences) matching this schema:
       "order": 1,
       "blueprintId": "<unique kebab-case slug, e.g. hero-full-bleed>",
       "name": "<PascalCase component name>",
-      "category": "Hero" | "Navigation" | "Cards" | "CTA" | "Content" | "Social Proof" | "Blog" | "Stats" | "Footer" | "Custom",
+      "category": "<one of: Hero, Navigation, Cards, CTA, Content, Social Proof, Blog, Stats, Footer, Custom>",
       "purpose": "<what this section does>",
       "layoutPattern": "<structural description>",
-      "contentSlots": ["<named content area>", ...],
-      "interactionNeeds": "none" | "minimal" | "stateful",
-      "tokenUsageHints": ["bg-brand-primary", ...],
-      "confidence": "high" | "medium" | "low",
+      "contentSlots": ["<named content area>"],
+      "interactionNeeds": "<one of: none, minimal, stateful>",
+      "tokenUsageHints": ["bg-brand-primary"],
+      "confidence": "<one of: high, medium, low>",
       "isShared": false
     }
   ],
@@ -136,63 +138,65 @@ Return ONLY a JSON object (no prose, no markdown fences) matching this schema:
     "palette": {
       "background": "<hex>",
       "foreground": "<hex>",
-      "primary": "<hex>",
-      "secondary": "<hex>",
-      "accent": "<hex>",
+      "primary": "<hex — the dominant brand colour, NEVER #000000 or #FFFFFF>",
+      "secondary": "<hex — secondary brand colour, NEVER #000000 or #FFFFFF>",
+      "accent": "<hex — accent/highlight colour, NEVER #000000 or #FFFFFF>",
       "additional": [],
-      "confidence": "high" | "medium" | "low"
+      "confidence": "<one of: high, medium, low>"
     },
     "typography": {
-      "headingWeight": "bold" | "extrabold" | "black",
-      "bodyWeight": "normal" | "medium",
-      "headingStyle": "sans" | "serif" | "display",
-      "usesInlineColourHighlights": true | false
+      "headingWeight": "<one of: bold, extrabold, black>",
+      "bodyWeight": "<one of: normal, medium>",
+      "headingStyle": "<one of: sans, serif, display>",
+      "usesInlineColourHighlights": "<boolean — true if headings use coloured spans or gradient text>"
     },
     "heroPattern": {
-      "type": "dark-full-bleed" | "split" | "centered" | "light",
-      "hasBackgroundImage": true | false,
-      "headerDark": true | false
+      "type": "<one of: dark-full-bleed, split, centered, light>",
+      "hasBackgroundImage": "<boolean>",
+      "headerDark": "<boolean>"
     },
-    "spacingDensity": "compact" | "standard" | "spacious"
+    "spacingDensity": "<one of: compact, standard, spacious>"
   },
-  "confidence": "high" | "medium" | "low"
+  "confidence": "<one of: high, medium, low>"
 }
 
 INSTRUCTIONS:
-1. Sample ACTUAL pixel colours from the screenshot. Use hex values.
+1. Sample ACTUAL pixel colours from the screenshot. Use hex values. Never output #000000 or #FFFFFF as brand colours.
 2. List sections in order from top to bottom.
 3. Mark header and footer sections as "isShared": true.
 4. The "blueprintId" should be unique kebab-case combining category and layout.
-5. Return ONLY the JSON object.`;
+5. Return ONLY valid JSON. No markdown fences. No commentary.`;
 
 export const SITE_SYNTHESIS_PROMPT = `You are consolidating per-page analysis results from a multi-page website into a unified site analysis.
 
-Input: JSON array of per-page analysis results.
+Input: JSON array of per-page analysis results (each includes a visualLanguage object with colour data).
 
 Tasks:
 1. Identify shared sections that appear on every/most pages (header, footer, CTA bands). Mark them and deduplicate.
 2. Deduplicate section blueprints across pages — same hero pattern on home + about = one blueprint.
-3. Resolve conflicting color readings between pages. Prefer the homepage palette when confidence is equal.
+3. Resolve conflicting colour readings: For each colour token, use the hex value that appears most frequently across pages. If tied, prefer the homepage's values. Never output #000000 or #FFFFFF as brand colours.
 4. Produce consolidated themeTokenRecommendations (single palette for the whole site).
-5. Determine registryRecommendation: which existing theme family (orion = dark header + full-bleed hero + circular icons, vega = light header + split hero + card grid) is the closest match.
+5. Determine registryRecommendation: pick from the constellation namespace (orion, vega, lyra, atlas, nova, etc.). orion = dark header + full-bleed hero + circular icons, vega = light header + split hero + card grid.
 
-Return ONLY a JSON object (no prose, no markdown fences):
+Return ONLY valid JSON. No markdown fences. No commentary.
+
+Schema:
 
 {
-  "sharedSections": ["<blueprintId>", ...],
+  "sharedSections": ["<blueprintId>"],
   "deduplicatedBlueprints": [
     {
       "id": "<unique kebab-case slug>",
       "name": "<PascalCase>",
-      "category": "<ComponentCategory>",
+      "category": "<one of: Hero, Navigation, Cards, CTA, Content, Social Proof, Blog, Stats, Footer, Custom>",
       "purpose": "<what this section does>",
       "layoutPattern": "<structural description>",
-      "contentSlots": ["<slot>", ...],
-      "interactionNeeds": "none" | "minimal" | "stateful",
+      "contentSlots": ["<slot>"],
+      "interactionNeeds": "<one of: none, minimal, stateful>",
       "componentFileName": "<kebab-case.tsx>",
       "componentExportName": "<PascalCase>",
-      "tokenUsageHints": ["<token>", ...],
-      "confidence": "high" | "medium" | "low",
+      "tokenUsageHints": ["<token>"],
+      "confidence": "<one of: high, medium, low>",
       "referenceSection": "<source page type + section name>"
     }
   ],
@@ -200,24 +204,24 @@ Return ONLY a JSON object (no prose, no markdown fences):
     "palette": {
       "background": "<hex>",
       "foreground": "<hex>",
-      "primary": "<hex>",
-      "secondary": "<hex>",
-      "accent": "<hex>",
+      "primary": "<hex — NEVER #000000 or #FFFFFF>",
+      "secondary": "<hex — NEVER #000000 or #FFFFFF>",
+      "accent": "<hex — NEVER #000000 or #FFFFFF>",
       "additional": [],
-      "confidence": "high" | "medium" | "low"
+      "confidence": "<one of: high, medium, low>"
     },
     "typography": {
-      "headingWeight": "bold" | "extrabold" | "black",
-      "bodyWeight": "normal" | "medium",
-      "headingStyle": "sans" | "serif" | "display",
-      "usesInlineColourHighlights": false
+      "headingWeight": "<one of: bold, extrabold, black>",
+      "bodyWeight": "<one of: normal, medium>",
+      "headingStyle": "<one of: sans, serif, display>",
+      "usesInlineColourHighlights": "<boolean — true if headings use coloured spans or gradient text>"
     },
     "heroPattern": {
-      "type": "dark-full-bleed" | "split" | "centered" | "light",
-      "hasBackgroundImage": true | false,
-      "headerDark": true | false
+      "type": "<one of: dark-full-bleed, split, centered, light>",
+      "hasBackgroundImage": "<boolean>",
+      "headerDark": "<boolean>"
     },
-    "spacingDensity": "compact" | "standard" | "spacious"
+    "spacingDensity": "<one of: compact, standard, spacious>"
   },
   "themeTokenRecommendations": {
     "brand": {
@@ -237,14 +241,14 @@ Return ONLY a JSON object (no prose, no markdown fences):
     }
   },
   "registryRecommendation": {
-    "themeName": "orion" | "vega",
-    "confidence": "high" | "medium" | "low",
+    "themeName": "<pick from constellation namespace: orion, vega, lyra, atlas, nova, etc.>",
+    "confidence": "<one of: high, medium, low>",
     "reasoning": "<explanation>"
   }
 }
 
 INSTRUCTIONS:
-1. Merge colour palettes by averaging and preferring high-confidence values.
+1. For each colour token, use the hex value that appears most frequently across pages. If tied, prefer the homepage's values. Never output #000000 or #FFFFFF as brand colours.
 2. Deduplicate blueprints by category + layoutPattern similarity.
 3. Keep the most detailed version of each blueprint.
-4. Return ONLY the JSON object.`;
+4. Return ONLY valid JSON. No markdown fences. No commentary.`;

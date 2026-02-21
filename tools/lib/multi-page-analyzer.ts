@@ -25,6 +25,13 @@ import {
   PAGE_LAYOUT_ANALYSIS_PROMPT,
   SITE_SYNTHESIS_PROMPT,
 } from "./reference-analysis-prompts";
+import type { z } from "zod";
+import {
+  PageVisionResponseSchema,
+  SiteSynthesisResponseSchema,
+  type VisualLanguageData,
+  type SiteSynthesisResponse,
+} from "./analysis-schemas";
 
 // ── Constants ────────────────────────────────────────────────────────────────
 
@@ -49,6 +56,7 @@ export interface PerPageAnalysis {
   blueprint: PageBlueprint;
   sections: SectionBlueprint[];
   analysisSource: "vision" | "html-only" | "hybrid";
+  visualLanguage?: VisualLanguageData;
 }
 
 // ── Helper: Convert HtmlSection to SectionBlueprint ──────────────────────────
@@ -280,54 +288,11 @@ function getMediaType(
 
 // ── Helper: Parse vision response JSON ───────────────────────────────────────
 
-interface VisionPageResult {
-  pageType: string;
-  path: string;
-  title: string;
-  sections: Array<{
-    order: number;
-    blueprintId: string;
-    name: string;
-    category: string;
-    purpose: string;
-    layoutPattern: string;
-    contentSlots: string[];
-    interactionNeeds: "none" | "minimal" | "stateful";
-    tokenUsageHints: string[];
-    confidence: "high" | "medium" | "low";
-    isShared: boolean;
-  }>;
-  visualLanguage: {
-    palette: {
-      background: string;
-      foreground: string;
-      primary: string;
-      secondary: string;
-      accent: string;
-      additional: string[];
-      confidence: "high" | "medium" | "low";
-    };
-    typography: {
-      headingWeight: string;
-      bodyWeight: string;
-      headingStyle: string;
-      usesInlineColourHighlights: boolean;
-    };
-    heroPattern: {
-      type: string;
-      hasBackgroundImage: boolean;
-      headerDark: boolean;
-    };
-    spacingDensity: string;
-  };
-  confidence: "high" | "medium" | "low";
-}
-
 /**
- * Convert a parsed vision response into PerPageAnalysis.
+ * Convert a Zod-validated vision response into PerPageAnalysis.
  */
 function visionResultToPerPageAnalysis(
-  result: VisionPageResult,
+  result: z.infer<typeof PageVisionResponseSchema>,
   page: DiscoveredPage,
 ): PerPageAnalysis {
   const sections: SectionBlueprint[] = result.sections.map((s) => ({
@@ -372,7 +337,60 @@ function visionResultToPerPageAnalysis(
     blueprint,
     sections,
     analysisSource: "vision",
+    visualLanguage: result.visualLanguage,
   };
+}
+
+// ── Helper: Robust JSON extraction ───────────────────────────────────────────
+
+/**
+ * Extract a JSON object from a text response with multiple fallback strategies:
+ * 1. Try JSON.parse(fullText) directly
+ * 2. Try extracting from markdown fences
+ * 3. Try balanced-brace extraction
+ */
+function extractJsonObject(text: string): string | null {
+  const trimmed = text.trim();
+
+  // Strategy 1: Try direct parse
+  try {
+    JSON.parse(trimmed);
+    return trimmed;
+  } catch {
+    // continue to other strategies
+  }
+
+  // Strategy 2: Extract from markdown fences
+  const fenceMatch = trimmed.match(/```(?:json)?\s*\n?([\s\S]*?)\n?\s*```/);
+  if (fenceMatch) {
+    try {
+      JSON.parse(fenceMatch[1].trim());
+      return fenceMatch[1].trim();
+    } catch {
+      // continue
+    }
+  }
+
+  // Strategy 3: Balanced-brace extraction
+  const firstBrace = trimmed.indexOf("{");
+  if (firstBrace !== -1) {
+    let depth = 0;
+    for (let i = firstBrace; i < trimmed.length; i++) {
+      if (trimmed[i] === "{") depth++;
+      else if (trimmed[i] === "}") depth--;
+      if (depth === 0) {
+        const candidate = trimmed.slice(firstBrace, i + 1);
+        try {
+          JSON.parse(candidate);
+          return candidate;
+        } catch {
+          // continue searching
+        }
+      }
+    }
+  }
+
+  return null;
 }
 
 // ── Core: Vision analysis for a single page ──────────────────────────────────
@@ -446,15 +464,24 @@ async function analyzePageWithVision(
     );
   }
 
-  const jsonMatch = textBlock.text.match(/\{[\s\S]*\}/);
-  if (!jsonMatch) {
+  const rawJson = extractJsonObject(textBlock.text);
+  if (!rawJson) {
     throw new Error(
       `No JSON object found in Claude response for page: ${page.pageType} (${page.path})`,
     );
   }
 
-  const parsed = JSON.parse(jsonMatch[0]) as VisionPageResult;
-  return visionResultToPerPageAnalysis(parsed, page);
+  const parsed = JSON.parse(rawJson);
+  const validated = PageVisionResponseSchema.safeParse(parsed);
+  if (!validated.success) {
+    console.warn(
+      `  [Warning] Vision response validation failed for ${page.pageType}: ${validated.error.message}`,
+    );
+    // Fall back to unvalidated data with best-effort cast
+    return visionResultToPerPageAnalysis(parsed, page);
+  }
+
+  return visionResultToPerPageAnalysis(validated.data, page);
 }
 
 // ── Core: HTML-only analysis for a single page ──────────────────────────────
@@ -511,7 +538,8 @@ function analyzePageHtmlOnly(
 async function synthesizeSiteAnalysis(
   client: Anthropic,
   perPageResults: PerPageAnalysis[],
-): Promise<Record<string, unknown>> {
+  outputDir?: string,
+): Promise<SiteSynthesisResponse | Record<string, unknown>> {
   // Build a JSON summary of all per-page analyses for the synthesis prompt
   const summaryPayload = perPageResults.map((result) => ({
     pageType: result.page.pageType,
@@ -531,11 +559,7 @@ async function synthesizeSiteAnalysis(
       tokenUsageHints: s.tokenUsageHints,
       confidence: s.confidence,
     })),
-    visualLanguage:
-      result.analysisSource === "vision"
-        ? (result as PerPageAnalysis & { visualLanguage?: unknown })
-            .visualLanguage ?? null
-        : null,
+    visualLanguage: result.visualLanguage ?? null,
   }));
 
   const response = await client.messages.create({
@@ -560,12 +584,28 @@ async function synthesizeSiteAnalysis(
     throw new Error("No text response from Claude for site synthesis");
   }
 
-  const jsonMatch = textBlock.text.match(/\{[\s\S]*\}/);
-  if (!jsonMatch) {
+  const rawJson = extractJsonObject(textBlock.text);
+  if (!rawJson) {
+    // Write raw response for debugging
+    if (outputDir) {
+      const debugPath = path.join(outputDir, "debug-synthesis-response.txt");
+      fs.writeFileSync(debugPath, textBlock.text, "utf8");
+      console.warn(`  [Debug] Raw synthesis response written to ${debugPath}`);
+    }
     throw new Error("No JSON object found in Claude synthesis response");
   }
 
-  return JSON.parse(jsonMatch[0]) as Record<string, unknown>;
+  const parsed = JSON.parse(rawJson);
+  const validated = SiteSynthesisResponseSchema.safeParse(parsed);
+  if (!validated.success) {
+    console.warn(
+      `  [Warning] Synthesis response validation failed: ${validated.error.message}`,
+    );
+    // Return unvalidated data as fallback
+    return parsed as Record<string, unknown>;
+  }
+
+  return validated.data;
 }
 
 // ── Main Export ──────────────────────────────────────────────────────────────
@@ -589,7 +629,8 @@ export async function analyzeMultiplePages(
   pages: DiscoveredPage[],
   htmlMap: Map<string, string>,
   screenshotMap: Map<string, string>,
-): Promise<{ perPage: PerPageAnalysis[]; synthesis: Record<string, unknown> }> {
+  outputDir?: string,
+): Promise<{ perPage: PerPageAnalysis[]; synthesis: SiteSynthesisResponse | Record<string, unknown> }> {
   const apiKey = process.env.ANTHROPIC_API_KEY;
   const client = apiKey ? new Anthropic({ apiKey }) : null;
 
@@ -665,10 +706,10 @@ export async function analyzeMultiplePages(
   }
 
   // Run site synthesis across all per-page results
-  let synthesis: Record<string, unknown> = {};
+  let synthesis: SiteSynthesisResponse | Record<string, unknown> = {};
   if (client && perPageResults.length > 0) {
     try {
-      synthesis = await synthesizeSiteAnalysis(client, perPageResults);
+      synthesis = await synthesizeSiteAnalysis(client, perPageResults, outputDir);
     } catch (err) {
       console.warn(`  [Warning] Site synthesis failed: ${err}`);
       synthesis = { error: String(err), perPageCount: perPageResults.length };
