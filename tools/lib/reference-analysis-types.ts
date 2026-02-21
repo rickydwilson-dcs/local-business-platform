@@ -85,3 +85,67 @@ export interface ReferenceAnalysis {
     };
   };
 }
+
+// ── Page Discovery Types ────────────────────────────────────────────────
+
+export type PageType =
+  | "home" | "about" | "services-list" | "service-detail"
+  | "blog-list" | "blog-post" | "contact" | "locations-list"
+  | "location-detail" | "reviews" | "projects" | "pricing" | "custom";
+
+export interface DiscoveredPage {
+  url: string;
+  path: string;
+  source: "sitemap" | "nav" | "probe";
+  pageType: PageType;
+  title?: string;
+  depth: number;
+}
+
+// ── Component Matching Types ────────────────────────────────────────────
+
+export interface ComponentMatch {
+  componentName: string;
+  importPath: string;
+  matchConfidence: "exact" | "close" | "partial";
+  adaptationNotes?: string;
+}
+
+// ── Page Blueprint Types ────────────────────────────────────────────────
+
+export interface PageSection {
+  order: number;
+  blueprintId: string;
+  isShared: boolean;
+  matchedComponent?: ComponentMatch;
+}
+
+export interface PageBlueprint {
+  pageType: PageType;
+  path: string;
+  title: string;
+  sections: PageSection[];
+  sharedSections: string[];
+  analysisSource: "vision" | "html-only" | "hybrid";
+  confidence: "high" | "medium" | "low";
+  routePattern: string;
+  isContentBacked: boolean;
+}
+
+// ── Site Analysis (v3) ──────────────────────────────────────────────────
+
+export interface SiteAnalysis {
+  analysisVersion: "3";
+  reference: {
+    url: string;
+    capturedAt: string;
+    pagesAnalysed: number;
+  };
+  discoveredPages: DiscoveredPage[];
+  pageBlueprints: PageBlueprint[];
+  visualLanguage: ReferenceAnalysis["visualLanguage"];
+  sectionBlueprints: SectionBlueprint[];
+  componentMatches: ComponentMatch[];
+  themeTokenRecommendations: ReferenceAnalysis["themeTokenRecommendations"];
+  registryRecommendation: ReferenceAnalysis["registryRecommendation"];
+}

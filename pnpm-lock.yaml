@@ -37,6 +37,9 @@ importers:
       '@google/generative-ai':
         specifier: ^0.24.1
         version: 0.24.1
+      '@playwright/test':
+        specifier: ^1.56.0
+        version: 1.56.0
       '@supabase/supabase-js':
         specifier: ^2.93.1
         version: 2.93.1
@@ -183,7 +186,7 @@ importers:
         version: 20.19.20
       '@vitest/coverage-v8':
         specifier: ^3.2.4
-        version: 3.2.4(vitest@3.2.4(@types/debug@4.1.12)(@types/node@20.19.20)(jiti@1.21.7)(jsdom@27.0.0)(tsx@4.20.6)(yaml@2.8.2))
+        version: 3.2.4(vitest@3.2.4(@types/debug@4.1.12)(@types/node@20.19.20)(jiti@1.21.7)(jsdom@27.0.0(postcss@8.5.6))(tsx@4.20.6)(yaml@2.8.2))
       ts-node:
         specifier: ^10.9.0
         version: 10.9.2(@types/node@20.19.20)(typescript@5.9.3)
@@ -8082,7 +8085,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@vitest/coverage-v8@3.2.4(vitest@3.2.4(@types/debug@4.1.12)(@types/node@20.19.20)(jiti@1.21.7)(jsdom@27.0.0)(tsx@4.20.6)(yaml@2.8.2))':
+  '@vitest/coverage-v8@3.2.4(vitest@3.2.4(@types/debug@4.1.12)(@types/node@20.19.20)(jiti@1.21.7)(jsdom@27.0.0(postcss@8.5.6))(tsx@4.20.6)(yaml@2.8.2))':
     dependencies:
       '@ampproject/remapping': 2.3.0
       '@bcoe/v8-coverage': 1.0.2
