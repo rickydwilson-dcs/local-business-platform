@@ -15,9 +15,11 @@
  *   --max-pages <n>      (optional) Max pages to discover, default: 10
  *   --dry-run            (optional) Analysis only, no file generation
  *   --skip-examples      (optional) Skip example page generation
+ *   --html-only          (optional) Allow running without API key (degraded mode)
  */
 
-import "dotenv/config";
+import dotenv from "dotenv";
+dotenv.config({ path: [".env.local", ".env"] });
 import * as fs from "fs";
 import * as path from "path";
 import type {
@@ -52,10 +54,11 @@ interface CliArgs {
   maxPages: number;
   dryRun: boolean;
   skipExamples: boolean;
+  htmlOnly: boolean;
 }
 
 function parseArgs(argv: string[]): CliArgs {
-  const args: Partial<CliArgs> = { maxPages: 10, dryRun: false, skipExamples: false };
+  const args: Partial<CliArgs> = { maxPages: 10, dryRun: false, skipExamples: false, htmlOnly: false };
 
   for (let i = 2; i < argv.length; i++) {
     const arg = argv[i];
@@ -83,6 +86,9 @@ function parseArgs(argv: string[]): CliArgs {
         break;
       case "--skip-examples":
         args.skipExamples = true;
+        break;
+      case "--html-only":
+        args.htmlOnly = true;
         break;
     }
   }
@@ -208,7 +214,12 @@ async function main() {
 
   // Preflight: API key check
   if (!process.env.ANTHROPIC_API_KEY) {
-    console.warn("⚠ ANTHROPIC_API_KEY not set — running in HTML-only mode");
+    if (args.htmlOnly) {
+      console.warn("⚠ ANTHROPIC_API_KEY not set — running in HTML-only mode (--html-only)");
+    } else {
+      console.error("❌ ANTHROPIC_API_KEY not set. Set it in .env.local or pass --html-only for degraded mode.");
+      process.exit(1);
+    }
   }
 
   console.log("\n╔══════════════════════════════════════════════════╗");
