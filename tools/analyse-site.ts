@@ -568,7 +568,7 @@ async function main() {
   // ── Step 14: Scaffold theme package ──
   stepStart = Date.now();
   console.log("[14/14] Scaffolding theme package...");
-  const themeDir = scaffoldThemePackage(siteAnalysis, themeName);
+  const themeDir = scaffoldThemePackage(siteAnalysis, themeName, outputDir);
   console.log(`  Theme package: ${themeDir}`);
   console.log(`  Done (${elapsed(stepStart)})\n`);
 

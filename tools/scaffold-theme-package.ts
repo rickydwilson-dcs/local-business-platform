@@ -172,17 +172,18 @@ function generateShowcaseRegistryTsx(
   // (skip those matched to core-components with "exact" or "close" confidence)
   const seenExports = new Set<string>();
   const importableBlueprints = analysis.sectionBlueprints.filter((bp) => {
-    // Skip duplicates
-    if (seenExports.has(bp.componentExportName)) return false;
-    seenExports.add(bp.componentExportName);
-
-    // Skip blueprints matched to core-components
+    // Skip blueprints matched to core-components first (before dedup)
     if (componentMatches) {
       const match = componentMatches.get(bp.id);
       if (match && (match.matchConfidence === "exact" || match.matchConfidence === "close")) {
         return false;
       }
     }
+
+    // Then skip duplicate export names
+    if (seenExports.has(bp.componentExportName)) return false;
+    seenExports.add(bp.componentExportName);
+
     return true;
   });
 
@@ -233,17 +234,17 @@ function generateComponentBarrel(
   lines.push(``);
 
   for (const bp of analysis.sectionBlueprints) {
-    // Skip duplicates
-    if (seenExports.has(bp.componentExportName)) continue;
-    seenExports.add(bp.componentExportName);
-
-    // Skip blueprints matched to core-components
+    // Skip blueprints matched to core-components first (before dedup)
     if (componentMatches) {
       const match = componentMatches.get(bp.id);
       if (match && (match.matchConfidence === "exact" || match.matchConfidence === "close")) {
         continue;
       }
     }
+
+    // Then skip duplicate export names
+    if (seenExports.has(bp.componentExportName)) continue;
+    seenExports.add(bp.componentExportName);
 
     lines.push(`export { ${bp.componentExportName} } from './${bp.componentFileName.replace(".tsx", "")}';`);
   }
@@ -498,7 +499,7 @@ function appendThemeName(name: string): void {
 // Main
 // ============================================================================
 
-export function scaffoldThemePackage(analysis: ReferenceAnalysis | SiteAnalysis, name: string): string {
+export function scaffoldThemePackage(analysis: ReferenceAnalysis | SiteAnalysis, name: string, outputDir?: string): string {
   const pascal = toPascalCase(name);
 
   // Version gate
@@ -553,6 +554,24 @@ export function scaffoldThemePackage(analysis: ReferenceAnalysis | SiteAnalysis,
   for (const [filePath, content] of files) {
     fs.writeFileSync(filePath, content, "utf8");
     console.log(`  ✓ ${path.relative(process.cwd(), filePath)}`);
+  }
+
+  // Copy generated component .tsx files from output directory to theme package
+  if (outputDir) {
+    const outputComponentsDir = path.join(outputDir, "components");
+    if (fs.existsSync(outputComponentsDir)) {
+      let copied = 0;
+      for (const file of fs.readdirSync(outputComponentsDir)) {
+        if (file.endsWith(".tsx")) {
+          fs.copyFileSync(
+            path.join(outputComponentsDir, file),
+            path.join(themeDir, "components", file),
+          );
+          copied++;
+        }
+      }
+      console.log(`  ✓ Copied ${copied} component files to theme package`);
+    }
   }
 
   // Update shared exports map in packages/themes/package.json
