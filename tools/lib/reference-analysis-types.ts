@@ -78,10 +78,28 @@ export interface ReferenceAnalysis {
       background: string;
       foreground: string;
       muted: string;
+      card?: string;
+      cardBorder?: string;
+      secondaryForeground?: string;
+      mutedForeground?: string;
+      subtle?: string;
+      inverse?: string;
     };
     typography: {
       fontFamilySans: string[];
       fontFamilyHeading: string[];
+      scale?: Partial<Record<"hero"|"h1"|"h2"|"h3"|"h4"|"body", {
+        size?: string;
+        lineHeight?: string;
+        letterSpacing?: string;
+        weight?: number;
+      }>>;
+    };
+    components?: {
+      button?: { borderRadius?: string; paddingX?: string; paddingY?: string; fontWeight?: number };
+      card?: { borderRadius?: string; padding?: string; shadow?: "none"|"sm"|"md"|"lg" };
+      navigation?: { height?: string; appearance?: "dark"|"light" };
+      section?: { paddingY?: string };
     };
   };
 }

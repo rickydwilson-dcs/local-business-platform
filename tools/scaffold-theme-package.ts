@@ -75,6 +75,78 @@ function generateIndexTs(name: string, analysis: ReferenceAnalysis | SiteAnalysi
   const camel = toCamelCase(name);
   const tokens = analysis.themeTokenRecommendations;
 
+  // Build extended surface tokens
+  const surfaceEntries: string[] = [
+    `      background: "${tokens.surface.background}",`,
+    `      foreground: "${tokens.surface.foreground}",`,
+    `      muted: "${tokens.surface.muted}",`,
+  ];
+  if (tokens.surface.card) surfaceEntries.push(`      card: "${tokens.surface.card}",`);
+  if (tokens.surface.cardBorder) surfaceEntries.push(`      cardBorder: "${tokens.surface.cardBorder}",`);
+  if (tokens.surface.secondaryForeground) surfaceEntries.push(`      secondaryForeground: "${tokens.surface.secondaryForeground}",`);
+  if (tokens.surface.mutedForeground) surfaceEntries.push(`      mutedForeground: "${tokens.surface.mutedForeground}",`);
+  if (tokens.surface.subtle) surfaceEntries.push(`      subtle: "${tokens.surface.subtle}",`);
+  if (tokens.surface.inverse) surfaceEntries.push(`      inverse: "${tokens.surface.inverse}",`);
+
+  // Build typography scale if available
+  let scaleBlock = "";
+  if (tokens.typography.scale) {
+    const scaleEntries: string[] = [];
+    for (const [key, entry] of Object.entries(tokens.typography.scale)) {
+      if (!entry) continue;
+      const fields: string[] = [];
+      if (entry.size) fields.push(`size: "${entry.size}"`);
+      if (entry.lineHeight) fields.push(`lineHeight: "${entry.lineHeight}"`);
+      if (entry.letterSpacing) fields.push(`letterSpacing: "${entry.letterSpacing}"`);
+      if (entry.weight) fields.push(`weight: ${entry.weight}`);
+      if (fields.length > 0) {
+        scaleEntries.push(`      ${key}: { ${fields.join(", ")} },`);
+      }
+    }
+    if (scaleEntries.length > 0) {
+      scaleBlock = `\n    scale: {\n${scaleEntries.join("\n")}\n    },`;
+    }
+  }
+
+  // Build components block if available
+  let componentsBlock = "";
+  if (tokens.components) {
+    const compParts: string[] = [];
+    if (tokens.components.button) {
+      const b = tokens.components.button;
+      const fields: string[] = [];
+      if (b.borderRadius) fields.push(`borderRadius: "${b.borderRadius}"`);
+      if (b.paddingX) fields.push(`paddingX: "${b.paddingX}"`);
+      if (b.paddingY) fields.push(`paddingY: "${b.paddingY}"`);
+      if (b.fontWeight) fields.push(`fontWeight: ${b.fontWeight}`);
+      if (fields.length > 0) compParts.push(`    button: { ${fields.join(", ")} },`);
+    }
+    if (tokens.components.card) {
+      const c = tokens.components.card;
+      const fields: string[] = [];
+      if (c.borderRadius) fields.push(`borderRadius: "${c.borderRadius}"`);
+      if (c.padding) fields.push(`padding: "${c.padding}"`);
+      if (c.shadow) fields.push(`shadow: "${c.shadow}"`);
+      if (fields.length > 0) compParts.push(`    card: { ${fields.join(", ")} },`);
+    }
+    if (tokens.components.navigation) {
+      const n = tokens.components.navigation;
+      const fields: string[] = [];
+      if (n.height) fields.push(`height: "${n.height}"`);
+      if (n.appearance) fields.push(`appearance: "${n.appearance}"`);
+      if (fields.length > 0) compParts.push(`    navigation: { ${fields.join(", ")} },`);
+    }
+    if (tokens.components.section) {
+      const s = tokens.components.section;
+      const fields: string[] = [];
+      if (s.paddingY) fields.push(`paddingY: "${s.paddingY}"`);
+      if (fields.length > 0) compParts.push(`    section: { ${fields.join(", ")} },`);
+    }
+    if (compParts.length > 0) {
+      componentsBlock = `\n  components: {\n${compParts.join("\n")}\n  },`;
+    }
+  }
+
   return `/**
  * ${pascal} Theme
  *
@@ -94,17 +166,15 @@ export const ${camel}DefaultConfig: DeepPartialThemeConfig = {
       accent: "${tokens.brand.accent}",
     },
     surface: {
-      background: "${tokens.surface.background}",
-      foreground: "${tokens.surface.foreground}",
-      muted: "${tokens.surface.muted}",
+${surfaceEntries.join("\n")}
     },
   },
   typography: {
     fontFamily: {
       sans: ${JSON.stringify(tokens.typography.fontFamilySans)},
       heading: ${JSON.stringify(tokens.typography.fontFamilyHeading)},
-    },
-  },
+    },${scaleBlock}
+  },${componentsBlock}
 };
 
 registerTheme({ name: "${name}", label: "${pascal}", config: ${camel}DefaultConfig });

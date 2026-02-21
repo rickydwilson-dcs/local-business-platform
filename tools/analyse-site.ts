@@ -29,6 +29,13 @@ import type {
   DiscoveredPage,
 } from "./lib/reference-analysis-types";
 import {
+  mapStylesToTokens,
+  enhanceSynthesisWithComputedValues,
+  computedTokensToRecommendations,
+  type MappedTokens,
+} from "./lib/computed-style-token-mapper";
+import { colorDistanceCIE76 } from "../packages/intake-system/src/theme-extraction/color-utils";
+import {
   SiteSynthesisResponseSchema,
   type SiteSynthesisResponse,
 } from "./lib/analysis-schemas";
@@ -363,14 +370,50 @@ async function main() {
     scrapedStyles.colors.primary &&
     scrapedStyles.colors.primary !== "#000000";
 
+  // Map computed styles to tokens
+  let computedTokens: MappedTokens | null = null;
+  if (computedStyles.length > 0) {
+    try {
+      computedTokens = mapStylesToTokens({ pages: computedStyles });
+      console.log(`  Computed tokens: ${Object.keys(computedTokens.provenance).length} mapped`);
+    } catch (err) {
+      console.warn(`  [Warning] Computed style mapping failed: ${err}`);
+    }
+  }
+
   // Determine token source using fallback chain:
-  // 1. Synthesis tokens (Zod validated) → 2. Homepage vision palette → 3. CSS-scraped → 4. Defaults
-  let tokenSource: "synthesis" | "vision" | "css" | "defaults";
+  // 1. Synthesis+computed → 2. Synthesis → 3. Computed → 4. Vision palette → 5. CSS-scraped → 6. Defaults
+  let tokenSource: "synthesis+computed" | "synthesis" | "computed" | "vision" | "css" | "defaults";
   let themeTokens: SiteAnalysis["themeTokenRecommendations"];
 
-  if (validatedSynthesis) {
+  if (validatedSynthesis && computedTokens) {
+    tokenSource = "synthesis+computed";
+    themeTokens = enhanceSynthesisWithComputedValues(
+      validatedSynthesis.themeTokenRecommendations,
+      computedTokens,
+    );
+    // Log enhancement details
+    const origTokens = validatedSynthesis.themeTokenRecommendations;
+    for (const [key, orig] of Object.entries({
+      "surface.background": origTokens.surface.background,
+      "surface.foreground": origTokens.surface.foreground,
+      "brand.primary": origTokens.brand.primary,
+      "brand.secondary": origTokens.brand.secondary,
+    })) {
+      const enhanced = key.startsWith("surface.")
+        ? themeTokens.surface[key.split(".")[1] as keyof typeof themeTokens.surface]
+        : themeTokens.brand[key.split(".")[1] as keyof typeof themeTokens.brand];
+      if (orig !== enhanced) {
+        const delta = colorDistanceCIE76(orig, enhanced).toFixed(1);
+        console.log(`  ✓ ${key}: ${orig} → ${enhanced} (ΔE=${delta})`);
+      }
+    }
+  } else if (validatedSynthesis) {
     tokenSource = "synthesis";
     themeTokens = validatedSynthesis.themeTokenRecommendations;
+  } else if (computedTokens) {
+    tokenSource = "computed";
+    themeTokens = computedTokensToRecommendations(computedTokens);
   } else if (hasVisionPalette && visionPalette) {
     tokenSource = "vision";
     themeTokens = {
@@ -513,6 +556,7 @@ async function main() {
     componentMatches,
     themeTokenRecommendations: themeTokens,
     registryRecommendation,
+    ...(computedStyles.length > 0 ? { computedStyles: { pages: computedStyles } } : {}),
   };
 
   // Write JSON
