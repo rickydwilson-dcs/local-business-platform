@@ -148,4 +148,52 @@ export interface SiteAnalysis {
   componentMatches: ComponentMatch[];
   themeTokenRecommendations: ReferenceAnalysis["themeTokenRecommendations"];
   registryRecommendation: ReferenceAnalysis["registryRecommendation"];
+  computedStyles?: ComputedStylesResult;
+}
+
+// ── Computed Style Extraction Types ───────────────────────────────────────
+
+export type ElementRole =
+  | "page-background" | "header" | "nav-link"
+  | "hero-section" | "hero-heading" | "hero-subheading"
+  | "primary-button" | "secondary-button"
+  | "heading-h1" | "heading-h2" | "heading-h3" | "heading-h4"
+  | "body-text" | "card" | "section" | "footer" | "link";
+
+export interface ElementComputedStyles {
+  selector: string;
+  role: ElementRole;
+  found: boolean;
+  styles: {
+    backgroundColor?: string;
+    color?: string;
+    borderColor?: string;
+    fontFamily?: string;
+    fontSize?: string;
+    fontWeight?: string;
+    lineHeight?: string;
+    letterSpacing?: string;
+    paddingTop?: string;
+    paddingRight?: string;
+    paddingBottom?: string;
+    paddingLeft?: string;
+    marginTop?: string;
+    marginBottom?: string;
+    gap?: string;
+    borderRadius?: string;
+    boxShadow?: string;
+    height?: string;
+  };
+}
+
+export interface PageComputedStyles {
+  pageType: string;
+  url: string;
+  elements: ElementComputedStyles[];
+  allColours: string[];
+  extractMs: number;
+}
+
+export interface ComputedStylesResult {
+  pages: PageComputedStyles[];
 }

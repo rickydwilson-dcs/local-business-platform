@@ -280,8 +280,9 @@ async function main() {
   // ── Step 4: Capture screenshots ──
   stepStart = Date.now();
   console.log("[4/14] Capturing screenshots via Playwright...");
-  const screenshotMap = await captureScreenshots(discoveredPages, outputDir);
+  const { screenshots: screenshotMap, computedStyles } = await captureScreenshots(discoveredPages, outputDir);
   console.log(`  Captured ${screenshotMap.size} screenshots`);
+  console.log(`  Extracted computed styles from ${computedStyles.length} pages`);
   console.log(`  Done (${elapsed(stepStart)})\n`);
 
   // ── Step 5: HTML structural analysis ──

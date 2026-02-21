@@ -10,7 +10,8 @@ import { chromium, type Browser } from "@playwright/test";
 import * as fs from "fs";
 import * as path from "path";
 
-import type { DiscoveredPage } from "./reference-analysis-types";
+import type { DiscoveredPage, PageComputedStyles } from "./reference-analysis-types";
+import { extractComputedStyles } from "./computed-style-extractor";
 
 const VIEWPORT_WIDTH = 1440;
 const VIEWPORT_HEIGHT = 900;
@@ -27,12 +28,17 @@ const NAVIGATION_TIMEOUT_MS = 15_000;
  *
  * @param pages - Array of discovered pages to screenshot
  * @param outputDir - Root output directory; screenshots go into a `screenshots/` subdirectory
- * @returns Map of pageType to the absolute path of the saved screenshot
+ * @returns Screenshots map and computed styles from each page
  */
+export interface ScreenshotResult {
+  screenshots: Map<string, string>;
+  computedStyles: PageComputedStyles[];
+}
+
 export async function captureScreenshots(
   pages: DiscoveredPage[],
   outputDir: string,
-): Promise<Map<string, string>> {
+): Promise<ScreenshotResult> {
   const screenshotsDir = path.join(outputDir, "screenshots");
 
   if (!fs.existsSync(screenshotsDir)) {
@@ -40,6 +46,7 @@ export async function captureScreenshots(
   }
 
   const results = new Map<string, string>();
+  const computedStyles: PageComputedStyles[] = [];
   let browser: Browser | null = null;
 
   try {
@@ -72,6 +79,14 @@ export async function captureScreenshots(
         });
 
         results.set(page.pageType, screenshotPath);
+
+        try {
+          const styles = await extractComputedStyles(browserPage, page.pageType, page.url);
+          computedStyles.push(styles);
+        } catch (err) {
+          const msg = err instanceof Error ? err.message : String(err);
+          console.warn(`  [computed-styles] Extraction failed for ${page.pageType}: ${msg}`);
+        }
       } catch (error) {
         const message =
           error instanceof Error ? error.message : String(error);
@@ -90,5 +105,5 @@ export async function captureScreenshots(
     }
   }
 
-  return results;
+  return { screenshots: results, computedStyles };
 }
