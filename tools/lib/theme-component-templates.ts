@@ -115,11 +115,27 @@ ${jsxBody}
 }
 
 /**
- * Generate Client Component shell ("use client" + useState import).
+ * Detect which React hooks are used in a JSX body.
+ * Always includes useState. Returns a deduplicated, sorted array.
+ */
+export function detectReactImports(jsxBody: string): string[] {
+  const hooks = new Set<string>(["useState"]);
+  const candidates = ["useEffect", "useRef", "useCallback", "useMemo"];
+  for (const hook of candidates) {
+    if (new RegExp(`\\b${hook}\\b`).test(jsxBody)) {
+      hooks.add(hook);
+    }
+  }
+  return [...hooks].sort();
+}
+
+/**
+ * Generate Client Component shell ("use client" + dynamic React imports).
  */
 export function clientComponentShell(blueprint: SectionBlueprint, jsxBody: string): string {
   const propsInterface = generatePropsInterface(blueprint);
   const interfaceName = `${blueprint.componentExportName}Props`;
+  const reactImports = detectReactImports(jsxBody).join(", ");
 
   return `"use client";
 
@@ -131,7 +147,7 @@ export function clientComponentShell(blueprint: SectionBlueprint, jsxBody: strin
  * Category: ${blueprint.category}
  */
 
-import { useState } from "react";
+import { ${reactImports} } from "react";
 
 ${propsInterface}
 
@@ -206,5 +222,20 @@ RULES:
 4. Use responsive breakpoints: mobile-first with md: and lg: prefixes.
 5. The component receives "props" as the parameter name.
 6. Output ONLY the function body starting with "  return (" — no imports, no interface, no function declaration.
-7. Keep it clean, semantic, and accessible.`;
+7. Keep it clean, semantic, and accessible.
+
+ANIMATION PRIMITIVES (use these when the layout pattern suggests animation):
+- Scroll-triggered reveals: wrap section content in <RevealOnScroll variant="fade-up">
+  Import: import { RevealOnScroll } from '@platform/core-components/components/animation';
+- Image carousels/sliders: use <Carousel autoPlay showDots loop>
+  Import: import { Carousel } from '@platform/core-components/components/animation';
+- Parallax backgrounds: use <ParallaxSection backgroundImage={props.backgroundImage} speed={0.3}>
+  Import: import { ParallaxSection } from '@platform/core-components/components/animation';
+- CSS animation classes: animate-fade-in-up, animate-slide-in-left, animate-slide-in-right, animate-scale-up
+
+ANIMATION RULES:
+8. Do NOT animate every section. Use RevealOnScroll on 2-3 content sections max.
+9. Carousels are for hero images, testimonials, and blog post grids ONLY when the layout says "slider" or "carousel".
+10. ParallaxSection is for hero backgrounds or full-bleed image sections only.
+11. Always respect prefers-reduced-motion (the primitives handle this internally).`;
 }

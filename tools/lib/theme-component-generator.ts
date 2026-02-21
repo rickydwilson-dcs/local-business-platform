@@ -135,7 +135,7 @@ function validateAndFixTokenClasses(content: string): { content: string; violati
 // "use client" directive detection
 // ============================================================================
 
-const CLIENT_PATTERNS = /\b(useState|useEffect|useRef|useCallback|useMemo|onClick|onChange|onSubmit|onKeyDown|onMouseEnter|onFocus|onBlur)\b|<form\b/;
+const CLIENT_PATTERNS = /\b(useState|useEffect|useRef|useCallback|useMemo|onClick|onChange|onSubmit|onKeyDown|onMouseEnter|onFocus|onBlur|RevealOnScroll|Carousel|ParallaxSection|useScrollParallax|IntersectionObserver)\b|<form\b/;
 
 /**
  * Determine if a component needs "use client" directive.
