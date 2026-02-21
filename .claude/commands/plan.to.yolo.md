@@ -30,10 +30,13 @@ mkdir -p output/sessions/YYYY-MM-DD_topic-slug
 Produce `output/sessions/YYYY-MM-DD_topic-slug/yolo-brief.md` by expanding the synthesis into an executable implementation brief. The brief must:
 
 **3a. Open with standard headers:**
+
+Derive the feature branch name from the topic slug: `feature/topic-slug`
+
 ```markdown
 # YOLO Implementation Brief: [Title from synthesis]
 
-**Branch:** develop
+**Branch:** feature/topic-slug (created from develop)
 **Session spec:** output/sessions/YYYY-MM-DD_topic-slug/yolo-brief.md
 **Mode:** Autonomous execution — implement all phases, verify after each, STOP on error
 
@@ -52,6 +55,7 @@ The synthesis was reviewed and approved. Implement it exactly as specified below
 
 ```bash
 git checkout develop && git pull
+git checkout -b feature/topic-slug   # create feature branch from develop
 pnpm type-check   # must be clean before starting
 ```
 ```
@@ -109,12 +113,12 @@ Confirm this was done in the final report.
 
 - STOP on any failed verification gate — do not continue to next phase
 - Read every file before editing it
-- Never push — leave all changes on `develop`
+- Never push — leave all changes on the feature branch
 - Parallel reads and independent file edits should be done concurrently using Task agents
 - Minimal changes only — implement what the plan says, nothing more
 ```
 
-## Step 4: Output the Terminal Command
+## Step 4: Output the Terminal Command and Next Steps
 
 Print this block verbatim for the user to copy-paste:
 
@@ -128,7 +132,23 @@ claude --dangerously-skip-permissions --model claude-opus-4-6 -p "Read output/se
 
 ---
 
-Tell the user:
-- Brief saved to: `output/sessions/YYYY-MM-DD_topic-slug/yolo-brief.md`
-- The command above launches an Opus session in YOLO mode — it will implement all phases autonomously
-- Review the brief before running if you want to make any manual adjustments first
+Tell the user clearly, using the exact format below:
+
+```
+Brief saved to: output/sessions/YYYY-MM-DD_topic-slug/yolo-brief.md
+
+The command above launches an Opus session in YOLO mode.
+It will create a feature branch `feature/topic-slug` from develop and implement all phases autonomously.
+
+Review the brief before running if you want to make any manual adjustments first.
+
+## After the YOLO session completes
+
+All work will be on the `feature/topic-slug` branch — nothing has been pushed.
+Back in VS Code / your IDE, you need to:
+
+  1. git checkout feature/topic-slug   (if not already on it)
+  2. Review the changes: git log --oneline develop..HEAD
+  3. Merge into develop: git checkout develop && git merge feature/topic-slug
+  4. Then run /deploy.changes to push develop → staging → main
+```

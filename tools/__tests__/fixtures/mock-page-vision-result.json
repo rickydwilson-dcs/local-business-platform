@@ -1,0 +1,57 @@
+{
+  "pageType": "home",
+  "path": "/",
+  "title": "Home Page",
+  "sections": [
+    {
+      "order": 0,
+      "blueprintId": "hero-full-bleed",
+      "name": "HeroFullBleed",
+      "category": "Hero",
+      "purpose": "Primary hero with background image",
+      "layoutPattern": "full-bleed with overlay",
+      "contentSlots": ["heading", "subheading", "ctaButtons", "backgroundImage"],
+      "interactionNeeds": "none",
+      "tokenUsageHints": ["bg-brand-primary", "text-surface-foreground"],
+      "confidence": "high",
+      "isShared": false
+    },
+    {
+      "order": 1,
+      "blueprintId": "services-grid",
+      "name": "ServicesGrid",
+      "category": "Cards",
+      "purpose": "Display service cards in a responsive grid",
+      "layoutPattern": "3-col grid",
+      "contentSlots": ["serviceCards", "sectionHeading"],
+      "interactionNeeds": "minimal",
+      "tokenUsageHints": ["bg-surface-background", "text-brand-primary"],
+      "confidence": "high",
+      "isShared": false
+    }
+  ],
+  "visualLanguage": {
+    "palette": {
+      "background": "#FFFFFF",
+      "foreground": "#1A1A2E",
+      "primary": "#005A9E",
+      "secondary": "#2D8CFF",
+      "accent": "#FF6B35",
+      "additional": ["#F0F4F8"],
+      "confidence": "high"
+    },
+    "typography": {
+      "headingWeight": "bold",
+      "bodyWeight": "normal",
+      "headingStyle": "sans",
+      "usesInlineColourHighlights": false
+    },
+    "heroPattern": {
+      "type": "dark-full-bleed",
+      "hasBackgroundImage": true,
+      "headerDark": true
+    },
+    "spacingDensity": "standard"
+  },
+  "confidence": "high"
+}

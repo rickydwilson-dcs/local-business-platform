@@ -78,10 +78,140 @@ export interface ReferenceAnalysis {
       background: string;
       foreground: string;
       muted: string;
+      card?: string;
+      cardBorder?: string;
+      secondaryForeground?: string;
+      mutedForeground?: string;
+      subtle?: string;
+      inverse?: string;
     };
     typography: {
       fontFamilySans: string[];
       fontFamilyHeading: string[];
+      scale?: Partial<Record<"hero"|"h1"|"h2"|"h3"|"h4"|"body", {
+        size?: string;
+        lineHeight?: string;
+        letterSpacing?: string;
+        weight?: number;
+      }>>;
+    };
+    components?: {
+      button?: { borderRadius?: string; paddingX?: string; paddingY?: string; fontWeight?: number };
+      card?: { borderRadius?: string; padding?: string; shadow?: "none"|"sm"|"md"|"lg" };
+      navigation?: { height?: string; appearance?: "dark"|"light" };
+      section?: { paddingY?: string };
     };
   };
+}
+
+// ── Page Discovery Types ────────────────────────────────────────────────
+
+export type PageType =
+  | "home" | "about" | "services-list" | "service-detail"
+  | "blog-list" | "blog-post" | "contact" | "locations-list"
+  | "location-detail" | "reviews" | "projects" | "pricing" | "custom";
+
+export interface DiscoveredPage {
+  url: string;
+  path: string;
+  source: "sitemap" | "nav" | "probe";
+  pageType: PageType;
+  title?: string;
+  depth: number;
+}
+
+// ── Component Matching Types ────────────────────────────────────────────
+
+export interface ComponentMatch {
+  componentName: string;
+  importPath: string;
+  matchConfidence: "exact" | "close" | "partial";
+  adaptationNotes?: string;
+}
+
+// ── Page Blueprint Types ────────────────────────────────────────────────
+
+export interface PageSection {
+  order: number;
+  blueprintId: string;
+  isShared: boolean;
+  matchedComponent?: ComponentMatch;
+}
+
+export interface PageBlueprint {
+  pageType: PageType;
+  path: string;
+  title: string;
+  sections: PageSection[];
+  sharedSections: string[];
+  analysisSource: "vision" | "html-only" | "hybrid";
+  confidence: "high" | "medium" | "low";
+  routePattern: string;
+  isContentBacked: boolean;
+}
+
+// ── Site Analysis (v3) ──────────────────────────────────────────────────
+
+export interface SiteAnalysis {
+  analysisVersion: "3";
+  reference: {
+    url: string;
+    capturedAt: string;
+    pagesAnalysed: number;
+  };
+  discoveredPages: DiscoveredPage[];
+  pageBlueprints: PageBlueprint[];
+  visualLanguage: ReferenceAnalysis["visualLanguage"];
+  sectionBlueprints: SectionBlueprint[];
+  componentMatches: ComponentMatch[];
+  themeTokenRecommendations: ReferenceAnalysis["themeTokenRecommendations"];
+  registryRecommendation: ReferenceAnalysis["registryRecommendation"];
+  computedStyles?: ComputedStylesResult;
+}
+
+// ── Computed Style Extraction Types ───────────────────────────────────────
+
+export type ElementRole =
+  | "page-background" | "header" | "nav-link"
+  | "hero-section" | "hero-heading" | "hero-subheading"
+  | "primary-button" | "secondary-button"
+  | "heading-h1" | "heading-h2" | "heading-h3" | "heading-h4"
+  | "body-text" | "card" | "section" | "footer" | "link";
+
+export interface ElementComputedStyles {
+  selector: string;
+  role: ElementRole;
+  found: boolean;
+  styles: {
+    backgroundColor?: string;
+    color?: string;
+    borderColor?: string;
+    fontFamily?: string;
+    fontSize?: string;
+    fontWeight?: string;
+    lineHeight?: string;
+    letterSpacing?: string;
+    paddingTop?: string;
+    paddingRight?: string;
+    paddingBottom?: string;
+    paddingLeft?: string;
+    marginTop?: string;
+    marginBottom?: string;
+    gap?: string;
+    borderRadius?: string;
+    boxShadow?: string;
+    height?: string;
+  };
+}
+
+export interface PageComputedStyles {
+  pageType: string;
+  url: string;
+  elements: ElementComputedStyles[];
+  allColours: string[];
+  extractMs: number;
+}
+
+export interface ComputedStylesResult {
+  pages: PageComputedStyles[];
 }

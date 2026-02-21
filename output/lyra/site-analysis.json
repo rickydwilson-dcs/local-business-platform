@@ -1,0 +1,1411 @@
+{
+  "analysisVersion": "3",
+  "reference": {
+    "url": "https://colorcode.events/",
+    "capturedAt": "2026-02-21T18:34:48.273Z",
+    "pagesAnalysed": 10
+  },
+  "discoveredPages": [
+    {
+      "url": "https://colorcode.events",
+      "path": "/",
+      "source": "sitemap",
+      "pageType": "home",
+      "depth": 0
+    },
+    {
+      "url": "https://colorcode.events/about",
+      "path": "/about",
+      "source": "sitemap",
+      "pageType": "about",
+      "depth": 1
+    },
+    {
+      "url": "https://colorcode.events/attendee-registration",
+      "path": "/attendee-registration",
+      "source": "sitemap",
+      "pageType": "custom",
+      "depth": 1
+    },
+    {
+      "url": "https://colorcode.events/blog",
+      "path": "/blog",
+      "source": "sitemap",
+      "pageType": "blog-list",
+      "depth": 1
+    },
+    {
+      "url": "https://colorcode.events/buffalo-2025",
+      "path": "/buffalo-2025",
+      "source": "sitemap",
+      "pageType": "custom",
+      "depth": 1
+    },
+    {
+      "url": "https://colorcode.events/privacy-policy",
+      "path": "/privacy-policy",
+      "source": "sitemap",
+      "pageType": "custom",
+      "depth": 1
+    },
+    {
+      "url": "https://colorcode.events/tickets-checkout",
+      "path": "/tickets-checkout",
+      "source": "sitemap",
+      "pageType": "custom",
+      "depth": 1
+    },
+    {
+      "url": "https://colorcode.events/tickets-order",
+      "path": "/tickets-order",
+      "source": "sitemap",
+      "pageType": "custom",
+      "depth": 1
+    },
+    {
+      "url": "https://colorcode.events/blog/announcing-the-colorcode-art-battle",
+      "path": "/blog/announcing-the-colorcode-art-battle",
+      "source": "sitemap",
+      "pageType": "blog-post",
+      "depth": 2
+    },
+    {
+      "url": "https://colorcode.events/blog/the-journey-to-our-first-colorcode-buffalo",
+      "path": "/blog/the-journey-to-our-first-colorcode-buffalo",
+      "source": "sitemap",
+      "pageType": "blog-post",
+      "depth": 2
+    }
+  ],
+  "pageBlueprints": [
+    {
+      "pageType": "home",
+      "path": "/",
+      "title": "ColorCode Buffalo — A Fresh Digital Conference for Cool People Doing Cool Things",
+      "sections": [
+        {
+          "order": 1,
+          "blueprintId": "navigation-top-bar",
+          "isShared": true
+        },
+        {
+          "order": 2,
+          "blueprintId": "hero-full-bleed-text",
+          "isShared": false
+        },
+        {
+          "order": 3,
+          "blueprintId": "hero-event-details-split",
+          "isShared": false
+        },
+        {
+          "order": 4,
+          "blueprintId": "cta-call-for-speakers-yellow",
+          "isShared": false
+        },
+        {
+          "order": 5,
+          "blueprintId": "cta-call-for-sponsors-blue",
+          "isShared": false
+        },
+        {
+          "order": 6,
+          "blueprintId": "cta-call-for-volunteers-green",
+          "isShared": false
+        },
+        {
+          "order": 7,
+          "blueprintId": "blog-cards-grid",
+          "isShared": false
+        },
+        {
+          "order": 8,
+          "blueprintId": "content-about-colorcode-events",
+          "isShared": false
+        },
+        {
+          "order": 9,
+          "blueprintId": "social-proof-photo-gallery",
+          "isShared": false
+        },
+        {
+          "order": 10,
+          "blueprintId": "cta-newsletter-signup",
+          "isShared": true
+        },
+        {
+          "order": 11,
+          "blueprintId": "footer-multi-column-links",
+          "isShared": true
+        }
+      ],
+      "sharedSections": [
+        "navigation-top-bar",
+        "cta-newsletter-signup",
+        "footer-multi-column-links"
+      ],
+      "analysisSource": "vision",
+      "confidence": "high",
+      "routePattern": "/",
+      "isContentBacked": false
+    },
+    {
+      "pageType": "about",
+      "path": "/about",
+      "title": "About — ColorCode Events",
+      "sections": [
+        {
+          "order": 1,
+          "blueprintId": "navigation-top-bar",
+          "isShared": true
+        },
+        {
+          "order": 2,
+          "blueprintId": "hero-page-title-banner",
+          "isShared": false
+        },
+        {
+          "order": 3,
+          "blueprintId": "content-origin-story",
+          "isShared": false
+        },
+        {
+          "order": 4,
+          "blueprintId": "cards-team-member-green",
+          "isShared": false
+        },
+        {
+          "order": 5,
+          "blueprintId": "cards-team-member-orange",
+          "isShared": false
+        },
+        {
+          "order": 6,
+          "blueprintId": "cards-team-member-blue",
+          "isShared": false
+        },
+        {
+          "order": 7,
+          "blueprintId": "cta-newsletter-signup",
+          "isShared": true
+        },
+        {
+          "order": 8,
+          "blueprintId": "footer-site-links",
+          "isShared": true
+        }
+      ],
+      "sharedSections": [
+        "navigation-top-bar",
+        "cta-newsletter-signup",
+        "footer-site-links"
+      ],
+      "analysisSource": "vision",
+      "confidence": "high",
+      "routePattern": "/about",
+      "isContentBacked": false
+    },
+    {
+      "pageType": "blog-list",
+      "path": "/blog",
+      "title": "Blog — ColorCode Events",
+      "sections": [
+        {
+          "order": 1,
+          "blueprintId": "navigation-top-bar",
+          "isShared": true
+        },
+        {
+          "order": 2,
+          "blueprintId": "hero-page-title-banner",
+          "isShared": false
+        },
+        {
+          "order": 3,
+          "blueprintId": "blog-cards-two-column-grid",
+          "isShared": false
+        },
+        {
+          "order": 4,
+          "blueprintId": "cta-newsletter-inline-form",
+          "isShared": false
+        },
+        {
+          "order": 5,
+          "blueprintId": "footer-multi-column-links",
+          "isShared": true
+        }
+      ],
+      "sharedSections": [
+        "navigation-top-bar",
+        "footer-multi-column-links"
+      ],
+      "analysisSource": "vision",
+      "confidence": "high",
+      "routePattern": "/blog",
+      "isContentBacked": false
+    },
+    {
+      "pageType": "custom",
+      "path": "/attendee-registration",
+      "title": "Attendee Registration",
+      "sections": [
+        {
+          "order": 1,
+          "blueprintId": "navigation-top-bar",
+          "isShared": true
+        },
+        {
+          "order": 2,
+          "blueprintId": "custom-error-message-centered",
+          "isShared": false
+        },
+        {
+          "order": 3,
+          "blueprintId": "cta-newsletter-signup",
+          "isShared": true
+        },
+        {
+          "order": 4,
+          "blueprintId": "footer-multi-column-links",
+          "isShared": true
+        }
+      ],
+      "sharedSections": [
+        "navigation-top-bar",
+        "cta-newsletter-signup",
+        "footer-multi-column-links"
+      ],
+      "analysisSource": "vision",
+      "confidence": "high",
+      "routePattern": "/attendee-registration",
+      "isContentBacked": false
+    },
+    {
+      "pageType": "custom",
+      "path": "/buffalo-2025",
+      "title": "Buffalo 2025",
+      "sections": [
+        {
+          "order": 1,
+          "blueprintId": "navigation-top-bar",
+          "isShared": true
+        },
+        {
+          "order": 2,
+          "blueprintId": "custom-error-card-centered",
+          "isShared": false
+        },
+        {
+          "order": 3,
+          "blueprintId": "cta-newsletter-banner",
+          "isShared": true
+        },
+        {
+          "order": 4,
+          "blueprintId": "footer-multi-column",
+          "isShared": true
+        }
+      ],
+      "sharedSections": [
+        "navigation-top-bar",
+        "cta-newsletter-banner",
+        "footer-multi-column"
+      ],
+      "analysisSource": "vision",
+      "confidence": "medium",
+      "routePattern": "/buffalo-2025",
+      "isContentBacked": false
+    },
+    {
+      "pageType": "custom",
+      "path": "/privacy-policy",
+      "title": "Privacy Policy",
+      "sections": [
+        {
+          "order": 1,
+          "blueprintId": "navigation-top-bar",
+          "isShared": true
+        },
+        {
+          "order": 2,
+          "blueprintId": "content-error-card-centered",
+          "isShared": false
+        },
+        {
+          "order": 3,
+          "blueprintId": "cta-newsletter-form-banner",
+          "isShared": true
+        },
+        {
+          "order": 4,
+          "blueprintId": "footer-multi-column-links",
+          "isShared": true
+        }
+      ],
+      "sharedSections": [
+        "navigation-top-bar",
+        "cta-newsletter-form-banner",
+        "footer-multi-column-links"
+      ],
+      "analysisSource": "vision",
+      "confidence": "high",
+      "routePattern": "/privacy-policy",
+      "isContentBacked": false
+    },
+    {
+      "pageType": "custom",
+      "path": "/tickets-checkout",
+      "title": "Checkout",
+      "sections": [
+        {
+          "order": 1,
+          "blueprintId": "hero",
+          "isShared": false
+        },
+        {
+          "order": 2,
+          "blueprintId": "content-checkout",
+          "isShared": false
+        },
+        {
+          "order": 3,
+          "blueprintId": "cta-subscribe-to-our-newsletter",
+          "isShared": false
+        },
+        {
+          "order": 4,
+          "blueprintId": "content",
+          "isShared": false
+        },
+        {
+          "order": 5,
+          "blueprintId": "cta-colorcode-buffalo-tickets-comi",
+          "isShared": false
+        },
+        {
+          "order": 6,
+          "blueprintId": "content",
+          "isShared": false
+        },
+        {
+          "order": 7,
+          "blueprintId": "navigation-jump-to",
+          "isShared": true
+        }
+      ],
+      "sharedSections": [
+        "navigation-jump-to"
+      ],
+      "analysisSource": "html-only",
+      "confidence": "low",
+      "routePattern": "/tickets-checkout",
+      "isContentBacked": false
+    },
+    {
+      "pageType": "custom",
+      "path": "/tickets-order",
+      "title": "Whoops!",
+      "sections": [
+        {
+          "order": 1,
+          "blueprintId": "hero",
+          "isShared": false
+        },
+        {
+          "order": 2,
+          "blueprintId": "content-whoops",
+          "isShared": false
+        },
+        {
+          "order": 3,
+          "blueprintId": "cta-subscribe-to-our-newsletter",
+          "isShared": false
+        },
+        {
+          "order": 4,
+          "blueprintId": "content",
+          "isShared": false
+        },
+        {
+          "order": 5,
+          "blueprintId": "cta-colorcode-buffalo-tickets-comi",
+          "isShared": false
+        },
+        {
+          "order": 6,
+          "blueprintId": "content",
+          "isShared": false
+        },
+        {
+          "order": 7,
+          "blueprintId": "navigation-jump-to",
+          "isShared": true
+        }
+      ],
+      "sharedSections": [
+        "navigation-jump-to"
+      ],
+      "analysisSource": "html-only",
+      "confidence": "low",
+      "routePattern": "/tickets-order",
+      "isContentBacked": false
+    },
+    {
+      "pageType": "blog-post",
+      "path": "/blog/announcing-the-colorcode-art-battle",
+      "title": "Blog",
+      "sections": [
+        {
+          "order": 1,
+          "blueprintId": "hero",
+          "isShared": false
+        },
+        {
+          "order": 2,
+          "blueprintId": "stats-blog",
+          "isShared": false
+        },
+        {
+          "order": 3,
+          "blueprintId": "cta-subscribe-to-our-newsletter",
+          "isShared": false
+        },
+        {
+          "order": 4,
+          "blueprintId": "content",
+          "isShared": false
+        },
+        {
+          "order": 5,
+          "blueprintId": "cta-colorcode-buffalo-tickets-comi",
+          "isShared": false
+        },
+        {
+          "order": 6,
+          "blueprintId": "content",
+          "isShared": false
+        },
+        {
+          "order": 7,
+          "blueprintId": "navigation-jump-to",
+          "isShared": true
+        }
+      ],
+      "sharedSections": [
+        "navigation-jump-to"
+      ],
+      "analysisSource": "html-only",
+      "confidence": "low",
+      "routePattern": "/blog/announcing-the-colorcode-art-battle",
+      "isContentBacked": false
+    },
+    {
+      "pageType": "blog-post",
+      "path": "/blog/the-journey-to-our-first-colorcode-buffalo",
+      "title": "Blog",
+      "sections": [
+        {
+          "order": 1,
+          "blueprintId": "hero",
+          "isShared": false
+        },
+        {
+          "order": 2,
+          "blueprintId": "stats-blog",
+          "isShared": false
+        },
+        {
+          "order": 3,
+          "blueprintId": "cta-subscribe-to-our-newsletter",
+          "isShared": false
+        },
+        {
+          "order": 4,
+          "blueprintId": "content",
+          "isShared": false
+        },
+        {
+          "order": 5,
+          "blueprintId": "cta-colorcode-buffalo-tickets-comi",
+          "isShared": false
+        },
+        {
+          "order": 6,
+          "blueprintId": "content",
+          "isShared": false
+        },
+        {
+          "order": 7,
+          "blueprintId": "navigation-jump-to",
+          "isShared": true
+        }
+      ],
+      "sharedSections": [
+        "navigation-jump-to"
+      ],
+      "analysisSource": "html-only",
+      "confidence": "low",
+      "routePattern": "/blog/the-journey-to-our-first-colorcode-buffalo",
+      "isContentBacked": false
+    }
+  ],
+  "visualLanguage": {
+    "palette": {
+      "background": "#2d2459",
+      "foreground": "#f5f5f5",
+      "primary": "#2d2a6e",
+      "secondary": "#f5c800",
+      "accent": "#00b140",
+      "additional": [
+        "#e8003d",
+        "#0057b8",
+        "#ff6b9d",
+        "#f47c20"
+      ],
+      "confidence": "high"
+    },
+    "typography": {
+      "headingWeight": "black",
+      "bodyWeight": "normal",
+      "headingStyle": "sans",
+      "usesInlineColourHighlights": true
+    },
+    "heroPattern": {
+      "type": "dark-full-bleed",
+      "hasBackgroundImage": true,
+      "headerDark": true
+    },
+    "spacingDensity": "standard"
+  },
+  "sectionBlueprints": [
+    {
+      "id": "navigation-top-bar",
+      "name": "TopNavigation",
+      "category": "Navigation",
+      "purpose": "Primary site-wide navigation with logo, event info CTA button, and hamburger menu for mobile",
+      "layoutPattern": "Full-width horizontal bar with logo left, CTA button and hamburger menu right",
+      "contentSlots": [
+        "logo",
+        "cta-button",
+        "hamburger-menu"
+      ],
+      "interactionNeeds": "stateful",
+      "componentFileName": "top-navigation.tsx",
+      "componentExportName": "TopNavigation",
+      "tokenUsageHints": [
+        "bg-brand-primary",
+        "text-white",
+        "btn-brand-accent"
+      ],
+      "confidence": "high",
+      "referenceSection": "home + about + blog-list + custom pages — navigation-top-bar"
+    },
+    {
+      "id": "hero-full-bleed-text",
+      "name": "HeroHeadline",
+      "category": "Hero",
+      "purpose": "Large typographic hero statement introducing the conference brand and value proposition with inline coloured graphic accents",
+      "layoutPattern": "Full-width dark background with oversized multi-line heading containing inline coloured graphic elements",
+      "contentSlots": [
+        "headline-text",
+        "inline-graphic-accents"
+      ],
+      "interactionNeeds": "none",
+      "componentFileName": "hero-headline.tsx",
+      "componentExportName": "HeroHeadline",
+      "tokenUsageHints": [
+        "bg-brand-primary",
+        "text-white",
+        "text-brand-yellow",
+        "text-brand-red",
+        "text-brand-green"
+      ],
+      "confidence": "high",
+      "referenceSection": "home — hero-full-bleed-text"
+    },
+    {
+      "id": "hero-event-details-split",
+      "name": "EventDetailsBanner",
+      "category": "Hero",
+      "purpose": "Displays key event logistics — date, time, venue — alongside a speaker photo with a CTA button",
+      "layoutPattern": "Full-width image background with overlay text block on right side showing event metadata and CTA button",
+      "contentSlots": [
+        "event-logo",
+        "event-date",
+        "event-time",
+        "event-venue",
+        "event-info-cta",
+        "background-image"
+      ],
+      "interactionNeeds": "minimal",
+      "componentFileName": "event-details-banner.tsx",
+      "componentExportName": "EventDetailsBanner",
+      "tokenUsageHints": [
+        "bg-overlay-dark",
+        "text-white",
+        "btn-brand-green"
+      ],
+      "confidence": "high",
+      "referenceSection": "home — hero-event-details-split"
+    },
+    {
+      "id": "hero-page-title-banner",
+      "name": "PageTitleBanner",
+      "category": "Hero",
+      "purpose": "Page title banner identifying interior pages with decorative icon and large heading",
+      "layoutPattern": "Full-width solid colour band with decorative slash marks or icon and heading text left-aligned",
+      "contentSlots": [
+        "decorative-icon",
+        "page-title"
+      ],
+      "interactionNeeds": "none",
+      "componentFileName": "page-title-banner.tsx",
+      "componentExportName": "PageTitleBanner",
+      "tokenUsageHints": [
+        "bg-brand-pink",
+        "bg-brand-blue",
+        "text-white",
+        "text-brand-yellow"
+      ],
+      "confidence": "high",
+      "referenceSection": "about + blog-list — hero-page-title-banner"
+    },
+    {
+      "id": "cta-newsletter-signup",
+      "name": "NewsletterSignup",
+      "category": "CTA",
+      "purpose": "Captures email addresses for newsletter subscription with heading, subtext, email input and submit button",
+      "layoutPattern": "Full-width horizontal band with heading and subtext left, email input field and submit button right",
+      "contentSlots": [
+        "section-heading",
+        "subheading",
+        "email-input",
+        "submit-button"
+      ],
+      "interactionNeeds": "stateful",
+      "componentFileName": "newsletter-signup.tsx",
+      "componentExportName": "NewsletterSignup",
+      "tokenUsageHints": [
+        "bg-brand-primary",
+        "text-white",
+        "btn-brand-yellow",
+        "input-field"
+      ],
+      "confidence": "high",
+      "referenceSection": "home + about + blog-list + custom pages — cta-newsletter-signup"
+    },
+    {
+      "id": "cta-call-for-speakers-yellow",
+      "name": "CallForSpeakersCTA",
+      "category": "CTA",
+      "purpose": "Encourages speakers to apply to present at the conference",
+      "layoutPattern": "Full-width yellow background block with heading and body copy left-aligned and CTA button",
+      "contentSlots": [
+        "section-heading",
+        "body-copy",
+        "apply-cta-button"
+      ],
+      "interactionNeeds": "minimal",
+      "componentFileName": "call-for-speakers-cta.tsx",
+      "componentExportName": "CallForSpeakersCTA",
+      "tokenUsageHints": [
+        "bg-brand-yellow",
+        "text-brand-dark",
+        "btn-brand-green"
+      ],
+      "confidence": "high",
+      "referenceSection": "home — cta-call-for-speakers-yellow"
+    },
+    {
+      "id": "cta-call-for-sponsors-blue",
+      "name": "CallForSponsorsCTA",
+      "category": "CTA",
+      "purpose": "Invites potential sponsors to support the event",
+      "layoutPattern": "Full-width blue background block with heading and body copy right-aligned and CTA button",
+      "contentSlots": [
+        "section-heading",
+        "body-copy",
+        "sponsor-levels-cta-button"
+      ],
+      "interactionNeeds": "minimal",
+      "componentFileName": "call-for-sponsors-cta.tsx",
+      "componentExportName": "CallForSponsorsCTA",
+      "tokenUsageHints": [
+        "bg-brand-blue",
+        "text-white",
+        "btn-brand-green"
+      ],
+      "confidence": "high",
+      "referenceSection": "home — cta-call-for-sponsors-blue"
+    },
+    {
+      "id": "cta-call-for-volunteers-green",
+      "name": "CallForVolunteersCTA",
+      "category": "CTA",
+      "purpose": "Recruits volunteers to help run the conference",
+      "layoutPattern": "Full-width green background block with heading and body copy left-aligned and CTA button",
+      "contentSlots": [
+        "section-heading",
+        "body-copy",
+        "volunteer-cta-button"
+      ],
+      "interactionNeeds": "minimal",
+      "componentFileName": "call-for-volunteers-cta.tsx",
+      "componentExportName": "CallForVolunteersCTA",
+      "tokenUsageHints": [
+        "bg-brand-green",
+        "text-white",
+        "btn-brand-dark"
+      ],
+      "confidence": "high",
+      "referenceSection": "home — cta-call-for-volunteers-green"
+    },
+    {
+      "id": "blog-cards-grid",
+      "name": "BlogPostGrid",
+      "category": "Blog",
+      "purpose": "Displays a grid of blog post cards with thumbnail image, title, date, excerpt, and read more CTA",
+      "layoutPattern": "Two-column card grid on white background, each card with top image, heading, date, body text, and button",
+      "contentSlots": [
+        "post-thumbnail",
+        "post-title",
+        "post-date",
+        "post-excerpt",
+        "read-more-button"
+      ],
+      "interactionNeeds": "minimal",
+      "componentFileName": "blog-post-grid.tsx",
+      "componentExportName": "BlogPostGrid",
+      "tokenUsageHints": [
+        "bg-white",
+        "text-brand-dark",
+        "text-brand-yellow",
+        "btn-outline-yellow",
+        "border-radius-card"
+      ],
+      "confidence": "high",
+      "referenceSection": "home + blog-list — blog-cards-grid / blog-cards-two-column-grid"
+    },
+    {
+      "id": "content-about-colorcode-events",
+      "name": "ColorCodeEventsAbout",
+      "category": "Content",
+      "purpose": "Describes the ColorCode Events organisation and its mission with heading, body copy and learn more CTA",
+      "layoutPattern": "Dark purple background with heading left and body copy right, plus a learn more CTA button",
+      "contentSlots": [
+        "section-heading",
+        "body-copy",
+        "learn-more-cta"
+      ],
+      "interactionNeeds": "minimal",
+      "componentFileName": "colorcode-events-about.tsx",
+      "componentExportName": "ColorCodeEventsAbout",
+      "tokenUsageHints": [
+        "bg-brand-primary",
+        "text-white",
+        "btn-brand-yellow"
+      ],
+      "confidence": "high",
+      "referenceSection": "home — content-about-colorcode-events"
+    },
+    {
+      "id": "content-origin-story",
+      "name": "HowItStarted",
+      "category": "Content",
+      "purpose": "Describes the founding story and mission of ColorCode Events with decorative arrows and multi-paragraph text",
+      "layoutPattern": "Two-column layout: decorative arrow row left, multi-paragraph text right on dark navy background",
+      "contentSlots": [
+        "section-heading",
+        "decorative-arrows",
+        "body-text"
+      ],
+      "interactionNeeds": "none",
+      "componentFileName": "how-it-started.tsx",
+      "componentExportName": "HowItStarted",
+      "tokenUsageHints": [
+        "bg-brand-primary",
+        "text-white"
+      ],
+      "confidence": "high",
+      "referenceSection": "about — content-origin-story"
+    },
+    {
+      "id": "cards-team-member",
+      "name": "TeamMemberCard",
+      "category": "Cards",
+      "purpose": "Full-width profile card for a team member or co-founder with bio and external links",
+      "layoutPattern": "Full-width coloured block with member name, title, bio, and links; alternating left/right text alignment with avatar image",
+      "contentSlots": [
+        "member-name",
+        "member-title",
+        "member-bio",
+        "linkedin-link",
+        "optional-external-link"
+      ],
+      "interactionNeeds": "minimal",
+      "componentFileName": "team-member-card.tsx",
+      "componentExportName": "TeamMemberCard",
+      "tokenUsageHints": [
+        "bg-brand-green",
+        "bg-brand-orange",
+        "bg-brand-blue",
+        "text-white",
+        "link-yellow"
+      ],
+      "confidence": "high",
+      "referenceSection": "about — cards-team-member-green / cards-team-member-orange / cards-team-member-blue"
+    },
+    {
+      "id": "social-proof-photo-gallery",
+      "name": "EventPhotoGallery",
+      "category": "Social Proof",
+      "purpose": "Visual gallery of past event photos to build credibility and excitement",
+      "layoutPattern": "Full-width horizontal strip of multiple event photos in a mosaic/grid layout",
+      "contentSlots": [
+        "photo-1",
+        "photo-2",
+        "photo-3",
+        "photo-4",
+        "photo-5"
+      ],
+      "interactionNeeds": "none",
+      "componentFileName": "event-photo-gallery.tsx",
+      "componentExportName": "EventPhotoGallery",
+      "tokenUsageHints": [
+        "bg-transparent"
+      ],
+      "confidence": "high",
+      "referenceSection": "home — social-proof-photo-gallery"
+    },
+    {
+      "id": "custom-error-card-centered",
+      "name": "ErrorMessageCard",
+      "category": "Custom",
+      "purpose": "Displays an error or empty state message indicating no purchase was made, with a link back home",
+      "layoutPattern": "Centered white card on dark background with heading, body text, and inline or text link",
+      "contentSlots": [
+        "error-heading",
+        "error-body-text",
+        "back-home-link"
+      ],
+      "interactionNeeds": "minimal",
+      "componentFileName": "error-message-card.tsx",
+      "componentExportName": "ErrorMessageCard",
+      "tokenUsageHints": [
+        "bg-white",
+        "text-dark",
+        "bg-brand-primary"
+      ],
+      "confidence": "high",
+      "referenceSection": "attendee-registration + buffalo-2025 + privacy-policy — custom-error-message-centered / custom-error-card-centered / content-error-card-centered"
+    },
+    {
+      "id": "footer-multi-column-links",
+      "name": "SiteFooter",
+      "category": "Footer",
+      "purpose": "Site-wide footer with navigation links grouped by category (Events, Support, Legal, Company), logo, social icons, and copyright",
+      "layoutPattern": "Dark background multi-column layout with four link groups, logo bottom right, social icons bottom right, copyright bottom left",
+      "contentSlots": [
+        "events-links",
+        "support-links",
+        "legal-links",
+        "company-links",
+        "footer-logo",
+        "social-icons",
+        "copyright-text"
+      ],
+      "interactionNeeds": "minimal",
+      "componentFileName": "site-footer.tsx",
+      "componentExportName": "SiteFooter",
+      "tokenUsageHints": [
+        "bg-brand-primary",
+        "text-white",
+        "text-brand-yellow",
+        "text-muted",
+        "icon-social"
+      ],
+      "confidence": "high",
+      "referenceSection": "home + about + blog-list + custom pages — footer-multi-column-links"
+    },
+    {
+      "id": "stats-blog",
+      "name": "BlogStats",
+      "category": "Stats",
+      "purpose": "Displays blog post metadata or stats such as read time and publication info",
+      "layoutPattern": "Contained horizontal stats row with heading and stat items",
+      "contentSlots": [
+        "heading",
+        "statItems"
+      ],
+      "interactionNeeds": "none",
+      "componentFileName": "blog-stats.tsx",
+      "componentExportName": "BlogStats",
+      "tokenUsageHints": [
+        "bg-surface-background",
+        "text-surface-foreground"
+      ],
+      "confidence": "low",
+      "referenceSection": "blog-post pages — stats-blog"
+    },
+    {
+      "id": "cards-team-member-green",
+      "name": "TeamMemberBenDunkle",
+      "category": "Cards",
+      "purpose": "Profile card for co-founder Ben Dunkle with bio and LinkedIn link",
+      "layoutPattern": "Full-width coloured block, text and links right-aligned with avatar image",
+      "contentSlots": [
+        "member-name",
+        "member-title",
+        "member-bio",
+        "linkedin-link"
+      ],
+      "interactionNeeds": "minimal",
+      "componentFileName": "cards-team-member-green.tsx",
+      "componentExportName": "TeamMemberBenDunkle",
+      "tokenUsageHints": [
+        "bg-brand-green",
+        "text-white",
+        "link-yellow"
+      ],
+      "confidence": "high",
+      "referenceSection": "about - TeamMemberBenDunkle"
+    },
+    {
+      "id": "cards-team-member-orange",
+      "name": "TeamMemberRonBrennan",
+      "category": "Cards",
+      "purpose": "Profile card for co-founder Ron Brennan with bio and external links",
+      "layoutPattern": "Full-width coloured block, text and links left-aligned",
+      "contentSlots": [
+        "member-name",
+        "member-title",
+        "member-bio",
+        "company-link",
+        "linkedin-link"
+      ],
+      "interactionNeeds": "minimal",
+      "componentFileName": "cards-team-member-orange.tsx",
+      "componentExportName": "TeamMemberRonBrennan",
+      "tokenUsageHints": [
+        "bg-brand-orange",
+        "text-white",
+        "link-yellow"
+      ],
+      "confidence": "high",
+      "referenceSection": "about - TeamMemberRonBrennan"
+    },
+    {
+      "id": "cards-team-member-blue",
+      "name": "TeamMemberTimBouchard",
+      "category": "Cards",
+      "purpose": "Profile card for co-founder Tim Bouchard with bio and external links",
+      "layoutPattern": "Full-width coloured block, text and links right-aligned",
+      "contentSlots": [
+        "member-name",
+        "member-title",
+        "member-bio",
+        "agency-link",
+        "linkedin-link"
+      ],
+      "interactionNeeds": "minimal",
+      "componentFileName": "cards-team-member-blue.tsx",
+      "componentExportName": "TeamMemberTimBouchard",
+      "tokenUsageHints": [
+        "bg-brand-blue",
+        "text-white",
+        "link-yellow"
+      ],
+      "confidence": "high",
+      "referenceSection": "about - TeamMemberTimBouchard"
+    },
+    {
+      "id": "footer-site-links",
+      "name": "SiteFooter",
+      "category": "Footer",
+      "purpose": "Global site footer with categorised navigation links, logo and copyright",
+      "layoutPattern": "Multi-column link grid with logo and social icons bottom right",
+      "contentSlots": [
+        "events-links",
+        "support-links",
+        "legal-links",
+        "company-links",
+        "logo",
+        "social-icons",
+        "copyright"
+      ],
+      "interactionNeeds": "minimal",
+      "componentFileName": "footer-site-links.tsx",
+      "componentExportName": "SiteFooter",
+      "tokenUsageHints": [
+        "bg-dark-navy",
+        "text-white",
+        "text-muted"
+      ],
+      "confidence": "high",
+      "referenceSection": "about - SiteFooter"
+    },
+    {
+      "id": "blog-cards-two-column-grid",
+      "name": "BlogPostGrid",
+      "category": "Blog",
+      "purpose": "Displays a grid of blog post cards with thumbnail image, title, date, excerpt, and read more CTA",
+      "layoutPattern": "Two-column card grid on white background, each card with top image, heading, date, body text, and button",
+      "contentSlots": [
+        "post-thumbnail",
+        "post-title",
+        "post-date",
+        "post-excerpt",
+        "read-more-button"
+      ],
+      "interactionNeeds": "minimal",
+      "componentFileName": "blog-cards-two-column-grid.tsx",
+      "componentExportName": "BlogPostGrid",
+      "tokenUsageHints": [
+        "bg-white",
+        "text-brand-yellow",
+        "border-radius-card",
+        "btn-outline-yellow"
+      ],
+      "confidence": "high",
+      "referenceSection": "blog-list - BlogPostGrid"
+    },
+    {
+      "id": "cta-newsletter-inline-form",
+      "name": "NewsletterSubscribeCTA",
+      "category": "CTA",
+      "purpose": "Encourages visitors to subscribe to the newsletter with an inline email form",
+      "layoutPattern": "Full-width purple band with heading and subtext left, email input and submit button right",
+      "contentSlots": [
+        "section-heading",
+        "section-subtext",
+        "email-input",
+        "submit-button"
+      ],
+      "interactionNeeds": "stateful",
+      "componentFileName": "cta-newsletter-inline-form.tsx",
+      "componentExportName": "NewsletterSubscribeCTA",
+      "tokenUsageHints": [
+        "bg-brand-purple",
+        "text-white",
+        "btn-brand-primary",
+        "input-outlined"
+      ],
+      "confidence": "high",
+      "referenceSection": "blog-list - NewsletterSubscribeCTA"
+    },
+    {
+      "id": "custom-error-message-centered",
+      "name": "RegistrationErrorState",
+      "category": "Custom",
+      "purpose": "Displays an error/empty state message indicating no purchase was made during attendee registration flow",
+      "layoutPattern": "Centered card on dark background with heading, body text, and text link",
+      "contentSlots": [
+        "error-heading",
+        "error-body-text",
+        "back-home-link"
+      ],
+      "interactionNeeds": "minimal",
+      "componentFileName": "custom-error-message-centered.tsx",
+      "componentExportName": "RegistrationErrorState",
+      "tokenUsageHints": [
+        "bg-white",
+        "text-dark",
+        "bg-brand-dark-purple"
+      ],
+      "confidence": "high",
+      "referenceSection": "custom - RegistrationErrorState"
+    },
+    {
+      "id": "cta-newsletter-banner",
+      "name": "NewsletterSubscribeBanner",
+      "category": "CTA",
+      "purpose": "Email newsletter subscription form with submit button",
+      "layoutPattern": "Full-width horizontal band with text left and email input + submit button right",
+      "contentSlots": [
+        "headline",
+        "subtext",
+        "email-input",
+        "submit-button"
+      ],
+      "interactionNeeds": "stateful",
+      "componentFileName": "cta-newsletter-banner.tsx",
+      "componentExportName": "NewsletterSubscribeBanner",
+      "tokenUsageHints": [
+        "bg-brand-purple",
+        "text-white",
+        "btn-brand-yellow"
+      ],
+      "confidence": "high",
+      "referenceSection": "custom - NewsletterSubscribeBanner"
+    },
+    {
+      "id": "footer-multi-column",
+      "name": "SiteFooter",
+      "category": "Footer",
+      "purpose": "Site-wide footer with navigation links grouped by category, logo, and social icons",
+      "layoutPattern": "Dark background with four link columns (Events, Support, Legal, Company), logo right, social icons bottom right, copyright bottom left",
+      "contentSlots": [
+        "events-links",
+        "support-links",
+        "legal-links",
+        "company-links",
+        "footer-logo",
+        "social-icons",
+        "copyright"
+      ],
+      "interactionNeeds": "minimal",
+      "componentFileName": "footer-multi-column.tsx",
+      "componentExportName": "SiteFooter",
+      "tokenUsageHints": [
+        "bg-brand-dark",
+        "text-white",
+        "link-brand-yellow"
+      ],
+      "confidence": "high",
+      "referenceSection": "custom - SiteFooter"
+    },
+    {
+      "id": "content-error-card-centered",
+      "name": "ErrorMessageCard",
+      "category": "Content",
+      "purpose": "Displays an error/whoops message indicating no purchase was made, with a link back home",
+      "layoutPattern": "Centered white card on dark background with heading, body text, and inline link",
+      "contentSlots": [
+        "error-heading",
+        "error-body-text",
+        "back-home-link"
+      ],
+      "interactionNeeds": "minimal",
+      "componentFileName": "content-error-card-centered.tsx",
+      "componentExportName": "ErrorMessageCard",
+      "tokenUsageHints": [
+        "bg-white",
+        "text-dark",
+        "text-brand-blue-link"
+      ],
+      "confidence": "high",
+      "referenceSection": "custom - ErrorMessageCard"
+    },
+    {
+      "id": "cta-newsletter-form-banner",
+      "name": "NewsletterSubscribeBanner",
+      "category": "CTA",
+      "purpose": "Encourages users to subscribe to the newsletter with an email input and submit button",
+      "layoutPattern": "Full-width horizontal band with text left and email form right",
+      "contentSlots": [
+        "section-heading",
+        "section-subheading",
+        "email-input",
+        "submit-button"
+      ],
+      "interactionNeeds": "stateful",
+      "componentFileName": "cta-newsletter-form-banner.tsx",
+      "componentExportName": "NewsletterSubscribeBanner",
+      "tokenUsageHints": [
+        "bg-brand-purple-medium",
+        "text-white",
+        "btn-bg-brand-yellow"
+      ],
+      "confidence": "high",
+      "referenceSection": "custom - NewsletterSubscribeBanner"
+    },
+    {
+      "id": "hero",
+      "name": "Hero",
+      "category": "Hero",
+      "purpose": "Hero section",
+      "layoutPattern": "contained",
+      "contentSlots": [
+        "subheading",
+        "ctaButtons",
+        "backgroundImage"
+      ],
+      "interactionNeeds": "none",
+      "componentFileName": "hero.tsx",
+      "componentExportName": "Hero",
+      "tokenUsageHints": [
+        "bg-brand-primary",
+        "text-surface-background"
+      ],
+      "confidence": "low",
+      "referenceSection": "custom - Hero (index 0)"
+    },
+    {
+      "id": "content-checkout",
+      "name": "ContentCheckout",
+      "category": "Content",
+      "purpose": "Content section: Checkout",
+      "layoutPattern": "contained",
+      "contentSlots": [
+        "heading",
+        "body"
+      ],
+      "interactionNeeds": "none",
+      "componentFileName": "content-checkout.tsx",
+      "componentExportName": "ContentCheckout",
+      "tokenUsageHints": [
+        "bg-surface-background",
+        "text-surface-foreground"
+      ],
+      "confidence": "low",
+      "referenceSection": "custom - Content (index 1)"
+    },
+    {
+      "id": "cta-subscribe-to-our-newsletter",
+      "name": "CtaSubscribeToOurNewsletter",
+      "category": "CTA",
+      "purpose": "CTA section: Subscribe to our Newsletter",
+      "layoutPattern": "contained",
+      "contentSlots": [
+        "heading",
+        "description",
+        "ctaButton",
+        "form"
+      ],
+      "interactionNeeds": "stateful",
+      "componentFileName": "cta-subscribe-to-our-newsletter.tsx",
+      "componentExportName": "CtaSubscribeToOurNewsletter",
+      "tokenUsageHints": [
+        "bg-brand-primary",
+        "text-surface-background"
+      ],
+      "confidence": "low",
+      "referenceSection": "custom - CTA (index 2)"
+    },
+    {
+      "id": "content",
+      "name": "Content",
+      "category": "Content",
+      "purpose": "Content section",
+      "layoutPattern": "contained",
+      "contentSlots": [
+        "body",
+        "image"
+      ],
+      "interactionNeeds": "none",
+      "componentFileName": "content.tsx",
+      "componentExportName": "Content",
+      "tokenUsageHints": [
+        "bg-surface-background",
+        "text-surface-foreground"
+      ],
+      "confidence": "low",
+      "referenceSection": "custom - Content (index 3)"
+    },
+    {
+      "id": "cta-colorcode-buffalo-tickets-comi",
+      "name": "CtaColorcodeBuffaloTicketsComi",
+      "category": "CTA",
+      "purpose": "CTA section: ColorCode: Buffalo Tickets Coming Soon!",
+      "layoutPattern": "contained",
+      "contentSlots": [
+        "heading",
+        "description",
+        "ctaButton",
+        "form"
+      ],
+      "interactionNeeds": "stateful",
+      "componentFileName": "cta-colorcode-buffalo-tickets-comi.tsx",
+      "componentExportName": "CtaColorcodeBuffaloTicketsComi",
+      "tokenUsageHints": [
+        "bg-brand-primary",
+        "text-surface-background"
+      ],
+      "confidence": "low",
+      "referenceSection": "custom - CTA (index 4)"
+    },
+    {
+      "id": "navigation-jump-to",
+      "name": "NavigationJumpTo",
+      "category": "Navigation",
+      "purpose": "Navigation section: Jump to:",
+      "layoutPattern": "contained",
+      "contentSlots": [
+        "heading",
+        "logo",
+        "navLinks",
+        "ctaButton"
+      ],
+      "interactionNeeds": "stateful",
+      "componentFileName": "navigation-jump-to.tsx",
+      "componentExportName": "NavigationJumpTo",
+      "tokenUsageHints": [
+        "bg-surface-background",
+        "text-surface-foreground"
+      ],
+      "confidence": "low",
+      "referenceSection": "custom - Navigation (index 6)"
+    },
+    {
+      "id": "content-whoops",
+      "name": "ContentWhoops",
+      "category": "Content",
+      "purpose": "Content section: Whoops!",
+      "layoutPattern": "contained",
+      "contentSlots": [
+        "heading",
+        "body"
+      ],
+      "interactionNeeds": "none",
+      "componentFileName": "content-whoops.tsx",
+      "componentExportName": "ContentWhoops",
+      "tokenUsageHints": [
+        "bg-surface-background",
+        "text-surface-foreground"
+      ],
+      "confidence": "low",
+      "referenceSection": "custom - Content (index 1)"
+    }
+  ],
+  "componentMatches": [
+    {
+      "componentName": "CTASection",
+      "importPath": "@platform/core-components",
+      "matchConfidence": "close",
+      "adaptationNotes": "Score 0.45 — may need minor prop adaptation"
+    },
+    {
+      "componentName": "CTASection",
+      "importPath": "@platform/core-components",
+      "matchConfidence": "close",
+      "adaptationNotes": "Score 0.45 — may need minor prop adaptation"
+    },
+    {
+      "componentName": "SiteHeader",
+      "importPath": "@platform/core-components",
+      "matchConfidence": "close",
+      "adaptationNotes": "Score 0.45 — may need minor prop adaptation"
+    }
+  ],
+  "themeTokenRecommendations": {
+    "brand": {
+      "primary": "#2d2a6e",
+      "primaryHover": "#1e1b4b",
+      "secondary": "#f5c800",
+      "accent": "#00b140"
+    },
+    "surface": {
+      "background": "#2d2459",
+      "foreground": "#f5f5f5",
+      "muted": "#4a4580"
+    },
+    "typography": {
+      "fontFamilySans": [
+        "Inter",
+        "system-ui",
+        "sans-serif"
+      ],
+      "fontFamilyHeading": [
+        "Inter",
+        "system-ui",
+        "sans-serif"
+      ]
+    }
+  },
+  "registryRecommendation": {
+    "themeName": "orion",
+    "confidence": "high",
+    "reasoning": "The site consistently uses a dark header across all pages, a full-bleed hero with background image on the homepage, and a bold typographic-first layout with a deep navy/purple primary background. These characteristics — dark header, full-bleed hero, strong brand colour blocks, and icon/graphic accents — align directly with the orion constellation theme definition."
+  }
+}

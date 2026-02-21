@@ -1,0 +1,14 @@
+{
+  "id": "hero-full-bleed",
+  "name": "HeroFullBleed",
+  "category": "Hero",
+  "purpose": "Full-bleed hero section with background image and CTA",
+  "layoutPattern": "full-bleed with overlay",
+  "contentSlots": ["heading", "subheading", "ctaButtons", "backgroundImage"],
+  "interactionNeeds": "none",
+  "componentFileName": "hero-full-bleed.tsx",
+  "componentExportName": "HeroFullBleed",
+  "tokenUsageHints": ["bg-brand-primary", "text-surface-background"],
+  "confidence": "high",
+  "referenceSection": "home - Hero"
+}

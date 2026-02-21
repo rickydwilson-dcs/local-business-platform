@@ -313,6 +313,61 @@ export function areColorsSimilar(color1: RGBColor, color2: RGBColor, threshold =
 }
 
 // ============================================================================
+// CIE Lab Color Space
+// ============================================================================
+
+/**
+ * Convert RGB to CIE Lab colour space
+ */
+export function rgbToLab(rgb: RGBColor): { L: number; a: number; b: number } {
+  // RGB to XYZ (sRGB D65)
+  let r = rgb.r / 255;
+  let g = rgb.g / 255;
+  let b = rgb.b / 255;
+
+  r = r > 0.04045 ? Math.pow((r + 0.055) / 1.055, 2.4) : r / 12.92;
+  g = g > 0.04045 ? Math.pow((g + 0.055) / 1.055, 2.4) : g / 12.92;
+  b = b > 0.04045 ? Math.pow((b + 0.055) / 1.055, 2.4) : b / 12.92;
+
+  // D65 reference white
+  let x = (r * 0.4124564 + g * 0.3575761 + b * 0.1804375) / 0.95047;
+  let y = (r * 0.2126729 + g * 0.7151522 + b * 0.0721750) / 1.00000;
+  let z = (r * 0.0193339 + g * 0.1191920 + b * 0.9503041) / 1.08883;
+
+  const epsilon = 0.008856;
+  const kappa = 903.3;
+
+  x = x > epsilon ? Math.pow(x, 1 / 3) : (kappa * x + 16) / 116;
+  y = y > epsilon ? Math.pow(y, 1 / 3) : (kappa * y + 16) / 116;
+  z = z > epsilon ? Math.pow(z, 1 / 3) : (kappa * z + 16) / 116;
+
+  return {
+    L: 116 * y - 16,
+    a: 500 * (x - y),
+    b: 200 * (y - z),
+  };
+}
+
+/**
+ * Calculate CIE76 colour distance (ΔE) between two hex colours.
+ * Simple Euclidean distance in Lab space. Sufficient for threshold matching.
+ */
+export function colorDistanceCIE76(hex1: string, hex2: string): number {
+  const rgb1 = hexToRgb(hex1);
+  const rgb2 = hexToRgb(hex2);
+  if (!rgb1 || !rgb2) return Infinity;
+
+  const lab1 = rgbToLab(rgb1);
+  const lab2 = rgbToLab(rgb2);
+
+  return Math.sqrt(
+    Math.pow(lab1.L - lab2.L, 2) +
+    Math.pow(lab1.a - lab2.a, 2) +
+    Math.pow(lab1.b - lab2.b, 2),
+  );
+}
+
+// ============================================================================
 // CSS Color Parsing
 // ============================================================================
 
