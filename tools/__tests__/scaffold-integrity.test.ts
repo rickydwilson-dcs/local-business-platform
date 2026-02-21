@@ -100,3 +100,89 @@ describe("showcase generation", () => {
     expect(scaffoldSource).toContain("import type { ReactNode }");
   });
 });
+
+// ---------------------------------------------------------------------------
+// globals.css generation (Findings 3, 4)
+// ---------------------------------------------------------------------------
+
+describe("generateGlobalsCss", () => {
+  // Extract the function body from source for pattern checks
+  const globalsCssMatch = scaffoldSource.match(
+    /function generateGlobalsCss[\s\S]*?return `([\s\S]*?)`;/,
+  );
+  const globalsCssTemplate = globalsCssMatch?.[1] ?? "";
+
+  test("does NOT use opacity modifiers in @apply directives", () => {
+    // Opacity modifiers like /90, /30, /10 on theme token classes
+    // don't work in @apply because tokens resolve to CSS custom properties
+    expect(globalsCssTemplate).not.toMatch(/\/(90|80|70|60|50|30|20|10)\b/);
+  });
+
+  test("does NOT reference non-existent text-on-brand-secondary", () => {
+    // The theme system only defines text-on-brand-primary, not secondary
+    expect(globalsCssTemplate).not.toContain("text-on-brand-secondary");
+  });
+
+  test("uses hover:bg-brand-primary-hover for primary button hover", () => {
+    expect(globalsCssTemplate).toContain("hover:bg-brand-primary-hover");
+  });
+
+  test("does NOT use @layer wrappers around selectors", () => {
+    // @layer base/components/utilities wrapping would break when imported before @tailwind
+    expect(globalsCssTemplate).not.toMatch(/@layer\s+(base|components|utilities)\s*\{/);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// ThemeName sync (Finding 2)
+// ---------------------------------------------------------------------------
+
+describe("appendThemeName", () => {
+  test("updates theme-context.tsx ThemeName union", () => {
+    // appendThemeName must sync to both types.ts AND theme-context.tsx
+    expect(scaffoldSource).toContain("theme-context.tsx");
+    expect(scaffoldSource).toContain("export type ThemeName =");
+  });
+});
+
+// ---------------------------------------------------------------------------
+// Component file copy (Finding 5)
+// ---------------------------------------------------------------------------
+
+describe("component file copy", () => {
+  test("copies .tsx files from output to theme package", () => {
+    // The scaffold should copy component .tsx files from the output directory
+    expect(scaffoldSource).toContain("copyFileSync");
+    expect(scaffoldSource).toContain('.endsWith(".tsx")');
+  });
+
+  test("scaffoldThemePackage accepts outputDir parameter", () => {
+    expect(scaffoldSource).toContain("outputDir?: string");
+  });
+});
+
+// ---------------------------------------------------------------------------
+// Barrel dedup order (Finding 6)
+// ---------------------------------------------------------------------------
+
+describe("barrel deduplication", () => {
+  test("checks core-match skip BEFORE duplicate name check in generateComponentBarrel", () => {
+    // Extract the barrel function body
+    const barrelFnMatch = scaffoldSource.match(
+      /function generateComponentBarrel[\s\S]*?^}/m,
+    );
+    const barrelFn = barrelFnMatch?.[0] ?? "";
+
+    // The core-match check (componentMatches.get) should appear before
+    // the seenExports.has check in the loop body
+    const coreMatchIndex = barrelFn.indexOf("componentMatches");
+    const seenExportsIndex = barrelFn.indexOf("seenExports.has");
+
+    // Both patterns should exist
+    expect(coreMatchIndex).toBeGreaterThan(-1);
+    expect(seenExportsIndex).toBeGreaterThan(-1);
+
+    // Core-match check should come first
+    expect(coreMatchIndex).toBeLessThan(seenExportsIndex);
+  });
+});
