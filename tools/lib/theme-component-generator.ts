@@ -145,7 +145,7 @@ const CLIENT_PATTERNS = /\b(useState|useEffect|useRef|useCallback|useMemo|onClic
  * - Category is "Forms" or "Newsletter"
  * - JSX body contains interactive hooks/handlers
  */
-function needsUseClient(blueprint: SectionBlueprint, jsxBody: string): boolean {
+export function needsUseClient(blueprint: SectionBlueprint, jsxBody: string): boolean {
   if (blueprint.interactionNeeds === "stateful") return true;
   if (blueprint.category === "Navigation") return true;
   const purpose = blueprint.purpose.toLowerCase();

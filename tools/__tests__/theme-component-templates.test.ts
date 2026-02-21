@@ -4,6 +4,8 @@ import {
   placeholderComponent,
   serverComponentShell,
   clientComponentShell,
+  detectReactImports,
+  buildComponentGenerationPrompt,
 } from "../lib/theme-component-templates";
 import type { SectionBlueprint } from "../lib/reference-analysis-types";
 
@@ -196,5 +198,42 @@ describe("clientComponentShell", () => {
     expect(result).toContain('import { useState } from "react"');
     expect(result).toContain("export function InteractiveWidget(");
     expect(result).toContain("InteractiveWidgetProps");
+  });
+});
+
+// ---------------------------------------------------------------------------
+// detectReactImports
+// ---------------------------------------------------------------------------
+
+describe("detectReactImports", () => {
+  test('returns ["useState"] for body with no hooks', () => {
+    const result = detectReactImports("  return <div>hello</div>;");
+    expect(result).toEqual(["useState"]);
+  });
+
+  test('returns ["useEffect", "useRef", "useState"] for body containing useEffect and useRef', () => {
+    const body = `  useEffect(() => { ref.current?.focus(); }, []);
+  const ref = useRef(null);
+  return <div ref={ref}>hello</div>;`;
+    const result = detectReactImports(body);
+    expect(result).toEqual(["useEffect", "useRef", "useState"]);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// buildComponentGenerationPrompt — animation primitives
+// ---------------------------------------------------------------------------
+
+describe("buildComponentGenerationPrompt", () => {
+  test('output contains "ANIMATION PRIMITIVES"', () => {
+    const bp = makeBlueprint({ componentExportName: "HeroSection" });
+    const result = buildComponentGenerationPrompt(bp, "HeroSectionProps");
+    expect(result).toContain("ANIMATION PRIMITIVES");
+  });
+
+  test('output contains "RevealOnScroll"', () => {
+    const bp = makeBlueprint({ componentExportName: "HeroSection" });
+    const result = buildComponentGenerationPrompt(bp, "HeroSectionProps");
+    expect(result).toContain("RevealOnScroll");
   });
 });
