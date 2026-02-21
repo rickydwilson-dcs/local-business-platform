@@ -150,7 +150,11 @@ function generateManifestTs(name: string, analysis: ReferenceAnalysis | SiteAnal
   return lines.join("\n");
 }
 
-function generateShowcaseRegistryTsx(name: string, analysis: ReferenceAnalysis | SiteAnalysis): string {
+function generateShowcaseRegistryTsx(
+  name: string,
+  analysis: ReferenceAnalysis | SiteAnalysis,
+  componentMatches?: Map<string, { matchConfidence: string }>,
+): string {
   const pascal = toPascalCase(name);
   const camel = toCamelCase(name);
   const lines: string[] = [];
@@ -161,9 +165,29 @@ function generateShowcaseRegistryTsx(name: string, analysis: ReferenceAnalysis |
   lines.push(` * Auto-generated ElementDefinition entries for the showcase site.`);
   lines.push(` */`);
   lines.push(``);
+  lines.push(`import type { ReactNode } from 'react';`);
+  lines.push(``);
 
-  // Import each component
-  for (const bp of analysis.sectionBlueprints) {
+  // Filter blueprints: only import components that will actually exist as files
+  // (skip those matched to core-components with "exact" or "close" confidence)
+  const seenExports = new Set<string>();
+  const importableBlueprints = analysis.sectionBlueprints.filter((bp) => {
+    // Skip duplicates
+    if (seenExports.has(bp.componentExportName)) return false;
+    seenExports.add(bp.componentExportName);
+
+    // Skip blueprints matched to core-components
+    if (componentMatches) {
+      const match = componentMatches.get(bp.id);
+      if (match && (match.matchConfidence === "exact" || match.matchConfidence === "close")) {
+        return false;
+      }
+    }
+    return true;
+  });
+
+  // Import each component that exists
+  for (const bp of importableBlueprints) {
     lines.push(`import { ${bp.componentExportName} } from './components/${bp.componentFileName.replace(".tsx", "")}';`);
   }
 
@@ -174,17 +198,17 @@ function generateShowcaseRegistryTsx(name: string, analysis: ReferenceAnalysis |
   lines.push(`  category: string;`);
   lines.push(`  description: string;`);
   lines.push(`  themeName: string;`);
-  lines.push(`  render: () => React.ReactNode;`);
+  lines.push(`  render: () => ReactNode;`);
   lines.push(`}`);
   lines.push(``);
   lines.push(`export const ${camel}Elements: ShowcaseElementEntry[] = [`);
 
-  for (const bp of analysis.sectionBlueprints) {
+  for (const bp of importableBlueprints) {
     lines.push(`  {`);
     lines.push(`    slug: "${bp.id}",`);
     lines.push(`    name: "${bp.name}",`);
     lines.push(`    category: "${bp.category}",`);
-    lines.push(`    description: "${bp.purpose}",`);
+    lines.push(`    description: "${bp.purpose.replace(/"/g, '\\"')}",`);
     lines.push(`    themeName: "${name}",`);
     lines.push(`    render: () => <${bp.componentExportName} />,`);
     lines.push(`  },`);
@@ -196,24 +220,108 @@ function generateShowcaseRegistryTsx(name: string, analysis: ReferenceAnalysis |
   return lines.join("\n");
 }
 
+function generateComponentBarrel(
+  analysis: ReferenceAnalysis | SiteAnalysis,
+  componentMatches?: Map<string, { matchConfidence: string }>,
+): string {
+  const lines: string[] = [];
+  const seenExports = new Set<string>();
+
+  lines.push(`/**`);
+  lines.push(` * Component barrel file — re-exports all theme components.`);
+  lines.push(` */`);
+  lines.push(``);
+
+  for (const bp of analysis.sectionBlueprints) {
+    // Skip duplicates
+    if (seenExports.has(bp.componentExportName)) continue;
+    seenExports.add(bp.componentExportName);
+
+    // Skip blueprints matched to core-components
+    if (componentMatches) {
+      const match = componentMatches.get(bp.id);
+      if (match && (match.matchConfidence === "exact" || match.matchConfidence === "close")) {
+        continue;
+      }
+    }
+
+    lines.push(`export { ${bp.componentExportName} } from './${bp.componentFileName.replace(".tsx", "")}';`);
+  }
+
+  lines.push(``);
+  return lines.join("\n");
+}
+
 function generateGlobalsCss(name: string, analysis: ReferenceAnalysis | SiteAnalysis): string {
+  const pascal = toPascalCase(name);
   return `/*
- * ${toPascalCase(name)} Theme — Global CSS Utilities
+ * ${pascal} Theme — Global CSS Utilities
  *
  * Reference site: ${analysis.reference.url ?? "unknown"}
  * Capture date: ${analysis.reference.capturedAt}
  *
- * This file is intentionally minimal. Theme tokens are defined in index.ts
- * and consumed via Tailwind utility classes. Add theme-specific utility
- * classes here only when needed.
- *
- * Import this file at the top of your site's app/globals.css:
+ * Standard utility classes using @apply with theme tokens.
+ * Import this file in your site's app/globals.css:
  *
  *   @import "../../packages/themes/${name}/globals.css";
- *   @tailwind base;
- *   @tailwind components;
- *   @tailwind utilities;
  */
+
+/* Buttons */
+.btn-primary {
+  @apply bg-brand-primary text-on-brand-primary px-6 py-3 rounded-lg font-semibold
+    hover:bg-brand-primary/90 transition-colors duration-200;
+}
+
+.btn-secondary {
+  @apply bg-brand-secondary text-on-brand-secondary px-6 py-3 rounded-lg font-semibold
+    hover:bg-brand-secondary/90 transition-colors duration-200;
+}
+
+.btn-ghost {
+  @apply bg-transparent text-brand-primary px-6 py-3 rounded-lg font-semibold
+    border border-brand-primary hover:bg-brand-primary/10 transition-colors duration-200;
+}
+
+/* Cards */
+.card {
+  @apply bg-surface-background border border-surface-muted rounded-xl p-6 shadow-sm;
+}
+
+.card-interactive {
+  @apply bg-surface-background border border-surface-muted rounded-xl p-6 shadow-sm
+    hover:shadow-md hover:border-brand-primary/30 transition-all duration-200;
+}
+
+/* Sections */
+.section {
+  @apply py-16 md:py-24 px-4;
+}
+
+.section-compact {
+  @apply py-8 md:py-12 px-4;
+}
+
+/* Containers */
+.container-narrow {
+  @apply max-w-3xl mx-auto;
+}
+
+.container-standard {
+  @apply max-w-7xl mx-auto;
+}
+
+/* Headings */
+.heading-hero {
+  @apply text-h1 font-bold text-surface-foreground;
+}
+
+.heading-section {
+  @apply text-h2 font-bold text-surface-foreground;
+}
+
+.heading-card {
+  @apply text-h3 font-semibold text-surface-foreground;
+}
 `;
 }
 
@@ -245,6 +353,44 @@ function generateReadme(name: string, analysis: ReferenceAnalysis | SiteAnalysis
   }
   lines.push("");
 
+  lines.push("## Wiring into a Site");
+  lines.push("");
+  lines.push("### 1. tsconfig.json");
+  lines.push("");
+  lines.push("```json");
+  lines.push(`{`);
+  lines.push(`  "compilerOptions": {`);
+  lines.push(`    "paths": {`);
+  lines.push(`      "@platform/themes/${name}/*": ["../../packages/themes/${name}/*"]`);
+  lines.push(`    }`);
+  lines.push(`  }`);
+  lines.push(`}`);
+  lines.push("```");
+  lines.push("");
+  lines.push("### 2. next.config.mjs");
+  lines.push("");
+  lines.push("```js");
+  lines.push(`transpilePackages: ["@platform/themes"],`);
+  lines.push("```");
+  lines.push("");
+  lines.push("### 3. app/globals.css");
+  lines.push("");
+  lines.push("```css");
+  lines.push(`@import "../../packages/themes/${name}/globals.css";`);
+  lines.push("```");
+  lines.push("");
+  lines.push("### 4. theme.config.ts");
+  lines.push("");
+  lines.push("```ts");
+  lines.push(`import { ${toCamelCase(name)}DefaultConfig } from "@platform/themes/${name}";`);
+  lines.push("");
+  lines.push(`export const themeConfig = {`);
+  lines.push(`  ...${toCamelCase(name)}DefaultConfig,`);
+  lines.push(`  // Override colours as needed:`);
+  lines.push(`  // colors: { brand: { primary: "#your-hex" } },`);
+  lines.push(`};`);
+  lines.push("```");
+  lines.push("");
   lines.push("## Verification");
   lines.push("");
   lines.push("Colours in this theme were extracted from a screenshot and may not be pixel-perfect.");
@@ -273,8 +419,8 @@ function appendThemeName(name: string): void {
     return;
   }
 
-  // Find the THEME_NAMES array and append before the closing bracket
-  const themeNamesRegex = /export const THEME_NAMES = \[([^\]]*)\] as const;/;
+  // Find the THEME_NAMES array and append before the closing bracket (supports multi-line)
+  const themeNamesRegex = /export const THEME_NAMES = \[([\s\S]*?)\] as const;/;
   const match = content.match(themeNamesRegex);
   if (!match) {
     console.warn("  [Warning] Could not find THEME_NAMES array — skipping update.");
@@ -327,12 +473,27 @@ export function scaffoldThemePackage(analysis: ReferenceAnalysis | SiteAnalysis,
   fs.mkdirSync(themeDir, { recursive: true });
   fs.mkdirSync(path.join(themeDir, "components"), { recursive: true });
 
+  // Build componentMatches map from v3 SiteAnalysis
+  let componentMatchMap: Map<string, { matchConfidence: string }> | undefined;
+  if ("componentMatches" in analysis && analysis.componentMatches) {
+    componentMatchMap = new Map();
+    for (const match of analysis.componentMatches) {
+      // Find which blueprint this match belongs to by scanning blueprints
+      for (const bp of analysis.sectionBlueprints) {
+        if (bp.componentExportName === match.componentName || bp.name === match.componentName) {
+          componentMatchMap.set(bp.id, { matchConfidence: match.matchConfidence });
+        }
+      }
+    }
+  }
+
   // Write files
   const files: Array<[string, string]> = [
     [path.join(themeDir, "index.ts"), generateIndexTs(name, analysis)],
     [path.join(themeDir, "globals.css"), generateGlobalsCss(name, analysis)],
     [path.join(themeDir, "manifest.ts"), generateManifestTs(name, analysis)],
-    [path.join(themeDir, "showcase-registry.tsx"), generateShowcaseRegistryTsx(name, analysis)],
+    [path.join(themeDir, "showcase-registry.tsx"), generateShowcaseRegistryTsx(name, analysis, componentMatchMap)],
+    [path.join(themeDir, "components", "index.ts"), generateComponentBarrel(analysis, componentMatchMap)],
     [path.join(themeDir, "README.md"), generateReadme(name, analysis)],
   ];
 
@@ -351,6 +512,7 @@ export function scaffoldThemePackage(analysis: ReferenceAnalysis | SiteAnalysis,
       [`./${name}`]: `./${name}/index.ts`,
       [`./${name}/manifest`]: `./${name}/manifest.ts`,
       [`./${name}/showcase`]: `./${name}/showcase-registry.tsx`,
+      [`./${name}/components`]: `./${name}/components/index.ts`,
     };
 
     for (const [key, value] of Object.entries(newExports)) {
@@ -403,8 +565,12 @@ function main() {
   console.log("\n✅ Scaffold complete.\n");
 }
 
-// Only run CLI when this file is the entry point
-const isDirectRun = require.main === module || process.argv[1]?.includes("scaffold-theme-package");
+// Only run CLI when this file is the entry point (ESM-safe detection)
+const isDirectRun =
+  (typeof import.meta?.url === "string" &&
+    process.argv[1] &&
+    import.meta.url === `file://${process.argv[1]}`) ||
+  process.argv[1]?.includes("scaffold-theme-package");
 if (isDirectRun) {
   main();
 }
