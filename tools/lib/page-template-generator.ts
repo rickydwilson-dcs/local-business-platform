@@ -108,7 +108,7 @@ function resolveImport(
   if (blueprint) {
     return {
       componentName: blueprint.componentExportName,
-      importPath: `@platform/themes/${themeName}/components/${blueprint.componentFileName.replace(".tsx", "")}`,
+      importPath: `@platform/themes/${themeName}/components`,
       isCore: false,
     };
   }
@@ -154,18 +154,8 @@ function generatePageTsx(
     importLines.push(`import { ${sorted.join(", ")} } from "${importPath}";`);
   }
 
-  // Determine if any section needs 'use client'
-  const needsClient = blueprint.sections.some((s) => {
-    const bp = blueprintMap.get(s.blueprintId);
-    return bp?.interactionNeeds === "stateful";
-  });
-
+  // Pages are Server Components by default — no blanket "use client"
   const lines: string[] = [];
-
-  if (needsClient) {
-    lines.push(`"use client";`);
-    lines.push("");
-  }
 
   lines.push(`/**`);
   lines.push(` * ${toPascalCase(blueprint.pageType)} Page`);
@@ -180,8 +170,7 @@ function generatePageTsx(
     lines.push("");
   }
 
-  const fnName = `${toPascalCase(blueprint.pageType)}Page`;
-  lines.push(`export function ${fnName}() {`);
+  lines.push(`export default function Page() {`);
   lines.push(`  return (`);
   lines.push(`    <div className="min-h-screen">`);
 
