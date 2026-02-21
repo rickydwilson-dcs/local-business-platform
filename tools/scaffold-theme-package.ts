@@ -260,67 +260,95 @@ function generateGlobalsCss(name: string, analysis: ReferenceAnalysis | SiteAnal
  * Reference site: ${analysis.reference.url ?? "unknown"}
  * Capture date: ${analysis.reference.capturedAt}
  *
- * Standard utility classes using @apply with theme tokens.
- * Import this file in your site's app/globals.css:
+ * Theme-level utility classes shared by all ${pascal} sites.
+ * Import this file at the top of your site's app/globals.css:
  *
  *   @import "../../packages/themes/${name}/globals.css";
+ *   @tailwind base;
+ *   @tailwind components;
+ *   @tailwind utilities;
+ *
+ * Pattern: matches packages/themes/vega/globals.css
+ * No @layer wrappers. No opacity modifiers in @apply. Only standard theme tokens.
  */
 
-/* Buttons */
+/* ==========================================
+   BUTTONS
+   ========================================== */
+
 .btn-primary {
-  @apply bg-brand-primary text-on-brand-primary px-6 py-3 rounded-lg font-semibold
-    hover:bg-brand-primary/90 transition-colors duration-200;
+  @apply inline-flex items-center justify-center px-6 py-3 rounded-lg;
+  @apply bg-brand-primary text-on-brand-primary font-semibold;
+  @apply hover:bg-brand-primary-hover transition-all duration-200;
+  @apply focus:ring-2 focus:ring-brand-primary focus:ring-offset-2;
 }
 
 .btn-secondary {
-  @apply bg-brand-secondary text-on-brand-secondary px-6 py-3 rounded-lg font-semibold
-    hover:bg-brand-secondary/90 transition-colors duration-200;
+  @apply inline-flex items-center justify-center px-6 py-3 rounded-lg;
+  @apply bg-surface-card text-brand-primary border border-brand-primary font-semibold;
+  @apply hover:bg-surface-subtle transition-all duration-200;
+  @apply focus:ring-2 focus:ring-brand-primary focus:ring-offset-2;
 }
 
 .btn-ghost {
-  @apply bg-transparent text-brand-primary px-6 py-3 rounded-lg font-semibold
-    border border-brand-primary hover:bg-brand-primary/10 transition-colors duration-200;
+  @apply inline-flex items-center justify-center px-6 py-3 rounded-lg;
+  @apply bg-surface-subtle text-surface-foreground font-semibold;
+  @apply hover:bg-surface-subtle transition-all duration-200;
+  @apply focus:ring-2 focus:ring-surface-subtle-border focus:ring-offset-2;
 }
 
-/* Cards */
+/* ==========================================
+   CARDS
+   ========================================== */
+
 .card {
-  @apply bg-surface-background border border-surface-muted rounded-xl p-6 shadow-sm;
+  @apply bg-surface-card border border-surface-subtle rounded-xl p-6;
+  @apply shadow-sm hover:shadow-md transition-shadow;
 }
 
 .card-interactive {
-  @apply bg-surface-background border border-surface-muted rounded-xl p-6 shadow-sm
-    hover:shadow-md hover:border-brand-primary/30 transition-all duration-200;
+  @apply bg-surface-card border border-surface-subtle rounded-xl p-6 shadow-sm;
+  @apply hover:shadow-md hover:-translate-y-1 transition-all duration-300;
 }
 
-/* Sections */
+/* ==========================================
+   SECTIONS
+   ========================================== */
+
 .section {
-  @apply py-16 md:py-24 px-4;
+  @apply py-16 md:py-24;
 }
 
 .section-compact {
-  @apply py-8 md:py-12 px-4;
+  @apply py-8 md:py-12;
 }
 
-/* Containers */
+/* ==========================================
+   CONTAINERS
+   ========================================== */
+
 .container-narrow {
-  @apply max-w-3xl mx-auto;
+  @apply max-w-4xl mx-auto px-4 sm:px-6 lg:px-8;
 }
 
 .container-standard {
-  @apply max-w-7xl mx-auto;
+  @apply mx-auto w-full lg:w-[90%] px-6;
 }
 
-/* Headings */
+/* ==========================================
+   TYPOGRAPHY
+   ========================================== */
+
 .heading-hero {
-  @apply text-h1 font-bold text-surface-foreground;
+  @apply text-4xl md:text-5xl lg:text-6xl font-bold text-surface-foreground mb-6;
 }
 
 .heading-section {
-  @apply text-h2 font-bold text-surface-foreground;
+  @apply text-2xl sm:text-3xl md:text-4xl font-bold text-surface-foreground mb-4;
 }
 
 .heading-card {
-  @apply text-h3 font-semibold text-surface-foreground;
+  @apply text-xl sm:text-2xl font-bold text-surface-foreground mb-4;
 }
 `;
 }
