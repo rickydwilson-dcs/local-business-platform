@@ -180,7 +180,7 @@ export function ContactForm({ services, serviceAreas }: ContactFormProps) {
         {/* Name */}
         <div>
           <label htmlFor="name" className="block text-sm font-medium text-surface-foreground mb-2">
-            Name <span className="text-red-500">*</span>
+            Name <span className="text-error">*</span>
           </label>
           <input
             type="text"
@@ -189,17 +189,17 @@ export function ContactForm({ services, serviceAreas }: ContactFormProps) {
             value={formData.name}
             onChange={handleChange}
             className={`w-full px-4 py-3 rounded-lg border ${
-              errors.name ? 'border-red-500' : 'border-surface-border'
+              errors.name ? 'border-error' : 'border-surface-border'
             } focus:outline-none focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary`}
             placeholder="Your name"
           />
-          {errors.name && <p className="mt-1 text-sm text-red-500">{errors.name}</p>}
+          {errors.name && <p className="mt-1 text-sm text-error">{errors.name}</p>}
         </div>
 
         {/* Email */}
         <div>
           <label htmlFor="email" className="block text-sm font-medium text-surface-foreground mb-2">
-            Email <span className="text-red-500">*</span>
+            Email <span className="text-error">*</span>
           </label>
           <input
             type="email"
@@ -208,11 +208,11 @@ export function ContactForm({ services, serviceAreas }: ContactFormProps) {
             value={formData.email}
             onChange={handleChange}
             className={`w-full px-4 py-3 rounded-lg border ${
-              errors.email ? 'border-red-500' : 'border-surface-border'
+              errors.email ? 'border-error' : 'border-surface-border'
             } focus:outline-none focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary`}
             placeholder="your@email.com"
           />
-          {errors.email && <p className="mt-1 text-sm text-red-500">{errors.email}</p>}
+          {errors.email && <p className="mt-1 text-sm text-error">{errors.email}</p>}
         </div>
 
         {/* Phone */}
@@ -263,7 +263,7 @@ export function ContactForm({ services, serviceAreas }: ContactFormProps) {
             name="service"
             value={formData.service}
             onChange={handleChange}
-            className="w-full px-4 py-3 rounded-lg border border-surface-border focus:outline-none focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary bg-white"
+            className="w-full px-4 py-3 rounded-lg border border-surface-border focus:outline-none focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary bg-surface-background"
           >
             <option value="">Select a service</option>
             {services.map((service) => (
@@ -288,7 +288,7 @@ export function ContactForm({ services, serviceAreas }: ContactFormProps) {
             name="location"
             value={formData.location}
             onChange={handleChange}
-            className="w-full px-4 py-3 rounded-lg border border-surface-border focus:outline-none focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary bg-white"
+            className="w-full px-4 py-3 rounded-lg border border-surface-border focus:outline-none focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary bg-surface-background"
           >
             <option value="">Select your area</option>
             {serviceAreas.map((area) => (
@@ -304,7 +304,7 @@ export function ContactForm({ services, serviceAreas }: ContactFormProps) {
       {/* Message */}
       <div>
         <label htmlFor="message" className="block text-sm font-medium text-surface-foreground mb-2">
-          Message <span className="text-red-500">*</span>
+          Message <span className="text-error">*</span>
         </label>
         <textarea
           id="message"
@@ -313,11 +313,11 @@ export function ContactForm({ services, serviceAreas }: ContactFormProps) {
           onChange={handleChange}
           rows={6}
           className={`w-full px-4 py-3 rounded-lg border ${
-            errors.message ? 'border-red-500' : 'border-surface-border'
+            errors.message ? 'border-error' : 'border-surface-border'
           } focus:outline-none focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary resize-none`}
           placeholder="Tell us about your project or enquiry..."
         />
-        {errors.message && <p className="mt-1 text-sm text-red-500">{errors.message}</p>}
+        {errors.message && <p className="mt-1 text-sm text-error">{errors.message}</p>}
       </div>
 
       {/* Submit Button */}

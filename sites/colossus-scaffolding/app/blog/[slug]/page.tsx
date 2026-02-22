@@ -159,25 +159,25 @@ export default async function BlogPostPage({ params }: { params: Promise<Params>
           />
 
           {/* Article Content - Single Column Layout */}
-          <section className="section-standard bg-white">
+          <section className="section-standard bg-surface-card">
             <div className="container-standard">
               <div className="max-w-4xl mx-auto">
                 {/* Prose Content */}
-                <div className="prose prose-lg max-w-none prose-headings:text-gray-900 prose-p:text-gray-700 prose-a:text-brand-primary prose-a:no-underline hover:prose-a:underline prose-strong:text-gray-900 prose-li:text-gray-700 prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-6 prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-4">
+                <div className="prose prose-lg max-w-none prose-headings:text-surface-foreground prose-p:text-surface-secondary prose-a:text-brand-primary prose-a:no-underline hover:prose-a:underline prose-strong:text-surface-foreground prose-li:text-surface-secondary prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-6 prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-4">
                   {mdxContent}
                 </div>
 
                 {/* Tags */}
                 {frontmatter.tags && frontmatter.tags.length > 0 && (
-                  <div className="mt-12 pt-8 border-t border-gray-200">
-                    <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-4">
+                  <div className="mt-12 pt-8 border-t border-surface-subtle">
+                    <h3 className="text-sm font-semibold text-surface-muted-foreground uppercase tracking-wide mb-4">
                       Topics
                     </h3>
                     <div className="flex flex-wrap gap-2">
                       {frontmatter.tags.map((tag) => (
                         <span
                           key={tag}
-                          className="bg-gray-100 text-gray-700 text-sm px-4 py-2 rounded-full hover:bg-gray-200 transition-colors"
+                          className="bg-surface-subtle text-surface-secondary text-sm px-4 py-2 rounded-full hover:bg-surface-muted transition-colors"
                         >
                           {tag}
                         </span>
@@ -188,8 +188,8 @@ export default async function BlogPostPage({ params }: { params: Promise<Params>
 
                 {/* Related Services */}
                 {frontmatter.relatedServices && frontmatter.relatedServices.length > 0 && (
-                  <div className="mt-8 pt-8 border-t border-gray-200">
-                    <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-4">
+                  <div className="mt-8 pt-8 border-t border-surface-subtle">
+                    <h3 className="text-sm font-semibold text-surface-muted-foreground uppercase tracking-wide mb-4">
                       Related Services
                     </h3>
                     <div className="flex flex-wrap gap-3">

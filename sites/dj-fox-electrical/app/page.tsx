@@ -242,7 +242,7 @@ export default async function HomePage() {
           <h2 className="text-4xl font-bold mb-6">
             Need an <span className="accent-underline">Emergency</span> Electrician?
           </h2>
-          <p className="text-xl mb-8 text-gray-300">
+          <p className="text-xl mb-8 text-surface-muted-foreground">
             Available 24/7 for urgent electrical issues across Eastbourne and East Sussex
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

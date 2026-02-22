@@ -43,7 +43,7 @@ function StarRating({ rating, size = "md" }: { rating: number; size?: "sm" | "md
       {[...Array(5)].map((_, i) => (
         <svg
           key={i}
-          className={`${sizeClasses[size]} ${i < rating ? "text-yellow-400" : "text-gray-200"}`}
+          className={`${sizeClasses[size]} ${i < rating ? "text-yellow-400" : "text-surface-muted-foreground"}`}
           fill="currentColor"
           viewBox="0 0 20 20"
           aria-hidden="true"
@@ -57,10 +57,10 @@ function StarRating({ rating, size = "md" }: { rating: number; size?: "sm" | "md
 
 function AggregateRatingDisplay({ average, count }: { average: number; count: number }) {
   return (
-    <div className="bg-white rounded-2xl shadow-lg p-8 text-center">
+    <div className="bg-surface-card rounded-2xl shadow-lg p-8 text-center">
       <div className="text-5xl font-bold text-brand-primary mb-2">{average.toFixed(1)}</div>
       <StarRating rating={Math.round(average)} size="lg" />
-      <p className="text-gray-600 mt-2">Based on {count} reviews</p>
+      <p className="text-surface-tertiary mt-2">Based on {count} reviews</p>
 
       {/* Rating Distribution */}
       <div className="mt-6 space-y-2">
@@ -69,7 +69,7 @@ function AggregateRatingDisplay({ average, count }: { average: number; count: nu
           const percentage = stars === 5 ? 90 : stars === 4 ? 10 : 0;
           return (
             <div key={stars} className="flex items-center gap-2 text-sm">
-              <span className="w-3 text-gray-600">{stars}</span>
+              <span className="w-3 text-surface-tertiary">{stars}</span>
               <svg
                 aria-hidden="true"
                 className="w-4 h-4 text-yellow-400"
@@ -78,13 +78,13 @@ function AggregateRatingDisplay({ average, count }: { average: number; count: nu
               >
                 <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
               </svg>
-              <div className="flex-1 h-2 bg-gray-100 rounded-full overflow-hidden">
+              <div className="flex-1 h-2 bg-surface-subtle rounded-full overflow-hidden">
                 <div
                   className="h-full bg-yellow-400 rounded-full"
                   style={{ width: `${percentage}%` }}
                 />
               </div>
-              <span className="w-8 text-right text-gray-500">{percentage}%</span>
+              <span className="w-8 text-right text-surface-muted-foreground">{percentage}%</span>
             </div>
           );
         })}
@@ -95,7 +95,7 @@ function AggregateRatingDisplay({ average, count }: { average: number; count: nu
 
 function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
   return (
-    <article className="bg-white rounded-2xl shadow-lg p-6 hover:shadow-xl transition-shadow">
+    <article className="bg-surface-card rounded-2xl shadow-lg p-6 hover:shadow-xl transition-shadow">
       {/* Header */}
       <div className="flex items-start justify-between mb-4">
         <div className="flex items-center gap-3">
@@ -103,15 +103,15 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
             {testimonial.customerName.charAt(0)}
           </div>
           <div>
-            <h3 className="font-bold text-gray-900">{testimonial.customerName}</h3>
-            <p className="text-sm text-gray-500">
+            <h3 className="font-bold text-surface-foreground">{testimonial.customerName}</h3>
+            <p className="text-sm text-surface-muted-foreground">
               {testimonial.customerRole}
               {testimonial.customerCompany && `, ${testimonial.customerCompany}`}
             </p>
           </div>
         </div>
         {testimonial.verified && (
-          <span className="inline-flex items-center gap-1 text-green-600 text-sm font-medium">
+          <span className="inline-flex items-center gap-1 text-success text-sm font-medium">
             <svg aria-hidden="true" className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
               <path
                 fillRule="evenodd"
@@ -130,10 +130,10 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
       </div>
 
       {/* Review Text */}
-      <blockquote className="text-gray-700 mb-4">&ldquo;{testimonial.text}&rdquo;</blockquote>
+      <blockquote className="text-surface-secondary mb-4">&ldquo;{testimonial.text}&rdquo;</blockquote>
 
       {/* Meta */}
-      <div className="flex flex-wrap items-center gap-2 text-sm text-gray-500">
+      <div className="flex flex-wrap items-center gap-2 text-sm text-surface-muted-foreground">
         <time dateTime={testimonial.date}>
           {new Date(testimonial.date).toLocaleDateString("en-GB", {
             day: "numeric",
@@ -186,11 +186,11 @@ export default async function ReviewsPage() {
 
       <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100">
         {/* Hero Section */}
-        <section className="section-standard lg:py-24 bg-white">
+        <section className="section-standard lg:py-24 bg-surface-card">
           <div className="container-standard">
             <div className="text-center max-w-3xl mx-auto">
               <h1 className="heading-hero">What Our Customers Say</h1>
-              <p className="text-xl text-gray-800 mb-8">
+              <p className="text-xl text-surface-foreground mb-8">
                 Don&apos;t just take our word for it. Read what homeowners and businesses across the
                 South East say about our scaffolding services.
               </p>
@@ -206,8 +206,8 @@ export default async function ReviewsPage() {
                 <AggregateRatingDisplay average={average} count={count} />
               </div>
               <div className="lg:col-span-2">
-                <div className="bg-white rounded-2xl shadow-lg p-8">
-                  <h2 className="text-xl font-bold text-gray-900 mb-4">Why Choose Us?</h2>
+                <div className="bg-surface-card rounded-2xl shadow-lg p-8">
+                  <h2 className="text-xl font-bold text-surface-foreground mb-4">Why Choose Us?</h2>
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div className="flex items-start gap-3">
                       <div className="w-10 h-10 bg-brand-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
@@ -225,8 +225,8 @@ export default async function ReviewsPage() {
                         </svg>
                       </div>
                       <div>
-                        <h3 className="font-semibold text-gray-900">TG20:21 Compliant</h3>
-                        <p className="text-sm text-gray-600">Industry-standard safety compliance</p>
+                        <h3 className="font-semibold text-surface-foreground">TG20:21 Compliant</h3>
+                        <p className="text-sm text-surface-tertiary">Industry-standard safety compliance</p>
                       </div>
                     </div>
                     <div className="flex items-start gap-3">
@@ -241,8 +241,8 @@ export default async function ReviewsPage() {
                         </svg>
                       </div>
                       <div>
-                        <h3 className="font-semibold text-gray-900">CISRS Qualified</h3>
-                        <p className="text-sm text-gray-600">Trained professional scaffolders</p>
+                        <h3 className="font-semibold text-surface-foreground">CISRS Qualified</h3>
+                        <p className="text-sm text-surface-tertiary">Trained professional scaffolders</p>
                       </div>
                     </div>
                     <div className="flex items-start gap-3">
@@ -261,8 +261,8 @@ export default async function ReviewsPage() {
                         </svg>
                       </div>
                       <div>
-                        <h3 className="font-semibold text-gray-900">Fast Response</h3>
-                        <p className="text-sm text-gray-600">Quick quotes and efficient service</p>
+                        <h3 className="font-semibold text-surface-foreground">Fast Response</h3>
+                        <p className="text-sm text-surface-tertiary">Quick quotes and efficient service</p>
                       </div>
                     </div>
                     <div className="flex items-start gap-3">
@@ -282,8 +282,8 @@ export default async function ReviewsPage() {
                         </svg>
                       </div>
                       <div>
-                        <h3 className="font-semibold text-gray-900">£10M Insured</h3>
-                        <p className="text-sm text-gray-600">Full public liability coverage</p>
+                        <h3 className="font-semibold text-surface-foreground">£10M Insured</h3>
+                        <p className="text-sm text-surface-tertiary">Full public liability coverage</p>
                       </div>
                     </div>
                   </div>
@@ -295,7 +295,7 @@ export default async function ReviewsPage() {
 
         {/* Featured Reviews */}
         {featuredTestimonials.length > 0 && (
-          <section className="section-standard bg-white">
+          <section className="section-standard bg-surface-card">
             <div className="container-standard">
               <h2 className="heading-section mb-8">Featured Reviews</h2>
               <div className="grid md:grid-cols-2 gap-8">
@@ -316,7 +316,7 @@ export default async function ReviewsPage() {
 
             {testimonials.length === 0 ? (
               <div className="text-center py-12">
-                <p className="text-gray-600 text-lg">
+                <p className="text-surface-tertiary text-lg">
                   No reviews yet. Check back soon for customer testimonials.
                 </p>
               </div>
@@ -342,7 +342,7 @@ export default async function ReviewsPage() {
             </p>
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center px-8 py-4 bg-white text-brand-primary font-semibold rounded-lg hover:bg-gray-100 transition-colors"
+              className="inline-flex items-center justify-center px-8 py-4 bg-white text-brand-primary font-semibold rounded-lg hover:bg-surface-subtle transition-colors"
             >
               Get Free Quote
             </Link>

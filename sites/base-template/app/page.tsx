@@ -12,7 +12,7 @@ export default async function HomePage() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="section bg-gradient-to-b from-brand-primary/5 to-white">
+      <section className="section bg-gradient-to-b from-brand-primary/5 to-surface-background">
         <div className="container-narrow text-center">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-balance text-surface-foreground">
             {siteConfig.name}
@@ -155,7 +155,7 @@ export default async function HomePage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/contact"
-              className="bg-white text-brand-primary px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+              className="bg-white text-brand-primary px-8 py-3 rounded-lg font-semibold hover:bg-surface-subtle transition-colors"
             >
               Get a Free Quote
             </Link>
