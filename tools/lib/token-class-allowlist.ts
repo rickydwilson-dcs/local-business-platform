@@ -26,6 +26,7 @@ export const ALLOWED_COLOR_PREFIXES = new Set([
   "text-surface-muted-foreground",
   "text-on-brand-primary",
   "text-on-brand-secondary",
+  "bg-brand-on-primary",
   "border-brand-primary",
   "border-brand-secondary",
   "border-brand-accent",
@@ -73,6 +74,33 @@ const UTILITY_TOKENS = new Set([
   "section-compact",
   "container-narrow",
   "container-standard",
+]);
+
+/** Standard Tailwind utilities that share prefixes with colour classes but aren't colours. */
+const NON_COLOR_UTILITIES = new Set([
+  // Background size / position / repeat / attachment / clip / origin
+  "bg-cover", "bg-contain", "bg-auto",
+  "bg-center", "bg-top", "bg-bottom", "bg-left", "bg-right",
+  "bg-left-top", "bg-left-bottom", "bg-right-top", "bg-right-bottom",
+  "bg-repeat", "bg-no-repeat", "bg-repeat-x", "bg-repeat-y", "bg-repeat-round", "bg-repeat-space",
+  "bg-fixed", "bg-scroll", "bg-local",
+  "bg-clip-border", "bg-clip-padding", "bg-clip-content", "bg-clip-text",
+  "bg-origin-border", "bg-origin-padding", "bg-origin-content",
+  // Text decoration style
+  "decoration-solid", "decoration-double", "decoration-dotted", "decoration-dashed", "decoration-wavy",
+  "decoration-auto", "decoration-from-font",
+  // Border style
+  "border-solid", "border-dashed", "border-dotted", "border-double", "border-hidden", "border-none",
+  // Outline style
+  "outline-none", "outline-dashed", "outline-dotted", "outline-double",
+  // Ring
+  "ring-inset",
+  // Shadow
+  "shadow-inner", "shadow-none",
+  // Stroke width
+  "stroke-0", "stroke-1", "stroke-2",
+  // Fill
+  "fill-none",
 ]);
 
 // ── Standard Tailwind prefixes (non-colour) ──────────────────────────────────
@@ -178,6 +206,9 @@ export function isAllowedClass(className: string): boolean {
       if (withoutNeg.startsWith(prefix)) return true;
     }
   }
+
+  // Allow non-colour utilities that share prefixes with colour classes
+  if (NON_COLOR_UTILITIES.has(stripped)) return true;
 
   // If it looks like a colour class but isn't in our allowlist, reject it
   if (looksLikeColorClass(stripped)) return false;

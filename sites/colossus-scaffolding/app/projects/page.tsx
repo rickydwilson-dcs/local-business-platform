@@ -61,7 +61,7 @@ function ProjectCard({ project }: { project: Project }) {
             <span className="bg-brand-primary text-white text-xs font-semibold px-2 py-1 rounded">
               {projectTypeLabels[project.projectType] || project.projectType}
             </span>
-            <span className="bg-white/90 text-gray-800 text-xs font-medium px-2 py-1 rounded">
+            <span className="bg-surface-card/90 text-surface-foreground text-xs font-medium px-2 py-1 rounded">
               {categoryLabels[project.category] || project.category}
             </span>
           </div>
@@ -69,9 +69,9 @@ function ProjectCard({ project }: { project: Project }) {
         </div>
       </Link>
       <div className="p-5">
-        <p className="text-gray-600 text-sm mb-4 line-clamp-2">{project.description}</p>
+        <p className="text-surface-tertiary text-sm mb-4 line-clamp-2">{project.description}</p>
 
-        <div className="flex flex-wrap gap-2 text-sm text-gray-500 mb-4">
+        <div className="flex flex-wrap gap-2 text-sm text-surface-muted-foreground mb-4">
           <div className="flex items-center gap-1">
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path
@@ -89,7 +89,7 @@ function ProjectCard({ project }: { project: Project }) {
             </svg>
             {project.locationName}
           </div>
-          <span className="text-gray-300">|</span>
+          <span className="text-surface-muted-foreground">|</span>
           <div className="flex items-center gap-1">
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path
@@ -103,7 +103,7 @@ function ProjectCard({ project }: { project: Project }) {
           </div>
           {project.duration && (
             <>
-              <span className="text-gray-300">|</span>
+              <span className="text-surface-muted-foreground">|</span>
               <span>{project.duration}</span>
             </>
           )}
@@ -121,7 +121,7 @@ function ProjectCard({ project }: { project: Project }) {
                 <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
               </svg>
             ))}
-            <span className="text-sm text-gray-500 ml-1">Client Rating</span>
+            <span className="text-sm text-surface-muted-foreground ml-1">Client Rating</span>
           </div>
         )}
 
@@ -164,7 +164,7 @@ export default async function ProjectsPage() {
           <div className="container-standard">
             <div className="text-center">
               <h1 className="heading-hero">Our Projects</h1>
-              <p className="text-xl text-gray-800 mb-8 mx-auto max-w-3xl">
+              <p className="text-xl text-surface-foreground mb-8 mx-auto max-w-3xl">
                 Explore our portfolio of scaffolding projects across the South East. From heritage
                 restorations to large commercial developments, we deliver excellence on every job.
               </p>
@@ -173,15 +173,15 @@ export default async function ProjectsPage() {
               <div className="flex flex-wrap justify-center gap-8 mb-8">
                 <div className="text-center">
                   <div className="text-3xl font-bold text-brand-primary">{totalProjects}+</div>
-                  <div className="text-sm text-gray-600">Completed Projects</div>
+                  <div className="text-sm text-surface-tertiary">Completed Projects</div>
                 </div>
                 <div className="text-center">
                   <div className="text-3xl font-bold text-brand-primary">{uniqueLocations}</div>
-                  <div className="text-sm text-gray-600">Locations Served</div>
+                  <div className="text-sm text-surface-tertiary">Locations Served</div>
                 </div>
                 <div className="text-center">
                   <div className="text-3xl font-bold text-brand-primary">100%</div>
-                  <div className="text-sm text-gray-600">Client Satisfaction</div>
+                  <div className="text-sm text-surface-tertiary">Client Satisfaction</div>
                 </div>
               </div>
             </div>
@@ -211,7 +211,7 @@ export default async function ProjectsPage() {
 
             {projects.length === 0 ? (
               <div className="text-center py-12">
-                <p className="text-gray-600 text-lg">
+                <p className="text-surface-tertiary text-lg">
                   No projects yet. Check back soon to see our latest work.
                 </p>
               </div>
@@ -224,7 +224,7 @@ export default async function ProjectsPage() {
             )}
 
             <div className="text-center mt-12">
-              <p className="text-gray-800 mb-6">
+              <p className="text-surface-foreground mb-6">
                 Have a project that needs professional scaffolding?
               </p>
               <Link href="/contact" className="btn-primary-lg">

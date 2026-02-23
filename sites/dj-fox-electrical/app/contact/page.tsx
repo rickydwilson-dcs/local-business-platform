@@ -71,7 +71,7 @@ export default function ContactPage() {
               <h2 className="text-3xl font-bold text-white mb-2">
                 Write to us for <AccentUnderline as="span">Fast</AccentUnderline> Feedback
               </h2>
-              <p className="text-gray-300 mb-6">
+              <p className="text-surface-muted-foreground mb-6">
                 Our team will get back to you as soon as possible with a tailored solution for your
                 needs.
               </p>
@@ -89,12 +89,12 @@ export default function ContactPage() {
             <div className="grid md:grid-cols-3 gap-12">
               {/* Contact Information */}
               <div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-6">Contact Information</h3>
+                <h3 className="text-2xl font-bold text-surface-foreground mb-6">Contact Information</h3>
                 <div className="space-y-6">
                   <div className="flex items-start gap-4">
                     <Phone className="w-6 h-6 text-brand-primary flex-shrink-0 mt-1" />
                     <div>
-                      <p className="font-semibold text-gray-900 mb-1">Phone</p>
+                      <p className="font-semibold text-surface-foreground mb-1">Phone</p>
                       <Link
                         href={`tel:${PHONE_TEL}`}
                         className="text-brand-primary hover:underline text-lg"
@@ -106,7 +106,7 @@ export default function ContactPage() {
                   <div className="flex items-start gap-4">
                     <Mail className="w-6 h-6 text-brand-primary flex-shrink-0 mt-1" />
                     <div>
-                      <p className="font-semibold text-gray-900 mb-1">Email</p>
+                      <p className="font-semibold text-surface-foreground mb-1">Email</p>
                       <Link
                         href={`mailto:${BUSINESS_EMAIL}`}
                         className="text-brand-primary hover:underline break-all"
@@ -118,8 +118,8 @@ export default function ContactPage() {
                   <div className="flex items-start gap-4">
                     <MapPin className="w-6 h-6 text-brand-primary flex-shrink-0 mt-1" />
                     <div>
-                      <p className="font-semibold text-gray-900 mb-1">Address</p>
-                      <p className="text-gray-700">
+                      <p className="font-semibold text-surface-foreground mb-1">Address</p>
+                      <p className="text-surface-secondary">
                         {ADDRESS.street}
                         <br />
                         {ADDRESS.locality}
@@ -133,22 +133,22 @@ export default function ContactPage() {
 
               {/* Business Hours */}
               <div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-6">Business Hours</h3>
+                <h3 className="text-2xl font-bold text-surface-foreground mb-6">Business Hours</h3>
                 <div className="space-y-4">
                   <div className="flex items-start gap-4">
                     <Clock className="w-6 h-6 text-brand-primary flex-shrink-0 mt-1" />
                     <div>
                       <div className="mb-3">
-                        <p className="font-semibold text-gray-900">Monday - Friday</p>
-                        <p className="text-gray-700">{siteConfig.business.hours.monday}</p>
+                        <p className="font-semibold text-surface-foreground">Monday - Friday</p>
+                        <p className="text-surface-secondary">{siteConfig.business.hours.monday}</p>
                       </div>
                       <div className="mb-3">
-                        <p className="font-semibold text-gray-900">Saturday</p>
-                        <p className="text-gray-700">{siteConfig.business.hours.saturday}</p>
+                        <p className="font-semibold text-surface-foreground">Saturday</p>
+                        <p className="text-surface-secondary">{siteConfig.business.hours.saturday}</p>
                       </div>
                       <div>
-                        <p className="font-semibold text-gray-900">Sunday</p>
-                        <p className="text-gray-700">{siteConfig.business.hours.sunday}</p>
+                        <p className="font-semibold text-surface-foreground">Sunday</p>
+                        <p className="text-surface-secondary">{siteConfig.business.hours.sunday}</p>
                       </div>
                     </div>
                   </div>
@@ -157,7 +157,7 @@ export default function ContactPage() {
 
               {/* Quick Links */}
               <div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-6">Our Services</h3>
+                <h3 className="text-2xl font-bold text-surface-foreground mb-6">Our Services</h3>
                 <ul className="space-y-3">
                   {siteConfig.services.slice(0, 5).map((service) => (
                     <li key={service.slug}>

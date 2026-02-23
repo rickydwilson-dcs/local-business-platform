@@ -83,15 +83,15 @@ function ProjectSummary({ project }: { project: Project }) {
     <ArticleCallout variant="info" title="Project Summary">
       <dl className="space-y-2">
         <div className="flex justify-between">
-          <dt className="text-gray-600">Location:</dt>
-          <dd className="font-medium text-gray-900">
+          <dt className="text-surface-tertiary">Location:</dt>
+          <dd className="font-medium text-surface-foreground">
             {project.locationName}
             {project.region && `, ${project.region}`}
           </dd>
         </div>
         <div className="flex justify-between">
-          <dt className="text-gray-600">Completion date:</dt>
-          <dd className="font-medium text-gray-900">
+          <dt className="text-surface-tertiary">Completion date:</dt>
+          <dd className="font-medium text-surface-foreground">
             {new Date(project.completionDate).toLocaleDateString("en-GB", {
               month: "long",
               year: "numeric",
@@ -100,30 +100,30 @@ function ProjectSummary({ project }: { project: Project }) {
         </div>
         {project.duration && (
           <div className="flex justify-between">
-            <dt className="text-gray-600">Duration:</dt>
-            <dd className="font-medium text-gray-900">{project.duration}</dd>
+            <dt className="text-surface-tertiary">Duration:</dt>
+            <dd className="font-medium text-surface-foreground">{project.duration}</dd>
           </div>
         )}
         {project.scope?.buildingType && (
           <div className="flex justify-between">
-            <dt className="text-gray-600">Building type:</dt>
-            <dd className="font-medium text-gray-900">{project.scope.buildingType}</dd>
+            <dt className="text-surface-tertiary">Building type:</dt>
+            <dd className="font-medium text-surface-foreground">{project.scope.buildingType}</dd>
           </div>
         )}
         {project.scope?.storeys && (
           <div className="flex justify-between">
-            <dt className="text-gray-600">Storeys:</dt>
-            <dd className="font-medium text-gray-900">{project.scope.storeys}</dd>
+            <dt className="text-surface-tertiary">Storeys:</dt>
+            <dd className="font-medium text-surface-foreground">{project.scope.storeys}</dd>
           </div>
         )}
         {project.scope?.squareMetres && (
           <div className="flex justify-between">
-            <dt className="text-gray-600">Size:</dt>
-            <dd className="font-medium text-gray-900">{project.scope.squareMetres}m²</dd>
+            <dt className="text-surface-tertiary">Size:</dt>
+            <dd className="font-medium text-surface-foreground">{project.scope.squareMetres}m²</dd>
           </div>
         )}
         <div className="pt-2 border-t border-blue-200">
-          <dt className="text-gray-600 mb-2">Services:</dt>
+          <dt className="text-surface-tertiary mb-2">Services:</dt>
           <dd className="flex flex-wrap gap-2">
             {project.services.map((serviceSlug) => (
               <Link
@@ -141,11 +141,11 @@ function ProjectSummary({ project }: { project: Project }) {
         </div>
         {project.scope?.challenges && project.scope.challenges.length > 0 && (
           <div className="pt-2 border-t border-blue-200">
-            <dt className="text-gray-600 mb-2">Key constraints:</dt>
+            <dt className="text-surface-tertiary mb-2">Key constraints:</dt>
             <dd className="space-y-1">
               {project.scope.challenges.map((challenge, idx) => (
-                <div key={idx} className="flex items-start gap-2 text-gray-700">
-                  <span className="text-brand-primary mt-0.5">•</span>
+                <div key={idx} className="flex items-start gap-2 text-surface-secondary">
+                  <span className="text-brand-primary mt-0.5">&bull;</span>
                   <span>{challenge}</span>
                 </div>
               ))}
@@ -206,10 +206,10 @@ function RelatedProjects({ projects, currentSlug }: { projects: Project[]; curre
                 />
               </Link>
               <div className="p-6">
-                <h3 className="font-bold text-gray-900 mb-2 line-clamp-2 hover:text-brand-primary transition-colors">
+                <h3 className="font-bold text-surface-foreground mb-2 line-clamp-2 hover:text-brand-primary transition-colors">
                   <Link href={`/projects/${project.slug}`}>{project.title}</Link>
                 </h3>
-                <p className="text-sm text-gray-600">
+                <p className="text-sm text-surface-tertiary">
                   {project.locationName} · {project.year}
                 </p>
               </div>
@@ -270,7 +270,7 @@ export default async function ProjectPage({ params }: { params: Promise<Params> 
                 <ProjectSummary project={frontmatter} />
 
                 {/* Prose Content */}
-                <div className="prose prose-lg max-w-none prose-headings:text-gray-900 prose-p:text-gray-700 prose-a:text-brand-primary prose-a:no-underline hover:prose-a:underline prose-strong:text-gray-900 prose-li:text-gray-700 prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-6 prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-4">
+                <div className="prose prose-lg max-w-none prose-headings:text-surface-foreground prose-p:text-surface-secondary prose-a:text-brand-primary prose-a:no-underline hover:prose-a:underline prose-strong:text-surface-foreground prose-li:text-surface-secondary prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-6 prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-4">
                   {mdxContent}
                 </div>
 

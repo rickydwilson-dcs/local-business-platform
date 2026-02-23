@@ -41,6 +41,54 @@ describe("isAllowedClass", () => {
   test('returns false for "text-accent-light" (invented colour)', () => {
     expect(isAllowedClass("text-accent-light")).toBe(false);
   });
+
+  // -------------------------------------------------------------------------
+  // NON_COLOR_UTILITIES — standard Tailwind utilities that share colour prefixes
+  // -------------------------------------------------------------------------
+
+  test("allows standard Tailwind background utilities", () => {
+    expect(isAllowedClass("bg-cover")).toBe(true);
+    expect(isAllowedClass("bg-center")).toBe(true);
+    expect(isAllowedClass("bg-no-repeat")).toBe(true);
+    expect(isAllowedClass("bg-contain")).toBe(true);
+    expect(isAllowedClass("bg-fixed")).toBe(true);
+    expect(isAllowedClass("bg-clip-text")).toBe(true);
+    expect(isAllowedClass("bg-auto")).toBe(true);
+  });
+
+  test("allows standard Tailwind decoration/border/outline utilities", () => {
+    expect(isAllowedClass("decoration-wavy")).toBe(true);
+    expect(isAllowedClass("border-dashed")).toBe(true);
+    expect(isAllowedClass("outline-none")).toBe(true);
+    expect(isAllowedClass("ring-inset")).toBe(true);
+    expect(isAllowedClass("shadow-none")).toBe(true);
+  });
+
+  test("still rejects invented colour classes", () => {
+    expect(isAllowedClass("bg-brand-dark-purple")).toBe(false);
+    expect(isAllowedClass("bg-custom-blue")).toBe(false);
+    expect(isAllowedClass("text-fancy-red")).toBe(false);
+    expect(isAllowedClass("stroke-neon-green")).toBe(false);
+  });
+
+  test("still allows theme tokens", () => {
+    expect(isAllowedClass("bg-brand-primary")).toBe(true);
+    expect(isAllowedClass("text-surface-foreground")).toBe(true);
+    expect(isAllowedClass("border-brand-accent")).toBe(true);
+  });
+
+  test("allows standard Tailwind prefixes", () => {
+    expect(isAllowedClass("p-4")).toBe(true);
+    expect(isAllowedClass("text-lg")).toBe(true);
+    expect(isAllowedClass("flex")).toBe(true);
+    expect(isAllowedClass("text-center")).toBe(true);
+  });
+
+  test("allows responsive and state modifiers", () => {
+    expect(isAllowedClass("sm:bg-cover")).toBe(true);
+    expect(isAllowedClass("hover:bg-brand-primary")).toBe(true);
+    expect(isAllowedClass("md:text-center")).toBe(true);
+  });
 });
 
 // ---------------------------------------------------------------------------

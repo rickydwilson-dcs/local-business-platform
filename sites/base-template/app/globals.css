@@ -17,7 +17,7 @@
   }
 
   body {
-    @apply bg-white text-gray-900;
+    @apply bg-surface-background text-surface-foreground;
     font-feature-settings: 'rlig' 1, 'calt' 1;
   }
 }

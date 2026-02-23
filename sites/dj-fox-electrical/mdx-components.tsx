@@ -109,7 +109,7 @@ const InfoBox: React.FC<InfoBoxProps> = ({ type = 'info', title, children }) => 
         </div>
         <div className="flex-1">
           {title && <h4 className={`font-semibold ${s.title} mb-2`}>{title}</h4>}
-          <div className="text-gray-700 text-sm leading-relaxed [&>p]:my-0">{children}</div>
+          <div className="text-surface-secondary text-sm leading-relaxed [&>p]:my-0">{children}</div>
         </div>
       </div>
     </div>

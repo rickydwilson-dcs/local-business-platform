@@ -114,23 +114,23 @@ export default function AboutPage() {
                 <ul className="space-y-4">
                   <li className="flex gap-3 items-start">
                     <CheckCircle className="w-6 h-6 text-brand-primary flex-shrink-0 mt-0.5" />
-                    <span className="text-gray-700">
+                    <span className="text-surface-secondary">
                       Fully qualified and NICEIC approved electricians
                     </span>
                   </li>
                   <li className="flex gap-3 items-start">
                     <CheckCircle className="w-6 h-6 text-brand-primary flex-shrink-0 mt-0.5" />
-                    <span className="text-gray-700">
+                    <span className="text-surface-secondary">
                       Comprehensive electrical services for all needs
                     </span>
                   </li>
                   <li className="flex gap-3 items-start">
                     <CheckCircle className="w-6 h-6 text-brand-primary flex-shrink-0 mt-0.5" />
-                    <span className="text-gray-700">24/7 emergency callout service available</span>
+                    <span className="text-surface-secondary">24/7 emergency callout service available</span>
                   </li>
                   <li className="flex gap-3 items-start">
                     <CheckCircle className="w-6 h-6 text-brand-primary flex-shrink-0 mt-0.5" />
-                    <span className="text-gray-700">
+                    <span className="text-surface-secondary">
                       Part P certified and fully insured with £5M cover
                     </span>
                   </li>
@@ -197,7 +197,7 @@ export default function AboutPage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 href="/contact"
-                className="bg-white text-brand-primary px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+                className="bg-white text-brand-primary px-8 py-3 rounded-lg font-semibold hover:bg-surface-subtle transition-colors"
               >
                 Get a Free Quote
               </Link>

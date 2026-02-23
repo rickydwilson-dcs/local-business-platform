@@ -96,6 +96,9 @@ const CLASS_REPLACEMENTS: Record<string, string> = {
   "text-secondary": "text-brand-secondary",
   "bg-muted": "bg-surface-muted",
   "text-muted": "text-surface-muted-foreground",
+  "bg-on-brand-primary": "bg-brand-on-primary",
+  "text-white": "text-on-brand-primary",
+  "text-black": "text-surface-foreground",
 };
 
 function validateAndFixTokenClasses(content: string): { content: string; violations: string[] } {
@@ -249,7 +252,19 @@ async function generateSingleComponent(
       if (usedAI) {
         const { content: fixedContent, violations } = validateAndFixTokenClasses(content);
         if (violations.length > 0) {
-          warnings.push(`${blueprint.name}: Non-standard colour classes auto-fixed: ${violations.join(", ")}`);
+          const strippedViolations = violations.map(v => ({
+            original: v,
+            stripped: v.replace(/^(?:sm:|md:|lg:|xl:|2xl:|hover:|focus:|active:|dark:)+/, ""),
+          }));
+          const fixedClasses = strippedViolations.filter(v => CLASS_REPLACEMENTS[v.stripped]).map(v => v.original);
+          const unfixedClasses = strippedViolations.filter(v => !CLASS_REPLACEMENTS[v.stripped]).map(v => v.original);
+
+          if (fixedClasses.length > 0) {
+            warnings.push(`${blueprint.name}: Non-standard colour classes replaced: ${fixedClasses.join(", ")}`);
+          }
+          if (unfixedClasses.length > 0) {
+            warnings.push(`${blueprint.name}: Unknown colour classes (not in token allowlist): ${unfixedClasses.join(", ")}`);
+          }
           content = fixedContent;
           // Re-check syntax after auto-fix
           const fixSyntaxErrors = validateTypeScriptSyntax(content, blueprint.componentFileName);

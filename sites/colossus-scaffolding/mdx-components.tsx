@@ -32,9 +32,9 @@ const RelatedServices: React.FC<RelatedServicesProps> = ({ title, children }) =>
     .map((child) => child.props);
 
   return (
-    <section className="section-standard bg-white">
+    <section className="section-standard bg-surface-card">
       <div className="container-standard">
-        {title && <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">{title}</h2>}
+        {title && <h2 className="text-2xl sm:text-3xl font-bold text-surface-foreground mb-6">{title}</h2>}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((service, idx) => (
             <ContentCard
@@ -134,7 +134,7 @@ const CoverageSection: React.FC<CoverageSectionProps> = ({
     });
 
   return (
-    <section className="section-standard bg-gray-50">
+    <section className="section-standard bg-surface-subtle">
       <div className="container-standard">
         {/* Badge */}
         {badge && (
@@ -161,7 +161,7 @@ const CoverageSection: React.FC<CoverageSectionProps> = ({
 
         {/* Title */}
         <h2 className="text-3xl sm:text-4xl font-bold text-center mb-4">
-          <span className="text-gray-900">{title}</span>
+          <span className="text-surface-foreground">{title}</span>
           {titleHighlight && (
             <>
               <br />
@@ -172,13 +172,13 @@ const CoverageSection: React.FC<CoverageSectionProps> = ({
 
         {/* Description */}
         {description && (
-          <p className="text-gray-600 text-center text-lg max-w-2xl mx-auto mb-10">{description}</p>
+          <p className="text-surface-tertiary text-center text-lg max-w-2xl mx-auto mb-10">{description}</p>
         )}
 
         {/* Region Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
           {regions.map((region, idx) => (
-            <div key={idx} className="bg-white rounded-2xl p-6 shadow-sm">
+            <div key={idx} className="bg-surface-card rounded-2xl p-6 shadow-sm">
               {/* Region Header */}
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-10 h-10 bg-brand-primary/10 rounded-full flex items-center justify-center">
@@ -202,7 +202,7 @@ const CoverageSection: React.FC<CoverageSectionProps> = ({
                     />
                   </svg>
                 </div>
-                <h3 className="text-xl font-bold text-gray-900">{region.title}</h3>
+                <h3 className="text-xl font-bold text-surface-foreground">{region.title}</h3>
               </div>
 
               {/* Location Pills */}
@@ -211,7 +211,7 @@ const CoverageSection: React.FC<CoverageSectionProps> = ({
                   <Link
                     key={locIdx}
                     href={loc.href}
-                    className="px-4 py-2 bg-gray-100 hover:ring-2 hover:ring-brand-primary text-gray-700 text-sm font-medium rounded-full transition-all"
+                    className="px-4 py-2 bg-surface-subtle hover:ring-2 hover:ring-brand-primary text-surface-secondary text-sm font-medium rounded-full transition-all"
                   >
                     {loc.name}
                   </Link>
@@ -295,12 +295,12 @@ const ServiceIntro: React.FC<ServiceIntroProps> = ({
     .map((child) => child.props.children);
 
   return (
-    <section className="section-standard bg-white">
+    <section className="section-standard bg-surface-card">
       <div className="container-standard grid lg:grid-cols-3 gap-12">
         {/* LEFT SIDEBAR */}
         <div className="lg:col-span-1 order-2 lg:order-1">
-          <div className="bg-gray-50 rounded-2xl p-6 border border-gray-200 h-fit">
-            <h3 className="text-xl font-semibold text-gray-900 mb-4 flex items-center gap-2">
+          <div className="bg-surface-subtle rounded-2xl p-6 border border-surface-subtle h-fit">
+            <h3 className="text-xl font-semibold text-surface-foreground mb-4 flex items-center gap-2">
               <svg
                 className="h-5 w-5 text-brand-primary"
                 fill="none"
@@ -320,16 +320,16 @@ const ServiceIntro: React.FC<ServiceIntroProps> = ({
               {sidebarItems.map((item, index) => (
                 <div
                   key={index}
-                  className="flex items-center gap-3 p-3 bg-white rounded-lg shadow-sm"
+                  className="flex items-center gap-3 p-3 bg-surface-card rounded-lg shadow-sm"
                 >
                   <div className="flex-shrink-0 w-2 h-2 bg-brand-primary rounded-full"></div>
-                  <span className="text-gray-900 font-medium text-sm">{item}</span>
+                  <span className="text-surface-foreground font-medium text-sm">{item}</span>
                 </div>
               ))}
             </div>
 
-            <div className="mt-6 pt-6 border-t border-gray-200">
-              <div className="flex items-center gap-2 text-sm text-gray-800 mb-4">
+            <div className="mt-6 pt-6 border-t border-surface-subtle">
+              <div className="flex items-center gap-2 text-sm text-surface-foreground mb-4">
                 <svg
                   className="h-4 w-4 text-brand-primary"
                   fill="none"
@@ -345,7 +345,7 @@ const ServiceIntro: React.FC<ServiceIntroProps> = ({
                 </svg>
                 TG20:21 Compliant & Fully Insured
               </div>
-              <p className="text-sm text-gray-800 mb-4">
+              <p className="text-sm text-surface-foreground mb-4">
                 £10M public liability insurance and CHAS accreditation for complete peace of mind.
               </p>
               <a
@@ -360,16 +360,16 @@ const ServiceIntro: React.FC<ServiceIntroProps> = ({
 
         {/* RIGHT CONTENT - Main area */}
         <div className="lg:col-span-2 order-1 lg:order-2">
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">{title}</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold text-surface-foreground mb-6">{title}</h2>
           <p className="text-body-lg mb-8">{intro}</p>
 
           {/* Process Steps - 2 column grid like original */}
           {processSteps.length > 0 && (
             <div className="space-y-6">
-              <h3 className="text-xl font-semibold text-gray-900">{stepsTitle}</h3>
+              <h3 className="text-xl font-semibold text-surface-foreground">{stepsTitle}</h3>
               <div className="grid md:grid-cols-2 gap-4">
                 {processSteps.map((step, index) => (
-                  <div key={index} className="flex items-start gap-3 p-4 bg-gray-50 rounded-lg">
+                  <div key={index} className="flex items-start gap-3 p-4 bg-surface-subtle rounded-lg">
                     <div className="flex-shrink-0 w-6 h-6 bg-brand-primary rounded-full flex items-center justify-center mt-0.5">
                       <svg
                         className="h-4 w-4 text-white"
@@ -385,7 +385,7 @@ const ServiceIntro: React.FC<ServiceIntroProps> = ({
                         />
                       </svg>
                     </div>
-                    <span className="text-gray-900 font-medium text-sm">{step}</span>
+                    <span className="text-surface-foreground font-medium text-sm">{step}</span>
                   </div>
                 ))}
               </div>
@@ -409,10 +409,10 @@ const ServiceIntro: React.FC<ServiceIntroProps> = ({
                     </svg>
                   </div>
                   <div>
-                    <h4 className="font-semibold text-gray-900 mb-2">
+                    <h4 className="font-semibold text-surface-foreground mb-2">
                       Professional Installation & Certification
                     </h4>
-                    <p className="text-gray-800 text-sm leading-relaxed">
+                    <p className="text-surface-foreground text-sm leading-relaxed">
                       Every scaffold receives a full handover certificate. We conduct 7-day
                       statutory inspections throughout your hire, plus inspections after adverse
                       weather or modifications.
@@ -518,7 +518,7 @@ const InfoBox: React.FC<InfoBoxProps> = ({ type = "info", title, children }) => 
         </div>
         <div className="flex-1">
           {title && <h4 className={`font-semibold ${s.title} mb-2`}>{title}</h4>}
-          <div className="text-gray-700 text-sm leading-relaxed [&>p]:my-0">{children}</div>
+          <div className="text-surface-secondary text-sm leading-relaxed [&>p]:my-0">{children}</div>
         </div>
       </div>
     </div>
@@ -592,7 +592,7 @@ const FeatureCard: React.FC<FeatureCardProps> = ({ title, icon = "scaffold", chi
   };
 
   return (
-    <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm hover:shadow-md transition-shadow">
+    <div className="bg-surface-card rounded-xl border border-surface-subtle p-6 shadow-sm hover:shadow-md transition-shadow">
       <div className="flex items-start gap-4">
         <div className="flex-shrink-0 w-12 h-12 bg-brand-primary/10 rounded-xl flex items-center justify-center">
           <svg
@@ -605,8 +605,8 @@ const FeatureCard: React.FC<FeatureCardProps> = ({ title, icon = "scaffold", chi
           </svg>
         </div>
         <div className="flex-1">
-          <h4 className="font-bold text-gray-900 mb-2">{title}</h4>
-          <div className="text-gray-700 text-sm leading-relaxed [&>p]:my-0 [&>ul]:my-2 [&>ul]:space-y-1 [&_li]:p-0 [&_li]:bg-transparent [&_li]:text-sm">
+          <h4 className="font-bold text-surface-foreground mb-2">{title}</h4>
+          <div className="text-surface-secondary text-sm leading-relaxed [&>p]:my-0 [&>ul]:my-2 [&>ul]:space-y-1 [&_li]:p-0 [&_li]:bg-transparent [&_li]:text-sm">
             {children}
           </div>
         </div>
@@ -654,13 +654,13 @@ const ComparisonTable: React.FC<ComparisonTableProps> = ({ headers, children }) 
 
   return (
     <div className="overflow-x-auto my-8">
-      <table className="w-full border-collapse bg-white rounded-xl overflow-hidden shadow-sm border border-gray-200">
+      <table className="w-full border-collapse bg-surface-card rounded-xl overflow-hidden shadow-sm border border-surface-subtle">
         <thead>
-          <tr className="bg-gray-50">
+          <tr className="bg-surface-subtle">
             {headers.map((header, idx) => (
               <th
                 key={idx}
-                className="px-4 py-3 text-left text-sm font-semibold text-gray-900 border-b border-gray-200"
+                className="px-4 py-3 text-left text-sm font-semibold text-surface-foreground border-b border-surface-subtle"
               >
                 {header}
               </th>
@@ -669,11 +669,11 @@ const ComparisonTable: React.FC<ComparisonTableProps> = ({ headers, children }) 
         </thead>
         <tbody>
           {rows.map((row, idx) => (
-            <tr key={idx} className={idx % 2 === 0 ? "bg-white" : "bg-gray-50"}>
-              <td className="px-4 py-3 text-sm font-medium text-gray-900 border-b border-gray-100">
+            <tr key={idx} className={idx % 2 === 0 ? "bg-surface-card" : "bg-surface-subtle"}>
+              <td className="px-4 py-3 text-sm font-medium text-surface-foreground border-b border-surface-subtle">
                 {row.label}
               </td>
-              <td className="px-4 py-3 text-sm text-gray-700 border-b border-gray-100">
+              <td className="px-4 py-3 text-sm text-surface-secondary border-b border-surface-subtle">
                 {row.content}
               </td>
             </tr>
@@ -693,13 +693,13 @@ interface CheckListProps {
 const CheckList: React.FC<CheckListProps> = ({ title, type = "check", children }) => {
   return (
     <div className="my-4">
-      {title && <p className="font-semibold text-gray-900 mb-3">{title}</p>}
+      {title && <p className="font-semibold text-surface-foreground mb-3">{title}</p>}
       <ul className="space-y-2">
         {React.Children.map(children, (child, idx) => {
           if (!React.isValidElement(child)) return null;
           const childProps = child.props as { children?: React.ReactNode };
           return (
-            <li key={idx} className="flex items-start gap-3 text-gray-700">
+            <li key={idx} className="flex items-start gap-3 text-surface-secondary">
               {type === "check" && (
                 <svg
                   className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5"
@@ -740,16 +740,16 @@ interface QuoteBlockProps {
 }
 const QuoteBlock: React.FC<QuoteBlockProps> = ({ author, role, children }) => {
   return (
-    <blockquote className="my-8 border-l-4 border-brand-primary bg-gray-50 rounded-r-xl p-6">
-      <div className="text-gray-800 text-lg italic leading-relaxed mb-4">{children}</div>
+    <blockquote className="my-8 border-l-4 border-brand-primary bg-surface-subtle rounded-r-xl p-6">
+      <div className="text-surface-foreground text-lg italic leading-relaxed mb-4">{children}</div>
       {author && (
         <footer className="flex items-center gap-3">
           <div className="w-10 h-10 bg-brand-primary rounded-full flex items-center justify-center text-white font-semibold">
             {author.charAt(0)}
           </div>
           <div>
-            <p className="font-semibold text-gray-900">{author}</p>
-            {role && <p className="text-sm text-gray-600">{role}</p>}
+            <p className="font-semibold text-surface-foreground">{author}</p>
+            {role && <p className="text-sm text-surface-tertiary">{role}</p>}
           </div>
         </footer>
       )}
@@ -784,7 +784,7 @@ const ImageWithCaption: React.FC<ImageWithCaptionProps> = ({
         />
       </div>
       {caption && (
-        <figcaption className="mt-3 text-sm text-gray-600 text-center italic">{caption}</figcaption>
+        <figcaption className="mt-3 text-sm text-surface-tertiary text-center italic">{caption}</figcaption>
       )}
     </figure>
   );
@@ -814,7 +814,7 @@ const StepByStep: React.FC<StepByStepProps> = ({ title, children }) => {
 
   return (
     <div className="my-8">
-      {title && <h3 className="text-xl font-bold text-gray-900 mb-6">{title}</h3>}
+      {title && <h3 className="text-xl font-bold text-surface-foreground mb-6">{title}</h3>}
       <div className="space-y-4">
         {steps.map((step, idx) => (
           <div key={idx} className="flex gap-4">
@@ -823,9 +823,9 @@ const StepByStep: React.FC<StepByStepProps> = ({ title, children }) => {
                 {idx + 1}
               </div>
             </div>
-            <div className="flex-1 pb-4 border-b border-gray-100 last:border-0">
-              <h4 className="font-semibold text-gray-900 mb-2">{step.title}</h4>
-              <div className="text-gray-700 text-sm leading-relaxed [&>p]:my-0">{step.content}</div>
+            <div className="flex-1 pb-4 border-b border-surface-subtle last:border-0">
+              <h4 className="font-semibold text-surface-foreground mb-2">{step.title}</h4>
+              <div className="text-surface-secondary text-sm leading-relaxed [&>p]:my-0">{step.content}</div>
             </div>
           </div>
         ))}
@@ -867,21 +867,21 @@ const mdxComponents: MDXMap = {
 
   // H2 - Large bold heading (NOT blue, NOT underlined)
   h2: (p) => (
-    <h2 className={`text-2xl sm:text-3xl font-bold text-gray-900 mt-12 mb-6 ${p.className || ""}`}>
+    <h2 className={`text-2xl sm:text-3xl font-bold text-surface-foreground mt-12 mb-6 ${p.className || ""}`}>
       {p.children}
     </h2>
   ),
 
   // H3 - Medium heading
   h3: (p) => (
-    <h3 className={`text-xl font-semibold text-gray-900 mt-8 mb-4 ${p.className || ""}`}>
+    <h3 className={`text-xl font-semibold text-surface-foreground mt-8 mb-4 ${p.className || ""}`}>
       {p.children}
     </h3>
   ),
 
   // Paragraph
   p: (p) => (
-    <p className={`text-gray-700 leading-relaxed my-4 ${p.className || ""}`}>{p.children}</p>
+    <p className={`text-surface-secondary leading-relaxed my-4 ${p.className || ""}`}>{p.children}</p>
   ),
 
   // Unordered list - vertical stack
@@ -896,19 +896,19 @@ const mdxComponents: MDXMap = {
 
   // List item - card with blue dot indicator
   li: (p) => (
-    <li className="flex items-start gap-3 p-4 bg-gray-50 rounded-lg list-none">
+    <li className="flex items-start gap-3 p-4 bg-surface-subtle rounded-lg list-none">
       <div className="flex-shrink-0 w-2 h-2 bg-brand-primary rounded-full mt-2" />
-      <div className="text-gray-800">{p.children}</div>
+      <div className="text-surface-foreground">{p.children}</div>
     </li>
   ),
 
   // Strong/bold text
   strong: (p) => (
-    <strong className={`font-semibold text-gray-900 ${p.className || ""}`}>{p.children}</strong>
+    <strong className={`font-semibold text-surface-foreground ${p.className || ""}`}>{p.children}</strong>
   ),
 
   // Horizontal rule
-  hr: () => <hr className="my-10 border-t border-gray-200" />,
+  hr: () => <hr className="my-10 border-t border-surface-subtle" />,
 
   // Images
   img: (p) => {

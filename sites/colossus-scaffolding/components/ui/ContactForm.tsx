@@ -169,7 +169,7 @@ export function ContactForm() {
   };
 
   return (
-    <div className="bg-white rounded-2xl shadow-lg p-8">
+    <div className="bg-surface-card rounded-2xl shadow-lg p-8">
       <h2 className="text-2xl font-semibold mb-6">Request a Free Quote</h2>
 
       {submitStatus === "success" && (
@@ -193,7 +193,7 @@ export function ContactForm() {
         {/* Personal Details */}
         <div className="grid md:grid-cols-2 gap-6">
           <div>
-            <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+            <label htmlFor="name" className="block text-sm font-medium text-surface-secondary mb-2">
               Full Name *
             </label>
             <input
@@ -206,19 +206,19 @@ export function ContactForm() {
               aria-invalid={!!errors.name}
               aria-describedby={errors.name ? "name-error" : undefined}
               className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-brand-primary ${
-                errors.name ? "border-red-500" : "border-gray-300"
+                errors.name ? "border-error" : "border-surface-subtle"
               }`}
               placeholder="Your full name"
             />
             {errors.name && (
-              <p id="name-error" role="alert" className="mt-1 text-sm text-red-600">
+              <p id="name-error" role="alert" className="mt-1 text-sm text-error">
                 {errors.name}
               </p>
             )}
           </div>
 
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+            <label htmlFor="email" className="block text-sm font-medium text-surface-secondary mb-2">
               Email Address *
             </label>
             <input
@@ -231,12 +231,12 @@ export function ContactForm() {
               aria-invalid={!!errors.email}
               aria-describedby={errors.email ? "email-error" : undefined}
               className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-brand-primary ${
-                errors.email ? "border-red-500" : "border-gray-300"
+                errors.email ? "border-error" : "border-surface-subtle"
               }`}
               placeholder="your.email@example.com"
             />
             {errors.email && (
-              <p id="email-error" role="alert" className="mt-1 text-sm text-red-600">
+              <p id="email-error" role="alert" className="mt-1 text-sm text-error">
                 {errors.email}
               </p>
             )}
@@ -245,7 +245,7 @@ export function ContactForm() {
 
         <div className="grid md:grid-cols-2 gap-6">
           <div>
-            <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
+            <label htmlFor="phone" className="block text-sm font-medium text-surface-secondary mb-2">
               Phone Number
             </label>
             <input
@@ -254,13 +254,13 @@ export function ContactForm() {
               name="phone"
               value={formData.phone}
               onChange={handleInputChange}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-brand-primary"
+              className="w-full px-4 py-3 border border-surface-subtle rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-brand-primary"
               placeholder="01234 567890"
             />
           </div>
 
           <div>
-            <label htmlFor="projectType" className="block text-sm font-medium text-gray-700 mb-2">
+            <label htmlFor="projectType" className="block text-sm font-medium text-surface-secondary mb-2">
               Project Type
             </label>
             <select
@@ -268,7 +268,7 @@ export function ContactForm() {
               name="projectType"
               value={formData.projectType}
               onChange={handleInputChange}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-brand-primary"
+              className="w-full px-4 py-3 border border-surface-subtle rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-brand-primary"
             >
               <option value="residential">Residential</option>
               <option value="commercial">Commercial</option>
@@ -280,7 +280,7 @@ export function ContactForm() {
         {/* Project Details */}
         <div className="grid md:grid-cols-2 gap-6">
           <div>
-            <label htmlFor="service" className="block text-sm font-medium text-gray-700 mb-2">
+            <label htmlFor="service" className="block text-sm font-medium text-surface-secondary mb-2">
               Service Required
             </label>
             <select
@@ -288,7 +288,7 @@ export function ContactForm() {
               name="service"
               value={formData.service}
               onChange={handleInputChange}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-brand-primary"
+              className="w-full px-4 py-3 border border-surface-subtle rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-brand-primary"
             >
               <option value="">Select a service...</option>
               {services.map((service) => (
@@ -300,7 +300,7 @@ export function ContactForm() {
           </div>
 
           <div>
-            <label htmlFor="location" className="block text-sm font-medium text-gray-700 mb-2">
+            <label htmlFor="location" className="block text-sm font-medium text-surface-secondary mb-2">
               Location/County
             </label>
             <select
@@ -308,7 +308,7 @@ export function ContactForm() {
               name="location"
               value={formData.location}
               onChange={handleInputChange}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-brand-primary"
+              className="w-full px-4 py-3 border border-surface-subtle rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-brand-primary"
             >
               <option value="">Select location...</option>
               {locations.map((location) => (
@@ -321,7 +321,7 @@ export function ContactForm() {
         </div>
 
         <div>
-          <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
+          <label htmlFor="subject" className="block text-sm font-medium text-surface-secondary mb-2">
             Subject
           </label>
           <input
@@ -330,14 +330,14 @@ export function ContactForm() {
             name="subject"
             value={formData.subject}
             onChange={handleInputChange}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-brand-primary"
+            className="w-full px-4 py-3 border border-surface-subtle rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-brand-primary"
             placeholder="e.g. Quote for house renovation scaffolding"
           />
         </div>
 
         {/* Message */}
         <div>
-          <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+          <label htmlFor="message" className="block text-sm font-medium text-surface-secondary mb-2">
             Project Details *
           </label>
           <textarea
@@ -350,12 +350,12 @@ export function ContactForm() {
             aria-invalid={!!errors.message}
             aria-describedby={errors.message ? "message-error" : undefined}
             className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-brand-primary ${
-              errors.message ? "border-red-500" : "border-gray-300"
+              errors.message ? "border-error" : "border-surface-subtle"
             }`}
             placeholder="Tell us about your project: building height, access requirements, duration, special considerations, etc."
           />
           {errors.message && (
-            <p id="message-error" role="alert" className="mt-1 text-sm text-red-600">
+            <p id="message-error" role="alert" className="mt-1 text-sm text-error">
               {errors.message}
             </p>
           )}
@@ -370,7 +370,7 @@ export function ContactForm() {
           {isSubmitting ? "Sending..." : "Send Enquiry"}
         </button>
 
-        <p className="text-sm text-gray-800 text-center">
+        <p className="text-sm text-surface-foreground text-center">
           * Required fields. We&apos;ll respond within 24 hours with your free quote.
         </p>
       </form>

@@ -326,10 +326,10 @@ export default async function Page({ params }: { params: Promise<Params> }) {
           <section className="py-16 bg-white">
             <div className="container-standard">
               <div className="text-center mb-12">
-                <h2 className="text-3xl font-semibold text-gray-900 mb-4">
+                <h2 className="text-3xl font-semibold text-surface-foreground mb-4">
                   {locationData.towns.title}
                 </h2>
-                <p className="text-lg text-gray-800 max-w-3xl mx-auto">
+                <p className="text-lg text-surface-foreground max-w-3xl mx-auto">
                   {locationData.towns.description}
                 </p>
               </div>
@@ -340,12 +340,12 @@ export default async function Page({ params }: { params: Promise<Params> }) {
                     <Link
                       key={town.slug}
                       href={`/locations/${town.slug}`}
-                      className="group p-6 bg-surface-muted rounded-lg border border-gray-200 hover:border-brand-primary hover:shadow-lg transition-all duration-200"
+                      className="group p-6 bg-surface-muted rounded-lg border border-surface-subtle hover:border-brand-primary hover:shadow-lg transition-all duration-200"
                     >
-                      <h3 className="text-lg font-medium text-gray-900 group-hover:text-brand-primary mb-2">
+                      <h3 className="text-lg font-medium text-surface-foreground group-hover:text-brand-primary mb-2">
                         {town.name}
                       </h3>
-                      <p className="text-sm text-gray-800 mb-3">{town.description}</p>
+                      <p className="text-sm text-surface-foreground mb-3">{town.description}</p>
                       <div className="flex items-center justify-between">
                         <span className="text-xs px-2 py-1 bg-green-100 text-green-700 rounded-full">
                           Local Specialists

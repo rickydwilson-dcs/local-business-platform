@@ -13,6 +13,7 @@
     "./components/analytics/AnalyticsDebugPanel": "./src/components/analytics/AnalyticsDebugPanel.tsx",
     "./components/ui/town-finder-section": "./src/components/ui/town-finder-section.tsx",
     "./components/ui/county-gateway-cards": "./src/components/ui/county-gateway-cards.tsx",
+    "./components/animation": "./src/components/animation/index.ts",
     "./components/*": "./src/components/*/index.tsx",
     "./lib/*": "./src/lib/*.ts"
   },

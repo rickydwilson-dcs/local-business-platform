@@ -67,6 +67,33 @@ function toCamelCase(slug: string): string {
 }
 
 // ============================================================================
+// Registry presets
+// ============================================================================
+
+/** Registry variant presets — one per base theme. Update when adding a new base theme. */
+interface RegistryPreset {
+  heroVariant: string;
+  headerVariant: string;
+  cardVariant: string;
+  sectionVariant: string;
+}
+
+const REGISTRY_PRESETS: Record<string, RegistryPreset> = {
+  vega: {
+    heroVariant: "split",
+    headerVariant: "light",
+    cardVariant: "standard",
+    sectionVariant: "standard",
+  },
+  orion: {
+    heroVariant: "image-overlay",
+    headerVariant: "dark",
+    cardVariant: "icon-circle",
+    sectionVariant: "dark-accent",
+  },
+};
+
+// ============================================================================
 // File generators
 // ============================================================================
 
@@ -74,6 +101,9 @@ function generateIndexTs(name: string, analysis: ReferenceAnalysis | SiteAnalysi
   const pascal = toPascalCase(name);
   const camel = toCamelCase(name);
   const tokens = analysis.themeTokenRecommendations;
+
+  const baseTheme = analysis.registryRecommendation?.themeName ?? "vega";
+  const preset = REGISTRY_PRESETS[baseTheme] ?? REGISTRY_PRESETS.vega;
 
   // Build extended surface tokens
   const surfaceEntries: string[] = [
@@ -154,8 +184,16 @@ function generateIndexTs(name: string, analysis: ReferenceAnalysis | SiteAnalysi
  * Analysis date: ${analysis.reference.capturedAt}
  */
 
-import type { DeepPartialThemeConfig } from "@platform/theme-system";
+import type { ComponentRegistry, DeepPartialThemeConfig } from "@platform/theme-system";
 import { registerTheme } from "@platform/theme-system";
+
+export const ${camel}Registry: ComponentRegistry = {
+  theme: "${name}",
+  heroVariant: "${preset.heroVariant}",
+  headerVariant: "${preset.headerVariant}",
+  cardVariant: "${preset.cardVariant}",
+  sectionVariant: "${preset.sectionVariant}",
+};
 
 export const ${camel}DefaultConfig: DeepPartialThemeConfig = {
   colors: {

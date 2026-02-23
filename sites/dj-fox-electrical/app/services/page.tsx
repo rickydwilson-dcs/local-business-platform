@@ -57,7 +57,7 @@ export default async function ServicesPage() {
         <section className="section bg-white">
           <div className="container-narrow">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
+              <h2 className="text-3xl md:text-4xl font-bold text-surface-foreground">
                 Top-Notch <AccentUnderline as="span">Electrical</AccentUnderline> Assistance
               </h2>
             </div>
@@ -91,7 +91,7 @@ export default async function ServicesPage() {
         <section className="section bg-surface-subtle">
           <div className="container-narrow">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
+              <h2 className="text-3xl md:text-4xl font-bold text-surface-foreground">
                 Browse Services by Type
               </h2>
               <p className="text-lg text-surface-foreground max-w-2xl mx-auto mt-4">
@@ -128,7 +128,7 @@ export default async function ServicesPage() {
         <section id="installation-services" className="section bg-white scroll-mt-20">
           <div className="container-narrow">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              <h2 className="text-3xl md:text-4xl font-bold text-surface-foreground mb-4">
                 Installation Services
               </h2>
               <p className="text-lg text-surface-foreground max-w-2xl mx-auto">
@@ -151,7 +151,7 @@ export default async function ServicesPage() {
         <section id="maintenance-services" className="section bg-surface-subtle scroll-mt-20">
           <div className="container-narrow">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              <h2 className="text-3xl md:text-4xl font-bold text-surface-foreground mb-4">
                 Maintenance & Upgrades
               </h2>
               <p className="text-lg text-surface-foreground max-w-2xl mx-auto">
@@ -174,7 +174,7 @@ export default async function ServicesPage() {
         <section id="repair-services" className="section bg-white scroll-mt-20">
           <div className="container-narrow">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              <h2 className="text-3xl md:text-4xl font-bold text-surface-foreground mb-4">
                 Repair & Emergency Services
               </h2>
               <p className="text-lg text-surface-foreground max-w-2xl mx-auto">
@@ -198,7 +198,7 @@ export default async function ServicesPage() {
           <section className="section bg-surface-subtle">
             <div className="container-narrow">
               <div className="text-center mb-12">
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                <h2 className="text-3xl md:text-4xl font-bold text-surface-foreground mb-4">
                   Other Services
                 </h2>
               </div>

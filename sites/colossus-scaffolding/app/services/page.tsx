@@ -47,11 +47,11 @@ export default async function ServicesPage() {
 
       <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100">
         {/* Hero Section */}
-        <section className="section-standard lg:py-24 bg-white">
+        <section className="section-standard lg:py-24 bg-surface-card">
           <div className="container-standard">
             <div className="text-center">
               <h1 className="heading-hero">Our Scaffolding Services</h1>
-              <p className="text-xl text-gray-800 mb-8 mx-auto w-full lg:w-[90%]">
+              <p className="text-xl text-surface-foreground mb-8 mx-auto w-full lg:w-[90%]">
                 Professional scaffolding solutions across the South East UK. From residential
                 repairs to large commercial projects, we deliver safe, compliant access solutions.
               </p>
@@ -62,7 +62,7 @@ export default async function ServicesPage() {
                 </Link>
                 <Link
                   href={`tel:${PHONE_TEL}`}
-                  className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-200 transition-colors"
+                  className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-surface-subtle text-surface-secondary font-semibold rounded-lg hover:bg-surface-muted transition-colors"
                 >
                   <svg
                     aria-hidden="true"
@@ -83,7 +83,7 @@ export default async function ServicesPage() {
               </div>
 
               <div className="flex flex-wrap justify-center gap-2 sm:gap-4">
-                <div className="inline-flex items-center gap-2 bg-gray-100 px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm">
+                <div className="inline-flex items-center gap-2 bg-surface-subtle px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm">
                   <svg
                     aria-hidden="true"
                     className="h-3 w-3 sm:h-4 sm:w-4 text-brand-primary"
@@ -98,7 +98,7 @@ export default async function ServicesPage() {
                   </svg>
                   TG20:21 Compliant
                 </div>
-                <div className="inline-flex items-center gap-2 bg-gray-100 px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm">
+                <div className="inline-flex items-center gap-2 bg-surface-subtle px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm">
                   <svg
                     aria-hidden="true"
                     className="h-3 w-3 sm:h-4 sm:w-4 text-brand-primary"
@@ -113,7 +113,7 @@ export default async function ServicesPage() {
                   </svg>
                   CHAS Accredited
                 </div>
-                <div className="bg-gray-100 px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm">
+                <div className="bg-surface-subtle px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm">
                   £10M Insured
                 </div>
               </div>
@@ -141,7 +141,7 @@ export default async function ServicesPage() {
             />
 
             <div className="text-center mt-12">
-              <p className="text-gray-800 mb-6">
+              <p className="text-surface-foreground mb-6">
                 Need a custom scaffolding solution for your project?
               </p>
               <Link href="/contact" className="btn-primary-lg">
@@ -152,10 +152,10 @@ export default async function ServicesPage() {
         </section>
 
         {/* Call to Action */}
-        <section className="section-compact bg-white">
+        <section className="section-compact bg-surface-card">
           <div className="container-standard text-center">
             <h2 className="heading-subsection">Need a Custom Solution?</h2>
-            <p className="text-xl text-gray-800 mb-8">
+            <p className="text-xl text-surface-foreground mb-8">
               Every project is unique. Contact our expert team to discuss your specific scaffolding
               requirements.
             </p>
@@ -165,7 +165,7 @@ export default async function ServicesPage() {
               </Link>
               <Link
                 href="/about"
-                className="inline-flex items-center justify-center px-8 py-4 border border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-200 transition-colors"
+                className="inline-flex items-center justify-center px-8 py-4 border border-surface-subtle text-surface-secondary font-semibold rounded-lg hover:bg-surface-muted transition-colors"
               >
                 Learn About Us
               </Link>
