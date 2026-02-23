@@ -151,16 +151,12 @@ export function ContactForm({ locations, darkMode = false }: ContactFormProps) {
   if (submitStatus === 'success') {
     const bgColorClass = darkMode ? 'bg-green-900/20' : 'bg-green-50';
     const borderColorClass = darkMode ? 'border-green-700/50' : 'border-green-200';
-    const headingColorClass = darkMode ? 'text-green-400' : 'text-green-800';
-    const textColorClass = darkMode ? 'text-green-300' : 'text-green-700';
 
     return (
       <div className={`${bgColorClass} border ${borderColorClass} rounded-lg p-8 text-center`}>
-        <CheckCircle
-          className={`w-16 h-16 ${darkMode ? 'text-green-400' : 'text-green-500'} mx-auto mb-4`}
-        />
-        <h2 className={`text-2xl font-bold ${headingColorClass} mb-2`}>Message Sent!</h2>
-        <p className={`${textColorClass} mb-6`}>{submitMessage}</p>
+        <CheckCircle className="w-16 h-16 text-success mx-auto mb-4" />
+        <h2 className="text-2xl font-bold text-success mb-2">Message Sent!</h2>
+        <p className="text-success mb-6">{submitMessage}</p>
         <button
           onClick={() => setSubmitStatus('idle')}
           className={darkMode ? 'btn-primary-dark' : 'btn-primary'}
@@ -172,14 +168,12 @@ export function ContactForm({ locations, darkMode = false }: ContactFormProps) {
   }
 
   const inputBgClass = darkMode
-    ? 'bg-gray-800 text-white placeholder-gray-400'
-    : 'bg-white text-gray-900';
-  const inputBorderClass = darkMode ? 'border-gray-600' : 'border-surface-border';
-  const labelClass = darkMode ? 'text-gray-200' : 'text-surface-foreground';
+    ? 'bg-surface-inverse text-white placeholder-surface-muted-foreground'
+    : 'bg-surface-card text-surface-foreground';
+  const inputBorderClass = darkMode ? 'border-surface-card-border' : 'border-surface-border';
+  const labelClass = darkMode ? 'text-surface-muted-foreground' : 'text-surface-foreground';
   const errorBgClass = darkMode ? 'bg-red-900/20' : 'bg-red-50';
   const errorBorderClass = darkMode ? 'border-red-700/50' : 'border-red-200';
-  const errorHeadingClass = darkMode ? 'text-red-400' : 'text-red-800';
-  const errorTextClass = darkMode ? 'text-red-300' : 'text-red-700';
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
@@ -187,12 +181,10 @@ export function ContactForm({ locations, darkMode = false }: ContactFormProps) {
         <div
           className={`${errorBgClass} border ${errorBorderClass} rounded-lg p-4 flex items-start gap-3`}
         >
-          <AlertCircle
-            className={`w-5 h-5 ${darkMode ? 'text-red-400' : 'text-red-500'} flex-shrink-0 mt-0.5`}
-          />
+          <AlertCircle className="w-5 h-5 text-error flex-shrink-0 mt-0.5" />
           <div>
-            <p className={`${errorHeadingClass} font-medium`}>Submission Failed</p>
-            <p className={`${errorTextClass} text-sm`}>{submitMessage}</p>
+            <p className="text-error font-medium">Submission Failed</p>
+            <p className="text-error text-sm">{submitMessage}</p>
           </div>
         </div>
       )}
@@ -210,11 +202,11 @@ export function ContactForm({ locations, darkMode = false }: ContactFormProps) {
             value={formData.name}
             onChange={handleChange}
             className={`w-full px-4 py-3 rounded-lg border ${
-              errors.name ? 'border-red-500' : inputBorderClass
+              errors.name ? 'border-error' : inputBorderClass
             } ${inputBgClass} focus:outline-none focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary`}
             placeholder="Your name"
           />
-          {errors.name && <p className="mt-1 text-sm text-red-500">{errors.name}</p>}
+          {errors.name && <p className="mt-1 text-sm text-error">{errors.name}</p>}
         </div>
 
         {/* Email */}
@@ -229,11 +221,11 @@ export function ContactForm({ locations, darkMode = false }: ContactFormProps) {
             value={formData.email}
             onChange={handleChange}
             className={`w-full px-4 py-3 rounded-lg border ${
-              errors.email ? 'border-red-500' : inputBorderClass
+              errors.email ? 'border-error' : inputBorderClass
             } ${inputBgClass} focus:outline-none focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary`}
             placeholder="your@email.com"
           />
-          {errors.email && <p className="mt-1 text-sm text-red-500">{errors.email}</p>}
+          {errors.email && <p className="mt-1 text-sm text-error">{errors.email}</p>}
         </div>
 
         {/* Phone */}
@@ -263,7 +255,7 @@ export function ContactForm({ locations, darkMode = false }: ContactFormProps) {
             value={formData.location}
             onChange={handleChange}
             className={`w-full px-4 py-3 rounded-lg border ${inputBorderClass} ${
-              darkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-900'
+              darkMode ? 'bg-surface-inverse text-white' : 'bg-surface-card text-surface-foreground'
             } focus:outline-none focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary`}
           >
             <option value="">Select your town</option>
@@ -305,11 +297,11 @@ export function ContactForm({ locations, darkMode = false }: ContactFormProps) {
           onChange={handleChange}
           rows={6}
           className={`w-full px-4 py-3 rounded-lg border ${
-            errors.message ? 'border-red-500' : inputBorderClass
+            errors.message ? 'border-error' : inputBorderClass
           } ${inputBgClass} focus:outline-none focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary resize-none`}
           placeholder="Tell us about your project or enquiry..."
         />
-        {errors.message && <p className="mt-1 text-sm text-red-500">{errors.message}</p>}
+        {errors.message && <p className="mt-1 text-sm text-error">{errors.message}</p>}
       </div>
 
       {/* Submit Button */}

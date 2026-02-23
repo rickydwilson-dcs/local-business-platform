@@ -60,7 +60,7 @@ function BlogCard({ post }: { post: BlogPost }) {
         </Link>
       )}
       <div className="p-6">
-        <div className="flex items-center gap-2 text-sm text-gray-500 mb-3">
+        <div className="flex items-center gap-2 text-sm text-surface-muted-foreground mb-3">
           <time dateTime={post.date}>
             {new Date(post.date).toLocaleDateString("en-GB", {
               day: "numeric",
@@ -75,16 +75,16 @@ function BlogCard({ post }: { post: BlogPost }) {
             </>
           )}
         </div>
-        <h2 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-brand-primary transition-colors">
+        <h2 className="text-xl font-bold text-surface-foreground mb-3 group-hover:text-brand-primary transition-colors">
           <Link href={`/blog/${post.slug}`}>{post.title}</Link>
         </h2>
-        <p className="text-gray-600 mb-4 line-clamp-3">{post.excerpt}</p>
+        <p className="text-surface-tertiary mb-4 line-clamp-3">{post.excerpt}</p>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 bg-brand-primary rounded-full flex items-center justify-center text-white text-sm font-semibold">
               {post.author.name.charAt(0)}
             </div>
-            <span className="text-sm text-gray-600">{post.author.name}</span>
+            <span className="text-sm text-surface-tertiary">{post.author.name}</span>
           </div>
           <Link
             href={`/blog/${post.slug}`}
@@ -123,7 +123,7 @@ export default async function BlogPage() {
           <div className="container-standard">
             <div className="text-center">
               <h1 className="heading-hero">Industry Insights & Expert Tips</h1>
-              <p className="text-xl text-gray-800 mb-8 mx-auto max-w-3xl">
+              <p className="text-xl text-surface-foreground mb-8 mx-auto max-w-3xl">
                 Professional scaffolding guidance, safety tips, and industry news from our
                 experienced team. Stay informed with the latest insights from {siteConfig.business.name}.
               </p>
@@ -154,7 +154,7 @@ export default async function BlogPage() {
 
             {posts.length === 0 ? (
               <div className="text-center py-12">
-                <p className="text-gray-600 text-lg">
+                <p className="text-surface-tertiary text-lg">
                   No blog posts yet. Check back soon for industry insights and expert tips.
                 </p>
               </div>
@@ -167,7 +167,7 @@ export default async function BlogPage() {
             )}
 
             <div className="text-center mt-12">
-              <p className="text-gray-800 mb-6">
+              <p className="text-surface-foreground mb-6">
                 Have a question about scaffolding? Contact our expert team.
               </p>
               <Link href="/contact" className="btn-primary-lg">

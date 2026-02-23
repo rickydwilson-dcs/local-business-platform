@@ -128,7 +128,7 @@ export default function PricingPage() {
                       <span className="text-sm">£100 Callout Fee</span>
                     </div>
                   </div>
-                  <p className="text-gray-300 mb-4">
+                  <p className="text-surface-muted-foreground mb-4">
                     Our £100 emergency callout fee includes up to 2 hours of labour. Additional work
                     charged at standard rates. We respond urgently to electrical emergencies across{' '}
                     {siteConfig.business.address.city} and surrounding areas.
@@ -412,7 +412,7 @@ export default function PricingPage() {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link
                   href="/contact"
-                  className="inline-flex items-center justify-center gap-2 bg-white text-brand-primary px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+                  className="inline-flex items-center justify-center gap-2 bg-white text-brand-primary px-8 py-4 rounded-lg font-semibold hover:bg-surface-subtle transition-colors"
                 >
                   Request Free Quote
                 </Link>

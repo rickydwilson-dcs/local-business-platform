@@ -46,7 +46,7 @@ export default function AboutPage() {
 
       <main className="min-h-screen bg-surface-background">
         {/* Hero Section */}
-        <section className="section-standard bg-gradient-to-br from-gray-50 to-gray-100">
+        <section className="section-standard bg-surface-subtle">
           <div className="container-standard">
             <div className="mx-auto w-full lg:w-[90%] text-center">
               {about?.heroBadges && about.heroBadges.length > 0 && (
@@ -111,7 +111,7 @@ export default function AboutPage() {
 
         {/* Stats Section */}
         {credentials.stats.length > 0 && (
-          <section className="section-standard bg-gradient-to-br from-gray-50 to-gray-100 border-t border-b border-gray-200">
+          <section className="section-standard bg-surface-subtle border-t border-b border-surface-subtle">
             <div className="container-standard">
               <h2 className="heading-section text-center mb-12">Our Track Record</h2>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
@@ -159,7 +159,7 @@ export default function AboutPage() {
                 ))}
                 {credentials.insurance && (
                   <div className="bg-surface-subtle rounded-lg p-6 shadow-sm border border-surface-border flex items-start gap-4">
-                    <div className="bg-green-100 rounded-full p-3 flex-shrink-0">
+                    <div className="bg-surface-subtle rounded-full p-3 flex-shrink-0">
                       <Shield className="w-6 h-6 text-green-600" />
                     </div>
                     <div>
@@ -237,7 +237,7 @@ export default function AboutPage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 href="/contact"
-                className="bg-white text-brand-primary px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+                className="bg-white text-brand-primary px-8 py-3 rounded-lg font-semibold hover:bg-surface-subtle transition-colors"
               >
                 Get a Free Quote
               </Link>

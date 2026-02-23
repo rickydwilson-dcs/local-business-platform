@@ -10,8 +10,8 @@ export default function NotFound() {
       <div className="max-w-md w-full text-center">
         <div className="mb-8">
           <div className="text-6xl font-bold text-colossus-blue mb-4">404</div>
-          <h1 className="text-2xl font-semibold text-gray-900 mb-2">Page Not Found</h1>
-          <p className="text-gray-600 mb-8">
+          <h1 className="text-2xl font-semibold text-surface-foreground mb-2">Page Not Found</h1>
+          <p className="text-surface-tertiary mb-8">
             Sorry, we couldn&apos;t find the page you&apos;re looking for. It may have been moved or
             no longer exists.
           </p>
@@ -35,8 +35,8 @@ export default function NotFound() {
           </button>
         </div>
 
-        <div className="mt-8 pt-8 border-t border-gray-200">
-          <p className="text-gray-600 text-sm mb-4">Need help? Contact us directly:</p>
+        <div className="mt-8 pt-8 border-t border-surface-subtle">
+          <p className="text-surface-tertiary text-sm mb-4">Need help? Contact us directly:</p>
           <div className="space-y-2">
             <Link
               href={`tel:${PHONE_TEL}`}
@@ -45,7 +45,7 @@ export default function NotFound() {
               <Phone className="w-4 h-4" />
               {PHONE_DISPLAY}
             </Link>
-            <div className="text-gray-400">•</div>
+            <div className="text-surface-muted-foreground">&bull;</div>
             <Link
               href="/contact"
               className="inline-flex items-center gap-2 text-colossus-blue hover:text-colossus-blue/80 transition-colors"
@@ -57,7 +57,7 @@ export default function NotFound() {
         </div>
 
         <div className="mt-8">
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">Popular Pages</h2>
+          <h2 className="text-lg font-semibold text-surface-foreground mb-4">Popular Pages</h2>
           <div className="grid grid-cols-2 gap-2 text-sm">
             <Link
               href="/services"

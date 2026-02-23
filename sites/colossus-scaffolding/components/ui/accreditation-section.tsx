@@ -115,10 +115,10 @@ export function AccreditationSection() {
 
       {/* Certificate Gallery */}
       <div className="mt-12">
-        <h3 className="text-xl font-semibold text-gray-900 text-center mb-6">
+        <h3 className="text-xl font-semibold text-surface-foreground text-center mb-6">
           View Our Certificates
         </h3>
-        <p className="text-gray-600 text-center mb-8 max-w-2xl mx-auto">
+        <p className="text-surface-tertiary text-center mb-8 max-w-2xl mx-auto">
           Click on any certificate below to view the full document
         </p>
         <CertificateGallery certificates={certificates} onSelect={handleSelectCertificate} />

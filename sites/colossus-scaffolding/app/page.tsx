@@ -130,21 +130,21 @@ export default function HomePage() {
           phone={PHONE_TEL}
         />
         {/* Trust Indicators Section */}
-        <section className="section-standard bg-gradient-to-br from-gray-50 to-gray-100 border-t border-b border-gray-200">
+        <section className="section-standard bg-surface-subtle border-t border-b border-surface-subtle">
           <div className="container-standard">
             <div className="text-center mb-12">
               <h2 className="heading-section font-semibold">
                 Trusted by Customers Across the South East
               </h2>
-              <p className="text-lg text-gray-800 mx-auto w-full lg:w-[90%]">
+              <p className="text-lg text-surface-foreground mx-auto w-full lg:w-[90%]">
                 Industry-leading certifications and proven track record you can rely on.
               </p>
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               <div className="text-center">
-                <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
-                  <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+                <div className="bg-surface-card rounded-xl p-6 shadow-sm border border-surface-subtle hover:shadow-md transition-shadow">
+                  <div className="w-12 h-12 bg-surface-subtle rounded-lg flex items-center justify-center mx-auto mb-4">
                     <svg
                       aria-hidden="true"
                       className="w-6 h-6 text-brand-primary"
@@ -161,14 +161,14 @@ export default function HomePage() {
                     </svg>
                   </div>
                   <div className="stat-number">15+</div>
-                  <div className="text-gray-900 font-medium">Years Experience</div>
-                  <div className="text-sm text-gray-700 mt-1">Serving the South East</div>
+                  <div className="text-surface-foreground font-medium">Years Experience</div>
+                  <div className="text-sm text-surface-secondary mt-1">Serving the South East</div>
                 </div>
               </div>
 
               <div className="text-center">
-                <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
-                  <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+                <div className="bg-surface-card rounded-xl p-6 shadow-sm border border-surface-subtle hover:shadow-md transition-shadow">
+                  <div className="w-12 h-12 bg-surface-subtle rounded-lg flex items-center justify-center mx-auto mb-4">
                     <svg
                       aria-hidden="true"
                       className="w-6 h-6 text-brand-primary"
@@ -185,14 +185,14 @@ export default function HomePage() {
                     </svg>
                   </div>
                   <div className="stat-number">£10M</div>
-                  <div className="text-gray-900 font-medium">Liability Insurance</div>
-                  <div className="text-sm text-gray-700 mt-1">Comprehensive Coverage</div>
+                  <div className="text-surface-foreground font-medium">Liability Insurance</div>
+                  <div className="text-sm text-surface-secondary mt-1">Comprehensive Coverage</div>
                 </div>
               </div>
 
               <div className="text-center">
-                <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
-                  <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+                <div className="bg-surface-card rounded-xl p-6 shadow-sm border border-surface-subtle hover:shadow-md transition-shadow">
+                  <div className="w-12 h-12 bg-surface-subtle rounded-lg flex items-center justify-center mx-auto mb-4">
                     <svg
                       aria-hidden="true"
                       className="w-6 h-6 text-brand-primary"
@@ -209,14 +209,14 @@ export default function HomePage() {
                     </svg>
                   </div>
                   <div className="stat-number">TG20:21</div>
-                  <div className="text-gray-900 font-medium">Compliant</div>
-                  <div className="text-sm text-gray-700 mt-1">Latest Safety Standards</div>
+                  <div className="text-surface-foreground font-medium">Compliant</div>
+                  <div className="text-sm text-surface-secondary mt-1">Latest Safety Standards</div>
                 </div>
               </div>
 
               <div className="text-center">
-                <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
-                  <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+                <div className="bg-surface-card rounded-xl p-6 shadow-sm border border-surface-subtle hover:shadow-md transition-shadow">
+                  <div className="w-12 h-12 bg-surface-subtle rounded-lg flex items-center justify-center mx-auto mb-4">
                     <svg
                       aria-hidden="true"
                       className="w-6 h-6 text-brand-primary"
@@ -233,14 +233,14 @@ export default function HomePage() {
                     </svg>
                   </div>
                   <div className="stat-number">CHAS</div>
-                  <div className="text-gray-900 font-medium">Accredited</div>
-                  <div className="text-sm text-gray-700 mt-1">Health & Safety Approved</div>
+                  <div className="text-surface-foreground font-medium">Accredited</div>
+                  <div className="text-sm text-surface-secondary mt-1">Health & Safety Approved</div>
                 </div>
               </div>
             </div>
 
             <div className="text-center mt-12">
-              <p className="text-gray-800 mb-6">
+              <p className="text-surface-foreground mb-6">
                 Get professional scaffolding services from the team you can trust.
               </p>
               <Link href="/contact" className="btn-primary-lg">

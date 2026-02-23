@@ -43,7 +43,7 @@ export default function AboutPage() {
 
       <main className="min-h-screen bg-surface-background">
         {/* Hero Section */}
-        <section className="section-standard bg-gradient-to-br from-gray-50 to-gray-100">
+        <section className="section-standard bg-surface-subtle">
           <div className="container-standard">
             <div className="mx-auto w-full lg:w-[90%] text-center">
               {about?.heroBadges && about.heroBadges.length > 0 && (
@@ -59,7 +59,7 @@ export default function AboutPage() {
                 </div>
               )}
               <h1 className="heading-hero leading-tight">About {name}</h1>
-              <p className="text-xl text-gray-800 leading-relaxed mx-auto w-full lg:w-[90%] mt-6">
+              <p className="text-xl text-surface-foreground leading-relaxed mx-auto w-full lg:w-[90%] mt-6">
                 {tagline}
               </p>
             </div>
@@ -68,11 +68,11 @@ export default function AboutPage() {
 
         {/* Our Story Section */}
         {about?.story && about.story.length > 0 && (
-          <section className="section-standard bg-white">
+          <section className="section-standard bg-surface-card">
             <div className="container-standard">
               <div className="mx-auto w-full lg:w-[90%]">
                 <h2 className="heading-section mb-8 text-center">Our Story</h2>
-                <div className="max-w-3xl mx-auto prose prose-lg text-gray-800 leading-relaxed">
+                <div className="max-w-3xl mx-auto prose prose-lg text-surface-foreground leading-relaxed">
                   {about.story.map((paragraph, index) => (
                     <p key={index} className={index === 0 ? "text-xl mb-6" : "mb-6"}>
                       {paragraph}
@@ -85,25 +85,25 @@ export default function AboutPage() {
         )}
 
         {/* Company Info Cards */}
-        <section className="section-standard bg-white">
+        <section className="section-standard bg-surface-card">
           <div className="container-standard">
             <div className="text-center mb-12">
               <h2 className="heading-section">Company Information</h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mx-auto w-full lg:w-[90%]">
               <div className="text-center p-6 bg-surface-muted rounded-2xl">
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Registered Name</h3>
-                <p className="text-gray-700">{business.legalName}</p>
+                <h3 className="text-lg font-semibold text-surface-foreground mb-2">Registered Name</h3>
+                <p className="text-surface-secondary">{business.legalName}</p>
               </div>
               <div className="text-center p-6 bg-surface-muted rounded-2xl">
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Established</h3>
+                <h3 className="text-lg font-semibold text-surface-foreground mb-2">Established</h3>
                 <p className="text-2xl font-bold text-brand-primary">
                   {credentials.yearEstablished}
                 </p>
               </div>
               <div className="text-center p-6 bg-surface-muted rounded-2xl">
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Service Coverage</h3>
-                <p className="text-gray-700">{serviceAreas.join(", ")}</p>
+                <h3 className="text-lg font-semibold text-surface-foreground mb-2">Service Coverage</h3>
+                <p className="text-surface-secondary">{serviceAreas.join(", ")}</p>
               </div>
             </div>
           </div>
@@ -111,7 +111,7 @@ export default function AboutPage() {
 
         {/* Stats Section */}
         {credentials.stats.length > 0 && (
-          <section className="section-standard bg-gradient-to-br from-gray-50 to-gray-100 border-t border-b border-gray-200">
+          <section className="section-standard bg-surface-subtle border-t border-b border-surface-subtle">
             <div className="container-standard">
               <div className="text-center mb-12">
                 <h2 className="heading-section">Our Track Record Speaks for Itself</h2>
@@ -119,11 +119,11 @@ export default function AboutPage() {
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                 {credentials.stats.map((stat, index) => (
                   <div key={index} className="text-center">
-                    <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
+                    <div className="bg-surface-card rounded-xl p-6 shadow-sm border border-surface-subtle hover:shadow-md transition-shadow">
                       <div className="text-4xl font-bold text-brand-primary mb-2">{stat.value}</div>
-                      <div className="text-gray-900 font-medium">{stat.label}</div>
+                      <div className="text-surface-foreground font-medium">{stat.label}</div>
                       {stat.description && (
-                        <div className="text-sm text-gray-700 mt-1">{stat.description}</div>
+                        <div className="text-sm text-surface-secondary mt-1">{stat.description}</div>
                       )}
                     </div>
                   </div>
@@ -135,11 +135,11 @@ export default function AboutPage() {
 
         {/* Certifications Section */}
         {credentials.certifications.length > 0 && (
-          <section className="section-standard bg-white">
+          <section className="section-standard bg-surface-card">
             <div className="container-standard">
               <div className="text-center mb-12">
                 <h2 className="heading-section">Certifications &amp; Accreditations</h2>
-                <p className="text-lg text-gray-800 mx-auto w-full lg:w-[90%] mt-4">
+                <p className="text-lg text-surface-foreground mx-auto w-full lg:w-[90%] mt-4">
                   We maintain the highest industry standards with comprehensive certifications and
                   accreditations.
                 </p>
@@ -154,21 +154,21 @@ export default function AboutPage() {
                       <Award className="w-6 h-6 text-brand-primary" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-gray-900">{cert.name}</h3>
-                      <p className="text-sm text-gray-700">{cert.description}</p>
+                      <h3 className="font-semibold text-surface-foreground">{cert.name}</h3>
+                      <p className="text-sm text-surface-secondary">{cert.description}</p>
                     </div>
                   </div>
                 ))}
                 {credentials.insurance && (
                   <div className="bg-surface-muted rounded-lg p-6 flex items-start gap-4">
-                    <div className="bg-green-100 rounded-full p-3 flex-shrink-0">
+                    <div className="bg-surface-subtle rounded-full p-3 flex-shrink-0">
                       <Shield className="w-6 h-6 text-green-600" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-gray-900">
+                      <h3 className="font-semibold text-surface-foreground">
                         {credentials.insurance.amount} Insurance
                       </h3>
-                      <p className="text-sm text-gray-700">{credentials.insurance.type}</p>
+                      <p className="text-sm text-surface-secondary">{credentials.insurance.type}</p>
                     </div>
                   </div>
                 )}
@@ -183,7 +183,7 @@ export default function AboutPage() {
             <div className="container-standard">
               <div className="text-center mb-12">
                 <h2 className="heading-section">Our Values</h2>
-                <p className="text-lg text-gray-800 mx-auto w-full lg:w-[90%] mt-4">
+                <p className="text-lg text-surface-foreground mx-auto w-full lg:w-[90%] mt-4">
                   These core principles guide everything we do, from the smallest residential project
                   to the largest commercial installation.
                 </p>
@@ -194,8 +194,8 @@ export default function AboutPage() {
                     <div className="w-16 h-16 bg-brand-primary rounded-full flex items-center justify-center mx-auto mb-4">
                       <Award className="w-8 h-8 text-white" />
                     </div>
-                    <h3 className="text-xl font-semibold text-gray-900 mb-3">{value.title}</h3>
-                    <p className="text-gray-800">{value.description}</p>
+                    <h3 className="text-xl font-semibold text-surface-foreground mb-3">{value.title}</h3>
+                    <p className="text-surface-foreground">{value.description}</p>
                   </div>
                 ))}
               </div>
@@ -205,11 +205,11 @@ export default function AboutPage() {
 
         {/* Why Choose Us Section */}
         {about?.whyChooseUs && about.whyChooseUs.length > 0 && (
-          <section className="section-standard bg-white">
+          <section className="section-standard bg-surface-card">
             <div className="container-standard">
               <div className="text-center mb-12">
                 <h2 className="heading-section">Why Choose {name}?</h2>
-                <p className="text-lg text-gray-800 mx-auto w-full lg:w-[90%] mt-4">
+                <p className="text-lg text-surface-foreground mx-auto w-full lg:w-[90%] mt-4">
                   From small residential projects to complex commercial installations, here&apos;s
                   what sets us apart.
                 </p>
@@ -223,7 +223,7 @@ export default function AboutPage() {
                     <div className="flex-shrink-0 w-6 h-6 bg-brand-primary rounded-full flex items-center justify-center mt-0.5">
                       <CheckCircle className="h-4 w-4 text-white" />
                     </div>
-                    <span className="text-gray-900 font-medium">{benefit}</span>
+                    <span className="text-surface-foreground font-medium">{benefit}</span>
                   </div>
                 ))}
               </div>
@@ -247,7 +247,7 @@ export default function AboutPage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-center px-8 py-4 bg-white text-brand-primary font-semibold rounded-lg hover:bg-gray-200 transition-colors"
+                className="inline-flex items-center justify-center px-8 py-4 bg-white text-brand-primary font-semibold rounded-lg hover:bg-surface-muted transition-colors"
               >
                 Get Free Quote
               </Link>

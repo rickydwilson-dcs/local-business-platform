@@ -5,10 +5,24 @@
  * step using Playwright's page.evaluate(). Uses selector strategies with
  * fallbacks per semantic role. Single page.evaluate() call per page for
  * minimal overhead.
+ *
+ * Uses string-based evaluate to bypass esbuild __name transform that breaks
+ * in browser context. RGB-to-hex conversion happens Node-side.
  */
 
 import type { Page } from "@playwright/test";
 import type { ElementRole, PageComputedStyles } from "./reference-analysis-types";
+
+// ── RGB-to-hex converter (Node-side) ────────────────────────────────────
+
+function rgbToHex(rgb: string): string | null {
+  const match = rgb.match(/rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/);
+  if (!match) return null;
+  const r = parseInt(match[1], 10);
+  const g = parseInt(match[2], 10);
+  const b = parseInt(match[3], 10);
+  return "#" + [r, g, b].map((c) => c.toString(16).padStart(2, "0")).join("").toUpperCase();
+}
 
 // ── Selector Strategies ──────────────────────────────────────────────────
 
@@ -106,6 +120,10 @@ export const SELECTOR_STRATEGIES: SelectorStrategy[] = [
   },
 ];
 
+// ── Colour properties that need rgb→hex conversion ──────────────────────
+
+const COLOUR_PROPERTIES = new Set(["backgroundColor", "color", "borderColor"]);
+
 // ── Extractor ────────────────────────────────────────────────────────────
 
 export async function extractComputedStyles(
@@ -119,97 +137,107 @@ export async function extractComputedStyles(
     properties: s.properties,
   }));
 
-  const result = await page.evaluate((strategies) => {
-    const startTime = performance.now();
+  // String-based evaluate bypasses esbuild transforms completely
+  const result = await page.evaluate(`
+    (function(strategies) {
+      var startTime = performance.now();
+      var colourSet = new Set();
+      var elements = [];
 
-    // Self-contained RGB-to-hex converter (cannot import modules inside evaluate)
-    function rgbToHex(rgb: string): string | null {
-      const match = rgb.match(/rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/);
-      if (!match) return null;
-      const r = parseInt(match[1], 10);
-      const g = parseInt(match[2], 10);
-      const b = parseInt(match[3], 10);
-      return "#" + [r, g, b].map((c) => c.toString(16).padStart(2, "0")).join("").toUpperCase();
-    }
+      for (var i = 0; i < strategies.length; i++) {
+        var strategy = strategies[i];
+        var matchedSelector = "";
+        var el = null;
 
-    const colourSet = new Set<string>();
-    const elements: Array<{
-      selector: string;
-      role: string;
-      found: boolean;
-      styles: Record<string, string>;
-    }> = [];
-
-    for (const strategy of strategies) {
-      let matchedSelector = "";
-      let el: Element | null = null;
-
-      for (const sel of strategy.selectors) {
-        try {
-          el = document.querySelector(sel);
-        } catch {
-          continue;
-        }
-        if (el) {
-          matchedSelector = sel;
-          break;
-        }
-      }
-
-      if (!el) {
-        elements.push({
-          selector: strategy.selectors[0],
-          role: strategy.role,
-          found: false,
-          styles: {},
-        });
-        continue;
-      }
-
-      const computed = getComputedStyle(el);
-      const styles: Record<string, string> = {};
-
-      for (const prop of strategy.properties) {
-        const value = computed.getPropertyValue(
-          prop.replace(/[A-Z]/g, (m) => "-" + m.toLowerCase()),
-        );
-        if (value) {
-          styles[prop] = value;
-
-          // Collect hex colours
-          if (prop === "backgroundColor" || prop === "color" || prop === "borderColor") {
-            const hex = rgbToHex(value);
-            if (hex && hex !== "#000000" && hex !== "#FFFFFF") {
-              colourSet.add(hex);
-            }
-            // Also add black/white when they're actually present
-            if (hex) colourSet.add(hex);
+        for (var j = 0; j < strategy.selectors.length; j++) {
+          try {
+            el = document.querySelector(strategy.selectors[j]);
+          } catch (e) {
+            continue;
+          }
+          if (el) {
+            matchedSelector = strategy.selectors[j];
+            break;
           }
         }
+
+        if (!el) {
+          elements.push({
+            selector: strategy.selectors[0],
+            role: strategy.role,
+            found: false,
+            styles: {}
+          });
+          continue;
+        }
+
+        try {
+          var computed = getComputedStyle(el);
+          var styles = {};
+
+          for (var k = 0; k < strategy.properties.length; k++) {
+            var prop = strategy.properties[k];
+            var cssProp = prop.replace(/[A-Z]/g, function(m) { return "-" + m.toLowerCase(); });
+            var value = computed.getPropertyValue(cssProp);
+            if (value) {
+              styles[prop] = value;
+              if (prop === "backgroundColor" || prop === "color" || prop === "borderColor") {
+                colourSet.add(value);
+              }
+            }
+          }
+
+          elements.push({
+            selector: matchedSelector,
+            role: strategy.role,
+            found: true,
+            styles: styles
+          });
+        } catch (e) {
+          elements.push({
+            selector: matchedSelector || strategy.selectors[0],
+            role: strategy.role,
+            found: false,
+            styles: {}
+          });
+        }
       }
 
-      elements.push({
-        selector: matchedSelector,
-        role: strategy.role,
-        found: true,
-        styles,
-      });
+      var endTime = performance.now();
+      return {
+        elements: elements,
+        allColours: Array.from(colourSet),
+        extractMs: Math.round(endTime - startTime)
+      };
+    })(${JSON.stringify(serialisedStrategies)})
+  `) as { elements: Array<{ selector: string; role: string; found: boolean; styles: Record<string, string> }>; allColours: string[]; extractMs: number };
+
+  // Node-side post-processing: convert rgb colours to hex
+  const hexColourSet = new Set<string>();
+
+  for (const colour of result.allColours) {
+    const hex = rgbToHex(colour);
+    if (hex) {
+      hexColourSet.add(hex);
     }
+  }
 
-    const endTime = performance.now();
-
-    return {
-      elements,
-      allColours: Array.from(colourSet),
-      extractMs: Math.round(endTime - startTime),
-    };
-  }, serialisedStrategies);
+  for (const element of result.elements) {
+    for (const prop of Object.keys(element.styles)) {
+      if (COLOUR_PROPERTIES.has(prop)) {
+        const hex = rgbToHex(element.styles[prop]);
+        if (hex) {
+          element.styles[prop] = hex;
+        }
+      }
+    }
+  }
 
   return {
     pageType,
     url,
     elements: result.elements as PageComputedStyles["elements"],
-    allColours: result.allColours,
+    allColours: Array.from(hexColourSet),
     extractMs: result.extractMs,
   };
 }

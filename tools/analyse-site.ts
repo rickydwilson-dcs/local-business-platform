@@ -357,6 +357,11 @@ async function main() {
     ? synthValidation.data
     : null;
 
+  if (!synthValidation.success) {
+    console.warn("  [Warning] Synthesis validation failed — falling back to lower-fidelity token sources");
+    console.warn(`  Missing/invalid fields: ${synthValidation.error.issues.map(i => i.path.join('.')).join(', ')}`);
+  }
+
   // Find homepage vision palette (fallback source #2)
   const homepageVision = perPage.find(
     (p) => p.page.pageType === "home" && p.visualLanguage,

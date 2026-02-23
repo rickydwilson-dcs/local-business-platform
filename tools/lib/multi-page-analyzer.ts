@@ -38,6 +38,7 @@ import {
 const MAX_VISION_CALLS = 6;
 const VISION_MODEL = "claude-sonnet-4-6";
 const VISION_MAX_TOKENS = 4096;
+const SYNTHESIS_MAX_TOKENS = 8192;
 const VISION_TEMPERATURE = 0;
 
 /** Priority order for selecting which pages get vision analysis. */
@@ -562,9 +563,9 @@ async function synthesizeSiteAnalysis(
     visualLanguage: result.visualLanguage ?? null,
   }));
 
-  const response = await client.messages.create({
+  let response = await client.messages.create({
     model: VISION_MODEL,
-    max_tokens: VISION_MAX_TOKENS,
+    max_tokens: SYNTHESIS_MAX_TOKENS,
     temperature: VISION_TEMPERATURE,
     messages: [
       {
@@ -578,6 +579,50 @@ async function synthesizeSiteAnalysis(
       },
     ],
   });
+
+  // Truncation detection with single retry
+  if (response.stop_reason === "max_tokens") {
+    console.warn("  [Warning] Synthesis response truncated at max_tokens — retrying with higher limit");
+    if (outputDir) {
+      const debugPath = path.join(outputDir, "debug-synthesis-response-attempt1.txt");
+      const attempt1Text = response.content.find((b) => b.type === "text");
+      if (attempt1Text && attempt1Text.type === "text") {
+        fs.writeFileSync(debugPath, attempt1Text.text, "utf8");
+        console.warn(`  [Debug] Partial response written to ${debugPath}`);
+      }
+    }
+
+    response = await client.messages.create({
+      model: VISION_MODEL,
+      max_tokens: SYNTHESIS_MAX_TOKENS * 2,
+      temperature: VISION_TEMPERATURE,
+      messages: [
+        {
+          role: "user",
+          content: [
+            {
+              type: "text",
+              text: `${SITE_SYNTHESIS_PROMPT}\n\nPer-page analysis results:\n${JSON.stringify(summaryPayload, null, 2)}`,
+            },
+          ],
+        },
+      ],
+    });
+
+    if (response.stop_reason === "max_tokens") {
+      console.warn("  [Warning] Synthesis retry also truncated — continuing with partial data");
+    }
+  }
+
+  // Always persist debug output on truncation
+  if (response.stop_reason === "max_tokens" && outputDir) {
+    const debugPath = path.join(outputDir, "debug-synthesis-response-truncated.txt");
+    const truncatedText = response.content.find((b) => b.type === "text");
+    if (truncatedText && truncatedText.type === "text") {
+      fs.writeFileSync(debugPath, truncatedText.text, "utf8");
+      console.warn(`  [Debug] Truncated response written to ${debugPath}`);
+    }
+  }
 
   const textBlock = response.content.find((b) => b.type === "text");
   if (!textBlock || textBlock.type !== "text") {
