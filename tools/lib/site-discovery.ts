@@ -61,27 +61,37 @@ function delay(ms: number): Promise<void> {
 
 /**
  * Normalise a URL string into a consistent base URL with no trailing slash.
+ * Preserves path prefix for subdirectory-hosted sites.
  */
 function normaliseBaseUrl(raw: string): string {
   const url = new URL(raw);
-  return `${url.protocol}//${url.host}`;
+  let basePath = url.pathname;
+  if (basePath.length > 1 && basePath.endsWith("/")) {
+    basePath = basePath.slice(0, -1);
+  }
+  return `${url.protocol}//${url.host}${basePath === "/" ? "" : basePath}`;
 }
 
 /**
- * Check whether a URL belongs to the same domain as the base URL.
+ * Check whether a URL is under the base URL (same host and path prefix).
  */
-function isSameDomain(href: string, baseUrl: string): boolean {
+function isUnderBase(href: string, baseUrl: string): boolean {
   try {
     const target = new URL(href, baseUrl);
     const base = new URL(baseUrl);
-    return target.hostname === base.hostname;
+    if (target.hostname !== base.hostname) return false;
+    return (
+      target.pathname === base.pathname ||
+      target.pathname.startsWith(base.pathname + "/")
+    );
   } catch {
     return false;
   }
 }
 
 /**
- * Get a clean pathname from an absolute or relative URL string.
+ * Get a clean relative pathname from an absolute or relative URL string.
+ * Strips base path prefix for subdirectory-hosted sites.
  * Returns null if the URL is invalid or off-domain.
  */
 function toCleanPath(href: string, baseUrl: string): string | null {
@@ -90,12 +100,18 @@ function toCleanPath(href: string, baseUrl: string): string | null {
     const base = new URL(baseUrl);
     if (target.hostname !== base.hostname) return null;
 
-    // Strip trailing slash (except for root)
-    let path = target.pathname;
-    if (path.length > 1 && path.endsWith("/")) {
-      path = path.slice(0, -1);
+    let targetPath = target.pathname;
+    const basePath = base.pathname;
+
+    // Strip base path prefix to get relative path
+    if (basePath !== "/" && targetPath.startsWith(basePath)) {
+      targetPath = targetPath.slice(basePath.length) || "/";
     }
-    return path;
+
+    if (targetPath.length > 1 && targetPath.endsWith("/")) {
+      targetPath = targetPath.slice(0, -1);
+    }
+    return targetPath;
   } catch {
     return null;
   }
@@ -352,7 +368,7 @@ function extractNavLinks(html: string, baseUrl: string): string[] {
       continue;
     }
 
-    if (!isSameDomain(href, baseUrl)) continue;
+    if (!isUnderBase(href, baseUrl)) continue;
 
     const path = toCleanPath(href, baseUrl);
     if (path !== null) {
