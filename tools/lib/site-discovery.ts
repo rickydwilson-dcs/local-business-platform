@@ -124,31 +124,65 @@ function pathDepth(path: string): number {
   return path.split("/").filter(Boolean).length;
 }
 
+const PAGE_TYPE_SYNONYMS: Record<string, PageType> = {
+  // About
+  "about-us": "about", "our-story": "about", "who-we-are": "about",
+  "team": "about", "our-team": "about",
+  // Services
+  "services": "services-list", "our-services": "services-list",
+  "what-we-do": "services-list", "solutions": "services-list",
+  "capabilities": "services-list", "expertise": "services-list",
+  "offerings": "services-list",
+  // Contact
+  "contact": "contact", "contact-us": "contact",
+  "get-in-touch": "contact", "enquiry": "contact",
+  "enquiries": "contact", "talk-to-us": "contact",
+  "book": "contact", "quote": "contact",
+  // Blog
+  "blog": "blog-list", "news": "blog-list", "articles": "blog-list",
+  "insights": "blog-list", "resources": "blog-list",
+  // Projects
+  "projects": "projects", "portfolio": "projects", "work": "projects",
+  "case-studies": "projects", "gallery": "projects",
+  // Reviews
+  "reviews": "reviews", "testimonials": "reviews",
+  // Pricing
+  "pricing": "pricing", "plans": "pricing", "packages": "pricing",
+  // Locations
+  "locations": "locations-list", "areas": "locations-list",
+  "areas-we-cover": "locations-list", "service-areas": "locations-list",
+};
+
 /**
- * Classify a URL path into a PageType based on pattern matching.
+ * Classify a URL path into a PageType based on synonym map and pattern matching.
  */
 function classifyPage(path: string): PageType {
   const lower = path.toLowerCase();
-
   if (lower === "/" || lower === "") return "home";
 
-  if (/^\/about/.test(lower)) return "about";
+  const firstSegment = lower.split("/").filter(Boolean)[0] ?? "";
+  const synonymMatch = PAGE_TYPE_SYNONYMS[firstSegment];
+  if (synonymMatch) {
+    const hasSubPath = lower.split("/").filter(Boolean).length > 1;
+    if (hasSubPath) {
+      if (synonymMatch === "services-list") return "service-detail";
+      if (synonymMatch === "blog-list") return "blog-post";
+      if (synonymMatch === "locations-list") return "location-detail";
+    }
+    return synonymMatch;
+  }
 
+  // Fallback regex patterns for paths not covered by synonyms
+  if (/^\/about/.test(lower)) return "about";
   if (lower === "/services") return "services-list";
   if (/^\/services\/.+/.test(lower)) return "service-detail";
-
   if (lower === "/blog") return "blog-list";
   if (/^\/blog\/.+/.test(lower)) return "blog-post";
-
   if (/^\/contact/.test(lower)) return "contact";
-
   if (lower === "/locations" || lower === "/areas") return "locations-list";
   if (/^\/locations\/.+/.test(lower)) return "location-detail";
-
   if (/^\/reviews/.test(lower)) return "reviews";
-
   if (/^\/projects/.test(lower)) return "projects";
-
   if (/^\/pricing/.test(lower)) return "pricing";
 
   return "custom";
