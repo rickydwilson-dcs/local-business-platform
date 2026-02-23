@@ -1,14 +1,14 @@
 # Lyra Theme
 
 **Reference site:** https://colorcode.events/
-**Analysis date:** 2026-02-21T18:34:48.273Z
+**Analysis date:** 2026-02-22T07:23:38.432Z
 **Analysis version:** 3
 
 ## Registry
 
 - Theme: orion
 - Confidence: high
-- Reasoning: The site consistently uses a dark header across all pages, a full-bleed hero with background image on the homepage, and a bold typographic-first layout with a deep navy/purple primary background. These characteristics — dark header, full-bleed hero, strong brand colour blocks, and icon/graphic accents — align directly with the orion constellation theme definition.
+- Reasoning: The site consistently uses a dark header across all pages, a full-bleed dark-background hero on the homepage with oversized typographic treatment, and bold coloured accent bands. The navigation is dark-on-dark with a logo left and controls right. These characteristics — dark header, full-bleed hero, strong brand colour blocks — align directly with the orion constellation pattern. The vega pattern (light header, split hero, card grid) does not match the dominant visual language observed across the high-confidence vision-analysed pages.
 
 ## Components
 
@@ -24,23 +24,22 @@
 | CallForVolunteersCTA | CTA | components/call-for-volunteers-cta.tsx |
 | BlogPostGrid | Blog | components/blog-post-grid.tsx |
 | ColorCodeEventsAbout | Content | components/colorcode-events-about.tsx |
-| HowItStarted | Content | components/how-it-started.tsx |
-| TeamMemberCard | Cards | components/team-member-card.tsx |
+| HowItStartedSection | Content | components/how-it-started-section.tsx |
 | EventPhotoGallery | Social Proof | components/event-photo-gallery.tsx |
-| ErrorMessageCard | Custom | components/error-message-card.tsx |
-| SiteFooter | Footer | components/site-footer.tsx |
+| TeamMemberBio | Custom | components/team-member-bio.tsx |
+| ErrorStateCentered | Custom | components/error-state-centered.tsx |
 | BlogStats | Stats | components/blog-stats.tsx |
-| TeamMemberBenDunkle | Cards | components/cards-team-member-green.tsx |
-| TeamMemberRonBrennan | Cards | components/cards-team-member-orange.tsx |
-| TeamMemberTimBouchard | Cards | components/cards-team-member-blue.tsx |
-| SiteFooter | Footer | components/footer-site-links.tsx |
-| BlogPostGrid | Blog | components/blog-cards-two-column-grid.tsx |
+| SiteFooter | Footer | components/site-footer.tsx |
+| TeamMemberBenDunkle | Custom | components/custom-team-member-green.tsx |
+| TeamMemberRonBrennan | Custom | components/custom-team-member-orange.tsx |
+| TeamMemberTimBouchard | Custom | components/custom-team-member-blue.tsx |
+| BlogPostGrid | Blog | components/blog-cards-two-column.tsx |
 | NewsletterSubscribeCTA | CTA | components/cta-newsletter-inline-form.tsx |
+| SiteFooter | Footer | components/footer-multi-column-links.tsx |
 | RegistrationErrorState | Custom | components/custom-error-message-centered.tsx |
+| OrderErrorMessage | Custom | components/custom-error-card-centered.tsx |
 | NewsletterSubscribeBanner | CTA | components/cta-newsletter-banner.tsx |
-| SiteFooter | Footer | components/footer-multi-column.tsx |
-| ErrorMessageCard | Content | components/content-error-card-centered.tsx |
-| NewsletterSubscribeBanner | CTA | components/cta-newsletter-form-banner.tsx |
+| OrderErrorCard | Content | components/content-error-card-centered.tsx |
 | Hero | Hero | components/hero.tsx |
 | ContentCheckout | Content | components/content-checkout.tsx |
 | CtaSubscribeToOurNewsletter | CTA | components/cta-subscribe-to-our-newsletter.tsx |

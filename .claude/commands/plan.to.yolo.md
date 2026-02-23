@@ -1,6 +1,6 @@
 # Plan to YOLO
 
-Converts the approved `synthesis.md` from the most recent codex peer review into a YOLO implementation brief, then outputs a terminal command to launch an autonomous Opus session.
+Converts the approved `synthesis.md` from the most recent codex peer review into a YOLO implementation brief, then outputs a terminal command to launch an autonomous session.
 
 ---
 
@@ -27,7 +27,25 @@ mkdir -p output/sessions/YYYY-MM-DD_topic-slug
 
 ## Step 3: Write the YOLO Brief
 
-Produce `output/sessions/YYYY-MM-DD_topic-slug/yolo-brief.md` by expanding the synthesis into an executable implementation brief. The brief must:
+Produce `output/sessions/YYYY-MM-DD_topic-slug/yolo-brief.md` by expanding the synthesis into an executable implementation brief.
+
+**Model tiers — include this table verbatim in every generated brief:**
+
+```markdown
+## Model Tiers
+
+| Tier | Alias | Cost (in/out per MTok) | Use for |
+|------|-------|----------------------|---------|
+| Opus | `opus` | $5 / $25 | Phases with >5 interdependent files, architectural rewrites, judgment calls not covered by the spec |
+| Sonnet | `sonnet` | $3 / $15 | Standard implementation — file edits, feature wiring, most phases |
+| Haiku | `haiku` | $1 / $5 | Mechanical tasks: find-replace, import additions, grep checks, content validation |
+
+Default orchestrator: **sonnet**. Default sub-agent: **sonnet** unless the task is clearly mechanical (→ haiku) or requires deep cross-file reasoning (→ opus).
+```
+
+Use this table when assigning models to each phase below.
+
+The brief must:
 
 **3a. Open with standard headers:**
 
@@ -39,6 +57,7 @@ Derive the feature branch name from the topic slug: `feature/topic-slug`
 **Branch:** feature/topic-slug (created from develop)
 **Session spec:** output/sessions/YYYY-MM-DD_topic-slug/yolo-brief.md
 **Mode:** Autonomous execution — implement all phases, verify after each, STOP on error
+**Orchestrator model:** sonnet
 
 ---
 
@@ -64,6 +83,16 @@ pnpm type-check   # must be clean before starting
 
 For each phase:
 - Retain the goal, files, and verification gate exactly from the synthesis
+- Annotate each phase with a `**Model:**` line immediately after `**Goal:**`, using the tier table. For Task agents within a phase, include `model: [tier]` in the agent spawn block. Example:
+  ```
+  **Goal:** Add ComponentRegistry exports to lyra and atlas
+  **Model:** haiku — mechanical import + export additions to two files
+
+  Spawn two agents in parallel:
+  Task: Fix lyra/index.ts registry export
+  model: haiku
+  Prompt: [...]
+  ```
 - Add explicit parallelism instructions wherever work is independent:
   - Reading multiple files → use parallel reads
   - Editing independent files in the same phase → use parallel Task agents
@@ -75,18 +104,49 @@ For each phase:
   [commands]
   ```
 
-**3d. Final report section:**
+**3d. Cost Estimate section (after all phases, before Final Report):**
+
+After expanding all phases, include a cost estimate table. Populate it by scanning the synthesis for file counts and approximate sizes.
+
+```markdown
+## Cost Estimate
+
+| Phase | Model | Est. input tokens | Est. output tokens | Est. cost |
+|-------|-------|------------------|--------------------|-----------|
+| Phase 1: [short name] | sonnet | ~12k | ~2k | $0.07 |
+| Phase 2: [short name] | haiku | ~8k | ~1k | $0.01 |
+| ... | | | | |
+| **Total** | | **~Xk** | **~Yk** | **~$Z.ZZ** |
+
+Rates: Opus $5/$25, Sonnet $3/$15, Haiku $1/$5 per MTok.
+Estimation: ~5 tokens per line of code. Input = files read + brief (~3k) + system prompt (~3k). Output = code written + verification output (~500/gate).
+```
+
+To populate: a file with ~100 lines ≈ 500 input tokens. A phase editing 3 medium files might output ~1k tokens. Be conservative (round up).
+
+**3e. Final report section:**
 ```markdown
 ## Final Report
 
 After all phases complete, output:
 1. Phases completed — list each with commit SHA
-2. Final hardcoded-class grep count (compare to baseline from Phase 0 if applicable)
-3. Build status — confirm `pnpm lint && pnpm type-check && pnpm build` passes
-4. Any exceptions or intentional deviations from the plan
+2. Build status — confirm `pnpm lint && pnpm type-check && pnpm build` passes
+3. Any exceptions or intentional deviations from the plan
+4. Token usage and cost estimate:
+
+   | Model | Est. input tokens | Est. output tokens | Est. cost |
+   |-------|------------------|--------------------|-----------|
+   | sonnet | [total across phases] | | $X.XX |
+   | haiku | [if used] | | $X.XX |
+   | opus | [if used] | | $X.XX |
+   | **Total** | | | **$X.XX** |
+
+   Estimate tokens from: files read (lines x 5) and written (lines x 5).
+   Compare to the pre-flight Cost Estimate above.
+   For exact figures: check console.anthropic.com.
 ```
 
-**3e. Session file update section:**
+**3f. Session file update section:**
 ```markdown
 ## Update Session File
 
@@ -98,7 +158,7 @@ After completing all phases, append to `output/sessions/YYYY-MM-DD_topic-slug/yo
 **Date:** [today]
 **Status:** All phases executed successfully
 
-[1-paragraph summary: what was implemented, any surprises, final class count reduction if applicable]
+[1-paragraph summary: what was implemented, any surprises]
 
 ### Commits
 [list each commit SHA and message]
@@ -107,7 +167,7 @@ After completing all phases, append to `output/sessions/YYYY-MM-DD_topic-slug/yo
 Confirm this was done in the final report.
 ```
 
-**3f. Execution rules footer:**
+**3g. Execution rules footer:**
 ```markdown
 ## Rules
 
@@ -116,31 +176,44 @@ Confirm this was done in the final report.
 - Never push — leave all changes on the feature branch
 - Parallel reads and independent file edits should be done concurrently using Task agents
 - Minimal changes only — implement what the plan says, nothing more
+- Use `model: haiku` for Task agents doing mechanical work (grep, import additions, find-replace); `model: sonnet` for standard edits; `model: opus` only for deep multi-file reasoning
+- The Co-Authored-By line in commits must reflect the orchestrator model used (e.g., `Claude Sonnet 4.6` not `Opus 4.6`)
 ```
 
-## Step 4: Output the Terminal Command and Next Steps
+## Step 4: Output the Terminal Command, Cost Summary, and Next Steps
 
-Print this block verbatim for the user to copy-paste:
+Print this block for the user to copy-paste:
 
 ---
 
 **Paste into terminal:**
 
 ```
-claude --dangerously-skip-permissions --model claude-opus-4-6 -p "Read output/sessions/YYYY-MM-DD_topic-slug/yolo-brief.md in full, then implement every phase it describes exactly as written."
+claude --dangerously-skip-permissions --model sonnet -p "Read output/sessions/YYYY-MM-DD_topic-slug/yolo-brief.md in full, then implement every phase it describes exactly as written."
 ```
 
 ---
 
-Tell the user clearly, using the exact format below:
+Then print a **Cost & Model Summary** so the user can review before running:
 
 ```
 Brief saved to: output/sessions/YYYY-MM-DD_topic-slug/yolo-brief.md
 
-The command above launches an Opus session in YOLO mode.
-It will create a feature branch `feature/topic-slug` from develop and implement all phases autonomously.
+## Cost & Model Summary
 
-Review the brief before running if you want to make any manual adjustments first.
+Estimated total cost: ~$X.XX
+
+| Phase | Model | Goal |
+|-------|-------|------|
+| Phase 1 | sonnet | [one-line goal] |
+| Phase 2 | haiku | [one-line goal] |
+| Phase 3 | sonnet | [one-line goal] |
+| ... | | |
+
+To override the orchestrator model: change `--model sonnet` to `--model opus`
+To set a hard budget ceiling: add `--max-budget-usd N` to the command
+
+Review the brief before running if you want to make any manual adjustments.
 
 ## After the YOLO session completes
 

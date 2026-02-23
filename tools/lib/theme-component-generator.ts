@@ -135,6 +135,27 @@ function validateAndFixTokenClasses(content: string): { content: string; violati
 }
 
 // ============================================================================
+// Bracket-notation props fix
+// ============================================================================
+
+export function fixBracketNotationProps(content: string): { content: string; fixCount: number } {
+  let fixCount = 0;
+  const fixed = content.replace(
+    /props\[['"]([a-z][a-z0-9]*(?:-[a-z0-9]+)*)['"]\]/g,
+    (_match, key: string) => {
+      const camelKey = key.replace(/-([a-z0-9])/g, (_: string, c: string) => c.toUpperCase());
+      fixCount++;
+      return `props.${camelKey}`;
+    }
+  );
+  return { content: fixed, fixCount };
+}
+
+export function hasResidualBracketProps(content: string): boolean {
+  return /props\[['"][a-z]/.test(content);
+}
+
+// ============================================================================
 // "use client" directive detection
 // ============================================================================
 
@@ -272,6 +293,21 @@ async function generateSingleComponent(
             content = placeholderComponent(blueprint);
             usedAI = false;
           }
+        }
+      }
+
+      // Post-generation: Fix bracket-notation prop access
+      if (usedAI) {
+        const { content: propsFixed, fixCount } = fixBracketNotationProps(content);
+        if (fixCount > 0) {
+          warnings.push(`${blueprint.name}: Fixed ${fixCount} bracket-notation prop accesses → dot notation`);
+          content = propsFixed;
+        }
+        // Hard-fail if bracket notation still remains after fix
+        if (hasResidualBracketProps(content)) {
+          warnings.push(`${blueprint.name}: Residual bracket-notation props detected after fix — using placeholder`);
+          content = placeholderComponent(blueprint);
+          usedAI = false;
         }
       }
     } else {

@@ -1,13 +1,13 @@
 /*
- * Lyra Theme — Global CSS Utilities
+ * Atlas Theme — Global CSS Utilities
  *
- * Reference site: https://colorcode.events/
- * Capture date: 2026-02-22T07:23:38.432Z
+ * Reference site: https://themes.boldway.agency/deep/bold/
+ * Capture date: 2026-02-22T07:25:52.892Z
  *
- * Theme-level utility classes shared by all Lyra sites.
+ * Theme-level utility classes shared by all Atlas sites.
  * Import this file at the top of your site's app/globals.css:
  *
- *   @import "../../packages/themes/lyra/globals.css";
+ *   @import "../../packages/themes/atlas/globals.css";
  *   @tailwind base;
  *   @tailwind components;
  *   @tailwind utilities;

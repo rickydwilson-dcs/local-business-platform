@@ -13,7 +13,7 @@ import type { SectionBlueprint } from "./reference-analysis-types";
  * - Prefix leading digits with underscore
  * - Remove any remaining non-identifier characters
  */
-function sanitiseSlotName(slot: string): string {
+export function sanitiseSlotName(slot: string): string {
   // Convert hyphens/spaces to camelCase
   let name = slot
     .replace(/[-\s]+([a-zA-Z])/g, (_, c: string) => c.toUpperCase())
@@ -97,6 +97,8 @@ function inferPropType(slotName: string): string {
 export function serverComponentShell(blueprint: SectionBlueprint, jsxBody: string): string {
   const propsInterface = generatePropsInterface(blueprint);
   const interfaceName = `${blueprint.componentExportName}Props`;
+  const animationPrimitives = detectAnimationImports(jsxBody);
+  const animationImport = buildAnimationImportLine(animationPrimitives);
 
   return `/**
  * ${blueprint.componentExportName}
@@ -105,7 +107,7 @@ export function serverComponentShell(blueprint: SectionBlueprint, jsxBody: strin
  * Layout: ${blueprint.layoutPattern}
  * Category: ${blueprint.category}
  */
-
+${animationImport ? "\n" + animationImport + "\n" : ""}
 ${propsInterface}
 
 export function ${blueprint.componentExportName}(props: ${interfaceName}) {
@@ -130,12 +132,47 @@ export function detectReactImports(jsxBody: string): string[] {
 }
 
 /**
+ * Animation primitives that may appear in AI-generated JSX.
+ */
+const ANIMATION_PRIMITIVES = [
+  "RevealOnScroll",
+  "Carousel",
+  "ParallaxSection",
+  "useScrollParallax",
+] as const;
+
+/**
+ * Detect which animation primitives are used in a JSX body.
+ * Returns a deduplicated array of names found.
+ */
+export function detectAnimationImports(jsxBody: string): string[] {
+  const found: string[] = [];
+  for (const name of ANIMATION_PRIMITIVES) {
+    if (new RegExp(`\\b${name}\\b`).test(jsxBody)) {
+      found.push(name);
+    }
+  }
+  return found;
+}
+
+/**
+ * Build the animation import line for detected primitives.
+ * Returns empty string if no animation primitives are used.
+ */
+function buildAnimationImportLine(primitives: string[]): string {
+  if (primitives.length === 0) return "";
+  return `import { ${primitives.join(", ")} } from "@platform/core-components/src/components/animation";`;
+}
+
+/**
  * Generate Client Component shell ("use client" + dynamic React imports).
  */
 export function clientComponentShell(blueprint: SectionBlueprint, jsxBody: string): string {
   const propsInterface = generatePropsInterface(blueprint);
   const interfaceName = `${blueprint.componentExportName}Props`;
   const reactImports = detectReactImports(jsxBody).join(", ");
+  const animationPrimitives = detectAnimationImports(jsxBody);
+  const animationImport = buildAnimationImportLine(animationPrimitives);
 
   return `"use client";
 
@@ -148,7 +185,7 @@ export function clientComponentShell(blueprint: SectionBlueprint, jsxBody: strin
  */
 
 import { ${reactImports} } from "react";
-
+${animationImport ? animationImport + "\n" : ""}
 ${propsInterface}
 
 export function ${blueprint.componentExportName}(props: ${interfaceName}) {
@@ -221,8 +258,12 @@ RULES:
 3. Standard Tailwind layout/spacing classes are fine (py-16, px-4, max-w-7xl, grid, flex, etc.)
 4. Use responsive breakpoints: mobile-first with md: and lg: prefixes.
 5. The component receives "props" as the parameter name.
-6. Output ONLY the function body starting with "  return (" — no imports, no interface, no function declaration.
-7. Keep it clean, semantic, and accessible.
+6. Access props using ONLY dot notation with camelCase names matching the interface:
+   CORRECT: props.backgroundImage, props.ctaButtons, props.heading
+   WRONG: props['background-image'], props['cta-buttons'], props['heading']
+   The interface defines camelCase prop names — use dot notation to access them.
+7. Output ONLY the function body starting with "  return (" — no imports, no interface, no function declaration.
+8. Keep it clean, semantic, and accessible.
 
 ANIMATION PRIMITIVES (use these when the layout pattern suggests animation):
 - Scroll-triggered reveals: wrap section content in <RevealOnScroll variant="fade-up">
@@ -234,8 +275,8 @@ ANIMATION PRIMITIVES (use these when the layout pattern suggests animation):
 - CSS animation classes: animate-fade-in-up, animate-slide-in-left, animate-slide-in-right, animate-scale-up
 
 ANIMATION RULES:
-8. Do NOT animate every section. Use RevealOnScroll on 2-3 content sections max.
-9. Carousels are for hero images, testimonials, and blog post grids ONLY when the layout says "slider" or "carousel".
-10. ParallaxSection is for hero backgrounds or full-bleed image sections only.
-11. Always respect prefers-reduced-motion (the primitives handle this internally).`;
+9. Do NOT animate every section. Use RevealOnScroll on 2-3 content sections max.
+10. Carousels are for hero images, testimonials, and blog post grids ONLY when the layout says "slider" or "carousel".
+11. ParallaxSection is for hero backgrounds or full-bleed image sections only.
+12. Always respect prefers-reduced-motion (the primitives handle this internally).`;
 }

@@ -16,18 +16,20 @@ import { CallForSponsorsCTA } from './components/call-for-sponsors-cta';
 import { CallForVolunteersCTA } from './components/call-for-volunteers-cta';
 import { BlogPostGrid } from './components/blog-post-grid';
 import { ColorCodeEventsAbout } from './components/colorcode-events-about';
-import { HowItStarted } from './components/how-it-started';
-import { TeamMemberCard } from './components/team-member-card';
+import { HowItStartedSection } from './components/how-it-started-section';
 import { EventPhotoGallery } from './components/event-photo-gallery';
-import { ErrorMessageCard } from './components/error-message-card';
-import { SiteFooter } from './components/site-footer';
+import { TeamMemberBio } from './components/team-member-bio';
+import { ErrorStateCentered } from './components/error-state-centered';
 import { BlogStats } from './components/blog-stats';
-import { TeamMemberBenDunkle } from './components/cards-team-member-green';
-import { TeamMemberRonBrennan } from './components/cards-team-member-orange';
-import { TeamMemberTimBouchard } from './components/cards-team-member-blue';
+import { SiteFooter } from './components/site-footer';
+import { TeamMemberBenDunkle } from './components/custom-team-member-green';
+import { TeamMemberRonBrennan } from './components/custom-team-member-orange';
+import { TeamMemberTimBouchard } from './components/custom-team-member-blue';
 import { NewsletterSubscribeCTA } from './components/cta-newsletter-inline-form';
 import { RegistrationErrorState } from './components/custom-error-message-centered';
+import { OrderErrorMessage } from './components/custom-error-card-centered';
 import { NewsletterSubscribeBanner } from './components/cta-newsletter-banner';
+import { OrderErrorCard } from './components/content-error-card-centered';
 import { Hero } from './components/hero';
 import { ContentCheckout } from './components/content-checkout';
 import { CtaSubscribeToOurNewsletter } from './components/cta-subscribe-to-our-newsletter';
@@ -50,7 +52,7 @@ export const lyraElements: ShowcaseElementEntry[] = [
     slug: "navigation-top-bar",
     name: "TopNavigation",
     category: "Navigation",
-    description: "Primary site-wide navigation with logo, event info CTA button, and hamburger menu for mobile",
+    description: "Global site navigation with logo, primary CTA button, and hamburger menu, present on every page",
     themeName: "lyra",
     render: () => <TopNavigation />,
   },
@@ -58,7 +60,7 @@ export const lyraElements: ShowcaseElementEntry[] = [
     slug: "hero-full-bleed-text",
     name: "HeroHeadline",
     category: "Hero",
-    description: "Large typographic hero statement introducing the conference brand and value proposition with inline coloured graphic accents",
+    description: "Large typographic hero statement introducing the conference brand and value proposition with inline colour highlights and decorative shapes",
     themeName: "lyra",
     render: () => <HeroHeadline />,
   },
@@ -66,7 +68,7 @@ export const lyraElements: ShowcaseElementEntry[] = [
     slug: "hero-event-details-split",
     name: "EventDetailsBanner",
     category: "Hero",
-    description: "Displays key event logistics — date, time, venue — alongside a speaker photo with a CTA button",
+    description: "Displays key event details — date, time, venue — alongside a speaker photo with CTA button",
     themeName: "lyra",
     render: () => <EventDetailsBanner />,
   },
@@ -74,7 +76,7 @@ export const lyraElements: ShowcaseElementEntry[] = [
     slug: "hero-page-title-banner",
     name: "PageTitleBanner",
     category: "Hero",
-    description: "Page title banner identifying interior pages with decorative icon and large heading",
+    description: "Full-width page title banner identifying the current section with decorative icon or slash marks",
     themeName: "lyra",
     render: () => <PageTitleBanner />,
   },
@@ -82,7 +84,7 @@ export const lyraElements: ShowcaseElementEntry[] = [
     slug: "cta-newsletter-signup",
     name: "NewsletterSignup",
     category: "CTA",
-    description: "Captures email addresses for newsletter subscription with heading, subtext, email input and submit button",
+    description: "Full-width newsletter subscription band capturing email addresses for event updates, present on every page",
     themeName: "lyra",
     render: () => <NewsletterSignup />,
   },
@@ -90,7 +92,7 @@ export const lyraElements: ShowcaseElementEntry[] = [
     slug: "cta-call-for-speakers-yellow",
     name: "CallForSpeakersCTA",
     category: "CTA",
-    description: "Encourages speakers to apply to present at the conference",
+    description: "Encourages speakers to apply with a brief description and apply button on a yellow background",
     themeName: "lyra",
     render: () => <CallForSpeakersCTA />,
   },
@@ -98,7 +100,7 @@ export const lyraElements: ShowcaseElementEntry[] = [
     slug: "cta-call-for-sponsors-blue",
     name: "CallForSponsorsCTA",
     category: "CTA",
-    description: "Invites potential sponsors to support the event",
+    description: "Encourages sponsors to support the event with a brief description and view sponsor levels button on a blue background",
     themeName: "lyra",
     render: () => <CallForSponsorsCTA />,
   },
@@ -106,7 +108,7 @@ export const lyraElements: ShowcaseElementEntry[] = [
     slug: "cta-call-for-volunteers-green",
     name: "CallForVolunteersCTA",
     category: "CTA",
-    description: "Recruits volunteers to help run the conference",
+    description: "Encourages volunteers to apply with a brief description and apply button on a green background",
     themeName: "lyra",
     render: () => <CallForVolunteersCTA />,
   },
@@ -114,33 +116,25 @@ export const lyraElements: ShowcaseElementEntry[] = [
     slug: "blog-cards-grid",
     name: "BlogPostGrid",
     category: "Blog",
-    description: "Displays a grid of blog post cards with thumbnail image, title, date, excerpt, and read more CTA",
+    description: "Displays recent blog post cards with thumbnail, title, date, excerpt, and read more CTA in a two-column grid",
     themeName: "lyra",
     render: () => <BlogPostGrid />,
   },
   {
-    slug: "content-about-colorcode-events",
+    slug: "content-about-events-dark",
     name: "ColorCodeEventsAbout",
     category: "Content",
-    description: "Describes the ColorCode Events organisation and its mission with heading, body copy and learn more CTA",
+    description: "Describes the ColorCode Events organisation, its history and mission with a learn more CTA on a dark background",
     themeName: "lyra",
     render: () => <ColorCodeEventsAbout />,
   },
   {
     slug: "content-origin-story",
-    name: "HowItStarted",
+    name: "HowItStartedSection",
     category: "Content",
-    description: "Describes the founding story and mission of ColorCode Events with decorative arrows and multi-paragraph text",
+    description: "Explains the origin story of ColorCode Events and its founding partners with decorative arrows",
     themeName: "lyra",
-    render: () => <HowItStarted />,
-  },
-  {
-    slug: "cards-team-member",
-    name: "TeamMemberCard",
-    category: "Cards",
-    description: "Full-width profile card for a team member or co-founder with bio and external links",
-    themeName: "lyra",
-    render: () => <TeamMemberCard />,
+    render: () => <HowItStartedSection />,
   },
   {
     slug: "social-proof-photo-gallery",
@@ -151,50 +145,58 @@ export const lyraElements: ShowcaseElementEntry[] = [
     render: () => <EventPhotoGallery />,
   },
   {
-    slug: "custom-error-card-centered",
-    name: "ErrorMessageCard",
+    slug: "team-member-bio",
+    name: "TeamMemberBio",
+    category: "Custom",
+    description: "Full-width founder bio card with name, title, description, and external links on a coloured background",
+    themeName: "lyra",
+    render: () => <TeamMemberBio />,
+  },
+  {
+    slug: "error-state-centered",
+    name: "ErrorStateCentered",
     category: "Custom",
     description: "Displays an error or empty state message indicating no purchase was made, with a link back home",
     themeName: "lyra",
-    render: () => <ErrorMessageCard />,
-  },
-  {
-    slug: "footer-multi-column-links",
-    name: "SiteFooter",
-    category: "Footer",
-    description: "Site-wide footer with navigation links grouped by category (Events, Support, Legal, Company), logo, social icons, and copyright",
-    themeName: "lyra",
-    render: () => <SiteFooter />,
+    render: () => <ErrorStateCentered />,
   },
   {
     slug: "stats-blog",
     name: "BlogStats",
     category: "Stats",
-    description: "Displays blog post metadata or stats such as read time and publication info",
+    description: "Displays blog post metadata and stats such as read time or post count",
     themeName: "lyra",
     render: () => <BlogStats />,
   },
   {
-    slug: "cards-team-member-green",
+    slug: "footer-multi-column",
+    name: "SiteFooter",
+    category: "Footer",
+    description: "Global site footer with navigation links grouped by category, logo, social icons, and copyright, present on every page",
+    themeName: "lyra",
+    render: () => <SiteFooter />,
+  },
+  {
+    slug: "custom-team-member-green",
     name: "TeamMemberBenDunkle",
-    category: "Cards",
-    description: "Profile card for co-founder Ben Dunkle with bio and LinkedIn link",
+    category: "Custom",
+    description: "Founder bio card for Ben Dunkle with title, description and LinkedIn link",
     themeName: "lyra",
     render: () => <TeamMemberBenDunkle />,
   },
   {
-    slug: "cards-team-member-orange",
+    slug: "custom-team-member-orange",
     name: "TeamMemberRonBrennan",
-    category: "Cards",
-    description: "Profile card for co-founder Ron Brennan with bio and external links",
+    category: "Custom",
+    description: "Founder bio card for Ron Brennan with title, description and external links",
     themeName: "lyra",
     render: () => <TeamMemberRonBrennan />,
   },
   {
-    slug: "cards-team-member-blue",
+    slug: "custom-team-member-blue",
     name: "TeamMemberTimBouchard",
-    category: "Cards",
-    description: "Profile card for co-founder Tim Bouchard with bio and external links",
+    category: "Custom",
+    description: "Founder bio card for Tim Bouchard with title, description and external links",
     themeName: "lyra",
     render: () => <TeamMemberTimBouchard />,
   },
@@ -202,7 +204,7 @@ export const lyraElements: ShowcaseElementEntry[] = [
     slug: "cta-newsletter-inline-form",
     name: "NewsletterSubscribeCTA",
     category: "CTA",
-    description: "Encourages visitors to subscribe to the newsletter with an inline email form",
+    description: "Email newsletter subscription section encouraging visitors to sign up for event news and articles",
     themeName: "lyra",
     render: () => <NewsletterSubscribeCTA />,
   },
@@ -215,12 +217,28 @@ export const lyraElements: ShowcaseElementEntry[] = [
     render: () => <RegistrationErrorState />,
   },
   {
+    slug: "custom-error-card-centered",
+    name: "OrderErrorMessage",
+    category: "Custom",
+    description: "Displays an error message indicating no purchase was made, with a link back home",
+    themeName: "lyra",
+    render: () => <OrderErrorMessage />,
+  },
+  {
     slug: "cta-newsletter-banner",
     name: "NewsletterSubscribeBanner",
     category: "CTA",
     description: "Email newsletter subscription form with submit button",
     themeName: "lyra",
     render: () => <NewsletterSubscribeBanner />,
+  },
+  {
+    slug: "content-error-card-centered",
+    name: "OrderErrorCard",
+    category: "Content",
+    description: "Displays an error message indicating no purchase was made, with a link back home",
+    themeName: "lyra",
+    render: () => <OrderErrorCard />,
   },
   {
     slug: "hero",

@@ -15,6 +15,7 @@ import type {
   ComponentMatch,
   PageType,
 } from "./reference-analysis-types";
+import { sanitiseSlotName } from "./theme-component-templates";
 
 // ============================================================================
 // Types
@@ -77,6 +78,31 @@ function toPascalCase(str: string): string {
     .split(/[-_\s]+/)
     .map((s) => s.charAt(0).toUpperCase() + s.slice(1).toLowerCase())
     .join("");
+}
+
+// ============================================================================
+// Placeholder Image Helpers
+// ============================================================================
+
+function placeholderImageSvg(width: number, height: number, label: string): string {
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}"><rect fill="#E5E7EB" width="${width}" height="${height}"/><text fill="#9CA3AF" font-family="system-ui,sans-serif" font-size="14" text-anchor="middle" x="${width / 2}" y="${height / 2 + 5}">${label} (${width}x${height})</text></svg>`;
+  return `data:image/svg+xml,${encodeURIComponent(svg)}`;
+}
+
+function getImageProps(blueprint: SectionBlueprint): Map<string, { width: number; height: number }> {
+  const imageProps = new Map<string, { width: number; height: number }>();
+  for (const slot of blueprint.contentSlots) {
+    const lower = slot.toLowerCase();
+    if (/image|photo|background|logo|avatar|banner|thumbnail/i.test(lower)) {
+      const propName = sanitiseSlotName(slot);
+      let width = 800, height = 400;
+      if (/logo|avatar|icon/i.test(lower)) { width = 200; height = 200; }
+      else if (/banner|hero|background/i.test(lower)) { width = 1920; height = 600; }
+      else if (/thumbnail|card/i.test(lower)) { width = 400; height = 300; }
+      imageProps.set(propName, { width, height });
+    }
+  }
+  return imageProps;
 }
 
 // ============================================================================
@@ -143,7 +169,16 @@ function generatePageTsx(
     const bp = blueprintMap.get(section.blueprintId);
     const purpose = bp?.purpose ?? section.blueprintId;
     sectionLines.push(`      {/* Section: ${purpose} — from ${section.blueprintId} */}`);
-    sectionLines.push(`      <${resolved.componentName} />`);
+    const imageProps = bp ? getImageProps(bp) : new Map();
+    if (imageProps.size > 0) {
+      const propsEntries = [...imageProps.entries()].map(([name, dims]) => {
+        const uri = placeholderImageSvg(dims.width, dims.height, name);
+        return `${name}={{ src: "${uri}", alt: "Placeholder: ${name}" }}`;
+      });
+      sectionLines.push(`      <${resolved.componentName} ${propsEntries.join(" ")} />`);
+    } else {
+      sectionLines.push(`      <${resolved.componentName} />`);
+    }
     sectionLines.push("");
   }
 
@@ -186,6 +221,125 @@ function generatePageTsx(
   lines.push("");
 
   return lines.join("\n");
+}
+
+// ============================================================================
+// Review Panel Generation
+// ============================================================================
+
+interface RouteManifestEntry {
+  pageType: string;
+  route: string;
+  label: string;
+}
+
+function generateReviewPanel(routes: RouteManifestEntry[]): string {
+  const routeArray = JSON.stringify(routes, null, 2)
+    .split("\n")
+    .map(line => `  ${line}`)
+    .join("\n");
+
+  return `"use client";
+
+/**
+ * ReviewPanel
+ *
+ * Collapsible navigation panel for test sites.
+ * Shows all generated routes with active-page highlighting.
+ * Intentionally uses hardcoded colors (not theme tokens) to be
+ * visually distinct from the theme under review.
+ */
+
+import { useState } from "react";
+
+const ROUTES = ${routeArray.trim()};
+
+export function ReviewPanel() {
+  const [open, setOpen] = useState(false);
+  const currentPath = typeof window !== "undefined" ? window.location.pathname : "";
+
+  return (
+    <div
+      style={{
+        position: "fixed",
+        bottom: "1rem",
+        right: "1rem",
+        zIndex: 9999,
+        fontFamily: "system-ui, sans-serif",
+        fontSize: "13px",
+      }}
+    >
+      {open ? (
+        <div
+          style={{
+            background: "#1F2937",
+            color: "#F9FAFB",
+            borderRadius: "8px",
+            padding: "12px",
+            minWidth: "200px",
+            boxShadow: "0 4px 20px rgba(0,0,0,0.4)",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              marginBottom: "8px",
+            }}
+          >
+            <span style={{ fontWeight: 600, color: "#9CA3AF", fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.05em" }}>
+              Review Panel
+            </span>
+            <button
+              onClick={() => setOpen(false)}
+              style={{ background: "none", border: "none", color: "#9CA3AF", cursor: "pointer", padding: "0 2px", fontSize: "16px", lineHeight: 1 }}
+            >
+              ×
+            </button>
+          </div>
+          <nav>
+            {ROUTES.map((r) => (
+              <a
+                key={r.route}
+                href={r.route}
+                style={{
+                  display: "block",
+                  padding: "4px 8px",
+                  borderRadius: "4px",
+                  color: currentPath === r.route ? "#FFFFFF" : "#D1D5DB",
+                  background: currentPath === r.route ? "#374151" : "transparent",
+                  textDecoration: "none",
+                  marginBottom: "2px",
+                }}
+              >
+                {r.label}
+              </a>
+            ))}
+          </nav>
+        </div>
+      ) : (
+        <button
+          onClick={() => setOpen(true)}
+          style={{
+            background: "#1F2937",
+            color: "#F9FAFB",
+            border: "none",
+            borderRadius: "8px",
+            padding: "8px 12px",
+            cursor: "pointer",
+            boxShadow: "0 4px 20px rgba(0,0,0,0.4)",
+            fontFamily: "system-ui, sans-serif",
+            fontSize: "13px",
+          }}
+        >
+          Pages ▲
+        </button>
+      )}
+    </div>
+  );
+}
+`;
 }
 
 // ============================================================================
@@ -290,6 +444,24 @@ export function generateExamplePages(
 
     console.log(`  ✓ ${relativePath}`);
   }
+
+  // Generate route manifest JSON
+  const routeManifest = pages.map(p => ({
+    pageType: p.pageType,
+    route: p.outputPath.replace(/^app/, "").replace(/\/page\.tsx$/, "") || "/",
+    label: p.pageType.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase()),
+  }));
+  const manifestPath = path.join(exampleDir, "route-manifest.json");
+  fs.writeFileSync(manifestPath, JSON.stringify(routeManifest, null, 2), "utf8");
+  console.log(`  ✓ route-manifest.json`);
+
+  // Generate ReviewPanel component
+  const reviewPanelContent = generateReviewPanel(routeManifest);
+  const reviewPanelDir = path.join(exampleDir, "components");
+  fs.mkdirSync(reviewPanelDir, { recursive: true });
+  const reviewPanelPath = path.join(reviewPanelDir, "ReviewPanel.tsx");
+  fs.writeFileSync(reviewPanelPath, reviewPanelContent, "utf8");
+  console.log(`  ✓ components/ReviewPanel.tsx`);
 
   // Generate README
   const readmeContent = generateReadme(themeName, pages);

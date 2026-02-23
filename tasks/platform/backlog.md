@@ -8,22 +8,19 @@ For completed build history, see [docs/project-history.md](../../docs/project-hi
 
 ## Immediate
 
-### End-to-End Workflow
+### Ingestion Pipeline Validation
 
-- [ ] Document complete site creation process (intake → generation → deploy → handoff)
-- [ ] Create workflow checklist template
-- [ ] Test complete workflow with dummy client
-- [ ] Time each step and identify bottlenecks
+- [ ] Test complete pipeline.ingest with a real client intake (not test fixtures)
+- [ ] Verify registry recommendation (orion vs vega) works end-to-end
 
-### Industry Libraries
+### Supabase Registry
 
-- [ ] Test all 14 industry libraries with AI content generation
-- [ ] Validate generated content quality across different trades
+- [ ] Create Supabase project and run schema SQL (`tools/supabase-schema.sql`)
+- [ ] Add credentials to `.env.local` and run initial sync (`pnpm registry:sync`)
 
 ### Code Quality
 
-- [ ] Resolve remaining code review findings from 2026-02-08 Codex review
-- [ ] Fix pre-existing colossus components referencing missing files (certificate-gallery, certificate-lightbox, content-card)
+- [ ] CQ-017 (LOW): Extract `sites/colossus-scaffolding/mdx-components.tsx` component definitions into separate files
 
 ---
 
