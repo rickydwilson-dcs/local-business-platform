@@ -15,6 +15,7 @@ import type {
   ComponentMatch,
   PageType,
 } from "./reference-analysis-types";
+import { sanitiseSlotName } from "./theme-component-templates";
 
 // ============================================================================
 // Types
@@ -77,6 +78,31 @@ function toPascalCase(str: string): string {
     .split(/[-_\s]+/)
     .map((s) => s.charAt(0).toUpperCase() + s.slice(1).toLowerCase())
     .join("");
+}
+
+// ============================================================================
+// Placeholder Image Helpers
+// ============================================================================
+
+function placeholderImageSvg(width: number, height: number, label: string): string {
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}"><rect fill="#E5E7EB" width="${width}" height="${height}"/><text fill="#9CA3AF" font-family="system-ui,sans-serif" font-size="14" text-anchor="middle" x="${width / 2}" y="${height / 2 + 5}">${label} (${width}x${height})</text></svg>`;
+  return `data:image/svg+xml,${encodeURIComponent(svg)}`;
+}
+
+function getImageProps(blueprint: SectionBlueprint): Map<string, { width: number; height: number }> {
+  const imageProps = new Map<string, { width: number; height: number }>();
+  for (const slot of blueprint.contentSlots) {
+    const lower = slot.toLowerCase();
+    if (/image|photo|background|logo|avatar|banner|thumbnail/i.test(lower)) {
+      const propName = sanitiseSlotName(slot);
+      let width = 800, height = 400;
+      if (/logo|avatar|icon/i.test(lower)) { width = 200; height = 200; }
+      else if (/banner|hero|background/i.test(lower)) { width = 1920; height = 600; }
+      else if (/thumbnail|card/i.test(lower)) { width = 400; height = 300; }
+      imageProps.set(propName, { width, height });
+    }
+  }
+  return imageProps;
 }
 
 // ============================================================================
@@ -143,7 +169,16 @@ function generatePageTsx(
     const bp = blueprintMap.get(section.blueprintId);
     const purpose = bp?.purpose ?? section.blueprintId;
     sectionLines.push(`      {/* Section: ${purpose} — from ${section.blueprintId} */}`);
-    sectionLines.push(`      <${resolved.componentName} />`);
+    const imageProps = bp ? getImageProps(bp) : new Map();
+    if (imageProps.size > 0) {
+      const propsEntries = [...imageProps.entries()].map(([name, dims]) => {
+        const uri = placeholderImageSvg(dims.width, dims.height, name);
+        return `${name}={{ src: "${uri}", alt: "Placeholder: ${name}" }}`;
+      });
+      sectionLines.push(`      <${resolved.componentName} ${propsEntries.join(" ")} />`);
+    } else {
+      sectionLines.push(`      <${resolved.componentName} />`);
+    }
     sectionLines.push("");
   }
 
