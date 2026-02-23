@@ -127,6 +127,7 @@ import './globals.css';
 import { siteConfig } from '@/site.config';
 import { ThemeProvider } from '@platform/core-components';
 import { <camelCaseThemeName>Registry } from '@platform/themes/<theme-name>';
+import { ReviewPanel } from './components/ReviewPanel';
 
 export const metadata: Metadata = {
   title: {
@@ -148,6 +149,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="min-h-screen flex flex-col">
         <ThemeProvider theme="<theme-name>" registry={<camelCaseThemeName>Registry}>
           {children}
+          <ReviewPanel />
         </ThemeProvider>
       </body>
     </html>
@@ -181,6 +183,7 @@ Do NOT include: SiteHeader, Footer, PageShell, getContentItems(), analytics, con
 4. **Copy generated example pages** into the test site:
    ```bash
    cp -r output/ingestion/<theme-name>/example-pages/app/* sites/test-<theme-name>/app/
+   cp -r output/ingestion/<theme-name>/example-pages/components/ sites/test-<theme-name>/app/components/
    ```
 
 5. **Import contract check.** Verify every page imports theme components:
