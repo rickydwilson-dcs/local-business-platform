@@ -62,6 +62,7 @@ interface CliArgs {
   dryRun: boolean;
   skipExamples: boolean;
   htmlOnly: boolean;
+  pages?: string[];
 }
 
 function parseArgs(argv: string[]): CliArgs {
@@ -96,6 +97,10 @@ function parseArgs(argv: string[]): CliArgs {
         break;
       case "--html-only":
         args.htmlOnly = true;
+        break;
+      case "--pages":
+        args.pages = next.split(",").map((u) => u.trim()).filter(Boolean);
+        i++;
         break;
     }
   }
@@ -248,7 +253,10 @@ async function main() {
   // ── Step 2: Discover pages ──
   stepStart = Date.now();
   console.log("[2/14] Discovering pages...");
-  const discoveredPages = await discoverPages(args.url, { maxPages: args.maxPages });
+  const discoveredPages = await discoverPages(args.url, {
+    maxPages: args.maxPages,
+    pages: args.pages,
+  });
   console.log(`  Found ${discoveredPages.length} pages`);
   for (const page of discoveredPages) {
     console.log(`    ${page.pageType}: ${page.path} (${page.source})`);

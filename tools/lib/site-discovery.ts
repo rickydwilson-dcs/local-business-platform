@@ -35,6 +35,22 @@ const COMMON_PATHS = [
   "/projects",
 ];
 
+const PAGE_TYPE_PRIORITY: PageType[] = [
+  "home",
+  "services-list",
+  "about",
+  "blog-list",
+  "contact",
+  "locations-list",
+  "pricing",
+  "reviews",
+  "projects",
+  "service-detail",
+  "blog-post",
+  "location-detail",
+  "custom",
+];
+
 // ============================================================================
 // Helpers
 // ============================================================================
@@ -438,10 +454,32 @@ async function discoverFromProbing(
  */
 export async function discoverPages(
   url: string,
-  options?: { maxPages?: number },
+  options?: { maxPages?: number; pages?: string[] },
 ): Promise<DiscoveredPage[]> {
   const maxPages = options?.maxPages ?? DEFAULT_MAX_PAGES;
   const baseUrl = normaliseBaseUrl(url);
+
+  // Manifest mode: bypass all discovery strategies
+  if (options?.pages && options.pages.length > 0) {
+    const pages = new Map<string, DiscoveredPage>();
+    for (const pageUrl of options.pages) {
+      const path = toCleanPath(pageUrl, baseUrl);
+      if (path !== null) {
+        addPage(pages, baseUrl, path, "manifest");
+      }
+    }
+    return Array.from(pages.values())
+      .sort((a, b) => {
+        if (a.path === "/") return -1;
+        if (b.path === "/") return 1;
+        const aPriority = PAGE_TYPE_PRIORITY.indexOf(a.pageType);
+        const bPriority = PAGE_TYPE_PRIORITY.indexOf(b.pageType);
+        if (aPriority !== bPriority) return aPriority - bPriority;
+        if (a.depth !== b.depth) return a.depth - b.depth;
+        return a.path.localeCompare(b.path);
+      })
+      .slice(0, maxPages);
+  }
 
   // Step 0: Check robots.txt
   const disallowed = await fetchDisallowedPaths(baseUrl);
@@ -477,15 +515,18 @@ export async function discoverPages(
     pages = await discoverFromProbing(baseUrl, disallowed, pages, maxPages);
   }
 
-  // Return as sorted array (home first, then by depth, then alphabetically)
+  if (pages.size <= 2) {
+    console.warn(`  [Warning] Only ${pages.size} page(s) discovered. Consider using --pages to provide specific URLs.`);
+  }
+
   return Array.from(pages.values())
     .sort((a, b) => {
-      // Home always first
       if (a.path === "/") return -1;
       if (b.path === "/") return 1;
-      // Then by depth
+      const aPriority = PAGE_TYPE_PRIORITY.indexOf(a.pageType);
+      const bPriority = PAGE_TYPE_PRIORITY.indexOf(b.pageType);
+      if (aPriority !== bPriority) return aPriority - bPriority;
       if (a.depth !== b.depth) return a.depth - b.depth;
-      // Then alphabetically
       return a.path.localeCompare(b.path);
     })
     .slice(0, maxPages);
