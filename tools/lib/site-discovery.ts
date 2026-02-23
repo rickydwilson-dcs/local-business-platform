@@ -63,7 +63,7 @@ function delay(ms: number): Promise<void> {
  * Normalise a URL string into a consistent base URL with no trailing slash.
  * Preserves path prefix for subdirectory-hosted sites.
  */
-function normaliseBaseUrl(raw: string): string {
+export function normaliseBaseUrl(raw: string): string {
   const url = new URL(raw);
   let basePath = url.pathname;
   if (basePath.length > 1 && basePath.endsWith("/")) {
@@ -75,11 +75,13 @@ function normaliseBaseUrl(raw: string): string {
 /**
  * Check whether a URL is under the base URL (same host and path prefix).
  */
-function isUnderBase(href: string, baseUrl: string): boolean {
+export function isUnderBase(href: string, baseUrl: string): boolean {
   try {
     const target = new URL(href, baseUrl);
     const base = new URL(baseUrl);
     if (target.hostname !== base.hostname) return false;
+    // Domain root — everything on this host is under it
+    if (base.pathname === "/") return true;
     return (
       target.pathname === base.pathname ||
       target.pathname.startsWith(base.pathname + "/")
@@ -94,7 +96,7 @@ function isUnderBase(href: string, baseUrl: string): boolean {
  * Strips base path prefix for subdirectory-hosted sites.
  * Returns null if the URL is invalid or off-domain.
  */
-function toCleanPath(href: string, baseUrl: string): string | null {
+export function toCleanPath(href: string, baseUrl: string): string | null {
   try {
     const target = new URL(href, baseUrl);
     const base = new URL(baseUrl);
@@ -156,7 +158,7 @@ const PAGE_TYPE_SYNONYMS: Record<string, PageType> = {
 /**
  * Classify a URL path into a PageType based on synonym map and pattern matching.
  */
-function classifyPage(path: string): PageType {
+export function classifyPage(path: string): PageType {
   const lower = path.toLowerCase();
   if (lower === "/" || lower === "") return "home";
 
