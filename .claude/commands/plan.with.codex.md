@@ -10,6 +10,8 @@ Runs the dual-model peer review workflow for complex architectural or multi-step
 
 ## Phase 1: Write Brief and Claude Plan
 
+**Recommended model:** Sonnet. This phase does codebase research and structured plan writing — Opus is not needed here.
+
 Triggered when `$ARGUMENTS` is NOT the word `synthesise`.
 
 ### Step 1: Parse Arguments
@@ -146,6 +148,8 @@ Tell the user:
 
 ## Phase 2: Synthesise
 
+**Recommended model:** Opus. The synthesis requires reasoning about conflicts between two plans and making judgment calls on trade-offs. This is the highest-value step.
+
 Triggered when `$ARGUMENTS` is exactly `synthesise`.
 
 ### Step 1: Find the Active Review Folder
@@ -220,3 +224,4 @@ Tell the user:
 - **Claude's plan is written before seeing Codex's output** — write it in Step 5 before any synthesis
 - **The synthesis is honest about conflicts** — don't paper over disagreements, reason through them
 - **The synthesis becomes the session.md** — once approved, copy it to `output/sessions/YYYY-MM-DD_[topic]/session.md` and implement from there
+- **Model selection:** Phase 1 (brief + claude-plan) → Sonnet. Phase 2 (synthesis) → Opus. The synthesis earns the Opus cost; Phase 1 does not.
