@@ -5,19 +5,7 @@
   "description": "Base template site for white-label platform - copy and customize for new sites",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
     "start": "next start",
-    "lint": "eslint .",
-    "type-check": "tsc --noEmit",
-    "test": "vitest run",
-    "test:watch": "vitest",
-    "test:e2e": "playwright test",
-    "test:e2e:smoke": "playwright test e2e/smoke.spec.ts --project=chromium",
-    "test:e2e:chromium": "playwright test --project=chromium",
-    "test:e2e:full": "E2E_FULL=1 playwright test",
-    "validate:content": "tsx ../../scripts/validate-content.ts all",
-    "validate:quality": "tsx scripts/validate-quality.ts",
-    "validate:all": "npm run validate:content && npm run validate:quality",
     "clean": "rm -rf .next"
   },
   "dependencies": {
