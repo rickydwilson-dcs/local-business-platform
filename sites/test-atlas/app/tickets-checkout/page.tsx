@@ -6,7 +6,7 @@
  */
 
 import { Content, ContentCheckout, Hero } from "@platform/themes/atlas/components";
-import { CTASection, SiteHeader } from "@platform/core-components";
+import { CTASection } from "@platform/core-components";
 
 export default function Page() {
   return (
@@ -28,9 +28,6 @@ export default function Page() {
 
       {/* Section: Content section — from content */}
       <Content />
-
-      {/* Section: Navigation section: Jump to: — from navigation-jump-to */}
-      <SiteHeader />
 
     </div>
   );

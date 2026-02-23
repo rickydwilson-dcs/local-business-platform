@@ -1,4 +1,5 @@
 "use client";
+import { RevealOnScroll } from "@platform/core-components/components/animation";
 
 /**
  * TeamBioCard
