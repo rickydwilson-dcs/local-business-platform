@@ -1,5 +1,11 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
-import { discoverPages } from "../lib/site-discovery";
+import {
+  discoverPages,
+  normaliseBaseUrl,
+  classifyPage,
+  isUnderBase,
+  toCleanPath,
+} from "../lib/site-discovery";
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -273,5 +279,153 @@ describe("discoverPages", () => {
       const firstDepth2Index = pages.indexOf(depth2Pages[0]);
       expect(lastDepth1Index).toBeLessThan(firstDepth2Index);
     }
+  });
+
+  it("uses manifest pages when --pages option is provided", async () => {
+    // fetch should NOT be called when pages option is provided
+    fetchMock.mockImplementation(async () => {
+      return new Response("Should not be called", { status: 200 });
+    });
+
+    const pages = await discoverPages("https://example.com", {
+      pages: [
+        "https://example.com/",
+        "https://example.com/about",
+        "https://example.com/services",
+      ],
+    });
+
+    expect(fetchMock).not.toHaveBeenCalled();
+    expect(pages).toHaveLength(3);
+    expect(pages.find((p) => p.path === "/")?.source).toBe("manifest");
+    expect(pages.find((p) => p.path === "/about")?.pageType).toBe("about");
+    expect(pages.find((p) => p.path === "/services")?.pageType).toBe("services-list");
+  });
+
+  it("priority sort: home+services+about come before blog-post/custom", async () => {
+    const navPaths = ["/blog/post-1", "/custom-page", "/services", "/about", "/blog"];
+    const html = buildNavHtml(navPaths);
+
+    fetchMock.mockImplementation(async (url: unknown) => {
+      const urlStr = typeof url === "string" ? url : String(url);
+      if (urlStr.includes("robots.txt")) return new Response("User-agent: *\nAllow: /", { status: 200 });
+      if (urlStr.includes("sitemap.xml")) return new Response("Not Found", { status: 404 });
+      return new Response(html, { status: 200, headers: { "Content-Type": "text/html" } });
+    });
+
+    const pages = await discoverPages("https://example.com", { maxPages: 20 });
+
+    const homeIdx = pages.findIndex((p) => p.pageType === "home");
+    const servicesIdx = pages.findIndex((p) => p.pageType === "services-list");
+    const aboutIdx = pages.findIndex((p) => p.pageType === "about");
+    const blogListIdx = pages.findIndex((p) => p.pageType === "blog-list");
+    const blogPostIdx = pages.findIndex((p) => p.pageType === "blog-post");
+
+    expect(homeIdx).toBe(0);
+    if (servicesIdx !== -1 && blogPostIdx !== -1) {
+      expect(servicesIdx).toBeLessThan(blogPostIdx);
+    }
+    if (aboutIdx !== -1 && blogPostIdx !== -1) {
+      expect(aboutIdx).toBeLessThan(blogPostIdx);
+    }
+    if (blogListIdx !== -1 && blogPostIdx !== -1) {
+      expect(blogListIdx).toBeLessThan(blogPostIdx);
+    }
+  });
+});
+
+// ---------------------------------------------------------------------------
+// normaliseBaseUrl
+// ---------------------------------------------------------------------------
+
+describe("normaliseBaseUrl", () => {
+  it("strips trailing slash from domain root", () => {
+    expect(normaliseBaseUrl("https://host.com/")).toBe("https://host.com");
+  });
+
+  it("preserves subdirectory path prefix", () => {
+    expect(normaliseBaseUrl("https://host.com/themes/bold/")).toBe("https://host.com/themes/bold");
+  });
+
+  it("preserves subdirectory without trailing slash", () => {
+    expect(normaliseBaseUrl("https://host.com/themes/bold")).toBe("https://host.com/themes/bold");
+  });
+});
+
+// ---------------------------------------------------------------------------
+// classifyPage — synonym map
+// ---------------------------------------------------------------------------
+
+describe("classifyPage (synonym expansion)", () => {
+  it('classifies "/our-services" as services-list', () => {
+    expect(classifyPage("/our-services")).toBe("services-list");
+  });
+
+  it('classifies "/what-we-do/plumbing" as service-detail', () => {
+    expect(classifyPage("/what-we-do/plumbing")).toBe("service-detail");
+  });
+
+  it('classifies "/get-in-touch" as contact', () => {
+    expect(classifyPage("/get-in-touch")).toBe("contact");
+  });
+
+  it('classifies "/portfolio" as projects', () => {
+    expect(classifyPage("/portfolio")).toBe("projects");
+  });
+
+  it('classifies "/testimonials" as reviews', () => {
+    expect(classifyPage("/testimonials")).toBe("reviews");
+  });
+
+  it('classifies "/news/my-article" as blog-post', () => {
+    expect(classifyPage("/news/my-article")).toBe("blog-post");
+  });
+
+  it('classifies "/random-page" as custom (no false positive)', () => {
+    expect(classifyPage("/random-page")).toBe("custom");
+  });
+});
+
+// ---------------------------------------------------------------------------
+// isUnderBase
+// ---------------------------------------------------------------------------
+
+describe("isUnderBase", () => {
+  it("returns true for URL under subdirectory base", () => {
+    expect(isUnderBase("https://host.com/themes/bold/about", "https://host.com/themes/bold")).toBe(true);
+  });
+
+  it("returns false for URL outside subdirectory base", () => {
+    expect(isUnderBase("https://host.com/other", "https://host.com/themes/bold")).toBe(false);
+  });
+
+  it("returns true for exact base URL match", () => {
+    expect(isUnderBase("https://host.com/themes/bold", "https://host.com/themes/bold")).toBe(true);
+  });
+
+  it("returns false for different hostname", () => {
+    expect(isUnderBase("https://other.com/themes/bold/about", "https://host.com/themes/bold")).toBe(false);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// toCleanPath
+// ---------------------------------------------------------------------------
+
+describe("toCleanPath", () => {
+  it("strips base path prefix to return relative path", () => {
+    expect(toCleanPath("https://host.com/themes/bold/about", "https://host.com/themes/bold")).toBe("/about");
+  });
+
+  it("returns / for URL matching the base exactly", () => {
+    expect(toCleanPath("https://host.com/themes/bold", "https://host.com/themes/bold")).toBe("/");
+  });
+
+  it("returns null for off-domain URL", () => {
+    expect(toCleanPath("https://other.com/about", "https://host.com")).toBeNull();
+  });
+
+  it("works for domain-root base", () => {
+    expect(toCleanPath("https://host.com/about", "https://host.com")).toBe("/about");
   });
 });

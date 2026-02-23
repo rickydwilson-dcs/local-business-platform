@@ -114,7 +114,7 @@ export type PageType =
 export interface DiscoveredPage {
   url: string;
   path: string;
-  source: "sitemap" | "nav" | "probe";
+  source: "sitemap" | "nav" | "probe" | "manifest";
   pageType: PageType;
   title?: string;
   depth: number;

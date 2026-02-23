@@ -35,6 +35,22 @@ const COMMON_PATHS = [
   "/projects",
 ];
 
+const PAGE_TYPE_PRIORITY: PageType[] = [
+  "home",
+  "services-list",
+  "about",
+  "blog-list",
+  "contact",
+  "locations-list",
+  "pricing",
+  "reviews",
+  "projects",
+  "service-detail",
+  "blog-post",
+  "location-detail",
+  "custom",
+];
+
 // ============================================================================
 // Helpers
 // ============================================================================
@@ -45,41 +61,59 @@ function delay(ms: number): Promise<void> {
 
 /**
  * Normalise a URL string into a consistent base URL with no trailing slash.
+ * Preserves path prefix for subdirectory-hosted sites.
  */
-function normaliseBaseUrl(raw: string): string {
+export function normaliseBaseUrl(raw: string): string {
   const url = new URL(raw);
-  return `${url.protocol}//${url.host}`;
+  let basePath = url.pathname;
+  if (basePath.length > 1 && basePath.endsWith("/")) {
+    basePath = basePath.slice(0, -1);
+  }
+  return `${url.protocol}//${url.host}${basePath === "/" ? "" : basePath}`;
 }
 
 /**
- * Check whether a URL belongs to the same domain as the base URL.
+ * Check whether a URL is under the base URL (same host and path prefix).
  */
-function isSameDomain(href: string, baseUrl: string): boolean {
+export function isUnderBase(href: string, baseUrl: string): boolean {
   try {
     const target = new URL(href, baseUrl);
     const base = new URL(baseUrl);
-    return target.hostname === base.hostname;
+    if (target.hostname !== base.hostname) return false;
+    // Domain root — everything on this host is under it
+    if (base.pathname === "/") return true;
+    return (
+      target.pathname === base.pathname ||
+      target.pathname.startsWith(base.pathname + "/")
+    );
   } catch {
     return false;
   }
 }
 
 /**
- * Get a clean pathname from an absolute or relative URL string.
+ * Get a clean relative pathname from an absolute or relative URL string.
+ * Strips base path prefix for subdirectory-hosted sites.
  * Returns null if the URL is invalid or off-domain.
  */
-function toCleanPath(href: string, baseUrl: string): string | null {
+export function toCleanPath(href: string, baseUrl: string): string | null {
   try {
     const target = new URL(href, baseUrl);
     const base = new URL(baseUrl);
     if (target.hostname !== base.hostname) return null;
 
-    // Strip trailing slash (except for root)
-    let path = target.pathname;
-    if (path.length > 1 && path.endsWith("/")) {
-      path = path.slice(0, -1);
+    let targetPath = target.pathname;
+    const basePath = base.pathname;
+
+    // Strip base path prefix to get relative path
+    if (basePath !== "/" && targetPath.startsWith(basePath)) {
+      targetPath = targetPath.slice(basePath.length) || "/";
     }
-    return path;
+
+    if (targetPath.length > 1 && targetPath.endsWith("/")) {
+      targetPath = targetPath.slice(0, -1);
+    }
+    return targetPath;
   } catch {
     return null;
   }
@@ -92,31 +126,65 @@ function pathDepth(path: string): number {
   return path.split("/").filter(Boolean).length;
 }
 
-/**
- * Classify a URL path into a PageType based on pattern matching.
- */
-function classifyPage(path: string): PageType {
-  const lower = path.toLowerCase();
+const PAGE_TYPE_SYNONYMS: Record<string, PageType> = {
+  // About
+  "about-us": "about", "our-story": "about", "who-we-are": "about",
+  "team": "about", "our-team": "about",
+  // Services
+  "services": "services-list", "our-services": "services-list",
+  "what-we-do": "services-list", "solutions": "services-list",
+  "capabilities": "services-list", "expertise": "services-list",
+  "offerings": "services-list",
+  // Contact
+  "contact": "contact", "contact-us": "contact",
+  "get-in-touch": "contact", "enquiry": "contact",
+  "enquiries": "contact", "talk-to-us": "contact",
+  "book": "contact", "quote": "contact",
+  // Blog
+  "blog": "blog-list", "news": "blog-list", "articles": "blog-list",
+  "insights": "blog-list", "resources": "blog-list",
+  // Projects
+  "projects": "projects", "portfolio": "projects", "work": "projects",
+  "case-studies": "projects", "gallery": "projects",
+  // Reviews
+  "reviews": "reviews", "testimonials": "reviews",
+  // Pricing
+  "pricing": "pricing", "plans": "pricing", "packages": "pricing",
+  // Locations
+  "locations": "locations-list", "areas": "locations-list",
+  "areas-we-cover": "locations-list", "service-areas": "locations-list",
+};
 
+/**
+ * Classify a URL path into a PageType based on synonym map and pattern matching.
+ */
+export function classifyPage(path: string): PageType {
+  const lower = path.toLowerCase();
   if (lower === "/" || lower === "") return "home";
 
-  if (/^\/about/.test(lower)) return "about";
+  const firstSegment = lower.split("/").filter(Boolean)[0] ?? "";
+  const synonymMatch = PAGE_TYPE_SYNONYMS[firstSegment];
+  if (synonymMatch) {
+    const hasSubPath = lower.split("/").filter(Boolean).length > 1;
+    if (hasSubPath) {
+      if (synonymMatch === "services-list") return "service-detail";
+      if (synonymMatch === "blog-list") return "blog-post";
+      if (synonymMatch === "locations-list") return "location-detail";
+    }
+    return synonymMatch;
+  }
 
+  // Fallback regex patterns for paths not covered by synonyms
+  if (/^\/about/.test(lower)) return "about";
   if (lower === "/services") return "services-list";
   if (/^\/services\/.+/.test(lower)) return "service-detail";
-
   if (lower === "/blog") return "blog-list";
   if (/^\/blog\/.+/.test(lower)) return "blog-post";
-
   if (/^\/contact/.test(lower)) return "contact";
-
   if (lower === "/locations" || lower === "/areas") return "locations-list";
   if (/^\/locations\/.+/.test(lower)) return "location-detail";
-
   if (/^\/reviews/.test(lower)) return "reviews";
-
   if (/^\/projects/.test(lower)) return "projects";
-
   if (/^\/pricing/.test(lower)) return "pricing";
 
   return "custom";
@@ -336,7 +404,7 @@ function extractNavLinks(html: string, baseUrl: string): string[] {
       continue;
     }
 
-    if (!isSameDomain(href, baseUrl)) continue;
+    if (!isUnderBase(href, baseUrl)) continue;
 
     const path = toCleanPath(href, baseUrl);
     if (path !== null) {
@@ -438,10 +506,32 @@ async function discoverFromProbing(
  */
 export async function discoverPages(
   url: string,
-  options?: { maxPages?: number },
+  options?: { maxPages?: number; pages?: string[] },
 ): Promise<DiscoveredPage[]> {
   const maxPages = options?.maxPages ?? DEFAULT_MAX_PAGES;
   const baseUrl = normaliseBaseUrl(url);
+
+  // Manifest mode: bypass all discovery strategies
+  if (options?.pages && options.pages.length > 0) {
+    const pages = new Map<string, DiscoveredPage>();
+    for (const pageUrl of options.pages) {
+      const path = toCleanPath(pageUrl, baseUrl);
+      if (path !== null) {
+        addPage(pages, baseUrl, path, "manifest");
+      }
+    }
+    return Array.from(pages.values())
+      .sort((a, b) => {
+        if (a.path === "/") return -1;
+        if (b.path === "/") return 1;
+        const aPriority = PAGE_TYPE_PRIORITY.indexOf(a.pageType);
+        const bPriority = PAGE_TYPE_PRIORITY.indexOf(b.pageType);
+        if (aPriority !== bPriority) return aPriority - bPriority;
+        if (a.depth !== b.depth) return a.depth - b.depth;
+        return a.path.localeCompare(b.path);
+      })
+      .slice(0, maxPages);
+  }
 
   // Step 0: Check robots.txt
   const disallowed = await fetchDisallowedPaths(baseUrl);
@@ -477,15 +567,18 @@ export async function discoverPages(
     pages = await discoverFromProbing(baseUrl, disallowed, pages, maxPages);
   }
 
-  // Return as sorted array (home first, then by depth, then alphabetically)
+  if (pages.size <= 2) {
+    console.warn(`  [Warning] Only ${pages.size} page(s) discovered. Consider using --pages to provide specific URLs.`);
+  }
+
   return Array.from(pages.values())
     .sort((a, b) => {
-      // Home always first
       if (a.path === "/") return -1;
       if (b.path === "/") return 1;
-      // Then by depth
+      const aPriority = PAGE_TYPE_PRIORITY.indexOf(a.pageType);
+      const bPriority = PAGE_TYPE_PRIORITY.indexOf(b.pageType);
+      if (aPriority !== bPriority) return aPriority - bPriority;
       if (a.depth !== b.depth) return a.depth - b.depth;
-      // Then alphabetically
       return a.path.localeCompare(b.path);
     })
     .slice(0, maxPages);
