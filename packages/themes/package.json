@@ -6,6 +6,10 @@
   "exports": {
     "./orion": "./orion/index.ts",
     "./vega": "./vega/index.ts",
+    "./atlas": "./atlas/index.ts",
+    "./atlas/manifest": "./atlas/manifest.ts",
+    "./atlas/showcase": "./atlas/showcase-registry.tsx",
+    "./atlas/components": "./atlas/components/index.ts",
     "./lyra": "./lyra/index.ts",
     "./lyra/manifest": "./lyra/manifest.ts",
     "./lyra/showcase": "./lyra/showcase-registry.tsx",
