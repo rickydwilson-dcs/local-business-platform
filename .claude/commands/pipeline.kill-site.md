@@ -53,7 +53,16 @@ rm -rf sites/<name>/
 ls sites/<name>/ 2>/dev/null && echo "FAIL: directory still exists" || echo "OK: site removed"
 ```
 
-## Step 5: Report
+## Step 5: Reconcile Lockfile
+
+1. Run `pnpm install --lockfile-only` at the monorepo root.
+2. If it fails, fall back to `pnpm install`.
+3. Stage `pnpm-lock.yaml` alongside the site removal.
+4. Report: "Lockfile updated — removed entries for test-<theme>"
+
+**Idempotency note:** If the site directory doesn't exist (already deleted), skip lockfile reconciliation unless `--reconcile-lockfile` is explicitly passed.
+
+## Step 6: Report
 
 - Confirm what was removed
 - Show `git status --short` for current state
@@ -66,4 +75,3 @@ ls sites/<name>/ 2>/dev/null && echo "FAIL: directory still exists" || echo "OK:
 - This command does NOT commit or push anything
 - This command does NOT remove the theme package — use `/pipeline.kill-theme` for that
 - This command does NOT remove `output/ingestion/<theme>/` — that's kept for debugging
-- No `pnpm install` needed — the workspace glob auto-discovers sites

@@ -226,11 +226,11 @@ The spec should:
 5. On failure, generate a diff image (red-highlighted pixels) in `test-results/diffs/`
 6. Save test screenshots to `test-results/screenshots/` for manual review
 
-## Step 6: Install and Verify
+## Step 6: Reconcile Lockfile
 
-```bash
-pnpm install
-```
+1. Run `pnpm install --lockfile-only` at the monorepo root. This updates `pnpm-lock.yaml` to include the new test site workspace without modifying `node_modules`.
+2. If `--lockfile-only` fails, fall back to `pnpm install`.
+3. Verify: `pnpm install --frozen-lockfile` must succeed.
 
 Then run type-check:
 ```bash
@@ -239,7 +239,15 @@ cd sites/test-<theme-name> && npx tsc --noEmit
 
 If type-check fails, report the errors but continue — the user needs to see what went wrong with the generated theme.
 
-## Step 7: Report
+## Step 7: Stage Lockfile With Test Site
+
+Stage `pnpm-lock.yaml` alongside the test site directory. The lockfile MUST be in the same commit as the test site to prevent `ERR_PNPM_OUTDATED_LOCKFILE` on any branch.
+
+```bash
+git add sites/test-<theme-name>/ pnpm-lock.yaml
+```
+
+## Step 8: Report
 
 Output:
 - Theme name and source URL
