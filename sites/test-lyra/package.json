@@ -8,6 +8,7 @@
     "start": "next start",
     "clean": "rm -rf .next"
   },
+  "pipelineTestSite": true,
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@mdx-js/react": "^3.1.1",

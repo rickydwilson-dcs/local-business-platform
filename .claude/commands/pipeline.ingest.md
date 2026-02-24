@@ -115,7 +115,24 @@ Where `<camelCaseThemeName>` is the theme name in camelCase (e.g., `lyra` → `l
 }
 ```
 
-**5c.** Update `sites/test-<theme-name>/package.json` — set `"name"` to `"test-<theme-name>"`.
+**5c.** Generate a CI-inert `sites/test-<theme-name>/package.json`:
+
+1. Read `sites/base-template/package.json`
+2. Use `generateTestSitePackageJson('test-<theme-name>', basePackageJson)` from `tools/lib/test-site-package.ts` to generate the test site package.json
+3. Write the result to `sites/test-<theme-name>/package.json`
+
+The utility strips all scripts except `dev`, `start`, and `clean`, and adds `"pipelineTestSite": true`.
+
+Verify the result is CI-inert:
+```bash
+node -e "
+  const p = require('./sites/test-<theme-name>/package.json');
+  const bad = ['build','type-check','lint','test'].filter(s => p.scripts?.[s]);
+  if (bad.length) { console.error('FAIL: test site has CI scripts:', bad); process.exit(1); }
+  if (!p.pipelineTestSite) { console.error('FAIL: missing pipelineTestSite marker'); process.exit(1); }
+  console.log('PASS: test site is CI-inert');
+"
+```
 
 **5d.** Update `sites/test-<theme-name>/site.config.ts` — find the `tagline` value and change it to `'Pipeline Test Site — <theme-name> theme'`.
 
