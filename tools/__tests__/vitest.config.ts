@@ -6,7 +6,7 @@ export default defineConfig({
     environment: "node",
     globals: true,
     setupFiles: [],
-    include: ["tools/__tests__/**/*.test.ts"],
+    include: ["tools/__tests__/**/*.test.ts", "tools/lib/__tests__/**/*.test.ts"],
     exclude: ["**/node_modules/**", "**/dist/**"],
   },
   resolve: {
