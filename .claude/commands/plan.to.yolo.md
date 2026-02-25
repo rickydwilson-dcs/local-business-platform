@@ -97,6 +97,7 @@ For each phase:
   - Reading multiple files → use parallel reads
   - Editing independent files in the same phase → use parallel Task agents
   - Running independent checks (lint, type-check, build) → note which can run together
+- If any phase produces new TypeScript files or modifies existing ones, the final phase MUST include a verification gate that runs `pnpm type-check` across the monorepo. If the work touches pipeline tools or theme packages, also run `pnpm pipeline:smoke`.
 - Include the commit command at the end of each phase, exactly as specified in the synthesis
 - Format verification gates as a named bash block that must pass before continuing:
   ```bash
@@ -178,6 +179,7 @@ Confirm this was done in the final report.
 - Minimal changes only — implement what the plan says, nothing more
 - Use `model: haiku` for Task agents doing mechanical work (grep, import additions, find-replace); `model: sonnet` for standard edits; `model: opus` only for deep multi-file reasoning
 - The Co-Authored-By line in commits must reflect the orchestrator model used (e.g., `Claude Sonnet 4.6` not `Opus 4.6`)
+- For any brief that creates or modifies theme packages or pipeline tools: the final phase MUST include `pnpm pipeline:smoke` as a verification gate before the final commit
 ```
 
 ## Step 4: Output the Terminal Command, Cost Summary, and Next Steps
