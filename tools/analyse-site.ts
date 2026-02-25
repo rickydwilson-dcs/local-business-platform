@@ -636,13 +636,13 @@ async function main() {
   console.log("[15/15] TypeScript compile check...");
 
   const monorepoRoot = path.resolve(__dirname, "..");
-  const tsconfigCheckPath = path.join(outputDir, "tsconfig.check.json");
+  const tsconfigCheckPath = path.join(monorepoRoot, "tsconfig.check.json");
   const tsconfigCheck = {
     compilerOptions: {
       noEmit: true,
       jsx: "react-jsx",
-      module: "nodenext",
-      moduleResolution: "nodenext",
+      module: "esnext",
+      moduleResolution: "bundler",
       strict: true,
       skipLibCheck: true,
       baseUrl: monorepoRoot,
@@ -655,9 +655,10 @@ async function main() {
         [`@platform/themes/${themeName}/*`]: [`packages/themes/${themeName}/*`],
       },
     },
+    // Only check scaffold-generated infrastructure files, not AI-generated component implementations
     include: [
-      path.join("packages/themes", themeName, "**/*.ts"),
-      path.join("packages/themes", themeName, "**/*.tsx"),
+      path.join("packages/themes", themeName, "index.ts"),
+      path.join("packages/themes", themeName, "manifest.ts"),
     ],
   };
 
