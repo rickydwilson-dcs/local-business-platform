@@ -60,7 +60,8 @@
     "alerts:cron": "tsx tools/alert-system.ts check --quiet && tsx tools/alert-system.ts notify --quiet",
     "changeset": "changeset",
     "version-packages": "changeset version",
-    "release": "pnpm build && changeset publish"
+    "release": "pnpm build && changeset publish",
+    "pipeline:smoke": "tsx tools/pipeline-smoke-test.ts"
   },
   "devDependencies": {
     "@anthropic-ai/sdk": "^0.61.0",

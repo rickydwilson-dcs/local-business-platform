@@ -209,6 +209,28 @@ The spec should:
 5. On failure, generate a diff image (red-highlighted pixels) in `test-results/diffs/`
 6. Save test screenshots to `test-results/screenshots/` for manual review
 
+**5h.** Wire theme TypeScript path into `sites/test-<theme-name>/tsconfig.json`:
+
+Read the test site's `tsconfig.json` and add path entries so TypeScript can resolve the generated theme's imports:
+
+1. Read `sites/test-<theme-name>/tsconfig.json`
+2. Add to `compilerOptions.paths`:
+   ```json
+   "@platform/themes/<theme-name>": ["../../packages/themes/<theme-name>/index.ts"],
+   "@platform/themes/<theme-name>/*": ["../../packages/themes/<theme-name>/*"]
+   ```
+3. Write back the updated file
+
+Verify:
+```bash
+node -e "
+  const ts = require('./sites/test-<theme-name>/tsconfig.json');
+  const key = '@platform/themes/<theme-name>';
+  if (!ts.compilerOptions?.paths?.[key]) { console.error('FAIL: missing theme path in tsconfig'); process.exit(1); }
+  console.log('PASS: theme path wired in tsconfig');
+"
+```
+
 ## Step 6: Install and Verify
 
 ```bash
