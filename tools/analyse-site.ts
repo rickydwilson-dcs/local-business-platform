@@ -22,6 +22,7 @@ import dotenv from "dotenv";
 dotenv.config({ path: [".env.local", ".env"] });
 import * as fs from "fs";
 import * as path from "path";
+import { spawnSync } from "child_process";
 import type {
   SiteAnalysis,
   SectionBlueprint,
@@ -240,7 +241,7 @@ async function main() {
 
   // ── Step 1: Parse args, determine theme name ──
   let stepStart = Date.now();
-  console.log("[1/14] Determining theme name...");
+  console.log("[1/15] Determining theme name...");
   const themeName = args.name ?? pickNextThemeName();
   const outputDir = args.output
     ? path.resolve(args.output)
@@ -252,7 +253,7 @@ async function main() {
 
   // ── Step 2: Discover pages ──
   stepStart = Date.now();
-  console.log("[2/14] Discovering pages...");
+  console.log("[2/15] Discovering pages...");
   const discoveredPages = await discoverPages(args.url, {
     maxPages: args.maxPages,
     pages: args.pages,
@@ -265,7 +266,7 @@ async function main() {
 
   // ── Step 3: Fetch HTML for all pages ──
   stepStart = Date.now();
-  console.log("[3/14] Fetching HTML...");
+  console.log("[3/15] Fetching HTML...");
   const htmlMap = new Map<string, string>();
   for (const page of discoveredPages) {
     try {
@@ -294,7 +295,7 @@ async function main() {
 
   // ── Step 4: Capture screenshots ──
   stepStart = Date.now();
-  console.log("[4/14] Capturing screenshots via Playwright...");
+  console.log("[4/15] Capturing screenshots via Playwright...");
   const { screenshots: screenshotMap, computedStyles } = await captureScreenshots(discoveredPages, outputDir);
   console.log(`  Captured ${screenshotMap.size} screenshots`);
   console.log(`  Extracted computed styles from ${computedStyles.length} pages`);
@@ -302,7 +303,7 @@ async function main() {
 
   // ── Step 5: HTML structural analysis ──
   stepStart = Date.now();
-  console.log("[5/14] Running HTML structural analysis...");
+  console.log("[5/15] Running HTML structural analysis...");
   const pageStructures = [];
   for (const page of discoveredPages) {
     const html = htmlMap.get(page.url);
@@ -316,7 +317,7 @@ async function main() {
 
   // ── Step 6: Colour extraction from homepage CSS ──
   stepStart = Date.now();
-  console.log("[6/14] Extracting colours from CSS...");
+  console.log("[6/15] Extracting colours from CSS...");
   let scrapedStyles;
   try {
     scrapedStyles = await extractStylesFromUrl(args.url);
@@ -330,7 +331,7 @@ async function main() {
 
   // ── Step 7-8: Per-page vision analysis + site synthesis ──
   stepStart = Date.now();
-  console.log("[7-8/14] Per-page vision analysis + site synthesis...");
+  console.log("[7-8/15] Per-page vision analysis + site synthesis...");
   const { perPage, synthesis } = await analyzeMultiplePages(
     discoveredPages,
     htmlMap,
@@ -342,7 +343,7 @@ async function main() {
 
   // ── Step 9: Component matching ──
   stepStart = Date.now();
-  console.log("[9/14] Matching sections to core components...");
+  console.log("[9/15] Matching sections to core components...");
   const allBlueprints: SectionBlueprint[] = perPage.flatMap((p) => p.sections);
   const componentMatchMap = matchComponents(allBlueprints);
   let matchedCount = 0;
@@ -357,7 +358,7 @@ async function main() {
 
   // ── Step 10: Token reconciliation ──
   stepStart = Date.now();
-  console.log("[10/14] Reconciling tokens...");
+  console.log("[10/15] Reconciling tokens...");
 
   // Validate synthesis with Zod
   const synthValidation = SiteSynthesisResponseSchema.safeParse(synthesis);
@@ -526,7 +527,7 @@ async function main() {
 
   // ── Step 11: Build SiteAnalysis and write JSON/MD ──
   stepStart = Date.now();
-  console.log("[11/14] Writing analysis files...");
+  console.log("[11/15] Writing analysis files...");
 
   // Deduplicate section blueprints
   const seenIds = new Set<string>();
@@ -592,7 +593,7 @@ async function main() {
 
   // ── Step 12: Component generation ──
   stepStart = Date.now();
-  console.log("[12/14] Generating theme components...");
+  console.log("[12/15] Generating theme components...");
   const componentsDir = path.join(outputDir, "components");
   const genResult = await generateThemeComponents(
     deduplicatedBlueprints,
@@ -610,7 +611,7 @@ async function main() {
   // ── Step 13: Example page generation ──
   if (!args.skipExamples) {
     stepStart = Date.now();
-    console.log("[13/14] Generating example pages...");
+    console.log("[13/15] Generating example pages...");
     generateExamplePages(
       siteAnalysis.pageBlueprints,
       deduplicatedBlueprints,
@@ -620,14 +621,76 @@ async function main() {
     );
     console.log(`  Done (${elapsed(stepStart)})\n`);
   } else {
-    console.log("[13/14] Skipping example pages (--skip-examples)\n");
+    console.log("[13/15] Skipping example pages (--skip-examples)\n");
   }
 
   // ── Step 14: Scaffold theme package ──
   stepStart = Date.now();
-  console.log("[14/14] Scaffolding theme package...");
+  console.log("[14/15] Scaffolding theme package...");
   const themeDir = scaffoldThemePackage(siteAnalysis, themeName, outputDir);
   console.log(`  Theme package: ${themeDir}`);
+  console.log(`  Done (${elapsed(stepStart)})\n`);
+
+  // ── Step 15: TypeScript compile check (advisory) ──
+  stepStart = Date.now();
+  console.log("[15/15] TypeScript compile check...");
+
+  const monorepoRoot = path.resolve(__dirname, "..");
+  const tsconfigCheckPath = path.join(monorepoRoot, "tsconfig.check.json");
+  const tsconfigCheck = {
+    compilerOptions: {
+      noEmit: true,
+      jsx: "react-jsx",
+      module: "esnext",
+      moduleResolution: "bundler",
+      strict: true,
+      skipLibCheck: true,
+      baseUrl: monorepoRoot,
+      paths: {
+        "@platform/theme-system": ["packages/theme-system/src/index.ts"],
+        "@platform/theme-system/*": ["packages/theme-system/src/*"],
+        "@platform/core-components": ["packages/core-components/src/index.ts"],
+        "@platform/core-components/*": ["packages/core-components/src/*"],
+        [`@platform/themes/${themeName}`]: [`packages/themes/${themeName}/index.ts`],
+        [`@platform/themes/${themeName}/*`]: [`packages/themes/${themeName}/*`],
+      },
+    },
+    // Only check scaffold-generated infrastructure files, not AI-generated component implementations
+    include: [
+      path.join("packages/themes", themeName, "index.ts"),
+      path.join("packages/themes", themeName, "manifest.ts"),
+    ],
+  };
+
+  fs.writeFileSync(tsconfigCheckPath, JSON.stringify(tsconfigCheck, null, 2), "utf8");
+
+  const tscResult = spawnSync("npx", ["tsc", "--project", tsconfigCheckPath], {
+    cwd: monorepoRoot,
+    encoding: "utf8",
+    timeout: 60_000,
+  });
+
+  // Clean up temp tsconfig
+  try {
+    fs.unlinkSync(tsconfigCheckPath);
+  } catch {
+    // ignore — best effort cleanup
+  }
+
+  if (tscResult.status !== 0) {
+    const output = (tscResult.stdout || "") + (tscResult.stderr || "");
+    const errorLines = output.split("\n").filter((l: string) => l.trim()).slice(0, 20);
+    console.warn("  [Warning] Theme package has TypeScript errors:");
+    for (const line of errorLines) {
+      console.warn(`    ${line}`);
+    }
+    if (output.split("\n").length > 20) {
+      console.warn(`    ... (${output.split("\\n").length - 20} more lines)`);
+    }
+    console.warn("  Pipeline continues — fix errors before wiring into a test site.");
+  } else {
+    console.log("  TypeScript OK");
+  }
   console.log(`  Done (${elapsed(stepStart)})\n`);
 
   // ── Summary ──
