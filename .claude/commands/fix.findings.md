@@ -87,10 +87,18 @@ Group findings into batches:
 1. Read the detailed finding(s) from the appropriate domain findings file
 2. Read the target file(s) using the Read tool — verify the code at the specified lines matches what the finding describes. If the code has changed since the review, skip the finding and log as "stale"
 3. Apply the fix as described in the finding's **Fix** field using the Edit tool
-4. After applying the batch, run incremental verification — **all three must pass**:
+4. After applying the batch, run incremental verification — **all three must pass**. Run each as a separate command (do NOT chain with `&&`):
 
 ```bash
-pnpm type-check && pnpm lint && pnpm build
+pnpm type-check
+```
+
+```bash
+pnpm lint
+```
+
+```bash
+pnpm build
 ```
 
 5. **If all three pass:** log the findings as "Fixed" and continue to the next batch
@@ -171,7 +179,7 @@ Spawn a Task agent to execute the plan. Choose the sub-agent type based on the f
 > **Instructions:**
 >
 > 1. Execute each task in order
-> 2. After each task, run `pnpm type-check && pnpm lint && pnpm build` to verify
+> 2. After each task, run `pnpm type-check`, then `pnpm lint`, then `pnpm build` (each as a separate command — do NOT chain with `&&`)
 > 3. If any verification step fails after a task, revert that task's changes with `git checkout -- [files]` and mark it as FAILED
 > 4. Continue to the next task regardless of whether the previous one succeeded or failed
 > 5. After all tasks, run the Final Verification commands
@@ -207,9 +215,10 @@ pnpm test
 
 Then run E2E smoke tests for any site that was modified:
 
+For each modified site (check `git diff --stat` for which sites were touched), run the smoke test using an absolute path — do NOT use `cd &&`:
+
 ```bash
-# For each modified site (check git diff --stat for which sites were touched)
-cd sites/[site-name] && npm run test:e2e:smoke
+npm run --prefix sites/[site-name] test:e2e:smoke
 ```
 
 If any verification step fails, identify which fix caused the failure by checking `git diff` against the findings. Revert the offending change and log it.
