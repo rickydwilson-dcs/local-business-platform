@@ -31,56 +31,64 @@ Echo the resolved theme name before proceeding: "Removing theme: <name>"
 
 ## Step 3: Remove Theme Directory
 
+Remove tracked files from the git index and working tree:
+```bash
+git rm -rf packages/themes/<name>/
+```
+
+Clean up any untracked artifacts:
 ```bash
 rm -rf packages/themes/<name>/
 ```
 
 ## Step 4: Clean Theme Exports
 
-Read `packages/themes/package.json` and remove all export entries with keys matching:
+Read `packages/themes/package.json`. Identify the lines containing export entries with keys matching:
 - `./<name>`
 - `./<name>/manifest`
 - `./<name>/showcase`
 - `./<name>/components`
 
-Write the file back with proper JSON formatting (2-space indent, trailing newline).
+Use the Edit tool to remove those lines. Handle trailing comma cleanup if the removed entries were at the end of the exports object.
 
-**Verification — read the file back and confirm no `<name>` references remain.**
+**Verification** (single command — do NOT chain with `&&` or `||`):
+```bash
+grep '<name>' packages/themes/package.json
+```
+If grep returns matches: STOP with "FAIL: theme exports still reference <name>."
+If grep returns nothing (exit code 1): exports are clean — continue.
 
 ## Step 5: Remove from THEME_NAMES
 
 Read `packages/theme-system/src/types.ts`.
 
-Find the `THEME_NAMES` array:
-```typescript
-export const THEME_NAMES = ["orion", "vega", "<name>"] as const;
-```
+Find the `THEME_NAMES` array (e.g., `export const THEME_NAMES = ["orion", "vega", "<name>"] as const;`).
 
-Remove `"<name>"` from the array. Handle comma cleanup:
+Use the Edit tool to remove `"<name>"` from the array. Handle comma cleanup:
 - If it was the last element, remove the preceding comma too
 - If it was the only extra element, ensure the array is still valid syntax
 
-Write the file back.
-
-**Verification — grep for the theme name:**
+**Verification** (single command):
 ```bash
 grep '"<name>"' packages/theme-system/src/types.ts
 ```
-Should return nothing.
+If grep returns a match: STOP with "FAIL: <name> still in THEME_NAMES."
+If grep returns nothing (exit code 1): THEME_NAMES is clean — continue.
 
 ## Step 6: Remove from ThemeName Union
 
 Read `packages/core-components/src/context/theme-context.tsx`.
 
-Find the `ThemeName` type and remove `| "<name>"` from it.
+Find the `ThemeName` type (e.g., `export type ThemeName = "orion" | "vega" | "<name>";`).
 
-Write the file back.
+Use the Edit tool to remove `| "<name>"` from the union type.
 
-**Verification — grep for the theme name:**
+**Verification** (single command):
 ```bash
 grep '"<name>"' packages/core-components/src/context/theme-context.tsx
 ```
-Should return nothing.
+If grep returns a match: STOP with "FAIL: <name> still in ThemeName type."
+If grep returns nothing (exit code 1): ThemeName is clean — continue.
 
 ## Step 7: Reinstall and Verify
 
@@ -88,22 +96,33 @@ Should return nothing.
 pnpm install
 ```
 
-Run full verification:
+Run each verification as a **separate command**. Do NOT chain with `&&` or `||` — interpret each result individually.
+
+**Check 1 — Theme directory removed:**
 ```bash
-# Theme directory gone
-ls packages/themes/<name>/ 2>/dev/null && echo "FAIL: directory still exists" || echo "OK: directory removed"
-
-# No exports referencing this theme
-grep '<name>' packages/themes/package.json && echo "FAIL: exports remain" || echo "OK: exports clean"
-
-# Not in THEME_NAMES
-grep '"<name>"' packages/theme-system/src/types.ts && echo "FAIL: still in THEME_NAMES" || echo "OK: THEME_NAMES clean"
-
-# Not in ThemeName union
-grep '"<name>"' packages/core-components/src/context/theme-context.tsx && echo "FAIL: still in ThemeName" || echo "OK: ThemeName clean"
+ls -d packages/themes/<name>/ 2>/dev/null
 ```
+If output is returned: FAIL — directory still exists. STOP.
 
-Then verify no broken types:
+**Check 2 — No exports referencing this theme:**
+```bash
+grep '<name>' packages/themes/package.json
+```
+If matches found: FAIL — exports still reference <name>. STOP.
+
+**Check 3 — Not in THEME_NAMES:**
+```bash
+grep '"<name>"' packages/theme-system/src/types.ts
+```
+If matches found: FAIL — still in THEME_NAMES. STOP.
+
+**Check 4 — Not in ThemeName union:**
+```bash
+grep '"<name>"' packages/core-components/src/context/theme-context.tsx
+```
+If matches found: FAIL — still in ThemeName. STOP.
+
+If all four checks pass, verify no broken types:
 ```bash
 pnpm type-check
 ```

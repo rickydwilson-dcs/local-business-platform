@@ -50,7 +50,19 @@ If the theme package was not created, STOP: "Pipeline did not create theme packa
 Copy base-template to create the test site:
 ```bash
 cp -r sites/base-template sites/test-<theme-name>
-rm -rf sites/test-<theme-name>/node_modules sites/test-<theme-name>/.next sites/test-<theme-name>/.turbo
+```
+
+Clean up copied build artifacts (each as a separate command):
+```bash
+rm -rf sites/test-<theme-name>/node_modules
+```
+
+```bash
+rm -rf sites/test-<theme-name>/.next
+```
+
+```bash
+rm -rf sites/test-<theme-name>/.turbo
 ```
 
 ## Step 4: Write Marker File
@@ -237,9 +249,9 @@ node -e "
 pnpm install
 ```
 
-Then run type-check:
+Then run type-check (use absolute path — do NOT use `cd &&`):
 ```bash
-cd sites/test-<theme-name> && npx tsc --noEmit
+npx tsc --noEmit --project sites/test-<theme-name>/tsconfig.json
 ```
 
 If type-check fails, report the errors but continue — the user needs to see what went wrong with the generated theme.
