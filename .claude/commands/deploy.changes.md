@@ -22,8 +22,18 @@ Run the `/update.docs` verification. If issues are found, fix them before procee
 
 Before committing anything, verify the codebase is healthy:
 
+Run each check as a separate command. Do NOT chain with `&&` — run them sequentially so failures are clear:
+
 ```bash
-pnpm type-check && pnpm lint && pnpm build
+pnpm type-check
+```
+
+```bash
+pnpm lint
+```
+
+```bash
+pnpm build
 ```
 
 If any step fails, STOP. Report the failure and do NOT commit broken code. The user should fix the issue first.

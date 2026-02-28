@@ -43,15 +43,25 @@ Echo the resolved path before proceeding: "Removing: sites/<name>/"
 
 ## Step 3: Remove
 
+Remove tracked files from the git index and working tree:
+```bash
+git rm -rf sites/<name>/
+```
+
+Clean up any untracked artifacts (`.next/`, `node_modules/`, etc.):
 ```bash
 rm -rf sites/<name>/
 ```
 
 ## Step 4: Verify
 
+Check the directory was removed (single command — do NOT chain with `&&` or `||`):
 ```bash
-ls sites/<name>/ 2>/dev/null && echo "FAIL: directory still exists" || echo "OK: site removed"
+ls -d sites/<name>/ 2>/dev/null
 ```
+
+- If the command produces output (directory still exists): STOP with "FAIL: sites/<name>/ was not removed."
+- If the command produces no output (exit code non-zero): directory removed successfully — continue.
 
 ## Step 5: Report
 
