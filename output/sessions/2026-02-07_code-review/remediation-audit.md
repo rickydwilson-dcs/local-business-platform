@@ -8,7 +8,7 @@ Note: `smiths-electrical-cambridge` has been replaced by `dj-fox-electrical` as 
 
 ---
 
-## Fixed ✅ (35 findings resolved)
+## Fixed ✅ (53 findings resolved)
 
 | ID | Severity | Domain | Evidence |
 |----|----------|--------|----------|
@@ -68,16 +68,13 @@ Note: `smiths-electrical-cambridge` has been replaced by `dj-fox-electrical` as 
 | A11Y-010 | LOW | A11y/SEO | `packages/core-components/src/components/ui/footer.tsx` — `aria-hidden="true"` added to Phone, Mail, MapPin, Award, Shield Lucide icons |
 | CQ-012 | MEDIUM | Code Quality | `packages/core-components/src/components/hero/HeroV3.tsx` — eslint-disable-next-line comments added to both inline styles (dynamic background-image URL and opacity); CoverageMap inline style already had correct disable comment |
 | ARCH-010 | MEDIUM | Architecture | `sites/colossus-reference/lib/locations.ts` — COUNTY_PAGE_SLUGS removed; getAllTownLocations() uses `loc.slug !== loc.countySlug`; getAllCounties() iterates content-driven county pages; Hove redirect moved to east-sussex.mdx `redirectTowns` field |
+| CQ-017 | LOW | Code Quality | `sites/colossus-scaffolding/components/mdx/` — 7 files extracted (service/related-services.tsx, service/benefits.tsx, service/coverage-section.tsx, service/service-intro.tsx, blog-components.tsx, html-overrides.tsx, index.ts); root mdx-components.tsx reduced from 963 to 66 lines |
 
 ---
 
-## Still Open 🔴 (1 finding remaining)
+## Still Open 🔴 (0 findings remaining)
 
-### LOW Priority
-
-| ID | Severity | Domain | File | Issue | Effort |
-|----|----------|--------|------|-------|--------|
-| CQ-017 | LOW | Code Quality | `sites/colossus-reference/mdx-components.tsx` | 955 lines — component definitions should be extracted to separate files | medium |
+All 59 findings resolved.
 
 ---
 
@@ -86,10 +83,10 @@ Note: `smiths-electrical-cambridge` has been replaced by `dj-fox-electrical` as 
 | | Count |
 |---|---|
 | Originally reported | 59 |
-| Fixed since review | **52** |
-| Confirmed still open | **1** |
+| Fixed since review | **53** |
+| Confirmed still open | **0** |
 | N/A (smiths replaced by dj-fox) | **2** (SEC-004 smiths, SEO-006) |
 | Misidentified as open (ARCH-013) | **1** |
 | Accounted for | **56** (3 unaccounted — likely double-counted in original review) |
 
-**Open by severity:** 0 HIGH · 0 MEDIUM · 1 LOW
+**Open by severity:** 0 HIGH · 0 MEDIUM · 0 LOW
