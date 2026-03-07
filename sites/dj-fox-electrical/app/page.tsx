@@ -1,10 +1,46 @@
 import Link from 'next/link';
+import type { Metadata } from 'next';
 import { siteConfig } from '@/site.config';
 import { getLocations } from '@/lib/content';
 import { PHONE_DISPLAY, PHONE_TEL } from '@/lib/contact-info';
+import { absUrl } from '@/lib/site';
+import { getLocalBusinessSchema } from '@/lib/schema';
 import { Phone, Shield, Clock, Award, Users } from 'lucide-react';
 import { HeroWithImage, InfoCard, CircularIconCard, ImageOverlayCard } from '@platform/core-components';
 import { getServiceIcon } from '@/lib/service-icons';
+
+export const metadata: Metadata = {
+  title: 'Professional Electrical Services in Eastbourne | D J Fox Electrical',
+  description:
+    'NICEIC approved electrical contractor in Eastbourne, East Sussex. 15+ years experience, 24/7 emergency service. Domestic and commercial electrical services.',
+  openGraph: {
+    title: 'Professional Electrical Services in Eastbourne | D J Fox Electrical',
+    description:
+      'NICEIC approved electrical contractor in Eastbourne, East Sussex. 15+ years experience, 24/7 emergency service.',
+    url: absUrl('/'),
+    siteName: siteConfig.name,
+    images: [
+      {
+        url: absUrl('/logo.svg'),
+        width: 1200,
+        height: 630,
+        alt: `${siteConfig.business.name} - Professional Electrical Services in Eastbourne`,
+      },
+    ],
+    locale: 'en_GB',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Professional Electrical Services in Eastbourne | D J Fox Electrical',
+    description:
+      'NICEIC approved electrical contractor in Eastbourne, East Sussex. 15+ years experience, 24/7 emergency service.',
+    images: [absUrl('/logo.svg')],
+  },
+  alternates: {
+    canonical: absUrl('/'),
+  },
+};
 
 export default async function HomePage() {
   // Fetch actual locations from content
@@ -25,8 +61,49 @@ export default async function HomePage() {
     .filter((loc) => priorityLocationSlugs.includes(loc.slug))
     .sort((a, b) => priorityLocationSlugs.indexOf(a.slug) - priorityLocationSlugs.indexOf(b.slug));
 
+  const localBusinessSchema = getLocalBusinessSchema();
+
+  const webSiteSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    '@id': absUrl('/#website'),
+    name: siteConfig.business.name,
+    url: absUrl('/'),
+    description: siteConfig.tagline,
+    publisher: {
+      '@id': absUrl('/#organization'),
+    },
+    inLanguage: 'en-GB',
+  };
+
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: absUrl('/'),
+      },
+    ],
+  };
+
   return (
     <div className="min-h-screen">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webSiteSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+
       {/* Hero Section - Full-width image with accent */}
       <HeroWithImage
         imageSrc="djfoxelectrical/hero/hero-electrician-work.jpg"
