@@ -11,7 +11,7 @@
  */
 
 import React from 'react';
-import type { ComponentPropsWithoutRef, ElementType, ReactNode } from 'react';
+import type { ComponentPropsWithoutRef, ReactNode } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Schema } from '../Schema';

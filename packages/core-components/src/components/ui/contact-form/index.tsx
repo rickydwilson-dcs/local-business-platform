@@ -189,7 +189,7 @@ export function ContactForm({
   const isDetailed = variant === 'detailed';
 
   // Success state
-  /* eslint-disable platform/no-hardcoded-tailwind-colors -- Intentional: form submission state feedback */
+  /* Intentional: form submission state feedback uses semantic Tailwind colors */
   if (submitStatus === 'success') {
     if (isDetailed) {
       return (
@@ -227,7 +227,7 @@ export function ContactForm({
       </div>
     );
   }
-  /* eslint-enable platform/no-hardcoded-tailwind-colors */
+  /* end state feedback colors */
 
   // Resolve services for the dropdown
   const serviceOptions: Array<{ value: string; label: string }> = services.map((s) =>
@@ -308,7 +308,7 @@ export function ContactForm({
   };
 
   // Error banner
-  /* eslint-disable platform/no-hardcoded-tailwind-colors -- Intentional: form submission state feedback */
+  /* Intentional: form submission state feedback uses semantic Tailwind colors */
   const errorBanner = submitStatus === 'error' && (
     <div
       role="alert"
@@ -321,7 +321,7 @@ export function ContactForm({
       </div>
     </div>
   );
-  /* eslint-enable platform/no-hardcoded-tailwind-colors */
+  /* end state feedback colors */
 
   // ---- Detailed variant (colossus-style card wrapper) ----
   if (isDetailed) {
@@ -329,14 +329,14 @@ export function ContactForm({
       <div className={`bg-surface-card rounded-2xl shadow-lg p-8 ${className ?? ''}`}>
         <h2 className="text-2xl font-semibold mb-6">Request a Free Quote</h2>
 
-        {/* eslint-disable platform/no-hardcoded-tailwind-colors -- Intentional: form submission state feedback */}
+        {/* Intentional: form submission state feedback uses semantic Tailwind colors */}
         {submitStatus === 'error' && (
           <div role="alert" className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
             <h3 className="text-red-800 font-semibold mb-1">Something went wrong</h3>
             <p className="text-red-700">Please try again or call us directly on the number below.</p>
           </div>
         )}
-        {/* eslint-enable platform/no-hardcoded-tailwind-colors */}
+        {/* end state feedback colors */}
 
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Name + Email */}

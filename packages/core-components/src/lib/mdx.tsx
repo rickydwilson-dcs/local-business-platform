@@ -9,7 +9,7 @@ import fs from 'fs/promises';
 import path from 'path';
 import matter from 'gray-matter';
 import { MDXRemote } from 'next-mdx-remote/rsc';
-import type { ReactElement, ElementType } from 'react';
+import type { ReactElement } from 'react';
 
 // Permissive type for the components map — MDXComponents from mdx/types includes nested
 // objects for component namespacing, so we accept Record<string, unknown> and cast at use.

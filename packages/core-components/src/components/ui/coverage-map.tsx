@@ -28,11 +28,12 @@ export interface TownLocation {
   description?: string;
 }
 
+// Intentional: default county colors for map markers, overridable via countyColors prop
 const defaultCountyColors: Record<string, string> = {
-  'East Sussex': '#2563eb',
-  'West Sussex': '#059669',
-  'Kent': '#dc2626',
-  'Surrey': '#7c3aed',
+  'East Sussex': '#2563eb', // eslint-disable-line no-restricted-syntax
+  'West Sussex': '#059669', // eslint-disable-line no-restricted-syntax
+  'Kent': '#dc2626', // eslint-disable-line no-restricted-syntax
+  'Surrey': '#7c3aed', // eslint-disable-line no-restricted-syntax
 };
 
 interface CoverageMapProps {
@@ -98,7 +99,7 @@ export function CoverageMap({
   }, []);
 
   const createCustomIcon = (leaflet: typeof import("leaflet"), county: string) => {
-    const color = countyColors[county] || "#4DB2E4";
+    const color = countyColors[county] || "#4DB2E4"; // eslint-disable-line no-restricted-syntax -- fallback color for unknown counties
     const size = 28;
 
     return new leaflet.DivIcon({
@@ -205,7 +206,7 @@ export function CoverageMap({
                     <div
                       className="w-3 h-3 rounded-full"
                       style={{
-                        backgroundColor: countyColors[location.county] || "#4DB2E4",
+                        backgroundColor: countyColors[location.county] || "#4DB2E4", // eslint-disable-line no-restricted-syntax -- fallback color for unknown counties
                       }}
                     ></div>
                     <span className="text-xs text-surface-secondary">{location.county}</span>

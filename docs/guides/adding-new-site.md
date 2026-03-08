@@ -54,7 +54,7 @@ sites/[client-slug]/
 ├── content/              # MDX content files
 │   ├── services/         # Service pages
 │   └── locations/        # Location pages
-├── lib/                  # Utilities and helpers
+├── lib/                  # Thin shims importing from @platform/core-components
 ├── public/               # Static assets
 ├── package.json          # Dependencies (name updated)
 ├── site.config.ts        # Business information
@@ -329,9 +329,11 @@ If you prefer to create sites manually instead of using the CLI tool:
 cp -r sites/base-template sites/[client-slug]
 
 # Update package.json name
-# Edit site.config.ts
+# Edit site.config.ts (business info + schema section)
 # Edit theme.config.ts
 ```
+
+The `lib/` directory contains thin shims (5-10 lines each) that import factory functions from `@platform/core-components` and re-export configured utilities. You generally don't need to modify these unless the site requires custom behavior (e.g., custom service sorting — see `sites/colossus-scaffolding/lib/content.ts` for an example of passing a `serviceSortFn`).
 
 ## Troubleshooting
 
