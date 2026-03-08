@@ -179,6 +179,7 @@ export function ContactForm({ locations, darkMode = false }: ContactFormProps) {
     <form onSubmit={handleSubmit} className="space-y-6">
       {submitStatus === 'error' && (
         <div
+          role="alert"
           className={`${errorBgClass} border ${errorBorderClass} rounded-lg p-4 flex items-start gap-3`}
         >
           <AlertCircle className="w-5 h-5 text-error flex-shrink-0 mt-0.5" />
@@ -201,12 +202,15 @@ export function ContactForm({ locations, darkMode = false }: ContactFormProps) {
             name="name"
             value={formData.name}
             onChange={handleChange}
+            aria-required="true"
+            aria-invalid={!!errors.name}
+            aria-describedby={errors.name ? 'name-error' : undefined}
             className={`w-full px-4 py-3 rounded-lg border ${
               errors.name ? 'border-error' : inputBorderClass
             } ${inputBgClass} focus:outline-none focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary`}
             placeholder="Your name"
           />
-          {errors.name && <p className="mt-1 text-sm text-error">{errors.name}</p>}
+          {errors.name && <p id="name-error" role="alert" className="mt-1 text-sm text-error">{errors.name}</p>}
         </div>
 
         {/* Email */}
@@ -220,12 +224,15 @@ export function ContactForm({ locations, darkMode = false }: ContactFormProps) {
             name="email"
             value={formData.email}
             onChange={handleChange}
+            aria-required="true"
+            aria-invalid={!!errors.email}
+            aria-describedby={errors.email ? 'email-error' : undefined}
             className={`w-full px-4 py-3 rounded-lg border ${
               errors.email ? 'border-error' : inputBorderClass
             } ${inputBgClass} focus:outline-none focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary`}
             placeholder="your@email.com"
           />
-          {errors.email && <p className="mt-1 text-sm text-error">{errors.email}</p>}
+          {errors.email && <p id="email-error" role="alert" className="mt-1 text-sm text-error">{errors.email}</p>}
         </div>
 
         {/* Phone */}
@@ -296,12 +303,15 @@ export function ContactForm({ locations, darkMode = false }: ContactFormProps) {
           value={formData.message}
           onChange={handleChange}
           rows={6}
+          aria-required="true"
+          aria-invalid={!!errors.message}
+          aria-describedby={errors.message ? 'message-error' : undefined}
           className={`w-full px-4 py-3 rounded-lg border ${
             errors.message ? 'border-error' : inputBorderClass
           } ${inputBgClass} focus:outline-none focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary resize-none`}
           placeholder="Tell us about your project or enquiry..."
         />
-        {errors.message && <p className="mt-1 text-sm text-error">{errors.message}</p>}
+        {errors.message && <p id="message-error" role="alert" className="mt-1 text-sm text-error">{errors.message}</p>}
       </div>
 
       {/* Submit Button */}

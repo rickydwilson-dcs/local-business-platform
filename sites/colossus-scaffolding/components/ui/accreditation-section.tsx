@@ -64,6 +64,7 @@ export function AccreditationSection() {
       <div className="mb-12">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
           {/* Construction Line Gold Badge */}
+          {/* eslint-disable platform/no-hardcoded-tailwind-colors -- Intentional: accreditation badge color scheme */}
           <div className="text-center p-6 bg-gradient-to-br from-amber-50 to-yellow-100 rounded-2xl border-2 border-amber-300 shadow-md">
             <div className="w-20 h-20 bg-gradient-to-br from-amber-400 to-yellow-500 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
               <svg
@@ -86,8 +87,10 @@ export function AccreditationSection() {
               Government-backed certification for supply chain excellence and compliance
             </p>
           </div>
+          {/* eslint-enable platform/no-hardcoded-tailwind-colors */}
 
           {/* CHAS Badge */}
+          {/* eslint-disable platform/no-hardcoded-tailwind-colors -- Intentional: accreditation badge color scheme */}
           <div className="text-center p-6 bg-gradient-to-br from-green-50 to-emerald-100 rounded-2xl border-2 border-green-300 shadow-md">
             <div className="w-20 h-20 bg-gradient-to-br from-green-500 to-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
               <svg
@@ -110,6 +113,7 @@ export function AccreditationSection() {
               Health and safety assessment scheme approved contractor
             </p>
           </div>
+          {/* eslint-enable platform/no-hardcoded-tailwind-colors */}
         </div>
       </div>
 
