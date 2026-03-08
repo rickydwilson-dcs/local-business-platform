@@ -92,6 +92,8 @@ export * from "./lib/schema-types";
 export * from "./lib/site-utils";
 export { createContactInfo } from "./lib/contact-info";
 export type { ContactInfoConfig } from "./lib/contact-info";
+export { createSchemaGenerators } from "./lib/schema-generators";
+export type { SchemaContext, ArticleSchemaOptions, AggregateRatingOptions } from "./lib/schema-generators";
 
 // Export platform-level types
 export * from "./types/site-config";
