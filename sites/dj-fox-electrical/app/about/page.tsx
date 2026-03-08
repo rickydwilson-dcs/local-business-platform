@@ -68,7 +68,7 @@ export default function AboutPage() {
 
   return (
     <>
-      <main className="min-h-screen bg-surface-background">
+      <div className="min-h-screen bg-surface-background">
         {/* Full-Width Hero with Breadcrumbs */}
         <PageHeroImage
           title="About D J Fox Electrical"
@@ -211,7 +211,7 @@ export default function AboutPage() {
             </div>
           </div>
         </section>
-      </main>
+      </div>
 
       {/* Schema Markup */}
       <Schema

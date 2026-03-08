@@ -45,6 +45,7 @@ export default async function ServicesPage() {
         </div>
       </div>
 
+      {/* eslint-disable-next-line platform/no-hardcoded-tailwind-colors -- Intentional: decorative gradient background */}
       <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100">
         {/* Hero Section */}
         <section className="section-standard lg:py-24 bg-surface-card">

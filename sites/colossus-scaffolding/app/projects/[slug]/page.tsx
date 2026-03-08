@@ -122,6 +122,7 @@ function ProjectSummary({ project }: { project: Project }) {
             <dd className="font-medium text-surface-foreground">{project.scope.squareMetres}m²</dd>
           </div>
         )}
+        {/* eslint-disable-next-line platform/no-hardcoded-tailwind-colors -- Intentional: decorative divider accent */}
         <div className="pt-2 border-t border-blue-200">
           <dt className="text-surface-tertiary mb-2">Services:</dt>
           <dd className="flex flex-wrap gap-2">
@@ -140,6 +141,7 @@ function ProjectSummary({ project }: { project: Project }) {
           </dd>
         </div>
         {project.scope?.challenges && project.scope.challenges.length > 0 && (
+          // eslint-disable-next-line platform/no-hardcoded-tailwind-colors -- Intentional: decorative divider accent
           <div className="pt-2 border-t border-blue-200">
             <dt className="text-surface-tertiary mb-2">Key constraints:</dt>
             <dd className="space-y-1">

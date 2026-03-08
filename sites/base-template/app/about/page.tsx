@@ -44,7 +44,7 @@ export default function AboutPage() {
         </div>
       </div>
 
-      <main className="min-h-screen bg-surface-background">
+      <div className="min-h-screen bg-surface-background">
         {/* Hero Section */}
         <section className="section-standard bg-surface-subtle">
           <div className="container-standard">
@@ -160,6 +160,7 @@ export default function AboutPage() {
                 {credentials.insurance && (
                   <div className="bg-surface-subtle rounded-lg p-6 shadow-sm border border-surface-border flex items-start gap-4">
                     <div className="bg-surface-subtle rounded-full p-3 flex-shrink-0">
+                      {/* eslint-disable-next-line platform/no-hardcoded-tailwind-colors -- Intentional: insurance shield icon color */}
                       <Shield className="w-6 h-6 text-green-600" />
                     </div>
                     <div>
@@ -251,7 +252,7 @@ export default function AboutPage() {
             </div>
           </div>
         </section>
-      </main>
+      </div>
 
       {/* Schema Markup */}
       <Schema
