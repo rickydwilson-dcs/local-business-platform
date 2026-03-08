@@ -150,15 +150,17 @@ export async function checkRateLimit(
     if (!data.allowed) {
       const retryAfter = Math.ceil((windowEnd.getTime() - now.getTime()) / 1000);
 
-      // Structured logging for rate limit denials
-      console.log("[Rate Limiter] Request denied", {
-        siteSlug,
-        identifier,
-        endpoint,
-        requestCount: data.request_count,
-        maxRequests,
-        timestamp: new Date().toISOString(),
-      });
+      if (process.env.NODE_ENV !== 'production') {
+        // Structured logging for rate limit denials
+        console.log("[Rate Limiter] Request denied", {
+          siteSlug,
+          identifier,
+          endpoint,
+          requestCount: data.request_count,
+          maxRequests,
+          timestamp: new Date().toISOString(),
+        });
+      }
 
       return { allowed: false, retryAfter };
     }
