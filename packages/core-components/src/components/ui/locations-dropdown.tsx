@@ -91,6 +91,48 @@ export function LocationsDropdown({
     };
   }, [isOpen]);
 
+  // Arrow key navigation and focus first item on open
+  useEffect(() => {
+    if (!isOpen) return;
+
+    // Focus first menuitem when menu opens
+    requestAnimationFrame(() => {
+      const menu = document.getElementById("locations-dropdown-menu");
+      const firstItem = menu?.querySelector<HTMLElement>('[role="menuitem"]');
+      firstItem?.focus();
+    });
+
+    const menu = document.getElementById("locations-dropdown-menu");
+    if (!menu) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      const items = Array.from(menu.querySelectorAll<HTMLElement>('[role="menuitem"]'));
+      const currentIndex = items.indexOf(document.activeElement as HTMLElement);
+
+      switch (e.key) {
+        case "ArrowDown":
+          e.preventDefault();
+          items[(currentIndex + 1) % items.length]?.focus();
+          break;
+        case "ArrowUp":
+          e.preventDefault();
+          items[(currentIndex - 1 + items.length) % items.length]?.focus();
+          break;
+        case "Home":
+          e.preventDefault();
+          items[0]?.focus();
+          break;
+        case "End":
+          e.preventDefault();
+          items[items.length - 1]?.focus();
+          break;
+      }
+    };
+
+    menu.addEventListener("keydown", handleKeyDown);
+    return () => menu.removeEventListener("keydown", handleKeyDown);
+  }, [isOpen]);
+
   if (locations.length === 0 && (!counties || counties.length === 0)) {
     const linkTextColor = variant === "dark" ? "text-white" : "text-surface-secondary";
     return (
@@ -157,7 +199,7 @@ function SimpleDropdown({
     locations.length > 8 ? "grid-cols-3" : locations.length > 4 ? "grid-cols-2" : "grid-cols-1";
 
   return (
-    <div id={id} className="absolute top-full left-1/2 -translate-x-1/2 mt-2 bg-surface-card rounded-lg shadow-lg border border-surface-subtle z-50 min-w-[200px] max-w-[600px]">
+    <div id={id} role="menu" className="absolute top-full left-1/2 -translate-x-1/2 mt-2 bg-surface-card rounded-lg shadow-lg border border-surface-subtle z-50 min-w-[200px] max-w-[600px]">
       {/* Header */}
       <div className="px-4 py-3 border-b border-surface-subtle">
         <h3 className="font-semibold text-surface-foreground">Service Areas</h3>
@@ -171,6 +213,8 @@ function SimpleDropdown({
             key={location.slug}
             href={`/locations/${location.slug}`}
             onClick={onClose}
+            role="menuitem"
+            tabIndex={0}
             className="px-3 py-2 rounded-md text-sm text-surface-secondary hover:bg-brand-primary/10 hover:text-brand-primary transition-colors"
           >
             {location.name}
@@ -205,7 +249,7 @@ function MegaMenuDropdown({
   onClose: () => void;
 }) {
   return (
-    <div id={id} className="absolute top-full left-0 mt-2 w-[900px] max-w-[90vw] bg-surface-card border border-surface-subtle rounded-lg shadow-xl z-50">
+    <div id={id} role="menu" className="absolute top-full left-0 mt-2 w-[900px] max-w-[90vw] bg-surface-card border border-surface-subtle rounded-lg shadow-xl z-50">
       <div className="p-4 md:p-6">
         {/* Header */}
         <div className="mb-4 md:mb-6">
@@ -220,6 +264,8 @@ function MegaMenuDropdown({
               {/* County Header */}
               <Link
                 href={county.href}
+                role="menuitem"
+                tabIndex={0}
                 className="block text-base font-semibold text-brand-primary hover:text-brand-primary-hover transition-colors border-b border-surface-subtle pb-2"
                 onClick={onClose}
               >
@@ -232,6 +278,8 @@ function MegaMenuDropdown({
                   <li key={town.slug}>
                     <Link
                       href={town.href}
+                      role="menuitem"
+                      tabIndex={0}
                       className={`block text-sm transition-colors ${
                         town.isRichContent
                           ? "text-surface-foreground font-medium hover:text-brand-primary"

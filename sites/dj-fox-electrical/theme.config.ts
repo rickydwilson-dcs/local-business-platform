@@ -12,6 +12,8 @@ export const themeConfig: DeepPartialThemeConfig = {
 
   colors: {
     brand: {
+      // Contrast ratio vs white (#fff): ~4.58:1 — passes WCAG AA (4.5:1) but not AAA (7:1).
+      // If a darker variant is needed for small text on white, use primaryHover (#ba0909, ~5.73:1).
       primary: '#db0b0b',
       primaryHover: '#ba0909',
       secondary: '#b00909',
