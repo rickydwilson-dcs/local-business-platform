@@ -151,7 +151,7 @@ export default async function BlogPostPage({ params }: { params: Promise<Params>
         </div>
       </div>
 
-      <main>
+      <div>
         <article>
           {/* Hero Section */}
           <BlogPostHero
@@ -251,7 +251,7 @@ export default async function BlogPostPage({ params }: { params: Promise<Params>
 
         {/* Related Posts */}
         <RelatedPosts posts={allPosts} currentSlug={slug} />
-      </main>
+      </div>
 
       <Schema
         org={{
