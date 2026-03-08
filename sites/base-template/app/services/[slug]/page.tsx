@@ -97,7 +97,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
               url: getImageUrl(heroImage),
               width: 1200,
               height: 630,
-              alt: fm.title,
+              alt: `${fm.title} - ${siteConfig.business.name}`,
             },
           ]
         : undefined,
