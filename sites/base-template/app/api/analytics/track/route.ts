@@ -15,6 +15,32 @@ import {
 import { checkRateLimit } from "@platform/core-components/lib/rate-limiter";
 import { extractClientIp } from "@platform/core-components/lib/security/ip-utils";
 
+/**
+ * Validate that the request Origin matches the site's domain.
+ * Prevents cross-site analytics injection.
+ */
+function validateOrigin(request: NextRequest): boolean {
+  const origin = request.headers.get("origin");
+  if (!origin) {
+    // Same-origin requests from some browsers may not send Origin
+    // Accept requests without Origin header (they come from same-origin fetch)
+    return true;
+  }
+
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
+  const vercelUrl = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : null;
+
+  const allowedOrigins = [
+    siteUrl,
+    vercelUrl,
+    "http://localhost:3000",
+    "http://localhost:3001",
+    "http://localhost:3002",
+  ].filter(Boolean) as string[];
+
+  return allowedOrigins.some((allowed) => origin === allowed);
+}
+
 // Get feature flags from environment
 function getFeatureFlags(): FeatureFlags {
   return {
@@ -48,6 +74,14 @@ function hasValidConsent(consent: ConsentState | null): boolean {
 
 export async function POST(request: NextRequest) {
   try {
+    // SEC-005: Origin validation to prevent cross-site analytics injection
+    if (!validateOrigin(request)) {
+      return NextResponse.json(
+        { success: false, error: "Invalid origin" },
+        { status: 403 }
+      );
+    }
+
     // Rate limiting (Supabase-backed, shared across instances)
     const clientIP = extractClientIp(request);
     const rateLimitResult = await checkRateLimit(clientIP, {

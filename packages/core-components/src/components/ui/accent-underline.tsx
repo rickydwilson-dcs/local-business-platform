@@ -6,7 +6,7 @@
  *
  * @example
  * <AccentUnderline>Latest Useful News</AccentUnderline>
- * // Renders: Latest <span className="accent-underline">Useful</span> News
+ * // Renders: Latest <span className="accent-underline underline decoration-[var(--color-brand-primary)]">Useful</span> News
  */
 
 import React from "react";
