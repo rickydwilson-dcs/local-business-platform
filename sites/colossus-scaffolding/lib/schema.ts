@@ -1,5 +1,5 @@
 import { absUrl } from "./site";
-import { colossusBusinessConfig, businessType } from "./business-config";
+import { businessConfig as colossusBusinessConfig, businessType } from "./business-config";
 
 /**
  * Generate LocalBusiness schema using the configured business type

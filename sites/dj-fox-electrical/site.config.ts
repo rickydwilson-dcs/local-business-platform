@@ -5,6 +5,8 @@
  * Generated at: 2026-02-15T19:18:53.726Z
  */
 
+import type { BusinessConfig, LocalBusinessSchemaOptions } from '@platform/core-components';
+
 export interface NavItem {
   label: string;
   href: string;
@@ -139,6 +141,12 @@ export interface SiteConfig {
     rateLimit: boolean;
     testimonials: boolean;
     blog: boolean;
+  };
+
+  /** Schema.org business configuration */
+  schema: {
+    businessConfig: BusinessConfig;
+    businessType: LocalBusinessSchemaOptions['businessType'];
   };
 }
 
@@ -575,5 +583,80 @@ export const siteConfig: SiteConfig = {
     rateLimit: true,
     testimonials: true,
     blog: true,
+  },
+
+  schema: {
+    businessType: 'LocalBusiness',
+    businessConfig: {
+      name: 'Your Business Name',
+      legalName: 'Your Business Ltd',
+      description:
+        'Professional local services serving [Your Area]. Quality workmanship, competitive pricing, and excellent customer service.',
+      slogan: 'Your trusted local experts',
+      foundingDate: '2020',
+      numberOfEmployees: '1-10',
+      priceRange: '$$',
+      email: 'info@yourbusiness.com',
+      telephone: '+441234567890',
+      address: {
+        streetAddress: '123 Main Street',
+        addressLocality: 'Your City',
+        addressRegion: 'Your County',
+        postalCode: 'AB12 3CD',
+        addressCountry: 'GB',
+      },
+      geo: {
+        latitude: '51.5074',
+        longitude: '-0.1278',
+      },
+      openingHours: [
+        {
+          dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+          opens: '09:00',
+          closes: '17:00',
+        },
+      ],
+      areaServed: ['Main Area', 'North Region', 'South Region', 'East Region', 'West Region'],
+      credentials: [
+        {
+          name: 'Fully Insured',
+          description: 'Public liability and professional indemnity insurance',
+          category: 'certification',
+        },
+        {
+          name: 'Qualified Team',
+          description: 'All staff are fully trained and certified',
+          category: 'certification',
+        },
+      ],
+      socialProfiles: [
+        'https://www.facebook.com/yourbusiness',
+        'https://www.linkedin.com/company/yourbusiness',
+      ],
+      knowsAbout: [
+        'Service Category 1',
+        'Service Category 2',
+        'Service Category 3',
+        'Industry Best Practices',
+        'Local Area Expertise',
+      ],
+      offerCatalog: [
+        {
+          name: 'Primary Service',
+          description: 'Our main service offering for residential and commercial clients',
+          url: '/services/primary-service',
+        },
+        {
+          name: 'Secondary Service',
+          description: 'Complementary service that enhances our primary offering',
+          url: '/services/secondary-service',
+        },
+        {
+          name: 'Service Three',
+          description: 'Specialized service for unique client needs',
+          url: '/services/service-three',
+        },
+      ],
+    },
   },
 };
