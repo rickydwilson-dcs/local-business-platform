@@ -49,7 +49,15 @@ function getCsrfSecret(): string {
  * - signature: HMAC-SHA256 of randomValue + timestamp
  */
 
-// Single-use token enforcement: track used tokens to prevent replay attacks
+// Single-use token enforcement: track used tokens to prevent replay attacks.
+//
+// LIMITATION: This in-memory Set only tracks replays within a single serverless
+// instance. In a distributed/serverless environment (e.g., Vercel), different
+// instances maintain separate Sets, so a token could theoretically be replayed
+// across instances. For stronger replay protection in production, consider using
+// a shared store (Redis, Vercel KV, or Supabase) for cross-instance tracking.
+// The current approach still provides meaningful protection against automated
+// replay attacks hitting the same instance.
 const usedTokens = new Set<string>();
 
 // Clean up expired tokens periodically (every 5 minutes)
