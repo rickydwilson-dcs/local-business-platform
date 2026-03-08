@@ -26,7 +26,9 @@ local-business-platform/
 │   ├── base-template/              # Gold-standard template for new sites
 │   ├── colossus-scaffolding/       # Reference implementation (scaffolding)
 │   ├── dj-fox-electrical/          # Production site (electrical)
-│   └── showcase/                   # Internal component/theme showcase
+│   ├── showcase/                   # Internal component/theme showcase
+│   ├── test-atlas/                 # Test site (pipeline testing)
+│   └── test-lyra/                  # Test site (pipeline testing)
 ├── packages/
 │   ├── core-components/            # Shared UI components (@platform/core-components)
 │   ├── theme-system/               # Theming engine (@platform/theme-system)

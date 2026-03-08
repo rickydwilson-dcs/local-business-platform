@@ -46,16 +46,31 @@ See `src/index.ts` for the full list of exports.
 
 ### Lib Utilities (`src/lib/`)
 
-- `content.ts` — generic MDX content reading functions (server-only, uses `fs/promises`)
+**Factory functions** — the core architecture pattern. Each returns configured utilities for a specific site:
+
+- `content.ts` — `createContentUtils(config)` factory for MDX content reading (server-only, uses `fs/promises`). Config accepts `getLocationSlugs` callback, `customSort`, and feature flags.
+- `mdx.tsx` — `createMdxLoader(config)` factory for MDX rendering via `next-mdx-remote/rsc`. Sites pass their own remark/rehype plugins (core-components can't resolve them).
+- `schema-generators.ts` — `createSchemaGenerators(config)` factory for JSON-LD schema generation. Config accepts `businessConfig`, `absUrl`, and `businessType`.
+- `site-utils.ts` — `createSiteUtils(config)` + standalone `formatPhone`, `telLink`, `mailtoLink`, `slugify` helpers.
+- `contact-info.ts` — `createContactInfo(siteConfig)` factory for phone/address/hours formatting.
+
+**API route factories** (`src/lib/api/`):
+
+- `contact-route.ts` — `createContactHandler(config)` factory for the contact form POST handler. Config includes business info, email settings, and provider choice.
+- `csrf-route.ts` — `createCsrfTokenHandler()` factory for CSRF token generation endpoint.
+- `analytics-route.ts` — shared analytics tracking route handler.
+
+**Other utilities:**
+
 - `content-schemas.ts` — Zod schemas for MDX frontmatter validation (exported from root)
-- `services.ts` — service-specific data types and helpers
-- `site.ts` — site configuration utilities
-- `schema.ts` / `schema-types.ts` — JSON-LD schema generation (exported from root)
-- `rate-limiter.ts` — Supabase-backed rate limiting (import via `@platform/core-components/lib/rate-limiter`)
+- `schema.ts` / `schema-types.ts` — JSON-LD schema types (exported from root)
+- `rate-limiter.ts` — rate limiting (import via `@platform/core-components/lib/rate-limiter`)
 - `security/csrf.ts` — HMAC-signed CSRF token validation
 - `security/ip-utils.ts` — IP extraction and validation from request headers
 - `validators/` — input validation (contact form, email, phone, etc.)
 - `image.ts` — image path utilities and validation
+
+**Critical import rule:** Site lib shims must import factories via **subpath** (`@platform/core-components/lib/contact-info`) NOT the barrel (`@platform/core-components`). Barrel imports cause circular dependencies in vitest.
 
 ### Context (`src/context/`)
 
@@ -95,12 +110,17 @@ Shared CSS keyframes are in `src/styles/animations.css` (imported by theme globa
 ## Importing
 
 ```typescript
-// From a site:
+// UI components — from barrel:
 import { HeroV1 } from "@platform/core-components";
 import { ServiceCards } from "@platform/core-components";
 
-// Subpath imports for lib utilities:
-import { getServices } from "@platform/core-components/lib/content";
+// Factory functions — ALWAYS use subpath imports:
+import { createContentUtils } from "@platform/core-components/lib/content";
+import { createSchemaGenerators } from "@platform/core-components/lib/schema-generators";
+import { createContactInfo } from "@platform/core-components/lib/contact-info";
+import { createSiteUtils } from "@platform/core-components/lib/site-utils";
+import { createMdxLoader } from "@platform/core-components/lib/mdx";
+import { createContactHandler } from "@platform/core-components/lib/api/contact-route";
 ```
 
 ## Adding a New Component

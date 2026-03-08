@@ -108,6 +108,12 @@ export default async function LocationPage({ params }: { params: Promise<Params>
 
   return (
     <>
+      {/* SEO-003: LocalBusiness schema for location page */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(locationSchema) }}
+      />
+
       {/* Breadcrumbs */}
       <div className="bg-surface-subtle border-b border-surface-border">
         <div className="container-standard py-4">
