@@ -52,7 +52,7 @@ export default async function ServicesPage() {
         breadcrumbs={breadcrumbItems}
       />
 
-      <main className="min-h-screen">
+      <div className="min-h-screen">
         {/* Featured Services Section */}
         <section className="section bg-white">
           <div className="container-narrow">
@@ -211,7 +211,7 @@ export default async function ServicesPage() {
             </div>
           </section>
         )}
-      </main>
+      </div>
 
       <Schema
         org={{

@@ -36,7 +36,7 @@ export default function CookiePolicyPage() {
         </div>
       </div>
 
-      <main className="min-h-screen bg-surface-background">
+      <div className="min-h-screen bg-surface-background">
         <article className="section-standard">
           <div className="container-standard max-w-4xl">
             <h1 className="heading-hero mb-4">Cookie Policy</h1>
@@ -119,12 +119,14 @@ export default function CookiePolicyPage() {
 
                 {/* Necessary Cookies */}
                 <div className="mb-8">
+                  {/* eslint-disable platform/no-hardcoded-tailwind-colors -- Intentional: semantic legal basis callout */}
                   <div className="bg-green-50 rounded-lg p-4 border-l-4 border-green-500 mb-4">
                     <h3 className="font-semibold text-green-800">Necessary Cookies</h3>
                     <p className="text-green-700 text-sm">
                       Required for the website to function. Cannot be disabled.
                     </p>
                   </div>
+                  {/* eslint-enable platform/no-hardcoded-tailwind-colors */}
                   <div className="overflow-x-auto">
                     <table className="w-full border-collapse text-sm">
                       <thead>
@@ -160,12 +162,14 @@ export default function CookiePolicyPage() {
 
                 {/* Analytics Cookies */}
                 <div className="mb-8">
+                  {/* eslint-disable platform/no-hardcoded-tailwind-colors -- Intentional: semantic legal basis callout */}
                   <div className="bg-blue-50 rounded-lg p-4 border-l-4 border-blue-500 mb-4">
                     <h3 className="font-semibold text-blue-800">Analytics Cookies</h3>
                     <p className="text-blue-700 text-sm">
                       Help us understand how visitors use our website.
                     </p>
                   </div>
+                  {/* eslint-enable platform/no-hardcoded-tailwind-colors */}
                   <div className="overflow-x-auto">
                     <table className="w-full border-collapse text-sm">
                       <thead>
@@ -201,12 +205,14 @@ export default function CookiePolicyPage() {
 
                 {/* Marketing Cookies */}
                 <div className="mb-8">
+                  {/* eslint-disable platform/no-hardcoded-tailwind-colors -- Intentional: semantic legal basis callout */}
                   <div className="bg-purple-50 rounded-lg p-4 border-l-4 border-purple-500 mb-4">
                     <h3 className="font-semibold text-purple-800">Marketing Cookies</h3>
                     <p className="text-purple-700 text-sm">
                       Used to deliver relevant advertisements and track campaign effectiveness.
                     </p>
                   </div>
+                  {/* eslint-enable platform/no-hardcoded-tailwind-colors */}
                   <div className="overflow-x-auto">
                     <table className="w-full border-collapse text-sm">
                       <thead>
@@ -347,7 +353,7 @@ export default function CookiePolicyPage() {
             </div>
           </div>
         </article>
-      </main>
+      </div>
     </>
   );
 }

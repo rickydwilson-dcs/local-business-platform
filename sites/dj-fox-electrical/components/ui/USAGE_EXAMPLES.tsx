@@ -255,6 +255,7 @@ export function SectionHeadingAccentExample() {
           <AccentUnderline as="h2" className="text-4xl md:text-5xl font-bold">
             Our Latest **Useful** News
           </AccentUnderline>
+          {/* eslint-disable-next-line platform/no-hardcoded-tailwind-colors -- Example code; not production UI */}
           <p className="text-xl text-gray-700 mt-4">
             Expert advice and updates from DJ Fox Electrical
           </p>
@@ -298,6 +299,7 @@ export function CompleteHomePageExample() {
       />
 
       {/* Service Cards Section */}
+      {/* eslint-disable-next-line platform/no-hardcoded-tailwind-colors -- Example code; not production UI */}
       <section className="section-standard bg-gray-50">
         <div className="container-standard">
           <div className="text-center mb-12">
@@ -353,6 +355,7 @@ export function CompleteServicePageExample() {
       </section>
 
       {/* FAQ Section */}
+      {/* eslint-disable-next-line platform/no-hardcoded-tailwind-colors -- Example code; not production UI */}
       <section className="section-standard bg-gray-50">
         <div className="container-standard">
           <AccentUnderline as="h2" className="text-4xl font-bold text-center mb-12">

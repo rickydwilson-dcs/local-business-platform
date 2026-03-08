@@ -292,6 +292,7 @@ When adding new styling:
 | Anti-Pattern                            | Why It Breaks White-Labeling        | Correct Approach                                           |
 | --------------------------------------- | ----------------------------------- | ---------------------------------------------------------- |
 | Hardcoded hex colors (`bg-[#005A9E]`)   | Not themeable, ignores theme config | Use theme tokens (`bg-brand-primary`)                      |
+| Hardcoded Tailwind color scales (`text-gray-600`, `bg-blue-50`) | Bypass theme tokens, break re-theming | Use `text-surface-muted-foreground`, `bg-surface-muted`, etc. — caught by ESLint |
 | Hardcoded RGBA (`bg-[rgba(0,0,0,0.8)]`) | Bypasses overlay tokens             | Use `bg-overlay-dark` or `bg-black/80`                     |
 | Hardcoded HSL/HSLA values               | Still a literal color               | Use theme tokens                                           |
 | `style={{}}` inline styles              | Bypasses Tailwind and theme system  | Use Tailwind utilities                                     |
@@ -301,11 +302,42 @@ When adding new styling:
 | `:root` overrides in CSS files          | Fragments the source of truth       | Define all values in `theme.config.ts`                     |
 | Arbitrary opacity (`opacity-[0.7]`)     | Bypasses semantic opacity system    | Use `opacity-muted`, `opacity-disabled`, `opacity-overlay` |
 
+## Automated Enforcement
+
+The no-hardcoded-color rule is enforced automatically by a custom ESLint rule that runs as part of `pnpm lint`:
+
+**Rule:** `platform/no-hardcoded-tailwind-colors`
+**Location:** `tools/eslint/rules/no-hardcoded-tailwind-colors.mjs`
+**Scope:** All `app/**/*.{ts,tsx}` and `components/**/*.{ts,tsx}` files in every client site
+
+The rule catches hardcoded Tailwind color-scale classes in JSX `className` attributes — patterns like `text-gray-600`, `bg-blue-50`, `border-red-200` — and reports them as errors with a message directing to this document.
+
+```tsx
+// ESLint ERROR — will fail pnpm lint
+<div className="text-gray-700">Hardcoded neutral</div>
+
+// CORRECT — theme token
+<div className="text-surface-foreground">Themed text</div>
+```
+
+**Intentional exceptions** (semantic callout colors, star ratings, form state feedback) use the standard ESLint escape hatch:
+
+```tsx
+{/* eslint-disable platform/no-hardcoded-tailwind-colors -- Intentional: semantic status callout */}
+<div className="bg-green-50 border border-green-200">
+  Success message
+</div>
+{/* eslint-enable platform/no-hardcoded-tailwind-colors */}
+```
+
+The rule covers string literals and template literal static parts. It does not flag dynamic template expressions like `` `${condition ? 'text-yellow-400' : ''}` `` (those are invisible to static analysis). Keep semantic coloring intentional, documented with a comment, and minimal.
+
 ## Verification Checklist
 
 Before completing any styling work:
 
 - [ ] No hardcoded hex colors (use `bg-brand-primary`, etc.)
+- [ ] No hardcoded Tailwind color-scale classes (`text-gray-*`, `bg-blue-*`, etc.) — caught by ESLint
 - [ ] No hardcoded RGBA/HSLA values (use overlay tokens or Tailwind opacity modifiers)
 - [ ] No inline styles (`style={{}}`) anywhere except email templates
 - [ ] No duplicated utility class strings (3+ uses = extract to class)

@@ -12,7 +12,7 @@ import { PHONE_DISPLAY, PHONE_TEL, BUSINESS_EMAIL } from '@/lib/contact-info';
 
 export default function NotFound() {
   return (
-    <main className="min-h-[80vh] flex items-center justify-center bg-surface-background">
+    <div className="min-h-[80vh] flex items-center justify-center bg-surface-background">
       <div className="container-narrow text-center py-16">
         {/* Error Code */}
         <h1 className="text-8xl md:text-9xl font-bold text-brand-primary/20 mb-4">404</h1>
@@ -93,6 +93,6 @@ export default function NotFound() {
           </div>
         </div>
       </div>
-    </main>
+    </div>
   );
 }

@@ -54,7 +54,7 @@ export default async function ReviewsPage() {
         </div>
       </div>
 
-      <main className="min-h-screen bg-gradient-to-b from-surface-subtle to-surface-background">
+      <div className="min-h-screen bg-gradient-to-b from-surface-subtle to-surface-background">
         {/* Hero Section */}
         <section className="section-standard lg:py-24 bg-surface-background">
           <div className="container-standard">
@@ -242,7 +242,7 @@ export default async function ReviewsPage() {
             </Link>
           </div>
         </section>
-      </main>
+      </div>
 
       <Schema
         org={{

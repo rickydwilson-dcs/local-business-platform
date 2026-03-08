@@ -43,13 +43,13 @@ export default function CookiePolicyPage() {
       </div>
 
       {/* Main Content */}
-      <div className="section-standard bg-white">
+      <div className="section-standard bg-surface-background">
         <div className="container-standard">
           <div className="mx-auto max-w-4xl">
             {/* Header */}
             <div className="text-center mb-12">
               <h1 className="heading-hero leading-tight mb-6">Cookie Policy</h1>
-              <div className="flex flex-wrap justify-center gap-4 text-sm text-gray-600">
+              <div className="flex flex-wrap justify-center gap-4 text-sm text-surface-muted-foreground">
                 <span>Last updated: {lastUpdated}</span>
                 <span>•</span>
                 <span>Version: {version}</span>
@@ -84,7 +84,7 @@ export default function CookiePolicyPage() {
             <div className="prose prose-lg max-w-none">
               {/* Introduction */}
               <section className="mb-12">
-                <p className="text-xl text-gray-700 leading-relaxed">
+                <p className="text-xl text-surface-foreground leading-relaxed">
                   This Cookie Policy explains how {siteConfig.business.name} (&quot;we&quot;,
                   &quot;us&quot;, or &quot;our&quot;) uses cookies and similar tracking technologies
                   on our website. We are committed to transparency about how we collect and use your
@@ -141,9 +141,10 @@ export default function CookiePolicyPage() {
 
                 {/* Necessary Cookies */}
                 <div className="mb-8">
-                  <h3 className="text-2xl font-semibold mb-4 text-gray-900">
+                  <h3 className="text-2xl font-semibold mb-4 text-surface-foreground">
                     3.1 Necessary Cookies
                   </h3>
+                  {/* eslint-disable platform/no-hardcoded-tailwind-colors -- Intentional: semantic legal basis callout */}
                   <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-4">
                     <p className="font-semibold text-blue-900">Legal Basis: Legitimate Interests</p>
                     <p className="text-blue-800">
@@ -151,35 +152,36 @@ export default function CookiePolicyPage() {
                       consent.
                     </p>
                   </div>
+                  {/* eslint-enable platform/no-hardcoded-tailwind-colors */}
                   <div className="overflow-x-auto">
-                    <table className="w-full border border-gray-300 rounded-lg">
-                      <thead className="bg-gray-50">
+                    <table className="w-full border border-surface-border rounded-lg">
+                      <thead className="bg-surface-muted">
                         <tr>
-                          <th className="border-b border-gray-300 px-4 py-3 text-left">
+                          <th className="border-b border-surface-border px-4 py-3 text-left">
                             Cookie Name
                           </th>
-                          <th className="border-b border-gray-300 px-4 py-3 text-left">Purpose</th>
-                          <th className="border-b border-gray-300 px-4 py-3 text-left">Duration</th>
+                          <th className="border-b border-surface-border px-4 py-3 text-left">Purpose</th>
+                          <th className="border-b border-surface-border px-4 py-3 text-left">Duration</th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr>
-                          <td className="border-b border-gray-200 px-4 py-3 font-mono text-sm">
+                          <td className="border-b border-surface-border px-4 py-3 font-mono text-sm">
                             analytics_consent
                           </td>
-                          <td className="border-b border-gray-200 px-4 py-3">
+                          <td className="border-b border-surface-border px-4 py-3">
                             Stores your cookie consent preferences
                           </td>
-                          <td className="border-b border-gray-200 px-4 py-3">1 year</td>
+                          <td className="border-b border-surface-border px-4 py-3">1 year</td>
                         </tr>
                         <tr>
-                          <td className="border-b border-gray-200 px-4 py-3 font-mono text-sm">
+                          <td className="border-b border-surface-border px-4 py-3 font-mono text-sm">
                             _ga_client_id
                           </td>
-                          <td className="border-b border-gray-200 px-4 py-3">
+                          <td className="border-b border-surface-border px-4 py-3">
                             Session management for analytics tracking
                           </td>
-                          <td className="border-b border-gray-200 px-4 py-3">2 years</td>
+                          <td className="border-b border-surface-border px-4 py-3">2 years</td>
                         </tr>
                       </tbody>
                     </table>
@@ -188,9 +190,10 @@ export default function CookiePolicyPage() {
 
                 {/* Analytics Cookies */}
                 <div className="mb-8">
-                  <h3 className="text-2xl font-semibold mb-4 text-gray-900">
+                  <h3 className="text-2xl font-semibold mb-4 text-surface-foreground">
                     3.2 Analytics Cookies
                   </h3>
+                  {/* eslint-disable platform/no-hardcoded-tailwind-colors -- Intentional: semantic legal basis callout */}
                   <div className="bg-green-50 border border-green-200 rounded-lg p-6 mb-4">
                     <p className="font-semibold text-green-900">Legal Basis: Consent</p>
                     <p className="text-green-800">
@@ -198,40 +201,41 @@ export default function CookiePolicyPage() {
                       website.
                     </p>
                   </div>
+                  {/* eslint-enable platform/no-hardcoded-tailwind-colors */}
                   <div className="overflow-x-auto">
-                    <table className="w-full border border-gray-300 rounded-lg">
-                      <thead className="bg-gray-50">
+                    <table className="w-full border border-surface-border rounded-lg">
+                      <thead className="bg-surface-muted">
                         <tr>
-                          <th className="border-b border-gray-300 px-4 py-3 text-left">
+                          <th className="border-b border-surface-border px-4 py-3 text-left">
                             Cookie Name
                           </th>
-                          <th className="border-b border-gray-300 px-4 py-3 text-left">Purpose</th>
-                          <th className="border-b border-gray-300 px-4 py-3 text-left">Duration</th>
+                          <th className="border-b border-surface-border px-4 py-3 text-left">Purpose</th>
+                          <th className="border-b border-surface-border px-4 py-3 text-left">Duration</th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr>
-                          <td className="border-b border-gray-200 px-4 py-3 font-mono text-sm">
+                          <td className="border-b border-surface-border px-4 py-3 font-mono text-sm">
                             _ga
                           </td>
-                          <td className="border-b border-gray-200 px-4 py-3">
+                          <td className="border-b border-surface-border px-4 py-3">
                             Google Analytics - distinguishes unique visitors
                           </td>
-                          <td className="border-b border-gray-200 px-4 py-3">2 years</td>
+                          <td className="border-b border-surface-border px-4 py-3">2 years</td>
                         </tr>
                         <tr>
-                          <td className="border-b border-gray-200 px-4 py-3 font-mono text-sm">
+                          <td className="border-b border-surface-border px-4 py-3 font-mono text-sm">
                             _ga_*
                           </td>
-                          <td className="border-b border-gray-200 px-4 py-3">
+                          <td className="border-b border-surface-border px-4 py-3">
                             Google Analytics GA4 - session and campaign tracking
                           </td>
-                          <td className="border-b border-gray-200 px-4 py-3">2 years</td>
+                          <td className="border-b border-surface-border px-4 py-3">2 years</td>
                         </tr>
                       </tbody>
                     </table>
                   </div>
-                  <p className="mt-4 text-sm text-gray-600">
+                  <p className="mt-4 text-sm text-surface-muted-foreground">
                     We use Google Analytics 4 via the Measurement Protocol for server-side tracking
                     to measure website performance and understand how visitors find information
                     about our scaffolding services.
@@ -240,9 +244,10 @@ export default function CookiePolicyPage() {
 
                 {/* Marketing Cookies */}
                 <div className="mb-8">
-                  <h3 className="text-2xl font-semibold mb-4 text-gray-900">
+                  <h3 className="text-2xl font-semibold mb-4 text-surface-foreground">
                     3.3 Marketing Cookies
                   </h3>
+                  {/* eslint-disable platform/no-hardcoded-tailwind-colors -- Intentional: semantic legal basis callout */}
                   <div className="bg-purple-50 border border-purple-200 rounded-lg p-6 mb-4">
                     <p className="font-semibold text-purple-900">Legal Basis: Consent</p>
                     <p className="text-purple-800">
@@ -250,49 +255,50 @@ export default function CookiePolicyPage() {
                       marketing.
                     </p>
                   </div>
+                  {/* eslint-enable platform/no-hardcoded-tailwind-colors */}
                   <div className="overflow-x-auto">
-                    <table className="w-full border border-gray-300 rounded-lg">
-                      <thead className="bg-gray-50">
+                    <table className="w-full border border-surface-border rounded-lg">
+                      <thead className="bg-surface-muted">
                         <tr>
-                          <th className="border-b border-gray-300 px-4 py-3 text-left">
+                          <th className="border-b border-surface-border px-4 py-3 text-left">
                             Cookie Name
                           </th>
-                          <th className="border-b border-gray-300 px-4 py-3 text-left">Purpose</th>
-                          <th className="border-b border-gray-300 px-4 py-3 text-left">Duration</th>
+                          <th className="border-b border-surface-border px-4 py-3 text-left">Purpose</th>
+                          <th className="border-b border-surface-border px-4 py-3 text-left">Duration</th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr>
-                          <td className="border-b border-gray-200 px-4 py-3 font-mono text-sm">
+                          <td className="border-b border-surface-border px-4 py-3 font-mono text-sm">
                             _fbp
                           </td>
-                          <td className="border-b border-gray-200 px-4 py-3">
+                          <td className="border-b border-surface-border px-4 py-3">
                             Facebook Pixel - browser identification
                           </td>
-                          <td className="border-b border-gray-200 px-4 py-3">3 months</td>
+                          <td className="border-b border-surface-border px-4 py-3">3 months</td>
                         </tr>
                         <tr>
-                          <td className="border-b border-gray-200 px-4 py-3 font-mono text-sm">
+                          <td className="border-b border-surface-border px-4 py-3 font-mono text-sm">
                             _fbc
                           </td>
-                          <td className="border-b border-gray-200 px-4 py-3">
+                          <td className="border-b border-surface-border px-4 py-3">
                             Facebook Pixel - click tracking
                           </td>
-                          <td className="border-b border-gray-200 px-4 py-3">3 months</td>
+                          <td className="border-b border-surface-border px-4 py-3">3 months</td>
                         </tr>
                         <tr>
-                          <td className="border-b border-gray-200 px-4 py-3 font-mono text-sm">
+                          <td className="border-b border-surface-border px-4 py-3 font-mono text-sm">
                             gclid
                           </td>
-                          <td className="border-b border-gray-200 px-4 py-3">
+                          <td className="border-b border-surface-border px-4 py-3">
                             Google Ads - conversion tracking for scaffolding inquiries
                           </td>
-                          <td className="border-b border-gray-200 px-4 py-3">90 days</td>
+                          <td className="border-b border-surface-border px-4 py-3">90 days</td>
                         </tr>
                       </tbody>
                     </table>
                   </div>
-                  <p className="mt-4 text-sm text-gray-600">
+                  <p className="mt-4 text-sm text-surface-muted-foreground">
                     We use Facebook Conversions API and Google Ads conversion tracking to measure
                     the effectiveness of our scaffolding service advertising and improve our
                     marketing to potential clients.
@@ -301,9 +307,10 @@ export default function CookiePolicyPage() {
 
                 {/* Functional Cookies */}
                 <div className="mb-8">
-                  <h3 className="text-2xl font-semibold mb-4 text-gray-900">
+                  <h3 className="text-2xl font-semibold mb-4 text-surface-foreground">
                     3.4 Functional Cookies
                   </h3>
+                  {/* eslint-disable platform/no-hardcoded-tailwind-colors -- Intentional: semantic legal basis callout */}
                   <div className="bg-orange-50 border border-orange-200 rounded-lg p-6 mb-4">
                     <p className="font-semibold text-orange-900">
                       Legal Basis: Legitimate Interests
@@ -312,6 +319,7 @@ export default function CookiePolicyPage() {
                       These cookies enhance your experience on our scaffolding website.
                     </p>
                   </div>
+                  {/* eslint-enable platform/no-hardcoded-tailwind-colors */}
                   <p>
                     We currently do not use functional cookies beyond those necessary for basic
                     website operation. Any future functional cookies will enhance your experience
@@ -386,13 +394,13 @@ export default function CookiePolicyPage() {
                 </p>
 
                 <div className="space-y-6">
-                  <div className="border border-gray-200 rounded-lg p-6">
+                  <div className="border border-surface-border rounded-lg p-6">
                     <h4 className="text-lg font-semibold mb-2">Google Analytics</h4>
-                    <p className="text-gray-700 mb-2">
+                    <p className="text-surface-foreground mb-2">
                       Helps us understand how visitors use our scaffolding website to improve our
                       services.
                     </p>
-                    <p className="text-sm text-gray-600">
+                    <p className="text-sm text-surface-muted-foreground">
                       Privacy Policy:{" "}
                       <a
                         href="https://policies.google.com/privacy"
@@ -405,13 +413,13 @@ export default function CookiePolicyPage() {
                     </p>
                   </div>
 
-                  <div className="border border-gray-200 rounded-lg p-6">
+                  <div className="border border-surface-border rounded-lg p-6">
                     <h4 className="text-lg font-semibold mb-2">Facebook/Meta Pixel</h4>
-                    <p className="text-gray-700 mb-2">
+                    <p className="text-surface-foreground mb-2">
                       Enables us to measure the effectiveness of our scaffolding service advertising
                       on Facebook and Instagram.
                     </p>
-                    <p className="text-sm text-gray-600">
+                    <p className="text-sm text-surface-muted-foreground">
                       Privacy Policy:{" "}
                       <a
                         href="https://www.facebook.com/privacy/policy/"
@@ -424,13 +432,13 @@ export default function CookiePolicyPage() {
                     </p>
                   </div>
 
-                  <div className="border border-gray-200 rounded-lg p-6">
+                  <div className="border border-surface-border rounded-lg p-6">
                     <h4 className="text-lg font-semibold mb-2">Google Ads</h4>
-                    <p className="text-gray-700 mb-2">
+                    <p className="text-surface-foreground mb-2">
                       Tracks conversions from our scaffolding service advertisements to measure
                       campaign effectiveness.
                     </p>
-                    <p className="text-sm text-gray-600">
+                    <p className="text-sm text-surface-muted-foreground">
                       Privacy Policy:{" "}
                       <a
                         href="https://policies.google.com/privacy"
@@ -457,7 +465,7 @@ export default function CookiePolicyPage() {
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
                       <h4 className="font-semibold mb-2">Data Controller</h4>
-                      <div className="text-gray-700 space-y-1">
+                      <div className="text-surface-foreground space-y-1">
                         <p>{siteConfig.business.name}</p>
                         <p>{ADDRESS.street}</p>
                         <p>{ADDRESS.locality}</p>
@@ -468,7 +476,7 @@ export default function CookiePolicyPage() {
                     </div>
                     <div>
                       <h4 className="font-semibold mb-2">Contact Details</h4>
-                      <div className="text-gray-700 space-y-1">
+                      <div className="text-surface-foreground space-y-1">
                         <p>Phone: {PHONE_DISPLAY}</p>
                         <p>Email: {BUSINESS_EMAIL}</p>
                         <p>
@@ -482,6 +490,7 @@ export default function CookiePolicyPage() {
                   </div>
                 </div>
 
+                {/* eslint-disable platform/no-hardcoded-tailwind-colors -- Intentional: semantic legal basis callout */}
                 <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
                   <p className="text-sm text-blue-800">
                     <strong>Your Rights:</strong> You have rights under UK data protection law
@@ -492,6 +501,7 @@ export default function CookiePolicyPage() {
                     for full details of your rights and how to exercise them.
                   </p>
                 </div>
+                {/* eslint-enable platform/no-hardcoded-tailwind-colors */}
               </section>
 
               {/* Updates */}
@@ -504,7 +514,7 @@ export default function CookiePolicyPage() {
                   &quot;Last Modified&quot; date.
                 </p>
                 <div className="bg-surface-muted rounded-lg p-4">
-                  <p className="text-sm text-gray-600">
+                  <p className="text-sm text-surface-muted-foreground">
                     <strong>Last updated:</strong> {lastUpdated}
                     <br />
                     <strong>Version:</strong> {version}
