@@ -28,12 +28,20 @@ export interface TownLocation {
   description?: string;
 }
 
+const defaultCountyColors: Record<string, string> = {
+  'East Sussex': '#2563eb',
+  'West Sussex': '#059669',
+  'Kent': '#dc2626',
+  'Surrey': '#7c3aed',
+};
+
 interface CoverageMapProps {
   locations: TownLocation[];
   center?: [number, number];
   zoom?: number;
   className?: string;
   height?: string;
+  countyColors?: Record<string, string>;
 }
 
 export function CoverageMap({
@@ -42,6 +50,7 @@ export function CoverageMap({
   zoom = 9,
   className = "",
   height = "h-96",
+  countyColors = defaultCountyColors,
 }: CoverageMapProps) {
   const [isClient, setIsClient] = useState(false);
   const [leafletModule, setLeafletModule] = useState<typeof import("leaflet") | null>(null);
@@ -89,16 +98,7 @@ export function CoverageMap({
   }, []);
 
   const createCustomIcon = (leaflet: typeof import("leaflet"), county: string) => {
-    /* eslint-disable no-restricted-syntax -- Leaflet map markers require inline hex colors */
-    const colors: { [key: string]: string } = {
-      "East Sussex": "#2563eb",
-      "West Sussex": "#059669",
-      Kent: "#dc2626",
-      Surrey: "#7c3aed",
-    };
-
-    const color = colors[county] || "#4DB2E4";
-    /* eslint-enable no-restricted-syntax */
+    const color = countyColors[county] || "#4DB2E4";
     const size = 28;
 
     return new leaflet.DivIcon({
@@ -204,17 +204,9 @@ export function CoverageMap({
                   <div className="flex items-center gap-1">
                     <div
                       className="w-3 h-3 rounded-full"
-                      /* eslint-disable no-restricted-syntax -- Map legend requires inline hex colors */
                       style={{
-                        backgroundColor:
-                          {
-                            "East Sussex": "#2563eb",
-                            "West Sussex": "#059669",
-                            Kent: "#dc2626",
-                            Surrey: "#7c3aed",
-                          }[location.county] || "#4DB2E4",
+                        backgroundColor: countyColors[location.county] || "#4DB2E4",
                       }}
-                      /* eslint-enable no-restricted-syntax */
                     ></div>
                     <span className="text-xs text-surface-secondary">{location.county}</span>
                   </div>
