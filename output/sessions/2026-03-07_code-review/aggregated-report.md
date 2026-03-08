@@ -12,9 +12,11 @@
 | --------- | -------- | ------------ | -------- | ------------ | --------- |
 | Critical  | 0        | 0            | 3        | 0            | **3**     |
 | High      | 1        | 1            | 4        | 4            | **10**    |
-| Medium    | 4        | 8            | 3        | 5            | **20**    |
-| Low       | 3        | 5            | 6        | 2            | **16**    |
-| **Total** | **8**    | **14**       | **16**   | **11**       | **49**    |
+| Medium    | 4        | 8            | 1        | 5            | **18**    |
+| Low       | 3        | 5            | 4        | 2            | **14**    |
+| **Total** | **8**    | **14**       | **12**   | **11**       | **45**    |
+
+_4 findings fixed in Session 4 (A11Y-005, A11Y-006, A11Y-007, A11Y-009 — see [Fixed in Session 4](#fixed-in-session-4) below)_
 
 **Immediate attention required:**
 - **A11Y-001** — Duplicate `<main>` landmark on ~30 pages across all sites (WCAG 1.3.1 violation)
@@ -87,8 +89,8 @@
 | CQ-012   | Code Quality | Identical analytics track route in base-template + colossus             |
 | SEO-004  | A11y/SEO     | Colossus `robots.ts` missing `/api/` disallow rule                     |
 | SEO-005  | A11y/SEO     | Layout OG metadata incomplete (no image/url); fix covered by SEO-001/002 |
-| A11Y-005 | A11y/SEO     | LocationsDropdown lacks `role="menu"` and arrow-key keyboard navigation |
-| A11Y-006 | A11y/SEO     | FAQ section renders static content; no accordion expand/collapse option |
+| ~~A11Y-005~~ | ~~A11y/SEO~~     | ~~LocationsDropdown lacks `role="menu"` and arrow-key keyboard navigation~~ — **Fixed in Session 4** |
+| ~~A11Y-006~~ | ~~A11y/SEO~~     | ~~FAQ section renders static content; no accordion expand/collapse option~~ — **Fixed in Session 4** |
 | SEO-007  | A11y/SEO     | Homepage h1 uses business name; could be more keyword-focused           |
 | ARCH-005 | Architecture | `ContactForm.tsx` duplicated across all 3 sites with significant divergence |
 | ARCH-006 | Architecture | Contact API route duplicated identically in base-template + dj-fox (see Cross-Domain #2) |
@@ -107,10 +109,10 @@
 | CQ-009   | Code Quality | Hardcoded `text-gray-*` in dj-fox `USAGE_EXAMPLES.tsx`                   |
 | CQ-013   | Code Quality | Hardcoded `text-yellow-400` for star ratings in 7+ locations              |
 | CQ-014   | Code Quality | `docs/standards/content.md` documents `services.cards` but schema uses `services.items` |
-| A11Y-007 | A11y/SEO     | `userScalable` not explicitly set in base-template + dj-fox viewport     |
+| ~~A11Y-007~~ | ~~A11y/SEO~~     | ~~`userScalable` not explicitly set in base-template + dj-fox viewport~~ — **Fixed in Session 4** |
 | A11Y-008 | A11y/SEO     | Phone SVG in mobile menu bottom CTA missing `aria-hidden="true"`          |
 | SEO-008  | A11y/SEO     | Service page OG image alt text uses bare title (could include business name) |
-| A11Y-009 | A11y/SEO     | DJ Fox `#db0b0b` red borderline WCAG AA contrast (4.58:1) on white       |
+| ~~A11Y-009~~ | ~~A11y/SEO~~     | ~~DJ Fox `#db0b0b` red borderline WCAG AA contrast (4.58:1) on white~~ — **Fixed in Session 4** (documented, no color change needed) |
 | SEO-009  | A11y/SEO     | `/reviews` page missing from sitemap in all 3 sites                       |
 | SEO-010  | A11y/SEO     | Colossus breadcrumbs conditional on frontmatter; no default fallback       |
 | ARCH-010 | Architecture | `image.ts` hardcodes brand name instead of reading from `siteConfig`      |
@@ -215,6 +217,19 @@
 17. **CQ-013** — Theme token for star ratings — _small, scattered fix_
 18. **SEO-009 + SEO-004** — Reviews in sitemaps, colossus robots.ts disallow — _trivial cluster_
 19. **ARCH-009/011** — Extract `contact-info.ts` utilities + `mdx.tsx` — _completes deduplication_
+
+---
+
+## Fixed in Session 4
+
+_Branch: `develop` (commit `0202d6c`) — 2026-03-08_
+
+| ID | Fix Summary |
+|---|---|
+| A11Y-005 | Added `role="menu"`, `role="menuitem"`, arrow key navigation (ArrowDown/Up/Home/End), and focus-on-open to `LocationsDropdown` in `packages/core-components/src/components/ui/locations-dropdown.tsx` |
+| A11Y-006 | Extracted `FAQAccordionItem` client component (`faq-accordion-item.tsx`) with accordion expand/collapse, `aria-expanded`, `aria-controls`/`aria-labelledby` pairing; `FAQSection` remains a Server Component |
+| A11Y-007 | Added `userScalable: true` to viewport config in `sites/base-template/app/layout.tsx` and `sites/dj-fox-electrical/app/layout.tsx` |
+| A11Y-009 | Verified `#db0b0b` passes WCAG AA (4.58:1 > 4.5:1 threshold); added contrast ratio documentation comment to `sites/dj-fox-electrical/theme.config.ts` — no color change required |
 
 ---
 
