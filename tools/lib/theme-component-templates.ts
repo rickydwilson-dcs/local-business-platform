@@ -262,6 +262,9 @@ RULES:
    CORRECT: props.backgroundImage, props.ctaButtons, props.heading
    WRONG: props['background-image'], props['cta-buttons'], props['heading']
    The interface defines camelCase prop names — use dot notation to access them.
+   REQUIRED: props.camelCase (e.g., props.postThumbnail, props.heroTitle)
+   FORBIDDEN: props['post-thumbnail'], props["hero-title"], props['cta_button']
+   The TypeScript interface uses camelCase. Your JSX must use the exact same names with dot notation.
 7. Output ONLY the function body starting with "  return (" — no imports, no interface, no function declaration.
 8. Keep it clean, semantic, and accessible.
 
