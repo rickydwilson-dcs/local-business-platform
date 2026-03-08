@@ -195,7 +195,7 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
         </section>
       )}
 
-      <main>
+      <div>
         {/* Hero Section */}
         <ServiceHero
           title={fm.title}
@@ -240,7 +240,7 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
           secondaryButtonText={`Call ${siteConfig.business.phone}`}
           secondaryButtonUrl={`tel:${siteConfig.business.phone.replace(/\s/g, '')}`}
         />
-      </main>
+      </div>
 
       <Schema
         org={{

@@ -39,7 +39,7 @@ export default function ContactPage() {
         breadcrumbs={breadcrumbItems}
       />
 
-      <main className="min-h-screen">
+      <div className="min-h-screen">
         {/* Info Cards Section */}
         <section className="section bg-white pt-16">
           <div className="container-narrow">
@@ -182,7 +182,7 @@ export default function ContactPage() {
             </div>
           </div>
         </section>
-      </main>
+      </div>
 
       {/* Schema Markup */}
       <Schema

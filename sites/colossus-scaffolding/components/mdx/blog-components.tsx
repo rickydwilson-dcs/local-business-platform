@@ -270,6 +270,7 @@ export const CheckList: React.FC<CheckListProps> = ({ title, type = "check", chi
           const childProps = child.props as { children?: React.ReactNode };
           return (
             <li key={idx} className="flex items-start gap-3 text-surface-secondary">
+              {/* eslint-disable platform/no-hardcoded-tailwind-colors -- Intentional: success/check icon color */}
               {type === "check" && (
                 <svg
                   className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5"
@@ -285,6 +286,7 @@ export const CheckList: React.FC<CheckListProps> = ({ title, type = "check", chi
                   />
                 </svg>
               )}
+              {/* eslint-enable platform/no-hardcoded-tailwind-colors */}
               {type === "bullet" && (
                 <span className="w-2 h-2 bg-brand-primary rounded-full flex-shrink-0 mt-2" />
               )}

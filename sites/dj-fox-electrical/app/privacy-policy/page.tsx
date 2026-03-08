@@ -36,7 +36,7 @@ export default function PrivacyPolicyPage() {
         </div>
       </div>
 
-      <main className="min-h-screen bg-surface-background">
+      <div className="min-h-screen bg-surface-background">
         <article className="section-standard">
           <div className="container-standard max-w-4xl">
             <h1 className="heading-hero mb-4">Privacy Policy</h1>
@@ -129,6 +129,7 @@ export default function PrivacyPolicyPage() {
                   We may collect and process the following types of personal data:
                 </p>
                 <div className="space-y-4">
+                  {/* eslint-disable platform/no-hardcoded-tailwind-colors -- Intentional: semantic legal basis callout */}
                   <div className="bg-blue-50 rounded-lg p-4 border-l-4 border-blue-500">
                     <h3 className="font-semibold text-blue-800">Contact Information</h3>
                     <p className="text-blue-700 text-sm">
@@ -157,6 +158,7 @@ export default function PrivacyPolicyPage() {
                       notes.
                     </p>
                   </div>
+                  {/* eslint-enable platform/no-hardcoded-tailwind-colors */}
                 </div>
               </section>
 
@@ -428,7 +430,7 @@ export default function PrivacyPolicyPage() {
             </div>
           </div>
         </article>
-      </main>
+      </div>
     </>
   );
 }

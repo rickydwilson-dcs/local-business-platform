@@ -3,8 +3,22 @@ import tsPlugin from "@typescript-eslint/eslint-plugin";
 import tsParser from "@typescript-eslint/parser";
 import reactPlugin from "eslint-plugin-react";
 import reactHooksPlugin from "eslint-plugin-react-hooks";
+import noHardcodedTailwindColors from "../../tools/eslint/rules/no-hardcoded-tailwind-colors.mjs";
 
 export default [
+  {
+    files: ["app/**/*.{ts,tsx}", "components/**/*.{ts,tsx}"],
+    plugins: {
+      platform: {
+        rules: {
+          "no-hardcoded-tailwind-colors": noHardcodedTailwindColors,
+        },
+      },
+    },
+    rules: {
+      "platform/no-hardcoded-tailwind-colors": "error",
+    },
+  },
   {
     ignores: [
       "node_modules/**",

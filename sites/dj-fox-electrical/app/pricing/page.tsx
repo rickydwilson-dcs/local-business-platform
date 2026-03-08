@@ -95,7 +95,7 @@ export default function PricingPage() {
         </div>
       </div>
 
-      <main className="min-h-screen bg-surface-background">
+      <div className="min-h-screen bg-surface-background">
         {/* Full-Width Hero */}
         <PageHero
           title="Transparent Pricing"
@@ -435,7 +435,7 @@ export default function PricingPage() {
             </div>
           </div>
         </section>
-      </main>
+      </div>
 
       {/* Schema Markup */}
       <Schema

@@ -347,9 +347,11 @@ export default async function Page({ params }: { params: Promise<Params> }) {
                       </h3>
                       <p className="text-sm text-surface-foreground mb-3">{town.description}</p>
                       <div className="flex items-center justify-between">
+                        {/* eslint-disable platform/no-hardcoded-tailwind-colors -- Intentional: semantic status indicator */}
                         <span className="text-xs px-2 py-1 bg-green-100 text-green-700 rounded-full">
                           Local Specialists
                         </span>
+                        {/* eslint-enable platform/no-hardcoded-tailwind-colors */}
                         <svg
                           aria-hidden="true"
                           className="w-4 h-4 text-brand-primary group-hover:translate-x-1 transition-transform"

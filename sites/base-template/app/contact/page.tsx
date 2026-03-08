@@ -34,7 +34,7 @@ export default function ContactPage() {
         </div>
       </div>
 
-      <main className="min-h-screen bg-surface-background">
+      <div className="min-h-screen bg-surface-background">
         {/* Hero Section */}
         <section className="section-standard bg-gradient-to-b from-brand-primary/5 to-surface-background">
           <div className="container-standard text-center">
@@ -146,7 +146,7 @@ export default function ContactPage() {
             </div>
           </div>
         </section>
-      </main>
+      </div>
 
       {/* Schema Markup */}
       <Schema

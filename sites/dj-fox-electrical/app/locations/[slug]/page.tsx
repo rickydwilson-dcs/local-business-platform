@@ -111,7 +111,7 @@ export default async function LocationPage({ params }: { params: Promise<Params>
         </div>
       </div>
 
-      <main>
+      <div>
         {/* Hero Section */}
         <LocationHero
           title={fm.hero?.title || `Professional Services in ${locationName}`}
@@ -152,7 +152,7 @@ export default async function LocationPage({ params }: { params: Promise<Params>
           secondaryButtonText={`Call ${siteConfig.business.phone}`}
           secondaryButtonUrl={`tel:${siteConfig.business.phone.replace(/\s/g, '')}`}
         />
-      </main>
+      </div>
 
       <Schema
         org={{
