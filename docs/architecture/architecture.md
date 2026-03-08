@@ -80,7 +80,9 @@ Drop a new MDX file in the right directory, build, and a new page appears. No co
 
 ### 4. Shared Component Library
 
-`@platform/core-components` provides reusable UI components (heroes, service cards, footers, CTAs, analytics) that work with any site's theme. It exports raw TypeScript — no build step — and sites compile it directly.
+`@platform/core-components` provides reusable UI components (heroes, service cards, footers, CTAs, analytics) and shared utility factories that work with any site's theme. It exports raw TypeScript — no build step — and sites compile it directly.
+
+**Factory pattern for shared utilities:** Core-components exports factory functions (`createContentUtils`, `createSchemaGenerators`, `createMdxLoader`, `createSiteUtils`, `createContactInfo`, `createContactHandler`) that accept site-specific configuration. Each site's `lib/` directory contains thin shims (5-10 lines) that call these factories and re-export configured utilities, preserving `@/lib/*` import paths. For example, `lib/content.ts` in each site calls `createContentUtils({ getLocationSlugs, serviceSortFn })` and re-exports `getServices`, `getLocations`, etc. This eliminates code duplication while allowing per-site customization (e.g., colossus's custom service sorting).
 
 ### 5. Theme System (White-Labeling)
 
@@ -126,9 +128,9 @@ MDX File → gray-matter → Frontmatter Data → React Components → Rendered 
 ```
 
 1. MDX file contains YAML frontmatter (hero config, FAQs, keywords, etc.) and markdown body
-2. `lib/content.ts` reads the file, `gray-matter` splits frontmatter from content
+2. Site's `lib/content.ts` shim calls `createContentUtils()` from core-components; `gray-matter` splits frontmatter from content
 3. Frontmatter data populates React component props
-4. MDX body rendered via `next-mdx-remote` with custom components
+4. MDX body rendered via `createMdxLoader()` with injected custom components
 5. `generateMetadata()` creates SEO tags from frontmatter
 6. Static HTML output at build time
 

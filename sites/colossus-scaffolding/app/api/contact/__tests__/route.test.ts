@@ -110,7 +110,7 @@ describe("Contact API", () => {
       const data = await response.json();
 
       expect(response.status).toBe(200);
-      expect(data.message).toContain("received");
+      expect(data.message).toContain("Thank you");
     });
 
     it("should accept valid contact form with all optional fields", async () => {
@@ -131,7 +131,7 @@ describe("Contact API", () => {
       const data = await response.json();
 
       expect(response.status).toBe(200);
-      expect(data.message).toContain("received");
+      expect(data.message).toContain("Thank you");
     });
 
     it("should trim whitespace from inputs", async () => {
