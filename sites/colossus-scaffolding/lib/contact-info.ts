@@ -1,4 +1,4 @@
-import { createContactInfo } from '@platform/core-components';
+import { createContactInfo } from '@platform/core-components/lib/contact-info';
 import { siteConfig } from '@/site.config';
 
 export const {
