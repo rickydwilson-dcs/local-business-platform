@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { FAQAccordionItem } from "./faq-accordion-item";
 
 /**
  * FAQ item interface
@@ -79,20 +80,13 @@ export function FAQSection({
           {/* FAQ Items */}
           <div className="space-y-6">
             {items.map((item, i) => (
-              <div
+              <FAQAccordionItem
                 key={i}
-                className={`${isLocationVariant ? "bg-surface-subtle" : "bg-surface-background"} border border-surface-border rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow`}
-              >
-                <h3 className="text-lg font-semibold text-surface-foreground mb-3 flex items-start gap-3">
-                  <span className="flex-shrink-0 w-6 h-6 bg-brand-primary rounded-full flex items-center justify-center text-brand-on-primary text-sm font-bold">
-                    Q
-                  </span>
-                  {item.question}
-                </h3>
-                <div className="ml-9">
-                  <p className="text-surface-foreground leading-relaxed">{item.answer}</p>
-                </div>
-              </div>
+                question={item.question}
+                answer={item.answer}
+                index={i}
+                isLocationVariant={isLocationVariant}
+              />
             ))}
           </div>
 
@@ -112,7 +106,7 @@ export function FAQSection({
                 </Link>
                 {phone && (
                   <Link href={`tel:${phone.replace(/\s/g, "")}`} className="btn-secondary gap-2">
-                    <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
@@ -130,7 +124,7 @@ export function FAQSection({
               <p className="text-surface-foreground mb-4">Still have questions?</p>
               {phone ? (
                 <Link href={`tel:${phone.replace(/\s/g, "")}`} className="btn-primary gap-2">
-                  <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"

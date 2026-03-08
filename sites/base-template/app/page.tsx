@@ -91,7 +91,7 @@ export default async function HomePage() {
       <section className="section bg-gradient-to-b from-brand-primary/5 to-surface-background">
         <div className="container-narrow text-center">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-balance text-surface-foreground">
-            {siteConfig.name}
+            Professional Local Services in {siteConfig.business.address.city}
           </h1>
           <p className="text-xl md:text-2xl text-surface-muted-foreground mb-8 text-balance">
             {siteConfig.tagline}

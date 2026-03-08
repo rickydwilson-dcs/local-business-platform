@@ -21,6 +21,7 @@ import { loadMdx } from '@/lib/mdx';
 import { getImageUrl } from '@/lib/image';
 import { absUrl } from '@/lib/site';
 import { siteConfig } from '@/site.config';
+import { getServiceAreaSchema } from '@/lib/schema';
 
 export const dynamic = 'force-static';
 export const dynamicParams = false;
@@ -96,6 +97,9 @@ export default async function LocationPage({ params }: { params: Promise<Params>
   const locationName = fm.title;
   const heroImage = fm.hero?.image || fm.heroImage;
   const faqs = fm.faqs || [];
+
+  // SEO-003: LocalBusiness schema for location page
+  const locationSchema = getServiceAreaSchema(locationName, slug);
 
   const breadcrumbItems = [
     { name: 'Locations', href: '/locations' },

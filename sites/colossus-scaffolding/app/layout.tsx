@@ -30,6 +30,24 @@ export const metadata: Metadata = {
   },
   description:
     "Professional scaffolding services across South East England. TG20:21 compliant, CISRS qualified teams with over 15 years experience. Free quotes available.",
+  openGraph: {
+    type: "website",
+    locale: "en_GB",
+    siteName: siteConfig.business.name,
+    url: "/",
+    images: [
+      {
+        url: "/logo.svg",
+        width: 1200,
+        height: 630,
+        alt: siteConfig.business.name,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: ["/logo.svg"],
+  },
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {

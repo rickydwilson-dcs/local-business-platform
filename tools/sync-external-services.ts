@@ -378,6 +378,11 @@ async function fetchNewRelicMetrics(
   pageViews: number | null;
   uniqueVisitors: number | null;
 }> {
+  // SEC-004: Validate appName to prevent NRQL injection
+  if (!/^[a-zA-Z0-9_\-. ]+$/.test(appName)) {
+    throw new Error(`Invalid app name: "${appName}". Only alphanumeric characters, underscores, hyphens, dots, and spaces are allowed.`);
+  }
+
   // NRQL query to get web transaction metrics for a specific day
   // We use multiple queries to get different metrics
   const startTime = `${date} 00:00:00`;

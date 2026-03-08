@@ -71,7 +71,7 @@ export function Analytics({
       page_referrer: document.referrer || undefined,
     });
 
-    if (debugMode) {
+    if (process.env.NODE_ENV !== 'production' && debugMode) {
       console.log("GA4 initialized with ID:", gaId, "and initial page view sent");
     }
   }, [gaId, consent, debugMode]);
@@ -87,7 +87,7 @@ export function Analytics({
     // Track initial page view
     window.fbq("track", "PageView");
 
-    if (debugMode) {
+    if (process.env.NODE_ENV !== 'production' && debugMode) {
       console.log("Facebook Pixel initialized with ID:", facebookPixelId);
     }
   }, [facebookPixelId, debugMode]);
@@ -98,7 +98,7 @@ export function Analytics({
 
     window.gtag("config", googleAdsId);
 
-    if (debugMode) {
+    if (process.env.NODE_ENV !== 'production' && debugMode) {
       console.log("Google Ads initialized with ID:", googleAdsId);
     }
   }, [googleAdsId, debugMode]);

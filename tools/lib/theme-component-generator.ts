@@ -141,9 +141,11 @@ function validateAndFixTokenClasses(content: string): { content: string; violati
 export function fixBracketNotationProps(content: string): { content: string; fixCount: number } {
   let fixCount = 0;
   const fixed = content.replace(
-    /props\[['"]([a-z][a-z0-9]*(?:-[a-z0-9]+)*)['"]\]/g,
+    /props\[['"]([a-zA-Z_$][a-zA-Z0-9_$-]*)['"]\]/g,
     (_match, key: string) => {
-      const camelKey = key.replace(/-([a-z0-9])/g, (_: string, c: string) => c.toUpperCase());
+      const camelKey = key
+        .replace(/[-_]([a-zA-Z0-9])/g, (_: string, c: string) => c.toUpperCase())
+        .replace(/^[A-Z]/, (c) => c.toLowerCase());
       fixCount++;
       return `props.${camelKey}`;
     }
@@ -151,8 +153,46 @@ export function fixBracketNotationProps(content: string): { content: string; fix
   return { content: fixed, fixCount };
 }
 
+export function validateNoBracketProps(content: string): { valid: boolean; violations: string[] } {
+  const violations: string[] = [];
+  const regex = /props\[['"][^'"]+['"]\]/g;
+  let match;
+  while ((match = regex.exec(content)) !== null) {
+    const line = content.substring(0, match.index).split('\n').length;
+    const context = content.substring(match.index, match.index + 50);
+    violations.push(`Line ${line}: ${context}`);
+  }
+  return { valid: violations.length === 0, violations };
+}
+
+export function validatePropsAgainstInterface(content: string): { valid: boolean; undeclaredProps: string[] } {
+  // Extract prop names from the interface
+  const interfaceMatch = content.match(/interface\s+\w+Props\s*\{([^}]+)\}/s);
+  if (!interfaceMatch) return { valid: true, undeclaredProps: [] };
+
+  const declaredProps = new Set<string>();
+  const propRegex = /(\w+)\s*[?:]|(\w+)\s*:/g;
+  let propMatch;
+  while ((propMatch = propRegex.exec(interfaceMatch[1])) !== null) {
+    declaredProps.add(propMatch[1] || propMatch[2]);
+  }
+
+  // Extract prop references from the body (after the interface)
+  const bodyStart = content.indexOf(interfaceMatch[0]) + interfaceMatch[0].length;
+  const body = content.substring(bodyStart);
+  const usedProps = new Set<string>();
+  const usageRegex = /props\.(\w+)/g;
+  let usageMatch;
+  while ((usageMatch = usageRegex.exec(body)) !== null) {
+    usedProps.add(usageMatch[1]);
+  }
+
+  const undeclaredProps = [...usedProps].filter(p => !declaredProps.has(p));
+  return { valid: undeclaredProps.length === 0, undeclaredProps };
+}
+
 export function hasResidualBracketProps(content: string): boolean {
-  return /props\[['"][a-z]/.test(content);
+  return !validateNoBracketProps(content).valid;
 }
 
 // ============================================================================
@@ -304,10 +344,18 @@ async function generateSingleComponent(
           content = propsFixed;
         }
         // Hard-fail if bracket notation still remains after fix
-        if (hasResidualBracketProps(content)) {
-          warnings.push(`${blueprint.name}: Residual bracket-notation props detected after fix — using placeholder`);
+        const { valid: noBracket, violations: bracketViolations } = validateNoBracketProps(content);
+        if (!noBracket) {
+          warnings.push(`${blueprint.name}: Residual bracket-notation props detected after fix — using placeholder: ${bracketViolations[0]}`);
           content = placeholderComponent(blueprint);
           usedAI = false;
+        }
+        // Informational: check for undeclared props
+        if (usedAI) {
+          const { valid: propsValid, undeclaredProps } = validatePropsAgainstInterface(content);
+          if (!propsValid) {
+            warnings.push(`${blueprint.name}: Undeclared props used (informational): ${undeclaredProps.join(", ")}`);
+          }
         }
       }
     } else {

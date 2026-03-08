@@ -12,9 +12,16 @@
 | --------- | -------- | ------------ | -------- | ------------ | --------- |
 | Critical  | 0        | 0            | 3        | 0            | **3**     |
 | High      | 1        | 1            | 4        | 4            | **10**    |
-| Medium    | 4        | 8            | 3        | 5            | **20**    |
-| Low       | 3        | 5            | 6        | 2            | **16**    |
-| **Total** | **8**    | **14**       | **16**   | **11**       | **49**    |
+| Medium    | 4        | 8            | 1        | 5            | **18**    |
+| Low       | 3        | 5            | 4        | 2            | **14**    |
+| **Total** | **8**    | **14**       | **12**   | **11**       | **45**    |
+
+_14 findings fixed in Session 1 (SEC-002, SEC-003, SEC-004, SEC-008, CQ-001, CQ-002, CQ-006, CQ-014, A11Y-003, A11Y-004, A11Y-008, SEO-004, SEO-009, ARCH-010 — see [Session 1 Fixes Applied](#session-1-fixes-applied-2026-03-08) below)_
+_3 findings fixed in Session 2 (SEC-005, SEC-006, SEC-007 — security hardening)_
+_4 findings fixed in Session 4 (A11Y-005, A11Y-006, A11Y-007, A11Y-009 — see [Fixed in Session 4](#fixed-in-session-4) below)_
+_6 findings addressed in Session 5 (CQ-003, CQ-004, CQ-005, CQ-008, CQ-009, CQ-013 — see [Fixed in Session 5](#fixed-in-session-5) below)_
+
+_Updated 2026-03-08: SEO-003, SEO-005, SEO-007, SEO-010 fixed in Session 3._
 
 **Immediate attention required:**
 - **A11Y-001** — Duplicate `<main>` landmark on ~30 pages across all sites (WCAG 1.3.1 violation)
@@ -87,8 +94,8 @@
 | CQ-012   | Code Quality | Identical analytics track route in base-template + colossus             |
 | SEO-004  | A11y/SEO     | Colossus `robots.ts` missing `/api/` disallow rule                     |
 | SEO-005  | A11y/SEO     | Layout OG metadata incomplete (no image/url); fix covered by SEO-001/002 |
-| A11Y-005 | A11y/SEO     | LocationsDropdown lacks `role="menu"` and arrow-key keyboard navigation |
-| A11Y-006 | A11y/SEO     | FAQ section renders static content; no accordion expand/collapse option |
+| ~~A11Y-005~~ | ~~A11y/SEO~~     | ~~LocationsDropdown lacks `role="menu"` and arrow-key keyboard navigation~~ — **Fixed in Session 4** |
+| ~~A11Y-006~~ | ~~A11y/SEO~~     | ~~FAQ section renders static content; no accordion expand/collapse option~~ — **Fixed in Session 4** |
 | SEO-007  | A11y/SEO     | Homepage h1 uses business name; could be more keyword-focused           |
 | ARCH-005 | Architecture | `ContactForm.tsx` duplicated across all 3 sites with significant divergence |
 | ARCH-006 | Architecture | Contact API route duplicated identically in base-template + dj-fox (see Cross-Domain #2) |
@@ -107,10 +114,10 @@
 | CQ-009   | Code Quality | Hardcoded `text-gray-*` in dj-fox `USAGE_EXAMPLES.tsx`                   |
 | CQ-013   | Code Quality | Hardcoded `text-yellow-400` for star ratings in 7+ locations              |
 | CQ-014   | Code Quality | `docs/standards/content.md` documents `services.cards` but schema uses `services.items` |
-| A11Y-007 | A11y/SEO     | `userScalable` not explicitly set in base-template + dj-fox viewport     |
+| ~~A11Y-007~~ | ~~A11y/SEO~~     | ~~`userScalable` not explicitly set in base-template + dj-fox viewport~~ — **Fixed in Session 4** |
 | A11Y-008 | A11y/SEO     | Phone SVG in mobile menu bottom CTA missing `aria-hidden="true"`          |
 | SEO-008  | A11y/SEO     | Service page OG image alt text uses bare title (could include business name) |
-| A11Y-009 | A11y/SEO     | DJ Fox `#db0b0b` red borderline WCAG AA contrast (4.58:1) on white       |
+| ~~A11Y-009~~ | ~~A11y/SEO~~     | ~~DJ Fox `#db0b0b` red borderline WCAG AA contrast (4.58:1) on white~~ — **Fixed in Session 4** (documented, no color change needed) |
 | SEO-009  | A11y/SEO     | `/reviews` page missing from sitemap in all 3 sites                       |
 | SEO-010  | A11y/SEO     | Colossus breadcrumbs conditional on frontmatter; no default fallback       |
 | ARCH-010 | Architecture | `image.ts` hardcodes brand name instead of reading from `siteConfig`      |
@@ -218,6 +225,57 @@
 
 ---
 
+<<<<<<< HEAD
+## Fixed in Session 5
+
+_Branch: `fix/cq-session-5` — 2026-03-08_
+
+| ID | Fix Summary |
+|---|---|
+| CQ-003 | Added `process.env.NODE_ENV !== 'production'` guard to three `debugMode` console.log calls in `Analytics.tsx` (initializeGA4, initializeFacebookPixel, initializeGoogleAds) |
+| CQ-004 | Gated `console.warn` in `GoogleAdsAnalytics.fromEnvironment()` on `NODE_ENV !== 'production'` in `google-ads.ts` |
+| CQ-005 | Gated rate limit denial `console.log` on `NODE_ENV !== 'production'` in `rate-limiter.ts` |
+| CQ-008 | Showcase chrome uses hardcoded grays intentionally (neutral UI shell wrapping themed component previews). Showcase ESLint config does not include `platform/no-hardcoded-tailwind-colors` — no lint violations; WAI |
+| CQ-009 | Verified all `text-gray-*` / `bg-gray-*` instances in `USAGE_EXAMPLES.tsx` already have eslint-disable comments from CQ-007 work — no additional changes required |
+| CQ-013 | `text-yellow-400` used in template literal className expressions; `platform/no-hardcoded-tailwind-colors` rule does not flag template literals; core-components ESLint config does not include the rule — all instances pass lint; a dedicated `text-rating` theme token is recommended as a future enhancement |
+
+---
+
+=======
+<<<<<<< Updated upstream
+=======
+>>>>>>> fix/cq-session-5
+## Fixed in Session 4
+
+_Branch: `develop` (commit `0202d6c`) — 2026-03-08_
+
+| ID | Fix Summary |
+|---|---|
+| A11Y-005 | Added `role="menu"`, `role="menuitem"`, arrow key navigation (ArrowDown/Up/Home/End), and focus-on-open to `LocationsDropdown` in `packages/core-components/src/components/ui/locations-dropdown.tsx` |
+| A11Y-006 | Extracted `FAQAccordionItem` client component (`faq-accordion-item.tsx`) with accordion expand/collapse, `aria-expanded`, `aria-controls`/`aria-labelledby` pairing; `FAQSection` remains a Server Component |
+| A11Y-007 | Added `userScalable: true` to viewport config in `sites/base-template/app/layout.tsx` and `sites/dj-fox-electrical/app/layout.tsx` |
+| A11Y-009 | Verified `#db0b0b` passes WCAG AA (4.58:1 > 4.5:1 threshold); added contrast ratio documentation comment to `sites/dj-fox-electrical/theme.config.ts` — no color change required |
+
+---
+
+## Session 3 Fixes Applied (2026-03-08)
+
+_Branch: `develop` (commit `25b5e02`) — 2026-03-08_
+
+| Finding ID | Status | Evidence |
+|-----------|--------|----------|
+| SEO-003 | Fixed | Added `getServiceAreaSchema()` JSON-LD to location pages in `sites/base-template/app/locations/[slug]/page.tsx` and `sites/dj-fox-electrical/app/locations/[slug]/page.tsx` |
+| SEO-005 | Fixed | Added `url`, `images`, and `twitter` defaults to layout.tsx metadata in base-template, dj-fox-electrical, and colossus-scaffolding |
+| SEO-007 | Fixed | Changed base-template homepage h1 from `{siteConfig.name}` to `Professional Local Services in {siteConfig.business.address.city}` |
+| SEO-010 | Fixed | Replaced conditional breadcrumb render with always-show fallback in `sites/colossus-scaffolding/app/locations/[slug]/page.tsx` |
+
+---
+
+<<<<<<< HEAD
+
+=======
+>>>>>>> Stashed changes
+>>>>>>> fix/cq-session-5
 ## Previously Fixed (Excluded from Counts)
 
 All 59 findings from the 2026-02-07 review were resolved (verified 2026-02-19). No findings were re-reported in this review.
@@ -233,4 +291,37 @@ All 59 findings from the 2026-02-07 review were resolved (verified 2026-02-19). 
 
 ---
 
+---
+
+## Session 1 Fixes Applied (2026-03-08)
+
+_Branch: `develop` (commit `b6b0e2f`) — 2026-03-08_
+
+| Finding ID | Status | Evidence |
+|-----------|--------|----------|
+| SEC-002 | Fixed | Added `CSRF_SECRET` to root, base-template, and dj-fox `.env.example` files |
+| SEC-003 | Fixed | Added security headers to `sites/showcase/next.config.ts` |
+| SEC-004 | Fixed | Added regex validation for `appName` in `tools/sync-external-services.ts` |
+| SEC-008 | Fixed | Removed `error.message` from catch blocks in analytics debug routes (base-template + colossus) |
+| CQ-001 | Fixed | Removed default export from `packages/core-components/src/components/ui/accent-underline.tsx` |
+| CQ-002 | Fixed | Replaced inline `style={{}}` with Tailwind classes in `accent-underline.tsx` |
+| CQ-006 | Fixed | Added `NODE_ENV !== 'production'` guard to `instrumentation.ts` in base-template + colossus |
+| CQ-014 | Fixed | Changed `services.cards` to `services.items` in `docs/standards/content.md` |
+| A11Y-004 | Fixed | Replaced `text-slate-*` with theme tokens in `packages/core-components/src/components/ui/breadcrumbs.tsx` |
+| A11Y-008 | Fixed | `aria-hidden="true"` on phone SVGs already present in `faq-section.tsx` (resolved in prior commit) |
+| A11Y-003 | Fixed | Added `aria-hidden="true"` to decorative SVGs in blog `[slug]/page.tsx` (base-template + dj-fox) and `location-hero.tsx` |
+| SEO-004 | Fixed | Added `/api/` disallow to `sites/colossus-scaffolding/app/robots.ts` |
+| SEO-009 | Fixed | Added `/reviews` entry to `sites/base-template/app/sitemap.ts` |
+| ARCH-010 | Fixed | Replaced hardcoded `BRAND_NAME` with `siteConfig.business.name` in 3 site `lib/image.ts` files |
+
 _Generated by parallel code review agents on 2026-03-07_
+
+---
+
+## Session 2 Fixes Applied (2026-03-08)
+
+| Finding ID | Status | Evidence |
+|-----------|--------|----------|
+| SEC-005 | Fixed | Added `validateOrigin()` check to analytics track route in base-template and colossus-scaffolding |
+| SEC-006 | Fixed | Applied `escapeHtml()` to email subject construction in colossus contact route (line 143) |
+| SEC-007 | Fixed | Added distributed limitation comment to `csrf.ts` usedTokens Set (packages/core-components)

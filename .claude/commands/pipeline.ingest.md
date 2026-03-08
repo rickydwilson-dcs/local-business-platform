@@ -50,19 +50,7 @@ If the theme package was not created, STOP: "Pipeline did not create theme packa
 Copy base-template to create the test site:
 ```bash
 cp -r sites/base-template sites/test-<theme-name>
-```
-
-Clean up copied build artifacts (each as a separate command):
-```bash
-rm -rf sites/test-<theme-name>/node_modules
-```
-
-```bash
-rm -rf sites/test-<theme-name>/.next
-```
-
-```bash
-rm -rf sites/test-<theme-name>/.turbo
+rm -rf sites/test-<theme-name>/node_modules sites/test-<theme-name>/.next sites/test-<theme-name>/.turbo
 ```
 
 ## Step 4: Write Marker File
@@ -127,7 +115,24 @@ Where `<camelCaseThemeName>` is the theme name in camelCase (e.g., `lyra` → `l
 }
 ```
 
-**5c.** Update `sites/test-<theme-name>/package.json` — set `"name"` to `"test-<theme-name>"`.
+**5c.** Generate a CI-inert `sites/test-<theme-name>/package.json`:
+
+1. Read `sites/base-template/package.json`
+2. Use `generateTestSitePackageJson('test-<theme-name>', basePackageJson)` from `tools/lib/test-site-package.ts` to generate the test site package.json
+3. Write the result to `sites/test-<theme-name>/package.json`
+
+The utility strips all scripts except `dev`, `start`, and `clean`, and adds `"pipelineTestSite": true`.
+
+Verify the result is CI-inert:
+```bash
+node -e "
+  const p = require('./sites/test-<theme-name>/package.json');
+  const bad = ['build','type-check','lint','test'].filter(s => p.scripts?.[s]);
+  if (bad.length) { console.error('FAIL: test site has CI scripts:', bad); process.exit(1); }
+  if (!p.pipelineTestSite) { console.error('FAIL: missing pipelineTestSite marker'); process.exit(1); }
+  console.log('PASS: test site is CI-inert');
+"
+```
 
 **5d.** Update `sites/test-<theme-name>/site.config.ts` — find the `tagline` value and change it to `'Pipeline Test Site — <theme-name> theme'`.
 
@@ -221,42 +226,28 @@ The spec should:
 5. On failure, generate a diff image (red-highlighted pixels) in `test-results/diffs/`
 6. Save test screenshots to `test-results/screenshots/` for manual review
 
-**5h.** Wire theme TypeScript path into `sites/test-<theme-name>/tsconfig.json`:
+## Step 6: Reconcile Lockfile
 
-Read the test site's `tsconfig.json` and add path entries so TypeScript can resolve the generated theme's imports:
+1. Run `pnpm install --lockfile-only` at the monorepo root. This updates `pnpm-lock.yaml` to include the new test site workspace without modifying `node_modules`.
+2. If `--lockfile-only` fails, fall back to `pnpm install`.
+3. Verify: `pnpm install --frozen-lockfile` must succeed.
 
-1. Read `sites/test-<theme-name>/tsconfig.json`
-2. Add to `compilerOptions.paths`:
-   ```json
-   "@platform/themes/<theme-name>": ["../../packages/themes/<theme-name>/index.ts"],
-   "@platform/themes/<theme-name>/*": ["../../packages/themes/<theme-name>/*"]
-   ```
-3. Write back the updated file
-
-Verify:
+Then run type-check:
 ```bash
-node -e "
-  const ts = require('./sites/test-<theme-name>/tsconfig.json');
-  const key = '@platform/themes/<theme-name>';
-  if (!ts.compilerOptions?.paths?.[key]) { console.error('FAIL: missing theme path in tsconfig'); process.exit(1); }
-  console.log('PASS: theme path wired in tsconfig');
-"
-```
-
-## Step 6: Install and Verify
-
-```bash
-pnpm install
-```
-
-Then run type-check (use absolute path — do NOT use `cd &&`):
-```bash
-npx tsc --noEmit --project sites/test-<theme-name>/tsconfig.json
+cd sites/test-<theme-name> && npx tsc --noEmit
 ```
 
 If type-check fails, report the errors but continue — the user needs to see what went wrong with the generated theme.
 
-## Step 7: Report
+## Step 7: Stage Lockfile With Test Site
+
+Stage `pnpm-lock.yaml` alongside the test site directory. The lockfile MUST be in the same commit as the test site to prevent `ERR_PNPM_OUTDATED_LOCKFILE` on any branch.
+
+```bash
+git add sites/test-<theme-name>/ pnpm-lock.yaml
+```
+
+## Step 8: Report
 
 Output:
 - Theme name and source URL

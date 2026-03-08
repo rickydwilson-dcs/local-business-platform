@@ -28,6 +28,7 @@ export * from "./components/ui/coverage-map-section";
 export * from "./components/ui/coverage-stats-section";
 export * from "./components/ui/cta-section";
 export * from "./components/ui/event-details-band";
+export * from "./components/ui/faq-accordion-item";
 export * from "./components/ui/faq-section";
 // Note: footer.tsx imports getContentItems (@/lib/content → fs/promises) — server-only async component.
 // Cannot be in barrel because client components also import from this barrel.
