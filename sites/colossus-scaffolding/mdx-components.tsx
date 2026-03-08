@@ -1,5 +1,6 @@
-import type { MDXComponents as MDXMap } from "mdx/types";
-import { Schema } from "@platform/core-components";
+import type { MDXComponents as MDXMap } from 'mdx/types';
+import { createMdxComponentsMap } from '@platform/core-components/components/mdx/mdx-components';
+import { Schema } from '@platform/core-components';
 import {
   // HTML overrides
   MdxLink, MdxH2, MdxH3, MdxP, MdxUl, MdxOl, MdxLi, MdxStrong, MdxHr, MdxImg,
@@ -12,12 +13,15 @@ import {
   InfoBox, FeatureCard, FeatureGrid,
   ComparisonTable, ComparisonRow, CheckList,
   QuoteBlock, ImageWithCaption, StepByStep, Step,
-} from "./components/mdx";
+} from './components/mdx';
 
-// Default components map used by both native MDX pages (app/*.mdx)
-// and by next-mdx-remote (imported in [slug] pages via lib/mdx.tsx)
+const base = createMdxComponentsMap();
+
+// Merge: core base first, then colossus-specific overrides on top
 const mdxComponents: MDXMap = {
-  // HTML tag overrides
+  ...base,
+
+  // HTML tag overrides (colossus versions)
   a: MdxLink,
   h2: MdxH2,
   h3: MdxH3,
@@ -44,7 +48,7 @@ const mdxComponents: MDXMap = {
   ProcessStep,
   SidebarItem,
 
-  // Blog components
+  // Blog components (colossus versions override core InfoBox/QuoteBlock/ImageWithCaption)
   InfoBox,
   FeatureCard,
   FeatureGrid,
@@ -59,8 +63,6 @@ const mdxComponents: MDXMap = {
 
 export default mdxComponents;
 
-// This hook is how Next's native MDX discovers your components map.
-// It MUST be exported from a file named exactly "mdx-components.(js|tsx)" at the project root.
 export function useMDXComponents(components: MDXMap): MDXMap {
   return { ...mdxComponents, ...components };
 }

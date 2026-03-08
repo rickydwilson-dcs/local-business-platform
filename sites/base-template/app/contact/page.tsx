@@ -11,8 +11,7 @@ import { Phone, Mail, MapPin, Clock } from 'lucide-react';
 import { siteConfig } from '@/site.config';
 import { PHONE_DISPLAY, PHONE_TEL, BUSINESS_EMAIL, ADDRESS } from '@/lib/contact-info';
 import { absUrl } from '@/lib/site';
-import { Schema, Breadcrumbs } from '@platform/core-components';
-import { ContactForm } from '@/components/ui/ContactForm';
+import { Schema, Breadcrumbs, ContactForm } from '@platform/core-components';
 
 export const metadata: Metadata = {
   title: `Contact Us | ${siteConfig.business.name}`,

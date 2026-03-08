@@ -26,9 +26,9 @@ Build & deploy → independent Vercel project
 - **Components** — site-level UI components (hero, navigation, footer, service cards, etc.)
 - **Content examples** — sample MDX files for each content type
 - **Config files** — `site.config.ts` (business info), `theme.config.ts` (brand colors), `tailwind.config.ts`
-- **Lib utilities** — content readers, MDX loader, schema definitions
+- **Lib shims** — thin wrappers (5-10 lines each) that import factory functions from `@platform/core-components` and re-export configured utilities (`lib/content.ts`, `lib/schema.ts`, `lib/mdx.tsx`, `lib/site.ts`, `lib/contact-info.ts`)
 
-When creating a new site, the tool copies base-template and replaces the config values. The dynamic routing, components, and utilities carry over unchanged.
+When creating a new site, the tool copies base-template and replaces the config values. The dynamic routing, components, and lib shims carry over unchanged. The shims preserve `@/lib/*` import paths so page files don't need modification.
 
 ## The Intake System
 
@@ -144,14 +144,17 @@ npx tsx tools/create-site-from-project.ts --project tools/examples/sample-projec
 
 ## What Gets Customized vs What's Shared
 
-| Customized per site                             | Shared across all sites                      |
-| ----------------------------------------------- | -------------------------------------------- |
-| `site.config.ts` (business info, nav, features) | `packages/core-components` (UI components)   |
-| `theme.config.ts` (brand colors, typography)    | `packages/theme-system` (theming engine)     |
-| `content/` (all MDX files)                      | Dynamic route handlers (`[slug]/page.tsx`)   |
-| `public/` (favicon, images)                     | Content reading utilities (`lib/content.ts`) |
-| Vercel project config                           | MDX rendering (`lib/mdx.tsx`)                |
-| Domain/DNS                                      | Zod validation schemas                       |
+| Customized per site                             | Shared across all sites (via core-components factories) |
+| ----------------------------------------------- | ------------------------------------------------------- |
+| `site.config.ts` (business info, nav, features) | `createContentUtils()` — content reading, filtering     |
+| `theme.config.ts` (brand colors, typography)    | `createSchemaGenerators()` — JSON-LD structured data    |
+| `content/` (all MDX files)                      | `createMdxLoader()` — MDX rendering pipeline            |
+| `public/` (favicon, images)                     | `createSiteUtils()` — URL helpers, phone formatters     |
+| Vercel project config                           | `createContactInfo()` — business contact constants      |
+| Domain/DNS                                      | `createContactHandler()` — contact form API route       |
+|                                                 | UI components, theme system, Zod schemas                |
+
+Each site's `lib/` directory contains thin shims that call these factories with site-specific config (from `site.config.ts`) and re-export the results. For example, a site needing custom service sorting passes a `serviceSortFn` to `createContentUtils()`.
 
 ## After Creation
 
@@ -165,10 +168,9 @@ Once a new site exists in `sites/`:
 
 ## Updating Base Template
 
-When base-template improves (new component, better routing, bug fix), existing sites don't automatically get the change. Options:
+When base-template improves (new component, better routing, bug fix), most improvements flow automatically because shared logic lives in `packages/core-components` via factory functions. Sites only contain thin shims and config — the actual implementations are shared.
+
+For site-specific files (page layouts, custom components), options are:
 
 - **Manual cherry-pick** — copy the specific improvement into the existing site
 - **Full re-generation** — re-run create-site with the existing project file (preserves content, gets new structure)
-- **Shared packages** — improvements to `core-components` or `theme-system` apply to all sites automatically on next build
-
-The long-term goal is to minimize site-specific code so most improvements flow through shared packages.
