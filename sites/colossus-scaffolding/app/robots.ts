@@ -10,7 +10,7 @@ export default function robots() {
     (process.env.NODE_ENV === "production" && !!process.env.NEXT_PUBLIC_SITE_URL);
 
   return {
-    rules: [{ userAgent: "*", allow: isProd ? "/" : [], disallow: isProd ? [] : "/" }],
+    rules: [{ userAgent: "*", allow: isProd ? "/" : [], disallow: isProd ? ["/api/"] : "/" }],
     // Point to sitemap index which lists all section sitemaps
     sitemap: isProd ? `${baseUrl}/sitemap-index.xml` : undefined,
   };

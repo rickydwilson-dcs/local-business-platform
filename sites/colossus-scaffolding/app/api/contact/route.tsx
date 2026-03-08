@@ -139,10 +139,11 @@ export async function POST(request: Request): Promise<Response> {
       ip: submission.ip ? escapeHtml(submission.ip) : null,
     };
 
-    // Create email subject
+    // Create email subject (SEC-006: escape user-provided values to prevent injection)
     const emailSubject =
-      subject ||
-      `New enquiry from ${name}${service ? ` - ${service}` : ""}${location ? ` (${location})` : ""}`;
+      subject
+        ? escapeHtml(subject)
+        : `New enquiry from ${escapeHtml(name)}${service ? ` - ${escapeHtml(service)}` : ""}${location ? ` (${escapeHtml(location)})` : ""}`;
 
     // Create email HTML content (using escaped inputs to prevent XSS)
     const emailHtml = `

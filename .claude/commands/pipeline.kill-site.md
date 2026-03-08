@@ -43,27 +43,26 @@ Echo the resolved path before proceeding: "Removing: sites/<name>/"
 
 ## Step 3: Remove
 
-Remove tracked files from the git index and working tree:
-```bash
-git rm -rf sites/<name>/
-```
-
-Clean up any untracked artifacts (`.next/`, `node_modules/`, etc.):
 ```bash
 rm -rf sites/<name>/
 ```
 
 ## Step 4: Verify
 
-Check the directory was removed (single command — do NOT chain with `&&` or `||`):
 ```bash
-ls -d sites/<name>/ 2>/dev/null
+ls sites/<name>/ 2>/dev/null && echo "FAIL: directory still exists" || echo "OK: site removed"
 ```
 
-- If the command produces output (directory still exists): STOP with "FAIL: sites/<name>/ was not removed."
-- If the command produces no output (exit code non-zero): directory removed successfully — continue.
+## Step 5: Reconcile Lockfile
 
-## Step 5: Report
+1. Run `pnpm install --lockfile-only` at the monorepo root.
+2. If it fails, fall back to `pnpm install`.
+3. Stage `pnpm-lock.yaml` alongside the site removal.
+4. Report: "Lockfile updated — removed entries for test-<theme>"
+
+**Idempotency note:** If the site directory doesn't exist (already deleted), skip lockfile reconciliation unless `--reconcile-lockfile` is explicitly passed.
+
+## Step 6: Report
 
 - Confirm what was removed
 - Show `git status --short` for current state
@@ -76,4 +75,3 @@ ls -d sites/<name>/ 2>/dev/null
 - This command does NOT commit or push anything
 - This command does NOT remove the theme package — use `/pipeline.kill-theme` for that
 - This command does NOT remove `output/ingestion/<theme>/` — that's kept for debugging
-- No `pnpm install` needed — the workspace glob auto-discovers sites

@@ -227,7 +227,9 @@ export class GoogleAdsAnalytics {
     const accessToken = process.env.GOOGLE_ADS_ACCESS_TOKEN;
 
     if (!this.validateConfig(customerId, conversionActionId)) {
-      console.warn("Google Ads configuration missing or invalid");
+      if (process.env.NODE_ENV !== 'production') {
+        console.warn("Google Ads configuration missing or invalid");
+      }
       return null;
     }
 

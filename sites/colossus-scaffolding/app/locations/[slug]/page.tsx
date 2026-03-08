@@ -229,14 +229,19 @@ export default async function Page({ params }: { params: Promise<Params> }) {
   return (
     <PageLayout>
       <div className="relative -mt-10 -mx-6 lg:-mx-6">
-        {/* Breadcrumbs - always show if exists */}
-        {locationData.breadcrumbs && (
-          <div className="bg-surface-muted border-b">
-            <div className="container-standard py-4">
-              <Breadcrumbs items={locationData.breadcrumbs} />
-            </div>
+        {/* Breadcrumbs - show from frontmatter or generate default */}
+        <div className="bg-surface-muted border-b">
+          <div className="container-standard py-4">
+            <Breadcrumbs
+              items={
+                locationData.breadcrumbs || [
+                  { name: 'Locations', href: '/locations' },
+                  { name: locationData.title, href: `/locations/${slug}`, current: true },
+                ]
+              }
+            />
           </div>
-        )}
+        </div>
 
         {/* Hero - always show */}
         <HeroSection
