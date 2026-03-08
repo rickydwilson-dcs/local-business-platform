@@ -7,10 +7,9 @@
 
 import Link from "next/link";
 import { Metadata } from "next";
-import { Schema, Breadcrumbs } from "@platform/core-components";
+import { Schema, Breadcrumbs, ContactForm } from "@platform/core-components";
 import { absUrl } from "@/lib/site";
 import { PHONE_DISPLAY, PHONE_TEL, BUSINESS_EMAIL } from "@/lib/contact-info";
-import { ContactForm } from "@/components/ui/ContactForm";
 import { siteConfig } from "@/site.config";
 
 export const metadata: Metadata = {
@@ -62,7 +61,36 @@ export default function ContactPage() {
         <div className="grid lg:grid-cols-3 gap-12">
           {/* Contact Form */}
           <div className="lg:col-span-2">
-            <ContactForm />
+            <ContactForm
+              services={[
+                "Access Scaffolding",
+                "Facade Scaffolding",
+                "Edge Protection",
+                "Temporary Roof Systems",
+                "Industrial Scaffolding",
+                "Suspended Scaffolding",
+                "Scaffold Towers",
+                "Other",
+              ]}
+              serviceAreas={["East Sussex", "West Sussex", "Kent", "Surrey", "Other"]}
+              variant="detailed"
+              extraFields={[
+                {
+                  name: "projectType",
+                  label: "Project Type",
+                  type: "select",
+                  options: ["Residential", "Commercial", "Industrial"],
+                  required: true,
+                  defaultValue: "residential",
+                },
+                {
+                  name: "urgency",
+                  label: "Urgency",
+                  type: "select",
+                  options: ["Standard", "Urgent", "Emergency"],
+                },
+              ]}
+            />
           </div>
 
           {/* Contact Information */}

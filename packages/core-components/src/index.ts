@@ -21,6 +21,7 @@ export * from "./components/ui/capability-showcase";
 export * from "./components/ui/card-grid";
 export * from "./components/ui/certificate-gallery";
 export * from "./components/ui/certificate-lightbox";
+export * from "./components/ui/contact-form";
 export * from "./components/ui/content-card";
 export * from "./components/ui/content-grid";
 export * from "./components/ui/coverage-areas";
@@ -103,6 +104,9 @@ export * from "./types/site-config";
 //   import { getContentItems } from "@/lib/content";
 //   import { absUrl } from "@/lib/site";
 //   import { getServices } from "@/lib/services";
+
+// API route factories depend on rate-limiter (Supabase) — import via subpath:
+//   import { createContactHandler } from "@platform/core-components/src/lib/api/contact-route";
 
 // Analytics components depend on site-specific @/lib/analytics/types.
 // Import directly from subpaths if needed:

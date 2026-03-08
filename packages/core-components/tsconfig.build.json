@@ -21,6 +21,7 @@
     "src/components/mdx/mdx-components.tsx",
     "src/lib/rate-limiter.ts",
     "src/lib/api/analytics-route.ts",
+    "src/lib/api/contact-route.ts",
     "src/components/templates/content-page.tsx"
   ]
 }

@@ -11,8 +11,7 @@ import { Phone, Mail, MapPin, Clock } from 'lucide-react';
 import { siteConfig } from '@/site.config';
 import { PHONE_DISPLAY, PHONE_TEL, BUSINESS_EMAIL, ADDRESS } from '@/lib/contact-info';
 import { absUrl } from '@/lib/site';
-import { Schema, AccentUnderline, PageHeroImage, InfoCard } from '@platform/core-components';
-import { ContactForm } from '@/components/ui/ContactForm';
+import { Schema, AccentUnderline, PageHeroImage, InfoCard, ContactForm } from '@platform/core-components';
 
 export const metadata: Metadata = {
   title: `Contact Us | ${siteConfig.business.name}`,
@@ -27,6 +26,11 @@ export default function ContactPage() {
     { name: 'Home', href: '/' },
     { name: 'Contact', href: '/contact', current: true },
   ];
+
+  // Map towns to serviceAreas format for the shared form
+  const locationNames = (siteConfig.serviceAreaRegions?.[0]?.towns || []).map(
+    (t: { name: string }) => t.name
+  );
 
   return (
     <>
@@ -76,7 +80,7 @@ export default function ContactPage() {
                 needs.
               </p>
               <ContactForm
-                locations={siteConfig.serviceAreaRegions?.[0]?.towns || []}
+                serviceAreas={locationNames}
                 darkMode={true}
               />
             </div>
