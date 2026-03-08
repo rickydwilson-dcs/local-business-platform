@@ -18,6 +18,7 @@
     "**/*.test.ts",
     "**/*.test.tsx",
     "src/lib/mdx.tsx",
+    "src/components/mdx/mdx-components.tsx",
     "src/lib/rate-limiter.ts",
     "src/lib/api/analytics-route.ts",
     "src/components/templates/content-page.tsx"
