@@ -10,11 +10,11 @@ import {
   generateImageAlt as _generateImageAlt,
   generateImageTitle as _generateImageTitle,
 } from '@platform/core-components/lib/image';
+import { siteConfig } from '@/site.config';
 
 export { getImageUrl, getImageSizes, isValidImagePath };
 
-// TODO: Replace with actual business name from site.config
-const BRAND_NAME = 'Your Business';
+const BRAND_NAME = siteConfig.business.name;
 
 export function generateImageAlt(
   serviceName: string,

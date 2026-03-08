@@ -56,10 +56,8 @@ const parseText = (
       return (
         <span
           key={index}
-          className="accent-underline"
+          className="accent-underline underline decoration-[var(--color-brand-primary)]"
           style={{
-            textDecoration: "underline",
-            textDecorationColor: "var(--color-brand-primary)",
             textDecorationThickness: `${underlineThickness}px`,
             textUnderlineOffset: `${underlineOffset}px`,
           }}
@@ -85,4 +83,3 @@ export const AccentUnderline: React.FC<AccentUnderlineProps> = ({
   return <Component className={className}>{parsedContent}</Component>;
 };
 
-export default AccentUnderline;

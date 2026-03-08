@@ -119,7 +119,7 @@ specialists:
     - title: "Residential"
       description: "Home scaffolding solutions"
 services:
-  cards:
+  items:
     - title: "Access Scaffolding"
       href: "/services/access-scaffolding"
 pricing:

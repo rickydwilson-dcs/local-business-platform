@@ -10,10 +10,11 @@ import {
   generateImageAlt as _generateImageAlt,
   generateImageTitle as _generateImageTitle,
 } from "@platform/core-components/lib/image";
+import { siteConfig } from "@/site.config";
 
 export { getImageUrl, getImageSizes, isValidImagePath };
 
-const BRAND_NAME = "Colossus Scaffolding";
+const BRAND_NAME = siteConfig.business.name;
 
 export function generateImageAlt(
   serviceName: string,
