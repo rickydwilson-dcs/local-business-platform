@@ -26,7 +26,7 @@ const HomeIcon = () => (
 
 const ChevronRightIcon = () => (
   <svg
-    className="h-5 w-5 flex-shrink-0 text-slate-400"
+    className="h-5 w-5 flex-shrink-0 text-surface-muted"
     fill="currentColor"
     viewBox="0 0 20 20"
     aria-hidden="true"
@@ -47,7 +47,7 @@ export function Breadcrumbs({ items, className = "" }: BreadcrumbsProps) {
           <div>
             <Link
               href="/"
-              className="text-slate-400 hover:text-slate-500 transition-colors"
+              className="text-surface-muted hover:text-surface-foreground transition-colors"
               aria-label="Home"
             >
               <HomeIcon />
@@ -60,13 +60,13 @@ export function Breadcrumbs({ items, className = "" }: BreadcrumbsProps) {
             <div className="flex items-center">
               <ChevronRightIcon />
               {item.current ? (
-                <span className="ml-2 text-sm font-medium text-slate-900" aria-current="page">
+                <span className="ml-2 text-sm font-medium text-surface-foreground" aria-current="page">
                   {item.name}
                 </span>
               ) : (
                 <Link
                   href={item.href}
-                  className="ml-2 text-sm font-medium text-slate-500 hover:text-slate-700 transition-colors"
+                  className="ml-2 text-sm font-medium text-surface-muted hover:text-surface-foreground transition-colors"
                 >
                   {item.name}
                 </Link>

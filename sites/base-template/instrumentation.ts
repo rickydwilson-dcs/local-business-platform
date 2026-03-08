@@ -12,6 +12,8 @@ export async function register() {
     // Import NewRelic agent
     await import("newrelic");
 
-    console.log("✅ NewRelic instrumentation loaded");
+    if (process.env.NODE_ENV !== "production") {
+      console.log("✅ NewRelic instrumentation loaded");
+    }
   }
 }

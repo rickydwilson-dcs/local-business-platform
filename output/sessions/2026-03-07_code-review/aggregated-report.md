@@ -17,6 +17,7 @@
 | **Total** | **5**    | **14**       | **16**   | **11**       | **46**    |
 
 _Updated 2026-03-08: SEC-005 (Medium), SEC-006 (Low), SEC-007 (Low) fixed in Session 2._
+_Updated 2026-03-08: SEO-003, SEO-005, SEO-007, SEO-010 fixed in Session 3._
 
 **Immediate attention required:**
 - **A11Y-001** — Duplicate `<main>` landmark on ~30 pages across all sites (WCAG 1.3.1 violation)
@@ -220,6 +221,35 @@ _Updated 2026-03-08: SEC-005 (Medium), SEC-006 (Low), SEC-007 (Low) fixed in Ses
 
 ---
 
+<<<<<<< Updated upstream
+=======
+## Fixed in Session 4
+
+_Branch: `develop` (commit `0202d6c`) — 2026-03-08_
+
+| ID | Fix Summary |
+|---|---|
+| A11Y-005 | Added `role="menu"`, `role="menuitem"`, arrow key navigation (ArrowDown/Up/Home/End), and focus-on-open to `LocationsDropdown` in `packages/core-components/src/components/ui/locations-dropdown.tsx` |
+| A11Y-006 | Extracted `FAQAccordionItem` client component (`faq-accordion-item.tsx`) with accordion expand/collapse, `aria-expanded`, `aria-controls`/`aria-labelledby` pairing; `FAQSection` remains a Server Component |
+| A11Y-007 | Added `userScalable: true` to viewport config in `sites/base-template/app/layout.tsx` and `sites/dj-fox-electrical/app/layout.tsx` |
+| A11Y-009 | Verified `#db0b0b` passes WCAG AA (4.58:1 > 4.5:1 threshold); added contrast ratio documentation comment to `sites/dj-fox-electrical/theme.config.ts` — no color change required |
+
+---
+
+## Session 3 Fixes Applied (2026-03-08)
+
+_Branch: `develop` (commit `25b5e02`) — 2026-03-08_
+
+| Finding ID | Status | Evidence |
+|-----------|--------|----------|
+| SEO-003 | Fixed | Added `getServiceAreaSchema()` JSON-LD to location pages in `sites/base-template/app/locations/[slug]/page.tsx` and `sites/dj-fox-electrical/app/locations/[slug]/page.tsx` |
+| SEO-005 | Fixed | Added `url`, `images`, and `twitter` defaults to layout.tsx metadata in base-template, dj-fox-electrical, and colossus-scaffolding |
+| SEO-007 | Fixed | Changed base-template homepage h1 from `{siteConfig.name}` to `Professional Local Services in {siteConfig.business.address.city}` |
+| SEO-010 | Fixed | Replaced conditional breadcrumb render with always-show fallback in `sites/colossus-scaffolding/app/locations/[slug]/page.tsx` |
+
+---
+
+>>>>>>> Stashed changes
 ## Previously Fixed (Excluded from Counts)
 
 All 59 findings from the 2026-02-07 review were resolved (verified 2026-02-19). No findings were re-reported in this review.
