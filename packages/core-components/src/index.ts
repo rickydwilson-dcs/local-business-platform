@@ -88,6 +88,11 @@ export * from "./lib/content-schemas";
 export * from "./lib/schema";
 export * from "./lib/schema-types";
 
+// Export shared utility factories
+export * from "./lib/site-utils";
+export { createContactInfo } from "./lib/contact-info";
+export type { ContactInfoConfig } from "./lib/contact-info";
+
 // Export platform-level types
 export * from "./types/site-config";
 
