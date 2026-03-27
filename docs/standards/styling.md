@@ -361,6 +361,16 @@ Before completing any styling work:
 | Transition | `transition-fast` (150ms), `transition-normal` (200ms), `transition-slow` (300ms)                                              |
 | Navigation | `h-nav`, `pt-nav`, `mt-nav`                                                                                                    |
 
+### Site-specific utility classes
+
+Sites may define additional utility classes in their `globals.css` for patterns not covered by the shared theme. These follow the same `@apply` convention and must use theme tokens (no hardcoded values). Examples from DJ Fox Electrical:
+
+| Class | Purpose |
+|---|---|
+| `.noise-overlay` | Adds a subtle SVG grain texture over flat/solid-colour sections to break digital flatness. Applied to dark CTA sections and stats strips. |
+| `.stat-value` | Enables `font-variant-numeric: tabular-nums` for data values (stats, counts) so numbers align consistently. |
+| `.location-pill` / `.location-pill-arrow` | Styled link pill for location grids — handles hover border, background tint, and arrow translation without inline JSX classes. |
+
 See [Theming Guide](../guides/theming.md) for full token reference and configuration details.
 
 ## Related Standards

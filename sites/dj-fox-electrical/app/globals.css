@@ -18,7 +18,23 @@
 
   body {
     @apply bg-surface-background text-surface-foreground;
-    font-feature-settings: 'rlig' 1, 'calt' 1;
+    font-family: var(--font-outfit), 'Outfit', system-ui, -apple-system, sans-serif;
+    font-feature-settings: 'rlig' 1, 'calt' 1, 'tnum' 0;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-outfit), 'Outfit', system-ui, -apple-system, sans-serif;
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Full-viewport sections use dvh to prevent iOS Safari layout jump */
+  .min-h-screen {
+    min-height: 100dvh;
   }
 }
 
@@ -27,4 +43,48 @@ nav [class*="absolute"][class*="left-0"][class*="w-[900px]"] {
   left: 50% !important;
   transform: translateX(-50%);
   margin-top: 0.5rem;
+}
+
+/* Subtle noise overlay — add to any section for texture over flat backgrounds */
+.noise-overlay {
+  position: relative;
+}
+.noise-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  pointer-events: none;
+  z-index: 0;
+}
+.noise-overlay > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Stats bar — tabular numbers for data display */
+.stat-value {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum' 1;
+}
+
+/* Location pill hover — more decisive on-brand feel */
+.location-pill {
+  @apply flex items-center justify-between px-5 py-4 rounded-xl border border-surface-card-border;
+  @apply hover:border-brand-primary transition-all duration-200;
+  background-color: transparent;
+}
+.location-pill:hover {
+  background-color: color-mix(in srgb, var(--color-brand-primary) 5%, transparent);
+}
+
+.location-pill:hover .location-pill-arrow {
+  transform: translateX(4px);
+  color: var(--color-brand-primary);
+}
+
+.location-pill-arrow {
+  transition: transform 0.2s ease, color 0.2s ease;
+  color: var(--color-surface-muted-foreground);
 }

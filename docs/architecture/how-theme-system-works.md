@@ -404,6 +404,7 @@ Because overlay colors are registered in Tailwind's `theme.extend.colors`, stand
 | Card hover reveal          | `bg-overlay-primary` | Brand-colored tint adds visual interest on interaction |
 | Frosted content panel      | `bg-overlay-light`   | Lightens content beneath while maintaining context     |
 | Brand-forward hero         | `bg-overlay-primary` | Tints hero image with brand color identity             |
+| Flat CTA / stats sections  | `.noise-overlay`     | SVG grain texture breaks digital flatness on solid-colour backgrounds without adding real images |
 
 ## WCAG Contrast Validation
 
