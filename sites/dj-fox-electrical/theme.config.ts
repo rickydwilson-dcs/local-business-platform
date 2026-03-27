@@ -42,8 +42,8 @@ export const themeConfig: DeepPartialThemeConfig = {
 
   typography: {
     fontFamily: {
-      sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
-      heading: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+      sans: ['var(--font-outfit)', 'Outfit', 'system-ui', '-apple-system', 'sans-serif'],
+      heading: ['var(--font-outfit)', 'Outfit', 'system-ui', '-apple-system', 'sans-serif'],
     },
     // Typography scale uses defaults from theme-system
   },

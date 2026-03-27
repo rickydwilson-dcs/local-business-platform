@@ -1,6 +1,14 @@
 import type { Metadata, Viewport } from 'next';
+import { Outfit } from 'next/font/google';
 import './globals.css';
 import { siteConfig } from '@/site.config';
+
+const outfit = Outfit({
+  subsets: ['latin'],
+  variable: '--font-outfit',
+  display: 'swap',
+  weight: ['400', '500', '600', '700', '800'],
+});
 import { PHONE_DISPLAY, PHONE_TEL } from '@/lib/contact-info';
 import { getAllCounties } from '@/lib/locations';
 import { SiteHeader, PageShell, ThemeProvider } from '@platform/core-components';
@@ -54,7 +62,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   );
 
   return (
-    <html lang="en-GB">
+    <html lang="en-GB" className={outfit.variable}>
       <head>
         {/* Geo meta tags for local SEO */}
         {siteConfig.business.geo && (

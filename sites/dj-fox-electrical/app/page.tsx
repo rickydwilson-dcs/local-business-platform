@@ -5,9 +5,12 @@ import { getLocations } from '@/lib/content';
 import { PHONE_DISPLAY, PHONE_TEL } from '@/lib/contact-info';
 import { absUrl } from '@/lib/site';
 import { getLocalBusinessSchema } from '@/lib/schema';
-import { Phone, Shield, Clock, Award, Users } from 'lucide-react';
-import { HeroWithImage, InfoCard, CircularIconCard, ImageOverlayCard } from '@platform/core-components';
+import { Phone, Shield, Clock, Award, Users, ArrowRight } from 'lucide-react';
+import { HeroWithImage, ImageOverlayCard } from '@platform/core-components';
 import { getServiceIcon } from '@/lib/service-icons';
+import { FadeIn } from '@/components/motion/fade-in';
+import { StaggerChildren, StaggerItem } from '@/components/motion/stagger-children';
+import { MagneticButton } from '@/components/motion/magnetic-button';
 
 export const metadata: Metadata = {
   title: 'Professional Electrical Services in Eastbourne | D J Fox Electrical',
@@ -43,10 +46,8 @@ export const metadata: Metadata = {
 };
 
 export default async function HomePage() {
-  // Fetch actual locations from content
   const allLocations = await getLocations();
 
-  // Select the 6 main towns for homepage display (largest in East Sussex)
   const priorityLocationSlugs = [
     'eastbourne',
     'hastings',
@@ -56,7 +57,6 @@ export default async function HomePage() {
     'hailsham',
   ];
 
-  // Filter and sort locations by priority
   const locations = allLocations
     .filter((loc) => priorityLocationSlugs.includes(loc.slug))
     .sort((a, b) => priorityLocationSlugs.indexOf(a.slug) - priorityLocationSlugs.indexOf(b.slug));
@@ -70,23 +70,14 @@ export default async function HomePage() {
     name: siteConfig.business.name,
     url: absUrl('/'),
     description: siteConfig.tagline,
-    publisher: {
-      '@id': absUrl('/#organization'),
-    },
+    publisher: { '@id': absUrl('/#organization') },
     inLanguage: 'en-GB',
   };
 
   const breadcrumbSchema = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
-    itemListElement: [
-      {
-        '@type': 'ListItem',
-        position: 1,
-        name: 'Home',
-        item: absUrl('/'),
-      },
-    ],
+    itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Home', item: absUrl('/') }],
   };
 
   return (
@@ -104,7 +95,7 @@ export default async function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
-      {/* Hero Section - Full-width image with accent */}
+      {/* Hero */}
       <HeroWithImage
         imageSrc="djfoxelectrical/hero/hero-electrician-work.jpg"
         imageAlt="Professional electrician working on electrical panel in Eastbourne"
@@ -119,217 +110,258 @@ export default async function HomePage() {
         ctaSecondary={{ label: 'Our Services', href: '/services' }}
       />
 
-      {/* Stats Section - White cards with shadows, overlapping hero */}
-      <section className="py-16 -mt-16 relative z-10">
+      {/* Stats strip — horizontal data bar, no symmetric cards */}
+      <section className="bg-surface-inverse border-b border-surface-border noise-overlay">
         <div className="container-narrow">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            <InfoCard icon={Shield} heading="NICEIC" text="Approved Contractor" />
-            <InfoCard icon={Clock} heading="24/7" text="Emergency Service" />
-            <InfoCard icon={Award} heading="15+ Years" text="Expertise" />
-            <InfoCard icon={Users} heading="100%" text="Satisfaction" />
-          </div>
-        </div>
-      </section>
-
-      {/* Services Overview - Circular icons, white background */}
-      <section className="section bg-white">
-        <div className="container-narrow">
-          <h2 className="heading-section text-center">
-            Our <span className="accent-underline">Electrical</span> Services
-          </h2>
-          <p className="text-center text-surface-muted-foreground mb-12 max-w-2xl mx-auto">
-            Professional electrical services for homes and businesses across Eastbourne and East
-            Sussex
-          </p>
-          <div className="grid md:grid-cols-3 gap-8">
-            {siteConfig.services.slice(0, 6).map((service) => (
-              <CircularIconCard
-                key={service.slug}
-                icon={getServiceIcon(service.slug)}
-                title={service.title}
-                description={service.description}
-                linkText="Learn More"
-                linkHref={`/services/${service.slug}`}
-              />
+          <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-surface-border">
+            {[
+              { icon: Shield, value: 'NICEIC', label: 'Approved Contractor' },
+              { icon: Clock, value: '24/7', label: 'Emergency Service' },
+              { icon: Award, value: '15+', label: 'Years Expertise' },
+              { icon: Users, value: '1,000+', label: 'Jobs Completed' },
+            ].map(({ icon: Icon, value, label }) => (
+              <div key={label} className="flex items-center gap-4 px-6 py-8">
+                <Icon className="w-6 h-6 text-brand-primary flex-shrink-0" aria-hidden="true" />
+                <div>
+                  <p className="text-xl font-bold text-white tracking-tight stat-value">{value}</p>
+                  <p className="text-xs text-surface-muted-foreground uppercase tracking-widest">{label}</p>
+                </div>
+              </div>
             ))}
           </div>
-          <div className="text-center mt-12">
-            <Link href="/services" className="btn-secondary">
-              View All Services
-            </Link>
-          </div>
         </div>
       </section>
 
-      {/* Category Image Grid - Gray subtle background */}
-      <section className="section bg-surface-subtle">
-        <div className="container-narrow">
-          <h2 className="heading-section text-center">Check Your Electrical Needs</h2>
-          <p className="text-center text-surface-muted-foreground mb-12 max-w-2xl mx-auto">
-            From new installations to emergency repairs, we cover all your electrical requirements
-          </p>
-          <div className="grid md:grid-cols-3 gap-6">
-            <ImageOverlayCard
-              imageSrc="djfoxelectrical/categories/installation-work.jpg"
-              imageAlt="Electrical installation services"
-              category="Installation"
-              title="New Installations"
-              href="/services#installation"
-            />
-            <ImageOverlayCard
-              imageSrc="djfoxelectrical/categories/maintenance-work.jpg"
-              imageAlt="Electrical maintenance services"
-              category="Maintenance"
-              title="Regular Maintenance"
-              href="/services#maintenance"
-            />
-            <ImageOverlayCard
-              imageSrc="djfoxelectrical/categories/repair-work.jpg"
-              imageAlt="Electrical repair services"
-              category="Repair"
-              title="Expert Repairs"
-              href="/services#repair"
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* Service Areas - White background */}
+      {/* Services — 2-col grid with header row spanning left */}
       <section className="section bg-white">
         <div className="container-narrow">
-          <h2 className="heading-section text-center">
-            Areas We <span className="accent-underline">Serve</span>
-          </h2>
-          <p className="text-center text-surface-muted-foreground mb-12 max-w-2xl mx-auto">
-            Providing expert electrical services across East Sussex and surrounding areas
-          </p>
-          <div className="grid md:grid-cols-3 gap-6">
-            {/* If we have content-based locations, use those */}
-            {locations.length > 0
-              ? locations.slice(0, 6).map((location) => (
-                  <Link
-                    key={location.slug}
-                    href={`/locations/${location.slug}`}
-                    className="card group text-center hover:shadow-lg transition-all duration-300 hover:border-brand-primary hover:-translate-y-1"
-                  >
-                    <p className="text-lg font-semibold group-hover:text-brand-primary transition-colors">
-                      {location.title}
-                    </p>
-                    {location.description && (
-                      <p className="text-sm text-surface-muted-foreground mt-2 line-clamp-2">
-                        {location.description}
-                      </p>
-                    )}
-                  </Link>
-                ))
-              : // Fallback to config-based service areas (also clickable)
-                siteConfig.serviceAreaRegions?.[0]?.towns.slice(0, 6).map((town) => (
-                  <Link
-                    key={town.slug}
-                    href={`/locations/${town.slug}`}
-                    className="card group text-center hover:shadow-lg transition-all duration-300 hover:border-brand-primary hover:-translate-y-1"
-                  >
-                    <p className="text-lg font-semibold group-hover:text-brand-primary transition-colors">
-                      {town.name}
-                    </p>
-                  </Link>
-                ))}
-          </div>
-          <div className="text-center mt-8">
-            <Link href="/locations" className="btn-secondary">
-              View All Locations
-            </Link>
+          <div className="grid md:grid-cols-[1fr_1fr] gap-x-12 gap-y-0 items-start">
+            {/* Left: sticky header */}
+            <FadeIn direction="left">
+              <div className="md:sticky md:top-24 pb-8 md:pb-0">
+                <p className="text-sm font-medium uppercase tracking-widest text-brand-primary mb-3">
+                  What We Do
+                </p>
+                <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-surface-foreground mb-6">
+                  Our <span className="accent-underline">Electrical</span> Services
+                </h2>
+                <p className="text-surface-muted-foreground leading-relaxed mb-8">
+                  Professional electrical services for homes and businesses across Eastbourne and East Sussex.
+                </p>
+                <Link href="/services" className="btn-secondary inline-flex items-center gap-2">
+                  View all services
+                  <ArrowRight className="w-4 h-4" aria-hidden="true" />
+                </Link>
+              </div>
+            </FadeIn>
+
+            {/* Right: service list */}
+            <StaggerChildren className="divide-y divide-surface-card-border" staggerDelay={0.07}>
+              {siteConfig.services.slice(0, 6).map((service) => {
+                const Icon = getServiceIcon(service.slug);
+                return (
+                  <StaggerItem key={service.slug}>
+                    <Link
+                      href={`/services/${service.slug}`}
+                      className="group flex items-start gap-4 py-6 hover:bg-surface-muted -mx-4 px-4 rounded-xl transition-colors duration-200"
+                    >
+                      <div className="w-10 h-10 rounded-xl bg-brand-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:bg-brand-primary/20 transition-colors">
+                        <Icon className="w-5 h-5 text-brand-primary" aria-hidden="true" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <h3 className="font-semibold text-surface-foreground group-hover:text-brand-primary transition-colors mb-1">
+                          {service.title}
+                        </h3>
+                        <p className="text-sm text-surface-muted-foreground leading-relaxed line-clamp-2">
+                          {service.description}
+                        </p>
+                      </div>
+                      <ArrowRight className="w-4 h-4 text-surface-muted-foreground group-hover:text-brand-primary group-hover:translate-x-1 transition-all duration-200 flex-shrink-0 mt-1 hidden md:block" aria-hidden="true" />
+                    </Link>
+                  </StaggerItem>
+                );
+              })}
+            </StaggerChildren>
           </div>
         </div>
       </section>
 
-      {/* Why Choose Us - Light gray background */}
-      <section className="section bg-surface-subtle">
+      {/* Category Image Grid */}
+      <section className="section bg-surface-muted">
         <div className="container-narrow">
-          <h2 className="heading-section text-center">
-            Why Choose <span className="accent-underline">D J Fox Electrical</span>
-          </h2>
-          <div className="grid md:grid-cols-2 gap-8 mt-12">
-            <div className="card">
-              <div className="flex items-start gap-4">
-                <div className="icon-circle-md flex-shrink-0">
-                  <Shield className="w-8 h-8" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-semibold mb-2">NICEIC Approved</h3>
-                  <p className="text-surface-muted-foreground">
-                    Fully certified and approved contractor, ensuring all work meets the highest
-                    safety standards and building regulations.
-                  </p>
-                </div>
-              </div>
-            </div>
+          <FadeIn>
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-surface-foreground mb-2">
+              Check Your Electrical Needs
+            </h2>
+            <p className="text-surface-muted-foreground mb-10 max-w-xl">
+              From new installations to emergency repairs, we cover all your electrical requirements
+            </p>
+          </FadeIn>
+          <StaggerChildren className="grid md:grid-cols-3 gap-6" staggerDelay={0.1}>
+            <StaggerItem>
+              <ImageOverlayCard
+                imageSrc="djfoxelectrical/categories/installation-work.jpg"
+                imageAlt="Electrical installation services"
+                category="Installation"
+                title="New Installations"
+                href="/services#installation"
+              />
+            </StaggerItem>
+            <StaggerItem>
+              <ImageOverlayCard
+                imageSrc="djfoxelectrical/categories/maintenance-work.jpg"
+                imageAlt="Electrical maintenance services"
+                category="Maintenance"
+                title="Regular Maintenance"
+                href="/services#maintenance"
+              />
+            </StaggerItem>
+            <StaggerItem>
+              <ImageOverlayCard
+                imageSrc="djfoxelectrical/categories/repair-work.jpg"
+                imageAlt="Electrical repair services"
+                category="Repair"
+                title="Expert Repairs"
+                href="/services#repair"
+              />
+            </StaggerItem>
+          </StaggerChildren>
+        </div>
+      </section>
 
-            <div className="card">
-              <div className="flex items-start gap-4">
-                <div className="icon-circle-md flex-shrink-0">
-                  <Award className="w-8 h-8" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-semibold mb-2">15+ Years Experience</h3>
-                  <p className="text-surface-muted-foreground">
-                    Over 15 years of professional electrical experience serving homes and businesses
-                    across East Sussex.
-                  </p>
-                </div>
+      {/* Service Areas — pill grid with arrow affordance */}
+      <section className="section bg-white">
+        <div className="container-narrow">
+          <FadeIn>
+            <div className="flex items-end justify-between mb-10 flex-wrap gap-4">
+              <div>
+                <p className="text-sm font-semibold uppercase tracking-widest text-brand-primary mb-3">
+                  Coverage
+                </p>
+                <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-surface-foreground">
+                  Areas We <span className="accent-underline">Serve</span>
+                </h2>
               </div>
+              <Link href="/locations" className="btn-secondary text-sm">
+                View All Locations
+              </Link>
             </div>
+          </FadeIn>
 
-            <div className="card">
-              <div className="flex items-start gap-4">
-                <div className="icon-circle-md flex-shrink-0">
-                  <Clock className="w-8 h-8" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-semibold mb-2">24/7 Emergency Service</h3>
-                  <p className="text-surface-muted-foreground">
-                    Round-the-clock emergency callout service for urgent electrical issues that
-                    cannot wait until morning.
-                  </p>
-                </div>
-              </div>
-            </div>
+          <StaggerChildren className="grid grid-cols-2 md:grid-cols-3 gap-3" staggerDelay={0.06}>
+            {(locations.length > 0
+              ? locations.slice(0, 6)
+              : (siteConfig.serviceAreaRegions?.[0]?.towns.slice(0, 6) ?? []).map((t) => ({
+                  slug: t.slug,
+                  title: t.name,
+                  description: undefined as string | undefined,
+                }))
+            ).map((location) => (
+              <StaggerItem key={location.slug}>
+                <Link
+                  href={`/locations/${location.slug}`}
+                  className="location-pill group"
+                >
+                  <span className="font-semibold text-surface-foreground group-hover:text-brand-primary transition-colors">
+                    {location.title}
+                  </span>
+                  <ArrowRight className="location-pill-arrow w-4 h-4 flex-shrink-0" aria-hidden="true" />
+                </Link>
+              </StaggerItem>
+            ))}
+          </StaggerChildren>
+        </div>
+      </section>
 
-            <div className="card">
-              <div className="flex items-start gap-4">
-                <div className="icon-circle-md flex-shrink-0">
-                  <Users className="w-8 h-8" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-semibold mb-2">100% Satisfaction</h3>
-                  <p className="text-surface-muted-foreground">
-                    Customer-focused service with a commitment to quality workmanship and complete
-                    satisfaction on every job.
+      {/* Why Choose Us — table-style rows on dark background */}
+      <section className="section bg-surface-inverse">
+        <div className="container-narrow">
+          <FadeIn>
+            <p className="text-sm font-semibold uppercase tracking-widest text-brand-primary mb-3">
+              Why Us
+            </p>
+            <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-white mb-16">
+              Why Choose{' '}
+              <span className="text-brand-primary">D J Fox Electrical</span>
+            </h2>
+          </FadeIn>
+
+          <div className="border-t border-surface-border">
+            {[
+              {
+                icon: Shield,
+                title: 'NICEIC Approved',
+                body: 'Fully certified and approved contractor, ensuring all work meets the highest safety standards and building regulations.',
+                stat: 'Certified',
+              },
+              {
+                icon: Award,
+                title: '15+ years experience',
+                body: 'Over 15 years of professional electrical experience serving homes and businesses across East Sussex.',
+                stat: 'Est. 2010',
+              },
+              {
+                icon: Clock,
+                title: '24/7 emergency service',
+                body: 'Round-the-clock emergency callout service for urgent electrical issues that cannot wait until morning.',
+                stat: 'Always on',
+              },
+              {
+                icon: Users,
+                title: '1,000+ jobs completed',
+                body: 'Customer-focused service with a commitment to quality workmanship and complete satisfaction on every job.',
+                stat: '& counting',
+              },
+            ].map(({ icon: Icon, title, body, stat }, i) => (
+              <FadeIn key={title} delay={i * 0.08}>
+                <div className="grid md:grid-cols-[2fr_3fr_1fr] gap-6 items-center py-8 border-b border-surface-border">
+                  <div className="flex items-center gap-4">
+                    <div className="w-10 h-10 rounded-lg bg-brand-primary/10 flex items-center justify-center flex-shrink-0">
+                      <Icon className="w-5 h-5 text-brand-primary" aria-hidden="true" />
+                    </div>
+                    <h3 className="text-base font-semibold text-white">{title}</h3>
+                  </div>
+                  <p className="text-surface-muted-foreground text-sm leading-relaxed">{body}</p>
+                  <p className="text-xs font-mono text-surface-muted-foreground uppercase tracking-widest md:text-right stat-value">
+                    {stat}
                   </p>
                 </div>
-              </div>
-            </div>
+              </FadeIn>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* CTA Section - Black background with red accents */}
-      <section className="section-dark-accent">
-        <div className="container-narrow text-center">
-          <h2 className="text-4xl font-bold mb-6">
-            Need an <span className="accent-underline">Emergency</span> Electrician?
-          </h2>
-          <p className="text-xl mb-8 text-surface-muted-foreground">
-            Available 24/7 for urgent electrical issues across Eastbourne and East Sussex
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/contact" className="btn-primary">
-              Get Free Quote
-            </Link>
-            <Link href={`tel:${PHONE_TEL}`} className="btn-tertiary">
-              <Phone className="w-5 h-5" />
-              Call {PHONE_DISPLAY}
-            </Link>
+      {/* CTA Section */}
+      <section className="section-dark-accent noise-overlay">
+        <div className="container-narrow">
+          <div className="grid md:grid-cols-[1fr_auto] gap-8 items-center">
+            <FadeIn direction="left">
+              <h2 className="text-4xl md:text-5xl font-bold tracking-tight">
+                Need an <span className="accent-underline">Emergency</span> Electrician?
+              </h2>
+              <p className="text-xl mt-4 text-surface-muted-foreground">
+                Available 24/7 across Eastbourne and East Sussex
+              </p>
+            </FadeIn>
+            <FadeIn direction="right" delay={0.15}>
+              <div className="flex flex-col gap-3">
+                <MagneticButton>
+                  <Link href="/contact" className="btn-primary whitespace-nowrap">
+                    Get Free Quote
+                  </Link>
+                </MagneticButton>
+                <MagneticButton>
+                  <Link
+                    href={`tel:${PHONE_TEL}`}
+                    className="btn-tertiary inline-flex items-center gap-2 whitespace-nowrap justify-center"
+                  >
+                    <Phone className="w-5 h-5" />
+                    Call {PHONE_DISPLAY}
+                  </Link>
+                </MagneticButton>
+              </div>
+            </FadeIn>
           </div>
         </div>
       </section>
