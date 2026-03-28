@@ -36,7 +36,7 @@ export function DarkStatCard({ value, label, icon: Icon }: DarkStatCardProps) {
       {/* Content */}
       <div className="relative z-10">
         <div className="text-5xl font-bold text-white mb-2 tracking-tight">{value}</div>
-        <p className="text-surface-muted-foreground text-lg font-medium">{label}</p>
+        <p className="text-on-inverse-muted text-lg font-medium">{label}</p>
       </div>
     </div>
   );
