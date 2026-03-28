@@ -35,7 +35,7 @@ const config: Config = {
           card: 'var(--color-surface-card)',
           border: 'var(--color-surface-card-border)',
           subtle: 'var(--color-surface-muted)',
-          inverse: 'var(--color-surface-foreground)',
+          inverse: 'var(--color-surface-inverse)',
           'on-inverse': 'var(--color-surface-background)',
         },
       },
