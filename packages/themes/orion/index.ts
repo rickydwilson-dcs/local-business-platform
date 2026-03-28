@@ -27,7 +27,8 @@ export const orionDefaultConfig: DeepPartialThemeConfig = {
     surface: {
       background: '#ffffff', foreground: '#1f2937', muted: '#f3f4f6',
       mutedForeground: '#5b6370', card: '#ffffff', cardBorder: '#e5e7eb',
-      inverse: '#000000',
+      inverse: '#1f2937',
+      inverseMutedForeground: '#94a3b8', // 5.72:1 on #1f2937 — WCAG AA ✓
     },
     semantic: { success: '#10b981', warning: '#f59e0b', error: '#ef4444', info: '#3b82f6' },
     overlay: { dark: 'rgba(0,0,0,0.8)', light: 'rgba(255,255,255,0.8)', primary: 'rgba(220,38,38,0.8)' },

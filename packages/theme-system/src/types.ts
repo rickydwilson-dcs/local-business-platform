@@ -77,6 +77,8 @@ export interface ThemeConfig {
       subtleBorder: string;
       /** Dark section background (replaces bg-black) */
       inverse: string;
+      /** Muted text on inverse (dark) backgrounds — WCAG AA compliant */
+      inverseMutedForeground: string;
     };
     semantic: {
       success: string;
@@ -384,6 +386,7 @@ export const ThemeConfigSchema = z.object({
       subtle: z.string().regex(/^#[0-9A-Fa-f]{6}$/, "Must be a valid hex color"),
       subtleBorder: z.string().regex(/^#[0-9A-Fa-f]{6}$/, "Must be a valid hex color"),
       inverse: z.string().regex(/^#[0-9A-Fa-f]{6}$/, "Must be a valid hex color"),
+      inverseMutedForeground: z.string().regex(/^#[0-9A-Fa-f]{6}$/, "Must be a valid hex color"),
     }),
     semantic: z.object({
       success: z.string().regex(/^#[0-9A-Fa-f]{6}$/, "Must be a valid hex color"),
