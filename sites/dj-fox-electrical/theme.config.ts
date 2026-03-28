@@ -19,6 +19,11 @@ export const themeConfig: DeepPartialThemeConfig = {
       secondary: '#b00909',
       accent: '#fbbf24',
     },
+    surface: {
+      // Lighten muted text on dark sections: slate-300 (#cbd5e1) vs Orion default slate-400 (#94a3b8).
+      // Contrast on surface.inverse (#1f2937): ~9.05:1 — passes WCAG AAA ✓
+      inverseMutedForeground: '#cbd5e1',
+    },
     overlay: {
       primary: 'rgba(219, 11, 11, 0.8)', // Brand red with opacity
     },
