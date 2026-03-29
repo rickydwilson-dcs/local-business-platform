@@ -26,7 +26,7 @@ Use this when the client has an existing website. The pipeline screenshots the s
 - `--url` (required) — the reference website to scrape
 - `--trade` (optional) — business type hint; helps with content generation
 
-The pipeline assigns a theme name automatically from the constellation namespace (e.g. `lyra`, `nova`).
+The pipeline assigns a theme name automatically from the constellation namespace. Current themes: `orion`, `vega`, `lyra`, `atlas`, `nova`, `rigel`.
 
 **What it produces:**
 - Screenshots and extracted tokens in `output/ingestion/<theme-name>/`
