@@ -145,6 +145,7 @@ npm run validate:content  # Shows which MDX files fail and why
 | [How the Build Pipeline Works](docs/architecture/how-build-pipeline-works.md) | Turborepo, packages, workspace linking     |
 | [How Site Creation Works](docs/architecture/how-site-creation-works.md)       | Intake → project file → new site → deploy  |
 | [How the Ingestion Pipeline Works](docs/architecture/how-ingestion-pipeline-works.md) | Screenshot → analysis → components → theme package |
+| [How the Stitch Design Pipeline Works](docs/architecture/how-stitch-design-pipeline-works.md) | Stitch AI design → tokens → theme package → test site |
 | [Architecture Overview](docs/architecture/architecture.md)                    | High-level system overview                 |
 
 ### Standards (How to Do It Right)
