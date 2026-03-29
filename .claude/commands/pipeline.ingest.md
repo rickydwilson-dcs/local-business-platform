@@ -45,6 +45,38 @@ ls packages/themes/<theme-name>/index.ts
 ```
 If the theme package was not created, STOP: "Pipeline did not create theme package. Check output above for errors."
 
+## Step 2b: Capture Reference HTML Source
+
+Create output directories:
+```bash
+mkdir -p output/ingestion/<theme-name>/html
+mkdir -p output/ingestion/<theme-name>/meta
+```
+
+For each page in `discoveredPages[]` from `output/ingestion/<theme-name>/site-analysis.json`, download the HTML source using curl. Map `pageType` to filename:
+- `pageType === "home"` → `home.html`
+- `pageType === "about"` → `about.html`
+- `pageType === "contact"` → `contact.html`
+- `pageType` containing `services-list` or `blog-list` → `<pageType>.html`
+- `pageType` containing `service-detail` or `blog-post` → `<pageType>.html` (first depth-2 page only)
+
+```bash
+curl -s --max-time 15 -L -A "Mozilla/5.0" "<page.url>" \
+  -o "output/ingestion/<theme-name>/html/<pageType>.html"
+```
+
+**WARN not STOP** if curl fails — many sites block crawlers. Screenshots (already captured by Step 2) are the primary reference; HTML is supplementary for structural comparison by the review agent.
+
+Write `output/ingestion/<theme-name>/meta/html-manifest.json`:
+```json
+{
+  "capturedAt": "<ISO timestamp>",
+  "pages": [
+    { "pageType": "home", "url": "<page url>", "file": "html/home.html" }
+  ]
+}
+```
+
 ## Step 3: Create Test Site
 
 Copy base-template to create the test site:
@@ -109,11 +141,34 @@ Where `<camelCaseThemeName>` is the theme name in camelCase (e.g., `lyra` → `l
   }
 
   body {
+    font-family: var(<$BODY_VAR>), sans-serif;
     @apply bg-surface-background text-surface-foreground;
     font-feature-settings: 'rlig' 1, 'calt' 1;
   }
+
+  h1, h2, h3, h4 {
+    font-family: var(<$HEADING_VAR>), serif;
+  }
+
+  .material-symbols-outlined {
+    font-family: 'Material Symbols Outlined';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    direction: ltr;
+    font-feature-settings: 'liga';
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    vertical-align: middle;
+  }
 }
 ```
+
+`$BODY_VAR` and `$HEADING_VAR` are the CSS custom property names computed during Step 5e font determination (e.g. `--font-inter`, `--font-newsreader`). Write globals.css **after** Step 5e font determination so the correct variable names can be substituted.
 
 **5c.** Generate a CI-inert `sites/test-<theme-name>/package.json`:
 
@@ -136,37 +191,78 @@ node -e "
 
 **5d.** Update `sites/test-<theme-name>/site.config.ts` — find the `tagline` value and change it to `'Pipeline Test Site — <theme-name> theme'`.
 
-**5e.** Rewrite `sites/test-<theme-name>/app/layout.tsx` to a bare shell layout:
+**5e.** Rewrite `sites/test-<theme-name>/app/layout.tsx`.
+
+**5e-i: Determine fonts**
+
+Read `output/ingestion/<theme-name>/site-analysis.json`. Extract:
+- `themeTokenRecommendations.typography.fontFamilySans[0]` → `$BODY_FONT_NAME`
+- `themeTokenRecommendations.typography.fontFamilyHeading[0]` → `$HEADING_FONT_NAME`
+
+Fallback (if field missing or null): `$BODY_FONT_NAME = "Work Sans"`, `$HEADING_FONT_NAME = "Newsreader"`
+
+**next/font/google export name:** Replace spaces with underscores: `"Work Sans"` → `Work_Sans`, `"DM Sans"` → `DM_Sans`, `"Plus Jakarta Sans"` → `Plus_Jakarta_Sans`, `"Source Serif 4"` → `Source_Serif_4`, etc.
+
+**Confirmed available in next/font/google:** `Inter`, `Lato`, `Work_Sans`, `Newsreader`, `Outfit`, `Montserrat`, `DM_Sans`, `Plus_Jakarta_Sans`, `Space_Grotesk`, `Manrope`, `Rubik`, `Geist`, `Sora`, `EB_Garamond`, `Literata`, `Source_Serif_4`, `Domine`, `Libre_Caslon_Text`, `Noto_Serif`, `Raleway`, `Open_Sans`, `Poppins`, `Nunito`, `Roboto`, `Mulish`, `Barlow`.
+
+Any font NOT in the confirmed list → fall back to `Work_Sans` (body) or `Newsreader` (heading).
+
+**CSS variable name:** Lowercase + underscores→hyphens: `Work_Sans` → `--font-work-sans`, `Source_Serif_4` → `--font-source-serif-4`. These become `$BODY_VAR` and `$HEADING_VAR`, also used in Step 5b globals.css.
+
+**5e-ii: Determine font weights**
+
+- Body font: `['300', '400', '500', '600', '700']`
+- Heading font (serif — Newsreader, EB_Garamond, Literata, Source_Serif_4, Domine, Libre_Caslon_Text, Noto_Serif): `['200', '300', '400', '500', '600', '700', '800']` + `style: ['normal', 'italic']`
+- Heading font (sans-serif): `['400', '500', '600', '700', '800']`
+
+**5e-iii: Write layout.tsx**
+
+If body and heading are the same font, use a single font instance with `variable: '--font-primary'`. globals.css uses `var(--font-primary)` for both body and h1-h4.
+
+For two different fonts (the typical case):
 
 ```typescript
 import type { Metadata, Viewport } from 'next';
+import { <BodyExportName>, <HeadingExportName> } from 'next/font/google';
 import './globals.css';
 import { siteConfig } from '@/site.config';
 import { ThemeProvider } from '@platform/core-components';
 import { <camelCaseThemeName>Registry } from '@platform/themes/<theme-name>';
-import { ReviewPanel } from './components/ReviewPanel';
+
+const bodyFont = <BodyExportName>({
+  subsets: ['latin'],
+  variable: '<$BODY_VAR>',
+  display: 'swap',
+  weight: ['300', '400', '500', '600', '700'],
+});
+
+const headingFont = <HeadingExportName>({
+  subsets: ['latin'],
+  variable: '<$HEADING_VAR>',
+  display: 'swap',
+  weight: ['200', '300', '400', '500', '600', '700', '800'],
+  style: ['normal', 'italic'],
+});
 
 export const metadata: Metadata = {
-  title: {
-    default: siteConfig.name,
-    template: `%s | ${siteConfig.name}`,
-  },
+  title: { default: siteConfig.name, template: `%s | ${siteConfig.name}` },
   description: siteConfig.tagline,
 };
 
-export const viewport: Viewport = {
-  width: 'device-width',
-  initialScale: 1,
-  maximumScale: 5,
-};
+export const viewport: Viewport = { width: 'device-width', initialScale: 1, maximumScale: 5 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en-GB">
+    <html lang="en-GB" className={`${bodyFont.variable} ${headingFont.variable}`}>
+      <head>
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=block"
+        />
+      </head>
       <body className="min-h-screen flex flex-col">
         <ThemeProvider theme="<theme-name>" registry={<camelCaseThemeName>Registry}>
           {children}
-          <ReviewPanel />
         </ThemeProvider>
       </body>
     </html>
@@ -174,9 +270,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 }
 ```
 
-**Why bare shell:** The generated example pages include the theme's own TopNavigation and SiteFooter inline. If layout.tsx also renders SiteHeader + Footer from core-components, you get double header/footer. The bare shell provides only ThemeProvider context — all visible UI comes from the example pages.
+**Why bare shell:** Generated pages include Nav and Footer inline — no double header/footer. Do NOT include SiteHeader, Footer, PageShell, ReviewPanel, analytics, or consent components.
 
-Do NOT include: SiteHeader, Footer, PageShell, getContentItems(), analytics, consent, geo meta tags. These are for production sites, not test sites.
+**After writing layout.tsx:** Go back and write `globals.css` (Step 5b) using the `$BODY_VAR` and `$HEADING_VAR` names computed above.
 
 **5f.** Generate five standard pages in the test site.
 
@@ -278,6 +374,9 @@ For each page:
 - **No hardcoded hex colors**
 - **No `generateStaticParams`, `getContentItems`, `getServices`, `getLocations`, `fs.readdir`**
 - Add comment at top of sections block: `{/* Source: <reference.url> — <pageType> blueprint */}` or `{/* Source: fallback template */}`
+- **Opacity modifier on CSS custom properties does not work:** Tailwind's `/opacity` modifier (e.g. `bg-surface-background/80`) renders transparent when the colour comes from a CSS custom property (`var()`). For semi-transparent theme colours, use the hex value from `themeTokenRecommendations` as an arbitrary value: `bg-[#hexvalue]/80`. This applies to sticky navs, hero overlays, and decorative backgrounds.
+- **Preserve all CSS animation and interaction classes:** Do not omit transition durations (`duration-300`, `duration-500`, `duration-700`), hover transforms (`hover:scale-105`, `hover:-translate-y-1`), grayscale filters (`grayscale`, `grayscale-[20%]`), or opacity transitions. If the blueprint indicates an interactive pattern, the TSX must implement it.
+- **No hardcoded hex colours** — except for the opacity workaround above, where a hardcoded hex is the only correct solution.
 
 ---
 
@@ -748,22 +847,136 @@ Validation:
 =========================================
 ```
 
-**5g.** Generate visual comparison test:
+**5g.** Patch `sites/test-<theme-name>/next.config.ts` — Add Google Fonts to CSP.
 
-Write `sites/test-<theme-name>/e2e/visual-compare.spec.ts` — a Playwright test that captures screenshots of the test site and compares them against the reference screenshots using `sharp` pixel comparison (NOT Playwright's `toHaveScreenshot`, which only works with its own snapshot directory).
+The base-template CSP blocks Google Fonts. Find the `Content-Security-Policy` value in `next.config.ts` and change:
 
-The spec should:
-1. Map reference screenshots from `output/ingestion/<theme-name>/screenshots/` to routes:
-   - `home.png` → `/`
-   - `about.png` → `/about`
-   - `blog-list.png` → `/blog`
-   - Skip `blog-post.png` (dynamic route, no fixture data)
-   - Skip `custom.png` (varies per site)
-2. Capture each page at 1440x900 viewport (matching reference capture settings)
-3. Use `sharp` to do raw pixel comparison against the reference PNG
-4. Per-page diff thresholds: 5% for home/about, 8% for blog-list, 10% default
-5. On failure, generate a diff image (red-highlighted pixels) in `test-results/diffs/`
-6. Save test screenshots to `test-results/screenshots/` for manual review
+```
+style-src 'self' 'unsafe-inline'; font-src 'self';
+```
+
+To:
+
+```
+style-src 'self' 'unsafe-inline' fonts.googleapis.com; font-src 'self' fonts.gstatic.com;
+```
+
+**Verification gate — STOP if fails:**
+```bash
+grep "fonts.googleapis.com" sites/test-<theme-name>/next.config.ts && echo "PASS: CSP patched" || { echo "FAIL: CSP not patched — fonts will be blocked"; exit 1; }
+```
+
+## Step 5h: Ingest Fidelity Review + Fix
+
+After pages are generated, start the dev server, compare each rendered page against reference screenshots and HTML source, then apply fixes autonomously.
+
+**5h-i — Start dev server**
+
+```bash
+cd sites/test-<theme-name> && npm install --silent
+npm run dev > /tmp/<theme-name>-dev.log 2>&1 &
+DEV_PID=$!
+```
+
+Poll until ready (max 30 seconds):
+```bash
+for i in 2 3 4 5 6 10; do
+  sleep $i
+  grep -q "Local:" /tmp/<theme-name>-dev.log 2>/dev/null && break
+done
+DEV_PORT=$(grep -o "localhost:[0-9]*" /tmp/<theme-name>-dev.log | head -1 | cut -d: -f2)
+DEV_PORT=${DEV_PORT:-3000}
+echo "Dev server on port $DEV_PORT"
+curl -s -o /dev/null -w "HTTP %{http_code}" http://localhost:$DEV_PORT
+```
+
+If HTTP status is not 200, STOP: "Dev server failed to start. Check /tmp/<theme-name>-dev.log"
+
+**5h-ii — Review agent (model: sonnet)**
+
+Launch a review agent with the following task:
+
+> Review the 5 test site pages for brand fidelity against the reference site.
+>
+> **Reference material:**
+> - Screenshots of the reference site: `output/ingestion/<theme-name>/screenshots/` (pageType filenames: `home.png`, `about.png`, `services-list.png`, `service-detail.png`, etc. — run `ls` to confirm which exist)
+> - HTML source: `output/ingestion/<theme-name>/html/` (if captured in Step 2b)
+> - Section blueprints: `output/ingestion/<theme-name>/site-analysis.json` → `pageBlueprints[]`, `sectionBlueprints[]`
+> - Extracted tokens: `site-analysis.json` → `themeTokenRecommendations`
+>
+> **Pages to compare** (substitute actual port for $DEV_PORT):
+> - `http://localhost:$DEV_PORT/` ↔ `screenshots/home.png`
+> - `http://localhost:$DEV_PORT/about` ↔ `screenshots/about.png` (if exists)
+> - `http://localhost:$DEV_PORT/contact` ↔ `screenshots/contact.png` (if exists)
+> - `http://localhost:$DEV_PORT/<detected-slug>/` ↔ `screenshots/services-list.png` or `screenshots/blog-list.png` (whichever exists)
+> - `http://localhost:$DEV_PORT/<detected-slug>/<first-item>` ↔ `screenshots/service-detail.png` or `screenshots/blog-post.png` (whichever exists)
+>
+> Also read each corresponding TSX file so you can identify where to apply fixes.
+>
+> **What to check (ingest-specific — brand fidelity, not exact replication):**
+> 1. **Font loading** — Is body text rendering in the extracted font (not browser default sans-serif)?
+> 2. **Brand colours** — Do primary/secondary/accent colours match `themeTokenRecommendations.brand`?
+> 3. **Section completeness** — Is every section in `pageBlueprints[page].sections[]` present in the rendered page?
+> 4. **Nav and footer** — Present on every page?
+> 5. **Layout pattern** — Does header style (dark/light) match `visualLanguage.heroPattern.headerDark`? Does hero pattern match `visualLanguage.heroPattern.type`?
+> 6. **CSS completeness** — Are hover effects, transitions, and interactive states present?
+>
+> **What NOT to check:**
+> - Whether content or images pixel-match the reference site — they will not
+> - Whether specific copy is identical
+> - Form field interactivity (static visual comparison only — `readOnly` is intentional)
+>
+> For each issue found, produce one finding. Write all findings to `output/ingestion/<theme-name>/meta/tsx-review-findings.json`:
+> ```json
+> [
+>   {
+>     "id": "I001",
+>     "page": "home",
+>     "section": "hero",
+>     "type": "blocker|visual|minor",
+>     "description": "Human-readable description",
+>     "reference_value": "What the reference screenshot shows or what the blueprint specifies",
+>     "tsx_value": "What the test site currently renders (or 'missing')",
+>     "fix_file": "sites/test-<theme-name>/app/page.tsx"
+>   }
+> ]
+> ```
+>
+> **Severity definitions:**
+> - `blocker` — font not loading, entire section missing per blueprint, nav or footer absent, layout visually broken
+> - `visual` — colour token mismatch vs extracted tokens, wrong font size, missing hover effects, missing transitions
+> - `minor` — copy difference, icon missing, minor structural variation that doesn't affect brand fidelity
+
+**5h-iii — Fix agent (model: sonnet)**
+
+Launch a fix agent with the following task:
+
+> Read `output/ingestion/<theme-name>/meta/tsx-review-findings.json`.
+>
+> Apply fixes in severity order: blockers first, then visual, then minor.
+>
+> For each finding:
+> 1. Read the `fix_file`
+> 2. Apply the minimal change needed to resolve the issue
+> 3. After editing each file, run: `cd sites/test-<theme-name> && npx tsc --noEmit 2>&1 | head -10`
+> 4. If type-check produces new errors, revert the last change and mark the finding as `skipped`
+>
+> Write a fix log to `output/ingestion/<theme-name>/meta/tsx-fix-log.json`:
+> ```json
+> [
+>   { "id": "I001", "status": "fixed", "description": "Applied correct brand-primary background to hero section" },
+>   { "id": "I002", "status": "skipped", "reason": "Would require client-side animation library" }
+> ]
+> ```
+>
+> Do not commit anything. Report: total findings, fixed count, skipped count, any blockers that could not be resolved.
+
+**5h-iv — Kill dev server**
+
+```bash
+kill $DEV_PID 2>/dev/null || true
+rm -f /tmp/<theme-name>-dev.log
+```
 
 ## Step 6: Reconcile Lockfile
 
@@ -789,15 +1002,40 @@ git add sites/test-<theme-name>/ pnpm-lock.yaml
 ## Step 8: Report
 
 Output:
-- Theme name and source URL
-- Test site location: `sites/test-<theme-name>/`
-- Ingestion output: `output/ingestion/<theme-name>/`
-- Command to start dev server: `cd sites/test-<theme-name> && npm run dev`
-- Visual comparison: `cd sites/test-<theme-name> && npx playwright test e2e/visual-compare.spec.ts`
-  Captures test site screenshots, compares against reference PNGs, generates diff images in `test-results/diffs/`
-- Cleanup commands:
-  - `/pipeline.kill-site test-<theme-name>` — remove the test site
-  - `/pipeline.kill-theme <theme-name>` — remove the generated theme package
+
+```
+✓ Theme name:     <theme-name>
+✓ Source URL:     <url>
+✓ Test site:      sites/test-<theme-name>/
+
+Reference assets: output/ingestion/<theme-name>/
+  screenshots/    — <N> reference site page captures (taken during Step 2)
+  html/           — <N> reference HTML pages (<or "not captured" if curl was blocked>)
+  meta/           — html-manifest.json, tsx-review-findings.json, tsx-fix-log.json
+
+Fidelity review:  <N> findings — <N_blockers> blockers, <N_visual> visual, <N_minor> minor
+Fix pass:         <N_fixed> fixed, <N_skipped> skipped
+<If any blockers were not resolved: "⚠ Unresolved blockers: <list>">
+
+Dev server:   cd sites/test-<theme-name> && npm run dev
+
+Reference comparison:
+  http://localhost:3000               ↔  screenshots/home.png
+  http://localhost:3000/about         ↔  screenshots/about.png
+  http://localhost:3000/contact       ↔  screenshots/contact.png
+  http://localhost:3000/<slug>/       ↔  screenshots/services-list.png (or blog-list.png)
+  http://localhost:3000/<slug>/<item> ↔  screenshots/service-detail.png (or blog-post.png)
+
+Cleanup:      /pipeline.kill-site test-<theme-name>   (removes test site)
+              /pipeline.kill-theme <theme-name>        (removes theme package)
+
+Next steps:
+  1. Start dev server, compare each page against the reference screenshots above
+  2. Review meta/tsx-review-findings.json — what the fidelity pass found
+  3. Review meta/tsx-fix-log.json — what was auto-fixed vs skipped
+  4. Iterate on theme.config.ts if brand colours need tuning
+  5. When satisfied: /deploy.changes
+```
 
 ---
 
