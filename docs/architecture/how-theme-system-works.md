@@ -426,7 +426,7 @@ Contrast ratios must meet WCAG AA: 4.5:1 for normal text, 3:1 for large text.
 
 ## Named Themes
 
-Beyond CSS variables, the platform has two named visual identities — **orion** and **vega** — each packaged in `packages/themes/`.
+Beyond CSS variables, the platform has named visual identities — **orion**, **vega**, and **lyra** — each packaged in `packages/themes/`.
 
 ### What a Named Theme Provides
 
@@ -439,6 +439,7 @@ Beyond CSS variables, the platform has two named visual identities — **orion**
 |-------|-----------------|-------------|
 | **orion** | Dark header, full-bleed hero, red brand accent, circular icon cards, dark stat cards | Trade/electrical sites (e.g. DJ Fox) |
 | **vega** | Light header, split hero, standard card grid, clean typography | Professional services, reference sites |
+| **lyra** | Editorial serif headlines, sans-serif body, muted sage/cream palette, rounded cards | Garden/heritage/lifestyle service sites |
 
 ### Wiring It Up
 

@@ -5,6 +5,7 @@
   "description": "Named visual theme packages for the Local Business Platform",
   "exports": {
     "./orion": "./orion/index.ts",
-    "./vega": "./vega/index.ts"
+    "./vega": "./vega/index.ts",
+    "./lyra": "./lyra/index.ts"
   }
 }
