@@ -14,20 +14,28 @@ export default function ServicesPage() {
   return (
     <div className="min-h-screen">
       {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 flex justify-between items-center px-6 h-20 bg-white border-b-2 border-zinc-100 shadow-sm">
-        <Link href="/" className="flex items-center gap-2">
-          <span className="text-2xl font-black text-[#E85118]">MAD <span className="text-[#5BA829]">GRAPHICS</span></span>
-        </Link>
-        <div className="hidden md:flex items-center gap-8">
-          <Link href="/" className="text-zinc-800 hover:text-[#E85118] transition-colors duration-200 font-medium">Home</Link>
-          <Link href="/services" className="text-[#5BA829] font-bold border-b-2 border-[#5BA829] py-1">Services</Link>
-          <Link href="/about" className="text-zinc-800 hover:text-[#E85118] transition-colors duration-200 font-medium">About</Link>
-          <Link href="/contact" className="text-zinc-800 hover:text-[#E85118] transition-colors duration-200 font-medium">Contact</Link>
-        </div>
-        <Link href="/contact" className="bg-[#E85118] text-white px-6 py-2.5 rounded-lg font-bold hover:bg-opacity-90 transition-all active:scale-95">
-          Get a Quote
-        </Link>
-      </nav>
+      <header className="bg-white/95 backdrop-blur-md fixed top-0 w-full z-50 border-b-2 border-zinc-100 shadow-sm transition-all duration-300">
+        <nav className="flex justify-between items-center w-full px-6 py-4 max-w-7xl mx-auto">
+          <Link href="/" className="flex items-center gap-1 cursor-pointer">
+            <span className="text-2xl font-black tracking-tighter text-[#E85118]">MAD</span>
+            <span className="text-2xl font-black tracking-tighter text-[#5BA829]">GRAPHICS</span>
+          </Link>
+          <div className="hidden md:flex items-center space-x-8">
+            <Link href="/services" className="text-[#E85118] font-bold border-b-2 border-[#E85118]">Services</Link>
+            <Link href="/about" className="text-zinc-800 font-medium hover:text-[#E85118] hover:scale-105 transition-transform duration-200">About</Link>
+            <Link href="/contact" className="text-zinc-800 font-medium hover:text-[#E85118] hover:scale-105 transition-transform duration-200">Contact</Link>
+          </div>
+          <div className="flex items-center gap-4">
+            <a className="hidden lg:flex items-center gap-2 font-bold text-[#1a1a1a]" href="tel:01323000000">
+              <span className="material-symbols-outlined text-[#E85118]">call</span>
+              01323 000000
+            </a>
+            <Link href="/contact" className="bg-[#E85118] text-white px-6 py-2.5 rounded-lg font-bold hover:scale-105 active:opacity-80 active:scale-95 transition-all duration-200 shadow-lg">
+              Get a Quote
+            </Link>
+          </div>
+        </nav>
+      </header>
 
       <main className="pt-20">
         {/* Breadcrumb & Header */}
@@ -55,7 +63,9 @@ export default function ServicesPage() {
                     src={`/stitch-images/${service.img}`}
                     alt={service.title}
                     fill
+                    sizes="(max-width: 768px) 100vw, 33vw"
                     className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    loading="eager"
                   />
                   <div className="absolute top-4 left-4 bg-[#5BA829] text-white p-3 rounded-lg shadow-lg">
                     <span className="material-symbols-outlined">{service.icon}</span>

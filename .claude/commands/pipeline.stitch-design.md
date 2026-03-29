@@ -821,7 +821,94 @@ Launch a fix agent with the following task:
 >
 > Do not commit anything. Report: total findings, fixed count, skipped count, any blockers that could not be resolved.
 
-**5h-iv — Kill dev server**
+**5h-iv — Console QA (Playwright)**
+
+With the dev server still running, use Playwright to visit each page and capture browser console output. This catches 400 image errors, missing `sizes` warnings, broken imports, and any JS exceptions that visual inspection misses.
+
+```bash
+cd sites/$THEME_NAME-test
+npx playwright test --config=../../playwright.console-qa.config.ts 2>/dev/null || \
+npx playwright chromium 2>/dev/null || true
+```
+
+If Playwright is not available, use this Node script instead:
+
+```bash
+node - <<'EOF'
+const http = require('http');
+const pages = ['/', '/about', '/contact', '/services', '/services/${FIRST_SERVICE_SLUG}'];
+let allClean = true;
+(async () => {
+  for (const path of pages) {
+    await new Promise(r => {
+      http.get(`http://localhost:${DEV_PORT}${path}`, res => {
+        let body = '';
+        res.on('data', d => body += d);
+        res.on('end', () => {
+          if (res.statusCode !== 200) {
+            console.error(`FAIL ${path} → HTTP ${res.statusCode}`);
+            allClean = false;
+          } else {
+            console.log(`OK   ${path} → 200`);
+          }
+          r();
+        });
+      }).on('error', e => { console.error(`FAIL ${path} → ${e.message}`); allClean = false; r(); });
+    });
+  }
+  process.exit(allClean ? 0 : 1);
+})();
+EOF
+```
+
+**Then** run a targeted Playwright console check for image and JS errors using a one-shot script:
+
+```bash
+npx playwright@latest --yes launch --browser chromium - <<'PWEOF' 2>/dev/null || echo "playwright unavailable — skip"
+// Requires: npx playwright install chromium
+const { chromium } = require('playwright');
+(async () => {
+  const browser = await chromium.launch();
+  const page = await browser.newPage();
+  const PAGES = [
+    '/', '/about', '/contact', '/services',
+    '/services/${FIRST_SERVICE_SLUG}'
+  ];
+  const errors = [];
+  page.on('console', msg => {
+    if (msg.type() === 'error') errors.push({ url: page.url(), text: msg.text() });
+  });
+  page.on('response', res => {
+    if (res.status() >= 400) errors.push({ url: page.url(), resource: res.url(), status: res.status() });
+  });
+  for (const p of PAGES) {
+    await page.goto('http://localhost:${DEV_PORT}' + p, { waitUntil: 'networkidle' });
+  }
+  await browser.close();
+  if (errors.length) {
+    console.error('Console/network errors found:');
+    errors.forEach(e => console.error(JSON.stringify(e)));
+    process.exit(1);
+  } else {
+    console.log('All pages clean — no console errors or 4xx resources.');
+  }
+})();
+PWEOF
+```
+
+**Interpret results and fix before proceeding:**
+
+| Error pattern | Likely cause | Fix |
+|---|---|---|
+| `400` on `/_next/image?url=...` | `fill` image missing `sizes` prop, or parent not `position: relative` | Add `sizes="..."` and `relative` to parent |
+| `404` on `/stitch-images/img-NNN.jpg` | Image not copied to `public/stitch-images/` | Copy from `output/ingestion/$THEME_NAME-stitch/images/` |
+| `Module not found` in console | Missing import or wrong path | Fix import |
+| `Warning: Each child in a list should have a unique "key"` | Missing `key` prop on mapped elements | Add `key` |
+| `hydration` error | Server/client HTML mismatch | Remove conditional client-only logic from Server Components |
+
+If any `blocker`-level errors are found (400s, 404s, JS exceptions), fix them before moving to Step 6. Add fixes to `tsx-fix-log.json` with `"source": "console-qa"`.
+
+**5h-v — Kill dev server**
 
 ```bash
 kill $DEV_PID 2>/dev/null || true

@@ -5,27 +5,33 @@ export default function AboutPage() {
   return (
     <div className="min-h-screen">
       {/* Navigation */}
-      <header className="sticky top-0 w-full z-50 bg-white/95 backdrop-blur-md border-b border-zinc-200 shadow-sm">
-        <nav className="flex justify-between items-center px-6 py-4 max-w-7xl mx-auto">
-          <Link href="/" className="text-2xl font-black tracking-tighter">
-            <span className="text-[#E85118]">MAD</span> <span className="text-[#5BA829]">GRAPHICS</span>
+      <header className="bg-white/95 backdrop-blur-md sticky top-0 z-50 border-b-2 border-zinc-100 shadow-sm transition-all duration-300">
+        <nav className="flex justify-between items-center w-full px-6 py-4 max-w-7xl mx-auto">
+          <Link href="/" className="flex items-center gap-1 cursor-pointer">
+            <span className="text-2xl font-black tracking-tighter text-[#E85118]">MAD</span>
+            <span className="text-2xl font-black tracking-tighter text-[#5BA829]">GRAPHICS</span>
           </Link>
           <div className="hidden md:flex items-center space-x-8">
-            <Link href="/" className="text-zinc-800 font-semibold hover:text-[#E85118] transition-colors">Home</Link>
-            <Link href="/services" className="text-zinc-800 font-semibold hover:text-[#E85118] transition-colors">Services</Link>
-            <Link href="/about" className="text-[#5BA829] font-bold border-b-2 border-[#5BA829] transition-colors">About</Link>
-            <Link href="/contact" className="text-zinc-800 font-semibold hover:text-[#E85118] transition-colors">Contact</Link>
+            <Link href="/services" className="text-zinc-800 font-medium hover:text-[#E85118] hover:scale-105 transition-transform duration-200">Services</Link>
+            <Link href="/about" className="text-[#E85118] font-bold border-b-2 border-[#E85118]">About</Link>
+            <Link href="/contact" className="text-zinc-800 font-medium hover:text-[#E85118] hover:scale-105 transition-transform duration-200">Contact</Link>
           </div>
-          <Link href="/contact" className="bg-[#E85118] text-white px-6 py-2 rounded-lg font-bold hover:opacity-90 active:scale-95 transition-all">
-            Get a Quote
-          </Link>
+          <div className="flex items-center gap-4">
+            <a className="hidden lg:flex items-center gap-2 font-bold text-[#1a1a1a]" href="tel:01323000000">
+              <span className="material-symbols-outlined text-[#E85118]">call</span>
+              01323 000000
+            </a>
+            <Link href="/contact" className="bg-[#E85118] text-white px-6 py-2.5 rounded-lg font-bold hover:scale-105 active:opacity-80 active:scale-95 transition-all duration-200 shadow-lg">
+              Get a Quote
+            </Link>
+          </div>
         </nav>
       </header>
 
       {/* Page Hero */}
       <section className="relative h-[614px] min-h-[500px] flex items-center overflow-hidden">
         <div className="absolute inset-0 z-0">
-          <Image src="/stitch-images/img-002.jpg" alt="Mad Graphics workshop" fill className="object-cover" priority />
+          <Image src="/stitch-images/img-002.jpg" alt="Mad Graphics workshop" fill sizes="100vw" className="object-cover" priority />
           <div className="absolute inset-0 bg-[#E85118]/40 mix-blend-multiply" />
           <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent" />
         </div>
@@ -83,8 +89,8 @@ export default function AboutPage() {
             </div>
           </div>
           <div className="relative">
-            <div className="aspect-square rounded-xl overflow-hidden shadow-2xl">
-              <Image src="/stitch-images/img-003.jpg" alt="Designer applying vinyl graphics" fill className="object-cover" />
+            <div className="relative aspect-square rounded-xl overflow-hidden shadow-2xl">
+              <Image src="/stitch-images/img-003.jpg" alt="Designer applying vinyl graphics" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
             </div>
             <div className="absolute -bottom-8 -left-8 bg-[#5BA829] text-white p-8 rounded-lg shadow-xl hidden lg:block">
               <div className="text-4xl font-black">15+</div>
@@ -147,7 +153,7 @@ export default function AboutPage() {
             { img: 'img-011.jpg', name: 'Tom Harris', role: 'Installation Lead', color: 'bg-[#E85118]/80', bio: 'The hands-on expert for on-site installations. From high-rise signage to intricate wall vinyls.' },
           ].map((member) => (
             <div key={member.name} className="group relative overflow-hidden rounded-xl bg-zinc-100 aspect-[3/4]">
-              <Image src={`/stitch-images/${member.img}`} alt={member.name} fill className="object-cover transition-transform duration-500 group-hover:scale-110" />
+              <Image src={`/stitch-images/${member.img}`} alt={member.name} fill sizes="(max-width: 768px) 100vw, 25vw" className="object-cover transition-transform duration-500 group-hover:scale-110" />
               <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80" />
               <div className={`absolute inset-0 ${member.color} flex flex-col justify-center p-8 translate-y-full group-hover:translate-y-0 transition-transform duration-300`}>
                 <p className="text-white text-sm leading-relaxed">{member.bio}</p>

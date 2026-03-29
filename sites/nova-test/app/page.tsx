@@ -37,6 +37,7 @@ export default function HomePage() {
               src="/stitch-images/img-007.jpg"
               alt="Large format industrial printing"
               fill
+              sizes="100vw"
               className="object-cover"
               priority
             />
@@ -130,7 +131,7 @@ export default function HomePage() {
             ].map((s) => (
               <div key={s.title} className="group relative overflow-hidden rounded-xl bg-white shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col h-full">
                 <div className="aspect-video relative overflow-hidden">
-                  <Image src={`/stitch-images/${s.img}`} alt={s.title} fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+                  <Image src={`/stitch-images/${s.img}`} alt={s.title} fill sizes="(max-width: 768px) 100vw, 25vw" className="object-cover group-hover:scale-110 transition-transform duration-500" />
                   <div className="absolute top-4 left-4 bg-white/90 backdrop-blur p-2 rounded-lg text-[#E85118]">
                     <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>{s.icon}</span>
                   </div>

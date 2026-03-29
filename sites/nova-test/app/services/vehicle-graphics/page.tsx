@@ -5,20 +5,27 @@ export default function VehicleGraphicsPage() {
   return (
     <div className="min-h-screen">
       {/* Navigation */}
-      <header className="sticky top-0 w-full z-50 flex justify-between items-center px-6 py-4 max-w-7xl mx-auto bg-white border-b-2 border-zinc-100 shadow-sm">
-        <Link href="/" className="flex items-center gap-2">
-          <span className="text-2xl font-black text-[#E85118] tracking-tighter">MAD <span className="text-[#5BA829]">GRAPHICS</span></span>
-        </Link>
-        <nav className="hidden md:flex items-center gap-8">
-          <Link href="/" className="text-zinc-800 font-medium hover:text-[#E85118] transition-colors">Home</Link>
-          <Link href="/services" className="text-zinc-800 font-medium hover:text-[#E85118] transition-colors">Services</Link>
-          <Link href="/services/vehicle-graphics" className="text-[#5BA829] font-bold border-b-2 border-[#5BA829] hover:text-[#E85118] transition-colors">Vehicle Graphics</Link>
-          <Link href="/about" className="text-zinc-800 font-medium hover:text-[#E85118] transition-colors">About</Link>
-          <Link href="/contact" className="text-zinc-800 font-medium hover:text-[#E85118] transition-colors">Contact</Link>
+      <header className="bg-white/95 backdrop-blur-md sticky top-0 w-full z-50 border-b-2 border-zinc-100 shadow-sm transition-all duration-300">
+        <nav className="flex justify-between items-center w-full px-6 py-4 max-w-7xl mx-auto">
+          <Link href="/" className="flex items-center gap-1 cursor-pointer">
+            <span className="text-2xl font-black tracking-tighter text-[#E85118]">MAD</span>
+            <span className="text-2xl font-black tracking-tighter text-[#5BA829]">GRAPHICS</span>
+          </Link>
+          <div className="hidden md:flex items-center space-x-8">
+            <Link href="/services" className="text-[#E85118] font-bold border-b-2 border-[#E85118]">Services</Link>
+            <Link href="/about" className="text-zinc-800 font-medium hover:text-[#E85118] hover:scale-105 transition-transform duration-200">About</Link>
+            <Link href="/contact" className="text-zinc-800 font-medium hover:text-[#E85118] hover:scale-105 transition-transform duration-200">Contact</Link>
+          </div>
+          <div className="flex items-center gap-4">
+            <a className="hidden lg:flex items-center gap-2 font-bold text-[#1a1a1a]" href="tel:01323000000">
+              <span className="material-symbols-outlined text-[#E85118]">call</span>
+              01323 000000
+            </a>
+            <Link href="/contact" className="bg-[#E85118] text-white px-6 py-2.5 rounded-lg font-bold hover:scale-105 active:opacity-80 active:scale-95 transition-all duration-200 shadow-lg">
+              Get a Quote
+            </Link>
+          </div>
         </nav>
-        <Link href="/contact" className="bg-[#E85118] text-white px-6 py-2 rounded-lg font-bold hover:opacity-80 active:scale-95 transition-all">
-          Get a Quote
-        </Link>
       </header>
 
       <main>
@@ -34,7 +41,7 @@ export default function VehicleGraphicsPage() {
         {/* Hero Section */}
         <section className="relative h-[600px] flex items-center justify-center overflow-hidden">
           <div className="absolute inset-0 z-0">
-            <Image src="/stitch-images/img-010.jpg" alt="Vehicle being wrapped with vinyl graphics" fill className="object-cover" priority />
+            <Image src="/stitch-images/img-010.jpg" alt="Vehicle being wrapped with vinyl graphics" fill sizes="100vw" className="object-cover" priority />
             <div className="absolute inset-0 bg-[#1a1a1a]/60" />
           </div>
           <div className="relative z-10 max-w-4xl px-6 text-center">
@@ -89,7 +96,7 @@ export default function VehicleGraphicsPage() {
             <h2 className="italic text-4xl text-white mb-12 text-center" style={{ fontFamily: 'var(--font-newsreader), serif' }}>Recent Transformations</h2>
             <div className="grid grid-cols-12 gap-6" style={{ height: '800px' }}>
               <div className="col-span-12 md:col-span-7 relative group overflow-hidden rounded-xl">
-                <Image src="/stitch-images/img-014.jpg" alt="Luxury vehicle wrap" fill className="object-cover transition-transform duration-700 group-hover:scale-110" />
+                <Image src="/stitch-images/img-014.jpg" alt="Luxury vehicle wrap" fill sizes="(max-width: 768px) 100vw, 58vw" className="object-cover transition-transform duration-700 group-hover:scale-110" />
                 <div className="absolute inset-0 bg-[#E85118]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-8">
                   <div className="text-center">
                     <h4 className="text-white text-2xl font-bold mb-2">Matte Stealth Wrap</h4>
@@ -99,7 +106,7 @@ export default function VehicleGraphicsPage() {
               </div>
               <div className="col-span-12 md:col-span-5 grid grid-rows-2 gap-6">
                 <div className="relative group overflow-hidden rounded-xl">
-                  <Image src="/stitch-images/img-017.jpg" alt="Corporate fleet branding" fill className="object-cover transition-transform duration-700 group-hover:scale-110" />
+                  <Image src="/stitch-images/img-017.jpg" alt="Corporate fleet branding" fill sizes="(max-width: 768px) 100vw, 42vw" className="object-cover transition-transform duration-700 group-hover:scale-110" />
                   <div className="absolute inset-0 bg-[#5BA829]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-8">
                     <div className="text-center">
                       <h4 className="text-white text-xl font-bold mb-2">Corporate Fleet</h4>
@@ -108,7 +115,7 @@ export default function VehicleGraphicsPage() {
                   </div>
                 </div>
                 <div className="relative group overflow-hidden rounded-xl">
-                  <Image src="/stitch-images/img-020.jpg" alt="Trade vehicle graphics" fill className="object-cover transition-transform duration-700 group-hover:scale-110" />
+                  <Image src="/stitch-images/img-020.jpg" alt="Trade vehicle graphics" fill sizes="(max-width: 768px) 100vw, 42vw" className="object-cover transition-transform duration-700 group-hover:scale-110" />
                   <div className="absolute inset-0 bg-[#E85118]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-8">
                     <div className="text-center">
                       <h4 className="text-white text-xl font-bold mb-2">Trade Professional</h4>

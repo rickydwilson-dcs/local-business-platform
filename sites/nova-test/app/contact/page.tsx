@@ -5,28 +5,34 @@ export default function ContactPage() {
   return (
     <div className="min-h-screen">
       {/* Navigation */}
-      <header className="fixed top-0 w-full z-50 flex justify-between items-center px-6 py-4 bg-white/95 backdrop-blur-sm border-b border-neutral-100 shadow-sm">
-        <Link href="/" className="flex items-center gap-2">
-          <span className="text-2xl font-black text-[#E85118]">MAD GRAPHICS</span>
-        </Link>
-        <nav className="hidden md:flex items-center gap-8">
-          <Link href="/" className="text-neutral-700 font-medium hover:text-[#E85118] transition-colors duration-200">Home</Link>
-          <Link href="/services" className="text-neutral-700 font-medium hover:text-[#E85118] transition-colors duration-200">Services</Link>
-          <Link href="/about" className="text-neutral-700 font-medium hover:text-[#E85118] transition-colors duration-200">About</Link>
-          <Link href="/contact" className="text-[#5BA829] font-bold border-b-2 border-[#5BA829] pb-1">Contact</Link>
-        </nav>
-        <div className="flex items-center gap-4">
-          <Link href="/contact" className="bg-[#E85118] text-white px-6 py-2 rounded-lg font-bold hover:scale-95 duration-150 transition-transform">
-            Get a Quote
+      <header className="bg-white/95 backdrop-blur-md fixed top-0 w-full z-50 border-b-2 border-zinc-100 shadow-sm transition-all duration-300">
+        <nav className="flex justify-between items-center w-full px-6 py-4 max-w-7xl mx-auto">
+          <Link href="/" className="flex items-center gap-1 cursor-pointer">
+            <span className="text-2xl font-black tracking-tighter text-[#E85118]">MAD</span>
+            <span className="text-2xl font-black tracking-tighter text-[#5BA829]">GRAPHICS</span>
           </Link>
-        </div>
+          <div className="hidden md:flex items-center space-x-8">
+            <Link href="/services" className="text-zinc-800 font-medium hover:text-[#E85118] hover:scale-105 transition-transform duration-200">Services</Link>
+            <Link href="/about" className="text-zinc-800 font-medium hover:text-[#E85118] hover:scale-105 transition-transform duration-200">About</Link>
+            <Link href="/contact" className="text-[#E85118] font-bold border-b-2 border-[#E85118]">Contact</Link>
+          </div>
+          <div className="flex items-center gap-4">
+            <a className="hidden lg:flex items-center gap-2 font-bold text-[#1a1a1a]" href="tel:01323000000">
+              <span className="material-symbols-outlined text-[#E85118]">call</span>
+              01323 000000
+            </a>
+            <Link href="/contact" className="bg-[#E85118] text-white px-6 py-2.5 rounded-lg font-bold hover:scale-105 active:opacity-80 active:scale-95 transition-all duration-200 shadow-lg">
+              Get a Quote
+            </Link>
+          </div>
+        </nav>
       </header>
 
       <main className="pt-20">
         {/* Hero Section */}
         <section className="relative h-[614px] min-h-[400px] flex items-center overflow-hidden">
           <div className="absolute inset-0 z-0">
-            <Image src="/stitch-images/img-001.jpg" alt="Signage Workshop" fill className="object-cover" priority />
+            <Image src="/stitch-images/img-001.jpg" alt="Signage Workshop" fill sizes="100vw" className="object-cover" priority />
             <div className="absolute inset-0 bg-[#E85118]/40 mix-blend-multiply" />
             <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a1a]/80 to-transparent" />
           </div>
@@ -140,7 +146,7 @@ export default function ContactPage() {
         {/* Map Section */}
         <section className="w-full h-[450px] relative">
           <div className="absolute inset-0 bg-neutral-200">
-            <Image src="/stitch-images/img-006.jpg" alt="Map location of Polegate" fill className="object-cover" />
+            <Image src="/stitch-images/img-006.jpg" alt="Map location of Polegate" fill sizes="100vw" className="object-cover" />
           </div>
           <div className="absolute inset-0 bg-[#1a1a1a]/10 pointer-events-none flex items-center justify-center">
             <div className="bg-white px-8 py-4 rounded-full shadow-2xl border border-neutral-100 flex items-center gap-3">
@@ -152,7 +158,7 @@ export default function ContactPage() {
 
         {/* Landscape Image Break */}
         <section className="relative h-[500px] overflow-hidden">
-          <Image src="/stitch-images/img-012.jpg" alt="Vehicle Graphics Work" fill className="object-cover" />
+          <Image src="/stitch-images/img-012.jpg" alt="Vehicle Graphics Work" fill sizes="100vw" className="object-cover" />
           <div className="absolute inset-0 bg-gradient-to-r from-[#1a1a1a]/60 to-transparent flex items-center">
             <div className="max-w-7xl mx-auto px-6 w-full">
               <div className="max-w-xl">
