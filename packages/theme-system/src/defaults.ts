@@ -26,6 +26,7 @@ export const defaultTheme: ThemeConfig = {
       subtle: "#f9fafb",
       subtleBorder: "#e5e7eb",
       inverse: "#111827",
+      inverseMutedForeground: "#94a3b8",
     },
     semantic: {
       success: "#10b981",
