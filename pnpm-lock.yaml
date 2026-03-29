@@ -804,6 +804,49 @@ importers:
         specifier: ^3.2.4
         version: 3.2.4(@types/debug@4.1.12)(@types/node@20.19.20)(jiti@1.21.7)(jsdom@27.0.0(postcss@8.5.6))(tsx@4.20.6)(yaml@2.8.2)
 
+  sites/nova-test:
+    dependencies:
+      '@platform/core-components':
+        specifier: workspace:*
+        version: link:../../packages/core-components
+      '@platform/theme-system':
+        specifier: workspace:*
+        version: link:../../packages/theme-system
+      '@platform/themes':
+        specifier: workspace:*
+        version: link:../../packages/themes
+      next:
+        specifier: '>=16.1.5'
+        version: 16.1.5(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(@playwright/test@1.56.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      react:
+        specifier: 19.2.3
+        version: 19.2.3
+      react-dom:
+        specifier: 19.2.3
+        version: 19.2.3(react@19.2.3)
+    devDependencies:
+      '@types/node':
+        specifier: ^20
+        version: 20.19.20
+      '@types/react':
+        specifier: ^19
+        version: 19.2.2
+      '@types/react-dom':
+        specifier: ^19
+        version: 19.2.1(@types/react@19.2.2)
+      autoprefixer:
+        specifier: ^10.4.21
+        version: 10.4.21(postcss@8.5.6)
+      postcss:
+        specifier: ^8.5.6
+        version: 8.5.6
+      tailwindcss:
+        specifier: ^3.4.17
+        version: 3.4.18(tsx@4.20.6)(yaml@2.8.2)
+      typescript:
+        specifier: ^5
+        version: 5.9.3
+
   sites/showcase:
     dependencies:
       '@platform/core-components':
