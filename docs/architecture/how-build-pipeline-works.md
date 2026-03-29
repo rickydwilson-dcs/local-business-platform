@@ -22,8 +22,7 @@ Phase 2: Build sites (parallel, after packages complete)
     ├── sites/colossus-scaffolding → next build
     ├── sites/dj-fox-electrical    → next build
     ├── sites/showcase             → next build
-    ├── sites/test-atlas           → next build (test only)
-    └── sites/test-lyra            → next build (test only)
+    └── sites/[theme-name]-test    → next build (test only, created by pipeline)
     ↓
 Each next build:
     1. Loads theme.config.ts → runs createThemePlugin() → generates CSS variables
