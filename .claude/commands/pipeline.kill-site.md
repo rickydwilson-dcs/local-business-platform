@@ -1,6 +1,6 @@
 # Pipeline Kill Site
 
-Remove a test site created by `/pipeline.ingest`.
+Remove a test site created by `/pipeline.ingest` or `/pipeline.stitch-design`.
 
 **Usage:** `/pipeline.kill-site test-<theme-name>` or `/pipeline.kill-site <theme-name>`
 **Options:** `--force` — remove even if `.pipeline-test-site.json` marker is missing
@@ -19,7 +19,13 @@ Parse `$ARGUMENTS` for:
 - Site name (required) — e.g., `test-lyra` or just `lyra`
 - `--force` (optional) — skip marker check
 
-Normalize the name: if it doesn't start with `test-`, prepend `test-`.
+Normalize the site name:
+1. If the argument matches an existing directory directly (e.g. `lyra-test` → `sites/lyra-test/`): use it as-is
+2. If the argument starts with `test-` (e.g. `test-lyra`): use as-is → `sites/test-lyra/`
+3. If the argument ends with `-test` (e.g. `lyra-test`): use as-is → `sites/lyra-test/`
+4. If the argument is a bare name (e.g. `lyra`): try `sites/lyra-test/` first, then `sites/test-lyra/`; use whichever exists
+5. If both `sites/<name>-test/` and `sites/test-<name>/` exist: STOP — "Ambiguous: both sites/<name>-test/ and sites/test-<name>/ exist. Pass the full folder name."
+6. If neither exists: "Site not found — nothing to remove." (idempotent success)
 
 ## Step 2: Validate
 

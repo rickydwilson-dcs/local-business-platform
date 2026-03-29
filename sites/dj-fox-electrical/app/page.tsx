@@ -124,7 +124,7 @@ export default async function HomePage() {
                 <Icon className="w-6 h-6 text-brand-primary flex-shrink-0" aria-hidden="true" />
                 <div>
                   <p className="text-xl font-bold text-white tracking-tight stat-value">{value}</p>
-                  <p className="text-xs text-surface-muted-foreground uppercase tracking-widest">{label}</p>
+                  <p className="text-xs text-on-inverse-muted uppercase tracking-widest">{label}</p>
                 </div>
               </div>
             ))}
@@ -321,8 +321,8 @@ export default async function HomePage() {
                     </div>
                     <h3 className="text-base font-semibold text-white">{title}</h3>
                   </div>
-                  <p className="text-surface-muted-foreground text-sm leading-relaxed">{body}</p>
-                  <p className="text-xs font-mono text-surface-muted-foreground uppercase tracking-widest md:text-right stat-value">
+                  <p className="text-on-inverse-muted text-sm leading-relaxed">{body}</p>
+                  <p className="text-xs font-mono text-on-inverse-muted uppercase tracking-widest md:text-right stat-value">
                     {stat}
                   </p>
                 </div>
@@ -340,7 +340,7 @@ export default async function HomePage() {
               <h2 className="text-4xl md:text-5xl font-bold tracking-tight">
                 Need an <span className="accent-underline">Emergency</span> Electrician?
               </h2>
-              <p className="text-xl mt-4 text-surface-muted-foreground">
+              <p className="text-xl mt-4 text-on-inverse-muted">
                 Available 24/7 across Eastbourne and East Sussex
               </p>
             </FadeIn>

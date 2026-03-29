@@ -195,7 +195,7 @@
   }
 
   .section-dark p {
-    @apply text-surface-muted-foreground;
+    @apply text-on-inverse-muted;
   }
 
   /* Black background with brand-colour accents — Orion CTA sections */
@@ -316,7 +316,7 @@
   }
 
   .stat-card-dark p {
-    @apply text-surface-muted-foreground;
+    @apply text-on-inverse-muted;
   }
 
   /* ==========================================

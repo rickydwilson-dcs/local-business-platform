@@ -181,3 +181,14 @@ The original single-screenshot pipeline (`tools/generate-theme-from-reference.ts
 | `tools/lib/component-matcher.ts` | Section → component matching |
 | `tools/lib/page-template-generator.ts` | Example page TSX generation |
 | `tools/lib/theme-name-picker.ts` | Auto theme name from constellation namespace |
+
+## Test Site Naming
+
+Two pipeline commands create test sites, using different naming conventions:
+
+| Command | Creates | Example |
+|---------|---------|---------|
+| `/pipeline.ingest` | `sites/test-<theme-name>/` | `sites/test-lyra/` |
+| `/pipeline.stitch-design` | `sites/<theme-name>-test/` | `sites/lyra-test/` |
+
+Both conventions are handled by `/pipeline.kill-site` — pass either the full folder name or the bare theme name and it resolves the correct directory.

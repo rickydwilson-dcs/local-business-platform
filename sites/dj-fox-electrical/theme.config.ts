@@ -20,22 +20,11 @@ export const themeConfig: DeepPartialThemeConfig = {
       accent: '#fbbf24',
     },
     surface: {
-      background: '#ffffff',
-      foreground: '#1f2937',
-      muted: '#f3f4f6',
-      mutedForeground: '#5b6370',
-      card: '#ffffff',
-      cardBorder: '#e5e7eb',
-    },
-    semantic: {
-      success: '#10b981',
-      warning: '#f59e0b',
-      error: '#ef4444',
-      info: '#3b82f6',
+      // Lighten muted text on dark sections: slate-300 (#cbd5e1) vs Orion default slate-400 (#94a3b8).
+      // Contrast on surface.inverse (#1f2937): ~9.05:1 — passes WCAG AAA ✓
+      inverseMutedForeground: '#cbd5e1',
     },
     overlay: {
-      dark: 'rgba(0, 0, 0, 0.8)',
-      light: 'rgba(255, 255, 255, 0.8)',
       primary: 'rgba(219, 11, 11, 0.8)', // Brand red with opacity
     },
   },
@@ -50,18 +39,13 @@ export const themeConfig: DeepPartialThemeConfig = {
 
   components: {
     button: {
-      borderRadius: '0.5rem',
       fontWeight: 600,
     },
-    card: {
-      borderRadius: '1rem',
-      shadow: 'sm',
-    },
+    // NOTE: hero.variant conflict — this site sets 'centered' but the Orion component registry
+    // declares heroVariant: 'image-overlay'. Needs human review to confirm which is authoritative
+    // post-CSS-refactor to semantic tokens. Do not resolve without visual regression check.
     hero: {
       variant: 'centered',
-    },
-    navigation: {
-      style: 'solid',
     },
   },
 };

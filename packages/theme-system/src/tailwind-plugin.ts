@@ -94,6 +94,9 @@ export function createThemePlugin(
         ".bg-surface-inverse": {
           backgroundColor: "var(--color-surface-inverse)",
         },
+        ".text-on-inverse-muted": {
+          color: "var(--color-surface-inverse-muted-foreground)",
+        },
         ".border-surface-subtle": {
           borderColor: "var(--color-surface-subtle-border)",
         },
@@ -268,6 +271,7 @@ export function createThemePlugin(
               subtle: "var(--color-surface-subtle)",
               "subtle-border": "var(--color-surface-subtle-border)",
               inverse: "var(--color-surface-inverse)",
+              "inverse-muted-foreground": "var(--color-surface-inverse-muted-foreground)",
             },
             semantic: {
               success: "var(--color-success)",

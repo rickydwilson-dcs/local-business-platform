@@ -30,6 +30,7 @@ export function generateCssVariables(config: ThemeConfig): Record<string, string
   vars["--color-surface-subtle"] = config.colors.surface.subtle;
   vars["--color-surface-subtle-border"] = config.colors.surface.subtleBorder;
   vars["--color-surface-inverse"] = config.colors.surface.inverse;
+  vars["--color-surface-inverse-muted-foreground"] = config.colors.surface.inverseMutedForeground;
 
   // Semantic Colors
   vars["--color-success"] = config.colors.semantic.success;

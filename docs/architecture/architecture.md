@@ -27,8 +27,7 @@ local-business-platform/
 │   ├── colossus-scaffolding/       # Reference implementation (scaffolding)
 │   ├── dj-fox-electrical/          # Production site (electrical)
 │   ├── showcase/                   # Internal component/theme showcase
-│   ├── test-atlas/                 # Test site (pipeline testing)
-│   └── test-lyra/                  # Test site (pipeline testing)
+│   └── [theme-name]-test/          # Temporary test sites (created by pipeline, removed after review)
 ├── packages/
 │   ├── core-components/            # Shared UI components (@platform/core-components)
 │   ├── theme-system/               # Theming engine (@platform/theme-system)

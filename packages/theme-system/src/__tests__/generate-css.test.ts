@@ -23,6 +23,7 @@ describe("CSS Generation", () => {
       expect(vars["--color-surface-subtle"]).toBe("#f9fafb");
       expect(vars["--color-surface-subtle-border"]).toBe("#e5e7eb");
       expect(vars["--color-surface-inverse"]).toBe("#111827");
+      expect(vars["--color-surface-inverse-muted-foreground"]).toBe("#94a3b8");
 
       // Brand on-primary
       expect(vars["--color-brand-on-primary"]).toBe("#ffffff");
