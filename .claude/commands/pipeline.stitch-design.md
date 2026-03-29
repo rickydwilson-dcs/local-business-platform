@@ -3,10 +3,46 @@
 Generate a new theme and test site using Google Stitch as the design source.
 No reference URL required — Stitch creates the design from a trade/profession description.
 
-**Usage:** `/pipeline.stitch-design --trade "electrical contractor" [--colors "dark navy and yellow"]`
+**Usage:**
+```
+/pipeline.stitch-design --trade "plumber" \
+  [--name "Ricky's Plumbing"] \
+  [--services "Boiler installation, Emergency repairs, Bathroom fitting"] \
+  [--location "East London"] \
+  [--tagline "London's most trusted plumber since 1998"] \
+  [--phone "020 7946 0321"] \
+  [--colors "#1a3a5c"] \
+  [--secondary-color "#c47a3a"] \
+  [--accent-color "#f5c842"] \
+  [--headline-font "newsreader"] \
+  [--body-font "work-sans"] \
+  [--roundness "default"] \
+  [--color-variant "fidelity"] \
+  [--logo-desc "A blue shield with a wrench"]
+```
 
-- `--trade` (required) — the business/profession type; used to prompt Stitch
-- `--colors` (optional) — colour scheme guidance; if omitted, Stitch chooses its own
+**Arguments:**
+
+| Argument | Required | Default | Description |
+|---|---|---|---|
+| `--trade` | ✓ | — | Business/profession type |
+| `--name` | — | `Smith & Sons [Trade]` | Company name used in all content |
+| `--services` | — | Generic for trade | Comma-separated list of services |
+| `--location` | — | `UK` | Service area, used in content and contact details |
+| `--tagline` | — | Generic | Brand tagline for hero and footer |
+| `--phone` | — | `0800 XXX XXXX` | Phone number used in contact and footer |
+| `--colors` | — | Stitch chooses | Primary brand colour (hex or description) |
+| `--secondary-color` | — | Stitch derives | Secondary colour hex |
+| `--accent-color` | — | Stitch derives | Accent/highlight colour hex |
+| `--headline-font` | — | `newsreader` | Heading font — see font options below |
+| `--body-font` | — | `work-sans` | Body/UI font — see font options below |
+| `--roundness` | — | `default` | Corner radius: `sharp` `default` `soft` `pill` |
+| `--color-variant` | — | `tonal` | Palette generation: `tonal` `fidelity` `vibrant` `expressive` `monochrome` |
+| `--logo-desc` | — | — | Description of logo for design system brief |
+
+**Font options:**
+- Serif: `newsreader` `eb-garamond` `literata` `source-serif` `domine` `libre-caslon` `noto-serif`
+- Sans: `work-sans` `inter` `plus-jakarta` `space-grotesk` `montserrat` `dm-sans` `manrope` `rubik` `geist` `sora`
 
 Theme name is auto-assigned from the constellation namespace.
 
@@ -32,15 +68,40 @@ If output is non-empty, WARN: "Working tree has uncommitted changes. Proceeding 
 
 **1.3 — Parse arguments**
 
-Parse `$ARGUMENTS` for:
-- `--trade` (required) — e.g. `electrical contractor`, `plumber`, `scaffolding company`
-- `--colors` (optional) — e.g. `dark navy and yellow`
+Parse `$ARGUMENTS` for all supported flags. Store each as a variable:
+
+| Flag | Variable | Default if omitted |
+|---|---|---|
+| `--trade` | `$TRADE` | — (required) |
+| `--name` | `$COMPANY_NAME` | `Smith & Sons [Trade]` |
+| `--services` | `$SERVICES_LIST` | _(leave empty — Stitch will generate appropriate services for the trade)_ |
+| `--location` | `$LOCATION` | `UK` |
+| `--tagline` | `$TAGLINE` | _(leave empty — generate from trade)_ |
+| `--phone` | `$PHONE` | `0800 XXX XXXX` |
+| `--colors` | `$PRIMARY_COLOR` | _(leave empty — Stitch chooses)_ |
+| `--secondary-color` | `$SECONDARY_COLOR` | _(leave empty)_ |
+| `--accent-color` | `$ACCENT_COLOR` | _(leave empty)_ |
+| `--headline-font` | `$HEADLINE_FONT` | `newsreader` |
+| `--body-font` | `$BODY_FONT` | `work-sans` |
+| `--roundness` | `$ROUNDNESS` | `default` |
+| `--color-variant` | `$COLOR_VARIANT` | `tonal` |
+| `--logo-desc` | `$LOGO_DESC` | _(leave empty)_ |
+
+Map font/roundness/color-variant args to Stitch enums:
+
+**Font name → Stitch enum:**
+`newsreader`→`NEWSREADER`, `eb-garamond`→`EB_GARAMOND`, `literata`→`LITERATA`, `source-serif`→`SOURCE_SERIF_FOUR`, `domine`→`DOMINE`, `libre-caslon`→`LIBRE_CASLON_TEXT`, `noto-serif`→`NOTO_SERIF`, `work-sans`→`WORK_SANS`, `inter`→`INTER`, `plus-jakarta`→`PLUS_JAKARTA_SANS`, `space-grotesk`→`SPACE_GROTESK`, `montserrat`→`MONTSERRAT`, `dm-sans`→`DM_SANS`, `manrope`→`MANROPE`, `rubik`→`RUBIK`, `geist`→`GEIST`, `sora`→`SORA`
+
+**Roundness → Stitch enum:** `sharp`→`ROUND_FOUR`, `default`→`ROUND_EIGHT`, `soft`→`ROUND_TWELVE`, `pill`→`ROUND_FULL`
+
+**Color variant → Stitch enum:** `tonal`→`TONAL_SPOT`, `fidelity`→`FIDELITY`, `vibrant`→`VIBRANT`, `expressive`→`EXPRESSIVE`, `monochrome`→`MONOCHROME`, `neutral`→`NEUTRAL`
 
 If `--trade` is missing, STOP with:
 ```
-Usage: /pipeline.stitch-design --trade "electrical contractor" [--colors "dark navy and yellow"]
+Usage: /pipeline.stitch-design --trade "electrical contractor" [options]
 
 --trade is required. It describes the business type used to prompt Stitch.
+Run /pipeline.stitch-design with no arguments to see all options.
 ```
 
 **1.4 — Verify Stitch MCP reachable**
@@ -74,7 +135,7 @@ THEME_NAMES may be out of sync. Investigate before proceeding.
 
 ---
 
-## Step 2: Create Stitch Project and Generate Pages
+## Step 2: Create Stitch Project, Design System, and Generate Pages
 
 **2a — Create project**
 
@@ -88,33 +149,107 @@ Examples:
 
 Store the returned project ID as `$PROJECT_ID`.
 
-**2b — Apply project-level design intent**
+**2b — Create design system**
 
-Send as the initial generation prompt or project description:
+Call Stitch MCP `create_design_system` with `projectId: $PROJECT_ID` and these fields:
+
 ```
-Design a professional website for a [TRADE] business in the UK.
-[If --colors provided:] Use a colour scheme of [COLORS].
-[If --colors omitted:] Choose a colour scheme appropriate for a [TRADE] business.
+displayName: "$THEME_NAME Design System"
+theme:
+  headlineFont: <$HEADLINE_FONT enum>       # e.g. NEWSREADER
+  bodyFont: <$BODY_FONT enum>               # e.g. WORK_SANS
+  customColor: <primary hex>                # from $PRIMARY_COLOR if provided, else omit
+  overrideSecondaryColor: <hex>             # from $SECONDARY_COLOR if provided, else omit
+  overrideTertiaryColor: <hex>              # from $ACCENT_COLOR if provided, else omit
+  colorMode: LIGHT
+  colorVariant: <$COLOR_VARIANT enum>       # e.g. TONAL_SPOT
+  roundness: <$ROUNDNESS enum>              # e.g. ROUND_EIGHT
+  designMd: <constructed below>
+```
 
-Design intent:
+**Construct `designMd`** from available args — include only the lines for which args were provided:
+
+```markdown
+# Brand Identity
+
+Company: $COMPANY_NAME
+Trade: $TRADE
+[If $LOCATION provided:] Location: $LOCATION
+[If $TAGLINE provided:] Tagline: $TAGLINE
+[If $LOGO_DESC provided:] Logo: $LOGO_DESC
+
+# Design Principles
+
 - Trustworthy, local, and conversion-focused — not generic SaaS
-- Consistent typography, spacing rhythm, and component language across all pages
-- Token-driven colour usage (primary, secondary, accent, surface, on-primary)
-- Use realistic placeholder content (company name: "Smith & Sons [Trade]", services, testimonials, contact details)
 - Mobile-first layout, clean navigation, prominent CTA buttons
+- Consistent spacing rhythm and component language across all pages
+
+# Content
+
+[If $SERVICES_LIST provided:] Services offered: $SERVICES_LIST
+[If $PHONE provided:] Phone: $PHONE
 ```
+
+Store the returned design system asset ID as `$DESIGN_SYSTEM_ID`.
 
 **2c — Generate exactly 5 screens**
 
-Submit one generation request per screen, using the page-specific prompts below:
+Generate the home page first, then use it as the explicit visual reference for all subsequent pages.
 
-| Screen | Slug | Key sections |
-|--------|------|-------------|
-| Home | `home` | Hero with strong CTA, services overview (3–4 cards), social proof/testimonials, stats bar, footer |
-| About | `about` | Company story, founding year, team/values, trust signals (accreditations, awards), footer |
-| Contact | `contact` | Contact form (name, email, phone, message), business phone/address, opening hours, map placeholder, footer |
-| Services | `services` | Grid/listing of service categories with icon, title, short description, "Learn more" link, breadcrumb nav |
-| Service Detail | `service-detail` | Single service page: hero + service name, description paragraphs, benefits list, image gallery placeholder, FAQ accordion, CTA panel, breadcrumb back to Services |
+**2c-i — Generate home screen**
+
+Submit the home generation request, substituting all `$VARIABLES` with their parsed values:
+
+```
+Home page for "$COMPANY_NAME" — a professional $LOCATION $TRADE business.
+[If $TAGLINE:] Brand tagline: "$TAGLINE"
+[If $SERVICES_LIST:] Services: $SERVICES_LIST
+[If $PHONE:] Phone: $PHONE
+
+Sections:
+- Fixed navigation bar: company name in headline font (brand primary colour), nav links (Services / About / Contact), prominent "Get a Quote" CTA button
+- Hero: full-bleed image with gradient overlay, large serif heading, subheading, two CTA buttons, optional floating review/stats card
+- Stats bar: 3 stats with Material Symbols icons, brand-primary accent numbers
+- Services overview: 3–4 cards with image, icon, heading, description, "Details" link
+  [If $SERVICES_LIST:] Use these services: $SERVICES_LIST
+- Testimonials: 2-column card grid, quote icon, star rating, italic blockquote, avatar with initials
+- CTA band: full-bleed brand-primary background, decorative icon, heading, body, two buttons
+- Footer: 3-column grid — brand+tagline, navigation links, contact details (phone, address)
+  [If $TAGLINE:] Use "$TAGLINE" as the brand description in the footer
+  [If $PHONE:] Use $PHONE in the footer contact column
+```
+
+Store the returned screen ID as `$HOME_SCREEN_ID`.
+
+**2c-ii — Generate remaining 4 screens**
+
+For each of the 4 remaining screens, prepend the following consistency instruction (substituting variables):
+
+```
+This is a page for the same website as the home page (screen ID: $HOME_SCREEN_ID).
+
+Company: "$COMPANY_NAME" — a $TRADE business[If $LOCATION:] in $LOCATION]
+[If $PHONE:] Phone: $PHONE
+
+MATCH THE HOME PAGE EXACTLY for:
+- Navigation bar: identical component — same font, same layout, same button style
+- Footer: identical component — same 3-column structure, same content areas
+- Typography: same heading font and body font as the home page — do not change font choices
+- Hero section style: if this page has a hero, use the same font weight, overlay treatment, and badge style as the home page hero
+- Button styles: same border-radius, same padding, same font weight as home page buttons
+- Colour usage: same semantic colour assignments as the home page
+
+Page-specific content:
+```
+
+Then append the page-specific sections:
+
+| Screen | Slug | Page-specific sections |
+|--------|------|----------------------|
+| About | `about` | Company story with founding year[If $LOCATION: and $LOCATION roots], pull-quote, team grid (4 members with hover reveal), values cards (3, icon + hover colour change), trust/accreditations bar (4 items, grayscale→colour on hover), CTA band |
+| Contact | `contact` | Page header with hero image, contact form (name/email/phone/message), contact info sidebar ([If $PHONE: $PHONE /] address / hours), map image placeholder, landscape image break |
+| Services | `services` | Breadcrumb, page header, 6-card service grid (icon + image + description + "Learn more" link)[If $SERVICES_LIST: using these services: $SERVICES_LIST], CTA band with decorative icon |
+| Service Detail | `service-detail` | Breadcrumb, hero for [first service from $SERVICES_LIST or "primary service"], description + benefits card (4 benefits with icons), 3-image staggered gallery with hover captions, FAQ accordion (3 questions), CTA panel |
 
 After submitting all 5 screens, call `list_screens` for `$PROJECT_ID` and confirm exactly 5 exist. If any failed, STOP and report which screen(s) failed.
 
@@ -122,6 +257,15 @@ After submitting all 5 screens, call `list_screens` for `$PROJECT_ID` and confir
 # Verification gate — STOP if this fails
 # Confirm list_screens returns exactly 5 screens for $PROJECT_ID
 ```
+
+**2d — Apply design system to all screens**
+
+Call `get_project` for `$PROJECT_ID` to retrieve screen instance IDs. Then call `apply_design_system` with:
+- `projectId: $PROJECT_ID`
+- `assetId: $DESIGN_SYSTEM_ID`
+- `selectedScreenInstances`: all screen instances from the project
+
+This enforces fonts, colours, and roundness across any screens that drifted during generation.
 
 ---
 
@@ -131,6 +275,7 @@ Create output folders:
 ```bash
 mkdir -p output/ingestion/$THEME_NAME-stitch/design-system
 mkdir -p output/ingestion/$THEME_NAME-stitch/html
+mkdir -p output/ingestion/$THEME_NAME-stitch/images
 mkdir -p output/ingestion/$THEME_NAME-stitch/meta
 ```
 
@@ -151,6 +296,17 @@ Download in parallel where possible:
   ```
 - For each of the 5 screens, call the Stitch HTML export tool → write to `output/ingestion/$THEME_NAME-stitch/html/<slug>.html`
 
+**3b — Download images**
+
+After all HTML files are written, extract and download all AI-generated images:
+
+1. Parse all 5 HTML files for every unique `https://lh3.googleusercontent.com/` URL in `src="..."` attributes
+2. Download each to `output/ingestion/$THEME_NAME-stitch/images/img-NNN.jpg` (sequential, zero-padded to 3 digits)
+3. Write `output/ingestion/$THEME_NAME-stitch/meta/image-manifest.json`:
+   ```json
+   { "img-001.jpg": "<original-url>", "img-002.jpg": "<original-url>" }
+   ```
+
 ```bash
 # Verification gate — STOP if this fails
 ls output/ingestion/$THEME_NAME-stitch/design-system/tokens.json
@@ -161,7 +317,10 @@ ls output/ingestion/$THEME_NAME-stitch/html/services.html
 ls output/ingestion/$THEME_NAME-stitch/html/service-detail.html
 ls output/ingestion/$THEME_NAME-stitch/meta/project.json
 ls output/ingestion/$THEME_NAME-stitch/meta/screens.json
-# All 8 files must exist and be non-empty
+ls output/ingestion/$THEME_NAME-stitch/meta/image-manifest.json
+# All 9 files must exist and be non-empty
+ls output/ingestion/$THEME_NAME-stitch/images/ | grep -c img
+# Must be > 0
 ```
 
 ---
@@ -404,17 +563,76 @@ Update the `tagline` field to:
 Pipeline Test Site — $THEME_NAME theme (Stitch)
 ```
 
-**5g — Rewrite app/layout.tsx as bare shell**
+**5g — Generate Stitch TSX Pages**
 
-The test site uses base-template pages wired to the new theme. Do NOT attempt to convert Stitch HTML to TSX — this is out of scope for v1.
+Produce five self-contained TSX server component pages that replicate the Stitch HTML designs section-by-section. These replace the base-template placeholder pages and form the visual comparison basis of the test site.
 
-```typescript
+**Pre-conditions:** Images must already be downloaded to `output/ingestion/$THEME_NAME-stitch/images/` and copied to `sites/$THEME_NAME-test/public/stitch-images/`.
+
+**First — copy images to test site:**
+```bash
+mkdir -p sites/$THEME_NAME-test/public/stitch-images
+cp output/ingestion/$THEME_NAME-stitch/images/img-*.jpg sites/$THEME_NAME-test/public/stitch-images/
+ls sites/$THEME_NAME-test/public/stitch-images/ | wc -l
+# Must match image count from output/ingestion/$THEME_NAME-stitch/images/
+```
+
+**Files to create/replace:**
+- `sites/$THEME_NAME-test/app/layout.tsx` — keep ThemeProvider structure; no `<head>` font tags (fonts load via globals.css @import)
+- `sites/$THEME_NAME-test/app/globals.css` — rewrite to add Google Fonts `@import` at the top before `@tailwind` directives
+- `sites/$THEME_NAME-test/app/page.tsx` — home
+- `sites/$THEME_NAME-test/app/about/page.tsx` — about
+- `sites/$THEME_NAME-test/app/contact/page.tsx` — contact
+- `sites/$THEME_NAME-test/app/services/page.tsx` — services listing
+- `sites/$THEME_NAME-test/app/services/[first-service-slug]/page.tsx` — service detail (static route, not dynamic)
+
+**Rules:**
+- Read each Stitch HTML file in full before writing its TSX counterpart — the HTML is source of truth for sections, content, and layout
+- No `'use client'`, no platform imports (`@platform/core-components`, `siteConfig`, etc.)
+- All content hardcoded from the Stitch HTML — do not use MDX or siteConfig
+- `<img src="/stitch-images/img-NNN.jpg" alt="..." />` — not `next/image`
+- `<a href="...">` — not `<Link>`
+- Material Symbols: `<span className="material-symbols-outlined">icon_name</span>`. Filled: add `style={{ fontVariationSettings: "'FILL' 1" }}`
+- FAQ accordions: `<details>`/`<summary>` with `group-open:rotate-180` on chevron — no JS state
+- Nav and footer are inlined per page (no shared import)
+- **Opacity modifiers on theme tokens don't work:** Tailwind's `/opacity` modifier (e.g. `bg-surface-background/80`) renders transparent when the color comes from a CSS custom property. Always use hardcoded hex with opacity instead: `bg-[#fbf9f5]/80`, `bg-[#163526]/30` etc. This applies everywhere — navs, overlays, decorative elements.
+- **CSS fidelity:** Copy ALL CSS classes from each Stitch HTML element faithfully. Do not omit or simplify hover effects, transition durations (`duration-500`, `duration-700`), grayscale filters (`grayscale-[20%]`), scale transforms (`scale-105`), opacity values, or micro-interactions. If the Stitch HTML has it, the TSX must have it.
+- Translate all Stitch MD3 color tokens to theme token classes using the canonical color map:
+
+| Stitch token | Theme token |
+|---|---|
+| `primary` | `brand-primary` |
+| `secondary` | `brand-secondary` |
+| `tertiary-fixed-dim` | `brand-accent` |
+| `surface` / `background` | `surface-background` |
+| `surface-container-low` | `surface-muted` |
+| `on-surface` | `surface-foreground` |
+| `outline-variant` | `surface-border` |
+| Unmapped colors | Tailwind arbitrary `bg-[#hexvalue]` |
+
+**layout.tsx pattern** — Newsreader and Work Sans via `next/font/google` (Turbopack-native). Material Symbols via `<link>` in `<head>` (server-rendered, not processed by Turbopack CSS bundler — `Material_Symbols_Outlined` is not available in next/font/google):
+```tsx
 import type { Metadata, Viewport } from 'next';
+import { Newsreader, Work_Sans } from 'next/font/google';
 import './globals.css';
 import { siteConfig } from '@/site.config';
 import { ThemeProvider } from '@platform/core-components';
-import { <camelCaseThemeName>Registry } from '@platform/themes/<theme-name>';
-import { ReviewPanel } from './components/ReviewPanel';
+import { [camelCaseThemeName]Registry } from '@platform/themes/$THEME_NAME';
+
+const newsreader = Newsreader({
+  subsets: ['latin'],
+  variable: '--font-newsreader',
+  display: 'swap',
+  style: ['normal', 'italic'],
+  weight: ['200', '300', '400', '500', '600', '700', '800'],
+});
+
+const workSans = Work_Sans({
+  subsets: ['latin'],
+  variable: '--font-work-sans',
+  display: 'swap',
+  weight: ['300', '400', '500', '600', '700'],
+});
 
 export const metadata: Metadata = {
   title: { default: siteConfig.name, template: `%s | ${siteConfig.name}` },
@@ -424,16 +642,190 @@ export const viewport: Viewport = { width: 'device-width', initialScale: 1, maxi
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en-GB">
+    <html lang="en-GB" className={`${newsreader.variable} ${workSans.variable}`}>
+      <head>
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=block"
+        />
+      </head>
       <body className="min-h-screen flex flex-col">
-        <ThemeProvider theme="<theme-name>" registry={<camelCaseThemeName>Registry}>
+        <ThemeProvider theme="$THEME_NAME" registry={[camelCaseThemeName]Registry}>
           {children}
-          <ReviewPanel />
         </ThemeProvider>
       </body>
     </html>
   );
 }
+```
+
+**globals.css pattern** — uses CSS variables from next/font, no `@import url()`:
+```css
+@import "../../../packages/themes/$THEME_NAME/globals.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/**
+ * Pipeline Test Site — $THEME_NAME theme (Stitch)
+ * Generated by /pipeline.stitch-design
+ */
+
+@layer base {
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-work-sans), sans-serif;
+    @apply bg-surface-background text-surface-foreground;
+    font-feature-settings: 'rlig' 1, 'calt' 1;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-newsreader), serif;
+  }
+  .material-symbols-outlined {
+    font-family: 'Material Symbols Outlined';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    direction: ltr;
+    font-feature-settings: 'liga';
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    vertical-align: middle;
+  }
+}
+```
+
+**Patch next.config.ts CSP** — the base-template CSP blocks Google Fonts. Update `sites/$THEME_NAME-test/next.config.ts`:
+
+Find the `Content-Security-Policy` value and change:
+```
+style-src 'self' 'unsafe-inline'; font-src 'self';
+```
+To:
+```
+style-src 'self' 'unsafe-inline' fonts.googleapis.com; font-src 'self' fonts.gstatic.com;
+```
+
+**Verification gate:**
+```bash
+ls sites/$THEME_NAME-test/app/{page.tsx,about/page.tsx,contact/page.tsx,services/page.tsx} | wc -l
+# Must be 4
+grep -l "@platform/core-components\|siteConfig\|getContentItems" \
+  sites/$THEME_NAME-test/app/page.tsx \
+  sites/$THEME_NAME-test/app/about/page.tsx \
+  sites/$THEME_NAME-test/app/contact/page.tsx \
+  sites/$THEME_NAME-test/app/services/page.tsx 2>/dev/null | wc -l
+# Must be 0
+```
+
+---
+
+## Step 5h: Stitch Fidelity Review + Fix
+
+After TSX pages are generated, start the dev server, compare each rendered page against its Stitch HTML source, then apply fixes. Fully autonomous — no pause for approval.
+
+**5h-i — Start dev server**
+
+```bash
+cd sites/$THEME_NAME-test && npm install --silent
+```
+
+Then start the dev server in the background and capture the port:
+```bash
+npm run dev > /tmp/$THEME_NAME-dev.log 2>&1 &
+DEV_PID=$!
+```
+
+Poll until ready (max 30 seconds):
+```bash
+for i in 2 3 4 5 6 10; do
+  sleep $i
+  if grep -q "Local:" /tmp/$THEME_NAME-dev.log 2>/dev/null; then break; fi
+done
+DEV_PORT=$(grep -o "localhost:[0-9]*" /tmp/$THEME_NAME-dev.log | head -1 | cut -d: -f2)
+DEV_PORT=${DEV_PORT:-3000}
+echo "Dev server on port $DEV_PORT"
+curl -s -o /dev/null -w "HTTP %{http_code}" http://localhost:$DEV_PORT
+```
+
+If HTTP status is not 200, STOP: "Dev server failed to start. Check /tmp/$THEME_NAME-dev.log"
+
+**5h-ii — Review agent (model: sonnet)**
+
+Launch a review agent with the following task:
+
+> Compare each of the 5 rendered pages against its Stitch HTML source. For each difference, write a structured finding.
+>
+> Pages to compare (substitute actual port for $DEV_PORT):
+> - Fetch http://localhost:$DEV_PORT/ → compare against `output/ingestion/$THEME_NAME-stitch/html/home.html`
+> - Fetch http://localhost:$DEV_PORT/about → compare against `output/ingestion/$THEME_NAME-stitch/html/about.html`
+> - Fetch http://localhost:$DEV_PORT/contact → compare against `output/ingestion/$THEME_NAME-stitch/html/contact.html`
+> - Fetch http://localhost:$DEV_PORT/services → compare against `output/ingestion/$THEME_NAME-stitch/html/services.html`
+> - Fetch http://localhost:$DEV_PORT/services/[first-service-slug] → compare against `output/ingestion/$THEME_NAME-stitch/html/service-detail.html`
+>
+> Also read each corresponding TSX file so you can identify where to apply fixes.
+>
+> For each difference, produce one entry. Write all findings to `output/ingestion/$THEME_NAME-stitch/meta/tsx-review-findings.json`:
+> ```json
+> [
+>   {
+>     "id": "H001",
+>     "page": "home",
+>     "section": "stats-bar",
+>     "type": "blocker|visual|minor",
+>     "description": "Human-readable description of the difference",
+>     "stitch_value": "The class/value/element in the Stitch HTML",
+>     "tsx_value": "What the TSX currently has (or 'missing')",
+>     "fix_file": "sites/$THEME_NAME-test/app/page.tsx"
+>   }
+> ]
+> ```
+>
+> Severity definitions:
+> - `blocker` — visible breakage: font not loading, missing whole section, broken layout
+> - `visual` — CSS detail absent: hover effect, transition duration, grayscale filter, scale transform, animation
+> - `minor` — copy difference, color token variant, minor structural deviation
+>
+> **Do NOT flag as findings:**
+> - Form fields being `readOnly` (static visual comparison — intentional)
+> - Local `/stitch-images/` paths instead of Google URLs (intentional — images are localised)
+> - Simplified footers on contact and service-detail pages (brief-specified minimal footer)
+> - Any difference that is explicitly required by the TSX generation rules (e.g. `<a>` not `<Link>`)
+
+**5h-iii — Fix agent (model: sonnet)**
+
+Launch a fix agent with the following task:
+
+> Read `output/ingestion/$THEME_NAME-stitch/meta/tsx-review-findings.json`.
+>
+> Apply fixes in severity order: blockers first, then visual, then minor.
+>
+> For each finding:
+> 1. Read the `fix_file`
+> 2. Apply the minimal change needed to resolve the difference
+> 3. After editing each file, run: `cd sites/$THEME_NAME-test && npx tsc --noEmit 2>&1 | head -10`
+> 4. If type-check produces new errors, revert the last change and mark the finding as `skipped`
+>
+> Write a fix log to `output/ingestion/$THEME_NAME-stitch/meta/tsx-fix-log.json`:
+> ```json
+> [
+>   { "id": "H001", "status": "fixed", "description": "Added @import for Google Fonts in globals.css" },
+>   { "id": "H002", "status": "skipped", "reason": "Would require client component" }
+> ]
+> ```
+>
+> Do not commit anything. Report: total findings, fixed count, skipped count, any blockers that could not be resolved.
+
+**5h-iv — Kill dev server**
+
+```bash
+kill $DEV_PID 2>/dev/null || true
+rm -f /tmp/$THEME_NAME-dev.log
 ```
 
 ---
@@ -480,23 +872,37 @@ Output this summary to the user:
 ```
 ✓ Theme assigned:   $THEME_NAME  (constellation namespace)
 ✓ Stitch project:   <project-name>  (id: $PROJECT_ID)
+✓ Design system:    $DESIGN_SYSTEM_ID
+    headline font:  $HEADLINE_FONT  |  body font: $BODY_FONT
+    primary colour: $PRIMARY_COLOR  |  roundness: $ROUNDNESS  |  variant: $COLOR_VARIANT
+✓ Company:          $COMPANY_NAME ($TRADE[, $LOCATION if set])
 ✓ Design assets:    output/ingestion/$THEME_NAME-stitch/
     html/           — 5 page exports (home, about, contact, services, service-detail)
     design-system/  — tokens.json
-    meta/           — project.json, screens.json, token-mapping-report.json
+    meta/           — project.json, screens.json, token-mapping-report.json, image-manifest.json,
+                      tsx-review-findings.json, tsx-fix-log.json
+    images/         — downloaded AI-generated images
 ✓ Theme package:    packages/themes/$THEME_NAME/
 ✓ Test site:        sites/$THEME_NAME-test/
 ✓ THEME_NAMES:      updated in packages/theme-system/src/types.ts
 
 Dev server:   cd sites/$THEME_NAME-test && npm run dev
+              Visit http://localhost:3000 to see Stitch-derived TSX pages
+
+Stitch comparison: http://localhost:3000        (home)
+                   http://localhost:3000/about
+                   http://localhost:3000/contact
+                   http://localhost:3000/services
+                   http://localhost:3000/services/[first-service-slug]
 Cleanup:      /pipeline.kill-site $THEME_NAME-test   (removes test site)
               /pipeline.kill-theme $THEME_NAME        (removes theme package)
 
 Next steps:
   1. Open Stitch project to review and iterate designs visually
   2. Inspect meta/token-mapping-report.json — verify colour extraction looks correct
-  3. Start dev server and confirm theme tokens resolve
-  4. When satisfied: /deploy.changes
+  3. Review tsx-review-findings.json and tsx-fix-log.json to see what the fidelity pass caught
+  4. Start dev server (npm run dev) and visit the 5 Stitch-derived TSX pages above
+  5. When satisfied: /deploy.changes
 ```
 
 ---

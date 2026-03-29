@@ -169,7 +169,8 @@ npm run validate:content  # Shows which MDX files fail and why
 | Guide                                               | Purpose                  |
 | --------------------------------------------------- | ------------------------ |
 | [Adding a New Site](docs/guides/adding-new-site.md) | Create a new client site |
-| [Theming](docs/guides/theming.md)                   | Configure site theme     |
+| [Creating a New Theme](docs/guides/creating-new-theme.md) | Create a theme via ingest or Stitch pipeline |
+| [Theming](docs/guides/theming.md)                   | Configure site theme tokens and overlays |
 | [Adding a Service](docs/guides/adding-service.md)   | Add service MDX content  |
 | [Adding a Location](docs/guides/adding-location.md) | Add location MDX content |
 | [Git Workflow](docs/guides/git-workflow.md)         | Branch workflow details  |
