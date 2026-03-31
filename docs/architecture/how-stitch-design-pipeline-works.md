@@ -92,6 +92,47 @@ To clean up:
 - `/pipeline.kill-site <theme-name>-test` — removes the test site
 - `/pipeline.kill-theme <theme-name>` — removes the theme package
 
+## Heading consistency mechanism
+
+Stitch generates each page independently, which means heading typography (H1/H2 weight, size, casing) can vary between pages if the design brief gives no explicit constraints. The pipeline addresses this at three layers.
+
+### 1. Enriched `designMd` (Step 2b)
+
+Before calling `create_design_system`, the pipeline constructs a richer `designMd` with three parts:
+
+- **Part A — Brand identity:** company name, trade, location, tagline, services, phone
+- **Part B — Taste-informed design system:** the `stitch-design-taste` skill is invoked inline with local-business dial overrides (Creativity: 4, Density: 5, Variance: 3, Motion Intent: 2). Only sections relevant to local businesses are requested: Color Palette, Typography Rules, Component Stylings, Layout Principles, and Anti-Patterns. The output is appended to `designMd` as `$TASTE_DESIGN_BLOCK`.
+- **Part C — Static fallback typography contract:** if the taste skill invocation fails or returns empty, an embedded fallback block is used instead. It specifies: H1 at font-weight 800–900 with tracking-tight and leading-tight, H2 at font-weight 700 with tracking-tight, sentence case on both, no uppercase on headings, no Inter font, no gradient or decorative heading treatments.
+
+The full `designMd` is logged to the terminal before `create_design_system` is called.
+
+### 2. Home page class extraction and injection (Step 2c-i-extract)
+
+After the home page generates, `get_screen` is called to retrieve its HTML. The pipeline extracts:
+- `$H1_CLASSES` — the full `class` attribute of the first `<h1>` element
+- `$H2_CLASSES` — the modal (most frequently occurring) `class` attribute across all `<h2>` elements
+
+These are injected as hard constraints into all 4 remaining page prompts (about, contact, services, service-detail). Each page prompt includes a "Typography hard constraints" block that requires every `<h1>` to use exactly `$H1_CLASSES` and every `<h2>` to use exactly `$H2_CLASSES`. If extraction fails (network error or no headings found), static class requirements fall back to: `font-extrabold tracking-tight leading-tight` for H1, `font-bold tracking-tight leading-snug` for H2.
+
+### 3. Drift report and normaliser (Step 2e)
+
+After `apply_design_system` (Step 2d) and before downloading assets (Step 3), the pipeline runs the heading drift report:
+
+```bash
+npx tsx tools/stitch-normalize-headings.mjs \
+  --dir output/ingestion/$THEME_NAME-stitch/html \
+  --h1 "$H1_CLASSES" \
+  --h2 "$H2_CLASSES"
+```
+
+The script parses all 5 HTML files and prints a table showing whether each page's H1 and H2 typography classes match the canonical strings from home. If drift is detected, the user is prompted with three choices:
+
+1. **Proceed anyway** — accept the drift and continue
+2. **Auto-normalise** — rerun with `--enforce` to rewrite drifted classes to match home
+3. **Stop** — re-generate the drifted pages manually, then resume from Step 3
+
+**`tools/stitch-normalize-headings.mjs`** uses Node built-ins only (no npm dependencies). In enforce mode (`--enforce`), it rewrites only the typography-relevant classes (`font-*`, `text-*`, `tracking-*`, `leading-*`, casing tokens) on drifted elements, preserving all layout, colour, and spacing classes. Each rewrite is logged with filename, element, and line number.
+
 ## Key Files
 
 | File | Purpose |
