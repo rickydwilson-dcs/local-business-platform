@@ -27,6 +27,7 @@
     "images:intake": "tsx tools/images-intake.ts",
     "images:update-mdx": "tsx tools/update-mdx-images.ts",
     "images:pipeline": "pnpm images:manifest && pnpm images:generate && pnpm images:upload && pnpm images:update-mdx",
+    "sync:themes": "tsx tools/sync-themes.ts",
     "rename:images": "tsx tools/rename-existing-images.ts",
     "update:r2-urls": "tsx tools/update-to-r2-urls.ts",
     "test:r2": "tsx tools/test-r2-connection.ts",

@@ -77,12 +77,76 @@ Write `output/ingestion/<theme-name>/meta/html-manifest.json`:
 }
 ```
 
+## Step 2c: Download Reference Images
+
+Download images from the reference site and place them into the test site's public directory so the fix agent can wire them into components.
+
+Create directories:
+```bash
+mkdir -p output/ingestion/<theme-name>/images
+mkdir -p sites/test-<theme-name>/public/images
+```
+
+For each HTML file captured in Step 2b, extract `<img src="...">` values:
+```bash
+grep -oh 'src="[^"]*"' output/ingestion/<theme-name>/html/*.html 2>/dev/null \
+  | sed 's/src="//;s/"//' \
+  | grep -v '^data:' \
+  | grep -v '^$' \
+  | sort -u > /tmp/<theme-name>-img-urls.txt
+```
+
+For each URL in that list (max 20 total):
+- Skip if URL length > 2000 chars
+- Resolve relative URLs to absolute using the page base URL (prefix `<source-url>` if path starts with `/`)
+- Sanitise filename — **use python3, not `tr`** (`tr` produces a trailing `-` on most image URLs):
+```bash
+python3 -c "
+import sys, re
+url = sys.argv[1]
+name = url.split('/')[-1].split('?')[0].split('#')[0]
+name = re.sub(r'[^a-zA-Z0-9._-]', '-', name)
+name = name.strip('-') or 'image'
+print(name)
+" "$url"
+```
+- Download to ingestion dir only (test site gets the images later in Step 3):
+```bash
+curl -s --max-time 10 -L -A "Mozilla/5.0" "$url" \
+  -o "output/ingestion/<theme-name>/images/<sanitised-filename>"
+```
+
+**WARN not STOP** on any curl failure — CDNs frequently block direct downloads. Continue to next image.
+
+Write `output/ingestion/<theme-name>/meta/image-manifest.json`:
+```json
+{
+  "capturedAt": "<ISO timestamp>",
+  "images": [
+    {
+      "originalUrl": "https://example.com/hero.jpg",
+      "localPath": "output/ingestion/<theme-name>/images/hero.jpg",
+      "publicPath": "/images/hero.jpg"
+    }
+  ]
+}
+```
+
+Print: `Downloaded N/M images (M attempted) → output/ingestion/<theme-name>/images/`
+
 ## Step 3: Create Test Site
 
-Copy base-template to create the test site:
+Copy base-template to create the test site. **Important:** `sites/test-<theme-name>/` must NOT exist yet when `cp -r` runs — if Step 2c created `public/images/` inside it first, `cp -r` nests `base-template/` inside the existing directory instead of replacing it.
+
 ```bash
 cp -r sites/base-template sites/test-<theme-name>
 rm -rf sites/test-<theme-name>/node_modules sites/test-<theme-name>/.next sites/test-<theme-name>/.turbo
+```
+
+Then copy the downloaded reference images into the test site's public directory:
+```bash
+mkdir -p sites/test-<theme-name>/public/images
+cp output/ingestion/<theme-name>/images/* sites/test-<theme-name>/public/images/ 2>/dev/null || true
 ```
 
 ## Step 4: Write Marker File
@@ -116,10 +180,25 @@ import { <camelCaseThemeName>Registry, <camelCaseThemeName>DefaultConfig } from 
 export const themeConfig: DeepPartialThemeConfig = {
   componentRegistry: <camelCaseThemeName>Registry,
   ...<camelCaseThemeName>DefaultConfig,
+  // Always override surface tokens directly in theme.config.ts.
+  // The theme-system Tailwind plugin is pre-compiled to dist/ — values imported from
+  // theme packages are not guaranteed to be picked up at the consuming site's build time.
+  // Overrides in theme.config.ts are always applied.
+  colors: {
+    ...<camelCaseThemeName>DefaultConfig.colors,
+    surface: {
+      ...<camelCaseThemeName>DefaultConfig.colors?.surface,
+      inverse: '<surface-inverse-hex>',
+    },
+  },
 };
 ```
 
-Where `<camelCaseThemeName>` is the theme name in camelCase (e.g., `lyra` → `lyra`, `dark-forest` → `darkForest`).
+Where:
+- `<camelCaseThemeName>` is the theme name in camelCase (e.g., `lyra` → `lyra`, `dark-forest` → `darkForest`)
+- `<surface-inverse-hex>` is from `themeTokenRecommendations.colors.surface.inverse` in `site-analysis.json`. If the field is absent or null, use `'#111111'` as a safe dark fallback.
+
+**Why this matters:** If `surface.inverse` is not overridden here and the theme's hero/CTA uses `bg-surface-inverse`, it will render as `#111827` (the theme-system default near-black) instead of the intended brand colour. This makes hero sections appear much darker than the reference site.
 
 **5b.** Rewrite `sites/test-<theme-name>/app/globals.css` with:
 
@@ -320,6 +399,51 @@ For all other components: build a map of `blueprintId → componentExportName` f
 1. Theme component — if `packages/themes/<theme-name>/components/<componentFileName>` exists → import from `@platform/themes/<theme-name>/components`
 2. Core component match — if `componentMatches` has "exact" or "close" confidence → import from `@platform/core-components` (barrel only, no subpath)
 3. Inline JSX — write the section directly in the page file using Tailwind theme tokens
+
+**5f-1b: Verify and clean theme barrel index**
+
+The pipeline sometimes marks components as "reused from core" but still appends their names to the theme's `index.ts` barrel. This causes import errors at build time. After building the component inventory, verify every named export in `packages/themes/<theme-name>/components/index.ts` has a corresponding file:
+
+```bash
+# List exports from barrel
+grep -o "export \* from '\./[^']*'" packages/themes/<theme-name>/components/index.ts \
+  | sed "s|export \* from '\./||;s|'||" \
+  | while read name; do
+    file="packages/themes/<theme-name>/components/${name}.tsx"
+    [ -f "$file" ] || echo "MISSING: $name"
+  done
+```
+
+For each MISSING export: remove that `export * from './...'` line from `packages/themes/<theme-name>/components/index.ts`.
+
+**This is a known pipeline defect** — do not skip this step even if the inventory looks complete.
+
+**5f-1c: Fix animation import paths in theme components**
+
+AI-generated theme components frequently use the wrong import path for animation primitives. The pipeline writes:
+```
+@platform/core-components/src/components/animation
+```
+but the correct path is:
+```
+@platform/core-components/components/animation
+```
+
+Batch-fix all affected files:
+```bash
+grep -rl '@platform/core-components/src/components/animation' \
+  packages/themes/<theme-name>/components/ \
+  | xargs -I{} sed -i '' \
+    's|@platform/core-components/src/components/animation|@platform/core-components/components/animation|g' {}
+```
+
+Verify the fix:
+```bash
+grep -r '@platform/core-components/src/components/animation' \
+  packages/themes/<theme-name>/components/ 2>/dev/null \
+  && echo "WARN: Some import paths not fixed" \
+  || echo "PASS: Animation import paths clean"
+```
 
 **5f-2: Detect category slug**
 
@@ -866,117 +990,95 @@ style-src 'self' 'unsafe-inline' fonts.googleapis.com; font-src 'self' fonts.gst
 grep "fonts.googleapis.com" sites/test-<theme-name>/next.config.ts && echo "PASS: CSP patched" || { echo "FAIL: CSP not patched — fonts will be blocked"; exit 1; }
 ```
 
-## Step 5h: Ingest Fidelity Review + Fix
+## Step 5h: Fidelity Review + Fix
 
-After pages are generated, start the dev server, compare each rendered page against reference screenshots and HTML source, then apply fixes autonomously.
+Write the review criteria to `output/ingestion/<theme-name>/meta/validate-review-prompt.txt`:
 
-**5h-i — Start dev server**
+```
+Review the 5 test site pages for brand fidelity against the reference site.
 
-```bash
-cd sites/test-<theme-name> && npm install --silent
-npm run dev > /tmp/<theme-name>-dev.log 2>&1 &
-DEV_PID=$!
+**Reference material:**
+- **Dev server screenshots** (actual rendered output): `output/ingestion/<theme-name>/meta/dev-screenshots/` — `home.png`, `about.png`, `contact.png`, `category-list.png`, `category-detail.png`. Run `ls` to confirm which exist. **Read these PNG files directly** to see what the test site actually looks like.
+- **Reference site screenshots**: `output/ingestion/<theme-name>/screenshots/` — `home.png`, `about.png`, `blog-list.png`, etc. Read these to see what the reference looks like.
+- **HTML source**: `output/ingestion/<theme-name>/html/` (structural reference)
+- **Section blueprints**: `output/ingestion/<theme-name>/site-analysis.json` → `pageBlueprints[]`, `sectionBlueprints[]`
+- **Extracted tokens**: `site-analysis.json` → `themeTokenRecommendations`
+- **Downloaded images**: `output/ingestion/<theme-name>/meta/image-manifest.json` — list of images available in the test site's `public/images/` directory
+
+**Primary comparison method**: Read both the dev screenshot and the reference screenshot for each page. Compare them visually — look at layout, colours, typography scale, spacing, and image presence. Use WebFetch on the dev server URL for structural/code checks only.
+
+**Pages to compare:**
+- `meta/dev-screenshots/home.png` ↔ `screenshots/home.png`
+- `meta/dev-screenshots/about.png` ↔ `screenshots/about.png` (if both exist)
+- `meta/dev-screenshots/contact.png` ↔ (no reference — check structure only)
+- `meta/dev-screenshots/category-list.png` ↔ `screenshots/blog-list.png` or `screenshots/services-list.png`
+- `meta/dev-screenshots/category-detail.png` ↔ `screenshots/blog-post.png` or `screenshots/service-detail.png`
+
+Also read each corresponding TSX file so you can identify where to apply fixes.
+
+**What to check (ingest-specific — brand fidelity, not exact replication):**
+1. **Font loading** — Is body text rendering in the extracted font (not browser default sans-serif)?
+2. **Brand colours** — Do primary/secondary/accent colours match `themeTokenRecommendations.brand`?
+3. **Section completeness** — Is every section in `pageBlueprints[page].sections[]` present in the rendered page?
+4. **Nav and footer** — Present on every page? Are they rendering real content or placeholder stubs?
+5. **Layout pattern** — Does header style (dark/light) match `visualLanguage.heroPattern.headerDark`? Does hero pattern match `visualLanguage.heroPattern.type`?
+6. **CSS completeness** — Are hover effects, transitions, and interactive states present?
+7. **Image rendering** — Are images present in the rendered output, or are they still colour-block placeholders? Check `image-manifest.json` for available downloaded images. If images exist in the manifest but components show placeholders, flag as `visual`.
+8. **Logo rendering** — Is the nav component rendering the logo as an `<img>` element, or as text? If `logo` is passed as a prop but appears as a string (e.g. `/images/logo.svg` shown as text), the component is outputting the prop value as text instead of an image source. Flag as `visual`.
+9. **Hamburger menu** — Is the mobile menu icon visible on desktop (not hidden with `md:hidden`)? Does it have an `onClick` handler and produce a dropdown with links? A hamburger that does nothing when clicked is a `blocker`. A hamburger hidden on desktop is a `visual`.
+10. **CTA colour variety** — If the page has multiple distinct CTA sections (e.g. speakers, sponsors, volunteers), do they each use a different background colour? If all CTAs share the same `bg-brand-primary` background when the reference shows yellow/blue/green variety, flag each one as `visual` with the target colour from the reference screenshot.
+11. **Invisible text** — Look for `text-surface-background` classes used as text colour. On dark `bg-surface-inverse` sections, `text-surface-background` renders the text the same colour as the background (invisible). This is always a `blocker` — flag with the correct replacement (`text-surface-foreground` or `text-white`).
+
+**What NOT to check:**
+- Whether content pixel-matches the reference site — it will not
+- Whether specific copy is identical
+- Form field interactivity (static visual comparison only — `readOnly` is intentional)
+- High pixel-diff scores — these are expected and informational only
+
+**Fix guidance for common finding types:**
+- **Image placeholder findings** (colour blocks where images should appear): read the component's props interface, then pass the appropriate downloaded image(s) from `image-manifest.json` as props. Use the `publicPath` field (e.g. `/images/hero.jpg`).
+- **Logo-as-text findings**: open the theme nav component file. Find where `props.logo` is used. If it outputs `{props.logo}` as text, replace with `<img src={props.logo} alt="Site logo" className="h-8 w-auto" />`.
+- **Hamburger findings**: the theme nav component needs `"use client"` at top, `useState` for `open` state, `onClick={() => setOpen(!open)}` on the button, and a conditional `{open && <div>...</div>}` block. The hamburger button should NOT have `md:hidden`.
+- **CTA colour findings**: assign distinct backgrounds — `bg-brand-secondary` for registration/speakers, `bg-[#hex]` for sponsors, `bg-brand-accent` for volunteers. Never use `text-on-brand-primary` on non-brand-primary backgrounds.
+- **Invisible text findings**: change `text-surface-background` → `text-surface-foreground` on dark sections.
 ```
 
-Poll until ready (max 30 seconds):
-```bash
-for i in 2 3 4 5 6 10; do
-  sleep $i
-  grep -q "Local:" /tmp/<theme-name>-dev.log 2>/dev/null && break
-done
-DEV_PORT=$(grep -o "localhost:[0-9]*" /tmp/<theme-name>-dev.log | head -1 | cut -d: -f2)
-DEV_PORT=${DEV_PORT:-3000}
-echo "Dev server on port $DEV_PORT"
-curl -s -o /dev/null -w "HTTP %{http_code}" http://localhost:$DEV_PORT
+Then run the shared validation skill:
+
+```
+/pipeline.validate-site \
+  --site-dir sites/test-<theme-name> \
+  --pages "/ /about /contact /<detected-slug>/ /<detected-slug>/test-item" \
+  --review-prompt-file output/ingestion/<theme-name>/meta/validate-review-prompt.txt \
+  --findings-file output/ingestion/<theme-name>/meta/tsx-review-findings.json \
+  --fix-log-file output/ingestion/<theme-name>/meta/tsx-fix-log.json \
+  --screenshot-dir output/ingestion/<theme-name>/meta/dev-screenshots
 ```
 
-If HTTP status is not 200, STOP: "Dev server failed to start. Check /tmp/<theme-name>-dev.log"
-
-**5h-ii — Review agent (model: sonnet)**
-
-Launch a review agent with the following task:
-
-> Review the 5 test site pages for brand fidelity against the reference site.
->
-> **Reference material:**
-> - Screenshots of the reference site: `output/ingestion/<theme-name>/screenshots/` (pageType filenames: `home.png`, `about.png`, `services-list.png`, `service-detail.png`, etc. — run `ls` to confirm which exist)
-> - HTML source: `output/ingestion/<theme-name>/html/` (if captured in Step 2b)
-> - Section blueprints: `output/ingestion/<theme-name>/site-analysis.json` → `pageBlueprints[]`, `sectionBlueprints[]`
-> - Extracted tokens: `site-analysis.json` → `themeTokenRecommendations`
->
-> **Pages to compare** (substitute actual port for $DEV_PORT):
-> - `http://localhost:$DEV_PORT/` ↔ `screenshots/home.png`
-> - `http://localhost:$DEV_PORT/about` ↔ `screenshots/about.png` (if exists)
-> - `http://localhost:$DEV_PORT/contact` ↔ `screenshots/contact.png` (if exists)
-> - `http://localhost:$DEV_PORT/<detected-slug>/` ↔ `screenshots/services-list.png` or `screenshots/blog-list.png` (whichever exists)
-> - `http://localhost:$DEV_PORT/<detected-slug>/<first-item>` ↔ `screenshots/service-detail.png` or `screenshots/blog-post.png` (whichever exists)
->
-> Also read each corresponding TSX file so you can identify where to apply fixes.
->
-> **What to check (ingest-specific — brand fidelity, not exact replication):**
-> 1. **Font loading** — Is body text rendering in the extracted font (not browser default sans-serif)?
-> 2. **Brand colours** — Do primary/secondary/accent colours match `themeTokenRecommendations.brand`?
-> 3. **Section completeness** — Is every section in `pageBlueprints[page].sections[]` present in the rendered page?
-> 4. **Nav and footer** — Present on every page?
-> 5. **Layout pattern** — Does header style (dark/light) match `visualLanguage.heroPattern.headerDark`? Does hero pattern match `visualLanguage.heroPattern.type`?
-> 6. **CSS completeness** — Are hover effects, transitions, and interactive states present?
->
-> **What NOT to check:**
-> - Whether content or images pixel-match the reference site — they will not
-> - Whether specific copy is identical
-> - Form field interactivity (static visual comparison only — `readOnly` is intentional)
->
-> For each issue found, produce one finding. Write all findings to `output/ingestion/<theme-name>/meta/tsx-review-findings.json`:
-> ```json
-> [
->   {
->     "id": "I001",
->     "page": "home",
->     "section": "hero",
->     "type": "blocker|visual|minor",
->     "description": "Human-readable description",
->     "reference_value": "What the reference screenshot shows or what the blueprint specifies",
->     "tsx_value": "What the test site currently renders (or 'missing')",
->     "fix_file": "sites/test-<theme-name>/app/page.tsx"
->   }
-> ]
-> ```
->
-> **Severity definitions:**
-> - `blocker` — font not loading, entire section missing per blueprint, nav or footer absent, layout visually broken
-> - `visual` — colour token mismatch vs extracted tokens, wrong font size, missing hover effects, missing transitions
-> - `minor` — copy difference, icon missing, minor structural variation that doesn't affect brand fidelity
-
-**5h-iii — Fix agent (model: sonnet)**
-
-Launch a fix agent with the following task:
-
-> Read `output/ingestion/<theme-name>/meta/tsx-review-findings.json`.
->
-> Apply fixes in severity order: blockers first, then visual, then minor.
->
-> For each finding:
-> 1. Read the `fix_file`
-> 2. Apply the minimal change needed to resolve the issue
-> 3. After editing each file, run: `cd sites/test-<theme-name> && npx tsc --noEmit 2>&1 | head -10`
-> 4. If type-check produces new errors, revert the last change and mark the finding as `skipped`
->
-> Write a fix log to `output/ingestion/<theme-name>/meta/tsx-fix-log.json`:
-> ```json
-> [
->   { "id": "I001", "status": "fixed", "description": "Applied correct brand-primary background to hero section" },
->   { "id": "I002", "status": "skipped", "reason": "Would require client-side animation library" }
-> ]
-> ```
->
-> Do not commit anything. Report: total findings, fixed count, skipped count, any blockers that could not be resolved.
-
-**5h-iv — Kill dev server**
-
+After the pixel-diff baseline (run inside the validate-site skill's screenshot step), also run:
 ```bash
-kill $DEV_PID 2>/dev/null || true
-rm -f /tmp/<theme-name>-dev.log
+npx tsx -e "
+import fs from 'fs';
+import path from 'path';
+import { compareImages } from './tools/lib/pipeline-visual-compare.ts';
+const devDir = 'output/ingestion/<theme-name>/meta/dev-screenshots';
+const refDir = 'output/ingestion/<theme-name>/screenshots';
+const pairs = [
+  ['home.png','home.png'], ['about.png','about.png'],
+  ['category-list.png','blog-list.png'], ['category-list.png','services-list.png'],
+];
+for (const [devFile, refFile] of pairs) {
+  const devPath = path.join(devDir, devFile);
+  const refPath = path.join(refDir, refFile);
+  if (!fs.existsSync(devPath) || !fs.existsSync(refPath)) continue;
+  const buf = fs.readFileSync(devPath);
+  const result = await compareImages(refPath, buf);
+  console.log(devFile + ': ' + (result.diffPercent * 100).toFixed(1) + '% pixel diff vs reference (informational)');
+}
+" 2>/dev/null || echo "WARN: Visual diff skipped (pipeline-visual-compare unavailable)"
 ```
+
+Print diff percentages as informational only — high values (30–70%) are expected since content differs.
 
 ## Step 6: Reconcile Lockfile
 
