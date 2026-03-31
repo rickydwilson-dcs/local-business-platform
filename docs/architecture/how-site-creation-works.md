@@ -134,9 +134,10 @@ The intake process produces a project file — a validated JSON structure contai
 1. **Copies base-template** to `sites/[project-name]/`
 2. **Generates `site.config.ts`** with business name, phone, email, address, hours
 3. **Generates `theme.config.ts`** with brand colors from the project file
-4. **Generates MDX content files** — one `.mdx` per service and location, with frontmatter populated from the project file
-5. **Updates `package.json`** with the new site name
-6. **Runs validation** to ensure all generated content passes schema checks
+4. **Updates `package.json`** with the new site name
+5. **Runs validation** to ensure all generated config passes schema checks
+
+> **Note:** `create-site-from-project.ts` generates config files (`site.config.ts`, `theme.config.ts`) only — it does not create MDX content files. Content generation is a separate step done by `tools/generate-services.ts` and `tools/generate-locations.ts` after the site is scaffolded.
 
 ```bash
 npx tsx tools/create-site-from-project.ts --project tools/examples/sample-project.json
