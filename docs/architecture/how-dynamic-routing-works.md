@@ -184,6 +184,19 @@ The platform supports five content types, all using this same dynamic routing pa
 | Projects     | `content/projects/`     | `/projects/[slug]`          | `ProjectFrontmatterSchema`     |
 | Testimonials | `content/testimonials/` | `/reviews` (aggregate page) | `TestimonialFrontmatterSchema` |
 
+## Static Pages
+
+Not every page uses a dynamic `[slug]` route. The base template includes conventional static Next.js pages for content that doesn't come from MDX files:
+
+| Page | Route file | Notes |
+|------|-----------|-------|
+| About | `app/about/page.tsx` | Static page with inline content |
+| Contact | `app/contact/page.tsx` | Contact form, wires to contact API route |
+| Privacy Policy | `app/privacy-policy/page.tsx` | Static legal content |
+| Cookie Policy | `app/cookie-policy/page.tsx` | Static legal content |
+
+These are plain Next.js pages — they don't use `generateStaticParams()` and don't read MDX files. Edit them directly if per-site customization is needed. They are intentionally kept outside the MDX architecture because their content rarely changes and doesn't benefit from the frontmatter-driven pattern.
+
 ## Adding New Content
 
 1. Create an MDX file in the appropriate `content/` subdirectory

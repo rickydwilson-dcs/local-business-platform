@@ -135,14 +135,60 @@ Use the same structure as the deliverable format above (phases, files, verificat
 
 Be thorough. This is the plan Claude would implement if working alone.
 
-### Step 6: Report to User
+### Step 6: Call OpenRouter API
 
-Tell the user:
+Check if `$OPENROUTER_API_KEY` is set:
 
+```bash
+echo $OPENROUTER_API_KEY
+```
+
+**If the key is empty or unset:** Fall back to the manual workflow — tell the user:
 1. The folder that was created: `output/sessions/codex-peer-review/[DATE_TOPIC]/`
-2. Open **`codex-prompt.md`** — it is a ready-to-paste prompt. Copy the entire file content and paste it into Codex in VS Code.
-3. Codex's instructions (where to save its response, what to run next) are already inside the file.
-4. Once Codex has saved `codex-plan.md`, run `/plan.with.codex synthesise` to generate the final spec.
+2. Open `codex-prompt.md` — copy the entire file content and paste it into Codex in VS Code.
+3. Once Codex has saved `codex-plan.md`, run `/plan.with.codex synthesise` to generate the final spec.
+4. Suggest they set `OPENROUTER_API_KEY` in their shell env to automate this step in future.
+
+**If the key is set:** Call OpenRouter automatically:
+
+```bash
+# Build JSON payload — escape the prompt content safely
+PROMPT_CONTENT=$(cat "$FOLDER/codex-prompt.md")
+PAYLOAD=$(python3 -c "
+import sys, json
+prompt = open('$FOLDER/codex-prompt.md').read()
+payload = {
+    'model': 'openai/gpt-5.3-codex',
+    'max_tokens': 4096,
+    'messages': [{'role': 'user', 'content': prompt}]
+}
+print(json.dumps(payload))
+")
+
+curl -s https://openrouter.ai/api/v1/chat/completions \
+  -H "Authorization: Bearer $OPENROUTER_API_KEY" \
+  -H "HTTP-Referer: https://github.com/local-business-platform" \
+  -H "X-Title: LBP Plan Peer Review" \
+  -H "Content-Type: application/json" \
+  -d "$PAYLOAD" \
+  > "$FOLDER/openrouter-response.json"
+
+# Check for API error
+python3 -c "
+import json, sys
+d = json.load(open('$FOLDER/openrouter-response.json'))
+if 'error' in d:
+    print('ERROR: ' + str(d['error']))
+    sys.exit(1)
+print(d['choices'][0]['message']['content'])
+" > "$FOLDER/codex-plan.md"
+```
+
+If the curl or parse step fails, show the error from `openrouter-response.json` and fall back to the manual workflow.
+
+If successful, tell the user: "OpenRouter response received and saved to `codex-plan.md`. Proceeding to synthesis..."
+
+Then immediately execute Phase 2 (Synthesise) without waiting for user input — proceed directly to the **Phase 2: Synthesise** steps below, using `$FOLDER` as the active review folder (skip the "Find the Active Review Folder" step).
 
 ---
 
@@ -225,3 +271,5 @@ Tell the user:
 - **The synthesis is honest about conflicts** — don't paper over disagreements, reason through them
 - **The synthesis becomes the session.md** — once approved, copy it to `output/sessions/YYYY-MM-DD_[topic]/session.md` and implement from there
 - **Model selection:** Phase 1 (brief + claude-plan) → Sonnet. Phase 2 (synthesis) → Opus. The synthesis earns the Opus cost; Phase 1 does not.
+- **OpenRouter key required for automation** — if `$OPENROUTER_API_KEY` is not set, fall back to manual copy-paste workflow. The OpenRouter model used is `openai/gpt-5.3-codex`.
+- **End-to-end automation when key is present** — if the API call succeeds, Phase 1 flows directly into Phase 2 with no user intervention between them.

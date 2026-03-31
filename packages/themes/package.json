@@ -4,8 +4,17 @@
   "private": true,
   "description": "Named visual theme packages for the Local Business Platform",
   "exports": {
+    "./atlas": "./atlas/index.ts",
+    "./atlas/manifest": "./atlas/manifest.ts",
+    "./atlas/showcase": "./atlas/showcase-registry.tsx",
+    "./atlas/components": "./atlas/components/index.ts",
+    "./lyra": "./lyra/index.ts",
+    "./nova": "./nova/index.ts",
     "./orion": "./orion/index.ts",
-    "./vega": "./vega/index.ts",
-    "./lyra": "./lyra/index.ts"
+    "./rigel": "./rigel/index.ts",
+    "./rigel/manifest": "./rigel/manifest.ts",
+    "./rigel/showcase": "./rigel/showcase-registry.tsx",
+    "./rigel/components": "./rigel/components/index.ts",
+    "./vega": "./vega/index.ts"
   }
 }

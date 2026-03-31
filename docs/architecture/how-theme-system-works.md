@@ -199,7 +199,7 @@ const config: Config = {
 ### Colors
 
 - **Brand:** `bg-brand-primary`, `bg-brand-secondary`, `bg-brand-accent`, `text-brand-primary`, `border-brand-primary`
-- **Surface:** `bg-surface-background`, `bg-surface-muted`, `bg-surface-card`, `text-surface-foreground`, `text-surface-muted-foreground`
+- **Surface:** `bg-surface-background`, `bg-surface-muted`, `bg-surface-card`, `bg-surface-subtle`, `text-surface-foreground`, `text-surface-secondary-foreground`, `text-surface-tertiary-foreground`, `text-surface-muted-foreground`, `border-surface-card-border`, `border-surface-subtle-border`, `bg-surface-inverse`, `text-surface-inverse-muted-foreground`
 - **Semantic:** `bg-success`, `bg-warning`, `bg-error`, `bg-info`, `text-success`, `text-error`, `text-info`
 
 ### Typography Scale

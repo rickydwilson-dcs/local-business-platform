@@ -27,7 +27,7 @@ import { createContext, useContext } from "react";
 // ============================================================
 
 /** Identifies which named visual theme is active. */
-export type ThemeName = "orion" | "vega" | "lyra";
+export type ThemeName = "orion" | "vega" | "lyra" | "atlas" | "nova" | "rigel";
 
 /** Metadata describing which component variants a theme uses. */
 export interface ComponentRegistry {
