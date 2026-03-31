@@ -167,7 +167,9 @@ theme:
   designMd: <constructed below>
 ```
 
-**Construct `designMd`** from available args — include only the lines for which args were provided:
+**Construct `designMd`** using three parts:
+
+**Part A — Brand Identity** (same variables as before):
 
 ```markdown
 # Brand Identity
@@ -178,17 +180,64 @@ Trade: $TRADE
 [If $TAGLINE provided:] Tagline: $TAGLINE
 [If $LOGO_DESC provided:] Logo: $LOGO_DESC
 
-# Design Principles
-
-- Trustworthy, local, and conversion-focused — not generic SaaS
-- Mobile-first layout, clean navigation, prominent CTA buttons
-- Consistent spacing rhythm and component language across all pages
-
 # Content
 
 [If $SERVICES_LIST provided:] Services offered: $SERVICES_LIST
 [If $PHONE provided:] Phone: $PHONE
 ```
+
+**Part B — Taste-informed design system (primary path):**
+
+Before calling `create_design_system`, invoke the `stitch-design-taste` skill with the following parameters to generate a design system brief calibrated for this project:
+
+- Project: $COMPANY_NAME — a $TRADE business
+- Primary colour: $PRIMARY_COLOR (if provided)
+- **Local business Dial overrides (use these — do not use the skill's defaults):**
+  - Creativity: 4
+  - Density: 5
+  - Variance: 3
+  - Motion Intent: 2
+- Request only sections: 2 (Color Palette), 3 (Typography Rules), 4 (Component Stylings), 6 (Layout Principles), and 9 (Anti-Patterns)
+- Omit: Hero inline image technique, motion philosophy section, dashboard constraints — these are SaaS patterns inappropriate for local service businesses
+
+Store the taste skill output as `$TASTE_DESIGN_BLOCK`.
+
+**Part C — Static fallback typography contract:**
+
+If `$TASTE_DESIGN_BLOCK` is empty or the skill invocation was not successful, use this embedded block instead:
+
+```markdown
+## Typography System
+
+**Display/Headlines:** Track-tight (-0.025em), weight-driven hierarchy (700–900), leading 1.1. Not screaming — hierarchy through weight, not excessive size.
+**Body:** Weight 400, leading 1.65, max 65 characters per line.
+**Scale:** H1 at clamp(2.5rem, 5vw, 4rem). H2 at clamp(1.5rem, 3vw, 2.25rem). Body at 1rem.
+
+**H1 rules:** font-weight 800–900, sentence case, tracking -0.025em, leading 1.1. NEVER uppercase.
+**H2 rules:** font-weight 700, sentence case, tracking -0.015em, leading 1.2. NEVER uppercase.
+**Eyebrow labels only** may use uppercase — never H1 or H2.
+
+**Banned:**
+- Inter font (use Geist, Work Sans, Space Grotesk, or the specified $HEADLINE_FONT)
+- ALL CAPS on headings
+- Gradient text on headings
+- Decorative outline or shadow treatments on headings
+- Different heading weights or casings across pages
+
+## Anti-Patterns
+
+- No generic 3-column equal card layouts — use 2-column zig-zag or asymmetric grids
+- No overlapping elements — every element in its own spatial zone
+- No AI copywriting clichés: "Elevate", "Seamless", "Unleash", "Next-Gen"
+- No pure black (#000000) — use off-black or dark grays
+- No neon/oversaturated accents
+- No fake round numbers (99.99%, 50%) — use organic data
+- No emojis anywhere
+```
+
+**Final `designMd`** = Part A + (Part B `$TASTE_DESIGN_BLOCK` if non-empty, else Part C)
+
+Before calling `create_design_system`, log the full `designMd` string to the terminal so it can be reviewed.
 
 Store the returned design system asset ID as `$DESIGN_SYSTEM_ID`.
 
@@ -221,6 +270,28 @@ Sections:
 
 Store the returned screen ID as `$HOME_SCREEN_ID`.
 
+**2c-i-extract — Extract heading classes from home screen**
+
+After storing `$HOME_SCREEN_ID`, call `get_screen` for `$HOME_SCREEN_ID` to retrieve the home page HTML.
+
+Parse the returned HTML:
+- Find the first `<h1>` element and extract its full `class` attribute value → store as `$H1_CLASSES`
+- Find all `<h2>` elements, extract their `class` attribute values, pick the most frequently occurring class string (by exact string match) → store as `$H2_CLASSES`
+
+Example of what to extract and store:
+```
+$H1_CLASSES = "font-headline text-5xl md:text-7xl font-extrabold tracking-tight leading-none"
+$H2_CLASSES = "font-headline text-3xl md:text-4xl font-bold tracking-tight leading-snug"
+```
+
+If `get_screen` fails, or the HTML contains no `<h1>` or `<h2>` elements, set both `$H1_CLASSES` and `$H2_CLASSES` to empty strings and continue — the static constraints in the per-page prompts below still apply.
+
+Log the extracted values:
+```
+H1 classes extracted: $H1_CLASSES
+H2 classes extracted: $H2_CLASSES
+```
+
 **2c-ii — Generate remaining 4 screens**
 
 For each of the 4 remaining screens, prepend the following consistency instruction (substituting variables):
@@ -238,6 +309,14 @@ MATCH THE HOME PAGE EXACTLY for:
 - Hero section style: if this page has a hero, use the same font weight, overlay treatment, and badge style as the home page hero
 - Button styles: same border-radius, same padding, same font weight as home page buttons
 - Colour usage: same semantic colour assignments as the home page
+
+Typography hard constraints — use these exact Tailwind classes on all heading elements:
+[If $H1_CLASSES is non-empty:] - All <h1> elements MUST use exactly these classes: $H1_CLASSES
+[If $H2_CLASSES is non-empty:] - All <h2> elements MUST use exactly these classes: $H2_CLASSES
+[If $H1_CLASSES is empty:] - All <h1> elements: font-extrabold tracking-tight leading-tight, size equivalent to clamp(2.5rem,5vw,4rem). Sentence case. NEVER uppercase.
+[If $H2_CLASSES is empty:] - All <h2> elements: font-bold tracking-tight leading-snug, size equivalent to clamp(1.5rem,3vw,2.25rem). Sentence case. NEVER uppercase.
+
+Do not add, remove, or substitute any of these classes. Do not use uppercase, font-black, or any heading modifier not present in the constraints above.
 
 Page-specific content:
 ```
@@ -266,6 +345,43 @@ Call `get_project` for `$PROJECT_ID` to retrieve screen instance IDs. Then call 
 - `selectedScreenInstances`: all screen instances from the project
 
 This enforces fonts, colours, and roundness across any screens that drifted during generation.
+
+**2e — Heading drift report**
+
+Run the heading drift report across the 5 downloaded HTML files:
+
+```bash
+npx tsx tools/stitch-normalize-headings.mjs \
+  --dir output/ingestion/$THEME_NAME-stitch/html \
+  --h1 "$H1_CLASSES" \
+  --h2 "$H2_CLASSES"
+```
+
+Review the output table. If the script exits 0 (no drift), proceed to Step 3.
+
+If the script exits 1 (drift detected), show the drift table to the user and ask:
+
+```
+Headings drifted on [N] page(s). Choose:
+1. Proceed anyway — accept the drift and continue to Step 3
+2. Auto-normalise — rewrite drifted classes to match home page, then continue
+3. Stop — I will re-generate the drifted pages manually
+
+Enter 1, 2, or 3:
+```
+
+If the user chooses 2, re-run with `--enforce`:
+```bash
+npx tsx tools/stitch-normalize-headings.mjs \
+  --dir output/ingestion/$THEME_NAME-stitch/html \
+  --h1 "$H1_CLASSES" \
+  --h2 "$H2_CLASSES" \
+  --enforce
+```
+
+Then continue to Step 3.
+
+If the user chooses 3, STOP with instructions to re-generate the specific pages and then resume from Step 3.
 
 ---
 
@@ -725,194 +841,73 @@ grep -l "@platform/core-components\|siteConfig\|getContentItems" \
 
 ---
 
-## Step 5h: Stitch Fidelity Review + Fix
+## Step 5h: Fidelity Review + Fix
 
-After TSX pages are generated, start the dev server, compare each rendered page against its Stitch HTML source, then apply fixes. Fully autonomous — no pause for approval.
+Write the review criteria to `output/ingestion/$THEME_NAME-stitch/meta/validate-review-prompt.txt`:
 
-**5h-i — Start dev server**
+```
+Compare each of the 5 rendered pages against its Stitch HTML source. For each difference, write a structured finding.
 
-```bash
-cd sites/$THEME_NAME-test && npm install --silent
+**Reference material:**
+- **Dev server screenshots** (actual rendered output): `output/ingestion/$THEME_NAME-stitch/meta/dev-screenshots/` — `home.png`, `about.png`, `contact.png`, `services.png`, `service-detail.png`. Run `ls` to confirm which exist. **Read these PNG files directly** as the primary visual reference.
+- **Stitch HTML exports**: `output/ingestion/$THEME_NAME-stitch/html/` — `home.html`, `about.html`, `contact.html`, `services.html`, `service-detail.html`. These are the source of truth for sections, layout, and CSS class fidelity.
+
+**Pages to compare:**
+- `meta/dev-screenshots/home.png` + Fetch rendered `/` → compare against `html/home.html`
+- `meta/dev-screenshots/about.png` + Fetch rendered `/about` → compare against `html/about.html`
+- `meta/dev-screenshots/contact.png` + Fetch rendered `/contact` → compare against `html/contact.html`
+- `meta/dev-screenshots/services.png` + Fetch rendered `/services` → compare against `html/services.html`
+- `meta/dev-screenshots/service-detail.png` + Fetch rendered `/services/[first-service-slug]` → compare against `html/service-detail.html`
+
+Also read each corresponding TSX file so you can identify where to apply fixes.
+
+**What to check (Stitch HTML fidelity — exact CSS replication):**
+1. **Font loading** — Are heading and body fonts loading correctly? Check for font variable CSS classes on `<html>`.
+2. **Section completeness** — Is every section from the Stitch HTML present in the rendered page?
+3. **CSS class fidelity** — Are hover effects, transition durations (`duration-500`, `duration-700`), grayscale filters (`grayscale-[20%]`), scale transforms (`scale-105`), and opacity values present?
+4. **Stitch MD3 colour token mapping** — Are Stitch tokens correctly mapped to theme tokens?
+   - `primary` → `brand-primary`
+   - `secondary` → `brand-secondary`
+   - `tertiary-fixed-dim` → `brand-accent`
+   - `surface` / `background` → `surface-background`
+   - `surface-container-low` → `surface-muted`
+   - `on-surface` → `surface-foreground`
+   - `outline-variant` → `surface-border`
+5. **Image rendering** — Are Stitch AI-generated images rendering (from `/stitch-images/img-NNN.jpg`) or showing as placeholders?
+6. **Nav and footer** — Present and inlined on every page?
+7. **FAQ accordions** — Using `<details>`/`<summary>` pattern (not JS state)?
+8. **Material Symbols** — `<span className="material-symbols-outlined">icon_name</span>` pattern used correctly?
+
+**Stitch token colour map** (use for fixing colour token findings):
+| Stitch token | Theme token class |
+|---|---|
+| `primary` | `brand-primary` |
+| `secondary` | `brand-secondary` |
+| `tertiary-fixed-dim` | `brand-accent` |
+| `surface` / `background` | `surface-background` |
+| `surface-container-low` | `surface-muted` |
+| `on-surface` | `surface-foreground` |
+| `outline-variant` | `surface-border` |
+| Unmapped colors | Tailwind arbitrary `bg-[#hexvalue]` |
+
+**Do NOT flag as findings:**
+- Form fields being `readOnly` (static visual comparison — intentional)
+- Local `/stitch-images/` paths instead of Google URLs (intentional — images are localised)
+- Simplified footers on contact and service-detail pages (brief-specified minimal footer)
+- `<a>` instead of `<Link>` (intentional per TSX generation rules)
+- Opacity modifier differences where hardcoded hex was used instead of theme token (intentional — opacity on CSS custom properties does not work in Tailwind)
 ```
 
-Then start the dev server in the background and capture the port:
-```bash
-npm run dev > /tmp/$THEME_NAME-dev.log 2>&1 &
-DEV_PID=$!
+Then run the shared validation skill:
+
 ```
-
-Poll until ready (max 30 seconds):
-```bash
-for i in 2 3 4 5 6 10; do
-  sleep $i
-  if grep -q "Local:" /tmp/$THEME_NAME-dev.log 2>/dev/null; then break; fi
-done
-DEV_PORT=$(grep -o "localhost:[0-9]*" /tmp/$THEME_NAME-dev.log | head -1 | cut -d: -f2)
-DEV_PORT=${DEV_PORT:-3000}
-echo "Dev server on port $DEV_PORT"
-curl -s -o /dev/null -w "HTTP %{http_code}" http://localhost:$DEV_PORT
-```
-
-If HTTP status is not 200, STOP: "Dev server failed to start. Check /tmp/$THEME_NAME-dev.log"
-
-**5h-ii — Review agent (model: sonnet)**
-
-Launch a review agent with the following task:
-
-> Compare each of the 5 rendered pages against its Stitch HTML source. For each difference, write a structured finding.
->
-> Pages to compare (substitute actual port for $DEV_PORT):
-> - Fetch http://localhost:$DEV_PORT/ → compare against `output/ingestion/$THEME_NAME-stitch/html/home.html`
-> - Fetch http://localhost:$DEV_PORT/about → compare against `output/ingestion/$THEME_NAME-stitch/html/about.html`
-> - Fetch http://localhost:$DEV_PORT/contact → compare against `output/ingestion/$THEME_NAME-stitch/html/contact.html`
-> - Fetch http://localhost:$DEV_PORT/services → compare against `output/ingestion/$THEME_NAME-stitch/html/services.html`
-> - Fetch http://localhost:$DEV_PORT/services/[first-service-slug] → compare against `output/ingestion/$THEME_NAME-stitch/html/service-detail.html`
->
-> Also read each corresponding TSX file so you can identify where to apply fixes.
->
-> For each difference, produce one entry. Write all findings to `output/ingestion/$THEME_NAME-stitch/meta/tsx-review-findings.json`:
-> ```json
-> [
->   {
->     "id": "H001",
->     "page": "home",
->     "section": "stats-bar",
->     "type": "blocker|visual|minor",
->     "description": "Human-readable description of the difference",
->     "stitch_value": "The class/value/element in the Stitch HTML",
->     "tsx_value": "What the TSX currently has (or 'missing')",
->     "fix_file": "sites/$THEME_NAME-test/app/page.tsx"
->   }
-> ]
-> ```
->
-> Severity definitions:
-> - `blocker` — visible breakage: font not loading, missing whole section, broken layout
-> - `visual` — CSS detail absent: hover effect, transition duration, grayscale filter, scale transform, animation
-> - `minor` — copy difference, color token variant, minor structural deviation
->
-> **Do NOT flag as findings:**
-> - Form fields being `readOnly` (static visual comparison — intentional)
-> - Local `/stitch-images/` paths instead of Google URLs (intentional — images are localised)
-> - Simplified footers on contact and service-detail pages (brief-specified minimal footer)
-> - Any difference that is explicitly required by the TSX generation rules (e.g. `<a>` not `<Link>`)
-
-**5h-iii — Fix agent (model: sonnet)**
-
-Launch a fix agent with the following task:
-
-> Read `output/ingestion/$THEME_NAME-stitch/meta/tsx-review-findings.json`.
->
-> Apply fixes in severity order: blockers first, then visual, then minor.
->
-> For each finding:
-> 1. Read the `fix_file`
-> 2. Apply the minimal change needed to resolve the difference
-> 3. After editing each file, run: `cd sites/$THEME_NAME-test && npx tsc --noEmit 2>&1 | head -10`
-> 4. If type-check produces new errors, revert the last change and mark the finding as `skipped`
->
-> Write a fix log to `output/ingestion/$THEME_NAME-stitch/meta/tsx-fix-log.json`:
-> ```json
-> [
->   { "id": "H001", "status": "fixed", "description": "Added @import for Google Fonts in globals.css" },
->   { "id": "H002", "status": "skipped", "reason": "Would require client component" }
-> ]
-> ```
->
-> Do not commit anything. Report: total findings, fixed count, skipped count, any blockers that could not be resolved.
-
-**5h-iv — Console QA (Playwright)**
-
-With the dev server still running, use Playwright to visit each page and capture browser console output. This catches 400 image errors, missing `sizes` warnings, broken imports, and any JS exceptions that visual inspection misses.
-
-```bash
-cd sites/$THEME_NAME-test
-npx playwright test --config=../../playwright.console-qa.config.ts 2>/dev/null || \
-npx playwright chromium 2>/dev/null || true
-```
-
-If Playwright is not available, use this Node script instead:
-
-```bash
-node - <<'EOF'
-const http = require('http');
-const pages = ['/', '/about', '/contact', '/services', '/services/${FIRST_SERVICE_SLUG}'];
-let allClean = true;
-(async () => {
-  for (const path of pages) {
-    await new Promise(r => {
-      http.get(`http://localhost:${DEV_PORT}${path}`, res => {
-        let body = '';
-        res.on('data', d => body += d);
-        res.on('end', () => {
-          if (res.statusCode !== 200) {
-            console.error(`FAIL ${path} → HTTP ${res.statusCode}`);
-            allClean = false;
-          } else {
-            console.log(`OK   ${path} → 200`);
-          }
-          r();
-        });
-      }).on('error', e => { console.error(`FAIL ${path} → ${e.message}`); allClean = false; r(); });
-    });
-  }
-  process.exit(allClean ? 0 : 1);
-})();
-EOF
-```
-
-**Then** run a targeted Playwright console check for image and JS errors using a one-shot script:
-
-```bash
-npx playwright@latest --yes launch --browser chromium - <<'PWEOF' 2>/dev/null || echo "playwright unavailable — skip"
-// Requires: npx playwright install chromium
-const { chromium } = require('playwright');
-(async () => {
-  const browser = await chromium.launch();
-  const page = await browser.newPage();
-  const PAGES = [
-    '/', '/about', '/contact', '/services',
-    '/services/${FIRST_SERVICE_SLUG}'
-  ];
-  const errors = [];
-  page.on('console', msg => {
-    if (msg.type() === 'error') errors.push({ url: page.url(), text: msg.text() });
-  });
-  page.on('response', res => {
-    if (res.status() >= 400) errors.push({ url: page.url(), resource: res.url(), status: res.status() });
-  });
-  for (const p of PAGES) {
-    await page.goto('http://localhost:${DEV_PORT}' + p, { waitUntil: 'networkidle' });
-  }
-  await browser.close();
-  if (errors.length) {
-    console.error('Console/network errors found:');
-    errors.forEach(e => console.error(JSON.stringify(e)));
-    process.exit(1);
-  } else {
-    console.log('All pages clean — no console errors or 4xx resources.');
-  }
-})();
-PWEOF
-```
-
-**Interpret results and fix before proceeding:**
-
-| Error pattern | Likely cause | Fix |
-|---|---|---|
-| `400` on `/_next/image?url=...` | `fill` image missing `sizes` prop, or parent not `position: relative` | Add `sizes="..."` and `relative` to parent |
-| `404` on `/stitch-images/img-NNN.jpg` | Image not copied to `public/stitch-images/` | Copy from `output/ingestion/$THEME_NAME-stitch/images/` |
-| `Module not found` in console | Missing import or wrong path | Fix import |
-| `Warning: Each child in a list should have a unique "key"` | Missing `key` prop on mapped elements | Add `key` |
-| `hydration` error | Server/client HTML mismatch | Remove conditional client-only logic from Server Components |
-
-If any `blocker`-level errors are found (400s, 404s, JS exceptions), fix them before moving to Step 6. Add fixes to `tsx-fix-log.json` with `"source": "console-qa"`.
-
-**5h-v — Kill dev server**
-
-```bash
-kill $DEV_PID 2>/dev/null || true
-rm -f /tmp/$THEME_NAME-dev.log
+/pipeline.validate-site \
+  --site-dir sites/$THEME_NAME-test \
+  --pages "/ /about /contact /services /services/[first-service-slug]" \
+  --review-prompt-file output/ingestion/$THEME_NAME-stitch/meta/validate-review-prompt.txt \
+  --findings-file output/ingestion/$THEME_NAME-stitch/meta/tsx-review-findings.json \
+  --fix-log-file output/ingestion/$THEME_NAME-stitch/meta/tsx-fix-log.json \
+  --screenshot-dir output/ingestion/$THEME_NAME-stitch/meta/dev-screenshots
 ```
 
 ---
