@@ -426,20 +426,24 @@ Contrast ratios must meet WCAG AA: 4.5:1 for normal text, 3:1 for large text.
 
 ## Named Themes
 
-Beyond CSS variables, the platform has named visual identities — **orion**, **vega**, and **lyra** — each packaged in `packages/themes/`.
+Beyond CSS variables, the platform has named visual identities — **orion**, **vega**, **lyra**, **cygnus**, **nova**, **atlas**, and **rigel** — each packaged in `packages/themes/`.
 
 ### What a Named Theme Provides
 
 - **CSS utilities** (`packages/themes/orion/globals.css`, `packages/themes/vega/globals.css`) — pre-written component classes (`btn-primary`, `card-interactive`, `mobile-menu-overlay`, `lightbox-content`, etc.) written as plain CSS with `@apply`. Each site's `globals.css` imports its theme's CSS before the `@tailwind` directives.
 - **`ComponentRegistry`** — a TypeScript object exported from the theme package (`orionRegistry`, `vegaRegistry`) that maps `heroVariant`, `headerVariant`, `cardVariant`, and `sectionVariant` slots to concrete component names. Sites include this in `theme.config.ts` under `componentRegistry`.
 
-### The Two Identities
+### Available Themes
 
 | Theme | Visual Identity | Typical Use |
 |-------|-----------------|-------------|
 | **orion** | Dark header, full-bleed hero, red brand accent, circular icon cards, dark stat cards | Trade/electrical sites (e.g. DJ Fox) |
 | **vega** | Light header, split hero, standard card grid, clean typography | Professional services, reference sites |
 | **lyra** | Editorial serif headlines, sans-serif body, muted sage/cream palette, rounded cards | Garden/heritage/lifestyle service sites |
+| **cygnus** | Dark mode, Press-Black background, Signal Orange + Craft Green, bold graphic-led | Design, print & signage businesses (e.g. Mad Graphics) |
+| **nova** | Light header, image-overlay hero, bold orange + green, dark-accent sections | Print and signage companies |
+| **atlas** | Custom component registry | TBD |
+| **rigel** | Custom component registry | TBD |
 
 ### Wiring It Up
 

@@ -8,6 +8,7 @@
     "./atlas/manifest": "./atlas/manifest.ts",
     "./atlas/showcase": "./atlas/showcase-registry.tsx",
     "./atlas/components": "./atlas/components/index.ts",
+    "./cygnus": "./cygnus/index.ts",
     "./lyra": "./lyra/index.ts",
     "./nova": "./nova/index.ts",
     "./orion": "./orion/index.ts",
