@@ -31,7 +31,7 @@ local-business-platform/
 ├── packages/
 │   ├── core-components/            # Shared UI components (@platform/core-components)
 │   ├── theme-system/               # Theming engine (@platform/theme-system)
-│   ├── themes/                     # Named theme CSS packages (orion, vega, lyra)
+│   ├── themes/                     # Named theme CSS packages (orion, vega, lyra, cygnus, nova, atlas, rigel)
 │   └── intake-system/              # Customer intake automation (@platform/intake-system)
 ├── tools/                          # Site creation & deployment CLI tools
 ├── docs/                           # Documentation
@@ -89,7 +89,7 @@ Drop a new MDX file in the right directory, build, and a new page appears. No co
 
 `@platform/theme-system` transforms per-site config into CSS custom properties and Tailwind utilities. Each site defines a `theme.config.ts` with brand colors; the plugin generates `:root` variables and classes like `bg-brand-primary`. Change the config, rebuild, and the entire site re-brands.
 
-**Named Themes** — `packages/themes/` contains pre-built CSS utility packages for each visual identity. `orion` (dark header, full-bleed hero, red accent), `vega` (light header, card grid, navy/blue), and `lyra` (editorial serif + sans-serif, muted sage/cream palette) are the available identities. Each site's `globals.css` imports its theme package, and `theme.config.ts` specifies a `componentRegistry` that selects the right component variants for that identity. `ThemeProvider` from `@platform/core-components` makes the registry available at runtime to client components.
+**Named Themes** — `packages/themes/` contains pre-built CSS utility packages for each visual identity. `orion` (dark header, full-bleed hero, red accent), `vega` (light header, card grid, navy/blue), `lyra` (editorial serif, muted sage/cream palette), `cygnus` (dark mode, Signal Orange, Craft Green), `nova` (bold orange + green, light header), `atlas`, and `rigel` are the available identities. Each site's `globals.css` imports its theme package, and `theme.config.ts` specifies a `componentRegistry` that selects the right component variants for that identity. `ThemeProvider` from `@platform/core-components` makes the registry available at runtime to client components.
 
 ### 6. Intake System (Site Generation)
 
