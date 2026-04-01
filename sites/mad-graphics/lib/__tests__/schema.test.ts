@@ -18,8 +18,8 @@ describe("Schema.org Structured Data", () => {
 
       expect(schema["@context"]).toBe("https://schema.org");
       expect(schema["@type"]).toBe(businessType);
-      expect(schema.name).toBe("Your Business Name");
-      expect(schema.legalName).toBe("Your Business Ltd");
+      expect(schema.name).toBe("Mad Graphics");
+      expect(schema.legalName).toBe("Mad Graphics");
     });
 
     it("should include required organization fields", () => {
@@ -108,7 +108,7 @@ describe("Schema.org Structured Data", () => {
 
       expect(schema["@context"]).toBe("https://schema.org");
       expect(schema["@type"]).toBe("WebSite");
-      expect(schema.name).toBe("Your Business Name");
+      expect(schema.name).toBe("Mad Graphics");
       expect(schema.url).toBeDefined();
     });
 
