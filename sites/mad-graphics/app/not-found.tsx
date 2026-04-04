@@ -68,25 +68,25 @@ export default function NotFound() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto">
             <Link
               href="/services"
-              className="block p-4 bg-white rounded-lg border border-surface-border hover:border-brand-primary hover:shadow-sm transition-all"
+              className="block p-4 bg-surface-card border border-surface-border hover:border-brand-primary transition-all"
             >
               <span className="font-medium text-surface-foreground">Services</span>
             </Link>
             <Link
               href="/locations"
-              className="block p-4 bg-white rounded-lg border border-surface-border hover:border-brand-primary hover:shadow-sm transition-all"
+              className="block p-4 bg-surface-card border border-surface-border hover:border-brand-primary transition-all"
             >
               <span className="font-medium text-surface-foreground">Locations</span>
             </Link>
             <Link
               href="/about"
-              className="block p-4 bg-white rounded-lg border border-surface-border hover:border-brand-primary hover:shadow-sm transition-all"
+              className="block p-4 bg-surface-card border border-surface-border hover:border-brand-primary transition-all"
             >
               <span className="font-medium text-surface-foreground">About</span>
             </Link>
             <Link
               href="/contact"
-              className="block p-4 bg-white rounded-lg border border-surface-border hover:border-brand-primary hover:shadow-sm transition-all"
+              className="block p-4 bg-surface-card border border-surface-border hover:border-brand-primary transition-all"
             >
               <span className="font-medium text-surface-foreground">Contact</span>
             </Link>

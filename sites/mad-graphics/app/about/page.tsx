@@ -91,17 +91,17 @@ export default function AboutPage() {
         <section className="section-standard bg-surface-subtle">
           <div className="container-standard">
             <div className="grid md:grid-cols-3 gap-6">
-              <div className="bg-white rounded-lg p-6 shadow-sm border border-surface-border text-center">
+              <div className="card text-center">
                 <h3 className="font-semibold text-surface-foreground mb-2">Business Name</h3>
                 <p className="text-surface-muted-foreground">{business.legalName}</p>
               </div>
-              <div className="bg-white rounded-lg p-6 shadow-sm border border-surface-border text-center">
+              <div className="card text-center">
                 <h3 className="font-semibold text-surface-foreground mb-2">Established</h3>
                 <p className="text-2xl font-bold text-brand-primary">
                   {credentials.yearEstablished}
                 </p>
               </div>
-              <div className="bg-white rounded-lg p-6 shadow-sm border border-surface-border text-center">
+              <div className="card text-center">
                 <h3 className="font-semibold text-surface-foreground mb-2">Service Coverage</h3>
                 <p className="text-surface-muted-foreground">{serviceAreas.join(', ')}</p>
               </div>

@@ -74,34 +74,56 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
 
 ### 2. The Content Reading Layer
 
-`lib/content.ts` provides functions that read MDX files from disk and parse their frontmatter:
+Each site's `lib/content.ts` is a thin shim that calls `createContentUtils()` from `@platform/core-components` and re-exports the configured functions:
 
 ```typescript
-// lib/content.ts — generic content reader for all types
+// sites/[name]/lib/content.ts — thin shim (5-10 lines)
+import { createContentUtils } from '@platform/core-components/lib/content';
+import { getLocationSlugs } from './locations-config';
 
-export async function getContentItems(contentType: ContentType): Promise<ContentItem[]> {
-  const dir = path.join(process.cwd(), "content", contentType);
-  const files = await fs.readdir(dir);
+const utils = createContentUtils({ getLocationSlugs });
 
-  const items = [];
-  for (const file of files) {
-    if (!file.endsWith(".mdx")) continue;
+export const {
+  getServices, getService,
+  getLocations, getLocation,
+  getBlogPosts, getBlogPost,
+  getProjects, getTestimonials,
+  // ... all content functions
+} = utils;
+```
 
-    const slug = file.replace(/\.mdx$/i, "");
-    const raw = await fs.readFile(path.join(dir, file), "utf8");
-    const { data } = matter(raw); // gray-matter parses YAML frontmatter
+The actual implementation lives in `packages/core-components/src/lib/content.ts`. It reads MDX files from disk and parses their frontmatter using `gray-matter`:
 
-    items.push({ slug, title: data.title, ...data });
+```typescript
+// packages/core-components/src/lib/content.ts — the shared implementation
+
+export function createContentUtils(options) {
+  async function getContentItems(contentType: ContentType) {
+    const dir = path.join(process.cwd(), "content", contentType);
+    const files = await fs.readdir(dir);
+
+    const items = [];
+    for (const file of files) {
+      if (!file.endsWith(".mdx")) continue;
+      const slug = file.replace(/\.mdx$/i, "");
+      const raw = await fs.readFile(path.join(dir, file), "utf8");
+      const { data } = matter(raw); // gray-matter parses YAML frontmatter
+      items.push({ slug, title: data.title, ...data });
+    }
+    return items.sort((a, b) => a.title.localeCompare(b.title));
   }
-  return items.sort((a, b) => a.title.localeCompare(b.title));
-}
 
-// Convenience wrappers per content type
-export const getServices = () => getContentItems("services");
-export const getLocations = () => getContentItems("locations");
+  return {
+    getServices: () => getContentItems("services"),
+    getLocations: () => getContentItems("locations"),
+    // ... all other content types
+  };
+}
 ```
 
 **Key detail:** `gray-matter` splits the MDX file into frontmatter (the YAML between `---` markers) and content (the markdown body). Frontmatter becomes a JavaScript object; content stays as a string until MDX renders it.
+
+**Why the shim pattern?** The factory lives in `core-components` so bug fixes flow to every site automatically. Sites import `@/lib/content` — a simple `@`-aliased path — so page files never need to change when the underlying implementation evolves. Each site can also pass per-site options (like a custom sort function) to `createContentUtils()`.
 
 ### 3. MDX Rendering
 

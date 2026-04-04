@@ -21,6 +21,7 @@ Phase 2: Build sites (parallel, after packages complete)
     ├── sites/base-template        → next build
     ├── sites/colossus-scaffolding → next build
     ├── sites/dj-fox-electrical    → next build
+    ├── sites/mad-graphics         → next build
     ├── sites/showcase             → next build
     └── sites/[theme-name]-test    → next build (test only, created by pipeline)
     ↓

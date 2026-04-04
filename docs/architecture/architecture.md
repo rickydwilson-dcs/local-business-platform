@@ -26,6 +26,7 @@ local-business-platform/
 │   ├── base-template/              # Gold-standard template for new sites
 │   ├── colossus-scaffolding/       # Reference implementation (scaffolding)
 │   ├── dj-fox-electrical/          # Production site (electrical)
+│   ├── mad-graphics/               # Production site (vehicle graphics & print, cygnus theme)
 │   ├── showcase/                   # Internal component/theme showcase
 │   └── [theme-name]-test/          # Temporary test sites (created by pipeline, removed after review)
 ├── packages/

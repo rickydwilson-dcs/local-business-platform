@@ -34,9 +34,14 @@ export const cygnusDefaultConfig: DeepPartialThemeConfig = {
     surface: {
       background: '#131313',
       foreground: '#e5e2e1',
+      secondaryForeground: '#b8b4b0',
+      tertiaryForeground: '#8c8884',
       muted: '#201f1f',
+      mutedForeground: '#9a9490',
       card: '#1c1b1b',
       cardBorder: '#544435',
+      subtle: '#201f1f',
+      subtleBorder: '#544435',
     },
     semantic: {
       success: '#10b981',
