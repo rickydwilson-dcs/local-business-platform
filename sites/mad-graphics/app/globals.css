@@ -1,13 +1,13 @@
-@import "../../../packages/themes/vega/globals.css";
+@import "../../../packages/themes/cygnus/globals.css";
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 /**
- * Base Template — Site-specific CSS
+ * Mad Graphics — Site-specific CSS
  *
- * Theme: Vega (light header, split hero)
+ * Theme: Cygnus (dark header, image-overlay hero)
  * Theme variables injected by @platform/theme-system
  */
 
