@@ -12,3 +12,5 @@
 export { HeroV1, type HeroV1Props } from "./HeroV1";
 export { HeroV2, type HeroV2Props } from "./HeroV2";
 export { HeroV3, type HeroV3Props } from "./HeroV3";
+export { ImageOverlayHero } from "./ImageOverlayHero";
+export type { ImageOverlayHeroProps, ImageOverlayHeroCta, ImageOverlayHeroStat } from "./ImageOverlayHero";
