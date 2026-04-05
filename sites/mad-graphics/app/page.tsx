@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { siteConfig } from '@/site.config';
+import { ImageOverlayHero } from '@platform/core-components';
+import { cygnusRegistry } from '@platform/themes/cygnus';
 import { getLocations } from '@/lib/content';
 import { absUrl, slugify } from '@/lib/site';
 import { getLocalBusinessSchema } from '@/lib/schema';
@@ -88,37 +90,54 @@ export default async function HomePage() {
       />
 
       {/* Hero Section */}
-      <section className="section bg-gradient-to-b from-brand-primary/5 to-surface-background">
-        <div className="container-narrow text-center">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-balance text-surface-foreground">
-            Professional Local Services in {siteConfig.business.address.city}
-          </h1>
-          <p className="text-xl md:text-2xl text-surface-muted-foreground mb-8 text-balance">
-            {siteConfig.tagline}
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/contact" className="btn-primary">
-              {siteConfig.cta.primary.label}
-            </Link>
-            <Link href="/services" className="btn-secondary">
-              Our Services
-            </Link>
-          </div>
-
-          {/* Phone CTA */}
-          {siteConfig.cta.phone.show && (
-            <div className="mt-8">
-              <Link
-                href={`tel:${PHONE_TEL}`}
-                className="inline-flex items-center gap-2 text-lg font-semibold text-brand-primary hover:text-brand-primary-hover transition-colors"
-              >
-                <Phone className="w-5 h-5" />
-                <span>Call us: {PHONE_DISPLAY}</span>
+      {cygnusRegistry.heroVariant === "image-overlay" ? (
+        <ImageOverlayHero
+          headline="Your brand,"
+          headlineAccent="made bold."
+          subheadline={siteConfig.tagline}
+          primaryCta={{ label: "Get a Quote", href: "/contact" }}
+          secondaryCta={{ label: "View Our Work", href: "/projects" }}
+          badge="847 projects completed"
+          stats={[
+            { value: "847", label: "Projects Delivered" },
+            { value: "12", label: "Years of Craft" },
+            { value: "5★", label: "Client Rated" },
+          ]}
+        />
+      ) : (
+        /* Fallback: original base-template hero — preserved as fallback */
+        <section className="section bg-gradient-to-b from-brand-primary/5 to-surface-background">
+          <div className="container-narrow text-center">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-balance text-surface-foreground">
+              Professional Local Services in {siteConfig.business.address.city}
+            </h1>
+            <p className="text-xl md:text-2xl text-surface-muted-foreground mb-8 text-balance">
+              {siteConfig.tagline}
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href="/contact" className="btn-primary">
+                {siteConfig.cta.primary.label}
+              </Link>
+              <Link href="/services" className="btn-secondary">
+                Our Services
               </Link>
             </div>
-          )}
-        </div>
-      </section>
+
+            {/* Phone CTA */}
+            {siteConfig.cta.phone.show && (
+              <div className="mt-8">
+                <Link
+                  href={`tel:${PHONE_TEL}`}
+                  className="inline-flex items-center gap-2 text-lg font-semibold text-brand-primary hover:text-brand-primary-hover transition-colors"
+                >
+                  <Phone className="w-5 h-5" />
+                  <span>Call us: {PHONE_DISPLAY}</span>
+                </Link>
+              </div>
+            )}
+          </div>
+        </section>
+      )}
 
       {/* Trust Indicators */}
       {siteConfig.credentials.stats.length > 0 && (
