@@ -57,7 +57,7 @@ export default function HomePage() {
         </nav>
       </header>
 
-      <main className="pt-20">
+      <main>
         {/* Hero Section */}
         {cygnusRegistry.heroVariant === "image-overlay" ? (
           <ImageOverlayHero

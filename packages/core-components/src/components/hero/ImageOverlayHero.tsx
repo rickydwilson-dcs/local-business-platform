@@ -39,7 +39,7 @@ export function ImageOverlayHero({
 }: ImageOverlayHeroProps) {
   return (
     <>
-      <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
+      <section className="relative min-h-screen flex items-center overflow-hidden">
         {/* Background image layer */}
         {backgroundImage ? (
           <>
@@ -50,7 +50,7 @@ export function ImageOverlayHero({
               className="absolute inset-0 w-full h-full object-cover opacity-40 grayscale-[50%]"
             />
             {/* Gradient overlay over image */}
-            <div className="absolute inset-0 bg-gradient-to-t from-surface-background via-surface-background/60 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-surface-background via-surface-background/70 to-transparent" />
           </>
         ) : (
           /* Fallback gradient when no backgroundImage */
@@ -71,7 +71,7 @@ export function ImageOverlayHero({
             )}
 
             {/* Headline */}
-            <h1 className="text-6xl md:text-7xl lg:text-8xl font-headline font-bold italic tracking-tight leading-none mb-8 text-surface-foreground">
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-headline font-bold italic tracking-tight leading-none mb-8 text-surface-foreground">
               {headline}
               {headlineAccent && (
                 <> <span className="text-brand-primary">{headlineAccent}</span></>
