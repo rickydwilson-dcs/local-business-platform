@@ -7,7 +7,6 @@ import { getLocations } from '@/lib/content';
 import { absUrl, slugify } from '@/lib/site';
 import { getLocalBusinessSchema } from '@/lib/schema';
 import { PHONE_DISPLAY, PHONE_TEL } from '@/lib/contact-info';
-import { getImageUrl } from '@/lib/image';
 import { Phone } from 'lucide-react';
 
 export const metadata: Metadata = {
@@ -93,17 +92,15 @@ export default async function HomePage() {
       {/* Hero Section */}
       {cygnusRegistry.heroVariant === "image-overlay" ? (
         <ImageOverlayHero
-          headline="Vehicle Graphics, Signs"
-          headlineAccent="& Print."
+          headline="Your brand,"
+          headlineAccent="made bold."
           subheadline={siteConfig.tagline}
-          backgroundImage={getImageUrl('mad-graphics/hero/homepage-hero.jpg')}
-          backgroundImageAlt="Wide-format print workshop at Mad Graphics, Polegate, East Sussex"
-          primaryCta={{ label: siteConfig.cta.primary.label, href: '/contact' }}
-          secondaryCta={{ label: 'Our Work', href: '/projects' }}
-          badge="Est. 2004 — Polegate, East Sussex"
+          primaryCta={{ label: "Get a Quote", href: "/contact" }}
+          secondaryCta={{ label: "View Our Work", href: "/projects" }}
+          badge="847 projects completed"
           stats={[
-            { value: "20+", label: "Years Experience" },
-            { value: "5,000+", label: "Projects Completed" },
+            { value: "847", label: "Projects Delivered" },
+            { value: "12", label: "Years of Craft" },
             { value: "5★", label: "Client Rated" },
           ]}
         />
