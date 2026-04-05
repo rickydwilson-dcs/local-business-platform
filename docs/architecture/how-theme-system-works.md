@@ -431,7 +431,7 @@ Beyond CSS variables, the platform has named visual identities — **orion**, **
 ### What a Named Theme Provides
 
 - **CSS utilities** (`packages/themes/orion/globals.css`, `packages/themes/vega/globals.css`) — pre-written component classes (`btn-primary`, `card-interactive`, `mobile-menu-overlay`, `lightbox-content`, etc.) written as plain CSS with `@apply`. Each site's `globals.css` imports its theme's CSS before the `@tailwind` directives.
-- **`ComponentRegistry`** — a TypeScript object exported from the theme package (`orionRegistry`, `vegaRegistry`) that maps `heroVariant`, `headerVariant`, `cardVariant`, and `sectionVariant` slots to concrete component names. Sites include this in `theme.config.ts` under `componentRegistry`.
+- **`ComponentRegistry`** — a TypeScript object exported from the theme package (`orionRegistry`, `vegaRegistry`, `cygnusRegistry`) that maps `heroVariant`, `headerVariant`, `cardVariant`, and `sectionVariant` slots to concrete component names. Sites include this in `theme.config.ts` under `componentRegistry`. For cygnus sites, `heroVariant: "image-overlay"` is now consumed at runtime — page components import `cygnusRegistry` directly and conditionally render `ImageOverlayHero` from `@platform/core-components` when the variant matches.
 
 ### Available Themes
 
