@@ -36,5 +36,13 @@ export const businessConfig = {
   credentials: [
     { name: 'Est. 2004', description: 'Over 20 years serving East Sussex businesses', category: 'certification' as const },
   ],
+  offerCatalog: [
+    { name: 'Vehicle Graphics', description: 'Fleet graphics, van graphics, and vehicle livery for businesses', url: '/services/vehicle-graphics' },
+    { name: 'Signs & Signage', description: 'Shop signs, building signs, and outdoor signage', url: '/services/signs-signage' },
+    { name: 'Banners & PVC', description: 'Printed banners, PVC banners, and roller banners', url: '/services/banners' },
+    { name: 'Graphic Design', description: 'Logo design, brand identity, and artwork preparation', url: '/services/graphic-design' },
+    { name: 'Large Format Print', description: 'Wide format digital printing for any application', url: '/services/large-format-print' },
+    { name: 'Window Graphics', description: 'Window stickers, frosted vinyl, and promotional graphics', url: '/services/window-graphics' },
+  ],
   socialProfiles: [siteConfig.business.socialMedia.instagram].filter(Boolean) as string[],
 };
