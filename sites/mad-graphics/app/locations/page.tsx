@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { Schema } from '@platform/core-components';
 import { getLocations } from '@/lib/content';
 import { absUrl } from '@/lib/site';
@@ -46,7 +47,7 @@ export default async function LocationsPage() {
       {/* Breadcrumb */}
       <div className="px-6 md:px-10 mb-12 pt-8">
         <nav className="flex items-center gap-2 text-xs uppercase tracking-widest text-surface-muted-foreground">
-          <a href="/" className="hover:text-surface-foreground transition-colors">Home</a>
+          <Link href="/" className="hover:text-surface-foreground transition-colors">Home</Link>
           <span>/</span>
           <span className="text-surface-foreground">Locations</span>
         </nav>

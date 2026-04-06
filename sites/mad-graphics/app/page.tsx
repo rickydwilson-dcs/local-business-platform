@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { ImageOverlayHero } from '@platform/core-components';
 import { cygnusRegistry } from '@platform/themes/cygnus';
 import { siteConfig } from '@/site.config';
@@ -128,9 +129,9 @@ export default async function HomePage() {
                 <a href="/contact" className="btn-primary px-10 py-4 text-lg font-bold">
                   Get a Free Quote
                 </a>
-                <a href="/projects" className="btn-outline px-10 py-4 text-lg font-bold">
+                <Link href="/projects" className="btn-outline px-10 py-4 text-lg font-bold">
                   Our Work
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -180,9 +181,9 @@ export default async function HomePage() {
           })}
         </div>
         <div className="text-center mt-12">
-          <a href="/services" className="btn-outline px-8 py-3">
+          <Link href="/services" className="btn-outline px-8 py-3">
             View All Services
-          </a>
+          </Link>
         </div>
       </section>
 
