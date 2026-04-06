@@ -48,7 +48,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   // Fetch locations for navigation
   const allLocations = await getContentItems('locations');
   const locationItems = allLocations.map((loc) => ({
-    name: loc.title,
+    name: (loc as { locationName?: string }).locationName ?? loc.title,
     slug: loc.slug,
   }));
 

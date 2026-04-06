@@ -157,6 +157,44 @@ npx tsx tools/create-site-from-project.ts --project tools/examples/sample-projec
 
 Each site's `lib/` directory contains thin shims that call these factories with site-specific config (from `site.config.ts`) and re-export the results. For example, a site needing custom service sorting passes a `serviceSortFn` to `createContentUtils()`.
 
+## Theme-First Visual Scaffolding
+
+New sites get two layers of scaffolding:
+
+1. **Base-template (capability layer)** — provides the full app infrastructure: API routes, lib shims, config structure, analytics, consent management, `[slug]` dynamic routes, TypeScript setup. Every site gets this layer regardless of theme.
+
+2. **Theme reference site (visual layer)** — provides canonical visual implementations of index and listing pages (`app/page.tsx`, `app/services/page.tsx`, `app/about/page.tsx`, `app/locations/page.tsx`). These pages are copied from the theme's reference site and overwrite the generic base-template versions.
+
+### Reference Sites
+
+| Theme | Reference Site | Provides |
+|-------|---------------|----------|
+| `cygnus` | `sites/cygnus-test` | Dark hero, image card grids, cygnus visual language |
+| `orion` | `sites/dj-fox-electrical` | Dark header, full-bleed hero, circular icons |
+| `vega` | (no override) | Uses base-template pages directly |
+
+### Graceful Fallback
+
+If no reference site is configured for the requested theme, or if the reference site directory doesn't exist on disk, the pipeline logs a warning and falls back to base-template pages. This means adding new themes doesn't require reference sites to exist immediately.
+
+### Pipeline Flow
+
+```
+create-site-from-project.ts --project project.json --theme cygnus
+
+1. Copy base-template → sites/new-site/   (capability infrastructure)
+2. applyThemePageOverrides()              (overlay visual pages from cygnus-test)
+3. Generate site.config.ts                (business data)
+4. Generate theme.config.ts              (brand colors + cygnusRegistry)
+```
+
+### Adding a New Theme Reference
+
+To wire a new theme (e.g. `nova`) to a reference site:
+1. Add an entry to `THEME_REFERENCE_SITE_MAP` in `tools/create-site-from-project.ts`
+2. Add the theme package to `THEME_REGISTRY_MAP` in the same file
+3. Ensure the reference site's visual pages don't import site-specific data directly
+
 ## After Creation
 
 Once a new site exists in `sites/`:

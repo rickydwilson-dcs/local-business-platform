@@ -1,270 +1,29 @@
-/**
- * About Page
- *
- * Company information, credentials, values, and team overview.
- * All content is driven from siteConfig — no hardcoded business data.
- *
- * Sections rendered:
- * - Hero (always) — siteConfig.about.heroBadges, siteConfig.name, siteConfig.tagline
- * - Our Story (if siteConfig.about.story) — narrative paragraphs
- * - Company Info cards (always) — legal name, year established, service areas
- * - Track Record / Stats (always) — siteConfig.credentials.stats
- * - Certifications (always) — siteConfig.credentials.certifications + insurance
- * - Values (if siteConfig.about.values) — card grid
- * - Why Choose Us (if siteConfig.about.whyChooseUs) — bullet list
- * - CTA (always)
- */
-
 import type { Metadata } from 'next';
-import Link from 'next/link';
-import { Shield, Award, CheckCircle, Phone } from 'lucide-react';
+import { Schema } from '@platform/core-components';
 import { siteConfig } from '@/site.config';
-import { PHONE_DISPLAY, PHONE_TEL } from '@/lib/contact-info';
 import { absUrl } from '@/lib/site';
-import { Breadcrumbs, Schema } from '@platform/core-components';
 
 export const metadata: Metadata = {
   title: `About Us | ${siteConfig.business.name}`,
-  description: `Learn about ${siteConfig.business.name} — established ${siteConfig.credentials.yearEstablished}. ${siteConfig.tagline}.`,
-  alternates: {
-    canonical: absUrl('/about'),
-  },
+  description: `Learn about ${siteConfig.business.name} — vehicle graphics and signage specialists in Polegate, East Sussex since ${siteConfig.credentials.yearEstablished}.`,
+  alternates: { canonical: absUrl('/about') },
+};
+
+const ICON_BY_VALUE: Record<number, string> = {
+  0: 'architecture',
+  1: 'price_check',
+  2: 'schedule',
+  3: 'location_on',
 };
 
 export default function AboutPage() {
-  const breadcrumbItems = [{ name: 'About', href: '/about', current: true }];
-  const { about, credentials, business, serviceAreas, name, tagline } = siteConfig;
+  const { about, credentials, business, name, tagline } = siteConfig;
 
   return (
     <>
-      {/* Breadcrumbs */}
-      <div className="bg-surface-subtle border-b border-surface-border">
-        <div className="container-standard py-4">
-          <Breadcrumbs items={breadcrumbItems} />
-        </div>
-      </div>
-
-      <div className="min-h-screen bg-surface-background">
-        {/* Hero Section */}
-        <section className="section-standard bg-surface-subtle">
-          <div className="container-standard">
-            <div className="mx-auto w-full lg:w-[90%] text-center">
-              {about?.heroBadges && about.heroBadges.length > 0 && (
-                <div className="flex flex-wrap justify-center gap-4 mb-8">
-                  {about.heroBadges.map((badge, index) => (
-                    <span
-                      key={index}
-                      className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-brand-primary/10 text-brand-primary border border-brand-primary/20"
-                    >
-                      {badge}
-                    </span>
-                  ))}
-                </div>
-              )}
-              <h1 className="heading-hero mb-6">About {name}</h1>
-              <p className="text-xl text-surface-muted-foreground leading-relaxed mx-auto w-full lg:w-[90%]">
-                {tagline}
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* Our Story Section */}
-        {about?.story && about.story.length > 0 && (
-          <section className="section-standard bg-surface-background">
-            <div className="container-standard">
-              <div className="mx-auto w-full lg:w-[90%]">
-                <h2 className="heading-section mb-8 text-center">Our Story</h2>
-                <div className="max-w-3xl mx-auto prose prose-lg text-surface-foreground leading-relaxed">
-                  {about.story.map((paragraph, index) => (
-                    <p key={index} className={index === 0 ? 'text-xl mb-6' : 'mb-6'}>
-                      {paragraph}
-                    </p>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </section>
-        )}
-
-        {/* Company Info Cards */}
-        <section className="section-standard bg-surface-subtle">
-          <div className="container-standard">
-            <div className="grid md:grid-cols-3 gap-6">
-              <div className="card text-center">
-                <h3 className="font-semibold text-surface-foreground mb-2">Business Name</h3>
-                <p className="text-surface-muted-foreground">{business.legalName}</p>
-              </div>
-              <div className="card text-center">
-                <h3 className="font-semibold text-surface-foreground mb-2">Established</h3>
-                <p className="text-2xl font-bold text-brand-primary">
-                  {credentials.yearEstablished}
-                </p>
-              </div>
-              <div className="card text-center">
-                <h3 className="font-semibold text-surface-foreground mb-2">Service Coverage</h3>
-                <p className="text-surface-muted-foreground">{serviceAreas.join(', ')}</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Stats Section */}
-        {credentials.stats.length > 0 && (
-          <section className="section-standard bg-surface-subtle border-t border-b border-surface-subtle">
-            <div className="container-standard">
-              <h2 className="heading-section text-center mb-12">Our Track Record</h2>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-                {credentials.stats.map((stat, index) => (
-                  <div key={index} className="text-center">
-                    <div className="text-4xl md:text-5xl font-bold text-brand-primary mb-2">
-                      {stat.value}
-                    </div>
-                    <div className="text-lg font-semibold text-surface-foreground">{stat.label}</div>
-                    {stat.description && (
-                      <div className="text-sm text-surface-muted-foreground mt-1">
-                        {stat.description}
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </section>
-        )}
-
-        {/* Certifications Section */}
-        {credentials.certifications.length > 0 && (
-          <section className="section-standard bg-surface-background">
-            <div className="container-standard">
-              <h2 className="heading-section text-center mb-4">Certifications &amp; Accreditations</h2>
-              <p className="text-center text-surface-muted-foreground mb-12 max-w-2xl mx-auto">
-                We maintain the highest industry standards through recognised certifications and
-                accreditations.
-              </p>
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {credentials.certifications.map((cert, index) => (
-                  <div
-                    key={index}
-                    className="bg-surface-subtle rounded-lg p-6 shadow-sm border border-surface-border flex items-start gap-4"
-                  >
-                    <div className="bg-brand-primary/10 rounded-full p-3 flex-shrink-0">
-                      <Award className="w-6 h-6 text-brand-primary" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-surface-foreground">{cert.name}</h3>
-                      <p className="text-sm text-surface-muted-foreground">{cert.description}</p>
-                    </div>
-                  </div>
-                ))}
-                {credentials.insurance && (
-                  <div className="bg-surface-subtle rounded-lg p-6 shadow-sm border border-surface-border flex items-start gap-4">
-                    <div className="bg-surface-subtle rounded-full p-3 flex-shrink-0">
-                      {/* eslint-disable-next-line platform/no-hardcoded-tailwind-colors -- Intentional: insurance shield icon color */}
-                      <Shield className="w-6 h-6 text-green-600" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-surface-foreground">
-                        {credentials.insurance.amount} Insurance
-                      </h3>
-                      <p className="text-sm text-surface-muted-foreground">
-                        {credentials.insurance.type}
-                      </p>
-                    </div>
-                  </div>
-                )}
-              </div>
-            </div>
-          </section>
-        )}
-
-        {/* Values Section */}
-        {about?.values && about.values.length > 0 && (
-          <section className="section-standard bg-surface-subtle">
-            <div className="container-standard">
-              <h2 className="heading-section text-center mb-4">Our Values</h2>
-              <p className="text-center text-surface-muted-foreground mb-12 max-w-2xl mx-auto">
-                The principles that guide everything we do and how we serve our customers.
-              </p>
-              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                {about.values.map((value, index) => (
-                  <div key={index} className="text-center">
-                    <div className="bg-brand-primary/10 rounded-full p-4 w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-                      <Award className="w-8 h-8 text-brand-primary" />
-                    </div>
-                    <h3 className="text-lg font-semibold text-surface-foreground mb-2">
-                      {value.title}
-                    </h3>
-                    <p className="text-surface-muted-foreground text-sm">{value.description}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </section>
-        )}
-
-        {/* Why Choose Us Section */}
-        {about?.whyChooseUs && about.whyChooseUs.length > 0 && (
-          <section className="section-standard bg-surface-background">
-            <div className="container-standard">
-              <div className="max-w-4xl mx-auto">
-                <h2 className="heading-section text-center mb-4">Why Choose {name}?</h2>
-                <p className="text-center text-surface-muted-foreground mb-12">
-                  We are committed to delivering exceptional service and value to every customer.
-                </p>
-                <div className="grid md:grid-cols-2 gap-4">
-                  {about.whyChooseUs.map((benefit, index) => (
-                    <div key={index} className="flex items-start gap-3 p-4 bg-surface-subtle rounded-lg">
-                      <div className="flex-shrink-0 w-6 h-6 bg-brand-primary rounded-full flex items-center justify-center mt-0.5">
-                        <CheckCircle className="w-4 h-4 text-white" />
-                      </div>
-                      <span className="text-surface-foreground font-medium">{benefit}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </section>
-        )}
-
-        {/* CTA Section */}
-        <section className="section-standard bg-brand-primary text-white">
-          <div className="container-standard text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Work With Us?</h2>
-            <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
-              Contact us today for a free consultation and quote. We look forward to helping you
-              with your project.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                href="/contact"
-                className="bg-white text-brand-primary px-8 py-3 rounded-lg font-semibold hover:bg-surface-subtle transition-colors"
-              >
-                Get a Free Quote
-              </Link>
-              <Link
-                href={`tel:${PHONE_TEL}`}
-                className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white/10 transition-colors inline-flex items-center justify-center gap-2"
-              >
-                <Phone className="w-5 h-5" />
-                {PHONE_DISPLAY}
-              </Link>
-            </div>
-          </div>
-        </section>
-      </div>
-
-      {/* Schema Markup */}
       <Schema
-        org={{
-          name: business.name,
-          url: '/',
-          logo: '/logo.svg',
-        }}
-        breadcrumbs={[
-          { name: 'Home', url: '/' },
-          { name: 'About', url: '/about' },
-        ]}
+        org={{ name: business.name, url: '/', logo: '/logo.svg' }}
+        breadcrumbs={[{ name: 'Home', url: '/' }, { name: 'About', url: '/about' }]}
         webpage={{
           '@type': 'AboutPage',
           '@id': absUrl('/about#aboutpage'),
@@ -273,6 +32,172 @@ export default function AboutPage() {
           description: `Learn about ${business.name} — professional services since ${credentials.yearEstablished}.`,
         }}
       />
+
+      {/* Page Hero */}
+      <section className="relative min-h-[640px] flex items-end pt-32 pb-24 overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <img
+            alt={`${name} workshop`}
+            className="w-full h-full object-cover grayscale opacity-40"
+            src="/stitch-images/img-002.jpg"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-surface-background/40 to-surface-background" />
+        </div>
+        <div className="relative z-10 max-w-screen-2xl mx-auto px-8 w-full">
+          {about?.heroBadges && about.heroBadges.length > 0 && (
+            <div className="flex flex-wrap gap-3 mb-6">
+              {about.heroBadges.map((badge, i) => (
+                <span
+                  key={i}
+                  className="inline-block text-brand-primary font-body font-bold uppercase tracking-[0.3em] text-xs border border-brand-primary/30 px-4 py-1.5"
+                >
+                  {badge}
+                </span>
+              ))}
+            </div>
+          )}
+          <h1 className="text-7xl md:text-8xl font-headline font-bold italic tracking-tight leading-none mb-4">
+            Our story
+          </h1>
+        </div>
+      </section>
+
+      {/* Company Story Section */}
+      {about?.story && about.story.length > 0 && (
+        <section className="py-32 bg-surface-background">
+          <div className="max-w-screen-2xl mx-auto px-8 grid grid-cols-1 md:grid-cols-12 gap-16 items-start">
+            <div className="md:col-span-7">
+              <p className="text-brand-primary font-body font-bold uppercase tracking-widest mb-6">
+                Est. {credentials.yearEstablished} — Polegate, East Sussex
+              </p>
+              <h2 className="text-5xl font-headline font-bold mb-8">
+                Over 20 years of vehicle graphics and print in East Sussex.
+              </h2>
+              <div className="space-y-6 text-surface-muted-foreground text-lg leading-relaxed max-w-2xl">
+                {about.story.map((paragraph, i) => (
+                  <p key={i}>{paragraph}</p>
+                ))}
+              </div>
+            </div>
+            <div className="md:col-span-5 pt-12 md:pt-24">
+              <div className="relative p-12 bg-surface-muted border-l-4 border-brand-primary">
+                <span className="material-symbols-outlined text-5xl text-brand-primary opacity-30 absolute top-4 right-8">
+                  format_quote
+                </span>
+                <blockquote className="text-2xl font-headline italic leading-snug text-surface-foreground">
+                  &ldquo;We do not offer full vehicle wraps. We focus on what we do best — cut vinyl graphics, signwriting, and printed graphics applied with precision. That focus means better results.&rdquo;
+                </blockquote>
+                <div className="mt-8">
+                  <p className="font-bold text-surface-foreground">Martin Adams</p>
+                  <p className="text-sm uppercase tracking-widest text-brand-primary">Founder</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Trust Bar */}
+      <section className="py-16 bg-surface-muted">
+        <div className="max-w-screen-2xl mx-auto px-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {credentials.stats.map((stat, i) => (
+              <div
+                key={i}
+                className="group flex flex-col items-center justify-center p-8 grayscale hover:grayscale-0 transition-all duration-500 border border-surface-border"
+              >
+                <p className="text-3xl font-headline font-bold text-brand-primary mb-2">{stat.value}</p>
+                <p className="text-center font-body font-bold uppercase tracking-tighter text-sm text-surface-foreground">
+                  {stat.label}
+                </p>
+                {stat.description && (
+                  <p className="text-xs text-surface-muted-foreground mt-1 text-center">{stat.description}</p>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Values Cards */}
+      {about?.values && about.values.length > 0 && (
+        <section className="py-32 bg-surface-background">
+          <div className="max-w-screen-2xl mx-auto px-8">
+            <div className="mb-16">
+              <span className="text-brand-primary font-body uppercase tracking-[0.3em] font-bold text-sm block mb-4">
+                How we work
+              </span>
+              <h2 className="text-5xl font-headline font-bold">Our Principles.</h2>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-0">
+              {about.values.map((value, i) => {
+                const icon = ICON_BY_VALUE[i] ?? 'verified';
+                const isMiddle = i > 0 && i < about.values!.length - 1;
+                return (
+                  <div
+                    key={i}
+                    className={`group p-12 border border-surface-border hover:bg-brand-primary transition-colors duration-500${isMiddle ? ' border-l-0 border-r-0' : ''}`}
+                  >
+                    <span className="material-symbols-outlined text-5xl mb-8 text-brand-primary group-hover:text-[var(--color-brand-on-primary)] block">
+                      {icon}
+                    </span>
+                    <h3 className="text-3xl font-headline font-bold mb-4 group-hover:text-[var(--color-brand-on-primary)] text-surface-foreground">
+                      {value.title}
+                    </h3>
+                    <p className="text-surface-muted-foreground group-hover:text-[var(--color-brand-on-primary)]/80 leading-relaxed">
+                      {value.description}
+                    </p>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Why Choose Us */}
+      {about?.whyChooseUs && about.whyChooseUs.length > 0 && (
+        <section className="py-32 bg-surface-muted">
+          <div className="max-w-screen-2xl mx-auto px-8">
+            <div className="mb-16">
+              <span className="text-brand-secondary font-body uppercase tracking-[0.3em] font-bold text-sm block mb-4">
+                The Mad Graphics difference
+              </span>
+              <h2 className="text-5xl font-headline font-bold text-surface-foreground">
+                Why choose us?
+              </h2>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl">
+              {about.whyChooseUs.map((item, i) => (
+                <div key={i} className="flex items-start gap-4 p-6 bg-surface-background border border-surface-border">
+                  <span className="material-symbols-outlined text-brand-secondary mt-0.5 flex-shrink-0">check_circle</span>
+                  <span className="text-surface-foreground font-body font-medium">{item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* CTA Band */}
+      <section className="bg-brand-primary py-24">
+        <div className="max-w-screen-2xl mx-auto px-8 flex flex-col md:flex-row items-center justify-between gap-12">
+          <div className="text-center md:text-left max-w-2xl">
+            <h2 className="text-5xl font-headline font-bold mb-4 text-surface-foreground">
+              Work with us
+            </h2>
+            <p className="text-xl font-body text-[var(--color-brand-on-primary)] opacity-90">
+              Ready to get your vehicles and premises looking sharp? Let&apos;s discuss your project.
+            </p>
+          </div>
+          <a
+            href="/contact"
+            className="bg-surface-background text-brand-primary px-12 py-5 font-bold uppercase tracking-widest text-lg hover:opacity-80 transition-all duration-300 shadow-2xl whitespace-nowrap"
+          >
+            Get a Quote
+          </a>
+        </div>
+      </section>
     </>
   );
 }

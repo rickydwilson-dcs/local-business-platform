@@ -133,6 +133,8 @@ export const LocationFrontmatterSchema = z.object({
     .min(2, "Location title must be at least 2 characters")
     .max(50, "Location title must be less than 50 characters"),
 
+  locationName: z.string().optional(),
+
   seoTitle: z
     .string()
     .min(10, "SEO title must be at least 10 characters")

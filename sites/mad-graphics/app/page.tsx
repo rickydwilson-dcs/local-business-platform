@@ -1,51 +1,57 @@
-import Link from 'next/link';
 import type { Metadata } from 'next';
-import { siteConfig } from '@/site.config';
+import Link from 'next/link';
 import { ImageOverlayHero } from '@platform/core-components';
 import { cygnusRegistry } from '@platform/themes/cygnus';
-import { getLocations } from '@/lib/content';
-import { absUrl, slugify } from '@/lib/site';
+import { siteConfig } from '@/site.config';
+import { getTestimonials } from '@/lib/content';
+import { absUrl } from '@/lib/site';
 import { getLocalBusinessSchema } from '@/lib/schema';
-import { PHONE_DISPLAY, PHONE_TEL } from '@/lib/contact-info';
-import { getImageUrl } from '@/lib/image';
-import { Phone } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: `${siteConfig.business.name} | ${siteConfig.tagline}`,
   description:
-    'Professional local services tailored to your needs. Quality workmanship, competitive pricing, and excellent customer service.',
+    'Vehicle graphics, van signwriting, shop signs, banners, and print for East Sussex businesses. Made and applied from our Polegate workshop since 2004.',
   openGraph: {
     title: `${siteConfig.business.name} | ${siteConfig.tagline}`,
     description:
-      'Professional local services tailored to your needs. Quality workmanship, competitive pricing, and excellent customer service.',
+      'Vehicle graphics, van signwriting, shop signs, banners, and print for East Sussex businesses. Made and applied from our Polegate workshop since 2004.',
     url: absUrl('/'),
     siteName: siteConfig.name,
-    images: [
-      {
-        url: absUrl('/logo.svg'),
-        width: 1200,
-        height: 630,
-        alt: `${siteConfig.business.name} - ${siteConfig.tagline}`,
-      },
-    ],
+    images: [{ url: absUrl('/logo.svg'), width: 1200, height: 630, alt: siteConfig.name }],
     locale: 'en_GB',
     type: 'website',
   },
-  twitter: {
-    card: 'summary_large_image',
-    title: `${siteConfig.business.name} | ${siteConfig.tagline}`,
-    description:
-      'Professional local services tailored to your needs. Quality workmanship, competitive pricing, and excellent customer service.',
-    images: [absUrl('/logo.svg')],
-  },
-  alternates: {
-    canonical: absUrl('/'),
-  },
+  alternates: { canonical: absUrl('/') },
+};
+
+const SERVICE_IMAGES: Record<string, string> = {
+  'vehicle-graphics':     '/stitch-images/img-025.jpg',
+  'signs-signage':        '/stitch-images/img-003.jpg',
+  'banners':              '/stitch-images/img-002.jpg',
+  'large-format-print':  '/stitch-images/img-006.jpg',
+  'marketing-print':     '/stitch-images/img-010.jpg',
+  'stickers-labels':     '/stitch-images/img-008.jpg',
+  'workwear-merchandise': '/stitch-images/img-015.jpg',
+  'graphic-design':      '/stitch-images/img-019.jpg',
+};
+
+// Category labels for each service
+const SERVICE_CATEGORIES: Record<string, string> = {
+  'vehicle-graphics':     'Automotive',
+  'signs-signage':        'Architectural',
+  'banners':              'Outdoor',
+  'large-format-print':  'Print',
+  'marketing-print':     'Marketing',
+  'stickers-labels':     'Specialty',
+  'workwear-merchandise': 'Apparel',
+  'graphic-design':      'Design',
 };
 
 export default async function HomePage() {
-  // Fetch actual locations from content
-  const locations = await getLocations();
+  const allTestimonials = await getTestimonials();
+  const featuredTestimonials = allTestimonials
+    .filter((t) => t.featured)
+    .slice(0, 2);
 
   const localBusinessSchema = getLocalBusinessSchema();
 
@@ -56,9 +62,7 @@ export default async function HomePage() {
     name: siteConfig.business.name,
     url: absUrl('/'),
     description: siteConfig.tagline,
-    publisher: {
-      '@id': absUrl('/#organization'),
-    },
+    publisher: { '@id': absUrl('/#organization') },
     inLanguage: 'en-GB',
   };
 
@@ -66,17 +70,12 @@ export default async function HomePage() {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      {
-        '@type': 'ListItem',
-        position: 1,
-        name: 'Home',
-        item: absUrl('/'),
-      },
+      { '@type': 'ListItem', position: 1, name: 'Home', item: absUrl('/') },
     ],
   };
 
   return (
-    <div className="min-h-screen">
+    <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
@@ -91,68 +90,146 @@ export default async function HomePage() {
       />
 
       {/* Hero Section */}
-      {cygnusRegistry.heroVariant === "image-overlay" ? (
+      {cygnusRegistry.heroVariant === 'image-overlay' ? (
         <ImageOverlayHero
           headline="Vehicle Graphics, Signs"
           headlineAccent="& Print."
           subheadline={siteConfig.tagline}
-          backgroundImage={getImageUrl('mad-graphics/hero/homepage-hero.jpg')}
+          backgroundImage="/stitch-images/img-006.jpg"
           backgroundImageAlt="Wide-format print workshop at Mad Graphics, Polegate, East Sussex"
-          primaryCta={{ label: siteConfig.cta.primary.label, href: '/contact' }}
+          primaryCta={{ label: 'Get a Free Quote', href: '/contact' }}
           secondaryCta={{ label: 'Our Work', href: '/projects' }}
           badge="Est. 2004 — Polegate, East Sussex"
           stats={[
-            { value: "20+", label: "Years Experience" },
-            { value: "5,000+", label: "Projects Completed" },
-            { value: "5★", label: "Client Rated" },
+            { value: '20+', label: 'Years Experience' },
+            { value: '5,000+', label: 'Projects Completed' },
+            { value: '5★', label: 'Client Rated' },
           ]}
         />
       ) : (
-        /* Fallback: original base-template hero — preserved as fallback */
-        <section className="section bg-gradient-to-b from-brand-primary/5 to-surface-background">
-          <div className="container-narrow text-center">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-balance text-surface-foreground">
-              Professional Local Services in {siteConfig.business.address.city}
-            </h1>
-            <p className="text-xl md:text-2xl text-surface-muted-foreground mb-8 text-balance">
-              {siteConfig.tagline}
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/contact" className="btn-primary">
-                {siteConfig.cta.primary.label}
-              </Link>
-              <Link href="/services" className="btn-secondary">
-                Our Services
-              </Link>
-            </div>
-
-            {/* Phone CTA */}
-            {siteConfig.cta.phone.show && (
-              <div className="mt-8">
-                <Link
-                  href={`tel:${PHONE_TEL}`}
-                  className="inline-flex items-center gap-2 text-lg font-semibold text-brand-primary hover:text-brand-primary-hover transition-colors"
-                >
-                  <Phone className="w-5 h-5" />
-                  <span>Call us: {PHONE_DISPLAY}</span>
+        <section className="relative min-h-screen flex items-center overflow-hidden">
+          <div className="absolute inset-0 z-0">
+            <img
+              className="w-full h-full object-cover opacity-40 grayscale-[0.5]"
+              src="/stitch-images/img-006.jpg"
+              alt="Wide-format print workshop at Mad Graphics"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-surface-background via-surface-background/60 to-transparent" />
+          </div>
+          <div className="relative z-10 max-w-7xl mx-auto px-8 w-full">
+            <div className="max-w-3xl">
+              <h1 className="text-7xl md:text-8xl font-headline font-bold italic tracking-tight leading-none mb-8">
+                Vehicle Graphics, Signs <br />
+                <span className="text-brand-primary">&amp; Print.</span>
+              </h1>
+              <p className="text-xl font-body text-surface-muted-foreground max-w-xl mb-10 leading-relaxed">
+                {siteConfig.tagline}
+              </p>
+              <div className="flex flex-wrap gap-4">
+                <a href="/contact" className="btn-primary px-10 py-4 text-lg font-bold">
+                  Get a Free Quote
+                </a>
+                <Link href="/projects" className="btn-outline px-10 py-4 text-lg font-bold">
+                  Our Work
                 </Link>
               </div>
-            )}
+            </div>
           </div>
         </section>
       )}
 
-      {/* Trust Indicators */}
-      {siteConfig.credentials.stats.length > 0 && (
-        <section className="py-8 bg-surface-subtle border-y border-surface-border">
-          <div className="container-narrow">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-              {siteConfig.credentials.stats.map((stat, index) => (
-                <div key={index}>
-                  <div className="text-2xl md:text-3xl font-bold text-brand-primary">
-                    {stat.value}
+      {/* Services Grid */}
+      <section id="services" className="py-32 px-8 max-w-7xl mx-auto">
+        <div className="mb-20">
+          <span className="text-brand-primary font-body uppercase tracking-[0.3em] font-bold text-sm">
+            Capabilities
+          </span>
+          <h2 className="text-5xl font-headline font-bold mt-4">Our Services</h2>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {siteConfig.services.map((service) => {
+            const image = SERVICE_IMAGES[service.slug] ?? '/stitch-images/img-006.jpg';
+            const category = SERVICE_CATEGORIES[service.slug] ?? 'Service';
+            return (
+              <div key={service.slug} className="group bg-surface-muted rounded-lg overflow-hidden flex flex-col">
+                <div className="h-64 overflow-hidden relative">
+                  <img
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    src={image}
+                    alt={service.title}
+                  />
+                  <div className="absolute inset-0 bg-surface-muted/20" />
+                </div>
+                <div className="p-8 flex-1 flex flex-col">
+                  <span className="text-brand-primary font-body uppercase tracking-widest text-[10px] font-bold mb-2">
+                    {category}
+                  </span>
+                  <h3 className="text-2xl font-headline font-bold mb-4">{service.title}</h3>
+                  <p className="text-sm text-surface-muted-foreground font-body mb-6 flex-1">
+                    {service.description}
+                  </p>
+                  <a
+                    className="inline-flex items-center gap-2 text-brand-primary font-bold text-xs uppercase tracking-widest group-hover:gap-4 transition-all"
+                    href={`/services/${service.slug}`}
+                  >
+                    Learn more{' '}
+                    <span className="material-symbols-outlined text-sm">arrow_forward</span>
+                  </a>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+        <div className="text-center mt-12">
+          <Link href="/services" className="btn-outline px-8 py-3">
+            View All Services
+          </Link>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      {featuredTestimonials.length > 0 && (
+        <section className="bg-surface-muted py-32">
+          <div className="max-w-7xl mx-auto px-8">
+            <div className="text-center mb-20">
+              <span className="text-brand-secondary font-body uppercase tracking-[0.3em] font-bold text-sm">
+                Word on the shop floor
+              </span>
+              <h2 className="text-5xl font-headline font-bold mt-4">
+                Trusted by East Sussex businesses
+              </h2>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {featuredTestimonials.map((testimonial) => (
+                <div
+                  key={testimonial.slug}
+                  className="bg-surface-background p-12 rounded-lg border border-surface-border"
+                >
+                  <div className="flex text-brand-primary mb-6">
+                    {Array.from({ length: testimonial.rating ?? 5 }).map((_, i) => (
+                      <span
+                        key={i}
+                        className="material-symbols-outlined"
+                        style={{ fontVariationSettings: "'FILL' 1" }}
+                      >
+                        star
+                      </span>
+                    ))}
                   </div>
-                  <div className="text-sm text-surface-muted-foreground">{stat.label}</div>
+                  <p className="text-2xl font-headline italic text-surface-foreground leading-relaxed mb-8">
+                    &ldquo;{testimonial.text}&rdquo;
+                  </p>
+                  <div>
+                    <div className="font-bold text-lg uppercase tracking-wider font-body">
+                      {testimonial.customerName}
+                    </div>
+                    {testimonial.customerRole && (
+                      <div className="text-surface-muted-foreground text-xs font-body uppercase tracking-widest">
+                        {testimonial.customerRole}
+                        {testimonial.customerCompany ? ` — ${testimonial.customerCompany}` : ''}
+                      </div>
+                    )}
+                  </div>
                 </div>
               ))}
             </div>
@@ -160,115 +237,33 @@ export default async function HomePage() {
         </section>
       )}
 
-      {/* Services Overview */}
-      <section className="section">
-        <div className="container-narrow">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-4 text-surface-foreground">
-            Our Services
-          </h2>
-          <p className="text-center text-surface-muted-foreground mb-12 max-w-2xl mx-auto">
-            We offer a comprehensive range of professional services tailored to your needs.
-          </p>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {siteConfig.services.map((service) => (
-              <Link
-                key={service.slug}
-                href={`/services/${service.slug}`}
-                className="card group hover:shadow-lg transition-shadow"
-              >
-                <h3 className="text-xl font-semibold mb-3 group-hover:text-brand-primary transition-colors">
-                  {service.title}
-                </h3>
-                <p className="text-surface-muted-foreground">{service.description}</p>
-                <span className="inline-block mt-4 text-brand-primary font-medium group-hover:translate-x-1 transition-transform">
-                  Learn more &rarr;
-                </span>
-              </Link>
-            ))}
+      {/* CTA Band */}
+      <section className="bg-brand-primary py-24">
+        <div className="max-w-7xl mx-auto px-8 flex flex-col md:flex-row items-center justify-between gap-12">
+          <div className="max-w-2xl text-center md:text-left">
+            <h2 className="md:text-6xl mb-4 text-5xl font-headline font-bold mt-4">
+              Ready to make your brand stand out?
+            </h2>
+            <p className="text-[var(--color-brand-on-primary)] text-lg font-body font-medium">
+              Let&apos;s discuss your project today and get a custom quote within 24 hours.
+            </p>
           </div>
-          <div className="text-center mt-8">
-            <Link href="/services" className="btn-secondary">
-              View All Services
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Service Areas - Now with clickable links */}
-      <section className="section bg-surface-subtle">
-        <div className="container-narrow">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-4 text-surface-foreground">
-            Service Areas
-          </h2>
-          <p className="text-center text-surface-muted-foreground mb-12 max-w-2xl mx-auto">
-            We proudly serve customers across these locations and surrounding areas.
-          </p>
-          <div className="grid md:grid-cols-3 gap-6">
-            {/* If we have content-based locations, use those */}
-            {locations.length > 0
-              ? locations.map((location) => (
-                  <Link
-                    key={location.slug}
-                    href={`/locations/${location.slug}`}
-                    className="card group text-center hover:shadow-lg transition-shadow hover:border-brand-primary"
-                  >
-                    <p className="text-lg font-semibold group-hover:text-brand-primary transition-colors">
-                      {location.title}
-                    </p>
-                    {location.description && (
-                      <p className="text-sm text-surface-muted-foreground mt-2 line-clamp-2">
-                        {location.description}
-                      </p>
-                    )}
-                  </Link>
-                ))
-              : // Fallback to config-based service areas (also clickable)
-                siteConfig.serviceAreas.map((area) => (
-                  <Link
-                    key={area}
-                    href={`/locations/${slugify(area)}`}
-                    className="card group text-center hover:shadow-lg transition-shadow hover:border-brand-primary"
-                  >
-                    <p className="text-lg font-semibold group-hover:text-brand-primary transition-colors">
-                      {area}
-                    </p>
-                  </Link>
-                ))}
-          </div>
-          <div className="text-center mt-8">
-            <Link href="/locations" className="btn-secondary">
-              View All Locations
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="section bg-brand-primary text-white">
-        <div className="container-narrow text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Get Started?</h2>
-          <p className="text-xl mb-8 opacity-90">
-            Contact us today for a free consultation and quote
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
+          <div className="flex flex-col sm:flex-row gap-4">
+            <a
               href="/contact"
-              className="bg-white text-brand-primary px-8 py-3 rounded-lg font-semibold hover:bg-surface-subtle transition-colors"
+              className="bg-surface-background text-brand-primary px-10 py-4 rounded-lg font-bold text-lg hover:scale-105 transition-transform uppercase tracking-widest"
             >
-              Get a Free Quote
-            </Link>
-            {siteConfig.cta.phone.show && (
-              <Link
-                href={`tel:${PHONE_TEL}`}
-                className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white/10 transition-colors inline-flex items-center justify-center gap-2"
-              >
-                <Phone className="w-5 h-5" />
-                {PHONE_DISPLAY}
-              </Link>
-            )}
+              Get a Quote
+            </a>
+            <a
+              href="tel:01323589700"
+              className="border border-surface-foreground/30 text-surface-background px-10 py-4 rounded-lg font-bold text-lg hover:bg-surface-foreground/10 transition-colors uppercase tracking-widest"
+            >
+              Call Us
+            </a>
           </div>
         </div>
       </section>
-    </div>
+    </>
   );
 }
