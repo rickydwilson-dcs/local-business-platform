@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { ImageOverlayHero } from '@platform/core-components';
 import { cygnusRegistry } from '@platform/themes/cygnus';
 import { siteConfig } from '@/site.config';
@@ -96,12 +97,12 @@ export default function HomePage() {
                   {siteConfig.tagline}
                 </p>
                 <div className="flex flex-wrap gap-4">
-                  <a href="/contact" className="btn-primary px-10 py-4 text-lg font-bold">
+                  <Link href="/contact" className="btn-primary px-10 py-4 text-lg font-bold">
                     Get a Quote
-                  </a>
-                  <a href="/projects" className="btn-outline px-10 py-4 text-lg font-bold">
+                  </Link>
+                  <Link href="/projects" className="btn-outline px-10 py-4 text-lg font-bold">
                     View Our Work
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>

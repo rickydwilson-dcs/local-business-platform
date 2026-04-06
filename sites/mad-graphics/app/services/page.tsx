@@ -7,6 +7,7 @@
  */
 
 import type { Metadata } from 'next';
+import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'Services | MAD GRAPHICS',
@@ -69,34 +70,34 @@ export default function ServicesPage() {
       {/* ── Nav ── */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-[#131313]">
         <div className="flex items-center justify-between px-6 md:px-10 py-4">
-          <a href="/" className="text-3xl font-black italic tracking-tighter text-[#f7941d] font-headline">
+          <Link href="/" className="text-3xl font-black italic tracking-tighter text-[#f7941d] font-headline">
             MAD GRAPHICS
-          </a>
+          </Link>
 
           <div className="hidden md:flex items-center gap-8">
-            <a href="/" className="font-headline uppercase tracking-tight text-white/60 hover:text-white transition-colors text-sm">
+            <Link href="/" className="font-headline uppercase tracking-tight text-white/60 hover:text-white transition-colors text-sm">
               Home
-            </a>
-            <a href="/about" className="font-headline uppercase tracking-tight text-white/60 hover:text-white transition-colors text-sm">
+            </Link>
+            <Link href="/about" className="font-headline uppercase tracking-tight text-white/60 hover:text-white transition-colors text-sm">
               About
-            </a>
-            <a href="/services" className="font-headline uppercase tracking-tight text-[#f7941d] border-b-4 border-[#f7941d] pb-1 text-sm">
+            </Link>
+            <Link href="/services" className="font-headline uppercase tracking-tight text-[#f7941d] border-b-4 border-[#f7941d] pb-1 text-sm">
               Services
-            </a>
-            <a href="/projects" className="font-headline uppercase tracking-tight text-white/60 hover:text-white transition-colors text-sm">
+            </Link>
+            <Link href="/projects" className="font-headline uppercase tracking-tight text-white/60 hover:text-white transition-colors text-sm">
               Projects
-            </a>
-            <a href="/contact" className="font-headline uppercase tracking-tight text-white/60 hover:text-white transition-colors text-sm">
+            </Link>
+            <Link href="/contact" className="font-headline uppercase tracking-tight text-white/60 hover:text-white transition-colors text-sm">
               Contact
-            </a>
+            </Link>
           </div>
 
-          <a
+          <Link
             href="/contact"
             className="hidden md:inline-flex items-center gap-2 bg-[#f7941d] text-[#2d1600] px-6 py-2.5 font-headline uppercase tracking-tight text-sm font-bold hover:bg-[#e8870f] transition-colors"
           >
             Get a Quote
-          </a>
+          </Link>
         </div>
         <div className="bg-[#353534] h-[4px] w-full absolute bottom-0" />
       </nav>
@@ -104,7 +105,7 @@ export default function ServicesPage() {
       {/* ── Breadcrumb ── */}
       <div className="px-6 md:px-10 mb-12 pt-32">
         <nav className="flex items-center gap-2 text-xs uppercase tracking-widest text-white/40">
-          <a href="/" className="hover:text-white/60 transition-colors">Home</a>
+          <Link href="/" className="hover:text-white/60 transition-colors">Home</Link>
           <span>/</span>
           <span className="text-white/60">Services</span>
         </nav>
@@ -208,11 +209,11 @@ export default function ServicesPage() {
               <div>
                 <h3 className="font-headline uppercase tracking-widest text-xs text-white/40 mb-4">Navigation</h3>
                 <ul className="space-y-2">
-                  <li><a href="/" className="text-white/60 hover:text-white transition-colors text-sm">Home</a></li>
-                  <li><a href="/about" className="text-white/60 hover:text-white transition-colors text-sm">About</a></li>
-                  <li><a href="/services" className="text-[#f7941d] text-sm">Services</a></li>
-                  <li><a href="/projects" className="text-white/60 hover:text-white transition-colors text-sm">Projects</a></li>
-                  <li><a href="/contact" className="text-white/60 hover:text-white transition-colors text-sm">Contact</a></li>
+                  <li><Link href="/" className="text-white/60 hover:text-white transition-colors text-sm">Home</Link></li>
+                  <li><Link href="/about" className="text-white/60 hover:text-white transition-colors text-sm">About</Link></li>
+                  <li><Link href="/services" className="text-[#f7941d] text-sm">Services</Link></li>
+                  <li><Link href="/projects" className="text-white/60 hover:text-white transition-colors text-sm">Projects</Link></li>
+                  <li><Link href="/contact" className="text-white/60 hover:text-white transition-colors text-sm">Contact</Link></li>
                 </ul>
               </div>
               <div>
