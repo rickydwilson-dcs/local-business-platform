@@ -433,10 +433,12 @@ ls output/ingestion/$THEME_NAME-stitch/html/about.html
 ls output/ingestion/$THEME_NAME-stitch/html/contact.html
 ls output/ingestion/$THEME_NAME-stitch/html/services.html
 ls output/ingestion/$THEME_NAME-stitch/html/service-detail.html
+ls output/ingestion/$THEME_NAME-stitch/html/blog.html
+ls output/ingestion/$THEME_NAME-stitch/html/blog-detail.html
 ls output/ingestion/$THEME_NAME-stitch/meta/project.json
 ls output/ingestion/$THEME_NAME-stitch/meta/screens.json
 ls output/ingestion/$THEME_NAME-stitch/meta/image-manifest.json
-# All 9 files must exist and be non-empty
+# All 11 files must exist and be non-empty
 ls output/ingestion/$THEME_NAME-stitch/images/ | grep -c img
 # Must be > 0
 ```
@@ -961,7 +963,7 @@ Output this summary to the user:
     primary colour: $PRIMARY_COLOR  |  roundness: $ROUNDNESS  |  variant: $COLOR_VARIANT
 ✓ Company:          $COMPANY_NAME ($TRADE[, $LOCATION if set])
 ✓ Design assets:    output/ingestion/$THEME_NAME-stitch/
-    html/           — 5 page exports (home, about, contact, services, service-detail)
+    html/           — 7 page exports (home, about, contact, services, service-detail, blog, blog-detail)
     design-system/  — tokens.json
     meta/           — project.json, screens.json, token-mapping-report.json, image-manifest.json,
                       tsx-review-findings.json, tsx-fix-log.json
