@@ -14,6 +14,9 @@ node_modules/
 /test-results/
 /playwright-report/
 /playwright/.cache/
+**/test-results/
+**/playwright-report/
+**/newrelic_agent.log
 *.lcov
 
 # Next.js (multiple sites)
