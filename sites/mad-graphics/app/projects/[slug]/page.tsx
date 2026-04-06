@@ -16,6 +16,7 @@ import {
   BlogPostHero,
   FAQSection,
   CTASection,
+  ArticleCallout,
 } from '@platform/core-components';
 import { getProjects, getProject, type Project } from '@/lib/content';
 import { getImageUrl } from '@/lib/image';
@@ -29,21 +30,11 @@ export const dynamicParams = false;
 type Params = { slug: string };
 
 const categoryLabels: Record<string, string> = {
-  // Scaffolding categories
   heritage: 'Heritage Project',
   'new-build': 'New Build Project',
   renovation: 'Renovation Project',
   maintenance: 'Maintenance Project',
   emergency: 'Emergency Project',
-  // Graphics categories
-  'vehicle-graphics': 'Vehicle Graphics',
-  'signs-signage': 'Signs & Signage',
-  banners: 'Banners',
-  'large-format-print': 'Large Format Print',
-  'marketing-print': 'Marketing Print',
-  'stickers-labels': 'Stickers & Labels',
-  'workwear-merchandise': 'Workwear',
-  'graphic-design': 'Graphic Design',
 };
 
 export async function generateStaticParams() {
@@ -97,24 +88,17 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
 
 function ProjectSummary({ project }: { project: Project }) {
   return (
-    <div className="bg-surface-muted border border-surface-border rounded-lg p-6 mb-8">
-      <p className="text-surface-muted-foreground text-xs uppercase tracking-widest mb-4">Project Summary</p>
+    <ArticleCallout variant="info" title="Project Summary">
       <dl className="space-y-2">
         <div className="flex justify-between">
-          <dt className="flex items-center gap-1 text-surface-muted-foreground">
-            <span className="material-symbols-outlined text-base" style={{ fontVariationSettings: "'FILL' 1" }}>location_on</span>
-            Location:
-          </dt>
+          <dt className="text-surface-muted-foreground">Location:</dt>
           <dd className="font-medium text-surface-foreground">
             {project.locationName}
             {project.region && `, ${project.region}`}
           </dd>
         </div>
         <div className="flex justify-between">
-          <dt className="flex items-center gap-1 text-surface-muted-foreground">
-            <span className="material-symbols-outlined text-base" style={{ fontVariationSettings: "'FILL' 1" }}>calendar_month</span>
-            Completion:
-          </dt>
+          <dt className="text-surface-muted-foreground">Completion date:</dt>
           <dd className="font-medium text-surface-foreground">
             {new Date(project.completionDate).toLocaleDateString('en-GB', {
               month: 'long',
@@ -124,19 +108,13 @@ function ProjectSummary({ project }: { project: Project }) {
         </div>
         {project.duration && (
           <div className="flex justify-between">
-            <dt className="flex items-center gap-1 text-surface-muted-foreground">
-              <span className="material-symbols-outlined text-base" style={{ fontVariationSettings: "'FILL' 1" }}>timer</span>
-              Duration:
-            </dt>
+            <dt className="text-surface-muted-foreground">Duration:</dt>
             <dd className="font-medium text-surface-foreground">{project.duration}</dd>
           </div>
         )}
         {project.scope?.buildingType && (
           <div className="flex justify-between">
-            <dt className="flex items-center gap-1 text-surface-muted-foreground">
-              <span className="material-symbols-outlined text-base" style={{ fontVariationSettings: "'FILL' 1" }}>construction</span>
-              Type:
-            </dt>
+            <dt className="text-surface-muted-foreground">Building type:</dt>
             <dd className="font-medium text-surface-foreground">{project.scope.buildingType}</dd>
           </div>
         )}
@@ -152,7 +130,8 @@ function ProjectSummary({ project }: { project: Project }) {
             <dd className="font-medium text-surface-foreground">{project.scope.squareMetres}m²</dd>
           </div>
         )}
-        <div className="pt-2 border-t border-surface-border">
+        {/* eslint-disable-next-line platform/no-hardcoded-tailwind-colors -- Intentional: decorative divider accent */}
+        <div className="pt-2 border-t border-blue-200">
           <dt className="text-surface-muted-foreground mb-2">Services:</dt>
           <dd className="flex flex-wrap gap-2">
             {project.services.map((serviceSlug) => (
@@ -170,7 +149,8 @@ function ProjectSummary({ project }: { project: Project }) {
           </dd>
         </div>
         {project.scope?.challenges && project.scope.challenges.length > 0 && (
-          <div className="pt-2 border-t border-surface-border">
+          // eslint-disable-next-line platform/no-hardcoded-tailwind-colors -- Intentional: decorative divider accent
+          <div className="pt-2 border-t border-blue-200">
             <dt className="text-surface-muted-foreground mb-2">Key constraints:</dt>
             <dd className="space-y-1">
               {project.scope.challenges.map((challenge, idx) => (
@@ -183,24 +163,12 @@ function ProjectSummary({ project }: { project: Project }) {
           </div>
         )}
       </dl>
-    </div>
+    </ArticleCallout>
   );
 }
 
 function OutcomesCallout({ results }: { results: string[] }) {
-  return (
-    <div className="border-l-4 border-brand-primary bg-surface-muted rounded-r-lg p-6 mb-8">
-      <p className="text-surface-muted-foreground text-xs uppercase tracking-widest mb-4">Outcomes</p>
-      <ul className="space-y-2">
-        {results.map((result, idx) => (
-          <li key={idx} className="flex items-start gap-2 text-surface-foreground">
-            <span className="material-symbols-outlined text-base text-brand-primary mt-0.5" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
-            <span>{result}</span>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
+  return <ArticleCallout variant="success" title="Outcomes" items={results} />;
 }
 
 function ClientTestimonialCallout({
@@ -212,25 +180,7 @@ function ClientTestimonialCallout({
   clientType: string;
   rating?: number;
 }) {
-  return (
-    <div className="bg-surface-muted border border-surface-border rounded-lg p-6 mb-8">
-      {rating && (
-        <div className="flex gap-1 mb-4">
-          {[...Array(5)].map((_, i) => (
-            <span
-              key={i}
-              className={`material-symbols-outlined text-base ${i < rating ? 'text-brand-primary' : 'text-surface-border'}`}
-              style={{ fontVariationSettings: "'FILL' 1" }}
-            >
-              star
-            </span>
-          ))}
-        </div>
-      )}
-      <p className="text-surface-foreground italic mb-4">&ldquo;{testimonial}&rdquo;</p>
-      <p className="text-surface-muted-foreground text-xs uppercase tracking-widest">{clientType}</p>
-    </div>
-  );
+  return <ArticleCallout variant="quote" quote={testimonial} author={clientType} rating={rating} />;
 }
 
 function RelatedProjects({ projects, currentSlug }: { projects: Project[]; currentSlug: string }) {
@@ -249,7 +199,7 @@ function RelatedProjects({ projects, currentSlug }: { projects: Project[]; curre
           {related.map((project) => (
             <article
               key={project.slug}
-              className="bg-surface-background rounded-lg overflow-hidden group border border-surface-border hover:border-brand-primary/50 transition-colors"
+              className="bg-surface-background rounded-xl overflow-hidden hover:shadow-lg transition-shadow group border border-surface-border"
             >
               <Link
                 href={`/projects/${project.slug}`}

@@ -1,5 +1,9 @@
-import type { BaseSiteConfig } from '@platform/core-components/types/site-config';
-import type { BusinessConfig, LocalBusinessSchemaOptions } from '@platform/core-components';
+/**
+ * Mad Graphics - Site Configuration
+ *
+ * Generated from project file: f3e1d2c0-1234-4ab5-9876-543210fedcba
+ * Generated at: 2026-04-06T18:45:40.149Z
+ */
 
 export interface NavItem {
   label: string;
@@ -58,10 +62,16 @@ export interface ServiceAreaRegion {
   towns: Array<{ name: string; slug: string }>;
 }
 
-export interface SiteConfig extends BaseSiteConfig {
+export interface SiteConfig {
+  /** Site identifier (used for logging, routing, and API handlers) */
+  slug: string;
+
+  /** Site name and branding */
   name: string;
   tagline: string;
   url: string;
+
+  /** Business information */
   business: {
     name: string;
     legalName: string;
@@ -95,19 +105,35 @@ export interface SiteConfig extends BaseSiteConfig {
       longitude: number;
     };
   };
+
+  /** Navigation configuration */
   navigation: {
     main: NavItem[];
   };
+
+  /** Call-to-action configuration */
   cta: CTAConfig;
+
+  /** Footer configuration */
   footer: FooterConfig;
+
+  /** Credentials and accreditations */
   credentials: CredentialsConfig;
+
+  /** Service areas */
   serviceAreas: string[];
+
+  /** Service area regions for dropdown navigation (optional) */
   serviceAreaRegions?: ServiceAreaRegion[];
+
+  /** Featured services */
   services: {
     title: string;
     slug: string;
     description: string;
   }[];
+
+  /** Feature flags */
   features: {
     analytics: boolean;
     consentBanner: boolean;
@@ -116,52 +142,41 @@ export interface SiteConfig extends BaseSiteConfig {
     testimonials: boolean;
     blog: boolean;
   };
-  schema: {
-    businessConfig: BusinessConfig;
-    businessType: LocalBusinessSchemaOptions['businessType'];
-  };
-  about?: {
-    heroBadges?: string[];
-    story?: string[];
-    whyChooseUs?: string[];
-    values?: Array<{
-      title: string;
-      description: string;
-    }>;
-  };
 }
 
 export const siteConfig: SiteConfig = {
   slug: 'mad-graphics',
-  domain: 'madgraphics.co.uk',
-  name: 'Mad Graphics',
-  tagline: 'Vehicle graphics, signs, banners & print — East Sussex',
-  url: process.env.NEXT_PUBLIC_SITE_URL || 'https://madgraphics.co.uk',
+  name: "Mad Graphics",
+  tagline: "Vehicle graphics, signs, banners & print — East Sussex",
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://madgraphics.co.uk",
 
   business: {
-    name: 'Mad Graphics',
-    legalName: 'Mad Graphics',
-    type: 'LocalBusiness',
-    phone: '01323 589 700',
-    email: 'office@madgraphics.co.uk',
+    name: "Mad Graphics",
+    legalName: "Mad Graphics",
+    type: "LocalBusiness",
+    phone: "01323 589 700",
+    email: "office@madgraphics.co.uk",
     address: {
-      street: 'Unit H2, Chaucer Business Park, Dittons Road',
-      city: 'Polegate',
-      region: 'East Sussex',
-      postalCode: 'BN26',
-      country: 'United Kingdom',
+      street: "Unit H2, Chaucer Business Park, Dittons Road",
+      city: "Polegate",
+      region: "East Sussex",
+      postalCode: "BN26",
+      country: "United Kingdom",
     },
     hours: {
-      monday: '8:00 AM - 5:30 PM',
-      tuesday: '8:00 AM - 5:30 PM',
-      wednesday: '8:00 AM - 5:30 PM',
-      thursday: '8:00 AM - 5:30 PM',
-      friday: '8:00 AM - 5:30 PM',
-      saturday: 'By appointment',
-      sunday: 'Closed',
+      monday: "8:00 AM - 5:30 PM",
+      tuesday: "8:00 AM - 5:30 PM",
+      wednesday: "8:00 AM - 5:30 PM",
+      thursday: "8:00 AM - 5:30 PM",
+      friday: "8:00 AM - 5:30 PM",
+      saturday: "By appointment",
+      sunday: "Closed",
     },
     socialMedia: {
-      instagram: 'https://instagram.com/mad_graphicssussex',
+      
+      
+      instagram: "https://instagram.com/mad_graphicssussex",
+      
     },
     geo: {
       latitude: 50.8161,
@@ -172,9 +187,7 @@ export const siteConfig: SiteConfig = {
   navigation: {
     main: [
       { label: 'Services', href: '/services' },
-      { label: 'Portfolio', href: '/projects' },
       { label: 'Locations', href: '/locations', hasDropdown: true },
-      { label: 'Blog', href: '/blog' },
       { label: 'About', href: '/about' },
       { label: 'Contact', href: '/contact' },
     ],
@@ -182,19 +195,19 @@ export const siteConfig: SiteConfig = {
 
   cta: {
     primary: {
-      label: 'Get a Free Quote',
+      label: "Get Free Quote",
       href: '/contact',
     },
     phone: {
       show: true,
-      label: 'Call 01323 589 700',
+      label: 'Call Us',
     },
   },
 
   footer: {
     showServices: true,
     showLocations: true,
-    maxServices: 8,
+    maxServices: 10,
     maxLocations: 12,
     copyright: '2026 Mad Graphics. All rights reserved.',
     builtBy: {
@@ -204,212 +217,383 @@ export const siteConfig: SiteConfig = {
   },
 
   credentials: {
-    yearEstablished: '2004',
+    yearEstablished: "2004",
     stats: [
-      { value: '20+', label: 'Years Experience', description: 'Est. 2004, Polegate' },
-      { value: '5,000+', label: 'Projects Completed', description: 'Across East Sussex' },
-      { value: 'Same Day', label: 'Quotes', description: 'Fast turnaround' },
-      { value: 'No Wraps', label: 'Honest Service', description: 'Specialist focus' },
+          {
+                "value": "22+",
+                "label": "Years Experience",
+                "description": "Serving local customers"
+          },
+          {
+                "value": "500+",
+                "label": "Projects Completed",
+                "description": "Satisfied clients"
+          },
+          {
+                "value": "100%",
+                "label": "Satisfaction",
+                "description": "Customer focused"
+          },
+          {
+                "value": "Fast",
+                "label": "Response",
+                "description": "Quick turnaround"
+          }
     ],
     certifications: [
-      { name: 'Est. 2004', description: 'Over 20 years of vehicle graphics and signage' },
-      { name: 'In-House Design', description: 'Full artwork and pre-press service' },
+          {
+                "name": "Est. 2004",
+                "description": "Mad Graphics"
+          },
+          {
+                "name": "In-House Design",
+                "description": "Mad Graphics"
+          }
     ],
+    
   },
 
-  serviceAreas: [
-    'Eastbourne',
-    'Hastings',
-    'Lewes',
-    'Bexhill-on-Sea',
-    'Uckfield',
-    'Crowborough',
-    'Seaford',
-    'Hailsham',
-    'Newhaven',
-    'Polegate',
-    'Peacehaven',
-    'Battle',
-    'St Leonards-on-Sea',
-    'Heathfield',
-    'Pevensey',
-    'Ringmer',
-    'Herstmonceux',
-    'Wadhurst',
-    'Alfriston',
+  serviceAreas: ["East Sussex"],
+
+  serviceAreaRegions: [
+      {
+          "name": "East Sussex",
+          "slug": "east-sussex",
+          "towns": [
+              {
+                  "name": "Eastbourne",
+                  "slug": "eastbourne"
+              },
+              {
+                  "name": "Hastings",
+                  "slug": "hastings"
+              },
+              {
+                  "name": "Lewes",
+                  "slug": "lewes"
+              },
+              {
+                  "name": "Bexhill-on-Sea",
+                  "slug": "bexhill-on-sea"
+              },
+              {
+                  "name": "Uckfield",
+                  "slug": "uckfield"
+              },
+              {
+                  "name": "Crowborough",
+                  "slug": "crowborough"
+              },
+              {
+                  "name": "Seaford",
+                  "slug": "seaford"
+              },
+              {
+                  "name": "Hailsham",
+                  "slug": "hailsham"
+              },
+              {
+                  "name": "Newhaven",
+                  "slug": "newhaven"
+              },
+              {
+                  "name": "Polegate",
+                  "slug": "polegate"
+              },
+              {
+                  "name": "Peacehaven",
+                  "slug": "peacehaven"
+              },
+              {
+                  "name": "Battle",
+                  "slug": "battle"
+              },
+              {
+                  "name": "St Leonards-on-Sea",
+                  "slug": "st-leonards-on-sea"
+              },
+              {
+                  "name": "Heathfield",
+                  "slug": "heathfield"
+              },
+              {
+                  "name": "Pevensey",
+                  "slug": "pevensey"
+              },
+              {
+                  "name": "Ringmer",
+                  "slug": "ringmer"
+              },
+              {
+                  "name": "Herstmonceux",
+                  "slug": "herstmonceux"
+              },
+              {
+                  "name": "Wadhurst",
+                  "slug": "wadhurst"
+              },
+              {
+                  "name": "Alfriston",
+                  "slug": "alfriston"
+              }
+          ]
+      }
   ],
 
   services: [
-    {
-      title: 'Vehicle Graphics',
-      slug: 'vehicle-graphics',
-      description: 'Van signwriting, car graphics, fleet branding, and magnetic signs for East Sussex businesses.',
-    },
-    {
-      title: 'Signs & Signage',
-      slug: 'signs-signage',
-      description: 'Shop signs, fascia signs, site boards, window graphics, and safety signage.',
-    },
-    {
-      title: 'Banners',
-      slug: 'banners',
-      description: 'PVC banners, roller banners, mesh banners, and fabric banners for events and promotions.',
-    },
-    {
-      title: 'Large Format Print',
-      slug: 'large-format-print',
-      description: 'Poster printing, large format prints, canvas, exhibition graphics, and foam board.',
-    },
-    {
-      title: 'Marketing Print',
-      slug: 'marketing-print',
-      description: 'Flyers, brochures, business cards, letterheads, folders, and menus.',
-    },
-    {
-      title: 'Stickers & Wall Graphics',
-      slug: 'stickers-labels',
-      description: 'Custom stickers, labels, wall graphics, floor graphics, and window decals.',
-    },
-    {
-      title: 'Workwear & Merchandise',
-      slug: 'workwear-merchandise',
-      description: 'Printed workwear, embroidered uniforms, hi-vis, merchandise, and personalised gifts.',
-    },
-    {
-      title: 'Graphic Design',
-      slug: 'graphic-design',
-      description: 'Logo design, brand identity, print design, and artwork pre-press services.',
-    },
+      {
+          "title": "Vehicle Graphics",
+          "slug": "vehicle-graphics",
+          "description": "Van lettering, car graphics, fleet branding and magnetic signs for East Sussex businesses."
+      },
+      {
+          "title": "Signs & Signage",
+          "slug": "signs-signage",
+          "description": "Shop signs, site boards, A-boards, hoardings and window graphics across East Sussex."
+      },
+      {
+          "title": "Banners",
+          "slug": "banners",
+          "description": "PVC, roller, mesh, fabric banners and flags for events, promotions and businesses."
+      },
+      {
+          "title": "Large Format Print",
+          "slug": "large-format-print",
+          "description": "Posters, canvas prints, exhibition displays, foam board and Correx boards."
+      },
+      {
+          "title": "Marketing Print",
+          "slug": "marketing-print",
+          "description": "Flyers, brochures, business cards and letterheads for East Sussex businesses."
+      },
+      {
+          "title": "Stickers & Wall Graphics",
+          "slug": "stickers-labels",
+          "description": "Custom stickers, wall graphics, floor graphics and window decals."
+      },
+      {
+          "title": "Workwear & Merchandise",
+          "slug": "workwear-merchandise",
+          "description": "Printed and embroidered workwear, hi-vis clothing and branded merchandise."
+      },
+      {
+          "title": "Graphic Design",
+          "slug": "graphic-design",
+          "description": "Logo design, brand identity and print-ready artwork for East Sussex businesses."
+      },
+      {
+          "title": "Van Graphics",
+          "slug": "van-graphics",
+          "description": "Custom van graphics and lettering for tradespeople and businesses across East Sussex."
+      },
+      {
+          "title": "Fleet Graphics",
+          "slug": "fleet-graphics",
+          "description": "Consistent fleet branding for vans and vehicles across East Sussex."
+      },
+      {
+          "title": "Car Graphics",
+          "slug": "car-graphics",
+          "description": "Branded car graphics and decals for businesses and individuals in East Sussex."
+      },
+      {
+          "title": "Vehicle Livery",
+          "slug": "vehicle-livery",
+          "description": "Professional vehicle livery design and application across East Sussex."
+      },
+      {
+          "title": "Magnetic Signs",
+          "slug": "magnetic-signs",
+          "description": "Removable magnetic vehicle signs for vans and cars in East Sussex."
+      },
+      {
+          "title": "Shop Signs",
+          "slug": "shop-signs",
+          "description": "Fascia signs, projecting signs and shop-front graphics for East Sussex businesses."
+      },
+      {
+          "title": "Site Boards",
+          "slug": "site-boards",
+          "description": "Construction site boards, hoarding graphics and project signage across East Sussex."
+      },
+      {
+          "title": "A-Boards",
+          "slug": "a-boards",
+          "description": "Pavement A-boards and forecourt signs for shops and businesses in East Sussex."
+      },
+      {
+          "title": "Safety Signs",
+          "slug": "safety-signs",
+          "description": "Health and safety signage, fire exit signs and warning signs for East Sussex businesses."
+      },
+      {
+          "title": "Directional Signs",
+          "slug": "directional-signs",
+          "description": "Wayfinding and directional signage for buildings and sites across East Sussex."
+      },
+      {
+          "title": "Hoarding Graphics",
+          "slug": "hoarding-graphics",
+          "description": "Large-scale hoarding graphics and construction site branding in East Sussex."
+      },
+      {
+          "title": "Window Graphics",
+          "slug": "window-graphics",
+          "description": "Frosted, printed and cut-vinyl window graphics for shops and offices in East Sussex."
+      },
+      {
+          "title": "Window Stickers",
+          "slug": "window-stickers",
+          "description": "Custom window stickers and decals for retail and commercial premises in East Sussex."
+      },
+      {
+          "title": "PVC Banners",
+          "slug": "pvc-banners",
+          "description": "Heavy-duty PVC banners for outdoor events and advertising across East Sussex."
+      },
+      {
+          "title": "Roller Banners",
+          "slug": "roller-banners",
+          "description": "Pull-up roller banners and pop-up displays for exhibitions and events."
+      },
+      {
+          "title": "Mesh Banners",
+          "slug": "mesh-banners",
+          "description": "Wind-resistant mesh banners for scaffolding and outdoor sites in East Sussex."
+      },
+      {
+          "title": "Fabric Banners",
+          "slug": "fabric-banners",
+          "description": "Premium fabric banners and flags for events and indoor displays."
+      },
+      {
+          "title": "Poster Printing",
+          "slug": "poster-printing",
+          "description": "A0, A1, A2 and custom-size poster printing for East Sussex businesses."
+      },
+      {
+          "title": "Canvas Prints",
+          "slug": "canvas-prints",
+          "description": "Custom canvas prints for offices, hospitality and retail spaces in East Sussex."
+      },
+      {
+          "title": "Foam Board & Correx",
+          "slug": "foam-board-correx",
+          "description": "Lightweight foam board and Correx boards for displays and site signs."
+      },
+      {
+          "title": "Exhibition Prints",
+          "slug": "exhibition-prints",
+          "description": "Exhibition display prints and pop-up systems for trade shows and events."
+      },
+      {
+          "title": "Large Format Printing",
+          "slug": "large-format",
+          "description": "Wide-format printing for any size requirement across East Sussex businesses."
+      },
+      {
+          "title": "Flyers & Leaflets",
+          "slug": "flyers-leaflets",
+          "description": "Full-colour flyers and leaflets for marketing campaigns in East Sussex."
+      },
+      {
+          "title": "Brochures",
+          "slug": "brochures",
+          "description": "Professionally printed brochures and booklets for East Sussex businesses."
+      },
+      {
+          "title": "Business Cards",
+          "slug": "business-cards",
+          "description": "Premium business card printing for professionals and businesses in East Sussex."
+      },
+      {
+          "title": "Letterheads",
+          "slug": "letterheads",
+          "description": "Branded letterheads and stationery for East Sussex businesses."
+      },
+      {
+          "title": "Presentation Folders",
+          "slug": "folders",
+          "description": "Custom printed presentation folders and document wallets for East Sussex businesses."
+      },
+      {
+          "title": "Menu Printing",
+          "slug": "menus",
+          "description": "Restaurant and cafe menus, boards and printed materials for East Sussex hospitality."
+      },
+      {
+          "title": "Custom Stickers",
+          "slug": "custom-stickers",
+          "description": "Custom-shaped and printed stickers for branding and packaging in East Sussex."
+      },
+      {
+          "title": "Labels",
+          "slug": "labels",
+          "description": "Printed labels for products, packaging and assets across East Sussex businesses."
+      },
+      {
+          "title": "Wall Graphics",
+          "slug": "wall-graphics",
+          "description": "Large-format wall graphics and murals for offices and retail spaces in East Sussex."
+      },
+      {
+          "title": "Floor Graphics",
+          "slug": "floor-graphics",
+          "description": "Non-slip floor graphics and vinyl for retail, events and wayfinding."
+      },
+      {
+          "title": "Printed Workwear",
+          "slug": "printed-workwear",
+          "description": "Screen printed and heat transfer workwear for East Sussex trade and business."
+      },
+      {
+          "title": "Embroidered Uniforms",
+          "slug": "embroidered-uniforms",
+          "description": "Embroidered polo shirts, jackets and uniforms for East Sussex businesses."
+      },
+      {
+          "title": "Hi-Vis Clothing",
+          "slug": "hi-vis",
+          "description": "Branded hi-vis vests, jackets and workwear for construction and trade in East Sussex."
+      },
+      {
+          "title": "Branded Merchandise",
+          "slug": "merchandise",
+          "description": "Promotional merchandise and branded gifts for East Sussex businesses."
+      },
+      {
+          "title": "Personalised Gifts",
+          "slug": "personalised-gifts",
+          "description": "Custom personalised gifts and keepsakes printed in East Sussex."
+      },
+      {
+          "title": "Logo Design",
+          "slug": "logo-design",
+          "description": "Professional logo design and brand identity creation for East Sussex businesses."
+      },
+      {
+          "title": "Brand Identity",
+          "slug": "brand-identity",
+          "description": "Full brand identity packages including logo, colours, typography and assets."
+      },
+      {
+          "title": "Print Design",
+          "slug": "print-design",
+          "description": "Print-ready artwork and layout design for all print products in East Sussex."
+      },
+      {
+          "title": "Artwork & Pre-Press",
+          "slug": "artwork-prepress",
+          "description": "Artwork preparation, file checking and pre-press services for all print jobs."
+      }
   ],
 
   features: {
-    analytics: false,
-    consentBanner: true,
-    contactForm: true,
-    rateLimit: true,
-    testimonials: true,
-    blog: true,
-  },
-
-  schema: {
-    businessType: 'LocalBusiness',
-    businessConfig: {
-      name: 'Mad Graphics',
-      legalName: 'Mad Graphics',
-      description:
-        'Mad Graphics provides vehicle graphics, signs, banners, and print services across East Sussex. Est. 2004. Based in Polegate.',
-      slogan: 'Vehicle graphics, signs, banners & print — East Sussex',
-      foundingDate: '2004',
-      numberOfEmployees: '1-10',
-      priceRange: '££',
-      email: 'office@madgraphics.co.uk',
-      telephone: '01323589700',
-      address: {
-        streetAddress: 'Unit H2, Chaucer Business Park, Dittons Road',
-        addressLocality: 'Polegate',
-        addressRegion: 'East Sussex',
-        postalCode: 'BN26',
-        addressCountry: 'GB',
-      },
-      geo: {
-        latitude: '50.8161',
-        longitude: '0.2372',
-      },
-      openingHours: [
-        {
-          dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-          opens: '08:00',
-          closes: '17:30',
-        },
-      ],
-      areaServed: [
-        'Eastbourne',
-        'Hastings',
-        'Lewes',
-        'Bexhill-on-Sea',
-        'Uckfield',
-        'Crowborough',
-        'Seaford',
-        'Hailsham',
-        'Newhaven',
-        'Polegate',
-        'Peacehaven',
-        'Battle',
-        'St Leonards-on-Sea',
-        'Heathfield',
-        'Pevensey',
-        'Ringmer',
-        'Herstmonceux',
-        'Wadhurst',
-        'Alfriston',
-      ],
-      credentials: [
-        {
-          name: 'Est. 2004',
-          description: 'Over 20 years serving East Sussex businesses',
-          category: 'certification',
-        },
-      ],
-      socialProfiles: ['https://instagram.com/mad_graphicssussex'],
-      knowsAbout: [
-        'vehicle graphics',
-        'van signwriting',
-        'fleet branding',
-        'shop signs',
-        'banners',
-        'large format print',
-        'workwear embroidery',
-        'graphic design',
-        'magnetic vehicle signs',
-        'window graphics',
-      ],
-      offerCatalog: [
-        { name: 'Vehicle Graphics', description: 'Van signwriting, car graphics, fleet branding', url: '/services/vehicle-graphics' },
-        { name: 'Signs & Signage', description: 'Shop signs, fascia, site boards, window graphics', url: '/services/signs-signage' },
-        { name: 'Banners', description: 'PVC, roller, mesh, and fabric banners', url: '/services/banners' },
-        { name: 'Large Format Print', description: 'Posters, canvas, exhibition, foam board', url: '/services/large-format-print' },
-        { name: 'Marketing Print', description: 'Flyers, brochures, business cards, menus', url: '/services/marketing-print' },
-        { name: 'Stickers & Wall Graphics', description: 'Custom stickers, labels, wall and floor graphics', url: '/services/stickers-labels' },
-        { name: 'Workwear & Merchandise', description: 'Printed workwear, embroidery, hi-vis, merchandise', url: '/services/workwear-merchandise' },
-        { name: 'Graphic Design', description: 'Logo design, brand identity, print design, artwork', url: '/services/graphic-design' },
-      ],
-    },
-  },
-
-  about: {
-    heroBadges: ['Est. 2004', 'Polegate, East Sussex', 'No Vehicle Wraps'],
-    story: [
-      'Mad Graphics was founded in 2004 by Martin Adams in Polegate, East Sussex. For over 20 years, we have been the go-to specialist for vehicle graphics, signage, banners, and print for businesses across the county.',
-      'From our base at Chaucer Business Park, we serve sole traders and large fleets alike — bringing the same attention to detail and honest pricing to every job. We cover Eastbourne, Hastings, Lewes, Bexhill, and everywhere in between.',
-      'One thing sets us apart: we are specialists. We do not offer full vehicle wraps. Instead, we focus on what we do best — cut vinyl graphics, signwriting, and printed graphics applied with precision. That focus means better results for our clients.',
-    ],
-    whyChooseUs: [
-      'No full vehicle wraps — specialist focus on graphics and signwriting',
-      'Same-day quotes for most enquiries',
-      'In-house graphic design and artwork service',
-      'Fleet discounts for multiple vehicles',
-      'UV-rated materials for long-lasting colour',
-      'Free artwork check before production',
-      'Local East Sussex knowledge since 2004',
-      'Honest, transparent pricing',
-    ],
-    values: [
-      {
-        title: 'Specialist Focus',
-        description: 'We specialise in vehicle graphics and signwriting — not wraps. That focus means better quality and more competitive pricing.',
-      },
-      {
-        title: 'Honest Pricing',
-        description: 'No hidden fees, no upselling. You get a clear quote with everything included before we start.',
-      },
-      {
-        title: 'Fast Turnaround',
-        description: 'Same-day quotes and efficient production mean your vehicle or signage is ready when you need it.',
-      },
-      {
-        title: 'Local Knowledge',
-        description: 'Based in Polegate since 2004, we understand East Sussex businesses and what works in our local market.',
-      },
-    ],
+      "analytics": false,
+      "consentBanner": false,
+      "contactForm": true,
+      "rateLimit": true,
+      "testimonials": true,
+      "blog": true
   },
 };
