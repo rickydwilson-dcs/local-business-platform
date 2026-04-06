@@ -1,0 +1,143 @@
+{
+  "business": {
+    "name": "Mad Graphics",
+    "legalName": "Mad Graphics",
+    "industry": "print_graphics",
+    "phone": "01323 589 700",
+    "email": "office@madgraphics.co.uk",
+    "website": "https://madgraphics.co.uk"
+  },
+  "credentials": {
+    "certifications": ["Est. 2004", "In-House Design & Artwork", "UV-rated materials"],
+    "insurance": "Public liability insurance",
+    "teamQualifications": "20+ years specialist experience in vehicle graphics, signage, and wide-format print. Based in Polegate, East Sussex since 2004."
+  },
+  "services": [
+    {
+      "slug": "vehicle-graphics",
+      "title": "Vehicle Graphics",
+      "category": "core",
+      "shortDescription": "Van lettering, car graphics, fleet branding and magnetic signs for East Sussex businesses.",
+      "keyFeatures": ["Fleet branding", "Van lettering", "Magnetic signs", "Car graphics", "In-house design"],
+      "relatedServices": ["signs-signage", "graphic-design"]
+    },
+    {
+      "slug": "signs-signage",
+      "title": "Signs & Signage",
+      "category": "core",
+      "shortDescription": "Shop signs, site boards, A-boards, hoardings and window graphics across East Sussex.",
+      "keyFeatures": ["Shop signs", "Site boards", "A-boards", "Window graphics", "Hoardings"],
+      "relatedServices": ["vehicle-graphics", "large-format-print"]
+    },
+    {
+      "slug": "banners",
+      "title": "Banners",
+      "category": "core",
+      "shortDescription": "PVC, roller, mesh, fabric banners and flags for events, promotions and businesses.",
+      "keyFeatures": ["PVC banners", "Roller banners", "Mesh banners", "Fabric banners", "Flags"],
+      "relatedServices": ["large-format-print", "marketing-print"]
+    },
+    {
+      "slug": "large-format-print",
+      "title": "Large Format Print",
+      "category": "core",
+      "shortDescription": "Posters, canvas prints, exhibition displays, foam board and Correx boards.",
+      "keyFeatures": ["Posters", "Canvas prints", "Exhibition displays", "Foam board", "Correx boards"],
+      "relatedServices": ["banners", "signs-signage"]
+    },
+    {
+      "slug": "marketing-print",
+      "title": "Marketing Print",
+      "category": "core",
+      "shortDescription": "Flyers, brochures, business cards and letterheads for East Sussex businesses.",
+      "keyFeatures": ["Flyers", "Brochures", "Business cards", "Letterheads", "Leaflets"],
+      "relatedServices": ["graphic-design", "stickers-labels"]
+    },
+    {
+      "slug": "stickers-labels",
+      "title": "Stickers & Wall Graphics",
+      "category": "specialist",
+      "shortDescription": "Custom stickers, wall graphics, floor graphics and window decals.",
+      "keyFeatures": ["Custom stickers", "Wall graphics", "Floor graphics", "Window decals", "Cut vinyl"],
+      "relatedServices": ["vehicle-graphics", "signs-signage"]
+    },
+    {
+      "slug": "workwear-merchandise",
+      "title": "Workwear & Merchandise",
+      "category": "specialist",
+      "shortDescription": "Printed and embroidered workwear, hi-vis clothing and branded merchandise.",
+      "keyFeatures": ["Embroidered workwear", "Printed hi-vis", "Branded merchandise", "Polo shirts", "Jackets"],
+      "relatedServices": ["graphic-design", "marketing-print"]
+    },
+    {
+      "slug": "graphic-design",
+      "title": "Graphic Design",
+      "category": "specialist",
+      "shortDescription": "Logo design, brand identity and print-ready artwork for East Sussex businesses.",
+      "keyFeatures": ["Logo design", "Brand identity", "Print-ready artwork", "Vehicle livery design", "Signage artwork"],
+      "relatedServices": ["vehicle-graphics", "signs-signage"]
+    },
+    { "slug": "van-graphics", "title": "Van Graphics", "category": "core", "keyFeatures": ["Van lettering", "Full side graphics", "Cut vinyl", "Digital print", "In-house design"], "relatedServices": ["vehicle-graphics", "magnetic-signs"] },
+    { "slug": "fleet-graphics", "title": "Fleet Graphics", "category": "core", "keyFeatures": ["Fleet livery", "Consistent branding", "Multiple vehicles", "Design included", "Fast turnaround"], "relatedServices": ["vehicle-graphics", "van-graphics"] },
+    { "slug": "car-graphics", "title": "Car Graphics", "category": "core", "keyFeatures": ["Car decals", "Bonnet graphics", "Roof graphics", "Cut vinyl", "Digital print"], "relatedServices": ["vehicle-graphics", "van-graphics"] },
+    { "slug": "vehicle-livery", "title": "Vehicle Livery", "category": "core", "keyFeatures": ["Full livery design", "Partial livery", "Fleet consistency", "Design service", "Application included"], "relatedServices": ["vehicle-graphics", "fleet-graphics"] },
+    { "slug": "magnetic-signs", "title": "Magnetic Signs", "category": "core", "keyFeatures": ["Removable", "Reusable", "Custom sizes", "Full colour print", "Quick fit"], "relatedServices": ["vehicle-graphics", "van-graphics"] },
+    { "slug": "shop-signs", "title": "Shop Signs", "category": "core", "keyFeatures": ["Fascia signs", "Projecting signs", "Illuminated options", "Shop front graphics", "Design included"], "relatedServices": ["signs-signage", "window-graphics"] },
+    { "slug": "site-boards", "title": "Site Boards", "category": "core", "keyFeatures": ["Site boards", "Hoarding graphics", "Project branding", "Weather resistant", "Large format"], "relatedServices": ["signs-signage", "hoarding-graphics"] },
+    { "slug": "a-boards", "title": "A-Boards", "category": "core", "keyFeatures": ["Pavement signs", "Forecourt boards", "Snap frames", "Printed inserts", "Durable frames"], "relatedServices": ["signs-signage", "shop-signs"] },
+    { "slug": "safety-signs", "title": "Safety Signs", "category": "core", "keyFeatures": ["Health and safety", "Fire exit signs", "Warning signs", "Compliant", "Custom wording"], "relatedServices": ["signs-signage", "site-boards"] },
+    { "slug": "directional-signs", "title": "Directional Signs", "category": "core", "keyFeatures": ["Wayfinding", "Interior signs", "Exterior signs", "Branded design", "Custom sizes"], "relatedServices": ["signs-signage", "shop-signs"] },
+    { "slug": "hoarding-graphics", "title": "Hoarding Graphics", "category": "specialist", "keyFeatures": ["Large format", "Full colour", "Weather resistant", "Site branding", "Fast install"], "relatedServices": ["signs-signage", "site-boards"] },
+    { "slug": "window-graphics", "title": "Window Graphics", "category": "core", "keyFeatures": ["Frosted vinyl", "Printed graphics", "Privacy film", "Branding", "Cut vinyl"], "relatedServices": ["signs-signage", "shop-signs"] },
+    { "slug": "window-stickers", "title": "Window Stickers", "category": "core", "keyFeatures": ["Static cling", "Adhesive vinyl", "Full colour", "Custom shapes", "Removable options"], "relatedServices": ["window-graphics", "stickers-labels"] },
+    { "slug": "pvc-banners", "title": "PVC Banners", "category": "core", "keyFeatures": ["Weatherproof", "Eyelets included", "Full colour", "Custom sizes", "Fast turnaround"], "relatedServices": ["banners", "mesh-banners"] },
+    { "slug": "roller-banners", "title": "Roller Banners", "category": "core", "keyFeatures": ["Pull-up stand", "Portable", "Full colour print", "Design service", "Carry case"], "relatedServices": ["banners", "exhibition-prints"] },
+    { "slug": "mesh-banners", "title": "Mesh Banners", "category": "specialist", "keyFeatures": ["Wind resistant", "Scaffolding banners", "Perforated mesh", "Lightweight", "Large format"], "relatedServices": ["banners", "site-boards"] },
+    { "slug": "fabric-banners", "title": "Fabric Banners", "category": "specialist", "keyFeatures": ["Premium finish", "Lightweight", "Indoor use", "Exhibition quality", "Full colour"], "relatedServices": ["banners", "roller-banners"] },
+    { "slug": "poster-printing", "title": "Poster Printing", "category": "core", "keyFeatures": ["A0 to A4", "Gloss or matt", "Same-day options", "Full colour", "Design service"], "relatedServices": ["large-format-print", "canvas-prints"] },
+    { "slug": "canvas-prints", "title": "Canvas Prints", "category": "specialist", "keyFeatures": ["Stretched canvas", "Custom sizes", "Gallery wrap", "Full colour", "Wall ready"], "relatedServices": ["large-format-print", "poster-printing"] },
+    { "slug": "foam-board-correx", "title": "Foam Board & Correx", "category": "core", "keyFeatures": ["Foam board", "Correx boards", "Lightweight", "Full colour", "Custom sizes"], "relatedServices": ["large-format-print", "site-boards"] },
+    { "slug": "exhibition-prints", "title": "Exhibition Prints", "category": "specialist", "keyFeatures": ["Exhibition quality", "Pop-up systems", "Banner stands", "Full colour", "Portable"], "relatedServices": ["large-format-print", "roller-banners"] },
+    { "slug": "large-format", "title": "Large Format Printing", "category": "core", "keyFeatures": ["Any size", "Indoor and outdoor", "Fast turnaround", "Full colour", "Multiple substrates"], "relatedServices": ["large-format-print", "poster-printing"] },
+    { "slug": "flyers-leaflets", "title": "Flyers & Leaflets", "category": "core", "keyFeatures": ["A5 and A6", "Gloss or silk", "Double sided", "Design service", "Fast print"], "relatedServices": ["marketing-print", "brochures"] },
+    { "slug": "brochures", "title": "Brochures", "category": "core", "keyFeatures": ["Saddle stitched", "Perfect bound", "Custom sizes", "Design service", "Full colour"], "relatedServices": ["marketing-print", "flyers-leaflets"] },
+    { "slug": "business-cards", "title": "Business Cards", "category": "core", "keyFeatures": ["400gsm card", "Gloss or matt", "Standard and custom sizes", "Design service", "Fast turnaround"], "relatedServices": ["marketing-print", "letterheads"] },
+    { "slug": "letterheads", "title": "Letterheads", "category": "core", "keyFeatures": ["A4 letterheads", "Compliment slips", "Branded design", "Full colour", "Premium paper"], "relatedServices": ["marketing-print", "business-cards"] },
+    { "slug": "folders", "title": "Presentation Folders", "category": "specialist", "keyFeatures": ["A4 folders", "Pocket inserts", "Custom print", "Gloss laminate", "Design service"], "relatedServices": ["marketing-print", "brochures"] },
+    { "slug": "menus", "title": "Menu Printing", "category": "specialist", "keyFeatures": ["Laminated menus", "Board menus", "Custom sizes", "Design service", "Fast reprint"], "relatedServices": ["marketing-print", "large-format-print"] },
+    { "slug": "custom-stickers", "title": "Custom Stickers", "category": "core", "keyFeatures": ["Die cut shapes", "Sheet stickers", "Roll stickers", "Waterproof options", "Full colour"], "relatedServices": ["stickers-labels", "labels"] },
+    { "slug": "labels", "title": "Labels", "category": "core", "keyFeatures": ["Product labels", "Asset labels", "Roll labels", "Waterproof", "Custom sizes"], "relatedServices": ["stickers-labels", "custom-stickers"] },
+    { "slug": "wall-graphics", "title": "Wall Graphics", "category": "specialist", "keyFeatures": ["Full wall coverage", "Cut vinyl", "Printed graphics", "Office branding", "Removable options"], "relatedServices": ["stickers-labels", "window-graphics"] },
+    { "slug": "floor-graphics", "title": "Floor Graphics", "category": "specialist", "keyFeatures": ["Non-slip laminate", "Anti-slip", "Full colour", "Custom shapes", "Indoor and outdoor"], "relatedServices": ["stickers-labels", "wall-graphics"] },
+    { "slug": "printed-workwear", "title": "Printed Workwear", "category": "core", "keyFeatures": ["Screen print", "Heat transfer", "Hi-vis", "T-shirts", "Hoodies"], "relatedServices": ["workwear-merchandise", "embroidered-uniforms"] },
+    { "slug": "embroidered-uniforms", "title": "Embroidered Uniforms", "category": "core", "keyFeatures": ["Embroidery", "Polo shirts", "Fleece jackets", "Caps", "Workwear"], "relatedServices": ["workwear-merchandise", "printed-workwear"] },
+    { "slug": "hi-vis", "title": "Hi-Vis Clothing", "category": "core", "keyFeatures": ["Hi-vis vests", "EN ISO 20471", "Printed or embroidered", "Custom branding", "Bulk orders"], "relatedServices": ["workwear-merchandise", "printed-workwear"] },
+    { "slug": "merchandise", "title": "Branded Merchandise", "category": "specialist", "keyFeatures": ["Promotional items", "Branded gifts", "Mugs", "Pens", "Tote bags"], "relatedServices": ["workwear-merchandise", "printed-workwear"] },
+    { "slug": "personalised-gifts", "title": "Personalised Gifts", "category": "specialist", "keyFeatures": ["Photo gifts", "Custom print", "Corporate gifts", "Awards", "Keepsakes"], "relatedServices": ["workwear-merchandise", "merchandise"] },
+    { "slug": "logo-design", "title": "Logo Design", "category": "core", "keyFeatures": ["Logo concepts", "Vector formats", "Brand guidelines", "Revisions included", "Print ready"], "relatedServices": ["graphic-design", "brand-identity"] },
+    { "slug": "brand-identity", "title": "Brand Identity", "category": "specialist", "keyFeatures": ["Brand strategy", "Logo design", "Colour palette", "Typography", "Brand guidelines"], "relatedServices": ["graphic-design", "logo-design"] },
+    { "slug": "print-design", "title": "Print Design", "category": "core", "keyFeatures": ["Print-ready files", "CMYK colour", "Bleed and crop marks", "Multiple formats", "Revisions included"], "relatedServices": ["graphic-design", "marketing-print"] },
+    { "slug": "artwork-prepress", "title": "Artwork & Pre-Press", "category": "specialist", "keyFeatures": ["File checking", "Colour correction", "Print optimisation", "Format conversion", "Proofing"], "relatedServices": ["graphic-design", "print-design"] }
+  ],
+  "regions": [
+    {
+      "name": "East Sussex",
+      "slug": "east-sussex",
+      "locations": [
+        "Eastbourne", "Hastings", "Lewes", "Bexhill-on-Sea", "Uckfield",
+        "Crowborough", "Seaford", "Hailsham", "Newhaven", "Polegate",
+        "Peacehaven", "Battle", "St Leonards-on-Sea", "Heathfield",
+        "Pevensey", "Ringmer", "Herstmonceux", "Wadhurst", "Alfriston"
+      ]
+    }
+  ],
+  "pricing": {
+    "domestic": { "min": 50, "max": 500, "duration": "per job" },
+    "commercial": { "min": 200, "max": 5000, "duration": "per project" }
+  },
+  "brandVoice": {
+    "tone": "Specialist, honest, local, professional — no-nonsense East Sussex trade voice",
+    "avoidWords": ["full wraps", "vehicle wraps", "full vehicle wrapping", "vinyl wrapping", "colour change wraps", "Brighton", "Hove", "Portslade"],
+    "preferredTerms": ["specialist", "graphics", "signwriting", "local", "East Sussex", "vehicle graphics", "livery"]
+  }
+}

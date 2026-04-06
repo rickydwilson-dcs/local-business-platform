@@ -1,0 +1,144 @@
+{
+  "runAt": "2026-04-06T19:02:29.995Z",
+  "siteId": "mad-graphics",
+  "provider": "claude",
+  "totalProcessed": 19,
+  "successful": 19,
+  "failed": 0,
+  "skipped": 0,
+  "entries": [
+    {
+      "slug": "eastbourne",
+      "name": "Eastbourne",
+      "status": "success",
+      "generatedAt": "2026-04-06T19:03:24.815Z",
+      "filePath": "/Users/rickywilson/Sites/local-business-platform/sites/mad-graphics/content/locations/eastbourne.mdx"
+    },
+    {
+      "slug": "hastings",
+      "name": "Hastings",
+      "status": "success",
+      "generatedAt": "2026-04-06T19:04:16.820Z",
+      "filePath": "/Users/rickywilson/Sites/local-business-platform/sites/mad-graphics/content/locations/hastings.mdx"
+    },
+    {
+      "slug": "lewes",
+      "name": "Lewes",
+      "status": "success",
+      "generatedAt": "2026-04-06T19:05:12.470Z",
+      "filePath": "/Users/rickywilson/Sites/local-business-platform/sites/mad-graphics/content/locations/lewes.mdx"
+    },
+    {
+      "slug": "bexhill-on-sea",
+      "name": "Bexhill-on-Sea",
+      "status": "success",
+      "generatedAt": "2026-04-06T19:06:05.596Z",
+      "filePath": "/Users/rickywilson/Sites/local-business-platform/sites/mad-graphics/content/locations/bexhill-on-sea.mdx"
+    },
+    {
+      "slug": "uckfield",
+      "name": "Uckfield",
+      "status": "success",
+      "generatedAt": "2026-04-06T19:06:58.355Z",
+      "filePath": "/Users/rickywilson/Sites/local-business-platform/sites/mad-graphics/content/locations/uckfield.mdx"
+    },
+    {
+      "slug": "crowborough",
+      "name": "Crowborough",
+      "status": "success",
+      "generatedAt": "2026-04-06T19:07:51.659Z",
+      "filePath": "/Users/rickywilson/Sites/local-business-platform/sites/mad-graphics/content/locations/crowborough.mdx"
+    },
+    {
+      "slug": "seaford",
+      "name": "Seaford",
+      "status": "success",
+      "generatedAt": "2026-04-06T19:08:46.751Z",
+      "filePath": "/Users/rickywilson/Sites/local-business-platform/sites/mad-graphics/content/locations/seaford.mdx"
+    },
+    {
+      "slug": "hailsham",
+      "name": "Hailsham",
+      "status": "success",
+      "generatedAt": "2026-04-06T19:09:41.324Z",
+      "filePath": "/Users/rickywilson/Sites/local-business-platform/sites/mad-graphics/content/locations/hailsham.mdx"
+    },
+    {
+      "slug": "newhaven",
+      "name": "Newhaven",
+      "status": "success",
+      "generatedAt": "2026-04-06T19:10:35.807Z",
+      "filePath": "/Users/rickywilson/Sites/local-business-platform/sites/mad-graphics/content/locations/newhaven.mdx"
+    },
+    {
+      "slug": "polegate",
+      "name": "Polegate",
+      "status": "success",
+      "generatedAt": "2026-04-06T19:11:27.418Z",
+      "filePath": "/Users/rickywilson/Sites/local-business-platform/sites/mad-graphics/content/locations/polegate.mdx"
+    },
+    {
+      "slug": "peacehaven",
+      "name": "Peacehaven",
+      "status": "success",
+      "generatedAt": "2026-04-06T19:12:21.739Z",
+      "filePath": "/Users/rickywilson/Sites/local-business-platform/sites/mad-graphics/content/locations/peacehaven.mdx"
+    },
+    {
+      "slug": "battle",
+      "name": "Battle",
+      "status": "success",
+      "generatedAt": "2026-04-06T19:13:15.146Z",
+      "filePath": "/Users/rickywilson/Sites/local-business-platform/sites/mad-graphics/content/locations/battle.mdx"
+    },
+    {
+      "slug": "st-leonards-on-sea",
+      "name": "St Leonards-on-Sea",
+      "status": "success",
+      "generatedAt": "2026-04-06T19:14:07.551Z",
+      "filePath": "/Users/rickywilson/Sites/local-business-platform/sites/mad-graphics/content/locations/st-leonards-on-sea.mdx"
+    },
+    {
+      "slug": "heathfield",
+      "name": "Heathfield",
+      "status": "success",
+      "generatedAt": "2026-04-06T19:15:02.677Z",
+      "filePath": "/Users/rickywilson/Sites/local-business-platform/sites/mad-graphics/content/locations/heathfield.mdx"
+    },
+    {
+      "slug": "pevensey",
+      "name": "Pevensey",
+      "status": "success",
+      "generatedAt": "2026-04-06T19:15:55.292Z",
+      "filePath": "/Users/rickywilson/Sites/local-business-platform/sites/mad-graphics/content/locations/pevensey.mdx"
+    },
+    {
+      "slug": "ringmer",
+      "name": "Ringmer",
+      "status": "success",
+      "generatedAt": "2026-04-06T19:16:47.106Z",
+      "filePath": "/Users/rickywilson/Sites/local-business-platform/sites/mad-graphics/content/locations/ringmer.mdx"
+    },
+    {
+      "slug": "herstmonceux",
+      "name": "Herstmonceux",
+      "status": "success",
+      "generatedAt": "2026-04-06T19:17:40.327Z",
+      "filePath": "/Users/rickywilson/Sites/local-business-platform/sites/mad-graphics/content/locations/herstmonceux.mdx"
+    },
+    {
+      "slug": "wadhurst",
+      "name": "Wadhurst",
+      "status": "success",
+      "generatedAt": "2026-04-06T19:18:36.163Z",
+      "filePath": "/Users/rickywilson/Sites/local-business-platform/sites/mad-graphics/content/locations/wadhurst.mdx"
+    },
+    {
+      "slug": "alfriston",
+      "name": "Alfriston",
+      "status": "success",
+      "generatedAt": "2026-04-06T19:19:28.560Z",
+      "filePath": "/Users/rickywilson/Sites/local-business-platform/sites/mad-graphics/content/locations/alfriston.mdx"
+    }
+  ]
+}
