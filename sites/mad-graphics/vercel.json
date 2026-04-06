@@ -3,5 +3,6 @@
   "buildCommand": "cd ../.. && pnpm turbo run build --filter=mad-graphics",
   "installCommand": "cd ../.. && pnpm install --frozen-lockfile",
   "ignoreCommand": "cd ../.. && npx turbo-ignore mad-graphics",
-  "framework": "nextjs"
+  "framework": "nextjs",
+  "outputDirectory": "sites/mad-graphics/.next"
 }
