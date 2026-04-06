@@ -1,203 +1,243 @@
 import type { Metadata } from 'next';
-import { Schema } from '@platform/core-components';
-import { siteConfig } from '@/site.config';
-import { absUrl } from '@/lib/site';
 
 export const metadata: Metadata = {
-  title: `About Us | ${siteConfig.business.name}`,
-  description: `Learn about ${siteConfig.business.name} — vehicle graphics and signage specialists in Polegate, East Sussex since ${siteConfig.credentials.yearEstablished}.`,
-  alternates: { canonical: absUrl('/about') },
-};
-
-const ICON_BY_VALUE: Record<number, string> = {
-  0: 'architecture',
-  1: 'price_check',
-  2: 'schedule',
-  3: 'location_on',
+  title: 'About Us | MAD GRAPHICS',
 };
 
 export default function AboutPage() {
-  const { about, credentials, business, name, tagline } = siteConfig;
-
   return (
     <>
-      <Schema
-        org={{ name: business.name, url: '/', logo: '/logo.svg' }}
-        breadcrumbs={[{ name: 'Home', url: '/' }, { name: 'About', url: '/about' }]}
-        webpage={{
-          '@type': 'AboutPage',
-          '@id': absUrl('/about#aboutpage'),
-          url: absUrl('/about'),
-          name: `About ${business.name}`,
-          description: `Learn about ${business.name} — professional services since ${credentials.yearEstablished}.`,
-        }}
-      />
-
-      {/* Page Hero */}
-      <section className="relative min-h-[640px] flex items-end pt-32 pb-24 overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <img
-            alt={`${name} workshop`}
-            className="w-full h-full object-cover grayscale opacity-40"
-            src="/stitch-images/img-002.jpg"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-surface-background/40 to-surface-background" />
-        </div>
-        <div className="relative z-10 max-w-screen-2xl mx-auto px-8 w-full">
-          {about?.heroBadges && about.heroBadges.length > 0 && (
-            <div className="flex flex-wrap gap-3 mb-6">
-              {about.heroBadges.map((badge, i) => (
-                <span
-                  key={i}
-                  className="inline-block text-brand-primary font-body font-bold uppercase tracking-[0.3em] text-xs border border-brand-primary/30 px-4 py-1.5"
-                >
-                  {badge}
-                </span>
-              ))}
-            </div>
-          )}
-          <h1 className="text-7xl md:text-8xl font-headline font-bold italic tracking-tight leading-none mb-4">
-            Our story
-          </h1>
-        </div>
-      </section>
-
-      {/* Company Story Section */}
-      {about?.story && about.story.length > 0 && (
-        <section className="py-32 bg-surface-background">
-          <div className="max-w-screen-2xl mx-auto px-8 grid grid-cols-1 md:grid-cols-12 gap-16 items-start">
-            <div className="md:col-span-7">
-              <p className="text-brand-primary font-body font-bold uppercase tracking-widest mb-6">
-                Est. {credentials.yearEstablished} — Polegate, East Sussex
-              </p>
-              <h2 className="text-5xl font-headline font-bold mb-8">
-                Over 20 years of vehicle graphics and print in East Sussex.
-              </h2>
-              <div className="space-y-6 text-surface-muted-foreground text-lg leading-relaxed max-w-2xl">
-                {about.story.map((paragraph, i) => (
-                  <p key={i}>{paragraph}</p>
-                ))}
-              </div>
-            </div>
-            <div className="md:col-span-5 pt-12 md:pt-24">
-              <div className="relative p-12 bg-surface-muted border-l-4 border-brand-primary">
-                <span className="material-symbols-outlined text-5xl text-brand-primary opacity-30 absolute top-4 right-8">
-                  format_quote
-                </span>
-                <blockquote className="text-2xl font-headline italic leading-snug text-surface-foreground">
-                  &ldquo;We do not offer full vehicle wraps. We focus on what we do best — cut vinyl graphics, signwriting, and printed graphics applied with precision. That focus means better results.&rdquo;
-                </blockquote>
-                <div className="mt-8">
-                  <p className="font-bold text-surface-foreground">Martin Adams</p>
-                  <p className="text-sm uppercase tracking-widest text-brand-primary">Founder</p>
-                </div>
-              </div>
-            </div>
+      {/* TopNavBar */}
+      <nav className="fixed top-0 w-full z-50 bg-[#131313]/80 backdrop-blur-xl shadow-[0_40px_40px_rgba(247,148,29,0.1)]">
+        <div className="flex justify-between items-center w-full px-8 py-6 max-w-screen-2xl mx-auto">
+          <div className="text-2xl font-serif italic font-bold text-[#f7941d]">MAD GRAPHICS</div>
+          {/* Desktop Links */}
+          <div className="hidden md:flex gap-12 items-center">
+            <a className="text-[#E5E2E1] hover:text-[#f7941d] transition-colors font-sans font-bold uppercase tracking-wider" href="#">Portfolio</a>
+            <a className="text-[#E5E2E1] hover:text-[#f7941d] transition-colors font-sans font-bold uppercase tracking-wider" href="#">Services</a>
+            <a className="text-[#E5E2E1] hover:text-[#f7941d] transition-colors font-sans font-bold uppercase tracking-wider" href="#">Process</a>
+            <a className="text-[#f7941d] border-b-2 border-[#f7941d] pb-1 font-sans font-bold uppercase tracking-wider" href="#">Contact</a>
           </div>
-        </section>
-      )}
-
-      {/* Trust Bar */}
-      <section className="py-16 bg-surface-muted">
-        <div className="max-w-screen-2xl mx-auto px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {credentials.stats.map((stat, i) => (
-              <div
-                key={i}
-                className="group flex flex-col items-center justify-center p-8 grayscale hover:grayscale-0 transition-all duration-500 border border-surface-border"
-              >
-                <p className="text-3xl font-headline font-bold text-brand-primary mb-2">{stat.value}</p>
-                <p className="text-center font-body font-bold uppercase tracking-tighter text-sm text-surface-foreground">
-                  {stat.label}
-                </p>
-                {stat.description && (
-                  <p className="text-xs text-surface-muted-foreground mt-1 text-center">{stat.description}</p>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Values Cards */}
-      {about?.values && about.values.length > 0 && (
-        <section className="py-32 bg-surface-background">
-          <div className="max-w-screen-2xl mx-auto px-8">
-            <div className="mb-16">
-              <span className="text-brand-primary font-body uppercase tracking-[0.3em] font-bold text-sm block mb-4">
-                How we work
-              </span>
-              <h2 className="text-5xl font-headline font-bold">Our Principles.</h2>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-0">
-              {about.values.map((value, i) => {
-                const icon = ICON_BY_VALUE[i] ?? 'verified';
-                const isMiddle = i > 0 && i < about.values!.length - 1;
-                return (
-                  <div
-                    key={i}
-                    className={`group p-12 border border-surface-border hover:bg-brand-primary transition-colors duration-500${isMiddle ? ' border-l-0 border-r-0' : ''}`}
-                  >
-                    <span className="material-symbols-outlined text-5xl mb-8 text-brand-primary group-hover:text-[var(--color-brand-on-primary)] block">
-                      {icon}
-                    </span>
-                    <h3 className="text-3xl font-headline font-bold mb-4 group-hover:text-[var(--color-brand-on-primary)] text-surface-foreground">
-                      {value.title}
-                    </h3>
-                    <p className="text-surface-muted-foreground group-hover:text-[var(--color-brand-on-primary)]/80 leading-relaxed">
-                      {value.description}
-                    </p>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* Why Choose Us */}
-      {about?.whyChooseUs && about.whyChooseUs.length > 0 && (
-        <section className="py-32 bg-surface-muted">
-          <div className="max-w-screen-2xl mx-auto px-8">
-            <div className="mb-16">
-              <span className="text-brand-secondary font-body uppercase tracking-[0.3em] font-bold text-sm block mb-4">
-                The Mad Graphics difference
-              </span>
-              <h2 className="text-5xl font-headline font-bold text-surface-foreground">
-                Why choose us?
-              </h2>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl">
-              {about.whyChooseUs.map((item, i) => (
-                <div key={i} className="flex items-start gap-4 p-6 bg-surface-background border border-surface-border">
-                  <span className="material-symbols-outlined text-brand-secondary mt-0.5 flex-shrink-0">check_circle</span>
-                  <span className="text-surface-foreground font-body font-medium">{item}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* CTA Band */}
-      <section className="bg-brand-primary py-24">
-        <div className="max-w-screen-2xl mx-auto px-8 flex flex-col md:flex-row items-center justify-between gap-12">
-          <div className="text-center md:text-left max-w-2xl">
-            <h2 className="text-5xl font-headline font-bold mb-4 text-surface-foreground">
-              Work with us
-            </h2>
-            <p className="text-xl font-body text-[var(--color-brand-on-primary)] opacity-90">
-              Ready to get your vehicles and premises looking sharp? Let&apos;s discuss your project.
-            </p>
-          </div>
-          <a
-            href="/contact"
-            className="bg-surface-background text-brand-primary px-12 py-5 font-bold uppercase tracking-widest text-lg hover:opacity-80 transition-all duration-300 shadow-2xl whitespace-nowrap"
-          >
+          <a href="/contact" className="bg-[#f7941d] text-[#2d1600] px-6 py-2.5 font-bold uppercase tracking-widest text-sm hover:opacity-80 transition-all duration-300 active:scale-95 lg:rounded-lg">
             Get a Quote
           </a>
         </div>
-      </section>
+      </nav>
+
+      <main>
+        {/* Page Hero */}
+        <section className="relative min-h-[870px] flex items-end pt-32 pb-24 overflow-hidden">
+          <div className="absolute inset-0 z-0">
+            <img
+              alt="Mad Graphics Print Workshop"
+              className="w-full h-full object-cover grayscale opacity-40"
+              src="/stitch-images/img-002.jpg"
+            />
+            <div
+              className="absolute inset-0"
+              style={{ background: 'linear-gradient(to bottom, rgba(14,14,14,0.4), rgba(19,19,19,1))' }}
+            />
+          </div>
+          <div className="relative z-10 max-w-screen-2xl mx-auto px-8 w-full">
+            <span className="inline-block text-[#f7941d] font-label font-bold uppercase tracking-[0.3em] mb-4">Established 2012</span>
+            <h1 className="text-7xl md:text-8xl font-headline font-bold italic tracking-tight leading-none mb-8">Our story</h1>
+          </div>
+        </section>
+
+        {/* Company Story Section */}
+        <section className="py-32 bg-surface-background">
+          <div className="max-w-screen-2xl mx-auto px-8 grid grid-cols-1 md:grid-cols-12 gap-16 items-start">
+            <div className="md:col-span-7">
+              <p className="text-[#f7941d] font-label font-bold uppercase tracking-widest mb-6">Mastering the Craft</p>
+              <h2 className="text-5xl font-headline font-bold mt-4 mb-8">Twelve years of precision in the heart of East Sussex.</h2>
+              <div className="space-y-6 text-surface-foreground/80 text-lg leading-relaxed max-w-2xl">
+                <p>Founded in Polegate, Mad Graphics emerged from a singular vision: to bridge the gap between technical industrial precision and high-end design aesthetics. We don&apos;t just print; we manufacture identity.</p>
+                <p>Over the last decade, our workshop has become a hub for local and national brands seeking signage that commands attention. From large-format environmental graphics to intricate vehicle wraps, every project is handled with artisanal care and industrial-grade technology.</p>
+              </div>
+            </div>
+            <div className="md:col-span-5 pt-12 md:pt-24">
+              <div className="relative p-12 bg-[#2a2a2a] border-l-4 border-[#f7941d]">
+                <span className="material-symbols-outlined text-5xl text-[#f7941d] opacity-30 absolute top-4 right-8">format_quote</span>
+                <blockquote className="text-2xl font-headline italic leading-snug text-surface-foreground">
+                  &ldquo;In an industry of shortcuts, we choose the long road of craftsmanship. Every sign that leaves our workshop carries our reputation. We build to last, not just to look good for a season.&rdquo;
+                </blockquote>
+                <div className="mt-8">
+                  <p className="font-bold text-surface-foreground">Martin Adams</p>
+                  <p className="text-sm uppercase tracking-widest text-[#f7941d]">Founder &amp; Lead Artisan</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Trust Bar */}
+        <section className="py-16 bg-[#0e0e0e]">
+          <div className="max-w-screen-2xl mx-auto px-8">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+              <div className="group flex flex-col items-center justify-center p-8 grayscale hover:grayscale-0 transition-all duration-500 border border-[#544435]/10">
+                <span className="material-symbols-outlined text-4xl mb-4 text-surface-foreground group-hover:text-[#5BA829]">verified</span>
+                <p className="text-center font-label font-bold uppercase tracking-tighter text-sm">ISO Certified</p>
+              </div>
+              <div className="group flex flex-col items-center justify-center p-8 grayscale hover:grayscale-0 transition-all duration-500 border border-[#544435]/10">
+                <span className="material-symbols-outlined text-4xl mb-4 text-surface-foreground group-hover:text-[#f7941d]">stars</span>
+                <p className="text-center font-label font-bold uppercase tracking-tighter text-sm">5-Star Rated</p>
+              </div>
+              <div className="group flex flex-col items-center justify-center p-8 grayscale hover:grayscale-0 transition-all duration-500 border border-[#544435]/10">
+                <span className="material-symbols-outlined text-4xl mb-4 text-surface-foreground group-hover:text-[#5BA829]">history</span>
+                <p className="text-center font-label font-bold uppercase tracking-tighter text-sm">12+ Years Experience</p>
+              </div>
+              <div className="group flex flex-col items-center justify-center p-8 grayscale hover:grayscale-0 transition-all duration-500 border border-[#544435]/10">
+                <span className="material-symbols-outlined text-4xl mb-4 text-surface-foreground group-hover:text-[#f7941d]">location_on</span>
+                <p className="text-center font-label font-bold uppercase tracking-tighter text-sm">East Sussex Based</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Values Cards */}
+        <section className="py-32 bg-surface-background">
+          <div className="max-w-screen-2xl mx-auto px-8">
+            <div className="mb-16">
+              <h2 className="text-5xl font-headline font-bold mt-4">Our Principles.</h2>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-0">
+              <div className="group p-12 border border-[#544435]/15 hover:bg-[#f7941d] transition-colors duration-500">
+                <span className="material-symbols-outlined text-5xl mb-8 group-hover:text-[#2d1600] text-[#f7941d]">architecture</span>
+                <h3 className="text-3xl font-headline font-bold mb-4 group-hover:text-[#2d1600]">Precision</h3>
+                <p className="text-surface-foreground/70 group-hover:text-[#2d1600]/80 leading-relaxed">Measurements down to the millimeter. Color matching that hits the mark every time. We don&apos;t settle for &lsquo;close enough&rsquo;.</p>
+              </div>
+              <div className="group p-12 border border-[#544435]/15 border-l-0 border-r-0 hover:bg-[#f7941d] transition-colors duration-500">
+                <span className="material-symbols-outlined text-5xl mb-8 group-hover:text-[#2d1600] text-[#f7941d]">brush</span>
+                <h3 className="text-3xl font-headline font-bold mb-4 group-hover:text-[#2d1600]">Creativity</h3>
+                <p className="text-surface-foreground/70 group-hover:text-[#2d1600]/80 leading-relaxed">Turning industrial materials into visual masterpieces. We find the art in the technical and the beauty in the functional.</p>
+              </div>
+              <div className="group p-12 border border-[#544435]/15 hover:bg-[#f7941d] transition-colors duration-500">
+                <span className="material-symbols-outlined text-5xl mb-8 group-hover:text-[#2d1600] text-[#f7941d]">handshake</span>
+                <h3 className="text-3xl font-headline font-bold mb-4 group-hover:text-[#2d1600]">Reliability</h3>
+                <p className="text-surface-foreground/70 group-hover:text-[#2d1600]/80 leading-relaxed">On time, on budget, and built to withstand the elements. When we give our word, consider it set in vinyl and steel.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Team Grid */}
+        <section className="py-32 bg-surface-muted">
+          <div className="max-w-screen-2xl mx-auto px-8">
+            <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
+              <div>
+                <p className="text-[#f7941d] font-label font-bold uppercase tracking-widest mb-4">The Workshop Hands</p>
+                <h2 className="text-5xl font-headline font-bold mt-4">Meet the Makers.</h2>
+              </div>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+              {/* Team Member 1 */}
+              <div className="relative group aspect-[3/4] overflow-hidden bg-[#353534]">
+                <img
+                  alt="Martin Adams"
+                  className="w-full h-full object-cover grayscale group-hover:scale-105 transition-transform duration-700"
+                  src="/stitch-images/img-016.jpg"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#131313] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
+                  <p className="text-[#f7941d] font-bold uppercase tracking-widest text-xs mb-1">Founder &amp; Lead Artisan</p>
+                  <p className="text-2xl font-headline font-bold">Martin Adams</p>
+                </div>
+                <div className="absolute top-8 left-8">
+                  <p className="text-lg font-headline font-bold text-surface-foreground group-hover:opacity-0 transition-opacity">M. Adams</p>
+                </div>
+              </div>
+              {/* Team Member 2 */}
+              <div className="relative group aspect-[3/4] overflow-hidden bg-[#353534]">
+                <img
+                  alt="Sarah Jenkins"
+                  className="w-full h-full object-cover grayscale group-hover:scale-105 transition-transform duration-700"
+                  src="/stitch-images/img-013.jpg"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#131313] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
+                  <p className="text-[#f7941d] font-bold uppercase tracking-widest text-xs mb-1">Creative Director</p>
+                  <p className="text-2xl font-headline font-bold">Sarah Jenkins</p>
+                </div>
+                <div className="absolute top-8 left-8">
+                  <p className="text-lg font-headline font-bold text-surface-foreground group-hover:opacity-0 transition-opacity">S. Jenkins</p>
+                </div>
+              </div>
+              {/* Team Member 3 */}
+              <div className="relative group aspect-[3/4] overflow-hidden bg-[#353534]">
+                <img
+                  alt="David Thorne"
+                  className="w-full h-full object-cover grayscale group-hover:scale-105 transition-transform duration-700"
+                  src="/stitch-images/img-020.jpg"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#131313] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
+                  <p className="text-[#f7941d] font-bold uppercase tracking-widest text-xs mb-1">Production Manager</p>
+                  <p className="text-2xl font-headline font-bold">David Thorne</p>
+                </div>
+                <div className="absolute top-8 left-8">
+                  <p className="text-lg font-headline font-bold text-surface-foreground group-hover:opacity-0 transition-opacity">D. Thorne</p>
+                </div>
+              </div>
+              {/* Team Member 4 */}
+              <div className="relative group aspect-[3/4] overflow-hidden bg-[#353534]">
+                <img
+                  alt="Elena Rossi"
+                  className="w-full h-full object-cover grayscale group-hover:scale-105 transition-transform duration-700"
+                  src="/stitch-images/img-026.jpg"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#131313] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
+                  <p className="text-[#f7941d] font-bold uppercase tracking-widest text-xs mb-1">Client Relations</p>
+                  <p className="text-2xl font-headline font-bold">Elena Rossi</p>
+                </div>
+                <div className="absolute top-8 left-8">
+                  <p className="text-lg font-headline font-bold text-surface-foreground group-hover:opacity-0 transition-opacity">E. Rossi</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* CTA Band */}
+        <section className="bg-[#f7941d] py-24">
+          <div className="max-w-screen-2xl mx-auto px-8 flex flex-col md:flex-row items-center justify-between gap-12 text-[#2d1600]">
+            <div className="text-center md:text-left max-w-2xl">
+              <h2 className="text-5xl font-headline font-bold mt-0 mb-4">Work with us</h2>
+              <p className="text-xl font-body opacity-90">Ready to elevate your brand&apos;s physical presence? Let&apos;s discuss your next project.</p>
+            </div>
+            <a href="/contact" className="bg-[#2d1600] text-[#f7941d] px-12 py-5 font-bold uppercase tracking-widest text-lg hover:bg-[#2d1600]/90 transition-all duration-300 lg:rounded-lg shadow-2xl">
+              Get a Quote
+            </a>
+          </div>
+        </section>
+      </main>
+
+      {/* Footer */}
+      <footer className="bg-[#0e0e0e] w-full border-t border-[#f7941d]/15">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 px-8 py-20 max-w-screen-2xl mx-auto">
+          <div>
+            <div className="text-[#f7941d] font-serif font-black text-2xl mb-6">MAD GRAPHICS</div>
+            <p className="font-sans text-sm uppercase tracking-tighter text-[#E5E2E1]/60 leading-relaxed">
+              &copy; 2024 MAD GRAPHICS. INDUSTRIAL PRECISION.
+              <br />POLEGATE, EAST SUSSEX.
+            </p>
+          </div>
+          <div className="flex flex-col gap-4">
+            <p className="font-serif text-xl text-[#f7941d] mb-2">Explore</p>
+            <a className="text-[#E5E2E1]/60 hover:text-[#f7941d] hover:underline underline-offset-4 transition-all font-sans text-sm uppercase tracking-tighter" href="#">Portfolio</a>
+            <a className="text-[#E5E2E1]/60 hover:text-[#f7941d] hover:underline underline-offset-4 transition-all font-sans text-sm uppercase tracking-tighter" href="#">Services</a>
+            <a className="text-[#E5E2E1]/60 hover:text-[#f7941d] hover:underline underline-offset-4 transition-all font-sans text-sm uppercase tracking-tighter" href="#">The Process</a>
+          </div>
+          <div className="flex flex-col gap-4">
+            <p className="font-serif text-xl text-[#f7941d] mb-2">Headquarters</p>
+            <p className="text-[#E5E2E1]/60 font-sans text-sm uppercase tracking-tighter">
+              Unit 4, Highpoint Business Park<br />
+              Polegate, East Sussex BN26 6NX
+            </p>
+            <div className="mt-4 flex gap-6">
+              <a className="text-[#E5E2E1]/60 hover:text-[#f7941d] transition-colors focus:ring-1 focus:ring-[#f7941d] p-1" href="#"><span className="material-symbols-outlined">share</span></a>
+              <a className="text-[#E5E2E1]/60 hover:text-[#f7941d] transition-colors focus:ring-1 focus:ring-[#f7941d] p-1" href="#"><span className="material-symbols-outlined">alternate_email</span></a>
+              <a className="text-[#E5E2E1]/60 hover:text-[#f7941d] transition-colors focus:ring-1 focus:ring-[#f7941d] p-1" href="#"><span className="material-symbols-outlined">call</span></a>
+            </div>
+          </div>
+        </div>
+      </footer>
     </>
   );
 }

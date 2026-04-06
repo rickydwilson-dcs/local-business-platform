@@ -5,7 +5,7 @@ import { PHONE_DISPLAY, PHONE_TEL } from '@/lib/contact-info';
 import { getContentItems } from '@/lib/content';
 import { SiteHeader, PageShell, ThemeProvider } from '@platform/core-components';
 import { Footer } from '@platform/core-components/components/ui/footer';
-import { cygnusRegistry } from '@platform/themes/cygnus';
+import { vegaRegistry } from '@platform/themes/vega';
 import { ConsentManager } from "@platform/core-components/components/analytics/ConsentManager";
 import { Analytics } from "@platform/core-components/components/analytics/Analytics";
 import { AnalyticsDebugPanel } from "@platform/core-components/components/analytics/AnalyticsDebugPanel";
@@ -48,23 +48,13 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   // Fetch locations for navigation
   const allLocations = await getContentItems('locations');
   const locationItems = allLocations.map((loc) => ({
-    name: (loc as { locationName?: string }).locationName ?? loc.title,
+    name: loc.title,
     slug: loc.slug,
   }));
 
   return (
     <html lang="en-GB">
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Work+Sans:wght@300;400;500;600;700&display=swap"
-          rel="stylesheet"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
-          rel="stylesheet"
-        />
         {/* Geo meta tags for local SEO */}
         {siteConfig.business.geo && (
           <>
@@ -81,11 +71,11 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         )}
       </head>
       <body className="min-h-screen flex flex-col">
-        <ThemeProvider theme="cygnus" registry={cygnusRegistry}>
+        <ThemeProvider theme="vega" registry={vegaRegistry}>
           <PageShell
             header={
               <SiteHeader
-                appearance="dark"
+                appearance="light"
                 siteName={siteConfig.name}
                 phoneDisplay={PHONE_DISPLAY}
                 phoneTel={PHONE_TEL}

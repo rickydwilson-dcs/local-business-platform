@@ -19,11 +19,6 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      fontFamily: {
-        headline: ['Newsreader', 'serif'],
-        label: ['Work Sans', 'sans-serif'],
-        body: ['Work Sans', 'sans-serif'],
-      },
       colors: {
         // Brand colors mapped to theme system CSS variables
         brand: {

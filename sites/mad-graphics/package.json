@@ -1,8 +1,8 @@
 {
   "name": "mad-graphics",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "private": true,
-  "description": "Mad Graphics — vehicle graphics, signs, banners & print. East Sussex.",
+  "description": "Base template site for white-label platform - copy and customize for new sites",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -23,12 +23,10 @@
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@mdx-js/react": "^3.1.1",
-    "@platform/core-components": "workspace:*",
     "@platform/theme-system": "workspace:*",
     "@platform/themes": "workspace:*",
     "@react-email/render": "^2.0.0",
     "@types/leaflet": "^1.9.20",
-    "framer-motion": "^12.38.0",
     "gray-matter": "^4.0.3",
     "leaflet": "^1.9.4",
     "lucide-react": "^0.544.0",
