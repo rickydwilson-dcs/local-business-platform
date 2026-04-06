@@ -927,9 +927,6 @@ importers:
       '@types/leaflet':
         specifier: ^1.9.20
         version: 1.9.21
-      framer-motion:
-        specifier: ^12.38.0
-        version: 12.38.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       gray-matter:
         specifier: ^4.0.3
         version: 4.0.3
