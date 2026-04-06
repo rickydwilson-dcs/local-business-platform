@@ -170,7 +170,7 @@ Blog post content in markdown...
 title: "Victorian Terrace Restoration - Brighton"
 description: "Complete scaffolding solution for a Grade II listed property..."
 projectType: "residential" # residential | commercial | industrial | heritage
-category: "heritage" # heritage | new-build | renovation | maintenance | emergency
+category: "heritage" # heritage | new-build | renovation | maintenance | emergency | vehicle-graphics | signs-signage | banners | large-format-print | marketing-print | stickers-labels | workwear-merchandise | graphic-design
 status: "featured" # completed | in-progress | featured
 location: "brighton"
 locationName: "Brighton"
