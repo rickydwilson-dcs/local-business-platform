@@ -16,7 +16,6 @@ import {
   BlogPostHero,
   FAQSection,
   CTASection,
-  ArticleCallout,
 } from '@platform/core-components';
 import { getProjects, getProject, type Project } from '@/lib/content';
 import { getImageUrl } from '@/lib/image';
@@ -98,17 +97,24 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
 
 function ProjectSummary({ project }: { project: Project }) {
   return (
-    <ArticleCallout variant="info" title="Project Summary">
+    <div className="bg-surface-muted border border-surface-border rounded-lg p-6 mb-8">
+      <p className="text-surface-muted-foreground text-xs uppercase tracking-widest mb-4">Project Summary</p>
       <dl className="space-y-2">
         <div className="flex justify-between">
-          <dt className="text-surface-muted-foreground">Location:</dt>
+          <dt className="flex items-center gap-1 text-surface-muted-foreground">
+            <span className="material-symbols-outlined text-base" style={{ fontVariationSettings: "'FILL' 1" }}>location_on</span>
+            Location:
+          </dt>
           <dd className="font-medium text-surface-foreground">
             {project.locationName}
             {project.region && `, ${project.region}`}
           </dd>
         </div>
         <div className="flex justify-between">
-          <dt className="text-surface-muted-foreground">Completion date:</dt>
+          <dt className="flex items-center gap-1 text-surface-muted-foreground">
+            <span className="material-symbols-outlined text-base" style={{ fontVariationSettings: "'FILL' 1" }}>calendar_month</span>
+            Completion:
+          </dt>
           <dd className="font-medium text-surface-foreground">
             {new Date(project.completionDate).toLocaleDateString('en-GB', {
               month: 'long',
@@ -118,13 +124,19 @@ function ProjectSummary({ project }: { project: Project }) {
         </div>
         {project.duration && (
           <div className="flex justify-between">
-            <dt className="text-surface-muted-foreground">Duration:</dt>
+            <dt className="flex items-center gap-1 text-surface-muted-foreground">
+              <span className="material-symbols-outlined text-base" style={{ fontVariationSettings: "'FILL' 1" }}>timer</span>
+              Duration:
+            </dt>
             <dd className="font-medium text-surface-foreground">{project.duration}</dd>
           </div>
         )}
         {project.scope?.buildingType && (
           <div className="flex justify-between">
-            <dt className="text-surface-muted-foreground">Building type:</dt>
+            <dt className="flex items-center gap-1 text-surface-muted-foreground">
+              <span className="material-symbols-outlined text-base" style={{ fontVariationSettings: "'FILL' 1" }}>construction</span>
+              Type:
+            </dt>
             <dd className="font-medium text-surface-foreground">{project.scope.buildingType}</dd>
           </div>
         )}
@@ -140,8 +152,7 @@ function ProjectSummary({ project }: { project: Project }) {
             <dd className="font-medium text-surface-foreground">{project.scope.squareMetres}m²</dd>
           </div>
         )}
-        {/* eslint-disable-next-line platform/no-hardcoded-tailwind-colors -- Intentional: decorative divider accent */}
-        <div className="pt-2 border-t border-blue-200">
+        <div className="pt-2 border-t border-surface-border">
           <dt className="text-surface-muted-foreground mb-2">Services:</dt>
           <dd className="flex flex-wrap gap-2">
             {project.services.map((serviceSlug) => (
@@ -159,8 +170,7 @@ function ProjectSummary({ project }: { project: Project }) {
           </dd>
         </div>
         {project.scope?.challenges && project.scope.challenges.length > 0 && (
-          // eslint-disable-next-line platform/no-hardcoded-tailwind-colors -- Intentional: decorative divider accent
-          <div className="pt-2 border-t border-blue-200">
+          <div className="pt-2 border-t border-surface-border">
             <dt className="text-surface-muted-foreground mb-2">Key constraints:</dt>
             <dd className="space-y-1">
               {project.scope.challenges.map((challenge, idx) => (
@@ -173,12 +183,24 @@ function ProjectSummary({ project }: { project: Project }) {
           </div>
         )}
       </dl>
-    </ArticleCallout>
+    </div>
   );
 }
 
 function OutcomesCallout({ results }: { results: string[] }) {
-  return <ArticleCallout variant="success" title="Outcomes" items={results} />;
+  return (
+    <div className="border-l-4 border-brand-primary bg-surface-muted rounded-r-lg p-6 mb-8">
+      <p className="text-surface-muted-foreground text-xs uppercase tracking-widest mb-4">Outcomes</p>
+      <ul className="space-y-2">
+        {results.map((result, idx) => (
+          <li key={idx} className="flex items-start gap-2 text-surface-foreground">
+            <span className="material-symbols-outlined text-base text-brand-primary mt-0.5" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
+            <span>{result}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 }
 
 function ClientTestimonialCallout({
@@ -190,7 +212,25 @@ function ClientTestimonialCallout({
   clientType: string;
   rating?: number;
 }) {
-  return <ArticleCallout variant="quote" quote={testimonial} author={clientType} rating={rating} />;
+  return (
+    <div className="bg-surface-muted border border-surface-border rounded-lg p-6 mb-8">
+      {rating && (
+        <div className="flex gap-1 mb-4">
+          {[...Array(5)].map((_, i) => (
+            <span
+              key={i}
+              className={`material-symbols-outlined text-base ${i < rating ? 'text-brand-primary' : 'text-surface-border'}`}
+              style={{ fontVariationSettings: "'FILL' 1" }}
+            >
+              star
+            </span>
+          ))}
+        </div>
+      )}
+      <p className="text-surface-foreground italic mb-4">&ldquo;{testimonial}&rdquo;</p>
+      <p className="text-surface-muted-foreground text-xs uppercase tracking-widest">{clientType}</p>
+    </div>
+  );
 }
 
 function RelatedProjects({ projects, currentSlug }: { projects: Project[]; currentSlug: string }) {
@@ -209,7 +249,7 @@ function RelatedProjects({ projects, currentSlug }: { projects: Project[]; curre
           {related.map((project) => (
             <article
               key={project.slug}
-              className="bg-surface-background rounded-xl overflow-hidden hover:shadow-lg transition-shadow group border border-surface-border"
+              className="bg-surface-background rounded-lg overflow-hidden group border border-surface-border hover:border-brand-primary/50 transition-colors"
             >
               <Link
                 href={`/projects/${project.slug}`}
