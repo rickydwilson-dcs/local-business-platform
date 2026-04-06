@@ -30,11 +30,21 @@ export const dynamicParams = false;
 type Params = { slug: string };
 
 const categoryLabels: Record<string, string> = {
+  // Scaffolding categories
   heritage: 'Heritage Project',
   'new-build': 'New Build Project',
   renovation: 'Renovation Project',
   maintenance: 'Maintenance Project',
   emergency: 'Emergency Project',
+  // Graphics categories
+  'vehicle-graphics': 'Vehicle Graphics',
+  'signs-signage': 'Signs & Signage',
+  banners: 'Banners',
+  'large-format-print': 'Large Format Print',
+  'marketing-print': 'Marketing Print',
+  'stickers-labels': 'Stickers & Labels',
+  'workwear-merchandise': 'Workwear',
+  'graphic-design': 'Graphic Design',
 };
 
 export async function generateStaticParams() {

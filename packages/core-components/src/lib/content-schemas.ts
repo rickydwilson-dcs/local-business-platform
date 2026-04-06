@@ -352,11 +352,21 @@ const ProjectScopeSchema = z.object({
 export const ProjectType = z.enum(["residential", "commercial", "industrial", "heritage"]);
 
 export const ProjectCategory = z.enum([
+  // Scaffolding / construction categories (existing sites)
   "heritage",
   "new-build",
   "renovation",
   "maintenance",
   "emergency",
+  // Graphics / print / signage categories (Mad Graphics)
+  "vehicle-graphics",
+  "signs-signage",
+  "banners",
+  "large-format-print",
+  "marketing-print",
+  "stickers-labels",
+  "workwear-merchandise",
+  "graphic-design",
 ]);
 
 export const ProjectFrontmatterSchema = z.object({

@@ -37,11 +37,21 @@ const projectTypeLabels: Record<string, string> = {
 };
 
 const categoryLabels: Record<string, string> = {
+  // Scaffolding categories
   heritage: 'Heritage',
   'new-build': 'New Build',
   renovation: 'Renovation',
   maintenance: 'Maintenance',
   emergency: 'Emergency',
+  // Graphics categories
+  'vehicle-graphics': 'Vehicle Graphics',
+  'signs-signage': 'Signs & Signage',
+  banners: 'Banners',
+  'large-format-print': 'Large Format Print',
+  'marketing-print': 'Marketing Print',
+  'stickers-labels': 'Stickers & Labels',
+  'workwear-merchandise': 'Workwear',
+  'graphic-design': 'Graphic Design',
 };
 
 function ProjectCard({ project }: { project: Project }) {
