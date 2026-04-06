@@ -861,7 +861,16 @@ style-src 'self' 'unsafe-inline' fonts.googleapis.com; font-src 'self' fonts.gst
 **Verification gate:**
 ```bash
 ls sites/$THEME_NAME-test/app/{page.tsx,about/page.tsx,contact/page.tsx,services/page.tsx} | wc -l
-# Must be 4
+# Must be 4 (core Stitch pages)
+ls sites/$THEME_NAME-test/app/blog/page.tsx \
+   "sites/$THEME_NAME-test/app/blog/[slug]/page.tsx" \
+   sites/$THEME_NAME-test/app/locations/page.tsx \
+   "sites/$THEME_NAME-test/app/locations/[slug]/page.tsx" \
+   sites/$THEME_NAME-test/app/projects/page.tsx \
+   "sites/$THEME_NAME-test/app/projects/[slug]/page.tsx" \
+   sites/$THEME_NAME-test/app/privacy-policy/page.tsx \
+   sites/$THEME_NAME-test/app/cookie-policy/page.tsx | wc -l
+# Must be 8
 grep -l "@platform/core-components\|siteConfig\|getContentItems" \
   sites/$THEME_NAME-test/app/page.tsx \
   sites/$THEME_NAME-test/app/about/page.tsx \
