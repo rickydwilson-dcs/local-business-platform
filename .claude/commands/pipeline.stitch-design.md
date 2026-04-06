@@ -705,6 +705,14 @@ ls sites/$THEME_NAME-test/public/stitch-images/ | wc -l
 - `sites/$THEME_NAME-test/app/contact/page.tsx` — contact
 - `sites/$THEME_NAME-test/app/services/page.tsx` — services listing
 - `sites/$THEME_NAME-test/app/services/[first-service-slug]/page.tsx` — service detail (static route, not dynamic)
+- `sites/$THEME_NAME-test/app/blog/page.tsx`                         — blog listing (from Stitch blog.html)
+- `sites/$THEME_NAME-test/app/blog/[slug]/page.tsx`                  — blog detail (from Stitch blog-detail.html; use first article title as static slug)
+- `sites/$THEME_NAME-test/app/locations/page.tsx`                    — locations listing (adapted from services listing HTML)
+- `sites/$THEME_NAME-test/app/locations/[slug]/page.tsx`             — location detail (adapted from service-detail HTML)
+- `sites/$THEME_NAME-test/app/projects/page.tsx`                     — projects listing (adapted from services listing HTML)
+- `sites/$THEME_NAME-test/app/projects/[slug]/page.tsx`              — project detail (adapted from service-detail HTML)
+- `sites/$THEME_NAME-test/app/privacy-policy/page.tsx`               — static prose template (no Stitch source)
+- `sites/$THEME_NAME-test/app/cookie-policy/page.tsx`                — static prose template (no Stitch source)
 
 **Rules:**
 - Read each Stitch HTML file in full before writing its TSX counterpart — the HTML is source of truth for sections, content, and layout
@@ -729,6 +737,25 @@ ls sites/$THEME_NAME-test/public/stitch-images/ | wc -l
 | `on-surface` | `surface-foreground` |
 | `outline-variant` | `surface-border` |
 | Unmapped colors | Tailwind arbitrary `bg-[#hexvalue]` |
+
+**Adaptation rules for non-Stitch pages:**
+
+*Locations listing* — adapt from `services.html`. Swap service icon cards for location cards: use Material Symbols `location_on` icon instead of service icons. Card content: town/area name as heading, county or tagline as subheading, "View services →" link. No image required. Keep the same card-grid section structure and CTA band.
+
+*Location detail* — adapt from `service-detail.html`. Replace the benefits card with a "Services in [area]" card (list of 4–5 service names with links). Replace the FAQ accordion with a "Local info" section (travel time placeholder, service radius, nearby landmark note). Keep the gallery placeholder and CTA panel.
+
+*Projects listing* — adapt from `services.html`. Cards are image-dominant (full-bleed top image, matching the services card style). Fields: project title as heading, trade/type badge, one-sentence scope, "View project →" link. 3-column grid.
+
+*Project detail* — adapt from `service-detail.html`. Lead with a 2-image overview gallery (use stitch images). Replace the benefits card with a "Project scope" list (4 bullet points of what was done). Replace the FAQ accordion with a client testimonial (pull-quote, star rating row, client name). Keep the CTA panel.
+
+*Blog listing and blog detail* — generated directly from `blog.html` and `blog-detail.html` respectively (same approach as services and service-detail). No adaptation needed — follow the standard Stitch HTML → TSX conversion rules.
+
+*Policy pages (privacy-policy, cookie-policy)* — no Stitch source. Generate a clean two-column prose layout using theme tokens only:
+- Left column (sticky on desktop): nav sidebar with anchor links to H2 sections — "Data we collect", "How we use it", "Cookies", "Your rights", "Contact us"
+- Right column: prose content — placeholder paragraphs under each H2 heading
+- On mobile: sidebar collapses to a `<details>` / `<summary>` "Jump to section" toggle
+- Typography only — use `text-surface-foreground`, `text-h2`, `text-h3` tokens; no hardcoded hex
+- No images, no CTA band — minimal typographic layout
 
 **layout.tsx pattern** — Newsreader and Work Sans via `next/font/google` (Turbopack-native). Material Symbols via `<link>` in `<head>` (server-rendered, not processed by Turbopack CSS bundler — `Material_Symbols_Outlined` is not available in next/font/google):
 ```tsx
