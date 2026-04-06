@@ -329,12 +329,14 @@ Then append the page-specific sections:
 | Contact | `contact` | Page header with hero image, contact form (name/email/phone/message), contact info sidebar ([If $PHONE: $PHONE /] address / hours), map image placeholder, landscape image break |
 | Services | `services` | Breadcrumb, page header, 6-card service grid (icon + image + description + "Learn more" link)[If $SERVICES_LIST: using these services: $SERVICES_LIST], CTA band with decorative icon |
 | Service Detail | `service-detail` | Breadcrumb, hero for [first service from $SERVICES_LIST or "primary service"], description + benefits card (4 benefits with icons), 3-image staggered gallery with hover captions, FAQ accordion (3 questions), CTA panel |
+| Blog | `blog` | Breadcrumb, page header, article card grid (6 cards: featured image, category tag, title, excerpt, read-time, author avatar + name, "Read more" link), pagination controls, sidebar with categories + recent posts |
+| Blog Detail | `blog-detail` | Breadcrumb, full-bleed hero with title + author + date + read-time, article body (rich prose: dropcap first paragraph, pull-quote block, body text, subheadings), author bio card, related articles (3 cards), CTA band |
 
 After submitting all 5 screens, call `list_screens` for `$PROJECT_ID` and confirm exactly 5 exist. If any failed, STOP and report which screen(s) failed.
 
 ```bash
 # Verification gate — STOP if this fails
-# Confirm list_screens returns exactly 5 screens for $PROJECT_ID
+# Confirm list_screens returns exactly 7 screens for $PROJECT_ID
 ```
 
 **2d — Apply design system to all screens**
