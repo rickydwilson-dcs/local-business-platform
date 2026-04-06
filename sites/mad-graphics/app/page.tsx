@@ -35,6 +35,17 @@ const SERVICE_IMAGES: Record<string, string> = {
   'graphic-design':      '/stitch-images/img-019.jpg',
 };
 
+const SERVICE_ICONS: Record<string, string> = {
+  'vehicle-graphics':    'local_shipping',
+  'signs-signage':       'storefront',
+  'banners':             'flag',
+  'large-format-print':  'print',
+  'marketing-print':     'description',
+  'stickers-labels':     'label',
+  'workwear-merchandise':'checkroom',
+  'graphic-design':      'palette',
+};
+
 // Category labels for each service
 const SERVICE_CATEGORIES: Record<string, string> = {
   'vehicle-graphics':     'Automotive',
@@ -150,6 +161,7 @@ export default async function HomePage() {
           {siteConfig.services.map((service) => {
             const image = SERVICE_IMAGES[service.slug] ?? '/stitch-images/img-006.jpg';
             const category = SERVICE_CATEGORIES[service.slug] ?? 'Service';
+            const icon = SERVICE_ICONS[service.slug] ?? 'build';
             return (
               <div key={service.slug} className="group bg-surface-muted rounded-lg overflow-hidden flex flex-col">
                 <div className="h-64 overflow-hidden relative">
@@ -161,6 +173,12 @@ export default async function HomePage() {
                   <div className="absolute inset-0 bg-surface-muted/20" />
                 </div>
                 <div className="p-8 flex-1 flex flex-col">
+                  <span
+                    className="material-symbols-outlined text-2xl text-brand-primary mb-2 block"
+                    style={{ fontVariationSettings: "'FILL' 1" }}
+                  >
+                    {icon}
+                  </span>
                   <span className="text-brand-primary font-body uppercase tracking-widest text-[10px] font-bold mb-2">
                     {category}
                   </span>
