@@ -594,3 +594,20 @@ After completing all phases, append to `output/sessions/2026-04-06_mad-graphics-
 - If content generators fail due to missing API keys, STOP and report — do not skip
 - `style={{ fontVariationSettings: ... }}` on Material Symbols is acceptable — not a color value
 - The Co-Authored-By line must say `Claude Sonnet 4.6`
+
+## Completed
+
+**Date:** 2026-04-06
+**Status:** All phases executed successfully
+
+The Mad Graphics site was fully rebuilt via the pipeline with `--force`, copying cygnus-test pages as visual reference. The two-schema problem (ProjectFileSchema vs BusinessContext) required creating a separate context file for the content generators. MDX component support (CoverageSection, ServiceIntro, RelatedServices etc.) was discovered in colossus-scaffolding and copied/adapted for mad-graphics. Pipeline quirks worked around: `vercel.json` manually restored after `--force` wipe, `eslint.config.mjs` copied since pipeline's FILES_TO_COPY still references the old `.eslintrc.json`, `site.config.ts` augmented with `slug` field, `lib/business-config.ts` rewritten to derive from available siteConfig fields. One generated location (eastbourne.mdx) contained a "Brighton-based firms" reference violating the geographic constraint — corrected. All lint errors (internal `<a>` → `<Link>`) fixed across page.tsx and services/page.tsx. Final state: 0 errors, 13 `<img>` warnings (acceptable for brutalist design), full production build passes with 46+ static service/location pages.
+
+### Commits
+```
+44c6a9a feat(mad-graphics): add project JSON for pipeline rebuild
+3ebfa5b feat(mad-graphics): rebuild site via pipeline from cygnus-test reference
+10ee441 chore(mad-graphics): restore vercel.json after pipeline rebuild
+bd3fbbf fix(csp): allow Google Fonts and Material Symbols on Vercel
+4ebd3ae feat(mad-graphics): regenerate service and location MDX content
+e3b2d79 chore(mad-graphics): final verification — all pages build clean
+```
