@@ -1016,6 +1016,14 @@ Stitch comparison: http://localhost:3000        (home)
                    http://localhost:3000/contact
                    http://localhost:3000/services
                    http://localhost:3000/services/[first-service-slug]
+                   http://localhost:3000/blog
+                   http://localhost:3000/blog/[first-article-slug]
+                   http://localhost:3000/locations
+                   http://localhost:3000/locations/[first-location-slug]
+                   http://localhost:3000/projects
+                   http://localhost:3000/projects/[first-project-slug]
+                   http://localhost:3000/privacy-policy
+                   http://localhost:3000/cookie-policy
 Cleanup:      /pipeline.kill-site $THEME_NAME-test   (removes test site)
               /pipeline.kill-theme $THEME_NAME        (removes theme package)
 
@@ -1023,7 +1031,7 @@ Next steps:
   1. Open Stitch project to review and iterate designs visually
   2. Inspect meta/token-mapping-report.json — verify colour extraction looks correct
   3. Review tsx-review-findings.json and tsx-fix-log.json to see what the fidelity pass caught
-  4. Start dev server (npm run dev) and visit the 5 Stitch-derived TSX pages above
+  4. Start dev server (npm run dev) and visit the 13 TSX pages (7 from Stitch screens + 6 adapted/templated) above
   5. When satisfied: /deploy.changes
 ```
 
