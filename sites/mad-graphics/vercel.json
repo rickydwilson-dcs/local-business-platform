@@ -4,5 +4,5 @@
   "installCommand": "cd ../.. && pnpm install --frozen-lockfile",
   "ignoreCommand": "cd ../.. && npx turbo-ignore mad-graphics",
   "framework": "nextjs",
-  "outputDirectory": "sites/mad-graphics/.next"
+  "outputDirectory": ".next"
 }
