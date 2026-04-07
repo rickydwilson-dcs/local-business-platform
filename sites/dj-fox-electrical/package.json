@@ -5,7 +5,7 @@
   "description": "Base template site for white-label platform - copy and customize for new sites",
   "scripts": {
     "dev": "next dev",
-    "build": "next build --no-turbopack",
+    "build": "next build --webpack",
     "start": "next start",
     "lint": "eslint .",
     "type-check": "tsc --noEmit",
