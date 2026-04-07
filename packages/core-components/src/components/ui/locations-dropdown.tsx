@@ -42,6 +42,8 @@ export interface LocationsDropdownProps {
   maxTownsPerCounty?: number;
   /** Theme variant - controls button text color */
   variant?: "light" | "dark";
+  /** Override className for the trigger button/link */
+  buttonClassName?: string;
 }
 
 export function LocationsDropdown({
@@ -50,6 +52,7 @@ export function LocationsDropdown({
   label = "Locations",
   maxTownsPerCounty = 6,
   variant = "light",
+  buttonClassName,
 }: LocationsDropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -138,7 +141,7 @@ export function LocationsDropdown({
     return (
       <Link
         href="/locations"
-        className={`${linkTextColor} hover:text-brand-primary transition-colors font-medium`}
+        className={buttonClassName ?? `${linkTextColor} hover:text-brand-primary transition-colors font-medium`}
       >
         {label}
       </Link>
@@ -153,7 +156,7 @@ export function LocationsDropdown({
       <button
         ref={buttonRef}
         onClick={() => setIsOpen(!isOpen)}
-        className={`flex items-center gap-1 ${buttonTextColor} hover:text-brand-primary transition-colors font-medium`}
+        className={buttonClassName ?? `flex items-center gap-1 ${buttonTextColor} hover:text-brand-primary transition-colors font-medium`}
         aria-expanded={isOpen}
         aria-haspopup="true"
         aria-controls="locations-dropdown-menu"

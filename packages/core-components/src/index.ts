@@ -46,6 +46,8 @@ export * from "./components/ui/location-hero";
 export * from "./components/ui/location-services";
 export * from "./components/ui/locations-dropdown";
 export * from "./components/ui/mobile-menu";
+export { NavLink } from "./components/ui/nav-link";
+export type { NavLinkProps } from "./components/ui/nav-link";
 export * from "./components/ui/newsletter-signup";
 export * from "./components/ui/page-hero";
 export * from "./components/ui/photo-strip";
