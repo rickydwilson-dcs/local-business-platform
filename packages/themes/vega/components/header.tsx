@@ -8,6 +8,8 @@ export interface VegaHeaderProps {
   primaryCta: { label: string; href: string };
   navigation: Array<{ label: string; href: string; hasDropdown?: boolean }>;
   locations: Array<{ name: string; slug: string }>;
+  logoWidth?: number;
+  logoHeight?: number;
 }
 
 export function VegaHeader(props: VegaHeaderProps) {

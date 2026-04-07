@@ -1,14 +1,13 @@
 import "./globals.css";
 import type { Metadata, Viewport } from "next";
-import { SiteHeader, PageShell, ThemeProvider } from "@platform/core-components";
-import { Footer } from "@platform/core-components/components/ui/footer";
+import { PageShell, ThemeProvider } from "@platform/core-components";
+import { VegaHeader, VegaFooter } from "@platform/themes/vega/components";
 import { vegaRegistry } from "@platform/themes/vega";
 import { ConsentManager } from "@platform/core-components/components/analytics/ConsentManager";
 import { Analytics } from "@platform/core-components/components/analytics/Analytics";
 import { AnalyticsDebugPanel } from "@platform/core-components/components/analytics/AnalyticsDebugPanel";
-import { PHONE_DISPLAY, PHONE_TEL } from "@/lib/contact-info";
+import { PHONE_DISPLAY, PHONE_TEL, BUSINESS_EMAIL, ADDRESS } from "@/lib/contact-info";
 import { getContentItems } from "@/lib/content";
-import { getAllCounties } from "@/lib/locations";
 import { siteConfig } from "@/site.config";
 
 export const viewport: Viewport = {
@@ -51,13 +50,15 @@ export const metadata: Metadata = {
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  // Fetch locations for navigation
-  const allLocations = await getContentItems("locations");
+  const [allServices, allLocations] = await Promise.all([
+    getContentItems("services"),
+    getContentItems("locations"),
+  ]);
+
   const locationItems = allLocations.map((loc) => ({
     name: loc.title,
     slug: loc.slug,
   }));
-  const counties = await getAllCounties();
 
   return (
     <html lang="en-GB">
@@ -78,22 +79,39 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <ThemeProvider theme="vega" registry={vegaRegistry}>
           <PageShell
             header={
-              <SiteHeader
-                appearance="light"
-                sticky={false}
+              <VegaHeader
                 siteName={siteConfig.business.name}
                 phoneDisplay={PHONE_DISPLAY}
                 phoneTel={PHONE_TEL}
                 showPhone={siteConfig.cta.phone.show}
                 primaryCta={siteConfig.cta.primary}
                 navigation={siteConfig.navigation.main}
-                counties={counties}
                 locations={locationItems}
                 logoWidth={180}
                 logoHeight={48}
               />
             }
-            footer={<Footer />}
+            footer={
+              <VegaFooter
+                siteName={siteConfig.business.name}
+                tagline={siteConfig.tagline}
+                phoneDisplay={PHONE_DISPLAY}
+                phoneTel={PHONE_TEL}
+                email={BUSINESS_EMAIL}
+                address={ADDRESS}
+                certifications={siteConfig.credentials?.certifications ?? []}
+                services={allServices.map(s => ({ slug: s.slug, title: s.title })).slice(0, siteConfig.footer?.maxServices ?? 8)}
+                locations={allLocations.map(l => ({ slug: l.slug, title: l.title })).slice(0, siteConfig.footer?.maxLocations ?? 8)}
+                totalServices={allServices.length}
+                totalLocations={allLocations.length}
+                maxServices={siteConfig.footer?.maxServices ?? 8}
+                maxLocations={siteConfig.footer?.maxLocations ?? 8}
+                showServices={siteConfig.footer?.showServices ?? true}
+                showLocations={siteConfig.footer?.showLocations ?? true}
+                copyright={siteConfig.footer?.copyright ?? `${new Date().getFullYear()} ${siteConfig.business.name}. All rights reserved.`}
+                builtBy={siteConfig.footer?.builtBy}
+              />
+            }
           >
             {children}
           </PageShell>
