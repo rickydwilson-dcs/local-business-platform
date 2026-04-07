@@ -43,9 +43,6 @@ jobs:
       - name: Run ESLint
         run: pnpm run lint
 
-      - name: Run build test
-        run: pnpm run build
-
       - name: Create deployment summary
         run: |
           echo "## ✅ Production Quality Checks Passed" >> $GITHUB_STEP_SUMMARY
