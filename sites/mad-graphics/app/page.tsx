@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import { ImageOverlayHero } from '@platform/core-components';
 import { cygnusRegistry } from '@platform/themes/cygnus';
 import { siteConfig } from '@/site.config';
@@ -52,36 +53,35 @@ export default function HomePage() {
             Get a Quote
           </a>
           {/* Mobile hamburger (visual only) */}
-          <span className="material-symbols-outlined md:hidden text-surface-foreground">
-            menu
-          </span>
+          <span className="material-symbols-outlined md:hidden text-surface-foreground">menu</span>
         </nav>
       </header>
 
       <main>
         {/* Hero Section */}
-        {cygnusRegistry.heroVariant === "image-overlay" ? (
+        {cygnusRegistry.heroVariant === 'image-overlay' ? (
           <ImageOverlayHero
             headline="Your brand,"
             headlineAccent="made bold."
             subheadline={siteConfig.tagline}
-            primaryCta={{ label: "Get a Quote", href: "/contact" }}
-            secondaryCta={{ label: "View Our Work", href: "/projects" }}
+            primaryCta={{ label: 'Get a Quote', href: '/contact' }}
+            secondaryCta={{ label: 'View Our Work', href: '/projects' }}
             backgroundImage="/stitch-images/img-006.jpg"
             backgroundImageAlt="Professional large format print workshop with industrial machinery"
             badge="847 projects completed"
             stats={[
-              { value: "847", label: "Projects Delivered" },
-              { value: "12", label: "Years of Craft" },
-              { value: "5★", label: "Client Rated" },
+              { value: '847', label: 'Projects Delivered' },
+              { value: '12', label: 'Years of Craft' },
+              { value: '5★', label: 'Client Rated' },
             ]}
           />
         ) : (
           /* Fallback: original Stitch hero — preserved as fallback */
           <section className="relative min-h-screen flex items-center overflow-hidden">
             <div className="absolute inset-0 z-0">
-              <img
-                className="w-full h-full object-cover opacity-40 grayscale-[0.5]"
+              <Image
+                fill
+                className="object-cover opacity-40 grayscale-[0.5]"
                 src="/stitch-images/img-006.jpg"
                 alt="dramatic wide angle shot of a professional large format print workshop with industrial machinery and vibrant orange lighting accents"
               />
@@ -115,16 +115,15 @@ export default function HomePage() {
             <span className="text-[#f7941d] font-body uppercase tracking-[0.3em] font-bold text-sm">
               Capabilities
             </span>
-            <h2 className="text-5xl font-headline font-bold mt-4">
-              Precision Services
-            </h2>
+            <h2 className="text-5xl font-headline font-bold mt-4">Precision Services</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* Card 1 - Design */}
             <div className="group bg-surface-muted rounded-lg overflow-hidden flex flex-col">
               <div className="h-64 overflow-hidden relative">
-                <img
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                <Image
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-110"
                   src="/stitch-images/img-019.jpg"
                   alt="macro close-up of a digital design workspace with high-end monitor showing vector branding and print layouts"
                 />
@@ -134,21 +133,17 @@ export default function HomePage() {
                 <span className="text-[#f7941d] font-body uppercase tracking-widest text-[10px] font-bold mb-2">
                   Design
                 </span>
-                <h3 className="text-2xl font-headline font-bold mb-4">
-                  Design &amp; Artwork
-                </h3>
+                <h3 className="text-2xl font-headline font-bold mb-4">Design &amp; Artwork</h3>
                 <p className="text-sm text-[#dac2af] font-body mb-6 flex-1">
-                  From initial concept to print-ready files, we ensure your
-                  brand&apos;s DNA is preserved with technical accuracy.
+                  From initial concept to print-ready files, we ensure your brand&apos;s DNA is
+                  preserved with technical accuracy.
                 </p>
                 <a
                   className="inline-flex items-center gap-2 text-[#f7941d] font-bold text-xs uppercase tracking-widest group-hover:gap-4 transition-all"
                   href="#"
                 >
                   Learn more{' '}
-                  <span className="material-symbols-outlined text-sm">
-                    arrow_forward
-                  </span>
+                  <span className="material-symbols-outlined text-sm">arrow_forward</span>
                 </a>
               </div>
             </div>
@@ -156,8 +151,9 @@ export default function HomePage() {
             {/* Card 2 - Print */}
             <div className="group bg-surface-muted rounded-lg overflow-hidden flex flex-col">
               <div className="h-64 overflow-hidden relative">
-                <img
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                <Image
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-110"
                   src="/stitch-images/img-010.jpg"
                   alt="industrial printing machine rollers feeding bright orange paper at high speed in a professional print shop"
                 />
@@ -167,21 +163,17 @@ export default function HomePage() {
                 <span className="text-[#f7941d] font-body uppercase tracking-widest text-[10px] font-bold mb-2">
                   Production
                 </span>
-                <h3 className="text-2xl font-headline font-bold mb-4">
-                  Print &amp; Production
-                </h3>
+                <h3 className="text-2xl font-headline font-bold mb-4">Print &amp; Production</h3>
                 <p className="text-sm text-[#dac2af] font-body mb-6 flex-1">
-                  Large format prints with stunning color depth. We use
-                  state-of-the-art machinery for ultra-sharp results.
+                  Large format prints with stunning color depth. We use state-of-the-art machinery
+                  for ultra-sharp results.
                 </p>
                 <a
                   className="inline-flex items-center gap-2 text-[#f7941d] font-bold text-xs uppercase tracking-widest group-hover:gap-4 transition-all"
                   href="#"
                 >
                   Learn more{' '}
-                  <span className="material-symbols-outlined text-sm">
-                    arrow_forward
-                  </span>
+                  <span className="material-symbols-outlined text-sm">arrow_forward</span>
                 </a>
               </div>
             </div>
@@ -189,8 +181,9 @@ export default function HomePage() {
             {/* Card 3 - Signage */}
             <div className="group bg-surface-muted rounded-lg overflow-hidden flex flex-col">
               <div className="h-64 overflow-hidden relative">
-                <img
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                <Image
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-110"
                   src="/stitch-images/img-003.jpg"
                   alt="exterior of a modern building featuring sleek 3D architectural signage with glowing backlight at dusk"
                 />
@@ -200,21 +193,17 @@ export default function HomePage() {
                 <span className="text-[#f7941d] font-body uppercase tracking-widest text-[10px] font-bold mb-2">
                   Architectural
                 </span>
-                <h3 className="text-2xl font-headline font-bold mb-4">
-                  Building Signage
-                </h3>
+                <h3 className="text-2xl font-headline font-bold mb-4">Building Signage</h3>
                 <p className="text-sm text-[#dac2af] font-body mb-6 flex-1">
-                  Transform your premises with premium facias, 3D lettering, and
-                  architectural illumination.
+                  Transform your premises with premium facias, 3D lettering, and architectural
+                  illumination.
                 </p>
                 <a
                   className="inline-flex items-center gap-2 text-[#f7941d] font-bold text-xs uppercase tracking-widest group-hover:gap-4 transition-all"
                   href="#"
                 >
                   Learn more{' '}
-                  <span className="material-symbols-outlined text-sm">
-                    arrow_forward
-                  </span>
+                  <span className="material-symbols-outlined text-sm">arrow_forward</span>
                 </a>
               </div>
             </div>
@@ -222,8 +211,9 @@ export default function HomePage() {
             {/* Card 4 - Vehicle */}
             <div className="group bg-surface-muted rounded-lg overflow-hidden flex flex-col">
               <div className="h-64 overflow-hidden relative">
-                <img
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                <Image
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-110"
                   src="/stitch-images/img-025.jpg"
                   alt="close up of a professional applicator finishing a high-gloss black vinyl wrap on a modern car door panel"
                 />
@@ -233,21 +223,17 @@ export default function HomePage() {
                 <span className="text-[#f7941d] font-body uppercase tracking-widest text-[10px] font-bold mb-2">
                   Automotive
                 </span>
-                <h3 className="text-2xl font-headline font-bold mb-4">
-                  Vehicle Graphics
-                </h3>
+                <h3 className="text-2xl font-headline font-bold mb-4">Vehicle Graphics</h3>
                 <p className="text-sm text-[#dac2af] font-body mb-6 flex-1">
-                  Turn your fleet into mobile billboards with durable,
-                  UV-resistant graphics that command attention.
+                  Turn your fleet into mobile billboards with durable, UV-resistant graphics that
+                  command attention.
                 </p>
                 <a
                   className="inline-flex items-center gap-2 text-[#f7941d] font-bold text-xs uppercase tracking-widest group-hover:gap-4 transition-all"
                   href="#"
                 >
                   Learn more{' '}
-                  <span className="material-symbols-outlined text-sm">
-                    arrow_forward
-                  </span>
+                  <span className="material-symbols-outlined text-sm">arrow_forward</span>
                 </a>
               </div>
             </div>
@@ -255,8 +241,9 @@ export default function HomePage() {
             {/* Card 5 - Vinyl */}
             <div className="group bg-surface-muted rounded-lg overflow-hidden flex flex-col">
               <div className="h-64 overflow-hidden relative">
-                <img
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                <Image
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-110"
                   src="/stitch-images/img-008.jpg"
                   alt="modern office interior with large scale custom typography vinyl graphics applied to glass partition walls"
                 />
@@ -266,21 +253,17 @@ export default function HomePage() {
                 <span className="text-[#f7941d] font-body uppercase tracking-widest text-[10px] font-bold mb-2">
                   Specialty
                 </span>
-                <h3 className="text-2xl font-headline font-bold mb-4">
-                  Vinyl Wrapping
-                </h3>
+                <h3 className="text-2xl font-headline font-bold mb-4">Vinyl Wrapping</h3>
                 <p className="text-sm text-[#dac2af] font-body mb-6 flex-1">
-                  Custom interior wraps for walls, glass, and furniture to create
-                  a fully immersive brand environment.
+                  Custom interior wraps for walls, glass, and furniture to create a fully immersive
+                  brand environment.
                 </p>
                 <a
                   className="inline-flex items-center gap-2 text-[#f7941d] font-bold text-xs uppercase tracking-widest group-hover:gap-4 transition-all"
                   href="#"
                 >
                   Learn more{' '}
-                  <span className="material-symbols-outlined text-sm">
-                    arrow_forward
-                  </span>
+                  <span className="material-symbols-outlined text-sm">arrow_forward</span>
                 </a>
               </div>
             </div>
@@ -288,8 +271,9 @@ export default function HomePage() {
             {/* Card 6 - Exhibition */}
             <div className="group bg-surface-muted rounded-lg overflow-hidden flex flex-col">
               <div className="h-64 overflow-hidden relative">
-                <img
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                <Image
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-110"
                   src="/stitch-images/img-015.jpg"
                   alt="vibrant trade show floor featuring modular exhibition stands with large graphic panels and integrated lighting"
                 />
@@ -299,21 +283,17 @@ export default function HomePage() {
                 <span className="text-[#f7941d] font-body uppercase tracking-widest text-[10px] font-bold mb-2">
                   Events
                 </span>
-                <h3 className="text-2xl font-headline font-bold mb-4">
-                  Exhibition Displays
-                </h3>
+                <h3 className="text-2xl font-headline font-bold mb-4">Exhibition Displays</h3>
                 <p className="text-sm text-[#dac2af] font-body mb-6 flex-1">
-                  High-impact pull-ups, backdrops, and modular stands designed
-                  for quick assembly and maximum visibility.
+                  High-impact pull-ups, backdrops, and modular stands designed for quick assembly
+                  and maximum visibility.
                 </p>
                 <a
                   className="inline-flex items-center gap-2 text-[#f7941d] font-bold text-xs uppercase tracking-widest group-hover:gap-4 transition-all"
                   href="#"
                 >
                   Learn more{' '}
-                  <span className="material-symbols-outlined text-sm">
-                    arrow_forward
-                  </span>
+                  <span className="material-symbols-outlined text-sm">arrow_forward</span>
                 </a>
               </div>
             </div>
@@ -327,24 +307,47 @@ export default function HomePage() {
               <span className="text-[#5BA829] font-body uppercase tracking-[0.3em] font-bold text-sm">
                 Word on the shop floor
               </span>
-              <h2 className="text-5xl font-headline font-bold mt-4">
-                Trusted by the best
-              </h2>
+              <h2 className="text-5xl font-headline font-bold mt-4">Trusted by the best</h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {/* Quote 1 */}
               <div className="bg-surface-background p-12 rounded-lg border border-[#544435]/10">
                 <div className="flex text-[#f7941d] mb-6">
-                  <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
-                  <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
-                  <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
-                  <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
-                  <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
+                  <span
+                    className="material-symbols-outlined"
+                    style={{ fontVariationSettings: "'FILL' 1" }}
+                  >
+                    star
+                  </span>
+                  <span
+                    className="material-symbols-outlined"
+                    style={{ fontVariationSettings: "'FILL' 1" }}
+                  >
+                    star
+                  </span>
+                  <span
+                    className="material-symbols-outlined"
+                    style={{ fontVariationSettings: "'FILL' 1" }}
+                  >
+                    star
+                  </span>
+                  <span
+                    className="material-symbols-outlined"
+                    style={{ fontVariationSettings: "'FILL' 1" }}
+                  >
+                    star
+                  </span>
+                  <span
+                    className="material-symbols-outlined"
+                    style={{ fontVariationSettings: "'FILL' 1" }}
+                  >
+                    star
+                  </span>
                 </div>
                 <p className="text-2xl font-headline italic text-surface-foreground leading-relaxed mb-8">
-                  &ldquo;The precision in their work is unmatched. We needed
-                  complex vehicle graphics for a ten-van fleet, and Mad Graphics
-                  delivered ahead of schedule with flawless execution.&rdquo;
+                  &ldquo;The precision in their work is unmatched. We needed complex vehicle
+                  graphics for a ten-van fleet, and Mad Graphics delivered ahead of schedule with
+                  flawless execution.&rdquo;
                 </p>
                 <div>
                   <div className="font-bold text-lg uppercase tracking-wider font-body">
@@ -359,16 +362,41 @@ export default function HomePage() {
               {/* Quote 2 */}
               <div className="bg-surface-background p-12 rounded-lg border border-[#544435]/10">
                 <div className="flex text-[#f7941d] mb-6">
-                  <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
-                  <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
-                  <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
-                  <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
-                  <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
+                  <span
+                    className="material-symbols-outlined"
+                    style={{ fontVariationSettings: "'FILL' 1" }}
+                  >
+                    star
+                  </span>
+                  <span
+                    className="material-symbols-outlined"
+                    style={{ fontVariationSettings: "'FILL' 1" }}
+                  >
+                    star
+                  </span>
+                  <span
+                    className="material-symbols-outlined"
+                    style={{ fontVariationSettings: "'FILL' 1" }}
+                  >
+                    star
+                  </span>
+                  <span
+                    className="material-symbols-outlined"
+                    style={{ fontVariationSettings: "'FILL' 1" }}
+                  >
+                    star
+                  </span>
+                  <span
+                    className="material-symbols-outlined"
+                    style={{ fontVariationSettings: "'FILL' 1" }}
+                  >
+                    star
+                  </span>
                 </div>
                 <p className="text-2xl font-headline italic text-surface-foreground leading-relaxed mb-8">
-                  &ldquo;Finding a printer who understands high-end finishes is
-                  rare. Mad Graphics treated our branding project with the kind
-                  of artisan care you just don&apos;t see anymore.&rdquo;
+                  &ldquo;Finding a printer who understands high-end finishes is rare. Mad Graphics
+                  treated our branding project with the kind of artisan care you just don&apos;t see
+                  anymore.&rdquo;
                 </p>
                 <div>
                   <div className="font-bold text-lg uppercase tracking-wider font-body">
@@ -391,8 +419,7 @@ export default function HomePage() {
                 Ready to make your brand stand out?
               </h2>
               <p className="text-[#613500] text-lg font-body font-medium">
-                Let&apos;s discuss your project today and get a custom quote
-                within 24 hours.
+                Let&apos;s discuss your project today and get a custom quote within 24 hours.
               </p>
             </div>
             <div className="flex flex-col sm:flex-row gap-4">
@@ -418,12 +445,10 @@ export default function HomePage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-16 max-w-7xl mx-auto">
           {/* Brand Column */}
           <div>
-            <div className="text-xl font-headline font-bold text-[#f7941d] mb-6">
-              MAD GRAPHICS
-            </div>
+            <div className="text-xl font-headline font-bold text-[#f7941d] mb-6">MAD GRAPHICS</div>
             <p className="text-[#dac2af] text-sm font-body leading-relaxed mb-8">
-              Precision in print. Passion in craft. Based in Polegate, serving
-              the boldest brands across East Sussex and beyond.
+              Precision in print. Passion in craft. Based in Polegate, serving the boldest brands
+              across East Sussex and beyond.
             </p>
             <div className="text-[#e5e2e1]/60 font-body font-medium uppercase tracking-widest text-[10px]">
               &copy; 2024 Mad Graphics Polegate HQ. Precision in Print.
@@ -474,9 +499,7 @@ export default function HomePage() {
             </h4>
             <div className="space-y-4">
               <div className="flex items-start gap-3">
-                <span className="material-symbols-outlined text-[#f7941d]">
-                  location_on
-                </span>
+                <span className="material-symbols-outlined text-[#f7941d]">location_on</span>
                 <p className="text-[#dac2af] text-sm font-body">
                   Unit 4, High Street Workshop
                   <br />
@@ -486,20 +509,12 @@ export default function HomePage() {
                 </p>
               </div>
               <div className="flex items-center gap-3">
-                <span className="material-symbols-outlined text-[#f7941d]">
-                  call
-                </span>
-                <p className="text-[#dac2af] text-sm font-body">
-                  01323 48XXXX
-                </p>
+                <span className="material-symbols-outlined text-[#f7941d]">call</span>
+                <p className="text-[#dac2af] text-sm font-body">01323 48XXXX</p>
               </div>
               <div className="flex items-center gap-3">
-                <span className="material-symbols-outlined text-[#f7941d]">
-                  mail
-                </span>
-                <p className="text-[#dac2af] text-sm font-body">
-                  studio@madgraphics.co.uk
-                </p>
+                <span className="material-symbols-outlined text-[#f7941d]">mail</span>
+                <p className="text-[#dac2af] text-sm font-body">studio@madgraphics.co.uk</p>
               </div>
             </div>
           </div>

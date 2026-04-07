@@ -11,6 +11,7 @@
         "SUPABASE_URL",
         "SUPABASE_SERVICE_KEY",
         "RESEND_API_KEY",
+        "FEATURE_CONSENT_BANNER",
         "FEATURE_GA4_ENABLED",
         "FEATURE_FACEBOOK_PIXEL",
         "FEATURE_GOOGLE_ADS",
@@ -19,7 +20,14 @@
         "CSRF_SECRET",
         "BUSINESS_NAME",
         "BUSINESS_EMAIL",
-        "R2_BUCKET_NAME"
+        "R2_BUCKET_NAME",
+        "GA4_API_SECRET",
+        "FACEBOOK_ACCESS_TOKEN",
+        "NEW_RELIC_LICENSE_KEY",
+        "NEW_RELIC_APP_NAME",
+        "NEW_RELIC_LOG",
+        "NEW_RELIC_DISTRIBUTED_TRACING_ENABLED",
+        "NEW_RELIC_NO_CONFIG_FILE"
       ]
     },
     "dev": {

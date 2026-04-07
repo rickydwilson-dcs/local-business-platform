@@ -8,6 +8,7 @@
 
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export const metadata: Metadata = {
   title: 'Services | MAD GRAPHICS',
@@ -70,24 +71,42 @@ export default function ServicesPage() {
       {/* ── Nav ── */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-[#131313]">
         <div className="flex items-center justify-between px-6 md:px-10 py-4">
-          <Link href="/" className="text-3xl font-black italic tracking-tighter text-[#f7941d] font-headline">
+          <Link
+            href="/"
+            className="text-3xl font-black italic tracking-tighter text-[#f7941d] font-headline"
+          >
             MAD GRAPHICS
           </Link>
 
           <div className="hidden md:flex items-center gap-8">
-            <Link href="/" className="font-headline uppercase tracking-tight text-white/60 hover:text-white transition-colors text-sm">
+            <Link
+              href="/"
+              className="font-headline uppercase tracking-tight text-white/60 hover:text-white transition-colors text-sm"
+            >
               Home
             </Link>
-            <Link href="/about" className="font-headline uppercase tracking-tight text-white/60 hover:text-white transition-colors text-sm">
+            <Link
+              href="/about"
+              className="font-headline uppercase tracking-tight text-white/60 hover:text-white transition-colors text-sm"
+            >
               About
             </Link>
-            <Link href="/services" className="font-headline uppercase tracking-tight text-[#f7941d] border-b-4 border-[#f7941d] pb-1 text-sm">
+            <Link
+              href="/services"
+              className="font-headline uppercase tracking-tight text-[#f7941d] border-b-4 border-[#f7941d] pb-1 text-sm"
+            >
               Services
             </Link>
-            <Link href="/projects" className="font-headline uppercase tracking-tight text-white/60 hover:text-white transition-colors text-sm">
+            <Link
+              href="/projects"
+              className="font-headline uppercase tracking-tight text-white/60 hover:text-white transition-colors text-sm"
+            >
               Projects
             </Link>
-            <Link href="/contact" className="font-headline uppercase tracking-tight text-white/60 hover:text-white transition-colors text-sm">
+            <Link
+              href="/contact"
+              className="font-headline uppercase tracking-tight text-white/60 hover:text-white transition-colors text-sm"
+            >
               Contact
             </Link>
           </div>
@@ -105,7 +124,9 @@ export default function ServicesPage() {
       {/* ── Breadcrumb ── */}
       <div className="px-6 md:px-10 mb-12 pt-32">
         <nav className="flex items-center gap-2 text-xs uppercase tracking-widest text-white/40">
-          <Link href="/" className="hover:text-white/60 transition-colors">Home</Link>
+          <Link href="/" className="hover:text-white/60 transition-colors">
+            Home
+          </Link>
           <span>/</span>
           <span className="text-white/60">Services</span>
         </nav>
@@ -126,10 +147,11 @@ export default function ServicesPage() {
             <div key={service.title} className="bg-[#1A1A1A] p-8 md:p-12 group">
               {/* Image */}
               <div className="relative overflow-hidden aspect-[16/9] mb-8">
-                <img
+                <Image
+                  fill
                   src={service.image}
                   alt={service.title}
-                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                  className="object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
                 />
                 <div className="absolute inset-0 bg-[#f7941d]/10 mix-blend-multiply group-hover:bg-transparent transition-all duration-500" />
               </div>
@@ -140,14 +162,10 @@ export default function ServicesPage() {
               </p>
 
               {/* Title */}
-              <h2 className="text-5xl font-headline font-bold text-white mb-4">
-                {service.title}
-              </h2>
+              <h2 className="text-5xl font-headline font-bold text-white mb-4">{service.title}</h2>
 
               {/* Description */}
-              <p className="text-white/60 mb-8 leading-relaxed">
-                {service.description}
-              </p>
+              <p className="text-white/60 mb-8 leading-relaxed">{service.description}</p>
 
               {/* Learn More */}
               <a
@@ -200,27 +218,79 @@ export default function ServicesPage() {
             {/* Ghost brand */}
             <div>
               <p className="text-6xl md:text-7xl font-black italic tracking-tighter text-white/10 font-headline leading-none">
-                MAD<br />GRAPHICS
+                MAD
+                <br />
+                GRAPHICS
               </p>
             </div>
 
             {/* Navigation + Legal */}
             <div className="flex gap-16">
               <div>
-                <h3 className="font-headline uppercase tracking-widest text-xs text-white/40 mb-4">Navigation</h3>
+                <h3 className="font-headline uppercase tracking-widest text-xs text-white/40 mb-4">
+                  Navigation
+                </h3>
                 <ul className="space-y-2">
-                  <li><Link href="/" className="text-white/60 hover:text-white transition-colors text-sm">Home</Link></li>
-                  <li><Link href="/about" className="text-white/60 hover:text-white transition-colors text-sm">About</Link></li>
-                  <li><Link href="/services" className="text-[#f7941d] text-sm">Services</Link></li>
-                  <li><Link href="/projects" className="text-white/60 hover:text-white transition-colors text-sm">Projects</Link></li>
-                  <li><Link href="/contact" className="text-white/60 hover:text-white transition-colors text-sm">Contact</Link></li>
+                  <li>
+                    <Link
+                      href="/"
+                      className="text-white/60 hover:text-white transition-colors text-sm"
+                    >
+                      Home
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/about"
+                      className="text-white/60 hover:text-white transition-colors text-sm"
+                    >
+                      About
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/services" className="text-[#f7941d] text-sm">
+                      Services
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/projects"
+                      className="text-white/60 hover:text-white transition-colors text-sm"
+                    >
+                      Projects
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/contact"
+                      className="text-white/60 hover:text-white transition-colors text-sm"
+                    >
+                      Contact
+                    </Link>
+                  </li>
                 </ul>
               </div>
               <div>
-                <h3 className="font-headline uppercase tracking-widest text-xs text-white/40 mb-4">Legal</h3>
+                <h3 className="font-headline uppercase tracking-widest text-xs text-white/40 mb-4">
+                  Legal
+                </h3>
                 <ul className="space-y-2">
-                  <li><a href="/privacy-policy" className="text-white/60 hover:text-white transition-colors text-sm">Privacy Policy</a></li>
-                  <li><a href="/cookie-policy" className="text-white/60 hover:text-white transition-colors text-sm">Cookie Policy</a></li>
+                  <li>
+                    <a
+                      href="/privacy-policy"
+                      className="text-white/60 hover:text-white transition-colors text-sm"
+                    >
+                      Privacy Policy
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="/cookie-policy"
+                      className="text-white/60 hover:text-white transition-colors text-sm"
+                    >
+                      Cookie Policy
+                    </a>
+                  </li>
                 </ul>
               </div>
             </div>
@@ -228,8 +298,13 @@ export default function ServicesPage() {
             {/* Contact + Copyright */}
             <div className="flex flex-col justify-between">
               <div>
-                <h3 className="font-headline uppercase tracking-widest text-xs text-white/40 mb-4">Contact</h3>
-                <a href="mailto:info@madgraphics.co.uk" className="text-white/60 hover:text-[#f7941d] transition-colors text-sm">
+                <h3 className="font-headline uppercase tracking-widest text-xs text-white/40 mb-4">
+                  Contact
+                </h3>
+                <a
+                  href="mailto:info@madgraphics.co.uk"
+                  className="text-white/60 hover:text-[#f7941d] transition-colors text-sm"
+                >
                   info@madgraphics.co.uk
                 </a>
               </div>
