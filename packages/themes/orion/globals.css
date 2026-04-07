@@ -65,7 +65,7 @@
 
   .accent-underline {
     text-decoration: underline;
-    text-decoration-color: theme('colors.brand.primary');
+    text-decoration-color: var(--color-brand-primary);
     text-decoration-thickness: 4px;
     text-underline-offset: 8px;
   }
@@ -82,7 +82,7 @@
     left: 0;
     width: 0;
     height: 4px;
-    background-color: theme('colors.brand.primary');
+    background-color: var(--color-brand-primary);
     transition: width 0.3s ease-in-out;
   }
 
