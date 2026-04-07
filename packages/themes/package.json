@@ -9,13 +9,16 @@
     "./atlas/showcase": "./atlas/showcase-registry.tsx",
     "./atlas/components": "./atlas/components/index.ts",
     "./cygnus": "./cygnus/index.ts",
+    "./cygnus/components": "./cygnus/components/index.ts",
     "./lyra": "./lyra/index.ts",
     "./nova": "./nova/index.ts",
     "./orion": "./orion/index.ts",
+    "./orion/components": "./orion/components/index.ts",
     "./rigel": "./rigel/index.ts",
     "./rigel/manifest": "./rigel/manifest.ts",
     "./rigel/showcase": "./rigel/showcase-registry.tsx",
     "./rigel/components": "./rigel/components/index.ts",
-    "./vega": "./vega/index.ts"
+    "./vega": "./vega/index.ts",
+    "./vega/components": "./vega/components/index.ts"
   }
 }
