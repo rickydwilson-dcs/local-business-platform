@@ -163,7 +163,9 @@ New sites get two layers of scaffolding:
 
 1. **Base-template (capability layer)** — provides the full app infrastructure: API routes, lib shims, config structure, analytics, consent management, `[slug]` dynamic routes, TypeScript setup. Every site gets this layer regardless of theme.
 
-2. **Theme reference site (visual layer)** — provides canonical visual implementations of index and listing pages (`app/page.tsx`, `app/services/page.tsx`, `app/about/page.tsx`, `app/locations/page.tsx`). These pages are copied from the theme's reference site and overwrite the generic base-template versions.
+2. **Theme reference site (visual layer)** — provides canonical visual implementations of the site shell and key pages. The following files are copied from the theme's reference site and overwrite the generic base-template versions:
+   - `app/layout.tsx` — wires the theme's `Header` and `Footer` components (e.g. `CygnusHeader`, `CygnusFooter`) so new sites get the correct navigation and footer automatically
+   - `app/page.tsx`, `app/services/page.tsx`, `app/about/page.tsx`, `app/locations/page.tsx` — page layouts using the theme's visual language
 
 ### Reference Sites
 
@@ -171,7 +173,7 @@ New sites get two layers of scaffolding:
 |-------|---------------|----------|
 | `cygnus` | `sites/cygnus-test` | Dark hero, image card grids, cygnus visual language |
 | `orion` | `sites/dj-fox-electrical` | Dark header, full-bleed hero, circular icons |
-| `vega` | (no override) | Uses base-template pages directly |
+| `vega` | `sites/base-template` | Light header, split hero, standard card grid |
 
 ### Graceful Fallback
 

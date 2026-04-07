@@ -432,6 +432,7 @@ Beyond CSS variables, the platform has named visual identities — **orion**, **
 
 - **CSS utilities** (`packages/themes/orion/globals.css`, `packages/themes/vega/globals.css`) — pre-written component classes (`btn-primary`, `card-interactive`, `mobile-menu-overlay`, `lightbox-content`, etc.) written as plain CSS with `@apply`. Each site's `globals.css` imports its theme's CSS before the `@tailwind` directives.
 - **`ComponentRegistry`** — a TypeScript object exported from the theme package (`orionRegistry`, `vegaRegistry`, `cygnusRegistry`) that maps `heroVariant`, `headerVariant`, `cardVariant`, and `sectionVariant` slots to concrete component names. Sites include this in `theme.config.ts` under `componentRegistry`. For cygnus sites, `heroVariant: "image-overlay"` is now consumed at runtime — page components import `cygnusRegistry` directly and conditionally render `ImageOverlayHero` from `@platform/core-components` when the variant matches.
+- **Structural components** (`packages/themes/[name]/components/`) — theme-specific `Header` and `Footer` React Server Components exported via a `/components` subpath. Sites import these directly into `app/layout.tsx` rather than using the generic `SiteHeader`/`Footer` from core-components. This is what gives each theme its distinct navigation and footer treatment — the visual identity is owned by the theme package, not by the consuming site.
 
 ### Available Themes
 
@@ -462,13 +463,21 @@ export const themeConfig: DeepPartialThemeConfig = {
 };
 
 // sites/my-site/app/layout.tsx
-import { ThemeProvider } from "@platform/core-components";
+import { ThemeProvider, PageShell } from "@platform/core-components";
 import { orionRegistry } from "@platform/themes/orion";
+import { OrionHeader, OrionFooter } from "@platform/themes/orion/components";
 // ...
 <ThemeProvider theme="orion" registry={orionRegistry}>
-  <PageShell ...>{children}</PageShell>
+  <PageShell
+    header={<OrionHeader siteName={...} navigation={...} locations={...} />}
+    footer={<OrionFooter siteName={...} services={...} locations={...} />}
+  >
+    {children}
+  </PageShell>
 </ThemeProvider>
 ```
+
+The `Header` and `Footer` exports are props-based Server Components — `layout.tsx` fetches site-specific data (services, locations, contact info) and passes it as props. The theme package owns the visual treatment; the site owns the data.
 
 ### AI Theme Generation
 
