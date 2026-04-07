@@ -59,11 +59,12 @@ const EXCLUDE_EXTENSIONS = [".log"];
 const THEME_REFERENCE_SITE_MAP: Record<string, string> = {
   cygnus: 'cygnus-test',
   orion:  'dj-fox-electrical',
-  // vega: uses base-template directly — no override needed
+  vega:   'base-template',
 };
 
 /** Page files to copy from theme reference site (overrides base-template copies). */
 const THEMED_PAGE_FILES = [
+  'app/layout.tsx',
   'app/page.tsx',
   'app/services/page.tsx',
   'app/about/page.tsx',
