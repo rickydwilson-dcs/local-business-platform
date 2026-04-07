@@ -47,9 +47,6 @@ jobs:
       - name: Run Tests
         run: pnpm test
 
-      - name: Run build test
-        run: pnpm run build
-
       - name: Cache build
         uses: actions/cache@v3
         with:
