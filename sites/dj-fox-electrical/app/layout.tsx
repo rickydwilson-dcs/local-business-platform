@@ -9,10 +9,11 @@ const outfit = Outfit({
   display: 'swap',
   weight: ['400', '500', '600', '700', '800'],
 });
-import { PHONE_DISPLAY, PHONE_TEL } from '@/lib/contact-info';
+import { PHONE_DISPLAY, PHONE_TEL, BUSINESS_EMAIL, ADDRESS } from '@/lib/contact-info';
 import { getAllCounties } from '@/lib/locations';
-import { SiteHeader, PageShell, ThemeProvider } from '@platform/core-components';
-import { Footer } from '@platform/core-components/components/ui/footer';
+import { getContentItems } from '@/lib/content';
+import { PageShell, ThemeProvider } from '@platform/core-components';
+import { OrionHeader, OrionFooter } from '@platform/themes/orion/components';
 import { orionRegistry } from '@platform/themes/orion';
 
 export const metadata: Metadata = {
@@ -50,16 +51,23 @@ export const viewport: Viewport = {
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  // Fetch county-grouped locations for desktop mega-menu
-  const counties = await getAllCounties();
+  const [allServices, counties] = await Promise.all([
+    getContentItems('services'),
+    getAllCounties(),
+  ]);
 
-  // Flatten counties to simple location list for mobile menu
+  // Flatten counties to simple location list for mobile menu and footer
   const locationItems = counties.flatMap((county) =>
     county.towns.map((town) => ({
       name: town.name,
       slug: town.slug,
     }))
   );
+
+  const totalLocations = locationItems.length;
+  const footerLocations = locationItems
+    .slice(0, siteConfig.footer?.maxLocations ?? 8)
+    .map((t) => ({ slug: t.slug, title: t.name }));
 
   return (
     <html lang="en-GB" className={outfit.variable}>
@@ -83,9 +91,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <ThemeProvider theme="orion" registry={orionRegistry}>
           <PageShell
             header={
-              <SiteHeader
-                appearance="dark"
-                siteName={siteConfig.name}
+              <OrionHeader
+                siteName={siteConfig.business.name}
                 phoneDisplay={PHONE_DISPLAY}
                 phoneTel={PHONE_TEL}
                 showPhone={siteConfig.cta.phone.show}
@@ -96,7 +103,27 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                 maxTownsPerCounty={10}
               />
             }
-            footer={<Footer />}
+            footer={
+              <OrionFooter
+                siteName={siteConfig.business.name}
+                tagline={siteConfig.tagline}
+                phoneDisplay={PHONE_DISPLAY}
+                phoneTel={PHONE_TEL}
+                email={BUSINESS_EMAIL}
+                address={ADDRESS}
+                certifications={siteConfig.credentials?.certifications ?? []}
+                services={allServices.map(s => ({ slug: s.slug, title: s.title })).slice(0, siteConfig.footer?.maxServices ?? 8)}
+                locations={footerLocations}
+                totalServices={allServices.length}
+                totalLocations={totalLocations}
+                maxServices={siteConfig.footer?.maxServices ?? 8}
+                maxLocations={siteConfig.footer?.maxLocations ?? 8}
+                showServices={siteConfig.footer?.showServices ?? true}
+                showLocations={siteConfig.footer?.showLocations ?? true}
+                copyright={siteConfig.footer?.copyright ?? `${new Date().getFullYear()} ${siteConfig.business.name}. All rights reserved.`}
+                builtBy={siteConfig.footer?.builtBy}
+              />
+            }
           >
             {children}
           </PageShell>
