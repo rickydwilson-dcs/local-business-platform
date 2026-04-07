@@ -219,7 +219,21 @@ importers:
         specifier: ^3.2.4
         version: 3.2.4(@types/debug@4.1.12)(@types/node@20.19.20)(jiti@1.21.7)(jsdom@27.0.0(postcss@8.5.6))(tsx@4.20.6)(yaml@2.8.2)
 
-  packages/themes: {}
+  packages/themes:
+    dependencies:
+      lucide-react:
+        specifier: ^0.544.0
+        version: 0.544.0(react@19.2.3)
+      next:
+        specifier: '>=16.1.5'
+        version: 16.1.5(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(@playwright/test@1.56.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      react:
+        specifier: 19.2.3
+        version: 19.2.3
+    devDependencies:
+      '@types/react':
+        specifier: ^19
+        version: 19.2.2
 
   sites/base-template:
     dependencies:
