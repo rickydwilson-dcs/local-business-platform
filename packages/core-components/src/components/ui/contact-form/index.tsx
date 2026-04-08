@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { CheckCircle, AlertCircle } from 'lucide-react';
+import { useState, useEffect } from "react";
+import { CheckCircle, AlertCircle } from "lucide-react";
 
 interface ExtraFieldConfig {
   name: string;
   label: string;
-  type: 'select' | 'text' | 'textarea';
+  type: "select" | "text" | "textarea";
   options?: string[];
   required?: boolean;
   placeholder?: string;
@@ -17,7 +17,7 @@ interface ContactFormProps {
   services?: Array<{ slug: string; title: string }> | string[];
   serviceAreas?: string[];
   extraFields?: ExtraFieldConfig[];
-  variant?: 'standard' | 'detailed';
+  variant?: "standard" | "detailed";
   darkMode?: boolean;
   className?: string;
 }
@@ -32,31 +32,31 @@ export function ContactForm({
   services = [],
   serviceAreas = [],
   extraFields = [],
-  variant = 'standard',
+  variant = "standard",
   darkMode = false,
   className,
 }: ContactFormProps) {
   const [formData, setFormData] = useState<Record<string, string>>(() => {
     const initial: Record<string, string> = {
-      name: '',
-      email: '',
-      phone: '',
-      subject: '',
-      service: '',
-      location: '',
-      message: '',
+      name: "",
+      email: "",
+      phone: "",
+      subject: "",
+      service: "",
+      location: "",
+      message: "",
     };
     for (const field of extraFields) {
-      initial[field.name] = field.defaultValue ?? '';
+      initial[field.name] = field.defaultValue ?? "";
     }
     return initial;
   });
 
   const [errors, setErrors] = useState<FormErrors>({});
-  const [csrfToken, setCsrfToken] = useState<string>('');
+  const [csrfToken, setCsrfToken] = useState<string>("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
-  const [submitMessage, setSubmitMessage] = useState('');
+  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
+  const [submitMessage, setSubmitMessage] = useState("");
 
   // Fetch CSRF token on mount
   useEffect(() => {
@@ -65,13 +65,13 @@ export function ContactForm({
 
   const fetchCSRFToken = async () => {
     try {
-      const response = await fetch('/api/csrf-token');
+      const response = await fetch("/api/csrf-token");
       if (response.ok) {
         const data = await response.json();
         setCsrfToken(data.token);
       }
     } catch (error) {
-      console.error('Failed to fetch CSRF token:', error);
+      console.error("Failed to fetch CSRF token:", error);
     }
   };
 
@@ -91,17 +91,17 @@ export function ContactForm({
     const newErrors: FormErrors = {};
 
     if (!formData.name.trim()) {
-      newErrors.name = 'Name is required';
+      newErrors.name = "Name is required";
     }
 
     if (!formData.email.trim()) {
-      newErrors.email = 'Email is required';
+      newErrors.email = "Email is required";
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = 'Please enter a valid email address';
+      newErrors.email = "Please enter a valid email address";
     }
 
     if (!formData.message.trim()) {
-      newErrors.message = 'Message is required';
+      newErrors.message = "Message is required";
     }
 
     setErrors(newErrors);
@@ -116,14 +116,14 @@ export function ContactForm({
     }
 
     setIsSubmitting(true);
-    setSubmitStatus('idle');
+    setSubmitStatus("idle");
 
     try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
+      const response = await fetch("/api/contact", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
-          'x-csrf-token': csrfToken,
+          "Content-Type": "application/json",
+          "x-csrf-token": csrfToken,
         },
         body: JSON.stringify(formData),
       });
@@ -131,38 +131,38 @@ export function ContactForm({
       const data = await response.json();
 
       if (data.success) {
-        setSubmitStatus('success');
-        setSubmitMessage(data.message || 'Thank you for your message!');
+        setSubmitStatus("success");
+        setSubmitMessage(data.message || "Thank you for your message!");
         // Reset form
         const resetData: Record<string, string> = {
-          name: '',
-          email: '',
-          phone: '',
-          subject: '',
-          service: '',
-          location: '',
-          message: '',
+          name: "",
+          email: "",
+          phone: "",
+          subject: "",
+          service: "",
+          location: "",
+          message: "",
         };
         for (const field of extraFields) {
-          resetData[field.name] = field.defaultValue ?? '';
+          resetData[field.name] = field.defaultValue ?? "";
         }
         setFormData(resetData);
         // Fetch new CSRF token for next submission
         fetchCSRFToken();
       } else {
         // Handle CSRF token expiration
-        if (data.code === 'CSRF_INVALID') {
+        if (data.code === "CSRF_INVALID") {
           await fetchCSRFToken();
-          setSubmitMessage('Please try submitting again.');
+          setSubmitMessage("Please try submitting again.");
         } else {
-          setSubmitMessage(data.error || 'Something went wrong. Please try again.');
+          setSubmitMessage(data.error || "Something went wrong. Please try again.");
         }
-        setSubmitStatus('error');
+        setSubmitStatus("error");
       }
     } catch (error) {
-      console.error('Form submission error:', error);
-      setSubmitStatus('error');
-      setSubmitMessage('Network error. Please check your connection and try again.');
+      console.error("Form submission error:", error);
+      setSubmitStatus("error");
+      setSubmitMessage("Network error. Please check your connection and try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -170,27 +170,27 @@ export function ContactForm({
 
   // Style helpers based on darkMode
   const inputBgClass = darkMode
-    ? 'bg-surface-inverse text-white placeholder-surface-muted-foreground'
-    : 'bg-surface-background';
-  const inputBorderClass = darkMode ? 'border-surface-card-border' : 'border-surface-border';
-  const labelClass = darkMode ? 'text-surface-muted-foreground' : 'text-surface-foreground';
-  const requiredMarkerClass = darkMode ? 'text-brand-primary' : 'text-error';
+    ? "bg-surface-muted text-surface-foreground placeholder-surface-muted-foreground"
+    : "bg-surface-background";
+  const inputBorderClass = darkMode ? "border-surface-card-border" : "border-surface-border";
+  const labelClass = darkMode ? "text-surface-muted-foreground" : "text-surface-foreground";
+  const requiredMarkerClass = darkMode ? "text-brand-primary" : "text-error";
 
   const inputClasses = (fieldName: string) =>
     `w-full px-4 py-3 rounded-lg border ${
-      errors[fieldName as keyof FormErrors] ? 'border-error' : inputBorderClass
+      errors[fieldName as keyof FormErrors] ? "border-error" : inputBorderClass
     } ${inputBgClass} focus:outline-none focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary`;
 
   const selectClasses = `w-full px-4 py-3 rounded-lg border ${inputBorderClass} ${
-    darkMode ? 'bg-surface-inverse text-white' : 'bg-surface-background'
+    darkMode ? "bg-surface-muted text-surface-foreground" : "bg-surface-background"
   } focus:outline-none focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary`;
 
   // Detailed variant wraps in a card
-  const isDetailed = variant === 'detailed';
+  const isDetailed = variant === "detailed";
 
   // Success state
   /* Intentional: form submission state feedback uses semantic Tailwind colors */
-  if (submitStatus === 'success') {
+  if (submitStatus === "success") {
     if (isDetailed) {
       return (
         <div className={className}>
@@ -199,10 +199,7 @@ export function ContactForm({
               <h3 className="text-green-800 font-semibold mb-1">Thank you!</h3>
               <p className="text-green-700">{submitMessage}</p>
             </div>
-            <button
-              onClick={() => setSubmitStatus('idle')}
-              className="mt-4 btn-primary"
-            >
+            <button onClick={() => setSubmitStatus("idle")} className="mt-4 btn-primary">
               Send Another Message
             </button>
           </div>
@@ -210,17 +207,19 @@ export function ContactForm({
       );
     }
 
-    const bgColorClass = darkMode ? 'bg-green-900/20' : 'bg-green-50';
-    const borderColorClass = darkMode ? 'border-green-700/50' : 'border-green-200';
+    const bgColorClass = darkMode ? "bg-green-900/20" : "bg-green-50";
+    const borderColorClass = darkMode ? "border-green-700/50" : "border-green-200";
 
     return (
-      <div className={`${bgColorClass} border ${borderColorClass} rounded-lg p-8 text-center ${className ?? ''}`}>
+      <div
+        className={`${bgColorClass} border ${borderColorClass} rounded-lg p-8 text-center ${className ?? ""}`}
+      >
         <CheckCircle className="w-16 h-16 text-success mx-auto mb-4" />
         <h2 className="text-2xl font-bold text-success mb-2">Message Sent!</h2>
         <p className="text-success mb-6">{submitMessage}</p>
         <button
-          onClick={() => setSubmitStatus('idle')}
-          className={darkMode ? 'btn-primary-dark' : 'btn-primary'}
+          onClick={() => setSubmitStatus("idle")}
+          className={darkMode ? "btn-primary-dark" : "btn-primary"}
         >
           Send Another Message
         </button>
@@ -231,36 +230,35 @@ export function ContactForm({
 
   // Resolve services for the dropdown
   const serviceOptions: Array<{ value: string; label: string }> = services.map((s) =>
-    typeof s === 'string'
-      ? { value: s.toLowerCase().replace(/\s+/g, '-'), label: s }
+    typeof s === "string"
+      ? { value: s.toLowerCase().replace(/\s+/g, "-"), label: s }
       : { value: s.title, label: s.title }
   );
 
   // Resolve service areas for the dropdown
   const areaOptions: Array<{ value: string; label: string }> = serviceAreas.map((area) =>
-    typeof area === 'string'
-      ? { value: area, label: area }
-      : { value: area, label: area }
+    typeof area === "string" ? { value: area, label: area } : { value: area, label: area }
   );
 
   // Render an extra field
   const renderExtraField = (field: ExtraFieldConfig) => {
-    if (field.type === 'select') {
+    if (field.type === "select") {
       return (
         <div key={field.name}>
           <label htmlFor={field.name} className={`block text-sm font-medium ${labelClass} mb-2`}>
-            {field.label}{field.required ? <span className={requiredMarkerClass}> *</span> : ''}
+            {field.label}
+            {field.required ? <span className={requiredMarkerClass}> *</span> : ""}
           </label>
           <select
             id={field.name}
             name={field.name}
-            value={formData[field.name] ?? ''}
+            value={formData[field.name] ?? ""}
             onChange={handleChange}
             className={selectClasses}
           >
             {!field.defaultValue && <option value="">Select...</option>}
             {(field.options ?? []).map((opt) => (
-              <option key={opt} value={opt.toLowerCase().replace(/\s+/g, '-')}>
+              <option key={opt} value={opt.toLowerCase().replace(/\s+/g, "-")}>
                 {opt}
               </option>
             ))}
@@ -269,16 +267,17 @@ export function ContactForm({
       );
     }
 
-    if (field.type === 'textarea') {
+    if (field.type === "textarea") {
       return (
         <div key={field.name}>
           <label htmlFor={field.name} className={`block text-sm font-medium ${labelClass} mb-2`}>
-            {field.label}{field.required ? <span className={requiredMarkerClass}> *</span> : ''}
+            {field.label}
+            {field.required ? <span className={requiredMarkerClass}> *</span> : ""}
           </label>
           <textarea
             id={field.name}
             name={field.name}
-            value={formData[field.name] ?? ''}
+            value={formData[field.name] ?? ""}
             onChange={handleChange}
             rows={4}
             className={`${inputClasses(field.name)} resize-none`}
@@ -292,13 +291,14 @@ export function ContactForm({
     return (
       <div key={field.name}>
         <label htmlFor={field.name} className={`block text-sm font-medium ${labelClass} mb-2`}>
-          {field.label}{field.required ? <span className={requiredMarkerClass}> *</span> : ''}
+          {field.label}
+          {field.required ? <span className={requiredMarkerClass}> *</span> : ""}
         </label>
         <input
           type="text"
           id={field.name}
           name={field.name}
-          value={formData[field.name] ?? ''}
+          value={formData[field.name] ?? ""}
           onChange={handleChange}
           className={inputClasses(field.name)}
           placeholder={field.placeholder}
@@ -309,10 +309,10 @@ export function ContactForm({
 
   // Error banner
   /* Intentional: form submission state feedback uses semantic Tailwind colors */
-  const errorBanner = submitStatus === 'error' && (
+  const errorBanner = submitStatus === "error" && (
     <div
       role="alert"
-      className={`${darkMode ? 'bg-red-900/20 border-red-700/50' : 'bg-red-50 border-red-200'} border rounded-lg p-4 flex items-start gap-3`}
+      className={`${darkMode ? "bg-red-900/20 border-red-700/50" : "bg-red-50 border-red-200"} border rounded-lg p-4 flex items-start gap-3`}
     >
       <AlertCircle className="w-5 h-5 text-error flex-shrink-0 mt-0.5" />
       <div>
@@ -326,14 +326,16 @@ export function ContactForm({
   // ---- Detailed variant (colossus-style card wrapper) ----
   if (isDetailed) {
     return (
-      <div className={`bg-surface-card rounded-2xl shadow-lg p-8 ${className ?? ''}`}>
+      <div className={`bg-surface-card rounded-2xl shadow-lg p-8 ${className ?? ""}`}>
         <h2 className="text-2xl font-semibold mb-6">Request a Free Quote</h2>
 
         {/* Intentional: form submission state feedback uses semantic Tailwind colors */}
-        {submitStatus === 'error' && (
+        {submitStatus === "error" && (
           <div role="alert" className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
             <h3 className="text-red-800 font-semibold mb-1">Something went wrong</h3>
-            <p className="text-red-700">Please try again or call us directly on the number below.</p>
+            <p className="text-red-700">
+              Please try again or call us directly on the number below.
+            </p>
           </div>
         )}
         {/* end state feedback colors */}
@@ -342,7 +344,10 @@ export function ContactForm({
           {/* Name + Email */}
           <div className="grid md:grid-cols-2 gap-6">
             <div>
-              <label htmlFor="name" className="block text-sm font-medium text-surface-secondary mb-2">
+              <label
+                htmlFor="name"
+                className="block text-sm font-medium text-surface-secondary mb-2"
+              >
                 Full Name *
               </label>
               <input
@@ -353,19 +358,24 @@ export function ContactForm({
                 onChange={handleChange}
                 aria-required="true"
                 aria-invalid={!!errors.name}
-                aria-describedby={errors.name ? 'name-error' : undefined}
+                aria-describedby={errors.name ? "name-error" : undefined}
                 className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-brand-primary ${
-                  errors.name ? 'border-error' : 'border-surface-subtle'
+                  errors.name ? "border-error" : "border-surface-subtle"
                 }`}
                 placeholder="Your full name"
               />
               {errors.name && (
-                <p id="name-error" role="alert" className="mt-1 text-sm text-error">{errors.name}</p>
+                <p id="name-error" role="alert" className="mt-1 text-sm text-error">
+                  {errors.name}
+                </p>
               )}
             </div>
 
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-surface-secondary mb-2">
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-surface-secondary mb-2"
+              >
                 Email Address *
               </label>
               <input
@@ -376,14 +386,16 @@ export function ContactForm({
                 onChange={handleChange}
                 aria-required="true"
                 aria-invalid={!!errors.email}
-                aria-describedby={errors.email ? 'email-error' : undefined}
+                aria-describedby={errors.email ? "email-error" : undefined}
                 className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-brand-primary ${
-                  errors.email ? 'border-error' : 'border-surface-subtle'
+                  errors.email ? "border-error" : "border-surface-subtle"
                 }`}
                 placeholder="your.email@example.com"
               />
               {errors.email && (
-                <p id="email-error" role="alert" className="mt-1 text-sm text-error">{errors.email}</p>
+                <p id="email-error" role="alert" className="mt-1 text-sm text-error">
+                  {errors.email}
+                </p>
               )}
             </div>
           </div>
@@ -391,7 +403,10 @@ export function ContactForm({
           {/* Phone + first extra field (or just phone) */}
           <div className="grid md:grid-cols-2 gap-6">
             <div>
-              <label htmlFor="phone" className="block text-sm font-medium text-surface-secondary mb-2">
+              <label
+                htmlFor="phone"
+                className="block text-sm font-medium text-surface-secondary mb-2"
+              >
                 Phone Number
               </label>
               <input
@@ -412,7 +427,10 @@ export function ContactForm({
             <div className="grid md:grid-cols-2 gap-6">
               {serviceOptions.length > 0 && (
                 <div>
-                  <label htmlFor="service" className="block text-sm font-medium text-surface-secondary mb-2">
+                  <label
+                    htmlFor="service"
+                    className="block text-sm font-medium text-surface-secondary mb-2"
+                  >
                     Service Required
                   </label>
                   <select
@@ -433,7 +451,10 @@ export function ContactForm({
               )}
               {areaOptions.length > 0 && (
                 <div>
-                  <label htmlFor="location" className="block text-sm font-medium text-surface-secondary mb-2">
+                  <label
+                    htmlFor="location"
+                    className="block text-sm font-medium text-surface-secondary mb-2"
+                  >
                     Location/County
                   </label>
                   <select
@@ -465,7 +486,10 @@ export function ContactForm({
 
           {/* Subject */}
           <div>
-            <label htmlFor="subject" className="block text-sm font-medium text-surface-secondary mb-2">
+            <label
+              htmlFor="subject"
+              className="block text-sm font-medium text-surface-secondary mb-2"
+            >
               Subject
             </label>
             <input
@@ -481,7 +505,10 @@ export function ContactForm({
 
           {/* Message */}
           <div>
-            <label htmlFor="message" className="block text-sm font-medium text-surface-secondary mb-2">
+            <label
+              htmlFor="message"
+              className="block text-sm font-medium text-surface-secondary mb-2"
+            >
               Project Details *
             </label>
             <textarea
@@ -492,14 +519,16 @@ export function ContactForm({
               onChange={handleChange}
               aria-required="true"
               aria-invalid={!!errors.message}
-              aria-describedby={errors.message ? 'message-error' : undefined}
+              aria-describedby={errors.message ? "message-error" : undefined}
               className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-brand-primary ${
-                errors.message ? 'border-error' : 'border-surface-subtle'
+                errors.message ? "border-error" : "border-surface-subtle"
               }`}
               placeholder="Tell us about your project..."
             />
             {errors.message && (
-              <p id="message-error" role="alert" className="mt-1 text-sm text-error">{errors.message}</p>
+              <p id="message-error" role="alert" className="mt-1 text-sm text-error">
+                {errors.message}
+              </p>
             )}
           </div>
 
@@ -509,7 +538,7 @@ export function ContactForm({
             disabled={isSubmitting}
             className="w-full bg-brand-primary text-white font-semibold py-4 px-6 rounded-lg hover:bg-brand-primary-hover focus:ring-2 focus:ring-brand-primary focus:ring-offset-2 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {isSubmitting ? 'Sending...' : 'Send Enquiry'}
+            {isSubmitting ? "Sending..." : "Send Enquiry"}
           </button>
 
           <p className="text-sm text-surface-foreground text-center">
@@ -522,7 +551,7 @@ export function ContactForm({
 
   // ---- Standard variant (base-template / dj-fox style) ----
   return (
-    <form onSubmit={handleSubmit} className={`space-y-6 ${className ?? ''}`}>
+    <form onSubmit={handleSubmit} className={`space-y-6 ${className ?? ""}`}>
       {errorBanner}
 
       <div className="grid md:grid-cols-2 gap-6">
@@ -539,11 +568,15 @@ export function ContactForm({
             onChange={handleChange}
             aria-required="true"
             aria-invalid={!!errors.name}
-            aria-describedby={errors.name ? 'name-error' : undefined}
-            className={inputClasses('name')}
+            aria-describedby={errors.name ? "name-error" : undefined}
+            className={inputClasses("name")}
             placeholder="Your name"
           />
-          {errors.name && <p id="name-error" role="alert" className="mt-1 text-sm text-error">{errors.name}</p>}
+          {errors.name && (
+            <p id="name-error" role="alert" className="mt-1 text-sm text-error">
+              {errors.name}
+            </p>
+          )}
         </div>
 
         {/* Email */}
@@ -559,11 +592,15 @@ export function ContactForm({
             onChange={handleChange}
             aria-required="true"
             aria-invalid={!!errors.email}
-            aria-describedby={errors.email ? 'email-error' : undefined}
-            className={inputClasses('email')}
+            aria-describedby={errors.email ? "email-error" : undefined}
+            className={inputClasses("email")}
             placeholder="your@email.com"
           />
-          {errors.email && <p id="email-error" role="alert" className="mt-1 text-sm text-error">{errors.email}</p>}
+          {errors.email && (
+            <p id="email-error" role="alert" className="mt-1 text-sm text-error">
+              {errors.email}
+            </p>
+          )}
         </div>
 
         {/* Phone */}
@@ -577,7 +614,7 @@ export function ContactForm({
             name="phone"
             value={formData.phone}
             onChange={handleChange}
-            className={inputClasses('phone')}
+            className={inputClasses("phone")}
             placeholder="Your phone number"
           />
         </div>
@@ -593,7 +630,7 @@ export function ContactForm({
             name="subject"
             value={formData.subject}
             onChange={handleChange}
-            className={inputClasses('subject')}
+            className={inputClasses("subject")}
             placeholder="What is this regarding?"
           />
         </div>
@@ -663,11 +700,15 @@ export function ContactForm({
           rows={6}
           aria-required="true"
           aria-invalid={!!errors.message}
-          aria-describedby={errors.message ? 'message-error' : undefined}
-          className={`${inputClasses('message')} resize-none`}
+          aria-describedby={errors.message ? "message-error" : undefined}
+          className={`${inputClasses("message")} resize-none`}
           placeholder="Tell us about your project or enquiry..."
         />
-        {errors.message && <p id="message-error" role="alert" className="mt-1 text-sm text-error">{errors.message}</p>}
+        {errors.message && (
+          <p id="message-error" role="alert" className="mt-1 text-sm text-error">
+            {errors.message}
+          </p>
+        )}
       </div>
 
       {/* Submit Button */}
@@ -675,10 +716,10 @@ export function ContactForm({
         type="submit"
         disabled={isSubmitting}
         className={`w-full py-4 text-lg font-semibold rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-colors ${
-          darkMode ? 'bg-brand-primary text-white hover:bg-brand-primary-hover' : 'btn-primary'
+          darkMode ? "bg-brand-primary text-white hover:bg-brand-primary-hover" : "btn-primary"
         }`}
       >
-        {isSubmitting ? 'Sending...' : 'Send Message'}
+        {isSubmitting ? "Sending..." : "Send Message"}
       </button>
     </form>
   );

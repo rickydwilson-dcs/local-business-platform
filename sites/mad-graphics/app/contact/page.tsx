@@ -27,16 +27,16 @@ export default function ContactPage() {
   return (
     <>
       {/* Breadcrumbs */}
-      <div className="bg-surface-subtle border-b border-surface-border">
-        <div className="container-standard py-4">
+      <div className="bg-surface-background border-b border-surface-muted">
+        <div className="max-w-7xl mx-auto px-8 py-4">
           <Breadcrumbs items={breadcrumbItems} />
         </div>
       </div>
 
       <div className="min-h-screen bg-surface-background">
         {/* Hero Section */}
-        <section className="section-standard bg-gradient-to-b from-brand-primary/5 to-surface-background">
-          <div className="container-standard text-center">
+        <section className="section-standard bg-surface-background">
+          <div className="max-w-7xl mx-auto px-8 text-center">
             <h1 className="heading-hero mb-4">Contact Us</h1>
             <p className="text-xl text-surface-muted-foreground max-w-2xl mx-auto">
               Get in touch with our team for a free quote or to discuss your requirements.
@@ -46,20 +46,17 @@ export default function ContactPage() {
 
         {/* Main Content */}
         <section className="section-standard">
-          <div className="container-standard">
+          <div className="max-w-7xl mx-auto px-8">
             <div className="grid lg:grid-cols-3 gap-12">
               {/* Contact Form */}
               <div className="lg:col-span-2">
-                <ContactForm
-                  services={siteConfig.services}
-                  serviceAreas={siteConfig.serviceAreas}
-                />
+                <ContactForm darkMode={true} />
               </div>
 
               {/* Sidebar */}
               <div className="space-y-6">
                 {/* Contact Information */}
-                <div className="bg-surface-subtle rounded-lg p-6">
+                <div className="bg-surface-muted rounded-lg p-6">
                   <h2 className="text-xl font-bold text-surface-foreground mb-6">
                     Contact Information
                   </h2>
@@ -118,7 +115,7 @@ export default function ContactPage() {
                 </div>
 
                 {/* Quick Links */}
-                <div className="bg-surface-subtle rounded-lg p-6">
+                <div className="bg-surface-muted rounded-lg p-6">
                   <h2 className="text-xl font-bold text-surface-foreground mb-4">Quick Links</h2>
                   <ul className="space-y-2">
                     {siteConfig.services.slice(0, 5).map((service) => (
