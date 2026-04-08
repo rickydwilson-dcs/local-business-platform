@@ -21,9 +21,14 @@ export const themeConfig: DeepPartialThemeConfig = {
       background: '#131313',
       foreground: '#e5e2e1',
       muted: '#1c1b1b',
-      mutedForeground: '#6b7280',
+      mutedForeground: '#9a9490',
       card: '#1c1b1b',
-      cardBorder: '#e5e7eb',
+      cardBorder: '#2e2b2b',
+      subtle: '#1c1b1b',
+      subtleBorder: '#2e2b2b',
+      secondaryForeground: '#b5b0ae',
+      inverse: '#131313',
+      inverseMutedForeground: '#9a9490',
     },
     semantic: {
       success: '#10b981',
@@ -35,8 +40,8 @@ export const themeConfig: DeepPartialThemeConfig = {
 
   typography: {
     fontFamily: {
-      sans: ["Work Sans","system-ui","-apple-system","sans-serif"],
-      heading: ["Newsreader","system-ui","-apple-system","sans-serif"],
+      sans: ['Work Sans', 'system-ui', '-apple-system', 'sans-serif'],
+      heading: ['Newsreader', 'system-ui', '-apple-system', 'sans-serif'],
     },
     // Typography scale uses defaults from theme-system
   },

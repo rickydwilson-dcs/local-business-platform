@@ -42,18 +42,9 @@ export default async function ServicesPage() {
       <div className="px-6 md:px-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-[#544435]/10 border-y border-[#544435]/10">
           {services.map((service, i) => {
-            const FALLBACK_IMAGES = [
-              '/stitch-images/img-024.jpg',
-              '/stitch-images/img-009.jpg',
-              '/stitch-images/img-005.jpg',
-              '/stitch-images/img-014.jpg',
-              '/stitch-images/img-018.jpg',
-              '/stitch-images/img-007.jpg',
-            ];
             const hero = service.hero as { image?: string } | undefined;
-            const imageSrc = hero?.image
-              ? getImageUrl(hero.image)
-              : FALLBACK_IMAGES[i % FALLBACK_IMAGES.length];
+            const heroImage = hero?.image || (service.heroImage as string | undefined);
+            const imageSrc = heroImage ? getImageUrl(heroImage) : '/stitch-images/img-024.jpg';
             const tags = service.tags as string[] | undefined;
             const category = tags?.[0] ?? 'Service';
 
@@ -65,6 +56,7 @@ export default async function ServicesPage() {
                     fill
                     src={imageSrc}
                     alt={service.title}
+                    unoptimized={process.env.NODE_ENV === 'development'}
                     className="object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
                   />
                   <div className="absolute inset-0 bg-[#f7941d]/10 mix-blend-multiply group-hover:bg-transparent transition-all duration-500" />

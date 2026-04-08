@@ -87,18 +87,9 @@ export default async function HomePage() {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {featuredServices.map((service, i) => {
-            const FALLBACK_IMAGES = [
-              '/stitch-images/img-019.jpg',
-              '/stitch-images/img-010.jpg',
-              '/stitch-images/img-003.jpg',
-              '/stitch-images/img-025.jpg',
-              '/stitch-images/img-008.jpg',
-              '/stitch-images/img-015.jpg',
-            ];
             const hero = service.hero as { image?: string } | undefined;
-            const imageSrc = hero?.image
-              ? getImageUrl(hero.image)
-              : FALLBACK_IMAGES[i % FALLBACK_IMAGES.length];
+            const heroImage = hero?.image || (service.heroImage as string | undefined);
+            const imageSrc = heroImage ? getImageUrl(heroImage) : '/stitch-images/img-019.jpg';
             const tags = service.tags as string[] | undefined;
             const category = tags?.[0] ?? 'Service';
 
@@ -113,6 +104,7 @@ export default async function HomePage() {
                     className="object-cover transition-transform duration-500 group-hover:scale-110"
                     src={imageSrc}
                     alt={service.title}
+                    unoptimized={process.env.NODE_ENV === 'development'}
                   />
                   <div className="absolute inset-0 bg-[#0e0e0e]/20" />
                 </div>

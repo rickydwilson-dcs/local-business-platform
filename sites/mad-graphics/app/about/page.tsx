@@ -9,13 +9,13 @@ export default function AboutPage() {
   return (
     <main>
       {/* Page Hero */}
-      <section className="relative min-h-[870px] flex items-end pb-24 overflow-hidden">
+      <section className="relative min-h-[55vh] flex items-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image
             fill
             alt="Mad Graphics Print Workshop"
-            className="object-cover grayscale opacity-40"
-            src="/stitch-images/img-002.jpg"
+            className="object-cover object-center grayscale opacity-40"
+            src="/stitch-images/img-001.jpg"
           />
           <div
             className="absolute inset-0"
@@ -24,7 +24,7 @@ export default function AboutPage() {
             }}
           />
         </div>
-        <div className="relative z-10 max-w-screen-2xl mx-auto px-8 w-full">
+        <div className="relative z-10 max-w-screen-2xl mx-auto px-8 w-full py-24">
           <span className="inline-block text-[#f7941d] font-label font-bold uppercase tracking-[0.3em] mb-4">
             Established 2012
           </span>

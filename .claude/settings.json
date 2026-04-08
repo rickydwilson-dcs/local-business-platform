@@ -11,7 +11,12 @@
       "Bash(cp -r /Users/rickywilson/Sites/local-business-platform/sites/cygnus-test/app-base/* /Users/rickywilson/Sites/local-business-platform/sites/cygnus-test/app/)",
       "mcp__stitch__get_project",
       "Read(//Users/rickywilson/Sites/local-business-platform/**)",
-      "Bash(git revert:*)"
+      "Bash(git revert:*)",
+      "Bash(./node_modules/.bin/next --version)",
+      "mcp__claude_ai_Vercel__get_runtime_logs",
+      "mcp__stitch__list_projects",
+      "mcp__stitch__list_screens",
+      "WebFetch(domain:contribution.usercontent.google.com)"
     ],
     "additionalDirectories": [
       "/Users/rickywilson/Sites/local-business-platform/output/ingestion/cygnus-stitch/images",
