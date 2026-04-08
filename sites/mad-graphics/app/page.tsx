@@ -6,6 +6,7 @@ import { cygnusRegistry } from '@platform/themes/cygnus';
 import { siteConfig } from '@/site.config';
 import { getContentItems } from '@/lib/content';
 import { getImageUrl } from '@/lib/image';
+import { CtaBand } from '@/components/ui/cta-band';
 
 export const metadata: Metadata = {
   title: 'Mad Graphics | Precision in Print & Signage',
@@ -80,7 +81,7 @@ export default async function HomePage() {
       {/* Services Grid */}
       <section id="services" className="py-32 px-8 max-w-7xl mx-auto">
         <div className="mb-20">
-          <span className="text-[#f7941d] font-body uppercase tracking-[0.3em] font-bold text-sm">
+          <span className="text-brand-primary font-body uppercase tracking-[0.3em] font-bold text-sm">
             Capabilities
           </span>
           <h2 className="text-5xl font-headline font-bold mt-4">Precision Services</h2>
@@ -106,19 +107,19 @@ export default async function HomePage() {
                     alt={service.title}
                     unoptimized={process.env.NODE_ENV === 'development'}
                   />
-                  <div className="absolute inset-0 bg-[#0e0e0e]/20" />
+                  <div className="absolute inset-0 bg-surface-background/20" />
                 </div>
                 <div className="p-8 flex-1 flex flex-col">
-                  <span className="text-[#f7941d] font-body uppercase tracking-widest text-[10px] font-bold mb-2">
+                  <span className="text-brand-primary font-body uppercase tracking-widest text-[10px] font-bold mb-2">
                     {category}
                   </span>
                   <h3 className="text-2xl font-headline font-bold mb-4">{service.title}</h3>
-                  <p className="text-sm text-[#dac2af] font-body mb-6 flex-1">
+                  <p className="text-sm text-surface-muted-foreground font-body mb-6 flex-1">
                     {service.description}
                   </p>
                   <Link
                     href={`/services/${service.slug}`}
-                    className="inline-flex items-center gap-2 text-[#f7941d] font-bold text-xs uppercase tracking-widest group-hover:gap-4 transition-all"
+                    className="inline-flex items-center gap-2 text-brand-primary font-bold text-xs uppercase tracking-widest group-hover:gap-4 transition-all"
                   >
                     Learn more{' '}
                     <span className="material-symbols-outlined text-sm">arrow_forward</span>
@@ -131,10 +132,10 @@ export default async function HomePage() {
       </section>
 
       {/* Testimonials */}
-      <section className="bg-[#0e0e0e] py-32">
+      <section className="bg-surface-muted py-32">
         <div className="max-w-7xl mx-auto px-8">
-          <div className="text-center mb-20">
-            <span className="text-[#5BA829] font-body uppercase tracking-[0.3em] font-bold text-sm">
+          <div className="mb-20">
+            <span className="text-brand-secondary font-body uppercase tracking-[0.3em] font-bold text-sm">
               Word on the shop floor
             </span>
             <h2 className="text-5xl font-headline font-bold mt-4">Trusted by the best</h2>
@@ -150,9 +151,9 @@ export default async function HomePage() {
               return (
                 <div
                   key={t.slug}
-                  className="bg-surface-background p-12 rounded-lg border border-[#544435]/10"
+                  className="bg-surface-background p-12 rounded-lg border border-surface-card-border"
                 >
-                  <div className="flex text-[#f7941d] mb-6">
+                  <div className="flex text-brand-primary mb-6">
                     {Array.from({ length: rating }).map((_, i) => (
                       <span
                         key={i}
@@ -170,7 +171,7 @@ export default async function HomePage() {
                     <div className="font-bold text-lg uppercase tracking-wider font-body">
                       {customerName}
                     </div>
-                    <div className="text-[#dac2af] text-xs font-body uppercase tracking-widest">
+                    <div className="text-surface-muted-foreground text-xs font-body uppercase tracking-widest">
                       {customerCompany}
                     </div>
                   </div>
@@ -182,32 +183,14 @@ export default async function HomePage() {
       </section>
 
       {/* CTA Band */}
-      <section className="bg-[#f7941d] py-24">
-        <div className="max-w-7xl mx-auto px-8 flex flex-col md:flex-row items-center justify-between gap-12">
-          <div className="max-w-2xl text-center md:text-left">
-            <h2 className="md:text-6xl mb-4 text-5xl font-headline font-bold mt-4">
-              Ready to make your brand stand out?
-            </h2>
-            <p className="text-[#613500] text-lg font-body font-medium">
-              Let&apos;s discuss your project today and get a custom quote within 24 hours.
-            </p>
-          </div>
-          <div className="flex flex-col sm:flex-row gap-4">
-            <a
-              href="/contact"
-              className="bg-[#131313] text-[#F7941D] px-10 py-4 rounded-lg font-bold text-lg hover:scale-105 transition-transform uppercase tracking-widest"
-            >
-              Get a Quote
-            </a>
-            <a
-              href="/contact"
-              className="bg-[#613500]/20 text-[#2d1600] border border-[#2d1600]/30 px-10 py-4 rounded-lg font-bold text-lg hover:bg-[#613500]/30 transition-colors uppercase tracking-widest"
-            >
-              Contact Us
-            </a>
-          </div>
-        </div>
-      </section>
+      <CtaBand
+        headline="Ready to make your brand stand out?"
+        subtext="Let's discuss your project today and get a custom quote within 24 hours."
+        primaryLabel="Get a Quote"
+        primaryHref="/contact"
+        secondaryLabel="Contact Us"
+        secondaryHref="/contact"
+      />
     </main>
   );
 }
