@@ -13,14 +13,14 @@ import Link from 'next/link';
 import {
   Schema,
   Breadcrumbs,
-  ServiceHero,
   ServiceAbout,
   ServiceBenefits,
   FAQSection,
-  CTASection,
   type FAQItem,
   type AboutContent,
 } from '@platform/core-components';
+import { ServicePageHero } from '@/components/ui/service-page-hero';
+import { CtaBand } from '@/components/ui/cta-band';
 import { deriveLocationContext, getAreaServed } from '@platform/core-components/lib/location-utils';
 import { getServices, getService } from '@/lib/content';
 import { getLocationSlugs } from '@/lib/locations-config';
@@ -76,7 +76,8 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
 
   let title = fm.seoTitle || `${fm.title} | ${siteConfig.business.name}`;
   if (locationContext && locationContext.isLocationSpecific) {
-    title = fm.seoTitle || `${serviceName} ${locationContext.locationName} | ${siteConfig.business.name}`;
+    title =
+      fm.seoTitle || `${serviceName} ${locationContext.locationName} | ${siteConfig.business.name}`;
   }
 
   const description = fm.description || `Learn about our ${fm.title} services.`;
@@ -142,21 +143,26 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
   const isLocationSpecific = locationContext !== null && locationContext.isLocationSpecific;
 
   // Build location-aware breadcrumbs
-  const breadcrumbItems = isLocationSpecific && locationContext
-    ? [
-        { name: 'Locations', href: '/locations' },
-        { name: locationContext.locationName, href: `/locations/${locationContext.locationSlug}` },
-        { name: serviceName, href: `/services/${slug}`, current: true },
-      ]
-    : [
-        { name: 'Services', href: '/services' },
-        { name: serviceName, href: `/services/${slug}`, current: true },
-      ];
+  const breadcrumbItems =
+    isLocationSpecific && locationContext
+      ? [
+          { name: 'Locations', href: '/locations' },
+          {
+            name: locationContext.locationName,
+            href: `/locations/${locationContext.locationSlug}`,
+          },
+          { name: serviceName, href: `/services/${slug}`, current: true },
+        ]
+      : [
+          { name: 'Services', href: '/services' },
+          { name: serviceName, href: `/services/${slug}`, current: true },
+        ];
 
   // Build location-aware areaServed for Schema
-  const areaServed = isLocationSpecific && locationContext
-    ? getAreaServed(locationContext.location)
-    : siteConfig.serviceAreas;
+  const areaServed =
+    isLocationSpecific && locationContext
+      ? getAreaServed(locationContext.location)
+      : siteConfig.serviceAreas;
 
   return (
     <>
@@ -197,11 +203,11 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
 
       <div>
         {/* Hero Section */}
-        <ServiceHero
+        <ServicePageHero
           title={fm.title}
           description={fm.description || ''}
           badge={fm.badge}
-          heroImage={heroImage}
+          heroImage={heroImage ? getImageUrl(heroImage) : undefined}
           phone={siteConfig.business.phone}
         />
 
@@ -232,13 +238,13 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
         )}
 
         {/* CTA Section */}
-        <CTASection
-          title={`Ready for Professional ${serviceName}?`}
-          description={`Contact ${siteConfig.business.name} today for a free quote. Our expert team is ready to help with your ${serviceName.toLowerCase()} needs.`}
-          primaryButtonText="Get Free Quote"
-          primaryButtonUrl="/contact"
-          secondaryButtonText={`Call ${siteConfig.business.phone}`}
-          secondaryButtonUrl={`tel:${siteConfig.business.phone.replace(/\s/g, '')}`}
+        <CtaBand
+          headline={`Ready for professional ${serviceName}?`}
+          subtext={`Contact ${siteConfig.business.name} for a free quote. Our team is ready to help.`}
+          primaryLabel="Get Free Quote"
+          primaryHref="/contact"
+          secondaryLabel={siteConfig.business.phone}
+          secondaryHref={`tel:${siteConfig.business.phone.replace(/\s/g, '')}`}
         />
       </div>
 
@@ -253,7 +259,10 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
             ? [
                 { name: 'Home', url: '/' },
                 { name: 'Locations', url: '/locations' },
-                { name: locationContext.locationName, url: `/locations/${locationContext.locationSlug}` },
+                {
+                  name: locationContext.locationName,
+                  url: `/locations/${locationContext.locationSlug}`,
+                },
                 { name: serviceName, url: `/services/${slug}` },
               ]
             : [
