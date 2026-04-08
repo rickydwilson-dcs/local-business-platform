@@ -5,7 +5,7 @@
   "description": "White-label website platform for local service businesses",
   "scripts": {
     "dev": "turbo run dev",
-    "build": "turbo run build --concurrency=2",
+    "build": "turbo run build --concurrency=4",
     "lint": "turbo run lint && tsx scripts/check-token-usage.ts",
     "type-check": "turbo run type-check",
     "test": "turbo run test",
