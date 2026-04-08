@@ -77,6 +77,27 @@ The theme system exists so sites can be re-branded without touching component co
 - Never over-engineer fixes for known upstream bugs — note the issue and move on
 - Prefer minimal, targeted changes over sweeping refactors
 
+### Vercel Monorepo Configuration
+
+- Root `vercel.json` produces a trivial static build. Each site deploys as its own Vercel project with `rootDirectory` set to `sites/<name>`.
+- Site `vercel.json` must NOT set `outputDirectory` — Vercel resolves `.next` relative to `rootDirectory` automatically. Setting it causes double-pathing.
+- Do NOT use `turbo-ignore` or `ignoreCommand` — Vercel native monorepo detection handles build skipping.
+
+### CSS Syntax
+
+- Never use Tailwind's `theme()` function in plain CSS files — it causes CSS parser panics. Use CSS custom properties: `var(--color-brand-primary)` not `theme('colors.brand.primary')`.
+
+### Tailwind Content Globs
+
+- Never use `packages/themes/**/*.{ext}` — the `**` descends into `node_modules/` causing 18+ minute builds. Use scoped globs: `packages/themes/*/*.{ext}` and `packages/themes/*/components/**/*.{ext}`.
+
+### Build & CI
+
+- Production builds use `next build --webpack`. Turbopack has PostCSS bugs in CI. Turbopack is still used for `next dev`.
+- Every env var affecting build output must be in `turbo.json` `env` array — missing vars cause stale cache hits.
+- E2E tests in CI use `next start` (pre-built), not `next dev`. New Relic is disabled in CI.
+- Pre-push hook runs only `type-check` (~3s). Full build runs in CI.
+
 ---
 
 ## Essential Commands
@@ -132,21 +153,28 @@ npm run validate:content  # Shows which MDX files fail and why
 # Common: description length (50-200 chars), FAQ count (3-15), missing required fields
 ```
 
+### Vercel Deployment Failures
+
+- **"No Output Directory found"** — Check that site `vercel.json` does NOT set `outputDirectory`. Vercel resolves paths relative to `rootDirectory`, so setting it causes double-pathing.
+- **CSS parser panic or PostCSS timeout** — Verify the site uses `next build --webpack` (not Turbopack) in its `package.json` build script.
+- **Stale builds after adding env var** — Add the variable name to `turbo.json` `tasks.build.env` array. Without this, Turborepo serves a cached build with the old value.
+- **18+ minute Tailwind builds** — Check `tailwind.config.ts` content globs for `**` patterns that descend into `node_modules/`. Use scoped globs instead.
+
 ---
 
 ## Documentation
 
 ### Architecture (How It Works)
 
-| Document                                                                      | Teaches                                    |
-| ----------------------------------------------------------------------------- | ------------------------------------------ |
-| [How Dynamic Routing Works](docs/architecture/how-dynamic-routing-works.md)   | MDX file → static page via `[slug]` routes |
-| [How the Theme System Works](docs/architecture/how-theme-system-works.md)     | Config → CSS variables → Tailwind classes  |
-| [How the Build Pipeline Works](docs/architecture/how-build-pipeline-works.md) | Turborepo, packages, workspace linking     |
-| [How Site Creation Works](docs/architecture/how-site-creation-works.md)       | Intake → project file → new site → deploy  |
-| [How the Ingestion Pipeline Works](docs/architecture/how-ingestion-pipeline-works.md) | Screenshot → analysis → components → theme package |
+| Document                                                                                      | Teaches                                               |
+| --------------------------------------------------------------------------------------------- | ----------------------------------------------------- |
+| [How Dynamic Routing Works](docs/architecture/how-dynamic-routing-works.md)                   | MDX file → static page via `[slug]` routes            |
+| [How the Theme System Works](docs/architecture/how-theme-system-works.md)                     | Config → CSS variables → Tailwind classes             |
+| [How the Build Pipeline Works](docs/architecture/how-build-pipeline-works.md)                 | Turborepo, packages, workspace linking                |
+| [How Site Creation Works](docs/architecture/how-site-creation-works.md)                       | Intake → project file → new site → deploy             |
+| [How the Ingestion Pipeline Works](docs/architecture/how-ingestion-pipeline-works.md)         | Screenshot → analysis → components → theme package    |
 | [How the Stitch Design Pipeline Works](docs/architecture/how-stitch-design-pipeline-works.md) | Stitch AI design → tokens → theme package → test site |
-| [Architecture Overview](docs/architecture/architecture.md)                    | High-level system overview                 |
+| [Architecture Overview](docs/architecture/architecture.md)                                    | High-level system overview                            |
 
 ### Standards (How to Do It Right)
 
@@ -166,15 +194,15 @@ npm run validate:content  # Shows which MDX files fail and why
 
 ### Guides (How to Do Common Tasks)
 
-| Guide                                               | Purpose                  |
-| --------------------------------------------------- | ------------------------ |
-| [Adding a New Site](docs/guides/adding-new-site.md) | Create a new client site |
+| Guide                                                     | Purpose                                      |
+| --------------------------------------------------------- | -------------------------------------------- |
+| [Adding a New Site](docs/guides/adding-new-site.md)       | Create a new client site                     |
 | [Creating a New Theme](docs/guides/creating-new-theme.md) | Create a theme via ingest or Stitch pipeline |
-| [Theming](docs/guides/theming.md)                   | Configure site theme tokens and overlays |
-| [Adding a Service](docs/guides/adding-service.md)   | Add service MDX content  |
-| [Adding a Location](docs/guides/adding-location.md) | Add location MDX content |
-| [Git Workflow](docs/guides/git-workflow.md)         | Branch workflow details  |
-| [Deploying a Site](docs/guides/deploying-site.md)   | Deployment procedures    |
+| [Theming](docs/guides/theming.md)                         | Configure site theme tokens and overlays     |
+| [Adding a Service](docs/guides/adding-service.md)         | Add service MDX content                      |
+| [Adding a Location](docs/guides/adding-location.md)       | Add location MDX content                     |
+| [Git Workflow](docs/guides/git-workflow.md)               | Branch workflow details                      |
+| [Deploying a Site](docs/guides/deploying-site.md)         | Deployment procedures                        |
 
 ---
 

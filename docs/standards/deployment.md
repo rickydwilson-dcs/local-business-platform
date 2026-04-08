@@ -1,7 +1,7 @@
 # Deployment Standards
 
-**Version:** 1.0.0
-**Last Updated:** 2025-12-05
+**Version:** 1.1.0
+**Last Updated:** 2026-04-08
 **Scope:** All sites in local-business-platform
 
 ---
@@ -213,7 +213,40 @@ gh run watch  # Wait for deployment
 
 ## Vercel Configuration
 
-Each site has its own Vercel project:
+### Monorepo Architecture
+
+The root monorepo has a trivial `vercel.json` that produces a static `public/index.html` (so the Vercel dashboard shows a clean success state). Each site is a separate Vercel project with `rootDirectory` set to `sites/<name>` in the Vercel project settings.
+
+### Site vercel.json Pattern
+
+Every site's `vercel.json` must follow this exact pattern:
+
+```json
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "cd ../.. && pnpm turbo run build --filter=<site-name>",
+  "installCommand": "cd ../.. && pnpm install --frozen-lockfile",
+  "framework": "nextjs"
+}
+```
+
+Rules:
+
+- Do NOT set `outputDirectory` — Vercel resolves `.next` relative to `rootDirectory` automatically. Setting it causes double-pathing (e.g., `sites/foo/sites/foo/.next`).
+- Do NOT use `ignoreCommand` or `turbo-ignore` — Vercel's native monorepo detection handles build skipping. The `turbo-ignore` package is deprecated.
+- The `buildCommand` uses `cd ../..` to run from monorepo root, then filters to the specific site.
+
+### Environment Variable Propagation
+
+All env vars that affect build output must appear in `turbo.json` `tasks.build.env` array. Otherwise Turborepo may serve a cached build that used different values.
+
+When adding a new feature flag or API key:
+
+1. Add the env var to Vercel project settings
+2. Add the env var name to `turbo.json` → `tasks.build.env`
+3. Verify with `pnpm turbo run build --dry` that the build hash changes
+
+### Linking a Site to Vercel
 
 ```bash
 # Link site to Vercel
@@ -227,15 +260,41 @@ vercel
 vercel --prod
 ```
 
+## Build Configuration
+
+### Webpack vs Turbopack
+
+All sites use `next build --webpack` for production builds. Turbopack has known PostCSS processing bugs that cause panics during CI builds (as of Next.js 16, April 2026). Turbopack remains the default for `next dev` (local development).
+
+If you see a CSS parser panic or PostCSS timeout in CI, verify the site's `package.json` build script includes `--webpack`.
+
+### Tailwind Content Scanning
+
+Tailwind scans files matching the `content` array in `tailwind.config.ts` to find used classes. Glob patterns must be scoped to avoid scanning `node_modules/`:
+
+```
+Correct:
+  '../../packages/themes/*/*.{js,ts,jsx,tsx}'
+  '../../packages/themes/*/components/**/*.{js,ts,jsx,tsx}'
+
+Wrong (scans node_modules, 18+ min builds):
+  '../../packages/themes/**/*.{js,ts,jsx,tsx}'
+```
+
 ## What NOT to Do
 
-| Anti-Pattern               | Why It's Wrong       | Correct Approach           |
-| -------------------------- | -------------------- | -------------------------- |
-| Deploy directly to main    | Skips quality gates  | develop → staging → main   |
-| Deploy all sites at once   | High risk            | Phased rollout             |
-| Skip pre-deployment checks | May break production | Always run checks          |
-| Ignore monitoring alerts   | Miss problems        | Monitor 30 min post-deploy |
-| Force push to main         | Bypass protections   | Never force push           |
+| Anti-Pattern                            | Why It's Wrong                  | Correct Approach                           |
+| --------------------------------------- | ------------------------------- | ------------------------------------------ |
+| Deploy directly to main                 | Skips quality gates             | develop → staging → main                   |
+| Deploy all sites at once                | High risk                       | Phased rollout                             |
+| Skip pre-deployment checks              | May break production            | Always run checks                          |
+| Ignore monitoring alerts                | Miss problems                   | Monitor 30 min post-deploy                 |
+| Force push to main                      | Bypass protections              | Never force push                           |
+| Set outputDirectory in site vercel.json | Double-paths with rootDirectory | Omit it; Vercel resolves automatically     |
+| Use turbo-ignore / ignoreCommand        | Deprecated package              | Use Vercel native monorepo detection       |
+| Use `theme()` in CSS files              | CSS parser panic                | Use `var(--color-*)` custom properties     |
+| Use `**` globs for packages/themes      | Scans node_modules (18+ min)    | Use scoped globs: `themes/*/*.{ext}`       |
+| Omit env vars from turbo.json           | Stale cached builds             | Add every build-affecting var to env array |
 
 ## Deployment Checklist
 

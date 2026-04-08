@@ -287,6 +287,54 @@ npm run test:e2e:smoke
 # CI may be slower than local machine
 ```
 
+### Vercel build fails: output directory not found
+
+The error looks like: `Error: No Output Directory named "sites/<name>/.next" found`
+
+**Cause:** `vercel.json` has `outputDirectory` set, which doubles with the `rootDirectory` set in Vercel project settings.
+
+**Fix:** Remove `outputDirectory` from `vercel.json`. Vercel resolves `.next` relative to `rootDirectory` automatically.
+
+### Build panics with CSS/PostCSS error
+
+Turbopack has known issues with PostCSS processing in CI. Verify the site uses webpack for builds:
+
+```json
+// package.json
+"build": "next build --webpack"
+```
+
+Turbopack is still used for `next dev` (local development).
+
+### E2E tests timeout waiting for server
+
+In CI, E2E tests should use `next start` (pre-built) instead of `next dev`. The dev server cold-start takes 3+ minutes on CI runners. Also ensure New Relic is disabled in CI by setting `NEW_RELIC_ENABLED=false` in the workflow — New Relic halts server startup without a license key.
+
+### Build takes 18+ minutes
+
+Check `tailwind.config.ts` content globs. If any glob uses `**` to match `packages/themes/`, it will descend into `node_modules/`. Use scoped patterns:
+
+```
+'../../packages/themes/*/*.{js,ts,jsx,tsx}'
+'../../packages/themes/*/components/**/*.{js,ts,jsx,tsx}'
+```
+
+### Stale builds after adding environment variable
+
+Add the variable name to `turbo.json` `tasks.build.env` array. Without this, Turborepo considers the build cache valid even when the env var changes.
+
+### CSS parser error: unexpected token theme()
+
+The `theme()` function is Tailwind-specific and cannot be used in regular CSS. Replace with CSS custom properties:
+
+```css
+/* Wrong */
+color: theme("colors.brand.primary");
+
+/* Correct */
+color: var(--color-brand-primary);
+```
+
 ## Related
 
 - [Git Workflow](./git-workflow.md) - Branch workflow details
@@ -296,4 +344,4 @@ npm run test:e2e:smoke
 
 ---
 
-**Last Updated:** 2025-12-05
+**Last Updated:** 2026-04-08

@@ -192,6 +192,12 @@ Cache busts when:
 
 In `"dependsOn": ["^build"]`, the `^` means "my dependencies' build tasks, not my own." So when `sites/base-template` builds, Turborepo first runs `build` on `@platform/theme-system` and `@platform/intake-system` (its workspace dependencies), then runs `next build` on the site itself.
 
+### Environment Variable Requirements
+
+Every environment variable that affects build output must be listed in the `env` array. If a variable is used at build time but not listed, Turborepo may serve a cached build from when the variable had a different value (or was unset). This has caused production bugs with feature flags like `FEATURE_CONSENT_BANNER` being invisible despite being set in Vercel.
+
+When adding a new env var: add it to `turbo.json` `tasks.build.env`, then verify with `pnpm turbo run build --dry` that build hashes change.
+
 ## What `next build` Does Per Site
 
 Inside each site's build:
@@ -205,6 +211,19 @@ Inside each site's build:
 4. **Asset optimization** — images, fonts, JS bundles
 5. **Output** — writes everything to `.next/`
 
+### Webpack vs Turbopack
+
+Production builds use `next build --webpack`. Turbopack (the default bundler in Next.js 16) has known PostCSS processing bugs that cause panics in CI (as of April 2026). Dev mode (`next dev`) continues to use Turbopack for its faster HMR.
+
+### Tailwind Content Scanning
+
+The `content` array in `tailwind.config.ts` controls which files Tailwind scans for class usage. Overly broad globs like `packages/themes/**/*.{js,ts,jsx,tsx}` will descend into `node_modules/` inside theme packages, inflating build times from ~30 seconds to 18+ minutes. Always use scoped globs that stop before `node_modules/`:
+
+```
+'../../packages/themes/*/*.{js,ts,jsx,tsx}'
+'../../packages/themes/*/components/**/*.{js,ts,jsx,tsx}'
+```
+
 ## Quality Gates
 
 The build pipeline includes quality checks at multiple stages:
@@ -212,7 +231,7 @@ The build pipeline includes quality checks at multiple stages:
 | Stage                  | What Runs                                                 | When                               |
 | ---------------------- | --------------------------------------------------------- | ---------------------------------- |
 | Pre-commit (Husky)     | lint-staged (Prettier), MDX content validation            | Every commit                       |
-| Pre-push (Husky)       | TypeScript check, production build                        | Every push                         |
+| Pre-push (Husky)       | TypeScript check only (~3s)                               | Every push                         |
 | CI (GitHub Actions)    | ESLint, TypeScript, content validation, unit tests, build | Every push to develop/staging/main |
 | CI (staging/main only) | E2E tests (Playwright)                                    | PRs and pushes to staging/main     |
 
