@@ -9,16 +9,7 @@
 
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
-import Link from 'next/link';
-import {
-  Schema,
-  Breadcrumbs,
-  ServiceAbout,
-  ServiceBenefits,
-  FAQSection,
-  type FAQItem,
-  type AboutContent,
-} from '@platform/core-components';
+import { Schema, type FAQItem, type AboutContent } from '@platform/core-components';
 import { ServicePageHero } from '@/components/ui/service-page-hero';
 import { CtaBand } from '@/components/ui/cta-band';
 import { deriveLocationContext, getAreaServed } from '@platform/core-components/lib/location-utils';
@@ -142,22 +133,6 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
   const locationContext = deriveLocationContext(slug, knownLocations);
   const isLocationSpecific = locationContext !== null && locationContext.isLocationSpecific;
 
-  // Build location-aware breadcrumbs
-  const breadcrumbItems =
-    isLocationSpecific && locationContext
-      ? [
-          { name: 'Locations', href: '/locations' },
-          {
-            name: locationContext.locationName,
-            href: `/locations/${locationContext.locationSlug}`,
-          },
-          { name: serviceName, href: `/services/${slug}`, current: true },
-        ]
-      : [
-          { name: 'Services', href: '/services' },
-          { name: serviceName, href: `/services/${slug}`, current: true },
-        ];
-
   // Build location-aware areaServed for Schema
   const areaServed =
     isLocationSpecific && locationContext
@@ -166,41 +141,6 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
 
   return (
     <>
-      {/* Breadcrumbs */}
-      <div className="bg-surface-subtle border-b border-surface-border">
-        <div className="container-standard py-4">
-          <Breadcrumbs items={breadcrumbItems} />
-        </div>
-      </div>
-
-      {/* Back-link banner for location-specific pages */}
-      {isLocationSpecific && locationContext && (
-        <section className="bg-brand-primary/5 border-b">
-          <div className="container-standard py-4">
-            <Link
-              href={`/locations/${locationContext.locationSlug}`}
-              className="inline-flex items-center gap-2 text-brand-primary hover:text-brand-primary-hover font-medium transition-colors"
-            >
-              <svg
-                aria-hidden="true"
-                className="w-4 h-4"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M10 19l-7-7m0 0l7-7m-7 7h18"
-                />
-              </svg>
-              More services in {locationContext.locationName}
-            </Link>
-          </div>
-        </section>
-      )}
-
       <div>
         {/* Hero Section */}
         <ServicePageHero
@@ -212,16 +152,90 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
         />
 
         {/* Benefits Section */}
-        {benefits.length > 0 && <ServiceBenefits items={benefits} />}
+        {benefits.length > 0 && (
+          <section className="py-20 bg-surface-muted">
+            <div className="max-w-7xl mx-auto px-8">
+              <div className="mb-12">
+                <h2 className="text-4xl font-headline font-bold">
+                  Why choose our {serviceName.toLowerCase()}
+                </h2>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {benefits.map((item, i) => (
+                  <div key={i} className="flex items-start gap-4 py-4">
+                    <div className="flex-shrink-0 w-2 h-2 bg-brand-primary rounded-full mt-2.5" />
+                    <span className="text-surface-foreground font-body text-lg">{item}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
 
         {/* About Section */}
-        {about && <ServiceAbout serviceName={serviceName} slug={slug} about={about} />}
+        {about && (
+          <section className="py-20 bg-surface-background">
+            <div className="max-w-7xl mx-auto px-8">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
+                <div className="lg:col-span-7">
+                  <span className="label-overline mb-6 inline-block">About this service</span>
+                  <h2 className="text-4xl font-headline font-bold mb-8">
+                    Professional {serviceName}
+                  </h2>
+                  <p className="text-surface-muted-foreground text-lg leading-relaxed mb-10">
+                    {about.whatIs}
+                  </p>
+
+                  <h3 className="text-xl font-headline font-bold mb-6">
+                    When you need {serviceName.toLowerCase()}
+                  </h3>
+                  <div className="grid md:grid-cols-2 gap-4">
+                    {about.whenNeeded.map((need, i) => (
+                      <div key={i} className="flex items-start gap-3 py-3">
+                        <div className="flex-shrink-0 w-2 h-2 bg-brand-primary rounded-full mt-2" />
+                        <span className="text-surface-foreground text-sm">{need}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div className="lg:col-span-5 pt-12 lg:pt-24">
+                  <div className="bg-surface-muted p-10 border-l-4 border-brand-primary">
+                    <h3 className="text-xl font-headline font-bold mb-6">What you achieve</h3>
+                    <div className="space-y-4">
+                      {about.whatAchieve.map((item, i) => (
+                        <div key={i} className="flex items-start gap-3">
+                          <div className="flex-shrink-0 w-2 h-2 bg-brand-primary rounded-full mt-2" />
+                          <span className="text-surface-foreground text-sm">{item}</span>
+                        </div>
+                      ))}
+                    </div>
+                    {about.keyPoints && about.keyPoints.length > 0 && (
+                      <div className="mt-8 pt-6 border-t border-surface-card-border">
+                        <h4 className="text-sm font-bold uppercase tracking-widest text-surface-muted-foreground mb-4">
+                          Key points
+                        </h4>
+                        <div className="space-y-3">
+                          {about.keyPoints.map((point, i) => (
+                            <div key={i} className="flex items-start gap-3">
+                              <span className="text-brand-primary text-xs mt-0.5">&#9632;</span>
+                              <span className="text-surface-foreground text-sm">{point}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
 
         {/* MDX Content */}
-        <section className="section-standard bg-surface-background">
-          <div className="container-standard">
+        <section className="py-20 bg-surface-background">
+          <div className="max-w-7xl mx-auto px-8">
             <div className="max-w-4xl mx-auto">
-              <div className="prose prose-lg max-w-none prose-headings:text-surface-foreground prose-p:text-surface-muted-foreground prose-a:text-brand-primary prose-a:no-underline hover:prose-a:underline prose-strong:text-surface-foreground prose-li:text-surface-muted-foreground">
+              <div className="prose prose-lg max-w-none prose-headings:text-surface-foreground prose-headings:font-headline prose-p:text-surface-muted-foreground prose-a:text-brand-primary prose-a:no-underline hover:prose-a:underline prose-strong:text-surface-foreground prose-li:text-surface-muted-foreground">
                 {mdxContent}
               </div>
             </div>
@@ -230,16 +244,35 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
 
         {/* FAQs */}
         {faqs.length > 0 && (
-          <FAQSection
-            items={faqs}
-            title="Frequently Asked Questions"
-            phone={siteConfig.business.phone}
-          />
+          <section className="py-20 bg-surface-muted">
+            <div className="max-w-7xl mx-auto px-8">
+              <div className="mb-16">
+                <h2 className="text-5xl font-headline font-bold">Frequently asked questions</h2>
+              </div>
+              <div className="divide-y divide-surface-card-border max-w-4xl">
+                {faqs.map((faq, i) => (
+                  <details key={i} className="group py-8">
+                    <summary className="flex items-center justify-between cursor-pointer list-none">
+                      <h3 className="text-xl font-headline font-bold text-surface-foreground pr-8">
+                        {faq.question}
+                      </h3>
+                      <span className="material-symbols-outlined text-brand-primary transition-transform group-open:rotate-45 flex-shrink-0">
+                        add
+                      </span>
+                    </summary>
+                    <p className="text-surface-muted-foreground leading-relaxed mt-4 max-w-3xl">
+                      {faq.answer}
+                    </p>
+                  </details>
+                ))}
+              </div>
+            </div>
+          </section>
         )}
 
         {/* CTA Section */}
         <CtaBand
-          headline={`Ready for professional ${serviceName}?`}
+          headline={`Ready for professional ${serviceName.toLowerCase()}?`}
           subtext={`Contact ${siteConfig.business.name} for a free quote. Our team is ready to help.`}
           primaryLabel="Get Free Quote"
           primaryHref="/contact"

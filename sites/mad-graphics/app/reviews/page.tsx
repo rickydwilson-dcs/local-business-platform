@@ -2,21 +2,16 @@
  * Reviews Page
  * ============
  *
- * Customer testimonials and reviews with aggregate rating display.
- * Uses theme CSS variables for consistent branding.
+ * Customer testimonials in the site's dark editorial style.
  */
 
-import Link from 'next/link';
 import type { Metadata } from 'next';
-import {
-  Schema,
-  Breadcrumbs,
-  AggregateRatingDisplay,
-  TestimonialCard,
-} from '@platform/core-components';
+import { Schema } from '@platform/core-components';
 import { getTestimonials, calculateAggregateRating } from '@/lib/content';
 import { absUrl } from '@/lib/site';
 import { siteConfig } from '@/site.config';
+import { PageHeader } from '@/components/ui/page-header';
+import { CtaBand } from '@/components/ui/cta-band';
 
 export const dynamic = 'force-static';
 
@@ -42,207 +37,139 @@ export default async function ReviewsPage() {
   const testimonials = await getTestimonials();
   const { average, count } = calculateAggregateRating(testimonials);
   const featuredTestimonials = testimonials.filter((t) => t.featured);
-
-  const breadcrumbItems = [{ name: 'Reviews', href: '/reviews', current: true }];
+  const regularTestimonials = testimonials.filter((t) => !t.featured);
 
   return (
     <>
-      {/* Breadcrumbs */}
-      <div className="bg-surface-subtle border-b border-surface-border">
-        <div className="container-standard py-4">
-          <Breadcrumbs items={breadcrumbItems} />
-        </div>
-      </div>
+      <PageHeader
+        overline="Word on the shop floor"
+        title="What our clients say"
+        showDivider={false}
+      />
 
-      <div className="min-h-screen bg-gradient-to-b from-surface-subtle to-surface-background">
-        {/* Hero Section */}
-        <section className="section-standard lg:py-24 bg-surface-background">
-          <div className="container-standard">
-            <div className="text-center max-w-3xl mx-auto">
-              <h1 className="heading-hero">What Our Customers Say</h1>
-              <p className="text-xl text-surface-foreground mb-8">
-                Don&apos;t just take our word for it. Read what homeowners and businesses say about
-                our services.
-              </p>
+      {/* Aggregate Rating */}
+      {count > 0 && (
+        <div className="px-8 pb-8">
+          <div className="max-w-7xl mx-auto flex items-center gap-4">
+            <span className="text-5xl font-headline font-bold text-brand-primary">{average}</span>
+            <div className="flex text-brand-primary">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <span
+                  key={i}
+                  className="material-symbols-outlined text-2xl"
+                  style={{ fontVariationSettings: "'FILL' 1" }}
+                >
+                  {i < Math.round(average) ? 'star' : 'star_border'}
+                </span>
+              ))}
             </div>
+            <span className="text-surface-muted-foreground font-body text-sm uppercase tracking-widest">
+              from {count} reviews
+            </span>
           </div>
-        </section>
+          <div className="max-w-7xl mx-auto mt-8 h-[2px] bg-surface-card-border/30 w-full" />
+        </div>
+      )}
 
-        {/* Aggregate Rating */}
-        <section className="section-standard bg-surface-subtle">
-          <div className="container-standard">
-            <div className="grid lg:grid-cols-3 gap-8">
-              <div className="lg:col-span-1">
-                <AggregateRatingDisplay
-                  ratingValue={average}
-                  reviewCount={count}
-                  size="lg"
-                  variant="stacked"
-                />
-              </div>
-              <div className="lg:col-span-2">
-                <div className="bg-surface-background rounded-2xl shadow-lg p-8 border border-surface-border">
-                  <h2 className="text-xl font-bold text-surface-foreground mb-4">Why Choose Us?</h2>
-                  <div className="grid sm:grid-cols-2 gap-4">
-                    <div className="flex items-start gap-3">
-                      <div className="w-10 h-10 bg-brand-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                        <svg
-                          className="w-5 h-5 text-brand-primary"
-                          fill="currentColor"
-                          viewBox="0 0 20 20"
-                        >
-                          <path
-                            fillRule="evenodd"
-                            d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                            clipRule="evenodd"
-                          />
-                        </svg>
-                      </div>
-                      <div>
-                        <h3 className="font-semibold text-surface-foreground">Quality Assured</h3>
-                        <p className="text-sm text-surface-muted-foreground">
-                          Industry-standard compliance
-                        </p>
-                      </div>
+      {/* Featured Reviews */}
+      {featuredTestimonials.length > 0 && (
+        <section className="py-20 bg-surface-background">
+          <div className="max-w-7xl mx-auto px-8">
+            <div className="mb-16">
+              <span className="label-overline mb-4 inline-block">Featured</span>
+              <h2 className="text-5xl font-headline font-bold">Top reviews</h2>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {featuredTestimonials.map((t) => (
+                <div
+                  key={t.slug}
+                  className="bg-surface-muted p-12 border border-surface-card-border"
+                >
+                  <div className="flex text-brand-primary mb-6">
+                    {Array.from({ length: t.rating }).map((_, i) => (
+                      <span
+                        key={i}
+                        className="material-symbols-outlined"
+                        style={{ fontVariationSettings: "'FILL' 1" }}
+                      >
+                        star
+                      </span>
+                    ))}
+                  </div>
+                  <p className="text-2xl font-headline italic text-surface-foreground leading-relaxed mb-8">
+                    &ldquo;{t.text}&rdquo;
+                  </p>
+                  <div>
+                    <div className="font-bold text-lg uppercase tracking-wider font-body">
+                      {t.customerName}
                     </div>
-                    <div className="flex items-start gap-3">
-                      <div className="w-10 h-10 bg-brand-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                        <svg
-                          className="w-5 h-5 text-brand-primary"
-                          fill="currentColor"
-                          viewBox="0 0 20 20"
-                        >
-                          <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z" />
-                        </svg>
+                    {(t.customerCompany || t.customerRole) && (
+                      <div className="text-surface-muted-foreground text-xs font-body uppercase tracking-widest">
+                        {t.customerCompany || t.customerRole}
                       </div>
-                      <div>
-                        <h3 className="font-semibold text-surface-foreground">Expert Team</h3>
-                        <p className="text-sm text-surface-muted-foreground">
-                          Trained professionals
-                        </p>
-                      </div>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <div className="w-10 h-10 bg-brand-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                        <svg
-                          className="w-5 h-5 text-brand-primary"
-                          fill="currentColor"
-                          viewBox="0 0 20 20"
-                        >
-                          <path
-                            fillRule="evenodd"
-                            d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"
-                            clipRule="evenodd"
-                          />
-                        </svg>
-                      </div>
-                      <div>
-                        <h3 className="font-semibold text-surface-foreground">Fast Response</h3>
-                        <p className="text-sm text-surface-muted-foreground">
-                          Quick quotes and efficient service
-                        </p>
-                      </div>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <div className="w-10 h-10 bg-brand-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                        <svg
-                          className="w-5 h-5 text-brand-primary"
-                          fill="currentColor"
-                          viewBox="0 0 20 20"
-                        >
-                          <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z" />
-                          <path
-                            fillRule="evenodd"
-                            d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z"
-                            clipRule="evenodd"
-                          />
-                        </svg>
-                      </div>
-                      <div>
-                        <h3 className="font-semibold text-surface-foreground">Fully Insured</h3>
-                        <p className="text-sm text-surface-muted-foreground">
-                          Public liability coverage
-                        </p>
-                      </div>
-                    </div>
+                    )}
                   </div>
                 </div>
-              </div>
+              ))}
             </div>
           </div>
         </section>
+      )}
 
-        {/* Featured Reviews */}
-        {featuredTestimonials.length > 0 && (
-          <section className="section-standard bg-surface-background">
-            <div className="container-standard">
-              <h2 className="heading-section mb-8">Featured Reviews</h2>
-              <div className="grid md:grid-cols-2 gap-8">
-                {featuredTestimonials.map((testimonial) => (
-                  <TestimonialCard
-                    key={testimonial.slug}
-                    name={testimonial.customerName}
-                    location={testimonial.location}
-                    rating={testimonial.rating}
-                    text={testimonial.text}
-                    date={testimonial.date}
-                    featured={testimonial.featured}
-                  />
-                ))}
-              </div>
-            </div>
-          </section>
-        )}
-
-        {/* All Reviews */}
-        <section className="section-standard bg-surface-subtle">
-          <div className="container-standard">
-            <h2 className="heading-section mb-8">
-              {featuredTestimonials.length > 0 ? 'All Reviews' : 'Customer Reviews'}
+      {/* All Reviews */}
+      <section className="py-20 bg-surface-muted">
+        <div className="max-w-7xl mx-auto px-8">
+          <div className="mb-16">
+            <h2 className="text-5xl font-headline font-bold">
+              {featuredTestimonials.length > 0 ? 'All reviews' : 'Client reviews'}
             </h2>
-
-            {testimonials.length === 0 ? (
-              <div className="text-center py-12">
-                <p className="text-surface-muted-foreground text-lg">
-                  No reviews yet. Check back soon for customer testimonials.
-                </p>
-              </div>
-            ) : (
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {testimonials.map((testimonial) => (
-                  <TestimonialCard
-                    key={testimonial.slug}
-                    name={testimonial.customerName}
-                    location={testimonial.location}
-                    rating={testimonial.rating}
-                    text={testimonial.text}
-                    date={testimonial.date}
-                    featured={testimonial.featured}
-                  />
-                ))}
-              </div>
-            )}
           </div>
-        </section>
 
-        {/* CTA Section */}
-        <section className="section-compact bg-brand-primary">
-          <div className="container-standard text-center">
-            <h2 className="text-2xl md:text-3xl font-bold text-brand-on-primary mb-4">
-              Ready to Experience Our Service?
-            </h2>
-            <p className="text-brand-on-primary/90 mb-8 max-w-2xl mx-auto">
-              Join our satisfied customers. Get a free quote for your project today.
+          {testimonials.length === 0 ? (
+            <p className="text-surface-muted-foreground text-lg">
+              No reviews yet. Check back soon for customer testimonials.
             </p>
-            <Link
-              href="/contact"
-              className="inline-flex items-center justify-center px-8 py-4 bg-surface-background text-brand-primary font-semibold rounded-lg hover:bg-surface-subtle transition-colors"
-            >
-              Get Free Quote
-            </Link>
-          </div>
-        </section>
-      </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-surface-card-border/20">
+              {(featuredTestimonials.length > 0 ? regularTestimonials : testimonials).map((t) => (
+                <div key={t.slug} className="bg-surface-background p-8">
+                  <div className="flex text-brand-primary mb-4">
+                    {Array.from({ length: t.rating }).map((_, i) => (
+                      <span
+                        key={i}
+                        className="material-symbols-outlined text-sm"
+                        style={{ fontVariationSettings: "'FILL' 1" }}
+                      >
+                        star
+                      </span>
+                    ))}
+                  </div>
+                  <p className="text-lg font-headline italic text-surface-foreground leading-relaxed mb-6">
+                    &ldquo;{t.excerpt || t.text}&rdquo;
+                  </p>
+                  <div>
+                    <div className="font-bold text-sm uppercase tracking-wider font-body">
+                      {t.customerName}
+                    </div>
+                    {t.location && (
+                      <div className="text-surface-muted-foreground text-xs font-body uppercase tracking-widest">
+                        {t.location}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
+
+      <CtaBand
+        headline="Ready to join them?"
+        subtext="Get a free quote for your project today."
+        primaryLabel="Get Free Quote"
+        primaryHref="/contact"
+      />
 
       <Schema
         org={{

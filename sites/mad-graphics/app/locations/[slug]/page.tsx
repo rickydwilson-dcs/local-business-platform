@@ -3,25 +3,20 @@
  * ====================
  *
  * Individual location page with MDX content rendering.
- * Features hero, local services, FAQs, and CTA.
+ * Uses the site's dark editorial style with local components.
  */
 
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
-import {
-  Schema,
-  Breadcrumbs,
-  LocationHero,
-  FAQSection,
-  CTASection,
-  type LocationFrontmatter,
-} from '@platform/core-components';
+import { Schema, type LocationFrontmatter } from '@platform/core-components';
 import { getLocations, getLocation } from '@/lib/content';
 import { loadMdx } from '@/lib/mdx';
 import { getImageUrl } from '@/lib/image';
 import { absUrl } from '@/lib/site';
 import { siteConfig } from '@/site.config';
 import { getServiceAreaSchema } from '@/lib/schema';
+import { LocationPageHero } from '@/components/ui/location-page-hero';
+import { CtaBand } from '@/components/ui/cta-band';
 
 export const dynamic = 'force-static';
 export const dynamicParams = false;
@@ -101,11 +96,6 @@ export default async function LocationPage({ params }: { params: Promise<Params>
   // SEO-003: LocalBusiness schema for location page
   const locationSchema = getServiceAreaSchema(locationName, slug);
 
-  const breadcrumbItems = [
-    { name: 'Locations', href: '/locations' },
-    { name: locationName, href: `/locations/${slug}`, current: true },
-  ];
-
   return (
     <>
       {/* SEO-003: LocalBusiness schema for location page */}
@@ -114,28 +104,24 @@ export default async function LocationPage({ params }: { params: Promise<Params>
         dangerouslySetInnerHTML={{ __html: JSON.stringify(locationSchema) }}
       />
 
-      {/* Breadcrumbs */}
-      <div className="bg-surface-subtle border-b border-surface-border">
-        <div className="container-standard py-4">
-          <Breadcrumbs items={breadcrumbItems} />
-        </div>
-      </div>
-
       <div>
         {/* Hero Section */}
-        <LocationHero
-          title={fm.hero?.title || `Professional Services in ${locationName}`}
+        <LocationPageHero
+          title={fm.hero?.title || `Print & graphics in ${locationName}`}
+          locationName={locationName}
           description={fm.hero?.description || fm.description || ''}
-          heroImage={heroImage}
-          phone={siteConfig.business.phone}
+          heroImage={heroImage ? getImageUrl(heroImage) : undefined}
+          phone={fm.hero?.phone || siteConfig.business.phone}
           trustBadges={fm.hero?.trustBadges}
+          ctaText={fm.hero?.ctaText || 'Get Free Quote'}
+          ctaUrl={fm.hero?.ctaUrl || '/contact'}
         />
 
         {/* MDX Content */}
-        <section className="section-standard bg-surface-background">
-          <div className="container-standard">
+        <section className="py-20 bg-surface-background">
+          <div className="max-w-7xl mx-auto px-8">
             <div className="max-w-4xl mx-auto">
-              <div className="prose prose-lg max-w-none prose-headings:text-surface-foreground prose-p:text-surface-muted-foreground prose-a:text-brand-primary prose-a:no-underline hover:prose-a:underline prose-strong:text-surface-foreground prose-li:text-surface-muted-foreground">
+              <div className="prose prose-lg max-w-none prose-headings:text-surface-foreground prose-headings:font-headline prose-p:text-surface-muted-foreground prose-a:text-brand-primary prose-a:no-underline hover:prose-a:underline prose-strong:text-surface-foreground prose-li:text-surface-muted-foreground">
                 {mdxContent}
               </div>
             </div>
@@ -144,23 +130,41 @@ export default async function LocationPage({ params }: { params: Promise<Params>
 
         {/* FAQs */}
         {faqs.length > 0 && (
-          <FAQSection
-            items={faqs}
-            title="Frequently Asked Questions"
-            location={locationName}
-            variant="location"
-            phone={siteConfig.business.phone}
-          />
+          <section className="py-20 bg-surface-muted">
+            <div className="max-w-7xl mx-auto px-8">
+              <div className="mb-16">
+                <span className="label-overline mb-4 inline-block">{locationName}</span>
+                <h2 className="text-5xl font-headline font-bold">Frequently asked questions</h2>
+              </div>
+              <div className="divide-y divide-surface-card-border max-w-4xl">
+                {faqs.map((faq, i) => (
+                  <details key={i} className="group py-8">
+                    <summary className="flex items-center justify-between cursor-pointer list-none">
+                      <h3 className="text-xl font-headline font-bold text-surface-foreground pr-8">
+                        {faq.question}
+                      </h3>
+                      <span className="material-symbols-outlined text-brand-primary transition-transform group-open:rotate-45 flex-shrink-0">
+                        add
+                      </span>
+                    </summary>
+                    <p className="text-surface-muted-foreground leading-relaxed mt-4 max-w-3xl">
+                      {faq.answer}
+                    </p>
+                  </details>
+                ))}
+              </div>
+            </div>
+          </section>
         )}
 
-        {/* CTA Section */}
-        <CTASection
-          title={`Ready for Professional Services in ${locationName}?`}
-          description={`Contact ${siteConfig.business.name} for a free quote. Our local team knows ${locationName} and is ready to help.`}
-          primaryButtonText="Get Free Quote"
-          primaryButtonUrl="/contact"
-          secondaryButtonText={`Call ${siteConfig.business.phone}`}
-          secondaryButtonUrl={`tel:${siteConfig.business.phone.replace(/\s/g, '')}`}
+        {/* CTA */}
+        <CtaBand
+          headline={`Ready to start your ${locationName} project?`}
+          subtext={`Contact ${siteConfig.business.name} for a free quote. Our team knows ${locationName} inside out.`}
+          primaryLabel="Get Free Quote"
+          primaryHref="/contact"
+          secondaryLabel={siteConfig.business.phone}
+          secondaryHref={`tel:${siteConfig.business.phone.replace(/\s/g, '')}`}
         />
       </div>
 

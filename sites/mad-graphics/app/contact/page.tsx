@@ -11,7 +11,8 @@ import { Phone, Mail, MapPin, Clock } from 'lucide-react';
 import { siteConfig } from '@/site.config';
 import { PHONE_DISPLAY, PHONE_TEL, BUSINESS_EMAIL, ADDRESS } from '@/lib/contact-info';
 import { absUrl } from '@/lib/site';
-import { Schema, Breadcrumbs, ContactForm } from '@platform/core-components';
+import { Schema, ContactForm } from '@platform/core-components';
+import { PageHeader } from '@/components/ui/page-header';
 
 export const metadata: Metadata = {
   title: `Contact Us | ${siteConfig.business.name}`,
@@ -22,30 +23,17 @@ export const metadata: Metadata = {
 };
 
 export default function ContactPage() {
-  const breadcrumbItems = [{ name: 'Contact', href: '/contact', current: true }];
-
   return (
     <>
-      {/* Breadcrumbs */}
-      <div className="bg-surface-background border-b border-surface-muted">
-        <div className="max-w-7xl mx-auto px-8 py-4">
-          <Breadcrumbs items={breadcrumbItems} />
-        </div>
-      </div>
+      <PageHeader
+        overline="Get in touch"
+        title="Contact us"
+        description="Get in touch with our team for a free quote or to discuss your requirements."
+      />
 
-      <div className="min-h-screen bg-surface-background">
-        {/* Hero Section */}
-        <section className="section-standard bg-surface-background">
-          <div className="max-w-7xl mx-auto px-8 text-center">
-            <h1 className="heading-hero mb-4">Contact Us</h1>
-            <p className="text-xl text-surface-muted-foreground max-w-2xl mx-auto">
-              Get in touch with our team for a free quote or to discuss your requirements.
-            </p>
-          </div>
-        </section>
-
+      <div className="bg-surface-background">
         {/* Main Content */}
-        <section className="section-standard">
+        <section className="py-20">
           <div className="max-w-7xl mx-auto px-8">
             <div className="grid lg:grid-cols-3 gap-12">
               {/* Contact Form */}
@@ -54,42 +42,48 @@ export default function ContactPage() {
               </div>
 
               {/* Sidebar */}
-              <div className="space-y-6">
+              <div className="space-y-0">
                 {/* Contact Information */}
-                <div className="bg-surface-muted rounded-lg p-6">
-                  <h2 className="text-xl font-bold text-surface-foreground mb-6">
-                    Contact Information
+                <div className="bg-surface-muted p-8 border-l-4 border-brand-primary">
+                  <h2 className="text-xl font-headline font-bold text-surface-foreground mb-6">
+                    Contact information
                   </h2>
-                  <div className="space-y-4">
+                  <div className="space-y-5">
                     <div className="flex items-start gap-3">
-                      <Phone className="w-5 h-5 text-brand-primary flex-shrink-0 mt-1" />
+                      <Phone className="w-4 h-4 text-brand-primary flex-shrink-0 mt-1" />
                       <div>
-                        <p className="font-medium text-surface-foreground">Phone</p>
+                        <p className="font-bold text-sm uppercase tracking-wider text-surface-foreground">
+                          Phone
+                        </p>
                         <Link
                           href={`tel:${PHONE_TEL}`}
-                          className="text-brand-primary hover:underline"
+                          className="text-brand-primary hover:underline text-sm"
                         >
                           {PHONE_DISPLAY}
                         </Link>
                       </div>
                     </div>
                     <div className="flex items-start gap-3">
-                      <Mail className="w-5 h-5 text-brand-primary flex-shrink-0 mt-1" />
+                      <Mail className="w-4 h-4 text-brand-primary flex-shrink-0 mt-1" />
                       <div>
-                        <p className="font-medium text-surface-foreground">Email</p>
+                        <p className="font-bold text-sm uppercase tracking-wider text-surface-foreground">
+                          Email
+                        </p>
                         <Link
                           href={`mailto:${BUSINESS_EMAIL}`}
-                          className="text-brand-primary hover:underline"
+                          className="text-brand-primary hover:underline text-sm"
                         >
                           {BUSINESS_EMAIL}
                         </Link>
                       </div>
                     </div>
                     <div className="flex items-start gap-3">
-                      <MapPin className="w-5 h-5 text-brand-primary flex-shrink-0 mt-1" />
+                      <MapPin className="w-4 h-4 text-brand-primary flex-shrink-0 mt-1" />
                       <div>
-                        <p className="font-medium text-surface-foreground">Address</p>
-                        <p className="text-surface-muted-foreground">
+                        <p className="font-bold text-sm uppercase tracking-wider text-surface-foreground">
+                          Address
+                        </p>
+                        <p className="text-surface-muted-foreground text-sm">
                           {ADDRESS.street}
                           <br />
                           {ADDRESS.locality}
@@ -99,9 +93,11 @@ export default function ContactPage() {
                       </div>
                     </div>
                     <div className="flex items-start gap-3">
-                      <Clock className="w-5 h-5 text-brand-primary flex-shrink-0 mt-1" />
+                      <Clock className="w-4 h-4 text-brand-primary flex-shrink-0 mt-1" />
                       <div>
-                        <p className="font-medium text-surface-foreground">Hours</p>
+                        <p className="font-bold text-sm uppercase tracking-wider text-surface-foreground">
+                          Hours
+                        </p>
                         <p className="text-surface-muted-foreground text-sm">
                           Mon-Fri: {siteConfig.business.hours.monday}
                           <br />
@@ -115,15 +111,18 @@ export default function ContactPage() {
                 </div>
 
                 {/* Quick Links */}
-                <div className="bg-surface-muted rounded-lg p-6">
-                  <h2 className="text-xl font-bold text-surface-foreground mb-4">Quick Links</h2>
+                <div className="bg-surface-muted p-8 mt-px">
+                  <h2 className="text-xl font-headline font-bold text-surface-foreground mb-4">
+                    Our services
+                  </h2>
                   <ul className="space-y-2">
                     {siteConfig.services.slice(0, 5).map((service) => (
                       <li key={service.slug}>
                         <Link
                           href={`/services/${service.slug}`}
-                          className="text-brand-primary hover:underline"
+                          className="inline-flex items-center gap-2 text-brand-primary hover:gap-3 transition-all text-sm"
                         >
+                          <span className="material-symbols-outlined text-xs">arrow_forward</span>
                           {service.title}
                         </Link>
                       </li>
@@ -131,9 +130,9 @@ export default function ContactPage() {
                     <li>
                       <Link
                         href="/services"
-                        className="text-brand-primary hover:underline font-medium"
+                        className="text-brand-primary hover:underline font-bold text-sm uppercase tracking-widest mt-2 inline-block"
                       >
-                        View all services &rarr;
+                        View all services
                       </Link>
                     </li>
                   </ul>

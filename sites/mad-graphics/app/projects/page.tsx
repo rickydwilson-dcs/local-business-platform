@@ -2,18 +2,19 @@
  * Projects Listing Page
  * =====================
  *
- * Portfolio of completed projects with stats and featured highlights.
- * Adapts to site branding via site.config.ts.
+ * Portfolio of completed projects in the site's dark editorial style.
  */
 
 import Link from 'next/link';
 import Image from 'next/image';
 import type { Metadata } from 'next';
-import { Schema, Breadcrumbs } from '@platform/core-components';
+import { Schema } from '@platform/core-components';
 import { getProjects, type Project } from '@/lib/content';
 import { getImageUrl } from '@/lib/image';
 import { absUrl } from '@/lib/site';
 import { siteConfig } from '@/site.config';
+import { PageHeader } from '@/components/ui/page-header';
+import { CtaBand } from '@/components/ui/cta-band';
 
 export const dynamic = 'force-static';
 
@@ -46,198 +47,119 @@ const categoryLabels: Record<string, string> = {
 
 function ProjectCard({ project }: { project: Project }) {
   return (
-    <article className="bg-surface-background rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow group border border-surface-border">
-      <Link href={`/projects/${project.slug}`} className="block relative h-56 overflow-hidden">
+    <Link
+      href={`/projects/${project.slug}`}
+      className="group block bg-surface-muted overflow-hidden"
+    >
+      <div className="relative aspect-[16/10] overflow-hidden">
         <Image
           src={getImageUrl(project.heroImage)}
           alt={project.title}
           fill
-          className="object-cover group-hover:scale-105 transition-transform duration-300"
+          className="object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-        <div className="absolute bottom-4 left-4 right-4">
-          <div className="flex gap-2 mb-2">
-            <span className="bg-brand-primary text-brand-on-primary text-xs font-semibold px-2 py-1 rounded">
+        <div className="absolute inset-0 bg-gradient-to-t from-surface-background/80 via-transparent to-transparent" />
+        <div className="absolute bottom-6 left-6 right-6">
+          <div className="flex gap-3 mb-3">
+            <span className="text-brand-primary text-xs font-bold uppercase tracking-widest">
               {projectTypeLabels[project.projectType] || project.projectType}
             </span>
-            <span className="bg-white/90 text-surface-foreground text-xs font-medium px-2 py-1 rounded">
+            <span className="text-surface-muted-foreground text-xs uppercase tracking-widest">
               {categoryLabels[project.category] || project.category}
             </span>
           </div>
-          <h2 className="text-white font-bold text-lg line-clamp-2">{project.title}</h2>
+          <h2 className="text-2xl font-headline font-bold text-surface-foreground">
+            {project.title}
+          </h2>
         </div>
-      </Link>
-      <div className="p-5">
-        <p className="text-surface-muted-foreground text-sm mb-4 line-clamp-2">
+      </div>
+      <div className="p-6">
+        <p className="text-surface-muted-foreground text-sm mb-4 leading-relaxed line-clamp-2">
           {project.description}
         </p>
-
-        <div className="flex flex-wrap gap-2 text-sm text-surface-muted mb-4">
-          <div className="flex items-center gap-1">
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-              />
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-              />
-            </svg>
-            {project.locationName}
-          </div>
-          <span className="text-surface-border">|</span>
-          <div className="flex items-center gap-1">
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-              />
-            </svg>
-            {project.year}
-          </div>
-          {project.duration && (
-            <>
-              <span className="text-surface-border">|</span>
-              <span>{project.duration}</span>
-            </>
-          )}
+        <div className="flex flex-wrap gap-4 text-xs text-surface-muted-foreground uppercase tracking-widest mb-4">
+          <span>{project.locationName}</span>
+          <span>{project.year}</span>
+          {project.duration && <span>{project.duration}</span>}
         </div>
-
         {project.client?.rating && (
-          <div className="flex items-center gap-1 mb-4">
-            {[...Array(5)].map((_, i) => (
-              <svg
+          <div className="flex text-brand-primary mb-4">
+            {Array.from({ length: project.client.rating }).map((_, i) => (
+              <span
                 key={i}
-                className={`w-4 h-4 ${i < project.client!.rating! ? 'text-yellow-400' : 'text-gray-200'}`}
-                fill="currentColor"
-                viewBox="0 0 20 20"
+                className="material-symbols-outlined text-sm"
+                style={{ fontVariationSettings: "'FILL' 1" }}
               >
-                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-              </svg>
+                star
+              </span>
             ))}
-            <span className="text-sm text-surface-muted ml-1">Client Rating</span>
           </div>
         )}
-
-        <Link
-          href={`/projects/${project.slug}`}
-          className="inline-flex items-center gap-1 text-brand-primary font-medium text-sm hover:underline"
-        >
-          View Project
-          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-          </svg>
-        </Link>
+        <span className="inline-flex items-center gap-2 text-brand-primary font-bold text-xs uppercase tracking-widest group-hover:gap-4 transition-all">
+          View project <span className="material-symbols-outlined text-sm">arrow_forward</span>
+        </span>
       </div>
-    </article>
+    </Link>
   );
 }
 
 export default async function ProjectsPage() {
   const projects = await getProjects();
-  const featuredProjects = projects.filter((p) => p.status === 'featured');
 
   // Calculate stats
   const uniqueLocations = new Set(projects.map((p) => p.location)).size;
   const totalProjects = projects.length;
 
-  const breadcrumbItems = [{ name: 'Projects', href: '/projects', current: true }];
-
   return (
     <>
-      {/* Breadcrumbs */}
-      <div className="bg-surface-subtle border-b border-surface-border">
-        <div className="container-standard py-4">
-          <Breadcrumbs items={breadcrumbItems} />
+      <PageHeader overline="Portfolio" title="Our work" />
+
+      {/* Stats */}
+      {totalProjects > 0 && (
+        <div className="px-8 pb-12">
+          <div className="max-w-7xl mx-auto flex flex-wrap gap-12">
+            <div>
+              <span className="text-4xl font-headline font-bold text-brand-primary">
+                {totalProjects}+
+              </span>
+              <span className="text-surface-muted-foreground text-sm uppercase tracking-widest ml-3">
+                projects
+              </span>
+            </div>
+            <div>
+              <span className="text-4xl font-headline font-bold text-brand-primary">
+                {uniqueLocations}
+              </span>
+              <span className="text-surface-muted-foreground text-sm uppercase tracking-widest ml-3">
+                locations
+              </span>
+            </div>
+          </div>
         </div>
-      </div>
+      )}
 
-      <div className="min-h-screen bg-gradient-to-b from-surface-subtle to-surface-background">
-        {/* Hero Section */}
-        <section className="section-standard lg:py-24 bg-surface-background">
-          <div className="container-standard">
-            <div className="text-center">
-              <h1 className="heading-hero">Our Projects</h1>
-              <p className="text-xl text-surface-foreground mb-8 mx-auto max-w-3xl">
-                Explore our portfolio of completed projects. From residential to commercial, we
-                deliver excellence on every job.
-              </p>
-
-              {/* Stats */}
-              {totalProjects > 0 && (
-                <div className="flex flex-wrap justify-center gap-8 mb-8">
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-brand-primary">{totalProjects}+</div>
-                    <div className="text-sm text-surface-muted-foreground">Completed Projects</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-brand-primary">{uniqueLocations}</div>
-                    <div className="text-sm text-surface-muted-foreground">Locations Served</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-brand-primary">100%</div>
-                    <div className="text-sm text-surface-muted-foreground">Client Satisfaction</div>
-                  </div>
-                </div>
-              )}
-            </div>
+      {/* Projects Grid */}
+      <section className="py-20 px-8 max-w-7xl mx-auto">
+        {projects.length === 0 ? (
+          <p className="text-surface-muted-foreground text-lg">
+            No projects yet. Check back soon to see our latest work.
+          </p>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-surface-card-border/20">
+            {projects.map((project) => (
+              <ProjectCard key={project.slug} project={project} />
+            ))}
           </div>
-        </section>
-
-        {/* Featured Projects */}
-        {featuredProjects.length > 0 && (
-          <section className="section-standard bg-surface-background">
-            <div className="container-standard">
-              <h2 className="heading-section mb-8">Featured Projects</h2>
-              <div className="grid md:grid-cols-2 gap-8">
-                {featuredProjects.slice(0, 2).map((project) => (
-                  <ProjectCard key={project.slug} project={project} />
-                ))}
-              </div>
-            </div>
-          </section>
         )}
+      </section>
 
-        {/* All Projects */}
-        <section className="section-standard bg-surface-subtle">
-          <div className="container-standard">
-            <h2 className="heading-section mb-8">
-              {featuredProjects.length > 0 ? 'All Projects' : 'Our Projects'}
-            </h2>
-
-            {projects.length === 0 ? (
-              <div className="text-center py-12">
-                <p className="text-surface-muted-foreground text-lg">
-                  No projects yet. Check back soon to see our latest work.
-                </p>
-              </div>
-            ) : (
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {projects.map((project) => (
-                  <ProjectCard key={project.slug} project={project} />
-                ))}
-              </div>
-            )}
-
-            <div className="text-center mt-12">
-              <p className="text-surface-foreground mb-6">
-                Have a project that needs professional service?
-              </p>
-              <Link href="/contact" className="btn-primary-lg">
-                Get Free Quote
-              </Link>
-            </div>
-          </div>
-        </section>
-      </div>
+      <CtaBand
+        headline="Have a project in mind?"
+        subtext="Let's discuss what you need. No obligation, no hard sell."
+        primaryLabel="Get a Quote"
+        primaryHref="/contact"
+      />
 
       <Schema
         org={{
