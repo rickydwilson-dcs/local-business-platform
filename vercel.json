@@ -1,4 +1,5 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "ignoreCommand": "exit 0"
+  "buildCommand": "mkdir -p public && echo 'Root monorepo - sites deploy via their own Vercel projects.' > public/index.html",
+  "outputDirectory": "public"
 }
