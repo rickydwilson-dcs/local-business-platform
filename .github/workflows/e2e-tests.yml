@@ -50,8 +50,10 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Build packages
-        run: pnpm turbo run build --filter=@platform/theme-system --filter=@platform/core-components --filter=@platform/themes
+      - name: Build site
+        run: pnpm turbo run build --filter=colossus-scaffolding
+        env:
+          NEW_RELIC_ENABLED: false
 
       - name: Install Playwright browsers
         run: pnpm --filter colossus-scaffolding exec playwright install --with-deps chromium
@@ -94,8 +96,10 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Build packages
-        run: pnpm --filter @platform/theme-system build
+      - name: Build site
+        run: pnpm turbo run build --filter=colossus-scaffolding
+        env:
+          NEW_RELIC_ENABLED: false
 
       - name: Install Playwright browsers
         run: pnpm --filter colossus-scaffolding exec playwright install --with-deps chromium
