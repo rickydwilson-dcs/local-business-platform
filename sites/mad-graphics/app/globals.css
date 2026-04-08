@@ -24,7 +24,7 @@
 
 @layer utilities {
   .label-overline {
-    @apply text-brand-primary font-body uppercase tracking-[0.3em] font-bold text-sm;
+    @apply text-brand-primary uppercase tracking-[0.3em] font-bold text-sm;
   }
   .cta-band-text-dark {
     color: #2d1600;
