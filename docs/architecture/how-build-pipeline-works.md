@@ -152,7 +152,7 @@ Turborepo's `"dependsOn": ["^build"]` ensures these build before any site that i
       "outputs": ["*.tsbuildinfo"]
     },
     "test": {
-      "dependsOn": ["build"], // Tests need built code
+      "dependsOn": ["^build"], // Tests need dependencies built first
       "outputs": ["coverage/**"]
     },
     "test:e2e": {

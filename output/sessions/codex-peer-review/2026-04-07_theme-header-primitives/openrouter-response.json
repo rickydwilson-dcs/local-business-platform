@@ -1,0 +1,42 @@
+{
+  "id": "gen-1775590653-Lm1nBWeBAPw54q2gRdHU",
+  "object": "chat.completion",
+  "created": 1775590653,
+  "model": "openai/gpt-4.1-2025-04-14",
+  "provider": "OpenAI",
+  "system_fingerprint": null,
+  "service_tier": "default",
+  "choices": [
+    {
+      "index": 0,
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "completed",
+      "message": {
+        "role": "assistant",
+        "content": "```markdown\n# Implementation Plan: Scalable Theme-Specific Header Primitives\n\n_Reviewer: Codex  \nDate: 2026-04-07_\n\n---\n\n## Overview\n\nThis plan will deliver:\n- Cygnus-specific header with uppercase, orange-underlined active nav links per design spec.\n- Reusable, theme-agnostic header/nav primitives in core-components.\n- Patterns enabling all current/future themes to own header layout and styling while sharing interactive logic.\n- Zero breaking changes for existing Orion and Vega sites.\n\n---\n\n## 1. Create a Theme-agnostic Active Nav Link Primitive in Core-components\n\n### 1.1. Add a `<NavLink>` Component (Client)\n- **Location:** `packages/core-components/src/components/primitives/nav-link.tsx`\n- **Description:** \n  - React client component.\n  - Accepts:  \n    - `href: string`\n    - `className?: string`\n    - `activeClassName?: string`\n    - `inactiveClassName?: string`\n    - `children`\n    - ...rest (spread to `<a>`)\n  - Uses Next.js `usePathname()` to detect active state.\n  - Applies classes per active/inactive state.\n  - **Export:** Named export from core-components.\n\n#### Why component, not hook?\n- Simpler for design consistency (\"always an anchor\")\n- Encourages composition and className props for theme customizations.\n- Removes repeated href/pathname compare logic from themes.\n\n#### 1.2. Export NavLink\n- Update `packages/core-components/src/index.ts` with a named export.\n\n#### Verification:\n- Unit test NavLink for correct class assignment and ARIA handling.\n\n---\n\n## 2. Refactor LocationsDropdown for Customizable Trigger Styling\n\n### 2.1. Add `triggerClassName` Prop\n- **File:** `packages/core-components/src/components/ui/locations-dropdown.tsx`\n- **Action:**  \n  - Add optional prop: `triggerClassName?: string`\n  - Pass through to the dropdown trigger `<button>`.\n  - Retain existing default styling for backward compatibility.\n  - If `triggerClassName` provided, merge with base focus/disabled state classes as needed.\n  - **No breaking changes:** Old consumers stay unchanged by default.\n\n### 2.2. Export Prop Update\n- Update types and docs for LocationsDropdown.\n- Update index/barrel if type exported.\n\n#### Verification:\n- Cygnus can customize.\n- Orion and Vega headers still render unstyled trigger, unchanged.\n\n---\n\n## 3. Create Cygnus-specific Header as a Standalone Component\n\n### 3.1. Replace Wrapper with Full JSX in CygnusHeader\n- **File:** `packages/themes/cygnus/components/header.tsx`\n- **Action:**\n  - No longer wrap SiteHeader—create full server component, bring in own logo, nav, call-to-actions per existing SiteHeader API/signature.\n  - Use new `<NavLink>` primitive for each navigation item.\n  - Pass required triggerClassName to LocationsDropdown.\n  - Render nav according to design:  \n    - All: `uppercase tracking-widest text-xs font-medium font-body`\n    - Inactive: `text-surface-foreground border-b-2 border-transparent pb-1 hover:text-brand-primary`\n    - Active: `text-brand-primary border-b-2 border-brand-primary pb-1`\n  - CTA, phone links, MobileMenu: use existing primitives as-is.\n  - Preserve header props interface for drop-in replacement in cygnus-test, mad-graphics.\n\n#### Layout Shift (Underline)\n- Prevent shift by always rendering a border with either transparent or orange color.\n\n#### Verification:\n- Visually inspect cygnus-test and mad-graphics header for:\n  - Correct typography, underline color, no layout shift.\n  - LocationsDropdown trigger matches nav style.\n- Confirm Orion and Vega headers unchanged.\n\n---\n\n## 4. Documentation & Barrel Exports\n\n### 4.1. Document Primitive Usage for Themes\n- Add JSDoc and README section in `core-components` on usage of `<NavLink>` and `triggerClassName` for LocationsDropdown.\n\n### 4.2. Ensure Barrel Consistency\n- Confirm named exports for all new/updated primitives.\n\n---\n\n## 5. Verification and Regression Checks\n\n### 5.1. Type and Build Checks\n- Run `pnpm type-check` across all workspaces.\n\n### 5.2. Confirm All Sites Build & Render\n- Build and smoke-test:\n  - cygnus-test\n  - mad-graphics\n  - base-template\n  - dj-fox-electrical\n  - colossus-scaffolding\n- Check Orion/Vega header unaffected visually and functionally.\n\n### 5.3. Verify Non-breaking/No Layout Change\n- Confirm no layout.tsx or prop interface changes required for consumers.\n\n---\n\n## 6. Migration Path for Other Themes\n\n### 6.1. Communicate New Pattern\n- Write migration guide for Orion/Vega in core-components or themes/README:\n  - How to use NavLink/triggerClassName\n  - Benefits: ownership of header layout, easier theme differentiation\n\n### 6.2. No Immediate Migration Required\n- Orion/Vega consume existing SiteHeader untouched.\n- Opt-in path: Theme teams can migrate on their schedule.\n\n---\n\n## 7. Site Creation Tooling\n\n### 7.1. Update Boilerplates\n- Ensure `tools/create-site.ts`, `tools/apply-theme.ts` reference the pattern for header import (theme owns header, not core-components).\n- (Optional) Ship example header in each theme referencing NavLink.\n\n### 7.2. Verification:\n- Create a test site using tools. Confirm that theme header instantiates with new primitives.\n\n---\n\n## Risks & Tradeoffs\n\n- **Server/Client split:** NavLink must be a client component, so must be rendered only inside client boundary. Themes need to be aware of this (documented).\n- **Future migrations:** Orion/Vega may require partial duplication of header JSX for full control, but this unlocks differentiation.\n- **Shared logic:** Any truly shared logic (e.g., nav config, links array) may be shared via utility exports or theme configs.\n- **No build step in core-components:** Ensure new files are importable as raw TypeScript, no .js-only node API, for current build setup.\n\n---\n\n# Summary of File Changes\n\n**Created:**\n- packages/core-components/src/components/primitives/nav-link.tsx\n\n**Modified:**\n- packages/core-components/src/components/ui/locations-dropdown.tsx\n- packages/core-components/src/index.ts\n- packages/themes/cygnus/components/header.tsx\n- core-components and cygnus/theme documentation as appropriate\n\n---\n\n# Verification Gates\n\n1. NavLink works as expected (unit tested).\n2. Cygnus headers render per design, support underline and uppercase.\n3. LocationsDropdown trigger can be custom styled in Cygnus, unstyled in existing themes.\n4. No regressions in Orion/Vega; all sites type-check and build.\n5. Barrels and documentation up to date; migration guide provided.\n\n---\n\n```\n\n**Copy and paste this command into Claude Code:**\n```\n/plan.with.codex synthesise output/sessions/codex-peer-review/2026-04-07_theme-header-primitives/\n```\n",
+        "refusal": null,
+        "reasoning": null
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 1782,
+    "completion_tokens": 1519,
+    "total_tokens": 3301,
+    "cost": 0.015716,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.015716,
+      "upstream_inference_prompt_cost": 0.003564,
+      "upstream_inference_completions_cost": 0.012152
+    },
+    "completion_tokens_details": { "reasoning_tokens": 0, "image_tokens": 0, "audio_tokens": 0 }
+  }
+}
