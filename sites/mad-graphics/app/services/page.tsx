@@ -8,6 +8,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import { getContentItems } from '@/lib/content';
+import { getImageUrl } from '@/lib/image';
 
 export const metadata: Metadata = {
   title: 'Services | MAD GRAPHICS',
@@ -51,7 +52,7 @@ export default async function ServicesPage() {
             ];
             const hero = service.hero as { image?: string } | undefined;
             const imageSrc = hero?.image
-              ? `/${hero.image}`
+              ? getImageUrl(hero.image)
               : FALLBACK_IMAGES[i % FALLBACK_IMAGES.length];
             const tags = service.tags as string[] | undefined;
             const category = tags?.[0] ?? 'Service';

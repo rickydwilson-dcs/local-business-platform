@@ -1,7 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Phone } from "lucide-react";
-import { MobileMenu, LocationsDropdown, NavLink } from "@platform/core-components";
+import { MobileMenu, NavLink } from "@platform/core-components";
+import { CygnusLocationsDropdown } from "./LocationsDropdown";
 
 export interface CygnusHeaderProps {
   siteName: string;
@@ -52,11 +53,10 @@ export function CygnusHeader({
             {navigation.map((item) => {
               if (item.hasDropdown && locations.length > 0) {
                 return (
-                  <LocationsDropdown
+                  <CygnusLocationsDropdown
                     key={item.href}
                     locations={locations}
                     label={item.label}
-                    variant="dark"
                     buttonClassName={dropdownBtnClass}
                   />
                 );
