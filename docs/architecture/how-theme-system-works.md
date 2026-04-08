@@ -396,14 +396,14 @@ Because overlay colors are registered in Tailwind's `theme.extend.colors`, stand
 
 ### Common Overlay Use Cases
 
-| Use Case                   | Recommended Overlay  | Why                                                    |
-| -------------------------- | -------------------- | ------------------------------------------------------ |
-| Hero image with white text | `bg-overlay-dark`    | Darkens the image so light text is readable            |
-| Modal/dialog backdrop      | `bg-overlay-dark`    | Dims page content to focus attention on the modal      |
-| Lightbox background        | `bg-overlay-dark`    | Near-black background for image viewing                |
-| Card hover reveal          | `bg-overlay-primary` | Brand-colored tint adds visual interest on interaction |
-| Frosted content panel      | `bg-overlay-light`   | Lightens content beneath while maintaining context     |
-| Brand-forward hero         | `bg-overlay-primary` | Tints hero image with brand color identity             |
+| Use Case                   | Recommended Overlay  | Why                                                                                              |
+| -------------------------- | -------------------- | ------------------------------------------------------------------------------------------------ |
+| Hero image with white text | `bg-overlay-dark`    | Darkens the image so light text is readable                                                      |
+| Modal/dialog backdrop      | `bg-overlay-dark`    | Dims page content to focus attention on the modal                                                |
+| Lightbox background        | `bg-overlay-dark`    | Near-black background for image viewing                                                          |
+| Card hover reveal          | `bg-overlay-primary` | Brand-colored tint adds visual interest on interaction                                           |
+| Frosted content panel      | `bg-overlay-light`   | Lightens content beneath while maintaining context                                               |
+| Brand-forward hero         | `bg-overlay-primary` | Tints hero image with brand color identity                                                       |
 | Flat CTA / stats sections  | `.noise-overlay`     | SVG grain texture breaks digital flatness on solid-colour backgrounds without adding real images |
 
 ## WCAG Contrast Validation
@@ -432,19 +432,19 @@ Beyond CSS variables, the platform has named visual identities — **orion**, **
 
 - **CSS utilities** (`packages/themes/orion/globals.css`, `packages/themes/vega/globals.css`) — pre-written component classes (`btn-primary`, `card-interactive`, `mobile-menu-overlay`, `lightbox-content`, etc.) written as plain CSS with `@apply`. Each site's `globals.css` imports its theme's CSS before the `@tailwind` directives.
 - **`ComponentRegistry`** — a TypeScript object exported from the theme package (`orionRegistry`, `vegaRegistry`, `cygnusRegistry`) that maps `heroVariant`, `headerVariant`, `cardVariant`, and `sectionVariant` slots to concrete component names. Sites include this in `theme.config.ts` under `componentRegistry`. For cygnus sites, `heroVariant: "image-overlay"` is now consumed at runtime — page components import `cygnusRegistry` directly and conditionally render `ImageOverlayHero` from `@platform/core-components` when the variant matches.
-- **Structural components** (`packages/themes/[name]/components/`) — theme-specific `Header` and `Footer` React Server Components exported via a `/components` subpath. Sites import these directly into `app/layout.tsx` rather than using the generic `SiteHeader`/`Footer` from core-components. This is what gives each theme its distinct navigation and footer treatment — the visual identity is owned by the theme package, not by the consuming site.
+- **Structural components** (`packages/themes/[name]/components/`) — theme-specific `Header` and `Footer` React Server Components exported via a `/components` subpath. Sites import these directly into `app/layout.tsx` rather than using the generic `SiteHeader`/`Footer` from core-components. This is what gives each theme its distinct navigation and footer treatment — the visual identity is owned by the theme package, not by the consuming site. Only **orion**, **vega**, and **cygnus** currently ship Header/Footer components via this pattern. **atlas** and **rigel** ship extensive full-page component libraries instead. **lyra** and **nova** are CSS-utilities-only themes (no structural components).
 
 ### Available Themes
 
-| Theme | Visual Identity | Typical Use |
-|-------|-----------------|-------------|
-| **orion** | Dark header, full-bleed hero, red brand accent, circular icon cards, dark stat cards | Trade/electrical sites (e.g. DJ Fox) |
-| **vega** | Light header, split hero, standard card grid, clean typography | Professional services, reference sites |
-| **lyra** | Editorial serif headlines, sans-serif body, muted sage/cream palette, rounded cards | Garden/heritage/lifestyle service sites |
-| **cygnus** | Dark mode, Press-Black background, Signal Orange + Craft Green, bold graphic-led | Design, print & signage businesses (e.g. Mad Graphics) |
-| **nova** | Light header, image-overlay hero, bold orange + green, dark-accent sections | Print and signage companies |
-| **atlas** | Custom component registry | TBD |
-| **rigel** | Custom component registry | TBD |
+| Theme      | Visual Identity                                                                      | Components                  |
+| ---------- | ------------------------------------------------------------------------------------ | --------------------------- |
+| **orion**  | Dark header, full-bleed hero, red brand accent, circular icon cards, dark stat cards | Header + Footer             |
+| **vega**   | Light header, split hero, standard card grid, clean typography                       | Header + Footer             |
+| **lyra**   | Editorial serif headlines, sans-serif body, muted sage/cream palette, rounded cards  | CSS utilities only          |
+| **cygnus** | Dark mode, Press-Black background, Signal Orange + Craft Green, bold graphic-led     | Header + Footer             |
+| **nova**   | Light header, image-overlay hero, bold orange + green, dark-accent sections          | CSS utilities only          |
+| **atlas**  | Conference/event platform                                                            | Full-page component library |
+| **rigel**  | Conference/event platform                                                            | Full-page component library |
 
 ### Wiring It Up
 

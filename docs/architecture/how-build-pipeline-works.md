@@ -126,10 +126,18 @@ Turborepo's `"dependsOn": ["^build"]` ensures these build before any site that i
         "FEATURE_GOOGLE_ADS",
         "FEATURE_ANALYTICS_ENABLED",
         "FEATURE_SERVER_TRACKING",
+        "FEATURE_CONSENT_BANNER",
         "CSRF_SECRET",
         "BUSINESS_NAME",
         "BUSINESS_EMAIL",
-        "R2_BUCKET_NAME"
+        "R2_BUCKET_NAME",
+        "GA4_API_SECRET",
+        "FACEBOOK_ACCESS_TOKEN",
+        "NEW_RELIC_LICENSE_KEY",
+        "NEW_RELIC_APP_NAME",
+        "NEW_RELIC_LOG",
+        "NEW_RELIC_DISTRIBUTED_TRACING_ENABLED",
+        "NEW_RELIC_NO_CONFIG_FILE"
       ]
     },
     "dev": {
