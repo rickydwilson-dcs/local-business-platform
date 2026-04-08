@@ -1,0 +1,6 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "echo 'Root monorepo project - no web output. Individual sites deploy via their own Vercel projects.'",
+  "outputDirectory": "docs",
+  "ignoreCommand": "exit 1"
+}
