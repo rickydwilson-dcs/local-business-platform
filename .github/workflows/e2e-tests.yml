@@ -30,7 +30,7 @@ jobs:
   smoke-tests:
     name: Smoke Tests (Fast)
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 8
     # Run smoke tests on push to develop/staging only (skip main - staging is final gate)
     if: (github.event_name == 'push' && (github.ref == 'refs/heads/develop' || github.ref == 'refs/heads/staging')) || (github.event_name == 'workflow_dispatch' && inputs.test-suite == 'smoke')
 
@@ -51,7 +51,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build packages
-        run: pnpm --filter @platform/theme-system build
+        run: pnpm turbo run build --filter=@platform/theme-system --filter=@platform/core-components --filter=@platform/themes
 
       - name: Install Playwright browsers
         run: pnpm --filter colossus-scaffolding exec playwright install --with-deps chromium
