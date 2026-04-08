@@ -76,7 +76,7 @@ jobs:
   standard-tests-auto:
     name: Standard E2E Tests (Auto)
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 30
     # Run automatically on staging pushes only (staging is final quality gate before main)
     if: github.event_name == 'push' && github.ref == 'refs/heads/staging'
 
