@@ -7,4 +7,5 @@ import "@platform/themes/polaris";
 import "@platform/themes/nova";
 import "@platform/themes/orion";
 import "@platform/themes/rigel";
+import "@platform/themes/sirius";
 import "@platform/themes/vega";

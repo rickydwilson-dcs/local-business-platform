@@ -35,7 +35,8 @@ export type ThemeName =
   | "nova"
   | "rigel"
   | "cygnus"
-  | "polaris";
+  | "polaris"
+  | "sirius";
 
 /** Metadata describing which component variants a theme uses. */
 export interface ComponentRegistry {
