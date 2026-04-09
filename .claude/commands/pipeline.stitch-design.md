@@ -4,6 +4,7 @@ Generate a new theme and test site using Google Stitch as the design source.
 No reference URL required — Stitch creates the design from a trade/profession description.
 
 **Usage:**
+
 ```
 /pipeline.stitch-design --trade "plumber" \
   [--name "Ricky's Plumbing"] \
@@ -23,24 +24,25 @@ No reference URL required — Stitch creates the design from a trade/profession 
 
 **Arguments:**
 
-| Argument | Required | Default | Description |
-|---|---|---|---|
-| `--trade` | ✓ | — | Business/profession type |
-| `--name` | — | `Smith & Sons [Trade]` | Company name used in all content |
-| `--services` | — | Generic for trade | Comma-separated list of services |
-| `--location` | — | `UK` | Service area, used in content and contact details |
-| `--tagline` | — | Generic | Brand tagline for hero and footer |
-| `--phone` | — | `0800 XXX XXXX` | Phone number used in contact and footer |
-| `--colors` | — | Stitch chooses | Primary brand colour (hex or description) |
-| `--secondary-color` | — | Stitch derives | Secondary colour hex |
-| `--accent-color` | — | Stitch derives | Accent/highlight colour hex |
-| `--headline-font` | — | `newsreader` | Heading font — see font options below |
-| `--body-font` | — | `work-sans` | Body/UI font — see font options below |
-| `--roundness` | — | `default` | Corner radius: `sharp` `default` `soft` `pill` |
-| `--color-variant` | — | `tonal` | Palette generation: `tonal` `fidelity` `vibrant` `expressive` `monochrome` |
-| `--logo-desc` | — | — | Description of logo for design system brief |
+| Argument            | Required | Default                | Description                                                                |
+| ------------------- | -------- | ---------------------- | -------------------------------------------------------------------------- |
+| `--trade`           | ✓        | —                      | Business/profession type                                                   |
+| `--name`            | —        | `Smith & Sons [Trade]` | Company name used in all content                                           |
+| `--services`        | —        | Generic for trade      | Comma-separated list of services                                           |
+| `--location`        | —        | `UK`                   | Service area, used in content and contact details                          |
+| `--tagline`         | —        | Generic                | Brand tagline for hero and footer                                          |
+| `--phone`           | —        | `0800 XXX XXXX`        | Phone number used in contact and footer                                    |
+| `--colors`          | —        | Stitch chooses         | Primary brand colour (hex or description)                                  |
+| `--secondary-color` | —        | Stitch derives         | Secondary colour hex                                                       |
+| `--accent-color`    | —        | Stitch derives         | Accent/highlight colour hex                                                |
+| `--headline-font`   | —        | `newsreader`           | Heading font — see font options below                                      |
+| `--body-font`       | —        | `work-sans`            | Body/UI font — see font options below                                      |
+| `--roundness`       | —        | `default`              | Corner radius: `sharp` `default` `soft` `pill`                             |
+| `--color-variant`   | —        | `tonal`                | Palette generation: `tonal` `fidelity` `vibrant` `expressive` `monochrome` |
+| `--logo-desc`       | —        | —                      | Description of logo for design system brief                                |
 
 **Font options:**
+
 - Serif: `newsreader` `eb-garamond` `literata` `source-serif` `domine` `libre-caslon` `noto-serif`
 - Sans: `work-sans` `inter` `plus-jakarta` `space-grotesk` `montserrat` `dm-sans` `manrope` `rubik` `geist` `sora`
 
@@ -70,22 +72,22 @@ If output is non-empty, WARN: "Working tree has uncommitted changes. Proceeding 
 
 Parse `$ARGUMENTS` for all supported flags. Store each as a variable:
 
-| Flag | Variable | Default if omitted |
-|---|---|---|
-| `--trade` | `$TRADE` | — (required) |
-| `--name` | `$COMPANY_NAME` | `Smith & Sons [Trade]` |
-| `--services` | `$SERVICES_LIST` | _(leave empty — Stitch will generate appropriate services for the trade)_ |
-| `--location` | `$LOCATION` | `UK` |
-| `--tagline` | `$TAGLINE` | _(leave empty — generate from trade)_ |
-| `--phone` | `$PHONE` | `0800 XXX XXXX` |
-| `--colors` | `$PRIMARY_COLOR` | _(leave empty — Stitch chooses)_ |
-| `--secondary-color` | `$SECONDARY_COLOR` | _(leave empty)_ |
-| `--accent-color` | `$ACCENT_COLOR` | _(leave empty)_ |
-| `--headline-font` | `$HEADLINE_FONT` | `newsreader` |
-| `--body-font` | `$BODY_FONT` | `work-sans` |
-| `--roundness` | `$ROUNDNESS` | `default` |
-| `--color-variant` | `$COLOR_VARIANT` | `tonal` |
-| `--logo-desc` | `$LOGO_DESC` | _(leave empty)_ |
+| Flag                | Variable           | Default if omitted                                                        |
+| ------------------- | ------------------ | ------------------------------------------------------------------------- |
+| `--trade`           | `$TRADE`           | — (required)                                                              |
+| `--name`            | `$COMPANY_NAME`    | `Smith & Sons [Trade]`                                                    |
+| `--services`        | `$SERVICES_LIST`   | _(leave empty — Stitch will generate appropriate services for the trade)_ |
+| `--location`        | `$LOCATION`        | `UK`                                                                      |
+| `--tagline`         | `$TAGLINE`         | _(leave empty — generate from trade)_                                     |
+| `--phone`           | `$PHONE`           | `0800 XXX XXXX`                                                           |
+| `--colors`          | `$PRIMARY_COLOR`   | _(leave empty — Stitch chooses)_                                          |
+| `--secondary-color` | `$SECONDARY_COLOR` | _(leave empty)_                                                           |
+| `--accent-color`    | `$ACCENT_COLOR`    | _(leave empty)_                                                           |
+| `--headline-font`   | `$HEADLINE_FONT`   | `newsreader`                                                              |
+| `--body-font`       | `$BODY_FONT`       | `work-sans`                                                               |
+| `--roundness`       | `$ROUNDNESS`       | `default`                                                                 |
+| `--color-variant`   | `$COLOR_VARIANT`   | `tonal`                                                                   |
+| `--logo-desc`       | `$LOGO_DESC`       | _(leave empty)_                                                           |
 
 Map font/roundness/color-variant args to Stitch enums:
 
@@ -97,6 +99,7 @@ Map font/roundness/color-variant args to Stitch enums:
 **Color variant → Stitch enum:** `tonal`→`TONAL_SPOT`, `fidelity`→`FIDELITY`, `vibrant`→`VIBRANT`, `expressive`→`EXPRESSIVE`, `monochrome`→`MONOCHROME`, `neutral`→`NEUTRAL`
 
 If `--trade` is missing, STOP with:
+
 ```
 Usage: /pipeline.stitch-design --trade "electrical contractor" [options]
 
@@ -107,6 +110,7 @@ Run /pipeline.stitch-design with no arguments to see all options.
 **1.4 — Verify Stitch MCP reachable**
 
 Attempt a lightweight probe call to the Stitch MCP (e.g. `list_projects` or equivalent low-cost tool). On failure, STOP:
+
 ```
 Stitch MCP tools not available.
 Ensure the Stitch MCP server is configured at user level (~/.claude/).
@@ -128,6 +132,7 @@ ls -d packages/themes/$THEME_NAME/ 2>/dev/null
 ```
 
 If the directory exists, STOP:
+
 ```
 Theme $THEME_NAME already exists in packages/themes/ but is not in THEME_NAMES —
 THEME_NAMES may be out of sync. Investigate before proceeding.
@@ -140,10 +145,13 @@ THEME_NAMES may be out of sync. Investigate before proceeding.
 **2a — Create project**
 
 Call Stitch MCP `create_project` with human-readable name:
+
 ```
 <ThemeNameTitleCase> <Trade> Website
 ```
+
 Examples:
+
 - theme `lyra` + trade `electrical contractor` → `Lyra Electrical Contractor Website`
 - theme `nova` + trade `plumber` → `Nova Plumber Website`
 
@@ -218,6 +226,7 @@ If `$TASTE_DESIGN_BLOCK` is empty or the skill invocation was not successful, us
 **Eyebrow labels only** may use uppercase — never H1 or H2.
 
 **Banned:**
+
 - Inter font (use Geist, Work Sans, Space Grotesk, or the specified $HEADLINE_FONT)
 - ALL CAPS on headings
 - Gradient text on headings
@@ -270,15 +279,27 @@ Sections:
 
 Store the returned screen ID as `$HOME_SCREEN_ID`.
 
+**2c-i-confirm — Confirm home screen exists**
+
+After the `generate_screen_from_text` call returns (whether it returned a screen ID or timed out), call `get_project` for `$PROJECT_ID`. Check `screenInstances` in the response for a new entry. If found, confirm `$HOME_SCREEN_ID` and **wait 10 minutes** before proceeding to the heading extraction and next screen. If **not** found, STOP:
+
+```
+Home screen did not appear in screenInstances after submission.
+Do not retry the generation call — retrying creates duplicates.
+Check Stitch directly, retrieve the screen ID, and resume from 2c-i-extract.
+```
+
 **2c-i-extract — Extract heading classes from home screen**
 
 After storing `$HOME_SCREEN_ID`, call `get_screen` for `$HOME_SCREEN_ID` to retrieve the home page HTML.
 
 Parse the returned HTML:
+
 - Find the first `<h1>` element and extract its full `class` attribute value → store as `$H1_CLASSES`
 - Find all `<h2>` elements, extract their `class` attribute values, pick the most frequently occurring class string (by exact string match) → store as `$H2_CLASSES`
 
 Example of what to extract and store:
+
 ```
 $H1_CLASSES = "font-headline text-5xl md:text-7xl font-extrabold tracking-tight leading-none"
 $H2_CLASSES = "font-headline text-3xl md:text-4xl font-bold tracking-tight leading-snug"
@@ -287,14 +308,17 @@ $H2_CLASSES = "font-headline text-3xl md:text-4xl font-bold tracking-tight leadi
 If `get_screen` fails, or the HTML contains no `<h1>` or `<h2>` elements, set both `$H1_CLASSES` and `$H2_CLASSES` to empty strings and continue — the static constraints in the per-page prompts below still apply.
 
 Log the extracted values:
+
 ```
 H1 classes extracted: $H1_CLASSES
 H2 classes extracted: $H2_CLASSES
 ```
 
-**2c-ii — Generate remaining 4 screens**
+**2c-ii — Generate remaining 4 screens (one at a time)**
 
-For each of the 4 remaining screens, prepend the following consistency instruction (substituting variables):
+Generate each screen individually. **Confirm each screen exists in `get_project` before submitting the next.** Do not submit screens in parallel or in batch. **Wait 10 minutes between screens** — submitting faster causes timeouts even when the previous screen completed successfully.
+
+For each screen, prepend the following consistency instruction (substituting variables):
 
 ```
 This is a page for the same website as the home page (screen ID: $HOME_SCREEN_ID).
@@ -321,27 +345,23 @@ Do not add, remove, or substitute any of these classes. Do not use uppercase, fo
 Page-specific content:
 ```
 
-Then append the page-specific sections:
+Then append the page-specific sections. For each screen: submit it, then immediately call `get_project` for `$PROJECT_ID` and check `screenInstances` for the new entry. If found, store the screen ID and proceed. If **not** found, STOP — do not retry.
 
-| Screen | Slug | Page-specific sections |
-|--------|------|----------------------|
-| About | `about` | Company story with founding year[If $LOCATION: and $LOCATION roots], pull-quote, team grid (4 members with hover reveal), values cards (3, icon + hover colour change), trust/accreditations bar (4 items, grayscale→colour on hover), CTA band |
-| Contact | `contact` | Page header with hero image, contact form (name/email/phone/message), contact info sidebar ([If $PHONE: $PHONE /] address / hours), map image placeholder, landscape image break |
-| Services | `services` | Breadcrumb, page header, 6-card service grid (icon + image + description + "Learn more" link)[If $SERVICES_LIST: using these services: $SERVICES_LIST], CTA band with decorative icon |
-| Service Detail | `service-detail` | Breadcrumb, hero for [first service from $SERVICES_LIST or "primary service"], description + benefits card (4 benefits with icons), 3-image staggered gallery with hover captions, FAQ accordion (3 questions), CTA panel |
-| Blog | `blog` | Breadcrumb, page header, article card grid (6 cards: featured image, category tag, title, excerpt, read-time, author avatar + name, "Read more" link), pagination controls, sidebar with categories + recent posts |
-| Blog Detail | `blog-detail` | Breadcrumb, full-bleed hero with title + author + date + read-time, article body (rich prose: dropcap first paragraph, pull-quote block, body text, subheadings), author bio card, related articles (3 cards), CTA band |
+| Screen         | Slug             | Page-specific sections                                                                                                                                                                                                                          |
+| -------------- | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| About          | `about`          | Company story with founding year[If $LOCATION: and $LOCATION roots], pull-quote, team grid (4 members with hover reveal), values cards (3, icon + hover colour change), trust/accreditations bar (4 items, grayscale→colour on hover), CTA band |
+| Contact        | `contact`        | Page header with hero image, contact form (name/email/phone/message), contact info sidebar ([If $PHONE: $PHONE /] address / hours), map image placeholder, landscape image break                                                                |
+| Services       | `services`       | Breadcrumb, page header, 6-card service grid (icon + image + description + "Learn more" link)[If $SERVICES_LIST: using these services: $SERVICES_LIST], CTA band with decorative icon                                                           |
+| Service Detail | `service-detail` | Breadcrumb, hero for [first service from $SERVICES_LIST or "primary service"], description + benefits card (4 benefits with icons), 3-image staggered gallery with hover captions, FAQ accordion (3 questions), CTA panel                       |
+| Blog           | `blog`           | Breadcrumb, page header, article card grid (6 cards: featured image, category tag, title, excerpt, read-time, author avatar + name, "Read more" link), pagination controls, sidebar with categories + recent posts                              |
+| Blog Detail    | `blog-detail`    | Breadcrumb, full-bleed hero with title + author + date + read-time, article body (rich prose: dropcap first paragraph, pull-quote block, body text, subheadings), author bio card, related articles (3 cards), CTA band                         |
 
-After submitting all 5 screens, call `list_screens` for `$PROJECT_ID` and confirm exactly 5 exist. If any failed, STOP and report which screen(s) failed.
-
-```bash
-# Verification gate — STOP if this fails
-# Confirm list_screens returns exactly 7 screens for $PROJECT_ID
-```
+After each screen submission, confirm via `get_project` `screenInstances` before sending the next. If any screen does not appear in `screenInstances`, STOP and report which screen failed. Do not call `list_screens` — it is broken. Do not retry a timed-out generation call — the generation completed silently.
 
 **2d — Apply design system to all screens**
 
 Call `get_project` for `$PROJECT_ID` to retrieve screen instance IDs. Then call `apply_design_system` with:
+
 - `projectId: $PROJECT_ID`
 - `assetId: $DESIGN_SYSTEM_ID`
 - `selectedScreenInstances`: all screen instances from the project
@@ -373,6 +393,7 @@ Enter 1, 2, or 3:
 ```
 
 If the user chooses 2, re-run with `--enforce`:
+
 ```bash
 npx tsx tools/stitch-normalize-headings.mjs \
   --dir output/ingestion/$THEME_NAME-stitch/html \
@@ -390,6 +411,7 @@ If the user chooses 3, STOP with instructions to re-generate the specific pages 
 ## Step 3: Download Design Assets
 
 Create output folders:
+
 ```bash
 mkdir -p output/ingestion/$THEME_NAME-stitch/design-system
 mkdir -p output/ingestion/$THEME_NAME-stitch/html
@@ -400,7 +422,7 @@ mkdir -p output/ingestion/$THEME_NAME-stitch/meta
 Download in parallel where possible:
 
 - Call `get_design_system` for `$PROJECT_ID` → write `output/ingestion/$THEME_NAME-stitch/design-system/tokens.json`
-- Call `list_screens` → write `output/ingestion/$THEME_NAME-stitch/meta/screens.json`
+- Call `get_project` for `$PROJECT_ID` → extract `screenInstances` → write to `output/ingestion/$THEME_NAME-stitch/meta/screens.json`
 - Write `output/ingestion/$THEME_NAME-stitch/meta/project.json`:
   ```json
   {
@@ -453,33 +475,38 @@ Read `output/ingestion/$THEME_NAME-stitch/design-system/tokens.json`.
 
 Resolve each ThemeConfig field using the alias resolution order below (first match wins):
 
-| ThemeConfig field | Stitch token aliases to try (in order) | Fallback |
-|---|---|---|
-| `colors.brand.primary` | `primaryColor`, `primary`, `colors.primary`, `brand.primary`, `brandColor` | `#2563eb` |
-| `colors.brand.primaryHover` | `primaryHover`, `primary-hover` | Darken primary ~12% |
-| `colors.brand.secondary` | `secondaryColor`, `secondary`, `colors.secondary` | `#1e3a5f` |
-| `colors.brand.accent` | `accentColor`, `accent`, `tertiary`, `highlight` | `#06b6d4` |
-| `colors.brand.onPrimary` | `onPrimary`, `primaryForeground`, `primaryText` | `#ffffff` if primary luminance < 0.5, else `#111827` |
-| `colors.surface.background` | `backgroundColor`, `background`, `surface`, `bgColor` | `#ffffff` |
-| `colors.surface.foreground` | `onBackground`, `textColor`, `foreground`, `text` | `#111827` |
-| `colors.surface.card` | `surfaceColor`, `cardBackground`, `card`, `surfaceContainer` | `#ffffff` |
-| `colors.surface.cardBorder` | `outlineColor`, `border`, `outline`, `divider` | `#e2e8f0` |
-| `colors.surface.muted` | `neutralColor`, `muted`, `surfaceVariant`, `neutral` | `#f8fafc` |
-| `colors.semantic.success` | `success`, `successColor` | `#10b981` |
-| `colors.semantic.warning` | `warning`, `warningColor` | `#f59e0b` |
-| `colors.semantic.error` | `error`, `errorColor` | `#ef4444` |
-| `colors.semantic.info` | `info`, `infoColor` | `#3b82f6` |
-| `colors.overlay.dark` | `overlayDark`, `scrim` | `rgba(0,0,0,0.8)` |
-| `colors.overlay.light` | `overlayLight` | `rgba(255,255,255,0.8)` |
-| `colors.overlay.primary` | `overlayPrimary` | `rgba(<primary-rgb>,0.8)` |
+| ThemeConfig field           | Stitch token aliases to try (in order)                                     | Fallback                                             |
+| --------------------------- | -------------------------------------------------------------------------- | ---------------------------------------------------- |
+| `colors.brand.primary`      | `primaryColor`, `primary`, `colors.primary`, `brand.primary`, `brandColor` | `#2563eb`                                            |
+| `colors.brand.primaryHover` | `primaryHover`, `primary-hover`                                            | Darken primary ~12%                                  |
+| `colors.brand.secondary`    | `secondaryColor`, `secondary`, `colors.secondary`                          | `#1e3a5f`                                            |
+| `colors.brand.accent`       | `accentColor`, `accent`, `tertiary`, `highlight`                           | `#06b6d4`                                            |
+| `colors.brand.onPrimary`    | `onPrimary`, `primaryForeground`, `primaryText`                            | `#ffffff` if primary luminance < 0.5, else `#111827` |
+| `colors.surface.background` | `backgroundColor`, `background`, `surface`, `bgColor`                      | `#ffffff`                                            |
+| `colors.surface.foreground` | `onBackground`, `textColor`, `foreground`, `text`                          | `#111827`                                            |
+| `colors.surface.card`       | `surfaceColor`, `cardBackground`, `card`, `surfaceContainer`               | `#ffffff`                                            |
+| `colors.surface.cardBorder` | `outlineColor`, `border`, `outline`, `divider`                             | `#e2e8f0`                                            |
+| `colors.surface.muted`      | `neutralColor`, `muted`, `surfaceVariant`, `neutral`                       | `#f8fafc`                                            |
+| `colors.semantic.success`   | `success`, `successColor`                                                  | `#10b981`                                            |
+| `colors.semantic.warning`   | `warning`, `warningColor`                                                  | `#f59e0b`                                            |
+| `colors.semantic.error`     | `error`, `errorColor`                                                      | `#ef4444`                                            |
+| `colors.semantic.info`      | `info`, `infoColor`                                                        | `#3b82f6`                                            |
+| `colors.overlay.dark`       | `overlayDark`, `scrim`                                                     | `rgba(0,0,0,0.8)`                                    |
+| `colors.overlay.light`      | `overlayLight`                                                             | `rgba(255,255,255,0.8)`                              |
+| `colors.overlay.primary`    | `overlayPrimary`                                                           | `rgba(<primary-rgb>,0.8)`                            |
 
 **4b — Record provenance**
 
 Write `output/ingestion/$THEME_NAME-stitch/meta/token-mapping-report.json`:
+
 ```json
 {
   "colors.brand.primary": { "source": "direct", "stitchKey": "primaryColor", "value": "#dc2626" },
-  "colors.brand.primaryHover": { "source": "derived", "from": "colors.brand.primary", "value": "#b91c1c" },
+  "colors.brand.primaryHover": {
+    "source": "derived",
+    "from": "colors.brand.primary",
+    "value": "#b91c1c"
+  },
   "colors.surface.muted": { "source": "fallback", "value": "#f8fafc" }
 }
 ```
@@ -490,11 +517,11 @@ Each key maps to one of: `"source": "direct"` (found via alias), `"source": "der
 
 Read `output/ingestion/$THEME_NAME-stitch/html/home.html` and apply these heuristics:
 
-| Field | Heuristic | Values |
-|---|---|---|
-| `heroVariant` | Full-width background image or `background-image` CSS → `"image-overlay"`; two-column split layout → `"split"` | `"image-overlay"` \| `"split"` |
-| `headerVariant` | Header/nav background luminance < 0.3 → `"dark"` | `"dark"` \| `"light"` |
-| `cardVariant` | Circular icon containers (`border-radius:50%` or `rounded-full`) → `"icon-circle"`; image overlay cards → `"overlay"`; else → `"standard"` | `"icon-circle"` \| `"overlay"` \| `"standard"` |
+| Field            | Heuristic                                                                                                                                      | Values                                                        |
+| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- |
+| `heroVariant`    | Full-width background image or `background-image` CSS → `"image-overlay"`; two-column split layout → `"split"`                                 | `"image-overlay"` \| `"split"`                                |
+| `headerVariant`  | Header/nav background luminance < 0.3 → `"dark"`                                                                                               | `"dark"` \| `"light"`                                         |
+| `cardVariant`    | Circular icon containers (`border-radius:50%` or `rounded-full`) → `"icon-circle"`; image overlay cards → `"overlay"`; else → `"standard"`     | `"icon-circle"` \| `"overlay"` \| `"standard"`                |
 | `sectionVariant` | Alternating dark brand block → `"dark-accent"`; recurring gradients → `"gradient"`; alternating tinted bands → `"banded"`; else → `"standard"` | `"dark-accent"` \| `"gradient"` \| `"banded"` \| `"standard"` |
 
 **4d — Write packages/themes/$THEME_NAME/index.ts**
@@ -587,15 +614,19 @@ The remainder of the file (buttons, cards, sections, containers, etc.) is copied
 Append `"$THEME_NAME"` to the `THEME_NAMES` array. This is MANDATORY. Without it, the next run of `pickNextThemeName()` will try to create the same name again.
 
 Example — before:
+
 ```typescript
 export const THEME_NAMES = ["orion", "vega"] as const;
 ```
+
 After (for theme `lyra`):
+
 ```typescript
 export const THEME_NAMES = ["orion", "vega", "lyra"] as const;
 ```
 
 **Verification gate — STOP if this fails:**
+
 ```bash
 npx tsx -e "import { pickNextThemeName } from './tools/lib/theme-name-picker.ts'; console.log(pickNextThemeName());"
 # Output must be the constellation name AFTER $THEME_NAME, not $THEME_NAME itself
@@ -615,6 +646,7 @@ rm -rf sites/$THEME_NAME-test/node_modules sites/$THEME_NAME-test/.next sites/$T
 **5b — Write marker file**
 
 Write `sites/$THEME_NAME-test/.pipeline-test-site.json`:
+
 ```json
 {
   "createdAt": "<ISO timestamp>",
@@ -651,10 +683,14 @@ export const themeConfig: DeepPartialThemeConfig = {
  */
 
 @layer base {
-  html { scroll-behavior: smooth; }
+  html {
+    scroll-behavior: smooth;
+  }
   body {
     @apply bg-surface-background text-surface-foreground;
-    font-feature-settings: 'rlig' 1, 'calt' 1;
+    font-feature-settings:
+      "rlig" 1,
+      "calt" 1;
   }
 }
 ```
@@ -666,6 +702,7 @@ export const themeConfig: DeepPartialThemeConfig = {
 3. Write the result to `sites/$THEME_NAME-test/package.json`
 
 **Verification gate — STOP if this fails:**
+
 ```bash
 node -e "
   const p = require('./sites/$THEME_NAME-test/package.json');
@@ -679,6 +716,7 @@ node -e "
 **5f — Update site.config.ts tagline**
 
 Update the `tagline` field to:
+
 ```
 Pipeline Test Site — $THEME_NAME theme (Stitch)
 ```
@@ -690,6 +728,7 @@ Produce five self-contained TSX server component pages that replicate the Stitch
 **Pre-conditions:** Images must already be downloaded to `output/ingestion/$THEME_NAME-stitch/images/` and copied to `sites/$THEME_NAME-test/public/stitch-images/`.
 
 **First — copy images to test site:**
+
 ```bash
 mkdir -p sites/$THEME_NAME-test/public/stitch-images
 cp output/ingestion/$THEME_NAME-stitch/images/img-*.jpg sites/$THEME_NAME-test/public/stitch-images/
@@ -698,6 +737,7 @@ ls sites/$THEME_NAME-test/public/stitch-images/ | wc -l
 ```
 
 **Files to create/replace:**
+
 - `sites/$THEME_NAME-test/app/layout.tsx` — keep ThemeProvider structure; no `<head>` font tags (fonts load via globals.css @import)
 - `sites/$THEME_NAME-test/app/globals.css` — rewrite to add Google Fonts `@import` at the top before `@tailwind` directives
 - `sites/$THEME_NAME-test/app/page.tsx` — home
@@ -705,16 +745,17 @@ ls sites/$THEME_NAME-test/public/stitch-images/ | wc -l
 - `sites/$THEME_NAME-test/app/contact/page.tsx` — contact
 - `sites/$THEME_NAME-test/app/services/page.tsx` — services listing
 - `sites/$THEME_NAME-test/app/services/[first-service-slug]/page.tsx` — service detail (static route, not dynamic)
-- `sites/$THEME_NAME-test/app/blog/page.tsx`                         — blog listing (from Stitch blog.html)
-- `sites/$THEME_NAME-test/app/blog/[slug]/page.tsx`                  — blog detail (from Stitch blog-detail.html; use first article title as static slug)
-- `sites/$THEME_NAME-test/app/locations/page.tsx`                    — locations listing (adapted from services listing HTML)
-- `sites/$THEME_NAME-test/app/locations/[slug]/page.tsx`             — location detail (adapted from service-detail HTML)
-- `sites/$THEME_NAME-test/app/projects/page.tsx`                     — projects listing (adapted from services listing HTML)
-- `sites/$THEME_NAME-test/app/projects/[slug]/page.tsx`              — project detail (adapted from service-detail HTML)
-- `sites/$THEME_NAME-test/app/privacy-policy/page.tsx`               — static prose template (no Stitch source)
-- `sites/$THEME_NAME-test/app/cookie-policy/page.tsx`                — static prose template (no Stitch source)
+- `sites/$THEME_NAME-test/app/blog/page.tsx` — blog listing (from Stitch blog.html)
+- `sites/$THEME_NAME-test/app/blog/[slug]/page.tsx` — blog detail (from Stitch blog-detail.html; use first article title as static slug)
+- `sites/$THEME_NAME-test/app/locations/page.tsx` — locations listing (adapted from services listing HTML)
+- `sites/$THEME_NAME-test/app/locations/[slug]/page.tsx` — location detail (adapted from service-detail HTML)
+- `sites/$THEME_NAME-test/app/projects/page.tsx` — projects listing (adapted from services listing HTML)
+- `sites/$THEME_NAME-test/app/projects/[slug]/page.tsx` — project detail (adapted from service-detail HTML)
+- `sites/$THEME_NAME-test/app/privacy-policy/page.tsx` — static prose template (no Stitch source)
+- `sites/$THEME_NAME-test/app/cookie-policy/page.tsx` — static prose template (no Stitch source)
 
 **Rules:**
+
 - Read each Stitch HTML file in full before writing its TSX counterpart — the HTML is source of truth for sections, content, and layout
 - No `'use client'`, no platform imports (`@platform/core-components`, `siteConfig`, etc.)
 - All content hardcoded from the Stitch HTML — do not use MDX or siteConfig
@@ -727,30 +768,31 @@ ls sites/$THEME_NAME-test/public/stitch-images/ | wc -l
 - **CSS fidelity:** Copy ALL CSS classes from each Stitch HTML element faithfully. Do not omit or simplify hover effects, transition durations (`duration-500`, `duration-700`), grayscale filters (`grayscale-[20%]`), scale transforms (`scale-105`), opacity values, or micro-interactions. If the Stitch HTML has it, the TSX must have it.
 - Translate all Stitch MD3 color tokens to theme token classes using the canonical color map:
 
-| Stitch token | Theme token |
-|---|---|
-| `primary` | `brand-primary` |
-| `secondary` | `brand-secondary` |
-| `tertiary-fixed-dim` | `brand-accent` |
-| `surface` / `background` | `surface-background` |
-| `surface-container-low` | `surface-muted` |
-| `on-surface` | `surface-foreground` |
-| `outline-variant` | `surface-border` |
-| Unmapped colors | Tailwind arbitrary `bg-[#hexvalue]` |
+| Stitch token             | Theme token                         |
+| ------------------------ | ----------------------------------- |
+| `primary`                | `brand-primary`                     |
+| `secondary`              | `brand-secondary`                   |
+| `tertiary-fixed-dim`     | `brand-accent`                      |
+| `surface` / `background` | `surface-background`                |
+| `surface-container-low`  | `surface-muted`                     |
+| `on-surface`             | `surface-foreground`                |
+| `outline-variant`        | `surface-border`                    |
+| Unmapped colors          | Tailwind arbitrary `bg-[#hexvalue]` |
 
 **Adaptation rules for non-Stitch pages:**
 
-*Locations listing* — adapt from `services.html`. Swap service icon cards for location cards: use Material Symbols `location_on` icon instead of service icons. Card content: town/area name as heading, county or tagline as subheading, "View services →" link. No image required. Keep the same card-grid section structure and CTA band.
+_Locations listing_ — adapt from `services.html`. Swap service icon cards for location cards: use Material Symbols `location_on` icon instead of service icons. Card content: town/area name as heading, county or tagline as subheading, "View services →" link. No image required. Keep the same card-grid section structure and CTA band.
 
-*Location detail* — adapt from `service-detail.html`. Replace the benefits card with a "Services in [area]" card (list of 4–5 service names with links). Replace the FAQ accordion with a "Local info" section (travel time placeholder, service radius, nearby landmark note). Keep the gallery placeholder and CTA panel.
+_Location detail_ — adapt from `service-detail.html`. Replace the benefits card with a "Services in [area]" card (list of 4–5 service names with links). Replace the FAQ accordion with a "Local info" section (travel time placeholder, service radius, nearby landmark note). Keep the gallery placeholder and CTA panel.
 
-*Projects listing* — adapt from `services.html`. Cards are image-dominant (full-bleed top image, matching the services card style). Fields: project title as heading, trade/type badge, one-sentence scope, "View project →" link. 3-column grid.
+_Projects listing_ — adapt from `services.html`. Cards are image-dominant (full-bleed top image, matching the services card style). Fields: project title as heading, trade/type badge, one-sentence scope, "View project →" link. 3-column grid.
 
-*Project detail* — adapt from `service-detail.html`. Lead with a 2-image overview gallery (use stitch images). Replace the benefits card with a "Project scope" list (4 bullet points of what was done). Replace the FAQ accordion with a client testimonial (pull-quote, star rating row, client name). Keep the CTA panel.
+_Project detail_ — adapt from `service-detail.html`. Lead with a 2-image overview gallery (use stitch images). Replace the benefits card with a "Project scope" list (4 bullet points of what was done). Replace the FAQ accordion with a client testimonial (pull-quote, star rating row, client name). Keep the CTA panel.
 
-*Blog listing and blog detail* — generated directly from `blog.html` and `blog-detail.html` respectively (same approach as services and service-detail). No adaptation needed — follow the standard Stitch HTML → TSX conversion rules.
+_Blog listing and blog detail_ — generated directly from `blog.html` and `blog-detail.html` respectively (same approach as services and service-detail). No adaptation needed — follow the standard Stitch HTML → TSX conversion rules.
 
-*Policy pages (privacy-policy, cookie-policy)* — no Stitch source. Generate a clean two-column prose layout using theme tokens only:
+_Policy pages (privacy-policy, cookie-policy)_ — no Stitch source. Generate a clean two-column prose layout using theme tokens only:
+
 - Left column (sticky on desktop): nav sidebar with anchor links to H2 sections — "Data we collect", "How we use it", "Cookies", "Your rights", "Contact us"
 - Right column: prose content — placeholder paragraphs under each H2 heading
 - On mobile: sidebar collapses to a `<details>` / `<summary>` "Jump to section" toggle
@@ -758,6 +800,7 @@ ls sites/$THEME_NAME-test/public/stitch-images/ | wc -l
 - No images, no CTA band — minimal typographic layout
 
 **layout.tsx pattern** — Newsreader and Work Sans via `next/font/google` (Turbopack-native). Material Symbols via `<link>` in `<head>` (server-rendered, not processed by Turbopack CSS bundler — `Material_Symbols_Outlined` is not available in next/font/google):
+
 ```tsx
 import type { Metadata, Viewport } from 'next';
 import { Newsreader, Work_Sans } from 'next/font/google';
@@ -807,6 +850,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 ```
 
 **globals.css pattern** — uses CSS variables from next/font, no `@import url()`:
+
 ```css
 @import "../../../packages/themes/$THEME_NAME/globals.css";
 
@@ -820,17 +864,24 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
  */
 
 @layer base {
-  html { scroll-behavior: smooth; }
+  html {
+    scroll-behavior: smooth;
+  }
   body {
     font-family: var(--font-work-sans), sans-serif;
     @apply bg-surface-background text-surface-foreground;
-    font-feature-settings: 'rlig' 1, 'calt' 1;
+    font-feature-settings:
+      "rlig" 1,
+      "calt" 1;
   }
-  h1, h2, h3, h4 {
+  h1,
+  h2,
+  h3,
+  h4 {
     font-family: var(--font-newsreader), serif;
   }
   .material-symbols-outlined {
-    font-family: 'Material Symbols Outlined';
+    font-family: "Material Symbols Outlined";
     font-weight: normal;
     font-style: normal;
     font-size: 24px;
@@ -840,8 +891,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     display: inline-block;
     white-space: nowrap;
     direction: ltr;
-    font-feature-settings: 'liga';
-    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    font-feature-settings: "liga";
+    font-variation-settings:
+      "FILL" 0,
+      "wght" 400,
+      "GRAD" 0,
+      "opsz" 24;
     vertical-align: middle;
   }
 }
@@ -850,15 +905,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 **Patch next.config.ts CSP** — the base-template CSP blocks Google Fonts. Update `sites/$THEME_NAME-test/next.config.ts`:
 
 Find the `Content-Security-Policy` value and change:
+
 ```
 style-src 'self' 'unsafe-inline'; font-src 'self';
 ```
+
 To:
+
 ```
 style-src 'self' 'unsafe-inline' fonts.googleapis.com; font-src 'self' fonts.gstatic.com;
 ```
 
 **Verification gate:**
+
 ```bash
 ls sites/$THEME_NAME-test/app/{page.tsx,about/page.tsx,contact/page.tsx,services/page.tsx} | wc -l
 # Must be 4 (core Stitch pages)
@@ -961,6 +1020,7 @@ pnpm install --lockfile-only
 ```
 
 If that fails:
+
 ```bash
 pnpm install
 ```

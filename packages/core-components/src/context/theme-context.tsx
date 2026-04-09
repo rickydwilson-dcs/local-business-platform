@@ -27,7 +27,15 @@ import { createContext, useContext } from "react";
 // ============================================================
 
 /** Identifies which named visual theme is active. */
-export type ThemeName = "orion" | "vega" | "lyra" | "atlas" | "nova" | "rigel" | "cygnus";
+export type ThemeName =
+  | "orion"
+  | "vega"
+  | "lyra"
+  | "atlas"
+  | "nova"
+  | "rigel"
+  | "cygnus"
+  | "polaris";
 
 /** Metadata describing which component variants a theme uses. */
 export interface ComponentRegistry {
@@ -65,16 +73,8 @@ export interface ThemeProviderProps {
   registry?: ComponentRegistry | null;
 }
 
-export function ThemeProvider({
-  children,
-  theme,
-  registry = null,
-}: ThemeProviderProps) {
-  return (
-    <ThemeContext.Provider value={{ theme, registry }}>
-      {children}
-    </ThemeContext.Provider>
-  );
+export function ThemeProvider({ children, theme, registry = null }: ThemeProviderProps) {
+  return <ThemeContext.Provider value={{ theme, registry }}>{children}</ThemeContext.Provider>;
 }
 
 // ============================================================

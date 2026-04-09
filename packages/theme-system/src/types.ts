@@ -10,8 +10,16 @@ import { z } from "zod";
  * Used by the ingestion pipeline and theme manifests.
  */
 export type ComponentCategory =
-  | "Hero" | "Navigation" | "Cards" | "CTA" | "Content"
-  | "Social Proof" | "Blog" | "Stats" | "Footer" | "Custom";
+  | "Hero"
+  | "Navigation"
+  | "Cards"
+  | "CTA"
+  | "Content"
+  | "Social Proof"
+  | "Blog"
+  | "Stats"
+  | "Footer"
+  | "Custom";
 
 /**
  * Typography scale entry with size, lineHeight, letterSpacing, and weight
@@ -269,7 +277,16 @@ export interface ThemeConfig {
  * - orion: dark header, full-bleed hero, circular icons (industrial style)
  * - vega:  light header, split hero, card grid (professional style)
  */
-export const THEME_NAMES = ["atlas", "cygnus", "lyra", "nova", "orion", "rigel", "vega"] as const;
+export const THEME_NAMES = [
+  "atlas",
+  "cygnus",
+  "lyra",
+  "nova",
+  "orion",
+  "polaris",
+  "rigel",
+  "vega",
+] as const;
 export type ThemeName = (typeof THEME_NAMES)[number];
 
 /**
