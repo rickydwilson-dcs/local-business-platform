@@ -484,6 +484,17 @@ The force repo (`/Users/rickywilson/Sites/force/`) uses a subset of these patter
 
 Force has one additional constraint — `GOVERNANCE §8` forbids concurrent **jobs** (one job runs at a time in the queue). However, within a single dispatched job, the parallel subagent patterns above are still permitted. The ban is on concurrent jobs, not on concurrent subagents within a job. See `force/CLAUDE.md` for the authoritative rule.
 
+### Force-specific divergences
+
+Force maintains byte-identical copies of 7 of the 8 shared skills. The one exception is `/review.code`, which force customizes to add two conditional agents:
+
+- **Agent 5: `cs-backend-engineer`** — triggered by changes to `listen/*.py`, `bridge/*.ts`, or `scripts/*.py`. Reviews force's FastAPI job server, TypeScript bridge, and Python utility scripts for backend correctness, async safety, and GOVERNANCE §6/§8/§9 compliance.
+- **Agent 6: `cs-observability-engineer`** — triggered by changes to audit logging, fallback sync, or notification paths. Reviews force's observability posture — whether failures are logged, whether notification failures are retried, whether the Supabase/.jsonl fallback is itself monitored.
+
+These agents are force-specific and have no equivalent in LBP because LBP has no Python infrastructure and different failure modes. LBP's `/review.code` still has Agents 1-6 (security, code quality, a11y/SEO, architecture, conditional Vercel config, conditional theme package).
+
+The divergence is protected by force's `just sync-skills` target, which explicitly excludes `review.code.md` from the sync list.
+
 ---
 
 ## References
