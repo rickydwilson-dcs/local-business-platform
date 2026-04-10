@@ -426,13 +426,13 @@ Contrast ratios must meet WCAG AA: 4.5:1 for normal text, 3:1 for large text.
 
 ## Named Themes
 
-Beyond CSS variables, the platform has named visual identities — **atlas**, **castor**, **cygnus**, **lyra**, **nova**, **orion**, **polaris**, **rigel**, **sirius**, and **vega** — each packaged in `packages/themes/`.
+Beyond CSS variables, the platform has named visual identities — **atlas**, **castor**, **cygnus**, **lyra**, **nova**, **orion**, **polaris**, **rigel**, **sirius**, **solaris**, and **vega** — each packaged in `packages/themes/`.
 
 ### What a Named Theme Provides
 
 - **CSS utilities** (`packages/themes/orion/globals.css`, `packages/themes/vega/globals.css`) — pre-written component classes (`btn-primary`, `card-interactive`, `mobile-menu-overlay`, `lightbox-content`, etc.) written as plain CSS with `@apply`. Each site's `globals.css` imports its theme's CSS before the `@tailwind` directives.
 - **`ComponentRegistry`** — a TypeScript object exported from the theme package (`orionRegistry`, `vegaRegistry`, `cygnusRegistry`) that maps `heroVariant`, `headerVariant`, `cardVariant`, and `sectionVariant` slots to concrete component names. Sites include this in `theme.config.ts` under `componentRegistry`. For cygnus sites, `heroVariant: "image-overlay"` is now consumed at runtime — page components import `cygnusRegistry` directly and conditionally render `ImageOverlayHero` from `@platform/core-components` when the variant matches.
-- **Structural components** (`packages/themes/[name]/components/`) — theme-specific `Header` and `Footer` React Server Components exported via a `/components` subpath. Sites import these directly into `app/layout.tsx` rather than using the generic `SiteHeader`/`Footer` from core-components. This is what gives each theme its distinct navigation and footer treatment — the visual identity is owned by the theme package, not by the consuming site. Only **orion**, **vega**, and **cygnus** currently ship Header/Footer components via this pattern. **atlas** and **rigel** ship extensive full-page component libraries instead. **lyra** and **nova** are CSS-utilities-only themes (no structural components).
+- **Structural components** (`packages/themes/[name]/components/`) — theme-specific `Header` and `Footer` React Server Components exported via a `/components` subpath. Sites import these directly into `app/layout.tsx` rather than using the generic `SiteHeader`/`Footer` from core-components. This is what gives each theme its distinct navigation and footer treatment — the visual identity is owned by the theme package, not by the consuming site. Only **orion**, **vega**, **cygnus**, and **solaris** currently ship Header/Footer components via this pattern. **atlas** and **rigel** ship extensive full-page component libraries instead. **lyra** and **nova** are CSS-utilities-only themes (no structural components).
 
 ### Available Themes
 
@@ -448,6 +448,7 @@ Beyond CSS variables, the platform has named visual identities — **atlas**, **
 | **polaris** | Tactical Telemetry dark mode, Aviation Red accent, industrial brutalist              | CSS utilities only          |
 | **rigel**   | Conference/event platform                                                            | Full-page component library |
 | **sirius**  | Premium Tech Agency light mode, Electric Blue + Teal, editorial breathing room       | CSS utilities only          |
+| **solaris** | Soft blue-white background, sky blue + chartreuse accent, geometric hero shapes      | Header + Footer             |
 
 ### Wiring It Up
 

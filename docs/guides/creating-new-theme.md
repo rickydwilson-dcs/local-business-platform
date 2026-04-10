@@ -8,10 +8,10 @@ There are two ways to create a new theme, depending on whether you have a refere
 
 ## Which pipeline to use?
 
-| Situation | Command |
-|---|---|
-| Client has an existing website to extract from | `/pipeline.ingest` |
-| No existing website — generate from scratch | `/pipeline.stitch-design` |
+| Situation                                      | Command                   |
+| ---------------------------------------------- | ------------------------- |
+| Client has an existing website to extract from | `/pipeline.ingest`        |
+| No existing website — generate from scratch    | `/pipeline.stitch-design` |
 
 ---
 
@@ -26,14 +26,16 @@ Use this when the client has an existing website. The pipeline screenshots the s
 - `--url` (required) — the reference website to scrape
 - `--trade` (optional) — business type hint; helps with content generation
 
-The pipeline assigns a theme name automatically from the constellation namespace. Current themes: `orion`, `vega`, `lyra`, `atlas`, `nova`, `rigel`.
+The pipeline assigns a theme name automatically from the constellation namespace. Current themes: `atlas`, `castor`, `cygnus`, `lyra`, `nova`, `orion`, `polaris`, `rigel`, `sirius`, `solaris`, `vega`.
 
 **What it produces:**
+
 - Screenshots and extracted tokens in `output/ingestion/<theme-name>/`
 - `packages/themes/<theme-name>/` — the theme package
 - `sites/test-<theme-name>/` — a test site wired to the new theme
 
 **After it runs:**
+
 1. Check `output/ingestion/<theme-name>/meta/token-mapping-report.json` — verify colour extraction looks right
 2. Run `cd sites/test-<theme-name> && npm run dev` to preview
 3. Adjust colours in `packages/themes/<theme-name>/index.ts` if needed
@@ -62,12 +64,14 @@ claude mcp add stitch --transport http https://stitch.googleapis.com/mcp \
 The pipeline assigns a theme name automatically from the constellation namespace.
 
 **What it produces:**
+
 - 5 Stitch-generated page designs (home, about, contact, services, service detail)
 - Design tokens in `output/ingestion/<theme-name>-stitch/`
 - `packages/themes/<theme-name>/` — the theme package
 - `sites/<theme-name>-test/` — a test site wired to the new theme
 
 **After it runs:**
+
 1. Open the Stitch project URL (printed in the report) to review designs visually
 2. Check `output/ingestion/<theme-name>-stitch/meta/token-mapping-report.json` — verify colour extraction
 3. The pipeline runs a **heading drift report** (Step 2e) before downloading assets. It checks whether H1/H2 Tailwind classes are consistent across all 5 pages. If drift is detected you'll be asked to choose: proceed anyway, auto-normalise (rewrites drifted classes to match home), or stop to re-generate. The normaliser is `tools/stitch-normalize-headings.mjs` — run it manually with `--enforce` at any time if you need to re-normalise after iterating on designs.
@@ -86,11 +90,11 @@ Both pipelines extract colours automatically, but you'll often want to fine-tune
 export const lyraDefaultConfig: DeepPartialThemeConfig = {
   colors: {
     brand: {
-      primary: '#dc2626',        // Adjust this
-      primaryHover: '#b91c1c',   // ~12% darker than primary
-      secondary: '#1e3a5f',
-      accent: '#fbbf24',
-      onPrimary: '#ffffff',
+      primary: "#dc2626", // Adjust this
+      primaryHover: "#b91c1c", // ~12% darker than primary
+      secondary: "#1e3a5f",
+      accent: "#fbbf24",
+      onPrimary: "#ffffff",
     },
     // ...
   },
@@ -123,8 +127,8 @@ Once the theme looks right in the test site:
 2. In the new site's `theme.config.ts`, import from the theme package:
 
 ```typescript
-import type { DeepPartialThemeConfig } from '@platform/theme-system';
-import { lyraRegistry, lyraDefaultConfig } from '@platform/themes/lyra';
+import type { DeepPartialThemeConfig } from "@platform/theme-system";
+import { lyraRegistry, lyraDefaultConfig } from "@platform/themes/lyra";
 
 export const themeConfig: DeepPartialThemeConfig = {
   componentRegistry: lyraRegistry,
@@ -133,7 +137,7 @@ export const themeConfig: DeepPartialThemeConfig = {
     ...lyraDefaultConfig.colors,
     brand: {
       ...lyraDefaultConfig.colors?.brand,
-      primary: '#dc2626', // Override with client's exact brand color if needed
+      primary: "#dc2626", // Override with client's exact brand color if needed
     },
   },
 };
