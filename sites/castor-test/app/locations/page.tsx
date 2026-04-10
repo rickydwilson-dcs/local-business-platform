@@ -24,7 +24,7 @@ export default function LocationsPage() {
               Services
             </a>
             <a
-              className="font-semibold tracking-wide text-sm text-[#3a7d44] border-b-2 border-[#3a7d44] pb-1 transition-colors duration-200"
+              className="font-medium tracking-wide text-sm text-white/90 hover:text-[#3a7d44] transition-colors duration-200"
               href="/locations"
             >
               Areas Covered

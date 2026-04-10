@@ -2,51 +2,49 @@ export default function ContactPage() {
   return (
     <>
       {/* TopNavBar — Navy variant */}
-      <nav className="bg-[#1a3a6b] font-medium tracking-wider text-sm uppercase sticky top-0 z-50 shadow-lg">
-        <div className="max-w-[1280px] mx-auto px-6 md:px-8 flex justify-between items-center h-20">
+      <nav className="bg-[#1a3a6b] sticky top-0 z-50 shadow-lg border-none">
+        <div className="flex justify-between items-center px-8 py-4 max-w-[1280px] mx-auto w-full">
           <a className="font-bold text-2xl text-white" href="/">
             DCS Plumbing
           </a>
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center gap-8">
             <a
-              className="text-white/90 hover:text-[#3a7d44] transition-colors duration-200"
+              className="font-medium tracking-wide text-sm text-white/90 hover:text-[#3a7d44] transition-colors duration-200"
               href="/services"
             >
               Services
             </a>
             <a
-              className="text-white/90 hover:text-[#3a7d44] transition-colors duration-200"
-              href="/services/boiler-installation"
+              className="font-medium tracking-wide text-sm text-white/90 hover:text-[#3a7d44] transition-colors duration-200"
+              href="/locations"
             >
-              Boilers
+              Areas Covered
             </a>
             <a
-              className="text-white/90 hover:text-[#3a7d44] transition-colors duration-200"
-              href="/services"
-            >
-              Emergency
-            </a>
-            <a
-              className="text-white/90 hover:text-[#3a7d44] transition-colors duration-200"
+              className="font-medium tracking-wide text-sm text-white/90 hover:text-[#3a7d44] transition-colors duration-200"
               href="/about"
             >
-              About
+              About Us
             </a>
             <a
-              className="text-[#3a7d44] font-semibold transition-colors duration-200"
+              className="font-medium tracking-wide text-sm text-white/90 hover:text-[#3a7d44] transition-colors duration-200"
+              href="/blog"
+            >
+              FAQs
+            </a>
+            <a
+              className="font-medium tracking-wide text-sm text-white/90 hover:text-[#3a7d44] transition-colors duration-200"
               href="/contact"
             >
               Contact
             </a>
           </div>
-          <div className="flex items-center space-x-4">
-            <a
-              className="hidden sm:block text-[#3a7d44] font-semibold bg-white px-4 py-2 rounded-lg text-xs tracking-widest active:translate-y-[1px] transition-transform"
-              href="tel:0800XXXXXXX"
-            >
-              0800 XXX XXXX
-            </a>
-          </div>
+          <a
+            className="bg-[#3a7d44] text-white px-6 py-2 rounded-lg font-semibold text-sm active:translate-y-[1px] transition-transform"
+            href="/contact"
+          >
+            Get a Quote
+          </a>
         </div>
       </nav>
 

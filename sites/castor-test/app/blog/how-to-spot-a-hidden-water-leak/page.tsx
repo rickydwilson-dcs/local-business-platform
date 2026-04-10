@@ -2,41 +2,49 @@ export default function BlogDetailPage() {
   return (
     <>
       {/* TopNavBar — Navy variant */}
-      <nav className="bg-[#1a3a6b] border-b border-[#1a3a6b] shadow-sm z-50 sticky top-0">
-        <div className="flex justify-between items-center w-full px-6 md:px-8 max-w-[1280px] mx-auto h-20">
-          <div className="font-extrabold text-2xl text-white">DCS Plumbing</div>
-          <div className="hidden md:flex items-center space-x-8">
+      <nav className="bg-[#1a3a6b] sticky top-0 z-50 shadow-lg border-none">
+        <div className="flex justify-between items-center px-8 py-4 max-w-[1280px] mx-auto w-full">
+          <a className="font-bold text-2xl text-white" href="/">
+            DCS Plumbing
+          </a>
+          <div className="hidden md:flex items-center gap-8">
             <a
-              className="font-medium tracking-wider text-sm text-white/90 hover:text-white transition-colors"
+              className="font-medium tracking-wide text-sm text-white/90 hover:text-[#3a7d44] transition-colors duration-200"
               href="/services"
             >
               Services
             </a>
             <a
-              className="font-medium tracking-wider text-sm text-white/90 hover:text-white transition-colors"
+              className="font-medium tracking-wide text-sm text-white/90 hover:text-[#3a7d44] transition-colors duration-200"
               href="/locations"
             >
               Areas Covered
             </a>
             <a
-              className="font-medium tracking-wider text-sm text-white/90 hover:text-white transition-colors"
+              className="font-medium tracking-wide text-sm text-white/90 hover:text-[#3a7d44] transition-colors duration-200"
               href="/about"
             >
               About Us
             </a>
             <a
-              className="font-medium tracking-wider text-sm text-white/90 hover:text-white transition-colors"
+              className="font-medium tracking-wide text-sm text-white/90 hover:text-[#3a7d44] transition-colors duration-200"
               href="/blog"
             >
               FAQs
             </a>
             <a
-              className="bg-[#3a7d44] text-white px-6 py-2 rounded-lg font-semibold active:scale-95 transition-transform"
+              className="font-medium tracking-wide text-sm text-white/90 hover:text-[#3a7d44] transition-colors duration-200"
               href="/contact"
             >
               Contact
             </a>
           </div>
+          <a
+            className="bg-[#3a7d44] text-white px-6 py-2 rounded-lg font-semibold text-sm active:translate-y-[1px] transition-transform"
+            href="/contact"
+          >
+            Get a Quote
+          </a>
         </div>
       </nav>
 

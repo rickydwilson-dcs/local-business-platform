@@ -1,46 +1,46 @@
 export default function HomePage() {
   return (
     <>
-      {/* TopNavBar */}
-      <nav className="fixed top-0 w-full z-50 bg-white border-b border-slate-200/60 shadow-sm h-20">
-        <div className="flex justify-between items-center max-w-[1280px] mx-auto px-6 md:px-8 h-full">
-          <a className="font-extrabold text-2xl text-[#1a3a6b] tracking-tighter" href="/">
+      {/* TopNavBar — Navy variant */}
+      <nav className="bg-[#1a3a6b] sticky top-0 z-50 shadow-lg border-none">
+        <div className="flex justify-between items-center px-8 py-4 max-w-[1280px] mx-auto w-full">
+          <a className="font-bold text-2xl text-white" href="/">
             DCS Plumbing
           </a>
           <div className="hidden md:flex items-center gap-8">
             <a
-              className="font-medium tracking-wide text-sm text-[#3a7d44] border-b-2 border-[#3a7d44] pb-1"
+              className="font-medium tracking-wide text-sm text-white/90 hover:text-[#3a7d44] transition-colors duration-200"
               href="/services"
             >
               Services
             </a>
             <a
-              className="font-medium tracking-wide text-sm text-[#1c1c1e] hover:text-[#3a7d44] transition-colors duration-200"
+              className="font-medium tracking-wide text-sm text-white/90 hover:text-[#3a7d44] transition-colors duration-200"
               href="/locations"
             >
               Areas Covered
             </a>
             <a
-              className="font-medium tracking-wide text-sm text-[#1c1c1e] hover:text-[#3a7d44] transition-colors duration-200"
+              className="font-medium tracking-wide text-sm text-white/90 hover:text-[#3a7d44] transition-colors duration-200"
               href="/about"
             >
               About Us
             </a>
             <a
-              className="font-medium tracking-wide text-sm text-[#1c1c1e] hover:text-[#3a7d44] transition-colors duration-200"
+              className="font-medium tracking-wide text-sm text-white/90 hover:text-[#3a7d44] transition-colors duration-200"
               href="/blog"
             >
               FAQs
             </a>
             <a
-              className="font-medium tracking-wide text-sm text-[#1c1c1e] hover:text-[#3a7d44] transition-colors duration-200"
+              className="font-medium tracking-wide text-sm text-white/90 hover:text-[#3a7d44] transition-colors duration-200"
               href="/contact"
             >
               Contact
             </a>
           </div>
           <a
-            className="bg-[#3a7d44] text-white px-6 py-2.5 rounded-lg font-semibold text-sm active:-translate-y-px transition-transform duration-150"
+            className="bg-[#3a7d44] text-white px-6 py-2 rounded-lg font-semibold text-sm active:translate-y-[1px] transition-transform"
             href="/contact"
           >
             Get a Quote
@@ -49,7 +49,7 @@ export default function HomePage() {
       </nav>
 
       {/* Hero Section */}
-      <header className="relative pt-20 min-h-[870px] flex items-center overflow-hidden">
+      <header className="relative min-h-[870px] flex items-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img
             className="w-full h-full object-cover"
@@ -528,6 +528,17 @@ export default function HomePage() {
                 </div>
               </div>
             </div>
+          </div>
+          <div className="mt-12 text-center">
+            <a
+              href="/reviews"
+              className="inline-flex items-center gap-2 text-[#1a3a6b] font-semibold text-sm border-b-2 border-[#1a3a6b] pb-0.5 hover:text-[#3a7d44] hover:border-[#3a7d44] transition-colors duration-200"
+            >
+              See all reviews
+              <span className="material-symbols-outlined text-base leading-none">
+                arrow_forward
+              </span>
+            </a>
           </div>
         </div>
       </section>
