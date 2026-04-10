@@ -279,6 +279,7 @@ export interface ThemeConfig {
  */
 export const THEME_NAMES = [
   "atlas",
+  "castor",
   "cygnus",
   "lyra",
   "nova",

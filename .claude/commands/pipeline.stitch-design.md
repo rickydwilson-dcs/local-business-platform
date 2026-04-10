@@ -358,6 +358,10 @@ Then append the page-specific sections. For each screen: submit it, then immedia
 
 After each screen submission, confirm via `get_project` `screenInstances` before sending the next. If any screen does not appear in `screenInstances`, STOP and report which screen failed. Do not call `list_screens` — it is broken. Do not retry a timed-out generation call — the generation completed silently.
 
+**Fallback: blog-detail screen fails repeatedly**
+
+If `blog-detail` does not appear in `screenInstances` after two attempts (15+ minutes each), skip it. The TSX page for `blog-detail` can be adapted directly from the `blog.html` source using the same pipeline adaptation rules. Mark the screen as "adapted-from-blog" in `meta/token-mapping-report.json`. This is an acceptable outcome — blog-detail is the most complex screen and Stitch occasionally rejects it with "service unavailable".
+
 **2d — Apply design system to all screens**
 
 Call `get_project` for `$PROJECT_ID` to retrieve screen instance IDs. Then call `apply_design_system` with:

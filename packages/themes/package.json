@@ -29,6 +29,7 @@
     "./rigel/showcase": "./rigel/showcase-registry.tsx",
     "./rigel/components": "./rigel/components/index.ts",
     "./vega": "./vega/index.ts",
-    "./vega/components": "./vega/components/index.ts"
+    "./vega/components": "./vega/components/index.ts",
+    "./castor": "./castor/index.ts"
   }
 }

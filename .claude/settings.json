@@ -17,7 +17,25 @@
       "mcp__stitch__list_projects",
       "mcp__stitch__list_screens",
       "WebFetch(domain:contribution.usercontent.google.com)",
-      "WebFetch(domain:www.digitalconsultingservices.co.uk)"
+      "WebFetch(domain:www.digitalconsultingservices.co.uk)",
+      "mcp__stitch__create_project",
+      "mcp__stitch__create_design_system",
+      "mcp__stitch__update_design_system",
+      "mcp__stitch__generate_screen_from_text",
+      "mcp__stitch__get_screen",
+      "mcp__stitch__apply_design_system",
+      "Bash(sed -i '' 's/\"name\": \"dcs\"/\"name\": \"dcs-industrial-brutalist\"/' sites/dcs-industrial-brutalist/package.json)",
+      "Bash(sed -i '' 's/slug: \"dcs\"/slug: \"dcs-industrial-brutalist\"/' sites/dcs-industrial-brutalist/site.config.ts)",
+      "Bash(sort -u wc -l /tmp/castor-image-urls.txt head -3 /tmp/castor-image-urls.txt)",
+      "Bash(sed -n '4,22p' page.tsx)",
+      "Bash(sed -n '4,22p' about/page.tsx)",
+      "Bash(sed -n '4,22p' contact/page.tsx)",
+      "Bash(sed -n '13,30p' services/page.tsx)",
+      "Bash(sed -n '4,22p' services/boiler-installation/page.tsx)",
+      "Bash(sed -n '4,22p' locations/eastbourne/page.tsx)",
+      "Bash(sed -n '4,22p' projects/victorian-bathroom-renovation/page.tsx)",
+      "Bash(sed -n '12,30p' privacy-policy/page.tsx)",
+      "Bash(sed -n '12,30p' cookie-policy/page.tsx)"
     ],
     "additionalDirectories": [
       "/Users/rickywilson/Sites/local-business-platform/output/ingestion/cygnus-stitch/images",
@@ -25,7 +43,9 @@
       "/Users/rickywilson/Sites/local-business-platform/output/sessions",
       "/Users/rickywilson/Sites/local-business-platform/output/sessions/2026-04-06_mad-graphics-cygnus-theme",
       "/Users/rickywilson/Sites/local-business-platform/sites/cygnus-test/.next",
-      "/Users/rickywilson/Sites/local-business-platform/output/sessions/codex-peer-review"
+      "/Users/rickywilson/Sites/local-business-platform/output/sessions/codex-peer-review",
+      "/Users/rickywilson/Sites/local-business-platform/.git",
+      "/Users/rickywilson/Sites/local-business-platform/output/ingestion/castor-stitch/images"
     ]
   }
 }
