@@ -140,6 +140,8 @@ npm run test:e2e:smoke
 npm run validate:content
 ```
 
+As of 2026-04-10, pre-flight checks run in two groups: Group 3a (type-check, lint, Vercel config audit) in parallel, followed by Group 3b (build, test) sequentially. See `.claude/commands/deploy.changes.md` Step 3 for the authoritative procedure.
+
 ## NewRelic Monitoring
 
 ### What's Monitored
