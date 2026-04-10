@@ -263,6 +263,7 @@ This rule applies to local-business-platform only. The force repo (`/Users/ricky
 | [Adding a Location](docs/guides/adding-location.md)       | Add location MDX content                     |
 | [Git Workflow](docs/guides/git-workflow.md)               | Branch workflow details                      |
 | [Deploying a Site](docs/guides/deploying-site.md)         | Deployment procedures                        |
+| [Orchestration Patterns](docs/guides/orchestration-patterns.md) | Skill patterns: sequential, parallel, hybrid |
 
 ---
 
