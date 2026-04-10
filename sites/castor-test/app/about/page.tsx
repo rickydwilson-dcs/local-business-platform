@@ -49,7 +49,7 @@ export default function AboutPage() {
       </nav>
 
       {/* Page Hero */}
-      <section className="relative min-h-[614px] flex items-center">
+      <section className="relative min-h-[400px] flex items-center">
         <div className="absolute inset-0 z-0">
           <img
             alt="DCS Plumbing Team Van"

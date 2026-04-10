@@ -118,7 +118,7 @@ export default function BlogPage() {
       </nav>
 
       {/* Page Header / Hero */}
-      <header className="relative bg-[#1a3a6b] py-20 md:py-32 overflow-hidden">
+      <header className="relative bg-[#1a3a6b] min-h-[400px] flex items-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img
             className="w-full h-full object-cover opacity-30"
