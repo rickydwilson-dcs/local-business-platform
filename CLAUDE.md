@@ -32,7 +32,7 @@ This is a **white-label website platform** for local service businesses. The bus
 
 **Content is MDX-only.** Every service page, location page, blog post, and project case study is an MDX file with YAML frontmatter. There are no centralized data files, no hardcoded page routes. Drop an MDX file in `content/services/` and the dynamic route `[slug]/page.tsx` picks it up automatically at build time via `generateStaticParams()`. This is the single most important architectural decision — it means content editors never touch code.
 
-**The theme system** makes white-labeling work. Each site defines a `theme.config.ts` with brand colors, typography, and component tokens. The theme system's Tailwind plugin transforms this config into CSS custom properties (`:root { --color-brand-primary: #xxx }`) and extends Tailwind with utility classes that reference those variables (`bg-brand-primary` → `var(--color-brand-primary)`). Pre-built named themes in `packages/themes/` (orion, vega, lyra, cygnus, nova, atlas, rigel) provide component registries, CSS utilities, and — for orion, vega, and cygnus — theme-owned `Header` and `Footer` Server Components exported via `@platform/themes/[name]/components`. Sites import these into `app/layout.tsx` instead of the generic `SiteHeader`/`Footer` from core-components. Change the config, rebuild, and the entire site re-themes.
+**The theme system** makes white-labeling work. Each site defines a `theme.config.ts` with brand colors, typography, and component tokens. The theme system's Tailwind plugin transforms this config into CSS custom properties (`:root { --color-brand-primary: #xxx }`) and extends Tailwind with utility classes that reference those variables (`bg-brand-primary` → `var(--color-brand-primary)`). Pre-built named themes in `packages/themes/` (orion, vega, lyra, cygnus, nova, atlas, rigel, castor, polaris, sirius) provide component registries, CSS utilities, and — for orion, vega, and cygnus — theme-owned `Header` and `Footer` Server Components exported via `@platform/themes/[name]/components`. Sites import these into `app/layout.tsx` instead of the generic `SiteHeader`/`Footer` from core-components. Change the config, rebuild, and the entire site re-themes.
 
 **New sites** are created by copying `sites/base-template` and customizing the config files. The intake system (`packages/intake-system`) can automate this by collecting business info through chat, extracting brand colors from logos/websites, and generating a project file that `tools/create-site-from-project.ts` consumes.
 
@@ -226,44 +226,55 @@ This rule applies to local-business-platform only. The force repo (`/Users/ricky
 
 ### Architecture (How It Works)
 
-| Document                                                                                      | Teaches                                               |
-| --------------------------------------------------------------------------------------------- | ----------------------------------------------------- |
-| [How Dynamic Routing Works](docs/architecture/how-dynamic-routing-works.md)                   | MDX file → static page via `[slug]` routes            |
-| [How the Theme System Works](docs/architecture/how-theme-system-works.md)                     | Config → CSS variables → Tailwind classes             |
-| [How the Build Pipeline Works](docs/architecture/how-build-pipeline-works.md)                 | Turborepo, packages, workspace linking                |
-| [How Site Creation Works](docs/architecture/how-site-creation-works.md)                       | Intake → project file → new site → deploy             |
-| [How the Ingestion Pipeline Works](docs/architecture/how-ingestion-pipeline-works.md)         | Screenshot → analysis → components → theme package    |
-| [How the Stitch Design Pipeline Works](docs/architecture/how-stitch-design-pipeline-works.md) | Stitch AI design → tokens → theme package → test site |
-| [Architecture Overview](docs/architecture/architecture.md)                                    | High-level system overview                            |
+| Document                                                                                      | Teaches                                                                           |
+| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| [How Dynamic Routing Works](docs/architecture/how-dynamic-routing-works.md)                   | MDX file → static page via `[slug]` routes                                        |
+| [How the Theme System Works](docs/architecture/how-theme-system-works.md)                     | Config → CSS variables → Tailwind classes                                         |
+| [How the Build Pipeline Works](docs/architecture/how-build-pipeline-works.md)                 | Turborepo, packages, workspace linking                                            |
+| [How Site Creation Works](docs/architecture/how-site-creation-works.md)                       | Intake → project file → new site → deploy                                         |
+| [How the Ingestion Pipeline Works](docs/architecture/how-ingestion-pipeline-works.md)         | Screenshot → analysis → components → theme package                                |
+| [How the Stitch Design Pipeline Works](docs/architecture/how-stitch-design-pipeline-works.md) | Stitch AI design → tokens → theme package → test site                             |
+| [Architecture Overview](docs/architecture/architecture.md)                                    | High-level system overview                                                        |
+| [Component Registry](docs/architecture/component-registry.md)                                 | All shared component slots: fields, pages, conditional behaviour, theme checklist |
+| [Content Validation](docs/architecture/content-validation.md)                                 | Zod schemas for MDX frontmatter validation                                        |
+| [Monitoring Dashboard](docs/architecture/monitoring-dashboard.md)                             | Dashboard design for site registry and monitoring                                 |
 
 ### Standards (How to Do It Right)
 
-| Standard                                   | Covers                                |
-| ------------------------------------------ | ------------------------------------- |
-| [Styling](docs/standards/styling.md)       | Tailwind CSS, theme tokens            |
-| [Components](docs/standards/components.md) | Component architecture, TypeScript    |
-| [Content](docs/standards/content.md)       | MDX architecture, frontmatter schemas |
-| [SEO](docs/standards/seo.md)               | Meta data, keywords, local SEO        |
-| [Images](docs/standards/images.md)         | R2 storage, optimization, naming      |
-| [Schema](docs/standards/schema.md)         | JSON-LD structured data               |
-| [Testing](docs/standards/testing.md)       | Unit tests, E2E tests                 |
-| [Security](docs/standards/security.md)     | Rate limiting, API security, GDPR     |
-| [Analytics](docs/standards/analytics.md)   | Consent management, GA4               |
-| [Deployment](docs/standards/deployment.md) | CI/CD, monitoring, rollback           |
-| [Quality](docs/standards/quality.md)       | Quality gates, checklists             |
+| Standard                                         | Covers                                |
+| ------------------------------------------------ | ------------------------------------- |
+| [Styling](docs/standards/styling.md)             | Tailwind CSS, theme tokens            |
+| [Components](docs/standards/components.md)       | Component architecture, TypeScript    |
+| [Content](docs/standards/content.md)             | MDX architecture, frontmatter schemas |
+| [SEO](docs/standards/seo.md)                     | Meta data, keywords, local SEO        |
+| [Images](docs/standards/images.md)               | R2 storage, optimization, naming      |
+| [Schema](docs/standards/schema.md)               | JSON-LD structured data               |
+| [Testing](docs/standards/testing.md)             | Unit tests, E2E tests                 |
+| [Security](docs/standards/security.md)           | Rate limiting, API security, GDPR     |
+| [Analytics](docs/standards/analytics.md)         | Consent management, GA4               |
+| [Deployment](docs/standards/deployment.md)       | CI/CD, monitoring, rollback           |
+| [Quality](docs/standards/quality.md)             | Quality gates, checklists             |
+| [Documentation](docs/standards/documentation.md) | Documentation maintenance guidelines  |
 
 ### Guides (How to Do Common Tasks)
 
-| Guide                                                     | Purpose                                      |
-| --------------------------------------------------------- | -------------------------------------------- |
-| [Adding a New Site](docs/guides/adding-new-site.md)       | Create a new client site                     |
-| [Creating a New Theme](docs/guides/creating-new-theme.md) | Create a theme via ingest or Stitch pipeline |
-| [Theming](docs/guides/theming.md)                         | Configure site theme tokens and overlays     |
-| [Adding a Service](docs/guides/adding-service.md)         | Add service MDX content                      |
-| [Adding a Location](docs/guides/adding-location.md)       | Add location MDX content                     |
-| [Git Workflow](docs/guides/git-workflow.md)               | Branch workflow details                      |
-| [Deploying a Site](docs/guides/deploying-site.md)         | Deployment procedures                        |
-| [Orchestration Patterns](docs/guides/orchestration-patterns.md) | Skill patterns: sequential, parallel, hybrid |
+| Guide                                                             | Purpose                                           |
+| ----------------------------------------------------------------- | ------------------------------------------------- |
+| [Adding a New Site](docs/guides/adding-new-site.md)               | Create a new client site                          |
+| [Creating a New Theme](docs/guides/creating-new-theme.md)         | Create a theme via ingest or Stitch pipeline      |
+| [Theming](docs/guides/theming.md)                                 | Configure site theme tokens and overlays          |
+| [Adding a Service](docs/guides/adding-service.md)                 | Add service MDX content                           |
+| [Adding a Location](docs/guides/adding-location.md)               | Add location MDX content                          |
+| [Git Workflow](docs/guides/git-workflow.md)                       | Branch workflow details                           |
+| [Deploying a Site](docs/guides/deploying-site.md)                 | Deployment procedures                             |
+| [Orchestration Patterns](docs/guides/orchestration-patterns.md)   | Skill patterns: sequential, parallel, hybrid      |
+| [GitHub Actions](docs/guides/github-actions.md)                   | CI/CD workflow configuration                      |
+| [Monitoring Setup](docs/guides/monitoring-setup.md)               | NewRelic and Vercel monitoring setup              |
+| [Adding a Content Section](docs/guides/adding-content-section.md) | Add new MDX content type with dynamic route       |
+| [Registry Setup](docs/guides/registry-setup.md)                   | Supabase site registry and monitoring setup       |
+| [End-to-End Workflow](docs/guides/end-to-end-workflow.md)         | Full site creation workflow from intake to deploy |
+| [Component Versioning](docs/guides/component-versioning.md)       | Versioning shared components in core-components   |
+| [Project History](docs/project-history.md)                        | Platform changelog and development phases         |
 
 ---
 
