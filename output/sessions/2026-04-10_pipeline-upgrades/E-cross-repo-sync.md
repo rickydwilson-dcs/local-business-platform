@@ -69,8 +69,8 @@ test -s /Users/rickywilson/Sites/force/CLAUDE.md || {
   exit 1
 }
 
-grep -q "GOVERNANCE §8" /Users/rickywilson/Sites/force/CLAUDE.md || {
-  echo "STOP: force CLAUDE.md does not reference GOVERNANCE §8. Cannot safely customize force /review.code without the governance boundary in place."
+grep -q "§8" /Users/rickywilson/Sites/force/CLAUDE.md || {
+  echo "STOP: force CLAUDE.md does not reference §8. Cannot safely customize force /review.code without the governance boundary in place."
   exit 1
 }
 ```
