@@ -6,6 +6,20 @@ Run the full ingestion pipeline against a URL, then create a temporary test site
 
 ---
 
+## Architecture: three-phase decomposition
+
+As of 2026-04-10 this skill is structured as three phases:
+
+| Phase | Owner | Work |
+|---|---|---|
+| **A — Reference harvest** | Orchestrator + parallel sub-agents | Run `analyse-site.ts` (A0, sequential), then fan out reference asset download (A1) and scaffold inventory (A3) as parallel sub-agents in a **single Task-tool message** |
+| **B — Theme package validation** | `cs-theme-package-validator` sub-agent (read-only) | Audit the generated `packages/themes/<name>/` package against all 15 TPV rules. **Gate:** if `Critical + High > 0`, the pipeline aborts before Phase C touches `sites/`. |
+| **C — Test site scaffolding** | Orchestrator (main Claude) | Copy base-template, wire the theme, generate the five standard pages, run fidelity review, reconcile lockfile, stage, report. Remains in the orchestrator because the work is stateful filesystem editing with tightly coupled intra-step state (`$BODY_VAR`/`$HEADING_VAR`/registry export name) that does not parallelise. |
+
+The primary benefit of this decomposition is **context isolation**, not wall-clock parallelism — the critical path is dominated by `analyse-site.ts` (A0) and the `/pipeline.validate-site` dev-server round trip (C3). Delegating the read-heavy harvest and the validator to fresh sub-agent contexts keeps the orchestrator focused on the stateful edit decisions in Phase C.
+
+---
+
 ## Step 1: Preflight Checks
 
 ```bash
@@ -26,132 +40,262 @@ Parse `$ARGUMENTS` for:
 
 If `--url` is missing, STOP with: "Usage: /pipeline.ingest --url https://example.com [--name my-theme]"
 
-## Step 2: Run Ingestion Pipeline
+---
+
+## Phase A — Reference Harvest
+
+Goal: gather every piece of input data that Phase B and Phase C will need.
+
+Phase A is split into one sequential prelude (A0) and a parallel fan-out (A1 + A3). Sub-agent A2 from the original plan is **subsumed by A0** because `tools/analyse-site.ts` already performs visual token extraction internally; duplicating that work in a sub-agent would waste cost without improving quality.
+
+### A0 — Sequential prelude: run the analysis tool
 
 ```bash
 npx tsx tools/analyse-site.ts --url $URL [--name $NAME]
 ```
 
-This takes several minutes. Wait for completion.
+This takes several minutes. Wait for completion. The tool performs screenshot capture, per-page vision analysis, token reconciliation, component generation, and theme package scaffolding as a single monolith. It cannot be meaningfully parallelised without rewriting `tools/analyse-site.ts` (out of scope for this skill).
 
-After the pipeline finishes, determine the theme name:
+After the tool finishes, determine the theme name:
 - If `--name` was supplied, use that
 - Otherwise, parse from the pipeline summary output (look for "Theme: <name>")
 - As a fallback, find the newest folder under `output/ingestion/`
 
-**Verification gate — STOP if this fails:**
+**A0 verification gate — STOP if this fails:**
+
 ```bash
-ls packages/themes/<theme-name>/index.ts
+test -f packages/themes/<theme-name>/index.ts
+test -f output/ingestion/<theme-name>/site-analysis.json
 ```
+
 If the theme package was not created, STOP: "Pipeline did not create theme package. Check output above for errors."
 
-## Step 2b: Capture Reference HTML Source
-
-Create output directories:
-```bash
-mkdir -p output/ingestion/<theme-name>/html
-mkdir -p output/ingestion/<theme-name>/meta
-```
-
-For each page in `discoveredPages[]` from `output/ingestion/<theme-name>/site-analysis.json`, download the HTML source using curl. Map `pageType` to filename:
-- `pageType === "home"` → `home.html`
-- `pageType === "about"` → `about.html`
-- `pageType === "contact"` → `contact.html`
-- `pageType` containing `services-list` or `blog-list` → `<pageType>.html`
-- `pageType` containing `service-detail` or `blog-post` → `<pageType>.html` (first depth-2 page only)
+Also export the session directory path for downstream sub-agents:
 
 ```bash
-curl -s --max-time 15 -L -A "Mozilla/5.0" "<page.url>" \
-  -o "output/ingestion/<theme-name>/html/<pageType>.html"
+SESSION_DIR="output/ingestion/<theme-name>"
 ```
 
-**WARN not STOP** if curl fails — many sites block crawlers. Screenshots (already captured by Step 2) are the primary reference; HTML is supplementary for structural comparison by the review agent.
+### A1 + A3 — Parallel fan-out (single Task-tool message)
 
-Write `output/ingestion/<theme-name>/meta/html-manifest.json`:
-```json
-{
-  "capturedAt": "<ISO timestamp>",
-  "pages": [
-    { "pageType": "home", "url": "<page url>", "file": "html/home.html" }
-  ]
-}
-```
+**CRITICAL: Launch both sub-agents in ONE Task message.** Not sequentially. The whole point of this step is the parallel fan-out.
 
-## Step 2c: Download Reference Images
+#### Sub-agent A1 — Reference asset download
 
-Download images from the reference site and place them into the test site's public directory so the fix agent can wire them into components.
+**Model:** sonnet (generic `general-purpose`)
 
-Create directories:
+**Prompt:**
+
+> You are sub-agent A1 of `/pipeline.ingest` Phase A. Your job is to capture reference HTML and download reference images for theme `<theme-name>`.
+>
+> **Inputs:**
+> - `output/ingestion/<theme-name>/site-analysis.json` — already written by A0. Read `discoveredPages[]` to know which pages to fetch.
+>
+> **Tasks:**
+>
+> 1. **Capture reference HTML.** Create `output/ingestion/<theme-name>/html/` and `output/ingestion/<theme-name>/meta/`. For each entry in `discoveredPages[]`, download HTML via:
+>
+>    ```bash
+>    curl -s --max-time 15 -L -A "Mozilla/5.0" "<page.url>" -o "output/ingestion/<theme-name>/html/<pageType>.html"
+>    ```
+>
+>    Map `pageType` to filename:
+>    - `pageType === "home"` → `home.html`
+>    - `pageType === "about"` → `about.html`
+>    - `pageType === "contact"` → `contact.html`
+>    - `pageType` containing `services-list` or `blog-list` → `<pageType>.html`
+>    - `pageType` containing `service-detail` or `blog-post` → `<pageType>.html` (first depth-2 page only)
+>
+>    **WARN not STOP** on curl failures — many sites block crawlers. Screenshots (from A0) are the primary reference; HTML is supplementary.
+>
+>    Write `output/ingestion/<theme-name>/meta/html-manifest.json`:
+>    ```json
+>    {
+>      "capturedAt": "<ISO timestamp>",
+>      "pages": [{ "pageType": "home", "url": "...", "file": "html/home.html" }]
+>    }
+>    ```
+>
+> 2. **Download reference images.** Create `output/ingestion/<theme-name>/images/`. For each HTML file, extract `<img src="...">` values:
+>
+>    ```bash
+>    grep -oh 'src="[^"]*"' output/ingestion/<theme-name>/html/*.html 2>/dev/null \
+>      | sed 's/src="//;s/"//' \
+>      | grep -v '^data:' \
+>      | grep -v '^$' \
+>      | sort -u > /tmp/<theme-name>-img-urls.txt
+>    ```
+>
+>    For each URL in that list (max 20):
+>    - Skip if URL length > 2000 chars
+>    - Resolve relative URLs to absolute using the page base URL
+>    - **Sanitise filename with python3, not `tr`** (`tr` produces trailing `-` on most URLs):
+>      ```bash
+>      python3 -c "
+>      import sys, re
+>      url = sys.argv[1]
+>      name = url.split('/')[-1].split('?')[0].split('#')[0]
+>      name = re.sub(r'[^a-zA-Z0-9._-]', '-', name)
+>      name = name.strip('-') or 'image'
+>      print(name)
+>      " \"$url\"
+>      ```
+>    - Download to the ingestion directory only (the test site copy happens in Phase C):
+>      ```bash
+>      curl -s --max-time 10 -L -A "Mozilla/5.0" "$url" -o "output/ingestion/<theme-name>/images/<sanitised-filename>"
+>      ```
+>    - **WARN not STOP** on curl failures — CDNs block direct downloads frequently.
+>
+>    Write `output/ingestion/<theme-name>/meta/image-manifest.json`:
+>    ```json
+>    {
+>      "capturedAt": "<ISO timestamp>",
+>      "images": [
+>        { "originalUrl": "https://example.com/hero.jpg",
+>          "localPath": "output/ingestion/<theme-name>/images/hero.jpg",
+>          "publicPath": "/images/hero.jpg" }
+>      ]
+>    }
+>    ```
+>
+> **Do NOT** touch `sites/test-<theme-name>/` — that directory does not exist yet and is owned by Phase C.
+>
+> **Return:** a one-line summary — `"A1: N HTML pages captured, M/K images downloaded."`
+
+#### Sub-agent A3 — Scaffold inventory
+
+**Model:** haiku (mechanical file reads)
+
+**Prompt:**
+
+> You are sub-agent A3 of `/pipeline.ingest` Phase A. Your job is to pre-compute the inventory that the orchestrator will consume during Phase C scaffolding, so the orchestrator does not have to parse these files in its own context.
+>
+> **Inputs:**
+> - `packages/themes/<theme-name>/index.ts` — already written by A0
+> - `packages/themes/<theme-name>/components/index.ts` (if present)
+> - `sites/base-template/` — read-only reference
+>
+> **Tasks:**
+>
+> 1. Parse `packages/themes/<theme-name>/index.ts` and extract the exported Registry and DefaultConfig variable names (e.g. `lyraRegistry`, `lyraDefaultConfig`).
+> 2. Compute the camelCase theme name (`dark-forest` → `darkForest`).
+> 3. If `packages/themes/<theme-name>/components/index.ts` exists, list every `export * from './<name>'` line and record the expected file paths.
+> 4. List the top-level entries of `sites/base-template/` (for the orchestrator's cp plan awareness).
+>
+> **Output file:** `output/ingestion/<theme-name>/meta/scaffold-inventory.json`
+>
+> ```json
+> {
+>   "themeName": "<theme-name>",
+>   "camelCaseThemeName": "<camelCaseThemeName>",
+>   "registryExport": "<themeNameRegistry>",
+>   "defaultConfigExport": "<themeNameDefaultConfig>",
+>   "themeComponents": [
+>     { "exportPath": "./HeroV1", "expectedFile": "HeroV1.tsx", "exists": true }
+>   ],
+>   "baseTemplateEntries": ["app", "components", "content", "public", "lib", "..."]
+> }
+> ```
+>
+> **Do NOT** write, edit, or patch any files outside `output/ingestion/<theme-name>/meta/`.
+>
+> **Return:** a one-line summary — `"A3: registry=<registryExport>, components=<N>/<M> present, N missing barrel entries."`
+
+### Phase A verification gate — STOP if this fails
+
 ```bash
-mkdir -p output/ingestion/<theme-name>/images
-mkdir -p sites/test-<theme-name>/public/images
+SESSION_DIR="output/ingestion/<theme-name>"
+test -f "$SESSION_DIR/site-analysis.json"                  # A0
+test -d "$SESSION_DIR/html" || test -f "$SESSION_DIR/meta/html-manifest.json"  # A1 (HTML)
+test -f "$SESSION_DIR/meta/image-manifest.json"            # A1 (images)
+test -f "$SESSION_DIR/meta/scaffold-inventory.json"        # A3
+test -f "packages/themes/<theme-name>/index.ts"            # A0 side effect
 ```
 
-For each HTML file captured in Step 2b, extract `<img src="...">` values:
+If any gate fails, STOP and print which sub-agent failed to produce its artefact.
+
+---
+
+## Phase B — Theme Package Validation (delegated gate)
+
+Goal: audit the generated theme package against the TPV rule set before any `sites/` modification. A failing audit aborts the pipeline.
+
+### B1 — Delegate to `cs-theme-package-validator`
+
+```
+Task tool parameters:
+  description: "Validate generated theme package"
+  subagent_type: "cs-theme-package-validator"
+```
+
+**Prompt for the agent:**
+
+> You are validating a newly generated theme package as part of `/pipeline.ingest` Phase B.
+>
+> **Scope:** Single-theme audit. The theme package is at `packages/themes/<theme-name>/`.
+>
+> **Rules to run:** All 15 rules (TPV-001 through TPV-015). This is a fresh package so all rules apply.
+>
+> **Session directory:** `output/ingestion/<theme-name>/`
+>
+> **Output file:** `output/ingestion/<theme-name>/meta/findings-theme-package.md`
+>
+> Follow your agent definition's review procedure exactly. Do NOT modify any files — this is a read-only audit.
+>
+> **Return:** the Statistics line from your findings file (`Statistics: Critical=X High=Y Medium=Z Low=W`) so the orchestrator can decide whether to proceed.
+
+### B2 — Gate on validator output
+
+After the validator completes, read the Statistics line from `output/ingestion/<theme-name>/meta/findings-theme-package.md`.
+
+**Gate rule:** if `Critical + High > 0`, STOP the pipeline:
+
+- Print the full findings file to the console
+- Tell the user: "Theme package validation failed — Critical/High TPV findings block Phase C. See `output/ingestion/<theme-name>/meta/findings-theme-package.md`. Fix the findings and re-run `/pipeline.ingest --url <same-url> --name <theme-name>`."
+- Do NOT proceed to Phase C. Do NOT touch `sites/`.
+- Do NOT delete `packages/themes/<theme-name>/` — leave it in place so the user can patch it.
+
+If `Critical + High == 0` but Medium/Low findings exist, print them as warnings and continue to Phase C.
+
+### Phase B verification gate — STOP if this fails
+
 ```bash
-grep -oh 'src="[^"]*"' output/ingestion/<theme-name>/html/*.html 2>/dev/null \
-  | sed 's/src="//;s/"//' \
-  | grep -v '^data:' \
-  | grep -v '^$' \
-  | sort -u > /tmp/<theme-name>-img-urls.txt
+test -f "output/ingestion/<theme-name>/meta/findings-theme-package.md"
+grep -q "Critical" "output/ingestion/<theme-name>/meta/findings-theme-package.md"
+test -d "packages/themes/<theme-name>"
+test -f "packages/themes/<theme-name>/index.ts"
 ```
 
-For each URL in that list (max 20 total):
-- Skip if URL length > 2000 chars
-- Resolve relative URLs to absolute using the page base URL (prefix `<source-url>` if path starts with `/`)
-- Sanitise filename — **use python3, not `tr`** (`tr` produces a trailing `-` on most image URLs):
-```bash
-python3 -c "
-import sys, re
-url = sys.argv[1]
-name = url.split('/')[-1].split('?')[0].split('#')[0]
-name = re.sub(r'[^a-zA-Z0-9._-]', '-', name)
-name = name.strip('-') or 'image'
-print(name)
-" "$url"
-```
-- Download to ingestion dir only (test site gets the images later in Step 3):
-```bash
-curl -s --max-time 10 -L -A "Mozilla/5.0" "$url" \
-  -o "output/ingestion/<theme-name>/images/<sanitised-filename>"
-```
+**Note on scope:** This skill does not include a validator-override mechanism. If a TPV rule produces a confirmed false positive on a generated theme, the rule should be fixed in `cs-theme-package-validator` or the generator should emit theme packages that comply. Do not add per-run suppression here.
 
-**WARN not STOP** on any curl failure — CDNs frequently block direct downloads. Continue to next image.
+---
 
-Write `output/ingestion/<theme-name>/meta/image-manifest.json`:
-```json
-{
-  "capturedAt": "<ISO timestamp>",
-  "images": [
-    {
-      "originalUrl": "https://example.com/hero.jpg",
-      "localPath": "output/ingestion/<theme-name>/images/hero.jpg",
-      "publicPath": "/images/hero.jpg"
-    }
-  ]
-}
-```
+## Phase C — Test Site Scaffolding (orchestrator)
 
-Print: `Downloaded N/M images (M attempted) → output/ingestion/<theme-name>/images/`
+Goal: create a throwaway test site that consumes the validated theme package. Phase C stays in the orchestrator because the work is stateful filesystem editing with tightly coupled intra-step state — sub-agent delegation would lose the shared `$BODY_VAR`/`$HEADING_VAR`/registry-export-name context that Steps C2a–C2g all consume.
 
-## Step 3: Create Test Site
+Read `output/ingestion/<theme-name>/meta/scaffold-inventory.json` (written by A3) to get `registryExport`, `defaultConfigExport`, `camelCaseThemeName`, and `themeComponents[]`. Hold these in working memory for the rest of Phase C.
 
-Copy base-template to create the test site. **Important:** `sites/test-<theme-name>/` must NOT exist yet when `cp -r` runs — if Step 2c created `public/images/` inside it first, `cp -r` nests `base-template/` inside the existing directory instead of replacing it.
+### C1 — Create the test site directory
+
+Copy base-template to create the test site. **Important:** `sites/test-<theme-name>/` must NOT exist yet when `cp -r` runs — if a previous step created anything inside it first, `cp -r` nests `base-template/` inside the existing directory instead of replacing it.
 
 ```bash
 cp -r sites/base-template sites/test-<theme-name>
 rm -rf sites/test-<theme-name>/node_modules sites/test-<theme-name>/.next sites/test-<theme-name>/.turbo
 ```
 
-Then copy the downloaded reference images into the test site's public directory:
+Copy the downloaded reference images into the test site's public directory:
+
 ```bash
 mkdir -p sites/test-<theme-name>/public/images
 cp output/ingestion/<theme-name>/images/* sites/test-<theme-name>/public/images/ 2>/dev/null || true
 ```
 
-## Step 4: Write Marker File
+### C1b — Write marker file
 
 Create `sites/test-<theme-name>/.pipeline-test-site.json` with:
+
 ```json
 {
   "createdAt": "<current ISO timestamp>",
@@ -161,13 +305,13 @@ Create `sites/test-<theme-name>/.pipeline-test-site.json` with:
 }
 ```
 
-## Step 5: Wire Theme Into Test Site
+### C2 — Wire theme into test site
 
-**5a.** Rewrite `sites/test-<theme-name>/theme.config.ts`:
+This block is the `5a`–`5g` chain from the pre-decomposition skill. It stays as one linear sequence inside Phase C because the substitutions share state (`$BODY_VAR`/`$HEADING_VAR` are computed in C2e and consumed by C2b).
 
-First, read `packages/themes/<theme-name>/index.ts` to find the exported Registry and DefaultConfig variable names (e.g. `lyraRegistry` and `lyraDefaultConfig`).
+**C2a. Rewrite `sites/test-<theme-name>/theme.config.ts`:**
 
-Then write:
+Use the `registryExport` / `defaultConfigExport` / `camelCaseThemeName` values from `scaffold-inventory.json`. Write:
 
 ```typescript
 import type { DeepPartialThemeConfig } from '@platform/theme-system';
@@ -194,13 +338,13 @@ export const themeConfig: DeepPartialThemeConfig = {
 };
 ```
 
-Where:
-- `<camelCaseThemeName>` is the theme name in camelCase (e.g., `lyra` → `lyra`, `dark-forest` → `darkForest`)
-- `<surface-inverse-hex>` is from `themeTokenRecommendations.colors.surface.inverse` in `site-analysis.json`. If the field is absent or null, use `'#111111'` as a safe dark fallback.
+Where `<surface-inverse-hex>` is `themeTokenRecommendations.colors.surface.inverse` from `site-analysis.json`. Fall back to `'#111111'` if absent or null.
 
-**Why this matters:** If `surface.inverse` is not overridden here and the theme's hero/CTA uses `bg-surface-inverse`, it will render as `#111827` (the theme-system default near-black) instead of the intended brand colour. This makes hero sections appear much darker than the reference site.
+**Why this matters:** If `surface.inverse` is not overridden here and the theme's hero/CTA uses `bg-surface-inverse`, it will render as `#111827` (the theme-system default near-black) instead of the intended brand colour.
 
-**5b.** Rewrite `sites/test-<theme-name>/app/globals.css` with:
+**C2b. Globals CSS** — see C2e for font determination. Globals CSS is written **after** C2e so `$BODY_VAR` and `$HEADING_VAR` are known.
+
+Write `sites/test-<theme-name>/app/globals.css`:
 
 ```css
 @import "../../../packages/themes/<theme-name>/globals.css";
@@ -247,17 +391,16 @@ Where:
 }
 ```
 
-`$BODY_VAR` and `$HEADING_VAR` are the CSS custom property names computed during Step 5e font determination (e.g. `--font-inter`, `--font-newsreader`). Write globals.css **after** Step 5e font determination so the correct variable names can be substituted.
-
-**5c.** Generate a CI-inert `sites/test-<theme-name>/package.json`:
+**C2c. CI-inert `package.json`:**
 
 1. Read `sites/base-template/package.json`
-2. Use `generateTestSitePackageJson('test-<theme-name>', basePackageJson)` from `tools/lib/test-site-package.ts` to generate the test site package.json
+2. Use `generateTestSitePackageJson('test-<theme-name>', basePackageJson)` from `tools/lib/test-site-package.ts`
 3. Write the result to `sites/test-<theme-name>/package.json`
 
 The utility strips all scripts except `dev`, `start`, and `clean`, and adds `"pipelineTestSite": true`.
 
-Verify the result is CI-inert:
+Verify:
+
 ```bash
 node -e "
   const p = require('./sites/test-<theme-name>/package.json');
@@ -268,11 +411,9 @@ node -e "
 "
 ```
 
-**5d.** Update `sites/test-<theme-name>/site.config.ts` — find the `tagline` value and change it to `'Pipeline Test Site — <theme-name> theme'`.
+**C2d. Tagline override:** Update `sites/test-<theme-name>/site.config.ts` — find the `tagline` value and change it to `'Pipeline Test Site — <theme-name> theme'`.
 
-**5e.** Rewrite `sites/test-<theme-name>/app/layout.tsx`.
-
-**5e-i: Determine fonts**
+**C2e. Layout.tsx and font determination:**
 
 Read `output/ingestion/<theme-name>/site-analysis.json`. Extract:
 - `themeTokenRecommendations.typography.fontFamilySans[0]` → `$BODY_FONT_NAME`
@@ -280,25 +421,22 @@ Read `output/ingestion/<theme-name>/site-analysis.json`. Extract:
 
 Fallback (if field missing or null): `$BODY_FONT_NAME = "Work Sans"`, `$HEADING_FONT_NAME = "Newsreader"`
 
-**next/font/google export name:** Replace spaces with underscores: `"Work Sans"` → `Work_Sans`, `"DM Sans"` → `DM_Sans`, `"Plus Jakarta Sans"` → `Plus_Jakarta_Sans`, `"Source Serif 4"` → `Source_Serif_4`, etc.
+**next/font/google export name:** Replace spaces with underscores: `"Work Sans"` → `Work_Sans`, `"DM Sans"` → `DM_Sans`, `"Plus Jakarta Sans"` → `Plus_Jakarta_Sans`, `"Source Serif 4"` → `Source_Serif_4`.
 
 **Confirmed available in next/font/google:** `Inter`, `Lato`, `Work_Sans`, `Newsreader`, `Outfit`, `Montserrat`, `DM_Sans`, `Plus_Jakarta_Sans`, `Space_Grotesk`, `Manrope`, `Rubik`, `Geist`, `Sora`, `EB_Garamond`, `Literata`, `Source_Serif_4`, `Domine`, `Libre_Caslon_Text`, `Noto_Serif`, `Raleway`, `Open_Sans`, `Poppins`, `Nunito`, `Roboto`, `Mulish`, `Barlow`.
 
 Any font NOT in the confirmed list → fall back to `Work_Sans` (body) or `Newsreader` (heading).
 
-**CSS variable name:** Lowercase + underscores→hyphens: `Work_Sans` → `--font-work-sans`, `Source_Serif_4` → `--font-source-serif-4`. These become `$BODY_VAR` and `$HEADING_VAR`, also used in Step 5b globals.css.
+**CSS variable name:** Lowercase + underscores→hyphens: `Work_Sans` → `--font-work-sans`, `Source_Serif_4` → `--font-source-serif-4`. These become `$BODY_VAR` and `$HEADING_VAR`, also used in C2b globals.css.
 
-**5e-ii: Determine font weights**
+**Weights:**
+- Body: `['300', '400', '500', '600', '700']`
+- Heading (serif — Newsreader, EB_Garamond, Literata, Source_Serif_4, Domine, Libre_Caslon_Text, Noto_Serif): `['200', '300', '400', '500', '600', '700', '800']` + `style: ['normal', 'italic']`
+- Heading (sans-serif): `['400', '500', '600', '700', '800']`
 
-- Body font: `['300', '400', '500', '600', '700']`
-- Heading font (serif — Newsreader, EB_Garamond, Literata, Source_Serif_4, Domine, Libre_Caslon_Text, Noto_Serif): `['200', '300', '400', '500', '600', '700', '800']` + `style: ['normal', 'italic']`
-- Heading font (sans-serif): `['400', '500', '600', '700', '800']`
+**Write `sites/test-<theme-name>/app/layout.tsx`:**
 
-**5e-iii: Write layout.tsx**
-
-If body and heading are the same font, use a single font instance with `variable: '--font-primary'`. globals.css uses `var(--font-primary)` for both body and h1-h4.
-
-For two different fonts (the typical case):
+If body and heading are the same font, use a single font instance with `variable: '--font-primary'` and reference `var(--font-primary)` in globals.css. Otherwise:
 
 ```typescript
 import type { Metadata, Viewport } from 'next';
@@ -349,30 +487,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 }
 ```
 
-**Why bare shell:** Generated pages include Nav and Footer inline — no double header/footer. Do NOT include SiteHeader, Footer, PageShell, ReviewPanel, analytics, or consent components.
+**Why bare shell:** Generated pages include Nav and Footer inline — no double header/footer. Do NOT include `SiteHeader`, `Footer`, `PageShell`, `ReviewPanel`, analytics, or consent components.
 
-**After writing layout.tsx:** Go back and write `globals.css` (Step 5b) using the `$BODY_VAR` and `$HEADING_VAR` names computed above.
+**After writing layout.tsx:** Go back and write `globals.css` (C2b) using the `$BODY_VAR` and `$HEADING_VAR` names computed above.
 
-**5f.** Generate five standard pages in the test site.
+**C2f. Generate five standard pages:**
 
 This step always produces exactly five routes regardless of what the analysis pipeline generated. The `output/ingestion/<theme-name>/example-pages/` directory is **not used** — the five pages are generated fresh from `site-analysis.json`.
 
-**5f-0: Load site-analysis.json**
+**C2f-0: Load site-analysis.json.** Extract and hold: `discoveredPages[]`, `pageBlueprints[]`, `sectionBlueprints[]`, `componentMatches[]`, `registryRecommendation.themeName`, `reference.url`.
 
-Read the full JSON:
-```bash
-cat output/ingestion/<theme-name>/site-analysis.json
-```
-
-Extract and hold in working memory:
-- `discoveredPages[]` — pages found on reference site (path, pageType, source, depth)
-- `pageBlueprints[]` — section structure per page (sections[] with blueprintId + order)
-- `sectionBlueprints[]` — section definitions (id, componentFileName, componentExportName, category, purpose, layoutPattern)
-- `componentMatches[]` — which blueprints matched core-components (exact/close/partial)
-- `registryRecommendation.themeName` — nearest theme constellation (orion|vega)
-- `reference.url` — source URL (add as comment in generated page files)
-
-**5f-1: Build component inventory**
+**C2f-1: Build component inventory.**
 
 ```bash
 ls packages/themes/<theme-name>/components/ 2>/dev/null || echo "no-components"
@@ -380,13 +505,12 @@ ls packages/themes/<theme-name>/components/ 2>/dev/null || echo "no-components"
 
 Build two sets:
 
-**`themeNavComponents`** — component export names from the theme where the `sectionBlueprints[].category` is `"Navigation"` OR the filename contains `nav`, `navigation`, `header`, `topbar`, `top-nav`.
+- **`themeNavComponents`** — component export names where `sectionBlueprints[].category === "Navigation"` OR filename contains `nav`, `navigation`, `header`, `topbar`, `top-nav`.
+- **`themeFooterComponents`** — component export names where category is `"Footer"` OR filename contains `footer`.
 
-**`themeFooterComponents`** — component export names where category is `"Footer"` OR filename contains `footer`.
+For all other components: build a map `blueprintId → componentExportName` from `sectionBlueprints[].componentFileName` cross-referenced with files actually present in `packages/themes/<theme-name>/components/`.
 
-For all other components: build a map of `blueprintId → componentExportName` from `sectionBlueprints[].componentFileName` cross-referenced with files actually present in `packages/themes/<theme-name>/components/`.
-
-**Safe core-components for fallback** (barrel import, no async data):
+**Safe core-components fallback** (barrel import, no async data):
 - Hero: `HeroV1`, `HeroV2`, `HeroV3`, `HeroSection`, `HeroWithImage`, `PageHero`
 - Sections: `CTASection`, `ServiceCards`, `FAQSection`, `Breadcrumbs`
 - Forms: `ContactForm` (client component — always safe)
@@ -400,12 +524,11 @@ For all other components: build a map of `blueprintId → componentExportName` f
 2. Core component match — if `componentMatches` has "exact" or "close" confidence → import from `@platform/core-components` (barrel only, no subpath)
 3. Inline JSX — write the section directly in the page file using Tailwind theme tokens
 
-**5f-1b: Verify and clean theme barrel index**
+**C2f-1b: Verify and clean theme barrel index.**
 
-The pipeline sometimes marks components as "reused from core" but still appends their names to the theme's `index.ts` barrel. This causes import errors at build time. After building the component inventory, verify every named export in `packages/themes/<theme-name>/components/index.ts` has a corresponding file:
+The pipeline sometimes marks components as "reused from core" but still appends their names to the theme's `index.ts` barrel. This causes import errors at build time. Verify every named export in `packages/themes/<theme-name>/components/index.ts` has a corresponding file:
 
 ```bash
-# List exports from barrel
 grep -o "export \* from '\./[^']*'" packages/themes/<theme-name>/components/index.ts \
   | sed "s|export \* from '\./||;s|'||" \
   | while read name; do
@@ -416,20 +539,12 @@ grep -o "export \* from '\./[^']*'" packages/themes/<theme-name>/components/inde
 
 For each MISSING export: remove that `export * from './...'` line from `packages/themes/<theme-name>/components/index.ts`.
 
-**This is a known pipeline defect** — do not skip this step even if the inventory looks complete.
+**Known pipeline defect — do not skip this step.** Phase B's TPV auditor will flag the stale barrel exports. If those findings were Medium/Low (non-blocking) in Phase B, the cleanup here is still required.
 
-**5f-1c: Fix animation import paths in theme components**
+**C2f-1c: Fix animation import paths in theme components.**
 
-AI-generated theme components frequently use the wrong import path for animation primitives. The pipeline writes:
-```
-@platform/core-components/src/components/animation
-```
-but the correct path is:
-```
-@platform/core-components/components/animation
-```
+AI-generated theme components frequently use the wrong import path for animation primitives. The pipeline writes `@platform/core-components/src/components/animation` but the correct path is `@platform/core-components/components/animation`.
 
-Batch-fix all affected files:
 ```bash
 grep -rl '@platform/core-components/src/components/animation' \
   packages/themes/<theme-name>/components/ \
@@ -437,7 +552,8 @@ grep -rl '@platform/core-components/src/components/animation' \
     's|@platform/core-components/src/components/animation|@platform/core-components/components/animation|g' {}
 ```
 
-Verify the fix:
+Verify:
+
 ```bash
 grep -r '@platform/core-components/src/components/animation' \
   packages/themes/<theme-name>/components/ 2>/dev/null \
@@ -445,37 +561,28 @@ grep -r '@platform/core-components/src/components/animation' \
   || echo "PASS: Animation import paths clean"
 ```
 
-**5f-2: Detect category slug**
+**C2f-2: Detect category slug.** First definitive match wins:
 
-Apply this decision tree (first definitive match wins):
+1. Extract all depth-1 paths from `discoveredPages[]`: filter `path.split('/').length === 2` and `path !== '/'`, take `path.split('/')[1]`, dedupe.
+2. Remove reserved roots: `about`, `contact`, `privacy`, `privacy-policy`, `cookie-policy`, `cookies`, `terms`, `legal`, `search`, `404`, `500`.
+3. Score remaining candidates:
 
-**Step 1:** Extract all depth-1 paths from `discoveredPages[]`:
-- Filter: `path.split('/').length === 2` and `path !== '/'`
-- Get the slug: `path.split('/')[1]`
-- Deduplicate
+   | Signal | Points |
+   |---|---|
+   | Has depth-2 page under `/<slug>/something` in discoveredPages | +3 |
+   | Has `pageBlueprints` entry for `/<slug>/` with ≥1 section | +2 |
+   | Has pageType containing `list` | +2 |
+   | Appears in discoveredPages with `source: "nav"` | +1 |
 
-**Step 2:** Remove reserved roots: `about`, `contact`, `privacy`, `privacy-policy`, `cookie-policy`, `cookies`, `terms`, `legal`, `search`, `404`, `500`
-
-**Step 3:** Score remaining candidates:
-
-| Signal | Points |
-|--------|--------|
-| Has depth-2 page under `/<slug>/something` in discoveredPages | +3 |
-| Has `pageBlueprints` entry for `/<slug>/` with ≥1 section | +2 |
-| Has pageType containing `list` (services-list, blog-list, etc.) | +2 |
-| Appears in discoveredPages with `source: "nav"` | +1 |
-
-**Step 4:** Pick the highest-scoring candidate. On tie, prefer the one with the lowest index in `discoveredPages` (nav ordering).
-
-**Step 5:** If no candidates remain: use `"services"` as fallback.
-
-**Step 6:** Emit: `Detected category slug: <slug> (source: <detection-reason>)`
+4. Pick highest-scoring candidate. On tie, prefer the one with the lowest index in `discoveredPages`.
+5. If no candidates remain: use `"services"` as fallback.
+6. Emit: `Detected category slug: <slug> (source: <detection-reason>)`
 
 **Nav/Footer resolution:**
-- Nav: if `themeNavComponents` has entries → use the first (or the one whose blueprint appears first in home page sections). If empty → use inline nav block.
-- Footer: if `themeFooterComponents` has entries → use the first (or the one whose blueprint appears last in home page sections). If empty → use inline footer block. **Never import Footer from core-components** — it crashes without MDX content.
+- Nav: if `themeNavComponents` has entries → use the first (or the one whose blueprint appears first in home page sections). Otherwise → use inline nav block.
+- Footer: if `themeFooterComponents` has entries → use the first (or the one whose blueprint appears last in home page sections). Otherwise → use inline footer block. **Never import Footer from core-components.**
 
-**5f-3: Clean test site pages**
+**C2f-3: Clean test site pages.**
 
 ```bash
 find sites/test-<theme-name>/app -name "page.tsx" -delete
@@ -485,11 +592,11 @@ mkdir -p sites/test-<theme-name>/app/contact
 mkdir -p "sites/test-<theme-name>/app/<detected-slug>/[slug]"
 ```
 
-**5f-4 through 5f-8: Generate five pages (one at a time)**
+**C2f-4 through C2f-8: Generate five pages (one at a time).**
 
 For each page:
 1. Find matching blueprint in `pageBlueprints` (match by `path` or `pageType`)
-2. If found: render sections in `sections[]` order, resolving each via the hierarchy in 5f-1
+2. If found: render sections in `sections[]` order, resolving each via the hierarchy in C2f-1
 3. If NOT found: use the fallback template
 
 **Structural rules for ALL generated pages:**
@@ -497,385 +604,38 @@ For each page:
 - All Tailwind classes use theme tokens: `bg-brand-primary`, `text-on-brand-primary`, `bg-surface-background`, `text-surface-foreground`, `bg-surface-muted`, `text-surface-muted-foreground`, `border-surface-subtle`, `bg-surface-inverse`, `text-brand-primary`
 - **No hardcoded hex colors**
 - **No `generateStaticParams`, `getContentItems`, `getServices`, `getLocations`, `fs.readdir`**
-- Add comment at top of sections block: `{/* Source: <reference.url> — <pageType> blueprint */}` or `{/* Source: fallback template */}`
-- **Opacity modifier on CSS custom properties does not work:** Tailwind's `/opacity` modifier (e.g. `bg-surface-background/80`) renders transparent when the colour comes from a CSS custom property (`var()`). For semi-transparent theme colours, use the hex value from `themeTokenRecommendations` as an arbitrary value: `bg-[#hexvalue]/80`. This applies to sticky navs, hero overlays, and decorative backgrounds.
-- **Preserve all CSS animation and interaction classes:** Do not omit transition durations (`duration-300`, `duration-500`, `duration-700`), hover transforms (`hover:scale-105`, `hover:-translate-y-1`), grayscale filters (`grayscale`, `grayscale-[20%]`), or opacity transitions. If the blueprint indicates an interactive pattern, the TSX must implement it.
-- **No hardcoded hex colours** — except for the opacity workaround above, where a hardcoded hex is the only correct solution.
+- Add comment at top of sections: `{/* Source: <reference.url> — <pageType> blueprint */}` or `{/* Source: fallback template */}`
+- **Opacity modifier on CSS custom properties does not work:** Tailwind's `/opacity` modifier renders transparent when the colour comes from `var()`. For semi-transparent theme colours, use the hex from `themeTokenRecommendations` as an arbitrary value: `bg-[#hexvalue]/80`. Applies to sticky navs, hero overlays, decorative backgrounds.
+- **Preserve CSS animation and interaction classes:** `duration-300/500/700`, `hover:scale-105`, `hover:-translate-y-1`, `grayscale`, `grayscale-[20%]`, opacity transitions. If the blueprint indicates an interactive pattern, the TSX must implement it.
 
----
+**C2f-4: `app/page.tsx` (Home)** — blueprint lookup: `pageBlueprints` where `path === "/"` or `pageType === "home"`. Fallback: hero (brand-primary), service cards (3 tiles), stats strip (4 numbers on surface-inverse), CTA section. Wrap with `<Nav />` and `<Footer />`.
 
-**5f-4: `app/page.tsx` (Home)**
+**C2f-5: `app/about/page.tsx`** — blueprint lookup: `path === "/about"` or `pageType === "about"`. Fallback: page-hero, Our Story narrative block, 3-value grid, CTA. Wrap with `<Nav />` / `<Footer />`.
 
-Blueprint lookup: `pageBlueprints` where `path === "/"` or `pageType === "home"`
+**C2f-6: `app/contact/page.tsx`** — blueprint lookup: `path === "/contact"` or `pageType === "contact"`. Fallback: `import { ContactForm } from '@platform/core-components'`, page-hero, 2-column layout with form + get-in-touch card. Wrap with `<Nav />` / `<Footer />`. **Never import Footer from core-components.**
 
-Fallback template (use when no home blueprint exists):
+**C2f-7: `app/<detected-slug>/page.tsx`** — blueprint lookup: `path === "/<detected-slug>"` or `path === "/<detected-slug>/"`. Fallback: three stub items in a const array, page-hero, 3-column card grid linking to `/<slug>/<item.slug>`, CTA. Wrap with `<Nav />` / `<Footer />`.
 
-```tsx
-<Nav />
-{/* Source: fallback template */}
+**C2f-8: `app/<detected-slug>/[slug]/page.tsx`** — blueprint lookup: `routePattern` containing `[slug]` under `/<detected-slug>`. **Do NOT add `generateStaticParams`** — dev-mode only test site. Fallback: derive title from `params.slug`, hero with breadcrumb, overview section with "What's Included" checklist, "Related" 2-card grid, CTA. Wrap with `<Nav />` / `<Footer />`.
 
-{/* Hero */}
-<section className="bg-brand-primary text-on-brand-primary py-20 md:py-32">
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-    <h1 className="text-4xl md:text-6xl font-bold mb-6">Welcome to Our Business</h1>
-    <p className="text-xl md:text-2xl opacity-90 max-w-3xl mx-auto mb-8">Professional services tailored to your needs</p>
-    <a href="/contact" className="inline-block bg-surface-background text-surface-foreground font-semibold px-8 py-3 rounded-lg hover:opacity-90 transition-opacity">Get in Touch</a>
-  </div>
-</section>
+**Inline Nav fallback** (when no theme nav component exists): `<header>` with sticky top, logo text, 3 nav links, primary-coloured Contact CTA.
 
-{/* Services/Category Overview */}
-<section className="py-16 md:py-24 bg-surface-background">
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <h2 className="text-3xl font-bold text-surface-foreground text-center mb-12">What We Do</h2>
-    <div className="grid md:grid-cols-3 gap-8">
-      <div className="bg-surface-muted rounded-lg p-6 border border-surface-subtle">
-        <h3 className="text-xl font-semibold text-surface-foreground mb-3">Quality Service</h3>
-        <p className="text-surface-muted-foreground">Experienced professionals delivering reliable results every time.</p>
-      </div>
-      <div className="bg-surface-muted rounded-lg p-6 border border-surface-subtle">
-        <h3 className="text-xl font-semibold text-surface-foreground mb-3">Tailored Solutions</h3>
-        <p className="text-surface-muted-foreground">Customised approaches that meet your specific requirements.</p>
-      </div>
-      <div className="bg-surface-muted rounded-lg p-6 border border-surface-subtle">
-        <h3 className="text-xl font-semibold text-surface-foreground mb-3">Get Started</h3>
-        <p className="text-surface-muted-foreground">Contact us today for a free, no-obligation consultation.</p>
-      </div>
-    </div>
-  </div>
-</section>
+**Inline Footer fallback** (when no theme footer component exists): `<footer>` on `bg-surface-inverse`, 3-column grid (brand, pages, contact), bottom border with copyright.
 
-{/* Stats strip */}
-<section className="py-12 bg-surface-inverse">
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-      <div><p className="text-4xl font-bold text-brand-primary">10+</p><p className="text-surface-muted-foreground mt-1">Years Experience</p></div>
-      <div><p className="text-4xl font-bold text-brand-primary">500+</p><p className="text-surface-muted-foreground mt-1">Happy Clients</p></div>
-      <div><p className="text-4xl font-bold text-brand-primary">100%</p><p className="text-surface-muted-foreground mt-1">Satisfaction Rate</p></div>
-      <div><p className="text-4xl font-bold text-brand-primary">24/7</p><p className="text-surface-muted-foreground mt-1">Support Available</p></div>
-    </div>
-  </div>
-</section>
+*(Full fallback template bodies — identical to the pre-decomposition skill — remain authoritative. The summaries above describe their structure; the orchestrator should render the same Tailwind-token JSX it always has.)*
 
-{/* CTA */}
-<section className="py-16 bg-brand-primary text-on-brand-primary">
-  <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-    <h2 className="text-3xl font-bold mb-4">Ready to Get Started?</h2>
-    <p className="text-lg opacity-90 mb-8">Get in touch for a free quote today.</p>
-    <a href="/contact" className="inline-block bg-surface-background text-surface-foreground font-semibold px-8 py-3 rounded-lg hover:opacity-90 transition-opacity">Contact Us</a>
-  </div>
-</section>
+**C2f-9: Validation gates.**
 
-<Footer />
-```
+Gate 1 — Route count (STOP):
 
----
-
-**5f-5: `app/about/page.tsx`**
-
-Blueprint lookup: `path === "/about"` or `pageType === "about"`
-
-Fallback template:
-
-```tsx
-<Nav />
-{/* Source: fallback template */}
-
-<section className="bg-surface-muted py-12 md:py-16 border-b border-surface-subtle">
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <h1 className="text-4xl font-bold text-surface-foreground">About Us</h1>
-    <p className="mt-4 text-lg text-surface-muted-foreground max-w-3xl">Learn more about our team and what drives us.</p>
-  </div>
-</section>
-
-<section className="py-16 md:py-24 bg-surface-background">
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div className="max-w-3xl">
-      <h2 className="text-3xl font-bold text-surface-foreground mb-6">Our Story</h2>
-      <p className="text-surface-muted-foreground mb-4 text-lg leading-relaxed">We are a dedicated team of professionals committed to delivering exceptional service. With years of experience in the industry, we understand what it takes to exceed expectations.</p>
-      <p className="text-surface-muted-foreground text-lg leading-relaxed">Our mission is to provide reliable, high-quality solutions that make a real difference for our clients and their communities.</p>
-    </div>
-  </div>
-</section>
-
-<section className="py-16 md:py-24 bg-surface-muted">
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <h2 className="text-3xl font-bold text-surface-foreground text-center mb-12">Our Values</h2>
-    <div className="grid md:grid-cols-3 gap-8">
-      <div className="bg-surface-background rounded-lg p-6 border border-surface-subtle text-center">
-        <div className="w-12 h-12 bg-brand-primary rounded-full mx-auto mb-4 flex items-center justify-center"><span className="text-on-brand-primary text-xl font-bold">1</span></div>
-        <h3 className="text-xl font-semibold text-surface-foreground mb-2">Quality</h3>
-        <p className="text-surface-muted-foreground">Uncompromising standards in everything we do.</p>
-      </div>
-      <div className="bg-surface-background rounded-lg p-6 border border-surface-subtle text-center">
-        <div className="w-12 h-12 bg-brand-primary rounded-full mx-auto mb-4 flex items-center justify-center"><span className="text-on-brand-primary text-xl font-bold">2</span></div>
-        <h3 className="text-xl font-semibold text-surface-foreground mb-2">Reliability</h3>
-        <p className="text-surface-muted-foreground">Consistent delivery you can count on every time.</p>
-      </div>
-      <div className="bg-surface-background rounded-lg p-6 border border-surface-subtle text-center">
-        <div className="w-12 h-12 bg-brand-primary rounded-full mx-auto mb-4 flex items-center justify-center"><span className="text-on-brand-primary text-xl font-bold">3</span></div>
-        <h3 className="text-xl font-semibold text-surface-foreground mb-2">Trust</h3>
-        <p className="text-surface-muted-foreground">Building lasting relationships with our clients.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section className="py-16 bg-brand-primary text-on-brand-primary">
-  <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-    <h2 className="text-3xl font-bold mb-4">Work With Us</h2>
-    <p className="text-lg opacity-90 mb-8">Ready to find out what we can do for you?</p>
-    <a href="/contact" className="inline-block bg-surface-background text-surface-foreground font-semibold px-8 py-3 rounded-lg hover:opacity-90 transition-opacity">Get in Touch</a>
-  </div>
-</section>
-
-<Footer />
-```
-
----
-
-**5f-6: `app/contact/page.tsx`**
-
-Blueprint lookup: `path === "/contact"` or `pageType === "contact"`
-
-Import `ContactForm` from `@platform/core-components` — it is a safe client component that does not use `getContentItems` or `fs/promises`. Do NOT import `Footer` from core-components.
-
-Fallback template:
-
-```tsx
-import { ContactForm } from '@platform/core-components';
-
-// ...
-
-<Nav />
-{/* Source: fallback template */}
-
-<section className="bg-surface-muted py-12 md:py-16 border-b border-surface-subtle">
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <h1 className="text-4xl font-bold text-surface-foreground">Contact Us</h1>
-    <p className="mt-4 text-lg text-surface-muted-foreground max-w-3xl">Get in touch with our team — we would love to hear from you.</p>
-  </div>
-</section>
-
-<section className="py-16 md:py-24 bg-surface-background">
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div className="grid lg:grid-cols-3 gap-12">
-      <div className="lg:col-span-2">
-        <ContactForm />
-      </div>
-      <div className="space-y-6">
-        <div className="bg-surface-muted rounded-lg p-6 border border-surface-subtle">
-          <h2 className="text-xl font-bold text-surface-foreground mb-4">Get in Touch</h2>
-          <div className="space-y-3 text-surface-muted-foreground text-sm">
-            <p>We aim to respond to all enquiries within 24 hours.</p>
-            <p>For urgent matters, please call us directly.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<Footer />
-```
-
----
-
-**5f-7: `app/<detected-slug>/page.tsx`**
-
-Blueprint lookup: `path === "/<detected-slug>"` or `path === "/<detected-slug>/"` in pageBlueprints
-
-Fallback template (replace `<SLUG>` with actual slug, `<SLUG_TITLE>` with slug capitalised):
-
-```tsx
-const items = [
-  { title: '<SLUG_TITLE> One', slug: '<slug>-one', description: 'A detailed overview of this offering and what it includes for you.' },
-  { title: '<SLUG_TITLE> Two', slug: '<slug>-two', description: 'Information about this service and the benefits it provides.' },
-  { title: '<SLUG_TITLE> Three', slug: '<slug>-three', description: 'How this service can help you achieve your goals.' },
-];
-
-// ...
-
-<Nav />
-{/* Source: fallback template */}
-
-<section className="bg-surface-muted py-12 md:py-16 border-b border-surface-subtle">
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <h1 className="text-4xl font-bold text-surface-foreground">Our <SLUG_TITLE></h1>
-    <p className="mt-4 text-lg text-surface-muted-foreground max-w-3xl">Browse our full range of <SLUG> below.</p>
-  </div>
-</section>
-
-<section className="py-16 md:py-24 bg-surface-background">
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {items.map((item) => (
-        <a key={item.slug} href={`/<SLUG>/${item.slug}`} className="group block bg-surface-muted rounded-lg border border-surface-subtle overflow-hidden hover:shadow-lg transition-shadow">
-          <div className="aspect-video bg-brand-primary opacity-10" />
-          <div className="p-6">
-            <h2 className="text-xl font-semibold text-surface-foreground group-hover:text-brand-primary transition-colors mb-2">{item.title}</h2>
-            <p className="text-surface-muted-foreground">{item.description}</p>
-          </div>
-        </a>
-      ))}
-    </div>
-  </div>
-</section>
-
-<section className="py-16 bg-brand-primary text-on-brand-primary">
-  <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-    <h2 className="text-3xl font-bold mb-4">Interested in Our <SLUG_TITLE>?</h2>
-    <p className="text-lg opacity-90 mb-8">Contact us today to discuss your requirements.</p>
-    <a href="/contact" className="inline-block bg-surface-background text-surface-foreground font-semibold px-8 py-3 rounded-lg hover:opacity-90 transition-opacity">Get a Quote</a>
-  </div>
-</section>
-
-<Footer />
-```
-
----
-
-**5f-8: `app/<detected-slug>/[slug]/page.tsx`**
-
-Blueprint lookup: `routePattern` containing `[slug]` under `/<detected-slug>` in pageBlueprints
-
-**Do NOT add `generateStaticParams`** — dev-mode only test site.
-
-Fallback template:
-
-```tsx
-export default function Page({ params }: { params: { slug: string } }) {
-  const title = params.slug
-    .split('-')
-    .map((w: string) => w.charAt(0).toUpperCase() + w.slice(1))
-    .join(' ');
-
-  return (
-    <div className="min-h-screen">
-      <Nav />
-      {/* Source: fallback template */}
-
-      <section className="bg-brand-primary text-on-brand-primary py-16 md:py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <nav className="text-sm mb-4 opacity-75" aria-label="Breadcrumb">
-            <a href="/" className="hover:underline">Home</a>
-            <span className="mx-2">/</span>
-            <a href="/<SLUG>" className="hover:underline capitalize"><SLUG></a>
-            <span className="mx-2">/</span>
-            <span>{title}</span>
-          </nav>
-          <h1 className="text-4xl md:text-5xl font-bold mt-2">{title}</h1>
-          <p className="mt-4 text-xl opacity-90 max-w-2xl">Professional <SLUG> services delivered with expertise and care.</p>
-        </div>
-      </section>
-
-      <section className="py-16 md:py-24 bg-surface-background">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl font-bold text-surface-foreground mb-6">Overview</h2>
-          <p className="text-surface-muted-foreground text-lg leading-relaxed mb-6">Our {title.toLowerCase()} service is delivered by experienced professionals committed to quality and reliability. We tailor every project to your specific requirements.</p>
-          <h2 className="text-2xl font-bold text-surface-foreground mt-12 mb-4">{"What's Included"}</h2>
-          <ul className="space-y-3">
-            <li className="flex items-start gap-3"><span className="text-brand-primary mt-1 font-bold">✓</span><span className="text-surface-muted-foreground">Initial consultation and needs assessment</span></li>
-            <li className="flex items-start gap-3"><span className="text-brand-primary mt-1 font-bold">✓</span><span className="text-surface-muted-foreground">Detailed planning and preparation</span></li>
-            <li className="flex items-start gap-3"><span className="text-brand-primary mt-1 font-bold">✓</span><span className="text-surface-muted-foreground">Professional delivery by qualified team</span></li>
-            <li className="flex items-start gap-3"><span className="text-brand-primary mt-1 font-bold">✓</span><span className="text-surface-muted-foreground">Follow-up and satisfaction guarantee</span></li>
-          </ul>
-        </div>
-      </section>
-
-      <section className="py-16 bg-surface-muted">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl font-bold text-surface-foreground mb-8">Related <SLUG_TITLE></h2>
-          <div className="grid md:grid-cols-2 gap-6">
-            <a href="/<SLUG>/<SLUG>-one" className="block bg-surface-background rounded-lg p-6 border border-surface-subtle hover:shadow-md transition-shadow">
-              <h3 className="text-lg font-semibold text-surface-foreground hover:text-brand-primary transition-colors mb-2"><SLUG_TITLE> One</h3>
-              <p className="text-surface-muted-foreground text-sm">A related service offering from our portfolio.</p>
-            </a>
-            <a href="/<SLUG>/<SLUG>-two" className="block bg-surface-background rounded-lg p-6 border border-surface-subtle hover:shadow-md transition-shadow">
-              <h3 className="text-lg font-semibold text-surface-foreground hover:text-brand-primary transition-colors mb-2"><SLUG_TITLE> Two</h3>
-              <p className="text-surface-muted-foreground text-sm">Another service offering from our portfolio.</p>
-            </a>
-          </div>
-        </div>
-      </section>
-
-      <section className="py-16 bg-brand-primary text-on-brand-primary">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold mb-4">Get a Quote for {title}</h2>
-          <p className="text-lg opacity-90 mb-8">Contact us to discuss your project.</p>
-          <a href="/contact" className="inline-block bg-surface-background text-surface-foreground font-semibold px-8 py-3 rounded-lg hover:opacity-90 transition-opacity">Contact Us</a>
-        </div>
-      </section>
-
-      <Footer />
-    </div>
-  );
-}
-```
-
----
-
-**Inline Nav fallback** (when no theme nav component exists):
-
-```tsx
-{/* Inline navigation — no theme nav component found */}
-<header className="w-full bg-surface-background border-b border-surface-subtle sticky top-0 z-50">
-  <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between" aria-label="Global">
-    <a href="/" className="text-xl font-bold text-surface-foreground">Test Site</a>
-    <div className="flex items-center gap-6 text-sm">
-      <a href="/about" className="text-surface-muted-foreground hover:text-surface-foreground transition-colors">About</a>
-      <a href="/<SLUG>" className="text-surface-muted-foreground hover:text-surface-foreground transition-colors capitalize"><SLUG></a>
-      <a href="/contact" className="bg-brand-primary text-on-brand-primary px-4 py-2 rounded-lg hover:opacity-90 transition-opacity">Contact</a>
-    </div>
-  </nav>
-</header>
-```
-
-**Inline Footer fallback** (when no theme footer component exists):
-
-```tsx
-{/* Inline footer — no theme footer component found */}
-<footer className="bg-surface-inverse py-12 mt-auto">
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div className="grid md:grid-cols-3 gap-8 mb-8">
-      <div>
-        <h3 className="text-lg font-semibold text-surface-background mb-3">Test Site</h3>
-        <p className="text-surface-muted-foreground text-sm">Pipeline test site.</p>
-      </div>
-      <div>
-        <h3 className="text-lg font-semibold text-surface-background mb-3">Pages</h3>
-        <ul className="space-y-2 text-sm text-surface-muted-foreground">
-          <li><a href="/" className="hover:text-brand-primary transition-colors">Home</a></li>
-          <li><a href="/about" className="hover:text-brand-primary transition-colors">About</a></li>
-          <li><a href="/<SLUG>" className="hover:text-brand-primary transition-colors capitalize"><SLUG></a></li>
-          <li><a href="/contact" className="hover:text-brand-primary transition-colors">Contact</a></li>
-        </ul>
-      </div>
-      <div>
-        <h3 className="text-lg font-semibold text-surface-background mb-3">Contact</h3>
-        <p className="text-surface-muted-foreground text-sm">Pipeline test site — placeholder content only.</p>
-      </div>
-    </div>
-    <div className="border-t border-surface-subtle pt-6 text-center">
-      <p className="text-surface-muted-foreground text-xs">&copy; {new Date().getFullYear()} Test Site. Generated by pipeline.</p>
-    </div>
-  </div>
-</footer>
-```
-
----
-
-**5f-9: Validation gates**
-
-Run all gates. STOP gates halt. WARN gates report and continue.
-
-**Gate 1 — Route count (STOP):**
 ```bash
 ROUTES=$(find sites/test-<theme-name>/app -name "page.tsx" | wc -l | tr -d ' ')
 [ "$ROUTES" -ne 5 ] && { echo "FAIL: Expected 5 page.tsx files, found $ROUTES"; exit 1; }
 echo "PASS: Route count = 5"
 ```
 
-**Gate 2 — All required routes present (STOP):**
+Gate 2 — All required routes present (STOP):
+
 ```bash
 for route in \
   "sites/test-<theme-name>/app/page.tsx" \
@@ -888,7 +648,8 @@ done
 echo "PASS: All required routes present"
 ```
 
-**Gate 3 — No hardcoded hex colors (WARN):**
+Gate 3 — No hardcoded hex colors (WARN):
+
 ```bash
 grep -rn '#[0-9a-fA-F]\{3,8\}' \
   sites/test-<theme-name>/app/page.tsx \
@@ -896,11 +657,12 @@ grep -rn '#[0-9a-fA-F]\{3,8\}' \
   sites/test-<theme-name>/app/contact/page.tsx \
   sites/test-<theme-name>/app/<detected-slug>/page.tsx \
   "sites/test-<theme-name>/app/<detected-slug>/[slug]/page.tsx" 2>/dev/null \
-  && echo "WARN: Hardcoded hex colors found — replace with Tailwind theme tokens" \
+  && echo "WARN: Hardcoded hex colors found" \
   || echo "PASS: No hardcoded hex colors"
 ```
 
-**Gate 4 — No forbidden APIs (WARN):**
+Gate 4 — No forbidden APIs (WARN):
+
 ```bash
 grep -rn 'generateStaticParams\|getContentItems\|getServices\|getLocations\|fs\.readdir\|TODO\|PLACEHOLDER' \
   sites/test-<theme-name>/app/page.tsx \
@@ -912,42 +674,14 @@ grep -rn 'generateStaticParams\|getContentItems\|getServices\|getLocations\|fs\.
   || echo "PASS: No forbidden APIs"
 ```
 
-**Gate 5 — Nav + footer present (WARN):**
-```bash
-for page in \
-  sites/test-<theme-name>/app/page.tsx \
-  sites/test-<theme-name>/app/about/page.tsx \
-  sites/test-<theme-name>/app/contact/page.tsx \
-  sites/test-<theme-name>/app/<detected-slug>/page.tsx \
-  "sites/test-<theme-name>/app/<detected-slug>/[slug]/page.tsx"; do
-  HAS_NAV=$(grep -cE '<nav|<header|Navigation|TopNav|NavBar|SiteHeader' "$page" 2>/dev/null || echo 0)
-  HAS_FOOTER=$(grep -cE '<footer|Footer|SiteFooter' "$page" 2>/dev/null || echo 0)
-  [ "$HAS_NAV" -eq 0 ] && echo "WARN: $page has no navigation"
-  [ "$HAS_FOOTER" -eq 0 ] && echo "WARN: $page has no footer"
-done
-echo "Nav/footer check complete"
-```
+Gate 5 — Nav + footer present (WARN): iterate every page and check `<nav|<header|Navigation|TopNav|NavBar|SiteHeader` and `<footer|Footer|SiteFooter`.
 
-**Gate 6 — Section count (WARN):**
-```bash
-for page in \
-  sites/test-<theme-name>/app/page.tsx \
-  sites/test-<theme-name>/app/about/page.tsx \
-  sites/test-<theme-name>/app/contact/page.tsx \
-  sites/test-<theme-name>/app/<detected-slug>/page.tsx; do
-  COUNT=$(grep -c '<section' "$page" 2>/dev/null || echo 0)
-  [ "$COUNT" -lt 3 ] && echo "WARN: $page has only $COUNT <section> elements (expected ≥3)"
-done
-DETAIL=$(grep -c '<section' "sites/test-<theme-name>/app/<detected-slug>/[slug]/page.tsx" 2>/dev/null || echo 0)
-[ "$DETAIL" -lt 2 ] && echo "WARN: Detail page has $DETAIL <section> elements (expected ≥2)"
-echo "Section count check complete"
-```
+Gate 6 — Section count (WARN): each page should have ≥3 `<section>` elements; detail page ≥2.
 
-**5f-10: Generation summary**
+**C2f-10: Generation summary — print:**
 
-Print:
 ```
-=== Step 5f: Standard Pages Generated ===
+=== C2f: Standard Pages Generated ===
 Source URL: <reference.url>
 Category slug: <detected-slug> (source: <detection-reason>)
 Nav component: <ThemeNavName | inline fallback>
@@ -956,11 +690,11 @@ Theme components used: <N> sections
 Inline JSX sections: <N> sections
 
 Routes created:
-  /                          app/page.tsx           (blueprint: found|fallback)
-  /about                     app/about/page.tsx      (blueprint: found|fallback)
-  /contact                   app/contact/page.tsx    (blueprint: found|fallback)
-  /<slug>/                   app/<slug>/page.tsx     (blueprint: found|fallback)
-  /<slug>/[slug]/            app/<slug>/[slug]/page.tsx (blueprint: found|fallback)
+  /                          app/page.tsx
+  /about                     app/about/page.tsx
+  /contact                   app/contact/page.tsx
+  /<slug>/                   app/<slug>/page.tsx
+  /<slug>/[slug]/            app/<slug>/[slug]/page.tsx
 
 Validation:
   Route count:    PASS (5/5)
@@ -968,12 +702,12 @@ Validation:
   Forbidden APIs: PASS | WARN (N occurrences)
   Nav/Footer:     PASS | WARN (details)
   Section counts: PASS | WARN (details)
-=========================================
+=====================================
 ```
 
-**5g.** Patch `sites/test-<theme-name>/next.config.ts` — Add Google Fonts to CSP.
+**C2g. CSP patch** — Add Google Fonts to `sites/test-<theme-name>/next.config.ts`.
 
-The base-template CSP blocks Google Fonts. Find the `Content-Security-Policy` value in `next.config.ts` and change:
+Find the `Content-Security-Policy` value and change:
 
 ```
 style-src 'self' 'unsafe-inline'; font-src 'self';
@@ -986,11 +720,14 @@ style-src 'self' 'unsafe-inline' fonts.googleapis.com; font-src 'self' fonts.gst
 ```
 
 **Verification gate — STOP if fails:**
+
 ```bash
-grep "fonts.googleapis.com" sites/test-<theme-name>/next.config.ts && echo "PASS: CSP patched" || { echo "FAIL: CSP not patched — fonts will be blocked"; exit 1; }
+grep "fonts.googleapis.com" sites/test-<theme-name>/next.config.ts \
+  && echo "PASS: CSP patched" \
+  || { echo "FAIL: CSP not patched — fonts will be blocked"; exit 1; }
 ```
 
-## Step 5h: Fidelity Review + Fix
+### C3 — Fidelity review + fix
 
 Write the review criteria to `output/ingestion/<theme-name>/meta/validate-review-prompt.txt`:
 
@@ -998,52 +735,39 @@ Write the review criteria to `output/ingestion/<theme-name>/meta/validate-review
 Review the 5 test site pages for brand fidelity against the reference site.
 
 **Reference material:**
-- **Dev server screenshots** (actual rendered output): `output/ingestion/<theme-name>/meta/dev-screenshots/` — `home.png`, `about.png`, `contact.png`, `category-list.png`, `category-detail.png`. Run `ls` to confirm which exist. **Read these PNG files directly** to see what the test site actually looks like.
-- **Reference site screenshots**: `output/ingestion/<theme-name>/screenshots/` — `home.png`, `about.png`, `blog-list.png`, etc. Read these to see what the reference looks like.
-- **HTML source**: `output/ingestion/<theme-name>/html/` (structural reference)
-- **Section blueprints**: `output/ingestion/<theme-name>/site-analysis.json` → `pageBlueprints[]`, `sectionBlueprints[]`
-- **Extracted tokens**: `site-analysis.json` → `themeTokenRecommendations`
-- **Downloaded images**: `output/ingestion/<theme-name>/meta/image-manifest.json` — list of images available in the test site's `public/images/` directory
+- Dev server screenshots (actual rendered output): `output/ingestion/<theme-name>/meta/dev-screenshots/` — `home.png`, `about.png`, `contact.png`, `category-list.png`, `category-detail.png`. Read these PNG files directly.
+- Reference site screenshots: `output/ingestion/<theme-name>/screenshots/` — `home.png`, `about.png`, `blog-list.png`, etc.
+- HTML source: `output/ingestion/<theme-name>/html/`
+- Section blueprints: `output/ingestion/<theme-name>/site-analysis.json` → `pageBlueprints[]`, `sectionBlueprints[]`
+- Extracted tokens: `site-analysis.json` → `themeTokenRecommendations`
+- Downloaded images: `output/ingestion/<theme-name>/meta/image-manifest.json`
 
-**Primary comparison method**: Read both the dev screenshot and the reference screenshot for each page. Compare them visually — look at layout, colours, typography scale, spacing, and image presence. Use WebFetch on the dev server URL for structural/code checks only.
+**Primary comparison method**: Read both dev and reference screenshots per page. Compare layout, colours, typography scale, spacing, image presence. Use WebFetch on the dev server URL for structural/code checks only.
 
-**Pages to compare:**
-- `meta/dev-screenshots/home.png` ↔ `screenshots/home.png`
-- `meta/dev-screenshots/about.png` ↔ `screenshots/about.png` (if both exist)
-- `meta/dev-screenshots/contact.png` ↔ (no reference — check structure only)
-- `meta/dev-screenshots/category-list.png` ↔ `screenshots/blog-list.png` or `screenshots/services-list.png`
-- `meta/dev-screenshots/category-detail.png` ↔ `screenshots/blog-post.png` or `screenshots/service-detail.png`
+**What to check:**
+1. Font loading — body text in the extracted font?
+2. Brand colours — match `themeTokenRecommendations.brand`?
+3. Section completeness — every `pageBlueprints[page].sections[]` present?
+4. Nav and footer — present on every page?
+5. Layout pattern — header dark/light matches `visualLanguage.heroPattern.headerDark`?
+6. CSS completeness — hover effects, transitions, interactive states present?
+7. Image rendering — images present, or still colour-block placeholders? Check `image-manifest.json`.
+8. Logo rendering — `<img>` element, not text. If `logo` prop renders as string, flag as `visual`.
+9. Hamburger menu — not `md:hidden` on desktop; has `onClick` handler and dropdown.
+10. CTA colour variety — distinct backgrounds per CTA section if reference shows variety.
+11. Invisible text — `text-surface-background` on dark `bg-surface-inverse` is a `blocker`.
 
-Also read each corresponding TSX file so you can identify where to apply fixes.
-
-**What to check (ingest-specific — brand fidelity, not exact replication):**
-1. **Font loading** — Is body text rendering in the extracted font (not browser default sans-serif)?
-2. **Brand colours** — Do primary/secondary/accent colours match `themeTokenRecommendations.brand`?
-3. **Section completeness** — Is every section in `pageBlueprints[page].sections[]` present in the rendered page?
-4. **Nav and footer** — Present on every page? Are they rendering real content or placeholder stubs?
-5. **Layout pattern** — Does header style (dark/light) match `visualLanguage.heroPattern.headerDark`? Does hero pattern match `visualLanguage.heroPattern.type`?
-6. **CSS completeness** — Are hover effects, transitions, and interactive states present?
-7. **Image rendering** — Are images present in the rendered output, or are they still colour-block placeholders? Check `image-manifest.json` for available downloaded images. If images exist in the manifest but components show placeholders, flag as `visual`.
-8. **Logo rendering** — Is the nav component rendering the logo as an `<img>` element, or as text? If `logo` is passed as a prop but appears as a string (e.g. `/images/logo.svg` shown as text), the component is outputting the prop value as text instead of an image source. Flag as `visual`.
-9. **Hamburger menu** — Is the mobile menu icon visible on desktop (not hidden with `md:hidden`)? Does it have an `onClick` handler and produce a dropdown with links? A hamburger that does nothing when clicked is a `blocker`. A hamburger hidden on desktop is a `visual`.
-10. **CTA colour variety** — If the page has multiple distinct CTA sections (e.g. speakers, sponsors, volunteers), do they each use a different background colour? If all CTAs share the same `bg-brand-primary` background when the reference shows yellow/blue/green variety, flag each one as `visual` with the target colour from the reference screenshot.
-11. **Invisible text** — Look for `text-surface-background` classes used as text colour. On dark `bg-surface-inverse` sections, `text-surface-background` renders the text the same colour as the background (invisible). This is always a `blocker` — flag with the correct replacement (`text-surface-foreground` or `text-white`).
-
-**What NOT to check:**
-- Whether content pixel-matches the reference site — it will not
-- Whether specific copy is identical
-- Form field interactivity (static visual comparison only — `readOnly` is intentional)
-- High pixel-diff scores — these are expected and informational only
+**What NOT to check:** pixel-matching content, identical copy, form interactivity (`readOnly` is intentional), high pixel-diff scores.
 
 **Fix guidance for common finding types:**
-- **Image placeholder findings** (colour blocks where images should appear): read the component's props interface, then pass the appropriate downloaded image(s) from `image-manifest.json` as props. Use the `publicPath` field (e.g. `/images/hero.jpg`).
-- **Logo-as-text findings**: open the theme nav component file. Find where `props.logo` is used. If it outputs `{props.logo}` as text, replace with `<img src={props.logo} alt="Site logo" className="h-8 w-auto" />`.
-- **Hamburger findings**: the theme nav component needs `"use client"` at top, `useState` for `open` state, `onClick={() => setOpen(!open)}` on the button, and a conditional `{open && <div>...</div>}` block. The hamburger button should NOT have `md:hidden`.
-- **CTA colour findings**: assign distinct backgrounds — `bg-brand-secondary` for registration/speakers, `bg-[#hex]` for sponsors, `bg-brand-accent` for volunteers. Never use `text-on-brand-primary` on non-brand-primary backgrounds.
-- **Invisible text findings**: change `text-surface-background` → `text-surface-foreground` on dark sections.
+- Image placeholder: pass `publicPath` from `image-manifest.json` as component props.
+- Logo-as-text: replace `{props.logo}` with `<img src={props.logo} alt="Site logo" className="h-8 w-auto" />`.
+- Hamburger: `"use client"`, `useState`, `onClick={() => setOpen(!open)}`, conditional dropdown. Remove `md:hidden`.
+- CTA colour: assign `bg-brand-secondary`/`bg-brand-accent`/`bg-[#hex]`. Never `text-on-brand-primary` on non-brand-primary backgrounds.
+- Invisible text: `text-surface-background` → `text-surface-foreground` on dark sections.
 ```
 
-Then run the shared validation skill:
+Then invoke the shared validation skill:
 
 ```
 /pipeline.validate-site \
@@ -1056,6 +780,7 @@ Then run the shared validation skill:
 ```
 
 After the pixel-diff baseline (run inside the validate-site skill's screenshot step), also run:
+
 ```bash
 npx tsx -e "
 import fs from 'fs';
@@ -1080,20 +805,21 @@ for (const [devFile, refFile] of pairs) {
 
 Print diff percentages as informational only — high values (30–70%) are expected since content differs.
 
-## Step 6: Reconcile Lockfile
+### C4 — Reconcile lockfile and type-check
 
 1. Run `pnpm install --lockfile-only` at the monorepo root. This updates `pnpm-lock.yaml` to include the new test site workspace without modifying `node_modules`.
 2. If `--lockfile-only` fails, fall back to `pnpm install`.
 3. Verify: `pnpm install --frozen-lockfile` must succeed.
 
-Then run type-check:
+Then run type-check inside the test site:
+
 ```bash
 cd sites/test-<theme-name> && npx tsc --noEmit
 ```
 
 If type-check fails, report the errors but continue — the user needs to see what went wrong with the generated theme.
 
-## Step 7: Stage Lockfile With Test Site
+### C5 — Stage with test site
 
 Stage `pnpm-lock.yaml` alongside the test site directory. The lockfile MUST be in the same commit as the test site to prevent `ERR_PNPM_OUTDATED_LOCKFILE` on any branch.
 
@@ -1101,23 +827,41 @@ Stage `pnpm-lock.yaml` alongside the test site directory. The lockfile MUST be i
 git add sites/test-<theme-name>/ pnpm-lock.yaml
 ```
 
-## Step 8: Report
+### Phase C verification gate — STOP if this fails
 
-Output:
+```bash
+test -d "sites/test-<theme-name>"
+test -f "sites/test-<theme-name>/.pipeline-test-site.json"
+test -f "sites/test-<theme-name>/theme.config.ts"
+test -f "sites/test-<theme-name>/app/layout.tsx"
+find "sites/test-<theme-name>/app" -name "page.tsx" | wc -l | grep -q "^ *5$"
+```
+
+---
+
+## Step 8: Final Report
 
 ```
+=== /pipeline.ingest complete ===
+
+Phase A (harvest):         <N> HTML pages, <M>/<K> images, scaffold inventory ok
+Phase B (validator):       Critical=0 High=0 Medium=<X> Low=<Y>  (findings: meta/findings-theme-package.md)
+Phase C (scaffolding):     5 routes generated, type-check <PASS|WARN>
+
 ✓ Theme name:     <theme-name>
 ✓ Source URL:     <url>
 ✓ Test site:      sites/test-<theme-name>/
 
 Reference assets: output/ingestion/<theme-name>/
-  screenshots/    — <N> reference site page captures (taken during Step 2)
-  html/           — <N> reference HTML pages (<or "not captured" if curl was blocked>)
-  meta/           — html-manifest.json, tsx-review-findings.json, tsx-fix-log.json
+  screenshots/    — <N> reference site page captures (A0)
+  html/           — <N> reference HTML pages (A1)
+  images/         — <M>/<K> downloaded images (A1)
+  meta/           — html-manifest.json, image-manifest.json, scaffold-inventory.json,
+                    findings-theme-package.md, tsx-review-findings.json, tsx-fix-log.json
 
-Fidelity review:  <N> findings — <N_blockers> blockers, <N_visual> visual, <N_minor> minor
-Fix pass:         <N_fixed> fixed, <N_skipped> skipped
-<If any blockers were not resolved: "⚠ Unresolved blockers: <list>">
+Fidelity review:  <N> findings — <blockers> blockers, <visual> visual, <minor> minor
+Fix pass:         <fixed> fixed, <skipped> skipped
+<If any blockers unresolved: "⚠ Unresolved blockers: <list>">
 
 Dev server:   cd sites/test-<theme-name> && npm run dev
 
@@ -1125,19 +869,49 @@ Reference comparison:
   http://localhost:3000               ↔  screenshots/home.png
   http://localhost:3000/about         ↔  screenshots/about.png
   http://localhost:3000/contact       ↔  screenshots/contact.png
-  http://localhost:3000/<slug>/       ↔  screenshots/services-list.png (or blog-list.png)
-  http://localhost:3000/<slug>/<item> ↔  screenshots/service-detail.png (or blog-post.png)
+  http://localhost:3000/<slug>/       ↔  screenshots/services-list.png | blog-list.png
+  http://localhost:3000/<slug>/<item> ↔  screenshots/service-detail.png | blog-post.png
 
-Cleanup:      /pipeline.kill-site test-<theme-name>   (removes test site)
-              /pipeline.kill-theme <theme-name>        (removes theme package)
+Cleanup:      /pipeline.kill-site test-<theme-name>
+              /pipeline.kill-theme <theme-name>
 
 Next steps:
   1. Start dev server, compare each page against the reference screenshots above
-  2. Review meta/tsx-review-findings.json — what the fidelity pass found
-  3. Review meta/tsx-fix-log.json — what was auto-fixed vs skipped
-  4. Iterate on theme.config.ts if brand colours need tuning
-  5. When satisfied: /deploy.changes
+  2. Review meta/findings-theme-package.md — TPV validation report
+  3. Review meta/tsx-review-findings.json — what the fidelity pass found
+  4. Review meta/tsx-fix-log.json — what was auto-fixed vs skipped
+  5. Iterate on theme.config.ts if brand colours need tuning
+  6. When satisfied: /deploy.changes
 ```
+
+---
+
+## Removed in the 2026-04-10 decomposition
+
+**None.** Every numbered step from the pre-decomposition skill maps to exactly one location in the Phase A / B / C structure:
+
+| Old step | New location |
+|---|---|
+| Step 1 Preflight | Step 1 Preflight (unchanged) |
+| Step 2 `analyse-site.ts` | Phase A0 |
+| Step 2b HTML capture | Phase A1 (first task) |
+| Step 2c Image download | Phase A1 (second task) |
+| *(new)* TPV audit | Phase B (new gate) |
+| Step 3 cp base-template + images | Phase C1 |
+| Step 4 Marker file | Phase C1b |
+| Step 5a theme.config.ts | Phase C2a |
+| Step 5b globals.css | Phase C2b |
+| Step 5c CI-inert package.json | Phase C2c |
+| Step 5d Tagline | Phase C2d |
+| Step 5e layout.tsx + fonts | Phase C2e |
+| Step 5f Five pages + gates | Phase C2f (sub-steps C2f-0 … C2f-10) |
+| Step 5g CSP patch | Phase C2g |
+| Step 5h Fidelity review | Phase C3 |
+| Step 6 Lockfile + type-check | Phase C4 |
+| Step 7 Stage | Phase C5 |
+| Step 8 Report | Step 8 Final Report |
+
+The scaffold-inventory JSON produced by the new sub-agent A3 is additive — it does not replace any existing step, it front-loads reads the orchestrator used to perform inline in Phase C.
 
 ---
 
@@ -1145,4 +919,8 @@ Next steps:
 
 - This command does NOT commit or push anything
 - Never modify `sites/base-template/` — only the copy
-- If the pipeline fails, STOP and report — do not attempt to create a partial test site
+- If any phase fails, STOP and report — do not attempt to create a partial test site
+- **Phase A1 and A3 MUST be launched in a single Task-tool message.** Sequential spawning defeats the parallel fan-out and is a correctness bug in this skill's execution.
+- **Phase B gate is hard.** Critical + High > 0 → abort before touching `sites/`. No overrides, no retries. Fix the theme package and re-run.
+- **Phase C stays in the orchestrator.** Do not attempt to delegate C2/C3/C4 to a sub-agent — the intra-step state sharing (`$BODY_VAR`/`$HEADING_VAR`/registry export names) would be lost.
+- Sub-agents see a fresh context. Always pass them absolute paths (theme name, session directory) and do not assume shared state.
