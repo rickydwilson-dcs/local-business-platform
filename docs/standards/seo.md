@@ -143,18 +143,41 @@ description: "[Service] for [use cases]. [Key benefit]. [Credential].";
 
 ## Internal Linking Strategy
 
+### Anchor Text Rule
+
+**Navigation links and inline cross-links must use the plain location or service name as anchor text — never a keyword phrase.**
+
+Keyword phrases like "Boiler Maintenance in Eastbourne" or "Scaffolding Brighton" must NOT appear as the visible text of a link. They belong in page copy, headings, and metadata — not in `<Link>` text.
+
+This rule applies to:
+
+- Header/footer navigation
+- Location listing links
+- Service listing links
+- Any `<Link>` component anywhere on the site
+
+```tsx
+// ✅ CORRECT — plain name as anchor text
+<Link href="/locations/eastbourne">Eastbourne</Link>
+<Link href="/services/boiler-maintenance">Boiler Maintenance</Link>
+
+// ❌ WRONG — keyword-stuffed anchor text (breaks this rule every time)
+<Link href="/locations/eastbourne">Boiler Maintenance in Eastbourne</Link>
+<Link href="/services/boiler-maintenance">Boiler Maintenance Eastbourne</Link>
+```
+
 ### Link from Locations to Services
 
 ```tsx
-// In location pages
-<Link href="/services/access-scaffolding">Access Scaffolding in {locationName}</Link>
+// In location pages — link text is the service name only
+<Link href="/services/access-scaffolding">Access Scaffolding</Link>
 ```
 
 ### Link from Services to Locations
 
 ```tsx
-// In service pages
-<Link href="/locations/brighton">{serviceName} in Brighton</Link>
+// In service pages — link text is the location name only
+<Link href="/locations/brighton">Brighton</Link>
 ```
 
 ## Image SEO
@@ -212,13 +235,14 @@ const serviceEntries = await Promise.all(
 
 ## What NOT to Do
 
-| Anti-Pattern            | Why It's Wrong              | Correct Approach        |
-| ----------------------- | --------------------------- | ----------------------- |
-| Title > 60 chars        | Truncated in search results | Keep under 60           |
-| Description > 160 chars | Truncated in search results | Keep to 150-160         |
-| Skipping heading levels | Poor accessibility & SEO    | Sequential h1→h2→h3     |
-| Keyword stuffing        | Penalized by Google         | Natural language        |
-| Duplicate content       | Competing with yourself     | Unique content per page |
+| Anti-Pattern                                                          | Why It's Wrong                                                                            | Correct Approach                                     |
+| --------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ---------------------------------------------------- |
+| Title > 60 chars                                                      | Truncated in search results                                                               | Keep under 60                                        |
+| Description > 160 chars                                               | Truncated in search results                                                               | Keep to 150-160                                      |
+| Skipping heading levels                                               | Poor accessibility & SEO                                                                  | Sequential h1→h2→h3                                  |
+| Keyword stuffing                                                      | Penalized by Google                                                                       | Natural language                                     |
+| Duplicate content                                                     | Competing with yourself                                                                   | Unique content per page                              |
+| Keyword phrase as link text (e.g. "Boiler Maintenance in Eastbourne") | Unnatural UX; anchor text should match what the destination page is, not target a keyword | Use plain name: "Eastbourne" or "Boiler Maintenance" |
 
 ## Verification Checklist
 
