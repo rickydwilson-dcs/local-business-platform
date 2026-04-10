@@ -723,6 +723,26 @@ Append to this brief file:
 - force: `feature/orchestration-patterns-sync` — ready for review and merge to develop
 ```
 
+## Completed
+
+**Date:** 2026-04-10
+**Status:** All phases executed successfully
+
+The divergence wiring went cleanly. Force's `sync-skills` target was on `feature/sync-skills-target` (not yet merged to develop), so the feature branch was based from there rather than develop. The Phase 2 verification gate caught that force's copy of `/review.code` still contained LBP-specific conditional agents (Vercel Config Auditor, Theme Package Validator) referencing `packages/themes/` and `sites/*/vercel.json` — paths that don't exist in force. These were removed alongside adding the force-specific agents, and agent prompts were updated to reference "force" instead of "local-business-platform". GOVERNANCE.md was not touched. The worktree decision rule was not propagated to force. LBP's `/review.code` was not modified.
+
+### Commits
+
+- LBP `feature/pipeline-upgrades-e` / Phase 1: `cf07e07` — cross-repo doc note
+- force `feature/orchestration-patterns-sync` / Phase 1: `37efc0f` — justfile + doc sync + CLAUDE.md
+- force `feature/orchestration-patterns-sync` / Phase 2: `ae7a2e4` — /review.code customization + sync exclusion + LBP-specific agent removal
+- LBP `feature/pipeline-upgrades-e` / Phase 3: `c30db67` — divergence doc note
+- force `feature/orchestration-patterns-sync` / Phase 4: `a0959b3` — resync doc (picked up Force-specific divergences section)
+
+### Branches left uncommitted-upstream
+
+- LBP: `feature/pipeline-upgrades-e` — ready for review and merge to develop
+- force: `feature/orchestration-patterns-sync` — ready for review and merge to develop
+
 ## Rules
 
 - STOP on any failed verification gate — do not continue to next phase
