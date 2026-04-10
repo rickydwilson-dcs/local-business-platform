@@ -165,12 +165,27 @@ Write to `output/sessions/[session-name]/plan-[FINDING-ID].md`:
 
 Spawn a Task agent to execute the plan. Choose the sub-agent type based on the finding's domain:
 
-| Finding prefix     | Sub-agent type         |
-| ------------------ | ---------------------- |
-| `SEC-*`            | `cs-security-engineer` |
-| `CQ-*`             | `cs-code-reviewer`     |
-| `A11Y-*` / `SEO-*` | `cs-frontend-engineer` |
-| `ARCH-*`           | `cs-architect`         |
+| Finding prefix     | Sub-agent type                                                                 |
+| ------------------ | ------------------------------------------------------------------------------ |
+| `SEC-*`            | `cs-security-engineer`                                                         |
+| `CQ-*`             | `cs-code-reviewer`                                                             |
+| `A11Y-*` / `SEO-*` | `cs-frontend-engineer`                                                         |
+| `ARCH-*`           | `cs-architect`                                                                 |
+| `VCA-*`            | `cs-code-reviewer` **(read-only auditor cannot apply edits — see note)**       |
+| `TPV-*`            | `cs-frontend-engineer` **(read-only validator cannot apply edits — see note)** |
+
+**Special rule for `VCA-*` findings:** The `cs-vercel-config-auditor` is a read-only reviewer and cannot apply fixes. For VCA findings, either:
+
+1. **Trivial fix (preferred):** Handle directly in the orchestrator's batch pass — VCA findings are almost always single-line edits to config files (delete a key, change a flag, add an env var name). Batch them with the other direct fixes.
+2. **If delegated anyway:** Use `cs-code-reviewer` as the fix executor. The finding's `Fix:` field in the findings file contains the exact remediation from the auditor's rule definition, so no additional reasoning is required.
+3. **Re-validation:** After any VCA fix is applied, you MAY re-invoke `cs-vercel-config-auditor` in read-only mode to confirm the fix resolved the violation. This is optional — `pnpm type-check` + `pnpm build` usually catches regressions, and the auditor re-runs automatically on the next `/deploy.changes` pre-flight anyway.
+
+**Special rule for `TPV-*` findings:** The `cs-theme-package-validator` is also a read-only auditor. For TPV findings:
+
+1. **Structural fixes (TPV-001 to TPV-005, TPV-015):** Trivial orchestrator batch fix — add a missing export, update `package.json` peerDependencies, remove a `@tailwind` directive. No delegation needed.
+2. **Token fixes (TPV-006 to TPV-011):** Use `cs-frontend-engineer` as the fix executor — these require understanding the theme config schema and filling in missing fields or correcting formats. The finding's `Fix:` field contains exact remediation guidance.
+3. **Hardcoding fixes (TPV-012 to TPV-014):** These are Medium-severity and touch multiple files across theme component code. Plan them as large findings if more than 3 files are affected, and delegate to `cs-frontend-engineer` with the standard large-fix flow (plan file + verification gates).
+4. **Re-validation:** After any TPV fix, optionally re-invoke `cs-theme-package-validator` in read-only mode to confirm. The validator also re-runs automatically on the next `/pipeline.ingest` or `/pipeline.validate-site` invocation.
 
 **Prompt for the sub-agent:**
 
@@ -236,10 +251,10 @@ Write `output/sessions/[session-name]/fixes-applied.md`:
 
 ## Applied (Direct Fixes)
 
-| ID      | Severity | Effort  | File                                                      | Notes                       |
-| ------- | -------- | ------- | --------------------------------------------------------- | --------------------------- |
+| ID      | Severity | Effort  | File                                                        | Notes                       |
+| ------- | -------- | ------- | ----------------------------------------------------------- | --------------------------- |
 | SEC-004 | HIGH     | trivial | sites/colossus-scaffolding/app/api/analytics/track/route.ts | Restricted GET to dev env   |
-| SEC-005 | MEDIUM   | trivial | sites/base-template/lib/csrf.ts                           | Added clearCSRFToken() call |
+| SEC-005 | MEDIUM   | trivial | sites/base-template/lib/csrf.ts                             | Added clearCSRFToken() call |
 
 ## Applied (Large Fixes via Sub-Agent)
 

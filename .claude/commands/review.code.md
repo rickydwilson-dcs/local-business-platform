@@ -45,7 +45,55 @@ Write `session.md`:
 | Code Quality        | Pending | findings-code-quality.md      |
 | Accessibility & SEO | Pending | findings-accessibility-seo.md |
 | Architecture        | Pending | findings-architecture.md      |
+| Vercel Config       | Pending | findings-vercel-config.md     |
+| Theme Package       | Pending | findings-theme-package.md     |
 ```
+
+Only include the "Vercel Config" row if its conditional agent was launched (see Step 1.4). Only include the "Theme Package" row if its conditional agent was launched. Omit rows for agents that did not run.
+
+## Step 1.4: Determine Conditional Agents
+
+Some agents only run when specific file patterns are in scope. Compute these flags once and use them to decide which agents to launch in Step 2.
+
+```bash
+# Recent / branch-diff file list — used for all conditional checks
+CHANGED_FILES=$(git diff --name-only develop main origin/develop 2>/dev/null)
+RECENT_FILES=$(git log --name-only --pretty=format: -20 | sort -u)
+```
+
+### Conditional agent 1: Vercel Config Auditor
+
+```bash
+echo "$CHANGED_FILES" | grep -E '(vercel\.json|next\.config\.|turbo\.json|tailwind\.config\.|middleware\.(t|j)s$|sites/[^/]+/package\.json)'
+```
+
+Run the Vercel config auditor if **any** of the following is true:
+
+1. The current branch diff touches a sensitive file (see regex above)
+2. `$ARGUMENTS` is empty AND the last 20 commits on `develop` touched any sensitive file (use `$RECENT_FILES`)
+3. `$ARGUMENTS` is a path AND that path contains a sensitive file
+4. The user explicitly passed `--vercel` as an argument (always force-run)
+
+### Conditional agent 2: Theme Package Validator
+
+```bash
+echo "$CHANGED_FILES" | grep -E '(packages/themes/[^/]+/|packages/theme-system/src/types\.ts)'
+```
+
+Run the theme package validator if **any** of the following is true:
+
+1. The current branch diff touches any file under `packages/themes/` OR `packages/theme-system/src/types.ts`
+2. `$ARGUMENTS` is empty AND the last 20 commits touched theme-package files
+3. `$ARGUMENTS` is a path that starts with `packages/themes/` or is exactly `packages/theme-system`
+4. The user explicitly passed `--theme` as an argument (always force-run)
+
+When this agent runs, also compute the list of **which themes** are in scope — either the specific theme directory from the path argument, or the union of theme directories touched in the diff, or (for full audits) all themes in `packages/themes/`. Pass this list into the agent prompt so it can skip unaffected themes.
+
+### Decision summary
+
+Conditional agents run **in the same parallel fan-out** as the standard 4 agents in Step 2 — they do not add sequential delay. They just add additional findings files. A full review with both conditional flags set fans out to 6 agents in one message.
+
+If neither conditional flag is set, only the 4 standard agents run and no conditional findings files are produced.
 
 ## Step 1.5: Check for Previously Fixed Findings
 
@@ -376,18 +424,88 @@ Task tool parameters:
 
 ---
 
+### Agent 5 (Conditional): Vercel Config Audit
+
+**Only launch this agent if Step 1.4 set the Vercel config flag.** Otherwise skip it entirely and do not include it in the session.md agent list.
+
+When launched, include this agent in the **same single message** as Agents 1–4 so it runs in the same parallel fan-out. Do not launch it sequentially after the others.
+
+```
+Task tool parameters:
+  description: "Vercel config audit"
+  subagent_type: "cs-vercel-config-auditor"
+  run_in_background: true
+```
+
+**Prompt for the agent:**
+
+> You are auditing the local-business-platform monorepo for Vercel / Next.js / Turborepo configuration issues as part of a parallel code review.
+>
+> **Scope:** If `$ARGUMENTS` from the parent `/review.code` invocation is a path, audit only that path. If it is empty, run a full audit. If it is a domain name, skip — config audits are not domain-scoped (tell the orchestrator and exit).
+>
+> **Rules to run:** All applicable rules in your agent definition (VCA-001 through VCA-009). Use the file-pattern table in Step 1 of your procedure to scope which rules apply.
+>
+> **Session directory:** `output/sessions/YYYY-MM-DD_code-review/` (same as the other review agents).
+>
+> **Output file:** `output/sessions/YYYY-MM-DD_code-review/findings-vercel-config.md`
+>
+> Follow your agent definition's review procedure exactly. Do NOT modify any files — this is a read-only audit. Number findings VCA-001 onwards using the rule IDs from your agent definition (do NOT renumber).
+>
+> If previously fixed findings were found in Step 1.5 of the parent skill, treat them the same way the other review agents do — do not re-report resolved issues.
+
+---
+
+### Agent 6 (Conditional): Theme Package Validation
+
+**Only launch this agent if Step 1.4 set the theme package flag.** Otherwise skip it entirely.
+
+When launched, include this agent in the **same single message** as Agents 1–4 (and Agent 5 if it is also active) so all agents run in one parallel fan-out.
+
+```
+Task tool parameters:
+  description: "Theme package validation"
+  subagent_type: "cs-theme-package-validator"
+  run_in_background: true
+```
+
+**Prompt for the agent:**
+
+> You are validating theme packages in the local-business-platform monorepo as part of a parallel code review.
+>
+> **Scope:** [insert the theme-package scope computed in Step 1.4 — either `full` (all themes), `theme:name` (single theme), or `diff-scoped` with the list of changed theme files].
+>
+> **Themes in scope:** [insert the list of theme package directories computed in Step 1.4].
+>
+> **Rules to run:** All applicable rules in your agent definition (TPV-001 through TPV-015). Use the file-pattern table in Step 1 of your procedure to scope which rules apply to which files.
+>
+> **Session directory:** `output/sessions/YYYY-MM-DD_code-review/` (same as the other review agents).
+>
+> **Output file:** `output/sessions/YYYY-MM-DD_code-review/findings-theme-package.md`
+>
+> Follow your agent definition's review procedure exactly. Do NOT modify any files — this is a read-only audit. Number findings using the TPV-NNN rule IDs from your agent definition (do NOT renumber).
+>
+> **Critical:** Before running checks, read `packages/theme-system/src/types.ts` to extract the current `THEME_NAMES` and variant unions. Do NOT rely on any hard-coded values in the rule examples — always cross-check against the live types file.
+>
+> If previously fixed findings were found in Step 1.5 of the parent skill, treat them the same way the other review agents do — do not re-report resolved issues.
+
+---
+
 ## Step 3: Wait for Agents and Aggregate
 
 After launching agents, check on each background agent using the TaskOutput tool. Wait for all to complete.
 
 If any agent fails, log it in `session.md` and continue with the others.
 
-Once all agents are done, read all findings files:
+Once all agents are done, read all findings files that exist:
 
 - `findings-security.md`
 - `findings-code-quality.md`
 - `findings-accessibility-seo.md`
 - `findings-architecture.md`
+- `findings-vercel-config.md` (only if the conditional Agent 5 was launched in Step 2)
+- `findings-theme-package.md` (only if the conditional Agent 6 was launched in Step 2)
+
+If a conditional agent was not launched, do not create a placeholder entry for it in the aggregated report — simply omit it from all tables and the executive summary.
 
 Aggregate into `aggregated-report.md` using this template:
 
@@ -402,13 +520,20 @@ Aggregate into `aggregated-report.md` using this template:
 
 ## Executive Summary
 
-| Severity  | Security | Code Quality | A11y/SEO | Architecture | **Total** |
-| --------- | -------- | ------------ | -------- | ------------ | --------- |
-| Critical  | N        | N            | N        | N            | **N**     |
-| High      | N        | N            | N        | N            | **N**     |
-| Medium    | N        | N            | N        | N            | **N**     |
-| Low       | N        | N            | N        | N            | **N**     |
-| **Total** | **N**    | **N**        | **N**    | **N**        | **N**     |
+Include a column only for each agent that actually ran. Omit columns for agents that were not launched (do not leave zeros for conditional agents that didn't run — the column should not appear at all).
+
+Standard columns: Security, Code Quality, A11y/SEO, Architecture.
+Conditional columns (include only if the corresponding conditional agent ran): Vercel Config, Theme Package.
+
+Example full table with all 6 agents active:
+
+| Severity  | Security | Code Quality | A11y/SEO | Architecture | Vercel Config | Theme Package | **Total** |
+| --------- | -------- | ------------ | -------- | ------------ | ------------- | ------------- | --------- |
+| Critical  | N        | N            | N        | N            | N             | N             | **N**     |
+| High      | N        | N            | N        | N            | N             | N             | **N**     |
+| Medium    | N        | N            | N        | N            | N             | N             | **N**     |
+| Low       | N        | N            | N        | N            | N             | N             | **N**     |
+| **Total** | **N**    | **N**        | **N**    | **N**        | **N**         | **N**         | **N**     |
 
 **Immediate attention required:** [summary of critical findings]
 
@@ -505,6 +630,8 @@ Findings flagged by 2+ agents targeting the same file (within 5 lines), merged u
 - `findings-code-quality.md` - Full code quality review details
 - `findings-accessibility-seo.md` - Full accessibility and SEO review details
 - `findings-architecture.md` - Full architecture review details
+- `findings-vercel-config.md` - Vercel/Next.js deployment config audit (if conditional Agent 5 ran)
+- `findings-theme-package.md` - Theme package structural validation (if conditional Agent 6 ran)
 
 ---
 
