@@ -1,5 +1,7 @@
 # Orchestration Patterns
 
+> **Cross-repo doc.** This guide is authored in local-business-platform and is the canonical reference for orchestration patterns across LBP and force. Force maintains a copy in `~/Sites/force/docs/guides/orchestration-patterns.md` that is synced via `just sync-skills` — see force's justfile.
+
 How skills in this monorepo are structured, when to delegate work to subagents, and when the orchestrator should do the work itself.
 
 ## Who this is for
@@ -50,18 +52,25 @@ Orchestrator
 ## Steps
 
 ### Step 1: Verify Branch
+
 git branch --show-current
+
 # Must be on develop. If not, STOP.
 
 ### Step 2: Pre-commit Verification
+
 # Group 3a (parallel read-only): type-check + lint + vercel audit
+
 # Group 3b (sequential write): build + test — ONLY if 3a passed
 
 ### Step 3: Commit if Needed
+
 # Check git status, commit if dirty
 
 ### Step 4: Push and merge develop → staging → main
+
 # Each push followed by: gh run watch
+
 # STOP if CI fails at any stage
 ```
 
@@ -120,18 +129,22 @@ Meta-orchestrator
 
 ```markdown
 ## Pre-flight
-git branch --show-current  # must be develop
-git status --porcelain     # must be clean
+
+git branch --show-current # must be develop
+git status --porcelain # must be clean
 
 ## Phase 1: Review
+
 Run /review.code. Wait. Read aggregated report.
 If no findings, skip Phase 2.
 
 ## Phase 2: Fix
+
 Run /fix.findings [scope from $ARGUMENTS] --auto.
 Check git status after — if no changes, inform user and STOP.
 
 ## Phase 3: Deploy
+
 Run /deploy.changes.
 
 ## Phase 4: Report
@@ -205,16 +218,19 @@ All 4–6 agents are spawned in **one message block** — do not launch them seq
 
 ```markdown
 ## Step 1: Setup
+
 Create session directory. Write session.md with agent status table.
 Determine conditional agents (check which files are in scope).
 
 ## Step 2: Spawn Parallel Agents
+
 SINGLE MESSAGE with run_in_background: true for all applicable agents.
 Agent 1: [specialist A] → findings-A.md
 Agent 2: [specialist B] → findings-B.md
 Agent N: [specialist N] → findings-N.md
 
 ## Step 3: Aggregate
+
 Wait for all agents. Read all findings files.
 Write aggregated-report.md.
 
@@ -274,12 +290,12 @@ For each pair of large findings (F_i, F_j):
 3. **Large fix delegation:** write a `plan-[FINDING-ID].md` first (for audit trail), then spawn the executor with the plan embedded in the prompt
 4. **Specialist selection by finding prefix:**
 
-   | Finding prefix | Subagent type           |
-   | -------------- | ----------------------- |
-   | `SEC-*`        | `cs-security-engineer`  |
-   | `CQ-*`         | `cs-code-reviewer`      |
-   | `A11Y-*`       | `cs-frontend-engineer`  |
-   | `ARCH-*`       | `cs-architect`          |
+   | Finding prefix | Subagent type          |
+   | -------------- | ---------------------- |
+   | `SEC-*`        | `cs-security-engineer` |
+   | `CQ-*`         | `cs-code-reviewer`     |
+   | `A11Y-*`       | `cs-frontend-engineer` |
+   | `ARCH-*`       | `cs-architect`         |
 
 5. **Never auto-commit** — all changes left uncommitted for user review
 6. Stale-finding detection: read the target file before fixing; if lines don't match the finding, mark as "stale" and skip
@@ -290,6 +306,7 @@ For each pair of large findings (F_i, F_j):
 ## Phase 1: Direct Fixes
 
 Group by target file. For each file group:
+
 1. Read the target file
 2. Apply fixes bottom-up
 3. Run: pnpm type-check, then pnpm lint, then pnpm build (each separately)
@@ -299,16 +316,19 @@ Group by target file. For each file group:
 ## Phase 2: Large Fixes
 
 For each large finding:
+
 1. Write plan-[ID].md (prerequisites, tasks, final verification, risks)
 2. Spawn fix-executor agent with plan embedded in prompt
 3. Spawn in parallel only if no file overlap with other large findings
 4. Read results file after each agent completes
 
 ## Phase 3: Final Verification
+
 pnpm type-check && pnpm lint && pnpm build && pnpm test
 E2E smoke: npm run --prefix sites/[modified-site] test:e2e:smoke
 
 ## Step 5: Log Results
+
 Write fixes-applied.md with Applied / Stale / Failed / Skipped tables
 ```
 
@@ -390,13 +410,13 @@ Decision tree — work through these in order:
 
 Quick reference:
 
-| Pattern | Name                     | Spawns subagents? | Writes files? | Best for                               |
-| ------- | ------------------------ | ----------------- | ------------- | -------------------------------------- |
-| A       | Sequential orchestrator  | No                | Yes           | Git operations, sequential pipelines   |
-| B       | Meta-orchestrator        | No (indirectly)   | No            | Chaining existing skills               |
-| C       | Parallel delegation      | Yes (fan-out)     | No (read-only)| Code reviews, parallel audits          |
-| D       | Hybrid batch-and-delegate| Sometimes         | Yes           | Fix pipelines with mixed effort levels |
-| E       | Phase-delegated          | Yes (per phase)   | Yes (phased)  | Long pipeline skills (>500 lines)      |
+| Pattern | Name                      | Spawns subagents? | Writes files?  | Best for                               |
+| ------- | ------------------------- | ----------------- | -------------- | -------------------------------------- |
+| A       | Sequential orchestrator   | No                | Yes            | Git operations, sequential pipelines   |
+| B       | Meta-orchestrator         | No (indirectly)   | No             | Chaining existing skills               |
+| C       | Parallel delegation       | Yes (fan-out)     | No (read-only) | Code reviews, parallel audits          |
+| D       | Hybrid batch-and-delegate | Sometimes         | Yes            | Fix pipelines with mixed effort levels |
+| E       | Phase-delegated           | Yes (per phase)   | Yes (phased)   | Long pipeline skills (>500 lines)      |
 
 ---
 
@@ -411,27 +431,27 @@ Every YOLO brief emitted by `/plan.to.yolo` must contain a `## Parallel executio
 ```markdown
 ## Parallel execution groups
 
-| Group | Phase   | Items                    | File overlap | Model  | Rationale      |
-| ----- | ------- | ------------------------ | ------------ | ------ | -------------- |
-| G1    | Phase 1 | Read A, Read B, Read C   | none (reads) | n/a    | Independent reads |
-| G2    | Phase 2 | Edit X, Edit Y           | none         | sonnet | Disjoint files |
+| Group | Phase   | Items                  | File overlap | Model  | Rationale         |
+| ----- | ------- | ---------------------- | ------------ | ------ | ----------------- |
+| G1    | Phase 1 | Read A, Read B, Read C | none (reads) | n/a    | Independent reads |
+| G2    | Phase 2 | Edit X, Edit Y         | none         | sonnet | Disjoint files    |
 
 ### Sequential points — MUST NOT parallelise
 
-| Item            | Reason                                        |
-| --------------- | --------------------------------------------- |
-| G1 → G2         | G2 depends on G1 output                       |
-| Phase 2 commit  | Must happen before Phase 3 reads branch state |
+| Item           | Reason                                        |
+| -------------- | --------------------------------------------- |
+| G1 → G2        | G2 depends on G1 output                       |
+| Phase 2 commit | Must happen before Phase 3 reads branch state |
 ```
 
 **Example from a real YOLO brief (2026-04-10):**
 
-| Group | Phase   | Items                                                         | File overlap | Model | Rationale                                      |
-| ----- | ------- | ------------------------------------------------------------- | ------------ | ----- | ---------------------------------------------- |
-| G1    | Phase 1 | Read CLAUDE.md, Read .gitignore                               | none (reads) | n/a   | Independent reads before the CLAUDE.md edit    |
-| G2    | Phase 2 | Read force/justfile, Read force/.claude/CLAUDE.md             | none (reads) | n/a   | Independent reads before justfile edit         |
-| G3    | Phase 3 | Read w1-w5, GOVERNANCE, force CLAUDE.md, review.code.md, cs-prompt-engineer.md | none (reads) | n/a | 9 independent reads to ground the new skill |
-| G4    | Phase 4 | Read review.code.md, fix.findings.md, deploy.changes.md, review.fix.deploy.md | none (reads) | n/a | 4 canonical skill examples for the guide    |
+| Group | Phase   | Items                                                                          | File overlap | Model | Rationale                                   |
+| ----- | ------- | ------------------------------------------------------------------------------ | ------------ | ----- | ------------------------------------------- |
+| G1    | Phase 1 | Read CLAUDE.md, Read .gitignore                                                | none (reads) | n/a   | Independent reads before the CLAUDE.md edit |
+| G2    | Phase 2 | Read force/justfile, Read force/.claude/CLAUDE.md                              | none (reads) | n/a   | Independent reads before justfile edit      |
+| G3    | Phase 3 | Read w1-w5, GOVERNANCE, force CLAUDE.md, review.code.md, cs-prompt-engineer.md | none (reads) | n/a   | 9 independent reads to ground the new skill |
+| G4    | Phase 4 | Read review.code.md, fix.findings.md, deploy.changes.md, review.fix.deploy.md  | none (reads) | n/a   | 4 canonical skill examples for the guide    |
 
 See `.claude/commands/plan.to.yolo.md` for the full schema specification.
 
