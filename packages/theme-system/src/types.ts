@@ -300,13 +300,13 @@ export interface ComponentRegistry {
   /** The named theme this site uses */
   theme: ThemeName;
   /** Hero component variant */
-  heroVariant: "image-overlay" | "split" | "minimal";
+  heroVariant: "image-overlay" | "split" | "split-geometric" | "minimal";
   /** Header appearance */
   headerVariant: "dark" | "light";
   /** Card style */
-  cardVariant: "icon-circle" | "standard" | "overlay";
+  cardVariant: "icon-circle" | "standard" | "elevated" | "overlay";
   /** Dark section accent style */
-  sectionVariant: "dark-accent" | "gradient" | "standard" | "banded";
+  sectionVariant: "dark-accent" | "gradient" | "standard" | "skewed" | "banded";
 }
 
 /**
@@ -363,10 +363,10 @@ export const ThemeNameSchema = z.enum(THEME_NAMES);
 
 export const ComponentRegistrySchema = z.object({
   theme: ThemeNameSchema,
-  heroVariant: z.enum(["image-overlay", "split", "minimal"]),
+  heroVariant: z.enum(["image-overlay", "split", "split-geometric", "minimal"]),
   headerVariant: z.enum(["dark", "light"]),
-  cardVariant: z.enum(["icon-circle", "standard", "overlay"]),
-  sectionVariant: z.enum(["dark-accent", "gradient", "standard", "banded"]),
+  cardVariant: z.enum(["icon-circle", "standard", "elevated", "overlay"]),
+  sectionVariant: z.enum(["dark-accent", "gradient", "standard", "skewed", "banded"]),
 });
 
 const typographyScaleEntrySchema = z.object({
