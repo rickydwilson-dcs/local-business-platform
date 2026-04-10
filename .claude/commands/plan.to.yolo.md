@@ -243,6 +243,10 @@ Confirm this was done in the final report.
 - Use `model: haiku` for Task agents doing mechanical work (grep, import additions, find-replace); `model: sonnet` for standard edits; `model: opus` only for deep multi-file reasoning
 - The Co-Authored-By line in commits must reflect the orchestrator model used (e.g., `Claude Sonnet 4.6` not `Opus 4.6`)
 - For any brief that creates or modifies theme packages or pipeline tools: the final phase MUST include `pnpm pipeline:smoke` as a verification gate before the final commit
+- **If the brief writes to files outside the primary repo**, the terminal command MUST include `--additionalDirectories` for each external path. `--dangerously-skip-permissions` only covers the directory the session is launched from — writes to other repos or user-global paths (e.g. `~/.claude/agents/`) will trigger interactive permission prompts, breaking unattended execution. Common cases:
+  - Brief touches another repo (e.g. `/Users/rickywilson/Sites/force/`): add `--additionalDirectories /Users/rickywilson/Sites/force`
+  - Brief writes to user-global agent/skill directories (`~/.claude/agents/`, `~/.claude/commands/`, `~/.claude/docs/`): add `--additionalDirectories ~/.claude`
+  - Brief touches multiple external paths: add one `--additionalDirectories` per path
 ````
 
 ## Step 4: Output the Terminal Command, Cost Summary, and Next Steps
@@ -254,8 +258,17 @@ Print this block for the user to copy-paste:
 **Paste into terminal:**
 
 ```
-claude --dangerously-skip-permissions --model sonnet -p "Read output/sessions/YYYY-MM-DD_topic-slug/yolo-brief.md in full, then implement every phase it describes exactly as written."
+claude --dangerously-skip-permissions --model sonnet [ADDITIONAL_DIRS] -p "Read output/sessions/YYYY-MM-DD_topic-slug/yolo-brief.md in full, then implement every phase it describes exactly as written."
 ```
+
+Replace `[ADDITIONAL_DIRS]` based on the brief's file targets:
+
+- If the brief ONLY writes within the primary repo: remove `[ADDITIONAL_DIRS]` entirely.
+- If the brief writes to another repo: replace with `--additionalDirectories /path/to/other/repo`
+- If the brief writes to `~/.claude/agents/` or other user-global paths: replace with `--additionalDirectories ~/.claude`
+- If both: use multiple flags, e.g. `--additionalDirectories /path/to/repo --additionalDirectories ~/.claude`
+
+Without these flags, writes outside the launch directory trigger interactive permission prompts that break unattended YOLO execution.
 
 ---
 
