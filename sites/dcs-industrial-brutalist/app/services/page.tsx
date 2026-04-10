@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { siteConfig } from '@/site.config';
 import { getServices } from '@/lib/content';
 
@@ -27,13 +28,13 @@ export default async function ServicesPage() {
       {/* NAV */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-[#0A0A0A] border-b border-[#2A2A2A]">
         <div className="max-w-[1400px] mx-auto px-6 md:px-12 flex items-center justify-between h-14">
-          <a
+          <Link
             href="/"
             className="font-bold text-[#EAEAEA] tracking-tight"
             style={{ fontFamily: 'var(--font-space-grotesk, system-ui)' }}
           >
             [ DCS ]
-          </a>
+          </Link>
           <nav className="hidden md:flex items-center gap-8">
             {[
               ['SYS.001', 'SERVICES', '/services'],
@@ -41,7 +42,7 @@ export default async function ServicesPage() {
               ['SYS.003', 'ABOUT', '/about'],
               ['SYS.004', 'CONTACT', '/contact'],
             ].map(([id, label, href]) => (
-              <a
+              <Link
                 key={href}
                 href={href}
                 className="flex items-center gap-2 text-[0.75rem] tracking-[0.08em] text-[#EAEAEA] hover:text-[#FF2A2A] transition-colors duration-150"
@@ -49,16 +50,16 @@ export default async function ServicesPage() {
               >
                 <span className="text-[#777777]">{id}</span>
                 {label}
-              </a>
+              </Link>
             ))}
           </nav>
-          <a
+          <Link
             href="/contact"
             className="bg-[#FF2A2A] text-white text-[0.75rem] tracking-[0.08em] uppercase px-4 py-2 hover:bg-[#CC2222] transition-colors duration-150"
             style={{ fontFamily: 'var(--font-geist-mono, monospace)' }}
           >
             [ INITIATE CONTACT ]
-          </a>
+          </Link>
         </div>
       </header>
 
@@ -74,9 +75,9 @@ export default async function ServicesPage() {
               color: '#777777',
             }}
           >
-            <a href="/" className="hover:text-[#FF2A2A] transition-colors duration-150">
+            <Link href="/" className="hover:text-[#FF2A2A] transition-colors duration-150">
               HOME
-            </a>
+            </Link>
             {' > '}
             <span className="text-[#EAEAEA]">SERVICES</span>
           </p>
@@ -128,7 +129,7 @@ export default async function ServicesPage() {
             {services.map((svc) => {
               const sysId = serviceIds[svc.slug] ?? 'SYS.???';
               return (
-                <a
+                <Link
                   key={svc.slug}
                   href={`/services/${svc.slug}`}
                   className="bg-[#0A0A0A] p-8 flex flex-col gap-4 group hover:bg-[#111111] transition-colors duration-150"
@@ -204,7 +205,7 @@ export default async function ServicesPage() {
                       REV 2.6
                     </span>
                   </div>
-                </a>
+                </Link>
               );
             })}
           </div>
@@ -225,13 +226,13 @@ export default async function ServicesPage() {
             >
               Ready to deploy?
             </h2>
-            <a
+            <Link
               href="/contact"
               className="inline-block bg-[#FF2A2A] text-white px-8 py-4 hover:bg-[#CC2222] transition-colors duration-150 text-[0.875rem] tracking-[0.08em] uppercase"
               style={{ fontFamily: 'var(--font-geist-mono, monospace)' }}
             >
               &lt; INITIATE CONTACT &gt;
-            </a>
+            </Link>
           </div>
         </section>
       </main>
@@ -284,7 +285,7 @@ export default async function ServicesPage() {
                 ['SYS.005', 'SEO & ANALYTICS', '/services/seo-analytics'],
                 ['SYS.006', 'MAINTENANCE', '/services/maintenance'],
               ].map(([id, label, href]) => (
-                <a
+                <Link
                   key={href}
                   href={href}
                   className="flex items-center gap-2 mb-2 hover:text-[#FF2A2A] transition-colors duration-150"
@@ -297,7 +298,7 @@ export default async function ServicesPage() {
                 >
                   <span style={{ color: '#777777' }}>{id}</span>
                   {label}
-                </a>
+                </Link>
               ))}
             </div>
             <div className="bg-[#0A0A0A] p-8">

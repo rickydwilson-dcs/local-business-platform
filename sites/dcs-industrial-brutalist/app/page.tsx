@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { siteConfig } from '@/site.config';
 
 export const metadata: Metadata = {
@@ -53,17 +54,17 @@ const services = [
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen flex flex-col bg-[#0A0A0A]">
+    <div className="min-h-screen flex flex-col bg-surface-background">
       {/* NAV */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-[#0A0A0A] border-b border-[#2A2A2A]">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-surface-background border-b border-surface-border">
         <div className="max-w-[1400px] mx-auto px-6 md:px-12 flex items-center justify-between h-14">
-          <a
+          <Link
             href="/"
-            className="font-bold text-[#EAEAEA] tracking-tight"
+            className="font-bold text-surface-foreground tracking-tight"
             style={{ fontFamily: 'var(--font-space-grotesk, system-ui)' }}
           >
             [ DCS ]
-          </a>
+          </Link>
           <nav className="hidden md:flex items-center gap-8">
             {[
               ['SYS.001', 'SERVICES', '/services'],
@@ -71,24 +72,24 @@ export default function HomePage() {
               ['SYS.003', 'ABOUT', '/about'],
               ['SYS.004', 'CONTACT', '/contact'],
             ].map(([id, label, href]) => (
-              <a
+              <Link
                 key={href}
                 href={href}
-                className="flex items-center gap-2 text-[0.75rem] tracking-[0.08em] text-[#EAEAEA] hover:text-[#FF2A2A] transition-colors duration-150"
+                className="flex items-center gap-2 text-[0.75rem] tracking-[0.08em] text-surface-foreground hover:text-brand-primary transition-colors duration-150"
                 style={{ fontFamily: 'var(--font-geist-mono, monospace)' }}
               >
-                <span className="text-[#777777]">{id}</span>
+                <span className="text-surface-secondary">{id}</span>
                 {label}
-              </a>
+              </Link>
             ))}
           </nav>
-          <a
+          <Link
             href="/contact"
-            className="bg-[#FF2A2A] text-white text-[0.75rem] tracking-[0.08em] uppercase px-4 py-2 hover:bg-[#CC2222] transition-colors duration-150"
+            className="bg-brand-primary text-white text-[0.75rem] tracking-[0.08em] uppercase px-4 py-2 hover:bg-brand-primary-hover transition-colors duration-150"
             style={{ fontFamily: 'var(--font-geist-mono, monospace)' }}
           >
             [ INITIATE CONTACT ]
-          </a>
+          </Link>
         </div>
       </header>
 
@@ -97,7 +98,7 @@ export default function HomePage() {
         <section className="pt-14 min-h-screen flex flex-col justify-between px-6 md:px-12 max-w-[1400px] mx-auto py-24">
           <div className="flex-1 flex flex-col justify-center">
             <h1
-              className="uppercase text-[#EAEAEA] mb-8 whitespace-pre-line"
+              className="uppercase text-surface-foreground mb-8 whitespace-pre-line"
               style={{
                 fontFamily: 'var(--font-space-grotesk, system-ui)',
                 fontSize: 'clamp(3rem, 8vw, 8rem)',
@@ -110,40 +111,38 @@ export default function HomePage() {
               <span className="cursor-blink">_</span>
             </h1>
             <p
-              className="mb-12 max-w-xl"
+              className="mb-12 max-w-xl text-surface-foreground/85"
               style={{
                 fontFamily: 'var(--font-geist, system-ui)',
                 fontSize: '1.25rem',
                 lineHeight: '1.6',
-                color: 'rgba(234, 234, 234, 0.85)',
               }}
             >
               We build the platform. You build the business.
             </p>
             <div>
-              <a
+              <Link
                 href="/contact"
-                className="inline-block bg-[#FF2A2A] text-white px-8 py-4 hover:bg-[#CC2222] transition-colors duration-150 text-[0.875rem] tracking-[0.08em] uppercase"
+                className="inline-block bg-brand-primary text-white px-8 py-4 hover:bg-brand-primary-hover transition-colors duration-150 text-[0.875rem] tracking-[0.08em] uppercase"
                 style={{ fontFamily: 'var(--font-geist-mono, monospace)' }}
               >
                 &lt; INITIATE CONTACT &gt;
-              </a>
+              </Link>
             </div>
           </div>
 
           {/* Status bar */}
           <div
-            className="border-t border-[#2A2A2A] pt-6 flex flex-wrap items-center justify-between gap-4"
+            className="border-t border-surface-border pt-6 flex flex-wrap items-center justify-between gap-4 text-surface-secondary"
             style={{
               fontFamily: 'var(--font-geist-mono, monospace)',
               fontSize: '0.75rem',
               letterSpacing: '0.08em',
-              color: '#777777',
             }}
           >
             <div className="flex flex-wrap gap-8 uppercase">
               <span>
-                SYS.STATUS: <span className="text-[#4AF626]">ONLINE</span>
+                SYS.STATUS: <span className="text-status-success">ONLINE</span>
               </span>
               <span>EST. 2015</span>
               <span>UNIT: UK-001</span>
@@ -153,33 +152,32 @@ export default function HomePage() {
         </section>
 
         {/* HR */}
-        <hr className="border-[#2A2A2A]" />
+        <hr className="border-surface-border" />
 
         {/* SERVICES GRID */}
         <section className="py-24 px-6 md:px-12 max-w-[1400px] mx-auto">
           <div
-            className="mb-12"
+            className="mb-12 text-surface-secondary"
             style={{
               fontFamily: 'var(--font-geist-mono, monospace)',
               fontSize: '0.75rem',
               letterSpacing: '0.08em',
-              color: '#777777',
             }}
           >
             <span
-              className="uppercase text-[#EAEAEA] text-sm"
+              className="uppercase text-surface-foreground text-sm"
               style={{ fontFamily: 'var(--font-space-grotesk, system-ui)', fontSize: '0.875rem' }}
             >
               /// SERVICES
             </span>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 bg-[#2A2A2A] gap-px">
+          <div className="grid grid-cols-1 md:grid-cols-2 bg-surface-border gap-px">
             {services.map((svc) => (
-              <a
+              <Link
                 key={svc.slug}
                 href={`/services/${svc.slug}`}
-                className="bg-[#0A0A0A] p-8 flex flex-col gap-4 group hover:bg-[#111111] transition-colors duration-150 border-0"
+                className="bg-surface-background p-8 flex flex-col gap-4 group hover:bg-surface-muted transition-colors duration-150 border-0"
               >
                 <div className="flex items-center justify-between">
                   <span
@@ -187,27 +185,25 @@ export default function HomePage() {
                       fontFamily: 'var(--font-geist-mono, monospace)',
                       fontSize: '0.75rem',
                       letterSpacing: '0.08em',
-                      color: '#777777',
                     }}
-                    className="uppercase"
+                    className="uppercase text-surface-secondary"
                   >
                     {svc.id}
                   </span>
                   <span
-                    className="flex items-center gap-2 uppercase"
+                    className="flex items-center gap-2 uppercase text-surface-secondary"
                     style={{
                       fontFamily: 'var(--font-geist-mono, monospace)',
                       fontSize: '0.75rem',
                       letterSpacing: '0.08em',
-                      color: '#777777',
                     }}
                   >
-                    <span className="inline-block w-2 h-2 bg-[#4AF626]" />
+                    <span className="inline-block w-2 h-2 bg-status-success" />
                     ACTIVE
                   </span>
                 </div>
                 <div
-                  className="text-[#EAEAEA] whitespace-pre-line group-hover:text-[#FF2A2A] transition-colors duration-150"
+                  className="text-surface-foreground whitespace-pre-line group-hover:text-brand-primary transition-colors duration-150"
                   style={{
                     fontFamily: 'var(--font-space-grotesk, system-ui)',
                     fontSize: 'clamp(1.25rem, 3vw, 2rem)',
@@ -219,18 +215,18 @@ export default function HomePage() {
                   {svc.title}
                 </div>
                 <p
+                  className="text-surface-foreground/85"
                   style={{
                     fontFamily: 'var(--font-geist, system-ui)',
                     fontSize: '1rem',
                     lineHeight: '1.6',
-                    color: 'rgba(234,234,234,0.85)',
                   }}
                 >
                   {svc.desc}
                 </p>
-                <div className="flex items-center justify-between mt-auto pt-4 border-t border-[#2A2A2A]">
+                <div className="flex items-center justify-between mt-auto pt-4 border-t border-surface-border">
                   <span
-                    className="text-[#FF2A2A] uppercase"
+                    className="text-brand-primary uppercase"
                     style={{
                       fontFamily: 'var(--font-geist-mono, monospace)',
                       fontSize: '0.75rem',
@@ -244,52 +240,50 @@ export default function HomePage() {
                       fontFamily: 'var(--font-geist-mono, monospace)',
                       fontSize: '0.75rem',
                       letterSpacing: '0.08em',
-                      color: '#777777',
                     }}
-                    className="uppercase"
+                    className="uppercase text-surface-secondary"
                   >
                     {svc.rev}
                   </span>
                 </div>
-              </a>
+              </Link>
             ))}
           </div>
         </section>
 
         {/* HR */}
-        <hr className="border-[#2A2A2A]" />
+        <hr className="border-surface-border" />
 
         {/* STATS BAR */}
         <section className="py-12 px-6 md:px-12 max-w-[1400px] mx-auto">
           <div
-            className="flex flex-wrap gap-8 md:gap-16"
+            className="flex flex-wrap gap-8 md:gap-16 text-surface-secondary"
             style={{
               fontFamily: 'var(--font-geist-mono, monospace)',
               fontSize: '0.875rem',
               letterSpacing: '0.08em',
-              color: '#777777',
             }}
           >
             <span className="uppercase">
-              SITES DEPLOYED: <strong className="text-[#EAEAEA]">047</strong>
+              SITES DEPLOYED: <strong className="text-surface-foreground">047</strong>
             </span>
             <span className="uppercase">
-              UPTIME: <strong className="text-[#EAEAEA]">99.9%</strong>
+              UPTIME: <strong className="text-surface-foreground">99.9%</strong>
             </span>
             <span className="uppercase">
-              CLIENTS SERVED: <strong className="text-[#EAEAEA]">023</strong>
+              CLIENTS SERVED: <strong className="text-surface-foreground">023</strong>
             </span>
           </div>
         </section>
 
         {/* HR */}
-        <hr className="border-[#2A2A2A]" />
+        <hr className="border-surface-border" />
 
         {/* CTA BAND */}
-        <section className="py-24 px-6 md:px-12 bg-[#111111] border-t-2 border-b-2 border-[#FF2A2A]">
+        <section className="py-24 px-6 md:px-12 bg-surface-muted border-t-2 border-b-2 border-brand-primary">
           <div className="max-w-[1400px] mx-auto text-center">
             <h2
-              className="text-[#EAEAEA] mb-8"
+              className="text-surface-foreground mb-8"
               style={{
                 fontFamily: 'var(--font-space-grotesk, system-ui)',
                 fontSize: 'clamp(2rem, 5vw, 4rem)',
@@ -300,35 +294,34 @@ export default function HomePage() {
             >
               Ready to deploy?
             </h2>
-            <a
+            <Link
               href="/contact"
-              className="inline-block bg-[#FF2A2A] text-white px-8 py-4 hover:bg-[#CC2222] transition-colors duration-150 text-[0.875rem] tracking-[0.08em] uppercase"
+              className="inline-block bg-brand-primary text-white px-8 py-4 hover:bg-brand-primary-hover transition-colors duration-150 text-[0.875rem] tracking-[0.08em] uppercase"
               style={{ fontFamily: 'var(--font-geist-mono, monospace)' }}
             >
               &lt; INITIATE CONTACT &gt;
-            </a>
+            </Link>
           </div>
         </section>
       </main>
 
       {/* FOOTER */}
-      <footer className="mt-auto border-t border-[#2A2A2A] bg-[#0A0A0A]">
+      <footer className="mt-auto border-t border-surface-border bg-surface-background">
         <div className="max-w-[1400px] mx-auto px-6 md:px-12">
-          <div className="grid grid-cols-1 md:grid-cols-3 bg-[#2A2A2A] gap-px">
-            <div className="bg-[#0A0A0A] p-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 bg-surface-border gap-px">
+            <div className="bg-surface-background p-8">
               <p
-                className="font-bold text-[#EAEAEA] text-lg mb-2"
+                className="font-bold text-surface-foreground text-lg mb-2"
                 style={{ fontFamily: 'var(--font-space-grotesk, system-ui)' }}
               >
                 [ DCS ]
               </p>
               <p
-                className="uppercase leading-relaxed"
+                className="uppercase leading-relaxed text-surface-secondary"
                 style={{
                   fontFamily: 'var(--font-geist-mono, monospace)',
                   fontSize: '0.75rem',
                   letterSpacing: '0.08em',
-                  color: '#777777',
                 }}
               >
                 Digital Consulting
@@ -339,14 +332,13 @@ export default function HomePage() {
                 EST. 2015
               </p>
             </div>
-            <div className="bg-[#0A0A0A] p-8">
+            <div className="bg-surface-background p-8">
               <p
-                className="uppercase mb-4"
+                className="uppercase mb-4 text-surface-secondary"
                 style={{
                   fontFamily: 'var(--font-geist-mono, monospace)',
                   fontSize: '0.75rem',
                   letterSpacing: '0.08em',
-                  color: '#777777',
                 }}
               >
                 Systems
@@ -359,41 +351,38 @@ export default function HomePage() {
                 ['SYS.005', 'SEO & ANALYTICS', '/services/seo-analytics'],
                 ['SYS.006', 'MAINTENANCE', '/services/maintenance'],
               ].map(([id, label, href]) => (
-                <a
+                <Link
                   key={href}
                   href={href}
-                  className="flex items-center gap-2 mb-2 hover:text-[#FF2A2A] transition-colors duration-150"
+                  className="flex items-center gap-2 mb-2 text-surface-foreground hover:text-brand-primary transition-colors duration-150"
                   style={{
                     fontFamily: 'var(--font-geist-mono, monospace)',
                     fontSize: '0.75rem',
                     letterSpacing: '0.08em',
-                    color: '#EAEAEA',
                   }}
                 >
-                  <span style={{ color: '#777777' }}>{id}</span>
+                  <span className="text-surface-secondary">{id}</span>
                   {label}
-                </a>
+                </Link>
               ))}
             </div>
-            <div className="bg-[#0A0A0A] p-8">
+            <div className="bg-surface-background p-8">
               <p
-                className="uppercase mb-4"
+                className="uppercase mb-4 text-surface-secondary"
                 style={{
                   fontFamily: 'var(--font-geist-mono, monospace)',
                   fontSize: '0.75rem',
                   letterSpacing: '0.08em',
-                  color: '#777777',
                 }}
               >
                 Coordinates
               </p>
               <p
-                className="uppercase leading-relaxed"
+                className="uppercase leading-relaxed text-surface-foreground"
                 style={{
                   fontFamily: 'var(--font-geist-mono, monospace)',
                   fontSize: '0.75rem',
                   letterSpacing: '0.08em',
-                  color: '#EAEAEA',
                 }}
               >
                 UK-001
@@ -402,7 +391,7 @@ export default function HomePage() {
                 <br />
                 <br />
                 <span className="inline-flex items-center gap-2">
-                  <span className="inline-block w-2 h-2 bg-[#4AF626]" />
+                  <span className="inline-block w-2 h-2 bg-status-success" />
                   STATUS: ONLINE
                 </span>
               </p>
@@ -410,23 +399,21 @@ export default function HomePage() {
           </div>
           <div className="py-4 flex items-center justify-between">
             <p
-              className="uppercase"
+              className="uppercase text-surface-secondary"
               style={{
                 fontFamily: 'var(--font-geist-mono, monospace)',
                 fontSize: '0.7rem',
                 letterSpacing: '0.08em',
-                color: '#777777',
               }}
             >
               (C) 2026 DIGITAL CONSULTING SERVICES
             </p>
             <p
-              className="uppercase"
+              className="uppercase text-surface-secondary"
               style={{
                 fontFamily: 'var(--font-geist-mono, monospace)',
                 fontSize: '0.7rem',
                 letterSpacing: '0.08em',
-                color: '#777777',
               }}
             >
               REV 2.6
