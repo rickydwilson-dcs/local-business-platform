@@ -8,7 +8,7 @@ How skills in this monorepo are structured, when to delegate work to subagents, 
 
 Anyone writing a new skill (`.claude/commands/*.md`) or refactoring an existing one. This doc captures the patterns already in use — it is descriptive, not prescriptive. When in doubt, pick the pattern that most closely matches your skill's shape.
 
-## The four patterns
+## The five patterns
 
 ### Pattern A — Sequential orchestrator-only
 

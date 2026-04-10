@@ -426,7 +426,7 @@ Contrast ratios must meet WCAG AA: 4.5:1 for normal text, 3:1 for large text.
 
 ## Named Themes
 
-Beyond CSS variables, the platform has named visual identities — **orion**, **vega**, **lyra**, **cygnus**, **nova**, **atlas**, and **rigel** — each packaged in `packages/themes/`.
+Beyond CSS variables, the platform has named visual identities — **atlas**, **castor**, **cygnus**, **lyra**, **nova**, **orion**, **polaris**, **rigel**, **sirius**, and **vega** — each packaged in `packages/themes/`.
 
 ### What a Named Theme Provides
 
@@ -436,15 +436,18 @@ Beyond CSS variables, the platform has named visual identities — **orion**, **
 
 ### Available Themes
 
-| Theme      | Visual Identity                                                                      | Components                  |
-| ---------- | ------------------------------------------------------------------------------------ | --------------------------- |
-| **orion**  | Dark header, full-bleed hero, red brand accent, circular icon cards, dark stat cards | Header + Footer             |
-| **vega**   | Light header, split hero, standard card grid, clean typography                       | Header + Footer             |
-| **lyra**   | Editorial serif headlines, sans-serif body, muted sage/cream palette, rounded cards  | CSS utilities only          |
-| **cygnus** | Dark mode, Press-Black background, Signal Orange + Craft Green, bold graphic-led     | Header + Footer             |
-| **nova**   | Light header, image-overlay hero, bold orange + green, dark-accent sections          | CSS utilities only          |
-| **atlas**  | Conference/event platform                                                            | Full-page component library |
-| **rigel**  | Conference/event platform                                                            | Full-page component library |
+| Theme       | Visual Identity                                                                      | Components                  |
+| ----------- | ------------------------------------------------------------------------------------ | --------------------------- |
+| **orion**   | Dark header, full-bleed hero, red brand accent, circular icon cards, dark stat cards | Header + Footer             |
+| **vega**    | Light header, split hero, standard card grid, clean typography                       | Header + Footer             |
+| **lyra**    | Editorial serif headlines, sans-serif body, muted sage/cream palette, rounded cards  | CSS utilities only          |
+| **cygnus**  | Dark mode, Press-Black background, Signal Orange + Craft Green, bold graphic-led     | Header + Footer             |
+| **nova**    | Light header, image-overlay hero, bold orange + green, dark-accent sections          | CSS utilities only          |
+| **atlas**   | Conference/event platform                                                            | Full-page component library |
+| **castor**  | Trade Navy + Fresh Sage, Newsreader/Work Sans, banded sections, plumber trade        | CSS utilities only          |
+| **polaris** | Tactical Telemetry dark mode, Aviation Red accent, industrial brutalist              | CSS utilities only          |
+| **rigel**   | Conference/event platform                                                            | Full-page component library |
+| **sirius**  | Premium Tech Agency light mode, Electric Blue + Teal, editorial breathing room       | CSS utilities only          |
 
 ### Wiring It Up
 
