@@ -37,6 +37,7 @@ export type ThemeName =
   | "polaris"
   | "rigel"
   | "sirius"
+  | "solaris"
   | "vega";
 
 /** Metadata describing which component variants a theme uses. */

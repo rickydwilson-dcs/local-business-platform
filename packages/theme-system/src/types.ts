@@ -287,6 +287,7 @@ export const THEME_NAMES = [
   "polaris",
   "rigel",
   "sirius",
+  "solaris",
   "vega",
 ] as const;
 export type ThemeName = (typeof THEME_NAMES)[number];
