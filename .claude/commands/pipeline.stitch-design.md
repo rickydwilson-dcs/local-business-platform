@@ -1015,6 +1015,39 @@ Then run the shared validation skill:
 
 ---
 
+## Step 5i: Post-Generation Visual Fidelity Check
+
+After `/pipeline.validate-site` completes, spawn `cs-visual-fidelity-reviewer` to compare the Stitch reference screenshots against the rendered test site screenshots.
+
+The Stitch reference screenshots are the AI-generated page designs downloaded from the Stitch MCP in Step 3 (stored in `output/ingestion/$THEME_NAME-stitch/stitch-screens/`). The rendered screenshots were captured during `/pipeline.validate-site` Step 2 (stored in `output/ingestion/$THEME_NAME-stitch/meta/dev-screenshots/`).
+
+Spawn `cs-visual-fidelity-reviewer` with model `opus`:
+
+> You are `cs-visual-fidelity-reviewer`. Compare the Stitch reference screenshots against the rendered test site screenshots and identify visual drift in colour, typography, layout, and component variants.
+>
+> **Inputs:**
+>
+> - Reference screenshots (Stitch originals): `output/ingestion/$THEME_NAME-stitch/stitch-screens/`
+> - Rendered screenshots (dev server): `output/ingestion/$THEME_NAME-stitch/meta/dev-screenshots/`
+> - Session directory: `output/ingestion/$THEME_NAME-stitch/meta/`
+> - Theme name: `$THEME_NAME`
+> - Scope: full
+>
+> Follow your agent procedure exactly. Pair screenshots by filename where possible; the Stitch screens may use different filenames (`screen-home.png`, `screen-about.png`) — use your best judgement to match them to rendered equivalents (`home.png`, `about.png`).
+>
+> Write findings to `output/ingestion/$THEME_NAME-stitch/meta/findings-visual-fidelity.md`.
+
+Wait for the agent to complete. Then read `output/ingestion/$THEME_NAME-stitch/meta/findings-visual-fidelity.md` and check the Statistics block.
+
+**If `Critical + High > 0`:** STOP and print the findings file to the user. Do not proceed to Step 6 until the user reviews the findings and either:
+
+1. Instructs you to fix the Critical/High issues (hand off to `cs-frontend-engineer` for remediation), or
+2. Explicitly accepts the findings and instructs you to continue anyway.
+
+**If `Critical + High == 0`:** proceed to Step 6 normally.
+
+---
+
 ## Step 6: Lockfile and Type-check
 
 **6a — Update lockfile**
