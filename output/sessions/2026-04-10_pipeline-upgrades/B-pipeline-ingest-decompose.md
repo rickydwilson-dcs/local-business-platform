@@ -541,3 +541,26 @@ After completing all phases, append to this brief file:
 ```
 claude --dangerously-skip-permissions --model opus -p "Read output/sessions/2026-04-10_pipeline-upgrades/B-pipeline-ingest-decompose.md in full, then implement every phase it describes exactly as written. Phase 0 is mandatory — do not skip it."
 ```
+
+---
+
+## Completed
+
+**Date:** 2026-04-10
+**Status:** All phases executed successfully
+
+The decomposition was mostly mechanical — the existing skill had clear natural breaks between the analysis-tool phase, the theme-package phase, and the site-scaffolding phase. Phase A's boundary was the one genuine judgment call: the brief proposed three parallel sub-agents (A1 reference download, A2 visual token extraction, A3 scaffold inventory), but the Phase 0 analysis revealed that `tools/analyse-site.ts` already performs visual token extraction internally, so A2 was subsumed into the A0 sequential prelude rather than duplicated as a parallel sub-agent. A1 (HTML + image download) and A3 (scaffold inventory) were confirmed as independent and are launched in a single Task message. Phase B (validator gate) and Phase C (orchestrator scaffolding) landed exactly where the brief specified. One operational note: the worktree was initially placed inside `.claude/worktrees/` which caused Claude Code to block writes to `.claude/commands/` (nested `.claude/` path protection). The fix was to move the worktree to `/tmp/lbp-upgrades-b` and write the rewritten skill file from the parent conversation context.
+
+### Commits
+
+- Phase 0: `0f2646a` — analysis scratch file
+- Phase 1: `f3a2084` — skill decomposition (926 lines)
+- Phase 2: `a72a429` — documentation update (how-ingestion-pipeline-works.md)
+
+### Line count
+- Before: 1148 lines
+- After: 926 lines
+
+### Phase boundary decisions
+- **A2 subsumed into A0:** The brief proposed a separate A2 sub-agent for visual token extraction. The Phase 0 analysis found `analyse-site.ts` already performs this step internally — adding a parallel A2 would duplicate work at extra cost. A2 is documented as subsumed in the skill file.
+- **C2b written after C2e:** The brief skeleton listed globals.css (C2b) before font determination (C2e), but the font variable names (`$BODY_VAR`, `$HEADING_VAR`) are computed in C2e and consumed in C2b. The implementation documents the dependency explicitly and writes C2b after C2e.
