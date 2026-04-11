@@ -1,0 +1,80 @@
+---
+title: Print Design vs Digital Design — the Differences That Matter
+date: 2025-10-07
+author:
+  name: "The DCS Team"
+  role: "Digital Consulting Services"
+description: "Designing for print and designing for screen are fundamentally different disciplines. Understanding the differences avoids expensive print failures."
+category: industry-tips
+tags:
+  - print design
+  - digital design
+  - graphic design
+  - artwork
+  - CMYK
+excerpt: "A design that looks perfect on screen can produce poor print results if it was produced without understanding the differences between screen and print. Here is what to know. (Example site content.)"
+heroImage: "placeholder/blog/print-vs-digital-design.webp"
+readingTime: 6
+---
+
+## The Screen-to-Print Gap
+
+It happens frequently in graphic design: a client approves artwork on screen, the job goes to print, and the printed result looks noticeably different — duller, darker, or with colours that have shifted. The client is surprised. The designer should have known better.
+
+The differences between screen and print design are fundamental, not cosmetic. Understanding them is the difference between artwork that works in both contexts and artwork that works in one but fails in the other.
+
+## Colour Mode: RGB vs CMYK
+
+Screens emit light. They create colour by combining red, green, and blue (RGB) light in varying intensities. A screen can display highly saturated, vivid colours because it is adding light.
+
+Printers use ink. They create colour by combining cyan, magenta, yellow, and black (CMYK) pigments on a white substrate. The result is a subtractive process — pigments absorb wavelengths rather than emitting them. The gamut (range of producible colours) of print is narrower than that of a screen.
+
+**What this means in practice:**
+
+- A vivid electric blue on screen may print as a slightly duller, more muted blue
+- Neon greens, vivid magentas, and bright oranges are particularly prone to gamut compression in print
+- Artwork produced in RGB and converted to CMYK at the last stage often produces unexpected colour shifts
+
+**The correct approach:** Design print-intended artwork in CMYK from the start, or use a properly managed conversion workflow with colour profile assignment (typically Fogra39 for European offset printing). At DCS Graphics, we produce all print artwork in CMYK with the appropriate press profile.
+
+## Resolution: 72 dpi vs 300 dpi
+
+Screen images are typically 72–96 pixels per inch. This is sufficient for the viewing distance and pixel density of a monitor. Print requires 300 dpi at final size to produce crisp, sharp output.
+
+An image that looks sharp on screen at 72 dpi will appear visibly soft and pixellated when printed at its on-screen size. A 1,000 × 1,000 pixel image that fills a computer screen (approximately 14 inches at 72 dpi) will only fill a 3.3 × 3.3 inch area at 300 dpi.
+
+**What this means in practice:** Images sourced from websites are almost always 72 dpi and are not suitable for print. Images need to be sourced at the correct resolution — or vector graphics used instead, which scale infinitely without quality loss.
+
+## Bleed and Safe Zones
+
+Printed items are trimmed after printing. The trim is mechanical and has a tolerance of approximately ±1mm. Any design element that should reach the edge of the printed piece needs to extend beyond the trim line by 3mm — this extension is the bleed.
+
+Conversely, any element that must not be cut — text, important graphics — should sit at least 3mm inside the trim line (the safe zone).
+
+Digital designs have no equivalent concept. A web page has no trim; elements simply sit where they are. Print files that don't include bleed produce white lines at the edges of the printed piece when trimming slightly shifts.
+
+## Typography: Font Handling
+
+Web fonts (Google Fonts, Typekit) are licensed for digital use. Many are not licensed for commercial print, or may produce rendering differences between screen hinting and print rendering. Always check licensing.
+
+For print files, fonts must either be embedded in the PDF or outlined (converted to vector paths). A PDF that references fonts without embedding will fail or substitute if the receiving print provider doesn't have the font installed.
+
+## File Formats for Print
+
+Print-ready files are typically:
+
+- **PDF/X-1a or PDF/X-4** — the standard print-ready PDF format; embeds fonts and images, defines colour space
+- **Native application files** (InDesign, Illustrator) with all linked assets packaged
+- **TIFF at 300 dpi** — for photographic image files
+
+**Not suitable for commercial print:** JPEG at screen resolution, PNG exported from a web design tool, Word or PowerPoint documents.
+
+## Getting It Right First Time
+
+The cost of a print mistake is the cost of the print run. For a high-quality brochure or leaflet run, that can easily be £500–2,000. Getting artwork right before it goes to press is far less expensive than reprinting.
+
+At DCS Graphics, we produce all print artwork to production-ready standards — correct colour mode, resolution, bleed, and file format — and provide print-ready PDF files that your chosen print provider can use without modification.
+
+---
+
+*This blog contains illustrative example content produced by Digital Consulting Services.*
