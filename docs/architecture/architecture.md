@@ -25,9 +25,8 @@ local-business-platform/
 ├── sites/                          # Client websites
 │   ├── base-template/              # Gold-standard template for new sites
 │   ├── colossus-scaffolding/       # Reference implementation (scaffolding)
+│   ├── cygnus-test/                # Theme test site (cygnus)
 │   ├── dcs/                        # Digital Consulting Services (polaris theme)
-│   ├── dcs-design-taste/           # DCS design-taste variant (sirius theme)
-│   ├── dcs-industrial-brutalist/   # DCS industrial-brutalist variant
 │   ├── dj-fox-electrical/          # Production site (electrical)
 │   ├── mad-graphics/               # Production site (vehicle graphics & print, cygnus theme)
 │   ├── showcase/                   # Internal component/theme showcase
@@ -35,7 +34,7 @@ local-business-platform/
 ├── packages/
 │   ├── core-components/            # Shared UI components (@platform/core-components)
 │   ├── theme-system/               # Theming engine (@platform/theme-system)
-│   ├── themes/                     # Named theme CSS packages (atlas, castor, cygnus, lyra, nova, orion, polaris, rigel, sirius, vega)
+│   ├── themes/                     # Named theme CSS packages (atlas, castor, cygnus, lyra, nova, orion, polaris, rigel, sirius, solaris, vega)
 │   └── intake-system/              # Customer intake automation (@platform/intake-system)
 ├── tools/                          # Site creation & deployment CLI tools
 ├── docs/                           # Documentation
@@ -93,7 +92,7 @@ Drop a new MDX file in the right directory, build, and a new page appears. No co
 
 `@platform/theme-system` transforms per-site config into CSS custom properties and Tailwind utilities. Each site defines a `theme.config.ts` with brand colors; the plugin generates `:root` variables and classes like `bg-brand-primary`. Change the config, rebuild, and the entire site re-brands.
 
-**Named Themes** — `packages/themes/` contains pre-built CSS utility packages for each visual identity. `orion` (dark header, full-bleed hero, red accent), `vega` (light header, card grid, navy/blue), `lyra` (editorial serif, muted sage/cream palette), `cygnus` (dark mode, Signal Orange, Craft Green), `nova` (bold orange + green, light header), `castor` (Trade Navy + Fresh Sage, plumber trade), `polaris` (dark industrial brutalist, Aviation Red), `sirius` (light premium tech agency, Electric Blue + Teal), `atlas`, and `rigel` are the available identities. Each site's `globals.css` imports its theme package, and `theme.config.ts` specifies a `componentRegistry` that selects the right component variants for that identity. `ThemeProvider` from `@platform/core-components` makes the registry available at runtime to client components.
+**Named Themes** — `packages/themes/` contains pre-built CSS utility packages for each visual identity. `orion` (dark header, full-bleed hero, red accent), `vega` (light header, card grid, navy/blue), `lyra` (editorial serif, muted sage/cream palette), `cygnus` (dark mode, Signal Orange, Craft Green), `nova` (bold orange + green, light header), `castor` (Trade Navy + Fresh Sage, plumber trade), `polaris` (dark industrial brutalist, Aviation Red), `sirius` (light premium tech agency, Electric Blue + Teal), `solaris` (soft blue-white, sky blue + chartreuse, geometric shapes), `atlas`, and `rigel` are the available identities. Each site's `globals.css` imports its theme package, and `theme.config.ts` specifies a `componentRegistry` that selects the right component variants for that identity. `ThemeProvider` from `@platform/core-components` makes the registry available at runtime to client components.
 
 ### 6. Intake System (Site Generation)
 
@@ -156,7 +155,7 @@ Five content types, all following the same MDX-only + dynamic routing pattern:
 | Stage              | Checks                                                    |
 | ------------------ | --------------------------------------------------------- |
 | Pre-commit (Husky) | lint-staged (Prettier), MDX content validation            |
-| Pre-push (Husky)   | TypeScript check, production build                        |
+| Pre-push (Husky)   | TypeScript check only (~3s)                               |
 | CI (all branches)  | ESLint, TypeScript, content validation, unit tests, build |
 | CI (staging/main)  | Full E2E test suite (Playwright)                          |
 

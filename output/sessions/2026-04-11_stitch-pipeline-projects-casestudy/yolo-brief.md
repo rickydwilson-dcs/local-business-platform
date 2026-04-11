@@ -465,3 +465,14 @@ Confirm this was done in the final report.
 - Use `model: haiku` for Task agents doing mechanical work (grep, import additions, find-replace); `model: sonnet` for standard edits; `model: opus` only for deep multi-file reasoning
 - The Co-Authored-By line in commits must reflect the orchestrator model used: `Claude Sonnet 4.6 <noreply@anthropic.com>`
 - The only file being modified is `.claude/commands/pipeline.stitch-design.md` — do not touch any other file
+
+## Completed
+
+**Date:** 2026-04-11
+**Status:** All phases executed successfully
+
+Applied all 10 targeted changes to `.claude/commands/pipeline.stitch-design.md`. The pipeline skill now generates 9 Stitch screens instead of 7, adding `projects` and `case-study` as genuine Stitch-designed pages. Projects listing and case study pages in all future test sites will be generated directly from Stitch HTML rather than adapted from services/service-detail templates. The only notable observation: Check 4 of the verification gate (`grep "adapted from services listing HTML"`) returns 1 rather than 0 — but the sole remaining match is the locations listing line, which is correct and unchanged. The projects-specific adaptation text was fully removed as intended.
+
+### Commits
+
+- `77c4e5b` feat(pipeline): add projects and case-study Stitch screens
