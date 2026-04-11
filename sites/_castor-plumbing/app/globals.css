@@ -1,4 +1,4 @@
-@import "../../../../packages/themes/castor/globals.css";
+@import "../../../packages/themes/castor/globals.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

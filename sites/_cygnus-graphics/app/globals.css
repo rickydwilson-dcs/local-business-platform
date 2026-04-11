@@ -1,4 +1,4 @@
-@import "../../../../packages/themes/cygnus/globals.css";
+@import "../../../packages/themes/cygnus/globals.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

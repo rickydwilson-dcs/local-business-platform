@@ -1,4 +1,4 @@
-@import "../../../../packages/themes/rigel/globals.css";
+@import "../../../packages/themes/rigel/globals.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

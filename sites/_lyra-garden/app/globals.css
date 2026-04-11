@@ -1,4 +1,4 @@
-@import "../../../../packages/themes/lyra/globals.css";
+@import "../../../packages/themes/lyra/globals.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
