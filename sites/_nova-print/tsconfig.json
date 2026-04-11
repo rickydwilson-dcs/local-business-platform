@@ -25,9 +25,8 @@
       "@platform/theme-system": ["../../packages/theme-system/src/index.ts"],
       "@platform/theme-system/plugin": ["../../packages/theme-system/src/tailwind-plugin.ts"],
       "@platform/theme-system/*": ["../../packages/theme-system/src/*"],
-      "@platform/themes/orion": ["../../packages/themes/orion/index.ts"],
-      "@platform/themes/vega": ["../../packages/themes/vega/index.ts"],
-      "@platform/themes/vega/components": ["../../packages/themes/vega/components/index.ts"]
+      "@platform/themes/nova": ["../../packages/themes/nova/index.ts"],
+      "@platform/themes/nova/components": ["../../packages/themes/nova/components/index.ts"]
     }
   },
   "include": [
