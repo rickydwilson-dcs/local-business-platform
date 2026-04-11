@@ -1,8 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { siteConfig } from "@/site.config";
-import { PHONE_DISPLAY, PHONE_TEL, BUSINESS_EMAIL, ADDRESS } from "@/lib/contact-info";
-import { getContentItems } from "@/lib/content";
+import { PHONE_DISPLAY, PHONE_TEL } from "@/lib/contact-info";
 import { PageShell, ThemeProvider } from "@platform/core-components";
 import { RigelHeader, SiteFooter } from "@platform/themes/rigel/components";
 import { rigelRegistry } from "@platform/themes/rigel";
@@ -15,7 +14,17 @@ export const metadata: Metadata = {
     default: siteConfig.name,
     template: `%s | ${siteConfig.name}`,
   },
-  description: siteConfig.tagline,
+  description:
+    "Digital Marketing Weekend is a free two-day conference for small business owners and marketers, held at the Winter Garden, Eastbourne on 17–18 October 2026.",
+  keywords: [
+    "digital marketing conference",
+    "small business marketing",
+    "Eastbourne",
+    "free marketing event",
+    "SEO workshop",
+    "social media marketing",
+    "AI marketing tools",
+  ],
   metadataBase: new URL(siteConfig.url),
   openGraph: {
     type: "website",
@@ -45,15 +54,8 @@ export const viewport: Viewport = {
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const [allServices, allLocations] = await Promise.all([
-    getContentItems("services"),
-    getContentItems("locations"),
-  ]);
-
-  const locationItems = allLocations.map((loc) => ({
-    name: loc.title,
-    slug: loc.slug,
-  }));
+  // Event site: no services or locations — navigation is event-specific
+  const locationItems: Array<{ name: string; slug: string }> = [];
 
   return (
     <html lang="en-GB">
