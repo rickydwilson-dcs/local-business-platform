@@ -226,9 +226,22 @@ After completing all phases, append to `output/sessions/YYYY-MM-DD_topic-slug/yo
 
 Confirm this was done in the final report.
 
-````
+`````
+
+**3h. Wrap-up section (required final step, after `## Update Session File`, before `## Rules`):**
+
+````markdown
+## Run Wrap-Up
+
+After completing all phases and updating the session file, run:
+
+/wrap-up-session
+
+This writes `session-wrap-up.md` to the session folder. **This is a required final step — do not skip it.**
+`````
 
 **3g. Execution rules footer:**
+
 ```markdown
 ## Rules
 
@@ -247,7 +260,7 @@ Confirm this was done in the final report.
   - Brief touches another repo (e.g. `/Users/rickywilson/Sites/force/`): add `--additionalDirectories /Users/rickywilson/Sites/force`
   - Brief writes to user-global agent/skill directories (`~/.claude/agents/`, `~/.claude/commands/`, `~/.claude/docs/`): add `--additionalDirectories ~/.claude`
   - Brief touches multiple external paths: add one `--additionalDirectories` per path
-````
+```
 
 ## Step 4: Output the Terminal Command, Cost Summary, and Next Steps
 
