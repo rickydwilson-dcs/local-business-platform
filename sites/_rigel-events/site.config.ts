@@ -76,7 +76,7 @@ export interface SiteConfig extends BaseSiteConfig {
   business: {
     name: string;
     legalName: string;
-    type: "LocalBusiness" | "ProfessionalService" | "HomeAndConstructionBusiness";
+    type: "LocalBusiness" | "ProfessionalService" | "HomeAndConstructionBusiness" | "Event";
     phone: string;
     email: string;
     address: {
@@ -168,70 +168,70 @@ export interface SiteConfig extends BaseSiteConfig {
 
 export const siteConfig: SiteConfig = {
   slug: "rigel-events",
-  domain: "localhost",
-  name: "Rigel Events",
-  tagline: "Professional Local Services",
+  domain: "digitalmarketingweekend.co.uk",
+  name: "Digital Marketing Weekend",
+  tagline: "Two days of practical marketing sessions, workshops, and networking — free to attend",
   url: process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
 
   business: {
-    name: "Rigel Events",
-    legalName: "Rigel Events Ltd",
-    type: "LocalBusiness",
-    phone: "+44 1234 567890",
-    email: "info@example.com",
+    name: "Digital Marketing Weekend",
+    legalName: "Digital Marketing Weekend",
+    type: "Event",
+    phone: "",
+    email: "hello@digitalmarketingweekend.co.uk",
     address: {
-      street: "123 Main Street",
-      city: "City Name",
-      region: "County/Region",
-      postalCode: "AB12 3CD",
+      street: "Winter Garden, Compton Street",
+      city: "Eastbourne",
+      region: "East Sussex",
+      postalCode: "BN21 4BP",
       country: "United Kingdom",
     },
     hours: {
-      monday: "9:00 AM - 5:00 PM",
-      tuesday: "9:00 AM - 5:00 PM",
-      wednesday: "9:00 AM - 5:00 PM",
-      thursday: "9:00 AM - 5:00 PM",
-      friday: "9:00 AM - 5:00 PM",
-      saturday: "Closed",
-      sunday: "Closed",
+      monday: "",
+      tuesday: "",
+      wednesday: "",
+      thursday: "",
+      friday: "",
+      saturday: "",
+      sunday: "",
     },
     socialMedia: {
-      facebook: "https://facebook.com/yourbusiness",
-      twitter: "https://twitter.com/yourbusiness",
-      instagram: "https://instagram.com/yourbusiness",
+      twitter: "https://twitter.com/dmweekend",
+      linkedin: "https://linkedin.com/company/digital-marketing-weekend",
+      instagram: "https://instagram.com/dmweekend",
     },
     geo: {
-      latitude: 51.5074,
-      longitude: -0.1278,
+      latitude: 50.7676,
+      longitude: 0.2858,
     },
   },
 
   navigation: {
     main: [
-      { label: "Services", href: "/services" },
-      { label: "Locations", href: "/locations", hasDropdown: true },
-      { label: "About", href: "/about" },
+      { label: "Speakers", href: "/speakers" },
+      { label: "Schedule", href: "/schedule" },
+      { label: "Venue", href: "/venue" },
+      { label: "Sponsors", href: "/sponsors" },
       { label: "Contact", href: "/contact" },
     ],
   },
 
   cta: {
     primary: {
-      label: "Get Free Quote",
-      href: "/contact",
+      label: "Get Tickets",
+      href: "https://www.eventbrite.co.uk/e/digital-marketing-weekend-2026",
     },
     phone: {
-      show: true,
-      label: "Call Us",
+      show: false,
     },
   },
 
   footer: {
-    showServices: true,
-    showLocations: true,
-    maxServices: 10,
-    maxLocations: 12,
-    copyright: "2025 Rigel Events. All rights reserved.",
+    showServices: false,
+    showLocations: false,
+    maxServices: 0,
+    maxLocations: 0,
+    copyright: "2026 Digital Marketing Weekend. All rights reserved.",
     builtBy: {
       name: "Digital Consulting Services",
       url: "https://www.digitalconsultingservices.co.uk",
@@ -239,42 +239,19 @@ export const siteConfig: SiteConfig = {
   },
 
   credentials: {
-    yearEstablished: "2020",
+    yearEstablished: "2025",
     stats: [
-      { value: "5+", label: "Years Experience", description: "Serving local customers" },
-      { value: "500+", label: "Projects Completed", description: "Satisfied clients" },
-      { value: "100%", label: "Satisfaction", description: "Customer focused" },
-      { value: "24/7", label: "Support", description: "Always available" },
+      { value: "2", label: "Days" },
+      { value: "10+", label: "Speakers" },
+      { value: "20+", label: "Sessions" },
+      { value: "300", label: "Attendees" },
     ],
-    certifications: [
-      { name: "Certified Professional", description: "Industry certification" },
-      { name: "Fully Insured", description: "Comprehensive coverage" },
-    ],
-    insurance: {
-      amount: "£5M",
-      type: "Public Liability",
-    },
+    certifications: [],
   },
 
-  serviceAreas: ["Main Area", "North Region", "South Region"],
+  serviceAreas: [],
 
-  services: [
-    {
-      title: "Primary Service",
-      slug: "primary-service",
-      description: "Our flagship service offering for residential and commercial clients.",
-    },
-    {
-      title: "Secondary Service",
-      slug: "secondary-service",
-      description: "Complementary service that enhances our primary offering.",
-    },
-    {
-      title: "Service Three",
-      slug: "service-three",
-      description: "Specialized service for unique client needs.",
-    },
-  ],
+  services: [],
 
   features: {
     analytics: false,
@@ -288,115 +265,83 @@ export const siteConfig: SiteConfig = {
   schema: {
     businessType: "LocalBusiness",
     businessConfig: {
-      name: "Rigel Events",
-      legalName: "Rigel Events Ltd",
+      name: "Digital Marketing Weekend",
+      legalName: "Digital Marketing Weekend",
       description:
-        "Professional local services serving [Your Area]. Quality workmanship, competitive pricing, and excellent customer service.",
-      slogan: "Your trusted local experts",
-      foundingDate: "2020",
+        "Digital Marketing Weekend is a free two-day conference for small business owners and marketers, held at the Winter Garden, Eastbourne on 17–18 October 2026.",
+      slogan: "Two days of practical marketing. Completely free.",
+      foundingDate: "2025",
       numberOfEmployees: "1-10",
-      priceRange: "$$",
-      email: "info@yourbusiness.com",
-      telephone: "+441234567890",
+      priceRange: "Free",
+      email: "hello@digitalmarketingweekend.co.uk",
+      telephone: "",
       address: {
-        streetAddress: "123 Main Street",
-        addressLocality: "Your City",
-        addressRegion: "Your County",
-        postalCode: "AB12 3CD",
+        streetAddress: "Winter Garden, Compton Street",
+        addressLocality: "Eastbourne",
+        addressRegion: "East Sussex",
+        postalCode: "BN21 4BP",
         addressCountry: "GB",
       },
       geo: {
-        latitude: "51.5074",
-        longitude: "-0.1278",
+        latitude: "50.7676",
+        longitude: "0.2858",
       },
-      openingHours: [
-        {
-          dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-          opens: "09:00",
-          closes: "17:00",
-        },
-      ],
-      areaServed: ["Main Area", "North Region", "South Region", "East Region", "West Region"],
-      credentials: [
-        {
-          name: "Fully Insured",
-          description: "Public liability and professional indemnity insurance",
-          category: "certification",
-        },
-        {
-          name: "Qualified Team",
-          description: "All staff are fully trained and certified",
-          category: "certification",
-        },
-      ],
+      openingHours: [],
+      areaServed: ["Eastbourne", "East Sussex", "South East England"],
+      credentials: [],
       socialProfiles: [
-        "https://www.facebook.com/yourbusiness",
-        "https://www.linkedin.com/company/yourbusiness",
+        "https://twitter.com/dmweekend",
+        "https://linkedin.com/company/digital-marketing-weekend",
+        "https://instagram.com/dmweekend",
       ],
       knowsAbout: [
-        "Service Category 1",
-        "Service Category 2",
-        "Service Category 3",
-        "Industry Best Practices",
-        "Local Area Expertise",
+        "Digital Marketing",
+        "SEO",
+        "Social Media Marketing",
+        "Email Marketing",
+        "Paid Advertising",
+        "AI Marketing Tools",
       ],
-      offerCatalog: [
-        {
-          name: "Primary Service",
-          description: "Our main service offering for residential and commercial clients",
-          url: "/services/primary-service",
-        },
-        {
-          name: "Secondary Service",
-          description: "Complementary service that enhances our primary offering",
-          url: "/services/secondary-service",
-        },
-        {
-          name: "Service Three",
-          description: "Specialized service for unique client needs",
-          url: "/services/service-three",
-        },
-      ],
+      offerCatalog: [],
     },
   },
 
   about: {
-    heroBadges: ["Est. 2020", "Local Experts", "Fully Insured"],
+    heroBadges: ["17–18 Oct 2026", "Eastbourne", "Free to Attend"],
     story: [
-      "Founded in 2020, Rigel Events was built on a simple promise: deliver professional, reliable service that our customers can count on every time.",
-      "From our base in City Name, we serve residential and commercial clients across Main Area, North Region, and South Region. Every project, large or small, receives the same dedication to quality.",
-      "Today we are proud to be a trusted local business — known for honest pricing, skilled workmanship, and the kind of service that earns referrals from neighbours and friends.",
+      "Digital Marketing Weekend is a free two-day event bringing together digital marketers, small business owners, and freelancers in the heart of Eastbourne.",
+      "Across two packed days at the historic Winter Garden, you'll hear from industry experts on everything from SEO and social media to email marketing, paid advertising, and AI-powered tools.",
+      "Whether you're just starting your digital journey or looking to sharpen your strategy, there's something for everyone — and it's completely free to attend.",
     ],
     whyChooseUs: [
-      "Fully insured with comprehensive public liability cover",
-      "Free quotes and consultations",
-      "Competitive, transparent pricing",
-      "Quality workmanship guaranteed",
-      "Professional, uniformed team",
-      "Clear communication throughout",
-      "Flexible scheduling to suit you",
-      "Comprehensive aftercare and support",
+      "Completely free to attend",
+      "10+ industry expert speakers",
+      "20+ practical sessions and workshops",
+      "Networking opportunities with 300 attendees",
+      "Stunning seafront venue",
+      "Saturday and Sunday programme",
+      "No sales pitches — just practical advice",
+      "Suitable for all levels of digital marketing experience",
     ],
     values: [
       {
-        title: "Quality First",
+        title: "Practical Learning",
         description:
-          "We maintain the highest standards in everything we do, ensuring exceptional results for every project.",
+          "Every session is designed to give you actionable takeaways you can implement immediately.",
       },
       {
-        title: "Professional Excellence",
+        title: "Accessible to All",
         description:
-          "Our team is fully qualified and continuously trained to deliver professional service.",
+          "Free to attend and welcoming to everyone — from beginners to experienced marketers.",
       },
       {
-        title: "Reliable Service",
+        title: "Community First",
         description:
-          "We arrive on time, complete projects efficiently, and communicate clearly throughout.",
+          "Built to bring together the local and regional business community around shared learning.",
       },
       {
-        title: "Customer Focus",
-        description:
-          "Your satisfaction is our priority. We listen to your needs and deliver tailored solutions.",
+        title: "No Fluff",
+        description: "Real practitioners sharing real insights. No sales pitches, no filler.",
       },
     ],
   },
