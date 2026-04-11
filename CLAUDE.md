@@ -226,18 +226,17 @@ This rule applies to local-business-platform only. The force repo (`/Users/ricky
 
 ### Architecture (How It Works)
 
-| Document                                                                                      | Teaches                                                                           |
-| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| [How Dynamic Routing Works](docs/architecture/how-dynamic-routing-works.md)                   | MDX file → static page via `[slug]` routes                                        |
-| [How the Theme System Works](docs/architecture/how-theme-system-works.md)                     | Config → CSS variables → Tailwind classes                                         |
-| [How the Build Pipeline Works](docs/architecture/how-build-pipeline-works.md)                 | Turborepo, packages, workspace linking                                            |
-| [How Site Creation Works](docs/architecture/how-site-creation-works.md)                       | Intake → project file → new site → deploy                                         |
-| [How the Ingestion Pipeline Works](docs/architecture/how-ingestion-pipeline-works.md)         | Screenshot → analysis → components → theme package                                |
-| [How the Stitch Design Pipeline Works](docs/architecture/how-stitch-design-pipeline-works.md) | Stitch AI design → tokens → theme package → test site                             |
-| [Architecture Overview](docs/architecture/architecture.md)                                    | High-level system overview                                                        |
-| [Component Registry](docs/architecture/component-registry.md)                                 | All shared component slots: fields, pages, conditional behaviour, theme checklist |
-| [Content Validation](docs/architecture/content-validation.md)                                 | Zod schemas for MDX frontmatter validation                                        |
-| [Monitoring Dashboard](docs/architecture/monitoring-dashboard.md)                             | Dashboard design for site registry and monitoring                                 |
+| Document                                                                                      | Teaches                                               |
+| --------------------------------------------------------------------------------------------- | ----------------------------------------------------- |
+| [How Dynamic Routing Works](docs/architecture/how-dynamic-routing-works.md)                   | MDX file → static page via `[slug]` routes            |
+| [How the Theme System Works](docs/architecture/how-theme-system-works.md)                     | Config → CSS variables → Tailwind classes             |
+| [How the Build Pipeline Works](docs/architecture/how-build-pipeline-works.md)                 | Turborepo, packages, workspace linking                |
+| [How Site Creation Works](docs/architecture/how-site-creation-works.md)                       | Intake → project file → new site → deploy             |
+| [How the Ingestion Pipeline Works](docs/architecture/how-ingestion-pipeline-works.md)         | Screenshot → analysis → components → theme package    |
+| [How the Stitch Design Pipeline Works](docs/architecture/how-stitch-design-pipeline-works.md) | Stitch AI design → tokens → theme package → test site |
+| [Architecture Overview](docs/architecture/architecture.md)                                    | High-level system overview                            |
+| [Content Validation](docs/architecture/content-validation.md)                                 | Zod schemas for MDX frontmatter validation            |
+| [Monitoring Dashboard](docs/architecture/monitoring-dashboard.md)                             | Dashboard design for site registry and monitoring     |
 
 ### Standards (How to Do It Right)
 

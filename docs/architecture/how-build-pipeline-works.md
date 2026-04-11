@@ -121,12 +121,12 @@ Turborepo's `"dependsOn": ["^build"]` ensures these build before any site that i
         "SUPABASE_URL",
         "SUPABASE_SERVICE_KEY",
         "RESEND_API_KEY",
+        "FEATURE_CONSENT_BANNER",
         "FEATURE_GA4_ENABLED",
         "FEATURE_FACEBOOK_PIXEL",
         "FEATURE_GOOGLE_ADS",
         "FEATURE_ANALYTICS_ENABLED",
         "FEATURE_SERVER_TRACKING",
-        "FEATURE_CONSENT_BANNER",
         "CSRF_SECRET",
         "BUSINESS_NAME",
         "BUSINESS_EMAIL",
@@ -137,7 +137,13 @@ Turborepo's `"dependsOn": ["^build"]` ensures these build before any site that i
         "NEW_RELIC_APP_NAME",
         "NEW_RELIC_LOG",
         "NEW_RELIC_DISTRIBUTED_TRACING_ENABLED",
-        "NEW_RELIC_NO_CONFIG_FILE"
+        "NEW_RELIC_NO_CONFIG_FILE",
+        "VERCEL_URL",
+        "VERCEL_ENV",
+        "NEXT_PUBLIC_FEATURE_CONSENT_BANNER",
+        "NEXT_PUBLIC_GA_MEASUREMENT_ID",
+        "NEXT_PUBLIC_FACEBOOK_PIXEL_ID",
+        "NEXT_PUBLIC_GOOGLE_ADS_CUSTOMER_ID"
       ]
     },
     "dev": {
