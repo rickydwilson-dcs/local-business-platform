@@ -335,6 +335,8 @@ cp -r sites/base-template sites/[client-slug]
 
 The `lib/` directory contains thin shims (5-10 lines each) that import factory functions from `@platform/core-components` and re-export configured utilities. You generally don't need to modify these unless the site requires custom behavior (e.g., custom service sorting — see `sites/colossus-scaffolding/lib/content.ts` for an example of passing a `serviceSortFn`).
 
+**Note on page files:** When using `create-site-from-project.ts`, the scaffolded site's `app/` page files are automatically copied from the theme's reference site (via `THEME_REFERENCE_SITE_MAP`). These are pre-wired thin wrappers that import the theme's page layout templates from `@platform/themes/[name]/pages`, fetch content, and pass it as props. You generally do not need to modify them — they follow the pattern: data fetch + `generateMetadata` + `generateStaticParams` in the wrapper; layout rendering in the theme template.
+
 ## Troubleshooting
 
 ### Build fails with "workspace:\* not found"
