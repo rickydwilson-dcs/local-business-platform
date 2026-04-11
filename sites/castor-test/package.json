@@ -5,6 +5,7 @@
   "description": "Pipeline test site — castor theme (Stitch)",
   "scripts": {
     "dev": "next dev",
+    "build": "next build --webpack",
     "start": "next start",
     "clean": "rm -rf .next"
   },
