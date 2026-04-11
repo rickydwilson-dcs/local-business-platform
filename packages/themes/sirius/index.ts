@@ -5,7 +5,7 @@
  * Built for Digital Consulting Services (digitalconsultingservices.co.uk)
  * Design spec: output/sessions/2026-04-08_dcs-redesign/yolo-brief-design-taste.md
  *
- * Sites using Sirius: dcs-design-taste
+ * Sites using Sirius: (none — dcs-design-taste removed)
  */
 import type { ComponentRegistry, DeepPartialThemeConfig } from "@platform/theme-system";
 import { registerTheme } from "@platform/theme-system";
