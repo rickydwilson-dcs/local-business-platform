@@ -152,12 +152,12 @@ export default async function HomePage() {
   ]);
 
   const featuredSpeakers = allSpeakers
-    .map((item) => ({ ...item, fm: item.frontmatter as unknown as SpeakerFrontmatter }))
+    .map((item) => ({ fm: item as unknown as SpeakerFrontmatter, slug: item.slug }))
     .filter((s) => s.fm.featured)
     .slice(0, 6);
 
   const featuredTestimonials = allTestimonials
-    .map((item) => ({ ...item, fm: item.frontmatter as unknown as TestimonialFrontmatter }))
+    .map((item) => ({ fm: item as unknown as TestimonialFrontmatter, slug: item.slug }))
     .filter((t) => t.fm.featured)
     .slice(0, 3);
 

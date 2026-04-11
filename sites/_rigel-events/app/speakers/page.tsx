@@ -47,7 +47,7 @@ export default async function SpeakersPage() {
 
   // Sort: featured first, then by day (saturday before sunday), then by time
   const speakers = items
-    .map((item) => ({ ...item, fm: item.frontmatter as SpeakerFrontmatter }))
+    .map((item) => ({ fm: item as unknown as SpeakerFrontmatter, slug: item.slug }))
     .sort((a, b) => {
       if (a.fm.featured && !b.fm.featured) return -1;
       if (!a.fm.featured && b.fm.featured) return 1;
