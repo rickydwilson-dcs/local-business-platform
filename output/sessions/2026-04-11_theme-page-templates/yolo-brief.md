@@ -1061,3 +1061,23 @@ This writes `session-wrap-up.md` to the session folder. **This is a required fin
 - For any phase that creates or modifies theme packages: after the final commit, run `pnpm type-check` to confirm the monorepo is still clean
 - **Non-migrated sites** (`colossus-scaffolding`, `mad-graphics`) must build correctly at every phase. The final `pnpm build` in Phase 8 verifies this.
 - **dj-fox-electrical is a production site** — Phase 5 must build cleanly before committing
+
+---
+
+## Completed
+
+**Date:** 2026-04-11
+**Status:** All phases executed successfully
+
+All 8 phases of the theme page template brief were implemented. Phase 1 added shared prop type contracts to core-components (HomePageTemplateProps, ServiceDetailPageTemplateProps, and 14 other interfaces plus Rigel event types). Phases 2–4 created Vega, Castor, Cygnus, Lyra, and Nova page templates and migrated their reference sites to thin wrappers — Phases 3–4 ran as parallel sub-agents. Phase 5 (opus) extracted Orion templates from the mature dj-fox-electrical implementation, parameterizing hardcoded content (NICEIC badge, stats, "Why Choose Us" items) as props. Phase 6 built Rigel event templates (speakers, schedule, venue, sponsors) with extended props for static schedule/venue data. Phase 7 updated the scaffolding tool with a per-theme page file manifest (rigel gets event pages, all others get the tradesperson set). Phase 8 updated architecture docs across 5 files. Key surprises: `packages/themes/` is a single package (no per-theme package.json — adapted to add all exports to root package.json); motion components (FadeIn, MagneticButton) in dj-fox are 'use client' so templates use plain HTML structure instead; BreadcrumbItem name collision in core-components was handled via re-export alias. Final `pnpm lint && pnpm type-check && pnpm build` all pass (12/12 sites, 0 type errors, 4 pre-existing lint warnings only).
+
+### Commits
+
+- `4f10daf` feat(core-components): add page template prop type contracts
+- `6e656cb` feat(vega): add page template components and migrate base-template
+- `c9af941` feat(castor): add page template components and migrate _castor-plumbing
+- `6f10d98` feat(themes): add cygnus/lyra/nova page templates and migrate reference sites
+- `6fa9ee8` feat(orion): extract page templates from dj-fox-electrical and migrate site
+- `54a766c` feat(rigel): add event page templates and migrate _rigel-events
+- `03f28b4` feat(scaffolding): expand theme reference map and add per-theme page file manifest
+- `b87623b` docs: update architecture docs for theme page template pattern
