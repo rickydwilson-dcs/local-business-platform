@@ -1,6 +1,13 @@
 /* Shared animation keyframes — do not move below theme-specific CSS */
 @import "../../core-components/src/styles/animations.css";
 
+/* Lyra extended brand tokens (brand.light + brand.dark are not in the
+   core generate-css.ts hardcoded list, so we define them here directly) */
+:root {
+  --color-brand-light: #c7ebd4;
+  --color-brand-dark: #2d4c3b;
+}
+
 /*
  * Lyra Theme — Global CSS Utilities
  *

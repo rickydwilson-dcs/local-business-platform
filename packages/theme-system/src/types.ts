@@ -61,6 +61,10 @@ export interface ThemeConfig {
       accent: string;
       /** Contrast-safe text on brand-primary backgrounds */
       onPrimary: string;
+      /** Light brand tint — hero accent text, light CTA backgrounds (optional, theme-specific) */
+      light?: string;
+      /** Dark brand shade — gradient endpoints, dark section backgrounds (optional, theme-specific) */
+      dark?: string;
     };
     surface: {
       /** Page background color */

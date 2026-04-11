@@ -21,31 +21,33 @@ export const lyraRegistry: ComponentRegistry = {
 export const lyraDefaultConfig: DeepPartialThemeConfig = {
   colors: {
     brand: {
-      primary: '#163526',
-      primaryHover: '#132f21',
-      secondary: '#77574d',
-      accent: '#f8bd2a',
-      onPrimary: '#ffffff',
+      primary: "#163526",
+      primaryHover: "#132f21",
+      secondary: "#77574d",
+      accent: "#f8bd2a",
+      onPrimary: "#ffffff",
+      light: "#c7ebd4", // hero accent text, light CTAs (from Stitch design)
+      dark: "#2d4c3b", // hero gradient end (from Stitch design)
     },
     surface: {
-      background: '#fbf9f5',
-      foreground: '#1b1c1a',
-      card: '#ffffff',
-      cardBorder: '#c2c8c1',
-      muted: '#f5f3ef',
+      background: "#fbf9f5",
+      foreground: "#1b1c1a",
+      card: "#ffffff",
+      cardBorder: "#c2c8c1",
+      muted: "#f5f3ef",
     },
     semantic: {
-      success: '#10b981',
-      warning: '#f59e0b',
-      error: '#ba1a1a',
-      info: '#3b82f6',
+      success: "#10b981",
+      warning: "#f59e0b",
+      error: "#ba1a1a",
+      info: "#3b82f6",
     },
     overlay: {
-      dark: 'rgba(0,0,0,0.8)',
-      light: 'rgba(255,255,255,0.8)',
-      primary: 'rgba(22,53,38,0.8)',
+      dark: "rgba(0,0,0,0.8)",
+      light: "rgba(255,255,255,0.8)",
+      primary: "rgba(22,53,38,0.8)",
     },
   },
 };
 
-registerTheme({ name: 'lyra', label: 'Lyra', config: lyraDefaultConfig });
+registerTheme({ name: "lyra", label: "Lyra", config: lyraDefaultConfig });
