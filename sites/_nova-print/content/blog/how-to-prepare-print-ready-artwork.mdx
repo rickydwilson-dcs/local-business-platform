@@ -1,0 +1,93 @@
+---
+title: How to Prepare Print-Ready Artwork — the Complete Guide
+date: 2025-11-17
+author:
+  name: "The DCS Team"
+  role: "Digital Consulting Services"
+description: "Print-ready artwork means the file is correctly set up for production without intervention from the print provider. Here is exactly what that requires."
+category: how-to-guide
+tags:
+  - print-ready artwork
+  - print
+  - artwork
+  - CMYK
+  - PDF
+excerpt: "Supplying incorrect artwork is the most common cause of print delays and disappointing results. This guide covers everything your file needs before it goes to press. (Example site content.)"
+heroImage: "placeholder/blog/how-to-prepare-print-ready-artwork.webp"
+readingTime: 8
+---
+
+## What "Print-Ready" Actually Means
+
+Print-ready artwork is a file that a print provider can output directly to their press without making any modifications. Everything is set up correctly: colour mode, resolution, document dimensions, bleed, safe zone, fonts, and file format. When a file is genuinely print-ready, it goes straight to production.
+
+Files that are not print-ready cause delays while the print provider requests corrections, or produce poor results if output without correction. Understanding what print-ready means — and checking your file before sending — saves time, money, and disappointment.
+
+## Step 1: Correct Colour Mode — CMYK
+
+Commercial printing uses CMYK inks (cyan, magenta, yellow, black). Artwork designed in RGB (the colour mode of screens) must be converted to CMYK before printing.
+
+**Why this matters:** RGB has a wider colour gamut than CMYK. Colours that are vivid on screen — particularly bright blues, electric greens, and saturated magentas — may look duller when converted and printed in CMYK. The conversion should happen at the design stage so you can review and adjust the colours in CMYK mode before the file is submitted.
+
+**How to check:** In Adobe Illustrator, go to File > Document Colour Mode > CMYK. In Photoshop, go to Image > Mode > CMYK Colour. In InDesign, swatches should be defined in CMYK; RGB swatches should be converted.
+
+**Spot colours:** If you're using a Pantone colour, specify the CMYK equivalent for digital printing (true Pantone/spot colour printing is typically only available on litho press runs).
+
+## Step 2: Resolution — 300 dpi Minimum
+
+Images within print artwork must be at least 300 dpi (dots per inch) at their final printed size. A 72 dpi web image used at screen size will appear visibly soft and pixellated in print.
+
+**How to check:**
+- In Photoshop, open the image and check Image > Image Size. The resolution must be 300 dpi and the dimensions must match the print size at that resolution.
+- In InDesign, use Window > Links > select the image > inspect the Effective PPI. This should be 300 or higher. If you've scaled an image up within InDesign, the effective PPI drops.
+
+**Vector graphics** (from Illustrator, or vector elements within a PDF) are resolution-independent and always print crisply regardless of size.
+
+## Step 3: Document Size, Bleed, and Safe Zone
+
+**Document size:** Set the document to the final trim size. A business card is 85 × 55mm. An A5 flyer is 148 × 210mm. Do not add bleed to the document dimensions.
+
+**Bleed:** All design elements that are intended to extend to the edge of the printed piece must extend 3mm beyond the trim line. This 3mm extension is the bleed. It allows for the mechanical tolerance of the trimming process (typically ±1mm). Set up your document with a 3mm bleed on all sides.
+
+- In InDesign: set bleed in the Document Setup dialogue (File > Document Setup > Bleed)
+- In Illustrator: set bleed in the Artboard options
+- In Photoshop: add 3mm to each dimension of the canvas, keeping content centred
+
+**Safe zone:** Keep all important content — text, logos, any graphic element that must not be cut — at least 3mm inside the trim line. An element that's 2mm from the trim edge may fall outside the finished piece if trimming shifts slightly.
+
+## Step 4: Fonts — Embed or Outline
+
+The PDF you send to the printer must include the fonts you used. If fonts are not embedded and the printer doesn't have them installed, the PDF will substitute a different font, or fail to output.
+
+**Option 1 — Embed fonts:** When exporting a PDF from InDesign or Illustrator, ensure "Embed fonts" is selected. Most PDF export presets do this automatically.
+
+**Option 2 — Outline text:** Convert all text to outlines (paths) before exporting. In Illustrator: select all text, then Type > Create Outlines. In InDesign this is done in the export options. Outlining ensures the text is stored as vector paths that require no fonts at the printer's end.
+
+Note that once text is outlined, it can no longer be edited. Keep an editable original file before outlining.
+
+## Step 5: File Format — PDF/X
+
+PDF is the standard file format for print-ready artwork. Specifically, PDF/X is a subset of the PDF format designed for print exchange — it enforces rules that ensure the file is complete and correctly specified.
+
+**PDF/X-1a:** All content must be CMYK or spot colours. No RGB or transparency. Fonts embedded. This is the most conservative standard and is compatible with any modern commercial press.
+
+**PDF/X-4:** Allows transparency and layers, which gives more flexibility. Supported by most modern RIP systems.
+
+When exporting from InDesign or Illustrator, use the built-in PDF/X-1a or PDF/X-4 press presets rather than a "print" or "screen" preset.
+
+## Step 6: Check Before Sending
+
+Before sending any file to a print provider:
+
+1. **Open the PDF in Adobe Acrobat** (not Preview or a browser) and check the Separations view under Output Preview to confirm all colours are CMYK
+2. **Review the Links panel** in InDesign to confirm all images are linked, not missing
+3. **Visually check bleed** — the artwork should visually extend to the edge of the printed canvas, with 3mm extending beyond the trim marks
+4. **Read the text aloud** — catches typographical errors that visual scanning misses
+
+## Supplying Artwork to DCS Print
+
+We accept PDF/X-1a and PDF/X-4 files. We also accept native InDesign and Illustrator files packaged with all linked files and fonts. When we receive your artwork, we run a preflight check and will contact you if we identify any issues before production begins.
+
+---
+
+*This blog contains illustrative example content produced by Digital Consulting Services.*

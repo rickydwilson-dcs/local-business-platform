@@ -10,12 +10,12 @@
  * MDXComponents from mdx/types is not resolvable from this package's node_modules path.
  */
 
-import React from 'react';
-import type { ComponentPropsWithoutRef, ReactNode } from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
-import { Schema } from '../Schema';
-import { ArticleCallout } from '../ui/article-callout';
+import React from "react";
+import type { ComponentPropsWithoutRef, ReactNode } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { Schema } from "../Schema";
+import { ArticleCallout } from "../ui/article-callout";
 
 // Local type alias — permissive enough to accept MDXComponents from mdx/types
 // (which includes nested objects) without requiring the mdx package in core deps.
@@ -27,36 +27,36 @@ type MDXComponents = Record<string, any>;
 // ============================================================================
 
 interface InfoBoxProps {
-  type?: 'info' | 'tip' | 'warning' | 'success';
+  type?: "info" | "tip" | "warning" | "success";
   title?: string;
   children: ReactNode;
 }
 
-const InfoBox: React.FC<InfoBoxProps> = ({ type = 'info', title, children }) => {
+const InfoBox: React.FC<InfoBoxProps> = ({ type = "info", title, children }) => {
   const styles = {
     info: {
-      bg: 'bg-blue-50',
-      border: 'border-blue-200',
-      icon: 'text-blue-600',
-      title: 'text-blue-900',
+      bg: "bg-blue-50",
+      border: "border-blue-200",
+      icon: "text-blue-600",
+      title: "text-blue-900",
     },
     tip: {
-      bg: 'bg-green-50',
-      border: 'border-green-200',
-      icon: 'text-green-600',
-      title: 'text-green-900',
+      bg: "bg-green-50",
+      border: "border-green-200",
+      icon: "text-green-600",
+      title: "text-green-900",
     },
     warning: {
-      bg: 'bg-amber-50',
-      border: 'border-amber-200',
-      icon: 'text-amber-600',
-      title: 'text-amber-900',
+      bg: "bg-amber-50",
+      border: "border-amber-200",
+      icon: "text-amber-600",
+      title: "text-amber-900",
     },
     success: {
-      bg: 'bg-emerald-50',
-      border: 'border-emerald-200',
-      icon: 'text-emerald-600',
-      title: 'text-emerald-900',
+      bg: "bg-emerald-50",
+      border: "border-emerald-200",
+      icon: "text-emerald-600",
+      title: "text-emerald-900",
     },
   };
 
@@ -112,7 +112,9 @@ const InfoBox: React.FC<InfoBoxProps> = ({ type = 'info', title, children }) => 
         </div>
         <div className="flex-1">
           {title && <h4 className={`font-semibold ${s.title} mb-2`}>{title}</h4>}
-          <div className="text-surface-secondary text-sm leading-relaxed [&>p]:my-0">{children}</div>
+          <div className="text-surface-secondary text-sm leading-relaxed [&>p]:my-0">
+            {children}
+          </div>
         </div>
       </div>
     </div>
@@ -141,6 +143,70 @@ const QuoteBlock: React.FC<QuoteBlockProps> = ({ author, role, children }) => {
         </footer>
       )}
     </blockquote>
+  );
+};
+
+interface ServiceIntroProps {
+  title: string;
+  intro: string;
+  sidebarTitle?: string;
+  stepsTitle?: string;
+  children: ReactNode;
+}
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const ServiceIntro: React.FC<ServiceIntroProps> = ({
+  title,
+  intro,
+  sidebarTitle: _s,
+  stepsTitle: _st,
+  children,
+}) => {
+  return (
+    <div className="my-8 space-y-6 not-prose">
+      <div className="border-l-4 border-brand-primary pl-6 py-2">
+        <h2 className="text-2xl font-bold text-surface-foreground mb-3">{title}</h2>
+        <p className="text-surface-muted-foreground leading-relaxed">{intro}</p>
+      </div>
+      <ul className="space-y-2">{children}</ul>
+    </div>
+  );
+};
+
+interface SidebarItemProps {
+  children: ReactNode;
+}
+
+const SidebarItem: React.FC<SidebarItemProps> = ({ children }) => {
+  return (
+    <li className="flex items-start gap-3 p-3 bg-surface-subtle rounded-lg list-none">
+      <div className="flex-shrink-0 w-2 h-2 bg-brand-primary rounded-full mt-2" />
+      <div className="text-surface-foreground text-sm">{children}</div>
+    </li>
+  );
+};
+
+interface ProcessStepProps {
+  children: ReactNode;
+  number?: number;
+}
+
+const ProcessStep: React.FC<ProcessStepProps> = ({ children }) => {
+  return (
+    <li className="flex items-start gap-4 p-4 bg-surface-subtle rounded-lg list-none">
+      <div className="flex-shrink-0 w-6 h-6 bg-brand-primary rounded-full flex items-center justify-center mt-0.5">
+        <svg
+          className="w-3 h-3 text-brand-on-primary"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth={3}
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+        </svg>
+      </div>
+      <div className="text-surface-foreground leading-relaxed">{children}</div>
+    </li>
   );
 };
 
@@ -186,9 +252,9 @@ const ImageWithCaption: React.FC<ImageWithCaptionProps> = ({
 export function createMdxComponentsMap(): MDXComponents {
   return {
     // Links
-    a: function MdxAnchor(props: ComponentPropsWithoutRef<'a'>) {
-      const href = typeof props.href === 'string' ? props.href : '';
-      const isInternal = href.startsWith('/');
+    a: function MdxAnchor(props: ComponentPropsWithoutRef<"a">) {
+      const href = typeof props.href === "string" ? props.href : "";
+      const isInternal = href.startsWith("/");
       if (isInternal) {
         return (
           <Link
@@ -210,7 +276,7 @@ export function createMdxComponentsMap(): MDXComponents {
     },
 
     // Headings
-    h2: function MdxH2(p: ComponentPropsWithoutRef<'h2'>) {
+    h2: function MdxH2(p: ComponentPropsWithoutRef<"h2">) {
       return (
         <h2 className="text-2xl sm:text-3xl font-bold text-surface-foreground mt-12 mb-6">
           {p.children}
@@ -218,31 +284,31 @@ export function createMdxComponentsMap(): MDXComponents {
       );
     },
 
-    h3: function MdxH3(p: ComponentPropsWithoutRef<'h3'>) {
+    h3: function MdxH3(p: ComponentPropsWithoutRef<"h3">) {
       return (
         <h3 className="text-xl font-semibold text-surface-foreground mt-8 mb-4">{p.children}</h3>
       );
     },
 
     // Paragraph
-    p: function MdxP(p: ComponentPropsWithoutRef<'p'>) {
+    p: function MdxP(p: ComponentPropsWithoutRef<"p">) {
       return <p className="text-surface-muted-foreground leading-relaxed my-4">{p.children}</p>;
     },
 
     // Lists
-    ul: function MdxUl(p: ComponentPropsWithoutRef<'ul'>) {
+    ul: function MdxUl(p: ComponentPropsWithoutRef<"ul">) {
       return <ul className="space-y-3 my-6">{p.children}</ul>;
     },
 
-    ol: function MdxOl(p: ComponentPropsWithoutRef<'ol'>) {
+    ol: function MdxOl(p: ComponentPropsWithoutRef<"ol">) {
       return (
-        <ol className="space-y-4 my-6" style={{ counterReset: 'item' }}>
+        <ol className="space-y-4 my-6" style={{ counterReset: "item" }}>
           {p.children}
         </ol>
       );
     },
 
-    li: function MdxLi(p: ComponentPropsWithoutRef<'li'>) {
+    li: function MdxLi(p: ComponentPropsWithoutRef<"li">) {
       return (
         <li className="flex items-start gap-3 p-4 bg-surface-subtle rounded-lg list-none">
           <div className="flex-shrink-0 w-2 h-2 bg-brand-primary rounded-full mt-2" />
@@ -252,7 +318,7 @@ export function createMdxComponentsMap(): MDXComponents {
     },
 
     // Text formatting
-    strong: function MdxStrong(p: ComponentPropsWithoutRef<'strong'>) {
+    strong: function MdxStrong(p: ComponentPropsWithoutRef<"strong">) {
       return <strong className="font-semibold text-surface-foreground">{p.children}</strong>;
     },
 
@@ -262,12 +328,21 @@ export function createMdxComponentsMap(): MDXComponents {
     },
 
     // Images
-    img: function MdxImg(p: ComponentPropsWithoutRef<'img'>) {
-      const { src = '', alt = '', width, height, ...rest } = p;
-      const w = typeof width === 'number' ? width : 1200;
-      const h = typeof height === 'number' ? height : 800;
+    img: function MdxImg(p: ComponentPropsWithoutRef<"img">) {
+      const { src = "", alt = "", width, height, ...rest } = p;
+      const w = typeof width === "number" ? width : 1200;
+      const h = typeof height === "number" ? height : 800;
       // src from img props can be string | Blob; Next.js Image expects string | StaticImport
-      return <Image src={src as string} alt={alt} width={w} height={h} {...rest} className="rounded-xl" />;
+      return (
+        <Image
+          src={src as string}
+          alt={alt}
+          width={w}
+          height={h}
+          {...rest}
+          className="rounded-xl"
+        />
+      );
     },
 
     // Schema.org component
@@ -278,6 +353,9 @@ export function createMdxComponentsMap(): MDXComponents {
     QuoteBlock,
     ImageWithCaption,
     ArticleCallout,
+    ProcessStep,
+    ServiceIntro,
+    SidebarItem,
   };
 }
 

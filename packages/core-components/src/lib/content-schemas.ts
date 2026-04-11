@@ -157,7 +157,10 @@ export const LocationFrontmatterSchema = z.object({
   county: z.string().min(2, "County/region name must be at least 2 characters").optional(),
 
   /** URL-safe county/region slug for grouping and routing (e.g. "east-sussex"). Must be lowercase with hyphens only. */
-  countySlug: z.string().regex(/^[a-z0-9-]+$/, "County slug must be lowercase letters, numbers, and hyphens only").optional(),
+  countySlug: z
+    .string()
+    .regex(/^[a-z0-9-]+$/, "County slug must be lowercase letters, numbers, and hyphens only")
+    .optional(),
 
   coords: z.tuple([z.number().min(-90).max(90), z.number().min(-180).max(180)]).optional(),
 
@@ -195,9 +198,15 @@ export const LocationFrontmatterSchema = z.object({
         .optional(),
       // --- Generic fields for all site types ---
       /** Generic primary CTA label (e.g. "Get a Free Quote", "Book a Consultation"). */
-      primaryActionLabel: z.string().min(3, "Primary action label must be at least 3 characters").optional(),
+      primaryActionLabel: z
+        .string()
+        .min(3, "Primary action label must be at least 3 characters")
+        .optional(),
       /** Generic primary CTA href. Must be a relative path. */
-      primaryActionHref: z.string().regex(/^\/[A-Za-z0-9\/_-]*$/, "Primary action href must be a relative path").optional(),
+      primaryActionHref: z
+        .string()
+        .regex(/^\/[A-Za-z0-9\/_-]*$/, "Primary action href must be a relative path")
+        .optional(),
       /** Generic highlight items (replaces trustBadges for non-scaffolding sites). */
       highlightItems: z.array(z.string().min(3, "Highlight item text too short")).min(1).optional(),
       ctaText: z.string().min(5, "CTA text is required").optional(),
@@ -236,7 +245,12 @@ export const LocationFrontmatterSchema = z.object({
           z.object({
             title: z.string().min(3, "Service title is required"),
             description: z.string().min(20, "Service description is required"),
-            link: z.string().regex(/^\/[A-Za-z0-9\/_-]+$/, "Service link must be a relative path (e.g. /services/my-service)"),
+            link: z
+              .string()
+              .regex(
+                /^\/[A-Za-z0-9\/_-]+$/,
+                "Service link must be a relative path (e.g. /services/my-service)"
+              ),
             icon: z.string().optional(),
           })
         )
@@ -367,6 +381,11 @@ export const ProjectCategory = z.enum([
   "stickers-labels",
   "workwear-merchandise",
   "graphic-design",
+  // Plumbing + garden categories (DCS example sites — added 2026-04-11)
+  "plumbing-install",
+  "plumbing-emergency",
+  "garden-design",
+  "garden-maintenance",
 ]);
 
 export const ProjectFrontmatterSchema = z.object({

@@ -5,8 +5,18 @@ export const themeConfig: DeepPartialThemeConfig = {
   componentRegistry: castorRegistry,
   colors: {
     brand: {
-      primary: "#3b82f6", // placeholder — update per brand
-      secondary: "#1d4ed8",
+      primary: "#1a3a6b",
+      primaryHover: "#142d54",
+      secondary: "#1a3a6b",
+      accent: "#3a7d44",
+      onPrimary: "#ffffff",
+    },
+    surface: {
+      background: "#ffffff",
+      foreground: "#1c1c1e",
+      card: "#ffffff",
+      cardBorder: "#e2e8f0",
+      muted: "#f0f4f8",
     },
   },
 };

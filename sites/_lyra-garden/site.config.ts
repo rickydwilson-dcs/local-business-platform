@@ -168,41 +168,40 @@ export interface SiteConfig extends BaseSiteConfig {
 
 export const siteConfig: SiteConfig = {
   slug: "lyra-garden",
-  domain: "localhost",
-  name: "Lyra Garden",
-  tagline: "Professional Local Services",
-  url: process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
+  domain: "dcs-garden.example.com",
+  name: "DCS Garden",
+  tagline: "Garden design and maintenance example site — East Sussex",
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://dcs-garden.example.com",
 
   business: {
-    name: "Lyra Garden",
-    legalName: "Lyra Garden Ltd",
-    type: "LocalBusiness",
-    phone: "+44 1234 567890",
-    email: "info@example.com",
+    name: "DCS Garden",
+    legalName: "Digital Consulting Services Ltd",
+    type: "HomeAndConstructionBusiness",
+    phone: "+44 7395 063764",
+    email: "mail@digitalconsultingservices.co.uk",
     address: {
-      street: "123 Main Street",
-      city: "City Name",
-      region: "County/Region",
-      postalCode: "AB12 3CD",
+      street: "Unit H3, Chaucer Business Park, Dittons Road",
+      city: "Polegate",
+      region: "East Sussex",
+      postalCode: "BN26 6QH",
       country: "United Kingdom",
     },
     hours: {
-      monday: "9:00 AM - 5:00 PM",
-      tuesday: "9:00 AM - 5:00 PM",
-      wednesday: "9:00 AM - 5:00 PM",
-      thursday: "9:00 AM - 5:00 PM",
-      friday: "9:00 AM - 5:00 PM",
-      saturday: "Closed",
+      monday: "9:00 AM - 5:30 PM",
+      tuesday: "9:00 AM - 5:30 PM",
+      wednesday: "9:00 AM - 5:30 PM",
+      thursday: "9:00 AM - 5:30 PM",
+      friday: "9:00 AM - 5:30 PM",
+      saturday: "By Appointment",
       sunday: "Closed",
     },
     socialMedia: {
-      facebook: "https://facebook.com/yourbusiness",
-      twitter: "https://twitter.com/yourbusiness",
-      instagram: "https://instagram.com/yourbusiness",
+      facebook: "https://facebook.com/digitalconsultingservices",
+      linkedin: "https://linkedin.com/company/digital-consulting-services",
     },
     geo: {
-      latitude: 51.5074,
-      longitude: -0.1278,
+      latitude: 50.8233,
+      longitude: 0.2557,
     },
   },
 
@@ -210,6 +209,8 @@ export const siteConfig: SiteConfig = {
     main: [
       { label: "Services", href: "/services" },
       { label: "Locations", href: "/locations", hasDropdown: true },
+      { label: "Projects", href: "/projects" },
+      { label: "Blog", href: "/blog" },
       { label: "About", href: "/about" },
       { label: "Contact", href: "/contact" },
     ],
@@ -217,12 +218,12 @@ export const siteConfig: SiteConfig = {
 
   cta: {
     primary: {
-      label: "Get Free Quote",
+      label: "Get a Free Quote",
       href: "/contact",
     },
     phone: {
       show: true,
-      label: "Call Us",
+      label: "Call 07395 063764",
     },
   },
 
@@ -231,7 +232,7 @@ export const siteConfig: SiteConfig = {
     showLocations: true,
     maxServices: 10,
     maxLocations: 12,
-    copyright: "2025 Lyra Garden. All rights reserved.",
+    copyright: "2026 Digital Consulting Services Ltd. Example site.",
     builtBy: {
       name: "Digital Consulting Services",
       url: "https://www.digitalconsultingservices.co.uk",
@@ -239,16 +240,32 @@ export const siteConfig: SiteConfig = {
   },
 
   credentials: {
-    yearEstablished: "2020",
+    yearEstablished: "2019",
     stats: [
-      { value: "5+", label: "Years Experience", description: "Serving local customers" },
-      { value: "500+", label: "Projects Completed", description: "Satisfied clients" },
-      { value: "100%", label: "Satisfaction", description: "Customer focused" },
-      { value: "24/7", label: "Support", description: "Always available" },
+      {
+        value: "Est. 2019",
+        label: "Established",
+        description: "Serving East Sussex gardens since 2019",
+      },
+      {
+        value: "20+",
+        label: "Years Combined Experience",
+        description: "Landscaping and garden design",
+      },
+      { value: "500+", label: "Garden Projects", description: "Domestic and commercial" },
+      { value: "NPTC", label: "Chainsaw Qualified", description: "Tree surgery accreditation" },
     ],
     certifications: [
-      { name: "Certified Professional", description: "Industry certification" },
-      { name: "Fully Insured", description: "Comprehensive coverage" },
+      {
+        name: "RHS-Aligned Practices",
+        description: "Horticulture to Royal Horticultural Society standards",
+      },
+      {
+        name: "BALI-Equivalent Member",
+        description: "British Association of Landscape Industries standards",
+      },
+      { name: "NPTC Chainsaw Qualified", description: "Accredited tree surgery team" },
+      { name: "Waste Carriers Licence", description: "Licensed garden waste removal" },
     ],
     insurance: {
       amount: "£5M",
@@ -256,23 +273,99 @@ export const siteConfig: SiteConfig = {
     },
   },
 
-  serviceAreas: ["Main Area", "North Region", "South Region"],
+  serviceAreas: [
+    "Polegate",
+    "Eastbourne",
+    "Hailsham",
+    "Lewes",
+    "Seaford",
+    "Brighton",
+    "Hove",
+    "Uckfield",
+  ],
+
+  serviceAreaRegions: [
+    {
+      name: "South Coast",
+      slug: "south-coast",
+      towns: [
+        { name: "Polegate", slug: "polegate" },
+        { name: "Eastbourne", slug: "eastbourne" },
+        { name: "Hailsham", slug: "hailsham" },
+        { name: "Seaford", slug: "seaford" },
+        { name: "Brighton", slug: "brighton" },
+        { name: "Hove", slug: "hove" },
+      ],
+    },
+    {
+      name: "Mid Sussex",
+      slug: "mid-sussex",
+      towns: [
+        { name: "Lewes", slug: "lewes" },
+        { name: "Uckfield", slug: "uckfield" },
+      ],
+    },
+  ],
 
   services: [
     {
-      title: "Primary Service",
-      slug: "primary-service",
-      description: "Our flagship service offering for residential and commercial clients.",
+      title: "Garden Design & Landscaping",
+      slug: "garden-design-landscaping",
+      description:
+        "Full garden design service with CAD plans, phased installation and planting schedules across East Sussex.",
     },
     {
-      title: "Secondary Service",
-      slug: "secondary-service",
-      description: "Complementary service that enhances our primary offering.",
+      title: "Lawn Care & Mowing",
+      slug: "lawn-care-mowing",
+      description:
+        "Weekly and fortnightly lawn care contracts including scarifying, feeding and moss treatment.",
     },
     {
-      title: "Service Three",
-      slug: "service-three",
-      description: "Specialized service for unique client needs.",
+      title: "Hedge Trimming & Pruning",
+      slug: "hedge-trimming-pruning",
+      description:
+        "Species-appropriate hedge trimming up to 12m with MEWP access and waste removal included.",
+    },
+    {
+      title: "Tree Surgery",
+      slug: "tree-surgery",
+      description:
+        "NPTC-qualified tree surgery including dismantling, crown reduction, stump grinding and full insurance.",
+    },
+    {
+      title: "Patio & Decking Installation",
+      slug: "patio-decking-installation",
+      description:
+        "Natural stone, porcelain and composite decking installation with proper drainage compliance.",
+    },
+    {
+      title: "Fencing & Gates",
+      slug: "fencing-gates",
+      description:
+        "Closeboard, lap panel, post-and-rail fencing and automated gates across East Sussex.",
+    },
+    {
+      title: "Garden Clearance",
+      slug: "garden-clearance",
+      description:
+        "Full garden clearance with licensed waste removal. Overgrown gardens a speciality.",
+    },
+    {
+      title: "Planting & Borders",
+      slug: "planting-borders",
+      description:
+        "Chalk-soil planting schemes with year-round interest and pollinator-friendly plant selection.",
+    },
+    {
+      title: "Turf Laying",
+      slug: "turf-laying",
+      description: "Ground preparation, topsoil, Rolawn-grade turf laying and aftercare guidance.",
+    },
+    {
+      title: "Seasonal Garden Maintenance",
+      slug: "seasonal-garden-maintenance",
+      description:
+        "Quarterly seasonal maintenance contracts: spring prep, summer mowing, autumn leaf clear, winter pruning.",
     },
   ],
 
@@ -282,121 +375,186 @@ export const siteConfig: SiteConfig = {
     contactForm: true,
     rateLimit: true,
     testimonials: true,
-    blog: false,
+    blog: true,
   },
 
   schema: {
-    businessType: "LocalBusiness",
+    businessType: "HomeAndConstructionBusiness",
     businessConfig: {
-      name: "Lyra Garden",
-      legalName: "Lyra Garden Ltd",
+      name: "DCS Garden",
+      legalName: "Digital Consulting Services Ltd",
       description:
-        "Professional local services serving [Your Area]. Quality workmanship, competitive pricing, and excellent customer service.",
-      slogan: "Your trusted local experts",
-      foundingDate: "2020",
+        "DCS Garden is an example site demonstrating the Local Business Platform for garden design and landscaping businesses. Operated by Digital Consulting Services from Polegate, East Sussex.",
+      slogan: "Garden design and maintenance example site — East Sussex",
+      foundingDate: "2019",
       numberOfEmployees: "1-10",
-      priceRange: "$$",
-      email: "info@yourbusiness.com",
-      telephone: "+441234567890",
+      priceRange: "££",
+      email: "mail@digitalconsultingservices.co.uk",
+      telephone: "+447395063764",
       address: {
-        streetAddress: "123 Main Street",
-        addressLocality: "Your City",
-        addressRegion: "Your County",
-        postalCode: "AB12 3CD",
+        streetAddress: "Unit H3, Chaucer Business Park, Dittons Road",
+        addressLocality: "Polegate",
+        addressRegion: "East Sussex",
+        postalCode: "BN26 6QH",
         addressCountry: "GB",
       },
       geo: {
-        latitude: "51.5074",
-        longitude: "-0.1278",
+        latitude: "50.8233",
+        longitude: "0.2557",
       },
       openingHours: [
         {
           dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
           opens: "09:00",
-          closes: "17:00",
+          closes: "17:30",
+        },
+        {
+          dayOfWeek: ["Saturday"],
+          opens: "09:00",
+          closes: "12:00",
         },
       ],
-      areaServed: ["Main Area", "North Region", "South Region", "East Region", "West Region"],
+      areaServed: [
+        "Polegate",
+        "Eastbourne",
+        "Hailsham",
+        "Lewes",
+        "Seaford",
+        "Brighton",
+        "Hove",
+        "Uckfield",
+      ],
       credentials: [
         {
-          name: "Fully Insured",
-          description: "Public liability and professional indemnity insurance",
+          name: "RHS-Aligned Practices",
+          description: "RHS horticultural standards",
           category: "certification",
         },
         {
-          name: "Qualified Team",
-          description: "All staff are fully trained and certified",
+          name: "BALI-Equivalent Member",
+          description: "Landscape industry standards",
           category: "certification",
+        },
+        {
+          name: "NPTC Chainsaw Qualified",
+          description: "Tree surgery accreditation",
+          category: "certification",
+        },
+        {
+          name: "Waste Carriers Licence",
+          description: "Licensed waste removal",
+          category: "compliance",
         },
       ],
       socialProfiles: [
-        "https://www.facebook.com/yourbusiness",
-        "https://www.linkedin.com/company/yourbusiness",
+        "https://facebook.com/digitalconsultingservices",
+        "https://linkedin.com/company/digital-consulting-services",
       ],
       knowsAbout: [
-        "Service Category 1",
-        "Service Category 2",
-        "Service Category 3",
-        "Industry Best Practices",
-        "Local Area Expertise",
+        "garden design",
+        "landscaping",
+        "lawn care",
+        "hedge trimming",
+        "tree surgery",
+        "fencing",
+        "planting",
+        "maintenance",
+        "chalk soil",
+        "South Downs",
       ],
       offerCatalog: [
         {
-          name: "Primary Service",
-          description: "Our main service offering for residential and commercial clients",
-          url: "/services/primary-service",
+          name: "Garden Design & Landscaping",
+          description:
+            "Full garden design with CAD plans, phased installation and planting schedules",
+          url: "/services/garden-design-landscaping",
         },
         {
-          name: "Secondary Service",
-          description: "Complementary service that enhances our primary offering",
-          url: "/services/secondary-service",
+          name: "Lawn Care & Mowing",
+          description: "Weekly and fortnightly lawn care contracts with scarifying and feeding",
+          url: "/services/lawn-care-mowing",
         },
         {
-          name: "Service Three",
-          description: "Specialized service for unique client needs",
-          url: "/services/service-three",
+          name: "Hedge Trimming & Pruning",
+          description: "Species-appropriate hedge trimming up to 12m with waste removal",
+          url: "/services/hedge-trimming-pruning",
+        },
+        {
+          name: "Tree Surgery",
+          description: "NPTC-qualified tree surgery including dismantling and stump grinding",
+          url: "/services/tree-surgery",
+        },
+        {
+          name: "Patio & Decking Installation",
+          description: "Natural stone, porcelain and composite decking with drainage compliance",
+          url: "/services/patio-decking-installation",
+        },
+        {
+          name: "Fencing & Gates",
+          description: "Closeboard, lap panel and post-and-rail fencing with automated gates",
+          url: "/services/fencing-gates",
+        },
+        {
+          name: "Garden Clearance",
+          description: "Full clearance with licensed waste removal, overgrown gardens a speciality",
+          url: "/services/garden-clearance",
+        },
+        {
+          name: "Planting & Borders",
+          description: "Chalk-soil planting schemes with year-round interest",
+          url: "/services/planting-borders",
+        },
+        {
+          name: "Turf Laying",
+          description: "Ground preparation, topsoil and Rolawn-grade turf laying",
+          url: "/services/turf-laying",
+        },
+        {
+          name: "Seasonal Garden Maintenance",
+          description: "Quarterly seasonal maintenance contracts across East Sussex",
+          url: "/services/seasonal-garden-maintenance",
         },
       ],
     },
   },
 
   about: {
-    heroBadges: ["Est. 2020", "Local Experts", "Fully Insured"],
+    heroBadges: ["Est. 2019", "East Sussex", "Example Site", "By DCS"],
     story: [
-      "Founded in 2020, Lyra Garden was built on a simple promise: deliver professional, reliable service that our customers can count on every time.",
-      "From our base in City Name, we serve residential and commercial clients across Main Area, North Region, and South Region. Every project, large or small, receives the same dedication to quality.",
-      "Today we are proud to be a trusted local business — known for honest pricing, skilled workmanship, and the kind of service that earns referrals from neighbours and friends.",
+      "DCS Garden was founded in 2019 by Digital Consulting Services to demonstrate what a high-quality local garden and landscaping business website looks like on the Local Business Platform. Drawing on decades of combined horticultural and landscaping experience, the company specialises in the gardens, coastal plots, and chalk-soil environments of East Sussex — from the South Downs edge near Polegate to the exposed clifftop gardens of Seaford.",
+      "From full garden redesigns and patio installations to regular lawn care contracts and tree surgery, DCS Garden covers the complete range of domestic and commercial garden services. Our NPTC-qualified team works to RHS-aligned horticultural standards, and every project — from a single hedge trim to a complete garden transformation — is completed with care for the plants, the soil, and the client's long-term enjoyment of their outdoor space.",
+      "This is an example site by Digital Consulting Services, demonstrating the Local Business Platform. It is not a live trading business — all services, customer reviews, and case studies shown are illustrative only. For the real platform and real client sites, visit digitalconsultingservices.co.uk.",
     ],
     whyChooseUs: [
-      "Fully insured with comprehensive public liability cover",
-      "Free quotes and consultations",
-      "Competitive, transparent pricing",
-      "Quality workmanship guaranteed",
-      "Professional, uniformed team",
-      "Clear communication throughout",
-      "Flexible scheduling to suit you",
-      "Comprehensive aftercare and support",
+      "NPTC-qualified tree surgeons on all tree work — fully insured",
+      "Chalk-soil and South Downs planting specialists",
+      "Waste Carriers Licence — all green waste disposed of legally",
+      "Seasonal maintenance contracts for year-round garden care",
+      "Drainage-compliant patio and decking installations",
+      "RHS-aligned horticultural practices on every project",
+      "Fully insured with £5M public liability cover",
+      "Serving East Sussex gardens from Polegate since 2019",
     ],
     values: [
       {
-        title: "Quality First",
+        title: "Respect for the Land",
         description:
-          "We maintain the highest standards in everything we do, ensuring exceptional results for every project.",
+          "We work with the natural character of East Sussex soil and climate — not against it. Sustainable planting that thrives long after we leave.",
       },
       {
-        title: "Professional Excellence",
+        title: "Qualified Expertise",
         description:
-          "Our team is fully qualified and continuously trained to deliver professional service.",
+          "Every tree job is carried out by NPTC-qualified surgeons. Every planting scheme is designed around RHS horticultural principles.",
       },
       {
-        title: "Reliable Service",
+        title: "Year-Round Care",
         description:
-          "We arrive on time, complete projects efficiently, and communicate clearly throughout.",
+          "Gardens need attention through all four seasons. Our maintenance contracts ensure your outdoor space looks its best whatever the weather.",
       },
       {
-        title: "Customer Focus",
+        title: "Transparent Pricing",
         description:
-          "Your satisfaction is our priority. We listen to your needs and deliver tailored solutions.",
+          "Clear quotes before we start, no hidden charges when the work is done. We respect your budget and your garden.",
       },
     ],
   },

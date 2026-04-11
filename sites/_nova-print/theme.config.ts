@@ -5,8 +5,18 @@ export const themeConfig: DeepPartialThemeConfig = {
   componentRegistry: novaRegistry,
   colors: {
     brand: {
-      primary: "#3b82f6", // placeholder — update per brand
-      secondary: "#1d4ed8",
+      primary: "#e85118",
+      primaryHover: "#cc4715",
+      secondary: "#5ba829",
+      accent: "#1a1a1a",
+      onPrimary: "#ffffff",
+    },
+    surface: {
+      background: "#ffffff",
+      foreground: "#1a1a1a",
+      card: "#ffffff",
+      cardBorder: "#d1d5db",
+      muted: "#fafafa",
     },
   },
 };

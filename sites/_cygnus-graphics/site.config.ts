@@ -168,41 +168,40 @@ export interface SiteConfig extends BaseSiteConfig {
 
 export const siteConfig: SiteConfig = {
   slug: "cygnus-graphics",
-  domain: "localhost",
-  name: "Cygnus Graphics",
-  tagline: "Professional Local Services",
-  url: process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
+  domain: "dcs-graphics.example.com",
+  name: "DCS Graphics",
+  tagline: "Creative design, signage and print example site — East Sussex",
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://dcs-graphics.example.com",
 
   business: {
-    name: "Cygnus Graphics",
-    legalName: "Cygnus Graphics Ltd",
-    type: "LocalBusiness",
-    phone: "+44 1234 567890",
-    email: "info@example.com",
+    name: "DCS Graphics",
+    legalName: "Digital Consulting Services Ltd",
+    type: "ProfessionalService",
+    phone: "+44 7395 063764",
+    email: "mail@digitalconsultingservices.co.uk",
     address: {
-      street: "123 Main Street",
-      city: "City Name",
-      region: "County/Region",
-      postalCode: "AB12 3CD",
+      street: "Unit H3, Chaucer Business Park, Dittons Road",
+      city: "Polegate",
+      region: "East Sussex",
+      postalCode: "BN26 6QH",
       country: "United Kingdom",
     },
     hours: {
-      monday: "9:00 AM - 5:00 PM",
-      tuesday: "9:00 AM - 5:00 PM",
-      wednesday: "9:00 AM - 5:00 PM",
-      thursday: "9:00 AM - 5:00 PM",
-      friday: "9:00 AM - 5:00 PM",
-      saturday: "Closed",
+      monday: "9:00 AM - 5:30 PM",
+      tuesday: "9:00 AM - 5:30 PM",
+      wednesday: "9:00 AM - 5:30 PM",
+      thursday: "9:00 AM - 5:30 PM",
+      friday: "9:00 AM - 5:30 PM",
+      saturday: "By Appointment",
       sunday: "Closed",
     },
     socialMedia: {
-      facebook: "https://facebook.com/yourbusiness",
-      twitter: "https://twitter.com/yourbusiness",
-      instagram: "https://instagram.com/yourbusiness",
+      facebook: "https://facebook.com/digitalconsultingservices",
+      linkedin: "https://linkedin.com/company/digital-consulting-services",
     },
     geo: {
-      latitude: 51.5074,
-      longitude: -0.1278,
+      latitude: 50.8233,
+      longitude: 0.2557,
     },
   },
 
@@ -210,6 +209,8 @@ export const siteConfig: SiteConfig = {
     main: [
       { label: "Services", href: "/services" },
       { label: "Locations", href: "/locations", hasDropdown: true },
+      { label: "Projects", href: "/projects" },
+      { label: "Blog", href: "/blog" },
       { label: "About", href: "/about" },
       { label: "Contact", href: "/contact" },
     ],
@@ -217,12 +218,12 @@ export const siteConfig: SiteConfig = {
 
   cta: {
     primary: {
-      label: "Get Free Quote",
+      label: "Get a Free Quote",
       href: "/contact",
     },
     phone: {
       show: true,
-      label: "Call Us",
+      label: "Call 07395 063764",
     },
   },
 
@@ -231,7 +232,7 @@ export const siteConfig: SiteConfig = {
     showLocations: true,
     maxServices: 10,
     maxLocations: 12,
-    copyright: "2025 Cygnus Graphics. All rights reserved.",
+    copyright: "2026 Digital Consulting Services Ltd. Example site.",
     builtBy: {
       name: "Digital Consulting Services",
       url: "https://www.digitalconsultingservices.co.uk",
@@ -239,40 +240,123 @@ export const siteConfig: SiteConfig = {
   },
 
   credentials: {
-    yearEstablished: "2020",
+    yearEstablished: "2019",
     stats: [
-      { value: "5+", label: "Years Experience", description: "Serving local customers" },
-      { value: "500+", label: "Projects Completed", description: "Satisfied clients" },
-      { value: "100%", label: "Satisfaction", description: "Customer focused" },
-      { value: "24/7", label: "Support", description: "Always available" },
+      { value: "Est. 2019", label: "Established", description: "Creative studio since 2019" },
+      {
+        value: "20+",
+        label: "Years Combined Experience",
+        description: "Design and print expertise",
+      },
+      { value: "500+", label: "Design Projects", description: "Brands, signs and print" },
+      { value: "In-House", label: "Design Team", description: "Consultative and creative" },
     ],
     certifications: [
-      { name: "Certified Professional", description: "Industry certification" },
-      { name: "Fully Insured", description: "Comprehensive coverage" },
+      { name: "In-House Designers", description: "Full-time creative team on site" },
+      { name: "Brand Strategy Specialists", description: "Strategy-first design approach" },
+      { name: "Colour-Matched Print", description: "Pantone and CMYK colour accuracy" },
+      { name: "Trade Association Member", description: "Industry-accredited studio" },
     ],
     insurance: {
-      amount: "£5M",
-      type: "Public Liability",
+      amount: "£2M",
+      type: "Professional Indemnity",
     },
   },
 
-  serviceAreas: ["Main Area", "North Region", "South Region"],
+  serviceAreas: [
+    "Polegate",
+    "Eastbourne",
+    "Hailsham",
+    "Lewes",
+    "Seaford",
+    "Brighton",
+    "Hove",
+    "Uckfield",
+  ],
+
+  serviceAreaRegions: [
+    {
+      name: "South Coast",
+      slug: "south-coast",
+      towns: [
+        { name: "Polegate", slug: "polegate" },
+        { name: "Eastbourne", slug: "eastbourne" },
+        { name: "Hailsham", slug: "hailsham" },
+        { name: "Seaford", slug: "seaford" },
+        { name: "Brighton", slug: "brighton" },
+        { name: "Hove", slug: "hove" },
+      ],
+    },
+    {
+      name: "Mid Sussex",
+      slug: "mid-sussex",
+      towns: [
+        { name: "Lewes", slug: "lewes" },
+        { name: "Uckfield", slug: "uckfield" },
+      ],
+    },
+  ],
 
   services: [
     {
-      title: "Primary Service",
-      slug: "primary-service",
-      description: "Our flagship service offering for residential and commercial clients.",
+      title: "Brand Identity & Logo Design",
+      slug: "brand-identity-logo-design",
+      description:
+        "Strategy-first brand identity and logo design for East Sussex businesses. Moodboards, 3 concepts, 2 revision rounds, brand guidelines PDF.",
     },
     {
-      title: "Secondary Service",
-      slug: "secondary-service",
-      description: "Complementary service that enhances our primary offering.",
+      title: "Graphic Design for Print",
+      slug: "graphic-design-for-print",
+      description:
+        "Print-ready artwork design from brief to finished file. Pantone matching and proofing included.",
     },
     {
-      title: "Service Three",
-      slug: "service-three",
-      description: "Specialized service for unique client needs.",
+      title: "Vehicle Graphics & Livery",
+      slug: "vehicle-graphics-livery",
+      description:
+        "UV-rated 7-year vinyl vehicle graphics and fleet livery. In-house design and Polegate workshop installation.",
+    },
+    {
+      title: "Shop Signs & Signage",
+      slug: "shop-signs-signage",
+      description:
+        "Shop front signage including illuminated options and heritage-area compliant designs for East Sussex.",
+    },
+    {
+      title: "Business Stationery",
+      slug: "business-stationery",
+      description:
+        "Matched business card, letterhead, compliment slip and email signature sets for East Sussex businesses.",
+    },
+    {
+      title: "Brochures & Marketing Print",
+      slug: "brochures-marketing-print",
+      description:
+        "Saddle-stitched and perfect-bound brochures on 150gsm to 400gsm stocks. Eco paper available.",
+    },
+    {
+      title: "Exhibition & Event Graphics",
+      slug: "exhibition-event-graphics",
+      description:
+        "Pop-up banners, pull-up stands, lightweight tension fabric displays with travel cases for events.",
+    },
+    {
+      title: "Workwear & Branded Clothing",
+      slug: "workwear-branded-clothing",
+      description:
+        "Embroidery and heat transfer branding on polos, hoodies, hi-vis and workwear. Bulk pricing available.",
+    },
+    {
+      title: "Window Graphics & Retail Display",
+      slug: "window-graphics-retail-display",
+      description:
+        "One-way vision film, cut vinyl and seasonal campaign window graphics with easy removal.",
+    },
+    {
+      title: "Packaging & Label Design",
+      slug: "packaging-label-design",
+      description:
+        "Die-line artwork, small-batch label runs, waterproof and UV-rated label options for East Sussex producers.",
     },
   ],
 
@@ -282,121 +366,184 @@ export const siteConfig: SiteConfig = {
     contactForm: true,
     rateLimit: true,
     testimonials: true,
-    blog: false,
+    blog: true,
   },
 
   schema: {
-    businessType: "LocalBusiness",
+    businessType: "ProfessionalService",
     businessConfig: {
-      name: "Cygnus Graphics",
-      legalName: "Cygnus Graphics Ltd",
+      name: "DCS Graphics",
+      legalName: "Digital Consulting Services Ltd",
       description:
-        "Professional local services serving [Your Area]. Quality workmanship, competitive pricing, and excellent customer service.",
-      slogan: "Your trusted local experts",
-      foundingDate: "2020",
+        "DCS Graphics is an example site demonstrating the Local Business Platform for graphic design, signage and print studios. Operated by Digital Consulting Services from Polegate, East Sussex.",
+      slogan: "Creative design, signage and print example site — East Sussex",
+      foundingDate: "2019",
       numberOfEmployees: "1-10",
-      priceRange: "$$",
-      email: "info@yourbusiness.com",
-      telephone: "+441234567890",
+      priceRange: "££",
+      email: "mail@digitalconsultingservices.co.uk",
+      telephone: "+447395063764",
       address: {
-        streetAddress: "123 Main Street",
-        addressLocality: "Your City",
-        addressRegion: "Your County",
-        postalCode: "AB12 3CD",
+        streetAddress: "Unit H3, Chaucer Business Park, Dittons Road",
+        addressLocality: "Polegate",
+        addressRegion: "East Sussex",
+        postalCode: "BN26 6QH",
         addressCountry: "GB",
       },
       geo: {
-        latitude: "51.5074",
-        longitude: "-0.1278",
+        latitude: "50.8233",
+        longitude: "0.2557",
       },
       openingHours: [
         {
           dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
           opens: "09:00",
-          closes: "17:00",
+          closes: "17:30",
+        },
+        {
+          dayOfWeek: ["Saturday"],
+          opens: "09:00",
+          closes: "12:00",
         },
       ],
-      areaServed: ["Main Area", "North Region", "South Region", "East Region", "West Region"],
+      areaServed: [
+        "Polegate",
+        "Eastbourne",
+        "Hailsham",
+        "Lewes",
+        "Seaford",
+        "Brighton",
+        "Hove",
+        "Uckfield",
+      ],
       credentials: [
         {
-          name: "Fully Insured",
-          description: "Public liability and professional indemnity insurance",
+          name: "In-House Designers",
+          description: "Full-time design team",
           category: "certification",
         },
         {
-          name: "Qualified Team",
-          description: "All staff are fully trained and certified",
+          name: "Brand Strategy Specialists",
+          description: "Consultative design approach",
+          category: "certification",
+        },
+        {
+          name: "Colour-Matched Print",
+          description: "Pantone accuracy guaranteed",
+          category: "certification",
+        },
+        {
+          name: "Trade Association Member",
+          description: "Industry accredited",
           category: "certification",
         },
       ],
       socialProfiles: [
-        "https://www.facebook.com/yourbusiness",
-        "https://www.linkedin.com/company/yourbusiness",
+        "https://facebook.com/digitalconsultingservices",
+        "https://linkedin.com/company/digital-consulting-services",
       ],
       knowsAbout: [
-        "Service Category 1",
-        "Service Category 2",
-        "Service Category 3",
-        "Industry Best Practices",
-        "Local Area Expertise",
+        "brand identity",
+        "logo design",
+        "graphic design",
+        "signage",
+        "print",
+        "packaging",
+        "creative studio",
+        "vehicle graphics",
       ],
       offerCatalog: [
         {
-          name: "Primary Service",
-          description: "Our main service offering for residential and commercial clients",
-          url: "/services/primary-service",
+          name: "Brand Identity & Logo Design",
+          description:
+            "Strategy-first brand identity with moodboards, concepts and brand guidelines",
+          url: "/services/brand-identity-logo-design",
         },
         {
-          name: "Secondary Service",
-          description: "Complementary service that enhances our primary offering",
-          url: "/services/secondary-service",
+          name: "Graphic Design for Print",
+          description: "Print-ready artwork from brief to finished file with Pantone matching",
+          url: "/services/graphic-design-for-print",
         },
         {
-          name: "Service Three",
-          description: "Specialized service for unique client needs",
-          url: "/services/service-three",
+          name: "Vehicle Graphics & Livery",
+          description: "UV-rated 7-year vinyl vehicle graphics and fleet livery design",
+          url: "/services/vehicle-graphics-livery",
+        },
+        {
+          name: "Shop Signs & Signage",
+          description: "Shop front and illuminated signage with heritage-area compliance",
+          url: "/services/shop-signs-signage",
+        },
+        {
+          name: "Business Stationery",
+          description: "Matched business card, letterhead and stationery sets",
+          url: "/services/business-stationery",
+        },
+        {
+          name: "Brochures & Marketing Print",
+          description: "Saddle-stitched and perfect-bound brochures on premium stocks",
+          url: "/services/brochures-marketing-print",
+        },
+        {
+          name: "Exhibition & Event Graphics",
+          description: "Pop-up banners and tension fabric displays for events",
+          url: "/services/exhibition-event-graphics",
+        },
+        {
+          name: "Workwear & Branded Clothing",
+          description: "Embroidery and heat transfer branding on workwear",
+          url: "/services/workwear-branded-clothing",
+        },
+        {
+          name: "Window Graphics & Retail Display",
+          description: "One-way vision and cut vinyl window graphics",
+          url: "/services/window-graphics-retail-display",
+        },
+        {
+          name: "Packaging & Label Design",
+          description: "Die-line artwork and small-batch label printing",
+          url: "/services/packaging-label-design",
         },
       ],
     },
   },
 
   about: {
-    heroBadges: ["Est. 2020", "Local Experts", "Fully Insured"],
+    heroBadges: ["Est. 2019", "East Sussex", "Example Site", "By DCS"],
     story: [
-      "Founded in 2020, Cygnus Graphics was built on a simple promise: deliver professional, reliable service that our customers can count on every time.",
-      "From our base in City Name, we serve residential and commercial clients across Main Area, North Region, and South Region. Every project, large or small, receives the same dedication to quality.",
-      "Today we are proud to be a trusted local business — known for honest pricing, skilled workmanship, and the kind of service that earns referrals from neighbours and friends.",
+      "DCS Graphics was established in 2019 as the creative studio arm of Digital Consulting Services, bringing together in-house designers and print production specialists under one roof in Polegate, East Sussex. From the outset, the studio was built around a simple belief: effective design is both art and science — it must captivate an audience and communicate a clear message at the same time.",
+      "The studio serves independent retailers, hospitality businesses, contractors, and professional services firms across East Sussex. Whether developing a brand from scratch, designing a full shop-front signage package, or producing fleet livery for a local contractor, DCS Graphics applies the same consultative, considered approach to every brief. We believe in educating clients about design — not just delivering artwork, but helping businesses understand why considered communication works.",
+      "This is an example site by Digital Consulting Services, demonstrating the Local Business Platform. It is not a live trading business — all services, customer reviews, and case studies shown are illustrative only. For the real platform and real client sites, visit digitalconsultingservices.co.uk.",
     ],
     whyChooseUs: [
-      "Fully insured with comprehensive public liability cover",
-      "Free quotes and consultations",
-      "Competitive, transparent pricing",
-      "Quality workmanship guaranteed",
-      "Professional, uniformed team",
-      "Clear communication throughout",
-      "Flexible scheduling to suit you",
-      "Comprehensive aftercare and support",
+      "Strategy-first approach — we understand your audience before we open a design file",
+      "In-house design team: no outsourcing, no handoffs, consistent quality throughout",
+      "Consultative process with moodboards, concepts and revision rounds included",
+      "Colour-matched print with Pantone accuracy on all production work",
+      "Heritage-area and planning-permission guidance for shop signage",
+      "Full brand guidelines PDF included with every brand identity project",
+      "Vehicle livery installed in our Polegate workshop — UV-rated 7-year vinyl",
+      "Serving East Sussex businesses since 2019 with a track record of effective design",
     ],
     values: [
       {
-        title: "Quality First",
+        title: "Art and Science",
         description:
-          "We maintain the highest standards in everything we do, ensuring exceptional results for every project.",
+          "Every design decision is backed by strategy. We ask what the work needs to achieve before we explore how it should look.",
       },
       {
-        title: "Professional Excellence",
+        title: "Consultative Process",
         description:
-          "Our team is fully qualified and continuously trained to deliver professional service.",
+          "We take the time to understand your business, your audience, and your brief before presenting solutions.",
       },
       {
-        title: "Reliable Service",
+        title: "Production Integrity",
         description:
-          "We arrive on time, complete projects efficiently, and communicate clearly throughout.",
+          "Print-ready artwork, colour-matched proofs, and proper file handover — we get the technical details right.",
       },
       {
-        title: "Customer Focus",
+        title: "Lasting Results",
         description:
-          "Your satisfaction is our priority. We listen to your needs and deliver tailored solutions.",
+          "Good design outlasts trends. We create work that represents your business well for years, not months.",
       },
     ],
   },
