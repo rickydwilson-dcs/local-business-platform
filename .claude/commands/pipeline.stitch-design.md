@@ -347,20 +347,30 @@ Page-specific content:
 
 Then append the page-specific sections. For each screen: submit it, then immediately call `get_project` for `$PROJECT_ID` and check `screenInstances` for the new entry. If found, store the screen ID and proceed. If **not** found, STOP — do not retry.
 
-| Screen         | Slug             | Page-specific sections                                                                                                                                                                                                                          |
-| -------------- | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| About          | `about`          | Company story with founding year[If $LOCATION: and $LOCATION roots], pull-quote, team grid (4 members with hover reveal), values cards (3, icon + hover colour change), trust/accreditations bar (4 items, grayscale→colour on hover), CTA band |
-| Contact        | `contact`        | Page header with hero image, contact form (name/email/phone/message), contact info sidebar ([If $PHONE: $PHONE /] address / hours), map image placeholder, landscape image break                                                                |
-| Services       | `services`       | Breadcrumb, page header, 6-card service grid (icon + image + description + "Learn more" link)[If $SERVICES_LIST: using these services: $SERVICES_LIST], CTA band with decorative icon                                                           |
-| Service Detail | `service-detail` | Breadcrumb, hero for [first service from $SERVICES_LIST or "primary service"], description + benefits card (4 benefits with icons), 3-image staggered gallery with hover captions, FAQ accordion (3 questions), CTA panel                       |
-| Blog           | `blog`           | Breadcrumb, page header, article card grid (6 cards: featured image, category tag, title, excerpt, read-time, author avatar + name, "Read more" link), pagination controls, sidebar with categories + recent posts                              |
-| Blog Detail    | `blog-detail`    | Breadcrumb, full-bleed hero with title + author + date + read-time, article body (rich prose: dropcap first paragraph, pull-quote block, body text, subheadings), author bio card, related articles (3 cards), CTA band                         |
+| Screen         | Slug             | Page-specific sections                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| -------------- | ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| About          | `about`          | Company story with founding year[If $LOCATION: and $LOCATION roots], pull-quote, team grid (4 members with hover reveal), values cards (3, icon + hover colour change), trust/accreditations bar (4 items, grayscale→colour on hover), CTA band                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| Contact        | `contact`        | Page header with hero image, contact form (name/email/phone/message), contact info sidebar ([If $PHONE: $PHONE /] address / hours), map image placeholder, landscape image break                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| Services       | `services`       | Breadcrumb, page header, 6-card service grid (icon + image + description + "Learn more" link)[If $SERVICES_LIST: using these services: $SERVICES_LIST], CTA band with decorative icon                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| Service Detail | `service-detail` | Breadcrumb, hero for [first service from $SERVICES_LIST or "primary service"], description + benefits card (4 benefits with icons), 3-image staggered gallery with hover captions, FAQ accordion (3 questions), CTA panel                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| Blog           | `blog`           | Breadcrumb, page header, article card grid (6 cards: featured image, category tag, title, excerpt, read-time, author avatar + name, "Read more" link), pagination controls, sidebar with categories + recent posts                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| Blog Detail    | `blog-detail`    | Breadcrumb, full-bleed hero with title + author + date + read-time, article body (rich prose: dropcap first paragraph, pull-quote block, body text, subheadings), author bio card, related articles (3 cards), CTA band                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| Projects       | `projects`       | Breadcrumb (Home → Projects), page header with H1 "Our Work" + subheading "A selection of recent projects by $COMPANY_NAME[If $LOCATION: across $LOCATION]", optional category filter tab row (All / Residential / Commercial / Heritage), stats bar (4 stats with icons: total projects completed, years in business, repeat client rate, satisfaction rate — accent numbers on muted background), project card grid 3-col (6 cards: full-bleed top image 60% of card, category badge, project title as H3, one-sentence scope, "View project →" arrow link; card hover: image scale + shadow lift), CTA band (brand-primary background, "Ready to start your project?", subheading, two buttons: primary "Get a Quote", secondary "Contact Us")                                                                                                                                                                                                                                                                                                                                                          |
+| Case Study     | `case-study`     | Breadcrumb (Home → Projects → [Project Name]), full-bleed hero with project title as H1 + trade/type badge + location tag + completion date badge + gradient overlay on image, 2-col project overview (left: scope summary paragraph + 4-item stats grid with Material Symbols icons e.g. Duration / Budget range / Project type / Outcome; right: featured project image), Challenge band (dark brand-secondary background, H2 "The Challenge", 2–3 paragraphs describing problem scope), Approach section (light background, H2 "Our Approach", 3-step numbered process each with icon; alternating text/image if space allows), 2×2 gallery grid with hover overlay captions ("Before" / "During" / "After" / "Completed view"), Results section (H2 "The Outcome", 4 result cards each with large accent number + label e.g. "3 weeks / On schedule"), client testimonial pull-quote band (5-star rating row, italic blockquote, avatar with initials, client name + location), CTA panel (H2 "Start your own project", subheading, primary "Get a Quote" button, secondary "View more projects" link) |
 
 After each screen submission, confirm via `get_project` `screenInstances` before sending the next. If any screen does not appear in `screenInstances`, STOP and report which screen failed. Do not call `list_screens` — it is broken. Do not retry a timed-out generation call — the generation completed silently.
 
 **Fallback: blog-detail screen fails repeatedly**
 
 If `blog-detail` does not appear in `screenInstances` after two attempts (15+ minutes each), skip it. The TSX page for `blog-detail` can be adapted directly from the `blog.html` source using the same pipeline adaptation rules. Mark the screen as "adapted-from-blog" in `meta/token-mapping-report.json`. This is an acceptable outcome — blog-detail is the most complex screen and Stitch occasionally rejects it with "service unavailable".
+
+**Fallback: projects screen fails repeatedly**
+
+If `projects` does not appear in `screenInstances` after two attempts (15+ minutes each), skip it. Adapt the projects listing TSX from `services.html` using the existing adaptation rules (3-column image-dominant grid, category badge, scope, "View project →" link). Mark as "adapted-from-services" in `meta/token-mapping-report.json`. This is an acceptable outcome — the pipeline degrades gracefully.
+
+**Fallback: case-study screen fails repeatedly**
+
+If `case-study` does not appear in `screenInstances` after two attempts (15+ minutes each), skip it. Adapt the project case study TSX from `service-detail.html` using the existing adaptation rules (project scope card, testimonial pull-quote, CTA panel). Mark as "adapted-from-service-detail" in `meta/token-mapping-report.json`.
 
 **2d — Apply design system to all screens**
 
@@ -374,7 +384,7 @@ This enforces fonts, colours, and roundness across any screens that drifted duri
 
 **2e — Heading drift report**
 
-Run the heading drift report across the 5 downloaded HTML files:
+Run the heading drift report across all downloaded HTML files:
 
 ```bash
 npx tsx tools/stitch-normalize-headings.mjs \
@@ -438,13 +448,13 @@ Download in parallel where possible:
     "generatedAt": "<ISO timestamp>"
   }
   ```
-- For each of the 5 screens, call the Stitch HTML export tool → write to `output/ingestion/$THEME_NAME-stitch/html/<slug>.html`
+- For each screen (home, about, contact, services, service-detail, blog, blog-detail, projects, case-study — or fewer if any were skipped due to fallback), call the Stitch HTML export tool → write to `output/ingestion/$THEME_NAME-stitch/html/<slug>.html`
 
 **3b — Download images**
 
 After all HTML files are written, extract and download all AI-generated images:
 
-1. Parse all 5 HTML files for every unique `https://lh3.googleusercontent.com/` URL in `src="..."` attributes
+1. Parse all HTML files in `output/ingestion/$THEME_NAME-stitch/html/` for every unique `https://lh3.googleusercontent.com/` URL in `src="..."` attributes
 2. Download each to `output/ingestion/$THEME_NAME-stitch/images/img-NNN.jpg` (sequential, zero-padded to 3 digits)
 3. Write `output/ingestion/$THEME_NAME-stitch/meta/image-manifest.json`:
    ```json
@@ -461,10 +471,12 @@ ls output/ingestion/$THEME_NAME-stitch/html/services.html
 ls output/ingestion/$THEME_NAME-stitch/html/service-detail.html
 ls output/ingestion/$THEME_NAME-stitch/html/blog.html
 ls output/ingestion/$THEME_NAME-stitch/html/blog-detail.html
+ls output/ingestion/$THEME_NAME-stitch/html/projects.html
+ls output/ingestion/$THEME_NAME-stitch/html/case-study.html
 ls output/ingestion/$THEME_NAME-stitch/meta/project.json
 ls output/ingestion/$THEME_NAME-stitch/meta/screens.json
 ls output/ingestion/$THEME_NAME-stitch/meta/image-manifest.json
-# All 11 files must exist and be non-empty
+# All 13 files must exist and be non-empty (fewer if any screens fell back to adaptation)
 ls output/ingestion/$THEME_NAME-stitch/images/ | grep -c img
 # Must be > 0
 ```
@@ -753,10 +765,12 @@ ls sites/$THEME_NAME-test/public/stitch-images/ | wc -l
 - `sites/$THEME_NAME-test/app/blog/[slug]/page.tsx` — blog detail (from Stitch blog-detail.html; use first article title as static slug)
 - `sites/$THEME_NAME-test/app/locations/page.tsx` — locations listing (adapted from services listing HTML)
 - `sites/$THEME_NAME-test/app/locations/[slug]/page.tsx` — location detail (adapted from service-detail HTML)
-- `sites/$THEME_NAME-test/app/projects/page.tsx` — projects listing (adapted from services listing HTML)
-- `sites/$THEME_NAME-test/app/projects/[slug]/page.tsx` — project detail (adapted from service-detail HTML)
+- `sites/$THEME_NAME-test/app/projects/page.tsx` — projects listing (from Stitch projects.html)
+- `sites/$THEME_NAME-test/app/projects/<first-project-slug>/page.tsx` — project case study (from Stitch case-study.html; static named route — see slug derivation in adaptation rules below)
 - `sites/$THEME_NAME-test/app/privacy-policy/page.tsx` — static prose template (no Stitch source)
 - `sites/$THEME_NAME-test/app/cookie-policy/page.tsx` — static prose template (no Stitch source)
+
+> **MDX routes must not be overwritten:** `app/blog/[slug]/page.tsx` and `app/projects/[slug]/page.tsx` are MDX-powered dynamic routes copied from base-template. Do NOT replace them with hardcoded Stitch TSX. Only static named example routes (`app/blog/<article-slug>/page.tsx`, `app/projects/<project-slug>/page.tsx`) receive Stitch-designed hardcoded content.
 
 **Rules:**
 
@@ -789,9 +803,19 @@ _Locations listing_ — adapt from `services.html`. Swap service icon cards for 
 
 _Location detail_ — adapt from `service-detail.html`. Replace the benefits card with a "Services in [area]" card (list of 4–5 service names with links). Replace the FAQ accordion with a "Local info" section (travel time placeholder, service radius, nearby landmark note). Keep the gallery placeholder and CTA panel.
 
-_Projects listing_ — adapt from `services.html`. Cards are image-dominant (full-bleed top image, matching the services card style). Fields: project title as heading, trade/type badge, one-sentence scope, "View project →" link. 3-column grid.
+_Projects listing_ — generated directly from `projects.html`. No adaptation needed — follow the standard Stitch HTML → TSX conversion rules exactly.
 
-_Project detail_ — adapt from `service-detail.html`. Lead with a 2-image overview gallery (use stitch images). Replace the benefits card with a "Project scope" list (4 bullet points of what was done). Replace the FAQ accordion with a client testimonial (pull-quote, star rating row, client name). Keep the CTA panel.
+_Project case study (static named example route)_ — generated directly from `case-study.html`. Follow the standard Stitch HTML → TSX conversion rules exactly.
+
+**Slug derivation for the named project route:** Read `case-study.html` and extract the first `<h1>` element's text content. Convert to kebab-case: lowercase, spaces → hyphens, strip all non-alphanumeric characters except hyphens, truncate to 50 characters. Examples:
+
+- "Victorian bathroom renovation, Eastbourne" → `victorian-bathroom-renovation-eastbourne`
+- "Commercial rewire — 3-storey office block" → `commercial-rewire-3-storey-office-block`
+- "Rear garden landscaping and paving project" → `rear-garden-landscaping-and-paving-project`
+
+Fallback if H1 extraction returns empty: `example-[trade-kebab]-project` where `[trade-kebab]` is the `$TRADE` argument converted to kebab-case (e.g. `$TRADE = "electrical contractor"` → `example-electrical-contractor-project`).
+
+**After deriving the slug**, update the first project card's `href` in `projects/page.tsx` to point to `/projects/<derived-slug>`.
 
 _Blog listing and blog detail_ — generated directly from `blog.html` and `blog-detail.html` respectively (same approach as services and service-detail). No adaptation needed — follow the standard Stitch HTML → TSX conversion rules.
 
@@ -925,20 +949,23 @@ style-src 'self' 'unsafe-inline' fonts.googleapis.com; font-src 'self' fonts.gst
 ```bash
 ls sites/$THEME_NAME-test/app/{page.tsx,about/page.tsx,contact/page.tsx,services/page.tsx} | wc -l
 # Must be 4 (core Stitch pages)
+ls sites/$THEME_NAME-test/app/projects/page.tsx
 ls sites/$THEME_NAME-test/app/blog/page.tsx \
-   "sites/$THEME_NAME-test/app/blog/[slug]/page.tsx" \
    sites/$THEME_NAME-test/app/locations/page.tsx \
    "sites/$THEME_NAME-test/app/locations/[slug]/page.tsx" \
-   sites/$THEME_NAME-test/app/projects/page.tsx \
-   "sites/$THEME_NAME-test/app/projects/[slug]/page.tsx" \
    sites/$THEME_NAME-test/app/privacy-policy/page.tsx \
    sites/$THEME_NAME-test/app/cookie-policy/page.tsx | wc -l
-# Must be 8
+# Must be 5
+ls sites/$THEME_NAME-test/app/projects/*/page.tsx 2>/dev/null | grep -v '\[slug\]' | wc -l
+# Must be >= 1 (the named project example route exists)
 grep -l "@platform/core-components\|siteConfig\|getContentItems" \
   sites/$THEME_NAME-test/app/page.tsx \
   sites/$THEME_NAME-test/app/about/page.tsx \
   sites/$THEME_NAME-test/app/contact/page.tsx \
-  sites/$THEME_NAME-test/app/services/page.tsx 2>/dev/null | wc -l
+  sites/$THEME_NAME-test/app/services/page.tsx \
+  sites/$THEME_NAME-test/app/projects/page.tsx \
+  $(ls sites/$THEME_NAME-test/app/projects/*/page.tsx 2>/dev/null | grep -v '\[slug\]') \
+  2>/dev/null | wc -l
 # Must be 0
 ```
 
@@ -952,8 +979,8 @@ Write the review criteria to `output/ingestion/$THEME_NAME-stitch/meta/validate-
 Compare each of the 5 rendered pages against its Stitch HTML source. For each difference, write a structured finding.
 
 **Reference material:**
-- **Dev server screenshots** (actual rendered output): `output/ingestion/$THEME_NAME-stitch/meta/dev-screenshots/` — `home.png`, `about.png`, `contact.png`, `services.png`, `service-detail.png`. Run `ls` to confirm which exist. **Read these PNG files directly** as the primary visual reference.
-- **Stitch HTML exports**: `output/ingestion/$THEME_NAME-stitch/html/` — `home.html`, `about.html`, `contact.html`, `services.html`, `service-detail.html`. These are the source of truth for sections, layout, and CSS class fidelity.
+- **Dev server screenshots** (actual rendered output): `output/ingestion/$THEME_NAME-stitch/meta/dev-screenshots/` — `home.png`, `about.png`, `contact.png`, `services.png`, `service-detail.png`, `blog.png`, `blog-detail.png`, `projects.png`, `case-study.png`. Run `ls` to confirm which exist. **Read these PNG files directly** as the primary visual reference.
+- **Stitch HTML exports**: `output/ingestion/$THEME_NAME-stitch/html/` — `home.html`, `about.html`, `contact.html`, `services.html`, `service-detail.html`, `blog.html`, `blog-detail.html`, `projects.html`, `case-study.html`. These are the source of truth for sections, layout, and CSS class fidelity.
 
 **Pages to compare:**
 - `meta/dev-screenshots/home.png` + Fetch rendered `/` → compare against `html/home.html`
@@ -961,6 +988,10 @@ Compare each of the 5 rendered pages against its Stitch HTML source. For each di
 - `meta/dev-screenshots/contact.png` + Fetch rendered `/contact` → compare against `html/contact.html`
 - `meta/dev-screenshots/services.png` + Fetch rendered `/services` → compare against `html/services.html`
 - `meta/dev-screenshots/service-detail.png` + Fetch rendered `/services/[first-service-slug]` → compare against `html/service-detail.html`
+- `meta/dev-screenshots/blog.png` + Fetch rendered `/blog` → compare against `html/blog.html`
+- `meta/dev-screenshots/blog-detail.png` + Fetch rendered `/blog/<first-article-slug>` → compare against `html/blog-detail.html`
+- `meta/dev-screenshots/projects.png` + Fetch rendered `/projects` → compare against `html/projects.html`
+- `meta/dev-screenshots/case-study.png` + Fetch rendered `/projects/<first-project-slug>` → compare against `html/case-study.html`
 
 Also read each corresponding TSX file so you can identify where to apply fixes.
 
@@ -1006,7 +1037,7 @@ Then run the shared validation skill:
 ```
 /pipeline.validate-site \
   --site-dir sites/$THEME_NAME-test \
-  --pages "/ /about /contact /services /services/[first-service-slug]" \
+  --pages "/ /about /contact /services /services/[first-service-slug] /blog /blog/[first-article-slug] /projects /projects/[first-project-slug]" \
   --review-prompt-file output/ingestion/$THEME_NAME-stitch/meta/validate-review-prompt.txt \
   --findings-file output/ingestion/$THEME_NAME-stitch/meta/tsx-review-findings.json \
   --fix-log-file output/ingestion/$THEME_NAME-stitch/meta/tsx-fix-log.json \
@@ -1096,7 +1127,7 @@ Output this summary to the user:
     primary colour: $PRIMARY_COLOR  |  roundness: $ROUNDNESS  |  variant: $COLOR_VARIANT
 ✓ Company:          $COMPANY_NAME ($TRADE[, $LOCATION if set])
 ✓ Design assets:    output/ingestion/$THEME_NAME-stitch/
-    html/           — 7 page exports (home, about, contact, services, service-detail, blog, blog-detail)
+    html/           — 9 page exports (home, about, contact, services, service-detail, blog, blog-detail, projects, case-study)
     design-system/  — tokens.json
     meta/           — project.json, screens.json, token-mapping-report.json, image-manifest.json,
                       tsx-review-findings.json, tsx-fix-log.json
@@ -1118,7 +1149,7 @@ Stitch comparison: http://localhost:3000        (home)
                    http://localhost:3000/locations
                    http://localhost:3000/locations/[first-location-slug]
                    http://localhost:3000/projects
-                   http://localhost:3000/projects/[first-project-slug]
+                   http://localhost:3000/projects/<first-project-slug>
                    http://localhost:3000/privacy-policy
                    http://localhost:3000/cookie-policy
 Cleanup:      /pipeline.kill-site $THEME_NAME-test   (removes test site)
@@ -1128,7 +1159,7 @@ Next steps:
   1. Open Stitch project to review and iterate designs visually
   2. Inspect meta/token-mapping-report.json — verify colour extraction looks correct
   3. Review tsx-review-findings.json and tsx-fix-log.json to see what the fidelity pass caught
-  4. Start dev server (npm run dev) and visit the 13 TSX pages (7 from Stitch screens + 6 adapted/templated) above
+  4. Start dev server (npm run dev) and visit the 13 TSX pages (9 from Stitch screens + 4 adapted/templated (locations listing, location detail, privacy-policy, cookie-policy)) above
   5. When satisfied: /deploy.changes
 ```
 
