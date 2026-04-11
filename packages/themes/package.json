@@ -19,6 +19,7 @@
     "./cygnus": "./cygnus/index.ts",
     "./cygnus/components": "./cygnus/components/index.ts",
     "./lyra": "./lyra/index.ts",
+    "./lyra/components": "./lyra/components/index.ts",
     "./nova": "./nova/index.ts",
     "./orion": "./orion/index.ts",
     "./orion/components": "./orion/components/index.ts",
