@@ -42,6 +42,10 @@ const categoryLabels: Record<string, string> = {
   renovation: "Renovation",
   maintenance: "Maintenance",
   emergency: "Emergency",
+  "plumbing-install": "Plumbing Installation",
+  "plumbing-emergency": "Emergency Plumbing",
+  "garden-design": "Garden Design",
+  "garden-maintenance": "Garden Maintenance",
 };
 
 function ProjectCard({ project }: { project: Project }) {

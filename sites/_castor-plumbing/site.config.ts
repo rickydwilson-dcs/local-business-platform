@@ -76,7 +76,7 @@ export interface SiteConfig extends BaseSiteConfig {
   business: {
     name: string;
     legalName: string;
-    type: "LocalBusiness" | "ProfessionalService" | "HomeAndConstructionBusiness";
+    type: "LocalBusiness" | "ProfessionalService" | "HomeAndConstructionBusiness" | "Plumber";
     phone: string;
     email: string;
     address: {

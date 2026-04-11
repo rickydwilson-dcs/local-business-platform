@@ -35,6 +35,10 @@ const categoryLabels: Record<string, string> = {
   renovation: "Renovation Project",
   maintenance: "Maintenance Project",
   emergency: "Emergency Project",
+  "plumbing-install": "Plumbing Installation",
+  "plumbing-emergency": "Emergency Plumbing",
+  "garden-design": "Garden Design",
+  "garden-maintenance": "Garden Maintenance",
 };
 
 export async function generateStaticParams() {
