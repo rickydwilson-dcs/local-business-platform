@@ -3,7 +3,7 @@ import Image from "next/image";
 import { Phone } from "lucide-react";
 import { MobileMenu, NavLink, LocationsDropdown } from "@platform/core-components";
 
-export interface LyraHeaderProps {
+export interface RigelHeaderProps {
   siteName: string;
   phoneDisplay?: string;
   phoneTel?: string;
@@ -13,7 +13,7 @@ export interface LyraHeaderProps {
   locations: Array<{ name: string; slug: string }>;
 }
 
-export function LyraHeader({
+export function RigelHeader({
   siteName,
   phoneDisplay,
   phoneTel,
@@ -21,15 +21,15 @@ export function LyraHeader({
   primaryCta,
   navigation,
   locations,
-}: LyraHeaderProps) {
+}: RigelHeaderProps) {
   const navBase =
     "uppercase tracking-widest text-xs font-medium font-body transition-colors border-b-2 pb-1";
   const navActive = "text-brand-primary border-brand-primary";
-  const navInactive = "text-surface-foreground border-transparent hover:text-brand-primary";
+  const navInactive = "text-white border-transparent hover:text-brand-primary";
   const dropdownBtnClass = `flex items-center gap-1 ${navBase} ${navInactive}`;
 
   return (
-    <header className="sticky top-0 z-40 bg-surface-background border-b border-surface-subtle">
+    <header className="sticky top-0 z-40 bg-surface-inverse border-b border-surface-subtle">
       <div className="mx-auto w-full lg:w-[90%] px-4 lg:px-6">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
@@ -76,7 +76,7 @@ export function LyraHeader({
             {showPhone && phoneDisplay && phoneTel && (
               <Link
                 href={`tel:${phoneTel}`}
-                className="flex items-center gap-2 text-surface-foreground hover:text-brand-primary transition-colors"
+                className="flex items-center gap-2 text-white hover:text-brand-primary transition-colors"
               >
                 <Phone className="w-4 h-4" aria-hidden="true" />
                 <span className="font-semibold">{phoneDisplay}</span>
@@ -99,7 +99,7 @@ export function LyraHeader({
             navigation={navigation}
             showPhone={showPhone}
             primaryCta={primaryCta}
-            variant="light"
+            variant="dark"
           />
         </div>
       </div>
