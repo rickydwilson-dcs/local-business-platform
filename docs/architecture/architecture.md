@@ -25,11 +25,15 @@ local-business-platform/
 ├── sites/                          # Client websites
 │   ├── base-template/              # Gold-standard template for new sites
 │   ├── colossus-scaffolding/       # Reference implementation (scaffolding)
-│   ├── cygnus-test/                # Theme test site (cygnus)
 │   ├── dcs/                        # Digital Consulting Services (polaris theme)
 │   ├── dj-fox-electrical/          # Production site (electrical)
 │   ├── mad-graphics/               # Production site (vehicle graphics & print, cygnus theme)
 │   ├── showcase/                   # Internal component/theme showcase
+│   ├── _castor-plumbing/           # Theme reference site (castor)
+│   ├── _cygnus-graphics/           # Theme reference site (cygnus)
+│   ├── _lyra-garden/               # Theme reference site (lyra)
+│   ├── _nova-print/                # Theme reference site (nova)
+│   ├── _rigel-events/              # Theme reference site (rigel) — events use case
 │   └── [theme-name]-test/          # Temporary test sites (created by pipeline, removed after review)
 ├── packages/
 │   ├── core-components/            # Shared UI components (@platform/core-components)

@@ -57,18 +57,18 @@ const EXCLUDE_EXTENSIONS = [".log"];
 
 /** Maps theme variant → reference site providing canonical visual page implementations. */
 const THEME_REFERENCE_SITE_MAP: Record<string, string> = {
-  cygnus: 'cygnus-test',
-  orion:  'dj-fox-electrical',
-  vega:   'base-template',
+  cygnus: "_cygnus-graphics",
+  orion: "dj-fox-electrical",
+  vega: "base-template",
 };
 
 /** Page files to copy from theme reference site (overrides base-template copies). */
 const THEMED_PAGE_FILES = [
-  'app/layout.tsx',
-  'app/page.tsx',
-  'app/services/page.tsx',
-  'app/about/page.tsx',
-  'app/locations/page.tsx',
+  "app/layout.tsx",
+  "app/page.tsx",
+  "app/services/page.tsx",
+  "app/about/page.tsx",
+  "app/locations/page.tsx",
 ] as const;
 
 // ============================================================================
@@ -216,11 +216,13 @@ function applyThemePageOverrides(
   }
   const referenceSiteDir = path.join(sitesDir, referenceSiteSlug);
   if (!fs.existsSync(referenceSiteDir)) {
-    options.log(`Warning: reference site '${referenceSiteSlug}' not found — using base-template pages`);
+    options.log(
+      `Warning: reference site '${referenceSiteSlug}' not found — using base-template pages`
+    );
     return;
   }
   for (const pageFile of THEMED_PAGE_FILES) {
-    const src  = path.join(referenceSiteDir, pageFile);
+    const src = path.join(referenceSiteDir, pageFile);
     const dest = path.join(newSiteDir, pageFile);
     if (fs.existsSync(src)) {
       if (!options.dryRun) fs.copyFileSync(src, dest);
@@ -228,8 +230,8 @@ function applyThemePageOverrides(
     }
   }
   // Copy stitch images if reference site has them
-  const srcImages  = path.join(referenceSiteDir, 'public', 'stitch-images');
-  const destImages = path.join(newSiteDir, 'public', 'stitch-images');
+  const srcImages = path.join(referenceSiteDir, "public", "stitch-images");
+  const destImages = path.join(newSiteDir, "public", "stitch-images");
   if (fs.existsSync(srcImages) && !fs.existsSync(destImages)) {
     if (!options.dryRun) fs.cpSync(srcImages, destImages, { recursive: true });
     options.log(`[theme:${themeVariant}] Copied stitch images from ${referenceSiteSlug}`);
@@ -670,16 +672,31 @@ function determineBusinessType(
 // Theme Config Generation
 // ============================================================================
 
-const THEME_REGISTRY_MAP: Record<string, { packagePath: string; registry: string; defaultConfig: string }> = {
-  vega:   { packagePath: '@platform/themes/vega',   registry: 'vegaRegistry',   defaultConfig: 'vegaDefaultConfig' },
-  orion:  { packagePath: '@platform/themes/orion',  registry: 'orionRegistry',  defaultConfig: 'orionDefaultConfig' },
-  cygnus: { packagePath: '@platform/themes/cygnus', registry: 'cygnusRegistry', defaultConfig: 'cygnusDefaultConfig' },
+const THEME_REGISTRY_MAP: Record<
+  string,
+  { packagePath: string; registry: string; defaultConfig: string }
+> = {
+  vega: {
+    packagePath: "@platform/themes/vega",
+    registry: "vegaRegistry",
+    defaultConfig: "vegaDefaultConfig",
+  },
+  orion: {
+    packagePath: "@platform/themes/orion",
+    registry: "orionRegistry",
+    defaultConfig: "orionDefaultConfig",
+  },
+  cygnus: {
+    packagePath: "@platform/themes/cygnus",
+    registry: "cygnusRegistry",
+    defaultConfig: "cygnusDefaultConfig",
+  },
 };
 
 function generateThemeConfig(project: ProjectFile): string {
   const theme = project.theme;
-  const themeVariant = theme?.themeVariant ?? 'vega';
-  const themeEntry = THEME_REGISTRY_MAP[themeVariant] ?? THEME_REGISTRY_MAP['vega'];
+  const themeVariant = theme?.themeVariant ?? "vega";
+  const themeEntry = THEME_REGISTRY_MAP[themeVariant] ?? THEME_REGISTRY_MAP["vega"];
   const registryImport = `import { ${themeEntry.registry} } from '${themeEntry.packagePath}';`;
   const registryRef = themeEntry.registry;
 
@@ -1063,7 +1080,7 @@ async function main(): Promise<void> {
   // ----------------------------------------
   // Step 3b: Overlay theme-specific page implementations
   // ----------------------------------------
-  const themeVariant = project.theme?.themeVariant ?? 'vega';
+  const themeVariant = project.theme?.themeVariant ?? "vega";
   applyThemePageOverrides(themeVariant, siteDir, SITES_DIR, {
     dryRun: options.dryRun,
     log: (msg) => console.log(`  ${msg}`),
@@ -1095,8 +1112,8 @@ async function main(): Promise<void> {
   if (!options.dryRun) {
     fs.writeFileSync(themeConfigPath, themeConfigContent);
     console.log(`  Generated theme.config.ts`);
-    const themeVariantUsed = project.theme?.themeVariant ?? 'vega';
-    const themeEntryUsed = THEME_REGISTRY_MAP[themeVariantUsed] ?? THEME_REGISTRY_MAP['vega'];
+    const themeVariantUsed = project.theme?.themeVariant ?? "vega";
+    const themeEntryUsed = THEME_REGISTRY_MAP[themeVariantUsed] ?? THEME_REGISTRY_MAP["vega"];
     console.log(`  \u2713 Theme variant: ${themeVariantUsed} (${themeEntryUsed.registry})`);
   } else {
     console.log(`  [DRY RUN] Would generate theme.config.ts`);
