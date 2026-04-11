@@ -2,26 +2,22 @@
  * Location Detail Page
  * ====================
  *
- * Individual location page with MDX content rendering.
- * Features hero, local services, FAQs, and CTA.
+ * Thin wrapper — delegates rendering to CygnusLocationDetailPage template.
+ * Retains metadata, generateStaticParams, and schema scripts.
  */
 
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import {
-  Schema,
-  Breadcrumbs,
-  LocationHero,
-  FAQSection,
-  CTASection,
-  type LocationFrontmatter,
-} from "@platform/core-components";
+import type { SiteConfigSummary } from "@platform/core-components";
+import { Schema, type LocationFrontmatter } from "@platform/core-components";
+import { CygnusLocationDetailPage } from "@platform/themes/cygnus/pages";
 import { getLocations, getLocation } from "@/lib/content";
 import { loadMdx } from "@/lib/mdx";
 import { getImageUrl } from "@/lib/image";
 import { absUrl } from "@/lib/site";
 import { siteConfig } from "@/site.config";
 import { getServiceAreaSchema } from "@/lib/schema";
+import { PHONE_DISPLAY } from "@/lib/contact-info";
 
 export const dynamic = "force-static";
 export const dynamicParams = false;
@@ -95,10 +91,7 @@ export default async function LocationPage({ params }: { params: Promise<Params>
   const { content: mdxContent } = await loadMdx({ baseDir: "locations", slug });
 
   const locationName = fm.title;
-  const heroImage = fm.hero?.image || fm.heroImage;
   const faqs = fm.faqs || [];
-
-  // SEO-003: LocalBusiness schema for location page
   const locationSchema = getServiceAreaSchema(locationName, slug);
 
   const breadcrumbItems = [
@@ -106,63 +99,35 @@ export default async function LocationPage({ params }: { params: Promise<Params>
     { name: locationName, href: `/locations/${slug}`, current: true },
   ];
 
+  const siteSummary: SiteConfigSummary = {
+    name: siteConfig.business.name,
+    tagline: siteConfig.tagline,
+    phone: siteConfig.business.phone,
+    phoneDisplay: PHONE_DISPLAY,
+    address: { city: siteConfig.business.address.city },
+    cta: siteConfig.cta,
+    stats: siteConfig.credentials?.stats,
+  };
+
   return (
     <>
-      {/* SEO-003: LocalBusiness schema for location page */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(locationSchema) }}
       />
 
-      {/* Breadcrumbs */}
-      <div className="bg-surface-subtle border-b border-surface-border">
-        <div className="container-standard py-4">
-          <Breadcrumbs items={breadcrumbItems} />
-        </div>
-      </div>
-
-      <div>
-        {/* Hero Section */}
-        <LocationHero
-          title={fm.hero?.title || `Professional Services in ${locationName}`}
-          description={fm.hero?.description || fm.description || ""}
-          heroImage={heroImage}
-          phone={siteConfig.business.phone}
-          trustBadges={fm.hero?.trustBadges}
-        />
-
-        {/* MDX Content */}
-        <section className="section-standard bg-surface-background">
-          <div className="container-standard">
-            <div className="max-w-4xl mx-auto">
-              <div className="prose prose-lg max-w-none prose-headings:text-surface-foreground prose-p:text-surface-muted-foreground prose-a:text-brand-primary prose-a:no-underline hover:prose-a:underline prose-strong:text-surface-foreground prose-li:text-surface-muted-foreground">
-                {mdxContent}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* FAQs */}
-        {faqs.length > 0 && (
-          <FAQSection
-            items={faqs}
-            title="Frequently Asked Questions"
-            location={locationName}
-            variant="location"
-            phone={siteConfig.business.phone}
-          />
-        )}
-
-        {/* CTA Section */}
-        <CTASection
-          title={`Ready for Professional Services in ${locationName}?`}
-          description={`Contact ${siteConfig.business.name} for a free quote. Our local team knows ${locationName} and is ready to help.`}
-          primaryButtonText="Get Free Quote"
-          primaryButtonUrl="/contact"
-          secondaryButtonText={`Call ${siteConfig.business.phone}`}
-          secondaryButtonUrl={`tel:${siteConfig.business.phone.replace(/\s/g, "")}`}
-        />
-      </div>
+      <CygnusLocationDetailPage
+        siteConfig={siteSummary}
+        frontmatter={{
+          title: fm.title,
+          description: fm.description,
+          heroImage: fm.hero?.image || fm.heroImage,
+          faqs,
+          hero: fm.hero,
+        }}
+        mdxContent={mdxContent}
+        breadcrumbs={breadcrumbItems}
+      />
 
       <Schema
         org={{

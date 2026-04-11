@@ -26,7 +26,8 @@
       "@platform/theme-system/plugin": ["../../packages/theme-system/src/tailwind-plugin.ts"],
       "@platform/theme-system/*": ["../../packages/theme-system/src/*"],
       "@platform/themes/lyra": ["../../packages/themes/lyra/index.ts"],
-      "@platform/themes/lyra/components": ["../../packages/themes/lyra/components/index.ts"]
+      "@platform/themes/lyra/components": ["../../packages/themes/lyra/components/index.ts"],
+      "@platform/themes/lyra/pages": ["../../packages/themes/lyra/pages/index.ts"]
     }
   },
   "include": [

@@ -10,24 +10,17 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Link from "next/link";
-import {
-  Schema,
-  Breadcrumbs,
-  ServiceHero,
-  ServiceAbout,
-  ServiceBenefits,
-  FAQSection,
-  CTASection,
-  type FAQItem,
-  type AboutContent,
-} from "@platform/core-components";
+import type { SiteConfigSummary } from "@platform/core-components";
+import { Schema, type FAQItem, type AboutContent } from "@platform/core-components";
 import { deriveLocationContext, getAreaServed } from "@platform/core-components/lib/location-utils";
+import { LyraServiceDetailPage } from "@platform/themes/lyra/pages";
 import { getServices, getService } from "@/lib/content";
 import { getLocationSlugs } from "@/lib/locations-config";
 import { loadMdx } from "@/lib/mdx";
 import { getImageUrl } from "@/lib/image";
 import { absUrl } from "@/lib/site";
 import { siteConfig } from "@/site.config";
+import { PHONE_DISPLAY } from "@/lib/contact-info";
 
 /** Service frontmatter shape */
 interface ServiceFrontmatter {
@@ -133,9 +126,7 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
     .replace(" Systems", "");
 
   const heroImage = fm.hero?.image || fm.heroImage;
-  const benefits = fm.benefits || [];
   const faqs = fm.faqs || [];
-  const about = fm.about;
 
   // Detect if this is a location-specific service
   const knownLocations = await getLocationSlugs();
@@ -164,15 +155,18 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
       ? getAreaServed(locationContext.location)
       : siteConfig.serviceAreas;
 
-  return (
-    <>
-      {/* Breadcrumbs */}
-      <div className="bg-surface-subtle border-b border-surface-border">
-        <div className="container-standard py-4">
-          <Breadcrumbs items={breadcrumbItems} />
-        </div>
-      </div>
+  const siteSummary: SiteConfigSummary = {
+    name: siteConfig.business.name,
+    tagline: siteConfig.tagline,
+    phone: siteConfig.business.phone,
+    phoneDisplay: PHONE_DISPLAY,
+    address: { city: siteConfig.business.address.city },
+    cta: siteConfig.cta,
+    stats: siteConfig.credentials?.stats,
+  };
 
+  const schemaNodes = (
+    <>
       {/* Back-link banner for location-specific pages */}
       {isLocationSpecific && locationContext && (
         <section className="bg-brand-primary/5 border-b">
@@ -200,54 +194,6 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
           </div>
         </section>
       )}
-
-      <div>
-        {/* Hero Section */}
-        <ServiceHero
-          title={fm.title}
-          description={fm.description || ""}
-          badge={fm.badge}
-          heroImage={heroImage}
-          phone={siteConfig.business.phone}
-        />
-
-        {/* Benefits Section */}
-        {benefits.length > 0 && <ServiceBenefits items={benefits} />}
-
-        {/* About Section */}
-        {about && <ServiceAbout serviceName={serviceName} slug={slug} about={about} />}
-
-        {/* MDX Content */}
-        <section className="section-standard bg-surface-background">
-          <div className="container-standard">
-            <div className="max-w-4xl mx-auto">
-              <div className="prose prose-lg max-w-none prose-headings:text-surface-foreground prose-p:text-surface-muted-foreground prose-a:text-brand-primary prose-a:no-underline hover:prose-a:underline prose-strong:text-surface-foreground prose-li:text-surface-muted-foreground">
-                {mdxContent}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* FAQs */}
-        {faqs.length > 0 && (
-          <FAQSection
-            items={faqs}
-            title="Frequently Asked Questions"
-            phone={siteConfig.business.phone}
-          />
-        )}
-
-        {/* CTA Section */}
-        <CTASection
-          title={`Ready for Professional ${serviceName}?`}
-          description={`Contact ${siteConfig.business.name} today for a free quote. Our expert team is ready to help with your ${serviceName.toLowerCase()} needs.`}
-          primaryButtonText="Get Free Quote"
-          primaryButtonUrl="/contact"
-          secondaryButtonText={`Call ${siteConfig.business.phone}`}
-          secondaryButtonUrl={`tel:${siteConfig.business.phone.replace(/\s/g, "")}`}
-        />
-      </div>
-
       <Schema
         org={{
           name: siteConfig.business.name,
@@ -282,5 +228,22 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
         faqs={faqs}
       />
     </>
+  );
+
+  return (
+    <LyraServiceDetailPage
+      siteConfig={siteSummary}
+      frontmatter={{
+        title: fm.title,
+        description: fm.description,
+        badge: fm.badge,
+        heroImage,
+        benefits: fm.benefits,
+        faqs: fm.faqs,
+      }}
+      mdxContent={mdxContent}
+      breadcrumbs={breadcrumbItems}
+      schemaNodes={schemaNodes}
+    />
   );
 }

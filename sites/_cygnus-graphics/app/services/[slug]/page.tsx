@@ -2,25 +2,16 @@
  * Service Detail Page
  * ===================
  *
- * Individual service page with MDX content rendering.
- * Features hero, benefits, about section, FAQs, and CTA.
- * Supports location-specific service pages with location-aware breadcrumbs and schema.
+ * Thin wrapper — delegates rendering to CygnusServiceDetailPage template.
+ * Retains metadata, generateStaticParams, schema, and location-aware breadcrumbs.
  */
 
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Link from "next/link";
-import {
-  Schema,
-  Breadcrumbs,
-  ServiceHero,
-  ServiceAbout,
-  ServiceBenefits,
-  FAQSection,
-  CTASection,
-  type FAQItem,
-  type AboutContent,
-} from "@platform/core-components";
+import type { SiteConfigSummary } from "@platform/core-components";
+import { Schema } from "@platform/core-components";
+import { CygnusServiceDetailPage } from "@platform/themes/cygnus/pages";
 import { deriveLocationContext, getAreaServed } from "@platform/core-components/lib/location-utils";
 import { getServices, getService } from "@/lib/content";
 import { getLocationSlugs } from "@/lib/locations-config";
@@ -28,6 +19,8 @@ import { loadMdx } from "@/lib/mdx";
 import { getImageUrl } from "@/lib/image";
 import { absUrl } from "@/lib/site";
 import { siteConfig } from "@/site.config";
+import { PHONE_DISPLAY } from "@/lib/contact-info";
+import type { FAQItem } from "@platform/core-components";
 
 /** Service frontmatter shape */
 interface ServiceFrontmatter {
@@ -40,7 +33,6 @@ interface ServiceFrontmatter {
   heroImage?: string;
   benefits?: string[];
   faqs?: FAQItem[];
-  about?: AboutContent;
 }
 
 export const dynamic = "force-static";
@@ -70,7 +62,6 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
     .replace(" Solutions", "")
     .replace(" Systems", "");
 
-  // Location-aware title generation
   const knownLocations = await getLocationSlugs();
   const locationContext = deriveLocationContext(slug, knownLocations);
 
@@ -135,47 +126,44 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
   const heroImage = fm.hero?.image || fm.heroImage;
   const benefits = fm.benefits || [];
   const faqs = fm.faqs || [];
-  const about = fm.about;
 
-  // Detect if this is a location-specific service
   const knownLocations = await getLocationSlugs();
   const locationContext = deriveLocationContext(slug, knownLocations);
   const isLocationSpecific = locationContext !== null && locationContext.isLocationSpecific;
 
-  // Build location-aware breadcrumbs
-  const breadcrumbItems =
-    isLocationSpecific && locationContext
-      ? [
-          { name: "Locations", href: "/locations" },
-          {
-            name: locationContext.locationName,
-            href: `/locations/${locationContext.locationSlug}`,
-          },
-          { name: serviceName, href: `/services/${slug}`, current: true },
-        ]
-      : [
-          { name: "Services", href: "/services" },
-          { name: serviceName, href: `/services/${slug}`, current: true },
-        ];
+  const breadcrumbItems = isLocationSpecific && locationContext
+    ? [
+        { name: "Locations", href: "/locations" },
+        {
+          name: locationContext.locationName,
+          href: `/locations/${locationContext.locationSlug}`,
+        },
+        { name: serviceName, href: `/services/${slug}`, current: true },
+      ]
+    : [
+        { name: "Services", href: "/services" },
+        { name: serviceName, href: `/services/${slug}`, current: true },
+      ];
 
-  // Build location-aware areaServed for Schema
-  const areaServed =
-    isLocationSpecific && locationContext
-      ? getAreaServed(locationContext.location)
-      : siteConfig.serviceAreas;
+  const areaServed = isLocationSpecific && locationContext
+    ? getAreaServed(locationContext.location)
+    : siteConfig.serviceAreas;
+
+  const siteSummary: SiteConfigSummary = {
+    name: siteConfig.business.name,
+    tagline: siteConfig.tagline,
+    phone: siteConfig.business.phone,
+    phoneDisplay: PHONE_DISPLAY,
+    address: { city: siteConfig.business.address.city },
+    cta: siteConfig.cta,
+    stats: siteConfig.credentials?.stats,
+  };
 
   return (
     <>
-      {/* Breadcrumbs */}
-      <div className="bg-surface-subtle border-b border-surface-border">
-        <div className="container-standard py-4">
-          <Breadcrumbs items={breadcrumbItems} />
-        </div>
-      </div>
-
       {/* Back-link banner for location-specific pages */}
       {isLocationSpecific && locationContext && (
-        <section className="bg-brand-primary/5 border-b">
+        <section className="bg-brand-primary/5 border-b border-surface-card-border">
           <div className="container-standard py-4">
             <Link
               href={`/locations/${locationContext.locationSlug}`}
@@ -201,52 +189,19 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
         </section>
       )}
 
-      <div>
-        {/* Hero Section */}
-        <ServiceHero
-          title={fm.title}
-          description={fm.description || ""}
-          badge={fm.badge}
-          heroImage={heroImage}
-          phone={siteConfig.business.phone}
-        />
-
-        {/* Benefits Section */}
-        {benefits.length > 0 && <ServiceBenefits items={benefits} />}
-
-        {/* About Section */}
-        {about && <ServiceAbout serviceName={serviceName} slug={slug} about={about} />}
-
-        {/* MDX Content */}
-        <section className="section-standard bg-surface-background">
-          <div className="container-standard">
-            <div className="max-w-4xl mx-auto">
-              <div className="prose prose-lg max-w-none prose-headings:text-surface-foreground prose-p:text-surface-muted-foreground prose-a:text-brand-primary prose-a:no-underline hover:prose-a:underline prose-strong:text-surface-foreground prose-li:text-surface-muted-foreground">
-                {mdxContent}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* FAQs */}
-        {faqs.length > 0 && (
-          <FAQSection
-            items={faqs}
-            title="Frequently Asked Questions"
-            phone={siteConfig.business.phone}
-          />
-        )}
-
-        {/* CTA Section */}
-        <CTASection
-          title={`Ready for Professional ${serviceName}?`}
-          description={`Contact ${siteConfig.business.name} today for a free quote. Our expert team is ready to help with your ${serviceName.toLowerCase()} needs.`}
-          primaryButtonText="Get Free Quote"
-          primaryButtonUrl="/contact"
-          secondaryButtonText={`Call ${siteConfig.business.phone}`}
-          secondaryButtonUrl={`tel:${siteConfig.business.phone.replace(/\s/g, "")}`}
-        />
-      </div>
+      <CygnusServiceDetailPage
+        siteConfig={siteSummary}
+        frontmatter={{
+          title: fm.title,
+          description: fm.description,
+          badge: fm.badge,
+          heroImage,
+          benefits,
+          faqs,
+        }}
+        mdxContent={mdxContent}
+        breadcrumbs={breadcrumbItems}
+      />
 
       <Schema
         org={{
