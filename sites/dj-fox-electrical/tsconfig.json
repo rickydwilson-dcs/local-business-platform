@@ -27,6 +27,7 @@
       "@platform/theme-system/*": ["../../packages/theme-system/src/*"],
       "@platform/themes/orion": ["../../packages/themes/orion/index.ts"],
       "@platform/themes/orion/components": ["../../packages/themes/orion/components/index.ts"],
+      "@platform/themes/orion/pages": ["../../packages/themes/orion/pages/index.ts"],
       "@platform/themes/vega": ["../../packages/themes/vega/index.ts"]
     }
   },
