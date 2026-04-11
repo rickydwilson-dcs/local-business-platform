@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DCS - Websites as Professional as You Are</title>
+<meta name="description" content="Digital Consulting Services builds professional websites for local service businesses. Design, copywriting, hosting and support from £995.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --slate-900:#0f172a;
+  --slate-800:#1e293b;
+  --slate-700:#334155;
+  --slate-600:#475569;
+  --slate-500:#64748b;
+  --slate-400:#94a3b8;
+  --slate-300:#cbd5e1;
+  --slate-200:#e2e8f0;
+  --slate-100:#f1f5f9;
+  --slate-50:#f8fafc;
+  --white:#ffffff;
+  --accent:#2563eb;
+  --accent-dark:#1d4ed8;
+  --accent-light:#dbeafe;
+  --green:#16a34a;
+  --radius:8px;
+}
+html{scroll-behavior:auto}
+body{font-family:'Inter',system-ui,-apple-system,sans-serif;color:var(--slate-700);background:var(--slate-50);line-height:1.6;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+h1,h2,h3,h4,h5,h6{color:var(--slate-900);line-height:1.2}
+.container{max-width:1120px;margin:0 auto;padding:0 24px}
+
+/* ---- HEADER ---- */
+.site-header{position:sticky;top:0;z-index:100;background:var(--white);border-bottom:1px solid var(--slate-200)}
+.header-inner{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{font-size:1.5rem;font-weight:800;color:var(--slate-900);letter-spacing:-0.02em}
+.nav-links{display:flex;gap:32px;align-items:center}
+.nav-links a{font-size:0.875rem;font-weight:500;color:var(--slate-600)}
+.nav-links a:hover{color:var(--slate-900)}
+.header-cta{display:inline-flex;align-items:center;padding:8px 20px;background:var(--accent);color:var(--white);font-size:0.875rem;font-weight:600;border-radius:var(--radius);border:none;cursor:pointer}
+.header-cta:hover{background:var(--accent-dark)}
+.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}
+.hamburger span{display:block;width:22px;height:2px;background:var(--slate-700);border-radius:1px}
+.mobile-nav{display:none;position:absolute;top:64px;left:0;right:0;background:var(--white);border-bottom:1px solid var(--slate-200);padding:16px 24px;flex-direction:column;gap:16px}
+.mobile-nav.open{display:flex}
+.mobile-nav a{font-size:1rem;font-weight:500;color:var(--slate-700);padding:8px 0}
+
+@media(max-width:768px){
+  .nav-links{display:none}
+  .hamburger{display:flex}
+}
+
+/* ---- HERO ---- */
+.hero{padding:80px 0 64px;background:var(--white);border-bottom:1px solid var(--slate-200)}
+.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.hero-badge{display:inline-block;font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--accent);background:var(--accent-light);padding:6px 14px;border-radius:20px;margin-bottom:20px}
+.hero h1{font-size:3rem;font-weight:800;letter-spacing:-0.03em;margin-bottom:16px;color:var(--slate-900)}
+.hero p{font-size:1.125rem;color:var(--slate-600);margin-bottom:32px;max-width:480px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+.btn-primary{display:inline-flex;align-items:center;padding:12px 28px;background:var(--accent);color:var(--white);font-size:0.9375rem;font-weight:600;border-radius:var(--radius);border:none;cursor:pointer}
+.btn-primary:hover{background:var(--accent-dark)}
+.btn-secondary{display:inline-flex;align-items:center;padding:12px 28px;background:var(--white);color:var(--slate-700);font-size:0.9375rem;font-weight:600;border-radius:var(--radius);border:1px solid var(--slate-300);cursor:pointer}
+.btn-secondary:hover{border-color:var(--slate-400)}
+.hero-visual{display:flex;align-items:center;justify-content:center}
+.geo-pattern{width:100%;max-width:420px;aspect-ratio:1;position:relative}
+.geo-pattern .circle{position:absolute;border-radius:50%;border:2px solid var(--slate-200)}
+.geo-pattern .circle-1{width:100%;height:100%;top:0;left:0}
+.geo-pattern .circle-2{width:70%;height:70%;top:15%;left:15%;border-color:var(--accent);opacity:0.3}
+.geo-pattern .circle-3{width:40%;height:40%;top:30%;left:30%;background:var(--accent-light);border:none}
+.geo-pattern .square{position:absolute;width:50%;height:50%;top:25%;left:25%;border:2px solid var(--slate-300);border-radius:4px;transform:rotate(45deg)}
+.geo-pattern .dot{position:absolute;width:12px;height:12px;border-radius:50%;background:var(--accent)}
+.geo-pattern .dot-1{top:10%;left:50%}
+.geo-pattern .dot-2{bottom:20%;left:15%}
+.geo-pattern .dot-3{top:40%;right:8%}
+@media(max-width:768px){
+  .hero{padding:48px 0}
+  .hero-grid{grid-template-columns:1fr;gap:40px}
+  .hero h1{font-size:2.25rem}
+  .hero-visual{order:-1}
+  .geo-pattern{max-width:280px}
+}
+
+/* ---- SECTION SHARED ---- */
+.section{padding:80px 0}
+.section-alt{background:var(--white);border-top:1px solid var(--slate-200);border-bottom:1px solid var(--slate-200)}
+.section-header{text-align:center;max-width:640px;margin:0 auto 48px}
+.section-header h2{font-size:2rem;font-weight:800;letter-spacing:-0.02em;margin-bottom:12px}
+.section-header p{font-size:1.0625rem;color:var(--slate-500)}
+.section-label{display:inline-block;font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--accent);margin-bottom:12px}
+
+@media(max-width:768px){
+  .section{padding:56px 0}
+  .section-header h2{font-size:1.625rem}
+}
+
+/* ---- HOW IT WORKS ---- */
+.steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:32px}
+.step-card{position:relative;padding:28px 24px;background:var(--white);border:1px solid var(--slate-200);border-radius:var(--radius)}
+.step-num{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;background:var(--accent);color:var(--white);font-size:0.875rem;font-weight:700;border-radius:50%;margin-bottom:16px}
+.step-card h3{font-size:1.0625rem;font-weight:700;margin-bottom:8px}
+.step-card p{font-size:0.875rem;color:var(--slate-500);line-height:1.55}
+@media(max-width:900px){.steps-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.steps-grid{grid-template-columns:1fr}}
+
+/* ---- WHAT'S INCLUDED ---- */
+.included-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.included-card{padding:28px 24px;border:1px solid var(--slate-200);border-radius:var(--radius);background:var(--slate-50)}
+.included-icon{width:40px;height:40px;display:flex;align-items:center;justify-content:center;background:var(--accent-light);border-radius:var(--radius);margin-bottom:16px;color:var(--accent);font-size:1.125rem;font-weight:700}
+.included-card h3{font-size:1rem;font-weight:700;margin-bottom:6px}
+.included-card p{font-size:0.875rem;color:var(--slate-500);line-height:1.55}
+@media(max-width:768px){.included-grid{grid-template-columns:1fr}}
+
+/* ---- PRICING ---- */
+.pricing-toggle{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:40px}
+.pricing-toggle span{font-size:0.875rem;font-weight:500;color:var(--slate-500)}
+.pricing-toggle span.active{color:var(--slate-900);font-weight:600}
+.toggle-switch{position:relative;width:48px;height:26px;background:var(--slate-300);border-radius:13px;cursor:pointer;border:none;padding:0}
+.toggle-switch::after{content:'';position:absolute;width:20px;height:20px;background:var(--white);border-radius:50%;top:3px;left:3px}
+.toggle-switch.on{background:var(--accent)}
+.toggle-switch.on::after{left:25px}
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:24px}
+.pricing-card{padding:32px 28px;background:var(--white);border:1px solid var(--slate-200);border-radius:var(--radius);display:flex;flex-direction:column}
+.pricing-card.featured{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.pricing-card .tier-label{font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;color:var(--accent);margin-bottom:8px}
+.pricing-card h3{font-size:1.25rem;font-weight:700;margin-bottom:4px}
+.pricing-card .price{font-size:2.25rem;font-weight:800;color:var(--slate-900);margin:12px 0 4px}
+.pricing-card .price-sub{font-size:0.8125rem;color:var(--slate-500);margin-bottom:20px}
+.pricing-card .desc{font-size:0.875rem;color:var(--slate-500);margin-bottom:20px;line-height:1.5}
+.pricing-features{flex:1;display:flex;flex-direction:column;gap:10px;margin-bottom:24px}
+.pricing-features li{font-size:0.875rem;color:var(--slate-600);display:flex;align-items:flex-start;gap:8px}
+.pricing-features li::before{content:'\2713';color:var(--green);font-weight:700;flex-shrink:0;margin-top:1px}
+.pricing-card .btn-primary{width:100%;justify-content:center;text-align:center}
+.pricing-card .btn-secondary{width:100%;justify-content:center;text-align:center}
+.pricing-note{text-align:center;font-size:0.8125rem;color:var(--slate-400);max-width:640px;margin:0 auto}
+@media(max-width:768px){
+  .pricing-grid{grid-template-columns:1fr;max-width:400px;margin-left:auto;margin-right:auto}
+}
+
+/* ---- RECENT WORK ---- */
+.work-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.work-card{border:1px solid var(--slate-200);border-radius:var(--radius);overflow:hidden;background:var(--white)}
+.work-thumb{height:200px;display:flex;align-items:center;justify-content:center;font-size:0.875rem;font-weight:600;color:var(--slate-400)}
+.work-thumb-1{background:linear-gradient(135deg,var(--slate-100),var(--slate-200))}
+.work-thumb-2{background:linear-gradient(135deg,#fef3c7,#fde68a)}
+.work-thumb-3{background:linear-gradient(135deg,var(--accent-light),#bfdbfe)}
+.work-body{padding:20px 24px}
+.work-body h3{font-size:1.0625rem;font-weight:700;margin-bottom:4px}
+.work-body p{font-size:0.875rem;color:var(--slate-500)}
+@media(max-width:768px){.work-grid{grid-template-columns:1fr}}
+
+/* ---- TESTIMONIALS ---- */
+.testimonials-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.testimonial-card{padding:28px 24px;background:var(--white);border:1px solid var(--slate-200);border-radius:var(--radius)}
+.testimonial-card blockquote{font-size:0.9375rem;color:var(--slate-600);line-height:1.6;margin-bottom:16px;font-style:normal}
+.testimonial-card blockquote::before{content:'\201C';font-size:1.75rem;color:var(--accent);line-height:1;display:block;margin-bottom:4px}
+.testimonial-author{font-size:0.8125rem;font-weight:600;color:var(--slate-800)}
+.testimonial-role{font-size:0.75rem;color:var(--slate-400)}
+@media(max-width:768px){.testimonials-grid{grid-template-columns:1fr}}
+
+/* ---- SEE WHAT'S POSSIBLE ---- */
+.examples-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.example-tile{padding:32px 24px;border:1px solid var(--slate-200);border-radius:var(--radius);background:var(--white);text-align:center}
+.example-tile .tile-icon{width:56px;height:56px;margin:0 auto 16px;border-radius:var(--radius);display:flex;align-items:center;justify-content:center;font-size:1.5rem}
+.tile-icon-1{background:#dbeafe;color:#2563eb}
+.tile-icon-2{background:#dcfce7;color:#16a34a}
+.tile-icon-3{background:#fef3c7;color:#d97706}
+.example-tile h3{font-size:1rem;font-weight:700;margin-bottom:6px}
+.example-tile p{font-size:0.875rem;color:var(--slate-500)}
+@media(max-width:768px){.examples-grid{grid-template-columns:1fr}}
+
+/* ---- CTA BAND ---- */
+.cta-band{padding:64px 0;background:var(--slate-900);text-align:center}
+.cta-band h2{font-size:2rem;font-weight:800;color:var(--white);margin-bottom:12px;letter-spacing:-0.02em}
+.cta-band p{font-size:1.0625rem;color:var(--slate-400);margin-bottom:28px;max-width:480px;margin-left:auto;margin-right:auto}
+.cta-band .btn-primary{background:var(--accent);font-size:1rem;padding:14px 32px}
+.cta-band .btn-primary:hover{background:var(--accent-dark)}
+
+/* ---- FAQ ---- */
+.faq-list{max-width:720px;margin:0 auto}
+.faq-item{border-bottom:1px solid var(--slate-200)}
+.faq-item:first-child{border-top:1px solid var(--slate-200)}
+.faq-question{width:100%;display:flex;align-items:center;justify-content:space-between;padding:20px 0;background:none;border:none;cursor:pointer;text-align:left;font-size:1rem;font-weight:600;color:var(--slate-800);font-family:inherit;gap:16px}
+.faq-question:hover{color:var(--slate-900)}
+.faq-icon{flex-shrink:0;font-size:1.25rem;color:var(--slate-400);font-weight:300}
+.faq-answer{display:none;padding:0 0 20px;font-size:0.9375rem;color:var(--slate-500);line-height:1.6}
+.faq-item.open .faq-answer{display:block}
+.faq-item.open .faq-icon{transform:rotate(45deg)}
+
+/* ---- FOOTER ---- */
+.site-footer{background:var(--slate-900);padding:56px 0 32px;color:var(--slate-400)}
+.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.5fr;gap:40px;margin-bottom:40px}
+.footer-logo{font-size:1.5rem;font-weight:800;color:var(--white);margin-bottom:8px}
+.footer-strapline{font-size:0.875rem;color:var(--slate-400);line-height:1.5}
+.footer-col h4{font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--slate-300);margin-bottom:16px}
+.footer-col ul{display:flex;flex-direction:column;gap:10px}
+.footer-col a{font-size:0.875rem;color:var(--slate-400)}
+.footer-col a:hover{color:var(--white)}
+.footer-contact p{font-size:0.875rem;margin-bottom:6px}
+.footer-contact a{color:var(--slate-400)}
+.footer-contact a:hover{color:var(--white)}
+.footer-bottom{border-top:1px solid var(--slate-800);padding-top:24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.footer-bottom p{font-size:0.8125rem;color:var(--slate-500)}
+.footer-legal{display:flex;gap:20px}
+.footer-legal a{font-size:0.8125rem;color:var(--slate-500)}
+.footer-legal a:hover{color:var(--slate-300)}
+@media(max-width:768px){
+  .footer-grid{grid-template-columns:1fr 1fr;gap:32px}
+}
+@media(max-width:520px){
+  .footer-grid{grid-template-columns:1fr}
+  .footer-bottom{flex-direction:column;align-items:flex-start}
+}
+
+/* ---- FOCUS / ACCESSIBILITY ---- */
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:2px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+</style>
+</head>
+<body>
+
+<!-- ========== HEADER ========== -->
+<header class="site-header" role="banner">
+  <div class="container header-inner">
+    <a href="#" class="logo" aria-label="DCS home">DCS</a>
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="#services">Services</a>
+      <a href="#work">Our Work</a>
+      <a href="#examples">Examples</a>
+      <a href="#about">About</a>
+      <a href="#faq">Blog</a>
+      <a href="#contact" class="header-cta">Get in touch</a>
+    </nav>
+    <button class="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <nav id="mobile-nav" class="mobile-nav" aria-label="Mobile navigation">
+    <a href="#services">Services</a>
+    <a href="#work">Our Work</a>
+    <a href="#examples">Examples</a>
+    <a href="#about">About</a>
+    <a href="#faq">Blog</a>
+    <a href="#contact" class="header-cta" style="align-self:flex-start">Get in touch</a>
+  </nav>
+</header>
+
+<!-- ========== HERO ========== -->
+<section class="hero">
+  <div class="container hero-grid">
+    <div class="hero-content">
+      <span class="hero-badge">Web Design for Trade &amp; Service Businesses</span>
+      <h1>Websites as professional as you are</h1>
+      <p>We build fast, mobile-friendly websites that help local tradespeople and service businesses get found online and win more work. No templates. No nonsense.</p>
+      <div class="hero-actions">
+        <a href="#pricing" class="btn-primary">View pricing</a>
+        <a href="#work" class="btn-secondary">See our work</a>
+      </div>
+    </div>
+    <div class="hero-visual" aria-hidden="true">
+      <div class="geo-pattern">
+        <div class="circle circle-1"></div>
+        <div class="circle circle-2"></div>
+        <div class="circle circle-3"></div>
+        <div class="square"></div>
+        <div class="dot dot-1"></div>
+        <div class="dot dot-2"></div>
+        <div class="dot dot-3"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== HOW IT WORKS ========== -->
+<section class="section section-alt" id="about">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">How It Works</span>
+      <h2>Four simple steps to your new website</h2>
+      <p>No jargon, no fuss. We handle everything so you can focus on running your business.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <h3>Discovery call</h3>
+        <p>We have a quick chat about your business, the customers you want to attract, and what you need from your website. No hard sell, just a conversation.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <h3>Design &amp; copy</h3>
+        <p>We create a bespoke design and write all the content for you. You review it, request changes, and approve when you are happy.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <h3>Build &amp; launch</h3>
+        <p>We build your site with clean code, optimise it for search engines, and launch it on fast, secure hosting. The whole process takes around two to three weeks.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">4</div>
+        <h3>Ongoing support</h3>
+        <p>After launch we keep your site updated, secure, and performing well. Need a change? Just drop us a message and we will sort it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== WHAT'S INCLUDED ========== -->
+<section class="section" id="services">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">What's Included</span>
+      <h2>Everything you need, nothing you don't</h2>
+      <p>Every package comes with the essentials to get your business noticed online.</p>
+    </div>
+    <div class="included-grid">
+      <div class="included-card">
+        <div class="included-icon">D</div>
+        <h3>Bespoke Design</h3>
+        <p>A unique design tailored to your brand and industry. No cookie-cutter templates or drag-and-drop builders.</p>
+      </div>
+      <div class="included-card">
+        <div class="included-icon">C</div>
+        <h3>Professional Copywriting</h3>
+        <p>Engaging, SEO-optimised content written for your target customers. We do the research so you don't have to.</p>
+      </div>
+      <div class="included-card">
+        <div class="included-icon">B</div>
+        <h3>Expert Build</h3>
+        <p>Hand-coded with modern technologies for lightning-fast load times and a perfect score on Google PageSpeed.</p>
+      </div>
+      <div class="included-card">
+        <div class="included-icon">H</div>
+        <h3>Fast Hosting</h3>
+        <p>Enterprise-grade hosting with a global CDN. Your site loads in under a second, wherever your customers are.</p>
+      </div>
+      <div class="included-card">
+        <div class="included-icon">S</div>
+        <h3>Security &amp; SSL</h3>
+        <p>Free SSL certificate, automatic backups, and proactive security monitoring to keep your site safe around the clock.</p>
+      </div>
+      <div class="included-card">
+        <div class="included-icon">+</div>
+        <h3>Ongoing Support</h3>
+        <p>Content updates, technical support, and performance monitoring included. We are always just an email away.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== PRICING ========== -->
+<section class="section section-alt" id="pricing">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Pricing</span>
+      <h2>Transparent pricing, no surprises</h2>
+      <p>Choose a one-off build with a monthly plan, or spread the cost with an all-inclusive monthly subscription.</p>
+    </div>
+    <div class="pricing-toggle">
+      <span id="label-oneoff" class="active">One-off + monthly</span>
+      <button class="toggle-switch" id="pricing-toggle" role="switch" aria-checked="false" aria-labelledby="label-oneoff label-monthly"></button>
+      <span id="label-monthly">Monthly only</span>
+    </div>
+    <div class="pricing-grid">
+      <!-- Starter -->
+      <div class="pricing-card">
+        <span class="tier-label">Starter</span>
+        <h3>Starter</h3>
+        <div class="price" data-oneoff="&pound;995" data-monthly="&pound;59"><span class="price-value">&pound;995</span></div>
+        <div class="price-sub" data-oneoff-sub="one-off build + &pound;29/mo hosting" data-monthly-sub="per month, 12-month minimum">one-off build + &pound;29/mo hosting</div>
+        <p class="desc">Perfect for tradespeople who need a professional online presence to start winning work.</p>
+        <ul class="pricing-features">
+          <li>Up to 5 pages</li>
+          <li>Mobile responsive design</li>
+          <li>Contact form</li>
+          <li>Basic SEO setup</li>
+          <li>Google Business integration</li>
+        </ul>
+        <a href="#contact" class="btn-secondary">Get started</a>
+      </div>
+      <!-- Professional -->
+      <div class="pricing-card featured">
+        <span class="tier-label">Most Popular</span>
+        <h3>Professional</h3>
+        <div class="price" data-oneoff="&pound;1,995" data-monthly="&pound;99"><span class="price-value">&pound;1,995</span></div>
+        <div class="price-sub" data-oneoff-sub="one-off build + &pound;39/mo hosting" data-monthly-sub="per month, 12-month minimum">one-off build + &pound;39/mo hosting</div>
+        <p class="desc">For growing businesses that want to rank higher and convert more visitors into enquiries.</p>
+        <ul class="pricing-features">
+          <li>Up to 15 pages</li>
+          <li>Advanced SEO &amp; content strategy</li>
+          <li>Service area pages</li>
+          <li>Project portfolio</li>
+          <li>Review integration</li>
+          <li>Monthly analytics report</li>
+        </ul>
+        <a href="#contact" class="btn-primary">Get started</a>
+      </div>
+      <!-- Growth -->
+      <div class="pricing-card">
+        <span class="tier-label">Growth</span>
+        <h3>Growth</h3>
+        <div class="price" data-oneoff="&pound;3,495" data-monthly="&pound;149"><span class="price-value">&pound;3,495</span></div>
+        <div class="price-sub" data-oneoff-sub="one-off build + &pound;59/mo hosting" data-monthly-sub="per month, 12-month minimum">one-off build + &pound;59/mo hosting</div>
+        <p class="desc">The full package for ambitious businesses ready to dominate their local market online.</p>
+        <ul class="pricing-features">
+          <li>Unlimited pages</li>
+          <li>Blog with ongoing content</li>
+          <li>Local SEO campaign</li>
+          <li>Conversion optimisation</li>
+          <li>Priority support</li>
+          <li>Quarterly strategy call</li>
+        </ul>
+        <a href="#contact" class="btn-secondary">Get started</a>
+      </div>
+    </div>
+    <p class="pricing-note">All prices exclude VAT. Monthly subscriptions require a 12-month minimum term. One-off builds include two rounds of revisions. Need something custom? <a href="#contact" style="color:var(--accent);font-weight:500;">Get in touch</a> for a tailored quote.</p>
+  </div>
+</section>
+
+<!-- ========== RECENT WORK ========== -->
+<section class="section" id="work">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Recent Work</span>
+      <h2>Websites we've built for businesses like yours</h2>
+      <p>Real projects for real tradespeople. Have a look at what we have delivered recently.</p>
+    </div>
+    <div class="work-grid">
+      <div class="work-card">
+        <div class="work-thumb work-thumb-1">Colossus Scaffolding</div>
+        <div class="work-body">
+          <h3>Colossus Scaffolding</h3>
+          <p>Commercial scaffolding company in East Sussex. Full website with service pages, project gallery, and local SEO.</p>
+        </div>
+      </div>
+      <div class="work-card">
+        <div class="work-thumb work-thumb-2">DJ Fox Electrical</div>
+        <div class="work-body">
+          <h3>DJ Fox Electrical</h3>
+          <p>Domestic electrician covering Sussex. Professional site with service breakdowns, testimonials, and enquiry forms.</p>
+        </div>
+      </div>
+      <div class="work-card">
+        <div class="work-thumb work-thumb-3">Bexhill Removals</div>
+        <div class="work-body">
+          <h3>Bexhill Removals</h3>
+          <p>Local removals firm in Bexhill-on-Sea. Clean design with instant quote calculator and area coverage pages.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== TESTIMONIALS ========== -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Testimonials</span>
+      <h2>What our clients say</h2>
+      <p>Don't take our word for it. Here is what the people we have worked with think.</p>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <blockquote>I was sceptical about spending money on a website, but DCS made the whole thing painless. They wrote all the content, handled the design, and I started getting enquiries within the first week of going live. Best business decision I have made this year.</blockquote>
+        <p class="testimonial-author">Paul</p>
+        <p class="testimonial-role">Scaffolding Contractor, East Sussex</p>
+      </div>
+      <div class="testimonial-card">
+        <blockquote>Our old website looked like it was built in 2005. DCS gave us something modern and professional that actually reflects the quality of work we do. The whole process was straightforward and they were brilliant at explaining everything in plain English.</blockquote>
+        <p class="testimonial-author">Sarah</p>
+        <p class="testimonial-role">Electrical Services, Brighton</p>
+      </div>
+      <div class="testimonial-card">
+        <blockquote>What impressed me most was how much they understood about our industry. They did not just build a pretty website -- they built one that ranks on Google and brings in real leads. The ongoing support has been fantastic too. Highly recommended.</blockquote>
+        <p class="testimonial-author">Mark</p>
+        <p class="testimonial-role">Removals Company, Bexhill-on-Sea</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== SEE WHAT'S POSSIBLE ========== -->
+<section class="section" id="examples">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">See What's Possible</span>
+      <h2>Explore what your website could look like</h2>
+      <p>Every business is different. Here are a few directions we can take your site.</p>
+    </div>
+    <div class="examples-grid">
+      <div class="example-tile">
+        <div class="tile-icon tile-icon-1">&#9670;</div>
+        <h3>Bold &amp; Industrial</h3>
+        <p>Dark backgrounds, strong typography, and high contrast. Ideal for construction, scaffolding, and heavy trade.</p>
+      </div>
+      <div class="example-tile">
+        <div class="tile-icon tile-icon-2">&#9678;</div>
+        <h3>Clean &amp; Trusted</h3>
+        <p>Light, open layouts with plenty of white space. Perfect for electricians, plumbers, and home service pros.</p>
+      </div>
+      <div class="example-tile">
+        <div class="tile-icon tile-icon-3">&#9733;</div>
+        <h3>Warm &amp; Approachable</h3>
+        <p>Friendly colours and rounded shapes. Great for removals, cleaning services, and customer-facing businesses.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== CTA BAND ========== -->
+<section class="cta-band" id="contact">
+  <div class="container">
+    <h2>Ready to get started?</h2>
+    <p>Book a free discovery call and we will show you exactly what we can build for your business. No obligation, no hard sell.</p>
+    <a href="mailto:mail@digitalconsultingservices.co.uk" class="btn-primary">Get in touch</a>
+  </div>
+</section>
+
+<!-- ========== FAQ ========== -->
+<section class="section" id="faq">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">FAQ</span>
+      <h2>Frequently asked questions</h2>
+      <p>Quick answers to the things we get asked most often.</p>
+    </div>
+    <div class="faq-list" role="list">
+      <div class="faq-item" role="listitem">
+        <button class="faq-question" aria-expanded="false">
+          <span>How long does it take to build a website?</span>
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-answer" role="region">
+          <p>Most websites are completed within two to three weeks from the initial discovery call. Larger projects with more pages or custom functionality may take a little longer, but we will always give you a clear timeline before we start.</p>
+        </div>
+      </div>
+      <div class="faq-item" role="listitem">
+        <button class="faq-question" aria-expanded="false">
+          <span>Do I need to provide the content for my website?</span>
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-answer" role="region">
+          <p>No. We write all the content for you as part of every package. We will research your industry, understand your customers, and create professional copy that is optimised for search engines. You just need to review and approve it.</p>
+        </div>
+      </div>
+      <div class="faq-item" role="listitem">
+        <button class="faq-question" aria-expanded="false">
+          <span>What if I already have a website?</span>
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-answer" role="region">
+          <p>No problem at all. We can redesign and rebuild your existing site or start from scratch. We will handle the migration, set up redirects so you do not lose any search engine rankings, and make the switch seamless.</p>
+        </div>
+      </div>
+      <div class="faq-item" role="listitem">
+        <button class="faq-question" aria-expanded="false">
+          <span>Can I make changes to my website after it launches?</span>
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-answer" role="region">
+          <p>Absolutely. All of our monthly plans include content updates and ongoing support. Just send us an email or a message and we will make the changes for you, usually within one to two working days.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer class="site-footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">DCS</div>
+        <p class="footer-strapline">Professional websites for local service businesses. We handle the design, the build, and everything in between.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#work">Our Work</a></li>
+          <li><a href="#examples">Examples</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#faq">Blog</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col footer-contact">
+        <h4>Get in Touch</h4>
+        <p><a href="mailto:mail@digitalconsultingservices.co.uk">mail@digitalconsultingservices.co.uk</a></p>
+        <p><a href="tel:+447395063764">07395 063764</a></p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Digital Consulting Services. All rights reserved.</p>
+      <div class="footer-legal">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Hamburger menu
+(function(){
+  var btn=document.querySelector('.hamburger');
+  var nav=document.getElementById('mobile-nav');
+  btn.addEventListener('click',function(){
+    var open=nav.classList.toggle('open');
+    btn.setAttribute('aria-expanded',open);
+  });
+  // Close on link click
+  nav.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click',function(){
+      nav.classList.remove('open');
+      btn.setAttribute('aria-expanded','false');
+    });
+  });
+})();
+
+// Pricing toggle — no transitions
+(function(){
+  var toggle=document.getElementById('pricing-toggle');
+  var labelOneoff=document.getElementById('label-oneoff');
+  var labelMonthly=document.getElementById('label-monthly');
+  var isMonthly=false;
+
+  toggle.addEventListener('click',function(){
+    isMonthly=!isMonthly;
+    toggle.setAttribute('aria-checked',isMonthly);
+    toggle.classList.toggle('on',isMonthly);
+    labelOneoff.classList.toggle('active',!isMonthly);
+    labelMonthly.classList.toggle('active',isMonthly);
+
+    document.querySelectorAll('.pricing-card .price').forEach(function(el){
+      var val=isMonthly?el.getAttribute('data-monthly'):el.getAttribute('data-oneoff');
+      el.querySelector('.price-value').innerHTML=val;
+    });
+    document.querySelectorAll('.pricing-card .price-sub').forEach(function(el){
+      var val=isMonthly?el.getAttribute('data-monthly-sub'):el.getAttribute('data-oneoff-sub');
+      el.textContent=val;
+    });
+  });
+})();
+
+// FAQ accordion — instant open/close, no animation
+(function(){
+  document.querySelectorAll('.faq-question').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var item=btn.closest('.faq-item');
+      var isOpen=item.classList.contains('open');
+      // Close all
+      document.querySelectorAll('.faq-item.open').forEach(function(i){
+        i.classList.remove('open');
+        i.querySelector('.faq-question').setAttribute('aria-expanded','false');
+      });
+      // Open clicked if it was closed
+      if(!isOpen){
+        item.classList.add('open');
+        btn.setAttribute('aria-expanded','true');
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>

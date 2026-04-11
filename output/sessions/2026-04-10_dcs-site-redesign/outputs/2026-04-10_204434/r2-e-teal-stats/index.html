@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digital Consulting Services — Websites as professional as you are</title>
+<meta name="description" content="Professional websites for local service businesses. Design, build, host and support — all handled for you.">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ── Reset & Tokens ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --primary: #537D96; --primary-deep: #3d6070; --primary-light: #6b9ab5;
+  --accent: #EC8F8D; --accent-hover: #d97a78;
+  --support: #44A194; --support-dark: #349587;
+  --bg: #F4F0E4; --white: #ffffff;
+  --gray-100: #f0ece0; --gray-200: #e4dfd0; --gray-400: #9a9590; --gray-600: #6b6560; --gray-800: #2c2820;
+  --font-display: 'Space Grotesk', sans-serif; --font-body: 'Inter', sans-serif;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+body { background: var(--bg); color: var(--gray-800); font-family: var(--font-body); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+button { font-family: inherit; cursor: pointer; border: none; background: none; }
+h1, h2, h3, h4, h5, h6 { font-family: var(--font-display); font-weight: 700; line-height: 1.15; color: var(--gray-800); }
+
+@keyframes fadeSlideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+.section-label { font-family: var(--font-display); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.15em; color: var(--support); margin-bottom: 0.75rem; }
+.section-title { font-size: clamp(2rem, 4vw, 2.75rem); margin-bottom: 1rem; letter-spacing: -0.02em; }
+.section-subtitle { font-size: 1.05rem; color: var(--gray-600); max-width: 540px; line-height: 1.7; }
+.btn { display: inline-flex; align-items: center; gap: 0.5rem; font-family: var(--font-display); font-weight: 600; font-size: 0.95rem; padding: 0.85rem 1.75rem; border-radius: 12px; transition: all 0.3s var(--ease-out); }
+.btn-primary { background: var(--accent); color: var(--white); }
+.btn-primary:hover { background: var(--accent-hover); transform: translateY(-2px); }
+.btn-secondary { background: var(--white); color: var(--gray-800); }
+.btn-secondary:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
+.btn-outline { border: 2px solid var(--white); color: var(--white); background: transparent; }
+.btn-outline:hover { background: var(--white); color: var(--primary); }
+
+/* ── Header ── */
+.site-header { position: sticky; top: 0; z-index: 100; background: var(--bg); transition: box-shadow 0.3s ease; }
+.site-header.scrolled { box-shadow: 0 1px 12px rgba(0,0,0,0.06); }
+.header-inner { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+.logo { font-family: var(--font-display); font-size: 1.35rem; font-weight: 700; color: var(--primary); letter-spacing: -0.03em; }
+.nav-links { display: flex; align-items: center; gap: 2rem; }
+.nav-links a { font-family: var(--font-display); font-size: 0.9rem; font-weight: 500; color: var(--gray-600); transition: color 0.2s; }
+.nav-links a:hover { color: var(--gray-800); }
+.header-cta { font-size: 0.85rem; padding: 0.65rem 1.35rem; }
+.hamburger { display: none; flex-direction: column; gap: 5px; width: 28px; padding: 4px 0; }
+.hamburger span { display: block; height: 2px; background: var(--gray-800); border-radius: 2px; transition: all 0.3s ease; }
+.mobile-nav { display: none; position: fixed; inset: 0; top: 72px; background: var(--bg); z-index: 99; flex-direction: column; padding: 2rem 1.5rem; gap: 0.25rem; }
+.mobile-nav.open { display: flex; }
+.mobile-nav a { font-family: var(--font-display); font-size: 1.25rem; font-weight: 600; color: var(--gray-800); padding: 1rem 0; border-bottom: 1px solid var(--gray-200); }
+.mobile-nav .btn { margin-top: 1rem; text-align: center; justify-content: center; }
+
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+}
+
+/* ── Hero ── */
+.hero { position: relative; overflow: hidden; padding: 6rem 0 5rem; min-height: 80vh; display: flex; align-items: center; }
+.hero::before { content: ''; position: absolute; top: -10%; right: -5%; width: 55%; height: 130%; background: var(--primary); transform: skewX(-6deg); border-radius: 0 0 0 40px; z-index: 1; }
+.hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; position: relative; z-index: 2; }
+.hero-content { position: relative; z-index: 3; }
+.hero-content .section-label { margin-bottom: 1.25rem; }
+.hero h1 { font-size: clamp(2.5rem, 5vw, 3.75rem); letter-spacing: -0.03em; line-height: 1.08; margin-bottom: 1.25rem; color: var(--gray-800); }
+.hero p { font-size: 1.1rem; color: var(--gray-600); max-width: 460px; line-height: 1.7; margin-bottom: 2rem; }
+.hero-buttons { display: flex; gap: 1rem; flex-wrap: wrap; }
+.hero-right { position: relative; z-index: 3; display: flex; justify-content: center; }
+.hero-stats { position: relative; z-index: 3; display: flex; flex-direction: column; }
+.hero-stat { padding: 1.5rem 0; opacity: 0; }
+.hero-stat:nth-child(1) { animation: fadeSlideUp 0.6s var(--ease-out) 0.6s forwards; }
+.hero-stat:nth-child(3) { animation: fadeSlideUp 0.6s var(--ease-out) 0.75s forwards; }
+.hero-stat:nth-child(5) { animation: fadeSlideUp 0.6s var(--ease-out) 0.9s forwards; }
+.stat-number { display: block; font-family: var(--font-display); font-size: 3.5rem; font-weight: 700; color: var(--white); line-height: 1; letter-spacing: -0.03em; }
+.stat-label { display: block; font-family: var(--font-display); font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: var(--support); margin-top: 0.4rem; }
+.stat-divider { border: none; border-top: 1px solid rgba(255,255,255,0.15); margin: 0; opacity: 0; }
+.stat-divider:nth-child(2) { animation: fadeSlideUp 0.3s ease 0.65s forwards; }
+.stat-divider:nth-child(4) { animation: fadeSlideUp 0.3s ease 0.8s forwards; }
+
+@media (max-width: 768px) {
+  .hero { min-height: auto; padding: 4rem 0 3rem; }
+  .hero::before { display: none; }
+  .hero-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .hero-right { display: none; }
+}
+
+/* ── How It Works ── */
+.how-it-works { padding: 6rem 0; }
+.steps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-top: 3rem; }
+.step-card { background: var(--white); border-radius: 20px; padding: 2rem 1.5rem; transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out); }
+.step-card:nth-child(even) { transform: translateY(2rem); }
+.step-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(0,0,0,0.06); }
+.step-card:nth-child(even):hover { transform: translateY(calc(2rem - 6px)); }
+.step-number { font-family: var(--font-display); font-size: 0.75rem; font-weight: 700; color: var(--support); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1.25rem; }
+.step-icon { width: 48px; height: 48px; background: var(--gray-100); border-radius: 14px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.25rem; color: var(--primary); }
+.step-card h3 { font-size: 1.15rem; margin-bottom: 0.6rem; letter-spacing: -0.01em; }
+.step-card p { font-size: 0.9rem; color: var(--gray-600); line-height: 1.65; }
+
+@media (max-width: 900px) {
+  .steps-grid { grid-template-columns: repeat(2, 1fr); }
+  .step-card:nth-child(even) { transform: none; }
+  .step-card:nth-child(even):hover { transform: translateY(-6px); }
+}
+@media (max-width: 520px) { .steps-grid { grid-template-columns: 1fr; } }
+
+/* ── What's Included ── */
+.whats-included { padding: 6rem 0; position: relative; }
+.whats-included::before { content: ''; position: absolute; inset: 0; background: var(--white); transform: skewY(-2deg); z-index: -1; }
+.included-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3rem; }
+.included-card { background: var(--bg); border-radius: 20px; padding: 2rem 1.5rem 2rem 2rem; position: relative; overflow: hidden; transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out); }
+.included-card:nth-child(2), .included-card:nth-child(5) { transform: translateY(1.5rem); }
+.included-card::before { content: ''; position: absolute; left: 0; top: 0; width: 4px; height: 0; background: var(--support); transition: height 0.4s var(--ease-out); border-radius: 0 4px 4px 0; }
+.included-card:hover::before { height: 100%; }
+.included-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.05); }
+.included-card:nth-child(2):hover, .included-card:nth-child(5):hover { transform: translateY(calc(1.5rem - 4px)); }
+.included-icon { width: 44px; height: 44px; background: var(--white); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.25rem; color: var(--primary); }
+.included-card h3 { font-size: 1.1rem; margin-bottom: 0.5rem; letter-spacing: -0.01em; }
+.included-card p { font-size: 0.88rem; color: var(--gray-600); line-height: 1.65; }
+
+@media (max-width: 900px) {
+  .included-grid { grid-template-columns: repeat(2, 1fr); }
+  .included-card:nth-child(2), .included-card:nth-child(5) { transform: none; }
+  .included-card:nth-child(2):hover, .included-card:nth-child(5):hover { transform: translateY(-4px); }
+}
+@media (max-width: 520px) { .included-grid { grid-template-columns: 1fr; } }
+
+/* ── Pricing ── */
+.pricing { padding: 6rem 0; background: var(--primary); position: relative; overflow: hidden; }
+.pricing::before { content: ''; position: absolute; inset: 0; background: var(--primary); transform: skewY(-2deg); z-index: 0; top: -3rem; bottom: -3rem; }
+.pricing .container { position: relative; z-index: 1; }
+.pricing .section-label { color: var(--primary-light); }
+.pricing .section-title { color: var(--white); }
+.pricing .section-subtitle { color: rgba(255,255,255,0.7); }
+.toggle-wrap { display: flex; align-items: center; justify-content: center; gap: 1rem; margin: 2.5rem 0; }
+.toggle-label { font-family: var(--font-display); font-size: 0.9rem; font-weight: 500; color: rgba(255,255,255,0.7); transition: color 0.3s; }
+.toggle-label.active { color: var(--white); font-weight: 600; }
+.toggle-track { width: 52px; height: 28px; background: rgba(255,255,255,0.2); border-radius: 14px; position: relative; cursor: pointer; transition: background 0.3s; }
+.toggle-thumb { position: absolute; top: 3px; left: 3px; width: 22px; height: 22px; background: var(--white); border-radius: 50%; transition: transform 0.3s var(--ease-out); }
+.toggle-track.annual .toggle-thumb { transform: translateX(24px); }
+.save-badge { font-family: var(--font-display); font-size: 0.7rem; font-weight: 700; background: var(--accent); color: var(--white); padding: 0.2rem 0.6rem; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.05em; }
+.pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.price-card { background: var(--white); border-radius: 24px; padding: 2.5rem 2rem; position: relative; transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out); }
+.price-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(0,0,0,0.12); }
+.price-card.featured { background: var(--gray-800); color: var(--white); }
+.price-card.featured h3, .price-card.featured .price-amount, .price-card.featured .price-period { color: var(--white); }
+.price-card.featured .price-features li { color: rgba(255,255,255,0.8); }
+.price-card.featured .price-features svg { color: var(--support); }
+.price-tag { font-family: var(--font-display); font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--support); margin-bottom: 0.75rem; }
+.price-card h3 { font-size: 1.35rem; margin-bottom: 0.35rem; color: var(--gray-800); }
+.price-desc { font-size: 0.85rem; color: var(--gray-400); margin-bottom: 1.5rem; }
+.price-card.featured .price-desc { color: rgba(255,255,255,0.5); }
+.price-setup { font-family: var(--font-display); font-size: 0.8rem; color: var(--gray-600); margin-bottom: 0.25rem; }
+.price-card.featured .price-setup { color: rgba(255,255,255,0.5); }
+.price-amount { font-family: var(--font-display); font-size: 2.75rem; font-weight: 700; color: var(--gray-800); line-height: 1; letter-spacing: -0.03em; }
+.price-period { font-size: 0.85rem; color: var(--gray-400); margin-bottom: 1.75rem; }
+.price-features { margin-bottom: 2rem; display: flex; flex-direction: column; gap: 0.6rem; }
+.price-features li { display: flex; align-items: flex-start; gap: 0.6rem; font-size: 0.88rem; color: var(--gray-600); }
+.price-features svg { flex-shrink: 0; margin-top: 2px; color: var(--support); }
+.price-card .btn { width: 100%; justify-content: center; }
+.price-card.featured .btn-primary { background: var(--accent); color: var(--white); }
+
+@media (max-width: 900px) { .pricing-grid { grid-template-columns: 1fr; max-width: 420px; margin-left: auto; margin-right: auto; } }
+
+/* ── Recent Work ── */
+.recent-work { padding: 6rem 0; }
+.work-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3rem; }
+.work-card { background: var(--white); border-radius: 24px; padding: 2rem; transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out); }
+.work-card:nth-child(2) { transform: translateY(2rem); }
+.work-card:hover { transform: translateY(-8px) rotate(-0.5deg); box-shadow: 0 20px 50px rgba(0,0,0,0.07); }
+.work-card:nth-child(2):hover { transform: translateY(calc(2rem - 8px)) rotate(-0.5deg); }
+.work-thumb { width: 100%; aspect-ratio: 16/10; background: var(--gray-100); border-radius: 16px; margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: center; }
+.work-thumb-inner { font-family: var(--font-display); font-size: 1.1rem; font-weight: 600; color: var(--gray-400); }
+.work-card h3 { font-size: 1.2rem; margin-bottom: 0.35rem; }
+.work-card .work-type { font-size: 0.82rem; color: var(--gray-400); font-family: var(--font-display); font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.6rem; }
+.work-card p { font-size: 0.9rem; color: var(--gray-600); line-height: 1.6; }
+.work-link { display: inline-flex; align-items: center; gap: 0.4rem; font-family: var(--font-display); font-weight: 600; font-size: 0.95rem; color: var(--primary); margin-top: 2.5rem; transition: gap 0.3s var(--ease-out); }
+.work-link:hover { gap: 0.75rem; }
+
+@media (max-width: 900px) {
+  .work-grid { grid-template-columns: 1fr; max-width: 480px; margin-left: auto; margin-right: auto; }
+  .work-card:nth-child(2) { transform: none; }
+  .work-card:nth-child(2):hover { transform: translateY(-8px) rotate(-0.5deg); }
+}
+
+/* ── Testimonials ── */
+.testimonials { padding: 6rem 0; position: relative; }
+.testimonials::before { content: ''; position: absolute; inset: 0; background: var(--white); transform: skewY(-2deg); z-index: -1; }
+.testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3rem; }
+.testimonial-card { background: var(--bg); border-radius: 24px; padding: 2rem; transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out); }
+.testimonial-card:nth-child(1) { transform: rotate(-1.5deg); }
+.testimonial-card:nth-child(2) { transform: translateY(1.5rem) rotate(0.5deg); }
+.testimonial-card:nth-child(3) { transform: rotate(1deg); }
+.testimonial-card:hover { box-shadow: 0 16px 40px rgba(0,0,0,0.06); }
+.testimonial-card.featured { background: var(--primary); color: var(--white); }
+.testimonial-card.featured .testimonial-text { color: rgba(255,255,255,0.9); }
+.testimonial-card.featured .testimonial-role { color: rgba(255,255,255,0.5); }
+.testimonial-card.featured .testimonial-stars { color: var(--accent); }
+.testimonial-stars { color: var(--accent); font-size: 0.9rem; margin-bottom: 1rem; letter-spacing: 2px; }
+.testimonial-text { font-size: 0.95rem; line-height: 1.7; color: var(--gray-600); margin-bottom: 1.5rem; }
+.testimonial-author { font-family: var(--font-display); font-weight: 600; font-size: 0.95rem; }
+.testimonial-role { font-size: 0.8rem; color: var(--gray-400); margin-top: 0.15rem; }
+
+@media (max-width: 900px) {
+  .testimonials-grid { grid-template-columns: 1fr; max-width: 480px; margin-left: auto; margin-right: auto; }
+  .testimonial-card:nth-child(1) { transform: none; }
+  .testimonial-card:nth-child(2) { transform: none; }
+  .testimonial-card:nth-child(3) { transform: none; }
+}
+
+/* ── Examples ── */
+.examples { padding: 6rem 0; }
+.examples-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; grid-template-rows: auto auto; gap: 1.5rem; margin-top: 3rem; }
+.example-tile { background: var(--white); border-radius: 20px; padding: 2.5rem 2rem; display: flex; flex-direction: column; justify-content: flex-end; transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out); }
+.example-tile:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.06); }
+.example-tile:first-child { grid-row: 1 / 3; background: var(--primary); color: var(--white); }
+.example-tile:first-child h3 { color: var(--white); }
+.example-tile:first-child p { color: rgba(255,255,255,0.8); }
+.example-tile:first-child .example-label { color: var(--primary-light); }
+.example-label { font-family: var(--font-display); font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--support); margin-bottom: 0.75rem; }
+.example-tile h3 { font-size: 1.25rem; margin-bottom: 0.5rem; }
+.example-tile p { font-size: 0.88rem; color: var(--gray-600); line-height: 1.6; }
+
+@media (max-width: 768px) {
+  .examples-grid { grid-template-columns: 1fr; }
+  .example-tile:first-child { grid-row: auto; }
+}
+
+/* ── CTA Banner ── */
+.cta-banner { padding: 5rem 0; background: var(--primary); position: relative; overflow: hidden; }
+.cta-banner::before { content: ''; position: absolute; inset: 0; background: var(--primary); transform: skewY(-2deg); z-index: 0; top: -2rem; bottom: -2rem; }
+.cta-banner .container { position: relative; z-index: 1; text-align: center; }
+.cta-banner h2 { font-size: clamp(1.75rem, 3.5vw, 2.5rem); color: var(--white); margin-bottom: 1rem; letter-spacing: -0.02em; }
+.cta-banner p { color: rgba(255,255,255,0.75); font-size: 1.05rem; margin-bottom: 2rem; max-width: 520px; margin-left: auto; margin-right: auto; }
+.cta-banner .btn { font-size: 1rem; padding: 1rem 2rem; }
+
+/* ── FAQ ── */
+.faq { padding: 6rem 0; }
+.faq-list { max-width: 720px; margin: 3rem auto 0; display: flex; flex-direction: column; gap: 0.75rem; }
+.faq-item { background: var(--white); border-radius: 16px; overflow: hidden; transition: box-shadow 0.3s ease; }
+.faq-item:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.04); }
+.faq-question { width: 100%; display: flex; align-items: center; justify-content: space-between; padding: 1.25rem 1.5rem; font-family: var(--font-display); font-size: 1rem; font-weight: 600; color: var(--gray-800); text-align: left; cursor: pointer; background: none; border: none; }
+.faq-icon { width: 24px; height: 24px; flex-shrink: 0; position: relative; }
+.faq-icon::before, .faq-icon::after { content: ''; position: absolute; background: var(--gray-400); border-radius: 2px; transition: transform 0.3s var(--ease-out); }
+.faq-icon::before { width: 14px; height: 2px; top: 11px; left: 5px; }
+.faq-icon::after { width: 2px; height: 14px; top: 5px; left: 11px; }
+.faq-item.open .faq-icon::after { transform: rotate(90deg); }
+.faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s var(--ease-out); }
+.faq-answer-inner { padding: 0 1.5rem 1.25rem; font-size: 0.92rem; color: var(--gray-600); line-height: 1.7; }
+
+/* ── Footer ── */
+.site-footer { padding: 4rem 0 2rem; border-top: 1px solid var(--gray-200); }
+.footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+.footer-brand .logo { margin-bottom: 0.75rem; display: inline-block; }
+.footer-brand p { font-size: 0.88rem; color: var(--gray-600); line-height: 1.6; max-width: 280px; }
+.footer-col h4 { font-family: var(--font-display); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gray-400); margin-bottom: 1rem; }
+.footer-col a { display: block; font-size: 0.9rem; color: var(--gray-600); padding: 0.3rem 0; transition: color 0.2s; }
+.footer-col a:hover { color: var(--gray-800); }
+.footer-bottom { display: flex; align-items: center; justify-content: space-between; padding-top: 2rem; border-top: 1px solid var(--gray-200); }
+.footer-bottom p { font-size: 0.8rem; color: var(--gray-400); }
+.footer-legal { display: flex; gap: 1.5rem; }
+.footer-legal a { font-size: 0.8rem; color: var(--gray-400); transition: color 0.2s; }
+.footer-legal a:hover { color: var(--gray-600); }
+
+@media (max-width: 768px) {
+  .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── Header ── -->
+<header class="site-header" id="siteHeader">
+  <div class="container header-inner">
+    <a href="#" class="logo">DCS</a>
+    <nav class="nav-links">
+      <a href="#how-it-works">How it works</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#work">Work</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact" class="btn btn-primary header-cta">Get in touch</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+    <a href="#how-it-works">How it works</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#work">Work</a>
+    <a href="#faq">FAQ</a>
+    <a href="#contact" class="btn btn-primary">Get in touch</a>
+  </nav>
+</header>
+
+<!-- ── Hero ── -->
+<section class="hero">
+  <div class="container hero-grid">
+    <div class="hero-content">
+      <p class="section-label">Digital Consulting Services</p>
+      <h1>Websites as professional as you are</h1>
+      <p>We build, host and look after websites for local service businesses. You get on with the work &mdash; we handle the rest.</p>
+      <div class="hero-buttons">
+        <a href="#pricing" class="btn btn-primary">View pricing</a>
+        <a href="#how-it-works" class="btn btn-secondary">How it works</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <span class="stat-number">47</span>
+          <span class="stat-label">Sites live</span>
+        </div>
+        <hr class="stat-divider">
+        <div class="hero-stat">
+          <span class="stat-number">11 days</span>
+          <span class="stat-label">Average setup</span>
+        </div>
+        <hr class="stat-divider">
+        <div class="hero-stat">
+          <span class="stat-number">94%</span>
+          <span class="stat-label">Client retention</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── How It Works ── -->
+<section class="how-it-works" id="how-it-works">
+  <div class="container">
+    <p class="section-label">How it works</p>
+    <h2 class="section-title">Four steps to a better website</h2>
+    <p class="section-subtitle">No jargon, no fuss. We take care of the entire process so you can focus on running your business.</p>
+    <div class="steps-grid">
+      <div class="step-card">
+        <span class="step-number">Step 01</span>
+        <div class="step-icon">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <h3>Tell us about your business</h3>
+        <p>A quick chat about your services, customers and what you want your website to achieve. Nothing complicated.</p>
+      </div>
+      <div class="step-card">
+        <span class="step-number">Step 02</span>
+        <div class="step-icon">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        </div>
+        <h3>We write and design</h3>
+        <p>Professional copywriting, thoughtful design and a layout that makes sense for your trade. You approve everything before we build.</p>
+      </div>
+      <div class="step-card">
+        <span class="step-number">Step 03</span>
+        <div class="step-icon">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        </div>
+        <h3>We build and launch</h3>
+        <p>Fast, mobile-friendly, and optimised for search engines. We handle hosting, SSL and domain setup. You just say go.</p>
+      </div>
+      <div class="step-card">
+        <span class="step-number">Step 04</span>
+        <div class="step-icon">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3>We look after it</h3>
+        <p>Ongoing hosting, security updates, content changes and support. Your site stays fast, safe and up to date &mdash; always.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── What's Included ── -->
+<section class="whats-included" id="included">
+  <div class="container">
+    <p class="section-label">What's included</p>
+    <h2 class="section-title">Everything you need, nothing you don't</h2>
+    <p class="section-subtitle">Every plan comes with the essentials built in. No hidden costs, no surprise add-ons.</p>
+    <div class="included-grid">
+      <div class="included-card">
+        <div class="included-icon">
+          <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        </div>
+        <h3>Custom design</h3>
+        <p>A bespoke layout and colour scheme that reflects your brand. No templates, no cookie-cutter sites.</p>
+      </div>
+      <div class="included-card">
+        <div class="included-icon">
+          <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        </div>
+        <h3>Professional copywriting</h3>
+        <p>Clear, persuasive content written for your customers. We research your trade and write copy that converts.</p>
+      </div>
+      <div class="included-card">
+        <div class="included-icon">
+          <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        </div>
+        <h3>Development and build</h3>
+        <p>Hand-coded with modern technology. Fast loading, mobile-first, and built to perform well on Google.</p>
+      </div>
+      <div class="included-card">
+        <div class="included-icon">
+          <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+        </div>
+        <h3>Hosting and uptime</h3>
+        <p>Enterprise-grade hosting on a global network. Your site loads quickly from anywhere, with 99.9% uptime.</p>
+      </div>
+      <div class="included-card">
+        <div class="included-icon">
+          <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3>Security and SSL</h3>
+        <p>HTTPS encryption, regular security patches and monitoring. We keep your site and your customers safe.</p>
+      </div>
+      <div class="included-card">
+        <div class="included-icon">
+          <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <h3>Ongoing support</h3>
+        <p>Content updates, technical fixes and friendly advice whenever you need it. We are always just a message away.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Pricing ── -->
+<section class="pricing" id="pricing">
+  <div class="container">
+    <p class="section-label">Pricing</p>
+    <h2 class="section-title">Simple, transparent pricing</h2>
+    <p class="section-subtitle">One-off setup fee, then a monthly plan. No long contracts &mdash; cancel any time.</p>
+    <div class="toggle-wrap">
+      <span class="toggle-label active" id="labelMonthly">Monthly</span>
+      <div class="toggle-track" id="pricingToggle" role="switch" aria-checked="false" aria-label="Toggle annual billing" tabindex="0">
+        <div class="toggle-thumb"></div>
+      </div>
+      <span class="toggle-label" id="labelAnnual">Annual</span>
+      <span class="save-badge">Save 40%+</span>
+    </div>
+    <div class="pricing-grid">
+      <!-- Starter -->
+      <div class="price-card">
+        <span class="price-tag">Starter</span>
+        <h3>Starter</h3>
+        <p class="price-desc">For sole traders who need a solid online presence</p>
+        <p class="price-setup">From &pound;995 setup</p>
+        <span class="price-amount" data-monthly="29" data-annual="59">&pound;29</span>
+        <p class="price-period"><span class="period-text">/month</span></p>
+        <ul class="price-features">
+          <li><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 4 6.5 13 2 9"/></svg>Up to 5 pages</li>
+          <li><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 4 6.5 13 2 9"/></svg>Mobile responsive design</li>
+          <li><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 4 6.5 13 2 9"/></svg>Contact form</li>
+          <li><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 4 6.5 13 2 9"/></svg>Basic SEO setup</li>
+          <li><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 4 6.5 13 2 9"/></svg>Hosting and SSL</li>
+        </ul>
+        <a href="#contact" class="btn btn-primary">Get started</a>
+      </div>
+      <!-- Professional -->
+      <div class="price-card featured">
+        <span class="price-tag">Most popular</span>
+        <h3>Professional</h3>
+        <p class="price-desc">For growing businesses that want to stand out</p>
+        <p class="price-setup">From &pound;1,995 setup</p>
+        <span class="price-amount" data-monthly="39" data-annual="99">&pound;39</span>
+        <p class="price-period"><span class="period-text">/month</span></p>
+        <ul class="price-features">
+          <li><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 4 6.5 13 2 9"/></svg>Up to 15 pages</li>
+          <li><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 4 6.5 13 2 9"/></svg>Professional copywriting</li>
+          <li><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 4 6.5 13 2 9"/></svg>Blog and case studies</li>
+          <li><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 4 6.5 13 2 9"/></svg>Advanced SEO</li>
+          <li><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 4 6.5 13 2 9"/></svg>Google Business integration</li>
+          <li><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 4 6.5 13 2 9"/></svg>Priority support</li>
+        </ul>
+        <a href="#contact" class="btn btn-primary">Get started</a>
+      </div>
+      <!-- Growth -->
+      <div class="price-card">
+        <span class="price-tag">Growth</span>
+        <h3>Growth</h3>
+        <p class="price-desc">For established businesses ready to scale online</p>
+        <p class="price-setup">From &pound;3,495 setup</p>
+        <span class="price-amount" data-monthly="59" data-annual="149">&pound;59</span>
+        <p class="price-period"><span class="period-text">/month</span></p>
+        <ul class="price-features">
+          <li><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 4 6.5 13 2 9"/></svg>Unlimited pages</li>
+          <li><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 4 6.5 13 2 9"/></svg>Multi-location support</li>
+          <li><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 4 6.5 13 2 9"/></svg>Monthly content updates</li>
+          <li><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 4 6.5 13 2 9"/></svg>Performance reporting</li>
+          <li><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 4 6.5 13 2 9"/></svg>Dedicated account manager</li>
+          <li><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 4 6.5 13 2 9"/></svg>Quarterly strategy reviews</li>
+        </ul>
+        <a href="#contact" class="btn btn-primary">Get started</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Recent Work ── -->
+<section class="recent-work" id="work">
+  <div class="container">
+    <p class="section-label">Recent work</p>
+    <h2 class="section-title">Sites we have built recently</h2>
+    <p class="section-subtitle">Real businesses, real results. Every site is designed for the trade it serves.</p>
+    <div class="work-grid">
+      <div class="work-card">
+        <div class="work-thumb"><span class="work-thumb-inner">Colossus Scaffolding</span></div>
+        <p class="work-type">Scaffolding</p>
+        <h3>Colossus Scaffolding</h3>
+        <p>A clean, authoritative site for a commercial scaffolding company. Service pages, project gallery and enquiry forms built to convert.</p>
+      </div>
+      <div class="work-card">
+        <div class="work-thumb"><span class="work-thumb-inner">DJ Fox Electrical</span></div>
+        <p class="work-type">Electrical</p>
+        <h3>DJ Fox Electrical</h3>
+        <p>Bold branding and clear service breakdowns for a domestic electrician. Optimised for local search across East Sussex.</p>
+      </div>
+      <div class="work-card">
+        <div class="work-thumb"><span class="work-thumb-inner">Bexhill Tiling</span></div>
+        <p class="work-type">Tiling</p>
+        <h3>Bexhill Tiling &amp; Bathrooms</h3>
+        <p>Showcase site with before-and-after galleries, customer reviews and location-targeted landing pages for the local area.</p>
+      </div>
+    </div>
+    <a href="#" class="work-link">See all our work <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+  </div>
+</section>
+
+<!-- ── Testimonials ── -->
+<section class="testimonials" id="testimonials">
+  <div class="container">
+    <p class="section-label">Testimonials</p>
+    <h2 class="section-title">What our clients say</h2>
+    <p class="section-subtitle">We let the results speak for themselves. Here is what business owners think of working with us.</p>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="testimonial-text">&ldquo;Brilliant service from start to finish. They understood exactly what we needed and delivered a site that actually brings in enquiries. Worth every penny.&rdquo;</p>
+        <p class="testimonial-author">Paul Richardson</p>
+        <p class="testimonial-role">Director, Colossus Scaffolding</p>
+      </div>
+      <div class="testimonial-card featured">
+        <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="testimonial-text">&ldquo;I had been putting off getting a proper website for years. DCS made it painless. The site looks professional, ranks well on Google, and I get calls from it every week.&rdquo;</p>
+        <p class="testimonial-author">Sarah Mitchell</p>
+        <p class="testimonial-role">Owner, Mitchell Plumbing</p>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="testimonial-text">&ldquo;Great communication throughout and the ongoing support is excellent. They actually pick up the phone when you ring &mdash; refreshing for a web company.&rdquo;</p>
+        <p class="testimonial-author">Mark Jennings</p>
+        <p class="testimonial-role">Owner, DJ Fox Electrical</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Examples ── -->
+<section class="examples" id="examples">
+  <div class="container">
+    <p class="section-label">Examples</p>
+    <h2 class="section-title">Built for every trade</h2>
+    <p class="section-subtitle">Whatever your service, we have the experience to build a site that works for your customers.</p>
+    <div class="examples-grid">
+      <div class="example-tile">
+        <span class="example-label">Plumbing &amp; Heating</span>
+        <h3>Emergency callouts, boiler installs, bathroom refits</h3>
+        <p>Service-specific landing pages designed to capture urgent and planned enquiries. Local SEO built in from day one.</p>
+      </div>
+      <div class="example-tile">
+        <span class="example-label">Electrical</span>
+        <h3>Domestic rewires, fuseboard upgrades, inspections</h3>
+        <p>Accreditation badges, clear pricing guides and trust signals that convert browsers into booked jobs.</p>
+      </div>
+      <div class="example-tile">
+        <span class="example-label">Gardening &amp; Landscaping</span>
+        <h3>Garden design, maintenance, driveways and patios</h3>
+        <p>Visual galleries, seasonal content and location pages that keep your pipeline full year-round.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA Banner ── -->
+<section class="cta-banner" id="contact">
+  <div class="container">
+    <h2>Ready to get a website that works as hard as you do?</h2>
+    <p>Get in touch for a no-obligation chat about your business. We will tell you exactly what we would do and what it would cost.</p>
+    <a href="mailto:mail@digitalconsultingservices.co.uk" class="btn btn-outline">Get in touch</a>
+  </div>
+</section>
+
+<!-- ── FAQ ── -->
+<section class="faq" id="faq">
+  <div class="container">
+    <p class="section-label">FAQ</p>
+    <h2 class="section-title">Common questions</h2>
+    <p class="section-subtitle">If your question is not here, just get in touch and we will be happy to help.</p>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          How long does it take to build a website?
+          <span class="faq-icon" aria-hidden="true"></span>
+        </button>
+        <div class="faq-answer" role="region">
+          <div class="faq-answer-inner">Most sites are live within 10 to 14 working days from sign-off. Larger projects with more pages or custom features may take a little longer, but we will always give you a clear timeline upfront.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          Do I need to provide content and images?
+          <span class="faq-icon" aria-hidden="true"></span>
+        </button>
+        <div class="faq-answer" role="region">
+          <div class="faq-answer-inner">No. We handle all the copywriting and source or create any graphics needed. If you have photos of your work, great &mdash; we will use them. If not, we will find a solution that looks professional and authentic.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          What if I want to make changes after launch?
+          <span class="faq-icon" aria-hidden="true"></span>
+        </button>
+        <div class="faq-answer" role="region">
+          <div class="faq-answer-inner">Content updates are included in all monthly plans. Whether it is a new service, a change of phone number or a fresh blog post, just let us know and we will take care of it &mdash; usually within 24 hours.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          Am I locked into a long contract?
+          <span class="faq-icon" aria-hidden="true"></span>
+        </button>
+        <div class="faq-answer" role="region">
+          <div class="faq-answer-inner">No. Monthly plans run on a rolling basis and you can cancel with 30 days' notice. Annual plans offer a significant discount and are paid upfront, but there is no penalty if your circumstances change.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ── -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="logo">DCS</a>
+        <p>Professional websites for local service businesses. Design, build, host and support &mdash; all handled for you.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <a href="#how-it-works">How it works</a>
+        <a href="#included">What's included</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#work">Work</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="mailto:mail@digitalconsultingservices.co.uk">mail@digitalconsultingservices.co.uk</a>
+        <a href="tel:07395063764">07395 063764</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Digital Consulting Services. All rights reserved.</p>
+      <div class="footer-legal">
+        <a href="#">Privacy policy</a>
+        <a href="#">Terms of service</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ── Sticky header shadow ── */
+(function() {
+  var header = document.getElementById('siteHeader');
+  window.addEventListener('scroll', function() {
+    header.classList.toggle('scrolled', window.scrollY > 10);
+  });
+})();
+
+/* ── Mobile nav ── */
+(function() {
+  var btn = document.getElementById('hamburger');
+  var nav = document.getElementById('mobileNav');
+  var links = nav.querySelectorAll('a');
+  function close() { nav.classList.remove('open'); btn.setAttribute('aria-expanded', 'false'); }
+  btn.addEventListener('click', function() {
+    var open = nav.classList.toggle('open');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  links.forEach(function(l) { l.addEventListener('click', close); });
+})();
+
+/* ── Pricing toggle ── */
+(function() {
+  var track = document.getElementById('pricingToggle');
+  var labelM = document.getElementById('labelMonthly');
+  var labelA = document.getElementById('labelAnnual');
+  var amounts = document.querySelectorAll('.price-amount');
+  var periods = document.querySelectorAll('.period-text');
+  var annual = false;
+
+  function update() {
+    track.classList.toggle('annual', annual);
+    track.setAttribute('aria-checked', annual ? 'true' : 'false');
+    labelM.classList.toggle('active', !annual);
+    labelA.classList.toggle('active', annual);
+    amounts.forEach(function(el) {
+      var val = annual ? el.getAttribute('data-annual') : el.getAttribute('data-monthly');
+      el.textContent = '\u00A3' + val;
+    });
+    periods.forEach(function(el) {
+      el.textContent = annual ? '/year' : '/month';
+    });
+  }
+
+  track.addEventListener('click', function() { annual = !annual; update(); });
+  track.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); annual = !annual; update(); }
+  });
+})();
+
+/* ── FAQ accordion ── */
+(function() {
+  var items = document.querySelectorAll('.faq-item');
+  items.forEach(function(item) {
+    var btn = item.querySelector('.faq-question');
+    var answer = item.querySelector('.faq-answer');
+    btn.addEventListener('click', function() {
+      var isOpen = item.classList.contains('open');
+      /* Close all */
+      items.forEach(function(i) {
+        i.classList.remove('open');
+        i.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+        i.querySelector('.faq-answer').style.maxHeight = null;
+      });
+      if (!isOpen) {
+        item.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+      }
+    });
+  });
+})();
+
+/* ── Smooth scroll ── */
+document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+  a.addEventListener('click', function(e) {
+    var target = document.querySelector(this.getAttribute('href'));
+    if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+  });
+});
+</script>
+</body>
+</html>

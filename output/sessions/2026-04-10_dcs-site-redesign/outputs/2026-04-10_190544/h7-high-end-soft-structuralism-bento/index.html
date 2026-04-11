@@ -1,0 +1,1365 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DCS — Websites as Professional as You Are</title>
+<meta name="description" content="Digital Consulting Services builds beautiful, high-performance websites for local service businesses across the UK.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+  background: #FAF8F5;
+  color: #1a1a1a;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+img, svg { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; cursor: pointer; border: none; background: none; }
+ul, ol { list-style: none; }
+
+/* ============================================================
+   TOKENS
+   ============================================================ */
+:root {
+  --bg: #FAF8F5;
+  --bg-warm: #F5F0EB;
+  --bg-card: #FFFFFF;
+  --text: #1a1a1a;
+  --text-muted: #6B6560;
+  --text-light: #9B9490;
+  --accent: #2A7D6E;
+  --accent-hover: #22665A;
+  --accent-light: #E8F4F1;
+  --accent-warm: #C4654A;
+  --border: #E8E3DD;
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.04);
+  --shadow: 0 4px 24px rgba(0,0,0,0.06);
+  --shadow-lg: 0 8px 40px rgba(0,0,0,0.08);
+  --radius: 14px;
+  --radius-lg: 20px;
+  --radius-sm: 10px;
+  --max-w: 1200px;
+  --section-py: clamp(64px, 10vw, 120px);
+}
+
+/* ============================================================
+   TYPOGRAPHY
+   ============================================================ */
+h1, h2, h3, h4 { font-family: 'DM Serif Display', Georgia, serif; font-weight: 400; line-height: 1.15; color: var(--text); }
+h1 { font-size: clamp(2.25rem, 5vw, 3.75rem); letter-spacing: -0.02em; }
+h2 { font-size: clamp(1.75rem, 3.5vw, 2.75rem); letter-spacing: -0.015em; }
+h3 { font-size: clamp(1.25rem, 2vw, 1.5rem); }
+h4 { font-size: 1.125rem; }
+p { max-width: 640px; }
+.text-muted { color: var(--text-muted); }
+.text-light { color: var(--text-light); }
+.label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+/* ============================================================
+   LAYOUT
+   ============================================================ */
+.container { width: 100%; max-width: var(--max-w); margin: 0 auto; padding: 0 24px; }
+section { padding: var(--section-py) 0; }
+.section-header { text-align: center; margin-bottom: clamp(40px, 6vw, 64px); }
+.section-header p { margin: 16px auto 0; }
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 28px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  border-radius: 50px;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+}
+.btn-primary:hover { background: var(--accent-hover); transform: translateY(-1px); box-shadow: var(--shadow); }
+.btn-secondary {
+  background: transparent;
+  color: var(--text);
+  border: 1.5px solid var(--border);
+}
+.btn-secondary:hover { border-color: var(--text); }
+.btn-sm { padding: 10px 20px; font-size: 0.875rem; }
+.btn-arrow::after { content: '\2192'; transition: transform 0.2s ease; }
+.btn-arrow:hover::after { transform: translateX(3px); }
+
+/* ============================================================
+   1. HEADER
+   ============================================================ */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(250, 248, 245, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.site-header.scrolled {
+  border-bottom-color: var(--border);
+  box-shadow: 0 1px 12px rgba(0,0,0,0.04);
+}
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+}
+.logo {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: 1.5rem;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+.nav-links { display: flex; gap: 32px; align-items: center; }
+.nav-links a {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  transition: color 0.2s ease;
+  position: relative;
+}
+.nav-links a:hover { color: var(--text); }
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--accent);
+  border-radius: 1px;
+  transition: width 0.25s ease;
+}
+.nav-links a:hover::after { width: 100%; }
+.header-cta { margin-left: 16px; }
+
+/* Mobile menu */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  width: 28px;
+  padding: 4px 0;
+}
+.hamburger span {
+  display: block;
+  height: 2px;
+  background: var(--text);
+  border-radius: 1px;
+  transition: all 0.3s ease;
+}
+.hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+.hamburger.active span:nth-child(2) { opacity: 0; }
+.hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+.mobile-nav {
+  display: none;
+  position: fixed;
+  inset: 72px 0 0;
+  background: var(--bg);
+  padding: 32px 24px;
+  flex-direction: column;
+  gap: 4px;
+  z-index: 99;
+}
+.mobile-nav.open { display: flex; }
+.mobile-nav a {
+  display: block;
+  padding: 14px 0;
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: var(--text);
+  border-bottom: 1px solid var(--border);
+}
+.mobile-nav .btn { margin-top: 16px; text-align: center; }
+
+@media (max-width: 768px) {
+  .nav-links, .header-cta { display: none; }
+  .hamburger { display: flex; }
+}
+
+/* ============================================================
+   2. HERO
+   ============================================================ */
+.hero {
+  padding: clamp(80px, 12vw, 140px) 0 var(--section-py);
+  position: relative;
+  overflow: hidden;
+}
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+.hero-content { position: relative; z-index: 2; }
+.hero-content h1 { margin-bottom: 20px; }
+.hero-content h1 span { color: var(--accent); }
+.hero-sub {
+  font-size: clamp(1.0625rem, 1.5vw, 1.1875rem);
+  color: var(--text-muted);
+  max-width: 480px;
+  margin-bottom: 36px;
+  line-height: 1.7;
+}
+.hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+
+.hero-visual {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 16px;
+  aspect-ratio: 1;
+  max-width: 480px;
+  justify-self: end;
+}
+.hero-shape {
+  border-radius: var(--radius-lg);
+  transition: transform 0.4s ease;
+}
+.hero-shape:hover { transform: scale(1.03); }
+.hero-shape-1 {
+  background: var(--accent);
+  grid-row: 1 / 3;
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hero-shape-1 svg { width: 48%; height: 48%; opacity: 0.2; }
+.hero-shape-2 {
+  background: var(--accent-light);
+  border-radius: var(--radius-lg);
+}
+.hero-shape-3 {
+  background: var(--accent-warm);
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hero-shape-3-inner {
+  width: 60%;
+  height: 60%;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+}
+
+@media (max-width: 768px) {
+  .hero-grid { grid-template-columns: 1fr; }
+  .hero-visual { max-width: 320px; justify-self: center; margin-top: 16px; }
+}
+
+/* ============================================================
+   3. HOW IT WORKS
+   ============================================================ */
+.how-it-works { background: var(--bg-warm); }
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+.step-card {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 32px 28px;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.step-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+.step-num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--accent-light);
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 1.125rem;
+  margin-bottom: 20px;
+}
+.step-card h3 { margin-bottom: 10px; }
+.step-card p { font-size: 0.9375rem; color: var(--text-muted); }
+
+@media (max-width: 900px) { .steps-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 520px) { .steps-grid { grid-template-columns: 1fr; } }
+
+/* ============================================================
+   4. WHAT'S INCLUDED — BENTO GRID
+   ============================================================ */
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto auto;
+  gap: 20px;
+}
+.bento-card {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 36px 32px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+.bento-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+.bento-card--wide { grid-column: span 2; }
+.bento-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: var(--accent-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  color: var(--accent);
+}
+.bento-card h3 { margin-bottom: 8px; }
+.bento-card p { font-size: 0.9375rem; color: var(--text-muted); line-height: 1.65; }
+.bento-card--accent {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+.bento-card--accent .bento-icon { background: rgba(255,255,255,0.15); color: #fff; }
+.bento-card--accent h3 { color: #fff; }
+.bento-card--accent p { color: rgba(255,255,255,0.8); }
+
+@media (max-width: 768px) {
+  .bento-grid { grid-template-columns: 1fr; }
+  .bento-card--wide { grid-column: span 1; }
+}
+
+/* ============================================================
+   5. PRICING
+   ============================================================ */
+.pricing { background: var(--bg-warm); }
+.pricing-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-bottom: 48px;
+}
+.pricing-toggle span {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  transition: color 0.2s ease;
+}
+.pricing-toggle span.active { color: var(--text); font-weight: 600; }
+.toggle-track {
+  width: 52px;
+  height: 28px;
+  background: var(--border);
+  border-radius: 14px;
+  position: relative;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+.toggle-track.active { background: var(--accent); }
+.toggle-thumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+  transition: transform 0.3s ease;
+}
+.toggle-track.active .toggle-thumb { transform: translateX(24px); }
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+.pricing-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  padding: 40px 32px;
+  box-shadow: var(--shadow-sm);
+  border: 1.5px solid var(--border);
+  text-align: center;
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.pricing-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+.pricing-card--featured {
+  border-color: var(--accent);
+  box-shadow: var(--shadow);
+  transform: scale(1.03);
+}
+.pricing-card--featured:hover { transform: scale(1.03) translateY(-4px); box-shadow: var(--shadow-lg); }
+.pricing-badge {
+  position: absolute;
+  top: -13px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 5px 18px;
+  border-radius: 50px;
+}
+.pricing-card h3 { margin-bottom: 8px; }
+.pricing-card .price {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: 2.5rem;
+  color: var(--text);
+  margin: 16px 0 4px;
+  line-height: 1;
+}
+.pricing-card .price-sub {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+}
+.pricing-features {
+  text-align: left;
+  margin-bottom: 28px;
+}
+.pricing-features li {
+  padding: 8px 0;
+  font-size: 0.9375rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+.pricing-features li::before {
+  content: '';
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  background: var(--accent-light);
+  border-radius: 50%;
+  margin-top: 2px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%232A7D6E' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.pricing-card .btn { width: 100%; }
+.pricing-small {
+  text-align: center;
+  margin-top: 32px;
+  font-size: 0.8125rem;
+  color: var(--text-light);
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.7;
+}
+
+@media (max-width: 900px) {
+  .pricing-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
+  .pricing-card--featured { transform: none; }
+  .pricing-card--featured:hover { transform: translateY(-4px); }
+}
+
+/* ============================================================
+   6. RECENT WORK
+   ============================================================ */
+.work-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.work-card {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.work-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+.work-card-img {
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.work-card-img-1 { background: linear-gradient(135deg, #1B2838, #2A4055); }
+.work-card-img-2 { background: linear-gradient(135deg, #8B1A1A, #C42D2D); }
+.work-card-img-3 { background: linear-gradient(135deg, #2A5C3F, #3D8B5E); }
+.work-card-initial {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: 3rem;
+  color: rgba(255,255,255,0.3);
+}
+.work-card-body { padding: 28px; }
+.work-card-body h3 { margin-bottom: 6px; }
+.work-card-body p { font-size: 0.9375rem; color: var(--text-muted); }
+.work-card-tag {
+  display: inline-block;
+  margin-top: 14px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--accent);
+  padding: 4px 12px;
+  background: var(--accent-light);
+  border-radius: 50px;
+}
+
+@media (max-width: 768px) { .work-grid { grid-template-columns: 1fr; } }
+
+/* ============================================================
+   7. TESTIMONIALS
+   ============================================================ */
+.testimonials { background: var(--bg-warm); }
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.testimonial-card {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 36px 32px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+}
+.testimonial-stars {
+  color: #E8A838;
+  font-size: 1.125rem;
+  letter-spacing: 2px;
+  margin-bottom: 16px;
+}
+.testimonial-card blockquote {
+  font-size: 0.9375rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  flex: 1;
+  margin-bottom: 20px;
+  font-style: italic;
+}
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.testimonial-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--accent-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.875rem;
+  color: var(--accent);
+}
+.testimonial-name { font-weight: 600; font-size: 0.9375rem; }
+.testimonial-role { font-size: 0.8125rem; color: var(--text-light); }
+
+@media (max-width: 768px) { .testimonials-grid { grid-template-columns: 1fr; } }
+
+/* ============================================================
+   8. SEE WHAT'S POSSIBLE
+   ============================================================ */
+.examples-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.example-card {
+  border-radius: var(--radius);
+  overflow: hidden;
+  position: relative;
+  aspect-ratio: 4/3;
+  display: flex;
+  align-items: flex-end;
+  padding: 28px;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+.example-card:hover { transform: translateY(-4px); }
+.example-card-1 { background: linear-gradient(160deg, #1E6F8C, #2A9DB8); }
+.example-card-2 { background: linear-gradient(160deg, #8B5E3C, #C4844A); }
+.example-card-3 { background: linear-gradient(160deg, #2D6B3F, #4A9F65); }
+.example-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 60%);
+}
+.example-card-content { position: relative; z-index: 1; color: #fff; }
+.example-card-content h3 { color: #fff; margin-bottom: 4px; }
+.example-card-content p { font-size: 0.875rem; color: rgba(255,255,255,0.8); }
+
+@media (max-width: 768px) { .examples-grid { grid-template-columns: 1fr; } }
+
+/* ============================================================
+   9. CTA SECTION
+   ============================================================ */
+.cta-section {
+  background: var(--accent);
+  color: #fff;
+  text-align: center;
+}
+.cta-section h2 { color: #fff; margin-bottom: 16px; }
+.cta-section p { color: rgba(255,255,255,0.85); margin: 0 auto 32px; }
+.cta-section .btn-primary {
+  background: #fff;
+  color: var(--accent);
+}
+.cta-section .btn-primary:hover { background: #F5F0EB; box-shadow: var(--shadow); }
+.cta-section .btn-secondary {
+  border-color: rgba(255,255,255,0.35);
+  color: #fff;
+}
+.cta-section .btn-secondary:hover { border-color: #fff; }
+
+/* ============================================================
+   10. FAQ
+   ============================================================ */
+.faq-list {
+  max-width: 720px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.faq-item {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  transition: box-shadow 0.3s ease;
+}
+.faq-item:hover { box-shadow: var(--shadow-sm); }
+.faq-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 22px 28px;
+  font-size: 1.0625rem;
+  font-weight: 600;
+  color: var(--text);
+  text-align: left;
+  gap: 16px;
+}
+.faq-icon {
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  border-radius: 50%;
+  background: var(--accent-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+.faq-icon svg { width: 14px; height: 14px; color: var(--accent); transition: transform 0.3s ease; }
+.faq-item.open .faq-icon { background: var(--accent); }
+.faq-item.open .faq-icon svg { color: #fff; transform: rotate(180deg); }
+.faq-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease, padding 0.35s ease;
+}
+.faq-body-inner {
+  padding: 0 28px 24px;
+  font-size: 0.9375rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+/* ============================================================
+   11. FOOTER
+   ============================================================ */
+.site-footer {
+  background: #1a1a1a;
+  color: rgba(255,255,255,0.7);
+  padding: 64px 0 32px;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.5fr;
+  gap: 40px;
+  margin-bottom: 48px;
+}
+.footer-brand .logo { color: #fff; margin-bottom: 12px; }
+.footer-brand p { font-size: 0.9375rem; color: rgba(255,255,255,0.5); max-width: 280px; line-height: 1.65; }
+.footer-col h4 { color: #fff; margin-bottom: 16px; font-size: 0.9375rem; font-family: 'DM Sans', sans-serif; font-weight: 600; }
+.footer-col a {
+  display: block;
+  padding: 4px 0;
+  font-size: 0.875rem;
+  color: rgba(255,255,255,0.5);
+  transition: color 0.2s ease;
+}
+.footer-col a:hover { color: #fff; }
+.footer-bar {
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding-top: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 0.8125rem;
+  color: rgba(255,255,255,0.35);
+}
+.footer-legal { display: flex; gap: 24px; }
+.footer-legal a { color: rgba(255,255,255,0.35); transition: color 0.2s ease; }
+.footer-legal a:hover { color: rgba(255,255,255,0.7); }
+
+@media (max-width: 768px) {
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 480px) {
+  .footer-grid { grid-template-columns: 1fr; }
+}
+
+/* ============================================================
+   ANIMATIONS
+   ============================================================ */
+.fade-up {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================================
+   SCROLLBAR
+   ============================================================ */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-light); }
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     1. HEADER
+     ============================================================ -->
+<header class="site-header" id="header" role="banner">
+  <div class="container">
+    <div class="header-inner">
+      <a href="#" class="logo" aria-label="DCS home">DCS</a>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#services">Services</a>
+        <a href="#work">Our Work</a>
+        <a href="#examples">Examples</a>
+        <a href="#how-it-works">About</a>
+        <a href="#faq">Blog</a>
+      </nav>
+      <a href="#cta" class="btn btn-primary btn-sm header-cta">Get in touch</a>
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
+    <a href="#services">Services</a>
+    <a href="#work">Our Work</a>
+    <a href="#examples">Examples</a>
+    <a href="#how-it-works">About</a>
+    <a href="#faq">Blog</a>
+    <a href="#cta" class="btn btn-primary">Get in touch</a>
+  </nav>
+</header>
+
+<!-- ============================================================
+     2. HERO
+     ============================================================ -->
+<section class="hero" id="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-content fade-up">
+        <p class="label">Digital Consulting Services</p>
+        <h1>Websites as professional<br>as <span>you are</span></h1>
+        <p class="hero-sub">We design, build, and look after beautiful websites for tradespeople and local service businesses. You focus on the work &mdash; we handle the web.</p>
+        <div class="hero-btns">
+          <a href="#pricing" class="btn btn-primary btn-arrow">See pricing</a>
+          <a href="#work" class="btn btn-secondary">View our work</a>
+        </div>
+      </div>
+      <div class="hero-visual fade-up" style="transition-delay: 0.15s">
+        <div class="hero-shape hero-shape-1">
+          <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="15" y="12" width="70" height="50" rx="4" stroke="white" stroke-width="2"/>
+            <line x1="15" y1="24" x2="85" y2="24" stroke="white" stroke-width="2"/>
+            <circle cx="22" cy="18" r="2" fill="white"/>
+            <circle cx="29" cy="18" r="2" fill="white"/>
+            <circle cx="36" cy="18" r="2" fill="white"/>
+            <rect x="20" y="30" width="25" height="3" rx="1.5" fill="white" opacity="0.7"/>
+            <rect x="20" y="37" width="40" height="2" rx="1" fill="white" opacity="0.4"/>
+            <rect x="20" y="42" width="35" height="2" rx="1" fill="white" opacity="0.4"/>
+            <rect x="20" y="47" width="30" height="2" rx="1" fill="white" opacity="0.4"/>
+            <rect x="55" y="30" width="25" height="22" rx="3" fill="white" opacity="0.15"/>
+            <rect x="15" y="72" width="70" height="18" rx="4" stroke="white" stroke-width="1.5" opacity="0.5"/>
+          </svg>
+        </div>
+        <div class="hero-shape hero-shape-2"></div>
+        <div class="hero-shape hero-shape-3">
+          <div class="hero-shape-3-inner"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     3. HOW IT WORKS
+     ============================================================ -->
+<section class="how-it-works" id="how-it-works">
+  <div class="container">
+    <div class="section-header fade-up">
+      <p class="label">How it works</p>
+      <h2>Four simple steps to your new website</h2>
+      <p class="text-muted">No jargon, no fuss. We handle everything from start to finish so you can focus on running your business.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card fade-up">
+        <div class="step-num">1</div>
+        <h3>Tell us about your business</h3>
+        <p>We start with a friendly chat about what you do, who your customers are, and what you want your website to achieve. No tech knowledge needed.</p>
+      </div>
+      <div class="step-card fade-up" style="transition-delay: 0.08s">
+        <div class="step-num">2</div>
+        <h3>We write and design it</h3>
+        <p>Our team writes compelling copy that speaks to your customers and designs a site that reflects the quality of your work. You review and approve everything.</p>
+      </div>
+      <div class="step-card fade-up" style="transition-delay: 0.16s">
+        <div class="step-num">3</div>
+        <h3>We build and launch it</h3>
+        <p>We develop your site to the highest standards &mdash; fast, secure, and optimised for search engines. Then we handle the launch and make sure everything works perfectly.</p>
+      </div>
+      <div class="step-card fade-up" style="transition-delay: 0.24s">
+        <div class="step-num">4</div>
+        <h3>We look after it</h3>
+        <p>Hosting, security updates, backups, and ongoing support are all included. Need a change? Just ask. We keep your site running smoothly so you never have to worry about it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     4. WHAT'S INCLUDED — BENTO GRID
+     ============================================================ -->
+<section class="whats-included" id="services">
+  <div class="container">
+    <div class="section-header fade-up">
+      <p class="label">What's included</p>
+      <h2>Everything you need, nothing you don't</h2>
+      <p class="text-muted">Every website comes with professional design, expert copywriting, and ongoing support as standard.</p>
+    </div>
+    <div class="bento-grid">
+      <div class="bento-card bento-card--wide bento-card--accent fade-up">
+        <div class="bento-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+        </div>
+        <h3>Bespoke Design</h3>
+        <p>A custom design tailored to your brand and industry. No cookie-cutter templates &mdash; your site will look as professional as the work you do, on every device.</p>
+      </div>
+      <div class="bento-card fade-up" style="transition-delay: 0.08s">
+        <div class="bento-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        </div>
+        <h3>Professional Copy</h3>
+        <p>Expertly written content that speaks to your customers and helps you rank on Google. We do the writing so you don't have to.</p>
+      </div>
+      <div class="bento-card fade-up" style="transition-delay: 0.08s">
+        <div class="bento-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        </div>
+        <h3>Expert Build</h3>
+        <p>Built with modern technology for blazing-fast load times, rock-solid reliability, and top search engine rankings.</p>
+      </div>
+      <div class="bento-card fade-up" style="transition-delay: 0.16s">
+        <div class="bento-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><circle cx="6" cy="6" r="1"/><circle cx="6" cy="18" r="1"/></svg>
+        </div>
+        <h3>Fast Hosting</h3>
+        <p>Enterprise-grade hosting included with every plan. Your site loads in under two seconds, every time.</p>
+      </div>
+      <div class="bento-card fade-up" style="transition-delay: 0.16s">
+        <div class="bento-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3>Security</h3>
+        <p>SSL certificates, regular security updates, and daily backups keep your site and your customers' data safe.</p>
+      </div>
+      <div class="bento-card bento-card--wide fade-up" style="transition-delay: 0.24s">
+        <div class="bento-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <h3>Ongoing Support</h3>
+        <p>Need a change? Want to add a new service? We're always here to help. Friendly, responsive support from real people who know your site inside out. No ticket queues, no chatbots.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     5. PRICING
+     ============================================================ -->
+<section class="pricing" id="pricing">
+  <div class="container">
+    <div class="section-header fade-up">
+      <p class="label">Pricing</p>
+      <h2>Simple, transparent pricing</h2>
+      <p class="text-muted">Choose the plan that fits your business. All plans include design, copy, build, hosting, and support.</p>
+    </div>
+    <div class="pricing-toggle fade-up" role="radiogroup" aria-label="Pricing type">
+      <span id="label-upfront" class="active">Pay upfront</span>
+      <button class="toggle-track" id="pricing-toggle" role="switch" aria-checked="false" aria-labelledby="label-upfront label-monthly">
+        <div class="toggle-thumb"></div>
+      </button>
+      <span id="label-monthly">Monthly</span>
+    </div>
+    <div class="pricing-grid">
+      <!-- Starter -->
+      <div class="pricing-card fade-up">
+        <h3>Starter</h3>
+        <p class="text-muted" style="font-size: 0.875rem;">Perfect for sole traders who need a professional online presence.</p>
+        <div class="price" data-upfront="&pound;995" data-monthly="&pound;59">&pound;995</div>
+        <div class="price-sub" data-upfront-sub="one-off + &pound;29/mo hosting" data-monthly-sub="per month, no upfront cost">one-off + &pound;29/mo hosting</div>
+        <ul class="pricing-features">
+          <li>Up to 5 pages</li>
+          <li>Mobile-responsive design</li>
+          <li>Professional copywriting</li>
+          <li>Contact form</li>
+          <li>Basic SEO setup</li>
+          <li>SSL &amp; hosting included</li>
+        </ul>
+        <a href="#cta" class="btn btn-secondary">Get started</a>
+      </div>
+      <!-- Professional -->
+      <div class="pricing-card pricing-card--featured fade-up" style="transition-delay: 0.08s">
+        <div class="pricing-badge">Most popular</div>
+        <h3>Professional</h3>
+        <p class="text-muted" style="font-size: 0.875rem;">For growing businesses that want to stand out and attract more customers.</p>
+        <div class="price" data-upfront="&pound;1,995" data-monthly="&pound;99">&pound;1,995</div>
+        <div class="price-sub" data-upfront-sub="one-off + &pound;39/mo hosting" data-monthly-sub="per month, no upfront cost">one-off + &pound;39/mo hosting</div>
+        <ul class="pricing-features">
+          <li>Up to 15 pages</li>
+          <li>Custom bespoke design</li>
+          <li>Professional copywriting</li>
+          <li>Advanced SEO &amp; local SEO</li>
+          <li>Google Business integration</li>
+          <li>Review &amp; testimonial system</li>
+          <li>Priority support</li>
+        </ul>
+        <a href="#cta" class="btn btn-primary">Get started</a>
+      </div>
+      <!-- Growth -->
+      <div class="pricing-card fade-up" style="transition-delay: 0.16s">
+        <h3>Growth</h3>
+        <p class="text-muted" style="font-size: 0.875rem;">For established businesses ready to dominate their local market online.</p>
+        <div class="price" data-upfront="&pound;3,495" data-monthly="&pound;149">&pound;3,495</div>
+        <div class="price-sub" data-upfront-sub="one-off + &pound;59/mo hosting" data-monthly-sub="per month, no upfront cost">one-off + &pound;59/mo hosting</div>
+        <ul class="pricing-features">
+          <li>Unlimited pages</li>
+          <li>Premium bespoke design</li>
+          <li>Full content strategy</li>
+          <li>Blog &amp; content system</li>
+          <li>Multi-location SEO</li>
+          <li>Analytics dashboard</li>
+          <li>Dedicated account manager</li>
+          <li>Monthly performance reports</li>
+        </ul>
+        <a href="#cta" class="btn btn-secondary">Get started</a>
+      </div>
+    </div>
+    <p class="pricing-small fade-up">All prices exclude VAT. Monthly plans have a minimum 12-month commitment. Pay-upfront pricing includes the first year of hosting. Prices may vary depending on specific requirements &mdash; we'll always give you a clear quote before any work begins.</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     6. RECENT WORK
+     ============================================================ -->
+<section class="recent-work" id="work">
+  <div class="container">
+    <div class="section-header fade-up">
+      <p class="label">Recent work</p>
+      <h2>Websites we're proud of</h2>
+      <p class="text-muted">Real sites for real businesses. Every project is designed and built bespoke to the client's needs.</p>
+    </div>
+    <div class="work-grid">
+      <div class="work-card fade-up">
+        <div class="work-card-img work-card-img-1">
+          <span class="work-card-initial">CS</span>
+        </div>
+        <div class="work-card-body">
+          <h3>Colossus Scaffolding</h3>
+          <p>A commanding online presence for a commercial scaffolding company, built to win large contracts and showcase major projects.</p>
+          <span class="work-card-tag">Scaffolding</span>
+        </div>
+      </div>
+      <div class="work-card fade-up" style="transition-delay: 0.08s">
+        <div class="work-card-img work-card-img-2">
+          <span class="work-card-initial">DF</span>
+        </div>
+        <div class="work-card-body">
+          <h3>DJ Fox Electrical</h3>
+          <p>A modern, high-trust website for an established electrical contractor, designed to generate consistent local enquiries.</p>
+          <span class="work-card-tag">Electrical</span>
+        </div>
+      </div>
+      <div class="work-card fade-up" style="transition-delay: 0.16s">
+        <div class="work-card-img work-card-img-3">
+          <span class="work-card-initial">BR</span>
+        </div>
+        <div class="work-card-body">
+          <h3>Bexhill Removals</h3>
+          <p>A friendly, trustworthy site for a local removals company, optimised to convert visitors into booking enquiries.</p>
+          <span class="work-card-tag">Removals</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     7. TESTIMONIALS
+     ============================================================ -->
+<section class="testimonials" id="testimonials">
+  <div class="container">
+    <div class="section-header fade-up">
+      <p class="label">Testimonials</p>
+      <h2>What our clients say</h2>
+      <p class="text-muted">Don't just take our word for it &mdash; hear from the businesses we've helped.</p>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card fade-up">
+        <div class="testimonial-stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <blockquote>&ldquo;Brilliant from start to finish. They took the time to understand our business and built a site that really represents who we are. We've had more enquiries in the first month than the previous six months combined.&rdquo;</blockquote>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">P</div>
+          <div>
+            <div class="testimonial-name">Paul</div>
+            <div class="testimonial-role">Colossus Scaffolding</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card fade-up" style="transition-delay: 0.08s">
+        <div class="testimonial-stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <blockquote>&ldquo;I was dreading the process of getting a website but they made it so easy. They wrote all the content, handled the design, and the whole thing was done in a couple of weeks. Couldn't recommend them more highly.&rdquo;</blockquote>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">S</div>
+          <div>
+            <div class="testimonial-name">Sarah</div>
+            <div class="testimonial-role">Local Service Business</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card fade-up" style="transition-delay: 0.16s">
+        <div class="testimonial-stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <blockquote>&ldquo;Professional, responsive, and genuinely good at what they do. Our old website was embarrassing &mdash; the new one actually looks like a company our size should look. The ongoing support is fantastic too.&rdquo;</blockquote>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">M</div>
+          <div>
+            <div class="testimonial-name">Mark</div>
+            <div class="testimonial-role">DJ Fox Electrical</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     8. SEE WHAT'S POSSIBLE
+     ============================================================ -->
+<section class="examples" id="examples">
+  <div class="container">
+    <div class="section-header fade-up">
+      <p class="label">See what's possible</p>
+      <h2>Designs for every trade</h2>
+      <p class="text-muted">Explore example designs built for different industries. Each one is fully bespoke and ready to make your business shine.</p>
+    </div>
+    <div class="examples-grid">
+      <div class="example-card example-card-1 fade-up">
+        <div class="example-card-content">
+          <h3>Plumbing</h3>
+          <p>Clean, trustworthy design for plumbing professionals</p>
+        </div>
+      </div>
+      <div class="example-card example-card-2 fade-up" style="transition-delay: 0.08s">
+        <div class="example-card-content">
+          <h3>Electrical</h3>
+          <p>Bold, modern design for electrical contractors</p>
+        </div>
+      </div>
+      <div class="example-card example-card-3 fade-up" style="transition-delay: 0.16s">
+        <div class="example-card-content">
+          <h3>Gardening</h3>
+          <p>Fresh, natural design for landscaping &amp; garden services</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     9. CTA
+     ============================================================ -->
+<section class="cta-section" id="cta">
+  <div class="container">
+    <div class="fade-up">
+      <p class="label" style="color: rgba(255,255,255,0.6);">Let's talk</p>
+      <h2>Ready to get started?</h2>
+      <p>Get in touch today for a free, no-obligation chat about your new website. We'll give you honest advice and a clear quote &mdash; no hard sell, no jargon.</p>
+      <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+        <a href="mailto:mail@digitalconsultingservices.co.uk" class="btn btn-primary btn-arrow">Get in touch</a>
+        <a href="tel:07395063764" class="btn btn-secondary">Call 07395 063764</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     10. FAQ
+     ============================================================ -->
+<section class="faq" id="faq">
+  <div class="container">
+    <div class="section-header fade-up">
+      <p class="label">FAQ</p>
+      <h2>Common questions</h2>
+      <p class="text-muted">Everything you need to know before getting started.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item fade-up">
+        <button class="faq-trigger" aria-expanded="false">
+          <span>How long does it take to build my website?</span>
+          <div class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </button>
+        <div class="faq-body" aria-hidden="true">
+          <div class="faq-body-inner">Most websites are designed, built, and launched within two to three weeks. More complex projects with lots of pages or custom features may take a little longer, but we'll always give you a clear timeline upfront.</div>
+        </div>
+      </div>
+      <div class="faq-item fade-up" style="transition-delay: 0.06s">
+        <button class="faq-trigger" aria-expanded="false">
+          <span>Do I need to provide the content and images?</span>
+          <div class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </button>
+        <div class="faq-body" aria-hidden="true">
+          <div class="faq-body-inner">No &mdash; we handle everything. Our team writes all the copy for your site based on a short chat about your business. If you have photos of your work, brilliant &mdash; send them over. If not, we can source professional imagery that fits your brand.</div>
+        </div>
+      </div>
+      <div class="faq-item fade-up" style="transition-delay: 0.12s">
+        <button class="faq-trigger" aria-expanded="false">
+          <span>What happens after my site is live?</span>
+          <div class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </button>
+        <div class="faq-body" aria-hidden="true">
+          <div class="faq-body-inner">We look after everything on an ongoing basis. That includes hosting, security updates, backups, and support. If you need to update your content, add a new service, or make any changes, just drop us a message and we'll sort it out &mdash; usually within 24 hours.</div>
+        </div>
+      </div>
+      <div class="faq-item fade-up" style="transition-delay: 0.18s">
+        <button class="faq-trigger" aria-expanded="false">
+          <span>Can I switch from monthly to pay-upfront later?</span>
+          <div class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </button>
+        <div class="faq-body" aria-hidden="true">
+          <div class="faq-body-inner">Absolutely. If you start on a monthly plan and later decide you'd prefer to pay upfront, we'll work out a fair price based on what you've already paid. There's no penalty or extra charge for switching &mdash; we want to keep things simple and flexible.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     11. FOOTER
+     ============================================================ -->
+<footer class="site-footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo">DCS</div>
+        <p>Beautiful, high-performance websites for tradespeople and local service businesses across the UK.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="#services">Services</a>
+        <a href="#work">Our Work</a>
+        <a href="#examples">Examples</a>
+        <a href="#how-it-works">About</a>
+        <a href="#faq">Blog</a>
+      </div>
+      <div class="footer-col">
+        <h4>Support</h4>
+        <a href="#faq">FAQ</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#cta">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Get in touch</h4>
+        <a href="mailto:mail@digitalconsultingservices.co.uk">mail@digitalconsultingservices.co.uk</a>
+        <a href="tel:07395063764">07395 063764</a>
+      </div>
+    </div>
+    <div class="footer-bar">
+      <span>&copy; 2025 Digital Consulting Services. All rights reserved.</span>
+      <div class="footer-legal">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Cookie Policy</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================================================
+     JAVASCRIPT
+     ============================================================ -->
+<script>
+(function() {
+  'use strict';
+
+  // ---- Header scroll state ----
+  var header = document.getElementById('header');
+  var scrolled = false;
+  function onScroll() {
+    var should = window.scrollY > 16;
+    if (should !== scrolled) {
+      scrolled = should;
+      header.classList.toggle('scrolled', scrolled);
+    }
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // ---- Mobile menu ----
+  var hamburger = document.getElementById('hamburger');
+  var mobileNav = document.getElementById('mobile-nav');
+  hamburger.addEventListener('click', function() {
+    var open = mobileNav.classList.toggle('open');
+    hamburger.classList.toggle('active', open);
+    hamburger.setAttribute('aria-expanded', String(open));
+    document.body.style.overflow = open ? 'hidden' : '';
+  });
+  mobileNav.querySelectorAll('a').forEach(function(a) {
+    a.addEventListener('click', function() {
+      mobileNav.classList.remove('open');
+      hamburger.classList.remove('active');
+      hamburger.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    });
+  });
+
+  // ---- Pricing toggle ----
+  var toggle = document.getElementById('pricing-toggle');
+  var labelUpfront = document.getElementById('label-upfront');
+  var labelMonthly = document.getElementById('label-monthly');
+  var isMonthly = false;
+
+  function setPricing(monthly) {
+    isMonthly = monthly;
+    toggle.classList.toggle('active', monthly);
+    toggle.setAttribute('aria-checked', String(monthly));
+    labelUpfront.classList.toggle('active', !monthly);
+    labelMonthly.classList.toggle('active', monthly);
+
+    document.querySelectorAll('.pricing-card .price').forEach(function(el) {
+      el.textContent = monthly ? el.dataset.monthly : el.dataset.upfront;
+    });
+    document.querySelectorAll('.pricing-card .price-sub').forEach(function(el) {
+      el.textContent = monthly ? el.dataset.monthlySub : el.dataset.upfrontSub;
+    });
+  }
+
+  toggle.addEventListener('click', function() { setPricing(!isMonthly); });
+  labelUpfront.addEventListener('click', function() { setPricing(false); });
+  labelMonthly.addEventListener('click', function() { setPricing(true); });
+
+  // ---- FAQ accordion ----
+  document.querySelectorAll('.faq-trigger').forEach(function(trigger) {
+    trigger.addEventListener('click', function() {
+      var item = this.closest('.faq-item');
+      var body = item.querySelector('.faq-body');
+      var inner = item.querySelector('.faq-body-inner');
+      var isOpen = item.classList.contains('open');
+
+      // Close all
+      document.querySelectorAll('.faq-item.open').forEach(function(openItem) {
+        openItem.classList.remove('open');
+        openItem.querySelector('.faq-trigger').setAttribute('aria-expanded', 'false');
+        openItem.querySelector('.faq-body').style.maxHeight = '0';
+        openItem.querySelector('.faq-body').setAttribute('aria-hidden', 'true');
+      });
+
+      // Open clicked (if it was closed)
+      if (!isOpen) {
+        item.classList.add('open');
+        this.setAttribute('aria-expanded', 'true');
+        body.style.maxHeight = inner.scrollHeight + 24 + 'px';
+        body.setAttribute('aria-hidden', 'false');
+      }
+    });
+  });
+
+  // ---- Scroll reveal ----
+  var faders = document.querySelectorAll('.fade-up');
+  if ('IntersectionObserver' in window) {
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    faders.forEach(function(el) { observer.observe(el); });
+  } else {
+    faders.forEach(function(el) { el.classList.add('visible'); });
+  }
+})();
+</script>
+</body>
+</html>

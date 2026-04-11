@@ -1,0 +1,1094 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DCS — Websites as Professional as You Are</title>
+<meta name="description" content="Digital Consulting Services builds beautiful, fast websites for local service businesses across the UK.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --white:#FFFFFF;
+  --bg:#FAFAFA;
+  --text:#1A1A2E;
+  --text-light:#555568;
+  --accent:#3B82F6;
+  --accent-hover:#2563EB;
+  --border:#E5E5ED;
+  --card-bg:#FFFFFF;
+  --section-pad:140px;
+  --radius:12px;
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{
+  font-family:'Inter',system-ui,sans-serif;
+  color:var(--text);
+  background:var(--bg);
+  line-height:1.85;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+h1,h2,h3,h4{font-family:'Playfair Display',Georgia,serif;font-weight:600;line-height:1.25}
+h1{font-size:clamp(2.4rem,5vw,4rem);letter-spacing:-0.02em}
+h2{font-size:clamp(1.8rem,3.5vw,2.8rem);letter-spacing:-0.015em}
+h3{font-size:clamp(1.2rem,2vw,1.5rem)}
+p{max-width:600px}
+a{color:var(--accent);text-decoration:none;transition:color .25s}
+a:hover{color:var(--accent-hover)}
+img{max-width:100%;display:block}
+ul{list-style:none}
+
+.container{
+  width:100%;
+  max-width:1100px;
+  margin:0 auto;
+  padding:0 24px;
+}
+.section{
+  padding:var(--section-pad) 0;
+}
+.section-label{
+  font-family:'Inter',sans-serif;
+  font-size:0.75rem;
+  font-weight:600;
+  letter-spacing:0.15em;
+  text-transform:uppercase;
+  color:var(--accent);
+  margin-bottom:20px;
+}
+.section-title{
+  margin-bottom:28px;
+}
+.section-subtitle{
+  color:var(--text-light);
+  font-size:1.05rem;
+  margin-bottom:0;
+}
+.text-center{text-align:center}
+.mx-auto{margin-left:auto;margin-right:auto}
+
+/* Buttons */
+.btn{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:14px 32px;
+  border-radius:50px;
+  font-family:'Inter',sans-serif;
+  font-size:0.95rem;
+  font-weight:600;
+  border:none;
+  cursor:pointer;
+  transition:all .3s ease;
+}
+.btn-primary{
+  background:var(--accent);
+  color:var(--white);
+}
+.btn-primary:hover{
+  background:var(--accent-hover);
+  transform:translateY(-2px);
+  box-shadow:0 8px 30px rgba(59,130,246,.25);
+}
+.btn-secondary{
+  background:transparent;
+  color:var(--text);
+  border:1.5px solid var(--border);
+}
+.btn-secondary:hover{
+  border-color:var(--accent);
+  color:var(--accent);
+}
+
+/* ============ HEADER ============ */
+.header{
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:rgba(250,250,250,.85);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+  transition:box-shadow .3s;
+}
+.header.scrolled{
+  box-shadow:0 1px 20px rgba(0,0,0,.06);
+}
+.header-inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  height:72px;
+}
+.logo{
+  font-family:'Playfair Display',serif;
+  font-size:1.5rem;
+  font-weight:700;
+  color:var(--text);
+}
+.nav{display:flex;align-items:center;gap:40px}
+.nav a{
+  font-size:0.9rem;
+  font-weight:500;
+  color:var(--text-light);
+  transition:color .25s;
+}
+.nav a:hover{color:var(--text)}
+.header-cta{
+  padding:10px 24px;
+  font-size:0.85rem;
+}
+.hamburger{
+  display:none;
+  flex-direction:column;
+  gap:5px;
+  background:none;
+  border:none;
+  cursor:pointer;
+  padding:4px;
+}
+.hamburger span{
+  display:block;
+  width:24px;
+  height:2px;
+  background:var(--text);
+  border-radius:2px;
+  transition:all .3s;
+}
+.mobile-menu{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:var(--bg);
+  z-index:99;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:36px;
+}
+.mobile-menu.open{display:flex}
+.mobile-menu a{
+  font-size:1.3rem;
+  font-weight:500;
+  color:var(--text);
+}
+.mobile-close{
+  position:absolute;
+  top:24px;
+  right:24px;
+  background:none;
+  border:none;
+  font-size:1.8rem;
+  cursor:pointer;
+  color:var(--text);
+}
+
+@media(max-width:768px){
+  .nav{display:none}
+  .header-cta.desktop{display:none}
+  .hamburger{display:flex}
+}
+
+/* ============ HERO ============ */
+.hero{
+  padding:160px 0 180px;
+  text-align:center;
+}
+.hero h1{
+  margin-bottom:32px;
+}
+.hero p{
+  font-size:1.15rem;
+  color:var(--text-light);
+  margin:0 auto 56px;
+  max-width:520px;
+}
+.hero-buttons{
+  display:flex;
+  gap:16px;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+
+/* ============ HOW IT WORKS ============ */
+.steps{
+  display:grid;
+  gap:80px;
+  margin-top:80px;
+}
+.step{
+  display:grid;
+  grid-template-columns:80px 1fr;
+  gap:32px;
+  align-items:start;
+}
+.step-number{
+  width:64px;
+  height:64px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-family:'Playfair Display',serif;
+  font-size:1.5rem;
+  font-weight:700;
+  color:var(--accent);
+  background:rgba(59,130,246,.08);
+  flex-shrink:0;
+}
+.step h3{margin-bottom:12px}
+.step p{color:var(--text-light);font-size:0.95rem}
+
+@media(max-width:600px){
+  .step{grid-template-columns:1fr;gap:16px;text-align:center;justify-items:center}
+}
+
+/* ============ WHAT'S INCLUDED ============ */
+.included-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:48px;
+  margin-top:80px;
+}
+.included-item{
+  text-align:center;
+  padding:48px 32px;
+}
+.included-icon{
+  width:56px;
+  height:56px;
+  border-radius:50%;
+  background:rgba(59,130,246,.08);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin:0 auto 28px;
+  font-size:1.4rem;
+}
+.included-item h3{margin-bottom:16px}
+.included-item p{color:var(--text-light);font-size:0.9rem;margin:0 auto}
+
+/* ============ PRICING ============ */
+.pricing-section{
+  background:var(--white);
+}
+.toggle-wrap{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:16px;
+  margin:48px 0 80px;
+  font-size:0.9rem;
+  font-weight:500;
+  color:var(--text-light);
+}
+.toggle{
+  width:52px;
+  height:28px;
+  border-radius:50px;
+  background:var(--border);
+  position:relative;
+  cursor:pointer;
+  border:none;
+  transition:background .3s;
+}
+.toggle.active{background:var(--accent)}
+.toggle::after{
+  content:'';
+  position:absolute;
+  top:3px;
+  left:3px;
+  width:22px;
+  height:22px;
+  border-radius:50%;
+  background:var(--white);
+  transition:transform .3s;
+  box-shadow:0 1px 4px rgba(0,0,0,.15);
+}
+.toggle.active::after{transform:translateX(24px)}
+
+.pricing-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:32px;
+}
+.price-card{
+  background:var(--bg);
+  border-radius:var(--radius);
+  padding:56px 40px;
+  text-align:center;
+  border:1.5px solid transparent;
+  transition:all .35s ease;
+  position:relative;
+}
+.price-card:hover{
+  border-color:var(--accent);
+  transform:translateY(-4px);
+  box-shadow:0 20px 60px rgba(59,130,246,.08);
+}
+.price-card.featured{
+  border-color:var(--accent);
+  background:var(--white);
+}
+.price-badge{
+  position:absolute;
+  top:-14px;
+  left:50%;
+  transform:translateX(-50%);
+  background:var(--accent);
+  color:var(--white);
+  font-size:0.7rem;
+  font-weight:700;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  padding:6px 20px;
+  border-radius:50px;
+}
+.price-card h3{margin-bottom:8px}
+.price-card .price-desc{
+  color:var(--text-light);
+  font-size:0.85rem;
+  margin-bottom:32px;
+}
+.price-amount{
+  font-family:'Playfair Display',serif;
+  font-size:2.8rem;
+  font-weight:700;
+  color:var(--text);
+  margin-bottom:4px;
+}
+.price-period{
+  font-size:0.8rem;
+  color:var(--text-light);
+  margin-bottom:32px;
+}
+.price-features{
+  text-align:left;
+  margin-bottom:40px;
+}
+.price-features li{
+  padding:10px 0;
+  font-size:0.9rem;
+  color:var(--text-light);
+  display:flex;
+  align-items:flex-start;
+  gap:12px;
+}
+.price-features li::before{
+  content:'\2713';
+  color:var(--accent);
+  font-weight:700;
+  flex-shrink:0;
+}
+.price-card .btn{width:100%;justify-content:center}
+.pricing-small{
+  text-align:center;
+  margin-top:48px;
+  font-size:0.8rem;
+  color:var(--text-light);
+  max-width:600px;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+/* ============ RECENT WORK ============ */
+.work-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:32px;
+  margin-top:80px;
+}
+.work-card{
+  background:var(--white);
+  border-radius:var(--radius);
+  overflow:hidden;
+  border:1px solid var(--border);
+  transition:all .35s ease;
+}
+.work-card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 16px 48px rgba(0,0,0,.06);
+}
+.work-thumb{
+  height:220px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:0.85rem;
+  font-weight:600;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  color:var(--white);
+}
+.work-body{padding:36px 32px}
+.work-body h3{margin-bottom:10px}
+.work-body p{color:var(--text-light);font-size:0.9rem}
+
+/* ============ TESTIMONIALS ============ */
+.testimonials-section{
+  background:var(--white);
+}
+.testimonials-grid{
+  display:grid;
+  gap:64px;
+  margin-top:80px;
+}
+.testimonial{
+  max-width:640px;
+  margin:0 auto;
+  text-align:center;
+}
+.testimonial blockquote{
+  font-family:'Playfair Display',serif;
+  font-size:1.2rem;
+  line-height:1.8;
+  color:var(--text);
+  font-style:italic;
+  margin-bottom:28px;
+  position:relative;
+}
+.testimonial blockquote::before{
+  content:'\201C';
+  font-size:4rem;
+  color:var(--accent);
+  opacity:.2;
+  position:absolute;
+  top:-24px;
+  left:-8px;
+  font-style:normal;
+}
+.testimonial cite{
+  font-style:normal;
+  font-size:0.85rem;
+  font-weight:600;
+  color:var(--text-light);
+}
+
+/* ============ SEE WHAT'S POSSIBLE ============ */
+.possible-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:32px;
+  margin-top:80px;
+}
+.possible-tile{
+  border-radius:var(--radius);
+  padding:64px 40px;
+  text-align:center;
+  color:var(--white);
+  transition:transform .35s ease;
+}
+.possible-tile:hover{transform:translateY(-4px)}
+.possible-tile h3{
+  color:var(--white);
+  margin-bottom:12px;
+}
+.possible-tile p{
+  opacity:.85;
+  font-size:0.9rem;
+  margin:0 auto;
+}
+
+/* ============ CTA ============ */
+.cta-section{
+  text-align:center;
+}
+.cta-section h2{margin-bottom:24px}
+.cta-section p{
+  color:var(--text-light);
+  margin:0 auto 48px;
+  font-size:1.05rem;
+}
+
+/* ============ FAQ ============ */
+.faq-section{
+  background:var(--white);
+}
+.faq-list{
+  max-width:700px;
+  margin:80px auto 0;
+}
+.faq-item{
+  border-bottom:1px solid var(--border);
+}
+.faq-question{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  width:100%;
+  background:none;
+  border:none;
+  padding:28px 0;
+  font-family:'Inter',sans-serif;
+  font-size:1rem;
+  font-weight:600;
+  color:var(--text);
+  cursor:pointer;
+  text-align:left;
+  gap:16px;
+}
+.faq-icon{
+  width:28px;
+  height:28px;
+  border-radius:50%;
+  border:1.5px solid var(--border);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
+  transition:all .3s;
+  font-size:1.1rem;
+  color:var(--text-light);
+}
+.faq-item.open .faq-icon{
+  background:var(--accent);
+  border-color:var(--accent);
+  color:var(--white);
+  transform:rotate(45deg);
+}
+.faq-answer{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height .4s ease, padding .4s ease;
+}
+.faq-answer-inner{
+  padding:0 0 28px;
+  color:var(--text-light);
+  font-size:0.95rem;
+  line-height:1.8;
+}
+
+/* ============ FOOTER ============ */
+.footer{
+  padding:100px 0 48px;
+  border-top:1px solid var(--border);
+}
+.footer-top{
+  display:grid;
+  grid-template-columns:1.5fr 1fr 1fr;
+  gap:64px;
+  margin-bottom:80px;
+}
+.footer-brand .logo{margin-bottom:16px;display:block}
+.footer-brand p{color:var(--text-light);font-size:0.9rem;max-width:280px}
+.footer-col h4{
+  font-family:'Inter',sans-serif;
+  font-size:0.75rem;
+  font-weight:600;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  color:var(--text-light);
+  margin-bottom:20px;
+}
+.footer-col ul{display:flex;flex-direction:column;gap:12px}
+.footer-col a{font-size:0.9rem;color:var(--text-light)}
+.footer-col a:hover{color:var(--text)}
+.footer-bottom{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding-top:32px;
+  border-top:1px solid var(--border);
+  font-size:0.8rem;
+  color:var(--text-light);
+  flex-wrap:wrap;
+  gap:12px;
+}
+.footer-legal{display:flex;gap:24px}
+.footer-legal a{color:var(--text-light);font-size:0.8rem}
+
+@media(max-width:768px){
+  :root{--section-pad:100px}
+  .hero{padding:120px 0 140px}
+  .footer-top{grid-template-columns:1fr;gap:40px}
+  .pricing-grid{grid-template-columns:1fr;max-width:400px;margin:0 auto}
+  .work-grid,.possible-grid{grid-template-columns:1fr}
+  .step{grid-template-columns:1fr}
+}
+
+@media(max-width:480px){
+  :root{--section-pad:80px}
+  .hero{padding:100px 0 120px}
+}
+
+/* ============ ANIMATIONS ============ */
+.fade-up{
+  opacity:0;
+  transform:translateY(32px);
+  transition:opacity .7s ease, transform .7s ease;
+}
+.fade-up.visible{
+  opacity:1;
+  transform:translateY(0);
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header" id="header">
+  <div class="container header-inner">
+    <a href="#" class="logo">DCS</a>
+    <nav class="nav" role="navigation" aria-label="Main navigation">
+      <a href="#services">Services</a>
+      <a href="#work">Our Work</a>
+      <a href="#examples">Examples</a>
+      <a href="#about">About</a>
+      <a href="#blog">Blog</a>
+    </nav>
+    <a href="#contact" class="btn btn-primary header-cta desktop">Get in touch</a>
+    <button class="hamburger" aria-label="Open menu" id="menuOpen">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Mobile navigation">
+  <button class="mobile-close" id="menuClose" aria-label="Close menu">&times;</button>
+  <a href="#services" class="mobile-link">Services</a>
+  <a href="#work" class="mobile-link">Our Work</a>
+  <a href="#examples" class="mobile-link">Examples</a>
+  <a href="#about" class="mobile-link">About</a>
+  <a href="#blog" class="mobile-link">Blog</a>
+  <a href="#contact" class="btn btn-primary">Get in touch</a>
+</div>
+
+<!-- HERO -->
+<section class="hero section">
+  <div class="container">
+    <p class="section-label fade-up">Digital Consulting Services</p>
+    <h1 class="fade-up">Websites as professional<br>as you are</h1>
+    <p class="fade-up">We build beautiful, fast websites for tradespeople and local service businesses. No templates. No faff. Just a site that works as hard as you do.</p>
+    <div class="hero-buttons fade-up">
+      <a href="#pricing" class="btn btn-primary">See pricing</a>
+      <a href="#work" class="btn btn-secondary">View our work</a>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section" id="services">
+  <div class="container">
+    <div class="text-center fade-up">
+      <p class="section-label">How It Works</p>
+      <h2 class="section-title">Four simple steps to your<br>new website</h2>
+      <p class="section-subtitle mx-auto">No jargon, no endless meetings. We keep things straightforward so you can focus on running your business.</p>
+    </div>
+    <div class="steps">
+      <div class="step fade-up">
+        <div class="step-number">1</div>
+        <div>
+          <h3>Discovery call</h3>
+          <p>We have a relaxed chat about your business, your customers, and what you need from your website. No hard sell, just honest advice about what will actually work for you.</p>
+        </div>
+      </div>
+      <div class="step fade-up">
+        <div class="step-number">2</div>
+        <div>
+          <h3>Design &amp; content</h3>
+          <p>We create your design and write all the copy for you. You review it, suggest changes, and we refine until it is exactly right. Most clients are happy after one or two rounds.</p>
+        </div>
+      </div>
+      <div class="step fade-up">
+        <div class="step-number">3</div>
+        <div>
+          <h3>Build &amp; test</h3>
+          <p>We build your site with clean code and optimise it for speed, search engines, and mobile devices. Every page is tested across browsers and screen sizes before you see it.</p>
+        </div>
+      </div>
+      <div class="step fade-up">
+        <div class="step-number">4</div>
+        <div>
+          <h3>Launch &amp; support</h3>
+          <p>We handle the domain, hosting, SSL, and go-live. After launch, we keep everything updated and secure so you never have to worry about the technical side again.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT'S INCLUDED -->
+<section class="section" style="background:var(--white)">
+  <div class="container">
+    <div class="text-center fade-up">
+      <p class="section-label">What's Included</p>
+      <h2 class="section-title">Everything you need,<br>nothing you don't</h2>
+    </div>
+    <div class="included-grid">
+      <div class="included-item fade-up">
+        <div class="included-icon">
+          <svg width="24" height="24" fill="none" stroke="#3B82F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg>
+        </div>
+        <h3>Custom design</h3>
+        <p>A bespoke design tailored to your brand. No off-the-shelf templates or cookie-cutter layouts.</p>
+      </div>
+      <div class="included-item fade-up">
+        <div class="included-icon">
+          <svg width="24" height="24" fill="none" stroke="#3B82F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 113 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        </div>
+        <h3>Professional copywriting</h3>
+        <p>We write every word for you. Compelling, clear copy that speaks to your customers and ranks on Google.</p>
+      </div>
+      <div class="included-item fade-up">
+        <div class="included-icon">
+          <svg width="24" height="24" fill="none" stroke="#3B82F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        </div>
+        <h3>Expert build</h3>
+        <p>Hand-coded with modern technology for blazing speed, accessibility, and rock-solid reliability.</p>
+      </div>
+      <div class="included-item fade-up">
+        <div class="included-icon">
+          <svg width="24" height="24" fill="none" stroke="#3B82F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><circle cx="6" cy="6" r="1"/><circle cx="6" cy="18" r="1"/></svg>
+        </div>
+        <h3>Fast hosting</h3>
+        <p>Enterprise-grade hosting on a global CDN. Your site loads in under two seconds, wherever your customers are.</p>
+      </div>
+      <div class="included-item fade-up">
+        <div class="included-icon">
+          <svg width="24" height="24" fill="none" stroke="#3B82F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3>Security &amp; SSL</h3>
+        <p>HTTPS encryption, regular security updates, and daily backups. Your site and your customers' data stay safe.</p>
+      </div>
+      <div class="included-item fade-up">
+        <div class="included-icon">
+          <svg width="24" height="24" fill="none" stroke="#3B82F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+        </div>
+        <h3>Ongoing support</h3>
+        <p>Content changes, technical support, and performance monitoring. We are always just an email or phone call away.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section pricing-section" id="pricing">
+  <div class="container">
+    <div class="text-center fade-up">
+      <p class="section-label">Pricing</p>
+      <h2 class="section-title">Simple, transparent pricing</h2>
+      <p class="section-subtitle mx-auto">Choose a one-off build with a small monthly fee, or spread the cost with our monthly plans.</p>
+    </div>
+    <div class="toggle-wrap fade-up">
+      <span id="labelOneoff">One-off + monthly</span>
+      <button class="toggle" id="pricingToggle" role="switch" aria-checked="false" aria-label="Toggle pricing between one-off and monthly"></button>
+      <span id="labelMonthly">Monthly plan</span>
+    </div>
+    <div class="pricing-grid">
+      <!-- Starter -->
+      <div class="price-card fade-up">
+        <h3>Starter</h3>
+        <p class="price-desc">Perfect for sole traders who need a professional online presence</p>
+        <div class="price-amount" data-oneoff="&pound;995" data-monthly="&pound;59"><span>&pound;995</span></div>
+        <p class="price-period" data-oneoff-period="then &pound;29/month" data-monthly-period="per month, 24-month term">then &pound;29/month</p>
+        <ul class="price-features">
+          <li>Up to 5 pages</li>
+          <li>Mobile responsive design</li>
+          <li>Contact form</li>
+          <li>Basic SEO setup</li>
+          <li>Hosting &amp; SSL included</li>
+        </ul>
+        <a href="#contact" class="btn btn-secondary">Get started</a>
+      </div>
+      <!-- Professional -->
+      <div class="price-card featured fade-up">
+        <span class="price-badge">Most Popular</span>
+        <h3>Professional</h3>
+        <p class="price-desc">For established businesses ready to grow their online presence</p>
+        <div class="price-amount" data-oneoff="&pound;1,995" data-monthly="&pound;99"><span>&pound;1,995</span></div>
+        <p class="price-period" data-oneoff-period="then &pound;39/month" data-monthly-period="per month, 24-month term">then &pound;39/month</p>
+        <ul class="price-features">
+          <li>Up to 15 pages</li>
+          <li>Custom design &amp; copywriting</li>
+          <li>Google Business integration</li>
+          <li>Advanced SEO &amp; local schema</li>
+          <li>Blog or project portfolio</li>
+          <li>Priority support</li>
+        </ul>
+        <a href="#contact" class="btn btn-primary">Get started</a>
+      </div>
+      <!-- Growth -->
+      <div class="price-card fade-up">
+        <h3>Growth</h3>
+        <p class="price-desc">For ambitious businesses who want to dominate their local market</p>
+        <div class="price-amount" data-oneoff="&pound;3,495" data-monthly="&pound;149"><span>&pound;3,495</span></div>
+        <p class="price-period" data-oneoff-period="then &pound;59/month" data-monthly-period="per month, 24-month term">then &pound;59/month</p>
+        <ul class="price-features">
+          <li>Unlimited pages</li>
+          <li>Full content strategy</li>
+          <li>Multi-location SEO</li>
+          <li>Monthly performance reports</li>
+          <li>Conversion optimisation</li>
+          <li>Dedicated account manager</li>
+        </ul>
+        <a href="#contact" class="btn btn-secondary">Get started</a>
+      </div>
+    </div>
+    <p class="pricing-small fade-up">All prices exclude VAT. Monthly plans require a 24-month minimum term. One-off prices include design, build, and launch. Monthly hosting fee covers hosting, SSL, security updates, and basic support.</p>
+  </div>
+</section>
+
+<!-- RECENT WORK -->
+<section class="section" id="work">
+  <div class="container">
+    <div class="text-center fade-up">
+      <p class="section-label">Recent Work</p>
+      <h2 class="section-title">Sites we are proud of</h2>
+    </div>
+    <div class="work-grid">
+      <div class="work-card fade-up">
+        <div class="work-thumb" style="background:linear-gradient(135deg,#1e293b,#334155)">Colossus Scaffolding</div>
+        <div class="work-body">
+          <h3>Colossus Scaffolding</h3>
+          <p>A commanding online presence for one of Bexhill's most trusted scaffolding firms. Bold design, clear service pages, and strong local SEO.</p>
+        </div>
+      </div>
+      <div class="work-card fade-up">
+        <div class="work-thumb" style="background:linear-gradient(135deg,#7f1d1d,#b91c1c)">DJ Fox Electrical</div>
+        <div class="work-body">
+          <h3>DJ Fox Electrical</h3>
+          <p>A professional site for a local electrician that builds trust from the first click. Service-focused pages with clear calls to action throughout.</p>
+        </div>
+      </div>
+      <div class="work-card fade-up">
+        <div class="work-thumb" style="background:linear-gradient(135deg,#1e3a5f,#2563eb)">Bexhill Removals</div>
+        <div class="work-body">
+          <h3>Bexhill Removals</h3>
+          <p>A clean, reassuring site for a local removals company. Focused on building confidence with clear pricing and genuine customer reviews.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section testimonials-section" id="about">
+  <div class="container">
+    <div class="text-center fade-up">
+      <p class="section-label">Testimonials</p>
+      <h2 class="section-title">What our clients say</h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial fade-up">
+        <blockquote>DCS built us a website that actually looks like a proper company, not some dodgy template job. We have had more enquiries in the first month than we got all last year. Absolutely chuffed with it.</blockquote>
+        <cite>Paul, Colossus Scaffolding</cite>
+      </div>
+      <div class="testimonial fade-up">
+        <blockquote>I was dreading the whole website process but they made it so easy. They wrote all the words, sorted the design, and had it live in two weeks. I did not have to think about a thing.</blockquote>
+        <cite>Sarah, Bexhill Removals</cite>
+      </div>
+      <div class="testimonial fade-up">
+        <blockquote>Best money I have spent on my business. The site looks incredible, loads fast, and I am finally showing up on Google. The ongoing support is brilliant too &mdash; nothing is ever too much trouble.</blockquote>
+        <cite>Mark, DJ Fox Electrical</cite>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SEE WHAT'S POSSIBLE -->
+<section class="section" id="examples">
+  <div class="container">
+    <div class="text-center fade-up">
+      <p class="section-label">See What's Possible</p>
+      <h2 class="section-title">Explore different styles</h2>
+      <p class="section-subtitle mx-auto">Every site is unique. Here are a few directions we can take your design.</p>
+    </div>
+    <div class="possible-grid">
+      <div class="possible-tile fade-up" style="background:linear-gradient(135deg,#0f172a,#1e293b)">
+        <h3>Bold &amp; Industrial</h3>
+        <p>High contrast, strong typography, and commanding layouts for trades that mean business.</p>
+      </div>
+      <div class="possible-tile fade-up" style="background:linear-gradient(135deg,#1e3a5f,#3b82f6)">
+        <h3>Clean &amp; Professional</h3>
+        <p>Crisp design with plenty of whitespace. Inspires trust and feels established from the first visit.</p>
+      </div>
+      <div class="possible-tile fade-up" style="background:linear-gradient(135deg,#065f46,#059669)">
+        <h3>Warm &amp; Approachable</h3>
+        <p>Friendly colours and soft shapes. Perfect for businesses where personal service matters most.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section cta-section" id="contact" style="background:var(--white)">
+  <div class="container">
+    <div class="fade-up">
+      <p class="section-label">Get Started</p>
+      <h2 class="section-title">Ready to get started?</h2>
+      <p>Book a free, no-obligation discovery call and let's talk about what your business needs. No jargon, no pressure &mdash; just honest advice.</p>
+      <a href="mailto:mail@digitalconsultingservices.co.uk" class="btn btn-primary">Get in touch</a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section faq-section" id="faq">
+  <div class="container">
+    <div class="text-center fade-up">
+      <p class="section-label">FAQ</p>
+      <h2 class="section-title">Common questions</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item fade-up">
+        <button class="faq-question" aria-expanded="false">
+          How long does it take to build a website?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer" role="region">
+          <div class="faq-answer-inner">Most websites are designed, built, and launched within two to four weeks. The exact timeline depends on the package you choose and how quickly you can provide feedback on the designs. We will give you a clear timeline before we start.</div>
+        </div>
+      </div>
+      <div class="faq-item fade-up">
+        <button class="faq-question" aria-expanded="false">
+          Do I need to provide the content?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer" role="region">
+          <div class="faq-answer-inner">No. We write all the content for you as part of every package. We will interview you about your business and use that to create compelling copy that speaks to your customers. You review and approve everything before it goes live.</div>
+        </div>
+      </div>
+      <div class="faq-item fade-up">
+        <button class="faq-question" aria-expanded="false">
+          What if I want changes after launch?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer" role="region">
+          <div class="faq-answer-inner">Your monthly plan includes content changes and ongoing support. Need to update your phone number, add a new service, or tweak some wording? Just drop us an email and we will sort it, usually within 24 hours.</div>
+        </div>
+      </div>
+      <div class="faq-item fade-up">
+        <button class="faq-question" aria-expanded="false">
+          Can I cancel my monthly plan?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer" role="region">
+          <div class="faq-answer-inner">Monthly plans have a 24-month minimum term. After that, you can cancel with 30 days' notice. If you chose the one-off option, you can cancel the monthly hosting at any time, though we would not recommend it &mdash; your site needs hosting and security updates to stay online and safe.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer" id="blog">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <span class="logo">DCS</span>
+        <p>Professional websites for local service businesses. Built with care in East Sussex.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#work">Our Work</a></li>
+          <li><a href="#examples">Examples</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:mail@digitalconsultingservices.co.uk">mail@digitalconsultingservices.co.uk</a></li>
+          <li><a href="tel:07395063764">07395 063764</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2025 Digital Consulting Services. All rights reserved.</span>
+      <div class="footer-legal">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Header scroll effect
+const header = document.getElementById('header');
+window.addEventListener('scroll', () => {
+  header.classList.toggle('scrolled', window.scrollY > 10);
+}, { passive: true });
+
+// Mobile menu
+const menuOpen = document.getElementById('menuOpen');
+const menuClose = document.getElementById('menuClose');
+const mobileMenu = document.getElementById('mobileMenu');
+
+menuOpen.addEventListener('click', () => {
+  mobileMenu.classList.add('open');
+  document.body.style.overflow = 'hidden';
+});
+
+function closeMenu() {
+  mobileMenu.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+menuClose.addEventListener('click', closeMenu);
+document.querySelectorAll('.mobile-link').forEach(link => {
+  link.addEventListener('click', closeMenu);
+});
+
+// Pricing toggle
+const toggle = document.getElementById('pricingToggle');
+let isMonthly = false;
+
+toggle.addEventListener('click', () => {
+  isMonthly = !isMonthly;
+  toggle.classList.toggle('active', isMonthly);
+  toggle.setAttribute('aria-checked', isMonthly);
+
+  document.querySelectorAll('.price-amount').forEach(el => {
+    el.querySelector('span').innerHTML = isMonthly ? el.dataset.monthly : el.dataset.oneoff;
+  });
+  document.querySelectorAll('.price-period').forEach(el => {
+    el.textContent = isMonthly ? el.dataset.monthlyPeriod : el.dataset.oneoffPeriod;
+  });
+});
+
+// FAQ accordion
+document.querySelectorAll('.faq-question').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.parentElement;
+    const answer = item.querySelector('.faq-answer');
+    const inner = answer.querySelector('.faq-answer-inner');
+    const isOpen = item.classList.contains('open');
+
+    // Close all
+    document.querySelectorAll('.faq-item').forEach(i => {
+      i.classList.remove('open');
+      i.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+      i.querySelector('.faq-answer').style.maxHeight = '0';
+    });
+
+    // Open clicked (if was closed)
+    if (!isOpen) {
+      item.classList.add('open');
+      btn.setAttribute('aria-expanded', 'true');
+      answer.style.maxHeight = inner.scrollHeight + 'px';
+    }
+  });
+});
+
+// Scroll animations
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

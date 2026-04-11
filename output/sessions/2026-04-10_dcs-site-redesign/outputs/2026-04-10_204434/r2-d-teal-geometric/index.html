@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digital Consulting Services — Websites as professional as you are</title>
+<meta name="description" content="Professional websites for local businesses. Design, copy, hosting, and ongoing support — all handled for you.">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ── Reset & Tokens ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --primary: #537D96; --primary-deep: #3d6070; --primary-light: #6b9ab5;
+  --accent: #EC8F8D; --accent-hover: #d97a78;
+  --support: #44A194; --support-dark: #349587;
+  --bg: #F4F0E4; --white: #ffffff;
+  --gray-100: #f0ece0; --gray-200: #e4dfd0; --gray-400: #9a9590; --gray-600: #6b6560; --gray-800: #2c2820;
+  --font-display: 'Space Grotesk', sans-serif; --font-body: 'Inter', sans-serif;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+body { background: var(--bg); color: var(--gray-800); font-family: var(--font-body); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+img { max-width: 100%; display: block; }
+h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.15; }
+button { font-family: inherit; cursor: pointer; border: none; background: none; }
+
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section-label { font-family: var(--font-display); font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: var(--primary); margin-bottom: 12px; }
+.section-heading { font-size: clamp(2rem, 4vw, 2.75rem); font-weight: 700; color: var(--gray-800); margin-bottom: 16px; }
+.section-sub { font-size: 1.05rem; color: var(--gray-600); max-width: 560px; line-height: 1.65; }
+
+/* ── Header ── */
+.header { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bottom: 1px solid var(--gray-200); transition: box-shadow 0.3s ease; }
+.header.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.06); }
+.header-inner { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+.logo { font-family: var(--font-display); font-size: 1.35rem; font-weight: 700; color: var(--gray-800); letter-spacing: -0.02em; }
+.nav { display: flex; align-items: center; gap: 32px; }
+.nav a { font-size: 0.92rem; font-weight: 500; color: var(--gray-600); position: relative; transition: color 0.25s ease; }
+.nav a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: var(--primary); transition: width 0.3s var(--ease-out); }
+.nav a:hover { color: var(--gray-800); }
+.nav a:hover::after { width: 100%; }
+.header-cta { display: inline-flex; align-items: center; padding: 10px 22px; background: var(--primary); color: var(--white); font-family: var(--font-display); font-size: 0.9rem; font-weight: 600; border-radius: 10px; transition: background 0.25s ease, transform 0.25s ease; }
+.header-cta:hover { background: var(--primary-deep); transform: translateY(-1px); }
+.hamburger { display: none; flex-direction: column; gap: 5px; width: 28px; padding: 4px 0; }
+.hamburger span { display: block; height: 2px; background: var(--gray-800); border-radius: 2px; transition: transform 0.3s ease, opacity 0.3s ease; }
+.mobile-nav { display: none; position: fixed; top: 72px; left: 0; right: 0; bottom: 0; background: var(--bg); z-index: 99; padding: 32px 24px; flex-direction: column; gap: 8px; }
+.mobile-nav a { font-family: var(--font-display); font-size: 1.25rem; font-weight: 600; color: var(--gray-800); padding: 12px 0; border-bottom: 1px solid var(--gray-200); display: block; }
+.mobile-nav .header-cta { margin-top: 16px; text-align: center; justify-content: center; }
+.mobile-nav.open { display: flex; }
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+@media (max-width: 768px) {
+  .nav { display: none; }
+  .header-cta.desk { display: none; }
+  .hamburger { display: flex; }
+}
+
+/* ── Hero ── */
+.hero { position: relative; padding: 100px 0 80px; overflow: hidden; }
+.hero::before { content: ''; position: absolute; top: -40%; left: -10%; width: 70%; height: 140%; background: var(--primary); transform: skewX(-8deg); opacity: 0.04; border-radius: 40px; pointer-events: none; }
+.hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+.hero-label { font-family: var(--font-display); font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: var(--primary); margin-bottom: 16px; opacity: 0; animation: fadeSlideUp 0.7s var(--ease-out) 0.2s forwards; }
+.hero h1 { font-size: clamp(2.4rem, 5vw, 3.4rem); font-weight: 700; color: var(--gray-800); line-height: 1.1; margin-bottom: 20px; opacity: 0; animation: fadeSlideUp 0.7s var(--ease-out) 0.35s forwards; }
+.hero-sub { font-size: 1.1rem; color: var(--gray-600); line-height: 1.65; max-width: 480px; margin-bottom: 32px; opacity: 0; animation: fadeSlideUp 0.7s var(--ease-out) 0.5s forwards; }
+.hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; opacity: 0; animation: fadeSlideUp 0.7s var(--ease-out) 0.65s forwards; }
+.btn-primary { display: inline-flex; align-items: center; padding: 14px 28px; background: var(--primary); color: var(--white); font-family: var(--font-display); font-size: 0.95rem; font-weight: 600; border-radius: 12px; transition: background 0.25s ease, transform 0.25s var(--ease-out); }
+.btn-primary:hover { background: var(--primary-deep); transform: translateY(-2px); }
+.btn-secondary { display: inline-flex; align-items: center; padding: 14px 28px; background: transparent; color: var(--gray-800); font-family: var(--font-display); font-size: 0.95rem; font-weight: 600; border: 2px solid var(--gray-200); border-radius: 12px; transition: border-color 0.25s ease, transform 0.25s var(--ease-out); }
+.btn-secondary:hover { border-color: var(--primary); transform: translateY(-2px); }
+.hero-visual { position: relative; max-width: 460px; aspect-ratio: 4/3; margin-left: auto; }
+.geo-shape { position: absolute; border-radius: 6px; opacity: 0; animation: fadeSlideUp 0.8s var(--ease-out) forwards; }
+.geo-1 { width: 260px; height: 260px; background: var(--primary); opacity: 0; top: 8%; left: 5%; animation-delay: 0.6s; }
+.geo-1.visible { opacity: 0.85; }
+.geo-2 { width: 160px; height: 160px; background: var(--accent); top: 0; right: 8%; transform: rotate(15deg); animation-delay: 0.75s; }
+.geo-3 { width: 120px; height: 120px; background: var(--support); bottom: 12%; left: 25%; transform: rotate(-10deg); animation-delay: 0.9s; }
+.geo-3.visible { opacity: 0.7; }
+.geo-4 { width: 70px; height: 70px; border: 3px solid var(--support); background: transparent; bottom: 28%; right: 5%; transform: rotate(25deg); animation-delay: 1.05s; }
+
+@keyframes geoIn1 { from { opacity:0; transform:translateY(30px); } to { opacity:0.85; transform:translateY(0); } }
+@keyframes geoIn3 { from { opacity:0; transform:translateY(30px) rotate(-10deg); } to { opacity:0.7; transform:translateY(0) rotate(-10deg); } }
+@keyframes geoIn2 { from { opacity:0; transform:translateY(30px) rotate(15deg); } to { opacity:1; transform:translateY(0) rotate(15deg); } }
+@keyframes geoIn4 { from { opacity:0; transform:translateY(30px) rotate(25deg); } to { opacity:1; transform:translateY(0) rotate(25deg); } }
+.geo-1 { animation: geoIn1 0.8s var(--ease-out) 0.6s forwards; }
+.geo-2 { animation: geoIn2 0.8s var(--ease-out) 0.75s forwards; }
+.geo-3 { animation: geoIn3 0.8s var(--ease-out) 0.9s forwards; }
+.geo-4 { animation: geoIn4 0.8s var(--ease-out) 1.05s forwards; }
+
+@media (max-width: 768px) {
+  .hero { padding: 60px 0 50px; }
+  .hero-grid { grid-template-columns: 1fr; gap: 0; }
+  .hero-visual { display: none; }
+}
+
+/* ── How It Works ── */
+.how-it-works { padding: 100px 0; }
+.steps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 48px; }
+.step-card { background: var(--white); border-radius: 20px; padding: 36px 28px; transition: transform 0.35s var(--ease-out), box-shadow 0.35s ease; }
+.step-card:nth-child(even) { transform: translateY(2rem); }
+.step-card:hover { transform: translateY(-6px); box-shadow: 0 12px 40px rgba(0,0,0,0.08); }
+.step-card:nth-child(even):hover { transform: translateY(calc(2rem - 6px)); box-shadow: 0 12px 40px rgba(0,0,0,0.08); }
+.step-num { font-family: var(--font-display); font-size: 0.8rem; font-weight: 700; color: var(--primary); background: var(--gray-100); width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
+.step-card h3 { font-size: 1.15rem; font-weight: 700; color: var(--gray-800); margin-bottom: 10px; }
+.step-card p { font-size: 0.92rem; color: var(--gray-600); line-height: 1.6; }
+
+@media (max-width: 768px) {
+  .steps-grid { grid-template-columns: 1fr 1fr; }
+  .step-card:nth-child(even) { transform: none; }
+  .step-card:nth-child(even):hover { transform: translateY(-6px); }
+}
+@media (max-width: 480px) {
+  .steps-grid { grid-template-columns: 1fr; }
+}
+
+/* ── What's Included ── */
+.whats-included { padding: 100px 0; position: relative; }
+.whats-included::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: var(--white); transform: skewY(-2deg); z-index: -1; }
+.included-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; }
+.included-card { background: var(--bg); border-radius: 20px; padding: 32px 28px; position: relative; overflow: hidden; transition: transform 0.35s var(--ease-out); }
+.included-card::before { content: ''; position: absolute; left: 0; top: 0; width: 4px; height: 0; background: var(--primary); transition: height 0.4s var(--ease-out); border-radius: 0 2px 2px 0; }
+.included-card:hover { transform: translateY(-4px); }
+.included-card:hover::before { height: 100%; }
+.included-card:nth-child(2), .included-card:nth-child(5) { transform: translateY(1.5rem); }
+.included-card:nth-child(2):hover, .included-card:nth-child(5):hover { transform: translateY(calc(1.5rem - 4px)); }
+.included-icon { width: 44px; height: 44px; border-radius: 12px; background: var(--white); display: flex; align-items: center; justify-content: center; margin-bottom: 18px; }
+.included-icon svg { width: 22px; height: 22px; stroke: var(--primary); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.included-card h3 { font-size: 1.1rem; font-weight: 700; color: var(--gray-800); margin-bottom: 8px; }
+.included-card p { font-size: 0.9rem; color: var(--gray-600); line-height: 1.6; }
+
+@media (max-width: 768px) {
+  .included-grid { grid-template-columns: 1fr 1fr; }
+  .included-card:nth-child(2), .included-card:nth-child(5) { transform: none; }
+  .included-card:nth-child(2):hover, .included-card:nth-child(5):hover { transform: translateY(-4px); }
+}
+@media (max-width: 480px) {
+  .included-grid { grid-template-columns: 1fr; }
+}
+
+/* ── Pricing ── */
+.pricing { padding: 100px 0; }
+.pricing-header { text-align: center; margin-bottom: 48px; }
+.pricing-header .section-sub { margin: 0 auto; }
+.toggle-wrap { display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 28px; }
+.toggle-label { font-family: var(--font-display); font-size: 0.9rem; font-weight: 600; color: var(--gray-600); }
+.toggle-label.active { color: var(--gray-800); }
+.toggle-track { width: 52px; height: 28px; background: var(--gray-200); border-radius: 14px; position: relative; cursor: pointer; transition: background 0.3s ease; }
+.toggle-track.on { background: var(--primary); }
+.toggle-thumb { position: absolute; top: 3px; left: 3px; width: 22px; height: 22px; background: var(--white); border-radius: 50%; transition: transform 0.3s var(--ease-out); box-shadow: 0 1px 4px rgba(0,0,0,0.15); }
+.toggle-track.on .toggle-thumb { transform: translateX(24px); }
+.pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.pricing-card { background: var(--primary); border-radius: 24px; padding: 40px 32px; color: var(--white); display: flex; flex-direction: column; }
+.pricing-card.featured { background: var(--primary-deep); transform: scale(1.04); position: relative; }
+.pricing-badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--accent); color: var(--white); font-family: var(--font-display); font-size: 0.75rem; font-weight: 700; padding: 5px 16px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.06em; }
+.pricing-name { font-family: var(--font-display); font-size: 1.15rem; font-weight: 700; margin-bottom: 4px; }
+.pricing-desc { font-size: 0.85rem; opacity: 0.75; margin-bottom: 24px; line-height: 1.5; }
+.pricing-amount { font-family: var(--font-display); font-size: 2.6rem; font-weight: 700; line-height: 1; }
+.pricing-amount span { font-size: 1rem; font-weight: 500; opacity: 0.75; }
+.pricing-period { font-size: 0.85rem; opacity: 0.65; margin-bottom: 28px; margin-top: 4px; }
+.pricing-features { list-style: none; margin-bottom: 32px; flex: 1; }
+.pricing-features li { font-size: 0.9rem; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.12); display: flex; align-items: center; gap: 10px; }
+.pricing-features li::before { content: ''; width: 18px; height: 18px; border-radius: 50%; background: rgba(255,255,255,0.15); flex-shrink: 0; display: flex; align-items: center; justify-content: center; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='9' fill='none'%3E%3Cpath stroke='%23fff' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' d='M1 4.5 4 7.5l6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: center; }
+.pricing-cta { display: block; width: 100%; text-align: center; padding: 14px; background: var(--white); color: var(--primary); font-family: var(--font-display); font-size: 0.95rem; font-weight: 700; border-radius: 12px; transition: transform 0.25s var(--ease-out), box-shadow 0.25s ease; }
+.pricing-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
+.pricing-small { text-align: center; margin-top: 32px; font-size: 0.82rem; color: var(--gray-400); max-width: 540px; margin-left: auto; margin-right: auto; line-height: 1.6; }
+
+@media (max-width: 768px) {
+  .pricing-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
+  .pricing-card.featured { transform: none; }
+}
+
+/* ── Work ── */
+.work { padding: 100px 0; position: relative; }
+.work::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: var(--white); transform: skewY(-2deg); z-index: -1; }
+.work-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; }
+.work-card { background: var(--bg); border-radius: 24px; padding: 36px 28px; transition: transform 0.35s var(--ease-out), box-shadow 0.35s ease; }
+.work-card:nth-child(2) { transform: translateY(2rem); }
+.work-card:hover { transform: translateY(-8px) rotate(-0.5deg); box-shadow: 0 16px 48px rgba(0,0,0,0.08); }
+.work-card:nth-child(2):hover { transform: translateY(calc(2rem - 8px)) rotate(-0.5deg); box-shadow: 0 16px 48px rgba(0,0,0,0.08); }
+.work-thumb { width: 100%; height: 180px; border-radius: 14px; background: var(--gray-200); margin-bottom: 20px; display: flex; align-items: center; justify-content: center; }
+.work-thumb-text { font-family: var(--font-display); font-size: 0.85rem; font-weight: 600; color: var(--gray-400); }
+.work-card h3 { font-size: 1.15rem; font-weight: 700; color: var(--gray-800); margin-bottom: 6px; }
+.work-card p { font-size: 0.9rem; color: var(--gray-600); line-height: 1.6; }
+.work-link { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-display); font-size: 0.92rem; font-weight: 600; color: var(--primary); margin-top: 40px; transition: gap 0.3s var(--ease-out); }
+.work-link:hover { gap: 10px; }
+
+@media (max-width: 768px) {
+  .work-grid { grid-template-columns: 1fr; max-width: 420px; }
+  .work-card:nth-child(2) { transform: none; }
+  .work-card:nth-child(2):hover { transform: translateY(-8px) rotate(-0.5deg); }
+}
+
+/* ── Testimonials ── */
+.testimonials { padding: 100px 0; }
+.testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; }
+.testimonial-card { border-radius: 24px; padding: 36px 28px; background: var(--white); transition: transform 0.35s var(--ease-out); }
+.testimonial-card:nth-child(1) { transform: rotate(-1.5deg); }
+.testimonial-card:nth-child(2) { transform: translateY(1.5rem) rotate(0.5deg); background: var(--primary); color: var(--white); }
+.testimonial-card:nth-child(3) { transform: rotate(1deg); }
+.testimonial-card:nth-child(2) .testi-name { color: var(--white); }
+.testimonial-card:nth-child(2) .testi-role { color: rgba(255,255,255,0.7); }
+.testi-quote { font-size: 1rem; line-height: 1.7; margin-bottom: 24px; font-style: italic; }
+.testi-name { font-family: var(--font-display); font-weight: 700; color: var(--gray-800); font-size: 0.95rem; }
+.testi-role { font-size: 0.82rem; color: var(--gray-400); margin-top: 2px; }
+
+@media (max-width: 768px) {
+  .testimonials-grid { grid-template-columns: 1fr; max-width: 420px; }
+  .testimonial-card:nth-child(1) { transform: none; }
+  .testimonial-card:nth-child(2) { transform: none; }
+  .testimonial-card:nth-child(3) { transform: none; }
+}
+
+/* ── Examples ── */
+.examples { padding: 100px 0; position: relative; }
+.examples::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: var(--white); transform: skewY(-2deg); z-index: -1; }
+.examples-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; grid-template-rows: auto auto; gap: 24px; margin-top: 48px; }
+.example-tile { background: var(--bg); border-radius: 20px; padding: 36px 28px; transition: transform 0.35s var(--ease-out); }
+.example-tile:hover { transform: translateY(-4px); }
+.example-tile:first-child { grid-row: span 2; display: flex; flex-direction: column; justify-content: center; }
+.example-label { font-family: var(--font-display); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--primary); margin-bottom: 10px; }
+.example-tile h3 { font-size: 1.2rem; font-weight: 700; color: var(--gray-800); margin-bottom: 8px; }
+.example-tile p { font-size: 0.9rem; color: var(--gray-600); line-height: 1.6; }
+.examples-link { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-display); font-size: 0.92rem; font-weight: 600; color: var(--primary); margin-top: 40px; transition: gap 0.3s var(--ease-out); }
+.examples-link:hover { gap: 10px; }
+
+@media (max-width: 768px) {
+  .examples-grid { grid-template-columns: 1fr; }
+  .example-tile:first-child { grid-row: auto; }
+}
+
+/* ── CTA Banner ── */
+.cta-banner { padding: 100px 0; }
+.cta-inner { background: var(--primary); border-radius: 28px; padding: 64px 48px; text-align: center; color: var(--white); }
+.cta-inner h2 { font-size: clamp(1.8rem, 3.5vw, 2.5rem); font-weight: 700; margin-bottom: 16px; }
+.cta-inner p { font-size: 1.05rem; opacity: 0.85; max-width: 480px; margin: 0 auto 32px; line-height: 1.6; }
+.cta-inner .btn-white { display: inline-flex; padding: 14px 32px; background: var(--white); color: var(--primary); font-family: var(--font-display); font-size: 0.95rem; font-weight: 700; border-radius: 12px; transition: transform 0.25s var(--ease-out), box-shadow 0.25s ease; }
+.cta-inner .btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
+
+/* ── FAQ ── */
+.faq { padding: 100px 0; }
+.faq-header { text-align: center; margin-bottom: 48px; }
+.faq-header .section-sub { margin: 0 auto; }
+.faq-list { max-width: 720px; margin: 0 auto; }
+.faq-item { border-bottom: 1px solid var(--gray-200); }
+.faq-question { width: 100%; display: flex; align-items: center; justify-content: space-between; padding: 22px 0; font-family: var(--font-display); font-size: 1.05rem; font-weight: 600; color: var(--gray-800); text-align: left; cursor: pointer; background: none; border: none; }
+.faq-icon { width: 28px; height: 28px; border-radius: 8px; background: var(--gray-100); display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: transform 0.3s var(--ease-out), background 0.3s ease; }
+.faq-item.open .faq-icon { transform: rotate(45deg); background: var(--primary); }
+.faq-item.open .faq-icon svg { stroke: var(--white); }
+.faq-icon svg { width: 14px; height: 14px; stroke: var(--gray-600); stroke-width: 2; fill: none; stroke-linecap: round; }
+.faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s var(--ease-out), padding 0.4s ease; }
+.faq-answer-inner { padding: 0 0 22px; font-size: 0.95rem; color: var(--gray-600); line-height: 1.7; }
+
+/* ── Footer ── */
+.footer { background: var(--gray-800); color: var(--white); padding: 64px 0 32px; }
+.footer-top { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+.footer-logo { font-family: var(--font-display); font-size: 1.35rem; font-weight: 700; margin-bottom: 12px; }
+.footer-strapline { font-size: 0.9rem; color: rgba(255,255,255,0.6); line-height: 1.6; max-width: 300px; }
+.footer-nav-title { font-family: var(--font-display); font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px; color: rgba(255,255,255,0.5); }
+.footer-nav a { display: block; font-size: 0.9rem; color: rgba(255,255,255,0.75); padding: 5px 0; transition: color 0.25s ease; }
+.footer-nav a:hover { color: var(--white); }
+.footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+.footer-legal { display: flex; gap: 24px; }
+.footer-legal a { font-size: 0.82rem; color: rgba(255,255,255,0.5); transition: color 0.25s ease; }
+.footer-legal a:hover { color: var(--white); }
+.footer-copy { font-size: 0.82rem; color: rgba(255,255,255,0.4); }
+
+@media (max-width: 768px) {
+  .footer-top { grid-template-columns: 1fr; gap: 32px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="header" id="header">
+  <div class="container header-inner">
+    <a href="#" class="logo">DCS</a>
+    <nav class="nav">
+      <a href="#included">Services</a>
+      <a href="#work">Our Work</a>
+      <a href="#examples">Examples</a>
+      <a href="#faq">About</a>
+      <a href="#footer">Blog</a>
+    </nav>
+    <a href="#cta" class="header-cta desk">Get in touch</a>
+    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+    <a href="#included">Services</a>
+    <a href="#work">Our Work</a>
+    <a href="#examples">Examples</a>
+    <a href="#faq">About</a>
+    <a href="#footer">Blog</a>
+    <a href="#cta" class="header-cta">Get in touch</a>
+  </nav>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="container hero-grid">
+    <div class="hero-text">
+      <p class="hero-label">Digital Consulting Services</p>
+      <h1>Websites as professional as you are</h1>
+      <p class="hero-sub">You tell us about your business. We handle design, copy, hosting, and everything else.</p>
+      <div class="hero-ctas">
+        <a href="#how" class="btn-primary">See how it works</a>
+        <a href="#work" class="btn-secondary">View our work</a>
+      </div>
+    </div>
+    <div class="hero-visual" aria-hidden="true">
+      <div class="geo-shape geo-1"></div>
+      <div class="geo-shape geo-2"></div>
+      <div class="geo-shape geo-3"></div>
+      <div class="geo-shape geo-4"></div>
+    </div>
+  </div>
+</section>
+
+<!-- How It Works -->
+<section class="how-it-works" id="how">
+  <div class="container">
+    <p class="section-label">How it works</p>
+    <h2 class="section-heading">Four simple steps</h2>
+    <p class="section-sub">No jargon, no fuss. We make the whole process straightforward so you can focus on running your business.</p>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-num">01</div>
+        <h3>Tell us about your business</h3>
+        <p>We start with a quick conversation about what you do, who your customers are, and what you want your website to achieve.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">02</div>
+        <h3>We write and design</h3>
+        <p>Our team creates professional copy and a bespoke design tailored to your trade. You review and approve before we build.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">03</div>
+        <h3>We build and launch</h3>
+        <p>We develop your site with fast load times, mobile responsiveness, and SEO best practices baked in from the start.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">04</div>
+        <h3>We look after it</h3>
+        <p>Hosting, security updates, and ongoing support are all included. If you need a change, just let us know.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- What's Included -->
+<section class="whats-included" id="included">
+  <div class="container">
+    <p class="section-label">What's included</p>
+    <h2 class="section-heading">Everything you need, nothing you don't</h2>
+    <p class="section-sub">Every plan includes the essentials to get your business online and keep it running smoothly.</p>
+    <div class="included-grid">
+      <div class="included-card">
+        <div class="included-icon">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+        </div>
+        <h3>Design</h3>
+        <p>A bespoke, professional design tailored to your business and built to convert visitors into customers.</p>
+      </div>
+      <div class="included-card">
+        <div class="included-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+        </div>
+        <h3>Copywriting</h3>
+        <p>Professionally written content that speaks to your customers and helps search engines find you.</p>
+      </div>
+      <div class="included-card">
+        <div class="included-icon">
+          <svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        </div>
+        <h3>Build</h3>
+        <p>Hand-built with modern technology for fast load times, smooth animations, and a brilliant mobile experience.</p>
+      </div>
+      <div class="included-card">
+        <div class="included-icon">
+          <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><circle cx="6" cy="6" r="1"/><circle cx="6" cy="18" r="1"/></svg>
+        </div>
+        <h3>Hosting</h3>
+        <p>Fast, reliable hosting on a global network. Your site loads quickly no matter where your customers are.</p>
+      </div>
+      <div class="included-card">
+        <div class="included-icon">
+          <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </div>
+        <h3>Security</h3>
+        <p>SSL certificates, regular updates, and monitoring to keep your site safe and your customers' data protected.</p>
+      </div>
+      <div class="included-card">
+        <div class="included-icon">
+          <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <h3>Ongoing support</h3>
+        <p>Need a change? Have a question? We are here to help. Ongoing support is included with every plan.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Pricing -->
+<section class="pricing" id="pricing">
+  <div class="container">
+    <div class="pricing-header">
+      <p class="section-label">Pricing</p>
+      <h2 class="section-heading">Transparent, honest pricing</h2>
+      <p class="section-sub">A one-off build fee to get you online, plus a simple monthly plan to keep everything running.</p>
+      <div class="toggle-wrap">
+        <span class="toggle-label active" id="togMonthly">Monthly</span>
+        <button class="toggle-track" id="pricingToggle" role="switch" aria-checked="false" aria-label="Toggle annual pricing">
+          <span class="toggle-thumb"></span>
+        </button>
+        <span class="toggle-label" id="togAnnual">Annual <span style="font-size:0.75rem;color:var(--accent);font-weight:700;margin-left:4px;">Save 40%+</span></span>
+      </div>
+    </div>
+    <div class="pricing-grid">
+      <!-- Starter -->
+      <div class="pricing-card">
+        <p class="pricing-name">Starter</p>
+        <p class="pricing-desc">A professional one-page site to get your business online quickly.</p>
+        <p class="pricing-amount">&pound;995</p>
+        <p class="pricing-period">one-off build fee</p>
+        <p class="pricing-amount" style="font-size:1.6rem;">+ <span class="monthly-price">&pound;29</span><span class="annual-price" style="display:none;">&pound;59</span><span>/mo</span></p>
+        <p class="pricing-period"><span class="monthly-label">billed monthly</span><span class="annual-label" style="display:none;">billed annually (&pound;708/yr)</span></p>
+        <ul class="pricing-features">
+          <li>One-page website</li>
+          <li>Professional copywriting</li>
+          <li>Mobile responsive design</li>
+          <li>Contact form</li>
+          <li>Hosting and SSL</li>
+        </ul>
+        <a href="#cta" class="pricing-cta">Get started</a>
+      </div>
+      <!-- Professional -->
+      <div class="pricing-card featured">
+        <span class="pricing-badge">Most popular</span>
+        <p class="pricing-name">Professional</p>
+        <p class="pricing-desc">A multi-page site with full content, SEO, and everything you need to grow.</p>
+        <p class="pricing-amount">&pound;1,995</p>
+        <p class="pricing-period">one-off build fee</p>
+        <p class="pricing-amount" style="font-size:1.6rem;">+ <span class="monthly-price">&pound;39</span><span class="annual-price" style="display:none;">&pound;99</span><span>/mo</span></p>
+        <p class="pricing-period"><span class="monthly-label">billed monthly</span><span class="annual-label" style="display:none;">billed annually (&pound;1,188/yr)</span></p>
+        <ul class="pricing-features">
+          <li>Up to 10 pages</li>
+          <li>Professional copywriting</li>
+          <li>SEO optimisation</li>
+          <li>Blog section</li>
+          <li>Google Business integration</li>
+          <li>Analytics dashboard</li>
+        </ul>
+        <a href="#cta" class="pricing-cta">Get started</a>
+      </div>
+      <!-- Growth -->
+      <div class="pricing-card">
+        <p class="pricing-name">Growth</p>
+        <p class="pricing-desc">For established businesses ready to dominate their local market online.</p>
+        <p class="pricing-amount">&pound;3,495</p>
+        <p class="pricing-period">one-off build fee</p>
+        <p class="pricing-amount" style="font-size:1.6rem;">+ <span class="monthly-price">&pound;59</span><span class="annual-price" style="display:none;">&pound;149</span><span>/mo</span></p>
+        <p class="pricing-period"><span class="monthly-label">billed monthly</span><span class="annual-label" style="display:none;">billed annually (&pound;1,788/yr)</span></p>
+        <ul class="pricing-features">
+          <li>Unlimited pages</li>
+          <li>Advanced SEO strategy</li>
+          <li>Monthly content updates</li>
+          <li>Priority support</li>
+          <li>Performance reporting</li>
+          <li>Conversion optimisation</li>
+        </ul>
+        <a href="#cta" class="pricing-cta">Get started</a>
+      </div>
+    </div>
+    <p class="pricing-small">All prices exclude VAT. Annual plans are paid upfront and include a discount on the equivalent monthly rate. You can cancel your monthly plan at any time with 30 days' notice.</p>
+  </div>
+</section>
+
+<!-- Work -->
+<section class="work" id="work">
+  <div class="container">
+    <p class="section-label">Recent work</p>
+    <h2 class="section-heading">Sites we have built</h2>
+    <p class="section-sub">Real businesses, real results. Here are some of the sites we have designed and built recently.</p>
+    <div class="work-grid">
+      <div class="work-card">
+        <div class="work-thumb"><span class="work-thumb-text">Colossus Scaffolding</span></div>
+        <h3>Colossus Scaffolding</h3>
+        <p>A professional site for a growing scaffolding company, showcasing services across multiple locations.</p>
+      </div>
+      <div class="work-card">
+        <div class="work-thumb"><span class="work-thumb-text">DJ Fox Electrical</span></div>
+        <h3>DJ Fox Electrical</h3>
+        <p>A modern, dark-themed site for an electrician, built to generate local leads and establish trust.</p>
+      </div>
+      <div class="work-card">
+        <div class="work-thumb"><span class="work-thumb-text">Bexhill Removals</span></div>
+        <h3>Bexhill Removals</h3>
+        <p>A clean, conversion-focused site for a local removals company serving East Sussex.</p>
+      </div>
+    </div>
+    <a href="#" class="work-link">See all our work &rarr;</a>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="testimonials" id="testimonials">
+  <div class="container">
+    <p class="section-label">Testimonials</p>
+    <h2 class="section-heading">What our clients say</h2>
+    <p class="section-sub">We let our work and our clients speak for themselves.</p>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <p class="testi-quote">"They made the whole process incredibly simple. I just talked about my business and they handled everything else. The site looks brilliant and I have had more enquiries in the first month than the previous six."</p>
+        <p class="testi-name">Paul Richardson</p>
+        <p class="testi-role">Colossus Scaffolding</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testi-quote">"I was dreading having to sort out a website, but DCS took all the stress out of it. Professional, fast, and they actually listened to what I needed. Could not recommend them enough."</p>
+        <p class="testi-name">Sarah Mitchell</p>
+        <p class="testi-role">Mitchell Plumbing</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testi-quote">"The site they built for us is head and shoulders above what our competitors have. It loads fast, looks professional, and our customers regularly comment on it. Worth every penny."</p>
+        <p class="testi-name">Mark Edwards</p>
+        <p class="testi-role">Edwards Landscaping</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Examples -->
+<section class="examples" id="examples">
+  <div class="container">
+    <p class="section-label">Examples</p>
+    <h2 class="section-heading">Built for your trade</h2>
+    <p class="section-sub">Whatever your trade, we have the experience to build a site that works for your industry.</p>
+    <div class="examples-grid">
+      <div class="example-tile">
+        <p class="example-label">Plumbing &amp; Heating</p>
+        <h3>Plumbing websites that generate leads</h3>
+        <p>Service pages for boiler installs, emergency call-outs, and bathroom fitting. Location pages to capture local search traffic. Built to turn visitors into phone calls.</p>
+      </div>
+      <div class="example-tile">
+        <p class="example-label">Electrical</p>
+        <h3>Electrical contractor sites</h3>
+        <p>Showcase domestic and commercial services with a professional, trustworthy design that sets you apart.</p>
+      </div>
+      <div class="example-tile">
+        <p class="example-label">Gardening &amp; Landscaping</p>
+        <h3>Landscaping portfolio sites</h3>
+        <p>Visual, project-led designs that let your work do the talking. Before and after galleries, service breakdowns, and local SEO.</p>
+      </div>
+    </div>
+    <a href="#" class="examples-link">Browse all examples &rarr;</a>
+  </div>
+</section>
+
+<!-- CTA Banner -->
+<section class="cta-banner" id="cta">
+  <div class="container">
+    <div class="cta-inner">
+      <h2>Ready to get started?</h2>
+      <p>Tell us about your business and we will show you what we can build. No obligation, no hard sell.</p>
+      <a href="mailto:mail@digitalconsultingservices.co.uk" class="btn-white">Get in touch</a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="container">
+    <div class="faq-header">
+      <p class="section-label">FAQ</p>
+      <h2 class="section-heading">Common questions</h2>
+      <p class="section-sub">Everything you need to know before getting started.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          How long does it take to build my website?
+          <span class="faq-icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
+        </button>
+        <div class="faq-answer" aria-hidden="true">
+          <div class="faq-answer-inner">Most websites are designed, written, and built within two to three weeks. Larger sites with more pages may take a little longer, but we will always give you a clear timeline before we start.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          Do I need to provide any content?
+          <span class="faq-icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
+        </button>
+        <div class="faq-answer" aria-hidden="true">
+          <div class="faq-answer-inner">No. We write all the copy for you based on a short conversation about your business. If you have photos of your work, those are always helpful, but we can work without them too.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          What if I want to make changes after launch?
+          <span class="faq-icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
+        </button>
+        <div class="faq-answer" aria-hidden="true">
+          <div class="faq-answer-inner">Small changes like updating a phone number or tweaking some text are included in your monthly plan at no extra cost. For larger changes or new pages, we will give you a quote before doing any work.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          Can I cancel my monthly plan?
+          <span class="faq-icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
+        </button>
+        <div class="faq-answer" aria-hidden="true">
+          <div class="faq-answer-inner">Yes, you can cancel your monthly plan at any time with 30 days' notice. Your website remains yours — we will help you move it to another host if you choose to leave.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer" id="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <p class="footer-logo">DCS</p>
+        <p class="footer-strapline">Professional websites for local businesses. Design, copy, hosting, and support — all handled for you.</p>
+      </div>
+      <div>
+        <p class="footer-nav-title">Navigation</p>
+        <nav class="footer-nav">
+          <a href="#how">How it works</a>
+          <a href="#included">Services</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#work">Our work</a>
+          <a href="#examples">Examples</a>
+        </nav>
+      </div>
+      <div>
+        <p class="footer-nav-title">Contact</p>
+        <nav class="footer-nav">
+          <a href="mailto:mail@digitalconsultingservices.co.uk">mail@digitalconsultingservices.co.uk</a>
+          <a href="tel:07395063764">07395 063764</a>
+        </nav>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-legal">
+        <a href="#">Privacy policy</a>
+        <a href="#">Terms of service</a>
+      </div>
+      <p class="footer-copy">&copy; 2025 Digital Consulting Services. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Header scroll
+const header = document.getElementById('header');
+window.addEventListener('scroll', () => {
+  header.classList.toggle('scrolled', window.scrollY > 10);
+});
+
+// Hamburger
+const hamburger = document.getElementById('hamburger');
+const mobileNav = document.getElementById('mobileNav');
+hamburger.addEventListener('click', () => {
+  const open = hamburger.classList.toggle('open');
+  mobileNav.classList.toggle('open');
+  hamburger.setAttribute('aria-expanded', open);
+  hamburger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+});
+mobileNav.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => {
+    hamburger.classList.remove('open');
+    mobileNav.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', 'false');
+  });
+});
+
+// Pricing toggle
+const toggle = document.getElementById('pricingToggle');
+const togMonthly = document.getElementById('togMonthly');
+const togAnnual = document.getElementById('togAnnual');
+let isAnnual = false;
+
+toggle.addEventListener('click', () => {
+  isAnnual = !isAnnual;
+  toggle.classList.toggle('on', isAnnual);
+  toggle.setAttribute('aria-checked', isAnnual);
+  togMonthly.classList.toggle('active', !isAnnual);
+  togAnnual.classList.toggle('active', isAnnual);
+
+  document.querySelectorAll('.monthly-price').forEach(el => el.style.display = isAnnual ? 'none' : '');
+  document.querySelectorAll('.annual-price').forEach(el => el.style.display = isAnnual ? '' : 'none');
+  document.querySelectorAll('.monthly-label').forEach(el => el.style.display = isAnnual ? 'none' : '');
+  document.querySelectorAll('.annual-label').forEach(el => el.style.display = isAnnual ? '' : 'none');
+});
+
+// FAQ accordion
+document.querySelectorAll('.faq-question').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.parentElement;
+    const answer = item.querySelector('.faq-answer');
+    const isOpen = item.classList.contains('open');
+
+    // Close all
+    document.querySelectorAll('.faq-item').forEach(i => {
+      i.classList.remove('open');
+      i.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+      i.querySelector('.faq-answer').style.maxHeight = null;
+      i.querySelector('.faq-answer').setAttribute('aria-hidden', 'true');
+    });
+
+    // Open clicked (if it was closed)
+    if (!isOpen) {
+      item.classList.add('open');
+      btn.setAttribute('aria-expanded', 'true');
+      answer.style.maxHeight = answer.scrollHeight + 'px';
+      answer.setAttribute('aria-hidden', 'false');
+    }
+  });
+});
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+</script>
+</body>
+</html>

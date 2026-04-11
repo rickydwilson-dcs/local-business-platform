@@ -107,58 +107,57 @@ Clients choose either **upfront** (lower total cost) or **pay-monthly** (no setu
 
 ### Our Advantage
 
-Our AI-native creation process means we generate all service pages, location pages, and SEO copy at near-zero marginal cost. Every tier gets a full site with comprehensive coverage — we don't artificially limit pages. More pages = better local SEO = more leads for the client = happier client who stays longer. The tiers differ on **ongoing service level**, not site size.
+Our AI-native creation process means we generate service pages, location pages, and SEO copy at near-zero marginal cost. Themes can be custom-built or picked from our library — the library just makes it faster and helps clients visualise what they'll get. Tiers differ on **site size** (total pages) and **ongoing service level**, not on bespoke-ness.
 
 ### What Every Site Gets (all tiers)
 
-- Full service pages covering their trade (typically 10-25 pages)
-- Location pages for their service area (typically 5-20 pages)
 - Contact form with email notifications
 - Mobile-responsive, fast-loading design
-- Choice of pre-built theme from our library (colours, typography, layout — all professional)
+- Custom theme — built from scratch or adapted from our library (colours, typography, layout)
 - Full local SEO (Schema markup, meta tags, sitemap, service + location targeting)
-- Custom domain setup + management
+- Custom domain setup + management (domain cost included — no extra charge on any tier)
 - Google Workspace email setup (billed separately via Google, ~£5/month)
 - SSL certificate (included)
 - Hosting, security updates, uptime monitoring
+- Unlimited rounds of revisions during build
 
 ### What Differentiates the Tiers
 
-#### Starter
+The core differences are **page count** (service pages + location pages) and **ongoing service level**.
+
+#### Starter — up to 20 pages
 
 **For:** Tradespeople who want a professional site and to be found on Google
 
-- Everything above
-- Domain cost extra (~£15/year)
-- 1 round of revisions during build
+- Up to 20 pages total (service + location pages combined)
 - **Monthly:** 1 content update/month
 
-#### Professional
+#### Professional — up to 50 pages
 
 **For:** Businesses who want active growth support alongside their site
 
-- Everything above, plus:
+- Everything in Starter, plus:
+- Up to 50 pages total (broader service coverage + more location pages)
 - Blog (we write 1 post/month for the first 3 months)
 - Project portfolio / case studies section
 - Customer reviews / testimonials page
 - Google My Business guidance
-- Domain cost included
-- 2 rounds of revisions during build
-- **Monthly:** 2 content updates/month, quarterly SEO review
+- Google Analytics + consent management (GDPR compliant)
+- **Monthly:** 2 content updates/month
 
 > **Colossus was this tier** — sold at £2,000 + £25/month.
 
-#### Growth
+#### Growth — up to 100 pages
 
 **For:** Businesses ready to invest seriously in online lead generation
 
 - Everything in Professional, plus:
+- Up to 100 pages total (maximum service + location coverage)
 - Blog with 2 posts/month (first 3 months, then optional add-on)
-- Google Analytics + monthly performance report
+- Monthly performance report
 - Google My Business setup and optimisation
-- Consent management (GDPR compliant)
+- Quarterly SEO review (keyword tracking, content gap analysis, recommendations)
 - Priority support (same-day response)
-- 3 rounds of revisions during build
 - **Monthly:** 4 content updates/month, monthly analytics report, blog management
 
 ### Pricing Options
@@ -169,9 +168,9 @@ Clients pick their tier, then choose how to pay:
 
 | Tier         | Setup Fee | Monthly | Year 1 Total | Year 2+ (per year) |
 | ------------ | --------- | ------- | ------------ | ------------------ |
-| Starter      | £995      | £29/mo  | £1,343       | £348               |
-| Professional | £1,995    | £39/mo  | £2,463       | £468               |
-| Growth       | £3,495    | £59/mo  | £4,203       | £708               |
+| Starter      | £995      | £15/mo  | £1,175       | £180               |
+| Professional | £1,995    | £25/mo  | £2,295       | £300               |
+| Growth       | £3,495    | £50/mo  | £4,095       | £600               |
 
 Best for clients who want the lowest total cost. No minimum term on monthly.
 
@@ -179,9 +178,9 @@ Best for clients who want the lowest total cost. No minimum term on monthly.
 
 | Tier         | Setup Fee | Monthly | Min Term  | Year 1 Total | Year 2+ (per year) |
 | ------------ | --------- | ------- | --------- | ------------ | ------------------ |
-| Starter      | £0        | £59/mo  | 12 months | £708         | £708               |
-| Professional | £0        | £99/mo  | 12 months | £1,188       | £1,188             |
-| Growth       | £0        | £149/mo | 12 months | £1,788       | £1,788             |
+| Starter      | £0        | £45/mo  | 12 months | £540         | £540               |
+| Professional | £0        | £75/mo  | 12 months | £900         | £900               |
+| Growth       | £0        | £125/mo | 12 months | £1,500       | £1,500             |
 
 Best for clients who don't want a big upfront cost. 12-month minimum contract. After 12 months, rolls monthly — cancel anytime with 30 days notice. Service model: we own and maintain the site. If they stop paying, the site comes down. (Same as leasing — they're paying for an ongoing service, not buying an asset.)
 
@@ -189,25 +188,56 @@ Best for clients who don't want a big upfront cost. 12-month minimum contract. A
 
 | Scenario (50 clients)              | Upfront Revenue | Monthly Recurring | Year 1 Total |
 | ---------------------------------- | --------------- | ----------------- | ------------ |
-| All upfront (avg Professional)     | £99,750         | £23,400/yr        | £123,150     |
-| All pay-monthly (avg Professional) | £0              | £59,400/yr        | £59,400      |
-| 50/50 mix                          | £49,875         | £41,400/yr        | £91,275      |
+| All upfront (avg Professional)     | £99,750         | £15,000/yr        | £114,750     |
+| All pay-monthly (avg Professional) | £0              | £45,000/yr        | £45,000      |
+| 50/50 mix                          | £49,875         | £30,000/yr        | £79,875      |
 
 Pay-monthly generates less in year 1 but builds stronger recurring revenue. By year 2 the monthly clients are pure profit. The 50/50 mix is realistic and still hits six figures by year 2.
 
 ### Add-Ons (same for both payment options)
 
-- Custom theme design: £350 (bespoke colours, typography, layout to match exact brand guidelines — goes into our theme library for future use, so each custom build grows our offering)
-- Blog post writing: £75/post
-- Google Ads setup + management: £200/month + ad spend
+Add-ons are designed to stay automatable or one-off — they shouldn't create ongoing manual work that breaks the business model.
+
+**Content & SEO (high-automation):**
+
+- Extra pages beyond tier cap: £20/page one-off (service or location page)
+- Blog post writing: £75/post (AI-drafted, human-edited)
+- Quarterly SEO review upgrade for Professional: £50/quarter
+- FAQ expansion pack: £100 one-off (20 AI-generated Q&As on their trade)
+
+**Automated growth tools:**
+
+- Review capture widget: £10/month (automated SMS/email asks customers for Google reviews after job completion)
+- Lead notification upgrade: £5/month (SMS alerts on form submission, not just email)
+- Call tracking number: £15/month (track which enquiries came from the website)
+- Chatbot with AI FAQ (trained on their service content): £20/month
+- Live availability / booking calendar integration: £15/month (Calendly/Cal.com)
+
+**One-off / low-touch:**
+
+- Custom theme design: £350 one-off (bespoke colours, typography, layout to match exact brand guidelines — joins our theme library for future reuse)
+- Logo design: £250 one-off (AI-assisted, 3 concepts)
+- Branded stationery pack (business cards, email signature, invoice template): £150 one-off
+- Google My Business setup: £150 one-off (for Starter tier, who don't get it bundled)
+- Multi-location expansion: £200 per additional trading area (unlocks 20 extra location pages)
+
+**Ecosystem / referral revenue (zero delivery work):**
+
+- Google Workspace setup via DCS as reseller (small margin per seat)
+- Domain registration via our registrar (small margin per domain)
+- Stripe payment integration (if they want to take deposits online): £100 setup, then client pays Stripe fees direct
+
+**Higher-touch (explicit premium — flagged because they break pure automation):**
+
+- Google Ads setup + management: £200/month + ad spend (manual oversight — price accordingly)
 - Monthly SEO retainer: £200/month (keyword tracking, backlink building, content strategy)
 - Photography session coordination: at cost
 
 ### Domain & Email (managed service)
 
-We buy and manage domains on behalf of clients. We set up Google Workspace for their business email.
+We buy and manage domains on behalf of clients. We set up Google Workspace for their business email. Domain cost is included on every tier.
 
-- Domain: included in Professional/Growth, or ~£15/year for Starter
+- Domain: included on all tiers (we cover ~£15/year)
 - Google Workspace: billed to client via Google (~£5.50/user/month), we handle setup and DNS
 
 ### Actions
@@ -272,11 +302,11 @@ We buy and manage domains on behalf of clients. We set up Google Workspace for t
 
 ### Revenue Projections (illustrative)
 
-| Clients | Setup Revenue | Monthly Recurring (avg £39/mo) | Annual Revenue |
+| Clients | Setup Revenue | Monthly Recurring (avg £25/mo) | Annual Revenue |
 | ------- | ------------- | ------------------------------ | -------------- |
-| 10      | £19,950       | £4,680                         | £24,630        |
-| 25      | £49,875       | £11,700                        | £61,575        |
-| 50      | £99,750       | £23,400                        | £123,150       |
+| 10      | £19,950       | £3,000                         | £22,950        |
+| 25      | £49,875       | £7,500                         | £57,375        |
+| 50      | £99,750       | £15,000                        | £114,750       |
 
 ### Financial
 

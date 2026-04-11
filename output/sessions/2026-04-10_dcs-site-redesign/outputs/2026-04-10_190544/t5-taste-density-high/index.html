@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DCS — Digital Consulting Services</title>
+<meta name="description" content="Websites as professional as you are. Custom-built websites for local service businesses.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#1a1a2e;--bg2:#16213e;--bg3:#0f3460;--bg4:#1c1c3a;
+  --surface:#22224a;--surface2:#2a2a5a;--surface3:#33336a;
+  --text:#e8e8f0;--text-dim:#a0a0c0;--text-muted:#707090;
+  --accent:#4fc3f7;--accent2:#00e5ff;--accent-dim:#2a7fa0;
+  --green:#66bb6a;--orange:#ffb74d;--red:#ef5350;
+  --border:#333366;--border-light:#444480;
+  --radius:6px;--radius-sm:4px;
+  --font:'IBM Plex Sans',system-ui,-apple-system,sans-serif;
+}
+html{font-size:14px;scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.35;-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+img{max-width:100%;display:block}
+button{font-family:inherit;cursor:pointer;border:none;background:none}
+ul{list-style:none}
+
+/* Utility */
+.container{max-width:1200px;margin:0 auto;padding:0 16px}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
+
+/* Header */
+.header{position:sticky;top:0;z-index:100;background:rgba(26,26,46,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:8px 0}
+.header .container{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.logo{font-size:1.25rem;font-weight:700;color:var(--accent);letter-spacing:2px}
+.nav{display:flex;align-items:center;gap:6px}
+.nav a{color:var(--text-dim);font-size:.8rem;font-weight:500;padding:4px 8px;border-radius:var(--radius-sm);transition:color .2s,background .2s}
+.nav a:hover{color:var(--text);background:var(--surface);text-decoration:none}
+.btn-primary{display:inline-flex;align-items:center;gap:6px;background:var(--accent);color:var(--bg);font-size:.8rem;font-weight:600;padding:6px 14px;border-radius:var(--radius);transition:background .2s,transform .15s}
+.btn-primary:hover{background:var(--accent2);text-decoration:none;transform:translateY(-1px)}
+.btn-secondary{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--accent);color:var(--accent);font-size:.8rem;font-weight:600;padding:6px 14px;border-radius:var(--radius);transition:all .2s}
+.btn-secondary:hover{background:var(--accent);color:var(--bg);text-decoration:none}
+.hamburger{display:none;flex-direction:column;gap:4px;padding:6px;background:none;border:none}
+.hamburger span{display:block;width:20px;height:2px;background:var(--text);border-radius:1px;transition:transform .2s}
+.mobile-menu{display:none;position:absolute;top:100%;left:0;right:0;background:var(--bg2);border-bottom:1px solid var(--border);padding:12px 16px}
+.mobile-menu.active{display:block}
+.mobile-menu a{display:block;padding:8px 0;color:var(--text-dim);font-size:.85rem}
+
+/* Hero */
+.hero{padding:32px 0 28px;background:linear-gradient(135deg,var(--bg) 0%,var(--bg2) 50%,var(--bg) 100%);border-bottom:1px solid var(--border)}
+.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:center}
+.hero h1{font-size:2rem;font-weight:700;line-height:1.15;margin-bottom:8px;background:linear-gradient(135deg,var(--text),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{font-size:.85rem;color:var(--text-dim);margin-bottom:14px;max-width:460px;line-height:1.4}
+.hero-ctas{display:flex;gap:8px;flex-wrap:wrap}
+.hero-visual{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.hero-stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:12px;text-align:center;transition:transform .2s,border-color .2s}
+.hero-stat:hover{transform:translateY(-2px);border-color:var(--accent)}
+.hero-stat .num{font-size:1.5rem;font-weight:700;color:var(--accent);line-height:1}
+.hero-stat .label{font-size:.65rem;color:var(--text-muted);margin-top:4px;text-transform:uppercase;letter-spacing:.5px}
+
+/* Section spacing */
+.section{padding:24px 0;border-bottom:1px solid var(--border)}
+.section-title{font-size:1.1rem;font-weight:700;margin-bottom:4px;color:var(--text)}
+.section-sub{font-size:.78rem;color:var(--text-muted);margin-bottom:16px}
+.section-header{margin-bottom:16px}
+
+/* How It Works */
+.steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.step{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px 12px;position:relative;transition:border-color .2s,transform .2s}
+.step:hover{border-color:var(--accent);transform:translateY(-2px)}
+.step-num{font-size:.65rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;display:flex;align-items:center;gap:6px}
+.step-num::before{content:'';display:block;width:18px;height:18px;border-radius:50%;background:rgba(79,195,247,.12);border:1px solid var(--accent);flex-shrink:0}
+.step h3{font-size:.85rem;font-weight:600;margin-bottom:4px}
+.step p{font-size:.72rem;color:var(--text-dim);line-height:1.4}
+
+/* What's Included */
+.included-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.included-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:12px;transition:border-color .2s,transform .2s}
+.included-card:hover{border-color:var(--accent);transform:translateY(-2px)}
+.included-icon{width:28px;height:28px;border-radius:var(--radius-sm);background:rgba(79,195,247,.1);display:flex;align-items:center;justify-content:center;margin-bottom:8px;font-size:.9rem}
+.included-card h3{font-size:.82rem;font-weight:600;margin-bottom:3px}
+.included-card p{font-size:.7rem;color:var(--text-dim);line-height:1.4}
+
+/* Pricing */
+.pricing-toggle{display:flex;align-items:center;gap:8px;margin-bottom:14px;font-size:.75rem;color:var(--text-dim)}
+.toggle-track{width:36px;height:20px;background:var(--surface2);border-radius:10px;position:relative;cursor:pointer;border:1px solid var(--border);transition:background .2s}
+.toggle-track.active{background:var(--accent-dim)}
+.toggle-knob{width:16px;height:16px;background:var(--text);border-radius:50%;position:absolute;top:1px;left:1px;transition:left .2s}
+.toggle-track.active .toggle-knob{left:17px}
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.price-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px 12px;position:relative;transition:border-color .2s,transform .2s}
+.price-card:hover{transform:translateY(-2px)}
+.price-card.featured{border-color:var(--accent);background:linear-gradient(180deg,rgba(79,195,247,.06),var(--surface))}
+.price-badge{position:absolute;top:-8px;right:12px;background:var(--accent);color:var(--bg);font-size:.6rem;font-weight:700;padding:2px 8px;border-radius:var(--radius-sm);text-transform:uppercase;letter-spacing:.5px}
+.price-name{font-size:.85rem;font-weight:700;margin-bottom:2px}
+.price-amount{font-size:1.4rem;font-weight:700;color:var(--accent);line-height:1.2}
+.price-period{font-size:.65rem;color:var(--text-muted)}
+.price-setup{font-size:.68rem;color:var(--text-dim);margin:6px 0 10px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.price-features{margin-bottom:10px}
+.price-features li{font-size:.7rem;color:var(--text-dim);padding:2px 0 2px 14px;position:relative;line-height:1.4}
+.price-features li::before{content:'\2713';position:absolute;left:0;color:var(--green);font-size:.7rem}
+.price-card .btn-primary,.price-card .btn-secondary{width:100%;justify-content:center;font-size:.75rem;padding:7px 12px}
+.pricing-note{font-size:.65rem;color:var(--text-muted);margin-top:10px;text-align:center;line-height:1.4}
+
+/* Recent Work */
+.work-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.work-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:border-color .2s,transform .2s}
+.work-card:hover{border-color:var(--accent);transform:translateY(-2px)}
+.work-preview{height:100px;background:var(--surface2);display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--border)}
+.work-preview-placeholder{font-size:.65rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px}
+.work-info{padding:10px 12px}
+.work-info h3{font-size:.82rem;font-weight:600;margin-bottom:2px}
+.work-info p{font-size:.68rem;color:var(--text-dim);line-height:1.4}
+.work-tags{display:flex;gap:4px;margin-top:6px;flex-wrap:wrap}
+.work-tag{font-size:.6rem;padding:2px 6px;background:rgba(79,195,247,.1);color:var(--accent);border-radius:var(--radius-sm)}
+
+/* Testimonials */
+.testimonial-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.testimonial{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:12px;transition:border-color .2s}
+.testimonial:hover{border-color:var(--accent)}
+.testimonial-quote{font-size:.72rem;color:var(--text-dim);line-height:1.45;margin-bottom:8px;font-style:italic}
+.testimonial-quote::before{content:'\201C';color:var(--accent);font-size:1.2rem;line-height:0;vertical-align:-.3rem;margin-right:2px}
+.testimonial-author{display:flex;align-items:center;gap:8px}
+.testimonial-avatar{width:28px;height:28px;border-radius:50%;background:var(--surface2);display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;color:var(--accent);border:1px solid var(--border)}
+.testimonial-name{font-size:.72rem;font-weight:600}
+.testimonial-role{font-size:.62rem;color:var(--text-muted)}
+.testimonial-stars{color:var(--orange);font-size:.65rem;margin-bottom:6px;letter-spacing:1px}
+
+/* See What's Possible */
+.examples-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.example-tile{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:border-color .2s,transform .2s}
+.example-tile:hover{border-color:var(--accent);transform:translateY(-2px)}
+.example-preview{height:90px;background:var(--surface2);display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--border)}
+.example-preview-text{font-size:.6rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px}
+.example-info{padding:10px 12px}
+.example-info h3{font-size:.8rem;font-weight:600;margin-bottom:2px}
+.example-info p{font-size:.68rem;color:var(--text-dim);line-height:1.4}
+
+/* CTA Section */
+.cta-section{padding:28px 0;text-align:center;background:linear-gradient(135deg,var(--bg2),var(--bg3),var(--bg2))}
+.cta-section h2{font-size:1.3rem;font-weight:700;margin-bottom:6px}
+.cta-section p{font-size:.8rem;color:var(--text-dim);margin-bottom:14px}
+.cta-buttons{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+
+/* FAQ */
+.faq-list{max-width:800px}
+.faq-item{border:1px solid var(--border);border-radius:var(--radius);margin-bottom:6px;overflow:hidden;transition:border-color .2s}
+.faq-item.active{border-color:var(--accent)}
+.faq-question{width:100%;text-align:left;padding:10px 14px;font-size:.8rem;font-weight:600;color:var(--text);display:flex;justify-content:space-between;align-items:center;background:var(--surface);transition:background .2s}
+.faq-question:hover{background:var(--surface2)}
+.faq-icon{font-size:.7rem;color:var(--accent);transition:transform .2s;flex-shrink:0;margin-left:8px}
+.faq-item.active .faq-icon{transform:rotate(180deg)}
+.faq-answer{max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s ease}
+.faq-answer-inner{padding:0 14px 10px;font-size:.72rem;color:var(--text-dim);line-height:1.45}
+
+/* Footer */
+.footer{padding:20px 0 12px;background:var(--bg);border-top:1px solid var(--border)}
+.footer-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:14px}
+.footer-brand .logo{margin-bottom:4px}
+.footer-strapline{font-size:.68rem;color:var(--text-muted);line-height:1.4}
+.footer-nav h4{font-size:.72rem;font-weight:600;margin-bottom:6px;color:var(--text);text-transform:uppercase;letter-spacing:.5px}
+.footer-nav a{display:block;font-size:.7rem;color:var(--text-dim);padding:2px 0;transition:color .2s}
+.footer-nav a:hover{color:var(--accent)}
+.footer-contact h4{font-size:.72rem;font-weight:600;margin-bottom:6px;color:var(--text);text-transform:uppercase;letter-spacing:.5px}
+.footer-contact a,.footer-contact p{font-size:.7rem;color:var(--text-dim);line-height:1.5}
+.footer-bottom{border-top:1px solid var(--border);padding-top:10px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.footer-bottom p{font-size:.62rem;color:var(--text-muted)}
+.footer-legal{display:flex;gap:12px}
+.footer-legal a{font-size:.62rem;color:var(--text-muted)}
+
+/* Animations */
+@keyframes fadeInUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.animate-in{opacity:0;transform:translateY(12px);transition:opacity .4s ease,transform .4s ease}
+.animate-in.visible{opacity:1;transform:translateY(0)}
+
+/* Responsive */
+@media(max-width:900px){
+  .hero-grid{grid-template-columns:1fr}
+  .hero-visual{grid-template-columns:repeat(4,1fr)}
+  .steps-grid{grid-template-columns:repeat(2,1fr)}
+  .included-grid{grid-template-columns:repeat(2,1fr)}
+  .pricing-grid{grid-template-columns:repeat(3,1fr)}
+  .work-grid{grid-template-columns:repeat(3,1fr)}
+  .testimonial-grid{grid-template-columns:repeat(3,1fr)}
+  .footer-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:640px){
+  html{font-size:13px}
+  .nav{display:none}
+  .hamburger{display:flex}
+  .hero h1{font-size:1.6rem}
+  .hero-visual{grid-template-columns:repeat(2,1fr)}
+  .steps-grid{grid-template-columns:1fr 1fr}
+  .included-grid{grid-template-columns:1fr 1fr}
+  .pricing-grid{grid-template-columns:1fr}
+  .work-grid{grid-template-columns:1fr}
+  .testimonial-grid{grid-template-columns:1fr}
+  .examples-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr}
+  .footer-bottom{flex-direction:column;text-align:center}
+}
+@media(max-width:375px){
+  html{font-size:12px}
+  .container{padding:0 12px}
+  .hero{padding:20px 0}
+  .section{padding:18px 0}
+}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="header" role="banner">
+  <div class="container">
+    <a href="#" class="logo" aria-label="DCS home">DCS</a>
+    <nav class="nav" role="navigation" aria-label="Main navigation">
+      <a href="#services">Services</a>
+      <a href="#work">Our Work</a>
+      <a href="#examples">Examples</a>
+      <a href="#about">About</a>
+      <a href="#faq">Blog</a>
+      <a href="#contact" class="btn-primary">Get in touch</a>
+    </nav>
+    <button class="hamburger" aria-label="Open menu" aria-expanded="false" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu" role="navigation" aria-label="Mobile navigation">
+    <a href="#services" onclick="closeMenu()">Services</a>
+    <a href="#work" onclick="closeMenu()">Our Work</a>
+    <a href="#examples" onclick="closeMenu()">Examples</a>
+    <a href="#about" onclick="closeMenu()">About</a>
+    <a href="#faq" onclick="closeMenu()">Blog</a>
+    <a href="#contact" class="btn-primary" style="margin-top:8px;display:inline-flex" onclick="closeMenu()">Get in touch</a>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <h1>Websites as professional as you are</h1>
+        <p>Custom-built websites for tradespeople and local service businesses. No templates, no page builders &mdash; just fast, professional sites that bring in work.</p>
+        <div class="hero-ctas">
+          <a href="#pricing" class="btn-primary">View pricing</a>
+          <a href="#work" class="btn-secondary">See our work</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-stat"><div class="num">50+</div><div class="label">Sites Built</div></div>
+        <div class="hero-stat"><div class="num">99.9%</div><div class="label">Uptime</div></div>
+        <div class="hero-stat"><div class="num">&lt;1s</div><div class="label">Load Time</div></div>
+        <div class="hero-stat"><div class="num">5&star;</div><div class="label">Rated</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- How It Works -->
+<section class="section" id="services">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">How It Works</h2>
+      <p class="section-sub">From first call to live site in as little as two weeks.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step animate-in">
+        <div class="step-num">Step 1</div>
+        <h3>Discovery Call</h3>
+        <p>We learn about your business, your customers, and what you need your website to do. No jargon, no pressure &mdash; just a straightforward conversation about your goals.</p>
+      </div>
+      <div class="step animate-in">
+        <div class="step-num">Step 2</div>
+        <h3>Design &amp; Content</h3>
+        <p>We create your site design and write all the copy for you. You review everything and we refine until you&rsquo;re completely happy with how it looks and reads.</p>
+      </div>
+      <div class="step animate-in">
+        <div class="step-num">Step 3</div>
+        <h3>Build &amp; Test</h3>
+        <p>Your site is built with modern technology for speed and reliability. We test across all devices, run performance audits, and make sure everything works perfectly.</p>
+      </div>
+      <div class="step animate-in">
+        <div class="step-num">Step 4</div>
+        <h3>Launch &amp; Support</h3>
+        <p>We handle domain setup, go live, and submit your site to Google. Ongoing hosting, security updates, and support are all included &mdash; you never need to worry about the tech.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- What's Included -->
+<section class="section" id="included">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">What&rsquo;s Included</h2>
+      <p class="section-sub">Everything you need, nothing you don&rsquo;t.</p>
+    </div>
+    <div class="included-grid">
+      <div class="included-card animate-in">
+        <div class="included-icon">&#9998;</div>
+        <h3>Bespoke Design</h3>
+        <p>Custom-designed to match your brand. No cookie-cutter templates &mdash; your site will look and feel unique to your business.</p>
+      </div>
+      <div class="included-card animate-in">
+        <div class="included-icon">&#9997;</div>
+        <h3>Professional Copy</h3>
+        <p>We write all your website content. Persuasive, SEO-optimised copy that speaks to your customers and ranks on Google.</p>
+      </div>
+      <div class="included-card animate-in">
+        <div class="included-icon">&#9881;</div>
+        <h3>Modern Build</h3>
+        <p>Built with Next.js for blazing speed. Your site scores 95+ on Google PageSpeed &mdash; faster than 99% of competitor sites.</p>
+      </div>
+      <div class="included-card animate-in">
+        <div class="included-icon">&#9729;</div>
+        <h3>Managed Hosting</h3>
+        <p>Enterprise-grade hosting on Vercel&rsquo;s edge network. Your site loads fast from anywhere with 99.9% uptime guaranteed.</p>
+      </div>
+      <div class="included-card animate-in">
+        <div class="included-icon">&#9888;</div>
+        <h3>Security &amp; SSL</h3>
+        <p>Free SSL certificate, automatic security patches, and daily backups. Your site and your customers&rsquo; data stay protected.</p>
+      </div>
+      <div class="included-card animate-in">
+        <div class="included-icon">&#9742;</div>
+        <h3>Ongoing Support</h3>
+        <p>Content updates, technical support, and performance monitoring included. We&rsquo;re here when you need us &mdash; no extra charge.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Pricing -->
+<section class="section" id="pricing">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Simple, Transparent Pricing</h2>
+      <p class="section-sub">One-off build fee + monthly hosting. Or spread it all into a single monthly payment.</p>
+    </div>
+    <div class="pricing-toggle">
+      <span id="toggleLabelOff" style="font-weight:600;color:var(--text)">One-off + monthly</span>
+      <div class="toggle-track" id="pricingToggle" role="switch" aria-checked="false" aria-label="Toggle monthly pricing" tabindex="0" onclick="togglePricing()" onkeydown="if(event.key===' '||event.key==='Enter'){event.preventDefault();togglePricing()}">
+        <div class="toggle-knob"></div>
+      </div>
+      <span id="toggleLabelOn">Monthly only</span>
+    </div>
+    <div class="pricing-grid">
+      <!-- Starter -->
+      <div class="price-card animate-in">
+        <div class="price-name">Starter</div>
+        <div id="starterPrice">
+          <div class="price-amount">&pound;995</div>
+          <div class="price-period">one-off build fee</div>
+          <div class="price-setup">then &pound;29/month for hosting &amp; support</div>
+        </div>
+        <ul class="price-features">
+          <li>Up to 5 pages</li>
+          <li>Mobile responsive design</li>
+          <li>Contact form</li>
+          <li>Basic SEO setup</li>
+          <li>Google Business integration</li>
+          <li>1 round of revisions</li>
+        </ul>
+        <a href="#contact" class="btn-secondary">Get started</a>
+      </div>
+      <!-- Professional -->
+      <div class="price-card featured animate-in">
+        <div class="price-badge">Most Popular</div>
+        <div class="price-name">Professional</div>
+        <div id="proPrice">
+          <div class="price-amount">&pound;1,995</div>
+          <div class="price-period">one-off build fee</div>
+          <div class="price-setup">then &pound;39/month for hosting &amp; support</div>
+        </div>
+        <ul class="price-features">
+          <li>Up to 15 pages</li>
+          <li>Bespoke design</li>
+          <li>Professional copywriting</li>
+          <li>Advanced SEO</li>
+          <li>Blog / news section</li>
+          <li>Google Analytics setup</li>
+          <li>3 rounds of revisions</li>
+          <li>Priority support</li>
+        </ul>
+        <a href="#contact" class="btn-primary">Get started</a>
+      </div>
+      <!-- Growth -->
+      <div class="price-card animate-in">
+        <div class="price-name">Growth</div>
+        <div id="growthPrice">
+          <div class="price-amount">&pound;3,495</div>
+          <div class="price-period">one-off build fee</div>
+          <div class="price-setup">then &pound;59/month for hosting &amp; support</div>
+        </div>
+        <ul class="price-features">
+          <li>Unlimited pages</li>
+          <li>Premium bespoke design</li>
+          <li>Full content strategy</li>
+          <li>Local SEO campaign</li>
+          <li>Monthly performance reports</li>
+          <li>Booking / quote system</li>
+          <li>Unlimited revisions</li>
+          <li>Dedicated account manager</li>
+        </ul>
+        <a href="#contact" class="btn-secondary">Get started</a>
+      </div>
+    </div>
+    <p class="pricing-note">All prices exclude VAT. Monthly plans have a minimum 12-month term. Cancel anytime after that with 30 days&rsquo; notice.</p>
+  </div>
+</section>
+
+<!-- Recent Work -->
+<section class="section" id="work">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Recent Work</h2>
+      <p class="section-sub">Real sites for real businesses.</p>
+    </div>
+    <div class="work-grid">
+      <div class="work-card animate-in">
+        <div class="work-preview"><span class="work-preview-placeholder">Colossus Scaffolding</span></div>
+        <div class="work-info">
+          <h3>Colossus Scaffolding</h3>
+          <p>Commercial and residential scaffolding services. Professional site with service pages, project gallery, and enquiry system.</p>
+          <div class="work-tags"><span class="work-tag">Next.js</span><span class="work-tag">SEO</span><span class="work-tag">Multi-page</span></div>
+        </div>
+      </div>
+      <div class="work-card animate-in">
+        <div class="work-preview"><span class="work-preview-placeholder">DJ Fox Electrical</span></div>
+        <div class="work-info">
+          <h3>DJ Fox Electrical</h3>
+          <p>Domestic and commercial electrical contractor. Dark-themed site with service areas, blog, and customer reviews integration.</p>
+          <div class="work-tags"><span class="work-tag">Next.js</span><span class="work-tag">Blog</span><span class="work-tag">Local SEO</span></div>
+        </div>
+      </div>
+      <div class="work-card animate-in">
+        <div class="work-preview"><span class="work-preview-placeholder">Bexhill Removals</span></div>
+        <div class="work-info">
+          <h3>Bexhill Removals</h3>
+          <p>Local removals and storage company. Clean, trustworthy design with instant quote functionality and area coverage maps.</p>
+          <div class="work-tags"><span class="work-tag">Next.js</span><span class="work-tag">Quote Form</span><span class="work-tag">Maps</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="section" id="about">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">What Our Clients Say</h2>
+      <p class="section-sub">Don&rsquo;t take our word for it.</p>
+    </div>
+    <div class="testimonial-grid">
+      <div class="testimonial animate-in">
+        <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="testimonial-quote">Brilliant service from start to finish. They took the time to understand what we needed and delivered a site that&rsquo;s already bringing in new enquiries. The whole process was painless &mdash; I just answered a few questions and they handled everything else.</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">P</div>
+          <div><div class="testimonial-name">Paul</div><div class="testimonial-role">Colossus Scaffolding</div></div>
+        </div>
+      </div>
+      <div class="testimonial animate-in">
+        <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="testimonial-quote">I&rsquo;d been putting off getting a proper website for years because I thought it would be a hassle. DCS made it so easy. My site looks amazing, loads incredibly fast, and I&rsquo;m finally showing up on Google for the searches that matter to my business.</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">S</div>
+          <div><div class="testimonial-name">Sarah</div><div class="testimonial-role">Local Service Business</div></div>
+        </div>
+      </div>
+      <div class="testimonial animate-in">
+        <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="testimonial-quote">The speed of the site blew me away &mdash; it loads instantly. They wrote all the content for me and it&rsquo;s spot on. I&rsquo;ve had more calls in the first month than I got in six months with my old site. Worth every penny and then some.</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">M</div>
+          <div><div class="testimonial-name">Mark</div><div class="testimonial-role">DJ Fox Electrical</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- See What's Possible -->
+<section class="section" id="examples">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">See What&rsquo;s Possible</h2>
+      <p class="section-sub">Example sites showcasing different styles and industries.</p>
+    </div>
+    <div class="examples-grid">
+      <div class="example-tile animate-in">
+        <div class="example-preview"><span class="example-preview-text">Plumber Demo</span></div>
+        <div class="example-info">
+          <h3>Emergency Plumber</h3>
+          <p>Bold, urgent design with click-to-call, service area pages, and 24/7 availability messaging. Built for emergency trades.</p>
+        </div>
+      </div>
+      <div class="example-tile animate-in">
+        <div class="example-preview"><span class="example-preview-text">Builder Demo</span></div>
+        <div class="example-info">
+          <h3>Construction &amp; Building</h3>
+          <p>Project gallery focused design with before/after showcases, accreditations, and detailed service breakdowns.</p>
+        </div>
+      </div>
+      <div class="example-tile animate-in">
+        <div class="example-preview"><span class="example-preview-text">Gardener Demo</span></div>
+        <div class="example-info">
+          <h3>Garden &amp; Landscaping</h3>
+          <p>Clean, nature-inspired design with seasonal service pages, photo galleries, and online booking integration.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <div class="container">
+    <h2>Ready to get started?</h2>
+    <p>Book a free discovery call and let&rsquo;s talk about what your website needs to do.</p>
+    <div class="cta-buttons">
+      <a href="mailto:mail@digitalconsultingservices.co.uk" class="btn-primary">Get in touch</a>
+      <a href="tel:+447395063764" class="btn-secondary">Call 07395 063764</a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" id="faq">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Frequently Asked Questions</h2>
+      <p class="section-sub">Quick answers to common questions.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
+          How long does it take to build my website?
+          <span class="faq-icon">&#9660;</span>
+        </button>
+        <div class="faq-answer" role="region">
+          <div class="faq-answer-inner">Most sites are designed, built, and live within two to three weeks. Starter sites can be ready in as little as one week. The timeline depends on how quickly you can provide feedback on designs and content &mdash; we work to your schedule.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
+          Do I need to provide content and images?
+          <span class="faq-icon">&#9660;</span>
+        </button>
+        <div class="faq-answer" role="region">
+          <div class="faq-answer-inner">No. We write all the content for you based on our discovery call. If you have photos of your work, brilliant &mdash; we&rsquo;ll use them. If not, we&rsquo;ll source professional imagery that fits your brand. You don&rsquo;t need to prepare anything in advance.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
+          What if I already have a website?
+          <span class="faq-icon">&#9660;</span>
+        </button>
+        <div class="faq-answer" role="region">
+          <div class="faq-answer-inner">We&rsquo;ll handle the entire migration. We redirect all your existing URLs so you don&rsquo;t lose any Google rankings, transfer your domain, and ensure a seamless switch. Your customers won&rsquo;t notice any downtime &mdash; just a much better website.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
+          Can I update the website myself?
+          <span class="faq-icon">&#9660;</span>
+        </button>
+        <div class="faq-answer" role="region">
+          <div class="faq-answer-inner">Content updates are included in your monthly plan &mdash; just email or call us and we&rsquo;ll make the changes, usually within 24 hours. If you prefer to make changes yourself, we can set up a simple content management system for you at no extra cost.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo">DCS</div>
+        <p class="footer-strapline">Digital Consulting Services. Custom-built websites for local service businesses that actually bring in work.</p>
+      </div>
+      <div class="footer-nav">
+        <h4>Navigation</h4>
+        <a href="#services">Services</a>
+        <a href="#work">Our Work</a>
+        <a href="#examples">Examples</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <div class="footer-contact">
+        <h4>Get in Touch</h4>
+        <a href="mailto:mail@digitalconsultingservices.co.uk">mail@digitalconsultingservices.co.uk</a>
+        <p><a href="tel:+447395063764">07395 063764</a></p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Digital Consulting Services. All rights reserved.</p>
+      <div class="footer-legal">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Cookie Policy</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Mobile menu
+function toggleMenu(){
+  var m=document.getElementById('mobileMenu');
+  var b=document.querySelector('.hamburger');
+  var active=m.classList.toggle('active');
+  b.setAttribute('aria-expanded',active);
+}
+function closeMenu(){
+  document.getElementById('mobileMenu').classList.remove('active');
+  document.querySelector('.hamburger').setAttribute('aria-expanded','false');
+}
+
+// Pricing toggle
+var isMonthly=false;
+function togglePricing(){
+  isMonthly=!isMonthly;
+  var t=document.getElementById('pricingToggle');
+  var labelOff=document.getElementById('toggleLabelOff');
+  var labelOn=document.getElementById('toggleLabelOn');
+  t.classList.toggle('active',isMonthly);
+  t.setAttribute('aria-checked',isMonthly);
+  labelOff.style.fontWeight=isMonthly?'400':'600';
+  labelOff.style.color=isMonthly?'var(--text-dim)':'var(--text)';
+  labelOn.style.fontWeight=isMonthly?'600':'400';
+  labelOn.style.color=isMonthly?'var(--text)':'var(--text-dim)';
+
+  if(isMonthly){
+    document.getElementById('starterPrice').innerHTML='<div class="price-amount">&pound;59<span class="price-period">/mo</span></div><div class="price-setup">No upfront cost. 12-month minimum term.</div>';
+    document.getElementById('proPrice').innerHTML='<div class="price-amount">&pound;99<span class="price-period">/mo</span></div><div class="price-setup">No upfront cost. 12-month minimum term.</div>';
+    document.getElementById('growthPrice').innerHTML='<div class="price-amount">&pound;149<span class="price-period">/mo</span></div><div class="price-setup">No upfront cost. 12-month minimum term.</div>';
+  }else{
+    document.getElementById('starterPrice').innerHTML='<div class="price-amount">&pound;995</div><div class="price-period">one-off build fee</div><div class="price-setup">then &pound;29/month for hosting &amp; support</div>';
+    document.getElementById('proPrice').innerHTML='<div class="price-amount">&pound;1,995</div><div class="price-period">one-off build fee</div><div class="price-setup">then &pound;39/month for hosting &amp; support</div>';
+    document.getElementById('growthPrice').innerHTML='<div class="price-amount">&pound;3,495</div><div class="price-period">one-off build fee</div><div class="price-setup">then &pound;59/month for hosting &amp; support</div>';
+  }
+}
+
+// FAQ accordion
+function toggleFaq(btn){
+  var item=btn.parentElement;
+  var answer=item.querySelector('.faq-answer');
+  var inner=answer.querySelector('.faq-answer-inner');
+  var isActive=item.classList.contains('active');
+
+  // Close all
+  document.querySelectorAll('.faq-item').forEach(function(fi){
+    fi.classList.remove('active');
+    fi.querySelector('.faq-question').setAttribute('aria-expanded','false');
+    fi.querySelector('.faq-answer').style.maxHeight='0';
+  });
+
+  // Open clicked (if wasn't already open)
+  if(!isActive){
+    item.classList.add('active');
+    btn.setAttribute('aria-expanded','true');
+    answer.style.maxHeight=inner.scrollHeight+16+'px';
+  }
+}
+
+// Scroll animations
+var observer=new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(e.isIntersecting){
+      e.target.classList.add('visible');
+    }
+  });
+},{threshold:0.1,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.animate-in').forEach(function(el){observer.observe(el)});
+</script>
+
+</body>
+</html>

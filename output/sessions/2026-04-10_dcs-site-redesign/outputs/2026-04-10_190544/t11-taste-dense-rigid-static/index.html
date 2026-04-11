@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DCS - Digital Consulting Services</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:14px;line-height:1.3;scroll-behavior:auto}
+body{font-family:'IBM Plex Sans',sans-serif;color:#333;background:#fff;-webkit-font-smoothing:antialiased}
+a{color:#2563EB;text-decoration:none}
+a:hover{text-decoration:underline}
+button{font-family:inherit;cursor:pointer}
+img{max-width:100%;display:block}
+ul{list-style:none}
+
+/* Utility */
+.container{max-width:1080px;margin:0 auto;padding:0 16px}
+.btn{display:inline-block;padding:6px 14px;font-size:.8125rem;font-weight:600;border:none;border-radius:3px;line-height:1.3;text-align:center}
+.btn-primary{background:#2563EB;color:#fff}
+.btn-primary:hover{background:#1d4ed8;text-decoration:none}
+.btn-outline{background:transparent;color:#2563EB;border:1px solid #2563EB}
+.btn-outline:hover{background:#2563EB;color:#fff;text-decoration:none}
+.section-title{font-size:1.125rem;font-weight:700;margin-bottom:8px;color:#111}
+.section-sub{font-size:.8125rem;color:#555;margin-bottom:12px}
+
+/* Header */
+.header{position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid #ddd;padding:6px 0}
+.header .container{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.logo{font-size:1rem;font-weight:700;color:#111;letter-spacing:-.02em}
+.nav{display:flex;align-items:center;gap:12px}
+.nav a{font-size:.75rem;color:#333;font-weight:500}
+.nav a:hover{color:#2563EB}
+.header .btn{font-size:.75rem;padding:4px 10px}
+.hamburger{display:none;background:none;border:none;font-size:1.25rem;color:#333;padding:4px}
+.mobile-menu{display:none;position:absolute;top:100%;left:0;right:0;background:#fff;border-bottom:1px solid #ddd;padding:8px 16px;flex-direction:column;gap:6px}
+.mobile-menu a{font-size:.8125rem;color:#333;display:block;padding:4px 0}
+.mobile-menu .btn{width:fit-content;margin-top:4px}
+
+/* Hero */
+.hero{padding:20px 0 16px;text-align:center;border-bottom:1px solid #eee}
+.hero h1{font-size:1.5rem;font-weight:700;color:#111;margin-bottom:4px;line-height:1.2}
+.hero p{font-size:.8125rem;color:#555;max-width:540px;margin:0 auto 10px}
+.hero-ctas{display:flex;gap:8px;justify-content:center}
+
+/* How It Works */
+.how-it-works{padding:16px 0;border-bottom:1px solid #eee}
+.steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.step{text-align:center;padding:8px}
+.step-num{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:#2563EB;color:#fff;font-size:.6875rem;font-weight:700;margin-bottom:4px}
+.step h3{font-size:.8125rem;font-weight:600;margin-bottom:2px;color:#111}
+.step p{font-size:.6875rem;color:#555}
+
+/* What's Included */
+.whats-included{padding:16px 0;border-bottom:1px solid #eee}
+.included-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.included-item{padding:10px;border:1px solid #e5e5e5;border-radius:3px}
+.included-item h3{font-size:.8125rem;font-weight:600;color:#111;margin-bottom:2px}
+.included-item p{font-size:.6875rem;color:#555}
+
+/* Pricing */
+.pricing{padding:16px 0;border-bottom:1px solid #eee}
+.toggle-wrap{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:12px}
+.toggle-label{font-size:.75rem;color:#555;font-weight:500}
+.toggle-label.active{color:#111;font-weight:600}
+.toggle-btn{position:relative;width:36px;height:20px;background:#ccc;border-radius:10px;border:none;padding:0;cursor:pointer}
+.toggle-btn::after{content:'';position:absolute;top:2px;left:2px;width:16px;height:16px;background:#fff;border-radius:50%}
+.toggle-btn.on{background:#2563EB}
+.toggle-btn.on::after{left:18px}
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.price-card{border:1px solid #e5e5e5;border-radius:3px;padding:12px;text-align:center}
+.price-card.featured{border-color:#2563EB;background:#f8faff}
+.price-card h3{font-size:.875rem;font-weight:700;color:#111;margin-bottom:4px}
+.price-card .price{font-size:1.25rem;font-weight:700;color:#2563EB;margin-bottom:2px;line-height:1.2}
+.price-card .price-sub{font-size:.6875rem;color:#777;margin-bottom:6px}
+.price-card ul{text-align:left;margin-bottom:8px}
+.price-card li{font-size:.6875rem;color:#555;padding:2px 0;padding-left:12px;position:relative}
+.price-card li::before{content:'\2713';position:absolute;left:0;color:#2563EB;font-size:.625rem}
+.price-card .btn{width:100%;padding:5px 0;font-size:.75rem}
+.pricing-note{font-size:.625rem;color:#888;text-align:center;margin-top:8px}
+
+/* Recent Work */
+.recent-work{padding:16px 0;border-bottom:1px solid #eee}
+.work-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.work-card{border:1px solid #e5e5e5;border-radius:3px;padding:10px}
+.work-card h3{font-size:.8125rem;font-weight:600;color:#111;margin-bottom:2px}
+.work-card p{font-size:.6875rem;color:#555;margin-bottom:4px}
+.work-card a{font-size:.6875rem}
+
+/* Testimonials */
+.testimonials{padding:16px 0;border-bottom:1px solid #eee}
+.testimonials-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.testimonial{border:1px solid #e5e5e5;border-radius:3px;padding:10px}
+.testimonial blockquote{font-size:.6875rem;color:#555;font-style:italic;margin-bottom:4px;line-height:1.4}
+.testimonial cite{font-size:.6875rem;font-weight:600;font-style:normal;color:#111}
+
+/* See What's Possible */
+.possible{padding:16px 0;border-bottom:1px solid #eee}
+.possible-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.possible-tile{border:1px solid #e5e5e5;border-radius:3px;padding:10px;text-align:center}
+.possible-tile h3{font-size:.8125rem;font-weight:600;color:#111;margin-bottom:2px}
+.possible-tile p{font-size:.6875rem;color:#555}
+
+/* CTA Band */
+.cta-band{padding:16px 0;text-align:center;background:#f5f5f5;border-bottom:1px solid #eee}
+.cta-band h2{font-size:1.125rem;font-weight:700;color:#111;margin-bottom:4px}
+.cta-band p{font-size:.8125rem;color:#555;margin-bottom:8px}
+
+/* FAQ */
+.faq{padding:16px 0;border-bottom:1px solid #eee}
+.faq-list{max-width:700px;margin:0 auto}
+.faq-item{border:1px solid #e5e5e5;margin-bottom:4px;border-radius:3px}
+.faq-q{display:flex;align-items:center;justify-content:space-between;width:100%;background:none;border:none;padding:8px 10px;font-size:.8125rem;font-weight:600;color:#111;text-align:left;cursor:pointer}
+.faq-q::after{content:'+';font-size:.875rem;color:#888;flex-shrink:0;margin-left:8px}
+.faq-item.open .faq-q::after{content:'\2212'}
+.faq-a{display:none;padding:0 10px 8px;font-size:.6875rem;color:#555;line-height:1.4}
+.faq-item.open .faq-a{display:block}
+
+/* Footer */
+.footer{padding:12px 0;background:#222;color:#aaa;font-size:.6875rem}
+.footer .container{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
+.footer-col h4{font-size:.75rem;font-weight:600;color:#fff;margin-bottom:4px}
+.footer-col a{color:#aaa;font-size:.6875rem;display:block;padding:1px 0}
+.footer-col a:hover{color:#fff}
+.footer-bottom{margin-top:8px;padding-top:8px;border-top:1px solid #444;font-size:.625rem;color:#777;text-align:center;width:100%}
+
+/* Mobile */
+@media(max-width:767px){
+  html{font-size:13px}
+  .nav{display:none}
+  .header .btn.desktop-cta{display:none}
+  .hamburger{display:block}
+  .mobile-menu.open{display:flex}
+  .steps-grid{grid-template-columns:repeat(2,1fr)}
+  .included-grid{grid-template-columns:repeat(2,1fr)}
+  .pricing-grid{grid-template-columns:1fr}
+  .work-grid{grid-template-columns:1fr}
+  .testimonials-grid{grid-template-columns:1fr}
+  .possible-grid{grid-template-columns:1fr}
+  .footer .container{flex-direction:column;gap:8px}
+}
+@media(max-width:374px){
+  .steps-grid{grid-template-columns:1fr}
+  .included-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="header" role="banner">
+  <div class="container">
+    <span class="logo">DCS</span>
+    <nav class="nav" role="navigation" aria-label="Main navigation">
+      <a href="#services">Services</a>
+      <a href="#work">Our Work</a>
+      <a href="#examples">Examples</a>
+      <a href="#about">About</a>
+      <a href="#blog">Blog</a>
+    </nav>
+    <a href="#contact" class="btn btn-primary desktop-cta">Get in touch</a>
+    <button class="hamburger" aria-label="Open menu" aria-expanded="false" onclick="toggleMenu()">&#9776;</button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu" role="navigation" aria-label="Mobile navigation">
+    <a href="#services">Services</a>
+    <a href="#work">Our Work</a>
+    <a href="#examples">Examples</a>
+    <a href="#about">About</a>
+    <a href="#blog">Blog</a>
+    <a href="#contact" class="btn btn-primary">Get in touch</a>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="container">
+    <h1>Websites as professional as you are</h1>
+    <p>Custom-built websites for tradespeople and local service businesses. Fast, mobile-friendly, and designed to bring you more customers.</p>
+    <div class="hero-ctas">
+      <a href="#pricing" class="btn btn-primary">View pricing</a>
+      <a href="#contact" class="btn btn-outline">Get in touch</a>
+    </div>
+  </div>
+</section>
+
+<!-- How It Works -->
+<section class="how-it-works">
+  <div class="container">
+    <div class="section-title" style="text-align:center">How It Works</div>
+    <div class="steps-grid">
+      <div class="step">
+        <span class="step-num">1</span>
+        <h3>Tell us about your business</h3>
+        <p>Share your services, service areas, and what makes you different.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">2</span>
+        <h3>We build your site</h3>
+        <p>Custom design and content tailored to your trade and local area.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">3</span>
+        <h3>Review and refine</h3>
+        <p>You review the site and we make adjustments until it's perfect.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">4</span>
+        <h3>Go live</h3>
+        <p>Your site launches and starts bringing in enquiries from day one.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- What's Included -->
+<section class="whats-included">
+  <div class="container">
+    <div class="section-title" style="text-align:center">What's Included</div>
+    <div class="included-grid">
+      <div class="included-item">
+        <h3>Custom Design</h3>
+        <p>Bespoke design that reflects your brand and stands out from template sites.</p>
+      </div>
+      <div class="included-item">
+        <h3>Mobile Responsive</h3>
+        <p>Looks perfect on phones, tablets, and desktops. Over 60% of traffic is mobile.</p>
+      </div>
+      <div class="included-item">
+        <h3>SEO Optimised</h3>
+        <p>Built with local SEO best practices so customers in your area find you first.</p>
+      </div>
+      <div class="included-item">
+        <h3>Fast Loading</h3>
+        <p>Sub-second load times. Faster sites rank higher and convert more visitors.</p>
+      </div>
+      <div class="included-item">
+        <h3>Contact Forms</h3>
+        <p>Enquiry forms that send leads straight to your inbox or phone.</p>
+      </div>
+      <div class="included-item">
+        <h3>Ongoing Support</h3>
+        <p>Hosting, maintenance, updates, and support included in your monthly plan.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Pricing -->
+<section class="pricing" id="pricing">
+  <div class="container">
+    <div class="section-title" style="text-align:center">Pricing</div>
+    <div class="section-sub" style="text-align:center">Choose one-off or monthly. Switch any time.</div>
+    <div class="toggle-wrap">
+      <span class="toggle-label active" id="labelOneoff">One-off + monthly</span>
+      <button class="toggle-btn" id="pricingToggle" aria-label="Toggle pricing" onclick="togglePricing()"></button>
+      <span class="toggle-label" id="labelMonthly">Monthly only</span>
+    </div>
+    <div class="pricing-grid">
+      <!-- Starter -->
+      <div class="price-card">
+        <h3>Starter</h3>
+        <div class="price" id="starterPrice">&pound;995</div>
+        <div class="price-sub" id="starterSub">+ &pound;29/mo hosting &amp; support</div>
+        <ul>
+          <li>Up to 5 pages</li>
+          <li>Mobile responsive</li>
+          <li>Contact form</li>
+          <li>Basic SEO setup</li>
+        </ul>
+        <a href="#contact" class="btn btn-outline">Get started</a>
+      </div>
+      <!-- Professional -->
+      <div class="price-card featured">
+        <h3>Professional</h3>
+        <div class="price" id="proPrice">&pound;1,995</div>
+        <div class="price-sub" id="proSub">+ &pound;39/mo hosting &amp; support</div>
+        <ul>
+          <li>Up to 15 pages</li>
+          <li>Advanced SEO</li>
+          <li>Google Business setup</li>
+          <li>Blog integration</li>
+          <li>Analytics dashboard</li>
+        </ul>
+        <a href="#contact" class="btn btn-primary">Get started</a>
+      </div>
+      <!-- Growth -->
+      <div class="price-card">
+        <h3>Growth</h3>
+        <div class="price" id="growthPrice">&pound;3,495</div>
+        <div class="price-sub" id="growthSub">+ &pound;59/mo hosting &amp; support</div>
+        <ul>
+          <li>Unlimited pages</li>
+          <li>Full SEO strategy</li>
+          <li>Monthly content updates</li>
+          <li>Priority support</li>
+          <li>Conversion tracking</li>
+        </ul>
+        <a href="#contact" class="btn btn-outline">Get started</a>
+      </div>
+    </div>
+    <p class="pricing-note">All prices exclude VAT. Monthly plans include hosting, SSL, maintenance, and support. No lock-in contracts.</p>
+  </div>
+</section>
+
+<!-- Recent Work -->
+<section class="recent-work" id="work">
+  <div class="container">
+    <div class="section-title" style="text-align:center">Recent Work</div>
+    <div class="work-grid">
+      <div class="work-card">
+        <h3>Colossus Scaffolding</h3>
+        <p>Professional scaffolding company in East Sussex. Full site with service pages, project gallery, and local SEO.</p>
+        <a href="#" aria-label="View Colossus Scaffolding project">View project &rarr;</a>
+      </div>
+      <div class="work-card">
+        <h3>DJ Fox Electrical</h3>
+        <p>Electrician serving Sussex and Surrey. Service pages, testimonials, blog, and Google Business integration.</p>
+        <a href="#" aria-label="View DJ Fox Electrical project">View project &rarr;</a>
+      </div>
+      <div class="work-card">
+        <h3>Bexhill Taxis</h3>
+        <p>Local taxi service in Bexhill-on-Sea. Booking integration, area guides, and fare calculator.</p>
+        <a href="#" aria-label="View Bexhill Taxis project">View project &rarr;</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="testimonials">
+  <div class="container">
+    <div class="section-title" style="text-align:center">What Our Clients Say</div>
+    <div class="testimonials-grid">
+      <div class="testimonial">
+        <blockquote>"Since launching our new site, enquiries have gone up noticeably. The whole process was straightforward and professional."</blockquote>
+        <cite>James F., Colossus Scaffolding</cite>
+      </div>
+      <div class="testimonial">
+        <blockquote>"I needed a site that looked the part and brought in work. DCS delivered exactly that, and the ongoing support is brilliant."</blockquote>
+        <cite>Dan F., DJ Fox Electrical</cite>
+      </div>
+      <div class="testimonial">
+        <blockquote>"Fast, reliable, and they actually understand what tradespeople need from a website. Highly recommend."</blockquote>
+        <cite>Mark T., Bexhill Taxis</cite>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- See What's Possible -->
+<section class="possible" id="examples">
+  <div class="container">
+    <div class="section-title" style="text-align:center">See What's Possible</div>
+    <div class="possible-grid">
+      <div class="possible-tile">
+        <h3>Electricians</h3>
+        <p>Service pages, certifications, emergency callout info, and local area targeting.</p>
+      </div>
+      <div class="possible-tile">
+        <h3>Builders &amp; Scaffolding</h3>
+        <p>Project galleries, service breakdowns, health &amp; safety credentials, and quote forms.</p>
+      </div>
+      <div class="possible-tile">
+        <h3>Plumbers &amp; Heating</h3>
+        <p>Emergency services, boiler brands, Gas Safe registration, and booking forms.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Band -->
+<section class="cta-band" id="contact">
+  <div class="container">
+    <h2>Ready to get started?</h2>
+    <p>Get in touch today for a free, no-obligation chat about your new website.</p>
+    <a href="mailto:mail@digitalconsultingservices.co.uk" class="btn btn-primary">Get in touch</a>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="about">
+  <div class="container">
+    <div class="section-title" style="text-align:center">Frequently Asked Questions</div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">How long does it take to build a website?</button>
+        <div class="faq-a" role="region">Most sites are completed within 2-3 weeks from initial briefing. More complex builds with lots of content may take 4-6 weeks. We'll give you a clear timeline upfront.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Do I need to provide content?</button>
+        <div class="faq-a" role="region">Not necessarily. We can write professional copy based on a brief chat about your business. If you have existing content you'd like to use, we're happy to work with that too.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Can I update the site myself?</button>
+        <div class="faq-a" role="region">Content updates are included in your monthly plan. Just send us the changes and we'll make them, usually within 24 hours. No need to learn a CMS.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">What if I want to cancel?</button>
+        <div class="faq-a" role="region">There are no lock-in contracts. You can cancel the monthly plan at any time. If you've paid one-off, the site is yours. We'll help you migrate if needed.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-col">
+      <h4>DCS</h4>
+      <a href="mailto:mail@digitalconsultingservices.co.uk">mail@digitalconsultingservices.co.uk</a>
+      <a href="tel:07395063764">07395 063764</a>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <a href="#services">Web Design</a>
+      <a href="#services">SEO</a>
+      <a href="#services">Content</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="#about">About</a>
+      <a href="#blog">Blog</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="footer-bottom">&copy; 2025 Digital Consulting Services. All rights reserved.</div>
+  </div>
+</footer>
+
+<script>
+function toggleMenu(){
+  var m=document.getElementById('mobileMenu');
+  var b=document.querySelector('.hamburger');
+  var open=m.classList.toggle('open');
+  b.setAttribute('aria-expanded',open);
+}
+
+var monthly=false;
+function togglePricing(){
+  monthly=!monthly;
+  var t=document.getElementById('pricingToggle');
+  var lo=document.getElementById('labelOneoff');
+  var lm=document.getElementById('labelMonthly');
+  if(monthly){
+    t.classList.add('on');
+    lo.classList.remove('active');
+    lm.classList.add('active');
+    document.getElementById('starterPrice').innerHTML='&pound;59<span style="font-size:.6875rem;font-weight:400">/mo</span>';
+    document.getElementById('starterSub').textContent='No upfront cost';
+    document.getElementById('proPrice').innerHTML='&pound;99<span style="font-size:.6875rem;font-weight:400">/mo</span>';
+    document.getElementById('proSub').textContent='No upfront cost';
+    document.getElementById('growthPrice').innerHTML='&pound;149<span style="font-size:.6875rem;font-weight:400">/mo</span>';
+    document.getElementById('growthSub').textContent='No upfront cost';
+  }else{
+    t.classList.remove('on');
+    lo.classList.add('active');
+    lm.classList.remove('active');
+    document.getElementById('starterPrice').innerHTML='&pound;995';
+    document.getElementById('starterSub').innerHTML='+ &pound;29/mo hosting &amp; support';
+    document.getElementById('proPrice').innerHTML='&pound;1,995';
+    document.getElementById('proSub').innerHTML='+ &pound;39/mo hosting &amp; support';
+    document.getElementById('growthPrice').innerHTML='&pound;3,495';
+    document.getElementById('growthSub').innerHTML='+ &pound;59/mo hosting &amp; support';
+  }
+}
+
+function toggleFaq(btn){
+  var item=btn.parentElement;
+  var isOpen=item.classList.contains('open');
+  // Close all
+  document.querySelectorAll('.faq-item').forEach(function(el){
+    el.classList.remove('open');
+    el.querySelector('.faq-q').setAttribute('aria-expanded','false');
+  });
+  if(!isOpen){
+    item.classList.add('open');
+    btn.setAttribute('aria-expanded','true');
+  }
+}
+</script>
+</body>
+</html>

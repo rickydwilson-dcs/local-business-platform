@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DCS - Websites as Professional as You Are</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --gold:#C9A96E;
+  --gold-light:#D4B97E;
+  --gold-dark:#A8893E;
+  --bg:#1a1a1a;
+  --bg-elevated:#222;
+  --bg-card:#252525;
+  --bg-deep:#111;
+  --text:#e8e4de;
+  --text-muted:#9a9590;
+  --text-dim:#6a6560;
+  --white:#f5f2ed;
+  --serif:'Playfair Display',Georgia,serif;
+  --sans:'Inter',system-ui,sans-serif;
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+button{font-family:inherit;cursor:pointer;border:none;background:none}
+
+/* Utility */
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+.gold-line{width:60px;height:1px;background:var(--gold);margin:0 auto}
+.gold-line-left{width:60px;height:1px;background:var(--gold)}
+.section-label{font-family:var(--sans);font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);font-weight:500}
+.section-heading{font-family:var(--serif);font-size:clamp(2rem,4vw,3.2rem);color:var(--white);line-height:1.15;font-weight:500}
+.section-sub{color:var(--text-muted);font-size:1.05rem;max-width:560px;line-height:1.7}
+
+/* Z-Axis Cascade: sections overlap */
+.cascade-section{position:relative;z-index:1}
+.cascade-up{margin-top:-60px;position:relative;z-index:2}
+.cascade-up-sm{margin-top:-40px;position:relative;z-index:3}
+.cascade-up-md{margin-top:-50px;position:relative;z-index:4}
+
+/* ─── HEADER ─── */
+.site-header{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(26,26,26,.92);backdrop-filter:blur(16px);border-bottom:1px solid rgba(201,169,110,.12);transition:background .3s}
+.header-inner{display:flex;align-items:center;justify-content:space-between;height:72px;max-width:1200px;margin:0 auto;padding:0 24px}
+.logo{font-family:var(--serif);font-size:1.6rem;font-weight:600;color:var(--white);letter-spacing:.04em}
+.logo span{color:var(--gold)}
+.nav-links{display:flex;gap:32px;align-items:center}
+.nav-links a{font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;color:var(--text-muted);transition:color .3s;font-weight:400}
+.nav-links a:hover{color:var(--gold)}
+.header-cta{font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;padding:10px 24px;border:1px solid var(--gold);color:var(--gold);transition:all .3s;font-weight:500}
+.header-cta:hover{background:var(--gold);color:var(--bg)}
+.hamburger{display:none;flex-direction:column;gap:5px;width:28px;padding:4px 0}
+.hamburger span{display:block;height:1.5px;background:var(--white);transition:all .3s;transform-origin:center}
+.mobile-nav{display:none;position:fixed;top:72px;left:0;right:0;bottom:0;background:rgba(17,17,17,.98);z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:32px}
+.mobile-nav.open{display:flex}
+.mobile-nav a{font-family:var(--serif);font-size:1.5rem;color:var(--text);transition:color .3s}
+.mobile-nav a:hover{color:var(--gold)}
+
+/* ─── HERO ─── */
+.hero{padding:180px 0 140px;position:relative;overflow:hidden;z-index:1}
+.hero::before{content:'';position:absolute;top:0;right:-10%;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(201,169,110,.06) 0%,transparent 70%);pointer-events:none}
+.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.hero-label{font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;font-weight:500}
+.hero h1{font-family:var(--serif);font-size:clamp(2.6rem,5vw,4rem);line-height:1.08;color:var(--white);font-weight:500;margin-bottom:24px}
+.hero h1 em{font-style:italic;color:var(--gold)}
+.hero-sub{color:var(--text-muted);font-size:1.1rem;line-height:1.7;margin-bottom:40px;max-width:480px}
+.hero-ctas{display:flex;gap:16px;flex-wrap:wrap}
+.btn-primary{display:inline-block;padding:14px 36px;background:var(--gold);color:var(--bg);font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;transition:all .3s}
+.btn-primary:hover{background:var(--gold-light);transform:translateY(-1px)}
+.btn-secondary{display:inline-block;padding:14px 36px;border:1px solid rgba(201,169,110,.4);color:var(--gold);font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;font-weight:500;transition:all .3s}
+.btn-secondary:hover{border-color:var(--gold);background:rgba(201,169,110,.08)}
+.hero-visual{position:relative;display:flex;align-items:center;justify-content:center;min-height:400px}
+.hero-abstract{width:100%;aspect-ratio:1;position:relative}
+.hero-abstract .ring{position:absolute;border:1px solid rgba(201,169,110,.15);border-radius:50%}
+.hero-abstract .ring-1{width:100%;height:100%;top:0;left:0;animation:spin 40s linear infinite}
+.hero-abstract .ring-2{width:75%;height:75%;top:12.5%;left:12.5%;border-color:rgba(201,169,110,.25);animation:spin 30s linear reverse infinite}
+.hero-abstract .ring-3{width:50%;height:50%;top:25%;left:25%;border-color:rgba(201,169,110,.35);animation:spin 20s linear infinite}
+.hero-abstract .dot{position:absolute;width:8px;height:8px;background:var(--gold);border-radius:50%}
+.hero-abstract .dot-1{top:0;left:50%;transform:translateX(-50%)}
+.hero-abstract .dot-2{bottom:12.5%;right:12.5%}
+.hero-abstract .dot-3{top:25%;left:25%}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+
+/* ─── HOW IT WORKS ─── */
+.how-it-works{padding:120px 0 100px;background:var(--bg-elevated);border-top:1px solid rgba(201,169,110,.08)}
+.how-header{text-align:center;margin-bottom:72px}
+.how-header .section-heading{margin:16px 0 12px}
+.steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:40px}
+.step{position:relative;padding:40px 28px 36px;background:var(--bg);border:1px solid rgba(201,169,110,.1);transition:all .4s}
+.step:hover{border-color:rgba(201,169,110,.3);transform:translateY(-4px)}
+.step-num{font-family:var(--serif);font-size:3.5rem;color:rgba(201,169,110,.15);font-weight:700;line-height:1;margin-bottom:16px}
+.step h3{font-family:var(--serif);font-size:1.25rem;color:var(--white);margin-bottom:12px;font-weight:500}
+.step p{color:var(--text-muted);font-size:.92rem;line-height:1.65}
+
+/* ─── WHAT'S INCLUDED ─── */
+.whats-included{padding:120px 0 100px;position:relative}
+.whats-included::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:1px;height:80px;background:linear-gradient(to bottom,rgba(201,169,110,.4),transparent)}
+.included-header{text-align:center;margin-bottom:72px}
+.included-header .section-heading{margin:16px 0}
+.included-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+.included-card{padding:44px 32px;background:var(--bg-card);border:1px solid rgba(201,169,110,.08);transition:all .4s;position:relative;overflow:hidden}
+.included-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--gold);transform:scaleX(0);transition:transform .4s;transform-origin:left}
+.included-card:hover::before{transform:scaleX(1)}
+.included-card:hover{transform:translateY(-4px);border-color:rgba(201,169,110,.2)}
+.included-icon{width:48px;height:48px;border:1px solid rgba(201,169,110,.3);display:flex;align-items:center;justify-content:center;margin-bottom:24px;color:var(--gold);font-size:1.2rem}
+.included-card h3{font-family:var(--serif);font-size:1.2rem;color:var(--white);margin-bottom:12px;font-weight:500}
+.included-card p{color:var(--text-muted);font-size:.92rem;line-height:1.65}
+
+/* ─── PRICING ─── */
+.pricing{padding:120px 0 100px;background:var(--bg-deep);position:relative}
+.pricing::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:200px;height:1px;background:linear-gradient(to right,transparent,rgba(201,169,110,.3),transparent)}
+.pricing-header{text-align:center;margin-bottom:20px}
+.pricing-header .section-heading{margin:16px 0 12px}
+.pricing-header .section-sub{margin:0 auto}
+.toggle-wrap{display:flex;justify-content:center;align-items:center;gap:16px;margin:36px 0 64px}
+.toggle-label{font-size:.85rem;color:var(--text-muted);transition:color .3s}
+.toggle-label.active{color:var(--gold)}
+.toggle-track{width:52px;height:28px;background:rgba(201,169,110,.2);border-radius:14px;position:relative;cursor:pointer;transition:background .3s}
+.toggle-track.monthly{background:rgba(201,169,110,.35)}
+.toggle-knob{position:absolute;top:3px;left:3px;width:22px;height:22px;background:var(--gold);border-radius:50%;transition:transform .3s}
+.toggle-track.monthly .toggle-knob{transform:translateX(24px)}
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;align-items:start}
+.price-card{padding:48px 36px;background:var(--bg-card);border:1px solid rgba(201,169,110,.1);transition:all .4s;position:relative}
+.price-card.featured{border-color:var(--gold);z-index:2;transform:scale(1.03)}
+.price-card.featured::before{content:'Most Popular';position:absolute;top:-1px;left:50%;transform:translateX(-50%) translateY(-50%);background:var(--gold);color:var(--bg);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;padding:6px 20px;font-weight:600}
+.price-card:hover{border-color:rgba(201,169,110,.3);transform:translateY(-4px)}
+.price-card.featured:hover{transform:scale(1.03) translateY(-4px)}
+.price-tier{font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:24px;font-weight:500}
+.price-amount{font-family:var(--serif);font-size:3rem;color:var(--white);font-weight:600;line-height:1}
+.price-amount span{font-size:1rem;color:var(--text-muted);font-weight:400}
+.price-period{color:var(--text-dim);font-size:.85rem;margin:8px 0 28px}
+.price-divider{width:100%;height:1px;background:rgba(201,169,110,.15);margin-bottom:28px}
+.price-features{list-style:none;margin-bottom:36px}
+.price-features li{padding:8px 0;color:var(--text-muted);font-size:.9rem;position:relative;padding-left:20px}
+.price-features li::before{content:'';position:absolute;left:0;top:16px;width:6px;height:6px;border:1px solid var(--gold);border-radius:50%}
+.price-card .btn-primary{display:block;text-align:center;width:100%}
+.price-card .btn-secondary{display:block;text-align:center;width:100%}
+.pricing-note{text-align:center;margin-top:48px;color:var(--text-dim);font-size:.85rem;max-width:600px;margin-left:auto;margin-right:auto;line-height:1.6}
+
+/* ─── RECENT WORK ─── */
+.recent-work{padding:120px 0 100px;background:var(--bg-elevated)}
+.work-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:64px}
+.work-header .section-heading{margin:16px 0 0}
+.work-link{font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);border-bottom:1px solid rgba(201,169,110,.3);padding-bottom:4px;transition:border-color .3s}
+.work-link:hover{border-color:var(--gold)}
+.work-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+.work-card{position:relative;overflow:hidden;background:var(--bg);border:1px solid rgba(201,169,110,.08);transition:all .4s}
+.work-card:hover{border-color:rgba(201,169,110,.25);transform:translateY(-4px)}
+.work-thumb{height:240px;background:var(--bg-card);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.work-thumb::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,var(--bg) 0%,transparent 50%);opacity:.5}
+.work-thumb-inner{font-family:var(--serif);font-size:1.1rem;color:var(--text-dim);letter-spacing:.05em}
+.work-info{padding:28px 28px 32px}
+.work-info h3{font-family:var(--serif);font-size:1.2rem;color:var(--white);margin-bottom:8px;font-weight:500}
+.work-info p{color:var(--text-muted);font-size:.88rem}
+
+/* ─── TESTIMONIALS ─── */
+.testimonials{padding:120px 0 100px;position:relative}
+.testimonials::before{content:'\201C';position:absolute;top:60px;left:50%;transform:translateX(-50%);font-family:var(--serif);font-size:12rem;color:rgba(201,169,110,.05);line-height:1;pointer-events:none}
+.test-header{text-align:center;margin-bottom:72px}
+.test-header .section-heading{margin:16px 0}
+.test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+.test-card{padding:40px 32px;background:var(--bg-card);border:1px solid rgba(201,169,110,.08);position:relative;transition:all .4s}
+.test-card:hover{border-color:rgba(201,169,110,.2);transform:translateY(-4px)}
+.test-card::before{content:'\201C';font-family:var(--serif);font-size:4rem;color:rgba(201,169,110,.2);line-height:1;position:absolute;top:24px;left:28px}
+.test-quote{font-family:var(--serif);font-size:1.05rem;color:var(--text);line-height:1.7;font-style:italic;margin-bottom:24px;padding-top:20px}
+.test-divider{width:40px;height:1px;background:var(--gold);margin-bottom:16px}
+.test-author{font-size:.8rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);font-weight:500}
+
+/* ─── SEE WHAT'S POSSIBLE ─── */
+.examples{padding:120px 0 100px;background:var(--bg-elevated)}
+.examples-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:64px}
+.examples-header .section-heading{margin:16px 0 0}
+.examples-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+.example-tile{height:280px;background:var(--bg);border:1px solid rgba(201,169,110,.1);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;transition:all .4s}
+.example-tile:hover{border-color:rgba(201,169,110,.3);transform:translateY(-4px)}
+.example-tile::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(201,169,110,.04),transparent);pointer-events:none}
+.example-tile span{font-family:var(--serif);font-size:1.1rem;color:var(--text-dim);letter-spacing:.04em;z-index:1}
+
+/* ─── CTA SECTION ─── */
+.cta-section{padding:140px 0;position:relative;text-align:center;background:var(--bg);overflow:hidden}
+.cta-section::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:800px;height:800px;border-radius:50%;background:radial-gradient(circle,rgba(201,169,110,.06) 0%,transparent 70%);pointer-events:none}
+.cta-section .section-heading{margin-bottom:16px}
+.cta-sub{color:var(--text-muted);font-size:1.05rem;margin-bottom:40px;max-width:480px;margin-left:auto;margin-right:auto}
+
+/* ─── FAQ ─── */
+.faq{padding:120px 0 100px;background:var(--bg-deep)}
+.faq-header{text-align:center;margin-bottom:64px}
+.faq-header .section-heading{margin:16px 0}
+.faq-list{max-width:720px;margin:0 auto}
+.faq-item{border-bottom:1px solid rgba(201,169,110,.1)}
+.faq-question{width:100%;display:flex;justify-content:space-between;align-items:center;padding:24px 0;text-align:left;color:var(--white);font-family:var(--serif);font-size:1.1rem;font-weight:400;transition:color .3s;background:none;cursor:pointer}
+.faq-question:hover{color:var(--gold)}
+.faq-icon{width:24px;height:24px;position:relative;flex-shrink:0;margin-left:16px}
+.faq-icon::before,.faq-icon::after{content:'';position:absolute;background:var(--gold);transition:transform .3s}
+.faq-icon::before{width:14px;height:1px;top:50%;left:50%;transform:translate(-50%,-50%)}
+.faq-icon::after{width:1px;height:14px;top:50%;left:50%;transform:translate(-50%,-50%)}
+.faq-item.open .faq-icon::after{transform:translate(-50%,-50%) rotate(90deg)}
+.faq-answer{max-height:0;overflow:hidden;transition:max-height .4s ease,padding .4s ease}
+.faq-answer-inner{padding:0 0 24px;color:var(--text-muted);font-size:.95rem;line-height:1.7}
+
+/* ─── FOOTER ─── */
+.site-footer{padding:80px 0 40px;background:var(--bg);border-top:1px solid rgba(201,169,110,.1)}
+.footer-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:48px;margin-bottom:60px}
+.footer-brand .logo{margin-bottom:12px}
+.footer-strapline{color:var(--text-muted);font-size:.9rem;max-width:280px}
+.footer-nav h4,.footer-contact h4{font-family:var(--serif);font-size:1rem;color:var(--white);margin-bottom:16px;font-weight:500}
+.footer-nav ul{list-style:none}
+.footer-nav li{margin-bottom:10px}
+.footer-nav a{color:var(--text-muted);font-size:.9rem;transition:color .3s}
+.footer-nav a:hover{color:var(--gold)}
+.footer-contact p,.footer-contact a{color:var(--text-muted);font-size:.9rem;display:block;margin-bottom:8px;transition:color .3s}
+.footer-contact a:hover{color:var(--gold)}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:32px;border-top:1px solid rgba(201,169,110,.08)}
+.footer-copy{color:var(--text-dim);font-size:.8rem}
+.footer-legal{display:flex;gap:24px}
+.footer-legal a{color:var(--text-dim);font-size:.8rem;transition:color .3s}
+.footer-legal a:hover{color:var(--gold)}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:1024px){
+  .hero-grid{grid-template-columns:1fr;gap:48px}
+  .hero-visual{max-width:360px;margin:0 auto}
+  .steps-grid{grid-template-columns:repeat(2,1fr)}
+  .pricing-grid{grid-template-columns:1fr;max-width:420px;margin:0 auto}
+  .price-card.featured{transform:none}
+  .price-card.featured:hover{transform:translateY(-4px)}
+  .work-grid,.test-grid,.examples-grid,.included-grid{grid-template-columns:1fr 1fr}
+  .footer-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:768px){
+  .nav-links,.header-cta{display:none}
+  .hamburger{display:flex}
+  .hero{padding:140px 0 100px}
+  .steps-grid,.included-grid,.work-grid,.test-grid,.examples-grid{grid-template-columns:1fr}
+  .work-header,.examples-header{flex-direction:column;align-items:flex-start;gap:16px}
+  .footer-grid{grid-template-columns:1fr}
+  .footer-bottom{flex-direction:column;gap:16px;text-align:center}
+  .cascade-up,.cascade-up-sm,.cascade-up-md{margin-top:0}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header" id="header">
+  <div class="header-inner">
+    <a href="#" class="logo">D<span>C</span>S</a>
+    <nav class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#work">Our Work</a>
+      <a href="#examples">Examples</a>
+      <a href="#about">About</a>
+      <a href="#faq">Blog</a>
+    </nav>
+    <a href="#contact" class="header-cta">Get in touch</a>
+    <button class="hamburger" id="hamburger" aria-label="Open navigation menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <nav class="mobile-nav" id="mobileNav" role="navigation" aria-label="Mobile navigation">
+    <a href="#services">Services</a>
+    <a href="#work">Our Work</a>
+    <a href="#examples">Examples</a>
+    <a href="#about">About</a>
+    <a href="#faq">Blog</a>
+    <a href="#contact" class="btn-primary" style="margin-top:16px">Get in touch</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero cascade-section">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-label">Digital Consulting Services</div>
+        <h1>Websites as <em>professional</em> as you are</h1>
+        <p class="hero-sub">We design, build, and manage websites for tradespeople and local service businesses. You get on with the job -- we handle the rest.</p>
+        <div class="hero-ctas">
+          <a href="#pricing" class="btn-primary">See pricing</a>
+          <a href="#work" class="btn-secondary">View our work</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-abstract">
+          <div class="ring ring-1"></div>
+          <div class="ring ring-2"></div>
+          <div class="ring ring-3"></div>
+          <div class="dot dot-1"></div>
+          <div class="dot dot-2"></div>
+          <div class="dot dot-3"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-it-works cascade-up" id="services">
+  <div class="container">
+    <div class="how-header">
+      <span class="section-label">The Process</span>
+      <h2 class="section-heading">How it works</h2>
+      <div class="gold-line" style="margin-top:16px"></div>
+    </div>
+    <div class="steps-grid">
+      <div class="step">
+        <div class="step-num">01</div>
+        <h3>Tell us about your business</h3>
+        <p>We start with a conversation about your business, your customers, and what you want your website to achieve. No jargon, no pressure.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <h3>We write &amp; design</h3>
+        <p>Our team writes compelling copy that speaks to your customers and designs a site that reflects the quality of your work.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <h3>Build &amp; launch</h3>
+        <p>We build your site with modern technology, optimise it for search engines, and launch it on a fast, secure platform.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <h3>We look after it</h3>
+        <p>Hosting, security updates, backups, and ongoing support are all included. Need a change? Just ask and we will sort it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT'S INCLUDED -->
+<section class="whats-included cascade-up-sm">
+  <div class="container">
+    <div class="included-header">
+      <span class="section-label">Everything You Need</span>
+      <h2 class="section-heading">What's included</h2>
+      <div class="gold-line" style="margin-top:16px"></div>
+    </div>
+    <div class="included-grid">
+      <div class="included-card">
+        <div class="included-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+        </div>
+        <h3>Bespoke Design</h3>
+        <p>A custom design tailored to your brand. No templates, no cookie-cutter layouts -- a site that looks and feels uniquely yours.</p>
+      </div>
+      <div class="included-card">
+        <div class="included-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        </div>
+        <h3>Professional Copywriting</h3>
+        <p>Persuasive, SEO-friendly copy written by professionals who understand local service businesses and what your customers need to hear.</p>
+      </div>
+      <div class="included-card">
+        <div class="included-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/><line x1="14" y1="4" x2="10" y2="20"/></svg>
+        </div>
+        <h3>Modern Build</h3>
+        <p>Built with cutting-edge technology for lightning-fast load times, perfect mobile responsiveness, and top search engine rankings.</p>
+      </div>
+      <div class="included-card">
+        <div class="included-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><circle cx="6" cy="6" r="1"/><circle cx="6" cy="18" r="1"/></svg>
+        </div>
+        <h3>Premium Hosting</h3>
+        <p>Your site is hosted on enterprise-grade infrastructure with 99.9% uptime, global CDN, and automatic scaling for traffic spikes.</p>
+      </div>
+      <div class="included-card">
+        <div class="included-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3>Security &amp; SSL</h3>
+        <p>Full SSL encryption, regular security audits, automated backups, and proactive monitoring keep your site and visitors safe.</p>
+      </div>
+      <div class="included-card">
+        <div class="included-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+        </div>
+        <h3>Ongoing Support</h3>
+        <p>Need something changed? Want to add a new service? We are on hand to make updates, answer questions, and keep everything running smoothly.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing cascade-up-md" id="pricing">
+  <div class="container">
+    <div class="pricing-header">
+      <span class="section-label">Investment</span>
+      <h2 class="section-heading">Simple, transparent pricing</h2>
+      <p class="section-sub">One-off build fee, then a simple monthly plan. No hidden costs, no surprises.</p>
+    </div>
+    <div class="toggle-wrap">
+      <span class="toggle-label" id="labelOneoff">One-off + monthly</span>
+      <button class="toggle-track" id="pricingToggle" role="switch" aria-checked="false" aria-label="Toggle pricing between one-off and monthly plans">
+        <span class="toggle-knob"></span>
+      </button>
+      <span class="toggle-label" id="labelMonthly">Monthly only</span>
+    </div>
+    <div class="pricing-grid">
+      <!-- Starter -->
+      <div class="price-card">
+        <div class="price-tier">Starter</div>
+        <div class="price-amount" data-oneoff="995" data-monthly="59" data-mo-oneoff="29" data-mo-monthly="59">
+          <span>&pound;</span>995
+        </div>
+        <div class="price-period" data-oneoff-label="+ &pound;29/month" data-monthly-label="&pound;59/month, no upfront cost">+ &pound;29/month</div>
+        <div class="price-divider"></div>
+        <ul class="price-features">
+          <li>Up to 5 pages</li>
+          <li>Mobile responsive design</li>
+          <li>Basic SEO setup</li>
+          <li>Contact form</li>
+          <li>Hosting &amp; SSL included</li>
+        </ul>
+        <a href="#contact" class="btn-secondary">Get started</a>
+      </div>
+      <!-- Professional -->
+      <div class="price-card featured">
+        <div class="price-tier">Professional</div>
+        <div class="price-amount" data-oneoff="1,995" data-monthly="99" data-mo-oneoff="39" data-mo-monthly="99">
+          <span>&pound;</span>1,995
+        </div>
+        <div class="price-period" data-oneoff-label="+ &pound;39/month" data-monthly-label="&pound;99/month, no upfront cost">+ &pound;39/month</div>
+        <div class="price-divider"></div>
+        <ul class="price-features">
+          <li>Up to 15 pages</li>
+          <li>Professional copywriting</li>
+          <li>Advanced local SEO</li>
+          <li>Blog setup</li>
+          <li>Google Business integration</li>
+          <li>Priority support</li>
+        </ul>
+        <a href="#contact" class="btn-primary">Get started</a>
+      </div>
+      <!-- Growth -->
+      <div class="price-card">
+        <div class="price-tier">Growth</div>
+        <div class="price-amount" data-oneoff="3,495" data-monthly="149" data-mo-oneoff="59" data-mo-monthly="149">
+          <span>&pound;</span>3,495
+        </div>
+        <div class="price-period" data-oneoff-label="+ &pound;59/month" data-monthly-label="&pound;149/month, no upfront cost">+ &pound;59/month</div>
+        <div class="price-divider"></div>
+        <ul class="price-features">
+          <li>Unlimited pages</li>
+          <li>Full content strategy</li>
+          <li>Monthly SEO reports</li>
+          <li>Conversion optimisation</li>
+          <li>Multi-location support</li>
+          <li>Dedicated account manager</li>
+        </ul>
+        <a href="#contact" class="btn-secondary">Get started</a>
+      </div>
+    </div>
+    <p class="pricing-note">All sites include full service and location pages, local SEO, custom domain, SSL, and hosting.</p>
+  </div>
+</section>
+
+<!-- RECENT WORK -->
+<section class="recent-work cascade-up" id="work">
+  <div class="container">
+    <div class="work-header">
+      <div>
+        <span class="section-label">Portfolio</span>
+        <h2 class="section-heading">Recent work</h2>
+      </div>
+      <a href="#" class="work-link">See all our work &rarr;</a>
+    </div>
+    <div class="work-grid">
+      <div class="work-card">
+        <div class="work-thumb"><span class="work-thumb-inner">Colossus Scaffolding</span></div>
+        <div class="work-info">
+          <h3>Colossus Scaffolding</h3>
+          <p>Professional scaffolding services across Sussex and Kent</p>
+        </div>
+      </div>
+      <div class="work-card">
+        <div class="work-thumb"><span class="work-thumb-inner">DJ Fox Electrical</span></div>
+        <div class="work-info">
+          <h3>DJ Fox Electrical</h3>
+          <p>Residential and commercial electrical services in East Sussex</p>
+        </div>
+      </div>
+      <div class="work-card">
+        <div class="work-thumb"><span class="work-thumb-inner">Bexhill Removals</span></div>
+        <div class="work-info">
+          <h3>Bexhill Removals</h3>
+          <p>House and office removals covering the South East</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials cascade-up-sm" id="about">
+  <div class="container">
+    <div class="test-header">
+      <span class="section-label">Client Feedback</span>
+      <h2 class="section-heading">What our clients say</h2>
+      <div class="gold-line" style="margin-top:16px"></div>
+    </div>
+    <div class="test-grid">
+      <div class="test-card">
+        <p class="test-quote">Ricky handled everything from start to finish. I just answered a few questions and ended up with a website that actually looks like a proper business. My phone has not stopped ringing since it went live.</p>
+        <div class="test-divider"></div>
+        <span class="test-author">Paul</span>
+      </div>
+      <div class="test-card">
+        <p class="test-quote">I have had my site with Ricky for five years now. He keeps it updated, handles all the technical stuff, and whenever I need a change it is done the same day. Would not go anywhere else.</p>
+        <div class="test-divider"></div>
+        <span class="test-author">Sarah</span>
+      </div>
+      <div class="test-card">
+        <p class="test-quote">I was embarrassed by my old website. Ricky built me something I am genuinely proud to show customers. The whole process was painless and the results speak for themselves.</p>
+        <div class="test-divider"></div>
+        <span class="test-author">Mark</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SEE WHAT'S POSSIBLE -->
+<section class="examples cascade-up" id="examples">
+  <div class="container">
+    <div class="examples-header">
+      <div>
+        <span class="section-label">Inspiration</span>
+        <h2 class="section-heading">See what's possible</h2>
+      </div>
+      <a href="#" class="work-link">Browse all examples &rarr;</a>
+    </div>
+    <div class="examples-grid">
+      <div class="example-tile"><span>Plumbing &amp; Heating</span></div>
+      <div class="example-tile"><span>Landscaping</span></div>
+      <div class="example-tile"><span>Construction</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section cascade-up-sm" id="contact">
+  <div class="container">
+    <span class="section-label">Let's Talk</span>
+    <h2 class="section-heading" style="margin-top:16px">Ready to get started?</h2>
+    <p class="cta-sub">Get in touch today for a free, no-obligation chat about your new website. We will have you up and running in no time.</p>
+    <a href="mailto:mail@digitalconsultingservices.co.uk" class="btn-primary">Get in touch</a>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq cascade-up-md" id="faq">
+  <div class="container">
+    <div class="faq-header">
+      <span class="section-label">Common Questions</span>
+      <h2 class="section-heading">Frequently asked questions</h2>
+      <div class="gold-line" style="margin-top:16px"></div>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          How long does it take to build my website?
+          <span class="faq-icon"></span>
+        </button>
+        <div class="faq-answer" role="region">
+          <div class="faq-answer-inner">Most websites are designed, built, and launched within two to three weeks. More complex sites with lots of content or custom features may take a little longer, but we will always give you a clear timeline upfront.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          Do I need to provide anything?
+          <span class="faq-icon"></span>
+        </button>
+        <div class="faq-answer" role="region">
+          <div class="faq-answer-inner">Just your time for a brief chat about your business. We handle everything else -- design, copywriting, images, and technical setup. If you have photos of your work or a logo, great, but it is not essential.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          Can I make changes after the site is live?
+          <span class="faq-icon"></span>
+        </button>
+        <div class="faq-answer" role="region">
+          <div class="faq-answer-inner">Absolutely. Your monthly plan includes ongoing updates and changes. Need to add a new service, update your phone number, or tweak the wording on a page? Just drop us a message and we will sort it, usually the same day.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          What if I want to cancel?
+          <span class="faq-icon"></span>
+        </button>
+        <div class="faq-answer" role="region">
+          <div class="faq-answer-inner">There are no long-term contracts. You can cancel your monthly plan at any time with 30 days' notice. If you have paid the one-off build fee, your site is yours and we can help you move it to another provider if needed.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo">D<span>C</span>S</div>
+        <p class="footer-strapline">Professional websites for tradespeople and local service businesses. We handle everything so you do not have to.</p>
+      </div>
+      <div class="footer-nav">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#work">Our Work</a></li>
+          <li><a href="#examples">Examples</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="footer-contact">
+        <h4>Get in Touch</h4>
+        <a href="mailto:mail@digitalconsultingservices.co.uk">mail@digitalconsultingservices.co.uk</a>
+        <a href="tel:07395063764">07395 063764</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">&copy; 2025 Digital Consulting Services. All rights reserved.</span>
+      <div class="footer-legal">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Mobile menu
+const hamburger = document.getElementById('hamburger');
+const mobileNav = document.getElementById('mobileNav');
+hamburger.addEventListener('click', () => {
+  const open = mobileNav.classList.toggle('open');
+  hamburger.setAttribute('aria-expanded', open);
+  const spans = hamburger.querySelectorAll('span');
+  if (open) {
+    spans[0].style.transform = 'rotate(45deg) translateY(6.5px)';
+    spans[1].style.opacity = '0';
+    spans[2].style.transform = 'rotate(-45deg) translateY(-6.5px)';
+  } else {
+    spans[0].style.transform = '';
+    spans[1].style.opacity = '';
+    spans[2].style.transform = '';
+  }
+});
+mobileNav.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => {
+    mobileNav.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', 'false');
+    hamburger.querySelectorAll('span').forEach(s => { s.style.transform = ''; s.style.opacity = ''; });
+  });
+});
+
+// Pricing toggle
+const toggle = document.getElementById('pricingToggle');
+const labelOneoff = document.getElementById('labelOneoff');
+const labelMonthly = document.getElementById('labelMonthly');
+let isMonthly = false;
+
+toggle.addEventListener('click', () => {
+  isMonthly = !isMonthly;
+  toggle.classList.toggle('monthly', isMonthly);
+  toggle.setAttribute('aria-checked', isMonthly);
+  labelOneoff.classList.toggle('active', !isMonthly);
+  labelMonthly.classList.toggle('active', isMonthly);
+
+  document.querySelectorAll('.price-amount').forEach(el => {
+    if (isMonthly) {
+      el.innerHTML = '<span>&pound;</span>' + el.dataset.monthly + '<span>/mo</span>';
+    } else {
+      el.innerHTML = '<span>&pound;</span>' + el.dataset.oneoff;
+    }
+  });
+  document.querySelectorAll('.price-period').forEach(el => {
+    el.textContent = isMonthly ? el.dataset.monthlyLabel : el.dataset.oneoffLabel;
+  });
+});
+labelOneoff.classList.add('active');
+
+// FAQ accordion
+document.querySelectorAll('.faq-question').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.parentElement;
+    const answer = item.querySelector('.faq-answer');
+    const inner = answer.querySelector('.faq-answer-inner');
+    const isOpen = item.classList.contains('open');
+
+    // Close all
+    document.querySelectorAll('.faq-item.open').forEach(openItem => {
+      openItem.classList.remove('open');
+      openItem.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+      openItem.querySelector('.faq-answer').style.maxHeight = '0';
+    });
+
+    if (!isOpen) {
+      item.classList.add('open');
+      btn.setAttribute('aria-expanded', 'true');
+      answer.style.maxHeight = inner.scrollHeight + 'px';
+    }
+  });
+});
+
+// Header scroll effect
+let lastScroll = 0;
+window.addEventListener('scroll', () => {
+  const header = document.getElementById('header');
+  const scroll = window.pageYOffset;
+  if (scroll > 100) {
+    header.style.background = 'rgba(17,17,17,.97)';
+  } else {
+    header.style.background = 'rgba(26,26,26,.92)';
+  }
+  lastScroll = scroll;
+}, { passive: true });
+</script>
+</body>
+</html>

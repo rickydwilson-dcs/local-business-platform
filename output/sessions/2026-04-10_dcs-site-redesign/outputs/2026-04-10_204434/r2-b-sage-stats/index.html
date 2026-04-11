@@ -1,0 +1,1776 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Consulting Services — Websites as professional as you are</title>
+  <meta name="description" content="Professional websites for local service businesses. Design, copy, hosting, and ongoing support from Digital Consulting Services.">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --primary: #1B1B1B;
+      --primary-deep: #0a0a0a;
+      --primary-light: #2d2d2d;
+      --accent: #595F39;
+      --accent-hover: #4a5030;
+      --support: #C4C5BA;
+      --support-dark: #b0b1a6;
+      --bg: #E4E4DE;
+      --white: #ffffff;
+      --gray-100: #ededea;
+      --gray-200: #dededb;
+      --gray-400: #9a9a95;
+      --gray-600: #5a5a54;
+      --gray-800: #2a2a25;
+      --font-display: 'Space Grotesk', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    body {
+      background: var(--bg);
+      font-family: var(--font-body);
+      color: var(--primary);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    ul { list-style: none; }
+    button { cursor: pointer; border: none; background: none; font-family: inherit; }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* ========================================
+       HEADER
+       ======================================== */
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: var(--bg);
+      border-bottom: 1px solid var(--gray-200);
+      transition: box-shadow 0.3s ease;
+    }
+
+    .site-header.scrolled {
+      box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+    }
+
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+    }
+
+    .wordmark {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: var(--primary);
+    }
+
+    .nav-desktop { display: flex; align-items: center; gap: 2.5rem; }
+
+    .nav-desktop a {
+      font-family: var(--font-display);
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--gray-600);
+      position: relative;
+      transition: color 0.3s ease;
+    }
+
+    .nav-desktop a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: width 0.3s var(--ease-out);
+    }
+
+    .nav-desktop a:hover { color: var(--primary); }
+    .nav-desktop a:hover::after { width: 100%; }
+
+    .btn-header {
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      font-weight: 600;
+      background: var(--primary);
+      color: var(--white);
+      padding: 0.65rem 1.5rem;
+      border-radius: 10px;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .btn-header:hover {
+      background: var(--primary-light);
+      transform: translateY(-1px);
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      width: 28px;
+      padding: 4px 0;
+    }
+
+    .hamburger span {
+      display: block;
+      height: 2px;
+      background: var(--primary);
+      border-radius: 2px;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      top: 72px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--bg);
+      z-index: 99;
+      padding: 2rem;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .mobile-nav.open { display: flex; }
+
+    .mobile-nav a {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--primary);
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--gray-200);
+    }
+
+    .mobile-nav .btn-header {
+      display: inline-block;
+      text-align: center;
+      margin-top: 1rem;
+      font-size: 1rem;
+      padding: 1rem 2rem;
+    }
+
+    /* ========================================
+       HERO
+       ======================================== */
+    .hero {
+      position: relative;
+      padding: 10rem 0 6rem;
+      overflow: hidden;
+      min-height: 90vh;
+      display: flex;
+      align-items: center;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -10%;
+      right: 0;
+      width: 50%;
+      height: 120%;
+      background: var(--primary);
+      transform: skewX(-4deg);
+      transform-origin: top right;
+      z-index: 1;
+    }
+
+    .hero-grid {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .hero-content { position: relative; z-index: 3; }
+
+    .hero-label {
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      opacity: 0;
+      animation: fadeSlideUp 0.6s var(--ease-out) 0.2s forwards;
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: 3.75rem;
+      font-weight: 700;
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      color: var(--primary);
+      margin-bottom: 1.25rem;
+      opacity: 0;
+      animation: fadeSlideUp 0.6s var(--ease-out) 0.35s forwards;
+    }
+
+    .hero-sub {
+      font-family: var(--font-body);
+      font-size: 1.15rem;
+      color: var(--gray-600);
+      line-height: 1.6;
+      max-width: 480px;
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeSlideUp 0.6s var(--ease-out) 0.5s forwards;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeSlideUp 0.6s var(--ease-out) 0.65s forwards;
+    }
+
+    .btn-primary {
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      font-weight: 600;
+      background: var(--accent);
+      color: var(--white);
+      padding: 0.9rem 2rem;
+      border-radius: 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--primary);
+      padding: 0.9rem 2rem;
+      border-radius: 12px;
+      border: 2px solid var(--gray-200);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: border-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--primary);
+      transform: translateY(-2px);
+    }
+
+    .hero-stats {
+      position: relative;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      padding: 2rem;
+    }
+
+    .hero-stat { padding: 1.5rem 0; opacity: 0; }
+    .hero-stat:nth-child(1) { animation: fadeSlideUp 0.6s var(--ease-out) 0.6s forwards; }
+    .hero-stat:nth-child(3) { animation: fadeSlideUp 0.6s var(--ease-out) 0.75s forwards; }
+    .hero-stat:nth-child(5) { animation: fadeSlideUp 0.6s var(--ease-out) 0.9s forwards; }
+
+    .stat-number {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1;
+      letter-spacing: -0.03em;
+    }
+
+    .stat-label {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--support);
+      margin-top: 0.4rem;
+    }
+
+    .stat-divider {
+      border: none;
+      border-top: 1px solid rgba(255,255,255,0.15);
+      margin: 0;
+      opacity: 0;
+    }
+
+    .stat-divider:nth-child(2) { animation: fadeSlideUp 0.3s ease 0.65s forwards; }
+    .stat-divider:nth-child(4) { animation: fadeSlideUp 0.3s ease 0.8s forwards; }
+
+    /* ========================================
+       SECTION UTILITIES
+       ======================================== */
+    .section { padding: 6rem 0; }
+    .section-lg { padding: 8rem 0; }
+
+    .section-label {
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: 2.75rem;
+      font-weight: 700;
+      line-height: 1.12;
+      letter-spacing: -0.02em;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    .section-sub {
+      font-size: 1.05rem;
+      color: var(--gray-600);
+      max-width: 520px;
+      line-height: 1.6;
+    }
+
+    .section-header {
+      margin-bottom: 3.5rem;
+    }
+
+    /* ========================================
+       HOW IT WORKS
+       ======================================== */
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+    }
+
+    .step-card {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 2rem 1.75rem;
+      transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out);
+    }
+
+    .step-card:nth-child(even) {
+      transform: translateY(2rem);
+    }
+
+    .step-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+    }
+
+    .step-card:nth-child(even):hover {
+      transform: translateY(calc(2rem - 6px));
+      box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+    }
+
+    .step-number {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 1.25rem;
+    }
+
+    .step-title {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.75rem;
+      line-height: 1.3;
+    }
+
+    .step-desc {
+      font-size: 0.9rem;
+      color: var(--gray-600);
+      line-height: 1.6;
+    }
+
+    /* ========================================
+       WHAT'S INCLUDED
+       ======================================== */
+    .included-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .included-card {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 2rem 1.75rem;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.4s var(--ease-out);
+    }
+
+    .included-card:nth-child(2),
+    .included-card:nth-child(5) {
+      transform: translateY(1.5rem);
+    }
+
+    .included-card::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 4px;
+      height: 0;
+      background: var(--accent);
+      transition: height 0.4s var(--ease-out);
+    }
+
+    .included-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .included-card:nth-child(2):hover,
+    .included-card:nth-child(5):hover {
+      transform: translateY(calc(1.5rem - 4px));
+    }
+
+    .included-card:hover::before {
+      height: 100%;
+    }
+
+    .included-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--gray-100);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.25rem;
+      font-size: 1.25rem;
+    }
+
+    .included-title {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .included-desc {
+      font-size: 0.9rem;
+      color: var(--gray-600);
+      line-height: 1.6;
+    }
+
+    /* ========================================
+       PRICING
+       ======================================== */
+    .pricing-section {
+      background: var(--primary);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pricing-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 80px;
+      background: var(--bg);
+      transform: skewY(-2deg);
+      transform-origin: top left;
+    }
+
+    .pricing-section::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 80px;
+      background: var(--bg);
+      transform: skewY(-2deg);
+      transform-origin: bottom right;
+    }
+
+    .pricing-inner {
+      position: relative;
+      z-index: 2;
+    }
+
+    .pricing-section .section-label { color: var(--support); }
+    .pricing-section .section-title { color: var(--white); }
+    .pricing-section .section-sub { color: var(--gray-400); }
+
+    .toggle-wrap {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+
+    .toggle-label {
+      font-family: var(--font-display);
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--gray-400);
+      transition: color 0.3s ease;
+    }
+
+    .toggle-label.active { color: var(--white); }
+
+    .toggle-track {
+      width: 52px;
+      height: 28px;
+      background: var(--primary-light);
+      border-radius: 14px;
+      position: relative;
+      cursor: pointer;
+      border: 2px solid var(--gray-600);
+      transition: border-color 0.3s ease;
+    }
+
+    .toggle-track:hover { border-color: var(--gray-400); }
+
+    .toggle-thumb {
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 20px;
+      height: 20px;
+      background: var(--accent);
+      border-radius: 50%;
+      transition: transform 0.3s var(--ease-out);
+    }
+
+    .toggle-track.monthly .toggle-thumb {
+      transform: translateX(24px);
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .pricing-card {
+      background: var(--primary-light);
+      border-radius: 24px;
+      padding: 2.5rem 2rem;
+      border: 1px solid rgba(255,255,255,0.08);
+      transition: transform 0.4s var(--ease-out), border-color 0.3s ease;
+    }
+
+    .pricing-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255,255,255,0.15);
+    }
+
+    .pricing-card.featured {
+      background: var(--accent);
+      border-color: transparent;
+    }
+
+    .pricing-tier {
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--gray-400);
+      margin-bottom: 0.5rem;
+    }
+
+    .pricing-card.featured .pricing-tier { color: rgba(255,255,255,0.7); }
+
+    .pricing-name {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 1.5rem;
+    }
+
+    .pricing-amount {
+      font-family: var(--font-display);
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1;
+      letter-spacing: -0.03em;
+    }
+
+    .pricing-period {
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      color: var(--gray-400);
+      margin-top: 0.25rem;
+      margin-bottom: 2rem;
+    }
+
+    .pricing-card.featured .pricing-period { color: rgba(255,255,255,0.7); }
+
+    .pricing-features {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-bottom: 2rem;
+    }
+
+    .pricing-feature {
+      font-size: 0.9rem;
+      color: var(--support);
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+
+    .pricing-feature::before {
+      content: '\2713';
+      color: var(--accent);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .pricing-card.featured .pricing-feature::before { color: rgba(255,255,255,0.8); }
+
+    .btn-pricing {
+      width: 100%;
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      font-weight: 600;
+      padding: 0.9rem;
+      border-radius: 12px;
+      text-align: center;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .btn-pricing-default {
+      background: rgba(255,255,255,0.1);
+      color: var(--white);
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .btn-pricing-default:hover {
+      background: rgba(255,255,255,0.15);
+      transform: translateY(-1px);
+    }
+
+    .btn-pricing-featured {
+      background: var(--white);
+      color: var(--accent);
+    }
+
+    .btn-pricing-featured:hover {
+      background: var(--gray-100);
+      transform: translateY(-1px);
+    }
+
+    .pricing-note {
+      font-size: 0.8rem;
+      color: var(--gray-400);
+      text-align: center;
+      margin-top: 2rem;
+      line-height: 1.6;
+    }
+
+    /* ========================================
+       RECENT WORK
+       ======================================== */
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .work-card {
+      background: var(--white);
+      border-radius: 24px;
+      overflow: hidden;
+      transition: transform 0.4s var(--ease-out);
+    }
+
+    .work-card:nth-child(2) {
+      transform: translateY(2rem);
+    }
+
+    .work-card:hover {
+      transform: translateY(-8px) rotate(-0.5deg);
+    }
+
+    .work-card:nth-child(2):hover {
+      transform: translateY(calc(2rem - 8px)) rotate(-0.5deg);
+    }
+
+    .work-thumb {
+      height: 220px;
+      background: var(--gray-200);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: var(--gray-400);
+      letter-spacing: -0.02em;
+    }
+
+    .work-card:nth-child(1) .work-thumb { background: #1a2744; color: rgba(255,255,255,0.4); }
+    .work-card:nth-child(2) .work-thumb { background: #c0392b; color: rgba(255,255,255,0.4); }
+    .work-card:nth-child(3) .work-thumb { background: #2c3e50; color: rgba(255,255,255,0.4); }
+
+    .work-info { padding: 1.75rem; }
+
+    .work-name {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.35rem;
+    }
+
+    .work-type {
+      font-size: 0.85rem;
+      color: var(--gray-600);
+    }
+
+    .section-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-top: 2.5rem;
+      transition: gap 0.3s var(--ease-out);
+    }
+
+    .section-link:hover { gap: 0.85rem; }
+
+    /* ========================================
+       TESTIMONIALS
+       ======================================== */
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .testimonial-card {
+      border-radius: 24px;
+      padding: 2.25rem;
+      transition: transform 0.4s var(--ease-out);
+    }
+
+    .testimonial-card:nth-child(1) {
+      background: var(--white);
+      transform: rotate(-1.5deg);
+    }
+
+    .testimonial-card:nth-child(2) {
+      background: var(--primary);
+      transform: translateY(1.5rem) rotate(0.5deg);
+    }
+
+    .testimonial-card:nth-child(3) {
+      background: var(--white);
+      transform: rotate(1deg);
+    }
+
+    .testimonial-card:hover {
+      transform: translateY(-4px) rotate(0deg);
+    }
+
+    .testimonial-card:nth-child(2):hover {
+      transform: translateY(calc(1.5rem - 4px)) rotate(0deg);
+    }
+
+    .testimonial-quote {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--gray-600);
+      margin-bottom: 1.5rem;
+      font-style: italic;
+    }
+
+    .testimonial-card:nth-child(2) .testimonial-quote { color: var(--support); }
+
+    .testimonial-author {
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .testimonial-card:nth-child(2) .testimonial-author { color: var(--white); }
+
+    .testimonial-role {
+      font-size: 0.8rem;
+      color: var(--gray-400);
+      margin-top: 0.15rem;
+    }
+
+    /* ========================================
+       EXAMPLES
+       ======================================== */
+    .examples-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 1.5rem;
+    }
+
+    .example-tile {
+      background: var(--white);
+      border-radius: 24px;
+      overflow: hidden;
+      transition: transform 0.4s var(--ease-out);
+    }
+
+    .example-tile:hover {
+      transform: translateY(-4px);
+    }
+
+    .example-tile:first-child {
+      grid-row: span 2;
+    }
+
+    .example-thumb {
+      height: 100%;
+      min-height: 200px;
+      background: var(--gray-200);
+      display: flex;
+      align-items: flex-end;
+      padding: 2rem;
+      position: relative;
+    }
+
+    .example-tile:first-child .example-thumb { min-height: 100%; background: var(--accent); }
+    .example-tile:nth-child(2) .example-thumb { background: var(--primary-light); }
+    .example-tile:nth-child(3) .example-thumb { background: var(--gray-800); }
+
+    .example-label {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--white);
+    }
+
+    .example-industry {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.6);
+      margin-top: 0.25rem;
+    }
+
+    /* ========================================
+       CTA BANNER
+       ======================================== */
+    .cta-banner {
+      background: var(--primary);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-banner::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 80px;
+      background: var(--bg);
+      transform: skewY(-2deg);
+      transform-origin: top left;
+    }
+
+    .cta-banner::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 80px;
+      background: var(--bg);
+      transform: skewY(-2deg);
+      transform-origin: bottom right;
+    }
+
+    .cta-inner {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+    }
+
+    .cta-title {
+      font-family: var(--font-display);
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.03em;
+      margin-bottom: 1rem;
+    }
+
+    .cta-sub {
+      font-size: 1.1rem;
+      color: var(--gray-400);
+      margin-bottom: 2rem;
+    }
+
+    .btn-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 600;
+      background: var(--accent);
+      color: var(--white);
+      padding: 1rem 2.5rem;
+      border-radius: 12px;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .btn-cta:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+    }
+
+    /* ========================================
+       FAQ
+       ======================================== */
+    .faq-list {
+      max-width: 720px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .faq-item {
+      background: var(--white);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: box-shadow 0.3s ease;
+    }
+
+    .faq-item:hover {
+      box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+    }
+
+    .faq-question {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.5rem 1.75rem;
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--primary);
+      text-align: left;
+      background: none;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+
+    .faq-question:hover { color: var(--accent); }
+
+    .faq-icon {
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      color: var(--gray-400);
+      transition: transform 0.3s var(--ease-out), color 0.3s ease;
+      flex-shrink: 0;
+    }
+
+    .faq-item.open .faq-icon {
+      transform: rotate(45deg);
+      color: var(--accent);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s var(--ease-out), padding 0.3s ease;
+    }
+
+    .faq-item.open .faq-answer {
+      max-height: 300px;
+    }
+
+    .faq-answer-inner {
+      padding: 0 1.75rem 1.5rem;
+      font-size: 0.95rem;
+      color: var(--gray-600);
+      line-height: 1.7;
+    }
+
+    /* ========================================
+       FOOTER
+       ======================================== */
+    .site-footer {
+      background: var(--primary);
+      padding: 4rem 0 2rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    .footer-wordmark {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.75rem;
+    }
+
+    .footer-strapline {
+      font-size: 0.9rem;
+      color: var(--gray-400);
+      line-height: 1.6;
+      max-width: 300px;
+    }
+
+    .footer-heading {
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--support);
+      margin-bottom: 1.25rem;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .footer-links a {
+      font-size: 0.9rem;
+      color: var(--gray-400);
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover { color: var(--white); }
+
+    .footer-contact-item {
+      font-size: 0.9rem;
+      color: var(--gray-400);
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-contact-item a {
+      color: var(--gray-400);
+      transition: color 0.3s ease;
+    }
+
+    .footer-contact-item a:hover { color: var(--white); }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-legal {
+      font-size: 0.8rem;
+      color: var(--gray-600);
+    }
+
+    .footer-legal-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .footer-legal-links a {
+      font-size: 0.8rem;
+      color: var(--gray-600);
+      transition: color 0.3s ease;
+    }
+
+    .footer-legal-links a:hover { color: var(--gray-400); }
+
+    /* ========================================
+       RESPONSIVE
+       ======================================== */
+    @media (max-width: 1024px) {
+      .hero-title { font-size: 3rem; }
+      .stat-number { font-size: 2.75rem; }
+      .steps-grid { grid-template-columns: repeat(2, 1fr); }
+      .pricing-grid { grid-template-columns: repeat(2, 1fr); }
+      .pricing-card:last-child { grid-column: span 2; max-width: 50%; margin: 0 auto; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-desktop { display: none; }
+      .btn-header-desktop { display: none; }
+      .hamburger { display: flex; }
+
+      .hero {
+        padding: 8rem 0 4rem;
+        min-height: auto;
+      }
+
+      .hero::before { display: none; }
+
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .hero-stats { display: none; }
+
+      .hero-title { font-size: 2.5rem; }
+
+      .section { padding: 4rem 0; }
+      .section-lg { padding: 5rem 0; }
+      .section-title { font-size: 2rem; }
+
+      .steps-grid { grid-template-columns: 1fr; }
+      .step-card:nth-child(even) { transform: none; }
+      .step-card:nth-child(even):hover { transform: translateY(-6px); }
+
+      .included-grid { grid-template-columns: 1fr; }
+      .included-card:nth-child(2),
+      .included-card:nth-child(5) { transform: none; }
+      .included-card:nth-child(2):hover,
+      .included-card:nth-child(5):hover { transform: translateY(-4px); }
+
+      .pricing-grid { grid-template-columns: 1fr; }
+      .pricing-card:last-child { grid-column: auto; max-width: none; }
+
+      .work-grid { grid-template-columns: 1fr; }
+      .work-card:nth-child(2) { transform: none; }
+      .work-card:nth-child(2):hover { transform: translateY(-8px) rotate(-0.5deg); }
+
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .testimonial-card:nth-child(1),
+      .testimonial-card:nth-child(2),
+      .testimonial-card:nth-child(3) { transform: none; }
+      .testimonial-card:hover { transform: translateY(-4px); }
+      .testimonial-card:nth-child(2):hover { transform: translateY(-4px); }
+
+      .examples-grid { grid-template-columns: 1fr; }
+      .example-tile:first-child { grid-row: auto; }
+      .example-thumb { min-height: 200px; }
+
+      .cta-title { font-size: 2.25rem; }
+
+      .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+
+      .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container { padding: 0 1.25rem; }
+      .hero-title { font-size: 2rem; }
+      .section-title { font-size: 1.75rem; }
+      .pricing-amount { font-size: 2.5rem; }
+      .cta-title { font-size: 1.85rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============ HEADER ============ -->
+  <header class="site-header" id="siteHeader">
+    <div class="header-inner">
+      <a href="#" class="wordmark">DCS</a>
+      <nav class="nav-desktop">
+        <a href="#services">Services</a>
+        <a href="#work">Our Work</a>
+        <a href="#examples">Examples</a>
+        <a href="#about">About</a>
+        <a href="#blog">Blog</a>
+      </nav>
+      <a href="#contact" class="btn-header btn-header-desktop">Get in touch</a>
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+    <a href="#services">Services</a>
+    <a href="#work">Our Work</a>
+    <a href="#examples">Examples</a>
+    <a href="#about">About</a>
+    <a href="#blog">Blog</a>
+    <a href="#contact" class="btn-header">Get in touch</a>
+  </nav>
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-content">
+          <p class="hero-label">Digital Consulting Services</p>
+          <h1 class="hero-title">Websites as professional as you are</h1>
+          <p class="hero-sub">You tell us about your business. We handle design, copy, hosting, and everything else.</p>
+          <div class="hero-ctas">
+            <a href="#how-it-works" class="btn-primary">See how it works</a>
+            <a href="#work" class="btn-secondary">View our work</a>
+          </div>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <span class="stat-number">47</span>
+            <span class="stat-label">Sites live</span>
+          </div>
+          <hr class="stat-divider">
+          <div class="hero-stat">
+            <span class="stat-number">11 days</span>
+            <span class="stat-label">Average setup</span>
+          </div>
+          <hr class="stat-divider">
+          <div class="hero-stat">
+            <span class="stat-number">94%</span>
+            <span class="stat-label">Client retention</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ HOW IT WORKS ============ -->
+  <section class="section" id="how-it-works">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">How it works</p>
+        <h2 class="section-title">Four simple steps to your new website</h2>
+        <p class="section-sub">No jargon, no fuss. We make the whole process straightforward from start to finish.</p>
+      </div>
+      <div class="steps-grid">
+        <div class="step-card">
+          <p class="step-number">Step 01</p>
+          <h3 class="step-title">Tell us about your business</h3>
+          <p class="step-desc">Answer a few quick questions about your services, your customers, and what makes you different. That is all we need to get started.</p>
+        </div>
+        <div class="step-card">
+          <p class="step-number">Step 02</p>
+          <h3 class="step-title">We write and design it</h3>
+          <p class="step-desc">Our team writes every word of copy and designs every page, tailored to your trade and your local area. You review and approve before we build.</p>
+        </div>
+        <div class="step-card">
+          <p class="step-number">Step 03</p>
+          <h3 class="step-title">We build and launch it</h3>
+          <p class="step-desc">We develop your site on fast, modern technology, connect your domain, set up analytics, and take it live. You do not need to touch a line of code.</p>
+        </div>
+        <div class="step-card">
+          <p class="step-number">Step 04</p>
+          <h3 class="step-title">We look after it</h3>
+          <p class="step-desc">Hosting, security updates, backups, and ongoing support are all included. If you need changes, just ask and we will sort it.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WHAT'S INCLUDED ============ -->
+  <section class="section" id="services">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">What's included</p>
+        <h2 class="section-title">Everything you need, nothing you don't</h2>
+        <p class="section-sub">Every plan comes with the essentials to keep your business looking professional online.</p>
+      </div>
+      <div class="included-grid">
+        <div class="included-card">
+          <div class="included-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+          </div>
+          <h3 class="included-title">Design</h3>
+          <p class="included-desc">A bespoke layout built around your brand colours, your trade, and the customers you want to attract. Clean, modern, and mobile-ready.</p>
+        </div>
+        <div class="included-card">
+          <div class="included-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          </div>
+          <h3 class="included-title">Copy</h3>
+          <p class="included-desc">Professionally written content for every page, optimised for search engines and written in plain language your customers will trust.</p>
+        </div>
+        <div class="included-card">
+          <div class="included-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          </div>
+          <h3 class="included-title">Build</h3>
+          <p class="included-desc">Built on fast, reliable technology with clean code. Pages load quickly, work on every device, and score highly on Google performance tests.</p>
+        </div>
+        <div class="included-card">
+          <div class="included-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+          </div>
+          <h3 class="included-title">Hosting</h3>
+          <p class="included-desc">Enterprise-grade hosting on a global content delivery network. Your site stays fast and online, no matter how many visitors you get.</p>
+        </div>
+        <div class="included-card">
+          <div class="included-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h3 class="included-title">Security</h3>
+          <p class="included-desc">SSL certificates, regular security patches, and automated backups. Your site and your customers' data are always protected.</p>
+        </div>
+        <div class="included-card">
+          <div class="included-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+          </div>
+          <h3 class="included-title">Support</h3>
+          <p class="included-desc">Ongoing support whenever you need it. Content updates, advice on getting more from your site, and a real person on the other end of the phone.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PRICING ============ -->
+  <section class="pricing-section section-lg" id="pricing">
+    <div class="container pricing-inner">
+      <div class="section-header">
+        <p class="section-label">Pricing</p>
+        <h2 class="section-title">Transparent pricing, no surprises</h2>
+        <p class="section-sub">Choose the plan that fits your business. Switch between upfront and monthly views.</p>
+      </div>
+      <div class="toggle-wrap">
+        <span class="toggle-label active" id="toggleUpfront">Upfront</span>
+        <div class="toggle-track" id="pricingToggle" role="switch" aria-checked="false" aria-label="Toggle between upfront and monthly pricing" tabindex="0">
+          <div class="toggle-thumb"></div>
+        </div>
+        <span class="toggle-label" id="toggleMonthly">Monthly</span>
+      </div>
+      <div class="pricing-grid">
+        <!-- Starter -->
+        <div class="pricing-card">
+          <p class="pricing-tier">Tier 1</p>
+          <h3 class="pricing-name">Starter</h3>
+          <p class="pricing-amount" data-upfront="&pound;995" data-monthly="&pound;59">&pound;995</p>
+          <p class="pricing-period" data-upfront="one-off + &pound;29/mo hosting" data-monthly="per month, no upfront cost">one-off + &pound;29/mo hosting</p>
+          <div class="pricing-features">
+            <p class="pricing-feature">Up to 5 pages</p>
+            <p class="pricing-feature">Mobile responsive design</p>
+            <p class="pricing-feature">Contact form</p>
+            <p class="pricing-feature">Basic SEO setup</p>
+            <p class="pricing-feature">SSL and hosting included</p>
+          </div>
+          <a href="#contact" class="btn-pricing btn-pricing-default">Get started</a>
+        </div>
+        <!-- Professional -->
+        <div class="pricing-card featured">
+          <p class="pricing-tier">Most popular</p>
+          <h3 class="pricing-name">Professional</h3>
+          <p class="pricing-amount" data-upfront="&pound;1,995" data-monthly="&pound;99">&pound;1,995</p>
+          <p class="pricing-period" data-upfront="one-off + &pound;39/mo hosting" data-monthly="per month, no upfront cost">one-off + &pound;39/mo hosting</p>
+          <div class="pricing-features">
+            <p class="pricing-feature">Up to 15 pages</p>
+            <p class="pricing-feature">Professional copywriting</p>
+            <p class="pricing-feature">Google Business integration</p>
+            <p class="pricing-feature">Advanced SEO and analytics</p>
+            <p class="pricing-feature">Priority support</p>
+            <p class="pricing-feature">Blog setup</p>
+          </div>
+          <a href="#contact" class="btn-pricing btn-pricing-featured">Get started</a>
+        </div>
+        <!-- Growth -->
+        <div class="pricing-card">
+          <p class="pricing-tier">Tier 3</p>
+          <h3 class="pricing-name">Growth</h3>
+          <p class="pricing-amount" data-upfront="&pound;3,495" data-monthly="&pound;149">&pound;3,495</p>
+          <p class="pricing-period" data-upfront="one-off + &pound;59/mo hosting" data-monthly="per month, no upfront cost">one-off + &pound;59/mo hosting</p>
+          <div class="pricing-features">
+            <p class="pricing-feature">Unlimited pages</p>
+            <p class="pricing-feature">Full content strategy</p>
+            <p class="pricing-feature">Multi-location SEO</p>
+            <p class="pricing-feature">Monthly performance reports</p>
+            <p class="pricing-feature">Dedicated account manager</p>
+            <p class="pricing-feature">Quarterly content updates</p>
+          </div>
+          <a href="#contact" class="btn-pricing btn-pricing-default">Get started</a>
+        </div>
+      </div>
+      <p class="pricing-note">All plans include hosting, SSL, security updates, and ongoing support. No hidden fees.<br>14-day cooling off period on all monthly plans. Cancel any time with 30 days notice.</p>
+    </div>
+  </section>
+
+  <!-- ============ RECENT WORK ============ -->
+  <section class="section" id="work">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Recent work</p>
+        <h2 class="section-title">Sites we have built recently</h2>
+        <p class="section-sub">Real businesses with real results. Here are a few of our latest projects.</p>
+      </div>
+      <div class="work-grid">
+        <div class="work-card">
+          <div class="work-thumb">Colossus</div>
+          <div class="work-info">
+            <h3 class="work-name">Colossus Scaffolding</h3>
+            <p class="work-type">Scaffolding &amp; Access Solutions</p>
+          </div>
+        </div>
+        <div class="work-card">
+          <div class="work-thumb">DJ Fox</div>
+          <div class="work-info">
+            <h3 class="work-name">DJ Fox Electrical</h3>
+            <p class="work-type">Electrical Services</p>
+          </div>
+        </div>
+        <div class="work-card">
+          <div class="work-thumb">Bexhill</div>
+          <div class="work-info">
+            <h3 class="work-name">Bexhill Removals</h3>
+            <p class="work-type">Removals &amp; Storage</p>
+          </div>
+        </div>
+      </div>
+      <a href="#" class="section-link">See all our work &rarr;</a>
+    </div>
+  </section>
+
+  <!-- ============ TESTIMONIALS ============ -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Testimonials</p>
+        <h2 class="section-title">What our clients say</h2>
+      </div>
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <p class="testimonial-quote">"I was dreading the whole website process but DCS made it painless. They wrote all the content, designed everything, and I just had to approve it. The phone started ringing within a week of going live."</p>
+          <p class="testimonial-author">Paul Henderson</p>
+          <p class="testimonial-role">Colossus Scaffolding</p>
+        </div>
+        <div class="testimonial-card">
+          <p class="testimonial-quote">"Professional from start to finish. They understood exactly what my business needed and the site they built looks far better than anything I could have got for three times the price elsewhere."</p>
+          <p class="testimonial-author">Sarah Mitchell</p>
+          <p class="testimonial-role">Mitchell Plumbing</p>
+        </div>
+        <div class="testimonial-card">
+          <p class="testimonial-quote">"What sold me was the ongoing support. I can ring up, ask for a change, and it is done the same day. No tickets, no waiting around. It is like having your own web team on call."</p>
+          <p class="testimonial-author">Mark Davies</p>
+          <p class="testimonial-role">Davies Landscaping</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ EXAMPLES ============ -->
+  <section class="section" id="examples">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">See what's possible</p>
+        <h2 class="section-title">Designs for every trade</h2>
+        <p class="section-sub">Browse example sites tailored to different industries. Each one is fully customisable.</p>
+      </div>
+      <div class="examples-grid">
+        <div class="example-tile">
+          <div class="example-thumb">
+            <div>
+              <p class="example-label">Plumbing</p>
+              <p class="example-industry">Plumbing &amp; Heating</p>
+            </div>
+          </div>
+        </div>
+        <div class="example-tile">
+          <div class="example-thumb">
+            <div>
+              <p class="example-label">Electrical</p>
+              <p class="example-industry">Electrical Services</p>
+            </div>
+          </div>
+        </div>
+        <div class="example-tile">
+          <div class="example-thumb">
+            <div>
+              <p class="example-label">Gardening</p>
+              <p class="example-industry">Garden &amp; Landscaping</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a href="#" class="section-link">Browse all examples &rarr;</a>
+    </div>
+  </section>
+
+  <!-- ============ CTA BANNER ============ -->
+  <section class="cta-banner section-lg" id="contact">
+    <div class="container cta-inner">
+      <h2 class="cta-title">Ready to get started?</h2>
+      <p class="cta-sub">Tell us about your business and we will take it from there.</p>
+      <a href="mailto:mail@digitalconsultingservices.co.uk" class="btn-cta">Get in touch</a>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section class="section" id="faq">
+    <div class="container">
+      <div class="section-header" style="text-align:center;">
+        <p class="section-label">FAQ</p>
+        <h2 class="section-title">Common questions</h2>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span>How long does it take to build my website?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer" role="region">
+            <div class="faq-answer-inner">
+              Most sites are live within 10 to 14 working days from the point we have everything we need from you. More complex projects with additional pages or custom features may take a little longer, but we will always agree a timeline upfront so there are no surprises.
+            </div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span>What do I need to provide?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer" role="region">
+            <div class="faq-answer-inner">
+              Very little. We will ask you some questions about your business, your services, and your customers. If you have a logo and any photos of your work, those are helpful but not essential. We handle everything else including writing all the copy.
+            </div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span>Can I make changes after the site goes live?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer" role="region">
+            <div class="faq-answer-inner">
+              Absolutely. All of our plans include ongoing support. If you need text updated, a new page added, or photos changed, just get in touch and we will sort it. There is no limit on reasonable change requests as part of your monthly plan.
+            </div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span>What happens if I want to cancel?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer" role="region">
+            <div class="faq-answer-inner">
+              Monthly plans can be cancelled with 30 days notice at any time. There are no long-term contracts or exit fees. If you are on an upfront plan, your hosting runs month to month after the initial setup is complete and can also be cancelled with 30 days notice.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <p class="footer-wordmark">DCS</p>
+          <p class="footer-strapline">Professional websites for local service businesses. Design, copy, hosting, and support — all taken care of.</p>
+        </div>
+        <div>
+          <p class="footer-heading">Navigation</p>
+          <div class="footer-links">
+            <a href="#services">Services</a>
+            <a href="#work">Our Work</a>
+            <a href="#examples">Examples</a>
+            <a href="#pricing">Pricing</a>
+            <a href="#faq">FAQ</a>
+          </div>
+        </div>
+        <div>
+          <p class="footer-heading">Contact</p>
+          <div class="footer-links">
+            <p class="footer-contact-item"><a href="mailto:mail@digitalconsultingservices.co.uk">mail@digitalconsultingservices.co.uk</a></p>
+            <p class="footer-contact-item"><a href="tel:07395063764">07395 063764</a></p>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-legal">&copy; 2025 Digital Consulting Services. All rights reserved.</p>
+        <div class="footer-legal-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============ JAVASCRIPT ============ -->
+  <script>
+    // Sticky header shadow
+    (function() {
+      var header = document.getElementById('siteHeader');
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > 10) {
+          header.classList.add('scrolled');
+        } else {
+          header.classList.remove('scrolled');
+        }
+      });
+    })();
+
+    // Mobile menu
+    (function() {
+      var hamburger = document.getElementById('hamburger');
+      var mobileNav = document.getElementById('mobileNav');
+      var isOpen = false;
+
+      hamburger.addEventListener('click', function() {
+        isOpen = !isOpen;
+        mobileNav.classList.toggle('open', isOpen);
+        hamburger.setAttribute('aria-expanded', isOpen.toString());
+      });
+
+      // Close on link click
+      var links = mobileNav.querySelectorAll('a');
+      for (var i = 0; i < links.length; i++) {
+        links[i].addEventListener('click', function() {
+          isOpen = false;
+          mobileNav.classList.remove('open');
+          hamburger.setAttribute('aria-expanded', 'false');
+        });
+      }
+    })();
+
+    // Pricing toggle
+    (function() {
+      var toggle = document.getElementById('pricingToggle');
+      var labelUpfront = document.getElementById('toggleUpfront');
+      var labelMonthly = document.getElementById('toggleMonthly');
+      var amounts = document.querySelectorAll('.pricing-amount');
+      var periods = document.querySelectorAll('.pricing-period');
+      var isMonthly = false;
+
+      function update() {
+        toggle.classList.toggle('monthly', isMonthly);
+        toggle.setAttribute('aria-checked', isMonthly.toString());
+        labelUpfront.classList.toggle('active', !isMonthly);
+        labelMonthly.classList.toggle('active', isMonthly);
+
+        var key = isMonthly ? 'monthly' : 'upfront';
+        for (var i = 0; i < amounts.length; i++) {
+          amounts[i].innerHTML = amounts[i].getAttribute('data-' + key);
+        }
+        for (var j = 0; j < periods.length; j++) {
+          periods[j].textContent = periods[j].getAttribute('data-' + key);
+        }
+      }
+
+      toggle.addEventListener('click', function() {
+        isMonthly = !isMonthly;
+        update();
+      });
+
+      toggle.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          isMonthly = !isMonthly;
+          update();
+        }
+      });
+    })();
+
+    // FAQ accordion
+    (function() {
+      var items = document.querySelectorAll('.faq-item');
+
+      for (var i = 0; i < items.length; i++) {
+        (function(item) {
+          var btn = item.querySelector('.faq-question');
+          btn.addEventListener('click', function() {
+            var isOpen = item.classList.contains('open');
+
+            // Close all
+            for (var j = 0; j < items.length; j++) {
+              items[j].classList.remove('open');
+              items[j].querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+            }
+
+            // Open clicked if was closed
+            if (!isOpen) {
+              item.classList.add('open');
+              btn.setAttribute('aria-expanded', 'true');
+            }
+          });
+        })(items[i]);
+      }
+    })();
+
+    // Smooth scroll for anchor links
+    (function() {
+      var links = document.querySelectorAll('a[href^="#"]');
+      for (var i = 0; i < links.length; i++) {
+        links[i].addEventListener('click', function(e) {
+          var target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            e.preventDefault();
+            var offset = 80;
+            var top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+            window.scrollTo({ top: top, behavior: 'smooth' });
+          }
+        });
+      }
+    })();
+  </script>
+
+</body>
+</html>

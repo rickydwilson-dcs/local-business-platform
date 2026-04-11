@@ -1,0 +1,1316 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DCS — Professional Websites for Tradespeople &amp; Small Businesses</title>
+<meta name="description" content="Professional websites for UK tradespeople and small businesses. We handle design, copy, hosting, and everything else.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --navy: #1B2A4A;
+  --navy-dark: #111D35;
+  --navy-light: #243558;
+  --blue: #3B82F6;
+  --blue-hover: #2563EB;
+  --blue-light: #DBEAFE;
+  --slate: #64748B;
+  --slate-light: #94A3B8;
+  --gray-50: #F8FAFC;
+  --gray-100: #F1F5F9;
+  --gray-200: #E2E8F0;
+  --gray-300: #CBD5E1;
+  --white: #FFFFFF;
+  --text-primary: #0F172A;
+  --text-secondary: #475569;
+  --text-inverse: #F8FAFC;
+  --radius: 8px;
+  --radius-lg: 12px;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+  --shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
+  --shadow-md: 0 4px 6px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.06);
+  --shadow-lg: 0 10px 15px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.05);
+  --transition: 0.2s ease;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: var(--text-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+a { text-decoration: none; color: inherit; }
+button { font-family: inherit; cursor: pointer; border: none; background: none; }
+ul { list-style: none; }
+img { max-width: 100%; display: block; }
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ── Buttons ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  padding: 12px 28px;
+  border-radius: var(--radius);
+  transition: all var(--transition);
+  gap: 8px;
+}
+.btn-primary {
+  background: var(--blue);
+  color: var(--white);
+}
+.btn-primary:hover { background: var(--blue-hover); transform: translateY(-1px); box-shadow: var(--shadow-md); }
+.btn-secondary {
+  background: var(--white);
+  color: var(--navy);
+  border: 1.5px solid var(--gray-300);
+}
+.btn-secondary:hover { border-color: var(--blue); color: var(--blue); transform: translateY(-1px); }
+.btn-white {
+  background: var(--white);
+  color: var(--navy);
+}
+.btn-white:hover { background: var(--gray-100); transform: translateY(-1px); }
+.btn-ghost {
+  color: var(--blue);
+  padding: 12px 0;
+}
+.btn-ghost:hover { color: var(--blue-hover); }
+.btn-ghost svg { transition: transform var(--transition); }
+.btn-ghost:hover svg { transform: translateX(3px); }
+
+/* ── Header ── */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--gray-200);
+  transition: box-shadow var(--transition);
+}
+.header.scrolled { box-shadow: var(--shadow); }
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+}
+.logo {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--navy);
+  letter-spacing: -0.5px;
+}
+.nav-links {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+}
+.nav-links a {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: color var(--transition);
+}
+.nav-links a:hover { color: var(--navy); }
+.header-cta { display: flex; align-items: center; gap: 16px; }
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  padding: 8px;
+}
+.hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--navy);
+  transition: all 0.3s ease;
+}
+
+/* Mobile nav */
+.mobile-nav {
+  display: none;
+  position: fixed;
+  top: 72px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--white);
+  z-index: 99;
+  padding: 32px 24px;
+  flex-direction: column;
+  gap: 8px;
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.mobile-nav.open { display: flex; opacity: 1; transform: translateY(0); }
+.mobile-nav a {
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  padding: 12px 0;
+  border-bottom: 1px solid var(--gray-100);
+}
+.mobile-nav .btn { margin-top: 16px; text-align: center; }
+
+/* ── Hero ── */
+.hero {
+  padding: 96px 0 80px;
+  background: linear-gradient(135deg, var(--gray-50) 0%, var(--white) 50%, var(--blue-light) 100%);
+  position: relative;
+  overflow: hidden;
+}
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+.hero-content { position: relative; z-index: 2; }
+.hero h1 {
+  font-size: 3.25rem;
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--navy);
+  letter-spacing: -1px;
+  margin-bottom: 20px;
+}
+.hero p {
+  font-size: 1.25rem;
+  color: var(--text-secondary);
+  max-width: 480px;
+  margin-bottom: 32px;
+  line-height: 1.7;
+}
+.hero-buttons { display: flex; gap: 12px; flex-wrap: wrap; }
+.hero-visual {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hero-abstract {
+  width: 100%;
+  max-width: 480px;
+  aspect-ratio: 1;
+  position: relative;
+}
+.hero-abstract .circle {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.12;
+}
+.hero-abstract .c1 { width: 360px; height: 360px; background: var(--blue); top: 10%; left: 10%; }
+.hero-abstract .c2 { width: 240px; height: 240px; background: var(--navy); top: 30%; right: 5%; }
+.hero-abstract .c3 { width: 160px; height: 160px; background: var(--blue); bottom: 10%; left: 20%; }
+.hero-abstract .grid-pattern {
+  position: absolute;
+  top: 15%;
+  left: 15%;
+  width: 70%;
+  height: 70%;
+  background-image:
+    radial-gradient(circle, var(--navy) 1px, transparent 1px);
+  background-size: 24px 24px;
+  opacity: 0.15;
+}
+
+/* ── Section shared ── */
+.section { padding: 80px 0; }
+.section-alt { background: var(--gray-50); }
+.section-dark { background: var(--navy); color: var(--text-inverse); }
+.section-header {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 56px;
+}
+.section-header h2 {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: var(--navy);
+  letter-spacing: -0.5px;
+  margin-bottom: 16px;
+}
+.section-dark .section-header h2 { color: var(--white); }
+.section-header p {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+.section-dark .section-header p { color: var(--slate-light); }
+
+/* ── How It Works ── */
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+  counter-reset: step;
+}
+.step {
+  text-align: center;
+  padding: 32px 20px;
+  position: relative;
+}
+.step-number {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--blue);
+  color: var(--white);
+  font-weight: 700;
+  font-size: 1.125rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+}
+.step h3 {
+  font-size: 1.0625rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 10px;
+}
+.step p {
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* connectors between steps */
+.step:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 56px;
+  right: -16px;
+  width: 32px;
+  height: 2px;
+  background: var(--gray-300);
+}
+
+/* ── Included ── */
+.included-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.included-card {
+  padding: 32px;
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-lg);
+  transition: all var(--transition);
+}
+.included-card:hover { border-color: var(--blue); box-shadow: var(--shadow-md); transform: translateY(-2px); }
+.included-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius);
+  background: var(--blue-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  color: var(--blue);
+}
+.included-card h3 {
+  font-size: 1.0625rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 8px;
+}
+.included-card p {
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* ── Pricing ── */
+.pricing-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 48px;
+}
+.pricing-toggle span {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: color var(--transition);
+}
+.pricing-toggle span.active { color: var(--navy); font-weight: 600; }
+.toggle-track {
+  width: 48px;
+  height: 26px;
+  background: var(--gray-300);
+  border-radius: 13px;
+  position: relative;
+  cursor: pointer;
+  transition: background var(--transition);
+}
+.toggle-track.active { background: var(--blue); }
+.toggle-track::after {
+  content: '';
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  background: var(--white);
+  border-radius: 50%;
+  top: 2px;
+  left: 2px;
+  transition: transform var(--transition);
+  box-shadow: var(--shadow-sm);
+}
+.toggle-track.active::after { transform: translateX(22px); }
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+.pricing-card {
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-lg);
+  padding: 36px 32px;
+  background: var(--white);
+  position: relative;
+  transition: all var(--transition);
+}
+.pricing-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); }
+.pricing-card.featured {
+  border-color: var(--blue);
+  box-shadow: var(--shadow-lg);
+}
+.pricing-badge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--blue);
+  color: var(--white);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 4px 16px;
+  border-radius: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.pricing-card h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 8px;
+}
+.pricing-amount {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--navy);
+  line-height: 1.2;
+}
+.pricing-amount .currency { font-size: 1.5rem; vertical-align: top; line-height: 1.6; }
+.pricing-period {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+}
+.pricing-detail {
+  font-size: 0.8125rem;
+  color: var(--slate-light);
+  margin-bottom: 24px;
+  min-height: 20px;
+}
+.pricing-card .btn { width: 100%; margin-bottom: 24px; }
+.pricing-features {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.pricing-features li {
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+.pricing-features li svg {
+  flex-shrink: 0;
+  margin-top: 3px;
+  color: var(--blue);
+}
+.pricing-note {
+  text-align: center;
+  margin-top: 32px;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+/* ── Recent Work ── */
+.work-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-bottom: 40px;
+}
+.work-card {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--gray-200);
+  transition: all var(--transition);
+  background: var(--white);
+}
+.work-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-3px); }
+.work-thumb {
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+.work-thumb-1 { background: linear-gradient(135deg, #1e3a5f, #2d5a8e); color: rgba(255,255,255,0.9); }
+.work-thumb-2 { background: linear-gradient(135deg, #c0392b, #e74c3c); color: rgba(255,255,255,0.9); }
+.work-thumb-3 { background: linear-gradient(135deg, #2c3e50, #34495e); color: rgba(255,255,255,0.9); }
+.work-info { padding: 24px; }
+.work-info h3 {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 4px;
+}
+.work-info p { font-size: 0.9375rem; color: var(--text-secondary); }
+.work-footer { text-align: center; }
+
+/* ── Testimonials ── */
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.testimonial-card {
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  transition: all var(--transition);
+}
+.testimonial-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+.testimonial-stars {
+  display: flex;
+  gap: 2px;
+  margin-bottom: 16px;
+  color: #F59E0B;
+}
+.testimonial-card blockquote {
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 20px;
+  font-style: italic;
+}
+.testimonial-author {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--navy);
+}
+.testimonial-role {
+  font-size: 0.8125rem;
+  color: var(--slate-light);
+}
+
+/* ── Examples ── */
+.examples-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-bottom: 40px;
+}
+.example-tile {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  position: relative;
+  height: 220px;
+  display: flex;
+  align-items: flex-end;
+  transition: all var(--transition);
+  cursor: pointer;
+}
+.example-tile:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+.example-tile::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+.example-tile.tile-plumbing {
+  background: linear-gradient(135deg, #1a5276, #2980b9);
+}
+.example-tile.tile-plumbing::before { background: linear-gradient(to top, rgba(26,82,118,0.85), transparent); }
+.example-tile.tile-electrical {
+  background: linear-gradient(135deg, #7d3c0f, #d4790e);
+}
+.example-tile.tile-electrical::before { background: linear-gradient(to top, rgba(125,60,15,0.85), transparent); }
+.example-tile.tile-gardening {
+  background: linear-gradient(135deg, #1e5631, #3daa5e);
+}
+.example-tile.tile-gardening::before { background: linear-gradient(to top, rgba(30,86,49,0.85), transparent); }
+.example-label {
+  position: relative;
+  z-index: 2;
+  padding: 20px 24px;
+  color: var(--white);
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+.examples-footer { text-align: center; }
+
+/* ── CTA ── */
+.cta-section {
+  padding: 80px 0;
+  background: var(--navy);
+  text-align: center;
+}
+.cta-section h2 {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: var(--white);
+  margin-bottom: 16px;
+  letter-spacing: -0.5px;
+}
+.cta-section p {
+  font-size: 1.1rem;
+  color: var(--slate-light);
+  max-width: 520px;
+  margin: 0 auto 32px;
+  line-height: 1.7;
+}
+
+/* ── FAQ ── */
+.faq-list {
+  max-width: 720px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.faq-item {
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--white);
+  transition: border-color var(--transition);
+}
+.faq-item.open { border-color: var(--blue); }
+.faq-question {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--navy);
+  text-align: left;
+  transition: color var(--transition);
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-family: inherit;
+}
+.faq-question:hover { color: var(--blue); }
+.faq-icon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+  color: var(--slate);
+}
+.faq-item.open .faq-icon { transform: rotate(180deg); }
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+.faq-answer-inner {
+  padding: 0 24px 20px;
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+/* ── Footer ── */
+.footer {
+  background: var(--navy-dark);
+  color: var(--text-inverse);
+  padding: 64px 0 32px;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 48px;
+  margin-bottom: 48px;
+}
+.footer-brand p {
+  font-size: 0.9375rem;
+  color: var(--slate-light);
+  line-height: 1.7;
+  margin-top: 12px;
+  max-width: 320px;
+}
+.footer h4 {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--slate-light);
+  margin-bottom: 16px;
+}
+.footer-links { display: flex; flex-direction: column; gap: 10px; }
+.footer-links a {
+  font-size: 0.9375rem;
+  color: var(--gray-300);
+  transition: color var(--transition);
+}
+.footer-links a:hover { color: var(--white); }
+.footer-bottom {
+  border-top: 1px solid var(--navy-light);
+  padding-top: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.footer-bottom p {
+  font-size: 0.8125rem;
+  color: var(--slate);
+}
+.footer-legal {
+  display: flex;
+  gap: 24px;
+}
+.footer-legal a {
+  font-size: 0.8125rem;
+  color: var(--slate);
+  transition: color var(--transition);
+}
+.footer-legal a:hover { color: var(--gray-300); }
+
+/* ── Scroll reveal ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .steps-grid { grid-template-columns: repeat(2, 1fr); }
+  .step:not(:last-child)::after { display: none; }
+  .pricing-grid { grid-template-columns: 1fr; max-width: 420px; margin-left: auto; margin-right: auto; }
+}
+
+@media (max-width: 768px) {
+  .nav-links, .header-cta .btn { display: none; }
+  .hamburger { display: flex; }
+  .hero { padding: 64px 0 56px; }
+  .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+  .hero h1 { font-size: 2.25rem; }
+  .hero p { font-size: 1.0625rem; }
+  .hero-visual { order: -1; }
+  .hero-abstract { max-width: 320px; }
+  .section { padding: 56px 0; }
+  .section-header { margin-bottom: 40px; }
+  .section-header h2 { font-size: 1.75rem; }
+  .included-grid { grid-template-columns: 1fr; }
+  .work-grid { grid-template-columns: 1fr; }
+  .testimonials-grid { grid-template-columns: 1fr; }
+  .examples-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+  .cta-section h2 { font-size: 1.75rem; }
+}
+
+@media (max-width: 375px) {
+  .container { padding: 0 16px; }
+  .hero h1 { font-size: 1.875rem; }
+  .hero-buttons { flex-direction: column; }
+  .hero-buttons .btn { width: 100%; }
+  .pricing-card { padding: 28px 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── Header ── -->
+<header class="header" id="header">
+  <div class="container">
+    <div class="header-inner">
+      <a href="#" class="logo">DCS</a>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#services">Services</a>
+        <a href="#work">Our Work</a>
+        <a href="#examples">Examples</a>
+        <a href="#about">About</a>
+        <a href="#faq">Blog</a>
+      </nav>
+      <div class="header-cta">
+        <a href="#contact" class="btn btn-primary">Get in touch</a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+  <a href="#services">Services</a>
+  <a href="#work">Our Work</a>
+  <a href="#examples">Examples</a>
+  <a href="#about">About</a>
+  <a href="#faq">Blog</a>
+  <a href="#contact" class="btn btn-primary">Get in touch</a>
+</nav>
+
+<!-- ── Hero ── -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-content">
+        <h1>Websites as professional as you are</h1>
+        <p>You tell us about your business. We handle design, copy, hosting, and everything else.</p>
+        <div class="hero-buttons">
+          <a href="#how" class="btn btn-primary">See how it works</a>
+          <a href="#work" class="btn btn-secondary">View our work</a>
+        </div>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="hero-abstract">
+          <div class="circle c1"></div>
+          <div class="circle c2"></div>
+          <div class="circle c3"></div>
+          <div class="grid-pattern"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── How It Works ── -->
+<section class="section section-alt" id="how">
+  <div class="container">
+    <div class="section-header reveal">
+      <h2>How it works</h2>
+      <p>Four simple steps from conversation to live website. No technical knowledge required.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step reveal">
+        <div class="step-number">1</div>
+        <h3>Tell us about your business</h3>
+        <p>A short conversation. No briefs, no spec documents.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-number">2</div>
+        <h3>We write and design it</h3>
+        <p>Copy, images, layout &mdash; all handled.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-number">3</div>
+        <h3>We build and launch it</h3>
+        <p>Fast, secure, and found on Google from day one.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-number">4</div>
+        <h3>We look after it</h3>
+        <p>Hosting, updates, and support. Nothing for you to manage.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── What's Included ── -->
+<section class="section" id="services">
+  <div class="container">
+    <div class="section-header reveal">
+      <h2>What's included</h2>
+      <p>Everything you need for a professional web presence, without the complexity.</p>
+    </div>
+    <div class="included-grid">
+      <div class="included-card reveal">
+        <div class="included-icon">
+          <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+        </div>
+        <h3>Design</h3>
+        <p>A site that looks the part, built around your brand.</p>
+      </div>
+      <div class="included-card reveal">
+        <div class="included-icon">
+          <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M17 3a2.85 2.85 0 0 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg>
+        </div>
+        <h3>Copy</h3>
+        <p>We write every word. You just check it reads like you.</p>
+      </div>
+      <div class="included-card reveal">
+        <div class="included-icon">
+          <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        </div>
+        <h3>Build</h3>
+        <p>Fast, mobile-friendly, and secure as standard.</p>
+      </div>
+      <div class="included-card reveal">
+        <div class="included-icon">
+          <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </div>
+        <h3>Hosting</h3>
+        <p>We manage it. No control panels, no technical decisions.</p>
+      </div>
+      <div class="included-card reveal">
+        <div class="included-icon">
+          <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3>Security</h3>
+        <p>Backups, SSL, and updates handled automatically.</p>
+      </div>
+      <div class="included-card reveal">
+        <div class="included-icon">
+          <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <h3>Support</h3>
+        <p>Something needs changing? Just ask.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Pricing ── -->
+<section class="section section-alt" id="pricing">
+  <div class="container">
+    <div class="section-header reveal">
+      <h2>Simple, transparent pricing</h2>
+      <p>One-off setup fee plus monthly management, or pay monthly with no upfront cost.</p>
+    </div>
+    <div class="pricing-toggle reveal" role="group" aria-label="Pricing toggle">
+      <span id="label-upfront" class="active">Upfront + monthly</span>
+      <button class="toggle-track" id="pricingToggle" role="switch" aria-checked="false" aria-labelledby="label-upfront label-monthly"></button>
+      <span id="label-monthly">Monthly only</span>
+    </div>
+    <div class="pricing-grid">
+      <div class="pricing-card reveal">
+        <h3>Starter</h3>
+        <div class="pricing-amount" data-upfront="995" data-monthly="59" data-upfront-mo="29">
+          <span class="currency">&pound;</span><span class="price-value">995</span>
+        </div>
+        <div class="pricing-period price-period-text">one-off setup fee</div>
+        <div class="pricing-detail price-detail-text">+ &pound;29/month</div>
+        <a href="#contact" class="btn btn-secondary">Get started</a>
+        <ul class="pricing-features">
+          <li><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Up to 5 pages</li>
+          <li><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Professional copywriting</li>
+          <li><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Mobile responsive</li>
+          <li><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Basic SEO setup</li>
+        </ul>
+      </div>
+      <div class="pricing-card featured reveal">
+        <div class="pricing-badge">Most popular</div>
+        <h3>Professional</h3>
+        <div class="pricing-amount" data-upfront="1995" data-monthly="99" data-upfront-mo="39">
+          <span class="currency">&pound;</span><span class="price-value">1,995</span>
+        </div>
+        <div class="pricing-period price-period-text">one-off setup fee</div>
+        <div class="pricing-detail price-detail-text">+ &pound;39/month</div>
+        <a href="#contact" class="btn btn-primary">Get started</a>
+        <ul class="pricing-features">
+          <li><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Up to 15 pages</li>
+          <li><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Service &amp; location pages</li>
+          <li><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Local SEO optimisation</li>
+          <li><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Google Business setup</li>
+          <li><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Contact form integration</li>
+        </ul>
+      </div>
+      <div class="pricing-card reveal">
+        <h3>Growth</h3>
+        <div class="pricing-amount" data-upfront="3495" data-monthly="149" data-upfront-mo="59">
+          <span class="currency">&pound;</span><span class="price-value">3,495</span>
+        </div>
+        <div class="pricing-period price-period-text">one-off setup fee</div>
+        <div class="pricing-detail price-detail-text">+ &pound;59/month</div>
+        <a href="#contact" class="btn btn-secondary">Get started</a>
+        <ul class="pricing-features">
+          <li><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Unlimited pages</li>
+          <li><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Blog with regular content</li>
+          <li><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Advanced SEO strategy</li>
+          <li><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Monthly performance reports</li>
+          <li><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Priority support</li>
+        </ul>
+      </div>
+    </div>
+    <p class="pricing-note reveal">All sites include full service and location pages, local SEO, custom domain, SSL, and hosting. No CMS &mdash; content updates go through us.</p>
+  </div>
+</section>
+
+<!-- ── Recent Work ── -->
+<section class="section" id="work">
+  <div class="container">
+    <div class="section-header reveal">
+      <h2>Recent work</h2>
+      <p>A few of the businesses we've built websites for recently.</p>
+    </div>
+    <div class="work-grid">
+      <div class="work-card reveal">
+        <div class="work-thumb work-thumb-1">CS</div>
+        <div class="work-info">
+          <h3>Colossus Scaffolding</h3>
+          <p>Scaffolding contractor</p>
+        </div>
+      </div>
+      <div class="work-card reveal">
+        <div class="work-thumb work-thumb-2">DJ</div>
+        <div class="work-info">
+          <h3>DJ Fox Electrical</h3>
+          <p>Electrician</p>
+        </div>
+      </div>
+      <div class="work-card reveal">
+        <div class="work-thumb work-thumb-3">BR</div>
+        <div class="work-info">
+          <h3>Bexhill Removals</h3>
+          <p>Removals company</p>
+        </div>
+      </div>
+    </div>
+    <div class="work-footer reveal">
+      <a href="#" class="btn btn-ghost">See all our work <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<!-- ── Testimonials ── -->
+<section class="section section-alt" id="about">
+  <div class="container">
+    <div class="section-header reveal">
+      <h2>What our clients say</h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card reveal">
+        <div class="testimonial-stars" aria-label="5 stars">
+          <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <blockquote>"Ricky handled everything &mdash; the design, the words, all of it. I just had to check it over and say yes. Couldn't have been easier."</blockquote>
+        <div class="testimonial-author">Paul</div>
+        <div class="testimonial-role">Scaffolding Contractor</div>
+      </div>
+      <div class="testimonial-card reveal">
+        <div class="testimonial-stars" aria-label="5 stars">
+          <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <blockquote>"I've had my site with Ricky for five years now. It still looks great, it's always up, and whenever I need something tweaked he sorts it straight away."</blockquote>
+        <div class="testimonial-author">Sarah</div>
+        <div class="testimonial-role">Fabric Retailer</div>
+      </div>
+      <div class="testimonial-card reveal">
+        <div class="testimonial-stars" aria-label="5 stars">
+          <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <blockquote>"I was embarrassed by my old website. Ricky built me something I'm genuinely proud to send customers to."</blockquote>
+        <div class="testimonial-author">Mark</div>
+        <div class="testimonial-role">Electrician</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── See What's Possible ── -->
+<section class="section" id="examples">
+  <div class="container">
+    <div class="section-header reveal">
+      <h2>See what's possible</h2>
+      <p>Example sites built for different trades. Browse them to see the quality we deliver.</p>
+    </div>
+    <div class="examples-grid">
+      <div class="example-tile tile-plumbing reveal">
+        <div class="example-label">Plumbing</div>
+      </div>
+      <div class="example-tile tile-electrical reveal">
+        <div class="example-label">Electrical</div>
+      </div>
+      <div class="example-tile tile-gardening reveal">
+        <div class="example-label">Gardening</div>
+      </div>
+    </div>
+    <div class="examples-footer reveal">
+      <a href="#" class="btn btn-ghost">Browse all examples <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ── -->
+<section class="cta-section" id="contact">
+  <div class="container">
+    <div class="reveal">
+      <h2>Ready to get started?</h2>
+      <p>It takes about 15 minutes to tell us what you need. We handle everything from there.</p>
+      <a href="#" class="btn btn-white">Get in touch</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── FAQ ── -->
+<section class="section section-alt" id="faq">
+  <div class="container">
+    <div class="section-header reveal">
+      <h2>Frequently asked questions</h2>
+    </div>
+    <div class="faq-list reveal">
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          How long does it take to build my website?
+          <svg class="faq-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-answer" role="region">
+          <div class="faq-answer-inner">Most sites are live within two weeks of our first conversation. Larger projects with more pages may take a little longer, but we'll give you a clear timeline upfront.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          Do I need to provide anything?
+          <svg class="faq-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-answer" role="region">
+          <div class="faq-answer-inner">Just answer our questions about your business. We handle the writing, design, and everything technical. If you have photos or a logo, great &mdash; but it's not essential.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          Can I make changes after the site is live?
+          <svg class="faq-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-answer" role="region">
+          <div class="faq-answer-inner">Absolutely. Content changes are included in your monthly plan. Just tell us what you need updated and we'll take care of it &mdash; usually within a working day.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          What if I want to cancel?
+          <svg class="faq-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-answer" role="region">
+          <div class="faq-answer-inner">If you pay upfront, there's no lock-in &mdash; you can cancel your monthly plan at any time. Monthly-only plans have a 12-month minimum term, after which you can cancel with 30 days' notice.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ── -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="logo" style="color: var(--white);">DCS</a>
+        <p>Professional websites for UK tradespeople and small businesses.</p>
+      </div>
+      <div>
+        <h4>Navigation</h4>
+        <div class="footer-links">
+          <a href="#services">Services</a>
+          <a href="#work">Our Work</a>
+          <a href="#examples">Examples</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#faq">FAQ</a>
+        </div>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <div class="footer-links">
+          <a href="mailto:mail@digitalconsultingservices.co.uk">mail@digitalconsultingservices.co.uk</a>
+          <a href="tel:07395063764">07395 063764</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Digital Consulting Services. All rights reserved.</p>
+      <div class="footer-legal">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── Header scroll shadow ──
+const header = document.getElementById('header');
+window.addEventListener('scroll', () => {
+  header.classList.toggle('scrolled', window.scrollY > 10);
+}, { passive: true });
+
+// ── Mobile menu ──
+const hamburger = document.getElementById('hamburger');
+const mobileNav = document.getElementById('mobileNav');
+let menuOpen = false;
+
+hamburger.addEventListener('click', () => {
+  menuOpen = !menuOpen;
+  hamburger.setAttribute('aria-expanded', menuOpen);
+  if (menuOpen) {
+    mobileNav.style.display = 'flex';
+    requestAnimationFrame(() => {
+      mobileNav.classList.add('open');
+    });
+  } else {
+    mobileNav.classList.remove('open');
+    setTimeout(() => { mobileNav.style.display = 'none'; }, 300);
+  }
+  // Animate hamburger
+  const spans = hamburger.querySelectorAll('span');
+  if (menuOpen) {
+    spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+    spans[1].style.opacity = '0';
+    spans[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
+  } else {
+    spans[0].style.transform = 'none';
+    spans[1].style.opacity = '1';
+    spans[2].style.transform = 'none';
+  }
+});
+
+// Close mobile nav on link click
+mobileNav.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => {
+    hamburger.click();
+  });
+});
+
+// ── Pricing toggle ──
+const toggle = document.getElementById('pricingToggle');
+const labelUpfront = document.getElementById('label-upfront');
+const labelMonthly = document.getElementById('label-monthly');
+let isMonthly = false;
+
+toggle.addEventListener('click', () => {
+  isMonthly = !isMonthly;
+  toggle.classList.toggle('active', isMonthly);
+  toggle.setAttribute('aria-checked', isMonthly);
+  labelUpfront.classList.toggle('active', !isMonthly);
+  labelMonthly.classList.toggle('active', isMonthly);
+
+  document.querySelectorAll('.pricing-amount').forEach(el => {
+    const upfront = el.dataset.upfront;
+    const monthly = el.dataset.monthly;
+    const upfrontMo = el.dataset.upfrontMo;
+    const priceEl = el.querySelector('.price-value');
+
+    if (isMonthly) {
+      priceEl.textContent = monthly;
+    } else {
+      priceEl.textContent = Number(upfront).toLocaleString();
+    }
+  });
+
+  document.querySelectorAll('.price-period-text').forEach(el => {
+    el.textContent = isMonthly ? 'per month' : 'one-off setup fee';
+  });
+
+  document.querySelectorAll('.price-detail-text').forEach((el, i) => {
+    if (isMonthly) {
+      el.textContent = '12-month minimum term';
+    } else {
+      const amounts = ['29', '39', '59'];
+      el.textContent = '+ \u00A3' + amounts[i] + '/month';
+    }
+  });
+});
+
+// ── FAQ accordion ──
+document.querySelectorAll('.faq-question').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.parentElement;
+    const answer = item.querySelector('.faq-answer');
+    const isOpen = item.classList.contains('open');
+
+    // Close all others
+    document.querySelectorAll('.faq-item.open').forEach(openItem => {
+      if (openItem !== item) {
+        openItem.classList.remove('open');
+        openItem.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+        openItem.querySelector('.faq-answer').style.maxHeight = '0';
+      }
+    });
+
+    if (isOpen) {
+      item.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+      answer.style.maxHeight = '0';
+    } else {
+      item.classList.add('open');
+      btn.setAttribute('aria-expanded', 'true');
+      answer.style.maxHeight = answer.scrollHeight + 'px';
+    }
+  });
+});
+
+// ── Scroll reveal ──
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// ── Smooth scroll ──
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', (e) => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+</script>
+
+</body>
+</html>

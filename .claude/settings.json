@@ -35,7 +35,9 @@
       "Bash(sed -n '4,22p' locations/eastbourne/page.tsx)",
       "Bash(sed -n '4,22p' projects/victorian-bathroom-renovation/page.tsx)",
       "Bash(sed -n '12,30p' privacy-policy/page.tsx)",
-      "Bash(sed -n '12,30p' cookie-policy/page.tsx)"
+      "Bash(sed -n '12,30p' cookie-policy/page.tsx)",
+      "Bash([ -f \"/Users/rickywilson/Sites/local-business-platform/sites/_lyra-garden/$file\" ])",
+      "Bash(node_modules/.bin/next dev:*)"
     ],
     "additionalDirectories": [
       "/Users/rickywilson/Sites/local-business-platform/output/ingestion/cygnus-stitch/images",

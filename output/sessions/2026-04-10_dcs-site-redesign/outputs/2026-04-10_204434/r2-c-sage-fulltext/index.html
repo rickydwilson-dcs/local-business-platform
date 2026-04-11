@@ -1,0 +1,1317 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digital Consulting Services | Websites as professional as you are</title>
+<meta name="description" content="Professional websites for local service businesses. Design, build, and ongoing support from Digital Consulting Services.">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --primary: #1B1B1B; --primary-deep: #0a0a0a; --primary-light: #2d2d2d;
+  --accent: #595F39; --accent-hover: #4a5030;
+  --support: #C4C5BA; --support-dark: #b0b1a6;
+  --bg: #E4E4DE; --white: #ffffff;
+  --gray-100: #ededea; --gray-200: #dededb; --gray-400: #9a9a95; --gray-600: #5a5a54; --gray-800: #2a2a25;
+  --font-display: 'Space Grotesk', sans-serif; --font-body: 'Inter', sans-serif;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body {
+  background: var(--bg);
+  font-family: var(--font-body);
+  color: var(--gray-800);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 { font-family: var(--font-display); }
+
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+img { max-width: 100%; display: block; }
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes drawUnderline {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+/* ─── BUTTONS ─── */
+.btn-cta {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.9rem 2rem; border-radius: 60px;
+  font-family: var(--font-display); font-weight: 600; font-size: 0.95rem;
+  border: 2px solid transparent; cursor: pointer;
+  transition: all 0.3s var(--ease-out);
+  text-decoration: none;
+}
+.btn-cta--primary { background: var(--accent); color: var(--white); border-color: var(--accent); }
+.btn-cta--primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); transform: translateY(-2px); }
+.btn-cta--outline { background: transparent; border-color: var(--gray-400); color: var(--gray-800); }
+.btn-cta--outline:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); }
+.btn-cta--white { background: var(--white); color: var(--primary); border-color: var(--white); }
+.btn-cta--white:hover { background: var(--gray-100); transform: translateY(-2px); }
+.btn-cta--ghost-white { background: transparent; border-color: rgba(255,255,255,0.4); color: var(--white); }
+.btn-cta--ghost-white:hover { background: rgba(255,255,255,0.1); border-color: var(--white); }
+
+.btn-cta svg { width: 16px; height: 16px; transition: transform 0.3s var(--ease-out); }
+.btn-cta:hover svg { transform: translateX(3px); }
+
+/* ─── HEADER ─── */
+.site-header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 1.25rem 0;
+  transition: all 0.4s var(--ease-out);
+}
+.site-header.scrolled {
+  background: rgba(27,27,27,0.85);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  padding: 0.75rem 0;
+  box-shadow: 0 1px 0 rgba(255,255,255,0.05);
+}
+.header-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  max-width: 1200px; margin: 0 auto; padding: 0 1.5rem;
+}
+.wordmark {
+  font-family: var(--font-display); font-size: 1.5rem; font-weight: 700;
+  color: var(--white); letter-spacing: -0.03em;
+}
+.nav-desktop { display: flex; align-items: center; gap: 2.5rem; }
+.nav-desktop a {
+  font-family: var(--font-body); font-size: 0.9rem; font-weight: 500;
+  color: rgba(255,255,255,0.7);
+  transition: color 0.3s var(--ease-out);
+}
+.nav-desktop a:hover { color: var(--white); }
+.nav-desktop .btn-cta { font-size: 0.85rem; padding: 0.65rem 1.5rem; }
+
+.hamburger {
+  display: none; background: none; border: none; cursor: pointer;
+  width: 32px; height: 24px; position: relative; z-index: 110;
+}
+.hamburger span {
+  display: block; width: 100%; height: 2px; background: var(--white);
+  position: absolute; left: 0; transition: all 0.3s var(--ease-out);
+}
+.hamburger span:nth-child(1) { top: 0; }
+.hamburger span:nth-child(2) { top: 50%; transform: translateY(-50%); }
+.hamburger span:nth-child(3) { bottom: 0; }
+.hamburger.active span:nth-child(1) { top: 50%; transform: translateY(-50%) rotate(45deg); }
+.hamburger.active span:nth-child(2) { opacity: 0; }
+.hamburger.active span:nth-child(3) { bottom: 50%; transform: translateY(50%) rotate(-45deg); }
+
+.nav-mobile {
+  display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  background: var(--primary-deep); z-index: 105;
+  flex-direction: column; align-items: center; justify-content: center; gap: 2rem;
+  opacity: 0; pointer-events: none; transition: opacity 0.3s var(--ease-out);
+}
+.nav-mobile.open { display: flex; opacity: 1; pointer-events: all; }
+.nav-mobile a {
+  font-family: var(--font-display); font-size: 1.5rem; font-weight: 600;
+  color: var(--white); transition: color 0.3s;
+}
+.nav-mobile a:hover { color: var(--support); }
+.nav-mobile .btn-cta { margin-top: 1rem; }
+
+/* ─── HERO ─── */
+.hero {
+  min-height: 90vh; padding: 12rem 0 8rem;
+  display: flex; align-items: center;
+  position: relative; overflow: hidden; text-align: center;
+}
+.hero::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0;
+  height: 65%; background: var(--primary); z-index: 0;
+  clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+}
+.hero-inner {
+  position: relative; z-index: 2;
+  max-width: 960px; margin: 0 auto; padding: 0 1.5rem;
+}
+.hero-label {
+  display: inline-block; font-size: 0.8rem; font-weight: 600;
+  letter-spacing: 0.15em; text-transform: uppercase; color: var(--support);
+  margin-bottom: 2rem;
+  opacity: 0; animation: fadeSlideUp 0.6s var(--ease-out) 0.15s forwards;
+}
+.hero h1 {
+  font-size: clamp(3.5rem, 7vw, 6rem); font-weight: 700;
+  letter-spacing: -0.04em; line-height: 1.05; color: var(--white); margin-bottom: 1.5rem;
+}
+.hero h1 .line1 { display: block; opacity: 0; animation: fadeSlideUp 0.6s var(--ease-out) 0.3s forwards; }
+.hero h1 .line2 { display: block; opacity: 0; animation: fadeSlideUp 0.6s var(--ease-out) 0.45s forwards; }
+.hero h1 em {
+  font-style: normal; position: relative; display: inline-block; color: var(--white);
+}
+.hero h1 em::after {
+  content: ''; position: absolute; bottom: 4px; left: 0;
+  height: 8px; width: 0; background: var(--accent); opacity: 0.7; z-index: -1;
+  border-radius: 2px; animation: drawUnderline 0.6s var(--ease-out) 0.7s forwards;
+}
+.hero-sub {
+  font-size: 1.2rem; color: rgba(255,255,255,0.7); line-height: 1.7;
+  max-width: 560px; margin: 0 auto 3rem;
+  opacity: 0; animation: fadeSlideUp 0.6s var(--ease-out) 0.6s forwards;
+}
+.hero-actions {
+  display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+  opacity: 0; animation: fadeSlideUp 0.6s var(--ease-out) 0.8s forwards;
+}
+.hero .btn-cta--primary { background: var(--accent); color: var(--white); border-color: var(--accent); }
+.hero .btn-cta--primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
+.hero .btn-cta--outline { background: transparent; border-color: rgba(255,255,255,0.5); color: var(--white); }
+.hero .btn-cta--outline:hover { background: rgba(255,255,255,0.1); border-color: var(--white); }
+
+/* ─── SECTION COMMON ─── */
+.section { padding: 6rem 0; }
+.section-label {
+  display: inline-block; font-size: 0.75rem; font-weight: 600;
+  letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent);
+  margin-bottom: 1rem;
+}
+.section-title {
+  font-size: clamp(2rem, 4vw, 3rem); font-weight: 700;
+  letter-spacing: -0.03em; line-height: 1.1; color: var(--primary);
+  margin-bottom: 1rem;
+}
+.section-subtitle {
+  font-size: 1.1rem; color: var(--gray-600); line-height: 1.7;
+  max-width: 560px;
+}
+.section-header { margin-bottom: 3.5rem; }
+.section-header--center { text-align: center; }
+.section-header--center .section-subtitle { margin: 0 auto; }
+
+/* ─── HOW IT WORKS ─── */
+.how-it-works { position: relative; }
+.steps-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem;
+}
+.step-card {
+  background: var(--white); border-radius: 20px; padding: 2.5rem 2rem;
+  transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out);
+}
+.step-card:nth-child(even) { transform: translateY(2rem); }
+.step-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.06); }
+.step-card:nth-child(even):hover { transform: translateY(calc(2rem - 4px)); }
+.step-number {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 48px; height: 48px; border-radius: 14px;
+  background: var(--gray-100); color: var(--accent);
+  font-family: var(--font-display); font-weight: 700; font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+}
+.step-card h3 {
+  font-size: 1.15rem; font-weight: 700; color: var(--primary);
+  margin-bottom: 0.75rem; letter-spacing: -0.02em;
+}
+.step-card p { font-size: 0.92rem; color: var(--gray-600); line-height: 1.65; }
+
+/* ─── WHAT'S INCLUDED ─── */
+.included-section {
+  position: relative; overflow: hidden;
+  padding: 8rem 0;
+}
+.included-section::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  background: var(--gray-100);
+  transform: skewY(-2deg); transform-origin: top left;
+  z-index: 0;
+}
+.included-section .container { position: relative; z-index: 1; }
+
+.included-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+}
+.included-card {
+  background: var(--white); border-radius: 20px; padding: 2.25rem 2rem;
+  position: relative; overflow: hidden;
+  transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out);
+}
+.included-card:nth-child(2), .included-card:nth-child(5) { transform: translateY(1.5rem); }
+.included-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.06); }
+.included-card:nth-child(2):hover, .included-card:nth-child(5):hover { transform: translateY(calc(1.5rem - 4px)); }
+
+.included-card::before {
+  content: ''; position: absolute; left: 0; top: 0;
+  width: 4px; height: 0; background: var(--accent);
+  border-radius: 0 2px 2px 0;
+  transition: height 0.4s var(--ease-out);
+}
+.included-card:hover::before { height: 100%; }
+
+.included-icon {
+  width: 44px; height: 44px; border-radius: 12px;
+  background: var(--gray-100); display: flex; align-items: center; justify-content: center;
+  margin-bottom: 1.25rem; color: var(--accent);
+}
+.included-icon svg { width: 22px; height: 22px; }
+.included-card h3 {
+  font-size: 1.05rem; font-weight: 700; color: var(--primary);
+  margin-bottom: 0.6rem; letter-spacing: -0.02em;
+}
+.included-card p { font-size: 0.88rem; color: var(--gray-600); line-height: 1.65; }
+
+/* ─── PRICING ─── */
+.pricing-section {
+  background: var(--primary); padding: 6rem 0;
+  position: relative; overflow: hidden;
+}
+.pricing-section .section-label { color: var(--support); }
+.pricing-section .section-title { color: var(--white); }
+.pricing-section .section-subtitle { color: rgba(255,255,255,0.6); }
+
+.toggle-wrap {
+  display: flex; align-items: center; justify-content: center; gap: 1rem;
+  margin-bottom: 3rem;
+}
+.toggle-label {
+  font-family: var(--font-body); font-size: 0.9rem; font-weight: 500;
+  color: rgba(255,255,255,0.6); transition: color 0.3s;
+}
+.toggle-label.active { color: var(--white); }
+.toggle-track {
+  width: 52px; height: 28px; border-radius: 14px;
+  background: var(--primary-light); border: 2px solid rgba(255,255,255,0.2);
+  position: relative; cursor: pointer;
+  transition: background 0.3s var(--ease-out);
+}
+.toggle-track:hover { border-color: rgba(255,255,255,0.4); }
+.toggle-thumb {
+  width: 20px; height: 20px; border-radius: 50%;
+  background: var(--accent); position: absolute; top: 2px; left: 2px;
+  transition: transform 0.3s var(--ease-out);
+}
+.toggle-track.annual .toggle-thumb { transform: translateX(24px); }
+.save-badge {
+  display: inline-block; font-size: 0.72rem; font-weight: 600;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  background: var(--accent); color: var(--white);
+  padding: 0.25rem 0.6rem; border-radius: 20px;
+  opacity: 0; transform: scale(0.8);
+  transition: all 0.3s var(--ease-out);
+}
+.save-badge.visible { opacity: 1; transform: scale(1); }
+
+.pricing-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+  align-items: start;
+}
+.pricing-card {
+  background: var(--primary-light); border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 24px; padding: 2.5rem 2rem;
+  transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out);
+}
+.pricing-card:hover { transform: translateY(-4px); box-shadow: 0 20px 50px rgba(0,0,0,0.3); }
+.pricing-card.featured {
+  background: var(--white); border-color: transparent;
+  position: relative;
+}
+.pricing-card.featured .pricing-tier { color: var(--accent); }
+.pricing-card.featured .pricing-amount { color: var(--primary); }
+.pricing-card.featured .pricing-period { color: var(--gray-600); }
+.pricing-card.featured .pricing-desc { color: var(--gray-600); }
+.pricing-card.featured .pricing-features li { color: var(--gray-800); }
+.pricing-card.featured .pricing-features li svg { color: var(--accent); }
+.pricing-card.featured .btn-cta--primary { background: var(--primary); border-color: var(--primary); }
+.pricing-card.featured .btn-cta--primary:hover { background: var(--primary-deep); border-color: var(--primary-deep); }
+.popular-badge {
+  position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+  background: var(--accent); color: var(--white);
+  font-family: var(--font-display); font-size: 0.72rem; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 0.35rem 1rem; border-radius: 20px;
+}
+.pricing-tier {
+  font-family: var(--font-display); font-size: 0.85rem; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--support);
+  margin-bottom: 1.25rem;
+}
+.pricing-amount {
+  font-family: var(--font-display); font-size: 2.75rem; font-weight: 700;
+  color: var(--white); letter-spacing: -0.03em; line-height: 1;
+}
+.pricing-period {
+  font-size: 0.85rem; color: rgba(255,255,255,0.5);
+  margin-bottom: 0.5rem;
+}
+.pricing-desc {
+  font-size: 0.88rem; color: rgba(255,255,255,0.5);
+  margin-bottom: 2rem; line-height: 1.5;
+}
+.pricing-setup {
+  font-size: 0.8rem; color: rgba(255,255,255,0.4);
+  margin-bottom: 1.75rem;
+}
+.pricing-card.featured .pricing-setup { color: var(--gray-400); }
+.pricing-features { margin-bottom: 2rem; }
+.pricing-features li {
+  display: flex; align-items: flex-start; gap: 0.6rem;
+  font-size: 0.88rem; color: rgba(255,255,255,0.75);
+  padding: 0.4rem 0;
+}
+.pricing-features li svg { width: 18px; height: 18px; color: var(--accent); flex-shrink: 0; margin-top: 2px; }
+.pricing-card .btn-cta { width: 100%; justify-content: center; }
+
+/* ─── WORK ─── */
+.work-section { padding: 6rem 0; }
+.work-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+}
+.work-card {
+  background: var(--white); border-radius: 24px; overflow: hidden;
+  transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out);
+}
+.work-card:nth-child(2) { transform: translateY(2rem); }
+.work-card:hover { transform: rotate(-0.5deg) translateY(-4px); box-shadow: 0 24px 48px rgba(0,0,0,0.08); }
+.work-card:nth-child(2):hover { transform: translateY(calc(2rem - 4px)) rotate(-0.5deg); }
+.work-thumb {
+  height: 220px; background: var(--gray-200); position: relative;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+.work-thumb-inner {
+  font-family: var(--font-display); font-weight: 700; font-size: 1.3rem;
+  color: var(--gray-400); letter-spacing: -0.02em;
+}
+.work-body { padding: 2rem; }
+.work-tag {
+  display: inline-block; font-size: 0.72rem; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent);
+  margin-bottom: 0.75rem;
+}
+.work-card h3 {
+  font-size: 1.2rem; font-weight: 700; color: var(--primary);
+  margin-bottom: 0.6rem; letter-spacing: -0.02em;
+}
+.work-card p { font-size: 0.88rem; color: var(--gray-600); line-height: 1.65; }
+.work-link {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  font-family: var(--font-display); font-size: 0.85rem; font-weight: 600;
+  color: var(--accent); margin-top: 1rem;
+  transition: gap 0.3s var(--ease-out);
+}
+.work-link:hover { gap: 0.7rem; }
+.work-link svg { width: 16px; height: 16px; }
+
+/* ─── TESTIMONIALS ─── */
+.testimonials-section {
+  position: relative; overflow: hidden; padding: 8rem 0;
+}
+.testimonials-section::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  background: var(--gray-100);
+  transform: skewY(-2deg); transform-origin: top right;
+  z-index: 0;
+}
+.testimonials-section .container { position: relative; z-index: 1; }
+.testimonials-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+}
+.testimonial-card {
+  border-radius: 24px; padding: 2.5rem 2rem;
+  transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out);
+}
+.testimonial-card--light { background: var(--white); }
+.testimonial-card--dark { background: var(--primary); color: var(--white); }
+.testimonial-card:nth-child(1) { transform: rotate(-1.5deg); }
+.testimonial-card:nth-child(2) { transform: translateY(1.5rem) rotate(0.5deg); }
+.testimonial-card:nth-child(3) { transform: rotate(1deg); }
+.testimonial-card:hover { box-shadow: 0 24px 48px rgba(0,0,0,0.08); }
+.testimonial-card:nth-child(1):hover { transform: rotate(-1.5deg) translateY(-4px); }
+.testimonial-card:nth-child(2):hover { transform: translateY(calc(1.5rem - 4px)) rotate(0.5deg); }
+.testimonial-card:nth-child(3):hover { transform: rotate(1deg) translateY(-4px); }
+
+.testimonial-stars {
+  display: flex; gap: 3px; margin-bottom: 1.25rem; color: var(--accent);
+}
+.testimonial-card--dark .testimonial-stars { color: var(--support); }
+.testimonial-stars svg { width: 18px; height: 18px; }
+.testimonial-card blockquote {
+  font-size: 0.95rem; line-height: 1.7; margin-bottom: 1.5rem;
+  color: var(--gray-600);
+}
+.testimonial-card--dark blockquote { color: rgba(255,255,255,0.75); }
+.testimonial-author {
+  display: flex; align-items: center; gap: 0.75rem;
+}
+.testimonial-avatar {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: var(--gray-200); display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-weight: 700; font-size: 0.9rem;
+  color: var(--gray-600);
+}
+.testimonial-card--dark .testimonial-avatar { background: var(--primary-light); color: var(--support); }
+.testimonial-name {
+  font-family: var(--font-display); font-weight: 600; font-size: 0.92rem;
+  color: var(--primary);
+}
+.testimonial-card--dark .testimonial-name { color: var(--white); }
+.testimonial-role {
+  font-size: 0.8rem; color: var(--gray-400);
+}
+.testimonial-card--dark .testimonial-role { color: rgba(255,255,255,0.4); }
+
+/* ─── EXAMPLES ─── */
+.examples-section { padding: 6rem 0; }
+.examples-grid {
+  display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 1.5rem;
+  grid-template-rows: auto auto;
+}
+.example-tile {
+  background: var(--white); border-radius: 24px; overflow: hidden;
+  position: relative;
+  transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out);
+}
+.example-tile:hover { transform: translateY(-4px); box-shadow: 0 24px 48px rgba(0,0,0,0.08); }
+.example-tile:first-child { grid-row: 1 / 3; }
+.example-tile-thumb {
+  height: 200px; background: var(--gray-200);
+  display: flex; align-items: center; justify-content: center;
+}
+.example-tile:first-child .example-tile-thumb { height: 100%; min-height: 320px; }
+.example-tile-thumb-text {
+  font-family: var(--font-display); font-weight: 700; font-size: 1.2rem;
+  color: var(--gray-400); letter-spacing: -0.02em;
+}
+.example-tile-body { padding: 1.75rem 2rem; }
+.example-tile:first-child .example-tile-body {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  background: linear-gradient(to top, rgba(27,27,27,0.95), transparent);
+  padding: 3rem 2rem 2rem;
+}
+.example-tile-tag {
+  display: inline-block; font-size: 0.72rem; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+.example-tile:first-child .example-tile-tag { color: var(--support); }
+.example-tile h3 {
+  font-size: 1.15rem; font-weight: 700; color: var(--primary);
+  letter-spacing: -0.02em; margin-bottom: 0.4rem;
+}
+.example-tile:first-child h3 { color: var(--white); font-size: 1.3rem; }
+.example-tile p { font-size: 0.85rem; color: var(--gray-600); line-height: 1.6; }
+.example-tile:first-child p { color: rgba(255,255,255,0.7); }
+
+/* ─── CTA BANNER ─── */
+.cta-banner {
+  background: var(--primary); padding: 5rem 0;
+  text-align: center;
+  position: relative; overflow: hidden;
+}
+.cta-banner::before {
+  content: ''; position: absolute; top: -40%; right: -10%;
+  width: 500px; height: 500px; border-radius: 50%;
+  background: rgba(89,95,57,0.08);
+}
+.cta-banner .container { position: relative; z-index: 1; }
+.cta-banner h2 {
+  font-size: clamp(2rem, 4vw, 3rem); font-weight: 700;
+  color: var(--white); letter-spacing: -0.03em;
+  margin-bottom: 1rem;
+}
+.cta-banner p {
+  font-size: 1.1rem; color: rgba(255,255,255,0.6);
+  margin-bottom: 2.5rem; max-width: 500px; margin-left: auto; margin-right: auto;
+}
+.cta-banner-actions {
+  display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+}
+
+/* ─── FAQ ─── */
+.faq-section { padding: 6rem 0; }
+.faq-list { max-width: 720px; margin: 0 auto; }
+.faq-item {
+  border-bottom: 1px solid var(--gray-200);
+}
+.faq-item:first-child { border-top: 1px solid var(--gray-200); }
+.faq-question {
+  width: 100%; background: none; border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.5rem 0; text-align: left;
+  font-family: var(--font-display); font-size: 1.05rem; font-weight: 600;
+  color: var(--primary); letter-spacing: -0.02em;
+  transition: color 0.3s;
+}
+.faq-question:hover { color: var(--accent); }
+.faq-question svg {
+  width: 20px; height: 20px; flex-shrink: 0; color: var(--gray-400);
+  transition: transform 0.3s var(--ease-out), color 0.3s;
+}
+.faq-item.open .faq-question svg { transform: rotate(45deg); color: var(--accent); }
+.faq-answer {
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.4s var(--ease-out), padding 0.4s var(--ease-out);
+}
+.faq-answer-inner {
+  padding-bottom: 1.5rem;
+  font-size: 0.92rem; color: var(--gray-600); line-height: 1.7;
+}
+
+/* ─── FOOTER ─── */
+.site-footer {
+  background: var(--primary); padding: 4rem 0 2rem;
+}
+.footer-top {
+  display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 3rem;
+  padding-bottom: 3rem; border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.footer-brand .wordmark { margin-bottom: 0.75rem; }
+.footer-strapline {
+  font-size: 0.88rem; color: rgba(255,255,255,0.5); line-height: 1.6;
+  max-width: 280px;
+}
+.footer-col h4 {
+  font-family: var(--font-display); font-size: 0.8rem; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--support);
+  margin-bottom: 1.25rem;
+}
+.footer-col a {
+  display: block; font-size: 0.88rem; color: rgba(255,255,255,0.6);
+  padding: 0.3rem 0; transition: color 0.3s;
+}
+.footer-col a:hover { color: var(--white); }
+.footer-bottom {
+  display: flex; align-items: center; justify-content: space-between;
+  padding-top: 2rem;
+}
+.footer-legal {
+  font-size: 0.8rem; color: rgba(255,255,255,0.35);
+}
+.footer-legal-links {
+  display: flex; gap: 1.5rem;
+}
+.footer-legal-links a {
+  font-size: 0.8rem; color: rgba(255,255,255,0.35);
+  transition: color 0.3s;
+}
+.footer-legal-links a:hover { color: rgba(255,255,255,0.6); }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 1024px) {
+  .steps-grid { grid-template-columns: repeat(2, 1fr); }
+  .pricing-grid { grid-template-columns: 1fr; max-width: 440px; margin: 0 auto; }
+  .work-grid { grid-template-columns: repeat(2, 1fr); }
+  .work-card:nth-child(3) { grid-column: 1 / -1; max-width: 50%; }
+  .testimonials-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
+  .testimonial-card:nth-child(1) { transform: rotate(0); }
+  .testimonial-card:nth-child(2) { transform: translateY(0); }
+  .testimonial-card:nth-child(3) { transform: rotate(0); }
+  .testimonial-card:nth-child(1):hover { transform: translateY(-4px); }
+  .testimonial-card:nth-child(2):hover { transform: translateY(-4px); }
+  .testimonial-card:nth-child(3):hover { transform: translateY(-4px); }
+  .examples-grid { grid-template-columns: 1fr 1fr; }
+  .example-tile:first-child { grid-row: auto; }
+  .footer-top { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 768px) {
+  .nav-desktop { display: none; }
+  .hamburger { display: block; }
+  .hero { min-height: 80vh; padding: 10rem 0 6rem; }
+  .hero h1 { font-size: clamp(2.5rem, 10vw, 3.5rem); }
+  .section { padding: 4rem 0; }
+  .included-section, .testimonials-section { padding: 6rem 0; }
+  .steps-grid { grid-template-columns: 1fr; }
+  .step-card:nth-child(even) { transform: none; }
+  .step-card:nth-child(even):hover { transform: translateY(-4px); }
+  .included-grid { grid-template-columns: 1fr; }
+  .included-card:nth-child(2), .included-card:nth-child(5) { transform: none; }
+  .included-card:nth-child(2):hover, .included-card:nth-child(5):hover { transform: translateY(-4px); }
+  .work-grid { grid-template-columns: 1fr; }
+  .work-card:nth-child(2) { transform: none; }
+  .work-card:nth-child(2):hover { transform: rotate(-0.5deg) translateY(-4px); }
+  .work-card:nth-child(3) { max-width: 100%; }
+  .examples-grid { grid-template-columns: 1fr; }
+  .footer-top { grid-template-columns: 1fr; gap: 2rem; }
+  .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+}
+
+@media (max-width: 480px) {
+  .hero { padding: 8rem 0 4rem; }
+  .hero-sub { font-size: 1rem; }
+  .btn-cta { padding: 0.8rem 1.5rem; font-size: 0.88rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- ─── HEADER ─── -->
+<header class="site-header" id="siteHeader" role="banner">
+  <div class="header-inner">
+    <a href="#" class="wordmark" aria-label="DCS Home">DCS</a>
+    <nav class="nav-desktop" aria-label="Main navigation">
+      <a href="#how-it-works">How it works</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#work">Work</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact" class="btn-cta btn-cta--primary">Get in touch</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <nav class="nav-mobile" id="mobileNav" role="navigation" aria-label="Mobile navigation">
+    <a href="#how-it-works" class="mobile-nav-link">How it works</a>
+    <a href="#pricing" class="mobile-nav-link">Pricing</a>
+    <a href="#work" class="mobile-nav-link">Work</a>
+    <a href="#faq" class="mobile-nav-link">FAQ</a>
+    <a href="#contact" class="btn-cta btn-cta--primary mobile-nav-link">Get in touch</a>
+  </nav>
+</header>
+
+<!-- ─── HERO ─── -->
+<section class="hero">
+  <div class="hero-inner">
+    <span class="hero-label">Websites for tradespeople</span>
+    <h1>
+      <span class="line1">Websites as</span>
+      <span class="line2"><em>professional</em> as you are</span>
+    </h1>
+    <p class="hero-sub">We design, build, and look after websites for local service businesses. You focus on the work. We handle the web.</p>
+    <div class="hero-actions">
+      <a href="#pricing" class="btn-cta btn-cta--primary">
+        See pricing
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+      </a>
+      <a href="#work" class="btn-cta btn-cta--outline">View our work</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── HOW IT WORKS ─── -->
+<section class="section how-it-works" id="how-it-works">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">How it works</span>
+      <h2 class="section-title">Four steps to a better website</h2>
+      <p class="section-subtitle">No jargon. No hassle. We handle everything from first conversation to go-live and beyond.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-number">01</div>
+        <h3>Tell us about your business</h3>
+        <p>A quick conversation about what you do, who your customers are, and what you need from your website. That is all we need to get started.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">02</div>
+        <h3>We write and design it</h3>
+        <p>We craft the copy, choose the imagery, and design every page to reflect your brand and speak directly to your ideal customers.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">03</div>
+        <h3>We build and launch it</h3>
+        <p>Your site is built for speed, search engines, and mobile devices. We handle hosting, domain setup, and go-live so you do not have to.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">04</div>
+        <h3>We look after it</h3>
+        <p>Ongoing hosting, security updates, content changes, and support. Your website stays fast, secure, and up to date without you lifting a finger.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── WHAT'S INCLUDED ─── -->
+<section class="included-section" id="included">
+  <div class="container">
+    <div class="section-header section-header--center">
+      <span class="section-label">What's included</span>
+      <h2 class="section-title">Everything you need, nothing you don't</h2>
+      <p class="section-subtitle">Every plan comes with the essentials to get your business online and keep it there.</p>
+    </div>
+    <div class="included-grid">
+      <div class="included-card">
+        <div class="included-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.395m3.42 3.42a15.995 15.995 0 004.764-4.648l3.876-5.814a1.151 1.151 0 00-1.597-1.597L14.146 6.32a15.996 15.996 0 00-4.649 4.763m3.42 3.42a6.776 6.776 0 00-3.42-3.42"/></svg>
+        </div>
+        <h3>Design</h3>
+        <p>Custom design tailored to your trade and brand. Clean layouts that build trust and convert visitors into enquiries.</p>
+      </div>
+      <div class="included-card">
+        <div class="included-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/></svg>
+        </div>
+        <h3>Copy</h3>
+        <p>Professionally written content that speaks your customers' language. Optimised for search engines and designed to drive action.</p>
+      </div>
+      <div class="included-card">
+        <div class="included-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5"/></svg>
+        </div>
+        <h3>Build</h3>
+        <p>Lightning-fast, mobile-first websites built on modern technology. Every page scores 90+ on Google PageSpeed.</p>
+      </div>
+      <div class="included-card">
+        <div class="included-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15a4.5 4.5 0 004.5 4.5H18a3.75 3.75 0 001.332-7.257 3 3 0 00-3.758-3.848 5.25 5.25 0 00-10.233 2.33A4.502 4.502 0 002.25 15z"/></svg>
+        </div>
+        <h3>Hosting</h3>
+        <p>Enterprise-grade hosting on a global CDN. Your site loads fast for every visitor, whether they are in Brighton or Birmingham.</p>
+      </div>
+      <div class="included-card">
+        <div class="included-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg>
+        </div>
+        <h3>Security</h3>
+        <p>SSL certificates, automated backups, and proactive monitoring. Your site and your customers' data stay protected around the clock.</p>
+      </div>
+      <div class="included-card">
+        <div class="included-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 01-.825-.242m9.345-8.334a2.126 2.126 0 00-.476-.095 48.64 48.64 0 00-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0011.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155"/></svg>
+        </div>
+        <h3>Support</h3>
+        <p>Real people, not chatbots. Reach us by email or phone whenever you need a change, have a question, or want advice.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PRICING ─── -->
+<section class="pricing-section section" id="pricing">
+  <div class="container">
+    <div class="section-header section-header--center">
+      <span class="section-label">Pricing</span>
+      <h2 class="section-title">Simple, transparent pricing</h2>
+      <p class="section-subtitle">One-off build fee, then a monthly plan. No hidden costs, no surprise invoices.</p>
+    </div>
+
+    <div class="toggle-wrap">
+      <span class="toggle-label active" id="toggleMonthly">Monthly</span>
+      <div class="toggle-track" id="billingToggle" role="switch" aria-checked="false" aria-label="Toggle annual billing" tabindex="0">
+        <div class="toggle-thumb"></div>
+      </div>
+      <span class="toggle-label" id="toggleAnnual">Annual</span>
+      <span class="save-badge" id="saveBadge">Save 40%+</span>
+    </div>
+
+    <div class="pricing-grid">
+      <!-- Starter -->
+      <div class="pricing-card">
+        <div class="pricing-tier">Starter</div>
+        <div class="pricing-amount">&pound;<span class="monthly-price">29</span></div>
+        <div class="pricing-period"><span class="period-text">per month</span></div>
+        <div class="pricing-setup">&pound;995 one-off build</div>
+        <p class="pricing-desc">A professional one-page website. Ideal for tradespeople who need a clean, credible online presence.</p>
+        <ul class="pricing-features">
+          <li>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+            One-page website
+          </li>
+          <li>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+            Mobile responsive design
+          </li>
+          <li>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+            Contact form
+          </li>
+          <li>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+            Hosting &amp; SSL
+          </li>
+          <li>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+            Email support
+          </li>
+        </ul>
+        <a href="#contact" class="btn-cta btn-cta--ghost-white">Get started</a>
+      </div>
+
+      <!-- Professional -->
+      <div class="pricing-card featured">
+        <div class="popular-badge">Most popular</div>
+        <div class="pricing-tier">Professional</div>
+        <div class="pricing-amount">&pound;<span class="monthly-price">39</span></div>
+        <div class="pricing-period"><span class="period-text">per month</span></div>
+        <div class="pricing-setup">&pound;1,995 one-off build</div>
+        <p class="pricing-desc">A multi-page website with service pages, local SEO, and everything needed to win more work online.</p>
+        <ul class="pricing-features">
+          <li>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+            Multi-page website
+          </li>
+          <li>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+            Service &amp; location pages
+          </li>
+          <li>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+            Local SEO setup
+          </li>
+          <li>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+            Google Business integration
+          </li>
+          <li>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+            Monthly content updates
+          </li>
+          <li>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+            Priority support
+          </li>
+        </ul>
+        <a href="#contact" class="btn-cta btn-cta--primary">Get started</a>
+      </div>
+
+      <!-- Growth -->
+      <div class="pricing-card">
+        <div class="pricing-tier">Growth</div>
+        <div class="pricing-amount">&pound;<span class="monthly-price">59</span></div>
+        <div class="pricing-period"><span class="period-text">per month</span></div>
+        <div class="pricing-setup">&pound;3,495 one-off build</div>
+        <p class="pricing-desc">A complete digital presence with blog, project gallery, and ongoing content strategy to dominate local search.</p>
+        <ul class="pricing-features">
+          <li>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+            Everything in Professional
+          </li>
+          <li>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+            Blog &amp; project gallery
+          </li>
+          <li>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+            Monthly blog articles
+          </li>
+          <li>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+            Review management
+          </li>
+          <li>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+            Analytics dashboard
+          </li>
+          <li>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+            Dedicated account manager
+          </li>
+        </ul>
+        <a href="#contact" class="btn-cta btn-cta--ghost-white">Get started</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── RECENT WORK ─── -->
+<section class="work-section section" id="work">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Recent work</span>
+      <h2 class="section-title">Sites we have built</h2>
+      <p class="section-subtitle">Real websites for real businesses. Each one designed to win more customers in their local area.</p>
+    </div>
+    <div class="work-grid">
+      <div class="work-card">
+        <div class="work-thumb">
+          <div class="work-thumb-inner">colossusscaffolding.co.uk</div>
+        </div>
+        <div class="work-body">
+          <span class="work-tag">Scaffolding</span>
+          <h3>Colossus Scaffolding</h3>
+          <p>A professional multi-page website for an East Sussex scaffolding company. Service pages, location targeting, and a project gallery.</p>
+          <a href="#" class="work-link">
+            View project
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="work-card">
+        <div class="work-thumb">
+          <div class="work-thumb-inner">djfoxelectrical.com</div>
+        </div>
+        <div class="work-body">
+          <span class="work-tag">Electrical</span>
+          <h3>DJ Fox Electrical</h3>
+          <p>A bold, high-impact website for a Sussex-based electrician. Dark theme, service pages, and local SEO to drive enquiries.</p>
+          <a href="#" class="work-link">
+            View project
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="work-card">
+        <div class="work-thumb">
+          <div class="work-thumb-inner">bexhillremovals.co.uk</div>
+        </div>
+        <div class="work-body">
+          <span class="work-tag">Removals</span>
+          <h3>Bexhill Removals</h3>
+          <p>A clean, trustworthy website for a local removals firm. Instant quote form, service areas, and customer testimonials throughout.</p>
+          <a href="#" class="work-link">
+            View project
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TESTIMONIALS ─── -->
+<section class="testimonials-section" id="testimonials">
+  <div class="container">
+    <div class="section-header section-header--center">
+      <span class="section-label">Testimonials</span>
+      <h2 class="section-title">What our clients say</h2>
+      <p class="section-subtitle">Do not take our word for it. Here is what the people we work with have to say.</p>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card testimonial-card--light">
+        <div class="testimonial-stars">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"/></svg>
+        </div>
+        <blockquote>"Best decision I made for my business this year. The site looks professional and the phone has not stopped ringing since it went live."</blockquote>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">P</div>
+          <div>
+            <div class="testimonial-name">Paul Thompson</div>
+            <div class="testimonial-role">Colossus Scaffolding</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card testimonial-card--dark">
+        <div class="testimonial-stars">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"/></svg>
+        </div>
+        <blockquote>"I had been putting off getting a website for years. DCS made it completely painless. They handled everything and it looks exactly how I wanted."</blockquote>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">S</div>
+          <div>
+            <div class="testimonial-name">Sarah Mitchell</div>
+            <div class="testimonial-role">DJ Fox Electrical</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card testimonial-card--light">
+        <div class="testimonial-stars">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"/></svg>
+        </div>
+        <blockquote>"Within three months of launching, we were getting twice the enquiries we used to. The investment paid for itself in the first month."</blockquote>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">M</div>
+          <div>
+            <div class="testimonial-name">Mark Davies</div>
+            <div class="testimonial-role">Bexhill Removals</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── EXAMPLES ─── -->
+<section class="examples-section section" id="examples">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Examples</span>
+      <h2 class="section-title">Built for every trade</h2>
+      <p class="section-subtitle">Whether you are a plumber, electrician, or gardener, we build websites that fit your industry.</p>
+    </div>
+    <div class="examples-grid">
+      <div class="example-tile">
+        <div class="example-tile-thumb">
+          <div class="example-tile-thumb-text">Plumbing &amp; Heating</div>
+        </div>
+        <div class="example-tile-body">
+          <span class="example-tile-tag">Plumbing</span>
+          <h3>Emergency callout pages, boiler service listings, and local area targeting to fill your diary.</h3>
+        </div>
+      </div>
+      <div class="example-tile">
+        <div class="example-tile-thumb">
+          <div class="example-tile-thumb-text">Electrical Services</div>
+        </div>
+        <div class="example-tile-body">
+          <span class="example-tile-tag">Electrical</span>
+          <h3>Domestic and commercial services</h3>
+          <p>Certification info, service breakdowns, and trust signals that win the job before you pick up the phone.</p>
+        </div>
+      </div>
+      <div class="example-tile">
+        <div class="example-tile-thumb">
+          <div class="example-tile-thumb-text">Garden &amp; Landscaping</div>
+        </div>
+        <div class="example-tile-body">
+          <span class="example-tile-tag">Gardening</span>
+          <h3>Landscaping and maintenance</h3>
+          <p>Project galleries, seasonal services, and before-and-after showcases that sell your work visually.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CTA BANNER ─── -->
+<section class="cta-banner" id="contact">
+  <div class="container">
+    <h2>Ready to get online?</h2>
+    <p>Tell us about your business and we will come back to you with a plan. No obligation, no hard sell.</p>
+    <div class="cta-banner-actions">
+      <a href="mailto:hello@digitalconsultingservices.co.uk" class="btn-cta btn-cta--white">
+        Get in touch
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+      </a>
+      <a href="tel:+441234567890" class="btn-cta btn-cta--ghost-white">Call us</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FAQ ─── -->
+<section class="faq-section section" id="faq">
+  <div class="container">
+    <div class="section-header section-header--center">
+      <span class="section-label">FAQ</span>
+      <h2 class="section-title">Common questions</h2>
+      <p class="section-subtitle">Everything you need to know before getting started.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          How long does it take to build my website?
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Most websites are designed, built, and live within two to three weeks. Larger projects with more pages or custom features may take a little longer, but we will give you a clear timeline before we start.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          Do I need to provide my own content?
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">No. We write all the copy for you based on a short conversation about your business. If you have photos of your work, great -- we will use those. If not, we source professional imagery that fits your trade.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          Can I update the website myself?
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">You do not need to. Content updates are included in your monthly plan. Just send us an email or give us a ring and we will make the changes for you, usually within 24 hours.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          What happens if I want to cancel?
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">There is no lock-in. You can cancel your monthly plan at any time with 30 days notice. Your website is yours -- we will help you move it to another host if you choose to leave.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer class="site-footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="wordmark">DCS</div>
+        <p class="footer-strapline">Professional websites for local service businesses. We design, build, and look after your online presence so you can focus on the work.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="#how-it-works">How it works</a>
+        <a href="#work">Our work</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <a href="#">Web design</a>
+        <a href="#">Copywriting</a>
+        <a href="#">SEO</a>
+        <a href="#">Hosting</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="mailto:hello@digitalconsultingservices.co.uk">hello@dcs.co.uk</a>
+        <a href="tel:+441234567890">01onal 234 567</a>
+        <a href="#">East Sussex, UK</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-legal">&copy; 2025 Digital Consulting Services. All rights reserved.</div>
+      <div class="footer-legal-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function() {
+  'use strict';
+
+  // ─── HEADER SCROLL ───
+  const header = document.getElementById('siteHeader');
+  let lastScroll = 0;
+  function onScroll() {
+    const y = window.scrollY;
+    if (y > 50) {
+      header.classList.add('scrolled');
+    } else {
+      header.classList.remove('scrolled');
+    }
+    lastScroll = y;
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  // ─── MOBILE NAV ───
+  const hamburger = document.getElementById('hamburger');
+  const mobileNav = document.getElementById('mobileNav');
+  const mobileLinks = mobileNav.querySelectorAll('a');
+
+  hamburger.addEventListener('click', function() {
+    const isOpen = mobileNav.classList.contains('open');
+    if (isOpen) {
+      mobileNav.classList.remove('open');
+      hamburger.classList.remove('active');
+      hamburger.setAttribute('aria-expanded', 'false');
+      hamburger.setAttribute('aria-label', 'Open menu');
+      document.body.style.overflow = '';
+    } else {
+      mobileNav.classList.add('open');
+      hamburger.classList.add('active');
+      hamburger.setAttribute('aria-expanded', 'true');
+      hamburger.setAttribute('aria-label', 'Close menu');
+      document.body.style.overflow = 'hidden';
+    }
+  });
+
+  mobileLinks.forEach(function(link) {
+    link.addEventListener('click', function() {
+      mobileNav.classList.remove('open');
+      hamburger.classList.remove('active');
+      hamburger.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    });
+  });
+
+  // ─── PRICING TOGGLE ───
+  const toggle = document.getElementById('billingToggle');
+  const monthlyLabel = document.getElementById('toggleMonthly');
+  const annualLabel = document.getElementById('toggleAnnual');
+  const saveBadge = document.getElementById('saveBadge');
+  const monthlyPrices = document.querySelectorAll('.monthly-price');
+  const periodTexts = document.querySelectorAll('.period-text');
+
+  var isAnnual = false;
+  var priceMap = {
+    monthly: ['29', '39', '59'],
+    annual: ['59', '99', '149']
+  };
+
+  function updatePricing() {
+    var prices = isAnnual ? priceMap.annual : priceMap.monthly;
+    monthlyPrices.forEach(function(el, i) {
+      el.textContent = prices[i];
+    });
+    periodTexts.forEach(function(el) {
+      el.textContent = isAnnual ? 'per quarter' : 'per month';
+    });
+    if (isAnnual) {
+      toggle.classList.add('annual');
+      toggle.setAttribute('aria-checked', 'true');
+      monthlyLabel.classList.remove('active');
+      annualLabel.classList.add('active');
+      saveBadge.classList.add('visible');
+    } else {
+      toggle.classList.remove('annual');
+      toggle.setAttribute('aria-checked', 'false');
+      monthlyLabel.classList.add('active');
+      annualLabel.classList.remove('active');
+      saveBadge.classList.remove('visible');
+    }
+  }
+
+  toggle.addEventListener('click', function() {
+    isAnnual = !isAnnual;
+    updatePricing();
+  });
+
+  toggle.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      isAnnual = !isAnnual;
+      updatePricing();
+    }
+  });
+
+  // ─── FAQ ACCORDION ───
+  var faqItems = document.querySelectorAll('.faq-item');
+
+  faqItems.forEach(function(item) {
+    var button = item.querySelector('.faq-question');
+    var answer = item.querySelector('.faq-answer');
+    var inner = item.querySelector('.faq-answer-inner');
+
+    button.addEventListener('click', function() {
+      var isOpen = item.classList.contains('open');
+
+      // Close all
+      faqItems.forEach(function(otherItem) {
+        otherItem.classList.remove('open');
+        otherItem.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+        otherItem.querySelector('.faq-answer').style.maxHeight = '0';
+      });
+
+      // Open clicked if it was closed
+      if (!isOpen) {
+        item.classList.add('open');
+        button.setAttribute('aria-expanded', 'true');
+        answer.style.maxHeight = inner.scrollHeight + 24 + 'px';
+      }
+    });
+  });
+
+  // ─── SMOOTH SCROLL ───
+  document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+    anchor.addEventListener('click', function(e) {
+      var target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        var offset = 80;
+        var top = target.getBoundingClientRect().top + window.scrollY - offset;
+        window.scrollTo({ top: top, behavior: 'smooth' });
+      }
+    });
+  });
+
+})();
+</script>
+</body>
+</html>

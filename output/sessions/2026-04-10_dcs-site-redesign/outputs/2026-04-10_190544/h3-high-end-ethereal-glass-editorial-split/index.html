@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DCS — Websites as professional as you are</title>
+<meta name="description" content="Digital Consulting Services builds high-performance websites for local trade and service businesses across the UK.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0a0a1a;
+  --bg-light:#0f0f2a;
+  --glass:rgba(255,255,255,0.06);
+  --glass-border:rgba(255,255,255,0.08);
+  --glass-hover:rgba(255,255,255,0.1);
+  --accent:#7C6AEF;
+  --accent-glow:rgba(124,106,239,0.25);
+  --accent-soft:rgba(124,106,239,0.12);
+  --text:#e8e8f0;
+  --text-muted:rgba(232,232,240,0.55);
+  --text-dim:rgba(232,232,240,0.35);
+  --white:#fff;
+  --radius:16px;
+  --radius-sm:10px;
+  --radius-lg:24px;
+  --font-heading:'Inter',sans-serif;
+  --font-body:'DM Sans',sans-serif;
+}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+body{font-family:var(--font-body);background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+
+/* ── Utility ── */
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+@media(min-width:768px){.container{padding:0 40px}}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
+
+/* ── Glass panels ── */
+.glass{background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--radius);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px)}
+.glass-hover:hover{background:var(--glass-hover);border-color:rgba(255,255,255,0.12)}
+
+/* ── Buttons ── */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:50px;font-family:var(--font-body);font-size:0.938rem;font-weight:500;text-decoration:none;cursor:pointer;border:none;transition:all .3s ease}
+.btn-primary{background:var(--accent);color:var(--white)}
+.btn-primary:hover{background:#6b58e0;transform:translateY(-1px);box-shadow:0 8px 30px var(--accent-glow)}
+.btn-ghost{background:transparent;color:var(--text);border:1px solid var(--glass-border)}
+.btn-ghost:hover{border-color:rgba(255,255,255,0.2);background:var(--glass)}
+.btn-sm{padding:10px 22px;font-size:0.875rem}
+
+/* ── Section spacing ── */
+section{padding:100px 0}
+@media(min-width:768px){section{padding:140px 0}}
+
+/* ── Section headings ── */
+.section-label{font-family:var(--font-body);font-size:0.75rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
+.section-heading{font-family:var(--font-heading);font-size:clamp(2rem,4.5vw,3.25rem);font-weight:300;line-height:1.15;letter-spacing:-0.02em;color:var(--white);margin-bottom:20px}
+.section-sub{font-size:1.05rem;color:var(--text-muted);max-width:520px;line-height:1.65}
+
+/* ── Ambient glow blobs ── */
+.glow{position:absolute;border-radius:50%;filter:blur(120px);pointer-events:none;opacity:.35}
+.glow-1{width:500px;height:500px;background:rgba(124,106,239,0.3);top:-200px;right:-100px}
+.glow-2{width:400px;height:400px;background:rgba(80,60,200,0.25);bottom:-150px;left:-100px}
+
+/* ── Scroll animations ── */
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-left{opacity:0;transform:translateX(-40px);transition:opacity .7s ease,transform .7s ease}
+.reveal-left.visible{opacity:1;transform:translateX(0)}
+.reveal-right{opacity:0;transform:translateX(40px);transition:opacity .7s ease,transform .7s ease}
+.reveal-right.visible{opacity:1;transform:translateX(0)}
+
+/* ═══════════════════════════════════
+   1. HEADER
+   ═══════════════════════════════════ */
+.header{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 0;transition:background .3s,backdrop-filter .3s}
+.header.scrolled{background:rgba(10,10,26,0.8);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--glass-border)}
+.header-inner{display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:var(--font-heading);font-size:1.5rem;font-weight:700;color:var(--white);text-decoration:none;letter-spacing:-0.03em}
+.logo span{color:var(--accent)}
+.nav{display:none;gap:32px;align-items:center}
+@media(min-width:768px){.nav{display:flex}}
+.nav a{color:var(--text-muted);text-decoration:none;font-size:0.875rem;font-weight:400;transition:color .2s}
+.nav a:hover{color:var(--white)}
+.nav-cta{display:none}
+@media(min-width:768px){.nav-cta{display:inline-flex}}
+.hamburger{display:flex;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px}
+@media(min-width:768px){.hamburger{display:none}}
+.hamburger span{display:block;width:22px;height:2px;background:var(--text);border-radius:2px;transition:all .3s}
+.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+.mobile-menu{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(10,10,26,0.97);backdrop-filter:blur(24px);z-index:99;flex-direction:column;align-items:center;justify-content:center;gap:28px}
+.mobile-menu.open{display:flex}
+.mobile-menu a{color:var(--white);text-decoration:none;font-family:var(--font-heading);font-size:1.5rem;font-weight:300}
+
+/* ═══════════════════════════════════
+   2. HERO — editorial split
+   ═══════════════════════════════════ */
+.hero{min-height:100vh;display:flex;align-items:center;padding-top:100px;position:relative;overflow:hidden}
+.hero-split{display:grid;grid-template-columns:1fr;gap:48px;align-items:center}
+@media(min-width:768px){.hero-split{grid-template-columns:1fr 1fr;gap:60px}}
+.hero-content{position:relative;z-index:2}
+.hero h1{font-family:var(--font-heading);font-size:clamp(2.5rem,6vw,4.25rem);font-weight:200;line-height:1.08;letter-spacing:-0.03em;color:var(--white);margin-bottom:24px}
+.hero h1 em{font-style:normal;color:var(--accent);font-weight:300}
+.hero p{font-size:1.125rem;color:var(--text-muted);max-width:480px;margin-bottom:36px;line-height:1.7}
+.hero-actions{display:flex;gap:16px;flex-wrap:wrap}
+.hero-visual{position:relative;display:flex;align-items:center;justify-content:center;min-height:340px}
+.hero-glass-panel{width:100%;max-width:420px;aspect-ratio:4/3;border-radius:var(--radius-lg);background:linear-gradient(135deg,rgba(124,106,239,0.12),rgba(80,60,200,0.06));border:1px solid rgba(124,106,239,0.15);position:relative;overflow:hidden}
+.hero-glass-panel::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(124,106,239,0.08));pointer-events:none}
+.hero-glass-panel .lines{position:absolute;inset:24px;display:flex;flex-direction:column;gap:14px;padding-top:40px}
+.hero-glass-panel .line{height:8px;border-radius:4px;background:rgba(255,255,255,0.06)}
+.hero-glass-panel .line:nth-child(1){width:70%}
+.hero-glass-panel .line:nth-child(2){width:90%}
+.hero-glass-panel .line:nth-child(3){width:55%}
+.hero-glass-panel .line:nth-child(4){width:80%}
+.hero-glass-panel .line:nth-child(5){width:40%}
+.hero-glass-panel .dot-row{position:absolute;top:24px;left:24px;display:flex;gap:8px}
+.hero-glass-panel .dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,0.1)}
+.hero-glass-panel .dot:first-child{background:rgba(124,106,239,0.5)}
+.hero-float-card{position:absolute;bottom:-20px;right:-20px;padding:18px 24px;border-radius:var(--radius);z-index:2}
+.hero-float-card .stat{font-family:var(--font-heading);font-size:1.75rem;font-weight:600;color:var(--accent)}
+.hero-float-card .stat-label{font-size:0.8rem;color:var(--text-muted)}
+
+/* ═══════════════════════════════════
+   3. HOW IT WORKS
+   ═══════════════════════════════════ */
+.how-section{position:relative;overflow:hidden}
+.how-split{display:grid;grid-template-columns:1fr;gap:48px;align-items:start}
+@media(min-width:768px){.how-split{grid-template-columns:1fr 1fr;gap:80px}}
+.how-steps{display:flex;flex-direction:column;gap:36px}
+.how-step{display:flex;gap:20px;align-items:flex-start}
+.step-num{flex-shrink:0;width:44px;height:44px;border-radius:50%;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;font-family:var(--font-heading);font-weight:600;font-size:0.875rem;color:var(--accent);border:1px solid rgba(124,106,239,0.2)}
+.step-text h3{font-family:var(--font-heading);font-size:1.1rem;font-weight:500;color:var(--white);margin-bottom:6px}
+.step-text p{font-size:0.938rem;color:var(--text-muted);line-height:1.6}
+
+/* ═══════════════════════════════════
+   4. WHAT'S INCLUDED
+   ═══════════════════════════════════ */
+.included-section{background:var(--bg-light);position:relative;overflow:hidden}
+.included-split{display:grid;grid-template-columns:1fr;gap:48px}
+@media(min-width:768px){.included-split{grid-template-columns:1fr 1fr;gap:80px;align-items:start}}
+.included-intro{position:sticky;top:140px}
+@media(max-width:767px){.included-intro{position:static}}
+.included-grid{display:flex;flex-direction:column;gap:20px}
+.included-card{padding:28px;transition:background .3s,border-color .3s}
+.included-card .card-icon{width:40px;height:40px;border-radius:10px;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;margin-bottom:16px;font-size:1.1rem}
+.included-card h3{font-family:var(--font-heading);font-size:1rem;font-weight:500;color:var(--white);margin-bottom:8px}
+.included-card p{font-size:0.875rem;color:var(--text-muted);line-height:1.6}
+
+/* ═══════════════════════════════════
+   5. PRICING
+   ═══════════════════════════════════ */
+.pricing-section{position:relative;overflow:hidden}
+.pricing-header{text-align:center;margin-bottom:56px}
+.pricing-header .section-sub{margin:0 auto}
+.toggle-wrap{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:32px}
+.toggle-label{font-size:0.875rem;color:var(--text-muted);transition:color .2s}
+.toggle-label.active{color:var(--white)}
+.toggle{width:52px;height:28px;border-radius:14px;background:var(--glass);border:1px solid var(--glass-border);cursor:pointer;position:relative;transition:background .3s}
+.toggle::after{content:'';position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:var(--accent);transition:transform .3s}
+.toggle.monthly::after{transform:translateX(24px)}
+.pricing-grid{display:grid;grid-template-columns:1fr;gap:24px}
+@media(min-width:768px){.pricing-grid{grid-template-columns:repeat(3,1fr)}}
+.price-card{padding:36px 32px;position:relative;display:flex;flex-direction:column}
+.price-card.featured{border-color:rgba(124,106,239,0.3);background:rgba(124,106,239,0.06)}
+.price-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--accent);color:var(--white);font-size:0.7rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:5px 16px;border-radius:20px}
+.price-name{font-family:var(--font-heading);font-size:1.1rem;font-weight:500;color:var(--white);margin-bottom:8px}
+.price-desc{font-size:0.8rem;color:var(--text-muted);margin-bottom:20px;line-height:1.5}
+.price-amount{font-family:var(--font-heading);font-size:2.5rem;font-weight:300;color:var(--white);letter-spacing:-0.03em}
+.price-amount .period{font-size:0.875rem;color:var(--text-muted);font-weight:400}
+.price-setup{font-size:0.8rem;color:var(--text-dim);margin-top:4px;margin-bottom:24px}
+.price-features{list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:32px;flex:1}
+.price-features li{font-size:0.875rem;color:var(--text-muted);padding-left:24px;position:relative}
+.price-features li::before{content:'\2713';position:absolute;left:0;color:var(--accent);font-weight:600;font-size:0.75rem}
+.price-card .btn{width:100%;justify-content:center}
+.pricing-note{text-align:center;margin-top:36px;font-size:0.8rem;color:var(--text-dim);max-width:640px;margin-left:auto;margin-right:auto;line-height:1.6}
+
+/* ═══════════════════════════════════
+   6. RECENT WORK
+   ═══════════════════════════════════ */
+.work-section{background:var(--bg-light);position:relative;overflow:hidden}
+.work-split{display:grid;grid-template-columns:1fr;gap:48px}
+@media(min-width:768px){.work-split{grid-template-columns:5fr 7fr;gap:80px;align-items:start}}
+.work-grid{display:flex;flex-direction:column;gap:20px}
+.work-card{padding:32px;transition:all .3s}
+.work-card h3{font-family:var(--font-heading);font-size:1.05rem;font-weight:500;color:var(--white);margin-bottom:6px}
+.work-card .work-type{font-size:0.8rem;color:var(--accent);margin-bottom:12px;font-weight:500}
+.work-card p{font-size:0.875rem;color:var(--text-muted);line-height:1.6}
+.work-link{display:inline-flex;align-items:center;gap:8px;color:var(--accent);text-decoration:none;font-size:0.938rem;font-weight:500;margin-top:24px;transition:gap .3s}
+.work-link:hover{gap:12px}
+
+/* ═══════════════════════════════════
+   7. TESTIMONIALS
+   ═══════════════════════════════════ */
+.testimonials-section{position:relative;overflow:hidden}
+.testimonials-split{display:grid;grid-template-columns:1fr;gap:48px}
+@media(min-width:768px){.testimonials-split{grid-template-columns:1fr 1fr;gap:80px;align-items:start}}
+.testimonials-list{display:flex;flex-direction:column;gap:28px}
+.testimonial-card{padding:28px;position:relative}
+.testimonial-card blockquote{font-size:0.938rem;color:var(--text-muted);line-height:1.7;font-style:italic;margin-bottom:16px}
+.testimonial-card blockquote::before{content:'\201C';font-family:var(--font-heading);font-size:3rem;color:var(--accent);opacity:.4;position:absolute;top:12px;left:20px;line-height:1}
+.testimonial-author{font-family:var(--font-heading);font-size:0.875rem;font-weight:500;color:var(--white)}
+.testimonial-role{font-size:0.75rem;color:var(--text-dim)}
+
+/* ═══════════════════════════════════
+   8. SEE WHAT'S POSSIBLE
+   ═══════════════════════════════════ */
+.examples-section{background:var(--bg-light);position:relative;overflow:hidden}
+.examples-header{text-align:center;margin-bottom:56px}
+.examples-header .section-sub{margin:0 auto}
+.examples-grid{display:grid;grid-template-columns:1fr;gap:20px}
+@media(min-width:600px){.examples-grid{grid-template-columns:repeat(3,1fr)}}
+.example-tile{padding:48px 28px;text-align:center;transition:all .3s;position:relative;overflow:hidden}
+.example-tile::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(124,106,239,0.06),transparent);opacity:0;transition:opacity .3s}
+.example-tile:hover::before{opacity:1}
+.example-icon{width:56px;height:56px;border-radius:14px;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin:0 auto 20px;border:1px solid rgba(124,106,239,0.15)}
+.example-tile h3{font-family:var(--font-heading);font-size:1rem;font-weight:500;color:var(--white);margin-bottom:6px}
+.example-tile p{font-size:0.8rem;color:var(--text-muted)}
+.examples-cta{text-align:center;margin-top:40px}
+
+/* ═══════════════════════════════════
+   9. CTA BANNER
+   ═══════════════════════════════════ */
+.cta-section{position:relative;overflow:hidden}
+.cta-banner{text-align:center;padding:80px 40px;border-radius:var(--radius-lg);background:linear-gradient(135deg,rgba(124,106,239,0.12),rgba(80,60,200,0.06));border:1px solid rgba(124,106,239,0.15);position:relative;overflow:hidden}
+.cta-banner::before{content:'';position:absolute;width:300px;height:300px;border-radius:50%;background:rgba(124,106,239,0.15);filter:blur(80px);top:-100px;right:-50px}
+.cta-banner h2{font-family:var(--font-heading);font-size:clamp(2rem,4vw,3rem);font-weight:200;color:var(--white);letter-spacing:-0.02em;margin-bottom:16px}
+.cta-banner p{font-size:1.05rem;color:var(--text-muted);margin-bottom:32px;max-width:440px;margin-left:auto;margin-right:auto}
+
+/* ═══════════════════════════════════
+   10. FAQ
+   ═══════════════════════════════════ */
+.faq-section{background:var(--bg-light);position:relative;overflow:hidden}
+.faq-split{display:grid;grid-template-columns:1fr;gap:48px}
+@media(min-width:768px){.faq-split{grid-template-columns:1fr 1fr;gap:80px;align-items:start}}
+.faq-list{display:flex;flex-direction:column;gap:12px}
+.faq-item{border-radius:var(--radius);overflow:hidden;border:1px solid var(--glass-border);background:var(--glass);transition:border-color .3s}
+.faq-item.open{border-color:rgba(124,106,239,0.2)}
+.faq-q{display:flex;align-items:center;justify-content:space-between;padding:20px 24px;cursor:pointer;background:none;border:none;width:100%;text-align:left;font-family:var(--font-heading);font-size:0.938rem;font-weight:500;color:var(--white);gap:16px}
+.faq-q:focus-visible{outline:2px solid var(--accent);outline-offset:-2px;border-radius:var(--radius)}
+.faq-icon{flex-shrink:0;width:24px;height:24px;border-radius:50%;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;font-size:1rem;color:var(--accent);transition:transform .3s}
+.faq-item.open .faq-icon{transform:rotate(45deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s}
+.faq-a-inner{padding:0 24px 20px;font-size:0.875rem;color:var(--text-muted);line-height:1.7}
+
+/* ═══════════════════════════════════
+   11. FOOTER
+   ═══════════════════════════════════ */
+.footer{border-top:1px solid var(--glass-border);padding:60px 0 32px}
+.footer-grid{display:grid;grid-template-columns:1fr;gap:40px}
+@media(min-width:768px){.footer-grid{grid-template-columns:2fr 1fr 1fr;gap:60px}}
+.footer-brand .logo{display:inline-block;margin-bottom:12px}
+.footer-brand p{font-size:0.875rem;color:var(--text-muted);max-width:300px;line-height:1.6}
+.footer-nav h4{font-family:var(--font-heading);font-size:0.8rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text-dim);margin-bottom:16px}
+.footer-nav a{display:block;color:var(--text-muted);text-decoration:none;font-size:0.875rem;padding:4px 0;transition:color .2s}
+.footer-nav a:hover{color:var(--white)}
+.footer-bottom{border-top:1px solid var(--glass-border);margin-top:48px;padding-top:24px;display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:center}
+.footer-bottom p{font-size:0.75rem;color:var(--text-dim)}
+.footer-legal{display:flex;gap:20px}
+.footer-legal a{font-size:0.75rem;color:var(--text-dim);text-decoration:none;transition:color .2s}
+.footer-legal a:hover{color:var(--text-muted)}
+
+/* ── Reduced motion ── */
+@media(prefers-reduced-motion:reduce){
+  .reveal,.reveal-left,.reveal-right{opacity:1;transform:none;transition:none}
+  .toggle::after{transition:none}
+  .faq-a{transition:none}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ 1. HEADER ═══ -->
+<header class="header" id="header">
+  <div class="container header-inner">
+    <a href="#" class="logo" aria-label="DCS home">D<span>C</span>S</a>
+    <nav class="nav" aria-label="Main navigation">
+      <a href="#services">Services</a>
+      <a href="#work">Our Work</a>
+      <a href="#examples">Examples</a>
+      <a href="#about">About</a>
+      <a href="#faq">Blog</a>
+    </nav>
+    <a href="#contact" class="btn btn-primary btn-sm nav-cta">Get in touch</a>
+    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobile-menu" role="dialog" aria-label="Navigation menu">
+  <a href="#services" class="mobile-link">Services</a>
+  <a href="#work" class="mobile-link">Our Work</a>
+  <a href="#examples" class="mobile-link">Examples</a>
+  <a href="#about" class="mobile-link">About</a>
+  <a href="#faq" class="mobile-link">Blog</a>
+  <a href="#contact" class="btn btn-primary" style="margin-top:12px">Get in touch</a>
+</div>
+
+<!-- ═══ 2. HERO ═══ -->
+<section class="hero" id="home">
+  <div class="glow glow-1"></div>
+  <div class="container">
+    <div class="hero-split">
+      <div class="hero-content reveal-left">
+        <p class="section-label">Digital Consulting Services</p>
+        <h1>Websites as <em>professional</em> as you are</h1>
+        <p>We design, build, and maintain high-performance websites for local trade and service businesses. You focus on what you do best — we handle the rest.</p>
+        <div class="hero-actions">
+          <a href="#pricing" class="btn btn-primary">See pricing</a>
+          <a href="#how" class="btn btn-ghost">How it works</a>
+        </div>
+      </div>
+      <div class="hero-visual reveal-right">
+        <div class="hero-glass-panel glass">
+          <div class="dot-row"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+          <div class="lines">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+          </div>
+        </div>
+        <div class="hero-float-card glass">
+          <div class="stat">100%</div>
+          <div class="stat-label">Hassle-free launch</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 3. HOW IT WORKS ═══ -->
+<section class="how-section" id="how">
+  <div class="glow glow-2"></div>
+  <div class="container">
+    <div class="how-split">
+      <div class="reveal-left">
+        <p class="section-label">How it works</p>
+        <h2 class="section-heading">From conversation to launch in four simple steps</h2>
+        <p class="section-sub">No jargon, no hassle. We guide you through every stage so you can get back to running your business.</p>
+      </div>
+      <div class="how-steps reveal-right">
+        <div class="how-step">
+          <div class="step-num">1</div>
+          <div class="step-text">
+            <h3>Tell us about your business</h3>
+            <p>A quick chat is all it takes. We learn what you do, who your customers are, and what matters most to your brand.</p>
+          </div>
+        </div>
+        <div class="how-step">
+          <div class="step-num">2</div>
+          <div class="step-text">
+            <h3>We write and design it</h3>
+            <p>Our team crafts your copy and designs a site that looks the part — professional, modern, and built to convert visitors into enquiries.</p>
+          </div>
+        </div>
+        <div class="how-step">
+          <div class="step-num">3</div>
+          <div class="step-text">
+            <h3>We build and launch it</h3>
+            <p>We develop your site with performance and search rankings in mind, then launch it on blazing-fast hosting with SSL security included.</p>
+          </div>
+        </div>
+        <div class="how-step">
+          <div class="step-num">4</div>
+          <div class="step-text">
+            <h3>We look after it</h3>
+            <p>Ongoing hosting, security updates, and content changes — all taken care of. You never have to think about your website again.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 4. WHAT'S INCLUDED ═══ -->
+<section class="included-section" id="services">
+  <div class="container">
+    <div class="included-split">
+      <div class="included-intro reveal-left">
+        <p class="section-label">What's included</p>
+        <h2 class="section-heading">Everything you need, nothing you don't</h2>
+        <p class="section-sub">Every package includes the full suite of services you need for a professional web presence. No hidden extras, no surprise invoices.</p>
+      </div>
+      <div class="included-grid reveal-right">
+        <div class="included-card glass glass-hover">
+          <div class="card-icon">&#9998;</div>
+          <h3>Design</h3>
+          <p>Bespoke design tailored to your trade and brand. Clean, modern layouts that build trust with potential customers from the first click.</p>
+        </div>
+        <div class="included-card glass glass-hover">
+          <div class="card-icon">&#9997;</div>
+          <h3>Copywriting</h3>
+          <p>Professionally written content that speaks your customers' language. SEO-optimised copy that ranks on Google and turns visitors into leads.</p>
+        </div>
+        <div class="included-card glass glass-hover">
+          <div class="card-icon">&#9881;</div>
+          <h3>Build</h3>
+          <p>Lightning-fast websites built with the latest technology. Mobile-first, accessible, and optimised for search engines out of the box.</p>
+        </div>
+        <div class="included-card glass glass-hover">
+          <div class="card-icon">&#9729;</div>
+          <h3>Hosting</h3>
+          <p>Premium hosting on a global edge network. Your site loads in under a second, wherever your customers are. 99.99% uptime guaranteed.</p>
+        </div>
+        <div class="included-card glass glass-hover">
+          <div class="card-icon">&#9951;</div>
+          <h3>Security</h3>
+          <p>SSL certificates, DDoS protection, and automatic security updates. Your site and your customers' data are safe with us.</p>
+        </div>
+        <div class="included-card glass glass-hover">
+          <div class="card-icon">&#9742;</div>
+          <h3>Ongoing Support</h3>
+          <p>Content updates, technical support, and performance monitoring. We're a message away whenever you need a change or have a question.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 5. PRICING ═══ -->
+<section class="pricing-section" id="pricing">
+  <div class="container">
+    <div class="pricing-header reveal">
+      <p class="section-label">Pricing</p>
+      <h2 class="section-heading">Simple, transparent pricing</h2>
+      <p class="section-sub">Choose a one-off build with a low monthly fee, or spread the cost with an all-inclusive monthly plan. No contracts beyond the minimum term.</p>
+      <div class="toggle-wrap">
+        <span class="toggle-label active" id="label-oneoff">One-off + monthly</span>
+        <button class="toggle" id="pricing-toggle" role="switch" aria-checked="false" aria-label="Toggle pricing between one-off and monthly"></button>
+        <span class="toggle-label" id="label-monthly">Monthly plan</span>
+      </div>
+    </div>
+    <div class="pricing-grid">
+      <!-- Starter -->
+      <div class="price-card glass reveal">
+        <div class="price-name">Starter</div>
+        <div class="price-desc">Perfect for sole traders and small businesses who need a clean, professional online presence.</div>
+        <div class="price-amount" data-oneoff="&pound;995" data-monthly="&pound;59"><span class="amount">&pound;995</span> <span class="period period-text">one-off</span></div>
+        <div class="price-setup setup-text">then &pound;29/month for hosting &amp; support</div>
+        <ul class="price-features">
+          <li>Up to 5 pages</li>
+          <li>Mobile-responsive design</li>
+          <li>Contact form</li>
+          <li>Basic SEO setup</li>
+          <li>SSL &amp; hosting included</li>
+        </ul>
+        <a href="#contact" class="btn btn-ghost">Get started</a>
+      </div>
+      <!-- Professional -->
+      <div class="price-card glass featured reveal">
+        <div class="price-badge">Most popular</div>
+        <div class="price-name">Professional</div>
+        <div class="price-desc">For growing businesses that want to stand out from the competition and generate more leads online.</div>
+        <div class="price-amount" data-oneoff="&pound;1,995" data-monthly="&pound;99"><span class="amount">&pound;1,995</span> <span class="period period-text">one-off</span></div>
+        <div class="price-setup setup-text">then &pound;39/month for hosting &amp; support</div>
+        <ul class="price-features">
+          <li>Up to 15 pages</li>
+          <li>Bespoke copywriting</li>
+          <li>Advanced SEO</li>
+          <li>Google Business integration</li>
+          <li>Review &amp; testimonial system</li>
+          <li>Monthly analytics report</li>
+        </ul>
+        <a href="#contact" class="btn btn-primary">Get started</a>
+      </div>
+      <!-- Growth -->
+      <div class="price-card glass reveal">
+        <div class="price-name">Growth</div>
+        <div class="price-desc">For ambitious businesses ready to dominate their local market with a comprehensive digital presence.</div>
+        <div class="price-amount" data-oneoff="&pound;3,495" data-monthly="&pound;149"><span class="amount">&pound;3,495</span> <span class="period period-text">one-off</span></div>
+        <div class="price-setup setup-text">then &pound;59/month for hosting &amp; support</div>
+        <ul class="price-features">
+          <li>Unlimited pages</li>
+          <li>Full content strategy</li>
+          <li>Blog with regular posts</li>
+          <li>Local SEO for multiple areas</li>
+          <li>Conversion tracking</li>
+          <li>Priority support</li>
+          <li>Quarterly strategy review</li>
+        </ul>
+        <a href="#contact" class="btn btn-ghost">Get started</a>
+      </div>
+    </div>
+    <p class="pricing-note">All prices exclude VAT. Monthly plans require a 12-month minimum term. One-off builds include 30 days of revisions after launch. Cancel your monthly hosting any time after the minimum term with 30 days' notice.</p>
+  </div>
+</section>
+
+<!-- ═══ 6. RECENT WORK ═══ -->
+<section class="work-section" id="work">
+  <div class="container">
+    <div class="work-split">
+      <div class="reveal-left">
+        <p class="section-label">Recent work</p>
+        <h2 class="section-heading">Built for businesses like yours</h2>
+        <p class="section-sub">Real websites, real results. Here are a few of the businesses we've helped establish a professional online presence.</p>
+        <a href="#" class="work-link">See all our work &rarr;</a>
+      </div>
+      <div class="work-grid reveal-right">
+        <div class="work-card glass glass-hover">
+          <div class="work-type">Scaffolding</div>
+          <h3>Colossus Scaffolding</h3>
+          <p>A commanding online presence for one of East Sussex's leading scaffolding contractors. Designed to convey scale, safety, and reliability.</p>
+        </div>
+        <div class="work-card glass glass-hover">
+          <div class="work-type">Electrical</div>
+          <h3>DJ Fox Electrical</h3>
+          <p>A modern, high-performance site for a trusted local electrician. Built to generate enquiries and showcase a wide range of domestic and commercial services.</p>
+        </div>
+        <div class="work-card glass glass-hover">
+          <div class="work-type">Removals</div>
+          <h3>Bexhill Removals</h3>
+          <p>A clean, reassuring website for a family-run removals firm. Focused on trust signals and easy quote requests to convert nervous movers into customers.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 7. TESTIMONIALS ═══ -->
+<section class="testimonials-section" id="about">
+  <div class="container">
+    <div class="testimonials-split">
+      <div class="reveal-left">
+        <p class="section-label">Testimonials</p>
+        <h2 class="section-heading">Don't take our word for it</h2>
+        <p class="section-sub">Hear from business owners who've made the switch to a website that actually works for them.</p>
+      </div>
+      <div class="testimonials-list reveal-right">
+        <div class="testimonial-card glass">
+          <blockquote>"They took the time to understand my business and built a site that genuinely represents what we do. I've had more enquiries in the last three months than in the whole of last year."</blockquote>
+          <div class="testimonial-author">Paul</div>
+          <div class="testimonial-role">Scaffolding Contractor</div>
+        </div>
+        <div class="testimonial-card glass">
+          <blockquote>"I was dreading the whole process but they made it completely painless. The site looks incredible and I didn't have to write a single word. Couldn't recommend them more highly."</blockquote>
+          <div class="testimonial-author">Sarah</div>
+          <div class="testimonial-role">Fabric Retailer</div>
+        </div>
+        <div class="testimonial-card glass">
+          <blockquote>"Finally, a website I'm actually proud to put on my van. It's fast, it looks professional, and my customers always comment on it. Best investment I've made in my business."</blockquote>
+          <div class="testimonial-author">Mark</div>
+          <div class="testimonial-role">Electrician</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 8. SEE WHAT'S POSSIBLE ═══ -->
+<section class="examples-section" id="examples">
+  <div class="container">
+    <div class="examples-header reveal">
+      <p class="section-label">See what's possible</p>
+      <h2 class="section-heading">Example sites for your industry</h2>
+      <p class="section-sub">Explore demo sites built for specific trades. Every example is a fully working website ready to be customised for your business.</p>
+    </div>
+    <div class="examples-grid">
+      <div class="example-tile glass glass-hover reveal">
+        <div class="example-icon">&#128295;</div>
+        <h3>Plumbing</h3>
+        <p>Emergency callouts, boiler installs, bathroom fitting</p>
+      </div>
+      <div class="example-tile glass glass-hover reveal">
+        <div class="example-icon">&#9889;</div>
+        <h3>Electrical</h3>
+        <p>Rewires, consumer units, smart home installation</p>
+      </div>
+      <div class="example-tile glass glass-hover reveal">
+        <div class="example-icon">&#127793;</div>
+        <h3>Gardening</h3>
+        <p>Landscaping, maintenance, garden design</p>
+      </div>
+    </div>
+    <div class="examples-cta reveal">
+      <a href="#" class="work-link">Browse all examples &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 9. CTA ═══ -->
+<section class="cta-section" id="contact">
+  <div class="container">
+    <div class="cta-banner reveal">
+      <h2>Ready to get started?</h2>
+      <p>Get in touch today and we'll have your new website live within weeks — not months.</p>
+      <a href="mailto:mail@digitalconsultingservices.co.uk" class="btn btn-primary">Get in touch</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 10. FAQ ═══ -->
+<section class="faq-section" id="faq">
+  <div class="container">
+    <div class="faq-split">
+      <div class="reveal-left">
+        <p class="section-label">FAQ</p>
+        <h2 class="section-heading">Questions? We've got answers</h2>
+        <p class="section-sub">If there's anything else you'd like to know, just get in touch. We're always happy to chat.</p>
+      </div>
+      <div class="faq-list reveal-right">
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            <span>How long does it take to build my website?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-a" role="region">
+            <div class="faq-a-inner">Most websites are designed, built, and launched within 2 to 4 weeks. Larger sites with extensive content may take a little longer, but we'll agree a timeline with you upfront so there are no surprises.</div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            <span>Do I need to provide anything?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-a" role="region">
+            <div class="faq-a-inner">Just your time for a quick chat. We handle the design, copywriting, and build. If you have photos or specific content you'd like to include, great — but it's not essential. We can work with what you've got.</div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            <span>Can I make changes after the site is live?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-a" role="region">
+            <div class="faq-a-inner">Absolutely. Your monthly plan includes content updates — just send us what you'd like changed and we'll take care of it, usually within 24 hours. For larger changes or new pages, we'll provide a quote upfront.</div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            <span>What happens if I want to cancel?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-a" role="region">
+            <div class="faq-a-inner">Monthly plans have a 12-month minimum term. After that, you can cancel with 30 days' notice. If you've paid the one-off build fee, your site is yours — we'll help you migrate it to another host if you'd like to move on.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 11. FOOTER ═══ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="logo">D<span>C</span>S</a>
+        <p>Professional websites for local trade and service businesses. Designed, built, and maintained so you don't have to worry about a thing.</p>
+      </div>
+      <div class="footer-nav">
+        <h4>Navigation</h4>
+        <a href="#services">Services</a>
+        <a href="#work">Our Work</a>
+        <a href="#examples">Examples</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <div class="footer-nav">
+        <h4>Contact</h4>
+        <a href="mailto:mail@digitalconsultingservices.co.uk">mail@digitalconsultingservices.co.uk</a>
+        <a href="tel:+447395063764">07395 063764</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Digital Consulting Services. All rights reserved.</p>
+      <div class="footer-legal">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  // ── Header scroll ──
+  const header = document.getElementById('header');
+  let ticking = false;
+  window.addEventListener('scroll', function(){
+    if(!ticking){
+      requestAnimationFrame(function(){
+        header.classList.toggle('scrolled', window.scrollY > 40);
+        ticking = false;
+      });
+      ticking = true;
+    }
+  });
+
+  // ── Mobile menu ──
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  hamburger.addEventListener('click', function(){
+    const open = mobileMenu.classList.toggle('open');
+    hamburger.classList.toggle('open');
+    hamburger.setAttribute('aria-expanded', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  });
+  mobileMenu.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      mobileMenu.classList.remove('open');
+      hamburger.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    });
+  });
+
+  // ── Pricing toggle ──
+  var isMonthly = false;
+  var toggle = document.getElementById('pricing-toggle');
+  var labelOneoff = document.getElementById('label-oneoff');
+  var labelMonthly = document.getElementById('label-monthly');
+  var amounts = document.querySelectorAll('.price-amount');
+  var setups = document.querySelectorAll('.price-setup');
+
+  var monthlySetups = [
+    'per month, all inclusive (12-month minimum)',
+    'per month, all inclusive (12-month minimum)',
+    'per month, all inclusive (12-month minimum)'
+  ];
+  var oneoffSetups = [
+    'then \u00a329/month for hosting & support',
+    'then \u00a339/month for hosting & support',
+    'then \u00a359/month for hosting & support'
+  ];
+
+  toggle.addEventListener('click', function(){
+    isMonthly = !isMonthly;
+    toggle.classList.toggle('monthly', isMonthly);
+    toggle.setAttribute('aria-checked', isMonthly);
+    labelOneoff.classList.toggle('active', !isMonthly);
+    labelMonthly.classList.toggle('active', isMonthly);
+    amounts.forEach(function(el){
+      var span = el.querySelector('.amount');
+      var period = el.querySelector('.period-text');
+      if(isMonthly){
+        span.innerHTML = el.dataset.monthly;
+        period.textContent = '/month';
+      } else {
+        span.innerHTML = el.dataset.oneoff;
+        period.textContent = 'one-off';
+      }
+    });
+    setups.forEach(function(el, i){
+      el.textContent = isMonthly ? monthlySetups[i] : oneoffSetups[i];
+    });
+  });
+
+  // ── FAQ accordion ──
+  document.querySelectorAll('.faq-q').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var item = btn.closest('.faq-item');
+      var answer = item.querySelector('.faq-a');
+      var inner = item.querySelector('.faq-a-inner');
+      var isOpen = item.classList.contains('open');
+
+      // Close all
+      document.querySelectorAll('.faq-item').forEach(function(fi){
+        fi.classList.remove('open');
+        fi.querySelector('.faq-q').setAttribute('aria-expanded','false');
+        fi.querySelector('.faq-a').style.maxHeight = '0';
+      });
+
+      if(!isOpen){
+        item.classList.add('open');
+        btn.setAttribute('aria-expanded','true');
+        answer.style.maxHeight = inner.scrollHeight + 20 + 'px';
+      }
+    });
+  });
+
+  // ── Scroll reveal ──
+  var reveals = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if(prefersReduced){
+    reveals.forEach(function(el){ el.classList.add('visible'); });
+  } else {
+    var observer = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(function(el){ observer.observe(el); });
+  }
+})();
+</script>
+</body>
+</html>
