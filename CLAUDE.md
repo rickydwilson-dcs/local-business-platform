@@ -295,3 +295,13 @@ Use sessions for: research tasks, feature implementation notes, bug investigatio
 **Naming:** `YYYY-MM-DD_topic-description`
 
 See [output/README.md](output/README.md) for details.
+
+## Session Wrap-Up Standard
+
+Every session ends with a `session-wrap-up.md` in the session folder:
+
+- **YOLO sessions:** The brief's final phase runs `/wrap-up-session` automatically.
+- **Interactive sessions:** Run `/wrap-up-session` before closing.
+- **Fallback:** The SessionEnd hook writes a minimal placeholder if the command was skipped.
+
+The wrap-up captures: goal, what was done, key decisions, commits, significant files changed, and what was learned.
