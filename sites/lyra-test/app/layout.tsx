@@ -2,8 +2,12 @@ import type { Metadata, Viewport } from 'next';
 import { Newsreader, Work_Sans } from 'next/font/google';
 import './globals.css';
 import { siteConfig } from '@/site.config';
-import { ThemeProvider } from '@platform/core-components';
+import { ThemeProvider, PageShell } from '@platform/core-components';
 import { lyraRegistry } from '@platform/themes/lyra';
+import { LyraHeader } from '@platform/themes/lyra/components';
+import { Footer } from '@platform/core-components/components/ui/footer';
+import { getContentItems } from '@/lib/content';
+import { PHONE_DISPLAY, PHONE_TEL } from '@/lib/contact-info';
 
 const newsreader = Newsreader({
   subsets: ['latin'],
@@ -27,12 +31,12 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = { width: 'device-width', initialScale: 1, maximumScale: 5 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const allLocations = await getContentItems('locations');
+  const locationItems = allLocations.map((l) => ({ name: l.title, slug: l.slug }));
+
   return (
-    <html
-      lang="en-GB"
-      className={`${newsreader.variable} ${workSans.variable}`}
-    >
+    <html lang="en-GB" className={`${newsreader.variable} ${workSans.variable}`}>
       <head>
         <link
           rel="stylesheet"
@@ -41,7 +45,22 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className="min-h-screen flex flex-col">
         <ThemeProvider theme="lyra" registry={lyraRegistry}>
-          {children}
+          <PageShell
+            header={
+              <LyraHeader
+                siteName={siteConfig.business.name}
+                phoneDisplay={PHONE_DISPLAY}
+                phoneTel={PHONE_TEL}
+                showPhone={siteConfig.cta.phone.show}
+                primaryCta={siteConfig.cta.primary}
+                navigation={siteConfig.navigation.main}
+                locations={locationItems}
+              />
+            }
+            footer={<Footer />}
+          >
+            {children}
+          </PageShell>
         </ThemeProvider>
       </body>
     </html>
