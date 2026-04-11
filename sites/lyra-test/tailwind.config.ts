@@ -27,6 +27,8 @@ const config: Config = {
           'primary-hover': 'var(--color-brand-primary-hover)',
           secondary: 'var(--color-brand-secondary)',
           accent: 'var(--color-brand-accent)',
+          light: 'var(--color-brand-light)', // NEW
+          dark: 'var(--color-brand-dark)', // NEW
         },
         surface: {
           background: 'var(--color-surface-background)',
