@@ -31,6 +31,7 @@
     "./rigel/components": "./rigel/components/index.ts",
     "./vega": "./vega/index.ts",
     "./vega/components": "./vega/components/index.ts",
+    "./vega/pages": "./vega/pages/index.ts",
     "./castor": "./castor/index.ts"
   }
 }
