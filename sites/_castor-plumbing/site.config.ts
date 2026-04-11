@@ -168,41 +168,40 @@ export interface SiteConfig extends BaseSiteConfig {
 
 export const siteConfig: SiteConfig = {
   slug: "castor-plumbing",
-  domain: "localhost",
-  name: "Castor Plumbing",
-  tagline: "Professional Local Services",
-  url: process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
+  domain: "dcs-plumbing.example.com",
+  name: "DCS Plumbing",
+  tagline: "Family-run plumbing and heating example site — East Sussex",
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://dcs-plumbing.example.com",
 
   business: {
-    name: "Castor Plumbing",
-    legalName: "Castor Plumbing Ltd",
-    type: "LocalBusiness",
-    phone: "+44 1234 567890",
-    email: "info@example.com",
+    name: "DCS Plumbing",
+    legalName: "Digital Consulting Services Ltd",
+    type: "Plumber",
+    phone: "+44 7395 063764",
+    email: "mail@digitalconsultingservices.co.uk",
     address: {
-      street: "123 Main Street",
-      city: "City Name",
-      region: "County/Region",
-      postalCode: "AB12 3CD",
+      street: "Unit H3, Chaucer Business Park, Dittons Road",
+      city: "Polegate",
+      region: "East Sussex",
+      postalCode: "BN26 6QH",
       country: "United Kingdom",
     },
     hours: {
-      monday: "9:00 AM - 5:00 PM",
-      tuesday: "9:00 AM - 5:00 PM",
-      wednesday: "9:00 AM - 5:00 PM",
-      thursday: "9:00 AM - 5:00 PM",
-      friday: "9:00 AM - 5:00 PM",
-      saturday: "Closed",
+      monday: "9:00 AM - 5:30 PM",
+      tuesday: "9:00 AM - 5:30 PM",
+      wednesday: "9:00 AM - 5:30 PM",
+      thursday: "9:00 AM - 5:30 PM",
+      friday: "9:00 AM - 5:30 PM",
+      saturday: "By Appointment",
       sunday: "Closed",
     },
     socialMedia: {
-      facebook: "https://facebook.com/yourbusiness",
-      twitter: "https://twitter.com/yourbusiness",
-      instagram: "https://instagram.com/yourbusiness",
+      facebook: "https://facebook.com/digitalconsultingservices",
+      linkedin: "https://linkedin.com/company/digital-consulting-services",
     },
     geo: {
-      latitude: 51.5074,
-      longitude: -0.1278,
+      latitude: 50.8233,
+      longitude: 0.2557,
     },
   },
 
@@ -210,6 +209,8 @@ export const siteConfig: SiteConfig = {
     main: [
       { label: "Services", href: "/services" },
       { label: "Locations", href: "/locations", hasDropdown: true },
+      { label: "Projects", href: "/projects" },
+      { label: "Blog", href: "/blog" },
       { label: "About", href: "/about" },
       { label: "Contact", href: "/contact" },
     ],
@@ -217,12 +218,12 @@ export const siteConfig: SiteConfig = {
 
   cta: {
     primary: {
-      label: "Get Free Quote",
+      label: "Get a Free Quote",
       href: "/contact",
     },
     phone: {
       show: true,
-      label: "Call Us",
+      label: "Call 07395 063764",
     },
   },
 
@@ -231,7 +232,7 @@ export const siteConfig: SiteConfig = {
     showLocations: true,
     maxServices: 10,
     maxLocations: 12,
-    copyright: "2025 Castor Plumbing. All rights reserved.",
+    copyright: "2026 Digital Consulting Services Ltd. Example site.",
     builtBy: {
       name: "Digital Consulting Services",
       url: "https://www.digitalconsultingservices.co.uk",
@@ -239,16 +240,21 @@ export const siteConfig: SiteConfig = {
   },
 
   credentials: {
-    yearEstablished: "2020",
+    yearEstablished: "2019",
     stats: [
-      { value: "5+", label: "Years Experience", description: "Serving local customers" },
-      { value: "500+", label: "Projects Completed", description: "Satisfied clients" },
-      { value: "100%", label: "Satisfaction", description: "Customer focused" },
-      { value: "24/7", label: "Support", description: "Always available" },
+      { value: "Est. 2019", label: "Established", description: "Serving East Sussex since 2019" },
+      { value: "20+", label: "Years Combined Experience", description: "Expert plumbing team" },
+      { value: "500+", label: "Plumbing Projects", description: "Residential and commercial" },
+      { value: "Gas Safe", label: "Registered", description: "Gas Safe certification" },
     ],
     certifications: [
-      { name: "Certified Professional", description: "Industry certification" },
-      { name: "Fully Insured", description: "Comprehensive coverage" },
+      { name: "Gas Safe Registered", description: "Reg. TBC — example site" },
+      {
+        name: "CIPHE Member",
+        description: "Chartered Institute of Plumbing and Heating Engineering",
+      },
+      { name: "WaterSafe Approved", description: "WaterSafe contractor" },
+      { name: "£5M Public Liability", description: "Fully insured" },
     ],
     insurance: {
       amount: "£5M",
@@ -256,23 +262,99 @@ export const siteConfig: SiteConfig = {
     },
   },
 
-  serviceAreas: ["Main Area", "North Region", "South Region"],
+  serviceAreas: [
+    "Polegate",
+    "Eastbourne",
+    "Hailsham",
+    "Lewes",
+    "Seaford",
+    "Brighton",
+    "Hove",
+    "Uckfield",
+  ],
+
+  serviceAreaRegions: [
+    {
+      name: "South Coast",
+      slug: "south-coast",
+      towns: [
+        { name: "Polegate", slug: "polegate" },
+        { name: "Eastbourne", slug: "eastbourne" },
+        { name: "Hailsham", slug: "hailsham" },
+        { name: "Seaford", slug: "seaford" },
+        { name: "Brighton", slug: "brighton" },
+        { name: "Hove", slug: "hove" },
+      ],
+    },
+    {
+      name: "Mid Sussex",
+      slug: "mid-sussex",
+      towns: [
+        { name: "Lewes", slug: "lewes" },
+        { name: "Uckfield", slug: "uckfield" },
+      ],
+    },
+  ],
 
   services: [
     {
-      title: "Primary Service",
-      slug: "primary-service",
-      description: "Our flagship service offering for residential and commercial clients.",
+      title: "Boiler Installation",
+      slug: "boiler-installation",
+      description:
+        "Gas Safe boiler installation and replacement across East Sussex. Worcester Bosch and Vaillant specialists.",
     },
     {
-      title: "Secondary Service",
-      slug: "secondary-service",
-      description: "Complementary service that enhances our primary offering.",
+      title: "Boiler Repair & Servicing",
+      slug: "boiler-repair-servicing",
+      description:
+        "Annual boiler service plans and repair callouts for homes and landlords across East Sussex.",
     },
     {
-      title: "Service Three",
-      slug: "service-three",
-      description: "Specialized service for unique client needs.",
+      title: "Emergency Plumber (24/7)",
+      slug: "emergency-plumber",
+      description:
+        "24/7 emergency plumbing callouts within East Sussex. 2-hour response within 10 miles of Polegate.",
+    },
+    {
+      title: "Bathroom Installation",
+      slug: "bathroom-installation",
+      description:
+        "Full bathroom supply and fit, including period-property specialists across East Sussex.",
+    },
+    {
+      title: "Central Heating Installation",
+      slug: "central-heating-installation",
+      description:
+        "New-build and upgrade central heating systems with smart thermostat and zone heating.",
+    },
+    {
+      title: "Power Flushing",
+      slug: "power-flushing",
+      description:
+        "System power flushing with MagnaClean filter fit to restore heating efficiency.",
+    },
+    {
+      title: "Leak Detection & Repair",
+      slug: "leak-detection-repair",
+      description:
+        "Thermal imaging and acoustic leak detection with minimal disruption across East Sussex.",
+    },
+    {
+      title: "Blocked Drains",
+      slug: "blocked-drains",
+      description:
+        "CCTV drain survey and high-pressure jetting to clear blocked drains across East Sussex.",
+    },
+    {
+      title: "Radiator Installation & Repair",
+      slug: "radiator-installation-repair",
+      description: "Designer radiators, towel rails, and cold-at-top radiator troubleshooting.",
+    },
+    {
+      title: "Landlord Gas Safety Certificates",
+      slug: "landlord-gas-safety",
+      description:
+        "CP12 certificates issued same day. Portfolio pricing for landlords across East Sussex.",
     },
   ],
 
@@ -282,121 +364,180 @@ export const siteConfig: SiteConfig = {
     contactForm: true,
     rateLimit: true,
     testimonials: true,
-    blog: false,
+    blog: true,
   },
 
   schema: {
-    businessType: "LocalBusiness",
+    businessType: "Plumber",
     businessConfig: {
-      name: "Castor Plumbing",
-      legalName: "Castor Plumbing Ltd",
+      name: "DCS Plumbing",
+      legalName: "Digital Consulting Services Ltd",
       description:
-        "Professional local services serving [Your Area]. Quality workmanship, competitive pricing, and excellent customer service.",
-      slogan: "Your trusted local experts",
-      foundingDate: "2020",
+        "DCS Plumbing is an example site demonstrating the Local Business Platform for plumbing and heating trades. Operated by Digital Consulting Services from Polegate, East Sussex.",
+      slogan: "Family-run plumbing and heating example site — East Sussex",
+      foundingDate: "2019",
       numberOfEmployees: "1-10",
-      priceRange: "$$",
-      email: "info@yourbusiness.com",
-      telephone: "+441234567890",
+      priceRange: "££",
+      email: "mail@digitalconsultingservices.co.uk",
+      telephone: "+447395063764",
       address: {
-        streetAddress: "123 Main Street",
-        addressLocality: "Your City",
-        addressRegion: "Your County",
-        postalCode: "AB12 3CD",
+        streetAddress: "Unit H3, Chaucer Business Park, Dittons Road",
+        addressLocality: "Polegate",
+        addressRegion: "East Sussex",
+        postalCode: "BN26 6QH",
         addressCountry: "GB",
       },
       geo: {
-        latitude: "51.5074",
-        longitude: "-0.1278",
+        latitude: "50.8233",
+        longitude: "0.2557",
       },
       openingHours: [
         {
           dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
           opens: "09:00",
-          closes: "17:00",
+          closes: "17:30",
+        },
+        {
+          dayOfWeek: ["Saturday"],
+          opens: "09:00",
+          closes: "12:00",
         },
       ],
-      areaServed: ["Main Area", "North Region", "South Region", "East Region", "West Region"],
+      areaServed: [
+        "Polegate",
+        "Eastbourne",
+        "Hailsham",
+        "Lewes",
+        "Seaford",
+        "Brighton",
+        "Hove",
+        "Uckfield",
+      ],
       credentials: [
         {
-          name: "Fully Insured",
-          description: "Public liability and professional indemnity insurance",
+          name: "Gas Safe Registered",
+          description: "Gas Safe registered plumber",
           category: "certification",
         },
         {
-          name: "Qualified Team",
-          description: "All staff are fully trained and certified",
+          name: "CIPHE Member",
+          description: "Chartered Institute of Plumbing and Heating Engineering",
           category: "certification",
         },
+        {
+          name: "WaterSafe Approved",
+          description: "WaterSafe approved contractor",
+          category: "certification",
+        },
+        { name: "£5M Public Liability", description: "Fully insured", category: "compliance" },
       ],
       socialProfiles: [
-        "https://www.facebook.com/yourbusiness",
-        "https://www.linkedin.com/company/yourbusiness",
+        "https://facebook.com/digitalconsultingservices",
+        "https://linkedin.com/company/digital-consulting-services",
       ],
       knowsAbout: [
-        "Service Category 1",
-        "Service Category 2",
-        "Service Category 3",
-        "Industry Best Practices",
-        "Local Area Expertise",
+        "boiler installation",
+        "boiler repair",
+        "plumbing",
+        "gas safe",
+        "central heating",
+        "bathrooms",
+        "emergency plumber",
+        "leak detection",
+        "blocked drains",
       ],
       offerCatalog: [
         {
-          name: "Primary Service",
-          description: "Our main service offering for residential and commercial clients",
-          url: "/services/primary-service",
+          name: "Boiler Installation",
+          description: "Gas Safe boiler installation and replacement across East Sussex",
+          url: "/services/boiler-installation",
         },
         {
-          name: "Secondary Service",
-          description: "Complementary service that enhances our primary offering",
-          url: "/services/secondary-service",
+          name: "Boiler Repair & Servicing",
+          description: "Annual boiler service plans and emergency repair callouts",
+          url: "/services/boiler-repair-servicing",
         },
         {
-          name: "Service Three",
-          description: "Specialized service for unique client needs",
-          url: "/services/service-three",
+          name: "Emergency Plumber (24/7)",
+          description: "24/7 emergency plumbing callouts, 2-hour response near Polegate",
+          url: "/services/emergency-plumber",
+        },
+        {
+          name: "Bathroom Installation",
+          description: "Full bathroom supply and fit including period-property specialists",
+          url: "/services/bathroom-installation",
+        },
+        {
+          name: "Central Heating Installation",
+          description: "New-build and upgrade central heating with smart thermostat",
+          url: "/services/central-heating-installation",
+        },
+        {
+          name: "Power Flushing",
+          description: "System power flushing with MagnaClean filter installation",
+          url: "/services/power-flushing",
+        },
+        {
+          name: "Leak Detection & Repair",
+          description: "Thermal imaging and acoustic leak detection with minimal disruption",
+          url: "/services/leak-detection-repair",
+        },
+        {
+          name: "Blocked Drains",
+          description: "CCTV drain survey and high-pressure jetting to clear blockages",
+          url: "/services/blocked-drains",
+        },
+        {
+          name: "Radiator Installation & Repair",
+          description: "Designer radiators, towel rails and radiator troubleshooting",
+          url: "/services/radiator-installation-repair",
+        },
+        {
+          name: "Landlord Gas Safety Certificates",
+          description: "CP12 certificates issued same day with portfolio pricing",
+          url: "/services/landlord-gas-safety",
         },
       ],
     },
   },
 
   about: {
-    heroBadges: ["Est. 2020", "Local Experts", "Fully Insured"],
+    heroBadges: ["Est. 2019", "East Sussex", "Example Site", "By DCS"],
     story: [
-      "Founded in 2020, Castor Plumbing was built on a simple promise: deliver professional, reliable service that our customers can count on every time.",
-      "From our base in City Name, we serve residential and commercial clients across Main Area, North Region, and South Region. Every project, large or small, receives the same dedication to quality.",
-      "Today we are proud to be a trusted local business — known for honest pricing, skilled workmanship, and the kind of service that earns referrals from neighbours and friends.",
+      "DCS Plumbing was founded in 2019 as part of Digital Consulting Services' family of local trade businesses across East Sussex. Built on decades of combined plumbing and heating experience, the company set out to offer Gas Safe work, honest pricing, and a genuinely responsive service to homeowners and landlords across Polegate, Eastbourne, Brighton, and the surrounding area.",
+      "From boiler installations and central heating upgrades to emergency callouts and bathroom fit-outs, DCS Plumbing covers the full spectrum of residential and commercial plumbing needs. Our Gas Safe registered engineers work to the highest standards, and every job — from a minor repair to a full bathroom renovation — is backed by our commitment to quality and clear communication.",
+      "This is an example site by Digital Consulting Services, demonstrating the Local Business Platform. It is not a live trading business — all services, customer reviews, and case studies shown are illustrative only. For the real platform and real client sites, visit digitalconsultingservices.co.uk.",
     ],
     whyChooseUs: [
-      "Fully insured with comprehensive public liability cover",
-      "Free quotes and consultations",
-      "Competitive, transparent pricing",
-      "Quality workmanship guaranteed",
-      "Professional, uniformed team",
-      "Clear communication throughout",
-      "Flexible scheduling to suit you",
-      "Comprehensive aftercare and support",
+      "Gas Safe registered engineers on every job",
+      "24/7 emergency callout, 2-hour response within 10 miles of Polegate",
+      "Fixed-price quotes — no hidden charges",
+      "Annual service plans for boilers and heating systems",
+      "Period-property and listed-building plumbing specialists",
+      "Same-day Landlord Gas Safety Certificates (CP12)",
+      "Fully insured with £5M public liability cover",
+      "Proud to serve East Sussex homeowners and landlords since 2019",
     ],
     values: [
       {
-        title: "Quality First",
+        title: "Safety First",
         description:
-          "We maintain the highest standards in everything we do, ensuring exceptional results for every project.",
+          "Every gas job is completed by a Gas Safe registered engineer. We never cut corners where safety is at stake.",
       },
       {
-        title: "Professional Excellence",
+        title: "Honest Pricing",
         description:
-          "Our team is fully qualified and continuously trained to deliver professional service.",
+          "We provide clear, itemised quotes before starting work. No surprise charges when the invoice arrives.",
       },
       {
-        title: "Reliable Service",
+        title: "Reliable Response",
         description:
-          "We arrive on time, complete projects efficiently, and communicate clearly throughout.",
+          "We show up when we say we will. Emergency callouts get a 2-hour response within 10 miles of Polegate.",
       },
       {
-        title: "Customer Focus",
+        title: "Quality Guaranteed",
         description:
-          "Your satisfaction is our priority. We listen to your needs and deliver tailored solutions.",
+          "Every installation is completed to manufacturer standards and backed by a workmanship guarantee.",
       },
     ],
   },
