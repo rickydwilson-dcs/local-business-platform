@@ -4,19 +4,19 @@
 // remark-gfm, rehype-slug, rehype-autolink-headings are NOT in core-components deps.
 // Accept them via options so sites import them from their own node_modules.
 // MDXComponents type is similarly not resolvable from this file's path — use ElementType alias.
-import fsSync from 'fs';
-import fs from 'fs/promises';
-import path from 'path';
-import matter from 'gray-matter';
-import { MDXRemote } from 'next-mdx-remote/rsc';
-import type { ReactElement } from 'react';
+import fsSync from "fs";
+import fs from "fs/promises";
+import path from "path";
+import matter from "gray-matter";
+import { MDXRemote } from "next-mdx-remote/rsc";
+import type { ReactElement } from "react";
 
 // Permissive type for the components map — MDXComponents from mdx/types includes nested
 // objects for component namespacing, so we accept Record<string, unknown> and cast at use.
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type MDXComponentsMap = Record<string, any>;
 
-type ContentDir = 'services' | 'locations' | 'blog' | 'projects' | 'testimonials';
+type ContentDir = "services" | "locations" | "blog" | "projects" | "testimonials" | "speakers";
 
 type LoadOpts = {
   baseDir: ContentDir;
@@ -37,11 +37,8 @@ interface MdxLoaderOptions {
   rehypePlugins?: any[];
 }
 
-export function createMdxLoader(
-  components: MDXComponentsMap,
-  options: MdxLoaderOptions = {}
-) {
-  const contentDirectory = path.join(process.cwd(), 'content');
+export function createMdxLoader(components: MDXComponentsMap, options: MdxLoaderOptions = {}) {
+  const contentDirectory = path.join(process.cwd(), "content");
 
   function getMdxFiles(dir: string): string[] {
     const fullPath = path.join(contentDirectory, dir);
@@ -50,8 +47,8 @@ export function createMdxLoader(
     }
     const files = fsSync.readdirSync(fullPath, { recursive: true });
     return files
-      .filter((file): file is string => typeof file === 'string' && file.endsWith('.mdx'))
-      .map((file) => file.replace(/\.mdx$/, ''));
+      .filter((file): file is string => typeof file === "string" && file.endsWith(".mdx"))
+      .map((file) => file.replace(/\.mdx$/, ""));
   }
 
   function getMdxContent(dir: string, slug: string) {
@@ -59,21 +56,21 @@ export function createMdxLoader(
     if (!fsSync.existsSync(filePath)) {
       return null;
     }
-    const fileContents = fsSync.readFileSync(filePath, 'utf8');
+    const fileContents = fsSync.readFileSync(filePath, "utf8");
     const { data, content } = matter(fileContents);
     return { frontmatter: data, content };
   }
 
   function getAllServices(): string[] {
-    return getMdxFiles('services');
+    return getMdxFiles("services");
   }
 
   function getAllLocations(): string[] {
-    return getMdxFiles('locations');
+    return getMdxFiles("locations");
   }
 
   async function listSlugs(baseDir: ContentDir): Promise<string[]> {
-    const dir = path.join(process.cwd(), 'content', baseDir);
+    const dir = path.join(process.cwd(), "content", baseDir);
     let files: string[] = [];
     try {
       files = await fs.readdir(dir);
@@ -81,16 +78,16 @@ export function createMdxLoader(
       return [];
     }
     return files
-      .filter((f) => f.endsWith('.md') || f.endsWith('.mdx'))
-      .map((f) => f.replace(/\.mdx?$/, ''));
+      .filter((f) => f.endsWith(".md") || f.endsWith(".mdx"))
+      .map((f) => f.replace(/\.mdx?$/, ""));
   }
 
   async function loadMdx({
     baseDir,
     slug,
   }: LoadOpts): Promise<{ frontmatter: MdxFrontmatter; content: ReactElement }> {
-    const filePath = path.join(process.cwd(), 'content', baseDir, `${slug}.mdx`);
-    const raw = await fs.readFile(filePath, 'utf8');
+    const filePath = path.join(process.cwd(), "content", baseDir, `${slug}.mdx`);
+    const raw = await fs.readFile(filePath, "utf8");
     const { content, data } = matter(raw);
 
     const el = (
@@ -112,11 +109,11 @@ export function createMdxLoader(
 
   async function getPageImage(baseDir: ContentDir, slug: string): Promise<string | null> {
     try {
-      const filePath = path.join(process.cwd(), 'content', baseDir, `${slug}.mdx`);
-      const raw = await fs.readFile(filePath, 'utf8');
+      const filePath = path.join(process.cwd(), "content", baseDir, `${slug}.mdx`);
+      const raw = await fs.readFile(filePath, "utf8");
       const { data } = matter(raw);
 
-      if (baseDir === 'services') {
+      if (baseDir === "services") {
         const heroData = data?.hero as { image?: string } | undefined;
         return heroData?.image || null;
       }
@@ -126,5 +123,13 @@ export function createMdxLoader(
     }
   }
 
-  return { getMdxFiles, getMdxContent, getAllServices, getAllLocations, listSlugs, loadMdx, getPageImage };
+  return {
+    getMdxFiles,
+    getMdxContent,
+    getAllServices,
+    getAllLocations,
+    listSlugs,
+    loadMdx,
+    getPageImage,
+  };
 }

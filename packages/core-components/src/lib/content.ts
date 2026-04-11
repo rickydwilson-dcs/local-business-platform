@@ -15,23 +15,29 @@
  * - Testimonials: Customer reviews (content/testimonials/)
  */
 
-import fs from 'fs/promises';
-import path from 'path';
-import matter from 'gray-matter';
+import fs from "fs/promises";
+import path from "path";
+import matter from "gray-matter";
 import type {
   BlogFrontmatter,
   ProjectFrontmatter,
   TestimonialFrontmatter,
   BlogCategoryType,
   ProjectTypeValue,
-} from './content-schemas';
+} from "./content-schemas";
 
 // ============================================================================
 // TYPES
 // ============================================================================
 
 /** Available content types in the content/ directory */
-export type ContentType = 'services' | 'locations' | 'blog' | 'projects' | 'testimonials';
+export type ContentType =
+  | "services"
+  | "locations"
+  | "blog"
+  | "projects"
+  | "testimonials"
+  | "speakers";
 
 /** Generic content item returned from content reading functions */
 export type ContentItem = {
@@ -88,15 +94,17 @@ export interface ContentUtilsOptions {
 /** Derive a title from a slug when frontmatter title is missing */
 function titleFromSlug(slug: string): string {
   return slug
-    .split('-')
+    .split("-")
     .map((w) => (w ? w[0].toUpperCase() + w.slice(1) : w))
-    .join(' ');
+    .join(" ");
 }
 
 /** Default image resolver — checks heroImage, hero.image, and image fields */
 function defaultImageResolver(data: Record<string, unknown>): string | undefined {
   const hero = data.hero as Record<string, unknown> | undefined;
-  return (data.heroImage as string) || (hero?.image as string) || (data.image as string) || undefined;
+  return (
+    (data.heroImage as string) || (hero?.image as string) || (data.image as string) || undefined
+  );
 }
 
 // ============================================================================
@@ -113,7 +121,7 @@ export function createContentUtils(options?: ContentUtilsOptions) {
   // --------------------------------------------------------------------------
 
   async function getContentItems(contentType: ContentType): Promise<ContentItem[]> {
-    const dir = path.join(process.cwd(), 'content', contentType);
+    const dir = path.join(process.cwd(), "content", contentType);
 
     let files: string[] = [];
     try {
@@ -124,18 +132,18 @@ export function createContentUtils(options?: ContentUtilsOptions) {
 
     // For services, optionally filter out location-specific slugs
     const locationSlugs =
-      contentType === 'services' && getLocationSlugs ? await getLocationSlugs() : [];
+      contentType === "services" && getLocationSlugs ? await getLocationSlugs() : [];
 
     const items: ContentItem[] = [];
 
     for (const file of files) {
-      if (!file.toLowerCase().endsWith('.mdx')) continue;
+      if (!file.toLowerCase().endsWith(".mdx")) continue;
 
-      const slug = file.replace(/\.mdx$/i, '');
+      const slug = file.replace(/\.mdx$/i, "");
 
       // Skip location-specific service files on main services page
       if (
-        contentType === 'services' &&
+        contentType === "services" &&
         locationSlugs.length > 0 &&
         locationSlugs.some((loc) => slug.includes(`-${loc}`))
       ) {
@@ -143,13 +151,12 @@ export function createContentUtils(options?: ContentUtilsOptions) {
       }
 
       const filePath = path.join(dir, file);
-      const raw = await fs.readFile(filePath, 'utf8');
+      const raw = await fs.readFile(filePath, "utf8");
       const { data } = matter(raw);
 
-      const title =
-        (typeof data.title === 'string' && data.title.trim()) || titleFromSlug(slug);
+      const title = (typeof data.title === "string" && data.title.trim()) || titleFromSlug(slug);
 
-      const badge = typeof data.badge === 'string' ? data.badge : undefined;
+      const badge = typeof data.badge === "string" ? data.badge : undefined;
       const features = Array.isArray(data.features) ? data.features : undefined;
       const subtitle = Array.isArray(data.subtitle) ? data.subtitle : undefined;
       const heroImage = imageResolver(data as Record<string, unknown>);
@@ -157,7 +164,7 @@ export function createContentUtils(options?: ContentUtilsOptions) {
       items.push({
         slug,
         title,
-        description: typeof data.description === 'string' ? data.description.trim() : undefined,
+        description: typeof data.description === "string" ? data.description.trim() : undefined,
         badge,
         features,
         subtitle,
@@ -168,7 +175,7 @@ export function createContentUtils(options?: ContentUtilsOptions) {
     }
 
     // Custom sort for services if provided, otherwise alphabetical
-    if (contentType === 'services' && serviceSortFn) {
+    if (contentType === "services" && serviceSortFn) {
       return items.sort(serviceSortFn);
     }
 
@@ -182,18 +189,17 @@ export function createContentUtils(options?: ContentUtilsOptions) {
     frontmatter: ContentItem;
     content: string;
   }> {
-    const filePath = path.join(process.cwd(), 'content', contentType, `${slug}.mdx`);
-    const raw = await fs.readFile(filePath, 'utf8');
+    const filePath = path.join(process.cwd(), "content", contentType, `${slug}.mdx`);
+    const raw = await fs.readFile(filePath, "utf8");
     const { data, content } = matter(raw);
 
-    const title =
-      (typeof data.title === 'string' && data.title.trim()) || titleFromSlug(slug);
+    const title = (typeof data.title === "string" && data.title.trim()) || titleFromSlug(slug);
 
     return {
       frontmatter: {
         slug,
         title,
-        description: typeof data.description === 'string' ? data.description.trim() : undefined,
+        description: typeof data.description === "string" ? data.description.trim() : undefined,
         ...data,
       },
       content,
@@ -210,11 +216,11 @@ export function createContentUtils(options?: ContentUtilsOptions) {
   // --------------------------------------------------------------------------
 
   async function getServices(): Promise<ContentItem[]> {
-    return getContentItems('services');
+    return getContentItems("services");
   }
 
   async function getService(slug: string) {
-    return getContentItem('services', slug);
+    return getContentItem("services", slug);
   }
 
   // --------------------------------------------------------------------------
@@ -222,11 +228,11 @@ export function createContentUtils(options?: ContentUtilsOptions) {
   // --------------------------------------------------------------------------
 
   async function getLocations(): Promise<ContentItem[]> {
-    return getContentItems('locations');
+    return getContentItems("locations");
   }
 
   async function getLocation(slug: string) {
-    return getContentItem('locations', slug);
+    return getContentItem("locations", slug);
   }
 
   // --------------------------------------------------------------------------
@@ -234,7 +240,7 @@ export function createContentUtils(options?: ContentUtilsOptions) {
   // --------------------------------------------------------------------------
 
   async function getBlogPosts(): Promise<BlogPost[]> {
-    const dir = path.join(process.cwd(), 'content', 'blog');
+    const dir = path.join(process.cwd(), "content", "blog");
 
     let files: string[] = [];
     try {
@@ -246,11 +252,11 @@ export function createContentUtils(options?: ContentUtilsOptions) {
     const posts: BlogPost[] = [];
 
     for (const file of files) {
-      if (!file.toLowerCase().endsWith('.mdx')) continue;
+      if (!file.toLowerCase().endsWith(".mdx")) continue;
 
-      const slug = file.replace(/\.mdx$/i, '');
+      const slug = file.replace(/\.mdx$/i, "");
       const filePath = path.join(dir, file);
-      const raw = await fs.readFile(filePath, 'utf8');
+      const raw = await fs.readFile(filePath, "utf8");
       const { data } = matter(raw);
 
       posts.push({
@@ -265,10 +271,10 @@ export function createContentUtils(options?: ContentUtilsOptions) {
   async function getBlogPost(
     slug: string
   ): Promise<{ frontmatter: BlogPost; content: string } | null> {
-    const filePath = path.join(process.cwd(), 'content', 'blog', `${slug}.mdx`);
+    const filePath = path.join(process.cwd(), "content", "blog", `${slug}.mdx`);
 
     try {
-      const raw = await fs.readFile(filePath, 'utf8');
+      const raw = await fs.readFile(filePath, "utf8");
       const { data, content } = matter(raw);
 
       return {
@@ -305,7 +311,7 @@ export function createContentUtils(options?: ContentUtilsOptions) {
   // --------------------------------------------------------------------------
 
   async function getProjects(): Promise<Project[]> {
-    const dir = path.join(process.cwd(), 'content', 'projects');
+    const dir = path.join(process.cwd(), "content", "projects");
 
     let files: string[] = [];
     try {
@@ -317,11 +323,11 @@ export function createContentUtils(options?: ContentUtilsOptions) {
     const projects: Project[] = [];
 
     for (const file of files) {
-      if (!file.toLowerCase().endsWith('.mdx')) continue;
+      if (!file.toLowerCase().endsWith(".mdx")) continue;
 
-      const slug = file.replace(/\.mdx$/i, '');
+      const slug = file.replace(/\.mdx$/i, "");
       const filePath = path.join(dir, file);
-      const raw = await fs.readFile(filePath, 'utf8');
+      const raw = await fs.readFile(filePath, "utf8");
       const { data } = matter(raw);
 
       projects.push({
@@ -338,10 +344,10 @@ export function createContentUtils(options?: ContentUtilsOptions) {
   async function getProject(
     slug: string
   ): Promise<{ frontmatter: Project; content: string } | null> {
-    const filePath = path.join(process.cwd(), 'content', 'projects', `${slug}.mdx`);
+    const filePath = path.join(process.cwd(), "content", "projects", `${slug}.mdx`);
 
     try {
-      const raw = await fs.readFile(filePath, 'utf8');
+      const raw = await fs.readFile(filePath, "utf8");
       const { data, content } = matter(raw);
 
       return {
@@ -373,7 +379,7 @@ export function createContentUtils(options?: ContentUtilsOptions) {
 
   async function getFeaturedProjects(limit = 6): Promise<Project[]> {
     const projects = await getProjects();
-    const featured = projects.filter((p) => p.status === 'featured');
+    const featured = projects.filter((p) => p.status === "featured");
     return featured.length > 0 ? featured.slice(0, limit) : projects.slice(0, limit);
   }
 
@@ -382,7 +388,7 @@ export function createContentUtils(options?: ContentUtilsOptions) {
   // --------------------------------------------------------------------------
 
   async function getTestimonials(): Promise<Testimonial[]> {
-    const dir = path.join(process.cwd(), 'content', 'testimonials');
+    const dir = path.join(process.cwd(), "content", "testimonials");
 
     let files: string[] = [];
     try {
@@ -394,11 +400,11 @@ export function createContentUtils(options?: ContentUtilsOptions) {
     const testimonials: Testimonial[] = [];
 
     for (const file of files) {
-      if (!file.toLowerCase().endsWith('.mdx')) continue;
+      if (!file.toLowerCase().endsWith(".mdx")) continue;
 
-      const slug = file.replace(/\.mdx$/i, '');
+      const slug = file.replace(/\.mdx$/i, "");
       const filePath = path.join(dir, file);
-      const raw = await fs.readFile(filePath, 'utf8');
+      const raw = await fs.readFile(filePath, "utf8");
       const { data } = matter(raw);
 
       testimonials.push({
@@ -407,18 +413,16 @@ export function createContentUtils(options?: ContentUtilsOptions) {
       });
     }
 
-    return testimonials.sort(
-      (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
-    );
+    return testimonials.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
   }
 
   async function getTestimonial(
     slug: string
   ): Promise<{ frontmatter: Testimonial; content: string } | null> {
-    const filePath = path.join(process.cwd(), 'content', 'testimonials', `${slug}.mdx`);
+    const filePath = path.join(process.cwd(), "content", "testimonials", `${slug}.mdx`);
 
     try {
-      const raw = await fs.readFile(filePath, 'utf8');
+      const raw = await fs.readFile(filePath, "utf8");
       const { data, content } = matter(raw);
 
       return {
