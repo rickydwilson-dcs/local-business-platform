@@ -4,7 +4,7 @@ export default function HomePage() {
       {/* Hero */}
       <header className="relative pt-24 pb-16 md:pt-32 md:pb-32 overflow-hidden">
         <div className="absolute inset-0 z-0">
-          <div className="w-full h-full bg-gradient-to-br from-brand-primary to-[#2d4c3b] opacity-95"></div>
+          <div className="w-full h-full bg-gradient-to-br from-brand-primary to-brand-dark opacity-95"></div>
           <img
             alt="Manicured British Garden"
             className="absolute inset-0 w-full h-full object-cover mix-blend-overlay"
@@ -13,30 +13,27 @@ export default function HomePage() {
         </div>
         <div className="relative z-10 max-w-7xl mx-auto px-8 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           <div className="lg:col-span-7">
-            <span className="inline-block bg-brand-accent text-[#261a00] px-4 py-1 rounded-full text-sm font-semibold mb-6">
+            <span className="inline-block bg-brand-accent text-surface-foreground px-4 py-1 rounded-full text-sm font-semibold mb-6">
               Now Booking for Spring Maintenance
             </span>
-            <h1
-              className="text-5xl md:text-7xl font-bold text-white mb-6 leading-[1.1]"
-              style={{ fontFamily: 'Newsreader, serif' }}
-            >
+            <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-[1.1]">
               Established Reliability for{' '}
-              <span className="text-[#c7ebd4]">British Landscapes.</span>
+              <span className="text-brand-light">British Landscapes.</span>
             </h1>
-            <p className="text-lg md:text-xl text-[#c7ebd4] opacity-90 mb-10 max-w-xl leading-relaxed">
+            <p className="text-lg md:text-xl text-brand-light opacity-90 mb-10 max-w-xl leading-relaxed">
               Three generations of expertise in professional garden care. From pristine lawns to
               expert pruning, we treat your outdoor space with the respect it deserves.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <a
                 href="/contact"
-                className="bg-[#c7ebd4] text-[#012113] px-8 py-4 rounded-lg text-lg font-bold shadow-xl hover:bg-white transition-all text-center"
+                className="bg-brand-light text-brand-primary px-8 py-4 rounded-lg text-lg font-bold shadow-xl hover:bg-white transition-all text-center"
               >
                 Get a Free Quote
               </a>
               <a
                 href="/services"
-                className="border border-[#c7ebd4]/30 text-white backdrop-blur-sm px-8 py-4 rounded-lg text-lg font-medium hover:bg-white/10 transition-all text-center"
+                className="border border-brand-light/30 text-white backdrop-blur-sm px-8 py-4 rounded-lg text-lg font-medium hover:bg-white/10 transition-all text-center"
               >
                 Our Services
               </a>
@@ -50,7 +47,7 @@ export default function HomePage() {
                 src="/stitch-images/img-002.jpg"
               />
             </div>
-            <div className="absolute -bottom-6 -left-6 bg-[#efeeea] p-6 rounded-xl shadow-xl max-w-xs transform -rotate-2">
+            <div className="absolute -bottom-6 -left-6 bg-surface-muted p-6 rounded-xl shadow-xl max-w-xs transform -rotate-2">
               <div className="flex items-center gap-2 mb-2">
                 <span
                   className="material-symbols-outlined text-brand-accent"
@@ -87,14 +84,14 @@ export default function HomePage() {
                 &ldquo;The most reliable service in the county. Our garden has never looked
                 better.&rdquo;
               </p>
-              <p className="text-xs text-[#727973] mt-2">&mdash; Mrs. Higgins, Surrey</p>
+              <p className="text-xs text-surface-secondary mt-2">&mdash; Mrs. Higgins, Surrey</p>
             </div>
           </div>
         </div>
       </header>
 
       {/* Stats Bar */}
-      <section className="bg-[#efeeea] py-12 relative z-20">
+      <section className="bg-surface-muted py-12 relative z-20">
         <div className="max-w-7xl mx-auto px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-16">
             <div className="flex items-center gap-6">
@@ -104,13 +101,8 @@ export default function HomePage() {
                 </span>
               </div>
               <div>
-                <div
-                  className="text-3xl font-bold text-brand-primary"
-                  style={{ fontFamily: 'Newsreader, serif' }}
-                >
-                  15+ Years
-                </div>
-                <div className="text-[#727973] text-sm uppercase tracking-wider font-semibold">
+                <div className="text-3xl font-bold text-brand-primary font-heading">15+ Years</div>
+                <div className="text-surface-secondary text-sm uppercase tracking-wider font-semibold">
                   In Business
                 </div>
               </div>
@@ -122,13 +114,8 @@ export default function HomePage() {
                 </span>
               </div>
               <div>
-                <div
-                  className="text-3xl font-bold text-brand-primary"
-                  style={{ fontFamily: 'Newsreader, serif' }}
-                >
-                  500+
-                </div>
-                <div className="text-[#727973] text-sm uppercase tracking-wider font-semibold">
+                <div className="text-3xl font-bold text-brand-primary font-heading">500+</div>
+                <div className="text-surface-secondary text-sm uppercase tracking-wider font-semibold">
                   Happy Customers
                 </div>
               </div>
@@ -140,13 +127,8 @@ export default function HomePage() {
                 </span>
               </div>
               <div>
-                <div
-                  className="text-3xl font-bold text-brand-primary"
-                  style={{ fontFamily: 'Newsreader, serif' }}
-                >
-                  Daily
-                </div>
-                <div className="text-[#727973] text-sm uppercase tracking-wider font-semibold">
+                <div className="text-3xl font-bold text-brand-primary font-heading">Daily</div>
+                <div className="text-surface-secondary text-sm uppercase tracking-wider font-semibold">
                   Garden Maintenance
                 </div>
               </div>
@@ -160,13 +142,10 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-8">
           <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
             <div className="max-w-2xl">
-              <h2
-                className="text-4xl md:text-5xl font-bold text-brand-primary mb-6"
-                style={{ fontFamily: 'Newsreader, serif' }}
-              >
+              <h2 className="text-4xl md:text-5xl font-bold text-brand-primary mb-6">
                 Masterfully Managed Gardens
               </h2>
-              <p className="text-lg text-[#424843]">
+              <p className="text-lg text-surface-secondary">
                 We offer a comprehensive suite of services tailored to the unique needs of the
                 British climate and local flora.
               </p>
@@ -216,13 +195,8 @@ export default function HomePage() {
                   />
                 </div>
                 <div className="p-8">
-                  <h3
-                    className="text-xl font-bold mb-3 text-brand-primary"
-                    style={{ fontFamily: 'Newsreader, serif' }}
-                  >
-                    {card.title}
-                  </h3>
-                  <p className="text-[#424843] text-sm leading-relaxed mb-6">{card.desc}</p>
+                  <h3 className="text-xl font-bold mb-3 text-brand-primary">{card.title}</h3>
+                  <p className="text-surface-secondary text-sm leading-relaxed mb-6">{card.desc}</p>
                   <a
                     href="/services"
                     className="text-brand-primary font-bold text-sm uppercase tracking-widest flex items-center gap-2"
@@ -238,13 +212,10 @@ export default function HomePage() {
       </section>
 
       {/* Testimonials */}
-      <section className="py-24 bg-[#efeeea] relative">
+      <section className="py-24 bg-surface-muted relative">
         <div className="max-w-7xl mx-auto px-8">
           <div className="text-center mb-16">
-            <h2
-              className="text-4xl md:text-5xl font-bold text-brand-primary mb-4"
-              style={{ fontFamily: 'Newsreader, serif' }}
-            >
+            <h2 className="text-4xl md:text-5xl font-bold text-brand-primary mb-4">
               Word From Our Neighbours
             </h2>
             <div className="w-24 h-1 bg-brand-accent mx-auto"></div>
@@ -286,20 +257,17 @@ export default function HomePage() {
                   star
                 </span>
               </div>
-              <blockquote
-                className="text-xl italic text-brand-primary leading-relaxed mb-6"
-                style={{ fontFamily: 'Newsreader, serif' }}
-              >
+              <blockquote className="text-xl italic text-brand-primary leading-relaxed mb-6 font-heading">
                 &ldquo;Reliable and thorough! Smith &amp; Sons have been looking after our estate
                 for three years now, and the level of detail they provide is unmatched.&rdquo;
               </blockquote>
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-[#2d4c3b] flex items-center justify-center text-white font-bold">
+                <div className="w-12 h-12 rounded-full bg-brand-dark flex items-center justify-center text-white font-bold">
                   JD
                 </div>
                 <div>
                   <div className="font-bold text-brand-primary">James Darlington</div>
-                  <div className="text-sm text-[#727973]">Hampshire Estate</div>
+                  <div className="text-sm text-surface-secondary">Hampshire Estate</div>
                 </div>
               </div>
             </div>
@@ -339,10 +307,7 @@ export default function HomePage() {
                   star
                 </span>
               </div>
-              <blockquote
-                className="text-xl italic text-brand-primary leading-relaxed mb-6"
-                style={{ fontFamily: 'Newsreader, serif' }}
-              >
+              <blockquote className="text-xl italic text-brand-primary leading-relaxed mb-6 font-heading">
                 &ldquo;Transformed our garden in just one day. The clearance team was incredibly
                 hardworking and left the place spotless. Highly recommended.&rdquo;
               </blockquote>
@@ -352,7 +317,7 @@ export default function HomePage() {
                 </div>
                 <div>
                   <div className="font-bold text-brand-primary">Sarah Miller</div>
-                  <div className="text-sm text-[#727973]">Cotswolds Resident</div>
+                  <div className="text-sm text-surface-secondary">Cotswolds Resident</div>
                 </div>
               </div>
             </div>
@@ -366,26 +331,23 @@ export default function HomePage() {
           <span className="material-symbols-outlined text-[30rem] leading-none">park</span>
         </div>
         <div className="max-w-7xl mx-auto px-8 relative z-10 text-center">
-          <h2
-            className="text-4xl md:text-6xl font-bold mb-8 max-w-3xl mx-auto"
-            style={{ fontFamily: 'Newsreader, serif' }}
-          >
+          <h2 className="text-4xl md:text-6xl font-bold mb-8 max-w-3xl mx-auto">
             Ready to restore your garden&apos;s glory?
           </h2>
-          <p className="text-xl text-[#accfb8] opacity-80 mb-12 max-w-xl mx-auto">
+          <p className="text-xl text-brand-light opacity-80 mb-12 max-w-xl mx-auto">
             Join hundreds of local families who trust Smith &amp; Sons for their regular
             maintenance.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-6">
             <a
               href="/contact"
-              className="bg-brand-accent text-[#261a00] px-10 py-5 rounded-lg text-xl font-bold hover:scale-105 transition-transform"
+              className="bg-brand-accent text-surface-foreground px-10 py-5 rounded-lg text-xl font-bold hover:scale-105 transition-transform"
             >
               Request Your Free Site Visit
             </a>
             <a
               href="/contact"
-              className="flex items-center justify-center gap-3 px-10 py-5 text-xl font-bold border border-[#c7ebd4]/30 text-white rounded-lg backdrop-blur-sm hover:bg-white/10 transition-colors"
+              className="flex items-center justify-center gap-3 px-10 py-5 text-xl font-bold border border-brand-light/30 text-white rounded-lg backdrop-blur-sm hover:bg-white/10 transition-colors"
             >
               <span className="material-symbols-outlined">call</span> 0800 GARDEN HELP
             </a>

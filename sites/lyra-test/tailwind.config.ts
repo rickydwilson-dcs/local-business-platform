@@ -20,6 +20,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        heading: ['var(--font-newsreader)', 'serif'],
+      },
       colors: {
         // Brand colors mapped to theme system CSS variables
         brand: {

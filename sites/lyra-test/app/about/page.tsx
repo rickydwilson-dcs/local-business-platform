@@ -20,16 +20,13 @@ export default function AboutPage() {
           </div>
           <div className="relative z-10 max-w-7xl mx-auto px-6 w-full">
             <div className="max-w-2xl text-white">
-              <span className="inline-block py-1 px-3 mb-6 bg-brand-accent text-[#261a00] font-medium text-xs tracking-widest uppercase rounded-sm">
+              <span className="inline-block py-1 px-3 mb-6 bg-brand-accent text-surface-foreground font-medium text-xs tracking-widest uppercase rounded-sm">
                 Est. 2005
               </span>
-              <h1
-                className="text-5xl md:text-7xl font-bold italic leading-tight mb-6"
-                style={{ fontFamily: 'Newsreader, serif' }}
-              >
+              <h1 className="text-5xl md:text-7xl font-bold italic leading-tight mb-6">
                 A Legacy of Living Landscapes
               </h1>
-              <p className="text-xl md:text-2xl font-light text-[#99bca6] max-w-xl leading-relaxed">
+              <p className="text-xl md:text-2xl font-light text-brand-light max-w-xl leading-relaxed">
                 For nineteen years, we have nurtured the gardens of the United Kingdom, blending
                 heritage techniques with modern horticultural excellence.
               </p>
@@ -42,13 +39,8 @@ export default function AboutPage() {
           <div className="max-w-7xl mx-auto px-6">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
               <div className="lg:col-span-7 space-y-8">
-                <h2
-                  className="text-5xl text-brand-primary"
-                  style={{ fontFamily: 'Newsreader, serif' }}
-                >
-                  The Hands That Tend the Earth
-                </h2>
-                <div className="space-y-6 text-[#424843] leading-relaxed text-lg">
+                <h2 className="text-5xl text-brand-primary">The Hands That Tend the Earth</h2>
+                <div className="space-y-6 text-surface-secondary leading-relaxed text-lg">
                   <p>
                     Founded in 2005 by Arthur Smith and his sons, our journey began with a single
                     lawnmower and a shared belief: that a garden is not merely a space, but a
@@ -61,10 +53,8 @@ export default function AboutPage() {
                     detail. Every hedge we trim and every border we design is a testament to the
                     family values of patience, stewardship, and local craftsmanship.
                   </p>
-                  <p
-                    className="italic text-xl text-brand-primary border-l-4 border-[#e7bdb1] pl-6"
-                    style={{ fontFamily: 'Newsreader, serif' }}
-                  >
+                  {/* TODO: border-[#e7bdb1] — pinkish accent, no theme token yet; consider adding brand.blush */}
+                  <p className="italic text-xl text-brand-primary border-l-4 border-[#e7bdb1] pl-6 font-heading">
                     &ldquo;We don&apos;t just maintain gardens; we preserve the stories told by the
                     land.&rdquo; &mdash; Arthur Smith, Founder
                   </p>
@@ -79,12 +69,7 @@ export default function AboutPage() {
                   />
                 </div>
                 <div className="absolute -bottom-8 -left-8 bg-brand-primary p-8 rounded shadow-xl hidden md:block">
-                  <p
-                    className="text-white italic text-2xl"
-                    style={{ fontFamily: 'Newsreader, serif' }}
-                  >
-                    19+ Years of Excellence
-                  </p>
+                  <p className="text-white italic text-2xl font-heading">19+ Years of Excellence</p>
                 </div>
               </div>
             </div>
@@ -95,10 +80,7 @@ export default function AboutPage() {
         <section className="py-24 bg-surface-muted">
           <div className="max-w-7xl mx-auto px-6">
             <div className="text-center mb-16">
-              <h2
-                className="text-4xl md:text-5xl text-brand-primary mb-4"
-                style={{ fontFamily: 'Newsreader, serif' }}
-              >
+              <h2 className="text-4xl md:text-5xl text-brand-primary mb-4">
                 Cultivated Principles
               </h2>
               <div className="h-1 w-24 bg-brand-accent mx-auto"></div>
@@ -123,20 +105,17 @@ export default function AboutPage() {
               ].map((value) => (
                 <div
                   key={value.title}
-                  className="bg-surface-background p-10 rounded-xl group hover:bg-[#2d4c3b] transition-all duration-500"
+                  className="bg-surface-background p-10 rounded-xl group hover:bg-brand-dark transition-all duration-500"
                 >
-                  <div className="w-16 h-16 bg-[#c7ebd4] rounded-full flex items-center justify-center mb-8 group-hover:bg-brand-accent transition-colors">
+                  <div className="w-16 h-16 bg-brand-light rounded-full flex items-center justify-center mb-8 group-hover:bg-brand-accent transition-colors">
                     <span className="material-symbols-outlined text-brand-primary text-3xl">
                       {value.icon}
                     </span>
                   </div>
-                  <h3
-                    className="text-2xl text-brand-primary mb-4 group-hover:text-white transition-colors"
-                    style={{ fontFamily: 'Newsreader, serif' }}
-                  >
+                  <h3 className="text-2xl text-brand-primary mb-4 group-hover:text-white transition-colors">
                     {value.title}
                   </h3>
-                  <p className="text-[#424843] group-hover:text-[#accfb8] transition-colors leading-relaxed">
+                  <p className="text-surface-secondary group-hover:text-brand-light transition-colors leading-relaxed">
                     {value.desc}
                   </p>
                 </div>
@@ -157,8 +136,7 @@ export default function AboutPage() {
               ].map((item) => (
                 <div
                   key={item.label}
-                  className="flex items-center gap-2 text-lg font-bold text-surface-foreground opacity-60 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-700"
-                  style={{ fontFamily: 'Newsreader, serif' }}
+                  className="flex items-center gap-2 text-lg font-bold text-surface-foreground opacity-60 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-700 font-heading"
                 >
                   <span className="material-symbols-outlined text-brand-secondary">
                     {item.icon}
@@ -175,13 +153,8 @@ export default function AboutPage() {
           <div className="max-w-7xl mx-auto px-6">
             <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
               <div className="max-w-2xl">
-                <h2
-                  className="text-5xl text-brand-primary mb-6"
-                  style={{ fontFamily: 'Newsreader, serif' }}
-                >
-                  The Custodians
-                </h2>
-                <p className="text-[#424843] text-lg leading-relaxed">
+                <h2 className="text-5xl text-brand-primary mb-6">The Custodians</h2>
+                <p className="text-surface-secondary text-lg leading-relaxed">
                   Meet the experts who bring decades of horticultural passion to your doorstep. Each
                   gardener at Smith &amp; Sons is hand-picked for their technical skill and respect
                   for nature.
@@ -228,13 +201,8 @@ export default function AboutPage() {
                       </p>
                     </div>
                   </div>
-                  <h4
-                    className="text-2xl text-brand-primary"
-                    style={{ fontFamily: 'Newsreader, serif' }}
-                  >
-                    {member.name}
-                  </h4>
-                  <p className="text-[#727973] text-sm">{member.role}</p>
+                  <h4 className="text-2xl text-brand-primary">{member.name}</h4>
+                  <p className="text-surface-secondary text-sm">{member.role}</p>
                 </div>
               ))}
             </div>
@@ -253,17 +221,15 @@ export default function AboutPage() {
         {/* CTA */}
         <section className="py-24 bg-brand-primary text-white">
           <div className="max-w-4xl mx-auto px-6 text-center">
-            <h2 className="text-5xl italic mb-8" style={{ fontFamily: 'Newsreader, serif' }}>
-              Begin Your Garden&apos;s Next Chapter
-            </h2>
-            <p className="text-xl mb-12 text-[#99bca6] leading-relaxed">
+            <h2 className="text-5xl italic mb-8">Begin Your Garden&apos;s Next Chapter</h2>
+            <p className="text-xl mb-12 text-brand-light leading-relaxed">
               Whether you require a one-off renovation or meticulous year-round care, our family is
               ready to serve yours.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-6">
               <a
                 href="/contact"
-                className="bg-brand-accent text-[#261a00] px-10 py-4 rounded font-bold text-lg hover:brightness-110 transition-all"
+                className="bg-brand-accent text-surface-foreground px-10 py-4 rounded font-bold text-lg hover:brightness-110 transition-all"
               >
                 Schedule a Consultation
               </a>
