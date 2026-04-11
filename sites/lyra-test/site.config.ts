@@ -167,23 +167,23 @@ export interface SiteConfig extends BaseSiteConfig {
 }
 
 export const siteConfig: SiteConfig = {
-  slug: 'base-template',
+  slug: 'lyra-gardening',
   domain: 'localhost',
-  name: 'Base Template Site',
-  tagline: 'Pipeline Test Site — lyra theme (Stitch)',
+  name: 'Lyra Gardening and Landscapes',
+  tagline: 'Expert gardening and landscaping across Gloucestershire',
   url: process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000',
 
   business: {
-    name: 'Your Business Name',
-    legalName: 'Your Business Ltd',
+    name: 'Lyra Gardening and Landscapes',
+    legalName: 'Lyra Gardening and Landscapes Ltd',
     type: 'LocalBusiness',
-    phone: '+44 1234 567890',
-    email: 'info@example.com',
+    phone: '+44 1632 960987',
+    email: 'hello@lyra-gardening.co.uk',
     address: {
-      street: '123 Main Street',
-      city: 'City Name',
-      region: 'County/Region',
-      postalCode: 'AB12 3CD',
+      street: '14 Fernwood Avenue',
+      city: 'Cheltenham',
+      region: 'Gloucestershire',
+      postalCode: 'GL50 2NW',
       country: 'United Kingdom',
     },
     hours: {
@@ -231,7 +231,7 @@ export const siteConfig: SiteConfig = {
     showLocations: true,
     maxServices: 10,
     maxLocations: 12,
-    copyright: '2025 Your Business Name. All rights reserved.',
+    copyright: '2025 Lyra Gardening and Landscapes Ltd. All rights reserved.',
     builtBy: {
       name: 'Digital Consulting Services',
       url: 'https://www.digitalconsultingservices.co.uk',
@@ -288,21 +288,21 @@ export const siteConfig: SiteConfig = {
   schema: {
     businessType: 'LocalBusiness',
     businessConfig: {
-      name: 'Your Business Name',
-      legalName: 'Your Business Ltd',
+      name: 'Lyra Gardening and Landscapes',
+      legalName: 'Lyra Gardening and Landscapes Ltd',
       description:
-        'Professional local services serving [Your Area]. Quality workmanship, competitive pricing, and excellent customer service.',
-      slogan: 'Your trusted local experts',
+        'Expert gardening and landscaping services across Gloucestershire. Quality workmanship, competitive pricing, and excellent customer service.',
+      slogan: 'Your trusted Gloucestershire gardening experts',
       foundingDate: '2020',
       numberOfEmployees: '1-10',
       priceRange: '$$',
-      email: 'info@yourbusiness.com',
-      telephone: '+441234567890',
+      email: 'hello@lyra-gardening.co.uk',
+      telephone: '+441632960987',
       address: {
-        streetAddress: '123 Main Street',
-        addressLocality: 'Your City',
-        addressRegion: 'Your County',
-        postalCode: 'AB12 3CD',
+        streetAddress: '14 Fernwood Avenue',
+        addressLocality: 'Cheltenham',
+        addressRegion: 'Gloucestershire',
+        postalCode: 'GL50 2NW',
         addressCountry: 'GB',
       },
       geo: {
