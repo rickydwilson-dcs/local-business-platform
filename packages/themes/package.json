@@ -33,6 +33,7 @@
     "./rigel/manifest": "./rigel/manifest.ts",
     "./rigel/showcase": "./rigel/showcase-registry.tsx",
     "./rigel/components": "./rigel/components/index.ts",
+    "./rigel/pages": "./rigel/pages/index.ts",
     "./vega": "./vega/index.ts",
     "./vega/components": "./vega/components/index.ts",
     "./vega/pages": "./vega/pages/index.ts",
