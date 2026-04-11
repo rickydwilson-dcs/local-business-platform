@@ -12,56 +12,58 @@ import { useState } from "react";
 import { RevealOnScroll, ParallaxSection } from "@platform/core-components/components/animation";
 
 export interface HeroProps {
+  /** heading */
+  heading?: string;
   /** subheading */
   subheading?: string;
   /** ctaButtons */
   ctaButtons?: Array<{ label?: string; href?: string }>;
   /** backgroundImage */
-  backgroundImage?: { src?: string; alt?: string };
+  backgroundImage?: string;
 }
 
 export function Hero(props: HeroProps) {
   return (
-      <section className="relative w-full bg-brand-primary overflow-hidden">
-        {props.backgroundImage ? (
-          <ParallaxSection backgroundImage={props.backgroundImage} speed={0.3}>
-            <div className="absolute inset-0 bg-brand-primary opacity-70" />
-          </ParallaxSection>
-        ) : null}
-  
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28 lg:py-36">
-          <RevealOnScroll variant="fade-up">
-            <div className="flex flex-col items-center text-center gap-6 md:gap-8">
-              <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-surface-background leading-tight max-w-4xl">
-                {props.heading ?? "Welcome to Our Platform"}
-              </h1>
-  
-              {props.subheading && (
-                <p className="text-lg md:text-xl lg:text-2xl text-surface-background opacity-90 max-w-2xl leading-relaxed">
-                  {props.subheading}
-                </p>
-              )}
-  
-              {props.ctaButtons && props.ctaButtons.length > 0 && (
-                <div className="flex flex-col sm:flex-row gap-4 mt-4">
-                  {props.ctaButtons.map((button, index) => (
-                    <a
-                      key={index}
-                      href={button.href}
-                      className={
-                        index === 0
-                          ? "inline-flex items-center justify-center px-8 py-3 rounded-lg bg-surface-background text-brand-primary font-semibold text-base md:text-lg transition-opacity hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-surface-background focus:ring-offset-2"
-                          : "inline-flex items-center justify-center px-8 py-3 rounded-lg border-2 border-surface-muted text-surface-background font-semibold text-base md:text-lg transition-opacity hover:opacity-80 focus:outline-none focus:ring-2 focus:ring-surface-background focus:ring-offset-2"
-                      }
-                    >
-                      {button.label}
-                    </a>
-                  ))}
-                </div>
-              )}
-            </div>
-          </RevealOnScroll>
-        </div>
-      </section>
-    );
+    <section className="relative w-full bg-brand-primary overflow-hidden">
+      {props.backgroundImage ? (
+        <ParallaxSection backgroundImage={props.backgroundImage} speed={0.3}>
+          <div className="absolute inset-0 bg-brand-primary opacity-70" />
+        </ParallaxSection>
+      ) : null}
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28 lg:py-36">
+        <RevealOnScroll variant="fade-up">
+          <div className="flex flex-col items-center text-center gap-6 md:gap-8">
+            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-surface-background leading-tight max-w-4xl">
+              {props.heading ?? "Welcome to Our Platform"}
+            </h1>
+
+            {props.subheading && (
+              <p className="text-lg md:text-xl lg:text-2xl text-surface-background opacity-90 max-w-2xl leading-relaxed">
+                {props.subheading}
+              </p>
+            )}
+
+            {props.ctaButtons && props.ctaButtons.length > 0 && (
+              <div className="flex flex-col sm:flex-row gap-4 mt-4">
+                {props.ctaButtons.map((button, index) => (
+                  <a
+                    key={index}
+                    href={button.href}
+                    className={
+                      index === 0
+                        ? "inline-flex items-center justify-center px-8 py-3 rounded-lg bg-surface-background text-brand-primary font-semibold text-base md:text-lg transition-opacity hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-surface-background focus:ring-offset-2"
+                        : "inline-flex items-center justify-center px-8 py-3 rounded-lg border-2 border-surface-muted text-surface-background font-semibold text-base md:text-lg transition-opacity hover:opacity-80 focus:outline-none focus:ring-2 focus:ring-surface-background focus:ring-offset-2"
+                    }
+                  >
+                    {button.label}
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>
+        </RevealOnScroll>
+      </div>
+    </section>
+  );
 }
