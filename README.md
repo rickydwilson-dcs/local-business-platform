@@ -11,7 +11,7 @@ local-business-platform/
 ├── packages/
 │   ├── core-components/       # Shared UI components
 │   ├── theme-system/          # Tailwind plugin + CSS variable generation
-│   ├── themes/                # Named theme CSS packages (atlas, castor, cygnus, lyra, nova, orion, polaris, rigel, sirius, solaris, vega)
+│   ├── themes/                # Named theme CSS packages (atlas, castor, corvus, cygnus, lyra, nova, orion, polaris, sirius, solaris, vega)
 │   └── intake-system/         # Client onboarding automation
 │
 ├── sites/
@@ -25,7 +25,8 @@ local-business-platform/
 │   ├── _cygnus-graphics/      # Theme reference site (cygnus)
 │   ├── _lyra-garden/          # Theme reference site (lyra)
 │   ├── _nova-print/           # Theme reference site (nova)
-│   └── _rigel-events/         # Theme reference site (rigel)
+│   ├── _rigel-events/         # Theme reference site (corvus) — events use case
+│   └── test-corvus/            # Pipeline test site (corvus theme)
 │
 ├── tools/                     # Site creation, image management, deployment scripts
 └── docs/                      # Architecture, standards, and how-to guides

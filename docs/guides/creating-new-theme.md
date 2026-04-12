@@ -26,7 +26,7 @@ Use this when the client has an existing website. The pipeline screenshots the s
 - `--url` (required) — the reference website to scrape
 - `--trade` (optional) — business type hint; helps with content generation
 
-The pipeline assigns a theme name automatically from the constellation namespace. Current themes: `atlas`, `castor`, `cygnus`, `lyra`, `nova`, `orion`, `polaris`, `rigel`, `sirius`, `solaris`, `vega`.
+The pipeline assigns a theme name automatically from the constellation namespace. Current themes: `atlas`, `castor`, `corvus`, `cygnus`, `lyra`, `nova`, `orion`, `polaris`, `sirius`, `solaris`, `vega`.
 
 **What it produces:**
 
@@ -143,7 +143,7 @@ packages/themes/<theme-name>/pages/
 └── ContactPage.tsx
 ```
 
-Event/conference themes (atlas, rigel) use a custom page set suited to their use case instead of the tradesperson set.
+Event/conference themes (atlas, corvus) use a custom page set suited to their use case instead of the tradesperson set.
 
 All template props interfaces (`HomePageTemplateProps`, `ServicePageTemplateProps`, `LocationPageTemplateProps`, etc.) are defined in `@platform/core-components` — specifically `packages/core-components/src/lib/page-template-types.ts`. Import and use these types; do not define local prop types in the theme package. The `SiteConfigSummary` type (also from that file) is the standard way to pass minimal site config to templates.
 

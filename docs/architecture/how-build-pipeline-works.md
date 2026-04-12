@@ -148,7 +148,8 @@ Turborepo's `"dependsOn": ["^build"]` ensures these build before any site that i
         "NEXT_PUBLIC_FEATURE_GOOGLE_ADS",
         "NEXT_PUBLIC_GA_MEASUREMENT_ID",
         "NEXT_PUBLIC_FACEBOOK_PIXEL_ID",
-        "NEXT_PUBLIC_GOOGLE_ADS_CUSTOMER_ID"
+        "NEXT_PUBLIC_GOOGLE_ADS_CUSTOMER_ID",
+        "NEXT_PUBLIC_R2_PUBLIC_URL"
       ]
     },
     "dev": {
