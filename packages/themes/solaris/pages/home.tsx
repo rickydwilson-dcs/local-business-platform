@@ -44,7 +44,7 @@ export function SolarisHomePage({
     siteConfig.stats && siteConfig.stats.length > 0
       ? siteConfig.stats.map((s, i) => ({
           ...s,
-          icon: defaultStats[i]?.icon ?? "check_circle",
+          icon: s.icon ?? defaultStats[i]?.icon ?? "check_circle",
         }))
       : defaultStats;
 

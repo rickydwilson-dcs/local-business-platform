@@ -61,7 +61,7 @@ export interface SiteConfigSummary {
     primary: { label: string; href: string };
     phone: { show: boolean };
   };
-  stats?: Array<{ value: string; label: string }>;
+  stats?: Array<{ value: string; label: string; icon?: string }>;
 }
 
 // ─── Tradesperson page props ──────────────────────────────────────────────────

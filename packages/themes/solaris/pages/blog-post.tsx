@@ -82,7 +82,7 @@ export function SolarisBlogPostPage({
 
             {/* ── Right: sticky sidebar ────────────────────────────────────── */}
             <aside className="lg:col-span-1">
-              <div className="sticky top-8">
+              <div className="sticky top-20">
                 {/* CTA card */}
                 <div className="bg-brand-primary text-white rounded-[20px] p-6 mb-6">
                   <h3 className="font-headline font-bold text-xl mb-2">

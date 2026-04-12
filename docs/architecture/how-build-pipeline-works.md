@@ -142,6 +142,10 @@ Turborepo's `"dependsOn": ["^build"]` ensures these build before any site that i
         "VERCEL_URL",
         "VERCEL_ENV",
         "NEXT_PUBLIC_FEATURE_CONSENT_BANNER",
+        "NEXT_PUBLIC_FEATURE_ANALYTICS_ENABLED",
+        "NEXT_PUBLIC_FEATURE_GA4_ENABLED",
+        "NEXT_PUBLIC_FEATURE_FACEBOOK_PIXEL",
+        "NEXT_PUBLIC_FEATURE_GOOGLE_ADS",
         "NEXT_PUBLIC_GA_MEASUREMENT_ID",
         "NEXT_PUBLIC_FACEBOOK_PIXEL_ID",
         "NEXT_PUBLIC_GOOGLE_ADS_CUSTOMER_ID"

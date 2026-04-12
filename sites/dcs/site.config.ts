@@ -268,6 +268,18 @@ export const siteConfig: SiteConfig = {
       title: "Google Workspace Email",
       description: "Professional business email setup via Google Workspace.",
     },
+    {
+      slug: "ecommerce",
+      title: "eCommerce Websites",
+      description:
+        "Start selling online with a WooCommerce or custom store — we build it and load your products.",
+    },
+    {
+      slug: "analytics",
+      title: "Analytics & Reporting",
+      description:
+        "Google Analytics setup, Search Console, and monthly traffic reports so you know what's working.",
+    },
   ],
 
   features: {
@@ -353,6 +365,16 @@ export const siteConfig: SiteConfig = {
           description: "Professional business email setup",
           url: "/services/google-workspace",
         },
+        {
+          name: "eCommerce Websites",
+          description: "WooCommerce and custom online stores, built and loaded with products",
+          url: "/services/ecommerce",
+        },
+        {
+          name: "Analytics & Reporting",
+          description: "Google Analytics, Search Console setup and monthly traffic reporting",
+          url: "/services/analytics",
+        },
       ],
     },
   },
@@ -393,22 +415,21 @@ export const siteConfig: SiteConfig = {
 
   testimonials: [
     {
-      name: "Mark H.",
-      trade: "Electrician, Brighton",
+      name: "Sarah",
+      trade: "Cuddle Plush Fabrics",
       quote:
-        "My phone started ringing within two weeks of the site going live. Ricky handled everything — I didn't have to do a thing.",
+        "Ricky has built and managed our online store for over 5 years. I couldn't be happier with his work.",
     },
     {
-      name: "Sarah T.",
-      trade: "Plumber, Eastbourne",
+      name: "Nicola",
+      trade: "Nicola Noble Tuition",
       quote:
-        "I was spending £80 a month on a website that wasn't getting me anything. Now I pay less and actually get enquiries.",
+        "I feared I would have to close my tutoring business when Covid struck, but now offer my classes online.",
     },
     {
-      name: "Dave C.",
-      trade: "Scaffolding Contractor, Lewes",
-      quote:
-        "The site looks exactly how I wanted. Professional, clear, and it shows up on Google when people search for scaffolding near me.",
+      name: "Molly",
+      trade: "Sanctuary Ida",
+      quote: "My yoga students love that they can book and pay for my classes on my website.",
     },
   ],
 };

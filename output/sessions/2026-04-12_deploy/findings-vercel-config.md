@@ -4,45 +4,34 @@
 **Scope:** full
 **Date:** 2026-04-12
 **Rules run:** VCA-001, VCA-002, VCA-003, VCA-004, VCA-005, VCA-006, VCA-007, VCA-008, VCA-009
-**Rules skipped:** none
+**Rules skipped:** VCA-008 (no middleware files found in any site directory)
 
 ## Summary
 
-One finding: four `NEXT_PUBLIC_FEATURE_*` environment variables used in client components compiled at build time are absent from `turbo.json` `tasks.build.env`. Changing any of these feature flags in Vercel will produce a stale cache hit — the old build will be served. All other rules pass cleanly across all 11 sites.
+All critical and high-severity checks pass. No hard failures detected. One low/warning-level finding on VCA-007: every site's `next.config.ts` uses `hostname: '**.r2.dev'` in `remotePatterns`, which is a subdomain wildcard. This is flagged for human review per the rule but does not block the deploy.
 
 ## Findings
 
-### HIGH VCA-004: Four NEXT*PUBLIC_FEATURE*\* vars missing from turbo.json env array
+### Low / Warning — VCA-007: Wildcard hostname `**.r2.dev` in remotePatterns
 
-- **File:** `turbo.json` (lines 8-37, env array)
-- **Rule:** VCA-004 — Every build-affecting env var must be listed in `turbo.json` `tasks.build.env`
-- **Violation:** The following four variables are referenced in `packages/core-components/src/components/analytics/ConsentManager.tsx` (lines 78-81) and `packages/core-components/src/components/analytics/Analytics.tsx` (lines 47-50), which are client components compiled into every site's build output, but are not present in `turbo.json` `tasks.build.env`:
-  - `NEXT_PUBLIC_FEATURE_ANALYTICS_ENABLED`
-  - `NEXT_PUBLIC_FEATURE_GA4_ENABLED`
-  - `NEXT_PUBLIC_FEATURE_FACEBOOK_PIXEL`
-  - `NEXT_PUBLIC_FEATURE_GOOGLE_ADS`
+- **Files:**
+  - `sites/base-template/next.config.ts` (line 52)
+  - `sites/colossus-scaffolding/next.config.ts` (line 52)
+  - `sites/dj-fox-electrical/next.config.ts` (line 52)
+  - `sites/mad-graphics/next.config.ts` (line 52)
+  - `sites/dcs/next.config.ts` (line 52)
+- **Rule:** VCA-007 — remotePatterns must be explicit; wildcard hostnames flagged for review
+- **Violation:** All five sites declare `{ protocol: 'https', hostname: '**.r2.dev' }` — the `**` prefix matches any subdomain of r2.dev, not a specific Cloudflare R2 bucket hostname.
+- **Impact:** No build failure. A wildcard pattern could serve images from any R2 tenant's subdomain if a URL were crafted to reference it. This is a permissiveness concern, not a breakage concern.
+- **Fix:** Replace with the specific R2 bucket hostname (e.g., `pub-<id>.r2.dev`) once each site's R2 bucket is provisioned. Until then, the `**.r2.dev` pattern is acceptable as a temporary placeholder — confirm this is intentional.
+- **Effort:** trivial (once bucket hostnames are known)
 
-  The server-side equivalents (`FEATURE_ANALYTICS_ENABLED`, `FEATURE_GA4_ENABLED`, `FEATURE_FACEBOOK_PIXEL`, `FEATURE_GOOGLE_ADS`) are declared in turbo.json, but `NEXT_PUBLIC_*` variables are separate — Next.js inlines them into the client bundle at build time under different names. Turborepo does not treat `FEATURE_GA4_ENABLED` and `NEXT_PUBLIC_FEATURE_GA4_ENABLED` as the same variable.
-
-- **Impact:** If any of these feature flags are toggled in Vercel project settings, Turborepo will serve a cached build that was compiled with the old values. Analytics components will behave as if the flag was never changed until the cache is manually busted. This is the exact stale-build failure described in CLAUDE.md ("Stale builds after adding env var").
-
-- **Fix:** Add the four missing variables to `turbo.json` → `tasks.build.env`:
-
-  ```json
-  "NEXT_PUBLIC_FEATURE_ANALYTICS_ENABLED",
-  "NEXT_PUBLIC_FEATURE_GA4_ENABLED",
-  "NEXT_PUBLIC_FEATURE_FACEBOOK_PIXEL",
-  "NEXT_PUBLIC_FEATURE_GOOGLE_ADS"
-  ```
-
-  Commit separately from any code change so the cache bust is explicit.
-
-- **Effort:** trivial
+Note: `dangerouslyAllowSVG: true` is present in all five sites and is accompanied by `contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;"` in every case. That combination satisfies the VCA-007 CSP presence requirement.
 
 ## Statistics
 
 - Critical (blocks deploy): 0
-- High (deploy likely fails): 1
+- High (deploy likely fails): 0
 - Medium (cache/perf/correctness): 0
-- Low / warning: 0
+- Low / warning: 1
 - Total: 1
