@@ -73,7 +73,7 @@ importers:
         version: 5.9.3
       vitest:
         specifier: ^3.2.4
-        version: 3.2.4(@types/debug@4.1.12)(@types/node@20.19.20)(jiti@1.21.7)(jsdom@27.0.0)(tsx@4.20.6)(yaml@2.8.2)
+        version: 3.2.4(@types/debug@4.1.12)(@types/node@20.19.20)(jiti@1.21.7)(jsdom@27.0.0(postcss@8.5.6))(tsx@4.20.6)(yaml@2.8.2)
       yaml:
         specifier: ^2.7.1
         version: 2.8.2
@@ -92,6 +92,12 @@ importers:
       '@types/leaflet':
         specifier: ^1.9.20
         version: 1.9.21
+      '@types/react':
+        specifier: ^19
+        version: 19.2.2
+      '@types/react-dom':
+        specifier: ^19
+        version: 19.2.1(@types/react@19.2.2)
       embla-carousel-react:
         specifier: ^8.6.0
         version: 8.6.0(react@19.2.3)
@@ -138,12 +144,6 @@ importers:
       '@types/node':
         specifier: ^20
         version: 20.19.20
-      '@types/react':
-        specifier: ^19
-        version: 19.2.2
-      '@types/react-dom':
-        specifier: ^19
-        version: 19.2.1(@types/react@19.2.2)
       '@typescript-eslint/eslint-plugin':
         specifier: ^8.48.1
         version: 8.48.1(@typescript-eslint/parser@8.48.1(eslint@9.37.0(jiti@1.21.7))(typescript@5.9.3))(eslint@9.37.0(jiti@1.21.7))(typescript@5.9.3)
@@ -170,7 +170,7 @@ importers:
         version: 5.9.3
       vitest:
         specifier: ^3.2.4
-        version: 3.2.4(@types/debug@4.1.12)(@types/node@20.19.20)(jiti@1.21.7)(jsdom@27.0.0)(tsx@4.20.6)(yaml@2.8.2)
+        version: 3.2.4(@types/debug@4.1.12)(@types/node@20.19.20)(jiti@1.21.7)(jsdom@27.0.0(postcss@8.5.6))(tsx@4.20.6)(yaml@2.8.2)
 
   packages/intake-system:
     dependencies:
@@ -192,7 +192,7 @@ importers:
         version: 5.9.3
       vitest:
         specifier: ^3.2.4
-        version: 3.2.4(@types/debug@4.1.12)(@types/node@20.19.20)(jiti@1.21.7)(jsdom@27.0.0)(tsx@4.20.6)(yaml@2.8.2)
+        version: 3.2.4(@types/debug@4.1.12)(@types/node@20.19.20)(jiti@1.21.7)(jsdom@27.0.0(postcss@8.5.6))(tsx@4.20.6)(yaml@2.8.2)
 
   packages/theme-system:
     dependencies:
@@ -208,7 +208,7 @@ importers:
         version: 20.19.20
       '@vitest/coverage-v8':
         specifier: ^3.2.4
-        version: 3.2.4(vitest@3.2.4(@types/debug@4.1.12)(@types/node@20.19.20)(jiti@1.21.7)(jsdom@27.0.0)(tsx@4.20.6)(yaml@2.8.2))
+        version: 3.2.4(vitest@3.2.4(@types/debug@4.1.12)(@types/node@20.19.20)(jiti@1.21.7)(jsdom@27.0.0(postcss@8.5.6))(tsx@4.20.6)(yaml@2.8.2))
       ts-node:
         specifier: ^10.9.0
         version: 10.9.2(@types/node@20.19.20)(typescript@5.9.3)
@@ -217,7 +217,7 @@ importers:
         version: 5.9.3
       vitest:
         specifier: ^3.2.4
-        version: 3.2.4(@types/debug@4.1.12)(@types/node@20.19.20)(jiti@1.21.7)(jsdom@27.0.0)(tsx@4.20.6)(yaml@2.8.2)
+        version: 3.2.4(@types/debug@4.1.12)(@types/node@20.19.20)(jiti@1.21.7)(jsdom@27.0.0(postcss@8.5.6))(tsx@4.20.6)(yaml@2.8.2)
 
   packages/themes:
     dependencies:
@@ -378,7 +378,7 @@ importers:
         version: 5.9.3
       vitest:
         specifier: ^3.2.4
-        version: 3.2.4(@types/debug@4.1.12)(@types/node@20.19.20)(jiti@1.21.7)(jsdom@27.0.0)(tsx@4.20.6)(yaml@2.8.2)
+        version: 3.2.4(@types/debug@4.1.12)(@types/node@20.19.20)(jiti@1.21.7)(jsdom@27.0.0(postcss@8.5.6))(tsx@4.20.6)(yaml@2.8.2)
 
   sites/_cygnus-graphics:
     dependencies:
@@ -523,7 +523,7 @@ importers:
         version: 5.9.3
       vitest:
         specifier: ^3.2.4
-        version: 3.2.4(@types/debug@4.1.12)(@types/node@20.19.20)(jiti@1.21.7)(jsdom@27.0.0)(tsx@4.20.6)(yaml@2.8.2)
+        version: 3.2.4(@types/debug@4.1.12)(@types/node@20.19.20)(jiti@1.21.7)(jsdom@27.0.0(postcss@8.5.6))(tsx@4.20.6)(yaml@2.8.2)
 
   sites/_lyra-garden:
     dependencies:
@@ -668,7 +668,7 @@ importers:
         version: 5.9.3
       vitest:
         specifier: ^3.2.4
-        version: 3.2.4(@types/debug@4.1.12)(@types/node@20.19.20)(jiti@1.21.7)(jsdom@27.0.0)(tsx@4.20.6)(yaml@2.8.2)
+        version: 3.2.4(@types/debug@4.1.12)(@types/node@20.19.20)(jiti@1.21.7)(jsdom@27.0.0(postcss@8.5.6))(tsx@4.20.6)(yaml@2.8.2)
 
   sites/_nova-print:
     dependencies:
@@ -813,7 +813,7 @@ importers:
         version: 5.9.3
       vitest:
         specifier: ^3.2.4
-        version: 3.2.4(@types/debug@4.1.12)(@types/node@20.19.20)(jiti@1.21.7)(jsdom@27.0.0)(tsx@4.20.6)(yaml@2.8.2)
+        version: 3.2.4(@types/debug@4.1.12)(@types/node@20.19.20)(jiti@1.21.7)(jsdom@27.0.0(postcss@8.5.6))(tsx@4.20.6)(yaml@2.8.2)
 
   sites/_rigel-events:
     dependencies:
@@ -958,7 +958,7 @@ importers:
         version: 5.9.3
       vitest:
         specifier: ^3.2.4
-        version: 3.2.4(@types/debug@4.1.12)(@types/node@20.19.20)(jiti@1.21.7)(jsdom@27.0.0)(tsx@4.20.6)(yaml@2.8.2)
+        version: 3.2.4(@types/debug@4.1.12)(@types/node@20.19.20)(jiti@1.21.7)(jsdom@27.0.0(postcss@8.5.6))(tsx@4.20.6)(yaml@2.8.2)
 
   sites/base-template:
     dependencies:
@@ -1103,7 +1103,7 @@ importers:
         version: 5.9.3
       vitest:
         specifier: ^3.2.4
-        version: 3.2.4(@types/debug@4.1.12)(@types/node@20.19.20)(jiti@1.21.7)(jsdom@27.0.0)(tsx@4.20.6)(yaml@2.8.2)
+        version: 3.2.4(@types/debug@4.1.12)(@types/node@20.19.20)(jiti@1.21.7)(jsdom@27.0.0(postcss@8.5.6))(tsx@4.20.6)(yaml@2.8.2)
 
   sites/colossus-scaffolding:
     dependencies:
@@ -1248,7 +1248,7 @@ importers:
         version: 5.9.3
       vitest:
         specifier: ^3.2.4
-        version: 3.2.4(@types/debug@4.1.12)(@types/node@20.19.20)(jiti@1.21.7)(jsdom@27.0.0)(tsx@4.20.6)(yaml@2.8.2)
+        version: 3.2.4(@types/debug@4.1.12)(@types/node@20.19.20)(jiti@1.21.7)(jsdom@27.0.0(postcss@8.5.6))(tsx@4.20.6)(yaml@2.8.2)
 
   sites/dcs:
     dependencies:
@@ -1393,7 +1393,7 @@ importers:
         version: 5.9.3
       vitest:
         specifier: ^3.2.4
-        version: 3.2.4(@types/debug@4.1.12)(@types/node@20.19.20)(jiti@1.21.7)(jsdom@27.0.0)(tsx@4.20.6)(yaml@2.8.2)
+        version: 3.2.4(@types/debug@4.1.12)(@types/node@20.19.20)(jiti@1.21.7)(jsdom@27.0.0(postcss@8.5.6))(tsx@4.20.6)(yaml@2.8.2)
 
   sites/dj-fox-electrical:
     dependencies:
@@ -1541,7 +1541,7 @@ importers:
         version: 5.9.3
       vitest:
         specifier: ^3.2.4
-        version: 3.2.4(@types/debug@4.1.12)(@types/node@20.19.20)(jiti@1.21.7)(jsdom@27.0.0)(tsx@4.20.6)(yaml@2.8.2)
+        version: 3.2.4(@types/debug@4.1.12)(@types/node@20.19.20)(jiti@1.21.7)(jsdom@27.0.0(postcss@8.5.6))(tsx@4.20.6)(yaml@2.8.2)
 
   sites/mad-graphics:
     dependencies:
@@ -1689,7 +1689,7 @@ importers:
         version: 5.9.3
       vitest:
         specifier: ^3.2.4
-        version: 3.2.4(@types/debug@4.1.12)(@types/node@20.19.20)(jiti@1.21.7)(jsdom@27.0.0)(tsx@4.20.6)(yaml@2.8.2)
+        version: 3.2.4(@types/debug@4.1.12)(@types/node@20.19.20)(jiti@1.21.7)(jsdom@27.0.0(postcss@8.5.6))(tsx@4.20.6)(yaml@2.8.2)
 
   sites/showcase:
     dependencies:
@@ -9095,7 +9095,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@vitest/coverage-v8@3.2.4(vitest@3.2.4(@types/debug@4.1.12)(@types/node@20.19.20)(jiti@1.21.7)(jsdom@27.0.0)(tsx@4.20.6)(yaml@2.8.2))':
+  '@vitest/coverage-v8@3.2.4(vitest@3.2.4(@types/debug@4.1.12)(@types/node@20.19.20)(jiti@1.21.7)(jsdom@27.0.0(postcss@8.5.6))(tsx@4.20.6)(yaml@2.8.2))':
     dependencies:
       '@ampproject/remapping': 2.3.0
       '@bcoe/v8-coverage': 1.0.2
@@ -9110,7 +9110,7 @@ snapshots:
       std-env: 3.9.0
       test-exclude: 7.0.1
       tinyrainbow: 2.0.0
-      vitest: 3.2.4(@types/debug@4.1.12)(@types/node@20.19.20)(jiti@1.21.7)(jsdom@27.0.0)(tsx@4.20.6)(yaml@2.8.2)
+      vitest: 3.2.4(@types/debug@4.1.12)(@types/node@20.19.20)(jiti@1.21.7)(jsdom@27.0.0(postcss@8.5.6))(tsx@4.20.6)(yaml@2.8.2)
     transitivePeerDependencies:
       - supports-color
 
@@ -12606,7 +12606,7 @@ snapshots:
       tsx: 4.20.6
       yaml: 2.8.2
 
-  vitest@3.2.4(@types/debug@4.1.12)(@types/node@20.19.20)(jiti@1.21.7)(jsdom@27.0.0)(tsx@4.20.6)(yaml@2.8.2):
+  vitest@3.2.4(@types/debug@4.1.12)(@types/node@20.19.20)(jiti@1.21.7)(jsdom@27.0.0(postcss@8.5.6))(tsx@4.20.6)(yaml@2.8.2):
     dependencies:
       '@types/chai': 5.2.2
       '@vitest/expect': 3.2.4
