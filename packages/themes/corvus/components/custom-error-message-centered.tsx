@@ -9,7 +9,7 @@
  */
 
 import { useState } from "react";
-import { RevealOnScroll } from "@platform/core-components/src/components/animation";
+import { RevealOnScroll } from "@platform/core-components/components/animation";
 
 export interface OrderErrorMessageProps {
   /** error-heading */
