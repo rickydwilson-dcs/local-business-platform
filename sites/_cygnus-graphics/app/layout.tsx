@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { Newsreader, Work_Sans } from "next/font/google";
 import "./globals.css";
 import { siteConfig } from "@/site.config";
 import { PHONE_DISPLAY, PHONE_TEL, BUSINESS_EMAIL, ADDRESS } from "@/lib/contact-info";
@@ -9,6 +10,21 @@ import { cygnusRegistry } from "@platform/themes/cygnus";
 import { ConsentManager } from "@platform/core-components/components/analytics/ConsentManager";
 import { Analytics } from "@platform/core-components/components/analytics/Analytics";
 import { AnalyticsDebugPanel } from "@platform/core-components/components/analytics/AnalyticsDebugPanel";
+
+const newsreader = Newsreader({
+  subsets: ["latin"],
+  variable: "--font-newsreader",
+  display: "swap",
+  weight: ["400", "700", "800"],
+  style: ["normal", "italic"],
+});
+
+const workSans = Work_Sans({
+  subsets: ["latin"],
+  variable: "--font-work-sans",
+  display: "swap",
+  weight: ["300", "400", "500", "600", "700"],
+});
 
 export const metadata: Metadata = {
   title: {
@@ -56,7 +72,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   }));
 
   return (
-    <html lang="en-GB">
+    <html lang="en-GB" className={`${newsreader.variable} ${workSans.variable}`}>
       <head>
         {/* Geo meta tags for local SEO */}
         {siteConfig.business.geo && (

@@ -17,9 +17,14 @@ const config: Config = {
     "../../packages/core-components/src/**/*.{js,ts,jsx,tsx}",
     "../../packages/themes/*/*.{js,ts,jsx,tsx}",
     "../../packages/themes/*/components/**/*.{js,ts,jsx,tsx}",
+    "../../packages/themes/*/pages/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
+      fontFamily: {
+        headline: ["var(--font-newsreader)", "serif"],
+        body: ["var(--font-work-sans)", "sans-serif"],
+      },
       colors: {
         // Brand colors mapped to theme system CSS variables
         brand: {
