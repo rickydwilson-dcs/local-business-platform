@@ -169,11 +169,14 @@ New sites get two layers of scaffolding:
 
 ### Reference Sites
 
-| Theme | Reference Site | Provides |
-|-------|---------------|----------|
-| `cygnus` | `sites/cygnus-test` | Dark hero, image card grids, cygnus visual language |
-| `orion` | `sites/dj-fox-electrical` | Dark header, full-bleed hero, circular icons |
-| `vega` | `sites/base-template` | Light header, split hero, standard card grid |
+| Theme    | Reference Site            | Provides                                                      |
+| -------- | ------------------------- | ------------------------------------------------------------- |
+| `castor` | `sites/_castor-plumbing`  | Trade Navy + Sage hero, zig-zag services, floating trust card |
+| `cygnus` | `sites/_cygnus-graphics`  | Dark mode hero, image card grids, cygnus visual language      |
+| `lyra`   | `sites/_lyra-garden`      | Editorial serif hero, garden/landscaping visual language      |
+| `nova`   | `sites/_nova-print`       | Bold orange + green hero, print/graphics visual language      |
+| `orion`  | `sites/dj-fox-electrical` | Dark header, full-bleed hero, circular icons                  |
+| `vega`   | `sites/base-template`     | Light header, split hero, standard card grid                  |
 
 ### Graceful Fallback
 
@@ -182,17 +185,18 @@ If no reference site is configured for the requested theme, or if the reference 
 ### Pipeline Flow
 
 ```
-create-site-from-project.ts --project project.json --theme cygnus
+create-site-from-project.ts --project project.json --theme castor
 
 1. Copy base-template → sites/new-site/   (capability infrastructure)
-2. applyThemePageOverrides()              (overlay visual pages from cygnus-test)
+2. applyThemePageOverrides()              (overlay visual pages from _castor-plumbing)
 3. Generate site.config.ts                (business data)
-4. Generate theme.config.ts              (brand colors + cygnusRegistry)
+4. Generate theme.config.ts              (brand colors + castorRegistry)
 ```
 
 ### Adding a New Theme Reference
 
-To wire a new theme (e.g. `nova`) to a reference site:
+To wire a new theme to a reference site:
+
 1. Add an entry to `THEME_REFERENCE_SITE_MAP` in `tools/create-site-from-project.ts`
 2. Add the theme package to `THEME_REGISTRY_MAP` in the same file
 3. Ensure the reference site's visual pages don't import site-specific data directly

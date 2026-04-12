@@ -432,7 +432,7 @@ Beyond CSS variables, the platform has named visual identities — **atlas**, **
 
 - **CSS utilities** (`packages/themes/orion/globals.css`, `packages/themes/vega/globals.css`) — pre-written component classes (`btn-primary`, `card-interactive`, `mobile-menu-overlay`, `lightbox-content`, etc.) written as plain CSS with `@apply`. Each site's `globals.css` imports its theme's CSS before the `@tailwind` directives.
 - **`ComponentRegistry`** — a TypeScript object exported from the theme package (`orionRegistry`, `vegaRegistry`, `cygnusRegistry`) that maps `heroVariant`, `headerVariant`, `cardVariant`, and `sectionVariant` slots to concrete component names. Sites include this in `theme.config.ts` under `componentRegistry`. For cygnus sites, `heroVariant: "image-overlay"` is now consumed at runtime — page components import `cygnusRegistry` directly and conditionally render `ImageOverlayHero` from `@platform/core-components` when the variant matches.
-- **Structural components** (`packages/themes/[name]/components/`) — theme-specific `Header` and `Footer` React Server Components exported via a `/components` subpath. Sites import these directly into `app/layout.tsx` rather than using the generic `SiteHeader`/`Footer` from core-components. This is what gives each theme its distinct navigation and footer treatment — the visual identity is owned by the theme package, not by the consuming site. Only **lyra**, **orion**, **vega**, **cygnus**, and **solaris** currently ship Header/Footer components via this pattern. **atlas** and **rigel** ship extensive full-page component libraries instead. **nova** is a CSS-utilities-only theme (no structural components).
+- **Structural components** (`packages/themes/[name]/components/`) — theme-specific `Header` and `Footer` React Server Components exported via a `/components` subpath. Sites import these directly into `app/layout.tsx` rather than using the generic `SiteHeader`/`Footer` from core-components. This is what gives each theme its distinct navigation and footer treatment — the visual identity is owned by the theme package, not by the consuming site. **lyra**, **orion**, **vega**, **cygnus**, **castor**, **nova**, and **solaris** all ship Header/Footer components via this pattern. **atlas** and **rigel** ship extensive full-page component libraries instead.
 
 ### Available Themes
 
@@ -442,9 +442,9 @@ Beyond CSS variables, the platform has named visual identities — **atlas**, **
 | **vega**    | Light header, split hero, standard card grid, clean typography                       | Header + Footer             |
 | **lyra**    | Editorial serif headlines, sans-serif body, muted sage/cream palette, rounded cards  | Header + Footer             |
 | **cygnus**  | Dark mode, Press-Black background, Signal Orange + Craft Green, bold graphic-led     | Header + Footer             |
-| **nova**    | Light header, image-overlay hero, bold orange + green, dark-accent sections          | CSS utilities only          |
+| **nova**    | Light header, image-overlay hero, bold orange + green, dark-accent sections          | Header + Footer             |
 | **atlas**   | Conference/event platform                                                            | Full-page component library |
-| **castor**  | Trade Navy + Fresh Sage, Newsreader/Work Sans, banded sections, plumber trade        | CSS utilities only          |
+| **castor**  | Trade Navy + Fresh Sage, Newsreader/Work Sans, banded sections, plumber trade        | Header + Footer             |
 | **polaris** | Tactical Telemetry dark mode, Aviation Red accent, industrial brutalist              | CSS utilities only          |
 | **rigel**   | Conference/event platform                                                            | Full-page component library |
 | **sirius**  | Premium Tech Agency light mode, Electric Blue + Teal, editorial breathing room       | CSS utilities only          |
@@ -489,13 +489,13 @@ Themes that ship Header/Footer components also export **page layout templates** 
 
 **What belongs where:**
 
-| Concern | Lives in |
-| --- | --- |
-| Visual layout (hero, sections, CTAs) | Theme template (`packages/themes/[name]/pages/`) |
-| `generateMetadata()` | Site `page.tsx` wrapper |
-| `generateStaticParams()` | Site `page.tsx` wrapper |
-| JSON-LD schema (`<script type="application/ld+json">`) | Site `page.tsx` wrapper |
-| Data fetching (`getService()`, `getLocation()`) | Site `page.tsx` wrapper |
+| Concern                                                | Lives in                                         |
+| ------------------------------------------------------ | ------------------------------------------------ |
+| Visual layout (hero, sections, CTAs)                   | Theme template (`packages/themes/[name]/pages/`) |
+| `generateMetadata()`                                   | Site `page.tsx` wrapper                          |
+| `generateStaticParams()`                               | Site `page.tsx` wrapper                          |
+| JSON-LD schema (`<script type="application/ld+json">`) | Site `page.tsx` wrapper                          |
+| Data fetching (`getService()`, `getLocation()`)        | Site `page.tsx` wrapper                          |
 
 **How thin wrappers work:** Each site's `page.tsx` imports the theme template, fetches content, builds a props object, and renders:
 
