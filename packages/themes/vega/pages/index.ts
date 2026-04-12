@@ -1,0 +1,12 @@
+export { VegaHomePage } from './home';
+export { VegaServicesPage } from './services';
+export { VegaServiceDetailPage } from './service-detail';
+export { VegaLocationsPage } from './locations';
+export { VegaLocationDetailPage } from './location-detail';
+export { VegaBlogPage } from './blog';
+export { VegaBlogPostPage } from './blog-post';
+export { VegaProjectsPage } from './projects';
+export { VegaProjectDetailPage } from './project-detail';
+export { VegaReviewsPage } from './reviews';
+export { VegaAboutPage } from './about';
+export { VegaContactPage } from './contact';

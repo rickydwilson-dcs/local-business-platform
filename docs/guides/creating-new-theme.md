@@ -119,6 +119,35 @@ Only run `/pipeline.kill-theme` if you're abandoning the theme entirely. If you'
 
 ---
 
+## Required: Page Templates
+
+Every new theme package **must** include a `pages/` directory exporting page layout templates. These are props-based Server Components that own the visual layout — the consuming site's `page.tsx` files are thin wrappers that handle data fetching and metadata.
+
+**Required page set for tradesperson themes:**
+
+```
+packages/themes/<theme-name>/pages/
+├── index.ts              # Named exports for all templates
+├── HomePage.tsx
+├── ServicesPage.tsx
+├── ServiceDetailPage.tsx
+├── LocationsPage.tsx
+├── LocationDetailPage.tsx
+├── BlogPage.tsx
+├── BlogPostPage.tsx
+├── ProjectsPage.tsx
+├── ProjectDetailPage.tsx
+├── ReviewsPage.tsx
+├── AboutPage.tsx
+└── ContactPage.tsx
+```
+
+Event/conference themes (atlas, rigel) use a custom page set suited to their use case instead of the tradesperson set.
+
+All template props interfaces (`HomePageTemplateProps`, `ServicePageTemplateProps`, `LocationPageTemplateProps`, etc.) are defined in `@platform/core-components` — specifically `packages/core-components/src/lib/page-template-types.ts`. Import and use these types; do not define local prop types in the theme package. The `SiteConfigSummary` type (also from that file) is the standard way to pass minimal site config to templates.
+
+---
+
 ## Promoting a theme to a real site
 
 Once the theme looks right in the test site:

@@ -6,10 +6,13 @@
  */
 
 import type { Metadata } from "next";
-import { Schema, Breadcrumbs, ContentGrid } from "@platform/core-components";
+import type { SiteConfigSummary } from "@platform/core-components";
+import { Schema } from "@platform/core-components";
+import { NovaServicesPage } from "@platform/themes/nova/pages";
 import { getServices } from "@/lib/content";
 import { absUrl } from "@/lib/site";
 import { siteConfig } from "@/site.config";
+import { PHONE_DISPLAY } from "@/lib/contact-info";
 
 export const dynamic = "force-static";
 
@@ -28,46 +31,26 @@ export const metadata: Metadata = {
 export default async function ServicesPage() {
   const services = await getServices();
 
-  const breadcrumbItems = [{ name: "Services", href: "/services", current: true }];
+  const siteSummary: SiteConfigSummary = {
+    name: siteConfig.business.name,
+    tagline: siteConfig.tagline,
+    phone: siteConfig.business.phone,
+    phoneDisplay: PHONE_DISPLAY,
+    address: { city: siteConfig.business.address.city },
+    cta: siteConfig.cta,
+    stats: siteConfig.credentials?.stats,
+  };
 
   return (
     <>
-      {/* Breadcrumbs */}
-      <div className="bg-surface-subtle border-b border-surface-border">
-        <div className="container-standard py-4">
-          <Breadcrumbs items={breadcrumbItems} />
-        </div>
-      </div>
-
-      <div className="min-h-screen bg-gradient-to-b from-surface-subtle to-surface-background">
-        {/* Hero Section */}
-        <section className="section-standard lg:py-24 bg-surface-background">
-          <div className="container-standard">
-            <div className="text-center">
-              <h1 className="heading-hero">Our Services</h1>
-              <p className="text-xl text-surface-foreground mb-8 mx-auto max-w-3xl">
-                Explore our range of professional services. {siteConfig.business.name} is committed
-                to delivering quality work and exceptional customer service.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* Services Grid */}
-        <section className="section-standard bg-surface-subtle">
-          <div className="container-standard">
-            <ContentGrid
-              items={services}
-              basePath="/services"
-              contentType="services"
-              emptyMessage="No services available yet. Check back soon."
-              fallbackDescription={(title) =>
-                `Learn more about our ${title.toLowerCase()} services.`
-              }
-            />
-          </div>
-        </section>
-      </div>
+      <NovaServicesPage
+        siteConfig={siteSummary}
+        services={services.map((s) => ({
+          slug: s.slug,
+          title: s.title,
+          description: s.description,
+        }))}
+      />
 
       <Schema
         org={{

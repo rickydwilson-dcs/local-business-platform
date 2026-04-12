@@ -1,0 +1,12 @@
+export { NovaHomePage } from './home';
+export { NovaServicesPage } from './services';
+export { NovaServiceDetailPage } from './service-detail';
+export { NovaLocationsPage } from './locations';
+export { NovaLocationDetailPage } from './location-detail';
+export { NovaBlogPage } from './blog';
+export { NovaBlogPostPage } from './blog-post';
+export { NovaProjectsPage } from './projects';
+export { NovaProjectDetailPage } from './project-detail';
+export { NovaReviewsPage } from './reviews';
+export { NovaAboutPage } from './about';
+export { NovaContactPage } from './contact';

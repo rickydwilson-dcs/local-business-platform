@@ -26,7 +26,8 @@
       "@platform/theme-system/plugin": ["../../packages/theme-system/src/tailwind-plugin.ts"],
       "@platform/theme-system/*": ["../../packages/theme-system/src/*"],
       "@platform/themes/castor": ["../../packages/themes/castor/index.ts"],
-      "@platform/themes/castor/components": ["../../packages/themes/castor/components/index.ts"]
+      "@platform/themes/castor/components": ["../../packages/themes/castor/components/index.ts"],
+      "@platform/themes/castor/pages": ["../../packages/themes/castor/pages/index.ts"]
     }
   },
   "include": [

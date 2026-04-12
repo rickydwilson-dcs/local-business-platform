@@ -1,24 +1,17 @@
 /**
- * Digital Marketing Weekend — Homepage
- * =====================================
+ * Homepage — thin wrapper
  *
- * 8-section event homepage:
- * 1. Hero
- * 2. Event Stats Strip
- * 3. About the Event
- * 4. Featured Speakers
- * 5. Schedule Preview
- * 6. Venue Teaser
- * 7. Past Attendees / Testimonials
- * 8. Final CTA
+ * Fetches data and delegates all rendering to RigelHomePage template.
  */
 
 import type { Metadata } from "next";
-import Link from "next/link";
 import { siteConfig } from "@/site.config";
 import { getContentItems } from "@/lib/content";
 import { absUrl } from "@/lib/site";
 import { getLocalBusinessSchema } from "@/lib/schema";
+import type { SiteConfigSummary, SpeakerSummary, TestimonialSummary } from "@platform/core-components";
+import { RigelHomePage } from "@platform/themes/rigel/pages";
+import type { RigelHomePageProps } from "@platform/themes/rigel/pages";
 
 export const dynamic = "force-static";
 
@@ -69,10 +62,13 @@ interface SpeakerFrontmatter {
   slug: string;
   title: string;
   topic: string;
-  featured: boolean;
+  description: string;
   day: "saturday" | "sunday";
   time: string;
   stage: string;
+  featured: boolean;
+  imageAlt?: string;
+  social?: { twitter?: string; linkedin?: string; website?: string };
 }
 
 interface TestimonialFrontmatter {
@@ -84,14 +80,7 @@ interface TestimonialFrontmatter {
   platform: string;
 }
 
-interface ScheduleSession {
-  time: string;
-  title: string;
-  stage: string;
-  speaker: string | null;
-}
-
-const saturdayPreview: ScheduleSession[] = [
+const saturdayPreview: RigelHomePageProps["saturdayPreview"] = [
   {
     time: "09:30",
     title: "The Small Business Marketing Stack: What Actually Works in 2026",
@@ -118,7 +107,7 @@ const saturdayPreview: ScheduleSession[] = [
   },
 ];
 
-const sundayPreview: ScheduleSession[] = [
+const sundayPreview: RigelHomePageProps["sundayPreview"] = [
   {
     time: "10:00",
     title: "Getting ROI from Google & Meta Ads on a Small Budget",
@@ -151,14 +140,41 @@ export default async function HomePage() {
     getContentItems("testimonials"),
   ]);
 
-  const featuredSpeakers = allSpeakers
-    .map((item) => ({ fm: item as unknown as SpeakerFrontmatter, slug: item.slug }))
-    .filter((s) => s.fm.featured)
+  const featuredSpeakers: SpeakerSummary[] = allSpeakers
+    .map((item) => {
+      const fm = item as unknown as SpeakerFrontmatter;
+      return {
+        slug: item.slug,
+        name: fm.name,
+        title: fm.title,
+        topic: fm.topic,
+        description: fm.description,
+        day: fm.day,
+        time: fm.time,
+        stage: fm.stage,
+        featured: fm.featured,
+        imageAlt: fm.imageAlt,
+        social: fm.social,
+      } satisfies SpeakerSummary;
+    })
+    .filter((s) => s.featured)
     .slice(0, 6);
 
-  const featuredTestimonials = allTestimonials
-    .map((item) => ({ fm: item as unknown as TestimonialFrontmatter, slug: item.slug }))
-    .filter((t) => t.fm.featured)
+  const testimonials: TestimonialSummary[] = allTestimonials
+    .map((item) => {
+      const fm = item as unknown as TestimonialFrontmatter;
+      return {
+        slug: item.slug,
+        name: fm.customerName,
+        rating: fm.rating,
+        body: fm.text,
+        platform: fm.platform,
+      } satisfies TestimonialSummary;
+    })
+    .filter((_, i) => {
+      const fm = allTestimonials[i] as unknown as TestimonialFrontmatter;
+      return fm.featured;
+    })
     .slice(0, 3);
 
   const localBusinessSchema = getLocalBusinessSchema();
@@ -204,8 +220,8 @@ export default async function HomePage() {
     inLanguage: "en-GB",
   };
 
-  return (
-    <div className="min-h-screen">
+  const schemaNodes = (
+    <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
@@ -218,355 +234,34 @@ export default async function HomePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(webSiteSchema) }}
       />
+    </>
+  );
 
-      {/* ── 1. HERO ─────────────────────────────────────────────────── */}
-      <section className="bg-brand-primary py-24 px-4 text-center">
-        <div className="max-w-4xl mx-auto">
-          {/* Date / location badge */}
-          <span className="inline-block mb-6 px-4 py-1.5 rounded-full bg-brand-secondary text-brand-primary text-sm font-bold uppercase tracking-widest">
-            17–18 October 2026 · Eastbourne
-          </span>
+  const siteSummary: SiteConfigSummary = {
+    name: siteConfig.business.name,
+    tagline: siteConfig.tagline,
+    phone: siteConfig.business.phone ?? "",
+    phoneDisplay: siteConfig.business.phone ?? "",
+    address: {
+      city: siteConfig.business.address.city,
+      county: siteConfig.business.address.region,
+    },
+    cta: siteConfig.cta,
+    stats: siteConfig.credentials.stats,
+  };
 
-          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
-            Digital Marketing Weekend
-          </h1>
-
-          <p className="text-xl md:text-2xl text-white opacity-90 mb-10 max-w-2xl mx-auto">
-            Two days of practical marketing sessions, workshops, and networking — free to attend.
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-            <a
-              href={siteConfig.cta.primary.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center px-8 py-4 bg-brand-secondary text-brand-primary font-bold text-lg rounded-lg hover:opacity-90 transition-opacity"
-            >
-              {siteConfig.cta.primary.label}
-            </a>
-            <Link
-              href="/schedule"
-              className="inline-flex items-center justify-center px-8 py-4 bg-transparent border-2 border-white text-white font-bold text-lg rounded-lg hover:bg-white/10 transition-colors"
-            >
-              View Schedule
-            </Link>
-          </div>
-
-          {/* Icon badges */}
-          <div className="flex flex-wrap justify-center gap-6 text-white opacity-80 text-sm">
-            <span className="flex items-center gap-2">
-              <span aria-hidden="true">✓</span> Free to Attend
-            </span>
-            <span className="flex items-center gap-2">
-              <span aria-hidden="true">✓</span> 10+ Expert Speakers
-            </span>
-            <span className="flex items-center gap-2">
-              <span aria-hidden="true">✓</span> Winter Garden, Eastbourne
-            </span>
-          </div>
-        </div>
-      </section>
-
-      {/* ── 2. EVENT STATS STRIP ────────────────────────────────────── */}
-      <section className="bg-surface-foreground py-12 px-4">
-        <div className="max-w-4xl mx-auto">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            {siteConfig.credentials.stats.map((stat, index) => (
-              <div key={index}>
-                <div className="text-4xl md:text-5xl font-bold text-brand-secondary mb-1">
-                  {stat.value}
-                </div>
-                <div className="text-sm font-medium text-surface-background opacity-80 uppercase tracking-wide">
-                  {stat.label}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── 3. ABOUT THE EVENT ──────────────────────────────────────── */}
-      <section className="section">
-        <div className="container-narrow">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-            <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-surface-foreground mb-6">
-                What is Digital Marketing Weekend?
-              </h2>
-              <div className="space-y-4 text-surface-muted-foreground leading-relaxed">
-                <p>
-                  Digital Marketing Weekend is a free two-day event bringing together digital
-                  marketers, small business owners, and freelancers in the heart of Eastbourne.
-                </p>
-                <p>
-                  Across two packed days at the historic Winter Garden, you&apos;ll hear from
-                  industry experts on everything from SEO and social media to email marketing, paid
-                  advertising, and AI-powered tools.
-                </p>
-                <p>
-                  Whether you&apos;re just starting your digital journey or looking to sharpen your
-                  strategy, there&apos;s something for everyone — and it&apos;s completely free.
-                </p>
-              </div>
-            </div>
-
-            <div>
-              <h3 className="text-xl font-bold text-surface-foreground mb-5">Who Should Attend?</h3>
-              <ul className="space-y-3">
-                {siteConfig.about?.whyChooseUs?.map((point, index) => (
-                  <li key={index} className="flex items-start gap-3">
-                    <span className="flex-shrink-0 w-5 h-5 mt-0.5 rounded-full bg-brand-secondary flex items-center justify-center">
-                      <svg
-                        className="w-3 h-3 text-brand-primary"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        strokeWidth={3}
-                      >
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                      </svg>
-                    </span>
-                    <span className="text-surface-muted-foreground">{point}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── 4. FEATURED SPEAKERS ────────────────────────────────────── */}
-      {featuredSpeakers.length > 0 && (
-        <section className="section bg-surface-subtle">
-          <div className="container-narrow">
-            <h2 className="text-3xl md:text-4xl font-bold text-surface-foreground text-center mb-4">
-              Featured Speakers
-            </h2>
-            <p className="text-center text-surface-muted-foreground mb-12 max-w-xl mx-auto">
-              Hear from practitioners sharing what actually works in digital marketing today.
-            </p>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {featuredSpeakers.map(({ slug, fm }) => (
-                <div key={slug} className="card flex flex-col gap-3">
-                  <div>
-                    <span
-                      className={`inline-block px-2 py-0.5 rounded text-xs font-semibold uppercase tracking-wide ${
-                        fm.day === "saturday"
-                          ? "bg-brand-primary text-white"
-                          : "bg-brand-secondary text-brand-primary"
-                      }`}
-                    >
-                      {fm.day === "saturday" ? "Saturday" : "Sunday"}
-                    </span>
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-bold text-surface-foreground">{fm.name}</h3>
-                    <p className="text-sm text-surface-muted-foreground">{fm.title}</p>
-                  </div>
-                  <p className="text-surface-foreground text-sm font-medium leading-snug flex-1">
-                    {fm.topic}
-                  </p>
-                  <p className="text-xs text-surface-muted-foreground">
-                    {fm.time} · {fm.stage}
-                  </p>
-                  <Link
-                    href={`/speakers/${slug}`}
-                    className="text-brand-primary font-semibold text-sm hover:underline"
-                  >
-                    Read Bio →
-                  </Link>
-                </div>
-              ))}
-            </div>
-
-            <div className="text-center mt-10">
-              <Link href="/speakers" className="btn-secondary">
-                View All Speakers
-              </Link>
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* ── 5. SCHEDULE PREVIEW ─────────────────────────────────────── */}
-      <section className="section">
-        <div className="container-narrow">
-          <h2 className="text-3xl md:text-4xl font-bold text-surface-foreground text-center mb-4">
-            Weekend Schedule
-          </h2>
-          <p className="text-center text-surface-muted-foreground mb-12 max-w-xl mx-auto">
-            17–18 October 2026 · The Winter Garden, Eastbourne
-          </p>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {/* Saturday */}
-            <div>
-              <h3 className="text-xl font-bold text-surface-foreground mb-4 pb-3 border-b-2 border-brand-primary">
-                Saturday 17 October
-              </h3>
-              <div className="space-y-0 divide-y divide-surface-muted">
-                {saturdayPreview.map((session, index) => (
-                  <div key={index} className="py-3 flex items-start gap-4">
-                    <span className="flex-shrink-0 inline-block bg-surface-subtle text-surface-foreground text-xs font-bold px-2 py-1 rounded w-14 text-center">
-                      {session.time}
-                    </span>
-                    <div className="flex-1 min-w-0">
-                      <p className="font-medium text-surface-foreground text-sm leading-snug">
-                        {session.title}
-                      </p>
-                      {session.speaker && (
-                        <p className="text-xs text-surface-muted-foreground mt-0.5">
-                          {session.speaker}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Sunday */}
-            <div>
-              <h3 className="text-xl font-bold text-surface-foreground mb-4 pb-3 border-b-2 border-brand-secondary">
-                Sunday 18 October
-              </h3>
-              <div className="space-y-0 divide-y divide-surface-muted">
-                {sundayPreview.map((session, index) => (
-                  <div key={index} className="py-3 flex items-start gap-4">
-                    <span className="flex-shrink-0 inline-block bg-surface-subtle text-surface-foreground text-xs font-bold px-2 py-1 rounded w-14 text-center">
-                      {session.time}
-                    </span>
-                    <div className="flex-1 min-w-0">
-                      <p className="font-medium text-surface-foreground text-sm leading-snug">
-                        {session.title}
-                      </p>
-                      {session.speaker && (
-                        <p className="text-xs text-surface-muted-foreground mt-0.5">
-                          {session.speaker}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          <div className="text-center mt-10">
-            <Link href="/schedule" className="btn-secondary">
-              View Full Schedule
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ── 6. VENUE TEASER ─────────────────────────────────────────── */}
-      <section className="section bg-surface-subtle">
-        <div className="container-narrow text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-surface-foreground mb-4">The Venue</h2>
-          <p className="text-xl text-brand-primary font-semibold mb-2">
-            The Winter Garden, Eastbourne
-          </p>
-          <p className="text-surface-muted-foreground mb-2">Compton Street, Eastbourne, BN21 4BP</p>
-          <p className="text-surface-muted-foreground max-w-xl mx-auto mb-8">
-            A stunning Victorian seafront venue with a 1,000-seat auditorium, breakout workshop
-            rooms, and a terrace overlooking Eastbourne&apos;s seafront.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/venue" className="btn-primary">
-              Venue & Travel Info
-            </Link>
-            <a
-              href="https://maps.google.com/?q=Winter+Garden+Eastbourne+BN21+4BP"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-secondary"
-            >
-              View on Map
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* ── 7. TESTIMONIALS ─────────────────────────────────────────── */}
-      {featuredTestimonials.length > 0 && (
-        <section className="section">
-          <div className="container-narrow">
-            <h2 className="text-3xl md:text-4xl font-bold text-surface-foreground text-center mb-4">
-              What Attendees Say
-            </h2>
-            <p className="text-center text-surface-muted-foreground mb-12 max-w-xl mx-auto">
-              Hear from people who attended our last event.
-            </p>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {featuredTestimonials.map(({ slug, fm }) => (
-                <div key={slug} className="card flex flex-col gap-4">
-                  {/* Stars */}
-                  <div className="flex gap-0.5">
-                    {Array.from({ length: fm.rating }).map((_, i) => (
-                      <svg
-                        key={i}
-                        className="w-4 h-4 text-brand-secondary"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                      >
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                      </svg>
-                    ))}
-                  </div>
-
-                  {/* Quote */}
-                  <p className="text-surface-muted-foreground leading-relaxed flex-1 italic">
-                    &ldquo;{fm.text}&rdquo;
-                  </p>
-
-                  {/* Attribution */}
-                  <div>
-                    <p className="font-semibold text-surface-foreground text-sm">
-                      {fm.customerName}
-                    </p>
-                    <p className="text-xs text-surface-muted-foreground">{fm.customerRole}</p>
-                    <p className="text-xs text-surface-muted-foreground mt-0.5">
-                      via {fm.platform}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* ── 8. FINAL CTA ────────────────────────────────────────────── */}
-      <section className="section bg-brand-primary">
-        <div className="container-narrow text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            Ready to Level Up Your Marketing?
-          </h2>
-          <p className="text-xl text-white opacity-90 mb-8 max-w-xl mx-auto">
-            Secure your free place at Digital Marketing Weekend 2026. Saturday &amp; Sunday, 17–18
-            October, Eastbourne.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href={siteConfig.cta.primary.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center px-8 py-4 bg-brand-secondary text-brand-primary font-bold text-lg rounded-lg hover:opacity-90 transition-opacity"
-            >
-              Get Your Free Ticket
-            </a>
-            <Link
-              href="/contact"
-              className="inline-flex items-center justify-center px-8 py-4 bg-transparent border-2 border-white text-white font-bold text-lg rounded-lg hover:bg-white/10 transition-colors"
-            >
-              Get in Touch
-            </Link>
-          </div>
-        </div>
-      </section>
-    </div>
+  return (
+    <RigelHomePage
+      siteConfig={siteSummary}
+      featuredSpeakers={featuredSpeakers}
+      testimonials={testimonials}
+      schemaNodes={schemaNodes}
+      saturdayPreview={saturdayPreview}
+      sundayPreview={sundayPreview}
+      whyChooseUs={siteConfig.about?.whyChooseUs ?? []}
+      eventDate="17–18 October 2026 · Eastbourne"
+      eventLocation="The Winter Garden, Eastbourne"
+      ticketUrl={siteConfig.cta.primary.href}
+    />
   );
 }

@@ -1,15 +1,15 @@
 /**
- * Locations Listing Page
- * ======================
- *
- * Displays all service area locations.
+ * Locations Listing Page — thin wrapper around OrionLocationsPage
  */
 
 import type { Metadata } from 'next';
-import { Schema, Breadcrumbs, ContentGrid } from '@platform/core-components';
+import type { SiteConfigSummary } from '@platform/core-components';
+import { Schema } from '@platform/core-components';
 import { getLocations } from '@/lib/content';
 import { absUrl } from '@/lib/site';
 import { siteConfig } from '@/site.config';
+import { PHONE_DISPLAY } from '@/lib/contact-info';
+import { OrionLocationsPage } from '@platform/themes/orion/pages';
 
 export const dynamic = 'force-static';
 
@@ -25,49 +25,31 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function LocationsPage() {
+const siteSummary: SiteConfigSummary = {
+  name: siteConfig.business.name,
+  tagline: siteConfig.tagline,
+  phone: siteConfig.business.phone,
+  phoneDisplay: PHONE_DISPLAY,
+  address: { city: siteConfig.business.address.city },
+  cta: siteConfig.cta,
+  stats: siteConfig.credentials?.stats,
+};
+
+export default async function LocationsPageWrapper() {
   const locations = await getLocations();
 
-  const breadcrumbItems = [{ name: 'Locations', href: '/locations', current: true }];
+  const locationSummaries = locations.map((loc) => ({
+    slug: loc.slug,
+    title: loc.title,
+    description: loc.description,
+  }));
 
   return (
     <>
-      {/* Breadcrumbs */}
-      <div className="bg-surface-subtle border-b border-surface-border">
-        <div className="container-standard py-4">
-          <Breadcrumbs items={breadcrumbItems} />
-        </div>
-      </div>
-
-      <div className="min-h-screen bg-gradient-to-b from-surface-subtle to-surface-background">
-        {/* Hero Section */}
-        <section className="section-standard lg:py-24 bg-surface-background">
-          <div className="container-standard">
-            <div className="text-center">
-              <h1 className="heading-hero">Our Service Areas</h1>
-              <p className="text-xl text-surface-foreground mb-8 mx-auto max-w-3xl">
-                {siteConfig.business.name} proudly serves customers across{' '}
-                {siteConfig.serviceAreas.join(', ')}. Find our professional services in your area.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* Locations Grid */}
-        <section className="section-standard bg-surface-subtle">
-          <div className="container-standard">
-            <ContentGrid
-              items={locations}
-              basePath="/locations"
-              contentType="locations"
-              emptyMessage="No locations available yet. Check back soon."
-              fallbackDescription={(title) =>
-                `Professional services in ${title}. Contact us for local expertise.`
-              }
-            />
-          </div>
-        </section>
-      </div>
+      <OrionLocationsPage
+        siteConfig={siteSummary}
+        locations={locationSummaries}
+      />
 
       <Schema
         org={{

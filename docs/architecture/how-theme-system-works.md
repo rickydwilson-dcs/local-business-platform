@@ -483,6 +483,37 @@ import { OrionHeader, OrionFooter } from "@platform/themes/orion/components";
 
 The `Header` and `Footer` exports are props-based Server Components — `layout.tsx` fetches site-specific data (services, locations, contact info) and passes it as props. The theme package owns the visual treatment; the site owns the data.
 
+### Page Templates
+
+Themes that ship Header/Footer components also export **page layout templates** from `packages/themes/[name]/pages/`. These are props-based Server Components that own the visual layout of a full page — hero, content sections, sidebars, CTAs — without touching metadata, schema, or data fetching.
+
+**What belongs where:**
+
+| Concern | Lives in |
+| --- | --- |
+| Visual layout (hero, sections, CTAs) | Theme template (`packages/themes/[name]/pages/`) |
+| `generateMetadata()` | Site `page.tsx` wrapper |
+| `generateStaticParams()` | Site `page.tsx` wrapper |
+| JSON-LD schema (`<script type="application/ld+json">`) | Site `page.tsx` wrapper |
+| Data fetching (`getService()`, `getLocation()`) | Site `page.tsx` wrapper |
+
+**How thin wrappers work:** Each site's `page.tsx` imports the theme template, fetches content, builds a props object, and renders:
+
+```typescript
+// sites/my-site/app/services/[slug]/page.tsx
+import { VegaServicePage } from '@platform/themes/vega/pages';
+
+export default async function ServicePage({ params }) {
+  const service = await getService(params.slug);
+  const siteConfig = getSiteConfigSummary();
+  return <VegaServicePage service={service} siteConfig={siteConfig} />;
+}
+```
+
+**`SiteConfigSummary`** — a minimal type from `@platform/core-components` (defined in `packages/core-components/src/lib/page-template-types.ts`) that passes brand-relevant site config (name, phone, email, serviceAreas) to templates without exposing the full `SiteConfig` object. All `*PageTemplateProps` interfaces are defined in the same file.
+
+The themes that currently export page templates: **vega**, **castor**, **cygnus**, **lyra**, **nova**, **orion**, and **rigel**.
+
 ### AI Theme Generation
 
 `tools/generate-theme-from-reference.ts` generates a complete `theme.config.ts` from a URL or image — it extracts brand colors, classifies the layout pattern (orion vs vega) using Claude Haiku, and injects the appropriate `componentRegistry`. `tools/apply-theme.ts` switches a site between named themes (updates both `globals.css` import and `theme.config.ts` registry).

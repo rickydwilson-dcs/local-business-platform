@@ -1,27 +1,18 @@
 /**
  * About Page
  *
- * Company information, credentials, values, and team overview.
- * All content is driven from siteConfig — no hardcoded business data.
- *
- * Sections rendered:
- * - Hero (always) — siteConfig.about.heroBadges, siteConfig.name, siteConfig.tagline
- * - Our Story (if siteConfig.about.story) — narrative paragraphs
- * - Company Info cards (always) — legal name, year established, service areas
- * - Track Record / Stats (always) — siteConfig.credentials.stats
- * - Certifications (always) — siteConfig.credentials.certifications + insurance
- * - Values (if siteConfig.about.values) — card grid
- * - Why Choose Us (if siteConfig.about.whyChooseUs) — bullet list
- * - CTA (always)
+ * Company information — uses Vega page template for the base layout,
+ * with rich content sections driven from siteConfig.about.
  */
 
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Shield, Award, CheckCircle, Phone } from 'lucide-react';
+import type { SiteConfigSummary } from '@platform/core-components';
+import { Breadcrumbs, Schema } from '@platform/core-components';
 import { siteConfig } from '@/site.config';
 import { PHONE_DISPLAY, PHONE_TEL } from '@/lib/contact-info';
 import { absUrl } from '@/lib/site';
-import { Breadcrumbs, Schema } from '@platform/core-components';
 
 export const metadata: Metadata = {
   title: `About Us | ${siteConfig.business.name}`,

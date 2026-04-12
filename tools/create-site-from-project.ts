@@ -57,19 +57,51 @@ const EXCLUDE_EXTENSIONS = [".log"];
 
 /** Maps theme variant → reference site providing canonical visual page implementations. */
 const THEME_REFERENCE_SITE_MAP: Record<string, string> = {
+  castor: "_castor-plumbing",
   cygnus: "_cygnus-graphics",
+  lyra: "_lyra-garden",
+  nova: "_nova-print",
   orion: "dj-fox-electrical",
   vega: "base-template",
+  rigel: "_rigel-events",
 };
 
-/** Page files to copy from theme reference site (overrides base-template copies). */
-const THEMED_PAGE_FILES = [
+const TRADESPERSON_PAGE_FILES = [
   "app/layout.tsx",
   "app/page.tsx",
   "app/services/page.tsx",
-  "app/about/page.tsx",
+  "app/services/[slug]/page.tsx",
   "app/locations/page.tsx",
+  "app/locations/[slug]/page.tsx",
+  "app/blog/page.tsx",
+  "app/blog/[slug]/page.tsx",
+  "app/projects/page.tsx",
+  "app/projects/[slug]/page.tsx",
+  "app/reviews/page.tsx",
+  "app/about/page.tsx",
+  "app/contact/page.tsx",
 ] as const;
+
+const RIGEL_EVENT_PAGE_FILES = [
+  "app/layout.tsx",
+  "app/page.tsx",
+  "app/speakers/page.tsx",
+  "app/speakers/[slug]/page.tsx",
+  "app/schedule/page.tsx",
+  "app/venue/page.tsx",
+  "app/sponsors/page.tsx",
+  "app/blog/page.tsx",
+  "app/blog/[slug]/page.tsx",
+  "app/contact/page.tsx",
+] as const;
+
+const THEMED_PAGE_FILES_BY_THEME: Record<string, readonly string[]> = {
+  rigel: RIGEL_EVENT_PAGE_FILES,
+};
+
+function getThemedPageFiles(theme: string): readonly string[] {
+  return THEMED_PAGE_FILES_BY_THEME[theme] ?? TRADESPERSON_PAGE_FILES;
+}
 
 // ============================================================================
 // Types
@@ -221,7 +253,7 @@ function applyThemePageOverrides(
     );
     return;
   }
-  for (const pageFile of THEMED_PAGE_FILES) {
+  for (const pageFile of getThemedPageFiles(themeVariant)) {
     const src = path.join(referenceSiteDir, pageFile);
     const dest = path.join(newSiteDir, pageFile);
     if (fs.existsSync(src)) {

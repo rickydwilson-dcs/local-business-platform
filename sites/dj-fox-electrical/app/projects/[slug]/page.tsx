@@ -1,40 +1,34 @@
 /**
- * Project Detail Page
- * ===================
- *
- * Individual project page with MDX content rendering.
- * Features hero section, project summary, outcomes, and testimonials.
+ * Project Detail Page — thin wrapper around OrionProjectDetailPage
  */
 
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import type { Metadata } from 'next';
-import {
-  Schema,
-  Breadcrumbs,
-  BlogPostHero,
-  FAQSection,
-  CTASection,
-  ArticleCallout,
-} from '@platform/core-components';
+import type { SiteConfigSummary } from '@platform/core-components';
+import { Schema, ArticleCallout } from '@platform/core-components';
 import { getProjects, getProject, type Project } from '@/lib/content';
 import { getImageUrl } from '@/lib/image';
 import { absUrl } from '@/lib/site';
 import { loadMdx } from '@/lib/mdx';
 import { siteConfig } from '@/site.config';
+import { PHONE_DISPLAY } from '@/lib/contact-info';
+import { OrionProjectDetailPage } from '@platform/themes/orion/pages';
 
 export const dynamic = 'force-static';
 export const dynamicParams = false;
 
 type Params = { slug: string };
 
-const categoryLabels: Record<string, string> = {
-  heritage: 'Heritage Project',
-  'new-build': 'New Build Project',
-  renovation: 'Renovation Project',
-  maintenance: 'Maintenance Project',
-  emergency: 'Emergency Project',
+const siteSummary: SiteConfigSummary = {
+  name: siteConfig.business.name,
+  tagline: siteConfig.tagline,
+  phone: siteConfig.business.phone,
+  phoneDisplay: PHONE_DISPLAY,
+  address: { city: siteConfig.business.address.city },
+  cta: siteConfig.cta,
+  stats: siteConfig.credentials?.stats,
 };
 
 export async function generateStaticParams() {
@@ -127,7 +121,7 @@ function ProjectSummary({ project }: { project: Project }) {
         {project.scope?.squareMetres && (
           <div className="flex justify-between">
             <dt className="text-surface-muted-foreground">Size:</dt>
-            <dd className="font-medium text-surface-foreground">{project.scope.squareMetres}m²</dd>
+            <dd className="font-medium text-surface-foreground">{project.scope.squareMetres}m&sup2;</dd>
           </div>
         )}
         {/* eslint-disable-next-line platform/no-hardcoded-tailwind-colors -- Intentional: decorative divider accent */}
@@ -155,7 +149,7 @@ function ProjectSummary({ project }: { project: Project }) {
             <dd className="space-y-1">
               {project.scope.challenges.map((challenge, idx) => (
                 <div key={idx} className="flex items-start gap-2 text-surface-muted-foreground">
-                  <span className="text-brand-primary mt-0.5">•</span>
+                  <span className="text-brand-primary mt-0.5">&bull;</span>
                   <span>{challenge}</span>
                 </div>
               ))}
@@ -167,23 +161,7 @@ function ProjectSummary({ project }: { project: Project }) {
   );
 }
 
-function OutcomesCallout({ results }: { results: string[] }) {
-  return <ArticleCallout variant="success" title="Outcomes" items={results} />;
-}
-
-function ClientTestimonialCallout({
-  testimonial,
-  clientType,
-  rating,
-}: {
-  testimonial: string;
-  clientType: string;
-  rating?: number;
-}) {
-  return <ArticleCallout variant="quote" quote={testimonial} author={clientType} rating={rating} />;
-}
-
-function RelatedProjects({ projects, currentSlug }: { projects: Project[]; currentSlug: string }) {
+function RelatedProjectsSection({ projects, currentSlug }: { projects: Project[]; currentSlug: string }) {
   const related = projects.filter((p) => p.slug !== currentSlug).slice(0, 3);
 
   if (related.length === 0) return null;
@@ -218,7 +196,7 @@ function RelatedProjects({ projects, currentSlug }: { projects: Project[]; curre
                   <Link href={`/projects/${project.slug}`}>{project.title}</Link>
                 </h3>
                 <p className="text-sm text-surface-muted-foreground">
-                  {project.locationName} · {project.year}
+                  {project.locationName} &middot; {project.year}
                 </p>
               </div>
             </article>
@@ -248,74 +226,33 @@ export default async function ProjectPage({ params }: { params: Promise<Params> 
 
   return (
     <>
-      {/* Breadcrumbs */}
-      <div className="bg-surface-subtle border-b border-surface-border">
-        <div className="container-standard py-4">
-          <Breadcrumbs items={breadcrumbItems} />
-        </div>
-      </div>
-
-      <div>
-        <article>
-          {/* Hero Section - Reusing BlogPostHero */}
-          <BlogPostHero
-            variant="project"
-            title={frontmatter.title}
-            description={frontmatter.description}
-            category={frontmatter.category}
-            categoryLabel={categoryLabels[frontmatter.category] || frontmatter.category}
-            locationName={frontmatter.locationName}
-            year={frontmatter.year}
-            duration={frontmatter.duration}
-            heroImage={frontmatter.heroImage}
-          />
-
-          {/* Article Content */}
-          <section className="section-standard bg-surface-background">
-            <div className="container-standard">
-              <div className="max-w-4xl mx-auto">
-                {/* Project Summary */}
-                <ProjectSummary project={frontmatter} />
-
-                {/* Prose Content */}
-                <div className="prose prose-lg max-w-none prose-headings:text-surface-foreground prose-p:text-surface-muted-foreground prose-a:text-brand-primary prose-a:no-underline hover:prose-a:underline prose-strong:text-surface-foreground prose-li:text-surface-muted-foreground prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-6 prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-4">
-                  {mdxContent}
-                </div>
-
-                {/* Outcomes */}
-                {frontmatter.results && frontmatter.results.length > 0 && (
-                  <OutcomesCallout results={frontmatter.results} />
-                )}
-
-                {/* Client Testimonial */}
-                {frontmatter.client?.testimonial && (
-                  <ClientTestimonialCallout
-                    testimonial={frontmatter.client.testimonial}
-                    clientType={frontmatter.client.type}
-                    rating={frontmatter.client.rating}
-                  />
-                )}
-              </div>
-            </div>
-          </section>
-
-          {/* FAQs */}
-          {frontmatter.faqs && frontmatter.faqs.length > 0 && (
-            <FAQSection items={frontmatter.faqs} variant="default" />
-          )}
-
-          {/* CTA Section */}
-          <CTASection
-            title="Ready to Start Your Project?"
-            description={`Contact our expert team for a free consultation and quote. ${siteConfig.business.name} is ready to help.`}
-            primaryButtonText="Get Free Quote"
-            primaryButtonUrl="/contact"
-          />
-        </article>
-
-        {/* Related Projects */}
-        <RelatedProjects projects={allProjects} currentSlug={slug} />
-      </div>
+      <OrionProjectDetailPage
+        siteConfig={siteSummary}
+        frontmatter={{
+          title: frontmatter.title,
+          description: frontmatter.description,
+          heroImage: frontmatter.heroImage,
+          outcomes: frontmatter.results,
+        }}
+        mdxContent={mdxContent}
+        breadcrumbs={breadcrumbItems}
+        category={frontmatter.category}
+        locationName={frontmatter.locationName}
+        year={frontmatter.year}
+        duration={frontmatter.duration}
+        projectSummary={<ProjectSummary project={frontmatter} />}
+        clientTestimonial={
+          frontmatter.client?.testimonial
+            ? {
+                text: frontmatter.client.testimonial,
+                type: frontmatter.client.type,
+                rating: frontmatter.client.rating,
+              }
+            : undefined
+        }
+        faqs={frontmatter.faqs}
+        relatedProjects={<RelatedProjectsSection projects={allProjects} currentSlug={slug} />}
+      />
 
       <Schema
         org={{

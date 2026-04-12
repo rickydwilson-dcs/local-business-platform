@@ -1,0 +1,12 @@
+export { LyraHomePage } from './home';
+export { LyraServicesPage } from './services';
+export { LyraServiceDetailPage } from './service-detail';
+export { LyraLocationsPage } from './locations';
+export { LyraLocationDetailPage } from './location-detail';
+export { LyraBlogPage } from './blog';
+export { LyraBlogPostPage } from './blog-post';
+export { LyraProjectsPage } from './projects';
+export { LyraProjectDetailPage } from './project-detail';
+export { LyraReviewsPage } from './reviews';
+export { LyraAboutPage } from './about';
+export { LyraContactPage } from './contact';
