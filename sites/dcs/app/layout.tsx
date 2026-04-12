@@ -5,7 +5,11 @@ import { siteConfig } from '@/site.config';
 import { PHONE_DISPLAY, BUSINESS_EMAIL } from '@/lib/contact-info';
 import { getContentItems } from '@/lib/content';
 import { PageShell, ThemeProvider } from '@platform/core-components';
-import { SolarisHeader, SolarisFooter } from '@platform/themes/solaris/components';
+import {
+  SolarisHeader,
+  SolarisFooter,
+  SolarisScrollReveal,
+} from '@platform/themes/solaris/components';
 import { solarisRegistry } from '@platform/themes/solaris';
 import { ConsentManager } from '@platform/core-components/components/analytics/ConsentManager';
 import { Analytics } from '@platform/core-components/components/analytics/Analytics';
@@ -167,6 +171,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           debugMode={process.env.NODE_ENV === 'development'}
         />
         <AnalyticsDebugPanel enabled={process.env.NODE_ENV === 'development'} />
+        <SolarisScrollReveal />
       </body>
     </html>
   );

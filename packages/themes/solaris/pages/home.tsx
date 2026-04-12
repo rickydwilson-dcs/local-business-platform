@@ -162,7 +162,10 @@ export function SolarisHomePage({
         <div className="max-w-[1200px] mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-4">
             {statItems.map((stat, index) => (
-              <div key={index} className="flex items-center gap-4 justify-center md:justify-start">
+              <div
+                key={index}
+                className={`flex items-center gap-4 justify-center md:justify-start solaris-reveal solaris-stagger-${index + 1}`}
+              >
                 <div className="bg-white/20 p-3 rounded-full shrink-0">
                   <span
                     className="material-symbols-outlined text-white text-3xl leading-none"
@@ -190,7 +193,7 @@ export function SolarisHomePage({
       <section className="py-20 md:py-28 bg-surface-background">
         <div className="max-w-[1200px] mx-auto px-6">
           <div className="text-center mb-14">
-            <h2 className="text-3xl md:text-4xl xl:text-5xl font-bold font-headline text-surface-foreground mb-4">
+            <h2 className="text-3xl md:text-4xl xl:text-5xl font-bold font-headline text-surface-foreground mb-4 solaris-heading">
               What We Do
             </h2>
             <p className="text-lg text-surface-muted-foreground max-w-2xl mx-auto font-body">
@@ -200,11 +203,11 @@ export function SolarisHomePage({
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-            {displayedServices.map((service) => (
+            {displayedServices.map((service, index) => (
               <Link
                 key={service.slug}
                 href={`/services/${service.slug}`}
-                className="block bg-surface-card rounded-[20px] shadow-md solaris-card-hover solaris-card-accent p-6 border border-surface-card-border group"
+                className={`block bg-surface-card rounded-[20px] shadow-md solaris-card-hover solaris-card-accent p-6 border border-surface-card-border group solaris-reveal solaris-stagger-${index + 1}`}
               >
                 <div className="bg-brand-primary/10 w-14 h-14 rounded-2xl flex items-center justify-center mb-5 group-hover:bg-brand-primary/20 transition-colors">
                   <span
@@ -262,7 +265,7 @@ export function SolarisHomePage({
       <section className="py-20 md:py-28 bg-surface-background">
         <div className="max-w-[1200px] mx-auto px-6">
           <div className="text-center mb-14">
-            <h2 className="text-3xl md:text-4xl xl:text-5xl font-bold font-headline text-surface-foreground mb-4">
+            <h2 className="text-3xl md:text-4xl xl:text-5xl font-bold font-headline text-surface-foreground mb-4 solaris-heading">
               Why choose {siteConfig.name}?
             </h2>
             <p className="text-lg text-surface-muted-foreground max-w-2xl mx-auto font-body">
@@ -287,10 +290,10 @@ export function SolarisHomePage({
                 title: "Fixed pricing",
                 body: "No surprise invoices. You get a clear quote upfront and pay exactly that. No hidden extras.",
               },
-            ].map((feature) => (
+            ].map((feature, index) => (
               <div
                 key={feature.icon}
-                className="flex flex-col items-start bg-surface-card rounded-[20px] p-8 border border-surface-card-border shadow-sm"
+                className={`flex flex-col items-start bg-surface-card rounded-[20px] p-8 border border-surface-card-border shadow-sm solaris-reveal solaris-stagger-${index + 1}`}
               >
                 <div className="bg-brand-accent/20 w-14 h-14 rounded-2xl flex items-center justify-center mb-6">
                   <span
@@ -318,17 +321,17 @@ export function SolarisHomePage({
         <section className="py-20 md:py-28 bg-surface-muted">
           <div className="max-w-[1200px] mx-auto px-6">
             <div className="text-center mb-14">
-              <h2 className="text-3xl md:text-4xl xl:text-5xl font-bold font-headline text-surface-foreground mb-4">
+              <h2 className="text-3xl md:text-4xl xl:text-5xl font-bold font-headline text-surface-foreground mb-4 solaris-heading">
                 What our clients say
               </h2>
               <div className="w-16 h-1 bg-brand-accent mx-auto rounded-full" />
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-              {testimonials!.slice(0, 3).map((testimonial) => (
+              {testimonials!.slice(0, 3).map((testimonial, index) => (
                 <div
                   key={testimonial.slug}
-                  className="bg-surface-card rounded-[20px] p-6 border border-surface-card-border shadow-sm flex flex-col"
+                  className={`bg-surface-card rounded-[20px] p-6 border border-surface-card-border shadow-sm flex flex-col solaris-reveal solaris-stagger-${index + 1}`}
                 >
                   {/* Stars */}
                   <div className="flex items-center gap-0.5 mb-4">
@@ -380,7 +383,7 @@ export function SolarisHomePage({
       {/* ─── CTA Banner ──────────────────────────────────────────────────────── */}
       <section className="bg-brand-accent py-16">
         <div className="max-w-[1200px] mx-auto px-6 text-center">
-          <h2 className="text-3xl md:text-4xl xl:text-5xl font-bold font-headline text-[var(--color-surface-foreground)] mb-4">
+          <h2 className="text-3xl md:text-4xl xl:text-5xl font-bold font-headline text-[var(--color-surface-foreground)] mb-4 solaris-heading">
             Ready to get more enquiries?
           </h2>
           <p className="text-lg text-[var(--color-surface-foreground)]/80 font-body mb-10 max-w-xl mx-auto">
