@@ -55,7 +55,7 @@ export function OrderErrorMessage(props: OrderErrorMessageProps) {
           </p>
 
           <a
-            href={props.backHomeLink ?? "/"}
+            href={props.backHomeLink?.[0]?.href ?? "/"}
             className="inline-block text-brand-secondary font-semibold text-base underline underline-offset-4 hover:text-brand-primary transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2 rounded"
           >
             &larr; Back to Home

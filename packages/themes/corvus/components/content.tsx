@@ -26,8 +26,8 @@ export function Content(props: ContentProps) {
           {props.image && (
             <div className="w-full rounded-xl overflow-hidden shadow-md">
               <img
-                src={props.image}
-                alt="Content illustration"
+                src={props.image.src}
+                alt={props.image.alt ?? "Content illustration"}
                 className="w-full h-full object-cover"
               />
             </div>

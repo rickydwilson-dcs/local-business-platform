@@ -36,10 +36,10 @@ export function Stats(props: StatsProps) {
             {(props.statItems && props.statItems.length > 0
               ? props.statItems
               : [
-                  { value: "10K+", label: "Happy Customers" },
-                  { value: "98%", label: "Satisfaction Rate" },
-                  { value: "150+", label: "Countries Served" },
-                  { value: "24/7", label: "Support Available" },
+                  { title: "10K+", description: "Happy Customers" },
+                  { title: "98%", description: "Satisfaction Rate" },
+                  { title: "150+", description: "Countries Served" },
+                  { title: "24/7", description: "Support Available" },
                 ]
             ).map((item, index) => (
               <div
@@ -47,10 +47,10 @@ export function Stats(props: StatsProps) {
                 className="bg-surface-foreground rounded-2xl p-8 text-center shadow-sm border border-surface-muted flex flex-col items-center justify-center"
               >
                 <dt className="text-4xl md:text-5xl font-extrabold text-brand-primary mb-2">
-                  {item.value}
+                  {item.title}
                 </dt>
                 <dd className="text-surface-muted-foreground text-base font-medium">
-                  {item.label}
+                  {item.description}
                 </dd>
               </div>
             ))}

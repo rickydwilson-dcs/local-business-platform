@@ -45,8 +45,8 @@ export function EventPhotoGallery(props: EventPhotoGalleryProps) {
             {props.photo1 && (
               <div className="relative flex-1 min-h-48 md:min-h-64 lg:min-h-80 rounded-xl overflow-hidden group">
                 <img
-                  src={props.photo1}
-                  alt="Event photo 1"
+                  src={props.photo1?.src}
+                  alt={props.photo1?.alt ?? "Event photo 1"}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-brand-primary opacity-0 group-hover:opacity-20 transition-opacity duration-300" />
@@ -56,8 +56,8 @@ export function EventPhotoGallery(props: EventPhotoGalleryProps) {
             {props.photo2 && (
               <div className="relative flex-1 min-h-48 md:min-h-64 lg:min-h-80 rounded-xl overflow-hidden group">
                 <img
-                  src={props.photo2}
-                  alt="Event photo 2"
+                  src={props.photo2?.src}
+                  alt={props.photo2?.alt ?? "Event photo 2"}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-brand-primary opacity-0 group-hover:opacity-20 transition-opacity duration-300" />
@@ -67,8 +67,8 @@ export function EventPhotoGallery(props: EventPhotoGalleryProps) {
             {props.photo3 && (
               <div className="relative flex-1 min-h-48 md:min-h-64 lg:min-h-80 rounded-xl overflow-hidden group">
                 <img
-                  src={props.photo3}
-                  alt="Event photo 3"
+                  src={props.photo3?.src}
+                  alt={props.photo3?.alt ?? "Event photo 3"}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-brand-primary opacity-0 group-hover:opacity-20 transition-opacity duration-300" />
@@ -78,8 +78,8 @@ export function EventPhotoGallery(props: EventPhotoGalleryProps) {
             {props.photo4 && (
               <div className="relative flex-1 min-h-48 md:min-h-64 lg:min-h-80 rounded-xl overflow-hidden group">
                 <img
-                  src={props.photo4}
-                  alt="Event photo 4"
+                  src={props.photo4?.src}
+                  alt={props.photo4?.alt ?? "Event photo 4"}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-brand-primary opacity-0 group-hover:opacity-20 transition-opacity duration-300" />
@@ -89,8 +89,8 @@ export function EventPhotoGallery(props: EventPhotoGalleryProps) {
             {props.photo5 && (
               <div className="relative flex-1 min-h-48 md:min-h-64 lg:min-h-80 rounded-xl overflow-hidden group">
                 <img
-                  src={props.photo5}
-                  alt="Event photo 5"
+                  src={props.photo5?.src}
+                  alt={props.photo5?.alt ?? "Event photo 5"}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-brand-primary opacity-0 group-hover:opacity-20 transition-opacity duration-300" />

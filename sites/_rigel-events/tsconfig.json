@@ -25,9 +25,8 @@
       "@platform/theme-system": ["../../packages/theme-system/src/index.ts"],
       "@platform/theme-system/plugin": ["../../packages/theme-system/src/tailwind-plugin.ts"],
       "@platform/theme-system/*": ["../../packages/theme-system/src/*"],
-      "@platform/themes/rigel": ["../../packages/themes/rigel/index.ts"],
-      "@platform/themes/rigel/components": ["../../packages/themes/rigel/components/index.ts"],
-      "@platform/themes/rigel/pages": ["../../packages/themes/rigel/pages/index.ts"]
+      "@platform/themes/corvus": ["../../packages/themes/corvus/index.ts"],
+      "@platform/themes/corvus/components": ["../../packages/themes/corvus/components/index.ts"]
     }
   },
   "include": [

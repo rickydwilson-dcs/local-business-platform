@@ -84,7 +84,17 @@ export function TopNavBar(props: TopNavBarProps) {
           <div className="flex items-center gap-3 md:gap-4">
             {/* CTA Button — visible on all sizes */}
             {props.ctaButton !== undefined ? (
-              <div className="hidden sm:block">{props.ctaButton}</div>
+              <div className="hidden sm:flex items-center gap-2">
+                {props.ctaButton.map((btn, i) => (
+                  <a
+                    key={i}
+                    href={btn.href ?? "#"}
+                    className="inline-flex items-center justify-center px-4 py-2 rounded-md bg-surface-background text-brand-primary text-sm font-semibold hover:opacity-90 transition-opacity duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-primary"
+                  >
+                    {btn.label}
+                  </a>
+                ))}
+              </div>
             ) : (
               <a
                 href="/get-started"

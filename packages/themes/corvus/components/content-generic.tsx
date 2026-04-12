@@ -36,7 +36,11 @@ export function ContentBlock(props: ContentBlockProps) {
           {props.image && (
             <RevealOnScroll variant="fade-up">
               <div className="w-full overflow-hidden rounded-2xl shadow-md">
-                <img src={props.image} alt="" className="w-full h-full object-cover" />
+                <img
+                  src={props.image.src}
+                  alt={props.image.alt ?? ""}
+                  className="w-full h-full object-cover"
+                />
               </div>
             </RevealOnScroll>
           )}

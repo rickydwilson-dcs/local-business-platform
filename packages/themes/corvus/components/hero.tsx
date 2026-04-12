@@ -12,6 +12,8 @@ import { useState } from "react";
 import { RevealOnScroll } from "@platform/core-components/components/animation";
 
 export interface HeroProps {
+  /** heading */
+  heading?: string;
   /** subheading */
   subheading?: string;
   /** ctaButtons */

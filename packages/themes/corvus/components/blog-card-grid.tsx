@@ -44,7 +44,7 @@ export function BlogPreviewGrid(props: BlogPreviewGridProps) {
         <RevealOnScroll variant="fade-up">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {Array.isArray(props.postTitle) ? (
-              props.postTitle.map((title: string, index: number) => (
+              props.postTitle.map((postTitleItem, index: number) => (
                 <article
                   key={index}
                   className="bg-surface-foreground rounded-2xl overflow-hidden shadow-sm border border-surface-muted flex flex-col"
@@ -52,8 +52,8 @@ export function BlogPreviewGrid(props: BlogPreviewGridProps) {
                   {props.postThumbnail && props.postThumbnail[index] && (
                     <div className="w-full h-52 md:h-64 overflow-hidden">
                       <img
-                        src={props.postThumbnail[index]}
-                        alt={title}
+                        src={props.postThumbnail[index].image}
+                        alt={postTitleItem.title ?? "Blog post"}
                         className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
                       />
                     </div>
@@ -62,17 +62,17 @@ export function BlogPreviewGrid(props: BlogPreviewGridProps) {
                   <div className="p-6 flex flex-col flex-1">
                     {props.postDate && props.postDate[index] && (
                       <p className="text-surface-muted-foreground text-sm mb-2 uppercase tracking-wide">
-                        {props.postDate[index]}
+                        {props.postDate[index].title}
                       </p>
                     )}
 
                     <h3 className="text-xl font-semibold text-surface-foreground mb-3 leading-snug">
-                      {title}
+                      {postTitleItem.title}
                     </h3>
 
                     {props.postExcerpt && props.postExcerpt[index] && (
                       <p className="text-surface-muted-foreground text-base leading-relaxed mb-6 flex-1">
-                        {props.postExcerpt[index]}
+                        {props.postExcerpt[index].description}
                       </p>
                     )}
 
@@ -94,8 +94,8 @@ export function BlogPreviewGrid(props: BlogPreviewGridProps) {
                 {props.postThumbnail && (
                   <div className="w-full h-52 md:h-64 overflow-hidden">
                     <img
-                      src={props.postThumbnail}
-                      alt={props.postTitle || "Blog post"}
+                      src={props.postThumbnail?.[0]?.image}
+                      alt="Blog post"
                       className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
                     />
                   </div>
@@ -104,29 +104,29 @@ export function BlogPreviewGrid(props: BlogPreviewGridProps) {
                 <div className="p-6 flex flex-col flex-1">
                   {props.postDate && (
                     <p className="text-surface-muted-foreground text-sm mb-2 uppercase tracking-wide">
-                      {props.postDate}
+                      {props.postDate?.[0]?.title}
                     </p>
                   )}
 
                   {props.postTitle && (
                     <h3 className="text-xl font-semibold text-surface-foreground mb-3 leading-snug">
-                      {props.postTitle}
+                      {"Blog post"}
                     </h3>
                   )}
 
                   {props.postExcerpt && (
                     <p className="text-surface-muted-foreground text-base leading-relaxed mb-6 flex-1">
-                      {props.postExcerpt}
+                      {props.postExcerpt?.[0]?.description}
                     </p>
                   )}
 
                   {props.readMoreButton && (
                     <div className="mt-auto">
                       <a
-                        href={props.readMoreButton.href || "#"}
+                        href={props.readMoreButton?.[0]?.href || "#"}
                         className="inline-block border border-brand-primary text-brand-primary text-sm font-medium px-5 py-2 rounded-full hover:bg-brand-primary hover:text-on-brand-primary transition-colors duration-200"
                       >
-                        {props.readMoreButton.label || "Read More"}
+                        {props.readMoreButton?.[0]?.label || "Read More"}
                       </a>
                     </div>
                   )}

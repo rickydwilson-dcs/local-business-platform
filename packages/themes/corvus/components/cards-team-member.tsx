@@ -62,7 +62,7 @@ export function TeamMemberCard(props: TeamMemberCardProps) {
               <div className="mt-8 flex flex-wrap gap-4 items-center">
                 {props.linkedinLink && (
                   <a
-                    href={props.linkedinLink}
+                    href={props.linkedinLink?.[0]?.href ?? "#"}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-brand-primary text-on-brand-primary font-semibold text-sm hover:opacity-90 transition-opacity duration-200 focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2"
@@ -77,13 +77,13 @@ export function TeamMemberCard(props: TeamMemberCardProps) {
                     >
                       <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-10h3v10zm-1.5-11.268c-.966 0-1.75-.784-1.75-1.75s.784-1.75 1.75-1.75 1.75.784 1.75 1.75-.784 1.75-1.75 1.75zm13.5 11.268h-3v-5.604c0-1.337-.025-3.063-1.868-3.063-1.869 0-2.155 1.46-2.155 2.967v5.7h-3v-10h2.881v1.367h.041c.401-.761 1.381-1.563 2.844-1.563 3.042 0 3.604 2.003 3.604 4.609v5.587z" />
                     </svg>
-                    LinkedIn
+                    {props.linkedinLink?.[0]?.label ?? "LinkedIn"}
                   </a>
                 )}
 
                 {props.externalLink && (
                   <a
-                    href={props.externalLink}
+                    href={props.externalLink?.[0]?.href ?? "#"}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-brand-primary text-brand-primary font-semibold text-sm hover:bg-brand-primary hover:text-on-brand-primary transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2"
@@ -104,7 +104,7 @@ export function TeamMemberCard(props: TeamMemberCardProps) {
                         d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
                       />
                     </svg>
-                    Visit Website
+                    {props.externalLink?.[0]?.label ?? "Visit Website"}
                   </a>
                 )}
               </div>

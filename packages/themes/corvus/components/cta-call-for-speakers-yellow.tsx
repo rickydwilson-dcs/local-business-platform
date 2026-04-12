@@ -39,9 +39,9 @@ export function CallForSpeakersCTA(props: CallForSpeakersCTAProps) {
         <div className="flex-shrink-0">
           <button
             className="inline-block bg-surface-background text-brand-primary font-semibold text-base md:text-lg px-8 py-4 rounded-md border-2 border-surface-background hover:bg-transparent hover:text-surface-background transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-surface-background focus:ring-offset-2 focus:ring-offset-brand-primary"
-            aria-label={props.ctaButton ?? "Apply to speak at the event"}
+            aria-label={props.ctaButton?.[0]?.label ?? "Apply to speak at the event"}
           >
-            {props.ctaButton ?? "Apply to Speak"}
+            {props.ctaButton?.[0]?.label ?? "Apply to Speak"}
           </button>
         </div>
       </div>

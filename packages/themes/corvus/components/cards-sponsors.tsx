@@ -45,13 +45,13 @@ export function CardsSponsors(props: CardsSponsorsProps) {
                   {card.image && (
                     <img
                       src={card.image}
-                      alt={card.alt || card.name || `Sponsor ${index + 1}`}
+                      alt={card.title || `Sponsor ${index + 1}`}
                       className="max-h-16 md:max-h-20 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300"
                     />
                   )}
-                  {!card.image && card.name && (
+                  {!card.image && card.title && (
                     <span className="text-surface-muted-foreground font-semibold text-sm md:text-base text-center">
-                      {card.name}
+                      {card.title}
                     </span>
                   )}
                 </div>
@@ -60,25 +60,16 @@ export function CardsSponsors(props: CardsSponsorsProps) {
           </RevealOnScroll>
         )}
 
-        {props.cardImages && props.cardImages.length > 0 && !props.cards && (
+        {props.cardImages && !props.cards && (
           <RevealOnScroll variant="fade-up">
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8">
-              {props.cardImages.map((image, index) => (
-                <div
-                  key={index}
-                  className="bg-surface-foreground rounded-xl shadow-sm border border-surface-muted flex items-center justify-center p-6 md:p-8 hover:shadow-md transition-shadow duration-300"
-                >
-                  <img
-                    src={typeof image === "string" ? image : image.src}
-                    alt={
-                      typeof image === "string"
-                        ? `Sponsor ${index + 1}`
-                        : image.alt || `Sponsor ${index + 1}`
-                    }
-                    className="max-h-16 md:max-h-20 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300"
-                  />
-                </div>
-              ))}
+              <div className="bg-surface-foreground rounded-xl shadow-sm border border-surface-muted flex items-center justify-center p-6 md:p-8 hover:shadow-md transition-shadow duration-300">
+                <img
+                  src={props.cardImages.src}
+                  alt={props.cardImages.alt || "Sponsor"}
+                  className="max-h-16 md:max-h-20 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300"
+                />
+              </div>
             </div>
           </RevealOnScroll>
         )}

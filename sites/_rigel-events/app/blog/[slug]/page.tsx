@@ -1,19 +1,19 @@
 /**
- * Blog Post Detail Page — thin wrapper
+ * Blog Post Detail Page
  *
- * Fetches post data and MDX content, builds schema, delegates rendering to RigelBlogPostPage.
+ * Fetches post data and MDX content, renders with corvus theme layout.
  */
 
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Schema } from "@platform/core-components";
 import { getBlogPosts, getBlogPost, calculateReadingTime } from "@/lib/content";
 import { getImageUrl } from "@/lib/image";
 import { absUrl } from "@/lib/site";
 import { loadMdx } from "@/lib/mdx";
 import { siteConfig } from "@/site.config";
-import type { SiteConfigSummary, BlogPostSummary, BreadcrumbItem } from "@platform/core-components";
-import { RigelBlogPostPage } from "@platform/themes/rigel/pages";
+import { PageTitleBanner } from "@platform/themes/corvus/components";
 
 export const dynamic = "force-static";
 export const dynamicParams = false;
@@ -87,7 +87,7 @@ export default async function BlogPostPage({ params }: { params: Promise<Params>
   const allPosts = await getBlogPosts();
   const readingTime = frontmatter.readingTime || calculateReadingTime(rawContent);
 
-  const relatedPosts: BlogPostSummary[] = allPosts
+  const relatedPosts = allPosts
     .filter((p) => p.slug !== slug)
     .slice(0, 3)
     .map((p) => ({
@@ -96,48 +96,80 @@ export default async function BlogPostPage({ params }: { params: Promise<Params>
       excerpt: p.excerpt,
       date: p.date,
       category: p.category,
-      heroImage: p.heroImage,
-      readingTime: p.readingTime,
-      author: p.author ? { name: p.author.name } : undefined,
     }));
-
-  const breadcrumbs: BreadcrumbItem[] = [
-    { name: "Blog", href: "/blog" },
-    { name: frontmatter.title, href: `/blog/${slug}`, current: true },
-  ];
-
-  const siteSummary: SiteConfigSummary = {
-    name: siteConfig.business.name,
-    tagline: siteConfig.tagline,
-    phone: siteConfig.business.phone ?? "",
-    phoneDisplay: siteConfig.business.phone ?? "",
-    address: {
-      city: siteConfig.business.address.city,
-      county: siteConfig.business.address.region,
-    },
-    cta: siteConfig.cta,
-    stats: siteConfig.credentials.stats,
-  };
 
   return (
     <>
-      <RigelBlogPostPage
-        siteConfig={siteSummary}
-        frontmatter={{
-          title: frontmatter.title,
-          description: frontmatter.description,
-          date: frontmatter.date,
-          category: frontmatter.category,
-          heroImage: frontmatter.heroImage,
-          author: frontmatter.author,
-          tags: frontmatter.tags,
-        }}
-        mdxContent={mdxContent}
-        relatedPosts={relatedPosts}
-        breadcrumbs={breadcrumbs}
-        slug={slug}
-        readingTime={readingTime}
-      />
+      <PageTitleBanner pageTitle={frontmatter.title} />
+
+      <section className="bg-surface-background py-16 px-4">
+        <div className="max-w-4xl mx-auto">
+          {/* Breadcrumbs */}
+          <nav className="mb-8 text-sm text-surface-muted-foreground">
+            <Link href="/" className="hover:text-brand-primary transition-colors">
+              Home
+            </Link>
+            <span className="mx-2">/</span>
+            <Link href="/blog" className="hover:text-brand-primary transition-colors">
+              Blog
+            </Link>
+            <span className="mx-2">/</span>
+            <span className="text-surface-foreground">{frontmatter.title}</span>
+          </nav>
+
+          {/* Post meta */}
+          <div className="flex flex-wrap gap-4 items-center text-sm text-surface-muted-foreground mb-8">
+            {frontmatter.category && (
+              <span className="text-brand-primary font-semibold uppercase tracking-wider text-xs">
+                {frontmatter.category}
+              </span>
+            )}
+            {frontmatter.date && <span>{frontmatter.date}</span>}
+            {readingTime && <span>{readingTime} min read</span>}
+            {frontmatter.author && <span>By {frontmatter.author.name}</span>}
+          </div>
+
+          {/* MDX content */}
+          <div className="prose prose-lg max-w-none prose-headings:text-surface-foreground prose-p:text-surface-muted-foreground prose-a:text-brand-primary">
+            {mdxContent}
+          </div>
+
+          {/* Related posts */}
+          {relatedPosts.length > 0 && (
+            <div className="mt-16 pt-8 border-t border-surface-border">
+              <h2 className="text-2xl font-bold text-surface-foreground mb-6">Related Posts</h2>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {relatedPosts.map((rp) => (
+                  <Link
+                    key={rp.slug}
+                    href={`/blog/${rp.slug}`}
+                    className="group bg-surface-card border border-surface-border rounded-xl p-5 hover:shadow-md transition-shadow"
+                  >
+                    <h3 className="font-semibold text-surface-foreground group-hover:text-brand-primary transition-colors mb-2">
+                      {rp.title}
+                    </h3>
+                    {rp.excerpt && (
+                      <p className="text-surface-muted-foreground text-sm line-clamp-2">
+                        {rp.excerpt}
+                      </p>
+                    )}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Back link */}
+          <div className="mt-12 pt-8 border-t border-surface-border">
+            <Link
+              href="/blog"
+              className="text-brand-primary font-semibold hover:text-brand-primary-hover transition-colors"
+            >
+              &larr; Back to all posts
+            </Link>
+          </div>
+        </div>
+      </section>
 
       <Schema
         org={{

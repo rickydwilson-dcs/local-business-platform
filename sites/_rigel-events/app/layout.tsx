@@ -3,8 +3,8 @@ import "./globals.css";
 import { siteConfig } from "@/site.config";
 import { PHONE_DISPLAY, PHONE_TEL } from "@/lib/contact-info";
 import { PageShell, ThemeProvider } from "@platform/core-components";
-import { RigelHeader, SiteFooter } from "@platform/themes/rigel/components";
-import { rigelRegistry } from "@platform/themes/rigel";
+import { CorvusHeader, CorvusFooter } from "@platform/themes/corvus/components";
+import { corvusRegistry } from "@platform/themes/corvus";
 import { ConsentManager } from "@platform/core-components/components/analytics/ConsentManager";
 import { Analytics } from "@platform/core-components/components/analytics/Analytics";
 import { AnalyticsDebugPanel } from "@platform/core-components/components/analytics/AnalyticsDebugPanel";
@@ -54,9 +54,6 @@ export const viewport: Viewport = {
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  // Event site: no services or locations — navigation is event-specific
-  const locationItems: Array<{ name: string; slug: string }> = [];
-
   return (
     <html lang="en-GB">
       <head>
@@ -76,20 +73,17 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         )}
       </head>
       <body className="min-h-screen flex flex-col">
-        <ThemeProvider theme="rigel" registry={rigelRegistry}>
+        <ThemeProvider theme="corvus" registry={corvusRegistry}>
           <PageShell
             header={
-              <RigelHeader
-                siteName={siteConfig.business.name}
-                phoneDisplay={PHONE_DISPLAY}
-                phoneTel={PHONE_TEL}
-                showPhone={siteConfig.cta.phone.show}
-                primaryCta={siteConfig.cta.primary}
-                navigation={siteConfig.navigation.main}
-                locations={locationItems}
+              <CorvusHeader
+                logo={siteConfig.business.name}
+                ctaButton={[
+                  { label: siteConfig.cta.primary.label, href: siteConfig.cta.primary.href },
+                ]}
               />
             }
-            footer={<SiteFooter />}
+            footer={<CorvusFooter copyrightText={siteConfig.footer.copyright} />}
           >
             {children}
           </PageShell>

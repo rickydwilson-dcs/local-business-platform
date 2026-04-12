@@ -45,11 +45,11 @@ export function ColorCodeEventsAbout(props: ColorCodeEventsAboutProps) {
 
               <div>
                 <a
-                  href={props.ctaButton?.url ?? "#"}
+                  href={props.ctaButton?.[0]?.href ?? "#"}
                   className="inline-block bg-brand-accent text-on-brand-secondary font-semibold text-base px-8 py-4 rounded-full transition-transform duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-brand-accent focus:ring-offset-2 focus:ring-offset-brand-primary"
-                  aria-label={props.ctaButton?.label ?? "Learn more about ColorCode Events"}
+                  aria-label={props.ctaButton?.[0]?.label ?? "Learn more about ColorCode Events"}
                 >
-                  {props.ctaButton?.label ?? "Learn More"}
+                  {props.ctaButton?.[0]?.label ?? "Learn More"}
                 </a>
               </div>
             </div>

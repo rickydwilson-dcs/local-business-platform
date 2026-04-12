@@ -38,12 +38,12 @@ export function BlogPostBody(props: BlogPostBodyProps) {
         <header className="mb-8">
           {props.postTitle && (
             <h1 className="text-4xl md:text-5xl font-bold text-surface-foreground leading-tight mb-3">
-              {props.postTitle}
+              {props.postTitle?.[0]?.title}
             </h1>
           )}
           {props.postDate && (
             <time className="text-surface-muted-foreground text-sm md:text-base">
-              {props.postDate}
+              {props.postDate?.[0]?.title}
             </time>
           )}
           <div className="mt-4 border-b border-surface-muted" />
@@ -56,8 +56,8 @@ export function BlogPostBody(props: BlogPostBodyProps) {
             {props.inlineImageRight && (
               <div className="float-right ml-6 mb-4 w-full max-w-xs rounded-lg overflow-hidden shadow-md">
                 <img
-                  src={props.inlineImageRight}
-                  alt="Inline illustration"
+                  src={props.inlineImageRight.src}
+                  alt={props.inlineImageRight.alt ?? "Inline illustration"}
                   className="w-full h-auto object-cover"
                 />
               </div>
@@ -66,7 +66,7 @@ export function BlogPostBody(props: BlogPostBodyProps) {
             {/* Body Text */}
             {props.postBodyText && (
               <p className="text-surface-foreground text-base md:text-lg leading-relaxed mb-6">
-                {props.postBodyText}
+                {props.postBodyText?.[0]?.description}
               </p>
             )}
 
@@ -77,8 +77,8 @@ export function BlogPostBody(props: BlogPostBodyProps) {
             {props.inlineImageLeft && (
               <div className="mr-6 mb-4 w-full max-w-xs rounded-lg overflow-hidden shadow-md">
                 <img
-                  src={props.inlineImageLeft}
-                  alt="Inline illustration"
+                  src={props.inlineImageLeft.src}
+                  alt={props.inlineImageLeft.alt ?? "Inline illustration"}
                   className="w-full h-auto object-cover"
                 />
               </div>
@@ -96,7 +96,7 @@ export function BlogPostBody(props: BlogPostBodyProps) {
                     key={index}
                     className="text-surface-foreground text-base md:text-lg leading-relaxed"
                   >
-                    {item}
+                    {item.label}
                   </li>
                 ))}
               </ol>
@@ -120,7 +120,7 @@ export function BlogPostBody(props: BlogPostBodyProps) {
         {props.backToBlogLink && (
           <div className="mt-8">
             <a
-              href={props.backToBlogLink}
+              href={props.backToBlogLink?.[0]?.href ?? "#"}
               className="inline-flex items-center gap-2 text-brand-primary hover:text-brand-secondary font-medium text-sm md:text-base transition-colors duration-200"
               aria-label="Back to blog listing"
             >
@@ -135,7 +135,7 @@ export function BlogPostBody(props: BlogPostBodyProps) {
               >
                 <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
               </svg>
-              Back to Blog
+              {props.backToBlogLink?.[0]?.label ?? "Back to Blog"}
             </a>
           </div>
         )}

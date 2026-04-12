@@ -85,7 +85,7 @@ export function NewsletterSignupCTA(props: NewsletterSignupCTAProps) {
                       transition-opacity duration-200
                     "
                 >
-                  {props.submitButton ?? "Subscribe Now"}
+                  {props.submitButton?.[0]?.label ?? "Subscribe Now"}
                 </button>
               </form>
               <p className="mt-3 text-on-brand-primary text-xs opacity-60">
