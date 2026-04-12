@@ -37,11 +37,11 @@ export function CallForVolunteersCTA(props: CallForVolunteersCTAProps) {
             </div>
             <div className="flex-shrink-0">
               <a
-                href={props.ctaButton?.url ?? "#apply"}
+                href={props.ctaButton?.[0]?.href ?? "#apply"}
                 className="inline-block border-2 border-surface-background text-on-brand-primary font-semibold text-base md:text-lg px-8 py-4 rounded-md hover:bg-surface-background hover:text-brand-primary transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-surface-background focus:ring-offset-2 focus:ring-offset-brand-primary"
-                aria-label={props.ctaButton?.label ?? "Apply to volunteer"}
+                aria-label={props.ctaButton?.[0]?.label ?? "Apply to volunteer"}
               >
-                {props.ctaButton?.label ?? "Apply Now"}
+                {props.ctaButton?.[0]?.label ?? "Apply Now"}
               </a>
             </div>
           </div>

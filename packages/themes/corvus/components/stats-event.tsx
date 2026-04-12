@@ -15,7 +15,15 @@ export interface EventStatsProps {
   /** heading */
   heading?: string;
   /** statItems */
-  statItems?: Array<{ title?: string; description?: string; image?: string; href?: string }>;
+  statItems?: Array<{
+    title?: string;
+    value?: string;
+    label?: string;
+    icon?: string;
+    description?: string;
+    image?: string;
+    href?: string;
+  }>;
 }
 
 export function EventStats(props: EventStatsProps) {

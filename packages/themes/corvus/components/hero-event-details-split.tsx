@@ -35,7 +35,7 @@ export function EventDetailsBanner(props: EventDetailsBannerProps) {
         {props.backgroundImage && (
           <div
             className="absolute inset-0 bg-cover bg-center opacity-20"
-            style={{ backgroundImage: `url(${props.backgroundImage})` }}
+            style={{ backgroundImage: `url(${props.backgroundImage?.src})` }}
             aria-hidden="true"
           />
         )}
@@ -153,10 +153,10 @@ export function EventDetailsBanner(props: EventDetailsBannerProps) {
           {props.ctaButton && (
             <div className="animate-fade-in-up">
               <a
-                href={props.ctaButton.url ?? "#"}
+                href={props.ctaButton[0]?.href ?? "#"}
                 className="inline-block bg-brand-accent text-on-brand-secondary font-bold text-sm uppercase tracking-wider px-8 py-4 rounded-sm hover:opacity-90 transition-opacity duration-200 focus:outline-none focus:ring-2 focus:ring-brand-accent focus:ring-offset-2 focus:ring-offset-surface-inverse"
               >
-                {props.ctaButton.label ?? "Register Now"}
+                {props.ctaButton[0]?.label ?? "Register Now"}
               </a>
             </div>
           )}
@@ -167,8 +167,8 @@ export function EventDetailsBanner(props: EventDetailsBannerProps) {
       <div className="relative w-full md:w-1/2 min-h-[400px] md:min-h-0 overflow-hidden">
         {props.backgroundImage ? (
           <img
-            src={props.backgroundImage}
-            alt="Event speaker or highlight"
+            src={props.backgroundImage?.src}
+            alt={props.backgroundImage?.alt ?? "Event speaker or highlight"}
             className="absolute inset-0 w-full h-full object-cover object-top animate-scale-up"
           />
         ) : (

@@ -15,12 +15,28 @@ export interface HowItStartedSectionProps {
   /** section-heading */
   sectionHeading?: string;
   /** decorative-arrows */
-  decorativeArrows?: string;
+  decorativeArrows?: string | string[];
   /** body-text-paragraphs */
-  bodyTextParagraphs?: string;
+  bodyTextParagraphs?: string | string[];
 }
 
 export function HowItStartedSection(props: HowItStartedSectionProps) {
+  const arrows = Array.isArray(props.decorativeArrows)
+    ? props.decorativeArrows
+    : typeof props.decorativeArrows === "string"
+      ? [props.decorativeArrows]
+      : ["→", "→", "→"];
+
+  const paragraphs = Array.isArray(props.bodyTextParagraphs)
+    ? props.bodyTextParagraphs
+    : typeof props.bodyTextParagraphs === "string"
+      ? [props.bodyTextParagraphs]
+      : [
+          "ColorCode Events was born out of a simple frustration: why do so many events feel the same? We believed that colour could transform the way people connect, celebrate, and create memories together.",
+          "What started as a small gathering of friends experimenting with themed colour palettes quickly grew into something far bigger. Word spread, communities formed, and ColorCode became a movement.",
+          "Today, we bring that same founding energy to every event we produce — bold, vibrant, and unapologetically alive with colour. Every detail is intentional, every palette tells a story.",
+        ];
+
   return (
     <section className="bg-brand-primary py-20 px-6 md:px-12 lg:px-24">
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
@@ -34,7 +50,7 @@ export function HowItStartedSection(props: HowItStartedSectionProps) {
 
           {/* Decorative Arrow Row */}
           <div className="flex items-center gap-3 mt-2">
-            {(props.decorativeArrows ?? ["→", "→", "→"]).map((arrow: string, index: number) => (
+            {arrows.map((arrow: string, index: number) => (
               <span
                 key={index}
                 className="text-brand-accent text-3xl md:text-4xl font-bold animate-fade-in-up"
@@ -50,13 +66,7 @@ export function HowItStartedSection(props: HowItStartedSectionProps) {
         {/* Right Column: Multi-paragraph Body Text */}
         <RevealOnScroll variant="fade-up">
           <div className="flex flex-col gap-6">
-            {(
-              props.bodyTextParagraphs ?? [
-                "ColorCode Events was born out of a simple frustration: why do so many events feel the same? We believed that colour could transform the way people connect, celebrate, and create memories together.",
-                "What started as a small gathering of friends experimenting with themed colour palettes quickly grew into something far bigger. Word spread, communities formed, and ColorCode became a movement.",
-                "Today, we bring that same founding energy to every event we produce — bold, vibrant, and unapologetically alive with colour. Every detail is intentional, every palette tells a story.",
-              ]
-            ).map((paragraph: string, index: number) => (
+            {paragraphs.map((paragraph: string, index: number) => (
               <p
                 key={index}
                 className="text-surface-secondary-foreground text-base md:text-lg leading-relaxed"

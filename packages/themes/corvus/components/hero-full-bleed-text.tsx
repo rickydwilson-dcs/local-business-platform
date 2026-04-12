@@ -22,7 +22,7 @@ export function HeroFullBleedText(props: HeroFullBleedTextProps) {
   return (
     <section className="relative min-h-screen bg-surface-inverse overflow-hidden flex items-center">
       {/* Decorative background shapes */}
-      {props.decorativeShapes !== false && (
+      {props.decorativeShapes !== "false" && (
         <>
           <div className="absolute top-0 right-0 w-64 h-64 md:w-96 md:h-96 bg-brand-primary opacity-20 rounded-full translate-x-1/2 -translate-y-1/2 blur-3xl pointer-events-none" />
           <div className="absolute bottom-0 left-0 w-48 h-48 md:w-72 md:h-72 bg-brand-secondary opacity-15 rounded-full -translate-x-1/3 translate-y-1/3 blur-2xl pointer-events-none" />

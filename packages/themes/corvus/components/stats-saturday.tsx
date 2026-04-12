@@ -15,7 +15,14 @@ export interface StatsSaturdayProps {
   /** heading */
   heading?: string;
   /** statItems */
-  statItems?: Array<{ title?: string; description?: string; image?: string; href?: string }>;
+  statItems?: Array<{
+    title?: string;
+    value?: string;
+    label?: string;
+    description?: string;
+    image?: string;
+    href?: string;
+  }>;
 }
 
 export function StatsSaturday(props: StatsSaturdayProps) {

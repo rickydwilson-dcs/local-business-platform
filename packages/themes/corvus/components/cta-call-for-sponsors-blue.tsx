@@ -39,11 +39,11 @@ export function CallForSponsorsCTA(props: CallForSponsorsCTAProps) {
         <RevealOnScroll variant="fade-up">
           <div className="flex md:flex-shrink-0 md:items-center justify-end md:justify-start">
             <a
-              href={props.ctaButton?.href ?? "#sponsorship-levels"}
+              href={props.ctaButton?.[0]?.href ?? "#sponsorship-levels"}
               className="inline-block border-2 border-surface-background text-on-brand-primary font-semibold text-base md:text-lg px-8 py-4 rounded-lg hover:bg-surface-background hover:text-brand-primary transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-surface-background focus:ring-offset-2 focus:ring-offset-brand-primary"
-              aria-label={props.ctaButton?.label ?? "View sponsorship levels"}
+              aria-label={props.ctaButton?.[0]?.label ?? "View sponsorship levels"}
             >
-              {props.ctaButton?.label ?? "View Sponsorship Levels"}
+              {props.ctaButton?.[0]?.label ?? "View Sponsorship Levels"}
             </a>
           </div>
         </RevealOnScroll>
