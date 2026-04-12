@@ -1,28 +1,32 @@
-import type { Metadata, Viewport } from "next";
-import { Space_Grotesk, Inter } from "next/font/google";
-import "./globals.css";
-import { siteConfig } from "@/site.config";
-import { PHONE_DISPLAY, BUSINESS_EMAIL } from "@/lib/contact-info";
-import { getContentItems } from "@/lib/content";
-import { PageShell, ThemeProvider } from "@platform/core-components";
-import { SolarisHeader, SolarisFooter } from "@platform/themes/solaris/components";
-import { solarisRegistry } from "@platform/themes/solaris";
-import { ConsentManager } from "@platform/core-components/components/analytics/ConsentManager";
-import { Analytics } from "@platform/core-components/components/analytics/Analytics";
-import { AnalyticsDebugPanel } from "@platform/core-components/components/analytics/AnalyticsDebugPanel";
+import type { Metadata, Viewport } from 'next';
+import { Space_Grotesk, Inter } from 'next/font/google';
+import './globals.css';
+import { siteConfig } from '@/site.config';
+import { PHONE_DISPLAY, BUSINESS_EMAIL } from '@/lib/contact-info';
+import { getContentItems } from '@/lib/content';
+import { PageShell, ThemeProvider } from '@platform/core-components';
+import {
+  SolarisHeader,
+  SolarisFooter,
+  SolarisScrollReveal,
+} from '@platform/themes/solaris/components';
+import { solarisRegistry } from '@platform/themes/solaris';
+import { ConsentManager } from '@platform/core-components/components/analytics/ConsentManager';
+import { Analytics } from '@platform/core-components/components/analytics/Analytics';
+import { AnalyticsDebugPanel } from '@platform/core-components/components/analytics/AnalyticsDebugPanel';
 
 const spaceGrotesk = Space_Grotesk({
-  subsets: ["latin"],
-  variable: "--font-space-grotesk",
-  display: "swap",
-  weight: ["400", "500", "600", "700"],
+  subsets: ['latin'],
+  variable: '--font-space-grotesk',
+  display: 'swap',
+  weight: ['400', '500', '600', '700'],
 });
 
 const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-  weight: ["400", "500", "600"],
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap',
+  weight: ['400', '500', '600'],
 });
 
 export const metadata: Metadata = {
@@ -33,17 +37,17 @@ export const metadata: Metadata = {
   description: siteConfig.tagline,
   metadataBase: new URL(siteConfig.url),
   icons: {
-    icon: "/favicon.svg",
-    shortcut: "/favicon.svg",
+    icon: '/favicon.svg',
+    shortcut: '/favicon.svg',
   },
   openGraph: {
-    type: "website",
-    locale: "en_GB",
+    type: 'website',
+    locale: 'en_GB',
     siteName: siteConfig.name,
     url: siteConfig.url,
     images: [
       {
-        url: "/logo.svg",
+        url: '/logo.svg',
         width: 1200,
         height: 630,
         alt: siteConfig.name,
@@ -51,13 +55,13 @@ export const metadata: Metadata = {
     ],
   },
   twitter: {
-    card: "summary_large_image",
-    images: ["/logo.svg"],
+    card: 'summary_large_image',
+    images: ['/logo.svg'],
   },
 };
 
 export const viewport: Viewport = {
-  width: "device-width",
+  width: 'device-width',
   initialScale: 1,
   maximumScale: 5,
   userScalable: true,
@@ -65,8 +69,8 @@ export const viewport: Viewport = {
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const [allServices, allLocations] = await Promise.all([
-    getContentItems("services"),
-    getContentItems("locations"),
+    getContentItems('services'),
+    getContentItems('locations'),
   ]);
 
   return (
@@ -92,6 +96,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <PageShell
             header={
               <SolarisHeader
+                logoSrc="/logo.svg"
+                logoAlt="DCS Gardening & Landscaping"
                 logoText="DCS"
                 navItems={siteConfig.navigation.main}
                 ctaLabel={siteConfig.cta.primary.label}
@@ -102,20 +108,22 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             }
             footer={
               <SolarisFooter
+                logoSrc="/logo.svg"
+                logoAlt="DCS Gardening & Landscaping"
                 logoText="DCS"
                 tagline={siteConfig.tagline}
                 copyright={siteConfig.footer.copyright}
                 navColumns={[
                   {
-                    heading: "Services",
+                    heading: 'Services',
                     links: siteConfig.services.map((s) => ({
                       label: s.title,
                       href: `/services/${s.slug}`,
                     })),
                   },
                   {
-                    heading: "Locations",
-                    links: ["Polegate", "Eastbourne", "Brighton", "Hove", "Lewes", "Seaford"].map(
+                    heading: 'Locations',
+                    links: ['Polegate', 'Eastbourne', 'Brighton', 'Hove', 'Lewes', 'Seaford'].map(
                       (l) => ({
                         label: l,
                         href: `/locations/${l.toLowerCase()}`,
@@ -123,13 +131,13 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                     ),
                   },
                   {
-                    heading: "Company",
+                    heading: 'Company',
                     links: [
-                      { label: "About", href: "/about" },
-                      { label: "Portfolio", href: "/projects" },
-                      { label: "Pricing", href: "/pricing" },
-                      { label: "Blog", href: "/blog" },
-                      { label: "Contact", href: "/contact" },
+                      { label: 'About', href: '/about' },
+                      { label: 'Portfolio', href: '/projects' },
+                      { label: 'Pricing', href: '/pricing' },
+                      { label: 'Blog', href: '/blog' },
+                      { label: 'Contact', href: '/contact' },
                     ],
                   },
                 ]}
@@ -137,7 +145,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                   phone: PHONE_DISPLAY,
                   email: BUSINESS_EMAIL,
                 }}
-                legal={{ privacyHref: "/privacy-policy" }}
+                legal={{ privacyHref: '/privacy-policy' }}
               />
             }
           >
@@ -146,13 +154,13 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         </ThemeProvider>
 
         <ConsentManager
-          enabled={process.env.NEXT_PUBLIC_FEATURE_CONSENT_BANNER === "true"}
+          enabled={process.env.NEXT_PUBLIC_FEATURE_CONSENT_BANNER === 'true'}
           config={{
-            title: "We value your privacy",
+            title: 'We value your privacy',
             description:
-              "We use cookies to provide a better service and understand how you use our site.",
-            privacyPolicyUrl: "/privacy-policy",
-            cookiePolicyUrl: "/cookie-policy",
+              'We use cookies to provide a better service and understand how you use our site.',
+            privacyPolicyUrl: '/privacy-policy',
+            cookiePolicyUrl: '/cookie-policy',
           }}
           reloadOnConsent={false}
         />
@@ -160,9 +168,10 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           gaId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}
           facebookPixelId={process.env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID}
           googleAdsId={process.env.NEXT_PUBLIC_GOOGLE_ADS_CUSTOMER_ID}
-          debugMode={process.env.NODE_ENV === "development"}
+          debugMode={process.env.NODE_ENV === 'development'}
         />
-        <AnalyticsDebugPanel enabled={process.env.NODE_ENV === "development"} />
+        <AnalyticsDebugPanel enabled={process.env.NODE_ENV === 'development'} />
+        <SolarisScrollReveal />
       </body>
     </html>
   );

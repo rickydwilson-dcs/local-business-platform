@@ -2,6 +2,8 @@ import Link from "next/link";
 
 export interface SolarisHeaderProps {
   logoText?: string;
+  logoSrc?: string;
+  logoAlt?: string;
   navItems: { label: string; href: string }[];
   ctaLabel?: string;
   ctaHref?: string;
@@ -11,6 +13,8 @@ export interface SolarisHeaderProps {
 
 export function SolarisHeader({
   logoText = "DCS",
+  logoSrc,
+  logoAlt,
   navItems,
   ctaLabel = "Get in touch",
   ctaHref = "#contact",
@@ -35,7 +39,18 @@ export function SolarisHeader({
             className="font-heading text-2xl font-bold tracking-tight"
             style={{ color: "#4a8fa8" }}
           >
-            {logoText}
+            {logoSrc ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={logoSrc}
+                alt={logoAlt ?? logoText}
+                width={140}
+                height={48}
+                style={{ height: "40px", width: "auto", objectFit: "contain" }}
+              />
+            ) : (
+              logoText
+            )}
           </Link>
 
           {/* Desktop nav */}
@@ -114,7 +129,18 @@ export function SolarisHeader({
             className="font-heading text-2xl font-bold tracking-tight"
             style={{ color: "#4a8fa8" }}
           >
-            {logoText}
+            {logoSrc ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={logoSrc}
+                alt={logoAlt ?? logoText}
+                width={140}
+                height={48}
+                style={{ height: "40px", width: "auto", objectFit: "contain" }}
+              />
+            ) : (
+              logoText
+            )}
           </Link>
           <button
             id="solaris-mobile-close"

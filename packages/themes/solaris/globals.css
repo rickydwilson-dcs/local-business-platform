@@ -3,6 +3,7 @@
 /* Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=block');
+@import '../../core-components/src/styles/animations.css';
 
 /* Custom properties */
 :root {
@@ -31,19 +32,19 @@ body { -webkit-font-smoothing: antialiased; overflow-x: hidden; }
 /* === GEOMETRIC SHAPE IDLE FLOATS === */
 @keyframes solarisFloatA {
   0%, 100% { transform: translateY(0px) rotate(0deg); }
-  50%       { transform: translateY(-12px) rotate(1.5deg); }
+  50%       { transform: translateY(-22px) rotate(3deg); }
 }
 @keyframes solarisFloatB {
   0%, 100% { transform: rotate(14deg) translateY(0px); }
-  50%       { transform: rotate(16deg) translateY(-8px); }
+  50%       { transform: rotate(18deg) translateY(-16px); }
 }
 @keyframes solarisFloatC {
   0%, 100% { transform: rotate(-9deg) translateY(0px); }
-  50%       { transform: rotate(-11deg) translateY(-10px); }
+  50%       { transform: rotate(-13deg) translateY(-18px); }
 }
 @keyframes solarisFloatD {
   0%, 100% { transform: rotate(22deg) translateY(0px); }
-  50%       { transform: rotate(20deg) translateY(-6px); }
+  50%       { transform: rotate(18deg) translateY(-12px); }
 }
 
 /* === SCROLL REVEAL UTILITIES === */
@@ -127,7 +128,7 @@ body { -webkit-font-smoothing: antialiased; overflow-x: hidden; }
   opacity: 0.35;
   top: 8%; left: 5%;
   animation: fadeSlideUp 0.7s var(--ease-out) 0.6s both,
-             solarisFloatA 6s ease-in-out 1.4s infinite;
+             solarisFloatA 4.5s ease-in-out 1.4s infinite;
 }
 .solaris-geo-2 {
   width: 170px; height: 170px;
@@ -136,7 +137,7 @@ body { -webkit-font-smoothing: antialiased; overflow-x: hidden; }
   top: 0; right: 8%;
   transform: rotate(14deg);
   animation: fadeSlideUp 0.7s var(--ease-out) 0.75s both,
-             solarisFloatB 7s ease-in-out 1.55s infinite;
+             solarisFloatB 5.5s ease-in-out 1.55s infinite;
 }
 .solaris-geo-3 {
   width: 130px; height: 130px;
@@ -145,7 +146,7 @@ body { -webkit-font-smoothing: antialiased; overflow-x: hidden; }
   bottom: 12%; left: 22%;
   transform: rotate(-9deg);
   animation: fadeSlideUp 0.7s var(--ease-out) 0.9s both,
-             solarisFloatC 8s ease-in-out 1.7s infinite;
+             solarisFloatC 6s ease-in-out 1.7s infinite;
 }
 .solaris-geo-4 {
   width: 75px; height: 75px;
@@ -154,5 +155,5 @@ body { -webkit-font-smoothing: antialiased; overflow-x: hidden; }
   bottom: 26%; right: 6%;
   transform: rotate(22deg);
   animation: fadeSlideUp 0.7s var(--ease-out) 1.05s both,
-             solarisFloatD 5.5s ease-in-out 1.85s infinite;
+             solarisFloatD 4s ease-in-out 1.85s infinite;
 }

@@ -2,6 +2,8 @@ import Link from "next/link";
 
 export interface SolarisFooterProps {
   logoText?: string;
+  logoSrc?: string;
+  logoAlt?: string;
   tagline?: string;
   navColumns?: { heading: string; links: { label: string; href: string }[] }[];
   contact?: { email?: string; phone?: string };
@@ -11,6 +13,8 @@ export interface SolarisFooterProps {
 
 export function SolarisFooter({
   logoText = "DCS",
+  logoSrc,
+  logoAlt,
   tagline,
   navColumns = [],
   contact,
@@ -24,7 +28,25 @@ export function SolarisFooter({
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-12 mb-12">
           {/* Brand column */}
           <div className="sm:col-span-2 lg:col-span-1">
-            <span className="block font-heading text-xl font-bold text-white mb-3">{logoText}</span>
+            {logoSrc ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={logoSrc}
+                alt={logoAlt ?? logoText}
+                width={140}
+                height={48}
+                style={{
+                  height: "36px",
+                  width: "auto",
+                  objectFit: "contain",
+                  filter: "brightness(0) invert(1)",
+                }}
+              />
+            ) : (
+              <span className="block font-heading text-xl font-bold text-white mb-3">
+                {logoText}
+              </span>
+            )}
             {tagline && (
               <p
                 className="text-sm leading-relaxed max-w-[280px]"
