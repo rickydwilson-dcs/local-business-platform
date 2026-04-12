@@ -22,8 +22,7 @@ export function CastorHeader({
   navigation,
   locations,
 }: CastorHeaderProps) {
-  const navBase =
-    "uppercase tracking-widest text-xs font-medium font-body transition-colors border-b-2 pb-1";
+  const navBase = "font-body text-sm font-medium transition-colors border-b-2 pb-1";
   const navActive = "text-brand-primary border-brand-primary";
   const navInactive = "text-surface-foreground border-transparent hover:text-brand-primary";
   const dropdownBtnClass = `flex items-center gap-1 ${navBase} ${navInactive}`;
