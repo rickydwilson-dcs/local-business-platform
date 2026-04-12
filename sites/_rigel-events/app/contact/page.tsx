@@ -1,7 +1,7 @@
 /**
- * Contact Page — thin wrapper
+ * Contact Page
  *
- * Builds schema and delegates rendering to RigelContactPage template.
+ * Event contact page with ContactForm from core-components.
  */
 
 import type { Metadata } from "next";
@@ -9,8 +9,8 @@ import { Schema } from "@platform/core-components";
 import { siteConfig } from "@/site.config";
 import { BUSINESS_EMAIL } from "@/lib/contact-info";
 import { absUrl } from "@/lib/site";
-import type { SiteConfigSummary, BreadcrumbItem } from "@platform/core-components";
-import { RigelContactPage } from "@platform/themes/rigel/pages";
+import { PageTitleBanner } from "@platform/themes/corvus/components";
+import { ContactForm } from "@platform/core-components";
 
 export const dynamic = "force-static";
 
@@ -23,29 +23,56 @@ export const metadata: Metadata = {
 };
 
 export default function ContactPage() {
-  const breadcrumbs: BreadcrumbItem[] = [{ name: "Contact", href: "/contact", current: true }];
-
-  const siteSummary: SiteConfigSummary = {
-    name: siteConfig.business.name,
-    tagline: siteConfig.tagline,
-    phone: siteConfig.business.phone ?? "",
-    phoneDisplay: siteConfig.business.phone ?? "",
-    address: {
-      city: siteConfig.business.address.city,
-      county: siteConfig.business.address.region,
-    },
-    cta: siteConfig.cta,
-    stats: siteConfig.credentials.stats,
-  };
-
   return (
     <>
-      <RigelContactPage
-        siteConfig={siteSummary}
-        breadcrumbs={breadcrumbs}
-        eventDate="Saturday 17 &amp; Sunday 18 October 2026"
-        email={BUSINESS_EMAIL}
-      />
+      <PageTitleBanner pageTitle="Contact Us" />
+
+      <section className="bg-surface-background py-16 px-4">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            {/* Contact info */}
+            <div>
+              <h2 className="text-2xl font-bold text-surface-foreground mb-6">Get in Touch</h2>
+              <p className="text-surface-muted-foreground text-lg mb-8">
+                Questions about the event, sponsorship, or speaking opportunities? We&apos;d love to
+                hear from you.
+              </p>
+
+              <div className="space-y-6">
+                <div className="bg-surface-card border border-surface-border rounded-lg p-5">
+                  <h3 className="font-semibold text-surface-foreground mb-1">Email</h3>
+                  <a
+                    href={`mailto:${BUSINESS_EMAIL}`}
+                    className="text-brand-primary hover:text-brand-primary-hover transition-colors"
+                  >
+                    {BUSINESS_EMAIL}
+                  </a>
+                </div>
+
+                <div className="bg-surface-card border border-surface-border rounded-lg p-5">
+                  <h3 className="font-semibold text-surface-foreground mb-1">Event Dates</h3>
+                  <p className="text-surface-muted-foreground">
+                    Saturday 17 &amp; Sunday 18 October 2026
+                  </p>
+                </div>
+
+                <div className="bg-surface-card border border-surface-border rounded-lg p-5">
+                  <h3 className="font-semibold text-surface-foreground mb-1">Venue</h3>
+                  <p className="text-surface-muted-foreground">
+                    Winter Garden, Compton Street, Eastbourne, BN21 4BP
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Contact form */}
+            <div className="bg-surface-card border border-surface-border rounded-xl p-6 lg:p-8">
+              <h2 className="text-xl font-bold text-surface-foreground mb-6">Send a Message</h2>
+              <ContactForm />
+            </div>
+          </div>
+        </div>
+      </section>
 
       <Schema
         org={{

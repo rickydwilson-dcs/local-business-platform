@@ -76,6 +76,13 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   return (
     <html lang="en-GB" className={`${spaceGrotesk.variable} ${inter.variable}`}>
       <head>
+        {/* Material Symbols — must be a <link>, not CSS @import, because
+            Tailwind's @tailwind expansion buries @import url() mid-file
+            and the browser ignores it per CSS spec. */}
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=block"
+        />
         {/* Geo meta tags for local SEO */}
         {siteConfig.business.geo && (
           <>
