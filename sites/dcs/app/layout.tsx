@@ -32,6 +32,10 @@ export const metadata: Metadata = {
   },
   description: siteConfig.tagline,
   metadataBase: new URL(siteConfig.url),
+  icons: {
+    icon: "/favicon.svg",
+    shortcut: "/favicon.svg",
+  },
   openGraph: {
     type: "website",
     locale: "en_GB",
