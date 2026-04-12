@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pricing — Digital Consulting Services</title>
+<meta name="description" content="Simple, transparent pricing for professional trade websites. No hidden costs. Choose upfront or pay monthly.">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* === RESET & TOKENS === */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --primary: #61A3BA; --primary-deep: #4a8fa8; --primary-light: #78b8d0;
+  --accent: #D2DE32; --accent-hover: #bdc82b;
+  --support: #A2C579; --support-dark: #8fb565;
+  --bg: #F0F7FA; --white: #ffffff;
+  --gray-100: #e4f0f5; --gray-200: #d4e8f0; --gray-400: #8a8a70; --gray-600: #3d4235; --gray-800: #2a2e20;
+  --font-display: 'Space Grotesk', sans-serif; --font-body: 'Inter', sans-serif;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --radius-card: 20px; --radius-card-lg: 24px;
+}
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--gray-800); font-family: var(--font-body); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+h1, h2, h3, h4, h5, h6 { font-family: var(--font-display); font-weight: 700; line-height: 1.15; }
+
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+/* === HEADER === */
+.header {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--bg); border-bottom: 1px solid var(--gray-200);
+  transition: box-shadow 0.3s ease;
+}
+.header.scrolled { box-shadow: 0 2px 20px rgba(42,46,32,0.08); }
+.header-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 24px; max-width: 1200px; margin: 0 auto;
+}
+.logo { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; color: var(--primary-deep); letter-spacing: -0.5px; }
+.nav-links { display: flex; gap: 32px; align-items: center; }
+.nav-links a { font-family: var(--font-display); font-size: 0.9rem; font-weight: 500; color: var(--gray-600); transition: color 0.2s; position: relative; }
+.nav-links a::after { content: ''; position: absolute; bottom: -3px; left: 0; width: 0; height: 2px; background: var(--primary); transition: width 0.3s var(--ease-out); border-radius: 2px; }
+.nav-links a:hover { color: var(--primary-deep); }
+.nav-links a:hover::after { width: 100%; }
+.nav-cta { background: var(--primary); color: #ffffff !important; padding: 10px 24px; border-radius: 8px; font-family: var(--font-display); font-weight: 600; font-size: 0.9rem; transition: background 0.2s; }
+.nav-cta:hover { background: var(--primary-deep); color: #ffffff !important; }
+.hamburger { display: none; background: none; border: none; cursor: pointer; width: 32px; height: 24px; position: relative; flex-direction: column; justify-content: space-between; }
+.hamburger span { display: block; width: 100%; height: 2.5px; background: var(--gray-800); border-radius: 2px; transition: all 0.3s var(--ease-out); }
+.hamburger.active span:nth-child(1) { transform: translateY(10.75px) rotate(45deg); }
+.hamburger.active span:nth-child(2) { opacity: 0; }
+.hamburger.active span:nth-child(3) { transform: translateY(-10.75px) rotate(-45deg); }
+.mobile-menu { display: none; position: fixed; top: 65px; left: 0; right: 0; bottom: 0; background: var(--bg); z-index: 99; padding: 40px 24px; flex-direction: column; gap: 24px; opacity: 0; transition: opacity 0.3s var(--ease-out); }
+.mobile-menu.open { display: flex; opacity: 1; }
+.mobile-menu a { font-family: var(--font-display); font-size: 1.25rem; font-weight: 600; color: var(--gray-800); padding: 8px 0; border-bottom: 1px solid var(--gray-200); }
+@media (max-width: 768px) { .nav-links { display: none; } .hamburger { display: flex; } }
+
+/* === SECTION SHARED === */
+.section { padding: 80px 0; position: relative; }
+.section-label { font-family: var(--font-display); font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; color: var(--primary); margin-bottom: 12px; }
+.section-title { font-size: clamp(2rem, 3.5vw, 2.75rem); margin-bottom: 16px; letter-spacing: -0.5px; }
+.section-subtitle { font-size: 1.1rem; color: var(--gray-600); max-width: 560px; line-height: 1.7; }
+.section-header { margin-bottom: 60px; }
+.section-header.center { text-align: center; }
+.section-header.center .section-subtitle { margin: 0 auto; }
+
+/* === BUTTONS === */
+.btn-primary { background: var(--primary); color: var(--white); padding: 14px 32px; border-radius: 10px; font-family: var(--font-display); font-weight: 600; font-size: 1rem; border: none; cursor: pointer; transition: all 0.25s var(--ease-out); display: inline-flex; align-items: center; gap: 8px; }
+.btn-primary:hover { background: var(--primary-deep); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(97,163,186,0.3); }
+.btn-outline { background: transparent; color: var(--gray-800); padding: 14px 32px; border-radius: 10px; font-family: var(--font-display); font-weight: 600; font-size: 1rem; border: 2px solid var(--gray-200); cursor: pointer; transition: all 0.25s var(--ease-out); display: inline-flex; align-items: center; gap: 8px; }
+.btn-outline:hover { border-color: var(--primary); color: var(--primary-deep); }
+.btn-white { background: var(--white); color: var(--primary-deep); padding: 14px 32px; border-radius: 10px; font-family: var(--font-display); font-weight: 600; font-size: 1rem; border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; transition: all 0.25s var(--ease-out); }
+.btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
+.btn-dark { background: var(--gray-800); color: var(--white); padding: 14px 32px; border-radius: 10px; font-family: var(--font-display); font-weight: 600; font-size: 1rem; border: 2px solid var(--gray-800); cursor: pointer; transition: all 0.25s var(--ease-out); display: inline-flex; align-items: center; gap: 8px; }
+.btn-dark:hover { background: var(--gray-600); transform: translateY(-2px); }
+
+/* === FOOTER === */
+.footer { background: var(--gray-800); color: rgba(255,255,255,0.7); padding: 80px 0 40px; }
+.footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+.footer-brand .logo { color: var(--white); margin-bottom: 12px; display: block; }
+.footer-brand p { font-size: 0.9rem; line-height: 1.6; max-width: 280px; }
+.footer-col h4 { font-family: var(--font-display); font-size: 0.85rem; font-weight: 600; color: var(--white); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px; }
+.footer-col a { display: block; font-size: 0.9rem; padding: 4px 0; transition: color 0.2s; }
+.footer-col a:hover { color: var(--white); }
+.footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-size: 0.82rem; }
+.footer-legal { display: flex; gap: 24px; }
+.footer-legal a:hover { color: var(--white); }
+@media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; } .footer-bottom { flex-direction: column; text-align: center; } }
+@media (max-width: 480px) { .footer-grid { grid-template-columns: 1fr; } }
+
+/* === SCROLL ANIMATION === */
+.reveal { opacity: 0; transform: translateY(30px); transition: all 0.7s var(--ease-out); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.section-label, .section-title, .section-subtitle { opacity: 0; transform: translateY(20px); transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out); }
+.section-label.visible { opacity: 1; transform: translateY(0); }
+.section-title.visible { opacity: 1; transform: translateY(0); transition-delay: 0.1s; }
+.section-subtitle.visible { opacity: 1; transform: translateY(0); transition-delay: 0.2s; }
+
+/* === FAQ === */
+.faq-list { max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+.faq-item { background: var(--white); border-radius: 16px; border: 1px solid var(--gray-200); overflow: hidden; transition: all 0.3s var(--ease-out); }
+.faq-item.open { box-shadow: 0 8px 24px rgba(42,46,32,0.06); }
+.faq-question { width: 100%; background: none; border: none; padding: 22px 28px; display: flex; align-items: center; justify-content: space-between; gap: 16px; cursor: pointer; font-family: var(--font-display); font-size: 1.05rem; font-weight: 600; color: var(--gray-800); text-align: left; }
+.faq-question:focus-visible { outline: 2px solid var(--primary); outline-offset: -2px; border-radius: 16px; }
+.faq-icon { width: 28px; height: 28px; flex-shrink: 0; position: relative; transition: transform 0.3s var(--ease-out); }
+.faq-item.open .faq-icon { transform: rotate(45deg); }
+.faq-icon::before, .faq-icon::after { content: ''; position: absolute; background: var(--primary); border-radius: 2px; left: 50%; top: 50%; transform: translate(-50%, -50%); }
+.faq-icon::before { width: 16px; height: 2.5px; }
+.faq-icon::after { width: 2.5px; height: 16px; }
+.faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s var(--ease-out); }
+.faq-answer-inner { padding: 0 28px 22px; }
+.faq-answer-inner p { font-size: 0.92rem; color: var(--gray-600); line-height: 1.7; }
+
+/* === PAGE-SPECIFIC: PRICING === */
+
+/* Hero */
+.page-hero {
+  background: linear-gradient(180deg, var(--primary-light) 0%, var(--bg) 100%);
+  padding: 80px 0 70px; border-bottom: 1px solid var(--gray-200);
+}
+.breadcrumb { font-size: 0.85rem; color: var(--gray-400); margin-bottom: 20px; }
+.breadcrumb a { color: var(--primary-deep); }
+.breadcrumb a:hover { text-decoration: underline; }
+.breadcrumb span { margin: 0 8px; }
+.page-hero h1 { font-size: clamp(2.2rem, 4.5vw, 3.5rem); color: var(--gray-800); margin-bottom: 16px; letter-spacing: -1px; max-width: 640px; }
+.page-hero .hero-sub { font-size: 1.15rem; color: var(--gray-600); max-width: 560px; line-height: 1.7; }
+
+/* Pricing Toggle */
+.pricing-toggle-section { padding: 60px 0 20px; }
+.toggle-wrap {
+  display: flex; align-items: center; justify-content: center; gap: 0;
+  background: var(--white); border: 1px solid var(--gray-200); border-radius: 12px;
+  padding: 6px; width: fit-content; margin: 0 auto;
+}
+.toggle-btn {
+  font-family: var(--font-display); font-size: 0.95rem; font-weight: 600;
+  padding: 10px 28px; border-radius: 8px; border: none; cursor: pointer;
+  transition: all 0.25s var(--ease-out); color: var(--gray-600); background: transparent;
+}
+.toggle-btn.active { background: var(--primary); color: var(--white); }
+.toggle-hint { text-align: center; margin-top: 12px; font-size: 0.85rem; color: var(--gray-400); }
+
+/* Pricing Cards */
+.pricing-section { padding: 40px 0 80px; }
+[data-pricing="upfront"] .price-monthly { display: none; }
+[data-pricing="monthly"] .price-upfront { display: none; }
+
+.pricing-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+}
+.pricing-card {
+  background: var(--white); border-radius: var(--radius-card-lg); padding: 40px 32px;
+  border: 1px solid var(--gray-200); display: flex; flex-direction: column;
+  position: relative; transition: all 0.35s var(--ease-out);
+}
+.pricing-card:hover { transform: translateY(-6px); box-shadow: 0 20px 48px rgba(42,46,32,0.10); }
+.pricing-card.featured {
+  border: 2px solid var(--accent); box-shadow: 0 8px 40px rgba(42,46,32,0.16);
+}
+.pricing-card.featured:hover { transform: translateY(-8px); box-shadow: 0 24px 56px rgba(42,46,32,0.18); }
+.popular-badge {
+  position: absolute; top: -14px; right: 24px;
+  background: var(--accent); color: var(--gray-800);
+  font-family: var(--font-display); font-size: 0.75rem; font-weight: 700;
+  padding: 6px 16px; border-radius: 100px; text-transform: uppercase; letter-spacing: 0.5px;
+}
+.tier-name {
+  font-family: var(--font-display); font-size: 0.85rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1px; color: var(--primary); margin-bottom: 8px;
+}
+.pricing-card.featured .tier-name { color: var(--gray-800); }
+.pages-badge {
+  display: inline-block; background: var(--gray-100); color: var(--gray-600);
+  font-size: 0.8rem; font-weight: 600; padding: 4px 12px; border-radius: 100px;
+  margin-bottom: 20px;
+}
+.price-headline { margin-bottom: 4px; }
+.price-headline .amount {
+  font-family: var(--font-display); font-size: 2.75rem; font-weight: 700;
+  color: var(--gray-800); line-height: 1;
+}
+.price-headline .currency { font-size: 1.5rem; vertical-align: super; }
+.price-note { font-size: 0.85rem; color: var(--gray-400); margin-bottom: 6px; }
+.year1-total { font-size: 0.85rem; color: var(--gray-600); margin-bottom: 24px; }
+.year1-total strong { color: var(--primary-deep); }
+.pricing-divider { width: 100%; height: 1px; background: var(--gray-200); margin-bottom: 24px; }
+.feature-list { flex: 1; display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
+.feature-item { display: flex; align-items: flex-start; gap: 10px; font-size: 0.9rem; color: var(--gray-600); }
+.feature-item svg { flex-shrink: 0; width: 18px; height: 18px; stroke: var(--support); fill: none; stroke-width: 2.5; margin-top: 2px; }
+.pricing-cta { display: block; width: 100%; text-align: center; padding: 14px; border-radius: 10px; font-family: var(--font-display); font-weight: 600; font-size: 0.95rem; border: none; cursor: pointer; transition: all 0.25s var(--ease-out); background: var(--primary); color: var(--white); }
+.pricing-cta:hover { background: var(--primary-deep); transform: translateY(-2px); }
+.pricing-card.featured .pricing-cta { background: var(--accent); color: var(--gray-800); }
+.pricing-card.featured .pricing-cta:hover { background: var(--accent-hover); }
+
+@media (max-width: 900px) { .pricing-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; } }
+
+/* What Every Site Gets */
+.inclusions-section { padding: 80px 0; background: var(--white); }
+.inclusions-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.inclusion-item { display: flex; align-items: flex-start; gap: 12px; font-size: 0.9rem; color: var(--gray-600); padding: 12px 0; }
+.inclusion-item svg { flex-shrink: 0; width: 20px; height: 20px; stroke: var(--support); fill: none; stroke-width: 2.5; margin-top: 1px; }
+@media (max-width: 768px) { .inclusions-grid { grid-template-columns: 1fr; } }
+@media (max-width: 1024px) and (min-width: 769px) { .inclusions-grid { grid-template-columns: repeat(2, 1fr); } }
+
+/* Add-ons */
+.addons-section { padding: 80px 0; }
+.addons-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; }
+.addon-group h3 { font-size: 1rem; font-weight: 700; color: var(--primary-deep); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid var(--gray-200); }
+.addon-item { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding: 8px 0; border-bottom: 1px solid var(--gray-100); font-size: 0.9rem; }
+.addon-name { color: var(--gray-600); }
+.addon-price { font-family: var(--font-display); font-weight: 600; color: var(--gray-800); white-space: nowrap; font-size: 0.9rem; }
+@media (max-width: 768px) { .addons-grid { grid-template-columns: 1fr; } }
+
+/* FAQ specific — pure CSS details/summary */
+.faq-section { padding: 80px 0; background: var(--gray-100); }
+.faq-list details {
+  background: var(--white); border-radius: 16px; border: 1px solid var(--gray-200);
+  overflow: hidden; margin-bottom: 12px;
+}
+.faq-list details summary {
+  cursor: pointer; padding: 22px 28px;
+  font-family: var(--font-display); font-size: 1.05rem; font-weight: 600;
+  color: var(--gray-800); list-style: none; display: flex;
+  align-items: center; justify-content: space-between; gap: 16px;
+}
+.faq-list details summary::-webkit-details-marker { display: none; }
+.faq-list details summary::after {
+  content: "▾"; font-size: 1.1rem; color: var(--primary);
+  transition: transform 0.2s var(--ease-out); flex-shrink: 0;
+}
+.faq-list details[open] summary::after { transform: rotate(-180deg); }
+.faq-list details .faq-body { padding: 0 28px 22px; }
+.faq-list details .faq-body p { font-size: 0.92rem; color: var(--gray-600); line-height: 1.7; }
+
+/* CTA Banner */
+.cta-section {
+  padding: 100px 0; background: var(--accent);
+  position: relative; overflow: hidden;
+}
+.cta-inner { text-align: center; position: relative; z-index: 1; }
+.cta-inner h2 { font-size: clamp(2rem, 4vw, 2.75rem); color: var(--gray-800); margin-bottom: 12px; }
+.cta-inner p { font-size: 1.1rem; color: var(--gray-600); margin-bottom: 32px; max-width: 480px; margin-left: auto; margin-right: auto; }
+.cta-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+</style>
+</head>
+<body>
+
+<header class="header" id="header">
+  <div class="header-inner">
+    <a href="/" class="logo">DCS</a>
+    <nav class="nav-links">
+      <a href="/services">Services</a>
+      <a href="/about">About</a>
+      <a href="/projects">Our Work</a>
+      <a href="/blog">Blog</a>
+      <a href="/pricing">Pricing</a>
+      <a href="/contact" class="nav-cta">Get Started</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation">
+    <a href="/services">Services</a>
+    <a href="/about">About</a>
+    <a href="/projects">Our Work</a>
+    <a href="/blog">Blog</a>
+    <a href="/pricing">Pricing</a>
+    <a href="/contact">Get Started</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="page-hero reveal">
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a><span>›</span>Pricing
+    </nav>
+    <h1>Simple, Transparent Pricing</h1>
+    <p class="hero-sub">No hidden costs. No scope creep. A professional website that works for your trade.</p>
+  </div>
+</section>
+
+<!-- PAYMENT TOGGLE -->
+<section class="pricing-toggle-section reveal">
+  <div class="container" id="pricingContainer" data-pricing="upfront">
+    <div class="toggle-wrap">
+      <button class="toggle-btn active" id="btnUpfront" onclick="setPricing('upfront')">Pay Upfront</button>
+      <button class="toggle-btn" id="btnMonthly" onclick="setPricing('monthly')">Pay Monthly</button>
+    </div>
+    <p class="toggle-hint">Upfront = lower total cost. Monthly = no setup fee, 12-month minimum.</p>
+
+    <!-- PRICING CARDS -->
+    <div class="pricing-grid" style="margin-top: 48px;">
+
+      <!-- Starter -->
+      <div class="pricing-card reveal">
+        <div class="tier-name">Starter</div>
+        <span class="pages-badge">Up to 20 pages</span>
+
+        <div class="price-upfront">
+          <div class="price-headline"><span class="currency">£</span><span class="amount">995</span></div>
+          <div class="price-note">setup + £15/mo</div>
+          <div class="year1-total">Year 1 total: <strong>£1,175</strong></div>
+        </div>
+        <div class="price-monthly">
+          <div class="price-headline"><span class="currency">£</span><span class="amount">45</span></div>
+          <div class="price-note">per month · 12-month minimum</div>
+          <div class="year1-total">No setup fee</div>
+        </div>
+
+        <div class="pricing-divider"></div>
+        <ul class="feature-list">
+          <li class="feature-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Up to 20 pages (services + locations)</li>
+          <li class="feature-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Custom theme design</li>
+          <li class="feature-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Full local SEO setup</li>
+          <li class="feature-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Contact form + email notifications</li>
+          <li class="feature-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Hosting, SSL, domain included</li>
+          <li class="feature-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>1 content update/month</li>
+        </ul>
+        <a href="/contact" class="pricing-cta">Get started</a>
+      </div>
+
+      <!-- Professional (featured) -->
+      <div class="pricing-card featured reveal">
+        <span class="popular-badge">Most Popular</span>
+        <div class="tier-name">Professional</div>
+        <span class="pages-badge">Up to 50 pages</span>
+
+        <div class="price-upfront">
+          <div class="price-headline"><span class="currency">£</span><span class="amount">1,995</span></div>
+          <div class="price-note">setup + £25/mo</div>
+          <div class="year1-total">Year 1 total: <strong>£2,295</strong></div>
+        </div>
+        <div class="price-monthly">
+          <div class="price-headline"><span class="currency">£</span><span class="amount">75</span></div>
+          <div class="price-note">per month · 12-month minimum</div>
+          <div class="year1-total">No setup fee</div>
+        </div>
+
+        <div class="pricing-divider"></div>
+        <ul class="feature-list">
+          <li class="feature-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Up to 50 pages (services + locations)</li>
+          <li class="feature-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Everything in Starter</li>
+          <li class="feature-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Blog (1 post/month, first 3 months)</li>
+          <li class="feature-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Project portfolio + reviews page</li>
+          <li class="feature-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Google Analytics + GDPR consent</li>
+          <li class="feature-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>2 content updates/month</li>
+        </ul>
+        <a href="/contact" class="pricing-cta">Get started</a>
+      </div>
+
+      <!-- Growth -->
+      <div class="pricing-card reveal">
+        <div class="tier-name">Growth</div>
+        <span class="pages-badge">Up to 100 pages</span>
+
+        <div class="price-upfront">
+          <div class="price-headline"><span class="currency">£</span><span class="amount">3,495</span></div>
+          <div class="price-note">setup + £50/mo</div>
+          <div class="year1-total">Year 1 total: <strong>£4,095</strong></div>
+        </div>
+        <div class="price-monthly">
+          <div class="price-headline"><span class="currency">£</span><span class="amount">125</span></div>
+          <div class="price-note">per month · 12-month minimum</div>
+          <div class="year1-total">No setup fee</div>
+        </div>
+
+        <div class="pricing-divider"></div>
+        <ul class="feature-list">
+          <li class="feature-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Up to 100 pages (maximum coverage)</li>
+          <li class="feature-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Everything in Professional</li>
+          <li class="feature-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Blog 2 posts/month (first 3 months)</li>
+          <li class="feature-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Quarterly SEO review</li>
+          <li class="feature-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Monthly performance report</li>
+          <li class="feature-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Priority support + 4 updates/month</li>
+        </ul>
+        <a href="/contact" class="pricing-cta">Get started</a>
+      </div>
+
+    </div><!-- /pricing-grid -->
+  </div><!-- /pricingContainer -->
+</section>
+
+<!-- WHAT EVERY SITE GETS -->
+<section class="inclusions-section">
+  <div class="container">
+    <div class="section-header center reveal">
+      <p class="section-label">Included on every plan</p>
+      <h2 class="section-title">What every site gets</h2>
+      <p class="section-subtitle">Every package comes with the full stack — no extras to add, no corners cut.</p>
+    </div>
+    <ul class="inclusions-grid reveal">
+      <li class="inclusion-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Contact form with email notifications</li>
+      <li class="inclusion-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Mobile-responsive, fast-loading design</li>
+      <li class="inclusion-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Custom theme (colours, typography, layout)</li>
+      <li class="inclusion-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Full local SEO (Schema markup, meta tags, sitemap)</li>
+      <li class="inclusion-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Custom domain setup + management (included)</li>
+      <li class="inclusion-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Google Workspace email setup</li>
+      <li class="inclusion-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>SSL certificate</li>
+      <li class="inclusion-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Hosting, security updates, uptime monitoring</li>
+      <li class="inclusion-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Unlimited revisions during build</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ADD-ONS -->
+<section class="addons-section reveal">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="section-label">Extras</p>
+      <h2 class="section-title">Extend your package</h2>
+      <p class="section-subtitle">Add what you need, when you need it. All add-ons work with any plan.</p>
+    </div>
+    <div class="addons-grid">
+      <div class="reveal">
+        <h3>Content &amp; SEO</h3>
+        <div class="addon-item"><span class="addon-name">Extra pages (beyond tier cap)</span><span class="addon-price">£20/page</span></div>
+        <div class="addon-item"><span class="addon-name">Blog post writing (AI-drafted, human-edited)</span><span class="addon-price">£75/post</span></div>
+        <div class="addon-item"><span class="addon-name">Quarterly SEO review upgrade (Professional)</span><span class="addon-price">£50/quarter</span></div>
+        <div class="addon-item"><span class="addon-name">FAQ expansion pack (20 Q&amp;As)</span><span class="addon-price">£100 one-off</span></div>
+      </div>
+      <div class="reveal">
+        <h3>Growth Tools</h3>
+        <div class="addon-item"><span class="addon-name">Review capture widget</span><span class="addon-price">£10/mo</span></div>
+        <div class="addon-item"><span class="addon-name">Lead notification SMS</span><span class="addon-price">£5/mo</span></div>
+        <div class="addon-item"><span class="addon-name">Call tracking number</span><span class="addon-price">£15/mo</span></div>
+        <div class="addon-item"><span class="addon-name">AI chatbot with FAQ</span><span class="addon-price">£20/mo</span></div>
+        <div class="addon-item"><span class="addon-name">Booking calendar integration</span><span class="addon-price">£15/mo</span></div>
+      </div>
+      <div class="reveal">
+        <h3>One-Off Extras</h3>
+        <div class="addon-item"><span class="addon-name">Custom theme design</span><span class="addon-price">£350</span></div>
+        <div class="addon-item"><span class="addon-name">Logo design</span><span class="addon-price">£250</span></div>
+        <div class="addon-item"><span class="addon-name">Branded stationery pack</span><span class="addon-price">£150</span></div>
+        <div class="addon-item"><span class="addon-name">Google My Business setup</span><span class="addon-price">£150</span></div>
+        <div class="addon-item"><span class="addon-name">Multi-location expansion (20 extra pages)</span><span class="addon-price">£200/area</span></div>
+      </div>
+      <div class="reveal">
+        <h3>Higher-Touch</h3>
+        <div class="addon-item"><span class="addon-name">Google Ads setup + management</span><span class="addon-price">£200/mo + ad spend</span></div>
+        <div class="addon-item"><span class="addon-name">Monthly SEO retainer</span><span class="addon-price">£200/mo</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="container">
+    <div class="section-header center reveal">
+      <p class="section-label">Questions</p>
+      <h2 class="section-title">Common pricing questions</h2>
+    </div>
+    <div class="faq-list reveal">
+      <details>
+        <summary>Do I own my website?</summary>
+        <div class="faq-body"><p>If you pay upfront, yes — you own the site outright. The monthly hosting fee just covers ongoing service. If you choose Pay Monthly, it's a service model: we build and maintain the site on your behalf, but if you stop paying the service ends and the site comes down. Think of it like leasing rather than buying.</p></div>
+      </details>
+      <details>
+        <summary>What happens if I want to cancel?</summary>
+        <div class="faq-body"><p>Upfront clients can cancel the monthly hosting at any time with 30 days' notice. Pay Monthly clients have a 12-month minimum, then roll monthly with 30 days' notice. If you cancel, we'll help you export your content and hand everything over. No lock-in tactics.</p></div>
+      </details>
+      <details>
+        <summary>Can I upgrade my plan later?</summary>
+        <div class="faq-body"><p>Yes, absolutely. You can upgrade from Starter to Professional or Growth at any time. You'll pay the difference in setup cost (for upfront) or move onto the higher monthly rate. Your existing content and design carry over — we just add the extra pages and features.</p></div>
+      </details>
+      <details>
+        <summary>Are there any hidden fees?</summary>
+        <div class="faq-body"><p>No. The prices you see are what you pay. Domain registration is included on every tier. Google Workspace email is billed directly by Google (~£5.50/user/month) — we set it up, but it goes through your Google account, not us. Everything else is included.</p></div>
+      </details>
+      <details>
+        <summary>What's included in a content update?</summary>
+        <div class="faq-body"><p>A content update covers things like changing a price, updating your service description, adding a new testimonial, or tweaking your contact details. Major additions — like a whole new service section or a redesign — are quoted separately depending on scope.</p></div>
+      </details>
+      <details>
+        <summary>What's the difference between upfront and pay monthly?</summary>
+        <div class="faq-body"><p>Same site, same quality, same support. The difference is ownership and cashflow. Upfront means you pay more now but less over time — and you own the asset. Pay Monthly means no big initial outlay, but you're paying for an ongoing service. By year 2, the upfront option is significantly cheaper in total.</p></div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<section class="cta-section reveal">
+  <div class="container">
+    <div class="cta-inner">
+      <h2>Ready to get started?</h2>
+      <p>Tell us about your business and we'll come back with a no-obligation quote within one working day.</p>
+      <div class="cta-actions">
+        <a href="/contact" class="btn-dark">Get a free quote</a>
+        <a href="tel:01234567890" class="btn-dark" style="background:transparent; border:2px solid var(--gray-800);">Call us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="/" class="logo">DCS</a>
+        <p>Professional websites for local service businesses. Design, build, host and support &mdash; all taken care of.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <a href="/services">Services</a>
+        <a href="/locations">Areas We Serve</a>
+        <a href="/pricing">Pricing</a>
+        <a href="/projects">Our Work</a>
+        <a href="/about">About</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="mailto:hello@digitalconsultingservices.co.uk">hello@digitalconsultingservices.co.uk</a>
+        <a href="tel:01234567890">01234 567 890</a>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="/privacy">Privacy Policy</a>
+        <a href="/terms">Terms of Service</a>
+        <a href="/cookies">Cookie Policy</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2025 Digital Consulting Services. All rights reserved.</span>
+      <div class="footer-legal">
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
+        <a href="/cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// === HEADER SCROLL ===
+const header = document.getElementById('header');
+window.addEventListener('scroll', () => {
+  header.classList.toggle('scrolled', window.scrollY > 20);
+}, { passive: true });
+
+// === HAMBURGER ===
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+hamburger.addEventListener('click', () => {
+  const isOpen = mobileMenu.classList.toggle('open');
+  hamburger.classList.toggle('active');
+  hamburger.setAttribute('aria-expanded', isOpen);
+  document.body.style.overflow = isOpen ? 'hidden' : '';
+});
+mobileMenu.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    mobileMenu.classList.remove('open');
+    hamburger.classList.remove('active');
+    hamburger.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  });
+});
+</script>
+
+<script>
+// === PRICING TOGGLE ===
+function setPricing(mode) {
+  document.getElementById('pricingContainer').dataset.pricing = mode;
+  document.getElementById('btnUpfront').classList.toggle('active', mode === 'upfront');
+  document.getElementById('btnMonthly').classList.toggle('active', mode === 'monthly');
+}
+</script>
+
+
+<script>
+// === SCROLL REVEAL ===
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+const headingObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      headingObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.2, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.section-label, .section-title, .section-subtitle').forEach(el => headingObserver.observe(el));
+</script>
+
+</body>
+</html>

@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Digital Consulting Services</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --primary: #61A3BA; --primary-deep: #4a8fa8; --primary-light: #78b8d0;
+      --accent: #D2DE32; --accent-hover: #bdc82b;
+      --support: #A2C579; --support-dark: #8fb565;
+      --bg: #F0F7FA; --white: #ffffff;
+      --gray-100: #e4f0f5; --gray-200: #d4e8f0; --gray-400: #8a8a70; --gray-600: #3d4235; --gray-800: #2a2e20;
+      --font-display: 'Space Grotesk', sans-serif; --font-body: 'Inter', sans-serif;
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --radius-card: 20px;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--gray-800); font-family: var(--font-body); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+    h1, h2, h3, h4, h5, h6 { font-family: var(--font-display); font-weight: 700; line-height: 1.15; }
+    @keyframes fadeSlideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+    /* HEADER */
+    .header { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bottom: 1px solid var(--gray-200); transition: box-shadow 0.3s ease; }
+    .header.scrolled { box-shadow: 0 2px 20px rgba(42,46,32,0.08); }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; padding: 16px 24px; max-width: 1200px; margin: 0 auto; }
+    .logo { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; color: var(--primary-deep); letter-spacing: -0.5px; }
+    .nav-links { display: flex; gap: 32px; align-items: center; }
+    .nav-links a { font-family: var(--font-display); font-size: 0.9rem; font-weight: 500; color: var(--gray-600); transition: color 0.2s; position: relative; }
+    .nav-links a:hover { color: var(--primary-deep); }
+    .nav-links a::after { content: ''; position: absolute; bottom: -3px; left: 0; width: 0; height: 2px; background: var(--primary); transition: width 0.3s var(--ease-out); border-radius: 2px; }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-cta { background: var(--primary); color: #ffffff !important; padding: 10px 24px; border-radius: 8px; font-family: var(--font-display); font-weight: 600; font-size: 0.9rem; transition: background 0.2s; }
+    .nav-cta:hover { background: var(--primary-deep); }
+    .hamburger { display: none; background: none; border: none; cursor: pointer; width: 32px; height: 24px; position: relative; flex-direction: column; justify-content: space-between; }
+    .hamburger span { display: block; width: 100%; height: 2.5px; background: var(--gray-800); border-radius: 2px; transition: all 0.3s var(--ease-out); }
+    .hamburger.active span:nth-child(1) { transform: translateY(10.75px) rotate(45deg); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: translateY(-10.75px) rotate(-45deg); }
+    .mobile-menu { display: none; position: fixed; top: 65px; left: 0; right: 0; bottom: 0; background: var(--bg); z-index: 99; padding: 40px 24px; flex-direction: column; gap: 24px; opacity: 0; transition: opacity 0.3s var(--ease-out); }
+    .mobile-menu.open { display: flex; opacity: 1; }
+    .mobile-menu a { font-family: var(--font-display); font-size: 1.25rem; font-weight: 600; color: var(--gray-800); padding: 8px 0; border-bottom: 1px solid var(--gray-200); }
+    @media (max-width: 768px) { .nav-links { display: none; } .hamburger { display: flex; } }
+
+    /* SECTION */
+    .section { padding: 100px 0; position: relative; }
+    .section-label { font-family: var(--font-display); font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; color: var(--primary); margin-bottom: 12px; }
+    .section-title { font-size: clamp(2rem, 3.5vw, 2.75rem); margin-bottom: 16px; letter-spacing: -0.5px; }
+    .section-subtitle { font-size: 1.1rem; color: var(--gray-600); max-width: 560px; line-height: 1.7; }
+    .section-header { margin-bottom: 60px; }
+    .section-header.center { text-align: center; }
+    .section-header.center .section-subtitle { margin: 0 auto; }
+
+    /* BUTTONS */
+    .btn-primary { background: var(--primary); color: var(--white); padding: 14px 32px; border-radius: 10px; font-family: var(--font-display); font-weight: 600; font-size: 1rem; border: none; cursor: pointer; transition: all 0.25s var(--ease-out); display: inline-flex; align-items: center; gap: 8px; }
+    .btn-primary:hover { background: var(--primary-deep); transform: translateY(-2px); }
+    .btn-outline { background: transparent; color: var(--gray-800); padding: 14px 32px; border-radius: 10px; font-family: var(--font-display); font-weight: 600; font-size: 1rem; border: 2px solid var(--gray-200); cursor: pointer; transition: all 0.25s var(--ease-out); display: inline-flex; align-items: center; gap: 8px; }
+    .btn-outline:hover { border-color: var(--primary); color: var(--primary-deep); }
+    .btn-accent { background: var(--accent); color: var(--gray-800); padding: 14px 32px; border-radius: 10px; font-family: var(--font-display); font-weight: 600; font-size: 1rem; border: none; cursor: pointer; transition: all 0.25s var(--ease-out); display: inline-flex; align-items: center; gap: 8px; }
+    .btn-accent:hover { background: var(--accent-hover); transform: translateY(-2px); }
+
+    /* FOOTER */
+    .footer { background: var(--gray-800); color: rgba(255,255,255,0.7); padding: 80px 0 40px; }
+    .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+    .footer-brand .logo { color: var(--white); margin-bottom: 12px; display: block; }
+    .footer-brand p { font-size: 0.9rem; line-height: 1.6; max-width: 280px; }
+    .footer-col h4 { font-family: var(--font-display); font-size: 0.85rem; font-weight: 600; color: var(--white); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px; }
+    .footer-col a { display: block; font-size: 0.9rem; padding: 4px 0; transition: color 0.2s; }
+    .footer-col a:hover { color: var(--white); }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-size: 0.82rem; }
+    .footer-legal { display: flex; gap: 24px; }
+    .footer-legal a:hover { color: var(--white); }
+    @media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; } .footer-bottom { flex-direction: column; text-align: center; } }
+    @media (max-width: 480px) { .footer-grid { grid-template-columns: 1fr; } }
+
+    /* SCROLL ANIMATION */
+    .reveal { opacity: 0; transform: translateY(30px); transition: all 0.7s var(--ease-out); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .section-label, .section-title, .section-subtitle { opacity: 0; transform: translateY(20px); transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out); }
+    .section-label.visible { opacity: 1; transform: translateY(0); }
+    .section-title.visible { opacity: 1; transform: translateY(0); transition-delay: 0.1s; }
+    .section-subtitle.visible { opacity: 1; transform: translateY(0); transition-delay: 0.2s; }
+
+    /* GEO SHAPES */
+    .geo-shape { position: absolute; border-radius: 6px; }
+    .geo-shape-1 { width: 270px; height: 270px; background: var(--primary); opacity: 0.35; top: 8%; left: 5%; animation: fadeSlideUp 0.7s var(--ease-out) 0.6s both; }
+
+    /* CTA BANNER */
+    .cta-banner { padding: 100px 0; background: var(--accent); }
+    .cta-inner { text-align: center; }
+    .cta-inner h2 { font-size: clamp(2rem, 4vw, 2.75rem); color: var(--gray-800); margin-bottom: 16px; }
+    .cta-inner p { font-size: 1.1rem; color: var(--gray-600); margin-bottom: 32px; max-width: 480px; margin-left: auto; margin-right: auto; }
+    .cta-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+    /* HERO */
+    .hero {
+      background: var(--primary-light);
+      padding: 80px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-content { max-width: 680px; position: relative; z-index: 1; }
+    .breadcrumb { display: flex; align-items: center; gap: 8px; font-size: 0.88rem; color: var(--gray-600); margin-bottom: 20px; }
+    .breadcrumb a { color: var(--gray-600); transition: color 0.2s; }
+    .breadcrumb a:hover { color: var(--primary-deep); }
+    .breadcrumb span { color: var(--gray-400); }
+    .hero-content h1 { font-size: clamp(2.25rem, 4.5vw, 3.5rem); letter-spacing: -1px; color: var(--gray-800); margin-bottom: 20px; }
+    .hero-content p { font-size: 1.15rem; color: var(--gray-600); line-height: 1.7; }
+
+    /* STORY SECTION */
+    .story-grid { display: grid; grid-template-columns: 1fr; gap: 48px; }
+    @media (min-width: 768px) { .story-grid { grid-template-columns: 60% 1fr; align-items: start; } }
+
+    .story-text p { font-size: 1.05rem; color: var(--gray-600); line-height: 1.8; margin-bottom: 24px; }
+    .story-text p:last-child { margin-bottom: 0; }
+
+    .stat-cards { display: flex; flex-direction: column; gap: 16px; }
+
+    .stat-card { border-radius: 16px; padding: 24px 28px; }
+    .stat-card--primary { background: var(--primary); color: var(--white); }
+    .stat-card--accent { background: var(--accent); color: var(--gray-800); }
+    .stat-card--support { background: var(--support); color: var(--gray-800); }
+
+    .stat-number { font-family: var(--font-display); font-size: 2.25rem; font-weight: 700; line-height: 1; margin-bottom: 6px; }
+    .stat-card--primary .stat-number { color: var(--white); }
+    .stat-card--primary .stat-label { font-size: 0.9rem; opacity: 0.85; }
+    .stat-card--accent .stat-label, .stat-card--support .stat-label { font-size: 0.9rem; color: var(--gray-600); }
+
+    /* STATS BAR */
+    .stats-bar { background: var(--primary); padding: 60px 0; }
+    .stats-row { display: flex; justify-content: center; gap: 80px; flex-wrap: wrap; }
+    .stat-item { text-align: center; color: var(--white); }
+    .stat-item .big-number { font-family: var(--font-display); font-size: 2.5rem; font-weight: 700; line-height: 1; }
+    .stat-item .stat-desc { font-size: 0.9rem; opacity: 0.85; margin-top: 6px; }
+
+    /* VALUES GRID */
+    .values-grid { display: grid; grid-template-columns: 1fr; gap: 28px; }
+    @media (min-width: 640px) { .values-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 960px) { .values-grid { grid-template-columns: repeat(3, 1fr); } }
+
+    .value-card {
+      background: var(--white);
+      border-radius: var(--radius-card);
+      padding: 32px 28px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.25s var(--ease-out), box-shadow 0.25s var(--ease-out);
+    }
+    .value-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      background: var(--primary);
+      border-radius: 0 0 0 0;
+      transition: width 0.3s var(--ease-out);
+    }
+    .value-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(42,46,32,0.08); }
+    .value-card:hover::before { width: 3px; }
+
+    .value-icon { margin-bottom: 20px; }
+    .value-title { font-size: 1.15rem; font-family: var(--font-display); font-weight: 600; color: var(--gray-800); margin-bottom: 10px; }
+    .value-desc { font-size: 0.95rem; color: var(--gray-600); line-height: 1.7; }
+  </style>
+</head>
+<body>
+
+<header class="header" id="header">
+  <div class="header-inner">
+    <a href="/" class="logo">DCS</a>
+    <nav class="nav-links">
+      <a href="/services">Services</a>
+      <a href="/about">About</a>
+      <a href="/projects">Our Work</a>
+      <a href="/blog">Blog</a>
+      <a href="/pricing">Pricing</a>
+      <a href="/contact" class="nav-cta">Get Started</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation">
+    <a href="/services">Services</a>
+    <a href="/about">About</a>
+    <a href="/projects">Our Work</a>
+    <a href="/blog">Blog</a>
+    <a href="/pricing">Pricing</a>
+    <a href="/contact">Get Started</a>
+  </nav>
+</header>
+
+<section class="hero reveal">
+  <div class="geo-shape geo-shape-1" aria-hidden="true"></div>
+  <div class="container">
+    <div class="hero-content">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span aria-hidden="true">›</span>
+        <span aria-current="page">About</span>
+      </nav>
+      <h1>About Digital Consulting Services</h1>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="story-grid">
+      <div class="story-text reveal">
+        <p>Digital Consulting Services was founded in East Sussex with a simple belief: every tradesperson who's good at their job deserves to be found by customers looking for exactly what they do. We started building websites for local tradespeople after seeing how many skilled, reliable contractors were losing work to less capable competitors who simply had a better web presence.</p>
+        <p>What makes us different from other web agencies is that we specialise exclusively in trade businesses. We know how local SEO works for plumbers, electricians, scaffolders, painters, and gardeners — the search terms customers use, the questions they ask, and what it takes to convert a visitor into a paying job. We don't build ecommerce sites or brand campaigns. We build websites that fill diaries.</p>
+        <p>We're a small, expert team. Every client works directly with us from kick-off to launch and beyond. We're available by phone and email, we respond quickly, and we tell you straight what's working and what isn't. No account managers, no outsourcing, no jargon.</p>
+      </div>
+      <div class="stat-cards reveal">
+        <div class="stat-card stat-card--primary">
+          <p class="stat-number">50+</p>
+          <p class="stat-label">Websites built</p>
+        </div>
+        <div class="stat-card stat-card--accent">
+          <p class="stat-number">3+</p>
+          <p class="stat-label">Years experience</p>
+        </div>
+        <div class="stat-card stat-card--support">
+          <p class="stat-number">UK-wide</p>
+          <p class="stat-label">Coverage</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="stats-bar">
+  <div class="container">
+    <div class="stats-row">
+      <div class="stat-item reveal">
+        <p class="big-number">50+</p>
+        <p class="stat-desc">Sites built</p>
+      </div>
+      <div class="stat-item reveal">
+        <p class="big-number">3 years</p>
+        <p class="stat-desc">In business</p>
+      </div>
+      <div class="stat-item reveal">
+        <p class="big-number">UK-wide</p>
+        <p class="stat-desc">Coverage</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+    <div class="section-header center">
+      <p class="section-label">Our Values</p>
+      <h2 class="section-title">How we work</h2>
+      <p class="section-subtitle">Three principles that guide every project we take on.</p>
+    </div>
+    <div class="values-grid">
+
+      <div class="value-card reveal">
+        <div class="value-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M12 20V4M5 11l7-7 7 7" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3 class="value-title">Results-first</h3>
+        <p class="value-desc">We measure success by your phone ringing, not by design awards. Every decision we make is about generating real enquiries for your business.</p>
+      </div>
+
+      <div class="value-card reveal">
+        <div class="value-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M9 10h.01M15 10h.01" stroke="var(--primary)" stroke-width="2" stroke-linecap="round"/>
+            <path d="M9 13.5L12 11l3 2.5" stroke="var(--primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3 class="value-title">No jargon</h3>
+        <p class="value-desc">Plain English, always. We explain what we're doing and why in terms that make sense, not web-speak that leaves you none the wiser.</p>
+      </div>
+
+      <div class="value-card reveal">
+        <div class="value-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3 class="value-title">Always reachable</h3>
+        <p class="value-desc">We're a small team and you'll always deal with us directly. Phone, email, WhatsApp — whatever works for you.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="cta-banner">
+  <div class="container">
+    <div class="cta-inner reveal">
+      <h2>Ready to work together?</h2>
+      <p>Get a free, no-obligation quote and see what a proper website could do for your trade business.</p>
+      <div class="cta-actions">
+        <a href="/contact" class="btn-primary">Get a free quote</a>
+        <a href="tel:01234567890" class="btn-outline">Call us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="/" class="logo">DCS</a>
+        <p>Professional websites for local service businesses. Design, build, host and support &mdash; all taken care of.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <a href="/services">Services</a>
+        <a href="/locations">Areas We Serve</a>
+        <a href="/pricing">Pricing</a>
+        <a href="/projects">Our Work</a>
+        <a href="/blog">Blog</a>
+        <a href="/about">About</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="mailto:hello@digitalconsultingservices.co.uk">hello@digitalconsultingservices.co.uk</a>
+        <a href="tel:01234567890">01234 567 890</a>
+        <p style="font-size:0.9rem; padding: 4px 0;">East Sussex, UK</p>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="/privacy">Privacy Policy</a>
+        <a href="/terms">Terms of Service</a>
+        <a href="/cookies">Cookie Policy</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2025 Digital Consulting Services. All rights reserved.</span>
+      <div class="footer-legal">
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
+        <a href="/cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const header = document.getElementById('header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 20);
+  }, { passive: true });
+
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.toggle('open');
+    hamburger.classList.toggle('active');
+    hamburger.setAttribute('aria-expanded', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      hamburger.classList.remove('active');
+      hamburger.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    });
+  });
+
+  const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+  document.querySelectorAll('.reveal').forEach(el => { observer.observe(el); });
+
+  const headingObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        headingObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.section-label, .section-title, .section-subtitle').forEach(el => {
+    headingObserver.observe(el);
+  });
+</script>
+
+</body>
+</html>

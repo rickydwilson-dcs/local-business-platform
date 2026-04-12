@@ -1,209 +1,358 @@
 <!DOCTYPE html>
-<html lang="en-GB">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Colossus Scaffolding — New Website — Digital Consulting Services</title>
-<meta name="description" content="How we built a professional website for Colossus Scaffolding in Sussex — resulting in organic enquiries within the first month of launch.">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-:root {
-  --primary: #61A3BA; --primary-deep: #4a8fa8; --primary-light: #78b8d0;
-  --accent: #D2DE32; --accent-hover: #bdc82b;
-  --support: #A2C579; --support-dark: #8fb565;
-  --bg: #F0F7FA; --white: #ffffff;
-  --gray-100: #e4f0f5; --gray-200: #d4e8f0; --gray-400: #8a8a70; --gray-600: #3d4235; --gray-800: #2a2e20;
-  --font-display: 'Space Grotesk', sans-serif; --font-body: 'Inter', sans-serif;
-  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-  --radius-card: 20px; --radius-card-lg: 24px;
-}
-html { scroll-behavior: smooth; }
-body { background: var(--bg); color: var(--gray-800); font-family: var(--font-body); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
-img { max-width: 100%; display: block; }
-a { color: inherit; text-decoration: none; }
-ul { list-style: none; }
-h1, h2, h3, h4, h5, h6 { font-family: var(--font-display); font-weight: 700; line-height: 1.15; }
-@keyframes fadeSlideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-.container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-.header { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bottom: 1px solid var(--gray-200); transition: box-shadow 0.3s ease; }
-.header.scrolled { box-shadow: 0 2px 20px rgba(42,46,32,0.08); }
-.header-inner { display: flex; align-items: center; justify-content: space-between; padding: 16px 24px; max-width: 1200px; margin: 0 auto; }
-.logo { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; color: var(--primary-deep); letter-spacing: -0.5px; }
-.nav-links { display: flex; gap: 32px; align-items: center; }
-.nav-links a { font-family: var(--font-display); font-size: 0.9rem; font-weight: 500; color: var(--gray-600); transition: color 0.2s; position: relative; }
-.nav-links a::after { content: ''; position: absolute; bottom: -3px; left: 0; width: 0; height: 2px; background: var(--primary); transition: width 0.3s var(--ease-out); border-radius: 2px; }
-.nav-links a:hover { color: var(--primary-deep); }
-.nav-links a:hover::after { width: 100%; }
-.nav-cta { background: var(--primary); color: #ffffff !important; padding: 10px 24px; border-radius: 8px; font-weight: 600; font-size: 0.9rem; transition: background 0.2s; }
-.nav-cta:hover { background: var(--primary-deep); }
-.hamburger { display: none; background: none; border: none; cursor: pointer; width: 32px; height: 24px; position: relative; flex-direction: column; justify-content: space-between; }
-.hamburger span { display: block; width: 100%; height: 2.5px; background: var(--gray-800); border-radius: 2px; transition: all 0.3s var(--ease-out); }
-.hamburger.active span:nth-child(1) { transform: translateY(10.75px) rotate(45deg); }
-.hamburger.active span:nth-child(2) { opacity: 0; }
-.hamburger.active span:nth-child(3) { transform: translateY(-10.75px) rotate(-45deg); }
-.mobile-menu { display: none; position: fixed; top: 65px; left: 0; right: 0; bottom: 0; background: var(--bg); z-index: 99; padding: 40px 24px; flex-direction: column; gap: 24px; opacity: 0; transition: opacity 0.3s var(--ease-out); }
-.mobile-menu.open { display: flex; opacity: 1; }
-.mobile-menu a { font-family: var(--font-display); font-size: 1.25rem; font-weight: 600; color: var(--gray-800); padding: 8px 0; border-bottom: 1px solid var(--gray-200); }
-@media (max-width: 768px) { .nav-links { display: none; } .hamburger { display: flex; } }
-.section { padding: 80px 0; position: relative; }
-.footer { background: var(--gray-800); color: rgba(255,255,255,0.7); padding: 80px 0 40px; }
-.footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
-.footer-brand .logo { color: var(--white); margin-bottom: 12px; display: block; }
-.footer-brand p { font-size: 0.9rem; line-height: 1.6; max-width: 280px; }
-.footer-col h4 { font-family: var(--font-display); font-size: 0.85rem; font-weight: 600; color: var(--white); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px; }
-.footer-col a { display: block; font-size: 0.9rem; padding: 4px 0; transition: color 0.2s; }
-.footer-col a:hover { color: var(--white); }
-.footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-size: 0.82rem; }
-.footer-legal { display: flex; gap: 24px; }
-.footer-legal a:hover { color: var(--white); }
-@media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; } .footer-bottom { flex-direction: column; text-align: center; } }
-@media (max-width: 480px) { .footer-grid { grid-template-columns: 1fr; } }
-.reveal { opacity: 0; transform: translateY(30px); transition: all 0.7s var(--ease-out); }
-.reveal.visible { opacity: 1; transform: translateY(0); }
-.section-label, .section-title, .section-subtitle { opacity: 0; transform: translateY(20px); transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out); }
-.section-label.visible { opacity: 1; transform: translateY(0); }
-.section-title.visible { opacity: 1; transform: translateY(0); transition-delay: 0.1s; }
-.section-subtitle.visible { opacity: 1; transform: translateY(0); transition-delay: 0.2s; }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Colossus Scaffolding — New Website | Digital Consulting Services</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --primary: #61A3BA; --primary-deep: #4a8fa8; --primary-light: #78b8d0;
+      --accent: #D2DE32; --accent-hover: #bdc82b;
+      --support: #A2C579; --support-dark: #8fb565;
+      --bg: #F0F7FA; --white: #ffffff;
+      --gray-100: #e4f0f5; --gray-200: #d4e8f0; --gray-400: #8a8a70; --gray-600: #3d4235; --gray-800: #2a2e20;
+      --font-display: 'Space Grotesk', sans-serif; --font-body: 'Inter', sans-serif;
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --radius-card: 20px; --radius-card-lg: 24px;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--gray-800); font-family: var(--font-body); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+    h1, h2, h3, h4, h5, h6 { font-family: var(--font-display); font-weight: 700; line-height: 1.15; }
 
-/* PAGE-SPECIFIC */
-.page-hero { background: linear-gradient(180deg, var(--primary-light) 0%, var(--bg) 100%); padding: 80px 0 70px; border-bottom: 1px solid var(--gray-200); }
-.breadcrumb { font-size: 0.85rem; color: var(--gray-400); margin-bottom: 20px; }
-.breadcrumb a { color: var(--primary-deep); }
-.breadcrumb a:hover { text-decoration: underline; }
-.breadcrumb span { margin: 0 8px; }
-.hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
-.hero-tag { display: inline-block; background: var(--gray-800); color: rgba(255,255,255,0.9); font-size: 0.8rem; font-weight: 600; padding: 5px 14px; border-radius: 100px; font-family: var(--font-display); }
-.hero-tag.accent { background: var(--accent); color: var(--gray-800); }
-.page-hero h1 { font-size: clamp(2rem, 4vw, 3rem); color: var(--gray-800); margin-bottom: 12px; letter-spacing: -1px; max-width: 640px; }
-.project-date { font-size: 0.9rem; color: var(--gray-400); font-family: var(--font-body); }
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-/* CONTENT AREA (full-width) */
-.project-prose { max-width: 720px; }
-.project-prose h2 { font-size: 1.5rem; color: var(--gray-800); margin: 2.5rem 0 1rem; letter-spacing: -0.3px; }
-.project-prose p { font-size: 1rem; color: var(--gray-600); line-height: 1.75; margin-bottom: 1.25rem; }
-.results-list { display: flex; flex-direction: column; gap: 12px; margin-top: 1.5rem; }
-.result-item { display: flex; align-items: flex-start; gap: 12px; font-size: 0.95rem; color: var(--gray-600); }
-.result-item svg { flex-shrink: 0; width: 20px; height: 20px; stroke: var(--support); fill: none; stroke-width: 2.5; margin-top: 2px; }
+    .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 
-/* CTA BANNER */
-.cta-section { padding: 100px 0; background: var(--accent); }
-.cta-inner { text-align: center; }
-.cta-inner h2 { font-size: clamp(2rem, 4vw, 2.75rem); color: var(--gray-800); margin-bottom: 12px; }
-.cta-inner p { font-size: 1.1rem; color: var(--gray-600); margin-bottom: 32px; max-width: 480px; margin-left: auto; margin-right: auto; }
-.cta-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-.btn-dark { background: var(--gray-800); color: var(--white); padding: 14px 32px; border-radius: 10px; font-family: var(--font-display); font-weight: 600; font-size: 1rem; border: none; cursor: pointer; transition: all 0.25s var(--ease-out); display: inline-flex; align-items: center; gap: 8px; }
-.btn-dark:hover { background: var(--gray-600); transform: translateY(-2px); }
-.btn-dark-outline { background: transparent; color: var(--gray-800); padding: 14px 32px; border-radius: 10px; font-family: var(--font-display); font-weight: 600; font-size: 1rem; border: 2px solid var(--gray-800); cursor: pointer; transition: all 0.25s var(--ease-out); display: inline-flex; align-items: center; gap: 8px; }
-.btn-dark-outline:hover { background: rgba(42,46,32,0.08); }
-</style>
+    /* === HEADER === */
+    .header { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bottom: 1px solid var(--gray-200); transition: box-shadow 0.3s ease; }
+    .header.scrolled { box-shadow: 0 2px 20px rgba(42,46,32,0.08); }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; padding: 16px 24px; max-width: 1200px; margin: 0 auto; }
+    .logo { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; color: var(--primary-deep); letter-spacing: -0.5px; }
+    .nav-links { display: flex; gap: 32px; align-items: center; }
+    .nav-links a { font-family: var(--font-display); font-size: 0.9rem; font-weight: 500; color: var(--gray-600); transition: color 0.2s; position: relative; }
+    .nav-links a:hover { color: var(--primary-deep); }
+    .nav-links a::after { content: ''; position: absolute; bottom: -3px; left: 0; width: 0; height: 2px; background: var(--primary); transition: width 0.3s var(--ease-out); border-radius: 2px; }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-cta { background: var(--primary); color: #ffffff !important; padding: 10px 24px; border-radius: 8px; font-family: var(--font-display); font-weight: 600; font-size: 0.9rem; transition: background 0.2s; }
+    .nav-cta:hover { background: var(--primary-deep); color: #ffffff !important; }
+    .hamburger { display: none; background: none; border: none; cursor: pointer; width: 32px; height: 24px; position: relative; flex-direction: column; justify-content: space-between; }
+    .hamburger span { display: block; width: 100%; height: 2.5px; background: var(--gray-800); border-radius: 2px; transition: all 0.3s var(--ease-out); }
+    .hamburger.active span:nth-child(1) { transform: translateY(10.75px) rotate(45deg); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: translateY(-10.75px) rotate(-45deg); }
+    .mobile-menu { display: none; position: fixed; top: 65px; left: 0; right: 0; bottom: 0; background: var(--bg); z-index: 99; padding: 40px 24px; flex-direction: column; gap: 24px; opacity: 0; transition: opacity 0.3s var(--ease-out); }
+    .mobile-menu.open { display: flex; opacity: 1; }
+    .mobile-menu a { font-family: var(--font-display); font-size: 1.25rem; font-weight: 600; color: var(--gray-800); padding: 8px 0; border-bottom: 1px solid var(--gray-200); }
+    @media (max-width: 768px) { .nav-links { display: none; } .hamburger { display: flex; } }
+
+    /* === FOOTER === */
+    .footer { background: var(--gray-800); color: rgba(255,255,255,0.7); padding: 80px 0 40px; }
+    .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+    .footer-brand .logo { color: var(--white); margin-bottom: 12px; display: block; }
+    .footer-brand p { font-size: 0.9rem; line-height: 1.6; max-width: 280px; }
+    .footer-col h4 { font-family: var(--font-display); font-size: 0.85rem; font-weight: 600; color: var(--white); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px; }
+    .footer-col a { display: block; font-size: 0.9rem; padding: 4px 0; transition: color 0.2s; }
+    .footer-col a:hover { color: var(--white); }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-size: 0.82rem; }
+    .footer-legal { display: flex; gap: 24px; }
+    .footer-legal a:hover { color: var(--white); }
+    @media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; } .footer-bottom { flex-direction: column; text-align: center; } }
+    @media (max-width: 480px) { .footer-grid { grid-template-columns: 1fr; } }
+
+    /* === SCROLL ANIMATION === */
+    .reveal { opacity: 0; transform: translateY(30px); transition: all 0.7s var(--ease-out); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .section-label, .section-title, .section-subtitle { opacity: 0; transform: translateY(20px); transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out); }
+    .section-label.visible { opacity: 1; transform: translateY(0); }
+    .section-title.visible { opacity: 1; transform: translateY(0); transition-delay: 0.1s; }
+    .section-subtitle.visible { opacity: 1; transform: translateY(0); transition-delay: 0.2s; }
+
+    /* === PAGE-SPECIFIC: Hero === */
+    .hero { background: var(--primary-light); padding: 80px 0 60px; position: relative; overflow: hidden; }
+    .breadcrumb { font-size: 0.85rem; color: var(--gray-400); margin-bottom: 20px; animation: fadeSlideUp 0.6s var(--ease-out) both; }
+    .breadcrumb a { color: var(--primary-deep); }
+    .breadcrumb a:hover { text-decoration: underline; }
+    .breadcrumb span { margin: 0 6px; }
+    .hero-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; animation: fadeSlideUp 0.6s var(--ease-out) 0.05s both; }
+    .hero-tag { display: inline-block; background: var(--accent); color: var(--gray-800); font-family: var(--font-display); font-size: 0.8rem; font-weight: 600; padding: 5px 14px; border-radius: 100px; }
+    .hero h1 { font-size: clamp(2rem, 4vw, 3rem); color: var(--gray-800); letter-spacing: -1px; margin-bottom: 12px; animation: fadeSlideUp 0.6s var(--ease-out) 0.1s both; }
+    .hero-date { font-size: 0.88rem; color: var(--gray-400); animation: fadeSlideUp 0.6s var(--ease-out) 0.2s both; }
+
+    /* === PROJECT CONTENT === */
+    .project-section { padding: 80px 0; }
+    .project-prose { max-width: 800px; }
+    .project-prose p { font-size: 0.97rem; color: var(--gray-600); line-height: 1.75; margin-bottom: 18px; }
+    .project-prose h2 { font-size: 1.6rem; margin-bottom: 20px; margin-top: 48px; color: var(--gray-800); font-family: var(--font-display); }
+
+    /* === Results list === */
+    .results-list { display: flex; flex-direction: column; gap: 14px; margin-top: 20px; }
+    .result-item { display: flex; align-items: flex-start; gap: 14px; background: var(--white); border-radius: 14px; padding: 18px 22px; border: 1px solid var(--gray-200); }
+    .result-icon { flex-shrink: 0; margin-top: 2px; }
+    .result-text { font-size: 0.95rem; color: var(--gray-600); line-height: 1.5; }
+    .result-text strong { color: var(--gray-800); font-family: var(--font-display); display: block; font-size: 0.97rem; }
+
+    /* === CTA Banner === */
+    .cta-banner { padding: 100px 0; background: var(--accent); }
+    .cta-inner { text-align: center; }
+    .cta-inner h2 { font-size: clamp(2rem, 4vw, 2.75rem); color: var(--gray-800); margin-bottom: 16px; }
+    .cta-inner p { font-size: 1.1rem; color: var(--gray-600); margin-bottom: 32px; max-width: 480px; margin-left: auto; margin-right: auto; }
+    .cta-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary { background: var(--primary); color: var(--white); padding: 16px 36px; border-radius: 10px; font-family: var(--font-display); font-weight: 600; font-size: 1rem; border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; transition: all 0.25s var(--ease-out); }
+    .btn-primary:hover { background: var(--primary-deep); transform: translateY(-2px); }
+    .btn-outline { background: transparent; color: var(--gray-800); padding: 14px 32px; border-radius: 10px; font-family: var(--font-display); font-weight: 600; font-size: 1rem; border: 2px solid rgba(42,46,32,0.25); cursor: pointer; transition: all 0.25s var(--ease-out); display: inline-flex; align-items: center; gap: 8px; }
+    .btn-outline:hover { border-color: var(--gray-800); }
+  </style>
 </head>
 <body>
 
-<header class="header" id="header">
-  <div class="header-inner">
-    <a href="/" class="logo">DCS</a>
-    <nav class="nav-links">
+  <!-- HEADER -->
+  <header class="header" id="header">
+    <div class="header-inner">
+      <a href="/" class="logo">DCS</a>
+      <nav class="nav-links">
+        <a href="/services">Services</a>
+        <a href="/about">About</a>
+        <a href="/projects">Our Work</a>
+        <a href="/blog">Blog</a>
+        <a href="/pricing">Pricing</a>
+        <a href="/contact" class="nav-cta">Get Started</a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation">
       <a href="/services">Services</a>
       <a href="/about">About</a>
       <a href="/projects">Our Work</a>
       <a href="/blog">Blog</a>
       <a href="/pricing">Pricing</a>
-      <a href="/contact" class="nav-cta">Get Started</a>
+      <a href="/contact">Get Started</a>
     </nav>
-    <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-  <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation">
-    <a href="/services">Services</a>
-    <a href="/about">About</a>
-    <a href="/projects">Our Work</a>
-    <a href="/blog">Blog</a>
-    <a href="/pricing">Pricing</a>
-    <a href="/contact">Get Started</a>
-  </nav>
-</header>
+  </header>
 
-<!-- HERO -->
-<section class="page-hero reveal">
-  <div class="container">
-    <nav class="breadcrumb" aria-label="Breadcrumb">
-      <a href="/">Home</a><span>›</span><a href="/projects">Our Work</a><span>›</span>Colossus Scaffolding
-    </nav>
-    <div class="hero-tags">
-      <span class="hero-tag accent">Scaffolding</span>
-      <span class="hero-tag">Platform Build</span>
+  <!-- HERO -->
+  <section class="hero reveal">
+    <div class="container">
+      <p class="breadcrumb">
+        <a href="/">Home</a><span>›</span>
+        <a href="/projects">Our Work</a><span>›</span>
+        Colossus Scaffolding
+      </p>
+      <div class="hero-tags">
+        <span class="hero-tag">Scaffolding</span>
+        <span class="hero-tag">Platform Build</span>
+      </div>
+      <h1>Colossus Scaffolding — New Website</h1>
+      <p class="hero-date">January 2025</p>
     </div>
-    <h1>Colossus Scaffolding — New Website</h1>
-    <p class="project-date">January 2025</p>
-  </div>
-</section>
+  </section>
 
-<!-- PROJECT CONTENT -->
-<section class="section">
-  <div class="container">
-    <div class="project-prose reveal">
-      <h2>The challenge</h2>
-      <p>Colossus Scaffolding had been trading in East Sussex for several years, building a strong reputation among builders, property developers, and homeowners across the region. But their online presence was essentially non-existent — no website, no Google listing, and no way for new customers to find them without a personal referral.</p>
-      <p>Paul, the owner, knew he was missing out on enquiries. Competitors with basic websites were appearing on Google for the searches his ideal customers were making — "scaffolding company Sussex", "scaffold hire East Sussex", and dozens of variations. He wanted to fix that, and he wanted it done without months of back-and-forth or a five-figure agency bill.</p>
+  <!-- PROJECT CONTENT -->
+  <section class="project-section">
+    <div class="container">
 
-      <h2>What we built</h2>
-      <p>We built Colossus a full platform site using the Professional tier: 40 pages of service and location content covering scaffolding for residential projects, commercial builds, and specialist access work across East Sussex and into West Sussex and Kent. The design uses a bold navy and white palette that reflects the strength and precision of the trade. Every page is mobile-first and loads in under two seconds.</p>
-      <p>The site includes Schema markup for a local business, consistent NAP (name, address, phone) across all pages, a contact form with email and SMS notifications, and a blog section to support ongoing SEO. We set up Paul's Google Workspace email, registered the domain, and handled the Vercel deployment. He went from nothing to a fully operational online presence in under three weeks.</p>
+      <div class="project-prose reveal">
+        <p>Colossus Scaffolding is an East Sussex scaffolding contractor that had been operating for several years entirely through word-of-mouth referrals. They had no web presence whatsoever — no website, no Google Business Profile, and no way for new customers to find them online. As their business grew and they started bidding on larger contracts, the lack of a professional online presence was becoming a genuine liability.</p>
 
-      <h2>The results</h2>
-      <ul class="results-list">
-        <li class="result-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>First organic enquiry within 3 weeks of launch</li>
-        <li class="result-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>3–5 qualified leads per month from Google within the first quarter</li>
-        <li class="result-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Professional business email replacing personal Gmail account</li>
-        <li class="result-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Appearing on page one of Google for 12+ target keywords within 90 days</li>
-        <li class="result-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Google My Business listing live and verified, driving map pack traffic</li>
-        <li class="result-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>All ongoing changes handled by DCS — Paul focuses on the job, not the website</li>
-      </ul>
+        <p>The brief was straightforward: build a professional website that establishes credibility for larger clients, gets Colossus ranking on Google for scaffolding searches across East Sussex, and creates a clear pathway for prospects to get in touch. We built the site on the DCS platform using the Vega theme customised with Colossus's navy blue and white brand palette, wrote all the service and location content, and configured the full local SEO stack from day one.</p>
+
+        <p>The site launched in January 2025 with 14 pages covering the core service offering, 8 location pages for the towns Colossus operates in, a project gallery, and a team page. We set up Google Workspace so the team could start using professional email addresses, and we submitted the site to Google Search Console and created their Google Business Profile as part of the launch package.</p>
+      </div>
+
+      <!-- Results -->
+      <div class="reveal" style="margin-top: 60px; max-width: 800px;">
+        <h2 style="font-family: var(--font-display); font-size: 1.6rem; margin-bottom: 24px; color: var(--gray-800);">The results</h2>
+        <ul class="results-list">
+          <li class="result-item">
+            <span class="result-icon">
+              <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="11" cy="11" r="11" fill="#A2C579"/>
+                <path d="M6 11.5L9.5 15L16 8" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <span class="result-text">
+              <strong>First enquiry within 3 weeks of launch</strong>
+              An inbound contact form submission from a new customer who found them via Google — the first digital lead in the business's history.
+            </span>
+          </li>
+          <li class="result-item">
+            <span class="result-icon">
+              <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="11" cy="11" r="11" fill="#A2C579"/>
+                <path d="M6 11.5L9.5 15L16 8" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <span class="result-text">
+              <strong>3–5 organic leads per month by month three</strong>
+              Steady growth in search impressions as the location pages began ranking for scaffolding + area keywords across East Sussex.
+            </span>
+          </li>
+          <li class="result-item">
+            <span class="result-icon">
+              <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="11" cy="11" r="11" fill="#A2C579"/>
+                <path d="M6 11.5L9.5 15L16 8" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <span class="result-text">
+              <strong>Professional email replacing personal Gmail</strong>
+              The whole team switched to @colossusscaffolding.co.uk addresses. Quoting and invoicing now comes from a professional address, improving trust with new clients.
+            </span>
+          </li>
+          <li class="result-item">
+            <span class="result-icon">
+              <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="11" cy="11" r="11" fill="#A2C579"/>
+                <path d="M6 11.5L9.5 15L16 8" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <span class="result-text">
+              <strong>Google Business Profile verified and populated</strong>
+              Profile now shows in Google Maps for Sussex scaffolding searches. 12 five-star reviews collected in the first 3 months.
+            </span>
+          </li>
+          <li class="result-item">
+            <span class="result-icon">
+              <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="11" cy="11" r="11" fill="#A2C579"/>
+                <path d="M6 11.5L9.5 15L16 8" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <span class="result-text">
+              <strong>Increased credibility for commercial contracts</strong>
+              Being able to send prospects to a professional website before site meetings has measurably improved the conversion rate on larger commercial tenders.
+            </span>
+          </li>
+          <li class="result-item">
+            <span class="result-icon">
+              <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="11" cy="11" r="11" fill="#A2C579"/>
+                <path d="M6 11.5L9.5 15L16 8" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <span class="result-text">
+              <strong>Zero maintenance overhead</strong>
+              The DCS managed hosting model means the Colossus team have never had to worry about updates, security, or uptime since launch.
+            </span>
+          </li>
+        </ul>
+      </div>
+
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- CTA BANNER -->
-<section class="cta-section reveal">
-  <div class="container">
-    <div class="cta-inner">
-      <h2>Need a website for your trade?</h2>
-      <p>We build fast, professional sites that rank on Google and generate real enquiries. Get started today.</p>
-      <div class="cta-actions">
-        <a href="/contact" class="btn-dark">Get a free quote</a>
-        <a href="tel:01234567890" class="btn-dark-outline">Call us</a>
+  <!-- CTA BANNER -->
+  <section class="cta-banner reveal">
+    <div class="container">
+      <div class="cta-inner">
+        <h2>Need a website for your trade?</h2>
+        <p>We build professional, fast, SEO-ready websites for tradespeople across the UK.</p>
+        <div class="cta-actions">
+          <a href="/contact" class="btn-primary">Get a free quote</a>
+          <a href="tel:01234567890" class="btn-outline">Call us</a>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<footer class="footer">
-  <div class="container">
-    <div class="footer-grid">
-      <div class="footer-brand"><a href="/" class="logo">DCS</a><p>Professional websites for local service businesses. Design, build, host and support &mdash; all taken care of.</p></div>
-      <div class="footer-col"><h4>Navigation</h4><a href="/services">Services</a><a href="/locations">Areas We Serve</a><a href="/pricing">Pricing</a><a href="/projects">Our Work</a><a href="/about">About</a></div>
-      <div class="footer-col"><h4>Contact</h4><a href="mailto:hello@digitalconsultingservices.co.uk">hello@digitalconsultingservices.co.uk</a><a href="tel:01234567890">01234 567 890</a></div>
-      <div class="footer-col"><h4>Legal</h4><a href="/privacy">Privacy Policy</a><a href="/terms">Terms of Service</a><a href="/cookies">Cookie Policy</a></div>
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="/" class="logo">DCS</a>
+          <p>Professional websites for local service businesses. Design, build, host and support &mdash; all taken care of.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Navigation</h4>
+          <a href="/services">Services</a>
+          <a href="/locations">Areas We Serve</a>
+          <a href="/pricing">Pricing</a>
+          <a href="/projects">Our Work</a>
+          <a href="/blog">Blog</a>
+          <a href="/about">About</a>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <a href="mailto:hello@digitalconsultingservices.co.uk">hello@digitalconsultingservices.co.uk</a>
+          <a href="tel:01234567890">01234 567 890</a>
+          <p style="font-size:0.9rem; padding: 4px 0;">East Sussex, UK</p>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <a href="/privacy">Privacy Policy</a>
+          <a href="/terms">Terms of Service</a>
+          <a href="/cookies">Cookie Policy</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2025 Digital Consulting Services. All rights reserved.</span>
+        <div class="footer-legal">
+          <a href="/privacy">Privacy</a>
+          <a href="/terms">Terms</a>
+          <a href="/cookies">Cookies</a>
+        </div>
+      </div>
     </div>
-    <div class="footer-bottom"><span>&copy; 2025 Digital Consulting Services. All rights reserved.</span><div class="footer-legal"><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/cookies">Cookies</a></div></div>
-  </div>
-</footer>
+  </footer>
 
-<script>
-const header = document.getElementById('header');
-window.addEventListener('scroll', () => { header.classList.toggle('scrolled', window.scrollY > 20); }, { passive: true });
-const hamburger = document.getElementById('hamburger');
-const mobileMenu = document.getElementById('mobileMenu');
-hamburger.addEventListener('click', () => { const isOpen = mobileMenu.classList.toggle('open'); hamburger.classList.toggle('active'); hamburger.setAttribute('aria-expanded', isOpen); document.body.style.overflow = isOpen ? 'hidden' : ''; });
-mobileMenu.querySelectorAll('a').forEach(link => { link.addEventListener('click', () => { mobileMenu.classList.remove('open'); hamburger.classList.remove('active'); hamburger.setAttribute('aria-expanded', 'false'); document.body.style.overflow = ''; }); });
-</script>
-<script>
-const revealObs = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); } }); }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
-const headObs = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); headObs.unobserve(e.target); } }); }, { threshold: 0.2 });
-document.querySelectorAll('.section-label, .section-title, .section-subtitle').forEach(el => headObs.observe(el));
-</script>
+  <script>
+  const header = document.getElementById('header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 20);
+  }, { passive: true });
+
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.toggle('open');
+    hamburger.classList.toggle('active');
+    hamburger.setAttribute('aria-expanded', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      hamburger.classList.remove('active');
+      hamburger.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    });
+  });
+
+  const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+  document.querySelectorAll('.reveal').forEach(el => { observer.observe(el); });
+
+  const headingObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        headingObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.section-label, .section-title, .section-subtitle').forEach(el => {
+    headingObserver.observe(el);
+  });
+  </script>
+
 </body>
 </html>
