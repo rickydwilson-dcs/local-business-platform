@@ -8,23 +8,41 @@
 
 ## Summary
 
-One low-severity warning was found. All critical and high-severity rules pass cleanly. The `hostname: '**.r2.dev'` pattern in the `images.remotePatterns` of 9 sites uses a double-wildcard that matches any subdomain of r2.dev — this is intentional for Cloudflare R2 public bucket URLs but warrants acknowledgment. All sites have `dangerouslyAllowSVG: true` paired with a correct `contentSecurityPolicy` on the image optimizer, so VCA-007's security condition is met. No deployment-blocking issues were found.
+One finding: four `NEXT_PUBLIC_FEATURE_*` environment variables used in client components compiled at build time are absent from `turbo.json` `tasks.build.env`. Changing any of these feature flags in Vercel will produce a stale cache hit — the old build will be served. All other rules pass cleanly across all 11 sites.
 
 ## Findings
 
-### [Low / Warning] VCA-007: `hostname: '**.r2.dev'` is a broad wildcard in remotePatterns
+### HIGH VCA-004: Four NEXT*PUBLIC_FEATURE*\* vars missing from turbo.json env array
 
-- **File:** `sites/base-template/next.config.ts` (line 52), `sites/colossus-scaffolding/next.config.ts` (line 51), `sites/dj-fox-electrical/next.config.ts` (line 52), `sites/mad-graphics/next.config.ts` (line 52), `sites/_castor-plumbing/next.config.ts` (line 52), `sites/_cygnus-graphics/next.config.ts` (line 52), `sites/_lyra-garden/next.config.ts` (line 52), `sites/_nova-print/next.config.ts` (line 52), `sites/_rigel-events/next.config.ts` (line 52)
-- **Rule:** VCA-007 — CSP / dangerouslyAllowSVG / image remote patterns must be explicit
-- **Violation:** `hostname: '**.r2.dev'` allows any subdomain of r2.dev, not only the specific project bucket. This is a wildcard hostname per Next.js docs.
-- **Impact:** Does not cause a build failure. Any Cloudflare R2 bucket on r2.dev can serve images through Next.js image optimization. If a malicious image were injected via a different R2 bucket URL, it would be optimized and served. Low practical risk given the CSP is correctly set.
-- **Fix:** Scope the pattern to the specific R2 bucket hostname (e.g., `pub-abc123.r2.dev`) once bucket URLs are confirmed per site. Until then, this is a warning, not a hard failure.
-- **Effort:** small
+- **File:** `turbo.json` (lines 8-37, env array)
+- **Rule:** VCA-004 — Every build-affecting env var must be listed in `turbo.json` `tasks.build.env`
+- **Violation:** The following four variables are referenced in `packages/core-components/src/components/analytics/ConsentManager.tsx` (lines 78-81) and `packages/core-components/src/components/analytics/Analytics.tsx` (lines 47-50), which are client components compiled into every site's build output, but are not present in `turbo.json` `tasks.build.env`:
+  - `NEXT_PUBLIC_FEATURE_ANALYTICS_ENABLED`
+  - `NEXT_PUBLIC_FEATURE_GA4_ENABLED`
+  - `NEXT_PUBLIC_FEATURE_FACEBOOK_PIXEL`
+  - `NEXT_PUBLIC_FEATURE_GOOGLE_ADS`
+
+  The server-side equivalents (`FEATURE_ANALYTICS_ENABLED`, `FEATURE_GA4_ENABLED`, `FEATURE_FACEBOOK_PIXEL`, `FEATURE_GOOGLE_ADS`) are declared in turbo.json, but `NEXT_PUBLIC_*` variables are separate — Next.js inlines them into the client bundle at build time under different names. Turborepo does not treat `FEATURE_GA4_ENABLED` and `NEXT_PUBLIC_FEATURE_GA4_ENABLED` as the same variable.
+
+- **Impact:** If any of these feature flags are toggled in Vercel project settings, Turborepo will serve a cached build that was compiled with the old values. Analytics components will behave as if the flag was never changed until the cache is manually busted. This is the exact stale-build failure described in CLAUDE.md ("Stale builds after adding env var").
+
+- **Fix:** Add the four missing variables to `turbo.json` → `tasks.build.env`:
+
+  ```json
+  "NEXT_PUBLIC_FEATURE_ANALYTICS_ENABLED",
+  "NEXT_PUBLIC_FEATURE_GA4_ENABLED",
+  "NEXT_PUBLIC_FEATURE_FACEBOOK_PIXEL",
+  "NEXT_PUBLIC_FEATURE_GOOGLE_ADS"
+  ```
+
+  Commit separately from any code change so the cache bust is explicit.
+
+- **Effort:** trivial
 
 ## Statistics
 
 - Critical (blocks deploy): 0
-- High (deploy likely fails): 0
+- High (deploy likely fails): 1
 - Medium (cache/perf/correctness): 0
-- Low / warning: 1
+- Low / warning: 0
 - Total: 1
