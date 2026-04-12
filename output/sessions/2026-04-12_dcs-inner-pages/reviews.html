@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Client Reviews — Digital Consulting Services</title>
+<meta name="description" content="Real reviews from real tradespeople. See what our clients say about their websites built by Digital Consulting Services.">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --primary: #61A3BA; --primary-deep: #4a8fa8; --primary-light: #78b8d0;
+  --accent: #D2DE32; --accent-hover: #bdc82b;
+  --support: #A2C579; --support-dark: #8fb565;
+  --bg: #F0F7FA; --white: #ffffff;
+  --gray-100: #e4f0f5; --gray-200: #d4e8f0; --gray-400: #8a8a70; --gray-600: #3d4235; --gray-800: #2a2e20;
+  --font-display: 'Space Grotesk', sans-serif; --font-body: 'Inter', sans-serif;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --radius-card: 20px; --radius-card-lg: 24px;
+}
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--gray-800); font-family: var(--font-body); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+h1, h2, h3, h4, h5, h6 { font-family: var(--font-display); font-weight: 700; line-height: 1.15; }
+@keyframes fadeSlideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes floatA { 0%,100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-18px) rotate(4deg); } }
+@keyframes floatB { 0%,100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(14px) rotate(-3deg); } }
+.container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.header { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bottom: 1px solid var(--gray-200); transition: box-shadow 0.3s ease; }
+.header.scrolled { box-shadow: 0 2px 20px rgba(42,46,32,0.08); }
+.header-inner { display: flex; align-items: center; justify-content: space-between; padding: 16px 24px; max-width: 1200px; margin: 0 auto; }
+.logo { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; color: var(--primary-deep); letter-spacing: -0.5px; }
+.nav-links { display: flex; gap: 32px; align-items: center; }
+.nav-links a { font-family: var(--font-display); font-size: 0.9rem; font-weight: 500; color: var(--gray-600); transition: color 0.2s; position: relative; }
+.nav-links a::after { content: ''; position: absolute; bottom: -3px; left: 0; width: 0; height: 2px; background: var(--primary); transition: width 0.3s var(--ease-out); border-radius: 2px; }
+.nav-links a:hover { color: var(--primary-deep); }
+.nav-links a:hover::after { width: 100%; }
+.nav-cta { background: var(--primary); color: #ffffff !important; padding: 10px 24px; border-radius: 8px; font-weight: 600; font-size: 0.9rem; transition: background 0.2s; }
+.nav-cta:hover { background: var(--primary-deep); }
+.hamburger { display: none; background: none; border: none; cursor: pointer; width: 32px; height: 24px; position: relative; flex-direction: column; justify-content: space-between; }
+.hamburger span { display: block; width: 100%; height: 2.5px; background: var(--gray-800); border-radius: 2px; transition: all 0.3s var(--ease-out); }
+.hamburger.active span:nth-child(1) { transform: translateY(10.75px) rotate(45deg); }
+.hamburger.active span:nth-child(2) { opacity: 0; }
+.hamburger.active span:nth-child(3) { transform: translateY(-10.75px) rotate(-45deg); }
+.mobile-menu { display: none; position: fixed; top: 65px; left: 0; right: 0; bottom: 0; background: var(--bg); z-index: 99; padding: 40px 24px; flex-direction: column; gap: 24px; opacity: 0; transition: opacity 0.3s var(--ease-out); }
+.mobile-menu.open { display: flex; opacity: 1; }
+.mobile-menu a { font-family: var(--font-display); font-size: 1.25rem; font-weight: 600; color: var(--gray-800); padding: 8px 0; border-bottom: 1px solid var(--gray-200); }
+@media (max-width: 768px) { .nav-links { display: none; } .hamburger { display: flex; } }
+.section { padding: 80px 0; position: relative; }
+.footer { background: var(--gray-800); color: rgba(255,255,255,0.7); padding: 80px 0 40px; }
+.footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+.footer-brand .logo { color: var(--white); margin-bottom: 12px; display: block; }
+.footer-brand p { font-size: 0.9rem; line-height: 1.6; max-width: 280px; }
+.footer-col h4 { font-family: var(--font-display); font-size: 0.85rem; font-weight: 600; color: var(--white); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px; }
+.footer-col a { display: block; font-size: 0.9rem; padding: 4px 0; transition: color 0.2s; }
+.footer-col a:hover { color: var(--white); }
+.footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-size: 0.82rem; }
+.footer-legal { display: flex; gap: 24px; }
+.footer-legal a:hover { color: var(--white); }
+@media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; } .footer-bottom { flex-direction: column; text-align: center; } }
+@media (max-width: 480px) { .footer-grid { grid-template-columns: 1fr; } }
+.reveal { opacity: 0; transform: translateY(30px); transition: all 0.7s var(--ease-out); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.section-label, .section-title, .section-subtitle { opacity: 0; transform: translateY(20px); transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out); }
+.section-label.visible { opacity: 1; transform: translateY(0); }
+.section-title.visible { opacity: 1; transform: translateY(0); transition-delay: 0.1s; }
+.section-subtitle.visible { opacity: 1; transform: translateY(0); transition-delay: 0.2s; }
+
+/* PAGE-SPECIFIC */
+.page-hero { background: linear-gradient(180deg, var(--primary-light) 0%, var(--bg) 100%); padding: 80px 0 90px; border-bottom: 1px solid var(--gray-200); position: relative; overflow: hidden; }
+.solaris-geo-1 { position: absolute; top: -60px; right: -60px; width: 300px; height: 300px; background: rgba(97,163,186,0.12); border-radius: 40% 60% 55% 45% / 45% 40% 60% 55%; animation: floatA 8s ease-in-out infinite; pointer-events: none; }
+.solaris-geo-2 { position: absolute; bottom: -40px; left: 10%; width: 180px; height: 180px; background: rgba(210,222,50,0.1); border-radius: 30% 70% 60% 40% / 50% 35% 65% 50%; animation: floatB 11s ease-in-out infinite; pointer-events: none; }
+.breadcrumb { font-size: 0.85rem; color: var(--gray-400); margin-bottom: 20px; }
+.breadcrumb a { color: var(--primary-deep); }
+.breadcrumb a:hover { text-decoration: underline; }
+.breadcrumb span { margin: 0 8px; }
+.page-hero h1 { font-size: clamp(2.2rem, 4.5vw, 3.5rem); color: var(--gray-800); margin-bottom: 16px; letter-spacing: -1px; max-width: 640px; }
+.page-hero .hero-sub { font-size: 1.15rem; color: var(--gray-600); max-width: 540px; line-height: 1.7; }
+
+/* RATING SUMMARY */
+.rating-summary { display: flex; align-items: center; gap: 32px; background: var(--white); border-radius: var(--radius-card-lg); padding: 32px 40px; border: 1px solid var(--gray-200); margin-bottom: 48px; flex-wrap: wrap; }
+.rating-big { font-family: var(--font-display); font-size: 4rem; font-weight: 700; color: var(--gray-800); line-height: 1; }
+.rating-stars-big { font-size: 1.8rem; color: var(--accent); margin-bottom: 4px; }
+.rating-count { font-size: 0.9rem; color: var(--gray-600); }
+.rating-bars { flex: 1; min-width: 240px; }
+.rating-bar-row { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; font-size: 0.85rem; color: var(--gray-600); }
+.rating-bar-track { flex: 1; height: 8px; background: var(--gray-100); border-radius: 4px; overflow: hidden; }
+.rating-bar-fill { height: 100%; background: var(--accent); border-radius: 4px; }
+
+/* REVIEWS GRID */
+.reviews-grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
+@media (min-width: 768px) { .reviews-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .reviews-grid { grid-template-columns: repeat(3, 1fr); } }
+
+.review-card {
+  background: var(--white); border-radius: var(--radius-card); padding: 28px;
+  border: 1px solid var(--gray-200);
+  border-left: 4px solid var(--primary);
+  transition: box-shadow 0.3s var(--ease-out), transform 0.3s var(--ease-out);
+}
+.review-card:hover { box-shadow: 0 12px 32px rgba(42,46,32,0.09); transform: translateY(-3px); }
+.review-stars { font-size: 1.1rem; color: var(--accent); margin-bottom: 14px; letter-spacing: 2px; }
+.review-text { font-size: 0.92rem; color: var(--gray-600); line-height: 1.7; margin-bottom: 20px; font-style: italic; }
+.review-author { display: flex; align-items: center; gap: 14px; }
+.review-avatar { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, var(--primary), var(--primary-deep)); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-weight: 700; color: var(--white); font-size: 1rem; flex-shrink: 0; }
+.review-name { font-family: var(--font-display); font-size: 0.92rem; font-weight: 600; color: var(--gray-800); }
+.review-trade { font-size: 0.8rem; color: var(--gray-400); }
+.review-date { font-size: 0.78rem; color: var(--gray-400); margin-top: 4px; }
+
+/* CTA BANNER */
+.cta-banner { background: var(--accent); border-radius: var(--radius-card-lg); padding: 56px 48px; text-align: center; }
+.cta-banner h2 { font-size: clamp(1.6rem, 3vw, 2.4rem); color: var(--gray-800); margin-bottom: 12px; }
+.cta-banner p { font-size: 1.05rem; color: var(--gray-600); margin-bottom: 28px; }
+.btn-primary { display: inline-block; background: var(--primary-deep); color: #fff; font-family: var(--font-display); font-weight: 700; font-size: 1rem; padding: 16px 40px; border-radius: 10px; transition: background 0.2s, transform 0.2s; }
+.btn-primary:hover { background: var(--primary); transform: translateY(-2px); }
+.btn-secondary { display: inline-block; background: transparent; color: var(--gray-800); font-family: var(--font-display); font-weight: 600; font-size: 1rem; padding: 16px 40px; border-radius: 10px; border: 2px solid var(--gray-800); margin-left: 16px; transition: background 0.2s; }
+.btn-secondary:hover { background: rgba(42,46,32,0.06); }
+@media (max-width: 600px) { .btn-secondary { margin-left: 0; margin-top: 12px; } .cta-banner { padding: 40px 24px; } }
+</style>
+</head>
+<body>
+
+<header class="header" id="header">
+  <div class="header-inner">
+    <a href="/" class="logo">DCS</a>
+    <nav class="nav-links">
+      <a href="/services">Services</a>
+      <a href="/about">About</a>
+      <a href="/projects">Our Work</a>
+      <a href="/blog">Blog</a>
+      <a href="/pricing">Pricing</a>
+      <a href="/contact" class="nav-cta">Get Started</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation">
+    <a href="/services">Services</a>
+    <a href="/about">About</a>
+    <a href="/projects">Our Work</a>
+    <a href="/blog">Blog</a>
+    <a href="/pricing">Pricing</a>
+    <a href="/contact">Get Started</a>
+  </nav>
+</header>
+
+<section class="page-hero">
+  <div class="solaris-geo-1"></div>
+  <div class="solaris-geo-2"></div>
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a><span>›</span>Reviews
+    </nav>
+    <h1 class="section-title">What our clients say</h1>
+    <p class="hero-sub section-subtitle">Every review is from a real tradesperson. No fake testimonials, no cherry-picking.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+
+    <div class="rating-summary reveal">
+      <div>
+        <div class="rating-big">4.9</div>
+        <div class="rating-stars-big">★★★★★</div>
+        <div class="rating-count">Based on 31 reviews</div>
+      </div>
+      <div class="rating-bars">
+        <div class="rating-bar-row">
+          <span>5★</span>
+          <div class="rating-bar-track"><div class="rating-bar-fill" style="width:90%"></div></div>
+          <span>28</span>
+        </div>
+        <div class="rating-bar-row">
+          <span>4★</span>
+          <div class="rating-bar-track"><div class="rating-bar-fill" style="width:10%"></div></div>
+          <span>3</span>
+        </div>
+        <div class="rating-bar-row">
+          <span>3★</span>
+          <div class="rating-bar-track"><div class="rating-bar-fill" style="width:0%"></div></div>
+          <span>0</span>
+        </div>
+        <div class="rating-bar-row">
+          <span>2★</span>
+          <div class="rating-bar-track"><div class="rating-bar-fill" style="width:0%"></div></div>
+          <span>0</span>
+        </div>
+        <div class="rating-bar-row">
+          <span>1★</span>
+          <div class="rating-bar-track"><div class="rating-bar-fill" style="width:0%"></div></div>
+          <span>0</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="reviews-grid">
+
+      <div class="review-card reveal">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"DCS built our website from scratch and we had our first enquiry within three weeks. They handled everything — the writing, the design, getting us on Google. We just had to answer a few questions. Couldn't be happier."</p>
+        <div class="review-author">
+          <div class="review-avatar">JC</div>
+          <div>
+            <div class="review-name">James Crawford</div>
+            <div class="review-trade">Scaffolding Contractor, Sussex</div>
+            <div class="review-date">March 2025</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card reveal">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"I was sceptical about paying for a website because the last one I had did nothing. DCS was different from the start — they explained what they were doing and why. We now rank on the first page for half a dozen searches."</p>
+        <div class="review-author">
+          <div class="review-avatar">DF</div>
+          <div>
+            <div class="review-name">David Fox</div>
+            <div class="review-trade">Electrician, East Sussex</div>
+            <div class="review-date">February 2025</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card reveal">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Brilliant service. They wrote all the content, sorted the SEO, and set up Google Business for us too. The site looks really professional. We've had a steady flow of calls since it went live in January."</p>
+        <div class="review-author">
+          <div class="review-avatar">MP</div>
+          <div>
+            <div class="review-name">Mark Pearson</div>
+            <div class="review-trade">Painter &amp; Decorator, Brighton</div>
+            <div class="review-date">January 2025</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card reveal">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Straightforward, professional, and they actually know about SEO for trades — not just web design. Our plumbing business has doubled the number of online enquiries compared to the old site. Well worth the investment."</p>
+        <div class="review-author">
+          <div class="review-avatar">SR</div>
+          <div>
+            <div class="review-name">Steve Robinson</div>
+            <div class="review-trade">Plumber, Eastbourne</div>
+            <div class="review-date">December 2024</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card reveal">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"I run a small roofing business and never had time to deal with websites. DCS handled absolutely everything. I just reviewed the site and it was exactly what I asked for. Zero stress. The phone started ringing within a month."</p>
+        <div class="review-author">
+          <div class="review-avatar">TH</div>
+          <div>
+            <div class="review-name">Tom Hughes</div>
+            <div class="review-trade">Roofing Contractor, Lewes</div>
+            <div class="review-date">November 2024</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card reveal">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"We've tried a few web agencies before and always felt like just a number. DCS are different. They know the trades industry, they write content that actually sounds like us, and they respond quickly when we need anything changed."</p>
+        <div class="review-author">
+          <div class="review-avatar">KL</div>
+          <div>
+            <div class="review-name">Karen Lewis</div>
+            <div class="review-trade">Landscape Gardener, Hove</div>
+            <div class="review-date">October 2024</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top: 0;">
+  <div class="container">
+    <div class="cta-banner reveal">
+      <h2>Ready to get more enquiries?</h2>
+      <p>Join 30+ tradespeople who trust DCS to handle their online presence.</p>
+      <a href="/contact" class="btn-primary">Get a free quote</a>
+      <a href="/projects" class="btn-secondary">See our work</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo">DCS</a><p>Professional websites for local service businesses. Design, build, host and support &mdash; all taken care of.</p></div>
+      <div class="footer-col"><h4>Navigation</h4><a href="/services">Services</a><a href="/locations">Areas We Serve</a><a href="/pricing">Pricing</a><a href="/projects">Our Work</a><a href="/about">About</a></div>
+      <div class="footer-col"><h4>Contact</h4><a href="mailto:hello@digitalconsultingservices.co.uk">hello@digitalconsultingservices.co.uk</a><a href="tel:01234567890">01234 567 890</a></div>
+      <div class="footer-col"><h4>Legal</h4><a href="/privacy">Privacy Policy</a><a href="/terms">Terms of Service</a><a href="/cookies">Cookie Policy</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2025 Digital Consulting Services. All rights reserved.</span><div class="footer-legal"><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/cookies">Cookies</a></div></div>
+  </div>
+</footer>
+
+<script>
+const header = document.getElementById('header');
+window.addEventListener('scroll', () => { header.classList.toggle('scrolled', window.scrollY > 20); }, { passive: true });
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+hamburger.addEventListener('click', () => { const isOpen = mobileMenu.classList.toggle('open'); hamburger.classList.toggle('active'); hamburger.setAttribute('aria-expanded', isOpen); document.body.style.overflow = isOpen ? 'hidden' : ''; });
+mobileMenu.querySelectorAll('a').forEach(link => { link.addEventListener('click', () => { mobileMenu.classList.remove('open'); hamburger.classList.remove('active'); hamburger.setAttribute('aria-expanded', 'false'); document.body.style.overflow = ''; }); });
+</script>
+<script>
+const revealObs = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); } }); }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+const headObs = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); headObs.unobserve(e.target); } }); }, { threshold: 0.2 });
+document.querySelectorAll('.section-label, .section-title, .section-subtitle').forEach(el => headObs.observe(el));
+</script>
+</body>
+</html>

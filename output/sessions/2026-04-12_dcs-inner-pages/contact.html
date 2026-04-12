@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Get in Touch — Digital Consulting Services</title>
+<meta name="description" content="Get a free, no-obligation quote for your trade website. We'll get back to you within one business day.">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --primary: #61A3BA; --primary-deep: #4a8fa8; --primary-light: #78b8d0;
+  --accent: #D2DE32; --accent-hover: #bdc82b;
+  --support: #A2C579; --support-dark: #8fb565;
+  --bg: #F0F7FA; --white: #ffffff;
+  --gray-100: #e4f0f5; --gray-200: #d4e8f0; --gray-400: #8a8a70; --gray-600: #3d4235; --gray-800: #2a2e20;
+  --font-display: 'Space Grotesk', sans-serif; --font-body: 'Inter', sans-serif;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --radius-card: 20px; --radius-card-lg: 24px;
+}
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--gray-800); font-family: var(--font-body); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+h1, h2, h3, h4, h5, h6 { font-family: var(--font-display); font-weight: 700; line-height: 1.15; }
+.container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.header { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bottom: 1px solid var(--gray-200); transition: box-shadow 0.3s ease; }
+.header.scrolled { box-shadow: 0 2px 20px rgba(42,46,32,0.08); }
+.header-inner { display: flex; align-items: center; justify-content: space-between; padding: 16px 24px; max-width: 1200px; margin: 0 auto; }
+.logo { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; color: var(--primary-deep); letter-spacing: -0.5px; }
+.nav-links { display: flex; gap: 32px; align-items: center; }
+.nav-links a { font-family: var(--font-display); font-size: 0.9rem; font-weight: 500; color: var(--gray-600); transition: color 0.2s; position: relative; }
+.nav-links a::after { content: ''; position: absolute; bottom: -3px; left: 0; width: 0; height: 2px; background: var(--primary); transition: width 0.3s var(--ease-out); border-radius: 2px; }
+.nav-links a:hover { color: var(--primary-deep); }
+.nav-links a:hover::after { width: 100%; }
+.nav-cta { background: var(--primary); color: #ffffff !important; padding: 10px 24px; border-radius: 8px; font-weight: 600; font-size: 0.9rem; transition: background 0.2s; }
+.nav-cta:hover { background: var(--primary-deep); }
+.hamburger { display: none; background: none; border: none; cursor: pointer; width: 32px; height: 24px; position: relative; flex-direction: column; justify-content: space-between; }
+.hamburger span { display: block; width: 100%; height: 2.5px; background: var(--gray-800); border-radius: 2px; transition: all 0.3s var(--ease-out); }
+.hamburger.active span:nth-child(1) { transform: translateY(10.75px) rotate(45deg); }
+.hamburger.active span:nth-child(2) { opacity: 0; }
+.hamburger.active span:nth-child(3) { transform: translateY(-10.75px) rotate(-45deg); }
+.mobile-menu { display: none; position: fixed; top: 65px; left: 0; right: 0; bottom: 0; background: var(--bg); z-index: 99; padding: 40px 24px; flex-direction: column; gap: 24px; opacity: 0; transition: opacity 0.3s var(--ease-out); }
+.mobile-menu.open { display: flex; opacity: 1; }
+.mobile-menu a { font-family: var(--font-display); font-size: 1.25rem; font-weight: 600; color: var(--gray-800); padding: 8px 0; border-bottom: 1px solid var(--gray-200); }
+@media (max-width: 768px) { .nav-links { display: none; } .hamburger { display: flex; } }
+.section { padding: 80px 0; position: relative; }
+.footer { background: var(--gray-800); color: rgba(255,255,255,0.7); padding: 80px 0 40px; }
+.footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+.footer-brand .logo { color: var(--white); margin-bottom: 12px; display: block; }
+.footer-brand p { font-size: 0.9rem; line-height: 1.6; max-width: 280px; }
+.footer-col h4 { font-family: var(--font-display); font-size: 0.85rem; font-weight: 600; color: var(--white); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px; }
+.footer-col a { display: block; font-size: 0.9rem; padding: 4px 0; transition: color 0.2s; }
+.footer-col a:hover { color: var(--white); }
+.footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-size: 0.82rem; }
+.footer-legal { display: flex; gap: 24px; }
+.footer-legal a:hover { color: var(--white); }
+@media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; } .footer-bottom { flex-direction: column; text-align: center; } }
+@media (max-width: 480px) { .footer-grid { grid-template-columns: 1fr; } }
+.reveal { opacity: 0; transform: translateY(30px); transition: all 0.7s var(--ease-out); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* PAGE-SPECIFIC */
+.page-hero { background: linear-gradient(180deg, var(--primary-light) 0%, var(--bg) 100%); padding: 80px 0 90px; border-bottom: 1px solid var(--gray-200); }
+.breadcrumb { font-size: 0.85rem; color: var(--gray-400); margin-bottom: 20px; }
+.breadcrumb a { color: var(--primary-deep); }
+.breadcrumb a:hover { text-decoration: underline; }
+.breadcrumb span { margin: 0 8px; }
+.page-hero h1 { font-size: clamp(2.2rem, 4.5vw, 3.5rem); color: var(--gray-800); margin-bottom: 16px; letter-spacing: -1px; max-width: 640px; }
+.page-hero .hero-sub { font-size: 1.15rem; color: var(--gray-600); max-width: 540px; line-height: 1.7; }
+
+/* CONTACT LAYOUT */
+.contact-grid { display: grid; grid-template-columns: 1fr; gap: 40px; }
+@media (min-width: 900px) { .contact-grid { grid-template-columns: 11fr 9fr; gap: 56px; } }
+
+/* FORM */
+.contact-form-wrap { background: var(--white); border-radius: var(--radius-card-lg); padding: 40px; border: 1px solid var(--gray-200); }
+.contact-form-wrap h2 { font-size: 1.5rem; margin-bottom: 8px; }
+.contact-form-wrap .form-intro { font-size: 0.92rem; color: var(--gray-600); margin-bottom: 28px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media (max-width: 560px) { .form-row { grid-template-columns: 1fr; } }
+.form-group { margin-bottom: 20px; }
+.form-group label { display: block; font-family: var(--font-display); font-size: 0.85rem; font-weight: 600; color: var(--gray-800); margin-bottom: 6px; }
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%; padding: 12px 16px;
+  border: 1.5px solid var(--gray-200); border-radius: 10px;
+  font-family: var(--font-body); font-size: 0.92rem; color: var(--gray-800);
+  background: var(--bg); transition: border-color 0.2s;
+  outline: none;
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus { border-color: var(--primary); background: var(--white); }
+.form-group textarea { min-height: 120px; resize: vertical; }
+.form-note { font-size: 0.8rem; color: var(--gray-400); margin-top: 6px; }
+.btn-submit { width: 100%; background: var(--primary-deep); color: #fff; font-family: var(--font-display); font-weight: 700; font-size: 1rem; padding: 16px 32px; border-radius: 10px; border: none; cursor: pointer; transition: background 0.2s, transform 0.2s; }
+.btn-submit:hover { background: var(--primary); transform: translateY(-1px); }
+.privacy-note { font-size: 0.78rem; color: var(--gray-400); margin-top: 12px; text-align: center; }
+.privacy-note a { color: var(--primary-deep); text-decoration: underline; }
+
+/* INFO PANEL */
+.contact-info { display: flex; flex-direction: column; gap: 24px; }
+.info-card { background: var(--white); border-radius: var(--radius-card); padding: 28px; border: 1px solid var(--gray-200); }
+.info-card h3 { font-size: 1.1rem; margin-bottom: 16px; }
+.info-item { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 16px; }
+.info-item:last-child { margin-bottom: 0; }
+.info-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--primary); margin-top: 6px; flex-shrink: 0; }
+.info-item-text strong { display: block; font-family: var(--font-display); font-size: 0.88rem; font-weight: 600; margin-bottom: 2px; }
+.info-item-text span { font-size: 0.85rem; color: var(--gray-600); }
+.info-item-text a { color: var(--primary-deep); }
+.info-item-text a:hover { text-decoration: underline; }
+.promise-list { list-style: none; padding: 0; }
+.promise-list li { display: flex; align-items: center; gap: 10px; font-size: 0.88rem; color: var(--gray-600); padding: 8px 0; border-bottom: 1px solid var(--gray-100); }
+.promise-list li:last-child { border-bottom: none; }
+.promise-tick { width: 20px; height: 20px; border-radius: 50%; background: var(--support); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 0.7rem; color: var(--white); font-weight: 700; }
+</style>
+</head>
+<body>
+
+<header class="header" id="header">
+  <div class="header-inner">
+    <a href="/" class="logo">DCS</a>
+    <nav class="nav-links">
+      <a href="/services">Services</a>
+      <a href="/about">About</a>
+      <a href="/projects">Our Work</a>
+      <a href="/blog">Blog</a>
+      <a href="/pricing">Pricing</a>
+      <a href="/contact" class="nav-cta">Get Started</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation">
+    <a href="/services">Services</a>
+    <a href="/about">About</a>
+    <a href="/projects">Our Work</a>
+    <a href="/blog">Blog</a>
+    <a href="/pricing">Pricing</a>
+    <a href="/contact">Get Started</a>
+  </nav>
+</header>
+
+<section class="page-hero">
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a><span>›</span>Contact
+    </nav>
+    <h1>Get a free quote</h1>
+    <p class="hero-sub">Tell us about your business. We'll get back to you within one working day — no sales pressure, no obligation.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="contact-grid">
+
+      <div class="contact-form-wrap reveal">
+        <h2>Tell us about your business</h2>
+        <p class="form-intro">Fill in the form below and we'll be in touch to discuss how we can help. Takes about 2 minutes.</p>
+
+        <form action="/contact/submit" method="POST" novalidate>
+          <!-- Honeypot: hidden from real users, filled by bots -->
+          <input type="text" name="website" style="display:none" tabindex="-1" autocomplete="off">
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="first_name">First name *</label>
+              <input type="text" id="first_name" name="first_name" required autocomplete="given-name">
+            </div>
+            <div class="form-group">
+              <label for="last_name">Last name *</label>
+              <input type="text" id="last_name" name="last_name" required autocomplete="family-name">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email address *</label>
+            <input type="email" id="email" name="email" required autocomplete="email">
+          </div>
+
+          <div class="form-group">
+            <label for="phone">Phone number</label>
+            <input type="tel" id="phone" name="phone" autocomplete="tel">
+            <p class="form-note">We'll only call if you'd like us to — just let us know.</p>
+          </div>
+
+          <div class="form-group">
+            <label for="trade">What type of business do you run? *</label>
+            <select id="trade" name="trade" required>
+              <option value="" disabled selected>Select your trade</option>
+              <option value="scaffolding">Scaffolding</option>
+              <option value="electrical">Electrical</option>
+              <option value="plumbing">Plumbing &amp; Heating</option>
+              <option value="painting">Painting &amp; Decorating</option>
+              <option value="roofing">Roofing</option>
+              <option value="landscaping">Landscaping &amp; Gardening</option>
+              <option value="building">Building &amp; Construction</option>
+              <option value="cleaning">Cleaning</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="location">Where are you based? *</label>
+            <input type="text" id="location" name="location" placeholder="e.g. Brighton, East Sussex" required>
+          </div>
+
+          <div class="form-group">
+            <label for="existing_site">Do you have an existing website?</label>
+            <select id="existing_site" name="existing_site">
+              <option value="no">No — I need a new website</option>
+              <option value="yes_replace">Yes — I want to replace it</option>
+              <option value="yes_improve">Yes — I want to improve it</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="message">Anything else you'd like to tell us?</label>
+            <textarea id="message" name="message" placeholder="Tell us about your goals, what's working, what isn't — anything that helps us understand what you need."></textarea>
+          </div>
+
+          <button type="submit" class="btn-submit">Send my free quote request</button>
+          <p class="privacy-note">We'll never share your details with third parties. See our <a href="/privacy">privacy policy</a>.</p>
+        </form>
+      </div>
+
+      <div class="contact-info reveal">
+
+        <div class="info-card">
+          <h3>Get in touch directly</h3>
+          <div class="info-item">
+            <div class="info-dot"></div>
+            <div class="info-item-text">
+              <strong>Email</strong>
+              <span><a href="mailto:hello@digitalconsultingservices.co.uk">hello@digitalconsultingservices.co.uk</a></span>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-dot"></div>
+            <div class="info-item-text">
+              <strong>Phone</strong>
+              <span><a href="tel:01234567890">01234 567 890</a></span>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-dot"></div>
+            <div class="info-item-text">
+              <strong>Hours</strong>
+              <span>Monday–Friday, 9am–5pm</span>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-dot"></div>
+            <div class="info-item-text">
+              <strong>Response time</strong>
+              <span>We reply within one working day</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <h3>What happens next</h3>
+          <ul class="promise-list">
+            <li><div class="promise-tick">1</div><span>We review your enquiry and look at your area</span></li>
+            <li><div class="promise-tick">2</div><span>We reply within one working day with initial thoughts</span></li>
+            <li><div class="promise-tick">3</div><span>If it looks like a good fit, we book a short call</span></li>
+            <li><div class="promise-tick">4</div><span>We send a written proposal with fixed pricing</span></li>
+            <li><div class="promise-tick">5</div><span>You decide — no pressure, no chasing</span></li>
+          </ul>
+        </div>
+
+        <div class="info-card" style="background: var(--accent); border-color: var(--accent-hover);">
+          <h3 style="color: var(--gray-800);">No obligation, ever</h3>
+          <p style="font-size: 0.88rem; color: var(--gray-600); line-height: 1.6;">Getting in touch doesn't commit you to anything. If we're not the right fit, we'll tell you honestly. We'd rather you find the right solution than sign up with us and be disappointed.</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo">DCS</a><p>Professional websites for local service businesses. Design, build, host and support &mdash; all taken care of.</p></div>
+      <div class="footer-col"><h4>Navigation</h4><a href="/services">Services</a><a href="/locations">Areas We Serve</a><a href="/pricing">Pricing</a><a href="/projects">Our Work</a><a href="/about">About</a></div>
+      <div class="footer-col"><h4>Contact</h4><a href="mailto:hello@digitalconsultingservices.co.uk">hello@digitalconsultingservices.co.uk</a><a href="tel:01234567890">01234 567 890</a></div>
+      <div class="footer-col"><h4>Legal</h4><a href="/privacy">Privacy Policy</a><a href="/terms">Terms of Service</a><a href="/cookies">Cookie Policy</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2025 Digital Consulting Services. All rights reserved.</span><div class="footer-legal"><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/cookies">Cookies</a></div></div>
+  </div>
+</footer>
+
+<script>
+const header = document.getElementById('header');
+window.addEventListener('scroll', () => { header.classList.toggle('scrolled', window.scrollY > 20); }, { passive: true });
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+hamburger.addEventListener('click', () => { const isOpen = mobileMenu.classList.toggle('open'); hamburger.classList.toggle('active'); hamburger.setAttribute('aria-expanded', isOpen); document.body.style.overflow = isOpen ? 'hidden' : ''; });
+mobileMenu.querySelectorAll('a').forEach(link => { link.addEventListener('click', () => { mobileMenu.classList.remove('open'); hamburger.classList.remove('active'); hamburger.setAttribute('aria-expanded', 'false'); document.body.style.overflow = ''; }); });
+</script>
+<script>
+const revealObs = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); } }); }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+</script>
+</body>
+</html>
