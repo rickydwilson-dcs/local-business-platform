@@ -49,7 +49,7 @@ export default async function BlogPage() {
           slug: p.slug,
           title: p.title,
           excerpt: p.excerpt,
-          date: p.date,
+          date: String(p.date),
           category: p.category,
           heroImage: p.heroImage,
           readingTime: p.readingTime,

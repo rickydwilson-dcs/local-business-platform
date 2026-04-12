@@ -101,7 +101,7 @@ export default async function BlogPostPage({ params }: { params: Promise<Params>
       slug: p.slug,
       title: p.title,
       excerpt: p.excerpt,
-      date: p.date,
+      date: String(p.date),
       category: p.category,
       heroImage: p.heroImage,
       readingTime: p.readingTime,
@@ -165,7 +165,7 @@ export default async function BlogPostPage({ params }: { params: Promise<Params>
       frontmatter={{
         title: frontmatter.title,
         description: frontmatter.description,
-        date: frontmatter.date,
+        date: String(frontmatter.date),
         category: frontmatter.category,
         heroImage: frontmatter.heroImage,
         author: frontmatter.author,

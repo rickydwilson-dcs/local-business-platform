@@ -50,20 +50,22 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
       url: absUrl(`/projects/${slug}`),
       siteName: siteConfig.business.name,
       type: "article",
-      images: [
-        {
-          url: getImageUrl(frontmatter.heroImage),
-          width: 1200,
-          height: 630,
-          alt: frontmatter.title,
-        },
-      ],
+      ...(frontmatter.heroImage && {
+        images: [
+          {
+            url: getImageUrl(frontmatter.heroImage),
+            width: 1200,
+            height: 630,
+            alt: frontmatter.title,
+          },
+        ],
+      }),
     },
     twitter: {
       card: "summary_large_image",
       title: frontmatter.title,
       description: frontmatter.description,
-      images: [getImageUrl(frontmatter.heroImage)],
+      ...(frontmatter.heroImage && { images: [getImageUrl(frontmatter.heroImage)] }),
     },
     alternates: {
       canonical: absUrl(`/projects/${slug}`),
