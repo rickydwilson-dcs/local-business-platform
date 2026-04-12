@@ -8,16 +8,23 @@
 
 ## Summary
 
-All 9 rules passed with zero violations across all 11 sites. No hard failures and no warnings were found. The configuration is clean and consistent with the canonical patterns defined in CLAUDE.md and deployment.md.
+One low-severity warning was found. All critical and high-severity rules pass cleanly. The `hostname: '**.r2.dev'` pattern in the `images.remotePatterns` of 9 sites uses a double-wildcard that matches any subdomain of r2.dev — this is intentional for Cloudflare R2 public bucket URLs but warrants acknowledgment. All sites have `dangerouslyAllowSVG: true` paired with a correct `contentSecurityPolicy` on the image optimizer, so VCA-007's security condition is met. No deployment-blocking issues were found.
+
+## Findings
+
+### [Low / Warning] VCA-007: `hostname: '**.r2.dev'` is a broad wildcard in remotePatterns
+
+- **File:** `sites/base-template/next.config.ts` (line 52), `sites/colossus-scaffolding/next.config.ts` (line 51), `sites/dj-fox-electrical/next.config.ts` (line 52), `sites/mad-graphics/next.config.ts` (line 52), `sites/_castor-plumbing/next.config.ts` (line 52), `sites/_cygnus-graphics/next.config.ts` (line 52), `sites/_lyra-garden/next.config.ts` (line 52), `sites/_nova-print/next.config.ts` (line 52), `sites/_rigel-events/next.config.ts` (line 52)
+- **Rule:** VCA-007 — CSP / dangerouslyAllowSVG / image remote patterns must be explicit
+- **Violation:** `hostname: '**.r2.dev'` allows any subdomain of r2.dev, not only the specific project bucket. This is a wildcard hostname per Next.js docs.
+- **Impact:** Does not cause a build failure. Any Cloudflare R2 bucket on r2.dev can serve images through Next.js image optimization. If a malicious image were injected via a different R2 bucket URL, it would be optimized and served. Low practical risk given the CSP is correctly set.
+- **Fix:** Scope the pattern to the specific R2 bucket hostname (e.g., `pub-abc123.r2.dev`) once bucket URLs are confirmed per site. Until then, this is a warning, not a hard failure.
+- **Effort:** small
 
 ## Statistics
 
 - Critical (blocks deploy): 0
 - High (deploy likely fails): 0
 - Medium (cache/perf/correctness): 0
-- Low / warning: 0
-- Total: 0
-
-## Out-of-scope observations
-
-`sites/dcs/vercel.json` uses `"buildCommand": "cd ../.. && pnpm build --filter @platform/dcs"` (space before `@platform/dcs`, no `turbo run`, package name rather than site directory name) which differs from the canonical pattern used by every other site (`pnpm turbo run build --filter=<site-name>`). This is not covered by the current rule set — for human review. Functionally it should still work because `pnpm build` at the monorepo root invokes Turborepo via the root `package.json` scripts, but the inconsistency increases operational risk if the root scripts change.
+- Low / warning: 1
+- Total: 1
