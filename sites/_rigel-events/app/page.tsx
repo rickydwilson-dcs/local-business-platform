@@ -1,7 +1,7 @@
 /**
  * Homepage — thin wrapper
  *
- * Fetches data and delegates all rendering to RigelHomePage template.
+ * Composes Rigel theme components to match the colorcode.events reference design.
  */
 
 import type { Metadata } from "next";
@@ -9,9 +9,16 @@ import { siteConfig } from "@/site.config";
 import { getContentItems } from "@/lib/content";
 import { absUrl } from "@/lib/site";
 import { getLocalBusinessSchema } from "@/lib/schema";
-import type { SiteConfigSummary, SpeakerSummary, TestimonialSummary } from "@platform/core-components";
-import { RigelHomePage } from "@platform/themes/rigel/pages";
-import type { RigelHomePageProps } from "@platform/themes/rigel/pages";
+import {
+  Hero,
+  Stats,
+  ColorCodeEventsAbout,
+  HowItStarted,
+  EventDetailsBanner,
+  StatsSpeakers,
+  EventStatsBlock,
+  NewsletterSignupCTA,
+} from "@platform/themes/rigel/components";
 
 export const dynamic = "force-static";
 
@@ -57,126 +64,7 @@ export const metadata: Metadata = {
   },
 };
 
-interface SpeakerFrontmatter {
-  name: string;
-  slug: string;
-  title: string;
-  topic: string;
-  description: string;
-  day: "saturday" | "sunday";
-  time: string;
-  stage: string;
-  featured: boolean;
-  imageAlt?: string;
-  social?: { twitter?: string; linkedin?: string; website?: string };
-}
-
-interface TestimonialFrontmatter {
-  customerName: string;
-  customerRole: string;
-  rating: number;
-  text: string;
-  featured: boolean;
-  platform: string;
-}
-
-const saturdayPreview: RigelHomePageProps["saturdayPreview"] = [
-  {
-    time: "09:30",
-    title: "The Small Business Marketing Stack: What Actually Works in 2026",
-    stage: "Main Stage",
-    speaker: "Ricky Wilson",
-  },
-  {
-    time: "11:00",
-    title: "Local SEO in 2026: What's Changed and What Still Works",
-    stage: "Main Stage",
-    speaker: "Sarah Chen",
-  },
-  {
-    time: "14:00",
-    title: "Email Isn't Dead: Building a List That Actually Converts",
-    stage: "Workshop Room",
-    speaker: "Emily Thornton",
-  },
-  {
-    time: "15:30",
-    title: "Panel: Marketing on a Shoestring Budget",
-    stage: "Main Stage",
-    speaker: "All Speakers",
-  },
-];
-
-const sundayPreview: RigelHomePageProps["sundayPreview"] = [
-  {
-    time: "10:00",
-    title: "Getting ROI from Google & Meta Ads on a Small Budget",
-    stage: "Main Stage",
-    speaker: "Marcus Okafor",
-  },
-  {
-    time: "11:30",
-    title: "AI-Powered Marketing: Tools You Can Use Today",
-    stage: "Main Stage",
-    speaker: "James Hartley",
-  },
-  {
-    time: "14:00",
-    title: "Workshop: Build Your 90-Day Marketing Plan",
-    stage: "Workshop Room",
-    speaker: "Ricky Wilson",
-  },
-  {
-    time: "15:30",
-    title: "Closing Keynote: The Future of Local Marketing",
-    stage: "Main Stage",
-    speaker: "All Speakers",
-  },
-];
-
 export default async function HomePage() {
-  const [allSpeakers, allTestimonials] = await Promise.all([
-    getContentItems("speakers"),
-    getContentItems("testimonials"),
-  ]);
-
-  const featuredSpeakers: SpeakerSummary[] = allSpeakers
-    .map((item) => {
-      const fm = item as unknown as SpeakerFrontmatter;
-      return {
-        slug: item.slug,
-        name: fm.name,
-        title: fm.title,
-        topic: fm.topic,
-        description: fm.description,
-        day: fm.day,
-        time: fm.time,
-        stage: fm.stage,
-        featured: fm.featured,
-        imageAlt: fm.imageAlt,
-        social: fm.social,
-      } satisfies SpeakerSummary;
-    })
-    .filter((s) => s.featured)
-    .slice(0, 6);
-
-  const testimonials: TestimonialSummary[] = allTestimonials
-    .map((item) => {
-      const fm = item as unknown as TestimonialFrontmatter;
-      return {
-        slug: item.slug,
-        name: fm.customerName,
-        rating: fm.rating,
-        body: fm.text,
-        platform: fm.platform,
-      } satisfies TestimonialSummary;
-    })
-    .filter((_, i) => {
-      const fm = allTestimonials[i] as unknown as TestimonialFrontmatter;
-      return fm.featured;
-    })
-    .slice(0, 3);
-
   const localBusinessSchema = getLocalBusinessSchema();
 
   const eventSchema = {
@@ -220,7 +108,7 @@ export default async function HomePage() {
     inLanguage: "en-GB",
   };
 
-  const schemaNodes = (
+  return (
     <>
       <script
         type="application/ld+json"
@@ -234,34 +122,80 @@ export default async function HomePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(webSiteSchema) }}
       />
+
+      {/* 1. Hero */}
+      <Hero
+        heading="Digital Marketing Weekend 2026"
+        subheading="Two days of practical marketing sessions, workshops, and networking — free to attend. Eastbourne, 17–18 October 2026."
+        ctaButtons={[
+          { label: "Get Your Free Ticket", href: siteConfig.cta.primary.href },
+          { label: "View Schedule", href: "/schedule" },
+        ]}
+      />
+
+      {/* 2. Event Details Banner */}
+      <EventDetailsBanner
+        eventDate="17–18 October 2026"
+        eventTime="9:00am – 6:00pm each day"
+        eventVenue="The Winter Garden, Eastbourne"
+        eventInfoCta={[{ label: "Get Event Info", href: "/venue" }]}
+      />
+
+      {/* 3. Stats strip */}
+      <Stats
+        statItems={[
+          {
+            value: "10+",
+            label: "Expert Speakers",
+            description: "Practitioners sharing real results",
+          },
+          { value: "2", label: "Full Days", description: "Packed with sessions and workshops" },
+          { value: "Free", label: "To Attend", description: "No ticket price, no catch" },
+          { value: "500+", label: "Attendees", description: "Marketers and business owners" },
+        ]}
+      />
+
+      {/* 4. About the event */}
+      <ColorCodeEventsAbout
+        sectionHeading="About Digital Marketing Weekend"
+        bodyText="Digital Marketing Weekend is a free two-day event bringing together digital marketers, small business owners, and freelancers in Eastbourne. Across two packed days at The Winter Garden, you'll hear from industry experts on everything from SEO and social media to email marketing, paid advertising, and AI-powered tools. Whether you're just starting your digital journey or looking to sharpen your strategy, there's something for everyone — and it's completely free."
+        learnMoreButton={[{ label: "About the Event", href: "/about" }]}
+      />
+
+      {/* 5. How it started */}
+      <HowItStarted
+        sectionHeading="How It All Started"
+        bodyText={[
+          "Digital Marketing Weekend was born out of a simple belief: that world-class marketing education shouldn't be locked behind expensive conference fees.",
+          "We started with a single event in Eastbourne, bringing together a handful of passionate marketers and business owners who wanted practical, actionable advice — not theoretical fluff.",
+          "Today, thousands of attendees have walked away with strategies they could implement the very next day. And it's still completely free.",
+        ]}
+      />
+
+      {/* 6. Speaker stats */}
+      <StatsSpeakers
+        heading="Our Speakers"
+        statItems={[
+          { value: "10+", label: "Expert Speakers" },
+          { value: "2", label: "Stages" },
+          { value: "20+", label: "Sessions" },
+          { value: "100%", label: "Practitioner-Led" },
+        ]}
+      />
+
+      {/* 7. Event stats block */}
+      <EventStatsBlock
+        heading="Event at a Glance"
+        statItems={[
+          { label: "Schedule", value: "9AM – 6PM", description: "Both Saturday and Sunday" },
+          { label: "Venue", value: "Winter Garden", description: "Compton Street, Eastbourne" },
+          { label: "Speakers", value: "10+", description: "Industry practitioners" },
+          { label: "Stages", value: "2", description: "Main stage and workshop room" },
+        ]}
+      />
+
+      {/* 8. Newsletter / register CTA */}
+      <NewsletterSignupCTA />
     </>
-  );
-
-  const siteSummary: SiteConfigSummary = {
-    name: siteConfig.business.name,
-    tagline: siteConfig.tagline,
-    phone: siteConfig.business.phone ?? "",
-    phoneDisplay: siteConfig.business.phone ?? "",
-    address: {
-      city: siteConfig.business.address.city,
-      county: siteConfig.business.address.region,
-    },
-    cta: siteConfig.cta,
-    stats: siteConfig.credentials.stats,
-  };
-
-  return (
-    <RigelHomePage
-      siteConfig={siteSummary}
-      featuredSpeakers={featuredSpeakers}
-      testimonials={testimonials}
-      schemaNodes={schemaNodes}
-      saturdayPreview={saturdayPreview}
-      sundayPreview={sundayPreview}
-      whyChooseUs={siteConfig.about?.whyChooseUs ?? []}
-      eventDate="17–18 October 2026 · Eastbourne"
-      eventLocation="The Winter Garden, Eastbourne"
-      ticketUrl={siteConfig.cta.primary.href}
-    />
   );
 }
