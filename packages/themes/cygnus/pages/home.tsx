@@ -1,176 +1,183 @@
-import type { HomePageTemplateProps } from '@platform/core-components';
-import Link from 'next/link';
-import { Phone } from 'lucide-react';
+import type { HomePageTemplateProps } from "@platform/core-components";
+import Link from "next/link";
 
 export function CygnusHomePage({
   siteConfig,
   services,
-  locations,
+  heroImage,
   heroHeadline,
   heroSubheading,
   schemaNodes,
 }: HomePageTemplateProps) {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-surface-background font-body">
       {schemaNodes}
 
-      {/* Hero Section — full-bleed dark with orange CTA */}
-      <section className="relative overflow-hidden bg-surface-inverse">
-        <div className="absolute inset-0 bg-gradient-to-br from-surface-inverse via-surface-inverse to-brand-primary/20" />
-        <div className="relative container-narrow text-center py-28 md:py-36">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-balance text-surface-foreground">
-            {heroHeadline || `Professional Services in ${siteConfig.address.city}`}
-          </h1>
-          <p className="text-xl md:text-2xl text-surface-secondary-foreground mb-10 text-balance">
-            {heroSubheading || siteConfig.tagline}
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href={siteConfig.cta.primary.href}
-              className="bg-brand-primary text-on-brand-primary px-8 py-3 rounded-lg font-semibold hover:bg-brand-primary-hover transition-colors"
-            >
-              {siteConfig.cta.primary.label}
-            </Link>
-            <Link
-              href="/services"
-              className="border-2 border-surface-foreground text-surface-foreground px-8 py-3 rounded-lg font-semibold hover:border-brand-primary hover:text-brand-primary transition-colors"
-            >
-              Our Services
-            </Link>
-          </div>
+      {/* Hero Section */}
+      <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          {/* TODO: Replace with actual hero image from site config / R2 */}
+          {heroImage && (
+            <div
+              className="w-full h-full bg-cover bg-center opacity-40 grayscale-[0.5]"
+              style={{ backgroundImage: `url(${heroImage})` }}
+            />
+          )}
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(to top, var(--color-surface-background), var(--color-surface-background-60, rgba(19,19,19,0.6)), transparent)",
+            }}
+          />
+        </div>
+        <div className="relative z-10 max-w-7xl mx-auto px-8 w-full">
+          <div className="max-w-3xl">
+            {/* Status badge */}
+            {siteConfig.stats && siteConfig.stats.length > 0 && (
+              <div className="inline-flex items-center gap-2 px-3 py-1 bg-surface-card rounded-full mb-6 border border-surface-card-border/15">
+                <span className="flex h-2 w-2 rounded-full bg-brand-secondary" />
+                <span className="text-xs font-body uppercase tracking-[0.2em] font-semibold text-surface-foreground">
+                  {siteConfig.stats[0].value} {siteConfig.stats[0].label}
+                </span>
+              </div>
+            )}
 
-          {/* Phone CTA */}
-          {siteConfig.cta.phone.show && (
-            <div className="mt-8">
+            <h1 className="text-7xl md:text-8xl font-headline font-bold italic tracking-tight leading-none mb-8 text-surface-foreground">
+              {heroHeadline || (
+                <>
+                  Your brand, <br />
+                  <span className="text-brand-primary">made bold.</span>
+                </>
+              )}
+            </h1>
+
+            <p className="text-xl font-body text-surface-muted-foreground max-w-xl mb-10 leading-relaxed">
+              {heroSubheading ||
+                `Expert services for ${siteConfig.address.city}. ${siteConfig.tagline}`}
+            </p>
+
+            <div className="flex flex-wrap gap-4">
               <Link
-                href={`tel:${siteConfig.phone}`}
-                className="inline-flex items-center gap-2 text-lg font-semibold text-brand-primary hover:text-brand-primary-hover transition-colors"
+                href={siteConfig.cta.primary.href}
+                className="bg-gradient-to-r from-brand-primary to-brand-primary/80 text-on-brand-primary px-10 py-4 rounded-lg font-bold text-lg hover:scale-[1.02] transition-transform"
               >
-                <Phone className="w-5 h-5" />
-                <span>Call us: {siteConfig.phoneDisplay}</span>
+                {siteConfig.cta.primary.label}
+              </Link>
+              <Link
+                href="/services"
+                className="bg-transparent border border-surface-card-border text-surface-foreground px-10 py-4 rounded-lg font-bold text-lg hover:bg-surface-card transition-colors"
+              >
+                View Services
               </Link>
             </div>
-          )}
+          </div>
         </div>
       </section>
 
-      {/* Stats Strip */}
+      {/* Stats Bar */}
       {siteConfig.stats && siteConfig.stats.length > 0 && (
-        <section className="py-8 bg-surface-muted border-y border-surface-card-border">
-          <div className="container-narrow">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-              {siteConfig.stats.map((stat, index) => (
-                <div key={index}>
-                  <div className="text-2xl md:text-3xl font-bold text-brand-primary">
-                    {stat.value}
-                  </div>
-                  <div className="text-sm text-surface-muted-foreground">{stat.label}</div>
+        <section className="bg-surface-muted border-y border-surface-card-border/10 py-16">
+          <div className="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-left">
+            {siteConfig.stats.map((stat, index) => (
+              <div key={index} className="space-y-2">
+                <div className="text-5xl font-headline font-bold text-brand-primary italic">
+                  {stat.value}
                 </div>
-              ))}
-            </div>
+                <div className="text-xs font-body uppercase tracking-widest text-surface-foreground/60">
+                  {stat.label}
+                </div>
+              </div>
+            ))}
           </div>
         </section>
       )}
 
-      {/* Services Overview */}
-      <section className="section bg-surface-background">
-        <div className="container-narrow">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-4 text-surface-foreground">
+      {/* Services Grid */}
+      <section className="py-32 px-8 max-w-7xl mx-auto">
+        <div className="mb-20">
+          <span className="text-brand-primary font-body uppercase tracking-[0.3em] font-bold text-sm">
+            Capabilities
+          </span>
+          <h2 className="text-5xl font-headline font-bold mt-4 text-surface-foreground">
             Our Services
           </h2>
-          <p className="text-center text-surface-muted-foreground mb-12 max-w-2xl mx-auto">
-            We offer a comprehensive range of professional services tailored to your needs.
-          </p>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {services.map((service) => (
-              <Link
-                key={service.slug}
-                href={`/services/${service.slug}`}
-                className="bg-surface-card border border-surface-card-border rounded-xl p-6 group hover:border-brand-primary hover:shadow-lg transition-all"
-              >
-                <h3 className="text-xl font-semibold mb-3 text-surface-foreground group-hover:text-brand-primary transition-colors">
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {services.map((service) => (
+            <Link
+              key={service.slug}
+              href={`/services/${service.slug}`}
+              className="group bg-surface-card rounded-lg overflow-hidden flex flex-col"
+            >
+              {/* Card image area */}
+              <div className="h-64 overflow-hidden relative bg-surface-muted">
+                {/* TODO: service hero images from R2 */}
+                <div className="w-full h-full bg-surface-muted transition-transform duration-500 group-hover:scale-110" />
+                <div className="absolute inset-0 bg-surface-muted/20" />
+              </div>
+              <div className="p-8 flex-1 flex flex-col">
+                {service.icon && (
+                  <span className="text-brand-primary font-body uppercase tracking-widest text-[10px] font-bold mb-2">
+                    {service.icon}
+                  </span>
+                )}
+                <h3 className="text-2xl font-headline font-bold mb-4 text-surface-foreground">
                   {service.title}
                 </h3>
                 {service.description && (
-                  <p className="text-surface-muted-foreground">{service.description}</p>
-                )}
-                <span className="inline-block mt-4 text-brand-primary font-medium group-hover:translate-x-1 transition-transform">
-                  Learn more &rarr;
-                </span>
-              </Link>
-            ))}
-          </div>
-          <div className="text-center mt-8">
-            <Link
-              href="/services"
-              className="border border-brand-primary text-brand-primary px-6 py-3 rounded-lg font-semibold hover:bg-brand-primary hover:text-on-brand-primary transition-colors"
-            >
-              View All Services
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Service Areas — slightly lighter dark */}
-      <section className="section bg-surface-muted">
-        <div className="container-narrow">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-4 text-surface-foreground">
-            Service Areas
-          </h2>
-          <p className="text-center text-surface-muted-foreground mb-12 max-w-2xl mx-auto">
-            We proudly serve customers across these locations and surrounding areas.
-          </p>
-          <div className="grid md:grid-cols-3 gap-6">
-            {locations.map((location) => (
-              <Link
-                key={location.slug}
-                href={`/locations/${location.slug}`}
-                className="bg-surface-card border border-surface-card-border rounded-xl p-6 group text-center hover:border-brand-primary hover:shadow-lg transition-all"
-              >
-                <p className="text-lg font-semibold text-surface-foreground group-hover:text-brand-primary transition-colors">
-                  {location.title}
-                </p>
-                {location.description && (
-                  <p className="text-sm text-surface-muted-foreground mt-2 line-clamp-2">
-                    {location.description}
+                  <p className="text-sm text-surface-muted-foreground font-body mb-6 flex-1">
+                    {service.description}
                   </p>
                 )}
-              </Link>
-            ))}
-          </div>
-          <div className="text-center mt-8">
-            <Link
-              href="/locations"
-              className="border border-brand-primary text-brand-primary px-6 py-3 rounded-lg font-semibold hover:bg-brand-primary hover:text-on-brand-primary transition-colors"
-            >
-              View All Locations
+                <span className="inline-flex items-center gap-2 text-brand-primary font-bold text-xs uppercase tracking-widest group-hover:gap-4 transition-all">
+                  Learn more{" "}
+                  <span className="material-symbols-outlined text-sm">arrow_forward</span>
+                </span>
+              </div>
             </Link>
-          </div>
+          ))}
         </div>
       </section>
 
-      {/* CTA Section — Signal Orange */}
-      <section className="section bg-brand-primary">
-        <div className="container-narrow text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-on-brand-primary">
-            Ready to Get Started?
-          </h2>
-          <p className="text-xl mb-8 text-on-brand-primary/90">
-            Contact us today for a free consultation and quote
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+      {/* Testimonials placeholder */}
+      <section className="bg-surface-muted py-32">
+        <div className="max-w-7xl mx-auto px-8">
+          <div className="text-center mb-20">
+            <span className="text-brand-secondary font-body uppercase tracking-[0.3em] font-bold text-sm">
+              What our clients say
+            </span>
+            <h2 className="text-5xl font-headline font-bold mt-4 text-surface-foreground">
+              Trusted by the best
+            </h2>
+          </div>
+          {/* Testimonials are rendered by the site wrapper if available */}
+        </div>
+      </section>
+
+      {/* CTA Band */}
+      <section className="bg-brand-primary py-24">
+        <div className="max-w-7xl mx-auto px-8 flex flex-col md:flex-row items-center justify-between gap-12">
+          <div className="max-w-2xl text-center md:text-left">
+            <h2 className="text-5xl md:text-6xl font-headline font-bold mt-4 text-on-brand-primary">
+              Ready to get started?
+            </h2>
+            <p className="text-on-brand-primary/80 text-lg font-body font-medium mt-4">
+              Contact us today for a free consultation and quote.
+            </p>
+          </div>
+          <div className="flex flex-col sm:flex-row gap-4">
             <Link
               href="/contact"
-              className="bg-surface-inverse text-surface-foreground px-8 py-3 rounded-lg font-semibold hover:bg-surface-card transition-colors"
+              className="bg-surface-background text-brand-primary px-10 py-4 rounded-lg font-bold text-lg hover:scale-105 transition-transform uppercase tracking-widest"
             >
-              Get a Free Quote
+              Get a Quote
             </Link>
             {siteConfig.cta.phone.show && (
               <Link
                 href={`tel:${siteConfig.phone}`}
-                className="border-2 border-on-brand-primary text-on-brand-primary px-8 py-3 rounded-lg font-semibold hover:bg-on-brand-primary/10 transition-colors inline-flex items-center justify-center gap-2"
+                className="border border-on-brand-primary/30 text-on-brand-primary px-10 py-4 rounded-lg font-bold text-lg hover:bg-on-brand-primary/10 transition-colors uppercase tracking-widest"
               >
-                <Phone className="w-5 h-5" />
                 {siteConfig.phoneDisplay}
               </Link>
             )}

@@ -1,88 +1,107 @@
-import type { ServicesPageTemplateProps } from '@platform/core-components';
-import Link from 'next/link';
-import { Breadcrumbs } from '@platform/core-components';
+import type { ServicesPageTemplateProps } from "@platform/core-components";
+import Link from "next/link";
 
 export function CygnusServicesPage({ siteConfig, services }: ServicesPageTemplateProps) {
-  const breadcrumbItems = [{ name: 'Services', href: '/services', current: true }];
-
   return (
-    <>
-      {/* Breadcrumbs */}
-      <div className="bg-surface-muted border-b border-surface-card-border">
-        <div className="container-standard py-4">
-          <Breadcrumbs items={breadcrumbItems} />
-        </div>
+    <div className="min-h-screen bg-surface-background font-body">
+      {/* Breadcrumb */}
+      <div className="px-6 md:px-10 mb-12 pt-32">
+        <nav className="flex text-xs uppercase tracking-widest text-surface-foreground/40 font-body">
+          <Link href="/" className="hover:text-brand-primary transition-colors">
+            Home
+          </Link>
+          <span className="mx-4 text-surface-foreground/20">/</span>
+          <span className="text-brand-primary">Services</span>
+        </nav>
       </div>
 
-      <div className="min-h-screen bg-surface-background">
-        {/* Hero Section */}
-        <section className="section-standard bg-surface-inverse">
-          <div className="container-standard">
-            <div className="text-center">
-              <h1 className="text-4xl md:text-5xl font-bold mb-6 text-surface-foreground">
-                Our Services
-              </h1>
-              <p className="text-xl text-surface-secondary-foreground mb-8 mx-auto max-w-3xl">
-                Explore our range of professional services. {siteConfig.name} is committed to
-                delivering quality work and exceptional customer service.
+      {/* Page Header */}
+      <header className="px-6 md:px-10 mb-20">
+        <h1 className="text-7xl md:text-8xl font-headline font-bold italic tracking-tight leading-none mb-8 text-surface-foreground">
+          What we do
+        </h1>
+        <div className="w-full h-px bg-surface-card-border opacity-20" />
+      </header>
+
+      {/* Services Grid */}
+      <section className="px-6 md:px-10 grid grid-cols-1 md:grid-cols-2 gap-px bg-surface-card-border/10 border-y border-surface-card-border/10">
+        {services.length === 0 ? (
+          <div className="bg-surface-card p-12 col-span-2 text-center">
+            <p className="text-surface-muted-foreground text-lg">
+              No services available yet. Check back soon.
+            </p>
+          </div>
+        ) : (
+          services.map((service) => (
+            <div key={service.slug} className="bg-surface-card p-8 md:p-12 group">
+              {/* Service image area */}
+              <div className="aspect-[16/9] overflow-hidden mb-8 relative bg-surface-muted">
+                {/* TODO: service hero images from R2 */}
+                <div className="w-full h-full bg-surface-muted grayscale group-hover:grayscale-0 transition-all duration-500" />
+                <div
+                  className="absolute inset-0 mix-blend-multiply group-hover:bg-transparent transition-all"
+                  style={{
+                    backgroundColor: "rgba(var(--color-brand-primary-rgb, 247,148,29), 0.1)",
+                  }}
+                />
+              </div>
+
+              {service.icon && (
+                <span className="text-brand-primary font-body uppercase tracking-[0.2em] text-xs font-bold">
+                  {service.icon}
+                </span>
+              )}
+
+              <h2 className="mt-4 text-5xl font-headline font-bold text-surface-foreground">
+                {service.title}
+              </h2>
+
+              {service.description && (
+                <p className="mt-6 text-surface-foreground/60 leading-relaxed max-w-md font-body">
+                  {service.description}
+                </p>
+              )}
+
+              <Link
+                href={`/services/${service.slug}`}
+                className="inline-flex items-center gap-2 mt-8 text-brand-primary font-bold uppercase tracking-widest text-sm group-hover:translate-x-2 transition-transform"
+              >
+                Learn more <span className="material-symbols-outlined">arrow_forward</span>
+              </Link>
+            </div>
+          ))
+        )}
+      </section>
+
+      {/* CTA Band */}
+      <section className="mt-20 px-6 md:px-10 pb-20">
+        <div className="bg-brand-primary text-on-brand-primary px-8 py-20 md:px-20 md:py-24 flex flex-col md:flex-row items-center justify-between gap-10">
+          <div className="flex items-center gap-8">
+            <div className="hidden lg:block">
+              <span
+                className="material-symbols-outlined text-8xl"
+                style={{ fontVariationSettings: "'FILL' 1" }}
+              >
+                precision_manufacturing
+              </span>
+            </div>
+            <div>
+              <h2 className="text-5xl md:text-7xl font-headline font-bold italic text-on-brand-primary">
+                Ready to get started?
+              </h2>
+              <p className="mt-4 text-on-brand-primary/80 font-bold uppercase tracking-widest text-sm">
+                {siteConfig.tagline}
               </p>
             </div>
           </div>
-        </section>
-
-        {/* Services Grid */}
-        <section className="section-standard bg-surface-background">
-          <div className="container-standard">
-            {services.length === 0 ? (
-              <div className="text-center py-12">
-                <p className="text-surface-muted-foreground text-lg">
-                  No services available yet. Check back soon.
-                </p>
-              </div>
-            ) : (
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {services.map((service) => (
-                  <Link
-                    key={service.slug}
-                    href={`/services/${service.slug}`}
-                    className="bg-surface-card border border-surface-card-border rounded-xl p-6 group hover:border-brand-primary hover:shadow-lg transition-all"
-                  >
-                    <h2 className="text-xl font-semibold mb-3 text-surface-foreground group-hover:text-brand-primary transition-colors">
-                      {service.title}
-                    </h2>
-                    {service.description && (
-                      <p className="text-surface-muted-foreground line-clamp-3">
-                        {service.description}
-                      </p>
-                    )}
-                    <span className="inline-block mt-4 text-brand-primary font-medium group-hover:translate-x-1 transition-transform">
-                      Learn more &rarr;
-                    </span>
-                  </Link>
-                ))}
-              </div>
-            )}
-          </div>
-        </section>
-
-        {/* CTA Section */}
-        <section className="section-standard bg-brand-primary">
-          <div className="container-standard text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-on-brand-primary">
-              Ready to Get Started?
-            </h2>
-            <p className="text-xl text-on-brand-primary/90 mb-8 max-w-2xl mx-auto">
-              Contact us today for a free quote on any of our services.
-            </p>
-            <Link
-              href="/contact"
-              className="inline-flex items-center justify-center px-8 py-4 bg-surface-inverse text-surface-foreground font-semibold rounded-lg hover:bg-surface-card transition-colors"
-            >
-              Get a Free Quote
-            </Link>
-          </div>
-        </section>
-      </div>
-    </>
+          <Link
+            href="/contact"
+            className="bg-surface-background text-brand-primary px-12 py-6 text-xl font-black uppercase tracking-tighter hover:bg-surface-card transition-colors whitespace-nowrap"
+          >
+            Get a Quote
+          </Link>
+        </div>
+      </section>
+    </div>
   );
 }
