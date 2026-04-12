@@ -176,6 +176,7 @@ New sites get two layers of scaffolding:
 | `lyra`   | `sites/_lyra-garden`      | Editorial serif hero, garden/landscaping visual language      |
 | `nova`   | `sites/_nova-print`       | Bold orange + green hero, print/graphics visual language      |
 | `orion`  | `sites/dj-fox-electrical` | Dark header, full-bleed hero, circular icons                  |
+| `rigel`  | `sites/_rigel-events`     | Conference/event platform, full-page component library        |
 | `vega`   | `sites/base-template`     | Light header, split hero, standard card grid                  |
 
 ### Graceful Fallback
