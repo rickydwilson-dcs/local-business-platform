@@ -38,6 +38,9 @@
     "./vega/components": "./vega/components/index.ts",
     "./vega/pages": "./vega/pages/index.ts",
     "./castor": "./castor/index.ts",
-    "./castor/pages": "./castor/pages/index.ts"
+    "./castor/pages": "./castor/pages/index.ts",
+    "./solaris": "./solaris/index.ts",
+    "./solaris/components": "./solaris/components/index.ts",
+    "./solaris/pages": "./solaris/pages/index.ts"
   }
 }
