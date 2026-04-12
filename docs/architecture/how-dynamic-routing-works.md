@@ -78,16 +78,20 @@ Each site's `lib/content.ts` is a thin shim that calls `createContentUtils()` fr
 
 ```typescript
 // sites/[name]/lib/content.ts — thin shim (5-10 lines)
-import { createContentUtils } from '@platform/core-components/lib/content';
-import { getLocationSlugs } from './locations-config';
+import { createContentUtils } from "@platform/core-components/lib/content";
+import { getLocationSlugs } from "./locations-config";
 
 const utils = createContentUtils({ getLocationSlugs });
 
 export const {
-  getServices, getService,
-  getLocations, getLocation,
-  getBlogPosts, getBlogPost,
-  getProjects, getTestimonials,
+  getServices,
+  getService,
+  getLocations,
+  getLocation,
+  getBlogPosts,
+  getBlogPost,
+  getProjects,
+  getTestimonials,
   // ... all content functions
 } = utils;
 ```
@@ -210,14 +214,19 @@ The platform supports five content types, all using this same dynamic routing pa
 
 Not every page uses a dynamic `[slug]` route. The base template includes conventional static Next.js pages for content that doesn't come from MDX files:
 
-| Page | Route file | Notes |
-|------|-----------|-------|
-| About | `app/about/page.tsx` | Static page with inline content |
-| Contact | `app/contact/page.tsx` | Contact form, wires to contact API route |
-| Privacy Policy | `app/privacy-policy/page.tsx` | Static legal content |
-| Cookie Policy | `app/cookie-policy/page.tsx` | Static legal content |
+| Page             | Route file                    | Notes                                              |
+| ---------------- | ----------------------------- | -------------------------------------------------- |
+| About            | `app/about/page.tsx`          | Static page with inline content                    |
+| Contact          | `app/contact/page.tsx`        | Contact form, wires to contact API route           |
+| Privacy Policy   | `app/privacy-policy/page.tsx` | Static legal content                               |
+| Cookie Policy    | `app/cookie-policy/page.tsx`  | Static legal content                               |
+| Services (list)  | `app/services/page.tsx`       | Aggregate listing, reads all service MDX           |
+| Locations (list) | `app/locations/page.tsx`      | Aggregate listing, reads all location MDX          |
+| Blog (list)      | `app/blog/page.tsx`           | Aggregate listing, reads all blog MDX              |
+| Projects (list)  | `app/projects/page.tsx`       | Aggregate listing, reads all project MDX           |
+| Reviews          | `app/reviews/page.tsx`        | Aggregate testimonials (no individual slug routes) |
 
-These are plain Next.js pages — they don't use `generateStaticParams()` and don't read MDX files. Edit them directly if per-site customization is needed. They are intentionally kept outside the MDX architecture because their content rarely changes and doesn't benefit from the frontmatter-driven pattern.
+The listing pages (`/services`, `/locations`, `/blog`, `/projects`) call content functions to fetch all items and render them as grids or lists — they read MDX files but don't use `generateStaticParams()` since they have a fixed URL. They are not dynamic routes. Edit them directly if per-site layout customization is needed.
 
 ## Adding New Content
 
