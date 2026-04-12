@@ -4,34 +4,16 @@
 **Scope:** full
 **Date:** 2026-04-12
 **Rules run:** VCA-001, VCA-002, VCA-003, VCA-004, VCA-005, VCA-006, VCA-007, VCA-008, VCA-009
-**Rules skipped:** VCA-008 (no middleware files found in any site directory)
+**Rules skipped:** none
 
 ## Summary
 
-All critical and high-severity checks pass. No hard failures detected. One low/warning-level finding on VCA-007: every site's `next.config.ts` uses `hostname: '**.r2.dev'` in `remotePatterns`, which is a subdomain wildcard. This is flagged for human review per the rule but does not block the deploy.
-
-## Findings
-
-### Low / Warning — VCA-007: Wildcard hostname `**.r2.dev` in remotePatterns
-
-- **Files:**
-  - `sites/base-template/next.config.ts` (line 52)
-  - `sites/colossus-scaffolding/next.config.ts` (line 52)
-  - `sites/dj-fox-electrical/next.config.ts` (line 52)
-  - `sites/mad-graphics/next.config.ts` (line 52)
-  - `sites/dcs/next.config.ts` (line 52)
-- **Rule:** VCA-007 — remotePatterns must be explicit; wildcard hostnames flagged for review
-- **Violation:** All five sites declare `{ protocol: 'https', hostname: '**.r2.dev' }` — the `**` prefix matches any subdomain of r2.dev, not a specific Cloudflare R2 bucket hostname.
-- **Impact:** No build failure. A wildcard pattern could serve images from any R2 tenant's subdomain if a URL were crafted to reference it. This is a permissiveness concern, not a breakage concern.
-- **Fix:** Replace with the specific R2 bucket hostname (e.g., `pub-<id>.r2.dev`) once each site's R2 bucket is provisioned. Until then, the `**.r2.dev` pattern is acceptable as a temporary placeholder — confirm this is intentional.
-- **Effort:** trivial (once bucket hostnames are known)
-
-Note: `dangerouslyAllowSVG: true` is present in all five sites and is accompanied by `contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;"` in every case. That combination satisfies the VCA-007 CSP presence requirement.
+All 9 rules pass with zero violations. The codebase is clean: no site vercel.json sets `outputDirectory`, all sites build with `next build --webpack`, no turbo-ignore or ignoreCommand is present, all build-time env vars (including `NEXT_PUBLIC_R2_PUBLIC_URL`, added in commit 56d5cb7) are declared in turbo.json, Tailwind content globs are correctly scoped, no `theme()` function appears in any CSS file, `dangerouslyAllowSVG` is accompanied by a CSP on every site that uses it, no middleware files exist in any site, and all sites pin Next.js major version 16.
 
 ## Statistics
 
 - Critical (blocks deploy): 0
 - High (deploy likely fails): 0
 - Medium (cache/perf/correctness): 0
-- Low / warning: 1
-- Total: 1
+- Low / warning: 0
+- Total: 0
