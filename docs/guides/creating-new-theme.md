@@ -74,10 +74,11 @@ The pipeline assigns a theme name automatically from the constellation namespace
 
 1. Open the Stitch project URL (printed in the report) to review designs visually
 2. Check `output/ingestion/<theme-name>-stitch/meta/token-mapping-report.json` — verify colour extraction
-3. The pipeline runs a **heading drift report** (Step 2e) before downloading assets. It checks whether H1/H2 Tailwind classes are consistent across all 5 pages. If drift is detected you'll be asked to choose: proceed anyway, auto-normalise (rewrites drifted classes to match home), or stop to re-generate. The normaliser is `tools/stitch-normalize-headings.mjs` — run it manually with `--enforce` at any time if you need to re-normalise after iterating on designs.
-4. Run `cd sites/<theme-name>-test && npm run dev` to preview
-5. Adjust colours in `packages/themes/<theme-name>/index.ts` if needed
-6. Run `/deploy.changes` when satisfied
+3. **Step 4b: Convert Stitch HTML → React page templates.** The pipeline extracts tokens automatically but does not yet auto-convert the HTML into TSX components. You must translate each Stitch HTML page into its corresponding `packages/themes/<theme-name>/pages/<page>.tsx`. See [How the Stitch Design Pipeline Works — Step 4b](../architecture/how-stitch-design-pipeline-works.md#step-4b-html--react-conversion-required) for the full checklist.
+4. The pipeline runs a **heading drift report** (Step 2e) before downloading assets. It checks whether H1/H2 Tailwind classes are consistent across all 5 pages. If drift is detected you'll be asked to choose: proceed anyway, auto-normalise (rewrites drifted classes to match home), or stop to re-generate. The normaliser is `tools/stitch-normalize-headings.mjs` — run it manually with `--enforce` at any time if you need to re-normalise after iterating on designs.
+5. Run `cd sites/<theme-name>-test && npm run dev` to preview
+6. Adjust colours in `packages/themes/<theme-name>/index.ts` if needed
+7. Run `/deploy.changes` when satisfied
 
 ---
 

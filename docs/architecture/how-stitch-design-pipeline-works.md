@@ -5,6 +5,7 @@ The Stitch design pipeline is a parallel path to `/pipeline.ingest` for generati
 ## When to Use It
 
 Use `/pipeline.stitch-design` when:
+
 - The client has no existing website to scrape
 - You want to start from a clean, AI-generated design rather than reverse-engineering an existing one
 - You want to iterate on designs visually before touching code
@@ -41,17 +42,18 @@ Stitch provides an MCP server that Claude calls directly. The skill requires the
 
 The skill generates exactly 5 pages:
 
-| Page | Purpose |
-|------|---------|
-| Home | Hero, services overview, testimonials, stats, footer |
-| About | Company story, values, trust signals |
-| Contact | Contact form, address, hours, map placeholder |
-| Services | Collection/listing of all service categories |
-| Service Detail | Single service/location detail page |
+| Page           | Purpose                                              |
+| -------------- | ---------------------------------------------------- |
+| Home           | Hero, services overview, testimonials, stats, footer |
+| About          | Company story, values, trust signals                 |
+| Contact        | Contact form, address, hours, map placeholder        |
+| Services       | Collection/listing of all service categories         |
+| Service Detail | Single service/location detail page                  |
 
 ## Design System Extraction
 
 After generation, the skill downloads:
+
 - `output/ingestion/<theme-name>-stitch/design-system/tokens.json` — Stitch design tokens
 - `output/ingestion/<theme-name>-stitch/html/<page>.html` — Full working HTML per page
 - `output/ingestion/<theme-name>-stitch/meta/` — Project metadata and token mapping report
@@ -73,9 +75,37 @@ The skill creates `packages/themes/<theme-name>/` following the exact orion/vega
 
 It also appends the new theme name to `THEME_NAMES` in `packages/theme-system/src/types.ts` so `pickNextThemeName()` skips it on subsequent runs.
 
+## Step 4b: HTML → React Conversion (REQUIRED)
+
+After token extraction, the Stitch HTML files must be translated into the theme's page templates. This step was missing from earlier pipeline runs and is the primary cause of design fidelity gaps.
+
+**This step must run before scaffolding the test site.**
+
+For each Stitch page (`home`, `services`, `service-detail`, `about`, `contact`), open `output/ingestion/<theme-name>-stitch/html/<page>.html` and translate it into `packages/themes/<theme-name>/pages/<page>.tsx` following these rules:
+
+### Translation checklist
+
+- [ ] **Hero structure**: full-bleed image or solid colour? overlay colour and opacity? left/centre/right text alignment? floating elements (trust cards, badges)?
+- [ ] **Section cadence**: list every section in HTML order and implement them in the same order in TSX
+- [ ] **Typography**: replace `font-['Newsreader']` → `font-headline`, `font-['Work_Sans']` → `font-body` (these are registered in tailwind.config.ts via Phase 1 of the font wiring)
+- [ ] **Colour tokens**: replace all hardcoded hex values with theme tokens (e.g. `#1a3a6b` → `bg-brand-primary`). Exception: rgba overlays — use inline style for these since Tailwind opacity modifiers don't work with CSS custom properties
+- [ ] **Icons**: keep `<span className="material-symbols-outlined">icon_name</span>` — Material Symbols is available via the theme's globals.css import
+- [ ] **Props**: replace all static copy with props from `HomePageTemplateProps` (etc.) in `packages/core-components/src/lib/page-template-types.ts`. If a needed prop doesn't exist, add it as optional
+- [ ] **Micro-interactions**: preserve all hover/active/group-hover animation classes exactly as in the HTML
+- [ ] **Images**: use `style={{ backgroundImage: 'url(...)' }}` for CSS background images with a `TODO` comment; use `<Image>` only for `<img>` tags
+
+### Origin-agnostic note
+
+This checklist applies regardless of how the design was created:
+
+- **Stitch origin**: HTML is in `output/ingestion/<name>-stitch/html/`
+- **Ingest origin**: screenshots and HTML are in `output/ingestion/<name>/`
+- **Taste-skill origin** (no external reference): a `DESIGN.md` spec was produced; the "HTML" step becomes "implement from DESIGN.md" using the same checklist
+
 ## Test Site
 
 The test site is created at `sites/<theme-name>-test/` (note: suffix style, not prefix — distinct from `/pipeline.ingest` which uses `test-<name>`). It is:
+
 - A copy of `sites/base-template/` wired to the new theme
 - Marked with `.pipeline-test-site.json` so `/pipeline.kill-site` can remove it
 - CI-inert (no build/test/type-check scripts)
@@ -89,6 +119,7 @@ The test site is created at `sites/<theme-name>-test/` (note: suffix style, not 
 4. When satisfied, run `/deploy.changes`
 
 To clean up:
+
 - `/pipeline.kill-site <theme-name>-test` — removes the test site
 - `/pipeline.kill-theme <theme-name>` — removes the theme package
 
@@ -109,6 +140,7 @@ The full `designMd` is logged to the terminal before `create_design_system` is c
 ### 2. Home page class extraction and injection (Step 2c-i-extract)
 
 After the home page generates, `get_screen` is called to retrieve its HTML. The pipeline extracts:
+
 - `$H1_CLASSES` — the full `class` attribute of the first `<h1>` element
 - `$H2_CLASSES` — the modal (most frequently occurring) `class` attribute across all `<h2>` elements
 
@@ -135,10 +167,10 @@ The script parses all 5 HTML files and prints a table showing whether each page'
 
 ## Key Files
 
-| File | Purpose |
-|------|---------|
-| `.claude/commands/pipeline.stitch-design.md` | The skill definition |
-| `tools/lib/theme-name-picker.ts` | Auto theme name from constellation namespace |
-| `packages/theme-system/src/theme-names.ts` | `CONSTELLATION_NAMES` master list |
-| `packages/themes/vega/globals.css` | Template for new theme globals.css |
-| `packages/themes/orion/index.ts` | Template for new theme index.ts |
+| File                                         | Purpose                                      |
+| -------------------------------------------- | -------------------------------------------- |
+| `.claude/commands/pipeline.stitch-design.md` | The skill definition                         |
+| `tools/lib/theme-name-picker.ts`             | Auto theme name from constellation namespace |
+| `packages/theme-system/src/theme-names.ts`   | `CONSTELLATION_NAMES` master list            |
+| `packages/themes/vega/globals.css`           | Template for new theme globals.css           |
+| `packages/themes/orion/index.ts`             | Template for new theme index.ts              |
