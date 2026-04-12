@@ -1,24 +1,21 @@
 /**
- * Homepage — thin wrapper
+ * Homepage — corvus theme components
  *
- * Composes Rigel theme components to match the colorcode.events reference design.
+ * Composes Corvus theme components for the Digital Marketing Weekend event site.
  */
 
 import type { Metadata } from "next";
 import { siteConfig } from "@/site.config";
-import { getContentItems } from "@/lib/content";
 import { absUrl } from "@/lib/site";
 import { getLocalBusinessSchema } from "@/lib/schema";
 import {
-  Hero,
-  Stats,
-  ColorCodeEventsAbout,
-  HowItStarted,
+  HeroFullBleedText,
   EventDetailsBanner,
-  StatsSpeakers,
-  EventStatsBlock,
+  EventStats,
+  ColorCodeEventsAbout,
+  HowItStartedSection,
   NewsletterSignupCTA,
-} from "@platform/themes/rigel/components";
+} from "@platform/themes/corvus/components";
 
 export const dynamic = "force-static";
 
@@ -124,34 +121,24 @@ export default async function HomePage() {
       />
 
       {/* 1. Hero */}
-      <Hero
-        heading="Digital Marketing Weekend 2026"
-        subheading="Two days of practical marketing sessions, workshops, and networking — free to attend. Eastbourne, 17–18 October 2026."
-        ctaButtons={[
-          { label: "Get Your Free Ticket", href: siteConfig.cta.primary.href },
-          { label: "View Schedule", href: "/schedule" },
-        ]}
-      />
+      <HeroFullBleedText headline="Digital Marketing Weekend 2026" />
 
       {/* 2. Event Details Banner */}
       <EventDetailsBanner
         eventDate="17–18 October 2026"
         eventTime="9:00am – 6:00pm each day"
         eventVenue="The Winter Garden, Eastbourne"
-        eventInfoCta={[{ label: "Get Event Info", href: "/venue" }]}
+        ctaButton={[{ label: "Get Event Info", href: "/venue" }]}
       />
 
       {/* 3. Stats strip */}
-      <Stats
+      <EventStats
+        heading="Event at a Glance"
         statItems={[
-          {
-            value: "10+",
-            label: "Expert Speakers",
-            description: "Practitioners sharing real results",
-          },
-          { value: "2", label: "Full Days", description: "Packed with sessions and workshops" },
-          { value: "Free", label: "To Attend", description: "No ticket price, no catch" },
-          { value: "500+", label: "Attendees", description: "Marketers and business owners" },
+          { title: "2", description: "Days" },
+          { title: "10+", description: "Speakers" },
+          { title: "20+", description: "Sessions" },
+          { title: "300", description: "Attendees" },
         ]}
       />
 
@@ -159,43 +146,150 @@ export default async function HomePage() {
       <ColorCodeEventsAbout
         sectionHeading="About Digital Marketing Weekend"
         bodyText="Digital Marketing Weekend is a free two-day event bringing together digital marketers, small business owners, and freelancers in Eastbourne. Across two packed days at The Winter Garden, you'll hear from industry experts on everything from SEO and social media to email marketing, paid advertising, and AI-powered tools. Whether you're just starting your digital journey or looking to sharpen your strategy, there's something for everyone — and it's completely free."
-        learnMoreButton={[{ label: "About the Event", href: "/about" }]}
+        ctaButton={[{ label: "Learn More", href: "/venue" }]}
       />
 
-      {/* 5. How it started */}
-      <HowItStarted
-        sectionHeading="How It All Started"
-        bodyText={[
-          "Digital Marketing Weekend was born out of a simple belief: that world-class marketing education shouldn't be locked behind expensive conference fees.",
-          "We started with a single event in Eastbourne, bringing together a handful of passionate marketers and business owners who wanted practical, actionable advice — not theoretical fluff.",
-          "Today, thousands of attendees have walked away with strategies they could implement the very next day. And it's still completely free.",
-        ]}
+      {/* 5. Why Choose Us */}
+      <section className="bg-surface-background py-16 px-4">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold text-surface-foreground text-center mb-12">
+            Why Attend?
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              "Completely free to attend",
+              "10+ industry expert speakers",
+              "20+ practical sessions and workshops",
+              "Networking opportunities with 300 attendees",
+              "Stunning seafront venue",
+              "Saturday and Sunday programme",
+              "No sales pitches — just practical advice",
+              "Suitable for all levels of experience",
+            ].map((item) => (
+              <div
+                key={item}
+                className="flex items-start gap-3 bg-surface-card border border-surface-border rounded-xl p-5"
+              >
+                <span className="mt-1 flex-shrink-0 w-5 h-5 rounded-full bg-brand-accent flex items-center justify-center">
+                  <svg
+                    className="w-3 h-3 text-surface-background"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </span>
+                <span className="text-surface-foreground font-medium">{item}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 6. Schedule preview */}
+      <section className="bg-brand-primary py-16 px-4">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold text-on-brand-primary text-center mb-12">
+            Weekend Highlights
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Saturday */}
+            <div className="bg-surface-inverse rounded-xl p-6">
+              <h3 className="text-xl font-bold text-brand-secondary mb-4">Saturday 17 October</h3>
+              <ul className="space-y-3">
+                <li className="flex gap-3">
+                  <span className="text-brand-accent font-mono text-sm mt-0.5">09:30</span>
+                  <span className="text-surface-foreground">
+                    The Small Business Marketing Stack — Ricky Wilson
+                  </span>
+                </li>
+                <li className="flex gap-3">
+                  <span className="text-brand-accent font-mono text-sm mt-0.5">11:00</span>
+                  <span className="text-surface-foreground">Local SEO in 2026 — Sarah Chen</span>
+                </li>
+                <li className="flex gap-3">
+                  <span className="text-brand-accent font-mono text-sm mt-0.5">14:00</span>
+                  <span className="text-surface-foreground">
+                    Email Isn&apos;t Dead — Emily Thornton
+                  </span>
+                </li>
+                <li className="flex gap-3">
+                  <span className="text-brand-accent font-mono text-sm mt-0.5">15:30</span>
+                  <span className="text-surface-foreground">
+                    Panel: Marketing on a Shoestring Budget
+                  </span>
+                </li>
+              </ul>
+            </div>
+            {/* Sunday */}
+            <div className="bg-surface-inverse rounded-xl p-6">
+              <h3 className="text-xl font-bold text-brand-secondary mb-4">Sunday 18 October</h3>
+              <ul className="space-y-3">
+                <li className="flex gap-3">
+                  <span className="text-brand-accent font-mono text-sm mt-0.5">10:00</span>
+                  <span className="text-surface-foreground">
+                    Google &amp; Meta Ads on a Small Budget — Marcus Okafor
+                  </span>
+                </li>
+                <li className="flex gap-3">
+                  <span className="text-brand-accent font-mono text-sm mt-0.5">11:30</span>
+                  <span className="text-surface-foreground">
+                    AI-Powered Marketing — James Hartley
+                  </span>
+                </li>
+                <li className="flex gap-3">
+                  <span className="text-brand-accent font-mono text-sm mt-0.5">14:00</span>
+                  <span className="text-surface-foreground">
+                    Build Your 90-Day Marketing Plan — Ricky Wilson
+                  </span>
+                </li>
+                <li className="flex gap-3">
+                  <span className="text-brand-accent font-mono text-sm mt-0.5">15:30</span>
+                  <span className="text-surface-foreground">
+                    Closing Keynote: The Future of Local Marketing
+                  </span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div className="text-center mt-8">
+            <a
+              href="/schedule"
+              className="inline-block bg-brand-secondary text-brand-primary font-bold px-8 py-3 rounded-lg hover:opacity-90 transition-opacity"
+            >
+              View Full Schedule
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* 7. Newsletter CTA */}
+      <NewsletterSignupCTA
+        heading="Stay in the loop"
+        subtext="Get speaker announcements, schedule updates, and event news delivered to your inbox."
       />
 
-      {/* 6. Speaker stats */}
-      <StatsSpeakers
-        heading="Our Speakers"
-        statItems={[
-          { value: "10+", label: "Expert Speakers" },
-          { value: "2", label: "Stages" },
-          { value: "20+", label: "Sessions" },
-          { value: "100%", label: "Practitioner-Led" },
-        ]}
-      />
-
-      {/* 7. Event stats block */}
-      <EventStatsBlock
-        heading="Event at a Glance"
-        statItems={[
-          { label: "Schedule", value: "9AM – 6PM", description: "Both Saturday and Sunday" },
-          { label: "Venue", value: "Winter Garden", description: "Compton Street, Eastbourne" },
-          { label: "Speakers", value: "10+", description: "Industry practitioners" },
-          { label: "Stages", value: "2", description: "Main stage and workshop room" },
-        ]}
-      />
-
-      {/* 8. Newsletter / register CTA */}
-      <NewsletterSignupCTA />
+      {/* 8. Final CTA */}
+      <section className="bg-surface-background py-16 px-4">
+        <div className="max-w-3xl mx-auto text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-surface-foreground mb-4">
+            Ready to Join Us?
+          </h2>
+          <p className="text-surface-muted-foreground text-lg mb-8">
+            Digital Marketing Weekend is completely free. Secure your spot today.
+          </p>
+          <a
+            href={siteConfig.cta.primary.href}
+            className="inline-block bg-brand-primary text-on-brand-primary font-bold text-lg px-10 py-4 rounded-lg hover:bg-brand-primary-hover transition-colors"
+          >
+            Get Your Free Ticket
+          </a>
+        </div>
+      </section>
     </>
   );
 }

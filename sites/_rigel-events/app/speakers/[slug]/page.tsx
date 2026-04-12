@@ -1,16 +1,16 @@
 /**
- * Speaker Bio Page — thin wrapper
+ * Speaker Bio Page
  *
- * Loads speaker data + MDX content, delegates rendering to RigelSpeakerDetailPage.
+ * Loads speaker data + MDX content, renders with corvus theme layout.
  */
 
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import Link from "next/link";
 import { getContentItems, getContentItem } from "@/lib/content";
 import { loadMdx } from "@/lib/mdx";
 import { siteConfig } from "@/site.config";
-import type { SiteConfigSummary, SpeakerSummary, BreadcrumbItem } from "@platform/core-components";
-import { RigelSpeakerDetailPage } from "@platform/themes/rigel/pages";
+import { PageTitleBanner } from "@platform/themes/corvus/components";
 
 export const dynamic = "force-static";
 export const dynamicParams = false;
@@ -69,45 +69,108 @@ export default async function SpeakerPage({ params }: { params: Promise<Params> 
   const fm = result.frontmatter as unknown as SpeakerFrontmatter;
   const { content: mdxContent } = await loadMdx({ baseDir: "speakers", slug });
 
-  const speakerData: SpeakerSummary = {
-    slug,
+  const speakerSchema = {
+    "@context": "https://schema.org",
+    "@type": "Person",
     name: fm.name,
-    title: fm.title,
-    topic: fm.topic,
+    jobTitle: fm.title,
     description: fm.description,
-    day: fm.day,
-    time: fm.time,
-    stage: fm.stage,
-    featured: fm.featured,
-    imageAlt: fm.imageAlt,
-    social: fm.social,
-  };
-
-  const breadcrumbs: BreadcrumbItem[] = [
-    { name: "Home", href: "/" },
-    { name: "Speakers", href: "/speakers" },
-    { name: fm.name, href: `/speakers/${slug}`, current: true },
-  ];
-
-  const siteSummary: SiteConfigSummary = {
-    name: siteConfig.business.name,
-    tagline: siteConfig.tagline,
-    phone: siteConfig.business.phone ?? "",
-    phoneDisplay: siteConfig.business.phone ?? "",
-    address: {
-      city: siteConfig.business.address.city,
-      county: siteConfig.business.address.region,
-    },
-    cta: siteConfig.cta,
-    stats: siteConfig.credentials.stats,
+    url: `${siteConfig.url}/speakers/${slug}`,
   };
 
   return (
-    <RigelSpeakerDetailPage
-      siteConfig={siteSummary}
-      frontmatter={speakerData}
-      mdxContent={mdxContent}
-      breadcrumbs={breadcrumbs}
-    />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(speakerSchema) }}
+      />
+
+      <PageTitleBanner pageTitle={fm.name} />
+
+      <section className="bg-surface-background py-16 px-4">
+        <div className="max-w-4xl mx-auto">
+          {/* Breadcrumbs */}
+          <nav className="mb-8 text-sm text-surface-muted-foreground">
+            <Link href="/" className="hover:text-brand-primary transition-colors">
+              Home
+            </Link>
+            <span className="mx-2">/</span>
+            <Link href="/speakers" className="hover:text-brand-primary transition-colors">
+              Speakers
+            </Link>
+            <span className="mx-2">/</span>
+            <span className="text-surface-foreground">{fm.name}</span>
+          </nav>
+
+          {/* Speaker info header */}
+          <div className="mb-8">
+            <div className="flex flex-wrap items-center gap-3 mb-4">
+              {fm.featured && (
+                <span className="text-xs font-bold uppercase tracking-wider text-brand-accent bg-brand-accent/10 px-2 py-0.5 rounded">
+                  Featured Speaker
+                </span>
+              )}
+              <span className="text-sm font-medium text-brand-secondary uppercase tracking-wider">
+                {fm.day === "saturday" ? "Saturday" : "Sunday"} &middot; {fm.time} &middot;{" "}
+                {fm.stage}
+              </span>
+            </div>
+            <p className="text-surface-muted-foreground text-lg">{fm.title}</p>
+            <p className="text-brand-primary font-semibold text-lg mt-2">{fm.topic}</p>
+          </div>
+
+          {/* Social links */}
+          {fm.social && (
+            <div className="flex gap-4 mb-8">
+              {fm.social.twitter && (
+                <a
+                  href={fm.social.twitter}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-brand-primary hover:text-brand-primary-hover transition-colors text-sm font-medium"
+                >
+                  Twitter
+                </a>
+              )}
+              {fm.social.linkedin && (
+                <a
+                  href={fm.social.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-brand-primary hover:text-brand-primary-hover transition-colors text-sm font-medium"
+                >
+                  LinkedIn
+                </a>
+              )}
+              {fm.social.website && (
+                <a
+                  href={fm.social.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-brand-primary hover:text-brand-primary-hover transition-colors text-sm font-medium"
+                >
+                  Website
+                </a>
+              )}
+            </div>
+          )}
+
+          {/* MDX content */}
+          <div className="prose prose-lg max-w-none prose-headings:text-surface-foreground prose-p:text-surface-muted-foreground prose-a:text-brand-primary">
+            {mdxContent}
+          </div>
+
+          {/* Back link */}
+          <div className="mt-12 pt-8 border-t border-surface-border">
+            <Link
+              href="/speakers"
+              className="text-brand-primary font-semibold hover:text-brand-primary-hover transition-colors"
+            >
+              &larr; Back to all speakers
+            </Link>
+          </div>
+        </div>
+      </section>
+    </>
   );
 }
