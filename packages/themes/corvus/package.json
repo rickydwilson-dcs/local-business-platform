@@ -1,0 +1,14 @@
+{
+  "name": "@platform/themes/corvus",
+  "version": "1.0.0",
+  "description": "Corvus theme package for the Local Business Platform",
+  "main": "./index.ts",
+  "types": "./index.ts",
+  "peerDependencies": {
+    "next": ">=16.0.0",
+    "react": ">=19.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19"
+  }
+}
