@@ -30,12 +30,12 @@ import { createContext, useContext } from "react";
 export type ThemeName =
   | "atlas"
   | "castor"
+  | "corvus"
   | "cygnus"
   | "lyra"
   | "nova"
   | "orion"
   | "polaris"
-  | "rigel"
   | "sirius"
   | "solaris"
   | "vega";
