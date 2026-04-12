@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Website Design for Tradespeople | Digital Consulting Services</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* === RESET & TOKENS === */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --primary: #61A3BA; --primary-deep: #4a8fa8; --primary-light: #78b8d0;
+      --accent: #D2DE32; --accent-hover: #bdc82b;
+      --support: #A2C579; --support-dark: #8fb565;
+      --bg: #F0F7FA; --white: #ffffff;
+      --gray-100: #e4f0f5; --gray-200: #d4e8f0; --gray-400: #8a8a70; --gray-600: #3d4235; --gray-800: #2a2e20;
+      --font-display: 'Space Grotesk', sans-serif; --font-body: 'Inter', sans-serif;
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --radius-card: 20px; --radius-card-lg: 24px;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--gray-800); font-family: var(--font-body); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+    h1, h2, h3, h4, h5, h6 { font-family: var(--font-display); font-weight: 700; line-height: 1.15; }
+
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+    /* === HEADER === */
+    .header {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--bg); border-bottom: 1px solid var(--gray-200);
+      transition: box-shadow 0.3s ease;
+    }
+    .header.scrolled { box-shadow: 0 2px 20px rgba(42,46,32,0.08); }
+    .header-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 24px; max-width: 1200px; margin: 0 auto;
+    }
+    .logo { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; color: var(--primary-deep); letter-spacing: -0.5px; }
+    .nav-links { display: flex; gap: 32px; align-items: center; }
+    .nav-links a { font-family: var(--font-display); font-size: 0.9rem; font-weight: 500; color: var(--gray-600); transition: color 0.2s; }
+    .nav-links a:hover { color: var(--primary-deep); }
+    .nav-cta {
+      background: var(--primary); color: #ffffff !important; padding: 10px 24px;
+      border-radius: 8px; font-family: var(--font-display); font-weight: 600;
+      font-size: 0.9rem; transition: background 0.2s;
+    }
+    .nav-cta:hover { background: var(--primary-deep); color: #ffffff !important; }
+    .hamburger {
+      display: none; background: none; border: none; cursor: pointer;
+      width: 32px; height: 24px; position: relative; flex-direction: column;
+      justify-content: space-between;
+    }
+    .hamburger span {
+      display: block; width: 100%; height: 2.5px; background: var(--gray-800);
+      border-radius: 2px; transition: all 0.3s var(--ease-out);
+    }
+    .hamburger.active span:nth-child(1) { transform: translateY(10.75px) rotate(45deg); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: translateY(-10.75px) rotate(-45deg); }
+    .mobile-menu {
+      display: none; position: fixed; top: 65px; left: 0; right: 0; bottom: 0;
+      background: var(--bg); z-index: 99; padding: 40px 24px;
+      flex-direction: column; gap: 24px; opacity: 0;
+      transition: opacity 0.3s var(--ease-out);
+    }
+    .mobile-menu.open { display: flex; opacity: 1; }
+    .mobile-menu a {
+      font-family: var(--font-display); font-size: 1.25rem; font-weight: 600;
+      color: var(--gray-800); padding: 8px 0; border-bottom: 1px solid var(--gray-200);
+    }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+    }
+
+    /* === SECTION SHARED === */
+    .section { padding: 100px 0; position: relative; }
+    .section-label {
+      font-family: var(--font-display); font-size: 0.8rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 1.5px; color: var(--primary);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: clamp(2rem, 3.5vw, 2.75rem); margin-bottom: 16px;
+      letter-spacing: -0.5px;
+    }
+    .section-subtitle {
+      font-size: 1.1rem; color: var(--gray-600); max-width: 560px; line-height: 1.7;
+    }
+    .section-header { margin-bottom: 60px; }
+    .section-header.center { text-align: center; }
+    .section-header.center .section-subtitle { margin: 0 auto; }
+
+    /* === BUTTONS === */
+    .btn-primary {
+      background: var(--primary); color: var(--white); padding: 14px 32px;
+      border-radius: 10px; font-family: var(--font-display); font-weight: 600;
+      font-size: 1rem; border: none; cursor: pointer; transition: all 0.25s var(--ease-out);
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-primary:hover { background: var(--primary-deep); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(97,163,186,0.3); }
+    .btn-outline {
+      background: transparent; color: var(--gray-800); padding: 14px 32px;
+      border-radius: 10px; font-family: var(--font-display); font-weight: 600;
+      font-size: 1rem; border: 2px solid var(--gray-200); cursor: pointer;
+      transition: all 0.25s var(--ease-out); display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-outline:hover { border-color: var(--primary); color: var(--primary-deep); }
+    .btn-accent {
+      background: var(--accent); color: var(--gray-800); padding: 14px 32px;
+      border-radius: 10px; font-family: var(--font-display); font-weight: 600;
+      font-size: 1rem; border: none; cursor: pointer; transition: all 0.25s var(--ease-out);
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-accent:hover { background: var(--accent-hover); transform: translateY(-2px); }
+
+    /* === CARDS === */
+    .card {
+      background: var(--white); border-radius: var(--radius-card); padding: 32px 28px;
+      border: 1px solid var(--gray-200); position: relative; overflow: hidden;
+      transition: all 0.35s var(--ease-out);
+    }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(42,46,32,0.08); }
+
+    /* === FOOTER === */
+    .footer {
+      background: var(--gray-800); color: rgba(255,255,255,0.7); padding: 80px 0 40px;
+    }
+    .footer-grid {
+      display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 48px;
+      margin-bottom: 48px;
+    }
+    .footer-brand .logo { color: var(--white); margin-bottom: 12px; display: block; }
+    .footer-brand p { font-size: 0.9rem; line-height: 1.6; max-width: 280px; }
+    .footer-col h4 {
+      font-family: var(--font-display); font-size: 0.85rem; font-weight: 600;
+      color: var(--white); text-transform: uppercase; letter-spacing: 1px;
+      margin-bottom: 16px;
+    }
+    .footer-col a { display: block; font-size: 0.9rem; padding: 4px 0; transition: color 0.2s; }
+    .footer-col a:hover { color: var(--white); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 12px; font-size: 0.82rem;
+    }
+    .footer-legal { display: flex; gap: 24px; }
+    .footer-legal a:hover { color: var(--white); }
+    @media (max-width: 768px) {
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+    @media (max-width: 480px) { .footer-grid { grid-template-columns: 1fr; } }
+
+    /* === SCROLL ANIMATION === */
+    .reveal { opacity: 0; transform: translateY(30px); transition: all 0.7s var(--ease-out); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* === SECTION HEADING REVEAL === */
+    .section-label, .section-title, .section-subtitle {
+      opacity: 0; transform: translateY(20px);
+      transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out);
+    }
+    .section-label.visible { opacity: 1; transform: translateY(0); }
+    .section-title.visible { opacity: 1; transform: translateY(0); transition-delay: 0.1s; }
+    .section-subtitle.visible { opacity: 1; transform: translateY(0); transition-delay: 0.2s; }
+
+    /* === NAV LINK HOVER UNDERLINE === */
+    .nav-links a { position: relative; }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -3px; left: 0;
+      width: 0; height: 2px; background: var(--primary);
+      transition: width 0.3s var(--ease-out); border-radius: 2px;
+    }
+    .nav-links a:hover::after { width: 100%; }
+
+    /* === GEOMETRIC SHAPES === */
+    .geo-shape {
+      position: absolute; border-radius: 6px;
+      animation: fadeSlideUp 0.7s var(--ease-out) both;
+    }
+    .geo-shape-1 {
+      width: 270px; height: 270px; background: var(--primary); opacity: 0.35;
+      top: 8%; left: 5%; animation-delay: 0.6s;
+    }
+    .geo-shape-2 {
+      width: 170px; height: 170px; background: var(--accent); opacity: 0.7;
+      top: 0; right: 8%; transform: rotate(14deg); animation-delay: 0.75s;
+    }
+    .geo-shape-3 {
+      width: 130px; height: 130px; background: var(--support); opacity: 0.5;
+      bottom: 12%; left: 22%; transform: rotate(-9deg); animation-delay: 0.9s;
+    }
+    .geo-shape-4 {
+      width: 75px; height: 75px; border: 3px solid var(--accent);
+      background: transparent; bottom: 26%; right: 6%;
+      transform: rotate(22deg); animation-delay: 1.05s;
+    }
+
+    @keyframes floatA {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-12px) rotate(1.5deg); }
+    }
+    @keyframes floatB {
+      0%, 100% { transform: rotate(14deg) translateY(0px); }
+      50% { transform: rotate(16deg) translateY(-8px); }
+    }
+    @keyframes floatC {
+      0%, 100% { transform: rotate(-9deg) translateY(0px); }
+      50% { transform: rotate(-11deg) translateY(-10px); }
+    }
+    @keyframes floatD {
+      0%, 100% { transform: rotate(22deg) translateY(0px); }
+      50% { transform: rotate(20deg) translateY(-6px); }
+    }
+    .geo-shape-1 { animation: fadeSlideUp 0.7s var(--ease-out) 0.6s both, floatA 6s ease-in-out 1.4s infinite; }
+    .geo-shape-2 { animation: fadeSlideUp 0.7s var(--ease-out) 0.75s both, floatB 7s ease-in-out 1.55s infinite; }
+    .geo-shape-3 { animation: fadeSlideUp 0.7s var(--ease-out) 0.9s both, floatC 8s ease-in-out 1.7s infinite; }
+    .geo-shape-4 { animation: fadeSlideUp 0.7s var(--ease-out) 1.05s both, floatD 5.5s ease-in-out 1.85s infinite; }
+
+    /* === FAQ (details/summary) === */
+    .faq-list { display: flex; flex-direction: column; gap: 12px; }
+    .faq-list details {
+      background: var(--white); border-radius: 16px; border: 1px solid var(--gray-200);
+      overflow: hidden;
+    }
+    .faq-list details summary {
+      cursor: pointer; padding: 20px 24px; font-family: var(--font-display); font-weight: 600;
+      font-size: 1rem; color: var(--gray-800); list-style: none;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    }
+    .faq-list details summary::-webkit-details-marker { display: none; }
+    .faq-list details summary::after {
+      content: "▾"; font-size: 1.2rem; color: var(--primary);
+      transition: transform 0.2s var(--ease-out); flex-shrink: 0;
+    }
+    .faq-list details[open] summary::after { transform: rotate(-180deg); }
+    .faq-list details p {
+      padding: 0 24px 20px; font-size: 0.92rem; color: var(--gray-600); line-height: 1.7;
+    }
+
+    /* === PAGE-SPECIFIC: Hero === */
+    .hero {
+      background: var(--primary-light); padding: 80px 0 60px; position: relative; overflow: hidden;
+    }
+    .hero-badge {
+      display: inline-block; background: var(--primary); color: var(--white);
+      font-family: var(--font-display); font-size: 0.8rem; font-weight: 600;
+      letter-spacing: 1px; text-transform: uppercase; padding: 6px 16px;
+      border-radius: 100px; margin-bottom: 20px;
+      animation: fadeSlideUp 0.6s var(--ease-out) both;
+    }
+    .hero h1 {
+      font-size: clamp(2.2rem, 4.5vw, 3.5rem); color: var(--gray-800);
+      letter-spacing: -1px; margin-bottom: 20px;
+      animation: fadeSlideUp 0.6s var(--ease-out) 0.1s both;
+    }
+    .hero-description {
+      font-size: 1.15rem; color: var(--gray-600); max-width: 560px; line-height: 1.7;
+      animation: fadeSlideUp 0.6s var(--ease-out) 0.2s both;
+    }
+    .breadcrumb {
+      font-size: 0.85rem; color: var(--gray-400); margin-bottom: 24px;
+      animation: fadeSlideUp 0.6s var(--ease-out) 0.05s both;
+    }
+    .breadcrumb a { color: var(--primary-deep); }
+    .breadcrumb a:hover { text-decoration: underline; }
+    .breadcrumb span { margin: 0 6px; }
+
+    /* === PAGE-SPECIFIC: Content Grid === */
+    .content-section { padding: 80px 0; }
+    .content-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+    @media (min-width: 768px) {
+      .content-grid {
+        grid-template-columns: 65% 1fr;
+      }
+    }
+    .sidebar {
+      position: sticky;
+      top: 120px;
+      align-self: start;
+    }
+
+    /* === PAGE-SPECIFIC: Prose === */
+    .prose h2 {
+      font-size: 1.6rem; margin-bottom: 16px; margin-top: 40px; color: var(--gray-800);
+    }
+    .prose p { font-size: 0.97rem; color: var(--gray-600); line-height: 1.75; margin-bottom: 16px; }
+
+    /* === PAGE-SPECIFIC: Benefits list === */
+    .benefits-list { display: flex; flex-direction: column; gap: 12px; margin: 24px 0; }
+    .benefit-item {
+      display: flex; align-items: flex-start; gap: 12px;
+      background: var(--white); border-radius: 12px; padding: 16px 20px;
+      border: 1px solid var(--gray-200);
+    }
+    .benefit-icon { flex-shrink: 0; margin-top: 2px; }
+    .benefit-text { font-size: 0.95rem; color: var(--gray-600); line-height: 1.5; }
+    .benefit-text strong { color: var(--gray-800); display: block; font-family: var(--font-display); font-size: 0.97rem; }
+
+    /* === PAGE-SPECIFIC: Sidebar CTA card === */
+    .sidebar-cta {
+      background: var(--white); border-radius: var(--radius-card); overflow: hidden;
+      border: 1px solid var(--gray-200); box-shadow: 0 8px 24px rgba(42,46,32,0.06);
+    }
+    .sidebar-cta-header {
+      background: var(--primary); padding: 24px 28px;
+    }
+    .sidebar-cta-header h3 {
+      color: var(--white); font-size: 1.2rem; margin-bottom: 8px;
+    }
+    .sidebar-cta-header p {
+      color: rgba(255,255,255,0.85); font-size: 0.9rem; line-height: 1.5;
+    }
+    .sidebar-cta-body { padding: 28px; }
+    .sidebar-phone {
+      display: flex; align-items: center; gap: 10px; margin-bottom: 20px;
+      font-family: var(--font-display); font-size: 1.2rem; font-weight: 700;
+      color: var(--primary-deep);
+    }
+    .sidebar-phone svg { flex-shrink: 0; }
+    .sidebar-note { font-size: 0.82rem; color: var(--gray-400); margin-top: 12px; text-align: center; }
+    .btn-accent-full {
+      display: block; width: 100%; text-align: center;
+      background: var(--accent); color: var(--gray-800); padding: 14px 24px;
+      border-radius: 10px; font-family: var(--font-display); font-weight: 700;
+      font-size: 1rem; transition: all 0.25s var(--ease-out);
+    }
+    .btn-accent-full:hover { background: var(--accent-hover); transform: translateY(-2px); }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header" id="header">
+    <div class="header-inner">
+      <a href="/" class="logo">DCS</a>
+      <nav class="nav-links">
+        <a href="/services">Services</a>
+        <a href="/about">About</a>
+        <a href="/projects">Our Work</a>
+        <a href="/blog">Blog</a>
+        <a href="/pricing">Pricing</a>
+        <a href="/contact" class="nav-cta">Get Started</a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation">
+      <a href="/services">Services</a>
+      <a href="/about">About</a>
+      <a href="/projects">Our Work</a>
+      <a href="/blog">Blog</a>
+      <a href="/pricing">Pricing</a>
+      <a href="/contact">Get Started</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero reveal">
+    <div class="container">
+      <p class="breadcrumb">
+        <a href="/">Home</a><span>›</span>
+        <a href="/services">Services</a><span>›</span>
+        Web Design
+      </p>
+      <span class="hero-badge">Web Design</span>
+      <h1>Website Design for Tradespeople</h1>
+      <p class="hero-description">A professional website that gets you found on Google and turns visitors into paying customers — built specifically for tradespeople.</p>
+    </div>
+  </section>
+
+  <!-- MAIN CONTENT -->
+  <section class="content-section">
+    <div class="container">
+      <div class="content-grid">
+
+        <!-- LEFT COLUMN: Prose -->
+        <main>
+          <div class="prose reveal">
+            <h2>About this service</h2>
+            <p>Running a trade business means your time is spent on the tools — not managing websites. That's why we handle everything for you: design, build, content, SEO, hosting, and ongoing support. You get a professional web presence without needing to become a web developer.</p>
+            <p>Every website we build is mobile-first, fast-loading, and built to rank in Google for local search terms like "electrician in Brighton" or "scaffolding Sussex". We use structured data markup (Schema.org) so your business appears correctly in Google search results and Google Maps.</p>
+            <p>We don't use page builders or templates bought off a shelf. Each site is custom-designed to match your brand and built on a modern technology stack that handles hundreds of pages without slowing down.</p>
+          </div>
+
+          <div class="reveal" style="margin-top: 48px;">
+            <h2 style="font-family: var(--font-display); font-size: 1.6rem; margin-bottom: 24px; color: var(--gray-800);">What you get</h2>
+            <ul class="benefits-list">
+              <li class="benefit-item">
+                <span class="benefit-icon">
+                  <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="11" cy="11" r="11" fill="#A2C579"/>
+                    <path d="M6 11.5L9.5 15L16 8" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+                <span class="benefit-text">
+                  <strong>Mobile-first, fast-loading</strong>
+                  Over 70% of trade enquiries come from mobile. Your site will score 90+ on Google PageSpeed.
+                </span>
+              </li>
+              <li class="benefit-item">
+                <span class="benefit-icon">
+                  <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="11" cy="11" r="11" fill="#A2C579"/>
+                    <path d="M6 11.5L9.5 15L16 8" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+                <span class="benefit-text">
+                  <strong>Full local SEO built in</strong>
+                  Schema markup, meta tags, sitemap, and content optimised for your target area from day one.
+                </span>
+              </li>
+              <li class="benefit-item">
+                <span class="benefit-icon">
+                  <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="11" cy="11" r="11" fill="#A2C579"/>
+                    <path d="M6 11.5L9.5 15L16 8" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+                <span class="benefit-text">
+                  <strong>No ongoing maintenance headaches</strong>
+                  We manage hosting, security updates, and uptime monitoring. You focus on the work.
+                </span>
+              </li>
+              <li class="benefit-item">
+                <span class="benefit-icon">
+                  <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="11" cy="11" r="11" fill="#A2C579"/>
+                    <path d="M6 11.5L9.5 15L16 8" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+                <span class="benefit-text">
+                  <strong>Custom domain + professional email</strong>
+                  yourname@yourcompany.co.uk included. No more quoting from a Gmail address.
+                </span>
+              </li>
+              <li class="benefit-item">
+                <span class="benefit-icon">
+                  <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="11" cy="11" r="11" fill="#A2C579"/>
+                    <path d="M6 11.5L9.5 15L16 8" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+                <span class="benefit-text">
+                  <strong>Contact form with email notifications</strong>
+                  Every enquiry lands straight in your inbox, including the caller's name, phone, and message.
+                </span>
+              </li>
+              <li class="benefit-item">
+                <span class="benefit-icon">
+                  <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="11" cy="11" r="11" fill="#A2C579"/>
+                    <path d="M6 11.5L9.5 15L16 8" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+                <span class="benefit-text">
+                  <strong>Unlimited revisions during build</strong>
+                  We tweak until you're happy. No extra charges for design changes while we're building.
+                </span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- FAQ -->
+          <div class="reveal" style="margin-top: 60px;">
+            <h2 style="font-family: var(--font-display); font-size: 1.6rem; margin-bottom: 24px; color: var(--gray-800);">Frequently asked questions</h2>
+            <ul class="faq-list">
+              <li>
+                <details>
+                  <summary>How long does it take to build my website?</summary>
+                  <p>Most projects go from kick-off to launch in 2–4 weeks. We start with a discovery call, then design, build, and review in stages. You'll have full visibility throughout and can request changes at any point before launch.</p>
+                </details>
+              </li>
+              <li>
+                <details>
+                  <summary>Do I need to write the content myself?</summary>
+                  <p>No. We write all the content for you based on a short questionnaire about your services and target area. Our content is written by a human (not AI-generated) and optimised for local search terms relevant to your trade.</p>
+                </details>
+              </li>
+              <li>
+                <details>
+                  <summary>Will I be able to update the website myself?</summary>
+                  <p>We handle all updates for you as part of the monthly management fee. If you'd prefer to manage content yourself, we can set up a simple content management interface — just let us know at the start of your project.</p>
+                </details>
+              </li>
+              <li>
+                <details>
+                  <summary>What if I already have a logo or brand colours?</summary>
+                  <p>Great — we'll incorporate your existing branding. If you don't have a logo yet, we can design one as an optional add-on (£250). We'll always match your trade's identity, not use a generic template.</p>
+                </details>
+              </li>
+            </ul>
+          </div>
+        </main>
+
+        <!-- RIGHT SIDEBAR -->
+        <aside class="sidebar reveal">
+          <div class="sidebar-cta">
+            <div class="sidebar-cta-header">
+              <h3>Get a Free Quote</h3>
+              <p>No obligation. We'll assess your requirements and give you a clear, fixed price.</p>
+            </div>
+            <div class="sidebar-cta-body">
+              <a href="tel:01234567890" class="sidebar-phone">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M4.5 2.5C4.5 2.5 3 2.5 2.5 4C2 5.5 2 7 4 9.5C6 12 8.5 14 10 15.5C11.5 17 13 18.5 14.5 18C16 17.5 17.5 16 17.5 16L14 13.5C14 13.5 13 14 12.5 14C12 14 11 13.5 9.5 12C8 10.5 7.5 9.5 7.5 9C7.5 8.5 8 7.5 8 7.5L4.5 2.5Z" stroke="#4a8fa8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                01234 567 890
+              </a>
+              <a href="/contact" class="btn-accent-full">Get in touch</a>
+              <p class="sidebar-note">No obligation · Free consultation</p>
+            </div>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="/" class="logo">DCS</a>
+          <p>Professional websites for local service businesses. Design, build, host and support &mdash; all taken care of.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Navigation</h4>
+          <a href="/services">Services</a>
+          <a href="/locations">Areas We Serve</a>
+          <a href="/pricing">Pricing</a>
+          <a href="/projects">Our Work</a>
+          <a href="/blog">Blog</a>
+          <a href="/about">About</a>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <a href="mailto:hello@digitalconsultingservices.co.uk">hello@digitalconsultingservices.co.uk</a>
+          <a href="tel:01234567890">01234 567 890</a>
+          <p style="font-size:0.9rem; padding: 4px 0;">East Sussex, UK</p>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <a href="/privacy">Privacy Policy</a>
+          <a href="/terms">Terms of Service</a>
+          <a href="/cookies">Cookie Policy</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2025 Digital Consulting Services. All rights reserved.</span>
+        <div class="footer-legal">
+          <a href="/privacy">Privacy</a>
+          <a href="/terms">Terms</a>
+          <a href="/cookies">Cookies</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+  // === HEADER SCROLL ===
+  const header = document.getElementById('header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 20);
+  }, { passive: true });
+
+  // === HAMBURGER ===
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.toggle('open');
+    hamburger.classList.toggle('active');
+    hamburger.setAttribute('aria-expanded', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      hamburger.classList.remove('active');
+      hamburger.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    });
+  });
+
+  // === SCROLL REVEAL ===
+  const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('.reveal').forEach(el => {
+    observer.observe(el);
+  });
+
+  // === SECTION HEADING REVEAL ===
+  const headingObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        headingObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.section-label, .section-title, .section-subtitle').forEach(el => {
+    headingObserver.observe(el);
+  });
+  </script>
+
+</body>
+</html>

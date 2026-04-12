@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Website Design for Tradespeople in Brighton | Digital Consulting Services</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* === RESET & TOKENS === */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --primary: #61A3BA; --primary-deep: #4a8fa8; --primary-light: #78b8d0;
+      --accent: #D2DE32; --accent-hover: #bdc82b;
+      --support: #A2C579; --support-dark: #8fb565;
+      --bg: #F0F7FA; --white: #ffffff;
+      --gray-100: #e4f0f5; --gray-200: #d4e8f0; --gray-400: #8a8a70; --gray-600: #3d4235; --gray-800: #2a2e20;
+      --font-display: 'Space Grotesk', sans-serif; --font-body: 'Inter', sans-serif;
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --radius-card: 20px; --radius-card-lg: 24px;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--gray-800); font-family: var(--font-body); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+    h1, h2, h3, h4, h5, h6 { font-family: var(--font-display); font-weight: 700; line-height: 1.15; }
+
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+    /* === HEADER === */
+    .header {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--bg); border-bottom: 1px solid var(--gray-200);
+      transition: box-shadow 0.3s ease;
+    }
+    .header.scrolled { box-shadow: 0 2px 20px rgba(42,46,32,0.08); }
+    .header-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 24px; max-width: 1200px; margin: 0 auto;
+    }
+    .logo { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; color: var(--primary-deep); letter-spacing: -0.5px; }
+    .nav-links { display: flex; gap: 32px; align-items: center; }
+    .nav-links a { font-family: var(--font-display); font-size: 0.9rem; font-weight: 500; color: var(--gray-600); transition: color 0.2s; }
+    .nav-links a:hover { color: var(--primary-deep); }
+    .nav-cta {
+      background: var(--primary); color: #ffffff !important; padding: 10px 24px;
+      border-radius: 8px; font-family: var(--font-display); font-weight: 600;
+      font-size: 0.9rem; transition: background 0.2s;
+    }
+    .nav-cta:hover { background: var(--primary-deep); color: #ffffff !important; }
+    .hamburger {
+      display: none; background: none; border: none; cursor: pointer;
+      width: 32px; height: 24px; position: relative; flex-direction: column;
+      justify-content: space-between;
+    }
+    .hamburger span {
+      display: block; width: 100%; height: 2.5px; background: var(--gray-800);
+      border-radius: 2px; transition: all 0.3s var(--ease-out);
+    }
+    .hamburger.active span:nth-child(1) { transform: translateY(10.75px) rotate(45deg); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: translateY(-10.75px) rotate(-45deg); }
+    .mobile-menu {
+      display: none; position: fixed; top: 65px; left: 0; right: 0; bottom: 0;
+      background: var(--bg); z-index: 99; padding: 40px 24px;
+      flex-direction: column; gap: 24px; opacity: 0;
+      transition: opacity 0.3s var(--ease-out);
+    }
+    .mobile-menu.open { display: flex; opacity: 1; }
+    .mobile-menu a {
+      font-family: var(--font-display); font-size: 1.25rem; font-weight: 600;
+      color: var(--gray-800); padding: 8px 0; border-bottom: 1px solid var(--gray-200);
+    }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+    }
+
+    /* === SECTION SHARED === */
+    .section { padding: 100px 0; position: relative; }
+    .section-label {
+      font-family: var(--font-display); font-size: 0.8rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 1.5px; color: var(--primary);
+      margin-bottom: 12px;
+    }
+    .section-title { font-size: clamp(2rem, 3.5vw, 2.75rem); margin-bottom: 16px; letter-spacing: -0.5px; }
+    .section-subtitle { font-size: 1.1rem; color: var(--gray-600); max-width: 560px; line-height: 1.7; }
+    .section-header { margin-bottom: 60px; }
+
+    /* === BUTTONS === */
+    .btn-primary {
+      background: var(--primary); color: var(--white); padding: 14px 32px;
+      border-radius: 10px; font-family: var(--font-display); font-weight: 600;
+      font-size: 1rem; border: none; cursor: pointer; transition: all 0.25s var(--ease-out);
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-primary:hover { background: var(--primary-deep); transform: translateY(-2px); }
+    .btn-accent {
+      background: var(--accent); color: var(--gray-800); padding: 14px 32px;
+      border-radius: 10px; font-family: var(--font-display); font-weight: 600;
+      font-size: 1rem; border: none; cursor: pointer; transition: all 0.25s var(--ease-out);
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-accent:hover { background: var(--accent-hover); transform: translateY(-2px); }
+
+    /* === FOOTER === */
+    .footer { background: var(--gray-800); color: rgba(255,255,255,0.7); padding: 80px 0 40px; }
+    .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+    .footer-brand .logo { color: var(--white); margin-bottom: 12px; display: block; }
+    .footer-brand p { font-size: 0.9rem; line-height: 1.6; max-width: 280px; }
+    .footer-col h4 { font-family: var(--font-display); font-size: 0.85rem; font-weight: 600; color: var(--white); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px; }
+    .footer-col a { display: block; font-size: 0.9rem; padding: 4px 0; transition: color 0.2s; }
+    .footer-col a:hover { color: var(--white); }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-size: 0.82rem; }
+    .footer-legal { display: flex; gap: 24px; }
+    .footer-legal a:hover { color: var(--white); }
+    @media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; } .footer-bottom { flex-direction: column; text-align: center; } }
+    @media (max-width: 480px) { .footer-grid { grid-template-columns: 1fr; } }
+
+    /* === SCROLL ANIMATION === */
+    .reveal { opacity: 0; transform: translateY(30px); transition: all 0.7s var(--ease-out); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .section-label, .section-title, .section-subtitle { opacity: 0; transform: translateY(20px); transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out); }
+    .section-label.visible { opacity: 1; transform: translateY(0); }
+    .section-title.visible { opacity: 1; transform: translateY(0); transition-delay: 0.1s; }
+    .section-subtitle.visible { opacity: 1; transform: translateY(0); transition-delay: 0.2s; }
+
+    /* === NAV LINK HOVER === */
+    .nav-links a { position: relative; }
+    .nav-links a::after { content: ''; position: absolute; bottom: -3px; left: 0; width: 0; height: 2px; background: var(--primary); transition: width 0.3s var(--ease-out); border-radius: 2px; }
+    .nav-links a:hover::after { width: 100%; }
+
+    /* === FAQ (details/summary) === */
+    .faq-list { display: flex; flex-direction: column; gap: 12px; }
+    .faq-list details { background: var(--white); border-radius: 16px; border: 1px solid var(--gray-200); overflow: hidden; }
+    .faq-list details summary { cursor: pointer; padding: 20px 24px; font-family: var(--font-display); font-weight: 600; font-size: 1rem; color: var(--gray-800); list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .faq-list details summary::-webkit-details-marker { display: none; }
+    .faq-list details summary::after { content: "▾"; font-size: 1.2rem; color: var(--primary); transition: transform 0.2s var(--ease-out); flex-shrink: 0; }
+    .faq-list details[open] summary::after { transform: rotate(-180deg); }
+    .faq-list details p { padding: 0 24px 20px; font-size: 0.92rem; color: var(--gray-600); line-height: 1.7; }
+
+    /* === PAGE-SPECIFIC: Hero === */
+    .hero { background: var(--primary-light); padding: 80px 0 60px; position: relative; overflow: hidden; }
+    .breadcrumb { font-size: 0.85rem; color: var(--gray-400); margin-bottom: 24px; animation: fadeSlideUp 0.6s var(--ease-out) both; }
+    .breadcrumb a { color: var(--primary-deep); }
+    .breadcrumb a:hover { text-decoration: underline; }
+    .breadcrumb span { margin: 0 6px; }
+    .hero h1 { font-size: clamp(2rem, 4.5vw, 3.2rem); color: var(--gray-800); letter-spacing: -1px; margin-bottom: 20px; animation: fadeSlideUp 0.6s var(--ease-out) 0.1s both; }
+    .hero-description { font-size: 1.15rem; color: var(--gray-600); max-width: 560px; line-height: 1.7; animation: fadeSlideUp 0.6s var(--ease-out) 0.2s both; }
+
+    /* === Content grid === */
+    .content-section { padding: 80px 0; }
+    .content-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; }
+    @media (min-width: 768px) { .content-grid { grid-template-columns: 65% 1fr; } }
+    .sidebar { position: sticky; top: 120px; align-self: start; }
+
+    /* === Prose === */
+    .prose h2 { font-size: 1.6rem; margin-bottom: 16px; margin-top: 40px; color: var(--gray-800); }
+    .prose p { font-size: 0.97rem; color: var(--gray-600); line-height: 1.75; margin-bottom: 16px; }
+
+    /* === Sidebar === */
+    .sidebar-cta { background: var(--white); border-radius: var(--radius-card); overflow: hidden; border: 1px solid var(--gray-200); box-shadow: 0 8px 24px rgba(42,46,32,0.06); }
+    .sidebar-cta-header { background: var(--primary); padding: 24px 28px; }
+    .sidebar-cta-header h3 { color: var(--white); font-size: 1.2rem; margin-bottom: 8px; }
+    .sidebar-cta-header p { color: rgba(255,255,255,0.85); font-size: 0.9rem; line-height: 1.5; }
+    .sidebar-cta-body { padding: 28px; }
+    .sidebar-phone { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; font-family: var(--font-display); font-size: 1.2rem; font-weight: 700; color: var(--primary-deep); }
+    .sidebar-note { font-size: 0.82rem; color: var(--gray-400); margin-top: 12px; text-align: center; }
+    .btn-accent-full { display: block; width: 100%; text-align: center; background: var(--accent); color: var(--gray-800); padding: 14px 24px; border-radius: 10px; font-family: var(--font-display); font-weight: 700; font-size: 1rem; transition: all 0.25s var(--ease-out); }
+    .btn-accent-full:hover { background: var(--accent-hover); transform: translateY(-2px); }
+
+    /* === Nearby towns card === */
+    .nearby-card { background: var(--white); border-radius: var(--radius-card); padding: 28px; border: 1px solid var(--gray-200); margin-top: 24px; }
+    .nearby-card h4 { font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: var(--gray-800); margin-bottom: 16px; }
+    .nearby-list { display: flex; flex-direction: column; gap: 8px; }
+    .nearby-list a { display: flex; align-items: center; gap: 8px; font-size: 0.9rem; color: var(--primary-deep); padding: 6px 0; border-bottom: 1px solid var(--gray-100); transition: color 0.2s; }
+    .nearby-list a:last-child { border-bottom: none; }
+    .nearby-list a:hover { color: var(--primary); }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header" id="header">
+    <div class="header-inner">
+      <a href="/" class="logo">DCS</a>
+      <nav class="nav-links">
+        <a href="/services">Services</a>
+        <a href="/about">About</a>
+        <a href="/projects">Our Work</a>
+        <a href="/blog">Blog</a>
+        <a href="/pricing">Pricing</a>
+        <a href="/contact" class="nav-cta">Get Started</a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation">
+      <a href="/services">Services</a>
+      <a href="/about">About</a>
+      <a href="/projects">Our Work</a>
+      <a href="/blog">Blog</a>
+      <a href="/pricing">Pricing</a>
+      <a href="/contact">Get Started</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero reveal">
+    <div class="container">
+      <p class="breadcrumb">
+        <a href="/">Home</a><span>›</span>
+        <a href="/locations">Areas We Serve</a><span>›</span>
+        Brighton
+      </p>
+      <h1>Website Design for Tradespeople in Brighton</h1>
+      <p class="hero-description">Brighton is one of the most competitive markets in the South East. Stand out from the crowd with a professional website that puts you at the top of local search results.</p>
+    </div>
+  </section>
+
+  <!-- MAIN CONTENT -->
+  <section class="content-section">
+    <div class="container">
+      <div class="content-grid">
+
+        <!-- LEFT COLUMN -->
+        <main>
+          <div class="prose reveal">
+            <h2>The Brighton market for tradespeople</h2>
+            <p>Brighton is home to over 200,000 residents and a thriving housing market with high demand for trade services year-round. The city's mix of Victorian terraces, modern flats, and commercial properties means there's consistent work for electricians, plumbers, scaffolders, painters, and every trade in between — but competition is fierce.</p>
+            <p>The majority of Brighton homeowners search for tradespeople on Google before calling anyone. If your business doesn't appear on page one for searches like "electrician Brighton" or "scaffolding East Sussex", you're invisible to the most valuable prospects — those actively looking to spend money right now. A well-optimised website with local SEO is the most cost-effective way to appear in those results consistently.</p>
+            <p>DCS has built websites for tradespeople across Brighton and the wider East Sussex area. We know the local postcode areas, the competitor landscape, and how to structure content so it ranks for the searches that generate real enquiries. Every site we build for Brighton includes structured data markup, location-specific landing pages, and Google Business Profile optimisation guidance.</p>
+          </div>
+
+          <div class="reveal" style="margin-top: 48px;">
+            <h2 style="font-family: var(--font-display); font-size: 1.6rem; margin-bottom: 24px; color: var(--gray-800);">Frequently asked questions</h2>
+            <ul class="faq-list">
+              <li>
+                <details>
+                  <summary>How quickly can I rank for "tradesperson Brighton" on Google?</summary>
+                  <p>For a new website, expect 3–6 months to see meaningful organic rankings. However, if you already have an existing Google Business Profile with reviews, results can come faster. We optimise your site from day one so you're not starting from scratch.</p>
+                </details>
+              </li>
+              <li>
+                <details>
+                  <summary>Do you create separate pages for different areas in Brighton?</summary>
+                  <p>Yes. We create location-specific service pages targeting postcode areas, nearby neighbourhoods (Kemp Town, Hove, Preston Park, etc.), and surrounding towns. Each page is unique — no copied content — so you can rank for multiple search terms.</p>
+                </details>
+              </li>
+              <li>
+                <details>
+                  <summary>Can you help with Google Business Profile for Brighton?</summary>
+                  <p>Yes. We provide Google My Business setup and optimisation as an optional add-on (£150 one-off). This includes setting up your profile, adding photos, selecting the right service categories, and helping you establish a review strategy.</p>
+                </details>
+              </li>
+            </ul>
+          </div>
+        </main>
+
+        <!-- RIGHT SIDEBAR -->
+        <aside class="sidebar reveal">
+          <div class="sidebar-cta">
+            <div class="sidebar-cta-header">
+              <h3>Get your website in Brighton</h3>
+              <p>Tell us about your trade and we'll come back to you within one working day.</p>
+            </div>
+            <div class="sidebar-cta-body">
+              <a href="tel:01234567890" class="sidebar-phone">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M4.5 2.5C4.5 2.5 3 2.5 2.5 4C2 5.5 2 7 4 9.5C6 12 8.5 14 10 15.5C11.5 17 13 18.5 14.5 18C16 17.5 17.5 16 17.5 16L14 13.5C14 13.5 13 14 12.5 14C12 14 11 13.5 9.5 12C8 10.5 7.5 9.5 7.5 9C7.5 8.5 8 7.5 8 7.5L4.5 2.5Z" stroke="#4a8fa8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                01234 567 890
+              </a>
+              <a href="/contact" class="btn-accent-full">Get in touch</a>
+              <p class="sidebar-note">No obligation · Free consultation</p>
+            </div>
+          </div>
+
+          <div class="nearby-card">
+            <h4>Nearby towns we cover</h4>
+            <ul class="nearby-list">
+              <li><a href="/locations/hove">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1C4.8 1 3 2.8 3 5C3 8 7 13 7 13C7 13 11 8 11 5C11 2.8 9.2 1 7 1ZM7 6.5C6.17 6.5 5.5 5.83 5.5 5C5.5 4.17 6.17 3.5 7 3.5C7.83 3.5 8.5 4.17 8.5 5C8.5 5.83 7.83 6.5 7 6.5Z" fill="#61A3BA"/></svg>
+                Hove
+              </a></li>
+              <li><a href="/locations/lewes">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1C4.8 1 3 2.8 3 5C3 8 7 13 7 13C7 13 11 8 11 5C11 2.8 9.2 1 7 1ZM7 6.5C6.17 6.5 5.5 5.83 5.5 5C5.5 4.17 6.17 3.5 7 3.5C7.83 3.5 8.5 4.17 8.5 5C8.5 5.83 7.83 6.5 7 6.5Z" fill="#61A3BA"/></svg>
+                Lewes
+              </a></li>
+              <li><a href="/locations/worthing">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1C4.8 1 3 2.8 3 5C3 8 7 13 7 13C7 13 11 8 11 5C11 2.8 9.2 1 7 1ZM7 6.5C6.17 6.5 5.5 5.83 5.5 5C5.5 4.17 6.17 3.5 7 3.5C7.83 3.5 8.5 4.17 8.5 5C8.5 5.83 7.83 6.5 7 6.5Z" fill="#61A3BA"/></svg>
+                Worthing
+              </a></li>
+              <li><a href="/locations/shoreham-by-sea">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1C4.8 1 3 2.8 3 5C3 8 7 13 7 13C7 13 11 8 11 5C11 2.8 9.2 1 7 1ZM7 6.5C6.17 6.5 5.5 5.83 5.5 5C5.5 4.17 6.17 3.5 7 3.5C7.83 3.5 8.5 4.17 8.5 5C8.5 5.83 7.83 6.5 7 6.5Z" fill="#61A3BA"/></svg>
+                Shoreham-by-Sea
+              </a></li>
+              <li><a href="/locations/portslade">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1C4.8 1 3 2.8 3 5C3 8 7 13 7 13C7 13 11 8 11 5C11 2.8 9.2 1 7 1ZM7 6.5C6.17 6.5 5.5 5.83 5.5 5C5.5 4.17 6.17 3.5 7 3.5C7.83 3.5 8.5 4.17 8.5 5C8.5 5.83 7.83 6.5 7 6.5Z" fill="#61A3BA"/></svg>
+                Portslade
+              </a></li>
+              <li><a href="/locations/burgess-hill">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1C4.8 1 3 2.8 3 5C3 8 7 13 7 13C7 13 11 8 11 5C11 2.8 9.2 1 7 1ZM7 6.5C6.17 6.5 5.5 5.83 5.5 5C5.5 4.17 6.17 3.5 7 3.5C7.83 3.5 8.5 4.17 8.5 5C8.5 5.83 7.83 6.5 7 6.5Z" fill="#61A3BA"/></svg>
+                Burgess Hill
+              </a></li>
+            </ul>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="/" class="logo">DCS</a>
+          <p>Professional websites for local service businesses. Design, build, host and support &mdash; all taken care of.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Navigation</h4>
+          <a href="/services">Services</a>
+          <a href="/locations">Areas We Serve</a>
+          <a href="/pricing">Pricing</a>
+          <a href="/projects">Our Work</a>
+          <a href="/blog">Blog</a>
+          <a href="/about">About</a>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <a href="mailto:hello@digitalconsultingservices.co.uk">hello@digitalconsultingservices.co.uk</a>
+          <a href="tel:01234567890">01234 567 890</a>
+          <p style="font-size:0.9rem; padding: 4px 0;">East Sussex, UK</p>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <a href="/privacy">Privacy Policy</a>
+          <a href="/terms">Terms of Service</a>
+          <a href="/cookies">Cookie Policy</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2025 Digital Consulting Services. All rights reserved.</span>
+        <div class="footer-legal">
+          <a href="/privacy">Privacy</a>
+          <a href="/terms">Terms</a>
+          <a href="/cookies">Cookies</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+  const header = document.getElementById('header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 20);
+  }, { passive: true });
+
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.toggle('open');
+    hamburger.classList.toggle('active');
+    hamburger.setAttribute('aria-expanded', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      hamburger.classList.remove('active');
+      hamburger.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    });
+  });
+
+  const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+  document.querySelectorAll('.reveal').forEach(el => { observer.observe(el); });
+
+  const headingObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        headingObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.section-label, .section-title, .section-subtitle').forEach(el => {
+    headingObserver.observe(el);
+  });
+  </script>
+
+</body>
+</html>
