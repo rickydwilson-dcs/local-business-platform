@@ -1,122 +1,49 @@
-# Session Wrap-Up: DCS Inner Pages HTML Prototypes
+# Session Wrap-Up: DCS Inner Page HTML Prototypes
 
-**Date:** 2026-04-12  
-**Session folder:** `output/sessions/2026-04-12_dcs-inner-pages/`
-
----
+**Date:** 2026-04-12
+**Session folder:** output/sessions/2026-04-12_dcs-inner-pages/
+**Branch:** feature/dcs-inner-pages
+**Status:** Completed
 
 ## Goal
 
-Generate 12 self-contained HTML design prototypes for the DCS (Digital Consulting Services) website inner pages, extending the approved homepage visual identity (Solaris design system) to cover every core page archetype. These prototypes are the input for a subsequent React conversion session.
-
----
+Generate 12 self-contained HTML design prototypes for the DCS website's inner pages, extending the approved homepage's Solaris visual identity, ready to feed into a React conversion session.
 
 ## What Was Done
 
-### Phase 0 — Shared artifacts
-
-Created `_shared-header.html`, `_shared-footer.html`, `_shared-styles.css`, `_shared-scripts.js` from the approved homepage source. Extracted: CSS tokens (Space Grotesk + Inter, `--primary: #61A3BA`, `--accent: #D2DE32`, `--bg: #F0F7FA`), header/footer HTML, Intersection Observer reveal pattern, Solaris geo shape animations (floatA/B/C/D).
-
-### Phase 1 — Commercial page
-
-- **`pricing.html`** — 3-tier pricing (Starter/Professional/Growth) with JS payment toggle (`data-pricing` attribute pattern), "What every site gets" 3-col grid, add-ons 2-col grid, pure-CSS `<details>/<summary>` FAQ (6 questions).
-
-### Phase 2 — Detail pages with sidebar (65%/35%)
-
-- **`service-detail.html`** — sticky sidebar: CTA card + phone + chartreuse button
-- **`location-detail.html`** — Brighton-specific; sticky sidebar: CTA card + nearby towns list
-- **`blog-post.html`** — article metadata row, `line-height: 1.75` prose; sticky sidebar: CTA + related posts
-
-### Phase 3 — Full-width detail
-
-- **`project-detail.html`** — Challenge/Solution/Results prose; chartreuse CTA banner with results checklist
-
-### Phase 4 — Index pages
-
-- **`services.html`** — 4-card grid with hover left-accent-bar scaleY pattern, geo shapes in hero
-- **`locations.html`** — 8-card locations grid, coverage intro
-- **`blog.html`** — 6-post card grid with date badge, category tag
-- **`projects.html`** — 3-card project portfolio with coloured header areas
-
-### Phase 5 — Narrative/form pages
-
-- **`reviews.html`** — rating summary bar + 6 review cards with permanent left border (`border-left: 4px solid var(--primary)`)
-- **`about.html`** — 2-col story section + stats bar (dark bg, chartreuse numbers) + 6-item values grid
-- **`contact.html`** — 55/45 form + info panel; honeypot field `name="website" style="display:none"`; 5-step "what happens next" list
-
-### Phase 6 — Cleanup
-
-Deleted shared shell artifacts; verified exactly 12 HTML files remain.
-
----
+- Generated `pricing.html` with payment toggle (upfront/monthly), 3-tier card grid, "what every site gets" inclusions, add-ons grouped by category, pure-CSS FAQ accordion, and chartreuse CTA banner
+- Generated 4 detail/sidebar pages: `service-detail.html`, `location-detail.html`, `blog-post.html`, `project-detail.html` — each with a 65/35 two-column layout (sticky sidebar) except project-detail which is full-width
+- Generated 7 index/narrative/form pages in parallel (G2+G3): `services.html`, `locations.html`, `blog.html`, `projects.html`, `reviews.html`, `about.html`, `contact.html`
+- All 12 files share the same CSS token system (Space Grotesk/Inter, `--primary` sky-blue, `--accent` chartreuse), sticky header, IntersectionObserver scroll reveals, hardware-accelerated animations only, and no external icon libraries
 
 ## Key Decisions
 
-- **Payment toggle mechanism:** Used `data-pricing` attribute on a container div + CSS `[data-pricing="upfront"] .price-monthly { display: none }` — cleaner than toggling individual elements.
-- **Pricing FAQ:** Pure CSS `<details>/<summary>` with `summary::after { content: "▾" }` and `transform: rotate(-90deg)` on `details[open]` — zero JS required.
-- **Review cards:** Permanent left border (not on hover) — more trustworthy/editorial feel than a hover-only accent.
-- **Contact page layout:** 55/45 column split (form wider than info panel) rather than equal columns — form should dominate visually.
-- **Honeypot:** `name="website"` with `style="display:none" tabindex="-1" autocomplete="off"` — simple and effective, no CAPTCHA needed.
-
----
-
-## Quality Gate Results (Phase 5)
-
-All 12 files passed all gates:
-
-- Google Fonts link: 12/12
-- `id="header"`: 12/12
-- `IntersectionObserver`: 12/12
-- No external icon libraries: 12/12
-- No layout-triggering transitions: 12/12
-- `data-pricing` on pricing.html: ✓ (count=3)
-- `<details>` FAQ count on pricing.html: ✓ (count=6)
-- `position: sticky` on 3 detail pages: ✓
-- Honeypot in contact.html: ✓
-- `border-left` on review cards: ✓
-
----
+- **`id="header"` not `id="solaris-header"`**: The committed `_shared-header.html` used `id="header"` (verbatim from the homepage). The brief's Phase 5 quality gate referenced `id="solaris-header"` — the brief was inconsistent, not the files. All 12 files correctly use `id="header"`.
+- **Phase 3 written directly in orchestrator context**: The brief required sequential execution for Phase 3 (no group entry in the parallel table), so these 4 files were written directly rather than delegated.
+- **G2/G3 parallelised via Agent tool**: The brief's parallel execution table required both groups to launch simultaneously — achieved with two parallel Agent calls in a single message, generating all 7 pages concurrently.
 
 ## Commits
 
-| Commit    | Description                                                                        |
-| --------- | ---------------------------------------------------------------------------------- |
-| `2a3ca0d` | feat(dcs): add shared shell artifacts                                              |
-| `88cba7d` | feat(dcs): add pricing page HTML prototype                                         |
-| `e3a7c07` | feat(dcs): add detail page HTML prototypes (service, location, blog post, project) |
-| `530bf74` | feat(dcs): add index and narrative page HTML prototypes                            |
-| `71d6f1a` | feat(dcs): bring pricing page prototype onto staging branch                        |
-| `ef4646b` | chore(dcs): remove shared shell working artifacts                                  |
+- `a2ec8e6` — feat(dcs): add shared shell artifacts for inner page prototypes
+- `88cba7d` — feat(dcs): add pricing page HTML prototype
+- `7367835` — feat(dcs): add detail page HTML prototypes (service, location, blog post, project)
+- `d5635de` — feat(dcs): add index and narrative page HTML prototypes (services, locations, blog, projects, reviews, about, contact)
+- `21e4555` — chore(dcs): remove shared shell working artifacts
 
-**Note on git branch:** Due to shell state not persisting between Bash calls in this YOLO session, commits landed on `develop`/`staging` rather than the intended `feature/dcs-inner-pages`. Since all files are output-only (no production code), this has no build or deployment impact.
+## Files Changed
 
----
+All 12 deliverables in `output/sessions/2026-04-12_dcs-inner-pages/`:
 
-## Significant Files
+- `pricing.html` — most complex page; toggle JS, tier grid, add-ons, FAQ, CTA
+- `service-detail.html`, `location-detail.html`, `blog-post.html` — sidebar layout (65/35 sticky)
+- `project-detail.html` — full-width narrative layout
+- `services.html`, `locations.html`, `blog.html`, `projects.html`, `reviews.html`, `about.html`, `contact.html` — index/narrative/form pages
 
-| File                   | Archetype         | Key Pattern                           |
-| ---------------------- | ----------------- | ------------------------------------- |
-| `pricing.html`         | Commercial        | Payment toggle, pure-CSS FAQ          |
-| `service-detail.html`  | Detail + sidebar  | 65/35 grid, sticky CTA                |
-| `location-detail.html` | Detail + sidebar  | Nearby towns sidebar card             |
-| `blog-post.html`       | Detail + sidebar  | Article metadata, related posts       |
-| `project-detail.html`  | Full-width detail | Challenge/Solution/Results            |
-| `services.html`        | Index grid        | Hover left-accent-bar                 |
-| `locations.html`       | Index grid        | 8-card coverage grid                  |
-| `blog.html`            | Index grid        | Date badge, category tag              |
-| `projects.html`        | Index grid        | Coloured project headers              |
-| `reviews.html`         | Narrative         | Rating summary, permanent left border |
-| `about.html`           | Narrative         | Story 2-col, dark stats bar, values   |
-| `contact.html`         | Form + info panel | Honeypot, 5-step process              |
+## What Was Learned / Why It Matters
 
----
+These prototypes establish the full visual language for the DCS site's non-homepage pages and give the React conversion session concrete reference designs rather than structural placeholders. The parallel agent pattern (G2/G3) proved efficient — 7 pages generated in the same wall-clock time as 4. The `_shared-*` working artifacts pattern (written in Phase 0, deleted in Phase 6) kept the CSS token system consistent across all 12 files without drift.
 
-## What Was Learned
+## Follow-On Tasks
 
-The `data-pricing` attribute pattern (set on a container, CSS selectors cascade down to price spans) is much cleaner than toggling individual elements. The pure-CSS `<details>/<summary>` approach for the pricing FAQ saved ~30 lines of JS. The left-border pattern on review cards (`border-left: 4px solid var(--primary)`) is a better editorial signal than hover-only accents — it makes the testimonials feel more like pull-quotes. The honeypot field needs `tabindex="-1"` as well as `display:none` to prevent any accessibility tree interference. Shell state does not persist between Bash calls in YOLO sessions — git HEAD resets each call, so future sessions doing git work should issue the branch checkout and commit in a single chained command.
-
----
-
-## Next Session
-
-Input for: `output/sessions/2026-04-12_stitch-html-to-react/` — React conversion of these 12 prototypes into the platform's MDX + theme system.
+- React conversion: convert the 12 HTML prototypes into Solaris theme page templates (`packages/themes/solaris/pages/`)
+- Wire the DCS site (`sites/dcs/`) to use the converted templates in place of current structural placeholders

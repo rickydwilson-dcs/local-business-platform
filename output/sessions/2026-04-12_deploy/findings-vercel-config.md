@@ -8,7 +8,7 @@
 
 ## Summary
 
-All 9 rules passed with zero violations. No hard failures and no warnings triggered. The codebase reflects the April 2026 deployment fixes correctly — webpack builds, scoped Tailwind globs, no turbo-ignore, all build-time env vars declared in turbo.json, and no CSS theme() usage.
+All 9 rules passed with zero violations across all 11 sites. No hard failures and no warnings were found. The configuration is clean and consistent with the canonical patterns defined in CLAUDE.md and deployment.md.
 
 ## Statistics
 
@@ -20,9 +20,4 @@ All 9 rules passed with zero violations. No hard failures and no warnings trigge
 
 ## Out-of-scope observations
 
-`sites/dcs/vercel.json` uses a non-standard pattern — not covered by current rule set — for human review:
-
-- `installCommand` is `cd ../.. && pnpm install --filter @platform/dcs...` rather than `cd ../.. && pnpm install --frozen-lockfile`
-- `buildCommand` is `cd ../.. && pnpm build --filter @platform/dcs` rather than `cd ../.. && pnpm turbo run build --filter=dcs`
-
-The canonical pattern documented in `docs/standards/deployment.md` uses `pnpm turbo run build --filter=<name>` and `--frozen-lockfile`. The `dcs` site deviates on both. This does not violate any VCA rule but the install command omits `--frozen-lockfile` (which protects against lockfile drift in CI) and the build command bypasses Turborepo (which means it won't benefit from remote cache hits). A human should decide whether to align it with the canonical pattern.
+`sites/dcs/vercel.json` uses `"buildCommand": "cd ../.. && pnpm build --filter @platform/dcs"` (space before `@platform/dcs`, no `turbo run`, package name rather than site directory name) which differs from the canonical pattern used by every other site (`pnpm turbo run build --filter=<site-name>`). This is not covered by the current rule set — for human review. Functionally it should still work because `pnpm build` at the monorepo root invokes Turborepo via the root `package.json` scripts, but the inconsistency increases operational risk if the root scripts change.
