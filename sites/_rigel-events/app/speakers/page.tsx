@@ -1,14 +1,14 @@
 /**
- * Speakers Listing Page — thin wrapper
+ * Speakers Listing Page
  *
- * Fetches and sorts speaker data, delegates rendering to RigelSpeakersPage template.
+ * Fetches speaker MDX content and renders a grid using corvus theme components.
  */
 
 import type { Metadata } from "next";
+import Link from "next/link";
 import { getContentItems } from "@/lib/content";
 import { siteConfig } from "@/site.config";
-import type { SiteConfigSummary, SpeakerSummary } from "@platform/core-components";
-import { RigelSpeakersPage } from "@platform/themes/rigel/pages";
+import { PageTitleBanner } from "@platform/themes/corvus/components";
 
 export const dynamic = "force-static";
 
@@ -41,7 +41,7 @@ interface SpeakerFrontmatter {
 export default async function SpeakersPage() {
   const items = await getContentItems("speakers");
 
-  const speakers: SpeakerSummary[] = items
+  const speakers = items
     .map((item) => {
       const fm = item as unknown as SpeakerFrontmatter;
       return {
@@ -56,7 +56,7 @@ export default async function SpeakersPage() {
         featured: fm.featured,
         imageAlt: fm.imageAlt,
         social: fm.social,
-      } satisfies SpeakerSummary;
+      };
     })
     .sort((a, b) => {
       if (a.featured && !b.featured) return -1;
@@ -65,18 +65,70 @@ export default async function SpeakersPage() {
       return a.time.localeCompare(b.time);
     });
 
-  const siteSummary: SiteConfigSummary = {
-    name: siteConfig.business.name,
-    tagline: siteConfig.tagline,
-    phone: siteConfig.business.phone ?? "",
-    phoneDisplay: siteConfig.business.phone ?? "",
-    address: {
-      city: siteConfig.business.address.city,
-      county: siteConfig.business.address.region,
-    },
-    cta: siteConfig.cta,
-    stats: siteConfig.credentials.stats,
-  };
+  return (
+    <>
+      <PageTitleBanner pageTitle="Speakers" />
 
-  return <RigelSpeakersPage siteConfig={siteSummary} speakers={speakers} />;
+      <section className="bg-surface-background py-16 px-4">
+        <div className="max-w-7xl mx-auto">
+          <p className="text-center text-surface-muted-foreground text-lg mb-12 max-w-2xl mx-auto">
+            Meet the practitioners and specialists sharing what actually works in digital marketing.
+          </p>
+
+          {speakers.length === 0 ? (
+            <div className="text-center py-12">
+              <p className="text-surface-muted-foreground text-lg">
+                Speaker announcements coming soon. Check back for updates.
+              </p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {speakers.map((speaker) => (
+                <Link
+                  key={speaker.slug}
+                  href={`/speakers/${speaker.slug}`}
+                  className="group bg-surface-card border border-surface-border rounded-xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+                >
+                  <div className="flex items-center gap-2 mb-3">
+                    {speaker.featured && (
+                      <span className="text-xs font-bold uppercase tracking-wider text-brand-accent bg-brand-accent/10 px-2 py-0.5 rounded">
+                        Featured
+                      </span>
+                    )}
+                    <span className="text-xs font-medium uppercase tracking-wider text-brand-secondary">
+                      {speaker.day === "saturday" ? "Saturday" : "Sunday"} &middot; {speaker.time}
+                    </span>
+                  </div>
+                  <h3 className="text-xl font-bold text-surface-foreground mb-1 group-hover:text-brand-primary transition-colors">
+                    {speaker.name}
+                  </h3>
+                  <p className="text-sm text-surface-muted-foreground mb-2">{speaker.title}</p>
+                  <p className="text-brand-primary font-semibold text-sm mb-3">{speaker.topic}</p>
+                  <p className="text-surface-muted-foreground text-sm line-clamp-3">
+                    {speaker.description}
+                  </p>
+                  <div className="mt-4 text-xs text-surface-muted-foreground">{speaker.stage}</div>
+                </Link>
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="bg-brand-primary py-12 px-4">
+        <div className="max-w-3xl mx-auto text-center">
+          <h2 className="text-2xl font-bold text-on-brand-primary mb-4">
+            Want to hear these speakers live?
+          </h2>
+          <a
+            href={siteConfig.cta.primary.href}
+            className="inline-block bg-brand-secondary text-brand-primary font-bold px-8 py-3 rounded-lg hover:opacity-90 transition-opacity"
+          >
+            Get Your Free Ticket
+          </a>
+        </div>
+      </section>
+    </>
+  );
 }
