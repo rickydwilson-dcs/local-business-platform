@@ -20,6 +20,7 @@ Phase 1: Build packages (parallel, no interdependencies)
 Phase 2: Build sites (parallel, after packages complete)
     ├── sites/base-template        → next build
     ├── sites/colossus-scaffolding → next build
+    ├── sites/dcs                  → next build
     ├── sites/dj-fox-electrical    → next build
     ├── sites/mad-graphics         → next build
     ├── sites/showcase             → next build

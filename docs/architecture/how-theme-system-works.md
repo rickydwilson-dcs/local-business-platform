@@ -512,7 +512,7 @@ export default async function ServicePage({ params }) {
 
 **`SiteConfigSummary`** — a minimal type from `@platform/core-components` (defined in `packages/core-components/src/lib/page-template-types.ts`) that passes brand-relevant site config (name, phone, email, serviceAreas) to templates without exposing the full `SiteConfig` object. All `*PageTemplateProps` interfaces are defined in the same file.
 
-The themes that currently export page templates: **vega**, **castor**, **cygnus**, **lyra**, **nova**, **orion**, and **rigel**.
+The themes that currently export page templates: **vega**, **castor**, **cygnus**, **lyra**, **nova**, **orion**, **rigel**, and **solaris**.
 
 ### AI Theme Generation
 

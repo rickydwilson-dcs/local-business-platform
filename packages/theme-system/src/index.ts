@@ -48,6 +48,5 @@ export {
   getNestedValue,
 } from "./utils";
 
-// Validation
-export { validateTheme, formatValidationResult } from "./cli/validate";
-export type { ValidationResult } from "./cli/validate";
+// Validation (import directly from @platform/theme-system/cli/validate for CLI use)
+// Not re-exported here to avoid pulling CLI-only code into browser bundles

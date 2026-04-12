@@ -11,14 +11,21 @@ local-business-platform/
 ├── packages/
 │   ├── core-components/       # Shared UI components
 │   ├── theme-system/          # Tailwind plugin + CSS variable generation
-│   ├── themes/                # Named theme CSS packages (orion, vega)
+│   ├── themes/                # Named theme CSS packages (atlas, castor, cygnus, lyra, nova, orion, polaris, rigel, sirius, solaris, vega)
 │   └── intake-system/         # Client onboarding automation
 │
 ├── sites/
 │   ├── base-template/         # Gold-standard template for new sites
-│   ├── colossus-scaffolding/  # Reference implementation (scaffolding business)
+│   ├── colossus-scaffolding/  # Production site (scaffolding business)
+│   ├── dcs/                   # Production site (digital consulting, polaris theme)
 │   ├── dj-fox-electrical/     # Production site (electrical business)
-│   └── showcase/              # Internal component/theme showcase
+│   ├── mad-graphics/          # Production site (vehicle graphics & print, cygnus theme)
+│   ├── showcase/              # Internal component/theme showcase
+│   ├── _castor-plumbing/      # Theme reference site (castor)
+│   ├── _cygnus-graphics/      # Theme reference site (cygnus)
+│   ├── _lyra-garden/          # Theme reference site (lyra)
+│   ├── _nova-print/           # Theme reference site (nova)
+│   └── _rigel-events/         # Theme reference site (rigel)
 │
 ├── tools/                     # Site creation, image management, deployment scripts
 └── docs/                      # Architecture, standards, and how-to guides
@@ -69,7 +76,7 @@ npm run test:e2e:smoke # Smoke tests (Playwright)
 
 **Core:** Next.js (App Router), React, TypeScript, Tailwind CSS, MDX
 
-**Build:** Turborepo, pnpm workspaces, Changesets
+**Build:** Turborepo, pnpm workspaces
 
 **Infrastructure:** Vercel, Cloudflare R2, Supabase
 

@@ -10,13 +10,14 @@ The Local Business Platform is a white-label website generation system for local
 
 For detailed explanations of how each system works, see:
 
-| Deep Dive                                                           | What It Teaches                                                             |
-| ------------------------------------------------------------------- | --------------------------------------------------------------------------- |
-| [How Dynamic Routing Works](how-dynamic-routing-works.md)           | How MDX files become pages via `[slug]` routes and `generateStaticParams()` |
-| [How the Theme System Works](how-theme-system-works.md)             | How `theme.config.ts` → CSS variables → Tailwind classes                    |
-| [How the Build Pipeline Works](how-build-pipeline-works.md)         | How Turborepo orchestrates packages and sites                               |
-| [How Site Creation Works](how-site-creation-works.md)               | How new business clients become deployed websites                           |
-| [How the Ingestion Pipeline Works](how-ingestion-pipeline-works.md) | How screenshots become analysed components and theme packages               |
+| Deep Dive                                                                   | What It Teaches                                                             |
+| --------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| [How Dynamic Routing Works](how-dynamic-routing-works.md)                   | How MDX files become pages via `[slug]` routes and `generateStaticParams()` |
+| [How the Theme System Works](how-theme-system-works.md)                     | How `theme.config.ts` → CSS variables → Tailwind classes                    |
+| [How the Build Pipeline Works](how-build-pipeline-works.md)                 | How Turborepo orchestrates packages and sites                               |
+| [How Site Creation Works](how-site-creation-works.md)                       | How new business clients become deployed websites                           |
+| [How the Ingestion Pipeline Works](how-ingestion-pipeline-works.md)         | How screenshots become analysed components and theme packages               |
+| [How the Stitch Design Pipeline Works](how-stitch-design-pipeline-works.md) | How Stitch AI designs become tokens, theme packages, and test sites         |
 
 ## Repository Structure
 
@@ -177,31 +178,40 @@ bg-[#005A9E]               # Hardcoded color (use theme tokens instead)
 
 ## Standards & Guides
 
-| Standard                                 | Description                                  |
-| ---------------------------------------- | -------------------------------------------- |
-| [Styling](../standards/styling.md)       | Tailwind CSS, theme tokens                   |
-| [Components](../standards/components.md) | Component architecture, TypeScript props     |
-| [Content](../standards/content.md)       | MDX-only architecture, frontmatter structure |
-| [SEO](../standards/seo.md)               | Meta data, keywords, local SEO               |
-| [Images](../standards/images.md)         | R2 storage, optimization, naming             |
-| [Schema](../standards/schema.md)         | JSON-LD structured data                      |
-| [Testing](../standards/testing.md)       | Unit tests, E2E tests, coverage              |
-| [Security](../standards/security.md)     | Rate limiting, API security, GDPR            |
-| [Analytics](../standards/analytics.md)   | Consent management, GA4                      |
-| [Deployment](../standards/deployment.md) | CI/CD, monitoring, rollback                  |
-| [Quality](../standards/quality.md)       | Quality gates, checklists                    |
+| Standard                                       | Description                                  |
+| ---------------------------------------------- | -------------------------------------------- |
+| [Styling](../standards/styling.md)             | Tailwind CSS, theme tokens                   |
+| [Components](../standards/components.md)       | Component architecture, TypeScript props     |
+| [Content](../standards/content.md)             | MDX-only architecture, frontmatter structure |
+| [SEO](../standards/seo.md)                     | Meta data, keywords, local SEO               |
+| [Images](../standards/images.md)               | R2 storage, optimization, naming             |
+| [Schema](../standards/schema.md)               | JSON-LD structured data                      |
+| [Testing](../standards/testing.md)             | Unit tests, E2E tests, coverage              |
+| [Security](../standards/security.md)           | Rate limiting, API security, GDPR            |
+| [Analytics](../standards/analytics.md)         | Consent management, GA4                      |
+| [Deployment](../standards/deployment.md)       | CI/CD, monitoring, rollback                  |
+| [Quality](../standards/quality.md)             | Quality gates, checklists                    |
+| [Documentation](../standards/documentation.md) | Documentation maintenance guidelines         |
 
-| Guide                                             | Purpose                    |
-| ------------------------------------------------- | -------------------------- |
-| [Adding a New Site](../guides/adding-new-site.md) | Create a new client site   |
-| [Theming](../guides/theming.md)                   | Theme system configuration |
-| [Adding a Location](../guides/adding-location.md) | Add location MDX file      |
-| [Adding a Service](../guides/adding-service.md)   | Add service MDX file       |
-| [Deploying a Site](../guides/deploying-site.md)   | Deployment procedures      |
-| [Git Workflow](../guides/git-workflow.md)         | Branch workflow            |
-| [GitHub Actions](../guides/github-actions.md)     | CI/CD workflow guide       |
+| Guide                                                           | Purpose                                      |
+| --------------------------------------------------------------- | -------------------------------------------- |
+| [Adding a New Site](../guides/adding-new-site.md)               | Create a new client site                     |
+| [Creating a New Theme](../guides/creating-new-theme.md)         | Create a theme via ingest or Stitch pipeline |
+| [Theming](../guides/theming.md)                                 | Theme system configuration                   |
+| [Adding a Service](../guides/adding-service.md)                 | Add service MDX file                         |
+| [Adding a Location](../guides/adding-location.md)               | Add location MDX file                        |
+| [Adding a Content Section](../guides/adding-content-section.md) | Add new MDX content type with dynamic route  |
+| [Deploying a Site](../guides/deploying-site.md)                 | Deployment procedures                        |
+| [Git Workflow](../guides/git-workflow.md)                       | Branch workflow                              |
+| [GitHub Actions](../guides/github-actions.md)                   | CI/CD workflow guide                         |
+| [Monitoring Setup](../guides/monitoring-setup.md)               | NewRelic and Vercel monitoring setup         |
+| [Orchestration Patterns](../guides/orchestration-patterns.md)   | Skill patterns: sequential, parallel, hybrid |
+| [Registry Setup](../guides/registry-setup.md)                   | Supabase site registry and monitoring setup  |
+| [End-to-End Workflow](../guides/end-to-end-workflow.md)         | Full site creation workflow                  |
+| [Component Versioning](../guides/component-versioning.md)       | Versioning shared components                 |
 
 ## Related Documentation
 
 - [CLAUDE.md](../../CLAUDE.md) - AI agent instructions and architectural briefing
 - [content-validation.md](./content-validation.md) - Validation schemas
+- [monitoring-dashboard.md](./monitoring-dashboard.md) - Dashboard design for site registry and monitoring

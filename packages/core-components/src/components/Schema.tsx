@@ -1,4 +1,3 @@
-import React from "react";
 import { absUrl } from "@/lib/site";
 
 type FAQ = { question: string; answer: string };
