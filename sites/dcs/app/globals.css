@@ -1,0 +1,28 @@
+@import "../../../packages/themes/solaris/globals.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/**
+ * DCS — Site-specific CSS
+ *
+ * Theme: Solaris
+ * Theme variables injected by @platform/theme-system
+ */
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-surface-background text-surface-foreground;
+    font-family: var(--font-inter), Inter, system-ui, sans-serif;
+    font-feature-settings: 'rlig' 1, 'calt' 1;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-space-grotesk), "Space Grotesk", system-ui, sans-serif;
+  }
+}

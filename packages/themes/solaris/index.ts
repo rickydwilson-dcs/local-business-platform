@@ -26,9 +26,7 @@ export const solarisDefaultConfig: DeepPartialThemeConfig = {
       primaryHover: "#4a8fa8",
       secondary: "#61A3BA",
       accent: "#D2DE32",
-      accentHover: "#bdc82b",
       onPrimary: "#ffffff",
-      onAccent: "#2a2e20",
     },
     surface: {
       background: "#F0F7FA",
