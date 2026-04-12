@@ -65,13 +65,12 @@ describe('Schema.org Structured Data', () => {
       expect(areaServed[0]['@type']).toBe('Place');
     });
 
-    it('should include credentials and certifications', () => {
+    it('should not include hasCredential when no certifications configured', () => {
       const schema = getLocalBusinessSchema();
       const hasCredential = schema.hasCredential as SchemaObject[];
 
-      expect(hasCredential).toBeDefined();
-      expect(Array.isArray(hasCredential)).toBe(true);
-      expect(hasCredential.length).toBeGreaterThanOrEqual(1);
+      // DCS has certifications: [] — hasCredential is absent from schema
+      expect(hasCredential).toBeUndefined();
     });
 
     it('should include offer catalog with services', () => {
