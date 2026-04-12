@@ -51,8 +51,8 @@ export default function HomePage() {
 
       <NewsletterSignupCTA
         heading="Stay in the Loop"
-        bodyText="Get updates on speakers, schedule announcements, and event news."
-        ctaButton={[{ label: 'Subscribe', href: '#newsletter' }]}
+        subtext="Get updates on speakers, schedule announcements, and event news."
+        submitButton={[{ label: 'Subscribe', href: '#newsletter' }]}
       />
 
       <section className="py-20 px-4 bg-brand-primary text-center">
