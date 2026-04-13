@@ -1,0 +1,5 @@
+/* Auto-generated for clone theme. Preflight omitted intentionally. */
+@import "../../../packages/themes/corvus/globals.css";
+
+@tailwind components;
+@tailwind utilities;

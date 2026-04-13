@@ -24,6 +24,7 @@ import {
 } from "./lib/computed-style-token-mapper";
 import type { SectionComputedStyle } from "./lib/computed-style-extractor";
 import { stripContent } from "./lib/content-stripper";
+import { preprocessCloneCss } from "./lib/clone-css-preprocessor";
 
 // ── Argument parsing ─────────────────────────────────────────────────────────
 
@@ -100,29 +101,29 @@ registerTheme({
 `;
 }
 
-function generateGlobalsCss(customProperties: Record<string, string>, cloneCss?: string): string {
+/**
+ * Generate the thin globals.css for a clone theme.
+ * Clone themes load visual CSS via <link> tag (bypasses PostCSS).
+ * Only platform-level animation imports go here.
+ */
+function generateThemeGlobalsCss(): string {
+  return `/* packages/themes/{theme}/globals.css — auto-generated */
+@import "../../core-components/src/styles/animations.css";
+
+/* Clone themes load visual CSS via <link> tag (bypasses PostCSS).
+   Only platform-level animation imports go here. */
+`;
+}
+
+/**
+ * Format computed custom properties as a :root { } block.
+ */
+function formatCustomPropertiesBlock(customProperties: Record<string, string>): string {
+  if (Object.keys(customProperties).length === 0) return "";
   const varLines = Object.entries(customProperties)
     .map(([k, v]) => `  ${k}: ${v};`)
     .join("\n");
-
-  const cloneSection = cloneCss
-    ? `\n/* Clone styles — extracted from reference site */\n${cloneCss}\n`
-    : "";
-
-  return `/* ${new Date().toISOString()} — auto-generated theme globals */
-@import "../theme-system/dist/base.css";
-
-:root {
-${varLines || "  /* no custom section colors */"}
-}
-
-/* Standard utilities */
-.container {
-  max-width: 1280px;
-  margin-inline: auto;
-  padding-inline: 1.5rem;
-}
-${cloneSection}`;
+  return `:root {\n${varLines}\n}`;
 }
 
 function generatePackageJson(themeName: string): object {
@@ -601,13 +602,8 @@ async function main() {
     // index.ts barrel
     fs.writeFileSync(path.join(themeDir, "index.ts"), generateIndexTs(themeName), "utf-8");
 
-    // globals.css — include clone CSS
-    const dedupedCss = [...new Set(allCssBlocks)].join("\n\n");
-    fs.writeFileSync(
-      path.join(themeDir, "globals.css"),
-      generateGlobalsCss(customProperties, dedupedCss || undefined),
-      "utf-8"
-    );
+    // globals.css — thin Tailwind-safe file; clone CSS served via <link> tag
+    fs.writeFileSync(path.join(themeDir, "globals.css"), generateThemeGlobalsCss(), "utf-8");
 
     // package.json
     fs.writeFileSync(
@@ -615,6 +611,170 @@ async function main() {
       JSON.stringify(generatePackageJson(themeName), null, 2),
       "utf-8"
     );
+
+    // ── CSS Preprocessor ────────────────────────────────────────────────────
+    console.log("[extract] Running CSS preprocessor...");
+    const dedupedInlineCss = [...new Set(allCssBlocks)].join("\n\n");
+    const customPropsBlock = formatCustomPropertiesBlock(customProperties);
+    const preprocessResult = await preprocessCloneCss({
+      cloneDir,
+      themeName,
+      customProperties: customPropsBlock || undefined,
+      inlineCss: dedupedInlineCss || undefined,
+    });
+
+    // Write clone-styles.css to theme package
+    fs.writeFileSync(path.join(themeDir, "clone-styles.css"), preprocessResult.css, "utf-8");
+    console.log(`[extract] clone-styles.css: ${preprocessResult.css.length} bytes`);
+
+    // Write manifest
+    fs.writeFileSync(
+      path.join(themeDir, "clone-assets.manifest.json"),
+      JSON.stringify(preprocessResult.manifest, null, 2),
+      "utf-8"
+    );
+    console.log(
+      `[extract] Manifest: ${preprocessResult.manifest.includedFiles.length} included, ` +
+        `${preprocessResult.manifest.excludedFiles.length} excluded, ` +
+        `${preprocessResult.manifest.rewrittenUrls} URLs rewritten`
+    );
+    if (preprocessResult.manifest.strippedFontFaces.length > 0) {
+      console.log(
+        `[extract] Stripped fonts: ${preprocessResult.manifest.strippedFontFaces.join(", ")}`
+      );
+    }
+
+    // Copy clone images to theme package assets
+    const themeImagesDir = path.join(themeDir, "assets", "images");
+    fs.mkdirSync(themeImagesDir, { recursive: true });
+    for (const imgPath of preprocessResult.imageFiles) {
+      fs.copyFileSync(imgPath, path.join(themeImagesDir, path.basename(imgPath)));
+    }
+    console.log(`[extract] Copied ${preprocessResult.imageFiles.length} images to theme package`);
+
+    // Copy clone fonts to theme package assets (if any)
+    if (preprocessResult.fontFiles.length > 0) {
+      const themeFontsDir = path.join(themeDir, "assets", "fonts");
+      fs.mkdirSync(themeFontsDir, { recursive: true });
+      for (const fontPath of preprocessResult.fontFiles) {
+        fs.copyFileSync(fontPath, path.join(themeFontsDir, path.basename(fontPath)));
+      }
+      console.log(`[extract] Copied ${preprocessResult.fontFiles.length} fonts to theme package`);
+    }
+
+    // ── Rewrite image paths in generated page components ──────────────────
+    console.log("[extract] Rewriting image paths in generated page components...");
+    const cloneAssetsPrefix = `/clone-assets/${themeName}/images/`;
+    for (const file of fs.readdirSync(pagesDir).filter((f) => f.endsWith(".tsx"))) {
+      const filePath = path.join(pagesDir, file);
+      let pageContent = fs.readFileSync(filePath, "utf-8");
+      const before = pageContent;
+      pageContent = pageContent.replace(/src="\/images\//g, `src="${cloneAssetsPrefix}`);
+      pageContent = pageContent.replace(/src="images\//g, `src="${cloneAssetsPrefix}`);
+      pageContent = pageContent.replace(/src="\/assets\/images\//g, `src="${cloneAssetsPrefix}`);
+      if (pageContent !== before) {
+        fs.writeFileSync(filePath, pageContent, "utf-8");
+      }
+    }
+    // Also rewrite in component files
+    for (const file of ["header.tsx", "footer.tsx"]) {
+      const filePath = path.join(componentDir, file);
+      if (!fs.existsSync(filePath)) continue;
+      let compContent = fs.readFileSync(filePath, "utf-8");
+      const before = compContent;
+      compContent = compContent.replace(/src="\/images\//g, `src="${cloneAssetsPrefix}`);
+      compContent = compContent.replace(/src="images\//g, `src="${cloneAssetsPrefix}`);
+      compContent = compContent.replace(/src="\/assets\/images\//g, `src="${cloneAssetsPrefix}`);
+      if (compContent !== before) {
+        fs.writeFileSync(filePath, compContent, "utf-8");
+      }
+    }
+
+    // ── Deploy to test site (if it exists) ───────────────────────────────
+    const sitesDir = path.resolve(__dirname, "..", "sites");
+    let testSiteDir: string | null = null;
+
+    if (fs.existsSync(sitesDir)) {
+      const candidates = fs
+        .readdirSync(sitesDir)
+        .filter(
+          (d) => d.startsWith(`_${themeName}`) && fs.statSync(path.join(sitesDir, d)).isDirectory()
+        );
+      if (candidates.length > 0) {
+        testSiteDir = path.join(sitesDir, candidates[0]);
+        console.log(`[extract] Found test site: ${testSiteDir}`);
+      }
+    }
+
+    if (testSiteDir) {
+      const sitePublicAssetsDir = path.join(testSiteDir, "public", "clone-assets", themeName);
+
+      // Deploy clone CSS
+      const siteCssDir = path.join(sitePublicAssetsDir, "styles");
+      fs.mkdirSync(siteCssDir, { recursive: true });
+      fs.copyFileSync(path.join(themeDir, "clone-styles.css"), path.join(siteCssDir, "clone.css"));
+      console.log(`[extract] Deployed clone.css to ${siteCssDir}`);
+
+      // Deploy images
+      const siteImagesDir = path.join(sitePublicAssetsDir, "images");
+      fs.mkdirSync(siteImagesDir, { recursive: true });
+      for (const imgPath of preprocessResult.imageFiles) {
+        fs.copyFileSync(imgPath, path.join(siteImagesDir, path.basename(imgPath)));
+      }
+      console.log(
+        `[extract] Deployed ${preprocessResult.imageFiles.length} images to ${siteImagesDir}`
+      );
+
+      // Deploy fonts (if any)
+      if (preprocessResult.fontFiles.length > 0) {
+        const siteFontsDir = path.join(sitePublicAssetsDir, "fonts");
+        fs.mkdirSync(siteFontsDir, { recursive: true });
+        for (const fontPath of preprocessResult.fontFiles) {
+          fs.copyFileSync(fontPath, path.join(siteFontsDir, path.basename(fontPath)));
+        }
+        console.log(
+          `[extract] Deployed ${preprocessResult.fontFiles.length} fonts to ${siteFontsDir}`
+        );
+      }
+
+      // Deploy icons (if clone has icons directory)
+      const cloneIconsDir = path.join(cloneDir, "assets", "icons");
+      if (fs.existsSync(cloneIconsDir)) {
+        const siteIconsDir = path.join(sitePublicAssetsDir, "icons");
+        fs.mkdirSync(siteIconsDir, { recursive: true });
+        for (const iconFile of fs.readdirSync(cloneIconsDir)) {
+          fs.copyFileSync(path.join(cloneIconsDir, iconFile), path.join(siteIconsDir, iconFile));
+        }
+        console.log(`[extract] Deployed icons to ${siteIconsDir}`);
+      }
+
+      // Auto-generate site globals.css (Preflight omitted — clone CSS owns all resets)
+      const siteGlobalsCss = `/* Auto-generated for clone theme. Preflight omitted intentionally. */
+@import "../../../packages/themes/${themeName}/globals.css";
+
+@tailwind components;
+@tailwind utilities;
+`;
+      fs.writeFileSync(path.join(testSiteDir, "app", "globals.css"), siteGlobalsCss, "utf-8");
+      console.log(`[extract] Generated site globals.css (no @tailwind base)`);
+
+      // Auto-insert <link> for clone CSS in site layout.tsx
+      const layoutPath = path.join(testSiteDir, "app", "layout.tsx");
+      if (fs.existsSync(layoutPath)) {
+        let layoutContent = fs.readFileSync(layoutPath, "utf-8");
+        const linkTag = `<link rel="stylesheet" href="/clone-assets/${themeName}/styles/clone.css" />`;
+        if (!layoutContent.includes("clone-assets")) {
+          // Insert after <head> opening tag
+          layoutContent = layoutContent.replace(/(<head(?:\s[^>]*)?>)/, `$1\n        ${linkTag}`);
+          fs.writeFileSync(layoutPath, layoutContent, "utf-8");
+          console.log(`[extract] Inserted clone CSS <link> into layout.tsx`);
+        } else {
+          console.log(`[extract] layout.tsx already has clone-assets link — skipped`);
+        }
+      }
+    } else {
+      console.log(`[extract] No test site found for theme "${themeName}" — skipping site deploy`);
+    }
 
     console.log(`[extract] Componentize pass complete: ${themeDir}`);
     console.log(`[extract] Typography scale: ${JSON.stringify(typographyScale)}`);
