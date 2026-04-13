@@ -1,0 +1,58 @@
+{
+  "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+  "createdAt": "2026-04-13T10:00:00Z",
+  "cpfVersion": "0.1",
+  "source": {
+    "type": "url",
+    "value": "https://colorcode.events"
+  },
+  "business": {
+    "name": "ColorCode Events",
+    "trade": "events",
+    "tagline": "Professional event management and production",
+    "phone": "+44 20 7946 0958",
+    "email": "hello@colorcode.events",
+    "address": {
+      "city": "London",
+      "postcode": "EC1A 1BB",
+      "region": "England"
+    },
+    "website": "https://colorcode.events"
+  },
+  "content": {
+    "services": [
+      "Corporate Events",
+      "Product Launches",
+      "Award Ceremonies",
+      "Brand Activations",
+      "Conference Production"
+    ],
+    "locations": ["London", "Manchester", "Birmingham", "Edinburgh"],
+    "aboutSummary": "ColorCode Events is a full-service event management agency specialising in corporate and brand events across the UK.",
+    "tone": "professional"
+  },
+  "theme": {
+    "name": "corvus",
+    "brandColors": {
+      "primary": "#292661",
+      "secondary": "#E63946",
+      "accent": "#F1A208"
+    },
+    "preferDark": false,
+    "referenceNotes": "Dark navy primary with coral/red accent. Clean minimal typography. Full-bleed hero section."
+  },
+  "qa": {
+    "maxIterations": 3,
+    "thresholds": {
+      "home": 0.05,
+      "about": 0.05,
+      "default": 0.1
+    }
+  },
+  "imageGen": {
+    "enabled": true,
+    "mode": "batch",
+    "stylePrompt": "Professional corporate event photography, clean modern aesthetic, warm lighting, high production value"
+  },
+  "runMode": "autonomous"
+}
