@@ -1,0 +1,243 @@
+
+E2E Pipeline: Clone → Extract → Scaffold
+  Brief: output/briefs/entry-a-corvus-events.json
+  Theme: corvus
+  Clone dir: /Users/rickywilson/Sites/local-business-platform/output/clones/corvus
+  Site path: /Users/rickywilson/Sites/local-business-platform/sites/_corvus-digital-marketing-events
+
+=== Stage 1: Clone ===
+[ingest] Starting ingest of https://colorcode.events → /Users/rickywilson/Sites/local-business-platform/output/clones/corvus
+[ingest] Step 1: Discovering pages...
+[ingest] Found 10 pages
+[ingest] Step 2: Fetching HTML...
+[ingest]   Fetched home (https://colorcode.events)
+[ingest]   Fetched about (https://colorcode.events/about)
+[ingest]   Fetched blog-list (https://colorcode.events/blog)
+[ingest]   Fetched blog-post (https://colorcode.events/blog/announcing-the-colorcode-art-battle)
+[ingest]   Fetched blog-post (https://colorcode.events/blog/the-journey-to-our-first-colorcode-buffalo)
+[ingest]   Fetched custom (https://colorcode.events/attendee-registration)
+[ingest]   Fetched custom (https://colorcode.events/buffalo-2025)
+[ingest]   Fetched custom (https://colorcode.events/privacy-policy)
+[ingest]   Fetched custom (https://colorcode.events/tickets-checkout)
+[ingest]   Fetched custom (https://colorcode.events/tickets-order)
+[ingest] Steps 3+4: Capturing screenshots and section styles...
+[ingest]   Section style extraction failed for https://colorcode.events/about: page.goto: Timeout 20000ms exceeded.
+Call log:
+[2m  - navigating to "https://colorcode.events/about", waiting until "networkidle"[22m
+
+[ingest]   Section style extraction failed for https://colorcode.events/blog: page.goto: Timeout 20000ms exceeded.
+Call log:
+[2m  - navigating to "https://colorcode.events/blog", waiting until "networkidle"[22m
+
+[ingest]   Section style extraction failed for https://colorcode.events/blog/announcing-the-colorcode-art-battle: page.goto: Timeout 20000ms exceeded.
+Call log:
+[2m  - navigating to "https://colorcode.events/blog/announcing-the-colorcode-art-battle", waiting until "networkidle"[22m
+
+[ingest]   Section style extraction failed for https://colorcode.events/blog/the-journey-to-our-first-colorcode-buffalo: page.goto: Timeout 20000ms exceeded.
+Call log:
+[2m  - navigating to "https://colorcode.events/blog/the-journey-to-our-first-colorcode-buffalo", waiting until "networkidle"[22m
+
+[ingest]   Section style extraction failed for https://colorcode.events/attendee-registration: page.goto: Timeout 20000ms exceeded.
+Call log:
+[2m  - navigating to "https://colorcode.events/attendee-registration", waiting until "networkidle"[22m
+
+[ingest]   Section style extraction failed for https://colorcode.events/buffalo-2025: page.goto: Timeout 20000ms exceeded.
+Call log:
+[2m  - navigating to "https://colorcode.events/buffalo-2025", waiting until "networkidle"[22m
+
+[ingest]   Section style extraction failed for https://colorcode.events/privacy-policy: page.goto: Timeout 20000ms exceeded.
+Call log:
+[2m  - navigating to "https://colorcode.events/privacy-policy", waiting until "networkidle"[22m
+
+[ingest]   Section style extraction failed for https://colorcode.events/tickets-checkout: page.goto: Timeout 20000ms exceeded.
+Call log:
+[2m  - navigating to "https://colorcode.events/tickets-checkout", waiting until "networkidle"[22m
+
+[ingest]   Section style extraction failed for https://colorcode.events/tickets-order: page.goto: Timeout 20000ms exceeded.
+Call log:
+[2m  - navigating to "https://colorcode.events/tickets-order", waiting until "networkidle"[22m
+
+[ingest] Step 5: Downloading assets...
+[ingest]   Downloaded 148 assets
+[ingest] Step 6: Converting HTML to JSX...
+[ingest]   Converted home → HomePage.tsx
+[ingest]   Converted about → AboutPage.tsx
+[ingest]   Converted blog-list → Blog-listPage.tsx
+[ingest]   Converted blog-post → Blog-postPage.tsx
+[ingest]   Converted custom → CustomPage.tsx
+[ingest] Step 7: Wrote meta.json
+[ingest] Step 8: Validating CPF...
+[ingest] CPF validation PASSED
+[ingest] Done: /Users/rickywilson/Sites/local-business-platform/output/clones/corvus
+[visual-qa] Iteration 1/3
+[visual-qa] Starting dev server...
+[visual-qa] Screenshot failed for about: page.goto: net::ERR_EMPTY_RESPONSE at http://localhost:3799/about
+Call log:
+[2m  - navigating to "http://localhost:3799/about", waiting until "networkidle"[22m
+
+[visual-qa] Screenshot failed for blog-list: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3799/blog-list
+Call log:
+[2m  - navigating to "http://localhost:3799/blog-list", waiting until "networkidle"[22m
+
+[visual-qa] Screenshot failed for blog-post: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3799/blog-post
+Call log:
+[2m  - navigating to "http://localhost:3799/blog-post", waiting until "networkidle"[22m
+
+[visual-qa] Screenshot failed for custom: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3799/custom
+Call log:
+[2m  - navigating to "http://localhost:3799/custom", waiting until "networkidle"[22m
+
+[visual-qa] Screenshot failed for home: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3799/
+Call log:
+[2m  - navigating to "http://localhost:3799/", waiting until "networkidle"[22m
+
+[visual-qa] Iteration 1: FAIL — 5 page(s) exceed threshold
+[visual-qa] Iteration 2/3
+[visual-qa] Starting dev server...
+[visual-qa] Screenshot failed for about: page.goto: net::ERR_CONNECTION_RESET at http://localhost:3799/about
+Call log:
+[2m  - navigating to "http://localhost:3799/about", waiting until "networkidle"[22m
+
+[visual-qa] Screenshot failed for blog-list: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3799/blog-list
+Call log:
+[2m  - navigating to "http://localhost:3799/blog-list", waiting until "networkidle"[22m
+
+[visual-qa] Screenshot failed for blog-post: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3799/blog-post
+Call log:
+[2m  - navigating to "http://localhost:3799/blog-post", waiting until "networkidle"[22m
+
+[visual-qa] Screenshot failed for custom: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3799/custom
+Call log:
+[2m  - navigating to "http://localhost:3799/custom", waiting until "networkidle"[22m
+
+[visual-qa] Screenshot failed for home: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3799/
+Call log:
+[2m  - navigating to "http://localhost:3799/", waiting until "networkidle"[22m
+
+[visual-qa] Iteration 2: FAIL — 5 page(s) exceed threshold
+[visual-qa] Iteration 3/3
+[visual-qa] Starting dev server...
+[visual-qa] Screenshot failed for about: page.goto: net::ERR_CONNECTION_RESET at http://localhost:3799/about
+Call log:
+[2m  - navigating to "http://localhost:3799/about", waiting until "networkidle"[22m
+
+[visual-qa] Screenshot failed for blog-list: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3799/blog-list
+Call log:
+[2m  - navigating to "http://localhost:3799/blog-list", waiting until "networkidle"[22m
+
+[visual-qa] Screenshot failed for blog-post: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3799/blog-post
+Call log:
+[2m  - navigating to "http://localhost:3799/blog-post", waiting until "networkidle"[22m
+
+[visual-qa] Screenshot failed for custom: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3799/custom
+Call log:
+[2m  - navigating to "http://localhost:3799/custom", waiting until "networkidle"[22m
+
+[visual-qa] Screenshot failed for home: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3799/
+Call log:
+[2m  - navigating to "http://localhost:3799/", waiting until "networkidle"[22m
+
+[visual-qa] Iteration 3: FAIL — 5 page(s) exceed threshold
+
+=== Stage 2: Extract Theme ===
+
+Extract Theme Pipeline
+  Clone: /Users/rickywilson/Sites/local-business-platform/output/clones/corvus
+  Theme: /Users/rickywilson/Sites/local-business-platform/packages/themes/corvus
+
+[extract] Step 1: Validating CPF...
+[extract] CPF valid
+[extract] Step 2: Reading computed styles...
+[extract] Extracted 12 sections, 10 custom color vars
+[extract] Step 3: Stripping content from JSX pages...
+[extract]   Stripped AboutPage.tsx: 15 props
+[extract]   Stripped Blog-listPage.tsx: 5 props
+[extract]   Stripped Blog-postPage.tsx: 15 props
+[extract]   Stripped CustomPage.tsx: 6 props
+[extract]   Stripped HomePage.tsx: 15 props
+[extract] Steps 4-10: Assembling theme package...
+[extract] Theme package assembled at: /Users/rickywilson/Sites/local-business-platform/packages/themes/corvus
+[extract] Typography scale: {"hero":"16px"}
+
+Done.
+
+=== Stage 3: Scaffold Site ===
+
+Scaffold Client Site
+  Theme: corvus
+  Trade: digital-marketing-events
+  Output: /Users/rickywilson/Sites/local-business-platform/sites/_corvus-digital-marketing-events
+
+[scaffold] Step 1: Copying base-template...
+[scaffold] Copied base-template
+[scaffold] Step 2: Wiring theme...
+[scaffold] Step 4: Generating site.config.ts...
+[scaffold] Step 5: Generating MDX content...
+[scaffold]   Generated 5 service MDX files
+[scaffold]   Generated 1 location MDX files
+[scaffold] Step 6: Marking as pipeline test site...
+[scaffold] Step 7: Running pnpm install...
+Scope: all 12 workspace projects
+../..                                    | Progress: resolved 0, reused 1, downloaded 0, added 0
+../..                                    | Progress: resolved 374, reused 298, downloaded 0, added 0
+ WARN  2 deprecated subdependencies found: glob@10.5.0, whatwg-encoding@3.1.1
+../..                                    | Progress: resolved 1180, reused 1057, downloaded 0, added 0, done
+
+dependencies:
++ @emotion/react 11.14.0
++ @mdx-js/react 3.1.1
++ @platform/theme-system 1.0.0 <- ../../packages/theme-system
++ @platform/themes 0.1.0 <- ../../packages/themes
++ @react-email/render 2.0.0 (2.0.6 is available)
++ @types/leaflet 1.9.21
++ gray-matter 4.0.3
++ leaflet 1.9.4
++ lucide-react 0.544.0 (1.8.0 is available)
++ newrelic 13.5.0 (13.18.0 is available)
++ next 16.1.5 (16.2.3 is available)
++ next-mdx-remote 6.0.0
++ react 19.2.3
++ react-dom 19.2.3
++ react-leaflet 5.0.0
++ rehype-autolink-headings 7.1.0
++ rehype-slug 6.0.0
++ resend 6.1.2 (6.10.0 is available)
++ zod 4.1.12 (4.3.6 is available)
+
+devDependencies:
++ @axe-core/playwright 4.10.2 (4.11.1 is available)
++ @mdx-js/loader 3.1.1
++ @next/eslint-plugin-next 16.0.10 (16.2.3 is available)
++ @next/mdx 16.0.7 (16.2.3 is available)
++ @playwright/test 1.56.0 (1.59.1 is available)
++ @tailwindcss/typography 0.5.19
++ @testing-library/jest-dom 6.9.1
++ @testing-library/react 16.3.0 (16.3.2 is available)
++ @types/mdx 2.0.13
++ @types/node 20.19.20 (25.6.0 is available)
++ @types/react 19.2.2 (19.2.14 is available)
++ @types/react-dom 19.2.1 (19.2.3 is available)
++ @typescript-eslint/eslint-plugin 8.56.0 (8.58.1 is available)
++ @typescript-eslint/parser 8.56.0 (8.58.1 is available)
++ @vitejs/plugin-react 5.1.1 (6.0.1 is available)
++ autoprefixer 10.4.21 (10.4.27 is available)
++ eslint 9.37.0 (10.2.0 is available)
++ eslint-plugin-react 7.37.5
++ eslint-plugin-react-hooks 5.2.0 (7.0.1 is available)
++ jsdom 27.0.0 (29.0.2 is available)
++ postcss 8.5.6 (8.5.9 is available)
++ prettier 3.6.2 (3.8.2 is available)
++ remark-frontmatter 5.0.0
++ remark-gfm 4.0.1
++ tailwindcss 3.4.18 (4.2.2 is available)
++ tsx 4.20.6 (4.21.0 is available)
++ typescript 5.9.3 (6.0.2 is available)
++ vitest 3.2.4 (4.1.4 is available)
+
+Done in 1.9s using pnpm v10.18.2
+[scaffold] Step 8: Verifying dev server starts (timeout 60s)...
+[scaffold] Dev server: READY
+
+Done. Site scaffolded at: /Users/rickywilson/Sites/local-business-platform/sites/_corvus-digital-marketing-events
+
+Done. Site at: /Users/rickywilson/Sites/local-business-platform/sites/_corvus-digital-marketing-events/
