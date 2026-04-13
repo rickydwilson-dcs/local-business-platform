@@ -3,7 +3,7 @@
  *
  * Newsletter signup band
  * Category: CTA
- * Note: Placeholder — regenerate with --pass translate when API key is available.
+ * Note: Placeholder — re-run --pass translate to regenerate.
  */
 
 export interface NewsletterSignupBandProps {

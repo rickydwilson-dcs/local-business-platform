@@ -3,12 +3,10 @@ export { CorvusAboutPage } from "./AboutPage";
 export { CorvusBlogListPage } from "./BlogListPage";
 export { CorvusBlogPostPage } from "./BlogPostPage";
 export { CorvusCustomPage } from "./CustomPage";
-export {
-  CorvusLocationDetailPage,
-  CorvusLocationsPage,
-  CorvusProjectDetailPage,
-  CorvusProjectsPage,
-  CorvusReviewsPage,
-  CorvusServiceDetailPage,
-  CorvusServicesPage,
-} from "./StubPages";
+export { CorvusServicesPage } from "./ServicesPage";
+export { CorvusServiceDetailPage } from "./ServiceDetailPage";
+export { CorvusLocationsPage } from "./LocationsPage";
+export { CorvusLocationDetailPage } from "./LocationDetailPage";
+export { CorvusProjectsPage } from "./ProjectsPage";
+export { CorvusProjectDetailPage } from "./ProjectDetailPage";
+export { CorvusReviewsPage } from "./ReviewsPage";

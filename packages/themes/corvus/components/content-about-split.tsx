@@ -1,23 +1,23 @@
 /**
- * AboutSplitDark
+ * ContentAboutSplit
  *
- * About section on dark background
+ * About section with split layout
  * Category: Content
- * Note: Placeholder — regenerate with --pass translate when API key is available.
+ * Note: Placeholder — AI generation produced type errors. Re-run --pass translate to regenerate.
  */
 
-export interface AboutSplitDarkProps {
+export interface ContentAboutSplitProps {
   [key: string]: unknown;
 }
 
-export function AboutSplitDark(props: AboutSplitDarkProps) {
+export function ContentAboutSplit(props: ContentAboutSplitProps) {
   void props;
   return (
     <section className="py-16 px-4">
       <div className="max-w-7xl mx-auto text-center">
         <p className="text-surface-foreground text-sm uppercase tracking-wider">Content</p>
         <h2 className="text-surface-foreground text-2xl font-bold mt-2">
-          About section on dark background
+          About section with split layout
         </h2>
       </div>
     </section>

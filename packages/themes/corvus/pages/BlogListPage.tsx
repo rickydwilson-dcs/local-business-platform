@@ -1,14 +1,9 @@
-interface BlogListPageProps {
-  [key: string]: unknown;
-}
+/* eslint-disable */
+// @ts-nocheck
+// Stub page — not yet extracted from clone.
+// Satisfies TypeScript until the full clone-to-theme extraction covers this page type.
 
-export function CorvusBlogListPage(props: BlogListPageProps) {
+export function CorvusBlogListPage(props: Record<string, unknown>) {
   void props;
-  return (
-    <main className="section container-standard">
-      <p className="text-surface-foreground">
-        Corvus blog list page — awaiting generation by extract-theme --pass translate.
-      </p>
-    </main>
-  );
+  return <main className="page-stub">{/* CorvusBlogListPage — stub */}</main>;
 }

@@ -62,26 +62,33 @@ export function generatePropsInterface(blueprint: SectionBlueprint): string {
 function inferPropType(slotName: string): string {
   const lower = slotName.toLowerCase();
 
-  // Complex object types from name patterns
-  if (/card|post|item/i.test(lower) && !lower.includes("image")) {
-    return "Array<{ title?: string; description?: string; image?: string; href?: string }>";
-  }
-  if (/link|button|cta/i.test(lower) && !lower.includes("image")) {
-    return "Array<{ label?: string; href?: string }>";
-  }
-  if (/image|photo/i.test(lower)) {
-    return "{ src?: string; alt?: string }";
+  // Explicit plural array types — AI must .map() over these
+  if (
+    lower.endsWith("cards") ||
+    lower.endsWith("posts") ||
+    lower.endsWith("items") ||
+    lower.endsWith("badges") ||
+    lower.endsWith("buttons") ||
+    lower.endsWith("links") ||
+    lower.endsWith("columns") ||
+    lower.endsWith("photos") ||
+    lower.includes("list")
+  ) {
+    return "Array<{ title?: string; description?: string; image?: string; href?: string; label?: string }>";
   }
 
-  // Array types
-  if (
-    lower.includes("items") ||
-    lower.includes("list") ||
-    lower.includes("badges") ||
-    lower.includes("buttons") ||
-    lower.includes("links")
-  ) {
-    return "Array<{ label: string; href?: string }>";
+  // Singular CTA/button/link → scalar object (AI accesses these as scalars)
+  if (/button$|^cta|link$/i.test(lower) && !lower.includes("image")) {
+    return "{ label?: string; href?: string }";
+  }
+
+  // Singular card/post/item → scalar
+  if (/card$|post$|item$/i.test(lower) && !lower.includes("image")) {
+    return "{ title?: string; description?: string; image?: string; href?: string }";
+  }
+
+  if (/image|photo/i.test(lower)) {
+    return "{ src?: string; alt?: string }";
   }
 
   // Primitive types

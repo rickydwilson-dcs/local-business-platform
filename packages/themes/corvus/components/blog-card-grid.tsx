@@ -3,7 +3,7 @@
  *
  * Blog post card grid
  * Category: Blog
- * Note: Placeholder — regenerate with --pass translate when API key is available.
+ * Note: Placeholder — AI generation produced type errors. Re-run --pass translate to regenerate.
  */
 
 export interface BlogCardGridProps {

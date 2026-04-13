@@ -1,7 +1,9 @@
+import type React from "react";
+
 export function CorvusFooter(props: Record<string, unknown>) {
   return (
-    <footer className="bg-surface-inverse text-on-brand-primary py-12">
-      <div className="container-standard">
+    <footer className="site-footer">
+      <div className="container">
         <p>
           &copy; {new Date().getFullYear()} {String(props.siteName ?? "")}
         </p>

@@ -261,13 +261,30 @@ async function generateJSXBody(
     // Strip markdown fences if present
     body = body.replace(/^```(?:tsx?|jsx?)?\n?/m, "").replace(/\n?```$/m, "");
 
-    // Ensure it starts with "  return ("
-    if (!body.trimStart().startsWith("return")) {
-      return null;
-    }
+    const trimmed = body.trimStart();
 
-    // Indent properly if needed
-    if (!body.startsWith("  ")) {
+    // Clone translation prompt returns raw JSX (starts with <section or <div).
+    // Wrap it in a return statement so the shell wrappers work correctly.
+    if (
+      useCloneTranslation &&
+      (trimmed.startsWith("<section") ||
+        trimmed.startsWith("<div") ||
+        trimmed.startsWith("<main") ||
+        trimmed.startsWith("<header") ||
+        trimmed.startsWith("<footer") ||
+        trimmed.startsWith("<nav"))
+    ) {
+      // Indent and wrap in return
+      const indented = body
+        .split("\n")
+        .map((line) => `    ${line}`)
+        .join("\n");
+      body = `  return (\n${indented}\n  );`;
+    } else if (!trimmed.startsWith("return")) {
+      // Blueprint-only prompt must start with "return"
+      return null;
+    } else if (!body.startsWith("  ")) {
+      // Indent properly if needed
       body = body
         .split("\n")
         .map((line) => `  ${line}`)

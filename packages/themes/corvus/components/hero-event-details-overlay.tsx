@@ -1,23 +1,23 @@
 /**
- * HeroEventBanner
+ * HeroEventDetailsOverlay
  *
- * Event hero banner with date and venue
+ * Hero with event details overlay
  * Category: Hero
- * Note: Placeholder — regenerate with --pass translate when API key is available.
+ * Note: Placeholder — AI generation produced type errors. Re-run --pass translate to regenerate.
  */
 
-export interface HeroEventBannerProps {
+export interface HeroEventDetailsOverlayProps {
   [key: string]: unknown;
 }
 
-export function HeroEventBanner(props: HeroEventBannerProps) {
+export function HeroEventDetailsOverlay(props: HeroEventDetailsOverlayProps) {
   void props;
   return (
     <section className="py-16 px-4">
       <div className="max-w-7xl mx-auto text-center">
         <p className="text-surface-foreground text-sm uppercase tracking-wider">Hero</p>
         <h2 className="text-surface-foreground text-2xl font-bold mt-2">
-          Event hero banner with date and venue
+          Hero with event details overlay
         </h2>
       </div>
     </section>

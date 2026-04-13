@@ -352,18 +352,13 @@ function generateHomePage(
     )
     .join("\n");
 
-  // Build the JSX composition — each component gets placeholder props
+  // Build the JSX composition — each component renders with empty/default props.
+  // CorvusHomePage accepts typed props from the site page.tsx; the composition
+  // pattern here is v1 scaffolding. Sites should wire props explicitly.
   const sectionJsx = components
     .map((c) => {
       const bp = c.blueprint;
-      // Build minimal props object from contentSlots
-      const propLines = bp.contentSlots.slice(0, 4).map((slot) => {
-        const camel = slot.replace(/[-_]([a-zA-Z])/g, (_, c: string) => c.toUpperCase());
-        if (/items|cards|links|buttons/i.test(slot)) return `      ${camel}={[]}`;
-        if (/image|photo/i.test(slot)) return `      ${camel}={{ src: '', alt: '' }}`;
-        return `      ${camel}={props.${camel}}`;
-      });
-      return `      <${bp.componentExportName}\n${propLines.join("\n")}\n      />`;
+      return `      <${bp.componentExportName} />`;
     })
     .join("\n");
 
@@ -677,12 +672,19 @@ async function main() {
     fs.writeFileSync(path.join(pagesDir, "HomePage.tsx"), homePageContent, "utf-8");
     console.log("[extract] pages/HomePage.tsx written");
 
-    // Stub pages for other page types
+    // Stub pages for other page types (must match all imports in the test site's app/ dir)
     const pageStubs: Array<{ file: string; exportName: string }> = [
       { file: "AboutPage.tsx", exportName: `${pascal}AboutPage` },
       { file: "BlogListPage.tsx", exportName: `${pascal}BlogListPage` },
       { file: "BlogPostPage.tsx", exportName: `${pascal}BlogPostPage` },
       { file: "CustomPage.tsx", exportName: `${pascal}CustomPage` },
+      { file: "ServicesPage.tsx", exportName: `${pascal}ServicesPage` },
+      { file: "ServiceDetailPage.tsx", exportName: `${pascal}ServiceDetailPage` },
+      { file: "LocationsPage.tsx", exportName: `${pascal}LocationsPage` },
+      { file: "LocationDetailPage.tsx", exportName: `${pascal}LocationDetailPage` },
+      { file: "ProjectsPage.tsx", exportName: `${pascal}ProjectsPage` },
+      { file: "ProjectDetailPage.tsx", exportName: `${pascal}ProjectDetailPage` },
+      { file: "ReviewsPage.tsx", exportName: `${pascal}ReviewsPage` },
     ];
 
     for (const stub of pageStubs) {
@@ -692,26 +694,13 @@ async function main() {
       }
     }
 
-    // pages/index.ts barrel — include StubPages if it exists
-    const stubPagesPath = path.join(pagesDir, "StubPages.tsx");
-    const hasStubPages = fs.existsSync(stubPagesPath);
-    const stubExports = hasStubPages
-      ? (fs
-          .readFileSync(stubPagesPath, "utf-8")
-          .match(/export function (\w+)/g)
-          ?.map((m) => m.replace("export function ", ""))
-          .filter(Boolean) ?? [])
-      : [];
-
+    // pages/index.ts barrel — all pages explicitly listed
     const pageExports =
       [
         `export { ${pascal}HomePage } from './HomePage';`,
         ...pageStubs.map(
           (s) => `export { ${s.exportName} } from './${s.file.replace(".tsx", "")}';`
         ),
-        ...(stubExports.length > 0
-          ? [`export {\n  ${stubExports.join(",\n  ")},\n} from './StubPages';`]
-          : []),
       ]
         .join("\n")
         .trim() + "\n";
