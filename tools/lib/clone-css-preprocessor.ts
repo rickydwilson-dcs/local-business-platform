@@ -19,6 +19,7 @@ export interface PreprocessorConfig {
   customProperties?: string; // :root CSS variables block (full rule or just declarations)
   inlineCss?: string; // CSS extracted from clone JSX comment blocks
   excludePatterns?: string[]; // Additional file patterns to exclude
+  sourceDomain?: string; // e.g. "https://colorcode.events" — clone origin domain
 }
 
 export interface PreprocessorResult {
@@ -79,6 +80,10 @@ function shouldExclude(filename: string, extraPatterns: string[]): boolean {
 }
 
 // ── URL handling ──────────────────────────────────────────────────────────────
+
+function escapeRegexStr(str: string): string {
+  return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
 
 function isRemoteOrDataUrl(url: string): boolean {
   return (
@@ -192,7 +197,8 @@ function sanitiseFile(
   raw: string,
   filename: string,
   assetsDir: string,
-  themeName: string
+  themeName: string,
+  sourceDomain?: string
 ): SanitiseResult {
   let content = raw;
   let rewrittenUrls = 0;
@@ -247,6 +253,19 @@ function sanitiseFile(
     }
   });
 
+  // 3b. Strip clone-domain remote URLs (e.g. fonts loaded from WP uploads)
+  if (sourceDomain) {
+    const domainRe = new RegExp(
+      `url\\(\\s*['"]?(${escapeRegexStr(sourceDomain)}[^)'"]*)['"]?\\s*\\)`,
+      "gi"
+    );
+    content = content.replace(domainRe, (_full, urlValue) => {
+      rewrittenUrls++;
+      warnings.push(`[${filename}] Stripped clone-domain URL: ${urlValue}`);
+      return "url(data:,)";
+    });
+  }
+
   // 4. Split mega-lines (minified CSS with very long single lines)
   content = splitMegaLines(content);
 
@@ -266,7 +285,14 @@ function discoverFiles(dir: string, extensions: string[]): string[] {
 // ── Main ─────────────────────────────────────────────────────────────────────
 
 export async function preprocessCloneCss(config: PreprocessorConfig): Promise<PreprocessorResult> {
-  const { cloneDir, themeName, customProperties, inlineCss, excludePatterns = [] } = config;
+  const {
+    cloneDir,
+    themeName,
+    customProperties,
+    inlineCss,
+    excludePatterns = [],
+    sourceDomain,
+  } = config;
 
   const cssDir = path.join(cloneDir, "assets", "css");
   const assetsDir = path.join(cloneDir, "assets");
@@ -324,7 +350,7 @@ export async function preprocessCloneCss(config: PreprocessorConfig): Promise<Pr
     const filePath = path.join(cssDir, filename);
     const raw = fs.readFileSync(filePath, "utf-8");
 
-    const result = sanitiseFile(raw, filename, assetsDir, themeName);
+    const result = sanitiseFile(raw, filename, assetsDir, themeName, sourceDomain);
 
     totalRewrittenUrls += result.rewrittenUrls;
     for (const fam of result.strippedFontFaces) {

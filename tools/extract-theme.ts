@@ -461,6 +461,50 @@ export function ${pascal}Footer(props: Record<string, unknown>) {
 `;
 }
 
+/**
+ * Strip the Breakdance popup/mobile-nav wrapper from page JSX.
+ * Finds the last <div className="breakdance"> block that contains bde-popup
+ * and removes it — it's duplicated across all pages with hardcoded external URLs.
+ */
+function stripPopupNav(jsx: string): string {
+  const marker = 'className="breakdance">';
+  let lastIdx = jsx.lastIndexOf(marker);
+  if (lastIdx === -1) return jsx;
+
+  // Walk back to the opening < of this div
+  while (lastIdx > 0 && jsx[lastIdx] !== "<") lastIdx--;
+
+  // Check that this block contains bde-popup (not just any "breakdance" class div)
+  const preview = jsx.slice(lastIdx, Math.min(lastIdx + 500, jsx.length));
+  if (!preview.includes("bde-popup")) return jsx;
+
+  // Walk forward tracking div depth to find the matching </div>
+  let depth = 0;
+  let pos = lastIdx;
+  let endPos = -1;
+
+  while (pos < jsx.length) {
+    if (jsx.startsWith("<div", pos) && (jsx[pos + 4] === " " || jsx[pos + 4] === ">")) {
+      depth++;
+      pos += 4;
+    } else if (jsx.startsWith("</div>", pos)) {
+      depth--;
+      if (depth === 0) {
+        endPos = pos + 6; // past </div>
+        break;
+      }
+      pos += 6;
+    } else {
+      pos++;
+    }
+  }
+
+  if (endPos === -1) return jsx; // couldn't match — leave unchanged
+
+  // Remove the popup block
+  return jsx.slice(0, lastIdx) + jsx.slice(endPos);
+}
+
 // ── Main ─────────────────────────────────────────────────────────────────────
 
 async function main() {
@@ -508,6 +552,21 @@ async function main() {
   const cloneDir = path.resolve(`output/clones/${cloneName}`);
   const themeName = cloneName;
   const themeDir = path.resolve(`packages/themes/${themeName}`);
+
+  // Read clone source domain from meta.json
+  const metaPath = path.join(cloneDir, "meta.json");
+  let sourceDomain: string | undefined;
+  if (fs.existsSync(metaPath)) {
+    try {
+      const meta = JSON.parse(fs.readFileSync(metaPath, "utf-8")) as { sourceRef?: string };
+      if (meta.sourceRef) {
+        sourceDomain = meta.sourceRef.replace(/\/$/, ""); // strip trailing slash
+        console.log(`[extract] Source domain: ${sourceDomain}`);
+      }
+    } catch {
+      console.log("[extract] Could not read meta.json — URL sanitisation will be limited");
+    }
+  }
 
   console.log(`\nExtract Theme Pipeline`);
   console.log(`  Clone: ${cloneDir}`);
@@ -591,6 +650,12 @@ async function main() {
     for (const [pageName, page] of Object.entries(clonePages)) {
       const { bodyWithoutHeaderFooter } = extractHeaderFooter(page.jsxBody);
       clonePages[pageName] = { css: page.css, jsxBody: bodyWithoutHeaderFooter };
+    }
+
+    // Strip mobile nav popup from ALL pages (duplicated Breakdance widget with external URLs)
+    for (const [pageName, page] of Object.entries(clonePages)) {
+      const stripped = stripPopupNav(page.jsxBody);
+      clonePages[pageName] = { css: page.css, jsxBody: stripped };
     }
 
     // Step 5: Assemble theme package
@@ -716,6 +781,7 @@ async function main() {
       themeName,
       customProperties: customPropsBlock || undefined,
       inlineCss: dedupedInlineCss || undefined,
+      sourceDomain,
     });
 
     // Write clone-styles.css to theme package
@@ -952,6 +1018,7 @@ async function main() {
       address: brief?.business.address
         ? { city: brief.business.address.city, postcode: brief.business.address.postcode }
         : undefined,
+      sourceDomain,
     };
 
     // Strip page layouts — only process componentize-generated files (marked @ts-nocheck)
