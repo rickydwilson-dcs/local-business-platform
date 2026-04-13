@@ -772,6 +772,23 @@ async function main() {
           console.log(`[extract] layout.tsx already has clone-assets link — skipped`);
         }
       }
+
+      // Ensure tailwind.config.ts has corePlugins: { preflight: false }
+      const tailwindConfigPath = path.join(testSiteDir, "tailwind.config.ts");
+      if (fs.existsSync(tailwindConfigPath)) {
+        let tailwindContent = fs.readFileSync(tailwindConfigPath, "utf-8");
+        if (!tailwindContent.includes("preflight")) {
+          // Insert corePlugins: { preflight: false } before the plugins line
+          tailwindContent = tailwindContent.replace(
+            /([ \t]*plugins\s*:)/,
+            `  corePlugins: {\n    preflight: false,\n  },\n$1`
+          );
+          fs.writeFileSync(tailwindConfigPath, tailwindContent, "utf-8");
+          console.log(`[extract] Set corePlugins.preflight = false in tailwind.config.ts`);
+        } else {
+          console.log(`[extract] tailwind.config.ts already has preflight config — skipped`);
+        }
+      }
     } else {
       console.log(`[extract] No test site found for theme "${themeName}" — skipping site deploy`);
     }

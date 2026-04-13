@@ -42,6 +42,9 @@ const config: Config = {
       },
     },
   },
+  corePlugins: {
+    preflight: false,
+  },
   plugins: [typography, createThemePlugin(themeConfig)],
 };
 
