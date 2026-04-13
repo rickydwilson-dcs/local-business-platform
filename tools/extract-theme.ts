@@ -58,8 +58,12 @@ export const ${themeName}Config = {
   name: "${themeName}" as const,
 };
 
-export const ${themeName}Registry = {
-  theme: "${themeName}" as const,
+export const ${themeName}Registry: import("@platform/theme-system").ComponentRegistry = {
+  theme: "${themeName}",
+  heroVariant: "image-overlay",
+  headerVariant: "dark",
+  cardVariant: "standard",
+  sectionVariant: "standard",
 };
 `;
 }
@@ -114,13 +118,12 @@ function generatePagesBarrel(pageNames: string[]): string {
 function generateHeaderComponent(themeName: string, stripped: string): string {
   return `import type React from "react";
 
-export function ${toPascalCase(themeName)}Header(props: Record<string, string>) {
-  void props;
+export function ${toPascalCase(themeName)}Header(props: Record<string, unknown>) {
   return (
     <header className="site-header">
       {/* ${themeName} header — extracted from reference clone */}
       <nav className="nav container">
-        <a href="/" className="nav-logo">{props.businessName}</a>
+        <a href="/" className="nav-logo">{String(props.siteName ?? "")}</a>
       </nav>
     </header>
   );
@@ -131,12 +134,11 @@ export function ${toPascalCase(themeName)}Header(props: Record<string, string>) 
 function generateFooterComponent(themeName: string): string {
   return `import type React from "react";
 
-export function ${toPascalCase(themeName)}Footer(props: Record<string, string>) {
-  void props;
+export function ${toPascalCase(themeName)}Footer(props: Record<string, unknown>) {
   return (
     <footer className="site-footer">
       <div className="container">
-        <p>&copy; {new Date().getFullYear()} {props.businessName}</p>
+        <p>&copy; {new Date().getFullYear()} {String(props.siteName ?? "")}</p>
       </div>
     </footer>
   );
@@ -147,17 +149,18 @@ export function ${toPascalCase(themeName)}Footer(props: Record<string, string>) 
 function generatePageLayout(themeName: string, pageName: string, stripped: string): string {
   const pascal = toPascalCase(themeName);
   const pagePascal = toPascalCase(pageName);
-  return `import type React from "react";
-
-interface ${pagePascal}PageProps {
+  return `interface ${pagePascal}PageProps {
   content?: Record<string, string>;
+  items?: Array<{ slug: string; title: string; description?: string }>;
 }
 
-export function ${pascal}${pagePascal}Page({ content = {} }: ${pagePascal}PageProps) {
-  void content;
+export function ${pascal}${pagePascal}Page({ content = {}, items = [] }: ${pagePascal}PageProps) {
   return (
     <main className="page-${pageName}">
       {/* ${themeName} ${pageName} layout — extracted from reference clone */}
+      {items.map((item: { slug: string; title: string; description?: string }) => (
+        <div key={item.slug}>{item.title}</div>
+      ))}
     </main>
   );
 }

@@ -38,7 +38,7 @@ export interface VisualQAResult {
 // ── Dev server management ────────────────────────────────────────────────────
 
 const SERVER_READY_PATTERNS = [/Ready in/, /Local:/, /localhost:\d+/];
-const SERVER_STARTUP_TIMEOUT_MS = 60_000;
+const SERVER_STARTUP_TIMEOUT_MS = 120_000;
 const SERVER_PORT = 3799; // Use a non-standard port to avoid conflicts
 
 async function startDevServer(

@@ -142,7 +142,7 @@ export async function ingestLiveSite(brief: JobBrief, outputDir: string): Promis
 
     for (const discoveredPage of pages) {
       try {
-        await page.goto(discoveredPage.url, { waitUntil: "networkidle", timeout: 20_000 });
+        await page.goto(discoveredPage.url, { waitUntil: "domcontentloaded", timeout: 45_000 });
         const sections = await extractAllSectionStyles(page);
         sectionStylesMap[discoveredPage.pageType] = sections;
       } catch (err) {

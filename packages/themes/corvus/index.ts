@@ -10,6 +10,10 @@ export const corvusConfig = {
   name: "corvus" as const,
 };
 
-export const corvusRegistry = {
-  theme: "corvus" as const,
+export const corvusRegistry: import("@platform/theme-system").ComponentRegistry = {
+  theme: "corvus",
+  heroVariant: "image-overlay",
+  headerVariant: "dark",
+  cardVariant: "standard",
+  sectionVariant: "dark-accent",
 };

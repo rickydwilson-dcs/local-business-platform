@@ -5,7 +5,7 @@ import { PHONE_DISPLAY, PHONE_TEL, BUSINESS_EMAIL, ADDRESS } from '@/lib/contact
 import { getContentItems } from '@/lib/content';
 import { PageShell, ThemeProvider } from '@platform/core-components';
 import { CorvusHeader, CorvusFooter } from '@platform/themes/corvus/components';
-import { vegaRegistry } from '@platform/themes/corvus';
+import { corvusRegistry } from '@platform/themes/corvus';
 import { ConsentManager } from '@platform/core-components/components/analytics/ConsentManager';
 import { Analytics } from '@platform/core-components/components/analytics/Analytics';
 import { AnalyticsDebugPanel } from '@platform/core-components/components/analytics/AnalyticsDebugPanel';
@@ -74,7 +74,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         )}
       </head>
       <body className="min-h-screen flex flex-col">
-        <ThemeProvider theme="vega" registry={vegaRegistry}>
+        <ThemeProvider theme="corvus" registry={corvusRegistry}>
           <PageShell
             header={
               <CorvusHeader
