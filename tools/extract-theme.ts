@@ -77,10 +77,14 @@ registerTheme({
 `;
 }
 
-function generateGlobalsCss(customProperties: Record<string, string>): string {
+function generateGlobalsCss(customProperties: Record<string, string>, cloneCss?: string): string {
   const varLines = Object.entries(customProperties)
     .map(([k, v]) => `  ${k}: ${v};`)
     .join("\n");
+
+  const cloneSection = cloneCss
+    ? `\n/* Clone styles — extracted from reference site */\n${cloneCss}\n`
+    : "";
 
   return `/* ${new Date().toISOString()} — auto-generated theme globals */
 @import "../theme-system/dist/base.css";
@@ -95,7 +99,7 @@ ${varLines || "  /* no custom section colors */"}
   margin-inline: auto;
   padding-inline: 1.5rem;
 }
-`;
+${cloneSection}`;
 }
 
 function generatePackageJson(themeName: string): object {
@@ -112,7 +116,7 @@ function generatePackageJson(themeName: string): object {
   };
 }
 
-// ── Component generation ─────────────────────────────────────────────────────
+// ── Component generation (legacy stub pass) ──────────────────────────────────
 
 function generateComponentsBarrel(themeName: string): string {
   const pascal = toPascalCase(themeName);
@@ -126,7 +130,7 @@ function generatePagesBarrel(pageNames: string[]): string {
   return pageNames.map((n) => `export * from "./${n}";`).join("\n") + "\n";
 }
 
-function generateHeaderComponent(themeName: string, stripped: string): string {
+function generateHeaderComponent(themeName: string): string {
   return `import type React from "react";
 
 export function ${toPascalCase(themeName)}Header(props: Record<string, unknown>) {
@@ -157,22 +161,221 @@ export function ${toPascalCase(themeName)}Footer(props: Record<string, unknown>)
 `;
 }
 
-function generatePageLayout(themeName: string, pageName: string, stripped: string): string {
+function generatePageLayout(themeName: string, pageName: string): string {
   const pascal = toPascalCase(themeName);
   const pagePascal = toPascalCase(pageName);
   return `interface ${pagePascal}PageProps {
-  content?: Record<string, string>;
-  items?: Array<{ slug: string; title: string; description?: string }>;
+  [key: string]: unknown;
 }
 
-export function ${pascal}${pagePascal}Page({ content = {}, items = [] }: ${pagePascal}PageProps) {
+export function ${pascal}${pagePascal}Page(props: ${pagePascal}PageProps) {
+  void props;
   return (
     <main className="page-${pageName}">
       {/* ${themeName} ${pageName} layout — extracted from reference clone */}
-      {items.map((item: { slug: string; title: string; description?: string }) => (
-        <div key={item.slug}>{item.title}</div>
-      ))}
     </main>
+  );
+}
+`;
+}
+
+// ── JSX sanitizer ────────────────────────────────────────────────────────────
+
+/**
+ * Fix HTML→JSX patterns that cause TypeScript parse errors.
+ *
+ * Removes attributes whose values are JSON objects (start with `{`).
+ * These are produced by WordPress/Breakdance page builders (e.g. `data-options`).
+ * The JSON values contain unescaped double quotes AND sometimes single quotes,
+ * making them impossible to safely wrap in either quote style in JSX.
+ *
+ * Since these attributes are JS-behaviour config (not styling/layout),
+ * removing them preserves visual fidelity without breaking the markup.
+ */
+function sanitizeForJsx(jsx: string): string {
+  let result = "";
+  let pos = 0;
+
+  while (pos < jsx.length) {
+    // Find next occurrence of ="{ which indicates a JSON-valued attribute
+    const attrStart = jsx.indexOf('="{', pos);
+    if (attrStart === -1) {
+      result += jsx.slice(pos);
+      break;
+    }
+
+    // Walk back to find the start of the attribute name (stops at whitespace)
+    let nameStart = attrStart - 1;
+    while (nameStart > 0 && jsx[nameStart - 1] !== " " && jsx[nameStart - 1] !== "\n") {
+      nameStart--;
+    }
+
+    // Copy everything before the attribute name
+    result += jsx.slice(pos, nameStart);
+
+    // Skip forward past the closing `}"` of the JSON attribute value
+    // Scan from `{` to find the balanced `}` followed by `"`
+    let scanPos = attrStart + 2; // points to `{`
+    let depth = 0;
+    let closePos = -1;
+
+    for (let i = scanPos; i < jsx.length; i++) {
+      if (jsx[i] === "{") depth++;
+      else if (jsx[i] === "}") {
+        depth--;
+        if (depth === 0) {
+          if (i + 1 < jsx.length && jsx[i + 1] === '"') {
+            closePos = i + 2; // skip past `}"`
+            break;
+          }
+        }
+      }
+    }
+
+    if (closePos === -1) {
+      // Couldn't find matching close — keep everything as-is and move on
+      result += jsx.slice(nameStart, attrStart + 2);
+      pos = attrStart + 2;
+    } else {
+      // Skip the entire attribute (name + value)
+      pos = closePos;
+    }
+  }
+
+  return result;
+}
+
+// ── Componentize pass helpers ─────────────────────────────────────────────────
+
+/**
+ * Split a clone JSX file into the leading CSS block and the JSX export function.
+ * Clone format:
+ *   // Extracted inline styles:
+ *   //
+ *   :root{...raw CSS...}
+ *   ...more CSS...
+ *
+ *   export function pageName() { return (...); }
+ */
+function extractCssFromCloneJsx(jsx: string): { css: string; jsxBody: string } {
+  const exportMatch = jsx.match(/^export function/m);
+  if (!exportMatch || exportMatch.index === undefined) {
+    return { css: "", jsxBody: jsx };
+  }
+
+  const cssBlock = jsx.slice(0, exportMatch.index);
+  const jsxBody = jsx.slice(exportMatch.index);
+
+  // Clean the CSS: remove JS comment markers and source map comments
+  const css = cssBlock
+    .replace(/^\/\/\s?/gm, "") // Remove // comment markers
+    .replace(/^\/\*.*?\*\/$/gm, "") // Remove /* */ inline comments
+    .replace(/\/\*#[^*]*\*+(?:[^/*][^*]*\*+)*\//g, "") // Remove source map comments
+    .trim();
+
+  return { css, jsxBody };
+}
+
+/**
+ * Extract <header> and <footer> blocks from JSX, replacing them with placeholders.
+ * Returns the extracted markup plus the body with placeholders inserted.
+ */
+function extractHeaderFooter(jsx: string): {
+  header: string | null;
+  footer: string | null;
+  bodyWithoutHeaderFooter: string;
+} {
+  let body = jsx;
+
+  // Find <header ...>...</header> — simple first-match approach
+  const headerMatch = jsx.match(/<header\b[\s\S]*?<\/header>/);
+  const footerMatch = jsx.match(/<footer\b[\s\S]*?<\/footer>/);
+
+  if (headerMatch) {
+    body = body.replace(headerMatch[0], "{/* header extracted to component */}");
+  }
+  if (footerMatch) {
+    body = body.replace(footerMatch[0], "{/* footer extracted to component */}");
+  }
+
+  return {
+    header: headerMatch?.[0] ?? null,
+    footer: footerMatch?.[0] ?? null,
+    bodyWithoutHeaderFooter: body,
+  };
+}
+
+/**
+ * Generate a theme page component preserving the clone's actual JSX markup.
+ */
+function generatePageLayoutFromClone(
+  themeName: string,
+  pageName: string,
+  cloneJsxBody: string
+): string {
+  const pascal = toPascalCase(themeName);
+  const pagePascal = toPascalCase(pageName);
+
+  // Extract the return value from the clone function body
+  // Clone format: export function pageName() { return (<>...</>); }
+  const bodyMatch = cloneJsxBody.match(/return\s*\(\s*([\s\S]*)\s*\);\s*\}[\s]*$/);
+  const rawBody = bodyMatch ? bodyMatch[1].trim() : cloneJsxBody;
+
+  // Sanitize JSX-incompatible HTML patterns (e.g. data-options='{"json":...}')
+  const body = sanitizeForJsx(rawBody);
+
+  return `/* eslint-disable */
+// @ts-nocheck
+// Auto-generated by extract-theme --pass componentize
+// This is a clone-fidelity component — not a production template.
+// Run extract-theme --pass strip to replace content with props.
+
+interface ${pagePascal}PageProps {
+  [key: string]: unknown;
+}
+
+export function ${pascal}${pagePascal}Page(props: ${pagePascal}PageProps) {
+  void props;
+  return (
+    ${body}
+  );
+}
+`;
+}
+
+/**
+ * Generate a theme header component from the clone's extracted header markup.
+ */
+function generateHeaderFromClone(themeName: string, headerMarkup: string): string {
+  const pascal = toPascalCase(themeName);
+  const sanitized = sanitizeForJsx(headerMarkup);
+  return `/* eslint-disable */
+// @ts-nocheck
+// Auto-generated by extract-theme --pass componentize
+
+export function ${pascal}Header(props: Record<string, unknown>) {
+  void props;
+  return (
+    ${sanitized}
+  );
+}
+`;
+}
+
+/**
+ * Generate a theme footer component from the clone's extracted footer markup.
+ */
+function generateFooterFromClone(themeName: string, footerMarkup: string): string {
+  const pascal = toPascalCase(themeName);
+  const sanitized = sanitizeForJsx(footerMarkup);
+  return `/* eslint-disable */
+// @ts-nocheck
+// Auto-generated by extract-theme --pass componentize
+
+export function ${pascal}Footer(props: Record<string, unknown>) {
+  void props;
+  return (
+    ${sanitized}
   );
 }
 `;
@@ -221,130 +424,220 @@ async function main() {
 
   console.log(`\nExtract Theme Pipeline`);
   console.log(`  Clone: ${cloneDir}`);
-  console.log(`  Theme: ${themeDir}\n`);
+  console.log(`  Theme: ${themeDir}`);
+  console.log(`  Pass: ${passArg}\n`);
 
-  // Step 1: Validate CPF
-  console.log("[extract] Step 1: Validating CPF...");
-  const validation = validateCPF(cloneDir);
-  if (!validation.valid) {
-    console.error("CPF validation failed:");
-    for (const err of validation.errors) console.error(`  - ${err}`);
-    process.exit(1);
-  }
-  console.log("[extract] CPF valid");
+  // ── Componentize pass ──────────────────────────────────────────────────────
 
-  // Step 2: Read computed styles
-  console.log("[extract] Step 2: Reading computed styles...");
-  const stylesPath = path.join(cloneDir, "styles", "computed-styles.json");
-  const stylesJson = JSON.parse(fs.readFileSync(stylesPath, "utf-8")) as {
-    sectionStyles?: Record<string, SectionComputedStyle[]>;
-    pages?: unknown[];
-  };
+  if (passArg === "componentize" || passArg === "both") {
+    console.log("[extract] === Componentize Pass ===");
 
-  const allSections: SectionComputedStyle[] = Object.values(stylesJson.sectionStyles ?? {}).flat();
-
-  // Token extraction from computed styles
-  let brandPrimary = brief?.theme.brandColors?.primary ?? "#3B82F6";
-  let brandSecondary = brief?.theme.brandColors?.secondary ?? "#6B7280";
-
-  if (stylesJson.pages && Array.isArray(stylesJson.pages)) {
-    try {
-      const mapped = mapStylesToTokens({ pages: stylesJson.pages as never });
-      brandPrimary = mapped.config.colors?.brand?.primary ?? brandPrimary;
-      brandSecondary = mapped.config.colors?.brand?.secondary ?? brandSecondary;
-    } catch {
-      // Ignore if pages data format doesn't match
+    // Step 1: Validate CPF
+    console.log("[extract] Step 1: Validating CPF...");
+    const validation = validateCPF(cloneDir);
+    if (!validation.valid) {
+      console.error("CPF validation failed:");
+      for (const err of validation.errors) console.error(`  - ${err}`);
+      process.exit(1);
     }
+    console.log("[extract] CPF valid");
+
+    // Step 2: Read computed styles
+    console.log("[extract] Step 2: Reading computed styles...");
+    const stylesPath = path.join(cloneDir, "styles", "computed-styles.json");
+    const stylesJson = JSON.parse(fs.readFileSync(stylesPath, "utf-8")) as {
+      sectionStyles?: Record<string, SectionComputedStyle[]>;
+      pages?: unknown[];
+    };
+
+    const allSections: SectionComputedStyle[] = Object.values(
+      stylesJson.sectionStyles ?? {}
+    ).flat();
+
+    let brandPrimary = brief?.theme.brandColors?.primary ?? "#3B82F6";
+    let brandSecondary = brief?.theme.brandColors?.secondary ?? "#6B7280";
+
+    if (stylesJson.pages && Array.isArray(stylesJson.pages)) {
+      try {
+        const mapped = mapStylesToTokens({ pages: stylesJson.pages as never });
+        brandPrimary = mapped.config.colors?.brand?.primary ?? brandPrimary;
+        brandSecondary = mapped.config.colors?.brand?.secondary ?? brandSecondary;
+      } catch {
+        // Ignore if pages data format doesn't match
+      }
+    }
+
+    const { customProperties } = mapSectionColors(allSections, brandPrimary, brandSecondary);
+    const typographyScale = extractTypographyScale(allSections);
+    console.log(
+      `[extract] Extracted ${allSections.length} sections, ${Object.keys(customProperties).length} custom color vars`
+    );
+
+    // Step 3: Read clone JSX pages and extract CSS + JSX bodies
+    console.log("[extract] Step 3: Reading clone JSX pages...");
+    const jsxDir = path.join(cloneDir, "jsx", "pages");
+    const clonePages: Record<string, { css: string; jsxBody: string }> = {};
+    const allCssBlocks: string[] = [];
+
+    for (const file of fs.readdirSync(jsxDir).filter((f) => f.endsWith(".tsx"))) {
+      const jsx = fs.readFileSync(path.join(jsxDir, file), "utf-8");
+      // Normalize filename → page key (e.g. "HomePage.tsx" → "home", "Blog-listPage.tsx" → "blog-list")
+      const pageName = file
+        .replace(/Page\.tsx$/, "")
+        .replace(/\.tsx$/, "")
+        .replace(/([a-z])-([A-Z])/g, (_, a, b) => `${a}${b}`) // remove kebab from CamelCase
+        .toLowerCase();
+      const { css, jsxBody } = extractCssFromCloneJsx(jsx);
+      clonePages[pageName] = { css, jsxBody };
+      if (css.trim()) allCssBlocks.push(css);
+      console.log(`[extract]   Read ${file} → page key: ${pageName}`);
+    }
+
+    // Step 4: Extract header/footer from home page, strip from all pages
+    console.log("[extract] Step 4: Extracting header/footer from home page...");
+    const homeJsx = clonePages["home"]?.jsxBody ?? "";
+    const { header: headerMarkup, footer: footerMarkup } = extractHeaderFooter(homeJsx);
+    console.log(`[extract]   Header: ${headerMarkup ? "extracted" : "not found"}`);
+    console.log(`[extract]   Footer: ${footerMarkup ? "extracted" : "not found"}`);
+
+    // Strip header/footer from ALL pages (each page includes a full site header in the clone)
+    for (const [pageName, page] of Object.entries(clonePages)) {
+      const { bodyWithoutHeaderFooter } = extractHeaderFooter(page.jsxBody);
+      clonePages[pageName] = { css: page.css, jsxBody: bodyWithoutHeaderFooter };
+    }
+
+    // Step 5: Assemble theme package
+    console.log("[extract] Steps 5-10: Assembling theme package...");
+
+    const componentDir = path.join(themeDir, "components");
+    const pagesDir = path.join(themeDir, "pages");
+    for (const d of [themeDir, componentDir, pagesDir]) {
+      fs.mkdirSync(d, { recursive: true });
+    }
+
+    // Header + Footer Server Components
+    if (headerMarkup) {
+      fs.writeFileSync(
+        path.join(componentDir, "header.tsx"),
+        generateHeaderFromClone(themeName, headerMarkup),
+        "utf-8"
+      );
+    } else {
+      fs.writeFileSync(
+        path.join(componentDir, "header.tsx"),
+        generateHeaderComponent(themeName),
+        "utf-8"
+      );
+    }
+
+    if (footerMarkup) {
+      fs.writeFileSync(
+        path.join(componentDir, "footer.tsx"),
+        generateFooterFromClone(themeName, footerMarkup),
+        "utf-8"
+      );
+    } else {
+      fs.writeFileSync(
+        path.join(componentDir, "footer.tsx"),
+        generateFooterComponent(themeName),
+        "utf-8"
+      );
+    }
+
+    fs.writeFileSync(
+      path.join(componentDir, "index.ts"),
+      generateComponentsBarrel(themeName),
+      "utf-8"
+    );
+
+    // Page layouts from clone JSX
+    const pageNames = Object.keys(clonePages);
+    for (const pageName of pageNames) {
+      const { jsxBody } = clonePages[pageName];
+      const layout = generatePageLayoutFromClone(themeName, pageName, jsxBody);
+      const filename = `${toPascalCase(pageName)}Page.tsx`;
+      fs.writeFileSync(path.join(pagesDir, filename), layout, "utf-8");
+      console.log(`[extract]   Generated page: ${filename}`);
+    }
+
+    // Build pages barrel from ALL .tsx files in the pages directory
+    // (includes both clone-generated pages and any pre-existing stub pages)
+    const allPageFiles = fs
+      .readdirSync(pagesDir)
+      .filter((f) => f.endsWith(".tsx"))
+      .map((f) => f.replace(/\.tsx$/, ""));
+    fs.writeFileSync(path.join(pagesDir, "index.ts"), generatePagesBarrel(allPageFiles), "utf-8");
+
+    // index.ts barrel
+    fs.writeFileSync(path.join(themeDir, "index.ts"), generateIndexTs(themeName), "utf-8");
+
+    // globals.css — include clone CSS
+    const dedupedCss = [...new Set(allCssBlocks)].join("\n\n");
+    fs.writeFileSync(
+      path.join(themeDir, "globals.css"),
+      generateGlobalsCss(customProperties, dedupedCss || undefined),
+      "utf-8"
+    );
+
+    // package.json
+    fs.writeFileSync(
+      path.join(themeDir, "package.json"),
+      JSON.stringify(generatePackageJson(themeName), null, 2),
+      "utf-8"
+    );
+
+    console.log(`[extract] Componentize pass complete: ${themeDir}`);
+    console.log(`[extract] Typography scale: ${JSON.stringify(typographyScale)}`);
   }
 
-  const { customProperties } = mapSectionColors(allSections, brandPrimary, brandSecondary);
-  const typographyScale = extractTypographyScale(allSections);
-  console.log(
-    `[extract] Extracted ${allSections.length} sections, ${Object.keys(customProperties).length} custom color vars`
-  );
+  // ── Strip pass ─────────────────────────────────────────────────────────────
 
-  // Step 3: Strip content from JSX pages
-  console.log("[extract] Step 3: Stripping content from JSX pages...");
-  const jsxDir = path.join(cloneDir, "jsx", "pages");
-  const strippedPages: Record<string, { tsx: string; propsInterface: string }> = {};
+  if (passArg === "strip" || passArg === "both") {
+    console.log("[extract] === Strip Pass ===");
 
-  for (const file of fs.readdirSync(jsxDir).filter((f) => f.endsWith(".tsx"))) {
-    const jsx = fs.readFileSync(path.join(jsxDir, file), "utf-8");
-    const pageName = file
-      .replace(/Page\.tsx$/, "")
-      .replace(/\.tsx$/, "")
-      .toLowerCase();
-    const stripped = stripContent(jsx, {
+    const pagesDir = path.join(themeDir, "pages");
+    const componentDir = path.join(themeDir, "components");
+
+    if (!fs.existsSync(pagesDir)) {
+      console.error(
+        `[extract] Strip pass requires componentized theme at ${pagesDir}. Run --pass componentize first.`
+      );
+      process.exit(1);
+    }
+
+    const strippingConfig = {
       businessName: brief?.business.name ?? "",
       phone: brief?.business.phone,
       email: brief?.business.email,
       address: brief?.business.address
         ? { city: brief.business.address.city, postcode: brief.business.address.postcode }
         : undefined,
-    });
-    strippedPages[pageName] = { tsx: stripped.tsx, propsInterface: stripped.propsInterface };
-    console.log(`[extract]   Stripped ${file}: ${stripped.propCount} props`);
+    };
+
+    // Strip page layouts
+    for (const file of fs.readdirSync(pagesDir).filter((f) => f.endsWith(".tsx"))) {
+      const filePath = path.join(pagesDir, file);
+      const jsx = fs.readFileSync(filePath, "utf-8");
+      const stripped = stripContent(jsx, strippingConfig);
+      // Write stripped version (overwrite componentized version)
+      fs.writeFileSync(filePath, stripped.tsx, "utf-8");
+      console.log(`[extract]   Stripped ${file}: ${stripped.propCount} props replaced`);
+    }
+
+    // Strip header/footer components
+    for (const file of ["header.tsx", "footer.tsx"]) {
+      const filePath = path.join(componentDir, file);
+      if (fs.existsSync(filePath)) {
+        const jsx = fs.readFileSync(filePath, "utf-8");
+        const stripped = stripContent(jsx, strippingConfig);
+        fs.writeFileSync(filePath, stripped.tsx, "utf-8");
+        console.log(`[extract]   Stripped ${file}: ${stripped.propCount} props replaced`);
+      }
+    }
+
+    console.log("[extract] Strip pass complete");
   }
 
-  // Steps 4-10: Assemble theme package
-  console.log("[extract] Steps 4-10: Assembling theme package...");
-
-  // Create directories
-  const componentDir = path.join(themeDir, "components");
-  const pagesDir = path.join(themeDir, "pages");
-  for (const d of [themeDir, componentDir, pagesDir]) {
-    fs.mkdirSync(d, { recursive: true });
-  }
-
-  // Header + Footer Server Components
-  fs.writeFileSync(
-    path.join(componentDir, "header.tsx"),
-    generateHeaderComponent(themeName, strippedPages["home"]?.tsx ?? ""),
-    "utf-8"
-  );
-  fs.writeFileSync(
-    path.join(componentDir, "footer.tsx"),
-    generateFooterComponent(themeName),
-    "utf-8"
-  );
-  fs.writeFileSync(
-    path.join(componentDir, "index.ts"),
-    generateComponentsBarrel(themeName),
-    "utf-8"
-  );
-
-  // Page layouts
-  const pageNames = Object.keys(strippedPages);
-  for (const pageName of pageNames) {
-    const layout = generatePageLayout(themeName, pageName, strippedPages[pageName].tsx);
-    const filename = `${toPascalCase(pageName)}Page.tsx`;
-    fs.writeFileSync(path.join(pagesDir, filename), layout, "utf-8");
-  }
-  fs.writeFileSync(
-    path.join(pagesDir, "index.ts"),
-    generatePagesBarrel(pageNames.map((n) => `${toPascalCase(n)}Page`)),
-    "utf-8"
-  );
-
-  // index.ts barrel
-  fs.writeFileSync(path.join(themeDir, "index.ts"), generateIndexTs(themeName), "utf-8");
-
-  // globals.css
-  fs.writeFileSync(
-    path.join(themeDir, "globals.css"),
-    generateGlobalsCss(customProperties),
-    "utf-8"
-  );
-
-  // package.json
-  fs.writeFileSync(
-    path.join(themeDir, "package.json"),
-    JSON.stringify(generatePackageJson(themeName), null, 2),
-    "utf-8"
-  );
-
-  console.log(`[extract] Theme package assembled at: ${themeDir}`);
-  console.log(`[extract] Typography scale: ${JSON.stringify(typographyScale)}`);
   console.log("\nDone.");
 }
 
