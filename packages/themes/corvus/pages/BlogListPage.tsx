@@ -140,7 +140,7 @@ export function CorvusBlogListPage(props: BlogListPageProps) {
         <div className="section-container">
           <div className="bde-div-40-101 bde-div">
             <div className="bde-div-40-102 bde-div">
-              <h4 className="bde-heading-40-103 bde-heading">Subscribe to our Newsletter</h4>{" "}
+              <h4 className="bde-heading-40-103 bde-heading">{props.sectionTitle}</h4>{" "}
               <div className="bde-text-40-104 bde-text">
                 The latest event news, articles, and resources, sent to your inbox.
               </div>
@@ -285,12 +285,7 @@ export function CorvusBlogListPage(props: BlogListPageProps) {
             </div>
           </div>{" "}
           <div className="bde-div-40-126 bde-div">
-            <p className="de-cry-40-127 de-cry">
-              &copy; 2026 ColorCode Events. All Rights Reserved. Website by{" "}
-              <a href="https://luminus.agency" target="_blank">
-                Luminus
-              </a>
-            </p>{" "}
+            <p className="de-cry-40-127 de-cry">{props.body}</p>{" "}
             <div className="bde-social-icons-40-128 bde-social-icons">
               <a
                 className="breakdance-link bde-social-icons__icon-wrapper bde-social-icons__icon-facebook"
@@ -363,9 +358,7 @@ export function CorvusBlogListPage(props: BlogListPageProps) {
                 <div className="section-container">
                   <div className="bde-columns-85-104 bde-columns">
                     <div className="bde-column-85-105 bde-column">
-                      <h1 className="bde-heading-85-106 bde-heading">
-                        ColorCode: Buffalo Tickets Coming Soon!
-                      </h1>{" "}
+                      <h1 className="bde-heading-85-106 bde-heading">{props.heading}</h1>{" "}
                       <div className="bde-text-85-114 bde-text">
                         We are currently finalizing vendors & budgets before launching ticket sales
                         in March 2026. Add your info below or follow us on social media to get
@@ -464,7 +457,7 @@ export function CorvusBlogListPage(props: BlogListPageProps) {
                 <div className="section-container">
                   <div className="bde-columns-44-104 bde-columns">
                     <div className="bde-column-44-105 bde-column">
-                      <h1 className="bde-heading-44-106 bde-heading">Jump to:</h1>{" "}
+                      <h1 className="bde-heading-44-106 bde-heading">{props.sectionTitle}</h1>{" "}
                       <div id="tickets-info" className="bde-button-44-112 bde-button">
                         <a
                           className="breakdance-link button-atom button-atom--custom bde-button__button"
@@ -481,10 +474,7 @@ export function CorvusBlogListPage(props: BlogListPageProps) {
                         </div>
                       </div>{" "}
                       <div className="bde-rich-text-44-109 bde-rich-text breakdance-rich-text-styles">
-                        <p>
-                          <a href="/privacy-policy/">Privacy</a> |{" "}
-                          <a href="/code-of-conduct/">Code of Conduct</a>
-                        </p>
+                        <p>{props.description}</p>
                       </div>
                     </div>{" "}
                     <div className="bde-column-44-110 bde-column">

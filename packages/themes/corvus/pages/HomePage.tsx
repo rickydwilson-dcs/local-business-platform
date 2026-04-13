@@ -46,10 +46,10 @@ export function CorvusHomePage(props: HomePageProps) {
                 </div>{" "}
                 <div className="bde-column-17-106 bde-column">
                   <div className="bde-div-17-111 bde-div">
-                    <h3 className="bde-heading-17-108 bde-heading">Saturday</h3>{" "}
-                    <h3 className="bde-heading-17-109 bde-heading">July 25, 2026</h3>{" "}
-                    <h3 className="bde-heading-17-112 bde-heading">8:00am - 5:00pm</h3>{" "}
-                    <h3 className="bde-heading-17-110 bde-heading">Seneca One Tower</h3>{" "}
+                    <h3 className="bde-heading-17-108 bde-heading">{props.sectionTitle5}</h3>{" "}
+                    <h3 className="bde-heading-17-109 bde-heading">{props.sectionTitle6}</h3>{" "}
+                    <h3 className="bde-heading-17-112 bde-heading">{props.sectionTitle7}</h3>{" "}
+                    <h3 className="bde-heading-17-110 bde-heading">{props.sectionTitle8}</h3>{" "}
                     <div className="bde-div-17-712 bde-div">
                       <div className="bde-button-17-113 bde-button bde-preset-337602b3-5cf2-4cf7-883f-6d7491bb1230">
                         <a
@@ -72,7 +72,7 @@ export function CorvusHomePage(props: HomePageProps) {
               <div className="bde-div-17-115 bde-div">
                 <div className="bde-columns-17-117 bde-columns">
                   <div className="bde-column-17-118 bde-column">
-                    <h2 className="bde-heading-17-661 bde-heading">Call For Speakers</h2>{" "}
+                    <h2 className="bde-heading-17-661 bde-heading">{props.sectionTitle}</h2>{" "}
                     <div className="bde-text-17-121 bde-text">
                       Are you a passionate designer, developer, writer, or marketer dying to share
                       your hot takes on what's next or best practices? We are actively seeking a
@@ -231,7 +231,7 @@ export function CorvusHomePage(props: HomePageProps) {
                     </div>
                   </div>{" "}
                   <div className="bde-column-17-132 bde-column">
-                    <h2 className="bde-heading-17-660 bde-heading">Call For Sponsors</h2>{" "}
+                    <h2 className="bde-heading-17-660 bde-heading">{props.sectionTitle2}</h2>{" "}
                     <div className="bde-text-17-134 bde-text">
                       With crowds of designers, bloggers, developers, users, educators and more,
                       sponsors help support an event aimed to spread knowledge and inspiration to
@@ -253,7 +253,7 @@ export function CorvusHomePage(props: HomePageProps) {
               <div className="bde-div-17-717 bde-div">
                 <div className="bde-columns-17-718 bde-columns">
                   <div className="bde-column-17-725 bde-column">
-                    <h2 className="bde-heading-17-726 bde-heading">Call For Volunteers</h2>{" "}
+                    <h2 className="bde-heading-17-726 bde-heading">{props.sectionTitle3}</h2>{" "}
                     <div className="bde-text-17-727 bde-text">
                       With crowds of designers, bloggers, developers, users, educators and more,
                       sponsors help support an event aimed to spread knowledge and inspiration to
@@ -275,7 +275,7 @@ export function CorvusHomePage(props: HomePageProps) {
               <div className="bde-div-17-729 bde-div">
                 <div className="bde-columns-17-730 bde-columns">
                   <div className="bde-column-17-731 bde-column">
-                    <h2 className="bde-heading-17-733 bde-heading">Blog</h2>{" "}
+                    <h2 className="bde-heading-17-733 bde-heading">{props.sectionTitle4}</h2>{" "}
                     <div className="bde-post-list-17-732 bde-post-list">
                       <div className="bde-loop bde-loop-grid ee-posts ee-posts-grid">
                         <article className="bde-loop-item ee-post">
@@ -387,7 +387,7 @@ export function CorvusHomePage(props: HomePageProps) {
             <div className="section-container">
               <div className="bde-columns-17-143 bde-columns">
                 <div className="bde-column-17-144 bde-column">
-                  <h1 className="bde-heading-17-713 bde-heading">ColorCode Events</h1>
+                  <h1 className="bde-heading-17-713 bde-heading">{props.heading}</h1>
                 </div>{" "}
                 <div className="bde-column-17-145 bde-column"></div>
               </div>{" "}
@@ -404,15 +404,7 @@ export function CorvusHomePage(props: HomePageProps) {
                 </div>{" "}
                 <div className="bde-column-17-150 bde-column">
                   <div className="bde-rich-text-17-152 bde-rich-text breakdance-rich-text-styles">
-                    <p>
-                      ColorCode Events was born from the world of CMS "camps" in 2024. The former
-                      organizers of the local Buffalo camp event, that had run it for over 10 years
-                      saw a new opportunity to create marquee events that bring together talented
-                      designers, developers, and users of all web platforms in an inclusive way.
-                      ColorCode Events strives to provide an impactful forward thinking, strategic,
-                      and creative experience for all attendees regardless of skillset or platform.
-                      Let's creative something better together!
-                    </p>
+                    <p>{props.body}</p>
                   </div>{" "}
                   <div className="bde-button-17-716 bde-button bde-preset-337602b3-5cf2-4cf7-883f-6d7491bb1230">
                     <a
@@ -598,7 +590,7 @@ export function CorvusHomePage(props: HomePageProps) {
             <div className="section-container">
               <div className="bde-div-40-101 bde-div">
                 <div className="bde-div-40-102 bde-div">
-                  <h4 className="bde-heading-40-103 bde-heading">Subscribe to our Newsletter</h4>{" "}
+                  <h4 className="bde-heading-40-103 bde-heading">{props.sectionTitle9}</h4>{" "}
                   <div className="bde-text-40-104 bde-text">
                     The latest event news, articles, and resources, sent to your inbox.
                   </div>
@@ -743,12 +735,7 @@ export function CorvusHomePage(props: HomePageProps) {
                 </div>
               </div>{" "}
               <div className="bde-div-40-126 bde-div">
-                <p className="de-cry-40-127 de-cry">
-                  &copy; 2026 ColorCode Events. All Rights Reserved. Website by{" "}
-                  <a href="https://luminus.agency" target="_blank">
-                    Luminus
-                  </a>
-                </p>{" "}
+                <p className="de-cry-40-127 de-cry">{props.description}</p>{" "}
                 <div className="bde-social-icons-40-128 bde-social-icons">
                   <a
                     className="breakdance-link bde-social-icons__icon-wrapper bde-social-icons__icon-facebook"
@@ -821,9 +808,7 @@ export function CorvusHomePage(props: HomePageProps) {
                     <div className="section-container">
                       <div className="bde-columns-85-104 bde-columns">
                         <div className="bde-column-85-105 bde-column">
-                          <h1 className="bde-heading-85-106 bde-heading">
-                            ColorCode: Buffalo Tickets Coming Soon!
-                          </h1>{" "}
+                          <h1 className="bde-heading-85-106 bde-heading">{props.sectionTitle}</h1>{" "}
                           <div className="bde-text-85-114 bde-text">
                             We are currently finalizing vendors & budgets before launching ticket
                             sales in March 2026. Add your info below or follow us on social media to
@@ -922,7 +907,7 @@ export function CorvusHomePage(props: HomePageProps) {
                     <div className="section-container">
                       <div className="bde-columns-44-104 bde-columns">
                         <div className="bde-column-44-105 bde-column">
-                          <h1 className="bde-heading-44-106 bde-heading">Jump to:</h1>{" "}
+                          <h1 className="bde-heading-44-106 bde-heading">{props.subheading}</h1>{" "}
                           <div id="tickets-info" className="bde-button-44-112 bde-button">
                             <a
                               className="breakdance-link button-atom button-atom--custom bde-button__button"
@@ -939,10 +924,7 @@ export function CorvusHomePage(props: HomePageProps) {
                             </div>
                           </div>{" "}
                           <div className="bde-rich-text-44-109 bde-rich-text breakdance-rich-text-styles">
-                            <p>
-                              <a href="/privacy-policy/">Privacy</a> |{" "}
-                              <a href="/code-of-conduct/">Code of Conduct</a>
-                            </p>
+                            <p>{props.bodyText}</p>
                           </div>
                         </div>{" "}
                         <div className="bde-column-44-110 bde-column">
