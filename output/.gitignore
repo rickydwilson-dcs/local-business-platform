@@ -6,3 +6,7 @@
 !.gitignore
 !sessions/
 !sessions/**
+!archive/
+!archive/**
+!briefs/
+!briefs/**
