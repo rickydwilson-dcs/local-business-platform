@@ -16,7 +16,7 @@ export function CorvusHeader(props: Record<string, unknown>) {
           >
             <img
               className="bde-image2-18-111 bde-image2"
-              src="/clone-assets/corvus/images/colorcode-events-logo.svg"
+              src={props.imageSrc}
               alt="ColorCode Events"
               loading="lazy"
               sizes="(max-width: 1px) 100vw, 1px"

@@ -29,53 +29,13 @@ export function CorvusBlogPostPage(props: BlogPostPageProps) {
           <div className="bde-div-171-105 bde-div">
             <div className="bde-columns-171-106 bde-columns">
               <div className="bde-column-171-107 bde-column">
-                <h1 className="bde-heading-171-109 bde-heading">
-                  The Journey to Our First ColorCode: Buffalo
-                </h1>{" "}
+                <h1 className="bde-heading-171-109 bde-heading">{props.heading}</h1>{" "}
                 <div className="bde-text-171-110 bde-text">April 28, 2025</div>{" "}
                 <div className="bde-rich-text-171-111 bde-rich-text breakdance-rich-text-styles">
-                  <p>
-                    <img
-                      loading="lazy"
-                      decoding="async"
-                      className="alignright wp-image-97 "
-                      src="/clone-assets/corvus/images/colorcode-buffalo-share-1024x605.jpg"
-                      alt=""
-                      width="501"
-                      height="296"
-                      srcSet="images/colorcode-buffalo-share-1024x605.jpg 1024w, images/colorcode-buffalo-share-300x177.jpg 300w, images/colorcode-buffalo-share-768x454.jpg 768w, images/colorcode-buffalo-share.jpg 1150w"
-                      sizes="auto, (max-width: 501px) 100vw, 501px"
-                    />
-                    It&#8217;s crazy to think about the last year in the design, web dev, WordPress,
-                    and even marketing world in general. Between #WPDrama and AI taking over along
-                    with the stubborn effects of COVID and public gatherings lingering, it&#8217;s
-                    been a rough couple months (maybe years).
-                  </p>
-                  <p>
-                    In 2023, my agency{" "}
-                    <a href="https://luminus.agency" target="_blank" rel="noopener">
-                      Luminus
-                    </a>{" "}
-                    sponsored WordCamp Buffalo, I was personally unable to attend, but my team did
-                    and noted how great it was to see in-person events bouncing back. The event
-                    still didn&#8217;t quite &#8220;hit&#8221; the way it should as that post-COVID
-                    effect was still hampering the success of all events starting to come back. So
-                    in 2024 our agency got involved and took on the entire branding and marketing
-                    side of WordCamp Buffalo. The event looked the part and we all had a blast there
-                    and met great people, but it still felt underwhelming for some reason.
-                  </p>
-                  <p>
-                    So I joined up with Ron &amp; Ben as a co-organizer and as early as July 2024,
-                    we started planning for WordCamp Buffalo 2025. Well, that got derailed in
-                    September lol. Things got dicey with WordCamp Central, sponsors, wordpress.org
-                    logins, etc etc. We were already wondering what else we might be able to do if
-                    we attempted an independent event. #WPDrama pushed us over the edge and by
-                    October 2024, we had started planning for ColorCode.
-                  </p>
-                  <p>
-                    With the barriers torn down, we were able to accomplish a number of things we
-                    desperately wanted to do:
-                  </p>
+                  <p>{props.body}</p>
+                  <p>{props.description}</p>
+                  <p>{props.bodyText}</p>
+                  <p>{props.paragraph}</p>
                   <ol>
                     <li>Expand event topics beyond WordPress specific topics</li>
                     <li>
@@ -88,40 +48,11 @@ export function CorvusBlogPostPage(props: BlogPostPageProps) {
                       we wanted to
                     </li>
                   </ol>
-                  <p>
-                    Ron and Ben had run nearly 10 years worth of WordCamps, they didn&#8217;t go
-                    into this blind, but we still had to start from scratch.
-                  </p>
-                  <p>
-                    <img
-                      loading="lazy"
-                      decoding="async"
-                      className="alignleft wp-image-81 size-medium"
-                      src="/clone-assets/corvus/images/event-sponsor-luminus-300x300.jpg"
-                      alt=""
-                      width="300"
-                      height="300"
-                      srcSet="images/event-sponsor-luminus-300x300.jpg 300w, images/event-sponsor-luminus-1024x1024.jpg 1024w, images/event-sponsor-luminus-150x150.jpg 150w, images/event-sponsor-luminus-768x768.jpg 768w, images/event-sponsor-luminus-1536x1536.jpg 1536w, images/event-sponsor-luminus-400x400.jpg 400w, images/event-sponsor-luminus-600x600.jpg 600w, images/event-sponsor-luminus.jpg 2000w"
-                      sizes="auto, (max-width: 300px) 100vw, 300px"
-                    />
-                    It&#8217;s been a long 10 months of planning, pivoting, and work to get to this
-                    point. ColorCode: Buffalo 2025 is THIS WEEK and we have a full slate of amazing
-                    speakers, a sponsor roster that nearly fully funded the entire event allowing us
-                    to keep ticket costs low, and over 100 attendees ready to network, learn, and
-                    have fun together!
-                  </p>
-                  <p>
-                    This process has been a rollercoaster ride, but like any good rollercoaster,
-                    we&#8217;re having a blast and we&#8217;re ready to do it again!
-                  </p>
-                  <p>
-                    We believe in the power of the user, design, development, and marketing
-                    communities coming together.
-                  </p>
-                  <p>
-                    There&#8217;s more to this story and we can&#8217;t wait to build upon this
-                    foundation.
-                  </p>
+                  <p>{props.body5}</p>
+                  <p>{props.body6}</p>
+                  <p>{props.body7}</p>
+                  <p>{props.body8}</p>
+                  <p>{props.body9}</p>
                   <p>Thanks for coming along for the ride!</p>
                   <p>&#8211; Tim</p>
                 </div>{" "}
@@ -142,7 +73,7 @@ export function CorvusBlogPostPage(props: BlogPostPageProps) {
         <div className="section-container">
           <div className="bde-div-40-101 bde-div">
             <div className="bde-div-40-102 bde-div">
-              <h4 className="bde-heading-40-103 bde-heading">Subscribe to our Newsletter</h4>{" "}
+              <h4 className="bde-heading-40-103 bde-heading">{props.sectionTitle}</h4>{" "}
               <div className="bde-text-40-104 bde-text">
                 The latest event news, articles, and resources, sent to your inbox.
               </div>
@@ -160,7 +91,7 @@ export function CorvusBlogPostPage(props: BlogPostPageProps) {
                     aria-describedby="newsletter_email"
                     type="email"
                     name="fields[newsletter_email]"
-                    placeholder="emailname@example.com *"
+                    placeholder="{props.email} *"
                     value=""
                     required={true}
                   />
@@ -274,7 +205,7 @@ export function CorvusBlogPostPage(props: BlogPostPageProps) {
             <div className="bde-column-40-123 bde-column">
               <img
                 className="bde-image2-40-124 bde-image2"
-                src="/clone-assets/corvus/images/colorcode-events-logo.svg"
+                src={props.imageSrc}
                 alt="ColorCode Events"
                 loading="lazy"
                 sizes="(max-width: 1px) 100vw, 1px"
@@ -287,16 +218,11 @@ export function CorvusBlogPostPage(props: BlogPostPageProps) {
             </div>
           </div>{" "}
           <div className="bde-div-40-126 bde-div">
-            <p className="de-cry-40-127 de-cry">
-              &copy; 2026 ColorCode Events. All Rights Reserved. Website by{" "}
-              <a href="https://luminus.agency" target="_blank">
-                Luminus
-              </a>
-            </p>{" "}
+            <p className="de-cry-40-127 de-cry">{props.body10}</p>{" "}
             <div className="bde-social-icons-40-128 bde-social-icons">
               <a
                 className="breakdance-link bde-social-icons__icon-wrapper bde-social-icons__icon-facebook"
-                href="https://www.facebook.com/colorcodeevents/"
+                href={props.facebookUrl ?? "#"}
                 target="_blank"
                 data-type="url"
                 aria-label="facebook"
@@ -307,7 +233,7 @@ export function CorvusBlogPostPage(props: BlogPostPageProps) {
               </a>
               <a
                 className="breakdance-link bde-social-icons__icon-wrapper bde-social-icons__icon-instagram"
-                href="https://www.instagram.com/hellocolorcode"
+                href={props.instagramUrl ?? "#"}
                 target="_blank"
                 data-type="url"
                 aria-label="instagram"
@@ -318,7 +244,7 @@ export function CorvusBlogPostPage(props: BlogPostPageProps) {
               </a>
               <a
                 className="breakdance-link bde-social-icons__icon-wrapper bde-social-icons__icon-twitter"
-                href="https://x.com/ColorCodeEvents"
+                href={props.xUrl ?? "#"}
                 target="_blank"
                 data-type="url"
                 aria-label="twitter"
@@ -329,7 +255,7 @@ export function CorvusBlogPostPage(props: BlogPostPageProps) {
               </a>
               <a
                 className="breakdance-link bde-social-icons__icon-wrapper bde-social-icons__icon-linkedin"
-                href="https://www.linkedin.com/company/105866867"
+                href={props.linkedinUrl ?? "#"}
                 target="_blank"
                 data-type="url"
                 aria-label="linkedin"

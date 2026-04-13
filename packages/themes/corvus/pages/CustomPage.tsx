@@ -90,7 +90,7 @@ export function CorvusCustomPage(props: CustomPageProps) {
               <section className="tribe-tickets__commerce-order">
                 <header className="tribe-tickets__commerce-order-header">
                   <h3 className="tribe-common-h2 tribe-tickets__commerce-order-header-title">
-                    Whoops!
+                    {props.sectionTitle}
                   </h3>
                 </header>
                 <div className="tribe-common-b1 tribe-tickets__commerce-order-description">
@@ -106,7 +106,7 @@ export function CorvusCustomPage(props: CustomPageProps) {
         <div className="section-container">
           <div className="bde-div-40-101 bde-div">
             <div className="bde-div-40-102 bde-div">
-              <h4 className="bde-heading-40-103 bde-heading">Subscribe to our Newsletter</h4>{" "}
+              <h4 className="bde-heading-40-103 bde-heading">{props.sectionTitle2}</h4>{" "}
               <div className="bde-text-40-104 bde-text">
                 The latest event news, articles, and resources, sent to your inbox.
               </div>
@@ -124,7 +124,7 @@ export function CorvusCustomPage(props: CustomPageProps) {
                     aria-describedby="newsletter_email"
                     type="email"
                     name="fields[newsletter_email]"
-                    placeholder="emailname@example.com *"
+                    placeholder="{props.email} *"
                     value=""
                     required={true}
                   />
@@ -238,7 +238,7 @@ export function CorvusCustomPage(props: CustomPageProps) {
             <div className="bde-column-40-123 bde-column">
               <img
                 className="bde-image2-40-124 bde-image2"
-                src="/clone-assets/corvus/images/colorcode-events-logo.svg"
+                src={props.imageSrc}
                 alt="ColorCode Events"
                 loading="lazy"
                 sizes="(max-width: 1px) 100vw, 1px"
@@ -251,16 +251,11 @@ export function CorvusCustomPage(props: CustomPageProps) {
             </div>
           </div>{" "}
           <div className="bde-div-40-126 bde-div">
-            <p className="de-cry-40-127 de-cry">
-              &copy; 2026 ColorCode Events. All Rights Reserved. Website by{" "}
-              <a href="https://luminus.agency" target="_blank">
-                Luminus
-              </a>
-            </p>{" "}
+            <p className="de-cry-40-127 de-cry">{props.body}</p>{" "}
             <div className="bde-social-icons-40-128 bde-social-icons">
               <a
                 className="breakdance-link bde-social-icons__icon-wrapper bde-social-icons__icon-facebook"
-                href="https://www.facebook.com/colorcodeevents/"
+                href={props.facebookUrl ?? "#"}
                 target="_blank"
                 data-type="url"
                 aria-label="facebook"
@@ -271,7 +266,7 @@ export function CorvusCustomPage(props: CustomPageProps) {
               </a>
               <a
                 className="breakdance-link bde-social-icons__icon-wrapper bde-social-icons__icon-instagram"
-                href="https://www.instagram.com/hellocolorcode"
+                href={props.instagramUrl ?? "#"}
                 target="_blank"
                 data-type="url"
                 aria-label="instagram"
@@ -282,7 +277,7 @@ export function CorvusCustomPage(props: CustomPageProps) {
               </a>
               <a
                 className="breakdance-link bde-social-icons__icon-wrapper bde-social-icons__icon-twitter"
-                href="https://x.com/ColorCodeEvents"
+                href={props.xUrl ?? "#"}
                 target="_blank"
                 data-type="url"
                 aria-label="twitter"
@@ -293,7 +288,7 @@ export function CorvusCustomPage(props: CustomPageProps) {
               </a>
               <a
                 className="breakdance-link bde-social-icons__icon-wrapper bde-social-icons__icon-linkedin"
-                href="https://www.linkedin.com/company/105866867"
+                href={props.linkedinUrl ?? "#"}
                 target="_blank"
                 data-type="url"
                 aria-label="linkedin"

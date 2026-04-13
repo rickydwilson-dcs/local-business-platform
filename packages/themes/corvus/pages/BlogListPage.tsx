@@ -34,14 +34,14 @@ export function CorvusBlogListPage(props: BlogListPageProps) {
                     <article className="bde-loop-item ee-post">
                       <a
                         className="bde-loop-item__image-link ee-post-image-link "
-                        href="https://colorcode.events/blog/the-journey-to-our-first-colorcode-buffalo/"
+                        href="/blog/the-journey-to-our-first-colorcode-buffalo/"
                         aria-label="The Journey to Our First ColorCode: Buffalo"
                       >
                         <div className="bde-loop-item__image ee-post-image">
                           <img
                             width="1150"
                             height="680"
-                            src="/clone-assets/corvus/images/colorcode-buffalo-share.jpg"
+                            src={props.imageSrc}
                             className="attachment-full size-full wp-post-image"
                             alt=""
                             decoding="async"
@@ -55,7 +55,7 @@ export function CorvusBlogListPage(props: BlogListPageProps) {
                         <h3 className="ee-post-title">
                           <a
                             className="bde-loop-item__title-link ee-post-title-link"
-                            href="https://colorcode.events/blog/the-journey-to-our-first-colorcode-buffalo/"
+                            href="/blog/the-journey-to-our-first-colorcode-buffalo/"
                           >
                             The Journey to Our First ColorCode: Buffalo
                           </a>
@@ -72,7 +72,7 @@ export function CorvusBlogListPage(props: BlogListPageProps) {
                         </div>
                         <a
                           className="breakdance-link button-atom button-atom--primary bde-loop-item__button ee-post-button"
-                          href="https://colorcode.events/blog/the-journey-to-our-first-colorcode-buffalo/"
+                          href="/blog/the-journey-to-our-first-colorcode-buffalo/"
                           target="_self"
                           data-type=""
                         >
@@ -83,14 +83,14 @@ export function CorvusBlogListPage(props: BlogListPageProps) {
                     <article className="bde-loop-item ee-post">
                       <a
                         className="bde-loop-item__image-link ee-post-image-link "
-                        href="https://colorcode.events/blog/announcing-the-colorcode-art-battle/"
+                        href="/blog/announcing-the-colorcode-art-battle/"
                         aria-label="Announcing the ColorCode Art Battle"
                       >
                         <div className="bde-loop-item__image ee-post-image">
                           <img
                             width="2560"
                             height="1598"
-                            src="/clone-assets/corvus/images/Untitled_Artwork-2-scaled.jpg"
+                            src={props.heroImageSrc}
                             className="attachment-full size-full wp-post-image"
                             alt=""
                             decoding="async"
@@ -104,7 +104,7 @@ export function CorvusBlogListPage(props: BlogListPageProps) {
                         <h3 className="ee-post-title">
                           <a
                             className="bde-loop-item__title-link ee-post-title-link"
-                            href="https://colorcode.events/blog/announcing-the-colorcode-art-battle/"
+                            href="/blog/announcing-the-colorcode-art-battle/"
                           >
                             Announcing the ColorCode Art Battle
                           </a>
@@ -121,7 +121,7 @@ export function CorvusBlogListPage(props: BlogListPageProps) {
                         </div>
                         <a
                           className="breakdance-link button-atom button-atom--primary bde-loop-item__button ee-post-button"
-                          href="https://colorcode.events/blog/announcing-the-colorcode-art-battle/"
+                          href="/blog/announcing-the-colorcode-art-battle/"
                           target="_self"
                           data-type=""
                         >
@@ -140,7 +140,7 @@ export function CorvusBlogListPage(props: BlogListPageProps) {
         <div className="section-container">
           <div className="bde-div-40-101 bde-div">
             <div className="bde-div-40-102 bde-div">
-              <h4 className="bde-heading-40-103 bde-heading">Subscribe to our Newsletter</h4>{" "}
+              <h4 className="bde-heading-40-103 bde-heading">{props.sectionTitle}</h4>{" "}
               <div className="bde-text-40-104 bde-text">
                 The latest event news, articles, and resources, sent to your inbox.
               </div>
@@ -158,7 +158,7 @@ export function CorvusBlogListPage(props: BlogListPageProps) {
                     aria-describedby="newsletter_email"
                     type="email"
                     name="fields[newsletter_email]"
-                    placeholder="emailname@example.com *"
+                    placeholder="{props.email} *"
                     value=""
                     required={true}
                   />
@@ -272,7 +272,7 @@ export function CorvusBlogListPage(props: BlogListPageProps) {
             <div className="bde-column-40-123 bde-column">
               <img
                 className="bde-image2-40-124 bde-image2"
-                src="/clone-assets/corvus/images/colorcode-events-logo.svg"
+                src={props.cardImageSrc}
                 alt="ColorCode Events"
                 loading="lazy"
                 sizes="(max-width: 1px) 100vw, 1px"
@@ -285,16 +285,11 @@ export function CorvusBlogListPage(props: BlogListPageProps) {
             </div>
           </div>{" "}
           <div className="bde-div-40-126 bde-div">
-            <p className="de-cry-40-127 de-cry">
-              &copy; 2026 ColorCode Events. All Rights Reserved. Website by{" "}
-              <a href="https://luminus.agency" target="_blank">
-                Luminus
-              </a>
-            </p>{" "}
+            <p className="de-cry-40-127 de-cry">{props.body}</p>{" "}
             <div className="bde-social-icons-40-128 bde-social-icons">
               <a
                 className="breakdance-link bde-social-icons__icon-wrapper bde-social-icons__icon-facebook"
-                href="https://www.facebook.com/colorcodeevents/"
+                href={props.facebookUrl ?? "#"}
                 target="_blank"
                 data-type="url"
                 aria-label="facebook"
@@ -305,7 +300,7 @@ export function CorvusBlogListPage(props: BlogListPageProps) {
               </a>
               <a
                 className="breakdance-link bde-social-icons__icon-wrapper bde-social-icons__icon-instagram"
-                href="https://www.instagram.com/hellocolorcode"
+                href={props.instagramUrl ?? "#"}
                 target="_blank"
                 data-type="url"
                 aria-label="instagram"
@@ -316,7 +311,7 @@ export function CorvusBlogListPage(props: BlogListPageProps) {
               </a>
               <a
                 className="breakdance-link bde-social-icons__icon-wrapper bde-social-icons__icon-twitter"
-                href="https://x.com/ColorCodeEvents"
+                href={props.xUrl ?? "#"}
                 target="_blank"
                 data-type="url"
                 aria-label="twitter"
@@ -327,7 +322,7 @@ export function CorvusBlogListPage(props: BlogListPageProps) {
               </a>
               <a
                 className="breakdance-link bde-social-icons__icon-wrapper bde-social-icons__icon-linkedin"
-                href="https://www.linkedin.com/company/105866867"
+                href={props.linkedinUrl ?? "#"}
                 target="_blank"
                 data-type="url"
                 aria-label="linkedin"

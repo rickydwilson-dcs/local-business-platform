@@ -38,7 +38,7 @@ export function CorvusHomePage(props: HomePageProps) {
                 <div className="bde-column-17-105 bde-column">
                   <img
                     className="bde-image2-17-107 bde-image2"
-                    src="/clone-assets/corvus/images/colorcode-buffalo-logo-white.svg"
+                    src={props.imageSrc}
                     alt="ColorCode: Buffalo"
                     loading="lazy"
                     sizes="(max-width: 1px) 100vw, 1px"
@@ -46,10 +46,10 @@ export function CorvusHomePage(props: HomePageProps) {
                 </div>{" "}
                 <div className="bde-column-17-106 bde-column">
                   <div className="bde-div-17-111 bde-div">
-                    <h3 className="bde-heading-17-108 bde-heading">Saturday</h3>{" "}
-                    <h3 className="bde-heading-17-109 bde-heading">July 25, 2026</h3>{" "}
-                    <h3 className="bde-heading-17-112 bde-heading">8:00am - 5:00pm</h3>{" "}
-                    <h3 className="bde-heading-17-110 bde-heading">Seneca One Tower</h3>{" "}
+                    <h3 className="bde-heading-17-108 bde-heading">{props.sectionTitle5}</h3>{" "}
+                    <h3 className="bde-heading-17-109 bde-heading">{props.sectionTitle6}</h3>{" "}
+                    <h3 className="bde-heading-17-112 bde-heading">{props.sectionTitle7}</h3>{" "}
+                    <h3 className="bde-heading-17-110 bde-heading">{props.sectionTitle8}</h3>{" "}
                     <div className="bde-div-17-712 bde-div">
                       <div className="bde-button-17-113 bde-button bde-preset-337602b3-5cf2-4cf7-883f-6d7491bb1230">
                         <a
@@ -72,7 +72,7 @@ export function CorvusHomePage(props: HomePageProps) {
               <div className="bde-div-17-115 bde-div">
                 <div className="bde-columns-17-117 bde-columns">
                   <div className="bde-column-17-118 bde-column">
-                    <h2 className="bde-heading-17-661 bde-heading">Call For Speakers</h2>{" "}
+                    <h2 className="bde-heading-17-661 bde-heading">{props.sectionTitle}</h2>{" "}
                     <div className="bde-text-17-121 bde-text">
                       Are you a passionate designer, developer, writer, or marketer dying to share
                       your hot takes on what's next or best practices? We are actively seeking a
@@ -98,7 +98,7 @@ export function CorvusHomePage(props: HomePageProps) {
                             <div className="breakdance-image-clip">
                               <img
                                 className="breakdance-image-object"
-                                src="/clone-assets/corvus/images/shape-green-half-circle.png"
+                                src={props.heroImageSrc}
                                 width="200"
                                 height="200"
                                 srcSet="images/shape-green-half-circle.png 200w, images/shape-green-half-circle-150x150.png 150w"
@@ -114,7 +114,7 @@ export function CorvusHomePage(props: HomePageProps) {
                             <div className="breakdance-image-clip">
                               <img
                                 className="breakdance-image-object"
-                                src="/clone-assets/corvus/images/shape-orange-arrow.png"
+                                src={props.cardImageSrc}
                                 width="200"
                                 height="200"
                                 srcSet="images/shape-orange-arrow.png 200w, images/shape-orange-arrow-150x150.png 150w"
@@ -130,7 +130,7 @@ export function CorvusHomePage(props: HomePageProps) {
                             <div className="breakdance-image-clip">
                               <img
                                 className="breakdance-image-object"
-                                src="/clone-assets/corvus/images/shape-magenta-slashes.png"
+                                src={props.sectionImageSrc}
                                 width="200"
                                 height="200"
                                 srcSet="images/shape-magenta-slashes.png 200w, images/shape-magenta-slashes-150x150.png 150w"
@@ -146,7 +146,7 @@ export function CorvusHomePage(props: HomePageProps) {
                             <div className="breakdance-image-clip">
                               <img
                                 className="breakdance-image-object"
-                                src="/clone-assets/corvus/images/CCE_Speaker-1_1000x1000.png"
+                                src={props.imageSrc5}
                                 width="1000"
                                 height="1000"
                                 srcSet="images/CCE_Speaker-1_1000x1000.png 1000w, images/CCE_Speaker-1_1000x1000-300x300.png 300w, images/CCE_Speaker-1_1000x1000-150x150.png 150w, images/CCE_Speaker-1_1000x1000-768x768.png 768w"
@@ -170,7 +170,7 @@ export function CorvusHomePage(props: HomePageProps) {
                             <div className="breakdance-image-clip">
                               <img
                                 className="breakdance-image-object"
-                                src="/clone-assets/corvus/images/shape-green-arrow.png"
+                                src={props.imageSrc6}
                                 width="200"
                                 height="200"
                                 srcSet="images/shape-green-arrow.png 200w, images/shape-green-arrow-150x150.png 150w"
@@ -186,7 +186,7 @@ export function CorvusHomePage(props: HomePageProps) {
                             <div className="breakdance-image-clip">
                               <img
                                 className="breakdance-image-object"
-                                src="/clone-assets/corvus/images/shape-yellow-box.png"
+                                src={props.imageSrc7}
                                 width="200"
                                 height="200"
                                 srcSet="images/shape-yellow-box.png 200w, images/shape-yellow-box-150x150.png 150w"
@@ -202,7 +202,7 @@ export function CorvusHomePage(props: HomePageProps) {
                             <div className="breakdance-image-clip">
                               <img
                                 className="breakdance-image-object"
-                                src="/clone-assets/corvus/images/shape-magenta-circle.png"
+                                src={props.imageSrc8}
                                 width="200"
                                 height="200"
                                 srcSet="images/shape-magenta-circle.png 200w, images/shape-magenta-circle-150x150.png 150w"
@@ -218,7 +218,7 @@ export function CorvusHomePage(props: HomePageProps) {
                             <div className="breakdance-image-clip">
                               <img
                                 className="breakdance-image-object"
-                                src="/clone-assets/corvus/images/CCE_Sponsor-1_1000x1000.png"
+                                src={props.imageSrc9}
                                 width="1000"
                                 height="1000"
                                 srcSet="images/CCE_Sponsor-1_1000x1000.png 1000w, images/CCE_Sponsor-1_1000x1000-300x300.png 300w, images/CCE_Sponsor-1_1000x1000-150x150.png 150w, images/CCE_Sponsor-1_1000x1000-768x768.png 768w"
@@ -231,7 +231,7 @@ export function CorvusHomePage(props: HomePageProps) {
                     </div>
                   </div>{" "}
                   <div className="bde-column-17-132 bde-column">
-                    <h2 className="bde-heading-17-660 bde-heading">Call For Sponsors</h2>{" "}
+                    <h2 className="bde-heading-17-660 bde-heading">{props.sectionTitle2}</h2>{" "}
                     <div className="bde-text-17-134 bde-text">
                       With crowds of designers, bloggers, developers, users, educators and more,
                       sponsors help support an event aimed to spread knowledge and inspiration to
@@ -253,7 +253,7 @@ export function CorvusHomePage(props: HomePageProps) {
               <div className="bde-div-17-717 bde-div">
                 <div className="bde-columns-17-718 bde-columns">
                   <div className="bde-column-17-725 bde-column">
-                    <h2 className="bde-heading-17-726 bde-heading">Call For Volunteers</h2>{" "}
+                    <h2 className="bde-heading-17-726 bde-heading">{props.sectionTitle3}</h2>{" "}
                     <div className="bde-text-17-727 bde-text">
                       With crowds of designers, bloggers, developers, users, educators and more,
                       sponsors help support an event aimed to spread knowledge and inspiration to
@@ -275,20 +275,20 @@ export function CorvusHomePage(props: HomePageProps) {
               <div className="bde-div-17-729 bde-div">
                 <div className="bde-columns-17-730 bde-columns">
                   <div className="bde-column-17-731 bde-column">
-                    <h2 className="bde-heading-17-733 bde-heading">Blog</h2>{" "}
+                    <h2 className="bde-heading-17-733 bde-heading">{props.sectionTitle4}</h2>{" "}
                     <div className="bde-post-list-17-732 bde-post-list">
                       <div className="bde-loop bde-loop-grid ee-posts ee-posts-grid">
                         <article className="bde-loop-item ee-post">
                           <a
                             className="bde-loop-item__image-link ee-post-image-link "
-                            href="https://colorcode.events/blog/the-journey-to-our-first-colorcode-buffalo/"
+                            href="/blog/the-journey-to-our-first-colorcode-buffalo/"
                             aria-label="The Journey to Our First ColorCode: Buffalo"
                           >
                             <div className="bde-loop-item__image ee-post-image">
                               <img
                                 width="1150"
                                 height="680"
-                                src="/clone-assets/corvus/images/colorcode-buffalo-share.jpg"
+                                src={props.imageSrc10}
                                 className="attachment-full size-full wp-post-image"
                                 alt=""
                                 decoding="async"
@@ -302,7 +302,7 @@ export function CorvusHomePage(props: HomePageProps) {
                             <h3 className="ee-post-title">
                               <a
                                 className="bde-loop-item__title-link ee-post-title-link"
-                                href="https://colorcode.events/blog/the-journey-to-our-first-colorcode-buffalo/"
+                                href="/blog/the-journey-to-our-first-colorcode-buffalo/"
                               >
                                 The Journey to Our First ColorCode: Buffalo
                               </a>
@@ -319,7 +319,7 @@ export function CorvusHomePage(props: HomePageProps) {
                             </div>
                             <a
                               className="breakdance-link button-atom button-atom--primary bde-loop-item__button ee-post-button"
-                              href="https://colorcode.events/blog/the-journey-to-our-first-colorcode-buffalo/"
+                              href="/blog/the-journey-to-our-first-colorcode-buffalo/"
                               target="_self"
                               data-type=""
                             >
@@ -330,14 +330,14 @@ export function CorvusHomePage(props: HomePageProps) {
                         <article className="bde-loop-item ee-post">
                           <a
                             className="bde-loop-item__image-link ee-post-image-link "
-                            href="https://colorcode.events/blog/announcing-the-colorcode-art-battle/"
+                            href="/blog/announcing-the-colorcode-art-battle/"
                             aria-label="Announcing the ColorCode Art Battle"
                           >
                             <div className="bde-loop-item__image ee-post-image">
                               <img
                                 width="2560"
                                 height="1598"
-                                src="/clone-assets/corvus/images/Untitled_Artwork-2-scaled.jpg"
+                                src={props.imageSrc11}
                                 className="attachment-full size-full wp-post-image"
                                 alt=""
                                 decoding="async"
@@ -351,7 +351,7 @@ export function CorvusHomePage(props: HomePageProps) {
                             <h3 className="ee-post-title">
                               <a
                                 className="bde-loop-item__title-link ee-post-title-link"
-                                href="https://colorcode.events/blog/announcing-the-colorcode-art-battle/"
+                                href="/blog/announcing-the-colorcode-art-battle/"
                               >
                                 Announcing the ColorCode Art Battle
                               </a>
@@ -368,7 +368,7 @@ export function CorvusHomePage(props: HomePageProps) {
                             </div>
                             <a
                               className="breakdance-link button-atom button-atom--primary bde-loop-item__button ee-post-button"
-                              href="https://colorcode.events/blog/announcing-the-colorcode-art-battle/"
+                              href="/blog/announcing-the-colorcode-art-battle/"
                               target="_self"
                               data-type=""
                             >
@@ -387,7 +387,7 @@ export function CorvusHomePage(props: HomePageProps) {
             <div className="section-container">
               <div className="bde-columns-17-143 bde-columns">
                 <div className="bde-column-17-144 bde-column">
-                  <h1 className="bde-heading-17-713 bde-heading">ColorCode Events</h1>
+                  <h1 className="bde-heading-17-713 bde-heading">{props.heading}</h1>
                 </div>{" "}
                 <div className="bde-column-17-145 bde-column"></div>
               </div>{" "}
@@ -395,7 +395,7 @@ export function CorvusHomePage(props: HomePageProps) {
                 <div className="bde-column-17-148 bde-column">
                   <img
                     className="bde-image2-17-151 bde-image2"
-                    src="/clone-assets/corvus/images/row-magenta-arrows.png"
+                    src={props.imageSrc12}
                     loading="lazy"
                     srcSet="images/row-magenta-arrows.png 590w, images/row-magenta-arrows-300x33.png 300w"
                     sizes="(max-width: 590px) 100vw, 590px"
@@ -404,15 +404,7 @@ export function CorvusHomePage(props: HomePageProps) {
                 </div>{" "}
                 <div className="bde-column-17-150 bde-column">
                   <div className="bde-rich-text-17-152 bde-rich-text breakdance-rich-text-styles">
-                    <p>
-                      ColorCode Events was born from the world of CMS "camps" in 2024. The former
-                      organizers of the local Buffalo camp event, that had run it for over 10 years
-                      saw a new opportunity to create marquee events that bring together talented
-                      designers, developers, and users of all web platforms in an inclusive way.
-                      ColorCode Events strives to provide an impactful forward thinking, strategic,
-                      and creative experience for all attendees regardless of skillset or platform.
-                      Let's creative something better together!
-                    </p>
+                    <p>{props.body}</p>
                   </div>{" "}
                   <div className="bde-button-17-716 bde-button bde-preset-337602b3-5cf2-4cf7-883f-6d7491bb1230">
                     <a
@@ -444,7 +436,7 @@ export function CorvusHomePage(props: HomePageProps) {
                         <figure className="ee-gallery-item-figure">
                           <img
                             className="breakdance-image-object"
-                            src="/clone-assets/corvus/images/color-code-buffalo-2025-social-5-768x1152.jpg"
+                            src={props.imageSrc13}
                             width="768"
                             height="1152"
                             srcSet="images/color-code-buffalo-2025-social-5.jpg 1333w, images/color-code-buffalo-2025-social-5-200x300.jpg 200w, images/color-code-buffalo-2025-social-5-682x1024.jpg 682w, images/color-code-buffalo-2025-social-5-768x1152.jpg 768w, images/color-code-buffalo-2025-social-5-1024x1536.jpg 1024w"
@@ -463,7 +455,7 @@ export function CorvusHomePage(props: HomePageProps) {
                         <figure className="ee-gallery-item-figure">
                           <img
                             className="breakdance-image-object"
-                            src="/clone-assets/corvus/images/color-code-buffalo-2025-lewis-768x512.jpg"
+                            src={props.imageSrc14}
                             width="768"
                             height="512"
                             srcSet="images/color-code-buffalo-2025-lewis.jpg 2000w, images/color-code-buffalo-2025-lewis-300x200.jpg 300w, images/color-code-buffalo-2025-lewis-1024x682.jpg 1024w, images/color-code-buffalo-2025-lewis-768x512.jpg 768w, images/color-code-buffalo-2025-lewis-1536x1024.jpg 1536w"
@@ -482,7 +474,7 @@ export function CorvusHomePage(props: HomePageProps) {
                         <figure className="ee-gallery-item-figure">
                           <img
                             className="breakdance-image-object"
-                            src="/clone-assets/corvus/images/color-code-buffalo-2025-social-4-768x512.jpg"
+                            src={props.imageSrc15}
                             width="768"
                             height="512"
                             srcSet="images/color-code-buffalo-2025-social-4.jpg 2000w, images/color-code-buffalo-2025-social-4-300x200.jpg 300w, images/color-code-buffalo-2025-social-4-1024x682.jpg 1024w, images/color-code-buffalo-2025-social-4-768x512.jpg 768w, images/color-code-buffalo-2025-social-4-1536x1024.jpg 1536w"
@@ -501,7 +493,7 @@ export function CorvusHomePage(props: HomePageProps) {
                         <figure className="ee-gallery-item-figure">
                           <img
                             className="breakdance-image-object"
-                            src="/clone-assets/corvus/images/color-code-buffalo-2025-cleary-768x512.jpg"
+                            src={props.imageSrc16}
                             width="768"
                             height="512"
                             srcSet="images/color-code-buffalo-2025-cleary.jpg 2000w, images/color-code-buffalo-2025-cleary-300x200.jpg 300w, images/color-code-buffalo-2025-cleary-1024x682.jpg 1024w, images/color-code-buffalo-2025-cleary-768x512.jpg 768w, images/color-code-buffalo-2025-cleary-1536x1024.jpg 1536w"
@@ -520,7 +512,7 @@ export function CorvusHomePage(props: HomePageProps) {
                         <figure className="ee-gallery-item-figure">
                           <img
                             className="breakdance-image-object"
-                            src="/clone-assets/corvus/images/color-code-buffalo-2025-social-3-768x512.jpg"
+                            src={props.imageSrc17}
                             width="768"
                             height="512"
                             srcSet="images/color-code-buffalo-2025-social-3.jpg 2000w, images/color-code-buffalo-2025-social-3-300x200.jpg 300w, images/color-code-buffalo-2025-social-3-1024x682.jpg 1024w, images/color-code-buffalo-2025-social-3-768x512.jpg 768w, images/color-code-buffalo-2025-social-3-1536x1024.jpg 1536w"
@@ -539,7 +531,7 @@ export function CorvusHomePage(props: HomePageProps) {
                         <figure className="ee-gallery-item-figure">
                           <img
                             className="breakdance-image-object"
-                            src="/clone-assets/corvus/images/event-sponsor-luminus-768x768.jpg"
+                            src={props.imageSrc18}
                             width="768"
                             height="768"
                             srcSet="images/event-sponsor-luminus.jpg 2000w, images/event-sponsor-luminus-300x300.jpg 300w, images/event-sponsor-luminus-1024x1024.jpg 1024w, images/event-sponsor-luminus-150x150.jpg 150w, images/event-sponsor-luminus-768x768.jpg 768w, images/event-sponsor-luminus-1536x1536.jpg 1536w, images/event-sponsor-luminus-400x400.jpg 400w, images/event-sponsor-luminus-600x600.jpg 600w"
@@ -558,7 +550,7 @@ export function CorvusHomePage(props: HomePageProps) {
                         <figure className="ee-gallery-item-figure">
                           <img
                             className="breakdance-image-object"
-                            src="/clone-assets/corvus/images/color-code-buffalo-2025-reimann-768x512.jpg"
+                            src={props.imageSrc19}
                             width="768"
                             height="512"
                             srcSet="images/color-code-buffalo-2025-reimann.jpg 2000w, images/color-code-buffalo-2025-reimann-300x200.jpg 300w, images/color-code-buffalo-2025-reimann-1024x682.jpg 1024w, images/color-code-buffalo-2025-reimann-768x512.jpg 768w, images/color-code-buffalo-2025-reimann-1536x1024.jpg 1536w"
@@ -577,7 +569,7 @@ export function CorvusHomePage(props: HomePageProps) {
                         <figure className="ee-gallery-item-figure">
                           <img
                             className="breakdance-image-object"
-                            src="/clone-assets/corvus/images/color-code-buffalo-2025-bolling-768x512.jpg"
+                            src={props.imageSrc20}
                             width="768"
                             height="512"
                             srcSet="images/color-code-buffalo-2025-bolling.jpg 2000w, images/color-code-buffalo-2025-bolling-300x200.jpg 300w, images/color-code-buffalo-2025-bolling-1024x682.jpg 1024w, images/color-code-buffalo-2025-bolling-768x512.jpg 768w, images/color-code-buffalo-2025-bolling-1536x1024.jpg 1536w"
@@ -598,7 +590,7 @@ export function CorvusHomePage(props: HomePageProps) {
             <div className="section-container">
               <div className="bde-div-40-101 bde-div">
                 <div className="bde-div-40-102 bde-div">
-                  <h4 className="bde-heading-40-103 bde-heading">Subscribe to our Newsletter</h4>{" "}
+                  <h4 className="bde-heading-40-103 bde-heading">{props.sectionTitle9}</h4>{" "}
                   <div className="bde-text-40-104 bde-text">
                     The latest event news, articles, and resources, sent to your inbox.
                   </div>
@@ -616,7 +608,7 @@ export function CorvusHomePage(props: HomePageProps) {
                         aria-describedby="newsletter_email"
                         type="email"
                         name="fields[newsletter_email]"
-                        placeholder="emailname@example.com *"
+                        placeholder="{props.email} *"
                         value=""
                         required={true}
                       />
@@ -730,7 +722,7 @@ export function CorvusHomePage(props: HomePageProps) {
                 <div className="bde-column-40-123 bde-column">
                   <img
                     className="bde-image2-40-124 bde-image2"
-                    src="/clone-assets/corvus/images/colorcode-events-logo.svg"
+                    src={props.imageSrc21}
                     alt="ColorCode Events"
                     loading="lazy"
                     sizes="(max-width: 1px) 100vw, 1px"
@@ -743,16 +735,11 @@ export function CorvusHomePage(props: HomePageProps) {
                 </div>
               </div>{" "}
               <div className="bde-div-40-126 bde-div">
-                <p className="de-cry-40-127 de-cry">
-                  &copy; 2026 ColorCode Events. All Rights Reserved. Website by{" "}
-                  <a href="https://luminus.agency" target="_blank">
-                    Luminus
-                  </a>
-                </p>{" "}
+                <p className="de-cry-40-127 de-cry">{props.description}</p>{" "}
                 <div className="bde-social-icons-40-128 bde-social-icons">
                   <a
                     className="breakdance-link bde-social-icons__icon-wrapper bde-social-icons__icon-facebook"
-                    href="https://www.facebook.com/colorcodeevents/"
+                    href={props.facebookUrl ?? "#"}
                     target="_blank"
                     data-type="url"
                     aria-label="facebook"
@@ -763,7 +750,7 @@ export function CorvusHomePage(props: HomePageProps) {
                   </a>
                   <a
                     className="breakdance-link bde-social-icons__icon-wrapper bde-social-icons__icon-instagram"
-                    href="https://www.instagram.com/hellocolorcode"
+                    href={props.instagramUrl ?? "#"}
                     target="_blank"
                     data-type="url"
                     aria-label="instagram"
@@ -774,7 +761,7 @@ export function CorvusHomePage(props: HomePageProps) {
                   </a>
                   <a
                     className="breakdance-link bde-social-icons__icon-wrapper bde-social-icons__icon-twitter"
-                    href="https://x.com/ColorCodeEvents"
+                    href={props.xUrl ?? "#"}
                     target="_blank"
                     data-type="url"
                     aria-label="twitter"
@@ -785,7 +772,7 @@ export function CorvusHomePage(props: HomePageProps) {
                   </a>
                   <a
                     className="breakdance-link bde-social-icons__icon-wrapper bde-social-icons__icon-linkedin"
-                    href="https://www.linkedin.com/company/105866867"
+                    href={props.linkedinUrl ?? "#"}
                     target="_blank"
                     data-type="url"
                     aria-label="linkedin"
