@@ -9,7 +9,7 @@
 import type { Metadata } from 'next';
 import type { SiteConfigSummary } from '@platform/core-components';
 import { Schema } from '@platform/core-components';
-import { CorvusBlogPage } from '@platform/themes/corvus/pages';
+import { CorvusBlogListPage } from '@platform/themes/corvus/pages';
 import { getBlogPosts } from '@/lib/content';
 import { absUrl } from '@/lib/site';
 import { siteConfig } from '@/site.config';
@@ -44,7 +44,7 @@ export default async function BlogPage() {
 
   return (
     <>
-      <CorvusBlogPage
+      <CorvusBlogListPage
         siteConfig={siteSummary}
         posts={posts.map((p) => ({
           slug: p.slug,

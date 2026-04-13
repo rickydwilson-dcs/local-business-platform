@@ -1,12 +1,15 @@
 interface CustomPageProps {
-  [key: string]: unknown;
+  content?: Record<string, string>;
+  items?: Array<{ slug: string; title: string; description?: string }>;
 }
 
-export function CorvusCustomPage(props: CustomPageProps) {
-  void props;
+export function CorvusCustomPage({ content = {}, items = [] }: CustomPageProps) {
   return (
-    <main className="page-CustomPage">
-      {/* corvus CustomPage layout — stub, to be populated by pipeline */}
+    <main className="page-custom">
+      {/* corvus custom layout — extracted from reference clone */}
+      {items.map((item: { slug: string; title: string; description?: string }) => (
+        <div key={item.slug}>{item.title}</div>
+      ))}
     </main>
   );
 }
