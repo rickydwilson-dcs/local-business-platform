@@ -26,8 +26,9 @@ import { createContext, useContext } from "react";
 // path to theme-system (which would violate the composite rootDir constraint).
 // ============================================================
 
-/** Identifies which named visual theme is active. */
+/** Identifies which named visual theme is active. Must stay in sync with THEME_NAMES in packages/theme-system/src/types.ts. */
 export type ThemeName =
+  // Active themes
   | "atlas"
   | "castor"
   | "corvus"
@@ -38,7 +39,28 @@ export type ThemeName =
   | "polaris"
   | "sirius"
   | "solaris"
-  | "vega";
+  | "vega"
+  // Reserved names for future themes
+  | "altair"
+  | "aquila"
+  | "aries"
+  | "auriga"
+  | "bootes"
+  | "callisto"
+  | "centauri"
+  | "draco"
+  | "eridanus"
+  | "fornax"
+  | "gemini"
+  | "hydra"
+  | "indus"
+  | "leo"
+  | "libra"
+  | "mensa"
+  | "norma"
+  | "pegasus"
+  | "rigel"
+  | "tucana";
 
 /** Metadata describing which component variants a theme uses. */
 export interface ComponentRegistry {

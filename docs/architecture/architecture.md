@@ -18,6 +18,7 @@ For detailed explanations of how each system works, see:
 | [How Site Creation Works](how-site-creation-works.md)                       | How new business clients become deployed websites                           |
 | [How the Ingestion Pipeline Works](how-ingestion-pipeline-works.md)         | How screenshots become analysed components and theme packages               |
 | [How the Stitch Design Pipeline Works](how-stitch-design-pipeline-works.md) | How Stitch AI designs become tokens, theme packages, and test sites         |
+| [Clone Package Format](../pipeline/CLONE_PACKAGE_FORMAT.md)                 | The CPF intermediate format used by the clone-to-scaffold pipeline          |
 
 ## Repository Structure
 
@@ -45,6 +46,7 @@ local-business-platform/
 ├── tools/                          # Site creation & deployment CLI tools
 ├── docs/                           # Documentation
 │   ├── architecture/               # How the systems work
+│   ├── pipeline/                   # Pipeline-specific specs (CPF, etc.)
 │   ├── standards/                  # How to do things right
 │   └── guides/                     # How to do common tasks
 └── .github/workflows/              # CI/CD workflows
