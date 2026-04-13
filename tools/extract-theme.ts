@@ -38,6 +38,28 @@ function parseArgs(): { clone?: string; brief?: string; pass?: string } {
   return result;
 }
 
+// ── Brief auto-discovery ──────────────────────────────────────────────────────
+
+function discoverBrief(cloneName: string): JobBrief | null {
+  const briefsDir = path.resolve(__dirname, "..", "output", "briefs");
+  if (!fs.existsSync(briefsDir)) return null;
+
+  for (const file of fs.readdirSync(briefsDir)) {
+    if (!file.endsWith(".json")) continue;
+    try {
+      const raw = JSON.parse(fs.readFileSync(path.join(briefsDir, file), "utf-8")) as unknown;
+      const brief = JobBriefSchema.parse(raw);
+      if (brief.theme?.name === cloneName) {
+        console.log(`[extract] Auto-discovered brief: output/briefs/${file}`);
+        return brief;
+      }
+    } catch {
+      // Skip invalid briefs
+    }
+  }
+  return null;
+}
+
 // ── Helpers ──────────────────────────────────────────────────────────────────
 
 function toPascalCase(name: string): string {
@@ -411,6 +433,12 @@ async function main() {
     cloneName = brief.theme.name ?? brief.id;
   } else if (args.clone) {
     cloneName = args.clone;
+    const discovered = discoverBrief(cloneName);
+    if (discovered) {
+      brief = discovered;
+    } else {
+      console.log("[extract] No brief found — strip pass will use limited defaults");
+    }
   } else {
     console.error(
       "Usage: extract-theme.ts --clone <name> [--pass componentize|strip|both] | --brief <path>"
