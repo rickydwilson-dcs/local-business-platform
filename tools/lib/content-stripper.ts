@@ -13,6 +13,7 @@ export interface ContentStrippingConfig {
   phone?: string;
   email?: string;
   address?: { city: string; postcode: string };
+  sourceDomain?: string; // e.g. "https://colorcode.events" — clone origin domain
 }
 
 export interface StrippedComponent {
@@ -202,6 +203,42 @@ export function stripContent(jsx: string, config: ContentStrippingConfig): Strip
     props[propName] = "string";
     return `src={props.${propName}}`;
   });
+
+  // 8. Clone domain URLs → relative paths
+  if (config.sourceDomain) {
+    const domain = config.sourceDomain.replace(/\/$/, ""); // strip trailing slash
+    // href="https://colorcode.events/about/" → href="/about/"
+    // href="https://colorcode.events" → href="/"
+    const domainUrlRe = new RegExp(`(href|src|action)="${escapeRegex(domain)}(/[^"]*)?(")`, "gi");
+    result = result.replace(domainUrlRe, (_match, attr, pathPart, close) => {
+      return `${attr}="${pathPart || "/"}"${close.replace(/^"/, "")}`;
+    });
+  }
+
+  // 9. Social media URLs → props
+  const socialPatterns = [
+    { re: /href="https?:\/\/(www\.)?facebook\.com\/[^"]+"/gi, prop: "facebookUrl" },
+    { re: /href="https?:\/\/(www\.)?instagram\.com\/[^"]+"/gi, prop: "instagramUrl" },
+    { re: /href="https?:\/\/(www\.)?twitter\.com\/[^"]+"/gi, prop: "twitterUrl" },
+    { re: /href="https?:\/\/(www\.)?x\.com\/[^"]+"/gi, prop: "xUrl" },
+    { re: /href="https?:\/\/(www\.)?linkedin\.com\/[^"]+"/gi, prop: "linkedinUrl" },
+    { re: /href="https?:\/\/(www\.)?youtube\.com\/[^"]+"/gi, prop: "youtubeUrl" },
+    { re: /href="https?:\/\/(www\.)?tiktok\.com\/[^"]+"/gi, prop: "tiktokUrl" },
+  ];
+
+  for (const { re, prop } of socialPatterns) {
+    if (re.test(result)) {
+      re.lastIndex = 0; // reset after test
+      result = result.replace(re, () => {
+        props[prop] = "string";
+        return `href={props.${prop} ?? "#"}`;
+      });
+    }
+  }
+
+  // 10. Remaining external URLs → "#" (agency credits, partner links, etc.)
+  // Only process href= attributes; skip xmlns and SVG namespace declarations
+  result = result.replace(/href="https?:\/\/[^"]+"/gi, 'href="#"');
 
   // Remove duplicate props that may have been added above
   const dedupedProps = { ...props };
