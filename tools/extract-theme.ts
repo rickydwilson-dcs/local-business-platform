@@ -14,8 +14,16 @@
 import * as fs from "fs";
 import * as path from "path";
 
+import Anthropic from "@anthropic-ai/sdk";
 import { JobBriefSchema, type JobBrief } from "./lib/pipeline-brief-types";
 import { stripContent } from "./lib/content-stripper";
+import { validateCPF } from "./lib/cpf-validator";
+import { mapSectionColors, extractTypographyScale } from "./lib/computed-style-token-mapper";
+import type { SectionComputedStyle } from "./lib/computed-style-extractor";
+import type { ReferenceAnalysis, SectionBlueprint } from "./lib/reference-analysis-types";
+import { REFERENCE_ANALYSIS_PROMPT } from "./lib/reference-analysis-prompts";
+import { enrichBlueprintsForPage } from "./lib/clone-section-extractor";
+import { generateThemeComponentsFromClone } from "./lib/theme-component-generator";
 
 // ── Argument parsing ─────────────────────────────────────────────────────────
 
@@ -225,6 +233,154 @@ export function ${pascal}${pagePascal}Page(props: ${pagePascal}PageProps) {
 `;
 }
 
+// ── Translate pass helpers ────────────────────────────────────────────────────
+
+/**
+ * Create minimal placeholder blueprints when vision analysis is unavailable.
+ */
+function createMinimalBlueprints(themeName: string): SectionBlueprint[] {
+  const pascal = toPascalCase(themeName);
+  return [
+    {
+      id: "hero",
+      name: "Hero",
+      category: "Hero",
+      purpose: "Full-bleed hero section with heading and CTA",
+      layoutPattern: "full-bleed with overlay",
+      contentSlots: ["heading", "subheading", "ctaText", "ctaHref", "backgroundImage"],
+      interactionNeeds: "none",
+      componentFileName: "hero.tsx",
+      componentExportName: `${pascal}Hero`,
+      tokenUsageHints: ["bg-brand-primary", "text-on-brand-primary"],
+      confidence: "low",
+      referenceSection: "hero",
+    },
+    {
+      id: "features",
+      name: "Features",
+      category: "Content",
+      purpose: "Feature cards or services grid",
+      layoutPattern: "3-col grid",
+      contentSlots: ["heading", "items"],
+      interactionNeeds: "none",
+      componentFileName: "features.tsx",
+      componentExportName: `${pascal}Features`,
+      tokenUsageHints: ["bg-surface-background", "text-surface-foreground"],
+      confidence: "low",
+      referenceSection: "features",
+    },
+    {
+      id: "cta",
+      name: "CallToAction",
+      category: "CTA",
+      purpose: "Call to action band",
+      layoutPattern: "full-bleed band",
+      contentSlots: ["heading", "subheading", "ctaText", "ctaHref"],
+      interactionNeeds: "none",
+      componentFileName: "call-to-action.tsx",
+      componentExportName: `${pascal}CallToAction`,
+      tokenUsageHints: ["bg-brand-primary", "text-on-brand-primary"],
+      confidence: "low",
+      referenceSection: "cta",
+    },
+  ];
+}
+
+/**
+ * Generate globals.css for a translated theme.
+ */
+function generateGlobalsCss(): string {
+  return `@import "../../core-components/src/styles/animations.css";
+
+/* ── Buttons ─────────────────────────────────────────────────────────────── */
+
+.btn-primary {
+  @apply inline-flex items-center justify-center px-6 py-3 rounded-lg;
+  @apply bg-brand-primary text-on-brand-primary font-semibold;
+  @apply hover:bg-brand-primary-hover transition-all duration-200;
+  @apply focus:ring-2 focus:ring-brand-primary focus:ring-offset-2;
+  @apply shadow-sm hover:shadow-md;
+}
+
+.btn-secondary {
+  @apply inline-flex items-center justify-center px-6 py-3 rounded-lg;
+  @apply bg-surface-card text-brand-primary border-2 border-brand-primary font-semibold;
+  @apply hover:bg-brand-primary hover:text-on-brand-primary transition-all duration-200;
+  @apply focus:ring-2 focus:ring-brand-primary focus:ring-offset-2;
+}
+
+/* ── Cards ───────────────────────────────────────────────────────────────── */
+
+.card {
+  @apply bg-surface-card border border-surface-subtle rounded-xl p-6 shadow-sm;
+}
+
+.card-interactive {
+  @apply card hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 cursor-pointer;
+}
+
+/* ── Layout ──────────────────────────────────────────────────────────────── */
+
+.section {
+  @apply py-16;
+}
+
+.container-standard {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+.container-narrow {
+  @apply max-w-4xl mx-auto px-4 sm:px-6 lg:px-8;
+}
+`;
+}
+
+/**
+ * Generate a HomePage.tsx that composes the generated section components.
+ */
+function generateHomePage(
+  themeName: string,
+  components: import("./lib/theme-component-generator").GeneratedComponent[]
+): string {
+  const pascal = toPascalCase(themeName);
+
+  // Build import lines for generated section components
+  const componentImports = components
+    .map(
+      (c) =>
+        `import { ${c.blueprint.componentExportName} } from '../components/${c.blueprint.componentFileName.replace(".tsx", "")}';`
+    )
+    .join("\n");
+
+  // Build the JSX composition — each component gets placeholder props
+  const sectionJsx = components
+    .map((c) => {
+      const bp = c.blueprint;
+      // Build minimal props object from contentSlots
+      const propLines = bp.contentSlots.slice(0, 4).map((slot) => {
+        const camel = slot.replace(/[-_]([a-zA-Z])/g, (_, c: string) => c.toUpperCase());
+        if (/items|cards|links|buttons/i.test(slot)) return `      ${camel}={[]}`;
+        if (/image|photo/i.test(slot)) return `      ${camel}={{ src: '', alt: '' }}`;
+        return `      ${camel}={props.${camel}}`;
+      });
+      return `      <${bp.componentExportName}\n${propLines.join("\n")}\n      />`;
+    })
+    .join("\n");
+
+  return `${componentImports ? componentImports + "\n\n" : ""}export interface ${pascal}HomePageProps {
+  [key: string]: unknown;
+}
+
+export function ${pascal}HomePage(props: ${pascal}HomePageProps) {
+  return (
+    <main>
+${sectionJsx || `      <section className="py-16 container-standard"><p className="text-surface-foreground">Home page</p></section>`}
+    </main>
+  );
+}
+`;
+}
+
 // ── Main ─────────────────────────────────────────────────────────────────────
 
 async function main() {
@@ -295,13 +451,319 @@ async function main() {
   // ── Translate pass ────────────────────────────────────────────────────────
   if (passArg === "translate" || passArg === "both") {
     console.log("[extract] === Translate Pass ===");
-    console.log("[extract] TODO: Translate pass not yet implemented.");
-    console.log("[extract] This pass will use AI to generate native Tailwind components");
-    console.log("[extract] from clone HTML/CSS/screenshots as reference material.");
+
+    // ── Step A: Validate CPF ─────────────────────────────────────────────────
+    const cpfValidation = validateCPF(cloneDir);
+    if (!cpfValidation.valid) {
+      console.error("[extract] CPF validation failed:");
+      for (const err of cpfValidation.errors) console.error(`  - ${err}`);
+      process.exit(1);
+    }
+    console.log("[extract] CPF validation passed");
+
+    // ── Step B: Read computed styles and map to tokens ───────────────────────
+    const stylesPath = path.join(cloneDir, "styles", "computed-styles.json");
+    let tokenMappingsString = "";
+    let brandPrimary = "#000000";
+    let brandSecondary = "#666666";
+
+    if (fs.existsSync(stylesPath)) {
+      const stylesJson = JSON.parse(fs.readFileSync(stylesPath, "utf-8")) as {
+        sectionStyles?: Record<string, SectionComputedStyle[]>;
+      };
+      const homeSections: SectionComputedStyle[] = stylesJson.sectionStyles?.home ?? [];
+
+      if (homeSections.length > 0) {
+        // Extract brand colors from global-settings.css for token mapping
+        const globalCss = fs.existsSync(path.join(cloneDir, "assets", "css", "global-settings.css"))
+          ? fs.readFileSync(path.join(cloneDir, "assets", "css", "global-settings.css"), "utf-8")
+          : "";
+
+        // Extract corvus brand primary from palette variable
+        const primaryMatch = globalCss.match(
+          /--bde-brand-primary-color[^;]*;\s*--bde-palette-color[^#]*#([0-9a-fA-F]{6})/
+        );
+        const paletteColors = [
+          ...globalCss.matchAll(/--bde-palette-color-\d-[a-f0-9-]+:(#[0-9a-fA-F]{6})/g),
+        ];
+        if (paletteColors.length > 0) {
+          brandPrimary = paletteColors[0][1];
+          brandSecondary = paletteColors.length > 1 ? paletteColors[1][1] : paletteColors[0][1];
+        }
+
+        const tokenMapping = mapSectionColors(homeSections, brandPrimary, brandSecondary);
+        const typographyScale = extractTypographyScale(homeSections);
+
+        // Format token mappings as a string for the AI prompt
+        const lines: string[] = [
+          `Brand primary: ${brandPrimary} → bg-brand-primary / text-brand-primary`,
+          `Brand secondary: ${brandSecondary} → bg-brand-secondary / text-brand-secondary`,
+        ];
+        for (const [key, tokenClass] of Object.entries(tokenMapping.standardMappings)) {
+          lines.push(`${key}: ${tokenClass}`);
+        }
+        if (typographyScale.h1) lines.push(`h1 font-size: ${typographyScale.h1}`);
+        if (typographyScale.h2) lines.push(`h2 font-size: ${typographyScale.h2}`);
+        tokenMappingsString = lines.join("\n");
+        console.log(
+          `[extract] Token mappings prepared (${lines.length} entries, brand primary: ${brandPrimary})`
+        );
+      }
+    }
+
+    // ── Step C: Vision analysis on homepage screenshot ───────────────────────
+    const screenshotDir = path.join(cloneDir, "reference-screenshots");
+    const homeScreenshot = path.join(screenshotDir, "home.png");
+    const jpgScreenshot = path.join(screenshotDir, "home.jpg");
+    const screenshotPath = fs.existsSync(homeScreenshot)
+      ? homeScreenshot
+      : fs.existsSync(jpgScreenshot)
+        ? jpgScreenshot
+        : null;
+
+    let sectionBlueprints: SectionBlueprint[] = [];
+
+    if (screenshotPath) {
+      console.log(`[extract] Running vision analysis on ${path.basename(screenshotPath)}...`);
+
+      const apiKey = process.env.ANTHROPIC_API_KEY;
+      if (!apiKey) {
+        console.warn("[extract] ANTHROPIC_API_KEY not set — using minimal placeholder blueprints");
+        sectionBlueprints = createMinimalBlueprints(themeName);
+      } else {
+        const client = new Anthropic({ apiKey });
+        try {
+          const imageBuffer = fs.readFileSync(screenshotPath);
+          const base64Image = imageBuffer.toString("base64");
+          const ext = path.extname(screenshotPath).toLowerCase();
+          const mediaType = ext === ".jpg" || ext === ".jpeg" ? "image/jpeg" : "image/png";
+
+          const contextNote = [
+            sourceDomain ? `Reference URL: ${sourceDomain}` : null,
+            `Brand primary colour: ${brandPrimary}`,
+            `Brand secondary colour: ${brandSecondary}`,
+            `Theme name: ${themeName}`,
+          ]
+            .filter(Boolean)
+            .join("\n");
+
+          const response = await client.messages.create({
+            model: "claude-sonnet-4-6",
+            max_tokens: 8192,
+            temperature: 0,
+            messages: [
+              {
+                role: "user",
+                content: [
+                  {
+                    type: "image",
+                    source: {
+                      type: "base64",
+                      media_type: mediaType,
+                      data: base64Image,
+                    },
+                  },
+                  {
+                    type: "text",
+                    text: `${REFERENCE_ANALYSIS_PROMPT}\n\nAdditional context:\n${contextNote}`,
+                  },
+                ],
+              },
+            ],
+          });
+
+          const textBlock = response.content.find((b) => b.type === "text");
+          if (!textBlock || textBlock.type !== "text") throw new Error("No text in response");
+
+          const jsonMatch = textBlock.text.match(/\{[\s\S]*\}/);
+          if (!jsonMatch) throw new Error("No JSON found in response");
+
+          const analysis = JSON.parse(jsonMatch[0]) as ReferenceAnalysis;
+          sectionBlueprints = analysis.sectionBlueprints ?? [];
+          console.log(
+            `[extract] Vision analysis complete: ${sectionBlueprints.length} section blueprints`
+          );
+        } catch (err) {
+          console.warn(`[extract] Vision analysis failed: ${err} — using minimal blueprints`);
+          sectionBlueprints = createMinimalBlueprints(themeName);
+        }
+      }
+    } else {
+      console.warn("[extract] No homepage screenshot found — using minimal blueprints");
+      sectionBlueprints = createMinimalBlueprints(themeName);
+    }
+
+    // ── Step D: Enrich blueprints with clone HTML/CSS context ────────────────
+    console.log("[extract] Enriching blueprints with clone HTML/CSS context...");
+    const enrichedBlueprints = enrichBlueprintsForPage("home", cloneDir, sectionBlueprints);
+    const enrichedCount = enrichedBlueprints.filter((bp) => bp.cloneHtmlFragment).length;
     console.log(
-      "[extract] See: output/sessions/2026-04-13_translate-pipeline/ for implementation brief."
+      `[extract] ${enrichedCount}/${enrichedBlueprints.length} blueprints enriched with clone context`
     );
-    // Future: vision analysis → section extraction → AI translation → page assembly → theme scaffold
+
+    // ── Step E: Generate components ──────────────────────────────────────────
+    const componentsDir = path.join(themeDir, "components");
+    console.log("[extract] Generating theme components...");
+    const generationResult = await generateThemeComponentsFromClone(
+      enrichedBlueprints,
+      componentsDir,
+      tokenMappingsString
+    );
+
+    if (generationResult.warnings.length > 0) {
+      console.log("[extract] Generation warnings:");
+      for (const w of generationResult.warnings) console.log(`  ⚠ ${w}`);
+    }
+
+    // ── Step F: Assemble theme package ───────────────────────────────────────
+    console.log("[extract] Assembling theme package...");
+
+    // index.ts
+    fs.writeFileSync(path.join(themeDir, "index.ts"), generateIndexTs(themeName), "utf-8");
+
+    // package.json
+    fs.writeFileSync(
+      path.join(themeDir, "package.json"),
+      JSON.stringify(generatePackageJson(themeName), null, 2) + "\n",
+      "utf-8"
+    );
+
+    // globals.css — keep the existing placeholder if it already has useful content,
+    // otherwise write a standard one with animation import + component classes
+    const existingGlobals = fs.existsSync(path.join(themeDir, "globals.css"))
+      ? fs.readFileSync(path.join(themeDir, "globals.css"), "utf-8")
+      : "";
+    if (!existingGlobals || existingGlobals.includes("placeholder globals")) {
+      fs.writeFileSync(path.join(themeDir, "globals.css"), generateGlobalsCss(), "utf-8");
+      console.log("[extract] globals.css generated");
+    } else {
+      console.log("[extract] globals.css already has content — keeping existing");
+    }
+
+    // components/index.ts — barrel exporting generated section components + header/footer
+    const generatedExports = generationResult.components
+      .map(
+        (c) =>
+          `export { ${c.blueprint.componentExportName} } from './${c.blueprint.componentFileName.replace(".tsx", "")}';`
+      )
+      .join("\n");
+    const pascal = toPascalCase(themeName);
+    // Ensure header.tsx and footer.tsx stubs exist
+    if (!fs.existsSync(path.join(componentsDir, "header.tsx"))) {
+      fs.writeFileSync(
+        path.join(componentsDir, "header.tsx"),
+        generateHeaderComponent(themeName),
+        "utf-8"
+      );
+    }
+    if (!fs.existsSync(path.join(componentsDir, "footer.tsx"))) {
+      fs.writeFileSync(
+        path.join(componentsDir, "footer.tsx"),
+        generateFooterComponent(themeName),
+        "utf-8"
+      );
+    }
+    const componentsBarrel = `export { ${pascal}Header } from './header';\nexport { ${pascal}Footer } from './footer';\n${generatedExports}\n`;
+    fs.writeFileSync(path.join(componentsDir, "index.ts"), componentsBarrel, "utf-8");
+    console.log(
+      `[extract] components/index.ts written (${generationResult.components.length} section components + header + footer)`
+    );
+
+    // pages/ — HomePage.tsx composing section components, stub pages for other page types
+    const pagesDir = path.join(themeDir, "pages");
+    fs.mkdirSync(pagesDir, { recursive: true });
+
+    const homePageContent = generateHomePage(themeName, generationResult.components);
+    fs.writeFileSync(path.join(pagesDir, "HomePage.tsx"), homePageContent, "utf-8");
+    console.log("[extract] pages/HomePage.tsx written");
+
+    // Stub pages for other page types
+    const pageStubs: Array<{ file: string; exportName: string }> = [
+      { file: "AboutPage.tsx", exportName: `${pascal}AboutPage` },
+      { file: "BlogListPage.tsx", exportName: `${pascal}BlogListPage` },
+      { file: "BlogPostPage.tsx", exportName: `${pascal}BlogPostPage` },
+      { file: "CustomPage.tsx", exportName: `${pascal}CustomPage` },
+    ];
+
+    for (const stub of pageStubs) {
+      const stubPath = path.join(pagesDir, stub.file);
+      if (!fs.existsSync(stubPath) || fs.readFileSync(stubPath, "utf-8").includes("stub page")) {
+        fs.writeFileSync(stubPath, generateStubPage(stub.exportName), "utf-8");
+      }
+    }
+
+    // pages/index.ts barrel — include StubPages if it exists
+    const stubPagesPath = path.join(pagesDir, "StubPages.tsx");
+    const hasStubPages = fs.existsSync(stubPagesPath);
+    const stubExports = hasStubPages
+      ? (fs
+          .readFileSync(stubPagesPath, "utf-8")
+          .match(/export function (\w+)/g)
+          ?.map((m) => m.replace("export function ", ""))
+          .filter(Boolean) ?? [])
+      : [];
+
+    const pageExports =
+      [
+        `export { ${pascal}HomePage } from './HomePage';`,
+        ...pageStubs.map(
+          (s) => `export { ${s.exportName} } from './${s.file.replace(".tsx", "")}';`
+        ),
+        ...(stubExports.length > 0
+          ? [`export {\n  ${stubExports.join(",\n  ")},\n} from './StubPages';`]
+          : []),
+      ]
+        .join("\n")
+        .trim() + "\n";
+    fs.writeFileSync(path.join(pagesDir, "index.ts"), pageExports, "utf-8");
+    console.log("[extract] pages/index.ts barrel written");
+
+    // ── Step G: Copy images to test site public/images/ ─────────────────────
+    const cloneImagesDir = path.join(cloneDir, "assets", "images");
+    if (fs.existsSync(cloneImagesDir)) {
+      // Discover test site for this theme
+      const potentialSiteDir = path.resolve(`sites/_${themeName}-digital-marketing-events`);
+      const siteDir = fs.existsSync(potentialSiteDir)
+        ? potentialSiteDir
+        : (() => {
+            // scan sites/ for any site using this theme
+            const sitesDir = path.resolve("sites");
+            for (const entry of fs.readdirSync(sitesDir)) {
+              const candidate = path.join(sitesDir, entry);
+              const tailwindConfig = path.join(candidate, "tailwind.config.ts");
+              if (
+                fs.existsSync(tailwindConfig) &&
+                fs.readFileSync(tailwindConfig, "utf-8").includes(`themes/${themeName}`)
+              ) {
+                return candidate;
+              }
+            }
+            return null;
+          })();
+
+      if (siteDir) {
+        const publicImagesDir = path.join(siteDir, "public", "images");
+        fs.mkdirSync(publicImagesDir, { recursive: true });
+        let copiedCount = 0;
+        for (const imgFile of fs.readdirSync(cloneImagesDir)) {
+          const src = path.join(cloneImagesDir, imgFile);
+          const dest = path.join(publicImagesDir, imgFile);
+          if (fs.statSync(src).isFile()) {
+            fs.copyFileSync(src, dest);
+            copiedCount++;
+          }
+        }
+        console.log(
+          `[extract] Copied ${copiedCount} images → ${path.relative(process.cwd(), publicImagesDir)}`
+        );
+      } else {
+        console.log("[extract] No test site found for image copy — skipping");
+      }
+    } else {
+      console.log("[extract] No clone assets/images directory — skipping image copy");
+    }
+
+    console.log("[extract] Translate pass complete");
   }
 
   // ── Strip pass ─────────────────────────────────────────────────────────────

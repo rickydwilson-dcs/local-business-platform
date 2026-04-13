@@ -1,2 +1,13 @@
 export { CorvusHeader } from "./header";
 export { CorvusFooter } from "./footer";
+export { NavDarkBar } from "./nav-dark-bar";
+export { HeroHeadlineColoured } from "./hero-headline-coloured";
+export { HeroEventBanner } from "./hero-event-banner";
+export { CtaSpeakersBand } from "./cta-speakers-band";
+export { CtaSponsorsBand } from "./cta-sponsors-band";
+export { CtaVolunteersBand } from "./cta-volunteers-band";
+export { BlogCardGrid } from "./blog-card-grid";
+export { AboutSplitDark } from "./about-split-dark";
+export { GalleryPhotoStrip } from "./gallery-photo-strip";
+export { NewsletterSignupBand } from "./newsletter-signup-band";
+export { FooterMultiColumn } from "./footer-multi-column";

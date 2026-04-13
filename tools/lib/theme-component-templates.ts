@@ -167,7 +167,7 @@ export function detectAnimationImports(jsxBody: string): string[] {
  */
 function buildAnimationImportLine(primitives: string[]): string {
   if (primitives.length === 0) return "";
-  return `import { ${primitives.join(", ")} } from "@platform/core-components/src/components/animation";`;
+  return `import { ${primitives.join(", ")} } from "@platform/core-components/components/animation";`;
 }
 
 /**
