@@ -523,8 +523,8 @@
   font-style: italic;
   font-weight: 400;
   font-display: swap;
-  src: url('https://colorcode.events/wp-content/uploads/breakdance/fonts/Aeonik_RegularItalic.woff') format('woff'),
-	    url('https://colorcode.events/wp-content/uploads/breakdance/fonts/Aeonik_RegularItalic.woff2') format('woff2');
+  src: url(data:,) format('woff'),
+	    url(data:,) format('woff2');
 }
 
 @font-face {
@@ -532,8 +532,8 @@
   font-style: italic;
   font-weight: 300;
   font-display: swap;
-  src: url('https://colorcode.events/wp-content/uploads/breakdance/fonts/Aeonik_LightItalic.woff') format('woff'),
-	    url('https://colorcode.events/wp-content/uploads/breakdance/fonts/Aeonik_LightItalic.woff2') format('woff2');
+  src: url(data:,) format('woff'),
+	    url(data:,) format('woff2');
 }
 
 @font-face {
@@ -541,8 +541,8 @@
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url('https://colorcode.events/wp-content/uploads/breakdance/fonts/Aeonik_Regular.woff2') format('woff2'),
-	    url('https://colorcode.events/wp-content/uploads/breakdance/fonts/Aeonik_Regular.woff') format('woff');
+  src: url(data:,) format('woff2'),
+	    url(data:,) format('woff');
 }
 
 @font-face {
@@ -550,8 +550,8 @@
   font-style: normal;
   font-weight: 500;
   font-display: swap;
-  src: url('https://colorcode.events/wp-content/uploads/breakdance/fonts/Aeonik_Medium.woff') format('woff'),
-	    url('https://colorcode.events/wp-content/uploads/breakdance/fonts/Aeonik_Medium.woff2') format('woff2');
+  src: url(data:,) format('woff'),
+	    url(data:,) format('woff2');
 }
 
 @font-face {
@@ -559,8 +559,8 @@
   font-style: normal;
   font-weight: 900;
   font-display: swap;
-  src: url('https://colorcode.events/wp-content/uploads/breakdance/fonts/Aeonik_Black.woff2') format('woff2'),
-	    url('https://colorcode.events/wp-content/uploads/breakdance/fonts/Aeonik_Black.woff') format('woff');
+  src: url(data:,) format('woff2'),
+	    url(data:,) format('woff');
 }
 
 @font-face {
@@ -568,8 +568,8 @@
   font-style: normal;
   font-weight: 100;
   font-display: swap;
-  src: url('https://colorcode.events/wp-content/uploads/breakdance/fonts/Aeonik_Thin.woff') format('woff'),
-	    url('https://colorcode.events/wp-content/uploads/breakdance/fonts/Aeonik_Thin.woff2') format('woff2');
+  src: url(data:,) format('woff'),
+	    url(data:,) format('woff2');
 }
 
 @font-face {
@@ -577,8 +577,8 @@
   font-style: italic;
   font-weight: 500;
   font-display: swap;
-  src: url('https://colorcode.events/wp-content/uploads/breakdance/fonts/Aeonik_MediumItalic.woff') format('woff'),
-	    url('https://colorcode.events/wp-content/uploads/breakdance/fonts/Aeonik_MediumItalic.woff2') format('woff2');
+  src: url(data:,) format('woff'),
+	    url(data:,) format('woff2');
 }
 
 @font-face {
@@ -586,8 +586,8 @@
   font-style: italic;
   font-weight: 900;
   font-display: swap;
-  src: url('https://colorcode.events/wp-content/uploads/breakdance/fonts/Aeonik_BlackItalic.woff2') format('woff2'),
-	    url('https://colorcode.events/wp-content/uploads/breakdance/fonts/Aeonik_BlackItalic.woff') format('woff');
+  src: url(data:,) format('woff2'),
+	    url(data:,) format('woff');
 }
 
 @font-face {
@@ -595,8 +595,8 @@
   font-style: normal;
   font-weight: 200;
   font-display: swap;
-  src: url('https://colorcode.events/wp-content/uploads/breakdance/fonts/Aeonik_Air.woff') format('woff'),
-	    url('https://colorcode.events/wp-content/uploads/breakdance/fonts/Aeonik_Air.woff2') format('woff2');
+  src: url(data:,) format('woff'),
+	    url(data:,) format('woff2');
 }
 
 @font-face {
@@ -604,8 +604,8 @@
   font-style: italic;
   font-weight: 100;
   font-display: swap;
-  src: url('https://colorcode.events/wp-content/uploads/breakdance/fonts/Aeonik_ThinItalic.woff') format('woff'),
-	    url('https://colorcode.events/wp-content/uploads/breakdance/fonts/Aeonik_ThinItalic.woff2') format('woff2');
+  src: url(data:,) format('woff'),
+	    url(data:,) format('woff2');
 }
 
 @font-face {
@@ -613,8 +613,8 @@
   font-style: italic;
   font-weight: 200;
   font-display: swap;
-  src: url('https://colorcode.events/wp-content/uploads/breakdance/fonts/Aeonik_AirItalic.woff') format('woff'),
-	    url('https://colorcode.events/wp-content/uploads/breakdance/fonts/Aeonik_AirItalic.woff2') format('woff2');
+  src: url(data:,) format('woff'),
+	    url(data:,) format('woff2');
 }
 
 @font-face {
@@ -622,8 +622,8 @@
   font-style: normal;
   font-weight: 700;
   font-display: swap;
-  src: url('https://colorcode.events/wp-content/uploads/breakdance/fonts/Aeonik_Bold.woff2') format('woff2'),
-	    url('https://colorcode.events/wp-content/uploads/breakdance/fonts/Aeonik_Bold.woff') format('woff');
+  src: url(data:,) format('woff2'),
+	    url(data:,) format('woff');
 }
 
 @font-face {
@@ -631,8 +631,8 @@
   font-style: normal;
   font-weight: 300;
   font-display: swap;
-  src: url('https://colorcode.events/wp-content/uploads/breakdance/fonts/Aeonik_Light.woff2') format('woff2'),
-	    url('https://colorcode.events/wp-content/uploads/breakdance/fonts/Aeonik_Light.woff') format('woff');
+  src: url(data:,) format('woff2'),
+	    url(data:,) format('woff');
 }
 
 @font-face {
@@ -640,8 +640,8 @@
   font-style: italic;
   font-weight: 700;
   font-display: swap;
-  src: url('https://colorcode.events/wp-content/uploads/breakdance/fonts/Aeonik_BoldItalic.woff') format('woff'),
-	    url('https://colorcode.events/wp-content/uploads/breakdance/fonts/Aeonik_BoldItalic.woff2') format('woff2');
+  src: url(data:,) format('woff'),
+	    url(data:,) format('woff2');
 }
 
 /* === global-settings.css === */
@@ -875,7 +875,7 @@ html {scroll-behavior: smooth;}*, ::before, ::after {box-sizing: border-box;}bod
 .short{width:0.75em}
 .breakdance .bde-code-block-17-463{width:100%;container-type:inline-size}
 .breakdance .bde-section-17-103 .section-container{display:flex;flex-direction:column;align-items:center;text-align:center}
-.breakdance .bde-section-17-103{background-color:var(--bde-palette-color-1-6e2d817b-1c00-447d-a5d5-059ab5957052);background-image:url(https://colorcode.events/wp-content/uploads/2025/12/color-code-buffalo-2025-cleary.jpg);background-size:cover;background-repeat:no-repeat;background-position:center center}
+.breakdance .bde-section-17-103{background-color:var(--bde-palette-color-1-6e2d817b-1c00-447d-a5d5-059ab5957052);background-image:url(data:,);background-size:cover;background-repeat:no-repeat;background-position:center center}
 .breakdance .bde-section-17-103>.section-background-overlay{background-color:var(--bde-palette-color-1-6e2d817b-1c00-447d-a5d5-059ab5957052);transition:background-color var(--bde-transition-duration) ease-in-out}
 .breakdance .bde-section-17-103>.section-background-overlay{opacity:0.8}
 .breakdance .bde-section-17-103>.section-background-overlay{mix-blend-mode:multiply}

@@ -462,47 +462,55 @@ export function ${pascal}Footer(props: Record<string, unknown>) {
 }
 
 /**
- * Strip the Breakdance popup/mobile-nav wrapper from page JSX.
- * Finds the last <div className="breakdance"> block that contains bde-popup
- * and removes it — it's duplicated across all pages with hardcoded external URLs.
+ * Strip all Breakdance popup/mobile-nav wrappers from page JSX.
+ * Finds every <div className="breakdance"> block that contains bde-popup
+ * and removes it — these are duplicated across all pages with hardcoded external URLs.
  */
 function stripPopupNav(jsx: string): string {
   const marker = 'className="breakdance">';
-  let lastIdx = jsx.lastIndexOf(marker);
-  if (lastIdx === -1) return jsx;
+  let result = jsx;
 
-  // Walk back to the opening < of this div
-  while (lastIdx > 0 && jsx[lastIdx] !== "<") lastIdx--;
+  // Loop until no more popup blocks remain
+  // eslint-disable-next-line no-constant-condition
+  while (true) {
+    let lastIdx = result.lastIndexOf(marker);
+    if (lastIdx === -1) break;
 
-  // Check that this block contains bde-popup (not just any "breakdance" class div)
-  const preview = jsx.slice(lastIdx, Math.min(lastIdx + 500, jsx.length));
-  if (!preview.includes("bde-popup")) return jsx;
+    // Walk back to the opening < of this div
+    while (lastIdx > 0 && result[lastIdx] !== "<") lastIdx--;
 
-  // Walk forward tracking div depth to find the matching </div>
-  let depth = 0;
-  let pos = lastIdx;
-  let endPos = -1;
+    // Check that this block contains bde-popup (not just any "breakdance" class div)
+    const preview = result.slice(lastIdx, Math.min(lastIdx + 500, result.length));
+    if (!preview.includes("bde-popup")) break;
 
-  while (pos < jsx.length) {
-    if (jsx.startsWith("<div", pos) && (jsx[pos + 4] === " " || jsx[pos + 4] === ">")) {
-      depth++;
-      pos += 4;
-    } else if (jsx.startsWith("</div>", pos)) {
-      depth--;
-      if (depth === 0) {
-        endPos = pos + 6; // past </div>
-        break;
+    // Walk forward tracking div depth to find the matching </div>
+    let depth = 0;
+    let pos = lastIdx;
+    let endPos = -1;
+
+    while (pos < result.length) {
+      if (result.startsWith("<div", pos) && (result[pos + 4] === " " || result[pos + 4] === ">")) {
+        depth++;
+        pos += 4;
+      } else if (result.startsWith("</div>", pos)) {
+        depth--;
+        if (depth === 0) {
+          endPos = pos + 6; // past </div>
+          break;
+        }
+        pos += 6;
+      } else {
+        pos++;
       }
-      pos += 6;
-    } else {
-      pos++;
     }
+
+    if (endPos === -1) break; // couldn't match — leave unchanged
+
+    // Remove the popup block and continue scanning
+    result = result.slice(0, lastIdx) + result.slice(endPos);
   }
 
-  if (endPos === -1) return jsx; // couldn't match — leave unchanged
-
-  // Remove the popup block
-  return jsx.slice(0, lastIdx) + jsx.slice(endPos);
+  return result;
 }
 
 // ── Main ─────────────────────────────────────────────────────────────────────
