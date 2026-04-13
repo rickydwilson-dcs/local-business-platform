@@ -74,7 +74,13 @@ function inferPropType(slotName: string): string {
   }
 
   // Array types
-  if (lower.includes("items") || lower.includes("list") || lower.includes("badges") || lower.includes("buttons") || lower.includes("links")) {
+  if (
+    lower.includes("items") ||
+    lower.includes("list") ||
+    lower.includes("badges") ||
+    lower.includes("buttons") ||
+    lower.includes("links")
+  ) {
     return "Array<{ label: string; href?: string }>";
   }
 
@@ -198,10 +204,11 @@ ${jsxBody}
  * Generate a placeholder component when AI generation is not available.
  */
 export function placeholderComponent(blueprint: SectionBlueprint): string {
-  const isClient = blueprint.interactionNeeds === "stateful"
-    || blueprint.category === "Navigation"
-    || blueprint.purpose.toLowerCase().includes("form")
-    || blueprint.purpose.toLowerCase().includes("newsletter");
+  const isClient =
+    blueprint.interactionNeeds === "stateful" ||
+    blueprint.category === "Navigation" ||
+    blueprint.purpose.toLowerCase().includes("form") ||
+    blueprint.purpose.toLowerCase().includes("newsletter");
   const interfaceName = `${blueprint.componentExportName}Props`;
 
   const jsxBody = `  return (
@@ -220,6 +227,84 @@ export function placeholderComponent(blueprint: SectionBlueprint): string {
   return serverComponentShell(blueprint, jsxBody);
 }
 
+// ── Internal helper ───────────────────────────────────────────────────────────
+
+function truncate(s: string, maxLen: number): string {
+  if (s.length <= maxLen) return s;
+  return s.slice(0, maxLen) + "\n/* ... truncated ... */";
+}
+
+/**
+ * Build a prompt for translating a clone HTML section to native Tailwind JSX.
+ * This prompt gives the AI both the HTML structure and CSS rules as reference,
+ * plus token mappings and the gold-standard output format.
+ */
+export function buildCloneTranslationPrompt(
+  blueprint: SectionBlueprint,
+  interfaceName: string,
+  tokenMappings?: string
+): string {
+  const slotsDescription = (blueprint.contentSlots ?? []).map((slot) => `- ${slot}`).join("\n");
+
+  const htmlContext = blueprint.cloneHtmlFragment
+    ? `\n## REFERENCE HTML (structure and layout reference — do NOT copy class names)\n\n\`\`\`html\n${truncate(blueprint.cloneHtmlFragment, 6000)}\n\`\`\``
+    : "";
+
+  const cssContext = blueprint.cloneRelevantCss
+    ? `\n## REFERENCE CSS (spacing, layout, sizing reference — do NOT copy rules)\n\nRead these rules to understand spacing (padding, margin, gap), layout (flex, grid, max-width), font sizes, and responsive breakpoints. Then recreate the same visual result using Tailwind utility classes.\n\n\`\`\`css\n${truncate(blueprint.cloneRelevantCss, 4000)}\n\`\`\``
+    : "";
+
+  const tokenSection = tokenMappings
+    ? `\n## TOKEN MAPPINGS\n\nUse these theme tokens instead of hardcoded colours:\n\n${tokenMappings}`
+    : "";
+
+  return `You are converting a cloned website section into a React Server Component using native Tailwind CSS for a Next.js platform.
+
+## TASK
+
+Reproduce the visual layout and design of the reference section below using ONLY Tailwind CSS utility classes and the platform's theme token classes. The result must look like the reference but be built entirely with Tailwind — no copied CSS class names.
+
+## COMPONENT SPEC
+
+- Component name: ${blueprint.componentExportName ?? blueprint.name}
+- Props interface: ${interfaceName}
+- Category: ${blueprint.category}
+- Layout pattern: ${blueprint.layoutPattern ?? "standard"}
+- Purpose: ${blueprint.purpose ?? "content section"}
+
+Content slots (these become component props):
+${slotsDescription || "- (derive from the HTML structure)"}
+${htmlContext}
+${cssContext}
+${tokenSection}
+
+## TRANSLATION RULES
+
+1. **Layout**: Reproduce the layout using Tailwind utilities (flex, grid, max-w-*, gap-*, etc.). Read the CSS for exact spacing values and convert: 16px→py-4, 24px→py-6, 32px→py-8, 48px→py-12, 64px→py-16, 96px→py-24.
+2. **Colours**: NEVER hardcode hex values. Use theme tokens: bg-brand-primary, bg-brand-secondary, bg-surface-inverse, bg-surface-muted, bg-surface-card, text-surface-foreground, text-brand-primary, text-on-brand-primary, text-on-inverse-muted, border-surface-border.
+3. **Typography**: Use Tailwind text sizing (text-sm, text-base, text-lg, text-xl, text-2xl, text-3xl, text-4xl, text-5xl). Use font-bold, font-semibold, font-medium, tracking-tight, leading-tight, leading-relaxed.
+4. **Responsive**: Mobile-first with md: and lg: breakpoints. Read the CSS @media queries for responsive behaviour.
+5. **Semantic HTML**: Use section, div, h1-h6, p, a, img, ul, li. Keep heading hierarchy logical.
+6. **Props**: Access props via dot notation (props.heading, props.items). For arrays, use .map() with proper keys.
+7. **Images**: Use standard <img> tags with props for src/alt. Decorative images can use hardcoded /images/ paths.
+8. **No imports**: Do NOT import React, next/link, lucide-react, or any external modules. The shell wrapper handles imports.
+9. **Component classes**: You may use these component utility classes (defined in globals.css): btn-primary, btn-secondary, card, card-interactive, section, container-standard, container-narrow.
+
+## OUTPUT FORMAT
+
+Return ONLY the JSX body — the content of the return statement. Start with a \`<section\` or \`<div\` element. Do NOT include the function signature, imports, or interface.
+
+Example output format:
+\`\`\`
+<section className="py-16 bg-surface-inverse">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 className="text-3xl font-bold text-on-brand-primary">{props.heading}</h2>
+    ...
+  </div>
+</section>
+\`\`\``;
+}
+
 /**
  * Build the AI prompt for generating JSX body for a component.
  */
@@ -228,13 +313,25 @@ export function buildComponentGenerationPrompt(
   interfaceName: string
 ): string {
   const allowedColourClasses = [
-    "bg-brand-primary", "bg-brand-secondary", "bg-brand-accent",
-    "bg-surface-background", "bg-surface-foreground", "bg-surface-muted", "bg-surface-inverse",
-    "text-brand-primary", "text-brand-secondary", "text-brand-accent",
-    "text-surface-foreground", "text-surface-background", "text-surface-muted",
-    "text-surface-secondary-foreground", "text-surface-muted-foreground",
-    "text-on-brand-primary", "text-on-brand-secondary",
-    "border-brand-primary", "border-surface-muted",
+    "bg-brand-primary",
+    "bg-brand-secondary",
+    "bg-brand-accent",
+    "bg-surface-background",
+    "bg-surface-foreground",
+    "bg-surface-muted",
+    "bg-surface-inverse",
+    "text-brand-primary",
+    "text-brand-secondary",
+    "text-brand-accent",
+    "text-surface-foreground",
+    "text-surface-background",
+    "text-surface-muted",
+    "text-surface-secondary-foreground",
+    "text-surface-muted-foreground",
+    "text-on-brand-primary",
+    "text-on-brand-secondary",
+    "border-brand-primary",
+    "border-surface-muted",
   ].join(", ");
 
   return `Return ONLY JSX body starting with \`  return (\`. No interfaces, no imports, no function declaration.
