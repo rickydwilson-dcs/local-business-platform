@@ -6,22 +6,34 @@
  */
 
 export type ComponentCategory =
-  | "Hero" | "Navigation" | "Cards" | "CTA" | "Content"
-  | "Social Proof" | "Blog" | "Stats" | "Footer" | "Custom";
+  | "Hero"
+  | "Navigation"
+  | "Cards"
+  | "CTA"
+  | "Content"
+  | "Social Proof"
+  | "Blog"
+  | "Stats"
+  | "Footer"
+  | "Custom";
 
 export interface SectionBlueprint {
-  id: string;                    // unique slug, e.g. "hero-full-bleed"
-  name: string;                  // PascalCase component name, e.g. "HeroFullBleed"
+  id: string; // unique slug, e.g. "hero-full-bleed"
+  name: string; // PascalCase component name, e.g. "HeroFullBleed"
   category: ComponentCategory;
-  purpose: string;               // what this section does
-  layoutPattern: string;         // structural description: "full-bleed with overlay" / "2-col grid" / etc.
-  contentSlots: string[];        // named content areas: ["heading", "subheading", "ctaButtons", "backgroundImage"]
-  interactionNeeds: "none" | "minimal" | "stateful";  // drives Server vs Client Component decision
-  componentFileName: string;     // kebab-case: "hero-full-bleed.tsx"
-  componentExportName: string;   // PascalCase: "HeroFullBleed"
-  tokenUsageHints: string[];     // ["bg-brand-primary", "text-surface-foreground", ...]
+  purpose: string; // what this section does
+  layoutPattern: string; // structural description: "full-bleed with overlay" / "2-col grid" / etc.
+  contentSlots: string[]; // named content areas: ["heading", "subheading", "ctaButtons", "backgroundImage"]
+  interactionNeeds: "none" | "minimal" | "stateful"; // drives Server vs Client Component decision
+  componentFileName: string; // kebab-case: "hero-full-bleed.tsx"
+  componentExportName: string; // PascalCase: "HeroFullBleed"
+  tokenUsageHints: string[]; // ["bg-brand-primary", "text-surface-foreground", ...]
   confidence: "high" | "medium" | "low";
-  referenceSection: string;      // which detectedSection this maps to
+  referenceSection: string; // which detectedSection this maps to
+  // Clone context — populated during translate pass enrichment
+  cloneHtmlFragment?: string;
+  cloneRelevantCss?: string;
+  sectionIndex?: number;
 }
 
 export interface ReferenceAnalysis {
@@ -58,7 +70,18 @@ export interface ReferenceAnalysis {
     name: string;
     background: string;
     layoutType: "full-bleed-band" | "contained" | "split" | "grid" | "strip";
-    purpose: "cta" | "info" | "blog" | "about" | "testimonial" | "nav" | "footer" | "sponsor" | "newsletter" | "hero" | "custom";
+    purpose:
+      | "cta"
+      | "info"
+      | "blog"
+      | "about"
+      | "testimonial"
+      | "nav"
+      | "footer"
+      | "sponsor"
+      | "newsletter"
+      | "hero"
+      | "custom";
     notes: string;
   }>;
   sectionBlueprints: SectionBlueprint[];
@@ -88,17 +111,22 @@ export interface ReferenceAnalysis {
     typography: {
       fontFamilySans: string[];
       fontFamilyHeading: string[];
-      scale?: Partial<Record<"hero"|"h1"|"h2"|"h3"|"h4"|"body", {
-        size?: string;
-        lineHeight?: string;
-        letterSpacing?: string;
-        weight?: number;
-      }>>;
+      scale?: Partial<
+        Record<
+          "hero" | "h1" | "h2" | "h3" | "h4" | "body",
+          {
+            size?: string;
+            lineHeight?: string;
+            letterSpacing?: string;
+            weight?: number;
+          }
+        >
+      >;
     };
     components?: {
       button?: { borderRadius?: string; paddingX?: string; paddingY?: string; fontWeight?: number };
-      card?: { borderRadius?: string; padding?: string; shadow?: "none"|"sm"|"md"|"lg" };
-      navigation?: { height?: string; appearance?: "dark"|"light" };
+      card?: { borderRadius?: string; padding?: string; shadow?: "none" | "sm" | "md" | "lg" };
+      navigation?: { height?: string; appearance?: "dark" | "light" };
       section?: { paddingY?: string };
     };
   };
@@ -107,9 +135,19 @@ export interface ReferenceAnalysis {
 // ── Page Discovery Types ────────────────────────────────────────────────
 
 export type PageType =
-  | "home" | "about" | "services-list" | "service-detail"
-  | "blog-list" | "blog-post" | "contact" | "locations-list"
-  | "location-detail" | "reviews" | "projects" | "pricing" | "custom";
+  | "home"
+  | "about"
+  | "services-list"
+  | "service-detail"
+  | "blog-list"
+  | "blog-post"
+  | "contact"
+  | "locations-list"
+  | "location-detail"
+  | "reviews"
+  | "projects"
+  | "pricing"
+  | "custom";
 
 export interface DiscoveredPage {
   url: string;
@@ -172,11 +210,23 @@ export interface SiteAnalysis {
 // ── Computed Style Extraction Types ───────────────────────────────────────
 
 export type ElementRole =
-  | "page-background" | "header" | "nav-link"
-  | "hero-section" | "hero-heading" | "hero-subheading"
-  | "primary-button" | "secondary-button"
-  | "heading-h1" | "heading-h2" | "heading-h3" | "heading-h4"
-  | "body-text" | "card" | "section" | "footer" | "link";
+  | "page-background"
+  | "header"
+  | "nav-link"
+  | "hero-section"
+  | "hero-heading"
+  | "hero-subheading"
+  | "primary-button"
+  | "secondary-button"
+  | "heading-h1"
+  | "heading-h2"
+  | "heading-h3"
+  | "heading-h4"
+  | "body-text"
+  | "card"
+  | "section"
+  | "footer"
+  | "link";
 
 export interface ElementComputedStyles {
   selector: string;

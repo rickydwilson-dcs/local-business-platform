@@ -88,7 +88,9 @@ function estimateChildCount(innerHtml: string): number {
 
   while ((tagMatch = tagRe.exec(innerHtml)) !== null) {
     const fullMatch = tagMatch[0];
-    const isSelfClosing = fullMatch.endsWith("/>") || /^(br|hr|img|input|meta|link|area|base|col|embed|source|track|wbr)$/i.test(tagMatch[1]);
+    const isSelfClosing =
+      fullMatch.endsWith("/>") ||
+      /^(br|hr|img|input|meta|link|area|base|col|embed|source|track|wbr)$/i.test(tagMatch[1]);
     const isClosing = fullMatch.startsWith("</");
 
     if (isClosing) {
@@ -130,7 +132,18 @@ function detectBackgroundHint(openingTag: string, classes: string[]): string | u
   }
 
   // Check class names for background keywords
-  const bgKeywords = ["bg-", "dark", "hero", "light", "gradient", "overlay", "banner", "inverted", "black", "white"];
+  const bgKeywords = [
+    "bg-",
+    "dark",
+    "hero",
+    "light",
+    "gradient",
+    "overlay",
+    "banner",
+    "inverted",
+    "black",
+    "white",
+  ];
   for (const cls of classes) {
     const lower = cls.toLowerCase();
     for (const keyword of bgKeywords) {
@@ -170,7 +183,8 @@ function hasStatContent(html: string): boolean {
   // Strip tags to get text only
   const text = html.replace(/<[^>]*>/g, " ");
   // Look for multiple stat-like patterns
-  const statPatterns = /(?:\d{1,3}(?:,\d{3})*\+?%?|\$[\d,.]+[KMBkmb]?|\d+\/\d+|\d+\s*(?:years?|clients?|projects?|customers?|employees?|locations?|reviews?|stars?))/gi;
+  const statPatterns =
+    /(?:\d{1,3}(?:,\d{3})*\+?%?|\$[\d,.]+[KMBkmb]?|\d+\/\d+|\d+\s*(?:years?|clients?|projects?|customers?|employees?|locations?|reviews?|stars?))/gi;
   const matches = text.match(statPatterns);
   return (matches?.length ?? 0) >= 2;
 }
@@ -219,7 +233,7 @@ function classifySection(
   hasImages: boolean,
   hasForm: boolean,
   isFirstSection: boolean,
-  classes: string[],
+  classes: string[]
 ): ComponentCategory {
   const lowerInner = innerHtml.toLowerCase();
   const lowerHeading = (headingText ?? "").toLowerCase();
@@ -270,7 +284,10 @@ function classifySection(
   }
 
   // Many images -> Cards
-  if (countImages(innerHtml) >= 3 || (hasImages && /\bgrid\b|\bcards?\b|\bgallery\b/i.test(lowerClasses + " " + lowerInner))) {
+  if (
+    countImages(innerHtml) >= 3 ||
+    (hasImages && /\bgrid\b|\bcards?\b|\bgallery\b/i.test(lowerClasses + " " + lowerInner))
+  ) {
     return "Cards";
   }
 
@@ -283,7 +300,7 @@ function classifySection(
 /**
  * Represents a raw extracted block from the HTML before classification.
  */
-interface RawBlock {
+export interface RawBlock {
   tag: string;
   openingTag: string;
   innerHtml: string;
@@ -295,7 +312,7 @@ interface RawBlock {
  * Uses regex-based matching to find <section>, <main>, <header>, <footer>,
  * <nav>, and <div> elements with ARIA roles.
  */
-function extractTopLevelBlocks(html: string): RawBlock[] {
+export function extractTopLevelBlocks(html: string): RawBlock[] {
   const blocks: RawBlock[] = [];
 
   // Target semantic elements and divs with roles
@@ -417,7 +434,11 @@ function extractTopLevelBlocks(html: string): RawBlock[] {
       const existingStart = html.indexOf(existing.fullMatch);
       const existingEnd = existingStart + existing.fullMatch.length;
 
-      if (blockStart >= existingStart && blockEnd <= existingEnd && block.fullMatch !== existing.fullMatch) {
+      if (
+        blockStart >= existingStart &&
+        blockEnd <= existingEnd &&
+        block.fullMatch !== existing.fullMatch
+      ) {
         isContained = true;
         break;
       }
@@ -468,7 +489,8 @@ function extractFooterLinks(html: string): string[] {
   }
 
   // Also check divs with role="contentinfo"
-  const roleFooterRe = /<div\s[^>]*role\s*=\s*(?:"contentinfo"|'contentinfo')[^>]*>[\s\S]*?<\/div>/gi;
+  const roleFooterRe =
+    /<div\s[^>]*role\s*=\s*(?:"contentinfo"|'contentinfo')[^>]*>[\s\S]*?<\/div>/gi;
   while ((match = roleFooterRe.exec(html)) !== null) {
     links.push(...extractLinks(match[0]));
   }
@@ -499,10 +521,7 @@ export function analyzeHtmlStructure(html: string, page: DiscoveredPage): PageSt
     const backgroundHint = detectBackgroundHint(block.openingTag, classes);
 
     // Determine if this is the first non-nav, non-header section for Hero classification
-    const isFirst =
-      isFirstContentSection &&
-      block.tag !== "nav" &&
-      block.tag !== "footer";
+    const isFirst = isFirstContentSection && block.tag !== "nav" && block.tag !== "footer";
 
     // Only the first qualifying section gets the "first section" flag
     const estimatedCategory = classifySection(
@@ -512,7 +531,7 @@ export function analyzeHtmlStructure(html: string, page: DiscoveredPage): PageSt
       hasImages,
       hasForm,
       isFirst,
-      classes,
+      classes
     );
 
     // Once we have classified a non-nav, non-footer section, no longer "first"
