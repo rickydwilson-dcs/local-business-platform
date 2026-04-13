@@ -2,12 +2,11 @@
 /**
  * Extract Theme CLI
  *
- * Reads a validated CPF clone directory, strips content, maps tokens,
- * and assembles a standard theme package.
+ * Reads a validated CPF clone directory and produces a theme package.
  *
  * Usage:
  *   npx tsx tools/extract-theme.ts --clone corvus
- *   npx tsx tools/extract-theme.ts --clone corvus --pass componentize
+ *   npx tsx tools/extract-theme.ts --clone corvus --pass translate
  *   npx tsx tools/extract-theme.ts --clone corvus --pass strip
  *   npx tsx tools/extract-theme.ts --brief output/briefs/abc123.json
  */
@@ -15,16 +14,8 @@
 import * as fs from "fs";
 import * as path from "path";
 
-import { validateCPF } from "./lib/cpf-validator";
 import { JobBriefSchema, type JobBrief } from "./lib/pipeline-brief-types";
-import {
-  mapSectionColors,
-  extractTypographyScale,
-  mapStylesToTokens,
-} from "./lib/computed-style-token-mapper";
-import type { SectionComputedStyle } from "./lib/computed-style-extractor";
 import { stripContent } from "./lib/content-stripper";
-import { preprocessCloneCss } from "./lib/clone-css-preprocessor";
 
 // ── Argument parsing ─────────────────────────────────────────────────────────
 
@@ -101,31 +92,6 @@ registerTheme({
 `;
 }
 
-/**
- * Generate the thin globals.css for a clone theme.
- * Clone themes load visual CSS via <link> tag (bypasses PostCSS).
- * Only platform-level animation imports go here.
- */
-function generateThemeGlobalsCss(): string {
-  return `/* packages/themes/{theme}/globals.css — auto-generated */
-@import "../../core-components/src/styles/animations.css";
-
-/* Clone themes load visual CSS via <link> tag (bypasses PostCSS).
-   Only platform-level animation imports go here. */
-`;
-}
-
-/**
- * Format computed custom properties as a :root { } block.
- */
-function formatCustomPropertiesBlock(customProperties: Record<string, string>): string {
-  if (Object.keys(customProperties).length === 0) return "";
-  const varLines = Object.entries(customProperties)
-    .map(([k, v]) => `  ${k}: ${v};`)
-    .join("\n");
-  return `:root {\n${varLines}\n}`;
-}
-
 function generatePackageJson(themeName: string): object {
   return {
     name: `@platform/themes/${themeName}`,
@@ -140,7 +106,7 @@ function generatePackageJson(themeName: string): object {
   };
 }
 
-// ── Component generation (legacy stub pass) ──────────────────────────────────
+// ── Component generation (stub pass) ─────────────────────────────────────────
 
 function generateComponentsBarrel(themeName: string): string {
   const pascal = toPascalCase(themeName);
@@ -259,260 +225,6 @@ export function ${pascal}${pagePascal}Page(props: ${pagePascal}PageProps) {
 `;
 }
 
-// ── JSX sanitizer ────────────────────────────────────────────────────────────
-
-/**
- * Fix HTML→JSX patterns that cause TypeScript parse errors.
- *
- * Removes attributes whose values are JSON objects (start with `{`).
- * These are produced by WordPress/Breakdance page builders (e.g. `data-options`).
- * The JSON values contain unescaped double quotes AND sometimes single quotes,
- * making them impossible to safely wrap in either quote style in JSX.
- *
- * Since these attributes are JS-behaviour config (not styling/layout),
- * removing them preserves visual fidelity without breaking the markup.
- */
-function sanitizeForJsx(jsx: string): string {
-  let result = "";
-  let pos = 0;
-
-  while (pos < jsx.length) {
-    // Find next occurrence of ="{ which indicates a JSON-valued attribute
-    const attrStart = jsx.indexOf('="{', pos);
-    if (attrStart === -1) {
-      result += jsx.slice(pos);
-      break;
-    }
-
-    // Walk back to find the start of the attribute name (stops at whitespace)
-    let nameStart = attrStart - 1;
-    while (nameStart > 0 && jsx[nameStart - 1] !== " " && jsx[nameStart - 1] !== "\n") {
-      nameStart--;
-    }
-
-    // Copy everything before the attribute name
-    result += jsx.slice(pos, nameStart);
-
-    // Skip forward past the closing `}"` of the JSON attribute value
-    // Scan from `{` to find the balanced `}` followed by `"`
-    let scanPos = attrStart + 2; // points to `{`
-    let depth = 0;
-    let closePos = -1;
-
-    for (let i = scanPos; i < jsx.length; i++) {
-      if (jsx[i] === "{") depth++;
-      else if (jsx[i] === "}") {
-        depth--;
-        if (depth === 0) {
-          if (i + 1 < jsx.length && jsx[i + 1] === '"') {
-            closePos = i + 2; // skip past `}"`
-            break;
-          }
-        }
-      }
-    }
-
-    if (closePos === -1) {
-      // Couldn't find matching close — keep everything as-is and move on
-      result += jsx.slice(nameStart, attrStart + 2);
-      pos = attrStart + 2;
-    } else {
-      // Skip the entire attribute (name + value)
-      pos = closePos;
-    }
-  }
-
-  return result;
-}
-
-// ── Componentize pass helpers ─────────────────────────────────────────────────
-
-/**
- * Split a clone JSX file into the leading CSS block and the JSX export function.
- * Clone format:
- *   // Extracted inline styles:
- *   //
- *   :root{...raw CSS...}
- *   ...more CSS...
- *
- *   export function pageName() { return (...); }
- */
-function extractCssFromCloneJsx(jsx: string): { css: string; jsxBody: string } {
-  const exportMatch = jsx.match(/^export function/m);
-  if (!exportMatch || exportMatch.index === undefined) {
-    return { css: "", jsxBody: jsx };
-  }
-
-  const cssBlock = jsx.slice(0, exportMatch.index);
-  const jsxBody = jsx.slice(exportMatch.index);
-
-  // Clean the CSS: remove JS comment markers and source map comments
-  const css = cssBlock
-    .replace(/^\/\/\s?/gm, "") // Remove // comment markers
-    .replace(/^\/\*.*?\*\/$/gm, "") // Remove /* */ inline comments
-    .replace(/\/\*#[^*]*\*+(?:[^/*][^*]*\*+)*\//g, "") // Remove source map comments
-    .trim();
-
-  return { css, jsxBody };
-}
-
-/**
- * Extract <header> and <footer> blocks from JSX, replacing them with placeholders.
- * Returns the extracted markup plus the body with placeholders inserted.
- */
-function extractHeaderFooter(jsx: string): {
-  header: string | null;
-  footer: string | null;
-  bodyWithoutHeaderFooter: string;
-} {
-  let body = jsx;
-
-  // Find <header ...>...</header> — simple first-match approach
-  const headerMatch = jsx.match(/<header\b[\s\S]*?<\/header>/);
-  const footerMatch = jsx.match(/<footer\b[\s\S]*?<\/footer>/);
-
-  if (headerMatch) {
-    body = body.replace(headerMatch[0], "{/* header extracted to component */}");
-  }
-  if (footerMatch) {
-    body = body.replace(footerMatch[0], "{/* footer extracted to component */}");
-  }
-
-  return {
-    header: headerMatch?.[0] ?? null,
-    footer: footerMatch?.[0] ?? null,
-    bodyWithoutHeaderFooter: body,
-  };
-}
-
-/**
- * Generate a theme page component preserving the clone's actual JSX markup.
- */
-function generatePageLayoutFromClone(
-  themeName: string,
-  pageName: string,
-  cloneJsxBody: string
-): string {
-  const pascal = toPascalCase(themeName);
-  const pagePascal = toPascalCase(pageName);
-
-  // Extract the return value from the clone function body
-  // Clone format: export function pageName() { return (<>...</>); }
-  const bodyMatch = cloneJsxBody.match(/return\s*\(\s*([\s\S]*)\s*\);\s*\}[\s]*$/);
-  const rawBody = bodyMatch ? bodyMatch[1].trim() : cloneJsxBody;
-
-  // Sanitize JSX-incompatible HTML patterns (e.g. data-options='{"json":...}')
-  const body = sanitizeForJsx(rawBody);
-
-  return `/* eslint-disable */
-// @ts-nocheck
-// Auto-generated by extract-theme --pass componentize
-// This is a clone-fidelity component — not a production template.
-// Run extract-theme --pass strip to replace content with props.
-
-interface ${pagePascal}PageProps {
-  [key: string]: unknown;
-}
-
-export function ${pascal}${pagePascal}Page(props: ${pagePascal}PageProps) {
-  void props;
-  return (
-    ${body}
-  );
-}
-`;
-}
-
-/**
- * Generate a theme header component from the clone's extracted header markup.
- */
-function generateHeaderFromClone(themeName: string, headerMarkup: string): string {
-  const pascal = toPascalCase(themeName);
-  const sanitized = sanitizeForJsx(headerMarkup);
-  return `/* eslint-disable */
-// @ts-nocheck
-// Auto-generated by extract-theme --pass componentize
-
-export function ${pascal}Header(props: Record<string, unknown>) {
-  void props;
-  return (
-    ${sanitized}
-  );
-}
-`;
-}
-
-/**
- * Generate a theme footer component from the clone's extracted footer markup.
- */
-function generateFooterFromClone(themeName: string, footerMarkup: string): string {
-  const pascal = toPascalCase(themeName);
-  const sanitized = sanitizeForJsx(footerMarkup);
-  return `/* eslint-disable */
-// @ts-nocheck
-// Auto-generated by extract-theme --pass componentize
-
-export function ${pascal}Footer(props: Record<string, unknown>) {
-  void props;
-  return (
-    ${sanitized}
-  );
-}
-`;
-}
-
-/**
- * Strip all Breakdance popup/mobile-nav wrappers from page JSX.
- * Finds every <div className="breakdance"> block that contains bde-popup
- * and removes it — these are duplicated across all pages with hardcoded external URLs.
- */
-function stripPopupNav(jsx: string): string {
-  const marker = 'className="breakdance">';
-  let result = jsx;
-
-  // Loop until no more popup blocks remain
-  // eslint-disable-next-line no-constant-condition
-  while (true) {
-    let lastIdx = result.lastIndexOf(marker);
-    if (lastIdx === -1) break;
-
-    // Walk back to the opening < of this div
-    while (lastIdx > 0 && result[lastIdx] !== "<") lastIdx--;
-
-    // Check that this block contains bde-popup (not just any "breakdance" class div)
-    const preview = result.slice(lastIdx, Math.min(lastIdx + 500, result.length));
-    if (!preview.includes("bde-popup")) break;
-
-    // Walk forward tracking div depth to find the matching </div>
-    let depth = 0;
-    let pos = lastIdx;
-    let endPos = -1;
-
-    while (pos < result.length) {
-      if (result.startsWith("<div", pos) && (result[pos + 4] === " " || result[pos + 4] === ">")) {
-        depth++;
-        pos += 4;
-      } else if (result.startsWith("</div>", pos)) {
-        depth--;
-        if (depth === 0) {
-          endPos = pos + 6; // past </div>
-          break;
-        }
-        pos += 6;
-      } else {
-        pos++;
-      }
-    }
-
-    if (endPos === -1) break; // couldn't match — leave unchanged
-
-    // Remove the popup block and continue scanning
-    result = result.slice(0, lastIdx) + result.slice(endPos);
-  }
-
-  return result;
-}
-
 // ── Main ─────────────────────────────────────────────────────────────────────
 
 async function main() {
@@ -520,11 +232,10 @@ async function main() {
 
   let cloneName: string;
   let brief: JobBrief | null = null;
-  const verify = args.verify ?? false;
 
-  const passArg = args.pass ?? "both";
-  if (!["componentize", "strip", "both"].includes(passArg)) {
-    console.error("--pass must be 'componentize', 'strip', or 'both'");
+  const passArg = args.pass ?? "translate";
+  if (!["translate", "strip", "both"].includes(passArg)) {
+    console.error("--pass must be 'translate', 'strip', or 'both'");
     process.exit(1);
   }
 
@@ -552,7 +263,7 @@ async function main() {
     }
   } else {
     console.error(
-      "Usage: extract-theme.ts --clone <name> [--pass componentize|strip|both] [--verify] | --brief <path>"
+      "Usage: extract-theme.ts --clone <name> [--pass translate|strip|both] | --brief <path>"
     );
     process.exit(1);
   }
@@ -581,427 +292,16 @@ async function main() {
   console.log(`  Theme: ${themeDir}`);
   console.log(`  Pass: ${passArg}\n`);
 
-  // ── Componentize pass ──────────────────────────────────────────────────────
-
-  if (passArg === "componentize" || passArg === "both") {
-    console.log("[extract] === Componentize Pass ===");
-
-    // Step 1: Validate CPF
-    console.log("[extract] Step 1: Validating CPF...");
-    const validation = validateCPF(cloneDir);
-    if (!validation.valid) {
-      console.error("CPF validation failed:");
-      for (const err of validation.errors) console.error(`  - ${err}`);
-      process.exit(1);
-    }
-    console.log("[extract] CPF valid");
-
-    // Step 2: Read computed styles
-    console.log("[extract] Step 2: Reading computed styles...");
-    const stylesPath = path.join(cloneDir, "styles", "computed-styles.json");
-    const stylesJson = JSON.parse(fs.readFileSync(stylesPath, "utf-8")) as {
-      sectionStyles?: Record<string, SectionComputedStyle[]>;
-      pages?: unknown[];
-    };
-
-    const allSections: SectionComputedStyle[] = Object.values(
-      stylesJson.sectionStyles ?? {}
-    ).flat();
-
-    let brandPrimary = brief?.theme.brandColors?.primary ?? "#3B82F6";
-    let brandSecondary = brief?.theme.brandColors?.secondary ?? "#6B7280";
-
-    if (stylesJson.pages && Array.isArray(stylesJson.pages)) {
-      try {
-        const mapped = mapStylesToTokens({ pages: stylesJson.pages as never });
-        brandPrimary = mapped.config.colors?.brand?.primary ?? brandPrimary;
-        brandSecondary = mapped.config.colors?.brand?.secondary ?? brandSecondary;
-      } catch {
-        // Ignore if pages data format doesn't match
-      }
-    }
-
-    const { customProperties } = mapSectionColors(allSections, brandPrimary, brandSecondary);
-    const typographyScale = extractTypographyScale(allSections);
+  // ── Translate pass ────────────────────────────────────────────────────────
+  if (passArg === "translate" || passArg === "both") {
+    console.log("[extract] === Translate Pass ===");
+    console.log("[extract] TODO: Translate pass not yet implemented.");
+    console.log("[extract] This pass will use AI to generate native Tailwind components");
+    console.log("[extract] from clone HTML/CSS/screenshots as reference material.");
     console.log(
-      `[extract] Extracted ${allSections.length} sections, ${Object.keys(customProperties).length} custom color vars`
+      "[extract] See: output/sessions/2026-04-13_translate-pipeline/ for implementation brief."
     );
-
-    // Step 3: Read clone JSX pages and extract CSS + JSX bodies
-    console.log("[extract] Step 3: Reading clone JSX pages...");
-    const jsxDir = path.join(cloneDir, "jsx", "pages");
-    const clonePages: Record<string, { css: string; jsxBody: string }> = {};
-    const allCssBlocks: string[] = [];
-
-    for (const file of fs.readdirSync(jsxDir).filter((f) => f.endsWith(".tsx"))) {
-      const jsx = fs.readFileSync(path.join(jsxDir, file), "utf-8");
-      // Normalize filename → page key (e.g. "HomePage.tsx" → "home", "Blog-listPage.tsx" → "blog-list")
-      const pageName = file
-        .replace(/Page\.tsx$/, "")
-        .replace(/\.tsx$/, "")
-        .replace(/([a-z])-([A-Z])/g, (_, a, b) => `${a}${b}`) // remove kebab from CamelCase
-        .toLowerCase();
-      const { css, jsxBody } = extractCssFromCloneJsx(jsx);
-      clonePages[pageName] = { css, jsxBody };
-      if (css.trim()) allCssBlocks.push(css);
-      console.log(`[extract]   Read ${file} → page key: ${pageName}`);
-    }
-
-    // Step 4: Extract header/footer from home page, strip from all pages
-    console.log("[extract] Step 4: Extracting header/footer from home page...");
-    const homeJsx = clonePages["home"]?.jsxBody ?? "";
-    const { header: headerMarkup, footer: footerMarkup } = extractHeaderFooter(homeJsx);
-    console.log(`[extract]   Header: ${headerMarkup ? "extracted" : "not found"}`);
-    console.log(`[extract]   Footer: ${footerMarkup ? "extracted" : "not found"}`);
-
-    // Strip header/footer from ALL pages (each page includes a full site header in the clone)
-    for (const [pageName, page] of Object.entries(clonePages)) {
-      const { bodyWithoutHeaderFooter } = extractHeaderFooter(page.jsxBody);
-      clonePages[pageName] = { css: page.css, jsxBody: bodyWithoutHeaderFooter };
-    }
-
-    // Strip mobile nav popup from ALL pages (duplicated Breakdance widget with external URLs)
-    for (const [pageName, page] of Object.entries(clonePages)) {
-      const stripped = stripPopupNav(page.jsxBody);
-      clonePages[pageName] = { css: page.css, jsxBody: stripped };
-    }
-
-    // Step 5: Assemble theme package
-    console.log("[extract] Steps 5-10: Assembling theme package...");
-
-    const componentDir = path.join(themeDir, "components");
-    const pagesDir = path.join(themeDir, "pages");
-    for (const d of [themeDir, componentDir, pagesDir]) {
-      fs.mkdirSync(d, { recursive: true });
-    }
-
-    // Header + Footer Server Components
-    if (headerMarkup) {
-      fs.writeFileSync(
-        path.join(componentDir, "header.tsx"),
-        generateHeaderFromClone(themeName, headerMarkup),
-        "utf-8"
-      );
-    } else {
-      fs.writeFileSync(
-        path.join(componentDir, "header.tsx"),
-        generateHeaderComponent(themeName),
-        "utf-8"
-      );
-    }
-
-    if (footerMarkup) {
-      fs.writeFileSync(
-        path.join(componentDir, "footer.tsx"),
-        generateFooterFromClone(themeName, footerMarkup),
-        "utf-8"
-      );
-    } else {
-      fs.writeFileSync(
-        path.join(componentDir, "footer.tsx"),
-        generateFooterComponent(themeName),
-        "utf-8"
-      );
-    }
-
-    fs.writeFileSync(
-      path.join(componentDir, "index.ts"),
-      generateComponentsBarrel(themeName),
-      "utf-8"
-    );
-
-    // Page layouts from clone JSX
-    const pageNames = Object.keys(clonePages);
-    for (const pageName of pageNames) {
-      const { jsxBody } = clonePages[pageName];
-      const layout = generatePageLayoutFromClone(themeName, pageName, jsxBody);
-      const filename = `${toPascalCase(pageName)}Page.tsx`;
-      fs.writeFileSync(path.join(pagesDir, filename), layout, "utf-8");
-      console.log(`[extract]   Generated page: ${filename}`);
-    }
-
-    // Generate stub pages for any theme page exports needed by the test site
-    // but not yet produced by the clone extraction.
-    const sitesRootDir = path.resolve(__dirname, "..", "sites");
-    const siteStubCandidates = fs.existsSync(sitesRootDir)
-      ? fs
-          .readdirSync(sitesRootDir)
-          .filter(
-            (d) =>
-              d.startsWith(`_${themeName}`) && fs.statSync(path.join(sitesRootDir, d)).isDirectory()
-          )
-      : [];
-
-    if (siteStubCandidates.length > 0) {
-      const siteForStubs = path.join(sitesRootDir, siteStubCandidates[0]);
-      const requiredExports = findRequiredThemePageExports(siteForStubs, themeName);
-
-      // Collect existing exports from already-generated page files
-      const existingExports: string[] = [];
-      for (const file of fs.readdirSync(pagesDir).filter((f) => f.endsWith(".tsx"))) {
-        const content = fs.readFileSync(path.join(pagesDir, file), "utf-8");
-        for (const m of content.matchAll(/export function (\w+)/g)) {
-          existingExports.push(m[1]);
-        }
-      }
-
-      const missingExports = requiredExports.filter((name) => !existingExports.includes(name));
-      if (missingExports.length > 0) {
-        console.log(`[extract] Generating stubs for missing exports: ${missingExports.join(", ")}`);
-        const stubFunctions = missingExports
-          .map(
-            (name) =>
-              `export function ${name}(props: Record<string, unknown>) {\n  void props;\n  return <main className="page-stub">{/* ${name} — stub */}</main>;\n}`
-          )
-          .join("\n\n");
-        const stubContent = `/* eslint-disable */\n// @ts-nocheck\n// Stub pages — not yet extracted from clone.\n\n${stubFunctions}\n`;
-        fs.writeFileSync(path.join(pagesDir, "StubPages.tsx"), stubContent, "utf-8");
-      }
-    }
-
-    // Build pages barrel from ALL .tsx files in the pages directory
-    // (includes both clone-generated pages and any stub pages written above)
-    const allPageFiles = fs
-      .readdirSync(pagesDir)
-      .filter((f) => f.endsWith(".tsx"))
-      .map((f) => f.replace(/\.tsx$/, ""));
-    fs.writeFileSync(path.join(pagesDir, "index.ts"), generatePagesBarrel(allPageFiles), "utf-8");
-
-    // index.ts barrel
-    fs.writeFileSync(path.join(themeDir, "index.ts"), generateIndexTs(themeName), "utf-8");
-
-    // globals.css — thin Tailwind-safe file; clone CSS served via <link> tag
-    fs.writeFileSync(path.join(themeDir, "globals.css"), generateThemeGlobalsCss(), "utf-8");
-
-    // package.json
-    fs.writeFileSync(
-      path.join(themeDir, "package.json"),
-      JSON.stringify(generatePackageJson(themeName), null, 2),
-      "utf-8"
-    );
-
-    // ── CSS Preprocessor ────────────────────────────────────────────────────
-    console.log("[extract] Running CSS preprocessor...");
-    const dedupedInlineCss = [...new Set(allCssBlocks)].join("\n\n");
-    const customPropsBlock = formatCustomPropertiesBlock(customProperties);
-    const preprocessResult = await preprocessCloneCss({
-      cloneDir,
-      themeName,
-      customProperties: customPropsBlock || undefined,
-      inlineCss: dedupedInlineCss || undefined,
-      sourceDomain,
-    });
-
-    // Write clone-styles.css to theme package
-    fs.writeFileSync(path.join(themeDir, "clone-styles.css"), preprocessResult.css, "utf-8");
-    console.log(`[extract] clone-styles.css: ${preprocessResult.css.length} bytes`);
-
-    // Write manifest
-    fs.writeFileSync(
-      path.join(themeDir, "clone-assets.manifest.json"),
-      JSON.stringify(preprocessResult.manifest, null, 2),
-      "utf-8"
-    );
-    console.log(
-      `[extract] Manifest: ${preprocessResult.manifest.includedFiles.length} included, ` +
-        `${preprocessResult.manifest.excludedFiles.length} excluded, ` +
-        `${preprocessResult.manifest.rewrittenUrls} URLs rewritten`
-    );
-    if (preprocessResult.manifest.strippedFontFaces.length > 0) {
-      console.log(
-        `[extract] Stripped fonts: ${preprocessResult.manifest.strippedFontFaces.join(", ")}`
-      );
-    }
-
-    // Copy clone images to theme package assets
-    const themeImagesDir = path.join(themeDir, "assets", "images");
-    fs.mkdirSync(themeImagesDir, { recursive: true });
-    for (const imgPath of preprocessResult.imageFiles) {
-      fs.copyFileSync(imgPath, path.join(themeImagesDir, path.basename(imgPath)));
-    }
-    console.log(`[extract] Copied ${preprocessResult.imageFiles.length} images to theme package`);
-
-    // Copy clone fonts to theme package assets (if any)
-    if (preprocessResult.fontFiles.length > 0) {
-      const themeFontsDir = path.join(themeDir, "assets", "fonts");
-      fs.mkdirSync(themeFontsDir, { recursive: true });
-      for (const fontPath of preprocessResult.fontFiles) {
-        fs.copyFileSync(fontPath, path.join(themeFontsDir, path.basename(fontPath)));
-      }
-      console.log(`[extract] Copied ${preprocessResult.fontFiles.length} fonts to theme package`);
-    }
-
-    // ── Rewrite image paths in generated page components ──────────────────
-    console.log("[extract] Rewriting image paths in generated page components...");
-    const cloneAssetsPrefix = `/clone-assets/${themeName}/images/`;
-    for (const file of fs.readdirSync(pagesDir).filter((f) => f.endsWith(".tsx"))) {
-      const filePath = path.join(pagesDir, file);
-      let pageContent = fs.readFileSync(filePath, "utf-8");
-      const before = pageContent;
-      pageContent = pageContent.replace(/src="\/images\//g, `src="${cloneAssetsPrefix}`);
-      pageContent = pageContent.replace(/src="images\//g, `src="${cloneAssetsPrefix}`);
-      pageContent = pageContent.replace(/src="\/assets\/images\//g, `src="${cloneAssetsPrefix}`);
-      if (pageContent !== before) {
-        fs.writeFileSync(filePath, pageContent, "utf-8");
-      }
-    }
-    // Also rewrite in component files
-    for (const file of ["header.tsx", "footer.tsx"]) {
-      const filePath = path.join(componentDir, file);
-      if (!fs.existsSync(filePath)) continue;
-      let compContent = fs.readFileSync(filePath, "utf-8");
-      const before = compContent;
-      compContent = compContent.replace(/src="\/images\//g, `src="${cloneAssetsPrefix}`);
-      compContent = compContent.replace(/src="images\//g, `src="${cloneAssetsPrefix}`);
-      compContent = compContent.replace(/src="\/assets\/images\//g, `src="${cloneAssetsPrefix}`);
-      if (compContent !== before) {
-        fs.writeFileSync(filePath, compContent, "utf-8");
-      }
-    }
-
-    // ── Deploy to test site (if it exists) ───────────────────────────────
-    const sitesDir = path.resolve(__dirname, "..", "sites");
-    let testSiteDir: string | null = null;
-
-    if (fs.existsSync(sitesDir)) {
-      const candidates = fs
-        .readdirSync(sitesDir)
-        .filter(
-          (d) => d.startsWith(`_${themeName}`) && fs.statSync(path.join(sitesDir, d)).isDirectory()
-        );
-      if (candidates.length > 0) {
-        testSiteDir = path.join(sitesDir, candidates[0]);
-        console.log(`[extract] Found test site: ${testSiteDir}`);
-      }
-    }
-
-    if (testSiteDir) {
-      const sitePublicAssetsDir = path.join(testSiteDir, "public", "clone-assets", themeName);
-
-      // Deploy clone CSS
-      const siteCssDir = path.join(sitePublicAssetsDir, "styles");
-      fs.mkdirSync(siteCssDir, { recursive: true });
-      fs.copyFileSync(path.join(themeDir, "clone-styles.css"), path.join(siteCssDir, "clone.css"));
-      console.log(`[extract] Deployed clone.css to ${siteCssDir}`);
-
-      // Deploy images
-      const siteImagesDir = path.join(sitePublicAssetsDir, "images");
-      fs.mkdirSync(siteImagesDir, { recursive: true });
-      for (const imgPath of preprocessResult.imageFiles) {
-        fs.copyFileSync(imgPath, path.join(siteImagesDir, path.basename(imgPath)));
-      }
-      console.log(
-        `[extract] Deployed ${preprocessResult.imageFiles.length} images to ${siteImagesDir}`
-      );
-
-      // Deploy fonts (if any)
-      if (preprocessResult.fontFiles.length > 0) {
-        const siteFontsDir = path.join(sitePublicAssetsDir, "fonts");
-        fs.mkdirSync(siteFontsDir, { recursive: true });
-        for (const fontPath of preprocessResult.fontFiles) {
-          fs.copyFileSync(fontPath, path.join(siteFontsDir, path.basename(fontPath)));
-        }
-        console.log(
-          `[extract] Deployed ${preprocessResult.fontFiles.length} fonts to ${siteFontsDir}`
-        );
-      }
-
-      // Deploy icons (if clone has icons directory)
-      const cloneIconsDir = path.join(cloneDir, "assets", "icons");
-      if (fs.existsSync(cloneIconsDir)) {
-        const siteIconsDir = path.join(sitePublicAssetsDir, "icons");
-        fs.mkdirSync(siteIconsDir, { recursive: true });
-        for (const iconFile of fs.readdirSync(cloneIconsDir)) {
-          fs.copyFileSync(path.join(cloneIconsDir, iconFile), path.join(siteIconsDir, iconFile));
-        }
-        console.log(`[extract] Deployed icons to ${siteIconsDir}`);
-      }
-
-      // Auto-generate site globals.css (Preflight omitted — clone CSS owns all resets)
-      const siteGlobalsCss = `/* Auto-generated for clone theme. Preflight omitted intentionally. */
-@import "../../../packages/themes/${themeName}/globals.css";
-
-@tailwind components;
-@tailwind utilities;
-`;
-      fs.writeFileSync(path.join(testSiteDir, "app", "globals.css"), siteGlobalsCss, "utf-8");
-      console.log(`[extract] Generated site globals.css (no @tailwind base)`);
-
-      // Auto-insert <link> for clone CSS in site layout.tsx
-      const layoutPath = path.join(testSiteDir, "app", "layout.tsx");
-      if (fs.existsSync(layoutPath)) {
-        let layoutContent = fs.readFileSync(layoutPath, "utf-8");
-        const linkTag = `<link rel="stylesheet" href="/clone-assets/${themeName}/styles/clone.css" />`;
-        if (!layoutContent.includes("clone-assets")) {
-          // Insert after <head> opening tag
-          layoutContent = layoutContent.replace(/(<head(?:\s[^>]*)?>)/, `$1\n        ${linkTag}`);
-          fs.writeFileSync(layoutPath, layoutContent, "utf-8");
-          console.log(`[extract] Inserted clone CSS <link> into layout.tsx`);
-        } else {
-          console.log(`[extract] layout.tsx already has clone-assets link — skipped`);
-        }
-      }
-
-      // Ensure tailwind.config.ts has corePlugins: { preflight: false }
-      const tailwindConfigPath = path.join(testSiteDir, "tailwind.config.ts");
-      if (fs.existsSync(tailwindConfigPath)) {
-        let tailwindContent = fs.readFileSync(tailwindConfigPath, "utf-8");
-        if (!tailwindContent.includes("preflight")) {
-          // Insert corePlugins: { preflight: false } before the plugins line
-          tailwindContent = tailwindContent.replace(
-            /([ \t]*plugins\s*:)/,
-            `  corePlugins: {\n    preflight: false,\n  },\n$1`
-          );
-          fs.writeFileSync(tailwindConfigPath, tailwindContent, "utf-8");
-          console.log(`[extract] Set corePlugins.preflight = false in tailwind.config.ts`);
-        } else {
-          console.log(`[extract] tailwind.config.ts already has preflight config — skipped`);
-        }
-      }
-    } else {
-      console.log(`[extract] No test site found for theme "${themeName}" — skipping site deploy`);
-    }
-
-    console.log(`[extract] Componentize pass complete: ${themeDir}`);
-    console.log(`[extract] Typography scale: ${JSON.stringify(typographyScale)}`);
-
-    // ── Visual QA gate (advisory) ───────────────────────────────────────────
-    if (verify) {
-      console.log("[extract] Running visual QA gate...");
-
-      const testSitePath = path.resolve(
-        __dirname,
-        "..",
-        `sites/_${themeName}-${brief?.business?.trade ?? "test"}`
-      );
-      const referencePath = path.resolve(cloneDir, "reference-screenshots");
-
-      if (fs.existsSync(testSitePath) && fs.existsSync(referencePath)) {
-        const { runVisualQALoop } = await import("./lib/visual-qa-loop");
-        const qaResult = await runVisualQALoop({
-          clonePath: testSitePath,
-          maxIterations: 1,
-          thresholds: { home: 0.1, about: 0.1, default: 0.15 },
-          mode: "pixel",
-        });
-
-        if (qaResult.passed) {
-          console.log("[extract] Visual QA PASSED — proceeding to strip");
-        } else {
-          console.log("[extract] Visual QA FAILED — diffs:");
-          for (const d of qaResult.finalDiffs) {
-            console.log(
-              `  ${d.page}: ${(d.diffPercent * 100).toFixed(1)}% (${d.pass ? "PASS" : "FAIL"})`
-            );
-          }
-          console.log(
-            "[extract] Continuing to strip despite failures (visual QA is advisory in v1)"
-          );
-        }
-      } else {
-        console.log("[extract] Skipping visual QA — test site or reference screenshots not found");
-      }
-    }
+    // Future: vision analysis → section extraction → AI translation → page assembly → theme scaffold
   }
 
   // ── Strip pass ─────────────────────────────────────────────────────────────
@@ -1014,7 +314,7 @@ async function main() {
 
     if (!fs.existsSync(pagesDir)) {
       console.error(
-        `[extract] Strip pass requires componentized theme at ${pagesDir}. Run --pass componentize first.`
+        `[extract] Strip pass requires theme pages at ${pagesDir}. Run --pass translate first.`
       );
       process.exit(1);
     }
@@ -1029,13 +329,13 @@ async function main() {
       sourceDomain,
     };
 
-    // Strip page layouts — only process componentize-generated files (marked @ts-nocheck)
+    // Strip page layouts — only process clone-verbatim files (marked @ts-nocheck)
     // Typed stub pages use proper template props and should not be processed by the stripper
     for (const file of fs.readdirSync(pagesDir).filter((f) => f.endsWith(".tsx"))) {
       const filePath = path.join(pagesDir, file);
       const jsx = fs.readFileSync(filePath, "utf-8");
       if (!jsx.includes("@ts-nocheck")) {
-        console.log(`[extract]   Skip ${file} (typed stub — not componentize-generated)`);
+        console.log(`[extract]   Skip ${file} (typed stub — skip)`);
         continue;
       }
       const stripped = stripContent(jsx, strippingConfig);
@@ -1043,14 +343,14 @@ async function main() {
       console.log(`[extract]   Stripped ${file}: ${stripped.propCount} props replaced`);
     }
 
-    // Strip header/footer components — only if componentize-generated (marked @ts-nocheck)
-    // Fallback stubs (no clone header/footer found) are typed and must not be processed
+    // Strip header/footer components — only if clone-verbatim (marked @ts-nocheck)
+    // Typed stubs are not processed by the stripper
     for (const file of ["header.tsx", "footer.tsx"]) {
       const filePath = path.join(componentDir, file);
       if (fs.existsSync(filePath)) {
         const jsx = fs.readFileSync(filePath, "utf-8");
         if (!jsx.includes("@ts-nocheck")) {
-          console.log(`[extract]   Skip ${file} (typed stub — not componentize-generated)`);
+          console.log(`[extract]   Skip ${file} (typed stub — skip)`);
           continue;
         }
         const stripped = stripContent(jsx, strippingConfig);
