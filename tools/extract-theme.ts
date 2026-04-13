@@ -154,6 +154,62 @@ function generatePagesBarrel(pageNames: string[]): string {
   return pageNames.map((n) => `export * from "./${n}";`).join("\n") + "\n";
 }
 
+/**
+ * Generate a stub page component file for a named export that doesn't yet
+ * have a real implementation extracted from the clone.
+ */
+function generateStubPage(exportName: string): string {
+  return `/* eslint-disable */
+// @ts-nocheck
+// Stub page — not yet extracted from clone.
+// Satisfies TypeScript until the full clone-to-theme extraction covers this page type.
+
+export function ${exportName}(props: Record<string, unknown>) {
+  void props;
+  return <main className="page-stub">{/* ${exportName} — stub */}</main>;
+}
+`;
+}
+
+/**
+ * Scan a site's app directory to find all theme page component imports.
+ * Returns a list of exported names needed from the theme's pages barrel.
+ */
+function findRequiredThemePageExports(siteDir: string, themeName: string): string[] {
+  const appDir = path.join(siteDir, "app");
+  if (!fs.existsSync(appDir)) return [];
+
+  const needed: string[] = [];
+  const importPattern = new RegExp(
+    `import\\s+\\{([^}]+)\\}\\s+from\\s+['"]@platform/themes/${themeName}/pages['"]`,
+    "g"
+  );
+
+  function scanDir(dir: string) {
+    for (const entry of fs.readdirSync(dir)) {
+      const fullPath = path.join(dir, entry);
+      const stat = fs.statSync(fullPath);
+      if (stat.isDirectory()) {
+        scanDir(fullPath);
+      } else if (entry.endsWith(".tsx") || entry.endsWith(".ts")) {
+        const content = fs.readFileSync(fullPath, "utf-8");
+        let m: RegExpExecArray | null;
+        while ((m = importPattern.exec(content)) !== null) {
+          for (const name of m[1]
+            .split(",")
+            .map((s) => s.trim())
+            .filter(Boolean)) {
+            if (!needed.includes(name)) needed.push(name);
+          }
+        }
+      }
+    }
+  }
+
+  scanDir(appDir);
+  return needed;
+}
+
 function generateHeaderComponent(themeName: string): string {
   return `import type React from "react";
 
@@ -591,8 +647,47 @@ async function main() {
       console.log(`[extract]   Generated page: ${filename}`);
     }
 
+    // Generate stub pages for any theme page exports needed by the test site
+    // but not yet produced by the clone extraction.
+    const sitesRootDir = path.resolve(__dirname, "..", "sites");
+    const siteStubCandidates = fs.existsSync(sitesRootDir)
+      ? fs
+          .readdirSync(sitesRootDir)
+          .filter(
+            (d) =>
+              d.startsWith(`_${themeName}`) && fs.statSync(path.join(sitesRootDir, d)).isDirectory()
+          )
+      : [];
+
+    if (siteStubCandidates.length > 0) {
+      const siteForStubs = path.join(sitesRootDir, siteStubCandidates[0]);
+      const requiredExports = findRequiredThemePageExports(siteForStubs, themeName);
+
+      // Collect existing exports from already-generated page files
+      const existingExports: string[] = [];
+      for (const file of fs.readdirSync(pagesDir).filter((f) => f.endsWith(".tsx"))) {
+        const content = fs.readFileSync(path.join(pagesDir, file), "utf-8");
+        for (const m of content.matchAll(/export function (\w+)/g)) {
+          existingExports.push(m[1]);
+        }
+      }
+
+      const missingExports = requiredExports.filter((name) => !existingExports.includes(name));
+      if (missingExports.length > 0) {
+        console.log(`[extract] Generating stubs for missing exports: ${missingExports.join(", ")}`);
+        const stubFunctions = missingExports
+          .map(
+            (name) =>
+              `export function ${name}(props: Record<string, unknown>) {\n  void props;\n  return <main className="page-stub">{/* ${name} — stub */}</main>;\n}`
+          )
+          .join("\n\n");
+        const stubContent = `/* eslint-disable */\n// @ts-nocheck\n// Stub pages — not yet extracted from clone.\n\n${stubFunctions}\n`;
+        fs.writeFileSync(path.join(pagesDir, "StubPages.tsx"), stubContent, "utf-8");
+      }
+    }
+
     // Build pages barrel from ALL .tsx files in the pages directory
-    // (includes both clone-generated pages and any pre-existing stub pages)
+    // (includes both clone-generated pages and any stub pages written above)
     const allPageFiles = fs
       .readdirSync(pagesDir)
       .filter((f) => f.endsWith(".tsx"))
