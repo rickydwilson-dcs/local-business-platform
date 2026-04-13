@@ -58,7 +58,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   return (
     <html lang="en-GB">
       <head>
-        <link rel="stylesheet" href="/clone-assets/corvus/styles/clone.css" />
         {/* Geo meta tags for local SEO */}
         {siteConfig.business.geo && (
           <>
