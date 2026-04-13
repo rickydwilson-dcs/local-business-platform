@@ -16,6 +16,7 @@ import {
   clientComponentShell,
   placeholderComponent,
   buildComponentGenerationPrompt,
+  buildCloneTranslationPrompt,
   generatePropsInterface,
 } from "./theme-component-templates";
 import { isAllowedClass, looksLikeColorClass } from "./token-class-allowlist";
@@ -65,10 +66,11 @@ function validateTypeScriptSyntax(content: string, fileName: string): string[] {
     content,
     ts.ScriptTarget.Latest,
     true,
-    ts.ScriptKind.TSX,
+    ts.ScriptKind.TSX
   );
   const errors: string[] = [];
-  const diagnostics = (sourceFile as unknown as { parseDiagnostics?: ts.Diagnostic[] }).parseDiagnostics;
+  const diagnostics = (sourceFile as unknown as { parseDiagnostics?: ts.Diagnostic[] })
+    .parseDiagnostics;
   if (diagnostics) {
     for (const d of diagnostics) {
       errors.push(ts.flattenDiagnosticMessageText(d.messageText, "\n"));
@@ -158,14 +160,17 @@ export function validateNoBracketProps(content: string): { valid: boolean; viola
   const regex = /props\[['"][^'"]+['"]\]/g;
   let match;
   while ((match = regex.exec(content)) !== null) {
-    const line = content.substring(0, match.index).split('\n').length;
+    const line = content.substring(0, match.index).split("\n").length;
     const context = content.substring(match.index, match.index + 50);
     violations.push(`Line ${line}: ${context}`);
   }
   return { valid: violations.length === 0, violations };
 }
 
-export function validatePropsAgainstInterface(content: string): { valid: boolean; undeclaredProps: string[] } {
+export function validatePropsAgainstInterface(content: string): {
+  valid: boolean;
+  undeclaredProps: string[];
+} {
   // Extract prop names from the interface
   const interfaceMatch = content.match(/interface\s+\w+Props\s*\{([^}]+)\}/s);
   if (!interfaceMatch) return { valid: true, undeclaredProps: [] };
@@ -187,7 +192,7 @@ export function validatePropsAgainstInterface(content: string): { valid: boolean
     usedProps.add(usageMatch[1]);
   }
 
-  const undeclaredProps = [...usedProps].filter(p => !declaredProps.has(p));
+  const undeclaredProps = [...usedProps].filter((p) => !declaredProps.has(p));
   return { valid: undeclaredProps.length === 0, undeclaredProps };
 }
 
@@ -199,7 +204,8 @@ export function hasResidualBracketProps(content: string): boolean {
 // "use client" directive detection
 // ============================================================================
 
-const CLIENT_PATTERNS = /\b(useState|useEffect|useRef|useCallback|useMemo|onClick|onChange|onSubmit|onKeyDown|onMouseEnter|onFocus|onBlur|RevealOnScroll|Carousel|ParallaxSection|useScrollParallax|IntersectionObserver)\b|<form\b/;
+const CLIENT_PATTERNS =
+  /\b(useState|useEffect|useRef|useCallback|useMemo|onClick|onChange|onSubmit|onKeyDown|onMouseEnter|onFocus|onBlur|RevealOnScroll|Carousel|ParallaxSection|useScrollParallax|IntersectionObserver)\b|<form\b/;
 
 /**
  * Determine if a component needs "use client" directive.
@@ -224,15 +230,24 @@ export function needsUseClient(blueprint: SectionBlueprint, jsxBody: string): bo
 
 async function generateJSXBody(
   client: Anthropic,
-  blueprint: SectionBlueprint
+  blueprint: SectionBlueprint,
+  tokenMappings?: string
 ): Promise<string | null> {
   const interfaceName = `${blueprint.componentExportName}Props`;
-  const prompt = buildComponentGenerationPrompt(blueprint, interfaceName);
+
+  // Use clone translation prompt when clone context is available
+  const useCloneTranslation = !!blueprint.cloneHtmlFragment;
+  const prompt = useCloneTranslation
+    ? buildCloneTranslationPrompt(blueprint, interfaceName, tokenMappings)
+    : buildComponentGenerationPrompt(blueprint, interfaceName);
+
+  // Increase max_tokens for clone translation (output is typically larger)
+  const maxTokens = useCloneTranslation ? 4096 : 2048;
 
   try {
     const response = await client.messages.create({
       model: "claude-sonnet-4-6",
-      max_tokens: 2048,
+      max_tokens: maxTokens,
       temperature: 0,
       messages: [{ role: "user", content: prompt }],
     });
@@ -253,7 +268,10 @@ async function generateJSXBody(
 
     // Indent properly if needed
     if (!body.startsWith("  ")) {
-      body = body.split("\n").map(line => `  ${line}`).join("\n");
+      body = body
+        .split("\n")
+        .map((line) => `  ${line}`)
+        .join("\n");
     }
 
     return body;
@@ -270,7 +288,8 @@ async function generateJSXBody(
 async function generateSingleComponent(
   client: Anthropic | null,
   blueprint: SectionBlueprint,
-  outputDir: string
+  outputDir: string,
+  tokenMappings?: string
 ): Promise<{ component: GeneratedComponent; warnings: string[] }> {
   const warnings: string[] = [];
   const filePath = path.join(outputDir, blueprint.componentFileName);
@@ -278,7 +297,20 @@ async function generateSingleComponent(
   let usedAI = false;
 
   if (client) {
-    let jsxBody = await generateJSXBody(client, blueprint);
+    let jsxBody = await generateJSXBody(client, blueprint, tokenMappings);
+
+    // If clone translation failed, fall back to blueprint-only generation
+    if (!jsxBody && blueprint.cloneHtmlFragment) {
+      warnings.push(
+        `${blueprint.name}: Clone translation failed — falling back to blueprint-only generation`
+      );
+      const blueprintOnly = {
+        ...blueprint,
+        cloneHtmlFragment: undefined,
+        cloneRelevantCss: undefined,
+      };
+      jsxBody = await generateJSXBody(client, blueprintOnly);
+    }
 
     if (jsxBody) {
       const needsClient = needsUseClient(blueprint, jsxBody);
@@ -313,18 +345,26 @@ async function generateSingleComponent(
       if (usedAI) {
         const { content: fixedContent, violations } = validateAndFixTokenClasses(content);
         if (violations.length > 0) {
-          const strippedViolations = violations.map(v => ({
+          const strippedViolations = violations.map((v) => ({
             original: v,
             stripped: v.replace(/^(?:sm:|md:|lg:|xl:|2xl:|hover:|focus:|active:|dark:)+/, ""),
           }));
-          const fixedClasses = strippedViolations.filter(v => CLASS_REPLACEMENTS[v.stripped]).map(v => v.original);
-          const unfixedClasses = strippedViolations.filter(v => !CLASS_REPLACEMENTS[v.stripped]).map(v => v.original);
+          const fixedClasses = strippedViolations
+            .filter((v) => CLASS_REPLACEMENTS[v.stripped])
+            .map((v) => v.original);
+          const unfixedClasses = strippedViolations
+            .filter((v) => !CLASS_REPLACEMENTS[v.stripped])
+            .map((v) => v.original);
 
           if (fixedClasses.length > 0) {
-            warnings.push(`${blueprint.name}: Non-standard colour classes replaced: ${fixedClasses.join(", ")}`);
+            warnings.push(
+              `${blueprint.name}: Non-standard colour classes replaced: ${fixedClasses.join(", ")}`
+            );
           }
           if (unfixedClasses.length > 0) {
-            warnings.push(`${blueprint.name}: Unknown colour classes (not in token allowlist): ${unfixedClasses.join(", ")}`);
+            warnings.push(
+              `${blueprint.name}: Unknown colour classes (not in token allowlist): ${unfixedClasses.join(", ")}`
+            );
           }
           content = fixedContent;
           // Re-check syntax after auto-fix
@@ -340,13 +380,17 @@ async function generateSingleComponent(
       if (usedAI) {
         const { content: propsFixed, fixCount } = fixBracketNotationProps(content);
         if (fixCount > 0) {
-          warnings.push(`${blueprint.name}: Fixed ${fixCount} bracket-notation prop accesses → dot notation`);
+          warnings.push(
+            `${blueprint.name}: Fixed ${fixCount} bracket-notation prop accesses → dot notation`
+          );
           content = propsFixed;
         }
         // Hard-fail if bracket notation still remains after fix
         const { valid: noBracket, violations: bracketViolations } = validateNoBracketProps(content);
         if (!noBracket) {
-          warnings.push(`${blueprint.name}: Residual bracket-notation props detected after fix — using placeholder: ${bracketViolations[0]}`);
+          warnings.push(
+            `${blueprint.name}: Residual bracket-notation props detected after fix — using placeholder: ${bracketViolations[0]}`
+          );
           content = placeholderComponent(blueprint);
           usedAI = false;
         }
@@ -354,7 +398,9 @@ async function generateSingleComponent(
         if (usedAI) {
           const { valid: propsValid, undeclaredProps } = validatePropsAgainstInterface(content);
           if (!propsValid) {
-            warnings.push(`${blueprint.name}: Undeclared props used (informational): ${undeclaredProps.join(", ")}`);
+            warnings.push(
+              `${blueprint.name}: Undeclared props used (informational): ${undeclaredProps.join(", ")}`
+            );
           }
         }
       }
@@ -370,7 +416,9 @@ async function generateSingleComponent(
   // Post-generation validation: hex literal scan
   const hexLiterals = scanForHexLiterals(content);
   if (hexLiterals.length > 0) {
-    warnings.push(`${blueprint.name}: Contains hex literals: ${hexLiterals.join(", ")} — replacing with placeholder`);
+    warnings.push(
+      `${blueprint.name}: Contains hex literals: ${hexLiterals.join(", ")} — replacing with placeholder`
+    );
     content = placeholderComponent(blueprint);
     usedAI = false;
   }
@@ -407,7 +455,7 @@ async function generateSingleComponent(
 export async function generateThemeComponents(
   blueprints: SectionBlueprint[],
   outputDir: string,
-  componentMatches?: Map<string, ComponentMatch | null>,
+  componentMatches?: Map<string, ComponentMatch | null>
 ): Promise<GenerationResult> {
   const allComponents: GeneratedComponent[] = [];
   const allWarnings: string[] = [];
@@ -429,14 +477,18 @@ export async function generateThemeComponents(
     ? blueprints.filter((bp) => {
         const match = componentMatches.get(bp.id);
         if (match && (match.matchConfidence === "exact" || match.matchConfidence === "close")) {
-          console.log(`    ✓ ${bp.componentExportName} → reusing ${match.componentName} (${match.matchConfidence})`);
+          console.log(
+            `    ✓ ${bp.componentExportName} → reusing ${match.componentName} (${match.matchConfidence})`
+          );
           return false;
         }
         return true;
       })
     : blueprints;
 
-  console.log(`  Generating ${blueprintsToGenerate.length} components (${blueprints.length - blueprintsToGenerate.length} reused from core)...`);
+  console.log(
+    `  Generating ${blueprintsToGenerate.length} components (${blueprints.length - blueprintsToGenerate.length} reused from core)...`
+  );
 
   for (const blueprint of blueprintsToGenerate) {
     console.log(`    ${blueprint.componentExportName} (${blueprint.category})...`);
@@ -444,7 +496,92 @@ export async function generateThemeComponents(
 
     // Write file
     fs.writeFileSync(component.filePath, component.content, "utf8");
-    console.log(`    ✓ ${path.basename(component.filePath)}${component.usedAI ? " (AI)" : " (placeholder)"}`);
+    console.log(
+      `    ✓ ${path.basename(component.filePath)}${component.usedAI ? " (AI)" : " (placeholder)"}`
+    );
+
+    allComponents.push(component);
+    allWarnings.push(...warnings);
+  }
+
+  // Globals.css validation: scan for non-standard Tailwind classes
+  const customClasses = scanForCustomClasses(allComponents);
+  if (customClasses.length > 0) {
+    allWarnings.push(
+      `Custom Tailwind classes used in components (verify in globals.css): ${customClasses.join(", ")}`
+    );
+  }
+
+  return { components: allComponents, warnings: allWarnings };
+}
+
+/**
+ * Generate component files from clone-enriched blueprints.
+ *
+ * Uses the clone translation prompt (HTML + CSS reference) when a blueprint
+ * has cloneHtmlFragment. Falls back to blueprint-only generation on failure.
+ *
+ * @param blueprints - Section blueprints enriched with clone context
+ * @param outputDir - Directory to write component files to
+ * @param tokenMappings - Optional formatted string of color token mappings for the AI prompt
+ * @param componentMatches - Optional map of blueprint ID to ComponentMatch (v3 pipeline)
+ * @returns Generation result with component metadata and warnings
+ */
+export async function generateThemeComponentsFromClone(
+  blueprints: SectionBlueprint[],
+  outputDir: string,
+  tokenMappings?: string,
+  componentMatches?: Map<string, ComponentMatch | null>
+): Promise<GenerationResult> {
+  const allComponents: GeneratedComponent[] = [];
+  const allWarnings: string[] = [];
+
+  // Ensure output directory exists
+  fs.mkdirSync(outputDir, { recursive: true });
+
+  // Set up AI client if available
+  const apiKey = process.env.ANTHROPIC_API_KEY;
+  let client: Anthropic | null = null;
+  if (apiKey) {
+    client = new Anthropic({ apiKey });
+  } else {
+    console.warn("  [Warning] ANTHROPIC_API_KEY not set — generating placeholder components.");
+  }
+
+  // Filter blueprints: skip those with "exact" or "close" matches
+  const blueprintsToGenerate = componentMatches
+    ? blueprints.filter((bp) => {
+        const match = componentMatches.get(bp.id);
+        if (match && (match.matchConfidence === "exact" || match.matchConfidence === "close")) {
+          console.log(
+            `    ✓ ${bp.componentExportName} → reusing ${match.componentName} (${match.matchConfidence})`
+          );
+          return false;
+        }
+        return true;
+      })
+    : blueprints;
+
+  const cloneCount = blueprintsToGenerate.filter((bp) => bp.cloneHtmlFragment).length;
+  console.log(
+    `  Generating ${blueprintsToGenerate.length} components (${cloneCount} with clone context, ${blueprintsToGenerate.length - cloneCount} blueprint-only)...`
+  );
+
+  for (const blueprint of blueprintsToGenerate) {
+    const contextLabel = blueprint.cloneHtmlFragment ? " [clone]" : "";
+    console.log(`    ${blueprint.componentExportName} (${blueprint.category})${contextLabel}...`);
+    const { component, warnings } = await generateSingleComponent(
+      client,
+      blueprint,
+      outputDir,
+      tokenMappings
+    );
+
+    // Write file
+    fs.writeFileSync(component.filePath, component.content, "utf8");
+    console.log(
+      `    ✓ ${path.basename(component.filePath)}${component.usedAI ? " (AI)" : " (placeholder)"}`
+    );
 
     allComponents.push(component);
     allWarnings.push(...warnings);
