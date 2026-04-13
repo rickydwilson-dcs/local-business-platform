@@ -30,15 +30,15 @@ This captures the site via Playwright: downloads HTML for all discovered pages, 
 
 **Check:** Open `output/clones/<theme-name>/html/pages/home.html` in your browser — it should look like the reference site.
 
-### Step 2: Componentize (preserve markup as theme components)
+### Step 2: Translate (generate native Tailwind components from clone reference)
 
 ```bash
-npx tsx tools/extract-theme.ts --clone <theme-name> --pass componentize --verify
+npx tsx tools/extract-theme.ts --clone <theme-name> --pass translate --verify
 ```
 
-This takes the clone's JSX and wraps it in React components at `packages/themes/<theme-name>/`. The `--verify` flag runs a Playwright screenshot diff against the reference screenshots to confirm fidelity.
+This reads the clone's HTML, CSS, and screenshots as reference material and uses AI (Claude claude-sonnet-4-6) to generate native Tailwind components at `packages/themes/<theme-name>/`. It does not copy the clone's CSS — instead it interprets layout, spacing, and colour from the clone and emits `flex flex-col max-w-7xl gap-8 bg-brand-primary`-style classes. The `--verify` flag runs a Playwright screenshot diff against the reference screenshots to confirm visual fidelity.
 
-**Check:** The page layouts in `packages/themes/<theme-name>/pages/` should contain the actual reference site markup (hundreds of lines, not stubs). If visual QA reports >10% diff, inspect the diff images in `output/clones/<theme-name>/reports/`.
+**Check:** The components in `packages/themes/<theme-name>/components/` should use Tailwind utility classes (not Breakdance/WordPress class names like `bde-section-*`). Run `grep -r "bde-" packages/themes/<theme-name>/` — should return nothing. If visual QA reports >10% diff, inspect the diff images in `output/clones/<theme-name>/reports/`.
 
 ### Step 3: Strip content (produce reusable theme shell)
 
