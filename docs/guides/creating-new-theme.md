@@ -10,12 +10,67 @@ There are two ways to create a new theme, depending on whether you have a refere
 
 | Situation                                      | Command                   |
 | ---------------------------------------------- | ------------------------- |
-| Client has an existing website to extract from | `/pipeline.ingest`        |
+| Client has an existing website to clone        | Clone pipeline (Option A) |
+| Client has an existing website (legacy ingest) | `/pipeline.ingest`        |
 | No existing website — generate from scratch    | `/pipeline.stitch-design` |
 
 ---
 
-## Option A: From a reference website (`/pipeline.ingest`)
+## Option A: Clone pipeline (recommended for reference sites)
+
+The clone pipeline produces the highest-fidelity themes. It clones the reference site's actual HTML, preserves the layout and CSS, then strips content to produce a reusable theme shell. Run each step individually and check the output before proceeding.
+
+### Step 1: Clone the reference site
+
+```bash
+npx tsx tools/clone-site.ts --url https://example.com --name <theme-name>
+```
+
+This captures the site via Playwright: downloads HTML for all discovered pages, captures screenshots at 1440x900, downloads images/fonts/CSS, and converts HTML to JSX mechanically.
+
+**Check:** Open `output/clones/<theme-name>/html/pages/home.html` in your browser — it should look like the reference site.
+
+### Step 2: Componentize (preserve markup as theme components)
+
+```bash
+npx tsx tools/extract-theme.ts --clone <theme-name> --pass componentize --verify
+```
+
+This takes the clone's JSX and wraps it in React components at `packages/themes/<theme-name>/`. The `--verify` flag runs a Playwright screenshot diff against the reference screenshots to confirm fidelity.
+
+**Check:** The page layouts in `packages/themes/<theme-name>/pages/` should contain the actual reference site markup (hundreds of lines, not stubs). If visual QA reports >10% diff, inspect the diff images in `output/clones/<theme-name>/reports/`.
+
+### Step 3: Strip content (produce reusable theme shell)
+
+```bash
+npx tsx tools/extract-theme.ts --clone <theme-name> --pass strip
+```
+
+This replaces headings, paragraphs, images, phone numbers, email addresses, and business names with component props (`{props.heading}`, `{props.body}`, `{props.imageSrc}`, etc.). The layout structure, CSS classes, and animations are preserved.
+
+**Check:** `grep -c "props\." packages/themes/<theme-name>/pages/HomePage.tsx` — should find 10+ prop replacements. `grep -c "OldBusinessName" packages/themes/<theme-name>/pages/HomePage.tsx` — should be 0 or near-0.
+
+**Note:** If you run `--clone` without `--brief`, the tool auto-discovers a matching brief from `output/briefs/` by theme name. For best stripping results, create a brief first with `tools/create-pipeline-brief.ts`.
+
+### Step 4: Scaffold a client site (optional)
+
+```bash
+npx tsx tools/scaffold-client-site.ts --theme <theme-name> --trade "trade" --brief output/briefs/<brief>.json
+```
+
+This creates `sites/_<theme-name>-<trade>/` with the theme wired in and MDX content generated from the brief.
+
+### What it produces
+
+```
+output/clones/<theme-name>/           # Clone artifacts (HTML, JSX, screenshots)
+packages/themes/<theme-name>/         # Theme package (components, pages, globals.css)
+sites/_<theme-name>-<trade>/          # Client site (if scaffold step run)
+```
+
+---
+
+## Option B: Legacy ingest from a reference website (`/pipeline.ingest`)
 
 Use this when the client has an existing website. The pipeline screenshots the site, extracts colours and layout patterns, and builds a theme package from what it finds.
 
@@ -43,7 +98,7 @@ The pipeline assigns a theme name automatically from the constellation namespace
 
 ---
 
-## Option B: AI-generated from a trade description (`/pipeline.stitch-design`)
+## Option C: AI-generated from a trade description (`/pipeline.stitch-design`)
 
 Use this when there's no existing website. Google Stitch generates a bespoke design from a trade/profession description. The pipeline extracts the design tokens and wires up a theme package.
 

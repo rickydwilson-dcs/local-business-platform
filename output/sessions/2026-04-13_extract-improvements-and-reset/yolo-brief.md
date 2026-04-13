@@ -595,3 +595,17 @@ This writes `session-wrap-up.md` to the session folder. **This is a required fin
 - **DO NOT push** — the user will deploy after reviewing
 - The content-stripper image regex must work for ANY source site (not just WordPress/colorcode.events) — match generic `images/` paths, not site-specific patterns
 - When resetting corvus theme stubs, keep the component barrel using lowercase filenames and named exports (the jiti fix from earlier today)
+
+## Completed
+
+**Date:** 2026-04-13
+**Status:** All phases executed successfully
+
+All 6 phases implemented without errors. Phase 1 extended the content stripper: broadened image src matching from `assets/images/` to any `images/` path (with and without leading slash), and added alt attribute stripping — critically, alt stripping was moved to run before the businessName global replacement to prevent partial replacement that would produce invalid JSX. Phase 2 added `discoverBrief()` auto-scan of `output/briefs/` by `theme.name`, verified against the corvus brief. Phase 3 added `--verify` flag wired to `runVisualQALoop` after the componentize pass (advisory in v1 — skips if test site or reference screenshots missing). Phase 4 cleaned up all pipeline artifacts: removed the clone, the scaffolded test site, reset 5 componentized pages and the header component to typed stubs, and removed 34 pipeline-generated component files from `packages/themes/corvus/components/`. Phase 5 merged both feature branches into develop via fast-forward. Phase 6 confirmed develop is clean on 9 passing type-check tasks and ready for a full pipeline re-run.
+
+### Commits
+
+- `1ee9565` feat(pipeline): extend content stripper for image paths and alt attrs
+- `3cc4081` feat(pipeline): auto-discover brief when using --clone without --brief
+- `78e5e82` feat(pipeline): add --verify flag for visual QA gate
+- `2b762cf` chore: reset pipeline artifacts for fresh end-to-end re-run
