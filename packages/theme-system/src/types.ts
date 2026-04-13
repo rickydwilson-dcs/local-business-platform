@@ -282,17 +282,39 @@ export interface ThemeConfig {
  * - vega:  light header, split hero, card grid (professional style)
  */
 export const THEME_NAMES = [
+  // Active themes
   "atlas",
   "castor",
+  "corvus",
   "cygnus",
   "lyra",
   "nova",
-  "corvus",
   "orion",
   "polaris",
   "sirius",
   "solaris",
   "vega",
+  // Reserved names for future themes
+  "altair",
+  "aquila",
+  "aries",
+  "auriga",
+  "bootes",
+  "callisto",
+  "centauri",
+  "draco",
+  "eridanus",
+  "fornax",
+  "gemini",
+  "hydra",
+  "indus",
+  "leo",
+  "libra",
+  "mensa",
+  "norma",
+  "pegasus",
+  "rigel",
+  "tucana",
 ] as const;
 export type ThemeName = (typeof THEME_NAMES)[number];
 
