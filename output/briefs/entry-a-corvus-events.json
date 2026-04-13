@@ -1,0 +1,55 @@
+{
+  "id": "entry-a-corvus-events-2026-04-13",
+  "createdAt": "2026-04-13T00:00:00Z",
+  "cpfVersion": "0.1",
+  "source": {
+    "type": "url",
+    "value": "https://colorcode.events"
+  },
+  "business": {
+    "name": "Digital Marketing Weekend",
+    "trade": "digital-marketing-events",
+    "tagline": "Two days of practical marketing sessions, workshops, and networking",
+    "email": "hello@colorcode.events",
+    "address": {
+      "city": "Eastbourne",
+      "postcode": "BN21 4BP",
+      "region": "East Sussex"
+    }
+  },
+  "content": {
+    "services": [
+      "Conference Sessions",
+      "Workshops",
+      "Networking Events",
+      "Speaker Presentations",
+      "Panel Discussions"
+    ],
+    "locations": ["Eastbourne"],
+    "aboutSummary": "A free two-day conference for small business owners and marketers, held at the Winter Garden, Eastbourne.",
+    "tone": "friendly"
+  },
+  "theme": {
+    "name": "corvus",
+    "brandColors": {
+      "primary": "#292661",
+      "secondary": "#F5D121",
+      "accent": "#e8175d"
+    },
+    "preferDark": true,
+    "referenceNotes": "Deep navy background, bold yellow accent, colorful geometric inline shapes in hero text, hamburger nav on all widths, bold solid-color section backgrounds (yellow, blue, green)"
+  },
+  "qa": {
+    "maxIterations": 3,
+    "thresholds": {
+      "home": 0.05,
+      "about": 0.05,
+      "default": 0.1
+    }
+  },
+  "imageGen": {
+    "enabled": false,
+    "mode": "batch"
+  },
+  "runMode": "autonomous"
+}
