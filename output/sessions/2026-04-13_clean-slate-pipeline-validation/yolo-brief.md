@@ -583,6 +583,20 @@ After completing all phases, append to `output/sessions/2026-04-13_clean-slate-p
 
 Confirm this was done in the final report.
 
+## Completed
+
+**Date:** 2026-04-13
+**Status:** All phases executed successfully (with documented pipeline findings)
+
+Archived MDX content and site.config narratives from 4 DCS trade sites (castor-plumbing, cygnus-graphics, lyra-garden, nova-print), then removed 6 test/underscore sites and the castor theme package. Repo builds cleanly with 6 remaining sites. Created a JobBrief for colorcode.events and ran the unified clone pipeline end-to-end: Stage 1 cloned 10 pages into 5 JSX templates, Stage 2 extracted 37 theme components and assembled the corvus theme package, Stage 3 scaffolded `sites/_corvus-digital-marketing-events` with a ready dev server. Three pipeline bugs were found and documented: section style extraction timeouts, visual QA dev server timing, and scaffolder generating a config/layout that doesn't match the SiteConfig TypeScript shape expected by base-template pages. One deviation from the brief: `output/.gitignore` was updated to whitelist `archive/` and `briefs/` (these directories were gitignored by default; the brief's commit steps required tracking them).
+
+### Commits
+
+- `beec699` chore: archive content from 4 DCS trade sites before cleanup
+- `9725bd0` chore: remove 6 test/underscore sites and castor theme
+- `d150267` chore: add pipeline brief for Entry A validation (colorcode.events)
+- `04e6237` feat: Entry A pipeline validation — colorcode.events → corvus
+
 ---
 
 ## Run Wrap-Up
