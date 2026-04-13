@@ -1,9 +1,14 @@
 #!/usr/bin/env tsx
 /**
  * Image Manifest Generator
- * Scans MDX files and generates manifest of required images with AI prompts
+ * Scans MDX files and generates manifest of required images with AI prompts.
  *
- * Usage: tsx tools/generate-image-manifest.ts [--dry-run]
+ * Usage:
+ *   tsx tools/generate-image-manifest.ts [--dry-run] [--site <path>] [--style-prompt <text>]
+ *
+ * Examples:
+ *   tsx tools/generate-image-manifest.ts --site sites/colossus-scaffolding
+ *   tsx tools/generate-image-manifest.ts --site sites/dj-fox-electrical --dry-run
  */
 
 import * as fs from "fs";
@@ -11,14 +16,31 @@ import * as path from "path";
 import matter from "gray-matter";
 import type { ImageManifest, ImageEntry, CardType } from "./lib/manifest-types";
 
-// Configuration
-const LOCATIONS_DIR = path.join(process.cwd(), "sites/colossus-scaffolding/content/locations");
+// ── Argument parsing ─────────────────────────────────────────────────────────
+
+function parseArgs(): { dryRun: boolean; site: string; stylePrompt?: string } {
+  const args = process.argv.slice(2);
+  let dryRun = false;
+  let site = "sites/colossus-scaffolding"; // backward-compatible default
+  let stylePrompt: string | undefined;
+
+  for (let i = 0; i < args.length; i++) {
+    if (args[i] === "--dry-run") dryRun = true;
+    else if (args[i] === "--site" && args[i + 1]) site = args[++i];
+    else if (args[i] === "--style-prompt" && args[i + 1]) stylePrompt = args[++i];
+  }
+
+  return { dryRun, site, stylePrompt };
+}
+
+const cliArgs = parseArgs();
+const SITE_DIR = path.resolve(cliArgs.site);
 const OUTPUT_FILE = path.join(process.cwd(), "output/image-manifest.json");
 const IMAGE_DIMENSIONS = { width: 800, height: 600 };
 const MANIFEST_VERSION = "1.0.0";
+const isDryRun = cliArgs.dryRun;
 
-// Command line flags
-const isDryRun = process.argv.includes("--dry-run");
+// ── Types ────────────────────────────────────────────────────────────────────
 
 interface Card {
   title: string;
@@ -27,93 +49,73 @@ interface Card {
 
 interface MDXFrontmatter {
   title: string;
+  image?: string;
   specialists?: {
     cards?: Card[];
   };
   services?: {
     cards?: Card[];
   };
+  [key: string]: unknown;
 }
 
-/**
- * Convert text to URL-safe slug
- */
+// ── Helpers ──────────────────────────────────────────────────────────────────
+
 function slugify(text: string): string {
   return text
     .toLowerCase()
     .trim()
-    .replace(/[^\w\s-]/g, "") // Remove special chars
-    .replace(/[\s_-]+/g, "-") // Replace spaces/underscores with hyphens
-    .replace(/^-+|-+$/g, ""); // Remove leading/trailing hyphens
+    .replace(/[^\w\s-]/g, "")
+    .replace(/[\s_-]+/g, "-")
+    .replace(/^-+|-+$/g, "");
 }
 
-/**
- * Generate AI-friendly prompt for a card image
- */
-function generatePrompt(card: Card, location: string, type: CardType): string {
+function generatePrompt(card: Card, context: string, type: CardType, stylePrompt?: string): string {
   const baseContext = card.description;
-  const locationContext = `in ${location}, UK setting`;
+  const locationContext = `in ${context}, UK setting`;
 
-  // Build scaffolding-specific context
-  const scaffoldingKeywords = [
-    "professional scaffolding",
-    "scaffolding tubes and boards",
-    "construction site safety equipment",
-    "metal framework",
-  ];
+  const styleModifiers = stylePrompt
+    ? [stylePrompt]
+    : [
+        "photorealistic",
+        "professional photography style",
+        "natural daylight",
+        "sharp focus",
+        "commercial quality",
+      ];
 
-  // Style modifiers
-  const styleModifiers = [
-    "photorealistic",
-    "professional photography style",
-    "natural daylight",
-    "sharp focus",
-    "commercial quality",
-  ];
-
-  // Combine elements into a descriptive prompt
-  const cardContext = baseContext.toLowerCase().includes("scaffolding")
-    ? baseContext
-    : `${baseContext} with professional scaffolding installation`;
-
-  // For specialist cards, focus on the specific heritage/building type
-  // For service cards, focus on the scaffolding service being provided
   const focusContext =
     type === "specialist-card"
       ? `featuring ${card.title.toLowerCase()}`
       : `showing ${card.title.toLowerCase()} setup`;
 
-  const prompt = `${cardContext} ${focusContext} ${locationContext}, ${scaffoldingKeywords.join(", ")}, construction workers in high-visibility safety gear and hard hats, ${styleModifiers.join(", ")}`;
+  const prompt = `${baseContext} ${focusContext} ${locationContext}, ${styleModifiers.join(", ")}`;
 
-  // Clean up the prompt - remove duplicate spaces and ensure proper capitalization
   return prompt
     .replace(/\s+/g, " ")
     .trim()
     .replace(/^./, (str) => str.toUpperCase());
 }
 
-/**
- * Create an image entry for a card
- */
 function createImageEntry(
   card: Card,
-  location: string,
-  locationSlug: string,
+  contextName: string,
+  contextSlug: string,
   type: CardType,
-  index: number
+  siteName: string,
+  stylePrompt?: string
 ): ImageEntry {
   const cardSlug = slugify(card.title);
   const typePrefix = type === "specialist-card" ? "specialist" : "service";
-
-  const id = `loc-${locationSlug}-${typePrefix}-${cardSlug}`;
-  const r2Key = `colossus-reference/cards/locations/${locationSlug}/${typePrefix}-${cardSlug}.webp`;
-  const prompt = generatePrompt(card, location, type);
+  const id = `loc-${contextSlug}-${typePrefix}-${cardSlug}`;
+  const r2Key = `${siteName}/cards/locations/${contextSlug}/${typePrefix}-${cardSlug}.webp`;
+  const prompt = generatePrompt(card, contextName, type, stylePrompt);
 
   return {
     id,
     type,
-    location,
-    locationSlug,
+    location: contextName,
+    locationSlug: contextSlug,
     cardTitle: card.title,
     cardDescription: card.description,
     r2Key,
@@ -123,67 +125,79 @@ function createImageEntry(
   };
 }
 
-/**
- * Scan location MDX files and extract cards
- */
-function scanLocationFiles(): ImageEntry[] {
+// ── Scanners ─────────────────────────────────────────────────────────────────
+
+function scanContentDir(
+  contentDir: string,
+  contentType: string,
+  siteName: string,
+  stylePrompt?: string
+): ImageEntry[] {
   const entries: ImageEntry[] = [];
 
-  console.log(`📂 Scanning MDX files in: ${LOCATIONS_DIR}\n`);
+  if (!fs.existsSync(contentDir)) return entries;
 
-  // Read all MDX files
   const files = fs
-    .readdirSync(LOCATIONS_DIR)
-    .filter((file) => file.endsWith(".mdx"))
+    .readdirSync(contentDir)
+    .filter((f) => f.endsWith(".mdx"))
     .sort();
 
-  console.log(`📄 Found ${files.length} location files\n`);
-
   for (const file of files) {
-    const filePath = path.join(LOCATIONS_DIR, file);
-    const locationSlug = file.replace(/\.mdx$/, "");
+    const filePath = path.join(contentDir, file);
+    const slug = file.replace(/\.mdx$/, "");
 
-    // Parse MDX frontmatter
     const fileContent = fs.readFileSync(filePath, "utf-8");
     const { data } = matter(fileContent);
     const frontmatter = data as MDXFrontmatter;
 
-    const locationName = frontmatter.title;
-    let locationCardCount = 0;
+    const contextName = frontmatter.title;
+    let count = 0;
 
-    // Extract specialist cards
+    // Specialist cards
     if (frontmatter.specialists?.cards) {
-      const specialistCards = frontmatter.specialists.cards;
-      console.log(`  🏛️  ${locationName}: Processing ${specialistCards.length} specialist cards`);
-
-      specialistCards.forEach((card, index) => {
-        const entry = createImageEntry(card, locationName, locationSlug, "specialist-card", index);
-        entries.push(entry);
-        locationCardCount++;
-      });
+      for (const card of frontmatter.specialists.cards) {
+        entries.push(
+          createImageEntry(card, contextName, slug, "specialist-card", siteName, stylePrompt)
+        );
+        count++;
+      }
     }
 
-    // Extract service cards
+    // Service cards
     if (frontmatter.services?.cards) {
-      const serviceCards = frontmatter.services.cards;
-      console.log(`  🔧 ${locationName}: Processing ${serviceCards.length} service cards`);
-
-      serviceCards.forEach((card, index) => {
-        const entry = createImageEntry(card, locationName, locationSlug, "service-card", index);
-        entries.push(entry);
-        locationCardCount++;
-      });
+      for (const card of frontmatter.services.cards) {
+        entries.push(
+          createImageEntry(card, contextName, slug, "service-card", siteName, stylePrompt)
+        );
+        count++;
+      }
     }
 
-    console.log(`  ✅ ${locationName}: Generated ${locationCardCount} image entries\n`);
+    // Frontmatter image placeholder
+    if (
+      frontmatter.image !== undefined &&
+      (!frontmatter.image || frontmatter.image.includes("placeholder"))
+    ) {
+      const card: Card = {
+        title: frontmatter.title,
+        description: `${contentType.slice(0, -1)} page for ${frontmatter.title}`,
+      };
+      entries.push(
+        createImageEntry(card, contextName, slug, "service-card", siteName, stylePrompt)
+      );
+      count++;
+    }
+
+    if (count > 0) {
+      console.log(`  ${contentType}/${file}: ${count} image entries`);
+    }
   }
 
   return entries;
 }
 
-/**
- * Calculate status counts for manifest
- */
+// ── Manifest utilities ────────────────────────────────────────────────────────
+
 function calculateStatusCounts(entries: ImageEntry[]): Record<string, number> {
   const counts: Record<string, number> = {
     pending: 0,
@@ -192,17 +206,12 @@ function calculateStatusCounts(entries: ImageEntry[]): Record<string, number> {
     complete: 0,
     error: 0,
   };
-
-  entries.forEach((entry) => {
+  for (const entry of entries) {
     counts[entry.status]++;
-  });
-
+  }
   return counts;
 }
 
-/**
- * Generate the complete manifest
- */
 function generateManifest(entries: ImageEntry[]): ImageManifest {
   return {
     generated: new Date().toISOString(),
@@ -213,123 +222,77 @@ function generateManifest(entries: ImageEntry[]): ImageManifest {
   };
 }
 
-/**
- * Write manifest to file
- */
 function writeManifest(manifest: ImageManifest): void {
-  // Ensure output directory exists
   const outputDir = path.dirname(OUTPUT_FILE);
   if (!fs.existsSync(outputDir)) {
     fs.mkdirSync(outputDir, { recursive: true });
   }
-
-  // Write manifest with pretty formatting
   fs.writeFileSync(OUTPUT_FILE, JSON.stringify(manifest, null, 2), "utf-8");
 }
 
-/**
- * Display summary statistics
- */
 function displaySummary(manifest: ImageManifest): void {
   console.log("\n" + "=".repeat(60));
-  console.log("📊 MANIFEST GENERATION SUMMARY");
+  console.log("MANIFEST GENERATION SUMMARY");
   console.log("=".repeat(60) + "\n");
-
-  console.log(`Total Images:        ${manifest.totalImages}`);
-  console.log(
-    `Specialist Cards:    ${manifest.images.filter((e) => e.type === "specialist-card").length}`
-  );
-  console.log(
-    `Service Cards:       ${manifest.images.filter((e) => e.type === "service-card").length}`
-  );
-  console.log(`Locations Processed: ${new Set(manifest.images.map((e) => e.locationSlug)).size}`);
-
+  console.log(`Total Images:     ${manifest.totalImages}`);
+  console.log(`Locations:        ${new Set(manifest.images.map((e) => e.locationSlug)).size}`);
   console.log("\nStatus Breakdown:");
-  Object.entries(manifest.statusCounts).forEach(([status, count]) => {
-    if (count > 0) {
-      console.log(`  ${status.padEnd(10)}: ${count}`);
-    }
-  });
-
-  if (!isDryRun) {
-    console.log(`\n📁 Output File: ${OUTPUT_FILE}`);
-    if (fs.existsSync(OUTPUT_FILE)) {
-      console.log(`📦 File Size:   ${(fs.statSync(OUTPUT_FILE).size / 1024).toFixed(2)} KB`);
-    }
+  for (const [status, count] of Object.entries(manifest.statusCounts)) {
+    if (count > 0) console.log(`  ${status.padEnd(10)}: ${count}`);
   }
-
+  if (!isDryRun) {
+    console.log(`\nOutput: ${OUTPUT_FILE}`);
+  }
   console.log("\n" + "=".repeat(60) + "\n");
 }
 
-/**
- * Display sample prompts
- */
-function displaySamplePrompts(manifest: ImageManifest): void {
-  console.log("🎨 SAMPLE PROMPTS\n");
+// ── Main ─────────────────────────────────────────────────────────────────────
 
-  // Show 1 specialist and 1 service card example
-  const specialistExample = manifest.images.find((e) => e.type === "specialist-card");
-  const serviceExample = manifest.images.find((e) => e.type === "service-card");
-
-  if (specialistExample) {
-    console.log("Example Specialist Card:");
-    console.log(`  Location: ${specialistExample.location}`);
-    console.log(`  Title:    ${specialistExample.cardTitle}`);
-    console.log(`  ID:       ${specialistExample.id}`);
-    console.log(`  Prompt:   ${specialistExample.prompt}`);
-    console.log();
-  }
-
-  if (serviceExample) {
-    console.log("Example Service Card:");
-    console.log(`  Location: ${serviceExample.location}`);
-    console.log(`  Title:    ${serviceExample.cardTitle}`);
-    console.log(`  ID:       ${serviceExample.id}`);
-    console.log(`  Prompt:   ${serviceExample.prompt}`);
-    console.log();
-  }
-}
-
-/**
- * Main execution
- */
 async function main() {
-  console.log("\n🚀 Image Manifest Generator");
+  console.log("\nImage Manifest Generator");
   console.log("=".repeat(60) + "\n");
 
   if (isDryRun) {
-    console.log("⚠️  DRY RUN MODE - No files will be written\n");
+    console.log("DRY RUN MODE - No files will be written\n");
   }
 
+  if (!fs.existsSync(SITE_DIR)) {
+    console.error(`Site directory not found: ${SITE_DIR}`);
+    process.exit(1);
+  }
+
+  const siteName = path.basename(SITE_DIR);
+  console.log(`Site: ${siteName} (${SITE_DIR})\n`);
+
   try {
-    // Scan and generate entries
-    const entries = scanLocationFiles();
+    const contentRoot = path.join(SITE_DIR, "content");
+    const allEntries: ImageEntry[] = [];
 
-    // Generate complete manifest
-    const manifest = generateManifest(entries);
+    // Scan all content types
+    const contentTypes = ["services", "locations", "blog", "projects"];
+    for (const ct of contentTypes) {
+      const dir = path.join(contentRoot, ct);
+      const entries = scanContentDir(dir, ct, siteName, cliArgs.stylePrompt);
+      allEntries.push(...entries);
+    }
 
-    // Write manifest first (unless dry run)
+    const manifest = generateManifest(allEntries);
+
     if (!isDryRun) {
       writeManifest(manifest);
     }
 
-    // Display summary
     displaySummary(manifest);
 
-    // Display sample prompts
-    displaySamplePrompts(manifest);
-
-    // Final message
-    if (!isDryRun) {
-      console.log("✅ Manifest generated successfully!\n");
+    if (isDryRun) {
+      console.log("Dry run complete - no files written\n");
     } else {
-      console.log("ℹ️  Dry run complete - no files written\n");
+      console.log("Manifest generated successfully!\n");
     }
   } catch (error) {
-    console.error("❌ Error generating manifest:", error);
+    console.error("Error generating manifest:", error);
     process.exit(1);
   }
 }
 
-// Execute
 main();
