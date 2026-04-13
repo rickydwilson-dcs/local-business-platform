@@ -13,6 +13,25 @@
 import type { Page } from "@playwright/test";
 import type { ElementRole, PageComputedStyles } from "./reference-analysis-types";
 
+// ── Section-level extraction types ──────────────────────────────────────────
+
+export interface SectionComputedStyle {
+  index: number;
+  headingText: string | null; // first heading text inside section
+  tagName: string; // 'section', 'div', etc.
+  styles: {
+    backgroundColor: string;
+    color: string;
+    fontFamily: string;
+    fontSize: string;
+    fontWeight: string;
+    lineHeight: string;
+    padding: string;
+    margin: string;
+    borderRadius: string;
+  };
+}
+
 // ── RGB-to-hex converter (Node-side) ────────────────────────────────────
 
 function rgbToHex(rgb: string): string | null {
@@ -21,7 +40,13 @@ function rgbToHex(rgb: string): string | null {
   const r = parseInt(match[1], 10);
   const g = parseInt(match[2], 10);
   const b = parseInt(match[3], 10);
-  return "#" + [r, g, b].map((c) => c.toString(16).padStart(2, "0")).join("").toUpperCase();
+  return (
+    "#" +
+    [r, g, b]
+      .map((c) => c.toString(16).padStart(2, "0"))
+      .join("")
+      .toUpperCase()
+  );
 }
 
 // ── Selector Strategies ──────────────────────────────────────────────────
@@ -60,8 +85,25 @@ export const SELECTOR_STRATEGIES: SelectorStrategy[] = [
   },
   {
     role: "primary-button",
-    selectors: ["a[class*='btn-primary']", "button[class*='primary']", ".btn-primary", ".cta", "section:first-of-type a[href]"],
-    properties: ["backgroundColor", "color", "borderRadius", "paddingTop", "paddingRight", "paddingBottom", "paddingLeft", "fontWeight", "fontSize", "borderColor"],
+    selectors: [
+      "a[class*='btn-primary']",
+      "button[class*='primary']",
+      ".btn-primary",
+      ".cta",
+      "section:first-of-type a[href]",
+    ],
+    properties: [
+      "backgroundColor",
+      "color",
+      "borderRadius",
+      "paddingTop",
+      "paddingRight",
+      "paddingBottom",
+      "paddingLeft",
+      "fontWeight",
+      "fontSize",
+      "borderColor",
+    ],
   },
   {
     role: "secondary-button",
@@ -96,7 +138,16 @@ export const SELECTOR_STRATEGIES: SelectorStrategy[] = [
   {
     role: "card",
     selectors: ["article", ".card", "[class*='card']"],
-    properties: ["backgroundColor", "borderRadius", "boxShadow", "paddingTop", "paddingRight", "paddingBottom", "paddingLeft", "borderColor"],
+    properties: [
+      "backgroundColor",
+      "borderRadius",
+      "boxShadow",
+      "paddingTop",
+      "paddingRight",
+      "paddingBottom",
+      "paddingLeft",
+      "borderColor",
+    ],
   },
   {
     role: "section",
@@ -129,7 +180,7 @@ const COLOUR_PROPERTIES = new Set(["backgroundColor", "color", "borderColor"]);
 export async function extractComputedStyles(
   page: Page,
   pageType: string,
-  url: string,
+  url: string
 ): Promise<PageComputedStyles> {
   const serialisedStrategies = SELECTOR_STRATEGIES.map((s) => ({
     role: s.role,
@@ -138,7 +189,7 @@ export async function extractComputedStyles(
   }));
 
   // String-based evaluate bypasses esbuild transforms completely
-  const result = await page.evaluate(`
+  const result = (await page.evaluate(`
     (function(strategies) {
       var startTime = performance.now();
       var colourSet = new Set();
@@ -210,7 +261,16 @@ export async function extractComputedStyles(
         extractMs: Math.round(endTime - startTime)
       };
     })(${JSON.stringify(serialisedStrategies)})
-  `) as { elements: Array<{ selector: string; role: string; found: boolean; styles: Record<string, string> }>; allColours: string[]; extractMs: number };
+  `)) as {
+    elements: Array<{
+      selector: string;
+      role: string;
+      found: boolean;
+      styles: Record<string, string>;
+    }>;
+    allColours: string[];
+    extractMs: number;
+  };
 
   // Node-side post-processing: convert rgb colours to hex
   const hexColourSet = new Set<string>();
@@ -240,4 +300,65 @@ export async function extractComputedStyles(
     allColours: Array.from(hexColourSet),
     extractMs: result.extractMs,
   };
+}
+
+// ── Section-level extractor ──────────────────────────────────────────────────
+
+export async function extractAllSectionStyles(page: Page): Promise<SectionComputedStyle[]> {
+  const raw = (await page.evaluate(`
+    (function() {
+      var SECTION_SELECTORS = ['section', 'header', 'footer', 'nav', 'main'];
+      var STYLE_PROPS = [
+        'backgroundColor', 'color', 'fontFamily', 'fontSize',
+        'fontWeight', 'lineHeight', 'padding', 'margin', 'borderRadius'
+      ];
+
+      function rgbToHex(rgb) {
+        var match = rgb && rgb.match(/rgba?\\(\\s*(\\d+)\\s*,\\s*(\\d+)\\s*,\\s*(\\d+)/);
+        if (!match) return rgb || '';
+        var r = parseInt(match[1], 10);
+        var g = parseInt(match[2], 10);
+        var b = parseInt(match[3], 10);
+        return '#' + [r, g, b].map(function(c) {
+          return c.toString(16).padStart(2, '0');
+        }).join('').toUpperCase();
+      }
+
+      function toCssProp(camel) {
+        return camel.replace(/[A-Z]/g, function(m) { return '-' + m.toLowerCase(); });
+      }
+
+      var results = [];
+      var index = 0;
+
+      SECTION_SELECTORS.forEach(function(sel) {
+        var els = document.querySelectorAll(sel);
+        els.forEach(function(el) {
+          var computed = getComputedStyle(el);
+          var styles = {};
+          STYLE_PROPS.forEach(function(prop) {
+            var val = computed.getPropertyValue(toCssProp(prop)) || '';
+            if (prop === 'backgroundColor' || prop === 'color') {
+              val = rgbToHex(val);
+            }
+            styles[prop] = val;
+          });
+
+          var headingEl = el.querySelector('h1,h2,h3,h4,h5,h6');
+          var headingText = headingEl ? (headingEl.textContent || '').trim().slice(0, 80) : null;
+
+          results.push({
+            index: index++,
+            headingText: headingText,
+            tagName: el.tagName.toLowerCase(),
+            styles: styles
+          });
+        });
+      });
+
+      return results;
+    })()
+  `)) as SectionComputedStyle[];
+
+  return raw;
 }
