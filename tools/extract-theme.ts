@@ -614,21 +614,30 @@ async function main() {
         : undefined,
     };
 
-    // Strip page layouts
+    // Strip page layouts — only process componentize-generated files (marked @ts-nocheck)
+    // Typed stub pages use proper template props and should not be processed by the stripper
     for (const file of fs.readdirSync(pagesDir).filter((f) => f.endsWith(".tsx"))) {
       const filePath = path.join(pagesDir, file);
       const jsx = fs.readFileSync(filePath, "utf-8");
+      if (!jsx.includes("@ts-nocheck")) {
+        console.log(`[extract]   Skip ${file} (typed stub — not componentize-generated)`);
+        continue;
+      }
       const stripped = stripContent(jsx, strippingConfig);
-      // Write stripped version (overwrite componentized version)
       fs.writeFileSync(filePath, stripped.tsx, "utf-8");
       console.log(`[extract]   Stripped ${file}: ${stripped.propCount} props replaced`);
     }
 
-    // Strip header/footer components
+    // Strip header/footer components — only if componentize-generated (marked @ts-nocheck)
+    // Fallback stubs (no clone header/footer found) are typed and must not be processed
     for (const file of ["header.tsx", "footer.tsx"]) {
       const filePath = path.join(componentDir, file);
       if (fs.existsSync(filePath)) {
         const jsx = fs.readFileSync(filePath, "utf-8");
+        if (!jsx.includes("@ts-nocheck")) {
+          console.log(`[extract]   Skip ${file} (typed stub — not componentize-generated)`);
+          continue;
+        }
         const stripped = stripContent(jsx, strippingConfig);
         fs.writeFileSync(filePath, stripped.tsx, "utf-8");
         console.log(`[extract]   Stripped ${file}: ${stripped.propCount} props replaced`);
