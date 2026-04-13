@@ -27,13 +27,14 @@ import { stripContent } from "./lib/content-stripper";
 
 // ── Argument parsing ─────────────────────────────────────────────────────────
 
-function parseArgs(): { clone?: string; brief?: string; pass?: string } {
+function parseArgs(): { clone?: string; brief?: string; pass?: string; verify?: boolean } {
   const args = process.argv.slice(2);
-  const result: { clone?: string; brief?: string; pass?: string } = {};
+  const result: { clone?: string; brief?: string; pass?: string; verify?: boolean } = {};
   for (let i = 0; i < args.length; i++) {
     if (args[i] === "--clone" && args[i + 1]) result.clone = args[++i];
     else if (args[i] === "--brief" && args[i + 1]) result.brief = args[++i];
     else if (args[i] === "--pass" && args[i + 1]) result.pass = args[++i];
+    else if (args[i] === "--verify") result.verify = true;
   }
   return result;
 }
@@ -410,6 +411,7 @@ async function main() {
 
   let cloneName: string;
   let brief: JobBrief | null = null;
+  const verify = args.verify ?? false;
 
   const passArg = args.pass ?? "both";
   if (!["componentize", "strip", "both"].includes(passArg)) {
@@ -441,7 +443,7 @@ async function main() {
     }
   } else {
     console.error(
-      "Usage: extract-theme.ts --clone <name> [--pass componentize|strip|both] | --brief <path>"
+      "Usage: extract-theme.ts --clone <name> [--pass componentize|strip|both] [--verify] | --brief <path>"
     );
     process.exit(1);
   }
@@ -616,6 +618,44 @@ async function main() {
 
     console.log(`[extract] Componentize pass complete: ${themeDir}`);
     console.log(`[extract] Typography scale: ${JSON.stringify(typographyScale)}`);
+
+    // ── Visual QA gate (advisory) ───────────────────────────────────────────
+    if (verify) {
+      console.log("[extract] Running visual QA gate...");
+
+      const testSitePath = path.resolve(
+        __dirname,
+        "..",
+        `sites/_${themeName}-${brief?.business?.trade ?? "test"}`
+      );
+      const referencePath = path.resolve(cloneDir, "reference-screenshots");
+
+      if (fs.existsSync(testSitePath) && fs.existsSync(referencePath)) {
+        const { runVisualQALoop } = await import("./lib/visual-qa-loop");
+        const qaResult = await runVisualQALoop({
+          clonePath: testSitePath,
+          maxIterations: 1,
+          thresholds: { home: 0.1, about: 0.1, default: 0.15 },
+          mode: "pixel",
+        });
+
+        if (qaResult.passed) {
+          console.log("[extract] Visual QA PASSED — proceeding to strip");
+        } else {
+          console.log("[extract] Visual QA FAILED — diffs:");
+          for (const d of qaResult.finalDiffs) {
+            console.log(
+              `  ${d.page}: ${(d.diffPercent * 100).toFixed(1)}% (${d.pass ? "PASS" : "FAIL"})`
+            );
+          }
+          console.log(
+            "[extract] Continuing to strip despite failures (visual QA is advisory in v1)"
+          );
+        }
+      } else {
+        console.log("[extract] Skipping visual QA — test site or reference screenshots not found");
+      }
+    }
   }
 
   // ── Strip pass ─────────────────────────────────────────────────────────────
