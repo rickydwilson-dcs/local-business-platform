@@ -127,7 +127,9 @@ export const siteConfig: SiteConfig = {
       saturday: 'Closed',
       sunday: 'Closed',
     },
-    socialMedia: {},
+    socialMedia: {
+      linkedin: 'https://www.linkedin.com/company/digital-marketing-weekend',
+    },
   },
 
   navigation: {
@@ -241,6 +243,31 @@ export const siteConfig: SiteConfig = {
         },
       ],
       areaServed: ['Eastbourne'],
+      socialProfiles: ['https://www.linkedin.com/company/digital-marketing-weekend'],
+      credentials: [
+        {
+          category: 'certification',
+          name: 'Certified Marketing Professional',
+          description: 'Industry-recognised digital marketing certification.',
+        },
+      ],
+      offerCatalog: [
+        {
+          name: 'Conference Sessions',
+          description: 'Professional conference sessions and workshops.',
+          url: '/services/conference-sessions',
+        },
+        {
+          name: 'Workshops',
+          description: 'Hands-on practical marketing workshops.',
+          url: '/services/workshops',
+        },
+        {
+          name: 'Networking Events',
+          description: 'Industry networking and connection events.',
+          url: '/services/networking-events',
+        },
+      ],
     },
   },
 };
