@@ -70,6 +70,12 @@ The theme system exists so sites can be re-branded without touching component co
 - Site-specific components in `sites/[name]/components/ui/`
 - TypeScript interfaces for all props, named exports only (no default exports)
 
+### Theme Package File Conventions
+
+- Theme `components/` files use **lowercase filenames** (`header.tsx`, `footer.tsx`) and **named exports** in the barrel (`export { LyraHeader } from './header'`). Never use PascalCase filenames or `export *` — jiti (Tailwind's config loader) can't resolve them.
+- Theme `index.ts` must **NOT** re-export from `./components` or `./pages` — this forces jiti to load every file at Tailwind config evaluation time. Sites import components via the subpath (`@platform/themes/lyra/components`), not the theme barrel.
+- Theme `pages/` files use PascalCase (`HomePage.tsx`) — this is safe because pages are imported by Next.js bundler, not jiti.
+
 ### Change Philosophy
 
 - Do NOT remove existing features, templates, or content unless explicitly asked

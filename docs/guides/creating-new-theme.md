@@ -120,6 +120,59 @@ Only run `/pipeline.kill-theme` if you're abandoning the theme entirely. If you'
 
 ---
 
+## Theme Package File Conventions
+
+These conventions are **mandatory** — violating them causes jiti/Tailwind resolution failures at dev time.
+
+### Component files: lowercase, named exports
+
+Theme components (`components/`) use **lowercase filenames** and **named exports** in the barrel:
+
+```
+packages/themes/<theme-name>/components/
+├── index.ts      # Named exports only (no export *)
+├── header.tsx    # lowercase filename
+└── footer.tsx    # lowercase filename
+```
+
+```typescript
+// components/index.ts — CORRECT
+export { LyraHeader } from "./header";
+export { LyraFooter } from "./footer";
+
+// components/index.ts — WRONG (causes jiti resolution failure)
+export * from "./Header"; // PascalCase + wildcard = broken
+export * from "./Footer";
+```
+
+**Why:** Tailwind evaluates `theme.config.ts` at dev startup via jiti (a CJS-compatible TypeScript loader). Jiti resolves module paths differently from the TypeScript compiler — PascalCase filenames and `export *` patterns can fail to resolve, causing `Cannot find module` errors that block the dev server entirely.
+
+### Theme index.ts: no barrel re-exports
+
+The theme's root `index.ts` must **NOT** re-export from `./components` or `./pages`:
+
+```typescript
+// index.ts — CORRECT
+import type { ComponentRegistry, DeepPartialThemeConfig } from "@platform/theme-system";
+import { registerTheme } from "@platform/theme-system";
+
+export const lyraRegistry: ComponentRegistry = { ... };
+export const lyraDefaultConfig: DeepPartialThemeConfig = { ... };
+registerTheme({ name: "lyra", label: "Lyra", config: lyraDefaultConfig });
+
+// index.ts — WRONG (forces jiti to load every component/page at config time)
+export * from "./components";
+export * from "./pages";
+```
+
+Sites import components via the **subpath** `@platform/themes/lyra/components`, not from the theme barrel. This avoids pulling component code into the Tailwind config evaluation.
+
+### Page layout files: PascalCase (exception)
+
+Page layouts (`pages/`) use PascalCase filenames (`HomePage.tsx`, `AboutPage.tsx`). This is safe because pages are imported by site code (bundled by Next.js), never evaluated by jiti.
+
+---
+
 ## Required: Page Templates
 
 Every new theme package **must** include a `pages/` directory exporting page layout templates. These are props-based Server Components that own the visual layout — the consuming site's `page.tsx` files are thin wrappers that handle data fetching and metadata.

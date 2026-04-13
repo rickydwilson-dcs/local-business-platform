@@ -1,2 +1,2 @@
-export * from "./Header";
-export * from "./Footer";
+export { CorvusHeader } from "./header";
+export { CorvusFooter } from "./footer";
