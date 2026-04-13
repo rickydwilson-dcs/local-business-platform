@@ -46,7 +46,7 @@ export interface MappedTokens {
 function findElement(
   pages: PageComputedStyles[],
   role: ElementRole,
-  preferPageType = "home",
+  preferPageType = "home"
 ): { element: ElementComputedStyles; pageType: string } | null {
   // Try preferred page first
   const preferred = pages.find((p) => p.pageType === preferPageType);
@@ -68,7 +68,13 @@ function parseRgbToHex(rgb: string): string | null {
   const r = parseInt(match[1], 10);
   const g = parseInt(match[2], 10);
   const b = parseInt(match[3], 10);
-  return "#" + [r, g, b].map((c) => c.toString(16).padStart(2, "0")).join("").toUpperCase();
+  return (
+    "#" +
+    [r, g, b]
+      .map((c) => c.toString(16).padStart(2, "0"))
+      .join("")
+      .toUpperCase()
+  );
 }
 
 function getHexFromStyle(element: ElementComputedStyles, prop: string): string | null {
@@ -109,10 +115,7 @@ function quantizeBoxShadow(raw: string): "none" | "sm" | "md" | "lg" {
   return "lg";
 }
 
-function getFrequentColours(
-  pages: PageComputedStyles[],
-  excludeHexes: string[],
-): string[] {
+function getFrequentColours(pages: PageComputedStyles[], excludeHexes: string[]): string[] {
   const freq = new Map<string, number>();
   for (const page of pages) {
     for (const hex of page.allColours) {
@@ -158,7 +161,10 @@ export function mapStylesToTokens(styles: ComputedStylesResult): MappedTokens {
   if (bgHex) {
     config.colors!.surface!.background = bgHex;
     provenance["surface.background"] = {
-      source: "computed", page: body!.pageType, selector: body!.element.selector, property: "backgroundColor",
+      source: "computed",
+      page: body!.pageType,
+      selector: body!.element.selector,
+      property: "backgroundColor",
     };
   }
 
@@ -167,7 +173,10 @@ export function mapStylesToTokens(styles: ComputedStylesResult): MappedTokens {
   if (fgHex) {
     config.colors!.surface!.foreground = fgHex;
     provenance["surface.foreground"] = {
-      source: "computed", page: body!.pageType, selector: body!.element.selector, property: "color",
+      source: "computed",
+      page: body!.pageType,
+      selector: body!.element.selector,
+      property: "color",
     };
   }
 
@@ -179,11 +188,17 @@ export function mapStylesToTokens(styles: ComputedStylesResult): MappedTokens {
     const frequent = getFrequentColours(pages, excludeList);
     primaryHex = frequent[0] ?? null;
     if (primaryHex) {
-      provenance["brand.primary"] = { source: "derived", property: "most frequent non-bg/fg colour" };
+      provenance["brand.primary"] = {
+        source: "derived",
+        property: "most frequent non-bg/fg colour",
+      };
     }
   } else {
     provenance["brand.primary"] = {
-      source: "computed", page: primaryBtn!.pageType, selector: primaryBtn!.element.selector, property: "backgroundColor",
+      source: "computed",
+      page: primaryBtn!.pageType,
+      selector: primaryBtn!.element.selector,
+      property: "backgroundColor",
     };
   }
   if (primaryHex) {
@@ -208,7 +223,10 @@ export function mapStylesToTokens(styles: ComputedStylesResult): MappedTokens {
     }
   } else {
     provenance["brand.secondary"] = {
-      source: "computed", page: secondaryBtn!.pageType, selector: secondaryBtn!.element.selector, property: "backgroundColor",
+      source: "computed",
+      page: secondaryBtn!.pageType,
+      selector: secondaryBtn!.element.selector,
+      property: "backgroundColor",
     };
   }
   if (secondaryHex) {
@@ -229,7 +247,10 @@ export function mapStylesToTokens(styles: ComputedStylesResult): MappedTokens {
     if (onPrimary) {
       config.colors!.brand!.onPrimary = onPrimary;
       provenance["brand.onPrimary"] = {
-        source: "computed", page: primaryBtn.pageType, selector: primaryBtn.element.selector, property: "color",
+        source: "computed",
+        page: primaryBtn.pageType,
+        selector: primaryBtn.element.selector,
+        property: "color",
       };
     }
   }
@@ -240,7 +261,10 @@ export function mapStylesToTokens(styles: ComputedStylesResult): MappedTokens {
   if (cardBg) {
     config.colors!.surface!.card = cardBg;
     provenance["surface.card"] = {
-      source: "computed", page: card!.pageType, selector: card!.element.selector, property: "backgroundColor",
+      source: "computed",
+      page: card!.pageType,
+      selector: card!.element.selector,
+      property: "backgroundColor",
     };
   } else if (bgHex) {
     const bgRgb = hexToRgb(bgHex);
@@ -254,7 +278,7 @@ export function mapStylesToTokens(styles: ComputedStylesResult): MappedTokens {
 
   // 9. surface.muted ← lightest non-white/non-bg background
   const allBgElements = pages.flatMap((p) =>
-    p.elements.filter((e) => e.found && e.styles.backgroundColor),
+    p.elements.filter((e) => e.found && e.styles.backgroundColor)
   );
   let lightestNonWhiteBg: string | null = null;
   let lightestL = 0;
@@ -298,10 +322,19 @@ export function mapStylesToTokens(styles: ComputedStylesResult): MappedTokens {
     const fgRgb = hexToRgb(fgHex);
     if (fgRgb) {
       const fgHsl = rgbToHsl(fgRgb);
-      config.colors!.surface!.secondaryForeground = rgbToHex(hslToRgb({ ...fgHsl, l: Math.min(100, fgHsl.l + 10) }));
-      config.colors!.surface!.tertiaryForeground = rgbToHex(hslToRgb({ ...fgHsl, l: Math.min(100, fgHsl.l + 20) }));
-      config.colors!.surface!.mutedForeground = rgbToHex(hslToRgb({ ...fgHsl, l: Math.min(100, fgHsl.l + 35) }));
-      provenance["surface.secondaryForeground"] = { source: "derived", property: "foreground +10L" };
+      config.colors!.surface!.secondaryForeground = rgbToHex(
+        hslToRgb({ ...fgHsl, l: Math.min(100, fgHsl.l + 10) })
+      );
+      config.colors!.surface!.tertiaryForeground = rgbToHex(
+        hslToRgb({ ...fgHsl, l: Math.min(100, fgHsl.l + 20) })
+      );
+      config.colors!.surface!.mutedForeground = rgbToHex(
+        hslToRgb({ ...fgHsl, l: Math.min(100, fgHsl.l + 35) })
+      );
+      provenance["surface.secondaryForeground"] = {
+        source: "derived",
+        property: "foreground +10L",
+      };
       provenance["surface.tertiaryForeground"] = { source: "derived", property: "foreground +20L" };
       provenance["surface.mutedForeground"] = { source: "derived", property: "foreground +35L" };
     }
@@ -314,7 +347,10 @@ export function mapStylesToTokens(styles: ComputedStylesResult): MappedTokens {
     const sans = parseFontFamily(bodyText.element.styles.fontFamily);
     config.typography!.fontFamily!.sans = [sans, "system-ui", "sans-serif"];
     provenance["fontFamily.sans"] = {
-      source: "computed", page: bodyText.pageType, selector: bodyText.element.selector, property: "fontFamily",
+      source: "computed",
+      page: bodyText.pageType,
+      selector: bodyText.element.selector,
+      property: "fontFamily",
     };
   }
 
@@ -325,7 +361,10 @@ export function mapStylesToTokens(styles: ComputedStylesResult): MappedTokens {
     if (heading !== sans) {
       config.typography!.fontFamily!.heading = [heading, "system-ui", "sans-serif"];
       provenance["fontFamily.heading"] = {
-        source: "computed", page: heroHeading.pageType, selector: heroHeading.element.selector, property: "fontFamily",
+        source: "computed",
+        page: heroHeading.pageType,
+        selector: heroHeading.element.selector,
+        property: "fontFamily",
       };
     }
   }
@@ -352,7 +391,10 @@ export function mapStylesToTokens(styles: ComputedStylesResult): MappedTokens {
     if (Object.keys(entry).length > 0) {
       (config.typography!.scale as Record<string, unknown>)[key] = entry;
       provenance[`scale.${key}`] = {
-        source: "computed", page: pageType, selector: element.selector, property: "fontSize+lineHeight+fontWeight",
+        source: "computed",
+        page: pageType,
+        selector: element.selector,
+        property: "fontSize+lineHeight+fontWeight",
       };
     }
   }
@@ -369,9 +411,16 @@ export function mapStylesToTokens(styles: ComputedStylesResult): MappedTokens {
     if (el.styles.paddingTop) btnTokens.paddingY = el.styles.paddingTop;
     if (el.styles.fontWeight) btnTokens.fontWeight = parseInt(el.styles.fontWeight, 10) || 600;
     if (Object.keys(btnTokens).length > 0) {
-      config.components!.button = btnTokens as DeepPartialThemeConfig["components"] extends { button?: infer B } ? B : never;
+      config.components!.button = btnTokens as DeepPartialThemeConfig["components"] extends {
+        button?: infer B;
+      }
+        ? B
+        : never;
       provenance["button"] = {
-        source: "computed", page: primaryBtn.pageType, selector: el.selector, property: "borderRadius+padding",
+        source: "computed",
+        page: primaryBtn.pageType,
+        selector: el.selector,
+        property: "borderRadius+padding",
       };
     }
   }
@@ -385,9 +434,16 @@ export function mapStylesToTokens(styles: ComputedStylesResult): MappedTokens {
     if (el.styles.paddingTop) cardTokens.padding = el.styles.paddingTop;
     if (el.styles.boxShadow) cardTokens.shadow = quantizeBoxShadow(el.styles.boxShadow);
     if (Object.keys(cardTokens).length > 0) {
-      config.components!.card = cardTokens as DeepPartialThemeConfig["components"] extends { card?: infer C } ? C : never;
+      config.components!.card = cardTokens as DeepPartialThemeConfig["components"] extends {
+        card?: infer C;
+      }
+        ? C
+        : never;
       provenance["card"] = {
-        source: "computed", page: card.pageType, selector: el.selector, property: "borderRadius+padding+shadow",
+        source: "computed",
+        page: card.pageType,
+        selector: el.selector,
+        property: "borderRadius+padding+shadow",
       };
     }
   }
@@ -397,13 +453,16 @@ export function mapStylesToTokens(styles: ComputedStylesResult): MappedTokens {
   if (header?.element.styles.height) {
     config.components!.navigation = { height: header.element.styles.height };
     provenance["navigation.height"] = {
-      source: "computed", page: header.pageType, selector: header.element.selector, property: "height",
+      source: "computed",
+      page: header.pageType,
+      selector: header.element.selector,
+      property: "height",
     };
   }
 
   // section.paddingY ← median paddingTop across section elements
   const sectionElements = pages.flatMap((p) =>
-    p.elements.filter((e) => e.role === "section" && e.found && e.styles.paddingTop),
+    p.elements.filter((e) => e.role === "section" && e.found && e.styles.paddingTop)
   );
   if (sectionElements.length > 0) {
     const pxValues = sectionElements
@@ -420,9 +479,9 @@ export function mapStylesToTokens(styles: ComputedStylesResult): MappedTokens {
   // ── Unmapped Colours ───────────────────────────────────────────────
 
   const mappedHexes = new Set(
-    Object.values(config.colors?.brand ?? {}).concat(
-      Object.values(config.colors?.surface ?? {}),
-    ).filter(Boolean) as string[],
+    Object.values(config.colors?.brand ?? {})
+      .concat(Object.values(config.colors?.surface ?? {}))
+      .filter(Boolean) as string[]
   );
   const allColours = new Set(pages.flatMap((p) => p.allColours));
   const unmappedColours = Array.from(allColours).filter((c) => !mappedHexes.has(c));
@@ -436,7 +495,7 @@ const CIE76_THRESHOLD = 20;
 
 export function enhanceSynthesisWithComputedValues(
   synthesisTokens: ThemeTokenRecommendations,
-  computedTokens: MappedTokens,
+  computedTokens: MappedTokens
 ): ThemeTokenRecommendations {
   const result = JSON.parse(JSON.stringify(synthesisTokens)) as ThemeTokenRecommendations;
   const computed = computedTokens.config;
@@ -490,10 +549,99 @@ export function enhanceSynthesisWithComputedValues(
   return result;
 }
 
+// ── Section color mapping ────────────────────────────────────────────────────
+
+export interface TokenMapping {
+  standardMappings: Record<string, string>; // sectionBg → token class
+  customProperties: Record<string, string>; // --color-section-N → hex
+}
+
+export interface TypographyScale {
+  hero?: string;
+  h1?: string;
+  h2?: string;
+  h3?: string;
+  h4?: string;
+  body?: string;
+  small?: string;
+  caption?: string;
+}
+
+const DELTA_E_THRESHOLD = 5;
+
+export function mapSectionColors(
+  sections: import("./computed-style-extractor").SectionComputedStyle[],
+  brandPrimary: string,
+  brandSecondary: string
+): TokenMapping {
+  const standardMappings: Record<string, string> = {};
+  const customProperties: Record<string, string> = {};
+
+  for (const section of sections) {
+    const bg = section.styles.backgroundColor;
+    if (!bg || bg === "rgba(0, 0, 0, 0)" || bg === "transparent") continue;
+
+    const bgHex = bg.startsWith("#") ? bg : null;
+    if (!bgHex) continue;
+
+    const sectionKey = `section-${section.index}-${section.tagName}`;
+
+    const deltaPrimary = brandPrimary ? colorDistanceCIE76(bgHex, brandPrimary) : Infinity;
+    const deltaSecondary = brandSecondary ? colorDistanceCIE76(bgHex, brandSecondary) : Infinity;
+
+    if (deltaPrimary <= DELTA_E_THRESHOLD) {
+      standardMappings[sectionKey] = "bg-brand-primary";
+    } else if (deltaSecondary <= DELTA_E_THRESHOLD) {
+      standardMappings[sectionKey] = "bg-brand-secondary";
+    } else {
+      const varName = `--color-section-${section.index}`;
+      customProperties[varName] = bgHex;
+    }
+  }
+
+  return { standardMappings, customProperties };
+}
+
+export function extractTypographyScale(
+  sections: import("./computed-style-extractor").SectionComputedStyle[]
+): TypographyScale {
+  // Collect all unique font sizes across sections
+  const sizes = new Set<number>();
+  for (const section of sections) {
+    const fs = section.styles.fontSize;
+    if (fs) {
+      const px = parseFloat(fs);
+      if (!isNaN(px) && px > 0) sizes.add(px);
+    }
+  }
+
+  // Sort descending
+  const sorted = Array.from(sizes).sort((a, b) => b - a);
+
+  // Map to 8-level scale
+  const levels: (keyof TypographyScale)[] = [
+    "hero",
+    "h1",
+    "h2",
+    "h3",
+    "h4",
+    "body",
+    "small",
+    "caption",
+  ];
+
+  const scale: TypographyScale = {};
+  for (let i = 0; i < Math.min(sorted.length, levels.length); i++) {
+    scale[levels[i]] = `${sorted[i]}px`;
+  }
+
+  return scale;
+}
+
 // ── Convert MappedTokens to ThemeTokenRecommendations ────────────────────
 
 export function computedTokensToRecommendations(
-  computedTokens: MappedTokens,
+  computedTokens: MappedTokens
 ): ThemeTokenRecommendations {
   const c = computedTokens.config;
   return {
@@ -510,7 +658,8 @@ export function computedTokensToRecommendations(
     },
     typography: {
       fontFamilySans: c.typography?.fontFamily?.sans ?? ["Inter", "system-ui", "sans-serif"],
-      fontFamilyHeading: c.typography?.fontFamily?.heading ?? c.typography?.fontFamily?.sans ?? ["Inter", "system-ui", "sans-serif"],
+      fontFamilyHeading: c.typography?.fontFamily?.heading ??
+        c.typography?.fontFamily?.sans ?? ["Inter", "system-ui", "sans-serif"],
     },
   };
 }
