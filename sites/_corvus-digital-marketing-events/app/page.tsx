@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import type { SiteConfigSummary } from '@platform/core-components';
-import { VegaHomePage } from '@platform/themes/vega/pages';
+import { CorvusHomePage } from '@platform/themes/corvus/pages';
 import { siteConfig } from '@/site.config';
 import { getLocations } from '@/lib/content';
 import { absUrl } from '@/lib/site';
@@ -99,7 +99,7 @@ export default async function HomePage() {
   );
 
   return (
-    <VegaHomePage
+    <CorvusHomePage
       siteConfig={siteSummary}
       services={siteConfig.services.map((s) => ({
         slug: s.slug,

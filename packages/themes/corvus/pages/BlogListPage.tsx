@@ -1,14 +1,12 @@
-import type React from "react";
-
 interface BlogListPageProps {
-  content?: Record<string, string>;
+  [key: string]: unknown;
 }
 
-export function CorvusBlogListPage({ content = {} }: BlogListPageProps) {
-  void content;
+export function CorvusBlogListPage(props: BlogListPageProps) {
+  void props;
   return (
-    <main className="page-blog-list">
-      {/* corvus blog-list layout — extracted from reference clone */}
+    <main className="page-BlogListPage">
+      {/* corvus BlogListPage layout — stub, to be populated by pipeline */}
     </main>
   );
 }

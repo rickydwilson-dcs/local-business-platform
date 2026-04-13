@@ -13,7 +13,7 @@ import Link from 'next/link';
 import type { SiteConfigSummary } from '@platform/core-components';
 import { Schema, type FAQItem, type AboutContent } from '@platform/core-components';
 import { deriveLocationContext, getAreaServed } from '@platform/core-components/lib/location-utils';
-import { VegaServiceDetailPage } from '@platform/themes/vega/pages';
+import { CorvusServiceDetailPage } from '@platform/themes/corvus/pages';
 import { getServices, getService } from '@/lib/content';
 import { getLocationSlugs } from '@/lib/locations-config';
 import { loadMdx } from '@/lib/mdx';
@@ -231,7 +231,7 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
   );
 
   return (
-    <VegaServiceDetailPage
+    <CorvusServiceDetailPage
       siteConfig={siteSummary}
       frontmatter={{
         title: fm.title,

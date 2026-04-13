@@ -1,12 +1,12 @@
-import type React from "react";
-
 interface HomePageProps {
-  content?: Record<string, string>;
+  [key: string]: unknown;
 }
 
-export function CorvusHomePage({ content = {} }: HomePageProps) {
-  void content;
+export function CorvusHomePage(props: HomePageProps) {
+  void props;
   return (
-    <main className="page-home">{/* corvus home layout — extracted from reference clone */}</main>
+    <main className="page-HomePage">
+      {/* corvus HomePage layout — stub, to be populated by pipeline */}
+    </main>
   );
 }

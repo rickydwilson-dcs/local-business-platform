@@ -1,12 +1,12 @@
-import type React from "react";
-
 interface AboutPageProps {
-  content?: Record<string, string>;
+  [key: string]: unknown;
 }
 
-export function CorvusAboutPage({ content = {} }: AboutPageProps) {
-  void content;
+export function CorvusAboutPage(props: AboutPageProps) {
+  void props;
   return (
-    <main className="page-about">{/* corvus about layout — extracted from reference clone */}</main>
+    <main className="page-AboutPage">
+      {/* corvus AboutPage layout — stub, to be populated by pipeline */}
+    </main>
   );
 }

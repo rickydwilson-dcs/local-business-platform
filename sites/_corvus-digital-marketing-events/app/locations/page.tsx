@@ -8,7 +8,7 @@
 import type { Metadata } from 'next';
 import type { SiteConfigSummary } from '@platform/core-components';
 import { Schema } from '@platform/core-components';
-import { VegaLocationsPage } from '@platform/themes/vega/pages';
+import { CorvusLocationsPage } from '@platform/themes/corvus/pages';
 import { getLocations } from '@/lib/content';
 import { absUrl } from '@/lib/site';
 import { siteConfig } from '@/site.config';
@@ -43,7 +43,7 @@ export default async function LocationsPage() {
 
   return (
     <>
-      <VegaLocationsPage
+      <CorvusLocationsPage
         siteConfig={siteSummary}
         locations={locations.map((l) => ({
           slug: l.slug,

@@ -1,5 +1,13 @@
-export * from "./AboutPage";
-export * from "./BlogListPage";
-export * from "./BlogPostPage";
-export * from "./CustomPage";
-export * from "./HomePage";
+export { CorvusAboutPage } from "./AboutPage";
+export { CorvusBlogListPage, CorvusBlogListPage as CorvusBlogPage } from "./BlogListPage";
+export { CorvusBlogPostPage } from "./BlogPostPage";
+export { CorvusContactPage } from "./ContactPage";
+export { CorvusCustomPage } from "./CustomPage";
+export { CorvusHomePage } from "./HomePage";
+export { CorvusLocationDetailPage } from "./LocationDetailPage";
+export { CorvusLocationsPage } from "./LocationsPage";
+export { CorvusProjectDetailPage } from "./ProjectDetailPage";
+export { CorvusProjectsPage } from "./ProjectsPage";
+export { CorvusReviewsPage } from "./ReviewsPage";
+export { CorvusServiceDetailPage } from "./ServiceDetailPage";
+export { CorvusServicesPage } from "./ServicesPage";

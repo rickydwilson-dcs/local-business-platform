@@ -9,7 +9,7 @@
 import type { Metadata } from 'next';
 import type { SiteConfigSummary } from '@platform/core-components';
 import { Schema } from '@platform/core-components';
-import { VegaProjectsPage } from '@platform/themes/vega/pages';
+import { CorvusProjectsPage } from '@platform/themes/corvus/pages';
 import { getProjects } from '@/lib/content';
 import { absUrl } from '@/lib/site';
 import { siteConfig } from '@/site.config';
@@ -44,7 +44,7 @@ export default async function ProjectsPage() {
 
   return (
     <>
-      <VegaProjectsPage
+      <CorvusProjectsPage
         siteConfig={siteSummary}
         projects={projects.map((p) => ({
           slug: p.slug,

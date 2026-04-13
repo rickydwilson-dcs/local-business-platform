@@ -8,7 +8,7 @@
 import type { Metadata } from 'next';
 import type { SiteConfigSummary } from '@platform/core-components';
 import { Schema } from '@platform/core-components';
-import { VegaReviewsPage } from '@platform/themes/vega/pages';
+import { CorvusReviewsPage } from '@platform/themes/corvus/pages';
 import { getTestimonials, calculateAggregateRating } from '@/lib/content';
 import { absUrl } from '@/lib/site';
 import { siteConfig } from '@/site.config';
@@ -50,7 +50,7 @@ export default async function ReviewsPage() {
 
   return (
     <>
-      <VegaReviewsPage
+      <CorvusReviewsPage
         siteConfig={siteSummary}
         testimonials={testimonials.map((t) => ({
           slug: t.slug || t.customerName,

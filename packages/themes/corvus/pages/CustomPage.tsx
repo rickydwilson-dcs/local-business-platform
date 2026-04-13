@@ -1,14 +1,12 @@
-import type React from "react";
-
 interface CustomPageProps {
-  content?: Record<string, string>;
+  [key: string]: unknown;
 }
 
-export function CorvusCustomPage({ content = {} }: CustomPageProps) {
-  void content;
+export function CorvusCustomPage(props: CustomPageProps) {
+  void props;
   return (
-    <main className="page-custom">
-      {/* corvus custom layout — extracted from reference clone */}
+    <main className="page-CustomPage">
+      {/* corvus CustomPage layout — stub, to be populated by pipeline */}
     </main>
   );
 }

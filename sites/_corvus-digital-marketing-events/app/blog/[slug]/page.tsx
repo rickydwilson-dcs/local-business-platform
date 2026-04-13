@@ -10,7 +10,7 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import type { SiteConfigSummary } from '@platform/core-components';
 import { Schema } from '@platform/core-components';
-import { VegaBlogPostPage } from '@platform/themes/vega/pages';
+import { CorvusBlogPostPage } from '@platform/themes/corvus/pages';
 import { getBlogPosts, getBlogPost, calculateReadingTime } from '@/lib/content';
 import { getImageUrl } from '@/lib/image';
 import { absUrl } from '@/lib/site';
@@ -161,7 +161,7 @@ export default async function BlogPostPage({ params }: { params: Promise<Params>
   );
 
   return (
-    <VegaBlogPostPage
+    <CorvusBlogPostPage
       siteConfig={siteSummary}
       frontmatter={{
         title: frontmatter.title,

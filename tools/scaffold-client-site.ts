@@ -44,6 +44,20 @@ function copyDirRecursive(src: string, dest: string, exclude: string[] = []): vo
   }
 }
 
+function findFilesRecursive(dir: string, extensions: string[], exclude: string[] = []): string[] {
+  const results: string[] = [];
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    if (exclude.includes(entry.name)) continue;
+    const fullPath = path.join(dir, entry.name);
+    if (entry.isDirectory()) {
+      results.push(...findFilesRecursive(fullPath, extensions, exclude));
+    } else if (extensions.some((ext) => entry.name.endsWith(ext))) {
+      results.push(fullPath);
+    }
+  }
+  return results;
+}
+
 function replaceInFile(filePath: string, replacements: Record<string, string>): void {
   if (!fs.existsSync(filePath)) return;
   let content = fs.readFileSync(filePath, "utf-8");
@@ -458,6 +472,27 @@ async function main() {
       vegaRegistry: `${themeName}Registry`,
       'theme="vega"': `theme="${themeName}"`,
     });
+  }
+
+  // Step 3b: Replace vega references in all page files and tsconfig
+  console.log("[scaffold] Step 3b: Replacing vega references in page files...");
+  const pascal = themeName.charAt(0).toUpperCase() + themeName.slice(1);
+  const filesToPatch = findFilesRecursive(sitePath, [".tsx", ".ts"], ["node_modules", ".next"]);
+  for (const file of filesToPatch) {
+    if (file === layoutPath || file === themeConfigPath) continue; // already handled
+    const content = fs.readFileSync(file, "utf-8");
+    if (content.includes("@platform/themes/vega") || content.includes("Vega")) {
+      replaceInFile(file, {
+        "@platform/themes/vega/pages": `@platform/themes/${themeName}/pages`,
+        "@platform/themes/vega/components": `@platform/themes/${themeName}/components`,
+        "@platform/themes/vega": `@platform/themes/${themeName}`,
+      });
+      // Replace component names (VegaHomePage → CorvusHomePage, etc.)
+      let updated = fs.readFileSync(file, "utf-8");
+      updated = updated.replace(/Vega(\w+Page)/g, `${pascal}$1`);
+      updated = updated.replace(/vegaRegistry/g, `${themeName}Registry`);
+      fs.writeFileSync(file, updated, "utf-8");
+    }
   }
 
   // Step 4: Generate site.config.ts
