@@ -7,6 +7,8 @@
  *
  * Usage:
  *   npx tsx tools/extract-theme.ts --clone corvus
+ *   npx tsx tools/extract-theme.ts --clone corvus --pass componentize
+ *   npx tsx tools/extract-theme.ts --clone corvus --pass strip
  *   npx tsx tools/extract-theme.ts --brief output/briefs/abc123.json
  */
 
@@ -25,12 +27,13 @@ import { stripContent } from "./lib/content-stripper";
 
 // ── Argument parsing ─────────────────────────────────────────────────────────
 
-function parseArgs(): { clone?: string; brief?: string } {
+function parseArgs(): { clone?: string; brief?: string; pass?: string } {
   const args = process.argv.slice(2);
-  const result: { clone?: string; brief?: string } = {};
+  const result: { clone?: string; brief?: string; pass?: string } = {};
   for (let i = 0; i < args.length; i++) {
     if (args[i] === "--clone" && args[i + 1]) result.clone = args[++i];
     else if (args[i] === "--brief" && args[i + 1]) result.brief = args[++i];
+    else if (args[i] === "--pass" && args[i + 1]) result.pass = args[++i];
   }
   return result;
 }
@@ -183,6 +186,12 @@ async function main() {
   let cloneName: string;
   let brief: JobBrief | null = null;
 
+  const passArg = args.pass ?? "both";
+  if (!["componentize", "strip", "both"].includes(passArg)) {
+    console.error("--pass must be 'componentize', 'strip', or 'both'");
+    process.exit(1);
+  }
+
   if (args.brief) {
     const rawPath = path.resolve(args.brief);
     if (!fs.existsSync(rawPath)) {
@@ -200,7 +209,9 @@ async function main() {
   } else if (args.clone) {
     cloneName = args.clone;
   } else {
-    console.error("Usage: extract-theme.ts --clone <name> | --brief <path>");
+    console.error(
+      "Usage: extract-theme.ts --clone <name> [--pass componentize|strip|both] | --brief <path>"
+    );
     process.exit(1);
   }
 
