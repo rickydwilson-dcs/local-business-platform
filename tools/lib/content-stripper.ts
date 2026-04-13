@@ -50,6 +50,7 @@ class PropNameGenerator {
       heading: ["sectionTitle", "subheading", "cardHeading"],
       body: ["description", "bodyText", "paragraph"],
       imageSrc: ["heroImageSrc", "cardImageSrc", "sectionImageSrc"],
+      imageAlt: ["heroImageAlt", "logoAlt", "cardImageAlt", "sectionImageAlt"],
     };
     const altList = suffixes[base];
     if (altList && altList[count - 1]) return altList[count - 1];
@@ -82,6 +83,17 @@ export function stripContent(jsx: string, config: ContentStrippingConfig): Strip
   let result = jsx;
   const props: Record<string, string> = {}; // propName → TypeScript type
   const nameGen = new PropNameGenerator();
+
+  // 0. Alt attributes containing business name — must run BEFORE businessName replacement
+  // (step 1 does a global replace that would break alt text before we can strip it cleanly)
+  if (config.businessName) {
+    const altRe = new RegExp(`(alt=")([^"]*${escapeRegex(config.businessName)}[^"]*)(")`, "gi");
+    result = result.replace(altRe, () => {
+      const propName = nameGen.get("imageAlt");
+      props[propName] = "string";
+      return `alt={props.${propName}}`;
+    });
+  }
 
   // 1. Business name — case-insensitive exact match
   if (config.businessName) {
@@ -171,18 +183,21 @@ export function stripContent(jsx: string, config: ContentStrippingConfig): Strip
     return `${open}{props.${propName}}${close}`;
   });
 
-  // 7. Image src pointing to assets/images/
-  const imgRe = /(<img(?:\s[^>]*)?\ssrc=")([^"]*assets\/images\/[^"]*)(")/gi;
-  result = result.replace(imgRe, (match, pre, _src, post) => {
+  // 7. Image src — any path containing /images/ (e.g. /images/foo.jpg, assets/images/foo.jpg)
+  const imgRe = /(<img(?:\s[^>]*)?\ssrc=")([^"]*\/images\/[^"]*)(")/gi;
+  result = result.replace(imgRe, (_match, pre, _src, post) => {
     const propName = nameGen.get("imageSrc");
     props[propName] = "string";
-    return `${pre}{props.${propName} as string}${post}`.replace(
-      `${pre}{props.${propName} as string}${post}`,
-      (_, ...__) => `${pre.replace(/"$/, "{")}props.${propName}${post.replace(/^"/, "}")}`
-    );
+    return `${pre.replace(/"$/, "{")}props.${propName}${post.replace(/^"/, "}")}`;
   });
-  // Simpler rewrite: replace src="...assets/images/..." with src={props.imageSrc}
-  result = result.replace(/src="[^"]*assets\/images\/[^"]*"/gi, () => {
+  // Simpler rewrite: catch any remaining src=".../ images/..." not handled above
+  result = result.replace(/src="[^"]*\/images\/[^"]*"/gi, () => {
+    const propName = nameGen.get("imageSrc");
+    props[propName] = "string";
+    return `src={props.${propName}}`;
+  });
+  // Also match src="images/..." (no leading slash, e.g. src="images/logo.svg")
+  result = result.replace(/src="(images\/[^"]*)"/gi, () => {
     const propName = nameGen.get("imageSrc");
     props[propName] = "string";
     return `src={props.${propName}}`;
