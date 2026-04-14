@@ -72,9 +72,14 @@ function inferPropType(slotName: string): string {
     lower.endsWith("links") ||
     lower.endsWith("columns") ||
     lower.endsWith("photos") ||
+    lower.endsWith("testimonials") ||
+    lower.endsWith("features") ||
+    lower.endsWith("services") ||
+    lower.endsWith("steps") ||
+    lower.endsWith("members") ||
     lower.includes("list")
   ) {
-    return "Array<{ title?: string; description?: string; image?: string; href?: string; label?: string }>";
+    return "Array<{ title?: string; description?: string; image?: string; href?: string; label?: string; [key: string]: unknown }>";
   }
 
   // Singular CTA/button/link → scalar object (AI accesses these as scalars)
