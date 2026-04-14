@@ -79,7 +79,7 @@ function inferPropType(slotName: string): string {
     lower.endsWith("members") ||
     lower.includes("list")
   ) {
-    return "Array<{ title?: string; description?: string; image?: string; href?: string; label?: string; [key: string]: unknown }>";
+    return "Array<{ title?: string; description?: string; image?: string; href?: string; label?: string; [key: string]: string | undefined }>";
   }
 
   // Singular CTA/button/link → scalar object (AI accesses these as scalars)
@@ -298,7 +298,7 @@ ${tokenSection}
 4. **Responsive**: Mobile-first with md: and lg: breakpoints. Read the CSS @media queries for responsive behaviour.
 5. **Semantic HTML**: Use section, div, h1-h6, p, a, img, ul, li. Keep heading hierarchy logical.
 6. **Props**: Access props via dot notation (props.heading, props.items). For arrays, use .map() with proper keys.
-7. **Array content**: When the HTML has repeating items (cards, posts, list items), model them as a SINGLE array prop: \`items?: Array<{ title?: string; description?: string; image?: string; href?: string; [key: string]: unknown }>\`. Never call \`.map()\` on a string prop — if it needs mapping, it must be typed as an array.
+7. **Array content**: When the HTML has repeating items (cards, posts, list items), model them as a SINGLE array prop: \`items?: Array<{ title?: string; description?: string; image?: string; href?: string; [key: string]: string | undefined }>\`. Never call \`.map()\` on a string prop — if it needs mapping, it must be typed as an array.
 8. **Images**: Use standard <img> tags with props for src/alt. Decorative images can use hardcoded /images/ paths.
 9. **No imports**: Do NOT import React, next/link, lucide-react, or any external modules. The shell wrapper handles imports.
 10. **Component classes**: You may use these component utility classes (defined in globals.css): btn-primary, btn-secondary, card, card-interactive, section, container-standard, container-narrow.
