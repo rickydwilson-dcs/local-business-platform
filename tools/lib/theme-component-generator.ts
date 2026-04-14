@@ -47,6 +47,29 @@ function scanForHexLiterals(tsx: string): string[] {
   return matches ?? [];
 }
 
+/**
+ * Attempt to replace hex color literals in inline style objects with CSS variable refs.
+ * Handles the common AI anti-pattern: style={{ backgroundColor: "#1a2b3c" }}
+ * Returns the fixed content and the count of replacements made.
+ */
+function autoRepairHexLiterals(tsx: string): { content: string; replacements: number } {
+  let replacements = 0;
+  const fixed = tsx
+    .replace(/backgroundColor:\s*["']#[0-9A-Fa-f]{3,6}["']/g, () => {
+      replacements++;
+      return 'backgroundColor: "var(--color-brand-primary)"';
+    })
+    .replace(/\bcolor:\s*["']#[0-9A-Fa-f]{3,6}["']/g, () => {
+      replacements++;
+      return 'color: "var(--color-surface-foreground)"';
+    })
+    .replace(/borderColor:\s*["']#[0-9A-Fa-f]{3,6}["']/g, () => {
+      replacements++;
+      return 'borderColor: "var(--color-surface-border)"';
+    });
+  return { content: fixed, replacements };
+}
+
 // ============================================================================
 // Named export verification
 // ============================================================================
@@ -509,14 +532,34 @@ async function generateSingleComponent(
     warnings.push(`${blueprint.name}: No API key, using placeholder`);
   }
 
-  // Post-generation validation: hex literal scan
-  const hexLiterals = scanForHexLiterals(content);
-  if (hexLiterals.length > 0) {
-    warnings.push(
-      `${blueprint.name}: Contains hex literals: ${hexLiterals.join(", ")} — replacing with placeholder`
-    );
-    content = placeholderComponent(blueprint);
-    usedAI = false;
+  // Post-generation: hex literal auto-repair then hard-fail
+  if (usedAI) {
+    const hexLiterals = scanForHexLiterals(content);
+    if (hexLiterals.length > 0) {
+      // Attempt inline style substitution first
+      const { content: hexFixed, replacements } = autoRepairHexLiterals(content);
+      const remaining = scanForHexLiterals(hexFixed);
+      if (remaining.length === 0) {
+        warnings.push(
+          `${blueprint.name}: Replaced ${replacements} hex literal(s) with CSS variable refs`
+        );
+        content = hexFixed;
+        // Re-verify syntax after substitution
+        const hexFixSyntaxErrors = validateTypeScriptSyntax(content, blueprint.componentFileName);
+        if (hexFixSyntaxErrors.length > 0) {
+          warnings.push(`${blueprint.name}: Hex fix introduced syntax errors — using placeholder`);
+          content = placeholderComponent(blueprint);
+          usedAI = false;
+        }
+      } else {
+        // Still has hex literals that couldn't be auto-fixed — hard-fail
+        warnings.push(
+          `${blueprint.name}: Contains hex literals: ${remaining.join(", ")} — replacing with placeholder`
+        );
+        content = placeholderComponent(blueprint);
+        usedAI = false;
+      }
+    }
   }
 
   // Post-generation validation: named export verification
