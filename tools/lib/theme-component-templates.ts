@@ -298,9 +298,10 @@ ${tokenSection}
 4. **Responsive**: Mobile-first with md: and lg: breakpoints. Read the CSS @media queries for responsive behaviour.
 5. **Semantic HTML**: Use section, div, h1-h6, p, a, img, ul, li. Keep heading hierarchy logical.
 6. **Props**: Access props via dot notation (props.heading, props.items). For arrays, use .map() with proper keys.
-7. **Images**: Use standard <img> tags with props for src/alt. Decorative images can use hardcoded /images/ paths.
-8. **No imports**: Do NOT import React, next/link, lucide-react, or any external modules. The shell wrapper handles imports.
-9. **Component classes**: You may use these component utility classes (defined in globals.css): btn-primary, btn-secondary, card, card-interactive, section, container-standard, container-narrow.
+7. **Array content**: When the HTML has repeating items (cards, posts, list items), model them as a SINGLE array prop: \`items?: Array<{ title?: string; description?: string; image?: string; href?: string; [key: string]: unknown }>\`. Never call \`.map()\` on a string prop — if it needs mapping, it must be typed as an array.
+8. **Images**: Use standard <img> tags with props for src/alt. Decorative images can use hardcoded /images/ paths.
+9. **No imports**: Do NOT import React, next/link, lucide-react, or any external modules. The shell wrapper handles imports.
+10. **Component classes**: You may use these component utility classes (defined in globals.css): btn-primary, btn-secondary, card, card-interactive, section, container-standard, container-narrow.
 
 ## OUTPUT FORMAT
 
@@ -374,8 +375,9 @@ RULES:
    REQUIRED: props.camelCase (e.g., props.postThumbnail, props.heroTitle)
    FORBIDDEN: props['post-thumbnail'], props["hero-title"], props['cta_button']
    The TypeScript interface uses camelCase. Your JSX must use the exact same names with dot notation.
-7. Output ONLY the function body starting with "  return (" — no imports, no interface, no function declaration.
-8. Keep it clean, semantic, and accessible.
+7. **Array props**: When multiple content slots share a common prefix (e.g. post-thumbnail, post-title, post-date) or represent per-item data, model them as a SINGLE array prop in the interface. Never call \`.map()\` on a string prop.
+8. Output ONLY the function body starting with "  return (" — no imports, no interface, no function declaration.
+9. Keep it clean, semantic, and accessible.
 
 ANIMATION PRIMITIVES (use these when the layout pattern suggests animation):
 - Scroll-triggered reveals: wrap section content in <RevealOnScroll variant="fade-up">
@@ -387,8 +389,8 @@ ANIMATION PRIMITIVES (use these when the layout pattern suggests animation):
 - CSS animation classes: animate-fade-in-up, animate-slide-in-left, animate-slide-in-right, animate-scale-up
 
 ANIMATION RULES:
-9. Do NOT animate every section. Use RevealOnScroll on 2-3 content sections max.
-10. Carousels are for hero images, testimonials, and blog post grids ONLY when the layout says "slider" or "carousel".
-11. ParallaxSection is for hero backgrounds or full-bleed image sections only.
-12. Always respect prefers-reduced-motion (the primitives handle this internally).`;
+10. Do NOT animate every section. Use RevealOnScroll on 2-3 content sections max.
+11. Carousels are for hero images, testimonials, and blog post grids ONLY when the layout says "slider" or "carousel".
+12. ParallaxSection is for hero backgrounds or full-bleed image sections only.
+13. Always respect prefers-reduced-motion (the primitives handle this internally).`;
 }
