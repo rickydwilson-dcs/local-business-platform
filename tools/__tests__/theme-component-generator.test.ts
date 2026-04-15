@@ -3,6 +3,7 @@ import {
   needsUseClient,
   fixBracketNotationProps,
   hasResidualBracketProps,
+  autoRepairHexLiterals,
 } from "../lib/theme-component-generator";
 import type { SectionBlueprint } from "../lib/reference-analysis-types";
 
@@ -91,5 +92,76 @@ describe("hasResidualBracketProps", () => {
 
   test("returns false for non-props bracket access", () => {
     expect(hasResidualBracketProps('items["key"]')).toBe(false);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// autoRepairHexLiterals
+// ---------------------------------------------------------------------------
+
+describe("autoRepairHexLiterals", () => {
+  test("replaces SVG fill attribute", () => {
+    const { content, replacements } = autoRepairHexLiterals('<path fill="#eb1d64" d="M0 0" />');
+    expect(content).toBe('<path fill="currentColor" d="M0 0" />');
+    expect(replacements).toBe(1);
+  });
+
+  test("replaces SVG stroke attribute", () => {
+    const { content, replacements } = autoRepairHexLiterals('<circle stroke="#07ab55" />');
+    expect(content).toBe('<circle stroke="currentColor" />');
+    expect(replacements).toBe(1);
+  });
+
+  test("replaces fill in style object", () => {
+    const { content, replacements } = autoRepairHexLiterals('style={{ fill: "#eb1d64" }}');
+    expect(content).toBe('style={{ fill: "currentColor" }}');
+    expect(replacements).toBe(1);
+  });
+
+  test("replaces stroke in style object", () => {
+    const { content, replacements } = autoRepairHexLiterals('style={{ stroke: "#07ab55" }}');
+    expect(content).toBe('style={{ stroke: "currentColor" }}');
+    expect(replacements).toBe(1);
+  });
+
+  test("replaces Tailwind bg-[#xxx] arbitrary class", () => {
+    const { content, replacements } = autoRepairHexLiterals('className="bg-[#fff] px-4"');
+    expect(content).toBe('className="bg-brand-primary px-4"');
+    expect(replacements).toBe(1);
+  });
+
+  test("replaces Tailwind text-[#xxx] arbitrary class", () => {
+    const { content, replacements } = autoRepairHexLiterals('className="text-[#1a2b3c]"');
+    expect(content).toBe('className="text-surface-foreground"');
+    expect(replacements).toBe(1);
+  });
+
+  test("replaces Tailwind border-[#xxx] arbitrary class", () => {
+    const { content, replacements } = autoRepairHexLiterals('className="border-[#aabbcc]"');
+    expect(content).toBe('className="border-brand-primary"');
+    expect(replacements).toBe(1);
+  });
+
+  test("handles 8-digit hex (alpha channel)", () => {
+    const { content, replacements } = autoRepairHexLiterals('<path fill="#eb1d6480" />');
+    expect(content).toBe('<path fill="currentColor" />');
+    expect(replacements).toBe(1);
+  });
+
+  test("repairs multiple contexts in one pass", () => {
+    const input = `
+      <path fill="#eb1d64" />
+      <div style={{ backgroundColor: "#1a2b3c" }} className="text-[#fff]" />
+    `;
+    const { content, replacements } = autoRepairHexLiterals(input);
+    expect(content).not.toContain("#");
+    expect(replacements).toBe(3);
+  });
+
+  test("does NOT repair CSS custom property hex (returns unchanged)", () => {
+    const input = `style={{ '--nav-color': '#eb1d64' }}`;
+    const { content, replacements } = autoRepairHexLiterals(input);
+    expect(content).toContain("#eb1d64"); // not repaired
+    expect(replacements).toBe(0);
   });
 });

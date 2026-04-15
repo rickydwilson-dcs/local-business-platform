@@ -47,26 +47,78 @@ function scanForHexLiterals(tsx: string): string[] {
   return matches ?? [];
 }
 
+/** Maps Tailwind color utility prefixes to nearest named theme token class. */
+const ARBITRARY_COLOR_TOKEN_MAP: Record<string, string> = {
+  bg: "bg-brand-primary",
+  text: "text-surface-foreground",
+  border: "border-brand-primary",
+  ring: "ring-brand-primary",
+  fill: "fill-none",
+  stroke: "stroke-1",
+  from: "from-brand-primary",
+  via: "via-brand-primary",
+  to: "to-brand-primary",
+  outline: "outline-none",
+  shadow: "shadow",
+  accent: "accent-brand-primary",
+  caret: "caret-brand-primary",
+  decoration: "decoration-brand-primary",
+};
+
 /**
- * Attempt to replace hex color literals in inline style objects with CSS variable refs.
- * Handles the common AI anti-pattern: style={{ backgroundColor: "#1a2b3c" }}
+ * Attempt to replace hex color literals with CSS variable refs or theme token classes.
+ * Handles: inline style objects, SVG JSX attributes, and Tailwind arbitrary-value classes.
  * Returns the fixed content and the count of replacements made.
  */
-function autoRepairHexLiterals(tsx: string): { content: string; replacements: number } {
+export function autoRepairHexLiterals(tsx: string): { content: string; replacements: number } {
   let replacements = 0;
+
   const fixed = tsx
-    .replace(/backgroundColor:\s*["']#[0-9A-Fa-f]{3,6}["']/g, () => {
+    // Inline style: camelCase backgroundColor / color / borderColor
+    .replace(/backgroundColor:\s*["']#[0-9A-Fa-f]{3,8}["']/g, () => {
       replacements++;
       return 'backgroundColor: "var(--color-brand-primary)"';
     })
-    .replace(/\bcolor:\s*["']#[0-9A-Fa-f]{3,6}["']/g, () => {
+    .replace(/\bcolor:\s*["']#[0-9A-Fa-f]{3,8}["']/g, () => {
       replacements++;
       return 'color: "var(--color-surface-foreground)"';
     })
-    .replace(/borderColor:\s*["']#[0-9A-Fa-f]{3,6}["']/g, () => {
+    .replace(/borderColor:\s*["']#[0-9A-Fa-f]{3,8}["']/g, () => {
       replacements++;
       return 'borderColor: "var(--color-surface-border)"';
-    });
+    })
+    // Inline style: background (longhand)
+    .replace(/\bbackground:\s*["']#[0-9A-Fa-f]{3,8}["']/g, () => {
+      replacements++;
+      return 'background: "var(--color-brand-primary)"';
+    })
+    // Inline style: fill / stroke (SVG in style object)
+    .replace(/\bfill:\s*["']#[0-9A-Fa-f]{3,8}["']/g, () => {
+      replacements++;
+      return 'fill: "currentColor"';
+    })
+    .replace(/\bstroke:\s*["']#[0-9A-Fa-f]{3,8}["']/g, () => {
+      replacements++;
+      return 'stroke: "currentColor"';
+    })
+    // SVG JSX attributes: fill="#xxx" stroke="#xxx"
+    .replace(/\bfill="#[0-9A-Fa-f]{3,8}"/g, () => {
+      replacements++;
+      return 'fill="currentColor"';
+    })
+    .replace(/\bstroke="#[0-9A-Fa-f]{3,8}"/g, () => {
+      replacements++;
+      return 'stroke="currentColor"';
+    })
+    // Tailwind arbitrary-value color classes: bg-[#xxx], text-[#xxx], etc.
+    .replace(
+      /\b(bg|text|border|ring|fill|stroke|from|via|to|outline|shadow|accent|caret|decoration)-\[#[0-9A-Fa-f]{3,8}\]/g,
+      (_match, prefix: string) => {
+        replacements++;
+        return ARBITRARY_COLOR_TOKEN_MAP[prefix] ?? `${prefix}-brand-primary`;
+      }
+    );
+
   return { content: fixed, replacements };
 }
 
