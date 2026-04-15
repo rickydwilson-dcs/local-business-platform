@@ -87,7 +87,7 @@ Use this when the client has an existing website. The pipeline screenshots the s
 - `--url` (required) — the reference website to scrape
 - `--trade` (optional) — business type hint; helps with content generation
 
-The pipeline assigns a theme name automatically from the constellation namespace. Current themes: `atlas`, `castor`, `corvus`, `cygnus`, `lyra`, `nova`, `orion`, `polaris`, `sirius`, `solaris`, `vega`.
+The pipeline assigns a theme name automatically from the constellation namespace. Current themes: `atlas`, `corvus`, `cygnus`, `lyra`, `nova`, `orion`, `polaris`, `sirius`, `solaris`, `vega`.
 
 **What it produces:**
 
