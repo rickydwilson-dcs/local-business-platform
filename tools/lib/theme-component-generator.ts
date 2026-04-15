@@ -492,6 +492,82 @@ Return ONLY the corrected TSX component, starting with the first line of the fil
 }
 
 // ============================================================================
+// Semantic-error targeted retry
+// ============================================================================
+
+/**
+ * Targeted semantic-error retry: sends the broken component + exact type errors
+ * to the AI with explicit fix patterns for common ReactNode and object-prop errors.
+ * Returns the full corrected component string, or null if the fix attempt fails
+ * or the content is too large to retry.
+ */
+export async function retryWithSemanticErrors(
+  client: Anthropic,
+  blueprint: SectionBlueprint,
+  brokenContent: string,
+  semanticErrors: string[]
+): Promise<string | null> {
+  // Guard: if content is very large, skip targeted retry (token cost)
+  if (brokenContent.length > 10000) {
+    return null;
+  }
+
+  const errorList = semanticErrors.slice(0, 5).join("\n- ");
+
+  const fixPrompt = `The following TSX component has TypeScript semantic type errors. Fix the errors listed below — do not change the layout, prop names, or overall structure.
+
+ERRORS:
+- ${errorList}
+
+COMMON FIX PATTERNS:
+- If error says "not assignable to type 'ReactNode'" or "not assignable to type 'ReactNode | undefined'":
+  The prop is an object (e.g. { label, href } or { src, alt }), not a string. You cannot render an object directly as a JSX child.
+  Fix: access its properties instead.
+  WRONG: <a>{props.button}</a>
+  CORRECT: <a href={props.button?.href}>{props.button?.label}</a>
+  WRONG: <div>{props.image}</div>
+  CORRECT: <img src={props.image?.src} alt={props.image?.alt ?? ""} />
+
+- If error says "Property 'X' does not exist on type 'string'":
+  The prop is typed as a plain string but you accessed .X on it. Use the prop directly.
+  WRONG: props.heading.text
+  CORRECT: props.heading
+
+- If error says "Property 'X' does not exist on type '{ label?: string; href?: string }'":
+  The object prop does not have property X. Use only .label and .href.
+  WRONG: props.button.target
+  CORRECT: props.button?.href (use as href attribute) and props.button?.label (use as text content)
+
+BROKEN COMPONENT:
+\`\`\`tsx
+${brokenContent}
+\`\`\`
+
+Return ONLY the corrected TSX component, starting with the first line of the file. No markdown fences, no explanation.`;
+
+  try {
+    const message = await client.messages.create({
+      model: "claude-sonnet-4-6",
+      max_tokens: 4096,
+      messages: [{ role: "user", content: fixPrompt }],
+    });
+
+    const responseText = message.content[0].type === "text" ? message.content[0].text.trim() : null;
+    if (!responseText) return null;
+
+    // Strip any accidental markdown fences
+    const cleaned = responseText
+      .replace(/^```(?:tsx?|jsx?)?\n?/, "")
+      .replace(/\n?```$/, "")
+      .trim();
+
+    return cleaned || null;
+  } catch {
+    return null;
+  }
+}
+
+// ============================================================================
 // Single component generation
 // ============================================================================
 
@@ -581,7 +657,7 @@ async function generateSingleComponent(
         if (semanticErrors.length > 0) {
           warnings.push(`${blueprint.name}: TS semantic errors: ${semanticErrors.join("; ")}`);
           // Targeted repair: show AI the broken content + exact semantic errors
-          const fixedContent = await retryWithSyntaxErrors(
+          const fixedContent = await retryWithSemanticErrors(
             client,
             blueprint,
             content,
