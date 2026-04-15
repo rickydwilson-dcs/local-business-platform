@@ -36,6 +36,12 @@ This captures the site via Playwright: downloads HTML for all discovered pages, 
 npx tsx tools/extract-theme.ts --clone <theme-name> --pass translate --verify
 ```
 
+Use `--out <dir>` to write to an alternate directory instead of `packages/themes/<theme-name>/` — useful for isolated test runs without overwriting the committed theme:
+
+```bash
+npx tsx tools/extract-theme.ts --clone <theme-name> --pass translate --out /tmp/<theme-name>-test
+```
+
 This reads the clone's HTML, CSS, and screenshots as reference material and uses AI (Claude claude-sonnet-4-6) to generate native Tailwind components at `packages/themes/<theme-name>/`. It does not copy the clone's CSS — instead it interprets layout, spacing, and colour from the clone and emits `flex flex-col max-w-7xl gap-8 bg-brand-primary`-style classes. The `--verify` flag runs a Playwright screenshot diff against the reference screenshots to confirm visual fidelity.
 
 **Check:** The components in `packages/themes/<theme-name>/components/` should use Tailwind utility classes (not Breakdance/WordPress class names like `bde-section-*`). Run `grep -r "bde-" packages/themes/<theme-name>/` — should return nothing. If visual QA reports >10% diff, inspect the diff images in `output/clones/<theme-name>/reports/`.
