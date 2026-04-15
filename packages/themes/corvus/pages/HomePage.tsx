@@ -1,13 +1,13 @@
-import { NavDarkBar } from "../components/nav-dark-bar";
+import { NavDarkBand } from "../components/nav-dark-band";
 import { HeroHeadlineColoured } from "../components/hero-headline-coloured";
-import { HeroEventDetailsOverlay } from "../components/hero-event-details-overlay";
+import { HeroEventBanner } from "../components/hero-event-banner";
 import { CtaYellowBand } from "../components/cta-yellow-band";
 import { CtaBlueBand } from "../components/cta-blue-band";
 import { CtaGreenBand } from "../components/cta-green-band";
 import { BlogCardGrid } from "../components/blog-card-grid";
-import { ContentAboutSplit } from "../components/content-about-split";
-import { CustomPhotoGalleryStrip } from "../components/custom-photo-gallery-strip";
-import { NewsletterSignupBand } from "../components/newsletter-signup-band";
+import { AboutSplitDark } from "../components/about-split-dark";
+import { GalleryPhotoStrip } from "../components/gallery-photo-strip";
+import { NewsletterDarkBand } from "../components/newsletter-dark-band";
 import { FooterMultiColumn } from "../components/footer-multi-column";
 
 export interface CorvusHomePageProps {
@@ -15,19 +15,18 @@ export interface CorvusHomePageProps {
 }
 
 export function CorvusHomePage(props: CorvusHomePageProps) {
-  void props;
   return (
     <main>
-      <NavDarkBar />
+      <NavDarkBand />
       <HeroHeadlineColoured />
-      <HeroEventDetailsOverlay />
+      <HeroEventBanner />
       <CtaYellowBand />
       <CtaBlueBand />
       <CtaGreenBand />
       <BlogCardGrid />
-      <ContentAboutSplit />
-      <CustomPhotoGalleryStrip />
-      <NewsletterSignupBand />
+      <AboutSplitDark />
+      <GalleryPhotoStrip />
+      <NewsletterDarkBand />
       <FooterMultiColumn />
     </main>
   );

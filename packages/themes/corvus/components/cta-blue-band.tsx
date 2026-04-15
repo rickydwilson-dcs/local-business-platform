@@ -1,8 +1,10 @@
+import React from "react";
+
 /**
  * CtaBlueBand
  *
- * Sponsor call-to-action band with right-aligned text layout on secondary brand colour background
- * Layout: contained section with right-aligned heading, body text and CTA button on secondary background
+ * Sponsor call-to-action band with text right-aligned and CTA button
+ * Layout: full-bleed blue band with heading and body text right-aligned, CTA button below
  * Category: CTA
  */
 
@@ -17,11 +19,11 @@ export interface CtaBlueBandProps {
 
 export function CtaBlueBand(props: CtaBlueBandProps) {
   return (
-    <section className="w-full pt-10 pb-0 bg-white">
-      <div className="w-full px-0 pb-0 pt-10">
-        {/* Gallery grid - 3 columns with 10px gap, showing a photo gallery */}
+    <section className="w-full bg-brand-secondary pt-10 pb-0">
+      <div className="w-full px-0 pb-0 pt-0">
+        {/* Gallery grid - 3 columns of images */}
         <div className="grid grid-cols-3 gap-[10px]">
-          <div className="relative w-full overflow-hidden bg-black/20 aspect-square">
+          <div className="aspect-square overflow-hidden bg-black/20">
             <img
               src="https://colorcode.events/wp-content/uploads/2025/12/color-code-buffalo-2025-social-5-768x1152.jpg"
               alt="Color Code Buffalo 2025"
@@ -29,7 +31,7 @@ export function CtaBlueBand(props: CtaBlueBandProps) {
               loading="lazy"
             />
           </div>
-          <div className="relative w-full overflow-hidden bg-black/20 aspect-square">
+          <div className="aspect-square overflow-hidden bg-black/20">
             <img
               src="https://colorcode.events/wp-content/uploads/2025/12/color-code-buffalo-2025-lewis-768x512.jpg"
               alt="Color Code Buffalo 2025 Lewis"
@@ -37,7 +39,7 @@ export function CtaBlueBand(props: CtaBlueBandProps) {
               loading="lazy"
             />
           </div>
-          <div className="relative w-full overflow-hidden bg-black/20 aspect-square">
+          <div className="aspect-square overflow-hidden bg-black/20">
             <img
               src="https://colorcode.events/wp-content/uploads/2025/12/color-code-buffalo-2025-social-4-768x512.jpg"
               alt="Color Code Buffalo 2025 Social"
@@ -45,7 +47,7 @@ export function CtaBlueBand(props: CtaBlueBandProps) {
               loading="lazy"
             />
           </div>
-          <div className="relative w-full overflow-hidden bg-black/20 aspect-square">
+          <div className="aspect-square overflow-hidden bg-black/20">
             <img
               src="https://colorcode.events/wp-content/uploads/2025/12/color-code-buffalo-2025-cleary-768x512.jpg"
               alt="Color Code Buffalo 2025 Cleary"
@@ -53,7 +55,7 @@ export function CtaBlueBand(props: CtaBlueBandProps) {
               loading="lazy"
             />
           </div>
-          <div className="relative w-full overflow-hidden bg-black/20 aspect-square">
+          <div className="aspect-square overflow-hidden bg-black/20">
             <img
               src="https://colorcode.events/wp-content/uploads/2025/12/color-code-buffalo-2025-social-3-768x512.jpg"
               alt="Color Code Buffalo 2025 Social 3"
@@ -61,7 +63,7 @@ export function CtaBlueBand(props: CtaBlueBandProps) {
               loading="lazy"
             />
           </div>
-          <div className="relative w-full overflow-hidden bg-black/20 aspect-square">
+          <div className="aspect-square overflow-hidden bg-black/20">
             <img
               src="https://colorcode.events/wp-content/uploads/2025/12/color-code-buffalo-2025-social-5-768x1152.jpg"
               alt="Color Code Buffalo 2025"
@@ -71,19 +73,23 @@ export function CtaBlueBand(props: CtaBlueBandProps) {
           </div>
         </div>
 
-        {/* CTA Blue Band */}
-        <div className="w-full bg-brand-secondary py-10 px-0 pb-10">
-          <div className="w-full flex flex-col items-end text-right px-10">
-            <h2 className="text-3xl md:text-4xl font-bold text-on-brand-primary leading-tight mb-4">
+        {/* CTA Band */}
+        <div className="w-full bg-brand-secondary flex flex-col items-end text-right px-10 pt-10 pb-10">
+          {props.heading && (
+            <h2 className="text-3xl font-bold text-on-brand-primary leading-tight mb-4 max-w-2xl">
               {props.heading}
             </h2>
-            <p className="text-on-brand-primary/90 text-base md:text-lg leading-relaxed max-w-xl mb-6">
+          )}
+          {props.bodyText && (
+            <p className="text-base text-on-brand-primary leading-relaxed mb-6 max-w-2xl">
               {props.bodyText}
             </p>
-            <a href={props.ctaButton?.href ?? "#"} className="btn-primary inline-block">
-              {props.ctaButton?.label ?? "Learn More"}
+          )}
+          {props.ctaButton && (
+            <a href={props.ctaButton?.href} className="btn-primary inline-block">
+              {props.ctaButton?.label}
             </a>
-          </div>
+          )}
         </div>
       </div>
     </section>
