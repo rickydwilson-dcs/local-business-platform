@@ -169,14 +169,14 @@ New sites get two layers of scaffolding:
 
 ### Reference Sites
 
-| Theme    | Reference Site            | Provides                                                 |
-| -------- | ------------------------- | -------------------------------------------------------- |
-| `cygnus` | `sites/_cygnus-graphics`  | Dark mode hero, image card grids, cygnus visual language |
-| `lyra`   | `sites/_lyra-garden`      | Editorial serif hero, garden/landscaping visual language |
-| `nova`   | `sites/_nova-print`       | Bold orange + green hero, print/graphics visual language |
-| `orion`  | `sites/dj-fox-electrical` | Dark header, full-bleed hero, circular icons             |
-| `corvus` | `sites/_corvus-events`    | Conference/event platform, full-page component library   |
-| `vega`   | `sites/base-template`     | Light header, split hero, standard card grid             |
+| Theme    | Reference Site                           | Provides                                                 |
+| -------- | ---------------------------------------- | -------------------------------------------------------- |
+| `cygnus` | `sites/_cygnus-graphics`                 | Dark mode hero, image card grids, cygnus visual language |
+| `lyra`   | `sites/_lyra-garden`                     | Editorial serif hero, garden/landscaping visual language |
+| `nova`   | `sites/_nova-print`                      | Bold orange + green hero, print/graphics visual language |
+| `orion`  | `sites/dj-fox-electrical`                | Dark header, full-bleed hero, circular icons             |
+| `corvus` | `sites/_corvus-digital-marketing-events` | Conference/event platform, full-page component library   |
+| `vega`   | `sites/base-template`                    | Light header, split hero, standard card grid             |
 
 ### Graceful Fallback
 
