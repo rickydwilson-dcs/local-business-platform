@@ -47,6 +47,29 @@ function scanForHexLiterals(tsx: string): string[] {
   return matches ?? [];
 }
 
+/**
+ * Attempt to replace hex color literals in inline style objects with CSS variable refs.
+ * Handles the common AI anti-pattern: style={{ backgroundColor: "#1a2b3c" }}
+ * Returns the fixed content and the count of replacements made.
+ */
+function autoRepairHexLiterals(tsx: string): { content: string; replacements: number } {
+  let replacements = 0;
+  const fixed = tsx
+    .replace(/backgroundColor:\s*["']#[0-9A-Fa-f]{3,6}["']/g, () => {
+      replacements++;
+      return 'backgroundColor: "var(--color-brand-primary)"';
+    })
+    .replace(/\bcolor:\s*["']#[0-9A-Fa-f]{3,6}["']/g, () => {
+      replacements++;
+      return 'color: "var(--color-surface-foreground)"';
+    })
+    .replace(/borderColor:\s*["']#[0-9A-Fa-f]{3,6}["']/g, () => {
+      replacements++;
+      return 'borderColor: "var(--color-surface-border)"';
+    });
+  return { content: fixed, replacements };
+}
+
 // ============================================================================
 // Named export verification
 // ============================================================================
@@ -299,6 +322,61 @@ async function generateJSXBody(
 }
 
 // ============================================================================
+// Syntax-error targeted retry
+// ============================================================================
+
+/**
+ * Targeted syntax-error retry: sends the broken component + exact parse errors
+ * to the AI for a focused fix. Returns the full corrected component string, or
+ * null if the fix attempt fails or the content is too large to retry.
+ */
+async function retryWithSyntaxErrors(
+  client: Anthropic,
+  blueprint: SectionBlueprint,
+  brokenContent: string,
+  syntaxErrors: string[]
+): Promise<string | null> {
+  // Guard: if content is very large, skip targeted retry (token cost)
+  if (brokenContent.length > 10000) {
+    return null;
+  }
+
+  const errorList = syntaxErrors.slice(0, 5).join("\n- ");
+
+  const fixPrompt = `The following TSX component has syntax errors. Fix ONLY the syntax errors listed below — do not change the logic, layout, or prop names.
+
+ERRORS:
+- ${errorList}
+
+BROKEN COMPONENT:
+\`\`\`tsx
+${brokenContent}
+\`\`\`
+
+Return ONLY the corrected TSX component, starting with the first line of the file. No markdown fences, no explanation.`;
+
+  try {
+    const response = await client.messages.create({
+      model: "claude-sonnet-4-6",
+      max_tokens: 4096,
+      temperature: 0,
+      messages: [{ role: "user", content: fixPrompt }],
+    });
+
+    const text = response.content.find((b) => b.type === "text");
+    if (!text || text.type !== "text") return null;
+
+    let fixed = text.text.trim();
+    // Strip markdown fences if present
+    fixed = fixed.replace(/^```(?:tsx?|jsx?)?\n?/m, "").replace(/\n?```$/m, "");
+    return fixed || null;
+  } catch (err) {
+    console.warn(`    [Warning] Syntax-error retry failed for ${blueprint.name}: ${err}`);
+    return null;
+  }
+}
+
+// ============================================================================
 // Single component generation
 // ============================================================================
 
@@ -340,21 +418,45 @@ async function generateSingleComponent(
       const syntaxErrors = validateTypeScriptSyntax(content, blueprint.componentFileName);
       if (syntaxErrors.length > 0) {
         warnings.push(`${blueprint.name}: TS syntax errors: ${syntaxErrors.join("; ")}`);
-        // Retry once
-        jsxBody = await generateJSXBody(client, blueprint);
-        if (jsxBody) {
-          content = needsClient
-            ? clientComponentShell(blueprint, jsxBody)
-            : serverComponentShell(blueprint, jsxBody);
-          const retryErrors = validateTypeScriptSyntax(content, blueprint.componentFileName);
-          if (retryErrors.length > 0) {
-            warnings.push(`${blueprint.name}: Retry also failed — using placeholder`);
+        // Targeted retry: show AI the broken content + exact errors
+        const fixedContent = await retryWithSyntaxErrors(client, blueprint, content, syntaxErrors);
+        if (fixedContent) {
+          // Verify the fix has the correct named export before accepting
+          if (!verifyNamedExport(fixedContent, blueprint.componentExportName)) {
+            warnings.push(
+              `${blueprint.name}: Syntax-fix retry changed export name — using placeholder`
+            );
+            content = placeholderComponent(blueprint);
+            usedAI = false;
+          } else {
+            const retryErrors = validateTypeScriptSyntax(fixedContent, blueprint.componentFileName);
+            if (retryErrors.length > 0) {
+              warnings.push(`${blueprint.name}: Syntax-fix retry also failed — using placeholder`);
+              content = placeholderComponent(blueprint);
+              usedAI = false;
+            } else {
+              warnings.push(`${blueprint.name}: Syntax-fix retry succeeded`);
+              content = fixedContent;
+              // usedAI stays true
+            }
+          }
+        } else {
+          // Fallback: blind regeneration (original behavior, used when content > 10k)
+          jsxBody = await generateJSXBody(client, blueprint);
+          if (jsxBody) {
+            content = needsClient
+              ? clientComponentShell(blueprint, jsxBody)
+              : serverComponentShell(blueprint, jsxBody);
+            const retryErrors = validateTypeScriptSyntax(content, blueprint.componentFileName);
+            if (retryErrors.length > 0) {
+              warnings.push(`${blueprint.name}: Blind retry also failed — using placeholder`);
+              content = placeholderComponent(blueprint);
+              usedAI = false;
+            }
+          } else {
             content = placeholderComponent(blueprint);
             usedAI = false;
           }
-        } else {
-          content = placeholderComponent(blueprint);
-          usedAI = false;
         }
       }
 
@@ -430,14 +532,34 @@ async function generateSingleComponent(
     warnings.push(`${blueprint.name}: No API key, using placeholder`);
   }
 
-  // Post-generation validation: hex literal scan
-  const hexLiterals = scanForHexLiterals(content);
-  if (hexLiterals.length > 0) {
-    warnings.push(
-      `${blueprint.name}: Contains hex literals: ${hexLiterals.join(", ")} — replacing with placeholder`
-    );
-    content = placeholderComponent(blueprint);
-    usedAI = false;
+  // Post-generation: hex literal auto-repair then hard-fail
+  if (usedAI) {
+    const hexLiterals = scanForHexLiterals(content);
+    if (hexLiterals.length > 0) {
+      // Attempt inline style substitution first
+      const { content: hexFixed, replacements } = autoRepairHexLiterals(content);
+      const remaining = scanForHexLiterals(hexFixed);
+      if (remaining.length === 0) {
+        warnings.push(
+          `${blueprint.name}: Replaced ${replacements} hex literal(s) with CSS variable refs`
+        );
+        content = hexFixed;
+        // Re-verify syntax after substitution
+        const hexFixSyntaxErrors = validateTypeScriptSyntax(content, blueprint.componentFileName);
+        if (hexFixSyntaxErrors.length > 0) {
+          warnings.push(`${blueprint.name}: Hex fix introduced syntax errors — using placeholder`);
+          content = placeholderComponent(blueprint);
+          usedAI = false;
+        }
+      } else {
+        // Still has hex literals that couldn't be auto-fixed — hard-fail
+        warnings.push(
+          `${blueprint.name}: Contains hex literals: ${remaining.join(", ")} — replacing with placeholder`
+        );
+        content = placeholderComponent(blueprint);
+        usedAI = false;
+      }
+    }
   }
 
   // Post-generation validation: named export verification
