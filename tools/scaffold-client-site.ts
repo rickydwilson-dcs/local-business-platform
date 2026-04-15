@@ -477,15 +477,26 @@ async function main() {
   // Step 3b: Replace vega references in all page files and tsconfig
   console.log("[scaffold] Step 3b: Replacing vega references in page files...");
   const pascal = themeName.charAt(0).toUpperCase() + themeName.slice(1);
-  const filesToPatch = findFilesRecursive(sitePath, [".tsx", ".ts"], ["node_modules", ".next"]);
+  const filesToPatch = findFilesRecursive(
+    sitePath,
+    [".tsx", ".ts", ".json", ".css"],
+    ["node_modules", ".next"]
+  );
   for (const file of filesToPatch) {
     if (file === layoutPath || file === themeConfigPath) continue; // already handled
     const content = fs.readFileSync(file, "utf-8");
-    if (content.includes("@platform/themes/vega") || content.includes("Vega")) {
+    if (
+      content.includes("@platform/themes/vega") ||
+      content.includes("@platform/themes/orion") ||
+      content.includes("Vega")
+    ) {
       replaceInFile(file, {
         "@platform/themes/vega/pages": `@platform/themes/${themeName}/pages`,
         "@platform/themes/vega/components": `@platform/themes/${themeName}/components`,
         "@platform/themes/vega": `@platform/themes/${themeName}`,
+        "@platform/themes/orion": `@platform/themes/${themeName}`,
+        "../../packages/themes/vega/": `../../packages/themes/${themeName}/`,
+        "../../packages/themes/orion/": `../../packages/themes/${themeName}/`,
       });
       // Replace component names (VegaHomePage → CorvusHomePage, etc.)
       let updated = fs.readFileSync(file, "utf-8");

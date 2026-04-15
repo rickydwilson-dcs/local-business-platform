@@ -1,8 +1,8 @@
 # Session Wrap-Up: Translate Pipeline — AI-Generated Native Tailwind from Clone References
 
-**Date:** 2026-04-13
+**Date:** 2026-04-13 (translate pass) / 2026-04-14 (gauntlet yield)
 **Session folder:** output/sessions/2026-04-13_translate-pipeline/
-**Branch:** feature/translate-pipeline
+**Branches:** feature/translate-pipeline (merged) → feature/gauntlet-yield (open)
 **Status:** Completed
 
 ## Goal
@@ -49,8 +49,50 @@ Implement the `--pass translate` pipeline in `tools/extract-theme.ts` so it gene
 
 The translate pipeline is now the canonical path for converting clones into theme packages — no clone CSS loads at runtime. The most fragile part of the pipeline is the 5-layer gauntlet: AI-generated JSX frequently accesses undeclared sub-properties on typed array items (`.thumbnail`, `.date`, `.excerpt`) or produces hex literals in complex components. Improving yield from ~45% to ~80%+ will require either relaxing the array item type in `inferPropType` (allow `[key: string]: unknown` on array items) or adding a pre-gauntlet scrubbing pass that substitutes undeclared property accesses with safe fallbacks before the TypeScript check runs.
 
-## Follow-On Tasks
+## Follow-On Tasks (translate-pipeline)
 
-- Improve gauntlet yield: relax array item type to include an index signature, or add a JSX scrubber that strips undeclared sub-property accesses before the type check
 - Wire `--pass translate` into the full pipeline orchestration script so it runs automatically after `--pass clone`
 - Merge `feature/translate-pipeline` → `develop` → `staging` → `main` via `/deploy.changes`
+
+---
+
+## Gauntlet Yield Improvement (2026-04-14 follow-on)
+
+**Branch:** feature/gauntlet-yield  
+**Brief:** `yolo-brief-gauntlet-yield.md`
+
+### Goal
+
+Push `--pass translate` yield from ~45% (5/11) to 80%+ by fixing four identified gauntlet failure modes.
+
+### What Was Done
+
+- Relaxed array item type to `string | undefined` open index signature; added 5 plural slot endings
+- Replaced blind re-generation retry with targeted syntax-error retry (sends broken component + exact errors back to Claude)
+- Added `autoRepairHexLiterals()` to substitute inline-style hex values with CSS variable refs before hard-failing
+- Injected explicit array/scalar guidance (rule 7) into both generation prompts
+
+### Key Decisions
+
+- **`string | undefined` not `unknown`**: Brief specified `unknown` but that makes dynamic array item props non-renderable in JSX. `string | undefined` achieves the same open-access goal while staying type-safe.
+- **Reverted corvus after test run**: Tool has no `--out` flag (brief assumed one), so test run overwrote real corvus. Reverted after recording results.
+- **Semantic type errors noted, not fixed**: Gauntlet uses `ts.createSourceFile` (parse-only). Semantic errors (`.map()` on string, object-as-ReactNode) require `ts.createProgram` — flagged as future work.
+
+### Commits
+
+- `cbee742` — fix(pipeline): relax array item index signature; add plural slot endings
+- `2b79e82` — feat(pipeline): smarter syntax-error retry with targeted fix prompt
+- `24bc760` — feat(pipeline): hex literal auto-repair before hard-fail
+- `a0db4c6` — feat(pipeline): add array/scalar guidance to component generation prompts
+- `c36203e` — fix(pipeline): use string|undefined index sig to keep array item props JSX-safe
+- `af6eeab` — chore(pipeline): verify gauntlet yield improvement (e2e test run)
+
+### Result
+
+**10/11 AI-generated** (91%) on re-run, up from 5/11 (45%). Phase 2 targeted retry demonstrably fired for CtaBlueBand and CtaGreenBand. Only NavDarkBand remained a placeholder (brand-specific hex in SVG/non-inline-style contexts).
+
+### Follow-On Tasks
+
+- Add semantic type-checking pass to gauntlet (`ts.createProgram`) to catch `ReactNode` and `.map()` errors
+- Add `--out <dir>` flag to `extract-theme.ts` for isolated test runs
+- Investigate NavDarkBand SVG attribute hex — may need targeted SVG replacer
