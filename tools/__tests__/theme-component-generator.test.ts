@@ -1,9 +1,11 @@
 import { describe, test, expect } from "vitest";
+import Anthropic from "@anthropic-ai/sdk";
 import {
   needsUseClient,
   fixBracketNotationProps,
   hasResidualBracketProps,
   autoRepairHexLiterals,
+  retryWithSemanticErrors,
 } from "../lib/theme-component-generator";
 import type { SectionBlueprint } from "../lib/reference-analysis-types";
 
@@ -163,5 +165,23 @@ describe("autoRepairHexLiterals", () => {
     const { content, replacements } = autoRepairHexLiterals(input);
     expect(content).toContain("#eb1d64"); // not repaired
     expect(replacements).toBe(0);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// retryWithSemanticErrors
+// ---------------------------------------------------------------------------
+
+describe("retryWithSemanticErrors", () => {
+  test("returns null for content over 10000 characters", async () => {
+    // The guard should return null without calling the API
+    const largeContent = "x".repeat(10001);
+    const result = await retryWithSemanticErrors(
+      {} as Anthropic, // won't be called
+      { name: "Test", type: "Section" } as unknown as SectionBlueprint,
+      largeContent,
+      ["[TS2322]:5 Type '{ label: string }' is not assignable to type 'ReactNode'"]
+    );
+    expect(result).toBeNull();
   });
 });
