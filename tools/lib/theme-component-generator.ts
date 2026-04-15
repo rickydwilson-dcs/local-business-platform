@@ -103,6 +103,69 @@ function validateTypeScriptSyntax(content: string, fileName: string): string[] {
 }
 
 // ============================================================================
+// Semantic type-checking constants
+// ============================================================================
+
+/** Error codes to suppress from semantic diagnostics (import-resolution and JSX noise). */
+const SEMANTIC_SKIP_CODES = new Set<number>([
+  2307, // Cannot find module 'x'
+  2304, // Cannot find name (cascades from unresolved imports)
+  7016, // Could not find declaration file for module
+  2792, // Cannot find module or its type declarations
+  7026, // JSX element implicitly 'any' (without @types/react)
+  17004, // Cannot use JSX unless '--jsx' flag is provided
+]);
+
+/** Compiler options for semantic validation. noEmit + skipLibCheck for speed. */
+const SEMANTIC_COMPILER_OPTIONS: ts.CompilerOptions = {
+  jsx: ts.JsxEmit.React,
+  strict: true,
+  skipLibCheck: true,
+  noEmit: true,
+  target: ts.ScriptTarget.ES2022,
+  module: ts.ModuleKind.CommonJS,
+  allowSyntheticDefaultImports: true,
+  esModuleInterop: true,
+  typeRoots: [path.resolve(process.cwd(), "packages/core-components/node_modules/@types")],
+  types: ["react"],
+};
+
+/**
+ * Run a full TypeScript semantic type check on generated component content.
+ * Catches errors that the parse-only check misses: .map() on string props,
+ * objects rendered as ReactNode, required prop mismatches, etc.
+ * Returns an array of error strings, filtered to suppress import-resolution noise.
+ */
+function validateTypeScriptSemantic(content: string, fileName: string): string[] {
+  const sourceFile = ts.createSourceFile(
+    fileName,
+    content,
+    ts.ScriptTarget.ES2022,
+    true,
+    ts.ScriptKind.TSX
+  );
+
+  const defaultHost = ts.createCompilerHost(SEMANTIC_COMPILER_OPTIONS);
+  const customHost: ts.CompilerHost = {
+    ...defaultHost,
+    getSourceFile: (name, lang) =>
+      name === fileName ? sourceFile : defaultHost.getSourceFile(name, lang),
+    fileExists: (f) => f === fileName || defaultHost.fileExists(f),
+    readFile: (f) => (f === fileName ? content : defaultHost.readFile(f)),
+  };
+
+  const program = ts.createProgram([fileName], SEMANTIC_COMPILER_OPTIONS, customHost);
+  const diagnostics = ts.getPreEmitDiagnostics(program);
+
+  return Array.from(diagnostics)
+    .filter((d) => !SEMANTIC_SKIP_CODES.has(d.code))
+    .map((d) => {
+      const line = d.file ? `:${d.file.getLineAndCharacterOfPosition(d.start ?? 0).line + 1}` : "";
+      return `[TS${d.code}]${line} ${ts.flattenDiagnosticMessageText(d.messageText, " ")}`;
+    });
+}
+
+// ============================================================================
 // Token class validation
 // ============================================================================
 
@@ -454,6 +517,52 @@ async function generateSingleComponent(
               usedAI = false;
             }
           } else {
+            content = placeholderComponent(blueprint);
+            usedAI = false;
+          }
+        }
+      }
+
+      // Post-generation: Semantic type check
+      if (usedAI) {
+        const semanticErrors = validateTypeScriptSemantic(content, blueprint.componentFileName);
+        if (semanticErrors.length > 0) {
+          warnings.push(`${blueprint.name}: TS semantic errors: ${semanticErrors.join("; ")}`);
+          // Targeted repair: show AI the broken content + exact semantic errors
+          const fixedContent = await retryWithSyntaxErrors(
+            client,
+            blueprint,
+            content,
+            semanticErrors
+          );
+          if (fixedContent) {
+            if (!verifyNamedExport(fixedContent, blueprint.componentExportName)) {
+              warnings.push(
+                `${blueprint.name}: Semantic-fix retry changed export name — using placeholder`
+              );
+              content = placeholderComponent(blueprint);
+              usedAI = false;
+            } else {
+              const retryErrors = validateTypeScriptSemantic(
+                fixedContent,
+                blueprint.componentFileName
+              );
+              if (retryErrors.length > 0) {
+                warnings.push(
+                  `${blueprint.name}: Semantic-fix retry also failed — using placeholder`
+                );
+                content = placeholderComponent(blueprint);
+                usedAI = false;
+              } else {
+                warnings.push(`${blueprint.name}: Semantic-fix retry succeeded`);
+                content = fixedContent;
+              }
+            }
+          } else {
+            // retryWithSyntaxErrors returned null (content > 10k or API error)
+            warnings.push(
+              `${blueprint.name}: Semantic errors, content too large to retry — using placeholder`
+            );
             content = placeholderComponent(blueprint);
             usedAI = false;
           }
