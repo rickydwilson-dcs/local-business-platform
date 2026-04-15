@@ -38,7 +38,10 @@
       "Bash(sed -n '12,30p' cookie-policy/page.tsx)",
       "Bash([ -f \"/Users/rickywilson/Sites/local-business-platform/sites/_lyra-garden/$file\" ])",
       "Bash(node_modules/.bin/next dev:*)",
-      "WebFetch(domain:colorcode.events)"
+      "WebFetch(domain:colorcode.events)",
+      "Bash([ -f \"/Users/rickywilson/Sites/local-business-platform/packages/themes/$theme/components/index.ts\" ])",
+      "Bash([ -d \"/Users/rickywilson/Sites/local-business-platform/packages/themes/$theme/pages\" ])",
+      "Bash([ -d \"/Users/rickywilson/Sites/local-business-platform/packages/themes/$theme\" ])"
     ],
     "additionalDirectories": [
       "/Users/rickywilson/Sites/local-business-platform/output/ingestion/cygnus-stitch/images",
