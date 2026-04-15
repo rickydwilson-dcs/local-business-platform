@@ -9,6 +9,7 @@
  *   npx tsx tools/extract-theme.ts --clone corvus --pass translate
  *   npx tsx tools/extract-theme.ts --clone corvus --pass strip
  *   npx tsx tools/extract-theme.ts --brief output/briefs/abc123.json
+ *   npx tsx tools/extract-theme.ts --clone corvus --pass translate --out /tmp/corvus-test
  */
 
 import * as fs from "fs";
@@ -27,13 +28,21 @@ import { generateThemeComponentsFromClone } from "./lib/theme-component-generato
 
 // ── Argument parsing ─────────────────────────────────────────────────────────
 
-function parseArgs(): { clone?: string; brief?: string; pass?: string; verify?: boolean } {
+function parseArgs(): {
+  clone?: string;
+  brief?: string;
+  pass?: string;
+  verify?: boolean;
+  out?: string;
+} {
   const args = process.argv.slice(2);
-  const result: { clone?: string; brief?: string; pass?: string; verify?: boolean } = {};
+  const result: { clone?: string; brief?: string; pass?: string; verify?: boolean; out?: string } =
+    {};
   for (let i = 0; i < args.length; i++) {
     if (args[i] === "--clone" && args[i + 1]) result.clone = args[++i];
     else if (args[i] === "--brief" && args[i + 1]) result.brief = args[++i];
     else if (args[i] === "--pass" && args[i + 1]) result.pass = args[++i];
+    else if (args[i] === "--out" && args[i + 1]) result.out = args[++i];
     else if (args[i] === "--verify") result.verify = true;
   }
   return result;
@@ -421,7 +430,12 @@ async function main() {
 
   const cloneDir = path.resolve(`output/clones/${cloneName}`);
   const themeName = cloneName;
-  const themeDir = path.resolve(`packages/themes/${themeName}`);
+  const defaultThemeDir = path.resolve(`packages/themes/${themeName}`);
+  const themeDir = args.out ? path.resolve(args.out) : defaultThemeDir;
+
+  if (args.out) {
+    fs.mkdirSync(themeDir, { recursive: true });
+  }
 
   // Read clone source domain from meta.json
   const metaPath = path.join(cloneDir, "meta.json");
