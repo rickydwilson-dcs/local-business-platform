@@ -15,6 +15,9 @@
 import * as fs from "fs";
 import * as path from "path";
 
+import * as dotenv from "dotenv";
+dotenv.config({ path: path.join(process.cwd(), ".env.local") });
+
 import Anthropic from "@anthropic-ai/sdk";
 import { JobBriefSchema, type JobBrief } from "./lib/pipeline-brief-types";
 import { stripContent } from "./lib/content-stripper";

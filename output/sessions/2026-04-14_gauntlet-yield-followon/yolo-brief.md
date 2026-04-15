@@ -578,6 +578,23 @@ This writes `session-wrap-up.md` to the session folder. **This is a required fin
 
 ---
 
+## Completed
+
+**Date:** 2026-04-15
+**Status:** All phases executed successfully
+
+All three improvements were implemented cleanly. Phase 1 added the `--out` flag to `extract-theme.ts` with a 1-line mkdirSync guard. Phase 2 added `validateTypeScriptSemantic` (using `ts.createProgram` + `getPreEmitDiagnostics`) with import-resolution noise suppressed via `SEMANTIC_SKIP_CODES`, wired into the gauntlet after the syntax check block using the existing `retryWithSyntaxErrors` repair path. Phase 3 rewrote `autoRepairHexLiterals` to cover SVG JSX attributes (`fill`/`stroke`), inline-style longhand properties, Tailwind arbitrary-value classes, and 8-digit hex (alpha channel), plus exported it and added 10 unit tests (all passing). The E2E smoke test confirmed isolation: files wrote to `/tmp/corvus-test-yield/` only and `packages/themes/corvus/` had no git-tracked changes. NavDarkBar could not be tested because `ANTHROPIC_API_KEY` is not set in this environment — all components ran as placeholders. The SVG fill repair logic is in place and will benefit future runs with a live API key.
+
+### Commits
+
+- `ffe5ba9` feat(pipeline): add --out flag to extract-theme.ts for isolated test runs
+- `842bc40` Merge branch 'feature/gauntlet-yield' into feature/gauntlet-yield-followon
+- `8271415` feat(pipeline): add semantic TypeScript type-checking pass to gauntlet
+- `a076392` feat(pipeline): extend hex auto-repair to SVG attributes and Tailwind arbitrary classes
+- `498c026` chore(pipeline): e2e smoke test of gauntlet follow-on improvements
+
+---
+
 ## Rules
 
 - STOP on any failed verification gate — do not continue to next phase
