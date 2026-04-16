@@ -34,6 +34,10 @@ export interface SectionBlueprint {
   cloneHtmlFragment?: string;
   cloneRelevantCss?: string;
   sectionIndex?: number;
+  // Correlation scoring — populated by multi-signal correlator
+  matchScore?: number;
+  matchConfidenceLevel?: "high" | "medium" | "low" | "none";
+  matchBreakdown?: string;
 }
 
 export interface ReferenceAnalysis {
