@@ -1,0 +1,45 @@
+
+=== Clone Section Diagnostic: corvus ===
+
+HTML: /Users/rickywilson/Sites/local-business-platform/output/clones/corvus/html/pages/home.html
+CSS:  /Users/rickywilson/Sites/local-business-platform/output/clones/corvus/assets/css
+
+--- Extracted 11 sections ---
+
+Idx | Tag       | Heading                                          | HTML chars | First 3 classes
+----|-----------|--------------------------------------------------|------------|----------------
+  0 | header    | [no heading]                                     |       1900 | bde-header-builder-18-108, bde-header-builder, bde-header-builder--sticky
+  1 | section   | [no heading]                                     |        814 | bde-section-17-100, bde-section
+  2 | section   | Saturday                                         |       1418 | bde-section-17-103, bde-section
+  3 | section   | Call For Speakers                                |      14414 | bde-section-17-114, bde-section
+  4 | section   | ColorCode Events                                 |       1993 | bde-section-17-142, bde-section
+  5 | section   | [no heading]                                     |      10243 | bde-section-17-714, bde-section
+  6 | section   | [no heading]                                     |       8253 | bde-section-40-100, bde-section
+  7 | section   | [no heading]                                     |        308 | bde-section-85-101, bde-section
+  8 | section   | ColorCode: Buffalo Tickets Coming Soon!          |       2948 | bde-section-85-103, bde-section
+  9 | section   | [no heading]                                     |        308 | bde-section-44-101, bde-section
+ 10 | section   | Jump to:                                         |       5232 | bde-section-44-103, bde-section
+
+--- Blueprint Correlation ---
+
+Blueprint                | Matched? | Section Idx | HTML fragment size
+-------------------------|----------|-------------|-------------------
+NavDarkBand              | YES      |           1 |                814
+HeroHeadlineColoured     | YES      |           2 |               1418
+HeroEventBanner          | YES      |           3 |              14414
+CtaYellowBand            | YES      |           4 |               1993
+CtaBlueBand              | YES      |           5 |              10243
+CtaGreenBand             | YES      |           6 |               8253
+BlogCardGrid             | YES      |           7 |                308
+AboutSplitDark           | YES      |           8 |               2948
+GalleryPhotoStrip        | YES      |           9 |                308
+NewsletterDarkBand       | YES      |          10 |               5232
+FooterMultiColumn        | NO       |          10 |                  -
+
+--- Summary ---
+Total sections extracted:    11
+Total blueprints:            11
+Blueprints enriched (HTML):  10
+Blueprints left empty:       1
+Enrichment rate:             91%
+
