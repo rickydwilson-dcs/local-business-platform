@@ -101,7 +101,12 @@ export function autoRepairHexLiterals(tsx: string): { content: string; replaceme
       replacements++;
       return 'stroke: "currentColor"';
     })
-    // SVG JSX attributes: fill="#xxx" stroke="#xxx"
+    // Inline style: stopColor (SVG gradient stops)
+    .replace(/\bstopColor:\s*["']#[0-9A-Fa-f]{3,8}["']/g, () => {
+      replacements++;
+      return 'stopColor: "currentColor"';
+    })
+    // SVG JSX attributes: fill="#xxx" stroke="#xxx" stopColor="#xxx" color="#xxx"
     .replace(/\bfill="#[0-9A-Fa-f]{3,8}"/g, () => {
       replacements++;
       return 'fill="currentColor"';
@@ -109,6 +114,14 @@ export function autoRepairHexLiterals(tsx: string): { content: string; replaceme
     .replace(/\bstroke="#[0-9A-Fa-f]{3,8}"/g, () => {
       replacements++;
       return 'stroke="currentColor"';
+    })
+    .replace(/\bstop-color="#[0-9A-Fa-f]{3,8}"/g, () => {
+      replacements++;
+      return 'stop-color="currentColor"';
+    })
+    .replace(/\bcolor="#[0-9A-Fa-f]{3,8}"/g, () => {
+      replacements++;
+      return 'color="currentColor"';
     })
     // Tailwind arbitrary-value color classes: bg-[#xxx], text-[#xxx], etc.
     .replace(
@@ -170,7 +183,7 @@ const SEMANTIC_SKIP_CODES = new Set<number>([
 
 /** Compiler options for semantic validation. noEmit + skipLibCheck for speed. */
 const SEMANTIC_COMPILER_OPTIONS: ts.CompilerOptions = {
-  jsx: ts.JsxEmit.React,
+  jsx: ts.JsxEmit.ReactJSX,
   strict: true,
   skipLibCheck: true,
   noEmit: true,
