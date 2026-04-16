@@ -9,7 +9,8 @@
 import * as fs from "fs";
 import * as path from "path";
 import type { SectionBlueprint } from "./reference-analysis-types";
-import { extractTopLevelBlocks } from "./html-structure-analyzer";
+import type { ComponentCategory } from "../../packages/theme-system/src/types";
+import { extractTopLevelBlocks, classifySection, countImages } from "./html-structure-analyzer";
 import { extractRelevantCssForSection } from "./clone-css-rule-extractor";
 
 export interface CloneSection {
@@ -18,6 +19,14 @@ export interface CloneSection {
   headingText?: string;
   html: string; // the full HTML of this section
   cssClasses: string[];
+  // Content-signal fields for source-agnostic correlation:
+  estimatedCategory?: ComponentCategory;
+  hasForm?: boolean;
+  hasImages?: boolean;
+  imageCount?: number;
+  charCount: number;
+  headingCandidates?: string[]; // all h1-h6 texts, not just first
+  isSpacerLike?: boolean;
 }
 
 /**
@@ -33,14 +42,55 @@ export function extractCloneSections(htmlPath: string): CloneSection[] {
   // Use the html-structure-analyzer's block extraction
   const blocks = extractTopLevelBlocks(bodyHtml);
 
+  let isFirstContentSection = true;
+
   return blocks.map((block, index) => {
-    // Extract heading text
+    // Extract heading text (first heading)
     const headingMatch = block.innerHtml.match(/<h[1-3][^>]*>([^<]+)</i);
     const headingText = headingMatch ? headingMatch[1].trim().slice(0, 80) : undefined;
+
+    // Extract ALL heading texts (h1-h6) for correlation signals
+    const headingCandidates: string[] = [];
+    const allHeadingsRe = /<h[1-6][^>]*>([\s\S]*?)<\/h[1-6]>/gi;
+    let hMatch: RegExpExecArray | null;
+    while ((hMatch = allHeadingsRe.exec(block.innerHtml)) !== null) {
+      const text = hMatch[1]
+        .replace(/<[^>]*>/g, "")
+        .replace(/\s+/g, " ")
+        .trim();
+      if (text) headingCandidates.push(text);
+    }
 
     // Extract CSS classes from the opening tag
     const classMatch = block.openingTag.match(/class="([^"]*)"/);
     const cssClasses = classMatch ? classMatch[1].split(/\s+/).filter(Boolean) : [];
+
+    // Content signal fields
+    const hasForm = /<form[\s>]/i.test(block.innerHtml);
+    const hasImages = /<img\b/i.test(block.innerHtml);
+    const imageCount = countImages(block.innerHtml);
+    const charCount = block.fullMatch.length;
+
+    // Determine if this is the first content section for Hero classification
+    const isFirst = isFirstContentSection && block.tag !== "nav" && block.tag !== "footer";
+
+    const estimatedCategory = classifySection(
+      block.tag,
+      block.innerHtml,
+      headingText,
+      hasImages,
+      hasForm,
+      isFirst,
+      cssClasses
+    );
+
+    // Update first-section tracking
+    if (block.tag !== "nav" && block.tag !== "footer") {
+      isFirstContentSection = false;
+    }
+
+    const isSpacerLike =
+      charCount < 300 && !hasForm && imageCount <= 1 && headingCandidates.length === 0;
 
     return {
       index,
@@ -48,6 +98,13 @@ export function extractCloneSections(htmlPath: string): CloneSection[] {
       headingText,
       html: block.fullMatch,
       cssClasses,
+      estimatedCategory,
+      hasForm,
+      hasImages,
+      imageCount,
+      charCount,
+      headingCandidates,
+      isSpacerLike,
     };
   });
 }

@@ -217,7 +217,7 @@ function hasBlogContent(html: string): boolean {
 /**
  * Count the number of <img> tags in an HTML fragment.
  */
-function countImages(html: string): number {
+export function countImages(html: string): number {
   const imgRe = /<img\b/gi;
   const matches = html.match(imgRe);
   return matches?.length ?? 0;
@@ -226,7 +226,7 @@ function countImages(html: string): number {
 /**
  * Classify an HTML section into a ComponentCategory based on structural signals.
  */
-function classifySection(
+export function classifySection(
   tag: string,
   innerHtml: string,
   headingText: string | undefined,
