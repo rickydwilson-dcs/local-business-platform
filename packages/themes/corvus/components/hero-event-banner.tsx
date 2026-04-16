@@ -3,8 +3,8 @@ import React from "react";
 /**
  * HeroEventBanner
  *
- * Full-width event photo with overlaid event date, time, venue, and CTA button
- * Layout: full-bleed image with dark overlay, text and button overlaid bottom-left
+ * Full-bleed event photo with overlaid event date, time, venue, and CTA
+ * Layout: full-bleed background image with dark overlay, event metadata and CTA button overlaid bottom-left
  * Category: Hero
  */
 
@@ -30,8 +30,8 @@ export function HeroEventBanner(props: HeroEventBannerProps) {
       <div className="absolute inset-0">
         {props.backgroundImage && (
           <img
-            src={props.backgroundImage?.src}
-            alt={props.backgroundImage?.alt ?? "Event background"}
+            src={props.backgroundImage.src}
+            alt={props.backgroundImage.alt ?? ""}
             className="w-full h-full object-cover object-center"
           />
         )}
@@ -39,8 +39,8 @@ export function HeroEventBanner(props: HeroEventBannerProps) {
       </div>
 
       {/* Content container */}
-      <div className="relative z-10 flex flex-col justify-end min-h-[480px] md:min-h-[600px] lg:min-h-[700px] px-8 md:px-16 lg:px-24 pb-12 md:pb-16 lg:pb-20 pt-12 md:pt-16">
-        <div className="flex flex-col items-start gap-4 max-w-2xl">
+      <div className="relative z-10 flex flex-col justify-end min-h-[480px] md:min-h-[600px] lg:min-h-[720px] px-8 md:px-16 lg:px-24 py-12 md:py-16">
+        <div className="flex flex-col items-start gap-4 max-w-xl">
           {/* Event logo */}
           {props.eventLogo && (
             <div className="mb-2">
@@ -52,35 +52,33 @@ export function HeroEventBanner(props: HeroEventBannerProps) {
             </div>
           )}
 
-          {/* Event date */}
-          {props.eventDate && (
-            <p className="text-2xl md:text-3xl font-normal tracking-widest uppercase text-on-brand-primary">
-              {props.eventDate}
-            </p>
-          )}
-
-          {/* Event time */}
-          {props.eventTime && (
-            <p className="text-xl md:text-2xl font-normal tracking-widest uppercase text-on-brand-primary">
-              {props.eventTime}
-            </p>
-          )}
-
-          {/* Event venue */}
-          {props.eventVenue && (
-            <p className="text-xl md:text-2xl font-normal tracking-widest uppercase text-on-brand-primary">
-              {props.eventVenue}
-            </p>
-          )}
+          {/* Event metadata */}
+          <div className="flex flex-col gap-2">
+            {props.eventDate && (
+              <p className="text-on-brand-primary text-xl md:text-2xl font-normal tracking-widest uppercase">
+                {props.eventDate}
+              </p>
+            )}
+            {props.eventTime && (
+              <p className="text-on-brand-primary text-xl md:text-2xl font-normal tracking-widest uppercase">
+                {props.eventTime}
+              </p>
+            )}
+            {props.eventVenue && (
+              <p className="text-on-brand-primary text-xl md:text-2xl font-normal tracking-widest uppercase">
+                {props.eventVenue}
+              </p>
+            )}
+          </div>
 
           {/* CTA Button */}
           {props.ctaButton && (
             <div className="mt-4">
               <a
                 href={props.ctaButton?.href ?? "#"}
-                className="inline-flex items-center px-8 py-3 rounded-none rounded-r-full bg-brand-secondary text-on-brand-primary text-base font-semibold tracking-wide uppercase transition-opacity hover:opacity-90"
+                className="inline-block bg-brand-secondary text-on-brand-primary text-base font-semibold tracking-wide uppercase px-8 py-3 rounded-full hover:opacity-90 transition-opacity"
               >
-                {props.ctaButton?.label ?? "Learn More"}
+                {props.ctaButton?.label}
               </a>
             </div>
           )}

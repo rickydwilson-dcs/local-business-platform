@@ -1,12 +1,12 @@
-import React from "react";
-
 /**
  * BlogCardGrid
  *
- * Display recent blog posts in a card grid with thumbnail, title, date, excerpt, and read more link
- * Layout: contained section with section heading, 2-column card grid below
+ * Blog post preview grid with thumbnail, title, date, excerpt, and read more link
+ * Layout: white background with section heading, 2-column card grid below
  * Category: Blog
  */
+
+import React from "react";
 
 export interface BlogCardGridProps {
   /** sectionHeading */
@@ -28,38 +28,38 @@ export interface BlogCardGridProps {
   cardDate?: string;
   /** cardExcerpt */
   cardExcerpt?: string;
-  /** cardCtaButton */
-  cardCtaButton?: { label?: string; href?: string };
+  /** cardCta */
+  cardCta?: string;
 }
 
 export function BlogCardGrid(props: BlogCardGridProps) {
   return (
-    <section className="relative w-full">
+    <section className="relative w-full bg-white">
       <div className="flex flex-col w-full max-w-full mx-auto px-[10px] pt-[10px] pb-0">
         <img
           src={
             props.cardThumbnail ??
             "https://colorcode.events/wp-content/uploads/2024/12/colorcode-events-logo.svg"
           }
-          alt=""
+          alt={props.cardTitle ?? "ColorCode Events"}
           loading="lazy"
           className="max-w-[150px]"
         />
       </div>
 
-      <div className="flex flex-col items-center text-center w-full max-w-full mx-auto py-10">
+      <div className="flex flex-col items-center text-center w-full max-w-full mx-auto px-4 py-10">
         {props.sectionHeading && (
-          <h2 className="text-3xl font-bold text-brand-primary tracking-tight mb-8">
+          <h2 className="text-3xl font-bold text-brand-primary tracking-tight leading-tight mb-8">
             {props.sectionHeading}
           </h2>
         )}
 
         {props.blogCards && props.blogCards.length > 0 && (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-5xl px-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-5xl mx-auto text-left">
             {props.blogCards.map((card, index) => (
               <div
                 key={card.title ?? index}
-                className="card flex flex-col bg-surface-card rounded-lg overflow-hidden shadow-sm border border-surface-border text-left"
+                className="card bg-white rounded-lg overflow-hidden shadow-sm border border-surface-border flex flex-col"
               >
                 {card.image && (
                   <img
@@ -84,8 +84,11 @@ export function BlogCardGrid(props: BlogCardGridProps) {
                     </p>
                   )}
                   {card.href && (
-                    <a href={card.href} className="btn-secondary self-start mt-2">
-                      {card.label ?? "Read More"}
+                    <a
+                      href={card.href}
+                      className="inline-block mt-2 text-brand-secondary font-semibold text-sm hover:underline"
+                    >
+                      {card.cta ?? "Read More"}
                     </a>
                   )}
                 </div>
