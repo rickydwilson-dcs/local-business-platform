@@ -455,3 +455,18 @@ This writes `session-wrap-up.md` to the session folder. **This is a required fin
 - The extract-theme pipeline makes its own Anthropic API calls internally — ensure `.env.local` has `ANTHROPIC_API_KEY` set before running Phase 5
 - **Source-agnostic constraint is paramount.** Do NOT add any CMS-specific logic (Breakdance class patterns, WordPress assumptions, Shopify-specific selectors). All correlation signals must work on any HTML source.
 - The `classifySection()` function in html-structure-analyzer.ts is the primary category classifier. Reuse it — do not duplicate classification logic.
+
+## Completed
+
+**Date:** 2026-04-16
+**Status:** All phases executed successfully
+
+Implemented source-agnostic multi-signal scored section correlation for the extract-theme pipeline. The new algorithm replaces the fragile heading-match + index-fallback approach with a scored system using category matching (+30), keyword overlap (+10 each, max +30), heading text matching (+50), form/image shape matching (+15 each), semantic tag matching (+10), and spacer penalties (-50). Mega-section detection prevents large composite sections from being incorrectly reused. The corvus translate run confirmed the algorithm eliminates the 2 known misassemblies (CtaGreenBand, BlogCardGrid) from the April 16 retranslate, with 7/11 blueprints enriched at higher accuracy vs the old 100% enrichment rate that included false matches.
+
+### Commits
+
+- `e870201` feat(pipeline): enrich CloneSection with source-agnostic content signals
+- `9ec7f7c` feat(pipeline): multi-signal scored section correlation
+- `7a279c7` feat(pipeline): mega-section detection and safe single-assignment
+- `0a766ec` feat(pipeline): diagnostic tool shows correlation signals and scores
+- `3ca2201` feat(pipeline): integrate scored correlation into translate pass
