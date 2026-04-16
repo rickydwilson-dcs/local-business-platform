@@ -427,6 +427,23 @@ This writes `session-wrap-up.md` to the session folder. **This is a required fin
 
 ---
 
+## Completed
+
+**Date:** 2026-04-16
+**Status:** All phases executed successfully
+
+Re-ran the extract-theme translate pipeline against the existing corvus clone HTML. The pipeline generated 10/11 section components via AI (1 placeholder due to hex literal rejection). Quality assessment: 3 "good" (27%), 6 "partial" (55%), 4 "fail" (including 2 expected shell placeholders). Applied two pipeline fixes — changed semantic validator JSX mode from React to ReactJSX (eliminating the universal TS2686 retry overhead), and added SVG color attribute hex repair patterns. Copied 7 improved components to the real corvus theme and updated theme.config.ts with correct brand colors (#292661 purple primary, #0F80C4 blue secondary, Aeonik font). All type-checks pass, dev server starts cleanly.
+
+### Commits
+
+- `c57caee` chore: add clone section diagnostic script and corvus analysis
+- `eaea28b` chore: corvus translate pipeline output assessment
+- `aab8681` chore: corvus component comparison — generated vs existing
+- `88495e3` fix: extract-theme pipeline improvements from corvus retranslate
+- `1334b5d` feat(corvus): apply retranslated components from extract-theme pipeline
+
+---
+
 ## Rules
 
 - STOP on any failed verification gate — do not continue to next phase
