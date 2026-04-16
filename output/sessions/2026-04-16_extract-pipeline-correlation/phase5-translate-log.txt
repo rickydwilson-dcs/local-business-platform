@@ -1,0 +1,98 @@
+[dotenv@17.2.3] injecting env (28) from .env.local -- tip: 🔐 prevent building .env in docker: https://dotenvx.com/prebuild
+[extract] Auto-discovered brief: output/briefs/entry-a-corvus-events.json
+[extract] Source domain: https://colorcode.events
+
+Extract Theme Pipeline
+  Clone: /Users/rickywilson/Sites/local-business-platform/output/clones/corvus
+  Theme: /tmp/corvus-correlation-test
+  Pass: translate
+
+[extract] === Translate Pass ===
+[extract] CPF validation passed
+[extract] Token mappings prepared (5 entries, brand primary: #292661)
+[extract] Running vision analysis on home.png...
+[extract] Vision analysis complete: 11 section blueprints
+[extract] Enriching blueprints with clone HTML/CSS context...
+[extract] Extracted 11 sections from home.html
+[extract] Mega-sections detected: section 3
+[extract] NavDarkBar → section 4 (score: 75, heading:+50 keywords:+10 images:+15) [high]
+[extract] HeroHeadlineShapes → section 0 (score: 30, category:+30) [medium]
+[extract] HeroEventBanner → section 2 (score: 25, keywords:+10 images:+15) [low]
+[extract] CtaYellowBand → section 3 (score: 70, heading:+50 keywords:+20) [high] [MEGA]
+[extract] CtaBlueBand → section 6 (score: 40, category:+30 keywords:+10) [medium]
+[extract] CtaGreenBand → section 8 (score: 30, category:+30) [medium]
+[extract] BlogCardGrid → UNMATCHED (best candidate section consumed as mega-section by CtaYellowBand)
+[extract] AboutSplitDark → section 1 (score: 30, category:+30) [medium]
+[extract] GalleryPhotoStrip → UNMATCHED (best candidate section consumed as mega-section by CtaYellowBand)
+[extract] NewsletterSignupBand → UNMATCHED (best: section 5 score: 0, below threshold 20)
+[extract] FooterMultiColumn → UNMATCHED (best: section 5 score: 15, below threshold 20)
+[extract] 7/11 blueprints enriched with clone context
+[extract] --- Correlation Details ---
+[extract]   NavDarkBar: section 4 (score: 75, heading:+50 keywords:+10 images:+15) [high]
+[extract]   HeroHeadlineShapes: section 0 (score: 30, category:+30) [medium]
+[extract]   HeroEventBanner: section 2 (score: 25, keywords:+10 images:+15) [low]
+[extract]   CtaYellowBand: section 3 (score: 70, heading:+50 keywords:+20) [high]
+[extract]   CtaBlueBand: section 6 (score: 40, category:+30 keywords:+10) [medium]
+[extract]   CtaGreenBand: section 8 (score: 30, category:+30) [medium]
+[extract]   BlogCardGrid: UNMATCHED (mega-section consumed by CtaYellowBand)
+[extract]   AboutSplitDark: section 1 (score: 30, category:+30) [medium]
+[extract]   GalleryPhotoStrip: UNMATCHED (mega-section consumed by CtaYellowBand)
+[extract]   NewsletterSignupBand: UNMATCHED (best: section 5 (0, below threshold))
+[extract]   FooterMultiColumn: UNMATCHED (best: section 5 (15, below threshold))
+[extract] Unmatched blueprints: BlogCardGrid, GalleryPhotoStrip, NewsletterSignupBand, FooterMultiColumn
+[extract] Generating theme components...
+  Generating 11 components (7 with clone context, 4 blueprint-only)...
+    NavDarkBar (Navigation) [clone]...
+    ✓ nav-dark-bar.tsx (AI)
+    HeroHeadlineShapes (Hero) [clone]...
+    ✓ hero-headline-shapes.tsx (AI)
+    HeroEventBanner (Hero) [clone]...
+    ✓ hero-event-banner.tsx (AI)
+    CtaYellowBand (CTA) [clone]...
+    ✓ cta-yellow-band.tsx (AI)
+    CtaBlueBand (CTA) [clone]...
+    ✓ cta-blue-band.tsx (AI)
+    CtaGreenBand (CTA) [clone]...
+    ✓ cta-green-band.tsx (AI)
+    BlogCardGrid (Blog)...
+    ✓ blog-card-grid.tsx (AI)
+    AboutSplitDark (Content) [clone]...
+    ✓ about-split-dark.tsx (placeholder)
+    GalleryPhotoStrip (Custom)...
+    ✓ gallery-photo-strip.tsx (AI)
+    NewsletterSignupBand (CTA)...
+    ✓ newsletter-signup-band.tsx (AI)
+    FooterMultiColumn (Footer)...
+    ✓ footer-multi-column.tsx (AI)
+[extract] Generation warnings:
+  ⚠ NavDarkBar: TS semantic errors: [TS2339]:31 Property 'href' does not exist on type 'string'.; [TS2339]:32 Property 'src' does not exist on type 'string'.; [TS2339]:34 Property 'src' does not exist on type 'string'.; [TS2339]:35 Property 'alt' does not exist on type 'string'.; [TS2339]:40 Property 'label' does not exist on type 'string'.; [TS2339]:84 Property 'label' does not exist on type 'string'.
+  ⚠ NavDarkBar: Semantic-fix retry succeeded
+  ⚠ NavDarkBar: Non-standard colour classes replaced: bg-on-brand-primary
+  ⚠ NavDarkBar: Undeclared props used (informational): navLinks, mobileMenuToggle
+  ⚠ HeroHeadlineShapes: Unknown colour classes (not in token allowlist): fill-current
+  ⚠ HeroEventBanner: Non-standard colour classes replaced: text-white
+  ⚠ HeroEventBanner: Undeclared props used (informational): eventLogo, eventDate, eventTime, eventVenue, ctaButton
+  ⚠ CtaYellowBand: Unknown colour classes (not in token allowlist): bg-yellow-400
+  ⚠ CtaBlueBand: TS semantic errors: [TS2322]:51 Type 'string | { label?: string | undefined; href?: string | undefined; }' is not assignable to type 'ReactNode'.   Type '{ label?: string | undefined; href?: string | undefined; }' is not assignable to type 'ReactNode'.
+  ⚠ CtaBlueBand: Semantic-fix retry succeeded
+  ⚠ CtaBlueBand: Unknown colour classes (not in token allowlist): text-on-inverse-muted, placeholder:text-on-inverse-muted, text-on-inverse-muted, text-on-inverse-muted, text-on-inverse-muted, text-on-inverse-muted, text-on-inverse-muted, text-on-inverse-muted, text-on-inverse-muted, text-on-inverse-muted, text-on-inverse-muted, text-on-inverse-muted, text-on-inverse-muted
+  ⚠ BlogCardGrid: TS semantic errors: [TS2339]:54 Property 'src' does not exist on type 'string'.; [TS2339]:55 Property 'alt' does not exist on type 'string'.; [TS7053]:80 Element implicitly has an 'any' type because expression of type 'number' can't be used to index type '{ label?: string | undefined; href?: string | undefined; }'.   No index signature with a parameter of type 'number' was found on type '{ label?: string | undefined; href?: string | undefined; }'.; [TS7053]:82 Element implicitly has an 'any' type because expression of type 'number' can't be used to index type '{ label?: string | undefined; href?: string | undefined; }'.   No index signature with a parameter of type 'number' was found on type '{ label?: string | undefined; href?: string | undefined; }'.; [TS7053]:86 Element implicitly has an 'any' type because expression of type 'number' can't be used to index type '{ label?: string | undefined; href?: string | undefined; }'.   No index signature with a parameter of type 'number' was found on type '{ label?: string | undefined; href?: string | undefined; }'.
+  ⚠ BlogCardGrid: Semantic-fix retry succeeded
+  ⚠ BlogCardGrid: Undeclared props used (informational): cardThumbnail, cardDate, cardTitle, cardExcerpt, cardReadMoreLink
+  ⚠ AboutSplitDark: Unknown colour classes (not in token allowlist): bg-yellow-400, bg-pink-600, bg-pink-600, bg-pink-600, bg-pink-600, bg-green-600, bg-green-600
+  ⚠ AboutSplitDark: Contains hex literals: #1281c5, #f68720, #f68720 — replacing with placeholder
+  ⚠ NewsletterSignupBand: TS semantic errors: [TS2339]:47 Property 'placeholder' does not exist on type 'string'.; [TS2339]:52 Property 'placeholder' does not exist on type 'string'.
+  ⚠ NewsletterSignupBand: Semantic-fix retry succeeded
+  ⚠ FooterMultiColumn: TS semantic errors: [TS2339]:30 Property 'src' does not exist on type 'string'.; [TS2339]:32 Property 'src' does not exist on type 'string'.; [TS2339]:33 Property 'alt' does not exist on type 'string'.; [TS2339]:42 Property 'map' does not exist on type 'string'.; [TS7006]:42 Parameter 'group' implicitly has an 'any' type.; [TS7006]:42 Parameter 'groupIndex' implicitly has an 'any' type.; [TS7006]:50 Parameter 'link' implicitly has an 'any' type.; [TS7006]:50 Parameter 'linkIndex' implicitly has an 'any' type.; [TS2339]:64 Property 'map' does not exist on type 'string'.; [TS7006]:64 Parameter 'heading' implicitly has an 'any' type.; [TS7006]:64 Parameter 'groupIndex' implicitly has an 'any' type.; [TS2722]:72 Cannot invoke an object which is possibly 'undefined'.; [TS2349]:72 This expression is not callable.   Type 'String' has no call signatures.; [TS7006]:72 Parameter 'link' implicitly has an 'any' type.; [TS7006]:72 Parameter 'linkIndex' implicitly has an 'any' type.; [TS2339]:95 Property 'src' does not exist on type 'string'.; [TS2339]:97 Property 'src' does not exist on type 'string'.; [TS2339]:98 Property 'alt' does not exist on type 'string'.
+  ⚠ FooterMultiColumn: Semantic-fix retry succeeded
+  ⚠ FooterMultiColumn: Undeclared props used (informational): copyrightText
+  ⚠ Custom Tailwind classes used in components (verify in globals.css): fill-current, bg-yellow-400, text-on-inverse-muted, placeholder:text-on-inverse-muted
+[extract] Assembling theme package...
+[extract] globals.css generated
+[extract] components/index.ts written (11 section components + header + footer)
+[extract] pages/HomePage.tsx written
+[extract] pages/index.ts barrel written
+[extract] Copied 91 images → sites/_corvus-digital-marketing-events/public/images
+[extract] Translate pass complete
+
+Done.

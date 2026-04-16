@@ -609,9 +609,33 @@ async function main() {
     console.log("[extract] Enriching blueprints with clone HTML/CSS context...");
     const enrichedBlueprints = enrichBlueprintsForPage("home", cloneDir, sectionBlueprints);
     const enrichedCount = enrichedBlueprints.filter((bp) => bp.cloneHtmlFragment).length;
+    const unmatchedBlueprints = enrichedBlueprints.filter((bp) => !bp.cloneHtmlFragment);
     console.log(
       `[extract] ${enrichedCount}/${enrichedBlueprints.length} blueprints enriched with clone context`
     );
+
+    // Verbose correlation logging when EXTRACT_VERBOSE=1
+    if (process.env.EXTRACT_VERBOSE === "1") {
+      console.log("[extract] --- Correlation Details ---");
+      for (const bp of enrichedBlueprints) {
+        const score = bp.matchScore ?? "—";
+        const confidence = bp.matchConfidenceLevel ?? "none";
+        const breakdown = bp.matchBreakdown ?? "—";
+        if (bp.cloneHtmlFragment) {
+          console.log(
+            `[extract]   ${bp.name}: section ${bp.sectionIndex} (score: ${score}, ${breakdown}) [${confidence}]`
+          );
+        } else {
+          console.log(`[extract]   ${bp.name}: UNMATCHED (${breakdown})`);
+        }
+      }
+    }
+
+    if (unmatchedBlueprints.length > 0) {
+      console.log(
+        `[extract] Unmatched blueprints: ${unmatchedBlueprints.map((bp) => bp.name).join(", ")}`
+      );
+    }
 
     // ── Step E: Generate components ──────────────────────────────────────────
     const componentsDir = path.join(themeDir, "components");

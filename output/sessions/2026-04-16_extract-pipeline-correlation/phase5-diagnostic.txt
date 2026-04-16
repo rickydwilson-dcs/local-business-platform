@@ -1,0 +1,68 @@
+
+=== Clone Section Diagnostic: corvus ===
+
+HTML: /Users/rickywilson/Sites/local-business-platform/output/clones/corvus/html/pages/home.html
+CSS:  /Users/rickywilson/Sites/local-business-platform/output/clones/corvus/assets/css
+
+--- Extracted 11 sections ---
+
+Idx  | Tag       | Category       | Heading                          | Chars  | Spacer | Form | Imgs | Headings
+-----|-----------|----------------|----------------------------------|--------|--------|------|------|--------
+   0 | header    | Hero           | [none]                           |   1900 | no     | no   |    1 | 0
+   1 | section   | Content        | [none]                           |    814 | no     | no   |    0 | 0
+   2 | section   | Stats          | Saturday                         |   1418 | no     | no   |    1 | 4
+   3 | section   | Stats          | Call For Speakers                |  14414 | no     | no   |   10 | 6 (MEGA)
+   4 | section   | Stats          | ColorCode Events                 |   1993 | no     | no   |    1 | 1
+   5 | section   | Stats          | [none]                           |  10243 | no     | no   |    8 | 0
+   6 | section   | CTA            | [none]                           |   8253 | no     | yes  |    1 | 1
+   7 | section   | Content        | [none]                           |    308 | no     | no   |    1 | 0
+   8 | section   | CTA            | ColorCode: Buffalo Tickets Comin |   2948 | no     | yes  |    0 | 1
+   9 | section   | Content        | [none]                           |    308 | no     | no   |    1 | 0
+  10 | section   | Navigation     | Jump to:                         |   5232 | no     | no   |    0 | 1
+
+--- Blueprint Correlation ---
+
+[extract] Mega-sections detected: section 3
+[extract] NavDarkBand → section 10 (score: 30, category:+30) [medium]
+[extract] HeroHeadlineColoured → section 3 (score: 75, heading:+50 keywords:+10 images:+15) [high] [MEGA]
+[extract] HeroEventBanner → section 4 (score: 60, heading:+50 keywords:+10) [high]
+[extract] CtaYellowBand → section 6 (score: 40, category:+30 keywords:+10) [medium]
+[extract] CtaBlueBand → section 8 (score: 30, category:+30) [medium]
+[extract] CtaGreenBand → UNMATCHED (best candidate section consumed as mega-section by HeroHeadlineColoured)
+[extract] BlogCardGrid → UNMATCHED (best candidate section consumed as mega-section by HeroHeadlineColoured)
+[extract] AboutSplitDark → section 7 (score: 45, category:+30 images:+15) [medium]
+[extract] GalleryPhotoStrip → UNMATCHED (best: section 0 score: 15, below threshold 20)
+[extract] NewsletterDarkBand → UNMATCHED (best: section 0 score: 0, below threshold 20)
+[extract] FooterMultiColumn → section 0 (score: 25, keywords:+10 images:+15) [low]
+
+Blueprint                | Match | Idx | Score | Breakdown                              | Confidence
+-------------------------|-------|-----|-------|----------------------------------------|----------
+NavDarkBand              | YES   |  10 |    30 | category:+30                           | medium    
+HeroHeadlineColoured     | YES   |   3 |    75 | heading:+50 keywords:+10 images:+15    | high      
+HeroEventBanner          | YES   |   4 |    60 | heading:+50 keywords:+10               | high      
+CtaYellowBand            | YES   |   6 |    40 | category:+30 keywords:+10              | medium    
+CtaBlueBand              | YES   |   8 |    30 | category:+30                           | medium    
+CtaGreenBand             | NO    |   — |     0 | mega-section consumed by HeroHeadlineColoured | none      
+BlogCardGrid             | NO    |   — |     0 | mega-section consumed by HeroHeadlineColoured | none      
+AboutSplitDark           | YES   |   7 |    45 | category:+30 images:+15                | medium    
+GalleryPhotoStrip        | NO    |   — |    15 | best: section 0 (15, below threshold)  | none      
+NewsletterDarkBand       | NO    |   — |     0 | best: section 0 (0, below threshold)   | none      
+FooterMultiColumn        | YES   |   0 |    25 | keywords:+10 images:+15                | low       
+
+--- Summary ---
+Total sections extracted:    11
+Total blueprints:            11
+Blueprints matched (HTML):   7
+Blueprints unmatched:        4
+Enrichment rate:             64%
+Average confidence:          high: 2, medium: 4, low: 1, none: 4
+
+Mega-sections (>5000 chars, 3+ headings):
+  Section 3: 14414 chars, 6 headings → claimed by HeroHeadlineColoured
+
+Unmatched blueprint reasons:
+  CtaGreenBand: mega-section consumed by HeroHeadlineColoured
+  BlogCardGrid: mega-section consumed by HeroHeadlineColoured
+  GalleryPhotoStrip: best: section 0 (15, below threshold)
+  NewsletterDarkBand: best: section 0 (0, below threshold)
+
