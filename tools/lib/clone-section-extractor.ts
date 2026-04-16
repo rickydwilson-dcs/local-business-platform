@@ -313,7 +313,22 @@ export function correlateWithBlueprints(
   cssDir: string
 ): SectionBlueprint[] {
   const usedSectionIndices = new Set<number>();
+  // Track which blueprint claimed each section (for mega-section logging)
+  const claimedBy = new Map<number, string>();
   const results: SectionBlueprint[] = [];
+
+  // Pre-compute mega-section set
+  const megaSections = new Set<number>();
+  for (const section of sections) {
+    if (section.charCount > 5000 && (section.headingCandidates?.length ?? 0) >= 3) {
+      megaSections.add(section.index);
+    }
+  }
+  if (megaSections.size > 0) {
+    console.log(
+      `[extract] Mega-sections detected: ${[...megaSections].map((i) => `section ${i}`).join(", ")}`
+    );
+  }
 
   for (const blueprint of blueprints) {
     // Score all unclaimed sections
@@ -329,16 +344,34 @@ export function correlateWithBlueprints(
       }
     }
 
+    // Check if the best candidate was already claimed as a mega-section
+    // (This handles the case where the best unclaimed is below threshold,
+    // but the actual best match was a mega-section already consumed.)
+    let megaSectionBlocker: string | undefined;
+    if (!bestSection || confidenceLevel(bestScore.total) === "none") {
+      // Check if any claimed mega-section would have scored well
+      for (const [sectionIdx, claimingBp] of claimedBy) {
+        if (!megaSections.has(sectionIdx)) continue;
+        const megaSection = sections.find((s) => s.index === sectionIdx);
+        if (!megaSection) continue;
+        const megaScore = scoreMatch(blueprint, megaSection);
+        if (confidenceLevel(megaScore.total) !== "none" && megaScore.total > bestScore.total) {
+          megaSectionBlocker = claimingBp;
+        }
+      }
+    }
+
     const confidence = confidenceLevel(bestScore.total);
 
     if (bestSection && confidence !== "none") {
       // Claim this section
       usedSectionIndices.add(bestSection.index);
+      claimedBy.set(bestSection.index, blueprint.name);
 
       const relevantCss = extractRelevantCssForSection(bestSection.html, cssDir);
 
       console.log(
-        `[extract] ${blueprint.name} → section ${bestSection.index} (score: ${bestScore.total}, ${bestScore.breakdown}) [${confidence}]`
+        `[extract] ${blueprint.name} → section ${bestSection.index} (score: ${bestScore.total}, ${bestScore.breakdown}) [${confidence}]${megaSections.has(bestSection.index) ? " [MEGA]" : ""}`
       );
 
       results.push({
@@ -352,18 +385,25 @@ export function correlateWithBlueprints(
       });
     } else {
       // No match above threshold
-      const reason = bestSection
-        ? `best: section ${bestSection.index} score: ${bestScore.total}, below threshold 20`
-        : "no candidate sections remaining";
+      let reason: string;
+      if (megaSectionBlocker) {
+        reason = `best candidate section consumed as mega-section by ${megaSectionBlocker}`;
+      } else if (bestSection) {
+        reason = `best: section ${bestSection.index} score: ${bestScore.total}, below threshold 20`;
+      } else {
+        reason = "no candidate sections remaining";
+      }
       console.log(`[extract] ${blueprint.name} → UNMATCHED (${reason})`);
 
       results.push({
         ...blueprint,
         matchScore: bestSection ? bestScore.total : undefined,
         matchConfidenceLevel: "none",
-        matchBreakdown: bestSection
-          ? `best: section ${bestSection.index} (${bestScore.total}, below threshold)`
-          : "no candidates",
+        matchBreakdown: megaSectionBlocker
+          ? `mega-section consumed by ${megaSectionBlocker}`
+          : bestSection
+            ? `best: section ${bestSection.index} (${bestScore.total}, below threshold)`
+            : "no candidates",
       });
     }
   }
