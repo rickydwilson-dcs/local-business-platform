@@ -6,7 +6,13 @@ Writes `session-wrap-up.md` to the active session folder, summarizing what was d
 
 ## Step 1: Find the Active Session Folder
 
-If `$ARGUMENTS` was passed (e.g. `/wrap-up-session 2026-04-11_canonical-pages-completeness`), use that as the folder name directly: `output/sessions/$ARGUMENTS/`.
+If `$ARGUMENTS` was passed (e.g. `/wrap-up-session 2026-04/2026-04-11_canonical-pages-completeness`), use that as the folder name directly: `output/sessions/$ARGUMENTS/`.
+
+If that path does not exist, try searching monthly buckets:
+
+```bash
+ls -d output/sessions/*/$ARGUMENTS/ 2>/dev/null | head -1
+```
 
 Otherwise check for a current-session pointer:
 
@@ -19,7 +25,7 @@ If that file exists and is non-empty, use `output/sessions/[contents]/`.
 Otherwise, find the most recently modified session folder:
 
 ```bash
-ls -dt output/sessions/[0-9]*/ | head -1
+ls -dt output/sessions/*/[0-9]*/ | head -1
 ```
 
 Confirm the folder exists before proceeding.

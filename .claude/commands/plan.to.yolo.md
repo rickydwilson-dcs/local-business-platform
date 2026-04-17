@@ -7,7 +7,7 @@ Converts the approved `synthesis.md` from the most recent codex peer review into
 ## Step 1: Find the Active Review Folder
 
 ```bash
-ls -dt output/sessions/codex-peer-review/20*/ | head -1
+ls -dt output/sessions/codex-peer-review/*/20*/ | head -1
 ```
 
 Use the most recently modified subfolder.
@@ -18,17 +18,17 @@ Read `[active-folder]/synthesis.md`. If it does not exist, STOP: "No synthesis.m
 
 Parse the review folder name: `YYYY-MM-DD_topic-slug`
 
-Target session folder: `output/sessions/YYYY-MM-DD_topic-slug/`
+Target session folder: `output/sessions/YYYY-MM/YYYY-MM-DD_topic-slug/`
 
 Create it if it doesn't exist:
 
 ```bash
-mkdir -p output/sessions/YYYY-MM-DD_topic-slug
+mkdir -p output/sessions/YYYY-MM/YYYY-MM-DD_topic-slug
 ```
 
 ## Step 3: Write the YOLO Brief
 
-Produce `output/sessions/YYYY-MM-DD_topic-slug/yolo-brief.md` by expanding the synthesis into an executable implementation brief.
+Produce `output/sessions/YYYY-MM/YYYY-MM-DD_topic-slug/yolo-brief.md` by expanding the synthesis into an executable implementation brief.
 
 **Model tiers — include this table verbatim in every generated brief:**
 
@@ -56,7 +56,7 @@ Derive the feature branch name from the topic slug: `feature/topic-slug`
 # YOLO Implementation Brief: [Title from synthesis]
 
 **Branch:** feature/topic-slug (created from develop)
-**Session spec:** output/sessions/YYYY-MM-DD_topic-slug/yolo-brief.md
+**Session spec:** output/sessions/YYYY-MM/YYYY-MM-DD_topic-slug/yolo-brief.md
 **Mode:** Autonomous execution — implement all phases, verify after each, STOP on error
 **Orchestrator model:** sonnet
 
@@ -208,7 +208,7 @@ After all phases complete, output:
 ````markdown
 ## Update Session File
 
-After completing all phases, append to `output/sessions/YYYY-MM-DD_topic-slug/yolo-brief.md`:
+After completing all phases, append to `output/sessions/YYYY-MM/YYYY-MM-DD_topic-slug/yolo-brief.md`:
 
 ```markdown
 ## Completed
@@ -271,7 +271,7 @@ Print this block for the user to copy-paste:
 **Paste into terminal:**
 
 ```
-claude --dangerously-skip-permissions --model sonnet [ADDITIONAL_DIRS] -p "Read output/sessions/YYYY-MM-DD_topic-slug/yolo-brief.md in full, then implement every phase it describes exactly as written."
+claude --dangerously-skip-permissions --model sonnet [ADDITIONAL_DIRS] -p "Read output/sessions/YYYY-MM/YYYY-MM-DD_topic-slug/yolo-brief.md in full, then implement every phase it describes exactly as written."
 ```
 
 Replace `[ADDITIONAL_DIRS]` based on the brief's file targets:
@@ -288,7 +288,7 @@ Without these flags, writes outside the launch directory trigger interactive per
 Then print a **Cost & Model Summary** so the user can review before running:
 
 ```
-Brief saved to: output/sessions/YYYY-MM-DD_topic-slug/yolo-brief.md
+Brief saved to: output/sessions/YYYY-MM/YYYY-MM-DD_topic-slug/yolo-brief.md
 
 ## Cost & Model Summary
 

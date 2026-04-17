@@ -21,15 +21,16 @@ If no arguments provided, ask: "What do you want to build? Describe it however c
 
 Before writing anything, read the brief and identify 3–5 gaps. Ask targeted questions — one per gap — drawn from these categories:
 
-| Category | What to probe |
-|----------|---------------|
-| **Scope** | "You mentioned X — does this include Y, or is that out of scope?" |
-| **Success criteria** | "How will you know this is working well? Walk me through the happy path end-to-end." |
-| **Non-goals** | "What are we explicitly NOT building in this iteration?" |
-| **User interaction** | "Who triggers this? What do they see or do? What happens on failure or edge cases?" |
-| **Constraints** | "Does this need to work with [existing system]? Any hard limits on approach or tech?" |
+| Category             | What to probe                                                                         |
+| -------------------- | ------------------------------------------------------------------------------------- |
+| **Scope**            | "You mentioned X — does this include Y, or is that out of scope?"                     |
+| **Success criteria** | "How will you know this is working well? Walk me through the happy path end-to-end."  |
+| **Non-goals**        | "What are we explicitly NOT building in this iteration?"                              |
+| **User interaction** | "Who triggers this? What do they see or do? What happens on failure or edge cases?"   |
+| **Constraints**      | "Does this need to work with [existing system]? Any hard limits on approach or tech?" |
 
 **Rules for questions:**
+
 - Be specific to the brief — never ask generic questions
 - Maximum 5 questions — prioritise the biggest gaps
 - Each question should be answerable in 1–3 sentences
@@ -51,7 +52,8 @@ Create the session folder and write the brief:
 
 ```bash
 DATE=$(date +%Y-%m-%d)
-FOLDER="output/sessions/codex-peer-review/${DATE}_[topic-slug]"
+MONTH=$(date +%Y-%m)
+FOLDER="output/sessions/codex-peer-review/${MONTH}/${DATE}_[topic-slug]"
 mkdir -p "$FOLDER"
 ```
 
@@ -105,7 +107,7 @@ Show the brief content inline in the response (formatted as markdown).
 
 Then tell the user:
 
-- Brief saved to: `output/sessions/codex-peer-review/[DATE]_[topic]/brief.md`
+- Brief saved to: `output/sessions/codex-peer-review/YYYY-MM/[DATE]_[topic]/brief.md`
 - Review it — if anything needs adjusting, edit the file directly
 - When ready: run `/plan.with.codex [topic]` — the brief will be picked up automatically
 

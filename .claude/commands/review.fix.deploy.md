@@ -80,7 +80,7 @@ Failed:    [N] ([IDs + brief errors])
 Committed: [commit SHA]
 Deployed:  develop → staging → main ✓
 
-Session:   output/sessions/YYYY-MM-DD_code-review/
+Session:   output/sessions/YYYY-MM/YYYY-MM-DD_code-review/
 ```
 
 ## Rules

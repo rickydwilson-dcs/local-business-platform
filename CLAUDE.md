@@ -298,7 +298,7 @@ The `/output/` folder stores session context and working notes for complex tasks
 
 Use sessions for: research tasks, feature implementation notes, bug investigations, architecture decisions.
 
-**Naming:** `YYYY-MM-DD_topic-description`
+**Naming:** `YYYY-MM/YYYY-MM-DD_topic-description`
 
 See [output/README.md](output/README.md) for details.
 

@@ -19,7 +19,7 @@ Parse `$ARGUMENTS` to determine scope:
 Find the most recent code review session:
 
 ```bash
-ls -d output/sessions/*_code-review 2>/dev/null | sort -r | head -1
+ls -d output/sessions/*/*_code-review 2>/dev/null | sort -r | head -1
 ```
 
 If no session exists, STOP and tell the user: "No review session found. Run `/review.code` first."

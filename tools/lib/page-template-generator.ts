@@ -37,11 +37,7 @@ export interface PageGenerationResult {
 // ============================================================================
 
 /** Page types that are NOT generated (handled by [slug] routes). */
-const SKIP_PAGE_TYPES: PageType[] = [
-  "service-detail",
-  "blog-post",
-  "location-detail",
-];
+const SKIP_PAGE_TYPES: PageType[] = ["service-detail", "blog-post", "location-detail"];
 
 /** Map pageType to output file path under example-pages/. */
 function getOutputPath(pageType: PageType, pagePath: string): string | null {
@@ -89,16 +85,26 @@ function placeholderImageSvg(width: number, height: number, label: string): stri
   return `data:image/svg+xml,${encodeURIComponent(svg)}`;
 }
 
-function getImageProps(blueprint: SectionBlueprint): Map<string, { width: number; height: number }> {
+function getImageProps(
+  blueprint: SectionBlueprint
+): Map<string, { width: number; height: number }> {
   const imageProps = new Map<string, { width: number; height: number }>();
   for (const slot of blueprint.contentSlots) {
     const lower = slot.toLowerCase();
     if (/image|photo|background|logo|avatar|banner|thumbnail/i.test(lower)) {
       const propName = sanitiseSlotName(slot);
-      let width = 800, height = 400;
-      if (/logo|avatar|icon/i.test(lower)) { width = 200; height = 200; }
-      else if (/banner|hero|background/i.test(lower)) { width = 1920; height = 600; }
-      else if (/thumbnail|card/i.test(lower)) { width = 400; height = 300; }
+      let width = 800,
+        height = 400;
+      if (/logo|avatar|icon/i.test(lower)) {
+        width = 200;
+        height = 200;
+      } else if (/banner|hero|background/i.test(lower)) {
+        width = 1920;
+        height = 600;
+      } else if (/thumbnail|card/i.test(lower)) {
+        width = 400;
+        height = 300;
+      }
       imageProps.set(propName, { width, height });
     }
   }
@@ -119,7 +125,7 @@ function resolveImport(
   section: PageSection,
   blueprintMap: Map<string, SectionBlueprint>,
   matchMap: Map<string, ComponentMatch | null>,
-  themeName: string,
+  themeName: string
 ): ResolvedImport | null {
   const match = matchMap.get(section.blueprintId);
   if (match && (match.matchConfidence === "exact" || match.matchConfidence === "close")) {
@@ -150,7 +156,7 @@ function generatePageTsx(
   blueprint: PageBlueprint,
   blueprintMap: Map<string, SectionBlueprint>,
   matchMap: Map<string, ComponentMatch | null>,
-  themeName: string,
+  themeName: string
 ): string {
   const imports: Map<string, Set<string>> = new Map();
   const sectionLines: string[] = [];
@@ -236,7 +242,7 @@ interface RouteManifestEntry {
 function generateReviewPanel(routes: RouteManifestEntry[]): string {
   const routeArray = JSON.stringify(routes, null, 2)
     .split("\n")
-    .map(line => `  ${line}`)
+    .map((line) => `  ${line}`)
     .join("\n");
 
   return `"use client";
@@ -346,10 +352,7 @@ export function ReviewPanel() {
 // README Generation
 // ============================================================================
 
-function generateReadme(
-  themeName: string,
-  pages: GeneratedPage[],
-): string {
+function generateReadme(themeName: string, pages: GeneratedPage[]): string {
   const lines: string[] = [];
 
   lines.push(`# Example Pages — ${toPascalCase(themeName)} Theme`);
@@ -405,9 +408,10 @@ export function generateExamplePages(
   sectionBlueprints: SectionBlueprint[],
   componentMatches: Map<string, ComponentMatch | null>,
   themeName: string,
-  outputDir: string,
+  outputDir: string
 ): PageGenerationResult {
   const exampleDir = path.join(outputDir, "example-pages");
+  fs.mkdirSync(exampleDir, { recursive: true });
 
   // Build lookup maps
   const blueprintMap = new Map<string, SectionBlueprint>();
@@ -424,12 +428,7 @@ export function generateExamplePages(
     const relativePath = getOutputPath(blueprint.pageType, blueprint.path);
     if (!relativePath) continue;
 
-    const content = generatePageTsx(
-      blueprint,
-      blueprintMap,
-      componentMatches,
-      themeName,
-    );
+    const content = generatePageTsx(blueprint, blueprintMap, componentMatches, themeName);
 
     const fullPath = path.join(exampleDir, relativePath);
     const dir = path.dirname(fullPath);
@@ -446,10 +445,10 @@ export function generateExamplePages(
   }
 
   // Generate route manifest JSON
-  const routeManifest = pages.map(p => ({
+  const routeManifest = pages.map((p) => ({
     pageType: p.pageType,
     route: p.outputPath.replace(/^app/, "").replace(/\/page\.tsx$/, "") || "/",
-    label: p.pageType.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase()),
+    label: p.pageType.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()),
   }));
   const manifestPath = path.join(exampleDir, "route-manifest.json");
   fs.writeFileSync(manifestPath, JSON.stringify(routeManifest, null, 2), "utf8");

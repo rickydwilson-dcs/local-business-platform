@@ -283,15 +283,9 @@ export interface ThemeConfig {
  */
 export const THEME_NAMES = [
   // Active themes
-  "atlas",
   "castor",
-  "corvus",
   "cygnus",
-  "lyra",
-  "nova",
   "orion",
-  "polaris",
-  "sirius",
   "solaris",
   "vega",
   // Reserved names for future themes

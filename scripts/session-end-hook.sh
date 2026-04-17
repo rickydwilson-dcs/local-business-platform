@@ -21,7 +21,7 @@ if [[ -f "$SESSION_POINTER" ]]; then
   SESSION_NAME=$(cat "$SESSION_POINTER")
   SESSION_DIR="$SESSIONS_DIR/$SESSION_NAME"
 else
-  SESSION_DIR=$(ls -dt "$SESSIONS_DIR"/[0-9]*/ 2>/dev/null | head -1 | tr -d '\n')
+  SESSION_DIR=$(ls -dt "$SESSIONS_DIR"/*/[0-9]*/ 2>/dev/null | head -1 | tr -d '\n')
 fi
 
 [[ -z "$SESSION_DIR" ]] || [[ ! -d "$SESSION_DIR" ]] && exit 0
