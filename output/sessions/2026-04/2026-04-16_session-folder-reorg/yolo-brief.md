@@ -635,6 +635,19 @@ After completing all phases, append to `output/sessions/2026-04-16_session-folde
 
 Confirm this was done in the final report.
 
+## Completed
+
+**Date:** 2026-04-17
+**Status:** All phases executed successfully
+
+All 94 session folders and 29 codex-peer-review subfolders were migrated into YYYY-MM monthly buckets via git mv (untracked folders via plain mv). Automation was updated across 9 skill files and the session-end-hook.sh script. Documentation in output/README.md, CLAUDE.md, and codex-peer-review/README.md was updated. Stale additionalDirectories entries were removed from settings.json. One complication: the lint-staged pre-commit hook conflicted with pre-existing dirty files (stash artifacts and untracked test-sirius merge conflict markers), requiring careful selective staging for each commit. A stray untracked codex-peer-review folder (`2026-04-17_design-brief-pipeline`) appeared post-Phase 1 (from stash artifacts) and was manually moved to the correct bucket in Phase 4.
+
+### Commits
+
+- `e46bc42` — chore: reorganize session folders into YYYY-MM monthly buckets
+- `5bf5486` — chore: update session automation for monthly bucket structure
+- `1540b88` — docs: update session documentation for monthly bucket structure
+
 ---
 
 ## Run Wrap-Up
