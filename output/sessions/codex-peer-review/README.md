@@ -16,9 +16,10 @@ Each review lives in a subfolder matching the session it belongs to:
 
 ```
 codex-peer-review/
-  YYYY-MM-DD_topic-name/
-    codex-plan.md       ← paste Codex's raw output here
-    synthesis.md        ← Claude's synthesised plan (becomes the session.md spec)
+  YYYY-MM/                              ← monthly bucket (e.g. 2026-04/)
+    YYYY-MM-DD_topic-name/
+      codex-plan.md       ← paste Codex's raw output here
+      synthesis.md        ← Claude's synthesised plan (becomes the session.md spec)
 ```
 
 ## Workflow

@@ -15,42 +15,42 @@ The output folder serves three core functions:
 ```
 output/
 ├── README.md                          # This file
-├── .current-session                   # Pointer to active session folder
-├── 2025-12-06_planning-features/      # Example session
-│   ├── session.md                     # Session metadata and notes
-│   ├── context.json                   # Conversation context (Claude memory)
-│   ├── notes.md                       # Working notes and decisions
-│   └── artifacts/                     # Generated files, drafts, logs
-│       ├── architecture-notes.md
-│       ├── component-analysis.json
-│       └── build-logs/
-│
-└── 2025-11-30_refactor-components/    # Archived session
-    └── ...
+├── .current-session                   # Pointer to active session folder (value: YYYY-MM/YYYY-MM-DD_topic)
+└── sessions/
+    ├── YYYY-MM/                       # Monthly bucket (e.g. 2026-04/)
+    │   ├── 2026-04-11_deploy/         # Example session
+    │   │   ├── session.md             # Session metadata and notes
+    │   │   ├── yolo-brief.md          # Implementation brief (YOLO sessions)
+    │   │   ├── session-wrap-up.md     # End-of-session summary
+    │   │   └── findings-*.md          # Review findings
+    │   └── 2026-04-16_other-topic/
+    │       └── ...
+    └── codex-peer-review/
+        └── YYYY-MM/
+            └── YYYY-MM-DD_topic-name/
 ```
 
 ## Session Naming Convention
 
-Sessions use the format: `YYYY-MM-DD_topic-description`
+Sessions are filed under their month: `output/sessions/YYYY-MM/YYYY-MM-DD_topic-description/`
 
 **Examples:**
 
-- `2025-12-06_planning-features` - Feature planning session on Dec 6
-- `2025-12-01_security-audit` - Security audit from Dec 1
-- `2025-11-28_component-refactor` - Component refactoring from Nov 28
+- `output/sessions/2026-04/2026-04-11_deploy/` - Deploy session on Apr 11
+- `output/sessions/2026-03/2026-03-07_code-review/` - Code review from Mar 7
 
 **Guidelines:**
 
 - Use kebab-case for the topic description (lowercase, hyphens between words)
 - Keep descriptions concise (2-4 words)
-- Date ensures chronological sorting and prevents collisions
+- Date ensures chronological sorting; month bucket keeps the top-level tidy
 
 ## Creating a New Session
 
 ### Step 1: Create the folder
 
 ```bash
-mkdir -p output/YYYY-MM-DD_topic-description
+mkdir -p output/sessions/$(date +%Y-%m)/YYYY-MM-DD_topic-description
 ```
 
 ### Step 2: Copy the metadata template
@@ -91,13 +91,13 @@ Any additional context or learnings.
 ### Step 3: Update the .current-session pointer
 
 ```bash
-echo "2025-12-06_topic-description" > output/.current-session
+echo "2026-04/2026-04-17_topic-description" > output/sessions/.current-session
 ```
 
 ### Step 4: Create subdirectories as needed
 
 ```bash
-mkdir -p output/YYYY-MM-DD_topic-description/artifacts
+mkdir -p output/sessions/$(date +%Y-%m)/YYYY-MM-DD_topic-description/artifacts
 ```
 
 ## Using the .current-session Pointer
@@ -113,7 +113,7 @@ cat output/.current-session
 **Switch to a different session:**
 
 ```bash
-echo "2025-12-01_other-session" > output/.current-session
+echo "2026-04/2026-04-01_other-session" > output/sessions/.current-session
 ```
 
 This allows you and Claude to quickly identify which session folder to write to or read from.
@@ -297,13 +297,13 @@ npm run build 2>&1 | tee output/$(cat output/.current-session)/artifacts/build-$
 
 ## Quick Reference
 
-| Task                 | Command                                             |
-| -------------------- | --------------------------------------------------- |
-| Create new session   | `mkdir -p output/YYYY-MM-DD_topic/artifacts`        |
-| Set active session   | `echo "YYYY-MM-DD_topic" > output/.current-session` |
-| View current session | `cat output/.current-session`                       |
-| List all sessions    | `ls -d output/[0-9]*/ \| sort -r`                   |
-| Archive session      | `mv output/YYYY-MM-DD_topic output/archive/`        |
+| Task                 | Command                                                                       |
+| -------------------- | ----------------------------------------------------------------------------- |
+| Create new session   | `mkdir -p output/sessions/$(date +%Y-%m)/YYYY-MM-DD_topic/artifacts`          |
+| Set active session   | `echo "YYYY-MM/YYYY-MM-DD_topic" > output/sessions/.current-session`          |
+| View current session | `cat output/sessions/.current-session`                                        |
+| List all sessions    | `ls -d output/sessions/*/[0-9]*/ \| sort -r`                                  |
+| Archive session      | `mv output/sessions/YYYY-MM/YYYY-MM-DD_topic output/sessions/YYYY-MM/archive` |
 
 ## Notes
 
