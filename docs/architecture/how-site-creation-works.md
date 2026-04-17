@@ -169,14 +169,12 @@ New sites get two layers of scaffolding:
 
 ### Reference Sites
 
-| Theme    | Reference Site                           | Provides                                                 |
-| -------- | ---------------------------------------- | -------------------------------------------------------- |
-| `cygnus` | `sites/_cygnus-graphics`                 | Dark mode hero, image card grids, cygnus visual language |
-| `lyra`   | `sites/_lyra-garden`                     | Editorial serif hero, garden/landscaping visual language |
-| `nova`   | `sites/_nova-print`                      | Bold orange + green hero, print/graphics visual language |
-| `orion`  | `sites/dj-fox-electrical`                | Dark header, full-bleed hero, circular icons             |
-| `corvus` | `sites/_corvus-digital-marketing-events` | Conference/event platform, full-page component library   |
-| `vega`   | `sites/base-template`                    | Light header, split hero, standard card grid             |
+| Theme   | Reference Site            | Provides                                     |
+| ------- | ------------------------- | -------------------------------------------- |
+| `orion` | `sites/dj-fox-electrical` | Dark header, full-bleed hero, circular icons |
+| `vega`  | `sites/base-template`     | Light header, split hero, standard card grid |
+
+Other active themes (cygnus, solaris, castor) fall back to `base-template` pages until a dedicated reference site is configured.
 
 ### Graceful Fallback
 
@@ -188,7 +186,7 @@ If no reference site is configured for the requested theme, or if the reference 
 create-site-from-project.ts --project project.json --theme castor
 
 1. Copy base-template → sites/new-site/   (capability infrastructure)
-2. applyThemePageOverrides()              (overlay visual pages from _castor-plumbing)
+2. applyThemePageOverrides()              (overlay visual pages from reference site, if configured)
 3. Generate site.config.ts                (business data)
 4. Generate theme.config.ts              (brand colors + castorRegistry)
 ```

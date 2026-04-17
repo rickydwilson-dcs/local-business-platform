@@ -11,22 +11,16 @@ local-business-platform/
 ├── packages/
 │   ├── core-components/       # Shared UI components
 │   ├── theme-system/          # Tailwind plugin + CSS variable generation
-│   ├── themes/                # Named theme CSS packages (atlas, castor, corvus, cygnus, lyra, nova, orion, polaris, sirius, solaris, vega)
+│   ├── themes/                # Named theme CSS packages (castor, cygnus, orion, solaris, vega)
 │   └── intake-system/         # Client onboarding automation
 │
 ├── sites/
 │   ├── base-template/         # Gold-standard template for new sites
 │   ├── colossus-scaffolding/  # Production site (scaffolding business)
-│   ├── dcs/                   # Production site (digital consulting, polaris theme)
-│   ├── dj-fox-electrical/     # Production site (electrical business)
+│   ├── dcs/                   # Production site (digital consulting)
+│   ├── dj-fox-electrical/     # Production site (electrical business, orion theme)
 │   ├── mad-graphics/          # Production site (vehicle graphics & print, cygnus theme)
-│   ├── showcase/              # Internal component/theme showcase
-│   ├── _castor-plumbing/      # Theme reference site (castor)
-│   ├── _cygnus-graphics/      # Theme reference site (cygnus)
-│   ├── _lyra-garden/          # Theme reference site (lyra)
-│   ├── _nova-print/           # Theme reference site (nova)
-│   ├── _rigel-events/         # Theme reference site (corvus) — events use case
-│   └── test-corvus/            # Pipeline test site (corvus theme)
+│   └── showcase/              # Internal component/theme showcase
 │
 ├── tools/                     # Site creation, image management, deployment scripts
 └── docs/                      # Architecture, standards, and how-to guides

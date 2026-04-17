@@ -45,7 +45,8 @@
       "Bash([ -f /Users/rickywilson/Sites/local-business-platform/output/.current-session ])",
       "WebFetch(domain:localhost)",
       "WebFetch(domain:impeccable.style)",
-      "WebFetch(domain:raw.githubusercontent.com)"
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash([ -d \"/Users/rickywilson/Sites/local-business-platform/sites/$site\" ])"
     ],
     "additionalDirectories": [
       "/Users/rickywilson/Sites/local-business-platform/output/ingestion/cygnus-stitch/images",
