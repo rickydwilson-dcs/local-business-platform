@@ -60,9 +60,9 @@ Task tool parameters:
 >
 > **Scope:** Full audit. Run all applicable rules (VCA-001 through VCA-009).
 >
-> **Session directory:** If `output/sessions/YYYY-MM-DD_deploy/` already exists (today's date), write into it. Otherwise, create `output/sessions/YYYY-MM-DD_deploy/` and write findings there.
+> **Session directory:** If `output/sessions/YYYY-MM/YYYY-MM-DD_deploy/` already exists (today's date), write into it. Otherwise, create `output/sessions/YYYY-MM/YYYY-MM-DD_deploy/` and write findings there.
 >
-> **Output file:** `output/sessions/YYYY-MM-DD_deploy/findings-vercel-config.md`
+> **Output file:** `output/sessions/YYYY-MM/YYYY-MM-DD_deploy/findings-vercel-config.md`
 >
 > Follow the review procedure in your agent definition exactly. Do NOT modify any files — this is a read-only audit. Report all findings with severity per the mapping table.
 >
@@ -74,9 +74,9 @@ Wait for all three checks to complete. Then:
 
 1. If `pnpm type-check` failed, STOP and report the error. Do not continue.
 2. If `pnpm lint` failed, STOP and report the error.
-3. Read the Statistics line from `output/sessions/YYYY-MM-DD_deploy/findings-vercel-config.md`. If `Critical + High > 0`:
+3. Read the Statistics line from `output/sessions/YYYY-MM/YYYY-MM-DD_deploy/findings-vercel-config.md`. If `Critical + High > 0`:
    - Print the full findings file
-   - Tell the user: "Vercel config audit blocked the deploy. See `output/sessions/YYYY-MM-DD_deploy/findings-vercel-config.md`. Fix the Critical/High findings and re-run `/deploy.changes`."
+   - Tell the user: "Vercel config audit blocked the deploy. See `output/sessions/YYYY-MM/YYYY-MM-DD_deploy/findings-vercel-config.md`. Fix the Critical/High findings and re-run `/deploy.changes`."
    - Do NOT proceed to Group 3b.
 4. If Group 3a passed entirely (possibly with Medium/Low Vercel warnings), continue to Group 3b. Note any warnings in the final report.
 

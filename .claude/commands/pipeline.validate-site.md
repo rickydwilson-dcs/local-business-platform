@@ -15,7 +15,7 @@ Runs a full fidelity review cycle: start dev server → screenshot pages → **p
   --fix-log-file output/ingestion/$THEME_NAME/meta/tsx-fix-log.json \
   [--screenshot-dir output/ingestion/$THEME_NAME/meta/dev-screenshots] \
   [--reference-screenshot-dir output/ingestion/$THEME_NAME/reference/screenshots] \
-  [--session-dir output/sessions/YYYY-MM-DD_validate-sitename]
+  [--session-dir output/sessions/YYYY-MM/YYYY-MM-DD_validate-sitename]
 ```
 
 **Arguments:**

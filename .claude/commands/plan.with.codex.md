@@ -3,6 +3,7 @@
 Runs the dual-model peer review workflow for complex architectural or multi-step implementation tasks.
 
 **Two modes:**
+
 - `/plan.with.codex [topic] [brief]` — **Phase 1**: Write the problem brief and Claude's initial plan, ready for Codex review
 - `/plan.with.codex synthesise` — **Phase 2**: Read both plans, synthesise into a final spec
 
@@ -25,7 +26,8 @@ If no arguments provided, ask the user: "What is the topic slug (e.g. `payment-i
 ```bash
 TOPIC="[topic-slug-from-arguments]"
 DATE=$(date +%Y-%m-%d)
-FOLDER="output/sessions/codex-peer-review/${DATE}_${TOPIC}"
+MONTH=$(date +%Y-%m)
+FOLDER="output/sessions/codex-peer-review/${MONTH}/${DATE}_${TOPIC}"
 mkdir -p "$FOLDER"
 ```
 
@@ -63,12 +65,13 @@ Paste this entire file into Codex in VS Code.
 You are doing an independent architectural peer review. Read the brief below, then produce your own implementation plan.
 
 Save your plan as `codex-plan.md` in this folder:
-`output/sessions/codex-peer-review/[DATE_TOPIC]/`
+`output/sessions/codex-peer-review/YYYY-MM/[DATE_TOPIC]/`
 
 When done, output this exact command so the user can copy-paste it into Claude Code:
-
 ```
-/plan.with.codex synthesise output/sessions/codex-peer-review/[DATE_TOPIC]/
+
+/plan.with.codex synthesise output/sessions/codex-peer-review/YYYY-MM/[DATE_TOPIC]/
+
 ```
 
 ---
@@ -121,10 +124,10 @@ Produce a numbered implementation plan with:
 - Verification gates between steps (how to confirm each step succeeded before moving on)
 - Any risks or trade-offs worth calling out
 
-Save your response as `codex-plan.md` in `output/sessions/codex-peer-review/[DATE_TOPIC]/`.
+Save your response as `codex-plan.md` in `output/sessions/codex-peer-review/YYYY-MM/[DATE_TOPIC]/`.
 
 Then output this command for the user to copy-paste into Claude Code:
-`/plan.with.codex synthesise output/sessions/codex-peer-review/[DATE_TOPIC]/`
+`/plan.with.codex synthesise output/sessions/codex-peer-review/YYYY-MM/[DATE_TOPIC]/`
 ```
 
 ### Step 5: Write Claude's Plan (`claude-plan.md`)
@@ -144,7 +147,8 @@ echo $OPENROUTER_API_KEY
 ```
 
 **If the key is empty or unset:** Fall back to the manual workflow — tell the user:
-1. The folder that was created: `output/sessions/codex-peer-review/[DATE_TOPIC]/`
+
+1. The folder that was created: `output/sessions/codex-peer-review/YYYY-MM/[DATE_TOPIC]/`
 2. Open `codex-prompt.md` — copy the entire file content and paste it into Codex in VS Code.
 3. Once Codex has saved `codex-plan.md`, run `/plan.with.codex synthesise` to generate the final spec.
 4. Suggest they set `OPENROUTER_API_KEY` in their shell env to automate this step in future.
@@ -201,7 +205,7 @@ Triggered when `$ARGUMENTS` is exactly `synthesise`.
 ### Step 1: Find the Active Review Folder
 
 ```bash
-ls -dt output/sessions/codex-peer-review/20*/ | head -1
+ls -dt output/sessions/codex-peer-review/*/20*/ | head -1
 ```
 
 Use the most recently modified subfolder as the active review.
@@ -209,6 +213,7 @@ Use the most recently modified subfolder as the active review.
 ### Step 2: Read Both Plans
 
 Read:
+
 - `[active-folder]/codex-prompt.md` — the original brief and constraints
 - `[active-folder]/claude-plan.md` — Claude's independent plan
 - `[active-folder]/codex-plan.md` — Codex's independent plan
@@ -237,8 +242,8 @@ Write `[active-folder]/synthesis.md`:
 
 ## Key Differences Between Plans
 
-| Aspect | Claude | Codex | Synthesised Decision |
-|--------|--------|-------|----------------------|
+| Aspect   | Claude              | Codex              | Synthesised Decision       |
+| -------- | ------------------- | ------------------ | -------------------------- |
 | [aspect] | [claude's approach] | [codex's approach] | [chosen approach + reason] |
 
 ## Blind Spots Caught
@@ -257,6 +262,7 @@ Write `[active-folder]/synthesis.md`:
 ### Step 5: Report to User
 
 Tell the user:
+
 1. Path to `synthesis.md`
 2. The 2-3 most significant differences between the two plans and how they were resolved
 3. Any blind spots caught (this is the most valuable part)
