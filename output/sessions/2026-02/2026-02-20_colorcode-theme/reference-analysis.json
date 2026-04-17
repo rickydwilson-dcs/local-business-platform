@@ -1,0 +1,258 @@
+{
+  "analysisVersion": "1",
+  "reference": {
+    "url": "https://colorcode.events/",
+    "screenshotPath": "/Users/rickywilson/Sites/local-business-platform/output/screencapture-colorcode-events-2026-02-20-12_32_12.png",
+    "capturedAt": "2026-02-20T12:32:12Z"
+  },
+  "visualLanguage": {
+    "palette": {
+      "background": "#2A2A64",
+      "foreground": "#FFFFFF",
+      "primary": "#2A2A64",
+      "secondary": "#F5C800",
+      "accent": "#3B9E3B",
+      "additional": ["#2E7DD1", "#E8334A", "#FF6B35", "#8B5CF6"],
+      "confidence": "high"
+    },
+    "typography": {
+      "headingWeight": "black",
+      "bodyWeight": "normal",
+      "headingStyle": "display",
+      "usesInlineColourHighlights": true
+    },
+    "heroPattern": {
+      "type": "dark-full-bleed",
+      "hasBackgroundImage": true,
+      "headerDark": true
+    },
+    "spacingDensity": "standard"
+  },
+  "detectedSections": [
+    {
+      "name": "Site Header",
+      "background": "#2A2A64",
+      "layoutType": "full-bleed-band",
+      "purpose": "nav",
+      "notes": "Dark navy header with ColorCode logo on left, a pink/red CTA button and hamburger menu on right"
+    },
+    {
+      "name": "Hero Banner",
+      "background": "#2A2A64",
+      "layoutType": "full-bleed-band",
+      "purpose": "hero",
+      "notes": "Large bold headline with inline colour highlights and decorative icons, dark navy background, no background image in text area"
+    },
+    {
+      "name": "Event Details Band",
+      "background": "#1A1A4E",
+      "layoutType": "full-bleed-band",
+      "purpose": "info",
+      "notes": "Full-width dark band with event photo background overlay, shows event name, date, time, location and an Event Info CTA button"
+    },
+    {
+      "name": "Call For Speakers",
+      "background": "#F5C800",
+      "layoutType": "split",
+      "purpose": "cta",
+      "notes": "Yellow background split section with heading, body text, Apply to Speak button on left and a photo of a speaker on right"
+    },
+    {
+      "name": "Call For Sponsors",
+      "background": "#2E7DD1",
+      "layoutType": "split",
+      "purpose": "sponsor",
+      "notes": "Blue background split section with heading and body text on right, View Sponsor Ladder CTA button, image implied on left"
+    },
+    {
+      "name": "Call For Volunteers",
+      "background": "#3B9E3B",
+      "layoutType": "full-bleed-band",
+      "purpose": "cta",
+      "notes": "Green full-width band with heading, short body text and Apply to Volunteer button"
+    },
+    {
+      "name": "Blog Section",
+      "background": "#FFFFFF",
+      "layoutType": "grid",
+      "purpose": "blog",
+      "notes": "White background with Blog heading, two blog post cards each with thumbnail image, title, date and Read More button"
+    },
+    {
+      "name": "ColorCode Events About",
+      "background": "#2A2A64",
+      "layoutType": "split",
+      "purpose": "about",
+      "notes": "Dark navy split section with heading on left, body text and Learn More button on right, decorative dot pattern"
+    },
+    {
+      "name": "Photo Strip",
+      "background": "#000000",
+      "layoutType": "full-bleed-band",
+      "purpose": "custom",
+      "notes": "Full-width horizontal strip of event photography images side by side"
+    },
+    {
+      "name": "Newsletter Signup",
+      "background": "#2A2A64",
+      "layoutType": "full-bleed-band",
+      "purpose": "newsletter",
+      "notes": "Dark navy band with Subscribe to Newsletter heading, subtext, email input field and Submit button"
+    },
+    {
+      "name": "Site Footer",
+      "background": "#1A1A4E",
+      "layoutType": "contained",
+      "purpose": "footer",
+      "notes": "Dark footer with four columns: Events, Support, Legal, Company links, plus ColorCode logo and social icons"
+    }
+  ],
+  "componentMappings": [
+    {
+      "section": "Site Header",
+      "status": "ADAPT",
+      "existingComponent": "site-header",
+      "notes": "Use site-header with dark variant, swap logo, add pink CTA button alongside hamburger menu",
+      "confidence": "high"
+    },
+    {
+      "section": "Hero Banner",
+      "status": "ADAPT",
+      "existingComponent": "hero-section",
+      "notes": "Adapt hero-section to dark-full-bleed with large black-weight display heading supporting inline colour highlights via rich text or spans",
+      "confidence": "medium"
+    },
+    {
+      "section": "Event Details Band",
+      "status": "NEW",
+      "existingComponent": null,
+      "notes": "New EventDetailsBand component needed: full-bleed with background image overlay, event metadata fields and CTA button",
+      "confidence": "high"
+    },
+    {
+      "section": "Call For Speakers",
+      "status": "ADAPT",
+      "existingComponent": "cta-section",
+      "notes": "Adapt cta-section to split layout with yellow background, left text+button, right image panel",
+      "confidence": "medium"
+    },
+    {
+      "section": "Call For Sponsors",
+      "status": "ADAPT",
+      "existingComponent": "cta-section",
+      "notes": "Adapt cta-section to split layout with blue background, text on right side, image on left",
+      "confidence": "medium"
+    },
+    {
+      "section": "Call For Volunteers",
+      "status": "ADAPT",
+      "existingComponent": "cta-section",
+      "notes": "Adapt cta-section to full-bleed-band with green background, single column text and button",
+      "confidence": "high"
+    },
+    {
+      "section": "Blog Section",
+      "status": "ADAPT",
+      "existingComponent": "card-grid",
+      "notes": "Use card-grid with blog-post-card children, white background, two-column grid layout",
+      "confidence": "high"
+    },
+    {
+      "section": "ColorCode Events About",
+      "status": "ADAPT",
+      "existingComponent": "service-about",
+      "notes": "Adapt service-about to dark navy background split layout with heading left, body+CTA right",
+      "confidence": "medium"
+    },
+    {
+      "section": "Photo Strip",
+      "status": "NEW",
+      "existingComponent": null,
+      "notes": "New PhotoStrip component needed: horizontal scrolling or fixed row of event photos",
+      "confidence": "high"
+    },
+    {
+      "section": "Newsletter Signup",
+      "status": "NEW",
+      "existingComponent": null,
+      "notes": "New NewsletterSignup component needed: dark band with heading, subtext, inline email input and submit button",
+      "confidence": "medium"
+    },
+    {
+      "section": "Site Footer",
+      "status": "ADAPT",
+      "existingComponent": "footer",
+      "notes": "Adapt footer to dark navy with four-column link groups and logo with social icons",
+      "confidence": "high"
+    }
+  ],
+  "newComponentBacklog": [
+    {
+      "name": "EventDetailsBand",
+      "description": "Full-bleed section with background image overlay displaying event name, date, time, location and a CTA button",
+      "propsContract": "interface EventDetailsBandProps { backgroundImage: string; eventName: string; date: string; timeRange: string; venue: string; ctaLabel: string; ctaHref: string; overlayOpacity?: number; }",
+      "tokenConstraints": "Must use brand.primary for overlay tint, brand.accent for CTA button, typography.fontFamilyHeading for event name",
+      "acceptanceCriteria": [
+        "Renders full-width with background image and dark overlay",
+        "Displays event name, date, time and venue in white text",
+        "CTA button links to event info page",
+        "Overlay opacity is configurable via prop",
+        "Responsive: stacks metadata vertically on mobile"
+      ],
+      "referenceSection": "Event Details Band"
+    },
+    {
+      "name": "PhotoStrip",
+      "description": "Horizontal strip of event photography images displayed side by side at full viewport width",
+      "propsContract": "interface PhotoStripProps { images: Array<{ src: string; alt: string }>; height?: number; objectFit?: 'cover' | 'contain'; }",
+      "tokenConstraints": "No background token required; images fill the strip. Height should reference a spacing scale token.",
+      "acceptanceCriteria": [
+        "Renders images in a single horizontal row",
+        "Images fill available height without gaps",
+        "On mobile, strip scrolls horizontally or collapses to a 2-column grid",
+        "Alt text is applied to each image for accessibility"
+      ],
+      "referenceSection": "Photo Strip"
+    },
+    {
+      "name": "NewsletterSignup",
+      "description": "Full-bleed band with newsletter subscription form including heading, subtext, email input and submit button",
+      "propsContract": "interface NewsletterSignupProps { heading: string; subtext?: string; inputPlaceholder?: string; buttonLabel: string; onSubmit: (email: string) => void; background?: string; }",
+      "tokenConstraints": "Must use surface.background or brand.primary for band background, brand.accent for submit button, typography.fontFamilySans for body text",
+      "acceptanceCriteria": [
+        "Renders full-width band with configurable background colour",
+        "Email input and submit button are inline on desktop, stacked on mobile",
+        "Validates email format before submission",
+        "Shows success/error state after submission",
+        "Heading and subtext are configurable via props"
+      ],
+      "referenceSection": "Newsletter Signup"
+    }
+  ],
+  "registryRecommendation": {
+    "themeName": "colorcode-events",
+    "heroVariant": "image-overlay",
+    "headerVariant": "dark",
+    "cardVariant": "standard",
+    "sectionVariant": "banded",
+    "confidence": "high",
+    "reasoning": "The site uses strongly coloured full-bleed bands alternating between navy, yellow, blue and green to create visual rhythm. The hero is a dark full-bleed with image overlay for the event details. Cards are standard rectangular with image thumbnails. The overall pattern is banded with high-contrast colour blocks rather than gradients or subtle backgrounds."
+  },
+  "themeTokenRecommendations": {
+    "brand": {
+      "primary": "#2A2A64",
+      "primaryHover": "#1A1A4E",
+      "secondary": "#F5C800",
+      "accent": "#3B9E3B"
+    },
+    "surface": {
+      "background": "#2A2A64",
+      "foreground": "#FFFFFF",
+      "muted": "#1A1A4E"
+    },
+    "typography": {
+      "fontFamilySans": ["Inter", "system-ui", "sans-serif"],
+      "fontFamilyHeading": ["Inter", "system-ui", "sans-serif"]
+    }
+  }
+}
