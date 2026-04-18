@@ -18,7 +18,7 @@ Rules:
 - Output ONLY valid JSON matching the VisualPassOutput schema
 - themeConfig must conform to DeepPartialThemeConfig shape (colors, typography, components)
 - Prefer tokens with provenance "computed" over "vision" over "derived"
-- cssOverrides must use ONLY CSS custom properties (var(--color-brand-primary)) — NEVER hardcoded hex values
+- cssOverrides ABSOLUTE RULE: use ONLY CSS custom properties like var(--color-brand-primary). NEVER write any hex value (#xxxxxx) anywhere in cssOverrides. If you cannot express something without hex, use an empty string "" for cssOverrides instead.
 - fontLinks must be valid Google Fonts <link> href URLs
 - Express button/card tweaks in themeConfig.components
 - If a font is from the brief's typography.fontFamily, include its Google Fonts URL`;
@@ -72,10 +72,13 @@ Output schema:
     return output;
   }
 
-  try {
-    return await attempt();
-  } catch (err) {
-    const errorMsg = err instanceof Error ? err.message : String(err);
-    return await attempt(errorMsg);
+  let lastError = "";
+  for (let i = 0; i < 3; i++) {
+    try {
+      return await attempt(i > 0 ? lastError : undefined);
+    } catch (err) {
+      lastError = err instanceof Error ? err.message : String(err);
+    }
   }
+  throw new Error(`Visual pass failed after 3 attempts. Last error: ${lastError}`);
 }

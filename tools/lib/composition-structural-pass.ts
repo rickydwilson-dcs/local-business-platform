@@ -75,7 +75,7 @@ Produce a SiteCompositionConfig JSON with version "1", siteId derived from brief
 
     const response = await client.messages.create({
       model,
-      max_tokens: 4096,
+      max_tokens: 8192,
       system: systemPrompt,
       messages: [{ role: "user", content: userContent }],
     });

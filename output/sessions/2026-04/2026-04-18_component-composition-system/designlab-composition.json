@@ -1,0 +1,724 @@
+{
+  "version": "1",
+  "siteId": "designlab-eastbourne",
+  "pages": [
+    {
+      "pageType": "home",
+      "sections": [
+        {
+          "component": "HeroSection",
+          "slots": {
+            "showEyebrow": true,
+            "showSubheading": true,
+            "showPrimaryCta": true,
+            "showSecondaryCta": false,
+            "showHeroImage": true,
+            "showTrustBadges": true
+          },
+          "layout": {
+            "background": "inverse",
+            "align": "split",
+            "fullBleed": true
+          },
+          "condition": {
+            "type": "always"
+          }
+        },
+        {
+          "component": "FeatureGrid",
+          "slots": {
+            "showSectionHeading": true,
+            "showSectionIntro": true,
+            "showIcons": true,
+            "showDescriptions": true
+          },
+          "layout": {
+            "columns": 3,
+            "background": "inverse"
+          },
+          "condition": {
+            "type": "always"
+          }
+        },
+        {
+          "component": "ServiceCards",
+          "slots": {
+            "showIcon": false,
+            "showImage": true,
+            "showDescription": true,
+            "showCta": true,
+            "showBadge": true
+          },
+          "layout": {
+            "columns": 3,
+            "background": "inverse"
+          },
+          "condition": {
+            "type": "always"
+          }
+        },
+        {
+          "component": "FeatureGrid",
+          "slots": {
+            "showSectionHeading": true,
+            "showSectionIntro": false,
+            "showIcons": false,
+            "showDescriptions": false
+          },
+          "layout": {
+            "columns": 3,
+            "background": "inverse"
+          },
+          "condition": {
+            "type": "data-present"
+          }
+        },
+        {
+          "component": "TestimonialGrid",
+          "slots": {
+            "showStars": true,
+            "showDate": false,
+            "showAvatar": true,
+            "showAuthorName": true,
+            "showLocation": false,
+            "showTitle": true
+          },
+          "layout": {
+            "columns": 3,
+            "background": "inverse"
+          },
+          "condition": {
+            "type": "data-present"
+          }
+        },
+        {
+          "component": "CTASection",
+          "slots": {
+            "showSubheading": false,
+            "showPrimaryCta": true,
+            "showSecondaryCta": false,
+            "showTrustLine": false
+          },
+          "layout": {
+            "background": "brand",
+            "align": "left"
+          },
+          "condition": {
+            "type": "always"
+          }
+        }
+      ]
+    },
+    {
+      "pageType": "about",
+      "sections": [
+        {
+          "component": "HeroSection",
+          "slots": {
+            "showEyebrow": true,
+            "showSubheading": false,
+            "showPrimaryCta": false,
+            "showSecondaryCta": false,
+            "showHeroImage": true,
+            "showTrustBadges": false
+          },
+          "layout": {
+            "background": "inverse",
+            "align": "split",
+            "fullBleed": true
+          },
+          "condition": {
+            "type": "always"
+          }
+        },
+        {
+          "component": "StatsStrip",
+          "slots": {
+            "showLabel": true,
+            "showDescription": true,
+            "showDividers": true
+          },
+          "layout": {
+            "columns": 4,
+            "background": "inverse",
+            "paddingY": "standard"
+          },
+          "condition": {
+            "type": "data-present"
+          }
+        },
+        {
+          "component": "CTASection",
+          "slots": {
+            "showSubheading": false,
+            "showPrimaryCta": true,
+            "showSecondaryCta": false,
+            "showTrustLine": false
+          },
+          "layout": {
+            "background": "brand",
+            "align": "left"
+          },
+          "condition": {
+            "type": "always"
+          }
+        }
+      ]
+    },
+    {
+      "pageType": "projects",
+      "sections": [
+        {
+          "component": "HeroSection",
+          "slots": {
+            "showEyebrow": false,
+            "showSubheading": true,
+            "showPrimaryCta": true,
+            "showSecondaryCta": false,
+            "showHeroImage": false,
+            "showTrustBadges": false
+          },
+          "layout": {
+            "background": "brand",
+            "align": "center",
+            "fullBleed": false
+          },
+          "condition": {
+            "type": "always"
+          }
+        },
+        {
+          "component": "ContentSection",
+          "slots": {
+            "showImage": false,
+            "showSubheading": false,
+            "showCta": false,
+            "showList": false
+          },
+          "layout": {
+            "align": "left",
+            "background": "inverse",
+            "fullBleed": false
+          },
+          "condition": {
+            "type": "always"
+          }
+        },
+        {
+          "component": "ContentSection",
+          "slots": {
+            "showImage": true,
+            "showSubheading": false,
+            "showCta": false,
+            "showList": false
+          },
+          "layout": {
+            "align": "split",
+            "background": "inverse",
+            "fullBleed": false
+          },
+          "condition": {
+            "type": "always"
+          }
+        },
+        {
+          "component": "StatsStrip",
+          "slots": {
+            "showLabel": true,
+            "showDescription": false,
+            "showDividers": true
+          },
+          "layout": {
+            "columns": 4,
+            "background": "inverse",
+            "paddingY": "standard"
+          },
+          "condition": {
+            "type": "data-present"
+          }
+        }
+      ]
+    },
+    {
+      "pageType": "custom",
+      "sections": [
+        {
+          "component": "HeroSection",
+          "slots": {
+            "showEyebrow": true,
+            "showSubheading": true,
+            "showPrimaryCta": true,
+            "showSecondaryCta": false,
+            "showHeroImage": true,
+            "showTrustBadges": true
+          },
+          "layout": {
+            "background": "inverse",
+            "align": "split",
+            "fullBleed": true
+          },
+          "condition": {
+            "type": "always"
+          }
+        },
+        {
+          "component": "FeatureGrid",
+          "slots": {
+            "showSectionHeading": true,
+            "showSectionIntro": false,
+            "showIcons": false,
+            "showDescriptions": true
+          },
+          "layout": {
+            "columns": 2,
+            "background": "inverse"
+          },
+          "condition": {
+            "type": "always"
+          }
+        },
+        {
+          "component": "ContentSection",
+          "slots": {
+            "showImage": true,
+            "showSubheading": false,
+            "showCta": false,
+            "showList": false
+          },
+          "layout": {
+            "align": "split",
+            "background": "inverse",
+            "fullBleed": false
+          },
+          "condition": {
+            "type": "always"
+          }
+        },
+        {
+          "component": "CTASection",
+          "slots": {
+            "showSubheading": false,
+            "showPrimaryCta": true,
+            "showSecondaryCta": false,
+            "showTrustLine": false
+          },
+          "layout": {
+            "background": "brand",
+            "align": "left"
+          },
+          "condition": {
+            "type": "always"
+          }
+        }
+      ]
+    },
+    {
+      "pageType": "custom",
+      "sections": [
+        {
+          "component": "HeroSection",
+          "slots": {
+            "showEyebrow": true,
+            "showSubheading": true,
+            "showPrimaryCta": true,
+            "showSecondaryCta": false,
+            "showHeroImage": true,
+            "showTrustBadges": true
+          },
+          "layout": {
+            "background": "inverse",
+            "align": "split",
+            "fullBleed": true
+          },
+          "condition": {
+            "type": "always"
+          }
+        },
+        {
+          "component": "FeatureGrid",
+          "slots": {
+            "showSectionHeading": true,
+            "showSectionIntro": false,
+            "showIcons": false,
+            "showDescriptions": true
+          },
+          "layout": {
+            "columns": 2,
+            "background": "inverse"
+          },
+          "condition": {
+            "type": "always"
+          }
+        },
+        {
+          "component": "ContentSection",
+          "slots": {
+            "showImage": true,
+            "showSubheading": false,
+            "showCta": false,
+            "showList": false
+          },
+          "layout": {
+            "align": "split",
+            "background": "inverse",
+            "fullBleed": false
+          },
+          "condition": {
+            "type": "always"
+          }
+        },
+        {
+          "component": "CTASection",
+          "slots": {
+            "showSubheading": false,
+            "showPrimaryCta": true,
+            "showSecondaryCta": false,
+            "showTrustLine": false
+          },
+          "layout": {
+            "background": "brand",
+            "align": "left"
+          },
+          "condition": {
+            "type": "always"
+          }
+        }
+      ]
+    },
+    {
+      "pageType": "custom",
+      "sections": [
+        {
+          "component": "HeroSection",
+          "slots": {
+            "showEyebrow": true,
+            "showSubheading": true,
+            "showPrimaryCta": true,
+            "showSecondaryCta": false,
+            "showHeroImage": true,
+            "showTrustBadges": true
+          },
+          "layout": {
+            "background": "inverse",
+            "align": "split",
+            "fullBleed": true
+          },
+          "condition": {
+            "type": "always"
+          }
+        },
+        {
+          "component": "ServiceCards",
+          "slots": {
+            "showIcon": false,
+            "showImage": true,
+            "showDescription": true,
+            "showCta": false,
+            "showBadge": false
+          },
+          "layout": {
+            "columns": 3,
+            "background": "inverse"
+          },
+          "condition": {
+            "type": "always"
+          }
+        },
+        {
+          "component": "CTASection",
+          "slots": {
+            "showSubheading": false,
+            "showPrimaryCta": true,
+            "showSecondaryCta": false,
+            "showTrustLine": false
+          },
+          "layout": {
+            "background": "brand",
+            "align": "left"
+          },
+          "condition": {
+            "type": "always"
+          }
+        }
+      ]
+    },
+    {
+      "pageType": "custom",
+      "sections": [
+        {
+          "component": "HeroSection",
+          "slots": {
+            "showEyebrow": false,
+            "showSubheading": true,
+            "showPrimaryCta": true,
+            "showSecondaryCta": false,
+            "showHeroImage": true,
+            "showTrustBadges": false
+          },
+          "layout": {
+            "background": "brand",
+            "align": "center",
+            "fullBleed": true
+          },
+          "condition": {
+            "type": "always"
+          }
+        },
+        {
+          "component": "ServiceCards",
+          "slots": {
+            "showIcon": false,
+            "showImage": true,
+            "showDescription": false,
+            "showCta": false,
+            "showBadge": false
+          },
+          "layout": {
+            "columns": 3,
+            "background": "inverse"
+          },
+          "condition": {
+            "type": "always"
+          }
+        },
+        {
+          "component": "ContentSection",
+          "slots": {
+            "showImage": true,
+            "showSubheading": false,
+            "showCta": false,
+            "showList": false
+          },
+          "layout": {
+            "align": "split",
+            "background": "inverse",
+            "fullBleed": false
+          },
+          "condition": {
+            "type": "always"
+          }
+        },
+        {
+          "component": "StatsStrip",
+          "slots": {
+            "showLabel": true,
+            "showDescription": false,
+            "showDividers": true
+          },
+          "layout": {
+            "columns": 4,
+            "background": "inverse",
+            "paddingY": "standard"
+          },
+          "condition": {
+            "type": "data-present"
+          }
+        }
+      ]
+    },
+    {
+      "pageType": "custom",
+      "sections": [
+        {
+          "component": "HeroSection",
+          "slots": {
+            "showEyebrow": false,
+            "showSubheading": true,
+            "showPrimaryCta": true,
+            "showSecondaryCta": false,
+            "showHeroImage": false,
+            "showTrustBadges": false
+          },
+          "layout": {
+            "background": "brand",
+            "align": "center",
+            "fullBleed": false
+          },
+          "condition": {
+            "type": "always"
+          }
+        },
+        {
+          "component": "StatsStrip",
+          "slots": {
+            "showLabel": true,
+            "showDescription": false,
+            "showDividers": true
+          },
+          "layout": {
+            "columns": 4,
+            "background": "inverse",
+            "paddingY": "standard"
+          },
+          "condition": {
+            "type": "data-present"
+          }
+        },
+        {
+          "component": "StatsStrip",
+          "slots": {
+            "showLabel": true,
+            "showDescription": false,
+            "showDividers": true
+          },
+          "layout": {
+            "columns": 4,
+            "background": "inverse",
+            "paddingY": "compact"
+          },
+          "condition": {
+            "type": "data-present"
+          }
+        }
+      ]
+    },
+    {
+      "pageType": "custom",
+      "sections": [
+        {
+          "component": "HeroSection",
+          "slots": {
+            "showEyebrow": false,
+            "showSubheading": true,
+            "showPrimaryCta": true,
+            "showSecondaryCta": false,
+            "showHeroImage": true,
+            "showTrustBadges": false
+          },
+          "layout": {
+            "background": "brand",
+            "align": "center",
+            "fullBleed": true
+          },
+          "condition": {
+            "type": "always"
+          }
+        },
+        {
+          "component": "ServiceCards",
+          "slots": {
+            "showIcon": false,
+            "showImage": true,
+            "showDescription": false,
+            "showCta": false,
+            "showBadge": false
+          },
+          "layout": {
+            "columns": 3,
+            "background": "inverse"
+          },
+          "condition": {
+            "type": "always"
+          }
+        },
+        {
+          "component": "ContentSection",
+          "slots": {
+            "showImage": true,
+            "showSubheading": false,
+            "showCta": false,
+            "showList": false
+          },
+          "layout": {
+            "align": "split",
+            "background": "inverse",
+            "fullBleed": false
+          },
+          "condition": {
+            "type": "always"
+          }
+        },
+        {
+          "component": "StatsStrip",
+          "slots": {
+            "showLabel": true,
+            "showDescription": false,
+            "showDividers": true
+          },
+          "layout": {
+            "columns": 4,
+            "background": "inverse",
+            "paddingY": "standard"
+          },
+          "condition": {
+            "type": "data-present"
+          }
+        }
+      ]
+    },
+    {
+      "pageType": "custom",
+      "sections": [
+        {
+          "component": "HeroSection",
+          "slots": {
+            "showEyebrow": false,
+            "showSubheading": true,
+            "showPrimaryCta": true,
+            "showSecondaryCta": false,
+            "showHeroImage": true,
+            "showTrustBadges": false
+          },
+          "layout": {
+            "background": "brand",
+            "align": "center",
+            "fullBleed": true
+          },
+          "condition": {
+            "type": "always"
+          }
+        },
+        {
+          "component": "ServiceCards",
+          "slots": {
+            "showIcon": false,
+            "showImage": true,
+            "showDescription": false,
+            "showCta": false,
+            "showBadge": false
+          },
+          "layout": {
+            "columns": 3,
+            "background": "inverse"
+          },
+          "condition": {
+            "type": "always"
+          }
+        },
+        {
+          "component": "ContentSection",
+          "slots": {
+            "showImage": true,
+            "showSubheading": false,
+            "showCta": false,
+            "showList": false
+          },
+          "layout": {
+            "align": "split",
+            "background": "inverse",
+            "fullBleed": false
+          },
+          "condition": {
+            "type": "always"
+          }
+        },
+        {
+          "component": "StatsStrip",
+          "slots": {
+            "showLabel": true,
+            "showDescription": false,
+            "showDividers": true
+          },
+          "layout": {
+            "columns": 4,
+            "background": "inverse",
+            "paddingY": "standard"
+          },
+          "condition": {
+            "type": "data-present"
+          }
+        }
+      ]
+    }
+  ]
+}

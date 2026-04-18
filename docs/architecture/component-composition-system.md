@@ -88,4 +88,31 @@ In `composition.json` — specifically `sections[].slots`. Each key maps to a `b
 
 ## Evaluation Findings
 
-_Populated after PoC evaluation — see `poc-evaluation.md` in the session folder._
+_Full evaluation: `output/sessions/2026-04/2026-04-18_component-composition-system/poc-evaluation.md`_
+
+### Results (2026-04-18 PoC)
+
+Both passes run against navagarden and designlab briefs. Key findings:
+
+**What works:**
+
+- Structural pass correctly maps sections to catalog components with accurate slot suppression and condition assignment.
+- Visual pass produces token-only theme config + CSS; hex guard + 3-attempt retry is reliable.
+- PoC site (`poc-composition-test`) builds and type-checks with zero hand-written section TSX.
+- 7 catalog components cover ~80% of real-world section types.
+
+**Known limitations:**
+
+- Large briefs (>800 lines) require `max_tokens: 8192` — 4096 causes truncated JSON.
+- Visual pass needs retry ~50% of runs (AI writes hex on first attempt despite instructions).
+- `pageType` assignment is weak — AI over-assigns `"custom"` instead of named types.
+
+### Catalog Gap Backlog
+
+| Component            | Sections it would cover          | Priority |
+| -------------------- | -------------------------------- | -------- |
+| `PortfolioGrid`      | Portfolio gallery, project tiles | High     |
+| `ContactFormSection` | Contact form + map split         | High     |
+| `BlogGrid`           | Article list grid                | Medium   |
+| `AccordionSection`   | FAQ accordion                    | Medium   |
+| `LogoStrip`          | Partner/client logo row          | Low      |
