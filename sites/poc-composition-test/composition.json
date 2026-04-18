@@ -1,0 +1,147 @@
+{
+  "version": "1",
+  "siteId": "navagarden",
+  "pages": [
+    {
+      "pageType": "home",
+      "sections": [
+        {
+          "id": "hero-split-image-text",
+          "component": "HeroSection",
+          "slots": {
+            "showEyebrow": true,
+            "showSubheading": true,
+            "showPrimaryCta": true,
+            "showSecondaryCta": false,
+            "showHeroImage": true,
+            "showTrustBadges": false
+          },
+          "layout": {
+            "background": "surface",
+            "align": "split",
+            "fullBleed": true
+          },
+          "condition": {
+            "type": "always"
+          }
+        },
+        {
+          "id": "cards-three-column-features",
+          "component": "FeatureGrid",
+          "slots": {
+            "showSectionHeading": false,
+            "showSectionIntro": false,
+            "showIcons": true,
+            "showDescriptions": true
+          },
+          "layout": {
+            "columns": 3,
+            "background": "surface"
+          },
+          "condition": {
+            "type": "always"
+          }
+        },
+        {
+          "id": "content-gallery-heading",
+          "component": "ContentSection",
+          "slots": {
+            "showImage": true,
+            "showSubheading": false,
+            "showCta": false,
+            "showList": false
+          },
+          "layout": {
+            "align": "center",
+            "background": "surface",
+            "fullBleed": false
+          },
+          "condition": {
+            "type": "data-present"
+          }
+        },
+        {
+          "id": "social-proof-provider-card",
+          "component": "ContentSection",
+          "slots": {
+            "showImage": true,
+            "showSubheading": true,
+            "showCta": true,
+            "showList": false
+          },
+          "layout": {
+            "align": "split",
+            "background": "subtle",
+            "fullBleed": false
+          },
+          "condition": {
+            "type": "data-present"
+          }
+        }
+      ]
+    },
+    {
+      "pageType": "custom",
+      "sections": [
+        {
+          "id": "content-text-block",
+          "component": "ContentSection",
+          "slots": {
+            "showImage": true,
+            "showSubheading": false,
+            "showCta": true,
+            "showList": true
+          },
+          "layout": {
+            "align": "split",
+            "background": "surface",
+            "fullBleed": false
+          },
+          "condition": {
+            "type": "always"
+          }
+        },
+        {
+          "id": "cta-form-split",
+          "component": "CTASection",
+          "slots": {
+            "showSubheading": false,
+            "showPrimaryCta": true,
+            "showSecondaryCta": false,
+            "showTrustLine": false
+          },
+          "layout": {
+            "background": "surface",
+            "align": "center"
+          },
+          "condition": {
+            "type": "data-present"
+          }
+        }
+      ]
+    },
+    {
+      "pageType": "custom",
+      "sections": [
+        {
+          "id": "content-two-column-text-image",
+          "component": "ContentSection",
+          "slots": {
+            "showImage": true,
+            "showSubheading": false,
+            "showCta": true,
+            "showList": true
+          },
+          "layout": {
+            "align": "split",
+            "background": "surface",
+            "fullBleed": false
+          },
+          "condition": {
+            "type": "always"
+          }
+        }
+      ]
+    }
+  ]
+}

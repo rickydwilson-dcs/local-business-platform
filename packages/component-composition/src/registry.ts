@@ -44,46 +44,48 @@ export interface ComponentDefinition {
   layoutSchema: z.ZodObject<z.ZodRawShape>;
 }
 
+const s = (slots: unknown) => slots as Record<string, boolean>;
+
 export const COMPONENT_REGISTRY: Record<ComponentName, ComponentDefinition> = {
   HeroSection: {
     component: ComposableHeroSection as ComponentDefinition["component"],
-    defaultSlots: HERO_SECTION_DEFAULT_SLOTS,
+    defaultSlots: s(HERO_SECTION_DEFAULT_SLOTS),
     slotsSchema: HeroSectionSlotsSchema,
     layoutSchema: HeroSectionLayoutSchema,
   },
   ServiceCards: {
     component: ServiceCards as ComponentDefinition["component"],
-    defaultSlots: SERVICE_CARDS_DEFAULT_SLOTS,
+    defaultSlots: s(SERVICE_CARDS_DEFAULT_SLOTS),
     slotsSchema: ServiceCardsSlotsSchema,
     layoutSchema: ServiceCardsLayoutSchema,
   },
   FeatureGrid: {
     component: FeatureGrid as ComponentDefinition["component"],
-    defaultSlots: FEATURE_GRID_DEFAULT_SLOTS,
+    defaultSlots: s(FEATURE_GRID_DEFAULT_SLOTS),
     slotsSchema: FeatureGridSlotsSchema,
     layoutSchema: FeatureGridLayoutSchema,
   },
   TestimonialGrid: {
     component: TestimonialGrid as ComponentDefinition["component"],
-    defaultSlots: TESTIMONIAL_GRID_DEFAULT_SLOTS,
+    defaultSlots: s(TESTIMONIAL_GRID_DEFAULT_SLOTS),
     slotsSchema: TestimonialGridSlotsSchema,
     layoutSchema: TestimonialGridLayoutSchema,
   },
   StatsStrip: {
     component: StatsStrip as ComponentDefinition["component"],
-    defaultSlots: STATS_STRIP_DEFAULT_SLOTS,
+    defaultSlots: s(STATS_STRIP_DEFAULT_SLOTS),
     slotsSchema: StatsStripSlotsSchema,
     layoutSchema: StatsStripLayoutSchema,
   },
   CTASection: {
     component: ComposableCTASection as ComponentDefinition["component"],
-    defaultSlots: CTA_SECTION_DEFAULT_SLOTS,
+    defaultSlots: s(CTA_SECTION_DEFAULT_SLOTS),
     slotsSchema: CTASectionSlotsSchema,
     layoutSchema: CTASectionLayoutSchema,
   },
   ContentSection: {
     component: ContentSection as ComponentDefinition["component"],
-    defaultSlots: CONTENT_SECTION_DEFAULT_SLOTS,
+    defaultSlots: s(CONTENT_SECTION_DEFAULT_SLOTS),
     slotsSchema: ContentSectionSlotsSchema,
     layoutSchema: ContentSectionLayoutSchema,
   },
