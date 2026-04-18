@@ -1,0 +1,79 @@
+import type { LayoutParams } from "./layout-params";
+
+export interface CTASectionSlots {
+  showSubheading: boolean;
+  showPrimaryCta: boolean;
+  showSecondaryCta: boolean;
+  showTrustLine: boolean;
+}
+
+export const CTA_SECTION_DEFAULT_SLOTS: CTASectionSlots = {
+  showSubheading: true,
+  showPrimaryCta: true,
+  showSecondaryCta: false,
+  showTrustLine: false,
+};
+
+interface CTASectionProps {
+  slots?: Partial<CTASectionSlots>;
+  layout?: Pick<LayoutParams, "background" | "align">;
+  data: Record<string, unknown>;
+  className?: string;
+}
+
+export function ComposableCTASection({
+  slots: slotOverrides,
+  layout,
+  data,
+  className,
+}: CTASectionProps) {
+  const slots = { ...CTA_SECTION_DEFAULT_SLOTS, ...slotOverrides };
+  const d = data as Record<string, string | undefined>;
+
+  const bg =
+    layout?.background === "inverse"
+      ? "bg-surface-inverse text-surface-inverse-foreground"
+      : layout?.background === "brand"
+        ? "bg-brand-primary text-brand-on-primary"
+        : layout?.background === "subtle"
+          ? "bg-surface-subtle text-surface-foreground"
+          : "bg-surface-background text-surface-foreground";
+
+  const isCenter = layout?.align !== "left";
+
+  return (
+    <section className={`${bg} ${className ?? ""}`} data-component="CTASection">
+      <div
+        className={`mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8 ${isCenter ? "text-center" : ""}`}
+      >
+        <h2 className="text-h2 mb-4">{d.heading ?? ""}</h2>
+        {slots.showSubheading && d.subheading && (
+          <p className="text-surface-muted-foreground mb-8 text-xl">{d.subheading}</p>
+        )}
+        <div className={`flex flex-wrap gap-4 ${isCenter ? "justify-center" : ""}`}>
+          {slots.showPrimaryCta && d.primaryCtaText && (
+            <a
+              href={d.primaryCtaHref ?? "#"}
+              className="bg-brand-primary text-brand-on-primary hover:bg-brand-primary-hover rounded-lg px-8 py-4 font-semibold transition-colors"
+            >
+              {d.primaryCtaText}
+            </a>
+          )}
+          {slots.showSecondaryCta && d.secondaryCtaText && (
+            <a
+              href={d.secondaryCtaHref ?? "#"}
+              className="border-brand-primary text-brand-primary hover:bg-brand-primary/10 rounded-lg border px-8 py-4 font-semibold transition-colors"
+            >
+              {d.secondaryCtaText}
+            </a>
+          )}
+        </div>
+        {slots.showTrustLine && d.trustLine && (
+          <p className="text-surface-muted-foreground mt-6 text-sm">{d.trustLine}</p>
+        )}
+      </div>
+    </section>
+  );
+}
+
+export { ComposableCTASection as CTASection };
