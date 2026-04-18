@@ -34,6 +34,9 @@ export type ThemeName =
   | "orion"
   | "solaris"
   | "vega"
+  // Pipeline-generated themes
+  | "designlab"
+  | "navagarden"
   // Reserved names for future themes
   | "altair"
   | "aquila"
