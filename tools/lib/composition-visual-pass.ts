@@ -1,0 +1,81 @@
+import Anthropic from "@anthropic-ai/sdk";
+import { VisualPassOutputSchema } from "./visual-output-schema";
+import type { DesignBrief } from "./design-brief-types";
+import type { VisualPassOutput } from "./visual-output-schema";
+
+const HEX_PATTERN = /#[0-9a-fA-F]{6}/g;
+
+export async function generateVisualConfig(
+  brief: DesignBrief,
+  options?: { model?: string }
+): Promise<VisualPassOutput> {
+  const client = new Anthropic();
+  const model = options?.model ?? "claude-sonnet-4-6";
+
+  const systemPrompt = `You are a design token expert. Given a DesignBrief JSON, produce a visual configuration object for a white-label website.
+
+Rules:
+- Output ONLY valid JSON matching the VisualPassOutput schema
+- themeConfig must conform to DeepPartialThemeConfig shape (colors, typography, components)
+- Prefer tokens with provenance "computed" over "vision" over "derived"
+- cssOverrides must use ONLY CSS custom properties (var(--color-brand-primary)) — NEVER hardcoded hex values
+- fontLinks must be valid Google Fonts <link> href URLs
+- Express button/card tweaks in themeConfig.components
+- If a font is from the brief's typography.fontFamily, include its Google Fonts URL`;
+
+  const userPrompt = `DesignBrief:
+${JSON.stringify(brief, null, 2)}
+
+Produce a VisualPassOutput JSON with:
+- themeConfig: colors (brand, surface, semantic, overlay), typography (fontFamily, headingStyle, headingWeight), components (button fontWeight, card borderRadius)
+- cssOverrides: any site-specific CSS using only var(--...) custom properties — empty string if none needed
+- fontLinks: Google Fonts <link> href values for the fonts in typography.fontFamily
+- provenance: for each top-level token group (brand, surface, typography), record the source
+
+Output schema:
+{
+  "themeConfig": { "colors": { "brand": {...}, "surface": {...} }, "typography": {...}, "components": {...} },
+  "cssOverrides": "/* CSS string using only var(--...) */",
+  "fontLinks": ["https://fonts.googleapis.com/css2?family=...&display=swap"],
+  "provenance": { "brand.primary": { "source": "computed" }, ... }
+}`;
+
+  async function attempt(repairContext?: string): Promise<VisualPassOutput> {
+    const userContent = repairContext
+      ? `${userPrompt}\n\nPrevious attempt failed:\n${repairContext}\n\nFix the errors and return only valid JSON. cssOverrides must use ONLY var(--...) custom properties — no hex values.`
+      : userPrompt;
+
+    const response = await client.messages.create({
+      model,
+      max_tokens: 4096,
+      system: systemPrompt,
+      messages: [{ role: "user", content: userContent }],
+    });
+
+    const content = response.content[0];
+    if (content.type !== "text") throw new Error("Unexpected response type");
+
+    const jsonMatch =
+      content.text.match(/```json\n?([\s\S]+?)\n?```/) ?? content.text.match(/(\{[\s\S]+\})/);
+    if (!jsonMatch) throw new Error("No JSON found in response");
+
+    const parsed = JSON.parse(jsonMatch[1]);
+    const output = VisualPassOutputSchema.parse(parsed);
+
+    const hexMatches = output.cssOverrides.match(HEX_PATTERN);
+    if (hexMatches) {
+      throw new Error(
+        `cssOverrides contains hardcoded hex values: ${hexMatches.join(", ")}. Replace all with var(--...) custom properties.`
+      );
+    }
+
+    return output;
+  }
+
+  try {
+    return await attempt();
+  } catch (err) {
+    const errorMsg = err instanceof Error ? err.message : String(err);
+    return await attempt(errorMsg);
+  }
+}
