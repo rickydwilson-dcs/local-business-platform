@@ -9,5 +9,332 @@
     "component": "OrionFooter",
     "dataKey": "footer"
   },
-  "pages": []
+  "pages": [
+    {
+      "pageType": "home",
+      "sections": [
+        {
+          "component": "HeroSection",
+          "dataKey": "home.hero"
+        },
+        {
+          "component": "StatsStrip",
+          "dataKey": "home.stats",
+          "layout": { "background": "subtle" }
+        },
+        {
+          "component": "ServiceCards",
+          "dataKey": "home.services",
+          "layout": { "columns": 3 }
+        },
+        {
+          "component": "TestimonialGrid",
+          "dataKey": "reviews",
+          "layout": { "background": "subtle" },
+          "slots": { "showSectionHeading": true }
+        },
+        {
+          "component": "FeatureGrid",
+          "dataKey": "home.whyChooseUs",
+          "layout": { "columns": 4 }
+        },
+        {
+          "component": "CTASection",
+          "dataKey": "home.cta",
+          "layout": { "background": "brand" }
+        }
+      ]
+    },
+    {
+      "pageType": "about",
+      "sections": [
+        {
+          "component": "HeroSection",
+          "dataKey": "about.hero",
+          "slots": { "showHeroImage": false }
+        },
+        {
+          "component": "ContentSection",
+          "dataKey": "about.content"
+        },
+        {
+          "component": "FeatureGrid",
+          "dataKey": "about.values",
+          "layout": { "columns": 3 }
+        },
+        {
+          "component": "StatsStrip",
+          "dataKey": "about.stats",
+          "layout": { "background": "subtle" }
+        },
+        {
+          "component": "CTASection",
+          "dataKey": "home.cta",
+          "layout": { "background": "brand" }
+        }
+      ]
+    },
+    {
+      "pageType": "contact",
+      "sections": [
+        {
+          "component": "HeroSection",
+          "dataKey": "contact.hero",
+          "slots": { "showHeroImage": false }
+        },
+        {
+          "component": "ContactSection",
+          "dataKey": "contact",
+          "layout": { "background": "surface" }
+        },
+        {
+          "component": "FAQSection",
+          "dataKey": "contact.faqs",
+          "layout": { "background": "subtle" },
+          "slots": { "showPhonePrompt": true }
+        }
+      ]
+    },
+    {
+      "pageType": "services",
+      "sections": [
+        {
+          "component": "HeroSection",
+          "dataKey": "services.hero",
+          "slots": { "showHeroImage": false }
+        },
+        {
+          "component": "ServiceCards",
+          "dataKey": "services",
+          "layout": { "columns": 3 }
+        },
+        {
+          "component": "CTASection",
+          "dataKey": "home.cta",
+          "layout": { "background": "brand" }
+        }
+      ]
+    },
+    {
+      "pageType": "service-detail",
+      "sections": [
+        {
+          "component": "HeroSection",
+          "dataKey": "hero",
+          "slots": { "showHeroImage": true }
+        },
+        {
+          "component": "ContentSection",
+          "dataKey": "mdxContent",
+          "layout": { "align": "left" }
+        },
+        {
+          "component": "FAQSection",
+          "dataKey": "faqs",
+          "slots": { "showPhonePrompt": true }
+        },
+        {
+          "component": "CTASection",
+          "dataKey": "home.cta",
+          "layout": { "background": "brand" }
+        }
+      ]
+    },
+    {
+      "pageType": "location-detail",
+      "sections": [
+        {
+          "component": "HeroSection",
+          "dataKey": "hero",
+          "slots": { "showHeroImage": false }
+        },
+        {
+          "component": "ContentSection",
+          "dataKey": "mdxContent",
+          "layout": { "align": "left" }
+        },
+        {
+          "component": "ServiceCards",
+          "dataKey": "services",
+          "layout": { "columns": 3 }
+        },
+        {
+          "component": "CTASection",
+          "dataKey": "home.cta",
+          "layout": { "background": "brand" }
+        }
+      ]
+    },
+    {
+      "pageType": "locations",
+      "sections": [
+        {
+          "component": "HeroSection",
+          "dataKey": "services.hero",
+          "slots": { "showHeroImage": false }
+        },
+        {
+          "component": "FeatureGrid",
+          "dataKey": "locations",
+          "layout": { "columns": 3 }
+        },
+        {
+          "component": "CTASection",
+          "dataKey": "home.cta",
+          "layout": { "background": "brand" }
+        }
+      ]
+    },
+    {
+      "pageType": "reviews",
+      "sections": [
+        {
+          "component": "HeroSection",
+          "dataKey": "reviews.hero",
+          "slots": { "showHeroImage": false }
+        },
+        {
+          "component": "StatsStrip",
+          "dataKey": "reviews.stats",
+          "layout": { "background": "subtle" }
+        },
+        {
+          "component": "TestimonialGrid",
+          "dataKey": "reviews",
+          "layout": { "columns": 3 }
+        },
+        {
+          "component": "CTASection",
+          "dataKey": "home.cta",
+          "layout": { "background": "brand" }
+        }
+      ]
+    },
+    {
+      "pageType": "projects",
+      "sections": [
+        {
+          "component": "HeroSection",
+          "dataKey": "projects.hero",
+          "slots": { "showHeroImage": false }
+        },
+        {
+          "component": "ProjectGrid",
+          "dataKey": "projects",
+          "slots": { "showStats": true, "showCta": false }
+        },
+        {
+          "component": "CTASection",
+          "dataKey": "home.cta",
+          "layout": { "background": "brand" }
+        }
+      ]
+    },
+    {
+      "pageType": "project-detail",
+      "sections": [
+        {
+          "component": "HeroSection",
+          "dataKey": "hero",
+          "slots": { "showHeroImage": false }
+        },
+        {
+          "component": "ContentSection",
+          "dataKey": "mdxContent",
+          "layout": { "align": "left" }
+        },
+        {
+          "component": "CTASection",
+          "dataKey": "home.cta",
+          "layout": { "background": "brand" }
+        }
+      ]
+    },
+    {
+      "pageType": "blog",
+      "sections": [
+        {
+          "component": "HeroSection",
+          "dataKey": "blog.hero",
+          "slots": { "showHeroImage": false }
+        },
+        {
+          "component": "BlogGrid",
+          "dataKey": "blog",
+          "layout": { "columns": 3 }
+        }
+      ]
+    },
+    {
+      "pageType": "blog-post",
+      "sections": [
+        {
+          "component": "HeroSection",
+          "dataKey": "hero",
+          "slots": { "showHeroImage": false }
+        },
+        {
+          "component": "ContentSection",
+          "dataKey": "mdxContent",
+          "layout": { "align": "left" }
+        },
+        {
+          "component": "CTASection",
+          "dataKey": "home.cta",
+          "layout": { "background": "brand" }
+        }
+      ]
+    },
+    {
+      "pageType": "pricing",
+      "sections": [
+        {
+          "component": "HeroSection",
+          "dataKey": "pricing.hero",
+          "slots": { "showHeroImage": false }
+        },
+        {
+          "component": "PricingTable",
+          "dataKey": "pricing.jobCosts",
+          "slots": { "showDisclaimer": true },
+          "layout": { "columns": 4 }
+        },
+        {
+          "component": "FeatureGrid",
+          "dataKey": "pricing.benefits",
+          "layout": { "columns": 3 }
+        },
+        {
+          "component": "FAQSection",
+          "dataKey": "pricing.faqs",
+          "slots": { "showPhonePrompt": true }
+        },
+        {
+          "component": "CTASection",
+          "dataKey": "home.cta",
+          "layout": { "background": "brand" }
+        }
+      ]
+    },
+    {
+      "pageType": "privacy",
+      "sections": [
+        {
+          "component": "TextSection",
+          "dataKey": "privacy",
+          "slots": { "showToc": true, "showLastUpdated": true }
+        }
+      ]
+    },
+    {
+      "pageType": "cookie",
+      "sections": [
+        {
+          "component": "TextSection",
+          "dataKey": "cookie",
+          "slots": { "showToc": true, "showLastUpdated": true }
+        }
+      ]
+    }
+  ]
 }
