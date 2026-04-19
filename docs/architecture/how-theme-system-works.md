@@ -529,6 +529,16 @@ CSS variables (not static Tailwind values) because:
 - **DevTools friendly** -- inspect any element and see which variable controls its color
 - **White-label ready** -- swap the entire brand identity by changing `:root` values
 
+## Component Contract
+
+Every theme's `globals.css` must define a set of CSS utility classes consumed by composable section components. This is the **Theme Component Contract** — a machine-enforced guarantee that composition sites render consistently across all themes.
+
+The contract defines 10 classes across buttons (`btn-primary`, `btn-secondary`, `btn-tertiary`, `btn-on-brand-primary`, `btn-on-brand-primary-outline`), sections (`section-dark-accent`), overlays (`noise-overlay`), and utilities (`stat-value`, `location-pill`, `location-pill-arrow`). Each theme implements them with its own visual identity.
+
+A CI validator (`pnpm validate:theme-contract`) blocks builds and PRs if any theme is missing a contract class.
+
+See [Theme Component Contract](../standards/theme-component-contract.md) for the full spec, per-theme implementation notes, and templates for new themes.
+
 ## File Structure
 
 ```
@@ -540,6 +550,7 @@ packages/theme-system/src/
 ├── tailwind-plugin.ts    # The Tailwind plugin (addBase + addUtilities + theme.extend)
 ├── theme-names.ts        # Constellation namespace — pool of approved theme names
 ├── theme-registry.ts     # Runtime registry for theme auto-discovery
+├── component-contract.ts # Theme Component Contract — required CSS classes
 ├── utils.ts              # Deep merge, hex-to-RGB, contrast ratio, WCAG checks
 └── cli/
     └── validate.ts       # CLI tool for contrast validation
