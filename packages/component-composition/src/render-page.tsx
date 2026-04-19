@@ -48,12 +48,18 @@ export function renderComposedPage(options: {
 
     try {
       const Component = definition.component;
+      const sectionData =
+        section.dataKey &&
+        typeof data[section.dataKey] === "object" &&
+        data[section.dataKey] !== null
+          ? { ...data, ...(data[section.dataKey] as Record<string, unknown>) }
+          : data;
       elements.push(
         React.createElement(Component, {
           key: section.id ?? `section-${index}`,
           slots,
           layout: section.layout as Record<string, unknown>,
-          data,
+          data: sectionData,
         })
       );
     } catch (err) {

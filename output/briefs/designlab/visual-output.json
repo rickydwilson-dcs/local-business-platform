@@ -1,0 +1,183 @@
+{
+  "themeConfig": {
+    "colors": {
+      "brand": {
+        "primary": "#ED9507",
+        "primaryHover": "#ED9507",
+        "secondary": "#2A2A2A",
+        "accent": "#ED9507",
+        "onPrimary": "#FFFFFF"
+      },
+      "surface": {
+        "background": "#121212",
+        "foreground": "#FFFFFF",
+        "secondaryForeground": "#D1D1D1",
+        "tertiaryForeground": "#EBEBEB",
+        "muted": "#2A2A2A",
+        "mutedForeground": "#FFFFFF",
+        "card": "#2A2A2A",
+        "cardBorder": "#E5E7EB",
+        "inverse": "#000000"
+      },
+      "semantic": {
+        "success": "#10b981",
+        "warning": "#f59e0b",
+        "error": "#ef4444",
+        "info": "#3b82f6"
+      },
+      "overlay": {
+        "dark": "rgba(255,255,255,0.7)",
+        "light": "rgba(255,255,255,0.8)",
+        "primary": "rgba(237,149,7,0.8)"
+      }
+    },
+    "typography": {
+      "fontFamily": {
+        "sans": ["century-gothic", "system-ui", "sans-serif"],
+        "heading": ["Inter", "system-ui", "sans-serif"]
+      },
+      "headingStyle": "sans",
+      "headingWeight": "bold",
+      "bodyWeight": "normal",
+      "scale": {
+        "hero": {
+          "size": "48px",
+          "lineHeight": "52.8px",
+          "letterSpacing": "-2.4px",
+          "weight": 700
+        },
+        "h1": {
+          "size": "48px",
+          "lineHeight": "52.8px",
+          "letterSpacing": "-2.4px",
+          "weight": 700
+        },
+        "h2": {
+          "size": "40px",
+          "lineHeight": "42px",
+          "letterSpacing": "normal",
+          "weight": 700
+        },
+        "h3": {
+          "size": "28px",
+          "lineHeight": "33.6px",
+          "letterSpacing": "normal",
+          "weight": 400
+        },
+        "h4": {
+          "size": "28px",
+          "lineHeight": "42px",
+          "letterSpacing": "normal",
+          "weight": 400
+        },
+        "body": {
+          "size": "12.8px",
+          "lineHeight": "17.92px",
+          "letterSpacing": "normal",
+          "weight": 400
+        }
+      }
+    },
+    "components": {
+      "button": {
+        "fontWeight": 700,
+        "borderRadius": "0.375rem",
+        "paddingX": "1.5rem",
+        "paddingY": "0.75rem",
+        "background": "var(--color-brand-primary)",
+        "color": "var(--color-brand-on-primary)",
+        "hoverBackground": "var(--color-brand-primary-hover)"
+      },
+      "card": {
+        "borderRadius": "0.5rem",
+        "background": "var(--color-surface-card)",
+        "borderColor": "var(--color-surface-card-border)",
+        "color": "var(--color-surface-foreground)"
+      },
+      "navigation": {
+        "height": "64px",
+        "background": "var(--color-surface-background)",
+        "color": "var(--color-surface-foreground)"
+      }
+    }
+  },
+  "cssOverrides": "/* Design Lab Eastbourne – site-specific overrides */\n\n:root {\n  --color-brand-primary: var(--color-brand-primary);\n  --nav-height: 64px;\n  --section-padding-y: 4rem;\n}\n\nbody {\n  background-color: var(--color-surface-background);\n  color: var(--color-surface-foreground);\n  font-family: var(--font-sans);\n}\n\nh1, h2, h3, h4, h5, h6 {\n  font-family: var(--font-heading);\n  font-weight: var(--font-weight-heading);\n  color: var(--color-surface-foreground);\n}\n\na {\n  color: var(--color-brand-primary);\n}\n\na:hover {\n  color: var(--color-brand-primary-hover);\n}\n\n.btn-primary {\n  background-color: var(--color-brand-primary);\n  color: var(--color-brand-on-primary);\n  border-radius: var(--radius-button);\n  font-weight: 700;\n}\n\n.btn-primary:hover {\n  background-color: var(--color-brand-primary-hover);\n}\n\n.btn-outline-white {\n  background-color: transparent;\n  color: var(--color-surface-foreground);\n  border: 2px solid var(--color-surface-foreground);\n  border-radius: var(--radius-button);\n  font-weight: 700;\n}\n\n.btn-outline-white:hover {\n  background-color: var(--color-surface-foreground);\n  color: var(--color-surface-background);\n}\n\n.cta-banner {\n  background-color: var(--color-brand-primary);\n  color: var(--color-brand-on-primary);\n}\n\n.card {\n  background-color: var(--color-surface-card);\n  border-color: var(--color-surface-card-border);\n  border-radius: var(--radius-card);\n  color: var(--color-surface-foreground);\n}\n\n.section-dark {\n  background-color: var(--color-surface-background);\n  color: var(--color-surface-foreground);\n}\n\n.section-muted {\n  background-color: var(--color-surface-muted);\n  color: var(--color-surface-muted-foreground);\n}\n\n.text-brand {\n  color: var(--color-brand-primary);\n}\n\n.footer {\n  background-color: var(--color-surface-inverse);\n  color: var(--color-surface-foreground);\n}\n\n.hero-image-frame {\n  border: 3px solid var(--color-brand-primary);\n  border-radius: var(--radius-card);\n}\n\n.eyebrow-label {\n  color: var(--color-brand-primary);\n  font-weight: 700;\n  text-transform: uppercase;\n  letter-spacing: 0.1em;\n}\n\n.nav-bar {\n  background-color: var(--color-surface-background);\n  color: var(--color-surface-foreground);\n  height: var(--nav-height);\n}\n\n.section {\n  padding-top: var(--section-padding-y);\n  padding-bottom: var(--section-padding-y);\n}",
+  "fontLinks": ["https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"],
+  "provenance": {
+    "brand.primary": {
+      "source": "computed"
+    },
+    "brand.primaryHover": {
+      "source": "derived"
+    },
+    "brand.secondary": {
+      "source": "derived"
+    },
+    "brand.accent": {
+      "source": "derived"
+    },
+    "brand.onPrimary": {
+      "source": "computed"
+    },
+    "surface.background": {
+      "source": "computed"
+    },
+    "surface.foreground": {
+      "source": "computed"
+    },
+    "surface.card": {
+      "source": "computed"
+    },
+    "surface.muted": {
+      "source": "derived"
+    },
+    "surface.inverse": {
+      "source": "derived"
+    },
+    "surface.secondaryForeground": {
+      "source": "derived"
+    },
+    "surface.tertiaryForeground": {
+      "source": "derived"
+    },
+    "surface.mutedForeground": {
+      "source": "derived"
+    },
+    "typography.fontFamily": {
+      "source": "computed"
+    },
+    "typography.headingStyle": {
+      "source": "computed"
+    },
+    "typography.headingWeight": {
+      "source": "computed"
+    },
+    "typography.scale.hero": {
+      "source": "computed"
+    },
+    "typography.scale.h1": {
+      "source": "computed"
+    },
+    "typography.scale.h2": {
+      "source": "computed"
+    },
+    "typography.scale.h3": {
+      "source": "computed"
+    },
+    "typography.scale.h4": {
+      "source": "computed"
+    },
+    "typography.scale.body": {
+      "source": "computed"
+    },
+    "components.button": {
+      "source": "computed"
+    },
+    "components.card": {
+      "source": "computed"
+    },
+    "components.navigation": {
+      "source": "computed"
+    }
+  }
+}

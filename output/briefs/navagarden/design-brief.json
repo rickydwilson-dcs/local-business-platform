@@ -1,0 +1,457 @@
+{
+  "meta": {
+    "briefVersion": "1",
+    "generatedAt": "2026-04-17T19:22:50.636Z",
+    "sourceUrl": "https://navagarden.hu/",
+    "pipelineVersion": "1.0.0"
+  },
+  "reference": {
+    "url": "https://navagarden.hu/",
+    "screenshots": {
+      "custom": "/Users/rickywilson/Sites/local-business-platform/output/ingestion/navagarden/screenshots/custom.png",
+      "home": "/Users/rickywilson/Sites/local-business-platform/output/ingestion/navagarden/screenshots/home.png"
+    },
+    "capturedAt": "2026-04-17T19:17:52.282Z"
+  },
+  "palette": {
+    "brand": {
+      "primary": "#DBA746",
+      "primaryHover": "#DBA746",
+      "secondary": "#1E2F4B",
+      "accent": "#DBA746",
+      "onPrimary": "#1E2F4B"
+    },
+    "surface": {
+      "background": "#F9FAFB",
+      "foreground": "#333333",
+      "secondaryForeground": "#1A1A1A",
+      "tertiaryForeground": "#333333",
+      "muted": "#ECE3DC",
+      "mutedForeground": "#595959",
+      "card": "#FFFFFF",
+      "cardBorder": "#E5E7EB",
+      "inverse": "#000000"
+    },
+    "semantic": {
+      "success": "#10b981",
+      "warning": "#f59e0b",
+      "error": "#ef4444",
+      "info": "#3b82f6"
+    },
+    "overlay": {
+      "dark": "rgba(51,51,51,0.7)",
+      "light": "rgba(255,255,255,0.8)",
+      "primary": "rgba(219,167,70,0.8)"
+    },
+    "provenance": {
+      "surface.background": {
+        "source": "computed",
+        "confidence": "high"
+      },
+      "surface.foreground": {
+        "source": "computed",
+        "confidence": "high"
+      },
+      "brand.primary": {
+        "source": "computed",
+        "confidence": "high"
+      },
+      "brand.primaryHover": {
+        "source": "derived",
+        "confidence": "medium"
+      },
+      "brand.secondary": {
+        "source": "derived",
+        "confidence": "medium"
+      },
+      "brand.accent": {
+        "source": "derived",
+        "confidence": "medium"
+      },
+      "brand.onPrimary": {
+        "source": "computed",
+        "confidence": "high"
+      },
+      "surface.card": {
+        "source": "derived",
+        "confidence": "medium"
+      },
+      "surface.muted": {
+        "source": "derived",
+        "confidence": "medium"
+      },
+      "surface.inverse": {
+        "source": "derived",
+        "confidence": "medium"
+      },
+      "surface.secondaryForeground": {
+        "source": "derived",
+        "confidence": "medium"
+      },
+      "surface.tertiaryForeground": {
+        "source": "derived",
+        "confidence": "medium"
+      },
+      "surface.mutedForeground": {
+        "source": "derived",
+        "confidence": "medium"
+      },
+      "fontFamily.sans": {
+        "source": "computed",
+        "confidence": "high"
+      },
+      "fontFamily.heading": {
+        "source": "computed",
+        "confidence": "high"
+      },
+      "scale.hero": {
+        "source": "computed",
+        "confidence": "high"
+      },
+      "scale.h1": {
+        "source": "computed",
+        "confidence": "high"
+      },
+      "scale.h2": {
+        "source": "computed",
+        "confidence": "high"
+      },
+      "scale.h3": {
+        "source": "computed",
+        "confidence": "high"
+      },
+      "scale.h4": {
+        "source": "computed",
+        "confidence": "high"
+      },
+      "scale.body": {
+        "source": "computed",
+        "confidence": "high"
+      },
+      "button": {
+        "source": "computed",
+        "confidence": "high"
+      },
+      "navigation.height": {
+        "source": "computed",
+        "confidence": "high"
+      },
+      "section.paddingY": {
+        "source": "derived",
+        "confidence": "medium"
+      }
+    }
+  },
+  "typography": {
+    "fontFamily": {
+      "sans": ["Work Sans", "system-ui", "sans-serif"],
+      "heading": ["Audrey", "system-ui", "sans-serif"]
+    },
+    "scale": {
+      "hero": {
+        "size": "160px",
+        "lineHeight": "134px",
+        "letterSpacing": "normal",
+        "weight": 400
+      },
+      "h1": {
+        "size": "160px",
+        "lineHeight": "134px",
+        "letterSpacing": "normal",
+        "weight": 400
+      },
+      "h2": {
+        "size": "39.0625px",
+        "lineHeight": "46.875px",
+        "letterSpacing": "normal",
+        "weight": 500
+      },
+      "h3": {
+        "size": "31.25px",
+        "lineHeight": "37.5px",
+        "letterSpacing": "normal",
+        "weight": 500
+      },
+      "h4": {
+        "size": "25px",
+        "lineHeight": "30px",
+        "letterSpacing": "normal",
+        "weight": 500
+      },
+      "body": {
+        "size": "16px",
+        "lineHeight": "22.4px",
+        "letterSpacing": "normal",
+        "weight": 300
+      }
+    },
+    "headingStyle": "serif",
+    "headingWeight": "bold",
+    "bodyWeight": "normal",
+    "usesInlineColorHighlights": false
+  },
+  "layout": {
+    "heroPattern": {
+      "type": "split",
+      "hasBackgroundImage": true,
+      "headerDark": false
+    },
+    "spacingDensity": "standard",
+    "containerWidth": "max-w-7xl",
+    "sectionPaddingY": "py-16 md:py-24"
+  },
+  "componentVariants": {
+    "heroVariant": "split",
+    "headerVariant": "light",
+    "headerStyle": "solid",
+    "cardVariant": "standard",
+    "sectionVariant": "standard",
+    "buttonRadius": "rounded",
+    "cardRadius": "rounded-xl"
+  },
+  "pageBlueprints": [
+    {
+      "pageType": "home",
+      "sections": [
+        {
+          "order": 1,
+          "id": "navigation-logo-links",
+          "name": "SiteNavigation",
+          "category": "Navigation",
+          "purpose": "Primary site navigation with logo, nav links and CTA booking button appearing on every page",
+          "layoutPattern": "Horizontal bar with logo left, nav links center-right, CTA button far right",
+          "contentSlots": ["logo", "nav-links", "cta-button"],
+          "interactionNeeds": "minimal",
+          "tokenUsageHints": ["bg-white", "text-brand-dark", "btn-brand-gold"],
+          "confidence": "high"
+        },
+        {
+          "order": 2,
+          "id": "hero-split-image-text",
+          "name": "HeroSplit",
+          "category": "Hero",
+          "purpose": "Main hero introducing the property with headline, description text, CTA link and a large property photo",
+          "layoutPattern": "Two-column split: text left, full-height image right",
+          "contentSlots": ["eyebrow-text", "headline", "body-copy", "cta-link", "hero-image"],
+          "interactionNeeds": "minimal",
+          "tokenUsageHints": ["bg-white", "text-brand-navy", "text-body-dark"],
+          "confidence": "high"
+        },
+        {
+          "order": 3,
+          "id": "cards-three-column-features",
+          "name": "FeatureCards",
+          "category": "Cards",
+          "purpose": "Three feature highlights showcasing exterior, interior and sports/activity amenities",
+          "layoutPattern": "Three equal-width cards in a horizontal row, each with icon, heading and description",
+          "contentSlots": ["card-icon", "card-heading", "card-description"],
+          "interactionNeeds": "none",
+          "tokenUsageHints": ["bg-white", "border-light-grey", "text-brand-navy"],
+          "confidence": "high"
+        },
+        {
+          "order": 4,
+          "id": "content-gallery-heading",
+          "name": "GallerySection",
+          "category": "Content",
+          "purpose": "Photo gallery section showcasing the property in images",
+          "layoutPattern": "Section heading centered above a wide image strip/gallery",
+          "contentSlots": ["section-heading", "gallery-images"],
+          "interactionNeeds": "minimal",
+          "tokenUsageHints": ["bg-white", "text-brand-navy"],
+          "confidence": "medium"
+        },
+        {
+          "order": 5,
+          "id": "social-proof-provider-card",
+          "name": "ServiceProviderCard",
+          "category": "Social Proof",
+          "purpose": "Highlights an on-site service provider with quote, role and website link",
+          "layoutPattern": "Full-width section with overlay heading, then a card with text left and portrait photo right",
+          "contentSlots": [
+            "section-heading",
+            "provider-name",
+            "provider-quote",
+            "provider-role",
+            "provider-link",
+            "provider-photo"
+          ],
+          "interactionNeeds": "none",
+          "tokenUsageHints": ["bg-cream", "text-brand-navy", "text-muted"],
+          "confidence": "high"
+        },
+        {
+          "order": 6,
+          "id": "footer-contact-info",
+          "name": "SiteFooter",
+          "category": "Footer",
+          "purpose": "Site footer with logo, tagline, owner names, contact details, address, social icon and legal links",
+          "layoutPattern": "Dark background centered layout with logo top, text content stacked, legal links at bottom",
+          "contentSlots": [
+            "footer-logo",
+            "tagline",
+            "owner-names",
+            "email",
+            "phone-numbers",
+            "address",
+            "social-icon",
+            "legal-links",
+            "copyright"
+          ],
+          "interactionNeeds": "minimal",
+          "tokenUsageHints": ["bg-brand-navy", "text-white", "text-light-muted"],
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "pageType": "custom",
+      "sections": [
+        {
+          "order": 1,
+          "id": "navigation-logo-links",
+          "name": "SiteNavigation",
+          "category": "Navigation",
+          "purpose": "Primary site navigation with logo, nav links and CTA booking button appearing on every page",
+          "layoutPattern": "Horizontal bar with logo left, nav links center-right, CTA button far right",
+          "contentSlots": ["logo", "nav-links", "cta-button"],
+          "interactionNeeds": "minimal",
+          "tokenUsageHints": ["bg-white", "text-brand-dark", "btn-brand-gold"],
+          "confidence": "high"
+        },
+        {
+          "order": 2,
+          "id": "content-text-block",
+          "name": "GiftVoucherIntro",
+          "category": "Content",
+          "purpose": "Introduces gift voucher offering with pricing details and peak period information",
+          "layoutPattern": "Two-column layout: text content left, large property image right",
+          "contentSlots": ["heading", "body-text", "pricing-list", "peak-periods-list", "cta-link"],
+          "interactionNeeds": "minimal",
+          "tokenUsageHints": ["text-brand-gold", "bg-white", "text-dark"],
+          "confidence": "high"
+        },
+        {
+          "order": 3,
+          "id": "cta-form-split",
+          "name": "GiftVoucherOrder",
+          "category": "CTA",
+          "purpose": "Gift voucher order form section allowing users to request or purchase vouchers",
+          "layoutPattern": "Two-column split with form fields left and supporting image or descriptive content right",
+          "contentSlots": ["section-heading", "form-fields", "submit-button", "supporting-image"],
+          "interactionNeeds": "stateful",
+          "tokenUsageHints": ["bg-white", "btn-brand-gold", "input-border"],
+          "confidence": "medium"
+        },
+        {
+          "order": 4,
+          "id": "footer-brand-contact",
+          "name": "SiteFooter",
+          "category": "Footer",
+          "purpose": "Site footer with logo, tagline, owner names, contact details, address, social media icon and legal links appearing on every page",
+          "layoutPattern": "Dark background centered single-column: logo top, tagline, owner names, email, phone numbers, address, social icon, legal links and copyright stacked vertically",
+          "contentSlots": [
+            "footer-logo",
+            "tagline",
+            "owner-names",
+            "email",
+            "phone-numbers",
+            "address",
+            "social-icon",
+            "legal-links",
+            "copyright"
+          ],
+          "interactionNeeds": "minimal",
+          "tokenUsageHints": ["bg-brand-navy", "text-white", "text-brand-gold", "text-light-muted"],
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "pageType": "custom",
+      "sections": [
+        {
+          "order": 1,
+          "id": "navigation-logo-links-cta",
+          "name": "SiteHeader",
+          "category": "Navigation",
+          "purpose": "Top navigation bar with logo, nav links and a highlighted CTA button for pricing/booking",
+          "layoutPattern": "Horizontal bar: logo left, nav links center-right, CTA button far right",
+          "contentSlots": ["logo", "nav-links", "cta-button"],
+          "interactionNeeds": "minimal",
+          "tokenUsageHints": ["bg-white", "text-brand-primary", "btn-brand-gold"],
+          "confidence": "high"
+        },
+        {
+          "order": 2,
+          "id": "content-two-column-text-image",
+          "name": "ContentTwoColumn",
+          "category": "Content",
+          "purpose": "Flexible two-column content section displaying rich text, pricing tiers, lists and a CTA alongside a large property photo; reused for pricing and gift voucher pages",
+          "layoutPattern": "Two-column layout: left column contains heading, body text blocks, bullet lists, CTA button and fine print; right column contains a large property photo",
+          "contentSlots": [
+            "section-heading",
+            "body-text",
+            "pricing-list",
+            "peak-periods-list",
+            "cta-link",
+            "property-image",
+            "fine-print"
+          ],
+          "interactionNeeds": "minimal",
+          "tokenUsageHints": [
+            "bg-white",
+            "text-brand-dark",
+            "heading-brand-gold",
+            "btn-outline-neutral"
+          ],
+          "confidence": "high"
+        },
+        {
+          "order": 3,
+          "id": "footer-brand-contact",
+          "name": "SiteFooter",
+          "category": "Footer",
+          "purpose": "Site footer with logo, tagline, owner names, contact details, address, social media icon and legal links appearing on every page",
+          "layoutPattern": "Dark background centered single-column: logo top, tagline, owner names, email, phone numbers, address, social icon, legal links and copyright stacked vertically",
+          "contentSlots": [
+            "footer-logo",
+            "tagline",
+            "owner-names",
+            "email",
+            "phone-numbers",
+            "address",
+            "social-icon",
+            "legal-links",
+            "copyright"
+          ],
+          "interactionNeeds": "minimal",
+          "tokenUsageHints": ["bg-brand-navy", "text-white", "text-brand-gold", "text-light-muted"],
+          "confidence": "high"
+        },
+        {
+          "order": 4,
+          "id": "footer-legal-bar",
+          "name": "LegalBar",
+          "category": "Footer",
+          "purpose": "Bottom legal strip with copyright notice, made-with credit and legal document links",
+          "layoutPattern": "Horizontal bar: copyright left, made-by credit center, legal links right",
+          "contentSlots": ["copyright", "made-by-credit", "legal-links"],
+          "interactionNeeds": "none",
+          "tokenUsageHints": ["bg-brand-dark", "text-muted", "border-top"],
+          "confidence": "high"
+        }
+      ]
+    }
+  ],
+  "visualTone": {
+    "description": "Bold, professional split layout with standard spacing and high-contrast warm #DBA746 accents",
+    "designSkillHints": {
+      "variance": 8,
+      "density": 5,
+      "motion": 7
+    },
+    "antiPatterns": ["avoid cool blue or green accents"],
+    "referenceDescription": "https://navagarden.hu/ — vega pattern site, 3 pages analysed, 12 sections identified, split hero with standard density"
+  }
+}

@@ -1,0 +1,1108 @@
+{
+  "meta": {
+    "briefVersion": "1",
+    "generatedAt": "2026-04-18T05:57:46.968Z",
+    "sourceUrl": "https://www.designlab-eastbourne.co.uk/",
+    "pipelineVersion": "1.0.0"
+  },
+  "reference": {
+    "url": "https://www.designlab-eastbourne.co.uk/",
+    "screenshots": {
+      "about": "/Users/rickywilson/Sites/local-business-platform/output/ingestion/designlab/screenshots/about.png",
+      "custom": "/Users/rickywilson/Sites/local-business-platform/output/ingestion/designlab/screenshots/custom.png",
+      "home": "/Users/rickywilson/Sites/local-business-platform/output/ingestion/designlab/screenshots/home.png",
+      "projects": "/Users/rickywilson/Sites/local-business-platform/output/ingestion/designlab/screenshots/projects.png"
+    },
+    "capturedAt": "2026-04-18T05:48:16.259Z"
+  },
+  "palette": {
+    "brand": {
+      "primary": "#ED9507",
+      "primaryHover": "#ED9507",
+      "secondary": "#2A2A2A",
+      "accent": "#ED9507",
+      "onPrimary": "#FFFFFF"
+    },
+    "surface": {
+      "background": "#121212",
+      "foreground": "#FFFFFF",
+      "secondaryForeground": "#D1D1D1",
+      "tertiaryForeground": "#EBEBEB",
+      "muted": "#2A2A2A",
+      "mutedForeground": "#FFFFFF",
+      "card": "#2A2A2A",
+      "cardBorder": "#E5E7EB",
+      "inverse": "#000000"
+    },
+    "semantic": {
+      "success": "#10b981",
+      "warning": "#f59e0b",
+      "error": "#ef4444",
+      "info": "#3b82f6"
+    },
+    "overlay": {
+      "dark": "rgba(255,255,255,0.7)",
+      "light": "rgba(255,255,255,0.8)",
+      "primary": "rgba(237,149,7,0.8)"
+    },
+    "provenance": {
+      "surface.background": {
+        "source": "computed",
+        "confidence": "high"
+      },
+      "surface.foreground": {
+        "source": "computed",
+        "confidence": "high"
+      },
+      "brand.primary": {
+        "source": "computed",
+        "confidence": "high"
+      },
+      "brand.primaryHover": {
+        "source": "derived",
+        "confidence": "medium"
+      },
+      "brand.secondary": {
+        "source": "derived",
+        "confidence": "medium"
+      },
+      "brand.accent": {
+        "source": "derived",
+        "confidence": "medium"
+      },
+      "brand.onPrimary": {
+        "source": "computed",
+        "confidence": "high"
+      },
+      "surface.card": {
+        "source": "computed",
+        "confidence": "high"
+      },
+      "surface.muted": {
+        "source": "derived",
+        "confidence": "medium"
+      },
+      "surface.inverse": {
+        "source": "derived",
+        "confidence": "medium"
+      },
+      "surface.secondaryForeground": {
+        "source": "derived",
+        "confidence": "medium"
+      },
+      "surface.tertiaryForeground": {
+        "source": "derived",
+        "confidence": "medium"
+      },
+      "surface.mutedForeground": {
+        "source": "derived",
+        "confidence": "medium"
+      },
+      "fontFamily.sans": {
+        "source": "computed",
+        "confidence": "high"
+      },
+      "scale.hero": {
+        "source": "computed",
+        "confidence": "high"
+      },
+      "scale.h1": {
+        "source": "computed",
+        "confidence": "high"
+      },
+      "scale.h2": {
+        "source": "computed",
+        "confidence": "high"
+      },
+      "scale.h3": {
+        "source": "computed",
+        "confidence": "high"
+      },
+      "scale.h4": {
+        "source": "computed",
+        "confidence": "high"
+      },
+      "scale.body": {
+        "source": "computed",
+        "confidence": "high"
+      },
+      "button": {
+        "source": "computed",
+        "confidence": "high"
+      },
+      "card": {
+        "source": "computed",
+        "confidence": "high"
+      },
+      "navigation.height": {
+        "source": "computed",
+        "confidence": "high"
+      },
+      "section.paddingY": {
+        "source": "derived",
+        "confidence": "medium"
+      }
+    }
+  },
+  "typography": {
+    "fontFamily": {
+      "sans": ["century-gothic", "system-ui", "sans-serif"],
+      "heading": ["Inter", "system-ui", "sans-serif"]
+    },
+    "scale": {
+      "hero": {
+        "size": "48px",
+        "lineHeight": "52.8px",
+        "letterSpacing": "-2.4px",
+        "weight": 700
+      },
+      "h1": {
+        "size": "48px",
+        "lineHeight": "52.8px",
+        "letterSpacing": "-2.4px",
+        "weight": 700
+      },
+      "h2": {
+        "size": "40px",
+        "lineHeight": "42px",
+        "letterSpacing": "normal",
+        "weight": 700
+      },
+      "h3": {
+        "size": "28px",
+        "lineHeight": "33.6px",
+        "letterSpacing": "normal",
+        "weight": 400
+      },
+      "h4": {
+        "size": "28px",
+        "lineHeight": "42px",
+        "letterSpacing": "normal",
+        "weight": 400
+      },
+      "body": {
+        "size": "12.8px",
+        "lineHeight": "17.92px",
+        "letterSpacing": "normal",
+        "weight": 400
+      }
+    },
+    "headingStyle": "sans",
+    "headingWeight": "bold",
+    "bodyWeight": "normal",
+    "usesInlineColorHighlights": true
+  },
+  "layout": {
+    "heroPattern": {
+      "type": "split",
+      "hasBackgroundImage": false,
+      "headerDark": true
+    },
+    "spacingDensity": "standard",
+    "containerWidth": "max-w-7xl",
+    "sectionPaddingY": "py-16 md:py-24"
+  },
+  "componentVariants": {
+    "heroVariant": "image-overlay",
+    "headerVariant": "dark",
+    "headerStyle": "solid",
+    "cardVariant": "icon-circle",
+    "sectionVariant": "dark-accent",
+    "buttonRadius": "rounded",
+    "cardRadius": "rounded-lg"
+  },
+  "pageBlueprints": [
+    {
+      "pageType": "home",
+      "sections": [
+        {
+          "order": 1,
+          "id": "navigation-logo-links-cta",
+          "name": "SiteNavigation",
+          "category": "Navigation",
+          "purpose": "Primary site navigation with logo, nav links including a services dropdown, and a highlighted contact CTA button",
+          "layoutPattern": "Horizontal bar with logo left, nav links centre-right, CTA button far right",
+          "contentSlots": ["logo", "nav-links", "services-dropdown", "cta-button"],
+          "interactionNeeds": "stateful",
+          "tokenUsageHints": ["bg-dark", "text-white", "btn-brand-primary"],
+          "confidence": "high"
+        },
+        {
+          "order": 2,
+          "id": "hero-split-image-right",
+          "name": "HeroSplit",
+          "category": "Hero",
+          "purpose": "Introduces a page or service with a headline, eyebrow label, subtext, optional CTA button, and a product or team image on the right",
+          "layoutPattern": "Two-column split: text content left, framed image right on dark background",
+          "contentSlots": [
+            "eyebrow-label",
+            "heading",
+            "subheading",
+            "body-text",
+            "cta-button",
+            "hero-image",
+            "trust-badge"
+          ],
+          "interactionNeeds": "minimal",
+          "tokenUsageHints": [
+            "bg-dark",
+            "text-white",
+            "text-brand-primary",
+            "border-brand-primary",
+            "border-image-frame"
+          ],
+          "confidence": "high"
+        },
+        {
+          "order": 3,
+          "id": "cards-icon-grid-dark",
+          "name": "ValuePropositionCards",
+          "category": "Cards",
+          "purpose": "Highlights the company's core value propositions or fresh approach to customer service with icon or feature cards on a dark background",
+          "layoutPattern": "Centred heading and subtext above a multi-column icon card grid on dark background with optional graphic overlay",
+          "contentSlots": ["section-heading", "section-subtext", "feature-cards"],
+          "interactionNeeds": "none",
+          "tokenUsageHints": ["bg-dark", "bg-graphic-overlay", "text-white", "text-brand-primary"],
+          "confidence": "medium"
+        },
+        {
+          "order": 4,
+          "id": "cards-services-grid",
+          "name": "ServicesGrid",
+          "category": "Cards",
+          "purpose": "Showcases the range of signage and design services offered with image cards and labels in a grid layout",
+          "layoutPattern": "Centred heading and subtext above a grid of service cards with images and labels on dark background",
+          "contentSlots": ["section-label", "section-heading", "section-subtext", "service-cards"],
+          "interactionNeeds": "minimal",
+          "tokenUsageHints": [
+            "bg-dark",
+            "bg-graphic-overlay",
+            "text-white",
+            "card-bg-dark",
+            "card-border"
+          ],
+          "confidence": "high"
+        },
+        {
+          "order": 5,
+          "id": "custom-portfolio-gallery",
+          "name": "PortfolioGallery",
+          "category": "Custom",
+          "purpose": "Displays a grid of portfolio or work images to showcase completed projects",
+          "layoutPattern": "Heading above a masonry-style or fixed grid of photo thumbnails on dark background",
+          "contentSlots": ["section-heading", "gallery-images"],
+          "interactionNeeds": "minimal",
+          "tokenUsageHints": ["bg-dark", "text-white"],
+          "confidence": "high"
+        },
+        {
+          "order": 6,
+          "id": "social-proof-reviews",
+          "name": "ReviewsSection",
+          "category": "Social Proof",
+          "purpose": "Displays customer testimonials and reviews to build trust with prospective clients",
+          "layoutPattern": "Centred heading above review cards or a carousel on dark background",
+          "contentSlots": ["section-heading", "review-cards"],
+          "interactionNeeds": "stateful",
+          "tokenUsageHints": ["bg-dark", "text-white", "text-brand-primary"],
+          "confidence": "medium"
+        },
+        {
+          "order": 7,
+          "id": "cta-banner-full-width",
+          "name": "CTABanner",
+          "category": "CTA",
+          "purpose": "Full-width call-to-action banner encouraging visitors to enquire, appearing on every page above the footer",
+          "layoutPattern": "Single row with headline text left and outlined CTA button right on brand-colour background",
+          "contentSlots": ["cta-heading", "cta-button"],
+          "interactionNeeds": "minimal",
+          "tokenUsageHints": ["bg-brand-primary", "text-white", "btn-outline-white"],
+          "confidence": "high"
+        },
+        {
+          "order": 8,
+          "id": "footer-multi-column",
+          "name": "SiteFooter",
+          "category": "Footer",
+          "purpose": "Site-wide footer with contact details, service links, useful links, social media icons, and copyright bar",
+          "layoutPattern": "Four-column grid: contact, services, useful links, social follow; dark background with copyright bar below",
+          "contentSlots": [
+            "contact-info",
+            "services-links",
+            "useful-links",
+            "social-icons",
+            "copyright"
+          ],
+          "interactionNeeds": "minimal",
+          "tokenUsageHints": [
+            "bg-near-black",
+            "text-white",
+            "text-brand-primary",
+            "text-muted",
+            "icon-social"
+          ],
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "pageType": "about",
+      "sections": [
+        {
+          "order": 1,
+          "id": "navigation-topbar-logo-links",
+          "name": "TopNavigation",
+          "category": "Navigation",
+          "purpose": "Primary site navigation with logo, nav links and contact CTA button",
+          "layoutPattern": "Horizontal bar with logo left, nav links centre-right, CTA button far right",
+          "contentSlots": ["logo", "nav-links", "cta-button"],
+          "interactionNeeds": "minimal",
+          "tokenUsageHints": ["bg-dark", "text-white", "btn-bg-brand-primary"],
+          "confidence": "high"
+        },
+        {
+          "order": 2,
+          "id": "hero-split-text-image",
+          "name": "AboutHeroSplit",
+          "category": "Hero",
+          "purpose": "Introduces the company with a headline, body copy and a team photo beside a branded van",
+          "layoutPattern": "Two-column split: text left, image right on dark background",
+          "contentSlots": ["eyebrow-label", "heading", "divider", "body-copy", "team-photo"],
+          "interactionNeeds": "none",
+          "tokenUsageHints": [
+            "bg-dark",
+            "text-white",
+            "text-brand-primary",
+            "border-brand-primary"
+          ],
+          "confidence": "high"
+        },
+        {
+          "order": 3,
+          "id": "stats-experience-dark",
+          "name": "ExperienceStats",
+          "category": "Stats",
+          "purpose": "Highlights trade experience metrics or milestones to build credibility, appearing on about and service pages",
+          "layoutPattern": "Single column or grid of stat blocks on dark background with optional supporting images",
+          "contentSlots": ["section-heading", "stat-items", "supporting-images"],
+          "interactionNeeds": "none",
+          "tokenUsageHints": ["bg-dark", "text-white", "text-brand-primary"],
+          "confidence": "medium"
+        },
+        {
+          "order": 4,
+          "id": "cta-banner-full-width",
+          "name": "CTABanner",
+          "category": "CTA",
+          "purpose": "Full-width call-to-action banner encouraging visitors to enquire, appearing on every page above the footer",
+          "layoutPattern": "Single row with headline text left and outlined CTA button right on brand-colour background",
+          "contentSlots": ["cta-heading", "cta-button"],
+          "interactionNeeds": "minimal",
+          "tokenUsageHints": ["bg-brand-primary", "text-white", "btn-outline-white"],
+          "confidence": "high"
+        },
+        {
+          "order": 5,
+          "id": "footer-multi-column-links",
+          "name": "SiteFooter",
+          "category": "Footer",
+          "purpose": "Site-wide footer with contact details, service links, useful links and social media icons",
+          "layoutPattern": "Four-column grid: contact, services, useful links, follow us — with copyright bar below",
+          "contentSlots": [
+            "contact-info",
+            "services-links",
+            "useful-links",
+            "social-icons",
+            "copyright"
+          ],
+          "interactionNeeds": "minimal",
+          "tokenUsageHints": ["bg-dark", "text-white", "text-brand-primary", "icon-social"],
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "pageType": "projects",
+      "sections": [
+        {
+          "order": 1,
+          "id": "navigation",
+          "name": "Navigation",
+          "category": "Navigation",
+          "purpose": "Navigation section",
+          "layoutPattern": "horizontal bar",
+          "contentSlots": ["logo", "navLinks", "ctaButton"],
+          "interactionNeeds": "stateful",
+          "tokenUsageHints": ["bg-surface-background", "text-surface-foreground"],
+          "confidence": "low"
+        },
+        {
+          "order": 2,
+          "id": "hero-take-a-look-at-our-latest-work",
+          "name": "HeroTakeALookAtOurLatestWork",
+          "category": "Hero",
+          "purpose": "Hero section: Take a look at our latest work",
+          "layoutPattern": "contained",
+          "contentSlots": ["heading", "subheading", "ctaButtons"],
+          "interactionNeeds": "none",
+          "tokenUsageHints": ["bg-brand-primary", "text-surface-background"],
+          "confidence": "low"
+        },
+        {
+          "order": 3,
+          "id": "content",
+          "name": "Content",
+          "category": "Content",
+          "purpose": "Content section",
+          "layoutPattern": "contained",
+          "contentSlots": ["body"],
+          "interactionNeeds": "none",
+          "tokenUsageHints": ["bg-surface-background", "text-surface-foreground"],
+          "confidence": "low"
+        },
+        {
+          "order": 4,
+          "id": "content-bring-your-idea-to-life-with-d",
+          "name": "ContentBringYourIdeaToLifeWithD",
+          "category": "Content",
+          "purpose": "Content section: Bring your idea to life with Design Lab",
+          "layoutPattern": "contained",
+          "contentSlots": ["heading", "body", "image"],
+          "interactionNeeds": "none",
+          "tokenUsageHints": ["bg-surface-background", "text-surface-foreground"],
+          "confidence": "low"
+        },
+        {
+          "order": 5,
+          "id": "footer",
+          "name": "Footer",
+          "category": "Footer",
+          "purpose": "Footer section",
+          "layoutPattern": "contained",
+          "contentSlots": ["links", "copyright"],
+          "interactionNeeds": "none",
+          "tokenUsageHints": ["bg-surface-inverse", "text-surface-background"],
+          "confidence": "low"
+        },
+        {
+          "order": 6,
+          "id": "stats-static-and-dynamic-content-edi",
+          "name": "StatsStaticAndDynamicContentEdi",
+          "category": "Stats",
+          "purpose": "Stats section: Static and dynamic content editing",
+          "layoutPattern": "contained",
+          "contentSlots": ["heading", "statItems"],
+          "interactionNeeds": "none",
+          "tokenUsageHints": ["bg-surface-background", "text-surface-foreground"],
+          "confidence": "low"
+        }
+      ]
+    },
+    {
+      "pageType": "custom",
+      "sections": [
+        {
+          "order": 1,
+          "id": "navigation-sticky-top",
+          "name": "SiteNavigation",
+          "category": "Navigation",
+          "purpose": "Primary site navigation with logo and menu links including a highlighted contact CTA button",
+          "layoutPattern": "Horizontal bar with logo left, nav links right, CTA button far right",
+          "contentSlots": ["logo", "nav-links", "cta-button"],
+          "interactionNeeds": "minimal",
+          "tokenUsageHints": ["bg-dark", "text-white", "btn-brand-primary"],
+          "confidence": "high"
+        },
+        {
+          "order": 2,
+          "id": "hero-split-image-right",
+          "name": "HeroSplit",
+          "category": "Hero",
+          "purpose": "Introduces a page or service with a headline, eyebrow label, subtext, optional CTA button, and a product or team image on the right",
+          "layoutPattern": "Two-column split: text content left, framed image right on dark background",
+          "contentSlots": [
+            "eyebrow-label",
+            "heading",
+            "subheading",
+            "body-text",
+            "cta-button",
+            "hero-image",
+            "trust-badge"
+          ],
+          "interactionNeeds": "minimal",
+          "tokenUsageHints": [
+            "bg-dark",
+            "text-white",
+            "text-brand-primary",
+            "border-brand-primary",
+            "border-image-frame"
+          ],
+          "confidence": "high"
+        },
+        {
+          "order": 3,
+          "id": "cards-feature-grid",
+          "name": "EfficiencyPrivacyCards",
+          "category": "Cards",
+          "purpose": "Highlights key benefits of commercial window tinting such as efficiency and privacy using feature cards",
+          "layoutPattern": "Single column or grid of feature cards with images, dark background",
+          "contentSlots": ["section-heading", "feature-cards"],
+          "interactionNeeds": "none",
+          "tokenUsageHints": ["bg-dark", "text-white", "card-border"],
+          "confidence": "medium"
+        },
+        {
+          "order": 4,
+          "id": "content-split-text-image",
+          "name": "ContentSplitTextImage",
+          "category": "Content",
+          "purpose": "Persuasive content section reinforcing a service value proposition with supporting imagery in a two-column layout",
+          "layoutPattern": "Two-column split: text one side, image other side on dark background",
+          "contentSlots": ["heading", "body-text", "supporting-image"],
+          "interactionNeeds": "none",
+          "tokenUsageHints": ["bg-dark", "text-white", "text-brand-primary"],
+          "confidence": "medium"
+        },
+        {
+          "order": 5,
+          "id": "cta-full-width-banner",
+          "name": "EnquireCTABanner",
+          "category": "CTA",
+          "purpose": "Full-width call-to-action banner prompting users to enquire about services",
+          "layoutPattern": "Single row with headline text left and outlined CTA button right, brand-colour background",
+          "contentSlots": ["headline", "cta-button"],
+          "interactionNeeds": "minimal",
+          "tokenUsageHints": ["bg-brand-primary", "text-white", "btn-outline-white"],
+          "confidence": "high"
+        },
+        {
+          "order": 6,
+          "id": "footer-multi-column",
+          "name": "SiteFooter",
+          "category": "Footer",
+          "purpose": "Site-wide footer with contact details, service links, useful links, social media icons, and copyright bar",
+          "layoutPattern": "Four-column grid: contact, services, useful links, social follow; dark background with copyright bar below",
+          "contentSlots": [
+            "contact-info",
+            "services-links",
+            "useful-links",
+            "social-icons",
+            "copyright"
+          ],
+          "interactionNeeds": "minimal",
+          "tokenUsageHints": [
+            "bg-near-black",
+            "text-white",
+            "text-brand-primary",
+            "text-muted",
+            "icon-social"
+          ],
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "pageType": "custom",
+      "sections": [
+        {
+          "order": 1,
+          "id": "navigation-sticky-top",
+          "name": "SiteNavigation",
+          "category": "Navigation",
+          "purpose": "Primary site navigation with logo and menu links including a highlighted contact CTA button",
+          "layoutPattern": "Horizontal bar with logo left, nav links right, CTA button far right",
+          "contentSlots": ["logo", "nav-links", "cta-button"],
+          "interactionNeeds": "minimal",
+          "tokenUsageHints": ["bg-dark", "text-white", "btn-brand-primary"],
+          "confidence": "high"
+        },
+        {
+          "order": 2,
+          "id": "hero-split-image-right",
+          "name": "HeroSplit",
+          "category": "Hero",
+          "purpose": "Introduces a page or service with a headline, eyebrow label, subtext, optional CTA button, and a product or team image on the right",
+          "layoutPattern": "Two-column split: text content left, framed image right on dark background",
+          "contentSlots": [
+            "eyebrow-label",
+            "heading",
+            "subheading",
+            "body-text",
+            "cta-button",
+            "hero-image",
+            "trust-badge"
+          ],
+          "interactionNeeds": "minimal",
+          "tokenUsageHints": [
+            "bg-dark",
+            "text-white",
+            "text-brand-primary",
+            "border-brand-primary",
+            "border-image-frame"
+          ],
+          "confidence": "high"
+        },
+        {
+          "order": 3,
+          "id": "cards-feature-grid",
+          "name": "EfficiencyPrivacyCards",
+          "category": "Cards",
+          "purpose": "Highlights key benefits of commercial window tinting such as efficiency and privacy using feature cards",
+          "layoutPattern": "Single column or grid of feature cards with images, dark background",
+          "contentSlots": ["section-heading", "feature-cards"],
+          "interactionNeeds": "none",
+          "tokenUsageHints": ["bg-dark", "text-white", "card-border"],
+          "confidence": "medium"
+        },
+        {
+          "order": 4,
+          "id": "content-two-column-image",
+          "name": "BusinessAlternativeContent",
+          "category": "Content",
+          "purpose": "Persuasive content section with heading 'If you mean business, then there's no alternative', supporting copy and imagery",
+          "layoutPattern": "Two-column layout: text left or right, image opposite on dark background",
+          "contentSlots": ["section-heading", "body-copy", "supporting-image"],
+          "interactionNeeds": "none",
+          "tokenUsageHints": ["bg-dark", "text-white", "text-brand-primary"],
+          "confidence": "medium"
+        },
+        {
+          "order": 5,
+          "id": "cta-full-width-banner",
+          "name": "EnquireCTABanner",
+          "category": "CTA",
+          "purpose": "Full-width call-to-action banner prompting users to enquire about services",
+          "layoutPattern": "Single row with headline text left and outlined CTA button right, brand-colour background",
+          "contentSlots": ["headline", "cta-button"],
+          "interactionNeeds": "minimal",
+          "tokenUsageHints": ["bg-brand-primary", "text-white", "btn-outline-white"],
+          "confidence": "high"
+        },
+        {
+          "order": 6,
+          "id": "footer-multi-column-links",
+          "name": "SiteFooter",
+          "category": "Footer",
+          "purpose": "Site-wide footer with contact details, service links, useful links and social media icons",
+          "layoutPattern": "Four-column grid: contact, services, useful links, follow us — with copyright bar below",
+          "contentSlots": [
+            "contact-info",
+            "services-links",
+            "useful-links",
+            "social-icons",
+            "copyright"
+          ],
+          "interactionNeeds": "minimal",
+          "tokenUsageHints": ["bg-dark", "text-white", "text-brand-primary", "icon-social"],
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "pageType": "custom",
+      "sections": [
+        {
+          "order": 1,
+          "id": "navigation-top-bar",
+          "name": "SiteNavigation",
+          "category": "Navigation",
+          "purpose": "Primary site navigation with logo and menu links including a highlighted contact CTA button",
+          "layoutPattern": "Horizontal bar with logo left, nav links right, CTA button far right",
+          "contentSlots": ["logo", "nav-links", "cta-button"],
+          "interactionNeeds": "minimal",
+          "tokenUsageHints": ["bg-dark", "text-white", "btn-brand-primary"],
+          "confidence": "high"
+        },
+        {
+          "order": 2,
+          "id": "hero-split-image-right",
+          "name": "HeroSplit",
+          "category": "Hero",
+          "purpose": "Introduces a page or service with a headline, eyebrow label, subtext, optional CTA button, and a product or team image on the right",
+          "layoutPattern": "Two-column split: text content left, framed image right on dark background",
+          "contentSlots": [
+            "eyebrow-label",
+            "heading",
+            "subheading",
+            "body-text",
+            "cta-button",
+            "hero-image",
+            "trust-badge"
+          ],
+          "interactionNeeds": "minimal",
+          "tokenUsageHints": [
+            "bg-dark",
+            "text-white",
+            "text-brand-primary",
+            "border-brand-primary",
+            "border-image-frame"
+          ],
+          "confidence": "high"
+        },
+        {
+          "order": 3,
+          "id": "cards-grid-services",
+          "name": "PrintBrandCards",
+          "category": "Cards",
+          "purpose": "Showcases print service offerings under the heading 'Print to build your brand' using a card grid layout",
+          "layoutPattern": "Single container with grid of cards, dark background, each card with image and text",
+          "contentSlots": ["section-heading", "card-grid"],
+          "interactionNeeds": "none",
+          "tokenUsageHints": ["bg-dark", "text-white", "card-border"],
+          "confidence": "medium"
+        },
+        {
+          "order": 4,
+          "id": "cta-full-width-banner",
+          "name": "EnquireCTABanner",
+          "category": "CTA",
+          "purpose": "Full-width call-to-action banner prompting users to enquire about services",
+          "layoutPattern": "Single row with headline text left and outlined CTA button right, brand-colour background",
+          "contentSlots": ["headline", "cta-button"],
+          "interactionNeeds": "minimal",
+          "tokenUsageHints": ["bg-brand-primary", "text-white", "btn-outline-white"],
+          "confidence": "high"
+        },
+        {
+          "order": 5,
+          "id": "footer-multi-column",
+          "name": "SiteFooter",
+          "category": "Footer",
+          "purpose": "Site-wide footer with contact details, service links, useful links, social media icons, and copyright bar",
+          "layoutPattern": "Four-column grid: contact, services, useful links, social follow; dark background with copyright bar below",
+          "contentSlots": [
+            "contact-info",
+            "services-links",
+            "useful-links",
+            "social-icons",
+            "copyright"
+          ],
+          "interactionNeeds": "minimal",
+          "tokenUsageHints": [
+            "bg-near-black",
+            "text-white",
+            "text-brand-primary",
+            "text-muted",
+            "icon-social"
+          ],
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "pageType": "custom",
+      "sections": [
+        {
+          "order": 1,
+          "id": "navigation",
+          "name": "Navigation",
+          "category": "Navigation",
+          "purpose": "Navigation section",
+          "layoutPattern": "horizontal bar",
+          "contentSlots": ["logo", "navLinks", "ctaButton"],
+          "interactionNeeds": "stateful",
+          "tokenUsageHints": ["bg-surface-background", "text-surface-foreground"],
+          "confidence": "low"
+        },
+        {
+          "order": 2,
+          "id": "hero-shop-signage",
+          "name": "HeroShopSignage",
+          "category": "Hero",
+          "purpose": "Hero section: Shop Signage",
+          "layoutPattern": "contained",
+          "contentSlots": ["heading", "subheading", "ctaButtons", "backgroundImage"],
+          "interactionNeeds": "none",
+          "tokenUsageHints": ["bg-brand-primary", "text-surface-background"],
+          "confidence": "low"
+        },
+        {
+          "order": 3,
+          "id": "cards-make-a-good-first-impression",
+          "name": "CardsMakeAGoodFirstImpression",
+          "category": "Cards",
+          "purpose": "Cards section: Make a good first impression",
+          "layoutPattern": "contained",
+          "contentSlots": ["heading", "cards", "cardImages"],
+          "interactionNeeds": "none",
+          "tokenUsageHints": ["bg-surface-background", "text-surface-foreground"],
+          "confidence": "low"
+        },
+        {
+          "order": 4,
+          "id": "content-if-you-mean-business-then-ther",
+          "name": "ContentIfYouMeanBusinessThenTher",
+          "category": "Content",
+          "purpose": "Content section: If you mean business, then theres no alternative",
+          "layoutPattern": "contained",
+          "contentSlots": ["heading", "body", "image"],
+          "interactionNeeds": "none",
+          "tokenUsageHints": ["bg-surface-background", "text-surface-foreground"],
+          "confidence": "low"
+        },
+        {
+          "order": 5,
+          "id": "footer",
+          "name": "Footer",
+          "category": "Footer",
+          "purpose": "Footer section",
+          "layoutPattern": "contained",
+          "contentSlots": ["links", "copyright"],
+          "interactionNeeds": "none",
+          "tokenUsageHints": ["bg-surface-inverse", "text-surface-background"],
+          "confidence": "low"
+        },
+        {
+          "order": 6,
+          "id": "stats-static-and-dynamic-content-edi",
+          "name": "StatsStaticAndDynamicContentEdi",
+          "category": "Stats",
+          "purpose": "Stats section: Static and dynamic content editing",
+          "layoutPattern": "contained",
+          "contentSlots": ["heading", "statItems"],
+          "interactionNeeds": "none",
+          "tokenUsageHints": ["bg-surface-background", "text-surface-foreground"],
+          "confidence": "low"
+        }
+      ]
+    },
+    {
+      "pageType": "custom",
+      "sections": [
+        {
+          "order": 1,
+          "id": "navigation",
+          "name": "Navigation",
+          "category": "Navigation",
+          "purpose": "Navigation section",
+          "layoutPattern": "horizontal bar",
+          "contentSlots": ["logo", "navLinks", "ctaButton"],
+          "interactionNeeds": "stateful",
+          "tokenUsageHints": ["bg-surface-background", "text-surface-foreground"],
+          "confidence": "low"
+        },
+        {
+          "order": 2,
+          "id": "hero-vehicle-aftercare",
+          "name": "HeroVehicleAftercare",
+          "category": "Hero",
+          "purpose": "Hero section: Vehicle Aftercare",
+          "layoutPattern": "contained",
+          "contentSlots": ["heading", "subheading", "ctaButtons"],
+          "interactionNeeds": "none",
+          "tokenUsageHints": ["bg-brand-primary", "text-surface-background"],
+          "confidence": "low"
+        },
+        {
+          "order": 3,
+          "id": "stats",
+          "name": "Stats",
+          "category": "Stats",
+          "purpose": "Stats section",
+          "layoutPattern": "contained",
+          "contentSlots": ["statItems"],
+          "interactionNeeds": "none",
+          "tokenUsageHints": ["bg-surface-background", "text-surface-foreground"],
+          "confidence": "low"
+        },
+        {
+          "order": 4,
+          "id": "footer",
+          "name": "Footer",
+          "category": "Footer",
+          "purpose": "Footer section",
+          "layoutPattern": "contained",
+          "contentSlots": ["links", "copyright"],
+          "interactionNeeds": "none",
+          "tokenUsageHints": ["bg-surface-inverse", "text-surface-background"],
+          "confidence": "low"
+        },
+        {
+          "order": 5,
+          "id": "stats-static-and-dynamic-content-edi",
+          "name": "StatsStaticAndDynamicContentEdi",
+          "category": "Stats",
+          "purpose": "Stats section: Static and dynamic content editing",
+          "layoutPattern": "contained",
+          "contentSlots": ["heading", "statItems"],
+          "interactionNeeds": "none",
+          "tokenUsageHints": ["bg-surface-background", "text-surface-foreground"],
+          "confidence": "low"
+        }
+      ]
+    },
+    {
+      "pageType": "custom",
+      "sections": [
+        {
+          "order": 1,
+          "id": "navigation",
+          "name": "Navigation",
+          "category": "Navigation",
+          "purpose": "Navigation section",
+          "layoutPattern": "horizontal bar",
+          "contentSlots": ["logo", "navLinks", "ctaButton"],
+          "interactionNeeds": "stateful",
+          "tokenUsageHints": ["bg-surface-background", "text-surface-foreground"],
+          "confidence": "low"
+        },
+        {
+          "order": 2,
+          "id": "hero-vehicle-signwriting",
+          "name": "HeroVehicleSignwriting",
+          "category": "Hero",
+          "purpose": "Hero section: Vehicle Signwriting",
+          "layoutPattern": "contained",
+          "contentSlots": ["heading", "subheading", "ctaButtons", "backgroundImage"],
+          "interactionNeeds": "none",
+          "tokenUsageHints": ["bg-brand-primary", "text-surface-background"],
+          "confidence": "low"
+        },
+        {
+          "order": 3,
+          "id": "cards-commercial-vehicle-signwriting",
+          "name": "CardsCommercialVehicleSignwriting",
+          "category": "Cards",
+          "purpose": "Cards section: Commercial Vehicle Signwriting",
+          "layoutPattern": "contained",
+          "contentSlots": ["heading", "cards", "cardImages"],
+          "interactionNeeds": "none",
+          "tokenUsageHints": ["bg-surface-background", "text-surface-foreground"],
+          "confidence": "low"
+        },
+        {
+          "order": 4,
+          "id": "content-bring-your-idea-to-life-with-d",
+          "name": "ContentBringYourIdeaToLifeWithD",
+          "category": "Content",
+          "purpose": "Content section: Bring your idea to life with Design Lab",
+          "layoutPattern": "contained",
+          "contentSlots": ["heading", "body", "image"],
+          "interactionNeeds": "none",
+          "tokenUsageHints": ["bg-surface-background", "text-surface-foreground"],
+          "confidence": "low"
+        },
+        {
+          "order": 5,
+          "id": "footer",
+          "name": "Footer",
+          "category": "Footer",
+          "purpose": "Footer section",
+          "layoutPattern": "contained",
+          "contentSlots": ["links", "copyright"],
+          "interactionNeeds": "none",
+          "tokenUsageHints": ["bg-surface-inverse", "text-surface-background"],
+          "confidence": "low"
+        },
+        {
+          "order": 6,
+          "id": "stats-static-and-dynamic-content-edi",
+          "name": "StatsStaticAndDynamicContentEdi",
+          "category": "Stats",
+          "purpose": "Stats section: Static and dynamic content editing",
+          "layoutPattern": "contained",
+          "contentSlots": ["heading", "statItems"],
+          "interactionNeeds": "none",
+          "tokenUsageHints": ["bg-surface-background", "text-surface-foreground"],
+          "confidence": "low"
+        }
+      ]
+    },
+    {
+      "pageType": "custom",
+      "sections": [
+        {
+          "order": 1,
+          "id": "navigation",
+          "name": "Navigation",
+          "category": "Navigation",
+          "purpose": "Navigation section",
+          "layoutPattern": "horizontal bar",
+          "contentSlots": ["logo", "navLinks", "ctaButton"],
+          "interactionNeeds": "stateful",
+          "tokenUsageHints": ["bg-surface-background", "text-surface-foreground"],
+          "confidence": "low"
+        },
+        {
+          "order": 2,
+          "id": "hero-clothing-amp-workwear",
+          "name": "HeroClothingAmpWorkwear",
+          "category": "Hero",
+          "purpose": "Hero section: Clothing &amp; Workwear",
+          "layoutPattern": "contained",
+          "contentSlots": ["heading", "subheading", "ctaButtons", "backgroundImage"],
+          "interactionNeeds": "none",
+          "tokenUsageHints": ["bg-brand-primary", "text-surface-background"],
+          "confidence": "low"
+        },
+        {
+          "order": 3,
+          "id": "cards-all-types-of-work-clothing",
+          "name": "CardsAllTypesOfWorkClothing",
+          "category": "Cards",
+          "purpose": "Cards section: All types of work clothing",
+          "layoutPattern": "contained",
+          "contentSlots": ["heading", "cards", "cardImages"],
+          "interactionNeeds": "none",
+          "tokenUsageHints": ["bg-surface-background", "text-surface-foreground"],
+          "confidence": "low"
+        },
+        {
+          "order": 4,
+          "id": "content-bring-your-idea-to-life-with-d",
+          "name": "ContentBringYourIdeaToLifeWithD",
+          "category": "Content",
+          "purpose": "Content section: Bring your idea to life with Design Lab",
+          "layoutPattern": "contained",
+          "contentSlots": ["heading", "body", "image"],
+          "interactionNeeds": "none",
+          "tokenUsageHints": ["bg-surface-background", "text-surface-foreground"],
+          "confidence": "low"
+        },
+        {
+          "order": 5,
+          "id": "footer",
+          "name": "Footer",
+          "category": "Footer",
+          "purpose": "Footer section",
+          "layoutPattern": "contained",
+          "contentSlots": ["links", "copyright"],
+          "interactionNeeds": "none",
+          "tokenUsageHints": ["bg-surface-inverse", "text-surface-background"],
+          "confidence": "low"
+        },
+        {
+          "order": 6,
+          "id": "stats-static-and-dynamic-content-edi",
+          "name": "StatsStaticAndDynamicContentEdi",
+          "category": "Stats",
+          "purpose": "Stats section: Static and dynamic content editing",
+          "layoutPattern": "contained",
+          "contentSlots": ["heading", "statItems"],
+          "interactionNeeds": "none",
+          "tokenUsageHints": ["bg-surface-background", "text-surface-foreground"],
+          "confidence": "low"
+        }
+      ]
+    }
+  ],
+  "visualTone": {
+    "description": "Bold, professional split layout with standard spacing and high-contrast warm #ED9507 accents",
+    "designSkillHints": {
+      "variance": 8,
+      "density": 5,
+      "motion": 7
+    },
+    "antiPatterns": ["avoid cool blue or green accents"],
+    "referenceDescription": "https://www.designlab-eastbourne.co.uk/ — orion pattern site, 10 pages analysed, 34 sections identified, split hero with standard density"
+  },
+  "constraints": {
+    "tokenOnlyStyling": true,
+    "rscByDefault": true,
+    "noThemeFunctionInCss": true,
+    "imagePlaceholderStrategy": "aspect-ratio-with-muted-bg",
+    "minTextContainerWidth": "max-w-sm",
+    "flexChildMinWidth": true,
+    "testimonialMinWidth": "60%"
+  }
+}

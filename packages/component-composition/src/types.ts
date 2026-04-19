@@ -56,6 +56,8 @@ export interface BaseSectionConfig {
   slots?: Record<string, boolean>;
   layout?: LayoutParams;
   condition?: ConditionConfig;
+  /** Key into the top-level data object whose value is merged over the base data for this section */
+  dataKey?: string;
 }
 
 export interface PageComposition {

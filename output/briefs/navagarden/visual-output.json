@@ -1,0 +1,198 @@
+{
+  "themeConfig": {
+    "colors": {
+      "brand": {
+        "primary": "#DBA746",
+        "primaryHover": "#DBA746",
+        "secondary": "#1E2F4B",
+        "accent": "#DBA746",
+        "onPrimary": "#1E2F4B"
+      },
+      "surface": {
+        "background": "#F9FAFB",
+        "foreground": "#333333",
+        "secondaryForeground": "#1A1A1A",
+        "tertiaryForeground": "#333333",
+        "muted": "#ECE3DC",
+        "mutedForeground": "#595959",
+        "card": "#FFFFFF",
+        "cardBorder": "#E5E7EB",
+        "inverse": "#000000"
+      },
+      "semantic": {
+        "success": "#10b981",
+        "warning": "#f59e0b",
+        "error": "#ef4444",
+        "info": "#3b82f6"
+      },
+      "overlay": {
+        "dark": "rgba(51,51,51,0.7)",
+        "light": "rgba(255,255,255,0.8)",
+        "primary": "rgba(219,167,70,0.8)"
+      }
+    },
+    "typography": {
+      "fontFamily": {
+        "sans": ["Work Sans", "system-ui", "sans-serif"],
+        "heading": ["Audrey", "system-ui", "sans-serif"]
+      },
+      "scale": {
+        "hero": {
+          "size": "160px",
+          "lineHeight": "134px",
+          "letterSpacing": "normal",
+          "weight": 400
+        },
+        "h1": {
+          "size": "160px",
+          "lineHeight": "134px",
+          "letterSpacing": "normal",
+          "weight": 400
+        },
+        "h2": {
+          "size": "39.0625px",
+          "lineHeight": "46.875px",
+          "letterSpacing": "normal",
+          "weight": 500
+        },
+        "h3": {
+          "size": "31.25px",
+          "lineHeight": "37.5px",
+          "letterSpacing": "normal",
+          "weight": 500
+        },
+        "h4": {
+          "size": "25px",
+          "lineHeight": "30px",
+          "letterSpacing": "normal",
+          "weight": 500
+        },
+        "body": {
+          "size": "16px",
+          "lineHeight": "22.4px",
+          "letterSpacing": "normal",
+          "weight": 300
+        }
+      },
+      "headingStyle": "serif",
+      "headingWeight": "bold",
+      "bodyWeight": "normal",
+      "usesInlineColorHighlights": false
+    },
+    "components": {
+      "button": {
+        "fontFamily": "var(--font-sans)",
+        "fontWeight": 500,
+        "borderRadius": "var(--radius-rounded)",
+        "backgroundColor": "var(--color-brand-primary)",
+        "color": "var(--color-brand-on-primary)",
+        "paddingX": "1.5rem",
+        "paddingY": "0.75rem",
+        "hoverBackgroundColor": "var(--color-brand-primary-hover)",
+        "textTransform": "none",
+        "letterSpacing": "normal"
+      },
+      "card": {
+        "borderRadius": "var(--radius-xl)",
+        "backgroundColor": "var(--color-surface-card)",
+        "borderColor": "var(--color-surface-card-border)",
+        "borderWidth": "1px",
+        "boxShadow": "none",
+        "padding": "1.5rem"
+      },
+      "navigation": {
+        "backgroundColor": "var(--color-surface-card)",
+        "textColor": "var(--color-brand-secondary)",
+        "height": "var(--nav-height)",
+        "fontFamily": "var(--font-sans)",
+        "fontWeight": 500,
+        "ctaBackgroundColor": "var(--color-brand-primary)",
+        "ctaTextColor": "var(--color-brand-on-primary)"
+      },
+      "footer": {
+        "backgroundColor": "var(--color-brand-secondary)",
+        "textColor": "var(--color-surface-card)",
+        "accentColor": "var(--color-brand-primary)",
+        "mutedTextColor": "var(--color-surface-muted)"
+      },
+      "hero": {
+        "variant": "split",
+        "textColor": "var(--color-brand-secondary)",
+        "backgroundColor": "var(--color-surface-card)"
+      },
+      "section": {
+        "paddingY": "var(--section-padding-y)",
+        "containerWidth": "var(--container-max-width)"
+      }
+    }
+  },
+  "cssOverrides": "/* Navagarden – site-specific overrides */\n\n:root {\n  --color-brand-primary: var(--color-brand-primary);\n  --color-brand-secondary: var(--color-brand-secondary);\n  --color-brand-accent: var(--color-brand-accent);\n  --color-brand-on-primary: var(--color-brand-on-primary);\n  --color-surface-background: var(--color-surface-background);\n  --color-surface-foreground: var(--color-surface-foreground);\n  --color-surface-muted: var(--color-surface-muted);\n  --color-surface-card: var(--color-surface-card);\n  --color-surface-card-border: var(--color-surface-card-border);\n  --font-heading: var(--font-heading);\n  --font-sans: var(--font-sans);\n  --nav-height: 72px;\n  --section-padding-y: clamp(4rem, 6vw, 6rem);\n  --container-max-width: 80rem;\n  --radius-rounded: 0.375rem;\n  --radius-xl: 0.75rem;\n}\n\nbody {\n  font-family: var(--font-sans);\n  background-color: var(--color-surface-background);\n  color: var(--color-surface-foreground);\n  font-weight: 300;\n}\n\nh1, h2, h3, h4, h5, h6 {\n  font-family: var(--font-heading);\n  color: var(--color-brand-secondary);\n}\n\na {\n  color: var(--color-brand-primary);\n}\n\na:hover {\n  color: var(--color-brand-primary-hover);\n}\n\n.btn-primary {\n  background-color: var(--color-brand-primary);\n  color: var(--color-brand-on-primary);\n  border-radius: var(--radius-rounded);\n  font-family: var(--font-sans);\n  font-weight: 500;\n}\n\n.btn-primary:hover {\n  background-color: var(--color-brand-primary-hover);\n}\n\n.card {\n  background-color: var(--color-surface-card);\n  border: 1px solid var(--color-surface-card-border);\n  border-radius: var(--radius-xl);\n}\n\n.site-nav {\n  background-color: var(--color-surface-card);\n  height: var(--nav-height);\n}\n\n.site-nav a {\n  color: var(--color-brand-secondary);\n  font-family: var(--font-sans);\n  font-weight: 500;\n}\n\n.site-footer {\n  background-color: var(--color-brand-secondary);\n  color: var(--color-surface-card);\n}\n\n.site-footer a {\n  color: var(--color-brand-primary);\n}\n\n.hero-split {\n  background-color: var(--color-surface-card);\n}\n\n.hero-split__text {\n  color: var(--color-brand-secondary);\n}\n\n.section-muted {\n  background-color: var(--color-surface-muted);\n}\n\n.text-accent {\n  color: var(--color-brand-primary);\n}\n\n.overlay-dark {\n  background-color: var(--color-overlay-dark);\n}\n\n.overlay-primary {\n  background-color: var(--color-overlay-primary);\n}",
+  "fontLinks": [
+    "https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600&display=swap"
+  ],
+  "provenance": {
+    "brand.primary": {
+      "source": "computed"
+    },
+    "brand.primaryHover": {
+      "source": "derived"
+    },
+    "brand.secondary": {
+      "source": "derived"
+    },
+    "brand.accent": {
+      "source": "derived"
+    },
+    "brand.onPrimary": {
+      "source": "computed"
+    },
+    "surface.background": {
+      "source": "computed"
+    },
+    "surface.foreground": {
+      "source": "computed"
+    },
+    "surface.card": {
+      "source": "derived"
+    },
+    "surface.muted": {
+      "source": "derived"
+    },
+    "surface.cardBorder": {
+      "source": "derived"
+    },
+    "surface.mutedForeground": {
+      "source": "derived"
+    },
+    "surface.inverse": {
+      "source": "derived"
+    },
+    "typography.fontFamily.sans": {
+      "source": "computed"
+    },
+    "typography.fontFamily.heading": {
+      "source": "computed"
+    },
+    "typography.scale": {
+      "source": "computed"
+    },
+    "typography.headingStyle": {
+      "source": "computed"
+    },
+    "typography.headingWeight": {
+      "source": "computed"
+    },
+    "components.button": {
+      "source": "computed"
+    },
+    "components.card": {
+      "source": "computed"
+    },
+    "components.navigation": {
+      "source": "computed"
+    },
+    "components.footer": {
+      "source": "computed"
+    }
+  }
+}
