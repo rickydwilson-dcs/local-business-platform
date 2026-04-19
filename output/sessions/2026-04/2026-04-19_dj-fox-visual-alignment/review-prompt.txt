@@ -1,0 +1,57 @@
+Visual Fidelity Review: DJ Fox Electrical Test Site (Composition) vs Production
+
+The test site (dj-fox-electrical-test) uses the composition system to render all pages via composable components. The production site (djfoxelectrical.com) uses the Orion theme's page templates directly.
+
+Compare every section of each page against the reference screenshots.
+
+Key fidelity criteria:
+
+1. HERO SECTION
+   - Background image must show with a dark overlay (bg-black/70) — not a light or semi-transparent overlay
+   - Heading and subtext must be visible and white on the dark background
+   - CTA buttons must be visible (btn-primary = red, btn-secondary = outlined white)
+   - Breadcrumbs must appear below the hero text on non-home pages
+
+2. STATS STRIP
+   - Background must be dark/inverse (section-dark-accent)
+   - Stat VALUES (numbers) must be WHITE — not red
+   - Stat labels must be visible (white with reduced opacity)
+   - Noise texture overlay must be visible
+
+3. SERVICES SECTION (HOME)
+   - Must be a 2-column layout: sticky heading on left, list of services on right
+   - Each service row has an arrow icon that animates right on hover
+   - NOT a card grid — it's a divider-separated list
+
+4. LOCATION PILLS SECTION (HOME)
+   - Grid of pill-shaped location buttons (2–3 cols)
+   - Each pill has a right-pointing arrow
+   - Should appear between services and why-choose-us
+
+5. WHY CHOOSE US / FEATURE SECTION (HOME)
+   - Dark background with noise texture
+   - Table-style rows with dividers (not card grid)
+   - Brand-primary color used for accent words in heading
+   - Optional stat values right-aligned
+
+6. CTA SECTION
+   - Home page CTA must be dark background (inverse), NOT solid red/brand
+   - Noise texture overlay should be visible
+
+7. CONTACT PAGE
+   - Contact form area should have dark/inverse background
+   - Light form on dark background, not light-on-light
+
+8. ABOUT PAGE
+   - Stats section uses dark cards with large numbers and icons
+
+9. NOISE TEXTURE
+   - Dark sections throughout site should show the subtle noise texture (noise-overlay class)
+
+10. GENERAL
+    - Header: dark background with logo, navigation, phone number
+    - Footer: dark background, multi-column links
+    - All headings use correct Orion theme typography
+    - Color tokens: brand-primary = red (#cc0000 approx), surface-inverse = dark charcoal
+
+Report all findings as: Critical (breaks page), High (major visual difference), Medium (noticeable difference), Low (minor/cosmetic).
