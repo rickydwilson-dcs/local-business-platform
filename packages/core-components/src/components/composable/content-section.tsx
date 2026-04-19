@@ -51,13 +51,25 @@ export function ContentSection({
       >
         <div className={isCenter ? "text-center" : ""}>
           {slots.showSubheading && d.subheading && (
-            <p className="text-brand-primary mb-3 text-sm font-semibold uppercase tracking-wide">
+            <p
+              data-slot="subheading"
+              className="text-brand-primary mb-3 text-sm font-semibold uppercase tracking-wide"
+            >
               {d.subheading}
             </p>
           )}
-          {d.heading && <h2 className="text-h2 mb-6">{d.heading}</h2>}
+          {d.heading && (
+            <h2 data-slot="heading" className="text-h2 mb-6">
+              {d.heading}
+            </h2>
+          )}
           {d.body && (
-            <p className="text-surface-muted-foreground mb-6 text-lg leading-relaxed">{d.body}</p>
+            <p
+              data-slot="body"
+              className="text-surface-muted-foreground mb-6 text-lg leading-relaxed"
+            >
+              {d.body}
+            </p>
           )}
           {slots.showList && listItems.length > 0 && (
             <ul className="mb-6 space-y-2">
@@ -72,6 +84,7 @@ export function ContentSection({
           {slots.showCta && d.ctaText && (
             <a
               href={d.ctaHref ?? "#"}
+              data-slot="cta"
               className="bg-brand-primary text-brand-on-primary hover:bg-brand-primary-hover inline-block rounded-lg px-6 py-3 font-semibold transition-colors"
             >
               {d.ctaText}

@@ -53,8 +53,14 @@ export function StatsStrip({ slots: slotOverrides, layout, data, className }: St
               key={i}
               className={`px-6 text-center ${slots.showDividers && i < stats.length - 1 ? "border-r border-current/20" : ""}`}
             >
-              <p className="text-brand-primary text-4xl font-bold">{stat.value}</p>
-              {slots.showLabel && stat.label && <p className="mt-1 font-semibold">{stat.label}</p>}
+              <p data-slot="statValue" className="text-brand-primary text-4xl font-bold">
+                {stat.value}
+              </p>
+              {slots.showLabel && stat.label && (
+                <p data-slot="statLabel" className="mt-1 font-semibold">
+                  {stat.label}
+                </p>
+              )}
               {slots.showDescription && stat.description && (
                 <p className="text-surface-muted-foreground mt-1 text-sm">{stat.description}</p>
               )}

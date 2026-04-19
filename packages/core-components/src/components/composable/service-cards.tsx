@@ -58,7 +58,11 @@ export function ServiceCards({ slots: slotOverrides, layout, data, className }: 
   return (
     <section className={`${bg} ${className ?? ""}`} data-component="ServiceCards">
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-        {d.heading && <h2 className="text-h2 mb-4 text-center">{d.heading}</h2>}
+        {d.heading && (
+          <h2 data-slot="heading" className="text-h2 mb-4 text-center">
+            {d.heading}
+          </h2>
+        )}
         {d.subheading && (
           <p className="text-surface-muted-foreground mb-12 text-center text-lg">{d.subheading}</p>
         )}
@@ -85,7 +89,9 @@ export function ServiceCards({ slots: slotOverrides, layout, data, className }: 
                   />
                 </div>
               )}
-              <h3 className="text-h3 mb-2">{service.title}</h3>
+              <h3 data-slot="serviceTitle" className="text-h3 mb-2">
+                {service.title}
+              </h3>
               {slots.showDescription && service.description && (
                 <p className="text-surface-muted-foreground mb-4">{service.description}</p>
               )}

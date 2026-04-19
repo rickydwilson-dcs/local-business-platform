@@ -68,7 +68,11 @@ export function TestimonialGrid({
   return (
     <section className={`${bg} ${className ?? ""}`} data-component="TestimonialGrid">
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-        {d.heading && <h2 className="text-h2 mb-4 text-center">{d.heading}</h2>}
+        {d.heading && (
+          <h2 data-slot="heading" className="text-h2 mb-4 text-center">
+            {d.heading}
+          </h2>
+        )}
         {d.subheading && (
           <p className="text-surface-muted-foreground mb-12 text-center text-lg">{d.subheading}</p>
         )}
@@ -91,7 +95,9 @@ export function TestimonialGrid({
                 </div>
               )}
               {slots.showTitle && t.title && <p className="mb-2 font-semibold">{t.title}</p>}
-              <p className="text-surface-foreground mb-4 italic">&ldquo;{t.text}&rdquo;</p>
+              <p data-slot="quote" className="text-surface-foreground mb-4 italic">
+                &ldquo;{t.text}&rdquo;
+              </p>
               <div className="flex items-center gap-3">
                 {slots.showAvatar && t.avatarInitials && (
                   <div className="bg-brand-primary text-brand-on-primary flex h-10 w-10 items-center justify-center rounded-full text-sm font-semibold">
@@ -99,7 +105,11 @@ export function TestimonialGrid({
                   </div>
                 )}
                 <div>
-                  {slots.showAuthorName && <p className="font-semibold">{t.name}</p>}
+                  {slots.showAuthorName && (
+                    <p data-slot="authorName" className="font-semibold">
+                      {t.name}
+                    </p>
+                  )}
                   {slots.showLocation && t.location && (
                     <p className="text-surface-muted-foreground text-sm">{t.location}</p>
                   )}

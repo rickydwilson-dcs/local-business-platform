@@ -55,13 +55,21 @@ export function ComposableHeroSection({
       >
         <div>
           {slots.showEyebrow && d.eyebrow && (
-            <p className="text-brand-primary mb-4 text-sm font-semibold uppercase tracking-widest">
+            <p
+              data-slot="eyebrow"
+              className="text-brand-primary mb-4 text-sm font-semibold uppercase tracking-widest"
+            >
               {d.eyebrow}
             </p>
           )}
-          <h1 className="text-h1 mb-6">{d.heading ?? ""}</h1>
+          <h1 data-slot="heading" className="text-h1 mb-6">
+            {d.heading ?? ""}
+          </h1>
           {slots.showSubheading && d.subheading && (
-            <p className="text-surface-muted-foreground mb-8 text-xl leading-relaxed">
+            <p
+              data-slot="subheading"
+              className="text-surface-muted-foreground mb-8 text-xl leading-relaxed"
+            >
               {d.subheading}
             </p>
           )}
@@ -81,6 +89,7 @@ export function ComposableHeroSection({
             {slots.showPrimaryCta && d.primaryCtaText && (
               <a
                 href={typeof data.primaryCtaHref === "string" ? data.primaryCtaHref : "#"}
+                data-slot="primaryCta"
                 className="bg-brand-primary text-brand-on-primary hover:bg-brand-primary-hover rounded-lg px-6 py-3 font-semibold transition-colors"
               >
                 {d.primaryCtaText}

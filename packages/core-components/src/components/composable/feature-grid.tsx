@@ -54,10 +54,14 @@ export function FeatureGrid({ slots: slotOverrides, layout, data, className }: F
     <section className={`${bg} ${className ?? ""}`} data-component="FeatureGrid">
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         {slots.showSectionHeading && d.heading && (
-          <h2 className="text-h2 mb-4 text-center">{d.heading}</h2>
+          <h2 data-slot="heading" className="text-h2 mb-4 text-center">
+            {d.heading}
+          </h2>
         )}
         {slots.showSectionIntro && d.intro && (
-          <p className="text-surface-muted-foreground mb-12 text-center text-lg">{d.intro}</p>
+          <p data-slot="intro" className="text-surface-muted-foreground mb-12 text-center text-lg">
+            {d.intro}
+          </p>
         )}
         <div className={`grid gap-8 ${gridCols}`}>
           {features.map((feature, i) => (
@@ -67,7 +71,9 @@ export function FeatureGrid({ slots: slotOverrides, layout, data, className }: F
                   {feature.icon}
                 </div>
               )}
-              <h3 className="text-h3 mb-2">{feature.title}</h3>
+              <h3 data-slot="featureTitle" className="text-h3 mb-2">
+                {feature.title}
+              </h3>
               {slots.showDescriptions && feature.description && (
                 <p className="text-surface-muted-foreground">{feature.description}</p>
               )}
