@@ -20,7 +20,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { getImageUrl } from "@/lib/image";
+import { getImageUrl } from "../../lib/image";
 
 export interface ImageOverlayCardProps {
   imageSrc: string;
