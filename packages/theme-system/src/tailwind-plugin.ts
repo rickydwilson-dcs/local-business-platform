@@ -17,7 +17,7 @@ export function createThemePlugin(
   userConfig: DeepPartialThemeConfig = {},
   options: { selector?: string } = {}
 ) {
-  const selector = options.selector ?? ':root';
+  const selector = options.selector ?? ":root";
 
   // Deep merge user config with defaults
   const config = deepMerge(
@@ -96,6 +96,9 @@ export function createThemePlugin(
         },
         ".text-on-inverse-muted": {
           color: "var(--color-surface-inverse-muted-foreground)",
+        },
+        ".text-surface-inverse-foreground": {
+          color: "#ffffff",
         },
         ".border-surface-subtle": {
           borderColor: "var(--color-surface-subtle-border)",
