@@ -10,6 +10,6 @@ export const ContactSectionSlotsSchema = z
 
 export const ContactSectionLayoutSchema = z
   .object({
-    background: z.enum(["surface", "subtle"]).optional(),
+    background: z.enum(["surface", "subtle", "inverse"]).optional(),
   })
   .strict();

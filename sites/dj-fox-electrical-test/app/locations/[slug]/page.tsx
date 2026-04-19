@@ -136,12 +136,34 @@ export default async function LocationDetailPage({
       ...fm,
       title: fm.title,
       description: fm.description,
-      hero: { image: heroImage, trustBadges: fm.hero?.trustBadges },
+      hero: {
+        heading: `Electricians in ${locationName}`,
+        subheading:
+          (fm as unknown as Record<string, string | undefined>).description ||
+          `Professional electrical services in ${locationName} by ${siteConfig.business.name}.`,
+        eyebrow: locationName,
+        image: heroImage,
+        heroImageSrc: heroImage,
+        trustBadges: (fm.hero as unknown as Record<string, unknown> | undefined)?.trustBadges,
+        breadcrumbs: [
+          { label: "Home", href: "/" },
+          { label: "Locations", href: "/locations" },
+          { label: locationName, href: `/locations/${slug}` },
+        ],
+      },
       heroImage,
       faqs,
       mdxContent: content,
       phone: siteConfig.business.phone,
       phoneDisplay: PHONE_DISPLAY,
+      services: {
+        heading: `Services in ${locationName}`,
+        services: siteConfig.services.slice(0, 6).map((s) => ({
+          title: s.title,
+          description: s.description,
+          href: `/services/${s.slug}`,
+        })),
+      },
     },
   });
 

@@ -52,7 +52,9 @@ export function ContactSection({
   const bg =
     layout?.background === "subtle"
       ? "bg-surface-subtle text-surface-foreground"
-      : "bg-surface-background text-surface-foreground";
+      : layout?.background === "inverse"
+        ? "bg-surface-inverse text-surface-inverse-foreground"
+        : "bg-surface-background text-surface-foreground";
 
   const heading = typeof d.heading === "string" ? d.heading : undefined;
   const subheading = typeof d.subheading === "string" ? d.subheading : undefined;

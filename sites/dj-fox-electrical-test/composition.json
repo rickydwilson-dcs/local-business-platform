@@ -32,11 +32,6 @@
           "dataKey": "home.locationPills"
         },
         {
-          "component": "TestimonialGrid",
-          "dataKey": "reviews",
-          "layout": { "background": "subtle" }
-        },
-        {
           "component": "WhyChooseUsSection",
           "dataKey": "home.whyChooseUs"
         },
@@ -67,12 +62,12 @@
         {
           "component": "StatsStrip",
           "dataKey": "about.stats",
-          "layout": { "background": "subtle" }
+          "layout": { "background": "inverse" }
         },
         {
           "component": "CTASection",
           "dataKey": "home.cta",
-          "layout": { "background": "brand" }
+          "layout": { "background": "inverse" }
         }
       ]
     },
@@ -87,7 +82,7 @@
         {
           "component": "ContactSection",
           "dataKey": "contact",
-          "layout": { "background": "surface" }
+          "layout": { "background": "inverse" }
         },
         {
           "component": "FAQSection",

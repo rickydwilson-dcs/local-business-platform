@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import type { LayoutParams } from "./layout-params";
+import { getImageUrl } from "../../lib/image";
 
 export interface BlogGridSlots {
   showSectionHeading: boolean;
@@ -98,7 +99,7 @@ export function BlogGrid({ slots: slotOverrides, layout, data, className }: Blog
               {post.heroImage && (
                 <div className="relative aspect-video overflow-hidden">
                   <Image
-                    src={post.heroImage}
+                    src={getImageUrl(post.heroImage)}
                     alt={post.title}
                     fill
                     className="object-cover"
