@@ -97,10 +97,18 @@ export const SectionSchema = z.discriminatedUnion("component", [
   ContentSectionSectionSchema,
 ]);
 
+export const LayoutBlockConfigSchema = z.object({
+  component: z.string(),
+  slots: z.record(z.string(), z.boolean()).optional(),
+  dataKey: z.string().optional(),
+});
+
 export const SiteCompositionConfigSchema = z.object({
   version: z.literal("1"),
   siteId: z.string(),
   defaultSlots: z.record(z.string(), z.record(z.string(), z.boolean())).optional(),
+  headerConfig: LayoutBlockConfigSchema.optional(),
+  footerConfig: LayoutBlockConfigSchema.optional(),
   pages: z.array(
     z.object({
       pageType: z.string(),
