@@ -94,7 +94,10 @@ export function ComposableHeroSection({
                   {d.eyebrow}
                 </p>
               )}
-              <h1 data-slot="heading" className="text-h1 mb-6 font-bold tracking-tight text-white">
+              <h1
+                data-slot="heading"
+                className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 text-white"
+              >
                 {d.heading ?? ""}
               </h1>
               {slots.showSubheading && d.subheading && (
@@ -116,7 +119,7 @@ export function ComposableHeroSection({
                   <a
                     href={typeof data.primaryCtaHref === "string" ? data.primaryCtaHref : "#"}
                     data-slot="primaryCta"
-                    className="bg-brand-primary text-brand-on-primary hover:bg-brand-primary-hover rounded-lg px-6 py-3 font-semibold transition-all duration-200 ease-out active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+                    className="btn-primary active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-transparent"
                   >
                     {d.primaryCtaText}
                   </a>
@@ -124,7 +127,7 @@ export function ComposableHeroSection({
                 {slots.showSecondaryCta && d.secondaryCtaText && (
                   <a
                     href={typeof data.secondaryCtaHref === "string" ? data.secondaryCtaHref : "#"}
-                    className="rounded-lg border border-white px-6 py-3 font-semibold text-white transition-all duration-200 ease-out hover:bg-white/10 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+                    className="rounded-lg border border-white px-6 py-3 font-semibold text-white transition-colors hover:bg-white/10 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-transparent"
                   >
                     {d.secondaryCtaText}
                   </a>
@@ -163,11 +166,7 @@ export function ComposableHeroSection({
   }
 
   return (
-    <section
-      className={`relative overflow-hidden ${bg} ${minHeight} ${className ?? ""}`}
-      data-component="HeroSection"
-    >
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 grain-light" />
+    <section className={`${bg} ${minHeight} ${className ?? ""}`} data-component="HeroSection">
       <div
         className={`mx-auto max-w-4xl px-4 py-16 md:py-24 sm:px-6 lg:px-8 ${isSplit ? "grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-center" : isCenter ? "text-center" : ""}`}
       >
@@ -180,7 +179,10 @@ export function ComposableHeroSection({
               {d.eyebrow}
             </p>
           )}
-          <h1 data-slot="heading" className="text-h1 mb-6">
+          <h1
+            data-slot="heading"
+            className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 text-surface-foreground"
+          >
             {d.heading ?? ""}
           </h1>
           {slots.showSubheading && d.subheading && (
@@ -208,7 +210,7 @@ export function ComposableHeroSection({
               <a
                 href={typeof data.primaryCtaHref === "string" ? data.primaryCtaHref : "#"}
                 data-slot="primaryCta"
-                className="bg-brand-primary text-brand-on-primary hover:bg-brand-primary-hover rounded-lg px-6 py-3 font-semibold transition-all duration-200 ease-out active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2 focus-visible:ring-offset-surface-background"
+                className="btn-primary active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2"
               >
                 {d.primaryCtaText}
               </a>
@@ -216,7 +218,7 @@ export function ComposableHeroSection({
             {slots.showSecondaryCta && d.secondaryCtaText && (
               <a
                 href={typeof data.secondaryCtaHref === "string" ? data.secondaryCtaHref : "#"}
-                className="border-brand-primary text-brand-primary hover:bg-brand-primary/10 rounded-lg border px-6 py-3 font-semibold transition-all duration-200 ease-out active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2 focus-visible:ring-offset-surface-background"
+                className="btn-secondary active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2"
               >
                 {d.secondaryCtaText}
               </a>
