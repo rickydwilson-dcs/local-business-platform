@@ -1,3 +1,4 @@
+import { FAQItem } from "./faq-item";
 import type { LayoutParams } from "./layout-params";
 
 export interface FAQSectionSlots {
@@ -55,20 +56,7 @@ export function FAQSection({ slots: slotOverrides, layout, data, className }: FA
         {faqs.length > 0 && (
           <div data-slot="faqs" className="divide-y divide-surface-border">
             {faqs.map((faq, i) => (
-              <details key={i} className="group py-5">
-                <summary className="text-surface-foreground flex cursor-pointer items-center justify-between gap-4 text-lg font-semibold list-none [&::-webkit-details-marker]:hidden">
-                  <span>{faq.question}</span>
-                  <span
-                    aria-hidden="true"
-                    className="text-brand-primary flex-shrink-0 text-2xl leading-none transition-transform group-open:rotate-45"
-                  >
-                    +
-                  </span>
-                </summary>
-                <div className="text-surface-muted-foreground mt-3 leading-relaxed">
-                  {faq.answer}
-                </div>
-              </details>
+              <FAQItem key={i} question={faq.question} answer={faq.answer} index={i} />
             ))}
           </div>
         )}
