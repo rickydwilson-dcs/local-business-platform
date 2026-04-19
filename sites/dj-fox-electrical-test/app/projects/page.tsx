@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import compositionConfig from "../../composition.json";
 import { SiteCompositionConfigSchema, renderComposedPage } from "@platform/component-composition";
 import { siteData } from "@/lib/page-data";
+import { getProjects } from "@/lib/content";
 
 const config = SiteCompositionConfigSchema.parse(compositionConfig);
 
@@ -19,11 +20,25 @@ export const metadata: Metadata = {
   },
 };
 
-export default function ProjectsPage() {
+export default async function ProjectsPage() {
+  const projects = await getProjects();
+  const data = {
+    ...(siteData as unknown as Record<string, unknown>),
+    projects: {
+      ...((siteData as unknown as Record<string, unknown>).projects as Record<string, unknown>),
+      projects: projects.map((p) => ({
+        slug: p.slug,
+        title: p.title,
+        description: p.description,
+        date: p.completionDate,
+        tags: p.services,
+      })),
+    },
+  };
   const { elements } = renderComposedPage({
     composition: config,
     pageType: "projects",
-    data: siteData as unknown as Record<string, unknown>,
+    data,
   });
   return <main className="min-h-screen">{elements}</main>;
 }

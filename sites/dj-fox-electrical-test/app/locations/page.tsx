@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import compositionConfig from "../../composition.json";
 import { SiteCompositionConfigSchema, renderComposedPage } from "@platform/component-composition";
 import { siteData } from "@/lib/page-data";
+import { getLocations } from "@/lib/content";
 
 const config = SiteCompositionConfigSchema.parse(compositionConfig);
 
@@ -18,11 +19,22 @@ export const metadata: Metadata = {
   },
 };
 
-export default function LocationsPage() {
+export default async function LocationsPage() {
+  const locations = await getLocations();
+  const data = {
+    ...(siteData as unknown as Record<string, unknown>),
+    locations: {
+      ...((siteData as unknown as Record<string, unknown>).locations as Record<string, unknown>),
+      features: locations.map((loc) => ({
+        title: loc.title,
+        description: loc.description ?? `Professional electrical services in ${loc.title}.`,
+      })),
+    },
+  };
   const { elements } = renderComposedPage({
     composition: config,
     pageType: "locations",
-    data: siteData as unknown as Record<string, unknown>,
+    data,
   });
   return <main className="min-h-screen">{elements}</main>;
 }
