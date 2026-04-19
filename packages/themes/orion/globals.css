@@ -523,6 +523,38 @@
   @apply text-brand-primary;
 }
 
+/* ==========================================
+     COMPOSABLE SECTION UTILITIES
+     ========================================== */
+
+  .shadow-brand {
+    box-shadow: 0 4px 14px color-mix(in srgb, var(--color-brand-primary) 20%, transparent);
+  }
+
+  .shadow-brand-lg {
+    box-shadow: 0 8px 28px color-mix(in srgb, var(--color-brand-primary) 25%, transparent);
+  }
+
+  .grain-light {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.02'/%3E%3C/svg%3E");
+    background-size: 200px 200px;
+  }
+
+  .card-lift {
+    transition: transform 200ms ease-out, box-shadow 200ms ease-out;
+  }
+  .card-lift:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px color-mix(in srgb, var(--color-brand-primary) 25%, transparent);
+  }
+
+  .press {
+    transition: transform 150ms ease-out;
+  }
+  .press:active {
+    transform: scale(0.98);
+  }
+
 /* Ensure consistent h1 font-size in semantic sectioning elements (Lighthouse) */
 article h1,
 aside h1,
