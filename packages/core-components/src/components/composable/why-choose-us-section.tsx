@@ -57,7 +57,11 @@ export function WhyChooseUsSection({
         {slots.showEyebrow && eyebrow && (
           <p
             data-slot="eyebrow"
-            className="mb-3 text-sm font-semibold uppercase tracking-widest text-brand-primary"
+            className={`mb-3 text-sm font-semibold uppercase tracking-widest ${
+              bg.includes("bg-surface-inverse") || bg.includes("bg-brand-primary")
+                ? "text-white/70"
+                : "text-brand-primary"
+            }`}
           >
             {eyebrow}
           </p>
