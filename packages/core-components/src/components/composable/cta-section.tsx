@@ -49,7 +49,7 @@ export function ComposableCTASection({
       <div
         className={`mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8 ${isCenter ? "text-center" : ""}`}
       >
-        <h2 data-slot="heading" className="text-h2 mb-4">
+        <h2 data-slot="heading" className="text-h2 mb-4 tracking-tight">
           {d.heading ?? ""}
         </h2>
         {slots.showSubheading && d.subheading && (
@@ -65,7 +65,7 @@ export function ComposableCTASection({
             <a
               href={d.primaryCtaHref ?? "#"}
               data-slot="primaryCta"
-              className="bg-brand-primary text-brand-on-primary hover:bg-brand-primary-hover rounded-lg px-8 py-4 font-semibold transition-colors"
+              className={`inline-flex items-center justify-center bg-brand-primary text-brand-on-primary hover:bg-brand-primary-hover rounded-xl px-8 py-4 font-semibold shadow-brand-lg transition-all duration-200 ease-out hover:-translate-y-0.5 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2${layout?.background === "inverse" || layout?.background === "brand" ? " focus-visible:ring-offset-surface-inverse" : ""}`}
             >
               {d.primaryCtaText}
             </a>
@@ -73,14 +73,16 @@ export function ComposableCTASection({
           {slots.showSecondaryCta && d.secondaryCtaText && (
             <a
               href={d.secondaryCtaHref ?? "#"}
-              className="border-brand-primary text-brand-primary hover:bg-brand-primary/10 rounded-lg border px-8 py-4 font-semibold transition-colors"
+              className="inline-flex items-center justify-center border-brand-primary text-brand-primary hover:bg-brand-primary/10 rounded-xl border px-8 py-4 font-semibold transition-all duration-200 ease-out active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2"
             >
               {d.secondaryCtaText}
             </a>
           )}
         </div>
         {slots.showTrustLine && d.trustLine && (
-          <p className="text-surface-muted-foreground mt-6 text-sm">{d.trustLine}</p>
+          <p className="text-surface-muted-foreground mt-8 text-xs uppercase tracking-[0.18em] font-medium">
+            {d.trustLine}
+          </p>
         )}
       </div>
     </section>
