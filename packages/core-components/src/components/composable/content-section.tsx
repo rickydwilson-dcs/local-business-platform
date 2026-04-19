@@ -48,13 +48,13 @@ export function ContentSection({
   return (
     <section className={`${bg} ${minHeight} ${className ?? ""}`} data-component="ContentSection">
       <div
-        className={`mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8 ${isSplit ? "grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-center" : ""}`}
+        className={`mx-auto max-w-4xl px-4 py-16 md:py-24 sm:px-6 lg:px-8 ${isSplit ? "grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-center" : ""}`}
       >
         <div className={isCenter ? "text-center" : ""}>
           {slots.showSubheading && d.subheading && (
             <p
               data-slot="subheading"
-              className="text-brand-primary mb-3 text-sm font-semibold uppercase tracking-wide"
+              className="text-brand-primary mb-3 text-sm font-semibold uppercase tracking-widest"
             >
               {d.subheading}
             </p>

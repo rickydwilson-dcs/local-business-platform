@@ -74,7 +74,7 @@ export function BlogGrid({ slots: slotOverrides, layout, data, className }: Blog
 
   return (
     <section className={`${bg} ${className ?? ""}`} data-component="BlogGrid">
-      <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-4xl px-4 py-16 md:py-24 sm:px-6 lg:px-8">
         {slots.showSectionHeading && (d.heading || d.subheading) && (
           <div className="mb-12 text-center">
             {d.heading && (

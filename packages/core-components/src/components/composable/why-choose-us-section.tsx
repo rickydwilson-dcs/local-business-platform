@@ -52,14 +52,14 @@ export function WhyChooseUsSection({
 
   return (
     <section
-      className={`${bg} noise-overlay py-16 lg:py-24 ${className ?? ""}`}
+      className={`${bg} noise-overlay py-16 md:py-24 ${className ?? ""}`}
       data-component="WhyChooseUsSection"
     >
-      <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         {slots.showEyebrow && eyebrow && (
           <p
             data-slot="eyebrow"
-            className={`mb-3 text-xs font-semibold uppercase tracking-[0.2em] ${
+            className={`mb-3 text-sm font-semibold uppercase tracking-widest ${
               bg.includes("bg-surface-inverse") || bg.includes("bg-brand-primary")
                 ? "text-white/70"
                 : "text-brand-primary"

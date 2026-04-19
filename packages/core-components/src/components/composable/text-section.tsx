@@ -210,7 +210,7 @@ export function TextSection({ slots: slotOverrides, layout, data, className }: T
 
   return (
     <article className={`${bg} ${className ?? ""}`} data-component="TextSection">
-      <div className={`mx-auto ${maxWidth} px-6 py-16`}>
+      <div className={`mx-auto ${maxWidth} px-6 py-16 md:py-24`}>
         {heading && (
           <h1 data-slot="heading" className="text-h1 mb-4">
             {heading}

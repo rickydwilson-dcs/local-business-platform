@@ -55,10 +55,10 @@ export function ServiceListSection({
 
   return (
     <section
-      className={`${bg} py-16 lg:py-24 ${className ?? ""}`}
+      className={`${bg} py-16 md:py-24 ${className ?? ""}`}
       data-component="ServiceListSection"
     >
-      <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         <div className="grid gap-x-12 gap-y-0 items-start md:grid-cols-2">
           <div className="md:sticky md:top-24 pb-8 md:pb-0">
             {slots.showEyebrow && eyebrow && (

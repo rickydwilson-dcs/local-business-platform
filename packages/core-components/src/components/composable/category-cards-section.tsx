@@ -34,7 +34,7 @@ export function CategoryCardsSection({ layout, data, className }: CategoryCardsS
 
   return (
     <section className={`${bg} ${className ?? ""}`} data-component="CategoryCardsSection">
-      <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-4xl px-4 py-16 md:py-24 sm:px-6 lg:px-8">
         {/* Flat shape: heading + cards at top level */}
         {heading && cards.length > 0 && (
           <div>

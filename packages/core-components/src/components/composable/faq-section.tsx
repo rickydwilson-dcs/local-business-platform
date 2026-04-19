@@ -46,7 +46,7 @@ export function FAQSection({ slots: slotOverrides, layout, data, className }: FA
 
   return (
     <section className={`${bg} ${className ?? ""}`} data-component="FAQSection">
-      <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-4xl px-4 py-16 md:py-24 sm:px-6 lg:px-8">
         {slots.showSectionHeading && heading && (
           <h2 data-slot="heading" className="text-h2 mb-10 text-center">
             {heading}

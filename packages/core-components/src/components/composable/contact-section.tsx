@@ -72,7 +72,7 @@ export function ContactSection({
 
   return (
     <section className={`${bg} ${className ?? ""}`} data-component="ContactSection">
-      <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-4xl px-4 py-16 md:py-24 sm:px-6 lg:px-8">
         {(heading || subheading) && (
           <div className="mb-12 text-center">
             {heading && (

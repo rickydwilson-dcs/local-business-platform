@@ -49,7 +49,7 @@ export function StatsStrip({ slots: slotOverrides, layout, data, className }: St
       className={`${bg} ${layout?.background === "inverse" ? "noise-overlay" : ""} ${className ?? ""}`}
       data-component="StatsStrip"
     >
-      <div className={`mx-auto max-w-5xl px-4 ${py} sm:px-6 lg:px-8`}>
+      <div className={`mx-auto max-w-4xl px-4 ${py} sm:px-6 lg:px-8`}>
         <div className={`grid ${gridCols}`}>
           {stats.map((stat, i) => (
             <div
@@ -68,7 +68,7 @@ export function StatsStrip({ slots: slotOverrides, layout, data, className }: St
               {slots.showLabel && stat.label && (
                 <p
                   data-slot="statLabel"
-                  className="mt-1 text-[0.7rem] uppercase tracking-[0.18em] font-medium text-on-inverse-muted"
+                  className="mt-1 text-xs uppercase tracking-widest font-medium text-on-inverse-muted"
                 >
                   {stat.label}
                 </p>

@@ -75,7 +75,7 @@ export function ComposableHeroSection({
             (data.overlayColor as string) === "brand" ? "bg-brand-primary/75" : "bg-black/75"
           }`}
         />
-        <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 py-16 text-white">
+        <div className="relative z-10 container mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-16 md:py-24 text-white">
           <div
             className={
               isSplit
@@ -89,7 +89,7 @@ export function ComposableHeroSection({
               {slots.showEyebrow && d.eyebrow && (
                 <p
                   data-slot="eyebrow"
-                  className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-white/80"
+                  className="mb-3 text-sm font-semibold uppercase tracking-widest text-white/80"
                 >
                   {d.eyebrow}
                 </p>
@@ -169,13 +169,13 @@ export function ComposableHeroSection({
     >
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 grain-light" />
       <div
-        className={`mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8 ${isSplit ? "grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-center" : isCenter ? "text-center" : ""}`}
+        className={`mx-auto max-w-4xl px-4 py-16 md:py-24 sm:px-6 lg:px-8 ${isSplit ? "grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-center" : isCenter ? "text-center" : ""}`}
       >
         <div>
           {slots.showEyebrow && d.eyebrow && (
             <p
               data-slot="eyebrow"
-              className="text-brand-primary mb-4 text-xs font-semibold uppercase tracking-[0.2em]"
+              className="text-brand-primary mb-3 text-sm font-semibold uppercase tracking-widest"
             >
               {d.eyebrow}
             </p>
