@@ -25,6 +25,7 @@ export const COMPONENT_NAMES = [
   "ProjectGrid",
   "PricingTable",
   "TextSection",
+  "CategoryCardsSection",
 ] as const;
 
 export type ComponentName = (typeof COMPONENT_NAMES)[number];
@@ -49,7 +50,7 @@ export interface RenderResult {
 
 export interface LayoutParams {
   columns?: 1 | 2 | 3 | 4;
-  background?: "surface" | "subtle" | "inverse" | "brand" | "muted";
+  background?: "surface" | "subtle" | "inverse" | "brand" | "muted" | "image";
   paddingY?: "compact" | "standard" | "spacious";
   align?: "left" | "center" | "right" | "split";
   maxItems?: number;

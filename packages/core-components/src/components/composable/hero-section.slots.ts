@@ -13,7 +13,7 @@ export const HeroSectionSlotsSchema = z
 
 export const HeroSectionLayoutSchema = z
   .object({
-    background: z.enum(["surface", "subtle", "inverse", "brand", "muted"]).optional(),
+    background: z.enum(["surface", "subtle", "inverse", "brand", "muted", "image"]).optional(),
     align: z.enum(["left", "center", "right", "split"]).optional(),
     fullBleed: z.boolean().optional(),
   })

@@ -1,5 +1,5 @@
 import type React from "react";
-import type { z } from "zod";
+import { z } from "zod";
 import {
   ComposableHeroSection,
   HERO_SECTION_DEFAULT_SLOTS,
@@ -158,5 +158,11 @@ export const COMPONENT_REGISTRY: Record<ComponentName, ComponentDefinition> = {
     defaultSlots: s(TEXT_SECTION_DEFAULT_SLOTS),
     slotsSchema: TextSectionSlotsSchema,
     layoutSchema: TextSectionLayoutSchema,
+  },
+  CategoryCardsSection: {
+    component: (() => null) as unknown as ComponentDefinition["component"],
+    defaultSlots: {},
+    slotsSchema: z.object({}),
+    layoutSchema: z.object({}),
   },
 };

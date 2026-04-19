@@ -44,7 +44,7 @@ const BaseSectionFields = {
 
 export const LayoutParamsSchema = z.object({
   columns: z.union([z.literal(1), z.literal(2), z.literal(3), z.literal(4)]).optional(),
-  background: z.enum(["surface", "subtle", "inverse", "brand", "muted"]).optional(),
+  background: z.enum(["surface", "subtle", "inverse", "brand", "muted", "image"]).optional(),
   paddingY: z.enum(["compact", "standard", "spacious"]).optional(),
   align: z.enum(["left", "center", "right", "split"]).optional(),
   maxItems: z.number().int().positive().optional(),
@@ -150,6 +150,12 @@ const TextSectionSectionSchema = z.object({
   layout: TextSectionLayoutSchema.partial().optional(),
 });
 
+export const CategoryCardsSectionSchema = z.object({
+  ...BaseSectionFields,
+  component: z.literal("CategoryCardsSection"),
+  layout: LayoutParamsSchema.pick({ background: true }).optional(),
+});
+
 export const SectionSchema = z.discriminatedUnion("component", [
   HeroSectionSectionSchema,
   ServiceCardsSectionSchema,
@@ -165,6 +171,7 @@ export const SectionSchema = z.discriminatedUnion("component", [
   ProjectGridSectionSchema,
   PricingTableSectionSchema,
   TextSectionSectionSchema,
+  CategoryCardsSectionSchema,
 ]);
 
 export const LayoutBlockConfigSchema = z.object({
