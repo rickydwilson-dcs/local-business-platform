@@ -46,36 +46,36 @@ export function StatsStrip({ slots: slotOverrides, layout, data, className }: St
 
   return (
     <section
-      className={`${bg} ${layout?.background === "inverse" ? "noise-overlay" : ""} ${className ?? ""}`}
+      className={`${bg} ${layout?.background === "inverse" || layout?.background === "brand" ? "noise-overlay" : ""} border-b border-surface-border ${className ?? ""}`}
       data-component="StatsStrip"
     >
-      <div className={`mx-auto max-w-4xl px-4 ${py} sm:px-6 lg:px-8`}>
-        <div className={`grid ${gridCols}`}>
+      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <div className={`grid ${gridCols} divide-x divide-surface-border`}>
           {stats.map((stat, i) => (
-            <div
-              key={i}
-              className={`px-6 text-center ${slots.showDividers && i < stats.length - 1 ? `border-r ${layout?.background === "inverse" ? "border-white/15" : "border-surface-card-border"}` : ""}`}
-            >
-              {slots.showDividers && (
-                <div aria-hidden="true" className="mx-auto mb-3 h-[2px] w-8 bg-brand-primary" />
-              )}
-              <p
-                data-slot="statValue"
-                className={`text-4xl sm:text-5xl font-extrabold tracking-tight tabular-nums stat-value ${layout?.background === "inverse" ? "text-white" : "text-brand-primary"}`}
-              >
-                {stat.value}
-              </p>
-              {slots.showLabel && stat.label && (
+            <div key={i} className="flex items-center gap-4 px-6 py-8">
+              <div>
                 <p
-                  data-slot="statLabel"
-                  className="mt-1 text-xs uppercase tracking-widest font-medium text-on-inverse-muted"
+                  data-slot="statValue"
+                  className={`text-xl font-bold tracking-tight stat-value ${layout?.background === "inverse" ? "text-white" : "text-brand-primary"}`}
                 >
-                  {stat.label}
+                  {stat.value}
                 </p>
-              )}
-              {slots.showDescription && stat.description && (
-                <p className="text-surface-muted-foreground mt-1 text-sm">{stat.description}</p>
-              )}
+                {slots.showLabel && stat.label && (
+                  <p
+                    data-slot="statLabel"
+                    className={`mt-1 text-xs uppercase tracking-widest ${layout?.background === "inverse" ? "text-on-inverse-muted" : "text-surface-muted-foreground"}`}
+                  >
+                    {stat.label}
+                  </p>
+                )}
+                {slots.showDescription && stat.description && (
+                  <p
+                    className={`mt-1 text-sm ${layout?.background === "inverse" ? "text-on-inverse-muted" : "text-surface-muted-foreground"}`}
+                  >
+                    {stat.description}
+                  </p>
+                )}
+              </div>
             </div>
           ))}
         </div>
