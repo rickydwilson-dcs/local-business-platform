@@ -37,7 +37,7 @@ export function FAQSection({ slots: slotOverrides, layout, data, className }: FA
 
   const bg =
     layout?.background === "inverse"
-      ? "bg-surface-inverse text-surface-inverse-foreground"
+      ? "bg-surface-inverse text-white"
       : layout?.background === "brand"
         ? "bg-brand-primary text-brand-on-primary"
         : layout?.background === "subtle"

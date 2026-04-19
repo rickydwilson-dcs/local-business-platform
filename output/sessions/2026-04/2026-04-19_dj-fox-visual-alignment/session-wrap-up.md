@@ -40,9 +40,9 @@ Ran `pipeline.validate-site` across 11 pages. All 200 OK. Playwright console sca
 
 - A11Y-002 (WhyChooseUsSection eyebrow contrast WCAG AA failure) → fixed, committed as `f34aa1e`
 
-**Findings deferred:**
+**Findings resolved as follow-on:**
 
-- A11Y-001 (FAQSection `<details>/<summary>` not announced by VoiceOver) — medium effort structural refactor, tracked as follow-on
+- A11Y-001 (FAQSection `<details>/<summary>` not announced by VoiceOver) → fixed, committed as `344ee38`
 
 ## Key Decisions
 
@@ -53,6 +53,7 @@ Ran `pipeline.validate-site` across 11 pages. All 200 OK. Playwright console sca
 ## Commits This Session
 
 ```
+344ee38 fix(composable): replace details/summary with aria-expanded button accordion in FAQSection
 f34aa1e fix(composable): fix WhyChooseUsSection eyebrow contrast on dark backgrounds
 16e6ec3 fix(composition): render MDX content in ContentSection and fix detail page hero data
 59cbb37 fix(dj-fox-test): page-specific visual alignment fixes from comparison review
@@ -65,23 +66,25 @@ df033a6 feat(dj-fox-test): wire ServiceListSection, LocationPillsSection, WhyCho
 
 ## Significant Files Changed
 
-| File                                                                            | Change                                     |
-| ------------------------------------------------------------------------------- | ------------------------------------------ |
-| `packages/core-components/src/components/composable/service-list-section.tsx`   | NEW                                        |
-| `packages/core-components/src/components/composable/location-pills-section.tsx` | NEW                                        |
-| `packages/core-components/src/components/composable/why-choose-us-section.tsx`  | NEW + A11Y fix                             |
-| `packages/core-components/src/components/composable/content-section.tsx`        | MDX content slot added                     |
-| `packages/core-components/src/components/composable/blog-grid.tsx`              | getImageUrl fix                            |
-| `packages/core-components/src/components/composable/contact-section.tsx`        | inverse bg case                            |
-| `packages/component-composition/src/types.ts`                                   | 3 new component names                      |
-| `packages/component-composition/src/schemas.ts`                                 | 3 new section schemas                      |
-| `packages/component-composition/src/registry.ts`                                | 3 new registry entries                     |
-| `sites/dj-fox-electrical-test/composition.json`                                 | home/about/contact wiring                  |
-| `sites/dj-fox-electrical-test/lib/page-data.ts`                                 | serviceList/locationPills/whyChooseUs data |
-| `sites/dj-fox-electrical-test/app/services/[slug]/page.tsx`                     | full hero + mdxContent fix                 |
-| `sites/dj-fox-electrical-test/app/locations/[slug]/page.tsx`                    | full hero + scoped services fix            |
-| `sites/dj-fox-electrical-test/app/blog/[slug]/page.tsx`                         | full hero + mdxContent fix                 |
-| `sites/dj-fox-electrical-test/app/projects/[slug]/page.tsx`                     | full hero + mdxContent fix                 |
+| File                                                                            | Change                                         |
+| ------------------------------------------------------------------------------- | ---------------------------------------------- |
+| `packages/core-components/src/components/composable/service-list-section.tsx`   | NEW                                            |
+| `packages/core-components/src/components/composable/location-pills-section.tsx` | NEW                                            |
+| `packages/core-components/src/components/composable/why-choose-us-section.tsx`  | NEW + A11Y fix                                 |
+| `packages/core-components/src/components/composable/faq-item.tsx`               | NEW — client accordion item with aria-expanded |
+| `packages/core-components/src/components/composable/faq-section.tsx`            | MODIFY — swap details/summary for FAQItem      |
+| `packages/core-components/src/components/composable/content-section.tsx`        | MDX content slot added                         |
+| `packages/core-components/src/components/composable/blog-grid.tsx`              | getImageUrl fix                                |
+| `packages/core-components/src/components/composable/contact-section.tsx`        | inverse bg case                                |
+| `packages/component-composition/src/types.ts`                                   | 3 new component names                          |
+| `packages/component-composition/src/schemas.ts`                                 | 3 new section schemas                          |
+| `packages/component-composition/src/registry.ts`                                | 3 new registry entries                         |
+| `sites/dj-fox-electrical-test/composition.json`                                 | home/about/contact wiring                      |
+| `sites/dj-fox-electrical-test/lib/page-data.ts`                                 | serviceList/locationPills/whyChooseUs data     |
+| `sites/dj-fox-electrical-test/app/services/[slug]/page.tsx`                     | full hero + mdxContent fix                     |
+| `sites/dj-fox-electrical-test/app/locations/[slug]/page.tsx`                    | full hero + scoped services fix                |
+| `sites/dj-fox-electrical-test/app/blog/[slug]/page.tsx`                         | full hero + mdxContent fix                     |
+| `sites/dj-fox-electrical-test/app/projects/[slug]/page.tsx`                     | full hero + mdxContent fix                     |
 
 ## What Was Learned
 
@@ -90,6 +93,5 @@ df033a6 feat(dj-fox-test): wire ServiceListSection, LocationPillsSection, WhyCho
 
 ## Follow-On Items
 
-- A11Y-001: FAQSection VoiceOver disclosure button refactor (medium effort, tracked in session findings)
 - PERF-001 to PERF-006: Unnecessary `'use client'` directives in some composable components (low priority)
 - Merge `feature/dj-fox-composition-migration` → `develop` when sign-off complete

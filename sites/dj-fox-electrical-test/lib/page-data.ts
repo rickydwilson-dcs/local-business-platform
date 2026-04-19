@@ -36,8 +36,8 @@ const footerServices = siteConfig.services
 const priorityLocationSlugs = [
   "eastbourne",
   "hastings",
-  "bexhill-on-sea",
-  "brighton",
+  "bexhill",
+  "brighton-hove",
   "lewes",
   "hailsham",
 ];
@@ -135,7 +135,7 @@ export const siteData = {
       heroImage: "djfoxelectrical/hero/hero-electrician-work.jpg",
       heroImageSrc: "djfoxelectrical/hero/hero-electrician-work.jpg",
       heroImageAlt: "Electrician working on a consumer unit",
-      overlayColor: "brand",
+      overlayColor: "dark",
       trustBadges: ["NICEIC Approved", "Part P Registered", "TrustMark Endorsed"],
     },
 

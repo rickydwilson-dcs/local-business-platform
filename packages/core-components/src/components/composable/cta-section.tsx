@@ -32,7 +32,7 @@ export function ComposableCTASection({
 
   const bg =
     layout?.background === "inverse"
-      ? "bg-surface-inverse text-surface-inverse-foreground"
+      ? "bg-surface-inverse text-white"
       : layout?.background === "brand"
         ? "bg-brand-primary text-brand-on-primary"
         : layout?.background === "subtle"
@@ -55,7 +55,7 @@ export function ComposableCTASection({
         {slots.showSubheading && d.subheading && (
           <p
             data-slot="subheading"
-            className={`mb-8 text-xl ${layout?.background === "brand" ? "text-brand-on-primary" : layout?.background === "inverse" ? "text-surface-inverse-foreground opacity-80" : "text-surface-muted-foreground"}`}
+            className={`mb-8 text-xl ${layout?.background === "brand" ? "text-brand-on-primary" : layout?.background === "inverse" ? "text-white opacity-80" : "text-surface-muted-foreground"}`}
           >
             {d.subheading}
           </p>

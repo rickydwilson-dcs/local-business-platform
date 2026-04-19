@@ -40,7 +40,7 @@ export function ComposableHeroSection({
 
   const bg =
     layout?.background === "inverse"
-      ? "bg-surface-inverse text-surface-inverse-foreground"
+      ? "bg-surface-inverse text-white"
       : layout?.background === "brand"
         ? "bg-brand-primary text-brand-on-primary"
         : layout?.background === "subtle"
@@ -162,7 +162,7 @@ export function ComposableHeroSection({
   return (
     <section className={`${bg} ${minHeight} ${className ?? ""}`} data-component="HeroSection">
       <div
-        className={`mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 ${isSplit ? "grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-center" : isCenter ? "text-center" : ""}`}
+        className={`mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8 ${isSplit ? "grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-center" : isCenter ? "text-center" : ""}`}
       >
         <div>
           {slots.showEyebrow && d.eyebrow && (

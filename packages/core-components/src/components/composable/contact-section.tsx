@@ -53,7 +53,7 @@ export function ContactSection({
     layout?.background === "subtle"
       ? "bg-surface-subtle text-surface-foreground"
       : layout?.background === "inverse"
-        ? "bg-surface-inverse text-surface-inverse-foreground"
+        ? "bg-surface-inverse text-white"
         : "bg-surface-background text-surface-foreground";
 
   const heading = typeof d.heading === "string" ? d.heading : undefined;
@@ -72,7 +72,7 @@ export function ContactSection({
 
   return (
     <section className={`${bg} ${className ?? ""}`} data-component="ContactSection">
-      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
         {(heading || subheading) && (
           <div className="mb-12 text-center">
             {heading && (

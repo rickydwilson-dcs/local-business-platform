@@ -38,9 +38,7 @@
         },
         {
           "component": "WhyChooseUsSection",
-          "dataKey": "home.whyChooseUs",
-          "slots": { "showStat": false },
-          "layout": { "background": "surface" }
+          "dataKey": "home.whyChooseUs"
         },
         {
           "component": "CTASection",

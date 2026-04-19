@@ -67,8 +67,8 @@ export function OrionFooter({
           {/* Column 2: Services */}
           {showServices && services.length > 0 && (
             <div>
-              <h3 className="text-sm sm:text-base font-semibold mb-4 text-white">Our Services</h3>
-              <ul className="space-y-2 text-surface-muted-foreground text-sm sm:text-base">
+              <h3 className="text-xs sm:text-sm font-semibold mb-4 text-white">Our Services</h3>
+              <ul className="space-y-2 text-surface-muted-foreground text-xs sm:text-sm">
                 {services.map((service) => (
                   <li key={service.slug}>
                     <Link
@@ -96,8 +96,8 @@ export function OrionFooter({
           {/* Column 3: Locations */}
           {showLocations && locations.length > 0 && (
             <div>
-              <h3 className="text-sm sm:text-base font-semibold mb-4 text-white">Service Areas</h3>
-              <ul className="space-y-2 text-surface-muted-foreground text-sm sm:text-base">
+              <h3 className="text-xs sm:text-sm font-semibold mb-4 text-white">Service Areas</h3>
+              <ul className="space-y-2 text-surface-muted-foreground text-xs sm:text-sm">
                 {locations.map((location) => (
                   <li key={location.slug}>
                     <Link
@@ -124,8 +124,8 @@ export function OrionFooter({
 
           {/* Column 4: Contact */}
           <div>
-            <h3 className="text-sm sm:text-base font-semibold mb-4 text-white">Contact Info</h3>
-            <div className="space-y-3 text-surface-muted-foreground text-sm sm:text-base">
+            <h3 className="text-xs sm:text-sm font-semibold mb-4 text-white">Contact Info</h3>
+            <div className="space-y-3 text-surface-muted-foreground text-xs sm:text-sm">
               <div className="flex items-center gap-2">
                 <Phone
                   className="h-3 w-3 sm:h-4 sm:w-4 text-brand-primary flex-shrink-0"

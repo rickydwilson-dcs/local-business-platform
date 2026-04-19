@@ -51,7 +51,7 @@ export function ImageGridSection({
 
   return (
     <section className={`${bg} ${className ?? ""}`} data-component="ImageGridSection">
-      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
         {d.heading && (
           <h2 data-slot="heading" className="text-h2 mb-12 text-center">
             {d.heading}

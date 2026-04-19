@@ -33,7 +33,7 @@ export function FeatureGrid({ slots: slotOverrides, layout, data, className }: F
 
   const bg =
     layout?.background === "inverse"
-      ? "bg-surface-inverse text-surface-inverse-foreground"
+      ? "bg-surface-inverse text-white"
       : layout?.background === "brand"
         ? "bg-brand-primary text-brand-on-primary"
         : layout?.background === "subtle"
@@ -55,7 +55,7 @@ export function FeatureGrid({ slots: slotOverrides, layout, data, className }: F
       className={`${bg} ${layout?.background === "inverse" ? "noise-overlay" : ""} ${className ?? ""}`}
       data-component="FeatureGrid"
     >
-      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
         {slots.showSectionHeading && d.heading && (
           <h2 data-slot="heading" className="text-h2 mb-4 text-center">
             {d.heading}
@@ -81,7 +81,7 @@ export function FeatureGrid({ slots: slotOverrides, layout, data, className }: F
                 <p
                   className={
                     layout?.background === "inverse"
-                      ? "text-surface-inverse-foreground opacity-80"
+                      ? "text-white opacity-80"
                       : "text-surface-muted-foreground"
                   }
                 >

@@ -33,6 +33,8 @@ export function WhyChooseUsSection({
 }: WhyChooseUsSectionProps) {
   const slots = { ...WHY_CHOOSE_US_SECTION_DEFAULT_SLOTS, ...slotOverrides };
 
+  const isDark =
+    layout?.background === "brand" || !layout?.background || layout?.background === "inverse";
   const bg =
     layout?.background === "brand"
       ? "bg-brand-primary"
@@ -53,7 +55,7 @@ export function WhyChooseUsSection({
       className={`${bg} noise-overlay py-16 lg:py-24 ${className ?? ""}`}
       data-component="WhyChooseUsSection"
     >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         {slots.showEyebrow && eyebrow && (
           <p
             data-slot="eyebrow"
@@ -66,7 +68,10 @@ export function WhyChooseUsSection({
             {eyebrow}
           </p>
         )}
-        <h2 data-slot="heading" className="text-h2 mb-16 text-white">
+        <h2
+          data-slot="heading"
+          className={`text-h2 mb-16 ${isDark ? "text-white" : "text-surface-foreground"}`}
+        >
           {heading}
           {slots.showHeadingHighlight && headingHighlight && (
             <>
@@ -80,14 +85,22 @@ export function WhyChooseUsSection({
           {items.map((item, i) => (
             <div
               key={i}
-              className="grid items-center gap-6 border-b border-surface-border py-8 md:grid-cols-[2fr_3fr_1fr]"
+              className={`grid items-center gap-6 border-b border-surface-border py-8 ${slots.showStat ? "md:grid-cols-[2fr_3fr_1fr]" : "md:grid-cols-[2fr_3fr]"}`}
             >
-              <h3 className="text-base font-semibold text-white">{item.title}</h3>
-              <p className="text-sm leading-relaxed text-on-inverse-muted">{item.body}</p>
+              <h3
+                className={`text-base font-semibold ${isDark ? "text-white" : "text-surface-foreground"}`}
+              >
+                {item.title}
+              </h3>
+              <p
+                className={`text-sm leading-relaxed ${isDark ? "text-on-inverse-muted" : "text-surface-muted-foreground"}`}
+              >
+                {item.body}
+              </p>
               {slots.showStat && item.stat && (
                 <p
                   data-slot="stat"
-                  className="font-mono text-xs uppercase tracking-widest text-on-inverse-muted md:text-right"
+                  className={`font-mono text-xs uppercase tracking-widest md:text-right ${isDark ? "text-on-inverse-muted" : "text-surface-muted-foreground"}`}
                 >
                   {item.stat}
                 </p>

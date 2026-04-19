@@ -161,7 +161,7 @@ export function LocationsDropdown({
         onClick={() => setIsOpen(!isOpen)}
         className={
           buttonClassName ??
-          `flex items-center gap-1 ${buttonTextColor} hover:text-brand-primary transition-colors font-medium`
+          `text-xs flex items-center gap-1 ${buttonTextColor} hover:text-brand-primary transition-colors font-medium`
         }
         aria-expanded={isOpen}
         aria-haspopup="menu"
@@ -186,6 +186,7 @@ export function LocationsDropdown({
             id="locations-dropdown-menu"
             counties={counties}
             maxTownsPerCounty={maxTownsPerCounty}
+            variant={variant}
             onClose={() => setIsOpen(false)}
           />
         ) : (
@@ -258,24 +259,35 @@ function MegaMenuDropdown({
   id,
   counties,
   maxTownsPerCounty,
+  variant = "light",
   onClose,
 }: {
   id: string;
   counties: CountyGroup[];
   maxTownsPerCounty: number;
+  variant?: "dark" | "light";
   onClose: () => void;
 }) {
+  const isDark = variant === "dark";
   return (
     <div
       id={id}
       role="menu"
-      className="absolute top-full left-0 mt-2 w-[900px] max-w-[90vw] bg-surface-card border border-surface-subtle rounded-lg shadow-xl z-50"
+      className={`absolute top-full left-0 mt-2 w-[900px] max-w-[90vw] rounded-lg shadow-xl z-50 border ${
+        isDark ? "bg-surface-inverse border-white/10" : "bg-surface-card border-surface-subtle"
+      }`}
     >
       <div className="p-4 md:p-6">
         {/* Header */}
         <div className="mb-4 md:mb-6">
-          <h3 className="text-lg font-semibold text-surface-foreground mb-2">Our Coverage Areas</h3>
-          <p className="text-sm text-surface-foreground">Professional services across the region</p>
+          <h3
+            className={`text-lg font-semibold mb-2 ${isDark ? "text-white" : "text-surface-foreground"}`}
+          >
+            Our Coverage Areas
+          </h3>
+          <p className={`text-sm ${isDark ? "text-white/60" : "text-surface-foreground"}`}>
+            Professional services across the region
+          </p>
         </div>
 
         {/* Counties Grid */}
@@ -286,7 +298,9 @@ function MegaMenuDropdown({
               <Link
                 href={county.href}
                 role="menuitem"
-                className="block text-base font-semibold text-brand-primary hover:text-brand-primary-hover transition-colors border-b border-surface-subtle pb-2"
+                className={`block text-base font-semibold text-brand-primary hover:text-brand-primary-hover transition-colors pb-2 border-b ${
+                  isDark ? "border-white/10" : "border-surface-subtle"
+                }`}
                 onClick={onClose}
               >
                 {county.name}
@@ -301,8 +315,8 @@ function MegaMenuDropdown({
                       role="menuitem"
                       className={`block text-sm transition-colors ${
                         town.isRichContent
-                          ? "text-surface-foreground font-medium hover:text-brand-primary"
-                          : "text-surface-foreground hover:text-surface-foreground"
+                          ? `font-medium hover:text-brand-primary ${isDark ? "text-white/80" : "text-surface-foreground"}`
+                          : `hover:text-brand-primary ${isDark ? "text-white/60" : "text-surface-foreground"}`
                       }`}
                       onClick={onClose}
                     >
@@ -322,9 +336,11 @@ function MegaMenuDropdown({
         </div>
 
         {/* Footer */}
-        <div className="mt-6 md:mt-8 pt-4 md:pt-6 border-t border-surface-subtle">
+        <div
+          className={`mt-6 md:mt-8 pt-4 md:pt-6 border-t ${isDark ? "border-white/10" : "border-surface-subtle"}`}
+        >
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 md:gap-0">
-            <p className="text-sm text-surface-foreground">
+            <p className={`text-sm ${isDark ? "text-white/60" : "text-surface-foreground"}`}>
               Can&apos;t find your area? We cover the entire region.
             </p>
             <Link

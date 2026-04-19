@@ -34,7 +34,7 @@ export function LocationPillsSection({
 
   const bg =
     layout?.background === "inverse"
-      ? "bg-surface-inverse text-surface-inverse-foreground"
+      ? "bg-surface-inverse text-white"
       : layout?.background === "brand"
         ? "bg-brand-primary text-brand-on-primary"
         : layout?.background === "subtle"
@@ -52,7 +52,7 @@ export function LocationPillsSection({
       className={`${bg} py-16 lg:py-24 ${className ?? ""}`}
       data-component="LocationPillsSection"
     >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
           <div>
             {slots.showEyebrow && eyebrow && (

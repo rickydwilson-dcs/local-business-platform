@@ -59,7 +59,7 @@ export function BlogGrid({ slots: slotOverrides, layout, data, className }: Blog
 
   const bg =
     layout?.background === "inverse"
-      ? "bg-surface-inverse text-surface-inverse-foreground"
+      ? "bg-surface-inverse text-white"
       : layout?.background === "subtle"
         ? "bg-surface-subtle text-surface-foreground"
         : "bg-surface-background text-surface-foreground";
@@ -74,7 +74,7 @@ export function BlogGrid({ slots: slotOverrides, layout, data, className }: Blog
 
   return (
     <section className={`${bg} ${className ?? ""}`} data-component="BlogGrid">
-      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
         {slots.showSectionHeading && (d.heading || d.subheading) && (
           <div className="mb-12 text-center">
             {d.heading && (
