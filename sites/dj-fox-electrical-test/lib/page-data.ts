@@ -133,6 +133,9 @@ export const siteData = {
       secondaryCtaText: "Our Services",
       secondaryCtaHref: "/services",
       heroImage: "djfoxelectrical/hero/hero-electrician-work.jpg",
+      heroImageSrc: "djfoxelectrical/hero/hero-electrician-work.jpg",
+      heroImageAlt: "Electrician working on a consumer unit",
+      overlayColor: "brand",
       trustBadges: ["NICEIC Approved", "Part P Registered", "TrustMark Endorsed"],
     },
 
@@ -327,6 +330,9 @@ export const siteData = {
       title: s.title,
     })),
 
+    services: siteConfig.services.map((s) => ({ slug: s.slug, title: s.title })),
+    serviceAreas: (siteConfig.serviceAreaRegions?.[0]?.towns ?? []).map((t) => t.name),
+
     faqs: {
       heading: "Frequently asked questions",
       phoneDisplay: PHONE_DISPLAY,
@@ -417,6 +423,13 @@ export const siteData = {
         category: "Repair",
         title: "Repair & Emergency",
         href: "#repair-services",
+      },
+    ],
+
+    categoryGroups: [
+      {
+        heading: "Electrical Services",
+        cards: allServiceCards,
       },
     ],
   },

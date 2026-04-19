@@ -15,7 +15,8 @@
       "sections": [
         {
           "component": "HeroSection",
-          "dataKey": "home.hero"
+          "dataKey": "home.hero",
+          "layout": { "background": "image", "fullBleed": true }
         },
         {
           "component": "StatsStrip",
@@ -106,6 +107,11 @@
           "component": "ServiceCards",
           "dataKey": "services",
           "layout": { "columns": 3 }
+        },
+        {
+          "component": "CategoryCardsSection",
+          "dataKey": "services.categoryGroups",
+          "layout": { "background": "surface" }
         },
         {
           "component": "CTASection",
