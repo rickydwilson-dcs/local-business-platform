@@ -24,9 +24,12 @@
           "layout": { "background": "inverse" }
         },
         {
-          "component": "ServiceCards",
-          "dataKey": "home.services",
-          "layout": { "columns": 3 }
+          "component": "ServiceListSection",
+          "dataKey": "home.serviceList"
+        },
+        {
+          "component": "LocationPillsSection",
+          "dataKey": "home.locationPills"
         },
         {
           "component": "TestimonialGrid",
@@ -34,9 +37,8 @@
           "layout": { "background": "subtle" }
         },
         {
-          "component": "FeatureGrid",
-          "dataKey": "home.whyChooseUs",
-          "layout": { "columns": 4, "background": "inverse" }
+          "component": "WhyChooseUsSection",
+          "dataKey": "home.whyChooseUs"
         },
         {
           "component": "CTASection",

@@ -153,6 +153,30 @@ export const siteData = {
       services: topServicesForHome,
     },
 
+    serviceList: {
+      eyebrow: "What We Do",
+      heading: "Our Services",
+      description: `Professional electrical services for homes and businesses across ${siteConfig.business.address.city} and surrounding areas.`,
+      ctaText: "View all services",
+      ctaHref: "/services",
+      items: siteConfig.services.slice(0, 8).map((s) => ({
+        title: s.title,
+        description: s.description,
+        href: `/services/${s.slug}`,
+      })),
+    },
+
+    locationPills: {
+      eyebrow: "Coverage",
+      heading: "Areas We Serve",
+      ctaText: "View All Locations",
+      ctaHref: "/locations",
+      items: priorityLocationCards.map((loc) => ({
+        title: loc.title,
+        href: `/locations/${loc.slug}`,
+      })),
+    },
+
     categories: {
       heading: "Check Your Needs",
       subheading: "From new installations to emergency repairs, we cover all your requirements",
@@ -187,32 +211,29 @@ export const siteData = {
     },
 
     whyChooseUs: {
-      heading: `Why Choose ${siteConfig.business.name}`,
-      intro: "Certified expertise, rapid response, and customer-first service.",
-      features: [
+      eyebrow: "Why Us",
+      heading: "Why Choose",
+      headingHighlight: siteConfig.business.name,
+      items: [
         {
-          icon: "🛡️",
           title: "NICEIC Approved",
-          description:
-            "Fully certified and approved contractor, ensuring all work meets the highest safety standards and building regulations.",
+          body: "Fully certified and approved contractor, ensuring all work meets the highest safety standards and building regulations.",
+          stat: "Certified",
         },
         {
-          icon: "🏆",
           title: "15+ years experience",
-          description:
-            "Over 15 years of professional electrical experience serving homes and businesses across East Sussex.",
+          body: "Over 15 years of professional electrical experience serving homes and businesses across East Sussex.",
+          stat: "Since 2009",
         },
         {
-          icon: "⏰",
           title: "24/7 emergency service",
-          description:
-            "Round-the-clock emergency callout service for urgent electrical issues that cannot wait until morning.",
+          body: "Round-the-clock emergency callout service for urgent electrical issues that cannot wait until morning.",
+          stat: "Always on",
         },
         {
-          icon: "👥",
           title: "1,000+ jobs completed",
-          description:
-            "Customer-focused service with a commitment to quality workmanship and complete satisfaction on every job.",
+          body: "Customer-focused service with a commitment to quality workmanship and complete satisfaction on every job.",
+          stat: "1,000+",
         },
       ],
     },
