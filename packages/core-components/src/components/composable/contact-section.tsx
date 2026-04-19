@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Phone, Mail, MapPin, Clock, ArrowRight } from "lucide-react";
+import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import type { LayoutParams } from "./layout-params";
 import { ContactForm } from "../ui/contact-form";
 
@@ -72,11 +72,14 @@ export function ContactSection({
 
   return (
     <section className={`${bg} ${className ?? ""}`} data-component="ContactSection">
-      <div className="mx-auto max-w-4xl px-4 py-16 md:py-24 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-16 md:py-24">
         {(heading || subheading) && (
           <div className="mb-12 text-center">
             {heading && (
-              <h2 data-slot="heading" className="text-h2 mb-4">
+              <h2
+                data-slot="heading"
+                className="text-3xl md:text-4xl font-bold tracking-tight mb-4"
+              >
                 {heading}
               </h2>
             )}
@@ -88,119 +91,160 @@ export function ContactSection({
           </div>
         )}
 
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-[3fr_2fr]">
-          {/* Left: Contact Form */}
-          <div data-slot="contactForm">
-            <ContactForm services={services} serviceAreas={serviceAreas} />
+        <div className="grid grid-cols-1 md:grid-cols-[3fr_2fr] gap-12 items-start">
+          {/* Left: Contact Form in dark card */}
+          <div data-slot="contactForm" className="bg-surface-inverse p-8 md:p-12 rounded-2xl">
+            <p className="text-sm font-semibold uppercase tracking-widest text-brand-primary mb-3">
+              Get in touch
+            </p>
+            <h3 className="text-3xl font-bold tracking-tight text-white mb-2">
+              Write to us for fast feedback
+            </h3>
+            <p className="text-surface-muted-foreground mb-8 text-sm leading-relaxed">
+              Our team will get back to you as soon as possible with a tailored solution.
+            </p>
+            <ContactForm services={services} serviceAreas={serviceAreas} darkMode={true} />
           </div>
 
-          {/* Right: Sidebar */}
-          <aside className="flex flex-col gap-6">
+          {/* Right: sidebar */}
+          <aside className="space-y-10 pt-2">
             {slots.showSidebarContact && (phoneDisplay || email || address) && (
-              <div
-                data-slot="sidebarContact"
-                className="bg-surface-card border-surface-border rounded-xl border p-6"
-              >
-                <h3 className="text-h4 mb-4">Get in touch</h3>
-                <ul className="flex flex-col gap-3">
+              <div data-slot="sidebarContact">
+                <p className="text-xs font-medium uppercase tracking-widest text-brand-primary mb-6">
+                  Direct contact
+                </p>
+                <div className="space-y-6">
                   {phoneDisplay && (
-                    <li className="flex items-start gap-3">
-                      <Phone
-                        className="text-brand-primary mt-1 h-5 w-5 flex-shrink-0"
-                        aria-hidden="true"
-                      />
-                      <a
-                        href={phoneTel ? `tel:${phoneTel}` : `tel:${phoneDisplay}`}
-                        className="hover:text-brand-primary"
-                      >
-                        {phoneDisplay}
-                      </a>
-                    </li>
+                    <div className="flex items-start gap-4">
+                      <div className="w-10 h-10 rounded-xl bg-brand-primary/10 flex items-center justify-center flex-shrink-0">
+                        <Phone className="w-5 h-5 text-brand-primary" aria-hidden="true" />
+                      </div>
+                      <div>
+                        <p className="text-xs text-surface-muted-foreground uppercase tracking-widest mb-1">
+                          Phone
+                        </p>
+                        <a
+                          href={phoneTel ? `tel:${phoneTel}` : `tel:${phoneDisplay}`}
+                          className="text-lg font-semibold text-brand-primary hover:underline"
+                        >
+                          {phoneDisplay}
+                        </a>
+                      </div>
+                    </div>
                   )}
                   {email && (
-                    <li className="flex items-start gap-3">
-                      <Mail
-                        className="text-brand-primary mt-1 h-5 w-5 flex-shrink-0"
-                        aria-hidden="true"
-                      />
-                      <a href={`mailto:${email}`} className="hover:text-brand-primary break-all">
-                        {email}
-                      </a>
-                    </li>
+                    <div className="flex items-start gap-4">
+                      <div className="w-10 h-10 rounded-xl bg-brand-primary/10 flex items-center justify-center flex-shrink-0">
+                        <Mail className="w-5 h-5 text-brand-primary" aria-hidden="true" />
+                      </div>
+                      <div>
+                        <p className="text-xs text-surface-muted-foreground uppercase tracking-widest mb-1">
+                          Email
+                        </p>
+                        <a
+                          href={`mailto:${email}`}
+                          className="text-brand-primary hover:underline break-all text-sm font-medium"
+                        >
+                          {email}
+                        </a>
+                      </div>
+                    </div>
                   )}
                   {address && (
-                    <li className="flex items-start gap-3">
-                      <MapPin
-                        className="text-brand-primary mt-1 h-5 w-5 flex-shrink-0"
-                        aria-hidden="true"
-                      />
-                      <address className="not-italic">
-                        {address.street && (
-                          <>
-                            {address.street}
-                            <br />
-                          </>
-                        )}
-                        {address.locality}, {address.region}
-                        {address.postalCode && (
-                          <>
-                            <br />
-                            {address.postalCode}
-                          </>
-                        )}
-                      </address>
-                    </li>
+                    <div className="flex items-start gap-4">
+                      <div className="w-10 h-10 rounded-xl bg-brand-primary/10 flex items-center justify-center flex-shrink-0">
+                        <MapPin className="w-5 h-5 text-brand-primary" aria-hidden="true" />
+                      </div>
+                      <div>
+                        <p className="text-xs text-surface-muted-foreground uppercase tracking-widest mb-1">
+                          Address
+                        </p>
+                        <address className="not-italic text-surface-foreground text-sm leading-relaxed">
+                          {address.street && (
+                            <>
+                              {address.street}
+                              <br />
+                            </>
+                          )}
+                          {address.locality}, {address.region}
+                          {address.postalCode && (
+                            <>
+                              <br />
+                              {address.postalCode}
+                            </>
+                          )}
+                        </address>
+                      </div>
+                    </div>
                   )}
-                </ul>
+                </div>
               </div>
             )}
 
+            {slots.showSidebarContact &&
+              (phoneDisplay || email || address) &&
+              slots.showHours &&
+              hours && <div className="border-t border-surface-card-border" />}
+
             {slots.showHours && hours && (hours.weekdays || hours.saturday || hours.sunday) && (
-              <div
-                data-slot="hours"
-                className="bg-surface-card border-surface-border rounded-xl border p-6"
-              >
-                <h3 className="text-h4 mb-4 flex items-center gap-2">
-                  <Clock className="text-brand-primary h-5 w-5" aria-hidden="true" />
-                  Opening hours
-                </h3>
-                <dl className="flex flex-col gap-2 text-sm">
+              <div data-slot="hours">
+                <p className="text-xs font-medium uppercase tracking-widest text-brand-primary mb-6">
+                  Business hours
+                </p>
+                <div className="space-y-3">
                   {hours.weekdays && (
-                    <div className="flex justify-between gap-4">
-                      <dt className="text-surface-muted-foreground">Mon&ndash;Fri</dt>
-                      <dd>{hours.weekdays}</dd>
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm text-surface-muted-foreground flex items-center gap-2">
+                        <Clock className="w-3.5 h-3.5 flex-shrink-0" aria-hidden="true" />
+                        Mon&ndash;Fri
+                      </span>
+                      <span className="text-sm font-medium text-surface-foreground">
+                        {hours.weekdays}
+                      </span>
                     </div>
                   )}
                   {hours.saturday && (
-                    <div className="flex justify-between gap-4">
-                      <dt className="text-surface-muted-foreground">Saturday</dt>
-                      <dd>{hours.saturday}</dd>
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm text-surface-muted-foreground flex items-center gap-2">
+                        <Clock className="w-3.5 h-3.5 flex-shrink-0" aria-hidden="true" />
+                        Saturday
+                      </span>
+                      <span className="text-sm font-medium text-surface-foreground">
+                        {hours.saturday}
+                      </span>
                     </div>
                   )}
                   {hours.sunday && (
-                    <div className="flex justify-between gap-4">
-                      <dt className="text-surface-muted-foreground">Sunday</dt>
-                      <dd>{hours.sunday}</dd>
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm text-surface-muted-foreground flex items-center gap-2">
+                        <Clock className="w-3.5 h-3.5 flex-shrink-0" aria-hidden="true" />
+                        Sunday
+                      </span>
+                      <span className="text-sm font-medium text-surface-foreground">
+                        {hours.sunday}
+                      </span>
                     </div>
                   )}
-                </dl>
+                </div>
               </div>
             )}
 
+            {((slots.showHours && hours) || slots.showSidebarContact) &&
+              slots.showServiceLinks &&
+              serviceLinks.length > 0 && <div className="border-t border-surface-card-border" />}
+
             {slots.showServiceLinks && serviceLinks.length > 0 && (
-              <div
-                data-slot="serviceLinks"
-                className="bg-surface-card border-surface-border rounded-xl border p-6"
-              >
-                <h3 className="text-h4 mb-4">Our services</h3>
-                <ul className="flex flex-col gap-2">
+              <div data-slot="serviceLinks">
+                <p className="text-xs font-medium uppercase tracking-widest text-brand-primary mb-4">
+                  Our services
+                </p>
+                <ul className="space-y-2">
                   {serviceLinks.slice(0, 5).map((svc) => (
                     <li key={svc.slug}>
                       <Link
                         href={`/services/${svc.slug}`}
-                        className="hover:text-brand-primary inline-flex items-center gap-2"
+                        className="text-sm text-surface-foreground hover:text-brand-primary transition-colors font-medium"
                       >
-                        <ArrowRight className="h-4 w-4" aria-hidden="true" />
                         {svc.title}
                       </Link>
                     </li>
@@ -208,9 +252,9 @@ export function ContactSection({
                 </ul>
                 <Link
                   href="/services"
-                  className="text-brand-primary mt-4 inline-flex items-center gap-1 text-sm font-medium hover:underline"
+                  className="text-sm text-brand-primary hover:underline font-semibold mt-4 inline-block"
                 >
-                  View all services <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                  View all services &rarr;
                 </Link>
               </div>
             )}

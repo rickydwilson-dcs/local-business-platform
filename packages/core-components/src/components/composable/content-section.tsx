@@ -54,13 +54,13 @@ export function ContentSection({
           {slots.showSubheading && d.subheading && (
             <p
               data-slot="subheading"
-              className="text-brand-primary mb-3 text-sm font-semibold uppercase tracking-widest"
+              className="text-sm font-semibold uppercase tracking-widest text-brand-primary mb-3"
             >
               {d.subheading}
             </p>
           )}
           {d.heading && (
-            <h2 data-slot="heading" className="text-h2 mb-6">
+            <h2 data-slot="heading" className="text-3xl md:text-4xl font-bold tracking-tight mb-6">
               {d.heading}
             </h2>
           )}
@@ -73,8 +73,10 @@ export function ContentSection({
             </p>
           )}
           {data.content != null && (
-            <div data-slot="content" className="prose prose-neutral max-w-none">
-              {data.content as React.JSX.Element}
+            <div data-slot="content" className="max-w-4xl mx-auto">
+              <div className="prose prose-lg max-w-none prose-headings:text-surface-foreground prose-p:text-surface-muted-foreground prose-a:text-brand-primary prose-a:no-underline hover:prose-a:underline prose-strong:text-surface-foreground prose-li:text-surface-muted-foreground prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-6 prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-4">
+                {data.content as React.JSX.Element}
+              </div>
             </div>
           )}
           {slots.showList && listItems.length > 0 && (
