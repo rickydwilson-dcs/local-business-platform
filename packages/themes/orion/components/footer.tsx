@@ -1,5 +1,5 @@
-import Link from 'next/link';
-import { Phone, Mail, MapPin, Shield, Award } from 'lucide-react';
+import Link from "next/link";
+import { Phone, Mail, MapPin, Shield, Award } from "lucide-react";
 
 export interface OrionFooterProps {
   siteName: string;
@@ -46,9 +46,7 @@ export function OrionFooter({
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mb-6 sm:mb-8">
           {/* Column 1: About */}
           <div className="sm:col-span-2 lg:col-span-1">
-            <h2 className="text-xl sm:text-2xl font-bold mb-4 text-white">
-              {siteName}
-            </h2>
+            <h2 className="text-xl sm:text-2xl font-bold mb-4 text-white">{siteName}</h2>
             <p className="text-surface-muted-foreground mb-4 text-sm sm:text-base">{tagline}</p>
             {certifications.length > 0 && (
               <div className="flex flex-wrap items-center gap-3 sm:gap-4">
@@ -69,7 +67,7 @@ export function OrionFooter({
           {/* Column 2: Services */}
           {showServices && services.length > 0 && (
             <div>
-              <h3 className="text-base sm:text-lg font-semibold mb-4 text-white">Our Services</h3>
+              <h3 className="text-sm sm:text-base font-semibold mb-4 text-white">Our Services</h3>
               <ul className="space-y-2 text-surface-muted-foreground text-sm sm:text-base">
                 {services.map((service) => (
                   <li key={service.slug}>
@@ -98,7 +96,7 @@ export function OrionFooter({
           {/* Column 3: Locations */}
           {showLocations && locations.length > 0 && (
             <div>
-              <h3 className="text-base sm:text-lg font-semibold mb-4 text-white">Service Areas</h3>
+              <h3 className="text-sm sm:text-base font-semibold mb-4 text-white">Service Areas</h3>
               <ul className="space-y-2 text-surface-muted-foreground text-sm sm:text-base">
                 {locations.map((location) => (
                   <li key={location.slug}>
@@ -126,10 +124,13 @@ export function OrionFooter({
 
           {/* Column 4: Contact */}
           <div>
-            <h3 className="text-base sm:text-lg font-semibold mb-4 text-white">Contact Info</h3>
+            <h3 className="text-sm sm:text-base font-semibold mb-4 text-white">Contact Info</h3>
             <div className="space-y-3 text-surface-muted-foreground text-sm sm:text-base">
               <div className="flex items-center gap-2">
-                <Phone className="h-3 w-3 sm:h-4 sm:w-4 text-brand-primary flex-shrink-0" aria-hidden="true" />
+                <Phone
+                  className="h-3 w-3 sm:h-4 sm:w-4 text-brand-primary flex-shrink-0"
+                  aria-hidden="true"
+                />
                 <Link
                   href={`tel:${phoneTel}`}
                   className="hover:text-brand-primary transition-colors"
@@ -138,7 +139,10 @@ export function OrionFooter({
                 </Link>
               </div>
               <div className="flex items-center gap-2">
-                <Mail className="h-3 w-3 sm:h-4 sm:w-4 text-brand-primary flex-shrink-0" aria-hidden="true" />
+                <Mail
+                  className="h-3 w-3 sm:h-4 sm:w-4 text-brand-primary flex-shrink-0"
+                  aria-hidden="true"
+                />
                 <Link
                   href={`mailto:${email}`}
                   className="hover:text-brand-primary transition-colors"
@@ -147,7 +151,10 @@ export function OrionFooter({
                 </Link>
               </div>
               <div className="flex items-start gap-2">
-                <MapPin className="h-3 w-3 sm:h-4 sm:w-4 text-brand-primary flex-shrink-0 mt-1" aria-hidden="true" />
+                <MapPin
+                  className="h-3 w-3 sm:h-4 sm:w-4 text-brand-primary flex-shrink-0 mt-1"
+                  aria-hidden="true"
+                />
                 <div className="leading-relaxed">
                   <div>{address.locality}</div>
                   <div>{address.region}</div>
@@ -171,8 +178,8 @@ export function OrionFooter({
             &copy; {copyright}
             {builtBy && (
               <>
-                {' '}
-                | Built by{' '}
+                {" "}
+                | Built by{" "}
                 <a
                   href={builtBy.url}
                   target="_blank"
