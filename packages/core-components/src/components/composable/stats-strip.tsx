@@ -45,7 +45,10 @@ export function StatsStrip({ slots: slotOverrides, layout, data, className }: St
   const gridCols = cols === 3 ? "grid-cols-1 sm:grid-cols-3" : "grid-cols-2 lg:grid-cols-4";
 
   return (
-    <section className={`${bg} ${className ?? ""}`} data-component="StatsStrip">
+    <section
+      className={`${bg} ${layout?.background === "inverse" ? "noise-overlay" : ""} ${className ?? ""}`}
+      data-component="StatsStrip"
+    >
       <div className={`mx-auto max-w-7xl px-4 ${py} sm:px-6 lg:px-8`}>
         <div className={`grid ${gridCols}`}>
           {stats.map((stat, i) => (
@@ -53,7 +56,10 @@ export function StatsStrip({ slots: slotOverrides, layout, data, className }: St
               key={i}
               className={`px-6 text-center ${slots.showDividers && i < stats.length - 1 ? "border-r border-current/20" : ""}`}
             >
-              <p data-slot="statValue" className="text-brand-primary text-4xl font-bold">
+              <p
+                data-slot="statValue"
+                className={`text-4xl font-bold ${layout?.background === "inverse" ? "text-surface-inverse-foreground" : "text-brand-primary"}`}
+              >
                 {stat.value}
               </p>
               {slots.showLabel && stat.label && (

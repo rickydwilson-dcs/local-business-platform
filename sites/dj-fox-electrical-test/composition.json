@@ -41,7 +41,7 @@
         {
           "component": "CTASection",
           "dataKey": "home.cta",
-          "layout": { "background": "brand" }
+          "layout": { "background": "inverse" }
         }
       ]
     },

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import type { LayoutParams } from "./layout-params";
+import { getImageUrl } from "../../lib/image";
 
 export interface HeroSectionSlots {
   showEyebrow: boolean;
@@ -53,12 +54,12 @@ export function ComposableHeroSection({
   if (layout?.background === "image") {
     return (
       <section
-        className={`relative overflow-hidden min-h-[500px] flex items-center ${className ?? ""}`}
+        className={`relative overflow-hidden min-h-[500px] flex items-center noise-overlay ${className ?? ""}`}
         data-component="HeroSection"
       >
         {heroImageSrc && (
           <Image
-            src={heroImageSrc}
+            src={getImageUrl(heroImageSrc)}
             alt={(data.heroImageAlt as string | undefined) ?? ""}
             aria-hidden={!(data.heroImageAlt as string | undefined) || undefined}
             fill
@@ -69,9 +70,7 @@ export function ComposableHeroSection({
         )}
         <div
           className={`absolute inset-0 ${
-            (data.overlayColor as string) === "brand"
-              ? "bg-brand-primary/60"
-              : "bg-surface-inverse/75"
+            (data.overlayColor as string) === "brand" ? "bg-brand-primary/60" : "bg-black/70"
           }`}
         />
         <div className="relative z-10 container mx-auto px-4 py-16 text-white">

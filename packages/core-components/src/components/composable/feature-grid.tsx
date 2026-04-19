@@ -51,7 +51,10 @@ export function FeatureGrid({ slots: slotOverrides, layout, data, className }: F
   const features = Array.isArray(data.features) ? (data.features as FeatureItem[]) : [];
 
   return (
-    <section className={`${bg} ${className ?? ""}`} data-component="FeatureGrid">
+    <section
+      className={`${bg} ${layout?.background === "inverse" ? "noise-overlay" : ""} ${className ?? ""}`}
+      data-component="FeatureGrid"
+    >
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         {slots.showSectionHeading && d.heading && (
           <h2 data-slot="heading" className="text-h2 mb-4 text-center">
@@ -75,7 +78,15 @@ export function FeatureGrid({ slots: slotOverrides, layout, data, className }: F
                 {feature.title}
               </h3>
               {slots.showDescriptions && feature.description && (
-                <p className="text-surface-muted-foreground">{feature.description}</p>
+                <p
+                  className={
+                    layout?.background === "inverse"
+                      ? "text-surface-inverse-foreground opacity-80"
+                      : "text-surface-muted-foreground"
+                  }
+                >
+                  {feature.description}
+                </p>
               )}
             </div>
           ))}

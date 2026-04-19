@@ -42,7 +42,10 @@ export function ComposableCTASection({
   const isCenter = layout?.align !== "left";
 
   return (
-    <section className={`${bg} ${className ?? ""}`} data-component="CTASection">
+    <section
+      className={`${bg} ${layout?.background === "inverse" ? "noise-overlay" : ""} ${className ?? ""}`}
+      data-component="CTASection"
+    >
       <div
         className={`mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8 ${isCenter ? "text-center" : ""}`}
       >
@@ -52,7 +55,7 @@ export function ComposableCTASection({
         {slots.showSubheading && d.subheading && (
           <p
             data-slot="subheading"
-            className={`mb-8 text-xl ${layout?.background === "brand" ? "text-brand-on-primary" : "text-surface-muted-foreground"}`}
+            className={`mb-8 text-xl ${layout?.background === "brand" ? "text-brand-on-primary" : layout?.background === "inverse" ? "text-surface-inverse-foreground opacity-80" : "text-surface-muted-foreground"}`}
           >
             {d.subheading}
           </p>
