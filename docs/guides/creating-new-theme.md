@@ -291,9 +291,20 @@ export const themeConfig: DeepPartialThemeConfig = {
 
 ---
 
+## Theme Component Contract (mandatory)
+
+Every new theme must implement the **Theme Component Contract** — a set of 10 CSS utility classes consumed by composable section components. Without them, composition sites on your theme will render broken buttons, missing overlays, and unstyled interactive elements.
+
+Run `pnpm validate:theme-contract --theme <your-theme>` before opening a PR. The CI Quality Checks job enforces this — PRs with failing validation will be blocked.
+
+See [Theme Component Contract](../standards/theme-component-contract.md) for the full class list and implementation templates.
+
+---
+
 ## Related
 
 - [theming.md](./theming.md) — token reference, overlay colours, Tailwind utilities
 - [Adding a New Site](./adding-new-site.md) — full site creation workflow
 - [How the Ingestion Pipeline Works](../architecture/how-ingestion-pipeline-works.md)
 - [How the Stitch Design Pipeline Works](../architecture/how-stitch-design-pipeline-works.md)
+- [Theme Component Contract](../standards/theme-component-contract.md) — required CSS classes for composable sections

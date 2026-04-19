@@ -106,6 +106,7 @@ Shared CSS keyframes are in `src/styles/animations.css` (imported by theme globa
 - TypeScript interfaces for all props (avoid `any`)
 - **Tailwind CSS only** for styling — components use theme tokens (`bg-brand-primary`, `text-surface-foreground`) so they work with any site's theme
 - Components must be theme-agnostic: never hardcode colors, always use CSS variable-based classes
+- **Theme contract:** Composable section components may reference any class name in `THEME_COMPONENT_CONTRACT` (exported from `@platform/theme-system`). Any other theme-specific class name is forbidden — it would break non-Orion themes.
 
 ## Importing
 
@@ -144,6 +145,7 @@ Some files are excluded from standalone type-check because they depend on site-s
 When adding a new component identified via reference analysis (`newComponentBacklog` in `reference-analysis.json`):
 
 ### Checklist
+
 - [ ] Named export only (no default export)
 - [ ] TypeScript interface for all props
 - [ ] Server Component — no `'use client'`, no React hooks, no context imports
@@ -157,7 +159,9 @@ When adding a new component identified via reference analysis (`newComponentBack
 - [ ] Visual check in `sites/dj-fox-electrical` (orion) dev server if practical
 
 ### Why core-components first?
+
 Components use theme tokens → single implementation adapts to every theme's colour palette automatically. No per-theme duplication needed.
 
 ### Gap component briefs
+
 Run `tools/generate-theme-from-reference.ts --analyse` → `newComponentBacklog` in `reference-analysis.json` contains props contract, token constraints, and acceptance criteria for each gap component.
