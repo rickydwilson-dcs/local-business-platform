@@ -16,7 +16,7 @@
         {
           "component": "HeroSection",
           "dataKey": "home.hero",
-          "layout": { "background": "image", "fullBleed": true }
+          "layout": { "background": "image", "fullBleed": true, "align": "center" }
         },
         {
           "component": "StatsStrip",
@@ -28,12 +28,19 @@
           "dataKey": "home.serviceList"
         },
         {
+          "component": "CategoryCardsSection",
+          "dataKey": "home.categories",
+          "layout": { "background": "subtle" }
+        },
+        {
           "component": "LocationPillsSection",
           "dataKey": "home.locationPills"
         },
         {
           "component": "WhyChooseUsSection",
-          "dataKey": "home.whyChooseUs"
+          "dataKey": "home.whyChooseUs",
+          "slots": { "showStat": false },
+          "layout": { "background": "surface" }
         },
         {
           "component": "CTASection",
