@@ -64,7 +64,7 @@ export function ServiceListSection({
             {slots.showEyebrow && eyebrow && (
               <p
                 data-slot="eyebrow"
-                className="mb-3 text-sm font-medium uppercase tracking-widest text-brand-primary"
+                className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-brand-primary"
               >
                 {eyebrow}
               </p>
@@ -84,7 +84,7 @@ export function ServiceListSection({
               <a
                 href={ctaHref}
                 data-slot="cta"
-                className="inline-flex items-center gap-2 rounded-lg border border-brand-primary px-5 py-2.5 text-sm font-semibold text-brand-primary transition-colors hover:bg-brand-primary hover:text-brand-on-primary"
+                className="inline-flex items-center gap-2 rounded-lg border border-brand-primary px-5 py-2.5 text-sm font-semibold text-brand-primary transition-colors hover:bg-brand-primary hover:text-brand-on-primary active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2"
               >
                 {ctaText}
                 {slots.showArrow && (
@@ -143,7 +143,7 @@ export function ServiceListSection({
                 <a
                   key={i}
                   href={item.href}
-                  className="group -mx-4 flex items-start gap-4 rounded-xl px-4 py-6 transition-colors duration-200 hover:bg-surface-muted"
+                  className="group -mx-4 flex items-start gap-4 rounded-xl px-4 py-6 transition-all duration-200 ease-out hover:bg-surface-muted hover:translate-x-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2"
                 >
                   {inner}
                 </a>
