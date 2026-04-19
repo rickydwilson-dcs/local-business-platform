@@ -143,11 +143,24 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
       title: fm.title,
       description: fm.description,
       badge: fm.badge,
-      hero: { image: heroImage },
+      hero: {
+        heading: fm.title,
+        subheading:
+          fm.description ||
+          `Professional ${fm.title.toLowerCase()} services by ${siteConfig.business.name}.`,
+        eyebrow: "Our Services",
+        image: heroImage,
+        heroImageSrc: heroImage,
+        breadcrumbs: [
+          { label: "Home", href: "/" },
+          { label: "Services", href: "/services" },
+          { label: serviceName, href: `/services/${slug}` },
+        ],
+      },
       heroImage,
       benefits,
       faqs,
-      mdxContent: content,
+      mdxContent: { content },
       phone: siteConfig.business.phone,
       phoneDisplay: PHONE_DISPLAY,
     },

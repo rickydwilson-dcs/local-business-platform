@@ -1,3 +1,4 @@
+import type React from "react";
 import type { LayoutParams } from "./layout-params";
 
 export interface ContentSectionSlots {
@@ -70,6 +71,11 @@ export function ContentSection({
             >
               {d.body}
             </p>
+          )}
+          {data.content != null && (
+            <div data-slot="content" className="prose prose-neutral max-w-none">
+              {data.content as React.JSX.Element}
+            </div>
           )}
           {slots.showList && listItems.length > 0 && (
             <ul className="mb-6 space-y-2">

@@ -153,7 +153,7 @@ export default async function LocationDetailPage({
       },
       heroImage,
       faqs,
-      mdxContent: content,
+      mdxContent: { content },
       phone: siteConfig.business.phone,
       phoneDisplay: PHONE_DISPLAY,
       services: {
