@@ -1,3 +1,4 @@
+import { Phone } from "lucide-react";
 import type { LayoutParams } from "./layout-params";
 
 export interface CTASectionSlots {
@@ -30,57 +31,100 @@ export function ComposableCTASection({
   const slots = { ...CTA_SECTION_DEFAULT_SLOTS, ...slotOverrides };
   const d = data as Record<string, string | undefined>;
 
-  const bg =
-    layout?.background === "inverse"
-      ? "bg-surface-inverse text-white"
-      : layout?.background === "brand"
-        ? "bg-brand-primary text-brand-on-primary"
-        : layout?.background === "subtle"
-          ? "bg-surface-subtle text-surface-foreground"
-          : "bg-surface-background text-surface-foreground";
+  const isInverse = layout?.background === "inverse";
+  const isBrand = layout?.background === "brand";
+  const isDark = isInverse || isBrand;
 
-  const isCenter = layout?.align !== "left";
+  const sectionClass = isInverse
+    ? "section-dark-accent noise-overlay"
+    : isBrand
+      ? "bg-brand-primary text-white py-16 md:py-24 noise-overlay"
+      : layout?.background === "subtle"
+        ? "bg-surface-subtle text-surface-foreground py-16 md:py-24"
+        : "bg-surface-background text-surface-foreground py-16 md:py-24";
+
+  const phoneTel = typeof data.phoneTel === "string" ? data.phoneTel : undefined;
+  const phoneDisplay = typeof data.phoneDisplay === "string" ? data.phoneDisplay : undefined;
+  const showPhoneCta = Boolean(phoneTel || phoneDisplay);
+
+  const headingScale = isInverse
+    ? "text-4xl md:text-5xl font-bold tracking-tight"
+    : "text-3xl md:text-4xl font-bold tracking-tight";
+
+  const subheadingClass = isBrand
+    ? "text-lg mt-3 text-white/80 max-w-xl"
+    : isInverse
+      ? "text-xl mt-4 text-on-inverse-muted max-w-xl"
+      : "text-lg mt-3 text-surface-muted-foreground max-w-xl";
+
+  const ringOffset = isDark
+    ? "focus-visible:ring-offset-surface-inverse"
+    : "focus-visible:ring-offset-surface-background";
 
   return (
-    <section
-      className={`${bg} ${layout?.background === "inverse" ? "noise-overlay" : ""} ${className ?? ""}`}
-      data-component="CTASection"
-    >
-      <div
-        className={`mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8 ${isCenter ? "text-center" : ""}`}
-      >
-        <h2 data-slot="heading" className="text-h2 mb-4 tracking-tight">
-          {d.heading ?? ""}
-        </h2>
-        {slots.showSubheading && d.subheading && (
-          <p
-            data-slot="subheading"
-            className={`mb-8 text-xl ${layout?.background === "brand" ? "text-brand-on-primary" : layout?.background === "inverse" ? "text-white opacity-80" : "text-surface-muted-foreground"}`}
-          >
-            {d.subheading}
-          </p>
-        )}
-        <div className={`flex flex-wrap gap-4 ${isCenter ? "justify-center" : ""}`}>
-          {slots.showPrimaryCta && d.primaryCtaText && (
-            <a
-              href={d.primaryCtaHref ?? "#"}
-              data-slot="primaryCta"
-              className={`inline-flex items-center justify-center bg-brand-primary text-brand-on-primary hover:bg-brand-primary-hover rounded-xl px-8 py-4 font-semibold shadow-brand-lg transition-all duration-200 ease-out hover:-translate-y-0.5 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2${layout?.background === "inverse" || layout?.background === "brand" ? " focus-visible:ring-offset-surface-inverse" : ""}`}
-            >
-              {d.primaryCtaText}
-            </a>
-          )}
-          {slots.showSecondaryCta && d.secondaryCtaText && (
-            <a
-              href={d.secondaryCtaHref ?? "#"}
-              className="inline-flex items-center justify-center border-brand-primary text-brand-primary hover:bg-brand-primary/10 rounded-xl border px-8 py-4 font-semibold transition-all duration-200 ease-out active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2"
-            >
-              {d.secondaryCtaText}
-            </a>
-          )}
+    <section className={`${sectionClass} ${className ?? ""}`} data-component="CTASection">
+      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <div className="grid md:grid-cols-[1fr_auto] gap-8 items-center">
+          <div>
+            <h2 data-slot="heading" className={headingScale}>
+              {d.heading ?? ""}
+            </h2>
+            {slots.showSubheading && d.subheading && (
+              <p data-slot="subheading" className={subheadingClass}>
+                {d.subheading}
+              </p>
+            )}
+          </div>
+          <div className={isInverse ? "flex flex-col gap-3" : "flex flex-col sm:flex-row gap-3"}>
+            {slots.showPrimaryCta && d.primaryCtaText && (
+              <a
+                href={d.primaryCtaHref ?? "#"}
+                data-slot="primaryCta"
+                className={
+                  (isBrand ? "btn-on-brand-primary" : "btn-primary") +
+                  " active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2 " +
+                  ringOffset
+                }
+              >
+                {d.primaryCtaText}
+              </a>
+            )}
+            {slots.showSecondaryCta && d.secondaryCtaText && (
+              <a
+                href={d.secondaryCtaHref ?? "#"}
+                className={
+                  (isBrand ? "btn-on-brand-primary-outline" : "btn-secondary") +
+                  " active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2 " +
+                  ringOffset
+                }
+              >
+                {d.secondaryCtaText}
+              </a>
+            )}
+            {showPhoneCta && (
+              <a
+                href={phoneTel ? `tel:${phoneTel}` : `tel:${phoneDisplay}`}
+                data-slot="phoneCta"
+                className={
+                  (isBrand
+                    ? "btn-on-brand-primary-outline"
+                    : isInverse
+                      ? "btn-tertiary"
+                      : "btn-secondary") +
+                  " inline-flex items-center gap-2 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2 " +
+                  ringOffset
+                }
+              >
+                <Phone className="w-5 h-5" aria-hidden="true" />
+                {isInverse && phoneDisplay ? `Call ${phoneDisplay}` : phoneDisplay}
+              </a>
+            )}
+          </div>
         </div>
         {slots.showTrustLine && d.trustLine && (
-          <p className="text-surface-muted-foreground mt-8 text-xs uppercase tracking-[0.18em] font-medium">
+          <p
+            className={`mt-8 text-xs uppercase tracking-widest font-medium ${isDark ? "text-white/70" : "text-surface-muted-foreground"}`}
+          >
             {d.trustLine}
           </p>
         )}
