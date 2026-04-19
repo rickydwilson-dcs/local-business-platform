@@ -65,9 +65,21 @@ export interface PageComposition {
   sections: BaseSectionConfig[];
 }
 
+export type LayoutComponentName = "OrionHeader" | "OrionFooter" | string;
+// string union allows sites to register custom names; LayoutComponentName
+// documents the known built-in names for IDE autocomplete.
+
+export interface LayoutBlockConfig {
+  component: LayoutComponentName;
+  slots?: Record<string, boolean>;
+  dataKey?: string; // key in siteData whose value is spread as props
+}
+
 export interface SiteCompositionConfig {
   version: "1";
   siteId: string;
   defaultSlots?: Record<string, Record<string, boolean>>;
+  headerConfig?: LayoutBlockConfig;
+  footerConfig?: LayoutBlockConfig;
   pages: PageComposition[];
 }

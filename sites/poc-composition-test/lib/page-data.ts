@@ -1,4 +1,27 @@
 export const siteData: Record<string, unknown> = {
+  header: {
+    siteName: "Designlab",
+    navigation: [
+      { label: "Signs", href: "/services" },
+      { label: "Vehicles", href: "/services/vehicle-graphics" },
+      { label: "Projects", href: "/projects" },
+      { label: "About", href: "/about" },
+    ],
+    primaryCta: { label: "Get a Quote", href: "/contact" },
+  },
+  footer: {
+    siteName: "Designlab",
+    tagline: "Eastbourne's leading sign makers",
+    email: "hello@designlab.co.uk",
+    services: [
+      { label: "Shop Signs", href: "/services/shop-signs" },
+      { label: "Vehicle Graphics", href: "/services/vehicle-graphics" },
+      { label: "Banners & Displays", href: "/services/banners" },
+      { label: "Window Graphics", href: "/services/window-graphics" },
+    ],
+    copyright: `© ${new Date().getFullYear()} Designlab. All rights reserved.`,
+  },
+
   heading: "Signs & Graphics That Get You Noticed",
   eyebrow: "Eastbourne's leading sign makers",
   subheading:
