@@ -70,7 +70,7 @@ export function WhyChooseUsSection({
         )}
         <h2
           data-slot="heading"
-          className={`text-h2 mb-16 tracking-tight ${isDark ? "text-white" : "text-surface-foreground"}`}
+          className={`text-4xl md:text-5xl font-bold tracking-tight mb-16 ${isDark ? "text-white" : "text-surface-foreground"}`}
         >
           {heading}
           {slots.showHeadingHighlight && headingHighlight && (
@@ -85,7 +85,7 @@ export function WhyChooseUsSection({
           {items.map((item, i) => (
             <div
               key={i}
-              className={`grid items-center gap-6 border-b border-surface-border py-10 transition-colors duration-200 hover:bg-surface-muted/30 ${slots.showStat ? "md:grid-cols-[2fr_3fr_1fr]" : "md:grid-cols-[2fr_3fr]"}`}
+              className={`grid items-center gap-6 border-b border-surface-border py-8 ${slots.showStat ? "md:grid-cols-[2fr_3fr_1fr]" : "md:grid-cols-[2fr_3fr]"}`}
             >
               <h3
                 className={`text-base font-semibold ${isDark ? "text-white" : "text-surface-foreground"}`}
@@ -100,7 +100,7 @@ export function WhyChooseUsSection({
               {slots.showStat && item.stat && (
                 <p
                   data-slot="stat"
-                  className={`font-mono text-sm font-semibold uppercase tracking-[0.15em] md:text-right ${isDark ? "text-on-inverse-muted" : "text-brand-primary"}`}
+                  className={`font-mono text-xs uppercase tracking-widest md:text-right ${isDark ? "text-on-inverse-muted" : "text-surface-muted-foreground"}`}
                 >
                   {item.stat}
                 </p>

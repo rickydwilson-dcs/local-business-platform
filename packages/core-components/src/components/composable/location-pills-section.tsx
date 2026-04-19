@@ -63,7 +63,10 @@ export function LocationPillsSection({
                 {eyebrow}
               </p>
             )}
-            <h2 data-slot="heading" className="text-h2">
+            <h2
+              data-slot="heading"
+              className="text-4xl md:text-5xl font-bold tracking-tight text-surface-foreground"
+            >
               {heading}
             </h2>
           </div>
@@ -71,7 +74,7 @@ export function LocationPillsSection({
             <a
               href={ctaHref}
               data-slot="cta"
-              className="rounded-lg border border-brand-primary px-5 py-2.5 text-sm font-semibold text-brand-primary transition-colors hover:bg-brand-primary hover:text-brand-on-primary"
+              className="btn-secondary text-sm active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2"
             >
               {ctaText}
             </a>
