@@ -54,18 +54,21 @@ export function StatsStrip({ slots: slotOverrides, layout, data, className }: St
           {stats.map((stat, i) => (
             <div
               key={i}
-              className={`px-6 text-center ${slots.showDividers && i < stats.length - 1 ? "border-r border-current/20" : ""}`}
+              className={`px-6 text-center ${slots.showDividers && i < stats.length - 1 ? `border-r ${layout?.background === "inverse" ? "border-white/15" : "border-surface-card-border"}` : ""}`}
             >
+              {slots.showDividers && (
+                <div aria-hidden="true" className="mx-auto mb-3 h-[2px] w-8 bg-brand-primary" />
+              )}
               <p
                 data-slot="statValue"
-                className={`text-xl font-bold ${layout?.background === "inverse" ? "text-white" : "text-brand-primary"}`}
+                className={`text-4xl sm:text-5xl font-extrabold tracking-tight tabular-nums stat-value ${layout?.background === "inverse" ? "text-white" : "text-brand-primary"}`}
               >
                 {stat.value}
               </p>
               {slots.showLabel && stat.label && (
                 <p
                   data-slot="statLabel"
-                  className="mt-1 text-xs text-on-inverse-muted uppercase tracking-widest"
+                  className="mt-1 text-[0.7rem] uppercase tracking-[0.18em] font-medium text-on-inverse-muted"
                 >
                   {stat.label}
                 </p>
