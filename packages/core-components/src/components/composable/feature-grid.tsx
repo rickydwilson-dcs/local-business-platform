@@ -68,13 +68,16 @@ export function FeatureGrid({ slots: slotOverrides, layout, data, className }: F
         )}
         <div className={`grid gap-8 ${gridCols}`}>
           {features.map((feature, i) => (
-            <div key={i} className="text-center">
+            <div key={i} className="group text-center">
               {slots.showIcons && feature.icon && (
-                <div className="bg-brand-primary/10 mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full text-2xl">
+                <div className="bg-brand-primary/10 ring-1 ring-brand-primary/20 mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl text-2xl transition-transform duration-300 ease-out group-hover:scale-110 group-hover:rotate-3">
                   {feature.icon}
                 </div>
               )}
-              <h3 data-slot="featureTitle" className="text-h3 mb-2">
+              <h3
+                data-slot="featureTitle"
+                className="text-h3 mb-2 transition-colors duration-200 group-hover:text-brand-primary"
+              >
                 {feature.title}
               </h3>
               {slots.showDescriptions && feature.description && (

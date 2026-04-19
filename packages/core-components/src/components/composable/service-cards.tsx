@@ -70,7 +70,7 @@ export function ServiceCards({ slots: slotOverrides, layout, data, className }: 
           {services.map((service, i) => (
             <div
               key={i}
-              className="bg-surface-card border-surface-card-border rounded-xl border p-6 transition-shadow hover:shadow-md"
+              className="group bg-surface-card border-surface-card-border rounded-2xl border p-6 transition-all duration-200 ease-out hover:-translate-y-1 hover:shadow-brand-lg hover:border-brand-primary/40"
             >
               {slots.showBadge && service.badge && (
                 <span className="bg-brand-primary/10 text-brand-primary mb-4 inline-block rounded-full px-3 py-1 text-xs font-semibold">
@@ -99,9 +99,15 @@ export function ServiceCards({ slots: slotOverrides, layout, data, className }: 
                 <a
                   href={service.href}
                   aria-label={`Learn more about ${service.title}`}
-                  className="text-brand-primary font-semibold hover:underline"
+                  className="inline-flex items-center gap-1.5 text-brand-primary font-semibold transition-all duration-200 ease-out hover:gap-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2 focus-visible:rounded"
                 >
-                  Learn more <span aria-hidden="true">→</span>
+                  Learn more{" "}
+                  <span
+                    aria-hidden="true"
+                    className="transition-transform duration-200 ease-out group-hover:translate-x-0.5"
+                  >
+                    →
+                  </span>
                 </a>
               )}
             </div>

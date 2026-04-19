@@ -80,8 +80,14 @@ export function TestimonialGrid({
           {testimonials.map((t, i) => (
             <div
               key={i}
-              className="bg-surface-card border-surface-card-border rounded-xl border p-6"
+              className="group relative bg-surface-card border-surface-card-border rounded-2xl border p-6 transition-all duration-200 ease-out hover:-translate-y-1 hover:shadow-brand hover:border-brand-primary/30"
             >
+              <span
+                aria-hidden="true"
+                className="pointer-events-none absolute -top-2 left-4 select-none font-serif text-6xl leading-none text-brand-primary/20"
+              >
+                &ldquo;
+              </span>
               {slots.showStars && t.rating != null && (
                 <div className="mb-3 flex gap-0.5" aria-label={`${t.rating ?? 5} out of 5 stars`}>
                   {Array.from({ length: 5 }).map((_, s) => (
@@ -96,12 +102,12 @@ export function TestimonialGrid({
                 </div>
               )}
               {slots.showTitle && t.title && <p className="mb-2 font-semibold">{t.title}</p>}
-              <p data-slot="quote" className="text-surface-foreground mb-4 italic">
+              <p data-slot="quote" className="relative z-10 text-surface-foreground mb-4 italic">
                 &ldquo;{t.text}&rdquo;
               </p>
               <div className="flex items-center gap-3">
                 {slots.showAvatar && t.avatarInitials && (
-                  <div className="bg-brand-primary text-brand-on-primary flex h-10 w-10 items-center justify-center rounded-full text-sm font-semibold">
+                  <div className="bg-brand-primary text-brand-on-primary flex h-10 w-10 items-center justify-center rounded-2xl text-sm font-semibold ring-2 ring-brand-primary/20">
                     {t.avatarInitials}
                   </div>
                 )}
