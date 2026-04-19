@@ -78,7 +78,10 @@ export function BlogGrid({ slots: slotOverrides, layout, data, className }: Blog
         {slots.showSectionHeading && (d.heading || d.subheading) && (
           <div className="mb-12 text-center">
             {d.heading && (
-              <h2 data-slot="heading" className="text-h2 mb-4">
+              <h2
+                data-slot="heading"
+                className="text-3xl md:text-4xl font-bold tracking-tight mb-4 text-center"
+              >
                 {d.heading}
               </h2>
             )}
@@ -94,7 +97,7 @@ export function BlogGrid({ slots: slotOverrides, layout, data, className }: Blog
           {posts.map((post) => (
             <article
               key={post.slug}
-              className="bg-surface-card border-surface-border overflow-hidden rounded-lg border"
+              className="bg-surface-background rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow group border border-surface-border"
             >
               {post.heroImage && (
                 <div className="relative aspect-video overflow-hidden">
@@ -125,7 +128,10 @@ export function BlogGrid({ slots: slotOverrides, layout, data, className }: Blog
                     {formatDate(post.date)}
                   </time>
                 )}
-                <h3 data-slot="title" className="text-surface-foreground text-xl font-bold">
+                <h3
+                  data-slot="title"
+                  className="text-surface-foreground text-xl font-bold group-hover:text-brand-primary transition-colors"
+                >
                   <Link href={`/blog/${post.slug}`}>{post.title}</Link>
                 </h3>
                 {slots.showExcerpt && post.excerpt && (

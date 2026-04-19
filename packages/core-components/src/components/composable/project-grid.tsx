@@ -63,7 +63,10 @@ export function ProjectGrid({ slots: slotOverrides, layout, data, className }: P
     <section className={`${bg} ${className ?? ""}`} data-component="ProjectGrid">
       <div className="mx-auto max-w-4xl px-4 py-16 md:py-24 sm:px-6 lg:px-8">
         {slots.showSectionHeading && d.heading && (
-          <h2 data-slot="heading" className="text-h2 mb-4 text-center">
+          <h2
+            data-slot="heading"
+            className="text-3xl md:text-4xl font-bold tracking-tight mb-4 text-center"
+          >
             {d.heading}
           </h2>
         )}
@@ -77,7 +80,7 @@ export function ProjectGrid({ slots: slotOverrides, layout, data, className }: P
         )}
 
         {slots.showStats && stats.length > 0 && (
-          <div data-slot="stats" className="mb-12 flex flex-wrap gap-8">
+          <div data-slot="stats" className="flex flex-wrap justify-center gap-8 mb-8">
             {stats.map((stat, i) => (
               <div key={i}>
                 <div className="text-brand-primary text-3xl font-bold">{stat.value}</div>
@@ -91,47 +94,52 @@ export function ProjectGrid({ slots: slotOverrides, layout, data, className }: P
           {projects.map((project) => (
             <article
               key={project.slug}
-              className="bg-surface-card border-surface-border rounded-lg border p-6"
+              className="bg-surface-background rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow group border border-surface-border"
             >
-              {slots.showTags && project.tags && project.tags.length > 0 && (
-                <div data-slot="tags" className="mb-3 flex flex-wrap gap-2">
-                  {project.tags.map((tag, i) => (
-                    <span
-                      key={i}
-                      className="bg-brand-primary/10 text-brand-primary rounded px-2 py-1 text-xs font-semibold"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              )}
+              <div className="p-6">
+                {slots.showTags && project.tags && project.tags.length > 0 && (
+                  <div data-slot="tags" className="mb-3 flex flex-wrap gap-2">
+                    {project.tags.map((tag, i) => (
+                      <span
+                        key={i}
+                        className="bg-brand-primary/10 text-brand-primary rounded px-2 py-1 text-xs font-semibold"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
 
-              <h3 data-slot="projectTitle" className="mb-2 text-xl font-bold">
-                <Link href={`/projects/${project.slug}`}>{project.title}</Link>
-              </h3>
-
-              {slots.showDescription && project.description && (
-                <p
-                  data-slot="description"
-                  className="text-surface-muted-foreground mb-3 line-clamp-2 text-sm"
+                <h3
+                  data-slot="projectTitle"
+                  className="mb-3 text-xl font-bold text-surface-foreground group-hover:text-brand-primary transition-colors"
                 >
-                  {project.description}
-                </p>
-              )}
+                  <Link href={`/projects/${project.slug}`}>{project.title}</Link>
+                </h3>
 
-              {slots.showDate && project.date && (
-                <div data-slot="date" className="text-surface-muted-foreground mb-3 text-sm">
-                  {project.date.substring(0, 4)}
-                </div>
-              )}
+                {slots.showDescription && project.description && (
+                  <p
+                    data-slot="description"
+                    className="text-surface-muted-foreground mb-3 line-clamp-2 text-sm"
+                  >
+                    {project.description}
+                  </p>
+                )}
 
-              <Link
-                href={`/projects/${project.slug}`}
-                aria-label={`View project: ${project.title}`}
-                className="text-brand-primary text-sm font-medium"
-              >
-                View Project <span aria-hidden="true">→</span>
-              </Link>
+                {slots.showDate && project.date && (
+                  <div data-slot="date" className="text-surface-muted-foreground mb-3 text-sm">
+                    {project.date.substring(0, 4)}
+                  </div>
+                )}
+
+                <Link
+                  href={`/projects/${project.slug}`}
+                  aria-label={`View project: ${project.title}`}
+                  className="text-brand-primary text-sm font-medium"
+                >
+                  View Project <span aria-hidden="true">→</span>
+                </Link>
+              </div>
             </article>
           ))}
         </div>

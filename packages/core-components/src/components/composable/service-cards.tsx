@@ -59,7 +59,10 @@ export function ServiceCards({ slots: slotOverrides, layout, data, className }: 
     <section className={`${bg} ${className ?? ""}`} data-component="ServiceCards">
       <div className="mx-auto max-w-4xl px-4 py-16 md:py-24 sm:px-6 lg:px-8">
         {d.heading && (
-          <h2 data-slot="heading" className="text-h2 mb-4 text-center">
+          <h2
+            data-slot="heading"
+            className="text-3xl md:text-4xl font-bold tracking-tight mb-4 text-center"
+          >
             {d.heading}
           </h2>
         )}
@@ -70,7 +73,7 @@ export function ServiceCards({ slots: slotOverrides, layout, data, className }: 
           {services.map((service, i) => (
             <div
               key={i}
-              className="group bg-surface-card border-surface-card-border rounded-2xl border p-6 transition-all duration-200 ease-out hover:-translate-y-1 hover:shadow-brand-lg hover:border-brand-primary/40"
+              className="group bg-surface-card rounded-2xl shadow-lg border border-surface-border p-6 transition-shadow duration-200 hover:shadow-xl"
             >
               {slots.showBadge && service.badge && (
                 <span className="bg-brand-primary/10 text-brand-primary mb-4 inline-block rounded-full px-3 py-1 text-xs font-semibold">
@@ -89,7 +92,10 @@ export function ServiceCards({ slots: slotOverrides, layout, data, className }: 
                   />
                 </div>
               )}
-              <h3 data-slot="serviceTitle" className="text-h3 mb-2">
+              <h3
+                data-slot="serviceTitle"
+                className="text-xl font-semibold mb-3 group-hover:text-brand-primary transition-colors"
+              >
                 {service.title}
               </h3>
               {slots.showDescription && service.description && (
@@ -99,15 +105,9 @@ export function ServiceCards({ slots: slotOverrides, layout, data, className }: 
                 <a
                   href={service.href}
                   aria-label={`Learn more about ${service.title}`}
-                  className="inline-flex items-center gap-1.5 text-brand-primary font-semibold transition-all duration-200 ease-out hover:gap-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2 focus-visible:rounded"
+                  className="inline-flex items-center text-brand-primary font-medium group-hover:translate-x-1 transition-transform focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2 focus-visible:rounded"
                 >
-                  Learn more{" "}
-                  <span
-                    aria-hidden="true"
-                    className="transition-transform duration-200 ease-out group-hover:translate-x-0.5"
-                  >
-                    →
-                  </span>
+                  Learn more <span aria-hidden="true">→</span>
                 </a>
               )}
             </div>

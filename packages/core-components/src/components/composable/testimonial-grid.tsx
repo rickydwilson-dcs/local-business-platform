@@ -1,5 +1,7 @@
 import type { LayoutParams } from "./layout-params";
+import { TestimonialCard } from "../ui/testimonial-card";
 
+// NOTE: after 2026-04-19 refactor, slot toggles are no-ops — TestimonialCard manages internal sections.
 export interface TestimonialGridSlots {
   showStars: boolean;
   showDate: boolean;
@@ -69,7 +71,10 @@ export function TestimonialGrid({
     <section className={`${bg} ${className ?? ""}`} data-component="TestimonialGrid">
       <div className="mx-auto max-w-4xl px-4 py-16 md:py-24 sm:px-6 lg:px-8">
         {d.heading && (
-          <h2 data-slot="heading" className="text-h2 mb-4 text-center">
+          <h2
+            data-slot="heading"
+            className="text-3xl md:text-4xl font-bold tracking-tight mb-4 text-center"
+          >
             {d.heading}
           </h2>
         )}
@@ -78,54 +83,16 @@ export function TestimonialGrid({
         )}
         <div className={`grid gap-6 ${gridCols}`}>
           {testimonials.map((t, i) => (
-            <div
+            <TestimonialCard
               key={i}
-              className="group relative bg-surface-card border-surface-card-border rounded-2xl border p-6 transition-all duration-200 ease-out hover:-translate-y-1 hover:shadow-brand hover:border-brand-primary/30"
-            >
-              <span
-                aria-hidden="true"
-                className="pointer-events-none absolute -top-2 left-4 select-none font-serif text-6xl leading-none text-brand-primary/20"
-              >
-                &ldquo;
-              </span>
-              {slots.showStars && t.rating != null && (
-                <div className="mb-3 flex gap-0.5" aria-label={`${t.rating ?? 5} out of 5 stars`}>
-                  {Array.from({ length: 5 }).map((_, s) => (
-                    <span
-                      key={s}
-                      aria-hidden={true}
-                      className={s < t.rating! ? "text-brand-primary" : "text-surface-muted"}
-                    >
-                      ★
-                    </span>
-                  ))}
-                </div>
-              )}
-              {slots.showTitle && t.title && <p className="mb-2 font-semibold">{t.title}</p>}
-              <p data-slot="quote" className="relative z-10 text-surface-foreground mb-4 italic">
-                &ldquo;{t.text}&rdquo;
-              </p>
-              <div className="flex items-center gap-3">
-                {slots.showAvatar && t.avatarInitials && (
-                  <div className="bg-brand-primary text-brand-on-primary flex h-10 w-10 items-center justify-center rounded-2xl text-sm font-semibold ring-2 ring-brand-primary/20">
-                    {t.avatarInitials}
-                  </div>
-                )}
-                <div>
-                  {slots.showAuthorName && (
-                    <p data-slot="authorName" className="font-semibold">
-                      {t.name}
-                    </p>
-                  )}
-                  {slots.showLocation && t.location && (
-                    <p className="text-surface-muted-foreground text-sm">{t.location}</p>
-                  )}
-                  {slots.showDate && t.date && (
-                    <p className="text-surface-muted-foreground text-xs">{t.date}</p>
-                  )}
-                </div>
-              </div>
-            </div>
+              name={t.name}
+              rating={t.rating ?? 5}
+              text={t.text}
+              title={t.title}
+              date={t.date}
+              location={t.location}
+              featured={(t as { featured?: boolean }).featured ?? false}
+            />
           ))}
         </div>
       </div>
