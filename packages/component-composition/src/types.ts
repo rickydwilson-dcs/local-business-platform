@@ -18,6 +18,13 @@ export const COMPONENT_NAMES = [
   "StatsStrip",
   "CTASection",
   "ContentSection",
+  "FAQSection",
+  "ContactSection",
+  "ImageGridSection",
+  "BlogGrid",
+  "ProjectGrid",
+  "PricingTable",
+  "TextSection",
 ] as const;
 
 export type ComponentName = (typeof COMPONENT_NAMES)[number];

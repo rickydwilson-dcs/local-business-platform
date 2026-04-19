@@ -14,6 +14,20 @@ import {
   CTASectionLayoutSchema,
   ContentSectionSlotsSchema,
   ContentSectionLayoutSchema,
+  FAQSectionSlotsSchema,
+  FAQSectionLayoutSchema,
+  ContactSectionSlotsSchema,
+  ContactSectionLayoutSchema,
+  ImageGridSectionSlotsSchema,
+  ImageGridSectionLayoutSchema,
+  BlogGridSlotsSchema,
+  BlogGridLayoutSchema,
+  ProjectGridSlotsSchema,
+  ProjectGridLayoutSchema,
+  PricingTableSlotsSchema,
+  PricingTableLayoutSchema,
+  TextSectionSlotsSchema,
+  TextSectionLayoutSchema,
 } from "@platform/core-components/components/composable";
 
 export const ConditionConfigSchema = z.object({
@@ -87,6 +101,55 @@ const ContentSectionSectionSchema = z.object({
   layout: ContentSectionLayoutSchema.partial().optional(),
 });
 
+const FAQSectionSectionSchema = z.object({
+  ...BaseSectionFields,
+  component: z.literal("FAQSection"),
+  slots: FAQSectionSlotsSchema.partial().optional(),
+  layout: FAQSectionLayoutSchema.partial().optional(),
+});
+
+const ContactSectionSectionSchema = z.object({
+  ...BaseSectionFields,
+  component: z.literal("ContactSection"),
+  slots: ContactSectionSlotsSchema.partial().optional(),
+  layout: ContactSectionLayoutSchema.partial().optional(),
+});
+
+const ImageGridSectionSectionSchema = z.object({
+  ...BaseSectionFields,
+  component: z.literal("ImageGridSection"),
+  slots: ImageGridSectionSlotsSchema.partial().optional(),
+  layout: ImageGridSectionLayoutSchema.partial().optional(),
+});
+
+const BlogGridSectionSchema = z.object({
+  ...BaseSectionFields,
+  component: z.literal("BlogGrid"),
+  slots: BlogGridSlotsSchema.partial().optional(),
+  layout: BlogGridLayoutSchema.partial().optional(),
+});
+
+const ProjectGridSectionSchema = z.object({
+  ...BaseSectionFields,
+  component: z.literal("ProjectGrid"),
+  slots: ProjectGridSlotsSchema.partial().optional(),
+  layout: ProjectGridLayoutSchema.partial().optional(),
+});
+
+const PricingTableSectionSchema = z.object({
+  ...BaseSectionFields,
+  component: z.literal("PricingTable"),
+  slots: PricingTableSlotsSchema.partial().optional(),
+  layout: PricingTableLayoutSchema.partial().optional(),
+});
+
+const TextSectionSectionSchema = z.object({
+  ...BaseSectionFields,
+  component: z.literal("TextSection"),
+  slots: TextSectionSlotsSchema.partial().optional(),
+  layout: TextSectionLayoutSchema.partial().optional(),
+});
+
 export const SectionSchema = z.discriminatedUnion("component", [
   HeroSectionSectionSchema,
   ServiceCardsSectionSchema,
@@ -95,6 +158,13 @@ export const SectionSchema = z.discriminatedUnion("component", [
   StatsStripSectionSchema,
   CTASectionSectionSchema,
   ContentSectionSectionSchema,
+  FAQSectionSectionSchema,
+  ContactSectionSectionSchema,
+  ImageGridSectionSectionSchema,
+  BlogGridSectionSchema,
+  ProjectGridSectionSchema,
+  PricingTableSectionSchema,
+  TextSectionSectionSchema,
 ]);
 
 export const LayoutBlockConfigSchema = z.object({
