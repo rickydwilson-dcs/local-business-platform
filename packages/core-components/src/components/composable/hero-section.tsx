@@ -72,10 +72,10 @@ export function ComposableHeroSection({
         )}
         <div
           className={`absolute inset-0 ${
-            (data.overlayColor as string) === "brand" ? "bg-brand-primary/75" : "bg-black/70"
+            (data.overlayColor as string) === "brand" ? "bg-brand-primary/75" : "bg-black/75"
           }`}
         />
-        <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 py-16 text-white">
+        <div className="relative z-10 container mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-16 md:py-24 text-white">
           <div
             className={
               isSplit
@@ -89,12 +89,15 @@ export function ComposableHeroSection({
               {slots.showEyebrow && d.eyebrow && (
                 <p
                   data-slot="eyebrow"
-                  className="mb-4 text-sm font-semibold uppercase tracking-widest text-white/80"
+                  className="mb-3 text-sm font-semibold uppercase tracking-widest text-white/80"
                 >
                   {d.eyebrow}
                 </p>
               )}
-              <h1 data-slot="heading" className="text-h1 mb-6 text-white">
+              <h1
+                data-slot="heading"
+                className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 text-white"
+              >
                 {d.heading ?? ""}
               </h1>
               {slots.showSubheading && d.subheading && (
@@ -116,7 +119,7 @@ export function ComposableHeroSection({
                   <a
                     href={typeof data.primaryCtaHref === "string" ? data.primaryCtaHref : "#"}
                     data-slot="primaryCta"
-                    className="bg-brand-primary text-brand-on-primary hover:bg-brand-primary-hover rounded-lg px-6 py-3 font-semibold transition-colors"
+                    className="btn-primary active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-transparent"
                   >
                     {d.primaryCtaText}
                   </a>
@@ -124,7 +127,7 @@ export function ComposableHeroSection({
                 {slots.showSecondaryCta && d.secondaryCtaText && (
                   <a
                     href={typeof data.secondaryCtaHref === "string" ? data.secondaryCtaHref : "#"}
-                    className="rounded-lg border border-white px-6 py-3 font-semibold text-white transition-colors hover:bg-white/10"
+                    className="rounded-lg border border-white px-6 py-3 font-semibold text-white transition-colors hover:bg-white/10 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-transparent"
                   >
                     {d.secondaryCtaText}
                   </a>
@@ -138,7 +141,10 @@ export function ComposableHeroSection({
                         <li key={i} className="flex items-center gap-2">
                           {i < arr.length - 1 ? (
                             <>
-                              <a href={crumb.href} className="hover:text-white transition-colors">
+                              <a
+                                href={crumb.href}
+                                className="hover:text-white transition-all duration-200 ease-out active:scale-[0.98]"
+                              >
                                 {crumb.label}
                               </a>
                               <span aria-hidden="true">/</span>
@@ -162,18 +168,21 @@ export function ComposableHeroSection({
   return (
     <section className={`${bg} ${minHeight} ${className ?? ""}`} data-component="HeroSection">
       <div
-        className={`mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8 ${isSplit ? "grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-center" : isCenter ? "text-center" : ""}`}
+        className={`mx-auto max-w-4xl px-4 py-16 md:py-24 sm:px-6 lg:px-8 ${isSplit ? "grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-center" : isCenter ? "text-center" : ""}`}
       >
         <div>
           {slots.showEyebrow && d.eyebrow && (
             <p
               data-slot="eyebrow"
-              className="text-brand-primary mb-4 text-sm font-semibold uppercase tracking-widest"
+              className="text-brand-primary mb-3 text-sm font-semibold uppercase tracking-widest"
             >
               {d.eyebrow}
             </p>
           )}
-          <h1 data-slot="heading" className="text-h1 mb-6">
+          <h1
+            data-slot="heading"
+            className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 text-surface-foreground"
+          >
             {d.heading ?? ""}
           </h1>
           {slots.showSubheading && d.subheading && (
@@ -201,7 +210,7 @@ export function ComposableHeroSection({
               <a
                 href={typeof data.primaryCtaHref === "string" ? data.primaryCtaHref : "#"}
                 data-slot="primaryCta"
-                className="bg-brand-primary text-brand-on-primary hover:bg-brand-primary-hover rounded-lg px-6 py-3 font-semibold transition-colors"
+                className="btn-primary active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2"
               >
                 {d.primaryCtaText}
               </a>
@@ -209,7 +218,7 @@ export function ComposableHeroSection({
             {slots.showSecondaryCta && d.secondaryCtaText && (
               <a
                 href={typeof data.secondaryCtaHref === "string" ? data.secondaryCtaHref : "#"}
-                className="border-brand-primary text-brand-primary hover:bg-brand-primary/10 rounded-lg border px-6 py-3 font-semibold transition-colors"
+                className="btn-secondary active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2"
               >
                 {d.secondaryCtaText}
               </a>
@@ -225,7 +234,7 @@ export function ComposableHeroSection({
                         <>
                           <a
                             href={crumb.href}
-                            className="hover:text-surface-foreground transition-colors"
+                            className="hover:text-surface-foreground transition-all duration-200 ease-out active:scale-[0.98]"
                           >
                             {crumb.label}
                           </a>

@@ -55,21 +55,24 @@ export function ServiceListSection({
 
   return (
     <section
-      className={`${bg} py-16 lg:py-24 ${className ?? ""}`}
+      className={`${bg} py-16 md:py-24 ${className ?? ""}`}
       data-component="ServiceListSection"
     >
-      <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         <div className="grid gap-x-12 gap-y-0 items-start md:grid-cols-2">
           <div className="md:sticky md:top-24 pb-8 md:pb-0">
             {slots.showEyebrow && eyebrow && (
               <p
                 data-slot="eyebrow"
-                className="mb-3 text-sm font-medium uppercase tracking-widest text-brand-primary"
+                className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-brand-primary"
               >
                 {eyebrow}
               </p>
             )}
-            <h2 data-slot="heading" className="text-h2 mb-6">
+            <h2
+              data-slot="heading"
+              className="text-4xl md:text-5xl font-bold tracking-tight text-surface-foreground mb-6"
+            >
               {heading}
             </h2>
             {slots.showDescription && description && (
@@ -84,7 +87,7 @@ export function ServiceListSection({
               <a
                 href={ctaHref}
                 data-slot="cta"
-                className="inline-flex items-center gap-2 rounded-lg border border-brand-primary px-5 py-2.5 text-sm font-semibold text-brand-primary transition-colors hover:bg-brand-primary hover:text-brand-on-primary"
+                className="btn-secondary inline-flex items-center gap-2 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2"
               >
                 {ctaText}
                 {slots.showArrow && (
@@ -123,7 +126,7 @@ export function ServiceListSection({
                   </div>
                   {slots.showArrow && (
                     <svg
-                      className="hidden h-4 w-4 flex-shrink-0 text-surface-muted-foreground transition-all duration-200 group-hover:translate-x-1 group-hover:text-brand-primary md:block"
+                      className="hidden h-4 w-4 flex-shrink-0 mt-1 text-surface-muted-foreground transition-all duration-200 group-hover:translate-x-1 group-hover:text-brand-primary md:block"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -143,7 +146,7 @@ export function ServiceListSection({
                 <a
                   key={i}
                   href={item.href}
-                  className="group -mx-4 flex items-start gap-4 rounded-xl px-4 py-6 transition-colors duration-200 hover:bg-surface-muted"
+                  className="group -mx-4 flex items-start gap-4 rounded-xl px-4 py-6 transition-colors duration-200 hover:bg-surface-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2"
                 >
                   {inner}
                 </a>

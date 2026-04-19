@@ -21,12 +21,12 @@ export function FAQItem({ question, answer, index }: FAQItemProps) {
         onClick={() => setIsOpen(!isOpen)}
         aria-expanded={isOpen}
         aria-controls={panelId}
-        className="text-surface-foreground flex w-full cursor-pointer items-center justify-between gap-4 text-left text-lg font-semibold"
+        className="text-surface-foreground flex w-full cursor-pointer items-center justify-between gap-4 text-left text-lg font-semibold rounded-lg active:scale-[0.99] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2 focus-visible:ring-offset-surface-background"
       >
         <span>{question}</span>
         <span
           aria-hidden="true"
-          className={`text-brand-primary flex-shrink-0 text-2xl leading-none transition-transform duration-200 ${isOpen ? "rotate-45" : ""}`}
+          className={`text-brand-primary flex-shrink-0 text-2xl leading-none transition-transform duration-300 ease-out ${isOpen ? "rotate-45" : ""}`}
         >
           +
         </span>

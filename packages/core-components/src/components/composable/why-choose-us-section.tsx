@@ -52,10 +52,10 @@ export function WhyChooseUsSection({
 
   return (
     <section
-      className={`${bg} noise-overlay py-16 lg:py-24 ${className ?? ""}`}
+      className={`${bg} noise-overlay py-16 md:py-24 ${className ?? ""}`}
       data-component="WhyChooseUsSection"
     >
-      <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         {slots.showEyebrow && eyebrow && (
           <p
             data-slot="eyebrow"
@@ -70,7 +70,7 @@ export function WhyChooseUsSection({
         )}
         <h2
           data-slot="heading"
-          className={`text-h2 mb-16 ${isDark ? "text-white" : "text-surface-foreground"}`}
+          className={`text-4xl md:text-5xl font-bold tracking-tight mb-16 ${isDark ? "text-white" : "text-surface-foreground"}`}
         >
           {heading}
           {slots.showHeadingHighlight && headingHighlight && (
