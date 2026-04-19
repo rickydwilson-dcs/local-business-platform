@@ -1,0 +1,97 @@
+import type { LayoutParams } from "./layout-params";
+
+export interface WhyChooseUsSectionSlots {
+  showEyebrow: boolean;
+  showHeadingHighlight: boolean;
+  showStat: boolean;
+}
+
+export const WHY_CHOOSE_US_SECTION_DEFAULT_SLOTS: WhyChooseUsSectionSlots = {
+  showEyebrow: true,
+  showHeadingHighlight: true,
+  showStat: true,
+};
+
+interface WhyChooseUsItem {
+  title: string;
+  body: string;
+  stat?: string;
+}
+
+interface WhyChooseUsSectionProps {
+  slots?: Partial<WhyChooseUsSectionSlots>;
+  layout?: Pick<LayoutParams, "background">;
+  data: Record<string, unknown>;
+  className?: string;
+}
+
+export function WhyChooseUsSection({
+  slots: slotOverrides,
+  layout,
+  data,
+  className,
+}: WhyChooseUsSectionProps) {
+  const slots = { ...WHY_CHOOSE_US_SECTION_DEFAULT_SLOTS, ...slotOverrides };
+
+  const bg =
+    layout?.background === "brand"
+      ? "bg-brand-primary"
+      : layout?.background === "subtle"
+        ? "bg-surface-subtle"
+        : layout?.background === "surface"
+          ? "bg-surface-background"
+          : "bg-surface-inverse";
+
+  const items = Array.isArray(data.items) ? (data.items as WhyChooseUsItem[]) : [];
+  const eyebrow = typeof data.eyebrow === "string" ? data.eyebrow : undefined;
+  const heading = typeof data.heading === "string" ? data.heading : "";
+  const headingHighlight =
+    typeof data.headingHighlight === "string" ? data.headingHighlight : undefined;
+
+  return (
+    <section
+      className={`${bg} noise-overlay py-16 lg:py-24 ${className ?? ""}`}
+      data-component="WhyChooseUsSection"
+    >
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        {slots.showEyebrow && eyebrow && (
+          <p
+            data-slot="eyebrow"
+            className="mb-3 text-sm font-semibold uppercase tracking-widest text-brand-primary"
+          >
+            {eyebrow}
+          </p>
+        )}
+        <h2 data-slot="heading" className="text-h2 mb-16 text-white">
+          {heading}
+          {slots.showHeadingHighlight && headingHighlight && (
+            <>
+              {" "}
+              <span className="text-brand-primary">{headingHighlight}</span>
+            </>
+          )}
+        </h2>
+
+        <div className="border-t border-surface-border">
+          {items.map((item, i) => (
+            <div
+              key={i}
+              className="grid items-center gap-6 border-b border-surface-border py-8 md:grid-cols-[2fr_3fr_1fr]"
+            >
+              <h3 className="text-base font-semibold text-white">{item.title}</h3>
+              <p className="text-sm leading-relaxed text-on-inverse-muted">{item.body}</p>
+              {slots.showStat && item.stat && (
+                <p
+                  data-slot="stat"
+                  className="font-mono text-xs uppercase tracking-widest text-on-inverse-muted md:text-right"
+                >
+                  {item.stat}
+                </p>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}

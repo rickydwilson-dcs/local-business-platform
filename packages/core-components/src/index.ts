@@ -11,6 +11,9 @@ export * from "./components/ui/image-overlay-card";
 
 // Composable section components
 export { CategoryCardsSection } from "./components/composable/category-cards-section";
+export { ServiceListSection } from "./components/composable/service-list-section";
+export { LocationPillsSection } from "./components/composable/location-pills-section";
+export { WhyChooseUsSection } from "./components/composable/why-choose-us-section";
 
 // Export all UI components (generic, usable across all sites)
 export * from "./components/ui/accent-underline";

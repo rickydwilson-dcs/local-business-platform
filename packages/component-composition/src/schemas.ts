@@ -28,6 +28,12 @@ import {
   PricingTableLayoutSchema,
   TextSectionSlotsSchema,
   TextSectionLayoutSchema,
+  ServiceListSectionSlotsSchema,
+  ServiceListSectionLayoutSchema,
+  LocationPillsSectionSlotsSchema,
+  LocationPillsSectionLayoutSchema,
+  WhyChooseUsSectionSlotsSchema,
+  WhyChooseUsSectionLayoutSchema,
 } from "@platform/core-components/components/composable";
 
 export const ConditionConfigSchema = z.object({
@@ -156,6 +162,27 @@ export const CategoryCardsSectionSchema = z.object({
   layout: LayoutParamsSchema.pick({ background: true }).optional(),
 });
 
+const ServiceListSectionSectionSchema = z.object({
+  ...BaseSectionFields,
+  component: z.literal("ServiceListSection"),
+  slots: ServiceListSectionSlotsSchema.partial().optional(),
+  layout: ServiceListSectionLayoutSchema.partial().optional(),
+});
+
+const LocationPillsSectionSectionSchema = z.object({
+  ...BaseSectionFields,
+  component: z.literal("LocationPillsSection"),
+  slots: LocationPillsSectionSlotsSchema.partial().optional(),
+  layout: LocationPillsSectionLayoutSchema.partial().optional(),
+});
+
+const WhyChooseUsSectionSectionSchema = z.object({
+  ...BaseSectionFields,
+  component: z.literal("WhyChooseUsSection"),
+  slots: WhyChooseUsSectionSlotsSchema.partial().optional(),
+  layout: WhyChooseUsSectionLayoutSchema.partial().optional(),
+});
+
 export const SectionSchema = z.discriminatedUnion("component", [
   HeroSectionSectionSchema,
   ServiceCardsSectionSchema,
@@ -172,6 +199,9 @@ export const SectionSchema = z.discriminatedUnion("component", [
   PricingTableSectionSchema,
   TextSectionSectionSchema,
   CategoryCardsSectionSchema,
+  ServiceListSectionSectionSchema,
+  LocationPillsSectionSectionSchema,
+  WhyChooseUsSectionSectionSchema,
 ]);
 
 export const LayoutBlockConfigSchema = z.object({

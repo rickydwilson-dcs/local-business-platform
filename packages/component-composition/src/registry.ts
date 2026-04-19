@@ -58,6 +58,18 @@ import {
   TEXT_SECTION_DEFAULT_SLOTS,
   TextSectionSlotsSchema,
   TextSectionLayoutSchema,
+  ServiceListSection,
+  SERVICE_LIST_SECTION_DEFAULT_SLOTS,
+  ServiceListSectionSlotsSchema,
+  ServiceListSectionLayoutSchema,
+  LocationPillsSection,
+  LOCATION_PILLS_SECTION_DEFAULT_SLOTS,
+  LocationPillsSectionSlotsSchema,
+  LocationPillsSectionLayoutSchema,
+  WhyChooseUsSection,
+  WHY_CHOOSE_US_SECTION_DEFAULT_SLOTS,
+  WhyChooseUsSectionSlotsSchema,
+  WhyChooseUsSectionLayoutSchema,
 } from "@platform/core-components/components/composable";
 import type { ComponentName } from "./types";
 
@@ -165,5 +177,23 @@ export const COMPONENT_REGISTRY: Record<ComponentName, ComponentDefinition> = {
     defaultSlots: {},
     slotsSchema: z.object({}),
     layoutSchema: z.object({}),
+  },
+  ServiceListSection: {
+    component: ServiceListSection as ComponentDefinition["component"],
+    defaultSlots: s(SERVICE_LIST_SECTION_DEFAULT_SLOTS),
+    slotsSchema: ServiceListSectionSlotsSchema,
+    layoutSchema: ServiceListSectionLayoutSchema,
+  },
+  LocationPillsSection: {
+    component: LocationPillsSection as ComponentDefinition["component"],
+    defaultSlots: s(LOCATION_PILLS_SECTION_DEFAULT_SLOTS),
+    slotsSchema: LocationPillsSectionSlotsSchema,
+    layoutSchema: LocationPillsSectionLayoutSchema,
+  },
+  WhyChooseUsSection: {
+    component: WhyChooseUsSection as ComponentDefinition["component"],
+    defaultSlots: s(WHY_CHOOSE_US_SECTION_DEFAULT_SLOTS),
+    slotsSchema: WhyChooseUsSectionSlotsSchema,
+    layoutSchema: WhyChooseUsSectionLayoutSchema,
   },
 };

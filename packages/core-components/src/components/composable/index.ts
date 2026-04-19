@@ -14,6 +14,9 @@ export * from "./project-grid";
 export * from "./pricing-table";
 export * from "./text-section";
 export * from "./category-cards-section";
+export * from "./service-list-section";
+export * from "./location-pills-section";
+export * from "./why-choose-us-section";
 // slots schemas
 export * from "./hero-section.slots";
 export * from "./service-cards.slots";
@@ -29,3 +32,6 @@ export * from "./blog-grid.slots";
 export * from "./project-grid.slots";
 export * from "./pricing-table.slots";
 export * from "./text-section.slots";
+export * from "./service-list-section.slots";
+export * from "./location-pills-section.slots";
+export * from "./why-choose-us-section.slots";
