@@ -3,6 +3,16 @@ import { evaluateCondition } from "./conditions";
 import { COMPONENT_REGISTRY } from "./registry";
 import type { SiteCompositionConfig, ComponentName, RenderDiagnostic, RenderResult } from "./types";
 
+function getByPath(obj: Record<string, unknown>, path: string): unknown {
+  return path
+    .split(".")
+    .reduce<unknown>(
+      (acc, key) =>
+        acc && typeof acc === "object" ? (acc as Record<string, unknown>)[key] : undefined,
+      obj
+    );
+}
+
 export function renderComposedPage(options: {
   composition: SiteCompositionConfig;
   pageType: string;
@@ -48,11 +58,10 @@ export function renderComposedPage(options: {
 
     try {
       const Component = definition.component;
+      const resolved = section.dataKey ? getByPath(data, section.dataKey) : undefined;
       const sectionData =
-        section.dataKey &&
-        typeof data[section.dataKey] === "object" &&
-        data[section.dataKey] !== null
-          ? { ...data, ...(data[section.dataKey] as Record<string, unknown>) }
+        section.dataKey && typeof resolved === "object" && resolved !== null
+          ? { ...data, ...(resolved as Record<string, unknown>) }
           : data;
       elements.push(
         React.createElement(Component, {

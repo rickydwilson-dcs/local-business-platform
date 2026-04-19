@@ -31,17 +31,15 @@ local-business-platform/
 │   ├── dj-fox-electrical/          # Production site (electrical)
 │   ├── mad-graphics/               # Production site (vehicle graphics & print, cygnus theme)
 │   ├── showcase/                   # Internal component/theme showcase
-│   ├── _castor-plumbing/           # Theme reference site (castor)
-│   ├── _cygnus-graphics/           # Theme reference site (cygnus)
-│   ├── _lyra-garden/               # Theme reference site (lyra)
-│   ├── _nova-print/                # Theme reference site (nova)
-│   ├── _rigel-events/              # Theme reference site (corvus) — events use case
-│   ├── test-corvus/                 # Pipeline test site (corvus theme)
+│   ├── poc-composition-test/       # Composition system PoC + UI library (/ui-library route)
+│   ├── designlab-test/             # Pipeline test site (designlab theme)
+│   ├── navagarden-test/            # Pipeline test site (navagarden theme)
 │   └── [theme-name]-test/          # Temporary test sites (created by pipeline, removed after review)
 ├── packages/
 │   ├── core-components/            # Shared UI components (@platform/core-components)
+│   ├── component-composition/      # Config-driven page composition engine
 │   ├── theme-system/               # Theming engine (@platform/theme-system)
-│   ├── themes/                     # Named theme CSS packages (atlas, castor, corvus, cygnus, lyra, nova, orion, polaris, sirius, solaris, vega)
+│   ├── themes/                     # Named theme CSS packages (cygnus, designlab, navagarden, orion, solaris, vega)
 │   └── intake-system/              # Customer intake automation (@platform/intake-system)
 ├── tools/                          # Site creation & deployment CLI tools
 ├── docs/                           # Documentation
@@ -100,7 +98,7 @@ Drop a new MDX file in the right directory, build, and a new page appears. No co
 
 `@platform/theme-system` transforms per-site config into CSS custom properties and Tailwind utilities. Each site defines a `theme.config.ts` with brand colors; the plugin generates `:root` variables and classes like `bg-brand-primary`. Change the config, rebuild, and the entire site re-brands.
 
-**Named Themes** — `packages/themes/` contains pre-built CSS utility packages for each visual identity. `orion` (dark header, full-bleed hero, red accent), `vega` (light header, card grid, navy/blue), `lyra` (editorial serif, muted sage/cream palette), `cygnus` (dark mode, Signal Orange, Craft Green), `nova` (bold orange + green, light header), `castor` (Trade Navy + Fresh Sage, plumber trade), `polaris` (dark industrial brutalist, Aviation Red), `sirius` (light premium tech agency, Electric Blue + Teal), `solaris` (soft blue-white, sky blue + chartreuse, geometric shapes), `atlas`, and `corvus` (conference/event platform, Indigo + Gold + Magenta) are the available identities. Each site's `globals.css` imports its theme package, and `theme.config.ts` specifies a `componentRegistry` that selects the right component variants for that identity. `ThemeProvider` from `@platform/core-components` makes the registry available at runtime to client components. Themes also export **page layout templates** from `packages/themes/[name]/pages/` — props-based Server Components that own the visual layout of each page type; sites' `page.tsx` files are thin wrappers that fetch data, call `generateMetadata()`/`generateStaticParams()`, and render the theme template.
+**Named Themes** — `packages/themes/` contains pre-built CSS utility packages for each visual identity. `orion` (dark header, full-bleed hero, red accent), `vega` (light header, card grid, navy/blue), `cygnus` (dark mode, Signal Orange, Craft Green), `solaris` (soft blue-white, sky blue + chartreuse, geometric shapes), `designlab`, and `navagarden` are the available identities. Each site's `globals.css` imports its theme package, and `theme.config.ts` specifies a `componentRegistry` that selects the right component variants for that identity. `ThemeProvider` from `@platform/core-components` makes the registry available at runtime to client components. Themes also export **page layout templates** from `packages/themes/[name]/pages/` — props-based Server Components that own the visual layout of each page type; sites' `page.tsx` files are thin wrappers that fetch data, call `generateMetadata()`/`generateStaticParams()`, and render the theme template.
 
 ### 6. Intake System (Site Generation)
 

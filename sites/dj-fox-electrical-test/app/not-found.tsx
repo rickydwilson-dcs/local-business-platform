@@ -21,14 +21,14 @@ export default function NotFound() {
             href="/"
             className="inline-flex items-center justify-center gap-2 bg-brand-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-brand-primary-hover transition-colors"
           >
-            <Home className="w-5 h-5" />
+            <Home className="w-5 h-5" aria-hidden={true} />
             Go to Homepage
           </Link>
           <button
             onClick={() => window.history.back()}
             className="inline-flex items-center justify-center gap-2 border border-surface-border text-surface-foreground px-6 py-3 rounded-lg font-semibold hover:bg-surface-subtle transition-colors"
           >
-            <ArrowLeft className="w-5 h-5" />
+            <ArrowLeft className="w-5 h-5" aria-hidden={true} />
             Go Back
           </button>
         </div>
@@ -40,14 +40,14 @@ export default function NotFound() {
               href={`tel:${PHONE_TEL}`}
               className="flex items-center justify-center gap-2 text-brand-primary hover:underline"
             >
-              <Phone className="w-4 h-4" />
+              <Phone className="w-4 h-4" aria-hidden={true} />
               {PHONE_DISPLAY}
             </Link>
             <Link
               href={`mailto:${BUSINESS_EMAIL}`}
               className="flex items-center justify-center gap-2 text-brand-primary hover:underline"
             >
-              <Mail className="w-4 h-4" />
+              <Mail className="w-4 h-4" aria-hidden={true} />
               {BUSINESS_EMAIL}
             </Link>
           </div>

@@ -116,9 +116,13 @@ export function BlogGrid({ slots: slotOverrides, layout, data, className }: Blog
                   </span>
                 )}
                 {slots.showDate && post.date && (
-                  <p data-slot="date" className="text-surface-muted-foreground text-xs">
+                  <time
+                    dateTime={post.date}
+                    data-slot="date"
+                    className="text-surface-muted-foreground text-xs"
+                  >
                     {formatDate(post.date)}
-                  </p>
+                  </time>
                 )}
                 <h3 data-slot="title" className="text-surface-foreground text-xl font-bold">
                   <Link href={`/blog/${post.slug}`}>{post.title}</Link>

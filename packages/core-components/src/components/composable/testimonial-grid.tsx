@@ -83,10 +83,11 @@ export function TestimonialGrid({
               className="bg-surface-card border-surface-card-border rounded-xl border p-6"
             >
               {slots.showStars && t.rating != null && (
-                <div className="mb-3 flex gap-0.5">
+                <div className="mb-3 flex gap-0.5" aria-label={`${t.rating ?? 5} out of 5 stars`}>
                   {Array.from({ length: 5 }).map((_, s) => (
                     <span
                       key={s}
+                      aria-hidden={true}
                       className={s < t.rating! ? "text-brand-primary" : "text-surface-muted"}
                     >
                       ★

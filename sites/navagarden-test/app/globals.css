@@ -1,0 +1,23 @@
+@import "../../../packages/themes/navagarden/globals.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/**
+ * Base Template — Site-specific CSS
+ *
+ * Theme: Vega (light header, split hero)
+ * Theme variables injected by @platform/theme-system
+ */
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-surface-background text-surface-foreground;
+    font-feature-settings: 'rlig' 1, 'calt' 1;
+  }
+}

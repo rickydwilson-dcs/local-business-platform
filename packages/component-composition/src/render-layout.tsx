@@ -2,6 +2,16 @@ import React from "react";
 import type { SiteCompositionConfig, LayoutBlockConfig } from "./types";
 import { getLayoutComponent } from "./layout-registry";
 
+function getByPath(obj: Record<string, unknown>, path: string): unknown {
+  return path
+    .split(".")
+    .reduce<unknown>(
+      (acc, key) =>
+        acc && typeof acc === "object" ? (acc as Record<string, unknown>)[key] : undefined,
+      obj
+    );
+}
+
 export interface LayoutRenderResult {
   headerElement: React.ReactElement | null;
   footerElement: React.ReactElement | null;
@@ -26,9 +36,10 @@ export function renderComposedLayout(options: {
       return null;
     }
 
+    const resolved = config.dataKey ? getByPath(data, config.dataKey) : undefined;
     const baseData =
-      config.dataKey && typeof data[config.dataKey] === "object" && data[config.dataKey] !== null
-        ? (data[config.dataKey] as Record<string, unknown>)
+      config.dataKey && typeof resolved === "object" && resolved !== null
+        ? (resolved as Record<string, unknown>)
         : data;
 
     const props: Record<string, unknown> = {

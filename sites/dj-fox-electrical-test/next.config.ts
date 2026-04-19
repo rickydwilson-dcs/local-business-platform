@@ -10,6 +10,7 @@ const withMDX = createMDX({
 });
 
 const nextConfig: NextConfig = {
+  compress: true,
   pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
   // Enable experimental features for better performance
   experimental: {
@@ -45,6 +46,7 @@ const nextConfig: NextConfig = {
   },
   // Image optimization configuration for better performance
   images: {
+    formats: ["image/avif", "image/webp"],
     // Remote patterns for image hosting
     remotePatterns: [
       {

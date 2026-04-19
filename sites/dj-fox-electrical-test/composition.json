@@ -20,7 +20,7 @@
         {
           "component": "StatsStrip",
           "dataKey": "home.stats",
-          "layout": { "background": "subtle" }
+          "layout": { "background": "inverse" }
         },
         {
           "component": "ServiceCards",
@@ -30,13 +30,12 @@
         {
           "component": "TestimonialGrid",
           "dataKey": "reviews",
-          "layout": { "background": "subtle" },
-          "slots": { "showSectionHeading": true }
+          "layout": { "background": "subtle" }
         },
         {
           "component": "FeatureGrid",
           "dataKey": "home.whyChooseUs",
-          "layout": { "columns": 4 }
+          "layout": { "columns": 4, "background": "inverse" }
         },
         {
           "component": "CTASection",

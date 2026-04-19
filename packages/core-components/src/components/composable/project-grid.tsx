@@ -127,9 +127,10 @@ export function ProjectGrid({ slots: slotOverrides, layout, data, className }: P
 
               <Link
                 href={`/projects/${project.slug}`}
+                aria-label={`View project: ${project.title}`}
                 className="text-brand-primary text-sm font-medium"
               >
-                View Project →
+                View Project <span aria-hidden="true">→</span>
               </Link>
             </article>
           ))}

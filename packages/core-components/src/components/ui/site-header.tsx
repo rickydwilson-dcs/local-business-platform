@@ -93,7 +93,9 @@ export function SiteHeader({
   const headerClasses = [
     sticky ? "sticky top-0" : "",
     "z-40",
-    isDark ? "bg-surface-inverse border-b border-surface-subtle" : "bg-surface-card border-b border-surface-subtle",
+    isDark
+      ? "bg-surface-inverse border-b border-surface-subtle"
+      : "bg-surface-card border-b border-surface-subtle",
   ]
     .filter(Boolean)
     .join(" ");
@@ -122,7 +124,7 @@ export function SiteHeader({
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-8">
+          <nav aria-label="Main navigation" className="hidden lg:flex items-center gap-8">
             {navigation.map((item) => {
               if (item.hasDropdown && (counties.length > 0 || locations.length > 0)) {
                 return (

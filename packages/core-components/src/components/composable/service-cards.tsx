@@ -96,8 +96,12 @@ export function ServiceCards({ slots: slotOverrides, layout, data, className }: 
                 <p className="text-surface-muted-foreground mb-4">{service.description}</p>
               )}
               {slots.showCta && service.href && (
-                <a href={service.href} className="text-brand-primary font-semibold hover:underline">
-                  Learn more →
+                <a
+                  href={service.href}
+                  aria-label={`Learn more about ${service.title}`}
+                  className="text-brand-primary font-semibold hover:underline"
+                >
+                  Learn more <span aria-hidden="true">→</span>
                 </a>
               )}
             </div>

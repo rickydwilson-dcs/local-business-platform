@@ -24,6 +24,9 @@ Phase 2: Build sites (parallel, after packages complete)
     ├── sites/dj-fox-electrical    → next build
     ├── sites/mad-graphics         → next build
     ├── sites/showcase             → next build
+    ├── sites/poc-composition-test → next build (composition system PoC)
+    ├── sites/designlab-test       → next build (pipeline test site)
+    ├── sites/navagarden-test      → next build (pipeline test site)
     └── sites/[theme-name]-test    → next build (test only, created by pipeline)
     ↓
 Each next build:

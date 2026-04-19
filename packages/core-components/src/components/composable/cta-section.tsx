@@ -50,7 +50,10 @@ export function ComposableCTASection({
           {d.heading ?? ""}
         </h2>
         {slots.showSubheading && d.subheading && (
-          <p data-slot="subheading" className="text-surface-muted-foreground mb-8 text-xl">
+          <p
+            data-slot="subheading"
+            className={`mb-8 text-xl ${layout?.background === "brand" ? "text-brand-on-primary" : "text-surface-muted-foreground"}`}
+          >
             {d.subheading}
           </p>
         )}

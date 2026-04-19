@@ -1,0 +1,177 @@
+[
+  {
+    "id": "VFR-001",
+    "domain": "visual",
+    "status": "fixed",
+    "attempt": 1,
+    "description": "Added getByPath dot-path resolver to render-page.tsx and render-layout.tsx; replaced direct data[section.dataKey] lookups with getByPath(data, section.dataKey) to support nested paths like 'home.hero'"
+  },
+  {
+    "id": "VFR-002",
+    "domain": "visual",
+    "status": "fixed",
+    "attempt": 1,
+    "description": "Copied content/ directory from sites/dj-fox-electrical to sites/dj-fox-electrical-test"
+  },
+  {
+    "id": "VFR-003",
+    "domain": "visual",
+    "status": "fixed",
+    "attempt": 1,
+    "description": "Copied public/ directory from sites/dj-fox-electrical to sites/dj-fox-electrical-test"
+  },
+  {
+    "id": "VFR-004",
+    "domain": "visual",
+    "status": "unresolved",
+    "attempts": 0,
+    "reason": "Medium effort — requires extending ComposableHeroSection with new hero image/overlay layout variant"
+  },
+  {
+    "id": "VFR-005",
+    "domain": "visual",
+    "status": "unresolved",
+    "attempts": 0,
+    "reason": "Medium effort — requires ContactForm client boundary wiring"
+  },
+  {
+    "id": "VFR-006",
+    "domain": "visual",
+    "status": "unresolved",
+    "attempts": 0,
+    "reason": "Medium effort — requires new CategoryCardsSection component for services category grouping"
+  },
+  {
+    "id": "VFR-007",
+    "domain": "visual",
+    "status": "unresolved",
+    "attempts": 0,
+    "reason": "Medium effort — requires content/location data restructure for trust details and MDX-backed count"
+  },
+  {
+    "id": "VFR-008",
+    "domain": "visual",
+    "status": "unresolved",
+    "attempts": 0,
+    "reason": "Medium effort — requires wiring Reviews MDX content loader in lib/page-data.ts"
+  },
+  {
+    "id": "VFR-009",
+    "domain": "visual",
+    "status": "unresolved",
+    "attempts": 0,
+    "reason": "Medium effort — requires wiring Projects/blog/pricing MDX loaders in lib/page-data.ts"
+  },
+  {
+    "id": "VFR-011",
+    "domain": "visual",
+    "status": "fixed",
+    "attempt": 1,
+    "description": "Updated composition.json home page: StatsStrip background changed from 'subtle' to 'inverse'; FeatureGrid (whyChooseUs) layout updated to add 'background': 'inverse'"
+  },
+  {
+    "id": "PERF-001",
+    "domain": "performance",
+    "status": "fixed",
+    "attempt": 1,
+    "description": "Added sizes='(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw' prop to Image with fill in image-grid-section.tsx"
+  },
+  {
+    "id": "PERF-002",
+    "domain": "performance",
+    "status": "fixed",
+    "attempt": 1,
+    "description": "Added formats: ['image/avif', 'image/webp'] to images config in sites/dj-fox-electrical-test/next.config.ts"
+  },
+  {
+    "id": "PERF-003",
+    "domain": "performance",
+    "status": "fixed",
+    "attempt": 1,
+    "description": "Added compress: true at the top of nextConfig in sites/dj-fox-electrical-test/next.config.ts"
+  },
+  {
+    "id": "A11Y-001",
+    "domain": "accessibility",
+    "status": "fixed",
+    "attempt": 1,
+    "description": "Added aria-label='Main navigation' to <nav> in site-header.tsx; added aria-label='Mobile navigation' to <nav> in mobile-menu.tsx"
+  },
+  {
+    "id": "A11Y-002",
+    "domain": "accessibility",
+    "status": "fixed",
+    "attempt": 1,
+    "description": "Added focus:ring-2 focus:ring-brand-primary focus:ring-offset-2 to .mobile-menu-close @apply line in packages/themes/orion/globals.css"
+  },
+  {
+    "id": "A11Y-003",
+    "domain": "accessibility",
+    "status": "fixed",
+    "attempt": 1,
+    "description": "Added aria-hidden={true} to chevron SVG in locations-dropdown.tsx trigger button; mobile-menu.tsx chevron already had aria-hidden='true' (no change needed)"
+  },
+  {
+    "id": "A11Y-004",
+    "domain": "accessibility",
+    "status": "fixed",
+    "attempt": 1,
+    "description": "Changed aria-haspopup='true' to aria-haspopup='menu' on trigger button; removed tabIndex={0} from all three <Link role='menuitem'> instances (SimpleDropdown location link, MegaMenuDropdown county header, MegaMenuDropdown town link)"
+  },
+  {
+    "id": "A11Y-005",
+    "domain": "accessibility",
+    "status": "fixed",
+    "attempt": 1,
+    "description": "Added aria-label='{n} out of 5 stars' to the star wrapper div and aria-hidden={true} to each individual star <span> in testimonial-grid.tsx"
+  },
+  {
+    "id": "A11Y-006",
+    "domain": "accessibility",
+    "status": "unresolved",
+    "attempts": 0,
+    "reason": "Medium effort — requires ContactForm client boundary wiring (same as VFR-005)"
+  },
+  {
+    "id": "A11Y-007",
+    "domain": "accessibility",
+    "status": "unresolved",
+    "attempts": 0,
+    "reason": "Medium effort — requires data schema change across 2 components for image alt text data keys"
+  },
+  {
+    "id": "A11Y-008",
+    "domain": "accessibility",
+    "status": "fixed",
+    "attempt": 1,
+    "description": "Changed first <td> in table rows to <th scope='row'> in the type==='table' branch of text-section.tsx"
+  },
+  {
+    "id": "A11Y-009",
+    "domain": "accessibility",
+    "status": "fixed",
+    "attempt": 1,
+    "description": "Added aria-hidden={true} to Home, ArrowLeft, Phone, and Mail icon components in sites/dj-fox-electrical-test/app/not-found.tsx"
+  },
+  {
+    "id": "A11Y-010",
+    "domain": "accessibility",
+    "status": "fixed",
+    "attempt": 1,
+    "description": "Added aria-label='Learn more about {title}' to Learn more link in service-cards.tsx and wrapped → in <span aria-hidden='true'>; added aria-label='View project: {title}' to View Project link in project-grid.tsx and wrapped → in <span aria-hidden='true'>"
+  },
+  {
+    "id": "A11Y-011",
+    "domain": "accessibility",
+    "status": "fixed",
+    "attempt": 1,
+    "description": "Applied conditional class to CTASection subheading: uses text-brand-on-primary when layout.background==='brand', otherwise text-surface-muted-foreground"
+  },
+  {
+    "id": "A11Y-012",
+    "domain": "accessibility",
+    "status": "fixed",
+    "attempt": 1,
+    "description": "Changed <p data-slot='date'> to <time dateTime={post.date} data-slot='date'> for blog post dates in blog-grid.tsx"
+  }
+]

@@ -122,7 +122,9 @@ function renderSection(section: TextSectionBlock, index: number) {
             <tbody>
               {items.map((item, i) => (
                 <tr key={i} className={i % 2 === 1 ? "bg-surface-subtle" : ""}>
-                  <td className="px-4 py-3 font-medium">{item.label}</td>
+                  <th scope="row" className="px-4 py-3 font-medium">
+                    {item.label}
+                  </th>
                   <td className="px-4 py-3">{item.value}</td>
                 </tr>
               ))}

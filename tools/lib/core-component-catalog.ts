@@ -18,6 +18,7 @@ export interface CatalogEntry {
   layoutCues: string[];
   interaction: "none" | "minimal" | "stateful";
   importPath: string;
+  composable?: boolean;
 }
 
 // ============================================================================
@@ -224,5 +225,69 @@ export const CORE_COMPONENT_CATALOG: CatalogEntry[] = [
     layoutCues: ["showcase", "features", "grid"],
     interaction: "none",
     importPath: "@platform/core-components",
+  },
+  // Composable section components
+  {
+    name: "HeroSection",
+    category: "Hero",
+    requiredSlots: ["heading", "heroImage", "primaryCtaText"],
+    layoutCues: ["hero", "full-bleed", "split", "centered", "above-fold"],
+    interaction: "none",
+    importPath: "@platform/core-components",
+    composable: true,
+  },
+  {
+    name: "ServiceCards",
+    category: "Cards",
+    requiredSlots: ["heading", "services"],
+    layoutCues: ["service", "cards", "grid", "icons"],
+    interaction: "none",
+    importPath: "@platform/core-components",
+    composable: true,
+  },
+  {
+    name: "FeatureGrid",
+    category: "Cards",
+    requiredSlots: ["heading", "features"],
+    layoutCues: ["feature", "grid", "icon-cards", "benefits"],
+    interaction: "none",
+    importPath: "@platform/core-components",
+    composable: true,
+  },
+  {
+    name: "TestimonialGrid",
+    category: "Social Proof",
+    requiredSlots: ["testimonials", "heading"],
+    layoutCues: ["testimonials", "reviews", "quotes", "social-proof"],
+    interaction: "none",
+    importPath: "@platform/core-components",
+    composable: true,
+  },
+  {
+    name: "StatsStrip",
+    category: "Stats",
+    requiredSlots: ["stats"],
+    layoutCues: ["stats", "numbers", "strip", "horizontal", "achievements"],
+    interaction: "none",
+    importPath: "@platform/core-components",
+    composable: true,
+  },
+  {
+    name: "CTASection",
+    category: "CTA",
+    requiredSlots: ["heading", "primaryCtaText"],
+    layoutCues: ["cta", "call-to-action", "band", "full-width", "conversion"],
+    interaction: "none",
+    importPath: "@platform/core-components",
+    composable: true,
+  },
+  {
+    name: "ContentSection",
+    category: "Content",
+    requiredSlots: ["heading", "body"],
+    layoutCues: ["content", "text", "split", "prose", "about"],
+    interaction: "none",
+    importPath: "@platform/core-components",
+    composable: true,
   },
 ];

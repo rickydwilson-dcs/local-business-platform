@@ -173,7 +173,7 @@ export function MobileMenu({
         </div>
 
         {/* Navigation Links */}
-        <nav className="px-6 py-6">
+        <nav aria-label="Mobile navigation" className="px-6 py-6">
           <ul className="space-y-4">
             {navItems.map((item: NavItem) => {
               // Handle locations dropdown separately
@@ -204,9 +204,7 @@ export function MobileMenu({
                       </svg>
                     </button>
                     {locationsExpanded && (
-                      <div
-                        className={`mt-2 ml-4 space-y-2 border-l-2 border-surface-subtle pl-4`}
-                      >
+                      <div className={`mt-2 ml-4 space-y-2 border-l-2 border-surface-subtle pl-4`}>
                         <Link
                           href="/locations"
                           onClick={closeMenu}
