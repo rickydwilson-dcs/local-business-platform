@@ -72,10 +72,10 @@ export function ComposableHeroSection({
         )}
         <div
           className={`absolute inset-0 ${
-            (data.overlayColor as string) === "brand" ? "bg-brand-primary/60" : "bg-black/70"
+            (data.overlayColor as string) === "brand" ? "bg-brand-primary/75" : "bg-black/70"
           }`}
         />
-        <div className="relative z-10 container mx-auto px-4 py-16 text-white">
+        <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 py-16 text-white">
           <div
             className={
               isSplit
