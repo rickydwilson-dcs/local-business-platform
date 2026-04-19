@@ -8,6 +8,7 @@ export const HeroSectionSlotsSchema = z
     showSecondaryCta: z.boolean(),
     showHeroImage: z.boolean(),
     showTrustBadges: z.boolean(),
+    showBreadcrumbs: z.boolean(),
   })
   .strict();
 

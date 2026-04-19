@@ -240,6 +240,10 @@ export const siteData = {
       primaryCtaHref: siteConfig.cta.primary.href,
       secondaryCtaText: `Call ${PHONE_DISPLAY}`,
       secondaryCtaHref: `tel:${PHONE_TEL}`,
+      breadcrumbs: [
+        { label: "Home", href: "/" },
+        { label: "About Us", href: "/about" },
+      ],
     },
 
     content: {
@@ -306,6 +310,10 @@ export const siteData = {
       primaryCtaHref: `tel:${PHONE_TEL}`,
       secondaryCtaText: "Email us",
       secondaryCtaHref: `mailto:${BUSINESS_EMAIL}`,
+      breadcrumbs: [
+        { label: "Home", href: "/" },
+        { label: "Contact", href: "/contact" },
+      ],
     },
 
     heading: "Get in touch",
@@ -374,6 +382,10 @@ export const siteData = {
       primaryCtaHref: siteConfig.cta.primary.href,
       secondaryCtaText: `Call ${PHONE_DISPLAY}`,
       secondaryCtaHref: `tel:${PHONE_TEL}`,
+      breadcrumbs: [
+        { label: "Home", href: "/" },
+        { label: "Services", href: "/services" },
+      ],
     },
 
     heading: "All services",
@@ -438,6 +450,19 @@ export const siteData = {
   // Locations list page — FeatureGrid data shape
   // -------------------------------------------------------------------------
   locations: {
+    hero: {
+      eyebrow: "Service Areas",
+      heading: "Areas We Serve",
+      subheading: `${siteConfig.business.name} covers ${siteConfig.business.address.city} and surrounding East Sussex towns. Find expert electrical services in your area.`,
+      primaryCtaText: siteConfig.cta.primary.label,
+      primaryCtaHref: siteConfig.cta.primary.href,
+      secondaryCtaText: `Call ${PHONE_DISPLAY}`,
+      secondaryCtaHref: `tel:${PHONE_TEL}`,
+      breadcrumbs: [
+        { label: "Home", href: "/" },
+        { label: "Locations", href: "/locations" },
+      ],
+    },
     heading: "Areas We Serve",
     intro: `${siteConfig.business.name} serves customers across ${siteConfig.serviceAreas.join(", ")}. Find our electrical services in your area.`,
     features: allLocationsFromConfig.map((l) => ({
@@ -458,6 +483,10 @@ export const siteData = {
       primaryCtaHref: siteConfig.cta.primary.href,
       secondaryCtaText: `Call ${PHONE_DISPLAY}`,
       secondaryCtaHref: `tel:${PHONE_TEL}`,
+      breadcrumbs: [
+        { label: "Home", href: "/" },
+        { label: "Reviews", href: "/reviews" },
+      ],
     },
 
     heading: "What our customers say",
@@ -487,6 +516,10 @@ export const siteData = {
       primaryCtaHref: siteConfig.cta.primary.href,
       secondaryCtaText: `Call ${PHONE_DISPLAY}`,
       secondaryCtaHref: `tel:${PHONE_TEL}`,
+      breadcrumbs: [
+        { label: "Home", href: "/" },
+        { label: "Projects", href: "/projects" },
+      ],
     },
 
     heading: "Recent projects",
@@ -513,6 +546,10 @@ export const siteData = {
       primaryCtaHref: siteConfig.cta.primary.href,
       secondaryCtaText: `Call ${PHONE_DISPLAY}`,
       secondaryCtaHref: `tel:${PHONE_TEL}`,
+      breadcrumbs: [
+        { label: "Home", href: "/" },
+        { label: "Blog", href: "/blog" },
+      ],
     },
     heading: "Latest articles",
     subheading:
@@ -533,6 +570,10 @@ export const siteData = {
       primaryCtaHref: "/contact",
       secondaryCtaText: `Call ${PHONE_DISPLAY}`,
       secondaryCtaHref: `tel:${PHONE_TEL}`,
+      breadcrumbs: [
+        { label: "Home", href: "/" },
+        { label: "Pricing", href: "/pricing" },
+      ],
     },
 
     emergencyBanner: {

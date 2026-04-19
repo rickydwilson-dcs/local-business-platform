@@ -9,6 +9,7 @@ export interface HeroSectionSlots {
   showSecondaryCta: boolean;
   showHeroImage: boolean;
   showTrustBadges: boolean;
+  showBreadcrumbs: boolean;
 }
 
 export const HERO_SECTION_DEFAULT_SLOTS: HeroSectionSlots = {
@@ -18,6 +19,7 @@ export const HERO_SECTION_DEFAULT_SLOTS: HeroSectionSlots = {
   showSecondaryCta: true,
   showHeroImage: true,
   showTrustBadges: false,
+  showBreadcrumbs: false,
 };
 
 interface HeroSectionProps {
@@ -128,6 +130,28 @@ export function ComposableHeroSection({
                   </a>
                 )}
               </div>
+              {slots.showBreadcrumbs && Array.isArray(data.breadcrumbs) && (
+                <nav aria-label="Breadcrumb" className="mt-4">
+                  <ol className="flex items-center gap-2 text-sm text-white/60">
+                    {(data.breadcrumbs as Array<{ label: string; href: string }>).map(
+                      (crumb, i, arr) => (
+                        <li key={i} className="flex items-center gap-2">
+                          {i < arr.length - 1 ? (
+                            <>
+                              <a href={crumb.href} className="hover:text-white transition-colors">
+                                {crumb.label}
+                              </a>
+                              <span aria-hidden="true">/</span>
+                            </>
+                          ) : (
+                            <span className="text-white/80">{crumb.label}</span>
+                          )}
+                        </li>
+                      )
+                    )}
+                  </ol>
+                </nav>
+              )}
             </div>
           </div>
         </div>
@@ -191,6 +215,31 @@ export function ComposableHeroSection({
               </a>
             )}
           </div>
+          {slots.showBreadcrumbs && Array.isArray(data.breadcrumbs) && (
+            <nav aria-label="Breadcrumb" className="mt-4">
+              <ol className="flex items-center gap-2 text-sm text-surface-muted-foreground">
+                {(data.breadcrumbs as Array<{ label: string; href: string }>).map(
+                  (crumb, i, arr) => (
+                    <li key={i} className="flex items-center gap-2">
+                      {i < arr.length - 1 ? (
+                        <>
+                          <a
+                            href={crumb.href}
+                            className="hover:text-surface-foreground transition-colors"
+                          >
+                            {crumb.label}
+                          </a>
+                          <span aria-hidden="true">/</span>
+                        </>
+                      ) : (
+                        <span className="text-surface-foreground">{crumb.label}</span>
+                      )}
+                    </li>
+                  )
+                )}
+              </ol>
+            </nav>
+          )}
         </div>
         {isSplit && slots.showHeroImage && typeof data.heroImage === "string" && (
           <div className="relative aspect-video overflow-hidden rounded-xl">

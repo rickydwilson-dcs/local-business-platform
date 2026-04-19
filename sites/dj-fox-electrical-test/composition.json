@@ -51,7 +51,7 @@
         {
           "component": "HeroSection",
           "dataKey": "about.hero",
-          "slots": { "showHeroImage": false }
+          "slots": { "showHeroImage": false, "showBreadcrumbs": true }
         },
         {
           "component": "ContentSection",
@@ -80,7 +80,7 @@
         {
           "component": "HeroSection",
           "dataKey": "contact.hero",
-          "slots": { "showHeroImage": false }
+          "slots": { "showHeroImage": false, "showBreadcrumbs": true }
         },
         {
           "component": "ContactSection",
@@ -101,7 +101,7 @@
         {
           "component": "HeroSection",
           "dataKey": "services.hero",
-          "slots": { "showHeroImage": false }
+          "slots": { "showHeroImage": false, "showBreadcrumbs": true }
         },
         {
           "component": "ServiceCards",
@@ -126,7 +126,7 @@
         {
           "component": "HeroSection",
           "dataKey": "hero",
-          "slots": { "showHeroImage": true }
+          "slots": { "showHeroImage": true, "showBreadcrumbs": true }
         },
         {
           "component": "ContentSection",
@@ -151,7 +151,7 @@
         {
           "component": "HeroSection",
           "dataKey": "hero",
-          "slots": { "showHeroImage": false }
+          "slots": { "showHeroImage": false, "showBreadcrumbs": true }
         },
         {
           "component": "ContentSection",
@@ -175,8 +175,8 @@
       "sections": [
         {
           "component": "HeroSection",
-          "dataKey": "services.hero",
-          "slots": { "showHeroImage": false }
+          "dataKey": "locations.hero",
+          "slots": { "showHeroImage": false, "showBreadcrumbs": true }
         },
         {
           "component": "FeatureGrid",
@@ -196,7 +196,7 @@
         {
           "component": "HeroSection",
           "dataKey": "reviews.hero",
-          "slots": { "showHeroImage": false }
+          "slots": { "showHeroImage": false, "showBreadcrumbs": true }
         },
         {
           "component": "StatsStrip",
@@ -221,7 +221,7 @@
         {
           "component": "HeroSection",
           "dataKey": "projects.hero",
-          "slots": { "showHeroImage": false }
+          "slots": { "showHeroImage": false, "showBreadcrumbs": true }
         },
         {
           "component": "ProjectGrid",
@@ -261,7 +261,7 @@
         {
           "component": "HeroSection",
           "dataKey": "blog.hero",
-          "slots": { "showHeroImage": false }
+          "slots": { "showHeroImage": false, "showBreadcrumbs": true }
         },
         {
           "component": "BlogGrid",
@@ -276,7 +276,7 @@
         {
           "component": "HeroSection",
           "dataKey": "hero",
-          "slots": { "showHeroImage": false }
+          "slots": { "showHeroImage": false, "showBreadcrumbs": true }
         },
         {
           "component": "ContentSection",
@@ -296,7 +296,7 @@
         {
           "component": "HeroSection",
           "dataKey": "pricing.hero",
-          "slots": { "showHeroImage": false }
+          "slots": { "showHeroImage": false, "showBreadcrumbs": true }
         },
         {
           "component": "PricingTable",
