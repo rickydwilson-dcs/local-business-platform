@@ -9,6 +9,9 @@ export * from "./components/ui/info-card";
 export * from "./components/ui/dark-stat-card";
 export * from "./components/ui/image-overlay-card";
 
+// Composable section components
+export { CategoryCardsSection } from "./components/composable/category-cards-section";
+
 // Export all UI components (generic, usable across all sites)
 export * from "./components/ui/accent-underline";
 export * from "./components/ui/aggregate-rating-display";
@@ -96,7 +99,11 @@ export * from "./lib/site-utils";
 export { createContactInfo } from "./lib/contact-info";
 export type { ContactInfoConfig } from "./lib/contact-info";
 export { createSchemaGenerators } from "./lib/schema-generators";
-export type { SchemaContext, ArticleSchemaOptions, AggregateRatingOptions } from "./lib/schema-generators";
+export type {
+  SchemaContext,
+  ArticleSchemaOptions,
+  AggregateRatingOptions,
+} from "./lib/schema-generators";
 export * from "./lib/page-template-types";
 
 // Export platform-level types

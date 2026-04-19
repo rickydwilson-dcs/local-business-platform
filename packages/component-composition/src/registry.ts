@@ -1,6 +1,7 @@
 import type React from "react";
 import { z } from "zod";
 import {
+  CategoryCardsSection,
   ComposableHeroSection,
   HERO_SECTION_DEFAULT_SLOTS,
   HeroSectionSlotsSchema,
@@ -160,7 +161,7 @@ export const COMPONENT_REGISTRY: Record<ComponentName, ComponentDefinition> = {
     layoutSchema: TextSectionLayoutSchema,
   },
   CategoryCardsSection: {
-    component: (() => null) as unknown as ComponentDefinition["component"],
+    component: CategoryCardsSection as ComponentDefinition["component"],
     defaultSlots: {},
     slotsSchema: z.object({}),
     layoutSchema: z.object({}),

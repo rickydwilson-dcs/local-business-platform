@@ -95,7 +95,12 @@ export function ContentSection({
           <div
             className={`overflow-hidden rounded-xl ${isSplit ? "relative aspect-video" : "mt-8"}`}
           >
-            <img src={data.image} alt="" className="h-full w-full object-cover" />
+            <img
+              src={data.image}
+              alt={(data.imageAlt as string | undefined) ?? ""}
+              aria-hidden={!(data.imageAlt as string | undefined) || undefined}
+              className="h-full w-full object-cover"
+            />
           </div>
         )}
       </div>

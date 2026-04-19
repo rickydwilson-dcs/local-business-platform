@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Phone, Mail, MapPin, Clock, ArrowRight } from "lucide-react";
 import type { LayoutParams } from "./layout-params";
+import { ContactForm } from "../ui/contact-form";
 
 export interface ContactSectionSlots {
   showHours: boolean;
@@ -62,6 +63,10 @@ export function ContactSection({
     d.address && typeof d.address === "object" ? (d.address as AddressData) : undefined;
   const hours = d.hours && typeof d.hours === "object" ? (d.hours as HoursData) : undefined;
   const serviceLinks = Array.isArray(d.serviceLinks) ? (d.serviceLinks as ServiceLink[]) : [];
+  const services = Array.isArray(d.services)
+    ? (d.services as Array<{ slug: string; title: string }>)
+    : undefined;
+  const serviceAreas = Array.isArray(d.serviceAreas) ? (d.serviceAreas as string[]) : undefined;
 
   return (
     <section className={`${bg} ${className ?? ""}`} data-component="ContactSection">
@@ -82,14 +87,9 @@ export function ContactSection({
         )}
 
         <div className="grid grid-cols-1 gap-8 md:grid-cols-[3fr_2fr]">
-          {/* Left: Contact Form Placeholder */}
-          <div
-            data-slot="contactForm"
-            className="bg-surface-card border-surface-border rounded-xl border p-8"
-          >
-            <p className="text-surface-muted-foreground">
-              Contact form placeholder &mdash; wire ContactForm at page level
-            </p>
+          {/* Left: Contact Form */}
+          <div data-slot="contactForm">
+            <ContactForm services={services} serviceAreas={serviceAreas} />
           </div>
 
           {/* Right: Sidebar */}

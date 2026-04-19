@@ -13,6 +13,7 @@ export * from "./blog-grid";
 export * from "./project-grid";
 export * from "./pricing-table";
 export * from "./text-section";
+export * from "./category-cards-section";
 // slots schemas
 export * from "./hero-section.slots";
 export * from "./service-cards.slots";

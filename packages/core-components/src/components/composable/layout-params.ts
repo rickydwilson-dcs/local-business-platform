@@ -1,6 +1,6 @@
 export interface LayoutParams {
   columns?: 1 | 2 | 3 | 4;
-  background?: "surface" | "subtle" | "inverse" | "brand" | "muted";
+  background?: "surface" | "subtle" | "inverse" | "brand" | "muted" | "image";
   paddingY?: "compact" | "standard" | "spacious";
   align?: "left" | "center" | "right" | "split";
   maxItems?: number;
