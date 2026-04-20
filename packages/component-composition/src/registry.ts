@@ -70,6 +70,14 @@ import {
   WHY_CHOOSE_US_SECTION_DEFAULT_SLOTS,
   WhyChooseUsSectionSlotsSchema,
   WhyChooseUsSectionLayoutSchema,
+  EmergencyBanner,
+  EMERGENCY_BANNER_DEFAULT_SLOTS,
+  EmergencyBannerSlotsSchema,
+  EmergencyBannerLayoutSchema,
+  RateCardsSection,
+  RATE_CARDS_SECTION_DEFAULT_SLOTS,
+  RateCardsSectionSlotsSchema,
+  RateCardsSectionLayoutSchema,
 } from "@platform/core-components/components/composable";
 import type { ComponentName } from "./types";
 
@@ -195,5 +203,17 @@ export const COMPONENT_REGISTRY: Record<ComponentName, ComponentDefinition> = {
     defaultSlots: s(WHY_CHOOSE_US_SECTION_DEFAULT_SLOTS),
     slotsSchema: WhyChooseUsSectionSlotsSchema,
     layoutSchema: WhyChooseUsSectionLayoutSchema,
+  },
+  EmergencyBanner: {
+    component: EmergencyBanner as ComponentDefinition["component"],
+    defaultSlots: s(EMERGENCY_BANNER_DEFAULT_SLOTS),
+    slotsSchema: EmergencyBannerSlotsSchema,
+    layoutSchema: EmergencyBannerLayoutSchema,
+  },
+  RateCardsSection: {
+    component: RateCardsSection as ComponentDefinition["component"],
+    defaultSlots: s(RATE_CARDS_SECTION_DEFAULT_SLOTS),
+    slotsSchema: RateCardsSectionSlotsSchema,
+    layoutSchema: RateCardsSectionLayoutSchema,
   },
 };
