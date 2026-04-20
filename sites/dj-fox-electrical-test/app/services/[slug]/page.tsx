@@ -151,6 +151,11 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
         eyebrow: "Our Services",
         image: heroImage,
         heroImageSrc: heroImage,
+        primaryCtaText: "Get Free Quote",
+        primaryCtaHref: "/contact",
+        secondaryCtaText: `Call ${PHONE_DISPLAY}`,
+        secondaryCtaHref: `tel:${siteConfig.business.phone}`,
+        trustBadges: ["NICEIC Approved", "Fully Insured", "Free Quotes"],
         breadcrumbs: [
           { label: "Home", href: "/" },
           { label: "Services", href: "/services" },

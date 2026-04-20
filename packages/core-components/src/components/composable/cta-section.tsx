@@ -48,8 +48,8 @@ export function ComposableCTASection({
   const showPhoneCta = Boolean(phoneTel || phoneDisplay);
 
   const headingScale = isInverse
-    ? "text-4xl md:text-5xl font-bold tracking-tight"
-    : "text-3xl md:text-4xl font-bold tracking-tight";
+    ? "text-3xl md:text-4xl font-bold tracking-tight"
+    : "text-2xl md:text-2xl font-bold tracking-tight";
 
   const subheadingClass = isBrand
     ? "text-lg mt-3 text-white/80 max-w-xl"

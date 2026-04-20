@@ -502,10 +502,21 @@ export const siteData = {
     },
     heading: "Areas We Serve",
     intro: `${siteConfig.business.name} serves customers across ${siteConfig.serviceAreas.join(", ")}. Find our electrical services in your area.`,
+    subheading: `${siteConfig.business.name} serves customers across ${siteConfig.serviceAreas.join(", ")}. Find electrical services in your area.`,
     features: allLocationsFromConfig.map((l) => ({
       title: l.title,
       description: l.description,
+      href: `/locations/${l.slug}`,
     })),
+    locationCardsSection: {
+      heading: "Areas We Serve",
+      subheading: `${siteConfig.business.name} serves customers across ${siteConfig.serviceAreas.join(", ")}. Find electrical services in your area.`,
+      services: allLocationsFromConfig.map((l) => ({
+        title: l.title,
+        description: l.description,
+        href: `/locations/${l.slug}`,
+      })),
+    },
   },
 
   // -------------------------------------------------------------------------

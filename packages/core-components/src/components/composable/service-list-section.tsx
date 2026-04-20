@@ -71,7 +71,7 @@ export function ServiceListSection({
             )}
             <h2
               data-slot="heading"
-              className="text-4xl md:text-5xl font-bold tracking-tight text-surface-foreground mb-6"
+              className="text-3xl md:text-4xl font-bold tracking-tight text-surface-foreground mb-6"
             >
               {heading}
             </h2>

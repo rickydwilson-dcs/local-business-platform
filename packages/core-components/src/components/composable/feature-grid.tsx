@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { LayoutParams } from "./layout-params";
 
 export interface FeatureGridSlots {
@@ -18,6 +19,7 @@ interface FeatureItem {
   title: string;
   description?: string;
   icon?: string;
+  href?: string;
 }
 
 interface FeatureGridProps {
@@ -59,7 +61,7 @@ export function FeatureGrid({ slots: slotOverrides, layout, data, className }: F
         {slots.showSectionHeading && d.heading && (
           <h2
             data-slot="heading"
-            className="text-3xl md:text-4xl font-bold tracking-tight mb-12 text-surface-foreground"
+            className="text-2xl md:text-2xl font-bold tracking-tight mb-12 text-surface-foreground"
           >
             {d.heading}
           </h2>
@@ -67,39 +69,60 @@ export function FeatureGrid({ slots: slotOverrides, layout, data, className }: F
         {slots.showSectionIntro && d.intro && (
           <p
             data-slot="intro"
-            className="text-surface-muted-foreground mb-12 max-w-xl text-lg leading-relaxed"
+            className="text-surface-muted-foreground mb-12 max-w-xl text-sm leading-relaxed"
           >
             {d.intro}
           </p>
         )}
         <div className={`grid gap-8 ${gridCols}`}>
-          {features.map((feature, i) => (
-            <div
-              key={i}
-              className="flex gap-5 p-6 bg-surface-card rounded-2xl border border-surface-card-border"
-            >
-              {slots.showIcons && feature.icon && (
-                <div className="w-11 h-11 rounded-xl bg-brand-primary/10 flex items-center justify-center flex-shrink-0 text-xl">
-                  {feature.icon}
-                </div>
-              )}
-              <div>
-                <h3
-                  data-slot="featureTitle"
-                  className="text-base font-semibold text-surface-foreground mb-2"
-                >
-                  {feature.title}
-                </h3>
-                {slots.showDescriptions && feature.description && (
-                  <p
-                    className={`text-sm leading-relaxed ${layout?.background === "inverse" ? "text-white/80" : "text-surface-muted-foreground"}`}
-                  >
-                    {feature.description}
-                  </p>
+          {features.map((feature, i) => {
+            const cardContent = (
+              <>
+                {slots.showIcons && feature.icon && (
+                  <div className="w-11 h-11 rounded-xl bg-brand-primary/10 flex items-center justify-center flex-shrink-0 text-xl">
+                    {feature.icon}
+                  </div>
                 )}
+                <div>
+                  <h3
+                    data-slot="featureTitle"
+                    className="text-base font-semibold text-surface-foreground mb-2"
+                  >
+                    {feature.title}
+                  </h3>
+                  {slots.showDescriptions && feature.description && (
+                    <p
+                      className={`text-sm leading-relaxed ${layout?.background === "inverse" ? "text-white/80" : "text-surface-muted-foreground"}`}
+                    >
+                      {feature.description}
+                    </p>
+                  )}
+                  {feature.href && (
+                    <span className="inline-flex items-center mt-4 text-brand-primary font-medium group-hover:translate-x-1 transition-transform text-sm">
+                      View services <span aria-hidden="true">→</span>
+                    </span>
+                  )}
+                </div>
+              </>
+            );
+
+            return feature.href ? (
+              <Link
+                key={i}
+                href={feature.href}
+                className="flex gap-5 p-6 bg-surface-card rounded-2xl border border-surface-card-border group hover:shadow-xl transition-shadow block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2 focus-visible:rounded-2xl"
+              >
+                {cardContent}
+              </Link>
+            ) : (
+              <div
+                key={i}
+                className="flex gap-5 p-6 bg-surface-card rounded-2xl border border-surface-card-border"
+              >
+                {cardContent}
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

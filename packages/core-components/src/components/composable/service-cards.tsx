@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { LayoutParams } from "./layout-params";
 
 export interface ServiceCardsSlots {
@@ -61,7 +62,7 @@ export function ServiceCards({ slots: slotOverrides, layout, data, className }: 
         {d.heading && (
           <h2
             data-slot="heading"
-            className="text-3xl md:text-4xl font-bold tracking-tight mb-4 text-center"
+            className="text-2xl md:text-2xl font-bold tracking-tight mb-4 text-center"
           >
             {d.heading}
           </h2>
@@ -70,48 +71,60 @@ export function ServiceCards({ slots: slotOverrides, layout, data, className }: 
           <p className="text-surface-muted-foreground mb-12 text-center text-lg">{d.subheading}</p>
         )}
         <div className={`grid gap-6 ${gridCols}`}>
-          {services.map((service, i) => (
-            <div
-              key={i}
-              className="group bg-surface-card rounded-2xl shadow-lg border border-surface-border p-6 transition-shadow duration-200 hover:shadow-xl"
-            >
-              {slots.showBadge && service.badge && (
-                <span className="bg-brand-primary/10 text-brand-primary mb-4 inline-block rounded-full px-3 py-1 text-xs font-semibold">
-                  {service.badge}
-                </span>
-              )}
-              {slots.showIcon && service.icon && (
-                <div className="mb-4 text-3xl">{service.icon}</div>
-              )}
-              {slots.showImage && service.image && (
-                <div className="mb-4 aspect-video overflow-hidden rounded-lg">
-                  <img
-                    src={service.image}
-                    alt={service.title}
-                    className="h-full w-full object-cover"
-                  />
-                </div>
-              )}
-              <h3
-                data-slot="serviceTitle"
-                className="text-xl font-semibold mb-3 group-hover:text-brand-primary transition-colors"
-              >
-                {service.title}
-              </h3>
-              {slots.showDescription && service.description && (
-                <p className="text-surface-muted-foreground mb-4">{service.description}</p>
-              )}
-              {slots.showCta && service.href && (
-                <a
-                  href={service.href}
-                  aria-label={`Learn more about ${service.title}`}
-                  className="inline-flex items-center text-brand-primary font-medium group-hover:translate-x-1 transition-transform focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2 focus-visible:rounded"
+          {services.map((service, i) => {
+            const cardContent = (
+              <>
+                {slots.showBadge && service.badge && (
+                  <span className="bg-brand-primary/10 text-brand-primary mb-4 inline-block rounded-full px-3 py-1 text-xs font-semibold">
+                    {service.badge}
+                  </span>
+                )}
+                {slots.showIcon && service.icon && (
+                  <div className="mb-4 text-3xl">{service.icon}</div>
+                )}
+                {slots.showImage && service.image && (
+                  <div className="mb-4 aspect-video overflow-hidden rounded-lg">
+                    <img
+                      src={service.image}
+                      alt={service.title}
+                      className="h-full w-full object-cover"
+                    />
+                  </div>
+                )}
+                <h3
+                  data-slot="serviceTitle"
+                  className="text-lg font-semibold mb-3 group-hover:text-brand-primary transition-colors"
                 >
-                  Learn more <span aria-hidden="true">→</span>
-                </a>
-              )}
-            </div>
-          ))}
+                  {service.title}
+                </h3>
+                {slots.showDescription && service.description && (
+                  <p className="text-surface-muted-foreground mb-4">{service.description}</p>
+                )}
+                {slots.showCta && (
+                  <span className="inline-flex items-center text-brand-primary font-medium group-hover:translate-x-1 transition-transform">
+                    Learn more <span aria-hidden="true">→</span>
+                  </span>
+                )}
+              </>
+            );
+
+            return service.href ? (
+              <Link
+                key={i}
+                href={service.href}
+                className="group bg-surface-card rounded-2xl shadow-lg border border-surface-border p-6 transition-shadow duration-200 hover:shadow-xl block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2 focus-visible:rounded-2xl"
+              >
+                {cardContent}
+              </Link>
+            ) : (
+              <div
+                key={i}
+                className="group bg-surface-card rounded-2xl shadow-lg border border-surface-border p-6 transition-shadow duration-200 hover:shadow-xl"
+              >
+                {cardContent}
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

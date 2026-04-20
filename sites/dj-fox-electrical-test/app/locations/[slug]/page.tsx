@@ -142,9 +142,12 @@ export default async function LocationDetailPage({
           (fm as unknown as Record<string, string | undefined>).description ||
           `Professional electrical services in ${locationName} by ${siteConfig.business.name}.`,
         eyebrow: locationName,
-        image: heroImage,
         heroImageSrc: heroImage,
-        trustBadges: (fm.hero as unknown as Record<string, unknown> | undefined)?.trustBadges,
+        primaryCtaText: "Get Free Quote",
+        primaryCtaHref: "/contact",
+        secondaryCtaText: `Call ${PHONE_DISPLAY}`,
+        secondaryCtaHref: `tel:${siteConfig.business.phone}`,
+        trustBadges: ["NICEIC Approved", "Fully Insured", "Free Quotes"],
         breadcrumbs: [
           { label: "Home", href: "/" },
           { label: "Locations", href: "/locations" },

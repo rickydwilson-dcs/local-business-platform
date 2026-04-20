@@ -184,7 +184,7 @@ function renderSection(section: TextSectionBlock, index: number) {
         {section.heading}
       </h2>
       {section.body && (
-        <p className="text-surface-muted-foreground text-lg leading-relaxed">{section.body}</p>
+        <p className="text-surface-muted-foreground text-sm leading-relaxed">{section.body}</p>
       )}
     </section>
   );
@@ -242,7 +242,7 @@ export function TextSection({ slots: slotOverrides, layout, data, className }: T
         {intro && (
           <p
             data-slot="intro"
-            className="text-surface-muted-foreground mb-10 text-lg leading-relaxed"
+            className="text-surface-muted-foreground mb-10 text-sm leading-relaxed"
           >
             {intro}
           </p>

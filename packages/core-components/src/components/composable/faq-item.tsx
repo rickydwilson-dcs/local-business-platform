@@ -21,7 +21,7 @@ export function FAQItem({ question, answer, index }: FAQItemProps) {
         onClick={() => setIsOpen(!isOpen)}
         aria-expanded={isOpen}
         aria-controls={panelId}
-        className="text-surface-foreground flex w-full cursor-pointer items-center justify-between gap-4 text-left text-lg font-semibold rounded-lg active:scale-[0.99] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2 focus-visible:ring-offset-surface-background"
+        className="text-surface-foreground flex w-full cursor-pointer items-center justify-between gap-4 text-left text-sm font-semibold rounded-lg active:scale-[0.99] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2 focus-visible:ring-offset-surface-background"
       >
         <span>{question}</span>
         <span
