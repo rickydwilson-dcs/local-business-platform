@@ -53,22 +53,34 @@
         {
           "component": "HeroSection",
           "dataKey": "about.hero",
-          "slots": { "showHeroImage": false, "showBreadcrumbs": true },
+          "slots": { "showHeroImage": false },
           "layout": { "background": "inverse" }
-        },
-        {
-          "component": "ContentSection",
-          "dataKey": "about.content"
-        },
-        {
-          "component": "FeatureGrid",
-          "dataKey": "about.values",
-          "layout": { "columns": 3 }
         },
         {
           "component": "StatsStrip",
           "dataKey": "about.stats",
           "layout": { "background": "inverse" }
+        },
+        {
+          "component": "ContentSection",
+          "dataKey": "about.content",
+          "slots": {
+            "showImage": true,
+            "showList": true,
+            "showSubheading": true,
+            "showCta": false
+          },
+          "layout": { "align": "split" }
+        },
+        {
+          "component": "FeatureGrid",
+          "dataKey": "about.benefits",
+          "layout": { "columns": 2, "background": "subtle", "variant": "list" }
+        },
+        {
+          "component": "FeatureGrid",
+          "dataKey": "about.values",
+          "layout": { "columns": 2, "variant": "list" }
         },
         {
           "component": "CTASection",
@@ -83,7 +95,7 @@
         {
           "component": "HeroSection",
           "dataKey": "contact.hero",
-          "slots": { "showHeroImage": false, "showBreadcrumbs": true },
+          "slots": { "showHeroImage": false },
           "layout": { "background": "inverse" }
         },
         {
@@ -104,7 +116,7 @@
         {
           "component": "HeroSection",
           "dataKey": "services.hero",
-          "slots": { "showHeroImage": false, "showBreadcrumbs": true },
+          "slots": { "showHeroImage": false },
           "layout": { "background": "inverse" }
         },
         {
@@ -182,7 +194,7 @@
         {
           "component": "HeroSection",
           "dataKey": "locations.hero",
-          "slots": { "showHeroImage": false, "showBreadcrumbs": true },
+          "slots": { "showHeroImage": false },
           "layout": { "background": "inverse" }
         },
         {
@@ -203,7 +215,7 @@
         {
           "component": "HeroSection",
           "dataKey": "reviews.hero",
-          "slots": { "showHeroImage": false, "showBreadcrumbs": true },
+          "slots": { "showHeroImage": false },
           "layout": { "background": "inverse" }
         },
         {
@@ -229,7 +241,7 @@
         {
           "component": "HeroSection",
           "dataKey": "projects.hero",
-          "slots": { "showHeroImage": false, "showBreadcrumbs": true },
+          "slots": { "showHeroImage": false },
           "layout": { "background": "inverse" }
         },
         {
@@ -271,7 +283,7 @@
         {
           "component": "HeroSection",
           "dataKey": "blog.hero",
-          "slots": { "showHeroImage": false, "showBreadcrumbs": true },
+          "slots": { "showHeroImage": false },
           "layout": { "background": "inverse" }
         },
         {
@@ -308,19 +320,38 @@
         {
           "component": "HeroSection",
           "dataKey": "pricing.hero",
-          "slots": { "showHeroImage": false, "showBreadcrumbs": true },
+          "slots": { "showHeroImage": false },
           "layout": { "background": "inverse" }
+        },
+        {
+          "component": "RateCardsSection",
+          "dataKey": "pricing.rateCards"
         },
         {
           "component": "PricingTable",
           "dataKey": "pricing.jobCosts",
           "slots": { "showDisclaimer": true },
-          "layout": { "columns": 4 }
+          "layout": { "columns": 4, "background": "subtle" }
+        },
+        {
+          "component": "ContentSection",
+          "dataKey": "pricing.checklist",
+          "slots": {
+            "showImage": true,
+            "showList": true,
+            "showCta": false,
+            "showSubheading": false
+          },
+          "layout": { "align": "split" }
+        },
+        {
+          "component": "EmergencyBanner",
+          "dataKey": "pricing.emergencyBanner"
         },
         {
           "component": "FeatureGrid",
           "dataKey": "pricing.benefits",
-          "layout": { "columns": 3 }
+          "layout": { "columns": 2, "background": "subtle", "variant": "list" }
         },
         {
           "component": "FAQSection",
@@ -329,7 +360,7 @@
         },
         {
           "component": "CTASection",
-          "dataKey": "home.cta",
+          "dataKey": "pricing.cta",
           "layout": { "background": "brand" }
         }
       ]

@@ -3,6 +3,7 @@ export interface LayoutParams {
   background?: "surface" | "subtle" | "inverse" | "brand" | "muted" | "image";
   paddingY?: "compact" | "standard" | "spacious";
   align?: "left" | "center" | "right" | "split";
+  variant?: string;
   maxItems?: number;
   fullBleed?: boolean;
   mediaPosition?: "left" | "right" | "top" | "bottom";

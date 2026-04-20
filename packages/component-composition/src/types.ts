@@ -29,6 +29,8 @@ export const COMPONENT_NAMES = [
   "ServiceListSection",
   "LocationPillsSection",
   "WhyChooseUsSection",
+  "EmergencyBanner",
+  "RateCardsSection",
 ] as const;
 
 export type ComponentName = (typeof COMPONENT_NAMES)[number];

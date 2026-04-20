@@ -17,6 +17,8 @@ export * from "./category-cards-section";
 export * from "./service-list-section";
 export * from "./location-pills-section";
 export * from "./why-choose-us-section";
+export * from "./emergency-banner";
+export * from "./rate-cards-section";
 // slots schemas
 export * from "./hero-section.slots";
 export * from "./service-cards.slots";
@@ -35,3 +37,5 @@ export * from "./text-section.slots";
 export * from "./service-list-section.slots";
 export * from "./location-pills-section.slots";
 export * from "./why-choose-us-section.slots";
+export * from "./emergency-banner.slots";
+export * from "./rate-cards-section.slots";

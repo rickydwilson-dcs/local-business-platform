@@ -1,4 +1,5 @@
 import type React from "react";
+import { getImageUrl } from "../../lib/image";
 import type { LayoutParams } from "./layout-params";
 
 export interface ContentSectionSlots {
@@ -104,7 +105,7 @@ export function ContentSection({
             className={`overflow-hidden rounded-xl ${isSplit ? "relative aspect-video" : "mt-8"}`}
           >
             <img
-              src={data.image}
+              src={getImageUrl(data.image)}
               alt={(data.imageAlt as string | undefined) ?? ""}
               aria-hidden={!(data.imageAlt as string | undefined) || undefined}
               className="h-full w-full object-cover"
