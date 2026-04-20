@@ -128,7 +128,8 @@
         {
           "component": "HeroSection",
           "dataKey": "hero",
-          "slots": { "showHeroImage": true, "showBreadcrumbs": true }
+          "slots": { "showHeroImage": true, "showBreadcrumbs": true, "showTrustBadges": true },
+          "layout": { "background": "subtle", "align": "split" }
         },
         {
           "component": "ContentSection",
@@ -153,7 +154,8 @@
         {
           "component": "HeroSection",
           "dataKey": "hero",
-          "slots": { "showHeroImage": false, "showBreadcrumbs": true }
+          "slots": { "showHeroImage": false, "showBreadcrumbs": true },
+          "layout": { "background": "subtle" }
         },
         {
           "component": "ContentSection",
