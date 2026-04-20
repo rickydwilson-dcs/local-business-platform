@@ -56,7 +56,7 @@ export function StatsStrip({ slots: slotOverrides, layout, data, className }: St
               <div>
                 <p
                   data-slot="statValue"
-                  className={`text-lg font-bold tracking-tight stat-value ${layout?.background === "inverse" ? "text-white" : "text-brand-primary"}`}
+                  className={`text-base font-bold tracking-tight stat-value ${layout?.background === "inverse" ? "text-white" : "text-brand-primary"}`}
                 >
                   {stat.value}
                 </p>
@@ -70,7 +70,7 @@ export function StatsStrip({ slots: slotOverrides, layout, data, className }: St
                 )}
                 {slots.showDescription && stat.description && (
                   <p
-                    className={`mt-1 text-sm ${layout?.background === "inverse" ? "text-on-inverse-muted" : "text-surface-muted-foreground"}`}
+                    className={`mt-1 text-xs ${layout?.background === "inverse" ? "text-on-inverse-muted" : "text-surface-muted-foreground"}`}
                   >
                     {stat.description}
                   </p>

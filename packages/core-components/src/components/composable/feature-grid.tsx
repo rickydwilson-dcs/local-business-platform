@@ -64,13 +64,13 @@ export function FeatureGrid({ slots: slotOverrides, layout, data, className }: F
           {slots.showSectionHeading && d.heading && (
             <h2
               data-slot="heading"
-              className="text-2xl md:text-2xl font-bold tracking-tight mb-8 text-surface-foreground"
+              className="text-xl md:text-xl font-bold tracking-tight mb-8 text-surface-foreground"
             >
               {d.heading}
             </h2>
           )}
           {slots.showSectionIntro && d.intro && (
-            <p className="text-surface-muted-foreground mb-8 max-w-xl text-sm leading-relaxed">
+            <p className="text-surface-muted-foreground mb-8 max-w-xl text-xs leading-relaxed">
               {d.intro}
             </p>
           )}
@@ -81,7 +81,7 @@ export function FeatureGrid({ slots: slotOverrides, layout, data, className }: F
                 <div>
                   <h3 className="font-bold text-surface-foreground mb-1">{feature.title}</h3>
                   {slots.showDescriptions && feature.description && (
-                    <p className="text-sm text-surface-muted-foreground">{feature.description}</p>
+                    <p className="text-xs text-surface-muted-foreground">{feature.description}</p>
                   )}
                 </div>
               </div>
@@ -101,7 +101,7 @@ export function FeatureGrid({ slots: slotOverrides, layout, data, className }: F
         {slots.showSectionHeading && d.heading && (
           <h2
             data-slot="heading"
-            className="text-2xl md:text-2xl font-bold tracking-tight mb-12 text-surface-foreground"
+            className="text-xl md:text-xl font-bold tracking-tight mb-12 text-surface-foreground"
           >
             {d.heading}
           </h2>
@@ -109,7 +109,7 @@ export function FeatureGrid({ slots: slotOverrides, layout, data, className }: F
         {slots.showSectionIntro && d.intro && (
           <p
             data-slot="intro"
-            className="text-surface-muted-foreground mb-12 max-w-xl text-sm leading-relaxed"
+            className="text-surface-muted-foreground mb-12 max-w-xl text-xs leading-relaxed"
           >
             {d.intro}
           </p>
@@ -119,26 +119,26 @@ export function FeatureGrid({ slots: slotOverrides, layout, data, className }: F
             const cardContent = (
               <>
                 {slots.showIcons && feature.icon && (
-                  <div className="w-11 h-11 rounded-xl bg-brand-primary/10 flex items-center justify-center flex-shrink-0 text-xl">
+                  <div className="w-11 h-11 rounded-xl bg-brand-primary/10 flex items-center justify-center flex-shrink-0 text-lg">
                     {feature.icon}
                   </div>
                 )}
                 <div>
                   <h3
                     data-slot="featureTitle"
-                    className="text-base font-semibold text-surface-foreground mb-2"
+                    className="text-sm font-semibold text-surface-foreground mb-2"
                   >
                     {feature.title}
                   </h3>
                   {slots.showDescriptions && feature.description && (
                     <p
-                      className={`text-sm leading-relaxed ${layout?.background === "inverse" ? "text-white/80" : "text-surface-muted-foreground"}`}
+                      className={`text-xs leading-relaxed ${layout?.background === "inverse" ? "text-white/80" : "text-surface-muted-foreground"}`}
                     >
                       {feature.description}
                     </p>
                   )}
                   {feature.href && (
-                    <span className="inline-flex items-center mt-4 text-brand-primary font-medium group-hover:translate-x-1 transition-transform text-sm">
+                    <span className="inline-flex items-center mt-4 text-brand-primary font-medium group-hover:translate-x-1 transition-transform text-xs">
                       View services <span aria-hidden="true">→</span>
                     </span>
                   )}

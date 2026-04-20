@@ -102,7 +102,7 @@ function renderSection(section: TextSectionBlock, index: number) {
             return (
               <div key={i} className={`rounded-lg p-4 ${colorClasses}`}>
                 {item.label && <p className="font-semibold">{item.label}</p>}
-                {item.description && <p className="mt-1 text-sm">{item.description}</p>}
+                {item.description && <p className="mt-1 text-xs">{item.description}</p>}
               </div>
             );
           })}
@@ -144,12 +144,12 @@ function renderSection(section: TextSectionBlock, index: number) {
         <div className="grid grid-cols-2 gap-6 md:grid-cols-3">
           {items.map((item, i) => (
             <div key={i}>
-              <div className="bg-brand-primary text-brand-on-primary mb-3 flex h-8 w-8 items-center justify-center rounded-full text-sm font-semibold">
+              <div className="bg-brand-primary text-brand-on-primary mb-3 flex h-8 w-8 items-center justify-center rounded-full text-xs font-semibold">
                 {i + 1}
               </div>
               {item.label && <p className="mb-1 font-semibold">{item.label}</p>}
               {item.description && (
-                <p className="text-surface-muted-foreground text-sm">{item.description}</p>
+                <p className="text-surface-muted-foreground text-xs">{item.description}</p>
               )}
             </div>
           ))}
@@ -169,7 +169,7 @@ function renderSection(section: TextSectionBlock, index: number) {
             <div key={i} className="border-surface-border rounded-lg border p-4">
               {item.label && <p className="mb-2 font-semibold">{item.label}</p>}
               {item.description && (
-                <p className="text-surface-muted-foreground text-sm">{item.description}</p>
+                <p className="text-surface-muted-foreground text-xs">{item.description}</p>
               )}
             </div>
           ))}
@@ -184,7 +184,7 @@ function renderSection(section: TextSectionBlock, index: number) {
         {section.heading}
       </h2>
       {section.body && (
-        <p className="text-surface-muted-foreground text-sm leading-relaxed">{section.body}</p>
+        <p className="text-surface-muted-foreground text-xs leading-relaxed">{section.body}</p>
       )}
     </section>
   );
@@ -217,7 +217,7 @@ export function TextSection({ slots: slotOverrides, layout, data, className }: T
           </h1>
         )}
         {slots.showLastUpdated && lastUpdated && (
-          <p data-slot="lastUpdated" className="text-surface-muted-foreground mb-8 text-sm">
+          <p data-slot="lastUpdated" className="text-surface-muted-foreground mb-8 text-xs">
             {formatLastUpdated(lastUpdated)}
           </p>
         )}
@@ -227,7 +227,7 @@ export function TextSection({ slots: slotOverrides, layout, data, className }: T
             aria-label="Table of contents"
             className="bg-surface-subtle mb-10 rounded-lg p-6"
           >
-            <p className="mb-3 text-sm font-semibold uppercase tracking-wide">Contents</p>
+            <p className="mb-3 text-xs font-semibold uppercase tracking-wide">Contents</p>
             <ol className="list-decimal space-y-2 pl-5">
               {tableOfContents.map((entry) => (
                 <li key={entry.id}>
@@ -242,7 +242,7 @@ export function TextSection({ slots: slotOverrides, layout, data, className }: T
         {intro && (
           <p
             data-slot="intro"
-            className="text-surface-muted-foreground mb-10 text-sm leading-relaxed"
+            className="text-surface-muted-foreground mb-10 text-xs leading-relaxed"
           >
             {intro}
           </p>

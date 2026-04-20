@@ -80,13 +80,13 @@ export function BlogGrid({ slots: slotOverrides, layout, data, className }: Blog
             {d.heading && (
               <h2
                 data-slot="heading"
-                className="text-2xl md:text-2xl font-bold tracking-tight mb-4 text-center"
+                className="text-xl md:text-xl font-bold tracking-tight mb-4 text-center"
               >
                 {d.heading}
               </h2>
             )}
             {d.subheading && (
-              <p data-slot="subheading" className="text-surface-muted-foreground text-lg">
+              <p data-slot="subheading" className="text-surface-muted-foreground text-base">
                 {d.subheading}
               </p>
             )}
@@ -130,20 +130,20 @@ export function BlogGrid({ slots: slotOverrides, layout, data, className }: Blog
                 )}
                 <h3
                   data-slot="title"
-                  className="text-surface-foreground text-sm font-bold group-hover:text-brand-primary transition-colors"
+                  className="text-surface-foreground text-xs font-bold group-hover:text-brand-primary transition-colors"
                 >
                   <Link href={`/blog/${post.slug}`}>{post.title}</Link>
                 </h3>
                 {slots.showExcerpt && post.excerpt && (
                   <p
                     data-slot="excerpt"
-                    className="text-surface-muted-foreground line-clamp-2 text-sm"
+                    className="text-surface-muted-foreground line-clamp-2 text-xs"
                   >
                     {post.excerpt}
                   </p>
                 )}
                 {slots.showAuthor && post.author && (
-                  <p data-slot="author" className="text-surface-muted-foreground text-sm">
+                  <p data-slot="author" className="text-surface-muted-foreground text-xs">
                     {post.author}
                   </p>
                 )}

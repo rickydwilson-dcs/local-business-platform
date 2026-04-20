@@ -55,27 +55,27 @@ export function ContentSection({
           {slots.showSubheading && d.subheading && (
             <p
               data-slot="subheading"
-              className="text-sm font-semibold uppercase tracking-widest text-brand-primary mb-3"
+              className="text-xs font-semibold uppercase tracking-widest text-brand-primary mb-3"
             >
               {d.subheading}
             </p>
           )}
           {d.heading && (
-            <h2 data-slot="heading" className="text-2xl md:text-2xl font-bold tracking-tight mb-6">
+            <h2 data-slot="heading" className="text-xl md:text-xl font-bold tracking-tight mb-6">
               {d.heading}
             </h2>
           )}
           {d.body && (
             <p
               data-slot="body"
-              className="text-surface-muted-foreground mb-6 text-sm leading-relaxed"
+              className="text-surface-muted-foreground mb-6 text-xs leading-relaxed"
             >
               {d.body}
             </p>
           )}
           {data.content != null && (
             <div data-slot="content" className="max-w-4xl mx-auto">
-              <div className="prose prose-lg max-w-none prose-headings:text-surface-foreground prose-p:text-surface-muted-foreground prose-a:text-brand-primary prose-a:no-underline hover:prose-a:underline prose-strong:text-surface-foreground prose-li:text-surface-muted-foreground prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-6 prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-4">
+              <div className="prose prose-lg max-w-none prose-headings:text-surface-foreground prose-p:text-surface-muted-foreground prose-a:text-brand-primary prose-a:no-underline hover:prose-a:underline prose-strong:text-surface-foreground prose-li:text-surface-muted-foreground prose-h2:text-xl prose-h2:mt-12 prose-h2:mb-6 prose-h3:text-lg prose-h3:mt-8 prose-h3:mb-4">
                 {data.content as React.JSX.Element}
               </div>
             </div>

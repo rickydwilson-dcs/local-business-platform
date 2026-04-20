@@ -58,7 +58,7 @@ export function PricingTable({ slots: slotOverrides, layout, data, className }: 
         {slots.showSectionHeading && d.subheading && (
           <p
             data-slot="subheading"
-            className="text-surface-muted-foreground mb-12 text-center text-lg"
+            className="text-surface-muted-foreground mb-12 text-center text-base"
           >
             {d.subheading}
           </p>
@@ -70,24 +70,24 @@ export function PricingTable({ slots: slotOverrides, layout, data, className }: 
               className="bg-surface-card border-surface-border rounded-lg border p-4 text-center"
             >
               {slots.showIcons && item.icon && (
-                <div data-slot="icon" className="mb-2 text-2xl">
+                <div data-slot="icon" className="mb-2 text-xl">
                   {item.icon}
                 </div>
               )}
-              <div data-slot="label" className="text-surface-foreground text-sm font-medium">
+              <div data-slot="label" className="text-surface-foreground text-xs font-medium">
                 {item.label}
               </div>
-              <div data-slot="priceRange" className="text-brand-primary text-sm font-bold">
+              <div data-slot="priceRange" className="text-brand-primary text-xs font-bold">
                 {item.priceRange}
               </div>
               {item.description && (
-                <p className="text-sm text-surface-muted-foreground mt-2">{item.description}</p>
+                <p className="text-xs text-surface-muted-foreground mt-2">{item.description}</p>
               )}
             </div>
           ))}
         </div>
         {slots.showDisclaimer && d.disclaimer && (
-          <p data-slot="disclaimer" className="text-surface-muted-foreground mt-4 text-sm">
+          <p data-slot="disclaimer" className="text-surface-muted-foreground mt-4 text-xs">
             {d.disclaimer}
           </p>
         )}

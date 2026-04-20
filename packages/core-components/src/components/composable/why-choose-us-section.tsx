@@ -59,7 +59,7 @@ export function WhyChooseUsSection({
         {slots.showEyebrow && eyebrow && (
           <p
             data-slot="eyebrow"
-            className={`mb-3 text-sm font-semibold uppercase tracking-widest ${
+            className={`mb-3 text-xs font-semibold uppercase tracking-widest ${
               bg.includes("bg-surface-inverse") || bg.includes("bg-brand-primary")
                 ? "text-white/70"
                 : "text-brand-primary"
@@ -70,7 +70,7 @@ export function WhyChooseUsSection({
         )}
         <h2
           data-slot="heading"
-          className={`text-3xl md:text-4xl font-bold tracking-tight mb-16 ${isDark ? "text-white" : "text-surface-foreground"}`}
+          className={`text-2xl md:text-3xl font-bold tracking-tight mb-16 ${isDark ? "text-white" : "text-surface-foreground"}`}
         >
           {heading}
           {slots.showHeadingHighlight && headingHighlight && (
@@ -88,12 +88,12 @@ export function WhyChooseUsSection({
               className={`grid items-center gap-6 border-b border-surface-border py-8 ${slots.showStat ? "md:grid-cols-[2fr_3fr_1fr]" : "md:grid-cols-[2fr_3fr]"}`}
             >
               <h3
-                className={`text-base font-semibold ${isDark ? "text-white" : "text-surface-foreground"}`}
+                className={`text-sm font-semibold ${isDark ? "text-white" : "text-surface-foreground"}`}
               >
                 {item.title}
               </h3>
               <p
-                className={`text-sm leading-relaxed ${isDark ? "text-on-inverse-muted" : "text-surface-muted-foreground"}`}
+                className={`text-xs leading-relaxed ${isDark ? "text-on-inverse-muted" : "text-surface-muted-foreground"}`}
               >
                 {item.body}
               </p>

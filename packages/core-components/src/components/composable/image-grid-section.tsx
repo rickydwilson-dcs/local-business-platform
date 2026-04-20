@@ -80,12 +80,12 @@ export function ImageGridSection({
                       </span>
                     )}
                     {slots.showTitle && (
-                      <h3 data-slot="cardTitle" className="text-xl font-bold text-white">
+                      <h3 data-slot="cardTitle" className="text-lg font-bold text-white">
                         {card.title}
                       </h3>
                     )}
                     {slots.showArrow && (
-                      <span data-slot="arrow" className="mt-2 text-sm text-white/80">
+                      <span data-slot="arrow" className="mt-2 text-xs text-white/80">
                         View More →
                       </span>
                     )}

@@ -41,7 +41,7 @@ export function CategoryCardsSection({ layout, data, className }: CategoryCardsS
       <div className="mx-auto max-w-4xl px-4 py-16 md:py-24 sm:px-6 lg:px-8">
         {heading && cards.length > 0 && (
           <div>
-            <h2 className="text-2xl md:text-2xl font-bold tracking-tight text-surface-foreground mb-2">
+            <h2 className="text-xl md:text-xl font-bold tracking-tight text-surface-foreground mb-2">
               {heading}
             </h2>
             {subheading && (
@@ -66,7 +66,7 @@ export function CategoryCardsSection({ layout, data, className }: CategoryCardsS
                   >
                     <h3 className="text-h4 mb-2">{card.title}</h3>
                     {card.description && (
-                      <p className="text-surface-muted-foreground text-sm">{card.description}</p>
+                      <p className="text-surface-muted-foreground text-xs">{card.description}</p>
                     )}
                   </a>
                 )
@@ -76,7 +76,7 @@ export function CategoryCardsSection({ layout, data, className }: CategoryCardsS
         )}
         {categories.map((category, i) => (
           <div key={i} className="mb-12">
-            <h2 className="text-2xl md:text-2xl font-bold tracking-tight text-surface-foreground mb-6">
+            <h2 className="text-xl md:text-xl font-bold tracking-tight text-surface-foreground mb-6">
               {category.heading}
             </h2>
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -98,7 +98,7 @@ export function CategoryCardsSection({ layout, data, className }: CategoryCardsS
                   >
                     <h3 className="text-h4 mb-2">{card.title}</h3>
                     {card.description && (
-                      <p className="text-surface-muted-foreground text-sm">{card.description}</p>
+                      <p className="text-surface-muted-foreground text-xs">{card.description}</p>
                     )}
                   </a>
                 )

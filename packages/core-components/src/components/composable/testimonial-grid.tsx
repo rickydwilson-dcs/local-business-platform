@@ -73,13 +73,15 @@ export function TestimonialGrid({
         {d.heading && (
           <h2
             data-slot="heading"
-            className="text-2xl md:text-2xl font-bold tracking-tight mb-4 text-center"
+            className="text-xl md:text-xl font-bold tracking-tight mb-4 text-center"
           >
             {d.heading}
           </h2>
         )}
         {d.subheading && (
-          <p className="text-surface-muted-foreground mb-12 text-center text-lg">{d.subheading}</p>
+          <p className="text-surface-muted-foreground mb-12 text-center text-base">
+            {d.subheading}
+          </p>
         )}
         <div className={`grid gap-6 ${gridCols}`}>
           {testimonials.map((t, i) => (

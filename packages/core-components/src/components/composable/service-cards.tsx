@@ -62,13 +62,15 @@ export function ServiceCards({ slots: slotOverrides, layout, data, className }: 
         {d.heading && (
           <h2
             data-slot="heading"
-            className="text-2xl md:text-2xl font-bold tracking-tight mb-4 text-center"
+            className="text-xl md:text-xl font-bold tracking-tight mb-4 text-center"
           >
             {d.heading}
           </h2>
         )}
         {d.subheading && (
-          <p className="text-surface-muted-foreground mb-12 text-center text-lg">{d.subheading}</p>
+          <p className="text-surface-muted-foreground mb-12 text-center text-base">
+            {d.subheading}
+          </p>
         )}
         <div className={`grid gap-6 ${gridCols}`}>
           {services.map((service, i) => {
@@ -80,7 +82,7 @@ export function ServiceCards({ slots: slotOverrides, layout, data, className }: 
                   </span>
                 )}
                 {slots.showIcon && service.icon && (
-                  <div className="mb-4 text-3xl">{service.icon}</div>
+                  <div className="mb-4 text-2xl">{service.icon}</div>
                 )}
                 {slots.showImage && service.image && (
                   <div className="mb-4 aspect-video overflow-hidden rounded-lg">
@@ -93,7 +95,7 @@ export function ServiceCards({ slots: slotOverrides, layout, data, className }: 
                 )}
                 <h3
                   data-slot="serviceTitle"
-                  className="text-lg font-semibold mb-3 group-hover:text-brand-primary transition-colors"
+                  className="text-base font-semibold mb-3 group-hover:text-brand-primary transition-colors"
                 >
                   {service.title}
                 </h3>

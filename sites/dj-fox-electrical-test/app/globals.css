@@ -22,7 +22,7 @@
 
   .btn-primary-lg {
     @apply inline-flex items-center justify-center px-8 py-4 rounded-lg;
-    @apply bg-brand-primary text-on-brand-primary font-semibold text-lg;
+    @apply bg-brand-primary text-on-brand-primary font-semibold text-base;
     @apply hover:bg-brand-primary-hover transition-all duration-200;
     @apply focus:ring-2 focus:ring-brand-primary focus:ring-offset-2;
     @apply shadow-md hover:shadow-lg;
@@ -276,35 +276,35 @@
      ========================================== */
 
   .heading-hero {
-    @apply text-4xl md:text-5xl lg:text-6xl font-bold text-surface-foreground mb-6;
+    @apply text-3xl md:text-4xl lg:text-5xl font-bold text-surface-foreground mb-6;
   }
 
   .heading-section {
-    @apply text-2xl sm:text-3xl md:text-4xl font-bold text-surface-foreground mb-4;
+    @apply text-xl sm:text-2xl md:text-3xl font-bold text-surface-foreground mb-4;
   }
 
   .heading-subsection {
-    @apply text-3xl font-bold text-surface-foreground mb-4;
+    @apply text-2xl font-bold text-surface-foreground mb-4;
   }
 
   .heading-card {
-    @apply text-xl sm:text-2xl font-bold text-surface-foreground mb-4;
+    @apply text-lg sm:text-xl font-bold text-surface-foreground mb-4;
   }
 
   .heading-card-sm {
-    @apply text-lg font-bold text-surface-foreground mb-1;
+    @apply text-base font-bold text-surface-foreground mb-1;
   }
 
   .stat-number {
-    @apply text-4xl font-extrabold text-surface-foreground mb-3 tracking-tight;
+    @apply text-3xl font-extrabold text-surface-foreground mb-3 tracking-tight;
   }
 
   .text-subtitle {
-    @apply text-lg sm:text-xl text-surface-foreground;
+    @apply text-base sm:text-lg text-surface-foreground;
   }
 
   .text-body-lg {
-    @apply text-lg text-surface-foreground leading-relaxed;
+    @apply text-base text-surface-foreground leading-relaxed;
   }
 
   /* ==========================================
@@ -467,7 +467,7 @@
   }
 
   .lightbox-title {
-    @apply text-xl sm:text-2xl font-bold text-surface-foreground mb-1;
+    @apply text-lg sm:text-xl font-bold text-surface-foreground mb-1;
   }
 
   .lightbox-position {

@@ -50,7 +50,7 @@ export function FAQSection({ slots: slotOverrides, layout, data, className }: FA
         {slots.showSectionHeading && heading && (
           <h2
             data-slot="heading"
-            className="text-2xl md:text-2xl font-bold tracking-tight mb-10 text-center"
+            className="text-xl md:text-xl font-bold tracking-tight mb-10 text-center"
           >
             {heading}
           </h2>
@@ -66,7 +66,7 @@ export function FAQSection({ slots: slotOverrides, layout, data, className }: FA
 
         {slots.showPhonePrompt && phoneTel && (
           <div data-slot="phonePrompt" className="mt-12 text-center">
-            <p className="text-surface-foreground text-lg">
+            <p className="text-surface-foreground text-base">
               Still have questions?{" "}
               <a
                 href={`tel:${phoneTel}`}

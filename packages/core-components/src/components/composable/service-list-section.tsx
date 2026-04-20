@@ -71,7 +71,7 @@ export function ServiceListSection({
             )}
             <h2
               data-slot="heading"
-              className="text-3xl md:text-4xl font-bold tracking-tight text-surface-foreground mb-6"
+              className="text-2xl md:text-3xl font-bold tracking-tight text-surface-foreground mb-6"
             >
               {heading}
             </h2>
@@ -119,7 +119,7 @@ export function ServiceListSection({
                       {item.title}
                     </h3>
                     {slots.showItemDescription && item.description && (
-                      <p className="line-clamp-2 text-sm leading-relaxed text-surface-muted-foreground">
+                      <p className="line-clamp-2 text-xs leading-relaxed text-surface-muted-foreground">
                         {item.description}
                       </p>
                     )}

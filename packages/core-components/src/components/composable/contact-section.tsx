@@ -76,15 +76,12 @@ export function ContactSection({
         {(heading || subheading) && (
           <div className="mb-12 text-center">
             {heading && (
-              <h2
-                data-slot="heading"
-                className="text-2xl md:text-2xl font-bold tracking-tight mb-4"
-              >
+              <h2 data-slot="heading" className="text-xl md:text-xl font-bold tracking-tight mb-4">
                 {heading}
               </h2>
             )}
             {subheading && (
-              <p data-slot="subheading" className="text-surface-muted-foreground text-lg">
+              <p data-slot="subheading" className="text-surface-muted-foreground text-base">
                 {subheading}
               </p>
             )}
@@ -94,13 +91,13 @@ export function ContactSection({
         <div className="grid grid-cols-1 md:grid-cols-[3fr_2fr] gap-12 items-start">
           {/* Left: Contact Form in dark card */}
           <div data-slot="contactForm" className="bg-surface-inverse p-8 md:p-12 rounded-2xl">
-            <p className="text-sm font-semibold uppercase tracking-widest text-brand-primary mb-3">
+            <p className="text-xs font-semibold uppercase tracking-widest text-brand-primary mb-3">
               Get in touch
             </p>
-            <h3 className="text-2xl font-bold tracking-tight text-white mb-2">
+            <h3 className="text-xl font-bold tracking-tight text-white mb-2">
               Write to us for fast feedback
             </h3>
-            <p className="text-surface-muted-foreground mb-8 text-sm leading-relaxed">
+            <p className="text-surface-muted-foreground mb-8 text-xs leading-relaxed">
               Our team will get back to you as soon as possible with a tailored solution.
             </p>
             <ContactForm services={services} serviceAreas={serviceAreas} darkMode={true} />
@@ -125,7 +122,7 @@ export function ContactSection({
                         </p>
                         <a
                           href={phoneTel ? `tel:${phoneTel}` : `tel:${phoneDisplay}`}
-                          className="text-lg font-semibold text-brand-primary hover:underline"
+                          className="text-base font-semibold text-brand-primary hover:underline"
                         >
                           {phoneDisplay}
                         </a>
@@ -143,7 +140,7 @@ export function ContactSection({
                         </p>
                         <a
                           href={`mailto:${email}`}
-                          className="text-brand-primary hover:underline break-all text-sm font-medium"
+                          className="text-brand-primary hover:underline break-all text-xs font-medium"
                         >
                           {email}
                         </a>
@@ -159,7 +156,7 @@ export function ContactSection({
                         <p className="text-xs text-surface-muted-foreground uppercase tracking-widest mb-1">
                           Address
                         </p>
-                        <address className="not-italic text-surface-foreground text-sm leading-relaxed">
+                        <address className="not-italic text-surface-foreground text-xs leading-relaxed">
                           {address.street && (
                             <>
                               {address.street}
@@ -194,33 +191,33 @@ export function ContactSection({
                 <div className="space-y-3">
                   {hours.weekdays && (
                     <div className="flex items-center justify-between">
-                      <span className="text-sm text-surface-muted-foreground flex items-center gap-2">
+                      <span className="text-xs text-surface-muted-foreground flex items-center gap-2">
                         <Clock className="w-3.5 h-3.5 flex-shrink-0" aria-hidden="true" />
                         Mon&ndash;Fri
                       </span>
-                      <span className="text-sm font-medium text-surface-foreground">
+                      <span className="text-xs font-medium text-surface-foreground">
                         {hours.weekdays}
                       </span>
                     </div>
                   )}
                   {hours.saturday && (
                     <div className="flex items-center justify-between">
-                      <span className="text-sm text-surface-muted-foreground flex items-center gap-2">
+                      <span className="text-xs text-surface-muted-foreground flex items-center gap-2">
                         <Clock className="w-3.5 h-3.5 flex-shrink-0" aria-hidden="true" />
                         Saturday
                       </span>
-                      <span className="text-sm font-medium text-surface-foreground">
+                      <span className="text-xs font-medium text-surface-foreground">
                         {hours.saturday}
                       </span>
                     </div>
                   )}
                   {hours.sunday && (
                     <div className="flex items-center justify-between">
-                      <span className="text-sm text-surface-muted-foreground flex items-center gap-2">
+                      <span className="text-xs text-surface-muted-foreground flex items-center gap-2">
                         <Clock className="w-3.5 h-3.5 flex-shrink-0" aria-hidden="true" />
                         Sunday
                       </span>
-                      <span className="text-sm font-medium text-surface-foreground">
+                      <span className="text-xs font-medium text-surface-foreground">
                         {hours.sunday}
                       </span>
                     </div>
@@ -243,7 +240,7 @@ export function ContactSection({
                     <li key={svc.slug}>
                       <Link
                         href={`/services/${svc.slug}`}
-                        className="text-sm text-surface-foreground hover:text-brand-primary transition-colors font-medium"
+                        className="text-xs text-surface-foreground hover:text-brand-primary transition-colors font-medium"
                       >
                         {svc.title}
                       </Link>
@@ -252,7 +249,7 @@ export function ContactSection({
                 </ul>
                 <Link
                   href="/services"
-                  className="text-sm text-brand-primary hover:underline font-semibold mt-4 inline-block"
+                  className="text-xs text-brand-primary hover:underline font-semibold mt-4 inline-block"
                 >
                   View all services &rarr;
                 </Link>
