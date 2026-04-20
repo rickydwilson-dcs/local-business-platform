@@ -181,8 +181,8 @@
           "slots": { "showHeroImage": false, "showBreadcrumbs": true }
         },
         {
-          "component": "FeatureGrid",
-          "dataKey": "locations",
+          "component": "ServiceCards",
+          "dataKey": "locations.locationCardsSection",
           "layout": { "columns": 3 }
         },
         {
