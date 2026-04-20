@@ -3,6 +3,14 @@
  */
 
 import { notFound } from "next/navigation";
+
+const CATEGORY_LABELS: Record<string, string> = {
+  "industry-tips": "Industry Tips",
+  "how-to-guide": "How-To Guide",
+  "case-study": "Case Study",
+  seasonal: "Seasonal",
+  news: "News",
+};
 import type { Metadata } from "next";
 import { Schema } from "@platform/core-components";
 import { getBlogPosts, getBlogPost, calculateReadingTime } from "@/lib/content";
@@ -162,7 +170,7 @@ export default async function BlogPostDetailPage({
       hero: {
         heading: frontmatter.title,
         subheading: frontmatter.description || "",
-        eyebrow: frontmatter.category || "Blog",
+        eyebrow: CATEGORY_LABELS[frontmatter.category] ?? frontmatter.category ?? "Blog",
         image: frontmatter.heroImage,
         heroImageSrc: frontmatter.heroImage,
         breadcrumbs: [
