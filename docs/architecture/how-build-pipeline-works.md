@@ -12,22 +12,24 @@ pnpm build (root)
     ↓ Determines dependency order via "dependsOn": ["^build"]
     ↓
 Phase 1: Build packages (parallel, no interdependencies)
-    ├── packages/theme-system     → tsc (TypeScript → dist/)
-    ├── packages/intake-system    → tsup (TypeScript → dist/, dual CJS + ESM)
-    ├── packages/themes/          → NO BUILD (CSS-only, imported by sites)
-    └── packages/core-components  → NO BUILD (source-only, compiled by sites)
+    ├── packages/theme-system          → tsc (TypeScript → dist/)
+    ├── packages/intake-system         → tsup (TypeScript → dist/, dual CJS + ESM)
+    ├── packages/themes/               → NO BUILD (CSS-only, imported by sites)
+    ├── packages/core-components       → NO BUILD (source-only, compiled by sites)
+    └── packages/component-composition → NO BUILD (source-only, compiled by sites)
     ↓
 Phase 2: Build sites (parallel, after packages complete)
-    ├── sites/base-template        → next build
-    ├── sites/colossus-scaffolding → next build
-    ├── sites/dcs                  → next build
-    ├── sites/dj-fox-electrical    → next build
-    ├── sites/mad-graphics         → next build
-    ├── sites/showcase             → next build
-    ├── sites/poc-composition-test → next build (composition system PoC)
-    ├── sites/designlab-test       → next build (pipeline test site)
-    ├── sites/navagarden-test      → next build (pipeline test site)
-    └── sites/[theme-name]-test    → next build (test only, created by pipeline)
+    ├── sites/base-template           → next build
+    ├── sites/colossus-scaffolding    → next build
+    ├── sites/dcs                     → next build
+    ├── sites/dj-fox-electrical       → next build
+    ├── sites/dj-fox-electrical-test  → next build (composition system migration)
+    ├── sites/mad-graphics            → next build
+    ├── sites/showcase                → next build
+    ├── sites/poc-composition-test    → next build (composition system PoC)
+    ├── sites/designlab-test          → next build (pipeline test site)
+    ├── sites/navagarden-test         → next build (pipeline test site)
+    └── sites/[theme-name]-test       → next build (test only, created by pipeline)
     ↓
 Each next build:
     1. Loads theme.config.ts → runs createThemePlugin() → generates CSS variables

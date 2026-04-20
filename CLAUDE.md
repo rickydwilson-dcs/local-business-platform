@@ -267,6 +267,7 @@ This rule applies to local-business-platform only. The force repo (`/Users/ricky
 | [Architecture Overview](docs/architecture/architecture.md)                                    | High-level system overview                                           |
 | [Content Validation](docs/architecture/content-validation.md)                                 | Zod schemas for MDX frontmatter validation                           |
 | [Monitoring Dashboard](docs/architecture/monitoring-dashboard.md)                             | Dashboard design for site registry and monitoring                    |
+| [Component Composition System](docs/architecture/component-composition-system.md)             | Config-driven page composition engine and two-pass AI pipeline       |
 
 ### Standards (How to Do It Right)
 

@@ -6,6 +6,23 @@ Commit (if needed) and push all changes through the full git workflow: develop â
 
 ## Steps
 
+### Step 0: Pre-flight
+
+Run these checks before anything else. Collect all failures and report them together â€” do not stop at the first failure.
+
+```bash
+# Check required CLI tools exist
+command -v pnpm >/dev/null 2>&1 || echo "MISSING: pnpm"
+command -v gh >/dev/null 2>&1 || echo "MISSING: gh (GitHub CLI)"
+command -v git >/dev/null 2>&1 || echo "MISSING: git"
+
+# Check git is synced with origin (fetch first, then check behind count)
+git fetch origin 2>/dev/null
+git rev-list --count HEAD..origin/$(git branch --show-current) 2>/dev/null | xargs -I{} sh -c '[ "{}" = "0" ] || echo "BEHIND: local branch is {} commit(s) behind origin"'
+```
+
+If any `MISSING:` or `BEHIND:` lines appear, STOP and list them clearly. Do not proceed until resolved.
+
 ### Step 1: Verify Branch
 
 ```bash

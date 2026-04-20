@@ -1,17 +1,4 @@
 {
-  "hooks": {
-    "PostToolUse": [
-      {
-        "matcher": "Edit|Write",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "npx tsc --noEmit 2>&1 | head -20"
-          }
-        ]
-      }
-    ]
-  },
   "permissions": {
     "allow": [
       "Bash(grep:*)",
@@ -87,7 +74,8 @@
       "WebFetch(domain:www.andrewlowry.com)",
       "Bash(node_modules/.bin/next dev *)",
       "Bash(curl -s http://localhost:3001)",
-      "WebFetch(domain:djfoxelectrical.com)"
+      "WebFetch(domain:djfoxelectrical.com)",
+      "Bash([ -f \"/Users/rickywilson/Sites/local-business-platform/$f\" ])"
     ],
     "additionalDirectories": [
       "/Users/rickywilson/Sites/local-business-platform/output/ingestion/cygnus-stitch/images",
@@ -101,6 +89,19 @@
       "/Users/rickywilson/Sites/local-business-platform/output/sessions/2026-04",
       "/Users/rickywilson/Sites/local-business-platform/output/sessions/2026-04/2026-04-19_dj-fox-composition-migration",
       "/Users/rickywilson/Sites/local-business-platform/output/sessions/2026-04/2026-04-20_detail-page-hero-fix"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "npx tsc --noEmit 2>&1 | head -20"
+          }
+        ]
+      }
     ]
   }
 }
