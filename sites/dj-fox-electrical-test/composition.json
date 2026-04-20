@@ -299,8 +299,8 @@
         {
           "component": "HeroSection",
           "dataKey": "hero",
-          "slots": { "showHeroImage": false, "showBreadcrumbs": true },
-          "layout": { "background": "inverse" }
+          "slots": { "showHeroImage": true, "showBreadcrumbs": false },
+          "layout": { "background": "inverse", "align": "split" }
         },
         {
           "component": "ContentSection",
