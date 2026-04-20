@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { CheckCircle2 } from "lucide-react";
 import type { LayoutParams } from "./layout-params";
 
 export interface FeatureGridSlots {
@@ -24,7 +25,7 @@ interface FeatureItem {
 
 interface FeatureGridProps {
   slots?: Partial<FeatureGridSlots>;
-  layout?: Pick<LayoutParams, "columns" | "background">;
+  layout?: Pick<LayoutParams, "columns" | "background" | "variant">;
   data: Record<string, unknown>;
   className?: string;
 }
@@ -32,6 +33,7 @@ interface FeatureGridProps {
 export function FeatureGrid({ slots: slotOverrides, layout, data, className }: FeatureGridProps) {
   const slots = { ...FEATURE_GRID_DEFAULT_SLOTS, ...slotOverrides };
   const d = data as Record<string, string | undefined>;
+  const variant = layout?.variant ?? "card";
 
   const bg =
     layout?.background === "inverse"
@@ -51,6 +53,44 @@ export function FeatureGrid({ slots: slotOverrides, layout, data, className }: F
         : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3";
 
   const features = Array.isArray(data.features) ? (data.features as FeatureItem[]) : [];
+
+  if (variant === "list") {
+    return (
+      <section
+        className={`${bg} ${layout?.background === "inverse" ? "noise-overlay" : ""} ${className ?? ""}`}
+        data-component="FeatureGrid"
+      >
+        <div className="mx-auto max-w-4xl px-4 py-16 md:py-24 sm:px-6 lg:px-8">
+          {slots.showSectionHeading && d.heading && (
+            <h2
+              data-slot="heading"
+              className="text-2xl md:text-2xl font-bold tracking-tight mb-8 text-surface-foreground"
+            >
+              {d.heading}
+            </h2>
+          )}
+          {slots.showSectionIntro && d.intro && (
+            <p className="text-surface-muted-foreground mb-8 max-w-xl text-sm leading-relaxed">
+              {d.intro}
+            </p>
+          )}
+          <div className={`grid gap-4 ${gridCols}`}>
+            {features.map((feature, i) => (
+              <div key={i} className="flex items-start gap-4">
+                <CheckCircle2 className="w-6 h-6 text-brand-primary flex-shrink-0 mt-0.5" />
+                <div>
+                  <h3 className="font-bold text-surface-foreground mb-1">{feature.title}</h3>
+                  {slots.showDescriptions && feature.description && (
+                    <p className="text-sm text-surface-muted-foreground">{feature.description}</p>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section

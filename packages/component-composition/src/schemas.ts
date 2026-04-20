@@ -57,6 +57,7 @@ export const LayoutParamsSchema = z.object({
   background: z.enum(["surface", "subtle", "inverse", "brand", "muted", "image"]).optional(),
   paddingY: z.enum(["compact", "standard", "spacious"]).optional(),
   align: z.enum(["left", "center", "right", "split"]).optional(),
+  variant: z.string().optional(),
   maxItems: z.number().int().positive().optional(),
   fullBleed: z.boolean().optional(),
   mediaPosition: z.enum(["left", "right", "top", "bottom"]).optional(),

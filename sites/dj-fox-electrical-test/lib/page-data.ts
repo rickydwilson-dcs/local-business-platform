@@ -336,47 +336,40 @@ export const siteData = {
     },
 
     benefits: {
-      heading: "Why Choose D J Fox Electrical?",
+      heading: "Why choose us?",
+      intro: "We are committed to delivering exceptional service and value to every customer.",
       features: [
         {
           icon: "✅",
           title: "Fully insured and accredited",
-          description: "£5M public liability insurance and full NICEIC accreditation.",
         },
         {
           icon: "✅",
           title: "Free quotes and consultations",
-          description: "No-obligation site visits and detailed written quotes.",
         },
         {
           icon: "✅",
           title: "Competitive pricing",
-          description: "Transparent rates with no hidden fees or surprise charges.",
         },
         {
           icon: "✅",
           title: "Quality workmanship guaranteed",
-          description: "All work certified and backed by a comprehensive guarantee.",
         },
         {
           icon: "✅",
           title: "Professional, uniformed team",
-          description: "Courteous, smart, and respectful of your home or business.",
         },
         {
           icon: "✅",
           title: "Clear communication throughout",
-          description: "You're kept informed at every stage of the work.",
         },
         {
           icon: "✅",
           title: "Flexible scheduling",
-          description: "We work around you, including evenings and weekends where possible.",
         },
         {
           icon: "✅",
           title: "Comprehensive aftercare",
-          description: "We're here if you have questions or need follow-up support.",
         },
       ],
     },
