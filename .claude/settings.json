@@ -71,7 +71,9 @@
       "WebFetch(domain:www.waywest.design)",
       "WebFetch(domain:www.toastdesign.co.uk)",
       "WebFetch(domain:www.webdesignandseocompany.co.uk)",
-      "WebFetch(domain:www.andrewlowry.com)"
+      "WebFetch(domain:www.andrewlowry.com)",
+      "Bash(node_modules/.bin/next dev *)",
+      "Bash(curl -s http://localhost:3001)"
     ],
     "additionalDirectories": [
       "/Users/rickywilson/Sites/local-business-platform/output/ingestion/cygnus-stitch/images",
