@@ -1002,9 +1002,6 @@ importers:
       '@platform/theme-system':
         specifier: workspace:*
         version: link:../../packages/theme-system
-      '@platform/themes':
-        specifier: workspace:*
-        version: link:../../packages/themes
       gray-matter:
         specifier: ^4.0.3
         version: 4.0.3
