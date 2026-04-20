@@ -287,6 +287,7 @@ export const siteData = {
       subheading: "Our Work",
       heading: "What sets us apart",
       body: "We are committed to delivering exceptional electrical service and value to every customer across Eastbourne and East Sussex.",
+      image: "djfoxelectrical/hero/about-hero.jpg",
       listItems: [
         "Fully qualified and NICEIC approved electricians",
         "Comprehensive electrical services for all needs",
@@ -331,6 +332,52 @@ export const siteData = {
         { value: "15+", label: "Years Electrical Expertise" },
         { value: "NICEIC", label: "Approved Contractor" },
         { value: "1000+", label: "Satisfied Customers" },
+      ],
+    },
+
+    benefits: {
+      heading: "Why Choose D J Fox Electrical?",
+      features: [
+        {
+          icon: "✅",
+          title: "Fully insured and accredited",
+          description: "£5M public liability insurance and full NICEIC accreditation.",
+        },
+        {
+          icon: "✅",
+          title: "Free quotes and consultations",
+          description: "No-obligation site visits and detailed written quotes.",
+        },
+        {
+          icon: "✅",
+          title: "Competitive pricing",
+          description: "Transparent rates with no hidden fees or surprise charges.",
+        },
+        {
+          icon: "✅",
+          title: "Quality workmanship guaranteed",
+          description: "All work certified and backed by a comprehensive guarantee.",
+        },
+        {
+          icon: "✅",
+          title: "Professional, uniformed team",
+          description: "Courteous, smart, and respectful of your home or business.",
+        },
+        {
+          icon: "✅",
+          title: "Clear communication throughout",
+          description: "You're kept informed at every stage of the work.",
+        },
+        {
+          icon: "✅",
+          title: "Flexible scheduling",
+          description: "We work around you, including evenings and weekends where possible.",
+        },
+        {
+          icon: "✅",
+          title: "Comprehensive aftercare",
+          description: "We're here if you have questions or need follow-up support.",
+        },
       ],
     },
   },

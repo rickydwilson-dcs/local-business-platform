@@ -57,8 +57,20 @@
           "layout": { "background": "inverse" }
         },
         {
+          "component": "StatsStrip",
+          "dataKey": "about.stats",
+          "layout": { "background": "inverse" }
+        },
+        {
           "component": "ContentSection",
-          "dataKey": "about.content"
+          "dataKey": "about.content",
+          "slots": {
+            "showImage": true,
+            "showList": true,
+            "showSubheading": true,
+            "showCta": false
+          },
+          "layout": { "align": "split" }
         },
         {
           "component": "FeatureGrid",
@@ -66,9 +78,9 @@
           "layout": { "columns": 3 }
         },
         {
-          "component": "StatsStrip",
-          "dataKey": "about.stats",
-          "layout": { "background": "inverse" }
+          "component": "FeatureGrid",
+          "dataKey": "about.benefits",
+          "layout": { "columns": 2, "background": "subtle" }
         },
         {
           "component": "CTASection",
