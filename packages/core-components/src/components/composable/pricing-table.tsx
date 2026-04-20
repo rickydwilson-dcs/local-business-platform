@@ -16,6 +16,7 @@ interface PricingItem {
   label: string;
   priceRange: string;
   icon?: string;
+  description?: string;
 }
 
 interface PricingTableProps {
@@ -79,6 +80,9 @@ export function PricingTable({ slots: slotOverrides, layout, data, className }: 
               <div data-slot="priceRange" className="text-brand-primary text-sm font-bold">
                 {item.priceRange}
               </div>
+              {item.description && (
+                <p className="text-sm text-surface-muted-foreground mt-2">{item.description}</p>
+              )}
             </div>
           ))}
         </div>
