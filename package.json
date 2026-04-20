@@ -62,8 +62,7 @@
     "changeset": "changeset",
     "version-packages": "changeset version",
     "release": "pnpm build && changeset publish",
-    "pipeline:smoke": "tsx tools/pipeline-smoke-test.ts",
-    "validate:theme-contract": "tsx tools/validate-theme-globals.ts"
+    "pipeline:smoke": "tsx tools/pipeline-smoke-test.ts"
   },
   "devDependencies": {
     "@anthropic-ai/sdk": "^0.61.0",
