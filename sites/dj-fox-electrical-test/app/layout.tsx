@@ -8,8 +8,8 @@ import {
   renderComposedLayout,
   registerLayoutComponent,
 } from "@platform/component-composition";
-import { OrionHeader } from "@platform/themes/orion/components";
-import { OrionFooter } from "@platform/themes/orion/components";
+import { SiteHeader } from "@/components/site-header";
+import { SiteFooter } from "@/components/site-footer";
 import { siteData } from "@/lib/page-data";
 import { siteConfig } from "@/site.config";
 
@@ -21,11 +21,11 @@ const outfit = Outfit({
 });
 
 // Register layout components for this site
-registerLayoutComponent("OrionHeader", {
-  component: OrionHeader as unknown as React.ComponentType<Record<string, unknown>>,
+registerLayoutComponent("SiteHeader", {
+  component: SiteHeader as unknown as React.ComponentType<Record<string, unknown>>,
 });
-registerLayoutComponent("OrionFooter", {
-  component: OrionFooter as unknown as React.ComponentType<Record<string, unknown>>,
+registerLayoutComponent("SiteFooter", {
+  component: SiteFooter as unknown as React.ComponentType<Record<string, unknown>>,
 });
 
 const config = SiteCompositionConfigSchema.parse(compositionConfig);
