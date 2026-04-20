@@ -62,7 +62,7 @@ export function ServiceCards({ slots: slotOverrides, layout, data, className }: 
         {d.heading && (
           <h2
             data-slot="heading"
-            className="text-3xl md:text-4xl font-bold tracking-tight mb-4 text-center"
+            className="text-2xl md:text-2xl font-bold tracking-tight mb-4 text-center"
           >
             {d.heading}
           </h2>
@@ -93,7 +93,7 @@ export function ServiceCards({ slots: slotOverrides, layout, data, className }: 
                 )}
                 <h3
                   data-slot="serviceTitle"
-                  className="text-xl font-semibold mb-3 group-hover:text-brand-primary transition-colors"
+                  className="text-lg font-semibold mb-3 group-hover:text-brand-primary transition-colors"
                 >
                   {service.title}
                 </h3>

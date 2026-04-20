@@ -73,7 +73,7 @@ export function TestimonialGrid({
         {d.heading && (
           <h2
             data-slot="heading"
-            className="text-3xl md:text-4xl font-bold tracking-tight mb-4 text-center"
+            className="text-2xl md:text-2xl font-bold tracking-tight mb-4 text-center"
           >
             {d.heading}
           </h2>

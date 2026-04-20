@@ -61,7 +61,7 @@ export function FeatureGrid({ slots: slotOverrides, layout, data, className }: F
         {slots.showSectionHeading && d.heading && (
           <h2
             data-slot="heading"
-            className="text-3xl md:text-4xl font-bold tracking-tight mb-12 text-surface-foreground"
+            className="text-2xl md:text-2xl font-bold tracking-tight mb-12 text-surface-foreground"
           >
             {d.heading}
           </h2>
@@ -69,7 +69,7 @@ export function FeatureGrid({ slots: slotOverrides, layout, data, className }: F
         {slots.showSectionIntro && d.intro && (
           <p
             data-slot="intro"
-            className="text-surface-muted-foreground mb-12 max-w-xl text-lg leading-relaxed"
+            className="text-surface-muted-foreground mb-12 max-w-xl text-sm leading-relaxed"
           >
             {d.intro}
           </p>

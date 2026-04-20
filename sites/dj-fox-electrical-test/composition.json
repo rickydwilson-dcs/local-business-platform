@@ -53,7 +53,8 @@
         {
           "component": "HeroSection",
           "dataKey": "about.hero",
-          "slots": { "showHeroImage": false, "showBreadcrumbs": true }
+          "slots": { "showHeroImage": false, "showBreadcrumbs": true },
+          "layout": { "background": "inverse" }
         },
         {
           "component": "ContentSection",
@@ -82,12 +83,12 @@
         {
           "component": "HeroSection",
           "dataKey": "contact.hero",
-          "slots": { "showHeroImage": false, "showBreadcrumbs": true }
+          "slots": { "showHeroImage": false, "showBreadcrumbs": true },
+          "layout": { "background": "inverse" }
         },
         {
           "component": "ContactSection",
-          "dataKey": "contact",
-          "layout": { "background": "inverse" }
+          "dataKey": "contact"
         },
         {
           "component": "FAQSection",
@@ -103,7 +104,8 @@
         {
           "component": "HeroSection",
           "dataKey": "services.hero",
-          "slots": { "showHeroImage": false, "showBreadcrumbs": true }
+          "slots": { "showHeroImage": false, "showBreadcrumbs": true },
+          "layout": { "background": "inverse" }
         },
         {
           "component": "ServiceCards",
@@ -129,7 +131,7 @@
           "component": "HeroSection",
           "dataKey": "hero",
           "slots": { "showHeroImage": true, "showBreadcrumbs": true, "showTrustBadges": true },
-          "layout": { "background": "subtle", "align": "split" }
+          "layout": { "background": "inverse", "align": "split" }
         },
         {
           "component": "ContentSection",
@@ -154,8 +156,8 @@
         {
           "component": "HeroSection",
           "dataKey": "hero",
-          "slots": { "showHeroImage": false, "showBreadcrumbs": true },
-          "layout": { "background": "subtle" }
+          "slots": { "showHeroImage": true, "showBreadcrumbs": true },
+          "layout": { "background": "inverse", "align": "split" }
         },
         {
           "component": "ContentSection",
@@ -180,7 +182,8 @@
         {
           "component": "HeroSection",
           "dataKey": "locations.hero",
-          "slots": { "showHeroImage": false, "showBreadcrumbs": true }
+          "slots": { "showHeroImage": false, "showBreadcrumbs": true },
+          "layout": { "background": "inverse" }
         },
         {
           "component": "ServiceCards",
@@ -200,7 +203,8 @@
         {
           "component": "HeroSection",
           "dataKey": "reviews.hero",
-          "slots": { "showHeroImage": false, "showBreadcrumbs": true }
+          "slots": { "showHeroImage": false, "showBreadcrumbs": true },
+          "layout": { "background": "inverse" }
         },
         {
           "component": "StatsStrip",
@@ -225,7 +229,8 @@
         {
           "component": "HeroSection",
           "dataKey": "projects.hero",
-          "slots": { "showHeroImage": false, "showBreadcrumbs": true }
+          "slots": { "showHeroImage": false, "showBreadcrumbs": true },
+          "layout": { "background": "inverse" }
         },
         {
           "component": "ProjectGrid",
@@ -245,7 +250,8 @@
         {
           "component": "HeroSection",
           "dataKey": "hero",
-          "slots": { "showHeroImage": false }
+          "slots": { "showHeroImage": false },
+          "layout": { "background": "inverse" }
         },
         {
           "component": "ContentSection",
@@ -265,7 +271,8 @@
         {
           "component": "HeroSection",
           "dataKey": "blog.hero",
-          "slots": { "showHeroImage": false, "showBreadcrumbs": true }
+          "slots": { "showHeroImage": false, "showBreadcrumbs": true },
+          "layout": { "background": "inverse" }
         },
         {
           "component": "BlogGrid",
@@ -280,7 +287,8 @@
         {
           "component": "HeroSection",
           "dataKey": "hero",
-          "slots": { "showHeroImage": false, "showBreadcrumbs": true }
+          "slots": { "showHeroImage": false, "showBreadcrumbs": true },
+          "layout": { "background": "inverse" }
         },
         {
           "component": "ContentSection",
@@ -300,7 +308,8 @@
         {
           "component": "HeroSection",
           "dataKey": "pricing.hero",
-          "slots": { "showHeroImage": false, "showBreadcrumbs": true }
+          "slots": { "showHeroImage": false, "showBreadcrumbs": true },
+          "layout": { "background": "inverse" }
         },
         {
           "component": "PricingTable",

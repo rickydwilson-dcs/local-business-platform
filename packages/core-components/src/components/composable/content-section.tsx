@@ -60,14 +60,14 @@ export function ContentSection({
             </p>
           )}
           {d.heading && (
-            <h2 data-slot="heading" className="text-3xl md:text-4xl font-bold tracking-tight mb-6">
+            <h2 data-slot="heading" className="text-2xl md:text-2xl font-bold tracking-tight mb-6">
               {d.heading}
             </h2>
           )}
           {d.body && (
             <p
               data-slot="body"
-              className="text-surface-muted-foreground mb-6 text-lg leading-relaxed"
+              className="text-surface-muted-foreground mb-6 text-sm leading-relaxed"
             >
               {d.body}
             </p>

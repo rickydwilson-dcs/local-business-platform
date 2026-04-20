@@ -80,7 +80,7 @@ export function BlogGrid({ slots: slotOverrides, layout, data, className }: Blog
             {d.heading && (
               <h2
                 data-slot="heading"
-                className="text-3xl md:text-4xl font-bold tracking-tight mb-4 text-center"
+                className="text-2xl md:text-2xl font-bold tracking-tight mb-4 text-center"
               >
                 {d.heading}
               </h2>
@@ -130,7 +130,7 @@ export function BlogGrid({ slots: slotOverrides, layout, data, className }: Blog
                 )}
                 <h3
                   data-slot="title"
-                  className="text-surface-foreground text-xl font-bold group-hover:text-brand-primary transition-colors"
+                  className="text-surface-foreground text-sm font-bold group-hover:text-brand-primary transition-colors"
                 >
                   <Link href={`/blog/${post.slug}`}>{post.title}</Link>
                 </h3>

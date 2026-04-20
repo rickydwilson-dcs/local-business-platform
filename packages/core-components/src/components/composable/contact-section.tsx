@@ -78,7 +78,7 @@ export function ContactSection({
             {heading && (
               <h2
                 data-slot="heading"
-                className="text-3xl md:text-4xl font-bold tracking-tight mb-4"
+                className="text-2xl md:text-2xl font-bold tracking-tight mb-4"
               >
                 {heading}
               </h2>
@@ -97,7 +97,7 @@ export function ContactSection({
             <p className="text-sm font-semibold uppercase tracking-widest text-brand-primary mb-3">
               Get in touch
             </p>
-            <h3 className="text-3xl font-bold tracking-tight text-white mb-2">
+            <h3 className="text-2xl font-bold tracking-tight text-white mb-2">
               Write to us for fast feedback
             </h3>
             <p className="text-surface-muted-foreground mb-8 text-sm leading-relaxed">

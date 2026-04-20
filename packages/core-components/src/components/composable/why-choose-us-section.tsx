@@ -70,7 +70,7 @@ export function WhyChooseUsSection({
         )}
         <h2
           data-slot="heading"
-          className={`text-4xl md:text-5xl font-bold tracking-tight mb-16 ${isDark ? "text-white" : "text-surface-foreground"}`}
+          className={`text-3xl md:text-4xl font-bold tracking-tight mb-16 ${isDark ? "text-white" : "text-surface-foreground"}`}
         >
           {heading}
           {slots.showHeadingHighlight && headingHighlight && (

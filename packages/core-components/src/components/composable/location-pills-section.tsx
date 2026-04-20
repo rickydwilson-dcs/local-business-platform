@@ -65,7 +65,7 @@ export function LocationPillsSection({
             )}
             <h2
               data-slot="heading"
-              className="text-4xl md:text-5xl font-bold tracking-tight text-surface-foreground"
+              className="text-3xl md:text-4xl font-bold tracking-tight text-surface-foreground"
             >
               {heading}
             </h2>

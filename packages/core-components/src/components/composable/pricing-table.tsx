@@ -76,7 +76,7 @@ export function PricingTable({ slots: slotOverrides, layout, data, className }: 
               <div data-slot="label" className="text-surface-foreground text-sm font-medium">
                 {item.label}
               </div>
-              <div data-slot="priceRange" className="text-brand-primary text-lg font-bold">
+              <div data-slot="priceRange" className="text-brand-primary text-sm font-bold">
                 {item.priceRange}
               </div>
             </div>

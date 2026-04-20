@@ -168,7 +168,7 @@ export function ComposableHeroSection({
   return (
     <section className={`${bg} ${minHeight} ${className ?? ""}`} data-component="HeroSection">
       <div
-        className={`mx-auto max-w-4xl px-4 py-16 md:py-24 sm:px-6 lg:px-8 ${isSplit ? "grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-center" : isCenter ? "text-center" : ""}`}
+        className={`mx-auto px-6 py-16 md:py-20 ${isSplit ? "w-full lg:w-[90%] grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-center" : "max-w-4xl sm:px-6 lg:px-8"} ${isCenter && !isSplit ? "text-center" : ""}`}
       >
         <div>
           {slots.showEyebrow && d.eyebrow && (
@@ -181,14 +181,14 @@ export function ComposableHeroSection({
           )}
           <h1
             data-slot="heading"
-            className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 text-surface-foreground"
+            className={`text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6 ${layout?.background === "inverse" ? "text-white" : "text-surface-foreground"}`}
           >
             {d.heading ?? ""}
           </h1>
           {slots.showSubheading && d.subheading && (
             <p
               data-slot="subheading"
-              className="text-surface-muted-foreground mb-8 text-xl leading-relaxed"
+              className={`mb-8 text-base leading-relaxed ${layout?.background === "inverse" ? "text-white/80" : "text-surface-muted-foreground"}`}
             >
               {d.subheading}
             </p>
@@ -226,7 +226,9 @@ export function ComposableHeroSection({
           </div>
           {slots.showBreadcrumbs && Array.isArray(data.breadcrumbs) && (
             <nav aria-label="Breadcrumb" className="mt-4">
-              <ol className="flex items-center gap-2 text-sm text-surface-muted-foreground">
+              <ol
+                className={`flex items-center gap-2 text-sm ${layout?.background === "inverse" ? "text-white/60" : "text-surface-muted-foreground"}`}
+              >
                 {(data.breadcrumbs as Array<{ label: string; href: string }>).map(
                   (crumb, i, arr) => (
                     <li key={i} className="flex items-center gap-2">
@@ -250,16 +252,23 @@ export function ComposableHeroSection({
             </nav>
           )}
         </div>
-        {isSplit && slots.showHeroImage && typeof data.heroImage === "string" && (
-          <div className="relative aspect-video overflow-hidden rounded-xl">
-            <img
-              src={data.heroImage}
-              alt={typeof data.heroImageAlt === "string" ? data.heroImageAlt : ""}
-              aria-hidden={!data.heroImageAlt || undefined}
-              className="h-full w-full object-cover"
-            />
-          </div>
-        )}
+        {isSplit &&
+          slots.showHeroImage &&
+          (typeof data.heroImageSrc === "string" || typeof data.heroImage === "string") && (
+            <div className="relative h-[400px] overflow-hidden rounded-2xl shadow-lg lg:order-first">
+              <Image
+                src={getImageUrl(
+                  (data.heroImageSrc as string | undefined) ?? (data.heroImage as string)
+                )}
+                alt={typeof data.heroImageAlt === "string" ? data.heroImageAlt : ""}
+                aria-hidden={!data.heroImageAlt || undefined}
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 50vw"
+                priority
+              />
+            </div>
+          )}
       </div>
     </section>
   );
