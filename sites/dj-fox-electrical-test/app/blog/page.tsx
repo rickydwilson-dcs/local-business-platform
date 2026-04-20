@@ -1,5 +1,13 @@
 import type { Metadata } from "next";
 import compositionConfig from "../../composition.json";
+
+const CATEGORY_LABELS: Record<string, string> = {
+  "industry-tips": "Industry Tips",
+  "how-to-guide": "How-To Guide",
+  "case-study": "Case Study",
+  seasonal: "Seasonal",
+  news: "News",
+};
 import { SiteCompositionConfigSchema, renderComposedPage } from "@platform/component-composition";
 import { siteData } from "@/lib/page-data";
 import { getBlogPosts } from "@/lib/content";
@@ -29,7 +37,7 @@ export default async function BlogPage() {
         title: p.title,
         excerpt: p.excerpt ?? p.description,
         date: p.date,
-        category: p.category,
+        category: CATEGORY_LABELS[p.category] ?? p.category,
         heroImage: p.heroImage,
         readingTime: p.readingTime,
         featured: p.featured,
