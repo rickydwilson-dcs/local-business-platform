@@ -36,8 +36,8 @@ const footerServices = siteConfig.services
 const priorityLocationSlugs = [
   "eastbourne",
   "hastings",
-  "bexhill",
-  "brighton-hove",
+  "bexhill-on-sea",
+  "brighton",
   "lewes",
   "hailsham",
 ];
@@ -57,17 +57,33 @@ const footerLocations = allLocationsFromConfig
   .slice(0, siteConfig.footer.maxLocations)
   .map((l) => ({ slug: l.slug, title: l.title }));
 
-// Counties for OrionHeader — built from serviceAreaRegions
-const headerCounties = (siteConfig.serviceAreaRegions ?? []).map((region) => ({
-  name: region.name,
-  slug: region.slug,
-  href: `/locations#${region.slug}`,
-  towns: region.towns.map((t) => ({
-    name: t.name,
-    slug: t.slug,
-    href: `/locations/${t.slug}`,
-  })),
-}));
+// Alphabetical letter-range groups for the locations dropdown mega-menu.
+// Groups all towns (sorted A-Z) into 4 columns by first-letter range.
+const allTownsSorted = (siteConfig.serviceAreaRegions ?? [])
+  .flatMap((r) => r.towns)
+  .sort((a, b) => a.name.localeCompare(b.name));
+
+function buildAlphaGroups(towns: typeof allTownsSorted) {
+  const numCols = 4;
+  const colSize = Math.ceil(towns.length / numCols);
+  const groups = [];
+  for (let i = 0; i < numCols; i++) {
+    const chunk = towns.slice(i * colSize, (i + 1) * colSize);
+    if (chunk.length === 0) continue;
+    const first = chunk[0].name[0].toUpperCase();
+    const last = chunk[chunk.length - 1].name[0].toUpperCase();
+    const label = first === last ? first : `${first}-${last}`;
+    groups.push({
+      name: label,
+      slug: label.toLowerCase(),
+      href: "/locations",
+      towns: chunk.map((t) => ({ name: t.name, slug: t.slug, href: `/locations/${t.slug}` })),
+    });
+  }
+  return groups;
+}
+
+const headerCounties = buildAlphaGroups(allTownsSorted);
 
 // ---------------------------------------------------------------------------
 // siteData — keyed by the dataKeys used in composition.json

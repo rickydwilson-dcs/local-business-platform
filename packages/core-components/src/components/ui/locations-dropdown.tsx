@@ -188,7 +188,7 @@ export function LocationsDropdown({
             id="locations-dropdown-menu"
             counties={counties}
             maxTownsPerCounty={maxTownsPerCounty}
-            variant={variant}
+            variant="light"
             onClose={() => setIsOpen(false)}
           />
         ) : (
@@ -301,13 +301,13 @@ function MegaMenuDropdown({
     <div
       id={id}
       role="menu"
-      className={`absolute top-full left-0 mt-2 w-[900px] max-w-[90vw] rounded-lg shadow-xl z-50 border ${
+      className={`absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[640px] max-w-[95vw] rounded-lg shadow-xl z-50 border ${
         isDark ? "bg-surface-inverse border-white/10" : "bg-surface-card border-surface-subtle"
       }`}
     >
-      <div className="p-4 md:p-6">
+      <div className="p-5">
         {/* Header */}
-        <div className="mb-4 md:mb-6">
+        <div className="mb-4">
           <h3
             className={`text-lg font-semibold mb-2 ${isDark ? "text-white" : "text-surface-foreground"}`}
           >
@@ -319,7 +319,7 @@ function MegaMenuDropdown({
         </div>
 
         {/* Counties Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 xl:gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {counties.map((county) => (
             <div key={county.slug} className="space-y-3">
               {/* County Header */}
@@ -341,20 +341,13 @@ function MegaMenuDropdown({
                     <Link
                       href={town.href}
                       role="menuitem"
-                      className={`block text-sm transition-colors ${
-                        town.isRichContent
-                          ? `font-medium hover:text-brand-primary ${isDark ? "text-white/80" : "text-surface-foreground"}`
-                          : `hover:text-brand-primary ${isDark ? "text-white/60" : "text-surface-foreground"}`
+                      className={`flex items-center gap-2 text-sm transition-colors hover:text-brand-primary ${
+                        isDark ? "text-white/80" : "text-surface-foreground"
                       }`}
                       onClick={onClose}
                     >
                       {town.name}
-                      {town.isRichContent && (
-                        <span
-                          className="ml-1 inline-block w-2 h-2 bg-brand-primary rounded-full"
-                          title="Detailed coverage"
-                        />
-                      )}
+                      <span className="inline-block w-2 h-2 bg-brand-primary rounded-full flex-shrink-0" />
                     </Link>
                   </li>
                 ))}
@@ -365,7 +358,7 @@ function MegaMenuDropdown({
 
         {/* Footer */}
         <div
-          className={`mt-6 md:mt-8 pt-4 md:pt-6 border-t ${isDark ? "border-white/10" : "border-surface-subtle"}`}
+          className={`mt-4 pt-4 border-t ${isDark ? "border-white/10" : "border-surface-subtle"}`}
         >
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 md:gap-0">
             <p className={`text-sm ${isDark ? "text-white/60" : "text-surface-foreground"}`}>
