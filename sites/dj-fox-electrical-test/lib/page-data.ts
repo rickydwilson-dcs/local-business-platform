@@ -636,30 +636,33 @@ export const siteData = {
       ctaHref: `tel:${PHONE_TEL}`,
     },
 
-    rateCards: [
-      {
-        icon: "⏰",
-        title: "Standard Work",
-        price: "£45-65",
-        unit: "per hour",
-        description: "Planned electrical work during normal business hours",
-      },
-      {
-        icon: "🚨",
-        title: "Emergency Callout",
-        price: "£100",
-        unit: "includes 2 hours labour",
-        description: "24/7 availability with rapid 1-2 hour response time",
-        featured: true,
-      },
-      {
-        icon: "🛡️",
-        title: "Commercial Work",
-        price: "£50-75",
-        unit: "per hour",
-        description: "Business premises, offices, and commercial installations",
-      },
-    ],
+    rateCards: {
+      heading: "Hourly Rates",
+      cards: [
+        {
+          icon: "⏰",
+          title: "Standard Work",
+          price: "£45-65",
+          unit: "per hour",
+          description: "Planned electrical work during normal business hours",
+        },
+        {
+          icon: "🚨",
+          title: "Emergency Callout",
+          price: "£100",
+          unit: "includes 2 hours labour",
+          description: "24/7 availability with rapid 1-2 hour response time",
+          featured: true,
+        },
+        {
+          icon: "🛡️",
+          title: "Commercial Work",
+          price: "£50-75",
+          unit: "per hour",
+          description: "Business premises, offices, and commercial installations",
+        },
+      ],
+    },
 
     jobCosts: {
       heading: "Example Job Costs",
@@ -672,41 +675,49 @@ export const siteData = {
           label: "Consumer Unit Upgrade",
           priceRange: "£400-800",
           icon: "🛡️",
+          description: "Replace old fuse box with modern RCD protection",
         },
         {
           label: "Full House Rewire (3-bed)",
           priceRange: "£3,500-6,000",
           icon: "⚡",
+          description: "Complete electrical rewiring to current standards",
         },
         {
           label: "EICR Certificate",
           priceRange: "£150-350",
           icon: "✅",
+          description: "Electrical Installation Condition Report",
         },
         {
           label: "EV Charger Installation",
           priceRange: "£800-1,200",
           icon: "🔌",
+          description: "Home electric vehicle charging point",
         },
         {
           label: "Additional Sockets",
           priceRange: "£80-150 each",
           icon: "🔌",
+          description: "New power outlets in convenient locations",
         },
         {
           label: "LED Lighting Upgrade",
           priceRange: "£200-500 per room",
           icon: "💡",
+          description: "Energy-efficient LED lighting installation",
         },
         {
           label: "Smart Home Wiring",
           priceRange: "£500-2,000",
           icon: "🏠",
+          description: "Future-proof structured cabling and automation",
         },
         {
           label: "Solar Panel Installation",
           priceRange: "£4,000-8,000",
           icon: "☀️",
+          description: "Complete solar PV system design and installation",
         },
       ],
     },
@@ -714,7 +725,7 @@ export const siteData = {
     checklist: {
       heading: "Comprehensive Electrical System Check",
       image: "djfoxelectrical/sections/electrical-inspection.jpg",
-      items: [
+      listItems: [
         "Consumer unit inspection and testing",
         "Circuit protection verification",
         "Socket and switch condition check",

@@ -312,15 +312,34 @@
           "layout": { "background": "inverse" }
         },
         {
+          "component": "EmergencyBanner",
+          "dataKey": "pricing.emergencyBanner"
+        },
+        {
+          "component": "RateCardsSection",
+          "dataKey": "pricing.rateCards"
+        },
+        {
           "component": "PricingTable",
           "dataKey": "pricing.jobCosts",
           "slots": { "showDisclaimer": true },
-          "layout": { "columns": 4 }
+          "layout": { "columns": 4, "background": "subtle" }
+        },
+        {
+          "component": "ContentSection",
+          "dataKey": "pricing.checklist",
+          "slots": {
+            "showImage": true,
+            "showList": true,
+            "showCta": false,
+            "showSubheading": false
+          },
+          "layout": { "align": "split" }
         },
         {
           "component": "FeatureGrid",
           "dataKey": "pricing.benefits",
-          "layout": { "columns": 3 }
+          "layout": { "columns": 3, "background": "subtle" }
         },
         {
           "component": "FAQSection",
@@ -329,7 +348,7 @@
         },
         {
           "component": "CTASection",
-          "dataKey": "home.cta",
+          "dataKey": "pricing.cta",
           "layout": { "background": "brand" }
         }
       ]
