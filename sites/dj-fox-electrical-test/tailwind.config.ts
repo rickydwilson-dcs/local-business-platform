@@ -9,8 +9,6 @@ const config: Config = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "../../packages/core-components/src/**/*.{js,ts,jsx,tsx}",
     "../../packages/component-composition/src/**/*.{js,ts,jsx,tsx}",
-    "../../packages/themes/*/*.{js,ts,jsx,tsx}",
-    "../../packages/themes/*/components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {

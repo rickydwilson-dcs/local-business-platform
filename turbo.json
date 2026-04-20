@@ -2,16 +2,8 @@
   "$schema": "https://turbo.build/schema.json",
   "globalDependencies": ["**/.env.*local"],
   "tasks": {
-    "validate:theme-contract": {
-      "inputs": [
-        "packages/theme-system/src/component-contract.ts",
-        "packages/themes/*/globals.css",
-        "tools/validate-theme-globals.ts"
-      ],
-      "outputs": []
-    },
     "build": {
-      "dependsOn": ["^build", "validate:theme-contract"],
+      "dependsOn": ["^build"],
       "outputs": [".next/**", "!.next/cache/**", "dist/**"],
       "env": [
         "NODE_ENV",

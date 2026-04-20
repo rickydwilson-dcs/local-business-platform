@@ -1,3 +1,5 @@
+> **Deprecated 2026-04-19.** The Theme Component Contract was retired alongside the decision to make every site self-contained (retiring `packages/themes/*`). See `output/sessions/2026-04/2026-04-19_dj-fox-test-self-contained/yolo-brief.md` for the migration that triggered this deprecation. The document is preserved as historical context.
+
 # Theme Component Contract
 
 ## Why This Exists

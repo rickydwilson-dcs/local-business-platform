@@ -2,11 +2,11 @@
   "version": "1",
   "siteId": "dj-fox-electrical-test",
   "headerConfig": {
-    "component": "OrionHeader",
+    "component": "SiteHeader",
     "dataKey": "header"
   },
   "footerConfig": {
-    "component": "OrionFooter",
+    "component": "SiteFooter",
     "dataKey": "footer"
   },
   "pages": [

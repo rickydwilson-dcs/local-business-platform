@@ -1,13 +1,9 @@
 /**
- * Theme Component Contract
+ * Theme Component Contract — documentation only, no longer enforced.
  *
- * Every theme's globals.css MUST define these CSS classes.
- * Composable section components in @platform/core-components rely on
- * them and will render broken on any theme that does not implement them.
- *
- * Classes are identified by NAME only — each theme implements them with
- * its own visual identity (colours, radii, shadows). Contract compliance
- * is validated in CI by tools/validate-theme-globals.ts.
+ * Retained as a reference for which CSS classes composable section
+ * components in @platform/core-components rely on. Each site now
+ * owns its own globals.css and is responsible for defining these classes.
  */
 
 export type ContractGroup = "button" | "section" | "overlay" | "utility";

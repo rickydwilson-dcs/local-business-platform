@@ -41,9 +41,6 @@ jobs:
       - name: Run TypeScript check
         run: pnpm run type-check
 
-      - name: Validate theme component contract
-        run: pnpm run validate:theme-contract
-
       - name: Run Content Validation
         run: pnpm --filter colossus-scaffolding run validate:content
 

@@ -1,5 +1,4 @@
-import type { DeepPartialThemeConfig } from "@platform/theme-system";
-import { orionRegistry } from "@platform/themes/orion";
+import type { DeepPartialThemeConfig, ComponentRegistry } from "@platform/theme-system";
 
 /**
  * D J Fox Electrical - Theme Configuration
@@ -8,7 +7,13 @@ import { orionRegistry } from "@platform/themes/orion";
  * Generated at: 2026-02-15T19:18:53.726Z
  */
 export const themeConfig: DeepPartialThemeConfig = {
-  componentRegistry: orionRegistry,
+  componentRegistry: {
+    theme: "orion",
+    heroVariant: "image-overlay",
+    headerVariant: "dark",
+    cardVariant: "icon-circle",
+    sectionVariant: "dark-accent",
+  } satisfies ComponentRegistry,
 
   colors: {
     brand: {

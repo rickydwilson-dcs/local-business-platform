@@ -14,7 +14,6 @@
     "@platform/component-composition": "workspace:*",
     "@platform/core-components": "workspace:*",
     "@platform/theme-system": "workspace:*",
-    "@platform/themes": "workspace:*",
     "gray-matter": "^4.0.3",
     "lucide-react": "^0.544.0",
     "next": "16.0.10",
