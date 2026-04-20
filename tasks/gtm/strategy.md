@@ -289,6 +289,90 @@ We buy and manage domains on behalf of clients. We set up Google Workspace for t
 
 ---
 
+## Platform Monetisation Options (Beyond Direct Client Sites)
+
+The platform itself — the composition system, AI pipeline, and theme engine — creates monetisation options beyond selling websites directly to tradespeople. These are not the current focus, but worth tracking as the client base grows.
+
+Researched 2026-04-19. Full analysis in [output/research/server-driven-ui-industry-research.md](../../output/research/server-driven-ui-industry-research.md).
+
+---
+
+### Option A: Managed Subscription Model (Near-Term)
+
+**What:** Bundle sites into an ongoing service — hosting, content updates, SEO monitoring, performance alerts — at a higher monthly rate. The site is the hook; the retainer is the business.
+
+**Who pays:** Existing and new direct clients. Same audience as today.
+
+**Why now:** No new platform development needed. The build pipeline makes content updates trivial (MDX file drop → auto-rebuild). Requires a simple client-facing content update workflow and Stripe subscription management.
+
+**Revenue model:** Higher monthly recurring vs. current £15-50/month maintenance fees. Packaging change, not a product build.
+
+**Actions:**
+
+- [ ] Define what "managed" includes (content updates/month, SEO monitoring, GMB management)
+- [ ] Price the managed tier (research: £99-£299/month is the market range)
+- [ ] Build a minimal content update workflow (form → generates MDX frontmatter → triggers Vercel rebuild)
+- [ ] Set up Stripe recurring billing for this tier
+
+---
+
+### Option B: Agency / Reseller Tooling (3–6 Months)
+
+**What:** License the platform to web agencies who serve local tradespeople. They brand it as their own, spin up client sites using the AI pipeline, and charge their clients. We charge a platform fee (monthly or per-site).
+
+**Who pays:** Small-to-mid web agencies (2–20 person shops) currently hand-building WordPress sites. The value prop: a multi-week build becomes a few hours. Their margin per site goes from ~40% to 80%+.
+
+**Why compelling:** One agency with 50 clients is worth more than 50 direct clients, and the agency handles sales and client management. The two-pass AI pipeline (structural → `composition.json`, visual → `theme.config.ts`) is the differentiator — nobody else offers "AI generates the composition config, static Next.js site builds from it."
+
+**What the platform already provides:** `tools/create-site-from-project.ts`, AI generation pipeline, theme system, base template, MDX content system, intake system.
+
+**What needs building:**
+
+- Self-service onboarding (currently CLI + monorepo knowledge required)
+- Multi-tenant deployment orchestration (currently each site is manually configured in Vercel)
+- Agency admin dashboard (portfolio of sites, deployment status, billing)
+- Documentation and training materials
+
+**Market signal:** Underserved niche. Competitors (Duda, GoHighLevel, Jetveo) exist but none combine CDUI + AI generation. The local trades vertical is specific enough to avoid direct competition with Webflow-for-agencies plays.
+
+**Risk:** Significant product packaging effort — 3–6 months to reach "an agency can onboard without hand-holding." Support burden increases.
+
+---
+
+### Option C: Embedded AI Site Generation API (6–12 Months)
+
+**What:** Expose the two-pass AI pipeline as an embeddable API. Input: business name, trade, brand colours. Output: deployed production website. Embed into vertical SaaS platforms (Jobber, ServiceTitan, Tradify, Housecall Pro) as an upsell feature.
+
+**Who pays:** Vertical SaaS platforms that serve tradespeople — they want "get a website" as a feature but don't want to build it. Also potentially direct local businesses who want an instant site at £200–500 vs. a £2K agency site.
+
+**Why compelling:** These platforms have existing distribution to tradespeople. ServiceTitan, Jobber, and Housecall Pro all offer poor or no website tools. Highest margin, lowest touch — API contract, they provide customers.
+
+**What needs building:** API wrapper around current CLI scripts, automated Vercel project creation + domain provisioning, payment layer, queue management for AI generation, error handling for pipeline failures (~9% rate after fixes).
+
+**Risk:** Integration sales cycle is long. Also competes with well-funded "instant website" players (Wix ADI, Squarespace Blueprint). The differentiation — real Next.js SSG with proper SEO/structured data — matters to us but may not matter to buyers.
+
+---
+
+### Options to Skip
+
+| Option                                                       | Why                                                                                                                                  |
+| ------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ |
+| **Theme marketplace**                                        | Saturated. shadcn/ui, Tailwind UI, ThemeForest own this space. Low margins.                                                          |
+| **Open-source CDUI framework**                               | The composition system is the competitive moat — open-sourcing loses the advantage. Community maintenance is a second full-time job. |
+| **Vertical SaaS expansion** (quoting, scheduling, invoicing) | Enormous build. Dominated by ServiceTitan ($9.5B), Jobber, Housecall Pro. Partner or embed — don't compete.                          |
+
+---
+
+### Recommended Sequence
+
+1. **Now:** Switch to managed subscription model for existing + new clients (Option A). Pure packaging, no new build.
+2. **Months 3–6:** Package for agency resellers (Option B) once the client base demonstrates the platform works at scale.
+3. **Months 6–12:** Embedded API partnerships (Option C) once the pipeline is proven and documented.
+
+The composition system, AI pipeline, and theme architecture are not products by themselves — they're what makes these options viable at margins competitors can't match. Keep them proprietary.
+
+---
+
 ## Pipeline Targets
 
 | Milestone             | Target   | Status      |

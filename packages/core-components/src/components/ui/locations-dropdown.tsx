@@ -137,7 +137,8 @@ export function LocationsDropdown({
   }, [isOpen]);
 
   if (locations.length === 0 && (!counties || counties.length === 0)) {
-    const linkTextColor = variant === "dark" ? "text-white" : "text-surface-secondary";
+    const linkTextColor =
+      variant === "dark" ? "text-white" : "text-[var(--color-surface-secondary-foreground)]";
     return (
       <Link
         href="/locations"
@@ -152,7 +153,8 @@ export function LocationsDropdown({
   }
 
   const useMegaMenu = counties && counties.length > 0;
-  const buttonTextColor = variant === "dark" ? "text-white" : "text-surface-secondary";
+  const buttonTextColor =
+    variant === "dark" ? "text-white" : "text-[var(--color-surface-secondary-foreground)]";
 
   return (
     <div ref={dropdownRef} className="relative">
@@ -193,6 +195,7 @@ export function LocationsDropdown({
           <SimpleDropdown
             id="locations-dropdown-menu"
             locations={locations}
+            variant={variant}
             onClose={() => setIsOpen(false)}
           />
         ))}
@@ -204,25 +207,42 @@ export function LocationsDropdown({
 function SimpleDropdown({
   id,
   locations,
+  variant = "light",
   onClose,
 }: {
   id: string;
   locations: LocationItem[];
+  variant?: "dark" | "light";
   onClose: () => void;
 }) {
   const gridCols =
     locations.length > 8 ? "grid-cols-3" : locations.length > 4 ? "grid-cols-2" : "grid-cols-1";
+  const isDark = variant === "dark";
 
   return (
     <div
       id={id}
       role="menu"
-      className="absolute top-full left-1/2 -translate-x-1/2 mt-2 bg-surface-card rounded-lg shadow-lg border border-surface-subtle z-50 min-w-[200px] max-w-[600px]"
+      className={`absolute top-full left-1/2 -translate-x-1/2 mt-2 rounded-lg shadow-lg border z-50 min-w-[200px] max-w-[600px] ${
+        isDark
+          ? "bg-surface-inverse border-white/10"
+          : "bg-[var(--color-surface-card)] border-[var(--color-surface-subtle-border)]"
+      }`}
     >
       {/* Header */}
-      <div className="px-4 py-3 border-b border-surface-subtle">
-        <h3 className="font-semibold text-surface-foreground">Service Areas</h3>
-        <p className="text-sm text-surface-muted-foreground">We proudly serve these locations</p>
+      <div
+        className={`px-4 py-3 border-b ${isDark ? "border-white/10" : "border-[var(--color-surface-subtle-border)]"}`}
+      >
+        <h3
+          className={`font-semibold ${isDark ? "text-white" : "text-[var(--color-surface-foreground)]"}`}
+        >
+          Service Areas
+        </h3>
+        <p
+          className={`text-sm ${isDark ? "text-white/60" : "text-[var(--color-surface-muted-foreground)]"}`}
+        >
+          We proudly serve these locations
+        </p>
       </div>
 
       {/* Locations Grid */}
@@ -233,7 +253,9 @@ function SimpleDropdown({
             href={`/locations/${location.slug}`}
             onClick={onClose}
             role="menuitem"
-            className="px-3 py-2 rounded-md text-sm text-surface-secondary hover:bg-brand-primary/10 hover:text-brand-primary transition-colors"
+            className={`px-3 py-2 rounded-md text-sm hover:bg-brand-primary/10 hover:text-brand-primary transition-colors ${
+              isDark ? "text-white/80" : "text-[var(--color-surface-secondary-foreground)]"
+            }`}
           >
             {location.name}
           </Link>
@@ -241,7 +263,13 @@ function SimpleDropdown({
       </div>
 
       {/* Footer */}
-      <div className="px-4 py-3 border-t border-surface-subtle bg-surface-muted rounded-b-lg">
+      <div
+        className={`px-4 py-3 border-t rounded-b-lg ${
+          isDark
+            ? "border-white/10 bg-white/5"
+            : "border-[var(--color-surface-subtle-border)] bg-[var(--color-surface-muted)]"
+        }`}
+      >
         <Link
           href="/locations"
           onClick={onClose}
