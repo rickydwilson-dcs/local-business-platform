@@ -54,7 +54,12 @@ function checkComposable(pattern: string, description: string, glob: string): st
 }
 
 const hexViolations = checkComposable("#[0-9a-fA-F]{6}", "hardcoded hex colors", "*.tsx");
-const useClientViolations = checkComposable('"use client"', '"use client" directive', "*.tsx");
+// .client.tsx files are intentional client components — exempt from the "use client" check
+const useClientViolations = checkComposable(
+  '"use client"',
+  '"use client" directive',
+  "*.tsx"
+).filter((line) => !line.includes(".client.tsx"));
 const defaultExportViolations = checkComposable("^export default", "default exports", "*.tsx");
 const styleAttrViolations = checkComposable("style=\\{", "inline styles", "*.tsx");
 

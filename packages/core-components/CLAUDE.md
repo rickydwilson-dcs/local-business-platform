@@ -29,8 +29,8 @@ Sites resolve imports via TypeScript path mapping in their `tsconfig.json`:
 - `Breadcrumbs` — breadcrumb navigation
 - `ContentCard`, `CardGrid`, `ContentGrid` — content display
 - `CoverageMap`, `CoverageAreas`, `CoverageMapSection`, `CoverageStatsSection` — service area visualization
-- `ServiceCards`, `ServiceBenefits`, `ServiceAbout`, `ServiceShowcase`, `ServiceGallery`, `ServiceFaq` — service page sections
-- `LocationServices`, `LocationFaq`, `LocationCoverage` — location page sections
+- `ServiceCards`, `ServiceBenefits`, `ServiceAbout`, `ServiceShowcase`, `ServiceGallery`, `ServiceFAQ` — service page sections
+- `LocationServices`, `LocationFAQ`, `LocationCoverage` — location page sections
 - `MobileMenu` — responsive mobile navigation
 - `LocationsDropdown` — locations navigation dropdown
 - `TestimonialCard`, `StarRating`, `AggregateRatingDisplay` — reviews

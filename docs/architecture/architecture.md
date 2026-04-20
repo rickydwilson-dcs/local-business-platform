@@ -32,6 +32,7 @@ local-business-platform/
 │   ├── mad-graphics/               # Production site (vehicle graphics & print, cygnus theme)
 │   ├── showcase/                   # Internal component/theme showcase
 │   ├── poc-composition-test/       # Composition system PoC + UI library (/ui-library route)
+│   ├── dj-fox-electrical-test/     # Composition system migration of dj-fox-electrical
 │   ├── designlab-test/             # Pipeline test site (designlab theme)
 │   ├── navagarden-test/            # Pipeline test site (navagarden theme)
 │   └── [theme-name]-test/          # Temporary test sites (created by pipeline, removed after review)
