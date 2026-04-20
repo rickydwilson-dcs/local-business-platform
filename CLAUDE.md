@@ -22,6 +22,18 @@ See [docs/guides/git-workflow.md](docs/guides/git-workflow.md) for detailed work
 
 ---
 
+## Debugging Approach
+
+- When diagnosing UI or runtime bugs, check whether a dev server is running (`lsof -i :3000`); if not, start one before speculating about causes
+- Fetch the running dev server (`WebFetch http://localhost:3000` or `:3001`) and take a screenshot to capture the visual state and any console output — do not ask the user for a screenshot if you can retrieve it yourself
+- Do not guess at hydration errors, RSC serialisation, or z-index issues without evidence
+- Check CSP headers early when scripts fail silently (`unsafe-eval`, `unsafe-inline` policies block many third-party scripts)
+- When evidence is still needed after fetching, ask for a specific console screenshot or error message — not a general "can you share what you see"
+
+See [docs/guides/debugging.md](docs/guides/debugging.md) for common issue patterns.
+
+---
+
 ## How This Platform Works
 
 This is a **white-label website platform** for local service businesses. The business model: take a single gold-standard template, customize it per client (colors, content, business info), and deploy each as an independent website.
@@ -136,6 +148,15 @@ npx tsx tools/create-site-from-project.ts --project [project-file.json]
 
 ---
 
+## Dev Server Management
+
+- Before starting a dev server, run `lsof -i :3000` (or the target port) to check for existing processes
+- If the port is occupied, identify which site/project owns it — do NOT kill the process without confirmation
+- If Turbopack causes PostCSS or worker errors in dev, retry with `--webpack` flag: `npm run dev -- --webpack`
+- Confirm the server is reachable with `curl -s http://localhost:3000` before reporting it as running
+
+---
+
 ## When Things Break
 
 ### TypeScript Errors During Push
@@ -166,6 +187,7 @@ npm run validate:content  # Shows which MDX files fail and why
 - **CSS parser panic or PostCSS timeout** — Verify the site uses `next build --webpack` (not Turbopack) in its `package.json` build script.
 - **Stale builds after adding env var** — Add the variable name to `turbo.json` `tasks.build.env` array. Without this, Turborepo serves a cached build with the old value.
 - **18+ minute Tailwind builds** — Check `tailwind.config.ts` content globs for `**` patterns that descend into `node_modules/`. Use scoped globs instead.
+- **CI scan gate fails with missing token** — `SNYK_TOKEN` must be set in the Vercel project environment variables before security scan gates will pass.
 
 ---
 
@@ -281,6 +303,7 @@ This rule applies to local-business-platform only. The force repo (`/Users/ricky
 | [Registry Setup](docs/guides/registry-setup.md)                   | Supabase site registry and monitoring setup       |
 | [End-to-End Workflow](docs/guides/end-to-end-workflow.md)         | Full site creation workflow from intake to deploy |
 | [Component Versioning](docs/guides/component-versioning.md)       | Versioning shared components in core-components   |
+| [Debugging](docs/guides/debugging.md)                             | Diagnosing UI, runtime, build, and CSP issues     |
 | [Project History](docs/project-history.md)                        | Platform changelog and development phases         |
 
 ---

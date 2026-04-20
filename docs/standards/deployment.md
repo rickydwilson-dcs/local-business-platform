@@ -193,6 +193,18 @@ NEW_RELIC_LOG=stdout
 NEW_RELIC_DISTRIBUTED_TRACING_ENABLED=true
 ```
 
+## Required CI/Deploy Environment Variables
+
+The following env vars must be set in Vercel project settings for CI and deployment gates to pass. All vars that affect build output must also appear in `turbo.json` → `tasks.build.env`.
+
+| Variable                                | Required for       | Notes                                              |
+| --------------------------------------- | ------------------ | -------------------------------------------------- |
+| `NEW_RELIC_LICENSE_KEY`                 | APM monitoring     | Set per site                                       |
+| `NEW_RELIC_APP_NAME`                    | APM monitoring     | Set per site                                       |
+| `NEW_RELIC_LOG`                         | APM monitoring     | Set to `stdout`                                    |
+| `NEW_RELIC_DISTRIBUTED_TRACING_ENABLED` | APM monitoring     | Set to `true`                                      |
+| `SNYK_TOKEN`                            | Security scan gate | Must be set before security scan CI step will pass |
+
 ## Git Workflow Commands
 
 ```bash
