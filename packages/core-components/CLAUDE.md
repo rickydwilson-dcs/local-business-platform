@@ -32,7 +32,8 @@ Sites resolve imports via TypeScript path mapping in their `tsconfig.json`:
 - `ServiceCards`, `ServiceBenefits`, `ServiceAbout`, `ServiceShowcase`, `ServiceGallery`, `ServiceFAQ` — service page sections
 - `LocationServices`, `LocationFAQ`, `LocationCoverage` — location page sections
 - `MobileMenu` — responsive mobile navigation
-- `LocationsDropdown` — locations navigation dropdown
+- `HeaderNavDropdown` — generic header dropdown supporting `mega` (alpha-grouped columns) and `list` modes; driven by a `HeaderDropdownConfig` on each nav item; replaces the old hardcoded `LocationsDropdown` branch in `SiteHeader`
+- `LocationsDropdown` — **deprecated** thin shim that maps legacy `locations`/`counties` props to `HeaderNavDropdown`; kept for backwards compat only
 - `TestimonialCard`, `StarRating`, `AggregateRatingDisplay` — reviews
 - `PageLayout` — shared page layout wrapper
 - `Schema` — JSON-LD structured data generation
@@ -69,6 +70,7 @@ See `src/index.ts` for the full list of exports.
 - `security/ip-utils.ts` — IP extraction and validation from request headers
 - `validators/` — input validation (contact form, email, phone, etc.)
 - `image.ts` — image path utilities and validation
+- `nav-grouping.ts` — `buildAlphaColumns(items, numCols)` pure function: sorts items A-Z and chunks into `numCols` groups with letter-range labels (`"A-D"`, `"E-J"`, …). Used by `HeaderNavDropdown` for the locations/services mega-menu.
 
 **Critical import rule:** Site lib shims must import factories via **subpath** (`@platform/core-components/lib/contact-info`) NOT the barrel (`@platform/core-components`). Barrel imports cause circular dependencies in vitest.
 
