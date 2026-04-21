@@ -34,8 +34,7 @@ export function CoverageMapClient({ center, zoom, markers, className }: Coverage
       <div
         role="img"
         aria-label="Coverage map loading"
-        className={`bg-surface-subtle border border-surface-subtle rounded-2xl ${className ?? ""}`}
-        style={{ aspectRatio: "16 / 9", minHeight: "320px" }}
+        className={`bg-surface-subtle border border-surface-subtle rounded-2xl aspect-video min-h-80 ${className ?? ""}`}
       />
     );
   }
@@ -54,7 +53,7 @@ export function CoverageMapClient({ center, zoom, markers, className }: Coverage
         center={center}
         zoom={zoom}
         scrollWheelZoom={false}
-        style={{ height: "420px", width: "100%" }}
+        className="h-[420px] w-full"
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
