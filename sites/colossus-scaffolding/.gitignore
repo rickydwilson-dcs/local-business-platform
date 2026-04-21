@@ -1,1 +1,11 @@
 .vercel
+
+# Visual parity artefacts.
+# target/ and diffs/ are regenerable per-run, never committed.
+# production/*.png (~400MB of baseline screenshots) regenerable via
+#   `tsx tools/visual-parity/capture-production.ts --baseline-dir ./tests/visual-baseline`
+# The manifest.json and per-route dom.json / capture.json ARE tracked
+# (they're small and define what the gate covers).
+tests/visual-baseline/target/
+tests/visual-baseline/diffs/
+tests/visual-baseline/production/**/*.png
