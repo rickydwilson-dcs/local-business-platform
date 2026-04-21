@@ -14,13 +14,16 @@ import Link from "next/link";
 import Image from "next/image";
 import { Phone } from "lucide-react";
 import { MobileMenu } from "./mobile-menu";
-import { LocationsDropdown } from "./locations-dropdown";
+import { HeaderNavDropdown } from "./header-nav-dropdown";
+import type { HeaderDropdownConfig } from "./header-nav-dropdown";
 import type { CountyGroup } from "./locations-dropdown";
 
 export interface SiteHeaderNavItem {
   label: string;
   href: string;
+  /** @deprecated Use `dropdown` instead. */
   hasDropdown?: boolean;
+  dropdown?: HeaderDropdownConfig;
 }
 
 export interface SiteHeaderProps {
@@ -51,18 +54,23 @@ export interface SiteHeaderProps {
   navigation: SiteHeaderNavItem[];
 
   /**
+   * @deprecated Pass per-item `dropdown` config on `navigation` items instead.
    * County-grouped locations for mega-menu (typically used by Orion sites
    * with many locations organised by region).
    */
   counties?: CountyGroup[];
 
   /**
+   * @deprecated Pass per-item `dropdown` config on `navigation` items instead.
    * Flat location list for the simple dropdown (used when county grouping
    * is not needed).
    */
   locations?: Array<{ name: string; slug: string }>;
 
-  /** Maximum towns to show per county in the mega-menu. Defaults to 10. */
+  /**
+   * @deprecated Pass per-item `dropdown` config on `navigation` items instead.
+   * Maximum towns to show per county in the mega-menu. Defaults to 10.
+   */
   maxTownsPerCounty?: number;
 
   /** Whether to use sticky positioning. Defaults to true. */
@@ -126,18 +134,58 @@ export function SiteHeader({
           {/* Desktop Navigation */}
           <nav aria-label="Main navigation" className="hidden lg:flex items-center gap-8">
             {navigation.map((item) => {
-              if (item.hasDropdown && (counties.length > 0 || locations.length > 0)) {
+              // 1. Explicit per-item dropdown config wins.
+              if (item.dropdown) {
                 return (
-                  <LocationsDropdown
+                  <HeaderNavDropdown
                     key={item.href}
-                    counties={counties}
-                    locations={locations}
+                    config={item.dropdown}
                     label={item.label}
                     variant={isDark ? "dark" : "light"}
-                    maxTownsPerCounty={maxTownsPerCounty}
                   />
                 );
               }
+
+              // 2. Legacy adapter: synthesise a config from top-level props.
+              if (item.hasDropdown && (counties.length > 0 || locations.length > 0)) {
+                const legacyConfig: HeaderDropdownConfig =
+                  counties.length > 0
+                    ? {
+                        mode: "mega",
+                        groups: counties.map((c) => ({
+                          label: c.name,
+                          items: c.towns
+                            .slice(0, maxTownsPerCounty)
+                            .map((t) => ({ label: t.name, href: t.href })),
+                        })),
+                        title: "Our Coverage Areas",
+                        subtitle: "Professional services across the region",
+                        footerCta: { label: "Get Free Quote", href: "/contact" },
+                      }
+                    : {
+                        mode: "mega",
+                        items: locations.map((l) => ({
+                          label: l.name,
+                          href: `/locations/${l.slug}`,
+                        })),
+                        title: "Service Areas",
+                        subtitle: "We proudly serve these locations",
+                        footerLink: {
+                          label: "View all service areas →",
+                          href: "/locations",
+                        },
+                      };
+                return (
+                  <HeaderNavDropdown
+                    key={item.href}
+                    config={legacyConfig}
+                    label={item.label}
+                    variant={isDark ? "dark" : "light"}
+                  />
+                );
+              }
+
+              // 3. Plain nav link.
               return (
                 <Link key={item.href} href={item.href} className={navLinkClasses}>
                   {item.label}
