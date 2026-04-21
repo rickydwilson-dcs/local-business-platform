@@ -11,6 +11,7 @@
 
 import { siteConfig } from "@/site.config";
 import { PHONE_DISPLAY, PHONE_TEL, BUSINESS_EMAIL, ADDRESS } from "@/lib/contact-info";
+import { buildAlphaColumns } from "@platform/core-components";
 
 // ---------------------------------------------------------------------------
 // Derived lists from siteConfig
@@ -58,32 +59,23 @@ const footerLocations = allLocationsFromConfig
   .map((l) => ({ slug: l.slug, title: l.title }));
 
 // Alphabetical letter-range groups for the locations dropdown mega-menu.
-// Groups all towns (sorted A-Z) into 4 columns by first-letter range.
 const allTownsSorted = (siteConfig.serviceAreaRegions ?? [])
   .flatMap((r) => r.towns)
   .sort((a, b) => a.name.localeCompare(b.name));
 
-function buildAlphaGroups(towns: typeof allTownsSorted) {
-  const numCols = 4;
-  const colSize = Math.ceil(towns.length / numCols);
-  const groups = [];
-  for (let i = 0; i < numCols; i++) {
-    const chunk = towns.slice(i * colSize, (i + 1) * colSize);
-    if (chunk.length === 0) continue;
-    const first = chunk[0].name[0].toUpperCase();
-    const last = chunk[chunk.length - 1].name[0].toUpperCase();
-    const label = first === last ? first : `${first}-${last}`;
-    groups.push({
-      name: label,
-      slug: label.toLowerCase(),
-      href: "/locations",
-      towns: chunk.map((t) => ({ name: t.name, slug: t.slug, href: `/locations/${t.slug}` })),
-    });
-  }
-  return groups;
-}
+const headerLocationDropdown = {
+  mode: "mega" as const,
+  groups: buildAlphaColumns(
+    allTownsSorted.map((t) => ({ label: t.name, href: `/locations/${t.slug}` }))
+  ),
+  title: "Service Areas",
+  subtitle: "We proudly serve these locations",
+  footerLink: { label: "View all service areas →", href: "/locations" },
+};
 
-const headerCounties = buildAlphaGroups(allTownsSorted);
+const headerNavigation = siteConfig.navigation.main.map((item) =>
+  item.hasDropdown ? { ...item, dropdown: headerLocationDropdown } : item
+);
 
 // ---------------------------------------------------------------------------
 // siteData — keyed by the dataKeys used in composition.json
@@ -104,10 +96,7 @@ export const siteData = {
     phoneTel: PHONE_TEL,
     showPhone: true,
     primaryCta: siteConfig.cta.primary,
-    navigation: siteConfig.navigation.main,
-    locations: allLocationsFromConfig.map((l) => ({ name: l.title, slug: l.slug })),
-    counties: headerCounties,
-    maxTownsPerCounty: 10,
+    navigation: headerNavigation,
   } as any,
 
   // -------------------------------------------------------------------------
