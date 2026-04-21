@@ -1,34 +1,25 @@
 /**
- * Location Detail Page — thin wrapper around OrionLocationDetailPage
+ * Location Detail Page — composition renderer version
  */
 
-import { notFound } from 'next/navigation';
-import type { Metadata } from 'next';
-import type { SiteConfigSummary } from '@platform/core-components';
-import { Schema, type LocationFrontmatter } from '@platform/core-components';
-import { getLocations, getLocation } from '@/lib/content';
-import { loadMdx } from '@/lib/mdx';
-import { getImageUrl } from '@/lib/image';
-import { absUrl } from '@/lib/site';
-import { siteConfig } from '@/site.config';
-import { PHONE_DISPLAY } from '@/lib/contact-info';
-import { getServiceAreaSchema } from '@/lib/schema';
-import { OrionLocationDetailPage } from '@platform/themes/orion/pages';
+import { notFound } from "next/navigation";
+import type { Metadata } from "next";
+import { Schema, type LocationFrontmatter } from "@platform/core-components";
+import { getLocations, getLocation } from "@/lib/content";
+import { loadMdx } from "@/lib/mdx";
+import { getImageUrl } from "@/lib/image";
+import { absUrl } from "@/lib/site";
+import { siteConfig } from "@/site.config";
+import { PHONE_DISPLAY } from "@/lib/contact-info";
+import { getServiceAreaSchema } from "@/lib/schema";
+import compositionConfig from "../../../composition.json";
+import { SiteCompositionConfigSchema, renderComposedPage } from "@platform/component-composition";
+import { siteData } from "@/lib/page-data";
 
-export const dynamic = 'force-static';
+export const dynamic = "force-static";
 export const dynamicParams = false;
 
 type Params = { slug: string };
-
-const siteSummary: SiteConfigSummary = {
-  name: siteConfig.business.name,
-  tagline: siteConfig.tagline,
-  phone: siteConfig.business.phone,
-  phoneDisplay: PHONE_DISPLAY,
-  address: { city: siteConfig.business.address.city },
-  cta: siteConfig.cta,
-  stats: siteConfig.credentials?.stats,
-};
 
 export async function generateStaticParams() {
   const locations = await getLocations();
@@ -41,8 +32,8 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
 
   if (!result) {
     return {
-      title: 'Location Not Found',
-      description: 'The requested location could not be found.',
+      title: "Location Not Found",
+      description: "The requested location could not be found.",
     };
   }
 
@@ -71,10 +62,10 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
             },
           ]
         : undefined,
-      type: 'website',
+      type: "website",
     },
     twitter: {
-      card: 'summary_large_image',
+      card: "summary_large_image",
       title: `Services in ${fm.title}`,
       description,
       images: heroImage ? [getImageUrl(heroImage)] : undefined,
@@ -85,7 +76,13 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   };
 }
 
-export default async function LocationPage({ params }: { params: Promise<Params> }) {
+const config = SiteCompositionConfigSchema.parse(compositionConfig);
+
+export default async function LocationDetailPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const { slug } = await params;
   const result = await getLocation(slug);
 
@@ -94,18 +91,13 @@ export default async function LocationPage({ params }: { params: Promise<Params>
   }
 
   const fm = result.frontmatter as unknown as LocationFrontmatter;
-  const { content: mdxContent } = await loadMdx({ baseDir: 'locations', slug });
+  const { content } = await loadMdx({ baseDir: "locations", slug });
 
   const locationName = fm.title;
   const heroImage = fm.hero?.image || fm.heroImage;
   const faqs = fm.faqs || [];
 
   const locationSchema = getServiceAreaSchema(locationName, slug);
-
-  const breadcrumbItems = [
-    { name: 'Locations', href: '/locations' },
-    { name: locationName, href: `/locations/${slug}`, current: true },
-  ];
 
   const schemaNodes = (
     <>
@@ -116,40 +108,72 @@ export default async function LocationPage({ params }: { params: Promise<Params>
       <Schema
         org={{
           name: siteConfig.business.name,
-          url: '/',
-          logo: '/logo.svg',
+          url: "/",
+          logo: "/logo.svg",
         }}
         breadcrumbs={[
-          { name: 'Home', url: '/' },
-          { name: 'Locations', url: '/locations' },
+          { name: "Home", url: "/" },
+          { name: "Locations", url: "/locations" },
           { name: locationName, url: `/locations/${slug}` },
         ]}
         webpage={{
-          '@type': 'WebPage',
-          '@id': absUrl(`/locations/${slug}#webpage`),
+          "@type": "WebPage",
+          "@id": absUrl(`/locations/${slug}#webpage`),
           url: absUrl(`/locations/${slug}`),
           name: `Services in ${locationName}`,
-          description: fm.description || '',
+          description: fm.description || "",
         }}
         faqs={faqs}
       />
     </>
   );
 
+  const { elements } = renderComposedPage({
+    composition: config,
+    pageType: "location-detail",
+    data: {
+      ...(siteData as unknown as Record<string, unknown>),
+      ...fm,
+      title: fm.title,
+      description: fm.description,
+      hero: {
+        heading: `Electricians in ${locationName}`,
+        subheading:
+          (fm as unknown as Record<string, string | undefined>).description ||
+          `Professional electrical services in ${locationName} by ${siteConfig.business.name}.`,
+        eyebrow: locationName,
+        heroImageSrc: heroImage,
+        primaryCtaText: "Get Free Quote",
+        primaryCtaHref: "/contact",
+        secondaryCtaText: `Call ${PHONE_DISPLAY}`,
+        secondaryCtaHref: `tel:${siteConfig.business.phone}`,
+        trustBadges: ["NICEIC Approved", "Fully Insured", "Free Quotes"],
+        breadcrumbs: [
+          { label: "Home", href: "/" },
+          { label: "Locations", href: "/locations" },
+          { label: locationName, href: `/locations/${slug}` },
+        ],
+      },
+      heroImage,
+      faqs,
+      mdxContent: { content },
+      phone: siteConfig.business.phone,
+      phoneDisplay: PHONE_DISPLAY,
+      services: {
+        heading: `Services in ${locationName}`,
+        services: siteConfig.services.slice(0, 6).map((s) => ({
+          title: s.title,
+          description: s.description,
+          href: `/services/${s.slug}`,
+        })),
+      },
+    },
+  });
+
   return (
-    <OrionLocationDetailPage
-      siteConfig={siteSummary}
-      frontmatter={{
-        title: fm.title,
-        description: fm.description,
-        heroImage,
-        faqs,
-        hero: fm.hero,
-      }}
-      mdxContent={mdxContent}
-      breadcrumbs={breadcrumbItems}
-      schemaNodes={schemaNodes}
-      trustBadges={fm.hero?.trustBadges}
-    />
+    <>
+      {schemaNodes}
+      <main className="min-h-screen">{elements}</main>
+    </>
   );
 }

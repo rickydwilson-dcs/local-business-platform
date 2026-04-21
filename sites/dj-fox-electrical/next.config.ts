@@ -1,16 +1,17 @@
-import createMDX from '@next/mdx';
-import type { NextConfig } from 'next';
+import createMDX from "@next/mdx";
+import type { NextConfig } from "next";
 
 // Next.js 16 with Turbopack requires plugins as strings (not imported functions)
 const withMDX = createMDX({
   options: {
-    remarkPlugins: ['remark-gfm', 'remark-frontmatter'],
+    remarkPlugins: ["remark-gfm", "remark-frontmatter"],
     rehypePlugins: [],
   },
 });
 
 const nextConfig: NextConfig = {
-  pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
+  compress: true,
+  pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
   // Enable experimental features for better performance
   experimental: {
     // Note: mdxRs and forceSwcTransforms removed for Next.js 16 compatibility
@@ -19,13 +20,13 @@ const nextConfig: NextConfig = {
   // Compiler optimizations for modern browsers
   compiler: {
     // Remove console.log in production
-    removeConsole: process.env.NODE_ENV === 'production',
+    removeConsole: process.env.NODE_ENV === "production",
   },
   // Webpack configuration for modern browsers and optimizations
   webpack: (config, { isServer, dev }) => {
     // Target modern browsers to eliminate polyfills
     if (!isServer) {
-      config.target = ['web', 'es2022'];
+      config.target = ["web", "es2022"];
       config.resolve.fallback = {
         ...config.resolve.fallback,
         fs: false,
@@ -45,16 +46,17 @@ const nextConfig: NextConfig = {
   },
   // Image optimization configuration for better performance
   images: {
+    formats: ["image/avif", "image/webp"],
     // Remote patterns for image hosting
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: '**.r2.dev',
+        protocol: "https",
+        hostname: "**.r2.dev",
       },
       // Allow placehold.co for fallback/placeholder images
       {
-        protocol: 'https',
-        hostname: 'placehold.co',
+        protocol: "https",
+        hostname: "placehold.co",
       },
     ],
     // Allow SVG images (safe for logos and icons)
@@ -73,72 +75,71 @@ const nextConfig: NextConfig = {
   trailingSlash: false,
   // Security headers for production
   async headers() {
-    // CSP script-src: unsafe-inline required for Next.js hydration
-    // Note: unsafe-eval removed from all environments for security
-    const scriptSrc =
-      "'self' 'unsafe-inline' *.googletagmanager.com *.google-analytics.com *.facebook.com vercel.live *.vercel.live";
+    // Next.js dev mode requires unsafe-eval for webpack HMR; production omits it
+    const unsafeEval = process.env.NODE_ENV === "development" ? " 'unsafe-eval'" : "";
+    const scriptSrc = `'self' 'unsafe-inline'${unsafeEval} *.googletagmanager.com *.google-analytics.com *.facebook.com vercel.live *.vercel.live`;
 
     // CORS: restrict API routes to same-origin requests only
     const allowedOrigin =
       process.env.NEXT_PUBLIC_SITE_URL ||
-      (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000');
+      (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000");
 
     return [
       // CORS headers for API routes (SEC-010)
       {
-        source: '/api/:path*',
+        source: "/api/:path*",
         headers: [
           {
-            key: 'Access-Control-Allow-Origin',
+            key: "Access-Control-Allow-Origin",
             value: allowedOrigin,
           },
           {
-            key: 'Access-Control-Allow-Methods',
-            value: 'GET, POST, OPTIONS',
+            key: "Access-Control-Allow-Methods",
+            value: "GET, POST, OPTIONS",
           },
           {
-            key: 'Access-Control-Allow-Headers',
-            value: 'Content-Type, X-CSRF-Token',
+            key: "Access-Control-Allow-Headers",
+            value: "Content-Type, X-CSRF-Token",
           },
           {
-            key: 'Access-Control-Max-Age',
-            value: '86400',
+            key: "Access-Control-Max-Age",
+            value: "86400",
           },
         ],
       },
       {
-        source: '/(.*)',
+        source: "/(.*)",
         headers: [
           {
-            key: 'X-Frame-Options',
-            value: 'DENY',
+            key: "X-Frame-Options",
+            value: "DENY",
           },
           {
-            key: 'X-Content-Type-Options',
-            value: 'nosniff',
+            key: "X-Content-Type-Options",
+            value: "nosniff",
           },
           {
-            key: 'Referrer-Policy',
-            value: 'strict-origin-when-cross-origin',
+            key: "Referrer-Policy",
+            value: "strict-origin-when-cross-origin",
           },
           {
-            key: 'Content-Security-Policy',
+            key: "Content-Security-Policy",
             value: `default-src 'self'; script-src ${scriptSrc}; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: *.r2.dev placehold.co; connect-src 'self' *.google-analytics.com *.facebook.com vercel.live *.vercel.live; frame-src vercel.live *.vercel.live; frame-ancestors 'none';`,
           },
           // HSTS - enforce HTTPS for 1 year, include subdomains, allow preload
           {
-            key: 'Strict-Transport-Security',
-            value: 'max-age=31536000; includeSubDomains; preload',
+            key: "Strict-Transport-Security",
+            value: "max-age=31536000; includeSubDomains; preload",
           },
           // Prevent resources from being loaded by other origins
           {
-            key: 'Cross-Origin-Resource-Policy',
-            value: 'same-origin',
+            key: "Cross-Origin-Resource-Policy",
+            value: "same-origin",
           },
           // Restrict browser features that aren't needed
           {
-            key: 'Permissions-Policy',
-            value: 'camera=(), microphone=(), geolocation=()',
+            key: "Permissions-Policy",
+            value: "camera=(), microphone=(), geolocation=()",
           },
         ],
       },

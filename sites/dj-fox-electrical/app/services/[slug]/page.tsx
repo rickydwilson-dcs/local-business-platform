@@ -1,18 +1,20 @@
 /**
- * Service Detail Page — thin wrapper around OrionServiceDetailPage
+ * Service Detail Page — composition renderer version
  */
 
-import { notFound } from 'next/navigation';
-import type { Metadata } from 'next';
-import type { SiteConfigSummary } from '@platform/core-components';
-import { Schema, type FAQItem, type AboutContent } from '@platform/core-components';
-import { getServices, getService } from '@/lib/content';
-import { loadMdx } from '@/lib/mdx';
-import { getImageUrl } from '@/lib/image';
-import { absUrl } from '@/lib/site';
-import { siteConfig } from '@/site.config';
-import { PHONE_DISPLAY } from '@/lib/contact-info';
-import { OrionServiceDetailPage } from '@platform/themes/orion/pages';
+import { notFound } from "next/navigation";
+import type { Metadata } from "next";
+import type { FAQItem, AboutContent } from "@platform/core-components";
+import { Schema } from "@platform/core-components";
+import { getServices, getService } from "@/lib/content";
+import { loadMdx } from "@/lib/mdx";
+import { getImageUrl } from "@/lib/image";
+import { absUrl } from "@/lib/site";
+import { siteConfig } from "@/site.config";
+import { PHONE_DISPLAY } from "@/lib/contact-info";
+import compositionConfig from "../../../composition.json";
+import { SiteCompositionConfigSchema, renderComposedPage } from "@platform/component-composition";
+import { siteData } from "@/lib/page-data";
 
 interface ServiceFrontmatter {
   title: string;
@@ -27,20 +29,10 @@ interface ServiceFrontmatter {
   about?: AboutContent;
 }
 
-export const dynamic = 'force-static';
+export const dynamic = "force-static";
 export const dynamicParams = false;
 
 type Params = { slug: string };
-
-const siteSummary: SiteConfigSummary = {
-  name: siteConfig.business.name,
-  tagline: siteConfig.tagline,
-  phone: siteConfig.business.phone,
-  phoneDisplay: PHONE_DISPLAY,
-  address: { city: siteConfig.business.address.city },
-  cta: siteConfig.cta,
-  stats: siteConfig.credentials?.stats,
-};
 
 export async function generateStaticParams() {
   const services = await getServices();
@@ -53,8 +45,8 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
 
   if (!result) {
     return {
-      title: 'Service Not Found',
-      description: 'The requested service could not be found.',
+      title: "Service Not Found",
+      description: "The requested service could not be found.",
     };
   }
 
@@ -82,10 +74,10 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
             },
           ]
         : undefined,
-      type: 'website',
+      type: "website",
     },
     twitter: {
-      card: 'summary_large_image',
+      card: "summary_large_image",
       title: fm.title,
       description,
       images: heroImage ? [getImageUrl(heroImage)] : undefined,
@@ -96,7 +88,9 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   };
 }
 
-export default async function ServicePage({ params }: { params: Promise<Params> }) {
+const config = SiteCompositionConfigSchema.parse(compositionConfig);
+
+export default async function ServiceDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const result = await getService(slug);
 
@@ -105,40 +99,34 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
   }
 
   const fm = result.frontmatter as ServiceFrontmatter;
-  const { content: mdxContent } = await loadMdx({ baseDir: 'services', slug });
+  const { content } = await loadMdx({ baseDir: "services", slug });
 
   const serviceName = fm.title
-    .replace(' Services', '')
-    .replace(' Solutions', '')
-    .replace(' Systems', '');
+    .replace(" Services", "")
+    .replace(" Solutions", "")
+    .replace(" Systems", "");
 
   const heroImage = fm.hero?.image || fm.heroImage;
   const benefits = fm.benefits || [];
   const faqs = fm.faqs || [];
-  const about = fm.about;
-
-  const breadcrumbItems = [
-    { name: 'Services', href: '/services' },
-    { name: serviceName, href: `/services/${slug}`, current: true },
-  ];
 
   const schemaNodes = (
     <Schema
       org={{
         name: siteConfig.business.name,
-        url: '/',
-        logo: '/logo.svg',
+        url: "/",
+        logo: "/logo.svg",
       }}
       breadcrumbs={[
-        { name: 'Home', url: '/' },
-        { name: 'Services', url: '/services' },
+        { name: "Home", url: "/" },
+        { name: "Services", url: "/services" },
         { name: serviceName, url: `/services/${slug}` },
       ]}
       service={{
         id: `/services/${slug}#service`,
         url: `/services/${slug}`,
         name: fm.title,
-        description: fm.description || '',
+        description: fm.description || "",
         serviceType: serviceName,
         areaServed: siteConfig.serviceAreas,
       }}
@@ -146,21 +134,47 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
     />
   );
 
+  const { elements } = renderComposedPage({
+    composition: config,
+    pageType: "service-detail",
+    data: {
+      ...(siteData as unknown as Record<string, unknown>),
+      ...fm,
+      title: fm.title,
+      description: fm.description,
+      badge: fm.badge,
+      hero: {
+        heading: fm.title,
+        subheading:
+          fm.description ||
+          `Professional ${fm.title.toLowerCase()} services by ${siteConfig.business.name}.`,
+        eyebrow: "Our Services",
+        image: heroImage,
+        heroImageSrc: heroImage,
+        primaryCtaText: "Get Free Quote",
+        primaryCtaHref: "/contact",
+        secondaryCtaText: `Call ${PHONE_DISPLAY}`,
+        secondaryCtaHref: `tel:${siteConfig.business.phone}`,
+        trustBadges: ["NICEIC Approved", "Fully Insured", "Free Quotes"],
+        breadcrumbs: [
+          { label: "Home", href: "/" },
+          { label: "Services", href: "/services" },
+          { label: serviceName, href: `/services/${slug}` },
+        ],
+      },
+      heroImage,
+      benefits,
+      faqs,
+      mdxContent: { content },
+      phone: siteConfig.business.phone,
+      phoneDisplay: PHONE_DISPLAY,
+    },
+  });
+
   return (
-    <OrionServiceDetailPage
-      siteConfig={siteSummary}
-      frontmatter={{
-        title: fm.title,
-        description: fm.description,
-        badge: fm.badge,
-        heroImage,
-        benefits,
-        faqs,
-      }}
-      mdxContent={mdxContent}
-      breadcrumbs={breadcrumbItems}
-      schemaNodes={schemaNodes}
-      about={about}
-    />
+    <>
+      {schemaNodes}
+      <main className="min-h-screen">{elements}</main>
+    </>
   );
 }

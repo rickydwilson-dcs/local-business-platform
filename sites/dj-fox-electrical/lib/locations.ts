@@ -3,15 +3,15 @@
  * Provides location data for the mega-menu dropdown
  */
 
-import { getContentItems } from './content';
-import type { CountyGroup } from '@platform/core-components';
+import { getContentItems } from "./content";
+import type { CountyGroup } from "@platform/core-components";
 
 /**
  * Get all locations split alphabetically across 4 columns for balanced mega-menu layout
  * Returns data structure for mega-menu dropdown (no region headers, just alphabetical towns)
  */
 export async function getAllCounties(): Promise<CountyGroup[]> {
-  const locations = await getContentItems('locations');
+  const locations = await getContentItems("locations");
 
   // Extract and sort all location names alphabetically
   const allTowns = locations.map((loc) => {
@@ -19,9 +19,9 @@ export async function getAllCounties(): Promise<CountyGroup[]> {
     const locationName =
       breadcrumbs?.[breadcrumbs.length - 1]?.title ||
       loc.slug
-        .split('-')
+        .split("-")
         .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-        .join(' ');
+        .join(" ");
 
     return {
       name: locationName,
@@ -53,7 +53,7 @@ export async function getAllCounties(): Promise<CountyGroup[]> {
       chunks.push({
         name: columnName,
         slug: `column-${i + 1}`,
-        href: '/locations',
+        href: "/locations",
         towns: chunkTowns,
       });
     }

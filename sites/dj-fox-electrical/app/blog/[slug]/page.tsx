@@ -1,41 +1,32 @@
 /**
- * Blog Post Detail Page — thin wrapper around OrionBlogPostPage
+ * Blog Post Detail Page — composition renderer version
  */
 
-import { notFound } from 'next/navigation';
-import type { Metadata } from 'next';
-import type { SiteConfigSummary } from '@platform/core-components';
-import { Schema } from '@platform/core-components';
-import { getBlogPosts, getBlogPost, calculateReadingTime } from '@/lib/content';
-import { getImageUrl } from '@/lib/image';
-import { absUrl } from '@/lib/site';
-import { loadMdx } from '@/lib/mdx';
-import { siteConfig } from '@/site.config';
-import { PHONE_DISPLAY } from '@/lib/contact-info';
-import { OrionBlogPostPage } from '@platform/themes/orion/pages';
+import { notFound } from "next/navigation";
 
-export const dynamic = 'force-static';
+const CATEGORY_LABELS: Record<string, string> = {
+  "industry-tips": "Industry Tips",
+  "how-to-guide": "How-To Guide",
+  "case-study": "Case Study",
+  seasonal: "Seasonal",
+  news: "News",
+};
+import type { Metadata } from "next";
+import { Schema } from "@platform/core-components";
+import { getBlogPosts, getBlogPost, calculateReadingTime } from "@/lib/content";
+import { getImageUrl } from "@/lib/image";
+import { absUrl } from "@/lib/site";
+import { loadMdx } from "@/lib/mdx";
+import { siteConfig } from "@/site.config";
+import { PHONE_DISPLAY } from "@/lib/contact-info";
+import compositionConfig from "../../../composition.json";
+import { SiteCompositionConfigSchema, renderComposedPage } from "@platform/component-composition";
+import { siteData } from "@/lib/page-data";
+
+export const dynamic = "force-static";
 export const dynamicParams = false;
 
 type Params = { slug: string };
-
-const categoryLabels: Record<string, string> = {
-  'industry-tips': 'Industry Tips',
-  'how-to-guide': 'How-To Guide',
-  'case-study': 'Case Study',
-  seasonal: 'Seasonal',
-  news: 'News',
-};
-
-const siteSummary: SiteConfigSummary = {
-  name: siteConfig.business.name,
-  tagline: siteConfig.tagline,
-  phone: siteConfig.business.phone,
-  phoneDisplay: PHONE_DISPLAY,
-  address: { city: siteConfig.business.address.city },
-  cta: siteConfig.cta,
-  stats: siteConfig.credentials?.stats,
-};
 
 export async function generateStaticParams() {
   const posts = await getBlogPosts();
@@ -48,8 +39,8 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
 
   if (!post) {
     return {
-      title: 'Article Not Found',
-      description: 'The requested blog article could not be found.',
+      title: "Article Not Found",
+      description: "The requested blog article could not be found.",
     };
   }
 
@@ -65,7 +56,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
       description: frontmatter.description,
       url: absUrl(`/blog/${slug}`),
       siteName: siteConfig.business.name,
-      type: 'article',
+      type: "article",
       publishedTime: frontmatter.date,
       authors: [frontmatter.author.name],
       images: frontmatter.heroImage
@@ -80,7 +71,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
         : undefined,
     },
     twitter: {
-      card: 'summary_large_image',
+      card: "summary_large_image",
       title: frontmatter.title,
       description: frontmatter.description,
       images: frontmatter.heroImage ? [getImageUrl(frontmatter.heroImage)] : undefined,
@@ -91,7 +82,13 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   };
 }
 
-export default async function BlogPostPageWrapper({ params }: { params: Promise<Params> }) {
+const config = SiteCompositionConfigSchema.parse(compositionConfig);
+
+export default async function BlogPostDetailPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const { slug } = await params;
   const post = await getBlogPost(slug);
 
@@ -100,14 +97,50 @@ export default async function BlogPostPageWrapper({ params }: { params: Promise<
   }
 
   const { frontmatter, content: rawContent } = post;
-  const { content: mdxContent } = await loadMdx({ baseDir: 'blog', slug });
+  const { content } = await loadMdx({ baseDir: "blog", slug });
   const allPosts = await getBlogPosts();
   const readingTime = frontmatter.readingTime || calculateReadingTime(rawContent);
 
-  const breadcrumbItems = [
-    { name: 'Blog', href: '/blog' },
-    { name: frontmatter.title, href: `/blog/${slug}`, current: true },
-  ];
+  const schemaNodes = (
+    <Schema
+      org={{
+        name: siteConfig.business.name,
+        url: "/",
+        logo: "/logo.svg",
+      }}
+      breadcrumbs={[
+        { name: "Home", url: "/" },
+        { name: "Blog", url: "/blog" },
+        { name: frontmatter.title, url: `/blog/${slug}` },
+      ]}
+      article={{
+        "@type": "BlogPosting",
+        "@id": absUrl(`/blog/${slug}#article`),
+        headline: frontmatter.title,
+        description: frontmatter.description,
+        image: frontmatter.heroImage ? getImageUrl(frontmatter.heroImage) : undefined,
+        datePublished: frontmatter.date,
+        dateModified: frontmatter.date,
+        author: {
+          "@type": "Person",
+          name: frontmatter.author.name,
+          jobTitle: frontmatter.author.role,
+        },
+        publisher: {
+          "@type": "Organization",
+          name: siteConfig.business.name,
+          logo: {
+            "@type": "ImageObject",
+            url: absUrl("/logo.svg"),
+          },
+        },
+        mainEntityOfPage: {
+          "@type": "WebPage",
+          "@id": absUrl(`/blog/${slug}`),
+        },
+      }}
+    />
+  );
 
   const relatedPosts = allPosts
     .filter((p) => p.slug !== slug)
@@ -123,65 +156,44 @@ export default async function BlogPostPageWrapper({ params }: { params: Promise<
       author: p.author ? { name: p.author.name } : undefined,
     }));
 
-  const schemaNodes = (
-    <Schema
-      org={{
-        name: siteConfig.business.name,
-        url: '/',
-        logo: '/logo.svg',
-      }}
-      breadcrumbs={[
-        { name: 'Home', url: '/' },
-        { name: 'Blog', url: '/blog' },
-        { name: frontmatter.title, url: `/blog/${slug}` },
-      ]}
-      article={{
-        '@type': 'BlogPosting',
-        '@id': absUrl(`/blog/${slug}#article`),
-        headline: frontmatter.title,
-        description: frontmatter.description,
-        image: frontmatter.heroImage ? getImageUrl(frontmatter.heroImage) : undefined,
-        datePublished: frontmatter.date,
-        dateModified: frontmatter.date,
-        author: {
-          '@type': 'Person',
-          name: frontmatter.author.name,
-          jobTitle: frontmatter.author.role,
-        },
-        publisher: {
-          '@type': 'Organization',
-          name: siteConfig.business.name,
-          logo: {
-            '@type': 'ImageObject',
-            url: absUrl('/logo.svg'),
-          },
-        },
-        mainEntityOfPage: {
-          '@type': 'WebPage',
-          '@id': absUrl(`/blog/${slug}`),
-        },
-      }}
-    />
-  );
+  const { elements } = renderComposedPage({
+    composition: config,
+    pageType: "blog-post",
+    data: {
+      ...(siteData as unknown as Record<string, unknown>),
+      ...frontmatter,
+      title: frontmatter.title,
+      description: frontmatter.description,
+      date: frontmatter.date,
+      category: frontmatter.category,
+      heroImage: frontmatter.heroImage,
+      hero: {
+        heading: frontmatter.title,
+        subheading: frontmatter.description || "",
+        eyebrow: CATEGORY_LABELS[frontmatter.category] ?? frontmatter.category ?? "Blog",
+        image: frontmatter.heroImage,
+        heroImageSrc: frontmatter.heroImage,
+        breadcrumbs: [
+          { label: "Home", href: "/" },
+          { label: "Blog", href: "/blog" },
+          { label: frontmatter.title, href: `/blog/${slug}` },
+        ],
+      },
+      author: frontmatter.author,
+      tags: frontmatter.tags,
+      relatedServices: frontmatter.relatedServices,
+      relatedPosts,
+      readingTime,
+      mdxContent: { content },
+      phone: siteConfig.business.phone,
+      phoneDisplay: PHONE_DISPLAY,
+    },
+  });
 
   return (
-    <OrionBlogPostPage
-      siteConfig={siteSummary}
-      frontmatter={{
-        title: frontmatter.title,
-        description: frontmatter.description,
-        date: frontmatter.date,
-        category: frontmatter.category,
-        heroImage: frontmatter.heroImage,
-        author: frontmatter.author,
-        tags: frontmatter.tags,
-        relatedServices: frontmatter.relatedServices,
-      }}
-      mdxContent={mdxContent}
-      relatedPosts={relatedPosts}
-      readingTime={readingTime}
-      breadcrumbs={breadcrumbItems}
-      schemaNodes={schemaNodes}
-    />
+    <>
+      {schemaNodes}
+      <main className="min-h-screen">{elements}</main>
+    </>
   );
 }

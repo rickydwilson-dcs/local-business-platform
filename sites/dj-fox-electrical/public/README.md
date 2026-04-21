@@ -41,7 +41,7 @@ Reference public files from root:
 <Image src="/static/logo.png" alt="Logo" width={200} height={50} />;
 
 // In MDX frontmatter
-hero: image: '/images/hero-primary-service.jpg';
+hero: image: "/images/hero-primary-service.jpg";
 ```
 
 ## Image Optimization

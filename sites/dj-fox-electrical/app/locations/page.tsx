@@ -1,74 +1,40 @@
-/**
- * Locations Listing Page — thin wrapper around OrionLocationsPage
- */
+import type { Metadata } from "next";
+import compositionConfig from "../../composition.json";
+import { SiteCompositionConfigSchema, renderComposedPage } from "@platform/component-composition";
+import { siteData } from "@/lib/page-data";
+import { getLocations } from "@/lib/content";
 
-import type { Metadata } from 'next';
-import type { SiteConfigSummary } from '@platform/core-components';
-import { Schema } from '@platform/core-components';
-import { getLocations } from '@/lib/content';
-import { absUrl } from '@/lib/site';
-import { siteConfig } from '@/site.config';
-import { PHONE_DISPLAY } from '@/lib/contact-info';
-import { OrionLocationsPage } from '@platform/themes/orion/pages';
-
-export const dynamic = 'force-static';
+const config = SiteCompositionConfigSchema.parse(compositionConfig);
 
 export const metadata: Metadata = {
-  title: `Service Areas | Locations | ${siteConfig.business.name}`,
-  description: `${siteConfig.business.name} serves customers across ${siteConfig.serviceAreas.join(', ')}. Find our services in your area.`,
-  keywords: ['locations', 'service areas', 'local services', ...siteConfig.serviceAreas],
+  title: "Service Areas | Locations | D J Fox Electrical",
+  description:
+    "D J Fox Electrical serves customers across Eastbourne, Hastings, Bexhill-on-Sea, Brighton, Lewes, Hailsham. Find our services in your area.",
+  keywords: ["locations", "service areas", "local services"],
   openGraph: {
-    title: `Service Areas | ${siteConfig.business.name}`,
-    description: `${siteConfig.business.name} serves customers across multiple locations.`,
-    url: '/locations',
-    type: 'website',
+    title: "Service Areas | D J Fox Electrical",
+    description: "D J Fox Electrical serves customers across multiple locations.",
+    url: "/locations",
+    type: "website",
   },
 };
 
-const siteSummary: SiteConfigSummary = {
-  name: siteConfig.business.name,
-  tagline: siteConfig.tagline,
-  phone: siteConfig.business.phone,
-  phoneDisplay: PHONE_DISPLAY,
-  address: { city: siteConfig.business.address.city },
-  cta: siteConfig.cta,
-  stats: siteConfig.credentials?.stats,
-};
-
-export default async function LocationsPageWrapper() {
+export default async function LocationsPage() {
   const locations = await getLocations();
-
-  const locationSummaries = locations.map((loc) => ({
-    slug: loc.slug,
-    title: loc.title,
-    description: loc.description,
-  }));
-
-  return (
-    <>
-      <OrionLocationsPage
-        siteConfig={siteSummary}
-        locations={locationSummaries}
-      />
-
-      <Schema
-        org={{
-          name: siteConfig.business.name,
-          url: '/',
-          logo: '/logo.svg',
-        }}
-        breadcrumbs={[
-          { name: 'Home', url: '/' },
-          { name: 'Locations', url: '/locations' },
-        ]}
-        webpage={{
-          '@type': 'CollectionPage',
-          '@id': absUrl('/locations#collection'),
-          url: absUrl('/locations'),
-          name: `${siteConfig.business.name} Service Areas`,
-          description: `${siteConfig.business.name} serves customers across multiple locations.`,
-        }}
-      />
-    </>
-  );
+  const data = {
+    ...(siteData as unknown as Record<string, unknown>),
+    locations: {
+      ...((siteData as unknown as Record<string, unknown>).locations as Record<string, unknown>),
+      features: locations.map((loc) => ({
+        title: loc.title,
+        description: loc.description ?? `Professional electrical services in ${loc.title}.`,
+      })),
+    },
+  };
+  const { elements } = renderComposedPage({
+    composition: config,
+    pageType: "locations",
+    data,
+  });
+  return <main className="min-h-screen">{elements}</main>;
 }

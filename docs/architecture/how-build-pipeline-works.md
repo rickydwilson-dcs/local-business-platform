@@ -22,8 +22,7 @@ Phase 2: Build sites (parallel, after packages complete)
     ├── sites/base-template           → next build
     ├── sites/colossus-scaffolding    → next build
     ├── sites/dcs                     → next build
-    ├── sites/dj-fox-electrical       → next build
-    ├── sites/dj-fox-electrical-test  → next build (composition system migration)
+    ├── sites/dj-fox-electrical       → next build (composition-based)
     ├── sites/mad-graphics            → next build
     ├── sites/showcase                → next build
     ├── sites/poc-composition-test    → next build (composition system PoC)

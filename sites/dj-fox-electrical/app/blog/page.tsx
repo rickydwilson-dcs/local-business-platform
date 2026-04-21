@@ -1,80 +1,53 @@
-/**
- * Blog Listing Page — thin wrapper around OrionBlogPage
- */
+import type { Metadata } from "next";
+import compositionConfig from "../../composition.json";
 
-import type { Metadata } from 'next';
-import type { SiteConfigSummary } from '@platform/core-components';
-import { Schema } from '@platform/core-components';
-import { getBlogPosts } from '@/lib/content';
-import { absUrl } from '@/lib/site';
-import { siteConfig } from '@/site.config';
-import { PHONE_DISPLAY } from '@/lib/contact-info';
-import { OrionBlogPage } from '@platform/themes/orion/pages';
+const CATEGORY_LABELS: Record<string, string> = {
+  "industry-tips": "Industry Tips",
+  "how-to-guide": "How-To Guide",
+  "case-study": "Case Study",
+  seasonal: "Seasonal",
+  news: "News",
+};
+import { SiteCompositionConfigSchema, renderComposedPage } from "@platform/component-composition";
+import { siteData } from "@/lib/page-data";
+import { getBlogPosts } from "@/lib/content";
 
-export const dynamic = 'force-static';
+const config = SiteCompositionConfigSchema.parse(compositionConfig);
 
 export const metadata: Metadata = {
-  title: `Blog | Industry Insights & Expert Tips | ${siteConfig.business.name}`,
-  description: `Expert insights, tips, and guidance from the ${siteConfig.business.name} team. Stay informed with professional advice and industry news.`,
-  keywords: ['blog', 'tips', 'industry news', 'expert advice', 'guidance'],
+  title: "Blog | Industry Insights & Expert Tips | D J Fox Electrical",
+  description:
+    "Expert insights, tips, and guidance from the D J Fox Electrical team. Stay informed with professional advice and industry news.",
+  keywords: ["blog", "tips", "industry news", "expert advice", "guidance"],
   openGraph: {
-    title: `Blog | Industry Insights & Expert Tips`,
-    description: `Expert insights, tips, and guidance from the ${siteConfig.business.name} team.`,
-    url: '/blog',
-    type: 'website',
+    title: "Blog | Industry Insights & Expert Tips",
+    description: "Expert insights, tips, and guidance from the D J Fox Electrical team.",
+    url: "/blog",
   },
 };
 
-const siteSummary: SiteConfigSummary = {
-  name: siteConfig.business.name,
-  tagline: siteConfig.tagline,
-  phone: siteConfig.business.phone,
-  phoneDisplay: PHONE_DISPLAY,
-  address: { city: siteConfig.business.address.city },
-  cta: siteConfig.cta,
-  stats: siteConfig.credentials?.stats,
-};
-
-export default async function BlogPageWrapper() {
+export default async function BlogPage() {
   const posts = await getBlogPosts();
-
-  const postSummaries = posts.map((p) => ({
-    slug: p.slug,
-    title: p.title,
-    excerpt: p.excerpt,
-    date: p.date,
-    category: p.category,
-    heroImage: p.heroImage,
-    readingTime: p.readingTime,
-    author: p.author ? { name: p.author.name } : undefined,
-    featured: p.featured,
-  }));
-
-  return (
-    <>
-      <OrionBlogPage
-        siteConfig={siteSummary}
-        posts={postSummaries}
-      />
-
-      <Schema
-        org={{
-          name: siteConfig.business.name,
-          url: '/',
-          logo: '/logo.svg',
-        }}
-        breadcrumbs={[
-          { name: 'Home', url: '/' },
-          { name: 'Blog', url: '/blog' },
-        ]}
-        webpage={{
-          '@type': 'Blog',
-          '@id': absUrl('/blog#blog'),
-          url: absUrl('/blog'),
-          name: `${siteConfig.business.name} Blog`,
-          description: `Expert insights, tips, and guidance from the ${siteConfig.business.name} team.`,
-        }}
-      />
-    </>
-  );
+  const data = {
+    ...(siteData as unknown as Record<string, unknown>),
+    blog: {
+      ...((siteData as unknown as Record<string, unknown>).blog as Record<string, unknown>),
+      posts: posts.map((p) => ({
+        slug: p.slug,
+        title: p.title,
+        excerpt: p.excerpt ?? p.description,
+        date: p.date,
+        category: CATEGORY_LABELS[p.category] ?? p.category,
+        heroImage: p.heroImage,
+        readingTime: p.readingTime,
+        featured: p.featured,
+      })),
+    },
+  };
+  const { elements } = renderComposedPage({
+    composition: config,
+    pageType: "blog",
+    data,
+  });
+  return <main className="min-h-screen">{elements}</main>;
 }

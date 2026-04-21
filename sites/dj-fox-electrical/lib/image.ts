@@ -9,8 +9,8 @@ import {
   isValidImagePath,
   generateImageAlt as _generateImageAlt,
   generateImageTitle as _generateImageTitle,
-} from '@platform/core-components/lib/image';
-import { siteConfig } from '@/site.config';
+} from "@platform/core-components/lib/image";
+import { siteConfig } from "@/site.config";
 
 export { getImageUrl, getImageSizes, isValidImagePath };
 

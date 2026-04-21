@@ -1,90 +1,50 @@
-/**
- * Reviews Page — thin wrapper around OrionReviewsPage
- */
+import type { Metadata } from "next";
+import compositionConfig from "../../composition.json";
+import { SiteCompositionConfigSchema, renderComposedPage } from "@platform/component-composition";
+import { siteData } from "@/lib/page-data";
+import { getTestimonials } from "@/lib/content";
 
-import type { Metadata } from 'next';
-import type { SiteConfigSummary } from '@platform/core-components';
-import { Schema } from '@platform/core-components';
-import { getTestimonials, calculateAggregateRating } from '@/lib/content';
-import { absUrl } from '@/lib/site';
-import { siteConfig } from '@/site.config';
-import { PHONE_DISPLAY } from '@/lib/contact-info';
-import { OrionReviewsPage } from '@platform/themes/orion/pages';
-
-export const dynamic = 'force-static';
+const config = SiteCompositionConfigSchema.parse(compositionConfig);
 
 export const metadata: Metadata = {
-  title: `Customer Reviews | What Our Clients Say | ${siteConfig.business.name}`,
-  description: `Read what our customers say about ${siteConfig.business.name}. Trusted by homeowners and businesses for professional services.`,
-  keywords: ['reviews', 'testimonials', 'customer reviews', 'client testimonials', 'company reviews'],
+  title: "Customer Reviews | What Our Clients Say | D J Fox Electrical",
+  description:
+    "Read what our customers say about D J Fox Electrical. Trusted by homeowners and businesses for professional services.",
+  keywords: [
+    "reviews",
+    "testimonials",
+    "customer reviews",
+    "client testimonials",
+    "company reviews",
+  ],
   openGraph: {
-    title: 'Customer Reviews | What Our Clients Say',
-    description: `Read what our customers say about ${siteConfig.business.name}. Trusted by homeowners and businesses.`,
-    url: '/reviews',
-    type: 'website',
+    title: "Customer Reviews | What Our Clients Say",
+    description:
+      "Read what our customers say about D J Fox Electrical. Trusted by homeowners and businesses.",
+    url: "/reviews",
+    type: "website",
   },
 };
 
-const siteSummary: SiteConfigSummary = {
-  name: siteConfig.business.name,
-  tagline: siteConfig.tagline,
-  phone: siteConfig.business.phone,
-  phoneDisplay: PHONE_DISPLAY,
-  address: { city: siteConfig.business.address.city },
-  cta: siteConfig.cta,
-  stats: siteConfig.credentials?.stats,
-};
-
-export default async function ReviewsPageWrapper() {
+export default async function ReviewsPage() {
   const testimonials = await getTestimonials();
-  const { average, count } = calculateAggregateRating(testimonials);
-
-  const testimonialSummaries = testimonials.map((t) => ({
-    slug: t.slug,
-    name: t.customerName,
-    rating: t.rating,
-    body: t.text,
-    date: t.date,
-    featured: t.featured,
-  }));
-
-  return (
-    <>
-      <OrionReviewsPage
-        siteConfig={siteSummary}
-        testimonials={testimonialSummaries}
-      />
-
-      <Schema
-        org={{
-          name: siteConfig.business.name,
-          url: '/',
-          logo: '/logo.svg',
-        }}
-        breadcrumbs={[
-          { name: 'Home', url: '/' },
-          { name: 'Reviews', url: '/reviews' },
-        ]}
-        webpage={{
-          '@type': 'WebPage',
-          '@id': absUrl('/reviews#webpage'),
-          url: absUrl('/reviews'),
-          name: 'Customer Reviews',
-          description: `Read what our customers say about ${siteConfig.business.name}. Trusted by homeowners and businesses.`,
-        }}
-        aggregateRating={
-          count > 0
-            ? {
-                '@type': 'AggregateRating',
-                '@id': absUrl('/reviews#aggregaterating'),
-                ratingValue: average,
-                bestRating: 5,
-                worstRating: 1,
-                ratingCount: count,
-              }
-            : undefined
-        }
-      />
-    </>
-  );
+  const data = {
+    ...(siteData as unknown as Record<string, unknown>),
+    reviews: {
+      ...((siteData as unknown as Record<string, unknown>).reviews as Record<string, unknown>),
+      testimonials: testimonials.map((t) => ({
+        name: t.customerName,
+        location: t.location,
+        rating: t.rating,
+        text: t.text,
+        date: t.date,
+      })),
+    },
+  };
+  const { elements } = renderComposedPage({
+    composition: config,
+    pageType: "reviews",
+    data,
+  });
+  return <main className="min-h-screen">{elements}</main>;
 }

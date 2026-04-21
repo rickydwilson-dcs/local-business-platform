@@ -28,11 +28,10 @@ local-business-platform/
 │   ├── base-template/              # Gold-standard template for new sites
 │   ├── colossus-scaffolding/       # Reference implementation (scaffolding)
 │   ├── dcs/                        # Digital Consulting Services (polaris theme)
-│   ├── dj-fox-electrical/          # Production site (electrical)
+│   ├── dj-fox-electrical/          # Production site (electrical, composition-based)
 │   ├── mad-graphics/               # Production site (vehicle graphics & print, cygnus theme)
 │   ├── showcase/                   # Internal component/theme showcase
 │   ├── poc-composition-test/       # Composition system PoC + UI library (/ui-library route)
-│   ├── dj-fox-electrical-test/     # Composition system migration of dj-fox-electrical
 │   ├── designlab-test/             # Pipeline test site (designlab theme)
 │   ├── navagarden-test/            # Pipeline test site (navagarden theme)
 │   └── [theme-name]-test/          # Temporary test sites (created by pipeline, removed after review)

@@ -1,10 +1,10 @@
 /**
- * Content utilities for dj-fox-electrical
+ * Content utilities for dj-fox-electrical-test
  * Thin shim over the canonical createContentUtils factory.
  * No location filtering — DJ Fox does not have location-specific service pages.
  */
 
-import { createContentUtils } from '@platform/core-components/lib/content';
+import { createContentUtils } from "@platform/core-components/lib/content";
 
 const utils = createContentUtils();
 
@@ -44,4 +44,4 @@ export type {
   Project,
   Testimonial,
   ContentUtilsOptions,
-} from '@platform/core-components/lib/content';
+} from "@platform/core-components/lib/content";

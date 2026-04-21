@@ -13,22 +13,16 @@
     "isolatedModules": true,
     "jsx": "react-jsx",
     "incremental": true,
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ],
+    "plugins": [{ "name": "next" }],
     "paths": {
       "@/*": ["./*"],
+      "@platform/component-composition": ["../../packages/component-composition/src/index.ts"],
+      "@platform/component-composition/*": ["../../packages/component-composition/src/*"],
       "@platform/core-components": ["../../packages/core-components/src/index.ts"],
       "@platform/core-components/*": ["../../packages/core-components/src/*"],
       "@platform/theme-system": ["../../packages/theme-system/src/index.ts"],
       "@platform/theme-system/plugin": ["../../packages/theme-system/src/tailwind-plugin.ts"],
-      "@platform/theme-system/*": ["../../packages/theme-system/src/*"],
-      "@platform/themes/orion": ["../../packages/themes/orion/index.ts"],
-      "@platform/themes/orion/components": ["../../packages/themes/orion/components/index.ts"],
-      "@platform/themes/orion/pages": ["../../packages/themes/orion/pages/index.ts"],
-      "@platform/themes/vega": ["../../packages/themes/vega/index.ts"]
+      "@platform/theme-system/*": ["../../packages/theme-system/src/*"]
     }
   },
   "include": [
