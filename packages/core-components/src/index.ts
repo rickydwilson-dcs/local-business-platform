@@ -51,6 +51,11 @@ export * from "./components/ui/location-faq";
 export * from "./components/ui/location-hero";
 export * from "./components/ui/location-services";
 export * from "./components/ui/locations-dropdown";
+export { HeaderNavDropdown } from "./components/ui/header-nav-dropdown";
+export type {
+  HeaderDropdownConfig,
+  HeaderNavDropdownProps,
+} from "./components/ui/header-nav-dropdown";
 export * from "./components/ui/mobile-menu";
 export { NavLink } from "./components/ui/nav-link";
 export type { NavLinkProps } from "./components/ui/nav-link";
