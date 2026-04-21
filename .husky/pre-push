@@ -17,6 +17,39 @@ npm run type-check || {
   exit 1
 }
 
+# Lint + custom platform checks. Matches what CI's Quality Checks job runs.
+# Covers:
+#   - per-package ESLint (incl. site-level rules like platform/no-hardcoded-tailwind-colors)
+#   - scripts/check-token-usage.ts (composable hex / "use client" / default-export / inline-style gates)
+# Fast path: if EVERY file being pushed is docs/content/output, skip lint to
+# keep push snappy on content-only work. Anything we can't confidently classify
+# as docs defaults to running lint.
+SKIP_LINT=0
+if UPSTREAM=$(git rev-parse --abbrev-ref --symbolic-full-name @{u} 2>/dev/null); then
+  CHANGED_CODE=$(git diff --name-only "$UPSTREAM" HEAD 2>/dev/null)
+  if [ -n "$CHANGED_CODE" ]; then
+    # Any file NOT in docs/output/*.md(x) → run lint
+    CODE_FILES=$(echo "$CHANGED_CODE" | grep -Ev '^(output/|docs/).*' | grep -Ev '\.(md|mdx)$' | head -1)
+    [ -z "$CODE_FILES" ] && SKIP_LINT=1
+  fi
+fi
+
+if [ "$SKIP_LINT" = "1" ]; then
+  echo ""
+  echo "▶️  Skipping lint (only docs/content/output changed in this push)..."
+else
+  echo ""
+  echo "▶️  Lint (eslint + platform quality gates)..."
+  npm run lint || {
+    echo ""
+    echo "❌ Lint failed — fix the errors above and push again."
+    echo ""
+    echo "💡 Tip: run \`npm run lint\` locally at any time to re-check."
+    echo ""
+    exit 1
+  }
+fi
+
 # Branch-specific quality gates
 if [ "$BRANCH" = "main" ]; then
   # For main: Verify staging tests passed (staging is the quality gate)
