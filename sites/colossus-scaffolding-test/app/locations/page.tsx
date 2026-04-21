@@ -144,11 +144,11 @@ export default async function LocationsPage() {
             <div className="container-standard">
               <div className="text-center">
                 <h1 className="heading-hero">Professional Scaffolding Across South East England</h1>
-                <p className="text-xl text-surface-foreground mb-6 mx-auto w-full lg:w-[90%]">
+                <p className="text-lg text-surface-foreground mb-6 mx-auto w-full lg:w-[90%]">
                   30+ towns covered with local specialists who understand your area&apos;s unique
                   challenges
                 </p>
-                <p className="text-lg text-surface-secondary mb-8 mx-auto w-full lg:w-[85%]">
+                <p className="text-base text-surface-secondary mb-8 mx-auto w-full lg:w-[85%]">
                   From Brighton&apos;s seafront heritage to Canterbury&apos;s World Heritage sites,
                   we provide expert scaffolding with genuine local knowledge and established council
                   relationships.
@@ -181,7 +181,7 @@ export default async function LocationsPage() {
                 </div>
 
                 <div className="flex flex-wrap justify-center gap-2 sm:gap-4">
-                  <div className="inline-flex items-center gap-2 bg-surface-subtle px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm">
+                  <div className="inline-flex items-center gap-2 bg-surface-subtle px-3 sm:px-4 py-2 rounded-full text-sm sm:text-base">
                     <svg
                       aria-hidden="true"
                       className="h-3 w-3 sm:h-4 sm:w-4 text-brand-primary"
@@ -196,7 +196,7 @@ export default async function LocationsPage() {
                     </svg>
                     30+ Towns Covered
                   </div>
-                  <div className="inline-flex items-center gap-2 bg-surface-subtle px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm">
+                  <div className="inline-flex items-center gap-2 bg-surface-subtle px-3 sm:px-4 py-2 rounded-full text-sm sm:text-base">
                     <svg
                       aria-hidden="true"
                       className="h-3 w-3 sm:h-4 sm:w-4 text-brand-primary"
@@ -211,7 +211,7 @@ export default async function LocationsPage() {
                     </svg>
                     Heritage Specialists
                   </div>
-                  <div className="bg-surface-subtle px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm">
+                  <div className="bg-surface-subtle px-3 sm:px-4 py-2 rounded-full text-sm sm:text-base">
                     Local Council Partners
                   </div>
                 </div>
@@ -247,7 +247,7 @@ export default async function LocationsPage() {
           <section className="section-standard bg-surface-card">
             <div className="container-standard text-center">
               <h2 className="heading-section">Ready to Work with Local Specialists?</h2>
-              <p className="text-xl text-surface-foreground mb-8 mx-auto w-full lg:w-[85%]">
+              <p className="text-lg text-surface-foreground mb-8 mx-auto w-full lg:w-[85%]">
                 Connect with scaffolding experts who understand your area&apos;s specific
                 requirements and challenges.
               </p>

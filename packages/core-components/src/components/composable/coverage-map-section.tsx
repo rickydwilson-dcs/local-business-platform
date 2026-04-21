@@ -59,12 +59,12 @@ export function CoverageMapSection({
     <section className={`${bg} ${className ?? ""}`} data-component="CoverageMapSection">
       <div className="mx-auto w-full max-w-6xl px-4 py-16 md:py-24 sm:px-6 lg:px-8">
         {slots.showSectionHeading && coverage.heading && (
-          <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-4 text-center">
+          <h2 className="text-xl md:text-2xl font-bold tracking-tight mb-4 text-center">
             {coverage.heading}
           </h2>
         )}
         {slots.showIntro && coverage.intro && (
-          <p className="text-base text-center opacity-80 mb-10 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-lg text-center opacity-80 mb-10 max-w-2xl mx-auto leading-relaxed">
             {coverage.intro}
           </p>
         )}
@@ -76,7 +76,7 @@ export function CoverageMapSection({
               <li
                 key={`${marker.name}-${marker.lat}-${marker.lng}`}
                 data-map-marker="list"
-                className="text-sm text-surface-foreground"
+                className="text-base text-surface-foreground"
               >
                 {marker.href ? (
                   <a href={marker.href} className="hover:text-brand-primary transition-colors">

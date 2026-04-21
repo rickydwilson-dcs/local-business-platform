@@ -52,7 +52,7 @@ export default async function ServicesPage() {
           <div className="container-standard">
             <div className="text-center">
               <h1 className="heading-hero">Our Scaffolding Services</h1>
-              <p className="text-xl text-surface-foreground mb-8 mx-auto w-full lg:w-[90%]">
+              <p className="text-lg text-surface-foreground mb-8 mx-auto w-full lg:w-[90%]">
                 Professional scaffolding solutions across the South East UK. From residential
                 repairs to large commercial projects, we deliver safe, compliant access solutions.
               </p>
@@ -84,7 +84,7 @@ export default async function ServicesPage() {
               </div>
 
               <div className="flex flex-wrap justify-center gap-2 sm:gap-4">
-                <div className="inline-flex items-center gap-2 bg-surface-subtle px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm">
+                <div className="inline-flex items-center gap-2 bg-surface-subtle px-3 sm:px-4 py-2 rounded-full text-sm sm:text-base">
                   <svg
                     aria-hidden="true"
                     className="h-3 w-3 sm:h-4 sm:w-4 text-brand-primary"
@@ -99,7 +99,7 @@ export default async function ServicesPage() {
                   </svg>
                   TG20:21 Compliant
                 </div>
-                <div className="inline-flex items-center gap-2 bg-surface-subtle px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm">
+                <div className="inline-flex items-center gap-2 bg-surface-subtle px-3 sm:px-4 py-2 rounded-full text-sm sm:text-base">
                   <svg
                     aria-hidden="true"
                     className="h-3 w-3 sm:h-4 sm:w-4 text-brand-primary"
@@ -114,7 +114,7 @@ export default async function ServicesPage() {
                   </svg>
                   CHAS Accredited
                 </div>
-                <div className="bg-surface-subtle px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm">
+                <div className="bg-surface-subtle px-3 sm:px-4 py-2 rounded-full text-sm sm:text-base">
                   £10M Insured
                 </div>
               </div>
@@ -156,7 +156,7 @@ export default async function ServicesPage() {
         <section className="section-compact bg-surface-card">
           <div className="container-standard text-center">
             <h2 className="heading-subsection">Need a Custom Solution?</h2>
-            <p className="text-xl text-surface-foreground mb-8">
+            <p className="text-lg text-surface-foreground mb-8">
               Every project is unique. Contact our expert team to discuss your specific scaffolding
               requirements.
             </p>

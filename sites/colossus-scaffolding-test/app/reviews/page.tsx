@@ -56,7 +56,7 @@ function StarRating({ rating, size = "md" }: { rating: number; size?: "sm" | "md
 function AggregateRatingDisplay({ average, count }: { average: number; count: number }) {
   return (
     <div className="bg-surface-card rounded-2xl shadow-lg p-8 text-center">
-      <div className="text-5xl font-bold text-brand-primary mb-2">{average.toFixed(1)}</div>
+      <div className="text-4xl font-bold text-brand-primary mb-2">{average.toFixed(1)}</div>
       <StarRating rating={Math.round(average)} size="lg" />
       <p className="text-surface-tertiary mt-2">Based on {count} reviews</p>
 
@@ -66,7 +66,7 @@ function AggregateRatingDisplay({ average, count }: { average: number; count: nu
           // For demo, assuming mostly 5-star reviews
           const percentage = stars === 5 ? 90 : stars === 4 ? 10 : 0;
           return (
-            <div key={stars} className="flex items-center gap-2 text-sm">
+            <div key={stars} className="flex items-center gap-2 text-base">
               <span className="w-3 text-surface-tertiary">{stars}</span>
               {/* eslint-disable platform/no-hardcoded-tailwind-colors -- Intentional: star rating UI */}
               <svg
@@ -101,19 +101,19 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
       {/* Header */}
       <div className="flex items-start justify-between mb-4">
         <div className="flex items-center gap-3">
-          <div className="w-12 h-12 bg-brand-primary rounded-full flex items-center justify-center text-white text-lg font-bold">
+          <div className="w-12 h-12 bg-brand-primary rounded-full flex items-center justify-center text-white text-base font-bold">
             {testimonial.customerName.charAt(0)}
           </div>
           <div>
             <h3 className="font-bold text-surface-foreground">{testimonial.customerName}</h3>
-            <p className="text-sm text-surface-muted-foreground">
+            <p className="text-base text-surface-muted-foreground">
               {testimonial.customerRole}
               {testimonial.customerCompany && `, ${testimonial.customerCompany}`}
             </p>
           </div>
         </div>
         {testimonial.verified && (
-          <span className="inline-flex items-center gap-1 text-success text-sm font-medium">
+          <span className="inline-flex items-center gap-1 text-success text-base font-medium">
             <svg aria-hidden="true" className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
               <path
                 fillRule="evenodd"
@@ -137,7 +137,7 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
       </blockquote>
 
       {/* Meta */}
-      <div className="flex flex-wrap items-center gap-2 text-sm text-surface-muted-foreground">
+      <div className="flex flex-wrap items-center gap-2 text-base text-surface-muted-foreground">
         <time dateTime={testimonial.date}>
           {new Date(testimonial.date).toLocaleDateString("en-GB", {
             day: "numeric",
@@ -195,7 +195,7 @@ export default async function ReviewsPage() {
           <div className="container-standard">
             <div className="text-center max-w-3xl mx-auto">
               <h1 className="heading-hero">What Our Customers Say</h1>
-              <p className="text-xl text-surface-foreground mb-8">
+              <p className="text-lg text-surface-foreground mb-8">
                 Don&apos;t just take our word for it. Read what homeowners and businesses across the
                 South East say about our scaffolding services.
               </p>
@@ -212,7 +212,7 @@ export default async function ReviewsPage() {
               </div>
               <div className="lg:col-span-2">
                 <div className="bg-surface-card rounded-2xl shadow-lg p-8">
-                  <h2 className="text-xl font-bold text-surface-foreground mb-4">Why Choose Us?</h2>
+                  <h2 className="text-lg font-bold text-surface-foreground mb-4">Why Choose Us?</h2>
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div className="flex items-start gap-3">
                       <div className="w-10 h-10 bg-brand-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
@@ -231,7 +231,7 @@ export default async function ReviewsPage() {
                       </div>
                       <div>
                         <h3 className="font-semibold text-surface-foreground">TG20:21 Compliant</h3>
-                        <p className="text-sm text-surface-tertiary">
+                        <p className="text-base text-surface-tertiary">
                           Industry-standard safety compliance
                         </p>
                       </div>
@@ -249,7 +249,7 @@ export default async function ReviewsPage() {
                       </div>
                       <div>
                         <h3 className="font-semibold text-surface-foreground">CISRS Qualified</h3>
-                        <p className="text-sm text-surface-tertiary">
+                        <p className="text-base text-surface-tertiary">
                           Trained professional scaffolders
                         </p>
                       </div>
@@ -271,7 +271,7 @@ export default async function ReviewsPage() {
                       </div>
                       <div>
                         <h3 className="font-semibold text-surface-foreground">Fast Response</h3>
-                        <p className="text-sm text-surface-tertiary">
+                        <p className="text-base text-surface-tertiary">
                           Quick quotes and efficient service
                         </p>
                       </div>
@@ -294,7 +294,7 @@ export default async function ReviewsPage() {
                       </div>
                       <div>
                         <h3 className="font-semibold text-surface-foreground">£10M Insured</h3>
-                        <p className="text-sm text-surface-tertiary">
+                        <p className="text-base text-surface-tertiary">
                           Full public liability coverage
                         </p>
                       </div>
@@ -329,7 +329,7 @@ export default async function ReviewsPage() {
 
             {testimonials.length === 0 ? (
               <div className="text-center py-12">
-                <p className="text-surface-tertiary text-lg">
+                <p className="text-surface-tertiary text-base">
                   No reviews yet. Check back soon for customer testimonials.
                 </p>
               </div>
@@ -346,7 +346,7 @@ export default async function ReviewsPage() {
         {/* CTA Section */}
         <section className="section-compact bg-brand-primary">
           <div className="container-standard text-center">
-            <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
+            <h2 className="text-xl md:text-2xl font-bold text-white mb-4">
               Ready to Experience Our Service?
             </h2>
             {/* eslint-disable-next-line platform/no-hardcoded-tailwind-colors -- Intentional: decorative accent color */}

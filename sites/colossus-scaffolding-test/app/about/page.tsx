@@ -51,7 +51,7 @@ export default function AboutPage() {
                   {about.heroBadges.map((badge, index) => (
                     <span
                       key={index}
-                      className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-brand-primary/10 text-brand-primary border border-brand-primary/20"
+                      className="inline-flex items-center px-3 py-1 rounded-full text-base font-medium bg-brand-primary/10 text-brand-primary border border-brand-primary/20"
                     >
                       {badge}
                     </span>
@@ -59,7 +59,7 @@ export default function AboutPage() {
                 </div>
               )}
               <h1 className="heading-hero leading-tight">About {name}</h1>
-              <p className="text-xl text-surface-foreground leading-relaxed mx-auto w-full lg:w-[90%] mt-6">
+              <p className="text-lg text-surface-foreground leading-relaxed mx-auto w-full lg:w-[90%] mt-6">
                 {tagline}
               </p>
             </div>
@@ -74,7 +74,7 @@ export default function AboutPage() {
                 <h2 className="heading-section mb-8 text-center">Our Story</h2>
                 <div className="max-w-3xl mx-auto prose prose-lg text-surface-foreground leading-relaxed">
                   {about.story.map((paragraph, index) => (
-                    <p key={index} className={index === 0 ? "text-xl mb-6" : "mb-6"}>
+                    <p key={index} className={index === 0 ? "text-lg mb-6" : "mb-6"}>
                       {paragraph}
                     </p>
                   ))}
@@ -92,19 +92,21 @@ export default function AboutPage() {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mx-auto w-full lg:w-[90%]">
               <div className="text-center p-6 bg-surface-muted rounded-2xl">
-                <h3 className="text-lg font-semibold text-surface-foreground mb-2">
+                <h3 className="text-base font-semibold text-surface-foreground mb-2">
                   Registered Name
                 </h3>
                 <p className="text-surface-secondary">{business.legalName}</p>
               </div>
               <div className="text-center p-6 bg-surface-muted rounded-2xl">
-                <h3 className="text-lg font-semibold text-surface-foreground mb-2">Established</h3>
-                <p className="text-2xl font-bold text-brand-primary">
+                <h3 className="text-base font-semibold text-surface-foreground mb-2">
+                  Established
+                </h3>
+                <p className="text-xl font-bold text-brand-primary">
                   {credentials.yearEstablished}
                 </p>
               </div>
               <div className="text-center p-6 bg-surface-muted rounded-2xl">
-                <h3 className="text-lg font-semibold text-surface-foreground mb-2">
+                <h3 className="text-base font-semibold text-surface-foreground mb-2">
                   Service Coverage
                 </h3>
                 <p className="text-surface-secondary">{serviceAreas.join(", ")}</p>
@@ -124,10 +126,10 @@ export default function AboutPage() {
                 {credentials.stats.map((stat, index) => (
                   <div key={index} className="text-center">
                     <div className="bg-surface-card rounded-xl p-6 shadow-sm border border-surface-subtle hover:shadow-md transition-shadow">
-                      <div className="text-4xl font-bold text-brand-primary mb-2">{stat.value}</div>
+                      <div className="text-3xl font-bold text-brand-primary mb-2">{stat.value}</div>
                       <div className="text-surface-foreground font-medium">{stat.label}</div>
                       {stat.description && (
-                        <div className="text-sm text-surface-secondary mt-1">
+                        <div className="text-base text-surface-secondary mt-1">
                           {stat.description}
                         </div>
                       )}
@@ -145,7 +147,7 @@ export default function AboutPage() {
             <div className="container-standard">
               <div className="text-center mb-12">
                 <h2 className="heading-section">Certifications &amp; Accreditations</h2>
-                <p className="text-lg text-surface-foreground mx-auto w-full lg:w-[90%] mt-4">
+                <p className="text-base text-surface-foreground mx-auto w-full lg:w-[90%] mt-4">
                   We maintain the highest industry standards with comprehensive certifications and
                   accreditations.
                 </p>
@@ -161,7 +163,7 @@ export default function AboutPage() {
                     </div>
                     <div>
                       <h3 className="font-semibold text-surface-foreground">{cert.name}</h3>
-                      <p className="text-sm text-surface-secondary">{cert.description}</p>
+                      <p className="text-base text-surface-secondary">{cert.description}</p>
                     </div>
                   </div>
                 ))}
@@ -175,7 +177,9 @@ export default function AboutPage() {
                       <h3 className="font-semibold text-surface-foreground">
                         {credentials.insurance.amount} Insurance
                       </h3>
-                      <p className="text-sm text-surface-secondary">{credentials.insurance.type}</p>
+                      <p className="text-base text-surface-secondary">
+                        {credentials.insurance.type}
+                      </p>
                     </div>
                   </div>
                 )}
@@ -190,7 +194,7 @@ export default function AboutPage() {
             <div className="container-standard">
               <div className="text-center mb-12">
                 <h2 className="heading-section">Our Values</h2>
-                <p className="text-lg text-surface-foreground mx-auto w-full lg:w-[90%] mt-4">
+                <p className="text-base text-surface-foreground mx-auto w-full lg:w-[90%] mt-4">
                   These core principles guide everything we do, from the smallest residential
                   project to the largest commercial installation.
                 </p>
@@ -201,7 +205,7 @@ export default function AboutPage() {
                     <div className="w-16 h-16 bg-brand-primary rounded-full flex items-center justify-center mx-auto mb-4">
                       <Award className="w-8 h-8 text-white" />
                     </div>
-                    <h3 className="text-xl font-semibold text-surface-foreground mb-3">
+                    <h3 className="text-lg font-semibold text-surface-foreground mb-3">
                       {value.title}
                     </h3>
                     <p className="text-surface-foreground">{value.description}</p>
@@ -218,7 +222,7 @@ export default function AboutPage() {
             <div className="container-standard">
               <div className="text-center mb-12">
                 <h2 className="heading-section">Why Choose {name}?</h2>
-                <p className="text-lg text-surface-foreground mx-auto w-full lg:w-[90%] mt-4">
+                <p className="text-base text-surface-foreground mx-auto w-full lg:w-[90%] mt-4">
                   From small residential projects to complex commercial installations, here&apos;s
                   what sets us apart.
                 </p>
@@ -243,8 +247,8 @@ export default function AboutPage() {
         {/* CTA Section */}
         <section className="section-standard bg-brand-primary text-white">
           <div className="container-standard text-center">
-            <h2 className="text-3xl sm:text-4xl font-bold mb-6">Ready to Work with {name}?</h2>
-            <p className="text-xl mb-8 mx-auto w-full lg:w-[90%] opacity-90 leading-relaxed">
+            <h2 className="text-2xl sm:text-3xl font-bold mb-6">Ready to Work with {name}?</h2>
+            <p className="text-lg mb-8 mx-auto w-full lg:w-[90%] opacity-90 leading-relaxed">
               Get your free quote today and experience the professional difference that{" "}
               {credentials.yearEstablished
                 ? `${new Date().getFullYear() - parseInt(credentials.yearEstablished)}+ years of`

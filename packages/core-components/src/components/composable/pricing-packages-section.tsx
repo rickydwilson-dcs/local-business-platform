@@ -58,12 +58,12 @@ export function PricingPackagesSection({
     <section className={`${bg} ${className ?? ""}`} data-component="PricingPackagesSection">
       <div className="mx-auto w-full max-w-6xl px-4 py-16 md:py-24 sm:px-6 lg:px-8">
         {slots.showSectionHeading && d.heading && (
-          <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-4 text-center">
+          <h2 className="text-xl md:text-2xl font-bold tracking-tight mb-4 text-center">
             {d.heading}
           </h2>
         )}
         {slots.showIntro && d.intro && (
-          <p className="text-base text-center opacity-80 mb-12 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-lg text-center opacity-80 mb-12 max-w-2xl mx-auto leading-relaxed">
             {d.intro}
           </p>
         )}
@@ -77,24 +77,24 @@ export function PricingPackagesSection({
             return (
               <div key={pkg.tier} className={cardClasses}>
                 {slots.showHighlightedBadge && isHighlighted && (
-                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 inline-flex items-center gap-1 px-4 py-1 rounded-full bg-brand-primary text-on-brand-primary text-xs font-semibold">
+                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 inline-flex items-center gap-1 px-4 py-1 rounded-full bg-brand-primary text-on-brand-primary text-sm font-semibold">
                     <Sparkles className="w-3.5 h-3.5" aria-hidden />
                     {pkg.badgeLabel ?? "Most Popular"}
                   </span>
                 )}
-                <h3 className="text-xl font-bold text-surface-foreground mb-2">{pkg.name}</h3>
+                <h3 className="text-lg font-bold text-surface-foreground mb-2">{pkg.name}</h3>
                 {pkg.description && (
-                  <p className="text-sm text-surface-muted-foreground mb-6 leading-relaxed">
+                  <p className="text-base text-surface-muted-foreground mb-6 leading-relaxed">
                     {pkg.description}
                   </p>
                 )}
                 {pkg.price && (
                   <div className="mb-6">
-                    <span className="text-3xl font-extrabold text-surface-foreground">
+                    <span className="text-2xl font-extrabold text-surface-foreground">
                       {pkg.price}
                     </span>
                     {pkg.priceSuffix && (
-                      <span className="text-sm text-surface-muted-foreground ml-1">
+                      <span className="text-base text-surface-muted-foreground ml-1">
                         {pkg.priceSuffix}
                       </span>
                     )}
@@ -105,7 +105,7 @@ export function PricingPackagesSection({
                     {pkg.features.map((feature, i) => (
                       <li
                         key={i}
-                        className="flex items-start gap-2 text-sm text-surface-foreground"
+                        className="flex items-start gap-2 text-base text-surface-foreground"
                       >
                         <CheckCircle2
                           className="w-4 h-4 text-brand-primary mt-0.5 flex-shrink-0"

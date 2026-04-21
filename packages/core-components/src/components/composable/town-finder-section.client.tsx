@@ -52,7 +52,7 @@ export function TownFinderClient({ towns, placeholder, showCountyBadge }: TownFi
           onFocus={() => setIsFocused(true)}
           onBlur={() => setTimeout(() => setIsFocused(false), 150)}
           aria-controls={listboxId}
-          className="w-full pl-12 pr-4 py-4 rounded-xl border border-surface-card-border bg-surface-card text-surface-foreground text-base focus:outline-none focus:ring-2 focus:ring-brand-primary"
+          className="w-full pl-12 pr-4 py-4 rounded-xl border border-surface-card-border bg-surface-card text-surface-foreground text-lg focus:outline-none focus:ring-2 focus:ring-brand-primary"
         />
       </div>
 
@@ -69,9 +69,9 @@ export function TownFinderClient({ towns, placeholder, showCountyBadge }: TownFi
                 className="flex items-center justify-between gap-3 px-4 py-3 hover:bg-surface-subtle text-surface-foreground"
                 onMouseDown={(e) => e.preventDefault()}
               >
-                <span className="text-sm font-medium">{town.name}</span>
+                <span className="text-base font-medium">{town.name}</span>
                 {showCountyBadge && town.county && (
-                  <span className="text-xs text-surface-muted-foreground">{town.county}</span>
+                  <span className="text-sm text-surface-muted-foreground">{town.county}</span>
                 )}
               </Link>
             </li>

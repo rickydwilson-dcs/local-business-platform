@@ -9,8 +9,8 @@ export default function NotFound() {
     <div className="min-h-screen bg-surface-muted flex items-center justify-center px-4">
       <div className="max-w-md w-full text-center">
         <div className="mb-8">
-          <div className="text-6xl font-bold text-colossus-blue mb-4">404</div>
-          <h1 className="text-2xl font-semibold text-surface-foreground mb-2">Page Not Found</h1>
+          <div className="text-5xl font-bold text-colossus-blue mb-4">404</div>
+          <h1 className="text-xl font-semibold text-surface-foreground mb-2">Page Not Found</h1>
           <p className="text-surface-tertiary mb-8">
             Sorry, we couldn&apos;t find the page you&apos;re looking for. It may have been moved or
             no longer exists.
@@ -36,7 +36,7 @@ export default function NotFound() {
         </div>
 
         <div className="mt-8 pt-8 border-t border-surface-subtle">
-          <p className="text-surface-tertiary text-sm mb-4">Need help? Contact us directly:</p>
+          <p className="text-surface-tertiary text-base mb-4">Need help? Contact us directly:</p>
           <div className="space-y-2">
             <Link
               href={`tel:${PHONE_TEL}`}
@@ -57,8 +57,8 @@ export default function NotFound() {
         </div>
 
         <div className="mt-8">
-          <h2 className="text-lg font-semibold text-surface-foreground mb-4">Popular Pages</h2>
-          <div className="grid grid-cols-2 gap-2 text-sm">
+          <h2 className="text-base font-semibold text-surface-foreground mb-4">Popular Pages</h2>
+          <div className="grid grid-cols-2 gap-2 text-base">
             <Link
               href="/services"
               className="text-colossus-blue hover:text-colossus-blue/80 transition-colors py-2"

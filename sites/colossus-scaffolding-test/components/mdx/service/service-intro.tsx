@@ -53,7 +53,7 @@ export const ServiceIntro: React.FC<ServiceIntroProps> = ({
         {/* LEFT SIDEBAR */}
         <div className="lg:col-span-1 order-2 lg:order-1">
           <div className="bg-surface-subtle rounded-2xl p-6 border border-surface-subtle h-fit">
-            <h3 className="text-xl font-semibold text-surface-foreground mb-4 flex items-center gap-2">
+            <h3 className="text-lg font-semibold text-surface-foreground mb-4 flex items-center gap-2">
               <svg
                 className="h-5 w-5 text-brand-primary"
                 fill="none"
@@ -76,13 +76,13 @@ export const ServiceIntro: React.FC<ServiceIntroProps> = ({
                   className="flex items-center gap-3 p-3 bg-surface-card rounded-lg shadow-sm"
                 >
                   <div className="flex-shrink-0 w-2 h-2 bg-brand-primary rounded-full"></div>
-                  <span className="text-surface-foreground font-medium text-sm">{item}</span>
+                  <span className="text-surface-foreground font-medium text-base">{item}</span>
                 </div>
               ))}
             </div>
 
             <div className="mt-6 pt-6 border-t border-surface-subtle">
-              <div className="flex items-center gap-2 text-sm text-surface-foreground mb-4">
+              <div className="flex items-center gap-2 text-base text-surface-foreground mb-4">
                 <svg
                   className="h-4 w-4 text-brand-primary"
                   fill="none"
@@ -98,12 +98,12 @@ export const ServiceIntro: React.FC<ServiceIntroProps> = ({
                 </svg>
                 TG20:21 Compliant & Fully Insured
               </div>
-              <p className="text-sm text-surface-foreground mb-4">
+              <p className="text-base text-surface-foreground mb-4">
                 £10M public liability insurance and CHAS accreditation for complete peace of mind.
               </p>
               <a
                 href="/contact"
-                className="w-full inline-flex items-center justify-center px-4 py-3 bg-brand-primary text-white font-semibold rounded-lg hover:bg-brand-primary-hover transition-colors text-sm"
+                className="w-full inline-flex items-center justify-center px-4 py-3 bg-brand-primary text-white font-semibold rounded-lg hover:bg-brand-primary-hover transition-colors text-base"
               >
                 {sidebarCta}
               </a>
@@ -113,13 +113,13 @@ export const ServiceIntro: React.FC<ServiceIntroProps> = ({
 
         {/* RIGHT CONTENT - Main area */}
         <div className="lg:col-span-2 order-1 lg:order-2">
-          <h2 className="text-3xl sm:text-4xl font-bold text-surface-foreground mb-6">{title}</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold text-surface-foreground mb-6">{title}</h2>
           <p className="text-body-lg mb-8">{intro}</p>
 
           {/* Process Steps - 2 column grid like original */}
           {processSteps.length > 0 && (
             <div className="space-y-6">
-              <h3 className="text-xl font-semibold text-surface-foreground">{stepsTitle}</h3>
+              <h3 className="text-lg font-semibold text-surface-foreground">{stepsTitle}</h3>
               <div className="grid md:grid-cols-2 gap-4">
                 {processSteps.map((step, index) => (
                   <div
@@ -141,7 +141,7 @@ export const ServiceIntro: React.FC<ServiceIntroProps> = ({
                         />
                       </svg>
                     </div>
-                    <span className="text-surface-foreground font-medium text-sm">{step}</span>
+                    <span className="text-surface-foreground font-medium text-base">{step}</span>
                   </div>
                 ))}
               </div>
@@ -168,7 +168,7 @@ export const ServiceIntro: React.FC<ServiceIntroProps> = ({
                     <h4 className="font-semibold text-surface-foreground mb-2">
                       Professional Installation & Certification
                     </h4>
-                    <p className="text-surface-foreground text-sm leading-relaxed">
+                    <p className="text-surface-foreground text-base leading-relaxed">
                       Every scaffold receives a full handover certificate. We conduct 7-day
                       statutory inspections throughout your hire, plus inspections after adverse
                       weather or modifications.

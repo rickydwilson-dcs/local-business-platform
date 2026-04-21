@@ -45,12 +45,12 @@ export function SiteFooter({
       <div className="mx-auto w-full lg:w-[90%] px-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mb-6 sm:mb-8">
           <div className="sm:col-span-2 lg:col-span-1">
-            <h2 className="text-xl sm:text-2xl font-bold mb-4 text-white">{siteName}</h2>
-            <p className="text-surface-muted-foreground mb-4 text-sm sm:text-base">{tagline}</p>
+            <h2 className="text-lg sm:text-xl font-bold mb-4 text-white">{siteName}</h2>
+            <p className="text-surface-muted-foreground mb-4 text-base sm:text-lg">{tagline}</p>
             {certifications.length > 0 && (
               <div className="flex flex-wrap items-center gap-3 sm:gap-4">
                 {certifications.slice(0, 3).map((cert, index) => (
-                  <div key={index} className="flex items-center gap-2 text-xs sm:text-sm">
+                  <div key={index} className="flex items-center gap-2 text-sm sm:text-base">
                     {index === 0 ? (
                       <Award className="h-3 w-3 sm:h-4 sm:w-4 text-amber-400" aria-hidden="true" />
                     ) : (
@@ -65,8 +65,8 @@ export function SiteFooter({
 
           {showServices && services.length > 0 && (
             <div>
-              <h3 className="text-base sm:text-lg font-semibold mb-4 text-white">Our Services</h3>
-              <ul className="space-y-2 text-surface-muted-foreground text-sm sm:text-base">
+              <h3 className="text-lg sm:text-base font-semibold mb-4 text-white">Our Services</h3>
+              <ul className="space-y-2 text-surface-muted-foreground text-base sm:text-lg">
                 {services.map((service) => (
                   <li key={service.slug}>
                     <Link
@@ -93,8 +93,8 @@ export function SiteFooter({
 
           {showLocations && locations.length > 0 && (
             <div>
-              <h3 className="text-base sm:text-lg font-semibold mb-4 text-white">Service Areas</h3>
-              <ul className="space-y-2 text-surface-muted-foreground text-sm sm:text-base">
+              <h3 className="text-lg sm:text-base font-semibold mb-4 text-white">Service Areas</h3>
+              <ul className="space-y-2 text-surface-muted-foreground text-base sm:text-lg">
                 {locations.map((location) => (
                   <li key={location.slug}>
                     <Link
@@ -120,8 +120,8 @@ export function SiteFooter({
           )}
 
           <div>
-            <h3 className="text-base sm:text-lg font-semibold mb-4 text-white">Contact Info</h3>
-            <div className="space-y-3 text-surface-muted-foreground text-sm sm:text-base">
+            <h3 className="text-lg sm:text-base font-semibold mb-4 text-white">Contact Info</h3>
+            <div className="space-y-3 text-surface-muted-foreground text-base sm:text-lg">
               <div className="flex items-center gap-2">
                 <Phone
                   className="h-3 w-3 sm:h-4 sm:w-4 text-brand-primary flex-shrink-0"
@@ -156,7 +156,7 @@ export function SiteFooter({
                   <div>{address.region}</div>
                 </div>
               </div>
-              <div className="mt-4 pt-4 border-t border-surface-subtle text-xs sm:text-sm">
+              <div className="mt-4 pt-4 border-t border-surface-subtle text-sm sm:text-base">
                 <Link href="/privacy-policy" className="hover:text-brand-primary transition-colors">
                   Privacy Policy
                 </Link>
@@ -169,7 +169,7 @@ export function SiteFooter({
           </div>
         </div>
 
-        <div className="border-t border-surface-subtle pt-6 sm:pt-8 text-center text-surface-muted-foreground text-xs sm:text-sm">
+        <div className="border-t border-surface-subtle pt-6 sm:pt-8 text-center text-surface-muted-foreground text-sm sm:text-base">
           <p>
             &copy; {copyright}
             {builtBy && (

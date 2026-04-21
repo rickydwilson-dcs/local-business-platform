@@ -47,12 +47,12 @@ export default function PrivacyPolicyPage() {
             {/* Header */}
             <div className="text-center mb-12">
               <h1 className="heading-hero leading-tight mb-6">Privacy Policy</h1>
-              <div className="flex flex-wrap justify-center gap-4 text-sm text-surface-muted-foreground">
+              <div className="flex flex-wrap justify-center gap-4 text-base text-surface-muted-foreground">
                 <span>Last updated: {lastUpdated}</span>
                 <span>•</span>
                 <span>Version: {version}</span>
               </div>
-              <p className="text-lg text-surface-foreground mt-6 max-w-3xl mx-auto">
+              <p className="text-base text-surface-foreground mt-6 max-w-3xl mx-auto">
                 This Privacy Policy explains how {siteConfig.business.name} collects, uses, and
                 protects your personal data in accordance with UK data protection laws.
               </p>
@@ -60,7 +60,7 @@ export default function PrivacyPolicyPage() {
 
             {/* Table of Contents */}
             <div className="bg-surface-muted rounded-2xl p-8 mb-12">
-              <h2 className="text-xl font-semibold mb-4">Table of Contents</h2>
+              <h2 className="text-lg font-semibold mb-4">Table of Contents</h2>
               <nav className="grid md:grid-cols-2 gap-2">
                 <a href="#data-controller" className="text-brand-primary hover:underline">
                   1. Data Controller Information
@@ -104,7 +104,7 @@ export default function PrivacyPolicyPage() {
             <div className="prose prose-lg max-w-none">
               {/* Data Controller */}
               <section id="data-controller" className="mb-12">
-                <h2 className="text-3xl font-semibold mb-6">1. Data Controller Information</h2>
+                <h2 className="text-2xl font-semibold mb-6">1. Data Controller Information</h2>
                 <p className="mb-6">
                   {siteConfig.business.name} is the data controller for your personal information.
                   We are a professional scaffolding company providing commercial, industrial, and
@@ -137,7 +137,7 @@ export default function PrivacyPolicyPage() {
 
               {/* Data We Collect */}
               <section id="data-we-collect" className="mb-12">
-                <h2 className="text-3xl font-semibold mb-6">2. Data We Collect</h2>
+                <h2 className="text-2xl font-semibold mb-6">2. Data We Collect</h2>
                 <p className="mb-6">
                   As a scaffolding contractor, we collect different types of personal data depending
                   on how you interact with our services:
@@ -146,7 +146,7 @@ export default function PrivacyPolicyPage() {
                 <div className="space-y-8">
                   {/* Contact Inquiries */}
                   <div className="border border-surface-border rounded-lg p-6">
-                    <h3 className="text-xl font-semibold mb-4">
+                    <h3 className="text-lg font-semibold mb-4">
                       2.1 Scaffolding Service Inquiries
                     </h3>
                     <p className="mb-4">
@@ -177,7 +177,7 @@ export default function PrivacyPolicyPage() {
 
                   {/* Website Analytics */}
                   <div className="border border-surface-border rounded-lg p-6">
-                    <h3 className="text-xl font-semibold mb-4">2.2 Website Analytics Data</h3>
+                    <h3 className="text-lg font-semibold mb-4">2.2 Website Analytics Data</h3>
                     <p className="mb-4">Through our website and analytics systems, we collect:</p>
                     <ul className="list-disc pl-6 space-y-2">
                       <li>
@@ -208,7 +208,7 @@ export default function PrivacyPolicyPage() {
 
                   {/* Marketing Data */}
                   <div className="border border-surface-border rounded-lg p-6">
-                    <h3 className="text-xl font-semibold mb-4">2.3 Marketing & Communications</h3>
+                    <h3 className="text-lg font-semibold mb-4">2.3 Marketing & Communications</h3>
                     <p className="mb-4">For marketing our scaffolding services, we may collect:</p>
                     <ul className="list-disc pl-6 space-y-2">
                       <li>
@@ -232,7 +232,7 @@ export default function PrivacyPolicyPage() {
 
                   {/* Project Data */}
                   <div className="border border-surface-border rounded-lg p-6">
-                    <h3 className="text-xl font-semibold mb-4">2.4 Active Project Information</h3>
+                    <h3 className="text-lg font-semibold mb-4">2.4 Active Project Information</h3>
                     <p className="mb-4">
                       For customers with active scaffolding projects, we process:
                     </p>
@@ -264,7 +264,7 @@ export default function PrivacyPolicyPage() {
 
               {/* How We Use Data */}
               <section id="how-we-use-data" className="mb-12">
-                <h2 className="text-3xl font-semibold mb-6">3. How We Use Your Data</h2>
+                <h2 className="text-2xl font-semibold mb-6">3. How We Use Your Data</h2>
                 <p className="mb-6">
                   We use your personal data to provide professional scaffolding services and improve
                   our business operations:
@@ -272,8 +272,8 @@ export default function PrivacyPolicyPage() {
 
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="border border-surface-border rounded-lg p-6">
-                    <h3 className="text-lg font-semibold mb-4">Service Delivery</h3>
-                    <ul className="list-disc pl-6 space-y-2 text-sm">
+                    <h3 className="text-base font-semibold mb-4">Service Delivery</h3>
+                    <ul className="list-disc pl-6 space-y-2 text-base">
                       <li>Provide scaffolding quotes and estimates</li>
                       <li>Schedule site visits and installations</li>
                       <li>Manage scaffolding projects and timelines</li>
@@ -284,8 +284,8 @@ export default function PrivacyPolicyPage() {
                   </div>
 
                   <div className="border border-surface-border rounded-lg p-6">
-                    <h3 className="text-lg font-semibold mb-4">Business Operations</h3>
-                    <ul className="list-disc pl-6 space-y-2 text-sm">
+                    <h3 className="text-base font-semibold mb-4">Business Operations</h3>
+                    <ul className="list-disc pl-6 space-y-2 text-base">
                       <li>Improve our scaffolding services and processes</li>
                       <li>Analyze website performance and user experience</li>
                       <li>Develop new scaffolding solutions and services</li>
@@ -296,8 +296,8 @@ export default function PrivacyPolicyPage() {
                   </div>
 
                   <div className="border border-surface-border rounded-lg p-6">
-                    <h3 className="text-lg font-semibold mb-4">Marketing & Communications</h3>
-                    <ul className="list-disc pl-6 space-y-2 text-sm">
+                    <h3 className="text-base font-semibold mb-4">Marketing & Communications</h3>
+                    <ul className="list-disc pl-6 space-y-2 text-base">
                       <li>Send information about our scaffolding services</li>
                       <li>Market relevant scaffolding solutions</li>
                       <li>Measure advertising campaign effectiveness</li>
@@ -308,8 +308,8 @@ export default function PrivacyPolicyPage() {
                   </div>
 
                   <div className="border border-surface-border rounded-lg p-6">
-                    <h3 className="text-lg font-semibold mb-4">Legal & Compliance</h3>
-                    <ul className="list-disc pl-6 space-y-2 text-sm">
+                    <h3 className="text-base font-semibold mb-4">Legal & Compliance</h3>
+                    <ul className="list-disc pl-6 space-y-2 text-base">
                       <li>Comply with health and safety regulations</li>
                       <li>Meet insurance and certification requirements</li>
                       <li>Fulfill contractual obligations</li>
@@ -324,7 +324,7 @@ export default function PrivacyPolicyPage() {
               {/* Sections 4-12 remain largely the same as they don't contain hardcoded business names */}
               {/* Legal Basis */}
               <section id="legal-basis" className="mb-12">
-                <h2 className="text-3xl font-semibold mb-6">4. Legal Basis for Processing</h2>
+                <h2 className="text-2xl font-semibold mb-6">4. Legal Basis for Processing</h2>
                 <p className="mb-6">
                   Under UK GDPR, we must have a valid legal basis for processing your personal data.
                   We rely on the following legal bases:
@@ -338,7 +338,7 @@ export default function PrivacyPolicyPage() {
                       For most business operations, we rely on our legitimate interests as a
                       scaffolding company to provide services and run our business effectively.
                     </p>
-                    <p className="text-sm text-blue-700">
+                    <p className="text-base text-blue-700">
                       <strong>Examples:</strong> Processing inquiries, providing quotes, analyzing
                       website performance, improving services, business communications.
                     </p>
@@ -352,7 +352,7 @@ export default function PrivacyPolicyPage() {
                       When you engage us for scaffolding services, we need to process your data to
                       fulfill our contractual obligations.
                     </p>
-                    <p className="text-sm text-green-700">
+                    <p className="text-base text-green-700">
                       <strong>Examples:</strong> Project management, scheduling installations,
                       safety compliance, invoicing, delivery of scaffolding services.
                     </p>
@@ -366,7 +366,7 @@ export default function PrivacyPolicyPage() {
                       For certain activities, we ask for your explicit consent before processing
                       your data.
                     </p>
-                    <p className="text-sm text-purple-700">
+                    <p className="text-base text-purple-700">
                       <strong>Examples:</strong> Marketing cookies, targeted advertising,
                       newsletters, optional marketing communications.
                     </p>
@@ -380,7 +380,7 @@ export default function PrivacyPolicyPage() {
                       Sometimes we must process data to comply with legal requirements in the
                       construction and scaffolding industry.
                     </p>
-                    <p className="text-sm text-red-700">
+                    <p className="text-base text-red-700">
                       <strong>Examples:</strong> Health and safety compliance, tax obligations,
                       insurance requirements, regulatory reporting.
                     </p>
@@ -391,7 +391,7 @@ export default function PrivacyPolicyPage() {
 
               {/* Data Sharing */}
               <section id="data-sharing" className="mb-12">
-                <h2 className="text-3xl font-semibold mb-6">5. Data Sharing & Third Parties</h2>
+                <h2 className="text-2xl font-semibold mb-6">5. Data Sharing & Third Parties</h2>
                 <p className="mb-6">
                   We may share your personal data with trusted third parties who help us provide our
                   scaffolding services:
@@ -399,7 +399,7 @@ export default function PrivacyPolicyPage() {
 
                 <div className="space-y-6">
                   <div className="border border-surface-border rounded-lg p-6">
-                    <h3 className="text-lg font-semibold mb-4">Service Providers</h3>
+                    <h3 className="text-base font-semibold mb-4">Service Providers</h3>
                     <ul className="list-disc pl-6 space-y-2">
                       <li>
                         <strong>Analytics Services:</strong> Google Analytics for website
@@ -425,7 +425,7 @@ export default function PrivacyPolicyPage() {
                   </div>
 
                   <div className="border border-surface-border rounded-lg p-6">
-                    <h3 className="text-lg font-semibold mb-4">Scaffolding Industry Partners</h3>
+                    <h3 className="text-base font-semibold mb-4">Scaffolding Industry Partners</h3>
                     <ul className="list-disc pl-6 space-y-2">
                       <li>
                         <strong>Subcontractors:</strong> Qualified scaffolding professionals who
@@ -447,7 +447,7 @@ export default function PrivacyPolicyPage() {
                   </div>
 
                   <div className="border border-surface-border rounded-lg p-6">
-                    <h3 className="text-lg font-semibold mb-4">Legal & Regulatory</h3>
+                    <h3 className="text-base font-semibold mb-4">Legal & Regulatory</h3>
                     <ul className="list-disc pl-6 space-y-2">
                       <li>
                         <strong>Legal Authorities:</strong> When required by law or court order
@@ -470,7 +470,7 @@ export default function PrivacyPolicyPage() {
 
                 {/* eslint-disable platform/no-hardcoded-tailwind-colors -- Intentional: semantic legal basis callout */}
                 <div className="mt-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
-                  <p className="text-sm text-yellow-800">
+                  <p className="text-base text-yellow-800">
                     <strong>Data Protection:</strong> All third parties are contractually required
                     to protect your data and use it only for the specific purposes we&apos;ve
                     authorized. We never sell your personal data to third parties.
@@ -481,7 +481,7 @@ export default function PrivacyPolicyPage() {
 
               {/* Data Retention */}
               <section id="data-retention" className="mb-12">
-                <h2 className="text-3xl font-semibold mb-6">6. Data Retention</h2>
+                <h2 className="text-2xl font-semibold mb-6">6. Data Retention</h2>
                 <p className="mb-6">
                   We keep your personal data only as long as necessary for the purposes outlined in
                   this policy and to meet our legal obligations:
@@ -580,7 +580,7 @@ export default function PrivacyPolicyPage() {
 
                 {/* eslint-disable platform/no-hardcoded-tailwind-colors -- Intentional: semantic legal basis callout */}
                 <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-                  <p className="text-sm text-blue-800">
+                  <p className="text-base text-blue-800">
                     <strong>Note:</strong> Some records may be retained longer if required for legal
                     proceedings or regulatory investigations. We review retention periods regularly
                     and securely delete data when no longer needed.
@@ -591,69 +591,69 @@ export default function PrivacyPolicyPage() {
 
               {/* Your Rights */}
               <section id="your-rights" className="mb-12">
-                <h2 className="text-3xl font-semibold mb-6">7. Your Rights</h2>
+                <h2 className="text-2xl font-semibold mb-6">7. Your Rights</h2>
                 <p className="mb-6">
                   Under UK GDPR, you have the following rights regarding your personal data:
                 </p>
 
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="border border-surface-border rounded-lg p-6">
-                    <h3 className="text-lg font-semibold mb-3">Right of Access</h3>
-                    <p className="text-sm text-surface-foreground mb-2">
+                    <h3 className="text-base font-semibold mb-3">Right of Access</h3>
+                    <p className="text-base text-surface-foreground mb-2">
                       Request copies of your personal data we hold and information about how we
                       process it.
                     </p>
-                    <p className="text-xs text-surface-muted-foreground">
+                    <p className="text-sm text-surface-muted-foreground">
                       We&apos;ll provide this information free of charge within one month.
                     </p>
                   </div>
 
                   <div className="border border-surface-border rounded-lg p-6">
-                    <h3 className="text-lg font-semibold mb-3">Right of Rectification</h3>
-                    <p className="text-sm text-surface-foreground mb-2">
+                    <h3 className="text-base font-semibold mb-3">Right of Rectification</h3>
+                    <p className="text-base text-surface-foreground mb-2">
                       Request correction of incomplete or inaccurate personal data.
                     </p>
-                    <p className="text-xs text-surface-muted-foreground">
+                    <p className="text-sm text-surface-muted-foreground">
                       We&apos;ll update your information and notify relevant third parties.
                     </p>
                   </div>
 
                   <div className="border border-surface-border rounded-lg p-6">
-                    <h3 className="text-lg font-semibold mb-3">Right of Erasure</h3>
-                    <p className="text-sm text-surface-foreground mb-2">
+                    <h3 className="text-base font-semibold mb-3">Right of Erasure</h3>
+                    <p className="text-base text-surface-foreground mb-2">
                       Request deletion of your personal data in certain circumstances.
                     </p>
-                    <p className="text-xs text-surface-muted-foreground">
+                    <p className="text-sm text-surface-muted-foreground">
                       Subject to our legal obligations and legitimate interests.
                     </p>
                   </div>
 
                   <div className="border border-surface-border rounded-lg p-6">
-                    <h3 className="text-lg font-semibold mb-3">Right to Restrict Processing</h3>
-                    <p className="text-sm text-surface-foreground mb-2">
+                    <h3 className="text-base font-semibold mb-3">Right to Restrict Processing</h3>
+                    <p className="text-base text-surface-foreground mb-2">
                       Request that we limit how we use your personal data.
                     </p>
-                    <p className="text-xs text-surface-muted-foreground">
+                    <p className="text-sm text-surface-muted-foreground">
                       Available in specific circumstances outlined by UK GDPR.
                     </p>
                   </div>
 
                   <div className="border border-surface-border rounded-lg p-6">
-                    <h3 className="text-lg font-semibold mb-3">Right of Data Portability</h3>
-                    <p className="text-sm text-surface-foreground mb-2">
+                    <h3 className="text-base font-semibold mb-3">Right of Data Portability</h3>
+                    <p className="text-base text-surface-foreground mb-2">
                       Receive your personal data in a machine-readable format.
                     </p>
-                    <p className="text-xs text-surface-muted-foreground">
+                    <p className="text-sm text-surface-muted-foreground">
                       Applies to data processed automatically based on consent or contract.
                     </p>
                   </div>
 
                   <div className="border border-surface-border rounded-lg p-6">
-                    <h3 className="text-lg font-semibold mb-3">Right to Object</h3>
-                    <p className="text-sm text-surface-foreground mb-2">
+                    <h3 className="text-base font-semibold mb-3">Right to Object</h3>
+                    <p className="text-base text-surface-foreground mb-2">
                       Object to processing based on legitimate interests or for marketing purposes.
                     </p>
-                    <p className="text-xs text-surface-muted-foreground">
+                    <p className="text-sm text-surface-muted-foreground">
                       We&apos;ll stop processing unless we have compelling legitimate grounds.
                     </p>
                   </div>
@@ -666,7 +666,7 @@ export default function PrivacyPolicyPage() {
                     To exercise any of these rights, please contact us using the details in Section
                     11. We may need to verify your identity before processing your request.
                   </p>
-                  <div className="text-sm text-green-700">
+                  <div className="text-base text-green-700">
                     <p>
                       <strong>Response Time:</strong> We&apos;ll respond within one month (or two
                       months for complex requests)
@@ -686,7 +686,7 @@ export default function PrivacyPolicyPage() {
 
               {/* International Transfers */}
               <section id="international-transfers" className="mb-12">
-                <h2 className="text-3xl font-semibold mb-6">8. International Transfers</h2>
+                <h2 className="text-2xl font-semibold mb-6">8. International Transfers</h2>
                 <p className="mb-6">
                   Some of our service providers are located outside the UK. When we transfer your
                   data internationally, we ensure appropriate safeguards are in place:
@@ -694,13 +694,13 @@ export default function PrivacyPolicyPage() {
 
                 <div className="space-y-6">
                   <div className="border border-surface-border rounded-lg p-6">
-                    <h3 className="text-lg font-semibold mb-4">
+                    <h3 className="text-base font-semibold mb-4">
                       Google Services (Analytics & Ads)
                     </h3>
                     <p className="text-surface-foreground mb-2">
                       Google processes data in various countries including the United States.
                     </p>
-                    <ul className="list-disc pl-6 space-y-1 text-sm text-surface-muted-foreground">
+                    <ul className="list-disc pl-6 space-y-1 text-base text-surface-muted-foreground">
                       <li>Google is certified under the EU-US Data Privacy Framework</li>
                       <li>Standard Contractual Clauses provide additional protection</li>
                       <li>Google implements technical and organizational security measures</li>
@@ -708,11 +708,11 @@ export default function PrivacyPolicyPage() {
                   </div>
 
                   <div className="border border-surface-border rounded-lg p-6">
-                    <h3 className="text-lg font-semibold mb-4">Facebook/Meta Services</h3>
+                    <h3 className="text-base font-semibold mb-4">Facebook/Meta Services</h3>
                     <p className="text-surface-foreground mb-2">
                       Facebook may process data in the United States and other countries.
                     </p>
-                    <ul className="list-disc pl-6 space-y-1 text-sm text-surface-muted-foreground">
+                    <ul className="list-disc pl-6 space-y-1 text-base text-surface-muted-foreground">
                       <li>Meta is certified under the EU-US Data Privacy Framework</li>
                       <li>Standard Contractual Clauses apply to data transfers</li>
                       <li>Additional security measures protect data in transit and storage</li>
@@ -722,7 +722,7 @@ export default function PrivacyPolicyPage() {
 
                 {/* eslint-disable platform/no-hardcoded-tailwind-colors -- Intentional: semantic legal basis callout */}
                 <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-                  <p className="text-sm text-blue-800">
+                  <p className="text-base text-blue-800">
                     <strong>Your Protection:</strong> We only work with providers who can
                     demonstrate appropriate data protection standards equivalent to UK GDPR
                     requirements.
@@ -733,7 +733,7 @@ export default function PrivacyPolicyPage() {
 
               {/* Security */}
               <section id="security" className="mb-12">
-                <h2 className="text-3xl font-semibold mb-6">9. Data Security</h2>
+                <h2 className="text-2xl font-semibold mb-6">9. Data Security</h2>
                 <p className="mb-6">
                   We implement appropriate technical and organizational measures to protect your
                   personal data against unauthorized access, alteration, disclosure, or destruction:
@@ -741,8 +741,8 @@ export default function PrivacyPolicyPage() {
 
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="border border-surface-border rounded-lg p-6">
-                    <h3 className="text-lg font-semibold mb-4">Technical Measures</h3>
-                    <ul className="list-disc pl-6 space-y-2 text-sm">
+                    <h3 className="text-base font-semibold mb-4">Technical Measures</h3>
+                    <ul className="list-disc pl-6 space-y-2 text-base">
                       <li>Encryption of data in transit and at rest</li>
                       <li>Secure server infrastructure and hosting</li>
                       <li>Regular security updates and patches</li>
@@ -753,8 +753,8 @@ export default function PrivacyPolicyPage() {
                   </div>
 
                   <div className="border border-surface-border rounded-lg p-6">
-                    <h3 className="text-lg font-semibold mb-4">Organizational Measures</h3>
-                    <ul className="list-disc pl-6 space-y-2 text-sm">
+                    <h3 className="text-base font-semibold mb-4">Organizational Measures</h3>
+                    <ul className="list-disc pl-6 space-y-2 text-base">
                       <li>Staff training on data protection principles</li>
                       <li>Access controls limiting data access to authorized personnel</li>
                       <li>Regular security assessments and reviews</li>
@@ -767,7 +767,7 @@ export default function PrivacyPolicyPage() {
 
                 {/* eslint-disable platform/no-hardcoded-tailwind-colors -- Intentional: semantic legal basis callout */}
                 <div className="mt-6 p-4 bg-red-50 border border-red-200 rounded-lg">
-                  <p className="text-sm text-red-800">
+                  <p className="text-base text-red-800">
                     <strong>Data Breach:</strong> In the unlikely event of a data breach that poses
                     a risk to your rights, we will notify you and the ICO within 72 hours as
                     required by UK GDPR.
@@ -778,7 +778,7 @@ export default function PrivacyPolicyPage() {
 
               {/* Cookies */}
               <section id="cookies" className="mb-12">
-                <h2 className="text-3xl font-semibold mb-6">10. Cookies</h2>
+                <h2 className="text-2xl font-semibold mb-6">10. Cookies</h2>
                 <p className="mb-4">
                   Our website uses cookies to improve your experience and provide analytics data.
                   For detailed information about our use of cookies, including:
@@ -800,15 +800,15 @@ export default function PrivacyPolicyPage() {
 
               {/* Contact & Complaints */}
               <section id="contact-complaints" className="mb-12">
-                <h2 className="text-3xl font-semibold mb-6">11. Contact & Complaints</h2>
+                <h2 className="text-2xl font-semibold mb-6">11. Contact & Complaints</h2>
 
                 <div className="grid md:grid-cols-2 gap-8 mb-8">
                   <div className="border border-surface-border rounded-lg p-6">
-                    <h3 className="text-lg font-semibold mb-4">Contact Us</h3>
+                    <h3 className="text-base font-semibold mb-4">Contact Us</h3>
                     <p className="mb-4">
                       For any questions about this Privacy Policy or to exercise your rights:
                     </p>
-                    <div className="space-y-2 text-sm text-surface-foreground">
+                    <div className="space-y-2 text-base text-surface-foreground">
                       <p>
                         <strong>{siteConfig.business.legalName}</strong>
                       </p>
@@ -833,12 +833,12 @@ export default function PrivacyPolicyPage() {
                   </div>
 
                   <div className="border border-surface-border rounded-lg p-6">
-                    <h3 className="text-lg font-semibold mb-4">Make a Complaint</h3>
+                    <h3 className="text-base font-semibold mb-4">Make a Complaint</h3>
                     <p className="mb-4">
                       If you&apos;re not satisfied with how we handle your personal data, you can
                       complain to:
                     </p>
-                    <div className="space-y-2 text-sm text-surface-foreground">
+                    <div className="space-y-2 text-base text-surface-foreground">
                       <p>
                         <strong>Information Commissioner&apos;s Office (ICO)</strong>
                       </p>
@@ -874,7 +874,7 @@ export default function PrivacyPolicyPage() {
                 </div>
 
                 <div className="p-4 bg-surface-muted border border-surface-border rounded-lg">
-                  <p className="text-sm text-surface-foreground">
+                  <p className="text-base text-surface-foreground">
                     <strong>Response Times:</strong> We aim to respond to all privacy-related
                     inquiries within 5 working days, and formal data subject requests within one
                     month as required by UK GDPR.
@@ -884,7 +884,7 @@ export default function PrivacyPolicyPage() {
 
               {/* Changes */}
               <section id="changes" className="mb-12 border-t pt-8">
-                <h2 className="text-3xl font-semibold mb-6">12. Changes to This Policy</h2>
+                <h2 className="text-2xl font-semibold mb-6">12. Changes to This Policy</h2>
                 <p className="mb-4">
                   We review this Privacy Policy regularly and may update it to reflect changes in
                   our practices or legal requirements. Significant changes will be communicated by:
@@ -900,7 +900,7 @@ export default function PrivacyPolicyPage() {
 
                 <div className="bg-surface-muted rounded-lg p-6">
                   <h3 className="font-semibold mb-2">Current Version Information:</h3>
-                  <div className="grid md:grid-cols-3 gap-4 text-sm text-surface-muted-foreground">
+                  <div className="grid md:grid-cols-3 gap-4 text-base text-surface-muted-foreground">
                     <div>
                       <p>
                         <strong>Last Updated:</strong> {lastUpdated}
@@ -921,7 +921,7 @@ export default function PrivacyPolicyPage() {
 
                 {/* eslint-disable platform/no-hardcoded-tailwind-colors -- Intentional: semantic legal basis callout */}
                 <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-                  <p className="text-sm text-blue-800">
+                  <p className="text-base text-blue-800">
                     <strong>Stay Informed:</strong> We recommend checking this Privacy Policy
                     periodically to stay informed about how we protect your personal information.
                     Continued use of our services after updates indicates your acceptance of any
