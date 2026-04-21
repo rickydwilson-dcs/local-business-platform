@@ -177,6 +177,37 @@ function isKnownClass(cls: string, reg: TokenRegistry): boolean {
   return false;
 }
 
+/**
+ * Scan a directory's globals.css files for site-defined utility classes —
+ * these are declared via `.classname { @apply ... }` and are registered by
+ * Tailwind's CSS build, not by the theme-system plugin. We need to recognise
+ * them to avoid false positives on legitimate site utilities like
+ * `text-body-lg`, `heading-hero`, etc.
+ */
+function collectSiteDefinedUtilities(dir: string): Set<string> {
+  const defined = new Set<string>();
+  const exts = new Set([".css", ".scss"]);
+
+  function walk(p: string) {
+    if (!fs.existsSync(p)) return;
+    const stat = fs.statSync(p);
+    if (stat.isDirectory()) {
+      const base = path.basename(p);
+      if (base === "node_modules" || base === ".next" || base === ".turbo" || base === "dist")
+        return;
+      for (const entry of fs.readdirSync(p)) walk(path.join(p, entry));
+    } else if (stat.isFile()) {
+      if (!exts.has(path.extname(p))) return;
+      const content = fs.readFileSync(p, "utf8");
+      for (const m of content.matchAll(/^\s*\.([a-z0-9\-]+)\s*\{/gm)) {
+        defined.add(m[1]);
+      }
+    }
+  }
+  walk(dir);
+  return defined;
+}
+
 function scanDir(dir: string): Map<string, Array<{ file: string; line: number }>> {
   const hits = new Map<string, Array<{ file: string; line: number }>>();
   const exts = new Set([".tsx", ".ts", ".jsx", ".js", ".json", ".md", ".mdx", ".css"]);
@@ -235,21 +266,33 @@ async function main() {
     `[preflight-tokens] Registry: ${registry.explicitClasses.size} explicit utilities, ${registry.extendColorPaths.size} extend color paths`
   );
 
+  const siteDefined = new Set<string>();
+  for (const dir of scanDirs) {
+    const absDir = path.resolve(dir);
+    for (const cls of collectSiteDefinedUtilities(absDir)) siteDefined.add(cls);
+  }
+  if (siteDefined.size > 0) {
+    console.log(
+      `[preflight-tokens] Site-defined utilities (via @apply in .css): ${siteDefined.size}`
+    );
+  }
+
   const findings: Finding[] = [];
   for (const dir of scanDirs) {
     const absDir = path.resolve(dir);
     console.log(`[preflight-tokens] Scanning ${absDir}`);
     const hits = scanDir(absDir);
     for (const [cls, occurrences] of hits) {
-      if (!isKnownClass(cls, registry)) {
-        for (const occ of occurrences) {
-          findings.push({
-            class: cls,
-            file: occ.file,
-            line: occ.line,
-            reason: "class is theme-token-shaped but not registered in tailwind-plugin",
-          });
-        }
+      if (isKnownClass(cls, registry)) continue;
+      if (siteDefined.has(cls)) continue;
+      for (const occ of occurrences) {
+        findings.push({
+          class: cls,
+          file: occ.file,
+          line: occ.line,
+          reason:
+            "class is theme-token-shaped but not registered in tailwind-plugin and not defined as a site utility in globals.css",
+        });
       }
     }
   }
