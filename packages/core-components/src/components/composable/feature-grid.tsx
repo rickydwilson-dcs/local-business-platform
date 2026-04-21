@@ -84,7 +84,6 @@ export function FeatureGrid({ slots: slotOverrides, layout, data, className }: F
                 className="group bg-surface-card border border-surface-card-border rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow"
               >
                 {feature.image && (
-                  // eslint-disable-next-line @next/next/no-img-element
                   <img
                     src={feature.image}
                     alt={feature.imageAlt ?? feature.title}
