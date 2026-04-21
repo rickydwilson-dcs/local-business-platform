@@ -31,6 +31,11 @@ export const COMPONENT_NAMES = [
   "WhyChooseUsSection",
   "EmergencyBanner",
   "RateCardsSection",
+  "CountyGatewayCards",
+  "TownFinderSection",
+  "LocalAuthorityExpertise",
+  "CoverageMapSection",
+  "PricingPackagesSection",
 ] as const;
 
 export type ComponentName = (typeof COMPONENT_NAMES)[number];

@@ -1,0 +1,134 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "description": "Performance baseline thresholds for Colossus Scaffolding website",
+  "version": "1.0.0",
+  "lastUpdated": "2025-10-09",
+  "thresholds": {
+    "coreWebVitals": {
+      "LCP": {
+        "good": 1200,
+        "warning": 2000,
+        "critical": 3000,
+        "description": "Largest Contentful Paint - Main content should load quickly"
+      },
+      "FID": {
+        "good": 100,
+        "warning": 300,
+        "description": "First Input Delay - Page should respond quickly to user input"
+      },
+      "CLS": {
+        "good": 0.1,
+        "warning": 0.15,
+        "critical": 0.2,
+        "description": "Cumulative Layout Shift - Visual stability, no unexpected shifts"
+      },
+      "FCP": {
+        "good": 1800,
+        "warning": 3000,
+        "description": "First Contentful Paint - Content should appear quickly"
+      },
+      "TTFB": {
+        "good": 600,
+        "warning": 1800,
+        "description": "Time to First Byte - Server response time"
+      },
+      "TBT": {
+        "good": 200,
+        "warning": 600,
+        "description": "Total Blocking Time - Main thread should not be blocked"
+      }
+    },
+    "resourceBudget": {
+      "totalPageWeight": {
+        "budget": 2097152,
+        "description": "2MB total page weight",
+        "unit": "bytes"
+      },
+      "imageSize": {
+        "budget": 512000,
+        "description": "500KB per image max",
+        "unit": "bytes"
+      },
+      "jsSize": {
+        "budget": 307200,
+        "description": "300KB per JS file max",
+        "unit": "bytes"
+      },
+      "cssSize": {
+        "budget": 102400,
+        "description": "100KB per CSS file max",
+        "unit": "bytes"
+      },
+      "totalRequests": {
+        "budget": 50,
+        "description": "Maximum 50 HTTP requests",
+        "unit": "count"
+      }
+    },
+    "timing": {
+      "domContentLoaded": {
+        "budget": 2000,
+        "description": "DOM ready in under 2 seconds",
+        "unit": "ms"
+      },
+      "loadComplete": {
+        "budget": 3000,
+        "description": "Full page load in under 3 seconds",
+        "unit": "ms"
+      }
+    },
+    "mobile": {
+      "loadTime": {
+        "budget": 3500,
+        "description": "Mobile load time target",
+        "unit": "ms"
+      },
+      "FCP": {
+        "budget": 2200,
+        "description": "Mobile First Contentful Paint",
+        "unit": "ms"
+      }
+    }
+  },
+  "pageSpecificThresholds": {
+    "homepage": {
+      "LCP": 2000,
+      "description": "Homepage is critical, stricter threshold"
+    },
+    "servicePage": {
+      "LCP": 2500,
+      "description": "Service pages should load quickly"
+    },
+    "locationPage": {
+      "LCP": 2500,
+      "description": "Location pages should load quickly"
+    },
+    "contactPage": {
+      "LCP": 2000,
+      "FID": 50,
+      "description": "Contact form needs to be interactive quickly"
+    }
+  },
+  "pagespeedTargets": {
+    "desktop": {
+      "performance": 90,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 100
+    },
+    "mobile": {
+      "performance": 85,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 100
+    }
+  },
+  "notes": [
+    "These thresholds are based on Google's Core Web Vitals recommendations",
+    "Good: Green zone - Target to maintain",
+    "Warning: Yellow zone - Needs improvement if crossed",
+    "Budget exceeded: Red zone - Must fix before deployment",
+    "Test against these thresholds on every deploy to staging/production",
+    "Update baselines only after intentional performance improvements"
+  ]
+}

@@ -110,4 +110,72 @@ export const COMPOSITION_CATALOG = [
       fullBleed: "boolean — makes section min-h-[50vh]",
     },
   },
+  {
+    name: "CountyGatewayCards",
+    description:
+      "Gateway cards per county linking to county overview pages. Use on locations index when locations are grouped by region.",
+    slots: {
+      showSectionHeading: "Section-level heading",
+      showDescription: "County description paragraph",
+      showHighlights: "List of up to 4 county highlights",
+      showTownCount: "Badge showing number of towns in county",
+    },
+    layoutParams: {
+      columns: [2, 3],
+      background: ["surface", "subtle", "inverse", "brand"],
+    },
+  },
+  {
+    name: "TownFinderSection",
+    description:
+      "Search-driven town autocomplete (client component). Use on locations index when users need to find a specific town by name.",
+    slots: {
+      showSectionHeading: "Section-level heading",
+      showIntro: "Intro paragraph",
+      showCountyBadge: "Display parent county name next to each town result",
+    },
+    layoutParams: {
+      background: ["surface", "subtle", "inverse", "brand"],
+    },
+  },
+  {
+    name: "LocalAuthorityExpertise",
+    description:
+      "Three-column display of local authority / council expertise: expertise bullets, fast-track claims, coverage neighbourhoods. Renders nothing if frontmatter field is absent.",
+    slots: {
+      showExpertiseBullets: "Council expertise bullet list",
+      showFastTrackClaims: "Fast-track / accelerated claims bullets",
+      showCoverageNeighbourhoods: "Neighbourhood coverage list",
+    },
+    layoutParams: {
+      background: ["surface", "subtle", "inverse", "brand"],
+    },
+  },
+  {
+    name: "CoverageMapSection",
+    description:
+      "Leaflet-based map with town markers. Lazy-loaded via next/dynamic; renders a semantic marker list below the map.",
+    slots: {
+      showSectionHeading: "Section-level heading",
+      showIntro: "Intro paragraph above the map",
+      showMarkerList: "Plain-text list of marker names below the map",
+    },
+    layoutParams: {
+      background: ["surface", "subtle", "inverse", "brand"],
+    },
+  },
+  {
+    name: "PricingPackagesSection",
+    description:
+      "Three-tier pricing packages (essential / standard / premium pattern). One of the packages may be marked highlighted: true for emphasis.",
+    slots: {
+      showSectionHeading: "Section-level heading",
+      showIntro: "Intro paragraph",
+      showFeatures: "Feature bullet list per package",
+      showHighlightedBadge: "Ribbon badge on the highlighted tier",
+    },
+    layoutParams: {
+      background: ["surface", "subtle", "inverse", "brand"],
+    },
+  },
 ] as const;

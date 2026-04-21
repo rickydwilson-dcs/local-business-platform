@@ -21,6 +21,8 @@ interface FeatureItem {
   description?: string;
   icon?: string;
   href?: string;
+  image?: string;
+  imageAlt?: string;
 }
 
 interface FeatureGridProps {
@@ -53,6 +55,79 @@ export function FeatureGrid({ slots: slotOverrides, layout, data, className }: F
         : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3";
 
   const features = Array.isArray(data.features) ? (data.features as FeatureItem[]) : [];
+
+  if (variant === "large-feature") {
+    return (
+      <section
+        className={`${bg} ${layout?.background === "inverse" ? "noise-overlay" : ""} ${className ?? ""}`}
+        data-component="FeatureGrid"
+        data-variant="large-feature"
+      >
+        <div className="mx-auto max-w-6xl px-4 py-16 md:py-24 sm:px-6 lg:px-8">
+          {slots.showSectionHeading && d.heading && (
+            <h2
+              data-slot="heading"
+              className="text-2xl md:text-3xl font-bold tracking-tight mb-4 text-surface-foreground"
+            >
+              {d.heading}
+            </h2>
+          )}
+          {slots.showSectionIntro && d.intro && (
+            <p className="text-surface-muted-foreground mb-12 max-w-2xl text-base leading-relaxed">
+              {d.intro}
+            </p>
+          )}
+          <div className="grid gap-8 md:grid-cols-2">
+            {features.map((feature, i) => (
+              <article
+                key={i}
+                className="group bg-surface-card border border-surface-card-border rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow"
+              >
+                {feature.image && (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={feature.image}
+                    alt={feature.imageAlt ?? feature.title}
+                    className="w-full h-48 object-cover"
+                    loading="lazy"
+                  />
+                )}
+                <div className="p-8">
+                  {slots.showIcons && feature.icon && (
+                    <div className="w-12 h-12 rounded-xl bg-brand-primary/10 flex items-center justify-center mb-4 text-2xl">
+                      {feature.icon}
+                    </div>
+                  )}
+                  <h3
+                    data-slot="featureTitle"
+                    className="text-xl font-bold text-surface-foreground mb-3"
+                  >
+                    {feature.title}
+                  </h3>
+                  {slots.showDescriptions && feature.description && (
+                    <p className="text-sm text-surface-muted-foreground leading-relaxed">
+                      {feature.description}
+                    </p>
+                  )}
+                  {feature.href && (
+                    <Link
+                      href={feature.href}
+                      className="inline-flex items-center mt-5 text-brand-primary font-semibold group-hover:translate-x-1 transition-transform text-sm"
+                    >
+                      Learn more{" "}
+                      <span aria-hidden="true" className="ml-1">
+                        →
+                      </span>
+                    </Link>
+                  )}
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   if (variant === "list") {
     return (
