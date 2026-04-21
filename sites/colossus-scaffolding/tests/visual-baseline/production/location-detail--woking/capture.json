@@ -1,0 +1,13 @@
+{
+  "path": "/locations/woking",
+  "pageType": "location-detail",
+  "slug": "woking",
+  "status": 200,
+  "error": null,
+  "screenshots": {
+    "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--woking/desktop.png",
+    "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--woking/tablet.png",
+    "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--woking/mobile.png"
+  },
+  "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--woking/dom.json"
+}

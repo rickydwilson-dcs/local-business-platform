@@ -1,0 +1,13 @@
+{
+  "path": "/services/temporary-roof-systems",
+  "pageType": "service-detail",
+  "slug": "temporary-roof-systems",
+  "status": 200,
+  "error": null,
+  "screenshots": {
+    "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--temporary-roof-systems/desktop.png",
+    "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--temporary-roof-systems/tablet.png",
+    "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--temporary-roof-systems/mobile.png"
+  },
+  "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--temporary-roof-systems/dom.json"
+}

@@ -130,7 +130,7 @@ function ProjectSummary({ project }: { project: Project }) {
               <Link
                 key={serviceSlug}
                 href={`/services/${serviceSlug}`}
-                className="text-xs bg-brand-primary/10 text-brand-primary px-2 py-1 rounded-full hover:bg-brand-primary/20 transition-colors"
+                className="text-sm bg-brand-primary/10 text-brand-primary px-2 py-1 rounded-full hover:bg-brand-primary/20 transition-colors"
               >
                 {serviceSlug
                   .split("-")
@@ -211,7 +211,7 @@ function RelatedProjects({ projects, currentSlug }: { projects: Project[]; curre
                 <h3 className="font-bold text-surface-foreground mb-2 line-clamp-2 hover:text-brand-primary transition-colors">
                   <Link href={`/projects/${project.slug}`}>{project.title}</Link>
                 </h3>
-                <p className="text-sm text-surface-tertiary">
+                <p className="text-base text-surface-tertiary">
                   {project.locationName} · {project.year}
                 </p>
               </div>
@@ -272,7 +272,7 @@ export default async function ProjectPage({ params }: { params: Promise<Params> 
                 <ProjectSummary project={frontmatter} />
 
                 {/* Prose Content */}
-                <div className="prose prose-lg max-w-none prose-headings:text-surface-foreground prose-p:text-surface-secondary prose-a:text-brand-primary prose-a:no-underline hover:prose-a:underline prose-strong:text-surface-foreground prose-li:text-surface-secondary prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-6 prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-4">
+                <div className="prose prose-lg max-w-none prose-headings:text-surface-foreground prose-p:text-surface-secondary prose-a:text-brand-primary prose-a:no-underline hover:prose-a:underline prose-strong:text-surface-foreground prose-li:text-surface-secondary prose-h2:text-xl prose-h2:mt-12 prose-h2:mb-6 prose-h3:text-lg prose-h3:mt-8 prose-h3:mb-4">
                   {mdxContent}
                 </div>
 

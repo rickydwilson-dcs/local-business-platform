@@ -1,0 +1,13 @@
+{
+  "path": "/services/industrial-scaffolding",
+  "pageType": "service-detail",
+  "slug": "industrial-scaffolding",
+  "status": 200,
+  "error": null,
+  "screenshots": {
+    "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--industrial-scaffolding/desktop.png",
+    "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--industrial-scaffolding/tablet.png",
+    "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--industrial-scaffolding/mobile.png"
+  },
+  "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--industrial-scaffolding/dom.json"
+}

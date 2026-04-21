@@ -1,0 +1,13 @@
+{
+  "path": "/locations/horsham",
+  "pageType": "location-detail",
+  "slug": "horsham",
+  "status": 200,
+  "error": null,
+  "screenshots": {
+    "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--horsham/desktop.png",
+    "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--horsham/tablet.png",
+    "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--horsham/mobile.png"
+  },
+  "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--horsham/dom.json"
+}

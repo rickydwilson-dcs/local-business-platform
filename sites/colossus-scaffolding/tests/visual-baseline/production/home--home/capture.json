@@ -1,0 +1,13 @@
+{
+  "path": "/",
+  "pageType": "home",
+  "slug": "home",
+  "status": 200,
+  "error": null,
+  "screenshots": {
+    "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/home--home/desktop.png",
+    "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/home--home/tablet.png",
+    "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/home--home/mobile.png"
+  },
+  "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/home--home/dom.json"
+}

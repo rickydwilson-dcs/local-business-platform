@@ -1,0 +1,13 @@
+{
+  "path": "/privacy-policy",
+  "pageType": "privacy",
+  "slug": "privacy",
+  "status": 200,
+  "error": null,
+  "screenshots": {
+    "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/privacy--privacy/desktop.png",
+    "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/privacy--privacy/tablet.png",
+    "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/privacy--privacy/mobile.png"
+  },
+  "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/privacy--privacy/dom.json"
+}

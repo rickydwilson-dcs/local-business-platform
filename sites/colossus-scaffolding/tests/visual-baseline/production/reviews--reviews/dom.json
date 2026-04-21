@@ -1,0 +1,93 @@
+{
+  "h1": "What Our Customers Say",
+  "headingOutline": [
+    {
+      "level": 1,
+      "text": "What Our Customers Say"
+    },
+    {
+      "level": 2,
+      "text": "Why Choose Us?"
+    },
+    {
+      "level": 3,
+      "text": "TG20:21 Compliant"
+    },
+    {
+      "level": 3,
+      "text": "CISRS Qualified"
+    },
+    {
+      "level": 3,
+      "text": "Fast Response"
+    },
+    {
+      "level": 3,
+      "text": "£10M Insured"
+    },
+    {
+      "level": 2,
+      "text": "Featured Reviews"
+    },
+    {
+      "level": 3,
+      "text": "John Smith"
+    },
+    {
+      "level": 3,
+      "text": "Sarah Jones"
+    },
+    {
+      "level": 2,
+      "text": "All Reviews"
+    },
+    {
+      "level": 3,
+      "text": "John Smith"
+    },
+    {
+      "level": 3,
+      "text": "Sarah Jones"
+    },
+    {
+      "level": 3,
+      "text": "Mike Wilson"
+    },
+    {
+      "level": 2,
+      "text": "Ready to Experience Our Service?"
+    },
+    {
+      "level": 2,
+      "text": "Colossus Scaffolding"
+    },
+    {
+      "level": 3,
+      "text": "Our Services"
+    },
+    {
+      "level": 3,
+      "text": "Service Areas"
+    },
+    {
+      "level": 3,
+      "text": "Contact Info"
+    },
+    {
+      "level": 3,
+      "text": "We value your privacy"
+    }
+  ],
+  "sectionCount": 5,
+  "landmarks": {
+    "header": 1,
+    "main": 1,
+    "footer": 1,
+    "nav": 3
+  },
+  "imageCount": 2,
+  "linkCount": 58,
+  "markerCount": 0,
+  "bodyTextLength": 4382,
+  "title": "Customer Reviews | Colossus Scaffolding"
+}

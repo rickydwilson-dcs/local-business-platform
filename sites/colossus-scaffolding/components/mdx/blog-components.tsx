@@ -87,7 +87,9 @@ export const InfoBox: React.FC<InfoBoxProps> = ({ type = "info", title, children
         </div>
         <div className="flex-1">
           {title && <h4 className={`font-semibold ${s.title} mb-2`}>{title}</h4>}
-          <div className="text-surface-secondary text-sm leading-relaxed [&>p]:my-0">{children}</div>
+          <div className="text-surface-secondary text-base leading-relaxed [&>p]:my-0">
+            {children}
+          </div>
         </div>
       </div>
     </div>
@@ -175,7 +177,7 @@ export const FeatureCard: React.FC<FeatureCardProps> = ({ title, icon = "scaffol
         </div>
         <div className="flex-1">
           <h4 className="font-bold text-surface-foreground mb-2">{title}</h4>
-          <div className="text-surface-secondary text-sm leading-relaxed [&>p]:my-0 [&>ul]:my-2 [&>ul]:space-y-1 [&_li]:p-0 [&_li]:bg-transparent [&_li]:text-sm">
+          <div className="text-surface-secondary text-base leading-relaxed [&>p]:my-0 [&>ul]:my-2 [&>ul]:space-y-1 [&_li]:p-0 [&_li]:bg-transparent [&_li]:text-base">
             {children}
           </div>
         </div>
@@ -230,7 +232,7 @@ export const ComparisonTable: React.FC<ComparisonTableProps> = ({ headers, child
             {headers.map((header, idx) => (
               <th
                 key={idx}
-                className="px-4 py-3 text-left text-sm font-semibold text-surface-foreground border-b border-surface-subtle"
+                className="px-4 py-3 text-left text-base font-semibold text-surface-foreground border-b border-surface-subtle"
               >
                 {header}
               </th>
@@ -240,10 +242,10 @@ export const ComparisonTable: React.FC<ComparisonTableProps> = ({ headers, child
         <tbody>
           {rows.map((row, idx) => (
             <tr key={idx} className={idx % 2 === 0 ? "bg-surface-card" : "bg-surface-subtle"}>
-              <td className="px-4 py-3 text-sm font-medium text-surface-foreground border-b border-surface-subtle">
+              <td className="px-4 py-3 text-base font-medium text-surface-foreground border-b border-surface-subtle">
                 {row.label}
               </td>
-              <td className="px-4 py-3 text-sm text-surface-secondary border-b border-surface-subtle">
+              <td className="px-4 py-3 text-base text-surface-secondary border-b border-surface-subtle">
                 {row.content}
               </td>
             </tr>
@@ -291,7 +293,7 @@ export const CheckList: React.FC<CheckListProps> = ({ title, type = "check", chi
                 <span className="w-2 h-2 bg-brand-primary rounded-full flex-shrink-0 mt-2" />
               )}
               {type === "number" && (
-                <span className="w-6 h-6 bg-brand-primary text-white text-sm font-semibold rounded-full flex items-center justify-center flex-shrink-0">
+                <span className="w-6 h-6 bg-brand-primary text-white text-base font-semibold rounded-full flex items-center justify-center flex-shrink-0">
                   {idx + 1}
                 </span>
               )}
@@ -313,7 +315,9 @@ export interface QuoteBlockProps {
 export const QuoteBlock: React.FC<QuoteBlockProps> = ({ author, role, children }) => {
   return (
     <blockquote className="my-8 border-l-4 border-brand-primary bg-surface-subtle rounded-r-xl p-6">
-      <div className="text-surface-foreground text-lg italic leading-relaxed mb-4">{children}</div>
+      <div className="text-surface-foreground text-base italic leading-relaxed mb-4">
+        {children}
+      </div>
       {author && (
         <footer className="flex items-center gap-3">
           <div className="w-10 h-10 bg-brand-primary rounded-full flex items-center justify-center text-white font-semibold">
@@ -321,7 +325,7 @@ export const QuoteBlock: React.FC<QuoteBlockProps> = ({ author, role, children }
           </div>
           <div>
             <p className="font-semibold text-surface-foreground">{author}</p>
-            {role && <p className="text-sm text-surface-tertiary">{role}</p>}
+            {role && <p className="text-base text-surface-tertiary">{role}</p>}
           </div>
         </footer>
       )}
@@ -356,7 +360,9 @@ export const ImageWithCaption: React.FC<ImageWithCaptionProps> = ({
         />
       </div>
       {caption && (
-        <figcaption className="mt-3 text-sm text-surface-tertiary text-center italic">{caption}</figcaption>
+        <figcaption className="mt-3 text-base text-surface-tertiary text-center italic">
+          {caption}
+        </figcaption>
       )}
     </figure>
   );
@@ -387,18 +393,20 @@ export const StepByStep: React.FC<StepByStepProps> = ({ title, children }) => {
 
   return (
     <div className="my-8">
-      {title && <h3 className="text-xl font-bold text-surface-foreground mb-6">{title}</h3>}
+      {title && <h3 className="text-lg font-bold text-surface-foreground mb-6">{title}</h3>}
       <div className="space-y-4">
         {steps.map((step, idx) => (
           <div key={idx} className="flex gap-4">
             <div className="flex-shrink-0">
-              <div className="w-10 h-10 bg-brand-primary text-white rounded-full flex items-center justify-center font-bold text-lg">
+              <div className="w-10 h-10 bg-brand-primary text-white rounded-full flex items-center justify-center font-bold text-base">
                 {idx + 1}
               </div>
             </div>
             <div className="flex-1 pb-4 border-b border-surface-subtle last:border-0">
               <h4 className="font-semibold text-surface-foreground mb-2">{step.title}</h4>
-              <div className="text-surface-secondary text-sm leading-relaxed [&>p]:my-0">{step.content}</div>
+              <div className="text-surface-secondary text-base leading-relaxed [&>p]:my-0">
+                {step.content}
+              </div>
             </div>
           </div>
         ))}

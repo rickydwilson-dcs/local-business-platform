@@ -61,7 +61,7 @@ export const CoverageSection: React.FC<CoverageSectionProps> = ({
         {/* Badge */}
         {badge && (
           <div className="flex justify-center mb-6">
-            <span className="inline-flex items-center gap-2 px-4 py-2 bg-brand-primary/10 text-brand-primary text-sm font-medium rounded-full">
+            <span className="inline-flex items-center gap-2 px-4 py-2 bg-brand-primary/10 text-brand-primary text-base font-medium rounded-full">
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path
                   strokeLinecap="round"
@@ -82,7 +82,7 @@ export const CoverageSection: React.FC<CoverageSectionProps> = ({
         )}
 
         {/* Title */}
-        <h2 className="text-3xl sm:text-4xl font-bold text-center mb-4">
+        <h2 className="text-2xl sm:text-3xl font-bold text-center mb-4">
           <span className="text-surface-foreground">{title}</span>
           {titleHighlight && (
             <>
@@ -94,7 +94,9 @@ export const CoverageSection: React.FC<CoverageSectionProps> = ({
 
         {/* Description */}
         {description && (
-          <p className="text-surface-tertiary text-center text-lg max-w-2xl mx-auto mb-10">{description}</p>
+          <p className="text-surface-tertiary text-center text-base max-w-2xl mx-auto mb-10">
+            {description}
+          </p>
         )}
 
         {/* Region Cards Grid */}
@@ -124,7 +126,7 @@ export const CoverageSection: React.FC<CoverageSectionProps> = ({
                     />
                   </svg>
                 </div>
-                <h3 className="text-xl font-bold text-surface-foreground">{region.title}</h3>
+                <h3 className="text-lg font-bold text-surface-foreground">{region.title}</h3>
               </div>
 
               {/* Location Pills */}
@@ -133,7 +135,7 @@ export const CoverageSection: React.FC<CoverageSectionProps> = ({
                   <Link
                     key={locIdx}
                     href={loc.href}
-                    className="px-4 py-2 bg-surface-subtle hover:ring-2 hover:ring-brand-primary text-surface-secondary text-sm font-medium rounded-full transition-all"
+                    className="px-4 py-2 bg-surface-subtle hover:ring-2 hover:ring-brand-primary text-surface-secondary text-base font-medium rounded-full transition-all"
                   >
                     {loc.name}
                   </Link>

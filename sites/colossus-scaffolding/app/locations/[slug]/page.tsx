@@ -186,9 +186,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
       siteName: siteConfig.business.name,
       images: [
         {
-          url: locationData.heroImage
-            ? getImageUrl(locationData.heroImage)
-            : absUrl("/logo.svg"),
+          url: locationData.heroImage ? getImageUrl(locationData.heroImage) : absUrl("/logo.svg"),
           width: 1200,
           height: 630,
           alt: `Professional scaffolding services in ${locationData.title} - ${siteConfig.business.name}`,
@@ -235,7 +233,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
             <Breadcrumbs
               items={
                 locationData.breadcrumbs || [
-                  { name: 'Locations', href: '/locations' },
+                  { name: "Locations", href: "/locations" },
                   { name: locationData.title, href: `/locations/${slug}`, current: true },
                 ]
               }
@@ -331,10 +329,10 @@ export default async function Page({ params }: { params: Promise<Params> }) {
           <section className="py-16 bg-white">
             <div className="container-standard">
               <div className="text-center mb-12">
-                <h2 className="text-3xl font-semibold text-surface-foreground mb-4">
+                <h2 className="text-2xl font-semibold text-surface-foreground mb-4">
                   {locationData.towns.title}
                 </h2>
-                <p className="text-lg text-surface-foreground max-w-3xl mx-auto">
+                <p className="text-base text-surface-foreground max-w-3xl mx-auto">
                   {locationData.towns.description}
                 </p>
               </div>
@@ -347,13 +345,13 @@ export default async function Page({ params }: { params: Promise<Params> }) {
                       href={`/locations/${town.slug}`}
                       className="group p-6 bg-surface-muted rounded-lg border border-surface-subtle hover:border-brand-primary hover:shadow-lg transition-all duration-200"
                     >
-                      <h3 className="text-lg font-medium text-surface-foreground group-hover:text-brand-primary mb-2">
+                      <h3 className="text-base font-medium text-surface-foreground group-hover:text-brand-primary mb-2">
                         {town.name}
                       </h3>
-                      <p className="text-sm text-surface-foreground mb-3">{town.description}</p>
+                      <p className="text-base text-surface-foreground mb-3">{town.description}</p>
                       <div className="flex items-center justify-between">
                         {/* eslint-disable platform/no-hardcoded-tailwind-colors -- Intentional: semantic status indicator */}
-                        <span className="text-xs px-2 py-1 bg-green-100 text-green-700 rounded-full">
+                        <span className="text-sm px-2 py-1 bg-green-100 text-green-700 rounded-full">
                           Local Specialists
                         </span>
                         {/* eslint-enable platform/no-hardcoded-tailwind-colors */}

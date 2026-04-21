@@ -1,0 +1,13 @@
+{
+  "path": "/services/commercial-scaffolding/hastings",
+  "pageType": "service-location-detail",
+  "slug": "commercial-scaffolding--hastings",
+  "status": 200,
+  "error": null,
+  "screenshots": {
+    "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/service-location-detail--commercial-scaffolding--hastings/desktop.png",
+    "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/service-location-detail--commercial-scaffolding--hastings/tablet.png",
+    "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/service-location-detail--commercial-scaffolding--hastings/mobile.png"
+  },
+  "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/service-location-detail--commercial-scaffolding--hastings/dom.json"
+}

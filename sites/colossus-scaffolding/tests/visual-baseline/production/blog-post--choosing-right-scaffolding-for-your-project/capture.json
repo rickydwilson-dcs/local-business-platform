@@ -1,0 +1,13 @@
+{
+  "path": "/blog/choosing-right-scaffolding-for-your-project",
+  "pageType": "blog-post",
+  "slug": "choosing-right-scaffolding-for-your-project",
+  "status": 200,
+  "error": null,
+  "screenshots": {
+    "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/blog-post--choosing-right-scaffolding-for-your-project/desktop.png",
+    "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/blog-post--choosing-right-scaffolding-for-your-project/tablet.png",
+    "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/blog-post--choosing-right-scaffolding-for-your-project/mobile.png"
+  },
+  "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/blog-post--choosing-right-scaffolding-for-your-project/dom.json"
+}

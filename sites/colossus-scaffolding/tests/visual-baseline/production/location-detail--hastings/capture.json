@@ -1,0 +1,13 @@
+{
+  "path": "/locations/hastings",
+  "pageType": "location-detail",
+  "slug": "hastings",
+  "status": 200,
+  "error": null,
+  "screenshots": {
+    "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--hastings/desktop.png",
+    "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--hastings/tablet.png",
+    "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--hastings/mobile.png"
+  },
+  "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--hastings/dom.json"
+}

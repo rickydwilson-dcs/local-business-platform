@@ -1,11 +1,1 @@
 .vercel
-
-# Visual parity artefacts.
-# target/ and diffs/ are regenerable per-run, never committed.
-# production/ baseline (~400MB of PNGs + DOM snapshots) is regenerable via
-#   `tsx tools/visual-parity/capture-production.ts --baseline-dir sites/colossus-scaffolding/tests/visual-baseline`
-# Not committed; consider git-lfs or a separate baseline storage bucket before enabling CI.
-# The manifest.json IS tracked (it's small and defines which routes the gate covers).
-tests/visual-baseline/target/
-tests/visual-baseline/diffs/
-tests/visual-baseline/production/

@@ -163,21 +163,21 @@ export default async function BlogPostPage({ params }: { params: Promise<Params>
             <div className="container-standard">
               <div className="max-w-4xl mx-auto">
                 {/* Prose Content */}
-                <div className="prose prose-lg max-w-none prose-headings:text-surface-foreground prose-p:text-surface-secondary prose-a:text-brand-primary prose-a:no-underline hover:prose-a:underline prose-strong:text-surface-foreground prose-li:text-surface-secondary prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-6 prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-4">
+                <div className="prose prose-lg max-w-none prose-headings:text-surface-foreground prose-p:text-surface-secondary prose-a:text-brand-primary prose-a:no-underline hover:prose-a:underline prose-strong:text-surface-foreground prose-li:text-surface-secondary prose-h2:text-xl prose-h2:mt-12 prose-h2:mb-6 prose-h3:text-lg prose-h3:mt-8 prose-h3:mb-4">
                   {mdxContent}
                 </div>
 
                 {/* Tags */}
                 {frontmatter.tags && frontmatter.tags.length > 0 && (
                   <div className="mt-12 pt-8 border-t border-surface-subtle">
-                    <h3 className="text-sm font-semibold text-surface-muted-foreground uppercase tracking-wide mb-4">
+                    <h3 className="text-base font-semibold text-surface-muted-foreground uppercase tracking-wide mb-4">
                       Topics
                     </h3>
                     <div className="flex flex-wrap gap-2">
                       {frontmatter.tags.map((tag) => (
                         <span
                           key={tag}
-                          className="bg-surface-subtle text-surface-secondary text-sm px-4 py-2 rounded-full hover:bg-surface-muted transition-colors"
+                          className="bg-surface-subtle text-surface-secondary text-base px-4 py-2 rounded-full hover:bg-surface-muted transition-colors"
                         >
                           {tag}
                         </span>
@@ -189,7 +189,7 @@ export default async function BlogPostPage({ params }: { params: Promise<Params>
                 {/* Related Services */}
                 {frontmatter.relatedServices && frontmatter.relatedServices.length > 0 && (
                   <div className="mt-8 pt-8 border-t border-surface-subtle">
-                    <h3 className="text-sm font-semibold text-surface-muted-foreground uppercase tracking-wide mb-4">
+                    <h3 className="text-base font-semibold text-surface-muted-foreground uppercase tracking-wide mb-4">
                       Related Services
                     </h3>
                     <div className="flex flex-wrap gap-3">
@@ -197,7 +197,7 @@ export default async function BlogPostPage({ params }: { params: Promise<Params>
                         <Link
                           key={serviceSlug}
                           href={`/services/${serviceSlug}`}
-                          className="inline-flex items-center gap-2 bg-brand-primary/10 text-brand-primary font-medium text-sm px-4 py-2 rounded-full hover:bg-brand-primary/20 transition-colors"
+                          className="inline-flex items-center gap-2 bg-brand-primary/10 text-brand-primary font-medium text-base px-4 py-2 rounded-full hover:bg-brand-primary/20 transition-colors"
                         >
                           {serviceSlug
                             .split("-")

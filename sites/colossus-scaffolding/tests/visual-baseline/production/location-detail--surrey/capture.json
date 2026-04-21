@@ -1,0 +1,13 @@
+{
+  "path": "/locations/surrey",
+  "pageType": "location-detail",
+  "slug": "surrey",
+  "status": 200,
+  "error": null,
+  "screenshots": {
+    "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--surrey/desktop.png",
+    "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--surrey/tablet.png",
+    "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--surrey/mobile.png"
+  },
+  "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--surrey/dom.json"
+}

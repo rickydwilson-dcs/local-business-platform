@@ -1,5 +1,5 @@
-import { createContactInfo } from '@platform/core-components/lib/contact-info';
-import { siteConfig } from '@/site.config';
+import { createContactInfo } from "@platform/core-components/lib/contact-info";
+import { siteConfig } from "@/site.config";
 
 export const {
   BUSINESS_NAME,

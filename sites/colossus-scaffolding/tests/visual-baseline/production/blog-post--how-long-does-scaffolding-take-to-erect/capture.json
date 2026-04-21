@@ -1,0 +1,13 @@
+{
+  "path": "/blog/how-long-does-scaffolding-take-to-erect",
+  "pageType": "blog-post",
+  "slug": "how-long-does-scaffolding-take-to-erect",
+  "status": 200,
+  "error": null,
+  "screenshots": {
+    "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/blog-post--how-long-does-scaffolding-take-to-erect/desktop.png",
+    "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/blog-post--how-long-does-scaffolding-take-to-erect/tablet.png",
+    "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/blog-post--how-long-does-scaffolding-take-to-erect/mobile.png"
+  },
+  "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/blog-post--how-long-does-scaffolding-take-to-erect/dom.json"
+}

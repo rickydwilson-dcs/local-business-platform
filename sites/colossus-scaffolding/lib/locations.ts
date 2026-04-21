@@ -48,11 +48,7 @@ export async function getAllTownLocations(): Promise<TownLocation[]> {
 
   cachedTowns = locations
     .filter(
-      (loc) =>
-        loc.county &&
-        loc.coords &&
-        Array.isArray(loc.coords) &&
-        loc.slug !== loc.countySlug // exclude county overview pages
+      (loc) => loc.county && loc.coords && Array.isArray(loc.coords) && loc.slug !== loc.countySlug // exclude county overview pages
     )
     .map((loc) => ({
       name: loc.title,
@@ -80,9 +76,7 @@ export async function getAllCounties(): Promise<CountyInfo[]> {
   const counties: CountyInfo[] = [];
 
   // County pages are those where slug === countySlug (set during MDX back-fill)
-  const countyPages = locations.filter(
-    (loc) => loc.countySlug && loc.slug === loc.countySlug
-  );
+  const countyPages = locations.filter((loc) => loc.countySlug && loc.slug === loc.countySlug);
 
   for (const countyData of countyPages) {
     const countyName = (countyData.county as string) || countyData.title;
@@ -98,7 +92,8 @@ export async function getAllCounties(): Promise<CountyInfo[]> {
       }));
 
     // Append any redirect towns defined in frontmatter
-    const redirectTowns = (countyData.redirectTowns as Array<{name: string; slug: string; redirectTo: string}>) || [];
+    const redirectTowns =
+      (countyData.redirectTowns as Array<{ name: string; slug: string; redirectTo: string }>) || [];
     for (const rt of redirectTowns) {
       countyTowns.push({ name: rt.name, slug: rt.slug, href: rt.redirectTo });
     }

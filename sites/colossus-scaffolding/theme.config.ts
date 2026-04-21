@@ -1,14 +1,22 @@
-import type { DeepPartialThemeConfig } from "@platform/theme-system";
-import { vegaRegistry } from "@platform/themes/vega";
+import type { DeepPartialThemeConfig, ComponentRegistry } from "@platform/theme-system";
 
 /**
- * Colossus Scaffolding Theme Configuration
+ * Colossus Scaffolding — self-contained theme configuration.
  *
  * Brand colors mapped from the original Tailwind config.
- * Uses the theme system for consistent CSS variable generation.
+ * Component registry is inlined so this site is self-contained
+ * and does not depend on any shared theme package.
  */
+export const componentRegistry: ComponentRegistry = {
+  theme: "vega",
+  heroVariant: "split",
+  headerVariant: "light",
+  cardVariant: "standard",
+  sectionVariant: "standard",
+};
+
 export const themeConfig: DeepPartialThemeConfig = {
-  componentRegistry: vegaRegistry,
+  componentRegistry,
 
   colors: {
     brand: {

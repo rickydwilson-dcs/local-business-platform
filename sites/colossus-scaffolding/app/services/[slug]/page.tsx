@@ -186,9 +186,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
       card: "summary_large_image",
       title: optimizedTitle,
       description: optimizedDescription,
-      images: serviceData.heroImage
-        ? [getImageUrl(serviceData.heroImage)]
-        : [absUrl("/logo.svg")],
+      images: serviceData.heroImage ? [getImageUrl(serviceData.heroImage)] : [absUrl("/logo.svg")],
     },
     alternates: {
       canonical: absUrl(`/services/${slug}`),

@@ -1,11 +1,11 @@
 import "./globals.css";
 import type { Metadata, Viewport } from "next";
-import { PageShell, ThemeProvider } from "@platform/core-components";
-import { VegaHeader, VegaFooter } from "@platform/themes/vega/components";
-import { vegaRegistry } from "@platform/themes/vega";
+import { PageShell } from "@platform/core-components";
 import { ConsentManager } from "@platform/core-components/components/analytics/ConsentManager";
 import { Analytics } from "@platform/core-components/components/analytics/Analytics";
 import { AnalyticsDebugPanel } from "@platform/core-components/components/analytics/AnalyticsDebugPanel";
+import { SiteHeader } from "@/components/site-header";
+import { SiteFooter } from "@/components/site-footer";
 import { PHONE_DISPLAY, PHONE_TEL, BUSINESS_EMAIL, ADDRESS } from "@/lib/contact-info";
 import { getContentItems } from "@/lib/content";
 import { siteConfig } from "@/site.config";
@@ -55,10 +55,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     getContentItems("locations"),
   ]);
 
-  const locationItems = allLocations.map((loc) => ({
-    name: loc.title,
-    slug: loc.slug,
-  }));
+  const locationItems = allLocations.map((loc) => ({ name: loc.title, slug: loc.slug }));
 
   return (
     <html lang="en-GB">
@@ -75,47 +72,52 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <meta name="ICBM" content="50.8570, 0.5750" />
       </head>
       {/* eslint-disable-next-line platform/no-hardcoded-tailwind-colors -- Intentional: fallback text color in layout */}
-      <body className="min-h-screen bg-white text-slate-900 antialiased">
-        <ThemeProvider theme="vega" registry={vegaRegistry}>
-          <PageShell
-            header={
-              <VegaHeader
-                siteName={siteConfig.business.name}
-                phoneDisplay={PHONE_DISPLAY}
-                phoneTel={PHONE_TEL}
-                showPhone={siteConfig.cta.phone.show}
-                primaryCta={siteConfig.cta.primary}
-                navigation={siteConfig.navigation.main}
-                locations={locationItems}
-                logoWidth={180}
-                logoHeight={48}
-              />
-            }
-            footer={
-              <VegaFooter
-                siteName={siteConfig.business.name}
-                tagline={siteConfig.tagline}
-                phoneDisplay={PHONE_DISPLAY}
-                phoneTel={PHONE_TEL}
-                email={BUSINESS_EMAIL}
-                address={ADDRESS}
-                certifications={siteConfig.credentials?.certifications ?? []}
-                services={allServices.map(s => ({ slug: s.slug, title: s.title })).slice(0, siteConfig.footer?.maxServices ?? 8)}
-                locations={allLocations.map(l => ({ slug: l.slug, title: l.title })).slice(0, siteConfig.footer?.maxLocations ?? 8)}
-                totalServices={allServices.length}
-                totalLocations={allLocations.length}
-                maxServices={siteConfig.footer?.maxServices ?? 8}
-                maxLocations={siteConfig.footer?.maxLocations ?? 8}
-                showServices={siteConfig.footer?.showServices ?? true}
-                showLocations={siteConfig.footer?.showLocations ?? true}
-                copyright={siteConfig.footer?.copyright ?? `${new Date().getFullYear()} ${siteConfig.business.name}. All rights reserved.`}
-                builtBy={siteConfig.footer?.builtBy}
-              />
-            }
-          >
-            {children}
-          </PageShell>
-        </ThemeProvider>
+      <body className="min-h-screen flex flex-col bg-surface-background text-surface-foreground antialiased">
+        <PageShell
+          header={
+            <SiteHeader
+              siteName={siteConfig.business.name}
+              phoneDisplay={PHONE_DISPLAY}
+              phoneTel={PHONE_TEL}
+              showPhone={siteConfig.cta.phone.show}
+              primaryCta={siteConfig.cta.primary}
+              navigation={siteConfig.navigation.main}
+              locations={locationItems}
+              logoWidth={150}
+              logoHeight={40}
+            />
+          }
+          footer={
+            <SiteFooter
+              siteName={siteConfig.business.name}
+              tagline={siteConfig.tagline}
+              phoneDisplay={PHONE_DISPLAY}
+              phoneTel={PHONE_TEL}
+              email={BUSINESS_EMAIL}
+              address={ADDRESS}
+              certifications={siteConfig.credentials?.certifications ?? []}
+              services={allServices
+                .map((s) => ({ slug: s.slug, title: s.title }))
+                .slice(0, siteConfig.footer?.maxServices ?? 8)}
+              locations={allLocations
+                .map((l) => ({ slug: l.slug, title: l.title }))
+                .slice(0, siteConfig.footer?.maxLocations ?? 8)}
+              totalServices={allServices.length}
+              totalLocations={allLocations.length}
+              maxServices={siteConfig.footer?.maxServices ?? 8}
+              maxLocations={siteConfig.footer?.maxLocations ?? 8}
+              showServices={siteConfig.footer?.showServices ?? true}
+              showLocations={siteConfig.footer?.showLocations ?? true}
+              copyright={
+                siteConfig.footer?.copyright ??
+                `${new Date().getFullYear()} ${siteConfig.business.name}. All rights reserved.`
+              }
+              builtBy={siteConfig.footer?.builtBy}
+            />
+          }
+        >
+          {children}
+        </PageShell>
 
         {/* Analytics System - ConsentManager will handle page detection internally */}
         <ConsentManager

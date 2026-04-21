@@ -1,0 +1,13 @@
+{
+  "path": "/services/facade-scaffolding",
+  "pageType": "service-detail",
+  "slug": "facade-scaffolding",
+  "status": 200,
+  "error": null,
+  "screenshots": {
+    "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--facade-scaffolding/desktop.png",
+    "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--facade-scaffolding/tablet.png",
+    "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--facade-scaffolding/mobile.png"
+  },
+  "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--facade-scaffolding/dom.json"
+}

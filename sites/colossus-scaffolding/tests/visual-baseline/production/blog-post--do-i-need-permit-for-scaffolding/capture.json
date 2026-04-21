@@ -1,0 +1,13 @@
+{
+  "path": "/blog/do-i-need-permit-for-scaffolding",
+  "pageType": "blog-post",
+  "slug": "do-i-need-permit-for-scaffolding",
+  "status": 200,
+  "error": null,
+  "screenshots": {
+    "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/blog-post--do-i-need-permit-for-scaffolding/desktop.png",
+    "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/blog-post--do-i-need-permit-for-scaffolding/tablet.png",
+    "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/blog-post--do-i-need-permit-for-scaffolding/mobile.png"
+  },
+  "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/blog-post--do-i-need-permit-for-scaffolding/dom.json"
+}

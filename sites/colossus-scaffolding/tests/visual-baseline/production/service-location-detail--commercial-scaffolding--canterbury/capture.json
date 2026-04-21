@@ -1,0 +1,13 @@
+{
+  "path": "/services/commercial-scaffolding/canterbury",
+  "pageType": "service-location-detail",
+  "slug": "commercial-scaffolding--canterbury",
+  "status": 200,
+  "error": null,
+  "screenshots": {
+    "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/service-location-detail--commercial-scaffolding--canterbury/desktop.png",
+    "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/service-location-detail--commercial-scaffolding--canterbury/tablet.png",
+    "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/service-location-detail--commercial-scaffolding--canterbury/mobile.png"
+  },
+  "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/service-location-detail--commercial-scaffolding--canterbury/dom.json"
+}

@@ -1,0 +1,13 @@
+{
+  "path": "/services/scaffold-towers-mast-systems",
+  "pageType": "service-detail",
+  "slug": "scaffold-towers-mast-systems",
+  "status": 200,
+  "error": null,
+  "screenshots": {
+    "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--scaffold-towers-mast-systems/desktop.png",
+    "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--scaffold-towers-mast-systems/tablet.png",
+    "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--scaffold-towers-mast-systems/mobile.png"
+  },
+  "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--scaffold-towers-mast-systems/dom.json"
+}

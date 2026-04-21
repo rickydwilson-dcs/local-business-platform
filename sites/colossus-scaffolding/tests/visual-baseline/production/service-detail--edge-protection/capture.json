@@ -1,0 +1,13 @@
+{
+  "path": "/services/edge-protection",
+  "pageType": "service-detail",
+  "slug": "edge-protection",
+  "status": 200,
+  "error": null,
+  "screenshots": {
+    "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--edge-protection/desktop.png",
+    "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--edge-protection/tablet.png",
+    "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--edge-protection/mobile.png"
+  },
+  "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--edge-protection/dom.json"
+}

@@ -1,0 +1,13 @@
+{
+  "path": "/locations/tunbridge-wells",
+  "pageType": "location-detail",
+  "slug": "tunbridge-wells",
+  "status": 200,
+  "error": null,
+  "screenshots": {
+    "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--tunbridge-wells/desktop.png",
+    "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--tunbridge-wells/tablet.png",
+    "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--tunbridge-wells/mobile.png"
+  },
+  "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--tunbridge-wells/dom.json"
+}

@@ -1,0 +1,13 @@
+{
+  "path": "/services",
+  "pageType": "services",
+  "slug": "services",
+  "status": 200,
+  "error": null,
+  "screenshots": {
+    "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/services--services/desktop.png",
+    "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/services--services/tablet.png",
+    "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/services--services/mobile.png"
+  },
+  "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/services--services/dom.json"
+}

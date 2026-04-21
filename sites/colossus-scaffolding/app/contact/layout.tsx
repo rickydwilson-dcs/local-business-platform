@@ -4,12 +4,10 @@ import { siteConfig } from "@/site.config";
 
 export const metadata: Metadata = {
   title: `Contact ${siteConfig.business.name} | Free Quotes`,
-  description:
-    `Contact ${siteConfig.business.name} for free quotes on professional scaffolding services across South East UK. TG20:21 compliant, CISRS qualified teams, rapid response.`,
+  description: `Contact ${siteConfig.business.name} for free quotes on professional scaffolding services across South East UK. TG20:21 compliant, CISRS qualified teams, rapid response.`,
   openGraph: {
     title: `Contact ${siteConfig.business.name} | Free Quotes`,
-    description:
-      `Contact ${siteConfig.business.name} for free quotes on professional scaffolding services across South East UK. TG20:21 compliant, CISRS qualified teams.`,
+    description: `Contact ${siteConfig.business.name} for free quotes on professional scaffolding services across South East UK. TG20:21 compliant, CISRS qualified teams.`,
     url: absUrl("/contact"),
     siteName: siteConfig.business.name,
     images: [
@@ -26,8 +24,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: `Contact ${siteConfig.business.name} | Free Quotes`,
-    description:
-      `Contact ${siteConfig.business.name} for free quotes on professional scaffolding services across South East UK. TG20:21 compliant, CISRS qualified teams.`,
+    description: `Contact ${siteConfig.business.name} for free quotes on professional scaffolding services across South East UK. TG20:21 compliant, CISRS qualified teams.`,
     images: [absUrl("/logo.svg")],
   },
   alternates: {
@@ -41,8 +38,7 @@ export default function ContactLayout({ children }: { children: React.ReactNode 
     "@type": "ContactPage",
     "@id": absUrl("/contact"),
     name: `Contact ${siteConfig.business.name}`,
-    description:
-      `Contact ${siteConfig.business.name} for free quotes on professional scaffolding services across South East UK.`,
+    description: `Contact ${siteConfig.business.name} for free quotes on professional scaffolding services across South East UK.`,
     url: absUrl("/contact"),
     mainEntity: {
       "@id": absUrl("/#organization"),

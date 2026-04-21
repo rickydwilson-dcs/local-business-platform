@@ -1,0 +1,13 @@
+{
+  "path": "/services/hangers-truss-outs-advanced-scaffolding",
+  "pageType": "service-detail",
+  "slug": "hangers-truss-outs-advanced-scaffolding",
+  "status": 200,
+  "error": null,
+  "screenshots": {
+    "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--hangers-truss-outs-advanced-scaffolding/desktop.png",
+    "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--hangers-truss-outs-advanced-scaffolding/tablet.png",
+    "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--hangers-truss-outs-advanced-scaffolding/mobile.png"
+  },
+  "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--hangers-truss-outs-advanced-scaffolding/dom.json"
+}

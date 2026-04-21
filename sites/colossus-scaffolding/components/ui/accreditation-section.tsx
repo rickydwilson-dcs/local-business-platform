@@ -81,9 +81,9 @@ export function AccreditationSection() {
                 />
               </svg>
             </div>
-            <h3 className="text-xl font-bold text-amber-900 mb-2">Construction Line Gold</h3>
-            <p className="text-amber-800 text-sm font-medium mb-2">Approved Contractor</p>
-            <p className="text-amber-700 text-sm">
+            <h3 className="text-lg font-bold text-amber-900 mb-2">Construction Line Gold</h3>
+            <p className="text-amber-800 text-base font-medium mb-2">Approved Contractor</p>
+            <p className="text-amber-700 text-base">
               Government-backed certification for supply chain excellence and compliance
             </p>
           </div>
@@ -107,9 +107,9 @@ export function AccreditationSection() {
                 />
               </svg>
             </div>
-            <h3 className="text-xl font-bold text-green-900 mb-2">CHAS Premium Plus</h3>
-            <p className="text-green-800 text-sm font-medium mb-2">Registered Contractor</p>
-            <p className="text-green-700 text-sm">
+            <h3 className="text-lg font-bold text-green-900 mb-2">CHAS Premium Plus</h3>
+            <p className="text-green-800 text-base font-medium mb-2">Registered Contractor</p>
+            <p className="text-green-700 text-base">
               Health and safety assessment scheme approved contractor
             </p>
           </div>
@@ -119,7 +119,7 @@ export function AccreditationSection() {
 
       {/* Certificate Gallery */}
       <div className="mt-12">
-        <h3 className="text-xl font-semibold text-surface-foreground text-center mb-6">
+        <h3 className="text-lg font-semibold text-surface-foreground text-center mb-6">
           View Our Certificates
         </h3>
         <p className="text-surface-tertiary text-center mb-8 max-w-2xl mx-auto">

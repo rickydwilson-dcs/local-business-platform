@@ -2,7 +2,9 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-export const MdxLink = (props: React.AnchorHTMLAttributes<HTMLAnchorElement> & { children?: React.ReactNode }) => {
+export const MdxLink = (
+  props: React.AnchorHTMLAttributes<HTMLAnchorElement> & { children?: React.ReactNode }
+) => {
   const href = typeof props.href === "string" ? props.href : "";
   const isInternal = href.startsWith("/");
   if (isInternal) {
@@ -26,13 +28,15 @@ export const MdxLink = (props: React.AnchorHTMLAttributes<HTMLAnchorElement> & {
 };
 
 export const MdxH2 = (p: React.HTMLAttributes<HTMLHeadingElement>) => (
-  <h2 className={`text-2xl sm:text-3xl font-bold text-surface-foreground mt-12 mb-6 ${p.className || ""}`}>
+  <h2
+    className={`text-xl sm:text-2xl font-bold text-surface-foreground mt-12 mb-6 ${p.className || ""}`}
+  >
     {p.children}
   </h2>
 );
 
 export const MdxH3 = (p: React.HTMLAttributes<HTMLHeadingElement>) => (
-  <h3 className={`text-xl font-semibold text-surface-foreground mt-8 mb-4 ${p.className || ""}`}>
+  <h3 className={`text-lg font-semibold text-surface-foreground mt-8 mb-4 ${p.className || ""}`}>
     {p.children}
   </h3>
 );
@@ -59,7 +63,9 @@ export const MdxLi = (p: React.HTMLAttributes<HTMLLIElement>) => (
 );
 
 export const MdxStrong = (p: React.HTMLAttributes<HTMLElement>) => (
-  <strong className={`font-semibold text-surface-foreground ${p.className || ""}`}>{p.children}</strong>
+  <strong className={`font-semibold text-surface-foreground ${p.className || ""}`}>
+    {p.children}
+  </strong>
 );
 
 export const MdxHr = () => <hr className="my-10 border-t border-surface-subtle" />;

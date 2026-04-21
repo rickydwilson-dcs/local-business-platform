@@ -1,0 +1,13 @@
+{
+  "path": "/services/commercial-scaffolding",
+  "pageType": "service-detail",
+  "slug": "commercial-scaffolding",
+  "status": 200,
+  "error": null,
+  "screenshots": {
+    "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--commercial-scaffolding/desktop.png",
+    "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--commercial-scaffolding/tablet.png",
+    "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--commercial-scaffolding/mobile.png"
+  },
+  "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--commercial-scaffolding/dom.json"
+}

@@ -1,0 +1,13 @@
+{
+  "path": "/services/pavement-gantries-loading-bays",
+  "pageType": "service-detail",
+  "slug": "pavement-gantries-loading-bays",
+  "status": 200,
+  "error": null,
+  "screenshots": {
+    "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--pavement-gantries-loading-bays/desktop.png",
+    "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--pavement-gantries-loading-bays/tablet.png",
+    "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--pavement-gantries-loading-bays/mobile.png"
+  },
+  "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--pavement-gantries-loading-bays/dom.json"
+}

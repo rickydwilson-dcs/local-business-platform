@@ -1,0 +1,13 @@
+{
+  "path": "/locations/west-sussex",
+  "pageType": "location-detail",
+  "slug": "west-sussex",
+  "status": 200,
+  "error": null,
+  "screenshots": {
+    "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--west-sussex/desktop.png",
+    "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--west-sussex/tablet.png",
+    "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--west-sussex/mobile.png"
+  },
+  "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--west-sussex/dom.json"
+}

@@ -5,15 +5,15 @@
  * Custom service sorting: main scaffolding categories first, then alphabetical.
  */
 
-import { createContentUtils } from '@platform/core-components/lib/content';
-import type { ContentItem } from '@platform/core-components/lib/content';
-import { getLocationSlugs } from './locations-config';
+import { createContentUtils } from "@platform/core-components/lib/content";
+import type { ContentItem } from "@platform/core-components/lib/content";
+import { getLocationSlugs } from "./locations-config";
 
 /** Main scaffolding categories displayed first in this specific order */
 const mainCategories = [
-  'Commercial Scaffolding',
-  'Residential Scaffolding',
-  'Industrial Scaffolding',
+  "Commercial Scaffolding",
+  "Residential Scaffolding",
+  "Industrial Scaffolding",
 ];
 
 /** Colossus category-first sorting: main categories pinned to top in order, rest alphabetical */
@@ -71,4 +71,4 @@ export type {
   Project,
   Testimonial,
   ContentUtilsOptions,
-} from '@platform/core-components/lib/content';
+} from "@platform/core-components/lib/content";

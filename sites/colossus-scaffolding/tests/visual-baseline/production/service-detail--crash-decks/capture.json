@@ -1,0 +1,13 @@
+{
+  "path": "/services/crash-decks",
+  "pageType": "service-detail",
+  "slug": "crash-decks",
+  "status": 200,
+  "error": null,
+  "screenshots": {
+    "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--crash-decks/desktop.png",
+    "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--crash-decks/tablet.png",
+    "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--crash-decks/mobile.png"
+  },
+  "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--crash-decks/dom.json"
+}

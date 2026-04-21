@@ -1,0 +1,13 @@
+{
+  "path": "/blog",
+  "pageType": "blog",
+  "slug": "blog",
+  "status": 200,
+  "error": null,
+  "screenshots": {
+    "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/blog--blog/desktop.png",
+    "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/blog--blog/tablet.png",
+    "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/blog--blog/mobile.png"
+  },
+  "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/blog--blog/dom.json"
+}

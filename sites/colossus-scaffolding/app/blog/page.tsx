@@ -11,8 +11,7 @@ export const dynamic = "force-static";
 
 export const metadata: Metadata = {
   title: "Scaffolding Blog | Industry Insights & Expert Tips",
-  description:
-    `Expert scaffolding insights, safety tips, and industry guidance from the ${siteConfig.business.name} team. Stay informed with our professional advice.`,
+  description: `Expert scaffolding insights, safety tips, and industry guidance from the ${siteConfig.business.name} team. Stay informed with our professional advice.`,
   keywords: [
     "scaffolding blog",
     "scaffolding tips",
@@ -22,8 +21,7 @@ export const metadata: Metadata = {
   ],
   openGraph: {
     title: "Scaffolding Blog | Industry Insights & Expert Tips",
-    description:
-      `Expert scaffolding insights, safety tips, and industry guidance from the ${siteConfig.business.name} team.`,
+    description: `Expert scaffolding insights, safety tips, and industry guidance from the ${siteConfig.business.name} team.`,
     url: absUrl("/blog"),
     type: "website",
   },
@@ -53,14 +51,14 @@ function BlogCard({ post }: { post: BlogPost }) {
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
           <div className="absolute top-4 left-4">
-            <span className="bg-brand-primary text-white text-xs font-semibold px-3 py-1 rounded-full">
+            <span className="bg-brand-primary text-white text-sm font-semibold px-3 py-1 rounded-full">
               {categoryLabels[post.category] || post.category}
             </span>
           </div>
         </Link>
       )}
       <div className="p-6">
-        <div className="flex items-center gap-2 text-sm text-surface-muted-foreground mb-3">
+        <div className="flex items-center gap-2 text-base text-surface-muted-foreground mb-3">
           <time dateTime={post.date}>
             {new Date(post.date).toLocaleDateString("en-GB", {
               day: "numeric",
@@ -75,20 +73,20 @@ function BlogCard({ post }: { post: BlogPost }) {
             </>
           )}
         </div>
-        <h2 className="text-xl font-bold text-surface-foreground mb-3 group-hover:text-brand-primary transition-colors">
+        <h2 className="text-lg font-bold text-surface-foreground mb-3 group-hover:text-brand-primary transition-colors">
           <Link href={`/blog/${post.slug}`}>{post.title}</Link>
         </h2>
         <p className="text-surface-tertiary mb-4 line-clamp-3">{post.excerpt}</p>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-brand-primary rounded-full flex items-center justify-center text-white text-sm font-semibold">
+            <div className="w-8 h-8 bg-brand-primary rounded-full flex items-center justify-center text-white text-base font-semibold">
               {post.author.name.charAt(0)}
             </div>
-            <span className="text-sm text-surface-tertiary">{post.author.name}</span>
+            <span className="text-base text-surface-tertiary">{post.author.name}</span>
           </div>
           <Link
             href={`/blog/${post.slug}`}
-            className="text-brand-primary font-medium text-sm hover:underline inline-flex items-center gap-1"
+            className="text-brand-primary font-medium text-base hover:underline inline-flex items-center gap-1"
           >
             Read more
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -124,9 +122,10 @@ export default async function BlogPage() {
           <div className="container-standard">
             <div className="text-center">
               <h1 className="heading-hero">Industry Insights & Expert Tips</h1>
-              <p className="text-xl text-surface-foreground mb-8 mx-auto max-w-3xl">
+              <p className="text-lg text-surface-foreground mb-8 mx-auto max-w-3xl">
                 Professional scaffolding guidance, safety tips, and industry news from our
-                experienced team. Stay informed with the latest insights from {siteConfig.business.name}.
+                experienced team. Stay informed with the latest insights from{" "}
+                {siteConfig.business.name}.
               </p>
             </div>
           </div>
@@ -155,7 +154,7 @@ export default async function BlogPage() {
 
             {posts.length === 0 ? (
               <div className="text-center py-12">
-                <p className="text-surface-tertiary text-lg">
+                <p className="text-surface-tertiary text-base">
                   No blog posts yet. Check back soon for industry insights and expert tips.
                 </p>
               </div>
@@ -194,8 +193,7 @@ export default async function BlogPage() {
           "@id": absUrl("/blog#blog"),
           url: absUrl("/blog"),
           name: `${siteConfig.business.name} Blog`,
-          description:
-            `Expert scaffolding insights, safety tips, and industry guidance from the ${siteConfig.business.name} team.`,
+          description: `Expert scaffolding insights, safety tips, and industry guidance from the ${siteConfig.business.name} team.`,
         }}
       />
     </>

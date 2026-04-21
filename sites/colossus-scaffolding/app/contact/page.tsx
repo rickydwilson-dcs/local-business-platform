@@ -14,8 +14,7 @@ import { siteConfig } from "@/site.config";
 
 export const metadata: Metadata = {
   title: `Contact ${siteConfig.business.name} | Free Quote`,
-  description:
-    `Get a free scaffolding quote from ${siteConfig.business.name}. Professional scaffolding services across South East UK. TG20:21 compliant, fully insured, CHAS accredited.`,
+  description: `Get a free scaffolding quote from ${siteConfig.business.name}. Professional scaffolding services across South East UK. TG20:21 compliant, fully insured, CHAS accredited.`,
   openGraph: {
     title: `Contact ${siteConfig.business.name} | Get a Free Quote`,
     description:
@@ -51,8 +50,10 @@ export default function ContactPage() {
       <div className="container mx-auto px-4 py-10">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-surface-foreground mb-4">Contact {siteConfig.business.name}</h1>
-          <p className="text-xl text-surface-foreground mx-auto w-full lg:w-[90%]">
+          <h1 className="text-3xl font-bold text-surface-foreground mb-4">
+            Contact {siteConfig.business.name}
+          </h1>
+          <p className="text-lg text-surface-foreground mx-auto w-full lg:w-[90%]">
             Get a free quote today. Professional scaffolding services across the South East UK.
             TG20:21 compliant, fully insured, and CHAS accredited.
           </p>
@@ -98,17 +99,17 @@ export default function ContactPage() {
             <div className="space-y-8">
               {/* Main Contact Info */}
               <div className="bg-white rounded-2xl shadow-lg p-8">
-                <h2 className="text-2xl font-semibold mb-6">Get In Touch</h2>
+                <h2 className="text-xl font-semibold mb-6">Get In Touch</h2>
 
                 <div className="space-y-6">
                   <div>
                     <h3 className="font-semibold text-surface-foreground mb-2">Phone</h3>
-                    <p className="text-lg text-brand-primary font-semibold">
+                    <p className="text-base text-brand-primary font-semibold">
                       <a href={`tel:${PHONE_TEL}`} className="hover:underline">
                         {PHONE_DISPLAY}
                       </a>
                     </p>
-                    <p className="text-sm text-surface-foreground">
+                    <p className="text-base text-surface-foreground">
                       Mon-Fri: 7:30am - 6:00pm
                       <br />
                       Sat: 8:00am - 4:00pm
@@ -124,13 +125,15 @@ export default function ContactPage() {
                         {BUSINESS_EMAIL}
                       </a>
                     </p>
-                    <p className="text-sm text-surface-foreground">We respond within 24 hours</p>
+                    <p className="text-base text-surface-foreground">We respond within 24 hours</p>
                   </div>
 
                   <div>
                     <h3 className="font-semibold text-surface-foreground mb-2">Service Areas</h3>
-                    <p className="text-surface-secondary">East Sussex, West Sussex, Kent & Surrey</p>
-                    <p className="text-sm text-surface-foreground">
+                    <p className="text-surface-secondary">
+                      East Sussex, West Sussex, Kent & Surrey
+                    </p>
+                    <p className="text-base text-surface-foreground">
                       <Link href="/locations" className="text-brand-primary hover:underline">
                         View All Coverage Areas
                       </Link>
@@ -138,11 +141,16 @@ export default function ContactPage() {
                   </div>
 
                   <div>
-                    <h3 className="font-semibold text-surface-foreground mb-2">Registered Office</h3>
+                    <h3 className="font-semibold text-surface-foreground mb-2">
+                      Registered Office
+                    </h3>
                     <div className="text-surface-secondary space-y-1">
                       <p>{siteConfig.business.address.street}</p>
                       <p>{siteConfig.business.address.city}</p>
-                      <p>{siteConfig.business.address.region} {siteConfig.business.address.postalCode}</p>
+                      <p>
+                        {siteConfig.business.address.region}{" "}
+                        {siteConfig.business.address.postalCode}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -150,7 +158,7 @@ export default function ContactPage() {
 
               {/* Quick Links */}
               <div className="bg-white rounded-2xl shadow-lg p-8">
-                <h2 className="text-2xl font-semibold mb-6">Quick Links</h2>
+                <h2 className="text-xl font-semibold mb-6">Quick Links</h2>
 
                 <div className="space-y-4">
                   <div>

@@ -1,0 +1,13 @@
+{
+  "path": "/locations/littlehampton",
+  "pageType": "location-detail",
+  "slug": "littlehampton",
+  "status": 200,
+  "error": null,
+  "screenshots": {
+    "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--littlehampton/desktop.png",
+    "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--littlehampton/tablet.png",
+    "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--littlehampton/mobile.png"
+  },
+  "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--littlehampton/dom.json"
+}

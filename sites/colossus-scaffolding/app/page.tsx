@@ -136,7 +136,7 @@ export default function HomePage() {
               <h2 className="heading-section font-semibold">
                 Trusted by Customers Across the South East
               </h2>
-              <p className="text-lg text-surface-foreground mx-auto w-full lg:w-[90%]">
+              <p className="text-base text-surface-foreground mx-auto w-full lg:w-[90%]">
                 Industry-leading certifications and proven track record you can rely on.
               </p>
             </div>
@@ -162,7 +162,9 @@ export default function HomePage() {
                   </div>
                   <div className="stat-number">15+</div>
                   <div className="text-surface-foreground font-medium">Years Experience</div>
-                  <div className="text-sm text-surface-secondary mt-1">Serving the South East</div>
+                  <div className="text-base text-surface-secondary mt-1">
+                    Serving the South East
+                  </div>
                 </div>
               </div>
 
@@ -186,7 +188,9 @@ export default function HomePage() {
                   </div>
                   <div className="stat-number">£10M</div>
                   <div className="text-surface-foreground font-medium">Liability Insurance</div>
-                  <div className="text-sm text-surface-secondary mt-1">Comprehensive Coverage</div>
+                  <div className="text-base text-surface-secondary mt-1">
+                    Comprehensive Coverage
+                  </div>
                 </div>
               </div>
 
@@ -210,7 +214,9 @@ export default function HomePage() {
                   </div>
                   <div className="stat-number">TG20:21</div>
                   <div className="text-surface-foreground font-medium">Compliant</div>
-                  <div className="text-sm text-surface-secondary mt-1">Latest Safety Standards</div>
+                  <div className="text-base text-surface-secondary mt-1">
+                    Latest Safety Standards
+                  </div>
                 </div>
               </div>
 
@@ -234,7 +240,9 @@ export default function HomePage() {
                   </div>
                   <div className="stat-number">CHAS</div>
                   <div className="text-surface-foreground font-medium">Accredited</div>
-                  <div className="text-sm text-surface-secondary mt-1">Health & Safety Approved</div>
+                  <div className="text-base text-surface-secondary mt-1">
+                    Health & Safety Approved
+                  </div>
                 </div>
               </div>
             </div>
