@@ -92,6 +92,10 @@ export * from "./context/theme-context";
 // Export hooks
 export * from "./hooks";
 
+// Export nav grouping helpers
+export { buildAlphaColumns } from "./lib/nav-grouping";
+export type { HeaderDropdownItem, HeaderDropdownGroup } from "./lib/nav-grouping";
+
 // Export type-only utilities from lib (no fs/server dependencies)
 export * from "./lib/content-schemas";
 export * from "./lib/schema";
