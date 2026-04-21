@@ -71,7 +71,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <meta name="geo.position" content="50.8570;0.5750" />
         <meta name="ICBM" content="50.8570, 0.5750" />
       </head>
-      {/* eslint-disable-next-line platform/no-hardcoded-tailwind-colors -- Intentional: fallback text color in layout */}
       <body className="min-h-screen flex flex-col bg-surface-background text-surface-foreground antialiased">
         <PageShell
           header={

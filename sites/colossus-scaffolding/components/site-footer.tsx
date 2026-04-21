@@ -52,9 +52,9 @@ export function SiteFooter({
                 {certifications.slice(0, 3).map((cert, index) => (
                   <div key={index} className="flex items-center gap-2 text-sm sm:text-base">
                     {index === 0 ? (
-                      <Award className="h-3 w-3 sm:h-4 sm:w-4 text-amber-400" aria-hidden="true" />
+                      <Award className="h-3 w-3 sm:h-4 sm:w-4 text-warning" aria-hidden="true" />
                     ) : (
-                      <Shield className="h-3 w-3 sm:h-4 sm:w-4 text-green-400" aria-hidden="true" />
+                      <Shield className="h-3 w-3 sm:h-4 sm:w-4 text-success" aria-hidden="true" />
                     )}
                     <span>{cert.name}</span>
                   </div>
