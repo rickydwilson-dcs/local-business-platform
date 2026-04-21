@@ -1,20 +1,9 @@
 "use client";
 
-/**
- * Locations Dropdown Component
- *
- * Desktop navigation dropdown for service areas/locations.
- * Two modes:
- * - Simple: flat list of locations (for sites with few locations)
- * - Mega menu: county-grouped layout (for sites with many locations)
- *
- * Pass `counties` for the grouped mega-menu, or just `locations` for the simple grid.
- */
+import { HeaderNavDropdown } from "./header-nav-dropdown";
+import type { HeaderDropdownConfig } from "./header-nav-dropdown";
 
-import { useState, useRef, useEffect } from "react";
-import Link from "next/link";
-
-interface LocationItem {
+export interface LocationItem {
   name: string;
   slug: string;
 }
@@ -32,356 +21,52 @@ export interface CountyGroup {
 }
 
 export interface LocationsDropdownProps {
-  /** Array of location items for simple dropdown */
-  locations: LocationItem[];
-  /** County groups for mega-menu layout (used instead of simple grid when provided) */
+  locations?: LocationItem[];
   counties?: CountyGroup[];
-  /** Label for the dropdown trigger button */
-  label?: string;
-  /** Maximum towns to show per county in mega-menu */
   maxTownsPerCounty?: number;
-  /** Theme variant - controls button text color */
-  variant?: "light" | "dark";
-  /** Override className for the trigger button/link */
+  label?: string;
+  variant?: "dark" | "light";
+  /** @deprecated No longer used. */
   buttonClassName?: string;
 }
 
+/**
+ * @deprecated Use HeaderNavDropdown with a `dropdown` config on the
+ * nav item instead. This wrapper remains for backwards compat only.
+ */
 export function LocationsDropdown({
-  locations,
-  counties,
+  locations = [],
+  counties = [],
+  maxTownsPerCounty = 10,
   label = "Locations",
-  maxTownsPerCounty = 6,
   variant = "light",
-  buttonClassName,
 }: LocationsDropdownProps) {
-  const [isOpen, setIsOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
-  const buttonRef = useRef<HTMLButtonElement>(null);
-
-  // Close on click outside
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setIsOpen(false);
-        buttonRef.current?.focus();
-      }
-    };
-
-    if (isOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [isOpen]);
-
-  // Close on escape key
-  useEffect(() => {
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        setIsOpen(false);
-        buttonRef.current?.focus();
-      }
-    };
-
-    if (isOpen) {
-      document.addEventListener("keydown", handleEscape);
-    }
-
-    return () => {
-      document.removeEventListener("keydown", handleEscape);
-    };
-  }, [isOpen]);
-
-  // Arrow key navigation and focus first item on open
-  useEffect(() => {
-    if (!isOpen) return;
-
-    // Focus first menuitem when menu opens
-    requestAnimationFrame(() => {
-      const menu = document.getElementById("locations-dropdown-menu");
-      const firstItem = menu?.querySelector<HTMLElement>('[role="menuitem"]');
-      firstItem?.focus();
-    });
-
-    const menu = document.getElementById("locations-dropdown-menu");
-    if (!menu) return;
-
-    const handleKeyDown = (e: KeyboardEvent) => {
-      const items = Array.from(menu.querySelectorAll<HTMLElement>('[role="menuitem"]'));
-      const currentIndex = items.indexOf(document.activeElement as HTMLElement);
-
-      switch (e.key) {
-        case "ArrowDown":
-          e.preventDefault();
-          items[(currentIndex + 1) % items.length]?.focus();
-          break;
-        case "ArrowUp":
-          e.preventDefault();
-          items[(currentIndex - 1 + items.length) % items.length]?.focus();
-          break;
-        case "Home":
-          e.preventDefault();
-          items[0]?.focus();
-          break;
-        case "End":
-          e.preventDefault();
-          items[items.length - 1]?.focus();
-          break;
-      }
-    };
-
-    menu.addEventListener("keydown", handleKeyDown);
-    return () => menu.removeEventListener("keydown", handleKeyDown);
-  }, [isOpen]);
-
-  if (locations.length === 0 && (!counties || counties.length === 0)) {
-    const linkTextColor =
-      variant === "dark" ? "text-white" : "text-[var(--color-surface-secondary-foreground)]";
-    return (
-      <Link
-        href="/locations"
-        className={
-          buttonClassName ??
-          `${linkTextColor} hover:text-brand-primary transition-colors font-medium`
+  const config: HeaderDropdownConfig =
+    counties.length > 0
+      ? {
+          mode: "mega",
+          groups: counties.map((c) => ({
+            label: c.name,
+            items: c.towns
+              .slice(0, maxTownsPerCounty)
+              .map((t) => ({ label: t.name, href: t.href })),
+          })),
+          title: "Our Coverage Areas",
+          subtitle: "Professional services across the region",
+          footerCta: { label: "Get Free Quote", href: "/contact" },
         }
-      >
-        {label}
-      </Link>
-    );
-  }
-
-  const useMegaMenu = counties && counties.length > 0;
-  const buttonTextColor =
-    variant === "dark" ? "text-white" : "text-[var(--color-surface-secondary-foreground)]";
-
-  return (
-    <div ref={dropdownRef} className="relative">
-      <button
-        ref={buttonRef}
-        onClick={() => setIsOpen(!isOpen)}
-        className={
-          buttonClassName ??
-          `text-xs flex items-center gap-1 ${buttonTextColor} hover:text-brand-primary transition-colors font-medium`
-        }
-        aria-expanded={isOpen}
-        aria-haspopup="menu"
-        aria-controls="locations-dropdown-menu"
-      >
-        {label}
-        <svg
-          aria-hidden={true}
-          className={`w-4 h-4 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-        </svg>
-      </button>
-
-      {/* Dropdown Menu */}
-      {isOpen &&
-        (useMegaMenu ? (
-          <MegaMenuDropdown
-            id="locations-dropdown-menu"
-            counties={counties}
-            maxTownsPerCounty={maxTownsPerCounty}
-            variant="light"
-            onClose={() => setIsOpen(false)}
-          />
-        ) : (
-          <SimpleDropdown
-            id="locations-dropdown-menu"
-            locations={locations}
-            variant={variant}
-            onClose={() => setIsOpen(false)}
-          />
-        ))}
-    </div>
-  );
-}
-
-/** Simple grid dropdown for sites with few locations */
-function SimpleDropdown({
-  id,
-  locations,
-  variant = "light",
-  onClose,
-}: {
-  id: string;
-  locations: LocationItem[];
-  variant?: "dark" | "light";
-  onClose: () => void;
-}) {
-  const gridCols =
-    locations.length > 8 ? "grid-cols-3" : locations.length > 4 ? "grid-cols-2" : "grid-cols-1";
-  const isDark = variant === "dark";
-
-  return (
-    <div
-      id={id}
-      role="menu"
-      className={`absolute top-full left-1/2 -translate-x-1/2 mt-2 rounded-lg shadow-lg border z-50 min-w-[200px] max-w-[600px] ${
-        isDark
-          ? "bg-surface-inverse border-white/10"
-          : "bg-[var(--color-surface-card)] border-[var(--color-surface-subtle-border)]"
-      }`}
-    >
-      {/* Header */}
-      <div
-        className={`px-4 py-3 border-b ${isDark ? "border-white/10" : "border-[var(--color-surface-subtle-border)]"}`}
-      >
-        <h3
-          className={`font-semibold ${isDark ? "text-white" : "text-[var(--color-surface-foreground)]"}`}
-        >
-          Service Areas
-        </h3>
-        <p
-          className={`text-sm ${isDark ? "text-white/60" : "text-[var(--color-surface-muted-foreground)]"}`}
-        >
-          We proudly serve these locations
-        </p>
-      </div>
-
-      {/* Locations Grid */}
-      <div className={`grid ${gridCols} gap-1 p-2`}>
-        {locations.map((location: LocationItem) => (
-          <Link
-            key={location.slug}
-            href={`/locations/${location.slug}`}
-            onClick={onClose}
-            role="menuitem"
-            className={`px-3 py-2 rounded-md text-sm hover:bg-brand-primary/10 hover:text-brand-primary transition-colors ${
-              isDark ? "text-white/80" : "text-[var(--color-surface-secondary-foreground)]"
-            }`}
-          >
-            {location.name}
-          </Link>
-        ))}
-      </div>
-
-      {/* Footer */}
-      <div
-        className={`px-4 py-3 border-t rounded-b-lg ${
-          isDark
-            ? "border-white/10 bg-white/5"
-            : "border-[var(--color-surface-subtle-border)] bg-[var(--color-surface-muted)]"
-        }`}
-      >
-        <Link
-          href="/locations"
-          onClick={onClose}
-          className="text-sm text-brand-primary hover:text-brand-primary-hover font-medium"
-        >
-          View all service areas &rarr;
-        </Link>
-      </div>
-    </div>
-  );
-}
-
-/** Mega-menu dropdown for sites with county-grouped locations */
-function MegaMenuDropdown({
-  id,
-  counties,
-  maxTownsPerCounty,
-  variant = "light",
-  onClose,
-}: {
-  id: string;
-  counties: CountyGroup[];
-  maxTownsPerCounty: number;
-  variant?: "dark" | "light";
-  onClose: () => void;
-}) {
-  const isDark = variant === "dark";
-  return (
-    <div
-      id={id}
-      role="menu"
-      className={`absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[640px] max-w-[95vw] rounded-lg shadow-xl z-50 border ${
-        isDark ? "bg-surface-inverse border-white/10" : "bg-surface-card border-surface-subtle"
-      }`}
-    >
-      <div className="p-5">
-        {/* Header */}
-        <div className="mb-4">
-          <h3
-            className={`text-lg font-semibold mb-2 ${isDark ? "text-white" : "text-surface-foreground"}`}
-          >
-            Our Coverage Areas
-          </h3>
-          <p className={`text-sm ${isDark ? "text-white/60" : "text-surface-foreground"}`}>
-            Professional services across the region
-          </p>
-        </div>
-
-        {/* Counties Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {counties.map((county) => (
-            <div key={county.slug} className="space-y-3">
-              {/* County Header */}
-              <Link
-                href={county.href}
-                role="menuitem"
-                className={`block text-base font-semibold text-brand-primary hover:text-brand-primary-hover transition-colors pb-2 border-b ${
-                  isDark ? "border-white/10" : "border-surface-subtle"
-                }`}
-                onClick={onClose}
-              >
-                {county.name}
-              </Link>
-
-              {/* Towns List */}
-              <ul className="space-y-2">
-                {county.towns.slice(0, maxTownsPerCounty).map((town) => (
-                  <li key={town.slug}>
-                    <Link
-                      href={town.href}
-                      role="menuitem"
-                      className={`flex items-center gap-2 text-sm transition-colors hover:text-brand-primary ${
-                        isDark ? "text-white/80" : "text-surface-foreground"
-                      }`}
-                      onClick={onClose}
-                    >
-                      {town.name}
-                      <span className="inline-block w-2 h-2 bg-brand-primary rounded-full flex-shrink-0" />
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-
-        {/* Footer */}
-        <div
-          className={`mt-4 pt-4 border-t ${isDark ? "border-white/10" : "border-surface-subtle"}`}
-        >
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 md:gap-0">
-            <p className={`text-sm ${isDark ? "text-white/60" : "text-surface-foreground"}`}>
-              Can&apos;t find your area? We cover the entire region.
-            </p>
-            <Link
-              href="/contact"
-              className="inline-flex items-center gap-2 text-sm font-medium text-brand-primary hover:text-brand-primary-hover"
-              onClick={onClose}
-            >
-              Get Free Quote
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M17 8l4 4m0 0l-4 4m4-4H3"
-                />
-              </svg>
-            </Link>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+      : {
+          mode: "mega",
+          items: locations.map((l) => ({
+            label: l.name,
+            href: `/locations/${l.slug}`,
+          })),
+          title: "Service Areas",
+          subtitle: "We proudly serve these locations",
+          footerLink: {
+            label: "View all service areas →",
+            href: "/locations",
+          },
+        };
+  return <HeaderNavDropdown config={config} label={label} variant={variant} />;
 }
