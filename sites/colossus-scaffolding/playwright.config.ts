@@ -15,14 +15,9 @@ import { defineConfig, devices } from "@playwright/test";
  */
 export default defineConfig({
   testDir: "./e2e",
-  // Only run smoke and standard tests by default (exclude .full.spec.ts and visual-regression.spec.ts)
-  // Visual regression requires seeded baselines — use test:e2e:visual or E2E_VISUAL=1
+  // Only run smoke and standard tests by default (exclude .full.spec.ts)
   testMatch: process.env.E2E_FULL ? "**/*.spec.ts" : "**/*.spec.ts",
-  testIgnore: process.env.E2E_FULL
-    ? []
-    : process.env.E2E_VISUAL
-      ? ["**/*.full.spec.ts"]
-      : ["**/*.full.spec.ts", "**/visual-regression.spec.ts"],
+  testIgnore: process.env.E2E_FULL ? [] : ["**/*.full.spec.ts"],
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
