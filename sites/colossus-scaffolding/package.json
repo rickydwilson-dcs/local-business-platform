@@ -15,6 +15,8 @@
     "test:e2e:smoke": "playwright test e2e/smoke.spec.ts --project=chromium",
     "test:e2e:chromium": "playwright test --project=chromium",
     "test:e2e:full": "E2E_FULL=1 playwright test",
+    "test:e2e:visual": "E2E_VISUAL=1 playwright test e2e/visual-regression.spec.ts --project=chromium",
+    "test:e2e:visual:update": "E2E_VISUAL=1 playwright test e2e/visual-regression.spec.ts --project=chromium --update-snapshots",
     "validate:content": "tsx ../../scripts/validate-content.ts all",
     "validate:quality": "tsx scripts/validate-quality.ts",
     "validate:all": "npm run validate:content && npm run validate:quality",
