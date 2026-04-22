@@ -66,6 +66,8 @@ Thumbs.db
 # Keep the directory structure examples
 !assets/.gitkeep
 !assets/README.md
+# Playwright snapshot baselines are committed (not R2 assets)
+!sites/**/e2e/**/*.png
 
 # Temporary files
 tmp/
