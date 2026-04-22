@@ -71,15 +71,12 @@ export function TestimonialGrid({
     <section className={`${bg} ${className ?? ""}`} data-component="TestimonialGrid">
       <div className="mx-auto max-w-4xl px-4 py-16 md:py-24 sm:px-6 lg:px-8">
         {d.heading && (
-          <h2
-            data-slot="heading"
-            className="text-xl md:text-xl font-bold tracking-tight mb-4 text-center"
-          >
+          <h2 data-slot="heading" className="heading-section tracking-tight text-center">
             {d.heading}
           </h2>
         )}
         {d.subheading && (
-          <p className="text-surface-muted-foreground mb-12 text-center text-base">
+          <p className="text-body text-surface-muted-foreground mb-12 text-center">
             {d.subheading}
           </p>
         )}

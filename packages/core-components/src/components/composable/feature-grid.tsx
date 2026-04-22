@@ -67,15 +67,13 @@ export function FeatureGrid({ slots: slotOverrides, layout, data, className }: F
           {slots.showSectionHeading && d.heading && (
             <h2
               data-slot="heading"
-              className="text-2xl md:text-3xl font-bold tracking-tight mb-4 text-surface-foreground"
+              className="heading-section tracking-tight text-surface-foreground"
             >
               {d.heading}
             </h2>
           )}
           {slots.showSectionIntro && d.intro && (
-            <p className="text-surface-muted-foreground mb-12 max-w-2xl text-base leading-relaxed">
-              {d.intro}
-            </p>
+            <p className="text-body text-surface-muted-foreground mb-12 max-w-2xl">{d.intro}</p>
           )}
           <div className="grid gap-8 md:grid-cols-2">
             {features.map((feature, i) => (
@@ -99,19 +97,19 @@ export function FeatureGrid({ slots: slotOverrides, layout, data, className }: F
                   )}
                   <h3
                     data-slot="featureTitle"
-                    className="text-xl font-bold text-surface-foreground mb-3"
+                    className="heading-card text-surface-foreground mb-3"
                   >
                     {feature.title}
                   </h3>
                   {slots.showDescriptions && feature.description && (
-                    <p className="text-sm text-surface-muted-foreground leading-relaxed">
+                    <p className="text-body-sm text-surface-muted-foreground">
                       {feature.description}
                     </p>
                   )}
                   {feature.href && (
                     <Link
                       href={feature.href}
-                      className="inline-flex items-center mt-5 text-brand-primary font-semibold group-hover:translate-x-1 transition-transform text-sm"
+                      className="text-label inline-flex items-center mt-5 text-brand-primary group-hover:translate-x-1 transition-transform"
                     >
                       Learn more{" "}
                       <span aria-hidden="true" className="ml-1">
@@ -138,15 +136,13 @@ export function FeatureGrid({ slots: slotOverrides, layout, data, className }: F
           {slots.showSectionHeading && d.heading && (
             <h2
               data-slot="heading"
-              className="text-xl md:text-xl font-bold tracking-tight mb-8 text-surface-foreground"
+              className="heading-section tracking-tight mb-8 text-surface-foreground"
             >
               {d.heading}
             </h2>
           )}
           {slots.showSectionIntro && d.intro && (
-            <p className="text-surface-muted-foreground mb-8 max-w-xl text-xs leading-relaxed">
-              {d.intro}
-            </p>
+            <p className="text-body text-surface-muted-foreground mb-8 max-w-xl">{d.intro}</p>
           )}
           <div className={`grid gap-4 ${gridCols}`}>
             {features.map((feature, i) => (
@@ -155,7 +151,9 @@ export function FeatureGrid({ slots: slotOverrides, layout, data, className }: F
                 <div>
                   <h3 className="font-bold text-surface-foreground mb-1">{feature.title}</h3>
                   {slots.showDescriptions && feature.description && (
-                    <p className="text-xs text-surface-muted-foreground">{feature.description}</p>
+                    <p className="text-body-sm text-surface-muted-foreground">
+                      {feature.description}
+                    </p>
                   )}
                 </div>
               </div>
@@ -175,16 +173,13 @@ export function FeatureGrid({ slots: slotOverrides, layout, data, className }: F
         {slots.showSectionHeading && d.heading && (
           <h2
             data-slot="heading"
-            className="text-xl md:text-xl font-bold tracking-tight mb-12 text-surface-foreground"
+            className="heading-section tracking-tight mb-12 text-surface-foreground"
           >
             {d.heading}
           </h2>
         )}
         {slots.showSectionIntro && d.intro && (
-          <p
-            data-slot="intro"
-            className="text-surface-muted-foreground mb-12 max-w-xl text-xs leading-relaxed"
-          >
+          <p data-slot="intro" className="text-body text-surface-muted-foreground mb-12 max-w-xl">
             {d.intro}
           </p>
         )}
@@ -198,21 +193,18 @@ export function FeatureGrid({ slots: slotOverrides, layout, data, className }: F
                   </div>
                 )}
                 <div>
-                  <h3
-                    data-slot="featureTitle"
-                    className="text-sm font-semibold text-surface-foreground mb-2"
-                  >
+                  <h3 data-slot="featureTitle" className="text-label text-surface-foreground mb-2">
                     {feature.title}
                   </h3>
                   {slots.showDescriptions && feature.description && (
                     <p
-                      className={`text-xs leading-relaxed ${layout?.background === "inverse" ? "text-white/80" : "text-surface-muted-foreground"}`}
+                      className={`text-body-sm ${layout?.background === "inverse" ? "text-white/80" : "text-surface-muted-foreground"}`}
                     >
                       {feature.description}
                     </p>
                   )}
                   {feature.href && (
-                    <span className="inline-flex items-center mt-4 text-brand-primary font-medium group-hover:translate-x-1 transition-transform text-xs">
+                    <span className="text-caption inline-flex items-center mt-4 text-brand-primary font-medium group-hover:translate-x-1 transition-transform">
                       View services <span aria-hidden="true">→</span>
                     </span>
                   )}

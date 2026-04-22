@@ -78,15 +78,12 @@ export function BlogGrid({ slots: slotOverrides, layout, data, className }: Blog
         {slots.showSectionHeading && (d.heading || d.subheading) && (
           <div className="mb-12 text-center">
             {d.heading && (
-              <h2
-                data-slot="heading"
-                className="text-xl md:text-xl font-bold tracking-tight mb-4 text-center"
-              >
+              <h2 data-slot="heading" className="heading-section tracking-tight text-center">
                 {d.heading}
               </h2>
             )}
             {d.subheading && (
-              <p data-slot="subheading" className="text-surface-muted-foreground text-base">
+              <p data-slot="subheading" className="text-body text-surface-muted-foreground">
                 {d.subheading}
               </p>
             )}
@@ -114,7 +111,7 @@ export function BlogGrid({ slots: slotOverrides, layout, data, className }: Blog
                 {slots.showCategory && post.category && (
                   <span
                     data-slot="category"
-                    className="bg-brand-primary/10 text-brand-primary inline-block rounded-full px-3 py-1 text-xs font-semibold"
+                    className="text-caption bg-brand-primary/10 text-brand-primary inline-block rounded-full px-3 py-1 font-semibold"
                   >
                     {post.category}
                   </span>
@@ -123,32 +120,32 @@ export function BlogGrid({ slots: slotOverrides, layout, data, className }: Blog
                   <time
                     dateTime={post.date}
                     data-slot="date"
-                    className="text-surface-muted-foreground text-xs"
+                    className="text-body-sm text-surface-muted-foreground"
                   >
                     {formatDate(post.date)}
                   </time>
                 )}
                 <h3
                   data-slot="title"
-                  className="text-surface-foreground text-xs font-bold group-hover:text-brand-primary transition-colors"
+                  className="heading-card-sm text-surface-foreground group-hover:text-brand-primary transition-colors"
                 >
                   <Link href={`/blog/${post.slug}`}>{post.title}</Link>
                 </h3>
                 {slots.showExcerpt && post.excerpt && (
                   <p
                     data-slot="excerpt"
-                    className="text-surface-muted-foreground line-clamp-2 text-xs"
+                    className="text-body-sm text-surface-muted-foreground line-clamp-2"
                   >
                     {post.excerpt}
                   </p>
                 )}
                 {slots.showAuthor && post.author && (
-                  <p data-slot="author" className="text-surface-muted-foreground text-xs">
+                  <p data-slot="author" className="text-body-sm text-surface-muted-foreground">
                     {post.author}
                   </p>
                 )}
                 {slots.showReadingTime && typeof post.readingTime === "number" && (
-                  <p data-slot="readingTime" className="text-surface-muted-foreground text-xs">
+                  <p data-slot="readingTime" className="text-body-sm text-surface-muted-foreground">
                     {post.readingTime} min read
                   </p>
                 )}
