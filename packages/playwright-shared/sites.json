@@ -1,0 +1,34 @@
+{
+  "prod": [
+    {
+      "name": "colossus",
+      "baseURL": "https://colossusscaffolding.com",
+      "hasLocations": true,
+      "firstServiceSlug": "access-scaffolding",
+      "firstLocationSlug": "brighton"
+    },
+    {
+      "name": "dj-fox",
+      "baseURL": "https://www.djfoxelectrical.com",
+      "hasLocations": false,
+      "firstServiceSlug": null,
+      "firstLocationSlug": null
+    },
+    {
+      "name": "dcs",
+      "baseURL": "https://digitalconsultingservices.co.uk",
+      "hasLocations": false,
+      "firstServiceSlug": null,
+      "firstLocationSlug": null
+    }
+  ],
+  "staging": [
+    {
+      "name": "colossus",
+      "baseURL": "https://colossus-scaffolding.vercel.app",
+      "hasLocations": true,
+      "firstServiceSlug": "access-scaffolding",
+      "firstLocationSlug": "brighton"
+    }
+  ]
+}

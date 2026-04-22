@@ -1,4 +1,5 @@
 import Anthropic from "@anthropic-ai/sdk";
+import { createTrace, flushLangfuse } from "./langfuse-tracer";
 import { matchComponents } from "./component-matcher";
 import type { SectionBlueprint } from "./reference-analysis-types";
 import { COMPOSITION_CATALOG } from "./composition-catalog";
@@ -16,6 +17,7 @@ export async function generateStructuralComposition(
 ): Promise<SiteCompositionConfig> {
   const client = new Anthropic();
   const model = options?.model ?? "claude-sonnet-4-6";
+  const trace = createTrace("composition-structural-pass", { siteRef: brief.reference?.url });
 
   // Convert design-brief sections to SectionBlueprint shape for the matcher
   const allSections: SectionBlueprint[] = brief.pageBlueprints.flatMap((p) =>
@@ -80,6 +82,14 @@ Produce a SiteCompositionConfig JSON with version "1", siteId derived from brief
       messages: [{ role: "user", content: userContent }],
     });
 
+    trace.logGeneration({
+      name: "structural-composition",
+      model,
+      input: userContent,
+      inputTokens: response.usage.input_tokens,
+      outputTokens: response.usage.output_tokens,
+    });
+
     const content = response.content[0];
     if (content.type !== "text") throw new Error("Unexpected response type");
 
@@ -92,9 +102,22 @@ Produce a SiteCompositionConfig JSON with version "1", siteId derived from brief
   }
 
   try {
-    return await attempt();
+    const result = await attempt();
+    trace.end(result);
+    await flushLangfuse();
+    return result;
   } catch (err) {
     const errorMsg = err instanceof Error ? err.message : String(err);
-    return await attempt(errorMsg);
+    try {
+      const result = await attempt(errorMsg);
+      trace.end(result);
+      await flushLangfuse();
+      return result;
+    } catch (err2) {
+      const finalError = err2 instanceof Error ? err2 : new Error(String(err2));
+      trace.end(undefined, finalError);
+      await flushLangfuse();
+      throw finalError;
+    }
   }
 }

@@ -1,0 +1,15 @@
+{
+  "name": "@platform/playwright-shared",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Cross-site smoke test suite for the regression watchdog",
+  "scripts": {
+    "test:smoke": "playwright test --config smoke.config.ts",
+    "test:smoke:staging": "WATCHDOG_ENV=staging playwright test --config smoke.config.ts"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.56.0",
+    "@types/node": "^20",
+    "typescript": "^5"
+  }
+}

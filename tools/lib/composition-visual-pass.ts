@@ -2,6 +2,7 @@ import Anthropic from "@anthropic-ai/sdk";
 import { VisualPassOutputSchema } from "./visual-output-schema";
 import type { DesignBrief } from "./design-brief-types";
 import type { VisualPassOutput } from "./visual-output-schema";
+import { createTrace, flushLangfuse } from "./langfuse-tracer";
 
 const HEX_PATTERN = /#[0-9a-fA-F]{6}/g;
 
@@ -11,6 +12,7 @@ export async function generateVisualConfig(
 ): Promise<VisualPassOutput> {
   const client = new Anthropic();
   const model = options?.model ?? "claude-sonnet-4-6";
+  const trace = createTrace("composition-visual-pass", { siteRef: brief.reference?.url });
 
   const systemPrompt = `You are a design token expert. Given a DesignBrief JSON, produce a visual configuration object for a white-label website.
 
@@ -52,6 +54,14 @@ Output schema:
       messages: [{ role: "user", content: userContent }],
     });
 
+    trace.logGeneration({
+      name: "visual-config",
+      model,
+      input: userContent,
+      inputTokens: response.usage.input_tokens,
+      outputTokens: response.usage.output_tokens,
+    });
+
     const content = response.content[0];
     if (content.type !== "text") throw new Error("Unexpected response type");
 
@@ -75,10 +85,16 @@ Output schema:
   let lastError = "";
   for (let i = 0; i < 3; i++) {
     try {
-      return await attempt(i > 0 ? lastError : undefined);
+      const result = await attempt(i > 0 ? lastError : undefined);
+      trace.end(result);
+      await flushLangfuse();
+      return result;
     } catch (err) {
       lastError = err instanceof Error ? err.message : String(err);
     }
   }
-  throw new Error(`Visual pass failed after 3 attempts. Last error: ${lastError}`);
+  const finalError = new Error(`Visual pass failed after 3 attempts. Last error: ${lastError}`);
+  trace.end(undefined, finalError);
+  await flushLangfuse();
+  throw finalError;
 }

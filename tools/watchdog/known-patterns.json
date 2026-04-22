@@ -1,0 +1,119 @@
+{
+  "patterns": [
+    {
+      "id": "turbopack-postcss",
+      "name": "Turbopack PostCSS panic in CI",
+      "symptoms": [
+        "PostCSS worker error",
+        "CSS parser panic",
+        "turbopack build failed",
+        "postcss failed to process",
+        "turbopack serialization",
+        "failed to process css"
+      ],
+      "root_cause": "Turbopack has known PostCSS serialization bugs with function-based Tailwind plugins. Production builds must use Next.js webpack mode.",
+      "fix_strategy": "Change the build script in the affected site's package.json from 'next build' to 'next build --webpack'",
+      "fix_old_string": "\"next build\"",
+      "fix_new_string": "\"next build --webpack\"",
+      "relevant_file_globs": ["sites/*/package.json"],
+      "docs_ref": "docs/guides/debugging.md#build-failures"
+    },
+    {
+      "id": "csp-unsafe-eval",
+      "name": "CSP blocking scripts in production",
+      "symptoms": [
+        "Refused to execute inline script",
+        "unsafe-eval",
+        "unsafe-inline",
+        "Content Security Policy",
+        "CSP violation",
+        "script blocked",
+        "refused to load the script"
+      ],
+      "root_cause": "The Content Security Policy in next.config.ts is missing a required directive or source. Scripts that work in dev (where CSP is relaxed) fail silently in production.",
+      "fix_strategy": "Add the required source or directive to the Content-Security-Policy header in next.config.ts. Common fixes: add domain to connect-src for API calls, or add specific script sources to script-src.",
+      "fix_old_string": null,
+      "fix_new_string": null,
+      "relevant_file_globs": ["sites/*/next.config.ts", "sites/*/next.config.js"],
+      "docs_ref": "docs/guides/debugging.md#csp-content-security-policy-issues"
+    },
+    {
+      "id": "tailwind-glob-scope",
+      "name": "Tailwind scanning node_modules via ** glob",
+      "symptoms": [
+        "18+ minute build",
+        "tailwind scanning node_modules",
+        "content glob",
+        "build timeout",
+        "tailwind took",
+        "slow tailwind",
+        "packages/themes/**"
+      ],
+      "root_cause": "A content glob using ** descends into node_modules causing Tailwind to scan thousands of files. The glob packages/themes/**/*.{ext} is the known offender.",
+      "fix_strategy": "Replace ** globs in tailwind.config.ts with scoped globs: use packages/themes/*/*.{ext} and packages/themes/*/components/**/*.{ext} instead of packages/themes/**/*.{ext}",
+      "fix_old_string": "packages/themes/**/*.{js,ts,tsx}",
+      "fix_new_string": "packages/themes/*/*.{js,ts,tsx}",
+      "relevant_file_globs": ["sites/*/tailwind.config.ts", "sites/*/tailwind.config.js"],
+      "docs_ref": "CLAUDE.md#tailwind-content-globs"
+    },
+    {
+      "id": "tailwind-addutilities",
+      "name": "Theme token classes undefined at runtime",
+      "symptoms": [
+        "bg-brand-primary not found",
+        "text-brand-primary not found",
+        "theme token undefined",
+        "class not applied",
+        "addUtilities",
+        "addBase",
+        "CSS custom property undefined",
+        "var(--color-brand-primary) not defined"
+      ],
+      "root_cause": "The Tailwind plugin is not correctly calling addBase (for CSS custom properties) and addUtilities (for utility class→variable mappings). Theme tokens are only available when both are applied.",
+      "fix_strategy": "Verify packages/theme-system/tailwind-plugin.ts calls both plugin.addBase() with :root CSS custom properties AND plugin.addUtilities() with the token utility classes. Both calls are required.",
+      "fix_old_string": null,
+      "fix_new_string": null,
+      "relevant_file_globs": [
+        "packages/theme-system/src/tailwind-plugin.ts",
+        "sites/*/tailwind.config.ts"
+      ],
+      "docs_ref": "docs/architecture/how-theme-system-works.md"
+    },
+    {
+      "id": "site-rename-lockfile",
+      "name": "CI fails after site directory rename",
+      "symptoms": [
+        "workspace not found",
+        "package not found in workspace",
+        "ERR_PNPM_NO_MATCHING_VERSION",
+        "lockfile out of date",
+        "frozen-lockfile",
+        "site renamed"
+      ],
+      "root_cause": "Renaming a site directory changes the workspace package name. The pnpm lockfile references the old name and pnpm install --frozen-lockfile (used in CI) will fail until the lockfile is regenerated.",
+      "fix_strategy": "Run 'pnpm install' locally (without --frozen-lockfile) to regenerate the lockfile, then commit the updated pnpm-lock.yaml file.",
+      "fix_old_string": null,
+      "fix_new_string": null,
+      "relevant_file_globs": ["pnpm-lock.yaml", "pnpm-workspace.yaml"],
+      "docs_ref": "CLAUDE.md"
+    },
+    {
+      "id": "external-font-import",
+      "name": "Fonts silently missing in production",
+      "symptoms": [
+        "font not loading",
+        "fallback font displayed",
+        "@import url",
+        "Google Fonts not loading",
+        "font flash",
+        "incorrect font rendered"
+      ],
+      "root_cause": "CSS @import url() for Google Fonts is silently ignored by Next.js/PostCSS pipeline. The font loads in dev but not in production builds.",
+      "fix_strategy": "Remove the @import url() from globals.css and add a <link> tag directly in the site's app/layout.tsx <head> section instead.",
+      "fix_old_string": "@import url('https://fonts.googleapis.com",
+      "fix_new_string": null,
+      "relevant_file_globs": ["sites/*/app/globals.css", "sites/*/app/layout.tsx"],
+      "docs_ref": "CLAUDE.md"
+    }
+  ]
+}
