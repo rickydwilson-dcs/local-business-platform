@@ -70,7 +70,7 @@ function renderSection(section: TextSectionBlock, index: number) {
   if (type === "list") {
     return (
       <section key={index} className="mb-12">
-        <h2 id={headingId} className="text-h2 mb-4">
+        <h2 id={headingId} className="heading-section">
           {section.heading}
         </h2>
         <ul className="space-y-3">
@@ -91,7 +91,7 @@ function renderSection(section: TextSectionBlock, index: number) {
   if (type === "callout-grid") {
     return (
       <section key={index} className="mb-12">
-        <h2 id={headingId} className="text-h2 mb-6">
+        <h2 id={headingId} className="heading-section mb-6">
           {section.heading}
         </h2>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
@@ -102,7 +102,7 @@ function renderSection(section: TextSectionBlock, index: number) {
             return (
               <div key={i} className={`rounded-lg p-4 ${colorClasses}`}>
                 {item.label && <p className="font-semibold">{item.label}</p>}
-                {item.description && <p className="mt-1 text-xs">{item.description}</p>}
+                {item.description && <p className="text-caption mt-1">{item.description}</p>}
               </div>
             );
           })}
@@ -114,7 +114,7 @@ function renderSection(section: TextSectionBlock, index: number) {
   if (type === "table") {
     return (
       <section key={index} className="mb-12">
-        <h2 id={headingId} className="text-h2 mb-6">
+        <h2 id={headingId} className="heading-section mb-6">
           {section.heading}
         </h2>
         <div className="overflow-x-auto">
@@ -138,18 +138,18 @@ function renderSection(section: TextSectionBlock, index: number) {
   if (type === "numbered-grid") {
     return (
       <section key={index} className="mb-12">
-        <h2 id={headingId} className="text-h2 mb-6">
+        <h2 id={headingId} className="heading-section mb-6">
           {section.heading}
         </h2>
         <div className="grid grid-cols-2 gap-6 md:grid-cols-3">
           {items.map((item, i) => (
             <div key={i}>
-              <div className="bg-brand-primary text-brand-on-primary mb-3 flex h-8 w-8 items-center justify-center rounded-full text-xs font-semibold">
+              <div className="text-caption bg-brand-primary text-brand-on-primary mb-3 flex h-8 w-8 items-center justify-center rounded-full font-semibold">
                 {i + 1}
               </div>
               {item.label && <p className="mb-1 font-semibold">{item.label}</p>}
               {item.description && (
-                <p className="text-surface-muted-foreground text-xs">{item.description}</p>
+                <p className="text-caption text-surface-muted-foreground">{item.description}</p>
               )}
             </div>
           ))}
@@ -161,7 +161,7 @@ function renderSection(section: TextSectionBlock, index: number) {
   if (type === "two-col") {
     return (
       <section key={index} className="mb-12">
-        <h2 id={headingId} className="text-h2 mb-6">
+        <h2 id={headingId} className="heading-section mb-6">
           {section.heading}
         </h2>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
@@ -169,7 +169,7 @@ function renderSection(section: TextSectionBlock, index: number) {
             <div key={i} className="border-surface-border rounded-lg border p-4">
               {item.label && <p className="mb-2 font-semibold">{item.label}</p>}
               {item.description && (
-                <p className="text-surface-muted-foreground text-xs">{item.description}</p>
+                <p className="text-caption text-surface-muted-foreground">{item.description}</p>
               )}
             </div>
           ))}
@@ -180,12 +180,10 @@ function renderSection(section: TextSectionBlock, index: number) {
 
   return (
     <section key={index} className="mb-12">
-      <h2 id={headingId} className="text-h2 mb-4">
+      <h2 id={headingId} className="heading-section">
         {section.heading}
       </h2>
-      {section.body && (
-        <p className="text-surface-muted-foreground text-xs leading-relaxed">{section.body}</p>
-      )}
+      {section.body && <p className="text-body text-surface-muted-foreground">{section.body}</p>}
     </section>
   );
 }
@@ -212,12 +210,12 @@ export function TextSection({ slots: slotOverrides, layout, data, className }: T
     <article className={`${bg} ${className ?? ""}`} data-component="TextSection">
       <div className={`mx-auto ${maxWidth} px-6 py-16 md:py-24`}>
         {heading && (
-          <h1 data-slot="heading" className="text-h1 mb-4">
+          <h1 data-slot="heading" className="heading-hero mb-4">
             {heading}
           </h1>
         )}
         {slots.showLastUpdated && lastUpdated && (
-          <p data-slot="lastUpdated" className="text-surface-muted-foreground mb-8 text-xs">
+          <p data-slot="lastUpdated" className="text-body-sm text-surface-muted-foreground mb-8">
             {formatLastUpdated(lastUpdated)}
           </p>
         )}
@@ -227,7 +225,7 @@ export function TextSection({ slots: slotOverrides, layout, data, className }: T
             aria-label="Table of contents"
             className="bg-surface-subtle mb-10 rounded-lg p-6"
           >
-            <p className="mb-3 text-xs font-semibold uppercase tracking-wide">Contents</p>
+            <p className="text-eyebrow mb-3">Contents</p>
             <ol className="list-decimal space-y-2 pl-5">
               {tableOfContents.map((entry) => (
                 <li key={entry.id}>
@@ -240,10 +238,7 @@ export function TextSection({ slots: slotOverrides, layout, data, className }: T
           </nav>
         )}
         {intro && (
-          <p
-            data-slot="intro"
-            className="text-surface-muted-foreground mb-10 text-xs leading-relaxed"
-          >
+          <p data-slot="intro" className="text-body text-surface-muted-foreground mb-10">
             {intro}
           </p>
         )}

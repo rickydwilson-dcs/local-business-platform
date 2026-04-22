@@ -53,7 +53,7 @@ export function ImageGridSection({
     <section className={`${bg} ${className ?? ""}`} data-component="ImageGridSection">
       <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
         {d.heading && (
-          <h2 data-slot="heading" className="text-h2 mb-12 text-center">
+          <h2 data-slot="heading" className="heading-section mb-12 text-center">
             {d.heading}
           </h2>
         )}
@@ -74,18 +74,18 @@ export function ImageGridSection({
                     {slots.showCategoryBadge && card.category && (
                       <span
                         data-slot="categoryBadge"
-                        className="bg-brand-primary mb-3 inline-block w-fit rounded-full px-3 py-1 text-xs text-white"
+                        className="text-caption bg-brand-primary mb-3 inline-block w-fit rounded-full px-3 py-1 text-white"
                       >
                         {card.category}
                       </span>
                     )}
                     {slots.showTitle && (
-                      <h3 data-slot="cardTitle" className="text-lg font-bold text-white">
+                      <h3 data-slot="cardTitle" className="heading-card-sm text-white">
                         {card.title}
                       </h3>
                     )}
                     {slots.showArrow && (
-                      <span data-slot="arrow" className="mt-2 text-xs text-white/80">
+                      <span data-slot="arrow" className="text-caption mt-2 text-white/80">
                         View More →
                       </span>
                     )}

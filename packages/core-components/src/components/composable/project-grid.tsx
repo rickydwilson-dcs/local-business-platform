@@ -63,17 +63,14 @@ export function ProjectGrid({ slots: slotOverrides, layout, data, className }: P
     <section className={`${bg} ${className ?? ""}`} data-component="ProjectGrid">
       <div className="mx-auto max-w-4xl px-4 py-16 md:py-24 sm:px-6 lg:px-8">
         {slots.showSectionHeading && d.heading && (
-          <h2
-            data-slot="heading"
-            className="text-xl md:text-xl font-bold tracking-tight mb-4 text-center"
-          >
+          <h2 data-slot="heading" className="heading-section tracking-tight text-center">
             {d.heading}
           </h2>
         )}
         {slots.showSectionHeading && d.subheading && (
           <p
             data-slot="subheading"
-            className="text-surface-muted-foreground mb-12 text-center text-base"
+            className="text-body text-surface-muted-foreground mb-12 text-center"
           >
             {d.subheading}
           </p>
@@ -83,8 +80,8 @@ export function ProjectGrid({ slots: slotOverrides, layout, data, className }: P
           <div data-slot="stats" className="flex flex-wrap justify-center gap-8 mb-8">
             {stats.map((stat, i) => (
               <div key={i}>
-                <div className="text-brand-primary text-xl font-bold">{stat.value}</div>
-                <div className="text-surface-muted-foreground text-xs">{stat.label}</div>
+                <div className="stat-number text-brand-primary">{stat.value}</div>
+                <div className="text-caption text-surface-muted-foreground">{stat.label}</div>
               </div>
             ))}
           </div>
@@ -102,7 +99,7 @@ export function ProjectGrid({ slots: slotOverrides, layout, data, className }: P
                     {project.tags.map((tag, i) => (
                       <span
                         key={i}
-                        className="bg-brand-primary/10 text-brand-primary rounded px-2 py-1 text-xs font-semibold"
+                        className="text-caption bg-brand-primary/10 text-brand-primary rounded px-2 py-1 font-semibold"
                       >
                         {tag}
                       </span>
@@ -112,7 +109,7 @@ export function ProjectGrid({ slots: slotOverrides, layout, data, className }: P
 
                 <h3
                   data-slot="projectTitle"
-                  className="mb-3 text-xs font-bold text-surface-foreground group-hover:text-brand-primary transition-colors"
+                  className="heading-card-sm mb-3 text-surface-foreground group-hover:text-brand-primary transition-colors"
                 >
                   <Link href={`/projects/${project.slug}`}>{project.title}</Link>
                 </h3>
@@ -120,14 +117,14 @@ export function ProjectGrid({ slots: slotOverrides, layout, data, className }: P
                 {slots.showDescription && project.description && (
                   <p
                     data-slot="description"
-                    className="text-surface-muted-foreground mb-3 line-clamp-2 text-xs"
+                    className="text-body-sm text-surface-muted-foreground mb-3 line-clamp-2"
                   >
                     {project.description}
                   </p>
                 )}
 
                 {slots.showDate && project.date && (
-                  <div data-slot="date" className="text-surface-muted-foreground mb-3 text-xs">
+                  <div data-slot="date" className="text-caption text-surface-muted-foreground mb-3">
                     {project.date.substring(0, 4)}
                   </div>
                 )}
@@ -135,7 +132,7 @@ export function ProjectGrid({ slots: slotOverrides, layout, data, className }: P
                 <Link
                   href={`/projects/${project.slug}`}
                   aria-label={`View project: ${project.title}`}
-                  className="text-brand-primary text-xs font-medium"
+                  className="text-caption text-brand-primary font-medium"
                 >
                   View Project <span aria-hidden="true">→</span>
                 </Link>

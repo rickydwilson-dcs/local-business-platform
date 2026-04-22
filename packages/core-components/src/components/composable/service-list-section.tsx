@@ -64,14 +64,14 @@ export function ServiceListSection({
             {slots.showEyebrow && eyebrow && (
               <p
                 data-slot="eyebrow"
-                className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-brand-primary"
+                className="text-eyebrow mb-3 tracking-[0.2em] text-brand-primary"
               >
                 {eyebrow}
               </p>
             )}
             <h2
               data-slot="heading"
-              className="text-2xl md:text-3xl font-bold tracking-tight text-surface-foreground mb-6"
+              className="heading-section tracking-tight text-surface-foreground mb-6"
             >
               {heading}
             </h2>
@@ -119,7 +119,7 @@ export function ServiceListSection({
                       {item.title}
                     </h3>
                     {slots.showItemDescription && item.description && (
-                      <p className="line-clamp-2 text-xs leading-relaxed text-surface-muted-foreground">
+                      <p className="text-body-sm line-clamp-2 text-surface-muted-foreground">
                         {item.description}
                       </p>
                     )}

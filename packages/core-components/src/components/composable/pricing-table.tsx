@@ -51,14 +51,14 @@ export function PricingTable({ slots: slotOverrides, layout, data, className }: 
     <section className={`${bg} ${className ?? ""}`} data-component="PricingTable">
       <div className="mx-auto max-w-4xl px-4 py-16 md:py-24 sm:px-6 lg:px-8">
         {slots.showSectionHeading && d.heading && (
-          <h2 data-slot="heading" className="text-h2 mb-4 text-center">
+          <h2 data-slot="heading" className="heading-section text-center">
             {d.heading}
           </h2>
         )}
         {slots.showSectionHeading && d.subheading && (
           <p
             data-slot="subheading"
-            className="text-surface-muted-foreground mb-12 text-center text-base"
+            className="text-body text-surface-muted-foreground mb-12 text-center"
           >
             {d.subheading}
           </p>
@@ -74,20 +74,22 @@ export function PricingTable({ slots: slotOverrides, layout, data, className }: 
                   {item.icon}
                 </div>
               )}
-              <div data-slot="label" className="text-surface-foreground text-xs font-medium">
+              <div data-slot="label" className="text-body-sm text-surface-foreground font-medium">
                 {item.label}
               </div>
-              <div data-slot="priceRange" className="text-brand-primary text-xs font-bold">
+              <div data-slot="priceRange" className="text-body-sm text-brand-primary font-bold">
                 {item.priceRange}
               </div>
               {item.description && (
-                <p className="text-xs text-surface-muted-foreground mt-2">{item.description}</p>
+                <p className="text-caption text-surface-muted-foreground mt-2">
+                  {item.description}
+                </p>
               )}
             </div>
           ))}
         </div>
         {slots.showDisclaimer && d.disclaimer && (
-          <p data-slot="disclaimer" className="text-surface-muted-foreground mt-4 text-xs">
+          <p data-slot="disclaimer" className="text-caption text-surface-muted-foreground mt-4">
             {d.disclaimer}
           </p>
         )}

@@ -56,16 +56,13 @@ export function LocationPillsSection({
         <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
           <div>
             {slots.showEyebrow && eyebrow && (
-              <p
-                data-slot="eyebrow"
-                className="mb-3 text-xs font-semibold uppercase tracking-widest text-brand-primary"
-              >
+              <p data-slot="eyebrow" className="text-eyebrow mb-3 text-brand-primary">
                 {eyebrow}
               </p>
             )}
             <h2
               data-slot="heading"
-              className="text-2xl md:text-3xl font-bold tracking-tight text-surface-foreground"
+              className="heading-section tracking-tight text-surface-foreground"
             >
               {heading}
             </h2>
@@ -74,7 +71,7 @@ export function LocationPillsSection({
             <a
               href={ctaHref}
               data-slot="cta"
-              className="btn-secondary text-xs active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2"
+              className="btn-secondary text-caption active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2"
             >
               {ctaText}
             </a>

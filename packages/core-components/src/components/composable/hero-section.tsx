@@ -87,28 +87,25 @@ export function ComposableHeroSection({
           >
             <div>
               {slots.showEyebrow && d.eyebrow && (
-                <p
-                  data-slot="eyebrow"
-                  className="mb-3 text-xs font-semibold uppercase tracking-widest text-white/80"
-                >
+                <p data-slot="eyebrow" className="text-eyebrow mb-3 text-white/80">
                   {d.eyebrow}
                 </p>
               )}
-              <h1
-                data-slot="heading"
-                className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-6 text-white"
-              >
+              <h1 data-slot="heading" className="heading-hero tracking-tight text-white">
                 {d.heading ?? ""}
               </h1>
               {slots.showSubheading && d.subheading && (
-                <p data-slot="subheading" className="mb-8 text-lg leading-relaxed text-white/90">
+                <p data-slot="subheading" className="text-body-lg mb-8 text-white/90">
                   {d.subheading}
                 </p>
               )}
               {slots.showTrustBadges && trustBadges.length > 0 && (
                 <div className="mb-8 flex flex-wrap gap-3">
                   {trustBadges.map((badge, i) => (
-                    <span key={i} className="rounded-full bg-white/20 px-3 py-1 text-xs text-white">
+                    <span
+                      key={i}
+                      className="text-caption rounded-full bg-white/20 px-3 py-1 text-white"
+                    >
                       {badge}
                     </span>
                   ))}
@@ -135,7 +132,7 @@ export function ComposableHeroSection({
               </div>
               {slots.showBreadcrumbs && Array.isArray(data.breadcrumbs) && (
                 <nav aria-label="Breadcrumb" className="mt-4">
-                  <ol className="flex items-center gap-2 text-xs text-white/60">
+                  <ol className="text-caption flex items-center gap-2 text-white/60">
                     {(data.breadcrumbs as Array<{ label: string; href: string }>).map(
                       (crumb, i, arr) => (
                         <li key={i} className="flex items-center gap-2">
@@ -172,23 +169,20 @@ export function ComposableHeroSection({
       >
         <div>
           {slots.showEyebrow && d.eyebrow && (
-            <p
-              data-slot="eyebrow"
-              className="text-brand-primary mb-3 text-xs font-semibold uppercase tracking-widest"
-            >
+            <p data-slot="eyebrow" className="text-eyebrow text-brand-primary mb-3">
               {d.eyebrow}
             </p>
           )}
           <h1
             data-slot="heading"
-            className={`text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-6 ${layout?.background === "inverse" ? "text-white" : "text-surface-foreground"}`}
+            className={`heading-hero leading-tight ${layout?.background === "inverse" ? "text-white" : "text-surface-foreground"}`}
           >
             {d.heading ?? ""}
           </h1>
           {slots.showSubheading && d.subheading && (
             <p
               data-slot="subheading"
-              className={`mb-8 text-sm leading-relaxed ${layout?.background === "inverse" ? "text-white/80" : "text-surface-muted-foreground"}`}
+              className={`text-body-sm mb-8 ${layout?.background === "inverse" ? "text-white/80" : "text-surface-muted-foreground"}`}
             >
               {d.subheading}
             </p>
@@ -198,7 +192,7 @@ export function ComposableHeroSection({
               {trustBadges.map((badge, i) => (
                 <span
                   key={i}
-                  className="bg-surface-subtle text-surface-foreground rounded-full px-3 py-1 text-xs"
+                  className="text-caption bg-surface-subtle text-surface-foreground rounded-full px-3 py-1"
                 >
                   {badge}
                 </span>
@@ -227,7 +221,7 @@ export function ComposableHeroSection({
           {slots.showBreadcrumbs && Array.isArray(data.breadcrumbs) && (
             <nav aria-label="Breadcrumb" className="mt-4">
               <ol
-                className={`flex items-center gap-2 text-xs ${layout?.background === "inverse" ? "text-white/60" : "text-surface-muted-foreground"}`}
+                className={`text-caption flex items-center gap-2 ${layout?.background === "inverse" ? "text-white/60" : "text-surface-muted-foreground"}`}
               >
                 {(data.breadcrumbs as Array<{ label: string; href: string }>).map(
                   (crumb, i, arr) => (

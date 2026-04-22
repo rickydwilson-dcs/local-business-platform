@@ -60,15 +60,12 @@ export function ServiceCards({ slots: slotOverrides, layout, data, className }: 
     <section className={`${bg} ${className ?? ""}`} data-component="ServiceCards">
       <div className="mx-auto max-w-4xl px-4 py-16 md:py-24 sm:px-6 lg:px-8">
         {d.heading && (
-          <h2
-            data-slot="heading"
-            className="text-xl md:text-xl font-bold tracking-tight mb-4 text-center"
-          >
+          <h2 data-slot="heading" className="heading-section tracking-tight text-center">
             {d.heading}
           </h2>
         )}
         {d.subheading && (
-          <p className="text-surface-muted-foreground mb-12 text-center text-base">
+          <p className="text-body text-surface-muted-foreground mb-12 text-center">
             {d.subheading}
           </p>
         )}
@@ -77,7 +74,7 @@ export function ServiceCards({ slots: slotOverrides, layout, data, className }: 
             const cardContent = (
               <>
                 {slots.showBadge && service.badge && (
-                  <span className="bg-brand-primary/10 text-brand-primary mb-4 inline-block rounded-full px-3 py-1 text-xs font-semibold">
+                  <span className="text-caption bg-brand-primary/10 text-brand-primary mb-4 inline-block rounded-full px-3 py-1 font-semibold">
                     {service.badge}
                   </span>
                 )}
@@ -95,7 +92,7 @@ export function ServiceCards({ slots: slotOverrides, layout, data, className }: 
                 )}
                 <h3
                   data-slot="serviceTitle"
-                  className="text-base font-semibold mb-3 group-hover:text-brand-primary transition-colors"
+                  className="heading-card-sm mb-3 group-hover:text-brand-primary transition-colors"
                 >
                   {service.title}
                 </h3>

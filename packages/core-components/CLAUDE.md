@@ -109,6 +109,7 @@ Shared CSS keyframes are in `src/styles/animations.css` (imported by theme globa
 - **Tailwind CSS only** for styling — components use theme tokens (`bg-brand-primary`, `text-surface-foreground`) so they work with any site's theme
 - Components must be theme-agnostic: never hardcode colors, always use CSS variable-based classes
 - **Theme contract:** Composable section components may reference any class name in `THEME_COMPONENT_CONTRACT` (exported from `@platform/theme-system`). Any other theme-specific class name is forbidden — it would break non-Orion themes.
+- Typography conventions: see `docs/standards/styling.md` — shared components must use semantic utility classes, never inline `text-<size>`.
 
 ## Importing
 

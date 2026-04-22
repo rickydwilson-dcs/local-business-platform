@@ -54,11 +54,9 @@ export function LocalAuthorityExpertise({
   return (
     <section className={`${bg} ${className ?? ""}`} data-component="LocalAuthorityExpertise">
       <div className="mx-auto w-full max-w-5xl px-4 py-16 md:py-24 sm:px-6 lg:px-8">
-        <h2 className="text-xl md:text-2xl font-bold tracking-tight mb-4">{heading}</h2>
+        <h2 className="heading-section tracking-tight">{heading}</h2>
         {authority.description && (
-          <p className="text-lg leading-relaxed mb-10 max-w-3xl opacity-80">
-            {authority.description}
-          </p>
+          <p className="text-body-lg mb-10 max-w-3xl opacity-80">{authority.description}</p>
         )}
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -66,11 +64,11 @@ export function LocalAuthorityExpertise({
             <div>
               <div className="flex items-center gap-2 mb-4">
                 <Shield className="w-5 h-5 text-brand-primary" aria-hidden />
-                <h3 className="text-lg font-semibold">Expertise</h3>
+                <h3 className="heading-card-sm mb-0">Expertise</h3>
               </div>
               <ul className="space-y-3">
                 {authority.expertiseBullets!.map((item, i) => (
-                  <li key={i} className="flex items-start gap-2 text-base">
+                  <li key={i} className="text-body flex items-start gap-2">
                     <CheckCircle2
                       className="w-4 h-4 text-brand-primary mt-0.5 flex-shrink-0"
                       aria-hidden
@@ -86,11 +84,11 @@ export function LocalAuthorityExpertise({
             <div>
               <div className="flex items-center gap-2 mb-4">
                 <Shield className="w-5 h-5 text-brand-primary" aria-hidden />
-                <h3 className="text-lg font-semibold">Fast-track Claims</h3>
+                <h3 className="heading-card-sm mb-0">Fast-track Claims</h3>
               </div>
               <ul className="space-y-3">
                 {authority.fastTrackClaims!.map((item, i) => (
-                  <li key={i} className="flex items-start gap-2 text-base">
+                  <li key={i} className="text-body flex items-start gap-2">
                     <CheckCircle2
                       className="w-4 h-4 text-brand-primary mt-0.5 flex-shrink-0"
                       aria-hidden
@@ -107,9 +105,9 @@ export function LocalAuthorityExpertise({
               <div>
                 <div className="flex items-center gap-2 mb-4">
                   <MapPin className="w-5 h-5 text-brand-primary" aria-hidden />
-                  <h3 className="text-lg font-semibold">Coverage</h3>
+                  <h3 className="heading-card-sm mb-0">Coverage</h3>
                 </div>
-                <ul className="grid grid-cols-1 gap-2 text-base">
+                <ul className="text-body grid grid-cols-1 gap-2">
                   {authority.coverageNeighbourhoods!.map((item, i) => (
                     <li key={i} className="opacity-90">
                       {item}
