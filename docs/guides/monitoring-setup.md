@@ -300,12 +300,84 @@ NewRelic overhead is typically < 5ms per request. If you notice impact:
 2. Reduce logging level
 3. Disable browser monitoring
 
+---
+
+## Regression Watchdog + Langfuse
+
+The regression watchdog runs automatically on every push to `staging` or `main`. It runs a cross-site smoke suite against production/staging URLs and, on any failure, calls Claude to produce a root-cause hypothesis and optionally opens a draft PR.
+
+### Langfuse — AI Pipeline Tracing
+
+Langfuse traces every Claude API call made by the composition pipeline tools (`generateVisualConfig`, `generateStructuralComposition`). This surfaces cost spikes, retry storms, and error rates without any manual instrumentation in the application.
+
+**Setup (one-time):**
+
+1. Create a free account at [cloud.langfuse.com](https://cloud.langfuse.com)
+2. Create a project and copy the Public Key and Secret Key
+3. Add to `.env.local`:
+
+```bash
+LANGFUSE_PUBLIC_KEY=pk-lf-xxxxxxxxxxxxxxxxxxxx
+LANGFUSE_SECRET_KEY=sk-lf-xxxxxxxxxxxxxxxxxxxx
+LANGFUSE_HOST=https://cloud.langfuse.com
+```
+
+4. Add the same keys as GitHub Actions secrets: `LANGFUSE_PUBLIC_KEY` and `LANGFUSE_SECRET_KEY`
+
+If the keys are absent, the tracer silently no-ops — pipeline tools work normally without Langfuse.
+
+### Watchdog GitHub Action
+
+The watchdog workflow (`.github/workflows/watchdog.yml`) triggers on push to `staging` or `main`. It:
+
+1. Runs `packages/playwright-shared` smoke tests against the deployed site
+2. On failure: queries Langfuse for anomalies, matches failure output against `tools/watchdog/known-patterns.json`, calls Claude for a root-cause hypothesis
+3. Creates a GitHub issue tagged `auto-triage` with the hypothesis
+4. For high-confidence matches: creates a branch with the proposed fix and opens a draft PR
+
+**GitHub Actions secrets required:**
+
+| Secret                | Purpose                          |
+| --------------------- | -------------------------------- |
+| `ANTHROPIC_API_KEY`   | Claude API for auto-triage agent |
+| `LANGFUSE_SECRET_KEY` | Langfuse anomaly queries         |
+| `LANGFUSE_PUBLIC_KEY` | Langfuse anomaly queries         |
+| `GITHUB_TOKEN`        | Built-in — no setup needed       |
+
+### Adding New Known Patterns
+
+When a new recurring issue is identified, add it to `tools/watchdog/known-patterns.json`:
+
+```json
+{
+  "id": "pattern-id",
+  "name": "Human-readable name",
+  "symptoms": ["error string 1", "error string 2"],
+  "root_cause": "Why this happens",
+  "fix_strategy": "How to fix it",
+  "fix_old_string": "exact string to replace (or null)",
+  "fix_new_string": "replacement string (or null)",
+  "relevant_file_globs": ["sites/*/relevant-file.ts"],
+  "docs_ref": "docs/guides/debugging.md#section"
+}
+```
+
+### Validate the Loop
+
+To confirm the full triage loop works end-to-end:
+
+```bash
+# Locally (requires GITHUB_TOKEN, ANTHROPIC_API_KEY in .env.local)
+npx tsx tools/watchdog/validate-loop.ts
+
+# Via GitHub Actions
+# Trigger workflow_dispatch on watchdog.yml with validate_loop: true
+```
+
+This injects a deliberately broken site URL, runs the smoke suite, verifies an issue was created, then cleans up.
+
 ## Related
 
 - [Deployment Standards](../standards/deployment.md) - Monitoring requirements
 - [Quality Standards](../standards/quality.md) - Performance targets
 - [Deploying a Site](./deploying-site.md) - Deployment procedures
-
----
-
-**Last Updated:** 2025-12-05

@@ -40,6 +40,7 @@ local-business-platform/
 │   ├── component-composition/      # Config-driven page composition engine
 │   ├── theme-system/               # Theming engine (@platform/theme-system)
 │   ├── themes/                     # Named theme CSS packages (cygnus, designlab, navagarden, orion, solaris, vega)
+│   ├── playwright-shared/          # Cross-site smoke suite for the regression watchdog
 │   └── intake-system/              # Customer intake automation (@platform/intake-system)
 ├── tools/                          # Site creation & deployment CLI tools
 ├── docs/                           # Documentation
@@ -127,7 +128,7 @@ The implementation uses database-level UNIQUE constraints on `(identifier, endpo
 | Deployment    | Vercel                                         |
 | Image Storage | Cloudflare R2                                  |
 | Rate Limiting | Supabase (shared database, per-site isolation) |
-| Monitoring    | NewRelic APM                                   |
+| Monitoring    | NewRelic APM + Langfuse (AI pipeline tracing)  |
 | Analytics     | GA4 (consent-managed)                          |
 | Backend       | Supabase                                       |
 
@@ -158,12 +159,13 @@ Five content types, all following the same MDX-only + dynamic routing pattern:
 
 ## Quality Gates
 
-| Stage              | Checks                                                    |
-| ------------------ | --------------------------------------------------------- |
-| Pre-commit (Husky) | lint-staged (Prettier), MDX content validation            |
-| Pre-push (Husky)   | TypeScript check only (~3s)                               |
-| CI (all branches)  | ESLint, TypeScript, content validation, unit tests, build |
-| CI (staging/main)  | Full E2E test suite (Playwright)                          |
+| Stage                              | Checks                                                                      |
+| ---------------------------------- | --------------------------------------------------------------------------- |
+| Pre-commit (Husky)                 | lint-staged (Prettier), MDX content validation                              |
+| Pre-push (Husky)                   | TypeScript check only (~3s)                                                 |
+| CI (all branches)                  | ESLint, TypeScript, content validation, unit tests, build                   |
+| CI (staging/main)                  | Full E2E test suite (Playwright)                                            |
+| Post-deploy (push to staging/main) | Regression watchdog: cross-site smoke suite + Claude auto-triage on failure |
 
 ## Architecture Violations
 

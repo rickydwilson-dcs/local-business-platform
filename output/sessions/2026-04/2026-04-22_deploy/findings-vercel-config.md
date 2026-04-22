@@ -8,17 +8,17 @@
 
 ## Summary
 
-One low-severity warning was found. All critical and high-severity checks passed cleanly: no site-level `vercel.json` sets `outputDirectory`, every site uses `next build --webpack`, no `turbo-ignore` or `ignoreCommand` is present, all build-time env vars are declared in `turbo.json`, Tailwind content globs are correctly scoped, no CSS file uses `theme()`, no middleware files exist, and all sites pin Next.js to the same major version (16). The single finding is `sites/poc-composition-test` enabling `dangerouslyAllowSVG: true` without the accompanying `contentSecurityPolicy` image option.
+The audit found one finding, rated Low/Warning. All critical and high-severity checks pass cleanly: no site sets `outputDirectory`, all sites use `next build --webpack`, no `turbo-ignore` or `ignoreCommand` is present, all build-time env vars are declared in `turbo.json`, Tailwind content globs are correctly scoped, no `theme()` calls exist in CSS files, no middleware files are present, and all sites pin Next.js 16.0.10. The single finding is `sites/poc-composition-test/next.config.ts` setting `dangerouslyAllowSVG: true` without a companion `contentSecurityPolicy` on the images config object.
 
 ## Findings
 
-### [Low / Warning] VCA-007: poc-composition-test dangerouslyAllowSVG without contentSecurityPolicy
+### Low/Warning — VCA-007: dangerouslyAllowSVG set without contentSecurityPolicy in poc-composition-test
 
-- **File:** `sites/poc-composition-test/next.config.ts` (line 17)
-- **Rule:** VCA-007 — dangerouslyAllowSVG must be accompanied by images.contentSecurityPolicy
-- **Violation:** `dangerouslyAllowSVG: true` is set but `images.contentSecurityPolicy` is absent. All other sites in the repo pair the flag with `contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;"`.
-- **Impact:** SVG images served through Next.js image optimization can execute embedded scripts in the browser context. For a test/PoC site this is low risk; it becomes a hard security issue if the pattern is copied to a production site.
-- **Fix:** Add `contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;"` to the `images` block immediately after `dangerouslyAllowSVG: true`.
+- **File:** `sites/poc-composition-test/next.config.ts` (line 16)
+- **Rule:** VCA-007 — CSP / dangerouslyAllowSVG / image remote patterns must be explicit
+- **Violation:** `images.dangerouslyAllowSVG` is set to `true`. No `images.contentSecurityPolicy` or `images.contentDispositionType` is present alongside it. All other sites with this flag set include `contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;"`.
+- **Impact:** SVG images served through Next.js image optimization can execute embedded scripts in the browser. This is a security risk if any SVG is sourced from user content or remote URLs rather than trusted static assets. For a test site the practical risk is low, but the pattern should not propagate to production sites via template copying.
+- **Fix:** Add `contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;"` and optionally `contentDispositionType: "attachment"` to the `images` config block, mirroring the pattern used in all other sites.
 - **Effort:** trivial
 
 ## Statistics
