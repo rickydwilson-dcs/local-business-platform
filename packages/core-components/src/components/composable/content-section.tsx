@@ -53,23 +53,17 @@ export function ContentSection({
       >
         <div className={isCenter ? "text-center" : ""}>
           {slots.showSubheading && d.subheading && (
-            <p
-              data-slot="subheading"
-              className="text-xs font-semibold uppercase tracking-widest text-brand-primary mb-3"
-            >
+            <p data-slot="subheading" className="text-eyebrow text-brand-primary mb-3">
               {d.subheading}
             </p>
           )}
           {d.heading && (
-            <h2 data-slot="heading" className="text-xl md:text-xl font-bold tracking-tight mb-6">
+            <h2 data-slot="heading" className="heading-section tracking-tight">
               {d.heading}
             </h2>
           )}
           {d.body && (
-            <p
-              data-slot="body"
-              className="text-surface-muted-foreground mb-6 text-xs leading-relaxed"
-            >
+            <p data-slot="body" className="text-body text-surface-muted-foreground mb-6">
               {d.body}
             </p>
           )}

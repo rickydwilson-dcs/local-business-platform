@@ -54,13 +54,13 @@ export function EmergencyBanner({ slots: slotOverrides, data, className }: Emerg
             <AlertCircle className="w-8 h-8 text-white" />
           </div>
           <div className="flex-1">
-            {slots.showHeading && heading && <h2 className="text-2xl font-bold mb-3">{heading}</h2>}
+            {slots.showHeading && heading && <h2 className="heading-section mb-3">{heading}</h2>}
             {slots.showPoints && points.length > 0 && (
               <div className="grid md:grid-cols-3 gap-4 mb-6">
                 {points.map((point, i) => (
                   <div key={i} className="flex items-center gap-2">
                     {getPointIcon(point.icon, i)}
-                    <span className="text-xs">{point.label}</span>
+                    <span className="text-caption">{point.label}</span>
                   </div>
                 ))}
               </div>

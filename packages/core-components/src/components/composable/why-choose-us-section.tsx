@@ -59,7 +59,7 @@ export function WhyChooseUsSection({
         {slots.showEyebrow && eyebrow && (
           <p
             data-slot="eyebrow"
-            className={`mb-3 text-xs font-semibold uppercase tracking-widest ${
+            className={`text-eyebrow mb-3 ${
               bg.includes("bg-surface-inverse") || bg.includes("bg-brand-primary")
                 ? "text-white/70"
                 : "text-brand-primary"
@@ -70,7 +70,7 @@ export function WhyChooseUsSection({
         )}
         <h2
           data-slot="heading"
-          className={`text-2xl md:text-3xl font-bold tracking-tight mb-16 ${isDark ? "text-white" : "text-surface-foreground"}`}
+          className={`heading-section tracking-tight mb-16 ${isDark ? "text-white" : "text-surface-foreground"}`}
         >
           {heading}
           {slots.showHeadingHighlight && headingHighlight && (
@@ -87,20 +87,18 @@ export function WhyChooseUsSection({
               key={i}
               className={`grid items-center gap-6 border-b border-surface-border py-8 ${slots.showStat ? "md:grid-cols-[2fr_3fr_1fr]" : "md:grid-cols-[2fr_3fr]"}`}
             >
-              <h3
-                className={`text-sm font-semibold ${isDark ? "text-white" : "text-surface-foreground"}`}
-              >
+              <h3 className={`text-label ${isDark ? "text-white" : "text-surface-foreground"}`}>
                 {item.title}
               </h3>
               <p
-                className={`text-xs leading-relaxed ${isDark ? "text-on-inverse-muted" : "text-surface-muted-foreground"}`}
+                className={`text-body ${isDark ? "text-on-inverse-muted" : "text-surface-muted-foreground"}`}
               >
                 {item.body}
               </p>
               {slots.showStat && item.stat && (
                 <p
                   data-slot="stat"
-                  className={`font-mono text-xs uppercase tracking-widest md:text-right ${isDark ? "text-on-inverse-muted" : "text-surface-muted-foreground"}`}
+                  className={`text-caption font-mono uppercase tracking-widest md:text-right ${isDark ? "text-on-inverse-muted" : "text-surface-muted-foreground"}`}
                 >
                   {item.stat}
                 </p>

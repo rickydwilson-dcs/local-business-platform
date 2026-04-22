@@ -47,15 +47,13 @@ export function ComposableCTASection({
   const phoneDisplay = typeof data.phoneDisplay === "string" ? data.phoneDisplay : undefined;
   const showPhoneCta = Boolean(phoneTel || phoneDisplay);
 
-  const headingScale = isInverse
-    ? "text-2xl md:text-3xl font-bold tracking-tight"
-    : "text-xl md:text-xl font-bold tracking-tight";
+  const headingScale = "heading-section tracking-tight";
 
   const subheadingClass = isBrand
-    ? "text-base mt-3 text-white/80 max-w-xl"
+    ? "text-body mt-3 text-white/80 max-w-xl"
     : isInverse
-      ? "text-lg mt-4 text-on-inverse-muted max-w-xl"
-      : "text-base mt-3 text-surface-muted-foreground max-w-xl";
+      ? "text-body-lg mt-4 text-on-inverse-muted max-w-xl"
+      : "text-body mt-3 text-surface-muted-foreground max-w-xl";
 
   const ringOffset = isDark
     ? "focus-visible:ring-offset-surface-inverse"
@@ -123,7 +121,7 @@ export function ComposableCTASection({
         </div>
         {slots.showTrustLine && d.trustLine && (
           <p
-            className={`mt-8 text-xs uppercase tracking-widest font-medium ${isDark ? "text-white/70" : "text-surface-muted-foreground"}`}
+            className={`text-caption mt-8 uppercase tracking-widest font-medium ${isDark ? "text-white/70" : "text-surface-muted-foreground"}`}
           >
             {d.trustLine}
           </p>
