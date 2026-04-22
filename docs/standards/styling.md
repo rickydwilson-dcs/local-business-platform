@@ -10,6 +10,43 @@
 
 All styling in the Local Business Platform uses Tailwind CSS with a centralized theme system (`@platform/theme-system`). This ensures consistency across all sites while allowing per-site brand customization through CSS variables.
 
+## Typography
+
+Shared components in `packages/core-components/` use **semantic utility classes** for typography — never inline `text-<size>` Tailwind classes.
+
+The classes are defined once per site in `app/globals.css`. This gives each site a single place to tune its font sizes without touching shared components.
+
+### Available classes
+
+| Class                | Semantic meaning                             |
+| -------------------- | -------------------------------------------- |
+| `heading-hero`       | Page H1                                      |
+| `heading-section`    | Section H2                                   |
+| `heading-subsection` | Subsection H2/H3                             |
+| `heading-card`       | Card/item title                              |
+| `heading-card-sm`    | Small card title                             |
+| `stat-number`        | Large stat/metric number                     |
+| `text-subtitle`      | Hero/section lede paragraph                  |
+| `text-body-lg`       | Large body text (lede for non-hero contexts) |
+| `text-body`          | Default body paragraph (16px canonical)      |
+| `text-body-sm`       | Metadata, dates, secondary copy              |
+| `text-label`         | Small semibold labels (non-uppercase)        |
+| `text-eyebrow`       | Uppercase section labels above headings      |
+| `text-caption`       | Badges, breadcrumbs, micro-copy              |
+
+### Rules
+
+- **NEVER** put `text-<size>` Tailwind classes on heading or body elements inside shared components. Use the semantic utility class.
+- **Per-site font tuning** lives in that site's `globals.css` — change the `@apply` line for the utility class.
+- **NEVER** edit shared component source to change font sizing for a specific site.
+- Colour (`text-white`, `text-surface-foreground`), alignment (`text-center`), tracking (`tracking-tight`), and layout (`mb-4`, `max-w-*`) DO stay inline on elements — semantic utilities cover size + weight + text-transform only.
+
+### PR checklist for shared components
+
+- [ ] No inline `text-<size>` classes on text elements.
+- [ ] If a new semantic class is needed, define it in EVERY site's `globals.css` in the same PR.
+- [ ] `pnpm validate:theme-contract` passes.
+
 ## Core Principles
 
 ### 1. Tailwind CSS Only
@@ -289,18 +326,18 @@ When adding new styling:
 
 ## What NOT to Do
 
-| Anti-Pattern                            | Why It Breaks White-Labeling        | Correct Approach                                           |
-| --------------------------------------- | ----------------------------------- | ---------------------------------------------------------- |
-| Hardcoded hex colors (`bg-[#005A9E]`)   | Not themeable, ignores theme config | Use theme tokens (`bg-brand-primary`)                      |
+| Anti-Pattern                                                    | Why It Breaks White-Labeling          | Correct Approach                                                                 |
+| --------------------------------------------------------------- | ------------------------------------- | -------------------------------------------------------------------------------- |
+| Hardcoded hex colors (`bg-[#005A9E]`)                           | Not themeable, ignores theme config   | Use theme tokens (`bg-brand-primary`)                                            |
 | Hardcoded Tailwind color scales (`text-gray-600`, `bg-blue-50`) | Bypass theme tokens, break re-theming | Use `text-surface-muted-foreground`, `bg-surface-muted`, etc. — caught by ESLint |
-| Hardcoded RGBA (`bg-[rgba(0,0,0,0.8)]`) | Bypasses overlay tokens             | Use `bg-overlay-dark` or `bg-black/80`                     |
-| Hardcoded HSL/HSLA values               | Still a literal color               | Use theme tokens                                           |
-| `style={{}}` inline styles              | Bypasses Tailwind and theme system  | Use Tailwind utilities                                     |
-| Duplicated utility strings              | Hard to maintain, inconsistent      | Extract to maintainable class                              |
-| Custom CSS files per component          | Fragmented styling                  | Use `globals.css`                                          |
-| styled-components / CSS-in-JS           | Different paradigm entirely         | Tailwind only                                              |
-| `:root` overrides in CSS files          | Fragments the source of truth       | Define all values in `theme.config.ts`                     |
-| Arbitrary opacity (`opacity-[0.7]`)     | Bypasses semantic opacity system    | Use `opacity-muted`, `opacity-disabled`, `opacity-overlay` |
+| Hardcoded RGBA (`bg-[rgba(0,0,0,0.8)]`)                         | Bypasses overlay tokens               | Use `bg-overlay-dark` or `bg-black/80`                                           |
+| Hardcoded HSL/HSLA values                                       | Still a literal color                 | Use theme tokens                                                                 |
+| `style={{}}` inline styles                                      | Bypasses Tailwind and theme system    | Use Tailwind utilities                                                           |
+| Duplicated utility strings                                      | Hard to maintain, inconsistent        | Extract to maintainable class                                                    |
+| Custom CSS files per component                                  | Fragmented styling                    | Use `globals.css`                                                                |
+| styled-components / CSS-in-JS                                   | Different paradigm entirely           | Tailwind only                                                                    |
+| `:root` overrides in CSS files                                  | Fragments the source of truth         | Define all values in `theme.config.ts`                                           |
+| Arbitrary opacity (`opacity-[0.7]`)                             | Bypasses semantic opacity system      | Use `opacity-muted`, `opacity-disabled`, `opacity-overlay`                       |
 
 ## Automated Enforcement
 
@@ -323,11 +360,13 @@ The rule catches hardcoded Tailwind color-scale classes in JSX `className` attri
 **Intentional exceptions** (semantic callout colors, star ratings, form state feedback) use the standard ESLint escape hatch:
 
 ```tsx
-{/* eslint-disable platform/no-hardcoded-tailwind-colors -- Intentional: semantic status callout */}
-<div className="bg-green-50 border border-green-200">
-  Success message
-</div>
-{/* eslint-enable platform/no-hardcoded-tailwind-colors */}
+{
+  /* eslint-disable platform/no-hardcoded-tailwind-colors -- Intentional: semantic status callout */
+}
+<div className="bg-green-50 border border-green-200">Success message</div>;
+{
+  /* eslint-enable platform/no-hardcoded-tailwind-colors */
+}
 ```
 
 The rule covers string literals and template literal static parts. It does not flag dynamic template expressions like `` `${condition ? 'text-yellow-400' : ''}` `` (those are invisible to static analysis). Keep semantic coloring intentional, documented with a comment, and minimal.
@@ -365,11 +404,11 @@ Before completing any styling work:
 
 Sites may define additional utility classes in their `globals.css` for patterns not covered by the shared theme. These follow the same `@apply` convention and must use theme tokens (no hardcoded values). Examples from DJ Fox Electrical:
 
-| Class | Purpose |
-|---|---|
-| `.noise-overlay` | Adds a subtle SVG grain texture over flat/solid-colour sections to break digital flatness. Applied to dark CTA sections and stats strips. |
-| `.stat-value` | Enables `font-variant-numeric: tabular-nums` for data values (stats, counts) so numbers align consistently. |
-| `.location-pill` / `.location-pill-arrow` | Styled link pill for location grids — handles hover border, background tint, and arrow translation without inline JSX classes. |
+| Class                                     | Purpose                                                                                                                                   |
+| ----------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| `.noise-overlay`                          | Adds a subtle SVG grain texture over flat/solid-colour sections to break digital flatness. Applied to dark CTA sections and stats strips. |
+| `.stat-value`                             | Enables `font-variant-numeric: tabular-nums` for data values (stats, counts) so numbers align consistently.                               |
+| `.location-pill` / `.location-pill-arrow` | Styled link pill for location grids — handles hover border, background tint, and arrow translation without inline JSX classes.            |
 
 See [Theming Guide](../guides/theming.md) for full token reference and configuration details.
 
