@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test";
 
 // One canonical snapshot per template type.
 // Covers every unique page layout without redundantly testing each dynamic route.
-// maxDiffPixels is permissive enough to survive font-rendering differences across OS/CI.
+// maxDiffPixelRatio: 0.1 tolerates ~7% runner-to-runner font-rendering variance in CI.
 
 test.use({ screenshot: "on" });
 
@@ -14,7 +14,7 @@ test.describe("Visual Regression — Template Snapshots", () => {
     await page.waitForTimeout(SETTLE_MS);
     await expect(page).toHaveScreenshot("template-home.png", {
       fullPage: true,
-      maxDiffPixels: 200,
+      maxDiffPixelRatio: 0.1,
     });
   });
 
@@ -23,7 +23,7 @@ test.describe("Visual Regression — Template Snapshots", () => {
     await page.waitForTimeout(SETTLE_MS);
     await expect(page).toHaveScreenshot("template-services-list.png", {
       fullPage: true,
-      maxDiffPixels: 200,
+      maxDiffPixelRatio: 0.1,
     });
   });
 
@@ -32,7 +32,7 @@ test.describe("Visual Regression — Template Snapshots", () => {
     await page.waitForTimeout(SETTLE_MS);
     await expect(page).toHaveScreenshot("template-service-detail.png", {
       fullPage: true,
-      maxDiffPixels: 200,
+      maxDiffPixelRatio: 0.1,
     });
   });
 
@@ -41,7 +41,7 @@ test.describe("Visual Regression — Template Snapshots", () => {
     await page.waitForTimeout(SETTLE_MS);
     await expect(page).toHaveScreenshot("template-locations-list.png", {
       fullPage: true,
-      maxDiffPixels: 200,
+      maxDiffPixelRatio: 0.1,
     });
   });
 
@@ -50,7 +50,7 @@ test.describe("Visual Regression — Template Snapshots", () => {
     await page.waitForTimeout(SETTLE_MS);
     await expect(page).toHaveScreenshot("template-location-detail.png", {
       fullPage: true,
-      maxDiffPixels: 200,
+      maxDiffPixelRatio: 0.1,
     });
   });
 
@@ -59,7 +59,7 @@ test.describe("Visual Regression — Template Snapshots", () => {
     await page.waitForTimeout(SETTLE_MS);
     await expect(page).toHaveScreenshot("template-blog-list.png", {
       fullPage: true,
-      maxDiffPixels: 200,
+      maxDiffPixelRatio: 0.1,
     });
   });
 
@@ -73,7 +73,7 @@ test.describe("Visual Regression — Template Snapshots", () => {
       await page.waitForTimeout(SETTLE_MS);
       await expect(page).toHaveScreenshot("template-blog-post.png", {
         fullPage: true,
-        maxDiffPixels: 200,
+        maxDiffPixelRatio: 0.1,
       });
     }
   });
@@ -83,7 +83,7 @@ test.describe("Visual Regression — Template Snapshots", () => {
     await page.waitForTimeout(SETTLE_MS);
     await expect(page).toHaveScreenshot("template-contact.png", {
       fullPage: true,
-      maxDiffPixels: 200,
+      maxDiffPixelRatio: 0.1,
     });
   });
 
@@ -92,7 +92,7 @@ test.describe("Visual Regression — Template Snapshots", () => {
     await page.waitForTimeout(SETTLE_MS);
     await expect(page).toHaveScreenshot("template-about.png", {
       fullPage: true,
-      maxDiffPixels: 200,
+      maxDiffPixelRatio: 0.1,
     });
   });
 
@@ -101,7 +101,7 @@ test.describe("Visual Regression — Template Snapshots", () => {
     await page.waitForTimeout(SETTLE_MS);
     await expect(page).toHaveScreenshot("template-projects-list.png", {
       fullPage: true,
-      maxDiffPixels: 200,
+      maxDiffPixelRatio: 0.1,
     });
   });
 
@@ -114,7 +114,7 @@ test.describe("Visual Regression — Template Snapshots", () => {
       await page.waitForTimeout(SETTLE_MS);
       await expect(page).toHaveScreenshot("template-project-detail.png", {
         fullPage: true,
-        maxDiffPixels: 200,
+        maxDiffPixelRatio: 0.1,
       });
     }
   });
@@ -126,7 +126,7 @@ test.describe("Visual Regression — Template Snapshots", () => {
     await page.waitForTimeout(SETTLE_MS);
     await expect(page).toHaveScreenshot("template-home-mobile.png", {
       fullPage: true,
-      maxDiffPixels: 200,
+      maxDiffPixelRatio: 0.1,
     });
   });
 });

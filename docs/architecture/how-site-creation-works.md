@@ -174,7 +174,7 @@ New sites get two layers of scaffolding:
 | `orion` | `sites/dj-fox-electrical` | Dark header, full-bleed hero, circular icons |
 | `vega`  | `sites/base-template`     | Light header, split hero, standard card grid |
 
-Other active themes (cygnus, solaris, castor) fall back to `base-template` pages until a dedicated reference site is configured.
+Other active themes (cygnus, solaris, designlab, navagarden) fall back to `base-template` pages until a dedicated reference site is configured.
 
 ### Graceful Fallback
 
@@ -183,12 +183,12 @@ If no reference site is configured for the requested theme, or if the reference 
 ### Pipeline Flow
 
 ```
-create-site-from-project.ts --project project.json --theme castor
+create-site-from-project.ts --project project.json --theme designlab
 
 1. Copy base-template → sites/new-site/   (capability infrastructure)
 2. applyThemePageOverrides()              (overlay visual pages from reference site, if configured)
 3. Generate site.config.ts                (business data)
-4. Generate theme.config.ts              (brand colors + castorRegistry)
+4. Generate theme.config.ts              (brand colors + designlabRegistry)
 ```
 
 ### Adding a New Theme Reference

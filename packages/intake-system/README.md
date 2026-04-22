@@ -51,8 +51,12 @@ import { getIndustryTemplate, industryTemplates } from "@platform/intake-system"
 const template = getIndustryTemplate("plumbing");
 // Returns: { services: [...], defaultFaqs: [...], contentSuggestions: [...] }
 
-// Available templates:
-// scaffolding, plumbing, electrical, cleaning, landscaping
+// Available templates cover the common UK trades (scaffolding,
+// plumbing, electrical, cleaning, landscaping, roofing, painting and
+// decorating, carpentry, locksmith, HVAC, handyman, plastering,
+// fencing and decking, flooring, tiling, chimney and stove, driveway
+// and patio, gardening, building).
+// Call getAvailableIndustries() to list the registered keys at runtime.
 ```
 
 ### Chat Intake (`@platform/intake-system/chat-intake`)
@@ -94,6 +98,7 @@ const passes = checkContrast("#ffffff", "#3b82f6"); // true (4.5:1+)
 ### `theme.themeVariant` (optional)
 
 Controls which component registry the generated site uses:
+
 - `"orion"` — Dark header, full-bleed image hero, circular icon cards. Best for trades businesses (electrical, plumbing, construction).
 - `"vega"` — Light header, split hero, card grid. Best for professional services (scaffolding, consulting).
 - Omitted — defaults to `"vega"`.

@@ -31,7 +31,7 @@ Detailed guides are in `docs/`:
 | Guide                                               | Purpose                                                    |
 | --------------------------------------------------- | ---------------------------------------------------------- |
 | [CONTENT_STANDARDS.md](docs/CONTENT_STANDARDS.md)   | Frontmatter requirements, validation rules, SEO guidelines |
-| [COMPONENTS.md](docs/COMPONENTS.md)                 | UI component reference with props and examples             |
+| [components.md](docs/components.md)                 | UI component reference with props and examples             |
 | [BLOG_SETUP.md](docs/BLOG_SETUP.md)                 | Blog system configuration and content creation             |
 | [PROJECTS_SETUP.md](docs/PROJECTS_SETUP.md)         | Portfolio/case study setup                                 |
 | [TESTIMONIALS_SETUP.md](docs/TESTIMONIALS_SETUP.md) | Customer reviews and ratings system                        |

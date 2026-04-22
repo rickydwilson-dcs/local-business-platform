@@ -10,8 +10,10 @@ The monorepo uses Turborepo + pnpm workspaces. Shared code lives in `packages/`,
 local-business-platform/
 ├── packages/
 │   ├── core-components/       # Shared UI components
+│   ├── component-composition/ # Config-driven page composition engine
 │   ├── theme-system/          # Tailwind plugin + CSS variable generation
-│   ├── themes/                # Named theme CSS packages (castor, cygnus, orion, solaris, vega)
+│   ├── themes/                # Named theme CSS packages (cygnus, designlab, navagarden, orion, solaris, vega)
+│   ├── playwright-shared/     # Cross-site smoke suite for the regression watchdog
 │   └── intake-system/         # Client onboarding automation
 │
 ├── sites/
@@ -20,7 +22,10 @@ local-business-platform/
 │   ├── dcs/                   # Production site (digital consulting)
 │   ├── dj-fox-electrical/     # Production site (electrical business, orion theme)
 │   ├── mad-graphics/          # Production site (vehicle graphics & print, cygnus theme)
-│   └── showcase/              # Internal component/theme showcase
+│   ├── showcase/              # Internal component/theme showcase
+│   ├── poc-composition-test/  # Composition system PoC + UI library
+│   ├── designlab-test/        # Pipeline test site (designlab theme)
+│   └── navagarden-test/       # Pipeline test site (navagarden theme)
 │
 ├── tools/                     # Site creation, image management, deployment scripts
 └── docs/                      # Architecture, standards, and how-to guides

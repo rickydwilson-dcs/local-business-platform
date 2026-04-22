@@ -46,19 +46,23 @@ See [Adding a Service](./adding-service.md) and [Adding a Location](./adding-loc
 
 ### Configuration
 
-| Guide                                 | Purpose                                  | Time      |
-| ------------------------------------- | ---------------------------------------- | --------- |
-| [Theming](./theming.md)               | Configure brand colors and design tokens | 15-30 min |
-| [Registry Setup](./registry-setup.md) | Set up Supabase site registry            | 30-45 min |
+| Guide                                             | Purpose                                      | Time      |
+| ------------------------------------------------- | -------------------------------------------- | --------- |
+| [Theming](./theming.md)                           | Configure brand colors and design tokens     | 15-30 min |
+| [Creating a New Theme](./creating-new-theme.md)   | Create a theme via ingest or Stitch pipeline | 1-2 hours |
+| [Component Versioning](./component-versioning.md) | Version shared components in core-components | 15-30 min |
+| [Registry Setup](./registry-setup.md)             | Set up Supabase site registry                | 30-45 min |
 
 ### Operations
 
-| Guide                                     | Purpose                                   | Time      |
-| ----------------------------------------- | ----------------------------------------- | --------- |
-| [Deploying a Site](./deploying-site.md)   | Deploy to staging and production          | 10-15 min |
-| [Monitoring Setup](./monitoring-setup.md) | Configure NewRelic APM                    | 20-30 min |
-| [GitHub Actions](./github-actions.md)     | CI/CD workflow guide                      | 15-20 min |
-| [Git Workflow](./git-workflow.md)         | Branch workflow: develop → staging → main | 5-10 min  |
+| Guide                                                 | Purpose                                      | Time      |
+| ----------------------------------------------------- | -------------------------------------------- | --------- |
+| [Deploying a Site](./deploying-site.md)               | Deploy to staging and production             | 10-15 min |
+| [Monitoring Setup](./monitoring-setup.md)             | Configure NewRelic APM                       | 20-30 min |
+| [GitHub Actions](./github-actions.md)                 | CI/CD workflow guide                         | 15-20 min |
+| [Git Workflow](./git-workflow.md)                     | Branch workflow: develop → staging → main    | 5-10 min  |
+| [Orchestration Patterns](./orchestration-patterns.md) | Skill patterns: sequential, parallel, hybrid | 10-15 min |
+| [Debugging](./debugging.md)                           | Diagnose UI, runtime, build, and CSP issues  | 5-15 min  |
 
 ## Recommended Reading Order
 
