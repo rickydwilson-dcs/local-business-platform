@@ -1,7 +1,7 @@
 # Session: Replace dj-fox-electrical with dj-fox-electrical-test as live production site
 
 **Date:** 2026-04-21
-**Status:** Ready to execute
+**Status:** Completed
 **Branch:** develop
 
 ---
@@ -154,4 +154,52 @@ git commit -m "feat: replace dj-fox-electrical with composition-based site"
 
 ## What Was Learned
 
-_(Fill in after execution)_
+The rename approach (mv + package.json name update) works cleanly — no Vercel dashboard changes needed. Two blockers to watch for in future migrations:
+
+1. **Duplicate workspace name:** The legacy site's `package.json` still carries the old `"name"` value. pnpm sees two packages with the same name and refuses to install. Fix: rename the legacy `package.json` name to `<site>-legacy` immediately after `mv`.
+
+2. **Stale lockfile:** Adding a new package name to the workspace (even an archived one) invalidates `pnpm-lock.yaml`. CI runs `--frozen-lockfile` and fails at install. Fix: run `pnpm install` locally after the rename and commit the updated lockfile in the same PR.
+
+## Reusable Recipe: Production Swap (test → live slot)
+
+For future migrations (e.g. colossus-scaffolding-test → colossus-scaffolding):
+
+```bash
+# 1. Archive old production site
+mv sites/<name> sites/<name>-legacy
+
+# 2. Move test site into production slot
+mv sites/<name>-test sites/<name>
+
+# 3. Fix legacy package name (prevents duplicate workspace error)
+# In sites/<name>-legacy/package.json: "name": "<name>-legacy"
+
+# 4. Update new site's package.json name
+# In sites/<name>/package.json: "name": "<name>"
+
+# 5. Add/verify vercel.json (copy from legacy, filter already correct)
+# buildCommand filter must match the new "name" field
+
+# 6. Update composition.json siteId (if present)
+# "siteId": "<name>"
+
+# 7. Update .env.local port if test site was on :3001
+# NEXT_PUBLIC_SITE_URL=http://localhost:3000
+
+# 8. Check site.config.ts slug (often already correct)
+
+# 9. Update pnpm lockfile
+pnpm install
+
+# 10. Build verify
+cd sites/<name> && npm run build
+
+# 11. Commit both directories + lockfile together
+git add sites/<name> sites/<name>-legacy pnpm-lock.yaml
+git commit -m "feat: replace <name> with composition-based site"
+
+# 12. Deploy
+# /deploy.changes
+```
+
+**What does NOT need to change:** Vercel project settings, DNS, env vars in Vercel dashboard (all scoped to the project, not the directory).
