@@ -39,7 +39,7 @@ export function RateCardsSection({ slots: slotOverrides, data, className }: Rate
     >
       <div className="mx-auto max-w-4xl px-4 py-16 md:py-24 sm:px-6 lg:px-8">
         {showHeading && (
-          <h2 className="text-2xl font-bold text-surface-foreground mb-8 text-center">{heading}</h2>
+          <h2 className="heading-section text-surface-foreground mb-8 text-center">{heading}</h2>
         )}
         <div className="grid md:grid-cols-3 gap-6">
           {cards.map((card, i) => {
@@ -50,10 +50,10 @@ export function RateCardsSection({ slots: slotOverrides, data, className }: Rate
                 className="bg-brand-primary text-white rounded-lg p-6 border-4 border-brand-primary shadow-xl transform md:scale-105"
               >
                 {getCardIcon(card.icon, card.title, true)}
-                <h3 className="text-lg font-bold mb-2 text-center">{card.title}</h3>
-                <p className="text-2xl font-bold mb-2 text-center">{card.price}</p>
-                <p className="text-xs text-white/90 text-center">{card.unit}</p>
-                <p className="text-xs text-white/90 mt-4 text-center">{card.description}</p>
+                <h3 className="heading-card-sm mb-2 text-center">{card.title}</h3>
+                <p className="stat-number mb-2 text-center">{card.price}</p>
+                <p className="text-caption text-white/90 text-center">{card.unit}</p>
+                <p className="text-caption text-white/90 mt-4 text-center">{card.description}</p>
               </div>
             ) : (
               <div
@@ -61,14 +61,14 @@ export function RateCardsSection({ slots: slotOverrides, data, className }: Rate
                 className="bg-surface-subtle rounded-lg p-6 border-2 border-surface-border"
               >
                 {getCardIcon(card.icon, card.title, false)}
-                <h3 className="text-lg font-bold text-surface-foreground mb-2 text-center">
+                <h3 className="heading-card-sm text-surface-foreground mb-2 text-center">
                   {card.title}
                 </h3>
-                <p className="text-2xl font-bold text-brand-primary mb-2 text-center">
-                  {card.price}
+                <p className="stat-number text-brand-primary mb-2 text-center">{card.price}</p>
+                <p className="text-caption text-surface-muted-foreground text-center">
+                  {card.unit}
                 </p>
-                <p className="text-xs text-surface-muted-foreground text-center">{card.unit}</p>
-                <p className="text-xs text-surface-muted-foreground mt-4 text-center">
+                <p className="text-caption text-surface-muted-foreground mt-4 text-center">
                   {card.description}
                 </p>
               </div>
