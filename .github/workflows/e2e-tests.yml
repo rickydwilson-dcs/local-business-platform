@@ -26,6 +26,9 @@ on:
           - standard
           - full
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   smoke-tests:
     name: Smoke Tests (Fast)

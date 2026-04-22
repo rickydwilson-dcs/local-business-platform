@@ -10,6 +10,9 @@ on:
         options:
           - colossus-scaffolding
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   generate-baselines:
     runs-on: ubuntu-latest
@@ -29,8 +32,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Build site
-        run: pnpm --filter ${{ inputs.site }} run build
+      - name: Build site (via Turborepo to respect package dependency order)
+        run: pnpm exec turbo run build --filter=${{ inputs.site }}
         env:
           NEXT_PUBLIC_R2_PUBLIC_URL: ${{ secrets.NEXT_PUBLIC_R2_PUBLIC_URL }}
 
