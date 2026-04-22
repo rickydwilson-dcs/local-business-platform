@@ -5,9 +5,9 @@
   "status": 200,
   "error": null,
   "screenshots": {
-    "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--epsom/desktop.png",
-    "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--epsom/tablet.png",
-    "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--epsom/mobile.png"
+    "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--epsom/desktop.png",
+    "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--epsom/tablet.png",
+    "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--epsom/mobile.png"
   },
-  "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--epsom/dom.json"
+  "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--epsom/dom.json"
 }

@@ -5,9 +5,9 @@
   "status": 200,
   "error": null,
   "screenshots": {
-    "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--folkestone/desktop.png",
-    "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--folkestone/tablet.png",
-    "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--folkestone/mobile.png"
+    "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--folkestone/desktop.png",
+    "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--folkestone/tablet.png",
+    "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--folkestone/mobile.png"
   },
-  "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--folkestone/dom.json"
+  "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--folkestone/dom.json"
 }

@@ -5,9 +5,9 @@
   "status": 200,
   "error": null,
   "screenshots": {
-    "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/cookie--cookie/desktop.png",
-    "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/cookie--cookie/tablet.png",
-    "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/cookie--cookie/mobile.png"
+    "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/cookie--cookie/desktop.png",
+    "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/cookie--cookie/tablet.png",
+    "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/cookie--cookie/mobile.png"
   },
-  "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/cookie--cookie/dom.json"
+  "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/cookie--cookie/dom.json"
 }

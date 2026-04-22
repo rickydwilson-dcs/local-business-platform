@@ -5,9 +5,9 @@
   "status": 200,
   "error": null,
   "screenshots": {
-    "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--staircase-towers/desktop.png",
-    "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--staircase-towers/tablet.png",
-    "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--staircase-towers/mobile.png"
+    "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--staircase-towers/desktop.png",
+    "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--staircase-towers/tablet.png",
+    "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--staircase-towers/mobile.png"
   },
-  "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--staircase-towers/dom.json"
+  "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--staircase-towers/dom.json"
 }

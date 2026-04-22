@@ -1,0 +1,398 @@
+{
+  "version": 1,
+  "siteSlug": "colossus",
+  "baselineUrl": "http://localhost:3000",
+  "capturedAt": "2026-04-22T09:22:06.328Z",
+  "routes": [
+    {
+      "path": "/",
+      "pageType": "home",
+      "slug": "home"
+    },
+    {
+      "path": "/about",
+      "pageType": "about",
+      "slug": "about"
+    },
+    {
+      "path": "/blog",
+      "pageType": "blog",
+      "slug": "blog"
+    },
+    {
+      "path": "/blog/choosing-right-scaffolding-for-your-project",
+      "pageType": "blog-post",
+      "slug": "choosing-right-scaffolding-for-your-project"
+    },
+    {
+      "path": "/blog/do-i-need-permit-for-scaffolding",
+      "pageType": "blog-post",
+      "slug": "do-i-need-permit-for-scaffolding"
+    },
+    {
+      "path": "/blog/how-long-does-scaffolding-take-to-erect",
+      "pageType": "blog-post",
+      "slug": "how-long-does-scaffolding-take-to-erect"
+    },
+    {
+      "path": "/blog/scaffolding-safety-guide-winter",
+      "pageType": "blog-post",
+      "slug": "scaffolding-safety-guide-winter"
+    },
+    {
+      "path": "/blog/scaffolding-safety-what-to-expect",
+      "pageType": "blog-post",
+      "slug": "scaffolding-safety-what-to-expect"
+    },
+    {
+      "path": "/contact",
+      "pageType": "contact",
+      "slug": "contact"
+    },
+    {
+      "path": "/cookie-policy",
+      "pageType": "cookie",
+      "slug": "cookie"
+    },
+    {
+      "path": "/locations",
+      "pageType": "locations",
+      "slug": "locations"
+    },
+    {
+      "path": "/locations/ashford",
+      "pageType": "location-detail",
+      "slug": "ashford"
+    },
+    {
+      "path": "/locations/battle",
+      "pageType": "location-detail",
+      "slug": "battle"
+    },
+    {
+      "path": "/locations/bognor-regis",
+      "pageType": "location-detail",
+      "slug": "bognor-regis"
+    },
+    {
+      "path": "/locations/brighton",
+      "pageType": "location-detail",
+      "slug": "brighton"
+    },
+    {
+      "path": "/locations/burgess-hill",
+      "pageType": "location-detail",
+      "slug": "burgess-hill"
+    },
+    {
+      "path": "/locations/camberley",
+      "pageType": "location-detail",
+      "slug": "camberley"
+    },
+    {
+      "path": "/locations/canterbury",
+      "pageType": "location-detail",
+      "slug": "canterbury"
+    },
+    {
+      "path": "/locations/chichester",
+      "pageType": "location-detail",
+      "slug": "chichester"
+    },
+    {
+      "path": "/locations/crawley",
+      "pageType": "location-detail",
+      "slug": "crawley"
+    },
+    {
+      "path": "/locations/crowborough",
+      "pageType": "location-detail",
+      "slug": "crowborough"
+    },
+    {
+      "path": "/locations/dartford",
+      "pageType": "location-detail",
+      "slug": "dartford"
+    },
+    {
+      "path": "/locations/dover",
+      "pageType": "location-detail",
+      "slug": "dover"
+    },
+    {
+      "path": "/locations/east-sussex",
+      "pageType": "location-detail",
+      "slug": "east-sussex"
+    },
+    {
+      "path": "/locations/eastbourne",
+      "pageType": "location-detail",
+      "slug": "eastbourne"
+    },
+    {
+      "path": "/locations/epsom",
+      "pageType": "location-detail",
+      "slug": "epsom"
+    },
+    {
+      "path": "/locations/folkestone",
+      "pageType": "location-detail",
+      "slug": "folkestone"
+    },
+    {
+      "path": "/locations/guildford",
+      "pageType": "location-detail",
+      "slug": "guildford"
+    },
+    {
+      "path": "/locations/hailsham",
+      "pageType": "location-detail",
+      "slug": "hailsham"
+    },
+    {
+      "path": "/locations/hastings",
+      "pageType": "location-detail",
+      "slug": "hastings"
+    },
+    {
+      "path": "/locations/haywards-heath",
+      "pageType": "location-detail",
+      "slug": "haywards-heath"
+    },
+    {
+      "path": "/locations/horsham",
+      "pageType": "location-detail",
+      "slug": "horsham"
+    },
+    {
+      "path": "/locations/kent",
+      "pageType": "location-detail",
+      "slug": "kent"
+    },
+    {
+      "path": "/locations/kingston-upon-thames",
+      "pageType": "location-detail",
+      "slug": "kingston-upon-thames"
+    },
+    {
+      "path": "/locations/lewes",
+      "pageType": "location-detail",
+      "slug": "lewes"
+    },
+    {
+      "path": "/locations/littlehampton",
+      "pageType": "location-detail",
+      "slug": "littlehampton"
+    },
+    {
+      "path": "/locations/maidstone",
+      "pageType": "location-detail",
+      "slug": "maidstone"
+    },
+    {
+      "path": "/locations/margate",
+      "pageType": "location-detail",
+      "slug": "margate"
+    },
+    {
+      "path": "/locations/newhaven",
+      "pageType": "location-detail",
+      "slug": "newhaven"
+    },
+    {
+      "path": "/locations/redhill",
+      "pageType": "location-detail",
+      "slug": "redhill"
+    },
+    {
+      "path": "/locations/seaford",
+      "pageType": "location-detail",
+      "slug": "seaford"
+    },
+    {
+      "path": "/locations/sevenoaks",
+      "pageType": "location-detail",
+      "slug": "sevenoaks"
+    },
+    {
+      "path": "/locations/surrey",
+      "pageType": "location-detail",
+      "slug": "surrey"
+    },
+    {
+      "path": "/locations/tunbridge-wells",
+      "pageType": "location-detail",
+      "slug": "tunbridge-wells"
+    },
+    {
+      "path": "/locations/uckfield",
+      "pageType": "location-detail",
+      "slug": "uckfield"
+    },
+    {
+      "path": "/locations/west-sussex",
+      "pageType": "location-detail",
+      "slug": "west-sussex"
+    },
+    {
+      "path": "/locations/woking",
+      "pageType": "location-detail",
+      "slug": "woking"
+    },
+    {
+      "path": "/locations/worthing",
+      "pageType": "location-detail",
+      "slug": "worthing"
+    },
+    {
+      "path": "/privacy-policy",
+      "pageType": "privacy",
+      "slug": "privacy"
+    },
+    {
+      "path": "/projects",
+      "pageType": "projects",
+      "slug": "projects"
+    },
+    {
+      "path": "/projects/commercial-office-development-canterbury",
+      "pageType": "project-detail",
+      "slug": "commercial-office-development-canterbury"
+    },
+    {
+      "path": "/projects/victorian-terrace-restoration-brighton",
+      "pageType": "project-detail",
+      "slug": "victorian-terrace-restoration-brighton"
+    },
+    {
+      "path": "/reviews",
+      "pageType": "reviews",
+      "slug": "reviews"
+    },
+    {
+      "path": "/services",
+      "pageType": "services",
+      "slug": "services"
+    },
+    {
+      "path": "/services/access-scaffolding",
+      "pageType": "service-detail",
+      "slug": "access-scaffolding"
+    },
+    {
+      "path": "/services/birdcage-scaffolds",
+      "pageType": "service-detail",
+      "slug": "birdcage-scaffolds"
+    },
+    {
+      "path": "/services/commercial-scaffolding",
+      "pageType": "service-detail",
+      "slug": "commercial-scaffolding"
+    },
+    {
+      "path": "/services/commercial-scaffolding/brighton",
+      "pageType": "service-location-detail",
+      "slug": "commercial-scaffolding--brighton"
+    },
+    {
+      "path": "/services/commercial-scaffolding/canterbury",
+      "pageType": "service-location-detail",
+      "slug": "commercial-scaffolding--canterbury"
+    },
+    {
+      "path": "/services/commercial-scaffolding/hastings",
+      "pageType": "service-location-detail",
+      "slug": "commercial-scaffolding--hastings"
+    },
+    {
+      "path": "/services/crash-decks",
+      "pageType": "service-detail",
+      "slug": "crash-decks"
+    },
+    {
+      "path": "/services/edge-protection",
+      "pageType": "service-detail",
+      "slug": "edge-protection"
+    },
+    {
+      "path": "/services/facade-scaffolding",
+      "pageType": "service-detail",
+      "slug": "facade-scaffolding"
+    },
+    {
+      "path": "/services/hangers-truss-outs-advanced-scaffolding",
+      "pageType": "service-detail",
+      "slug": "hangers-truss-outs-advanced-scaffolding"
+    },
+    {
+      "path": "/services/heavy-duty-industrial-scaffolding",
+      "pageType": "service-detail",
+      "slug": "heavy-duty-industrial-scaffolding"
+    },
+    {
+      "path": "/services/industrial-scaffolding",
+      "pageType": "service-detail",
+      "slug": "industrial-scaffolding"
+    },
+    {
+      "path": "/services/pavement-gantries-loading-bays",
+      "pageType": "service-detail",
+      "slug": "pavement-gantries-loading-bays"
+    },
+    {
+      "path": "/services/residential-scaffolding",
+      "pageType": "service-detail",
+      "slug": "residential-scaffolding"
+    },
+    {
+      "path": "/services/residential-scaffolding/brighton",
+      "pageType": "service-location-detail",
+      "slug": "residential-scaffolding--brighton"
+    },
+    {
+      "path": "/services/residential-scaffolding/canterbury",
+      "pageType": "service-location-detail",
+      "slug": "residential-scaffolding--canterbury"
+    },
+    {
+      "path": "/services/residential-scaffolding/hastings",
+      "pageType": "service-location-detail",
+      "slug": "residential-scaffolding--hastings"
+    },
+    {
+      "path": "/services/scaffold-alarms",
+      "pageType": "service-detail",
+      "slug": "scaffold-alarms"
+    },
+    {
+      "path": "/services/scaffold-towers-mast-systems",
+      "pageType": "service-detail",
+      "slug": "scaffold-towers-mast-systems"
+    },
+    {
+      "path": "/services/scaffolding-design-drawings",
+      "pageType": "service-detail",
+      "slug": "scaffolding-design-drawings"
+    },
+    {
+      "path": "/services/scaffolding-inspections-maintenance",
+      "pageType": "service-detail",
+      "slug": "scaffolding-inspections-maintenance"
+    },
+    {
+      "path": "/services/sheeting-netting-encapsulation",
+      "pageType": "service-detail",
+      "slug": "sheeting-netting-encapsulation"
+    },
+    {
+      "path": "/services/staircase-towers",
+      "pageType": "service-detail",
+      "slug": "staircase-towers"
+    },
+    {
+      "path": "/services/temporary-roof-systems",
+      "pageType": "service-detail",
+      "slug": "temporary-roof-systems"
+    }
+  ]
+}

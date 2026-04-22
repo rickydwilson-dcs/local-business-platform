@@ -5,9 +5,9 @@
   "status": 200,
   "error": null,
   "screenshots": {
-    "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--birdcage-scaffolds/desktop.png",
-    "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--birdcage-scaffolds/tablet.png",
-    "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--birdcage-scaffolds/mobile.png"
+    "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--birdcage-scaffolds/desktop.png",
+    "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--birdcage-scaffolds/tablet.png",
+    "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--birdcage-scaffolds/mobile.png"
   },
-  "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--birdcage-scaffolds/dom.json"
+  "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--birdcage-scaffolds/dom.json"
 }

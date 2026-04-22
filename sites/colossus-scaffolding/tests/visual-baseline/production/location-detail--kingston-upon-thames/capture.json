@@ -5,9 +5,9 @@
   "status": 200,
   "error": null,
   "screenshots": {
-    "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--kingston-upon-thames/desktop.png",
-    "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--kingston-upon-thames/tablet.png",
-    "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--kingston-upon-thames/mobile.png"
+    "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--kingston-upon-thames/desktop.png",
+    "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--kingston-upon-thames/tablet.png",
+    "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--kingston-upon-thames/mobile.png"
   },
-  "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--kingston-upon-thames/dom.json"
+  "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--kingston-upon-thames/dom.json"
 }

@@ -5,9 +5,9 @@
   "status": 200,
   "error": null,
   "screenshots": {
-    "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--dartford/desktop.png",
-    "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--dartford/tablet.png",
-    "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--dartford/mobile.png"
+    "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--dartford/desktop.png",
+    "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--dartford/tablet.png",
+    "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--dartford/mobile.png"
   },
-  "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--dartford/dom.json"
+  "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--dartford/dom.json"
 }

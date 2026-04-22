@@ -1,6 +1,6 @@
 {
-  "baseUrl": "https://www.colossus-scaffolding.co.uk",
-  "capturedAt": "2026-04-21T15:55:10.839Z",
+  "baseUrl": "http://localhost:3000",
+  "capturedAt": "2026-04-22T09:32:17.952Z",
   "results": [
     {
       "path": "/",
@@ -9,11 +9,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/home--home/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/home--home/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/home--home/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/home--home/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/home--home/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/home--home/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/home--home/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/home--home/dom.json"
     },
     {
       "path": "/about",
@@ -22,11 +22,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/about--about/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/about--about/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/about--about/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/about--about/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/about--about/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/about--about/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/about--about/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/about--about/dom.json"
     },
     {
       "path": "/blog",
@@ -35,11 +35,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/blog--blog/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/blog--blog/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/blog--blog/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/blog--blog/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/blog--blog/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/blog--blog/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/blog--blog/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/blog--blog/dom.json"
     },
     {
       "path": "/blog/choosing-right-scaffolding-for-your-project",
@@ -48,11 +48,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/blog-post--choosing-right-scaffolding-for-your-project/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/blog-post--choosing-right-scaffolding-for-your-project/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/blog-post--choosing-right-scaffolding-for-your-project/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/blog-post--choosing-right-scaffolding-for-your-project/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/blog-post--choosing-right-scaffolding-for-your-project/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/blog-post--choosing-right-scaffolding-for-your-project/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/blog-post--choosing-right-scaffolding-for-your-project/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/blog-post--choosing-right-scaffolding-for-your-project/dom.json"
     },
     {
       "path": "/blog/do-i-need-permit-for-scaffolding",
@@ -61,11 +61,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/blog-post--do-i-need-permit-for-scaffolding/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/blog-post--do-i-need-permit-for-scaffolding/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/blog-post--do-i-need-permit-for-scaffolding/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/blog-post--do-i-need-permit-for-scaffolding/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/blog-post--do-i-need-permit-for-scaffolding/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/blog-post--do-i-need-permit-for-scaffolding/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/blog-post--do-i-need-permit-for-scaffolding/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/blog-post--do-i-need-permit-for-scaffolding/dom.json"
     },
     {
       "path": "/blog/how-long-does-scaffolding-take-to-erect",
@@ -74,11 +74,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/blog-post--how-long-does-scaffolding-take-to-erect/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/blog-post--how-long-does-scaffolding-take-to-erect/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/blog-post--how-long-does-scaffolding-take-to-erect/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/blog-post--how-long-does-scaffolding-take-to-erect/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/blog-post--how-long-does-scaffolding-take-to-erect/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/blog-post--how-long-does-scaffolding-take-to-erect/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/blog-post--how-long-does-scaffolding-take-to-erect/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/blog-post--how-long-does-scaffolding-take-to-erect/dom.json"
     },
     {
       "path": "/blog/scaffolding-safety-guide-winter",
@@ -87,11 +87,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/blog-post--scaffolding-safety-guide-winter/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/blog-post--scaffolding-safety-guide-winter/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/blog-post--scaffolding-safety-guide-winter/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/blog-post--scaffolding-safety-guide-winter/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/blog-post--scaffolding-safety-guide-winter/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/blog-post--scaffolding-safety-guide-winter/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/blog-post--scaffolding-safety-guide-winter/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/blog-post--scaffolding-safety-guide-winter/dom.json"
     },
     {
       "path": "/blog/scaffolding-safety-what-to-expect",
@@ -100,11 +100,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/blog-post--scaffolding-safety-what-to-expect/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/blog-post--scaffolding-safety-what-to-expect/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/blog-post--scaffolding-safety-what-to-expect/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/blog-post--scaffolding-safety-what-to-expect/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/blog-post--scaffolding-safety-what-to-expect/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/blog-post--scaffolding-safety-what-to-expect/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/blog-post--scaffolding-safety-what-to-expect/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/blog-post--scaffolding-safety-what-to-expect/dom.json"
     },
     {
       "path": "/contact",
@@ -113,11 +113,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/contact--contact/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/contact--contact/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/contact--contact/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/contact--contact/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/contact--contact/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/contact--contact/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/contact--contact/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/contact--contact/dom.json"
     },
     {
       "path": "/cookie-policy",
@@ -126,11 +126,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/cookie--cookie/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/cookie--cookie/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/cookie--cookie/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/cookie--cookie/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/cookie--cookie/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/cookie--cookie/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/cookie--cookie/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/cookie--cookie/dom.json"
     },
     {
       "path": "/locations",
@@ -139,11 +139,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/locations--locations/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/locations--locations/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/locations--locations/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/locations--locations/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/locations--locations/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/locations--locations/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/locations--locations/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/locations--locations/dom.json"
     },
     {
       "path": "/locations/ashford",
@@ -152,11 +152,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--ashford/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--ashford/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--ashford/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--ashford/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--ashford/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--ashford/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--ashford/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--ashford/dom.json"
     },
     {
       "path": "/locations/battle",
@@ -165,11 +165,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--battle/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--battle/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--battle/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--battle/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--battle/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--battle/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--battle/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--battle/dom.json"
     },
     {
       "path": "/locations/bognor-regis",
@@ -178,11 +178,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--bognor-regis/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--bognor-regis/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--bognor-regis/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--bognor-regis/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--bognor-regis/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--bognor-regis/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--bognor-regis/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--bognor-regis/dom.json"
     },
     {
       "path": "/locations/brighton",
@@ -191,11 +191,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--brighton/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--brighton/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--brighton/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--brighton/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--brighton/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--brighton/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--brighton/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--brighton/dom.json"
     },
     {
       "path": "/locations/burgess-hill",
@@ -204,11 +204,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--burgess-hill/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--burgess-hill/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--burgess-hill/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--burgess-hill/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--burgess-hill/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--burgess-hill/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--burgess-hill/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--burgess-hill/dom.json"
     },
     {
       "path": "/locations/camberley",
@@ -217,11 +217,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--camberley/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--camberley/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--camberley/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--camberley/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--camberley/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--camberley/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--camberley/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--camberley/dom.json"
     },
     {
       "path": "/locations/canterbury",
@@ -230,11 +230,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--canterbury/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--canterbury/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--canterbury/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--canterbury/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--canterbury/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--canterbury/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--canterbury/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--canterbury/dom.json"
     },
     {
       "path": "/locations/chichester",
@@ -243,11 +243,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--chichester/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--chichester/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--chichester/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--chichester/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--chichester/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--chichester/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--chichester/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--chichester/dom.json"
     },
     {
       "path": "/locations/crawley",
@@ -256,11 +256,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--crawley/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--crawley/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--crawley/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--crawley/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--crawley/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--crawley/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--crawley/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--crawley/dom.json"
     },
     {
       "path": "/locations/crowborough",
@@ -269,11 +269,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--crowborough/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--crowborough/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--crowborough/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--crowborough/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--crowborough/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--crowborough/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--crowborough/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--crowborough/dom.json"
     },
     {
       "path": "/locations/dartford",
@@ -282,11 +282,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--dartford/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--dartford/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--dartford/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--dartford/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--dartford/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--dartford/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--dartford/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--dartford/dom.json"
     },
     {
       "path": "/locations/dover",
@@ -295,11 +295,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--dover/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--dover/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--dover/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--dover/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--dover/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--dover/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--dover/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--dover/dom.json"
     },
     {
       "path": "/locations/east-sussex",
@@ -308,11 +308,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--east-sussex/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--east-sussex/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--east-sussex/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--east-sussex/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--east-sussex/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--east-sussex/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--east-sussex/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--east-sussex/dom.json"
     },
     {
       "path": "/locations/eastbourne",
@@ -321,11 +321,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--eastbourne/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--eastbourne/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--eastbourne/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--eastbourne/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--eastbourne/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--eastbourne/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--eastbourne/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--eastbourne/dom.json"
     },
     {
       "path": "/locations/epsom",
@@ -334,11 +334,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--epsom/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--epsom/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--epsom/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--epsom/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--epsom/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--epsom/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--epsom/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--epsom/dom.json"
     },
     {
       "path": "/locations/folkestone",
@@ -347,11 +347,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--folkestone/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--folkestone/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--folkestone/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--folkestone/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--folkestone/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--folkestone/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--folkestone/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--folkestone/dom.json"
     },
     {
       "path": "/locations/guildford",
@@ -360,11 +360,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--guildford/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--guildford/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--guildford/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--guildford/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--guildford/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--guildford/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--guildford/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--guildford/dom.json"
     },
     {
       "path": "/locations/hailsham",
@@ -373,11 +373,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--hailsham/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--hailsham/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--hailsham/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--hailsham/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--hailsham/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--hailsham/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--hailsham/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--hailsham/dom.json"
     },
     {
       "path": "/locations/hastings",
@@ -386,11 +386,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--hastings/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--hastings/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--hastings/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--hastings/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--hastings/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--hastings/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--hastings/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--hastings/dom.json"
     },
     {
       "path": "/locations/haywards-heath",
@@ -399,11 +399,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--haywards-heath/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--haywards-heath/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--haywards-heath/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--haywards-heath/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--haywards-heath/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--haywards-heath/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--haywards-heath/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--haywards-heath/dom.json"
     },
     {
       "path": "/locations/horsham",
@@ -412,11 +412,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--horsham/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--horsham/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--horsham/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--horsham/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--horsham/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--horsham/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--horsham/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--horsham/dom.json"
     },
     {
       "path": "/locations/kent",
@@ -425,11 +425,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--kent/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--kent/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--kent/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--kent/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--kent/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--kent/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--kent/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--kent/dom.json"
     },
     {
       "path": "/locations/kingston-upon-thames",
@@ -438,11 +438,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--kingston-upon-thames/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--kingston-upon-thames/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--kingston-upon-thames/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--kingston-upon-thames/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--kingston-upon-thames/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--kingston-upon-thames/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--kingston-upon-thames/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--kingston-upon-thames/dom.json"
     },
     {
       "path": "/locations/lewes",
@@ -451,11 +451,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--lewes/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--lewes/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--lewes/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--lewes/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--lewes/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--lewes/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--lewes/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--lewes/dom.json"
     },
     {
       "path": "/locations/littlehampton",
@@ -464,11 +464,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--littlehampton/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--littlehampton/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--littlehampton/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--littlehampton/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--littlehampton/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--littlehampton/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--littlehampton/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--littlehampton/dom.json"
     },
     {
       "path": "/locations/maidstone",
@@ -477,11 +477,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--maidstone/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--maidstone/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--maidstone/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--maidstone/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--maidstone/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--maidstone/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--maidstone/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--maidstone/dom.json"
     },
     {
       "path": "/locations/margate",
@@ -490,11 +490,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--margate/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--margate/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--margate/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--margate/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--margate/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--margate/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--margate/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--margate/dom.json"
     },
     {
       "path": "/locations/newhaven",
@@ -503,11 +503,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--newhaven/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--newhaven/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--newhaven/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--newhaven/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--newhaven/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--newhaven/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--newhaven/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--newhaven/dom.json"
     },
     {
       "path": "/locations/redhill",
@@ -516,11 +516,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--redhill/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--redhill/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--redhill/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--redhill/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--redhill/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--redhill/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--redhill/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--redhill/dom.json"
     },
     {
       "path": "/locations/seaford",
@@ -529,11 +529,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--seaford/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--seaford/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--seaford/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--seaford/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--seaford/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--seaford/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--seaford/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--seaford/dom.json"
     },
     {
       "path": "/locations/sevenoaks",
@@ -542,11 +542,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--sevenoaks/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--sevenoaks/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--sevenoaks/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--sevenoaks/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--sevenoaks/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--sevenoaks/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--sevenoaks/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--sevenoaks/dom.json"
     },
     {
       "path": "/locations/surrey",
@@ -555,11 +555,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--surrey/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--surrey/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--surrey/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--surrey/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--surrey/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--surrey/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--surrey/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--surrey/dom.json"
     },
     {
       "path": "/locations/tunbridge-wells",
@@ -568,11 +568,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--tunbridge-wells/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--tunbridge-wells/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--tunbridge-wells/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--tunbridge-wells/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--tunbridge-wells/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--tunbridge-wells/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--tunbridge-wells/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--tunbridge-wells/dom.json"
     },
     {
       "path": "/locations/uckfield",
@@ -581,11 +581,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--uckfield/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--uckfield/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--uckfield/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--uckfield/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--uckfield/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--uckfield/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--uckfield/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--uckfield/dom.json"
     },
     {
       "path": "/locations/west-sussex",
@@ -594,11 +594,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--west-sussex/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--west-sussex/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--west-sussex/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--west-sussex/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--west-sussex/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--west-sussex/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--west-sussex/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--west-sussex/dom.json"
     },
     {
       "path": "/locations/woking",
@@ -607,11 +607,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--woking/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--woking/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--woking/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--woking/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--woking/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--woking/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--woking/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--woking/dom.json"
     },
     {
       "path": "/locations/worthing",
@@ -620,11 +620,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--worthing/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--worthing/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--worthing/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--worthing/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--worthing/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--worthing/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/location-detail--worthing/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/location-detail--worthing/dom.json"
     },
     {
       "path": "/privacy-policy",
@@ -633,11 +633,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/privacy--privacy/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/privacy--privacy/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/privacy--privacy/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/privacy--privacy/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/privacy--privacy/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/privacy--privacy/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/privacy--privacy/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/privacy--privacy/dom.json"
     },
     {
       "path": "/projects",
@@ -646,11 +646,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/projects--projects/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/projects--projects/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/projects--projects/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/projects--projects/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/projects--projects/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/projects--projects/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/projects--projects/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/projects--projects/dom.json"
     },
     {
       "path": "/projects/commercial-office-development-canterbury",
@@ -659,11 +659,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/project-detail--commercial-office-development-canterbury/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/project-detail--commercial-office-development-canterbury/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/project-detail--commercial-office-development-canterbury/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/project-detail--commercial-office-development-canterbury/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/project-detail--commercial-office-development-canterbury/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/project-detail--commercial-office-development-canterbury/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/project-detail--commercial-office-development-canterbury/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/project-detail--commercial-office-development-canterbury/dom.json"
     },
     {
       "path": "/projects/victorian-terrace-restoration-brighton",
@@ -672,11 +672,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/project-detail--victorian-terrace-restoration-brighton/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/project-detail--victorian-terrace-restoration-brighton/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/project-detail--victorian-terrace-restoration-brighton/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/project-detail--victorian-terrace-restoration-brighton/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/project-detail--victorian-terrace-restoration-brighton/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/project-detail--victorian-terrace-restoration-brighton/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/project-detail--victorian-terrace-restoration-brighton/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/project-detail--victorian-terrace-restoration-brighton/dom.json"
     },
     {
       "path": "/reviews",
@@ -685,11 +685,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/reviews--reviews/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/reviews--reviews/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/reviews--reviews/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/reviews--reviews/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/reviews--reviews/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/reviews--reviews/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/reviews--reviews/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/reviews--reviews/dom.json"
     },
     {
       "path": "/services",
@@ -698,11 +698,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/services--services/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/services--services/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/services--services/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/services--services/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/services--services/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/services--services/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/services--services/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/services--services/dom.json"
     },
     {
       "path": "/services/access-scaffolding",
@@ -711,11 +711,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--access-scaffolding/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--access-scaffolding/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--access-scaffolding/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--access-scaffolding/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--access-scaffolding/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--access-scaffolding/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--access-scaffolding/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--access-scaffolding/dom.json"
     },
     {
       "path": "/services/birdcage-scaffolds",
@@ -724,11 +724,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--birdcage-scaffolds/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--birdcage-scaffolds/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--birdcage-scaffolds/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--birdcage-scaffolds/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--birdcage-scaffolds/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--birdcage-scaffolds/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--birdcage-scaffolds/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--birdcage-scaffolds/dom.json"
     },
     {
       "path": "/services/commercial-scaffolding",
@@ -737,11 +737,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--commercial-scaffolding/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--commercial-scaffolding/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--commercial-scaffolding/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--commercial-scaffolding/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--commercial-scaffolding/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--commercial-scaffolding/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--commercial-scaffolding/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--commercial-scaffolding/dom.json"
     },
     {
       "path": "/services/commercial-scaffolding/brighton",
@@ -750,11 +750,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/service-location-detail--commercial-scaffolding--brighton/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/service-location-detail--commercial-scaffolding--brighton/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/service-location-detail--commercial-scaffolding--brighton/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/service-location-detail--commercial-scaffolding--brighton/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/service-location-detail--commercial-scaffolding--brighton/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/service-location-detail--commercial-scaffolding--brighton/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/service-location-detail--commercial-scaffolding--brighton/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/service-location-detail--commercial-scaffolding--brighton/dom.json"
     },
     {
       "path": "/services/commercial-scaffolding/canterbury",
@@ -763,11 +763,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/service-location-detail--commercial-scaffolding--canterbury/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/service-location-detail--commercial-scaffolding--canterbury/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/service-location-detail--commercial-scaffolding--canterbury/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/service-location-detail--commercial-scaffolding--canterbury/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/service-location-detail--commercial-scaffolding--canterbury/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/service-location-detail--commercial-scaffolding--canterbury/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/service-location-detail--commercial-scaffolding--canterbury/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/service-location-detail--commercial-scaffolding--canterbury/dom.json"
     },
     {
       "path": "/services/commercial-scaffolding/hastings",
@@ -776,11 +776,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/service-location-detail--commercial-scaffolding--hastings/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/service-location-detail--commercial-scaffolding--hastings/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/service-location-detail--commercial-scaffolding--hastings/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/service-location-detail--commercial-scaffolding--hastings/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/service-location-detail--commercial-scaffolding--hastings/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/service-location-detail--commercial-scaffolding--hastings/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/service-location-detail--commercial-scaffolding--hastings/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/service-location-detail--commercial-scaffolding--hastings/dom.json"
     },
     {
       "path": "/services/crash-decks",
@@ -789,11 +789,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--crash-decks/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--crash-decks/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--crash-decks/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--crash-decks/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--crash-decks/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--crash-decks/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--crash-decks/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--crash-decks/dom.json"
     },
     {
       "path": "/services/edge-protection",
@@ -802,11 +802,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--edge-protection/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--edge-protection/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--edge-protection/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--edge-protection/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--edge-protection/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--edge-protection/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--edge-protection/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--edge-protection/dom.json"
     },
     {
       "path": "/services/facade-scaffolding",
@@ -815,11 +815,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--facade-scaffolding/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--facade-scaffolding/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--facade-scaffolding/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--facade-scaffolding/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--facade-scaffolding/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--facade-scaffolding/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--facade-scaffolding/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--facade-scaffolding/dom.json"
     },
     {
       "path": "/services/hangers-truss-outs-advanced-scaffolding",
@@ -828,11 +828,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--hangers-truss-outs-advanced-scaffolding/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--hangers-truss-outs-advanced-scaffolding/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--hangers-truss-outs-advanced-scaffolding/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--hangers-truss-outs-advanced-scaffolding/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--hangers-truss-outs-advanced-scaffolding/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--hangers-truss-outs-advanced-scaffolding/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--hangers-truss-outs-advanced-scaffolding/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--hangers-truss-outs-advanced-scaffolding/dom.json"
     },
     {
       "path": "/services/heavy-duty-industrial-scaffolding",
@@ -841,11 +841,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--heavy-duty-industrial-scaffolding/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--heavy-duty-industrial-scaffolding/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--heavy-duty-industrial-scaffolding/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--heavy-duty-industrial-scaffolding/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--heavy-duty-industrial-scaffolding/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--heavy-duty-industrial-scaffolding/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--heavy-duty-industrial-scaffolding/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--heavy-duty-industrial-scaffolding/dom.json"
     },
     {
       "path": "/services/industrial-scaffolding",
@@ -854,11 +854,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--industrial-scaffolding/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--industrial-scaffolding/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--industrial-scaffolding/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--industrial-scaffolding/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--industrial-scaffolding/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--industrial-scaffolding/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--industrial-scaffolding/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--industrial-scaffolding/dom.json"
     },
     {
       "path": "/services/pavement-gantries-loading-bays",
@@ -867,11 +867,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--pavement-gantries-loading-bays/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--pavement-gantries-loading-bays/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--pavement-gantries-loading-bays/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--pavement-gantries-loading-bays/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--pavement-gantries-loading-bays/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--pavement-gantries-loading-bays/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--pavement-gantries-loading-bays/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--pavement-gantries-loading-bays/dom.json"
     },
     {
       "path": "/services/residential-scaffolding",
@@ -880,11 +880,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--residential-scaffolding/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--residential-scaffolding/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--residential-scaffolding/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--residential-scaffolding/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--residential-scaffolding/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--residential-scaffolding/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--residential-scaffolding/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--residential-scaffolding/dom.json"
     },
     {
       "path": "/services/residential-scaffolding/brighton",
@@ -893,11 +893,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/service-location-detail--residential-scaffolding--brighton/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/service-location-detail--residential-scaffolding--brighton/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/service-location-detail--residential-scaffolding--brighton/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/service-location-detail--residential-scaffolding--brighton/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/service-location-detail--residential-scaffolding--brighton/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/service-location-detail--residential-scaffolding--brighton/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/service-location-detail--residential-scaffolding--brighton/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/service-location-detail--residential-scaffolding--brighton/dom.json"
     },
     {
       "path": "/services/residential-scaffolding/canterbury",
@@ -906,11 +906,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/service-location-detail--residential-scaffolding--canterbury/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/service-location-detail--residential-scaffolding--canterbury/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/service-location-detail--residential-scaffolding--canterbury/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/service-location-detail--residential-scaffolding--canterbury/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/service-location-detail--residential-scaffolding--canterbury/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/service-location-detail--residential-scaffolding--canterbury/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/service-location-detail--residential-scaffolding--canterbury/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/service-location-detail--residential-scaffolding--canterbury/dom.json"
     },
     {
       "path": "/services/residential-scaffolding/hastings",
@@ -919,11 +919,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/service-location-detail--residential-scaffolding--hastings/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/service-location-detail--residential-scaffolding--hastings/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/service-location-detail--residential-scaffolding--hastings/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/service-location-detail--residential-scaffolding--hastings/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/service-location-detail--residential-scaffolding--hastings/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/service-location-detail--residential-scaffolding--hastings/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/service-location-detail--residential-scaffolding--hastings/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/service-location-detail--residential-scaffolding--hastings/dom.json"
     },
     {
       "path": "/services/scaffold-alarms",
@@ -932,11 +932,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--scaffold-alarms/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--scaffold-alarms/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--scaffold-alarms/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--scaffold-alarms/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--scaffold-alarms/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--scaffold-alarms/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--scaffold-alarms/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--scaffold-alarms/dom.json"
     },
     {
       "path": "/services/scaffold-towers-mast-systems",
@@ -945,11 +945,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--scaffold-towers-mast-systems/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--scaffold-towers-mast-systems/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--scaffold-towers-mast-systems/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--scaffold-towers-mast-systems/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--scaffold-towers-mast-systems/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--scaffold-towers-mast-systems/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--scaffold-towers-mast-systems/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--scaffold-towers-mast-systems/dom.json"
     },
     {
       "path": "/services/scaffolding-design-drawings",
@@ -958,11 +958,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--scaffolding-design-drawings/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--scaffolding-design-drawings/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--scaffolding-design-drawings/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--scaffolding-design-drawings/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--scaffolding-design-drawings/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--scaffolding-design-drawings/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--scaffolding-design-drawings/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--scaffolding-design-drawings/dom.json"
     },
     {
       "path": "/services/scaffolding-inspections-maintenance",
@@ -971,11 +971,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--scaffolding-inspections-maintenance/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--scaffolding-inspections-maintenance/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--scaffolding-inspections-maintenance/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--scaffolding-inspections-maintenance/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--scaffolding-inspections-maintenance/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--scaffolding-inspections-maintenance/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--scaffolding-inspections-maintenance/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--scaffolding-inspections-maintenance/dom.json"
     },
     {
       "path": "/services/sheeting-netting-encapsulation",
@@ -984,11 +984,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--sheeting-netting-encapsulation/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--sheeting-netting-encapsulation/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--sheeting-netting-encapsulation/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--sheeting-netting-encapsulation/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--sheeting-netting-encapsulation/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--sheeting-netting-encapsulation/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--sheeting-netting-encapsulation/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--sheeting-netting-encapsulation/dom.json"
     },
     {
       "path": "/services/staircase-towers",
@@ -997,11 +997,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--staircase-towers/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--staircase-towers/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--staircase-towers/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--staircase-towers/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--staircase-towers/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--staircase-towers/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--staircase-towers/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--staircase-towers/dom.json"
     },
     {
       "path": "/services/temporary-roof-systems",
@@ -1010,11 +1010,11 @@
       "status": 200,
       "error": null,
       "screenshots": {
-        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--temporary-roof-systems/desktop.png",
-        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--temporary-roof-systems/tablet.png",
-        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--temporary-roof-systems/mobile.png"
+        "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--temporary-roof-systems/desktop.png",
+        "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--temporary-roof-systems/tablet.png",
+        "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--temporary-roof-systems/mobile.png"
       },
-      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--temporary-roof-systems/dom.json"
+      "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--temporary-roof-systems/dom.json"
     }
   ]
 }

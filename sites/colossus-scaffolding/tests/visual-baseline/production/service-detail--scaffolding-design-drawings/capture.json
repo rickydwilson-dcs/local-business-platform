@@ -5,9 +5,9 @@
   "status": 200,
   "error": null,
   "screenshots": {
-    "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--scaffolding-design-drawings/desktop.png",
-    "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--scaffolding-design-drawings/tablet.png",
-    "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--scaffolding-design-drawings/mobile.png"
+    "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--scaffolding-design-drawings/desktop.png",
+    "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--scaffolding-design-drawings/tablet.png",
+    "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--scaffolding-design-drawings/mobile.png"
   },
-  "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--scaffolding-design-drawings/dom.json"
+  "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--scaffolding-design-drawings/dom.json"
 }

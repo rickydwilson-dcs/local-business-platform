@@ -5,9 +5,9 @@
   "status": 200,
   "error": null,
   "screenshots": {
-    "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--heavy-duty-industrial-scaffolding/desktop.png",
-    "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--heavy-duty-industrial-scaffolding/tablet.png",
-    "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--heavy-duty-industrial-scaffolding/mobile.png"
+    "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--heavy-duty-industrial-scaffolding/desktop.png",
+    "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--heavy-duty-industrial-scaffolding/tablet.png",
+    "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--heavy-duty-industrial-scaffolding/mobile.png"
   },
-  "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--heavy-duty-industrial-scaffolding/dom.json"
+  "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--heavy-duty-industrial-scaffolding/dom.json"
 }

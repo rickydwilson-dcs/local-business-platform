@@ -5,9 +5,9 @@
   "status": 200,
   "error": null,
   "screenshots": {
-    "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/blog-post--scaffolding-safety-guide-winter/desktop.png",
-    "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/blog-post--scaffolding-safety-guide-winter/tablet.png",
-    "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/blog-post--scaffolding-safety-guide-winter/mobile.png"
+    "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/blog-post--scaffolding-safety-guide-winter/desktop.png",
+    "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/blog-post--scaffolding-safety-guide-winter/tablet.png",
+    "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/blog-post--scaffolding-safety-guide-winter/mobile.png"
   },
-  "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/blog-post--scaffolding-safety-guide-winter/dom.json"
+  "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/blog-post--scaffolding-safety-guide-winter/dom.json"
 }

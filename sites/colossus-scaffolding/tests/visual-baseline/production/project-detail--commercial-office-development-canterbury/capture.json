@@ -5,9 +5,9 @@
   "status": 200,
   "error": null,
   "screenshots": {
-    "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/project-detail--commercial-office-development-canterbury/desktop.png",
-    "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/project-detail--commercial-office-development-canterbury/tablet.png",
-    "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/project-detail--commercial-office-development-canterbury/mobile.png"
+    "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/project-detail--commercial-office-development-canterbury/desktop.png",
+    "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/project-detail--commercial-office-development-canterbury/tablet.png",
+    "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/project-detail--commercial-office-development-canterbury/mobile.png"
   },
-  "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/project-detail--commercial-office-development-canterbury/dom.json"
+  "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/project-detail--commercial-office-development-canterbury/dom.json"
 }

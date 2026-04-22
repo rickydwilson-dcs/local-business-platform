@@ -5,9 +5,9 @@
   "status": 200,
   "error": null,
   "screenshots": {
-    "desktop": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--scaffold-alarms/desktop.png",
-    "tablet": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--scaffold-alarms/tablet.png",
-    "mobile": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--scaffold-alarms/mobile.png"
+    "desktop": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--scaffold-alarms/desktop.png",
+    "tablet": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--scaffold-alarms/tablet.png",
+    "mobile": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--scaffold-alarms/mobile.png"
   },
-  "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/production/service-detail--scaffold-alarms/dom.json"
+  "domSnapshotPath": "sites/colossus-scaffolding/tests/visual-baseline/target/service-detail--scaffold-alarms/dom.json"
 }
