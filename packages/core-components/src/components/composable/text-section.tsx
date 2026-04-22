@@ -180,7 +180,7 @@ function renderSection(section: TextSectionBlock, index: number) {
 
   return (
     <section key={index} className="mb-12">
-      <h2 id={headingId} className="text-h2 mb-4">
+      <h2 id={headingId} className="heading-section">
         {section.heading}
       </h2>
       {section.body && <p className="text-body text-surface-muted-foreground">{section.body}</p>}
