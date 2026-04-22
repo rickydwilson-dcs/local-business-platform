@@ -62,14 +62,10 @@ export function CountyGatewayCards({
     >
       <div className="mx-auto w-full max-w-6xl px-4 py-16 md:py-24 sm:px-6 lg:px-8">
         {slots.showSectionHeading && d.heading && (
-          <h2 className="text-xl md:text-2xl font-bold tracking-tight mb-4 text-center">
-            {d.heading}
-          </h2>
+          <h2 className="heading-section tracking-tight text-center">{d.heading}</h2>
         )}
         {d.intro && (
-          <p className="text-lg text-center opacity-80 mb-12 max-w-2xl mx-auto leading-relaxed">
-            {d.intro}
-          </p>
+          <p className="text-body-lg text-center opacity-80 mb-12 max-w-2xl mx-auto">{d.intro}</p>
         )}
         <div className={`grid gap-6 lg:gap-8 ${gridCols}`}>
           {counties.map((county) => (
@@ -79,24 +75,22 @@ export function CountyGatewayCards({
               className="group bg-surface-card text-surface-foreground rounded-2xl border border-surface-card-border p-8 hover:shadow-xl transition-shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary"
             >
               <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-bold text-surface-foreground">{county.name}</h3>
+                <h3 className="heading-card-sm text-surface-foreground">{county.name}</h3>
                 {slots.showTownCount && typeof county.townCount === "number" && (
-                  <span className="inline-flex items-center px-3 py-1 rounded-full bg-brand-primary/10 text-brand-primary text-sm font-semibold">
+                  <span className="text-label inline-flex items-center px-3 py-1 rounded-full bg-brand-primary/10 text-brand-primary">
                     {county.townCount} towns
                   </span>
                 )}
               </div>
               {slots.showDescription && county.description && (
-                <p className="text-base text-surface-muted-foreground leading-relaxed mb-6">
-                  {county.description}
-                </p>
+                <p className="text-body text-surface-muted-foreground mb-6">{county.description}</p>
               )}
               {slots.showHighlights && (county.highlights?.length ?? 0) > 0 && (
                 <ul className="space-y-2 mb-6">
                   {county.highlights!.slice(0, 4).map((item, i) => (
                     <li
                       key={i}
-                      className="flex items-start gap-2 text-base text-surface-foreground"
+                      className="text-body flex items-start gap-2 text-surface-foreground"
                     >
                       <CheckCircle2
                         className="w-4 h-4 text-brand-primary mt-0.5 flex-shrink-0"
@@ -107,7 +101,7 @@ export function CountyGatewayCards({
                   ))}
                 </ul>
               )}
-              <span className="inline-flex items-center gap-1 text-base font-semibold text-brand-primary group-hover:translate-x-1 transition-transform">
+              <span className="text-label inline-flex items-center gap-1 text-brand-primary group-hover:translate-x-1 transition-transform">
                 Explore {county.name} <ArrowRight className="w-4 h-4" aria-hidden />
               </span>
             </Link>

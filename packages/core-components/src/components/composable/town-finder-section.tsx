@@ -52,12 +52,10 @@ export function TownFinderSection({
     <section className={`${bg} ${className ?? ""}`} data-component="TownFinderSection">
       <div className="mx-auto w-full max-w-3xl px-4 py-16 md:py-20 sm:px-6 lg:px-8">
         {slots.showSectionHeading && d.heading && (
-          <h2 className="text-xl md:text-2xl font-bold tracking-tight mb-4 text-center">
-            {d.heading}
-          </h2>
+          <h2 className="heading-section tracking-tight text-center">{d.heading}</h2>
         )}
         {slots.showIntro && d.intro && (
-          <p className="text-lg text-center opacity-80 mb-8 leading-relaxed">{d.intro}</p>
+          <p className="text-body-lg text-center opacity-80 mb-8">{d.intro}</p>
         )}
         <TownFinderClient
           towns={towns}
