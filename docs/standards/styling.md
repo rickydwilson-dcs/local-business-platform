@@ -45,7 +45,7 @@ The classes are defined once per site in `app/globals.css`. This gives each site
 
 - [ ] No inline `text-<size>` classes on text elements.
 - [ ] If a new semantic class is needed, define it in EVERY site's `globals.css` in the same PR.
-- [ ] `pnpm validate:theme-contract` passes.
+- [ ] `pnpm lint` and `pnpm type-check` pass.
 
 ## Core Principles
 

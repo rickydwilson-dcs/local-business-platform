@@ -73,7 +73,7 @@ The theme system exists so sites can be re-branded without touching component co
 
 - `bg-brand-primary`, `text-surface-foreground`, `text-h1` — these resolve to CSS variables
 - Never hardcode hex colors (`bg-[#005A9E]`) — they break white-labeling
-- Every theme must satisfy the Theme Component Contract — see `docs/standards/theme-component-contract.md`. Validated in CI (`pnpm validate:theme-contract`).
+- Every theme must satisfy the Theme Component Contract — see `docs/standards/theme-component-contract.md`. (The CI validation script was retired in April 2026 alongside the self-containment pivot; the contract remains the architectural rule.)
 - Reusable classes go in `app/globals.css` with `@apply`
 - No inline styles, no CSS-in-JS — Tailwind only
 
