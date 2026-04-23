@@ -8,7 +8,7 @@
 import type { Metadata } from "next";
 import type { SiteConfigSummary } from "@platform/core-components";
 import { Schema } from "@platform/core-components";
-import { SolarisServicesPage } from "@platform/themes/solaris/pages";
+import { SiteServicesPage } from "@/components/pages/ServicesPage";
 import { getServices } from "@/lib/content";
 import { absUrl } from "@/lib/site";
 import { siteConfig } from "@/site.config";
@@ -43,7 +43,7 @@ export default async function ServicesPage() {
 
   return (
     <>
-      <SolarisServicesPage
+      <SiteServicesPage
         siteConfig={siteSummary}
         services={services.map((s) => ({
           slug: s.slug,

@@ -15,9 +15,6 @@ const config: Config = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./content/**/*.{md,mdx}",
     "../../packages/core-components/src/**/*.{js,ts,jsx,tsx}",
-    "../../packages/themes/solaris/*.{ts,tsx,css}",
-    "../../packages/themes/solaris/components/**/*.{ts,tsx}",
-    "../../packages/themes/solaris/pages/**/*.{ts,tsx}",
   ],
   theme: {
     extend: {

@@ -1,12 +1,12 @@
 /**
  * About Page
  *
- * Uses Solaris page template driven from siteConfig.
+ * Uses site page template driven from siteConfig.
  */
 
 import type { Metadata } from "next";
 import type { SiteConfigSummary } from "@platform/core-components";
-import { SolarisAboutPage } from "@platform/themes/solaris/pages";
+import { SiteAboutPage } from "@/components/pages/AboutPage";
 import { siteConfig } from "@/site.config";
 import { PHONE_DISPLAY } from "@/lib/contact-info";
 import { absUrl } from "@/lib/site";
@@ -30,5 +30,5 @@ export default function AboutPage() {
     stats: siteConfig.credentials?.stats,
   };
 
-  return <SolarisAboutPage siteConfig={siteSummary} />;
+  return <SiteAboutPage siteConfig={siteSummary} />;
 }

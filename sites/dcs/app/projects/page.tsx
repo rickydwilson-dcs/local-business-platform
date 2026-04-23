@@ -8,7 +8,7 @@
 import type { Metadata } from "next";
 import type { SiteConfigSummary } from "@platform/core-components";
 import { Schema } from "@platform/core-components";
-import { SolarisProjectsPage } from "@platform/themes/solaris/pages";
+import { SiteProjectsPage } from "@/components/pages/ProjectsPage";
 import { getProjects } from "@/lib/content";
 import { absUrl } from "@/lib/site";
 import { siteConfig } from "@/site.config";
@@ -43,7 +43,7 @@ export default async function ProjectsPage() {
 
   return (
     <>
-      <SolarisProjectsPage
+      <SiteProjectsPage
         siteConfig={siteSummary}
         projects={projects.map((p) => ({
           slug: p.slug,
