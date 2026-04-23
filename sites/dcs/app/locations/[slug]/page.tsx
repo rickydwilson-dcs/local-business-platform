@@ -9,7 +9,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import type { SiteConfigSummary } from "@platform/core-components";
 import { Schema, type LocationFrontmatter } from "@platform/core-components";
-import { SolarisLocationDetailPage } from "@platform/themes/solaris/pages";
+import { SiteLocationDetailPage } from "@/components/pages/LocationDetailPage";
 import { getLocations, getLocation } from "@/lib/content";
 import { loadMdx } from "@/lib/mdx";
 import { getImageUrl } from "@/lib/image";
@@ -141,7 +141,7 @@ export default async function LocationPage({ params }: { params: Promise<Params>
   );
 
   return (
-    <SolarisLocationDetailPage
+    <SiteLocationDetailPage
       siteConfig={siteSummary}
       frontmatter={{
         title: fm.title,

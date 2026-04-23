@@ -9,7 +9,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import type { SiteConfigSummary } from "@platform/core-components";
 import { Schema, type FAQItem, type AboutContent } from "@platform/core-components";
-import { SolarisServiceDetailPage } from "@platform/themes/solaris/pages";
+import { SiteServiceDetailPage } from "@/components/pages/ServiceDetailPage";
 import { getServices, getService } from "@/lib/content";
 import { loadMdx } from "@/lib/mdx";
 import { getImageUrl } from "@/lib/image";
@@ -144,7 +144,7 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
   );
 
   return (
-    <SolarisServiceDetailPage
+    <SiteServiceDetailPage
       siteConfig={siteSummary}
       frontmatter={{
         title: fm.title,

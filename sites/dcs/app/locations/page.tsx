@@ -8,7 +8,7 @@
 import type { Metadata } from "next";
 import type { SiteConfigSummary } from "@platform/core-components";
 import { Schema } from "@platform/core-components";
-import { SolarisLocationsPage } from "@platform/themes/solaris/pages";
+import { SiteLocationsPage } from "@/components/pages/LocationsPage";
 import { getLocations } from "@/lib/content";
 import { absUrl } from "@/lib/site";
 import { siteConfig } from "@/site.config";
@@ -43,7 +43,7 @@ export default async function LocationsPage() {
 
   return (
     <>
-      <SolarisLocationsPage
+      <SiteLocationsPage
         siteConfig={siteSummary}
         locations={locations.map((l) => ({
           slug: l.slug,

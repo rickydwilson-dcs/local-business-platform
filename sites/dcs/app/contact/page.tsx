@@ -1,12 +1,12 @@
 /**
  * Contact Page
  *
- * Uses Solaris page template driven from siteConfig.
+ * Uses site page template driven from siteConfig.
  */
 
 import type { Metadata } from "next";
 import type { SiteConfigSummary } from "@platform/core-components";
-import { SolarisContactPage } from "@platform/themes/solaris/pages";
+import { SiteContactPage } from "@/components/pages/ContactPage";
 import { siteConfig } from "@/site.config";
 import { PHONE_DISPLAY } from "@/lib/contact-info";
 import { absUrl } from "@/lib/site";
@@ -30,5 +30,5 @@ export default function ContactPage() {
     stats: siteConfig.credentials?.stats,
   };
 
-  return <SolarisContactPage siteConfig={siteSummary} />;
+  return <SiteContactPage siteConfig={siteSummary} />;
 }

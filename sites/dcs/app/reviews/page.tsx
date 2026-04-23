@@ -8,7 +8,7 @@
 import type { Metadata } from "next";
 import type { SiteConfigSummary } from "@platform/core-components";
 import { Schema } from "@platform/core-components";
-import { SolarisReviewsPage } from "@platform/themes/solaris/pages";
+import { SiteReviewsPage } from "@/components/pages/ReviewsPage";
 import { getTestimonials, calculateAggregateRating } from "@/lib/content";
 import { absUrl } from "@/lib/site";
 import { siteConfig } from "@/site.config";
@@ -50,7 +50,7 @@ export default async function ReviewsPage() {
 
   return (
     <>
-      <SolarisReviewsPage
+      <SiteReviewsPage
         siteConfig={siteSummary}
         testimonials={testimonials.map((t) => ({
           slug: t.slug || t.customerName,

@@ -9,7 +9,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import type { SiteConfigSummary } from "@platform/core-components";
 import { Schema } from "@platform/core-components";
-import { SolarisBlogPostPage } from "@platform/themes/solaris/pages";
+import { SiteBlogPostPage } from "@/components/pages/BlogPostPage";
 import { getBlogPosts, getBlogPost, calculateReadingTime } from "@/lib/content";
 import { getImageUrl } from "@/lib/image";
 import { absUrl } from "@/lib/site";
@@ -160,7 +160,7 @@ export default async function BlogPostPage({ params }: { params: Promise<Params>
   );
 
   return (
-    <SolarisBlogPostPage
+    <SiteBlogPostPage
       siteConfig={siteSummary}
       frontmatter={{
         title: frontmatter.title,

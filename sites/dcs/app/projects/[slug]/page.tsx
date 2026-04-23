@@ -9,7 +9,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import type { SiteConfigSummary } from "@platform/core-components";
 import { Schema } from "@platform/core-components";
-import { SolarisProjectDetailPage } from "@platform/themes/solaris/pages";
+import { SiteProjectDetailPage } from "@/components/pages/ProjectDetailPage";
 import { getProjects, getProject } from "@/lib/content";
 import { getImageUrl } from "@/lib/image";
 import { absUrl } from "@/lib/site";
@@ -101,7 +101,7 @@ export default async function ProjectPage({ params }: { params: Promise<Params> 
 
   return (
     <>
-      <SolarisProjectDetailPage
+      <SiteProjectDetailPage
         siteConfig={siteSummary}
         frontmatter={{
           title: frontmatter.title,

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import type { SiteConfigSummary } from "@platform/core-components";
-import { SolarisHomePage } from "@platform/themes/solaris/pages";
+import { SiteHomePage } from "@/components/pages/HomePage";
 import { siteConfig } from "@/site.config";
 import { getLocations } from "@/lib/content";
 import { absUrl } from "@/lib/site";
@@ -99,7 +99,7 @@ export default async function HomePage() {
   );
 
   return (
-    <SolarisHomePage
+    <SiteHomePage
       siteConfig={siteSummary}
       heroHeadline="Websites That Get Tradespeople More Jobs"
       heroSubheading="Bespoke websites for electricians, plumbers, scaffolders, and builders. Built-in local SEO. Fully managed."

@@ -4,13 +4,10 @@ import './globals.css';
 import { siteConfig } from '@/site.config';
 import { PHONE_DISPLAY, BUSINESS_EMAIL } from '@/lib/contact-info';
 import { getContentItems } from '@/lib/content';
-import { PageShell, ThemeProvider } from '@platform/core-components';
-import {
-  SolarisHeader,
-  SolarisFooter,
-  SolarisScrollReveal,
-} from '@platform/themes/solaris/components';
-import { solarisRegistry } from '@platform/themes/solaris';
+import { PageShell } from '@platform/core-components';
+import { SiteHeader } from '@/components/site-header';
+import { SiteFooter } from '@/components/site-footer';
+import { SiteScrollReveal } from '@/components/site-scroll-reveal';
 import { ConsentManager } from '@platform/core-components/components/analytics/ConsentManager';
 import { Analytics } from '@platform/core-components/components/analytics/Analytics';
 import { AnalyticsDebugPanel } from '@platform/core-components/components/analytics/AnalyticsDebugPanel';
@@ -99,66 +96,64 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         )}
       </head>
       <body className="min-h-screen flex flex-col">
-        <ThemeProvider theme="solaris" registry={solarisRegistry}>
-          <PageShell
-            header={
-              <SolarisHeader
-                logoSrc="/logo.svg"
-                logoAlt="DCS Gardening & Landscaping"
-                logoText="DCS"
-                navItems={siteConfig.navigation.main}
-                ctaLabel={siteConfig.cta.primary.label}
-                ctaHref={siteConfig.cta.primary.href}
-                phone={PHONE_DISPLAY}
-                showPhone={siteConfig.cta.phone.show}
-              />
-            }
-            footer={
-              <SolarisFooter
-                logoSrc="/logo.svg"
-                logoAlt="DCS Gardening & Landscaping"
-                logoText="DCS"
-                tagline={siteConfig.tagline}
-                copyright={siteConfig.footer.copyright}
-                navColumns={[
-                  {
-                    heading: 'Services',
-                    links: siteConfig.services.map((s) => ({
-                      label: s.title,
-                      href: `/services/${s.slug}`,
-                    })),
-                  },
-                  {
-                    heading: 'Locations',
-                    links: ['Polegate', 'Eastbourne', 'Brighton', 'Hove', 'Lewes', 'Seaford'].map(
-                      (l) => ({
-                        label: l,
-                        href: `/locations/${l.toLowerCase()}`,
-                      })
-                    ),
-                  },
-                  {
-                    heading: 'Company',
-                    links: [
-                      { label: 'About', href: '/about' },
-                      { label: 'Portfolio', href: '/projects' },
-                      { label: 'Pricing', href: '/pricing' },
-                      { label: 'Blog', href: '/blog' },
-                      { label: 'Contact', href: '/contact' },
-                    ],
-                  },
-                ]}
-                contact={{
-                  phone: PHONE_DISPLAY,
-                  email: BUSINESS_EMAIL,
-                }}
-                legal={{ privacyHref: '/privacy-policy' }}
-              />
-            }
-          >
-            {children}
-          </PageShell>
-        </ThemeProvider>
+        <PageShell
+          header={
+            <SiteHeader
+              logoSrc="/logo.svg"
+              logoAlt="DCS Gardening & Landscaping"
+              logoText="DCS"
+              navItems={siteConfig.navigation.main}
+              ctaLabel={siteConfig.cta.primary.label}
+              ctaHref={siteConfig.cta.primary.href}
+              phone={PHONE_DISPLAY}
+              showPhone={siteConfig.cta.phone.show}
+            />
+          }
+          footer={
+            <SiteFooter
+              logoSrc="/logo.svg"
+              logoAlt="DCS Gardening & Landscaping"
+              logoText="DCS"
+              tagline={siteConfig.tagline}
+              copyright={siteConfig.footer.copyright}
+              navColumns={[
+                {
+                  heading: 'Services',
+                  links: siteConfig.services.map((s) => ({
+                    label: s.title,
+                    href: `/services/${s.slug}`,
+                  })),
+                },
+                {
+                  heading: 'Locations',
+                  links: ['Polegate', 'Eastbourne', 'Brighton', 'Hove', 'Lewes', 'Seaford'].map(
+                    (l) => ({
+                      label: l,
+                      href: `/locations/${l.toLowerCase()}`,
+                    })
+                  ),
+                },
+                {
+                  heading: 'Company',
+                  links: [
+                    { label: 'About', href: '/about' },
+                    { label: 'Portfolio', href: '/projects' },
+                    { label: 'Pricing', href: '/pricing' },
+                    { label: 'Blog', href: '/blog' },
+                    { label: 'Contact', href: '/contact' },
+                  ],
+                },
+              ]}
+              contact={{
+                phone: PHONE_DISPLAY,
+                email: BUSINESS_EMAIL,
+              }}
+              legal={{ privacyHref: '/privacy-policy' }}
+            />
+          }
+        >
+          {children}
+        </PageShell>
 
         <ConsentManager
           enabled={process.env.NEXT_PUBLIC_FEATURE_CONSENT_BANNER === 'true'}
@@ -178,7 +173,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           debugMode={process.env.NODE_ENV === 'development'}
         />
         <AnalyticsDebugPanel enabled={process.env.NODE_ENV === 'development'} />
-        <SolarisScrollReveal />
+        <SiteScrollReveal />
       </body>
     </html>
   );
