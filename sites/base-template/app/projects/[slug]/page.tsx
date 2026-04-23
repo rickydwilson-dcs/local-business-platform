@@ -9,7 +9,7 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import type { SiteConfigSummary } from '@platform/core-components';
 import { Schema } from '@platform/core-components';
-import { VegaProjectDetailPage } from '@platform/themes/vega/pages';
+import { ProjectDetailPage } from '@/components/pages/project-detail-page';
 import { getProjects, getProject } from '@/lib/content';
 import { getImageUrl } from '@/lib/image';
 import { absUrl } from '@/lib/site';
@@ -71,7 +71,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   };
 }
 
-export default async function ProjectPage({ params }: { params: Promise<Params> }) {
+export default async function ProjectPageRoute({ params }: { params: Promise<Params> }) {
   const { slug } = await params;
   const project = await getProject(slug);
 
@@ -99,7 +99,7 @@ export default async function ProjectPage({ params }: { params: Promise<Params> 
 
   return (
     <>
-      <VegaProjectDetailPage
+      <ProjectDetailPage
         siteConfig={siteSummary}
         frontmatter={{
           title: frontmatter.title,

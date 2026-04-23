@@ -24,11 +24,7 @@
       "@platform/core-components/*": ["../../packages/core-components/src/*"],
       "@platform/theme-system": ["../../packages/theme-system/src/index.ts"],
       "@platform/theme-system/plugin": ["../../packages/theme-system/src/tailwind-plugin.ts"],
-      "@platform/theme-system/*": ["../../packages/theme-system/src/*"],
-      "@platform/themes/orion": ["../../packages/themes/orion/index.ts"],
-      "@platform/themes/vega": ["../../packages/themes/vega/index.ts"],
-      "@platform/themes/vega/components": ["../../packages/themes/vega/components/index.ts"],
-      "@platform/themes/vega/pages": ["../../packages/themes/vega/pages/index.ts"]
+      "@platform/theme-system/*": ["../../packages/theme-system/src/*"]
     }
   },
   "include": [

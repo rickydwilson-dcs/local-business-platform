@@ -9,7 +9,7 @@
 import type { Metadata } from 'next';
 import type { SiteConfigSummary } from '@platform/core-components';
 import { Schema } from '@platform/core-components';
-import { VegaProjectsPage } from '@platform/themes/vega/pages';
+import { ProjectsPage } from '@/components/pages/projects-page';
 import { getProjects } from '@/lib/content';
 import { absUrl } from '@/lib/site';
 import { siteConfig } from '@/site.config';
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function ProjectsPage() {
+export default async function ProjectsPageRoute() {
   const projects = await getProjects();
 
   const siteSummary: SiteConfigSummary = {
@@ -44,7 +44,7 @@ export default async function ProjectsPage() {
 
   return (
     <>
-      <VegaProjectsPage
+      <ProjectsPage
         siteConfig={siteSummary}
         projects={projects.map((p) => ({
           slug: p.slug,
