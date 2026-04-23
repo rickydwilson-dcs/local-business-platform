@@ -3,9 +3,9 @@ import './globals.css';
 import { siteConfig } from '@/site.config';
 import { PHONE_DISPLAY, PHONE_TEL, BUSINESS_EMAIL, ADDRESS } from '@/lib/contact-info';
 import { getContentItems } from '@/lib/content';
-import { PageShell, ThemeProvider } from '@platform/core-components';
-import { CygnusHeader, CygnusFooter } from '@platform/themes/cygnus/components';
-import { cygnusRegistry } from '@platform/themes/cygnus';
+import { PageShell } from '@platform/core-components';
+import { SiteHeader } from '@/components/site-header';
+import { SiteFooter } from '@/components/site-footer';
 import { ConsentManager } from "@platform/core-components/components/analytics/ConsentManager";
 import { Analytics } from "@platform/core-components/components/analytics/Analytics";
 import { AnalyticsDebugPanel } from "@platform/core-components/components/analytics/AnalyticsDebugPanel";
@@ -63,7 +63,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
           rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=block"
         />
         {/* Geo meta tags for local SEO */}
         {siteConfig.business.geo && (
@@ -81,44 +81,42 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         )}
       </head>
       <body className="min-h-screen flex flex-col">
-        <ThemeProvider theme="cygnus" registry={cygnusRegistry}>
-          <PageShell
-            header={
-              <CygnusHeader
-                siteName={siteConfig.business.name}
-                phoneDisplay={PHONE_DISPLAY}
-                phoneTel={PHONE_TEL}
-                showPhone={siteConfig.cta.phone.show}
-                primaryCta={siteConfig.cta.primary}
-                navigation={siteConfig.navigation.main}
-                locations={locationItems}
-              />
-            }
-            footer={
-              <CygnusFooter
-                siteName={siteConfig.business.name}
-                tagline={siteConfig.tagline}
-                phoneDisplay={PHONE_DISPLAY}
-                phoneTel={PHONE_TEL}
-                email={BUSINESS_EMAIL}
-                address={ADDRESS}
-                certifications={siteConfig.credentials?.certifications ?? []}
-                services={allServices.map(s => ({ slug: s.slug, title: s.title })).slice(0, siteConfig.footer?.maxServices ?? 8)}
-                locations={allLocations.map(l => ({ slug: l.slug, title: l.title })).slice(0, siteConfig.footer?.maxLocations ?? 8)}
-                totalServices={allServices.length}
-                totalLocations={allLocations.length}
-                maxServices={siteConfig.footer?.maxServices ?? 8}
-                maxLocations={siteConfig.footer?.maxLocations ?? 8}
-                showServices={siteConfig.footer?.showServices ?? true}
-                showLocations={siteConfig.footer?.showLocations ?? true}
-                copyright={siteConfig.footer?.copyright ?? `${new Date().getFullYear()} ${siteConfig.business.name}. All rights reserved.`}
-                builtBy={siteConfig.footer?.builtBy}
-              />
-            }
-          >
-            {children}
-          </PageShell>
-        </ThemeProvider>
+        <PageShell
+          header={
+            <SiteHeader
+              siteName={siteConfig.business.name}
+              phoneDisplay={PHONE_DISPLAY}
+              phoneTel={PHONE_TEL}
+              showPhone={siteConfig.cta.phone.show}
+              primaryCta={siteConfig.cta.primary}
+              navigation={siteConfig.navigation.main}
+              locations={locationItems}
+            />
+          }
+          footer={
+            <SiteFooter
+              siteName={siteConfig.business.name}
+              tagline={siteConfig.tagline}
+              phoneDisplay={PHONE_DISPLAY}
+              phoneTel={PHONE_TEL}
+              email={BUSINESS_EMAIL}
+              address={ADDRESS}
+              certifications={siteConfig.credentials?.certifications ?? []}
+              services={allServices.map(s => ({ slug: s.slug, title: s.title })).slice(0, siteConfig.footer?.maxServices ?? 8)}
+              locations={allLocations.map(l => ({ slug: l.slug, title: l.title })).slice(0, siteConfig.footer?.maxLocations ?? 8)}
+              totalServices={allServices.length}
+              totalLocations={allLocations.length}
+              maxServices={siteConfig.footer?.maxServices ?? 8}
+              maxLocations={siteConfig.footer?.maxLocations ?? 8}
+              showServices={siteConfig.footer?.showServices ?? true}
+              showLocations={siteConfig.footer?.showLocations ?? true}
+              copyright={siteConfig.footer?.copyright ?? `${new Date().getFullYear()} ${siteConfig.business.name}. All rights reserved.`}
+              builtBy={siteConfig.footer?.builtBy}
+            />
+          }
+        >
+          {children}
+        </PageShell>
 
         <ConsentManager
           enabled={process.env.NEXT_PUBLIC_FEATURE_CONSENT_BANNER === 'true'}

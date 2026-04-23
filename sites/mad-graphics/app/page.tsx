@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ImageOverlayHero } from '@platform/core-components';
-import { cygnusRegistry } from '@platform/themes/cygnus';
+import { registry } from '@/theme.config';
 import { siteConfig } from '@/site.config';
 import { getContentItems } from '@/lib/content';
 import { getImageUrl } from '@/lib/image';
@@ -28,7 +28,7 @@ export default async function HomePage() {
   return (
     <main>
       {/* Hero Section */}
-      {cygnusRegistry.heroVariant === 'image-overlay' ? (
+      {registry.heroVariant === 'image-overlay' ? (
         <ImageOverlayHero
           headline="Your brand,"
           headlineAccent="made bold."
