@@ -1,5 +1,5 @@
 import type { DeepPartialThemeConfig } from '@platform/theme-system';
-import { cygnusRegistry } from '@platform/themes/cygnus';
+import type { ComponentRegistry } from '@platform/theme-system';
 
 /**
  * Mad Graphics - Theme Configuration
@@ -8,8 +8,6 @@ import { cygnusRegistry } from '@platform/themes/cygnus';
  * Generated at: 2026-04-06T18:45:40.149Z
  */
 export const themeConfig: DeepPartialThemeConfig = {
-  componentRegistry: cygnusRegistry,
-
   colors: {
     brand: {
       primary: '#F47B20',
@@ -62,4 +60,12 @@ export const themeConfig: DeepPartialThemeConfig = {
       style: 'solid',
     },
   },
+};
+
+export const registry: ComponentRegistry = {
+  theme: "cygnus",
+  heroVariant: "image-overlay",
+  headerVariant: "dark",
+  cardVariant: "standard",
+  sectionVariant: "dark-accent",
 };
