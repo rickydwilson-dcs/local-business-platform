@@ -125,6 +125,29 @@ grep -rn "@platform/themes\|packages/themes" sites/<name> --exclude-dir=node_mod
 
 Must return **ZERO hits**. If any hits remain, fix them before continuing.
 
+## Worktree Pre-flight
+
+Fresh git worktrees do not have `dist/` built for the shared packages. Before running any site build, run:
+
+```bash
+pnpm --filter @platform/theme-system run build
+```
+
+This produces `packages/theme-system/dist/tailwind-plugin.js` which Tailwind's jiti loader requires at config evaluation time. Without it, all site builds fail with `Cannot find module '@platform/theme-system/dist/tailwind-plugin.js'`.
+
+## Discovered in Parallel Run 2026-04-23
+
+**Pages components also need copying.** All theme packages include a `pages/` directory with page-level template components (e.g. `VegaHomePage`, `SolarisServicesPage`, `CygnusProjectDetailPage`). These are imported by the site's `app/` page files and must be copied and renamed just like the layout components:
+
+- Copy `packages/themes/<theme>/pages/*.tsx` → `sites/<name>/components/pages/*.tsx`
+- Rename exported identifiers: `<Theme><PageName>Page` → `<PageName>Page` (e.g. `VegaHomePage` → `HomePage`)
+- Update all `app/<page>/page.tsx` imports to point at `@/components/pages/<PageName>`
+- Run the invariant grep after — `@platform/themes/*/pages` imports also break it
+
+**Header may have sibling component dependencies.** The cygnus header imports `CygnusLocationsDropdown` from a sibling file in the theme's components directory. Check each theme's `components/` directory for sibling files referenced by header.tsx or footer.tsx and copy them too.
+
+**Check app/page.tsx for registry imports.** Some sites import the theme registry in `app/page.tsx` for conditional logic. If the invariant grep finds a match there, replace the import with `import { registry } from '@/theme.config'` (no logic change — only the import source changes).
+
 ## Verification Commands (per site, run from site directory)
 
 ```bash
