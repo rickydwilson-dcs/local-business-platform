@@ -1,23 +1,6 @@
-import type { DeepPartialThemeConfig, ComponentRegistry } from "@platform/theme-system";
-
-/**
- * Colossus Scaffolding — self-contained theme configuration.
- *
- * Brand colors mapped from the original Tailwind config.
- * Component registry is inlined so this site is self-contained
- * and does not depend on any shared theme package.
- */
-export const componentRegistry: ComponentRegistry = {
-  theme: "vega",
-  heroVariant: "split",
-  headerVariant: "light",
-  cardVariant: "standard",
-  sectionVariant: "standard",
-};
+import type { DeepPartialThemeConfig } from "@platform/theme-system";
 
 export const themeConfig: DeepPartialThemeConfig = {
-  componentRegistry,
-
   colors: {
     brand: {
       primary: "#005A9E", // Colossus brand blue

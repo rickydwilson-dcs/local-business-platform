@@ -29,14 +29,10 @@ import { createContext, useContext } from "react";
 /** Identifies which named visual theme is active. Must stay in sync with THEME_NAMES in packages/theme-system/src/types.ts. */
 export type ThemeName =
   // Active themes
-  | "castor"
   | "cygnus"
   | "orion"
   | "solaris"
   | "vega"
-  // Pipeline-generated themes
-  | "designlab"
-  | "navagarden"
   // Reserved names for future themes
   | "altair"
   | "aquila"

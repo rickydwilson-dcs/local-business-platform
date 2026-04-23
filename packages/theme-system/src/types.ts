@@ -283,14 +283,10 @@ export interface ThemeConfig {
  */
 export const THEME_NAMES = [
   // Active themes
-  "castor",
   "cygnus",
   "orion",
   "solaris",
   "vega",
-  // Pipeline-generated themes
-  "designlab",
-  "navagarden",
   // Reserved names for future themes
   "altair",
   "aquila",

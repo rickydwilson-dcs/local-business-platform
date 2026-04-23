@@ -21,16 +21,8 @@
     "./vega": "./vega/index.ts",
     "./vega/components": "./vega/components/index.ts",
     "./vega/pages": "./vega/pages/index.ts",
-    "./castor": "./castor/index.ts",
-    "./castor/pages": "./castor/pages/index.ts",
     "./solaris": "./solaris/index.ts",
     "./solaris/components": "./solaris/components/index.ts",
-    "./solaris/pages": "./solaris/pages/index.ts",
-    "./designlab": "./designlab/index.ts",
-    "./designlab/components": "./designlab/components/index.ts",
-    "./designlab/pages": "./designlab/pages/index.ts",
-    "./navagarden": "./navagarden/index.ts",
-    "./navagarden/components": "./navagarden/components/index.ts",
-    "./navagarden/pages": "./navagarden/pages/index.ts"
+    "./solaris/pages": "./solaris/pages/index.ts"
   }
 }

@@ -1,20 +1,6 @@
-import type { DeepPartialThemeConfig, ComponentRegistry } from "@platform/theme-system";
+import type { DeepPartialThemeConfig } from "@platform/theme-system";
 
-/**
- * D J Fox Electrical - Theme Configuration
- *
- * Generated from project file: 550e8400-e29b-41d4-a716-446655440015
- * Generated at: 2026-02-15T19:18:53.726Z
- */
 export const themeConfig: DeepPartialThemeConfig = {
-  componentRegistry: {
-    theme: "orion",
-    heroVariant: "image-overlay",
-    headerVariant: "dark",
-    cardVariant: "icon-circle",
-    sectionVariant: "dark-accent",
-  } satisfies ComponentRegistry,
-
   colors: {
     brand: {
       // Contrast ratio vs white (#fff): ~4.58:1 — passes WCAG AA (4.5:1) but not AAA (7:1).
