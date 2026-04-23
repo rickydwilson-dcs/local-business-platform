@@ -13,7 +13,7 @@ import Link from 'next/link';
 import type { SiteConfigSummary } from '@platform/core-components';
 import { Schema, type FAQItem, type AboutContent } from '@platform/core-components';
 import { deriveLocationContext, getAreaServed } from '@platform/core-components/lib/location-utils';
-import { VegaServiceDetailPage } from '@platform/themes/vega/pages';
+import { ServiceDetailPage } from '@/components/pages/service-detail-page';
 import { getServices, getService } from '@/lib/content';
 import { getLocationSlugs } from '@/lib/locations-config';
 import { loadMdx } from '@/lib/mdx';
@@ -108,7 +108,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   };
 }
 
-export default async function ServicePage({ params }: { params: Promise<Params> }) {
+export default async function ServicePageRoute({ params }: { params: Promise<Params> }) {
   const { slug } = await params;
   const result = await getService(slug);
 
@@ -222,7 +222,7 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
   );
 
   return (
-    <VegaServiceDetailPage
+    <ServiceDetailPage
       siteConfig={siteSummary}
       frontmatter={{
         title: fm.title,

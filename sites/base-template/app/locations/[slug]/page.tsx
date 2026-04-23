@@ -10,7 +10,7 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import type { SiteConfigSummary } from '@platform/core-components';
 import { Schema, type LocationFrontmatter } from '@platform/core-components';
-import { VegaLocationDetailPage } from '@platform/themes/vega/pages';
+import { LocationDetailPage } from '@/components/pages/location-detail-page';
 import { getLocations, getLocation } from '@/lib/content';
 import { loadMdx } from '@/lib/mdx';
 import { getImageUrl } from '@/lib/image';
@@ -79,7 +79,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   };
 }
 
-export default async function LocationPage({ params }: { params: Promise<Params> }) {
+export default async function LocationPageRoute({ params }: { params: Promise<Params> }) {
   const { slug } = await params;
   const result = await getLocation(slug);
 
@@ -143,7 +143,7 @@ export default async function LocationPage({ params }: { params: Promise<Params>
   );
 
   return (
-    <VegaLocationDetailPage
+    <LocationDetailPage
       siteConfig={siteSummary}
       frontmatter={{
         title: fm.title,

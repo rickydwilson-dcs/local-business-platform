@@ -8,7 +8,7 @@
 import type { Metadata } from 'next';
 import type { SiteConfigSummary } from '@platform/core-components';
 import { Schema } from '@platform/core-components';
-import { VegaReviewsPage } from '@platform/themes/vega/pages';
+import { ReviewsPage } from '@/components/pages/reviews-page';
 import { getTestimonials, calculateAggregateRating } from '@/lib/content';
 import { absUrl } from '@/lib/site';
 import { siteConfig } from '@/site.config';
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function ReviewsPage() {
+export default async function ReviewsPageRoute() {
   const testimonials = await getTestimonials();
   const { average, count } = calculateAggregateRating(testimonials);
 
@@ -50,7 +50,7 @@ export default async function ReviewsPage() {
 
   return (
     <>
-      <VegaReviewsPage
+      <ReviewsPage
         siteConfig={siteSummary}
         testimonials={testimonials.map((t) => ({
           slug: t.slug || t.customerName,

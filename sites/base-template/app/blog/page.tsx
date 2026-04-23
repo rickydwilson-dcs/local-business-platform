@@ -9,7 +9,7 @@
 import type { Metadata } from 'next';
 import type { SiteConfigSummary } from '@platform/core-components';
 import { Schema } from '@platform/core-components';
-import { VegaBlogPage } from '@platform/themes/vega/pages';
+import { BlogPage } from '@/components/pages/blog-page';
 import { getBlogPosts } from '@/lib/content';
 import { absUrl } from '@/lib/site';
 import { siteConfig } from '@/site.config';
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function BlogPage() {
+export default async function BlogPageRoute() {
   const posts = await getBlogPosts();
 
   const siteSummary: SiteConfigSummary = {
@@ -44,7 +44,7 @@ export default async function BlogPage() {
 
   return (
     <>
-      <VegaBlogPage
+      <BlogPage
         siteConfig={siteSummary}
         posts={posts.map((p) => ({
           slug: p.slug,

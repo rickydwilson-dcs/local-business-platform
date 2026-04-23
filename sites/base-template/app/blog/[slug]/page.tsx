@@ -10,7 +10,7 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import type { SiteConfigSummary } from '@platform/core-components';
 import { Schema } from '@platform/core-components';
-import { VegaBlogPostPage } from '@platform/themes/vega/pages';
+import { BlogPostPage } from '@/components/pages/blog-post-page';
 import { getBlogPosts, getBlogPost, calculateReadingTime } from '@/lib/content';
 import { getImageUrl } from '@/lib/image';
 import { absUrl } from '@/lib/site';
@@ -77,7 +77,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   };
 }
 
-export default async function BlogPostPage({ params }: { params: Promise<Params> }) {
+export default async function BlogPostPageRoute({ params }: { params: Promise<Params> }) {
   const { slug } = await params;
   const post = await getBlogPost(slug);
 
@@ -161,7 +161,7 @@ export default async function BlogPostPage({ params }: { params: Promise<Params>
   );
 
   return (
-    <VegaBlogPostPage
+    <BlogPostPage
       siteConfig={siteSummary}
       frontmatter={{
         title: frontmatter.title,

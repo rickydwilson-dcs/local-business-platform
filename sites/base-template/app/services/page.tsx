@@ -8,7 +8,7 @@
 import type { Metadata } from 'next';
 import type { SiteConfigSummary } from '@platform/core-components';
 import { Schema } from '@platform/core-components';
-import { VegaServicesPage } from '@platform/themes/vega/pages';
+import { ServicesPage } from '@/components/pages/services-page';
 import { getServices } from '@/lib/content';
 import { absUrl } from '@/lib/site';
 import { siteConfig } from '@/site.config';
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function ServicesPage() {
+export default async function ServicesPageRoute() {
   const services = await getServices();
 
   const siteSummary: SiteConfigSummary = {
@@ -43,7 +43,7 @@ export default async function ServicesPage() {
 
   return (
     <>
-      <VegaServicesPage
+      <ServicesPage
         siteConfig={siteSummary}
         services={services.map((s) => ({
           slug: s.slug,

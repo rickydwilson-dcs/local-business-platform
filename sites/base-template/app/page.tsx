@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import type { SiteConfigSummary } from '@platform/core-components';
-import { VegaHomePage } from '@platform/themes/vega/pages';
+import { HomePage } from '@/components/pages/home-page';
 import { siteConfig } from '@/site.config';
 import { getLocations } from '@/lib/content';
 import { absUrl } from '@/lib/site';
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function HomePage() {
+export default async function HomePageRoute() {
   const locations = await getLocations();
 
   const localBusinessSchema = getLocalBusinessSchema();
@@ -99,7 +99,7 @@ export default async function HomePage() {
   );
 
   return (
-    <VegaHomePage
+    <HomePage
       siteConfig={siteSummary}
       services={siteConfig.services.map((s) => ({
         slug: s.slug,
