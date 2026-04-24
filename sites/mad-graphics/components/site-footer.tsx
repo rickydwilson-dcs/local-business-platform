@@ -46,18 +46,16 @@ export function SiteFooter({
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mb-6 sm:mb-8">
           {/* Column 1: About */}
           <div className="sm:col-span-2 lg:col-span-1">
-            <h2 className="text-xl sm:text-2xl font-bold mb-4 text-white">
-              {siteName}
-            </h2>
+            <h2 className="text-xl sm:text-2xl font-bold mb-4 text-white">{siteName}</h2>
             <p className="text-surface-muted-foreground mb-4 text-sm sm:text-base">{tagline}</p>
             {certifications.length > 0 && (
               <div className="flex flex-wrap items-center gap-3 sm:gap-4">
                 {certifications.slice(0, 3).map((cert, index) => (
                   <div key={index} className="flex items-center gap-2 text-xs sm:text-sm">
                     {index === 0 ? (
-                      <Award className="h-3 w-3 sm:h-4 sm:w-4 text-amber-400" aria-hidden="true" />
+                      <Award className="h-3 w-3 sm:h-4 sm:w-4 text-warning" aria-hidden="true" />
                     ) : (
-                      <Shield className="h-3 w-3 sm:h-4 sm:w-4 text-green-400" aria-hidden="true" />
+                      <Shield className="h-3 w-3 sm:h-4 sm:w-4 text-success" aria-hidden="true" />
                     )}
                     <span>{cert.name}</span>
                   </div>
@@ -129,7 +127,10 @@ export function SiteFooter({
             <h3 className="text-base sm:text-lg font-semibold mb-4 text-white">Contact Info</h3>
             <div className="space-y-3 text-surface-muted-foreground text-sm sm:text-base">
               <div className="flex items-center gap-2">
-                <Phone className="h-3 w-3 sm:h-4 sm:w-4 text-brand-primary flex-shrink-0" aria-hidden="true" />
+                <Phone
+                  className="h-3 w-3 sm:h-4 sm:w-4 text-brand-primary flex-shrink-0"
+                  aria-hidden="true"
+                />
                 <Link
                   href={`tel:${phoneTel}`}
                   className="hover:text-brand-primary transition-colors"
@@ -138,7 +139,10 @@ export function SiteFooter({
                 </Link>
               </div>
               <div className="flex items-center gap-2">
-                <Mail className="h-3 w-3 sm:h-4 sm:w-4 text-brand-primary flex-shrink-0" aria-hidden="true" />
+                <Mail
+                  className="h-3 w-3 sm:h-4 sm:w-4 text-brand-primary flex-shrink-0"
+                  aria-hidden="true"
+                />
                 <Link
                   href={`mailto:${email}`}
                   className="hover:text-brand-primary transition-colors"
@@ -147,7 +151,10 @@ export function SiteFooter({
                 </Link>
               </div>
               <div className="flex items-start gap-2">
-                <MapPin className="h-3 w-3 sm:h-4 sm:w-4 text-brand-primary flex-shrink-0 mt-1" aria-hidden="true" />
+                <MapPin
+                  className="h-3 w-3 sm:h-4 sm:w-4 text-brand-primary flex-shrink-0 mt-1"
+                  aria-hidden="true"
+                />
                 <div className="leading-relaxed">
                   <div>{address.locality}</div>
                   <div>{address.region}</div>

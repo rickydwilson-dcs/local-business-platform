@@ -27,9 +27,9 @@ local-business-platform/
 ├── sites/                          # Client websites
 │   ├── base-template/              # Gold-standard template for new sites
 │   ├── colossus-scaffolding/       # Reference implementation (scaffolding)
-│   ├── dcs/                        # Digital Consulting Services (polaris theme)
+│   ├── dcs/                        # Digital Consulting Services (self-contained)
 │   ├── dj-fox-electrical/          # Production site (electrical, composition-based)
-│   ├── mad-graphics/               # Production site (vehicle graphics & print, cygnus theme)
+│   ├── mad-graphics/               # Production site (vehicle graphics & print, self-contained)
 │   ├── showcase/                   # Internal component/theme showcase
 │   ├── poc-composition-test/       # Composition system PoC + UI library (/ui-library route)
 │   ├── designlab-test/             # Pipeline test site (designlab theme)

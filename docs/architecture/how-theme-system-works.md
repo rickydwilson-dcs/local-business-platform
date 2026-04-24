@@ -1,5 +1,7 @@
 # How the Theme System Works
 
+> **Scope note (April 2026):** The shared-theme model described in this document — where sites import `Header`, `Footer`, and page templates from `@platform/themes/[name]/*` — is currently in use only by `dj-fox-electrical` (orion) and `colossus-scaffolding` (vega). `base-template`, `dcs`, and `mad-graphics` have migrated to a **self-contained architecture**: each of those sites owns its own header, footer, page components, and theme CSS, with zero imports from `@platform/themes/*`. The `theme.config.ts` → CSS variables → Tailwind utility pipeline described below still applies to self-contained sites; only the shared component packages differ.
+
 This document explains how a single `theme.config.ts` file re-brands an entire website. This is what makes the platform white-label.
 
 ## The Big Picture
