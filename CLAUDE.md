@@ -124,6 +124,11 @@ The theme system exists so sites can be re-branded without touching component co
 ## Essential Commands
 
 ```bash
+# Session verification — MANDATORY at the end of every coding session
+pnpm type-check                        # TypeScript strict check across monorepo
+pnpm build                             # Production build (all sites)
+pnpm --filter <site> run lint          # Lint for each site modified (e.g. pnpm --filter dj-fox-electrical run lint)
+
 # Root level — runs across all workspaces via Turborepo
 pnpm build          # Build packages first, then all sites (cached)
 pnpm lint           # ESLint across all workspaces

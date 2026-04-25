@@ -103,7 +103,13 @@ Prompt: [...]
 - Reading multiple files → use parallel reads
 - Editing independent files in the same phase → use parallel Task agents
 - Running independent checks (lint, type-check, build) → note which can run together
-- If any phase produces new TypeScript files or modifies existing ones, the final phase MUST include a verification gate that runs `pnpm type-check` across the monorepo. If the work touches pipeline tools or theme packages, also run `pnpm pipeline:smoke`.
+- The final phase MUST always include a verification gate that runs all three of the following (in order). STOP if any fails:
+  ```bash
+  pnpm type-check
+  pnpm build
+  pnpm --filter <site> run lint   # repeat for every site touched by the brief
+  ```
+  If the work also touches pipeline tools or theme packages, additionally run `pnpm pipeline:smoke`.
 - Include the commit command at the end of each phase, exactly as specified in the synthesis
 - Format verification gates as a named bash block that must pass before continuing:
 ```bash
@@ -142,11 +148,11 @@ Only populate this table if the synthesis explicitly states two or more phases h
 
 ### Sequential points — MUST NOT parallelise
 
-| Item                                                                | Reason                                                                     |
-| ------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| Verification gates (`pnpm type-check`, `pnpm build`) between phases | Each phase's output gates the next. Gates are the synchronisation barrier. |
-| Git commits                                                         | One commit per phase, in order. Commits are never batched.                 |
-| Any file edited by two or more items                                | Same-file edits must always serialise.                                     |
+| Item                                                                                                 | Reason                                                                     |
+| ---------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| Verification gates (`pnpm type-check`, `pnpm build`, `pnpm --filter <site> run lint`) between phases | Each phase's output gates the next. Gates are the synchronisation barrier. |
+| Git commits                                                                                          | One commit per phase, in order. Commits are never batched.                 |
+| Any file edited by two or more items                                                                 | Same-file edits must always serialise.                                     |
 ```
 
 **Rules for populating the groups table:**
@@ -187,7 +193,7 @@ To populate: a file with ~100 lines ≈ 500 input tokens. A phase editing 3 medi
 After all phases complete, output:
 
 1. Phases completed — list each with commit SHA
-2. Build status — confirm `pnpm lint && pnpm type-check && pnpm build` passes
+2. Build status — confirm all three pass: `pnpm type-check && pnpm build && pnpm --filter <site> run lint` (substitute actual site names)
 3. Any exceptions or intentional deviations from the plan
 4. Token usage and cost estimate:
 
@@ -255,7 +261,8 @@ This writes `session-wrap-up.md` to the session folder. **This is a required fin
 - Minimal changes only — implement what the plan says, nothing more
 - Use `model: haiku` for Task agents doing mechanical work (grep, import additions, find-replace); `model: sonnet` for standard edits; `model: opus` only for deep multi-file reasoning
 - The Co-Authored-By line in commits must reflect the orchestrator model used (e.g., `Claude Sonnet 4.6` not `Opus 4.6`)
-- For any brief that creates or modifies theme packages or pipeline tools: the final phase MUST include `pnpm pipeline:smoke` as a verification gate before the final commit
+- Every brief MUST verify with all three of: `pnpm type-check`, `pnpm build`, and `pnpm --filter <site> run lint` (substituting the actual site name(s) touched). STOP if any fails.
+- For any brief that creates or modifies theme packages or pipeline tools: the final phase MUST also include `pnpm pipeline:smoke` as a verification gate before the final commit
 - **If the brief writes to files outside the primary repo**, the terminal command MUST include `--additionalDirectories` for each external path. `--dangerously-skip-permissions` only covers the directory the session is launched from — writes to other repos or user-global paths (e.g. `~/.claude/agents/`) will trigger interactive permission prompts, breaking unattended execution. Common cases:
   - Brief touches another repo (e.g. `/Users/rickywilson/Sites/force/`): add `--additionalDirectories /Users/rickywilson/Sites/force`
   - Brief writes to user-global agent/skill directories (`~/.claude/agents/`, `~/.claude/commands/`, `~/.claude/docs/`): add `--additionalDirectories ~/.claude`

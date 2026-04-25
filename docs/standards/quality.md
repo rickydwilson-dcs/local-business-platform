@@ -89,7 +89,9 @@ npm run build
 ### Before Pushing
 
 - [ ] Pre-commit checks pass
-- [ ] Build succeeds (`npm run build`)
+- [ ] Build succeeds (`pnpm build`)
+- [ ] Site lint passes (`pnpm --filter <site> run lint` — repeat for each site modified)
+- [ ] Type-check passes (`pnpm type-check`)
 - [ ] E2E smoke tests pass (`npm run test:e2e:smoke`)
 
 ### Before Merging to Staging
