@@ -364,6 +364,7 @@ function generateShowcaseRegistryTsx(
 
 function generateComponentBarrel(
   analysis: ReferenceAnalysis | SiteAnalysis,
+  options?: { themeName?: string },
   componentMatches?: Map<string, { matchConfidence: string }>
 ): string {
   const lines: string[] = [];
@@ -390,6 +391,55 @@ function generateComponentBarrel(
     lines.push(
       `export { ${bp.componentExportName} } from './${bp.componentFileName.replace(".tsx", "")}';`
     );
+  }
+
+  if (options?.themeName) {
+    const pascal = toPascalCase(options.themeName);
+
+    let primaryNavBp: (typeof analysis.sectionBlueprints)[number] | undefined;
+    let primaryFooterBp: (typeof analysis.sectionBlueprints)[number] | undefined;
+
+    for (const bp of analysis.sectionBlueprints) {
+      const conf = componentMatches?.get(bp.id)?.matchConfidence;
+      const isMatched = conf === "exact" || conf === "close";
+      if (!isMatched && bp.category === "Navigation") {
+        const fn = bp.componentFileName.toLowerCase();
+        const pur = bp.purpose.toLowerCase();
+        const isMainNav =
+          fn.includes("site-header") ||
+          fn.includes("primary-nav") ||
+          pur.includes("primary") ||
+          pur.includes("sticky");
+        if (isMainNav && !primaryNavBp) primaryNavBp = bp;
+        else if (!primaryNavBp) primaryNavBp = bp;
+      }
+      if (!isMatched && bp.category === "Footer" && !primaryFooterBp) {
+        primaryFooterBp = bp;
+      }
+    }
+
+    if (primaryNavBp || primaryFooterBp) {
+      lines.push("");
+      lines.push("// Theme contract aliases (TPV-002)");
+    }
+    if (primaryNavBp) {
+      const file = primaryNavBp.componentFileName.replace(".tsx", "");
+      lines.push(
+        `export { ${primaryNavBp.componentExportName} as ${pascal}Header } from './${file}';`
+      );
+      lines.push(
+        `export type { ${primaryNavBp.componentExportName}Props as ${pascal}HeaderProps } from './${file}';`
+      );
+    }
+    if (primaryFooterBp) {
+      const file = primaryFooterBp.componentFileName.replace(".tsx", "");
+      lines.push(
+        `export { ${primaryFooterBp.componentExportName} as ${pascal}Footer } from './${file}';`
+      );
+      lines.push(
+        `export type { ${primaryFooterBp.componentExportName}Props as ${pascal}FooterProps } from './${file}';`
+      );
+    }
   }
 
   lines.push(``);
@@ -703,7 +753,7 @@ export function scaffoldThemePackage(
     ],
     [
       path.join(themeDir, "components", "index.ts"),
-      generateComponentBarrel(analysis, componentMatchMap),
+      generateComponentBarrel(analysis, { themeName: name }, componentMatchMap),
     ],
     [path.join(themeDir, "README.md"), generateReadme(name, analysis)],
   ];
