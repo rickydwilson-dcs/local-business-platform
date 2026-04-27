@@ -733,6 +733,23 @@ Confirm this was done in the final report.
 
 ---
 
+## Completed
+
+**Date:** 2026-04-27
+**Status:** All phases executed successfully
+
+All 6 phases implemented in order. Phase 0 wrote 8 red tests confirming all 5 generator bugs. Phases 1–5 applied targeted fixes: `react`/`next` moved to peerDependencies, blanket Navigation→client-component rule deleted, `blueprintId` serialised through the `ComponentMatch` array roundtrip, `hexToRgba` + `DEFAULT_TYPOGRAPHY_SCALE` added so `generateIndexTs` always emits all required color categories and all 8 typography scale levels, and `generateComponentBarrel` given a `{ themeName }` option that appends `{Pascal}Header`/`{Pascal}Footer` alias exports. One intentional deviation: `analysis-schemas.ts` had no `ComponentMatchSchema` to edit (the Zod schema for `ComponentMatch` does not exist in that file), so Step 3b was a no-op. All 184 tests green, type-check clean, full build passes, pipeline smoke PASS.
+
+### Commits
+
+- `b833718` test(generator): add red tests for TPV-002/003/006/009 generator bugs
+- `ea24af2` fix(themes): move react and next to peerDependencies (TPV-004)
+- `75b1026` fix(generator): remove blanket Navigation→client-component rule (TPV-003)
+- `b569e6c` fix(generator): preserve blueprintId through ComponentMatch serialisation (Bug 5)
+- `4115bac` fix(generator): always emit semantic, overlay, surface sub-fields and typography scale (TPV-006, TPV-009)
+- `17cbe15` fix(generator): add {ThemeName}Header/{ThemeName}Footer barrel aliases (TPV-002)
+- `d73292b` chore(generator): verify all generator fixes pass type-check, build, and pipeline smoke
+
 ## Run Wrap-Up
 
 After completing all phases and updating the session file, run:
