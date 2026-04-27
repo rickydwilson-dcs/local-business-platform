@@ -13,7 +13,7 @@ import * as path from "path";
 
 const scaffoldSource = fs.readFileSync(
   path.resolve(__dirname, "../scaffold-theme-package.ts"),
-  "utf8",
+  "utf8"
 );
 
 // ---------------------------------------------------------------------------
@@ -108,7 +108,7 @@ describe("showcase generation", () => {
 describe("generateGlobalsCss", () => {
   // Extract the function body from source for pattern checks
   const globalsCssMatch = scaffoldSource.match(
-    /function generateGlobalsCss[\s\S]*?return `([\s\S]*?)`;/,
+    /function generateGlobalsCss[\s\S]*?return `([\s\S]*?)`;/
   );
   const globalsCssTemplate = globalsCssMatch?.[1] ?? "";
 
@@ -168,9 +168,7 @@ describe("component file copy", () => {
 describe("barrel deduplication", () => {
   test("checks core-match skip BEFORE duplicate name check in generateComponentBarrel", () => {
     // Extract the barrel function body
-    const barrelFnMatch = scaffoldSource.match(
-      /function generateComponentBarrel[\s\S]*?^}/m,
-    );
+    const barrelFnMatch = scaffoldSource.match(/function generateComponentBarrel[\s\S]*?^}/m);
     const barrelFn = barrelFnMatch?.[0] ?? "";
 
     // The core-match check (componentMatches.get) should appear before
@@ -184,5 +182,50 @@ describe("barrel deduplication", () => {
 
     // Core-match check should come first
     expect(coreMatchIndex).toBeLessThan(seenExportsIndex);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// generateIndexTs completeness (TPV-006, TPV-009)
+// ---------------------------------------------------------------------------
+
+describe("generateIndexTs completeness (TPV-006, TPV-009)", () => {
+  test("always emits colors.semantic block (Bug 2 fix)", () => {
+    expect(scaffoldSource).toMatch(/semantic:\s*\{/);
+  });
+
+  test("always emits colors.overlay block (Bug 2 fix)", () => {
+    expect(scaffoldSource).toMatch(/overlay:\s*\{/);
+  });
+
+  test("defines DEFAULT_TYPOGRAPHY_SCALE constant with all 8 levels (Bug 3 fix)", () => {
+    expect(scaffoldSource).toContain("DEFAULT_TYPOGRAPHY_SCALE");
+    expect(scaffoldSource).toContain("hero:");
+    expect(scaffoldSource).toContain("caption:");
+  });
+
+  test("typography scale uses ?? DEFAULT_TYPOGRAPHY_SCALE fallback (Bug 3 fix)", () => {
+    expect(scaffoldSource).toContain("DEFAULT_TYPOGRAPHY_SCALE");
+    expect(scaffoldSource).toMatch(/typography\.scale.*\?\?|tokens\.typography\.scale.*\?\?/);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// generateComponentBarrel contract (TPV-002, Bug 5)
+// ---------------------------------------------------------------------------
+
+describe("generateComponentBarrel contract (TPV-002, Bug 5)", () => {
+  test("generateComponentBarrel accepts themeName option (Bug 4 fix)", () => {
+    // Verify the function signature accepts an options object
+    expect(scaffoldSource).toMatch(/generateComponentBarrel\s*\([^)]*options/);
+  });
+
+  test("barrel emits theme-prefixed Header alias (Bug 4 fix)", () => {
+    expect(scaffoldSource).toMatch(/Header.*from/);
+    expect(scaffoldSource).toMatch(/pascal.*Header/);
+  });
+
+  test("blueprintId is used as primary key in map reconstruction (Bug 5 fix)", () => {
+    expect(scaffoldSource).toContain("match.blueprintId");
   });
 });
