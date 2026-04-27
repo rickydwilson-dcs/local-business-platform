@@ -368,7 +368,6 @@ const CLIENT_PATTERNS =
  */
 export function needsUseClient(blueprint: SectionBlueprint, jsxBody: string): boolean {
   if (blueprint.interactionNeeds === "stateful") return true;
-  if (blueprint.category === "Navigation") return true;
   const purpose = blueprint.purpose.toLowerCase();
   if (purpose.includes("form") || purpose.includes("newsletter")) return true;
   if (CLIENT_PATTERNS.test(jsxBody)) return true;
