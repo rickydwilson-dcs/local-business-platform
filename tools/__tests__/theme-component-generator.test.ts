@@ -39,6 +39,20 @@ describe("needsUseClient", () => {
     const jsxBody = "  return <Carousel autoPlay><div>Slide</div></Carousel>;";
     expect(needsUseClient(bp, jsxBody)).toBe(true);
   });
+
+  test("returns false for Navigation category with purely static JSX (Bug 1 fix)", () => {
+    const bp = makeBlueprint({ category: "Navigation", interactionNeeds: "none" });
+    const staticJsx =
+      '  return <nav className="bg-surface-inverse py-4"><a href="/">Home</a></nav>;';
+    expect(needsUseClient(bp, staticJsx)).toBe(false);
+  });
+
+  test("still returns true for Navigation category when JSX contains onClick", () => {
+    const bp = makeBlueprint({ category: "Navigation", interactionNeeds: "none" });
+    const interactiveJsx =
+      "  return <nav><button onClick={() => setOpen(true)}>Menu</button></nav>;";
+    expect(needsUseClient(bp, interactiveJsx)).toBe(true);
+  });
 });
 
 // ---------------------------------------------------------------------------

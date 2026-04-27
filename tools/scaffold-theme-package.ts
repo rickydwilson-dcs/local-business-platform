@@ -97,6 +97,25 @@ const REGISTRY_PRESETS: Record<string, RegistryPreset> = {
 // File generators
 // ============================================================================
 
+function hexToRgba(hex: string, alpha: number): string {
+  const h = hex.replace("#", "");
+  const r = parseInt(h.slice(0, 2), 16);
+  const g = parseInt(h.slice(2, 4), 16);
+  const b = parseInt(h.slice(4, 6), 16);
+  return `rgba(${r},${g},${b},${alpha})`;
+}
+
+const DEFAULT_TYPOGRAPHY_SCALE = {
+  hero: { size: "4rem", lineHeight: "1.1", letterSpacing: "-0.02em", weight: 800 },
+  h1: { size: "3rem", lineHeight: "1.15", letterSpacing: "-0.015em", weight: 700 },
+  h2: { size: "2.25rem", lineHeight: "1.2", letterSpacing: "-0.01em", weight: 700 },
+  h3: { size: "1.875rem", lineHeight: "1.25", letterSpacing: "-0.005em", weight: 600 },
+  h4: { size: "1.5rem", lineHeight: "1.3", letterSpacing: "0", weight: 600 },
+  body: { size: "1rem", lineHeight: "1.6", letterSpacing: "0", weight: 400 },
+  small: { size: "0.875rem", lineHeight: "1.5", letterSpacing: "0", weight: 400 },
+  caption: { size: "0.75rem", lineHeight: "1.5", letterSpacing: "0.01em", weight: 400 },
+} as const;
+
 function generateIndexTs(name: string, analysis: ReferenceAnalysis | SiteAnalysis): string {
   const pascal = toPascalCase(name);
   const camel = toCamelCase(name);
@@ -111,32 +130,33 @@ function generateIndexTs(name: string, analysis: ReferenceAnalysis | SiteAnalysi
     `      foreground: "${tokens.surface.foreground}",`,
     `      muted: "${tokens.surface.muted}",`,
   ];
-  if (tokens.surface.card) surfaceEntries.push(`      card: "${tokens.surface.card}",`);
-  if (tokens.surface.cardBorder) surfaceEntries.push(`      cardBorder: "${tokens.surface.cardBorder}",`);
-  if (tokens.surface.secondaryForeground) surfaceEntries.push(`      secondaryForeground: "${tokens.surface.secondaryForeground}",`);
-  if (tokens.surface.mutedForeground) surfaceEntries.push(`      mutedForeground: "${tokens.surface.mutedForeground}",`);
-  if (tokens.surface.subtle) surfaceEntries.push(`      subtle: "${tokens.surface.subtle}",`);
-  if (tokens.surface.inverse) surfaceEntries.push(`      inverse: "${tokens.surface.inverse}",`);
-
-  // Build typography scale if available
-  let scaleBlock = "";
-  if (tokens.typography.scale) {
-    const scaleEntries: string[] = [];
-    for (const [key, entry] of Object.entries(tokens.typography.scale)) {
-      if (!entry) continue;
-      const fields: string[] = [];
-      if (entry.size) fields.push(`size: "${entry.size}"`);
-      if (entry.lineHeight) fields.push(`lineHeight: "${entry.lineHeight}"`);
-      if (entry.letterSpacing) fields.push(`letterSpacing: "${entry.letterSpacing}"`);
-      if (entry.weight) fields.push(`weight: ${entry.weight}`);
-      if (fields.length > 0) {
-        scaleEntries.push(`      ${key}: { ${fields.join(", ")} },`);
-      }
-    }
-    if (scaleEntries.length > 0) {
-      scaleBlock = `\n    scale: {\n${scaleEntries.join("\n")}\n    },`;
-    }
+  surfaceEntries.push(`      card: "${tokens.surface.card ?? tokens.surface.background}",`);
+  surfaceEntries.push(`      cardBorder: "${tokens.surface.cardBorder ?? "#e5e7eb"}",`);
+  surfaceEntries.push(`      mutedForeground: "${tokens.surface.mutedForeground ?? "#6b7280"}",`);
+  surfaceEntries.push(`      subtle: "${tokens.surface.subtle ?? tokens.surface.muted}",`);
+  surfaceEntries.push(`      inverse: "${tokens.surface.inverse ?? tokens.surface.foreground}",`);
+  if (tokens.surface.secondaryForeground) {
+    surfaceEntries.push(`      secondaryForeground: "${tokens.surface.secondaryForeground}",`);
   }
+
+  // Compute overlay.primary from brand color
+  const overlayPrimary = /^#[0-9a-fA-F]{6}$/.test(tokens.brand.primary)
+    ? hexToRgba(tokens.brand.primary, 0.8)
+    : "rgba(0,0,0,0.6)";
+
+  // Build typography scale — always emitted with DEFAULT_TYPOGRAPHY_SCALE fallback
+  const resolvedScale = tokens.typography.scale ?? DEFAULT_TYPOGRAPHY_SCALE;
+  const scaleEntries: string[] = [];
+  for (const [key, entry] of Object.entries(resolvedScale)) {
+    if (!entry) continue;
+    const fields: string[] = [];
+    if (entry.size) fields.push(`size: "${entry.size}"`);
+    if (entry.lineHeight) fields.push(`lineHeight: "${entry.lineHeight}"`);
+    if (entry.letterSpacing) fields.push(`letterSpacing: "${entry.letterSpacing}"`);
+    if (entry.weight) fields.push(`weight: ${entry.weight}`);
+    if (fields.length > 0) scaleEntries.push(`      ${key}: { ${fields.join(", ")} },`);
+  }
+  const scaleBlock = `\n    scale: {\n${scaleEntries.join("\n")}\n    },`;
 
   // Build components block if available
   let componentsBlock = "";
@@ -206,6 +226,17 @@ export const ${camel}DefaultConfig: DeepPartialThemeConfig = {
     surface: {
 ${surfaceEntries.join("\n")}
     },
+    semantic: {
+      success: '#10b981',
+      warning: '#f59e0b',
+      error:   '#ef4444',
+      info:    '#3b82f6',
+    },
+    overlay: {
+      dark:    'rgba(0,0,0,0.8)',
+      light:   'rgba(255,255,255,0.8)',
+      primary: '${overlayPrimary}',
+    },
   },
   typography: {
     fontFamily: {
@@ -261,7 +292,7 @@ function generateManifestTs(name: string, analysis: ReferenceAnalysis | SiteAnal
 function generateShowcaseRegistryTsx(
   name: string,
   analysis: ReferenceAnalysis | SiteAnalysis,
-  componentMatches?: Map<string, { matchConfidence: string }>,
+  componentMatches?: Map<string, { matchConfidence: string }>
 ): string {
   const pascal = toPascalCase(name);
   const camel = toCamelCase(name);
@@ -297,7 +328,9 @@ function generateShowcaseRegistryTsx(
 
   // Import each component that exists
   for (const bp of importableBlueprints) {
-    lines.push(`import { ${bp.componentExportName} } from './components/${bp.componentFileName.replace(".tsx", "")}';`);
+    lines.push(
+      `import { ${bp.componentExportName} } from './components/${bp.componentFileName.replace(".tsx", "")}';`
+    );
   }
 
   lines.push(``);
@@ -331,7 +364,8 @@ function generateShowcaseRegistryTsx(
 
 function generateComponentBarrel(
   analysis: ReferenceAnalysis | SiteAnalysis,
-  componentMatches?: Map<string, { matchConfidence: string }>,
+  options?: { themeName?: string },
+  componentMatches?: Map<string, { matchConfidence: string }>
 ): string {
   const lines: string[] = [];
   const seenExports = new Set<string>();
@@ -354,7 +388,58 @@ function generateComponentBarrel(
     if (seenExports.has(bp.componentExportName)) continue;
     seenExports.add(bp.componentExportName);
 
-    lines.push(`export { ${bp.componentExportName} } from './${bp.componentFileName.replace(".tsx", "")}';`);
+    lines.push(
+      `export { ${bp.componentExportName} } from './${bp.componentFileName.replace(".tsx", "")}';`
+    );
+  }
+
+  if (options?.themeName) {
+    const pascal = toPascalCase(options.themeName);
+
+    let primaryNavBp: (typeof analysis.sectionBlueprints)[number] | undefined;
+    let primaryFooterBp: (typeof analysis.sectionBlueprints)[number] | undefined;
+
+    for (const bp of analysis.sectionBlueprints) {
+      const conf = componentMatches?.get(bp.id)?.matchConfidence;
+      const isMatched = conf === "exact" || conf === "close";
+      if (!isMatched && bp.category === "Navigation") {
+        const fn = bp.componentFileName.toLowerCase();
+        const pur = bp.purpose.toLowerCase();
+        const isMainNav =
+          fn.includes("site-header") ||
+          fn.includes("primary-nav") ||
+          pur.includes("primary") ||
+          pur.includes("sticky");
+        if (isMainNav && !primaryNavBp) primaryNavBp = bp;
+        else if (!primaryNavBp) primaryNavBp = bp;
+      }
+      if (!isMatched && bp.category === "Footer" && !primaryFooterBp) {
+        primaryFooterBp = bp;
+      }
+    }
+
+    if (primaryNavBp || primaryFooterBp) {
+      lines.push("");
+      lines.push("// Theme contract aliases (TPV-002)");
+    }
+    if (primaryNavBp) {
+      const file = primaryNavBp.componentFileName.replace(".tsx", "");
+      lines.push(
+        `export { ${primaryNavBp.componentExportName} as ${pascal}Header } from './${file}';`
+      );
+      lines.push(
+        `export type { ${primaryNavBp.componentExportName}Props as ${pascal}HeaderProps } from './${file}';`
+      );
+    }
+    if (primaryFooterBp) {
+      const file = primaryFooterBp.componentFileName.replace(".tsx", "");
+      lines.push(
+        `export { ${primaryFooterBp.componentExportName} as ${pascal}Footer } from './${file}';`
+      );
+      lines.push(
+        `export type { ${primaryFooterBp.componentExportName}Props as ${pascal}FooterProps } from './${file}';`
+      );
+    }
   }
 
   lines.push(``);
@@ -530,7 +615,9 @@ function generateReadme(name: string, analysis: ReferenceAnalysis | SiteAnalysis
   lines.push("");
   lines.push("## Verification");
   lines.push("");
-  lines.push("Colours in this theme were extracted from a screenshot and may not be pixel-perfect.");
+  lines.push(
+    "Colours in this theme were extracted from a screenshot and may not be pixel-perfect."
+  );
   lines.push("Verify against the reference site and adjust hex values as needed.");
   lines.push("");
 
@@ -569,16 +656,16 @@ function appendThemeName(name: string): void {
     ? `${existingNames} "${name}"`
     : `${existingNames}, "${name}"`;
 
-  content = content.replace(
-    themeNamesRegex,
-    `export const THEME_NAMES = [${newNames}] as const;`
-  );
+  content = content.replace(themeNamesRegex, `export const THEME_NAMES = [${newNames}] as const;`);
 
   fs.writeFileSync(typesPath, content, "utf8");
   console.log(`  ✓ Appended "${name}" to THEME_NAMES`);
 
   // Also update ThemeName union in theme-context.tsx (structurally duplicated type)
-  const contextPath = path.resolve(__dirname, "../packages/core-components/src/context/theme-context.tsx");
+  const contextPath = path.resolve(
+    __dirname,
+    "../packages/core-components/src/context/theme-context.tsx"
+  );
   if (!fs.existsSync(contextPath)) {
     console.warn(`  [Warning] Could not find ${contextPath} — skipping ThemeName sync.`);
     return;
@@ -598,7 +685,10 @@ function appendThemeName(name: string): void {
   }
 
   const updatedUnion = `${themeNameMatch[1]} | "${name}"`;
-  contextContent = contextContent.replace(themeNameRegex, `export type ThemeName = ${updatedUnion};`);
+  contextContent = contextContent.replace(
+    themeNameRegex,
+    `export type ThemeName = ${updatedUnion};`
+  );
   fs.writeFileSync(contextPath, contextContent, "utf8");
   console.log(`  ✓ Synced "${name}" to ThemeName union in theme-context.tsx`);
 }
@@ -607,14 +697,18 @@ function appendThemeName(name: string): void {
 // Main
 // ============================================================================
 
-export function scaffoldThemePackage(analysis: ReferenceAnalysis | SiteAnalysis, name: string, outputDir?: string): string {
+export function scaffoldThemePackage(
+  analysis: ReferenceAnalysis | SiteAnalysis,
+  name: string,
+  outputDir?: string
+): string {
   const pascal = toPascalCase(name);
 
   // Version gate
   if (analysis.analysisVersion === "1") {
     throw new Error(
       `Analysis version "1" is not supported by scaffold v2. ` +
-      `Re-run the analysis pipeline to produce a v2 analysis with sectionBlueprints.`
+        `Re-run the analysis pipeline to produce a v2 analysis with sectionBlueprints.`
     );
   }
 
@@ -640,12 +734,11 @@ export function scaffoldThemePackage(analysis: ReferenceAnalysis | SiteAnalysis,
   if ("componentMatches" in analysis && analysis.componentMatches) {
     componentMatchMap = new Map();
     for (const match of analysis.componentMatches) {
-      // Find which blueprint this match belongs to by scanning blueprints
-      for (const bp of analysis.sectionBlueprints) {
-        if (bp.componentExportName === match.componentName || bp.name === match.componentName) {
-          componentMatchMap.set(bp.id, { matchConfidence: match.matchConfidence });
-        }
+      if (match.blueprintId) {
+        componentMatchMap.set(match.blueprintId, { matchConfidence: match.matchConfidence });
       }
+      // No legacy fallback — the old name-match never worked anyway.
+      // Old site-analysis.json files without blueprintId should be re-ingested.
     }
   }
 
@@ -654,8 +747,14 @@ export function scaffoldThemePackage(analysis: ReferenceAnalysis | SiteAnalysis,
     [path.join(themeDir, "index.ts"), generateIndexTs(name, analysis)],
     [path.join(themeDir, "globals.css"), generateGlobalsCss(name, analysis)],
     [path.join(themeDir, "manifest.ts"), generateManifestTs(name, analysis)],
-    [path.join(themeDir, "showcase-registry.tsx"), generateShowcaseRegistryTsx(name, analysis, componentMatchMap)],
-    [path.join(themeDir, "components", "index.ts"), generateComponentBarrel(analysis, componentMatchMap)],
+    [
+      path.join(themeDir, "showcase-registry.tsx"),
+      generateShowcaseRegistryTsx(name, analysis, componentMatchMap),
+    ],
+    [
+      path.join(themeDir, "components", "index.ts"),
+      generateComponentBarrel(analysis, { themeName: name }, componentMatchMap),
+    ],
     [path.join(themeDir, "README.md"), generateReadme(name, analysis)],
   ];
 
@@ -673,7 +772,7 @@ export function scaffoldThemePackage(analysis: ReferenceAnalysis | SiteAnalysis,
         if (file.endsWith(".tsx")) {
           fs.copyFileSync(
             path.join(outputComponentsDir, file),
-            path.join(themeDir, "components", file),
+            path.join(themeDir, "components", file)
           );
           copied++;
         }

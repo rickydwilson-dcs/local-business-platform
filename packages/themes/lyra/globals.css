@@ -1,0 +1,96 @@
+/*
+ * Lyra Theme — Global CSS Utilities
+ *
+ * Reference site: https://www.fountaindigital.co.uk/
+ * Capture date: 2026-04-25T05:33:40.645Z
+ *
+ * Theme-level utility classes shared by all Lyra sites.
+ * Import this file at the top of your site's app/globals.css:
+ *
+ *   @import "../../packages/themes/lyra/globals.css";
+ *   @tailwind base;
+ *   @tailwind components;
+ *   @tailwind utilities;
+ *
+ * Pattern: matches packages/themes/vega/globals.css
+ * No @layer wrappers. No opacity modifiers in @apply. Only standard theme tokens.
+ */
+
+/* ==========================================
+   BUTTONS
+   ========================================== */
+
+.btn-primary {
+  @apply inline-flex items-center justify-center px-6 py-3 rounded-lg;
+  @apply bg-brand-primary text-on-brand-primary font-semibold;
+  @apply hover:bg-brand-primary-hover transition-all duration-200;
+  @apply focus:ring-2 focus:ring-brand-primary focus:ring-offset-2;
+}
+
+.btn-secondary {
+  @apply inline-flex items-center justify-center px-6 py-3 rounded-lg;
+  @apply bg-surface-card text-brand-primary border border-brand-primary font-semibold;
+  @apply hover:bg-surface-subtle transition-all duration-200;
+  @apply focus:ring-2 focus:ring-brand-primary focus:ring-offset-2;
+}
+
+.btn-ghost {
+  @apply inline-flex items-center justify-center px-6 py-3 rounded-lg;
+  @apply bg-surface-subtle text-surface-foreground font-semibold;
+  @apply hover:bg-surface-subtle transition-all duration-200;
+  @apply focus:ring-2 focus:ring-surface-subtle-border focus:ring-offset-2;
+}
+
+/* ==========================================
+   CARDS
+   ========================================== */
+
+.card {
+  @apply bg-surface-card border border-surface-subtle rounded-xl p-6;
+  @apply shadow-sm hover:shadow-md transition-shadow;
+}
+
+.card-interactive {
+  @apply bg-surface-card border border-surface-subtle rounded-xl p-6 shadow-sm;
+  @apply hover:shadow-md hover:-translate-y-1 transition-all duration-300;
+}
+
+/* ==========================================
+   SECTIONS
+   ========================================== */
+
+.section {
+  @apply py-16 md:py-24;
+}
+
+.section-compact {
+  @apply py-8 md:py-12;
+}
+
+/* ==========================================
+   CONTAINERS
+   ========================================== */
+
+.container-narrow {
+  @apply max-w-4xl mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+.container-standard {
+  @apply mx-auto w-full lg:w-[90%] px-6;
+}
+
+/* ==========================================
+   TYPOGRAPHY
+   ========================================== */
+
+.heading-hero {
+  @apply text-4xl md:text-5xl lg:text-6xl font-bold text-surface-foreground mb-6;
+}
+
+.heading-section {
+  @apply text-2xl sm:text-3xl md:text-4xl font-bold text-surface-foreground mb-4;
+}
+
+.heading-card {
+  @apply text-xl sm:text-2xl font-bold text-surface-foreground mb-4;
+}
