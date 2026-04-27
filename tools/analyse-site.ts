@@ -36,10 +36,7 @@ import {
   type MappedTokens,
 } from "./lib/computed-style-token-mapper";
 import { colorDistanceCIE76 } from "../packages/intake-system/src/theme-extraction/color-utils";
-import {
-  SiteSynthesisResponseSchema,
-  type SiteSynthesisResponse,
-} from "./lib/analysis-schemas";
+import { SiteSynthesisResponseSchema, type SiteSynthesisResponse } from "./lib/analysis-schemas";
 import { discoverPages } from "./lib/site-discovery";
 import { captureScreenshots } from "./lib/screenshot-capture";
 import { pickNextThemeName } from "./lib/theme-name-picker";
@@ -67,7 +64,12 @@ interface CliArgs {
 }
 
 function parseArgs(argv: string[]): CliArgs {
-  const args: Partial<CliArgs> = { maxPages: 10, dryRun: false, skipExamples: false, htmlOnly: false };
+  const args: Partial<CliArgs> = {
+    maxPages: 10,
+    dryRun: false,
+    skipExamples: false,
+    htmlOnly: false,
+  };
 
   for (let i = 2; i < argv.length; i++) {
     const arg = argv[i];
@@ -100,7 +102,10 @@ function parseArgs(argv: string[]): CliArgs {
         args.htmlOnly = true;
         break;
       case "--pages":
-        args.pages = next.split(",").map((u) => u.trim()).filter(Boolean);
+        args.pages = next
+          .split(",")
+          .map((u) => u.trim())
+          .filter(Boolean);
         i++;
         break;
     }
@@ -129,7 +134,7 @@ function elapsed(start: number): string {
 
 function generateMarkdownReport(
   analysis: SiteAnalysis,
-  componentMatchMap: Map<string, ComponentMatch | null>,
+  componentMatchMap: Map<string, ComponentMatch | null>
 ): string {
   const lines: string[] = [];
 
@@ -166,7 +171,9 @@ function generateMarkdownReport(
       const matchInfo = match
         ? ` → **${match.componentName}** (${match.matchConfidence})`
         : " → *new component*";
-      lines.push(`  ${section.order}. \`${section.blueprintId}\`${section.isShared ? " [shared]" : ""}${matchInfo}`);
+      lines.push(
+        `  ${section.order}. \`${section.blueprintId}\`${section.isShared ? " [shared]" : ""}${matchInfo}`
+      );
     }
     lines.push("");
   }
@@ -230,7 +237,9 @@ async function main() {
     if (args.htmlOnly) {
       console.warn("⚠ ANTHROPIC_API_KEY not set — running in HTML-only mode (--html-only)");
     } else {
-      console.error("❌ ANTHROPIC_API_KEY not set. Set it in .env.local or pass --html-only for degraded mode.");
+      console.error(
+        "❌ ANTHROPIC_API_KEY not set. Set it in .env.local or pass --html-only for degraded mode."
+      );
       process.exit(1);
     }
   }
@@ -296,7 +305,10 @@ async function main() {
   // ── Step 4: Capture screenshots ──
   stepStart = Date.now();
   console.log("[4/15] Capturing screenshots via Playwright...");
-  const { screenshots: screenshotMap, computedStyles } = await captureScreenshots(discoveredPages, outputDir);
+  const { screenshots: screenshotMap, computedStyles } = await captureScreenshots(
+    discoveredPages,
+    outputDir
+  );
   console.log(`  Captured ${screenshotMap.size} screenshots`);
   console.log(`  Extracted computed styles from ${computedStyles.length} pages`);
   console.log(`  Done (${elapsed(stepStart)})\n`);
@@ -336,7 +348,7 @@ async function main() {
     discoveredPages,
     htmlMap,
     screenshotMap,
-    outputDir,
+    outputDir
   );
   console.log(`  Analysed ${perPage.length} pages`);
   console.log(`  Done (${elapsed(stepStart)})\n`);
@@ -367,22 +379,23 @@ async function main() {
     : null;
 
   if (!synthValidation.success) {
-    console.warn("  [Warning] Synthesis validation failed — falling back to lower-fidelity token sources");
-    console.warn(`  Missing/invalid fields: ${synthValidation.error.issues.map(i => i.path.join('.')).join(', ')}`);
+    console.warn(
+      "  [Warning] Synthesis validation failed — falling back to lower-fidelity token sources"
+    );
+    console.warn(
+      `  Missing/invalid fields: ${synthValidation.error.issues.map((i) => i.path.join(".")).join(", ")}`
+    );
   }
 
   // Find homepage vision palette (fallback source #2)
-  const homepageVision = perPage.find(
-    (p) => p.page.pageType === "home" && p.visualLanguage,
-  );
+  const homepageVision = perPage.find((p) => p.page.pageType === "home" && p.visualLanguage);
   const visionPalette = homepageVision?.visualLanguage?.palette;
-  const hasVisionPalette = visionPalette &&
-    (visionPalette.confidence === "high" || visionPalette.confidence === "medium");
+  const hasVisionPalette =
+    visionPalette && (visionPalette.confidence === "high" || visionPalette.confidence === "medium");
 
   // Check if CSS-scraped values are non-default
-  const hasCssValues = scrapedStyles &&
-    scrapedStyles.colors.primary &&
-    scrapedStyles.colors.primary !== "#000000";
+  const hasCssValues =
+    scrapedStyles && scrapedStyles.colors.primary && scrapedStyles.colors.primary !== "#000000";
 
   // Map computed styles to tokens
   let computedTokens: MappedTokens | null = null;
@@ -404,7 +417,7 @@ async function main() {
     tokenSource = "synthesis+computed";
     themeTokens = enhanceSynthesisWithComputedValues(
       validatedSynthesis.themeTokenRecommendations,
-      computedTokens,
+      computedTokens
     );
     // Log enhancement details
     const origTokens = validatedSynthesis.themeTokenRecommendations;
@@ -487,9 +500,8 @@ async function main() {
     };
   }
 
-  const visualLanguage: SiteAnalysis["visualLanguage"] = validatedSynthesis?.visualLanguage
-    ?? (homepageVision?.visualLanguage as SiteAnalysis["visualLanguage"] | undefined)
-    ?? {
+  const visualLanguage: SiteAnalysis["visualLanguage"] = validatedSynthesis?.visualLanguage ??
+    (homepageVision?.visualLanguage as SiteAnalysis["visualLanguage"] | undefined) ?? {
       palette: {
         background: themeTokens.surface.background,
         foreground: themeTokens.surface.foreground,
@@ -522,7 +534,9 @@ async function main() {
 
   console.log(`  TOKEN_SOURCE: ${tokenSource}`);
   console.log(`  Primary: ${themeTokens.brand.primary}`);
-  console.log(`  Registry: ${registryRecommendation.themeName} (${registryRecommendation.confidence})`);
+  console.log(
+    `  Registry: ${registryRecommendation.themeName} (${registryRecommendation.confidence})`
+  );
   console.log(`  Done (${elapsed(stepStart)})\n`);
 
   // ── Step 11: Build SiteAnalysis and write JSON/MD ──
@@ -534,7 +548,9 @@ async function main() {
   const deduplicatedBlueprints: SectionBlueprint[] = [];
 
   // Use synthesis deduplicated blueprints if available
-  const synthBlueprints = validatedSynthesis?.deduplicatedBlueprints as SectionBlueprint[] | undefined;
+  const synthBlueprints = validatedSynthesis?.deduplicatedBlueprints as
+    | SectionBlueprint[]
+    | undefined;
   if (synthBlueprints && Array.isArray(synthBlueprints)) {
     for (const bp of synthBlueprints) {
       if (!seenIds.has(bp.id)) {
@@ -552,8 +568,8 @@ async function main() {
   }
 
   const componentMatches: ComponentMatch[] = [];
-  for (const [, match] of componentMatchMap) {
-    if (match) componentMatches.push(match);
+  for (const [blueprintId, match] of componentMatchMap) {
+    if (match) componentMatches.push({ ...match, blueprintId });
   }
 
   const siteAnalysis: SiteAnalysis = {
@@ -598,7 +614,7 @@ async function main() {
   const genResult = await generateThemeComponents(
     deduplicatedBlueprints,
     componentsDir,
-    componentMatchMap,
+    componentMatchMap
   );
   if (genResult.warnings.length > 0) {
     console.log("  Warnings:");
@@ -617,7 +633,7 @@ async function main() {
       deduplicatedBlueprints,
       componentMatchMap,
       themeName,
-      outputDir,
+      outputDir
     );
     console.log(`  Done (${elapsed(stepStart)})\n`);
   } else {
@@ -679,7 +695,10 @@ async function main() {
 
   if (tscResult.status !== 0) {
     const output = (tscResult.stdout || "") + (tscResult.stderr || "");
-    const errorLines = output.split("\n").filter((l: string) => l.trim()).slice(0, 20);
+    const errorLines = output
+      .split("\n")
+      .filter((l: string) => l.trim())
+      .slice(0, 20);
     console.warn("  [Warning] Theme package has TypeScript errors:");
     for (const line of errorLines) {
       console.warn(`    ${line}`);

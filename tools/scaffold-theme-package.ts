@@ -112,9 +112,12 @@ function generateIndexTs(name: string, analysis: ReferenceAnalysis | SiteAnalysi
     `      muted: "${tokens.surface.muted}",`,
   ];
   if (tokens.surface.card) surfaceEntries.push(`      card: "${tokens.surface.card}",`);
-  if (tokens.surface.cardBorder) surfaceEntries.push(`      cardBorder: "${tokens.surface.cardBorder}",`);
-  if (tokens.surface.secondaryForeground) surfaceEntries.push(`      secondaryForeground: "${tokens.surface.secondaryForeground}",`);
-  if (tokens.surface.mutedForeground) surfaceEntries.push(`      mutedForeground: "${tokens.surface.mutedForeground}",`);
+  if (tokens.surface.cardBorder)
+    surfaceEntries.push(`      cardBorder: "${tokens.surface.cardBorder}",`);
+  if (tokens.surface.secondaryForeground)
+    surfaceEntries.push(`      secondaryForeground: "${tokens.surface.secondaryForeground}",`);
+  if (tokens.surface.mutedForeground)
+    surfaceEntries.push(`      mutedForeground: "${tokens.surface.mutedForeground}",`);
   if (tokens.surface.subtle) surfaceEntries.push(`      subtle: "${tokens.surface.subtle}",`);
   if (tokens.surface.inverse) surfaceEntries.push(`      inverse: "${tokens.surface.inverse}",`);
 
@@ -261,7 +264,7 @@ function generateManifestTs(name: string, analysis: ReferenceAnalysis | SiteAnal
 function generateShowcaseRegistryTsx(
   name: string,
   analysis: ReferenceAnalysis | SiteAnalysis,
-  componentMatches?: Map<string, { matchConfidence: string }>,
+  componentMatches?: Map<string, { matchConfidence: string }>
 ): string {
   const pascal = toPascalCase(name);
   const camel = toCamelCase(name);
@@ -297,7 +300,9 @@ function generateShowcaseRegistryTsx(
 
   // Import each component that exists
   for (const bp of importableBlueprints) {
-    lines.push(`import { ${bp.componentExportName} } from './components/${bp.componentFileName.replace(".tsx", "")}';`);
+    lines.push(
+      `import { ${bp.componentExportName} } from './components/${bp.componentFileName.replace(".tsx", "")}';`
+    );
   }
 
   lines.push(``);
@@ -331,7 +336,7 @@ function generateShowcaseRegistryTsx(
 
 function generateComponentBarrel(
   analysis: ReferenceAnalysis | SiteAnalysis,
-  componentMatches?: Map<string, { matchConfidence: string }>,
+  componentMatches?: Map<string, { matchConfidence: string }>
 ): string {
   const lines: string[] = [];
   const seenExports = new Set<string>();
@@ -354,7 +359,9 @@ function generateComponentBarrel(
     if (seenExports.has(bp.componentExportName)) continue;
     seenExports.add(bp.componentExportName);
 
-    lines.push(`export { ${bp.componentExportName} } from './${bp.componentFileName.replace(".tsx", "")}';`);
+    lines.push(
+      `export { ${bp.componentExportName} } from './${bp.componentFileName.replace(".tsx", "")}';`
+    );
   }
 
   lines.push(``);
@@ -530,7 +537,9 @@ function generateReadme(name: string, analysis: ReferenceAnalysis | SiteAnalysis
   lines.push("");
   lines.push("## Verification");
   lines.push("");
-  lines.push("Colours in this theme were extracted from a screenshot and may not be pixel-perfect.");
+  lines.push(
+    "Colours in this theme were extracted from a screenshot and may not be pixel-perfect."
+  );
   lines.push("Verify against the reference site and adjust hex values as needed.");
   lines.push("");
 
@@ -569,16 +578,16 @@ function appendThemeName(name: string): void {
     ? `${existingNames} "${name}"`
     : `${existingNames}, "${name}"`;
 
-  content = content.replace(
-    themeNamesRegex,
-    `export const THEME_NAMES = [${newNames}] as const;`
-  );
+  content = content.replace(themeNamesRegex, `export const THEME_NAMES = [${newNames}] as const;`);
 
   fs.writeFileSync(typesPath, content, "utf8");
   console.log(`  ✓ Appended "${name}" to THEME_NAMES`);
 
   // Also update ThemeName union in theme-context.tsx (structurally duplicated type)
-  const contextPath = path.resolve(__dirname, "../packages/core-components/src/context/theme-context.tsx");
+  const contextPath = path.resolve(
+    __dirname,
+    "../packages/core-components/src/context/theme-context.tsx"
+  );
   if (!fs.existsSync(contextPath)) {
     console.warn(`  [Warning] Could not find ${contextPath} — skipping ThemeName sync.`);
     return;
@@ -598,7 +607,10 @@ function appendThemeName(name: string): void {
   }
 
   const updatedUnion = `${themeNameMatch[1]} | "${name}"`;
-  contextContent = contextContent.replace(themeNameRegex, `export type ThemeName = ${updatedUnion};`);
+  contextContent = contextContent.replace(
+    themeNameRegex,
+    `export type ThemeName = ${updatedUnion};`
+  );
   fs.writeFileSync(contextPath, contextContent, "utf8");
   console.log(`  ✓ Synced "${name}" to ThemeName union in theme-context.tsx`);
 }
@@ -607,14 +619,18 @@ function appendThemeName(name: string): void {
 // Main
 // ============================================================================
 
-export function scaffoldThemePackage(analysis: ReferenceAnalysis | SiteAnalysis, name: string, outputDir?: string): string {
+export function scaffoldThemePackage(
+  analysis: ReferenceAnalysis | SiteAnalysis,
+  name: string,
+  outputDir?: string
+): string {
   const pascal = toPascalCase(name);
 
   // Version gate
   if (analysis.analysisVersion === "1") {
     throw new Error(
       `Analysis version "1" is not supported by scaffold v2. ` +
-      `Re-run the analysis pipeline to produce a v2 analysis with sectionBlueprints.`
+        `Re-run the analysis pipeline to produce a v2 analysis with sectionBlueprints.`
     );
   }
 
@@ -640,12 +656,11 @@ export function scaffoldThemePackage(analysis: ReferenceAnalysis | SiteAnalysis,
   if ("componentMatches" in analysis && analysis.componentMatches) {
     componentMatchMap = new Map();
     for (const match of analysis.componentMatches) {
-      // Find which blueprint this match belongs to by scanning blueprints
-      for (const bp of analysis.sectionBlueprints) {
-        if (bp.componentExportName === match.componentName || bp.name === match.componentName) {
-          componentMatchMap.set(bp.id, { matchConfidence: match.matchConfidence });
-        }
+      if (match.blueprintId) {
+        componentMatchMap.set(match.blueprintId, { matchConfidence: match.matchConfidence });
       }
+      // No legacy fallback — the old name-match never worked anyway.
+      // Old site-analysis.json files without blueprintId should be re-ingested.
     }
   }
 
@@ -654,8 +669,14 @@ export function scaffoldThemePackage(analysis: ReferenceAnalysis | SiteAnalysis,
     [path.join(themeDir, "index.ts"), generateIndexTs(name, analysis)],
     [path.join(themeDir, "globals.css"), generateGlobalsCss(name, analysis)],
     [path.join(themeDir, "manifest.ts"), generateManifestTs(name, analysis)],
-    [path.join(themeDir, "showcase-registry.tsx"), generateShowcaseRegistryTsx(name, analysis, componentMatchMap)],
-    [path.join(themeDir, "components", "index.ts"), generateComponentBarrel(analysis, componentMatchMap)],
+    [
+      path.join(themeDir, "showcase-registry.tsx"),
+      generateShowcaseRegistryTsx(name, analysis, componentMatchMap),
+    ],
+    [
+      path.join(themeDir, "components", "index.ts"),
+      generateComponentBarrel(analysis, componentMatchMap),
+    ],
     [path.join(themeDir, "README.md"), generateReadme(name, analysis)],
   ];
 
@@ -673,7 +694,7 @@ export function scaffoldThemePackage(analysis: ReferenceAnalysis | SiteAnalysis,
         if (file.endsWith(".tsx")) {
           fs.copyFileSync(
             path.join(outputComponentsDir, file),
-            path.join(themeDir, "components", file),
+            path.join(themeDir, "components", file)
           );
           copied++;
         }

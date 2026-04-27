@@ -165,6 +165,7 @@ export interface DiscoveredPage {
 // ── Component Matching Types ────────────────────────────────────────────
 
 export interface ComponentMatch {
+  blueprintId?: string; // id of the SectionBlueprint; present in analyses generated after this fix
   componentName: string;
   importPath: string;
   matchConfidence: "exact" | "close" | "partial";

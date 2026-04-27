@@ -98,7 +98,7 @@ function scoreMatch(blueprint: SectionBlueprint, entry: CatalogEntry): number {
  * @returns Map of blueprint ID to ComponentMatch or null
  */
 export function matchComponents(
-  blueprints: SectionBlueprint[],
+  blueprints: SectionBlueprint[]
 ): Map<string, ComponentMatch | null> {
   const results = new Map<string, ComponentMatch | null>();
 
@@ -115,10 +115,10 @@ export function matchComponents(
     }
 
     if (bestScore >= 0.4 && bestEntry) {
-      const confidence: ComponentMatch["matchConfidence"] =
-        bestScore > 0.7 ? "exact" : "close";
+      const confidence: ComponentMatch["matchConfidence"] = bestScore > 0.7 ? "exact" : "close";
 
       results.set(blueprint.id, {
+        blueprintId: blueprint.id,
         componentName: bestEntry.name,
         importPath: bestEntry.importPath,
         matchConfidence: confidence,
