@@ -97,6 +97,25 @@ const REGISTRY_PRESETS: Record<string, RegistryPreset> = {
 // File generators
 // ============================================================================
 
+function hexToRgba(hex: string, alpha: number): string {
+  const h = hex.replace("#", "");
+  const r = parseInt(h.slice(0, 2), 16);
+  const g = parseInt(h.slice(2, 4), 16);
+  const b = parseInt(h.slice(4, 6), 16);
+  return `rgba(${r},${g},${b},${alpha})`;
+}
+
+const DEFAULT_TYPOGRAPHY_SCALE = {
+  hero: { size: "4rem", lineHeight: "1.1", letterSpacing: "-0.02em", weight: 800 },
+  h1: { size: "3rem", lineHeight: "1.15", letterSpacing: "-0.015em", weight: 700 },
+  h2: { size: "2.25rem", lineHeight: "1.2", letterSpacing: "-0.01em", weight: 700 },
+  h3: { size: "1.875rem", lineHeight: "1.25", letterSpacing: "-0.005em", weight: 600 },
+  h4: { size: "1.5rem", lineHeight: "1.3", letterSpacing: "0", weight: 600 },
+  body: { size: "1rem", lineHeight: "1.6", letterSpacing: "0", weight: 400 },
+  small: { size: "0.875rem", lineHeight: "1.5", letterSpacing: "0", weight: 400 },
+  caption: { size: "0.75rem", lineHeight: "1.5", letterSpacing: "0.01em", weight: 400 },
+} as const;
+
 function generateIndexTs(name: string, analysis: ReferenceAnalysis | SiteAnalysis): string {
   const pascal = toPascalCase(name);
   const camel = toCamelCase(name);
@@ -111,35 +130,33 @@ function generateIndexTs(name: string, analysis: ReferenceAnalysis | SiteAnalysi
     `      foreground: "${tokens.surface.foreground}",`,
     `      muted: "${tokens.surface.muted}",`,
   ];
-  if (tokens.surface.card) surfaceEntries.push(`      card: "${tokens.surface.card}",`);
-  if (tokens.surface.cardBorder)
-    surfaceEntries.push(`      cardBorder: "${tokens.surface.cardBorder}",`);
-  if (tokens.surface.secondaryForeground)
+  surfaceEntries.push(`      card: "${tokens.surface.card ?? tokens.surface.background}",`);
+  surfaceEntries.push(`      cardBorder: "${tokens.surface.cardBorder ?? "#e5e7eb"}",`);
+  surfaceEntries.push(`      mutedForeground: "${tokens.surface.mutedForeground ?? "#6b7280"}",`);
+  surfaceEntries.push(`      subtle: "${tokens.surface.subtle ?? tokens.surface.muted}",`);
+  surfaceEntries.push(`      inverse: "${tokens.surface.inverse ?? tokens.surface.foreground}",`);
+  if (tokens.surface.secondaryForeground) {
     surfaceEntries.push(`      secondaryForeground: "${tokens.surface.secondaryForeground}",`);
-  if (tokens.surface.mutedForeground)
-    surfaceEntries.push(`      mutedForeground: "${tokens.surface.mutedForeground}",`);
-  if (tokens.surface.subtle) surfaceEntries.push(`      subtle: "${tokens.surface.subtle}",`);
-  if (tokens.surface.inverse) surfaceEntries.push(`      inverse: "${tokens.surface.inverse}",`);
-
-  // Build typography scale if available
-  let scaleBlock = "";
-  if (tokens.typography.scale) {
-    const scaleEntries: string[] = [];
-    for (const [key, entry] of Object.entries(tokens.typography.scale)) {
-      if (!entry) continue;
-      const fields: string[] = [];
-      if (entry.size) fields.push(`size: "${entry.size}"`);
-      if (entry.lineHeight) fields.push(`lineHeight: "${entry.lineHeight}"`);
-      if (entry.letterSpacing) fields.push(`letterSpacing: "${entry.letterSpacing}"`);
-      if (entry.weight) fields.push(`weight: ${entry.weight}`);
-      if (fields.length > 0) {
-        scaleEntries.push(`      ${key}: { ${fields.join(", ")} },`);
-      }
-    }
-    if (scaleEntries.length > 0) {
-      scaleBlock = `\n    scale: {\n${scaleEntries.join("\n")}\n    },`;
-    }
   }
+
+  // Compute overlay.primary from brand color
+  const overlayPrimary = /^#[0-9a-fA-F]{6}$/.test(tokens.brand.primary)
+    ? hexToRgba(tokens.brand.primary, 0.8)
+    : "rgba(0,0,0,0.6)";
+
+  // Build typography scale — always emitted with DEFAULT_TYPOGRAPHY_SCALE fallback
+  const resolvedScale = tokens.typography.scale ?? DEFAULT_TYPOGRAPHY_SCALE;
+  const scaleEntries: string[] = [];
+  for (const [key, entry] of Object.entries(resolvedScale)) {
+    if (!entry) continue;
+    const fields: string[] = [];
+    if (entry.size) fields.push(`size: "${entry.size}"`);
+    if (entry.lineHeight) fields.push(`lineHeight: "${entry.lineHeight}"`);
+    if (entry.letterSpacing) fields.push(`letterSpacing: "${entry.letterSpacing}"`);
+    if (entry.weight) fields.push(`weight: ${entry.weight}`);
+    if (fields.length > 0) scaleEntries.push(`      ${key}: { ${fields.join(", ")} },`);
+  }
+  const scaleBlock = `\n    scale: {\n${scaleEntries.join("\n")}\n    },`;
 
   // Build components block if available
   let componentsBlock = "";
@@ -208,6 +225,17 @@ export const ${camel}DefaultConfig: DeepPartialThemeConfig = {
     },
     surface: {
 ${surfaceEntries.join("\n")}
+    },
+    semantic: {
+      success: '#10b981',
+      warning: '#f59e0b',
+      error:   '#ef4444',
+      info:    '#3b82f6',
+    },
+    overlay: {
+      dark:    'rgba(0,0,0,0.8)',
+      light:   'rgba(255,255,255,0.8)',
+      primary: '${overlayPrimary}',
     },
   },
   typography: {
