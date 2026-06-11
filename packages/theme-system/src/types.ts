@@ -308,7 +308,6 @@ export const THEME_NAMES = [
   "pegasus",
   "rigel",
   "tucana",
-  "lyra",
 ] as const;
 export type ThemeName = (typeof THEME_NAMES)[number];
 

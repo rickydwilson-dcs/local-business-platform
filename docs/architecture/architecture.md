@@ -36,7 +36,7 @@ local-business-platform/
 │   ├── core-components/            # Shared UI components (@platform/core-components)
 │   ├── component-composition/      # Config-driven page composition engine
 │   ├── theme-system/               # Theming engine (@platform/theme-system)
-│   ├── themes/                     # Named theme packages (cygnus, lyra, orion, solaris, vega)
+│   ├── themes/                     # Named theme packages (cygnus, orion, solaris, vega)
 │   ├── playwright-shared/          # Cross-site smoke suite for the regression watchdog
 │   └── intake-system/              # Customer intake automation (@platform/intake-system)
 ├── tools/                          # Site creation & deployment CLI tools
