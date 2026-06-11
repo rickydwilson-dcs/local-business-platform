@@ -1,57 +1,58 @@
 # Lyra Theme
 
 **Reference site:** https://www.fountaindigital.co.uk/
-**Analysis date:** 2026-04-25T05:33:40.645Z
+**Analysis date:** 2026-04-27T06:23:40.913Z
 **Analysis version:** 3
 
 ## Registry
 
 - Theme: vega
 - Confidence: high
-- Reasoning: The site consistently uses a light white header with no dark background, a two-column split hero on the primary page, and card grids for services and case studies — all hallmarks of the vega pattern. The header is light across all pages, the hero is split rather than full-bleed dark, and the layout relies on card grids rather than circular icon arrangements. The dark navy is reserved for the footer and CTA banners only, not the header or hero, ruling out orion.
+- Reasoning: The site consistently uses a light header on a white or near-white background, a split hero layout on the homepage with text left and media right, and a card grid for services and case studies — all hallmarks of the vega pattern. The header is never dark; navigation is always light with a branded CTA button. The primary colour is a strong blue (#2563eb) with a spacious layout density and extrabold sans headings, which aligns well with vega's light-header, split-hero, card-grid archetype.
 
 ## Components
 
 | Component                   | Category     | File                                            |
 | --------------------------- | ------------ | ----------------------------------------------- |
 | AnnouncementBar             | Navigation   | components/announcement-bar.tsx                 |
-| SiteHeader                  | Navigation   | components/site-header.tsx                      |
+| PrimaryNavigation           | Navigation   | components/primary-navigation.tsx               |
 | HeroSplit                   | Hero         | components/hero-split.tsx                       |
-| HeroCentered                | Hero         | components/hero-centered.tsx                    |
+| CenteredPageHero            | Hero         | components/centered-page-hero.tsx               |
 | ClientLogoStrip             | Social Proof | components/client-logo-strip.tsx                |
-| ClientLogoCarousel          | Social Proof | components/client-logo-carousel.tsx             |
-| TestimonialsStrip           | Social Proof | components/testimonials-strip.tsx               |
+| TeamAvatarRow               | Social Proof | components/team-avatar-row.tsx                  |
+| CustomerCountBanner         | Social Proof | components/customer-count-banner.tsx            |
+| TestimonialsGrid            | Social Proof | components/testimonials-grid.tsx                |
 | ServicesGrid                | Cards        | components/services-grid.tsx                    |
-| CaseStudiesGrid             | Cards        | components/case-studies-grid.tsx                |
-| MidPageCTABanner            | CTA          | components/mid-page-cta-banner.tsx              |
-| HelpCTABanner               | CTA          | components/help-cta-banner.tsx                  |
-| CustomerCountBanner         | Stats        | components/customer-count-banner.tsx            |
-| FAQSection                  | Content      | components/faq-section.tsx                      |
+| FilteredCardsGrid           | Cards        | components/filtered-cards-grid.tsx              |
 | FeaturedBlogPost            | Blog         | components/featured-blog-post.tsx               |
-| BlogArticleGrid             | Blog         | components/blog-article-grid.tsx                |
+| GradientDividerBand         | CTA          | components/gradient-divider-band.tsx            |
+| HelpCTABanner               | CTA          | components/help-cta-banner.tsx                  |
+| FAQAccordion                | Content      | components/faq-accordion.tsx                    |
+| ContactInformation          | Content      | components/contact-information.tsx              |
 | ContactFormPanel            | Custom       | components/contact-form-panel.tsx               |
 | LogoDesignQuestionnaireForm | Custom       | components/logo-design-questionnaire-form.tsx   |
 | SiteFooter                  | Footer       | components/site-footer.tsx                      |
-| SiteHeader                  | Navigation   | components/navigation-sticky-top.tsx            |
-| HeroSplit                   | Hero         | components/hero-split-animated.tsx              |
-| MidPageCTABanner            | CTA          | components/cta-full-bleed-gradient.tsx          |
-| SupportCTABanner            | CTA          | components/cta-dark-support-banner.tsx          |
 | AnnouncementBar             | Navigation   | components/navigation-top-bar-announcement.tsx  |
 | PrimaryNavigation           | Navigation   | components/navigation-horizontal-logo-links.tsx |
-| AboutHero                   | Hero         | components/hero-split-text-image.tsx            |
-| ContentSpacer               | Content      | components/content-blank-spacer.tsx             |
-| HelpCTABanner               | CTA          | components/cta-dark-split-with-avatars.tsx      |
-| SiteFooter                  | Footer       | components/footer-multi-column-links.tsx        |
-| SiteHeader                  | Navigation   | components/navigation-top-bar.tsx               |
-| BlogHero                    | Hero         | components/hero-blog-centered.tsx               |
-| ContactHero                 | Hero         | components/hero-split-contact-intro.tsx         |
-| SupportCTABanner            | CTA          | components/cta-dark-split-support.tsx           |
+| HeroSplit                   | Hero         | components/hero-split-text-illustration.tsx     |
+| ClientLogoStrip             | Social Proof | components/social-proof-logo-strip.tsx          |
+| SupportCTABanner            | CTA          | components/cta-dark-support-banner.tsx          |
 | SiteFooter                  | Footer       | components/footer-multi-column-dark.tsx         |
-| CaseStudiesHero             | Hero         | components/hero-centered-light.tsx              |
-| EmergencyCTABanner          | CTA          | components/cta-dark-full-bleed.tsx              |
-| PrimaryNavigation           | Navigation   | components/navigation-header-logo-links.tsx     |
-| PageHero                    | Hero         | components/hero-centered-page-title.tsx         |
-| HelpCTABanner               | CTA          | components/cta-help-banner-split.tsx            |
+| TopNavigation               | Navigation   | components/navigation-top-bar.tsx               |
+| AboutHero                   | Hero         | components/hero-split-about.tsx                 |
+| TeamAvatarCarousel          | Social Proof | components/social-proof-logo-carousel.tsx       |
+| HelpCTABanner               | CTA          | components/cta-help-banner.tsx                  |
+| SiteFooter                  | Footer       | components/footer-multi-column.tsx              |
+| BlogHero                    | Hero         | components/hero-centered-blog-intro.tsx         |
+| BlogArticleGrid             | Blog         | components/blog-cards-grid-filtered.tsx         |
+| HelpCTABanner               | CTA          | components/cta-help-banner-dark.tsx             |
+| ContactHero                 | Hero         | components/hero-split-contact-intro.tsx         |
+| ContactFormPanel            | Custom       | components/custom-contact-form-split.tsx        |
+| ContactInformation          | Content      | components/content-contact-information-list.tsx |
+| EmergencyHelpCTA            | CTA          | components/cta-dark-split-emergency-help.tsx    |
+| WebsiteHelpCTA              | CTA          | components/cta-dark-banner.tsx                  |
+| LogoDesignQuestionnaireForm | Custom       | components/custom-multi-step-form.tsx           |
+| HelpCTABanner               | CTA          | components/cta-split-illustration.tsx           |
 | Navigation                  | Navigation   | components/navigation.tsx                       |
 
 ## Wiring into a Site

@@ -1,5 +1,3 @@
-"use client";
-
 /**
  * BlogArticleGrid
  *
@@ -7,10 +5,7 @@
  * Layout: Category filter tabs row above a 3-column card grid with pagination below
  * Category: Blog
  */
-
-import { useState } from "react";
 import { RevealOnScroll } from "@platform/core-components/components/animation";
-
 export interface BlogArticleGridProps {
   /** section-heading */
   sectionHeading?: string;
@@ -33,7 +28,6 @@ export interface BlogArticleGridProps {
     [key: string]: string | undefined;
   }>;
 }
-
 export function BlogArticleGrid(props: BlogArticleGridProps) {
   return (
     <section className="bg-surface-background py-16 px-4">

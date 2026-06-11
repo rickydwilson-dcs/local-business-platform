@@ -1,5 +1,3 @@
-"use client";
-
 /**
  * HeroCentered
  *
@@ -7,10 +5,7 @@
  * Layout: Centered text block with eyebrow label above heading and descriptor subheading below
  * Category: Hero
  */
-
-import { useState } from "react";
 import { RevealOnScroll } from "@platform/core-components/components/animation";
-
 export interface HeroCenteredProps {
   /** eyebrow-label */
   eyebrowLabel?: string;
@@ -19,7 +14,6 @@ export interface HeroCenteredProps {
   /** subheading */
   subheading?: string;
 }
-
 export function HeroCentered(props: HeroCenteredProps) {
   return (
     <section className="bg-surface-background py-20 px-4">

@@ -7,31 +7,31 @@
 import type { ReactNode } from "react";
 
 import { AnnouncementBar } from "./components/announcement-bar";
+import { PrimaryNavigation } from "./components/primary-navigation";
 import { HeroSplit } from "./components/hero-split";
-import { HeroCentered } from "./components/hero-centered";
+import { CenteredPageHero } from "./components/centered-page-hero";
 import { ClientLogoStrip } from "./components/client-logo-strip";
-import { ClientLogoCarousel } from "./components/client-logo-carousel";
-import { TestimonialsStrip } from "./components/testimonials-strip";
-import { ServicesGrid } from "./components/services-grid";
-import { CaseStudiesGrid } from "./components/case-studies-grid";
-import { MidPageCTABanner } from "./components/mid-page-cta-banner";
-import { HelpCTABanner } from "./components/help-cta-banner";
+import { TeamAvatarRow } from "./components/team-avatar-row";
 import { CustomerCountBanner } from "./components/customer-count-banner";
-import { FAQSection } from "./components/faq-section";
+import { TestimonialsGrid } from "./components/testimonials-grid";
+import { ServicesGrid } from "./components/services-grid";
+import { FilteredCardsGrid } from "./components/filtered-cards-grid";
 import { FeaturedBlogPost } from "./components/featured-blog-post";
-import { BlogArticleGrid } from "./components/blog-article-grid";
+import { GradientDividerBand } from "./components/gradient-divider-band";
+import { HelpCTABanner } from "./components/help-cta-banner";
+import { FAQAccordion } from "./components/faq-accordion";
+import { ContactInformation } from "./components/contact-information";
 import { ContactFormPanel } from "./components/contact-form-panel";
 import { LogoDesignQuestionnaireForm } from "./components/logo-design-questionnaire-form";
 import { SiteFooter } from "./components/site-footer";
 import { SupportCTABanner } from "./components/cta-dark-support-banner";
-import { PrimaryNavigation } from "./components/navigation-horizontal-logo-links";
-import { AboutHero } from "./components/hero-split-text-image";
-import { ContentSpacer } from "./components/content-blank-spacer";
-import { BlogHero } from "./components/hero-blog-centered";
+import { TopNavigation } from "./components/navigation-top-bar";
+import { AboutHero } from "./components/hero-split-about";
+import { TeamAvatarCarousel } from "./components/social-proof-logo-carousel";
+import { BlogArticleGrid } from "./components/blog-cards-grid-filtered";
 import { ContactHero } from "./components/hero-split-contact-intro";
-import { CaseStudiesHero } from "./components/hero-centered-light";
-import { EmergencyCTABanner } from "./components/cta-dark-full-bleed";
-import { Navigation } from "./components/navigation";
+import { EmergencyHelpCTA } from "./components/cta-dark-split-emergency-help";
+import { WebsiteHelpCTA } from "./components/cta-dark-banner";
 
 export interface ShowcaseElementEntry {
   slug: string;
@@ -47,30 +47,38 @@ export const lyraElements: ShowcaseElementEntry[] = [
     slug: "navigation-announcement-bar",
     name: "AnnouncementBar",
     category: "Navigation",
-    description: "Top-of-page promotional announcement strip with centered text and a CTA link",
+    description: "Top-of-page announcement strip promoting the award-winning team with a CTA link",
     themeName: "lyra",
     render: () => <AnnouncementBar />,
   },
   {
-    slug: "hero-split",
+    slug: "navigation-primary-header",
+    name: "PrimaryNavigation",
+    category: "Navigation",
+    description: "Main site navigation with logo, nav links, search icon and contact CTA button",
+    themeName: "lyra",
+    render: () => <PrimaryNavigation />,
+  },
+  {
+    slug: "hero-split-text-media",
     name: "HeroSplit",
     category: "Hero",
     description:
-      "Primary two-column hero with headline, subtext, CTA buttons on the left and a supporting image or illustration on the right",
+      "Primary hero section introducing the page with headline, body text, CTAs and a right-side media element (illustration or image)",
     themeName: "lyra",
     render: () => <HeroSplit />,
   },
   {
-    slug: "hero-centered",
-    name: "HeroCentered",
+    slug: "hero-centered-light",
+    name: "CenteredPageHero",
     category: "Hero",
     description:
-      "Centered page-header hero introducing a section with an eyebrow label, large heading and subheading",
+      "Centered page header introducing an interior page with eyebrow label, large heading and subheading",
     themeName: "lyra",
-    render: () => <HeroCentered />,
+    render: () => <CenteredPageHero />,
   },
   {
-    slug: "social-proof-logo-strip",
+    slug: "social-proof-client-logo-strip",
     name: "ClientLogoStrip",
     category: "Social Proof",
     description:
@@ -79,117 +87,119 @@ export const lyraElements: ShowcaseElementEntry[] = [
     render: () => <ClientLogoStrip />,
   },
   {
-    slug: "social-proof-logo-carousel",
-    name: "ClientLogoCarousel",
+    slug: "social-proof-team-avatar-row",
+    name: "TeamAvatarRow",
     category: "Social Proof",
     description:
-      "Displays client or partner logos in a horizontal scrolling carousel to build trust",
+      "Displays circular avatar indicators for team members or clients in a horizontal row",
     themeName: "lyra",
-    render: () => <ClientLogoCarousel />,
+    render: () => <TeamAvatarRow />,
   },
   {
-    slug: "social-proof-testimonials-strip",
-    name: "TestimonialsStrip",
+    slug: "social-proof-customer-count",
+    name: "CustomerCountBanner",
     category: "Social Proof",
     description:
-      "Displays customer testimonials with star ratings and reviewer names in a horizontal grid",
+      "Highlights the number of satisfied customers to build trust, with a link to more reviews",
     themeName: "lyra",
-    render: () => <TestimonialsStrip />,
+    render: () => <CustomerCountBanner />,
+  },
+  {
+    slug: "social-proof-testimonials-grid",
+    name: "TestimonialsGrid",
+    category: "Social Proof",
+    description:
+      "Displays customer testimonials with star ratings and reviewer names to build trust",
+    themeName: "lyra",
+    render: () => <TestimonialsGrid />,
   },
   {
     slug: "cards-services-grid",
     name: "ServicesGrid",
     category: "Cards",
     description:
-      "Showcases core services with icon, title, description and arrow link in a card grid",
+      "Showcases the agency's core service offerings in a grid of icon cards with descriptions and arrow links",
     themeName: "lyra",
     render: () => <ServicesGrid />,
   },
   {
-    slug: "cards-filter-grid",
-    name: "CaseStudiesGrid",
+    slug: "cards-filtered-grid",
+    name: "FilteredCardsGrid",
     category: "Cards",
-    description: "Filterable grid of case study cards with image, title, description and author",
+    description:
+      "Filterable grid of cards (case studies or blog articles) with category filter tabs, card image, tags, title, description, author and pagination",
     themeName: "lyra",
-    render: () => <CaseStudiesGrid />,
+    render: () => <FilteredCardsGrid />,
   },
   {
-    slug: "cta-mid-page-gradient",
-    name: "MidPageCTABanner",
-    category: "CTA",
-    description: "Full-width decorative gradient band acting as a visual break and implicit CTA",
+    slug: "blog-featured-post-split",
+    name: "FeaturedBlogPost",
+    category: "Blog",
+    description:
+      "Highlights the latest or featured blog post with image, tags, title, excerpt and author",
     themeName: "lyra",
-    render: () => <MidPageCTABanner />,
+    render: () => <FeaturedBlogPost />,
+  },
+  {
+    slug: "cta-full-bleed-gradient",
+    name: "GradientDividerBand",
+    category: "CTA",
+    description:
+      "Full-width decorative gradient wave band acting as a visual break between content sections",
+    themeName: "lyra",
+    render: () => <GradientDividerBand />,
   },
   {
     slug: "cta-dark-help-banner",
     name: "HelpCTABanner",
     category: "CTA",
     description:
-      "Dark full-width banner encouraging users to contact the team if they have website issues, with a CTA button and illustrated team avatars",
+      "Encourages visitors who have website problems to contact the agency for help, with supporting illustration of avatars",
     themeName: "lyra",
     render: () => <HelpCTABanner />,
   },
   {
-    slug: "stats-customer-count",
-    name: "CustomerCountBanner",
-    category: "Stats",
-    description:
-      "Highlights the number of satisfied customers to build social proof with a reviews CTA",
-    themeName: "lyra",
-    render: () => <CustomerCountBanner />,
-  },
-  {
-    slug: "content-faq-two-column",
-    name: "FAQSection",
+    slug: "content-faq-accordion",
+    name: "FAQAccordion",
     category: "Content",
     description:
-      "Answers common customer questions via an accordion and links to support resources",
+      "Answers common customer questions using an accordion layout with links to full FAQ and support centre",
     themeName: "lyra",
-    render: () => <FAQSection />,
+    render: () => <FAQAccordion />,
   },
   {
-    slug: "blog-featured-split",
-    name: "FeaturedBlogPost",
-    category: "Blog",
+    slug: "content-contact-information",
+    name: "ContactInformation",
+    category: "Content",
     description:
-      "Highlights the latest or featured blog post with image, category tags, title, excerpt and author",
+      "Displays physical address, opening hours, phone number, support centre link and additional contact resource links",
     themeName: "lyra",
-    render: () => <FeaturedBlogPost />,
+    render: () => <ContactInformation />,
   },
   {
-    slug: "blog-grid-filtered",
-    name: "BlogArticleGrid",
-    category: "Blog",
-    description:
-      "Displays a filterable grid of blog article cards with category filter tabs and pagination",
-    themeName: "lyra",
-    render: () => <BlogArticleGrid />,
-  },
-  {
-    slug: "custom-contact-form-panel",
+    slug: "custom-contact-form",
     name: "ContactFormPanel",
     category: "Custom",
     description:
-      "Multi-field contact form allowing users to submit enquiries with optional file attachments",
+      "Primary contact form allowing users to submit name, company, email, phone, service selection, additional info and file attachments",
     themeName: "lyra",
     render: () => <ContactFormPanel />,
   },
   {
-    slug: "custom-form-logo-questionnaire",
+    slug: "custom-logo-questionnaire-form",
     name: "LogoDesignQuestionnaireForm",
     category: "Custom",
     description:
-      "Multi-field form collecting client information for a logo design brief including business details, target audience, style preferences, colour preferences, visual examples and signature",
+      "Multi-field questionnaire form collecting business info, design preferences, target audience, logo style, colour preferences and signature for a logo design brief",
     themeName: "lyra",
     render: () => <LogoDesignQuestionnaireForm />,
   },
   {
-    slug: "footer-multi-column",
+    slug: "footer-site-footer",
     name: "SiteFooter",
     category: "Footer",
     description:
-      "Site-wide footer with contact details, company links, quick links, legal info, partner certification logos and social media icons",
+      "Full site footer with contact details, company links, quick links, legal links, company registration, certifications, partner logos and social icons",
     themeName: "lyra",
     render: () => <SiteFooter />,
   },
@@ -197,74 +207,69 @@ export const lyraElements: ShowcaseElementEntry[] = [
     slug: "cta-dark-support-banner",
     name: "SupportCTABanner",
     category: "CTA",
-    description: "Encourages users who have broken their website to contact the team for help",
+    description: "Encourages users who have broken their website to contact the agency for help",
     themeName: "lyra",
     render: () => <SupportCTABanner />,
   },
   {
-    slug: "navigation-horizontal-logo-links",
-    name: "PrimaryNavigation",
+    slug: "navigation-top-bar",
+    name: "TopNavigation",
     category: "Navigation",
-    description: "Main site navigation with logo, nav links, search and contact CTA",
+    description: "Primary site navigation with logo, nav links, search and contact CTA",
     themeName: "lyra",
-    render: () => <PrimaryNavigation />,
+    render: () => <TopNavigation />,
   },
   {
-    slug: "hero-split-text-image",
+    slug: "hero-split-about",
     name: "AboutHero",
     category: "Hero",
     description:
-      "Introduces the About Us page with headline, subtext, CTA button and a supporting image of portfolio/books on shelves",
+      "Introduces the About Us page with headline, tagline, CTA button and a bookshelf image",
     themeName: "lyra",
     render: () => <AboutHero />,
   },
   {
-    slug: "content-blank-spacer",
-    name: "ContentSpacer",
-    category: "Content",
+    slug: "social-proof-logo-carousel",
+    name: "TeamAvatarCarousel",
+    category: "Social Proof",
     description:
-      "Large white space section likely intended for team bios, values or additional about content that is not rendering in the screenshot",
+      "Displays circular avatar/profile indicators, likely team members or client logos in a horizontal row",
     themeName: "lyra",
-    render: () => <ContentSpacer />,
+    render: () => <TeamAvatarCarousel />,
   },
   {
-    slug: "hero-blog-centered",
-    name: "BlogHero",
-    category: "Hero",
-    description: "Introduces the blog section with a headline and subheading",
+    slug: "blog-cards-grid-filtered",
+    name: "BlogArticleGrid",
+    category: "Blog",
+    description:
+      "Displays a filterable grid of blog article cards with category filters, pagination",
     themeName: "lyra",
-    render: () => <BlogHero />,
+    render: () => <BlogArticleGrid />,
   },
   {
     slug: "hero-split-contact-intro",
     name: "ContactHero",
     category: "Hero",
-    description: "Left-side heading and contact information panel introducing the contact page",
+    description:
+      "Introduces the contact page with a headline and subtext encouraging visitors to get in touch",
     themeName: "lyra",
     render: () => <ContactHero />,
   },
   {
-    slug: "hero-centered-light",
-    name: "CaseStudiesHero",
-    category: "Hero",
-    description: "Page header introducing the case studies section with headline and subtext",
-    themeName: "lyra",
-    render: () => <CaseStudiesHero />,
-  },
-  {
-    slug: "cta-dark-full-bleed",
-    name: "EmergencyCTABanner",
+    slug: "cta-dark-split-emergency-help",
+    name: "EmergencyHelpCTA",
     category: "CTA",
-    description: "Dark bottom CTA encouraging users to contact for website help",
+    description:
+      "Reassurance section for users who have broken their website, encouraging them to contact Fountain Digital for help",
     themeName: "lyra",
-    render: () => <EmergencyCTABanner />,
+    render: () => <EmergencyHelpCTA />,
   },
   {
-    slug: "navigation",
-    name: "Navigation",
-    category: "Navigation",
-    description: "Navigation section",
+    slug: "cta-dark-banner",
+    name: "WebsiteHelpCTA",
+    category: "CTA",
+    description: "Bottom-of-page CTA encouraging users to get help with their website",
     themeName: "lyra",
-    render: () => <Navigation />,
+    render: () => <WebsiteHelpCTA />,
   },
 ];

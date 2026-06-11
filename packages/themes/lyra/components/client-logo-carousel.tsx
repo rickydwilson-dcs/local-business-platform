@@ -1,5 +1,3 @@
-"use client";
-
 /**
  * ClientLogoCarousel
  *
@@ -7,9 +5,6 @@
  * Layout: Full-width horizontal row of circular logo placeholders with auto-scroll behaviour
  * Category: Social Proof
  */
-
-import { useState } from "react";
-
 export interface ClientLogoCarouselProps {
   /** logo-items */
   logoItems?: Array<{
@@ -21,7 +16,6 @@ export interface ClientLogoCarouselProps {
     [key: string]: string | undefined;
   }>;
 }
-
 export function ClientLogoCarousel(props: ClientLogoCarouselProps) {
   return (
     <section className="py-16 px-4">

@@ -1,5 +1,3 @@
-"use client";
-
 /**
  * EmergencyCTABanner
  *
@@ -7,10 +5,7 @@
  * Layout: Full-width dark background with heading, body text and CTA button left-aligned
  * Category: CTA
  */
-
-import { useState } from "react";
 import { RevealOnScroll } from "@platform/core-components/components/animation";
-
 export interface EmergencyCTABannerProps {
   /** heading */
   heading?: string;
@@ -19,7 +14,6 @@ export interface EmergencyCTABannerProps {
   /** cta-button */
   ctaButton?: { label?: string; href?: string };
 }
-
 export function EmergencyCTABanner(props: EmergencyCTABannerProps) {
   return (
     <section className="w-full bg-surface-inverse py-16 px-4">

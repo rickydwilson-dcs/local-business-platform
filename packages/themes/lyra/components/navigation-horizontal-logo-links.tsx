@@ -1,15 +1,10 @@
-"use client";
-
 /**
  * PrimaryNavigation
  *
- * Main site navigation with logo, nav links, search and contact CTA
- * Layout: Horizontal bar: logo left, nav links center, search icon and contact button right
+ * Main site navigation with logo, nav links, search icon and contact CTA button
+ * Layout: Horizontal bar: logo left, nav links center, search + button right
  * Category: Navigation
  */
-
-import { useState } from "react";
-
 export interface PrimaryNavigationProps {
   /** logo */
   logo?: string;
@@ -24,30 +19,35 @@ export interface PrimaryNavigationProps {
   }>;
   /** search-icon */
   searchIcon?: string;
-  /** contact-button */
-  contactButton?: { label?: string; href?: string };
+  /** contact-cta-button */
+  contactCtaButton?: { label?: string; href?: string };
 }
-
 export function PrimaryNavigation(props: PrimaryNavigationProps) {
   return (
-    <nav className="bg-surface-background border-b border-surface-muted sticky top-0 z-50">
+    <nav className="bg-surface-background shadow-sm border-b border-surface-muted sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 md:h-20">
+        <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <span className="text-brand-primary font-bold text-xl md:text-2xl">
-              {props.logo ?? "Logo"}
-            </span>
+            {props.logo ? (
+              <a href="/" aria-label="Go to homepage">
+                <img src={props.logo} alt="Site logo" className="h-8 w-auto" />
+              </a>
+            ) : (
+              <a href="/" className="text-brand-primary font-bold text-xl">
+                {"Brand"}
+              </a>
+            )}
           </div>
 
-          {/* Nav Links — center, hidden on mobile */}
+          {/* Nav Links - Center */}
           <div className="hidden md:flex items-center gap-6 lg:gap-8">
-            {props.navLinks && Array.isArray(props.navLinks) ? (
+            {props.navLinks && props.navLinks.length > 0 ? (
               props.navLinks.map((link, index) => (
                 <a
                   key={index}
                   href={link?.href ?? "#"}
-                  className="text-surface-foreground hover:text-brand-primary text-sm lg:text-base font-medium transition-colors duration-200"
+                  className="text-surface-foreground hover:text-brand-primary text-sm font-medium transition-colors duration-200"
                 >
                   {link?.label}
                 </a>
@@ -56,25 +56,25 @@ export function PrimaryNavigation(props: PrimaryNavigationProps) {
               <>
                 <a
                   href="#"
-                  className="text-surface-foreground hover:text-brand-primary text-sm lg:text-base font-medium transition-colors duration-200"
+                  className="text-surface-foreground hover:text-brand-primary text-sm font-medium transition-colors duration-200"
                 >
                   Home
                 </a>
                 <a
                   href="#"
-                  className="text-surface-foreground hover:text-brand-primary text-sm lg:text-base font-medium transition-colors duration-200"
+                  className="text-surface-foreground hover:text-brand-primary text-sm font-medium transition-colors duration-200"
                 >
                   About
                 </a>
                 <a
                   href="#"
-                  className="text-surface-foreground hover:text-brand-primary text-sm lg:text-base font-medium transition-colors duration-200"
+                  className="text-surface-foreground hover:text-brand-primary text-sm font-medium transition-colors duration-200"
                 >
                   Services
                 </a>
                 <a
                   href="#"
-                  className="text-surface-foreground hover:text-brand-primary text-sm lg:text-base font-medium transition-colors duration-200"
+                  className="text-surface-foreground hover:text-brand-primary text-sm font-medium transition-colors duration-200"
                 >
                   Blog
                 </a>
@@ -82,19 +82,19 @@ export function PrimaryNavigation(props: PrimaryNavigationProps) {
             )}
           </div>
 
-          {/* Right side: Search + Contact CTA */}
-          <div className="flex items-center gap-3 md:gap-4">
+          {/* Right: Search Icon + CTA Button */}
+          <div className="flex items-center gap-3 lg:gap-4">
             {/* Search Icon */}
             <button
-              aria-label="Search"
-              className="text-surface-foreground hover:text-brand-primary transition-colors duration-200 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-primary"
+              aria-label="Open search"
+              className="text-surface-muted-foreground hover:text-brand-primary transition-colors duration-200 p-1.5 rounded-md"
             >
               {props.searchIcon ? (
-                <img src={props.searchIcon} alt="Search" className="w-5 h-5" />
+                <span>{props.searchIcon}</span>
               ) : (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="w-5 h-5"
+                  className="h-5 w-5"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -112,20 +112,20 @@ export function PrimaryNavigation(props: PrimaryNavigationProps) {
 
             {/* Contact CTA Button */}
             <a
-              href={props.contactButton?.href ?? "#contact"}
-              className="hidden md:inline-flex items-center justify-center bg-brand-primary text-on-brand-primary text-sm lg:text-base font-semibold px-4 py-2 lg:px-6 lg:py-2.5 rounded-md hover:opacity-90 transition-opacity duration-200 focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2"
+              href={props.contactCtaButton?.href ?? "#contact"}
+              className="hidden md:inline-flex items-center justify-center bg-brand-primary text-on-brand-primary text-sm font-semibold px-4 py-2 rounded-md hover:opacity-90 transition-opacity duration-200 whitespace-nowrap"
             >
-              {props.contactButton?.label ?? "Contact Us"}
+              {props.contactCtaButton?.label ?? "Contact Us"}
             </a>
 
-            {/* Mobile menu button */}
+            {/* Mobile Menu Toggle */}
             <button
-              aria-label="Open menu"
-              className="md:hidden text-surface-foreground hover:text-brand-primary transition-colors duration-200 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-primary"
+              aria-label="Open mobile menu"
+              className="md:hidden text-surface-muted-foreground hover:text-brand-primary transition-colors duration-200 p-1.5 rounded-md"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="w-6 h-6"
+                className="h-6 w-6"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -140,12 +140,12 @@ export function PrimaryNavigation(props: PrimaryNavigationProps) {
 
         {/* Mobile Nav Links */}
         <div className="md:hidden border-t border-surface-muted py-3 flex flex-col gap-2">
-          {props.navLinks && Array.isArray(props.navLinks) ? (
+          {props.navLinks && props.navLinks.length > 0 ? (
             props.navLinks.map((link, index) => (
               <a
                 key={index}
                 href={link?.href ?? "#"}
-                className="text-surface-foreground hover:text-brand-primary text-base font-medium px-2 py-1.5 rounded-md transition-colors duration-200"
+                className="text-surface-foreground hover:text-brand-primary text-sm font-medium px-2 py-1.5 rounded-md hover:bg-surface-muted transition-colors duration-200"
               >
                 {link?.label}
               </a>
@@ -154,35 +154,35 @@ export function PrimaryNavigation(props: PrimaryNavigationProps) {
             <>
               <a
                 href="#"
-                className="text-surface-foreground hover:text-brand-primary text-base font-medium px-2 py-1.5 rounded-md transition-colors duration-200"
+                className="text-surface-foreground hover:text-brand-primary text-sm font-medium px-2 py-1.5 rounded-md hover:bg-surface-muted transition-colors duration-200"
               >
                 Home
               </a>
               <a
                 href="#"
-                className="text-surface-foreground hover:text-brand-primary text-base font-medium px-2 py-1.5 rounded-md transition-colors duration-200"
+                className="text-surface-foreground hover:text-brand-primary text-sm font-medium px-2 py-1.5 rounded-md hover:bg-surface-muted transition-colors duration-200"
               >
                 About
               </a>
               <a
                 href="#"
-                className="text-surface-foreground hover:text-brand-primary text-base font-medium px-2 py-1.5 rounded-md transition-colors duration-200"
+                className="text-surface-foreground hover:text-brand-primary text-sm font-medium px-2 py-1.5 rounded-md hover:bg-surface-muted transition-colors duration-200"
               >
                 Services
               </a>
               <a
                 href="#"
-                className="text-surface-foreground hover:text-brand-primary text-base font-medium px-2 py-1.5 rounded-md transition-colors duration-200"
+                className="text-surface-foreground hover:text-brand-primary text-sm font-medium px-2 py-1.5 rounded-md hover:bg-surface-muted transition-colors duration-200"
               >
                 Blog
               </a>
             </>
           )}
           <a
-            href={props.contactButton?.href ?? "#contact"}
-            className="mt-2 inline-flex items-center justify-center bg-brand-primary text-on-brand-primary text-base font-semibold px-4 py-2 rounded-md hover:opacity-90 transition-opacity duration-200"
+            href={props.contactCtaButton?.href ?? "#contact"}
+            className="mt-1 inline-flex items-center justify-center bg-brand-primary text-on-brand-primary text-sm font-semibold px-4 py-2 rounded-md hover:opacity-90 transition-opacity duration-200"
           >
-            {props.contactButton?.label ?? "Contact Us"}
+            {props.contactCtaButton?.label ?? "Contact Us"}
           </a>
         </div>
       </div>

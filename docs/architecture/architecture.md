@@ -25,21 +25,18 @@ For detailed explanations of how each system works, see:
 ```
 local-business-platform/
 ├── sites/                          # Client websites
-│   ├── base-template/              # Gold-standard template for new sites
-│   ├── colossus-scaffolding/       # Reference implementation (scaffolding)
+│   ├── base-template/              # Gold-standard template for new sites (self-contained)
+│   ├── colossus-scaffolding/       # Reference implementation (scaffolding, vega theme)
 │   ├── dcs/                        # Digital Consulting Services (self-contained)
-│   ├── dj-fox-electrical/          # Production site (electrical, composition-based)
+│   ├── dj-fox-electrical/          # Production site (electrical, orion theme)
 │   ├── mad-graphics/               # Production site (vehicle graphics & print, self-contained)
 │   ├── showcase/                   # Internal component/theme showcase
-│   ├── poc-composition-test/       # Composition system PoC + UI library (/ui-library route)
-│   ├── designlab-test/             # Pipeline test site (designlab theme)
-│   ├── navagarden-test/            # Pipeline test site (navagarden theme)
 │   └── [theme-name]-test/          # Temporary test sites (created by pipeline, removed after review)
 ├── packages/
 │   ├── core-components/            # Shared UI components (@platform/core-components)
 │   ├── component-composition/      # Config-driven page composition engine
 │   ├── theme-system/               # Theming engine (@platform/theme-system)
-│   ├── themes/                     # Named theme CSS packages (cygnus, designlab, navagarden, orion, solaris, vega)
+│   ├── themes/                     # Named theme packages (cygnus, lyra, orion, solaris, vega)
 │   ├── playwright-shared/          # Cross-site smoke suite for the regression watchdog
 │   └── intake-system/              # Customer intake automation (@platform/intake-system)
 ├── tools/                          # Site creation & deployment CLI tools

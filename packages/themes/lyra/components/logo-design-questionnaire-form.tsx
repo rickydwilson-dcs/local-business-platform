@@ -1,52 +1,45 @@
-"use client";
-
 /**
  * LogoDesignQuestionnaireForm
  *
- * Multi-field form collecting client information for a logo design brief including business details, target audience, style preferences, colour preferences, visual examples and signature
- * Layout: Single-column card container with two-column field rows, checkboxes, file upload, visual style selector with example images and signature area
+ * Multi-field questionnaire form collecting business info, design preferences, target audience, logo style, colour preferences and signature for a logo design brief
+ * Layout: Single-column card container with two-column field rows, checkboxes, file upload, visual style selector with logo type examples and signature field
  * Category: Custom
  */
-
-import { useState } from "react";
-
 export interface LogoDesignQuestionnaireFormProps {
-  /** first-name-field */
-  firstNameField?: string;
-  /** last-name-field */
-  lastNameField?: string;
-  /** business-name-field */
-  businessNameField?: string;
-  /** email-field */
-  emailField?: string;
-  /** describe-services-textarea */
-  describeServicesTextarea?: string;
-  /** logo-goals-textarea */
-  logoGoalsTextarea?: string;
-  /** main-competitors-textarea */
-  mainCompetitorsTextarea?: string;
-  /** differentiation-textarea */
-  differentiationTextarea?: string;
+  /** name-fields */
+  nameFields?: string;
+  /** business-name */
+  businessName?: string;
+  /** email */
+  email?: string;
+  /** service-description */
+  serviceDescription?: string;
+  /** logo-goals */
+  logoGoals?: string;
+  /** competitors */
+  competitors?: string;
+  /** differentiators */
+  differentiators?: string;
   /** age-range-checkboxes */
   ageRangeCheckboxes?: string;
   /** tagline-field */
   taglineField?: string;
-  /** imagery-textarea */
-  imageryTextarea?: { src?: string; alt?: string };
+  /** imagery-field */
+  imageryField?: { src?: string; alt?: string };
   /** logo-usage-checkboxes */
   logoUsageCheckboxes?: string;
-  /** colour-preferences-textarea */
-  colourPreferencesTextarea?: string;
-  /** colours-to-avoid-textarea */
-  coloursToAvoidTextarea?: string;
-  /** feeling-message-textarea */
-  feelingMessageTextarea?: string;
-  /** logos-appeal-textarea */
-  logosAppealTextarea?: string;
+  /** colour-preferences */
+  colourPreferences?: string;
+  /** colours-to-avoid */
+  coloursToAvoid?: string;
+  /** feeling-message */
+  feelingMessage?: string;
+  /** logo-appeal */
+  logoAppeal?: string;
   /** visual-examples-upload */
   visualExamplesUpload?: string;
-  /** visual-style-checkboxes */
-  visualStyleCheckboxes?: string;
+  /** visual-style-selector */
+  visualStyleSelector?: string;
   /** wordmark-examples */
   wordmarkExamples?: string;
   /** lettermark-examples */
@@ -57,14 +50,13 @@ export interface LogoDesignQuestionnaireFormProps {
   combinationMarkExamples?: string;
   /** emblem-examples */
   emblemExamples?: string;
-  /** signature-area */
-  signatureArea?: string;
+  /** signature-field */
+  signatureField?: string;
+  /** ip-infringement-checkbox */
+  ipInfringementCheckbox?: string;
   /** submit-button */
   submitButton?: { label?: string; href?: string };
-  /** reset-button */
-  resetButton?: { label?: string; href?: string };
 }
-
 export function LogoDesignQuestionnaireForm(props: LogoDesignQuestionnaireFormProps) {
   return (
     <section className="py-16 px-4">
@@ -74,9 +66,8 @@ export function LogoDesignQuestionnaireForm(props: LogoDesignQuestionnaireFormPr
         </p>
         <h2 className="text-h2 text-surface-foreground mb-4">LogoDesignQuestionnaireForm</h2>
         <p className="text-body text-surface-secondary-foreground">
-          Multi-field form collecting client information for a logo design brief including business
-          details, target audience, style preferences, colour preferences, visual examples and
-          signature
+          Multi-field questionnaire form collecting business info, design preferences, target
+          audience, logo style, colour preferences and signature for a logo design brief
         </p>
       </div>
     </section>

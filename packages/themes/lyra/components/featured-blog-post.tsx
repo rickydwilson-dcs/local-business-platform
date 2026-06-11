@@ -1,21 +1,16 @@
-"use client";
-
 /**
  * FeaturedBlogPost
  *
- * Highlights the latest or featured blog post with image, category tags, title, excerpt and author
- * Layout: Two-column split: large image left, text content with tags, title, excerpt and author right
+ * Highlights the latest or featured blog post with image, tags, title, excerpt and author
+ * Layout: Two-column split: image left, text content right with category tags, title, excerpt and author avatar
  * Category: Blog
  */
-
-import { useState } from "react";
 import { RevealOnScroll } from "@platform/core-components/components/animation";
-
 export interface FeaturedBlogPostProps {
-  /** featured-image */
-  featuredImage?: { src?: string; alt?: string };
+  /** post-image */
+  postImage?: { src?: string; alt?: string };
   /** category-tags */
-  categoryTags?: string[];
+  categoryTags?: string;
   /** post-title */
   postTitle?: string;
   /** post-excerpt */
@@ -25,47 +20,41 @@ export interface FeaturedBlogPostProps {
   /** author-name */
   authorName?: string;
 }
-
 export function FeaturedBlogPost(props: FeaturedBlogPostProps) {
   return (
-    <section className="bg-surface-background py-12 md:py-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="bg-surface-background py-12 px-4 md:py-20">
+      <div className="max-w-6xl mx-auto">
         <RevealOnScroll variant="fade-up">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-center bg-surface-foreground rounded-2xl overflow-hidden shadow-sm">
+          <div className="flex flex-col md:flex-row rounded-2xl overflow-hidden shadow-lg bg-surface-foreground">
             {/* Left: Featured Image */}
-            <div className="relative w-full h-64 md:h-full min-h-[320px] lg:min-h-[480px] overflow-hidden">
-              {props.featuredImage?.src ? (
+            <div className="md:w-1/2 w-full relative">
+              {props.postImage?.src ? (
                 <img
-                  src={props.featuredImage.src}
-                  alt={props.featuredImage.alt ?? "Featured blog post image"}
-                  className="w-full h-full object-cover"
+                  src={props.postImage.src}
+                  alt={props.postImage.alt ?? "Featured blog post image"}
+                  className="w-full h-64 md:h-full object-cover"
                 />
               ) : (
-                <div className="w-full h-full bg-surface-muted flex items-center justify-center">
+                <div className="w-full h-64 md:h-full bg-surface-muted flex items-center justify-center">
                   <span className="text-surface-muted-foreground text-sm">No image available</span>
                 </div>
               )}
             </div>
 
             {/* Right: Text Content */}
-            <div className="flex flex-col justify-center px-6 py-8 md:px-8 lg:px-12 lg:py-12 gap-5">
+            <div className="md:w-1/2 w-full flex flex-col justify-center p-8 md:p-12 gap-5">
               {/* Category Tags */}
               {props.categoryTags && props.categoryTags.length > 0 && (
                 <div className="flex flex-wrap gap-2">
-                  {props.categoryTags.map((tag: string, index: number) => (
-                    <span
-                      key={index}
-                      className="inline-block bg-brand-accent text-on-brand-secondary text-xs font-semibold uppercase tracking-wide px-3 py-1 rounded-full"
-                    >
-                      {tag}
-                    </span>
-                  ))}
+                  <span className="text-xs font-semibold uppercase tracking-wide px-3 py-1 rounded-full bg-brand-accent text-on-brand-secondary">
+                    {props.categoryTags}
+                  </span>
                 </div>
               )}
 
               {/* Post Title */}
               {props.postTitle && (
-                <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-primary leading-tight">
+                <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-surface-foreground leading-tight">
                   {props.postTitle}
                 </h2>
               )}
@@ -78,37 +67,41 @@ export function FeaturedBlogPost(props: FeaturedBlogPostProps) {
               )}
 
               {/* Author */}
-              {(props.authorName || props.authorAvatar?.src) && (
-                <div className="flex items-center gap-3 pt-2 border-t border-surface-muted">
-                  {props.authorAvatar?.src && (
-                    <img
-                      src={props.authorAvatar.src}
-                      alt={props.authorAvatar.alt ?? props.authorName ?? "Author avatar"}
-                      className="w-10 h-10 rounded-full object-cover flex-shrink-0"
-                    />
-                  )}
-                  {props.authorName && (
-                    <div>
-                      <p className="text-xs text-surface-muted-foreground uppercase tracking-wide font-medium">
-                        Written by
-                      </p>
-                      <p className="text-sm font-semibold text-brand-primary">{props.authorName}</p>
-                    </div>
-                  )}
-                </div>
-              )}
+              <div className="flex items-center gap-3 mt-2">
+                {props.authorAvatar?.src ? (
+                  <img
+                    src={props.authorAvatar.src}
+                    alt={props.authorAvatar.alt ?? props.authorName ?? "Author avatar"}
+                    className="w-10 h-10 rounded-full object-cover border-2 border-brand-primary"
+                  />
+                ) : (
+                  <div className="w-10 h-10 rounded-full bg-brand-primary flex items-center justify-center">
+                    <span className="text-on-brand-primary text-sm font-bold">
+                      {props.authorName ? props.authorName.charAt(0).toUpperCase() : "A"}
+                    </span>
+                  </div>
+                )}
+                {props.authorName && (
+                  <div>
+                    <p className="text-sm font-semibold text-surface-foreground">
+                      {props.authorName}
+                    </p>
+                    <p className="text-xs text-surface-muted-foreground">Author</p>
+                  </div>
+                )}
+              </div>
 
               {/* Read More CTA */}
-              <div className="pt-2">
+              <div className="mt-2">
                 <a
                   href="#"
-                  className="inline-flex items-center gap-2 bg-brand-primary text-on-brand-primary text-sm font-semibold px-6 py-3 rounded-lg hover:opacity-90 transition-opacity duration-200"
-                  aria-label={`Read more about ${props.postTitle ?? "this post"}`}
+                  className="inline-flex items-center gap-2 text-brand-primary font-semibold text-sm hover:underline transition-all"
+                  aria-label="Read full blog post"
                 >
                   Read Full Article
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="w-4 h-4"
+                    className="h-4 w-4"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"

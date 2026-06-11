@@ -1,5 +1,3 @@
-"use client";
-
 /**
  * CaseStudiesGrid
  *
@@ -7,10 +5,7 @@
  * Layout: Filter tabs row above a two-column card layout with image left and content right
  * Category: Cards
  */
-
-import { useState } from "react";
 import { RevealOnScroll } from "@platform/core-components/components/animation";
-
 export interface CaseStudiesGridProps {
   /** filter-tabs */
   filterTabs?: string[];
@@ -23,7 +18,6 @@ export interface CaseStudiesGridProps {
   /** card-author */
   cardAuthor?: string[];
 }
-
 export function CaseStudiesGrid(props: CaseStudiesGridProps) {
   return (
     <section className="py-16 px-4 bg-surface-background">

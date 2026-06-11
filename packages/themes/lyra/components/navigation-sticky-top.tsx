@@ -1,5 +1,3 @@
-"use client";
-
 /**
  * SiteHeader
  *
@@ -7,9 +5,6 @@
  * Layout: Full-width horizontal bar with logo left, nav links centre, search and CTA button right
  * Category: Navigation
  */
-
-import { useState } from "react";
-
 export interface SiteHeaderProps {
   /** logo */
   logo?: string;
@@ -27,7 +22,6 @@ export interface SiteHeaderProps {
   /** contact-cta-button */
   contactCtaButton?: { label?: string; href?: string };
 }
-
 export function SiteHeader(props: SiteHeaderProps) {
   return (
     <header className="w-full bg-surface-background shadow-sm sticky top-0 z-50">

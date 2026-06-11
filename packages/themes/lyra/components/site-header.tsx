@@ -1,5 +1,3 @@
-"use client";
-
 /**
  * SiteHeader
  *
@@ -7,8 +5,6 @@
  * Layout: Full-width horizontal bar: logo left, nav links centre, search icon and CTA button right
  * Category: Navigation
  */
-
-import { useState } from "react";
 
 export interface SiteHeaderProps {
   /** logo */

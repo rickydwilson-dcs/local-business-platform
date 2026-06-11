@@ -1,5 +1,3 @@
-"use client";
-
 /**
  * PageHero
  *
@@ -7,10 +5,7 @@
  * Layout: Centered text block with eyebrow label, large heading, and subtitle
  * Category: Hero
  */
-
-import { useState } from "react";
 import { RevealOnScroll } from "@platform/core-components/components/animation";
-
 export interface PageHeroProps {
   /** eyebrow-label */
   eyebrowLabel?: string;
@@ -19,7 +14,6 @@ export interface PageHeroProps {
   /** subtitle */
   subtitle?: string;
 }
-
 export function PageHero(props: PageHeroProps) {
   return (
     <section className="bg-surface-background py-16 px-4 md:py-24">

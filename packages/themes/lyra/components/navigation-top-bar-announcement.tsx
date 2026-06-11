@@ -1,38 +1,45 @@
-"use client";
-
 /**
  * AnnouncementBar
  *
- * Top-of-page announcement strip with a CTA link to meet the team
- * Layout: Full-width single row centered text with inline link
+ * Top-of-page announcement strip promoting the team with a CTA link
+ * Layout: Full-width single row centered text with arrow link
  * Category: Navigation
  */
-
-import { useState } from "react";
 
 export interface AnnouncementBarProps {
   /** announcement-text */
   announcementText?: string;
-  /** announcement-link */
-  announcementLink?: { label?: string; href?: string };
+  /** cta-link */
+  ctaLink?: { label?: string; href?: string };
 }
 
 export function AnnouncementBar(props: AnnouncementBarProps) {
   return (
     <div className="bg-brand-primary w-full py-2 px-4">
-      <div className="max-w-7xl mx-auto flex items-center justify-center text-center">
-        <p className="text-on-brand-primary text-sm font-medium">
-          {props.announcementText ?? "Meet the team behind the product."}{" "}
-          {props.announcementLink && (
-            <a
-              href={props.announcementLink.href}
-              className="text-on-brand-primary underline underline-offset-2 font-semibold hover:opacity-80 transition-opacity duration-200"
-              aria-label="Learn more about our team"
+      <div className="max-w-7xl mx-auto flex items-center justify-center gap-2 text-sm">
+        <span className="text-on-brand-primary font-medium text-center">
+          {props.announcementText ?? "🎉 Welcome to our team — we're building something great!"}
+        </span>
+        {props.ctaLink?.href && (
+          <a
+            href={props.ctaLink.href}
+            className="text-on-brand-primary font-semibold underline underline-offset-2 inline-flex items-center gap-1 hover:opacity-80 transition-opacity whitespace-nowrap"
+            aria-label={props.ctaLink.label ?? "Learn more"}
+          >
+            {props.ctaLink.label ?? "Learn more"}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-4 w-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+              aria-hidden="true"
             >
-              {props.announcementLink.label ?? "Meet the team \u2192"}
-            </a>
-          )}
-        </p>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
+          </a>
+        )}
       </div>
     </div>
   );

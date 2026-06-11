@@ -1,5 +1,3 @@
-"use client";
-
 /**
  * HeroSplit
  *
@@ -7,10 +5,7 @@
  * Layout: Two-column split: text left with headline, body copy and two buttons; animated UI mockup right with avatar
  * Category: Hero
  */
-
-import { useState } from "react";
 import { RevealOnScroll } from "@platform/core-components/components/animation";
-
 export interface HeroSplitProps {
   /** eyebrow-label */
   eyebrowLabel?: string;
@@ -27,7 +22,6 @@ export interface HeroSplitProps {
   /** avatar-image */
   avatarImage?: { src?: string; alt?: string };
 }
-
 export function HeroSplit(props: HeroSplitProps) {
   return (
     <section className="bg-surface-background overflow-hidden">

@@ -1,5 +1,3 @@
-"use client";
-
 /**
  * FAQSection
  *
@@ -7,10 +5,7 @@
  * Layout: Two-column layout: accordion FAQ list left, support links and all-FAQs CTA right
  * Category: Content
  */
-
-import { useState } from "react";
 import { RevealOnScroll } from "@platform/core-components/components/animation";
-
 export interface FAQSectionProps {
   /** section-heading */
   sectionHeading?: string;
@@ -47,7 +42,6 @@ export interface FAQSectionProps {
     links?: Array<{ href?: string; label?: string }>;
   };
 }
-
 export function FAQSection(props: FAQSectionProps) {
   return (
     <section className="bg-surface-background py-16 px-4">

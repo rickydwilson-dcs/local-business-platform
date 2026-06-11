@@ -1,5 +1,3 @@
-"use client";
-
 /**
  * HelpCTABanner
  *
@@ -7,10 +5,7 @@
  * Layout: Two-column split with text and CTA button on left, illustrated character images on right
  * Category: CTA
  */
-
-import { useState } from "react";
 import { RevealOnScroll } from "@platform/core-components/components/animation";
-
 export interface HelpCTABannerProps {
   /** headline */
   headline?: string;
@@ -21,7 +16,6 @@ export interface HelpCTABannerProps {
   /** illustration-images */
   illustrationImages?: { src?: string; alt?: string }[];
 }
-
 export function HelpCTABanner(props: HelpCTABannerProps) {
   return (
     <section className="bg-surface-muted py-16 px-4 overflow-hidden">

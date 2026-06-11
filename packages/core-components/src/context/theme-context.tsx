@@ -30,6 +30,7 @@ import { createContext, useContext } from "react";
 export type ThemeName =
   // Active themes
   | "cygnus"
+  | "lyra"
   | "orion"
   | "solaris"
   | "vega"

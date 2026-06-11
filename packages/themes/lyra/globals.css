@@ -2,7 +2,7 @@
  * Lyra Theme — Global CSS Utilities
  *
  * Reference site: https://www.fountaindigital.co.uk/
- * Capture date: 2026-04-25T05:33:40.645Z
+ * Capture date: 2026-04-27T06:23:40.913Z
  *
  * Theme-level utility classes shared by all Lyra sites.
  * Import this file at the top of your site's app/globals.css:
@@ -93,4 +93,13 @@
 
 .heading-card {
   @apply text-xl sm:text-2xl font-bold text-surface-foreground mb-4;
+}
+
+/* ==========================================
+   DECORATIVE PATTERNS
+   ========================================== */
+
+.dot-grid-overlay {
+  background-image: radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px);
+  background-size: 40px 40px;
 }

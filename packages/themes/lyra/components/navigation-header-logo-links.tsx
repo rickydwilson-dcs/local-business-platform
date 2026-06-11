@@ -1,5 +1,3 @@
-"use client";
-
 /**
  * PrimaryNavigation
  *
@@ -7,9 +5,6 @@
  * Layout: Horizontal bar with logo left, nav links center, icons and button right
  * Category: Navigation
  */
-
-import { useState } from "react";
-
 export interface PrimaryNavigationProps {
   /** logo */
   logo?: string;
@@ -27,7 +22,6 @@ export interface PrimaryNavigationProps {
   /** contact-button */
   contactButton?: { label?: string; href?: string };
 }
-
 export function PrimaryNavigation(props: PrimaryNavigationProps) {
   return (
     <section className="py-16 px-4">

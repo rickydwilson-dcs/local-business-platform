@@ -1,5 +1,3 @@
-"use client";
-
 /**
  * MidPageCTABanner
  *
@@ -7,15 +5,11 @@
  * Layout: Full-width block with abstract gradient or wave shapes
  * Category: CTA
  */
-
-import { useState } from "react";
 import { RevealOnScroll } from "@platform/core-components/components/animation";
-
 export interface MidPageCTABannerProps {
   /** background-gradient-shape */
   backgroundGradientShape?: string;
 }
-
 export function MidPageCTABanner(props: MidPageCTABannerProps) {
   return (
     <section className="relative w-full overflow-hidden py-20 md:py-28 lg:py-36 bg-brand-primary">

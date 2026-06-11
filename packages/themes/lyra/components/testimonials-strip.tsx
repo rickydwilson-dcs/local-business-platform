@@ -1,5 +1,3 @@
-"use client";
-
 /**
  * TestimonialsStrip
  *
@@ -7,10 +5,7 @@
  * Layout: Four-column horizontal grid of testimonial cards on a dark background
  * Category: Social Proof
  */
-
-import { useState } from "react";
 import { RevealOnScroll } from "@platform/core-components/components/animation";
-
 export interface TestimonialsStripProps {
   /** reviewer-name-1 */
   reviewerName1?: string;
@@ -37,7 +32,6 @@ export interface TestimonialsStripProps {
   /** quote-4 */
   quote4?: string;
 }
-
 export function TestimonialsStrip(props: TestimonialsStripProps) {
   return (
     <section className="bg-surface-inverse py-16 px-4">

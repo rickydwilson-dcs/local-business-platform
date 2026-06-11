@@ -1,5 +1,3 @@
-"use client";
-
 /**
  * ContentSpacer
  *
@@ -7,15 +5,11 @@
  * Layout: Full-width empty white block
  * Category: Content
  */
-
-import { useState } from "react";
 import { RevealOnScroll } from "@platform/core-components/components/animation";
-
 export interface ContentSpacerProps {
   /** dynamic-content-placeholder */
   dynamicContentPlaceholder?: string;
 }
-
 export function ContentSpacer(props: ContentSpacerProps) {
   return (
     <section className="w-full bg-surface-background py-24 md:py-32 lg:py-40">

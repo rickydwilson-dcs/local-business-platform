@@ -68,14 +68,7 @@ export function MidPageCTABanner(props: MidPageCTABannerProps) {
       />
 
       {/* Subtle grid overlay */}
-      <div
-        className="absolute inset-0 opacity-10"
-        style={{
-          backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px)",
-          backgroundSize: "40px 40px",
-        }}
-        aria-hidden="true"
-      />
+      <div className="absolute inset-0 opacity-10 dot-grid-overlay" aria-hidden="true" />
 
       {/* Animated shimmer bar */}
       <div

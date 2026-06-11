@@ -1,5 +1,3 @@
-"use client";
-
 /**
  * HelpCTABanner
  *
@@ -7,10 +5,7 @@
  * Layout: Two-column dark background: text and button left, illustrated character avatars right
  * Category: CTA
  */
-
-import { useState } from "react";
 import { RevealOnScroll } from "@platform/core-components/components/animation";
-
 export interface HelpCTABannerProps {
   /** heading */
   heading?: string;
@@ -21,7 +16,6 @@ export interface HelpCTABannerProps {
   /** avatar-illustrations */
   avatarIllustrations?: { src?: string; alt?: string }[];
 }
-
 export function HelpCTABanner(props: HelpCTABannerProps) {
   return (
     <section className="bg-surface-inverse py-16 px-4">

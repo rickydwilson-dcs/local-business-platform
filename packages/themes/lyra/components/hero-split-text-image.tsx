@@ -1,5 +1,3 @@
-"use client";
-
 /**
  * AboutHero
  *
@@ -7,10 +5,7 @@
  * Layout: Two-column split: text left, image right
  * Category: Hero
  */
-
-import { useState } from "react";
 import { RevealOnScroll } from "@platform/core-components/components/animation";
-
 export interface AboutHeroProps {
   /** eyebrow-label */
   eyebrowLabel?: string;
@@ -23,7 +18,6 @@ export interface AboutHeroProps {
   /** hero-image */
   heroImage?: { src?: string; alt?: string };
 }
-
 export function AboutHero(props: AboutHeroProps) {
   return (
     <section className="bg-surface-background py-16 md:py-24">

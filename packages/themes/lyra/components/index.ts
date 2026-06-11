@@ -3,28 +3,34 @@
  */
 
 export { AnnouncementBar } from "./announcement-bar";
+export { PrimaryNavigation } from "./primary-navigation";
 export { HeroSplit } from "./hero-split";
-export { HeroCentered } from "./hero-centered";
+export { CenteredPageHero } from "./centered-page-hero";
 export { ClientLogoStrip } from "./client-logo-strip";
-export { ClientLogoCarousel } from "./client-logo-carousel";
-export { TestimonialsStrip } from "./testimonials-strip";
-export { ServicesGrid } from "./services-grid";
-export { CaseStudiesGrid } from "./case-studies-grid";
-export { MidPageCTABanner } from "./mid-page-cta-banner";
-export { HelpCTABanner } from "./help-cta-banner";
+export { TeamAvatarRow } from "./team-avatar-row";
 export { CustomerCountBanner } from "./customer-count-banner";
-export { FAQSection } from "./faq-section";
+export { TestimonialsGrid } from "./testimonials-grid";
+export { ServicesGrid } from "./services-grid";
+export { FilteredCardsGrid } from "./filtered-cards-grid";
 export { FeaturedBlogPost } from "./featured-blog-post";
-export { BlogArticleGrid } from "./blog-article-grid";
+export { GradientDividerBand } from "./gradient-divider-band";
+export { HelpCTABanner } from "./help-cta-banner";
+export { FAQAccordion } from "./faq-accordion";
+export { ContactInformation } from "./contact-information";
 export { ContactFormPanel } from "./contact-form-panel";
 export { LogoDesignQuestionnaireForm } from "./logo-design-questionnaire-form";
 export { SiteFooter } from "./site-footer";
 export { SupportCTABanner } from "./cta-dark-support-banner";
-export { PrimaryNavigation } from "./navigation-horizontal-logo-links";
-export { AboutHero } from "./hero-split-text-image";
-export { ContentSpacer } from "./content-blank-spacer";
-export { BlogHero } from "./hero-blog-centered";
+export { TopNavigation } from "./navigation-top-bar";
+export { AboutHero } from "./hero-split-about";
+export { TeamAvatarCarousel } from "./social-proof-logo-carousel";
+export { BlogArticleGrid } from "./blog-cards-grid-filtered";
 export { ContactHero } from "./hero-split-contact-intro";
-export { CaseStudiesHero } from "./hero-centered-light";
-export { EmergencyCTABanner } from "./cta-dark-full-bleed";
-export { Navigation } from "./navigation";
+export { EmergencyHelpCTA } from "./cta-dark-split-emergency-help";
+export { WebsiteHelpCTA } from "./cta-dark-banner";
+
+// Theme contract aliases (TPV-002)
+export { AnnouncementBar as LyraHeader } from "./announcement-bar";
+export type { AnnouncementBarProps as LyraHeaderProps } from "./announcement-bar";
+export { SiteFooter as LyraFooter } from "./site-footer";
+export type { SiteFooterProps as LyraFooterProps } from "./site-footer";
