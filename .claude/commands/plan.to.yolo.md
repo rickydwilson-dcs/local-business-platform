@@ -46,6 +46,34 @@ Default orchestrator: **sonnet**. Default sub-agent: **sonnet** unless the task 
 
 Use this table when assigning models to each phase below.
 
+**Delegation model — include this section verbatim in every generated brief:**
+
+```markdown
+## Delegation Model
+
+The orchestrator is a **coordinator, not an implementer**. Its job is: read this brief,
+sequence the phases, dispatch sub-agents, run verification gates, make commits, and write
+the final report. It does **not** implement phase work inline by default.
+
+**Every phase's implementation work is delegated to one or more `Task` sub-agents**, each
+spawned at the phase's `**Model:**` tier. The model annotation *is* the sub-agent's model —
+it is meaningless unless the work is delegated, because the orchestrator cannot change its
+own running model. A `**Model:** haiku` phase executed inline runs at full orchestrator
+cost and consumes orchestrator context; delegating it keeps that work in the sub-agent and
+returns only a short summary.
+
+**Inline exception.** The orchestrator may implement a phase inline ONLY when the work is
+tightly cross-coupled and correctness-critical — e.g. a deterministic engine spanning many
+interdependent files with exact golden vectors — where round-tripping through a sub-agent
+would lose essential context. When taken, the phase MUST declare
+`**Execution:** inline (exception) — <one-line rationale>`. This is the exception, not the
+default; prefer delegation whenever the work is separable.
+
+The orchestrator's own model (set by the launch command) is **independent** of the phase
+tiers. Opus orchestrating while individual phases delegate to haiku/sonnet sub-agents is
+expected and correct — the orchestrator coordinates; the tiers attach to sub-agents.
+```
+
 The brief must:
 
 **3a. Open with standard headers:**
@@ -57,8 +85,8 @@ Derive the feature branch name from the topic slug: `feature/topic-slug`
 
 **Branch:** feature/topic-slug (created from develop)
 **Session spec:** output/sessions/YYYY-MM/YYYY-MM-DD_topic-slug/yolo-brief.md
-**Mode:** Autonomous execution — implement all phases, verify after each, STOP on error
-**Orchestrator model:** sonnet
+**Mode:** Autonomous execution — coordinate all phases, delegate implementation to sub-agents, verify after each, STOP on error
+**Orchestrator model:** sonnet — coordinator only; per-phase `**Model:**` tiers attach to delegated sub-agents and are independent of this
 
 ---
 
@@ -87,14 +115,40 @@ pnpm type-check   # must be clean before starting
 
 For each phase:
 - Retain the goal, files, and verification gate exactly from the synthesis
-- Annotate each phase with a `**Model:**` line immediately after `**Goal:**`, using the tier table. For Task agents within a phase, include `model: [tier]` in the agent spawn block. Example:
+- Annotate each phase with a `**Model:**` line immediately after `**Goal:**`, using the tier table.
+- Annotate each phase with an `**Execution:**` line immediately after `**Model:**`. This is REQUIRED on every phase and is one of:
+  - `**Execution:** delegate to 1 [tier] sub-agent` — the sequential default. Even a single-item phase is delegated, not done inline.
+  - `**Execution:** delegate to N [tier] sub-agents in one message` — when the phase has independent work items that can run in parallel.
+  - `**Execution:** inline (exception) — [rationale]` — ONLY for tightly cross-coupled, correctness-critical work per the Delegation Model. State the rationale.
+- For every delegated sub-agent, include `model: [tier]` in the agent spawn block. Parallel sub-agents MUST be launched in a single Task-tool message.
+
+**Default-delegate example (single sub-agent, sequential phase):**
+
+```
+
+**Goal:** Wire the squad-validation endpoint to the new budget rule
+**Model:** sonnet — standard feature wiring across two files
+**Execution:** delegate to 1 sonnet sub-agent
+
+Task: Implement budget-rule wiring
+model: sonnet
+Prompt: [self-contained instructions — files to read, change to make, what to return]
+
+```
+
+**Parallel example (two sub-agents in one message):**
+
 ```
 
 **Goal:** Add ComponentRegistry exports to lyra and atlas
-**Model:** haiku — mechanical import + export additions to two files
+**Model:** haiku — mechanical import + export additions to two independent files
+**Execution:** delegate to 2 haiku sub-agents in one message
 
-Spawn two agents in parallel:
+Spawn two agents in parallel (single Task-tool message):
 Task: Fix lyra/index.ts registry export
+model: haiku
+Prompt: [...]
+Task: Fix atlas/index.ts registry export
 model: haiku
 Prompt: [...]
 
@@ -161,9 +215,10 @@ Only populate this table if the synthesis explicitly states two or more phases h
 2. **Reads are always safe to parallelise.** If a phase reads 3+ files before editing, emit a group listing all the reads.
 3. **Verification commands are parallelisable only if they are read-only and independent.** `pnpm lint` and `pnpm type-check` can run in parallel. `pnpm build` must run alone (it writes to `.next/` and `dist/`).
 4. **Task subagents with `model:` annotations count as parallel items.** If Phase 2 spawns two `haiku` subagents on different files, they are a group.
-5. **If the synthesis does not describe any parallelism for a given phase, emit a row stating `— no parallel work in this phase —` rather than omitting the phase.** Explicit "nothing to parallelise" is more useful than silence.
+5. **If a phase has no parallel work, emit a row stating `1 sub-agent, sequential` (or `inline (exception)` if the phase declared it) — never `inline by default` and never silence.** A phase with no parallelism is still *delegated* to a single sub-agent; it just isn't a parallel group. Omitting the phase, or implying the orchestrator does it inline, is wrong.
 6. **Every group must name its model tier.** Mixed-tier groups are allowed (e.g. one `haiku` + one `sonnet` subagent in the same message) but each item's tier must be stated.
 7. **Cross-phase parallelism defaults to empty.** Only fill the cross-phase table if the synthesis text explicitly declares phase independence. The executor will read this section and trust it literally — an incorrect entry causes corruption.
+8. **A phase row may read `inline (exception)` ONLY if that phase's `**Execution:**` line declared the inline exception with a rationale.** Every other phase is delegated to one or more sub-agents — the orchestrator never silently absorbs phase work.
 
 **3d. Cost Estimate section (after all phases and the Parallel execution groups block, before Final Report):**
 
@@ -254,13 +309,16 @@ This writes `session-wrap-up.md` to the session folder. **This is a required fin
 - STOP on any failed verification gate — do not continue to next phase
 - Read every file before editing it
 - Never push — leave all changes on the feature branch
+- **Delegate every phase's implementation to sub-agents by default.** The orchestrator coordinates, gates, and commits — it does NOT write phase code inline. Each phase's `**Execution:**` line says how: `delegate to 1 [tier] sub-agent`, `delegate to N [tier] sub-agents in one message`, or `inline (exception) — [rationale]`. Only implement inline when the phase explicitly declared the inline exception.
+- **The `**Model:**` tier names the sub-agent's model, not the orchestrator's.** The orchestrator's own model is set by the launch command and is independent of the phase tiers — it cannot change its own running model, so a `haiku`/`sonnet` phase tier is only honoured by spawning a sub-agent at that tier. A phase done inline runs at orchestrator cost and burns orchestrator context regardless of its annotation.
+- **Inline is the exception, not the default.** Reserve it for tightly cross-coupled, correctness-critical work (e.g. a deterministic engine spanning many interdependent files with exact golden vectors) where round-tripping through a sub-agent loses essential context. Always state the rationale on the `**Execution:**` line.
 - **Consult the `## Parallel execution groups` section before launching any work.** Every item listed in a group MUST be launched in a single Task-tool message. Do not launch group items sequentially — that defeats the purpose of the block and doubles the wall-clock time.
-- **Items NOT listed in any group run sequentially.** If the groups table has no row for a given work item, assume it is sequential.
+- **Items NOT listed in any group run sequentially — but still as delegated sub-agents.** "Sequential" means one sub-agent at a time, not the orchestrator doing it inline.
 - **Never parallelise across phase boundaries unless the Cross-phase groups table explicitly lists the phases.** Verification gates are the synchronisation barrier between phases — respect them.
 - **If the groups table and the phase prose disagree, the groups table wins.** The groups block is the authoritative execution plan.
 - Minimal changes only — implement what the plan says, nothing more
 - Use `model: haiku` for Task agents doing mechanical work (grep, import additions, find-replace); `model: sonnet` for standard edits; `model: opus` only for deep multi-file reasoning
-- The Co-Authored-By line in commits must reflect the orchestrator model used (e.g., `Claude Sonnet 4.6` not `Opus 4.6`)
+- The Co-Authored-By line in commits must reflect the **orchestrator** model (the committer), e.g. `Claude Sonnet 4.6` — not the per-phase sub-agent tier that implemented the change. If the running orchestrator differs from the brief's stated `**Orchestrator model:**`, use the actual running model.
 - Every brief MUST verify with all three of: `pnpm type-check`, `pnpm build`, and `pnpm --filter <site> run lint` (substituting the actual site name(s) touched). STOP if any fails.
 - For any brief that creates or modifies theme packages or pipeline tools: the final phase MUST also include `pnpm pipeline:smoke` as a verification gate before the final commit
 - **If the brief writes to files outside the primary repo**, the terminal command MUST include `--additionalDirectories` for each external path. `--dangerously-skip-permissions` only covers the directory the session is launched from — writes to other repos or user-global paths (e.g. `~/.claude/agents/`) will trigger interactive permission prompts, breaking unattended execution. Common cases:
@@ -301,14 +359,16 @@ Brief saved to: output/sessions/YYYY-MM/YYYY-MM-DD_topic-slug/yolo-brief.md
 
 Estimated total cost: ~$X.XX
 
-| Phase | Model | Goal |
-|-------|-------|------|
-| Phase 1 | sonnet | [one-line goal] |
-| Phase 2 | haiku | [one-line goal] |
-| Phase 3 | sonnet | [one-line goal] |
-| ... | | |
+| Phase | Sub-agent model | Execution | Goal |
+|-------|-----------------|-----------|------|
+| Phase 1 | sonnet | delegate to 1 sub-agent | [one-line goal] |
+| Phase 2 | haiku | delegate to 2 sub-agents | [one-line goal] |
+| Phase 3 | sonnet | inline (exception) | [one-line goal] |
+| ... | | | |
 
-To override the orchestrator model: change `--model sonnet` to `--model opus`
+The "Sub-agent model" column is the tier each phase's work is **delegated** to — it is independent of the orchestrator model below. The orchestrator only coordinates, gates, and commits.
+
+To override the orchestrator model: change `--model sonnet` to `--model opus` (this changes the coordinator only; per-phase sub-agent tiers are unaffected)
 To set a hard budget ceiling: add `--max-budget-usd N` to the command
 
 Review the brief before running if you want to make any manual adjustments.
