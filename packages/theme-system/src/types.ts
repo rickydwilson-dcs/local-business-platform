@@ -284,6 +284,7 @@ export interface ThemeConfig {
 export const THEME_NAMES = [
   // Active themes
   "cygnus",
+  "lyra",
   "orion",
   "solaris",
   "vega",

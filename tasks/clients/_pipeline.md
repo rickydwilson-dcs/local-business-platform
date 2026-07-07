@@ -6,9 +6,10 @@ All clients tracked from prospect through to live site.
 
 ## Pipeline
 
-| Client               | Trade       | Stage | Site Folder                  | Domain                         | Assets        | Brief                            |
-| -------------------- | ----------- | ----- | ---------------------------- | ------------------------------ | ------------- | -------------------------------- |
-| Colossus Scaffolding | Scaffolding | LIVE  | `sites/colossus-scaffolding` | www.colossus-scaffolding.co.uk | [GDrive](TBD) | [Brief](colossus-scaffolding.md) |
+| Client               | Trade                                | Stage | Site Folder                  | Domain                         | Assets        | Brief                            |
+| -------------------- | ------------------------------------ | ----- | ---------------------------- | ------------------------------ | ------------- | -------------------------------- |
+| Colossus Scaffolding | Scaffolding                          | LIVE  | `sites/colossus-scaffolding` | www.colossus-scaffolding.co.uk | [GDrive](TBD) | [Brief](colossus-scaffolding.md) |
+| DCH Automotive       | Vehicle security & fleet accessories | BRIEF | `sites/dch-automotive` (TBD) | dchautomotive.co.uk            | [GDrive](TBD) | [Brief](dch-automotive.md)       |
 
 ---
 

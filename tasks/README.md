@@ -31,6 +31,7 @@
 | -------------------- | ----- | ------------------------------ | ---------------------------------------- |
 | Colossus Scaffolding | LIVE  | www.colossus-scaffolding.co.uk | [Brief](clients/colossus-scaffolding.md) |
 | Smith's Electrical   | BUILD | smithselectrical.co.uk         | [Brief](clients/smiths-electrical.md)    |
+| DCH Automotive       | BRIEF | dchautomotive.co.uk            | [Brief](clients/dch-automotive.md)       |
 
 ---
 

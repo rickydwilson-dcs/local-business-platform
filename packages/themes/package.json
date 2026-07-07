@@ -25,6 +25,7 @@
     "./vega/pages": "./vega/pages/index.ts",
     "./solaris": "./solaris/index.ts",
     "./solaris/components": "./solaris/components/index.ts",
-    "./solaris/pages": "./solaris/pages/index.ts"
+    "./solaris/pages": "./solaris/pages/index.ts",
+    "./lyra": "./lyra/index.ts"
   }
 }
