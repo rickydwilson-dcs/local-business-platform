@@ -1,7 +1,0 @@
-{
-  "createdAt": "2026-07-07T18:44:30.000Z",
-  "themeName": "lyra",
-  "sourceUrl": "stitch:6609563365548103094",
-  "pipelineOutput": "output/ingestion/lyra-stitch/",
-  "note": "Scoped test site — only Home + Car Remaps pages built (the 2 Stitch screens generated for the DCH Automotive design review), not the full platform page set."
-}

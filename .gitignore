@@ -68,6 +68,11 @@ Thumbs.db
 !assets/README.md
 # Playwright snapshot baselines are committed (not R2 assets)
 !sites/**/e2e/**/*.png
+# DCH Automotive: R2 not yet configured for this site — logo, Stitch-generated
+# imagery, and Viezu partner assets are committed directly until it is
+!sites/dch-automotive/public/logo/**
+!sites/dch-automotive/public/stitch-images/**
+!sites/dch-automotive/public/viezu/**
 
 # Temporary files
 tmp/
