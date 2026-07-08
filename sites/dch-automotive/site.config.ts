@@ -180,20 +180,20 @@ export const siteConfig: SiteConfig = {
     phone: '+44 7506 016106',
     email: 'info@DCHautomotive.co.uk',
     address: {
-      street: '', // Not yet confirmed with client — see tasks/clients/dch-automotive.md Outstanding
+      street: 'Unit H2 Chaucer Business Park',
       city: 'Polegate',
       region: 'East Sussex',
-      postalCode: 'BN26',
+      postalCode: 'BN26 6QH',
       country: 'United Kingdom',
     },
     hours: {
-      monday: '8:00 AM - 6:00 PM',
-      tuesday: '8:00 AM - 6:00 PM',
-      wednesday: '8:00 AM - 6:00 PM',
-      thursday: '8:00 AM - 6:00 PM',
-      friday: '8:00 AM - 6:00 PM',
-      saturday: '8:00 AM - 6:00 PM',
-      sunday: 'Closed',
+      monday: 'By appointment (usually 8:30 AM - 5:00 PM)',
+      tuesday: 'By appointment (usually 8:30 AM - 5:00 PM)',
+      wednesday: 'By appointment (usually 8:30 AM - 5:00 PM)',
+      thursday: 'By appointment (usually 8:30 AM - 5:00 PM)',
+      friday: 'By appointment (usually 8:30 AM - 5:00 PM)',
+      saturday: 'By appointment',
+      sunday: 'By appointment',
     },
     socialMedia: {
       facebook: 'https://www.facebook.com/DCHautomotive-105166288262588',
@@ -269,19 +269,31 @@ export const siteConfig: SiteConfig = {
 
   services: [
     {
-      title: 'Primary Service',
-      slug: 'primary-service',
-      description: 'Our flagship service offering for residential and commercial clients.',
+      title: 'Vehicle Security',
+      slug: 'vehicle-security',
+      description:
+        'Trackers, plant machinery security, immobilisers and motorbike security, fitted by City & Guilds and IMI accredited installers.',
     },
     {
-      title: 'Secondary Service',
-      slug: 'secondary-service',
-      description: 'Complementary service that enhances our primary offering.',
+      title: 'Parking Aids',
+      slug: 'parking-aids',
+      description: 'Flush-fit parking sensors for cars, vans and motorhomes.',
     },
     {
-      title: 'Service Three',
-      slug: 'service-three',
-      description: 'Specialized service for unique client needs.',
+      title: 'Fleet Solutions',
+      slug: 'fleet-solutions',
+      description:
+        'Fleet tracking and reporting, MDVR and dashcam systems, asset tracking, and DVS progressive safe systems for HGVs.',
+    },
+    {
+      title: 'Accessories',
+      slug: 'accessories',
+      description: 'LED auto lamps and audio upgrades for cars, vans and motorbikes.',
+    },
+    {
+      title: 'Dash Cameras',
+      slug: 'dash-cameras',
+      description: 'IROAD dash cameras supplied and fitted — front, rear and 4K systems.',
     },
   ],
 
@@ -308,10 +320,10 @@ export const siteConfig: SiteConfig = {
       email: 'info@DCHautomotive.co.uk',
       telephone: '+447506016106',
       address: {
-        streetAddress: '', // Not yet confirmed with client — see tasks/clients/dch-automotive.md Outstanding
+        streetAddress: 'Unit H2 Chaucer Business Park',
         addressLocality: 'Polegate',
         addressRegion: 'East Sussex',
-        postalCode: 'BN26',
+        postalCode: 'BN26 6QH',
         addressCountry: 'GB',
       },
       geo: {
@@ -320,9 +332,9 @@ export const siteConfig: SiteConfig = {
       },
       openingHours: [
         {
-          dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-          opens: '08:00',
-          closes: '18:00',
+          dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+          opens: '08:30',
+          closes: '17:00',
         },
       ],
       areaServed: ['Eastbourne', 'Polegate', 'Hailsham', 'South East England'],
@@ -352,35 +364,46 @@ export const siteConfig: SiteConfig = {
         'Vehicle Security',
         'Fleet Electrics',
         'ECU Remapping',
-        'Tow Bar Installation',
+        'Dash Camera Installation',
         'Parking Sensor Fitting',
       ],
       offerCatalog: [
         {
-          name: 'Primary Service',
-          description: 'Our main service offering for residential and commercial clients',
-          url: '/services/primary-service',
+          name: 'Vehicle Security',
+          description: 'Trackers, plant machinery security, immobilisers and motorbike security',
+          url: '/services/vehicle-security',
         },
         {
-          name: 'Secondary Service',
-          description: 'Complementary service that enhances our primary offering',
-          url: '/services/secondary-service',
+          name: 'Parking Aids',
+          description: 'Flush-fit parking sensors for cars, vans and motorhomes',
+          url: '/services/parking-aids',
         },
         {
-          name: 'Service Three',
-          description: 'Specialized service for unique client needs',
-          url: '/services/service-three',
+          name: 'Fleet Solutions',
+          description:
+            'Fleet tracking, MDVR/dashcam systems, asset tracking and DVS progressive safe systems',
+          url: '/services/fleet-solutions',
+        },
+        {
+          name: 'Accessories',
+          description: 'LED auto lamps and audio upgrades',
+          url: '/services/accessories',
+        },
+        {
+          name: 'Dash Cameras',
+          description: 'IROAD dash cameras supplied and fitted',
+          url: '/services/dash-cameras',
         },
       ],
     },
   },
 
   about: {
-    heroBadges: ['Est. 2020', 'Local Experts', 'Fully Insured'],
+    heroBadges: ['Est. 2018', 'City & Guilds Certified', 'Viezu Approved Dealer'],
     story: [
-      'Founded in 2020, Your Business Name was built on a simple promise: deliver professional, reliable service that our customers can count on every time.',
-      'From our base in City Name, we serve residential and commercial clients across Main Area, North Region, and South Region. Every project, large or small, receives the same dedication to quality.',
-      'Today we are proud to be a trusted local business — known for honest pricing, skilled workmanship, and the kind of service that earns referrals from neighbours and friends.',
+      'Founded in 2018, DCH Automotive was built on a simple promise: deliver professional vehicle security and electrical work that our customers — and the trade — can count on every time.',
+      'From our base in Polegate, we serve private and motor trade customers across Eastbourne, Hailsham and the wider South East, fitting everything from trackers and immobilisers to fleet camera systems and Viezu-approved ECU remapping.',
+      'Today we are proud to be a trusted name in vehicle security — known for honest pricing, City & Guilds and IMI accredited workmanship, and the kind of service that earns referrals from private customers and trade partners alike.',
     ],
     whyChooseUs: [
       'Fully insured with comprehensive public liability cover',

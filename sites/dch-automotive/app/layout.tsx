@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import { siteConfig } from '@/site.config';
+import { SiteHeader } from '@/components/site-header';
+import { SiteFooter } from '@/components/site-footer';
 
 export const metadata: Metadata = {
   title: {
@@ -32,7 +34,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className="min-h-screen flex flex-col bg-surface-background text-surface-foreground font-sans">
-        {children}
+        <SiteHeader />
+        <main className="flex-1 pt-20 overflow-x-hidden">{children}</main>
+        <SiteFooter />
       </body>
     </html>
   );

@@ -92,10 +92,10 @@ test.describe('Navigation', () => {
     await page.waitForTimeout(500);
 
     // Check footer service links
-    const primaryServiceLink = page.locator('footer a[href="/services/primary-service"]').first();
+    const primaryServiceLink = page.locator('footer a[href="/services/vehicle-security"]').first();
     await expect(primaryServiceLink).toBeVisible();
     await primaryServiceLink.click();
-    await expect(page).toHaveURL(/.*primary-service/);
+    await expect(page).toHaveURL(/.*vehicle-security/);
     await page.goBack();
 
     // Check footer location links
@@ -138,7 +138,7 @@ test.describe('Navigation', () => {
 
   test('should navigate through breadcrumbs', async ({ page, baseURL }) => {
     // Navigate to a service page
-    await page.goto('/services/primary-service');
+    await page.goto('/services/vehicle-security');
 
     // Check breadcrumbs exist
     const breadcrumbs = page.locator('nav[aria-label="Breadcrumb"], nav:has(ol)');

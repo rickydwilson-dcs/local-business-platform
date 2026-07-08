@@ -1,192 +1,131 @@
 import Link from 'next/link';
-import { Phone, Mail, MapPin, Shield, Award } from 'lucide-react';
+import { siteConfig } from '@/site.config';
+import { PHONE_DISPLAY, PHONE_TEL } from '@/lib/contact-info';
 
-export interface SiteFooterProps {
-  siteName: string;
-  tagline: string;
-  phoneDisplay: string;
-  phoneTel: string;
-  email: string;
-  address: { locality: string; region: string };
-  certifications: Array<{ name: string; description: string; icon?: string }>;
-  services: Array<{ slug: string; title: string }>;
-  locations: Array<{ slug: string; title: string }>;
-  totalServices: number;
-  totalLocations: number;
-  maxServices: number;
-  maxLocations: number;
-  showServices: boolean;
-  showLocations: boolean;
-  copyright: string;
-  builtBy?: { name: string; url: string };
-}
+const QUICK_LINKS = [
+  ...siteConfig.services.map((service) => ({
+    label: service.title,
+    href: `/services/${service.slug}`,
+  })),
+  { label: 'Car Remaps', href: '/car-remaps' },
+  { label: 'Locations', href: '/locations' },
+];
 
-export function SiteFooter({
-  siteName,
-  tagline,
-  phoneDisplay,
-  phoneTel,
-  email,
-  address,
-  certifications,
-  services,
-  locations,
-  totalServices,
-  totalLocations,
-  maxServices,
-  maxLocations,
-  showServices,
-  showLocations,
-  copyright,
-  builtBy,
-}: SiteFooterProps) {
+export function SiteFooter() {
   return (
-    <footer className="bg-surface-inverse text-white py-12 sm:py-16">
-      <div className="mx-auto w-full lg:w-[90%] px-6">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mb-6 sm:mb-8">
-          {/* Column 1: About */}
-          <div className="sm:col-span-2 lg:col-span-1">
-            <h2 className="text-xl sm:text-2xl font-bold mb-4 text-white">{siteName}</h2>
-            <p className="text-surface-muted-foreground mb-4 text-sm sm:text-base">{tagline}</p>
-            {certifications.length > 0 && (
-              <div className="flex flex-wrap items-center gap-3 sm:gap-4">
-                {certifications.slice(0, 3).map((cert, index) => (
-                  <div key={index} className="flex items-center gap-2 text-xs sm:text-sm">
-                    {index === 0 ? (
-                      <Award className="h-3 w-3 sm:h-4 sm:w-4 text-warning" aria-hidden="true" />
-                    ) : (
-                      <Shield className="h-3 w-3 sm:h-4 sm:w-4 text-success" aria-hidden="true" />
-                    )}
-                    <span>{cert.name}</span>
-                  </div>
-                ))}
-              </div>
-            )}
+    <footer className="bg-surface-background border-t border-surface-card-border">
+      <div className="w-full py-12 px-6 flex flex-col md:flex-row justify-between items-start gap-8 container mx-auto">
+        <div className="max-w-sm">
+          <div className="text-lg font-heading font-bold text-white mb-4 uppercase tracking-tight">
+            {siteConfig.business.name}
           </div>
-
-          {/* Column 2: Services */}
-          {showServices && services.length > 0 && (
-            <div>
-              <h3 className="text-base sm:text-lg font-semibold mb-4 text-white">Our Services</h3>
-              <ul className="space-y-2 text-surface-muted-foreground text-sm sm:text-base">
-                {services.map((service) => (
-                  <li key={service.slug}>
-                    <Link
-                      href={`/services/${service.slug}`}
-                      className="hover:text-brand-primary transition-colors"
-                    >
-                      {service.title}
-                    </Link>
-                  </li>
-                ))}
-                {totalServices > maxServices && (
-                  <li>
-                    <Link
-                      href="/services"
-                      className="hover:text-brand-primary transition-colors font-semibold"
-                    >
-                      View All Services &rarr;
-                    </Link>
-                  </li>
-                )}
-              </ul>
-            </div>
-          )}
-
-          {/* Column 3: Locations */}
-          {showLocations && locations.length > 0 && (
-            <div>
-              <h3 className="text-base sm:text-lg font-semibold mb-4 text-white">Service Areas</h3>
-              <ul className="space-y-2 text-surface-muted-foreground text-sm sm:text-base">
-                {locations.map((location) => (
-                  <li key={location.slug}>
-                    <Link
-                      href={`/locations/${location.slug}`}
-                      className="hover:text-brand-primary transition-colors"
-                    >
-                      {location.title}
-                    </Link>
-                  </li>
-                ))}
-                {totalLocations > maxLocations && (
-                  <li>
-                    <Link
-                      href="/locations"
-                      className="hover:text-brand-primary transition-colors font-semibold"
-                    >
-                      View All Locations &rarr;
-                    </Link>
-                  </li>
-                )}
-              </ul>
-            </div>
-          )}
-
-          {/* Column 4: Contact */}
-          <div>
-            <h3 className="text-base sm:text-lg font-semibold mb-4 text-white">Contact Info</h3>
-            <div className="space-y-3 text-surface-muted-foreground text-sm sm:text-base">
-              <div className="flex items-center gap-2">
-                <Phone
-                  className="h-3 w-3 sm:h-4 sm:w-4 text-brand-primary flex-shrink-0"
-                  aria-hidden="true"
-                />
-                <Link
-                  href={`tel:${phoneTel}`}
-                  className="hover:text-brand-primary transition-colors"
-                >
-                  {phoneDisplay}
-                </Link>
-              </div>
-              <div className="flex items-center gap-2">
-                <Mail
-                  className="h-3 w-3 sm:h-4 sm:w-4 text-brand-primary flex-shrink-0"
-                  aria-hidden="true"
-                />
-                <Link
-                  href={`mailto:${email}`}
-                  className="hover:text-brand-primary transition-colors"
-                >
-                  {email}
-                </Link>
-              </div>
-              <div className="flex items-start gap-2">
-                <MapPin
-                  className="h-3 w-3 sm:h-4 sm:w-4 text-brand-primary flex-shrink-0 mt-1"
-                  aria-hidden="true"
-                />
-                <div className="leading-relaxed">
-                  <div>{address.locality}</div>
-                  <div>{address.region}</div>
-                </div>
-              </div>
-              <div className="mt-4 pt-4 border-t border-surface-subtle text-xs sm:text-sm">
-                <Link href="/privacy-policy" className="hover:text-brand-primary transition-colors">
-                  Privacy Policy
-                </Link>
-                <span className="mx-2 text-surface-muted-foreground">|</span>
-                <Link href="/cookie-policy" className="hover:text-brand-primary transition-colors">
-                  Cookie Policy
-                </Link>
-              </div>
-            </div>
+          <p className="font-sans text-sm text-white/60 mb-6 leading-relaxed">
+            {siteConfig.tagline}
+          </p>
+          <div className="flex space-x-4">
+            <a
+              href={siteConfig.business.socialMedia.facebook}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="DCH Automotive on Facebook"
+              className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center hover:border-brand-primary transition-colors"
+            >
+              <span className="material-symbols-outlined text-xs">thumb_up</span>
+            </a>
+            <a
+              href={siteConfig.business.socialMedia.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="DCH Automotive on Instagram"
+              className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center hover:border-brand-primary transition-colors"
+            >
+              <span className="material-symbols-outlined text-xs">photo_camera</span>
+            </a>
+            <a
+              href={`mailto:${siteConfig.business.email}`}
+              aria-label="Email DCH Automotive"
+              className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center hover:border-brand-primary transition-colors"
+            >
+              <span className="material-symbols-outlined text-xs">mail</span>
+            </a>
           </div>
         </div>
 
-        <div className="border-t border-surface-subtle pt-6 sm:pt-8 text-center text-surface-muted-foreground text-xs sm:text-sm">
-          <p>
-            &copy; {copyright}
-            {builtBy && (
+        <div>
+          <h4 className="text-white font-bold uppercase tracking-widest text-xs mb-6">
+            Quick Links
+          </h4>
+          <ul className="space-y-3">
+            {QUICK_LINKS.map((link) => (
+              <li key={link.href}>
+                <Link
+                  href={link.href}
+                  className="text-white/60 hover:text-brand-primary text-sm hover:underline transition-all"
+                >
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+            <li>
+              <Link
+                href="/privacy-policy"
+                className="text-white/60 hover:text-brand-primary text-sm hover:underline transition-all"
+              >
+                Privacy Policy
+              </Link>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 className="text-white font-bold uppercase tracking-widest text-xs mb-6">
+            Contact Us
+          </h4>
+          <ul className="space-y-4">
+            <li className="flex items-start space-x-3">
+              <span className="material-symbols-outlined text-brand-primary text-sm">
+                location_on
+              </span>
+              <span className="text-white/60 text-sm">
+                {siteConfig.business.address.street}
+                <br />
+                {siteConfig.business.address.city}, {siteConfig.business.address.region}{' '}
+                {siteConfig.business.address.postalCode}
+              </span>
+            </li>
+            <li className="flex items-center space-x-3">
+              <span className="material-symbols-outlined text-brand-primary text-sm">phone</span>
+              <a
+                href={`tel:${PHONE_TEL}`}
+                className="text-white/60 hover:text-brand-primary text-sm"
+              >
+                {PHONE_DISPLAY}
+              </a>
+            </li>
+            <li className="flex items-center space-x-3">
+              <span className="material-symbols-outlined text-brand-primary text-sm">schedule</span>
+              <span className="text-white/60 text-sm">
+                By appointment — usually Mon-Fri 8:30am-5pm
+              </span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div className="border-t border-white/5 py-8">
+        <div className="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="font-sans text-sm text-white/60">
+            &copy; {siteConfig.footer.copyright}
+            {siteConfig.footer.builtBy && (
               <>
                 {' '}
                 | Built by{' '}
                 <a
-                  href={builtBy.url}
+                  href={siteConfig.footer.builtBy.url}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-white hover:text-brand-primary transition-colors underline"
                 >
-                  {builtBy.name}
+                  {siteConfig.footer.builtBy.name}
                 </a>
               </>
             )}

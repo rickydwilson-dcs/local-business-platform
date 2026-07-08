@@ -34,7 +34,7 @@ test.describe('Smoke Tests - Page Load Only', () => {
   });
 
   test('sample service page loads', async ({ page }) => {
-    const response = await page.goto('/services/primary-service');
+    const response = await page.goto('/services/vehicle-security');
     expect(response?.status()).toBe(200);
     await expect(page.locator('h1')).toBeVisible();
   });

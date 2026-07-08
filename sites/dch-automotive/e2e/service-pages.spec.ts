@@ -13,19 +13,19 @@ test.describe('Service Pages', () => {
   });
 
   test('should navigate to primary service page', async ({ page }) => {
-    await page.goto('/services/primary-service');
+    await page.goto('/services/vehicle-security');
 
-    await expect(page).toHaveURL(/.*primary-service/);
+    await expect(page).toHaveURL(/.*vehicle-security/);
     await expect(page.locator('h1')).toBeVisible();
   });
 
   test('should display service page with all required sections', async ({ page }) => {
-    await page.goto('/services/primary-service');
+    await page.goto('/services/vehicle-security');
 
     // Check for hero section
     const hero = page
       .locator('section, div')
-      .filter({ hasText: /primary.service/i })
+      .filter({ hasText: /vehicle.security/i })
       .first();
     await expect(hero).toBeVisible();
 
@@ -44,7 +44,7 @@ test.describe('Service Pages', () => {
   });
 
   test('should expand FAQ items when clicked', async ({ page }) => {
-    await page.goto('/services/primary-service');
+    await page.goto('/services/vehicle-security');
 
     // Find FAQ section
     const faqSection = page.locator('text=/faq|questions/i').locator('..').locator('..');
@@ -65,7 +65,7 @@ test.describe('Service Pages', () => {
   });
 
   test('should show breadcrumbs on service pages', async ({ page }) => {
-    await page.goto('/services/primary-service');
+    await page.goto('/services/vehicle-security');
 
     const breadcrumbs = page.locator('nav[aria-label="Breadcrumb"], nav:has(ol)');
     await expect(breadcrumbs).toBeVisible();
@@ -73,7 +73,7 @@ test.describe('Service Pages', () => {
   });
 
   test('should have CTA button linking to contact', async ({ page }) => {
-    await page.goto('/services/primary-service');
+    await page.goto('/services/vehicle-security');
 
     // Look for contact CTA
     const ctaButton = page
@@ -87,7 +87,7 @@ test.describe('Service Pages', () => {
   });
 
   test('should have phone number link', async ({ page }) => {
-    await page.goto('/services/primary-service');
+    await page.goto('/services/vehicle-security');
 
     const phoneLink = page.locator('a[href^="tel:"]').first();
     await expect(phoneLink).toBeVisible();
@@ -95,7 +95,7 @@ test.describe('Service Pages', () => {
   });
 
   test('should display service images', async ({ page }) => {
-    await page.goto('/services/primary-service');
+    await page.goto('/services/vehicle-security');
 
     // Check for images (hero or gallery)
     const images = page.locator('img');
@@ -110,23 +110,23 @@ test.describe('Service Pages', () => {
   test('should navigate between different service pages', async ({ page }) => {
     await page.goto('/services');
 
-    // Click on primary-service (use .first() to avoid strict mode)
-    await page.locator('a[href="/services/primary-service"]').first().click();
-    await expect(page).toHaveURL(/.*primary-service/);
+    // Click on vehicle-security (use .first() to avoid strict mode)
+    await page.locator('a[href="/services/vehicle-security"]').first().click();
+    await expect(page).toHaveURL(/.*vehicle-security/);
 
     // Go back to services
     await page.goBack();
 
-    // Click on secondary-service (use .first() to avoid strict mode)
-    const secondaryLink = page.locator('a[href="/services/secondary-service"]').first();
+    // Click on parking-aids (use .first() to avoid strict mode)
+    const secondaryLink = page.locator('a[href="/services/parking-aids"]').first();
     if (await secondaryLink.isVisible()) {
       await secondaryLink.click();
-      await expect(page).toHaveURL(/.*secondary-service/);
+      await expect(page).toHaveURL(/.*parking-aids/);
     }
   });
 
   test('should show related services or next steps', async ({ page }) => {
-    await page.goto('/services/primary-service');
+    await page.goto('/services/vehicle-security');
 
     // Check for related services section (use .first() to handle MDX body content with multiple matches)
     const relatedSection = page
@@ -138,7 +138,7 @@ test.describe('Service Pages', () => {
   });
 
   test('should have schema.org structured data', async ({ page }) => {
-    await page.goto('/services/primary-service');
+    await page.goto('/services/vehicle-security');
 
     // Check for JSON-LD schema markup
     const schemaScript = page.locator('script[type="application/ld+json"]');
@@ -153,7 +153,7 @@ test.describe('Service Pages', () => {
 
   test('should be responsive on mobile', async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 667 });
-    await page.goto('/services/primary-service');
+    await page.goto('/services/vehicle-security');
 
     // Page should load without horizontal scroll
     const body = page.locator('body');
@@ -167,11 +167,11 @@ test.describe('Service Pages', () => {
 
   test('should load all service pages without errors', async ({ page }) => {
     const serviceSlugs = [
-      'primary-service',
-      'secondary-service',
-      'service-three',
-      'service-four',
-      'service-five',
+      'vehicle-security',
+      'parking-aids',
+      'fleet-solutions',
+      'accessories',
+      'dash-cameras',
     ];
 
     for (const slug of serviceSlugs.slice(0, 5)) {

@@ -6,13 +6,6 @@ export const metadata: Metadata = {
     'Professional vehicle security, fleet electrics, and ECU remapping installer serving the South East. Thatcham and IMI certified expertise.',
 };
 
-const NAV_LINKS = [
-  { label: 'Services', href: '/', active: true },
-  { label: 'Fleet Solutions', href: '/' },
-  { label: 'Car Remaps', href: '/car-remaps' },
-  { label: 'Contact', href: '/' },
-];
-
 const CREDENTIALS = [
   { label: 'Certified', value: 'City & Guilds' },
   { label: 'Accredited', value: 'IMI Approved' },
@@ -85,33 +78,8 @@ const TESTIMONIALS = [
 export default function HomePage() {
   return (
     <>
-      {/* Nav */}
-      <nav className="fixed top-0 w-full z-50 flex justify-between items-center px-6 py-4 max-w-full bg-surface-background border-b border-surface-card-border">
-        <div className="text-xl font-heading font-black text-white uppercase tracking-tight">
-          DCH Automotive
-        </div>
-        <div className="hidden md:flex items-center space-x-8">
-          {NAV_LINKS.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              className={
-                link.active
-                  ? 'text-brand-primary font-bold border-b-2 border-brand-primary pb-1 font-heading uppercase tracking-tight'
-                  : 'text-white/80 font-medium hover:text-white transition-colors font-heading uppercase tracking-tight'
-              }
-            >
-              {link.label}
-            </a>
-          ))}
-        </div>
-        <button className="bg-brand-primary text-brand-on-primary px-5 py-2 font-heading font-extrabold uppercase tracking-tight hover:brightness-110 transition-all active:scale-95">
-          Get a Quote
-        </button>
-      </nav>
-
       {/* Hero */}
-      <section className="relative h-screen min-h-[700px] flex items-center pt-20 overflow-hidden">
+      <section className="relative h-screen min-h-[700px] flex items-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <div
             className="w-full h-full bg-cover bg-center"
@@ -315,85 +283,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="bg-surface-background border-t border-surface-card-border">
-        <div className="w-full py-12 px-6 flex flex-col md:flex-row justify-between items-start gap-8 container mx-auto">
-          <div className="max-w-sm">
-            <div className="text-lg font-heading font-bold text-white mb-4 uppercase tracking-tight">
-              DCH Automotive
-            </div>
-            <p className="font-sans text-sm text-white/60 mb-6 leading-relaxed">
-              Vehicle security and fleet electrics, done properly. Serving Polegate, East Sussex and
-              the wider South East.
-            </p>
-            <div className="flex space-x-4">
-              <div className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center hover:border-brand-primary transition-colors cursor-pointer">
-                <span className="material-symbols-outlined text-xs">share</span>
-              </div>
-              <div className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center hover:border-brand-primary transition-colors cursor-pointer">
-                <span className="material-symbols-outlined text-xs">mail</span>
-              </div>
-            </div>
-          </div>
-          <div>
-            <h4 className="text-white font-bold uppercase tracking-widest text-xs mb-6">
-              Quick Links
-            </h4>
-            <ul className="space-y-3">
-              {[
-                'Services',
-                'Fleet Solutions',
-                'Car Remaps',
-                'Privacy Policy',
-                'Terms of Service',
-              ].map((label) => (
-                <li key={label}>
-                  <a
-                    className="text-white/60 hover:text-brand-primary text-sm hover:underline transition-all"
-                    href={label === 'Car Remaps' ? '/car-remaps' : '/'}
-                  >
-                    {label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h4 className="text-white font-bold uppercase tracking-widest text-xs mb-6">
-              Contact Us
-            </h4>
-            <ul className="space-y-4">
-              <li className="flex items-start space-x-3">
-                <span className="material-symbols-outlined text-brand-primary text-sm">
-                  location_on
-                </span>
-                <span className="text-white/60 text-sm">
-                  Polegate, East Sussex <br />
-                  United Kingdom
-                </span>
-              </li>
-              <li className="flex items-center space-x-3">
-                <span className="material-symbols-outlined text-brand-primary text-sm">phone</span>
-                <span className="text-white/60 text-sm">07506 016106</span>
-              </li>
-              <li className="flex items-center space-x-3">
-                <span className="material-symbols-outlined text-brand-primary text-sm">
-                  schedule
-                </span>
-                <span className="text-white/60 text-sm">Mon - Sat: 08:00 - 18:00</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div className="border-t border-white/5 py-8">
-          <div className="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="font-sans text-sm text-white/60">
-              © 2026 DCH Automotive. Vehicle security and fleet electrics, done properly.
-            </p>
-          </div>
-        </div>
-      </footer>
     </>
   );
 }
