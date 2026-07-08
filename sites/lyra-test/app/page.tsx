@@ -202,16 +202,21 @@ export default function HomePage() {
       <section className="py-24 bg-[#11100D] relative overflow-hidden">
         <div className="container mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="relative z-10">
-            <div className="inline-flex items-center space-x-2 bg-brand-primary text-white px-3 py-1 mb-6 font-heading font-black text-xs uppercase tracking-widest">
-              <span>NEW SERVICE</span>
+            <div className="flex items-center gap-3 mb-6">
+              <span className="inline-flex items-center bg-brand-primary text-white px-3 py-1 font-heading font-black text-xs uppercase tracking-widest">
+                NEW SERVICE
+              </span>
+              <span className="text-white/50 text-xs font-heading uppercase tracking-widest">
+                Viezu Approved Dealer
+              </span>
             </div>
             <h2 className="text-5xl font-heading font-black uppercase tracking-tight mb-6">
               Corporate <span className="text-brand-primary">Fleet Remaps</span>
             </h2>
             <p className="text-xl text-white/80 mb-8 max-w-xl">
-              Engineered for efficiency. Our ECU remapping solutions target corporate fleet owners
-              seeking significant fuel savings, reduced carbon footprints, and optimized power
-              delivery for heavy-duty commercial use.
+              Engineered for efficiency. Stage 1-3, Economy Tuning (BlueOptimize), Performance
+              Tuning and Gearbox Tuning — fitted on genuine Viezu KESS3 hardware, with fleet fuel
+              savings as the headline use case.
             </p>
             <ul className="space-y-4 mb-10">
               {[

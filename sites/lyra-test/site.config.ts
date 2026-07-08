@@ -167,50 +167,49 @@ export interface SiteConfig extends BaseSiteConfig {
 }
 
 export const siteConfig: SiteConfig = {
-  slug: 'base-template',
+  slug: 'dch-automotive',
   domain: 'localhost',
-  name: 'Base Template Site',
-  tagline: 'Professional Local Services',
+  name: 'DCH Automotive',
+  tagline: 'Vehicle security and fleet electrics, done properly.',
   url: process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000',
 
   business: {
-    name: 'Your Business Name',
-    legalName: 'Your Business Ltd',
+    name: 'DCH Automotive',
+    legalName: 'DCH Automotive',
     type: 'LocalBusiness',
-    phone: '+44 1234 567890',
-    email: 'info@example.com',
+    phone: '+44 7506 016106',
+    email: 'info@DCHautomotive.co.uk',
     address: {
-      street: '123 Main Street',
-      city: 'City Name',
-      region: 'County/Region',
-      postalCode: 'AB12 3CD',
+      street: '', // Not yet confirmed with client — see tasks/clients/dch-automotive.md Outstanding
+      city: 'Polegate',
+      region: 'East Sussex',
+      postalCode: 'BN26',
       country: 'United Kingdom',
     },
     hours: {
-      monday: '9:00 AM - 5:00 PM',
-      tuesday: '9:00 AM - 5:00 PM',
-      wednesday: '9:00 AM - 5:00 PM',
-      thursday: '9:00 AM - 5:00 PM',
-      friday: '9:00 AM - 5:00 PM',
-      saturday: 'Closed',
+      monday: '8:00 AM - 6:00 PM',
+      tuesday: '8:00 AM - 6:00 PM',
+      wednesday: '8:00 AM - 6:00 PM',
+      thursday: '8:00 AM - 6:00 PM',
+      friday: '8:00 AM - 6:00 PM',
+      saturday: '8:00 AM - 6:00 PM',
       sunday: 'Closed',
     },
     socialMedia: {
-      facebook: 'https://facebook.com/yourbusiness',
-      twitter: 'https://twitter.com/yourbusiness',
-      instagram: 'https://instagram.com/yourbusiness',
+      facebook: 'https://www.facebook.com/DCHautomotive-105166288262588',
+      instagram: 'https://www.instagram.com/dchautomotive/',
     },
     geo: {
-      latitude: 51.5074,
-      longitude: -0.1278,
+      latitude: 50.8236,
+      longitude: 0.2478,
     },
   },
 
   navigation: {
     main: [
       { label: 'Services', href: '/services' },
+      { label: 'Car Remaps', href: '/car-remaps' },
       { label: 'Locations', href: '/locations', hasDropdown: true },
-      { label: 'About', href: '/about' },
       { label: 'Contact', href: '/contact' },
     ],
   },
@@ -231,7 +230,7 @@ export const siteConfig: SiteConfig = {
     showLocations: true,
     maxServices: 10,
     maxLocations: 12,
-    copyright: '2025 Your Business Name. All rights reserved.',
+    copyright: '2026 DCH Automotive. All rights reserved.',
     builtBy: {
       name: 'Digital Consulting Services',
       url: 'https://www.digitalconsultingservices.co.uk',
@@ -239,24 +238,34 @@ export const siteConfig: SiteConfig = {
   },
 
   credentials: {
-    yearEstablished: '2020',
+    yearEstablished: '2018',
     stats: [
-      { value: '5+', label: 'Years Experience', description: 'Serving local customers' },
-      { value: '500+', label: 'Projects Completed', description: 'Satisfied clients' },
-      { value: '100%', label: 'Satisfaction', description: 'Customer focused' },
-      { value: '24/7', label: 'Support', description: 'Always available' },
+      { value: '2018', label: 'Established', description: 'Trading since 2018' },
+      {
+        value: '7',
+        label: 'Trade Certifications',
+        description: 'City & Guilds, IMI, Thatcham + more',
+      },
+      {
+        value: 'Public & Trade',
+        label: 'Who We Serve',
+        description: 'Private and motor trade customers',
+      },
+      { value: 'South East', label: 'Coverage', description: 'Based in Polegate, East Sussex' },
     ],
     certifications: [
-      { name: 'Certified Professional', description: 'Industry certification' },
-      { name: 'Fully Insured', description: 'Comprehensive coverage' },
+      { name: 'City & Guilds', description: 'Certified installer' },
+      { name: 'IMI Accredited', description: 'Institute of the Motor Industry' },
+      { name: 'Thatcham Approved', description: 'Insurer-recognised security' },
+      { name: 'Autowatch Approved', description: 'Approved installer' },
+      { name: 'Witter Approved', description: 'Tow bar installer' },
+      { name: 'Smartrack Approved', description: 'Tracking installer' },
+      { name: 'Thinkware Approved', description: 'Dash cam installer' },
+      { name: 'Viezu Approved Dealer', description: 'ECU remapping partner' },
     ],
-    insurance: {
-      amount: '£5M',
-      type: 'Public Liability',
-    },
   },
 
-  serviceAreas: ['Main Area', 'North Region', 'South Region'],
+  serviceAreas: ['Eastbourne', 'Polegate', 'Hailsham'],
 
   services: [
     {
@@ -288,57 +297,63 @@ export const siteConfig: SiteConfig = {
   schema: {
     businessType: 'LocalBusiness',
     businessConfig: {
-      name: 'Your Business Name',
-      legalName: 'Your Business Ltd',
+      name: 'DCH Automotive',
+      legalName: 'DCH Automotive',
       description:
-        'Professional local services serving [Your Area]. Quality workmanship, competitive pricing, and excellent customer service.',
-      slogan: 'Your trusted local experts',
-      foundingDate: '2020',
+        'Vehicle security, fleet electrics and Viezu-approved ECU remapping, serving the South East of England from Polegate, East Sussex since 2018.',
+      slogan: 'Vehicle security and fleet electrics, done properly.',
+      foundingDate: '2018',
       numberOfEmployees: '1-10',
       priceRange: '$$',
-      email: 'info@yourbusiness.com',
-      telephone: '+441234567890',
+      email: 'info@DCHautomotive.co.uk',
+      telephone: '+447506016106',
       address: {
-        streetAddress: '123 Main Street',
-        addressLocality: 'Your City',
-        addressRegion: 'Your County',
-        postalCode: 'AB12 3CD',
+        streetAddress: '', // Not yet confirmed with client — see tasks/clients/dch-automotive.md Outstanding
+        addressLocality: 'Polegate',
+        addressRegion: 'East Sussex',
+        postalCode: 'BN26',
         addressCountry: 'GB',
       },
       geo: {
-        latitude: '51.5074',
-        longitude: '-0.1278',
+        latitude: '50.8236',
+        longitude: '0.2478',
       },
       openingHours: [
         {
-          dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-          opens: '09:00',
-          closes: '17:00',
+          dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+          opens: '08:00',
+          closes: '18:00',
         },
       ],
-      areaServed: ['Main Area', 'North Region', 'South Region', 'East Region', 'West Region'],
+      areaServed: ['Eastbourne', 'Polegate', 'Hailsham', 'South East England'],
       credentials: [
+        { name: 'City & Guilds', description: 'Certified installer', category: 'certification' },
         {
-          name: 'Fully Insured',
-          description: 'Public liability and professional indemnity insurance',
+          name: 'IMI Accredited',
+          description: 'Institute of the Motor Industry',
           category: 'certification',
         },
         {
-          name: 'Qualified Team',
-          description: 'All staff are fully trained and certified',
+          name: 'Thatcham Approved',
+          description: 'Insurer-recognised vehicle security',
+          category: 'certification',
+        },
+        {
+          name: 'Viezu Approved Dealer',
+          description: 'ECU remapping partner, KESS3 hardware',
           category: 'certification',
         },
       ],
       socialProfiles: [
-        'https://www.facebook.com/yourbusiness',
-        'https://www.linkedin.com/company/yourbusiness',
+        'https://www.facebook.com/DCHautomotive-105166288262588',
+        'https://www.instagram.com/dchautomotive/',
       ],
       knowsAbout: [
-        'Service Category 1',
-        'Service Category 2',
-        'Service Category 3',
-        'Industry Best Practices',
-        'Local Area Expertise',
+        'Vehicle Security',
+        'Fleet Electrics',
+        'ECU Remapping',
+        'Tow Bar Installation',
+        'Parking Sensor Fitting',
       ],
       offerCatalog: [
         {
