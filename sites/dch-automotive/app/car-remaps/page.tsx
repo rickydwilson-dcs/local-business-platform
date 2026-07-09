@@ -137,9 +137,12 @@ export default function CarRemapsPage() {
               enthusiast fluff.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <button className="bg-brand-primary hover:bg-brand-primary-hover text-brand-on-primary font-heading font-bold uppercase tracking-tight px-10 py-5 transition-all active:scale-95">
+              <a
+                href="#fleet-enquiry"
+                className="inline-flex items-center justify-center bg-brand-primary hover:bg-brand-primary-hover text-brand-on-primary font-heading font-bold uppercase tracking-tight px-10 py-5 transition-all active:scale-95"
+              >
                 Request a Fleet Assessment
-              </button>
+              </a>
               <a
                 href="#services"
                 className="inline-flex items-center justify-center border border-white/20 hover:bg-white/10 text-white font-heading font-bold uppercase tracking-tight px-10 py-5 transition-all"
@@ -328,7 +331,7 @@ export default function CarRemapsPage() {
       </section>
 
       {/* Fleet Enquiry Form (static — see note in car-remaps-stitch conversion) */}
-      <section className="py-24">
+      <section id="fleet-enquiry" className="py-24">
         <div className="container mx-auto px-6">
           <div className="bg-surface-card/20 border border-white/10 p-8 md:p-16 max-w-5xl mx-auto">
             <div className="grid lg:grid-cols-5 gap-16">

@@ -120,8 +120,10 @@ Redesign/upgrade brief: `output/sessions/2026-07/2026-07-07_dch-automotive-redes
 - [ ] Confirm real testimonials/case studies to replace Stitch's fabricated placeholder quotes (Home page — flagged, must not ship as-is)
 - [ ] Ask client whether Stage 2/3/Performance Tuning should share the fleet-focused `/car-remaps` page or get separated onto their own page
 - [ ] Get updated pricing from client for all rebuilt service categories (client said they'll send a list separately — none of the rebuilt pages carry final DCH pricing beyond public IROAD dash cam RRPs)
-- [ ] Real photography needed for Vehicle Security, Bike Security, Fleet Solutions, Accessories, Dash Cameras — pages currently ship with no hero images (omitted to avoid the documented `hero.image` local-path R2 placeholder bug; see `feedback_hero_image_local_path_bug` memory)
+- [ ] Real photography needed for Vehicle Security, Bike Security, Fleet Solutions, Accessories, Dash Cameras — pages currently ship with no hero images. **Correction (2026-07-09):** the R2-bug rationale for omitting these doesn't actually apply — `service-detail-page.tsx` renders `frontmatter.heroImage` via a raw `<img src>`, same as the location template, not through `getImageUrl()`. Local `/public` stock images (e.g. from `public/stitch-images/`) would render fine as an interim measure, same approach used for the location pages below; still want real DCH photography eventually
 - [ ] WCAG contrast check on white-on-orange buttons before shipping
+- [x] Location page hero images added (2026-07-09) — Eastbourne/Polegate/Hailsham now use existing `public/stitch-images/` stock photography instead of the placeholder icon; not town-specific photography, just a legibility/completeness fix
+- [x] Tow Bars and Alarms content cleanup (2026-07-09) — both services were confirmed deleted during the WordPress migration (see "Current Services" table above) but stale references survived into the homepage credentials strip, `site.config.ts` certifications, and all three location pages' hero/FAQ/body copy; removed throughout, trade-certification count corrected 7 → 6
 - [x] Review competitor research / upgrade brief with client stakeholder
 - [x] Run UX-UI-Max skill to generate page design options against the brief
 - [x] Decide theme approach — dark, near-black/orange identity, self-contained in `theme.config.ts`

@@ -485,6 +485,21 @@ section h1 {
   vertical-align: middle;
 }
 
+/* Contact form inputs: browser autofill (name/email/phone) forces a light
+   background but keeps the input's authored `color`, making white text
+   invisible against it until the fill color is overridden. */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+  -webkit-text-fill-color: #ffffff;
+  -webkit-box-shadow: 0 0 0px 1000px #080807 inset;
+  box-shadow: 0 0 0px 1000px #080807 inset;
+  caret-color: #ffffff;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
 /* Home page — stamped credentials plate */
 .stamped-plate {
   background: linear-gradient(145deg, #1a1a1a, #0a0a0a);

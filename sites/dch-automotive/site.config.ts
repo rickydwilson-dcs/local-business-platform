@@ -242,7 +242,7 @@ export const siteConfig: SiteConfig = {
     stats: [
       { value: '2018', label: 'Established', description: 'Trading since 2018' },
       {
-        value: '7',
+        value: '6',
         label: 'Trade Certifications',
         description: 'City & Guilds, IMI, Thatcham + more',
       },
@@ -258,7 +258,6 @@ export const siteConfig: SiteConfig = {
       { name: 'IMI Accredited', description: 'Institute of the Motor Industry' },
       { name: 'Thatcham Approved', description: 'Insurer-recognised security' },
       { name: 'Autowatch Approved', description: 'Approved installer' },
-      { name: 'Witter Approved', description: 'Tow bar installer' },
       { name: 'Smartrack Approved', description: 'Tracking installer' },
       { name: 'Thinkware Approved', description: 'Dash cam installer' },
       { name: 'Viezu Approved Dealer', description: 'ECU remapping partner' },

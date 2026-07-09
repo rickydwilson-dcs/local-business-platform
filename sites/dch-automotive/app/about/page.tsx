@@ -8,7 +8,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Shield, Award, CheckCircle, Phone } from 'lucide-react';
-import type { SiteConfigSummary } from '@platform/core-components';
 import { Schema } from '@platform/core-components';
 import { BreadcrumbBar } from '@/components/breadcrumb-bar';
 import { siteConfig } from '@/site.config';

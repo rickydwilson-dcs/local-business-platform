@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'DCH Automotive | Vehicle Security & Fleet Electrics',
@@ -11,7 +12,6 @@ const CREDENTIALS = [
   { label: 'Accredited', value: 'IMI Approved' },
   { label: 'Security', value: 'Thatcham' },
   { label: 'Installer', value: 'Autowatch' },
-  { label: 'Tow Bars', value: 'Witter' },
   { label: 'Tracking', value: 'Smartrack' },
   { label: 'Dash Cams', value: 'Thinkware' },
 ];
@@ -19,9 +19,11 @@ const CREDENTIALS = [
 const SERVICES = [
   {
     title: 'Vehicle Security',
-    description: 'Insurance approved trackers, S5 & S7 immobilisers, and high-spec alarm systems.',
+    description:
+      'Insurance approved trackers and Autowatch Ghost 2 immobilisers, fitted to Thatcham standards.',
     icon: 'security',
     image: '/stitch-images/img-006.jpg',
+    href: '/services/vehicle-security',
   },
   {
     title: 'Bike Security',
@@ -29,19 +31,14 @@ const SERVICES = [
       'Specialist tracking and anti-theft solutions specifically designed for motorcycles.',
     icon: 'motorcycle',
     image: '/stitch-images/img-003.jpg',
-  },
-  {
-    title: 'Tow Bars',
-    description:
-      'Fixed and detachable tow bar installations with dedicated vehicle-specific electrics.',
-    icon: 'rv_hookup',
-    image: '/stitch-images/img-007.jpg',
+    href: '/services/vehicle-security',
   },
   {
     title: 'Parking Aids',
     description: 'Flush-fit parking sensors and high-definition reverse camera systems.',
     icon: 'settings_input_component',
     image: '/stitch-images/img-010.jpg',
+    href: '/services/parking-aids',
   },
   {
     title: 'Fleet Solutions',
@@ -49,12 +46,14 @@ const SERVICES = [
       'Mass-deployment of tracking, telematics, and security for commercial vehicle fleets.',
     icon: 'local_shipping',
     image: '/stitch-images/img-005.jpg',
+    href: '/services/fleet-solutions',
   },
   {
     title: 'Accessories',
     description: 'Dash cams, beacon bars, work lights, and bespoke electrical modifications.',
     icon: 'construction',
     image: '/stitch-images/img-009.jpg',
+    href: '/services/accessories',
   },
 ];
 
@@ -68,7 +67,7 @@ const TESTIMONIALS = [
   },
   {
     quote:
-      '"Had a Thatcham alarm and Witter tow bar fitted to my new Defender. The finish is factory-standard. These guys really know their electrics. Wouldn\'t go anywhere else."',
+      '"Had an Autowatch Ghost immobiliser and dash cam fitted to my new Defender. The finish is factory-standard. These guys really know their electrics. Wouldn\'t go anywhere else."',
     initials: 'JH',
     name: 'James Harrison',
     role: 'Private Client — SAMPLE QUOTE, not a real customer',
@@ -91,21 +90,27 @@ export default function HomePage() {
         </div>
         <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-3xl">
-            <h1 className="text-6xl md:text-8xl font-heading font-black uppercase tracking-tighter leading-none mb-6">
+            <h1 className="text-4xl md:text-6xl font-heading font-black uppercase tracking-tight leading-tight mb-6">
               Vehicle Security <br />
               <span className="text-brand-primary">Done Properly.</span>
             </h1>
-            <p className="text-xl md:text-2xl text-white/80 max-w-xl mb-10 font-light border-l-4 border-brand-primary pl-6">
+            <p className="text-lg md:text-xl text-white/80 max-w-xl mb-10 font-light border-l-4 border-brand-primary pl-6">
               Professional vehicle security, fleet electrics, and ECU remapping installer serving
               the South East. Thatcham and IMI certified expertise.
             </p>
             <div className="flex flex-wrap gap-4">
-              <button className="bg-brand-primary text-brand-on-primary px-8 py-4 font-heading font-black uppercase tracking-widest hover:bg-brand-primary-hover transition-colors">
+              <Link
+                href="/services"
+                className="bg-brand-primary text-brand-on-primary px-6 py-3 font-heading font-bold uppercase tracking-wide hover:bg-brand-primary-hover transition-colors"
+              >
                 View Services
-              </button>
-              <button className="border-2 border-white text-white px-8 py-4 font-heading font-black uppercase tracking-widest hover:bg-white hover:text-surface-background transition-all">
+              </Link>
+              <Link
+                href="/services/fleet-solutions"
+                className="border-2 border-white text-white px-6 py-3 font-heading font-bold uppercase tracking-wide hover:bg-white hover:text-surface-background transition-all"
+              >
                 Fleet Solutions
-              </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -137,8 +142,9 @@ export default function HomePage() {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {SERVICES.map((service) => (
-            <div
+            <Link
               key={service.title}
+              href={service.href}
               className="group bg-surface-card border border-surface-card-border hover:border-brand-primary transition-all"
             >
               <div className="h-56 relative overflow-hidden">
@@ -161,7 +167,7 @@ export default function HomePage() {
                 <h3 className="text-xl font-heading font-bold uppercase mb-2">{service.title}</h3>
                 <p className="text-white/60 text-sm leading-relaxed">{service.description}</p>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </section>
@@ -276,9 +282,12 @@ export default function HomePage() {
             >
               07506 016106
             </a>
-            <button className="bg-brand-primary text-brand-on-primary px-10 py-5 font-heading font-black uppercase tracking-widest shadow-2xl hover:-translate-y-0.5 transition-all">
+            <Link
+              href="/contact"
+              className="bg-brand-primary text-brand-on-primary px-10 py-5 font-heading font-black uppercase tracking-widest shadow-2xl hover:-translate-y-0.5 transition-all"
+            >
               Request a Callback
-            </button>
+            </Link>
           </div>
         </div>
       </section>
