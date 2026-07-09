@@ -209,11 +209,10 @@ export default function HomePage() {
             <div className="aspect-video relative rounded-lg overflow-hidden border border-white/10">
               {/* eslint-disable-next-line @next/next/no-img-element -- static Stitch design review asset, not next/image */}
               <img
-                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000"
+                className="w-full h-full object-cover"
                 alt="A diagnostic laptop connected to a commercial van's OBD port showing ECU mapping data"
                 src="/stitch-images/img-002.jpg"
               />
-              <div className="absolute inset-0 car-remap-gradient pointer-events-none" />
             </div>
             <div className="absolute -bottom-6 -right-6 w-32 h-32 border-r-4 border-b-4 border-brand-primary/20" />
           </div>

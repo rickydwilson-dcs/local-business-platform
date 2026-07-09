@@ -496,8 +496,3 @@ section h1 {
   transform: translateY(-2px);
   border-color: #f2730d;
 }
-
-/* Home page — Car Remaps section image gradient */
-.car-remap-gradient {
-  background: linear-gradient(to right, rgba(12, 11, 9, 1) 0%, rgba(12, 11, 9, 0.7) 100%);
-}
