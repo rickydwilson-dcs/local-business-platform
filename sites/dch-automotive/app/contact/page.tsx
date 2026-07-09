@@ -11,9 +11,10 @@ import { Phone, Mail, MapPin, Clock } from 'lucide-react';
 import { siteConfig } from '@/site.config';
 import { PHONE_DISPLAY, PHONE_TEL, BUSINESS_EMAIL, ADDRESS } from '@/lib/contact-info';
 import { absUrl } from '@/lib/site';
-import { Schema, ContactForm } from '@platform/core-components';
+import { Schema } from '@platform/core-components';
 import { BreadcrumbBar } from '@/components/breadcrumb-bar';
 import { PageHero } from '@/components/page-hero';
+import { ContactForm } from '@/components/contact-form';
 
 export const metadata: Metadata = {
   title: `Contact Us | ${siteConfig.business.name}`,
@@ -43,11 +44,7 @@ export default function ContactPage() {
         <div className="grid lg:grid-cols-3 gap-12">
           {/* Contact Form */}
           <div className="lg:col-span-2">
-            <ContactForm
-              services={siteConfig.services}
-              serviceAreas={siteConfig.serviceAreas}
-              darkMode
-            />
+            <ContactForm services={siteConfig.services} serviceAreas={siteConfig.serviceAreas} />
           </div>
 
           {/* Sidebar */}
