@@ -1,8 +1,14 @@
-import type { LocationsPageTemplateProps } from '@platform/core-components';
 import Link from 'next/link';
 import { BreadcrumbBar } from '@/components/breadcrumb-bar';
+import { PageHero } from '@/components/page-hero';
 
-export function LocationsPage({ locations }: LocationsPageTemplateProps) {
+interface LocationCard {
+  slug: string;
+  title: string;
+  description?: string;
+}
+
+export function LocationsPage({ locations }: { locations: LocationCard[] }) {
   const breadcrumbItems = [
     { name: 'Home', href: '/' },
     { name: 'Locations', href: '/locations', current: true },
@@ -12,44 +18,40 @@ export function LocationsPage({ locations }: LocationsPageTemplateProps) {
     <>
       <BreadcrumbBar items={breadcrumbItems} />
 
-      {/* Page Title */}
-      <section className="section-standard lg:py-24 bg-surface-background">
-        <div className="container-standard">
-          <div className="text-center">
-            <h1 className="heading-hero">Our Service Areas</h1>
-            <p className="text-xl text-surface-foreground mb-8 mx-auto max-w-3xl">
-              Find our professional services in your area.
-            </p>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        title="Our Service Areas"
+        description="Vehicle security, fleet electrics and accessories across the South East of England."
+      />
 
-      {/* Locations Grid */}
-      <section className="section-standard bg-surface-subtle">
-        <div className="container-standard">
+      <section className="py-16 sm:py-24 bg-[#080807] border-y border-white/5">
+        <div className="container mx-auto px-6">
           {locations.length === 0 ? (
             <div className="text-center py-12">
-              <p className="text-surface-muted-foreground text-lg">
-                No locations available yet. Check back soon.
-              </p>
+              <p className="text-white/60 text-lg">No locations available yet. Check back soon.</p>
             </div>
           ) : (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {locations.map((location) => (
                 <Link
                   key={location.slug}
                   href={`/locations/${location.slug}`}
-                  className="bg-surface-background rounded-2xl shadow-lg border border-surface-border p-6 group hover:shadow-xl transition-shadow text-center"
+                  className="group bg-surface-card border border-surface-card-border hover:border-brand-primary transition-all p-8 text-center"
                 >
-                  <h2 className="text-xl font-semibold group-hover:text-brand-primary transition-colors text-surface-foreground">
+                  <span
+                    className="material-symbols-outlined text-brand-primary mb-4 inline-block"
+                    style={{ fontSize: '3rem' }}
+                  >
+                    location_on
+                  </span>
+                  <h2 className="text-xl font-heading font-bold uppercase mb-2">
                     {location.title}
                   </h2>
                   {location.description && (
-                    <p className="text-surface-muted-foreground mt-2 line-clamp-3">
+                    <p className="text-white/60 text-sm leading-relaxed line-clamp-3">
                       {location.description}
                     </p>
                   )}
-                  <span className="inline-block mt-4 text-brand-primary font-medium group-hover:translate-x-1 transition-transform">
+                  <span className="inline-block mt-4 text-brand-primary font-bold uppercase tracking-wide text-sm group-hover:translate-x-1 transition-transform">
                     View services &rarr;
                   </span>
                 </Link>

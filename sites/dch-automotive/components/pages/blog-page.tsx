@@ -1,6 +1,6 @@
-import type { BlogPageTemplateProps } from '@platform/core-components';
 import Link from 'next/link';
 import { BreadcrumbBar } from '@/components/breadcrumb-bar';
+import { PageHero } from '@/components/page-hero';
 
 const categoryLabels: Record<string, string> = {
   'industry-tips': 'Industry Tips',
@@ -10,7 +10,18 @@ const categoryLabels: Record<string, string> = {
   news: 'News',
 };
 
-export function BlogPage({ posts }: BlogPageTemplateProps) {
+interface BlogCard {
+  slug: string;
+  title: string;
+  excerpt: string;
+  date: string;
+  category: string;
+  heroImage?: string;
+  readingTime?: number;
+  author?: { name: string };
+}
+
+export function BlogPage({ posts }: { posts: BlogCard[] }) {
   const breadcrumbItems = [
     { name: 'Home', href: '/' },
     { name: 'Blog', href: '/blog', current: true },
@@ -20,37 +31,40 @@ export function BlogPage({ posts }: BlogPageTemplateProps) {
     <>
       <BreadcrumbBar items={breadcrumbItems} />
 
-      {/* Page Title */}
-      <section className="section-standard lg:py-24 bg-surface-background">
-        <div className="container-standard">
-          <div className="text-center">
-            <h1 className="heading-hero">Industry Insights & Expert Tips</h1>
-            <p className="text-xl text-surface-foreground mb-8 mx-auto max-w-3xl">
-              Professional guidance, tips, and industry news from our experienced team.
-            </p>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        title="Industry Insights & Expert Tips"
+        description="Professional guidance, tips, and industry news from our experienced team."
+      />
 
-      {/* Posts Grid */}
-      <section className="section-standard bg-surface-subtle">
-        <div className="container-standard">
+      <section className="py-16 sm:py-24 bg-[#080807] border-y border-white/5">
+        <div className="container mx-auto px-6">
           {posts.length === 0 ? (
             <div className="text-center py-12">
-              <p className="text-surface-muted-foreground text-lg">
+              <p className="text-white/60 text-lg">
                 No blog posts yet. Check back soon for industry insights and expert tips.
               </p>
             </div>
           ) : (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {posts.map((post) => (
-                <article
+                <Link
                   key={post.slug}
-                  className="bg-surface-background rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow group border border-surface-border"
+                  href={`/blog/${post.slug}`}
+                  className="group bg-surface-card border border-surface-card-border hover:border-brand-primary transition-all"
                 >
-                  <div className="p-6">
-                    <div className="flex items-center gap-2 text-sm text-surface-muted-foreground mb-3">
-                      <span className="bg-brand-primary/10 text-brand-primary text-xs font-semibold px-3 py-1 rounded-full">
+                  {post.heroImage && (
+                    <div className="h-48 relative overflow-hidden">
+                      {/* eslint-disable-next-line @next/next/no-img-element -- static Stitch design review asset, not next/image */}
+                      <img
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                        alt={post.title}
+                        src={post.heroImage}
+                      />
+                    </div>
+                  )}
+                  <div className="p-8">
+                    <div className="flex items-center gap-2 text-xs text-white/40 mb-3">
+                      <span className="bg-brand-primary/10 text-brand-primary font-bold uppercase tracking-wide px-3 py-1">
                         {categoryLabels[post.category] || post.category}
                       </span>
                       <time dateTime={post.date}>
@@ -61,27 +75,20 @@ export function BlogPage({ posts }: BlogPageTemplateProps) {
                         })}
                       </time>
                     </div>
-                    <h2 className="text-xl font-bold text-surface-foreground mb-3 group-hover:text-brand-primary transition-colors">
-                      <Link href={`/blog/${post.slug}`}>{post.title}</Link>
-                    </h2>
-                    <p className="text-surface-muted-foreground mb-4 line-clamp-3">
+                    <h2 className="text-xl font-heading font-bold uppercase mb-2">{post.title}</h2>
+                    <p className="text-white/60 text-sm leading-relaxed line-clamp-3 mb-4">
                       {post.excerpt}
                     </p>
                     <div className="flex items-center justify-between">
                       {post.author && (
-                        <span className="text-sm text-surface-muted-foreground">
-                          {post.author.name}
-                        </span>
+                        <span className="text-xs text-white/40">{post.author.name}</span>
                       )}
-                      <Link
-                        href={`/blog/${post.slug}`}
-                        className="text-brand-primary font-medium text-sm hover:underline"
-                      >
+                      <span className="text-brand-primary font-bold uppercase tracking-wide text-sm group-hover:translate-x-1 transition-transform">
                         Read more &rarr;
-                      </Link>
+                      </span>
                     </div>
                   </div>
-                </article>
+                </Link>
               ))}
             </div>
           )}

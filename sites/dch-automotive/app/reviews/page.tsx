@@ -6,13 +6,11 @@
  */
 
 import type { Metadata } from 'next';
-import type { SiteConfigSummary } from '@platform/core-components';
 import { Schema } from '@platform/core-components';
 import { ReviewsPage } from '@/components/pages/reviews-page';
 import { getTestimonials, calculateAggregateRating } from '@/lib/content';
 import { absUrl } from '@/lib/site';
 import { siteConfig } from '@/site.config';
-import { PHONE_DISPLAY } from '@/lib/contact-info';
 
 export const dynamic = 'force-static';
 
@@ -38,20 +36,9 @@ export default async function ReviewsPageRoute() {
   const testimonials = await getTestimonials();
   const { average, count } = calculateAggregateRating(testimonials);
 
-  const siteSummary: SiteConfigSummary = {
-    name: siteConfig.business.name,
-    tagline: siteConfig.tagline,
-    phone: siteConfig.business.phone,
-    phoneDisplay: PHONE_DISPLAY,
-    address: { city: siteConfig.business.address.city },
-    cta: siteConfig.cta,
-    stats: siteConfig.credentials?.stats,
-  };
-
   return (
     <>
       <ReviewsPage
-        siteConfig={siteSummary}
         testimonials={testimonials.map((t) => ({
           slug: t.slug || t.customerName,
           name: t.customerName,

@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import type { ServiceDetailPageTemplateProps } from '@platform/core-components';
 import { BreadcrumbBar } from '@/components/breadcrumb-bar';
+import { FaqAccordion } from '@/components/faq-accordion';
+import { CtaBand } from '@/components/cta-band';
 
 const SERVICE_ICONS: Record<string, string> = {
   'Vehicle Security': 'gps_fixed',
@@ -111,65 +113,13 @@ export function ServiceDetailPage({
       </section>
 
       {/* FAQs */}
-      {frontmatter.faqs && frontmatter.faqs.length > 0 && (
-        <section className="py-16 sm:py-24 bg-[#080807] border-y border-white/5">
-          <div className="container mx-auto px-6">
-            <div className="max-w-4xl mx-auto">
-              <h2 className="text-4xl font-heading font-black uppercase tracking-tight mb-2">
-                Frequently Asked Questions
-              </h2>
-              <div className="w-20 h-1.5 bg-brand-primary mb-12" />
-              <div className="space-y-4">
-                {frontmatter.faqs.map((faq) => (
-                  <details
-                    key={faq.question}
-                    className="group bg-surface-card border border-surface-card-border hover:border-brand-primary transition-all p-6"
-                  >
-                    <summary className="flex items-center justify-between cursor-pointer font-heading font-bold uppercase tracking-tight text-lg list-none">
-                      {faq.question}
-                      <span className="material-symbols-outlined text-brand-primary transition-transform group-open:rotate-180">
-                        expand_more
-                      </span>
-                    </summary>
-                    <p className="text-white/70 mt-4 leading-relaxed">{faq.answer}</p>
-                  </details>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-      )}
+      {frontmatter.faqs && frontmatter.faqs.length > 0 && <FaqAccordion items={frontmatter.faqs} />}
 
-      {/* CTA band */}
-      <section className="relative py-20 overflow-hidden">
-        <div className="absolute inset-0 bg-brand-primary/5 z-0" />
-        <div className="absolute left-0 top-0 w-2 h-full bg-brand-primary" />
-        <div className="container mx-auto px-6 relative z-10 flex flex-col md:flex-row justify-between items-center gap-12">
-          <div>
-            <h2 className="text-4xl font-heading font-black uppercase tracking-tight mb-2">
-              Ready for {frontmatter.title}?
-            </h2>
-            <p className="text-xl text-white/60">
-              Based in {siteConfig.address.city}, serving{' '}
-              {siteConfig.address.county ?? 'the South East'}.
-            </p>
-          </div>
-          <div className="flex flex-col items-center md:items-end">
-            <a
-              className="text-3xl font-heading font-black text-brand-primary mb-4 hover:brightness-125 transition-all"
-              href={`tel:${phoneTel}`}
-            >
-              {siteConfig.phoneDisplay}
-            </a>
-            <Link
-              href={siteConfig.cta.primary.href}
-              className="bg-brand-primary text-brand-on-primary px-10 py-5 font-heading font-black uppercase tracking-widest shadow-2xl hover:-translate-y-0.5 transition-all inline-block"
-            >
-              {siteConfig.cta.primary.label}
-            </Link>
-          </div>
-        </div>
-      </section>
+      <CtaBand
+        siteConfig={siteConfig}
+        title={`Ready for ${frontmatter.title}?`}
+        description={`Based in ${siteConfig.address.city}, serving ${siteConfig.address.county ?? 'the South East'}.`}
+      />
     </>
   );
 }
