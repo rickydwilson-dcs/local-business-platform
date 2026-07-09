@@ -98,6 +98,7 @@ export default async function LocationPageRoute({ params }: { params: Promise<Pa
   const locationSchema = getServiceAreaSchema(locationName, slug);
 
   const breadcrumbItems = [
+    { name: 'Home', href: '/' },
     { name: 'Locations', href: '/locations' },
     { name: locationName, href: `/locations/${slug}`, current: true },
   ];

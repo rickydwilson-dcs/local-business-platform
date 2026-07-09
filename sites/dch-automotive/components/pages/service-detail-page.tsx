@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import type { ServiceDetailPageTemplateProps } from '@platform/core-components';
+import { BreadcrumbBar } from '@/components/breadcrumb-bar';
 
 const SERVICE_ICONS: Record<string, string> = {
   'Vehicle Security': 'gps_fixed',
@@ -23,31 +24,7 @@ export function ServiceDetailPage({
     <>
       {schemaNodes}
 
-      {/* Breadcrumb */}
-      <div className="bg-[#080807] border-b border-white/5 py-4">
-        <div className="container mx-auto px-6">
-          <nav
-            aria-label="Breadcrumb"
-            className="flex items-center gap-2 text-xs uppercase tracking-widest"
-          >
-            {breadcrumbs.map((item, i) => (
-              <span key={item.href} className="flex items-center gap-2">
-                {i > 0 && <span className="text-white/30">/</span>}
-                {item.current ? (
-                  <span className="text-brand-primary font-bold">{item.name}</span>
-                ) : (
-                  <Link
-                    href={item.href}
-                    className="text-white/50 hover:text-white transition-colors"
-                  >
-                    {item.name}
-                  </Link>
-                )}
-              </span>
-            ))}
-          </nav>
-        </div>
-      </div>
+      <BreadcrumbBar items={breadcrumbs} />
 
       {/* Hero */}
       <section className="py-16 sm:py-24 container mx-auto px-6">

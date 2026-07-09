@@ -11,7 +11,8 @@ import { Phone, Mail, MapPin, Clock } from 'lucide-react';
 import { siteConfig } from '@/site.config';
 import { PHONE_DISPLAY, PHONE_TEL, BUSINESS_EMAIL, ADDRESS } from '@/lib/contact-info';
 import { absUrl } from '@/lib/site';
-import { Schema, Breadcrumbs, ContactForm } from '@platform/core-components';
+import { Schema, ContactForm } from '@platform/core-components';
+import { BreadcrumbBar } from '@/components/breadcrumb-bar';
 
 export const metadata: Metadata = {
   title: `Contact Us | ${siteConfig.business.name}`,
@@ -22,16 +23,14 @@ export const metadata: Metadata = {
 };
 
 export default function ContactPage() {
-  const breadcrumbItems = [{ name: 'Contact', href: '/contact', current: true }];
+  const breadcrumbItems = [
+    { name: 'Home', href: '/' },
+    { name: 'Contact', href: '/contact', current: true },
+  ];
 
   return (
     <>
-      {/* Breadcrumbs */}
-      <div className="bg-surface-subtle border-b border-surface-border">
-        <div className="container-standard py-4">
-          <Breadcrumbs items={breadcrumbItems} />
-        </div>
-      </div>
+      <BreadcrumbBar items={breadcrumbItems} />
 
       <div className="min-h-screen bg-surface-background">
         {/* Hero Section */}

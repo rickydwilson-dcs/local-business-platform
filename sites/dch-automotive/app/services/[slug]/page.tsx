@@ -137,6 +137,7 @@ export default async function ServicePageRoute({ params }: { params: Promise<Par
   const breadcrumbItems =
     isLocationSpecific && locationContext
       ? [
+          { name: 'Home', href: '/' },
           { name: 'Locations', href: '/locations' },
           {
             name: locationContext.locationName,
@@ -145,6 +146,7 @@ export default async function ServicePageRoute({ params }: { params: Promise<Par
           { name: serviceName, href: `/services/${slug}`, current: true },
         ]
       : [
+          { name: 'Home', href: '/' },
           { name: 'Services', href: '/services' },
           { name: serviceName, href: `/services/${slug}`, current: true },
         ];

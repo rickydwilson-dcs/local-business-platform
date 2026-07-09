@@ -1,18 +1,16 @@
 import type { ProjectsPageTemplateProps } from '@platform/core-components';
 import Link from 'next/link';
-import { Breadcrumbs } from '@platform/core-components';
+import { BreadcrumbBar } from '@/components/breadcrumb-bar';
 
 export function ProjectsPage({ projects }: ProjectsPageTemplateProps) {
-  const breadcrumbItems = [{ name: 'Projects', href: '/projects', current: true }];
+  const breadcrumbItems = [
+    { name: 'Home', href: '/' },
+    { name: 'Projects', href: '/projects', current: true },
+  ];
 
   return (
     <>
-      {/* Breadcrumbs */}
-      <div className="bg-surface-subtle border-b border-surface-border">
-        <div className="container-standard py-4">
-          <Breadcrumbs items={breadcrumbItems} />
-        </div>
-      </div>
+      <BreadcrumbBar items={breadcrumbItems} />
 
       {/* Page Title */}
       <section className="section-standard lg:py-24 bg-surface-background">

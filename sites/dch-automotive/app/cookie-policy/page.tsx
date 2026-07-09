@@ -9,7 +9,7 @@ import Link from 'next/link';
 import { siteConfig } from '@/site.config';
 import { BUSINESS_EMAIL } from '@/lib/contact-info';
 import { absUrl } from '@/lib/site';
-import { Breadcrumbs } from '@platform/core-components';
+import { BreadcrumbBar } from '@/components/breadcrumb-bar';
 
 export const metadata: Metadata = {
   title: `Cookie Policy | ${siteConfig.business.name}`,
@@ -20,7 +20,10 @@ export const metadata: Metadata = {
 };
 
 export default function CookiePolicyPage() {
-  const breadcrumbItems = [{ name: 'Cookie Policy', href: '/cookie-policy', current: true }];
+  const breadcrumbItems = [
+    { name: 'Home', href: '/' },
+    { name: 'Cookie Policy', href: '/cookie-policy', current: true },
+  ];
   const lastUpdated = new Date().toLocaleDateString('en-GB', {
     day: 'numeric',
     month: 'long',
@@ -29,12 +32,7 @@ export default function CookiePolicyPage() {
 
   return (
     <>
-      {/* Breadcrumbs */}
-      <div className="bg-surface-subtle border-b border-surface-border">
-        <div className="container-standard py-4">
-          <Breadcrumbs items={breadcrumbItems} />
-        </div>
-      </div>
+      <BreadcrumbBar items={breadcrumbItems} />
 
       <div className="min-h-screen bg-surface-background">
         <article className="section-standard">

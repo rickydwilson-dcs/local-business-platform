@@ -1,12 +1,7 @@
 import type { BlogPostPageTemplateProps } from '@platform/core-components';
 import Link from 'next/link';
-import {
-  Breadcrumbs,
-  BlogPostHero,
-  AuthorCard,
-  CTASection,
-  BlogPostCard,
-} from '@platform/core-components';
+import { BlogPostHero, AuthorCard, CTASection, BlogPostCard } from '@platform/core-components';
+import { BreadcrumbBar } from '@/components/breadcrumb-bar';
 
 const categoryLabels: Record<string, string> = {
   'industry-tips': 'Industry Tips',
@@ -29,12 +24,7 @@ export function BlogPostPage({
     <>
       {schemaNodes}
 
-      {/* Breadcrumbs */}
-      <div className="bg-surface-subtle border-b border-surface-border">
-        <div className="container-standard py-4">
-          <Breadcrumbs items={breadcrumbs} />
-        </div>
-      </div>
+      <BreadcrumbBar items={breadcrumbs} />
 
       <div>
         <article>

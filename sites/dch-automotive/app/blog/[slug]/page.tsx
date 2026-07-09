@@ -91,6 +91,7 @@ export default async function BlogPostPageRoute({ params }: { params: Promise<Pa
   const readingTime = frontmatter.readingTime || calculateReadingTime(rawContent);
 
   const breadcrumbItems = [
+    { name: 'Home', href: '/' },
     { name: 'Blog', href: '/blog' },
     { name: frontmatter.title, href: `/blog/${slug}`, current: true },
   ];

@@ -1,6 +1,6 @@
 import type { BlogPageTemplateProps } from '@platform/core-components';
 import Link from 'next/link';
-import { Breadcrumbs } from '@platform/core-components';
+import { BreadcrumbBar } from '@/components/breadcrumb-bar';
 
 const categoryLabels: Record<string, string> = {
   'industry-tips': 'Industry Tips',
@@ -11,16 +11,14 @@ const categoryLabels: Record<string, string> = {
 };
 
 export function BlogPage({ posts }: BlogPageTemplateProps) {
-  const breadcrumbItems = [{ name: 'Blog', href: '/blog', current: true }];
+  const breadcrumbItems = [
+    { name: 'Home', href: '/' },
+    { name: 'Blog', href: '/blog', current: true },
+  ];
 
   return (
     <>
-      {/* Breadcrumbs */}
-      <div className="bg-surface-subtle border-b border-surface-border">
-        <div className="container-standard py-4">
-          <Breadcrumbs items={breadcrumbItems} />
-        </div>
-      </div>
+      <BreadcrumbBar items={breadcrumbItems} />
 
       {/* Page Title */}
       <section className="section-standard lg:py-24 bg-surface-background">

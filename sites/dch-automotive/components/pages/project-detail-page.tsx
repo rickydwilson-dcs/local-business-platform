@@ -1,5 +1,6 @@
 import type { ProjectDetailPageTemplateProps } from '@platform/core-components';
-import { Breadcrumbs, CTASection } from '@platform/core-components';
+import { CTASection } from '@platform/core-components';
+import { BreadcrumbBar } from '@/components/breadcrumb-bar';
 
 export function ProjectDetailPage({
   siteConfig,
@@ -9,12 +10,7 @@ export function ProjectDetailPage({
 }: ProjectDetailPageTemplateProps) {
   return (
     <>
-      {/* Breadcrumbs */}
-      <div className="bg-surface-subtle border-b border-surface-border">
-        <div className="container-standard py-4">
-          <Breadcrumbs items={breadcrumbs} />
-        </div>
-      </div>
+      <BreadcrumbBar items={breadcrumbs} />
 
       <div>
         {/* Hero/Title Section */}

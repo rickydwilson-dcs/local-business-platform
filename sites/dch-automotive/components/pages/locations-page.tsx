@@ -1,18 +1,16 @@
 import type { LocationsPageTemplateProps } from '@platform/core-components';
 import Link from 'next/link';
-import { Breadcrumbs } from '@platform/core-components';
+import { BreadcrumbBar } from '@/components/breadcrumb-bar';
 
 export function LocationsPage({ locations }: LocationsPageTemplateProps) {
-  const breadcrumbItems = [{ name: 'Locations', href: '/locations', current: true }];
+  const breadcrumbItems = [
+    { name: 'Home', href: '/' },
+    { name: 'Locations', href: '/locations', current: true },
+  ];
 
   return (
     <>
-      {/* Breadcrumbs */}
-      <div className="bg-surface-subtle border-b border-surface-border">
-        <div className="container-standard py-4">
-          <Breadcrumbs items={breadcrumbItems} />
-        </div>
-      </div>
+      <BreadcrumbBar items={breadcrumbItems} />
 
       {/* Page Title */}
       <section className="section-standard lg:py-24 bg-surface-background">

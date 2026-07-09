@@ -1,5 +1,6 @@
 import type { LocationDetailPageTemplateProps } from '@platform/core-components';
-import { Breadcrumbs, LocationHero, FAQSection, CTASection } from '@platform/core-components';
+import { LocationHero, FAQSection, CTASection } from '@platform/core-components';
+import { BreadcrumbBar } from '@/components/breadcrumb-bar';
 
 export function LocationDetailPage({
   siteConfig,
@@ -14,12 +15,7 @@ export function LocationDetailPage({
     <>
       {schemaNodes}
 
-      {/* Breadcrumbs */}
-      <div className="bg-surface-subtle border-b border-surface-border">
-        <div className="container-standard py-4">
-          <Breadcrumbs items={breadcrumbs} />
-        </div>
-      </div>
+      <BreadcrumbBar items={breadcrumbs} />
 
       <div>
         {/* Hero Section */}

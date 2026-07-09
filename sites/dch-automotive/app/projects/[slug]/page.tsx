@@ -83,6 +83,7 @@ export default async function ProjectPageRoute({ params }: { params: Promise<Par
   const { content: mdxContent } = await loadMdx({ baseDir: 'projects', slug });
 
   const breadcrumbItems = [
+    { name: 'Home', href: '/' },
     { name: 'Projects', href: '/projects' },
     { name: frontmatter.title, href: `/projects/${slug}`, current: true },
   ];

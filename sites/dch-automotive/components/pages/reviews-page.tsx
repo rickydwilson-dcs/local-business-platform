@@ -1,8 +1,12 @@
 import type { ReviewsPageTemplateProps } from '@platform/core-components';
-import { Breadcrumbs, TestimonialCard, AggregateRatingDisplay } from '@platform/core-components';
+import { TestimonialCard, AggregateRatingDisplay } from '@platform/core-components';
+import { BreadcrumbBar } from '@/components/breadcrumb-bar';
 
 export function ReviewsPage({ testimonials }: ReviewsPageTemplateProps) {
-  const breadcrumbItems = [{ name: 'Reviews', href: '/reviews', current: true }];
+  const breadcrumbItems = [
+    { name: 'Home', href: '/' },
+    { name: 'Reviews', href: '/reviews', current: true },
+  ];
 
   // Compute average rating
   const count = testimonials.length;
@@ -13,12 +17,7 @@ export function ReviewsPage({ testimonials }: ReviewsPageTemplateProps) {
 
   return (
     <>
-      {/* Breadcrumbs */}
-      <div className="bg-surface-subtle border-b border-surface-border">
-        <div className="container-standard py-4">
-          <Breadcrumbs items={breadcrumbItems} />
-        </div>
-      </div>
+      <BreadcrumbBar items={breadcrumbItems} />
 
       {/* Page Title */}
       <section className="section-standard lg:py-24 bg-surface-background">
