@@ -86,11 +86,10 @@ export function ServiceDetailPage({
               <div className="aspect-[4/3] relative overflow-hidden border border-white/10">
                 {/* eslint-disable-next-line @next/next/no-img-element -- static Stitch design review asset, not next/image */}
                 <img
-                  className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000"
+                  className="w-full h-full object-cover"
                   alt={`${frontmatter.title} — DCH Automotive`}
                   src={frontmatter.heroImage}
                 />
-                <div className="absolute inset-0 car-remap-gradient pointer-events-none" />
               </div>
             ) : (
               <div className="stamped-plate aspect-[4/3] flex items-center justify-center">
