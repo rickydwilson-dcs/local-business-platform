@@ -6,6 +6,16 @@ Notable platform-level changes to the Local Business Platform. Site-specific cha
 
 ---
 
+## 2026-07-09
+
+### Sites
+
+- `sites/dch-automotive` built out and prepared for its first Vercel deployment: dark/orange self-contained theme, bespoke `ContactForm`, real Car Remaps catalogue with embedded Viezu dealer widget, real Eastbourne/Polegate/Hailsham location content, and a site-specific `vercel.json` pointing the Turborepo build filter at the site
+- `.env.example` for `dch-automotive` documents which variables are shared across LBP sites (NewRelic license key, Supabase URL, Resend API key) versus which must be unique per site (`CSRF_SECRET`); initial deploy targets the Vercel-assigned URL rather than the live `dchautomotive.co.uk` domain, pending domain cutover
+- Known gaps carried into this deploy (tracked in `tasks/clients/dch-automotive.md`): `/reviews` still serves generic base-template placeholder testimonials, and five service pages (Vehicle Security, Bike Security, Fleet Solutions, Accessories, Dash Cameras) ship without hero images — both flagged for a follow-up content pass before the real domain is cut over
+
+---
+
 ## 2026-02-08
 
 ### Architecture
