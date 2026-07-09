@@ -79,7 +79,7 @@ export default function HomePage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative h-screen min-h-[700px] flex items-center overflow-hidden">
+      <section className="relative h-[calc(100vh-5rem)] min-h-[620px] flex items-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <div
             className="w-full h-full bg-cover bg-center"

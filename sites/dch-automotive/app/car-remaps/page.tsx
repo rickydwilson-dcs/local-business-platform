@@ -111,7 +111,7 @@ export default function CarRemapsPage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative h-[85vh] min-h-[600px] flex items-center overflow-hidden">
+      <section className="relative h-[calc(85vh-5rem)] min-h-[520px] flex items-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           {/* eslint-disable-next-line @next/next/no-img-element -- static Stitch design review asset, not next/image */}
           <img
