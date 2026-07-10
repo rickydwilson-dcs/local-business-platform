@@ -242,7 +242,7 @@ export default function CarRemapsPage() {
             <span className="text-brand-primary font-heading font-bold uppercase tracking-[0.2em] mb-4 block">
               ECU Remapping — Viezu Approved Dealer
             </span>
-            <h1 className="text-5xl md:text-7xl font-heading font-black uppercase tracking-tight leading-[0.95] mb-6">
+            <h1 className="text-4xl md:text-6xl font-heading font-black uppercase tracking-tight leading-tight mb-6">
               ECU Remapping That <br />
               <span className="text-brand-primary">Pays For Itself.</span>
             </h1>
