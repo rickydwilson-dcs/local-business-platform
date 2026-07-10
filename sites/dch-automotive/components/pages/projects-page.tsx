@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { BreadcrumbBar } from '@/components/breadcrumb-bar';
 import { PageHero } from '@/components/page-hero';
+import { getImageUrl } from '@/lib/image';
 
 interface ProjectCard {
   slug: string;
@@ -48,7 +49,7 @@ export function ProjectsPage({ projects }: { projects: ProjectCard[] }) {
                       <img
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                         alt={project.title}
-                        src={project.heroImage}
+                        src={getImageUrl(project.heroImage)}
                       />
                     </div>
                   )}

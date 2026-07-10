@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { BreadcrumbBar } from '@/components/breadcrumb-bar';
 import { PageHero } from '@/components/page-hero';
+import { getImageUrl } from '@/lib/image';
 
 const SERVICE_ICONS: Record<string, string> = {
   'Vehicle Security': 'gps_fixed',
@@ -54,7 +55,7 @@ export function ServicesPage({ services }: { services: ServiceCard[] }) {
                         <img
                           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                           alt={service.title}
-                          src={service.image}
+                          src={getImageUrl(service.image)}
                         />
                       ) : (
                         <div className="w-full h-full flex items-center justify-center bg-[#080807]">

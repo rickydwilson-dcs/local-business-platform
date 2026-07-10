@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { BreadcrumbBar } from '@/components/breadcrumb-bar';
 import { PageHero } from '@/components/page-hero';
+import { getImageUrl } from '@/lib/image';
 
 const categoryLabels: Record<string, string> = {
   'industry-tips': 'Industry Tips',
@@ -58,7 +59,7 @@ export function BlogPage({ posts }: { posts: BlogCard[] }) {
                       <img
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                         alt={post.title}
-                        src={post.heroImage}
+                        src={getImageUrl(post.heroImage)}
                       />
                     </div>
                   )}
