@@ -3,6 +3,7 @@ import type { ServiceDetailPageTemplateProps } from '@platform/core-components';
 import { BreadcrumbBar } from '@/components/breadcrumb-bar';
 import { FaqAccordion } from '@/components/faq-accordion';
 import { CtaBand } from '@/components/cta-band';
+import { getImageUrl } from '@/lib/image';
 
 const SERVICE_ICONS: Record<string, string> = {
   'Vehicle Security': 'gps_fixed',
@@ -67,7 +68,7 @@ export function ServiceDetailPage({
                 <img
                   className="w-full h-full object-cover"
                   alt={`${frontmatter.title} — DCH Automotive`}
-                  src={frontmatter.heroImage}
+                  src={getImageUrl(frontmatter.heroImage)}
                 />
               </div>
             ) : (

@@ -3,6 +3,7 @@ import type { LocationDetailPageTemplateProps } from '@platform/core-components'
 import { BreadcrumbBar } from '@/components/breadcrumb-bar';
 import { FaqAccordion } from '@/components/faq-accordion';
 import { CtaBand } from '@/components/cta-band';
+import { getImageUrl } from '@/lib/image';
 
 export function LocationDetailPage({
   siteConfig,
@@ -59,7 +60,7 @@ export function LocationDetailPage({
                 <img
                   className="w-full h-full object-cover"
                   alt={`${locationName} — DCH Automotive`}
-                  src={frontmatter.heroImage}
+                  src={getImageUrl(frontmatter.heroImage)}
                 />
               </div>
             ) : (

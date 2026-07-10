@@ -1,6 +1,13 @@
 import React from "react";
 import { absUrl } from "@/lib/site";
 
+// `service.url` is passed relative (callers wrap it in absUrl themselves),
+// but `webpage.url` is conventionally passed already-absolute — guard
+// against double-prefixing when building an @id from either one.
+function toAbsoluteId(url: string): string {
+  return /^https?:\/\//.test(url) ? url : absUrl(url);
+}
+
 type FAQ = { question: string; answer: string };
 
 type BreadcrumbItem = {
@@ -137,7 +144,7 @@ export function Schema({
     const faqUrl = service?.url || webpage?.url || "/";
     graph.push({
       "@type": "FAQPage",
-      "@id": absUrl(faqUrl + (faqUrl.includes("#") ? "" : "#faq")),
+      "@id": toAbsoluteId(faqUrl + (faqUrl.includes("#") ? "" : "#faq")),
       mainEntity: faqs.map((f) => ({
         "@type": "Question",
         name: f.question,
@@ -151,7 +158,7 @@ export function Schema({
     const breadcrumbUrl = service?.url || webpage?.url || article?.mainEntityOfPage?.["@id"] || "/";
     graph.push({
       "@type": "BreadcrumbList",
-      "@id": absUrl(breadcrumbUrl + "#breadcrumb"),
+      "@id": toAbsoluteId(breadcrumbUrl + "#breadcrumb"),
       itemListElement: breadcrumbs.map((breadcrumb, index) => ({
         "@type": "ListItem",
         position: index + 1,

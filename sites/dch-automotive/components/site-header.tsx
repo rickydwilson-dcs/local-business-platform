@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { getImageUrl } from '@/lib/image';
 
 const NAV_LINKS = [
   { label: 'Services', href: '/services' },
@@ -23,7 +24,7 @@ export function SiteHeader() {
     <nav className="fixed top-0 w-full z-50 flex justify-between items-center px-6 py-4 max-w-full bg-surface-background border-b border-surface-card-border">
       <Link href="/" className="flex items-center" onClick={() => setMobileOpen(false)}>
         <Image
-          src="/logo/dch-automotive-logo.webp"
+          src={getImageUrl('dch-automotive/logo/dch-automotive-logo.webp')}
           alt="DCH Automotive"
           width={160}
           height={90}

@@ -1,5 +1,9 @@
 import type { Metadata } from 'next';
+import { Schema } from '@platform/core-components';
 import { FuelSavingsCalculator } from '@/components/fuel-savings-calculator';
+import { FaqAccordion } from '@/components/faq-accordion';
+import { getImageUrl } from '@/lib/image';
+import { absUrl } from '@/lib/site';
 
 export const metadata: Metadata = {
   title: 'Car Remaps | DCH Automotive — Viezu Approved Dealer',
@@ -49,9 +53,9 @@ const REMAP_SERVICES = [
 ];
 
 const GUARANTEES = [
-  { image: '/viezu/seal-money-back.jpg', label: '30-Day Money-Back Guarantee' },
-  { image: '/viezu/seal-insurance-backed.jpg', label: 'Insurance-Backed Guarantee' },
-  { image: '/viezu/seal-approved-dealer.jpg', label: 'Viezu Approved Dealer' },
+  { image: 'dch-automotive/viezu/seal-money-back.jpg', label: '30-Day Money-Back Guarantee' },
+  { image: 'dch-automotive/viezu/seal-insurance-backed.jpg', label: 'Insurance-Backed Guarantee' },
+  { image: 'dch-automotive/viezu/seal-approved-dealer.jpg', label: 'Viezu Approved Dealer' },
 ];
 
 const PROCESS_STEPS = [
@@ -98,6 +102,117 @@ const NOT_A_PERFORMANCE_SHOP = [
   },
 ];
 
+const HOW_IT_WORKS_STEPS = [
+  {
+    icon: 'memory',
+    title: 'Your ECU, Explained',
+    description:
+      'Every modern vehicle runs on an Engine Control Unit (ECU) — an onboard computer that decides fuelling, boost pressure, ignition timing and gearbox behaviour thousands of times a second. Manufacturers set these parameters conservatively from the factory, to suit every climate, fuel grade and driving style a vehicle might face worldwide.',
+  },
+  {
+    icon: 'tune',
+    title: 'What Remapping Actually Changes',
+    description:
+      "Remapping connects genuine Viezu KESS3 hardware to your vehicle's OBD port and rewrites those factory parameters with a tune calibrated to your specific vehicle, mileage and condition. No physical parts are removed or fitted for a standard remap — it's a software recalibration, not a hardware modification.",
+  },
+  {
+    icon: 'verified',
+    title: 'Matched, Not Generic',
+    description:
+      "We don't load an off-the-shelf file. Every tune is built around your vehicle's exact engine code, current condition and your stated goals — fuel economy for a fleet van and outright drivability for an individual customer are two different calibrations, not the same map with a different label.",
+  },
+];
+
+const BENEFITS = [
+  {
+    icon: 'local_gas_station',
+    title: 'Fuel Economy',
+    description:
+      'Economy Tuning (BlueOptimize) is calibrated specifically to reduce fuel consumption and CO2 across a duty cycle, rather than chasing peak power — the default choice for fleets where fuel is the largest running cost.',
+  },
+  {
+    icon: 'speed',
+    title: 'Throttle Response & Drivability',
+    description:
+      'Performance Tuning sharpens throttle response and smooths the power delivery through the rev range, so the vehicle feels less hesitant and more predictable to drive — particularly noticeable pulling away and overtaking.',
+  },
+  {
+    icon: 'trending_up',
+    title: 'Torque for Towing & Loading',
+    description:
+      'A broader, earlier torque curve makes a real difference to vehicles that regularly tow, carry loads or run at GVW — less strain on the engine and gearbox to do the same job, which fleet operators feel in wear as much as in performance.',
+  },
+  {
+    icon: 'settings_suggest',
+    title: 'Smoother Gear Changes',
+    description:
+      'Gearbox Tuning recalibrates shift points and clutch behaviour on automatic and DSG-equipped vehicles, for faster, smoother changes rather than working purely on engine parameters.',
+  },
+];
+
+const CAR_REMAPS_FAQS = [
+  {
+    question: 'What is ECU remapping?',
+    answer:
+      "ECU remapping is the process of rewriting the software parameters your vehicle's Engine Control Unit uses to manage fuelling, boost, ignition timing and (where applicable) gearbox behaviour. It's a recalibration of the factory settings for your specific vehicle and goals, not a physical or hardware modification.",
+  },
+  {
+    question: 'How does DCH Automotive carry out a remap?',
+    answer:
+      "We connect genuine Viezu KESS3 tuning hardware to your vehicle's OBD port and upload a tune built around your vehicle's engine code, mileage and condition. There's no need to remove any components for a standard remap — most vehicles are done within a few hours, either at your workshop, on-site, or during scheduled downtime for fleets.",
+  },
+  {
+    question: 'Is ECU remapping legal in the UK?',
+    answer:
+      "Remapping itself isn't illegal, but the vehicle must still meet MOT emissions requirements and remain roadworthy afterwards — which is exactly why we map to your vehicle rather than loading a generic file. You are responsible for informing your insurer of any performance modification, including a remap.",
+  },
+  {
+    question: 'Will remapping affect my car insurance?',
+    answer:
+      "Almost certainly yes, and you should declare it. Most UK insurers treat an ECU remap as a modification that must be disclosed, and failing to do so can invalidate a claim. Some insurers charge a modest additional premium; others don't, but it varies by provider — check with yours before or shortly after your remap.",
+  },
+  {
+    question: 'Will a remap void my manufacturer warranty?',
+    answer:
+      "This depends on your manufacturer and the specific fault — under UK consumer law a manufacturer generally can't refuse an entire warranty claim unless they can show the remap directly caused that fault. That said, some manufacturers take a stricter line on drivetrain and emissions components. If your vehicle is still under warranty, it's worth checking with your dealer before proceeding.",
+  },
+  {
+    question: 'Is a remap reversible?',
+    answer:
+      'Yes — every remap we carry out is fully reversible and logged. We keep strict software version records for your maintenance history, so the original factory map can be restored at any time, for example ahead of a warranty visit or a vehicle sale.',
+  },
+  {
+    question: "What's the difference between Economy Tuning and Performance Tuning?",
+    answer:
+      "Economy Tuning (Viezu's BlueOptimize program) is calibrated to reduce fuel consumption and CO2 without chasing peak power — it's our default recommendation for fleet and commercial vehicles, where running cost matters more than outright pace. Performance Tuning is calibrated the other way: for individual customers who want sharper throttle response and more usable power and torque, matched to their specific vehicle rather than a generic file.",
+  },
+  {
+    question: "What's the difference between Stage 1, 2 and 3 remaps?",
+    answer:
+      "Stage 1 uses your vehicle's existing hardware — standard turbo, injectors and intercooler — and is the safest, most common and fully reversible starting point. Stage 2 is for vehicles that already have supporting hardware upgrades fitted, with a more aggressive tune matched to those changes. Stage 3 is our most advanced tier, built around vehicles with major supporting hardware changes and bespoke to that specific setup.",
+  },
+  {
+    question: 'Can any vehicle be remapped?',
+    answer:
+      "Most modern petrol and diesel vehicles with an ECU can be remapped, including cars, vans, HGVs and plant machinery. Some very new models or unusual engine codes may have limited support on the tuning platform at any given time — the vehicle finder tool further down this page, provided directly by Viezu, will confirm what's currently available for your specific vehicle.",
+  },
+  {
+    question: 'Will remapping damage my engine?',
+    answer:
+      "Not when it's done properly and matched to your vehicle's condition — which is the entire reason we map individually rather than loading a generic file. A poorly calibrated or overly aggressive generic remap can put unnecessary strain on an engine; a correctly calibrated one, backed by Viezu's guarantees, should not.",
+  },
+  {
+    question: 'Does remapping affect emissions or MOT compliance?',
+    answer:
+      "Your vehicle still has to pass its MOT emissions test after a remap — we calibrate within that requirement rather than around it. This is a key part of why we don't use generic off-the-shelf files: a tune matched to your specific vehicle can be built to stay compliant, where a one-size-fits-all map risks pushing emissions outside the legal limit.",
+  },
+  {
+    question: 'What guarantees come with a DCH Automotive remap?',
+    answer:
+      "Every remap is backed by Viezu's 30-day money-back guarantee and insurance-backed guarantee, as a Viezu Approved Dealer — see the guarantee badges further up this page. Combined with our full reversibility and software version logging, you're not committing to anything permanent.",
+  },
+];
+
 const CERTIFICATIONS = [
   'THATCHAM APPROVED',
   'City & Guilds',
@@ -118,7 +233,7 @@ export default function CarRemapsPage() {
             className="w-full h-full object-cover opacity-40 mix-blend-luminosity"
             alt=""
             aria-hidden="true"
-            src="/stitch-images/img-008.jpg"
+            src={getImageUrl('dch-automotive/stitch-images/img-008.jpg')}
           />
           <div className="absolute inset-0 bg-gradient-to-r from-surface-background via-surface-background/80 to-transparent" />
         </div>
@@ -159,7 +274,7 @@ export default function CarRemapsPage() {
         <div className="container mx-auto px-6 flex flex-wrap items-center justify-center gap-x-10 gap-y-4">
           {/* eslint-disable-next-line @next/next/no-img-element -- third-party supplier logo, not next/image */}
           <img
-            src="/viezu/powered-by-viezu-white.png"
+            src={getImageUrl('dch-automotive/viezu/powered-by-viezu-white.png')}
             alt="Powered by Viezu Performance Tuning"
             className="h-8 w-auto opacity-90"
           />
@@ -167,6 +282,66 @@ export default function CarRemapsPage() {
           <span className="text-white/70 font-heading uppercase tracking-widest text-sm">
             Genuine Viezu KESS3 tuning hardware
           </span>
+        </div>
+      </section>
+
+      {/* What Is ECU Remapping? */}
+      <section className="py-24 container mx-auto px-6">
+        <div className="mb-16 max-w-2xl">
+          <h2 className="text-4xl font-heading font-black uppercase tracking-tight mb-4">
+            What Is <span className="text-brand-primary">ECU Remapping?</span>
+          </h2>
+          <p className="text-white/60 font-sans">
+            A quick explainer before you look at the service tiers below — remapping is software,
+            not hardware, and it's calibrated to your specific vehicle, not loaded from a generic
+            file.
+          </p>
+        </div>
+        <div className="grid md:grid-cols-3 gap-8">
+          {HOW_IT_WORKS_STEPS.map((step) => (
+            <div key={step.title} className="bg-surface-card border border-surface-card-border p-8">
+              <span className="material-symbols-outlined text-brand-primary text-3xl mb-4 block">
+                {step.icon}
+              </span>
+              <h3 className="text-lg font-heading font-bold uppercase tracking-tight mb-3">
+                {step.title}
+              </h3>
+              <p className="text-white/60 text-sm leading-relaxed">{step.description}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Benefits */}
+      <section className="py-24 bg-[#11100D] border-y border-white/5">
+        <div className="container mx-auto px-6">
+          <div className="mb-16 max-w-2xl">
+            <h2 className="text-4xl font-heading font-black uppercase tracking-tight mb-4">
+              What Benefits Can Be <span className="text-brand-primary">Gained?</span>
+            </h2>
+            <p className="text-white/60 font-sans">
+              Which of these matters most depends on the tier — Economy Tuning and Performance
+              Tuning are calibrated toward different ends of this list, not all of it at once.
+            </p>
+          </div>
+          <div className="grid md:grid-cols-2 gap-6">
+            {BENEFITS.map((benefit) => (
+              <div
+                key={benefit.title}
+                className="flex items-start gap-4 bg-surface-card border border-surface-card-border p-6"
+              >
+                <span className="material-symbols-outlined text-brand-primary text-2xl flex-shrink-0">
+                  {benefit.icon}
+                </span>
+                <div>
+                  <h3 className="font-heading font-bold uppercase tracking-tight mb-1">
+                    {benefit.title}
+                  </h3>
+                  <p className="text-white/60 text-sm leading-relaxed">{benefit.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -222,7 +397,7 @@ export default function CarRemapsPage() {
                 <div className="w-24 h-24 rounded-full overflow-hidden bg-white p-1">
                   {/* eslint-disable-next-line @next/next/no-img-element -- third-party guarantee seal, not next/image */}
                   <img
-                    src={g.image}
+                    src={getImageUrl(g.image)}
                     alt={g.label}
                     className="w-full h-full object-cover rounded-full"
                   />
@@ -300,7 +475,7 @@ export default function CarRemapsPage() {
               <img
                 className="max-w-full max-h-full object-contain grayscale group-hover:grayscale-0 transition-all duration-700"
                 alt="The Viezu KESS3 ECU tuning tool used for every remap"
-                src="/viezu/kess3-tool.jpg"
+                src={getImageUrl('dch-automotive/viezu/kess3-tool.jpg')}
               />
             </div>
           </div>
@@ -449,6 +624,9 @@ export default function CarRemapsPage() {
         </div>
       </section>
 
+      {/* FAQs */}
+      <FaqAccordion items={CAR_REMAPS_FAQS} title="Car Remaps Frequently Asked Questions" />
+
       {/* Certifications */}
       <section className="py-12 border-t border-white/5 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
         <div className="container mx-auto px-6 overflow-hidden">
@@ -464,6 +642,28 @@ export default function CarRemapsPage() {
           </div>
         </div>
       </section>
+
+      {/* Schema Markup */}
+      <Schema
+        org={{
+          name: 'DCH Automotive',
+          url: '/',
+          logo: '/logo.svg',
+        }}
+        breadcrumbs={[
+          { name: 'Home', url: '/' },
+          { name: 'Car Remaps', url: '/car-remaps' },
+        ]}
+        webpage={{
+          '@type': 'WebPage',
+          '@id': absUrl('/car-remaps#webpage'),
+          url: absUrl('/car-remaps'),
+          name: 'Car Remaps | DCH Automotive — Viezu Approved Dealer',
+          description:
+            "ECU remapping fitted by DCH Automotive, a Viezu Approved Dealer — Stage 1-3, Economy Tuning, Performance Tuning and Gearbox Tuning, backed by Viezu's money-back and insurance-backed guarantees.",
+        }}
+        faqs={CAR_REMAPS_FAQS}
+      />
     </>
   );
 }

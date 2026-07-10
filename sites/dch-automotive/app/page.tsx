@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { getImageUrl } from '@/lib/image';
 
 export const metadata: Metadata = {
   title: 'DCH Automotive | Vehicle Security & Fleet Electrics',
@@ -22,7 +23,7 @@ const SERVICES = [
     description:
       'Insurance approved trackers and Autowatch Ghost 2 immobilisers, fitted to Thatcham standards.',
     icon: 'security',
-    image: '/stitch-images/img-006.jpg',
+    image: 'dch-automotive/stitch-images/img-006.jpg',
     href: '/services/vehicle-security',
   },
   {
@@ -30,14 +31,14 @@ const SERVICES = [
     description:
       'Specialist tracking and anti-theft solutions specifically designed for motorcycles.',
     icon: 'motorcycle',
-    image: '/stitch-images/img-003.jpg',
+    image: 'dch-automotive/stitch-images/img-003.jpg',
     href: '/services/vehicle-security',
   },
   {
     title: 'Parking Aids',
     description: 'Flush-fit parking sensors and high-definition reverse camera systems.',
     icon: 'settings_input_component',
-    image: '/stitch-images/img-010.jpg',
+    image: 'dch-automotive/stitch-images/img-010.jpg',
     href: '/services/parking-aids',
   },
   {
@@ -45,14 +46,14 @@ const SERVICES = [
     description:
       'Mass-deployment of tracking, telematics, and security for commercial vehicle fleets.',
     icon: 'local_shipping',
-    image: '/stitch-images/img-005.jpg',
+    image: 'dch-automotive/stitch-images/img-005.jpg',
     href: '/services/fleet-solutions',
   },
   {
     title: 'Accessories',
     description: 'Dash cams, beacon bars, work lights, and bespoke electrical modifications.',
     icon: 'construction',
-    image: '/stitch-images/img-009.jpg',
+    image: 'dch-automotive/stitch-images/img-009.jpg',
     href: '/services/accessories',
   },
 ];
@@ -82,7 +83,9 @@ export default function HomePage() {
         <div className="absolute inset-0 z-0">
           <div
             className="w-full h-full bg-cover bg-center"
-            style={{ backgroundImage: "url('/stitch-images/img-011.jpg')" }}
+            style={{
+              backgroundImage: `url('${getImageUrl('dch-automotive/stitch-images/img-011.jpg')}')`,
+            }}
             role="img"
             aria-label="A technician wiring a vehicle's dashboard"
           />
@@ -152,7 +155,7 @@ export default function HomePage() {
                 <img
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                   alt={service.title}
-                  src={service.image}
+                  src={getImageUrl(service.image)}
                 />
                 <div className="absolute top-4 right-4 bg-brand-primary p-2">
                   <span
@@ -217,7 +220,7 @@ export default function HomePage() {
               <img
                 className="w-full h-full object-cover"
                 alt="A diagnostic laptop connected to a commercial van's OBD port showing ECU mapping data"
-                src="/stitch-images/img-002.jpg"
+                src={getImageUrl('dch-automotive/stitch-images/img-002.jpg')}
               />
             </div>
             <div className="absolute -bottom-6 -right-6 w-32 h-32 border-r-4 border-b-4 border-brand-primary/20" />

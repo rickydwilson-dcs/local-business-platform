@@ -22,11 +22,17 @@ Vehicle security, fleet electrics and ECU remapping installer serving the South 
 - Dead `<button>` elements on the homepage and Car Remaps hero wired to real destinations
 - Homepage hero heading/subtext/buttons resized down from an oversized all-caps treatment
 - Removed lingering Tow Bars and Alarms references that survived into location-page copy and the homepage credentials strip after those services were deleted from the service catalogue during migration; trade-certification count corrected 7 → 6
+- `CLAUDE.md` rewritten to describe this site's actual architecture (bespoke homepage/Car Remaps pages, dark theme, bespoke ContactForm) — was still the unmodified `base-template` guide
+- All images (35 files: stock photography, Viezu marketing assets, site logo) migrated from local `public/` to the shared platform R2 bucket under the `dch-automotive/` key prefix, via new `tools/upload-dch-automotive-to-r2.ts`; every render call site now resolves through `getImageUrl()`
+
+### Content
+
+- `/car-remaps` expanded with a "What Is ECU Remapping?" explainer, a benefits section, and a 12-question FAQ covering legality, insurance, warranty, reversibility, Stage 1-3 differences and emissions/MOT compliance — with `FAQPage` JSON-LD
 
 ### Known Gaps
 
 - `/reviews` still serves generic base-template placeholder testimonials; homepage testimonials are explicitly marked as samples pending real client quotes
-- Five service pages (Vehicle Security, Bike Security, Fleet Solutions, Accessories, Dash Cameras) ship without hero images — see `tasks/clients/dch-automotive.md`
+- All imagery site-wide is still the Stitch-generated stock set, not real DCH photography — R2-hosted now, but not yet client-specific
 
 ---
 

@@ -2,6 +2,7 @@ import type { BlogPostPageTemplateProps } from '@platform/core-components';
 import Link from 'next/link';
 import { BreadcrumbBar } from '@/components/breadcrumb-bar';
 import { CtaBand } from '@/components/cta-band';
+import { getImageUrl } from '@/lib/image';
 
 const categoryLabels: Record<string, string> = {
   'industry-tips': 'Industry Tips',
@@ -60,7 +61,7 @@ export function BlogPostPage({
               <img
                 className="w-full h-full object-cover"
                 alt={frontmatter.title}
-                src={frontmatter.heroImage}
+                src={getImageUrl(frontmatter.heroImage)}
               />
             </div>
           </div>
@@ -164,7 +165,7 @@ export function BlogPostPage({
                       <img
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                         alt={post.title}
-                        src={post.heroImage}
+                        src={getImageUrl(post.heroImage)}
                       />
                     </div>
                   )}
