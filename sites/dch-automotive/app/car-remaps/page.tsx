@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Schema } from '@platform/core-components';
 import { FuelSavingsCalculator } from '@/components/fuel-savings-calculator';
+import { CarRemapsReadyReckoner } from '@/components/car-remaps-ready-reckoner';
 import { FaqAccordion } from '@/components/faq-accordion';
 import { getImageUrl } from '@/lib/image';
 import { absUrl } from '@/lib/site';
@@ -487,8 +488,8 @@ export default async function CarRemapsPage() {
       </section>
 
       {/* Browse by Make — SEO interlinking to per-make performance/pricing pages.
-          Separate from the Viezu widget below (a future phase replaces that iframe
-          with an interactive tool; this section is plain server-rendered links). */}
+          Separate from the interactive ready reckoner below (this section is
+          plain server-rendered links, crawlable without JS). */}
       <section className="py-24 bg-[#11100D] border-y border-white/5">
         <div className="container mx-auto px-6">
           <div className="mb-16 max-w-2xl">
@@ -514,27 +515,18 @@ export default async function CarRemapsPage() {
         </div>
       </section>
 
-      {/* Viezu vehicle-selector widget */}
+      {/* Car Remaps Ready Reckoner — DCH-owned interactive vehicle finder over our synced catalogue */}
       <section className="py-24 container mx-auto px-6">
         <div className="mb-10 text-center max-w-2xl mx-auto">
           <h2 className="text-4xl font-heading font-black uppercase tracking-tight mb-4">
             Check What&apos;s Available for Your Vehicle
           </h2>
           <p className="text-white/60 font-sans">
-            Select your vehicle below — powered directly by Viezu, our tuning technology partner.
+            Select your make, model, fuel type and variant below to see performance figures and
+            Economy Tuning gains for your exact vehicle.
           </p>
         </div>
-        <div className="max-w-4xl mx-auto border-2 border-surface-card-border overflow-hidden bg-white">
-          <iframe
-            src="https://viezu.com/dealer?id=33805671920f0d02e6d18f630985aace"
-            title="Viezu vehicle tuning finder for DCH Automotive"
-            className="w-full h-[950px] md:h-[1050px] block"
-            loading="lazy"
-          />
-        </div>
-        <p className="text-center text-xs text-white/40 mt-4 font-sans">
-          This tool is provided directly by Viezu Technologies and opens results within this page.
-        </p>
+        <CarRemapsReadyReckoner />
       </section>
 
       {/* Fleet Enquiry Form (static — see note in car-remaps-stitch conversion) */}
