@@ -331,3 +331,52 @@ Manual smoke test:
 3. `curl` the JSON API (`/api/car-remaps/lookup`) with a few real `make`/`model`/`fuelType`/
    `variant` combinations, confirming progressive narrowing and a 400 on invalid params.
 4. Confirm `/llms.txt` is reachable and its listed `/car-remaps/[make]` URLs return 200.
+
+---
+
+## 7. Fuel Savings Calculator + live fuel prices
+
+Added 2026-07-11. The Savings Calculator on `/car-remaps` (`components/fuel-savings-calculator.tsx`)
+embeds the same `CarRemapsSelectors` used by the Ready Reckoner, so the efficiency-gain figure it
+uses is the selected vehicle's real `fuelSaving` percentage from the synced catalogue — not a
+guessed slider value. It's a separate `CarRemapsSelectors` instance from the Ready Reckoner's, so
+selecting a vehicle in one doesn't affect the other.
+
+The fuel price field auto-fills from the UK weekly average petrol/diesel price
+(`lib/fuel-prices/fetch.ts`, served via `/api/fuel-prices/current`) but stays editable — a manual
+edit is never overwritten by a later vehicle selection (`fuelPriceTouched` state in the
+component).
+
+**Data source**: DESNZ's "Weekly road fuel prices" open data workbook (data.gov.uk, OGL v3.0), the
+same one behind the government's official fuel price index. This feed updates **weekly**, not
+daily or live — the CMA's real-time "Fuel Finder" API exists but requires formal accreditation as
+a registered data recipient, which was judged out of scope for this feature.
+
+**How it's fetched**: unlike the car-remaps catalogue sync, this is **not** a committed-JSON
+pattern — there's no cron or scheduled job anywhere in this repo to build on (see §1's "How often
+to run it" for the same gap in the catalogue sync). Instead, `fetchLatestFuelPrices()` fetches
+live at request time inside the API route, using Next's `fetch()` `revalidate: 604800` (7 days) so
+it only actually hits gov.uk roughly once a week, matching the source's own cadence:
+
+1. Fetch the data.gov.uk dataset page and regex-extract the current `.xlsx` download link (it's
+   date-stamped, e.g. `weekly_road_fuel_prices_060726.xlsx`, so the URL isn't stable — it must be
+   scraped each time, not hardcoded).
+2. Fetch and parse that workbook's `Data` sheet with the `xlsx` package. The header row is found
+   dynamically (first row where column 0 is the literal string `"Date"`), and the petrol/diesel
+   columns are found by matching header text containing `"ULSP"`/`"ULSD"` and `"Pump price"` —
+   not hardcoded column indices — so the parser tolerates the workbook growing new columns.
+3. Take the last data row (most recent week), convert its Excel date serial to an ISO date, and
+   sanity-check both prices fall within 80–300 pence/litre.
+
+**Verified during implementation** against the real workbook (week ending 2026-07-06): `Data`
+sheet, header row at index 7, `ULSP: Pump price (p/litre)` and `ULSD: Pump price (p/litre)`
+columns — confirmed values were petrol 149.80p, diesel 164.77p (notably different from initial
+web-search estimates used during planning, which is why the parser was verified against the real
+downloaded file rather than assumed).
+
+**Fails safe**: any error at any step (page restructured, network failure, an out-of-range value)
+is caught, logged with `console.error`, and `fetchLatestFuelPrices()` returns
+`FUEL_PRICE_FALLBACK` (`lib/fuel-prices/types.ts`) — a hand-updated constant set to the last
+confirmed-real values. The calculator always has a usable price; it never surfaces a fetch error
+to the customer. If the fallback starts looking stale, update the constant by hand (no sync script
+for this — the live fetch is expected to keep it current under normal conditions).
