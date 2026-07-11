@@ -1,0 +1,278 @@
+[
+  {
+    "make": "Hummer",
+    "model": "H3",
+    "modelSlug": "h3",
+    "sourceProductId": 20192,
+    "sourceUrl": "https://viezu.com/shop/hummer-h3-2006-2010/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "3.5",
+        "originalBhp": {
+          "raw": "220",
+          "parsedValues": ["220"],
+          "primaryValue": "220"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "305",
+          "parsedValues": ["305"],
+          "primaryValue": "305"
+        },
+        "torqueNmGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "3.7",
+        "originalBhp": {
+          "raw": "242",
+          "parsedValues": ["242"],
+          "primaryValue": "242"
+        },
+        "powerBhpGain": {
+          "raw": "18",
+          "parsedValues": ["18"],
+          "primaryValue": "18"
+        },
+        "originalTorque": {
+          "raw": "328",
+          "parsedValues": ["328"],
+          "primaryValue": "328"
+        },
+        "torqueNmGain": {
+          "raw": "22",
+          "parsedValues": ["22"],
+          "primaryValue": "22"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "5.3",
+        "originalBhp": {
+          "raw": "300",
+          "parsedValues": ["300"],
+          "primaryValue": "300"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "430",
+          "parsedValues": ["430"],
+          "primaryValue": "430"
+        },
+        "torqueNmGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Hummer",
+    "model": "H2",
+    "modelSlug": "h2",
+    "sourceProductId": 20190,
+    "sourceUrl": "https://viezu.com/shop/hummer-h2-2008-2009/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "6.2",
+        "originalBhp": {
+          "raw": "393",
+          "parsedValues": ["393"],
+          "primaryValue": "393"
+        },
+        "powerBhpGain": {
+          "raw": "22",
+          "parsedValues": ["22"],
+          "primaryValue": "22"
+        },
+        "originalTorque": {
+          "raw": "574",
+          "parsedValues": ["574"],
+          "primaryValue": "574"
+        },
+        "torqueNmGain": {
+          "raw": "26",
+          "parsedValues": ["26"],
+          "primaryValue": "26"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Hummer",
+    "model": "H2",
+    "modelSlug": "h2",
+    "sourceProductId": 20188,
+    "sourceUrl": "https://viezu.com/shop/hummer-h2-2003-2007/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "6.0",
+        "originalBhp": {
+          "raw": "316",
+          "parsedValues": ["316"],
+          "primaryValue": "316"
+        },
+        "powerBhpGain": {
+          "raw": "19",
+          "parsedValues": ["19"],
+          "primaryValue": "19"
+        },
+        "originalTorque": {
+          "raw": "522",
+          "parsedValues": ["522"],
+          "primaryValue": "522"
+        },
+        "torqueNmGain": {
+          "raw": "23",
+          "parsedValues": ["23"],
+          "primaryValue": "23"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Hummer",
+    "model": "H1",
+    "modelSlug": "h1",
+    "sourceProductId": 20186,
+    "sourceUrl": "https://viezu.com/shop/hummer-h1-present-2006/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "6.6",
+        "originalBhp": {
+          "raw": "305",
+          "parsedValues": ["305"],
+          "primaryValue": "305"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "820",
+          "parsedValues": ["820"],
+          "primaryValue": "820"
+        },
+        "torqueNmGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "economyGainBhp": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  }
+]

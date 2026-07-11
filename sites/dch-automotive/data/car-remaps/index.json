@@ -1,0 +1,419 @@
+{
+  "makes": [
+    {
+      "slug": "abarth",
+      "name": "Abarth",
+      "modelCount": 3
+    },
+    {
+      "slug": "alfa-romeo",
+      "name": "Alfa Romeo",
+      "modelCount": 21
+    },
+    {
+      "slug": "alpina",
+      "name": "Alpina",
+      "modelCount": 17
+    },
+    {
+      "slug": "alpine",
+      "name": "Alpine",
+      "modelCount": 1
+    },
+    {
+      "slug": "aston-martin",
+      "name": "Aston Martin",
+      "modelCount": 9
+    },
+    {
+      "slug": "audi",
+      "name": "Audi",
+      "modelCount": 104
+    },
+    {
+      "slug": "bentley",
+      "name": "Bentley",
+      "modelCount": 10
+    },
+    {
+      "slug": "bmw",
+      "name": "BMW",
+      "modelCount": 83
+    },
+    {
+      "slug": "bugatti",
+      "name": "Bugatti",
+      "modelCount": 4
+    },
+    {
+      "slug": "buick",
+      "name": "Buick",
+      "modelCount": 3
+    },
+    {
+      "slug": "cadillac",
+      "name": "Cadillac",
+      "modelCount": 17
+    },
+    {
+      "slug": "changan",
+      "name": "Changan",
+      "modelCount": 1
+    },
+    {
+      "slug": "chery",
+      "name": "Chery",
+      "modelCount": 2
+    },
+    {
+      "slug": "chevrolet",
+      "name": "Chevrolet",
+      "modelCount": 13
+    },
+    {
+      "slug": "chrysler",
+      "name": "Chrysler",
+      "modelCount": 12
+    },
+    {
+      "slug": "citroen",
+      "name": "Citroen",
+      "modelCount": 54
+    },
+    {
+      "slug": "cupra",
+      "name": "Cupra",
+      "modelCount": 3
+    },
+    {
+      "slug": "dacia",
+      "name": "Dacia",
+      "modelCount": 17
+    },
+    {
+      "slug": "daewoo",
+      "name": "Daewoo",
+      "modelCount": 4
+    },
+    {
+      "slug": "daihatsu",
+      "name": "Daihatsu",
+      "modelCount": 1
+    },
+    {
+      "slug": "dallara",
+      "name": "Dallara",
+      "modelCount": 1
+    },
+    {
+      "slug": "dodge",
+      "name": "Dodge",
+      "modelCount": 16
+    },
+    {
+      "slug": "ds",
+      "name": "DS",
+      "modelCount": 7
+    },
+    {
+      "slug": "ferrari",
+      "name": "Ferrari",
+      "modelCount": 17
+    },
+    {
+      "slug": "fiat",
+      "name": "FIAT",
+      "modelCount": 47
+    },
+    {
+      "slug": "ford",
+      "name": "Ford",
+      "modelCount": 97
+    },
+    {
+      "slug": "geely",
+      "name": "Geely",
+      "modelCount": 4
+    },
+    {
+      "slug": "genesis",
+      "name": "Genesis",
+      "modelCount": 6
+    },
+    {
+      "slug": "gmc",
+      "name": "Gmc",
+      "modelCount": 18
+    },
+    {
+      "slug": "gwm",
+      "name": "GWM",
+      "modelCount": 6
+    },
+    {
+      "slug": "holden",
+      "name": "Holden",
+      "modelCount": 3
+    },
+    {
+      "slug": "honda",
+      "name": "Honda",
+      "modelCount": 31
+    },
+    {
+      "slug": "hummer",
+      "name": "Hummer",
+      "modelCount": 4
+    },
+    {
+      "slug": "hyundai",
+      "name": "Hyundai",
+      "modelCount": 47
+    },
+    {
+      "slug": "ineos",
+      "name": "Ineos",
+      "modelCount": 4
+    },
+    {
+      "slug": "infiniti",
+      "name": "Infiniti",
+      "modelCount": 21
+    },
+    {
+      "slug": "isuzu",
+      "name": "Isuzu",
+      "modelCount": 7
+    },
+    {
+      "slug": "iveco",
+      "name": "Iveco",
+      "modelCount": 3
+    },
+    {
+      "slug": "jaecoo",
+      "name": "Jaecoo",
+      "modelCount": 2
+    },
+    {
+      "slug": "jaguar",
+      "name": "Jaguar",
+      "modelCount": 5
+    },
+    {
+      "slug": "jeep",
+      "name": "Jeep",
+      "modelCount": 19
+    },
+    {
+      "slug": "kia",
+      "name": "Kia",
+      "modelCount": 47
+    },
+    {
+      "slug": "lamborghini",
+      "name": "Lamborghini",
+      "modelCount": 4
+    },
+    {
+      "slug": "lancia",
+      "name": "Lancia",
+      "modelCount": 11
+    },
+    {
+      "slug": "land-rover",
+      "name": "Land Rover",
+      "modelCount": 18
+    },
+    {
+      "slug": "ldv",
+      "name": "LDV",
+      "modelCount": 2
+    },
+    {
+      "slug": "lexus",
+      "name": "Lexus",
+      "modelCount": 14
+    },
+    {
+      "slug": "lincoln",
+      "name": "Lincoln",
+      "modelCount": 11
+    },
+    {
+      "slug": "lotus",
+      "name": "Lotus",
+      "modelCount": 6
+    },
+    {
+      "slug": "luxgen",
+      "name": "Luxgen",
+      "modelCount": 3
+    },
+    {
+      "slug": "mahindra",
+      "name": "Mahindra",
+      "modelCount": 6
+    },
+    {
+      "slug": "maserati",
+      "name": "Maserati",
+      "modelCount": 9
+    },
+    {
+      "slug": "mazda",
+      "name": "Mazda",
+      "modelCount": 28
+    },
+    {
+      "slug": "mclaren",
+      "name": "Mclaren",
+      "modelCount": 13
+    },
+    {
+      "slug": "mercedes-benz",
+      "name": "Mercedes-benz",
+      "modelCount": 99
+    },
+    {
+      "slug": "mg",
+      "name": "MG",
+      "modelCount": 5
+    },
+    {
+      "slug": "mini",
+      "name": "Mini",
+      "modelCount": 21
+    },
+    {
+      "slug": "mitsubishi",
+      "name": "Mitsubishi",
+      "modelCount": 20
+    },
+    {
+      "slug": "morgan",
+      "name": "Morgan",
+      "modelCount": 1
+    },
+    {
+      "slug": "nissan",
+      "name": "Nissan",
+      "modelCount": 61
+    },
+    {
+      "slug": "omoda",
+      "name": "Omoda",
+      "modelCount": 1
+    },
+    {
+      "slug": "opel",
+      "name": "Opel",
+      "modelCount": 26
+    },
+    {
+      "slug": "peugeot",
+      "name": "Peugeot",
+      "modelCount": 54
+    },
+    {
+      "slug": "pontiac",
+      "name": "Pontiac",
+      "modelCount": 14
+    },
+    {
+      "slug": "porsche",
+      "name": "Porsche",
+      "modelCount": 15
+    },
+    {
+      "slug": "proton",
+      "name": "Proton",
+      "modelCount": 1
+    },
+    {
+      "slug": "renault",
+      "name": "Renault",
+      "modelCount": 54
+    },
+    {
+      "slug": "roewe",
+      "name": "Roewe",
+      "modelCount": 1
+    },
+    {
+      "slug": "rolls-royce",
+      "name": "Rolls Royce",
+      "modelCount": 4
+    },
+    {
+      "slug": "rover",
+      "name": "Rover",
+      "modelCount": 1
+    },
+    {
+      "slug": "saab",
+      "name": "Saab",
+      "modelCount": 9
+    },
+    {
+      "slug": "saturn",
+      "name": "Saturn",
+      "modelCount": 9
+    },
+    {
+      "slug": "seat",
+      "name": "Seat",
+      "modelCount": 25
+    },
+    {
+      "slug": "skoda",
+      "name": "Skoda",
+      "modelCount": 25
+    },
+    {
+      "slug": "smart",
+      "name": "Smart",
+      "modelCount": 7
+    },
+    {
+      "slug": "ssangyong",
+      "name": "Ssangyong",
+      "modelCount": 12
+    },
+    {
+      "slug": "subaru",
+      "name": "Subaru",
+      "modelCount": 21
+    },
+    {
+      "slug": "suzuki",
+      "name": "Suzuki",
+      "modelCount": 12
+    },
+    {
+      "slug": "tata",
+      "name": "Tata",
+      "modelCount": 1
+    },
+    {
+      "slug": "toyota",
+      "name": "Toyota",
+      "modelCount": 48
+    },
+    {
+      "slug": "vauxhall",
+      "name": "Vauxhall",
+      "modelCount": 5
+    },
+    {
+      "slug": "volvo",
+      "name": "Volvo",
+      "modelCount": 43
+    },
+    {
+      "slug": "vw",
+      "name": "VW",
+      "modelCount": 1
+    }
+  ]
+}

@@ -1,0 +1,971 @@
+[
+  {
+    "make": "Ssangyong",
+    "model": "Korando",
+    "modelSlug": "korando",
+    "sourceProductId": 60785,
+    "sourceUrl": "https://viezu.com/shop/ssangyong-korando-2019-present/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "136",
+          "parsedValues": ["136"],
+          "primaryValue": "136"
+        },
+        "powerBhpGain": {
+          "raw": "29",
+          "parsedValues": ["29"],
+          "primaryValue": "29"
+        },
+        "originalTorque": {
+          "raw": "324",
+          "parsedValues": ["324"],
+          "primaryValue": "324"
+        },
+        "torqueNmGain": {
+          "raw": "26",
+          "parsedValues": ["26"],
+          "primaryValue": "26"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.5",
+        "originalBhp": {
+          "raw": "163",
+          "parsedValues": ["163"],
+          "primaryValue": "163"
+        },
+        "powerBhpGain": {
+          "raw": "27",
+          "parsedValues": ["27"],
+          "primaryValue": "27"
+        },
+        "originalTorque": {
+          "raw": "280",
+          "parsedValues": ["280"],
+          "primaryValue": "280"
+        },
+        "torqueNmGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Ssangyong",
+    "model": "Tivoli",
+    "modelSlug": "tivoli",
+    "sourceProductId": 57094,
+    "sourceUrl": "https://viezu.com/shop/ssangyong-tivoli-2020-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.2",
+        "originalBhp": {
+          "raw": "128",
+          "parsedValues": ["128"],
+          "primaryValue": "128"
+        },
+        "powerBhpGain": {
+          "raw": "32",
+          "parsedValues": ["32"],
+          "primaryValue": "32"
+        },
+        "originalTorque": {
+          "raw": "230",
+          "parsedValues": ["230"],
+          "primaryValue": "230"
+        },
+        "torqueNmGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Ssangyong",
+    "model": "Musso",
+    "modelSlug": "musso",
+    "sourceProductId": 51992,
+    "sourceUrl": "https://viezu.com/shop/ssangyong-musso-2021-present/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.2",
+        "originalBhp": {
+          "raw": "181",
+          "parsedValues": ["181"],
+          "primaryValue": "181"
+        },
+        "powerBhpGain": {
+          "raw": "39",
+          "parsedValues": ["39"],
+          "primaryValue": "39"
+        },
+        "originalTorque": {
+          "raw": "420",
+          "parsedValues": ["420"],
+          "primaryValue": "420"
+        },
+        "torqueNmGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Ssangyong",
+    "model": "XLV",
+    "modelSlug": "xlv",
+    "sourceProductId": 23017,
+    "sourceUrl": "https://viezu.com/shop/xlv-2016-present/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "115",
+          "parsedValues": ["115"],
+          "primaryValue": "115"
+        },
+        "powerBhpGain": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "300",
+          "parsedValues": ["300"],
+          "primaryValue": "300"
+        },
+        "torqueNmGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Ssangyong",
+    "model": "Tivoli",
+    "modelSlug": "tivoli",
+    "sourceProductId": 23015,
+    "sourceUrl": "https://viezu.com/shop/ssangyong-tivoli-2015-2019/",
+    "variations": [
+      {
+        "fuelType": "",
+        "variant": "",
+        "originalBhp": {
+          "raw": "128",
+          "parsedValues": ["128"],
+          "primaryValue": "128"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "160",
+          "parsedValues": ["160"],
+          "primaryValue": "160"
+        },
+        "torqueNmGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "115",
+          "parsedValues": ["115"],
+          "primaryValue": "115"
+        },
+        "powerBhpGain": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "300",
+          "parsedValues": ["300"],
+          "primaryValue": "300"
+        },
+        "torqueNmGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Ssangyong",
+    "model": "Rodius",
+    "modelSlug": "rodius",
+    "sourceProductId": 23011,
+    "sourceUrl": "https://viezu.com/shop/rodius-all/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "155",
+          "parsedValues": ["155"],
+          "primaryValue": "155"
+        },
+        "powerBhpGain": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "originalTorque": {
+          "raw": "360",
+          "parsedValues": ["360"],
+          "primaryValue": "360"
+        },
+        "torqueNmGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.2",
+        "originalBhp": {
+          "raw": "178",
+          "parsedValues": ["178"],
+          "primaryValue": "178"
+        },
+        "powerBhpGain": {
+          "raw": "42",
+          "parsedValues": ["42"],
+          "primaryValue": "42"
+        },
+        "originalTorque": {
+          "raw": "400",
+          "parsedValues": ["400"],
+          "primaryValue": "400"
+        },
+        "torqueNmGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.7",
+        "originalBhp": {
+          "raw": "165",
+          "parsedValues": ["165"],
+          "primaryValue": "165"
+        },
+        "powerBhpGain": {
+          "raw": "55",
+          "parsedValues": ["55"],
+          "primaryValue": "55"
+        },
+        "originalTorque": {
+          "raw": "345",
+          "parsedValues": ["345"],
+          "primaryValue": "345"
+        },
+        "torqueNmGain": {
+          "raw": "115",
+          "parsedValues": ["115"],
+          "primaryValue": "115"
+        },
+        "economyGainBhp": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "economyGainNm": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Ssangyong",
+    "model": "Rexton",
+    "modelSlug": "rexton",
+    "sourceProductId": 23009,
+    "sourceUrl": "https://viezu.com/shop/rexton-2017-present/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.2",
+        "originalBhp": {
+          "raw": "181",
+          "parsedValues": ["181"],
+          "primaryValue": "181"
+        },
+        "powerBhpGain": {
+          "raw": "39",
+          "parsedValues": ["39"],
+          "primaryValue": "39"
+        },
+        "originalTorque": {
+          "raw": "420",
+          "parsedValues": ["420"],
+          "primaryValue": "420"
+        },
+        "torqueNmGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Ssangyong",
+    "model": "Rexton",
+    "modelSlug": "rexton",
+    "sourceProductId": 23005,
+    "sourceUrl": "https://viezu.com/shop/ssangyong-rexton-present-2016/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "155",
+          "parsedValues": ["155"],
+          "primaryValue": "155"
+        },
+        "powerBhpGain": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "originalTorque": {
+          "raw": "360",
+          "parsedValues": ["360"],
+          "primaryValue": "360"
+        },
+        "torqueNmGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.2",
+        "originalBhp": {
+          "raw": "178",
+          "parsedValues": ["178"],
+          "primaryValue": "178"
+        },
+        "powerBhpGain": {
+          "raw": "42",
+          "parsedValues": ["42"],
+          "primaryValue": "42"
+        },
+        "originalTorque": {
+          "raw": "400",
+          "parsedValues": ["400"],
+          "primaryValue": "400"
+        },
+        "torqueNmGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.7",
+        "originalBhp": {
+          "raw": "163 | 180",
+          "parsedValues": ["163", "180"],
+          "primaryValue": "163",
+          "secondaryValue": "180"
+        },
+        "powerBhpGain": {
+          "raw": "22 | 25",
+          "parsedValues": ["22", "25"],
+          "primaryValue": "22",
+          "secondaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "345 | 402",
+          "parsedValues": ["345", "402"],
+          "primaryValue": "345",
+          "secondaryValue": "402"
+        },
+        "torqueNmGain": {
+          "raw": "75 | 58",
+          "parsedValues": ["75", "58"],
+          "primaryValue": "75",
+          "secondaryValue": "58"
+        },
+        "economyGainBhp": {
+          "raw": "10 | 10",
+          "parsedValues": ["10", "10"],
+          "primaryValue": "10",
+          "secondaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "40 | 30",
+          "parsedValues": ["40", "30"],
+          "primaryValue": "40",
+          "secondaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Ssangyong",
+    "model": "Musso",
+    "modelSlug": "musso",
+    "sourceProductId": 23003,
+    "sourceUrl": "https://viezu.com/shop/musso-2018-2020/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.2",
+        "originalBhp": {
+          "raw": "181",
+          "parsedValues": ["181"],
+          "primaryValue": "181"
+        },
+        "powerBhpGain": {
+          "raw": "39",
+          "parsedValues": ["39"],
+          "primaryValue": "39"
+        },
+        "originalTorque": {
+          "raw": "420",
+          "parsedValues": ["420"],
+          "primaryValue": "420"
+        },
+        "torqueNmGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Ssangyong",
+    "model": "Kyron",
+    "modelSlug": "kyron",
+    "sourceProductId": 23000,
+    "sourceUrl": "https://viezu.com/shop/kyron-all/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "141",
+          "parsedValues": ["141"],
+          "primaryValue": "141"
+        },
+        "powerBhpGain": {
+          "raw": "29",
+          "parsedValues": ["29"],
+          "primaryValue": "29"
+        },
+        "originalTorque": {
+          "raw": "310",
+          "parsedValues": ["310"],
+          "primaryValue": "310"
+        },
+        "torqueNmGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.7",
+        "originalBhp": {
+          "raw": "165",
+          "parsedValues": ["165"],
+          "primaryValue": "165"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "345",
+          "parsedValues": ["345"],
+          "primaryValue": "345"
+        },
+        "torqueNmGain": {
+          "raw": "75",
+          "parsedValues": ["75"],
+          "primaryValue": "75"
+        },
+        "economyGainBhp": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Ssangyong",
+    "model": "Korando",
+    "modelSlug": "korando",
+    "sourceProductId": 22997,
+    "sourceUrl": "https://viezu.com/shop/ssangyong-korando-2011-2018/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "150 | 175",
+          "parsedValues": ["150", "175"],
+          "primaryValue": "150",
+          "secondaryValue": "175"
+        },
+        "powerBhpGain": {
+          "raw": "45 | 25",
+          "parsedValues": ["45", "25"],
+          "primaryValue": "45",
+          "secondaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "360 | 360",
+          "parsedValues": ["360", "360"],
+          "primaryValue": "360",
+          "secondaryValue": "360"
+        },
+        "torqueNmGain": {
+          "raw": "90 | 60",
+          "parsedValues": ["90", "60"],
+          "primaryValue": "90",
+          "secondaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "20 | 10",
+          "parsedValues": ["20", "10"],
+          "primaryValue": "20",
+          "secondaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "45 | 30",
+          "parsedValues": ["45", "30"],
+          "primaryValue": "45",
+          "secondaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.2",
+        "originalBhp": {
+          "raw": "178",
+          "parsedValues": ["178"],
+          "primaryValue": "178"
+        },
+        "powerBhpGain": {
+          "raw": "42",
+          "parsedValues": ["42"],
+          "primaryValue": "42"
+        },
+        "originalTorque": {
+          "raw": "400",
+          "parsedValues": ["400"],
+          "primaryValue": "400"
+        },
+        "torqueNmGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Ssangyong",
+    "model": "Actyon",
+    "modelSlug": "actyon",
+    "sourceProductId": 22994,
+    "sourceUrl": "https://viezu.com/shop/ssangyong-actyon-all/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "175",
+          "parsedValues": ["175"],
+          "primaryValue": "175"
+        },
+        "powerBhpGain": {
+          "raw": "42",
+          "parsedValues": ["42"],
+          "primaryValue": "42"
+        },
+        "originalTorque": {
+          "raw": "400",
+          "parsedValues": ["400"],
+          "primaryValue": "400"
+        },
+        "torqueNmGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "136 | 141 | 155",
+          "parsedValues": ["136", "141", "155"],
+          "primaryValue": "136",
+          "secondaryValue": "141"
+        },
+        "powerBhpGain": {
+          "raw": "34 | 29 | 45",
+          "parsedValues": ["34", "29", "45"],
+          "primaryValue": "34",
+          "secondaryValue": "29"
+        },
+        "originalTorque": {
+          "raw": "310 | 310 | 360",
+          "parsedValues": ["310", "310", "360"],
+          "primaryValue": "310",
+          "secondaryValue": "310"
+        },
+        "torqueNmGain": {
+          "raw": "60 | 60 | 90",
+          "parsedValues": ["60", "60", "90"],
+          "primaryValue": "60",
+          "secondaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "15 | 15 | 20",
+          "parsedValues": ["15", "15", "20"],
+          "primaryValue": "15",
+          "secondaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "30 | 30 | 45",
+          "parsedValues": ["30", "30", "45"],
+          "primaryValue": "30",
+          "secondaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  }
+]

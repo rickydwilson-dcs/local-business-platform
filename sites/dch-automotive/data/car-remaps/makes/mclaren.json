@@ -1,0 +1,643 @@
+[
+  {
+    "make": "Mclaren",
+    "model": "Senna",
+    "modelSlug": "senna",
+    "sourceProductId": 21043,
+    "sourceUrl": "https://viezu.com/shop/mclaren-senna-all/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "4.0",
+        "originalBhp": {
+          "raw": "800",
+          "parsedValues": ["800"],
+          "primaryValue": "800"
+        },
+        "powerBhpGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "originalTorque": {
+          "raw": "800",
+          "parsedValues": ["800"],
+          "primaryValue": "800"
+        },
+        "torqueNmGain": {
+          "raw": "100",
+          "parsedValues": ["100"],
+          "primaryValue": "100"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 99900
+      }
+    ]
+  },
+  {
+    "make": "Mclaren",
+    "model": "P1",
+    "modelSlug": "p1",
+    "sourceProductId": 21041,
+    "sourceUrl": "https://viezu.com/shop/mclaren-p1-all/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "3.8",
+        "originalBhp": {
+          "raw": "916",
+          "parsedValues": ["916"],
+          "primaryValue": "916"
+        },
+        "powerBhpGain": {
+          "raw": "84",
+          "parsedValues": ["84"],
+          "primaryValue": "84"
+        },
+        "originalTorque": {
+          "raw": "900",
+          "parsedValues": ["900"],
+          "primaryValue": "900"
+        },
+        "torqueNmGain": {
+          "raw": "100",
+          "parsedValues": ["100"],
+          "primaryValue": "100"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 99900
+      }
+    ]
+  },
+  {
+    "make": "Mclaren",
+    "model": "MP4-12C",
+    "modelSlug": "mp4-12c",
+    "sourceProductId": 21039,
+    "sourceUrl": "https://viezu.com/shop/mclaren-mp4-12c-all/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "3.8",
+        "originalBhp": {
+          "raw": "625 | 590",
+          "parsedValues": ["625", "590"],
+          "primaryValue": "625",
+          "secondaryValue": "590"
+        },
+        "powerBhpGain": {
+          "raw": "55 | 80",
+          "parsedValues": ["55", "80"],
+          "primaryValue": "55",
+          "secondaryValue": "80"
+        },
+        "originalTorque": {
+          "raw": "600 | 600",
+          "parsedValues": ["600", "600"],
+          "primaryValue": "600",
+          "secondaryValue": "600"
+        },
+        "torqueNmGain": {
+          "raw": "100 | 100",
+          "parsedValues": ["100", "100"],
+          "primaryValue": "100",
+          "secondaryValue": "100"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 99900
+      }
+    ]
+  },
+  {
+    "make": "Mclaren",
+    "model": "GT",
+    "modelSlug": "gt",
+    "sourceProductId": 21037,
+    "sourceUrl": "https://viezu.com/shop/mclaren-gt-2019-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "4.0",
+        "originalBhp": {
+          "raw": "620",
+          "parsedValues": ["620"],
+          "primaryValue": "620"
+        },
+        "powerBhpGain": {
+          "raw": "200",
+          "parsedValues": ["200"],
+          "primaryValue": "200"
+        },
+        "originalTorque": {
+          "raw": "630",
+          "parsedValues": ["630"],
+          "primaryValue": "630"
+        },
+        "torqueNmGain": {
+          "raw": "250",
+          "parsedValues": ["250"],
+          "primaryValue": "250"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 99900
+      }
+    ]
+  },
+  {
+    "make": "Mclaren",
+    "model": "720S",
+    "modelSlug": "720s",
+    "sourceProductId": 21035,
+    "sourceUrl": "https://viezu.com/shop/mclaren-720s-2017-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "4.0",
+        "originalBhp": {
+          "raw": "720",
+          "parsedValues": ["720"],
+          "primaryValue": "720"
+        },
+        "powerBhpGain": {
+          "raw": "100",
+          "parsedValues": ["100"],
+          "primaryValue": "100"
+        },
+        "originalTorque": {
+          "raw": "770",
+          "parsedValues": ["770"],
+          "primaryValue": "770"
+        },
+        "torqueNmGain": {
+          "raw": "110",
+          "parsedValues": ["110"],
+          "primaryValue": "110"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 99900
+      }
+    ]
+  },
+  {
+    "make": "Mclaren",
+    "model": "675LT",
+    "modelSlug": "675lt",
+    "sourceProductId": 21033,
+    "sourceUrl": "https://viezu.com/shop/mclaren-675lt-all/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "3.8",
+        "originalBhp": {
+          "raw": "675",
+          "parsedValues": ["675"],
+          "primaryValue": "675"
+        },
+        "powerBhpGain": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "700",
+          "parsedValues": ["700"],
+          "primaryValue": "700"
+        },
+        "torqueNmGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 99900
+      }
+    ]
+  },
+  {
+    "make": "Mclaren",
+    "model": "650S",
+    "modelSlug": "650s",
+    "sourceProductId": 21031,
+    "sourceUrl": "https://viezu.com/shop/mclaren-650s-all/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "3.8",
+        "originalBhp": {
+          "raw": "650",
+          "parsedValues": ["650"],
+          "primaryValue": "650"
+        },
+        "powerBhpGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "originalTorque": {
+          "raw": "678",
+          "parsedValues": ["678"],
+          "primaryValue": "678"
+        },
+        "torqueNmGain": {
+          "raw": "62",
+          "parsedValues": ["62"],
+          "primaryValue": "62"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 99900
+      }
+    ]
+  },
+  {
+    "make": "Mclaren",
+    "model": "625C",
+    "modelSlug": "625c",
+    "sourceProductId": 21029,
+    "sourceUrl": "https://viezu.com/shop/mclaren-625c-2014-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "3.8",
+        "originalBhp": {
+          "raw": "625",
+          "parsedValues": ["625"],
+          "primaryValue": "625"
+        },
+        "powerBhpGain": {
+          "raw": "55",
+          "parsedValues": ["55"],
+          "primaryValue": "55"
+        },
+        "originalTorque": {
+          "raw": "610",
+          "parsedValues": ["610"],
+          "primaryValue": "610"
+        },
+        "torqueNmGain": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 99900
+      }
+    ]
+  },
+  {
+    "make": "Mclaren",
+    "model": "620R",
+    "modelSlug": "620r",
+    "sourceProductId": 21027,
+    "sourceUrl": "https://viezu.com/shop/mclaren-620r-2020-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "3.8",
+        "originalBhp": {
+          "raw": "620",
+          "parsedValues": ["620"],
+          "primaryValue": "620"
+        },
+        "powerBhpGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "originalTorque": {
+          "raw": "620",
+          "parsedValues": ["620"],
+          "primaryValue": "620"
+        },
+        "torqueNmGain": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 99900
+      }
+    ]
+  },
+  {
+    "make": "Mclaren",
+    "model": "600LT",
+    "modelSlug": "600lt",
+    "sourceProductId": 21025,
+    "sourceUrl": "https://viezu.com/shop/mclaren-600lt-2018-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "3.8",
+        "originalBhp": {
+          "raw": "600",
+          "parsedValues": ["600"],
+          "primaryValue": "600"
+        },
+        "powerBhpGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "originalTorque": {
+          "raw": "620",
+          "parsedValues": ["620"],
+          "primaryValue": "620"
+        },
+        "torqueNmGain": {
+          "raw": "100",
+          "parsedValues": ["100"],
+          "primaryValue": "100"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 99900
+      }
+    ]
+  },
+  {
+    "make": "Mclaren",
+    "model": "570GT",
+    "modelSlug": "570gt",
+    "sourceProductId": 21023,
+    "sourceUrl": "https://viezu.com/shop/mclaren-570gt-all/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "3.8",
+        "originalBhp": {
+          "raw": "570",
+          "parsedValues": ["570"],
+          "primaryValue": "570"
+        },
+        "powerBhpGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "originalTorque": {
+          "raw": "600",
+          "parsedValues": ["600"],
+          "primaryValue": "600"
+        },
+        "torqueNmGain": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 99900
+      }
+    ]
+  },
+  {
+    "make": "Mclaren",
+    "model": "570 S / Sprint / GT4",
+    "modelSlug": "570-s-sprint-gt4",
+    "sourceProductId": 21021,
+    "sourceUrl": "https://viezu.com/shop/mclaren-570-s-sprint-gt4-all/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "3.8",
+        "originalBhp": {
+          "raw": "570",
+          "parsedValues": ["570"],
+          "primaryValue": "570"
+        },
+        "powerBhpGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "originalTorque": {
+          "raw": "600",
+          "parsedValues": ["600"],
+          "primaryValue": "600"
+        },
+        "torqueNmGain": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 99900
+      }
+    ]
+  },
+  {
+    "make": "Mclaren",
+    "model": "540C",
+    "modelSlug": "540c",
+    "sourceProductId": 21019,
+    "sourceUrl": "https://viezu.com/shop/mclaren-540c-all/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "3.8",
+        "originalBhp": {
+          "raw": "540",
+          "parsedValues": ["540"],
+          "primaryValue": "540"
+        },
+        "powerBhpGain": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "originalTorque": {
+          "raw": "540",
+          "parsedValues": ["540"],
+          "primaryValue": "540"
+        },
+        "torqueNmGain": {
+          "raw": "140",
+          "parsedValues": ["140"],
+          "primaryValue": "140"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 99900
+      }
+    ]
+  }
+]

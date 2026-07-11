@@ -1,0 +1,791 @@
+[
+  {
+    "make": "Smart",
+    "model": "Roadster",
+    "modelSlug": "roadster",
+    "sourceProductId": 22992,
+    "sourceUrl": "https://viezu.com/shop/roadster-2003-2006/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "0.7",
+        "originalBhp": {
+          "raw": "62 | 82 | 101",
+          "parsedValues": ["62", "82", "101"],
+          "primaryValue": "62",
+          "secondaryValue": "82"
+        },
+        "powerBhpGain": {
+          "raw": "16 | 20 | 20",
+          "parsedValues": ["16", "20", "20"],
+          "primaryValue": "16",
+          "secondaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "95 | 110 | 130",
+          "parsedValues": ["95", "110", "130"],
+          "primaryValue": "95",
+          "secondaryValue": "110"
+        },
+        "torqueNmGain": {
+          "raw": "30 | 25 | 30",
+          "parsedValues": ["30", "25", "30"],
+          "primaryValue": "30",
+          "secondaryValue": "25"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      }
+    ]
+  },
+  {
+    "make": "Smart",
+    "model": "ForTwo",
+    "modelSlug": "fortwo",
+    "sourceProductId": 22989,
+    "sourceUrl": "https://viezu.com/shop/smart-fortwo-2014-present/",
+    "variations": [
+      {
+        "fuelType": "Electric",
+        "variant": "0",
+        "originalBhp": {
+          "raw": "82",
+          "parsedValues": ["82"],
+          "primaryValue": "82"
+        },
+        "powerBhpGain": {
+          "raw": "8",
+          "parsedValues": ["8"],
+          "primaryValue": "8"
+        },
+        "originalTorque": {
+          "raw": "150",
+          "parsedValues": ["150"],
+          "primaryValue": "150"
+        },
+        "torqueNmGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "0.9",
+        "originalBhp": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "powerBhpGain": {
+          "raw": "9",
+          "parsedValues": ["9"],
+          "primaryValue": "9"
+        },
+        "originalTorque": {
+          "raw": "135",
+          "parsedValues": ["135"],
+          "primaryValue": "135"
+        },
+        "torqueNmGain": {
+          "raw": "14",
+          "parsedValues": ["14"],
+          "primaryValue": "14"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.0",
+        "originalBhp": {
+          "raw": "90 | 61 | 71 | 84 | 102",
+          "parsedValues": ["90", "61", "71", "84", "102"],
+          "primaryValue": "90",
+          "secondaryValue": "61"
+        },
+        "powerBhpGain": {
+          "raw": "20 | 6 | 8 | 9 | 10",
+          "parsedValues": ["20", "6", "8", "9", "10"],
+          "primaryValue": "20",
+          "secondaryValue": "6"
+        },
+        "originalTorque": {
+          "raw": "135 | 92 | 89 | 121 | 147",
+          "parsedValues": ["135", "92", "89", "121", "147"],
+          "primaryValue": "135",
+          "secondaryValue": "92"
+        },
+        "torqueNmGain": {
+          "raw": "40 | 10 | 16 | 20 | 15",
+          "parsedValues": ["40", "10", "16", "20", "15"],
+          "primaryValue": "40",
+          "secondaryValue": "10"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "0.8",
+        "originalBhp": {
+          "raw": "54",
+          "parsedValues": ["54"],
+          "primaryValue": "54"
+        },
+        "powerBhpGain": {
+          "raw": "19",
+          "parsedValues": ["19"],
+          "primaryValue": "19"
+        },
+        "originalTorque": {
+          "raw": "130",
+          "parsedValues": ["130"],
+          "primaryValue": "130"
+        },
+        "torqueNmGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "economyGainBhp": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 22500
+      }
+    ]
+  },
+  {
+    "make": "Smart",
+    "model": "ForTwo",
+    "modelSlug": "fortwo",
+    "sourceProductId": 22986,
+    "sourceUrl": "https://viezu.com/shop/smart-fortwo-present-2014/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.0",
+        "originalBhp": {
+          "raw": "61 | 71 | 98 | 84",
+          "parsedValues": ["61", "71", "98", "84"],
+          "primaryValue": "61",
+          "secondaryValue": "71"
+        },
+        "powerBhpGain": {
+          "raw": "6 | 8 | 10 | 9",
+          "parsedValues": ["6", "8", "10", "9"],
+          "primaryValue": "6",
+          "secondaryValue": "8"
+        },
+        "originalTorque": {
+          "raw": "92 | 89 | 140 | 120 ",
+          "parsedValues": ["92", "89", "140", "120"],
+          "primaryValue": "92",
+          "secondaryValue": "89"
+        },
+        "torqueNmGain": {
+          "raw": "10 | 16 | 14 | 12",
+          "parsedValues": ["10", "16", "14", "12"],
+          "primaryValue": "10",
+          "secondaryValue": "16"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "0.7",
+        "originalBhp": {
+          "raw": "50 | 75 | 60",
+          "parsedValues": ["50", "75", "60"],
+          "primaryValue": "50",
+          "secondaryValue": "75"
+        },
+        "powerBhpGain": {
+          "raw": "5 | 8 | 6",
+          "parsedValues": ["5", "8", "6"],
+          "primaryValue": "5",
+          "secondaryValue": "8"
+        },
+        "originalTorque": {
+          "raw": "95 | 110 | 95",
+          "parsedValues": ["95", "110", "95"],
+          "primaryValue": "95",
+          "secondaryValue": "110"
+        },
+        "torqueNmGain": {
+          "raw": "10 | 11 | 10",
+          "parsedValues": ["10", "11", "10"],
+          "primaryValue": "10",
+          "secondaryValue": "11"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "0.8",
+        "originalBhp": {
+          "raw": "41 | 45 | 54",
+          "parsedValues": ["41", "45", "54"],
+          "primaryValue": "41",
+          "secondaryValue": "45"
+        },
+        "powerBhpGain": {
+          "raw": "20 | 20 | 19",
+          "parsedValues": ["20", "20", "19"],
+          "primaryValue": "20",
+          "secondaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "100 | 110 | 130",
+          "parsedValues": ["100", "110", "130"],
+          "primaryValue": "100",
+          "secondaryValue": "110"
+        },
+        "torqueNmGain": {
+          "raw": "35 | 45 | 40",
+          "parsedValues": ["35", "45", "40"],
+          "primaryValue": "35",
+          "secondaryValue": "45"
+        },
+        "economyGainBhp": {
+          "raw": "10 | 10 | 10",
+          "parsedValues": ["10", "10", "10"],
+          "primaryValue": "10",
+          "secondaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "20 | 20 | 20",
+          "parsedValues": ["20", "20", "20"],
+          "primaryValue": "20",
+          "secondaryValue": "20"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 22500
+      }
+    ]
+  },
+  {
+    "make": "Smart",
+    "model": "ForFour",
+    "modelSlug": "forfour",
+    "sourceProductId": 22984,
+    "sourceUrl": "https://viezu.com/shop/smart-forfour-2014-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "0.9",
+        "originalBhp": {
+          "raw": "90 | 107",
+          "parsedValues": ["90", "107"],
+          "primaryValue": "90",
+          "secondaryValue": "107"
+        },
+        "powerBhpGain": {
+          "raw": "20 | 25",
+          "parsedValues": ["20", "25"],
+          "primaryValue": "20",
+          "secondaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "135 | 170",
+          "parsedValues": ["135", "170"],
+          "primaryValue": "135",
+          "secondaryValue": "170"
+        },
+        "torqueNmGain": {
+          "raw": "20 | 25",
+          "parsedValues": ["20", "25"],
+          "primaryValue": "20",
+          "secondaryValue": "25"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.0",
+        "originalBhp": {
+          "raw": "61 | 71",
+          "parsedValues": ["61", "71"],
+          "primaryValue": "61",
+          "secondaryValue": "71"
+        },
+        "powerBhpGain": {
+          "raw": "8 | 8",
+          "parsedValues": ["8", "8"],
+          "primaryValue": "8",
+          "secondaryValue": "8"
+        },
+        "originalTorque": {
+          "raw": "91 | 91",
+          "parsedValues": ["91", "91"],
+          "primaryValue": "91",
+          "secondaryValue": "91"
+        },
+        "torqueNmGain": {
+          "raw": "14 | 14",
+          "parsedValues": ["14", "14"],
+          "primaryValue": "14",
+          "secondaryValue": "14"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      }
+    ]
+  },
+  {
+    "make": "Smart",
+    "model": "ForFour",
+    "modelSlug": "forfour",
+    "sourceProductId": 22981,
+    "sourceUrl": "https://viezu.com/shop/smart-forfour-2004-2014/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.1",
+        "originalBhp": {
+          "raw": "74",
+          "parsedValues": ["74"],
+          "primaryValue": "74"
+        },
+        "powerBhpGain": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "originalTorque": {
+          "raw": "100",
+          "parsedValues": ["100"],
+          "primaryValue": "100"
+        },
+        "torqueNmGain": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.5",
+        "originalBhp": {
+          "raw": "177 | 109",
+          "parsedValues": ["177", "109"],
+          "primaryValue": "177",
+          "secondaryValue": "109"
+        },
+        "powerBhpGain": {
+          "raw": "3 | 7",
+          "parsedValues": ["3", "7"],
+          "primaryValue": "3",
+          "secondaryValue": "7"
+        },
+        "originalTorque": {
+          "raw": "230 | 145",
+          "parsedValues": ["230", "145"],
+          "primaryValue": "230",
+          "secondaryValue": "145"
+        },
+        "torqueNmGain": {
+          "raw": "40 | 10",
+          "parsedValues": ["40", "10"],
+          "primaryValue": "40",
+          "secondaryValue": "10"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.5",
+        "originalBhp": {
+          "raw": "68 | 95",
+          "parsedValues": ["68", "95"],
+          "primaryValue": "68",
+          "secondaryValue": "95"
+        },
+        "powerBhpGain": {
+          "raw": "24 | 20",
+          "parsedValues": ["24", "20"],
+          "primaryValue": "24",
+          "secondaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "160 | 210",
+          "parsedValues": ["160", "210"],
+          "primaryValue": "160",
+          "secondaryValue": "210"
+        },
+        "torqueNmGain": {
+          "raw": "50 | 50",
+          "parsedValues": ["50", "50"],
+          "primaryValue": "50",
+          "secondaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "10 | 10",
+          "parsedValues": ["10", "10"],
+          "primaryValue": "10",
+          "secondaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "25 | 25",
+          "parsedValues": ["25", "25"],
+          "primaryValue": "25",
+          "secondaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 22500
+      }
+    ]
+  },
+  {
+    "make": "Smart",
+    "model": "Crossblade",
+    "modelSlug": "crossblade",
+    "sourceProductId": 22979,
+    "sourceUrl": "https://viezu.com/shop/crossblade-2002-2003/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "0.6",
+        "originalBhp": {
+          "raw": "70",
+          "parsedValues": ["70"],
+          "primaryValue": "70"
+        },
+        "powerBhpGain": {
+          "raw": "12",
+          "parsedValues": ["12"],
+          "primaryValue": "12"
+        },
+        "originalTorque": {
+          "raw": "108",
+          "parsedValues": ["108"],
+          "primaryValue": "108"
+        },
+        "torqueNmGain": {
+          "raw": "17",
+          "parsedValues": ["17"],
+          "primaryValue": "17"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      }
+    ]
+  },
+  {
+    "make": "Smart",
+    "model": "City",
+    "modelSlug": "city",
+    "sourceProductId": 22976,
+    "sourceUrl": "https://viezu.com/shop/smart-city-2002-2004/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "0.6",
+        "originalBhp": {
+          "raw": "56",
+          "parsedValues": ["56"],
+          "primaryValue": "56"
+        },
+        "powerBhpGain": {
+          "raw": "6",
+          "parsedValues": ["6"],
+          "primaryValue": "6"
+        },
+        "originalTorque": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "torqueNmGain": {
+          "raw": "8",
+          "parsedValues": ["8"],
+          "primaryValue": "8"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "0.7",
+        "originalBhp": {
+          "raw": "75 | 60",
+          "parsedValues": ["75", "60"],
+          "primaryValue": "75",
+          "secondaryValue": "60"
+        },
+        "powerBhpGain": {
+          "raw": "7 | 6",
+          "parsedValues": ["7", "6"],
+          "primaryValue": "7",
+          "secondaryValue": "6"
+        },
+        "originalTorque": {
+          "raw": "110 | 95",
+          "parsedValues": ["110", "95"],
+          "primaryValue": "110",
+          "secondaryValue": "95"
+        },
+        "torqueNmGain": {
+          "raw": "11 | 9",
+          "parsedValues": ["11", "9"],
+          "primaryValue": "11",
+          "secondaryValue": "9"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "0.8",
+        "originalBhp": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "110",
+          "parsedValues": ["110"],
+          "primaryValue": "110"
+        },
+        "torqueNmGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "economyGainBhp": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 22500
+      }
+    ]
+  }
+]

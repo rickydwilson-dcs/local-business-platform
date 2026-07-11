@@ -1,0 +1,390 @@
+[
+  {
+    "make": "Mahindra",
+    "model": "Thar",
+    "modelSlug": "thar",
+    "sourceProductId": 62958,
+    "sourceUrl": "https://viezu.com/shop/mahindra-thar-2020-present/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.2",
+        "originalBhp": {
+          "raw": "130 | 150 | 172",
+          "parsedValues": ["130", "150", "172"],
+          "primaryValue": "130",
+          "secondaryValue": "150"
+        },
+        "powerBhpGain": {
+          "raw": "25 | 50 | 28",
+          "parsedValues": ["25", "50", "28"],
+          "primaryValue": "25",
+          "secondaryValue": "50"
+        },
+        "originalTorque": {
+          "raw": "300 | 330 | 350",
+          "parsedValues": ["300", "330", "350"],
+          "primaryValue": "300",
+          "secondaryValue": "330"
+        },
+        "torqueNmGain": {
+          "raw": "30 | 50 | 30",
+          "parsedValues": ["30", "50", "30"],
+          "primaryValue": "30",
+          "secondaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "12 | 25 | 14",
+          "parsedValues": ["12", "25", "14"],
+          "primaryValue": "12",
+          "secondaryValue": "25"
+        },
+        "economyGainNm": {
+          "raw": "15 | 25 | 15",
+          "parsedValues": ["15", "25", "15"],
+          "primaryValue": "15",
+          "secondaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Mahindra",
+    "model": "Xylo",
+    "modelSlug": "xylo",
+    "sourceProductId": 20898,
+    "sourceUrl": "https://viezu.com/shop/mahindra-xylo-all/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.2",
+        "originalBhp": {
+          "raw": "120",
+          "parsedValues": ["120"],
+          "primaryValue": "120"
+        },
+        "powerBhpGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "originalTorque": {
+          "raw": "290",
+          "parsedValues": ["290"],
+          "primaryValue": "290"
+        },
+        "torqueNmGain": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.5",
+        "originalBhp": {
+          "raw": "94",
+          "parsedValues": ["94"],
+          "primaryValue": "94"
+        },
+        "powerBhpGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "218",
+          "parsedValues": ["218"],
+          "primaryValue": "218"
+        },
+        "torqueNmGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "65",
+          "parsedValues": ["65"],
+          "primaryValue": "65"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Mahindra",
+    "model": "XUV500",
+    "modelSlug": "xuv500",
+    "sourceProductId": 20896,
+    "sourceUrl": "https://viezu.com/shop/mahindra-xuv500-all/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.2",
+        "originalBhp": {
+          "raw": "140 | 155",
+          "parsedValues": ["140", "155"],
+          "primaryValue": "140",
+          "secondaryValue": "155"
+        },
+        "powerBhpGain": {
+          "raw": "80 | 50",
+          "parsedValues": ["80", "50"],
+          "primaryValue": "80",
+          "secondaryValue": "50"
+        },
+        "originalTorque": {
+          "raw": "330 | 340",
+          "parsedValues": ["330", "340"],
+          "primaryValue": "330",
+          "secondaryValue": "340"
+        },
+        "torqueNmGain": {
+          "raw": "170 | 160",
+          "parsedValues": ["170", "160"],
+          "primaryValue": "170",
+          "secondaryValue": "160"
+        },
+        "economyGainBhp": {
+          "raw": "40 | 25",
+          "parsedValues": ["40", "25"],
+          "primaryValue": "40",
+          "secondaryValue": "25"
+        },
+        "economyGainNm": {
+          "raw": "85 | 80",
+          "parsedValues": ["85", "80"],
+          "primaryValue": "85",
+          "secondaryValue": "80"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Mahindra",
+    "model": "Scorpio",
+    "modelSlug": "scorpio",
+    "sourceProductId": 20894,
+    "sourceUrl": "https://viezu.com/shop/mahindra-scorpio-all/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.2",
+        "originalBhp": {
+          "raw": "120",
+          "parsedValues": ["120"],
+          "primaryValue": "120"
+        },
+        "powerBhpGain": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "270",
+          "parsedValues": ["270"],
+          "primaryValue": "270"
+        },
+        "torqueNmGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Mahindra",
+    "model": "Quanto",
+    "modelSlug": "quanto",
+    "sourceProductId": 20892,
+    "sourceUrl": "https://viezu.com/shop/mahindra-quanto-all/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "1.5",
+        "originalBhp": {
+          "raw": "99",
+          "parsedValues": ["99"],
+          "primaryValue": "99"
+        },
+        "powerBhpGain": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "240",
+          "parsedValues": ["240"],
+          "primaryValue": "240"
+        },
+        "torqueNmGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "12",
+          "parsedValues": ["12"],
+          "primaryValue": "12"
+        },
+        "economyGainNm": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.2",
+        "originalBhp": {
+          "raw": "120",
+          "parsedValues": ["120"],
+          "primaryValue": "120"
+        },
+        "powerBhpGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "originalTorque": {
+          "raw": "290",
+          "parsedValues": ["290"],
+          "primaryValue": "290"
+        },
+        "torqueNmGain": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Mahindra",
+    "model": "Genio",
+    "modelSlug": "genio",
+    "sourceProductId": 20890,
+    "sourceUrl": "https://viezu.com/shop/mahindra-genio-all/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.2",
+        "originalBhp": {
+          "raw": "120",
+          "parsedValues": ["120"],
+          "primaryValue": "120"
+        },
+        "powerBhpGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "originalTorque": {
+          "raw": "290",
+          "parsedValues": ["290"],
+          "primaryValue": "290"
+        },
+        "torqueNmGain": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  }
+]

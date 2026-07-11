@@ -1,0 +1,804 @@
+[
+  {
+    "make": "Bentley",
+    "model": "Mulsanne",
+    "modelSlug": "mulsanne",
+    "sourceProductId": 18374,
+    "sourceUrl": "https://viezu.com/shop/bentley-mulsanne-present-2016/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "6.8",
+        "originalBhp": {
+          "raw": "537 | 505",
+          "parsedValues": ["537", "505"],
+          "primaryValue": "537",
+          "secondaryValue": "505"
+        },
+        "powerBhpGain": {
+          "raw": "163 | 195",
+          "parsedValues": ["163", "195"],
+          "primaryValue": "163",
+          "secondaryValue": "195"
+        },
+        "originalTorque": {
+          "raw": "1100 | 1020",
+          "parsedValues": ["1100", "1020"],
+          "primaryValue": "1100",
+          "secondaryValue": "1020"
+        },
+        "torqueNmGain": {
+          "raw": "300 | 380",
+          "parsedValues": ["300", "380"],
+          "primaryValue": "300",
+          "secondaryValue": "380"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 99900
+      }
+    ]
+  },
+  {
+    "make": "Bentley",
+    "model": "Continental GTC",
+    "modelSlug": "continental-gtc",
+    "sourceProductId": 18371,
+    "sourceUrl": "https://viezu.com/shop/bentley-continental-gtc-all/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "4.0",
+        "originalBhp": {
+          "raw": "507 | 528",
+          "parsedValues": ["507", "528"],
+          "primaryValue": "507",
+          "secondaryValue": "528"
+        },
+        "powerBhpGain": {
+          "raw": "133 | 112",
+          "parsedValues": ["133", "112"],
+          "primaryValue": "133",
+          "secondaryValue": "112"
+        },
+        "originalTorque": {
+          "raw": "660 | 680",
+          "parsedValues": ["660", "680"],
+          "primaryValue": "660",
+          "secondaryValue": "680"
+        },
+        "torqueNmGain": {
+          "raw": "240 | 220",
+          "parsedValues": ["240", "220"],
+          "primaryValue": "240",
+          "secondaryValue": "220"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 59900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "6.0",
+        "originalBhp": {
+          "raw": "560 | 610 | 630",
+          "parsedValues": ["560", "610", "630"],
+          "primaryValue": "560",
+          "secondaryValue": "610"
+        },
+        "powerBhpGain": {
+          "raw": "120 | 70 | 50",
+          "parsedValues": ["120", "70", "50"],
+          "primaryValue": "120",
+          "secondaryValue": "70"
+        },
+        "originalTorque": {
+          "raw": "650 | 750 | 800",
+          "parsedValues": ["650", "750", "800"],
+          "primaryValue": "650",
+          "secondaryValue": "750"
+        },
+        "torqueNmGain": {
+          "raw": "250 | 150 | 100",
+          "parsedValues": ["250", "150", "100"],
+          "primaryValue": "250",
+          "secondaryValue": "150"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 59900
+      }
+    ]
+  },
+  {
+    "make": "Bentley",
+    "model": "Continental GT3-R",
+    "modelSlug": "continental-gt3-r",
+    "sourceProductId": 18369,
+    "sourceUrl": "https://viezu.com/shop/bentley-continental-gt3-r-all/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "4.0",
+        "originalBhp": {
+          "raw": "580",
+          "parsedValues": ["580"],
+          "primaryValue": "580"
+        },
+        "powerBhpGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "originalTorque": {
+          "raw": "700",
+          "parsedValues": ["700"],
+          "primaryValue": "700"
+        },
+        "torqueNmGain": {
+          "raw": "200",
+          "parsedValues": ["200"],
+          "primaryValue": "200"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 59900
+      }
+    ]
+  },
+  {
+    "make": "Bentley",
+    "model": "Continental GT/S",
+    "modelSlug": "continental-gt-s",
+    "sourceProductId": 18367,
+    "sourceUrl": "https://viezu.com/shop/bentley-continental-gt-s-2017-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "4.0",
+        "originalBhp": {
+          "raw": "550",
+          "parsedValues": ["550"],
+          "primaryValue": "550"
+        },
+        "powerBhpGain": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "originalTorque": {
+          "raw": "770",
+          "parsedValues": ["770"],
+          "primaryValue": "770"
+        },
+        "torqueNmGain": {
+          "raw": "130",
+          "parsedValues": ["130"],
+          "primaryValue": "130"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 54900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "6.0",
+        "originalBhp": {
+          "raw": "626",
+          "parsedValues": ["626"],
+          "primaryValue": "626"
+        },
+        "powerBhpGain": {
+          "raw": "54",
+          "parsedValues": ["54"],
+          "primaryValue": "54"
+        },
+        "originalTorque": {
+          "raw": "900",
+          "parsedValues": ["900"],
+          "primaryValue": "900"
+        },
+        "torqueNmGain": {
+          "raw": "100",
+          "parsedValues": ["100"],
+          "primaryValue": "100"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 59900
+      }
+    ]
+  },
+  {
+    "make": "Bentley",
+    "model": "Continental GT/S",
+    "modelSlug": "continental-gt-s",
+    "sourceProductId": 18364,
+    "sourceUrl": "https://viezu.com/shop/bentley-continental-gt-s-2011-2016/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "4.0",
+        "originalBhp": {
+          "raw": "507 | 528",
+          "parsedValues": ["507", "528"],
+          "primaryValue": "507",
+          "secondaryValue": "528"
+        },
+        "powerBhpGain": {
+          "raw": "133 | 112",
+          "parsedValues": ["133", "112"],
+          "primaryValue": "133",
+          "secondaryValue": "112"
+        },
+        "originalTorque": {
+          "raw": "660 | 680",
+          "parsedValues": ["660", "680"],
+          "primaryValue": "660",
+          "secondaryValue": "680"
+        },
+        "torqueNmGain": {
+          "raw": "240 | 220",
+          "parsedValues": ["240", "220"],
+          "primaryValue": "240",
+          "secondaryValue": "220"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 59900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "6.0",
+        "originalBhp": {
+          "raw": "575 | 625 | 635",
+          "parsedValues": ["575", "625", "635"],
+          "primaryValue": "575",
+          "secondaryValue": "625"
+        },
+        "powerBhpGain": {
+          "raw": "105 | 55 | 45",
+          "parsedValues": ["105", "55", "45"],
+          "primaryValue": "105",
+          "secondaryValue": "55"
+        },
+        "originalTorque": {
+          "raw": "700 | 800 | 820",
+          "parsedValues": ["700", "800", "820"],
+          "primaryValue": "700",
+          "secondaryValue": "800"
+        },
+        "torqueNmGain": {
+          "raw": "200 | 100 | 80",
+          "parsedValues": ["200", "100", "80"],
+          "primaryValue": "200",
+          "secondaryValue": "100"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 59900
+      }
+    ]
+  },
+  {
+    "make": "Bentley",
+    "model": "Continental GT Speed",
+    "modelSlug": "continental-gt-speed",
+    "sourceProductId": 18362,
+    "sourceUrl": "https://viezu.com/shop/bentley-continental-gt-speed-all/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "6.0",
+        "originalBhp": {
+          "raw": "635 | 660",
+          "parsedValues": ["635", "660"],
+          "primaryValue": "635",
+          "secondaryValue": "660"
+        },
+        "powerBhpGain": {
+          "raw": "45 | 20",
+          "parsedValues": ["45", "20"],
+          "primaryValue": "45",
+          "secondaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "820 | 900",
+          "parsedValues": ["820", "900"],
+          "primaryValue": "820",
+          "secondaryValue": "900"
+        },
+        "torqueNmGain": {
+          "raw": "80 | 50",
+          "parsedValues": ["80", "50"],
+          "primaryValue": "80",
+          "secondaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 59900
+      }
+    ]
+  },
+  {
+    "make": "Bentley",
+    "model": "Continental Flying Spur",
+    "modelSlug": "continental-flying-spur",
+    "sourceProductId": 18359,
+    "sourceUrl": "https://viezu.com/shop/bentley-continental-flying-spur-2016-2019/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "4.0",
+        "originalBhp": {
+          "raw": "528",
+          "parsedValues": ["528"],
+          "primaryValue": "528"
+        },
+        "powerBhpGain": {
+          "raw": "112",
+          "parsedValues": ["112"],
+          "primaryValue": "112"
+        },
+        "originalTorque": {
+          "raw": "680",
+          "parsedValues": ["680"],
+          "primaryValue": "680"
+        },
+        "torqueNmGain": {
+          "raw": "220",
+          "parsedValues": ["220"],
+          "primaryValue": "220"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 59900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "6.0",
+        "originalBhp": {
+          "raw": "635",
+          "parsedValues": ["635"],
+          "primaryValue": "635"
+        },
+        "powerBhpGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "820",
+          "parsedValues": ["820"],
+          "primaryValue": "820"
+        },
+        "torqueNmGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 59900
+      }
+    ]
+  },
+  {
+    "make": "Bentley",
+    "model": "Continental Flying Spur",
+    "modelSlug": "continental-flying-spur",
+    "sourceProductId": 18356,
+    "sourceUrl": "https://viezu.com/shop/bentley-continental-flying-spur-present-2016/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "4.0",
+        "originalBhp": {
+          "raw": "507",
+          "parsedValues": ["507"],
+          "primaryValue": "507"
+        },
+        "powerBhpGain": {
+          "raw": "133",
+          "parsedValues": ["133"],
+          "primaryValue": "133"
+        },
+        "originalTorque": {
+          "raw": "660",
+          "parsedValues": ["660"],
+          "primaryValue": "660"
+        },
+        "torqueNmGain": {
+          "raw": "240",
+          "parsedValues": ["240"],
+          "primaryValue": "240"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 59900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "6.0",
+        "originalBhp": {
+          "raw": "560 | 610 | 625",
+          "parsedValues": ["560", "610", "625"],
+          "primaryValue": "560",
+          "secondaryValue": "610"
+        },
+        "powerBhpGain": {
+          "raw": "120 | 70 | 55",
+          "parsedValues": ["120", "70", "55"],
+          "primaryValue": "120",
+          "secondaryValue": "70"
+        },
+        "originalTorque": {
+          "raw": "650 | 750 | 800",
+          "parsedValues": ["650", "750", "800"],
+          "primaryValue": "650",
+          "secondaryValue": "750"
+        },
+        "torqueNmGain": {
+          "raw": "250 | 150 | 100",
+          "parsedValues": ["250", "150", "100"],
+          "primaryValue": "250",
+          "secondaryValue": "150"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 59900
+      }
+    ]
+  },
+  {
+    "make": "Bentley",
+    "model": "Bentayga",
+    "modelSlug": "bentayga",
+    "sourceProductId": 18354,
+    "sourceUrl": "https://viezu.com/shop/bentley-bentayga-2020-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "4.0",
+        "originalBhp": {
+          "raw": "550",
+          "parsedValues": ["550"],
+          "primaryValue": "550"
+        },
+        "powerBhpGain": {
+          "raw": "70",
+          "parsedValues": ["70"],
+          "primaryValue": "70"
+        },
+        "originalTorque": {
+          "raw": "770",
+          "parsedValues": ["770"],
+          "primaryValue": "770"
+        },
+        "torqueNmGain": {
+          "raw": "100",
+          "parsedValues": ["100"],
+          "primaryValue": "100"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 59900
+      }
+    ]
+  },
+  {
+    "make": "Bentley",
+    "model": "Bentayga",
+    "modelSlug": "bentayga",
+    "sourceProductId": 18350,
+    "sourceUrl": "https://viezu.com/shop/bentley-bentayga-2016-2019/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "4.0",
+        "originalBhp": {
+          "raw": "550",
+          "parsedValues": ["550"],
+          "primaryValue": "550"
+        },
+        "powerBhpGain": {
+          "raw": "70",
+          "parsedValues": ["70"],
+          "primaryValue": "70"
+        },
+        "originalTorque": {
+          "raw": "770",
+          "parsedValues": ["770"],
+          "primaryValue": "770"
+        },
+        "torqueNmGain": {
+          "raw": "100",
+          "parsedValues": ["100"],
+          "primaryValue": "100"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 59900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "6.0",
+        "originalBhp": {
+          "raw": "608 | 635",
+          "parsedValues": ["608", "635"],
+          "primaryValue": "608",
+          "secondaryValue": "635"
+        },
+        "powerBhpGain": {
+          "raw": "72 | 45",
+          "parsedValues": ["72", "45"],
+          "primaryValue": "72",
+          "secondaryValue": "45"
+        },
+        "originalTorque": {
+          "raw": "900 | 900",
+          "parsedValues": ["900", "900"],
+          "primaryValue": "900",
+          "secondaryValue": "900"
+        },
+        "torqueNmGain": {
+          "raw": "150 | 150",
+          "parsedValues": ["150", "150"],
+          "primaryValue": "150",
+          "secondaryValue": "150"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 59900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "4.0",
+        "originalBhp": {
+          "raw": "435",
+          "parsedValues": ["435"],
+          "primaryValue": "435"
+        },
+        "powerBhpGain": {
+          "raw": "75",
+          "parsedValues": ["75"],
+          "primaryValue": "75"
+        },
+        "originalTorque": {
+          "raw": "900",
+          "parsedValues": ["900"],
+          "primaryValue": "900"
+        },
+        "torqueNmGain": {
+          "raw": "100",
+          "parsedValues": ["100"],
+          "primaryValue": "100"
+        },
+        "economyGainBhp": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "economyGainNm": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 59900
+      }
+    ]
+  }
+]

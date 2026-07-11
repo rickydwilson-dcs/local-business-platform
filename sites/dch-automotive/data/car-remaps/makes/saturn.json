@@ -1,0 +1,683 @@
+[
+  {
+    "make": "Saturn",
+    "model": "Relay",
+    "modelSlug": "relay",
+    "sourceProductId": 27680,
+    "sourceUrl": "https://viezu.com/shop/saturn-relay-2007-2011/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "3.9",
+        "originalBhp": {
+          "raw": "243",
+          "parsedValues": ["243"],
+          "primaryValue": "243"
+        },
+        "powerBhpGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "332",
+          "parsedValues": ["332"],
+          "primaryValue": "332"
+        },
+        "torqueNmGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "economyGainBhp": {
+          "raw": "0",
+          "parsedValues": ["0"],
+          "primaryValue": "0"
+        },
+        "economyGainNm": {
+          "raw": "0",
+          "parsedValues": ["0"],
+          "primaryValue": "0"
+        },
+        "fuelSaving": {
+          "raw": "0",
+          "parsedValues": ["0"],
+          "primaryValue": "0"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Saturn",
+    "model": "Vue",
+    "modelSlug": "vue",
+    "sourceProductId": 22676,
+    "sourceUrl": "https://viezu.com/shop/saturn-vue-2008-2010/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "2.4",
+        "originalBhp": {
+          "raw": "170",
+          "parsedValues": ["170"],
+          "primaryValue": "170"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "220",
+          "parsedValues": ["220"],
+          "primaryValue": "220"
+        },
+        "torqueNmGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Saturn",
+    "model": "Vue",
+    "modelSlug": "vue",
+    "sourceProductId": 22673,
+    "sourceUrl": "https://viezu.com/shop/saturn-vue-2002-2007/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "2.4",
+        "originalBhp": {
+          "raw": "170",
+          "parsedValues": ["170"],
+          "primaryValue": "170"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "220",
+          "parsedValues": ["220"],
+          "primaryValue": "220"
+        },
+        "torqueNmGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "3.5",
+        "originalBhp": {
+          "raw": "250",
+          "parsedValues": ["250"],
+          "primaryValue": "250"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "328",
+          "parsedValues": ["328"],
+          "primaryValue": "328"
+        },
+        "torqueNmGain": {
+          "raw": "32",
+          "parsedValues": ["32"],
+          "primaryValue": "32"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Saturn",
+    "model": "Sky",
+    "modelSlug": "sky",
+    "sourceProductId": 22670,
+    "sourceUrl": "https://viezu.com/shop/saturn-sky-2007-2010/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "260",
+          "parsedValues": ["260"],
+          "primaryValue": "260"
+        },
+        "powerBhpGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "353",
+          "parsedValues": ["353"],
+          "primaryValue": "353"
+        },
+        "torqueNmGain": {
+          "raw": "57",
+          "parsedValues": ["57"],
+          "primaryValue": "57"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "2.4",
+        "originalBhp": {
+          "raw": "177",
+          "parsedValues": ["177"],
+          "primaryValue": "177"
+        },
+        "powerBhpGain": {
+          "raw": "18",
+          "parsedValues": ["18"],
+          "primaryValue": "18"
+        },
+        "originalTorque": {
+          "raw": "235",
+          "parsedValues": ["235"],
+          "primaryValue": "235"
+        },
+        "torqueNmGain": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Saturn",
+    "model": "Relay",
+    "modelSlug": "relay",
+    "sourceProductId": 22668,
+    "sourceUrl": "https://viezu.com/shop/saturn-relay-2004-2007/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "3.5",
+        "originalBhp": {
+          "raw": "200",
+          "parsedValues": ["200"],
+          "primaryValue": "200"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "300",
+          "parsedValues": ["300"],
+          "primaryValue": "300"
+        },
+        "torqueNmGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Saturn",
+    "model": "Outlook",
+    "modelSlug": "outlook",
+    "sourceProductId": 22666,
+    "sourceUrl": "https://viezu.com/shop/saturn-outlook-2007-2010/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "3.6",
+        "originalBhp": {
+          "raw": "275",
+          "parsedValues": ["275"],
+          "primaryValue": "275"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "340",
+          "parsedValues": ["340"],
+          "primaryValue": "340"
+        },
+        "torqueNmGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Saturn",
+    "model": "L-Series",
+    "modelSlug": "l-series",
+    "sourceProductId": 22664,
+    "sourceUrl": "https://viezu.com/shop/saturn-l-series-2000-2004/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "2.2",
+        "originalBhp": {
+          "raw": "140",
+          "parsedValues": ["140"],
+          "primaryValue": "140"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "203",
+          "parsedValues": ["203"],
+          "primaryValue": "203"
+        },
+        "torqueNmGain": {
+          "raw": "27",
+          "parsedValues": ["27"],
+          "primaryValue": "27"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Saturn",
+    "model": "Ion",
+    "modelSlug": "ion",
+    "sourceProductId": 22660,
+    "sourceUrl": "https://viezu.com/shop/saturn-ion-2003-2007/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "205",
+          "parsedValues": ["205"],
+          "primaryValue": "205"
+        },
+        "powerBhpGain": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "271",
+          "parsedValues": ["271"],
+          "primaryValue": "271"
+        },
+        "torqueNmGain": {
+          "raw": "39",
+          "parsedValues": ["39"],
+          "primaryValue": "39"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "2.2",
+        "originalBhp": {
+          "raw": "140",
+          "parsedValues": ["140"],
+          "primaryValue": "140"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "197",
+          "parsedValues": ["197"],
+          "primaryValue": "197"
+        },
+        "torqueNmGain": {
+          "raw": "28",
+          "parsedValues": ["28"],
+          "primaryValue": "28"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "2.4",
+        "originalBhp": {
+          "raw": "175",
+          "parsedValues": ["175"],
+          "primaryValue": "175"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "222",
+          "parsedValues": ["222"],
+          "primaryValue": "222"
+        },
+        "torqueNmGain": {
+          "raw": "23",
+          "parsedValues": ["23"],
+          "primaryValue": "23"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Saturn",
+    "model": "Aura",
+    "modelSlug": "aura",
+    "sourceProductId": 22656,
+    "sourceUrl": "https://viezu.com/shop/saturn-aura-2007-2009/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "2.4",
+        "originalBhp": {
+          "raw": "170",
+          "parsedValues": ["170"],
+          "primaryValue": "170"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "220",
+          "parsedValues": ["220"],
+          "primaryValue": "220"
+        },
+        "torqueNmGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "3.5",
+        "originalBhp": {
+          "raw": "224",
+          "parsedValues": ["224"],
+          "primaryValue": "224"
+        },
+        "powerBhpGain": {
+          "raw": "21",
+          "parsedValues": ["21"],
+          "primaryValue": "21"
+        },
+        "originalTorque": {
+          "raw": "298",
+          "parsedValues": ["298"],
+          "primaryValue": "298"
+        },
+        "torqueNmGain": {
+          "raw": "32",
+          "parsedValues": ["32"],
+          "primaryValue": "32"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "3.6",
+        "originalBhp": {
+          "raw": "256",
+          "parsedValues": ["256"],
+          "primaryValue": "256"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "340",
+          "parsedValues": ["340"],
+          "primaryValue": "340"
+        },
+        "torqueNmGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  }
+]

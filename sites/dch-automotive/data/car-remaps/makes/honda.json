@@ -1,0 +1,2907 @@
+[
+  {
+    "make": "Honda",
+    "model": "Odyssey",
+    "modelSlug": "odyssey",
+    "sourceProductId": 52014,
+    "sourceUrl": "https://viezu.com/shop/honda-odyssey-2018-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "3.5",
+        "originalBhp": {
+          "raw": "280",
+          "parsedValues": ["280"],
+          "primaryValue": "280"
+        },
+        "powerBhpGain": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "355",
+          "parsedValues": ["355"],
+          "primaryValue": "355"
+        },
+        "torqueNmGain": {
+          "raw": "33",
+          "parsedValues": ["33"],
+          "primaryValue": "33"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 34900
+      }
+    ]
+  },
+  {
+    "make": "Honda",
+    "model": "Jazz",
+    "modelSlug": "jazz",
+    "sourceProductId": 51685,
+    "sourceUrl": "https://viezu.com/shop/honda-jazz-2016-2020/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.5",
+        "originalBhp": {
+          "raw": "130",
+          "parsedValues": ["130"],
+          "primaryValue": "130"
+        },
+        "powerBhpGain": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "155",
+          "parsedValues": ["155"],
+          "primaryValue": "155"
+        },
+        "torqueNmGain": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Honda",
+    "model": "Legend",
+    "modelSlug": "legend",
+    "sourceProductId": 51035,
+    "sourceUrl": "https://viezu.com/shop/honda-legend-2004-2008/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "3.5",
+        "originalBhp": {
+          "raw": "294",
+          "parsedValues": ["294"],
+          "primaryValue": "294"
+        },
+        "powerBhpGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "351",
+          "parsedValues": ["351"],
+          "primaryValue": "351"
+        },
+        "torqueNmGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24500
+      }
+    ]
+  },
+  {
+    "make": "Honda",
+    "model": "JAZZ",
+    "modelSlug": "jazz",
+    "sourceProductId": 48071,
+    "sourceUrl": "https://viezu.com/shop/honda-jazz-2001-2008/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.3",
+        "originalBhp": {
+          "raw": "82",
+          "parsedValues": ["82"],
+          "primaryValue": "82"
+        },
+        "powerBhpGain": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "originalTorque": {
+          "raw": "119",
+          "parsedValues": ["119"],
+          "primaryValue": "119"
+        },
+        "torqueNmGain": {
+          "raw": "16",
+          "parsedValues": ["16"],
+          "primaryValue": "16"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 17500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.2",
+        "originalBhp": {
+          "raw": "76",
+          "parsedValues": ["76"],
+          "primaryValue": "76"
+        },
+        "powerBhpGain": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "originalTorque": {
+          "raw": "110",
+          "parsedValues": ["110"],
+          "primaryValue": "110"
+        },
+        "torqueNmGain": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 30000
+      }
+    ]
+  },
+  {
+    "make": "Honda",
+    "model": "INSIGHT",
+    "modelSlug": "insight",
+    "sourceProductId": 48070,
+    "sourceUrl": "https://viezu.com/shop/honda-insight-2009-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.3",
+        "originalBhp": {
+          "raw": "87",
+          "parsedValues": ["87"],
+          "primaryValue": "87"
+        },
+        "powerBhpGain": {
+          "raw": "11",
+          "parsedValues": ["11"],
+          "primaryValue": "11"
+        },
+        "originalTorque": {
+          "raw": "121",
+          "parsedValues": ["121"],
+          "primaryValue": "121"
+        },
+        "torqueNmGain": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 17500
+      }
+    ]
+  },
+  {
+    "make": "Honda",
+    "model": "ELEMENT",
+    "modelSlug": "element",
+    "sourceProductId": 48069,
+    "sourceUrl": "https://viezu.com/shop/honda-element-2002-2011/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "2.4",
+        "originalBhp": {
+          "raw": "158 | 166 | 166",
+          "parsedValues": ["158", "166", "166"],
+          "primaryValue": "158",
+          "secondaryValue": "166"
+        },
+        "powerBhpGain": {
+          "raw": "20 | 21 | 21",
+          "parsedValues": ["20", "21", "21"],
+          "primaryValue": "20",
+          "secondaryValue": "21"
+        },
+        "originalTorque": {
+          "raw": "218 | 220 | 218",
+          "parsedValues": ["218", "220", "218"],
+          "primaryValue": "218",
+          "secondaryValue": "220"
+        },
+        "torqueNmGain": {
+          "raw": "18 | 18 | 18",
+          "parsedValues": ["18", "18", "18"],
+          "primaryValue": "18",
+          "secondaryValue": "18"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 19900
+      }
+    ]
+  },
+  {
+    "make": "Honda",
+    "model": "CR-Z",
+    "modelSlug": "cr-z",
+    "sourceProductId": 48068,
+    "sourceUrl": "https://viezu.com/shop/honda-cr-z-2010-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.5",
+        "originalBhp": {
+          "raw": "118",
+          "parsedValues": ["118"],
+          "primaryValue": "118"
+        },
+        "powerBhpGain": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "originalTorque": {
+          "raw": "145",
+          "parsedValues": ["145"],
+          "primaryValue": "145"
+        },
+        "torqueNmGain": {
+          "raw": "11",
+          "parsedValues": ["11"],
+          "primaryValue": "11"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 17500
+      }
+    ]
+  },
+  {
+    "make": "Honda",
+    "model": "UR-V",
+    "modelSlug": "ur-v",
+    "sourceProductId": 33160,
+    "sourceUrl": "https://viezu.com/shop/honda-ur-v-2016-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "272",
+          "parsedValues": ["272"],
+          "primaryValue": "272"
+        },
+        "powerBhpGain": {
+          "raw": "28",
+          "parsedValues": ["28"],
+          "primaryValue": "28"
+        },
+        "originalTorque": {
+          "raw": "370",
+          "parsedValues": ["370"],
+          "primaryValue": "370"
+        },
+        "torqueNmGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Honda",
+    "model": "S2000",
+    "modelSlug": "s2000",
+    "sourceProductId": 33158,
+    "sourceUrl": "https://viezu.com/shop/honda-s2000-2003-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "2.2",
+        "originalBhp": {
+          "raw": "240",
+          "parsedValues": ["240"],
+          "primaryValue": "240"
+        },
+        "powerBhpGain": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "originalTorque": {
+          "raw": "220",
+          "parsedValues": ["220"],
+          "primaryValue": "220"
+        },
+        "torqueNmGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Honda",
+    "model": "Odyssey",
+    "modelSlug": "odyssey",
+    "sourceProductId": 33156,
+    "sourceUrl": "https://viezu.com/shop/honda-odyssey-2013-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "2.4",
+        "originalBhp": {
+          "raw": "180 | 174",
+          "parsedValues": ["180", "174"],
+          "primaryValue": "180",
+          "secondaryValue": "174"
+        },
+        "powerBhpGain": {
+          "raw": "19 | 21",
+          "parsedValues": ["19", "21"],
+          "primaryValue": "19",
+          "secondaryValue": "21"
+        },
+        "originalTorque": {
+          "raw": "218 | 225",
+          "parsedValues": ["218", "225"],
+          "primaryValue": "218",
+          "secondaryValue": "225"
+        },
+        "torqueNmGain": {
+          "raw": "31 | 42",
+          "parsedValues": ["31", "42"],
+          "primaryValue": "31",
+          "secondaryValue": "42"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Honda",
+    "model": "Odyssey",
+    "modelSlug": "odyssey",
+    "sourceProductId": 33152,
+    "sourceUrl": "https://viezu.com/shop/honda-odyssey-2003-2008/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "2.4",
+        "originalBhp": {
+          "raw": "200",
+          "parsedValues": ["200"],
+          "primaryValue": "200"
+        },
+        "powerBhpGain": {
+          "raw": "18",
+          "parsedValues": ["18"],
+          "primaryValue": "18"
+        },
+        "originalTorque": {
+          "raw": "232",
+          "parsedValues": ["232"],
+          "primaryValue": "232"
+        },
+        "torqueNmGain": {
+          "raw": "32",
+          "parsedValues": ["32"],
+          "primaryValue": "32"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Honda",
+    "model": "Jade",
+    "modelSlug": "jade",
+    "sourceProductId": 33150,
+    "sourceUrl": "https://viezu.com/shop/honda-jade-2017-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.5",
+        "originalBhp": {
+          "raw": "160",
+          "parsedValues": ["160"],
+          "primaryValue": "160"
+        },
+        "powerBhpGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "203",
+          "parsedValues": ["203"],
+          "primaryValue": "203"
+        },
+        "torqueNmGain": {
+          "raw": "57",
+          "parsedValues": ["57"],
+          "primaryValue": "57"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      }
+    ]
+  },
+  {
+    "make": "Honda",
+    "model": "HR-V",
+    "modelSlug": "hr-v",
+    "sourceProductId": 33147,
+    "sourceUrl": "https://viezu.com/shop/honda-hr-v-2018-2020/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.5",
+        "originalBhp": {
+          "raw": "182",
+          "parsedValues": ["182"],
+          "primaryValue": "182"
+        },
+        "powerBhpGain": {
+          "raw": "38",
+          "parsedValues": ["38"],
+          "primaryValue": "38"
+        },
+        "originalTorque": {
+          "raw": "240",
+          "parsedValues": ["240"],
+          "primaryValue": "240"
+        },
+        "torqueNmGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "120",
+          "parsedValues": ["120"],
+          "primaryValue": "120"
+        },
+        "powerBhpGain": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "originalTorque": {
+          "raw": "300",
+          "parsedValues": ["300"],
+          "primaryValue": "300"
+        },
+        "torqueNmGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Honda",
+    "model": "HR-V",
+    "modelSlug": "hr-v",
+    "sourceProductId": 33145,
+    "sourceUrl": "https://viezu.com/shop/honda-hr-v-2015-2018/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.5",
+        "originalBhp": {
+          "raw": "130",
+          "parsedValues": ["130"],
+          "primaryValue": "130"
+        },
+        "powerBhpGain": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "originalTorque": {
+          "raw": "155",
+          "parsedValues": ["155"],
+          "primaryValue": "155"
+        },
+        "torqueNmGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "120",
+          "parsedValues": ["120"],
+          "primaryValue": "120"
+        },
+        "powerBhpGain": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "originalTorque": {
+          "raw": "300",
+          "parsedValues": ["300"],
+          "primaryValue": "300"
+        },
+        "torqueNmGain": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Honda",
+    "model": "FR-V",
+    "modelSlug": "fr-v",
+    "sourceProductId": 33143,
+    "sourceUrl": "https://viezu.com/shop/honda-fr-v-2004-2010/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.7",
+        "originalBhp": {
+          "raw": "125",
+          "parsedValues": ["125"],
+          "primaryValue": "125"
+        },
+        "powerBhpGain": {
+          "raw": "13",
+          "parsedValues": ["13"],
+          "primaryValue": "13"
+        },
+        "originalTorque": {
+          "raw": "154",
+          "parsedValues": ["154"],
+          "primaryValue": "154"
+        },
+        "torqueNmGain": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.8",
+        "originalBhp": {
+          "raw": "140",
+          "parsedValues": ["140"],
+          "primaryValue": "140"
+        },
+        "powerBhpGain": {
+          "raw": "14",
+          "parsedValues": ["14"],
+          "primaryValue": "14"
+        },
+        "originalTorque": {
+          "raw": "174",
+          "parsedValues": ["174"],
+          "primaryValue": "174"
+        },
+        "torqueNmGain": {
+          "raw": "18",
+          "parsedValues": ["18"],
+          "primaryValue": "18"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "150",
+          "parsedValues": ["150"],
+          "primaryValue": "150"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "192",
+          "parsedValues": ["192"],
+          "primaryValue": "192"
+        },
+        "torqueNmGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.2",
+        "originalBhp": {
+          "raw": "140",
+          "parsedValues": ["140"],
+          "primaryValue": "140"
+        },
+        "powerBhpGain": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "originalTorque": {
+          "raw": "340",
+          "parsedValues": ["340"],
+          "primaryValue": "340"
+        },
+        "torqueNmGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Honda",
+    "model": "Crider",
+    "modelSlug": "crider",
+    "sourceProductId": 33141,
+    "sourceUrl": "https://viezu.com/shop/honda-crider-2018-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.0",
+        "originalBhp": {
+          "raw": "122",
+          "parsedValues": ["122"],
+          "primaryValue": "122"
+        },
+        "powerBhpGain": {
+          "raw": "28",
+          "parsedValues": ["28"],
+          "primaryValue": "28"
+        },
+        "originalTorque": {
+          "raw": "173",
+          "parsedValues": ["173"],
+          "primaryValue": "173"
+        },
+        "torqueNmGain": {
+          "raw": "67",
+          "parsedValues": ["67"],
+          "primaryValue": "67"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      }
+    ]
+  },
+  {
+    "make": "Honda",
+    "model": "CR-V",
+    "modelSlug": "cr-v",
+    "sourceProductId": 33138,
+    "sourceUrl": "https://viezu.com/shop/honda-cr-v-2017-2019/",
+    "variations": [
+      {
+        "fuelType": "Petrol Hybrid",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "184",
+          "parsedValues": ["184"],
+          "primaryValue": "184"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "175",
+          "parsedValues": ["175"],
+          "primaryValue": "175"
+        },
+        "torqueNmGain": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.5",
+        "originalBhp": {
+          "raw": "173 | 193",
+          "parsedValues": ["173", "193"],
+          "primaryValue": "173",
+          "secondaryValue": "193"
+        },
+        "powerBhpGain": {
+          "raw": "47 | 27",
+          "parsedValues": ["47", "27"],
+          "primaryValue": "47",
+          "secondaryValue": "27"
+        },
+        "originalTorque": {
+          "raw": "220 | 243",
+          "parsedValues": ["220", "243"],
+          "primaryValue": "220",
+          "secondaryValue": "243"
+        },
+        "torqueNmGain": {
+          "raw": "80 | 57",
+          "parsedValues": ["80", "57"],
+          "primaryValue": "80",
+          "secondaryValue": "57"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "120 | 160",
+          "parsedValues": ["120", "160"],
+          "primaryValue": "120",
+          "secondaryValue": "160"
+        },
+        "powerBhpGain": {
+          "raw": "30 | 30",
+          "parsedValues": ["30", "30"],
+          "primaryValue": "30",
+          "secondaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "300 | 350",
+          "parsedValues": ["300", "350"],
+          "primaryValue": "300",
+          "secondaryValue": "350"
+        },
+        "torqueNmGain": {
+          "raw": "50 | 60",
+          "parsedValues": ["50", "60"],
+          "primaryValue": "50",
+          "secondaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "15 | 15",
+          "parsedValues": ["15", "15"],
+          "primaryValue": "15",
+          "secondaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "25 | 30",
+          "parsedValues": ["25", "30"],
+          "primaryValue": "25",
+          "secondaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Honda",
+    "model": "CR-V",
+    "modelSlug": "cr-v",
+    "sourceProductId": 33136,
+    "sourceUrl": "https://viezu.com/shop/honda-cr-v-2015-2016/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "120 | 160",
+          "parsedValues": ["120", "160"],
+          "primaryValue": "120",
+          "secondaryValue": "160"
+        },
+        "powerBhpGain": {
+          "raw": "30 | 30",
+          "parsedValues": ["30", "30"],
+          "primaryValue": "30",
+          "secondaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "300 | 350",
+          "parsedValues": ["300", "350"],
+          "primaryValue": "300",
+          "secondaryValue": "350"
+        },
+        "torqueNmGain": {
+          "raw": "50 | 60",
+          "parsedValues": ["50", "60"],
+          "primaryValue": "50",
+          "secondaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "15 | 15",
+          "parsedValues": ["15", "15"],
+          "primaryValue": "15",
+          "secondaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "25 | 30",
+          "parsedValues": ["25", "30"],
+          "primaryValue": "25",
+          "secondaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Honda",
+    "model": "CR-V",
+    "modelSlug": "cr-v",
+    "sourceProductId": 33132,
+    "sourceUrl": "https://viezu.com/shop/honda-cr-v-2012-2015/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "120 | 160",
+          "parsedValues": ["120", "160"],
+          "primaryValue": "120",
+          "secondaryValue": "160"
+        },
+        "powerBhpGain": {
+          "raw": "30 | 30",
+          "parsedValues": ["30", "30"],
+          "primaryValue": "30",
+          "secondaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "300 | 350",
+          "parsedValues": ["300", "350"],
+          "primaryValue": "300",
+          "secondaryValue": "350"
+        },
+        "torqueNmGain": {
+          "raw": "50 | 60",
+          "parsedValues": ["50", "60"],
+          "primaryValue": "50",
+          "secondaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "15 | 15",
+          "parsedValues": ["15", "15"],
+          "primaryValue": "15",
+          "secondaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "25 | 30",
+          "parsedValues": ["25", "30"],
+          "primaryValue": "25",
+          "secondaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.2",
+        "originalBhp": {
+          "raw": "150",
+          "parsedValues": ["150"],
+          "primaryValue": "150"
+        },
+        "powerBhpGain": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "350",
+          "parsedValues": ["350"],
+          "primaryValue": "350"
+        },
+        "torqueNmGain": {
+          "raw": "70",
+          "parsedValues": ["70"],
+          "primaryValue": "70"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "155",
+          "parsedValues": ["155"],
+          "primaryValue": "155"
+        },
+        "powerBhpGain": {
+          "raw": "12",
+          "parsedValues": ["12"],
+          "primaryValue": "12"
+        },
+        "originalTorque": {
+          "raw": "192",
+          "parsedValues": ["192"],
+          "primaryValue": "192"
+        },
+        "torqueNmGain": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Honda",
+    "model": "CR-V",
+    "modelSlug": "cr-v",
+    "sourceProductId": 33130,
+    "sourceUrl": "https://viezu.com/shop/honda-cr-v-2007-2012/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.2",
+        "originalBhp": {
+          "raw": "140 | 150",
+          "parsedValues": ["140", "150"],
+          "primaryValue": "140",
+          "secondaryValue": "150"
+        },
+        "powerBhpGain": {
+          "raw": "45 | 40",
+          "parsedValues": ["45", "40"],
+          "primaryValue": "45",
+          "secondaryValue": "40"
+        },
+        "originalTorque": {
+          "raw": "340 | 350",
+          "parsedValues": ["340", "350"],
+          "primaryValue": "340",
+          "secondaryValue": "350"
+        },
+        "torqueNmGain": {
+          "raw": "60 | 70",
+          "parsedValues": ["60", "70"],
+          "primaryValue": "60",
+          "secondaryValue": "70"
+        },
+        "economyGainBhp": {
+          "raw": "20 | 20",
+          "parsedValues": ["20", "20"],
+          "primaryValue": "20",
+          "secondaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "30 | 35",
+          "parsedValues": ["30", "35"],
+          "primaryValue": "30",
+          "secondaryValue": "35"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Honda",
+    "model": "CR-V",
+    "modelSlug": "cr-v",
+    "sourceProductId": 33128,
+    "sourceUrl": "https://viezu.com/shop/honda-cr-v-2002-2006/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "147",
+          "parsedValues": ["147"],
+          "primaryValue": "147"
+        },
+        "powerBhpGain": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "originalTorque": {
+          "raw": "192",
+          "parsedValues": ["192"],
+          "primaryValue": "192"
+        },
+        "torqueNmGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.2",
+        "originalBhp": {
+          "raw": "140",
+          "parsedValues": ["140"],
+          "primaryValue": "140"
+        },
+        "powerBhpGain": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "originalTorque": {
+          "raw": "340",
+          "parsedValues": ["340"],
+          "primaryValue": "340"
+        },
+        "torqueNmGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Honda",
+    "model": "Civic",
+    "modelSlug": "civic",
+    "sourceProductId": 33124,
+    "sourceUrl": "https://viezu.com/shop/honda-civic-2020-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.5",
+        "originalBhp": {
+          "raw": "182",
+          "parsedValues": ["182"],
+          "primaryValue": "182"
+        },
+        "powerBhpGain": {
+          "raw": "38",
+          "parsedValues": ["38"],
+          "primaryValue": "38"
+        },
+        "originalTorque": {
+          "raw": "240",
+          "parsedValues": ["240"],
+          "primaryValue": "240"
+        },
+        "torqueNmGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "329",
+          "parsedValues": ["329"],
+          "primaryValue": "329"
+        },
+        "powerBhpGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "originalTorque": {
+          "raw": "400",
+          "parsedValues": ["400"],
+          "primaryValue": "400"
+        },
+        "torqueNmGain": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "120",
+          "parsedValues": ["120"],
+          "primaryValue": "120"
+        },
+        "powerBhpGain": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "originalTorque": {
+          "raw": "300",
+          "parsedValues": ["300"],
+          "primaryValue": "300"
+        },
+        "torqueNmGain": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Honda",
+    "model": "Civic",
+    "modelSlug": "civic",
+    "sourceProductId": 33119,
+    "sourceUrl": "https://viezu.com/shop/honda-civic-2017-2020/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.0",
+        "originalBhp": {
+          "raw": "129",
+          "parsedValues": ["129"],
+          "primaryValue": "129"
+        },
+        "powerBhpGain": {
+          "raw": "21",
+          "parsedValues": ["21"],
+          "primaryValue": "21"
+        },
+        "originalTorque": {
+          "raw": "180",
+          "parsedValues": ["180"],
+          "primaryValue": "180"
+        },
+        "torqueNmGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.5",
+        "originalBhp": {
+          "raw": "182",
+          "parsedValues": ["182"],
+          "primaryValue": "182"
+        },
+        "powerBhpGain": {
+          "raw": "38",
+          "parsedValues": ["38"],
+          "primaryValue": "38"
+        },
+        "originalTorque": {
+          "raw": "240",
+          "parsedValues": ["240"],
+          "primaryValue": "240"
+        },
+        "torqueNmGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "320",
+          "parsedValues": ["320"],
+          "primaryValue": "320"
+        },
+        "powerBhpGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "originalTorque": {
+          "raw": "400",
+          "parsedValues": ["400"],
+          "primaryValue": "400"
+        },
+        "torqueNmGain": {
+          "raw": "100",
+          "parsedValues": ["100"],
+          "primaryValue": "100"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "120",
+          "parsedValues": ["120"],
+          "primaryValue": "120"
+        },
+        "powerBhpGain": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "originalTorque": {
+          "raw": "300",
+          "parsedValues": ["300"],
+          "primaryValue": "300"
+        },
+        "torqueNmGain": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Honda",
+    "model": "Civic",
+    "modelSlug": "civic",
+    "sourceProductId": 33114,
+    "sourceUrl": "https://viezu.com/shop/honda-civic-2013-2016/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.4",
+        "originalBhp": {
+          "raw": "100",
+          "parsedValues": ["100"],
+          "primaryValue": "100"
+        },
+        "powerBhpGain": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "originalTorque": {
+          "raw": "127",
+          "parsedValues": ["127"],
+          "primaryValue": "127"
+        },
+        "torqueNmGain": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "120",
+          "parsedValues": ["120"],
+          "primaryValue": "120"
+        },
+        "powerBhpGain": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "originalTorque": {
+          "raw": "300",
+          "parsedValues": ["300"],
+          "primaryValue": "300"
+        },
+        "torqueNmGain": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.2",
+        "originalBhp": {
+          "raw": "150",
+          "parsedValues": ["150"],
+          "primaryValue": "150"
+        },
+        "powerBhpGain": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "350",
+          "parsedValues": ["350"],
+          "primaryValue": "350"
+        },
+        "torqueNmGain": {
+          "raw": "70",
+          "parsedValues": ["70"],
+          "primaryValue": "70"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.8",
+        "originalBhp": {
+          "raw": "142",
+          "parsedValues": ["142"],
+          "primaryValue": "142"
+        },
+        "powerBhpGain": {
+          "raw": "13",
+          "parsedValues": ["13"],
+          "primaryValue": "13"
+        },
+        "originalTorque": {
+          "raw": "174",
+          "parsedValues": ["174"],
+          "primaryValue": "174"
+        },
+        "torqueNmGain": {
+          "raw": "11",
+          "parsedValues": ["11"],
+          "primaryValue": "11"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "310",
+          "parsedValues": ["310"],
+          "primaryValue": "310"
+        },
+        "powerBhpGain": {
+          "raw": "54",
+          "parsedValues": ["54"],
+          "primaryValue": "54"
+        },
+        "originalTorque": {
+          "raw": "400",
+          "parsedValues": ["400"],
+          "primaryValue": "400"
+        },
+        "torqueNmGain": {
+          "raw": "100",
+          "parsedValues": ["100"],
+          "primaryValue": "100"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Honda",
+    "model": "Civic",
+    "modelSlug": "civic",
+    "sourceProductId": 33109,
+    "sourceUrl": "https://viezu.com/shop/honda-civic-2006-2012/",
+    "variations": [
+      {
+        "fuelType": "Petrol Hybrid",
+        "variant": "1.3",
+        "originalBhp": {
+          "raw": "115",
+          "parsedValues": ["115"],
+          "primaryValue": "115"
+        },
+        "powerBhpGain": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "originalTorque": {
+          "raw": "225",
+          "parsedValues": ["225"],
+          "primaryValue": "225"
+        },
+        "torqueNmGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.3",
+        "originalBhp": {
+          "raw": "83 | 100",
+          "parsedValues": ["83", "100"],
+          "primaryValue": "83",
+          "secondaryValue": "100"
+        },
+        "powerBhpGain": {
+          "raw": "17 | 20",
+          "parsedValues": ["17", "20"],
+          "primaryValue": "17",
+          "secondaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "119 | 123",
+          "parsedValues": ["119", "123"],
+          "primaryValue": "119",
+          "secondaryValue": "123"
+        },
+        "torqueNmGain": {
+          "raw": "13 | 17",
+          "parsedValues": ["13", "17"],
+          "primaryValue": "13",
+          "secondaryValue": "17"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "201 | 160",
+          "parsedValues": ["201", "160"],
+          "primaryValue": "201",
+          "secondaryValue": "160"
+        },
+        "powerBhpGain": {
+          "raw": "15 | 10",
+          "parsedValues": ["15", "10"],
+          "primaryValue": "15",
+          "secondaryValue": "10"
+        },
+        "originalTorque": {
+          "raw": "193 | 191",
+          "parsedValues": ["193", "191"],
+          "primaryValue": "193",
+          "secondaryValue": "191"
+        },
+        "torqueNmGain": {
+          "raw": "17 | 19",
+          "parsedValues": ["17", "19"],
+          "primaryValue": "17",
+          "secondaryValue": "19"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.8",
+        "originalBhp": {
+          "raw": "140",
+          "parsedValues": ["140"],
+          "primaryValue": "140"
+        },
+        "powerBhpGain": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "originalTorque": {
+          "raw": "173",
+          "parsedValues": ["173"],
+          "primaryValue": "173"
+        },
+        "torqueNmGain": {
+          "raw": "19",
+          "parsedValues": ["19"],
+          "primaryValue": "19"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.2",
+        "originalBhp": {
+          "raw": "140 | 150",
+          "parsedValues": ["140", "150"],
+          "primaryValue": "140",
+          "secondaryValue": "150"
+        },
+        "powerBhpGain": {
+          "raw": "45 | 35",
+          "parsedValues": ["45", "35"],
+          "primaryValue": "45",
+          "secondaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "340 | 350",
+          "parsedValues": ["340", "350"],
+          "primaryValue": "340",
+          "secondaryValue": "350"
+        },
+        "torqueNmGain": {
+          "raw": "60 | 70",
+          "parsedValues": ["60", "70"],
+          "primaryValue": "60",
+          "secondaryValue": "70"
+        },
+        "economyGainBhp": {
+          "raw": "20 | 20",
+          "parsedValues": ["20", "20"],
+          "primaryValue": "20",
+          "secondaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "30 | 35",
+          "parsedValues": ["30", "35"],
+          "primaryValue": "30",
+          "secondaryValue": "35"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Honda",
+    "model": "Civic",
+    "modelSlug": "civic",
+    "sourceProductId": 33107,
+    "sourceUrl": "https://viezu.com/shop/honda-civic-2002-2005/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.7",
+        "originalBhp": {
+          "raw": "127",
+          "parsedValues": ["127"],
+          "primaryValue": "127"
+        },
+        "powerBhpGain": {
+          "raw": "13",
+          "parsedValues": ["13"],
+          "primaryValue": "13"
+        },
+        "originalTorque": {
+          "raw": "153",
+          "parsedValues": ["153"],
+          "primaryValue": "153"
+        },
+        "torqueNmGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.4",
+        "originalBhp": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "powerBhpGain": {
+          "raw": "9",
+          "parsedValues": ["9"],
+          "primaryValue": "9"
+        },
+        "originalTorque": {
+          "raw": "129",
+          "parsedValues": ["129"],
+          "primaryValue": "129"
+        },
+        "torqueNmGain": {
+          "raw": "13",
+          "parsedValues": ["13"],
+          "primaryValue": "13"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "110",
+          "parsedValues": ["110"],
+          "primaryValue": "110"
+        },
+        "powerBhpGain": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "originalTorque": {
+          "raw": "152",
+          "parsedValues": ["152"],
+          "primaryValue": "152"
+        },
+        "torqueNmGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.7",
+        "originalBhp": {
+          "raw": "100",
+          "parsedValues": ["100"],
+          "primaryValue": "100"
+        },
+        "powerBhpGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "220",
+          "parsedValues": ["220"],
+          "primaryValue": "220"
+        },
+        "torqueNmGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Honda",
+    "model": "City",
+    "modelSlug": "city",
+    "sourceProductId": 33104,
+    "sourceUrl": "https://viezu.com/shop/honda-city-2017-2019/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "1.5",
+        "originalBhp": {
+          "raw": "100",
+          "parsedValues": ["100"],
+          "primaryValue": "100"
+        },
+        "powerBhpGain": {
+          "raw": "21",
+          "parsedValues": ["21"],
+          "primaryValue": "21"
+        },
+        "originalTorque": {
+          "raw": "200",
+          "parsedValues": ["200"],
+          "primaryValue": "200"
+        },
+        "torqueNmGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "economyGainBhp": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.5",
+        "originalBhp": {
+          "raw": "119",
+          "parsedValues": ["119"],
+          "primaryValue": "119"
+        },
+        "powerBhpGain": {
+          "raw": "12",
+          "parsedValues": ["12"],
+          "primaryValue": "12"
+        },
+        "originalTorque": {
+          "raw": "145",
+          "parsedValues": ["145"],
+          "primaryValue": "145"
+        },
+        "torqueNmGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      }
+    ]
+  },
+  {
+    "make": "Honda",
+    "model": "Breeze",
+    "modelSlug": "breeze",
+    "sourceProductId": 33102,
+    "sourceUrl": "https://viezu.com/shop/honda-breeze-2020-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.5",
+        "originalBhp": {
+          "raw": "193",
+          "parsedValues": ["193"],
+          "primaryValue": "193"
+        },
+        "powerBhpGain": {
+          "raw": "27",
+          "parsedValues": ["27"],
+          "primaryValue": "27"
+        },
+        "originalTorque": {
+          "raw": "243",
+          "parsedValues": ["243"],
+          "primaryValue": "243"
+        },
+        "torqueNmGain": {
+          "raw": "57",
+          "parsedValues": ["57"],
+          "primaryValue": "57"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      }
+    ]
+  },
+  {
+    "make": "Honda",
+    "model": "BR-V",
+    "modelSlug": "br-v",
+    "sourceProductId": 33099,
+    "sourceUrl": "https://viezu.com/shop/honda-br-v-2015-2019/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "1.5",
+        "originalBhp": {
+          "raw": "99",
+          "parsedValues": ["99"],
+          "primaryValue": "99"
+        },
+        "powerBhpGain": {
+          "raw": "21",
+          "parsedValues": ["21"],
+          "primaryValue": "21"
+        },
+        "originalTorque": {
+          "raw": "200",
+          "parsedValues": ["200"],
+          "primaryValue": "200"
+        },
+        "torqueNmGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "economyGainBhp": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.5",
+        "originalBhp": {
+          "raw": "119",
+          "parsedValues": ["119"],
+          "primaryValue": "119"
+        },
+        "powerBhpGain": {
+          "raw": "12",
+          "parsedValues": ["12"],
+          "primaryValue": "12"
+        },
+        "originalTorque": {
+          "raw": "145",
+          "parsedValues": ["145"],
+          "primaryValue": "145"
+        },
+        "torqueNmGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      }
+    ]
+  },
+  {
+    "make": "Honda",
+    "model": "Avencier",
+    "modelSlug": "avencier",
+    "sourceProductId": 33096,
+    "sourceUrl": "https://viezu.com/shop/honda-avencier-2016-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.5",
+        "originalBhp": {
+          "raw": "193",
+          "parsedValues": ["193"],
+          "primaryValue": "193"
+        },
+        "powerBhpGain": {
+          "raw": "27",
+          "parsedValues": ["27"],
+          "primaryValue": "27"
+        },
+        "originalTorque": {
+          "raw": "243",
+          "parsedValues": ["243"],
+          "primaryValue": "243"
+        },
+        "torqueNmGain": {
+          "raw": "57",
+          "parsedValues": ["57"],
+          "primaryValue": "57"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "272",
+          "parsedValues": ["272"],
+          "primaryValue": "272"
+        },
+        "powerBhpGain": {
+          "raw": "88",
+          "parsedValues": ["88"],
+          "primaryValue": "88"
+        },
+        "originalTorque": {
+          "raw": "370",
+          "parsedValues": ["370"],
+          "primaryValue": "370"
+        },
+        "torqueNmGain": {
+          "raw": "130",
+          "parsedValues": ["130"],
+          "primaryValue": "130"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Honda",
+    "model": "Accord",
+    "modelSlug": "accord",
+    "sourceProductId": 33091,
+    "sourceUrl": "https://viezu.com/shop/honda-accord-all/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "252 | 156",
+          "parsedValues": ["252", "156"],
+          "primaryValue": "252",
+          "secondaryValue": "156"
+        },
+        "powerBhpGain": {
+          "raw": "28 | 15",
+          "parsedValues": ["28", "15"],
+          "primaryValue": "28",
+          "secondaryValue": "15"
+        },
+        "originalTorque": {
+          "raw": "370 | 190",
+          "parsedValues": ["370", "190"],
+          "primaryValue": "370",
+          "secondaryValue": "190"
+        },
+        "torqueNmGain": {
+          "raw": "80 | 20",
+          "parsedValues": ["80", "20"],
+          "primaryValue": "80",
+          "secondaryValue": "20"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.5",
+        "originalBhp": {
+          "raw": "192",
+          "parsedValues": ["192"],
+          "primaryValue": "192"
+        },
+        "powerBhpGain": {
+          "raw": "28",
+          "parsedValues": ["28"],
+          "primaryValue": "28"
+        },
+        "originalTorque": {
+          "raw": "260",
+          "parsedValues": ["260"],
+          "primaryValue": "260"
+        },
+        "torqueNmGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "2.4",
+        "originalBhp": {
+          "raw": "188",
+          "parsedValues": ["188"],
+          "primaryValue": "188"
+        },
+        "powerBhpGain": {
+          "raw": "12",
+          "parsedValues": ["12"],
+          "primaryValue": "12"
+        },
+        "originalTorque": {
+          "raw": "245",
+          "parsedValues": ["245"],
+          "primaryValue": "245"
+        },
+        "torqueNmGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.2",
+        "originalBhp": {
+          "raw": "140 | 150 | 180",
+          "parsedValues": ["140", "150", "180"],
+          "primaryValue": "140",
+          "secondaryValue": "150"
+        },
+        "powerBhpGain": {
+          "raw": "45 | 40 | 30",
+          "parsedValues": ["45", "40", "30"],
+          "primaryValue": "45",
+          "secondaryValue": "40"
+        },
+        "originalTorque": {
+          "raw": "340 | 350 | 380",
+          "parsedValues": ["340", "350", "380"],
+          "primaryValue": "340",
+          "secondaryValue": "350"
+        },
+        "torqueNmGain": {
+          "raw": "60 | 70 | 60",
+          "parsedValues": ["60", "70", "60"],
+          "primaryValue": "60",
+          "secondaryValue": "70"
+        },
+        "economyGainBhp": {
+          "raw": "20 | 20 | 15",
+          "parsedValues": ["20", "20", "15"],
+          "primaryValue": "20",
+          "secondaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "30 | 35 | 30",
+          "parsedValues": ["30", "35", "30"],
+          "primaryValue": "30",
+          "secondaryValue": "35"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  }
+]

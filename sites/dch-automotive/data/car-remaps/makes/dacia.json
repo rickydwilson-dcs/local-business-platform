@@ -1,0 +1,2059 @@
+[
+  {
+    "make": "Dacia",
+    "model": "Bigster",
+    "modelSlug": "bigster",
+    "sourceProductId": 61622,
+    "sourceUrl": "https://viezu.com/shop/dacia-bigster-2025-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol Hybrid",
+        "variant": "1.8",
+        "originalBhp": {
+          "raw": "155",
+          "parsedValues": ["155"],
+          "primaryValue": "155"
+        },
+        "powerBhpGain": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "172",
+          "parsedValues": ["172"],
+          "primaryValue": "172"
+        },
+        "torqueNmGain": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.2",
+        "originalBhp": {
+          "raw": "140 | 128",
+          "parsedValues": ["140", "128"],
+          "primaryValue": "140",
+          "secondaryValue": "128"
+        },
+        "powerBhpGain": {
+          "raw": "20 | 32",
+          "parsedValues": ["20", "32"],
+          "primaryValue": "20",
+          "secondaryValue": "32"
+        },
+        "originalTorque": {
+          "raw": "230 | 230",
+          "parsedValues": ["230", "230"],
+          "primaryValue": "230",
+          "secondaryValue": "230"
+        },
+        "torqueNmGain": {
+          "raw": "20 | 20",
+          "parsedValues": ["20", "20"],
+          "primaryValue": "20",
+          "secondaryValue": "20"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Dacia",
+    "model": "Jogger",
+    "modelSlug": "jogger",
+    "sourceProductId": 56183,
+    "sourceUrl": "https://viezu.com/shop/dacia-jogger-2021-present/",
+    "variations": [
+      {
+        "fuelType": "Hybrid Petrol",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "140",
+          "parsedValues": ["140"],
+          "primaryValue": "140"
+        },
+        "powerBhpGain": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "originalTorque": {
+          "raw": "280",
+          "parsedValues": ["280"],
+          "primaryValue": "280"
+        },
+        "torqueNmGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.0",
+        "originalBhp": {
+          "raw": "110",
+          "parsedValues": ["110"],
+          "primaryValue": "110"
+        },
+        "powerBhpGain": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "originalTorque": {
+          "raw": "200",
+          "parsedValues": ["200"],
+          "primaryValue": "200"
+        },
+        "torqueNmGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Dacia",
+    "model": "Duster",
+    "modelSlug": "duster",
+    "sourceProductId": 51507,
+    "sourceUrl": "https://viezu.com/shop/dacia-duster-2021-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol Hybrid",
+        "variant": "1.2",
+        "originalBhp": {
+          "raw": "130",
+          "parsedValues": ["130"],
+          "primaryValue": "130"
+        },
+        "powerBhpGain": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "230",
+          "parsedValues": ["230"],
+          "primaryValue": "230"
+        },
+        "torqueNmGain": {
+          "raw": "70",
+          "parsedValues": ["70"],
+          "primaryValue": "70"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.0",
+        "originalBhp": {
+          "raw": "100 | 90",
+          "parsedValues": ["100", "90"],
+          "primaryValue": "100",
+          "secondaryValue": "90"
+        },
+        "powerBhpGain": {
+          "raw": "10 | 20",
+          "parsedValues": ["10", "20"],
+          "primaryValue": "10",
+          "secondaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "160 | 160",
+          "parsedValues": ["160", "160"],
+          "primaryValue": "160",
+          "secondaryValue": "160"
+        },
+        "torqueNmGain": {
+          "raw": "16 | 25",
+          "parsedValues": ["16", "25"],
+          "primaryValue": "16",
+          "secondaryValue": "25"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.3",
+        "originalBhp": {
+          "raw": "130",
+          "parsedValues": ["130"],
+          "primaryValue": "130"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "240",
+          "parsedValues": ["240"],
+          "primaryValue": "240"
+        },
+        "torqueNmGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.5",
+        "originalBhp": {
+          "raw": "115",
+          "parsedValues": ["115"],
+          "primaryValue": "115"
+        },
+        "powerBhpGain": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "260",
+          "parsedValues": ["260"],
+          "primaryValue": "260"
+        },
+        "torqueNmGain": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Dacia",
+    "model": "Sandero",
+    "modelSlug": "sandero",
+    "sourceProductId": 51417,
+    "sourceUrl": "https://viezu.com/shop/dacia-sandero-2021-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.0",
+        "originalBhp": {
+          "raw": "91",
+          "parsedValues": ["91"],
+          "primaryValue": "91"
+        },
+        "powerBhpGain": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "originalTorque": {
+          "raw": "142",
+          "parsedValues": ["142"],
+          "primaryValue": "142"
+        },
+        "torqueNmGain": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Dacia",
+    "model": "SOLENZA",
+    "modelSlug": "solenza",
+    "sourceProductId": 48035,
+    "sourceUrl": "https://viezu.com/shop/dacia-solenza-2003-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.4",
+        "originalBhp": {
+          "raw": "74",
+          "parsedValues": ["74"],
+          "primaryValue": "74"
+        },
+        "powerBhpGain": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "originalTorque": {
+          "raw": "114",
+          "parsedValues": ["114"],
+          "primaryValue": "114"
+        },
+        "torqueNmGain": {
+          "raw": "22",
+          "parsedValues": ["22"],
+          "primaryValue": "22"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 17500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.9",
+        "originalBhp": {
+          "raw": "74",
+          "parsedValues": ["74"],
+          "primaryValue": "74"
+        },
+        "powerBhpGain": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "originalTorque": {
+          "raw": "114",
+          "parsedValues": ["114"],
+          "primaryValue": "114"
+        },
+        "torqueNmGain": {
+          "raw": "22",
+          "parsedValues": ["22"],
+          "primaryValue": "22"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 19900
+      }
+    ]
+  },
+  {
+    "make": "Dacia",
+    "model": "Sandero",
+    "modelSlug": "sandero",
+    "sourceProductId": 19366,
+    "sourceUrl": "https://viezu.com/shop/dacia-sandero-2016-2020/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "0.9",
+        "originalBhp": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "powerBhpGain": {
+          "raw": "17",
+          "parsedValues": ["17"],
+          "primaryValue": "17"
+        },
+        "originalTorque": {
+          "raw": "135",
+          "parsedValues": ["135"],
+          "primaryValue": "135"
+        },
+        "torqueNmGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.0",
+        "originalBhp": {
+          "raw": "73 | 100",
+          "parsedValues": ["73", "100"],
+          "primaryValue": "73",
+          "secondaryValue": "100"
+        },
+        "powerBhpGain": {
+          "raw": "12 | 25",
+          "parsedValues": ["12", "25"],
+          "primaryValue": "12",
+          "secondaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "97 | 160",
+          "parsedValues": ["97", "160"],
+          "primaryValue": "97",
+          "secondaryValue": "160"
+        },
+        "torqueNmGain": {
+          "raw": "13 | 40",
+          "parsedValues": ["13", "40"],
+          "primaryValue": "13",
+          "secondaryValue": "40"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.5",
+        "originalBhp": {
+          "raw": "75 | 90",
+          "parsedValues": ["75", "90"],
+          "primaryValue": "75",
+          "secondaryValue": "90"
+        },
+        "powerBhpGain": {
+          "raw": "40 | 25",
+          "parsedValues": ["40", "25"],
+          "primaryValue": "40",
+          "secondaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "200 | 200",
+          "parsedValues": ["200", "200"],
+          "primaryValue": "200",
+          "secondaryValue": "200"
+        },
+        "torqueNmGain": {
+          "raw": "60 | 60",
+          "parsedValues": ["60", "60"],
+          "primaryValue": "60",
+          "secondaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "20 | 10",
+          "parsedValues": ["20", "10"],
+          "primaryValue": "20",
+          "secondaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "30 | 30",
+          "parsedValues": ["30", "30"],
+          "primaryValue": "30",
+          "secondaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 22500
+      }
+    ]
+  },
+  {
+    "make": "Dacia",
+    "model": "Sandero",
+    "modelSlug": "sandero",
+    "sourceProductId": 19363,
+    "sourceUrl": "https://viezu.com/shop/sandero-2013-2015/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "0.9",
+        "originalBhp": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "powerBhpGain": {
+          "raw": "17",
+          "parsedValues": ["17"],
+          "primaryValue": "17"
+        },
+        "originalTorque": {
+          "raw": "135",
+          "parsedValues": ["135"],
+          "primaryValue": "135"
+        },
+        "torqueNmGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.5",
+        "originalBhp": {
+          "raw": "75 | 90",
+          "parsedValues": ["75", "90"],
+          "primaryValue": "75",
+          "secondaryValue": "90"
+        },
+        "powerBhpGain": {
+          "raw": "40 | 20",
+          "parsedValues": ["40", "20"],
+          "primaryValue": "40",
+          "secondaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "200 | 200",
+          "parsedValues": ["200", "200"],
+          "primaryValue": "200",
+          "secondaryValue": "200"
+        },
+        "torqueNmGain": {
+          "raw": "60 | 50",
+          "parsedValues": ["60", "50"],
+          "primaryValue": "60",
+          "secondaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "20 | 10",
+          "parsedValues": ["20", "10"],
+          "primaryValue": "20",
+          "secondaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "30 | 25",
+          "parsedValues": ["30", "25"],
+          "primaryValue": "30",
+          "secondaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 22500
+      }
+    ]
+  },
+  {
+    "make": "Dacia",
+    "model": "Sandero",
+    "modelSlug": "sandero",
+    "sourceProductId": 19358,
+    "sourceUrl": "https://viezu.com/shop/sandero-2008-2012/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.1",
+        "originalBhp": {
+          "raw": "75",
+          "parsedValues": ["75"],
+          "primaryValue": "75"
+        },
+        "powerBhpGain": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "originalTorque": {
+          "raw": "107",
+          "parsedValues": ["107"],
+          "primaryValue": "107"
+        },
+        "torqueNmGain": {
+          "raw": "18",
+          "parsedValues": ["18"],
+          "primaryValue": "18"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.4",
+        "originalBhp": {
+          "raw": "75",
+          "parsedValues": ["75"],
+          "primaryValue": "75"
+        },
+        "powerBhpGain": {
+          "raw": "7",
+          "parsedValues": ["7"],
+          "primaryValue": "7"
+        },
+        "originalTorque": {
+          "raw": "112",
+          "parsedValues": ["112"],
+          "primaryValue": "112"
+        },
+        "torqueNmGain": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "105 | 85",
+          "parsedValues": ["105", "85"],
+          "primaryValue": "105",
+          "secondaryValue": "85"
+        },
+        "powerBhpGain": {
+          "raw": "10 | 10",
+          "parsedValues": ["10", "10"],
+          "primaryValue": "10",
+          "secondaryValue": "10"
+        },
+        "originalTorque": {
+          "raw": "148 | 135",
+          "parsedValues": ["148", "135"],
+          "primaryValue": "148",
+          "secondaryValue": "135"
+        },
+        "torqueNmGain": {
+          "raw": "12 | 15",
+          "parsedValues": ["12", "15"],
+          "primaryValue": "12",
+          "secondaryValue": "15"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.5",
+        "originalBhp": {
+          "raw": "70 | 75 | 85 | 90",
+          "parsedValues": ["70", "75", "85", "90"],
+          "primaryValue": "70",
+          "secondaryValue": "75"
+        },
+        "powerBhpGain": {
+          "raw": "20 | 20 | 25 | 20",
+          "parsedValues": ["20", "20", "25", "20"],
+          "primaryValue": "20",
+          "secondaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "160 | 180 | 200 | 200",
+          "parsedValues": ["160", "180", "200", "200"],
+          "primaryValue": "160",
+          "secondaryValue": "180"
+        },
+        "torqueNmGain": {
+          "raw": "40 | 40 | 50 | 50",
+          "parsedValues": ["40", "40", "50", "50"],
+          "primaryValue": "40",
+          "secondaryValue": "40"
+        },
+        "economyGainBhp": {
+          "raw": "10 | 10 | 10 | 10",
+          "parsedValues": ["10", "10", "10", "10"],
+          "primaryValue": "10",
+          "secondaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "20 | 20 | 25 | 25",
+          "parsedValues": ["20", "20", "25", "25"],
+          "primaryValue": "20",
+          "secondaryValue": "20"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 22500
+      }
+    ]
+  },
+  {
+    "make": "Dacia",
+    "model": "Logan",
+    "modelSlug": "logan",
+    "sourceProductId": 19354,
+    "sourceUrl": "https://viezu.com/shop/dacia-logan-2016-2020/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "0.9",
+        "originalBhp": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "powerBhpGain": {
+          "raw": "17",
+          "parsedValues": ["17"],
+          "primaryValue": "17"
+        },
+        "originalTorque": {
+          "raw": "135",
+          "parsedValues": ["135"],
+          "primaryValue": "135"
+        },
+        "torqueNmGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.0",
+        "originalBhp": {
+          "raw": "100",
+          "parsedValues": ["100"],
+          "primaryValue": "100"
+        },
+        "powerBhpGain": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "160",
+          "parsedValues": ["160"],
+          "primaryValue": "160"
+        },
+        "torqueNmGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.5",
+        "originalBhp": {
+          "raw": "75 | 90 | 95",
+          "parsedValues": ["75", "90", "95"],
+          "primaryValue": "75",
+          "secondaryValue": "90"
+        },
+        "powerBhpGain": {
+          "raw": "40 | 30 | 45",
+          "parsedValues": ["40", "30", "45"],
+          "primaryValue": "40",
+          "secondaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "200 | 200 | 220",
+          "parsedValues": ["200", "200", "220"],
+          "primaryValue": "200",
+          "secondaryValue": "200"
+        },
+        "torqueNmGain": {
+          "raw": "60 | 60 | 90",
+          "parsedValues": ["60", "60", "90"],
+          "primaryValue": "60",
+          "secondaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "20 | 15 | 20",
+          "parsedValues": ["20", "15", "20"],
+          "primaryValue": "20",
+          "secondaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "30 | 30 | 45",
+          "parsedValues": ["30", "30", "45"],
+          "primaryValue": "30",
+          "secondaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 22500
+      }
+    ]
+  },
+  {
+    "make": "Dacia",
+    "model": "Logan",
+    "modelSlug": "logan",
+    "sourceProductId": 19351,
+    "sourceUrl": "https://viezu.com/shop/logan-2013-2015/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "0.9",
+        "originalBhp": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "powerBhpGain": {
+          "raw": "17",
+          "parsedValues": ["17"],
+          "primaryValue": "17"
+        },
+        "originalTorque": {
+          "raw": "135",
+          "parsedValues": ["135"],
+          "primaryValue": "135"
+        },
+        "torqueNmGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.5",
+        "originalBhp": {
+          "raw": "75 | 90",
+          "parsedValues": ["75", "90"],
+          "primaryValue": "75",
+          "secondaryValue": "90"
+        },
+        "powerBhpGain": {
+          "raw": "40 | 20",
+          "parsedValues": ["40", "20"],
+          "primaryValue": "40",
+          "secondaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "200 | 200",
+          "parsedValues": ["200", "200"],
+          "primaryValue": "200",
+          "secondaryValue": "200"
+        },
+        "torqueNmGain": {
+          "raw": "60 | 50",
+          "parsedValues": ["60", "50"],
+          "primaryValue": "60",
+          "secondaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "20 | 10",
+          "parsedValues": ["20", "10"],
+          "primaryValue": "20",
+          "secondaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "30 | 25",
+          "parsedValues": ["30", "25"],
+          "primaryValue": "30",
+          "secondaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 22500
+      }
+    ]
+  },
+  {
+    "make": "Dacia",
+    "model": "Logan",
+    "modelSlug": "logan",
+    "sourceProductId": 19346,
+    "sourceUrl": "https://viezu.com/shop/logan-2004-2012/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.1",
+        "originalBhp": {
+          "raw": "75",
+          "parsedValues": ["75"],
+          "primaryValue": "75"
+        },
+        "powerBhpGain": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "originalTorque": {
+          "raw": "107",
+          "parsedValues": ["107"],
+          "primaryValue": "107"
+        },
+        "torqueNmGain": {
+          "raw": "13",
+          "parsedValues": ["13"],
+          "primaryValue": "13"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.4",
+        "originalBhp": {
+          "raw": "75",
+          "parsedValues": ["75"],
+          "primaryValue": "75"
+        },
+        "powerBhpGain": {
+          "raw": "7",
+          "parsedValues": ["7"],
+          "primaryValue": "7"
+        },
+        "originalTorque": {
+          "raw": "112",
+          "parsedValues": ["112"],
+          "primaryValue": "112"
+        },
+        "torqueNmGain": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "105 | 87",
+          "parsedValues": ["105", "87"],
+          "primaryValue": "105",
+          "secondaryValue": "87"
+        },
+        "powerBhpGain": {
+          "raw": "10 | 8",
+          "parsedValues": ["10", "8"],
+          "primaryValue": "10",
+          "secondaryValue": "8"
+        },
+        "originalTorque": {
+          "raw": "148 | 128",
+          "parsedValues": ["148", "128"],
+          "primaryValue": "148",
+          "secondaryValue": "128"
+        },
+        "torqueNmGain": {
+          "raw": "17 | 17",
+          "parsedValues": ["17", "17"],
+          "primaryValue": "17",
+          "secondaryValue": "17"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.5",
+        "originalBhp": {
+          "raw": "70 | 75 | 90",
+          "parsedValues": ["70", "75", "90"],
+          "primaryValue": "70",
+          "secondaryValue": "75"
+        },
+        "powerBhpGain": {
+          "raw": "20 | 20 | 20",
+          "parsedValues": ["20", "20", "20"],
+          "primaryValue": "20",
+          "secondaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "160 | 180 | 200",
+          "parsedValues": ["160", "180", "200"],
+          "primaryValue": "160",
+          "secondaryValue": "180"
+        },
+        "torqueNmGain": {
+          "raw": "40 | 40 | 50",
+          "parsedValues": ["40", "40", "50"],
+          "primaryValue": "40",
+          "secondaryValue": "40"
+        },
+        "economyGainBhp": {
+          "raw": "10 | 10 | 10 | 10",
+          "parsedValues": ["10", "10", "10", "10"],
+          "primaryValue": "10",
+          "secondaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "20 | 20 | 25 | 25",
+          "parsedValues": ["20", "20", "25", "25"],
+          "primaryValue": "20",
+          "secondaryValue": "20"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 22500
+      }
+    ]
+  },
+  {
+    "make": "Dacia",
+    "model": "Lodgy",
+    "modelSlug": "lodgy",
+    "sourceProductId": 19343,
+    "sourceUrl": "https://viezu.com/shop/lodgy-2017-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.2",
+        "originalBhp": {
+          "raw": "115",
+          "parsedValues": ["115"],
+          "primaryValue": "115"
+        },
+        "powerBhpGain": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "190",
+          "parsedValues": ["190"],
+          "primaryValue": "190"
+        },
+        "torqueNmGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.5",
+        "originalBhp": {
+          "raw": "110 | 115 | 90 | 95",
+          "parsedValues": ["110", "115", "90", "95"],
+          "primaryValue": "110",
+          "secondaryValue": "115"
+        },
+        "powerBhpGain": {
+          "raw": "20 | 25 | 20 | 40",
+          "parsedValues": ["20", "25", "20", "40"],
+          "primaryValue": "20",
+          "secondaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "240 | 260 | 200 | 220",
+          "parsedValues": ["240", "260", "200", "220"],
+          "primaryValue": "240",
+          "secondaryValue": "260"
+        },
+        "torqueNmGain": {
+          "raw": "60 | 60 | 50 | 90",
+          "parsedValues": ["60", "60", "50", "90"],
+          "primaryValue": "60",
+          "secondaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "10 | 10 | 10 | 20",
+          "parsedValues": ["10", "10", "10", "20"],
+          "primaryValue": "10",
+          "secondaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "30 | 30 | 25 | 45",
+          "parsedValues": ["30", "30", "25", "45"],
+          "primaryValue": "30",
+          "secondaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 22500
+      }
+    ]
+  },
+  {
+    "make": "Dacia",
+    "model": "Lodgy",
+    "modelSlug": "lodgy",
+    "sourceProductId": 19340,
+    "sourceUrl": "https://viezu.com/shop/lodgy-2012-2017/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.2",
+        "originalBhp": {
+          "raw": "115",
+          "parsedValues": ["115"],
+          "primaryValue": "115"
+        },
+        "powerBhpGain": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "190",
+          "parsedValues": ["190"],
+          "primaryValue": "190"
+        },
+        "torqueNmGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.5",
+        "originalBhp": {
+          "raw": "110 | 90",
+          "parsedValues": ["110", "90"],
+          "primaryValue": "110",
+          "secondaryValue": "90"
+        },
+        "powerBhpGain": {
+          "raw": "20 | 20",
+          "parsedValues": ["20", "20"],
+          "primaryValue": "20",
+          "secondaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "240 | 200",
+          "parsedValues": ["240", "200"],
+          "primaryValue": "240",
+          "secondaryValue": "200"
+        },
+        "torqueNmGain": {
+          "raw": "60 | 50",
+          "parsedValues": ["60", "50"],
+          "primaryValue": "60",
+          "secondaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "10 | 10",
+          "parsedValues": ["10", "10"],
+          "primaryValue": "10",
+          "secondaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "30 | 25",
+          "parsedValues": ["30", "25"],
+          "primaryValue": "30",
+          "secondaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 22500
+      }
+    ]
+  },
+  {
+    "make": "Dacia",
+    "model": "Duster",
+    "modelSlug": "duster",
+    "sourceProductId": 19337,
+    "sourceUrl": "https://viezu.com/shop/dacia-duster-2018-2020/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "115",
+          "parsedValues": ["115"],
+          "primaryValue": "115"
+        },
+        "powerBhpGain": {
+          "raw": "12",
+          "parsedValues": ["12"],
+          "primaryValue": "12"
+        },
+        "originalTorque": {
+          "raw": "144",
+          "parsedValues": ["144"],
+          "primaryValue": "144"
+        },
+        "torqueNmGain": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.3",
+        "originalBhp": {
+          "raw": "150",
+          "parsedValues": ["150"],
+          "primaryValue": "150"
+        },
+        "powerBhpGain": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "originalTorque": {
+          "raw": "250",
+          "parsedValues": ["250"],
+          "primaryValue": "250"
+        },
+        "torqueNmGain": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.2",
+        "originalBhp": {
+          "raw": "125",
+          "parsedValues": ["125"],
+          "primaryValue": "125"
+        },
+        "powerBhpGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "205",
+          "parsedValues": ["205"],
+          "primaryValue": "205"
+        },
+        "torqueNmGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.5",
+        "originalBhp": {
+          "raw": "110 | 115 | 95",
+          "parsedValues": ["110", "115", "95"],
+          "primaryValue": "110",
+          "secondaryValue": "115"
+        },
+        "powerBhpGain": {
+          "raw": "30 | 25 | 45",
+          "parsedValues": ["30", "25", "45"],
+          "primaryValue": "30",
+          "secondaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "240 | 260 | 240",
+          "parsedValues": ["240", "260", "240"],
+          "primaryValue": "240",
+          "secondaryValue": "260"
+        },
+        "torqueNmGain": {
+          "raw": "60 | 40 | 60",
+          "parsedValues": ["60", "40", "60"],
+          "primaryValue": "60",
+          "secondaryValue": "40"
+        },
+        "economyGainBhp": {
+          "raw": "15 | 10 | 20",
+          "parsedValues": ["15", "10", "20"],
+          "primaryValue": "15",
+          "secondaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "30 | 20 | 30",
+          "parsedValues": ["30", "20", "30"],
+          "primaryValue": "30",
+          "secondaryValue": "20"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 22500
+      }
+    ]
+  },
+  {
+    "make": "Dacia",
+    "model": "Duster",
+    "modelSlug": "duster",
+    "sourceProductId": 19333,
+    "sourceUrl": "https://viezu.com/shop/dacia-duster-2010-2017/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.2",
+        "originalBhp": {
+          "raw": "125",
+          "parsedValues": ["125"],
+          "primaryValue": "125"
+        },
+        "powerBhpGain": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "originalTorque": {
+          "raw": "205",
+          "parsedValues": ["205"],
+          "primaryValue": "205"
+        },
+        "torqueNmGain": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "105",
+          "parsedValues": ["105"],
+          "primaryValue": "105"
+        },
+        "powerBhpGain": {
+          "raw": "8",
+          "parsedValues": ["8"],
+          "primaryValue": "8"
+        },
+        "originalTorque": {
+          "raw": "148",
+          "parsedValues": ["148"],
+          "primaryValue": "148"
+        },
+        "torqueNmGain": {
+          "raw": "16",
+          "parsedValues": ["16"],
+          "primaryValue": "16"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.5",
+        "originalBhp": {
+          "raw": "110 | 85 | 90",
+          "parsedValues": ["110", "85", "90"],
+          "primaryValue": "110",
+          "secondaryValue": "85"
+        },
+        "powerBhpGain": {
+          "raw": "25 | 25 | 20",
+          "parsedValues": ["25", "25", "20"],
+          "primaryValue": "25",
+          "secondaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "240 | 200 | 200",
+          "parsedValues": ["240", "200", "200"],
+          "primaryValue": "240",
+          "secondaryValue": "200"
+        },
+        "torqueNmGain": {
+          "raw": "60 | 50 | 50",
+          "parsedValues": ["60", "50", "50"],
+          "primaryValue": "60",
+          "secondaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "10 | 10 | 10",
+          "parsedValues": ["10", "10", "10"],
+          "primaryValue": "10",
+          "secondaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "30 | 25 | 25",
+          "parsedValues": ["30", "25", "25"],
+          "primaryValue": "30",
+          "secondaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 22500
+      }
+    ]
+  },
+  {
+    "make": "Dacia",
+    "model": "Dokker",
+    "modelSlug": "dokker",
+    "sourceProductId": 19330,
+    "sourceUrl": "https://viezu.com/shop/dokker-2017-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.2",
+        "originalBhp": {
+          "raw": "115",
+          "parsedValues": ["115"],
+          "primaryValue": "115"
+        },
+        "powerBhpGain": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "190",
+          "parsedValues": ["190"],
+          "primaryValue": "190"
+        },
+        "torqueNmGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.5",
+        "originalBhp": {
+          "raw": "75 | 90",
+          "parsedValues": ["75", "90"],
+          "primaryValue": "75",
+          "secondaryValue": "90"
+        },
+        "powerBhpGain": {
+          "raw": "40 | 25",
+          "parsedValues": ["40", "25"],
+          "primaryValue": "40",
+          "secondaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "200 | 220",
+          "parsedValues": ["200", "220"],
+          "primaryValue": "200",
+          "secondaryValue": "220"
+        },
+        "torqueNmGain": {
+          "raw": "60 | 40",
+          "parsedValues": ["60", "40"],
+          "primaryValue": "60",
+          "secondaryValue": "40"
+        },
+        "economyGainBhp": {
+          "raw": "20 | 10",
+          "parsedValues": ["20", "10"],
+          "primaryValue": "20",
+          "secondaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "30 | 20",
+          "parsedValues": ["30", "20"],
+          "primaryValue": "30",
+          "secondaryValue": "20"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 22500
+      }
+    ]
+  },
+  {
+    "make": "Dacia",
+    "model": "Dokker",
+    "modelSlug": "dokker",
+    "sourceProductId": 19326,
+    "sourceUrl": "https://viezu.com/shop/dokker-2013-2016/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.2",
+        "originalBhp": {
+          "raw": "115",
+          "parsedValues": ["115"],
+          "primaryValue": "115"
+        },
+        "powerBhpGain": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "200",
+          "parsedValues": ["200"],
+          "primaryValue": "200"
+        },
+        "torqueNmGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "85",
+          "parsedValues": ["85"],
+          "primaryValue": "85"
+        },
+        "powerBhpGain": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "originalTorque": {
+          "raw": "134",
+          "parsedValues": ["134"],
+          "primaryValue": "134"
+        },
+        "torqueNmGain": {
+          "raw": "16",
+          "parsedValues": ["16"],
+          "primaryValue": "16"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.5",
+        "originalBhp": {
+          "raw": "75 | 90",
+          "parsedValues": ["75", "90"],
+          "primaryValue": "75",
+          "secondaryValue": "90"
+        },
+        "powerBhpGain": {
+          "raw": "20 | 20",
+          "parsedValues": ["20", "20"],
+          "primaryValue": "20",
+          "secondaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "180 | 190",
+          "parsedValues": ["180", "190"],
+          "primaryValue": "180",
+          "secondaryValue": "190"
+        },
+        "torqueNmGain": {
+          "raw": "40 | 50",
+          "parsedValues": ["40", "50"],
+          "primaryValue": "40",
+          "secondaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "10 | 10",
+          "parsedValues": ["10", "10"],
+          "primaryValue": "10",
+          "secondaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "20 | 25",
+          "parsedValues": ["20", "25"],
+          "primaryValue": "20",
+          "secondaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 22500
+      }
+    ]
+  }
+]

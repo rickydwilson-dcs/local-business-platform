@@ -1,0 +1,202 @@
+[
+  {
+    "make": "Rolls Royce",
+    "model": "Wraith",
+    "modelSlug": "wraith",
+    "sourceProductId": 22615,
+    "sourceUrl": "https://viezu.com/shop/rolls-royce-wraith-all/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "6.6",
+        "originalBhp": {
+          "raw": "633",
+          "parsedValues": ["633"],
+          "primaryValue": "633"
+        },
+        "powerBhpGain": {
+          "raw": "67",
+          "parsedValues": ["67"],
+          "primaryValue": "67"
+        },
+        "originalTorque": {
+          "raw": "795",
+          "parsedValues": ["795"],
+          "primaryValue": "795"
+        },
+        "torqueNmGain": {
+          "raw": "155",
+          "parsedValues": ["155"],
+          "primaryValue": "155"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 99900
+      }
+    ]
+  },
+  {
+    "make": "Rolls Royce",
+    "model": "Ghost",
+    "modelSlug": "ghost",
+    "sourceProductId": 22613,
+    "sourceUrl": "https://viezu.com/shop/rolls-royce-ghost-all/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "6.6",
+        "originalBhp": {
+          "raw": "570 | 612",
+          "parsedValues": ["570", "612"],
+          "primaryValue": "570",
+          "secondaryValue": "612"
+        },
+        "powerBhpGain": {
+          "raw": "130 | 88",
+          "parsedValues": ["130", "88"],
+          "primaryValue": "130",
+          "secondaryValue": "88"
+        },
+        "originalTorque": {
+          "raw": "820 | 840",
+          "parsedValues": ["820", "840"],
+          "primaryValue": "820",
+          "secondaryValue": "840"
+        },
+        "torqueNmGain": {
+          "raw": "130 | 110",
+          "parsedValues": ["130", "110"],
+          "primaryValue": "130",
+          "secondaryValue": "110"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 99900
+      }
+    ]
+  },
+  {
+    "make": "Rolls Royce",
+    "model": "Dawn",
+    "modelSlug": "dawn",
+    "sourceProductId": 22611,
+    "sourceUrl": "https://viezu.com/shop/rolls-royce-dawn-all/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "6.6",
+        "originalBhp": {
+          "raw": "571",
+          "parsedValues": ["571"],
+          "primaryValue": "571"
+        },
+        "powerBhpGain": {
+          "raw": "129",
+          "parsedValues": ["129"],
+          "primaryValue": "129"
+        },
+        "originalTorque": {
+          "raw": "820",
+          "parsedValues": ["820"],
+          "primaryValue": "820"
+        },
+        "torqueNmGain": {
+          "raw": "130",
+          "parsedValues": ["130"],
+          "primaryValue": "130"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 99900
+      }
+    ]
+  },
+  {
+    "make": "Rolls Royce",
+    "model": "Cullinan",
+    "modelSlug": "cullinan",
+    "sourceProductId": 22609,
+    "sourceUrl": "https://viezu.com/shop/rolls-royce-cullinan-2018-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "6.7",
+        "originalBhp": {
+          "raw": "571",
+          "parsedValues": ["571"],
+          "primaryValue": "571"
+        },
+        "powerBhpGain": {
+          "raw": "49",
+          "parsedValues": ["49"],
+          "primaryValue": "49"
+        },
+        "originalTorque": {
+          "raw": "850",
+          "parsedValues": ["850"],
+          "primaryValue": "850"
+        },
+        "torqueNmGain": {
+          "raw": "100",
+          "parsedValues": ["100"],
+          "primaryValue": "100"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 99900
+      }
+    ]
+  }
+]

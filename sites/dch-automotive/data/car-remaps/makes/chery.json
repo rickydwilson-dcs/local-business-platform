@@ -1,0 +1,100 @@
+[
+  {
+    "make": "Chery",
+    "model": "Tiggo 8",
+    "modelSlug": "tiggo-8",
+    "sourceProductId": 62944,
+    "sourceUrl": "https://viezu.com/shop/chery-tiggo-8-2020-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "147",
+          "parsedValues": ["147"],
+          "primaryValue": "147"
+        },
+        "powerBhpGain": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "275",
+          "parsedValues": ["275"],
+          "primaryValue": "275"
+        },
+        "torqueNmGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Chery",
+    "model": "TIGGO 5x",
+    "modelSlug": "tiggo-5x",
+    "sourceProductId": 48034,
+    "sourceUrl": "https://viezu.com/shop/chery-tiggo-5x-2017-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "2",
+        "originalBhp": {
+          "raw": "154",
+          "parsedValues": ["154"],
+          "primaryValue": "154"
+        },
+        "powerBhpGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "210",
+          "parsedValues": ["210"],
+          "primaryValue": "210"
+        },
+        "torqueNmGain": {
+          "raw": "42",
+          "parsedValues": ["42"],
+          "primaryValue": "42"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 30000
+      }
+    ]
+  }
+]

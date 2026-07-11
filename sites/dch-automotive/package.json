@@ -18,6 +18,7 @@
     "validate:content": "tsx ../../scripts/validate-content.ts all",
     "validate:quality": "tsx scripts/validate-quality.ts",
     "validate:all": "npm run validate:content && npm run validate:quality",
+    "car-remaps:sync": "tsx scripts/car-remaps/sync.ts",
     "clean": "rm -rf .next"
   },
   "dependencies": {

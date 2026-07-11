@@ -1,0 +1,254 @@
+[
+  {
+    "make": "Lamborghini",
+    "model": "Urus",
+    "modelSlug": "urus",
+    "sourceProductId": 20702,
+    "sourceUrl": "https://viezu.com/shop/lamborghini-urus-2018-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "4.0",
+        "originalBhp": {
+          "raw": "650",
+          "parsedValues": ["650"],
+          "primaryValue": "650"
+        },
+        "powerBhpGain": {
+          "raw": "70",
+          "parsedValues": ["70"],
+          "primaryValue": "70"
+        },
+        "originalTorque": {
+          "raw": "850",
+          "parsedValues": ["850"],
+          "primaryValue": "850"
+        },
+        "torqueNmGain": {
+          "raw": "150",
+          "parsedValues": ["150"],
+          "primaryValue": "150"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 69900
+      }
+    ]
+  },
+  {
+    "make": "Lamborghini",
+    "model": "Huracan",
+    "modelSlug": "huracan",
+    "sourceProductId": 20697,
+    "sourceUrl": "https://viezu.com/shop/lamborghini-huracan-all/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "5.2",
+        "originalBhp": {
+          "raw": "580 | 610 | 640 | 640",
+          "parsedValues": ["580", "610", "640", "640"],
+          "primaryValue": "580",
+          "secondaryValue": "610"
+        },
+        "powerBhpGain": {
+          "raw": "50 | 20 | 15 | 15",
+          "parsedValues": ["50", "20", "15", "15"],
+          "primaryValue": "50",
+          "secondaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "540 | 560 | 600 | 600",
+          "parsedValues": ["540", "560", "600", "600"],
+          "primaryValue": "540",
+          "secondaryValue": "560"
+        },
+        "torqueNmGain": {
+          "raw": "40 | 20 | 30 | 30",
+          "parsedValues": ["40", "20", "30", "30"],
+          "primaryValue": "40",
+          "secondaryValue": "20"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 69900
+      }
+    ]
+  },
+  {
+    "make": "Lamborghini",
+    "model": "Gallardo",
+    "modelSlug": "gallardo",
+    "sourceProductId": 20694,
+    "sourceUrl": "https://viezu.com/shop/lamborghini-gallardo-all/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "5.0",
+        "originalBhp": {
+          "raw": "493 | 512 | 523",
+          "parsedValues": ["493", "512", "523"],
+          "primaryValue": "493",
+          "secondaryValue": "512"
+        },
+        "powerBhpGain": {
+          "raw": "19 | 20 | 20",
+          "parsedValues": ["19", "20", "20"],
+          "primaryValue": "19",
+          "secondaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "510 | 510 | 510",
+          "parsedValues": ["510", "510", "510"],
+          "primaryValue": "510",
+          "secondaryValue": "510"
+        },
+        "torqueNmGain": {
+          "raw": "25 | 25 | 25",
+          "parsedValues": ["25", "25", "25"],
+          "primaryValue": "25",
+          "secondaryValue": "25"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 49900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "5.2",
+        "originalBhp": {
+          "raw": "552 | 543 | 562",
+          "parsedValues": ["552", "543", "562"],
+          "primaryValue": "552",
+          "secondaryValue": "543"
+        },
+        "powerBhpGain": {
+          "raw": "36 | 35 | 36",
+          "parsedValues": ["36", "35", "36"],
+          "primaryValue": "36",
+          "secondaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "540 | 540 | 540",
+          "parsedValues": ["540", "540", "540"],
+          "primaryValue": "540",
+          "secondaryValue": "540"
+        },
+        "torqueNmGain": {
+          "raw": "35 | 35 | 35",
+          "parsedValues": ["35", "35", "35"],
+          "primaryValue": "35",
+          "secondaryValue": "35"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 49900
+      }
+    ]
+  },
+  {
+    "make": "Lamborghini",
+    "model": "Aventador",
+    "modelSlug": "aventador",
+    "sourceProductId": 20692,
+    "sourceUrl": "https://viezu.com/shop/lamborghini-aventador-all/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "6.5",
+        "originalBhp": {
+          "raw": "700 | 740 | 750 | 770",
+          "parsedValues": ["700", "740", "750", "770"],
+          "primaryValue": "700",
+          "secondaryValue": "740"
+        },
+        "powerBhpGain": {
+          "raw": "30 | 10 | 10 | 10",
+          "parsedValues": ["30", "10", "10", "10"],
+          "primaryValue": "30",
+          "secondaryValue": "10"
+        },
+        "originalTorque": {
+          "raw": "690 | 690 | 690 | 720",
+          "parsedValues": ["690", "690", "690", "720"],
+          "primaryValue": "690",
+          "secondaryValue": "690"
+        },
+        "torqueNmGain": {
+          "raw": "30 | 14 | 14 | 15",
+          "parsedValues": ["30", "14", "14", "15"],
+          "primaryValue": "30",
+          "secondaryValue": "14"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 99900
+      }
+    ]
+  }
+]

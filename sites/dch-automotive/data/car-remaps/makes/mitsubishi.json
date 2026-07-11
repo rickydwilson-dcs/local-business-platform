@@ -1,0 +1,2067 @@
+[
+  {
+    "make": "Mitsubishi",
+    "model": "ASX",
+    "modelSlug": "asx",
+    "sourceProductId": 59236,
+    "sourceUrl": "https://viezu.com/shop/mitsubishi-asx-2020-2024/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "150",
+          "parsedValues": ["150"],
+          "primaryValue": "150"
+        },
+        "powerBhpGain": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "originalTorque": {
+          "raw": "195",
+          "parsedValues": ["195"],
+          "primaryValue": "195"
+        },
+        "torqueNmGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Mitsubishi",
+    "model": "Shogun",
+    "modelSlug": "shogun",
+    "sourceProductId": 56862,
+    "sourceUrl": "https://viezu.com/shop/mitsubishi-shogun-2000-2006/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "3.5",
+        "originalBhp": {
+          "raw": "203",
+          "parsedValues": ["203"],
+          "primaryValue": "203"
+        },
+        "powerBhpGain": {
+          "raw": "17",
+          "parsedValues": ["17"],
+          "primaryValue": "17"
+        },
+        "originalTorque": {
+          "raw": "318",
+          "parsedValues": ["318"],
+          "primaryValue": "318"
+        },
+        "torqueNmGain": {
+          "raw": "22",
+          "parsedValues": ["22"],
+          "primaryValue": "22"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Mitsubishi",
+    "model": "Galant",
+    "modelSlug": "galant",
+    "sourceProductId": 55922,
+    "sourceUrl": "https://viezu.com/shop/mitsubishi-galant-all/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "2.4",
+        "originalBhp": {
+          "raw": "150",
+          "parsedValues": ["150"],
+          "primaryValue": "150"
+        },
+        "powerBhpGain": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "originalTorque": {
+          "raw": "225",
+          "parsedValues": ["225"],
+          "primaryValue": "225"
+        },
+        "torqueNmGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Mitsubishi",
+    "model": "Triton",
+    "modelSlug": "triton",
+    "sourceProductId": 21646,
+    "sourceUrl": "https://viezu.com/shop/mitsubishi-triton-all/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "3.2",
+        "originalBhp": {
+          "raw": "160",
+          "parsedValues": ["160"],
+          "primaryValue": "160"
+        },
+        "powerBhpGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "373",
+          "parsedValues": ["373"],
+          "primaryValue": "373"
+        },
+        "torqueNmGain": {
+          "raw": "57",
+          "parsedValues": ["57"],
+          "primaryValue": "57"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Mitsubishi",
+    "model": "Spacestar",
+    "modelSlug": "spacestar",
+    "sourceProductId": 21644,
+    "sourceUrl": "https://viezu.com/shop/mitsubishi-spacestar-all/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "1.9",
+        "originalBhp": {
+          "raw": "102 | 115",
+          "parsedValues": ["102", "115"],
+          "primaryValue": "102",
+          "secondaryValue": "115"
+        },
+        "powerBhpGain": {
+          "raw": "27 | 27",
+          "parsedValues": ["27", "27"],
+          "primaryValue": "27",
+          "secondaryValue": "27"
+        },
+        "originalTorque": {
+          "raw": "215 | 265",
+          "parsedValues": ["215", "265"],
+          "primaryValue": "215",
+          "secondaryValue": "265"
+        },
+        "torqueNmGain": {
+          "raw": "60 | 100",
+          "parsedValues": ["60", "100"],
+          "primaryValue": "60",
+          "secondaryValue": "100"
+        },
+        "economyGainBhp": {
+          "raw": "15 | 15",
+          "parsedValues": ["15", "15"],
+          "primaryValue": "15",
+          "secondaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "30 | 50",
+          "parsedValues": ["30", "50"],
+          "primaryValue": "30",
+          "secondaryValue": "50"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Mitsubishi",
+    "model": "Pajero",
+    "modelSlug": "pajero",
+    "sourceProductId": 21639,
+    "sourceUrl": "https://viezu.com/shop/mitsubishi-pajero-all/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "129",
+          "parsedValues": ["129"],
+          "primaryValue": "129"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "190",
+          "parsedValues": ["190"],
+          "primaryValue": "190"
+        },
+        "torqueNmGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.5",
+        "originalBhp": {
+          "raw": "181",
+          "parsedValues": ["181"],
+          "primaryValue": "181"
+        },
+        "powerBhpGain": {
+          "raw": "29",
+          "parsedValues": ["29"],
+          "primaryValue": "29"
+        },
+        "originalTorque": {
+          "raw": "430",
+          "parsedValues": ["430"],
+          "primaryValue": "430"
+        },
+        "torqueNmGain": {
+          "raw": "70",
+          "parsedValues": ["70"],
+          "primaryValue": "70"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.5",
+        "originalBhp": {
+          "raw": "115",
+          "parsedValues": ["115"],
+          "primaryValue": "115"
+        },
+        "powerBhpGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "240",
+          "parsedValues": ["240"],
+          "primaryValue": "240"
+        },
+        "torqueNmGain": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "3.2",
+        "originalBhp": {
+          "raw": "160 | 170 | 190 | 200",
+          "parsedValues": ["160", "170", "190", "200"],
+          "primaryValue": "160",
+          "secondaryValue": "170"
+        },
+        "powerBhpGain": {
+          "raw": "35 | 25 | 50 | 40",
+          "parsedValues": ["35", "25", "50", "40"],
+          "primaryValue": "35",
+          "secondaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "373 | 373 | 441 | 441",
+          "parsedValues": ["373", "373", "441", "441"],
+          "primaryValue": "373",
+          "secondaryValue": "373"
+        },
+        "torqueNmGain": {
+          "raw": "67 | 67 | 59 | 59",
+          "parsedValues": ["67", "67", "59", "59"],
+          "primaryValue": "67",
+          "secondaryValue": "67"
+        },
+        "economyGainBhp": {
+          "raw": "20 | 10 | 25 | 20",
+          "parsedValues": ["20", "10", "25", "20"],
+          "primaryValue": "20",
+          "secondaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "35 | 35 | 30 | 30",
+          "parsedValues": ["35", "35", "30", "30"],
+          "primaryValue": "35",
+          "secondaryValue": "35"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "3.0",
+        "originalBhp": {
+          "raw": "223",
+          "parsedValues": ["223"],
+          "primaryValue": "223"
+        },
+        "powerBhpGain": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "originalTorque": {
+          "raw": "291",
+          "parsedValues": ["291"],
+          "primaryValue": "291"
+        },
+        "torqueNmGain": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Mitsubishi",
+    "model": "Outlander",
+    "modelSlug": "outlander",
+    "sourceProductId": 21637,
+    "sourceUrl": "https://viezu.com/shop/mitsubishi-outlander-2017-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol Hybrid",
+        "variant": "2.4",
+        "originalBhp": {
+          "raw": "252",
+          "parsedValues": ["252"],
+          "primaryValue": "252"
+        },
+        "powerBhpGain": {
+          "raw": "28",
+          "parsedValues": ["28"],
+          "primaryValue": "28"
+        },
+        "originalTorque": {
+          "raw": "543",
+          "parsedValues": ["543"],
+          "primaryValue": "543"
+        },
+        "torqueNmGain": {
+          "raw": "57",
+          "parsedValues": ["57"],
+          "primaryValue": "57"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol Hybrid",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "203",
+          "parsedValues": ["203"],
+          "primaryValue": "203"
+        },
+        "powerBhpGain": {
+          "raw": "27",
+          "parsedValues": ["27"],
+          "primaryValue": "27"
+        },
+        "originalTorque": {
+          "raw": "522",
+          "parsedValues": ["522"],
+          "primaryValue": "522"
+        },
+        "torqueNmGain": {
+          "raw": "48",
+          "parsedValues": ["48"],
+          "primaryValue": "48"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.2",
+        "originalBhp": {
+          "raw": "150",
+          "parsedValues": ["150"],
+          "primaryValue": "150"
+        },
+        "powerBhpGain": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "380",
+          "parsedValues": ["380"],
+          "primaryValue": "380"
+        },
+        "torqueNmGain": {
+          "raw": "70",
+          "parsedValues": ["70"],
+          "primaryValue": "70"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Mitsubishi",
+    "model": "Outlander",
+    "modelSlug": "outlander",
+    "sourceProductId": 21634,
+    "sourceUrl": "https://viezu.com/shop/mitsubishi-outlander-2013-2016/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.3",
+        "originalBhp": {
+          "raw": "150 | 175",
+          "parsedValues": ["150", "175"],
+          "primaryValue": "150",
+          "secondaryValue": "175"
+        },
+        "powerBhpGain": {
+          "raw": "35 | 10",
+          "parsedValues": ["35", "10"],
+          "primaryValue": "35",
+          "secondaryValue": "10"
+        },
+        "originalTorque": {
+          "raw": "380 | 380",
+          "parsedValues": ["380", "380"],
+          "primaryValue": "380",
+          "secondaryValue": "380"
+        },
+        "torqueNmGain": {
+          "raw": "70 | 70",
+          "parsedValues": ["70", "70"],
+          "primaryValue": "70",
+          "secondaryValue": "70"
+        },
+        "economyGainBhp": {
+          "raw": "20 | 5",
+          "parsedValues": ["20", "5"],
+          "primaryValue": "20",
+          "secondaryValue": "5"
+        },
+        "economyGainNm": {
+          "raw": "35 | 35",
+          "parsedValues": ["35", "35"],
+          "primaryValue": "35",
+          "secondaryValue": "35"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "150",
+          "parsedValues": ["150"],
+          "primaryValue": "150"
+        },
+        "powerBhpGain": {
+          "raw": "19",
+          "parsedValues": ["19"],
+          "primaryValue": "19"
+        },
+        "originalTorque": {
+          "raw": "195",
+          "parsedValues": ["195"],
+          "primaryValue": "195"
+        },
+        "torqueNmGain": {
+          "raw": "27",
+          "parsedValues": ["27"],
+          "primaryValue": "27"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Mitsubishi",
+    "model": "Outlander",
+    "modelSlug": "outlander",
+    "sourceProductId": 21629,
+    "sourceUrl": "https://viezu.com/shop/mitsubishi-outlander-2007-2012/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.3",
+        "originalBhp": {
+          "raw": "177 | 140",
+          "parsedValues": ["177", "140"],
+          "primaryValue": "177",
+          "secondaryValue": "140"
+        },
+        "powerBhpGain": {
+          "raw": "35 | 70",
+          "parsedValues": ["35", "70"],
+          "primaryValue": "35",
+          "secondaryValue": "70"
+        },
+        "originalTorque": {
+          "raw": "380 | 380",
+          "parsedValues": ["380", "380"],
+          "primaryValue": "380",
+          "secondaryValue": "380"
+        },
+        "torqueNmGain": {
+          "raw": "80 | 80",
+          "parsedValues": ["80", "80"],
+          "primaryValue": "80",
+          "secondaryValue": "80"
+        },
+        "economyGainBhp": {
+          "raw": "17 | 35",
+          "parsedValues": ["17", "35"],
+          "primaryValue": "17",
+          "secondaryValue": "35"
+        },
+        "economyGainNm": {
+          "raw": "40 | 40",
+          "parsedValues": ["40", "40"],
+          "primaryValue": "40",
+          "secondaryValue": "40"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "2.4",
+        "originalBhp": {
+          "raw": "170",
+          "parsedValues": ["170"],
+          "primaryValue": "170"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "232",
+          "parsedValues": ["232"],
+          "primaryValue": "232"
+        },
+        "torqueNmGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "140",
+          "parsedValues": ["140"],
+          "primaryValue": "140"
+        },
+        "powerBhpGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "originalTorque": {
+          "raw": "310",
+          "parsedValues": ["310"],
+          "primaryValue": "310"
+        },
+        "torqueNmGain": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.2",
+        "originalBhp": {
+          "raw": "156",
+          "parsedValues": ["156"],
+          "primaryValue": "156"
+        },
+        "powerBhpGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "380",
+          "parsedValues": ["380"],
+          "primaryValue": "380"
+        },
+        "torqueNmGain": {
+          "raw": "70",
+          "parsedValues": ["70"],
+          "primaryValue": "70"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "202",
+          "parsedValues": ["202"],
+          "primaryValue": "202"
+        },
+        "powerBhpGain": {
+          "raw": "58",
+          "parsedValues": ["58"],
+          "primaryValue": "58"
+        },
+        "originalTorque": {
+          "raw": "303",
+          "parsedValues": ["303"],
+          "primaryValue": "303"
+        },
+        "torqueNmGain": {
+          "raw": "67",
+          "parsedValues": ["67"],
+          "primaryValue": "67"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Mitsubishi",
+    "model": "Lancer EVO",
+    "modelSlug": "lancer-evo",
+    "sourceProductId": 21624,
+    "sourceUrl": "https://viezu.com/shop/mitsubishi-lancer-evo-x/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "295",
+          "parsedValues": ["295"],
+          "primaryValue": "295"
+        },
+        "powerBhpGain": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "366",
+          "parsedValues": ["366"],
+          "primaryValue": "366"
+        },
+        "torqueNmGain": {
+          "raw": "64",
+          "parsedValues": ["64"],
+          "primaryValue": "64"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Mitsubishi",
+    "model": "Lancer EVO",
+    "modelSlug": "lancer-evo",
+    "sourceProductId": 21622,
+    "sourceUrl": "https://viezu.com/shop/mitsubishi-lancer-evo-ix/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "280",
+          "parsedValues": ["280"],
+          "primaryValue": "280"
+        },
+        "powerBhpGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "originalTorque": {
+          "raw": "355",
+          "parsedValues": ["355"],
+          "primaryValue": "355"
+        },
+        "torqueNmGain": {
+          "raw": "65",
+          "parsedValues": ["65"],
+          "primaryValue": "65"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Mitsubishi",
+    "model": "Lancer",
+    "modelSlug": "lancer",
+    "sourceProductId": 21619,
+    "sourceUrl": "https://viezu.com/shop/mitsubishi-lancer-all/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.8",
+        "originalBhp": {
+          "raw": "143",
+          "parsedValues": ["143"],
+          "primaryValue": "143"
+        },
+        "powerBhpGain": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "originalTorque": {
+          "raw": "178",
+          "parsedValues": ["178"],
+          "primaryValue": "178"
+        },
+        "torqueNmGain": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "98",
+          "parsedValues": ["98"],
+          "primaryValue": "98"
+        },
+        "powerBhpGain": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "originalTorque": {
+          "raw": "150",
+          "parsedValues": ["150"],
+          "primaryValue": "150"
+        },
+        "torqueNmGain": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "280 | 237 | 265",
+          "parsedValues": ["280", "237", "265"],
+          "primaryValue": "280",
+          "secondaryValue": "237"
+        },
+        "powerBhpGain": {
+          "raw": "20 | 15 | 17",
+          "parsedValues": ["20", "15", "17"],
+          "primaryValue": "20",
+          "secondaryValue": "15"
+        },
+        "originalTorque": {
+          "raw": "383 |  343 | 355",
+          "parsedValues": ["383", "343", "355"],
+          "primaryValue": "383",
+          "secondaryValue": "343"
+        },
+        "torqueNmGain": {
+          "raw": "40 | 30 | 35",
+          "parsedValues": ["40", "30", "35"],
+          "primaryValue": "40",
+          "secondaryValue": "30"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.8",
+        "originalBhp": {
+          "raw": "116 | 150",
+          "parsedValues": ["116", "150"],
+          "primaryValue": "116",
+          "secondaryValue": "150"
+        },
+        "powerBhpGain": {
+          "raw": "44 | 25",
+          "parsedValues": ["44", "25"],
+          "primaryValue": "44",
+          "secondaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "300 | 300",
+          "parsedValues": ["300", "300"],
+          "primaryValue": "300",
+          "secondaryValue": "300"
+        },
+        "torqueNmGain": {
+          "raw": "60 | 60",
+          "parsedValues": ["60", "60"],
+          "primaryValue": "60",
+          "secondaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "20 | 10",
+          "parsedValues": ["20", "10"],
+          "primaryValue": "20",
+          "secondaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "30 | 30",
+          "parsedValues": ["30", "30"],
+          "primaryValue": "30",
+          "secondaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "140",
+          "parsedValues": ["140"],
+          "primaryValue": "140"
+        },
+        "powerBhpGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "originalTorque": {
+          "raw": "310",
+          "parsedValues": ["310"],
+          "primaryValue": "310"
+        },
+        "torqueNmGain": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Mitsubishi",
+    "model": "L200",
+    "modelSlug": "l200",
+    "sourceProductId": 21615,
+    "sourceUrl": "https://viezu.com/shop/mitsubishi-l200-all/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.5",
+        "originalBhp": {
+          "raw": "115 | 136 | 178 | 163 | 98 | 160",
+          "parsedValues": ["115", "136", "178", "163", "98", "160"],
+          "primaryValue": "115",
+          "secondaryValue": "136"
+        },
+        "powerBhpGain": {
+          "raw": "30 | 39 | 32 | 42 | 50 | 40",
+          "parsedValues": ["30", "39", "32", "42", "50", "40"],
+          "primaryValue": "30",
+          "secondaryValue": "39"
+        },
+        "originalTorque": {
+          "raw": "240 | 315 | 400 | 410 | 240 | 402",
+          "parsedValues": ["240", "315", "400", "410", "240", "402"],
+          "primaryValue": "240",
+          "secondaryValue": "315"
+        },
+        "torqueNmGain": {
+          "raw": "80 | 45 | 60 | 45 | 80 | 80",
+          "parsedValues": ["80", "45", "60", "45", "80", "80"],
+          "primaryValue": "80",
+          "secondaryValue": "45"
+        },
+        "economyGainBhp": {
+          "raw": "15 | 20 | 15 | 20 | 25 | 20",
+          "parsedValues": ["15", "20", "15", "20", "25", "20"],
+          "primaryValue": "15",
+          "secondaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "40 | 20 | 30 | 20 | 40 | 40",
+          "parsedValues": ["40", "20", "30", "20", "40", "40"],
+          "primaryValue": "40",
+          "secondaryValue": "20"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10% | 10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%", "10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.3",
+        "originalBhp": {
+          "raw": "150 | 150",
+          "parsedValues": ["150", "150"],
+          "primaryValue": "150",
+          "secondaryValue": "150"
+        },
+        "powerBhpGain": {
+          "raw": "30 | 30",
+          "parsedValues": ["30", "30"],
+          "primaryValue": "30",
+          "secondaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "400 | 400",
+          "parsedValues": ["400", "400"],
+          "primaryValue": "400",
+          "secondaryValue": "400"
+        },
+        "torqueNmGain": {
+          "raw": "60 | 60",
+          "parsedValues": ["60", "60"],
+          "primaryValue": "60",
+          "secondaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "15 | 15",
+          "parsedValues": ["15", "15"],
+          "primaryValue": "15",
+          "secondaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "30 | 30",
+          "parsedValues": ["30", "30"],
+          "primaryValue": "30",
+          "secondaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.4",
+        "originalBhp": {
+          "raw": "154 | 181",
+          "parsedValues": ["154", "181"],
+          "primaryValue": "154",
+          "secondaryValue": "181"
+        },
+        "powerBhpGain": {
+          "raw": "46 | 24",
+          "parsedValues": ["46", "24"],
+          "primaryValue": "46",
+          "secondaryValue": "24"
+        },
+        "originalTorque": {
+          "raw": "380 | 430",
+          "parsedValues": ["380", "430"],
+          "primaryValue": "380",
+          "secondaryValue": "430"
+        },
+        "torqueNmGain": {
+          "raw": "120 | 70",
+          "parsedValues": ["120", "70"],
+          "primaryValue": "120",
+          "secondaryValue": "70"
+        },
+        "economyGainBhp": {
+          "raw": "25 | 10",
+          "parsedValues": ["25", "10"],
+          "primaryValue": "25",
+          "secondaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "60 | 35",
+          "parsedValues": ["60", "35"],
+          "primaryValue": "60",
+          "secondaryValue": "35"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Mitsubishi",
+    "model": "Grandis",
+    "modelSlug": "grandis",
+    "sourceProductId": 21613,
+    "sourceUrl": "https://viezu.com/shop/grandis-2004-2011/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "136",
+          "parsedValues": ["136"],
+          "primaryValue": "136"
+        },
+        "powerBhpGain": {
+          "raw": "34",
+          "parsedValues": ["34"],
+          "primaryValue": "34"
+        },
+        "originalTorque": {
+          "raw": "310",
+          "parsedValues": ["310"],
+          "primaryValue": "310"
+        },
+        "torqueNmGain": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Mitsubishi",
+    "model": "Fuso",
+    "modelSlug": "fuso",
+    "sourceProductId": 21611,
+    "sourceUrl": "https://viezu.com/shop/mitsubishi-fuso-2006-present/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "3.0",
+        "originalBhp": {
+          "raw": "125 | 130 | 145",
+          "parsedValues": ["125", "130", "145"],
+          "primaryValue": "125",
+          "secondaryValue": "130"
+        },
+        "powerBhpGain": {
+          "raw": "30 | 30 | 30",
+          "parsedValues": ["30", "30", "30"],
+          "primaryValue": "30",
+          "secondaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "294 | 300 | 362",
+          "parsedValues": ["294", "300", "362"],
+          "primaryValue": "294",
+          "secondaryValue": "300"
+        },
+        "torqueNmGain": {
+          "raw": "56 | 60 | 58",
+          "parsedValues": ["56", "60", "58"],
+          "primaryValue": "56",
+          "secondaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "15 | 15 | 15",
+          "parsedValues": ["15", "15", "15"],
+          "primaryValue": "15",
+          "secondaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "30 | 30 | 30",
+          "parsedValues": ["30", "30", "30"],
+          "primaryValue": "30",
+          "secondaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Mitsubishi",
+    "model": "Eclipse Cross",
+    "modelSlug": "eclipse-cross",
+    "sourceProductId": 21608,
+    "sourceUrl": "https://viezu.com/shop/mitsubishi-eclipse-cross-2017-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.5",
+        "originalBhp": {
+          "raw": "163",
+          "parsedValues": ["163"],
+          "primaryValue": "163"
+        },
+        "powerBhpGain": {
+          "raw": "13",
+          "parsedValues": ["13"],
+          "primaryValue": "13"
+        },
+        "originalTorque": {
+          "raw": "250",
+          "parsedValues": ["250"],
+          "primaryValue": "250"
+        },
+        "torqueNmGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.3",
+        "originalBhp": {
+          "raw": "150",
+          "parsedValues": ["150"],
+          "primaryValue": "150"
+        },
+        "powerBhpGain": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "400",
+          "parsedValues": ["400"],
+          "primaryValue": "400"
+        },
+        "torqueNmGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Mitsubishi",
+    "model": "Colt",
+    "modelSlug": "colt",
+    "sourceProductId": 21605,
+    "sourceUrl": "https://viezu.com/shop/mitsubishi-colt-all/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.3",
+        "originalBhp": {
+          "raw": "95",
+          "parsedValues": ["95"],
+          "primaryValue": "95"
+        },
+        "powerBhpGain": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "originalTorque": {
+          "raw": "125",
+          "parsedValues": ["125"],
+          "primaryValue": "125"
+        },
+        "torqueNmGain": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.1",
+        "originalBhp": {
+          "raw": "73",
+          "parsedValues": ["73"],
+          "primaryValue": "73"
+        },
+        "powerBhpGain": {
+          "raw": "7",
+          "parsedValues": ["7"],
+          "primaryValue": "7"
+        },
+        "originalTorque": {
+          "raw": "100",
+          "parsedValues": ["100"],
+          "primaryValue": "100"
+        },
+        "torqueNmGain": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.5",
+        "originalBhp": {
+          "raw": "150 | 107",
+          "parsedValues": ["150", "107"],
+          "primaryValue": "150",
+          "secondaryValue": "107"
+        },
+        "powerBhpGain": {
+          "raw": "30 | 10",
+          "parsedValues": ["30", "10"],
+          "primaryValue": "30",
+          "secondaryValue": "10"
+        },
+        "originalTorque": {
+          "raw": "210 | 145",
+          "parsedValues": ["210", "145"],
+          "primaryValue": "210",
+          "secondaryValue": "145"
+        },
+        "torqueNmGain": {
+          "raw": "60 | 14",
+          "parsedValues": ["60", "14"],
+          "primaryValue": "60",
+          "secondaryValue": "14"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.5",
+        "originalBhp": {
+          "raw": "95",
+          "parsedValues": ["95"],
+          "primaryValue": "95"
+        },
+        "powerBhpGain": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "210",
+          "parsedValues": ["210"],
+          "primaryValue": "210"
+        },
+        "torqueNmGain": {
+          "raw": "65",
+          "parsedValues": ["65"],
+          "primaryValue": "65"
+        },
+        "economyGainBhp": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 22500
+      }
+    ]
+  },
+  {
+    "make": "Mitsubishi",
+    "model": "Carisma",
+    "modelSlug": "carisma",
+    "sourceProductId": 21603,
+    "sourceUrl": "https://viezu.com/shop/carisma-all/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "1.9",
+        "originalBhp": {
+          "raw": "102 | 115",
+          "parsedValues": ["102", "115"],
+          "primaryValue": "102",
+          "secondaryValue": "115"
+        },
+        "powerBhpGain": {
+          "raw": "24 | 27",
+          "parsedValues": ["24", "27"],
+          "primaryValue": "24",
+          "secondaryValue": "27"
+        },
+        "originalTorque": {
+          "raw": "215 | 265",
+          "parsedValues": ["215", "265"],
+          "primaryValue": "215",
+          "secondaryValue": "265"
+        },
+        "torqueNmGain": {
+          "raw": "45 | 100",
+          "parsedValues": ["45", "100"],
+          "primaryValue": "45",
+          "secondaryValue": "100"
+        },
+        "economyGainBhp": {
+          "raw": "10 | 15",
+          "parsedValues": ["10", "15"],
+          "primaryValue": "10",
+          "secondaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "20 | 50",
+          "parsedValues": ["20", "50"],
+          "primaryValue": "20",
+          "secondaryValue": "50"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Mitsubishi",
+    "model": "ASX",
+    "modelSlug": "asx",
+    "sourceProductId": 21600,
+    "sourceUrl": "https://viezu.com/shop/mitsubishi-asx-2016-2019/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "117",
+          "parsedValues": ["117"],
+          "primaryValue": "117"
+        },
+        "powerBhpGain": {
+          "raw": "12",
+          "parsedValues": ["12"],
+          "primaryValue": "12"
+        },
+        "originalTorque": {
+          "raw": "154",
+          "parsedValues": ["154"],
+          "primaryValue": "154"
+        },
+        "torqueNmGain": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "115",
+          "parsedValues": ["115"],
+          "primaryValue": "115"
+        },
+        "powerBhpGain": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "270",
+          "parsedValues": ["270"],
+          "primaryValue": "270"
+        },
+        "torqueNmGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.3",
+        "originalBhp": {
+          "raw": "150",
+          "parsedValues": ["150"],
+          "primaryValue": "150"
+        },
+        "powerBhpGain": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "380",
+          "parsedValues": ["380"],
+          "primaryValue": "380"
+        },
+        "torqueNmGain": {
+          "raw": "70",
+          "parsedValues": ["70"],
+          "primaryValue": "70"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Mitsubishi",
+    "model": "ASX",
+    "modelSlug": "asx",
+    "sourceProductId": 21596,
+    "sourceUrl": "https://viezu.com/shop/mitsubishi-asx-2010-2016/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "115",
+          "parsedValues": ["115"],
+          "primaryValue": "115"
+        },
+        "powerBhpGain": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "270",
+          "parsedValues": ["270"],
+          "primaryValue": "270"
+        },
+        "torqueNmGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.8",
+        "originalBhp": {
+          "raw": "115 | 150",
+          "parsedValues": ["115", "150"],
+          "primaryValue": "115",
+          "secondaryValue": "150"
+        },
+        "powerBhpGain": {
+          "raw": "60 | 25",
+          "parsedValues": ["60", "25"],
+          "primaryValue": "60",
+          "secondaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "300 | 300",
+          "parsedValues": ["300", "300"],
+          "primaryValue": "300",
+          "secondaryValue": "300"
+        },
+        "torqueNmGain": {
+          "raw": "60 | 60",
+          "parsedValues": ["60", "60"],
+          "primaryValue": "60",
+          "secondaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "30 | 10",
+          "parsedValues": ["30", "10"],
+          "primaryValue": "30",
+          "secondaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "30 | 30",
+          "parsedValues": ["30", "30"],
+          "primaryValue": "30",
+          "secondaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.3",
+        "originalBhp": {
+          "raw": "150",
+          "parsedValues": ["150"],
+          "primaryValue": "150"
+        },
+        "powerBhpGain": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "380",
+          "parsedValues": ["380"],
+          "primaryValue": "380"
+        },
+        "torqueNmGain": {
+          "raw": "70",
+          "parsedValues": ["70"],
+          "primaryValue": "70"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  }
+]

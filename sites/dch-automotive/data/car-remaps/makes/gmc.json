@@ -1,0 +1,2372 @@
+[
+  {
+    "make": "Gmc",
+    "model": "Yukon",
+    "modelSlug": "yukon",
+    "sourceProductId": 20139,
+    "sourceUrl": "https://viezu.com/shop/gmc-yukon-2014-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "6.2",
+        "originalBhp": {
+          "raw": "420",
+          "parsedValues": ["420"],
+          "primaryValue": "420"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "610",
+          "parsedValues": ["610"],
+          "primaryValue": "610"
+        },
+        "torqueNmGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Gmc",
+    "model": "Yukon",
+    "modelSlug": "yukon",
+    "sourceProductId": 20134,
+    "sourceUrl": "https://viezu.com/shop/gmc-yukon-2007-2013/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "4.8",
+        "originalBhp": {
+          "raw": "295",
+          "parsedValues": ["295"],
+          "primaryValue": "295"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "393",
+          "parsedValues": ["393"],
+          "primaryValue": "393"
+        },
+        "torqueNmGain": {
+          "raw": "22",
+          "parsedValues": ["22"],
+          "primaryValue": "22"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "5.3",
+        "originalBhp": {
+          "raw": "320",
+          "parsedValues": ["320"],
+          "primaryValue": "320"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "481",
+          "parsedValues": ["481"],
+          "primaryValue": "481"
+        },
+        "torqueNmGain": {
+          "raw": "19",
+          "parsedValues": ["19"],
+          "primaryValue": "19"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "6.0",
+        "originalBhp": {
+          "raw": "332",
+          "parsedValues": ["332"],
+          "primaryValue": "332"
+        },
+        "powerBhpGain": {
+          "raw": "3",
+          "parsedValues": ["3"],
+          "primaryValue": "3"
+        },
+        "originalTorque": {
+          "raw": "498",
+          "parsedValues": ["498"],
+          "primaryValue": "498"
+        },
+        "torqueNmGain": {
+          "raw": "32",
+          "parsedValues": ["32"],
+          "primaryValue": "32"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "6.2",
+        "originalBhp": {
+          "raw": "405",
+          "parsedValues": ["405"],
+          "primaryValue": "405"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "565",
+          "parsedValues": ["565"],
+          "primaryValue": "565"
+        },
+        "torqueNmGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Gmc",
+    "model": "Yukon",
+    "modelSlug": "yukon",
+    "sourceProductId": 20129,
+    "sourceUrl": "https://viezu.com/shop/gmc-yukon-2000-2006/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "4.8",
+        "originalBhp": {
+          "raw": "275",
+          "parsedValues": ["275"],
+          "primaryValue": "275"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "393",
+          "parsedValues": ["393"],
+          "primaryValue": "393"
+        },
+        "torqueNmGain": {
+          "raw": "22",
+          "parsedValues": ["22"],
+          "primaryValue": "22"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "5.3",
+        "originalBhp": {
+          "raw": "295",
+          "parsedValues": ["295"],
+          "primaryValue": "295"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "447",
+          "parsedValues": ["447"],
+          "primaryValue": "447"
+        },
+        "torqueNmGain": {
+          "raw": "18",
+          "parsedValues": ["18"],
+          "primaryValue": "18"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "6.0",
+        "originalBhp": {
+          "raw": "329",
+          "parsedValues": ["329"],
+          "primaryValue": "329"
+        },
+        "powerBhpGain": {
+          "raw": "21",
+          "parsedValues": ["21"],
+          "primaryValue": "21"
+        },
+        "originalTorque": {
+          "raw": "495",
+          "parsedValues": ["495"],
+          "primaryValue": "495"
+        },
+        "torqueNmGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "8.1",
+        "originalBhp": {
+          "raw": "325",
+          "parsedValues": ["325"],
+          "primaryValue": "325"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "597",
+          "parsedValues": ["597"],
+          "primaryValue": "597"
+        },
+        "torqueNmGain": {
+          "raw": "23",
+          "parsedValues": ["23"],
+          "primaryValue": "23"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Gmc",
+    "model": "Terrain",
+    "modelSlug": "terrain",
+    "sourceProductId": 20126,
+    "sourceUrl": "https://viezu.com/shop/gmc-terrain-2017-2020/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "137",
+          "parsedValues": ["137"],
+          "primaryValue": "137"
+        },
+        "powerBhpGain": {
+          "raw": "28",
+          "parsedValues": ["28"],
+          "primaryValue": "28"
+        },
+        "originalTorque": {
+          "raw": "325",
+          "parsedValues": ["325"],
+          "primaryValue": "325"
+        },
+        "torqueNmGain": {
+          "raw": "55",
+          "parsedValues": ["55"],
+          "primaryValue": "55"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "256",
+          "parsedValues": ["256"],
+          "primaryValue": "256"
+        },
+        "powerBhpGain": {
+          "raw": "48",
+          "parsedValues": ["48"],
+          "primaryValue": "48"
+        },
+        "originalTorque": {
+          "raw": "353",
+          "parsedValues": ["353"],
+          "primaryValue": "353"
+        },
+        "torqueNmGain": {
+          "raw": "97",
+          "parsedValues": ["97"],
+          "primaryValue": "97"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Gmc",
+    "model": "Terrain",
+    "modelSlug": "terrain",
+    "sourceProductId": 20123,
+    "sourceUrl": "https://viezu.com/shop/gmc-terrain-2016-2017/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "2.4",
+        "originalBhp": {
+          "raw": "182",
+          "parsedValues": ["182"],
+          "primaryValue": "182"
+        },
+        "powerBhpGain": {
+          "raw": "18",
+          "parsedValues": ["18"],
+          "primaryValue": "18"
+        },
+        "originalTorque": {
+          "raw": "233",
+          "parsedValues": ["233"],
+          "primaryValue": "233"
+        },
+        "torqueNmGain": {
+          "raw": "22",
+          "parsedValues": ["22"],
+          "primaryValue": "22"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "3.6",
+        "originalBhp": {
+          "raw": "301",
+          "parsedValues": ["301"],
+          "primaryValue": "301"
+        },
+        "powerBhpGain": {
+          "raw": "19",
+          "parsedValues": ["19"],
+          "primaryValue": "19"
+        },
+        "originalTorque": {
+          "raw": "369",
+          "parsedValues": ["369"],
+          "primaryValue": "369"
+        },
+        "torqueNmGain": {
+          "raw": "21",
+          "parsedValues": ["21"],
+          "primaryValue": "21"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Gmc",
+    "model": "Terrain",
+    "modelSlug": "terrain",
+    "sourceProductId": 20119,
+    "sourceUrl": "https://viezu.com/shop/gmc-terrain-2009-2015/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "2.4",
+        "originalBhp": {
+          "raw": "182",
+          "parsedValues": ["182"],
+          "primaryValue": "182"
+        },
+        "powerBhpGain": {
+          "raw": "18",
+          "parsedValues": ["18"],
+          "primaryValue": "18"
+        },
+        "originalTorque": {
+          "raw": "233",
+          "parsedValues": ["233"],
+          "primaryValue": "233"
+        },
+        "torqueNmGain": {
+          "raw": "22",
+          "parsedValues": ["22"],
+          "primaryValue": "22"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "3.0",
+        "originalBhp": {
+          "raw": "264",
+          "parsedValues": ["264"],
+          "primaryValue": "264"
+        },
+        "powerBhpGain": {
+          "raw": "21",
+          "parsedValues": ["21"],
+          "primaryValue": "21"
+        },
+        "originalTorque": {
+          "raw": "301",
+          "parsedValues": ["301"],
+          "primaryValue": "301"
+        },
+        "torqueNmGain": {
+          "raw": "19",
+          "parsedValues": ["19"],
+          "primaryValue": "19"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "3.6",
+        "originalBhp": {
+          "raw": "301",
+          "parsedValues": ["301"],
+          "primaryValue": "301"
+        },
+        "powerBhpGain": {
+          "raw": "19",
+          "parsedValues": ["19"],
+          "primaryValue": "19"
+        },
+        "originalTorque": {
+          "raw": "369",
+          "parsedValues": ["369"],
+          "primaryValue": "369"
+        },
+        "torqueNmGain": {
+          "raw": "21",
+          "parsedValues": ["21"],
+          "primaryValue": "21"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Gmc",
+    "model": "Sonoma",
+    "modelSlug": "sonoma",
+    "sourceProductId": 20116,
+    "sourceUrl": "https://viezu.com/shop/gmc-sonoma-1997-2004/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "2.2",
+        "originalBhp": {
+          "raw": "120",
+          "parsedValues": ["120"],
+          "primaryValue": "120"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "190",
+          "parsedValues": ["190"],
+          "primaryValue": "190"
+        },
+        "torqueNmGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "4.3",
+        "originalBhp": {
+          "raw": "195",
+          "parsedValues": ["195"],
+          "primaryValue": "195"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "352",
+          "parsedValues": ["352"],
+          "primaryValue": "352"
+        },
+        "torqueNmGain": {
+          "raw": "23",
+          "parsedValues": ["23"],
+          "primaryValue": "23"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Gmc",
+    "model": "Sierra",
+    "modelSlug": "sierra",
+    "sourceProductId": 20110,
+    "sourceUrl": "https://viezu.com/shop/gmc-sierra-2017-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "4.3",
+        "originalBhp": {
+          "raw": "285",
+          "parsedValues": ["285"],
+          "primaryValue": "285"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "413",
+          "parsedValues": ["413"],
+          "primaryValue": "413"
+        },
+        "torqueNmGain": {
+          "raw": "27",
+          "parsedValues": ["27"],
+          "primaryValue": "27"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "5.3",
+        "originalBhp": {
+          "raw": "355",
+          "parsedValues": ["355"],
+          "primaryValue": "355"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "519",
+          "parsedValues": ["519"],
+          "primaryValue": "519"
+        },
+        "torqueNmGain": {
+          "raw": "21",
+          "parsedValues": ["21"],
+          "primaryValue": "21"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "6.0",
+        "originalBhp": {
+          "raw": "360",
+          "parsedValues": ["360"],
+          "primaryValue": "360"
+        },
+        "powerBhpGain": {
+          "raw": "23",
+          "parsedValues": ["23"],
+          "primaryValue": "23"
+        },
+        "originalTorque": {
+          "raw": "515",
+          "parsedValues": ["515"],
+          "primaryValue": "515"
+        },
+        "torqueNmGain": {
+          "raw": "24",
+          "parsedValues": ["24"],
+          "primaryValue": "24"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "6.2",
+        "originalBhp": {
+          "raw": "420",
+          "parsedValues": ["420"],
+          "primaryValue": "420"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "609",
+          "parsedValues": ["609"],
+          "primaryValue": "609"
+        },
+        "torqueNmGain": {
+          "raw": "21",
+          "parsedValues": ["21"],
+          "primaryValue": "21"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Gmc",
+    "model": "Sierra",
+    "modelSlug": "sierra",
+    "sourceProductId": 20105,
+    "sourceUrl": "https://viezu.com/shop/gmc-sierra-2014-2016/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "4.3",
+        "originalBhp": {
+          "raw": "285",
+          "parsedValues": ["285"],
+          "primaryValue": "285"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "413",
+          "parsedValues": ["413"],
+          "primaryValue": "413"
+        },
+        "torqueNmGain": {
+          "raw": "27",
+          "parsedValues": ["27"],
+          "primaryValue": "27"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "5.3",
+        "originalBhp": {
+          "raw": "355",
+          "parsedValues": ["355"],
+          "primaryValue": "355"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "519",
+          "parsedValues": ["519"],
+          "primaryValue": "519"
+        },
+        "torqueNmGain": {
+          "raw": "21",
+          "parsedValues": ["21"],
+          "primaryValue": "21"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "6.2",
+        "originalBhp": {
+          "raw": "420",
+          "parsedValues": ["420"],
+          "primaryValue": "420"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "609",
+          "parsedValues": ["609"],
+          "primaryValue": "609"
+        },
+        "torqueNmGain": {
+          "raw": "21",
+          "parsedValues": ["21"],
+          "primaryValue": "21"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "6.6",
+        "originalBhp": {
+          "raw": "365",
+          "parsedValues": ["365"],
+          "primaryValue": "365"
+        },
+        "powerBhpGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "894",
+          "parsedValues": ["894"],
+          "primaryValue": "894"
+        },
+        "torqueNmGain": {
+          "raw": "51",
+          "parsedValues": ["51"],
+          "primaryValue": "51"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Gmc",
+    "model": "Sierra",
+    "modelSlug": "sierra",
+    "sourceProductId": 20098,
+    "sourceUrl": "https://viezu.com/shop/gmc-sierra-2008-2013/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "4.3",
+        "originalBhp": {
+          "raw": "195",
+          "parsedValues": ["195"],
+          "primaryValue": "195"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "353",
+          "parsedValues": ["353"],
+          "primaryValue": "353"
+        },
+        "torqueNmGain": {
+          "raw": "17",
+          "parsedValues": ["17"],
+          "primaryValue": "17"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "4.8",
+        "originalBhp": {
+          "raw": "302",
+          "parsedValues": ["302"],
+          "primaryValue": "302"
+        },
+        "powerBhpGain": {
+          "raw": "18",
+          "parsedValues": ["18"],
+          "primaryValue": "18"
+        },
+        "originalTorque": {
+          "raw": "414",
+          "parsedValues": ["414"],
+          "primaryValue": "414"
+        },
+        "torqueNmGain": {
+          "raw": "21",
+          "parsedValues": ["21"],
+          "primaryValue": "21"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "5.3",
+        "originalBhp": {
+          "raw": "326",
+          "parsedValues": ["326"],
+          "primaryValue": "326"
+        },
+        "powerBhpGain": {
+          "raw": "19",
+          "parsedValues": ["19"],
+          "primaryValue": "19"
+        },
+        "originalTorque": {
+          "raw": "472",
+          "parsedValues": ["472"],
+          "primaryValue": "472"
+        },
+        "torqueNmGain": {
+          "raw": "23",
+          "parsedValues": ["23"],
+          "primaryValue": "23"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "6.0",
+        "originalBhp": {
+          "raw": "360",
+          "parsedValues": ["360"],
+          "primaryValue": "360"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "515",
+          "parsedValues": ["515"],
+          "primaryValue": "515"
+        },
+        "torqueNmGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "6.2",
+        "originalBhp": {
+          "raw": "403",
+          "parsedValues": ["403"],
+          "primaryValue": "403"
+        },
+        "powerBhpGain": {
+          "raw": "22",
+          "parsedValues": ["22"],
+          "primaryValue": "22"
+        },
+        "originalTorque": {
+          "raw": "565",
+          "parsedValues": ["565"],
+          "primaryValue": "565"
+        },
+        "torqueNmGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "6.6",
+        "originalBhp": {
+          "raw": "365",
+          "parsedValues": ["365"],
+          "primaryValue": "365"
+        },
+        "powerBhpGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "894",
+          "parsedValues": ["894"],
+          "primaryValue": "894"
+        },
+        "torqueNmGain": {
+          "raw": "51",
+          "parsedValues": ["51"],
+          "primaryValue": "51"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Gmc",
+    "model": "Sierra",
+    "modelSlug": "sierra",
+    "sourceProductId": 20091,
+    "sourceUrl": "https://viezu.com/shop/gmc-sierra-1999-2007/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "4.3",
+        "originalBhp": {
+          "raw": "200",
+          "parsedValues": ["200"],
+          "primaryValue": "200"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "350",
+          "parsedValues": ["350"],
+          "primaryValue": "350"
+        },
+        "torqueNmGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "4.8",
+        "originalBhp": {
+          "raw": "295",
+          "parsedValues": ["295"],
+          "primaryValue": "295"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "414",
+          "parsedValues": ["414"],
+          "primaryValue": "414"
+        },
+        "torqueNmGain": {
+          "raw": "21",
+          "parsedValues": ["21"],
+          "primaryValue": "21"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "5.3",
+        "originalBhp": {
+          "raw": "295",
+          "parsedValues": ["295"],
+          "primaryValue": "295"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "447",
+          "parsedValues": ["447"],
+          "primaryValue": "447"
+        },
+        "torqueNmGain": {
+          "raw": "23",
+          "parsedValues": ["23"],
+          "primaryValue": "23"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "6.0",
+        "originalBhp": {
+          "raw": "360",
+          "parsedValues": ["360"],
+          "primaryValue": "360"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "525",
+          "parsedValues": ["525"],
+          "primaryValue": "525"
+        },
+        "torqueNmGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "8.1",
+        "originalBhp": {
+          "raw": "330",
+          "parsedValues": ["330"],
+          "primaryValue": "330"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "610",
+          "parsedValues": ["610"],
+          "primaryValue": "610"
+        },
+        "torqueNmGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "6.6",
+        "originalBhp": {
+          "raw": "365",
+          "parsedValues": ["365"],
+          "primaryValue": "365"
+        },
+        "powerBhpGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "894",
+          "parsedValues": ["894"],
+          "primaryValue": "894"
+        },
+        "torqueNmGain": {
+          "raw": "51",
+          "parsedValues": ["51"],
+          "primaryValue": "51"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Gmc",
+    "model": "Savana",
+    "modelSlug": "savana",
+    "sourceProductId": 20084,
+    "sourceUrl": "https://viezu.com/shop/gmc-savana-2003-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "4.3",
+        "originalBhp": {
+          "raw": "200",
+          "parsedValues": ["200"],
+          "primaryValue": "200"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "353",
+          "parsedValues": ["353"],
+          "primaryValue": "353"
+        },
+        "torqueNmGain": {
+          "raw": "27",
+          "parsedValues": ["27"],
+          "primaryValue": "27"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "4.8",
+        "originalBhp": {
+          "raw": "275",
+          "parsedValues": ["275"],
+          "primaryValue": "275"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "393",
+          "parsedValues": ["393"],
+          "primaryValue": "393"
+        },
+        "torqueNmGain": {
+          "raw": "22",
+          "parsedValues": ["22"],
+          "primaryValue": "22"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "5.3",
+        "originalBhp": {
+          "raw": "310",
+          "parsedValues": ["310"],
+          "primaryValue": "310"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "453",
+          "parsedValues": ["453"],
+          "primaryValue": "453"
+        },
+        "torqueNmGain": {
+          "raw": "27",
+          "parsedValues": ["27"],
+          "primaryValue": "27"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "5.7",
+        "originalBhp": {
+          "raw": "255",
+          "parsedValues": ["255"],
+          "primaryValue": "255"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "447",
+          "parsedValues": ["447"],
+          "primaryValue": "447"
+        },
+        "torqueNmGain": {
+          "raw": "23",
+          "parsedValues": ["23"],
+          "primaryValue": "23"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "6.0",
+        "originalBhp": {
+          "raw": "342",
+          "parsedValues": ["342"],
+          "primaryValue": "342"
+        },
+        "powerBhpGain": {
+          "raw": "18",
+          "parsedValues": ["18"],
+          "primaryValue": "18"
+        },
+        "originalTorque": {
+          "raw": "506",
+          "parsedValues": ["506"],
+          "primaryValue": "506"
+        },
+        "torqueNmGain": {
+          "raw": "24",
+          "parsedValues": ["24"],
+          "primaryValue": "24"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Gmc",
+    "model": "Safari",
+    "modelSlug": "safari",
+    "sourceProductId": 20082,
+    "sourceUrl": "https://viezu.com/shop/gmc-safari-2001-2005/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "4.3",
+        "originalBhp": {
+          "raw": "190",
+          "parsedValues": ["190"],
+          "primaryValue": "190"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "339",
+          "parsedValues": ["339"],
+          "primaryValue": "339"
+        },
+        "torqueNmGain": {
+          "raw": "21",
+          "parsedValues": ["21"],
+          "primaryValue": "21"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Gmc",
+    "model": "Envoy",
+    "modelSlug": "envoy",
+    "sourceProductId": 20079,
+    "sourceUrl": "https://viezu.com/shop/gmc-envoy-2002-2010/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "4.2",
+        "originalBhp": {
+          "raw": "279",
+          "parsedValues": ["279"],
+          "primaryValue": "279"
+        },
+        "powerBhpGain": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "originalTorque": {
+          "raw": "373",
+          "parsedValues": ["373"],
+          "primaryValue": "373"
+        },
+        "torqueNmGain": {
+          "raw": "22",
+          "parsedValues": ["22"],
+          "primaryValue": "22"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "5.3",
+        "originalBhp": {
+          "raw": "290 | 300",
+          "parsedValues": ["290", "300"],
+          "primaryValue": "290",
+          "secondaryValue": "300"
+        },
+        "powerBhpGain": {
+          "raw": "20 | 20",
+          "parsedValues": ["20", "20"],
+          "primaryValue": "20",
+          "secondaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "441 | 447",
+          "parsedValues": ["441", "447"],
+          "primaryValue": "441",
+          "secondaryValue": "447"
+        },
+        "torqueNmGain": {
+          "raw": "19 | 23",
+          "parsedValues": ["19", "23"],
+          "primaryValue": "19",
+          "secondaryValue": "23"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Gmc",
+    "model": "Canyon",
+    "modelSlug": "canyon",
+    "sourceProductId": 20076,
+    "sourceUrl": "https://viezu.com/shop/gmc-canyon-2016-present/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.8",
+        "originalBhp": {
+          "raw": "181",
+          "parsedValues": ["181"],
+          "primaryValue": "181"
+        },
+        "powerBhpGain": {
+          "raw": "29",
+          "parsedValues": ["29"],
+          "primaryValue": "29"
+        },
+        "originalTorque": {
+          "raw": "500",
+          "parsedValues": ["500"],
+          "primaryValue": "500"
+        },
+        "torqueNmGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "3.6",
+        "originalBhp": {
+          "raw": "308",
+          "parsedValues": ["308"],
+          "primaryValue": "308"
+        },
+        "powerBhpGain": {
+          "raw": "22",
+          "parsedValues": ["22"],
+          "primaryValue": "22"
+        },
+        "originalTorque": {
+          "raw": "373",
+          "parsedValues": ["373"],
+          "primaryValue": "373"
+        },
+        "torqueNmGain": {
+          "raw": "22",
+          "parsedValues": ["22"],
+          "primaryValue": "22"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Gmc",
+    "model": "Canyon",
+    "modelSlug": "canyon",
+    "sourceProductId": 20070,
+    "sourceUrl": "https://viezu.com/shop/gmc-canyon-2003-2012/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "2.8",
+        "originalBhp": {
+          "raw": "175",
+          "parsedValues": ["175"],
+          "primaryValue": "175"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "251",
+          "parsedValues": ["251"],
+          "primaryValue": "251"
+        },
+        "torqueNmGain": {
+          "raw": "19",
+          "parsedValues": ["19"],
+          "primaryValue": "19"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "2.9",
+        "originalBhp": {
+          "raw": "185",
+          "parsedValues": ["185"],
+          "primaryValue": "185"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "258",
+          "parsedValues": ["258"],
+          "primaryValue": "258"
+        },
+        "torqueNmGain": {
+          "raw": "32",
+          "parsedValues": ["32"],
+          "primaryValue": "32"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "3.5",
+        "originalBhp": {
+          "raw": "220",
+          "parsedValues": ["220"],
+          "primaryValue": "220"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "305",
+          "parsedValues": ["305"],
+          "primaryValue": "305"
+        },
+        "torqueNmGain": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "3.7",
+        "originalBhp": {
+          "raw": "242",
+          "parsedValues": ["242"],
+          "primaryValue": "242"
+        },
+        "powerBhpGain": {
+          "raw": "23",
+          "parsedValues": ["23"],
+          "primaryValue": "23"
+        },
+        "originalTorque": {
+          "raw": "328",
+          "parsedValues": ["328"],
+          "primaryValue": "328"
+        },
+        "torqueNmGain": {
+          "raw": "22",
+          "parsedValues": ["22"],
+          "primaryValue": "22"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "5.3",
+        "originalBhp": {
+          "raw": "300",
+          "parsedValues": ["300"],
+          "primaryValue": "300"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "434",
+          "parsedValues": ["434"],
+          "primaryValue": "434"
+        },
+        "torqueNmGain": {
+          "raw": "21",
+          "parsedValues": ["21"],
+          "primaryValue": "21"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Gmc",
+    "model": "Acadia",
+    "modelSlug": "acadia",
+    "sourceProductId": 20068,
+    "sourceUrl": "https://viezu.com/shop/gmc-acadia-2017-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "3.6",
+        "originalBhp": {
+          "raw": "310",
+          "parsedValues": ["310"],
+          "primaryValue": "310"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "367",
+          "parsedValues": ["367"],
+          "primaryValue": "367"
+        },
+        "torqueNmGain": {
+          "raw": "23",
+          "parsedValues": ["23"],
+          "primaryValue": "23"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Gmc",
+    "model": "Acadia",
+    "modelSlug": "acadia",
+    "sourceProductId": 20066,
+    "sourceUrl": "https://viezu.com/shop/gmc-acadia-2007-2013/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "3.6",
+        "originalBhp": {
+          "raw": "275 | 288",
+          "parsedValues": ["275", "288"],
+          "primaryValue": "275",
+          "secondaryValue": "288"
+        },
+        "powerBhpGain": {
+          "raw": "20 | 22",
+          "parsedValues": ["20", "22"],
+          "primaryValue": "20",
+          "secondaryValue": "22"
+        },
+        "originalTorque": {
+          "raw": "251 | 366",
+          "parsedValues": ["251", "366"],
+          "primaryValue": "251",
+          "secondaryValue": "366"
+        },
+        "torqueNmGain": {
+          "raw": "29 | 29",
+          "parsedValues": ["29", "29"],
+          "primaryValue": "29",
+          "secondaryValue": "29"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  }
+]

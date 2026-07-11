@@ -1,0 +1,51 @@
+[
+  {
+    "make": "Daihatsu",
+    "model": "Terios",
+    "modelSlug": "terios",
+    "sourceProductId": 51108,
+    "sourceUrl": "https://viezu.com/shop/daihatsu-terios-all/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.3",
+        "originalBhp": {
+          "raw": "84",
+          "parsedValues": ["84"],
+          "primaryValue": "84"
+        },
+        "powerBhpGain": {
+          "raw": "8",
+          "parsedValues": ["8"],
+          "primaryValue": "8"
+        },
+        "originalTorque": {
+          "raw": "125",
+          "parsedValues": ["125"],
+          "primaryValue": "125"
+        },
+        "torqueNmGain": {
+          "raw": "12",
+          "parsedValues": ["12"],
+          "primaryValue": "12"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      }
+    ]
+  }
+]

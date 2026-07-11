@@ -1,0 +1,193 @@
+[
+  {
+    "make": "Abarth",
+    "model": "PUNTO EVO",
+    "modelSlug": "punto-evo",
+    "sourceProductId": 47996,
+    "sourceUrl": "https://viezu.com/shop/abarth-punto-evo-2009-2012/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.4",
+        "originalBhp": {
+          "raw": "161 | 177",
+          "parsedValues": ["161", "177"],
+          "primaryValue": "161",
+          "secondaryValue": "177"
+        },
+        "powerBhpGain": {
+          "raw": "44 | 43",
+          "parsedValues": ["44", "43"],
+          "primaryValue": "44",
+          "secondaryValue": "43"
+        },
+        "originalTorque": {
+          "raw": "250 | 270",
+          "parsedValues": ["250", "270"],
+          "primaryValue": "250",
+          "secondaryValue": "270"
+        },
+        "torqueNmGain": {
+          "raw": "20 | 150",
+          "parsedValues": ["20", "150"],
+          "primaryValue": "20",
+          "secondaryValue": "150"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 17500
+      }
+    ]
+  },
+  {
+    "make": "Abarth",
+    "model": "GRANDE PUNTO",
+    "modelSlug": "grande-punto",
+    "sourceProductId": 47995,
+    "sourceUrl": "https://viezu.com/shop/abarth-grande-punto-2007-2010/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.4",
+        "originalBhp": {
+          "raw": "153",
+          "parsedValues": ["153"],
+          "primaryValue": "153"
+        },
+        "powerBhpGain": {
+          "raw": "27",
+          "parsedValues": ["27"],
+          "primaryValue": "27"
+        },
+        "originalTorque": {
+          "raw": "230",
+          "parsedValues": ["230"],
+          "primaryValue": "230"
+        },
+        "torqueNmGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 17500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.4",
+        "originalBhp": {
+          "raw": "177",
+          "parsedValues": ["177"],
+          "primaryValue": "177"
+        },
+        "powerBhpGain": {
+          "raw": "28",
+          "parsedValues": ["28"],
+          "primaryValue": "28"
+        },
+        "originalTorque": {
+          "raw": "270",
+          "parsedValues": ["270"],
+          "primaryValue": "270"
+        },
+        "torqueNmGain": {
+          "raw": "150",
+          "parsedValues": ["150"],
+          "primaryValue": "150"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 17500
+      }
+    ]
+  },
+  {
+    "make": "Abarth",
+    "model": "124",
+    "modelSlug": "124",
+    "sourceProductId": 47927,
+    "sourceUrl": "https://viezu.com/shop/abarth-124-2016/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.4",
+        "originalBhp": {
+          "raw": "168",
+          "parsedValues": ["168"],
+          "primaryValue": "168"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "250",
+          "parsedValues": ["250"],
+          "primaryValue": "250"
+        },
+        "torqueNmGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 17500
+      }
+    ]
+  }
+]

@@ -1,0 +1,1303 @@
+[
+  {
+    "make": "Saab",
+    "model": "900 Cabriolet",
+    "modelSlug": "900-cabriolet",
+    "sourceProductId": 22654,
+    "sourceUrl": "https://viezu.com/shop/saab-900-cabriolet-all/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "185",
+          "parsedValues": ["185"],
+          "primaryValue": "185"
+        },
+        "powerBhpGain": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "230",
+          "parsedValues": ["230"],
+          "primaryValue": "230"
+        },
+        "torqueNmGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Saab",
+    "model": "9-5",
+    "modelSlug": "9-5",
+    "sourceProductId": 22647,
+    "sourceUrl": "https://viezu.com/shop/saab-9-5-2010-2011/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "180",
+          "parsedValues": ["180"],
+          "primaryValue": "180"
+        },
+        "powerBhpGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "230",
+          "parsedValues": ["230"],
+          "primaryValue": "230"
+        },
+        "torqueNmGain": {
+          "raw": "70",
+          "parsedValues": ["70"],
+          "primaryValue": "70"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "220",
+          "parsedValues": ["220"],
+          "primaryValue": "220"
+        },
+        "powerBhpGain": {
+          "raw": "75",
+          "parsedValues": ["75"],
+          "primaryValue": "75"
+        },
+        "originalTorque": {
+          "raw": "350",
+          "parsedValues": ["350"],
+          "primaryValue": "350"
+        },
+        "torqueNmGain": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "2.8",
+        "originalBhp": {
+          "raw": "300",
+          "parsedValues": ["300"],
+          "primaryValue": "300"
+        },
+        "powerBhpGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "originalTorque": {
+          "raw": "400",
+          "parsedValues": ["400"],
+          "primaryValue": "400"
+        },
+        "torqueNmGain": {
+          "raw": "70",
+          "parsedValues": ["70"],
+          "primaryValue": "70"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "3.0",
+        "originalBhp": {
+          "raw": "200",
+          "parsedValues": ["200"],
+          "primaryValue": "200"
+        },
+        "powerBhpGain": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "originalTorque": {
+          "raw": "310",
+          "parsedValues": ["310"],
+          "primaryValue": "310"
+        },
+        "torqueNmGain": {
+          "raw": "70",
+          "parsedValues": ["70"],
+          "primaryValue": "70"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "160 | 190",
+          "parsedValues": ["160", "190"],
+          "primaryValue": "160",
+          "secondaryValue": "190"
+        },
+        "powerBhpGain": {
+          "raw": "30 | 35",
+          "parsedValues": ["30", "35"],
+          "primaryValue": "30",
+          "secondaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "350 | 400",
+          "parsedValues": ["350", "400"],
+          "primaryValue": "350",
+          "secondaryValue": "400"
+        },
+        "torqueNmGain": {
+          "raw": "60 | 80",
+          "parsedValues": ["60", "80"],
+          "primaryValue": "60",
+          "secondaryValue": "80"
+        },
+        "economyGainBhp": {
+          "raw": "15 | 20",
+          "parsedValues": ["15", "20"],
+          "primaryValue": "15",
+          "secondaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "30 | 40",
+          "parsedValues": ["30", "40"],
+          "primaryValue": "30",
+          "secondaryValue": "40"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "3.0",
+        "originalBhp": {
+          "raw": "177",
+          "parsedValues": ["177"],
+          "primaryValue": "177"
+        },
+        "powerBhpGain": {
+          "raw": "31",
+          "parsedValues": ["31"],
+          "primaryValue": "31"
+        },
+        "originalTorque": {
+          "raw": "350",
+          "parsedValues": ["350"],
+          "primaryValue": "350"
+        },
+        "torqueNmGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Saab",
+    "model": "9-5",
+    "modelSlug": "9-5",
+    "sourceProductId": 22643,
+    "sourceUrl": "https://viezu.com/shop/9-5-2005-2010/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "1.9",
+        "originalBhp": {
+          "raw": "150",
+          "parsedValues": ["150"],
+          "primaryValue": "150"
+        },
+        "powerBhpGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "originalTorque": {
+          "raw": "320",
+          "parsedValues": ["320"],
+          "primaryValue": "320"
+        },
+        "torqueNmGain": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "150",
+          "parsedValues": ["150"],
+          "primaryValue": "150"
+        },
+        "powerBhpGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "originalTorque": {
+          "raw": "240",
+          "parsedValues": ["240"],
+          "primaryValue": "240"
+        },
+        "torqueNmGain": {
+          "raw": "70",
+          "parsedValues": ["70"],
+          "primaryValue": "70"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "2.3",
+        "originalBhp": {
+          "raw": "185 | 220 | 260",
+          "parsedValues": ["185", "220", "260"],
+          "primaryValue": "185",
+          "secondaryValue": "220"
+        },
+        "powerBhpGain": {
+          "raw": "40 | 35 | 30",
+          "parsedValues": ["40", "35", "30"],
+          "primaryValue": "40",
+          "secondaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "280 | 310 | 350",
+          "parsedValues": ["280", "310", "350"],
+          "primaryValue": "280",
+          "secondaryValue": "310"
+        },
+        "torqueNmGain": {
+          "raw": "85 | 55 | 60",
+          "parsedValues": ["85", "55", "60"],
+          "primaryValue": "85",
+          "secondaryValue": "55"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Saab",
+    "model": "9-5",
+    "modelSlug": "9-5",
+    "sourceProductId": 22638,
+    "sourceUrl": "https://viezu.com/shop/9-5-2001-2005/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "150",
+          "parsedValues": ["150"],
+          "primaryValue": "150"
+        },
+        "powerBhpGain": {
+          "raw": "32",
+          "parsedValues": ["32"],
+          "primaryValue": "32"
+        },
+        "originalTorque": {
+          "raw": "240",
+          "parsedValues": ["240"],
+          "primaryValue": "240"
+        },
+        "torqueNmGain": {
+          "raw": "55",
+          "parsedValues": ["55"],
+          "primaryValue": "55"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "2.3",
+        "originalBhp": {
+          "raw": "185 | 220 | 250",
+          "parsedValues": ["185", "220", "250"],
+          "primaryValue": "185",
+          "secondaryValue": "220"
+        },
+        "powerBhpGain": {
+          "raw": "35 | 35 | 30",
+          "parsedValues": ["35", "35", "30"],
+          "primaryValue": "35",
+          "secondaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "280 | 310 | 350",
+          "parsedValues": ["280", "310", "350"],
+          "primaryValue": "280",
+          "secondaryValue": "310"
+        },
+        "torqueNmGain": {
+          "raw": "60 | 55 | 60",
+          "parsedValues": ["60", "55", "60"],
+          "primaryValue": "60",
+          "secondaryValue": "55"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "3.0",
+        "originalBhp": {
+          "raw": "200",
+          "parsedValues": ["200"],
+          "primaryValue": "200"
+        },
+        "powerBhpGain": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "originalTorque": {
+          "raw": "310",
+          "parsedValues": ["310"],
+          "primaryValue": "310"
+        },
+        "torqueNmGain": {
+          "raw": "70",
+          "parsedValues": ["70"],
+          "primaryValue": "70"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "3.0",
+        "originalBhp": {
+          "raw": "176",
+          "parsedValues": ["176"],
+          "primaryValue": "176"
+        },
+        "powerBhpGain": {
+          "raw": "32",
+          "parsedValues": ["32"],
+          "primaryValue": "32"
+        },
+        "originalTorque": {
+          "raw": "350",
+          "parsedValues": ["350"],
+          "primaryValue": "350"
+        },
+        "torqueNmGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Saab",
+    "model": "9-5",
+    "modelSlug": "9-5",
+    "sourceProductId": 22634,
+    "sourceUrl": "https://viezu.com/shop/saab-9-5-1997-2001/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "150",
+          "parsedValues": ["150"],
+          "primaryValue": "150"
+        },
+        "powerBhpGain": {
+          "raw": "32",
+          "parsedValues": ["32"],
+          "primaryValue": "32"
+        },
+        "originalTorque": {
+          "raw": "240",
+          "parsedValues": ["240"],
+          "primaryValue": "240"
+        },
+        "torqueNmGain": {
+          "raw": "55",
+          "parsedValues": ["55"],
+          "primaryValue": "55"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "2.3",
+        "originalBhp": {
+          "raw": "170 | 185 | 230",
+          "parsedValues": ["170", "185", "230"],
+          "primaryValue": "170",
+          "secondaryValue": "185"
+        },
+        "powerBhpGain": {
+          "raw": "30 | 35 | 35",
+          "parsedValues": ["30", "35", "35"],
+          "primaryValue": "30",
+          "secondaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "280 | 280 | 350",
+          "parsedValues": ["280", "280", "350"],
+          "primaryValue": "280",
+          "secondaryValue": "280"
+        },
+        "torqueNmGain": {
+          "raw": "45 | 60 | 55",
+          "parsedValues": ["45", "60", "55"],
+          "primaryValue": "45",
+          "secondaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "3.0",
+        "originalBhp": {
+          "raw": "200",
+          "parsedValues": ["200"],
+          "primaryValue": "200"
+        },
+        "powerBhpGain": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "originalTorque": {
+          "raw": "310",
+          "parsedValues": ["310"],
+          "primaryValue": "310"
+        },
+        "torqueNmGain": {
+          "raw": "70",
+          "parsedValues": ["70"],
+          "primaryValue": "70"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Saab",
+    "model": "9-3",
+    "modelSlug": "9-3",
+    "sourceProductId": 22630,
+    "sourceUrl": "https://viezu.com/shop/9-3-2010-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "150 | 175 | 210",
+          "parsedValues": ["150", "175", "210"],
+          "primaryValue": "150",
+          "secondaryValue": "175"
+        },
+        "powerBhpGain": {
+          "raw": "50 | 30 | 30",
+          "parsedValues": ["50", "30", "30"],
+          "primaryValue": "50",
+          "secondaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "240 | 265 | 300",
+          "parsedValues": ["240", "265", "300"],
+          "primaryValue": "240",
+          "secondaryValue": "265"
+        },
+        "torqueNmGain": {
+          "raw": "60 | 55 | 50",
+          "parsedValues": ["60", "55", "50"],
+          "primaryValue": "60",
+          "secondaryValue": "55"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "2.8",
+        "originalBhp": {
+          "raw": "280",
+          "parsedValues": ["280"],
+          "primaryValue": "280"
+        },
+        "powerBhpGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "400",
+          "parsedValues": ["400"],
+          "primaryValue": "400"
+        },
+        "torqueNmGain": {
+          "raw": "70",
+          "parsedValues": ["70"],
+          "primaryValue": "70"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.9",
+        "originalBhp": {
+          "raw": "130 | 160 | 180",
+          "parsedValues": ["130", "160", "180"],
+          "primaryValue": "130",
+          "secondaryValue": "160"
+        },
+        "powerBhpGain": {
+          "raw": "30 | 30 | 40",
+          "parsedValues": ["30", "30", "40"],
+          "primaryValue": "30",
+          "secondaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "320 | 360 | 400",
+          "parsedValues": ["320", "360", "400"],
+          "primaryValue": "320",
+          "secondaryValue": "360"
+        },
+        "torqueNmGain": {
+          "raw": "60 | 60 | 80",
+          "parsedValues": ["60", "60", "80"],
+          "primaryValue": "60",
+          "secondaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "15 | 15 | 20",
+          "parsedValues": ["15", "15", "20"],
+          "primaryValue": "15",
+          "secondaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "30 | 30 | 40",
+          "parsedValues": ["30", "30", "40"],
+          "primaryValue": "30",
+          "secondaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Saab",
+    "model": "9-3",
+    "modelSlug": "9-3",
+    "sourceProductId": 22626,
+    "sourceUrl": "https://viezu.com/shop/saab-9-3-2007-2010/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "150 | 175 | 175 | 200 | 210",
+          "parsedValues": ["150", "175", "175", "200", "210"],
+          "primaryValue": "150",
+          "secondaryValue": "175"
+        },
+        "powerBhpGain": {
+          "raw": "50 | 30 | 30 | 30 | 30",
+          "parsedValues": ["50", "30", "30", "30", "30"],
+          "primaryValue": "50",
+          "secondaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "240 | 265 | 265 | 300 | 300",
+          "parsedValues": ["240", "265", "265", "300", "300"],
+          "primaryValue": "240",
+          "secondaryValue": "265"
+        },
+        "torqueNmGain": {
+          "raw": "60 | 45 | 55 | 50 | 50",
+          "parsedValues": ["60", "45", "55", "50", "50"],
+          "primaryValue": "60",
+          "secondaryValue": "45"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "2.8",
+        "originalBhp": {
+          "raw": "250 | 280",
+          "parsedValues": ["250", "280"],
+          "primaryValue": "250",
+          "secondaryValue": "280"
+        },
+        "powerBhpGain": {
+          "raw": "60 | 30",
+          "parsedValues": ["60", "30"],
+          "primaryValue": "60",
+          "secondaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "400 | 400",
+          "parsedValues": ["400", "400"],
+          "primaryValue": "400",
+          "secondaryValue": "400"
+        },
+        "torqueNmGain": {
+          "raw": "70 | 70",
+          "parsedValues": ["70", "70"],
+          "primaryValue": "70",
+          "secondaryValue": "70"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.9",
+        "originalBhp": {
+          "raw": "120 | 150 | 180",
+          "parsedValues": ["120", "150", "180"],
+          "primaryValue": "120",
+          "secondaryValue": "150"
+        },
+        "powerBhpGain": {
+          "raw": "30 | 35 | 40",
+          "parsedValues": ["30", "35", "40"],
+          "primaryValue": "30",
+          "secondaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "280 | 320 | 400",
+          "parsedValues": ["280", "320", "400"],
+          "primaryValue": "280",
+          "secondaryValue": "320"
+        },
+        "torqueNmGain": {
+          "raw": "60 | 70 | 80",
+          "parsedValues": ["60", "70", "80"],
+          "primaryValue": "60",
+          "secondaryValue": "70"
+        },
+        "economyGainBhp": {
+          "raw": "15 | 20 | 20",
+          "parsedValues": ["15", "20", "20"],
+          "primaryValue": "15",
+          "secondaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "30 | 35 | 40",
+          "parsedValues": ["30", "35", "40"],
+          "primaryValue": "30",
+          "secondaryValue": "35"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Saab",
+    "model": "9-3",
+    "modelSlug": "9-3",
+    "sourceProductId": 22622,
+    "sourceUrl": "https://viezu.com/shop/saab-9-3-2002-2007/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "2.8",
+        "originalBhp": {
+          "raw": "250",
+          "parsedValues": ["250"],
+          "primaryValue": "250"
+        },
+        "powerBhpGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "originalTorque": {
+          "raw": "350",
+          "parsedValues": ["350"],
+          "primaryValue": "350"
+        },
+        "torqueNmGain": {
+          "raw": "70",
+          "parsedValues": ["70"],
+          "primaryValue": "70"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "150 | 175 | 185 | 210",
+          "parsedValues": ["150", "175", "185", "210"],
+          "primaryValue": "150",
+          "secondaryValue": "175"
+        },
+        "powerBhpGain": {
+          "raw": "50 | 40 | 30 | 25",
+          "parsedValues": ["50", "40", "30", "25"],
+          "primaryValue": "50",
+          "secondaryValue": "40"
+        },
+        "originalTorque": {
+          "raw": "240 | 265 | 263 | 300",
+          "parsedValues": ["240", "265", "263", "300"],
+          "primaryValue": "240",
+          "secondaryValue": "265"
+        },
+        "torqueNmGain": {
+          "raw": "60 | 55 | 52 | 50",
+          "parsedValues": ["60", "55", "52", "50"],
+          "primaryValue": "60",
+          "secondaryValue": "55"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.9",
+        "originalBhp": {
+          "raw": "120 | 150",
+          "parsedValues": ["120", "150"],
+          "primaryValue": "120",
+          "secondaryValue": "150"
+        },
+        "powerBhpGain": {
+          "raw": "30 | 40",
+          "parsedValues": ["30", "40"],
+          "primaryValue": "30",
+          "secondaryValue": "40"
+        },
+        "originalTorque": {
+          "raw": "280 | 320",
+          "parsedValues": ["280", "320"],
+          "primaryValue": "280",
+          "secondaryValue": "320"
+        },
+        "torqueNmGain": {
+          "raw": "60 | 80",
+          "parsedValues": ["60", "80"],
+          "primaryValue": "60",
+          "secondaryValue": "80"
+        },
+        "economyGainBhp": {
+          "raw": "15 | 20",
+          "parsedValues": ["15", "20"],
+          "primaryValue": "15",
+          "secondaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "30 | 40",
+          "parsedValues": ["30", "40"],
+          "primaryValue": "30",
+          "secondaryValue": "40"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Saab",
+    "model": "9-3",
+    "modelSlug": "9-3",
+    "sourceProductId": 22619,
+    "sourceUrl": "https://viezu.com/shop/saab-9-3-1998-2002/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "2.3",
+        "originalBhp": {
+          "raw": "220",
+          "parsedValues": ["220"],
+          "primaryValue": "220"
+        },
+        "powerBhpGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "originalTorque": {
+          "raw": "350",
+          "parsedValues": ["350"],
+          "primaryValue": "350"
+        },
+        "torqueNmGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "150 | 154 | 185 | 200",
+          "parsedValues": ["150", "154", "185", "200"],
+          "primaryValue": "150",
+          "secondaryValue": "154"
+        },
+        "powerBhpGain": {
+          "raw": "35 | 40 | 30 | 40",
+          "parsedValues": ["35", "40", "30", "40"],
+          "primaryValue": "35",
+          "secondaryValue": "40"
+        },
+        "originalTorque": {
+          "raw": "240 | 219 | 263 | 283",
+          "parsedValues": ["240", "219", "263", "283"],
+          "primaryValue": "240",
+          "secondaryValue": "219"
+        },
+        "torqueNmGain": {
+          "raw": "60 | 71 | 52 | 67",
+          "parsedValues": ["60", "71", "52", "67"],
+          "primaryValue": "60",
+          "secondaryValue": "71"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.2",
+        "originalBhp": {
+          "raw": "115",
+          "parsedValues": ["115"],
+          "primaryValue": "115"
+        },
+        "powerBhpGain": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "originalTorque": {
+          "raw": "260",
+          "parsedValues": ["260"],
+          "primaryValue": "260"
+        },
+        "torqueNmGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  }
+]
