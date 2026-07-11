@@ -1,0 +1,55 @@
+[
+  {
+    "make": "Roewe",
+    "model": "550",
+    "modelSlug": "550",
+    "sourceProductId": 22607,
+    "sourceUrl": "https://viezu.com/shop/550-2008-2/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.8",
+        "originalBhp": {
+          "raw": "130 | 160",
+          "parsedValues": ["130", "160"],
+          "primaryValue": "130",
+          "secondaryValue": "160"
+        },
+        "powerBhpGain": {
+          "raw": "10 | 30",
+          "parsedValues": ["10", "30"],
+          "primaryValue": "10",
+          "secondaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "168 | 215",
+          "parsedValues": ["168", "215"],
+          "primaryValue": "168",
+          "secondaryValue": "215"
+        },
+        "torqueNmGain": {
+          "raw": "17 | 70",
+          "parsedValues": ["17", "70"],
+          "primaryValue": "17",
+          "secondaryValue": "70"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  }
+]

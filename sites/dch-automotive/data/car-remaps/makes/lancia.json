@@ -1,0 +1,1107 @@
+[
+  {
+    "make": "Lancia",
+    "model": "Ypsilon",
+    "modelSlug": "ypsilon",
+    "sourceProductId": 20737,
+    "sourceUrl": "https://viezu.com/shop/lancia-ypsilon-2016-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "0.9",
+        "originalBhp": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "145",
+          "parsedValues": ["145"],
+          "primaryValue": "145"
+        },
+        "torqueNmGain": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      }
+    ]
+  },
+  {
+    "make": "Lancia",
+    "model": "Ypsilon",
+    "modelSlug": "ypsilon",
+    "sourceProductId": 20734,
+    "sourceUrl": "https://viezu.com/shop/lancia-ypsilon-2011-2015/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.2",
+        "originalBhp": {
+          "raw": "70",
+          "parsedValues": ["70"],
+          "primaryValue": "70"
+        },
+        "powerBhpGain": {
+          "raw": "7",
+          "parsedValues": ["7"],
+          "primaryValue": "7"
+        },
+        "originalTorque": {
+          "raw": "102",
+          "parsedValues": ["102"],
+          "primaryValue": "102"
+        },
+        "torqueNmGain": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "0.9",
+        "originalBhp": {
+          "raw": "80 | 85",
+          "parsedValues": ["80", "85"],
+          "primaryValue": "80",
+          "secondaryValue": "85"
+        },
+        "powerBhpGain": {
+          "raw": "20 | 15",
+          "parsedValues": ["20", "15"],
+          "primaryValue": "20",
+          "secondaryValue": "15"
+        },
+        "originalTorque": {
+          "raw": "145 | 145",
+          "parsedValues": ["145", "145"],
+          "primaryValue": "145",
+          "secondaryValue": "145"
+        },
+        "torqueNmGain": {
+          "raw": "45 | 45",
+          "parsedValues": ["45", "45"],
+          "primaryValue": "45",
+          "secondaryValue": "45"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      }
+    ]
+  },
+  {
+    "make": "Lancia",
+    "model": "Ypsilon",
+    "modelSlug": "ypsilon",
+    "sourceProductId": 20729,
+    "sourceUrl": "https://viezu.com/shop/lancia-ypsilon-2004-2011/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.2",
+        "originalBhp": {
+          "raw": "80 | 60",
+          "parsedValues": ["80", "60"],
+          "primaryValue": "80",
+          "secondaryValue": "60"
+        },
+        "powerBhpGain": {
+          "raw": "8 | 8",
+          "parsedValues": ["8", "8"],
+          "primaryValue": "8",
+          "secondaryValue": "8"
+        },
+        "originalTorque": {
+          "raw": "114 | 102",
+          "parsedValues": ["114", "102"],
+          "primaryValue": "114",
+          "secondaryValue": "102"
+        },
+        "torqueNmGain": {
+          "raw": "11 | 10",
+          "parsedValues": ["11", "10"],
+          "primaryValue": "11",
+          "secondaryValue": "10"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.4",
+        "originalBhp": {
+          "raw": "95 | 77",
+          "parsedValues": ["95", "77"],
+          "primaryValue": "95",
+          "secondaryValue": "77"
+        },
+        "powerBhpGain": {
+          "raw": "12 | 8",
+          "parsedValues": ["12", "8"],
+          "primaryValue": "12",
+          "secondaryValue": "8"
+        },
+        "originalTorque": {
+          "raw": "128 | 113",
+          "parsedValues": ["128", "113"],
+          "primaryValue": "128",
+          "secondaryValue": "113"
+        },
+        "torqueNmGain": {
+          "raw": "16 | 12",
+          "parsedValues": ["16", "12"],
+          "primaryValue": "16",
+          "secondaryValue": "12"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.3",
+        "originalBhp": {
+          "raw": "70 | 90",
+          "parsedValues": ["70", "90"],
+          "primaryValue": "70",
+          "secondaryValue": "90"
+        },
+        "powerBhpGain": {
+          "raw": "15 | 24",
+          "parsedValues": ["15", "24"],
+          "primaryValue": "15",
+          "secondaryValue": "24"
+        },
+        "originalTorque": {
+          "raw": "180 | 200",
+          "parsedValues": ["180", "200"],
+          "primaryValue": "180",
+          "secondaryValue": "200"
+        },
+        "torqueNmGain": {
+          "raw": "40 | 45",
+          "parsedValues": ["40", "45"],
+          "primaryValue": "40",
+          "secondaryValue": "45"
+        },
+        "economyGainBhp": {
+          "raw": "10 | 10",
+          "parsedValues": ["10", "10"],
+          "primaryValue": "10",
+          "secondaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "20 | 20",
+          "parsedValues": ["20", "20"],
+          "primaryValue": "20",
+          "secondaryValue": "20"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 22500
+      }
+    ]
+  },
+  {
+    "make": "Lancia",
+    "model": "Voyager",
+    "modelSlug": "voyager",
+    "sourceProductId": 20727,
+    "sourceUrl": "https://viezu.com/shop/voyager-2011-present/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.8",
+        "originalBhp": {
+          "raw": "163 | 178",
+          "parsedValues": ["163", "178"],
+          "primaryValue": "163",
+          "secondaryValue": "178"
+        },
+        "powerBhpGain": {
+          "raw": "32 | 37",
+          "parsedValues": ["32", "37"],
+          "primaryValue": "32",
+          "secondaryValue": "37"
+        },
+        "originalTorque": {
+          "raw": "360 | 360",
+          "parsedValues": ["360", "360"],
+          "primaryValue": "360",
+          "secondaryValue": "360"
+        },
+        "torqueNmGain": {
+          "raw": "60 | 140",
+          "parsedValues": ["60", "140"],
+          "primaryValue": "60",
+          "secondaryValue": "140"
+        },
+        "economyGainBhp": {
+          "raw": "15 | 20",
+          "parsedValues": ["15", "20"],
+          "primaryValue": "15",
+          "secondaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "30 | 70",
+          "parsedValues": ["30", "70"],
+          "primaryValue": "30",
+          "secondaryValue": "70"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Lancia",
+    "model": "Thesis",
+    "modelSlug": "thesis",
+    "sourceProductId": 20724,
+    "sourceUrl": "https://viezu.com/shop/lancia-thesis-2002-2008/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "185",
+          "parsedValues": ["185"],
+          "primaryValue": "185"
+        },
+        "powerBhpGain": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "308",
+          "parsedValues": ["308"],
+          "primaryValue": "308"
+        },
+        "torqueNmGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.4",
+        "originalBhp": {
+          "raw": "150 | 175 | 185",
+          "parsedValues": ["150", "175", "185"],
+          "primaryValue": "150",
+          "secondaryValue": "175"
+        },
+        "powerBhpGain": {
+          "raw": "32 | 33 | 27",
+          "parsedValues": ["32", "33", "27"],
+          "primaryValue": "32",
+          "secondaryValue": "33"
+        },
+        "originalTorque": {
+          "raw": "305 | 380 | 390",
+          "parsedValues": ["305", "380", "390"],
+          "primaryValue": "305",
+          "secondaryValue": "380"
+        },
+        "torqueNmGain": {
+          "raw": "75 | 85 | 95",
+          "parsedValues": ["75", "85", "95"],
+          "primaryValue": "75",
+          "secondaryValue": "85"
+        },
+        "economyGainBhp": {
+          "raw": "15 | 15 | 15",
+          "parsedValues": ["15", "15", "15"],
+          "primaryValue": "15",
+          "secondaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "40 | 40 | 50",
+          "parsedValues": ["40", "40", "50"],
+          "primaryValue": "40",
+          "secondaryValue": "40"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Lancia",
+    "model": "Thema",
+    "modelSlug": "thema",
+    "sourceProductId": 20722,
+    "sourceUrl": "https://viezu.com/shop/lancia-thema-2011-present/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "3.0",
+        "originalBhp": {
+          "raw": "190 | 240",
+          "parsedValues": ["190", "240"],
+          "primaryValue": "190",
+          "secondaryValue": "240"
+        },
+        "powerBhpGain": {
+          "raw": "80 | 30",
+          "parsedValues": ["80", "30"],
+          "primaryValue": "80",
+          "secondaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "440 | 550",
+          "parsedValues": ["440", "550"],
+          "primaryValue": "440",
+          "secondaryValue": "550"
+        },
+        "torqueNmGain": {
+          "raw": "190 | 80",
+          "parsedValues": ["190", "80"],
+          "primaryValue": "190",
+          "secondaryValue": "80"
+        },
+        "economyGainBhp": {
+          "raw": "40 | 15",
+          "parsedValues": ["40", "15"],
+          "primaryValue": "40",
+          "secondaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "95 | 40",
+          "parsedValues": ["95", "40"],
+          "primaryValue": "95",
+          "secondaryValue": "40"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Lancia",
+    "model": "Phedra",
+    "modelSlug": "phedra",
+    "sourceProductId": 20719,
+    "sourceUrl": "https://viezu.com/shop/lancia-phedra-all/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "110 | 120 | 136",
+          "parsedValues": ["110", "120", "136"],
+          "primaryValue": "110",
+          "secondaryValue": "120"
+        },
+        "powerBhpGain": {
+          "raw": "22 | 45 | 29",
+          "parsedValues": ["22", "45", "29"],
+          "primaryValue": "22",
+          "secondaryValue": "45"
+        },
+        "originalTorque": {
+          "raw": "250 | 300 | 320",
+          "parsedValues": ["250", "300", "320"],
+          "primaryValue": "250",
+          "secondaryValue": "300"
+        },
+        "torqueNmGain": {
+          "raw": "45 | 90 | 55",
+          "parsedValues": ["45", "90", "55"],
+          "primaryValue": "45",
+          "secondaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "10 | 20 | 15",
+          "parsedValues": ["10", "20", "15"],
+          "primaryValue": "10",
+          "secondaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "20 | 45 | 30",
+          "parsedValues": ["20", "45", "30"],
+          "primaryValue": "20",
+          "secondaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.2",
+        "originalBhp": {
+          "raw": "128 | 170",
+          "parsedValues": ["128", "170"],
+          "primaryValue": "128",
+          "secondaryValue": "170"
+        },
+        "powerBhpGain": {
+          "raw": "32 | 25",
+          "parsedValues": ["32", "25"],
+          "primaryValue": "32",
+          "secondaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "314 | 370",
+          "parsedValues": ["314", "370"],
+          "primaryValue": "314",
+          "secondaryValue": "370"
+        },
+        "torqueNmGain": {
+          "raw": "86 | 65",
+          "parsedValues": ["86", "65"],
+          "primaryValue": "86",
+          "secondaryValue": "65"
+        },
+        "economyGainBhp": {
+          "raw": "15 | 10",
+          "parsedValues": ["15", "10"],
+          "primaryValue": "15",
+          "secondaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "45 | 30",
+          "parsedValues": ["45", "30"],
+          "primaryValue": "45",
+          "secondaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Lancia",
+    "model": "Musa",
+    "modelSlug": "musa",
+    "sourceProductId": 20715,
+    "sourceUrl": "https://viezu.com/shop/lancia-musa-all/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "1.2",
+        "originalBhp": {
+          "raw": "70 | 90",
+          "parsedValues": ["70", "90"],
+          "primaryValue": "70",
+          "secondaryValue": "90"
+        },
+        "powerBhpGain": {
+          "raw": "20 | 20",
+          "parsedValues": ["20", "20"],
+          "primaryValue": "20",
+          "secondaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "180 | 200",
+          "parsedValues": ["180", "200"],
+          "primaryValue": "180",
+          "secondaryValue": "200"
+        },
+        "torqueNmGain": {
+          "raw": "50 | 45",
+          "parsedValues": ["50", "45"],
+          "primaryValue": "50",
+          "secondaryValue": "45"
+        },
+        "economyGainBhp": {
+          "raw": "10 | 10",
+          "parsedValues": ["10", "10"],
+          "primaryValue": "10",
+          "secondaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "25 | 20",
+          "parsedValues": ["25", "20"],
+          "primaryValue": "25",
+          "secondaryValue": "20"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.9",
+        "originalBhp": {
+          "raw": "100",
+          "parsedValues": ["100"],
+          "primaryValue": "100"
+        },
+        "powerBhpGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "260",
+          "parsedValues": ["260"],
+          "primaryValue": "260"
+        },
+        "torqueNmGain": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.4",
+        "originalBhp": {
+          "raw": "95",
+          "parsedValues": ["95"],
+          "primaryValue": "95"
+        },
+        "powerBhpGain": {
+          "raw": "9",
+          "parsedValues": ["9"],
+          "primaryValue": "9"
+        },
+        "originalTorque": {
+          "raw": "128",
+          "parsedValues": ["128"],
+          "primaryValue": "128"
+        },
+        "torqueNmGain": {
+          "raw": "17",
+          "parsedValues": ["17"],
+          "primaryValue": "17"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      }
+    ]
+  },
+  {
+    "make": "Lancia",
+    "model": "Lybra",
+    "modelSlug": "lybra",
+    "sourceProductId": 20712,
+    "sourceUrl": "https://viezu.com/shop/lancia-lybra-all/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "1.9",
+        "originalBhp": {
+          "raw": "105 | 110 | 115",
+          "parsedValues": ["105", "110", "115"],
+          "primaryValue": "105",
+          "secondaryValue": "110"
+        },
+        "powerBhpGain": {
+          "raw": "35 | 30 | 25",
+          "parsedValues": ["35", "30", "25"],
+          "primaryValue": "35",
+          "secondaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "255 | 275 | 275",
+          "parsedValues": ["255", "275", "275"],
+          "primaryValue": "255",
+          "secondaryValue": "275"
+        },
+        "torqueNmGain": {
+          "raw": "60 | 55 | 55",
+          "parsedValues": ["60", "55", "55"],
+          "primaryValue": "60",
+          "secondaryValue": "55"
+        },
+        "economyGainBhp": {
+          "raw": "20 | 15 | 10",
+          "parsedValues": ["20", "15", "10"],
+          "primaryValue": "20",
+          "secondaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "30 | 30 | 30",
+          "parsedValues": ["30", "30", "30"],
+          "primaryValue": "30",
+          "secondaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.4",
+        "originalBhp": {
+          "raw": "140 | 150",
+          "parsedValues": ["140", "150"],
+          "primaryValue": "140",
+          "secondaryValue": "150"
+        },
+        "powerBhpGain": {
+          "raw": "33 | 35",
+          "parsedValues": ["33", "35"],
+          "primaryValue": "33",
+          "secondaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "304 | 308",
+          "parsedValues": ["304", "308"],
+          "primaryValue": "304",
+          "secondaryValue": "308"
+        },
+        "torqueNmGain": {
+          "raw": "78 | 77",
+          "parsedValues": ["78", "77"],
+          "primaryValue": "78",
+          "secondaryValue": "77"
+        },
+        "economyGainBhp": {
+          "raw": "15 | 20",
+          "parsedValues": ["15", "20"],
+          "primaryValue": "15",
+          "secondaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "40 | 40",
+          "parsedValues": ["40", "40"],
+          "primaryValue": "40",
+          "secondaryValue": "40"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Lancia",
+    "model": "Kappa",
+    "modelSlug": "kappa",
+    "sourceProductId": 20710,
+    "sourceUrl": "https://viezu.com/shop/lancia-kappa-all/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.4",
+        "originalBhp": {
+          "raw": "136",
+          "parsedValues": ["136"],
+          "primaryValue": "136"
+        },
+        "powerBhpGain": {
+          "raw": "32",
+          "parsedValues": ["32"],
+          "primaryValue": "32"
+        },
+        "originalTorque": {
+          "raw": "310",
+          "parsedValues": ["310"],
+          "primaryValue": "310"
+        },
+        "torqueNmGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "30 ",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Lancia",
+    "model": "Delta",
+    "modelSlug": "delta",
+    "sourceProductId": 20704,
+    "sourceUrl": "https://viezu.com/shop/lancia-delta-2008-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.4",
+        "originalBhp": {
+          "raw": "140 | 120 | 150",
+          "parsedValues": ["140", "120", "150"],
+          "primaryValue": "140",
+          "secondaryValue": "120"
+        },
+        "powerBhpGain": {
+          "raw": "10 | 35 | 25",
+          "parsedValues": ["10", "35", "25"],
+          "primaryValue": "10",
+          "secondaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "230 | 206 | 230",
+          "parsedValues": ["230", "206", "230"],
+          "primaryValue": "230",
+          "secondaryValue": "206"
+        },
+        "torqueNmGain": {
+          "raw": "60 | 59 | 50",
+          "parsedValues": ["60", "59", "50"],
+          "primaryValue": "60",
+          "secondaryValue": "59"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.8",
+        "originalBhp": {
+          "raw": "200",
+          "parsedValues": ["200"],
+          "primaryValue": "200"
+        },
+        "powerBhpGain": {
+          "raw": "55",
+          "parsedValues": ["55"],
+          "primaryValue": "55"
+        },
+        "originalTorque": {
+          "raw": "320",
+          "parsedValues": ["320"],
+          "primaryValue": "320"
+        },
+        "torqueNmGain": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "105 | 120",
+          "parsedValues": ["105", "120"],
+          "primaryValue": "105",
+          "secondaryValue": "120"
+        },
+        "powerBhpGain": {
+          "raw": "35 | 25",
+          "parsedValues": ["35", "25"],
+          "primaryValue": "35",
+          "secondaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "320 | 320",
+          "parsedValues": ["320", "320"],
+          "primaryValue": "320",
+          "secondaryValue": "320"
+        },
+        "torqueNmGain": {
+          "raw": "60 | 60",
+          "parsedValues": ["60", "60"],
+          "primaryValue": "60",
+          "secondaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "20 | 10",
+          "parsedValues": ["20", "10"],
+          "primaryValue": "20",
+          "secondaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "30 | 30",
+          "parsedValues": ["30", "30"],
+          "primaryValue": "30",
+          "secondaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.9",
+        "originalBhp": {
+          "raw": "190",
+          "parsedValues": ["190"],
+          "primaryValue": "190"
+        },
+        "powerBhpGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "originalTorque": {
+          "raw": "400",
+          "parsedValues": ["400"],
+          "primaryValue": "400"
+        },
+        "torqueNmGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "165",
+          "parsedValues": ["165"],
+          "primaryValue": "165"
+        },
+        "powerBhpGain": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "360",
+          "parsedValues": ["360"],
+          "primaryValue": "360"
+        },
+        "torqueNmGain": {
+          "raw": "65",
+          "parsedValues": ["65"],
+          "primaryValue": "65"
+        },
+        "economyGainBhp": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  }
+]

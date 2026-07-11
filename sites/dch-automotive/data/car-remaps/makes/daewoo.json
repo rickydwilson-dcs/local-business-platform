@@ -1,0 +1,242 @@
+[
+  {
+    "make": "Daewoo",
+    "model": "TOSCA",
+    "modelSlug": "tosca",
+    "sourceProductId": 48041,
+    "sourceUrl": "https://viezu.com/shop/daewoo-tosca-2006-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "2",
+        "originalBhp": {
+          "raw": "154",
+          "parsedValues": ["154"],
+          "primaryValue": "154"
+        },
+        "powerBhpGain": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "237",
+          "parsedValues": ["237"],
+          "primaryValue": "237"
+        },
+        "torqueNmGain": {
+          "raw": "59",
+          "parsedValues": ["59"],
+          "primaryValue": "59"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 30000
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2",
+        "originalBhp": {
+          "raw": "148",
+          "parsedValues": ["148"],
+          "primaryValue": "148"
+        },
+        "powerBhpGain": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "320",
+          "parsedValues": ["320"],
+          "primaryValue": "320"
+        },
+        "torqueNmGain": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 30000
+      }
+    ]
+  },
+  {
+    "make": "Daewoo",
+    "model": "LACETTI",
+    "modelSlug": "lacetti",
+    "sourceProductId": 48040,
+    "sourceUrl": "https://viezu.com/shop/daewoo-lacetti-2002-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.8",
+        "originalBhp": {
+          "raw": "94 |107 | 119 ",
+          "parsedValues": ["94", "107", "119"],
+          "primaryValue": "94",
+          "secondaryValue": "107"
+        },
+        "powerBhpGain": {
+          "raw": "19 | 21 | 24",
+          "parsedValues": ["19", "21", "24"],
+          "primaryValue": "19",
+          "secondaryValue": "21"
+        },
+        "originalTorque": {
+          "raw": "131 | 150 | 169 ",
+          "parsedValues": ["131", "150", "169"],
+          "primaryValue": "131",
+          "secondaryValue": "150"
+        },
+        "torqueNmGain": {
+          "raw": "26 | 30 | 33",
+          "parsedValues": ["26", "30", "33"],
+          "primaryValue": "26",
+          "secondaryValue": "30"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Daewoo",
+    "model": "Nubira",
+    "modelSlug": "nubira",
+    "sourceProductId": 19372,
+    "sourceUrl": "https://viezu.com/shop/daewoo-nubira-all/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "133",
+          "parsedValues": ["133"],
+          "primaryValue": "133"
+        },
+        "powerBhpGain": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "originalTorque": {
+          "raw": "184",
+          "parsedValues": ["184"],
+          "primaryValue": "184"
+        },
+        "torqueNmGain": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Daewoo",
+    "model": "Matiz",
+    "modelSlug": "matiz",
+    "sourceProductId": 19370,
+    "sourceUrl": "https://viezu.com/shop/matiz-all/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "0.8",
+        "originalBhp": {
+          "raw": "51",
+          "parsedValues": ["51"],
+          "primaryValue": "51"
+        },
+        "powerBhpGain": {
+          "raw": "9",
+          "parsedValues": ["9"],
+          "primaryValue": "9"
+        },
+        "originalTorque": {
+          "raw": "69",
+          "parsedValues": ["69"],
+          "primaryValue": "69"
+        },
+        "torqueNmGain": {
+          "raw": "11",
+          "parsedValues": ["11"],
+          "primaryValue": "11"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      }
+    ]
+  }
+]

@@ -1,0 +1,4800 @@
+[
+  {
+    "make": "Seat",
+    "model": "Arona",
+    "modelSlug": "arona",
+    "sourceProductId": 54894,
+    "sourceUrl": "https://viezu.com/shop/seat-arona-2021-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.0",
+        "originalBhp": {
+          "raw": "110",
+          "parsedValues": ["110"],
+          "primaryValue": "110"
+        },
+        "powerBhpGain": {
+          "raw": "11",
+          "parsedValues": ["11"],
+          "primaryValue": "11"
+        },
+        "originalTorque": {
+          "raw": "200",
+          "parsedValues": ["200"],
+          "primaryValue": "200"
+        },
+        "torqueNmGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      }
+    ]
+  },
+  {
+    "make": "Seat",
+    "model": "Toledo",
+    "modelSlug": "toledo",
+    "sourceProductId": 22840,
+    "sourceUrl": "https://viezu.com/shop/seat-toledo-2013-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.2",
+        "originalBhp": {
+          "raw": "105 | 85",
+          "parsedValues": ["105", "85"],
+          "primaryValue": "105",
+          "secondaryValue": "85"
+        },
+        "powerBhpGain": {
+          "raw": "35 | 55",
+          "parsedValues": ["35", "55"],
+          "primaryValue": "35",
+          "secondaryValue": "55"
+        },
+        "originalTorque": {
+          "raw": "175 | 160",
+          "parsedValues": ["175", "160"],
+          "primaryValue": "175",
+          "secondaryValue": "160"
+        },
+        "torqueNmGain": {
+          "raw": "50 | 65",
+          "parsedValues": ["50", "65"],
+          "primaryValue": "50",
+          "secondaryValue": "65"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.4",
+        "originalBhp": {
+          "raw": "122 | 125",
+          "parsedValues": ["122", "125"],
+          "primaryValue": "122",
+          "secondaryValue": "125"
+        },
+        "powerBhpGain": {
+          "raw": "28 | 25",
+          "parsedValues": ["28", "25"],
+          "primaryValue": "28",
+          "secondaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "200 | 200",
+          "parsedValues": ["200", "200"],
+          "primaryValue": "200",
+          "secondaryValue": "200"
+        },
+        "torqueNmGain": {
+          "raw": "65 | 65",
+          "parsedValues": ["65", "65"],
+          "primaryValue": "65",
+          "secondaryValue": "65"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.4",
+        "originalBhp": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "powerBhpGain": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "230",
+          "parsedValues": ["230"],
+          "primaryValue": "230"
+        },
+        "torqueNmGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "105 | 115",
+          "parsedValues": ["105", "115"],
+          "primaryValue": "105",
+          "secondaryValue": "115"
+        },
+        "powerBhpGain": {
+          "raw": "35 | 35",
+          "parsedValues": ["35", "35"],
+          "primaryValue": "35",
+          "secondaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "250 | 250",
+          "parsedValues": ["250", "250"],
+          "primaryValue": "250",
+          "secondaryValue": "250"
+        },
+        "torqueNmGain": {
+          "raw": "70 | 80",
+          "parsedValues": ["70", "80"],
+          "primaryValue": "70",
+          "secondaryValue": "80"
+        },
+        "economyGainBhp": {
+          "raw": "20 | 20",
+          "parsedValues": ["20", "20"],
+          "primaryValue": "20",
+          "secondaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "35 | 40",
+          "parsedValues": ["35", "40"],
+          "primaryValue": "35",
+          "secondaryValue": "40"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Seat",
+    "model": "Toledo",
+    "modelSlug": "toledo",
+    "sourceProductId": 22834,
+    "sourceUrl": "https://viezu.com/shop/seat-toledo-2004-2009/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "102",
+          "parsedValues": ["102"],
+          "primaryValue": "102"
+        },
+        "powerBhpGain": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "originalTorque": {
+          "raw": "148",
+          "parsedValues": ["148"],
+          "primaryValue": "148"
+        },
+        "torqueNmGain": {
+          "raw": "17",
+          "parsedValues": ["17"],
+          "primaryValue": "17"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.8",
+        "originalBhp": {
+          "raw": "160",
+          "parsedValues": ["160"],
+          "primaryValue": "160"
+        },
+        "powerBhpGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "originalTorque": {
+          "raw": "250",
+          "parsedValues": ["250"],
+          "primaryValue": "250"
+        },
+        "torqueNmGain": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "150",
+          "parsedValues": ["150"],
+          "primaryValue": "150"
+        },
+        "powerBhpGain": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "originalTorque": {
+          "raw": "200",
+          "parsedValues": ["200"],
+          "primaryValue": "200"
+        },
+        "torqueNmGain": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.9",
+        "originalBhp": {
+          "raw": "105",
+          "parsedValues": ["105"],
+          "primaryValue": "105"
+        },
+        "powerBhpGain": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "250",
+          "parsedValues": ["250"],
+          "primaryValue": "250"
+        },
+        "torqueNmGain": {
+          "raw": "70",
+          "parsedValues": ["70"],
+          "primaryValue": "70"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "140",
+          "parsedValues": ["140"],
+          "primaryValue": "140"
+        },
+        "powerBhpGain": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "320",
+          "parsedValues": ["320"],
+          "primaryValue": "320"
+        },
+        "torqueNmGain": {
+          "raw": "75",
+          "parsedValues": ["75"],
+          "primaryValue": "75"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Seat",
+    "model": "Toledo",
+    "modelSlug": "toledo",
+    "sourceProductId": 22829,
+    "sourceUrl": "https://viezu.com/shop/toledo-1999-2004/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "105",
+          "parsedValues": ["105"],
+          "primaryValue": "105"
+        },
+        "powerBhpGain": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "originalTorque": {
+          "raw": "148",
+          "parsedValues": ["148"],
+          "primaryValue": "148"
+        },
+        "torqueNmGain": {
+          "raw": "17",
+          "parsedValues": ["17"],
+          "primaryValue": "17"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.8",
+        "originalBhp": {
+          "raw": "125 | 180",
+          "parsedValues": ["125", "180"],
+          "primaryValue": "125",
+          "secondaryValue": "180"
+        },
+        "powerBhpGain": {
+          "raw": "10 | 40",
+          "parsedValues": ["10", "40"],
+          "primaryValue": "10",
+          "secondaryValue": "40"
+        },
+        "originalTorque": {
+          "raw": "170 | 235",
+          "parsedValues": ["170", "235"],
+          "primaryValue": "170",
+          "secondaryValue": "235"
+        },
+        "torqueNmGain": {
+          "raw": "15 | 95",
+          "parsedValues": ["15", "95"],
+          "primaryValue": "15",
+          "secondaryValue": "95"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "2.3",
+        "originalBhp": {
+          "raw": "150 | 170",
+          "parsedValues": ["150", "170"],
+          "primaryValue": "150",
+          "secondaryValue": "170"
+        },
+        "powerBhpGain": {
+          "raw": "10 | 10",
+          "parsedValues": ["10", "10"],
+          "primaryValue": "10",
+          "secondaryValue": "10"
+        },
+        "originalTorque": {
+          "raw": "210 | 225",
+          "parsedValues": ["210", "225"],
+          "primaryValue": "210",
+          "secondaryValue": "225"
+        },
+        "torqueNmGain": {
+          "raw": "15 | 15",
+          "parsedValues": ["15", "15"],
+          "primaryValue": "15",
+          "secondaryValue": "15"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.9",
+        "originalBhp": {
+          "raw": "110 | 130 | 150 | 90",
+          "parsedValues": ["110", "130", "150", "90"],
+          "primaryValue": "110",
+          "secondaryValue": "130"
+        },
+        "powerBhpGain": {
+          "raw": "30 | 40 | 35 | 30",
+          "parsedValues": ["30", "40", "35", "30"],
+          "primaryValue": "30",
+          "secondaryValue": "40"
+        },
+        "originalTorque": {
+          "raw": "235 | 310 | 320 | 210",
+          "parsedValues": ["235", "310", "320", "210"],
+          "primaryValue": "235",
+          "secondaryValue": "310"
+        },
+        "torqueNmGain": {
+          "raw": "60 | 80 | 80 | 80",
+          "parsedValues": ["60", "80", "80", "80"],
+          "primaryValue": "60",
+          "secondaryValue": "80"
+        },
+        "economyGainBhp": {
+          "raw": "15 | 20 | 20 | 15",
+          "parsedValues": ["15", "20", "20", "15"],
+          "primaryValue": "15",
+          "secondaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "30 | 40 | 40 | 40",
+          "parsedValues": ["30", "40", "40", "40"],
+          "primaryValue": "30",
+          "secondaryValue": "40"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Seat",
+    "model": "Tarraco",
+    "modelSlug": "tarraco",
+    "sourceProductId": 22824,
+    "sourceUrl": "https://viezu.com/shop/seat-tarraco-2019-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "245",
+          "parsedValues": ["245"],
+          "primaryValue": "245"
+        },
+        "powerBhpGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "originalTorque": {
+          "raw": "370",
+          "parsedValues": ["370"],
+          "primaryValue": "370"
+        },
+        "torqueNmGain": {
+          "raw": "70",
+          "parsedValues": ["70"],
+          "primaryValue": "70"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.4",
+        "originalBhp": {
+          "raw": "150",
+          "parsedValues": ["150"],
+          "primaryValue": "150"
+        },
+        "powerBhpGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "originalTorque": {
+          "raw": "250",
+          "parsedValues": ["250"],
+          "primaryValue": "250"
+        },
+        "torqueNmGain": {
+          "raw": "70",
+          "parsedValues": ["70"],
+          "primaryValue": "70"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.5",
+        "originalBhp": {
+          "raw": "150",
+          "parsedValues": ["150"],
+          "primaryValue": "150"
+        },
+        "powerBhpGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "250",
+          "parsedValues": ["250"],
+          "primaryValue": "250"
+        },
+        "torqueNmGain": {
+          "raw": "85",
+          "parsedValues": ["85"],
+          "primaryValue": "85"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "190",
+          "parsedValues": ["190"],
+          "primaryValue": "190"
+        },
+        "powerBhpGain": {
+          "raw": "55",
+          "parsedValues": ["55"],
+          "primaryValue": "55"
+        },
+        "originalTorque": {
+          "raw": "320",
+          "parsedValues": ["320"],
+          "primaryValue": "320"
+        },
+        "torqueNmGain": {
+          "raw": "110",
+          "parsedValues": ["110"],
+          "primaryValue": "110"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "150 | 190 | 200",
+          "parsedValues": ["150", "190", "200"],
+          "primaryValue": "150",
+          "secondaryValue": "190"
+        },
+        "powerBhpGain": {
+          "raw": "50 | 30 | 20",
+          "parsedValues": ["50", "30", "20"],
+          "primaryValue": "50",
+          "secondaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "320 | 400 | 400",
+          "parsedValues": ["320", "400", "400"],
+          "primaryValue": "320",
+          "secondaryValue": "400"
+        },
+        "torqueNmGain": {
+          "raw": "110 | 50 | 50",
+          "parsedValues": ["110", "50", "50"],
+          "primaryValue": "110",
+          "secondaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "25 | 15 | 10",
+          "parsedValues": ["25", "15", "10"],
+          "primaryValue": "25",
+          "secondaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "55 | 25 | 25",
+          "parsedValues": ["55", "25", "25"],
+          "primaryValue": "55",
+          "secondaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Seat",
+    "model": "Mii",
+    "modelSlug": "mii",
+    "sourceProductId": 22822,
+    "sourceUrl": "https://viezu.com/shop/mii-2012-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.0",
+        "originalBhp": {
+          "raw": "60 | 75",
+          "parsedValues": ["60", "75"],
+          "primaryValue": "60",
+          "secondaryValue": "75"
+        },
+        "powerBhpGain": {
+          "raw": "25 | 10",
+          "parsedValues": ["25", "10"],
+          "primaryValue": "25",
+          "secondaryValue": "10"
+        },
+        "originalTorque": {
+          "raw": "92 | 95",
+          "parsedValues": ["92", "95"],
+          "primaryValue": "92",
+          "secondaryValue": "95"
+        },
+        "torqueNmGain": {
+          "raw": "13 | 10",
+          "parsedValues": ["13", "10"],
+          "primaryValue": "13",
+          "secondaryValue": "10"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      }
+    ]
+  },
+  {
+    "make": "Seat",
+    "model": "Leon",
+    "modelSlug": "leon",
+    "sourceProductId": 22818,
+    "sourceUrl": "https://viezu.com/shop/seat-leon-kl-2020-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol Hybrid",
+        "variant": "1.4",
+        "originalBhp": {
+          "raw": "204",
+          "parsedValues": ["204"],
+          "primaryValue": "204"
+        },
+        "powerBhpGain": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "350",
+          "parsedValues": ["350"],
+          "primaryValue": "350"
+        },
+        "torqueNmGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol Hybrid",
+        "variant": "1.0",
+        "originalBhp": {
+          "raw": "110",
+          "parsedValues": ["110"],
+          "primaryValue": "110"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "200",
+          "parsedValues": ["200"],
+          "primaryValue": "200"
+        },
+        "torqueNmGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.0",
+        "originalBhp": {
+          "raw": "110 | 90",
+          "parsedValues": ["110", "90"],
+          "primaryValue": "110",
+          "secondaryValue": "90"
+        },
+        "powerBhpGain": {
+          "raw": "20 | 40",
+          "parsedValues": ["20", "40"],
+          "primaryValue": "20",
+          "secondaryValue": "40"
+        },
+        "originalTorque": {
+          "raw": "200 | 160",
+          "parsedValues": ["200", "160"],
+          "primaryValue": "200",
+          "secondaryValue": "160"
+        },
+        "torqueNmGain": {
+          "raw": "40 | 80",
+          "parsedValues": ["40", "80"],
+          "primaryValue": "40",
+          "secondaryValue": "80"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.5",
+        "originalBhp": {
+          "raw": "130 | 150",
+          "parsedValues": ["130", "150"],
+          "primaryValue": "130",
+          "secondaryValue": "150"
+        },
+        "powerBhpGain": {
+          "raw": "40 | 30",
+          "parsedValues": ["40", "30"],
+          "primaryValue": "40",
+          "secondaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "200 | 250",
+          "parsedValues": ["200", "250"],
+          "primaryValue": "200",
+          "secondaryValue": "250"
+        },
+        "torqueNmGain": {
+          "raw": "90 | 85",
+          "parsedValues": ["90", "85"],
+          "primaryValue": "90",
+          "secondaryValue": "85"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "115 | 150",
+          "parsedValues": ["115", "150"],
+          "primaryValue": "115",
+          "secondaryValue": "150"
+        },
+        "powerBhpGain": {
+          "raw": "85 | 50",
+          "parsedValues": ["85", "50"],
+          "primaryValue": "85",
+          "secondaryValue": "50"
+        },
+        "originalTorque": {
+          "raw": "300 | 360",
+          "parsedValues": ["300", "360"],
+          "primaryValue": "300",
+          "secondaryValue": "360"
+        },
+        "torqueNmGain": {
+          "raw": "130 | 70",
+          "parsedValues": ["130", "70"],
+          "primaryValue": "130",
+          "secondaryValue": "70"
+        },
+        "economyGainBhp": {
+          "raw": "40 | 25",
+          "parsedValues": ["40", "25"],
+          "primaryValue": "40",
+          "secondaryValue": "25"
+        },
+        "economyGainNm": {
+          "raw": "65 | 35",
+          "parsedValues": ["65", "35"],
+          "primaryValue": "65",
+          "secondaryValue": "35"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Seat",
+    "model": "Leon",
+    "modelSlug": "leon",
+    "sourceProductId": 22810,
+    "sourceUrl": "https://viezu.com/shop/leon-5f-mk2-2017-2019/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.0",
+        "originalBhp": {
+          "raw": "115",
+          "parsedValues": ["115"],
+          "primaryValue": "115"
+        },
+        "powerBhpGain": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "originalTorque": {
+          "raw": "200",
+          "parsedValues": ["200"],
+          "primaryValue": "200"
+        },
+        "torqueNmGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.4",
+        "originalBhp": {
+          "raw": "150",
+          "parsedValues": ["150"],
+          "primaryValue": "150"
+        },
+        "powerBhpGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "originalTorque": {
+          "raw": "250",
+          "parsedValues": ["250"],
+          "primaryValue": "250"
+        },
+        "torqueNmGain": {
+          "raw": "70",
+          "parsedValues": ["70"],
+          "primaryValue": "70"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.5",
+        "originalBhp": {
+          "raw": "130 | 130 | 150",
+          "parsedValues": ["130", "130", "150"],
+          "primaryValue": "130",
+          "secondaryValue": "130"
+        },
+        "powerBhpGain": {
+          "raw": "25 | 40 | 30",
+          "parsedValues": ["25", "40", "30"],
+          "primaryValue": "25",
+          "secondaryValue": "40"
+        },
+        "originalTorque": {
+          "raw": "200 | 200 | 250",
+          "parsedValues": ["200", "200", "250"],
+          "primaryValue": "200",
+          "secondaryValue": "200"
+        },
+        "torqueNmGain": {
+          "raw": "50 | 90 | 85",
+          "parsedValues": ["50", "90", "85"],
+          "primaryValue": "50",
+          "secondaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.8",
+        "originalBhp": {
+          "raw": "180",
+          "parsedValues": ["180"],
+          "primaryValue": "180"
+        },
+        "powerBhpGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "originalTorque": {
+          "raw": "250",
+          "parsedValues": ["250"],
+          "primaryValue": "250"
+        },
+        "torqueNmGain": {
+          "raw": "130",
+          "parsedValues": ["130"],
+          "primaryValue": "130"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "190 | 300",
+          "parsedValues": ["190", "300"],
+          "primaryValue": "190",
+          "secondaryValue": "300"
+        },
+        "powerBhpGain": {
+          "raw": "55 | 65",
+          "parsedValues": ["55", "65"],
+          "primaryValue": "55",
+          "secondaryValue": "65"
+        },
+        "originalTorque": {
+          "raw": "320 | 380",
+          "parsedValues": ["320", "380"],
+          "primaryValue": "320",
+          "secondaryValue": "380"
+        },
+        "torqueNmGain": {
+          "raw": "110 | 90",
+          "parsedValues": ["110", "90"],
+          "primaryValue": "110",
+          "secondaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "115",
+          "parsedValues": ["115"],
+          "primaryValue": "115"
+        },
+        "powerBhpGain": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "250",
+          "parsedValues": ["250"],
+          "primaryValue": "250"
+        },
+        "torqueNmGain": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "150 | 184",
+          "parsedValues": ["150", "184"],
+          "primaryValue": "150",
+          "secondaryValue": "184"
+        },
+        "powerBhpGain": {
+          "raw": "45 | 41",
+          "parsedValues": ["45", "41"],
+          "primaryValue": "45",
+          "secondaryValue": "41"
+        },
+        "originalTorque": {
+          "raw": "320 | 380",
+          "parsedValues": ["320", "380"],
+          "primaryValue": "320",
+          "secondaryValue": "380"
+        },
+        "torqueNmGain": {
+          "raw": "110 | 80",
+          "parsedValues": ["110", "80"],
+          "primaryValue": "110",
+          "secondaryValue": "80"
+        },
+        "economyGainBhp": {
+          "raw": "20 | 20",
+          "parsedValues": ["20", "20"],
+          "primaryValue": "20",
+          "secondaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "55 | 40",
+          "parsedValues": ["55", "40"],
+          "primaryValue": "55",
+          "secondaryValue": "40"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Seat",
+    "model": "Leon",
+    "modelSlug": "leon",
+    "sourceProductId": 22802,
+    "sourceUrl": "https://viezu.com/shop/seat-leon-5f-mk1-2012-2017/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.2",
+        "originalBhp": {
+          "raw": "105 | 110 | 85",
+          "parsedValues": ["105", "110", "85"],
+          "primaryValue": "105",
+          "secondaryValue": "110"
+        },
+        "powerBhpGain": {
+          "raw": "35 | 30 | 55",
+          "parsedValues": ["35", "30", "55"],
+          "primaryValue": "35",
+          "secondaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "175 | 175 | 160",
+          "parsedValues": ["175", "175", "160"],
+          "primaryValue": "175",
+          "secondaryValue": "175"
+        },
+        "torqueNmGain": {
+          "raw": "60 | 60 | 75",
+          "parsedValues": ["60", "60", "75"],
+          "primaryValue": "60",
+          "secondaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.4",
+        "originalBhp": {
+          "raw": "110 | 125 | 140 | 150",
+          "parsedValues": ["110", "125", "140", "150"],
+          "primaryValue": "110",
+          "secondaryValue": "125"
+        },
+        "powerBhpGain": {
+          "raw": "35 | 30 | 30 | 40",
+          "parsedValues": ["35", "30", "30", "40"],
+          "primaryValue": "35",
+          "secondaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "200 | 200 | 250 | 250",
+          "parsedValues": ["200", "200", "250", "250"],
+          "primaryValue": "200",
+          "secondaryValue": "200"
+        },
+        "torqueNmGain": {
+          "raw": "50 | 70 | 50 | 70",
+          "parsedValues": ["50", "70", "50", "70"],
+          "primaryValue": "50",
+          "secondaryValue": "70"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.8",
+        "originalBhp": {
+          "raw": "180",
+          "parsedValues": ["180"],
+          "primaryValue": "180"
+        },
+        "powerBhpGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "originalTorque": {
+          "raw": "250",
+          "parsedValues": ["250"],
+          "primaryValue": "250"
+        },
+        "torqueNmGain": {
+          "raw": "130",
+          "parsedValues": ["130"],
+          "primaryValue": "130"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "265 | 280 | 290",
+          "parsedValues": ["265", "280", "290"],
+          "primaryValue": "265",
+          "secondaryValue": "280"
+        },
+        "powerBhpGain": {
+          "raw": "100 | 85 | 75",
+          "parsedValues": ["100", "85", "75"],
+          "primaryValue": "100",
+          "secondaryValue": "85"
+        },
+        "originalTorque": {
+          "raw": "350 | 350 | 350",
+          "parsedValues": ["350", "350", "350"],
+          "primaryValue": "350",
+          "secondaryValue": "350"
+        },
+        "torqueNmGain": {
+          "raw": "120 | 120 | 120",
+          "parsedValues": ["120", "120", "120"],
+          "primaryValue": "120",
+          "secondaryValue": "120"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "110 | 90",
+          "parsedValues": ["110", "90"],
+          "primaryValue": "110",
+          "secondaryValue": "90"
+        },
+        "powerBhpGain": {
+          "raw": "45 | 60",
+          "parsedValues": ["45", "60"],
+          "primaryValue": "45",
+          "secondaryValue": "60"
+        },
+        "originalTorque": {
+          "raw": "250 | 230",
+          "parsedValues": ["250", "230"],
+          "primaryValue": "250",
+          "secondaryValue": "230"
+        },
+        "torqueNmGain": {
+          "raw": "70 | 90",
+          "parsedValues": ["70", "90"],
+          "primaryValue": "70",
+          "secondaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "20 | 30",
+          "parsedValues": ["20", "30"],
+          "primaryValue": "20",
+          "secondaryValue": "30"
+        },
+        "economyGainNm": {
+          "raw": "35 | 45",
+          "parsedValues": ["35", "45"],
+          "primaryValue": "35",
+          "secondaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "150 | 184",
+          "parsedValues": ["150", "184"],
+          "primaryValue": "150",
+          "secondaryValue": "184"
+        },
+        "powerBhpGain": {
+          "raw": "40 | 41",
+          "parsedValues": ["40", "41"],
+          "primaryValue": "40",
+          "secondaryValue": "41"
+        },
+        "originalTorque": {
+          "raw": "320 | 380",
+          "parsedValues": ["320", "380"],
+          "primaryValue": "320",
+          "secondaryValue": "380"
+        },
+        "torqueNmGain": {
+          "raw": "100 | 80",
+          "parsedValues": ["100", "80"],
+          "primaryValue": "100",
+          "secondaryValue": "80"
+        },
+        "economyGainBhp": {
+          "raw": "20 | 20",
+          "parsedValues": ["20", "20"],
+          "primaryValue": "20",
+          "secondaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "50 | 40",
+          "parsedValues": ["50", "40"],
+          "primaryValue": "50",
+          "secondaryValue": "40"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Seat",
+    "model": "Leon",
+    "modelSlug": "leon",
+    "sourceProductId": 22793,
+    "sourceUrl": "https://viezu.com/shop/seat-leon-1p-2005-2012/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.2",
+        "originalBhp": {
+          "raw": "105 | 86",
+          "parsedValues": ["105", "86"],
+          "primaryValue": "105",
+          "secondaryValue": "86"
+        },
+        "powerBhpGain": {
+          "raw": "35 | 54",
+          "parsedValues": ["35", "54"],
+          "primaryValue": "35",
+          "secondaryValue": "54"
+        },
+        "originalTorque": {
+          "raw": "175 | 160",
+          "parsedValues": ["175", "160"],
+          "primaryValue": "175",
+          "secondaryValue": "160"
+        },
+        "torqueNmGain": {
+          "raw": "50 | 65",
+          "parsedValues": ["50", "65"],
+          "primaryValue": "50",
+          "secondaryValue": "65"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.4",
+        "originalBhp": {
+          "raw": "125 | 85",
+          "parsedValues": ["125", "85"],
+          "primaryValue": "125",
+          "secondaryValue": "85"
+        },
+        "powerBhpGain": {
+          "raw": "25 | 10",
+          "parsedValues": ["25", "10"],
+          "primaryValue": "25",
+          "secondaryValue": "10"
+        },
+        "originalTorque": {
+          "raw": "200 | 130",
+          "parsedValues": ["200", "130"],
+          "primaryValue": "200",
+          "secondaryValue": "130"
+        },
+        "torqueNmGain": {
+          "raw": "65 | 15",
+          "parsedValues": ["65", "15"],
+          "primaryValue": "65",
+          "secondaryValue": "15"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "102",
+          "parsedValues": ["102"],
+          "primaryValue": "102"
+        },
+        "powerBhpGain": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "originalTorque": {
+          "raw": "148",
+          "parsedValues": ["148"],
+          "primaryValue": "148"
+        },
+        "torqueNmGain": {
+          "raw": "17",
+          "parsedValues": ["17"],
+          "primaryValue": "17"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.8",
+        "originalBhp": {
+          "raw": "160",
+          "parsedValues": ["160"],
+          "primaryValue": "160"
+        },
+        "powerBhpGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "originalTorque": {
+          "raw": "250",
+          "parsedValues": ["250"],
+          "primaryValue": "250"
+        },
+        "torqueNmGain": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "150 | 185 | 200 | 240 | 265 | 210",
+          "parsedValues": ["150", "185", "200", "240", "265", "210"],
+          "primaryValue": "150",
+          "secondaryValue": "185"
+        },
+        "powerBhpGain": {
+          "raw": "10 | 65 | 50 | 70 | 45 | 50",
+          "parsedValues": ["10", "65", "50", "70", "45", "50"],
+          "primaryValue": "10",
+          "secondaryValue": "65"
+        },
+        "originalTorque": {
+          "raw": "200 | 270 | 280 | 300 | 350 | 280",
+          "parsedValues": ["200", "270", "280", "300", "350", "280"],
+          "primaryValue": "200",
+          "secondaryValue": "270"
+        },
+        "torqueNmGain": {
+          "raw": "15 | 90 | 80 | 110 | 70 | 100",
+          "parsedValues": ["15", "90", "80", "110", "70", "100"],
+          "primaryValue": "15",
+          "secondaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "105 | 90",
+          "parsedValues": ["105", "90"],
+          "primaryValue": "105",
+          "secondaryValue": "90"
+        },
+        "powerBhpGain": {
+          "raw": "35 | 50",
+          "parsedValues": ["35", "50"],
+          "primaryValue": "35",
+          "secondaryValue": "50"
+        },
+        "originalTorque": {
+          "raw": "250 | 230",
+          "parsedValues": ["250", "230"],
+          "primaryValue": "250",
+          "secondaryValue": "230"
+        },
+        "torqueNmGain": {
+          "raw": "70 | 80",
+          "parsedValues": ["70", "80"],
+          "primaryValue": "70",
+          "secondaryValue": "80"
+        },
+        "economyGainBhp": {
+          "raw": "20 | 25",
+          "parsedValues": ["20", "25"],
+          "primaryValue": "20",
+          "secondaryValue": "25"
+        },
+        "economyGainNm": {
+          "raw": "35 | 40",
+          "parsedValues": ["35", "40"],
+          "primaryValue": "35",
+          "secondaryValue": "40"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.9",
+        "originalBhp": {
+          "raw": "105 | 90",
+          "parsedValues": ["105", "90"],
+          "primaryValue": "105",
+          "secondaryValue": "90"
+        },
+        "powerBhpGain": {
+          "raw": "35 | 50",
+          "parsedValues": ["35", "50"],
+          "primaryValue": "35",
+          "secondaryValue": "50"
+        },
+        "originalTorque": {
+          "raw": "250 | 210",
+          "parsedValues": ["250", "210"],
+          "primaryValue": "250",
+          "secondaryValue": "210"
+        },
+        "torqueNmGain": {
+          "raw": "70 | 110",
+          "parsedValues": ["70", "110"],
+          "primaryValue": "70",
+          "secondaryValue": "110"
+        },
+        "economyGainBhp": {
+          "raw": "20 | 25",
+          "parsedValues": ["20", "25"],
+          "primaryValue": "20",
+          "secondaryValue": "25"
+        },
+        "economyGainNm": {
+          "raw": "35 | 55",
+          "parsedValues": ["35", "55"],
+          "primaryValue": "35",
+          "secondaryValue": "55"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "140 | 170",
+          "parsedValues": ["140", "170"],
+          "primaryValue": "140",
+          "secondaryValue": "170"
+        },
+        "powerBhpGain": {
+          "raw": "35 | 30",
+          "parsedValues": ["35", "30"],
+          "primaryValue": "35",
+          "secondaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "320 | 350",
+          "parsedValues": ["320", "350"],
+          "primaryValue": "320",
+          "secondaryValue": "350"
+        },
+        "torqueNmGain": {
+          "raw": "70 | 70",
+          "parsedValues": ["70", "70"],
+          "primaryValue": "70",
+          "secondaryValue": "70"
+        },
+        "economyGainBhp": {
+          "raw": "20 | 15",
+          "parsedValues": ["20", "15"],
+          "primaryValue": "20",
+          "secondaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "35 | 35",
+          "parsedValues": ["35", "35"],
+          "primaryValue": "35",
+          "secondaryValue": "35"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Seat",
+    "model": "Leon",
+    "modelSlug": "leon",
+    "sourceProductId": 22788,
+    "sourceUrl": "https://viezu.com/shop/leon-1m-2000-2006/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.4",
+        "originalBhp": {
+          "raw": "75",
+          "parsedValues": ["75"],
+          "primaryValue": "75"
+        },
+        "powerBhpGain": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "originalTorque": {
+          "raw": "128",
+          "parsedValues": ["128"],
+          "primaryValue": "128"
+        },
+        "torqueNmGain": {
+          "raw": "12",
+          "parsedValues": ["12"],
+          "primaryValue": "12"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "105 | 100",
+          "parsedValues": ["105", "100"],
+          "primaryValue": "105",
+          "secondaryValue": "100"
+        },
+        "powerBhpGain": {
+          "raw": "10 | 7",
+          "parsedValues": ["10", "7"],
+          "primaryValue": "10",
+          "secondaryValue": "7"
+        },
+        "originalTorque": {
+          "raw": "148 | 145",
+          "parsedValues": ["148", "145"],
+          "primaryValue": "148",
+          "secondaryValue": "145"
+        },
+        "torqueNmGain": {
+          "raw": "12 | 10",
+          "parsedValues": ["12", "10"],
+          "primaryValue": "12",
+          "secondaryValue": "10"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.8",
+        "originalBhp": {
+          "raw": "125 | 180 | 210 | 225",
+          "parsedValues": ["125", "180", "210", "225"],
+          "primaryValue": "125",
+          "secondaryValue": "180"
+        },
+        "powerBhpGain": {
+          "raw": "10 | 40 | 30 | 35",
+          "parsedValues": ["10", "40", "30", "35"],
+          "primaryValue": "10",
+          "secondaryValue": "40"
+        },
+        "originalTorque": {
+          "raw": "170 | 235 | 270 | 280",
+          "parsedValues": ["170", "235", "270", "280"],
+          "primaryValue": "170",
+          "secondaryValue": "235"
+        },
+        "torqueNmGain": {
+          "raw": "15 | 95 | 70 | 120",
+          "parsedValues": ["15", "95", "70", "120"],
+          "primaryValue": "15",
+          "secondaryValue": "95"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.9",
+        "originalBhp": {
+          "raw": "68 | 110 | 130 | 150 | 90",
+          "parsedValues": ["68", "110", "130", "150", "90"],
+          "primaryValue": "68",
+          "secondaryValue": "110"
+        },
+        "powerBhpGain": {
+          "raw": "12 | 30 | 40 | 40 | 30",
+          "parsedValues": ["12", "30", "40", "40", "30"],
+          "primaryValue": "12",
+          "secondaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "133 | 235 | 310 | 320 | 210",
+          "parsedValues": ["133", "235", "310", "320", "210"],
+          "primaryValue": "133",
+          "secondaryValue": "235"
+        },
+        "torqueNmGain": {
+          "raw": "22 | 60 | 80 | 90 | 70",
+          "parsedValues": ["22", "60", "80", "90", "70"],
+          "primaryValue": "22",
+          "secondaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "5 | 15 | 20 | 20 | 15",
+          "parsedValues": ["5", "15", "20", "20", "15"],
+          "primaryValue": "5",
+          "secondaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "10 | 30 | 40 | 45 | 35",
+          "parsedValues": ["10", "30", "40", "45", "35"],
+          "primaryValue": "10",
+          "secondaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Seat",
+    "model": "Exeo",
+    "modelSlug": "exeo",
+    "sourceProductId": 22751,
+    "sourceUrl": "https://viezu.com/shop/seat-exeo-2009-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.8",
+        "originalBhp": {
+          "raw": "120 | 150 | 160",
+          "parsedValues": ["120", "150", "160"],
+          "primaryValue": "120",
+          "secondaryValue": "150"
+        },
+        "powerBhpGain": {
+          "raw": "90 | 50 | 50",
+          "parsedValues": ["90", "50", "50"],
+          "primaryValue": "90",
+          "secondaryValue": "50"
+        },
+        "originalTorque": {
+          "raw": "230 | 220 | 250",
+          "parsedValues": ["230", "220", "250"],
+          "primaryValue": "230",
+          "secondaryValue": "220"
+        },
+        "torqueNmGain": {
+          "raw": "110 | 100 | 90",
+          "parsedValues": ["110", "100", "90"],
+          "primaryValue": "110",
+          "secondaryValue": "100"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "200 | 210",
+          "parsedValues": ["200", "210"],
+          "primaryValue": "200",
+          "secondaryValue": "210"
+        },
+        "powerBhpGain": {
+          "raw": "50 | 50",
+          "parsedValues": ["50", "50"],
+          "primaryValue": "50",
+          "secondaryValue": "50"
+        },
+        "originalTorque": {
+          "raw": "280 | 320",
+          "parsedValues": ["280", "320"],
+          "primaryValue": "280",
+          "secondaryValue": "320"
+        },
+        "torqueNmGain": {
+          "raw": "80 | 80",
+          "parsedValues": ["80", "80"],
+          "primaryValue": "80",
+          "secondaryValue": "80"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "120 | 143 | 170",
+          "parsedValues": ["120", "143", "170"],
+          "primaryValue": "120",
+          "secondaryValue": "143"
+        },
+        "powerBhpGain": {
+          "raw": "60 | 42 | 35",
+          "parsedValues": ["60", "42", "35"],
+          "primaryValue": "60",
+          "secondaryValue": "42"
+        },
+        "originalTorque": {
+          "raw": "290 | 320 | 350",
+          "parsedValues": ["290", "320", "350"],
+          "primaryValue": "290",
+          "secondaryValue": "320"
+        },
+        "torqueNmGain": {
+          "raw": "110 | 80 | 80",
+          "parsedValues": ["110", "80", "80"],
+          "primaryValue": "110",
+          "secondaryValue": "80"
+        },
+        "economyGainBhp": {
+          "raw": "30 | 20 | 20",
+          "parsedValues": ["30", "20", "20"],
+          "primaryValue": "30",
+          "secondaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "55 | 40 | 40",
+          "parsedValues": ["55", "40", "40"],
+          "primaryValue": "55",
+          "secondaryValue": "40"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Seat",
+    "model": "Cordoba",
+    "modelSlug": "cordoba",
+    "sourceProductId": 22745,
+    "sourceUrl": "https://viezu.com/shop/cordoba-6l-2003-2009/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.2",
+        "originalBhp": {
+          "raw": "70",
+          "parsedValues": ["70"],
+          "primaryValue": "70"
+        },
+        "powerBhpGain": {
+          "raw": "7",
+          "parsedValues": ["7"],
+          "primaryValue": "7"
+        },
+        "originalTorque": {
+          "raw": "112",
+          "parsedValues": ["112"],
+          "primaryValue": "112"
+        },
+        "torqueNmGain": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.4",
+        "originalBhp": {
+          "raw": "100 | 75 | 85",
+          "parsedValues": ["100", "75", "85"],
+          "primaryValue": "100",
+          "secondaryValue": "75"
+        },
+        "powerBhpGain": {
+          "raw": "10 | 10 | 10",
+          "parsedValues": ["10", "10", "10"],
+          "primaryValue": "10",
+          "secondaryValue": "10"
+        },
+        "originalTorque": {
+          "raw": "126 | 126 | 130",
+          "parsedValues": ["126", "126", "130"],
+          "primaryValue": "126",
+          "secondaryValue": "126"
+        },
+        "torqueNmGain": {
+          "raw": "14 | 14 | 15",
+          "parsedValues": ["14", "14", "15"],
+          "primaryValue": "14",
+          "secondaryValue": "14"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "105",
+          "parsedValues": ["105"],
+          "primaryValue": "105"
+        },
+        "powerBhpGain": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "originalTorque": {
+          "raw": "153",
+          "parsedValues": ["153"],
+          "primaryValue": "153"
+        },
+        "torqueNmGain": {
+          "raw": "17",
+          "parsedValues": ["17"],
+          "primaryValue": "17"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.4",
+        "originalBhp": {
+          "raw": "70 | 75 | 80",
+          "parsedValues": ["70", "75", "80"],
+          "primaryValue": "70",
+          "secondaryValue": "75"
+        },
+        "powerBhpGain": {
+          "raw": "20 | 25 | 25",
+          "parsedValues": ["20", "25", "25"],
+          "primaryValue": "20",
+          "secondaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "155 | 155 | 195",
+          "parsedValues": ["155", "155", "195"],
+          "primaryValue": "155",
+          "secondaryValue": "155"
+        },
+        "torqueNmGain": {
+          "raw": "45 | 90 | 50",
+          "parsedValues": ["45", "90", "50"],
+          "primaryValue": "45",
+          "secondaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "10 | 10 | 10",
+          "parsedValues": ["10", "10", "10"],
+          "primaryValue": "10",
+          "secondaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "20 | 45 | 25",
+          "parsedValues": ["20", "45", "25"],
+          "primaryValue": "20",
+          "secondaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.9",
+        "originalBhp": {
+          "raw": "64 | 100 | 130",
+          "parsedValues": ["64", "100", "130"],
+          "primaryValue": "64",
+          "secondaryValue": "100"
+        },
+        "powerBhpGain": {
+          "raw": "16 | 40 | 35",
+          "parsedValues": ["16", "40", "35"],
+          "primaryValue": "16",
+          "secondaryValue": "40"
+        },
+        "originalTorque": {
+          "raw": "125 | 240 | 310",
+          "parsedValues": ["125", "240", "310"],
+          "primaryValue": "125",
+          "secondaryValue": "240"
+        },
+        "torqueNmGain": {
+          "raw": "28 | 80 | 80",
+          "parsedValues": ["28", "80", "80"],
+          "primaryValue": "28",
+          "secondaryValue": "80"
+        },
+        "economyGainBhp": {
+          "raw": "10 | 20 | 20",
+          "parsedValues": ["10", "20", "20"],
+          "primaryValue": "10",
+          "secondaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "15 | 40 | 40",
+          "parsedValues": ["15", "40", "40"],
+          "primaryValue": "15",
+          "secondaryValue": "40"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Seat",
+    "model": "Cordoba",
+    "modelSlug": "cordoba",
+    "sourceProductId": 22740,
+    "sourceUrl": "https://viezu.com/shop/cordoba-6k-1999-2003/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.4",
+        "originalBhp": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "powerBhpGain": {
+          "raw": "6",
+          "parsedValues": ["6"],
+          "primaryValue": "6"
+        },
+        "originalTorque": {
+          "raw": "116",
+          "parsedValues": ["116"],
+          "primaryValue": "116"
+        },
+        "torqueNmGain": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "100 | 75",
+          "parsedValues": ["100", "75"],
+          "primaryValue": "100",
+          "secondaryValue": "75"
+        },
+        "powerBhpGain": {
+          "raw": "10 | 7",
+          "parsedValues": ["10", "7"],
+          "primaryValue": "10",
+          "secondaryValue": "7"
+        },
+        "originalTorque": {
+          "raw": "145 | 135",
+          "parsedValues": ["145", "135"],
+          "primaryValue": "145",
+          "secondaryValue": "135"
+        },
+        "torqueNmGain": {
+          "raw": "15 | 10",
+          "parsedValues": ["15", "10"],
+          "primaryValue": "15",
+          "secondaryValue": "10"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.8",
+        "originalBhp": {
+          "raw": "156",
+          "parsedValues": ["156"],
+          "primaryValue": "156"
+        },
+        "powerBhpGain": {
+          "raw": "44",
+          "parsedValues": ["44"],
+          "primaryValue": "44"
+        },
+        "originalTorque": {
+          "raw": "210",
+          "parsedValues": ["210"],
+          "primaryValue": "210"
+        },
+        "torqueNmGain": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.9",
+        "originalBhp": {
+          "raw": "68 | 110 | 90",
+          "parsedValues": ["68", "110", "90"],
+          "primaryValue": "68",
+          "secondaryValue": "110"
+        },
+        "powerBhpGain": {
+          "raw": "12 | 30 | 30",
+          "parsedValues": ["12", "30", "30"],
+          "primaryValue": "12",
+          "secondaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "133 | 235 | 210",
+          "parsedValues": ["133", "235", "210"],
+          "primaryValue": "133",
+          "secondaryValue": "235"
+        },
+        "torqueNmGain": {
+          "raw": "20 | 60 | 60",
+          "parsedValues": ["20", "60", "60"],
+          "primaryValue": "20",
+          "secondaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "5 | 15 | 15",
+          "parsedValues": ["5", "15", "15"],
+          "primaryValue": "5",
+          "secondaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "10 | 30 | 30",
+          "parsedValues": ["10", "30", "30"],
+          "primaryValue": "10",
+          "secondaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Seat",
+    "model": "Ateca",
+    "modelSlug": "ateca",
+    "sourceProductId": 22727,
+    "sourceUrl": "https://viezu.com/shop/seat-ateca-2016-2019/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.0",
+        "originalBhp": {
+          "raw": "115",
+          "parsedValues": ["115"],
+          "primaryValue": "115"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "200",
+          "parsedValues": ["200"],
+          "primaryValue": "200"
+        },
+        "torqueNmGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.4",
+        "originalBhp": {
+          "raw": "150",
+          "parsedValues": ["150"],
+          "primaryValue": "150"
+        },
+        "powerBhpGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "originalTorque": {
+          "raw": "250",
+          "parsedValues": ["250"],
+          "primaryValue": "250"
+        },
+        "torqueNmGain": {
+          "raw": "70",
+          "parsedValues": ["70"],
+          "primaryValue": "70"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.5",
+        "originalBhp": {
+          "raw": "150",
+          "parsedValues": ["150"],
+          "primaryValue": "150"
+        },
+        "powerBhpGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "250",
+          "parsedValues": ["250"],
+          "primaryValue": "250"
+        },
+        "torqueNmGain": {
+          "raw": "85",
+          "parsedValues": ["85"],
+          "primaryValue": "85"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "190",
+          "parsedValues": ["190"],
+          "primaryValue": "190"
+        },
+        "powerBhpGain": {
+          "raw": "55",
+          "parsedValues": ["55"],
+          "primaryValue": "55"
+        },
+        "originalTorque": {
+          "raw": "320",
+          "parsedValues": ["320"],
+          "primaryValue": "320"
+        },
+        "torqueNmGain": {
+          "raw": "110",
+          "parsedValues": ["110"],
+          "primaryValue": "110"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "115",
+          "parsedValues": ["115"],
+          "primaryValue": "115"
+        },
+        "powerBhpGain": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "250",
+          "parsedValues": ["250"],
+          "primaryValue": "250"
+        },
+        "torqueNmGain": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "150 | 190",
+          "parsedValues": ["150", "190"],
+          "primaryValue": "150",
+          "secondaryValue": "190"
+        },
+        "powerBhpGain": {
+          "raw": "45 | 35",
+          "parsedValues": ["45", "35"],
+          "primaryValue": "45",
+          "secondaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "340 | 400",
+          "parsedValues": ["340", "400"],
+          "primaryValue": "340",
+          "secondaryValue": "400"
+        },
+        "torqueNmGain": {
+          "raw": "90 | 60",
+          "parsedValues": ["90", "60"],
+          "primaryValue": "90",
+          "secondaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "20 | 20",
+          "parsedValues": ["20", "20"],
+          "primaryValue": "20",
+          "secondaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "45 | 30",
+          "parsedValues": ["45", "30"],
+          "primaryValue": "45",
+          "secondaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Seat",
+    "model": "Arosa",
+    "modelSlug": "arosa",
+    "sourceProductId": 22722,
+    "sourceUrl": "https://viezu.com/shop/arosa-2001-2004/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.0",
+        "originalBhp": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "powerBhpGain": {
+          "raw": "6",
+          "parsedValues": ["6"],
+          "primaryValue": "6"
+        },
+        "originalTorque": {
+          "raw": "86",
+          "parsedValues": ["86"],
+          "primaryValue": "86"
+        },
+        "torqueNmGain": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.4",
+        "originalBhp": {
+          "raw": "100 | 60",
+          "parsedValues": ["100", "60"],
+          "primaryValue": "100",
+          "secondaryValue": "60"
+        },
+        "powerBhpGain": {
+          "raw": "10 | 7",
+          "parsedValues": ["10", "7"],
+          "primaryValue": "10",
+          "secondaryValue": "7"
+        },
+        "originalTorque": {
+          "raw": "126 | 116",
+          "parsedValues": ["126", "116"],
+          "primaryValue": "126",
+          "secondaryValue": "116"
+        },
+        "torqueNmGain": {
+          "raw": "15 | 10",
+          "parsedValues": ["15", "10"],
+          "primaryValue": "15",
+          "secondaryValue": "10"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.4",
+        "originalBhp": {
+          "raw": "75",
+          "parsedValues": ["75"],
+          "primaryValue": "75"
+        },
+        "powerBhpGain": {
+          "raw": "26",
+          "parsedValues": ["26"],
+          "primaryValue": "26"
+        },
+        "originalTorque": {
+          "raw": "195",
+          "parsedValues": ["195"],
+          "primaryValue": "195"
+        },
+        "torqueNmGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.7",
+        "originalBhp": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "powerBhpGain": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "originalTorque": {
+          "raw": "115",
+          "parsedValues": ["115"],
+          "primaryValue": "115"
+        },
+        "torqueNmGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainBhp": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "economyGainNm": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Seat",
+    "model": "Arosa",
+    "modelSlug": "arosa",
+    "sourceProductId": 22717,
+    "sourceUrl": "https://viezu.com/shop/arosa-1997-2001/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.0",
+        "originalBhp": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "powerBhpGain": {
+          "raw": "6",
+          "parsedValues": ["6"],
+          "primaryValue": "6"
+        },
+        "originalTorque": {
+          "raw": "86",
+          "parsedValues": ["86"],
+          "primaryValue": "86"
+        },
+        "torqueNmGain": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.4",
+        "originalBhp": {
+          "raw": "100 | 60",
+          "parsedValues": ["100", "60"],
+          "primaryValue": "100",
+          "secondaryValue": "60"
+        },
+        "powerBhpGain": {
+          "raw": "10 | 7",
+          "parsedValues": ["10", "7"],
+          "primaryValue": "10",
+          "secondaryValue": "7"
+        },
+        "originalTorque": {
+          "raw": "126 | 116",
+          "parsedValues": ["126", "116"],
+          "primaryValue": "126",
+          "secondaryValue": "116"
+        },
+        "torqueNmGain": {
+          "raw": "15 | 10",
+          "parsedValues": ["15", "10"],
+          "primaryValue": "15",
+          "secondaryValue": "10"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.4",
+        "originalBhp": {
+          "raw": "75",
+          "parsedValues": ["75"],
+          "primaryValue": "75"
+        },
+        "powerBhpGain": {
+          "raw": "26",
+          "parsedValues": ["26"],
+          "primaryValue": "26"
+        },
+        "originalTorque": {
+          "raw": "195",
+          "parsedValues": ["195"],
+          "primaryValue": "195"
+        },
+        "torqueNmGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.7",
+        "originalBhp": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "powerBhpGain": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "originalTorque": {
+          "raw": "115",
+          "parsedValues": ["115"],
+          "primaryValue": "115"
+        },
+        "torqueNmGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainBhp": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "economyGainNm": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Seat",
+    "model": "Arona",
+    "modelSlug": "arona",
+    "sourceProductId": 22713,
+    "sourceUrl": "https://viezu.com/shop/seat-arona-2017-2020/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.0",
+        "originalBhp": {
+          "raw": "90 | 115 | 95",
+          "parsedValues": ["90", "115", "95"],
+          "primaryValue": "90",
+          "secondaryValue": "115"
+        },
+        "powerBhpGain": {
+          "raw": "25 | 20 | 40",
+          "parsedValues": ["25", "20", "40"],
+          "primaryValue": "25",
+          "secondaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "160 | 200 | 160",
+          "parsedValues": ["160", "200", "160"],
+          "primaryValue": "160",
+          "secondaryValue": "200"
+        },
+        "torqueNmGain": {
+          "raw": "45 | 40 | 80",
+          "parsedValues": ["45", "40", "80"],
+          "primaryValue": "45",
+          "secondaryValue": "40"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.5",
+        "originalBhp": {
+          "raw": "150",
+          "parsedValues": ["150"],
+          "primaryValue": "150"
+        },
+        "powerBhpGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "250",
+          "parsedValues": ["250"],
+          "primaryValue": "250"
+        },
+        "torqueNmGain": {
+          "raw": "85",
+          "parsedValues": ["85"],
+          "primaryValue": "85"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "115 | 95",
+          "parsedValues": ["115", "95"],
+          "primaryValue": "115",
+          "secondaryValue": "95"
+        },
+        "powerBhpGain": {
+          "raw": "30 | 50",
+          "parsedValues": ["30", "50"],
+          "primaryValue": "30",
+          "secondaryValue": "50"
+        },
+        "originalTorque": {
+          "raw": "250 | 250",
+          "parsedValues": ["250", "250"],
+          "primaryValue": "250",
+          "secondaryValue": "250"
+        },
+        "torqueNmGain": {
+          "raw": "70 | 70",
+          "parsedValues": ["70", "70"],
+          "primaryValue": "70",
+          "secondaryValue": "70"
+        },
+        "economyGainBhp": {
+          "raw": "15 | 25",
+          "parsedValues": ["15", "25"],
+          "primaryValue": "15",
+          "secondaryValue": "25"
+        },
+        "economyGainNm": {
+          "raw": "35 | 35",
+          "parsedValues": ["35", "35"],
+          "primaryValue": "35",
+          "secondaryValue": "35"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Seat",
+    "model": "Altea FreeTrack",
+    "modelSlug": "altea-freetrack",
+    "sourceProductId": 22708,
+    "sourceUrl": "https://viezu.com/shop/seat-altea-freetrack-2009-2013/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.4",
+        "originalBhp": {
+          "raw": "125",
+          "parsedValues": ["125"],
+          "primaryValue": "125"
+        },
+        "powerBhpGain": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "200",
+          "parsedValues": ["200"],
+          "primaryValue": "200"
+        },
+        "torqueNmGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "211",
+          "parsedValues": ["211"],
+          "primaryValue": "211"
+        },
+        "powerBhpGain": {
+          "raw": "49",
+          "parsedValues": ["49"],
+          "primaryValue": "49"
+        },
+        "originalTorque": {
+          "raw": "280",
+          "parsedValues": ["280"],
+          "primaryValue": "280"
+        },
+        "torqueNmGain": {
+          "raw": "100",
+          "parsedValues": ["100"],
+          "primaryValue": "100"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "105 | 90",
+          "parsedValues": ["105", "90"],
+          "primaryValue": "105",
+          "secondaryValue": "90"
+        },
+        "powerBhpGain": {
+          "raw": "45 | 50",
+          "parsedValues": ["45", "50"],
+          "primaryValue": "45",
+          "secondaryValue": "50"
+        },
+        "originalTorque": {
+          "raw": "250 | 230",
+          "parsedValues": ["250", "230"],
+          "primaryValue": "250",
+          "secondaryValue": "230"
+        },
+        "torqueNmGain": {
+          "raw": "60 | 80",
+          "parsedValues": ["60", "80"],
+          "primaryValue": "60",
+          "secondaryValue": "80"
+        },
+        "economyGainBhp": {
+          "raw": "20 | 25",
+          "parsedValues": ["20", "25"],
+          "primaryValue": "20",
+          "secondaryValue": "25"
+        },
+        "economyGainNm": {
+          "raw": "30 | 40",
+          "parsedValues": ["30", "40"],
+          "primaryValue": "30",
+          "secondaryValue": "40"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "140 | 170",
+          "parsedValues": ["140", "170"],
+          "primaryValue": "140",
+          "secondaryValue": "170"
+        },
+        "powerBhpGain": {
+          "raw": "40 | 35",
+          "parsedValues": ["40", "35"],
+          "primaryValue": "40",
+          "secondaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "320 | 350",
+          "parsedValues": ["320", "350"],
+          "primaryValue": "320",
+          "secondaryValue": "350"
+        },
+        "torqueNmGain": {
+          "raw": "80 | 80",
+          "parsedValues": ["80", "80"],
+          "primaryValue": "80",
+          "secondaryValue": "80"
+        },
+        "economyGainBhp": {
+          "raw": "20 | 20",
+          "parsedValues": ["20", "20"],
+          "primaryValue": "20",
+          "secondaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "40 | 40",
+          "parsedValues": ["40", "40"],
+          "primaryValue": "40",
+          "secondaryValue": "40"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Seat",
+    "model": "Altea FreeTrack",
+    "modelSlug": "altea-freetrack",
+    "sourceProductId": 22705,
+    "sourceUrl": "https://viezu.com/shop/seat-altea-freetrack-2007-2009/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "140 | 170",
+          "parsedValues": ["140", "170"],
+          "primaryValue": "140",
+          "secondaryValue": "170"
+        },
+        "powerBhpGain": {
+          "raw": "40 | 35",
+          "parsedValues": ["40", "35"],
+          "primaryValue": "40",
+          "secondaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "320 | 350",
+          "parsedValues": ["320", "350"],
+          "primaryValue": "320",
+          "secondaryValue": "350"
+        },
+        "torqueNmGain": {
+          "raw": "80 | 80",
+          "parsedValues": ["80", "80"],
+          "primaryValue": "80",
+          "secondaryValue": "80"
+        },
+        "economyGainBhp": {
+          "raw": "20 | 20",
+          "parsedValues": ["20", "20"],
+          "primaryValue": "20",
+          "secondaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "40 | 40",
+          "parsedValues": ["40", "40"],
+          "primaryValue": "40",
+          "secondaryValue": "40"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "200",
+          "parsedValues": ["200"],
+          "primaryValue": "200"
+        },
+        "powerBhpGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "originalTorque": {
+          "raw": "280",
+          "parsedValues": ["280"],
+          "primaryValue": "280"
+        },
+        "torqueNmGain": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Seat",
+    "model": "Altea / XL",
+    "modelSlug": "altea-xl",
+    "sourceProductId": 22697,
+    "sourceUrl": "https://viezu.com/shop/seat-altea-xl-2009-present/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "105 | 90",
+          "parsedValues": ["105", "90"],
+          "primaryValue": "105",
+          "secondaryValue": "90"
+        },
+        "powerBhpGain": {
+          "raw": "45 | 50",
+          "parsedValues": ["45", "50"],
+          "primaryValue": "45",
+          "secondaryValue": "50"
+        },
+        "originalTorque": {
+          "raw": "250 | 230",
+          "parsedValues": ["250", "230"],
+          "primaryValue": "250",
+          "secondaryValue": "230"
+        },
+        "torqueNmGain": {
+          "raw": "70 | 80",
+          "parsedValues": ["70", "80"],
+          "primaryValue": "70",
+          "secondaryValue": "80"
+        },
+        "economyGainBhp": {
+          "raw": "20 | 25",
+          "parsedValues": ["20", "25"],
+          "primaryValue": "20",
+          "secondaryValue": "25"
+        },
+        "economyGainNm": {
+          "raw": "35 | 40",
+          "parsedValues": ["35", "40"],
+          "primaryValue": "35",
+          "secondaryValue": "40"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.2",
+        "originalBhp": {
+          "raw": "105",
+          "parsedValues": ["105"],
+          "primaryValue": "105"
+        },
+        "powerBhpGain": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "originalTorque": {
+          "raw": "175",
+          "parsedValues": ["175"],
+          "primaryValue": "175"
+        },
+        "torqueNmGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.4",
+        "originalBhp": {
+          "raw": "125",
+          "parsedValues": ["125"],
+          "primaryValue": "125"
+        },
+        "powerBhpGain": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "200",
+          "parsedValues": ["200"],
+          "primaryValue": "200"
+        },
+        "torqueNmGain": {
+          "raw": "65",
+          "parsedValues": ["65"],
+          "primaryValue": "65"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "102",
+          "parsedValues": ["102"],
+          "primaryValue": "102"
+        },
+        "powerBhpGain": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "originalTorque": {
+          "raw": "148",
+          "parsedValues": ["148"],
+          "primaryValue": "148"
+        },
+        "torqueNmGain": {
+          "raw": "17",
+          "parsedValues": ["17"],
+          "primaryValue": "17"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.8",
+        "originalBhp": {
+          "raw": "160",
+          "parsedValues": ["160"],
+          "primaryValue": "160"
+        },
+        "powerBhpGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "originalTorque": {
+          "raw": "250",
+          "parsedValues": ["250"],
+          "primaryValue": "250"
+        },
+        "torqueNmGain": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "211",
+          "parsedValues": ["211"],
+          "primaryValue": "211"
+        },
+        "powerBhpGain": {
+          "raw": "49",
+          "parsedValues": ["49"],
+          "primaryValue": "49"
+        },
+        "originalTorque": {
+          "raw": "280",
+          "parsedValues": ["280"],
+          "primaryValue": "280"
+        },
+        "torqueNmGain": {
+          "raw": "100",
+          "parsedValues": ["100"],
+          "primaryValue": "100"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "140 | 170",
+          "parsedValues": ["140", "170"],
+          "primaryValue": "140",
+          "secondaryValue": "170"
+        },
+        "powerBhpGain": {
+          "raw": "40 | 35",
+          "parsedValues": ["40", "35"],
+          "primaryValue": "40",
+          "secondaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "320 | 350",
+          "parsedValues": ["320", "350"],
+          "primaryValue": "320",
+          "secondaryValue": "350"
+        },
+        "torqueNmGain": {
+          "raw": "80 | 80",
+          "parsedValues": ["80", "80"],
+          "primaryValue": "80",
+          "secondaryValue": "80"
+        },
+        "economyGainBhp": {
+          "raw": "20 | 20",
+          "parsedValues": ["20", "20"],
+          "primaryValue": "20",
+          "secondaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "40 | 40",
+          "parsedValues": ["40", "40"],
+          "primaryValue": "40",
+          "secondaryValue": "40"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Seat",
+    "model": "Altea / XL",
+    "modelSlug": "altea-xl",
+    "sourceProductId": 22690,
+    "sourceUrl": "https://viezu.com/shop/seat-altea-xl-2004-2009/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "1.9",
+        "originalBhp": {
+          "raw": "105 | 90",
+          "parsedValues": ["105", "90"],
+          "primaryValue": "105",
+          "secondaryValue": "90"
+        },
+        "powerBhpGain": {
+          "raw": "35 | 30",
+          "parsedValues": ["35", "30"],
+          "primaryValue": "35",
+          "secondaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "250 | 210",
+          "parsedValues": ["250", "210"],
+          "primaryValue": "250",
+          "secondaryValue": "210"
+        },
+        "torqueNmGain": {
+          "raw": "70 | 55",
+          "parsedValues": ["70", "55"],
+          "primaryValue": "70",
+          "secondaryValue": "55"
+        },
+        "economyGainBhp": {
+          "raw": "20 | 15",
+          "parsedValues": ["20", "15"],
+          "primaryValue": "20",
+          "secondaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "35 | 25",
+          "parsedValues": ["35", "25"],
+          "primaryValue": "35",
+          "secondaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.4",
+        "originalBhp": {
+          "raw": "125",
+          "parsedValues": ["125"],
+          "primaryValue": "125"
+        },
+        "powerBhpGain": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "200",
+          "parsedValues": ["200"],
+          "primaryValue": "200"
+        },
+        "torqueNmGain": {
+          "raw": "65",
+          "parsedValues": ["65"],
+          "primaryValue": "65"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "102",
+          "parsedValues": ["102"],
+          "primaryValue": "102"
+        },
+        "powerBhpGain": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "originalTorque": {
+          "raw": "148",
+          "parsedValues": ["148"],
+          "primaryValue": "148"
+        },
+        "torqueNmGain": {
+          "raw": "17",
+          "parsedValues": ["17"],
+          "primaryValue": "17"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.8",
+        "originalBhp": {
+          "raw": "160",
+          "parsedValues": ["160"],
+          "primaryValue": "160"
+        },
+        "powerBhpGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "originalTorque": {
+          "raw": "250",
+          "parsedValues": ["250"],
+          "primaryValue": "250"
+        },
+        "torqueNmGain": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "150 | 200",
+          "parsedValues": ["150", "200"],
+          "primaryValue": "150",
+          "secondaryValue": "200"
+        },
+        "powerBhpGain": {
+          "raw": "10 | 50",
+          "parsedValues": ["10", "50"],
+          "primaryValue": "10",
+          "secondaryValue": "50"
+        },
+        "originalTorque": {
+          "raw": "200 | 280",
+          "parsedValues": ["200", "280"],
+          "primaryValue": "200",
+          "secondaryValue": "280"
+        },
+        "torqueNmGain": {
+          "raw": "15 | 80",
+          "parsedValues": ["15", "80"],
+          "primaryValue": "15",
+          "secondaryValue": "80"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "140 | 170",
+          "parsedValues": ["140", "170"],
+          "primaryValue": "140",
+          "secondaryValue": "170"
+        },
+        "powerBhpGain": {
+          "raw": "35 | 35",
+          "parsedValues": ["35", "35"],
+          "primaryValue": "35",
+          "secondaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "320 | 350",
+          "parsedValues": ["320", "350"],
+          "primaryValue": "320",
+          "secondaryValue": "350"
+        },
+        "torqueNmGain": {
+          "raw": "75 | 80",
+          "parsedValues": ["75", "80"],
+          "primaryValue": "75",
+          "secondaryValue": "80"
+        },
+        "economyGainBhp": {
+          "raw": "20 | 20",
+          "parsedValues": ["20", "20"],
+          "primaryValue": "20",
+          "secondaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "40 | 40",
+          "parsedValues": ["40", "40"],
+          "primaryValue": "40",
+          "secondaryValue": "40"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Seat",
+    "model": "Alhambra",
+    "modelSlug": "alhambra",
+    "sourceProductId": 22686,
+    "sourceUrl": "https://viezu.com/shop/alhambra-2010-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.4",
+        "originalBhp": {
+          "raw": "150",
+          "parsedValues": ["150"],
+          "primaryValue": "150"
+        },
+        "powerBhpGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "originalTorque": {
+          "raw": "240",
+          "parsedValues": ["240"],
+          "primaryValue": "240"
+        },
+        "torqueNmGain": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "200 | 220",
+          "parsedValues": ["200", "220"],
+          "primaryValue": "200",
+          "secondaryValue": "220"
+        },
+        "powerBhpGain": {
+          "raw": "60 | 80",
+          "parsedValues": ["60", "80"],
+          "primaryValue": "60",
+          "secondaryValue": "80"
+        },
+        "originalTorque": {
+          "raw": "280 | 350",
+          "parsedValues": ["280", "350"],
+          "primaryValue": "280",
+          "secondaryValue": "350"
+        },
+        "torqueNmGain": {
+          "raw": "100 | 100",
+          "parsedValues": ["100", "100"],
+          "primaryValue": "100",
+          "secondaryValue": "100"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "115 | 136 | 140 | 150 | 170 | 177 | 184",
+          "parsedValues": ["115", "136", "140", "150", "170", "177", "184"],
+          "primaryValue": "115",
+          "secondaryValue": "136"
+        },
+        "powerBhpGain": {
+          "raw": "70 | 44 | 40 | 40 | 35 | 38 | 41",
+          "parsedValues": ["70", "44", "40", "40", "35", "38", "41"],
+          "primaryValue": "70",
+          "secondaryValue": "44"
+        },
+        "originalTorque": {
+          "raw": "280 | 320 | 320 | 320 | 350 | 380 | 380",
+          "parsedValues": ["280", "320", "320", "320", "350", "380", "380"],
+          "primaryValue": "280",
+          "secondaryValue": "320"
+        },
+        "torqueNmGain": {
+          "raw": "130 | 80 | 80 | 100 | 80 | 50 | 80",
+          "parsedValues": ["130", "80", "80", "100", "80", "50", "80"],
+          "primaryValue": "130",
+          "secondaryValue": "80"
+        },
+        "economyGainBhp": {
+          "raw": "35 | 20 | 20 | 20 | 20 | 20 | 20",
+          "parsedValues": ["35", "20", "20", "20", "20", "20", "20"],
+          "primaryValue": "35",
+          "secondaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "65 | 40 | 40 | 50 | 40 | 25 | 40",
+          "parsedValues": ["65", "40", "40", "50", "40", "25", "40"],
+          "primaryValue": "65",
+          "secondaryValue": "40"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10% | 10% | 10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%", "10%", "10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Seat",
+    "model": "Alhambra",
+    "modelSlug": "alhambra",
+    "sourceProductId": 22681,
+    "sourceUrl": "https://viezu.com/shop/alhambra-2000-2010/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.8",
+        "originalBhp": {
+          "raw": "150",
+          "parsedValues": ["150"],
+          "primaryValue": "150"
+        },
+        "powerBhpGain": {
+          "raw": "42",
+          "parsedValues": ["42"],
+          "primaryValue": "42"
+        },
+        "originalTorque": {
+          "raw": "210",
+          "parsedValues": ["210"],
+          "primaryValue": "210"
+        },
+        "torqueNmGain": {
+          "raw": "100",
+          "parsedValues": ["100"],
+          "primaryValue": "100"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "115",
+          "parsedValues": ["115"],
+          "primaryValue": "115"
+        },
+        "powerBhpGain": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "originalTorque": {
+          "raw": "170",
+          "parsedValues": ["170"],
+          "primaryValue": "170"
+        },
+        "torqueNmGain": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.9",
+        "originalBhp": {
+          "raw": "115 | 130 | 90",
+          "parsedValues": ["115", "130", "90"],
+          "primaryValue": "115",
+          "secondaryValue": "130"
+        },
+        "powerBhpGain": {
+          "raw": "35 | 40 | 25",
+          "parsedValues": ["35", "40", "25"],
+          "primaryValue": "35",
+          "secondaryValue": "40"
+        },
+        "originalTorque": {
+          "raw": "310 | 310 | 240",
+          "parsedValues": ["310", "310", "240"],
+          "primaryValue": "310",
+          "secondaryValue": "310"
+        },
+        "torqueNmGain": {
+          "raw": "90 | 80 | 60",
+          "parsedValues": ["90", "80", "60"],
+          "primaryValue": "90",
+          "secondaryValue": "80"
+        },
+        "economyGainBhp": {
+          "raw": "20 | 20 | 10",
+          "parsedValues": ["20", "20", "10"],
+          "primaryValue": "20",
+          "secondaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "45 | 40 | 30",
+          "parsedValues": ["45", "40", "30"],
+          "primaryValue": "45",
+          "secondaryValue": "40"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "140",
+          "parsedValues": ["140"],
+          "primaryValue": "140"
+        },
+        "powerBhpGain": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "310",
+          "parsedValues": ["310"],
+          "primaryValue": "310"
+        },
+        "torqueNmGain": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Seat",
+    "model": "Alhambra",
+    "modelSlug": "alhambra",
+    "sourceProductId": 22678,
+    "sourceUrl": "https://viezu.com/shop/alhambra-1996-2000/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.8",
+        "originalBhp": {
+          "raw": "150",
+          "parsedValues": ["150"],
+          "primaryValue": "150"
+        },
+        "powerBhpGain": {
+          "raw": "42",
+          "parsedValues": ["42"],
+          "primaryValue": "42"
+        },
+        "originalTorque": {
+          "raw": "210",
+          "parsedValues": ["210"],
+          "primaryValue": "210"
+        },
+        "torqueNmGain": {
+          "raw": "100",
+          "parsedValues": ["100"],
+          "primaryValue": "100"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.9",
+        "originalBhp": {
+          "raw": "110 | 90",
+          "parsedValues": ["110", "90"],
+          "primaryValue": "110",
+          "secondaryValue": "90"
+        },
+        "powerBhpGain": {
+          "raw": "30 | 30",
+          "parsedValues": ["30", "30"],
+          "primaryValue": "30",
+          "secondaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "235 | 202",
+          "parsedValues": ["235", "202"],
+          "primaryValue": "235",
+          "secondaryValue": "202"
+        },
+        "torqueNmGain": {
+          "raw": "65 | 68",
+          "parsedValues": ["65", "68"],
+          "primaryValue": "65",
+          "secondaryValue": "68"
+        },
+        "economyGainBhp": {
+          "raw": "15 | 15",
+          "parsedValues": ["15", "15"],
+          "primaryValue": "15",
+          "secondaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "30 | 35",
+          "parsedValues": ["30", "35"],
+          "primaryValue": "30",
+          "secondaryValue": "35"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  }
+]

@@ -1,0 +1,432 @@
+[
+  {
+    "make": "Lotus",
+    "model": "Emira",
+    "modelSlug": "emira",
+    "sourceProductId": 53715,
+    "sourceUrl": "https://viezu.com/shop/lotus-emira-all/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "360",
+          "parsedValues": ["360"],
+          "primaryValue": "360"
+        },
+        "powerBhpGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "originalTorque": {
+          "raw": "430",
+          "parsedValues": ["430"],
+          "primaryValue": "430"
+        },
+        "torqueNmGain": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "3.5",
+        "originalBhp": {
+          "raw": "405",
+          "parsedValues": ["405"],
+          "primaryValue": "405"
+        },
+        "powerBhpGain": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "originalTorque": {
+          "raw": "420",
+          "parsedValues": ["420"],
+          "primaryValue": "420"
+        },
+        "torqueNmGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 34900
+      }
+    ]
+  },
+  {
+    "make": "Lotus",
+    "model": "2 ELEVEN",
+    "modelSlug": "2-eleven",
+    "sourceProductId": 48877,
+    "sourceUrl": "https://viezu.com/shop/lotus-2-eleven-2007-2011/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.8",
+        "originalBhp": {
+          "raw": "252",
+          "parsedValues": ["252"],
+          "primaryValue": "252"
+        },
+        "powerBhpGain": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "originalTorque": {
+          "raw": "242",
+          "parsedValues": ["242"],
+          "primaryValue": "242"
+        },
+        "torqueNmGain": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 19900
+      }
+    ]
+  },
+  {
+    "make": "Lotus",
+    "model": "Exige",
+    "modelSlug": "exige",
+    "sourceProductId": 20879,
+    "sourceUrl": "https://viezu.com/shop/lotus-exige-all/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "3.5",
+        "originalBhp": {
+          "raw": "350 | 346 | 375 | 424 | 404 | 430",
+          "parsedValues": ["350", "346", "375", "424", "404", "430"],
+          "primaryValue": "350",
+          "secondaryValue": "346"
+        },
+        "powerBhpGain": {
+          "raw": "15 | 24 | 10 | 6 | 16 | 10",
+          "parsedValues": ["15", "24", "10", "6", "16", "10"],
+          "primaryValue": "15",
+          "secondaryValue": "24"
+        },
+        "originalTorque": {
+          "raw": "400 | 400 | 410 | 440 | 410 | 438",
+          "parsedValues": ["400", "400", "410", "440", "410", "438"],
+          "primaryValue": "400",
+          "secondaryValue": "400"
+        },
+        "torqueNmGain": {
+          "raw": "15 | 30 | 15 | 10 | 20 | 12",
+          "parsedValues": ["15", "30", "15", "10", "20", "12"],
+          "primaryValue": "15",
+          "secondaryValue": "30"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 34900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.8",
+        "originalBhp": {
+          "raw": "192 | 221 | 241",
+          "parsedValues": ["192", "221", "241"],
+          "primaryValue": "192",
+          "secondaryValue": "221"
+        },
+        "powerBhpGain": {
+          "raw": "13 | 19 | 24",
+          "parsedValues": ["13", "19", "24"],
+          "primaryValue": "13",
+          "secondaryValue": "19"
+        },
+        "originalTorque": {
+          "raw": "185 | 215 | 215",
+          "parsedValues": ["185", "215", "215"],
+          "primaryValue": "185",
+          "secondaryValue": "215"
+        },
+        "torqueNmGain": {
+          "raw": "15 | 15 | 15",
+          "parsedValues": ["15", "15", "15"],
+          "primaryValue": "15",
+          "secondaryValue": "15"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 34900
+      }
+    ]
+  },
+  {
+    "make": "Lotus",
+    "model": "Evora",
+    "modelSlug": "evora",
+    "sourceProductId": 20877,
+    "sourceUrl": "https://viezu.com/shop/lotus-evora-all/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "3.5",
+        "originalBhp": {
+          "raw": "280 | 350 | 409 | 400",
+          "parsedValues": ["280", "350", "409", "400"],
+          "primaryValue": "280",
+          "secondaryValue": "350"
+        },
+        "powerBhpGain": {
+          "raw": "25 | 10 | 40 | 37",
+          "parsedValues": ["25", "10", "40", "37"],
+          "primaryValue": "25",
+          "secondaryValue": "10"
+        },
+        "originalTorque": {
+          "raw": "350 | 400 | 440 | 410",
+          "parsedValues": ["350", "400", "440", "410"],
+          "primaryValue": "350",
+          "secondaryValue": "400"
+        },
+        "torqueNmGain": {
+          "raw": "60 | 15 | 25 | 17",
+          "parsedValues": ["60", "15", "25", "17"],
+          "primaryValue": "60",
+          "secondaryValue": "15"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 34900
+      }
+    ]
+  },
+  {
+    "make": "Lotus",
+    "model": "Europa",
+    "modelSlug": "europa",
+    "sourceProductId": 20875,
+    "sourceUrl": "https://viezu.com/shop/lotus-europa-all/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "220",
+          "parsedValues": ["220"],
+          "primaryValue": "220"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "272",
+          "parsedValues": ["272"],
+          "primaryValue": "272"
+        },
+        "torqueNmGain": {
+          "raw": "88",
+          "parsedValues": ["88"],
+          "primaryValue": "88"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 34900
+      }
+    ]
+  },
+  {
+    "make": "Lotus",
+    "model": "Elise",
+    "modelSlug": "elise",
+    "sourceProductId": 20873,
+    "sourceUrl": "https://viezu.com/shop/lotus-elise-all/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "135",
+          "parsedValues": ["135"],
+          "primaryValue": "135"
+        },
+        "powerBhpGain": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "originalTorque": {
+          "raw": "160",
+          "parsedValues": ["160"],
+          "primaryValue": "160"
+        },
+        "torqueNmGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 34900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.8",
+        "originalBhp": {
+          "raw": "246 | 192 | 136 | 220 | 122 | 160",
+          "parsedValues": ["246", "192", "136", "220", "122", "160"],
+          "primaryValue": "246",
+          "secondaryValue": "192"
+        },
+        "powerBhpGain": {
+          "raw": "19 | 13 | 14 | 20 | 12 | 14",
+          "parsedValues": ["19", "13", "14", "20", "12", "14"],
+          "primaryValue": "19",
+          "secondaryValue": "13"
+        },
+        "originalTorque": {
+          "raw": "250 | 181 | 160 | 250 | 168 | 175",
+          "parsedValues": ["250", "181", "160", "250", "168", "175"],
+          "primaryValue": "250",
+          "secondaryValue": "181"
+        },
+        "torqueNmGain": {
+          "raw": "20 | 15 | 20 | 30 | 17 | 15",
+          "parsedValues": ["20", "15", "20", "30", "17", "15"],
+          "primaryValue": "20",
+          "secondaryValue": "15"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 34900
+      }
+    ]
+  }
+]

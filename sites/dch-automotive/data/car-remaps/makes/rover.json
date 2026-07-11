@@ -1,0 +1,58 @@
+[
+  {
+    "make": "Rover",
+    "model": "75",
+    "modelSlug": "75",
+    "sourceProductId": 22617,
+    "sourceUrl": "https://viezu.com/shop/75-all/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "115 | 131",
+          "parsedValues": ["115", "131"],
+          "primaryValue": "115",
+          "secondaryValue": "131"
+        },
+        "powerBhpGain": {
+          "raw": "27 | 29",
+          "parsedValues": ["27", "29"],
+          "primaryValue": "27",
+          "secondaryValue": "29"
+        },
+        "originalTorque": {
+          "raw": "260 | 300",
+          "parsedValues": ["260", "300"],
+          "primaryValue": "260",
+          "secondaryValue": "300"
+        },
+        "torqueNmGain": {
+          "raw": "42 | 60",
+          "parsedValues": ["42", "60"],
+          "primaryValue": "42",
+          "secondaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "15 | 15",
+          "parsedValues": ["15", "15"],
+          "primaryValue": "15",
+          "secondaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "20 | 30",
+          "parsedValues": ["20", "30"],
+          "primaryValue": "20",
+          "secondaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  }
+]

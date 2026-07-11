@@ -1,0 +1,845 @@
+[
+  {
+    "make": "Maserati",
+    "model": "Spyder",
+    "modelSlug": "spyder",
+    "sourceProductId": 58008,
+    "sourceUrl": "https://viezu.com/shop/maserati-spyder-all/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "4.2",
+        "originalBhp": {
+          "raw": "389",
+          "parsedValues": ["389"],
+          "primaryValue": "389"
+        },
+        "powerBhpGain": {
+          "raw": "39",
+          "parsedValues": ["39"],
+          "primaryValue": "39"
+        },
+        "originalTorque": {
+          "raw": "451",
+          "parsedValues": ["451"],
+          "primaryValue": "451"
+        },
+        "torqueNmGain": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 39900
+      }
+    ]
+  },
+  {
+    "make": "Maserati",
+    "model": "GRANCABRIO",
+    "modelSlug": "grancabrio",
+    "sourceProductId": 48880,
+    "sourceUrl": "https://viezu.com/shop/maserati-grancabrio-2010-2013/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "4.7",
+        "originalBhp": {
+          "raw": "434 | 444 | 453",
+          "parsedValues": ["434", "444", "453"],
+          "primaryValue": "434",
+          "secondaryValue": "444"
+        },
+        "powerBhpGain": {
+          "raw": "26 | 21 | 31",
+          "parsedValues": ["26", "21", "31"],
+          "primaryValue": "26",
+          "secondaryValue": "21"
+        },
+        "originalTorque": {
+          "raw": "490 | 510 | 520",
+          "parsedValues": ["490", "510", "520"],
+          "primaryValue": "490",
+          "secondaryValue": "510"
+        },
+        "torqueNmGain": {
+          "raw": "20 | 17 | 33",
+          "parsedValues": ["20", "17", "33"],
+          "primaryValue": "20",
+          "secondaryValue": "17"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 69900
+      }
+    ]
+  },
+  {
+    "make": "Maserati",
+    "model": "Quattroporte",
+    "modelSlug": "quattroporte",
+    "sourceProductId": 20921,
+    "sourceUrl": "https://viezu.com/shop/quattroporte-2013-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "3.0",
+        "originalBhp": {
+          "raw": "330 | 410 | 430",
+          "parsedValues": ["330", "410", "430"],
+          "primaryValue": "330",
+          "secondaryValue": "410"
+        },
+        "powerBhpGain": {
+          "raw": "50 | 90 | 70",
+          "parsedValues": ["50", "90", "70"],
+          "primaryValue": "50",
+          "secondaryValue": "90"
+        },
+        "originalTorque": {
+          "raw": "500 | 550 | 580",
+          "parsedValues": ["500", "550", "580"],
+          "primaryValue": "500",
+          "secondaryValue": "550"
+        },
+        "torqueNmGain": {
+          "raw": "100 | 115 | 85",
+          "parsedValues": ["100", "115", "85"],
+          "primaryValue": "100",
+          "secondaryValue": "115"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 59900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "3.8",
+        "originalBhp": {
+          "raw": "530",
+          "parsedValues": ["530"],
+          "primaryValue": "530"
+        },
+        "powerBhpGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "originalTorque": {
+          "raw": "650",
+          "parsedValues": ["650"],
+          "primaryValue": "650"
+        },
+        "torqueNmGain": {
+          "raw": "150",
+          "parsedValues": ["150"],
+          "primaryValue": "150"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 59900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "3.0",
+        "originalBhp": {
+          "raw": "275",
+          "parsedValues": ["275"],
+          "primaryValue": "275"
+        },
+        "powerBhpGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "600",
+          "parsedValues": ["600"],
+          "primaryValue": "600"
+        },
+        "torqueNmGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 49900
+      }
+    ]
+  },
+  {
+    "make": "Maserati",
+    "model": "Quattroporte",
+    "modelSlug": "quattroporte",
+    "sourceProductId": 20918,
+    "sourceUrl": "https://viezu.com/shop/maserati-quattroporte-2004-2012/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "4.2",
+        "originalBhp": {
+          "raw": "400",
+          "parsedValues": ["400"],
+          "primaryValue": "400"
+        },
+        "powerBhpGain": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "460",
+          "parsedValues": ["460"],
+          "primaryValue": "460"
+        },
+        "torqueNmGain": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 49900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "4.7",
+        "originalBhp": {
+          "raw": "430 | 440",
+          "parsedValues": ["430", "440"],
+          "primaryValue": "430",
+          "secondaryValue": "440"
+        },
+        "powerBhpGain": {
+          "raw": "15 | 20",
+          "parsedValues": ["15", "20"],
+          "primaryValue": "15",
+          "secondaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "490 | 490",
+          "parsedValues": ["490", "490"],
+          "primaryValue": "490",
+          "secondaryValue": "490"
+        },
+        "torqueNmGain": {
+          "raw": "20 | 20",
+          "parsedValues": ["20", "20"],
+          "primaryValue": "20",
+          "secondaryValue": "20"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 49900
+      }
+    ]
+  },
+  {
+    "make": "Maserati",
+    "model": "Levante",
+    "modelSlug": "levante",
+    "sourceProductId": 20914,
+    "sourceUrl": "https://viezu.com/shop/maserati-levante-2016-present/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "3.0",
+        "originalBhp": {
+          "raw": "275",
+          "parsedValues": ["275"],
+          "primaryValue": "275"
+        },
+        "powerBhpGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "600",
+          "parsedValues": ["600"],
+          "primaryValue": "600"
+        },
+        "torqueNmGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 59900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "3.0",
+        "originalBhp": {
+          "raw": "350 | 430",
+          "parsedValues": ["350", "430"],
+          "primaryValue": "350",
+          "secondaryValue": "430"
+        },
+        "powerBhpGain": {
+          "raw": "70 | 30",
+          "parsedValues": ["70", "30"],
+          "primaryValue": "70",
+          "secondaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "500 | 580",
+          "parsedValues": ["500", "580"],
+          "primaryValue": "500",
+          "secondaryValue": "580"
+        },
+        "torqueNmGain": {
+          "raw": "100 | 120",
+          "parsedValues": ["100", "120"],
+          "primaryValue": "100",
+          "secondaryValue": "120"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 59900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "3.8",
+        "originalBhp": {
+          "raw": "550 | 580",
+          "parsedValues": ["550", "580"],
+          "primaryValue": "550",
+          "secondaryValue": "580"
+        },
+        "powerBhpGain": {
+          "raw": "50 | 20",
+          "parsedValues": ["50", "20"],
+          "primaryValue": "50",
+          "secondaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "730 | 730",
+          "parsedValues": ["730", "730"],
+          "primaryValue": "730",
+          "secondaryValue": "730"
+        },
+        "torqueNmGain": {
+          "raw": "70 | 70",
+          "parsedValues": ["70", "70"],
+          "primaryValue": "70",
+          "secondaryValue": "70"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 59900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "3.0",
+        "originalBhp": {
+          "raw": "250",
+          "parsedValues": ["250"],
+          "primaryValue": "250"
+        },
+        "powerBhpGain": {
+          "raw": "55",
+          "parsedValues": ["55"],
+          "primaryValue": "55"
+        },
+        "originalTorque": {
+          "raw": "600",
+          "parsedValues": ["600"],
+          "primaryValue": "600"
+        },
+        "torqueNmGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "economyGainNm": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 49900
+      }
+    ]
+  },
+  {
+    "make": "Maserati",
+    "model": "GranTurismo",
+    "modelSlug": "granturismo",
+    "sourceProductId": 20912,
+    "sourceUrl": "https://viezu.com/shop/maserati-granturismo-2017-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "4.7",
+        "originalBhp": {
+          "raw": "460",
+          "parsedValues": ["460"],
+          "primaryValue": "460"
+        },
+        "powerBhpGain": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "520",
+          "parsedValues": ["520"],
+          "primaryValue": "520"
+        },
+        "torqueNmGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 59900
+      }
+    ]
+  },
+  {
+    "make": "Maserati",
+    "model": "GranTurismo",
+    "modelSlug": "granturismo",
+    "sourceProductId": 20909,
+    "sourceUrl": "https://viezu.com/shop/maserati-granturismo-2007-2016/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "4.2",
+        "originalBhp": {
+          "raw": "405",
+          "parsedValues": ["405"],
+          "primaryValue": "405"
+        },
+        "powerBhpGain": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "460",
+          "parsedValues": ["460"],
+          "primaryValue": "460"
+        },
+        "torqueNmGain": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 49900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "4.7",
+        "originalBhp": {
+          "raw": "440",
+          "parsedValues": ["440"],
+          "primaryValue": "440"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "490",
+          "parsedValues": ["490"],
+          "primaryValue": "490"
+        },
+        "torqueNmGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 49900
+      }
+    ]
+  },
+  {
+    "make": "Maserati",
+    "model": "Ghibli",
+    "modelSlug": "ghibli",
+    "sourceProductId": 20906,
+    "sourceUrl": "https://viezu.com/shop/ghibli-2017-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "3.0",
+        "originalBhp": {
+          "raw": "350 | 410",
+          "parsedValues": ["350", "410"],
+          "primaryValue": "350",
+          "secondaryValue": "410"
+        },
+        "powerBhpGain": {
+          "raw": "70 | 50",
+          "parsedValues": ["70", "50"],
+          "primaryValue": "70",
+          "secondaryValue": "50"
+        },
+        "originalTorque": {
+          "raw": "500 | 550",
+          "parsedValues": ["500", "550"],
+          "primaryValue": "500",
+          "secondaryValue": "550"
+        },
+        "torqueNmGain": {
+          "raw": "100 | 150",
+          "parsedValues": ["100", "150"],
+          "primaryValue": "100",
+          "secondaryValue": "150"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 59900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "3.0",
+        "originalBhp": {
+          "raw": "250 | 275",
+          "parsedValues": ["250", "275"],
+          "primaryValue": "250",
+          "secondaryValue": "275"
+        },
+        "powerBhpGain": {
+          "raw": "55 | 30",
+          "parsedValues": ["55", "30"],
+          "primaryValue": "55",
+          "secondaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "600 | 600",
+          "parsedValues": ["600", "600"],
+          "primaryValue": "600",
+          "secondaryValue": "600"
+        },
+        "torqueNmGain": {
+          "raw": "60 | 60",
+          "parsedValues": ["60", "60"],
+          "primaryValue": "60",
+          "secondaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "30 | 15",
+          "parsedValues": ["30", "15"],
+          "primaryValue": "30",
+          "secondaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "30 | 30",
+          "parsedValues": ["30", "30"],
+          "primaryValue": "30",
+          "secondaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 49900
+      }
+    ]
+  },
+  {
+    "make": "Maserati",
+    "model": "Ghibli",
+    "modelSlug": "ghibli",
+    "sourceProductId": 20903,
+    "sourceUrl": "https://viezu.com/shop/maserati-ghibli-2013-2016/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "3.0",
+        "originalBhp": {
+          "raw": "275 | 250",
+          "parsedValues": ["275", "250"],
+          "primaryValue": "275",
+          "secondaryValue": "250"
+        },
+        "powerBhpGain": {
+          "raw": "30 | 45",
+          "parsedValues": ["30", "45"],
+          "primaryValue": "30",
+          "secondaryValue": "45"
+        },
+        "originalTorque": {
+          "raw": "600 | 600",
+          "parsedValues": ["600", "600"],
+          "primaryValue": "600",
+          "secondaryValue": "600"
+        },
+        "torqueNmGain": {
+          "raw": "60 | 60",
+          "parsedValues": ["60", "60"],
+          "primaryValue": "60",
+          "secondaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "15 | 22",
+          "parsedValues": ["15", "22"],
+          "primaryValue": "15",
+          "secondaryValue": "22"
+        },
+        "economyGainNm": {
+          "raw": "30 | 15",
+          "parsedValues": ["30", "15"],
+          "primaryValue": "30",
+          "secondaryValue": "15"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 49900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "3.0",
+        "originalBhp": {
+          "raw": "330 | 410",
+          "parsedValues": ["330", "410"],
+          "primaryValue": "330",
+          "secondaryValue": "410"
+        },
+        "powerBhpGain": {
+          "raw": "50 | 50",
+          "parsedValues": ["50", "50"],
+          "primaryValue": "50",
+          "secondaryValue": "50"
+        },
+        "originalTorque": {
+          "raw": "500 | 550",
+          "parsedValues": ["500", "550"],
+          "primaryValue": "500",
+          "secondaryValue": "550"
+        },
+        "torqueNmGain": {
+          "raw": "100 | 115",
+          "parsedValues": ["100", "115"],
+          "primaryValue": "100",
+          "secondaryValue": "115"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 59900
+      }
+    ]
+  }
+]

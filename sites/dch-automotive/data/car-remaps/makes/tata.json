@@ -1,0 +1,51 @@
+[
+  {
+    "make": "Tata",
+    "model": "Nano",
+    "modelSlug": "nano",
+    "sourceProductId": 63240,
+    "sourceUrl": "https://viezu.com/shop/tata-nano-all/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "0.6",
+        "originalBhp": {
+          "raw": "38",
+          "parsedValues": ["38"],
+          "primaryValue": "38"
+        },
+        "powerBhpGain": {
+          "raw": "4",
+          "parsedValues": ["4"],
+          "primaryValue": "4"
+        },
+        "originalTorque": {
+          "raw": "42",
+          "parsedValues": ["42"],
+          "primaryValue": "42"
+        },
+        "torqueNmGain": {
+          "raw": "4",
+          "parsedValues": ["4"],
+          "primaryValue": "4"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      }
+    ]
+  }
+]

@@ -1,0 +1,425 @@
+[
+  {
+    "make": "Iveco",
+    "model": "Daily",
+    "modelSlug": "daily",
+    "sourceProductId": 30418,
+    "sourceUrl": "https://viezu.com/shop/iveco-daily-1999-present/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.3",
+        "originalBhp": {
+          "raw": "94 | 95 | 105 | 114 | 125 | 134 | 143 | 148 | 154 | 158 | 179",
+          "parsedValues": [
+            "94",
+            "95",
+            "105",
+            "114",
+            "125",
+            "134",
+            "143",
+            "148",
+            "154",
+            "158",
+            "179"
+          ],
+          "primaryValue": "94",
+          "secondaryValue": "95"
+        },
+        "powerBhpGain": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "originalTorque": {
+          "raw": "x | x | x | x | x | 350 | x | 350 | 350 | 400 | 430",
+          "parsedValues": ["x", "x", "x", "x", "x", "350", "x", "350", "350", "400", "430"],
+          "primaryValue": "x",
+          "secondaryValue": "x"
+        },
+        "torqueNmGain": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.8",
+        "originalBhp": {
+          "raw": "83 | 89 | 105 | 123 | 145",
+          "parsedValues": ["83", "89", "105", "123", "145"],
+          "primaryValue": "83",
+          "secondaryValue": "89"
+        },
+        "powerBhpGain": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "originalTorque": {
+          "raw": "x | x | x | x | x",
+          "parsedValues": ["x", "x", "x", "x", "x"],
+          "primaryValue": "x",
+          "secondaryValue": "x"
+        },
+        "torqueNmGain": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "3.0",
+        "originalBhp": {
+          "raw": "136 | 140 | 146 | 150 | 158 | 160 | 164 | 168 | 174 | 176 | 177 | 180 | 201 | 209",
+          "parsedValues": [
+            "136",
+            "140",
+            "146",
+            "150",
+            "158",
+            "160",
+            "164",
+            "168",
+            "174",
+            "176",
+            "177",
+            "180",
+            "201",
+            "209"
+          ],
+          "primaryValue": "136",
+          "secondaryValue": "140"
+        },
+        "powerBhpGain": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "originalTorque": {
+          "raw": "134 | 138 | 143 | 148 | 400 | 360 | x | x | x | 430 | 380 | 430 | x | 470",
+          "parsedValues": [
+            "134",
+            "138",
+            "143",
+            "148",
+            "400",
+            "360",
+            "x",
+            "x",
+            "x",
+            "430",
+            "380",
+            "430",
+            "x",
+            "470"
+          ],
+          "primaryValue": "134",
+          "secondaryValue": "138"
+        },
+        "torqueNmGain": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 69900
+      }
+    ]
+  },
+  {
+    "make": "Iveco",
+    "model": "Daily",
+    "modelSlug": "daily",
+    "sourceProductId": 20414,
+    "sourceUrl": "https://viezu.com/shop/iveco-daily-2016-present/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.3",
+        "originalBhp": {
+          "raw": "116 | 136 | 145 | 156",
+          "parsedValues": ["116", "136", "145", "156"],
+          "primaryValue": "116",
+          "secondaryValue": "136"
+        },
+        "powerBhpGain": {
+          "raw": "29 | 34 | 25 | 29",
+          "parsedValues": ["29", "34", "25", "29"],
+          "primaryValue": "29",
+          "secondaryValue": "34"
+        },
+        "originalTorque": {
+          "raw": "320 | 350 | 350 | 350",
+          "parsedValues": ["320", "350", "350", "350"],
+          "primaryValue": "320",
+          "secondaryValue": "350"
+        },
+        "torqueNmGain": {
+          "raw": "60 | 60 | 60 | 60",
+          "parsedValues": ["60", "60", "60", "60"],
+          "primaryValue": "60",
+          "secondaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "15 | 15 | 10 | 15",
+          "parsedValues": ["15", "15", "10", "15"],
+          "primaryValue": "15",
+          "secondaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "30 | 30 | 30 | 30",
+          "parsedValues": ["30", "30", "30", "30"],
+          "primaryValue": "30",
+          "secondaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "3.0",
+        "originalBhp": {
+          "raw": "150 | 180 | 205",
+          "parsedValues": ["150", "180", "205"],
+          "primaryValue": "150",
+          "secondaryValue": "180"
+        },
+        "powerBhpGain": {
+          "raw": "35 | 20 | 45",
+          "parsedValues": ["35", "20", "45"],
+          "primaryValue": "35",
+          "secondaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "350 | 430 | 470",
+          "parsedValues": ["350", "430", "470"],
+          "primaryValue": "350",
+          "secondaryValue": "430"
+        },
+        "torqueNmGain": {
+          "raw": "60 | 50 | 90",
+          "parsedValues": ["60", "50", "90"],
+          "primaryValue": "60",
+          "secondaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "20 | 10 | 20",
+          "parsedValues": ["20", "10", "20"],
+          "primaryValue": "20",
+          "secondaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "30 | 25 | 45",
+          "parsedValues": ["30", "25", "45"],
+          "primaryValue": "30",
+          "secondaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Iveco",
+    "model": "Daily",
+    "modelSlug": "daily",
+    "sourceProductId": 20411,
+    "sourceUrl": "https://viezu.com/shop/iveco-daily-present-2016/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.8",
+        "originalBhp": {
+          "raw": "146",
+          "parsedValues": ["146"],
+          "primaryValue": "146"
+        },
+        "powerBhpGain": {
+          "raw": "34",
+          "parsedValues": ["34"],
+          "primaryValue": "34"
+        },
+        "originalTorque": {
+          "raw": "350",
+          "parsedValues": ["350"],
+          "primaryValue": "350"
+        },
+        "torqueNmGain": {
+          "raw": "70",
+          "parsedValues": ["70"],
+          "primaryValue": "70"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.3",
+        "originalBhp": {
+          "raw": "116 | 96 | 136 | 106 | 126 | 146",
+          "parsedValues": ["116", "96", "136", "106", "126", "146"],
+          "primaryValue": "116",
+          "secondaryValue": "96"
+        },
+        "powerBhpGain": {
+          "raw": "29 | 29 | 29 | 74 | 54 | 34",
+          "parsedValues": ["29", "29", "29", "74", "54", "34"],
+          "primaryValue": "29",
+          "secondaryValue": "29"
+        },
+        "originalTorque": {
+          "raw": "270 | 240 | 350 | 270 | 320 | 350",
+          "parsedValues": ["270", "240", "350", "270", "320", "350"],
+          "primaryValue": "270",
+          "secondaryValue": "240"
+        },
+        "torqueNmGain": {
+          "raw": "60 | 60 | 60 | 150 | 100 | 70",
+          "parsedValues": ["60", "60", "60", "150", "100", "70"],
+          "primaryValue": "60",
+          "secondaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "15 | 15 | 15 | 35 | 25 | 15",
+          "parsedValues": ["15", "15", "15", "35", "25", "15"],
+          "primaryValue": "15",
+          "secondaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "30 | 30 | 30 | 75 | 50 | 35",
+          "parsedValues": ["30", "30", "30", "75", "50", "35"],
+          "primaryValue": "30",
+          "secondaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10% | 10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%", "10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "3.0",
+        "originalBhp": {
+          "raw": "140 | 170 | 156 | 205 | 146 | 176 | 166",
+          "parsedValues": ["140", "170", "156", "205", "146", "176", "166"],
+          "primaryValue": "140",
+          "secondaryValue": "170"
+        },
+        "powerBhpGain": {
+          "raw": "34 | 30 | 29 | 45 | 34 | 24 | 30",
+          "parsedValues": ["34", "30", "29", "45", "34", "24", "30"],
+          "primaryValue": "34",
+          "secondaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "350 | 400 | 350 | 470 | 340 | 380 | 360",
+          "parsedValues": ["350", "400", "350", "470", "340", "380", "360"],
+          "primaryValue": "350",
+          "secondaryValue": "400"
+        },
+        "torqueNmGain": {
+          "raw": "60 | 60 | 60 | 90 | 70 | 80 | 60",
+          "parsedValues": ["60", "60", "60", "90", "70", "80", "60"],
+          "primaryValue": "60",
+          "secondaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "15 | 15 | 15 | 20 | 15 | 10 | 15",
+          "parsedValues": ["15", "15", "15", "20", "15", "10", "15"],
+          "primaryValue": "15",
+          "secondaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "30 | 30 | 30 | 45 | 35 | 40 | 30",
+          "parsedValues": ["30", "30", "30", "45", "35", "40", "30"],
+          "primaryValue": "30",
+          "secondaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10% | 10% | 10% | 10% | 30%",
+          "parsedValues": ["10%", "10%", "10%", "10%", "10%", "10%", "30%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  }
+]
