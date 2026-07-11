@@ -1,0 +1,1622 @@
+[
+  {
+    "make": "Cadillac",
+    "model": "XTS",
+    "modelSlug": "xts",
+    "sourceProductId": 18827,
+    "sourceUrl": "https://viezu.com/shop/cadillac-xts-2013-2016/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "3.6",
+        "originalBhp": {
+          "raw": "309 | 416",
+          "parsedValues": ["309", "416"],
+          "primaryValue": "309",
+          "secondaryValue": "416"
+        },
+        "powerBhpGain": {
+          "raw": "15 | 64",
+          "parsedValues": ["15", "64"],
+          "primaryValue": "15",
+          "secondaryValue": "64"
+        },
+        "originalTorque": {
+          "raw": "358 | 583",
+          "parsedValues": ["358", "583"],
+          "primaryValue": "358",
+          "secondaryValue": "583"
+        },
+        "torqueNmGain": {
+          "raw": "22 | 97",
+          "parsedValues": ["22", "97"],
+          "primaryValue": "22",
+          "secondaryValue": "97"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Cadillac",
+    "model": "XT5",
+    "modelSlug": "xt5",
+    "sourceProductId": 18824,
+    "sourceUrl": "https://viezu.com/shop/cadillac-xt5-2017-2019/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "241",
+          "parsedValues": ["241"],
+          "primaryValue": "241"
+        },
+        "powerBhpGain": {
+          "raw": "39",
+          "parsedValues": ["39"],
+          "primaryValue": "39"
+        },
+        "originalTorque": {
+          "raw": "400",
+          "parsedValues": ["400"],
+          "primaryValue": "400"
+        },
+        "torqueNmGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "3.6",
+        "originalBhp": {
+          "raw": "314",
+          "parsedValues": ["314"],
+          "primaryValue": "314"
+        },
+        "powerBhpGain": {
+          "raw": "16",
+          "parsedValues": ["16"],
+          "primaryValue": "16"
+        },
+        "originalTorque": {
+          "raw": "367",
+          "parsedValues": ["367"],
+          "primaryValue": "367"
+        },
+        "torqueNmGain": {
+          "raw": "23",
+          "parsedValues": ["23"],
+          "primaryValue": "23"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Cadillac",
+    "model": "XLR",
+    "modelSlug": "xlr",
+    "sourceProductId": 18821,
+    "sourceUrl": "https://viezu.com/shop/cadillac-xlr-2006-2009/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "4.4",
+        "originalBhp": {
+          "raw": "450",
+          "parsedValues": ["450"],
+          "primaryValue": "450"
+        },
+        "powerBhpGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "561",
+          "parsedValues": ["561"],
+          "primaryValue": "561"
+        },
+        "torqueNmGain": {
+          "raw": "39",
+          "parsedValues": ["39"],
+          "primaryValue": "39"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "4.6",
+        "originalBhp": {
+          "raw": "326",
+          "parsedValues": ["326"],
+          "primaryValue": "326"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "423",
+          "parsedValues": ["423"],
+          "primaryValue": "423"
+        },
+        "torqueNmGain": {
+          "raw": "27",
+          "parsedValues": ["27"],
+          "primaryValue": "27"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Cadillac",
+    "model": "STS",
+    "modelSlug": "sts",
+    "sourceProductId": 18818,
+    "sourceUrl": "https://viezu.com/shop/cadillac-sts-2006-2010/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "3.6",
+        "originalBhp": {
+          "raw": "255",
+          "parsedValues": ["255"],
+          "primaryValue": "255"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "342",
+          "parsedValues": ["342"],
+          "primaryValue": "342"
+        },
+        "torqueNmGain": {
+          "raw": "28",
+          "parsedValues": ["28"],
+          "primaryValue": "28"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "4.4",
+        "originalBhp": {
+          "raw": "476",
+          "parsedValues": ["476"],
+          "primaryValue": "476"
+        },
+        "powerBhpGain": {
+          "raw": "28",
+          "parsedValues": ["28"],
+          "primaryValue": "28"
+        },
+        "originalTorque": {
+          "raw": "595",
+          "parsedValues": ["595"],
+          "primaryValue": "595"
+        },
+        "torqueNmGain": {
+          "raw": "85",
+          "parsedValues": ["85"],
+          "primaryValue": "85"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Cadillac",
+    "model": "SRX",
+    "modelSlug": "srx",
+    "sourceProductId": 18815,
+    "sourceUrl": "https://viezu.com/shop/cadillac-srx-2010-2016/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "3.0",
+        "originalBhp": {
+          "raw": "265",
+          "parsedValues": ["265"],
+          "primaryValue": "265"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "302",
+          "parsedValues": ["302"],
+          "primaryValue": "302"
+        },
+        "torqueNmGain": {
+          "raw": "28",
+          "parsedValues": ["28"],
+          "primaryValue": "28"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "3.5",
+        "originalBhp": {
+          "raw": "313",
+          "parsedValues": ["313"],
+          "primaryValue": "313"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "359",
+          "parsedValues": ["359"],
+          "primaryValue": "359"
+        },
+        "torqueNmGain": {
+          "raw": "21",
+          "parsedValues": ["21"],
+          "primaryValue": "21"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Cadillac",
+    "model": "SRX",
+    "modelSlug": "srx",
+    "sourceProductId": 18812,
+    "sourceUrl": "https://viezu.com/shop/cadillac-srx-2004-2009/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "3.6",
+        "originalBhp": {
+          "raw": "255",
+          "parsedValues": ["255"],
+          "primaryValue": "255"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "344",
+          "parsedValues": ["344"],
+          "primaryValue": "344"
+        },
+        "torqueNmGain": {
+          "raw": "26",
+          "parsedValues": ["26"],
+          "primaryValue": "26"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "4.6",
+        "originalBhp": {
+          "raw": "325",
+          "parsedValues": ["325"],
+          "primaryValue": "325"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "427",
+          "parsedValues": ["427"],
+          "primaryValue": "427"
+        },
+        "torqueNmGain": {
+          "raw": "18",
+          "parsedValues": ["18"],
+          "primaryValue": "18"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Cadillac",
+    "model": "Seville",
+    "modelSlug": "seville",
+    "sourceProductId": 18808,
+    "sourceUrl": "https://viezu.com/shop/seville-all/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "4.6",
+        "originalBhp": {
+          "raw": "305",
+          "parsedValues": ["305"],
+          "primaryValue": "305"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "400",
+          "parsedValues": ["400"],
+          "primaryValue": "400"
+        },
+        "torqueNmGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Cadillac",
+    "model": "Escalade",
+    "modelSlug": "escalade",
+    "sourceProductId": 18806,
+    "sourceUrl": "https://viezu.com/shop/cadillac-escalade-2014-2019/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "6.2",
+        "originalBhp": {
+          "raw": "426",
+          "parsedValues": ["426"],
+          "primaryValue": "426"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "623",
+          "parsedValues": ["623"],
+          "primaryValue": "623"
+        },
+        "torqueNmGain": {
+          "raw": "22",
+          "parsedValues": ["22"],
+          "primaryValue": "22"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Cadillac",
+    "model": "Escalade",
+    "modelSlug": "escalade",
+    "sourceProductId": 18804,
+    "sourceUrl": "https://viezu.com/shop/cadillac-escalade-2007-2013/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "6.2",
+        "originalBhp": {
+          "raw": "403",
+          "parsedValues": ["403"],
+          "primaryValue": "403"
+        },
+        "powerBhpGain": {
+          "raw": "22",
+          "parsedValues": ["22"],
+          "primaryValue": "22"
+        },
+        "originalTorque": {
+          "raw": "565",
+          "parsedValues": ["565"],
+          "primaryValue": "565"
+        },
+        "torqueNmGain": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Cadillac",
+    "model": "Escalade",
+    "modelSlug": "escalade",
+    "sourceProductId": 18801,
+    "sourceUrl": "https://viezu.com/shop/cadillac-escalade-2002-2006/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "5.3",
+        "originalBhp": {
+          "raw": "295",
+          "parsedValues": ["295"],
+          "primaryValue": "295"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "454",
+          "parsedValues": ["454"],
+          "primaryValue": "454"
+        },
+        "torqueNmGain": {
+          "raw": "26",
+          "parsedValues": ["26"],
+          "primaryValue": "26"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "6.0",
+        "originalBhp": {
+          "raw": "345",
+          "parsedValues": ["345"],
+          "primaryValue": "345"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "515",
+          "parsedValues": ["515"],
+          "primaryValue": "515"
+        },
+        "torqueNmGain": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Cadillac",
+    "model": "DTS",
+    "modelSlug": "dts",
+    "sourceProductId": 18799,
+    "sourceUrl": "https://viezu.com/shop/cadillac-dts-2006-2009/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "4.6",
+        "originalBhp": {
+          "raw": "279",
+          "parsedValues": ["279"],
+          "primaryValue": "279"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "400",
+          "parsedValues": ["400"],
+          "primaryValue": "400"
+        },
+        "torqueNmGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Cadillac",
+    "model": "CTS",
+    "modelSlug": "cts",
+    "sourceProductId": 18796,
+    "sourceUrl": "https://viezu.com/shop/cadillac-cts-2014-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "272",
+          "parsedValues": ["272"],
+          "primaryValue": "272"
+        },
+        "powerBhpGain": {
+          "raw": "28",
+          "parsedValues": ["28"],
+          "primaryValue": "28"
+        },
+        "originalTorque": {
+          "raw": "350",
+          "parsedValues": ["350"],
+          "primaryValue": "350"
+        },
+        "torqueNmGain": {
+          "raw": "100",
+          "parsedValues": ["100"],
+          "primaryValue": "100"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "3.6",
+        "originalBhp": {
+          "raw": "325 | 340 | 426",
+          "parsedValues": ["325", "340", "426"],
+          "primaryValue": "325",
+          "secondaryValue": "340"
+        },
+        "powerBhpGain": {
+          "raw": "22 | 22 | 39",
+          "parsedValues": ["22", "22", "39"],
+          "primaryValue": "22",
+          "secondaryValue": "22"
+        },
+        "originalTorque": {
+          "raw": "373 | 386 | 583",
+          "parsedValues": ["373", "386", "583"],
+          "primaryValue": "373",
+          "secondaryValue": "386"
+        },
+        "torqueNmGain": {
+          "raw": "26 | 16 | 53",
+          "parsedValues": ["26", "16", "53"],
+          "primaryValue": "26",
+          "secondaryValue": "16"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Cadillac",
+    "model": "CTS",
+    "modelSlug": "cts",
+    "sourceProductId": 18791,
+    "sourceUrl": "https://viezu.com/shop/cadillac-cts-2008-2013/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "2.8",
+        "originalBhp": {
+          "raw": "211",
+          "parsedValues": ["211"],
+          "primaryValue": "211"
+        },
+        "powerBhpGain": {
+          "raw": "17",
+          "parsedValues": ["17"],
+          "primaryValue": "17"
+        },
+        "originalTorque": {
+          "raw": "246",
+          "parsedValues": ["246"],
+          "primaryValue": "246"
+        },
+        "torqueNmGain": {
+          "raw": "22",
+          "parsedValues": ["22"],
+          "primaryValue": "22"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "3.0",
+        "originalBhp": {
+          "raw": "274",
+          "parsedValues": ["274"],
+          "primaryValue": "274"
+        },
+        "powerBhpGain": {
+          "raw": "27",
+          "parsedValues": ["27"],
+          "primaryValue": "27"
+        },
+        "originalTorque": {
+          "raw": "302",
+          "parsedValues": ["302"],
+          "primaryValue": "302"
+        },
+        "torqueNmGain": {
+          "raw": "29",
+          "parsedValues": ["29"],
+          "primaryValue": "29"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "3.6",
+        "originalBhp": {
+          "raw": "304",
+          "parsedValues": ["304"],
+          "primaryValue": "304"
+        },
+        "powerBhpGain": {
+          "raw": "21",
+          "parsedValues": ["21"],
+          "primaryValue": "21"
+        },
+        "originalTorque": {
+          "raw": "370",
+          "parsedValues": ["370"],
+          "primaryValue": "370"
+        },
+        "torqueNmGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "6.2",
+        "originalBhp": {
+          "raw": "556",
+          "parsedValues": ["556"],
+          "primaryValue": "556"
+        },
+        "powerBhpGain": {
+          "raw": "44",
+          "parsedValues": ["44"],
+          "primaryValue": "44"
+        },
+        "originalTorque": {
+          "raw": "747",
+          "parsedValues": ["747"],
+          "primaryValue": "747"
+        },
+        "torqueNmGain": {
+          "raw": "53",
+          "parsedValues": ["53"],
+          "primaryValue": "53"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Cadillac",
+    "model": "CTS",
+    "modelSlug": "cts",
+    "sourceProductId": 18785,
+    "sourceUrl": "https://viezu.com/shop/cadillac-cts-2002-2007/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "3.6",
+        "originalBhp": {
+          "raw": "257",
+          "parsedValues": ["257"],
+          "primaryValue": "257"
+        },
+        "powerBhpGain": {
+          "raw": "13",
+          "parsedValues": ["13"],
+          "primaryValue": "13"
+        },
+        "originalTorque": {
+          "raw": "340",
+          "parsedValues": ["340"],
+          "primaryValue": "340"
+        },
+        "torqueNmGain": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "2.8",
+        "originalBhp": {
+          "raw": "215",
+          "parsedValues": ["215"],
+          "primaryValue": "215"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "262",
+          "parsedValues": ["262"],
+          "primaryValue": "262"
+        },
+        "torqueNmGain": {
+          "raw": "28",
+          "parsedValues": ["28"],
+          "primaryValue": "28"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "3.2",
+        "originalBhp": {
+          "raw": "223",
+          "parsedValues": ["223"],
+          "primaryValue": "223"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "298",
+          "parsedValues": ["298"],
+          "primaryValue": "298"
+        },
+        "torqueNmGain": {
+          "raw": "38",
+          "parsedValues": ["38"],
+          "primaryValue": "38"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "5.7",
+        "originalBhp": {
+          "raw": "405 | 405",
+          "parsedValues": ["405", "405"],
+          "primaryValue": "405",
+          "secondaryValue": "405"
+        },
+        "powerBhpGain": {
+          "raw": "25 | 25",
+          "parsedValues": ["25", "25"],
+          "primaryValue": "25",
+          "secondaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "533 | 533",
+          "parsedValues": ["533", "533"],
+          "primaryValue": "533",
+          "secondaryValue": "533"
+        },
+        "torqueNmGain": {
+          "raw": "27 | 27",
+          "parsedValues": ["27", "27"],
+          "primaryValue": "27",
+          "secondaryValue": "27"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "6.0",
+        "originalBhp": {
+          "raw": "405",
+          "parsedValues": ["405"],
+          "primaryValue": "405"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "536",
+          "parsedValues": ["536"],
+          "primaryValue": "536"
+        },
+        "torqueNmGain": {
+          "raw": "19",
+          "parsedValues": ["19"],
+          "primaryValue": "19"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Cadillac",
+    "model": "CT6",
+    "modelSlug": "ct6",
+    "sourceProductId": 18782,
+    "sourceUrl": "https://viezu.com/shop/cadillac-ct6-2016-2019/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "269",
+          "parsedValues": ["269"],
+          "primaryValue": "269"
+        },
+        "powerBhpGain": {
+          "raw": "31",
+          "parsedValues": ["31"],
+          "primaryValue": "31"
+        },
+        "originalTorque": {
+          "raw": "400",
+          "parsedValues": ["400"],
+          "primaryValue": "400"
+        },
+        "torqueNmGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "3.0",
+        "originalBhp": {
+          "raw": "409",
+          "parsedValues": ["409"],
+          "primaryValue": "409"
+        },
+        "powerBhpGain": {
+          "raw": "34",
+          "parsedValues": ["34"],
+          "primaryValue": "34"
+        },
+        "originalTorque": {
+          "raw": "542",
+          "parsedValues": ["542"],
+          "primaryValue": "542"
+        },
+        "torqueNmGain": {
+          "raw": "56",
+          "parsedValues": ["56"],
+          "primaryValue": "56"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Cadillac",
+    "model": "BLS",
+    "modelSlug": "bls",
+    "sourceProductId": 18779,
+    "sourceUrl": "https://viezu.com/shop/bls-2006-2010/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "1.9",
+        "originalBhp": {
+          "raw": "150 | 180",
+          "parsedValues": ["150", "180"],
+          "primaryValue": "150",
+          "secondaryValue": "180"
+        },
+        "powerBhpGain": {
+          "raw": "40 | 30",
+          "parsedValues": ["40", "30"],
+          "primaryValue": "40",
+          "secondaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "320 | 400",
+          "parsedValues": ["320", "400"],
+          "primaryValue": "320",
+          "secondaryValue": "400"
+        },
+        "torqueNmGain": {
+          "raw": "80 | 65",
+          "parsedValues": ["80", "65"],
+          "primaryValue": "80",
+          "secondaryValue": "65"
+        },
+        "economyGainBhp": {
+          "raw": "20 | 15",
+          "parsedValues": ["20", "15"],
+          "primaryValue": "20",
+          "secondaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "40 | 30",
+          "parsedValues": ["40", "30"],
+          "primaryValue": "40",
+          "secondaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "175 | 210",
+          "parsedValues": ["175", "210"],
+          "primaryValue": "175",
+          "secondaryValue": "210"
+        },
+        "powerBhpGain": {
+          "raw": "30 | 30",
+          "parsedValues": ["30", "30"],
+          "primaryValue": "30",
+          "secondaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "265 | 300",
+          "parsedValues": ["265", "300"],
+          "primaryValue": "265",
+          "secondaryValue": "300"
+        },
+        "torqueNmGain": {
+          "raw": "55 | 50",
+          "parsedValues": ["55", "50"],
+          "primaryValue": "55",
+          "secondaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Cadillac",
+    "model": "ATS",
+    "modelSlug": "ats",
+    "sourceProductId": 18774,
+    "sourceUrl": "https://viezu.com/shop/cadillac-ats-2013-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "276",
+          "parsedValues": ["276"],
+          "primaryValue": "276"
+        },
+        "powerBhpGain": {
+          "raw": "24",
+          "parsedValues": ["24"],
+          "primaryValue": "24"
+        },
+        "originalTorque": {
+          "raw": "353",
+          "parsedValues": ["353"],
+          "primaryValue": "353"
+        },
+        "torqueNmGain": {
+          "raw": "97",
+          "parsedValues": ["97"],
+          "primaryValue": "97"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "2.5",
+        "originalBhp": {
+          "raw": "204",
+          "parsedValues": ["204"],
+          "primaryValue": "204"
+        },
+        "powerBhpGain": {
+          "raw": "23",
+          "parsedValues": ["23"],
+          "primaryValue": "23"
+        },
+        "originalTorque": {
+          "raw": "259",
+          "parsedValues": ["259"],
+          "primaryValue": "259"
+        },
+        "torqueNmGain": {
+          "raw": "21",
+          "parsedValues": ["21"],
+          "primaryValue": "21"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "3.6",
+        "originalBhp": {
+          "raw": "321",
+          "parsedValues": ["321"],
+          "primaryValue": "321"
+        },
+        "powerBhpGain": {
+          "raw": "29",
+          "parsedValues": ["29"],
+          "primaryValue": "29"
+        },
+        "originalTorque": {
+          "raw": "358",
+          "parsedValues": ["358"],
+          "primaryValue": "358"
+        },
+        "torqueNmGain": {
+          "raw": "22",
+          "parsedValues": ["22"],
+          "primaryValue": "22"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "3.6",
+        "originalBhp": {
+          "raw": "340 | 471",
+          "parsedValues": ["340", "471"],
+          "primaryValue": "340",
+          "secondaryValue": "471"
+        },
+        "powerBhpGain": {
+          "raw": "15 | 30",
+          "parsedValues": ["15", "30"],
+          "primaryValue": "15",
+          "secondaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "386 | 600",
+          "parsedValues": ["386", "600"],
+          "primaryValue": "386",
+          "secondaryValue": "600"
+        },
+        "torqueNmGain": {
+          "raw": "14 | 60",
+          "parsedValues": ["14", "60"],
+          "primaryValue": "14",
+          "secondaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  }
+]

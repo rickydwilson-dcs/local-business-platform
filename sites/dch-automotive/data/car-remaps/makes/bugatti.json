@@ -1,0 +1,202 @@
+[
+  {
+    "make": "Bugatti",
+    "model": "Divo",
+    "modelSlug": "divo",
+    "sourceProductId": 61479,
+    "sourceUrl": "https://viezu.com/shop/bugatti-divo-all/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "8.0",
+        "originalBhp": {
+          "raw": "1500",
+          "parsedValues": ["1500"],
+          "primaryValue": "1500"
+        },
+        "powerBhpGain": {
+          "raw": "295",
+          "parsedValues": ["295"],
+          "primaryValue": "295"
+        },
+        "originalTorque": {
+          "raw": "1600",
+          "parsedValues": ["1600"],
+          "primaryValue": "1600"
+        },
+        "torqueNmGain": {
+          "raw": "192",
+          "parsedValues": ["192"],
+          "primaryValue": "192"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 150000
+      }
+    ]
+  },
+  {
+    "make": "Bugatti",
+    "model": "La Voiture Noire",
+    "modelSlug": "la-voiture-noire",
+    "sourceProductId": 61477,
+    "sourceUrl": "https://viezu.com/shop/bugatti-la-voiture-noire-all/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "8.0",
+        "originalBhp": {
+          "raw": "1500",
+          "parsedValues": ["1500"],
+          "primaryValue": "1500"
+        },
+        "powerBhpGain": {
+          "raw": "195",
+          "parsedValues": ["195"],
+          "primaryValue": "195"
+        },
+        "originalTorque": {
+          "raw": "1600",
+          "parsedValues": ["1600"],
+          "primaryValue": "1600"
+        },
+        "torqueNmGain": {
+          "raw": "192",
+          "parsedValues": ["192"],
+          "primaryValue": "192"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 150000
+      }
+    ]
+  },
+  {
+    "make": "Bugatti",
+    "model": "Chiron",
+    "modelSlug": "chiron",
+    "sourceProductId": 48031,
+    "sourceUrl": "https://viezu.com/shop/bugatti-chiron-2016/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "8.0",
+        "originalBhp": {
+          "raw": "1500 | 1600",
+          "parsedValues": ["1500", "1600"],
+          "primaryValue": "1500",
+          "secondaryValue": "1600"
+        },
+        "powerBhpGain": {
+          "raw": "295 | 195",
+          "parsedValues": ["295", "195"],
+          "primaryValue": "295",
+          "secondaryValue": "195"
+        },
+        "originalTorque": {
+          "raw": "1600 | 1600",
+          "parsedValues": ["1600", "1600"],
+          "primaryValue": "1600",
+          "secondaryValue": "1600"
+        },
+        "torqueNmGain": {
+          "raw": "192 | 192",
+          "parsedValues": ["192", "192"],
+          "primaryValue": "192",
+          "secondaryValue": "192"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 150000
+      }
+    ]
+  },
+  {
+    "make": "Bugatti",
+    "model": "VEYRON EB 16.4",
+    "modelSlug": "veyron-eb-16-4",
+    "sourceProductId": 48020,
+    "sourceUrl": "https://viezu.com/shop/bugatti-veyron-eb-16-4-2003-2012/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "8",
+        "originalBhp": {
+          "raw": "987",
+          "parsedValues": ["987"],
+          "primaryValue": "987"
+        },
+        "powerBhpGain": {
+          "raw": "197",
+          "parsedValues": ["197"],
+          "primaryValue": "197"
+        },
+        "originalTorque": {
+          "raw": "1250",
+          "parsedValues": ["1250"],
+          "primaryValue": "1250"
+        },
+        "torqueNmGain": {
+          "raw": "150",
+          "parsedValues": ["150"],
+          "primaryValue": "150"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 150000
+      }
+    ]
+  }
+]

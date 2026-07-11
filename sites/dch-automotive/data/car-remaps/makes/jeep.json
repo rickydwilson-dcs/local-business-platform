@@ -1,0 +1,2372 @@
+[
+  {
+    "make": "Jeep",
+    "model": "Compass",
+    "modelSlug": "compass",
+    "sourceProductId": 51928,
+    "sourceUrl": "https://viezu.com/shop/jeep-compass-2021-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.3",
+        "originalBhp": {
+          "raw": "130 | 180",
+          "parsedValues": ["130", "180"],
+          "primaryValue": "130",
+          "secondaryValue": "180"
+        },
+        "powerBhpGain": {
+          "raw": "70 | 20",
+          "parsedValues": ["70", "20"],
+          "primaryValue": "70",
+          "secondaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "270 | 270",
+          "parsedValues": ["270", "270"],
+          "primaryValue": "270",
+          "secondaryValue": "270"
+        },
+        "torqueNmGain": {
+          "raw": "50 | 50",
+          "parsedValues": ["50", "50"],
+          "primaryValue": "50",
+          "secondaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Jeep",
+    "model": "Wrangler",
+    "modelSlug": "wrangler",
+    "sourceProductId": 20546,
+    "sourceUrl": "https://viezu.com/shop/jeep-wrangler-2017-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "272",
+          "parsedValues": ["272"],
+          "primaryValue": "272"
+        },
+        "powerBhpGain": {
+          "raw": "38",
+          "parsedValues": ["38"],
+          "primaryValue": "38"
+        },
+        "originalTorque": {
+          "raw": "400",
+          "parsedValues": ["400"],
+          "primaryValue": "400"
+        },
+        "torqueNmGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "3.6",
+        "originalBhp": {
+          "raw": "285",
+          "parsedValues": ["285"],
+          "primaryValue": "285"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "353",
+          "parsedValues": ["353"],
+          "primaryValue": "353"
+        },
+        "torqueNmGain": {
+          "raw": "22",
+          "parsedValues": ["22"],
+          "primaryValue": "22"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.2",
+        "originalBhp": {
+          "raw": "200",
+          "parsedValues": ["200"],
+          "primaryValue": "200"
+        },
+        "powerBhpGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "450",
+          "parsedValues": ["450"],
+          "primaryValue": "450"
+        },
+        "torqueNmGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Jeep",
+    "model": "Wrangler",
+    "modelSlug": "wrangler",
+    "sourceProductId": 20542,
+    "sourceUrl": "https://viezu.com/shop/wrangler-2010-2016/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.8",
+        "originalBhp": {
+          "raw": "200",
+          "parsedValues": ["200"],
+          "primaryValue": "200"
+        },
+        "powerBhpGain": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "410",
+          "parsedValues": ["410"],
+          "primaryValue": "410"
+        },
+        "torqueNmGain": {
+          "raw": "110",
+          "parsedValues": ["110"],
+          "primaryValue": "110"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "55",
+          "parsedValues": ["55"],
+          "primaryValue": "55"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "3.6",
+        "originalBhp": {
+          "raw": "285",
+          "parsedValues": ["285"],
+          "primaryValue": "285"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "353",
+          "parsedValues": ["353"],
+          "primaryValue": "353"
+        },
+        "torqueNmGain": {
+          "raw": "22",
+          "parsedValues": ["22"],
+          "primaryValue": "22"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "3.8",
+        "originalBhp": {
+          "raw": "200",
+          "parsedValues": ["200"],
+          "primaryValue": "200"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "321",
+          "parsedValues": ["321"],
+          "primaryValue": "321"
+        },
+        "torqueNmGain": {
+          "raw": "19",
+          "parsedValues": ["19"],
+          "primaryValue": "19"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Jeep",
+    "model": "Wrangler",
+    "modelSlug": "wrangler",
+    "sourceProductId": 20538,
+    "sourceUrl": "https://viezu.com/shop/jeep-wrangler-2007-2010/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.8",
+        "originalBhp": {
+          "raw": "177",
+          "parsedValues": ["177"],
+          "primaryValue": "177"
+        },
+        "powerBhpGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "410",
+          "parsedValues": ["410"],
+          "primaryValue": "410"
+        },
+        "torqueNmGain": {
+          "raw": "110",
+          "parsedValues": ["110"],
+          "primaryValue": "110"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "55",
+          "parsedValues": ["55"],
+          "primaryValue": "55"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "3.6",
+        "originalBhp": {
+          "raw": "285",
+          "parsedValues": ["285"],
+          "primaryValue": "285"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "353",
+          "parsedValues": ["353"],
+          "primaryValue": "353"
+        },
+        "torqueNmGain": {
+          "raw": "22",
+          "parsedValues": ["22"],
+          "primaryValue": "22"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "3.8",
+        "originalBhp": {
+          "raw": "200",
+          "parsedValues": ["200"],
+          "primaryValue": "200"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "321",
+          "parsedValues": ["321"],
+          "primaryValue": "321"
+        },
+        "torqueNmGain": {
+          "raw": "19",
+          "parsedValues": ["19"],
+          "primaryValue": "19"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Jeep",
+    "model": "Renegade",
+    "modelSlug": "renegade",
+    "sourceProductId": 20533,
+    "sourceUrl": "https://viezu.com/shop/renegade-2019-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.0",
+        "originalBhp": {
+          "raw": "120",
+          "parsedValues": ["120"],
+          "primaryValue": "120"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "190",
+          "parsedValues": ["190"],
+          "primaryValue": "190"
+        },
+        "torqueNmGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.3",
+        "originalBhp": {
+          "raw": "150",
+          "parsedValues": ["150"],
+          "primaryValue": "150"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "270",
+          "parsedValues": ["270"],
+          "primaryValue": "270"
+        },
+        "torqueNmGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "120",
+          "parsedValues": ["120"],
+          "primaryValue": "120"
+        },
+        "powerBhpGain": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "320",
+          "parsedValues": ["320"],
+          "primaryValue": "320"
+        },
+        "torqueNmGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "140 | 170",
+          "parsedValues": ["140", "170"],
+          "primaryValue": "140",
+          "secondaryValue": "170"
+        },
+        "powerBhpGain": {
+          "raw": "35 | 15",
+          "parsedValues": ["35", "15"],
+          "primaryValue": "35",
+          "secondaryValue": "15"
+        },
+        "originalTorque": {
+          "raw": "350 | 350",
+          "parsedValues": ["350", "350"],
+          "primaryValue": "350",
+          "secondaryValue": "350"
+        },
+        "torqueNmGain": {
+          "raw": "70 | 80",
+          "parsedValues": ["70", "80"],
+          "primaryValue": "70",
+          "secondaryValue": "80"
+        },
+        "economyGainBhp": {
+          "raw": "20 | 10",
+          "parsedValues": ["20", "10"],
+          "primaryValue": "20",
+          "secondaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "35 | 40",
+          "parsedValues": ["35", "40"],
+          "primaryValue": "35",
+          "secondaryValue": "40"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Jeep",
+    "model": "Renegade",
+    "modelSlug": "renegade",
+    "sourceProductId": 20529,
+    "sourceUrl": "https://viezu.com/shop/jeep-renegade-2014-2018/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "115 | 120",
+          "parsedValues": ["115", "120"],
+          "primaryValue": "115",
+          "secondaryValue": "120"
+        },
+        "powerBhpGain": {
+          "raw": "30 | 35",
+          "parsedValues": ["30", "35"],
+          "primaryValue": "30",
+          "secondaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "320 | 320",
+          "parsedValues": ["320", "320"],
+          "primaryValue": "320",
+          "secondaryValue": "320"
+        },
+        "torqueNmGain": {
+          "raw": "60 | 60",
+          "parsedValues": ["60", "60"],
+          "primaryValue": "60",
+          "secondaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "15 | 20",
+          "parsedValues": ["15", "20"],
+          "primaryValue": "15",
+          "secondaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "30 | 30",
+          "parsedValues": ["30", "30"],
+          "primaryValue": "30",
+          "secondaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.4",
+        "originalBhp": {
+          "raw": "140 | 170",
+          "parsedValues": ["140", "170"],
+          "primaryValue": "140",
+          "secondaryValue": "170"
+        },
+        "powerBhpGain": {
+          "raw": "10 | 15",
+          "parsedValues": ["10", "15"],
+          "primaryValue": "10",
+          "secondaryValue": "15"
+        },
+        "originalTorque": {
+          "raw": "230 | 250",
+          "parsedValues": ["230", "250"],
+          "primaryValue": "230",
+          "secondaryValue": "250"
+        },
+        "torqueNmGain": {
+          "raw": "40 | 40",
+          "parsedValues": ["40", "40"],
+          "primaryValue": "40",
+          "secondaryValue": "40"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "140 | 170",
+          "parsedValues": ["140", "170"],
+          "primaryValue": "140",
+          "secondaryValue": "170"
+        },
+        "powerBhpGain": {
+          "raw": "25 | 35",
+          "parsedValues": ["25", "35"],
+          "primaryValue": "25",
+          "secondaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "350 | 350",
+          "parsedValues": ["350", "350"],
+          "primaryValue": "350",
+          "secondaryValue": "350"
+        },
+        "torqueNmGain": {
+          "raw": "70 | 75",
+          "parsedValues": ["70", "75"],
+          "primaryValue": "70",
+          "secondaryValue": "75"
+        },
+        "economyGainBhp": {
+          "raw": "10 | 20",
+          "parsedValues": ["10", "20"],
+          "primaryValue": "10",
+          "secondaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "35 | 40",
+          "parsedValues": ["35", "40"],
+          "primaryValue": "35",
+          "secondaryValue": "40"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Jeep",
+    "model": "Patriot",
+    "modelSlug": "patriot",
+    "sourceProductId": 20524,
+    "sourceUrl": "https://viezu.com/shop/patriot-2007-2011/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "136",
+          "parsedValues": ["136"],
+          "primaryValue": "136"
+        },
+        "powerBhpGain": {
+          "raw": "39",
+          "parsedValues": ["39"],
+          "primaryValue": "39"
+        },
+        "originalTorque": {
+          "raw": "320",
+          "parsedValues": ["320"],
+          "primaryValue": "320"
+        },
+        "torqueNmGain": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.1",
+        "originalBhp": {
+          "raw": "163",
+          "parsedValues": ["163"],
+          "primaryValue": "163"
+        },
+        "powerBhpGain": {
+          "raw": "37",
+          "parsedValues": ["37"],
+          "primaryValue": "37"
+        },
+        "originalTorque": {
+          "raw": "320",
+          "parsedValues": ["320"],
+          "primaryValue": "320"
+        },
+        "torqueNmGain": {
+          "raw": "100",
+          "parsedValues": ["100"],
+          "primaryValue": "100"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "158",
+          "parsedValues": ["158"],
+          "primaryValue": "158"
+        },
+        "powerBhpGain": {
+          "raw": "22",
+          "parsedValues": ["22"],
+          "primaryValue": "22"
+        },
+        "originalTorque": {
+          "raw": "191",
+          "parsedValues": ["191"],
+          "primaryValue": "191"
+        },
+        "torqueNmGain": {
+          "raw": "19",
+          "parsedValues": ["19"],
+          "primaryValue": "19"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "2.4",
+        "originalBhp": {
+          "raw": "173",
+          "parsedValues": ["173"],
+          "primaryValue": "173"
+        },
+        "powerBhpGain": {
+          "raw": "22",
+          "parsedValues": ["22"],
+          "primaryValue": "22"
+        },
+        "originalTorque": {
+          "raw": "223",
+          "parsedValues": ["223"],
+          "primaryValue": "223"
+        },
+        "torqueNmGain": {
+          "raw": "22",
+          "parsedValues": ["22"],
+          "primaryValue": "22"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Jeep",
+    "model": "Liberty",
+    "modelSlug": "liberty",
+    "sourceProductId": 20522,
+    "sourceUrl": "https://viezu.com/shop/liberty-2005-2012/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "3.7",
+        "originalBhp": {
+          "raw": "210",
+          "parsedValues": ["210"],
+          "primaryValue": "210"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "318",
+          "parsedValues": ["318"],
+          "primaryValue": "318"
+        },
+        "torqueNmGain": {
+          "raw": "22",
+          "parsedValues": ["22"],
+          "primaryValue": "22"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Jeep",
+    "model": "Grand Cherokee",
+    "modelSlug": "grand-cherokee",
+    "sourceProductId": 20515,
+    "sourceUrl": "https://viezu.com/shop/jeep-grand-cherokee-2011-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "6.4",
+        "originalBhp": {
+          "raw": "475 | 468",
+          "parsedValues": ["475", "468"],
+          "primaryValue": "475",
+          "secondaryValue": "468"
+        },
+        "powerBhpGain": {
+          "raw": "20 | 18",
+          "parsedValues": ["20", "18"],
+          "primaryValue": "20",
+          "secondaryValue": "18"
+        },
+        "originalTorque": {
+          "raw": "637 | 624",
+          "parsedValues": ["637", "624"],
+          "primaryValue": "637",
+          "secondaryValue": "624"
+        },
+        "torqueNmGain": {
+          "raw": "18 | 15",
+          "parsedValues": ["18", "15"],
+          "primaryValue": "18",
+          "secondaryValue": "15"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "3.0",
+        "originalBhp": {
+          "raw": "190 | 241 | 250",
+          "parsedValues": ["190", "241", "250"],
+          "primaryValue": "190",
+          "secondaryValue": "241"
+        },
+        "powerBhpGain": {
+          "raw": "90 | 39 | 35",
+          "parsedValues": ["90", "39", "35"],
+          "primaryValue": "90",
+          "secondaryValue": "39"
+        },
+        "originalTorque": {
+          "raw": "440 | 550 | 570",
+          "parsedValues": ["440", "550", "570"],
+          "primaryValue": "440",
+          "secondaryValue": "550"
+        },
+        "torqueNmGain": {
+          "raw": "170 | 80 | 60",
+          "parsedValues": ["170", "80", "60"],
+          "primaryValue": "170",
+          "secondaryValue": "80"
+        },
+        "economyGainBhp": {
+          "raw": "45 | 20 | 20",
+          "parsedValues": ["45", "20", "20"],
+          "primaryValue": "45",
+          "secondaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "85 | 40 | 30",
+          "parsedValues": ["85", "40", "30"],
+          "primaryValue": "85",
+          "secondaryValue": "40"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "3.6",
+        "originalBhp": {
+          "raw": "286",
+          "parsedValues": ["286"],
+          "primaryValue": "286"
+        },
+        "powerBhpGain": {
+          "raw": "14",
+          "parsedValues": ["14"],
+          "primaryValue": "14"
+        },
+        "originalTorque": {
+          "raw": "347",
+          "parsedValues": ["347"],
+          "primaryValue": "347"
+        },
+        "torqueNmGain": {
+          "raw": "23",
+          "parsedValues": ["23"],
+          "primaryValue": "23"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "5.7",
+        "originalBhp": {
+          "raw": "360",
+          "parsedValues": ["360"],
+          "primaryValue": "360"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "529",
+          "parsedValues": ["529"],
+          "primaryValue": "529"
+        },
+        "torqueNmGain": {
+          "raw": "21",
+          "parsedValues": ["21"],
+          "primaryValue": "21"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "6.2",
+        "originalBhp": {
+          "raw": "707",
+          "parsedValues": ["707"],
+          "primaryValue": "707"
+        },
+        "powerBhpGain": {
+          "raw": "33",
+          "parsedValues": ["33"],
+          "primaryValue": "33"
+        },
+        "originalTorque": {
+          "raw": "875",
+          "parsedValues": ["875"],
+          "primaryValue": "875"
+        },
+        "torqueNmGain": {
+          "raw": "43",
+          "parsedValues": ["43"],
+          "primaryValue": "43"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Jeep",
+    "model": "Grand Cherokee",
+    "modelSlug": "grand-cherokee",
+    "sourceProductId": 20509,
+    "sourceUrl": "https://viezu.com/shop/jeep-grand-cherokee-2005-2011/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "3.0",
+        "originalBhp": {
+          "raw": "211 | 218",
+          "parsedValues": ["211", "218"],
+          "primaryValue": "211",
+          "secondaryValue": "218"
+        },
+        "powerBhpGain": {
+          "raw": "54 | 47",
+          "parsedValues": ["54", "47"],
+          "primaryValue": "54",
+          "secondaryValue": "47"
+        },
+        "originalTorque": {
+          "raw": "510 | 510",
+          "parsedValues": ["510", "510"],
+          "primaryValue": "510",
+          "secondaryValue": "510"
+        },
+        "torqueNmGain": {
+          "raw": "90 | 90",
+          "parsedValues": ["90", "90"],
+          "primaryValue": "90",
+          "secondaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "25 | 25",
+          "parsedValues": ["25", "25"],
+          "primaryValue": "25",
+          "secondaryValue": "25"
+        },
+        "economyGainNm": {
+          "raw": "45 | 45",
+          "parsedValues": ["45", "45"],
+          "primaryValue": "45",
+          "secondaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "3.7",
+        "originalBhp": {
+          "raw": "215",
+          "parsedValues": ["215"],
+          "primaryValue": "215"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "319",
+          "parsedValues": ["319"],
+          "primaryValue": "319"
+        },
+        "torqueNmGain": {
+          "raw": "21",
+          "parsedValues": ["21"],
+          "primaryValue": "21"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "4.7",
+        "originalBhp": {
+          "raw": "230 | 305",
+          "parsedValues": ["230", "305"],
+          "primaryValue": "230",
+          "secondaryValue": "305"
+        },
+        "powerBhpGain": {
+          "raw": "20 | 20",
+          "parsedValues": ["20", "20"],
+          "primaryValue": "20",
+          "secondaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "400 | 453",
+          "parsedValues": ["400", "453"],
+          "primaryValue": "400",
+          "secondaryValue": "453"
+        },
+        "torqueNmGain": {
+          "raw": "20 | 22",
+          "parsedValues": ["20", "22"],
+          "primaryValue": "20",
+          "secondaryValue": "22"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "5.7",
+        "originalBhp": {
+          "raw": "325 | 357",
+          "parsedValues": ["325", "357"],
+          "primaryValue": "325",
+          "secondaryValue": "357"
+        },
+        "powerBhpGain": {
+          "raw": "20 | 18",
+          "parsedValues": ["20", "18"],
+          "primaryValue": "20",
+          "secondaryValue": "18"
+        },
+        "originalTorque": {
+          "raw": "500 | 527",
+          "parsedValues": ["500", "527"],
+          "primaryValue": "500",
+          "secondaryValue": "527"
+        },
+        "torqueNmGain": {
+          "raw": "20 | 18",
+          "parsedValues": ["20", "18"],
+          "primaryValue": "20",
+          "secondaryValue": "18"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "6.1",
+        "originalBhp": {
+          "raw": "426",
+          "parsedValues": ["426"],
+          "primaryValue": "426"
+        },
+        "powerBhpGain": {
+          "raw": "14",
+          "parsedValues": ["14"],
+          "primaryValue": "14"
+        },
+        "originalTorque": {
+          "raw": "569",
+          "parsedValues": ["569"],
+          "primaryValue": "569"
+        },
+        "torqueNmGain": {
+          "raw": "21",
+          "parsedValues": ["21"],
+          "primaryValue": "21"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Jeep",
+    "model": "Grand Cherokee",
+    "modelSlug": "grand-cherokee",
+    "sourceProductId": 20507,
+    "sourceUrl": "https://viezu.com/shop/jeep-grand-cherokee-2001-2005/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "4.7",
+        "originalBhp": {
+          "raw": "220",
+          "parsedValues": ["220"],
+          "primaryValue": "220"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "394",
+          "parsedValues": ["394"],
+          "primaryValue": "394"
+        },
+        "torqueNmGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 38900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.7",
+        "originalBhp": {
+          "raw": "163",
+          "parsedValues": ["163"],
+          "primaryValue": "163"
+        },
+        "powerBhpGain": {
+          "raw": "37",
+          "parsedValues": ["37"],
+          "primaryValue": "37"
+        },
+        "originalTorque": {
+          "raw": "400",
+          "parsedValues": ["400"],
+          "primaryValue": "400"
+        },
+        "torqueNmGain": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Jeep",
+    "model": "Compass",
+    "modelSlug": "compass",
+    "sourceProductId": 20503,
+    "sourceUrl": "https://viezu.com/shop/compass-2017-2020/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.4",
+        "originalBhp": {
+          "raw": "140 | 170",
+          "parsedValues": ["140", "170"],
+          "primaryValue": "140",
+          "secondaryValue": "170"
+        },
+        "powerBhpGain": {
+          "raw": "10 | 15",
+          "parsedValues": ["10", "15"],
+          "primaryValue": "10",
+          "secondaryValue": "15"
+        },
+        "originalTorque": {
+          "raw": "230 | 250",
+          "parsedValues": ["230", "250"],
+          "primaryValue": "230",
+          "secondaryValue": "250"
+        },
+        "torqueNmGain": {
+          "raw": "40 | 40",
+          "parsedValues": ["40", "40"],
+          "primaryValue": "40",
+          "secondaryValue": "40"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "120",
+          "parsedValues": ["120"],
+          "primaryValue": "120"
+        },
+        "powerBhpGain": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "320",
+          "parsedValues": ["320"],
+          "primaryValue": "320"
+        },
+        "torqueNmGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "140 | 170",
+          "parsedValues": ["140", "170"],
+          "primaryValue": "140",
+          "secondaryValue": "170"
+        },
+        "powerBhpGain": {
+          "raw": "25 | 15",
+          "parsedValues": ["25", "15"],
+          "primaryValue": "25",
+          "secondaryValue": "15"
+        },
+        "originalTorque": {
+          "raw": "350 | 350",
+          "parsedValues": ["350", "350"],
+          "primaryValue": "350",
+          "secondaryValue": "350"
+        },
+        "torqueNmGain": {
+          "raw": "70 | 70",
+          "parsedValues": ["70", "70"],
+          "primaryValue": "70",
+          "secondaryValue": "70"
+        },
+        "economyGainBhp": {
+          "raw": "10 | 10",
+          "parsedValues": ["10", "10"],
+          "primaryValue": "10",
+          "secondaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "35 | 35",
+          "parsedValues": ["35", "35"],
+          "primaryValue": "35",
+          "secondaryValue": "35"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Jeep",
+    "model": "Compass",
+    "modelSlug": "compass",
+    "sourceProductId": 20501,
+    "sourceUrl": "https://viezu.com/shop/compass-2011-2016/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.1",
+        "originalBhp": {
+          "raw": "136 | 136 | 163",
+          "parsedValues": ["136", "136", "163"],
+          "primaryValue": "136",
+          "secondaryValue": "136"
+        },
+        "powerBhpGain": {
+          "raw": "44 | 64 | 37",
+          "parsedValues": ["44", "64", "37"],
+          "primaryValue": "44",
+          "secondaryValue": "64"
+        },
+        "originalTorque": {
+          "raw": "320 | 320 | 320",
+          "parsedValues": ["320", "320", "320"],
+          "primaryValue": "320",
+          "secondaryValue": "320"
+        },
+        "torqueNmGain": {
+          "raw": "70 | 100 | 100",
+          "parsedValues": ["70", "100", "100"],
+          "primaryValue": "70",
+          "secondaryValue": "100"
+        },
+        "economyGainBhp": {
+          "raw": "20 | 30 | 20",
+          "parsedValues": ["20", "30", "20"],
+          "primaryValue": "20",
+          "secondaryValue": "30"
+        },
+        "economyGainNm": {
+          "raw": "35 | 50 | 50",
+          "parsedValues": ["35", "50", "50"],
+          "primaryValue": "35",
+          "secondaryValue": "50"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Jeep",
+    "model": "Compass",
+    "modelSlug": "compass",
+    "sourceProductId": 20497,
+    "sourceUrl": "https://viezu.com/shop/compass-2006-2011/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "140",
+          "parsedValues": ["140"],
+          "primaryValue": "140"
+        },
+        "powerBhpGain": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "310",
+          "parsedValues": ["310"],
+          "primaryValue": "310"
+        },
+        "torqueNmGain": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "158",
+          "parsedValues": ["158"],
+          "primaryValue": "158"
+        },
+        "powerBhpGain": {
+          "raw": "22",
+          "parsedValues": ["22"],
+          "primaryValue": "22"
+        },
+        "originalTorque": {
+          "raw": "191",
+          "parsedValues": ["191"],
+          "primaryValue": "191"
+        },
+        "torqueNmGain": {
+          "raw": "19",
+          "parsedValues": ["19"],
+          "primaryValue": "19"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "2.4",
+        "originalBhp": {
+          "raw": "172",
+          "parsedValues": ["172"],
+          "primaryValue": "172"
+        },
+        "powerBhpGain": {
+          "raw": "18",
+          "parsedValues": ["18"],
+          "primaryValue": "18"
+        },
+        "originalTorque": {
+          "raw": "220",
+          "parsedValues": ["220"],
+          "primaryValue": "220"
+        },
+        "torqueNmGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Jeep",
+    "model": "Commander",
+    "modelSlug": "commander",
+    "sourceProductId": 20489,
+    "sourceUrl": "https://viezu.com/shop/jeep-commander-2006-2010/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "3.0",
+        "originalBhp": {
+          "raw": "211 | 218",
+          "parsedValues": ["211", "218"],
+          "primaryValue": "211",
+          "secondaryValue": "218"
+        },
+        "powerBhpGain": {
+          "raw": "54 | 47",
+          "parsedValues": ["54", "47"],
+          "primaryValue": "54",
+          "secondaryValue": "47"
+        },
+        "originalTorque": {
+          "raw": "510 | 510",
+          "parsedValues": ["510", "510"],
+          "primaryValue": "510",
+          "secondaryValue": "510"
+        },
+        "torqueNmGain": {
+          "raw": "90 | 90",
+          "parsedValues": ["90", "90"],
+          "primaryValue": "90",
+          "secondaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "25 | 25",
+          "parsedValues": ["25", "25"],
+          "primaryValue": "25",
+          "secondaryValue": "25"
+        },
+        "economyGainNm": {
+          "raw": "45 | 45",
+          "parsedValues": ["45", "45"],
+          "primaryValue": "45",
+          "secondaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "3.7",
+        "originalBhp": {
+          "raw": "210",
+          "parsedValues": ["210"],
+          "primaryValue": "210"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "319",
+          "parsedValues": ["319"],
+          "primaryValue": "319"
+        },
+        "torqueNmGain": {
+          "raw": "21",
+          "parsedValues": ["21"],
+          "primaryValue": "21"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "4.7",
+        "originalBhp": {
+          "raw": "235 | 305",
+          "parsedValues": ["235", "305"],
+          "primaryValue": "235",
+          "secondaryValue": "305"
+        },
+        "powerBhpGain": {
+          "raw": "20 | 20",
+          "parsedValues": ["20", "20"],
+          "primaryValue": "20",
+          "secondaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "393 | 453",
+          "parsedValues": ["393", "453"],
+          "primaryValue": "393",
+          "secondaryValue": "453"
+        },
+        "torqueNmGain": {
+          "raw": "22 | 22",
+          "parsedValues": ["22", "22"],
+          "primaryValue": "22",
+          "secondaryValue": "22"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "5.7",
+        "originalBhp": {
+          "raw": "330",
+          "parsedValues": ["330"],
+          "primaryValue": "330"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "500",
+          "parsedValues": ["500"],
+          "primaryValue": "500"
+        },
+        "torqueNmGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Jeep",
+    "model": "Cherokee",
+    "modelSlug": "cherokee",
+    "sourceProductId": 20485,
+    "sourceUrl": "https://viezu.com/shop/cherokee-2014-present/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "140 | 170",
+          "parsedValues": ["140", "170"],
+          "primaryValue": "140",
+          "secondaryValue": "170"
+        },
+        "powerBhpGain": {
+          "raw": "45 | 30",
+          "parsedValues": ["45", "30"],
+          "primaryValue": "45",
+          "secondaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "350 | 350",
+          "parsedValues": ["350", "350"],
+          "primaryValue": "350",
+          "secondaryValue": "350"
+        },
+        "torqueNmGain": {
+          "raw": "50 | 75",
+          "parsedValues": ["50", "75"],
+          "primaryValue": "50",
+          "secondaryValue": "75"
+        },
+        "economyGainBhp": {
+          "raw": "20 | 15",
+          "parsedValues": ["20", "15"],
+          "primaryValue": "20",
+          "secondaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "25 | 40",
+          "parsedValues": ["25", "40"],
+          "primaryValue": "25",
+          "secondaryValue": "40"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.2",
+        "originalBhp": {
+          "raw": "185 | 200",
+          "parsedValues": ["185", "200"],
+          "primaryValue": "185",
+          "secondaryValue": "200"
+        },
+        "powerBhpGain": {
+          "raw": "15 | 10",
+          "parsedValues": ["15", "10"],
+          "primaryValue": "15",
+          "secondaryValue": "10"
+        },
+        "originalTorque": {
+          "raw": "440 | 440",
+          "parsedValues": ["440", "440"],
+          "primaryValue": "440",
+          "secondaryValue": "440"
+        },
+        "torqueNmGain": {
+          "raw": "60 | 60",
+          "parsedValues": ["60", "60"],
+          "primaryValue": "60",
+          "secondaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "10 | 5",
+          "parsedValues": ["10", "5"],
+          "primaryValue": "10",
+          "secondaryValue": "5"
+        },
+        "economyGainNm": {
+          "raw": "30 | 30",
+          "parsedValues": ["30", "30"],
+          "primaryValue": "30",
+          "secondaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "3.2",
+        "originalBhp": {
+          "raw": "270",
+          "parsedValues": ["270"],
+          "primaryValue": "270"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "324",
+          "parsedValues": ["324"],
+          "primaryValue": "324"
+        },
+        "torqueNmGain": {
+          "raw": "21",
+          "parsedValues": ["21"],
+          "primaryValue": "21"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Jeep",
+    "model": "Cherokee",
+    "modelSlug": "cherokee",
+    "sourceProductId": 20483,
+    "sourceUrl": "https://viezu.com/shop/cherokee-2008-2013/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.8",
+        "originalBhp": {
+          "raw": "163 | 177",
+          "parsedValues": ["163", "177"],
+          "primaryValue": "163",
+          "secondaryValue": "177"
+        },
+        "powerBhpGain": {
+          "raw": "47 | 28",
+          "parsedValues": ["47", "28"],
+          "primaryValue": "47",
+          "secondaryValue": "28"
+        },
+        "originalTorque": {
+          "raw": "400 | 460",
+          "parsedValues": ["400", "460"],
+          "primaryValue": "400",
+          "secondaryValue": "460"
+        },
+        "torqueNmGain": {
+          "raw": "120 | 60",
+          "parsedValues": ["120", "60"],
+          "primaryValue": "120",
+          "secondaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "25 | 15",
+          "parsedValues": ["25", "15"],
+          "primaryValue": "25",
+          "secondaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "60 | 30",
+          "parsedValues": ["60", "30"],
+          "primaryValue": "60",
+          "secondaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Jeep",
+    "model": "Cherokee",
+    "modelSlug": "cherokee",
+    "sourceProductId": 20481,
+    "sourceUrl": "https://viezu.com/shop/jeep-cherokee-2005-2008/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.8",
+        "originalBhp": {
+          "raw": "163",
+          "parsedValues": ["163"],
+          "primaryValue": "163"
+        },
+        "powerBhpGain": {
+          "raw": "47",
+          "parsedValues": ["47"],
+          "primaryValue": "47"
+        },
+        "originalTorque": {
+          "raw": "400",
+          "parsedValues": ["400"],
+          "primaryValue": "400"
+        },
+        "torqueNmGain": {
+          "raw": "120",
+          "parsedValues": ["120"],
+          "primaryValue": "120"
+        },
+        "economyGainBhp": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "economyGainNm": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Jeep",
+    "model": "Cherokee",
+    "modelSlug": "cherokee",
+    "sourceProductId": 20477,
+    "sourceUrl": "https://viezu.com/shop/jeep-cherokee-2000-2005/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.5",
+        "originalBhp": {
+          "raw": "143 | 115",
+          "parsedValues": ["143", "115"],
+          "primaryValue": "143",
+          "secondaryValue": "115"
+        },
+        "powerBhpGain": {
+          "raw": "27 | 27",
+          "parsedValues": ["27", "27"],
+          "primaryValue": "27",
+          "secondaryValue": "27"
+        },
+        "originalTorque": {
+          "raw": "343 | 278",
+          "parsedValues": ["343", "278"],
+          "primaryValue": "343",
+          "secondaryValue": "278"
+        },
+        "torqueNmGain": {
+          "raw": "57 | 37",
+          "parsedValues": ["57", "37"],
+          "primaryValue": "57",
+          "secondaryValue": "37"
+        },
+        "economyGainBhp": {
+          "raw": "15 | 15",
+          "parsedValues": ["15", "15"],
+          "primaryValue": "15",
+          "secondaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "30 | 20",
+          "parsedValues": ["30", "20"],
+          "primaryValue": "30",
+          "secondaryValue": "20"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.8",
+        "originalBhp": {
+          "raw": "150 | 163",
+          "parsedValues": ["150", "163"],
+          "primaryValue": "150",
+          "secondaryValue": "163"
+        },
+        "powerBhpGain": {
+          "raw": "30 | 34",
+          "parsedValues": ["30", "34"],
+          "primaryValue": "30",
+          "secondaryValue": "34"
+        },
+        "originalTorque": {
+          "raw": "360 | 400",
+          "parsedValues": ["360", "400"],
+          "primaryValue": "360",
+          "secondaryValue": "400"
+        },
+        "torqueNmGain": {
+          "raw": "70 | 100",
+          "parsedValues": ["70", "100"],
+          "primaryValue": "70",
+          "secondaryValue": "100"
+        },
+        "economyGainBhp": {
+          "raw": "15 | 15",
+          "parsedValues": ["15", "15"],
+          "primaryValue": "15",
+          "secondaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "35 | 50",
+          "parsedValues": ["35", "50"],
+          "primaryValue": "35",
+          "secondaryValue": "50"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  }
+]

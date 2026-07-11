@@ -1,0 +1,6042 @@
+[
+  {
+    "make": "FIAT",
+    "model": "Titano",
+    "modelSlug": "titano",
+    "sourceProductId": 62952,
+    "sourceUrl": "https://viezu.com/shop/fiat-titano-2024-present/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.2",
+        "originalBhp": {
+          "raw": "180",
+          "parsedValues": ["180"],
+          "primaryValue": "180"
+        },
+        "powerBhpGain": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "400",
+          "parsedValues": ["400"],
+          "primaryValue": "400"
+        },
+        "torqueNmGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "12",
+          "parsedValues": ["12"],
+          "primaryValue": "12"
+        },
+        "economyGainNm": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "FIAT",
+    "model": "Tipo",
+    "modelSlug": "tipo",
+    "sourceProductId": 58034,
+    "sourceUrl": "https://viezu.com/shop/fiat-tipo-2021-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.0",
+        "originalBhp": {
+          "raw": "100",
+          "parsedValues": ["100"],
+          "primaryValue": "100"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "190",
+          "parsedValues": ["190"],
+          "primaryValue": "190"
+        },
+        "torqueNmGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "FIAT",
+    "model": "Ducato",
+    "modelSlug": "ducato",
+    "sourceProductId": 51920,
+    "sourceUrl": "https://viezu.com/shop/fiat-ducato-2021-present/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.2",
+        "originalBhp": {
+          "raw": "182 | 140 | 120",
+          "parsedValues": ["182", "140", "120"],
+          "primaryValue": "182",
+          "secondaryValue": "140"
+        },
+        "powerBhpGain": {
+          "raw": "25 | 30 | 30",
+          "parsedValues": ["25", "30", "30"],
+          "primaryValue": "25",
+          "secondaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "380 | 350 | 320",
+          "parsedValues": ["380", "350", "320"],
+          "primaryValue": "380",
+          "secondaryValue": "350"
+        },
+        "torqueNmGain": {
+          "raw": "50 | 60 | 60",
+          "parsedValues": ["50", "60", "60"],
+          "primaryValue": "50",
+          "secondaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "12 | 15 | 15",
+          "parsedValues": ["12", "15", "15"],
+          "primaryValue": "12",
+          "secondaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "25 | 30 | 30",
+          "parsedValues": ["25", "30", "30"],
+          "primaryValue": "25",
+          "secondaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "FIAT",
+    "model": "LINEA",
+    "modelSlug": "linea",
+    "sourceProductId": 48049,
+    "sourceUrl": "https://viezu.com/shop/fiat-linea-2006-present/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "1.3",
+        "originalBhp": {
+          "raw": "74",
+          "parsedValues": ["74"],
+          "primaryValue": "74"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "145",
+          "parsedValues": ["145"],
+          "primaryValue": "145"
+        },
+        "torqueNmGain": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 17500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.4",
+        "originalBhp": {
+          "raw": "76",
+          "parsedValues": ["76"],
+          "primaryValue": "76"
+        },
+        "powerBhpGain": {
+          "raw": "21",
+          "parsedValues": ["21"],
+          "primaryValue": "21"
+        },
+        "originalTorque": {
+          "raw": "0",
+          "parsedValues": ["0"],
+          "primaryValue": "0"
+        },
+        "torqueNmGain": {
+          "raw": "0",
+          "parsedValues": ["0"],
+          "primaryValue": "0"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 17500
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "74",
+          "parsedValues": ["74"],
+          "primaryValue": "74"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "145",
+          "parsedValues": ["145"],
+          "primaryValue": "145"
+        },
+        "torqueNmGain": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 19900
+      }
+    ]
+  },
+  {
+    "make": "FIAT",
+    "model": "Scudo",
+    "modelSlug": "scudo",
+    "sourceProductId": 27523,
+    "sourceUrl": "https://viezu.com/shop/fiat-scudo-2004-2011/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "92",
+          "parsedValues": ["92"],
+          "primaryValue": "92"
+        },
+        "powerBhpGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "109",
+          "parsedValues": ["109"],
+          "primaryValue": "109"
+        },
+        "powerBhpGain": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "economyGainBhp": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "fuelSaving": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "136",
+          "parsedValues": ["136"],
+          "primaryValue": "136"
+        },
+        "powerBhpGain": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "12",
+          "parsedValues": ["12"],
+          "primaryValue": "12"
+        },
+        "economyGainBhp": {
+          "raw": "0",
+          "parsedValues": ["0"],
+          "primaryValue": "0"
+        },
+        "economyGainNm": {
+          "raw": "0",
+          "parsedValues": ["0"],
+          "primaryValue": "0"
+        },
+        "fuelSaving": {
+          "raw": "0",
+          "parsedValues": ["0"],
+          "primaryValue": "0"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "powerBhpGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "136",
+          "parsedValues": ["136"],
+          "primaryValue": "136"
+        },
+        "powerBhpGain": {
+          "raw": "49",
+          "parsedValues": ["49"],
+          "primaryValue": "49"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "economyGainBhp": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "economyGainNm": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "fuelSaving": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "120",
+          "parsedValues": ["120"],
+          "primaryValue": "120"
+        },
+        "powerBhpGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "163",
+          "parsedValues": ["163"],
+          "primaryValue": "163"
+        },
+        "powerBhpGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "65",
+          "parsedValues": ["65"],
+          "primaryValue": "65"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "128",
+          "parsedValues": ["128"],
+          "primaryValue": "128"
+        },
+        "powerBhpGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "fuelSaving": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "FIAT",
+    "model": "Doblo",
+    "modelSlug": "doblo",
+    "sourceProductId": 27478,
+    "sourceUrl": "https://viezu.com/shop/fiat-doblo-2001-2014/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "1.2",
+        "originalBhp": {
+          "raw": "69",
+          "parsedValues": ["69"],
+          "primaryValue": "69"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "180",
+          "parsedValues": ["180"],
+          "primaryValue": "180"
+        },
+        "torqueNmGain": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "economyGainBhp": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "fuelSaving": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.2",
+        "originalBhp": {
+          "raw": "75",
+          "parsedValues": ["75"],
+          "primaryValue": "75"
+        },
+        "powerBhpGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "180",
+          "parsedValues": ["180"],
+          "primaryValue": "180"
+        },
+        "torqueNmGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.2",
+        "originalBhp": {
+          "raw": "86",
+          "parsedValues": ["86"],
+          "primaryValue": "86"
+        },
+        "powerBhpGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "200",
+          "parsedValues": ["200"],
+          "primaryValue": "200"
+        },
+        "torqueNmGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.9",
+        "originalBhp": {
+          "raw": "101",
+          "parsedValues": ["101"],
+          "primaryValue": "101"
+        },
+        "powerBhpGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "originalTorque": {
+          "raw": "200",
+          "parsedValues": ["200"],
+          "primaryValue": "200"
+        },
+        "torqueNmGain": {
+          "raw": "70",
+          "parsedValues": ["70"],
+          "primaryValue": "70"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "fuelSaving": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.9",
+        "originalBhp": {
+          "raw": "105",
+          "parsedValues": ["105"],
+          "primaryValue": "105"
+        },
+        "powerBhpGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "205",
+          "parsedValues": ["205"],
+          "primaryValue": "205"
+        },
+        "torqueNmGain": {
+          "raw": "70",
+          "parsedValues": ["70"],
+          "primaryValue": "70"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "fuelSaving": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.9",
+        "originalBhp": {
+          "raw": "120",
+          "parsedValues": ["120"],
+          "primaryValue": "120"
+        },
+        "powerBhpGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "200",
+          "parsedValues": ["200"],
+          "primaryValue": "200"
+        },
+        "torqueNmGain": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "fuelSaving": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.2",
+        "originalBhp": {
+          "raw": "65",
+          "parsedValues": ["65"],
+          "primaryValue": "65"
+        },
+        "powerBhpGain": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "originalTorque": {
+          "raw": "102",
+          "parsedValues": ["102"],
+          "primaryValue": "102"
+        },
+        "torqueNmGain": {
+          "raw": "7",
+          "parsedValues": ["7"],
+          "primaryValue": "7"
+        },
+        "economyGainBhp": {
+          "raw": "0",
+          "parsedValues": ["0"],
+          "primaryValue": "0"
+        },
+        "economyGainNm": {
+          "raw": "0",
+          "parsedValues": ["0"],
+          "primaryValue": "0"
+        },
+        "fuelSaving": {
+          "raw": "0",
+          "parsedValues": ["0"],
+          "primaryValue": "0"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.4",
+        "originalBhp": {
+          "raw": "76",
+          "parsedValues": ["76"],
+          "primaryValue": "76"
+        },
+        "powerBhpGain": {
+          "raw": "6",
+          "parsedValues": ["6"],
+          "primaryValue": "6"
+        },
+        "originalTorque": {
+          "raw": "115",
+          "parsedValues": ["115"],
+          "primaryValue": "115"
+        },
+        "torqueNmGain": {
+          "raw": "8",
+          "parsedValues": ["8"],
+          "primaryValue": "8"
+        },
+        "economyGainBhp": {
+          "raw": "0",
+          "parsedValues": ["0"],
+          "primaryValue": "0"
+        },
+        "economyGainNm": {
+          "raw": "0",
+          "parsedValues": ["0"],
+          "primaryValue": "0"
+        },
+        "fuelSaving": {
+          "raw": "0",
+          "parsedValues": ["0"],
+          "primaryValue": "0"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "103",
+          "parsedValues": ["103"],
+          "primaryValue": "103"
+        },
+        "powerBhpGain": {
+          "raw": "6",
+          "parsedValues": ["6"],
+          "primaryValue": "6"
+        },
+        "originalTorque": {
+          "raw": "145",
+          "parsedValues": ["145"],
+          "primaryValue": "145"
+        },
+        "torqueNmGain": {
+          "raw": "8",
+          "parsedValues": ["8"],
+          "primaryValue": "8"
+        },
+        "economyGainBhp": {
+          "raw": "0",
+          "parsedValues": ["0"],
+          "primaryValue": "0"
+        },
+        "economyGainNm": {
+          "raw": "0",
+          "parsedValues": ["0"],
+          "primaryValue": "0"
+        },
+        "fuelSaving": {
+          "raw": "0",
+          "parsedValues": ["0"],
+          "primaryValue": "0"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.2",
+        "originalBhp": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "powerBhpGain": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "200",
+          "parsedValues": ["200"],
+          "primaryValue": "200"
+        },
+        "torqueNmGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "economyGainBhp": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "fuelSaving": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "105",
+          "parsedValues": ["105"],
+          "primaryValue": "105"
+        },
+        "powerBhpGain": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "290",
+          "parsedValues": ["290"],
+          "primaryValue": "290"
+        },
+        "torqueNmGain": {
+          "raw": "70",
+          "parsedValues": ["70"],
+          "primaryValue": "70"
+        },
+        "economyGainBhp": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "fuelSaving": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "powerBhpGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "originalTorque": {
+          "raw": "200",
+          "parsedValues": ["200"],
+          "primaryValue": "200"
+        },
+        "torqueNmGain": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "fuelSaving": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "135",
+          "parsedValues": ["135"],
+          "primaryValue": "135"
+        },
+        "powerBhpGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "320",
+          "parsedValues": ["320"],
+          "primaryValue": "320"
+        },
+        "torqueNmGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.4",
+        "originalBhp": {
+          "raw": "95",
+          "parsedValues": ["95"],
+          "primaryValue": "95"
+        },
+        "powerBhpGain": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "originalTorque": {
+          "raw": "127",
+          "parsedValues": ["127"],
+          "primaryValue": "127"
+        },
+        "torqueNmGain": {
+          "raw": "17",
+          "parsedValues": ["17"],
+          "primaryValue": "17"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.4",
+        "originalBhp": {
+          "raw": "120",
+          "parsedValues": ["120"],
+          "primaryValue": "120"
+        },
+        "powerBhpGain": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "originalTorque": {
+          "raw": "206",
+          "parsedValues": ["206"],
+          "primaryValue": "206"
+        },
+        "torqueNmGain": {
+          "raw": "74",
+          "parsedValues": ["74"],
+          "primaryValue": "74"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "FIAT",
+    "model": "Uno",
+    "modelSlug": "uno",
+    "sourceProductId": 19662,
+    "sourceUrl": "https://viezu.com/shop/fiat-uno-2010-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.4",
+        "originalBhp": {
+          "raw": "85",
+          "parsedValues": ["85"],
+          "primaryValue": "85"
+        },
+        "powerBhpGain": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "originalTorque": {
+          "raw": "122",
+          "parsedValues": ["122"],
+          "primaryValue": "122"
+        },
+        "torqueNmGain": {
+          "raw": "13",
+          "parsedValues": ["13"],
+          "primaryValue": "13"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      }
+    ]
+  },
+  {
+    "make": "FIAT",
+    "model": "Ulysse",
+    "modelSlug": "ulysse",
+    "sourceProductId": 19659,
+    "sourceUrl": "https://viezu.com/shop/ulysse-all/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "110 | 136",
+          "parsedValues": ["110", "136"],
+          "primaryValue": "110",
+          "secondaryValue": "136"
+        },
+        "powerBhpGain": {
+          "raw": "22 | 29",
+          "parsedValues": ["22", "29"],
+          "primaryValue": "22",
+          "secondaryValue": "29"
+        },
+        "originalTorque": {
+          "raw": "250 | 320",
+          "parsedValues": ["250", "320"],
+          "primaryValue": "250",
+          "secondaryValue": "320"
+        },
+        "torqueNmGain": {
+          "raw": "42 | 55",
+          "parsedValues": ["42", "55"],
+          "primaryValue": "42",
+          "secondaryValue": "55"
+        },
+        "economyGainBhp": {
+          "raw": "10 | 15",
+          "parsedValues": ["10", "15"],
+          "primaryValue": "10",
+          "secondaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "20 | 30",
+          "parsedValues": ["20", "30"],
+          "primaryValue": "20",
+          "secondaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.2",
+        "originalBhp": {
+          "raw": "128",
+          "parsedValues": ["128"],
+          "primaryValue": "128"
+        },
+        "powerBhpGain": {
+          "raw": "27",
+          "parsedValues": ["27"],
+          "primaryValue": "27"
+        },
+        "originalTorque": {
+          "raw": "314",
+          "parsedValues": ["314"],
+          "primaryValue": "314"
+        },
+        "torqueNmGain": {
+          "raw": "86",
+          "parsedValues": ["86"],
+          "primaryValue": "86"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "FIAT",
+    "model": "Toro",
+    "modelSlug": "toro",
+    "sourceProductId": 19657,
+    "sourceUrl": "https://viezu.com/shop/fiat-toro-2016-present/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "170",
+          "parsedValues": ["170"],
+          "primaryValue": "170"
+        },
+        "powerBhpGain": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "350",
+          "parsedValues": ["350"],
+          "primaryValue": "350"
+        },
+        "torqueNmGain": {
+          "raw": "75",
+          "parsedValues": ["75"],
+          "primaryValue": "75"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "FIAT",
+    "model": "Tipo",
+    "modelSlug": "tipo",
+    "sourceProductId": 19652,
+    "sourceUrl": "https://viezu.com/shop/tipo-2016-2020/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "1.2",
+        "originalBhp": {
+          "raw": "95",
+          "parsedValues": ["95"],
+          "primaryValue": "95"
+        },
+        "powerBhpGain": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "200",
+          "parsedValues": ["200"],
+          "primaryValue": "200"
+        },
+        "torqueNmGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "120",
+          "parsedValues": ["120"],
+          "primaryValue": "120"
+        },
+        "powerBhpGain": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "320",
+          "parsedValues": ["320"],
+          "primaryValue": "320"
+        },
+        "torqueNmGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.4",
+        "originalBhp": {
+          "raw": "120 | 95",
+          "parsedValues": ["120", "95"],
+          "primaryValue": "120",
+          "secondaryValue": "95"
+        },
+        "powerBhpGain": {
+          "raw": "40 | 10",
+          "parsedValues": ["40", "10"],
+          "primaryValue": "40",
+          "secondaryValue": "10"
+        },
+        "originalTorque": {
+          "raw": "215 | 127",
+          "parsedValues": ["215", "127"],
+          "primaryValue": "215",
+          "secondaryValue": "127"
+        },
+        "torqueNmGain": {
+          "raw": "65 | 13",
+          "parsedValues": ["65", "13"],
+          "primaryValue": "65",
+          "secondaryValue": "13"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "110",
+          "parsedValues": ["110"],
+          "primaryValue": "110"
+        },
+        "powerBhpGain": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "originalTorque": {
+          "raw": "152",
+          "parsedValues": ["152"],
+          "primaryValue": "152"
+        },
+        "torqueNmGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "FIAT",
+    "model": "Talento",
+    "modelSlug": "talento",
+    "sourceProductId": 19649,
+    "sourceUrl": "https://viezu.com/shop/talento-2020-present/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "95",
+          "parsedValues": ["95"],
+          "primaryValue": "95"
+        },
+        "powerBhpGain": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "originalTorque": {
+          "raw": "260",
+          "parsedValues": ["260"],
+          "primaryValue": "260"
+        },
+        "torqueNmGain": {
+          "raw": "100",
+          "parsedValues": ["100"],
+          "primaryValue": "100"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "120 | 145 | 170",
+          "parsedValues": ["120", "145", "170"],
+          "primaryValue": "120",
+          "secondaryValue": "145"
+        },
+        "powerBhpGain": {
+          "raw": "80 | 55 | 30",
+          "parsedValues": ["80", "55", "30"],
+          "primaryValue": "80",
+          "secondaryValue": "55"
+        },
+        "originalTorque": {
+          "raw": "320 | 350 | 380",
+          "parsedValues": ["320", "350", "380"],
+          "primaryValue": "320",
+          "secondaryValue": "350"
+        },
+        "torqueNmGain": {
+          "raw": "120 | 90 | 60",
+          "parsedValues": ["120", "90", "60"],
+          "primaryValue": "120",
+          "secondaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "40 | 30 | 15",
+          "parsedValues": ["40", "30", "15"],
+          "primaryValue": "40",
+          "secondaryValue": "30"
+        },
+        "economyGainNm": {
+          "raw": "60 | 45 | 30",
+          "parsedValues": ["60", "45", "30"],
+          "primaryValue": "60",
+          "secondaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "FIAT",
+    "model": "Talento",
+    "modelSlug": "talento",
+    "sourceProductId": 19647,
+    "sourceUrl": "https://viezu.com/shop/talento-2016-2019/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "95 | 125 | 145 | 120 | 95",
+          "parsedValues": ["95", "125", "145", "120", "95"],
+          "primaryValue": "95",
+          "secondaryValue": "125"
+        },
+        "powerBhpGain": {
+          "raw": "45 | 40 | 20 | 25 | 45",
+          "parsedValues": ["45", "40", "20", "25", "45"],
+          "primaryValue": "45",
+          "secondaryValue": "40"
+        },
+        "originalTorque": {
+          "raw": "260 | 320 | 340 | 300 | 260",
+          "parsedValues": ["260", "320", "340", "300", "260"],
+          "primaryValue": "260",
+          "secondaryValue": "320"
+        },
+        "torqueNmGain": {
+          "raw": "100 | 60 | 40 | 80 | 100",
+          "parsedValues": ["100", "60", "40", "80", "100"],
+          "primaryValue": "100",
+          "secondaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "20 | 20 | 10 | 10 | 20",
+          "parsedValues": ["20", "20", "10", "10", "20"],
+          "primaryValue": "20",
+          "secondaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "50 | 30 | 20 | 40 | 50",
+          "parsedValues": ["50", "30", "20", "40", "50"],
+          "primaryValue": "50",
+          "secondaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "FIAT",
+    "model": "Strada",
+    "modelSlug": "strada",
+    "sourceProductId": 19644,
+    "sourceUrl": "https://viezu.com/shop/strada-all/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "1.2",
+        "originalBhp": {
+          "raw": "85 | 95",
+          "parsedValues": ["85", "95"],
+          "primaryValue": "85",
+          "secondaryValue": "95"
+        },
+        "powerBhpGain": {
+          "raw": "25 | 20",
+          "parsedValues": ["25", "20"],
+          "primaryValue": "25",
+          "secondaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "200 | 200",
+          "parsedValues": ["200", "200"],
+          "primaryValue": "200",
+          "secondaryValue": "200"
+        },
+        "torqueNmGain": {
+          "raw": "50 | 50",
+          "parsedValues": ["50", "50"],
+          "primaryValue": "50",
+          "secondaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "10 | 10",
+          "parsedValues": ["10", "10"],
+          "primaryValue": "10",
+          "secondaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "25 | 25",
+          "parsedValues": ["25", "25"],
+          "primaryValue": "25",
+          "secondaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.9",
+        "originalBhp": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "powerBhpGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "196",
+          "parsedValues": ["196"],
+          "primaryValue": "196"
+        },
+        "torqueNmGain": {
+          "raw": "64",
+          "parsedValues": ["64"],
+          "primaryValue": "64"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "FIAT",
+    "model": "Stilo",
+    "modelSlug": "stilo",
+    "sourceProductId": 19641,
+    "sourceUrl": "https://viezu.com/shop/stilo-2001-2007/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "1.9",
+        "originalBhp": {
+          "raw": "100 | 115 | 120 | 140 | 150 | 80",
+          "parsedValues": ["100", "115", "120", "140", "150", "80"],
+          "primaryValue": "100",
+          "secondaryValue": "115"
+        },
+        "powerBhpGain": {
+          "raw": "35 | 30 | 35 | 35 | 35 | 32",
+          "parsedValues": ["35", "30", "35", "35", "35", "32"],
+          "primaryValue": "35",
+          "secondaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "200 | 255 | 280 | 305 | 305 | 196",
+          "parsedValues": ["200", "255", "280", "305", "305", "196"],
+          "primaryValue": "200",
+          "secondaryValue": "255"
+        },
+        "torqueNmGain": {
+          "raw": "65 | 70 | 65 | 65 | 75 | 72",
+          "parsedValues": ["65", "70", "65", "65", "75", "72"],
+          "primaryValue": "65",
+          "secondaryValue": "70"
+        },
+        "economyGainBhp": {
+          "raw": "20 | 15 | 20 | 20 | 20 | 15",
+          "parsedValues": ["20", "15", "20", "20", "20", "15"],
+          "primaryValue": "20",
+          "secondaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "30 | 35 | 30 | 30 | 40 | 35",
+          "parsedValues": ["30", "35", "30", "30", "40", "35"],
+          "primaryValue": "30",
+          "secondaryValue": "35"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10% | 10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%", "10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "2.4",
+        "originalBhp": {
+          "raw": "170",
+          "parsedValues": ["170"],
+          "primaryValue": "170"
+        },
+        "powerBhpGain": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "originalTorque": {
+          "raw": "221",
+          "parsedValues": ["221"],
+          "primaryValue": "221"
+        },
+        "torqueNmGain": {
+          "raw": "19",
+          "parsedValues": ["19"],
+          "primaryValue": "19"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "FIAT",
+    "model": "Sedici",
+    "modelSlug": "sedici",
+    "sourceProductId": 19638,
+    "sourceUrl": "https://viezu.com/shop/fiat-sedici-all/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "1.9",
+        "originalBhp": {
+          "raw": "120",
+          "parsedValues": ["120"],
+          "primaryValue": "120"
+        },
+        "powerBhpGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "originalTorque": {
+          "raw": "280",
+          "parsedValues": ["280"],
+          "primaryValue": "280"
+        },
+        "torqueNmGain": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "135",
+          "parsedValues": ["135"],
+          "primaryValue": "135"
+        },
+        "powerBhpGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "320",
+          "parsedValues": ["320"],
+          "primaryValue": "320"
+        },
+        "torqueNmGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "FIAT",
+    "model": "Scudo",
+    "modelSlug": "scudo",
+    "sourceProductId": 19635,
+    "sourceUrl": "https://viezu.com/shop/fiat-scudo-2007-present/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "powerBhpGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "180",
+          "parsedValues": ["180"],
+          "primaryValue": "180"
+        },
+        "torqueNmGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "120 | 128 | 136 | 163",
+          "parsedValues": ["120", "128", "136", "163"],
+          "primaryValue": "120",
+          "secondaryValue": "128"
+        },
+        "powerBhpGain": {
+          "raw": "30 | 57 | 49 | 32",
+          "parsedValues": ["30", "57", "49", "32"],
+          "primaryValue": "30",
+          "secondaryValue": "57"
+        },
+        "originalTorque": {
+          "raw": "300 | 300 | 320 | 360",
+          "parsedValues": ["300", "300", "320", "360"],
+          "primaryValue": "300",
+          "secondaryValue": "300"
+        },
+        "torqueNmGain": {
+          "raw": "60 | 100 | 80 | 65",
+          "parsedValues": ["60", "100", "80", "65"],
+          "primaryValue": "60",
+          "secondaryValue": "100"
+        },
+        "economyGainBhp": {
+          "raw": "15 | 30 | 25 | 15",
+          "parsedValues": ["15", "30", "25", "15"],
+          "primaryValue": "15",
+          "secondaryValue": "30"
+        },
+        "economyGainNm": {
+          "raw": "30 | 50 | 40 | 30",
+          "parsedValues": ["30", "50", "40", "30"],
+          "primaryValue": "30",
+          "secondaryValue": "50"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "FIAT",
+    "model": "Scudo",
+    "modelSlug": "scudo",
+    "sourceProductId": 19633,
+    "sourceUrl": "https://viezu.com/shop/scudo-1995-2007/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "109",
+          "parsedValues": ["109"],
+          "primaryValue": "109"
+        },
+        "powerBhpGain": {
+          "raw": "23",
+          "parsedValues": ["23"],
+          "primaryValue": "23"
+        },
+        "originalTorque": {
+          "raw": "250",
+          "parsedValues": ["250"],
+          "primaryValue": "250"
+        },
+        "torqueNmGain": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "economyGainBhp": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "FIAT",
+    "model": "Qubo",
+    "modelSlug": "qubo",
+    "sourceProductId": 19631,
+    "sourceUrl": "https://viezu.com/shop/fiat-qubo-2008-present/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "1.3",
+        "originalBhp": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "powerBhpGain": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "originalTorque": {
+          "raw": "79",
+          "parsedValues": ["79"],
+          "primaryValue": "79"
+        },
+        "torqueNmGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainBhp": {
+          "raw": "7",
+          "parsedValues": ["7"],
+          "primaryValue": "7"
+        },
+        "economyGainNm": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.2",
+        "originalBhp": {
+          "raw": "75 | 95",
+          "parsedValues": ["75", "95"],
+          "primaryValue": "75",
+          "secondaryValue": "95"
+        },
+        "powerBhpGain": {
+          "raw": "20 | 20",
+          "parsedValues": ["20", "20"],
+          "primaryValue": "20",
+          "secondaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "190 | 200",
+          "parsedValues": ["190", "200"],
+          "primaryValue": "190",
+          "secondaryValue": "200"
+        },
+        "torqueNmGain": {
+          "raw": "50 | 50",
+          "parsedValues": ["50", "50"],
+          "primaryValue": "50",
+          "secondaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "10 | 10",
+          "parsedValues": ["10", "10"],
+          "primaryValue": "10",
+          "secondaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "25 | 25",
+          "parsedValues": ["25", "25"],
+          "primaryValue": "25",
+          "secondaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 22500
+      }
+    ]
+  },
+  {
+    "make": "FIAT",
+    "model": "Punto EVO",
+    "modelSlug": "punto-evo",
+    "sourceProductId": 19627,
+    "sourceUrl": "https://viezu.com/shop/fiat-punto-evo-2009-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.4",
+        "originalBhp": {
+          "raw": "135 | 165 | 180 | 180 | 180 | 77 | 105",
+          "parsedValues": ["135", "165", "180", "180", "180", "77", "105"],
+          "primaryValue": "135",
+          "secondaryValue": "165"
+        },
+        "powerBhpGain": {
+          "raw": "15 | 15 | 20 | 20 | 20 | 10 | 15",
+          "parsedValues": ["15", "15", "20", "20", "20", "10", "15"],
+          "primaryValue": "15",
+          "secondaryValue": "15"
+        },
+        "originalTorque": {
+          "raw": "206 | 250 | 270 | 270 | 270 | 115 | 130",
+          "parsedValues": ["206", "250", "270", "270", "270", "115", "130"],
+          "primaryValue": "206",
+          "secondaryValue": "250"
+        },
+        "torqueNmGain": {
+          "raw": "74 | 50 | 50 | 50 | 50 | 10 | 15",
+          "parsedValues": ["74", "50", "50", "50", "50", "10", "15"],
+          "primaryValue": "74",
+          "secondaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.2",
+        "originalBhp": {
+          "raw": "70 | 80 | 85 | 95",
+          "parsedValues": ["70", "80", "85", "95"],
+          "primaryValue": "70",
+          "secondaryValue": "80"
+        },
+        "powerBhpGain": {
+          "raw": "25 | 30 | 25 | 20",
+          "parsedValues": ["25", "30", "25", "20"],
+          "primaryValue": "25",
+          "secondaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "190 | 200 | 200 | 200",
+          "parsedValues": ["190", "200", "200", "200"],
+          "primaryValue": "190",
+          "secondaryValue": "200"
+        },
+        "torqueNmGain": {
+          "raw": "50 | 50 | 50 | 50",
+          "parsedValues": ["50", "50", "50", "50"],
+          "primaryValue": "50",
+          "secondaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "10 | 15 | 10 | 10",
+          "parsedValues": ["10", "15", "10", "10"],
+          "primaryValue": "10",
+          "secondaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "25 | 25 | 25 | 25",
+          "parsedValues": ["25", "25", "25", "25"],
+          "primaryValue": "25",
+          "secondaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 22500
+      }
+    ]
+  },
+  {
+    "make": "FIAT",
+    "model": "Punto",
+    "modelSlug": "punto",
+    "sourceProductId": 19623,
+    "sourceUrl": "https://viezu.com/shop/fiat-punto-2012-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.4",
+        "originalBhp": {
+          "raw": "74",
+          "parsedValues": ["74"],
+          "primaryValue": "74"
+        },
+        "powerBhpGain": {
+          "raw": "9",
+          "parsedValues": ["9"],
+          "primaryValue": "9"
+        },
+        "originalTorque": {
+          "raw": "115",
+          "parsedValues": ["115"],
+          "primaryValue": "115"
+        },
+        "torqueNmGain": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.2",
+        "originalBhp": {
+          "raw": "70",
+          "parsedValues": ["70"],
+          "primaryValue": "70"
+        },
+        "powerBhpGain": {
+          "raw": "7",
+          "parsedValues": ["7"],
+          "primaryValue": "7"
+        },
+        "originalTorque": {
+          "raw": "102",
+          "parsedValues": ["102"],
+          "primaryValue": "102"
+        },
+        "torqueNmGain": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "0.9",
+        "originalBhp": {
+          "raw": "100 | 85",
+          "parsedValues": ["100", "85"],
+          "primaryValue": "100",
+          "secondaryValue": "85"
+        },
+        "powerBhpGain": {
+          "raw": "5 | 10",
+          "parsedValues": ["5", "10"],
+          "primaryValue": "5",
+          "secondaryValue": "10"
+        },
+        "originalTorque": {
+          "raw": "145 | 145",
+          "parsedValues": ["145", "145"],
+          "primaryValue": "145",
+          "secondaryValue": "145"
+        },
+        "torqueNmGain": {
+          "raw": "45 | 45",
+          "parsedValues": ["45", "45"],
+          "primaryValue": "45",
+          "secondaryValue": "45"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.2",
+        "originalBhp": {
+          "raw": "80 | 85 | 95",
+          "parsedValues": ["80", "85", "95"],
+          "primaryValue": "80",
+          "secondaryValue": "85"
+        },
+        "powerBhpGain": {
+          "raw": "30 | 20 | 25",
+          "parsedValues": ["30", "20", "25"],
+          "primaryValue": "30",
+          "secondaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "200 | 200 | 200",
+          "parsedValues": ["200", "200", "200"],
+          "primaryValue": "200",
+          "secondaryValue": "200"
+        },
+        "torqueNmGain": {
+          "raw": "50 | 50 | 50",
+          "parsedValues": ["50", "50", "50"],
+          "primaryValue": "50",
+          "secondaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "15 | 10 | 10",
+          "parsedValues": ["15", "10", "10"],
+          "primaryValue": "15",
+          "secondaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "25 | 25 | 25",
+          "parsedValues": ["25", "25", "25"],
+          "primaryValue": "25",
+          "secondaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 22500
+      }
+    ]
+  },
+  {
+    "make": "FIAT",
+    "model": "Punto",
+    "modelSlug": "punto",
+    "sourceProductId": 19617,
+    "sourceUrl": "https://viezu.com/shop/fiat-punto-2003-present/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "120",
+          "parsedValues": ["120"],
+          "primaryValue": "120"
+        },
+        "powerBhpGain": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "320",
+          "parsedValues": ["320"],
+          "primaryValue": "320"
+        },
+        "torqueNmGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "17",
+          "parsedValues": ["17"],
+          "primaryValue": "17"
+        },
+        "economyGainNm": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.4",
+        "originalBhp": {
+          "raw": "95 | 77",
+          "parsedValues": ["95", "77"],
+          "primaryValue": "95",
+          "secondaryValue": "77"
+        },
+        "powerBhpGain": {
+          "raw": "10 | 7",
+          "parsedValues": ["10", "7"],
+          "primaryValue": "10",
+          "secondaryValue": "7"
+        },
+        "originalTorque": {
+          "raw": "128 | 115",
+          "parsedValues": ["128", "115"],
+          "primaryValue": "128",
+          "secondaryValue": "115"
+        },
+        "torqueNmGain": {
+          "raw": "13 | 11",
+          "parsedValues": ["13", "11"],
+          "primaryValue": "13",
+          "secondaryValue": "11"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.2",
+        "originalBhp": {
+          "raw": "80 | 60 | 65",
+          "parsedValues": ["80", "60", "65"],
+          "primaryValue": "80",
+          "secondaryValue": "60"
+        },
+        "powerBhpGain": {
+          "raw": "7 | 7 | 7",
+          "parsedValues": ["7", "7", "7"],
+          "primaryValue": "7",
+          "secondaryValue": "7"
+        },
+        "originalTorque": {
+          "raw": "114 | 102 | 102",
+          "parsedValues": ["114", "102", "102"],
+          "primaryValue": "114",
+          "secondaryValue": "102"
+        },
+        "torqueNmGain": {
+          "raw": "10 | 10 | 10",
+          "parsedValues": ["10", "10", "10"],
+          "primaryValue": "10",
+          "secondaryValue": "10"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.3",
+        "originalBhp": {
+          "raw": "70 | 75 | 85",
+          "parsedValues": ["70", "75", "85"],
+          "primaryValue": "70",
+          "secondaryValue": "75"
+        },
+        "powerBhpGain": {
+          "raw": "20 | 20 | 20",
+          "parsedValues": ["20", "20", "20"],
+          "primaryValue": "20",
+          "secondaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "180 | 190 | 204",
+          "parsedValues": ["180", "190", "204"],
+          "primaryValue": "180",
+          "secondaryValue": "190"
+        },
+        "torqueNmGain": {
+          "raw": "50 | 50 | 46",
+          "parsedValues": ["50", "50", "46"],
+          "primaryValue": "50",
+          "secondaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "10 | 10 | 10",
+          "parsedValues": ["10", "10", "10"],
+          "primaryValue": "10",
+          "secondaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "25 | 25 | 25",
+          "parsedValues": ["25", "25", "25"],
+          "primaryValue": "25",
+          "secondaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.9",
+        "originalBhp": {
+          "raw": "100 | 80 | 85",
+          "parsedValues": ["100", "80", "85"],
+          "primaryValue": "100",
+          "secondaryValue": "80"
+        },
+        "powerBhpGain": {
+          "raw": "40 | 35 | 30",
+          "parsedValues": ["40", "35", "30"],
+          "primaryValue": "40",
+          "secondaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "260 | 196 | 196",
+          "parsedValues": ["260", "196", "196"],
+          "primaryValue": "260",
+          "secondaryValue": "196"
+        },
+        "torqueNmGain": {
+          "raw": "80 | 64 | 64",
+          "parsedValues": ["80", "64", "64"],
+          "primaryValue": "80",
+          "secondaryValue": "64"
+        },
+        "economyGainBhp": {
+          "raw": "20 | 20 | 15",
+          "parsedValues": ["20", "20", "15"],
+          "primaryValue": "20",
+          "secondaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "40 | 30 | 30",
+          "parsedValues": ["40", "30", "30"],
+          "primaryValue": "40",
+          "secondaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "FIAT",
+    "model": "Panda",
+    "modelSlug": "panda",
+    "sourceProductId": 19612,
+    "sourceUrl": "https://viezu.com/shop/fiat-panda-all/",
+    "variations": [
+      {
+        "fuelType": "Petrol Hybrid",
+        "variant": "1.0",
+        "originalBhp": {
+          "raw": "69",
+          "parsedValues": ["69"],
+          "primaryValue": "69"
+        },
+        "powerBhpGain": {
+          "raw": "7",
+          "parsedValues": ["7"],
+          "primaryValue": "7"
+        },
+        "originalTorque": {
+          "raw": "92",
+          "parsedValues": ["92"],
+          "primaryValue": "92"
+        },
+        "torqueNmGain": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.1",
+        "originalBhp": {
+          "raw": "54",
+          "parsedValues": ["54"],
+          "primaryValue": "54"
+        },
+        "powerBhpGain": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "originalTorque": {
+          "raw": "87",
+          "parsedValues": ["87"],
+          "primaryValue": "87"
+        },
+        "torqueNmGain": {
+          "raw": "9",
+          "parsedValues": ["9"],
+          "primaryValue": "9"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "0.9",
+        "originalBhp": {
+          "raw": "80 | 85 | 90",
+          "parsedValues": ["80", "85", "90"],
+          "primaryValue": "80",
+          "secondaryValue": "85"
+        },
+        "powerBhpGain": {
+          "raw": "15 | 10 | 5",
+          "parsedValues": ["15", "10", "5"],
+          "primaryValue": "15",
+          "secondaryValue": "10"
+        },
+        "originalTorque": {
+          "raw": "145 | 145 | 145",
+          "parsedValues": ["145", "145", "145"],
+          "primaryValue": "145",
+          "secondaryValue": "145"
+        },
+        "torqueNmGain": {
+          "raw": "45 | 45 | 45",
+          "parsedValues": ["45", "45", "45"],
+          "primaryValue": "45",
+          "secondaryValue": "45"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.2",
+        "originalBhp": {
+          "raw": "60 | 70",
+          "parsedValues": ["60", "70"],
+          "primaryValue": "60",
+          "secondaryValue": "70"
+        },
+        "powerBhpGain": {
+          "raw": "10 | 12",
+          "parsedValues": ["10", "12"],
+          "primaryValue": "10",
+          "secondaryValue": "12"
+        },
+        "originalTorque": {
+          "raw": "102 | 102",
+          "parsedValues": ["102", "102"],
+          "primaryValue": "102",
+          "secondaryValue": "102"
+        },
+        "torqueNmGain": {
+          "raw": "12 | 12",
+          "parsedValues": ["12", "12"],
+          "primaryValue": "12",
+          "secondaryValue": "12"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.4",
+        "originalBhp": {
+          "raw": "100",
+          "parsedValues": ["100"],
+          "primaryValue": "100"
+        },
+        "powerBhpGain": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "originalTorque": {
+          "raw": "131",
+          "parsedValues": ["131"],
+          "primaryValue": "131"
+        },
+        "torqueNmGain": {
+          "raw": "19",
+          "parsedValues": ["19"],
+          "primaryValue": "19"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.2",
+        "originalBhp": {
+          "raw": "70 | 75 | 95",
+          "parsedValues": ["70", "75", "95"],
+          "primaryValue": "70",
+          "secondaryValue": "75"
+        },
+        "powerBhpGain": {
+          "raw": "15 | 15 | 25",
+          "parsedValues": ["15", "15", "25"],
+          "primaryValue": "15",
+          "secondaryValue": "15"
+        },
+        "originalTorque": {
+          "raw": "145 | 145 | 200",
+          "parsedValues": ["145", "145", "200"],
+          "primaryValue": "145",
+          "secondaryValue": "145"
+        },
+        "torqueNmGain": {
+          "raw": "35 | 35 | 50",
+          "parsedValues": ["35", "35", "50"],
+          "primaryValue": "35",
+          "secondaryValue": "35"
+        },
+        "economyGainBhp": {
+          "raw": "10 | 10 | 10",
+          "parsedValues": ["10", "10", "10"],
+          "primaryValue": "10",
+          "secondaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "20 | 20 | 25",
+          "parsedValues": ["20", "20", "25"],
+          "primaryValue": "20",
+          "secondaryValue": "20"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 22500
+      }
+    ]
+  },
+  {
+    "make": "FIAT",
+    "model": "Multipla",
+    "modelSlug": "multipla",
+    "sourceProductId": 19608,
+    "sourceUrl": "https://viezu.com/shop/fiat-multipla-all/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "1.9",
+        "originalBhp": {
+          "raw": "105 | 110 | 115 | 120",
+          "parsedValues": ["105", "110", "115", "120"],
+          "primaryValue": "105",
+          "secondaryValue": "110"
+        },
+        "powerBhpGain": {
+          "raw": "33 | 25 | 30 | 30",
+          "parsedValues": ["33", "25", "30", "30"],
+          "primaryValue": "33",
+          "secondaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "200 | 200 | 203 | 206",
+          "parsedValues": ["200", "200", "203", "206"],
+          "primaryValue": "200",
+          "secondaryValue": "200"
+        },
+        "torqueNmGain": {
+          "raw": "70 | 95 | 57 | 64",
+          "parsedValues": ["70", "95", "57", "64"],
+          "primaryValue": "70",
+          "secondaryValue": "95"
+        },
+        "economyGainBhp": {
+          "raw": "15 | 10 | 15 | 15",
+          "parsedValues": ["15", "10", "15", "15"],
+          "primaryValue": "15",
+          "secondaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "35 | 50 | 30 | 30",
+          "parsedValues": ["35", "50", "30", "30"],
+          "primaryValue": "35",
+          "secondaryValue": "50"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "FIAT",
+    "model": "Marea",
+    "modelSlug": "marea",
+    "sourceProductId": 19605,
+    "sourceUrl": "https://viezu.com/shop/fiat-marea-all/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "102",
+          "parsedValues": ["102"],
+          "primaryValue": "102"
+        },
+        "powerBhpGain": {
+          "raw": "18",
+          "parsedValues": ["18"],
+          "primaryValue": "18"
+        },
+        "originalTorque": {
+          "raw": "144",
+          "parsedValues": ["144"],
+          "primaryValue": "144"
+        },
+        "torqueNmGain": {
+          "raw": "16",
+          "parsedValues": ["16"],
+          "primaryValue": "16"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.9",
+        "originalBhp": {
+          "raw": "100 | 110 | 115",
+          "parsedValues": ["100", "110", "115"],
+          "primaryValue": "100",
+          "secondaryValue": "110"
+        },
+        "powerBhpGain": {
+          "raw": "30 | 25 | 30",
+          "parsedValues": ["30", "25", "30"],
+          "primaryValue": "30",
+          "secondaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "200 | 200 | 203",
+          "parsedValues": ["200", "200", "203"],
+          "primaryValue": "200",
+          "secondaryValue": "200"
+        },
+        "torqueNmGain": {
+          "raw": "60 | 95 | 57",
+          "parsedValues": ["60", "95", "57"],
+          "primaryValue": "60",
+          "secondaryValue": "95"
+        },
+        "economyGainBhp": {
+          "raw": "15 | 10 | 15",
+          "parsedValues": ["15", "10", "15"],
+          "primaryValue": "15",
+          "secondaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "30 | 50 | 30",
+          "parsedValues": ["30", "50", "30"],
+          "primaryValue": "30",
+          "secondaryValue": "50"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.4",
+        "originalBhp": {
+          "raw": "130",
+          "parsedValues": ["130"],
+          "primaryValue": "130"
+        },
+        "powerBhpGain": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "310",
+          "parsedValues": ["310"],
+          "primaryValue": "310"
+        },
+        "torqueNmGain": {
+          "raw": "55",
+          "parsedValues": ["55"],
+          "primaryValue": "55"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "FIAT",
+    "model": "Idea",
+    "modelSlug": "idea",
+    "sourceProductId": 19601,
+    "sourceUrl": "https://viezu.com/shop/idea-all/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "1.2",
+        "originalBhp": {
+          "raw": "70 | 90 | 95",
+          "parsedValues": ["70", "90", "95"],
+          "primaryValue": "70",
+          "secondaryValue": "90"
+        },
+        "powerBhpGain": {
+          "raw": "20 | 20 | 25",
+          "parsedValues": ["20", "20", "25"],
+          "primaryValue": "20",
+          "secondaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "180 | 200 | 200",
+          "parsedValues": ["180", "200", "200"],
+          "primaryValue": "180",
+          "secondaryValue": "200"
+        },
+        "torqueNmGain": {
+          "raw": "50 | 50 | 50",
+          "parsedValues": ["50", "50", "50"],
+          "primaryValue": "50",
+          "secondaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "10 | 10 | 10",
+          "parsedValues": ["10", "10", "10"],
+          "primaryValue": "10",
+          "secondaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "25 | 25 | 25",
+          "parsedValues": ["25", "25", "25"],
+          "primaryValue": "25",
+          "secondaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.9",
+        "originalBhp": {
+          "raw": "100",
+          "parsedValues": ["100"],
+          "primaryValue": "100"
+        },
+        "powerBhpGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "originalTorque": {
+          "raw": "260",
+          "parsedValues": ["260"],
+          "primaryValue": "260"
+        },
+        "torqueNmGain": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.4",
+        "originalBhp": {
+          "raw": "95",
+          "parsedValues": ["95"],
+          "primaryValue": "95"
+        },
+        "powerBhpGain": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "originalTorque": {
+          "raw": "128",
+          "parsedValues": ["128"],
+          "primaryValue": "128"
+        },
+        "torqueNmGain": {
+          "raw": "17",
+          "parsedValues": ["17"],
+          "primaryValue": "17"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      }
+    ]
+  },
+  {
+    "make": "FIAT",
+    "model": "Grande Punto",
+    "modelSlug": "grande-punto",
+    "sourceProductId": 19596,
+    "sourceUrl": "https://viezu.com/shop/fiat-grande-punto-2005-present/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "1.2",
+        "originalBhp": {
+          "raw": "70 | 75 | 85 | 95",
+          "parsedValues": ["70", "75", "85", "95"],
+          "primaryValue": "70",
+          "secondaryValue": "75"
+        },
+        "powerBhpGain": {
+          "raw": "25 | 20 | 25 | 20",
+          "parsedValues": ["25", "20", "25", "20"],
+          "primaryValue": "25",
+          "secondaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "190 | 190 | 200 | 200",
+          "parsedValues": ["190", "190", "200", "200"],
+          "primaryValue": "190",
+          "secondaryValue": "190"
+        },
+        "torqueNmGain": {
+          "raw": "50 | 50 | 50 | 50",
+          "parsedValues": ["50", "50", "50", "50"],
+          "primaryValue": "50",
+          "secondaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "10 | 10 | 10 | 10",
+          "parsedValues": ["10", "10", "10", "10"],
+          "primaryValue": "10",
+          "secondaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "25 | 25 | 25 | 25",
+          "parsedValues": ["25", "25", "25", "25"],
+          "primaryValue": "25",
+          "secondaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "120",
+          "parsedValues": ["120"],
+          "primaryValue": "120"
+        },
+        "powerBhpGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "320",
+          "parsedValues": ["320"],
+          "primaryValue": "320"
+        },
+        "torqueNmGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.9",
+        "originalBhp": {
+          "raw": "120 | 130",
+          "parsedValues": ["120", "130"],
+          "primaryValue": "120",
+          "secondaryValue": "130"
+        },
+        "powerBhpGain": {
+          "raw": "40 | 30",
+          "parsedValues": ["40", "30"],
+          "primaryValue": "40",
+          "secondaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "280 | 280",
+          "parsedValues": ["280", "280"],
+          "primaryValue": "280",
+          "secondaryValue": "280"
+        },
+        "torqueNmGain": {
+          "raw": "80 | 80",
+          "parsedValues": ["80", "80"],
+          "primaryValue": "80",
+          "secondaryValue": "80"
+        },
+        "economyGainBhp": {
+          "raw": "20 | 15",
+          "parsedValues": ["20", "15"],
+          "primaryValue": "20",
+          "secondaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "40 | 40",
+          "parsedValues": ["40", "40"],
+          "primaryValue": "40",
+          "secondaryValue": "40"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.4",
+        "originalBhp": {
+          "raw": "120 | 95 | 155",
+          "parsedValues": ["120", "95", "155"],
+          "primaryValue": "120",
+          "secondaryValue": "95"
+        },
+        "powerBhpGain": {
+          "raw": "45 | 10 | 25",
+          "parsedValues": ["45", "10", "25"],
+          "primaryValue": "45",
+          "secondaryValue": "10"
+        },
+        "originalTorque": {
+          "raw": "206 | 127 | 230",
+          "parsedValues": ["206", "127", "230"],
+          "primaryValue": "206",
+          "secondaryValue": "127"
+        },
+        "torqueNmGain": {
+          "raw": "74 | 17 | 50",
+          "parsedValues": ["74", "17", "50"],
+          "primaryValue": "74",
+          "secondaryValue": "17"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      }
+    ]
+  },
+  {
+    "make": "FIAT",
+    "model": "Fullback",
+    "modelSlug": "fullback",
+    "sourceProductId": 19594,
+    "sourceUrl": "https://viezu.com/shop/fullback-2017-present/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.4",
+        "originalBhp": {
+          "raw": "150 | 180",
+          "parsedValues": ["150", "180"],
+          "primaryValue": "150",
+          "secondaryValue": "180"
+        },
+        "powerBhpGain": {
+          "raw": "55 | 25",
+          "parsedValues": ["55", "25"],
+          "primaryValue": "55",
+          "secondaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "380 | 430",
+          "parsedValues": ["380", "430"],
+          "primaryValue": "380",
+          "secondaryValue": "430"
+        },
+        "torqueNmGain": {
+          "raw": "120 | 70",
+          "parsedValues": ["120", "70"],
+          "primaryValue": "120",
+          "secondaryValue": "70"
+        },
+        "economyGainBhp": {
+          "raw": "30 | 10",
+          "parsedValues": ["30", "10"],
+          "primaryValue": "30",
+          "secondaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "60 | 35",
+          "parsedValues": ["60", "35"],
+          "primaryValue": "60",
+          "secondaryValue": "35"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "FIAT",
+    "model": "Freemont",
+    "modelSlug": "freemont",
+    "sourceProductId": 19592,
+    "sourceUrl": "https://viezu.com/shop/freemont-2012-present/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "136 | 140 | 163 | 170",
+          "parsedValues": ["136", "140", "163", "170"],
+          "primaryValue": "136",
+          "secondaryValue": "140"
+        },
+        "powerBhpGain": {
+          "raw": "49 | 45 | 37 | 30",
+          "parsedValues": ["49", "45", "37", "30"],
+          "primaryValue": "49",
+          "secondaryValue": "45"
+        },
+        "originalTorque": {
+          "raw": "350 | 350 | 360 | 360",
+          "parsedValues": ["350", "350", "360", "360"],
+          "primaryValue": "350",
+          "secondaryValue": "350"
+        },
+        "torqueNmGain": {
+          "raw": "50 | 50 | 65 | 65",
+          "parsedValues": ["50", "50", "65", "65"],
+          "primaryValue": "50",
+          "secondaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "25 | 20 | 20 | 15",
+          "parsedValues": ["25", "20", "20", "15"],
+          "primaryValue": "25",
+          "secondaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "25 | 25 | 30 | 30",
+          "parsedValues": ["25", "25", "30", "30"],
+          "primaryValue": "25",
+          "secondaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "FIAT",
+    "model": "Fiorino",
+    "modelSlug": "fiorino",
+    "sourceProductId": 19590,
+    "sourceUrl": "https://viezu.com/shop/fiat-fiorino-all/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "1.3",
+        "originalBhp": {
+          "raw": "75 | 95",
+          "parsedValues": ["75", "95"],
+          "primaryValue": "75",
+          "secondaryValue": "95"
+        },
+        "powerBhpGain": {
+          "raw": "20 | 20",
+          "parsedValues": ["20", "20"],
+          "primaryValue": "20",
+          "secondaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "190 | 200",
+          "parsedValues": ["190", "200"],
+          "primaryValue": "190",
+          "secondaryValue": "200"
+        },
+        "torqueNmGain": {
+          "raw": "40 | 50",
+          "parsedValues": ["40", "50"],
+          "primaryValue": "40",
+          "secondaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "10 | 10",
+          "parsedValues": ["10", "10"],
+          "primaryValue": "10",
+          "secondaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "20 | 25",
+          "parsedValues": ["20", "25"],
+          "primaryValue": "20",
+          "secondaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 22500
+      }
+    ]
+  },
+  {
+    "make": "FIAT",
+    "model": "Ducato",
+    "modelSlug": "ducato",
+    "sourceProductId": 19588,
+    "sourceUrl": "https://viezu.com/shop/fiat-ducato-2019-2020/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.3",
+        "originalBhp": {
+          "raw": "120 | 140 | 160 | 180",
+          "parsedValues": ["120", "140", "160", "180"],
+          "primaryValue": "120",
+          "secondaryValue": "140"
+        },
+        "powerBhpGain": {
+          "raw": "80 | 60 | 40 | 20",
+          "parsedValues": ["80", "60", "40", "20"],
+          "primaryValue": "80",
+          "secondaryValue": "60"
+        },
+        "originalTorque": {
+          "raw": "320 | 350 | 400 | 400",
+          "parsedValues": ["320", "350", "400", "400"],
+          "primaryValue": "320",
+          "secondaryValue": "350"
+        },
+        "torqueNmGain": {
+          "raw": "140 | 110 | 60 | 60",
+          "parsedValues": ["140", "110", "60", "60"],
+          "primaryValue": "140",
+          "secondaryValue": "110"
+        },
+        "economyGainBhp": {
+          "raw": "40 | 30 | 20 | 10",
+          "parsedValues": ["40", "30", "20", "10"],
+          "primaryValue": "40",
+          "secondaryValue": "30"
+        },
+        "economyGainNm": {
+          "raw": "70 | 55 | 30 | 30",
+          "parsedValues": ["70", "55", "30", "30"],
+          "primaryValue": "70",
+          "secondaryValue": "55"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "FIAT",
+    "model": "Ducato",
+    "modelSlug": "ducato",
+    "sourceProductId": 19585,
+    "sourceUrl": "https://viezu.com/shop/fiat-ducato-2016-2019/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.3",
+        "originalBhp": {
+          "raw": "130 | 150 | 177",
+          "parsedValues": ["130", "150", "177"],
+          "primaryValue": "130",
+          "secondaryValue": "150"
+        },
+        "powerBhpGain": {
+          "raw": "30 | 30 | 23",
+          "parsedValues": ["30", "30", "23"],
+          "primaryValue": "30",
+          "secondaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "320 | 380 | 400",
+          "parsedValues": ["320", "380", "400"],
+          "primaryValue": "320",
+          "secondaryValue": "380"
+        },
+        "torqueNmGain": {
+          "raw": "80 | 40 | 70",
+          "parsedValues": ["80", "40", "70"],
+          "primaryValue": "80",
+          "secondaryValue": "40"
+        },
+        "economyGainBhp": {
+          "raw": "15 | 15 | 10",
+          "parsedValues": ["15", "15", "10"],
+          "primaryValue": "15",
+          "secondaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "40 | 20 | 35",
+          "parsedValues": ["40", "20", "35"],
+          "primaryValue": "40",
+          "secondaryValue": "20"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "FIAT",
+    "model": "Ducato",
+    "modelSlug": "ducato",
+    "sourceProductId": 19581,
+    "sourceUrl": "https://viezu.com/shop/fiat-ducato-2011-2016/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "115",
+          "parsedValues": ["115"],
+          "primaryValue": "115"
+        },
+        "powerBhpGain": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "280",
+          "parsedValues": ["280"],
+          "primaryValue": "280"
+        },
+        "torqueNmGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.3",
+        "originalBhp": {
+          "raw": "120 | 130 | 148",
+          "parsedValues": ["120", "130", "148"],
+          "primaryValue": "120",
+          "secondaryValue": "130"
+        },
+        "powerBhpGain": {
+          "raw": "30 | 50 | 32",
+          "parsedValues": ["30", "50", "32"],
+          "primaryValue": "30",
+          "secondaryValue": "50"
+        },
+        "originalTorque": {
+          "raw": "320 | 320 | 350",
+          "parsedValues": ["320", "320", "350"],
+          "primaryValue": "320",
+          "secondaryValue": "320"
+        },
+        "torqueNmGain": {
+          "raw": "60 | 100 | 70",
+          "parsedValues": ["60", "100", "70"],
+          "primaryValue": "60",
+          "secondaryValue": "100"
+        },
+        "economyGainBhp": {
+          "raw": "15 | 25 | 15",
+          "parsedValues": ["15", "25", "15"],
+          "primaryValue": "15",
+          "secondaryValue": "25"
+        },
+        "economyGainNm": {
+          "raw": "30 | 50 | 35",
+          "parsedValues": ["30", "50", "35"],
+          "primaryValue": "30",
+          "secondaryValue": "50"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10% ",
+          "parsedValues": ["10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "3.0",
+        "originalBhp": {
+          "raw": "177",
+          "parsedValues": ["177"],
+          "primaryValue": "177"
+        },
+        "powerBhpGain": {
+          "raw": "23",
+          "parsedValues": ["23"],
+          "primaryValue": "23"
+        },
+        "originalTorque": {
+          "raw": "400",
+          "parsedValues": ["400"],
+          "primaryValue": "400"
+        },
+        "torqueNmGain": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "economyGainBhp": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "FIAT",
+    "model": "Ducato",
+    "modelSlug": "ducato",
+    "sourceProductId": 19575,
+    "sourceUrl": "https://viezu.com/shop/fiat-ducato-2001-2011/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.2",
+        "originalBhp": {
+          "raw": "100",
+          "parsedValues": ["100"],
+          "primaryValue": "100"
+        },
+        "powerBhpGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "250",
+          "parsedValues": ["250"],
+          "primaryValue": "250"
+        },
+        "torqueNmGain": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "84",
+          "parsedValues": ["84"],
+          "primaryValue": "84"
+        },
+        "powerBhpGain": {
+          "raw": "31",
+          "parsedValues": ["31"],
+          "primaryValue": "31"
+        },
+        "originalTorque": {
+          "raw": "192",
+          "parsedValues": ["192"],
+          "primaryValue": "192"
+        },
+        "torqueNmGain": {
+          "raw": "73",
+          "parsedValues": ["73"],
+          "primaryValue": "73"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.3",
+        "originalBhp": {
+          "raw": "110 | 120 | 130",
+          "parsedValues": ["110", "120", "130"],
+          "primaryValue": "110",
+          "secondaryValue": "120"
+        },
+        "powerBhpGain": {
+          "raw": "30 | 35 | 30",
+          "parsedValues": ["30", "35", "30"],
+          "primaryValue": "30",
+          "secondaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "270 | 320 | 320",
+          "parsedValues": ["270", "320", "320"],
+          "primaryValue": "270",
+          "secondaryValue": "320"
+        },
+        "torqueNmGain": {
+          "raw": "45 | 90 | 92",
+          "parsedValues": ["45", "90", "92"],
+          "primaryValue": "45",
+          "secondaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "15 | 20 | 15",
+          "parsedValues": ["15", "20", "15"],
+          "primaryValue": "15",
+          "secondaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "20 | 45 | 45",
+          "parsedValues": ["20", "45", "45"],
+          "primaryValue": "20",
+          "secondaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.8",
+        "originalBhp": {
+          "raw": "127 | 145 | 87",
+          "parsedValues": ["127", "145", "87"],
+          "primaryValue": "127",
+          "secondaryValue": "145"
+        },
+        "powerBhpGain": {
+          "raw": "23 | 30 | 40",
+          "parsedValues": ["23", "30", "40"],
+          "primaryValue": "23",
+          "secondaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "300 | 310 | 285",
+          "parsedValues": ["300", "310", "285"],
+          "primaryValue": "300",
+          "secondaryValue": "310"
+        },
+        "torqueNmGain": {
+          "raw": "70 | 90 | 80",
+          "parsedValues": ["70", "90", "80"],
+          "primaryValue": "70",
+          "secondaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "10 | 15 | 20",
+          "parsedValues": ["10", "15", "20"],
+          "primaryValue": "10",
+          "secondaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "35 | 45 | 40",
+          "parsedValues": ["35", "45", "40"],
+          "primaryValue": "35",
+          "secondaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "3.0",
+        "originalBhp": {
+          "raw": "158",
+          "parsedValues": ["158"],
+          "primaryValue": "158"
+        },
+        "powerBhpGain": {
+          "raw": "32",
+          "parsedValues": ["32"],
+          "primaryValue": "32"
+        },
+        "originalTorque": {
+          "raw": "400",
+          "parsedValues": ["400"],
+          "primaryValue": "400"
+        },
+        "torqueNmGain": {
+          "raw": "110",
+          "parsedValues": ["110"],
+          "primaryValue": "110"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "55",
+          "parsedValues": ["55"],
+          "primaryValue": "55"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "FIAT",
+    "model": "Doblo",
+    "modelSlug": "doblo",
+    "sourceProductId": 19570,
+    "sourceUrl": "https://viezu.com/shop/fiat-doblo-2015-present/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "1.2",
+        "originalBhp": {
+          "raw": "95",
+          "parsedValues": ["95"],
+          "primaryValue": "95"
+        },
+        "powerBhpGain": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "200",
+          "parsedValues": ["200"],
+          "primaryValue": "200"
+        },
+        "torqueNmGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "12",
+          "parsedValues": ["12"],
+          "primaryValue": "12"
+        },
+        "economyGainNm": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "100 | 105 | 120 | 90",
+          "parsedValues": ["100", "105", "120", "90"],
+          "primaryValue": "100",
+          "secondaryValue": "105"
+        },
+        "powerBhpGain": {
+          "raw": "40 | 35 | 20 | 30",
+          "parsedValues": ["40", "35", "20", "30"],
+          "primaryValue": "40",
+          "secondaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "320 | 290 | 320 | 200",
+          "parsedValues": ["320", "290", "320", "200"],
+          "primaryValue": "320",
+          "secondaryValue": "290"
+        },
+        "torqueNmGain": {
+          "raw": "40 | 70 | 40 | 60",
+          "parsedValues": ["40", "70", "40", "60"],
+          "primaryValue": "40",
+          "secondaryValue": "70"
+        },
+        "economyGainBhp": {
+          "raw": "20 | 20 | 10 | 15",
+          "parsedValues": ["20", "20", "10", "15"],
+          "primaryValue": "20",
+          "secondaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "20 | 35 | 20 | 30",
+          "parsedValues": ["20", "35", "20", "30"],
+          "primaryValue": "20",
+          "secondaryValue": "35"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "135",
+          "parsedValues": ["135"],
+          "primaryValue": "135"
+        },
+        "powerBhpGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "320",
+          "parsedValues": ["320"],
+          "primaryValue": "320"
+        },
+        "torqueNmGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.4",
+        "originalBhp": {
+          "raw": "120",
+          "parsedValues": ["120"],
+          "primaryValue": "120"
+        },
+        "powerBhpGain": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "206",
+          "parsedValues": ["206"],
+          "primaryValue": "206"
+        },
+        "torqueNmGain": {
+          "raw": "74",
+          "parsedValues": ["74"],
+          "primaryValue": "74"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      }
+    ]
+  },
+  {
+    "make": "FIAT",
+    "model": "Doblo",
+    "modelSlug": "doblo",
+    "sourceProductId": 19564,
+    "sourceUrl": "https://viezu.com/shop/fiat-doblo-2010-2015/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "1.2",
+        "originalBhp": {
+          "raw": "75 | 90",
+          "parsedValues": ["75", "90"],
+          "primaryValue": "75",
+          "secondaryValue": "90"
+        },
+        "powerBhpGain": {
+          "raw": "20 | 25",
+          "parsedValues": ["20", "25"],
+          "primaryValue": "20",
+          "secondaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "190 | 200",
+          "parsedValues": ["190", "200"],
+          "primaryValue": "190",
+          "secondaryValue": "200"
+        },
+        "torqueNmGain": {
+          "raw": "50 | 50",
+          "parsedValues": ["50", "50"],
+          "primaryValue": "50",
+          "secondaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "10 | 10",
+          "parsedValues": ["10", "10"],
+          "primaryValue": "10",
+          "secondaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "25 | 25",
+          "parsedValues": ["25", "25"],
+          "primaryValue": "25",
+          "secondaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "105 | 90",
+          "parsedValues": ["105", "90"],
+          "primaryValue": "105",
+          "secondaryValue": "90"
+        },
+        "powerBhpGain": {
+          "raw": "25 | 40",
+          "parsedValues": ["25", "40"],
+          "primaryValue": "25",
+          "secondaryValue": "40"
+        },
+        "originalTorque": {
+          "raw": "290 | 280",
+          "parsedValues": ["290", "280"],
+          "primaryValue": "290",
+          "secondaryValue": "280"
+        },
+        "torqueNmGain": {
+          "raw": "70 | 80",
+          "parsedValues": ["70", "80"],
+          "primaryValue": "70",
+          "secondaryValue": "80"
+        },
+        "economyGainBhp": {
+          "raw": "10 | 20",
+          "parsedValues": ["10", "20"],
+          "primaryValue": "10",
+          "secondaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "35 | 40",
+          "parsedValues": ["35", "40"],
+          "primaryValue": "35",
+          "secondaryValue": "40"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "135",
+          "parsedValues": ["135"],
+          "primaryValue": "135"
+        },
+        "powerBhpGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "320",
+          "parsedValues": ["320"],
+          "primaryValue": "320"
+        },
+        "torqueNmGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.4",
+        "originalBhp": {
+          "raw": "120 | 95",
+          "parsedValues": ["120", "95"],
+          "primaryValue": "120",
+          "secondaryValue": "95"
+        },
+        "powerBhpGain": {
+          "raw": "35 | 10",
+          "parsedValues": ["35", "10"],
+          "primaryValue": "35",
+          "secondaryValue": "10"
+        },
+        "originalTorque": {
+          "raw": "206 | 127",
+          "parsedValues": ["206", "127"],
+          "primaryValue": "206",
+          "secondaryValue": "127"
+        },
+        "torqueNmGain": {
+          "raw": "74 | 17",
+          "parsedValues": ["74", "17"],
+          "primaryValue": "74",
+          "secondaryValue": "17"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "105",
+          "parsedValues": ["105"],
+          "primaryValue": "105"
+        },
+        "powerBhpGain": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "originalTorque": {
+          "raw": "145",
+          "parsedValues": ["145"],
+          "primaryValue": "145"
+        },
+        "torqueNmGain": {
+          "raw": "19",
+          "parsedValues": ["19"],
+          "primaryValue": "19"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "FIAT",
+    "model": "Doblo",
+    "modelSlug": "doblo",
+    "sourceProductId": 19559,
+    "sourceUrl": "https://viezu.com/shop/fiat-doblo-2001-2010/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "1.2",
+        "originalBhp": {
+          "raw": "70 | 75 | 85",
+          "parsedValues": ["70", "75", "85"],
+          "primaryValue": "70",
+          "secondaryValue": "75"
+        },
+        "powerBhpGain": {
+          "raw": "15 | 20 | 25",
+          "parsedValues": ["15", "20", "25"],
+          "primaryValue": "15",
+          "secondaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "180 | 190 | 190",
+          "parsedValues": ["180", "190", "190"],
+          "primaryValue": "180",
+          "secondaryValue": "190"
+        },
+        "torqueNmGain": {
+          "raw": "40 | 40 | 50",
+          "parsedValues": ["40", "40", "50"],
+          "primaryValue": "40",
+          "secondaryValue": "40"
+        },
+        "economyGainBhp": {
+          "raw": "10 | 10 | 10",
+          "parsedValues": ["10", "10", "10"],
+          "primaryValue": "10",
+          "secondaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "20 | 20 | 25",
+          "parsedValues": ["20", "20", "25"],
+          "primaryValue": "20",
+          "secondaryValue": "20"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.9",
+        "originalBhp": {
+          "raw": "100 | 105 | 120",
+          "parsedValues": ["100", "105", "120"],
+          "primaryValue": "100",
+          "secondaryValue": "105"
+        },
+        "powerBhpGain": {
+          "raw": "30 | 25 | 35",
+          "parsedValues": ["30", "25", "35"],
+          "primaryValue": "30",
+          "secondaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "200 | 205 | 280",
+          "parsedValues": ["200", "205", "280"],
+          "primaryValue": "200",
+          "secondaryValue": "205"
+        },
+        "torqueNmGain": {
+          "raw": "90 | 85 | 85",
+          "parsedValues": ["90", "85", "85"],
+          "primaryValue": "90",
+          "secondaryValue": "85"
+        },
+        "economyGainBhp": {
+          "raw": "15 | 10 | 20",
+          "parsedValues": ["15", "10", "20"],
+          "primaryValue": "15",
+          "secondaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "45 | 40 | 40",
+          "parsedValues": ["45", "40", "40"],
+          "primaryValue": "45",
+          "secondaryValue": "40"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.4",
+        "originalBhp": {
+          "raw": "95",
+          "parsedValues": ["95"],
+          "primaryValue": "95"
+        },
+        "powerBhpGain": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "originalTorque": {
+          "raw": "127",
+          "parsedValues": ["127"],
+          "primaryValue": "127"
+        },
+        "torqueNmGain": {
+          "raw": "17",
+          "parsedValues": ["17"],
+          "primaryValue": "17"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "105",
+          "parsedValues": ["105"],
+          "primaryValue": "105"
+        },
+        "powerBhpGain": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "originalTorque": {
+          "raw": "145",
+          "parsedValues": ["145"],
+          "primaryValue": "145"
+        },
+        "torqueNmGain": {
+          "raw": "19",
+          "parsedValues": ["19"],
+          "primaryValue": "19"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "FIAT",
+    "model": "Cronos",
+    "modelSlug": "cronos",
+    "sourceProductId": 19557,
+    "sourceUrl": "https://viezu.com/shop/fiat-cronos-2018-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.8",
+        "originalBhp": {
+          "raw": "130",
+          "parsedValues": ["130"],
+          "primaryValue": "130"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "182",
+          "parsedValues": ["182"],
+          "primaryValue": "182"
+        },
+        "torqueNmGain": {
+          "raw": "28",
+          "parsedValues": ["28"],
+          "primaryValue": "28"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "FIAT",
+    "model": "Croma",
+    "modelSlug": "croma",
+    "sourceProductId": 19554,
+    "sourceUrl": "https://viezu.com/shop/fiat-croma-2008-2011/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "1.9",
+        "originalBhp": {
+          "raw": "120 | 150",
+          "parsedValues": ["120", "150"],
+          "primaryValue": "120",
+          "secondaryValue": "150"
+        },
+        "powerBhpGain": {
+          "raw": "40 | 30",
+          "parsedValues": ["40", "30"],
+          "primaryValue": "40",
+          "secondaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "280 | 320",
+          "parsedValues": ["280", "320"],
+          "primaryValue": "280",
+          "secondaryValue": "320"
+        },
+        "torqueNmGain": {
+          "raw": "70 | 65",
+          "parsedValues": ["70", "65"],
+          "primaryValue": "70",
+          "secondaryValue": "65"
+        },
+        "economyGainBhp": {
+          "raw": "20 | 15",
+          "parsedValues": ["20", "15"],
+          "primaryValue": "20",
+          "secondaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "35 | 30",
+          "parsedValues": ["35", "30"],
+          "primaryValue": "35",
+          "secondaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.4",
+        "originalBhp": {
+          "raw": "200",
+          "parsedValues": ["200"],
+          "primaryValue": "200"
+        },
+        "powerBhpGain": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "400",
+          "parsedValues": ["400"],
+          "primaryValue": "400"
+        },
+        "torqueNmGain": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "FIAT",
+    "model": "Croma",
+    "modelSlug": "croma",
+    "sourceProductId": 19551,
+    "sourceUrl": "https://viezu.com/shop/fiat-croma-2005-2008/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "1.9",
+        "originalBhp": {
+          "raw": "115 | 120 | 136",
+          "parsedValues": ["115", "120", "136"],
+          "primaryValue": "115",
+          "secondaryValue": "120"
+        },
+        "powerBhpGain": {
+          "raw": "45 | 40 | 44",
+          "parsedValues": ["45", "40", "44"],
+          "primaryValue": "45",
+          "secondaryValue": "40"
+        },
+        "originalTorque": {
+          "raw": "280 | 280 | 320",
+          "parsedValues": ["280", "280", "320"],
+          "primaryValue": "280",
+          "secondaryValue": "280"
+        },
+        "torqueNmGain": {
+          "raw": "70 | 70 | 60",
+          "parsedValues": ["70", "70", "60"],
+          "primaryValue": "70",
+          "secondaryValue": "70"
+        },
+        "economyGainBhp": {
+          "raw": "20 | 20 | 20",
+          "parsedValues": ["20", "20", "20"],
+          "primaryValue": "20",
+          "secondaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "35 | 35 | 30",
+          "parsedValues": ["35", "35", "30"],
+          "primaryValue": "35",
+          "secondaryValue": "35"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "FIAT",
+    "model": "Bravo",
+    "modelSlug": "bravo",
+    "sourceProductId": 19546,
+    "sourceUrl": "https://viezu.com/shop/bravo-2007-2015/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.4",
+        "originalBhp": {
+          "raw": "140 | 120 | 150 | 90",
+          "parsedValues": ["140", "120", "150", "90"],
+          "primaryValue": "140",
+          "secondaryValue": "120"
+        },
+        "powerBhpGain": {
+          "raw": "10 | 45 | 25 | 10",
+          "parsedValues": ["10", "45", "25", "10"],
+          "primaryValue": "10",
+          "secondaryValue": "45"
+        },
+        "originalTorque": {
+          "raw": "230 | 206 | 230 | 127",
+          "parsedValues": ["230", "206", "230", "127"],
+          "primaryValue": "230",
+          "secondaryValue": "206"
+        },
+        "torqueNmGain": {
+          "raw": "60 | 74 | 70 | 13",
+          "parsedValues": ["60", "74", "70", "13"],
+          "primaryValue": "60",
+          "secondaryValue": "74"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "105 | 120 | 90",
+          "parsedValues": ["105", "120", "90"],
+          "primaryValue": "105",
+          "secondaryValue": "120"
+        },
+        "powerBhpGain": {
+          "raw": "25 | 30 | 40",
+          "parsedValues": ["25", "30", "40"],
+          "primaryValue": "25",
+          "secondaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "290 | 300 | 280",
+          "parsedValues": ["290", "300", "280"],
+          "primaryValue": "290",
+          "secondaryValue": "300"
+        },
+        "torqueNmGain": {
+          "raw": "70 | 80 | 80",
+          "parsedValues": ["70", "80", "80"],
+          "primaryValue": "70",
+          "secondaryValue": "80"
+        },
+        "economyGainBhp": {
+          "raw": "10 | 15 | 20",
+          "parsedValues": ["10", "15", "20"],
+          "primaryValue": "10",
+          "secondaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "35 | 40 | 40",
+          "parsedValues": ["35", "40", "40"],
+          "primaryValue": "35",
+          "secondaryValue": "40"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.9",
+        "originalBhp": {
+          "raw": "115 | 120 | 150",
+          "parsedValues": ["115", "120", "150"],
+          "primaryValue": "115",
+          "secondaryValue": "120"
+        },
+        "powerBhpGain": {
+          "raw": "45 | 40 | 35",
+          "parsedValues": ["45", "40", "35"],
+          "primaryValue": "45",
+          "secondaryValue": "40"
+        },
+        "originalTorque": {
+          "raw": "255 | 255 | 305",
+          "parsedValues": ["255", "255", "305"],
+          "primaryValue": "255",
+          "secondaryValue": "255"
+        },
+        "torqueNmGain": {
+          "raw": "95 | 95 | 80",
+          "parsedValues": ["95", "95", "80"],
+          "primaryValue": "95",
+          "secondaryValue": "95"
+        },
+        "economyGainBhp": {
+          "raw": "20 | 20 | 20",
+          "parsedValues": ["20", "20", "20"],
+          "primaryValue": "20",
+          "secondaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "50 | 50 | 40",
+          "parsedValues": ["50", "50", "40"],
+          "primaryValue": "50",
+          "secondaryValue": "50"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "165",
+          "parsedValues": ["165"],
+          "primaryValue": "165"
+        },
+        "powerBhpGain": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "360",
+          "parsedValues": ["360"],
+          "primaryValue": "360"
+        },
+        "torqueNmGain": {
+          "raw": "65",
+          "parsedValues": ["65"],
+          "primaryValue": "65"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "FIAT",
+    "model": "Bravo",
+    "modelSlug": "bravo",
+    "sourceProductId": 19544,
+    "sourceUrl": "https://viezu.com/shop/bravo-2001-2007/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "1.9",
+        "originalBhp": {
+          "raw": "100 | 105 | 115",
+          "parsedValues": ["100", "105", "115"],
+          "primaryValue": "100",
+          "secondaryValue": "105"
+        },
+        "powerBhpGain": {
+          "raw": "30 | 30 | 35",
+          "parsedValues": ["30", "30", "35"],
+          "primaryValue": "30",
+          "secondaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "200 | 200 | 255",
+          "parsedValues": ["200", "200", "255"],
+          "primaryValue": "200",
+          "secondaryValue": "200"
+        },
+        "torqueNmGain": {
+          "raw": "65 | 65 | 80",
+          "parsedValues": ["65", "65", "80"],
+          "primaryValue": "65",
+          "secondaryValue": "65"
+        },
+        "economyGainBhp": {
+          "raw": "15 | 15 | 20",
+          "parsedValues": ["15", "15", "20"],
+          "primaryValue": "15",
+          "secondaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "30 | 30 | 40",
+          "parsedValues": ["30", "30", "40"],
+          "primaryValue": "30",
+          "secondaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "FIAT",
+    "model": "Brava",
+    "modelSlug": "brava",
+    "sourceProductId": 19542,
+    "sourceUrl": "https://viezu.com/shop/brava-1998-2001/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "1.9",
+        "originalBhp": {
+          "raw": "100 | 105 | 110",
+          "parsedValues": ["100", "105", "110"],
+          "primaryValue": "100",
+          "secondaryValue": "105"
+        },
+        "powerBhpGain": {
+          "raw": "30 | 33 | 25",
+          "parsedValues": ["30", "33", "25"],
+          "primaryValue": "30",
+          "secondaryValue": "33"
+        },
+        "originalTorque": {
+          "raw": "200 | 200 | 200",
+          "parsedValues": ["200", "200", "200"],
+          "primaryValue": "200",
+          "secondaryValue": "200"
+        },
+        "torqueNmGain": {
+          "raw": "60 | 70 | 95",
+          "parsedValues": ["60", "70", "95"],
+          "primaryValue": "60",
+          "secondaryValue": "70"
+        },
+        "economyGainBhp": {
+          "raw": "15 | 15 | 10",
+          "parsedValues": ["15", "15", "10"],
+          "primaryValue": "15",
+          "secondaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "30 | 35 | 50",
+          "parsedValues": ["30", "35", "50"],
+          "primaryValue": "30",
+          "secondaryValue": "35"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "FIAT",
+    "model": "500 X",
+    "modelSlug": "500-x",
+    "sourceProductId": 19535,
+    "sourceUrl": "https://viezu.com/shop/fiat-500-x-2019-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.0",
+        "originalBhp": {
+          "raw": "120",
+          "parsedValues": ["120"],
+          "primaryValue": "120"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "190",
+          "parsedValues": ["190"],
+          "primaryValue": "190"
+        },
+        "torqueNmGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.3",
+        "originalBhp": {
+          "raw": "150",
+          "parsedValues": ["150"],
+          "primaryValue": "150"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "270",
+          "parsedValues": ["270"],
+          "primaryValue": "270"
+        },
+        "torqueNmGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "110",
+          "parsedValues": ["110"],
+          "primaryValue": "110"
+        },
+        "powerBhpGain": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "320",
+          "parsedValues": ["320"],
+          "primaryValue": "320"
+        },
+        "torqueNmGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "150",
+          "parsedValues": ["150"],
+          "primaryValue": "150"
+        },
+        "powerBhpGain": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "350",
+          "parsedValues": ["350"],
+          "primaryValue": "350"
+        },
+        "torqueNmGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "FIAT",
+    "model": "500 X",
+    "modelSlug": "500-x",
+    "sourceProductId": 19530,
+    "sourceUrl": "https://viezu.com/shop/fiat-500-x-2015-2018/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "1.3",
+        "originalBhp": {
+          "raw": "95",
+          "parsedValues": ["95"],
+          "primaryValue": "95"
+        },
+        "powerBhpGain": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "200",
+          "parsedValues": ["200"],
+          "primaryValue": "200"
+        },
+        "torqueNmGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "120",
+          "parsedValues": ["120"],
+          "primaryValue": "120"
+        },
+        "powerBhpGain": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "320",
+          "parsedValues": ["320"],
+          "primaryValue": "320"
+        },
+        "torqueNmGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "140",
+          "parsedValues": ["140"],
+          "primaryValue": "140"
+        },
+        "powerBhpGain": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "originalTorque": {
+          "raw": "350",
+          "parsedValues": ["350"],
+          "primaryValue": "350"
+        },
+        "torqueNmGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.4",
+        "originalBhp": {
+          "raw": "140 | 170",
+          "parsedValues": ["140", "170"],
+          "primaryValue": "140",
+          "secondaryValue": "170"
+        },
+        "powerBhpGain": {
+          "raw": "30 | 10",
+          "parsedValues": ["30", "10"],
+          "primaryValue": "30",
+          "secondaryValue": "10"
+        },
+        "originalTorque": {
+          "raw": "230 | 250",
+          "parsedValues": ["230", "250"],
+          "primaryValue": "230",
+          "secondaryValue": "250"
+        },
+        "torqueNmGain": {
+          "raw": "70 | 50",
+          "parsedValues": ["70", "50"],
+          "primaryValue": "70",
+          "secondaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      }
+    ]
+  },
+  {
+    "make": "FIAT",
+    "model": "500 L",
+    "modelSlug": "500-l",
+    "sourceProductId": 19525,
+    "sourceUrl": "https://viezu.com/shop/fiat-500-l-2012-present/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "105 | 120",
+          "parsedValues": ["105", "120"],
+          "primaryValue": "105",
+          "secondaryValue": "120"
+        },
+        "powerBhpGain": {
+          "raw": "25 | 25",
+          "parsedValues": ["25", "25"],
+          "primaryValue": "25",
+          "secondaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "320 | 320",
+          "parsedValues": ["320", "320"],
+          "primaryValue": "320",
+          "secondaryValue": "320"
+        },
+        "torqueNmGain": {
+          "raw": "50 | 50",
+          "parsedValues": ["50", "50"],
+          "primaryValue": "50",
+          "secondaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "10 | 10",
+          "parsedValues": ["10", "10"],
+          "primaryValue": "10",
+          "secondaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "25 | 25",
+          "parsedValues": ["25", "25"],
+          "primaryValue": "25",
+          "secondaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "0.9",
+        "originalBhp": {
+          "raw": "105 | 80",
+          "parsedValues": ["105", "80"],
+          "primaryValue": "105",
+          "secondaryValue": "80"
+        },
+        "powerBhpGain": {
+          "raw": "5 | 15",
+          "parsedValues": ["5", "15"],
+          "primaryValue": "5",
+          "secondaryValue": "15"
+        },
+        "originalTorque": {
+          "raw": "145 | 140",
+          "parsedValues": ["145", "140"],
+          "primaryValue": "145",
+          "secondaryValue": "140"
+        },
+        "torqueNmGain": {
+          "raw": "45 | 50",
+          "parsedValues": ["45", "50"],
+          "primaryValue": "45",
+          "secondaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.4",
+        "originalBhp": {
+          "raw": "120 | 95",
+          "parsedValues": ["120", "95"],
+          "primaryValue": "120",
+          "secondaryValue": "95"
+        },
+        "powerBhpGain": {
+          "raw": "40 | 10",
+          "parsedValues": ["40", "10"],
+          "primaryValue": "40",
+          "secondaryValue": "10"
+        },
+        "originalTorque": {
+          "raw": "215 | 127",
+          "parsedValues": ["215", "127"],
+          "primaryValue": "215",
+          "secondaryValue": "127"
+        },
+        "torqueNmGain": {
+          "raw": "65 | 13",
+          "parsedValues": ["65", "13"],
+          "primaryValue": "65",
+          "secondaryValue": "13"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.2",
+        "originalBhp": {
+          "raw": "85",
+          "parsedValues": ["85"],
+          "primaryValue": "85"
+        },
+        "powerBhpGain": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "200",
+          "parsedValues": ["200"],
+          "primaryValue": "200"
+        },
+        "torqueNmGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 22500
+      }
+    ]
+  },
+  {
+    "make": "FIAT",
+    "model": "500 / 595 / 695",
+    "modelSlug": "500-595-695",
+    "sourceProductId": 19514,
+    "sourceUrl": "https://viezu.com/shop/fiat-500-595-695-500-2007-2015/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "0.9",
+        "originalBhp": {
+          "raw": "105 | 60 | 80 | 85",
+          "parsedValues": ["105", "60", "80", "85"],
+          "primaryValue": "105",
+          "secondaryValue": "60"
+        },
+        "powerBhpGain": {
+          "raw": "5 | 10 | 10 | 10",
+          "parsedValues": ["5", "10", "10", "10"],
+          "primaryValue": "5",
+          "secondaryValue": "10"
+        },
+        "originalTorque": {
+          "raw": "145 | 88 | 140 | 145",
+          "parsedValues": ["145", "88", "140", "145"],
+          "primaryValue": "145",
+          "secondaryValue": "88"
+        },
+        "torqueNmGain": {
+          "raw": "45 | 12 | 50 | 45",
+          "parsedValues": ["45", "12", "50", "45"],
+          "primaryValue": "45",
+          "secondaryValue": "12"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.2",
+        "originalBhp": {
+          "raw": "69",
+          "parsedValues": ["69"],
+          "primaryValue": "69"
+        },
+        "powerBhpGain": {
+          "raw": "6",
+          "parsedValues": ["6"],
+          "primaryValue": "6"
+        },
+        "originalTorque": {
+          "raw": "102",
+          "parsedValues": ["102"],
+          "primaryValue": "102"
+        },
+        "torqueNmGain": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.4",
+        "originalBhp": {
+          "raw": "100 | 135 | 140 | 160 | 180 | 190",
+          "parsedValues": ["100", "135", "140", "160", "180", "190"],
+          "primaryValue": "100",
+          "secondaryValue": "135"
+        },
+        "powerBhpGain": {
+          "raw": "12 | 35 | 30 | 10 | 20 | 30",
+          "parsedValues": ["12", "35", "30", "10", "20", "30"],
+          "primaryValue": "12",
+          "secondaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "131 | 206 | 206 | 234 | 230 | 250",
+          "parsedValues": ["131", "206", "206", "234", "230", "250"],
+          "primaryValue": "131",
+          "secondaryValue": "206"
+        },
+        "torqueNmGain": {
+          "raw": "19 | 94 | 94 | 66 | 70 | 90",
+          "parsedValues": ["19", "94", "94", "66", "70", "90"],
+          "primaryValue": "19",
+          "secondaryValue": "94"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.2",
+        "originalBhp": {
+          "raw": "75 | 95",
+          "parsedValues": ["75", "95"],
+          "primaryValue": "75",
+          "secondaryValue": "95"
+        },
+        "powerBhpGain": {
+          "raw": "20 | 20",
+          "parsedValues": ["20", "20"],
+          "primaryValue": "20",
+          "secondaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "190 | 200",
+          "parsedValues": ["190", "200"],
+          "primaryValue": "190",
+          "secondaryValue": "200"
+        },
+        "torqueNmGain": {
+          "raw": "55 | 50",
+          "parsedValues": ["55", "50"],
+          "primaryValue": "55",
+          "secondaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "10 | 20 | 10",
+          "parsedValues": ["10", "20", "10"],
+          "primaryValue": "10",
+          "secondaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "30 | 25",
+          "parsedValues": ["30", "25"],
+          "primaryValue": "30",
+          "secondaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% ",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 22500
+      }
+    ]
+  },
+  {
+    "make": "FIAT",
+    "model": "124 Spider",
+    "modelSlug": "124-spider",
+    "sourceProductId": 19512,
+    "sourceUrl": "https://viezu.com/shop/124-spider-2016-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.4",
+        "originalBhp": {
+          "raw": "140 | 170",
+          "parsedValues": ["140", "170"],
+          "primaryValue": "140",
+          "secondaryValue": "170"
+        },
+        "powerBhpGain": {
+          "raw": "45 | 15",
+          "parsedValues": ["45", "15"],
+          "primaryValue": "45",
+          "secondaryValue": "15"
+        },
+        "originalTorque": {
+          "raw": "240 | 250",
+          "parsedValues": ["240", "250"],
+          "primaryValue": "240",
+          "secondaryValue": "250"
+        },
+        "torqueNmGain": {
+          "raw": "30 | 20",
+          "parsedValues": ["30", "20"],
+          "primaryValue": "30",
+          "secondaryValue": "20"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      }
+    ]
+  }
+]

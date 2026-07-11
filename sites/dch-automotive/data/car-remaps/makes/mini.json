@@ -1,0 +1,2101 @@
+[
+  {
+    "make": "Mini",
+    "model": "Roadster",
+    "modelSlug": "roadster",
+    "sourceProductId": 21593,
+    "sourceUrl": "https://viezu.com/shop/mini-roadster-r58-2012-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "115 | 122 | 163 | 184 | 211",
+          "parsedValues": ["115", "122", "163", "184", "211"],
+          "primaryValue": "115",
+          "secondaryValue": "122"
+        },
+        "powerBhpGain": {
+          "raw": "15 | 8 | 42 | 26 | 19",
+          "parsedValues": ["15", "8", "42", "26", "19"],
+          "primaryValue": "15",
+          "secondaryValue": "8"
+        },
+        "originalTorque": {
+          "raw": "160 | 160 | 240 | 260 | 280",
+          "parsedValues": ["160", "160", "240", "260", "280"],
+          "primaryValue": "160",
+          "secondaryValue": "160"
+        },
+        "torqueNmGain": {
+          "raw": "15 | 15 | 60 | 80 | 60",
+          "parsedValues": ["15", "15", "60", "80", "60"],
+          "primaryValue": "15",
+          "secondaryValue": "15"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "143",
+          "parsedValues": ["143"],
+          "primaryValue": "143"
+        },
+        "powerBhpGain": {
+          "raw": "37",
+          "parsedValues": ["37"],
+          "primaryValue": "37"
+        },
+        "originalTorque": {
+          "raw": "305",
+          "parsedValues": ["305"],
+          "primaryValue": "305"
+        },
+        "torqueNmGain": {
+          "raw": "95",
+          "parsedValues": ["95"],
+          "primaryValue": "95"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Mini",
+    "model": "Paceman",
+    "modelSlug": "paceman",
+    "sourceProductId": 21589,
+    "sourceUrl": "https://viezu.com/shop/mini-paceman-2013-present/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "112",
+          "parsedValues": ["112"],
+          "primaryValue": "112"
+        },
+        "powerBhpGain": {
+          "raw": "28",
+          "parsedValues": ["28"],
+          "primaryValue": "28"
+        },
+        "originalTorque": {
+          "raw": "270",
+          "parsedValues": ["270"],
+          "primaryValue": "270"
+        },
+        "torqueNmGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "112 | 136 | 143",
+          "parsedValues": ["112", "136", "143"],
+          "primaryValue": "112",
+          "secondaryValue": "136"
+        },
+        "powerBhpGain": {
+          "raw": "68 | 44 | 37",
+          "parsedValues": ["68", "44", "37"],
+          "primaryValue": "68",
+          "secondaryValue": "44"
+        },
+        "originalTorque": {
+          "raw": "270 | 305 | 305",
+          "parsedValues": ["270", "305", "305"],
+          "primaryValue": "270",
+          "secondaryValue": "305"
+        },
+        "torqueNmGain": {
+          "raw": "130 | 95 | 95",
+          "parsedValues": ["130", "95", "95"],
+          "primaryValue": "130",
+          "secondaryValue": "95"
+        },
+        "economyGainBhp": {
+          "raw": "35 | 20 | 20",
+          "parsedValues": ["35", "20", "20"],
+          "primaryValue": "35",
+          "secondaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "65 | 50 | 50",
+          "parsedValues": ["65", "50", "50"],
+          "primaryValue": "65",
+          "secondaryValue": "50"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "115 | 122 | 163 | 184 | 190 | 218",
+          "parsedValues": ["115", "122", "163", "184", "190", "218"],
+          "primaryValue": "115",
+          "secondaryValue": "122"
+        },
+        "powerBhpGain": {
+          "raw": "15 | 8 | 42 | 26 | 20 | 12",
+          "parsedValues": ["15", "8", "42", "26", "20", "12"],
+          "primaryValue": "15",
+          "secondaryValue": "8"
+        },
+        "originalTorque": {
+          "raw": "160 | 160 | 240 | 240 | 240 | 280",
+          "parsedValues": ["160", "160", "240", "240", "240", "280"],
+          "primaryValue": "160",
+          "secondaryValue": "160"
+        },
+        "torqueNmGain": {
+          "raw": "15 | 15 | 60 | 80 | 80 | 60",
+          "parsedValues": ["15", "15", "60", "80", "80", "60"],
+          "primaryValue": "15",
+          "secondaryValue": "15"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Mini",
+    "model": "One",
+    "modelSlug": "one",
+    "sourceProductId": 21585,
+    "sourceUrl": "https://viezu.com/shop/mini-one-f56-lci-2018-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.2",
+        "originalBhp": {
+          "raw": "102 | 75",
+          "parsedValues": ["102", "75"],
+          "primaryValue": "102",
+          "secondaryValue": "75"
+        },
+        "powerBhpGain": {
+          "raw": "48 | 75",
+          "parsedValues": ["48", "75"],
+          "primaryValue": "48",
+          "secondaryValue": "75"
+        },
+        "originalTorque": {
+          "raw": "180 | 180",
+          "parsedValues": ["180", "180"],
+          "primaryValue": "180",
+          "secondaryValue": "180"
+        },
+        "torqueNmGain": {
+          "raw": "70 | 70",
+          "parsedValues": ["70", "70"],
+          "primaryValue": "70",
+          "secondaryValue": "70"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.5",
+        "originalBhp": {
+          "raw": "102",
+          "parsedValues": ["102"],
+          "primaryValue": "102"
+        },
+        "powerBhpGain": {
+          "raw": "63",
+          "parsedValues": ["63"],
+          "primaryValue": "63"
+        },
+        "originalTorque": {
+          "raw": "190",
+          "parsedValues": ["190"],
+          "primaryValue": "190"
+        },
+        "torqueNmGain": {
+          "raw": "110",
+          "parsedValues": ["110"],
+          "primaryValue": "110"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.5",
+        "originalBhp": {
+          "raw": "95",
+          "parsedValues": ["95"],
+          "primaryValue": "95"
+        },
+        "powerBhpGain": {
+          "raw": "55",
+          "parsedValues": ["55"],
+          "primaryValue": "55"
+        },
+        "originalTorque": {
+          "raw": "220",
+          "parsedValues": ["220"],
+          "primaryValue": "220"
+        },
+        "torqueNmGain": {
+          "raw": "110",
+          "parsedValues": ["110"],
+          "primaryValue": "110"
+        },
+        "economyGainBhp": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "economyGainNm": {
+          "raw": "55",
+          "parsedValues": ["55"],
+          "primaryValue": "55"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 22500
+      }
+    ]
+  },
+  {
+    "make": "Mini",
+    "model": "One",
+    "modelSlug": "one",
+    "sourceProductId": 21581,
+    "sourceUrl": "https://viezu.com/shop/mini-one-f56-2014-2018/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.2",
+        "originalBhp": {
+          "raw": "102 | 75",
+          "parsedValues": ["102", "75"],
+          "primaryValue": "102",
+          "secondaryValue": "75"
+        },
+        "powerBhpGain": {
+          "raw": "48 | 75",
+          "parsedValues": ["48", "75"],
+          "primaryValue": "48",
+          "secondaryValue": "75"
+        },
+        "originalTorque": {
+          "raw": "180 | 180",
+          "parsedValues": ["180", "180"],
+          "primaryValue": "180",
+          "secondaryValue": "180"
+        },
+        "torqueNmGain": {
+          "raw": "70 | 70",
+          "parsedValues": ["70", "70"],
+          "primaryValue": "70",
+          "secondaryValue": "70"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.5",
+        "originalBhp": {
+          "raw": "102 | 75",
+          "parsedValues": ["102", "75"],
+          "primaryValue": "102",
+          "secondaryValue": "75"
+        },
+        "powerBhpGain": {
+          "raw": "63 | 90",
+          "parsedValues": ["63", "90"],
+          "primaryValue": "63",
+          "secondaryValue": "90"
+        },
+        "originalTorque": {
+          "raw": "190 | 160",
+          "parsedValues": ["190", "160"],
+          "primaryValue": "190",
+          "secondaryValue": "160"
+        },
+        "torqueNmGain": {
+          "raw": "80 | 110",
+          "parsedValues": ["80", "110"],
+          "primaryValue": "80",
+          "secondaryValue": "110"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.5",
+        "originalBhp": {
+          "raw": "95",
+          "parsedValues": ["95"],
+          "primaryValue": "95"
+        },
+        "powerBhpGain": {
+          "raw": "55",
+          "parsedValues": ["55"],
+          "primaryValue": "55"
+        },
+        "originalTorque": {
+          "raw": "220",
+          "parsedValues": ["220"],
+          "primaryValue": "220"
+        },
+        "torqueNmGain": {
+          "raw": "110",
+          "parsedValues": ["110"],
+          "primaryValue": "110"
+        },
+        "economyGainBhp": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "economyGainNm": {
+          "raw": "55",
+          "parsedValues": ["55"],
+          "primaryValue": "55"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 22500
+      }
+    ]
+  },
+  {
+    "make": "Mini",
+    "model": "One",
+    "modelSlug": "one",
+    "sourceProductId": 21576,
+    "sourceUrl": "https://viezu.com/shop/mini-one-r56-2010-2014/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.4",
+        "originalBhp": {
+          "raw": "75",
+          "parsedValues": ["75"],
+          "primaryValue": "75"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "120",
+          "parsedValues": ["120"],
+          "primaryValue": "120"
+        },
+        "torqueNmGain": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "115 | 122 | 75 | 98",
+          "parsedValues": ["115", "122", "75", "98"],
+          "primaryValue": "115",
+          "secondaryValue": "122"
+        },
+        "powerBhpGain": {
+          "raw": "15 | 8 | 55 | 32",
+          "parsedValues": ["15", "8", "55", "32"],
+          "primaryValue": "15",
+          "secondaryValue": "8"
+        },
+        "originalTorque": {
+          "raw": "160 | 160 | 140 | 153",
+          "parsedValues": ["160", "160", "140", "153"],
+          "primaryValue": "160",
+          "secondaryValue": "160"
+        },
+        "torqueNmGain": {
+          "raw": "15 | 15 | 35 | 27",
+          "parsedValues": ["15", "15", "35", "27"],
+          "primaryValue": "15",
+          "secondaryValue": "15"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.5",
+        "originalBhp": {
+          "raw": "95",
+          "parsedValues": ["95"],
+          "primaryValue": "95"
+        },
+        "powerBhpGain": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "220",
+          "parsedValues": ["220"],
+          "primaryValue": "220"
+        },
+        "torqueNmGain": {
+          "raw": "70",
+          "parsedValues": ["70"],
+          "primaryValue": "70"
+        },
+        "economyGainBhp": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "powerBhpGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "originalTorque": {
+          "raw": "215",
+          "parsedValues": ["215"],
+          "primaryValue": "215"
+        },
+        "torqueNmGain": {
+          "raw": "105",
+          "parsedValues": ["105"],
+          "primaryValue": "105"
+        },
+        "economyGainBhp": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "economyGainNm": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Mini",
+    "model": "One",
+    "modelSlug": "one",
+    "sourceProductId": 21572,
+    "sourceUrl": "https://viezu.com/shop/one-r56-2007-2010/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.4",
+        "originalBhp": {
+          "raw": "75 | 95",
+          "parsedValues": ["75", "95"],
+          "primaryValue": "75",
+          "secondaryValue": "95"
+        },
+        "powerBhpGain": {
+          "raw": "30 | 10",
+          "parsedValues": ["30", "10"],
+          "primaryValue": "30",
+          "secondaryValue": "10"
+        },
+        "originalTorque": {
+          "raw": "120 | 140",
+          "parsedValues": ["120", "140"],
+          "primaryValue": "120",
+          "secondaryValue": "140"
+        },
+        "torqueNmGain": {
+          "raw": "30 | 10",
+          "parsedValues": ["30", "10"],
+          "primaryValue": "30",
+          "secondaryValue": "10"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "98",
+          "parsedValues": ["98"],
+          "primaryValue": "98"
+        },
+        "powerBhpGain": {
+          "raw": "27",
+          "parsedValues": ["27"],
+          "primaryValue": "27"
+        },
+        "originalTorque": {
+          "raw": "153",
+          "parsedValues": ["153"],
+          "primaryValue": "153"
+        },
+        "torqueNmGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "powerBhpGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "originalTorque": {
+          "raw": "210",
+          "parsedValues": ["210"],
+          "primaryValue": "210"
+        },
+        "torqueNmGain": {
+          "raw": "100",
+          "parsedValues": ["100"],
+          "primaryValue": "100"
+        },
+        "economyGainBhp": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "economyGainNm": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Mini",
+    "model": "One",
+    "modelSlug": "one",
+    "sourceProductId": 21569,
+    "sourceUrl": "https://viezu.com/shop/mini-one-r50-2002-2007/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "1.4",
+        "originalBhp": {
+          "raw": "75 | 88",
+          "parsedValues": ["75", "88"],
+          "primaryValue": "75",
+          "secondaryValue": "88"
+        },
+        "powerBhpGain": {
+          "raw": "25 | 22",
+          "parsedValues": ["25", "22"],
+          "primaryValue": "25",
+          "secondaryValue": "22"
+        },
+        "originalTorque": {
+          "raw": "180 | 190",
+          "parsedValues": ["180", "190"],
+          "primaryValue": "180",
+          "secondaryValue": "190"
+        },
+        "torqueNmGain": {
+          "raw": "45 | 40",
+          "parsedValues": ["45", "40"],
+          "primaryValue": "45",
+          "secondaryValue": "40"
+        },
+        "economyGainBhp": {
+          "raw": "10 | 10",
+          "parsedValues": ["10", "10"],
+          "primaryValue": "10",
+          "secondaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "20 | 20",
+          "parsedValues": ["20", "20"],
+          "primaryValue": "20",
+          "secondaryValue": "20"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "116 | 90",
+          "parsedValues": ["116", "90"],
+          "primaryValue": "116",
+          "secondaryValue": "90"
+        },
+        "powerBhpGain": {
+          "raw": "9 | 35",
+          "parsedValues": ["9", "35"],
+          "primaryValue": "9",
+          "secondaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "150 | 140",
+          "parsedValues": ["150", "140"],
+          "primaryValue": "150",
+          "secondaryValue": "140"
+        },
+        "torqueNmGain": {
+          "raw": "15 | 25",
+          "parsedValues": ["15", "25"],
+          "primaryValue": "15",
+          "secondaryValue": "25"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Mini",
+    "model": "Countryman",
+    "modelSlug": "countryman",
+    "sourceProductId": 21564,
+    "sourceUrl": "https://viezu.com/shop/mini-countryman-f60-2017-2019/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "1.5",
+        "originalBhp": {
+          "raw": "116",
+          "parsedValues": ["116"],
+          "primaryValue": "116"
+        },
+        "powerBhpGain": {
+          "raw": "34",
+          "parsedValues": ["34"],
+          "primaryValue": "34"
+        },
+        "originalTorque": {
+          "raw": "270",
+          "parsedValues": ["270"],
+          "primaryValue": "270"
+        },
+        "torqueNmGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "150 | 190",
+          "parsedValues": ["150", "190"],
+          "primaryValue": "150",
+          "secondaryValue": "190"
+        },
+        "powerBhpGain": {
+          "raw": "40 | 30",
+          "parsedValues": ["40", "30"],
+          "primaryValue": "40",
+          "secondaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "330 | 400",
+          "parsedValues": ["330", "400"],
+          "primaryValue": "330",
+          "secondaryValue": "400"
+        },
+        "torqueNmGain": {
+          "raw": "70 | 40",
+          "parsedValues": ["70", "40"],
+          "primaryValue": "70",
+          "secondaryValue": "40"
+        },
+        "economyGainBhp": {
+          "raw": "20 | 15",
+          "parsedValues": ["20", "15"],
+          "primaryValue": "20",
+          "secondaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "35 | 20",
+          "parsedValues": ["35", "20"],
+          "primaryValue": "35",
+          "secondaryValue": "20"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.5",
+        "originalBhp": {
+          "raw": "102 | 136 | 102 | 136 | 224",
+          "parsedValues": ["102", "136", "102", "136", "224"],
+          "primaryValue": "102",
+          "secondaryValue": "136"
+        },
+        "powerBhpGain": {
+          "raw": "63 | 29 | 63 | 29 | 46",
+          "parsedValues": ["63", "29", "63", "29", "46"],
+          "primaryValue": "63",
+          "secondaryValue": "29"
+        },
+        "originalTorque": {
+          "raw": "180 | 230 | 180 | 230 | 358",
+          "parsedValues": ["180", "230", "180", "230", "358"],
+          "primaryValue": "180",
+          "secondaryValue": "230"
+        },
+        "torqueNmGain": {
+          "raw": "90 | 40 | 120 | 70 | 92",
+          "parsedValues": ["90", "40", "120", "70", "92"],
+          "primaryValue": "90",
+          "secondaryValue": "40"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "192 | 231 | 306",
+          "parsedValues": ["192", "231", "306"],
+          "primaryValue": "192",
+          "secondaryValue": "231"
+        },
+        "powerBhpGain": {
+          "raw": "58 | 49 | 29",
+          "parsedValues": ["58", "49", "29"],
+          "primaryValue": "58",
+          "secondaryValue": "49"
+        },
+        "originalTorque": {
+          "raw": "280 | 350 | 450",
+          "parsedValues": ["280", "350", "450"],
+          "primaryValue": "280",
+          "secondaryValue": "350"
+        },
+        "torqueNmGain": {
+          "raw": "120 | 90 | 50",
+          "parsedValues": ["120", "90", "50"],
+          "primaryValue": "120",
+          "secondaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Mini",
+    "model": "Countryman",
+    "modelSlug": "countryman",
+    "sourceProductId": 21560,
+    "sourceUrl": "https://viezu.com/shop/countryman-r60-2010-2016/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "112 | 90",
+          "parsedValues": ["112", "90"],
+          "primaryValue": "112",
+          "secondaryValue": "90"
+        },
+        "powerBhpGain": {
+          "raw": "28 | 50",
+          "parsedValues": ["28", "50"],
+          "primaryValue": "28",
+          "secondaryValue": "50"
+        },
+        "originalTorque": {
+          "raw": "270 | 215",
+          "parsedValues": ["270", "215"],
+          "primaryValue": "270",
+          "secondaryValue": "215"
+        },
+        "torqueNmGain": {
+          "raw": "50 | 105",
+          "parsedValues": ["50", "105"],
+          "primaryValue": "50",
+          "secondaryValue": "105"
+        },
+        "economyGainBhp": {
+          "raw": "15 | 25",
+          "parsedValues": ["15", "25"],
+          "primaryValue": "15",
+          "secondaryValue": "25"
+        },
+        "economyGainNm": {
+          "raw": "25 | 50",
+          "parsedValues": ["25", "50"],
+          "primaryValue": "25",
+          "secondaryValue": "50"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "112 | 143",
+          "parsedValues": ["112", "143"],
+          "primaryValue": "112",
+          "secondaryValue": "143"
+        },
+        "powerBhpGain": {
+          "raw": "68 | 37",
+          "parsedValues": ["68", "37"],
+          "primaryValue": "68",
+          "secondaryValue": "37"
+        },
+        "originalTorque": {
+          "raw": "270 | 305",
+          "parsedValues": ["270", "305"],
+          "primaryValue": "270",
+          "secondaryValue": "305"
+        },
+        "torqueNmGain": {
+          "raw": "130 | 95",
+          "parsedValues": ["130", "95"],
+          "primaryValue": "130",
+          "secondaryValue": "95"
+        },
+        "economyGainBhp": {
+          "raw": "35 | 20",
+          "parsedValues": ["35", "20"],
+          "primaryValue": "35",
+          "secondaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "65 | 50",
+          "parsedValues": ["65", "50"],
+          "primaryValue": "65",
+          "secondaryValue": "50"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "115 | 122 | 98 | 184 | 218",
+          "parsedValues": ["115", "122", "98", "184", "218"],
+          "primaryValue": "115",
+          "secondaryValue": "122"
+        },
+        "powerBhpGain": {
+          "raw": "15 | 8 | 32 | 26 | 12",
+          "parsedValues": ["15", "8", "32", "26", "12"],
+          "primaryValue": "15",
+          "secondaryValue": "8"
+        },
+        "originalTorque": {
+          "raw": "160 | 160 | 153 | 240 | 280",
+          "parsedValues": ["160", "160", "153", "240", "280"],
+          "primaryValue": "160",
+          "secondaryValue": "160"
+        },
+        "torqueNmGain": {
+          "raw": "15 | 15 | 22 | 90 | 60",
+          "parsedValues": ["15", "15", "22", "90", "60"],
+          "primaryValue": "15",
+          "secondaryValue": "15"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Mini",
+    "model": "Cooper S D",
+    "modelSlug": "cooper-s-d",
+    "sourceProductId": 21558,
+    "sourceUrl": "https://viezu.com/shop/mini-cooper-s-d-f56-lci-2018-present/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "170",
+          "parsedValues": ["170"],
+          "primaryValue": "170"
+        },
+        "powerBhpGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "originalTorque": {
+          "raw": "360",
+          "parsedValues": ["360"],
+          "primaryValue": "360"
+        },
+        "torqueNmGain": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "economyGainBhp": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "economyGainNm": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Mini",
+    "model": "Cooper S D",
+    "modelSlug": "cooper-s-d",
+    "sourceProductId": 21556,
+    "sourceUrl": "https://viezu.com/shop/mini-cooper-s-d-f56-2014-2018/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "170",
+          "parsedValues": ["170"],
+          "primaryValue": "170"
+        },
+        "powerBhpGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "originalTorque": {
+          "raw": "360",
+          "parsedValues": ["360"],
+          "primaryValue": "360"
+        },
+        "torqueNmGain": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "economyGainBhp": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "economyGainNm": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Mini",
+    "model": "Cooper S D",
+    "modelSlug": "cooper-s-d",
+    "sourceProductId": 21554,
+    "sourceUrl": "https://viezu.com/shop/mini-cooper-s-d-r56-2010-2014/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "112 | 136 | 143",
+          "parsedValues": ["112", "136", "143"],
+          "primaryValue": "112",
+          "secondaryValue": "136"
+        },
+        "powerBhpGain": {
+          "raw": "68 | 44 | 37",
+          "parsedValues": ["68", "44", "37"],
+          "primaryValue": "68",
+          "secondaryValue": "44"
+        },
+        "originalTorque": {
+          "raw": "305 | 305 | 305",
+          "parsedValues": ["305", "305", "305"],
+          "primaryValue": "305",
+          "secondaryValue": "305"
+        },
+        "torqueNmGain": {
+          "raw": "95 | 95 | 95",
+          "parsedValues": ["95", "95", "95"],
+          "primaryValue": "95",
+          "secondaryValue": "95"
+        },
+        "economyGainBhp": {
+          "raw": "35 | 20 | 20",
+          "parsedValues": ["35", "20", "20"],
+          "primaryValue": "35",
+          "secondaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "50 | 50 | 50",
+          "parsedValues": ["50", "50", "50"],
+          "primaryValue": "50",
+          "secondaryValue": "50"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Mini",
+    "model": "Cooper S",
+    "modelSlug": "cooper-s",
+    "sourceProductId": 21552,
+    "sourceUrl": "https://viezu.com/shop/mini-cooper-s-f56-lci-2018-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "231 | 306 | 178",
+          "parsedValues": ["231", "306", "178"],
+          "primaryValue": "231",
+          "secondaryValue": "306"
+        },
+        "powerBhpGain": {
+          "raw": "49 | 29 | 32",
+          "parsedValues": ["49", "29", "32"],
+          "primaryValue": "49",
+          "secondaryValue": "29"
+        },
+        "originalTorque": {
+          "raw": "320 | 450 | 280",
+          "parsedValues": ["320", "450", "280"],
+          "primaryValue": "320",
+          "secondaryValue": "450"
+        },
+        "torqueNmGain": {
+          "raw": "80 | 50 | 100",
+          "parsedValues": ["80", "50", "100"],
+          "primaryValue": "80",
+          "secondaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.5",
+        "originalBhp": {
+          "raw": "220 (135)",
+          "parsedValues": ["220 (135)"],
+          "primaryValue": "220 (135)"
+        },
+        "powerBhpGain": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "385 (220)",
+          "parsedValues": ["385 (220)"],
+          "primaryValue": "385 (220)"
+        },
+        "torqueNmGain": {
+          "raw": "55",
+          "parsedValues": ["55"],
+          "primaryValue": "55"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Mini",
+    "model": "Cooper S",
+    "modelSlug": "cooper-s",
+    "sourceProductId": 21550,
+    "sourceUrl": "https://viezu.com/shop/mini-cooper-s-f56-2014-2018/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "163 | 192 | 231 | 210",
+          "parsedValues": ["163", "192", "231", "210"],
+          "primaryValue": "163",
+          "secondaryValue": "192"
+        },
+        "powerBhpGain": {
+          "raw": "67 | 58 | 49 | 35",
+          "parsedValues": ["67", "58", "49", "35"],
+          "primaryValue": "67",
+          "secondaryValue": "58"
+        },
+        "originalTorque": {
+          "raw": "280 | 280 | 320 | 280",
+          "parsedValues": ["280", "280", "320", "280"],
+          "primaryValue": "280",
+          "secondaryValue": "280"
+        },
+        "torqueNmGain": {
+          "raw": "70 | 120 | 80 | 65",
+          "parsedValues": ["70", "120", "80", "65"],
+          "primaryValue": "70",
+          "secondaryValue": "120"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Mini",
+    "model": "Cooper S",
+    "modelSlug": "cooper-s",
+    "sourceProductId": 21548,
+    "sourceUrl": "https://viezu.com/shop/mini-cooper-s-r56-2007-2014/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "163 | 175 | 184 | 218 | 211 | 170",
+          "parsedValues": ["163", "175", "184", "218", "211", "170"],
+          "primaryValue": "163",
+          "secondaryValue": "175"
+        },
+        "powerBhpGain": {
+          "raw": "42 | 30 | 26 | 12 | 19 | 35",
+          "parsedValues": ["42", "30", "26", "12", "19", "35"],
+          "primaryValue": "42",
+          "secondaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "240 | 240 | 240 | 280 | 240 | 220",
+          "parsedValues": ["240", "240", "240", "280", "240", "220"],
+          "primaryValue": "240",
+          "secondaryValue": "240"
+        },
+        "torqueNmGain": {
+          "raw": "60 | 60 | 100 | 60 | 100 | 60",
+          "parsedValues": ["60", "60", "100", "60", "100", "60"],
+          "primaryValue": "60",
+          "secondaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Mini",
+    "model": "Cooper S",
+    "modelSlug": "cooper-s",
+    "sourceProductId": 21546,
+    "sourceUrl": "https://viezu.com/shop/mini-cooper-s-r53-2002-2007/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "163 | 218 | 210",
+          "parsedValues": ["163", "218", "210"],
+          "primaryValue": "163",
+          "secondaryValue": "218"
+        },
+        "powerBhpGain": {
+          "raw": "12 | 7 | 15",
+          "parsedValues": ["12", "7", "15"],
+          "primaryValue": "12",
+          "secondaryValue": "7"
+        },
+        "originalTorque": {
+          "raw": "210 | 250 | 240",
+          "parsedValues": ["210", "250", "240"],
+          "primaryValue": "210",
+          "secondaryValue": "250"
+        },
+        "torqueNmGain": {
+          "raw": "15 | 10 | 20",
+          "parsedValues": ["15", "10", "20"],
+          "primaryValue": "15",
+          "secondaryValue": "10"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Mini",
+    "model": "Cooper",
+    "modelSlug": "cooper",
+    "sourceProductId": 21543,
+    "sourceUrl": "https://viezu.com/shop/mini-cooper-f56-lci-2018-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.5",
+        "originalBhp": {
+          "raw": "134",
+          "parsedValues": ["134"],
+          "primaryValue": "134"
+        },
+        "powerBhpGain": {
+          "raw": "29",
+          "parsedValues": ["29"],
+          "primaryValue": "29"
+        },
+        "originalTorque": {
+          "raw": "220",
+          "parsedValues": ["220"],
+          "primaryValue": "220"
+        },
+        "torqueNmGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.5",
+        "originalBhp": {
+          "raw": "116",
+          "parsedValues": ["116"],
+          "primaryValue": "116"
+        },
+        "powerBhpGain": {
+          "raw": "34",
+          "parsedValues": ["34"],
+          "primaryValue": "34"
+        },
+        "originalTorque": {
+          "raw": "270",
+          "parsedValues": ["270"],
+          "primaryValue": "270"
+        },
+        "torqueNmGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Mini",
+    "model": "Cooper",
+    "modelSlug": "cooper",
+    "sourceProductId": 21540,
+    "sourceUrl": "https://viezu.com/shop/mini-cooper-f56-2014-2018/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "1.5",
+        "originalBhp": {
+          "raw": "116",
+          "parsedValues": ["116"],
+          "primaryValue": "116"
+        },
+        "powerBhpGain": {
+          "raw": "34",
+          "parsedValues": ["34"],
+          "primaryValue": "34"
+        },
+        "originalTorque": {
+          "raw": "270",
+          "parsedValues": ["270"],
+          "primaryValue": "270"
+        },
+        "torqueNmGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.5",
+        "originalBhp": {
+          "raw": "102 | 136 | 75",
+          "parsedValues": ["102", "136", "75"],
+          "primaryValue": "102",
+          "secondaryValue": "136"
+        },
+        "powerBhpGain": {
+          "raw": "63 | 29 | 90",
+          "parsedValues": ["63", "29", "90"],
+          "primaryValue": "63",
+          "secondaryValue": "29"
+        },
+        "originalTorque": {
+          "raw": "190 | 230 | 160",
+          "parsedValues": ["190", "230", "160"],
+          "primaryValue": "190",
+          "secondaryValue": "230"
+        },
+        "torqueNmGain": {
+          "raw": "80 | 40 | 110",
+          "parsedValues": ["80", "40", "110"],
+          "primaryValue": "80",
+          "secondaryValue": "40"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      }
+    ]
+  },
+  {
+    "make": "Mini",
+    "model": "Cooper",
+    "modelSlug": "cooper",
+    "sourceProductId": 21536,
+    "sourceUrl": "https://viezu.com/shop/mini-cooper-r56-2010-2014/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "112",
+          "parsedValues": ["112"],
+          "primaryValue": "112"
+        },
+        "powerBhpGain": {
+          "raw": "28",
+          "parsedValues": ["28"],
+          "primaryValue": "28"
+        },
+        "originalTorque": {
+          "raw": "270",
+          "parsedValues": ["270"],
+          "primaryValue": "270"
+        },
+        "torqueNmGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "112",
+          "parsedValues": ["112"],
+          "primaryValue": "112"
+        },
+        "powerBhpGain": {
+          "raw": "68",
+          "parsedValues": ["68"],
+          "primaryValue": "68"
+        },
+        "originalTorque": {
+          "raw": "270",
+          "parsedValues": ["270"],
+          "primaryValue": "270"
+        },
+        "torqueNmGain": {
+          "raw": "130",
+          "parsedValues": ["130"],
+          "primaryValue": "130"
+        },
+        "economyGainBhp": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "economyGainNm": {
+          "raw": "65",
+          "parsedValues": ["65"],
+          "primaryValue": "65"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "115 | 122",
+          "parsedValues": ["115", "122"],
+          "primaryValue": "115",
+          "secondaryValue": "122"
+        },
+        "powerBhpGain": {
+          "raw": "20 | 13",
+          "parsedValues": ["20", "13"],
+          "primaryValue": "20",
+          "secondaryValue": "13"
+        },
+        "originalTorque": {
+          "raw": "160 | 160",
+          "parsedValues": ["160", "160"],
+          "primaryValue": "160",
+          "secondaryValue": "160"
+        },
+        "torqueNmGain": {
+          "raw": "15 | 15",
+          "parsedValues": ["15", "15"],
+          "primaryValue": "15",
+          "secondaryValue": "15"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Mini",
+    "model": "Cooper",
+    "modelSlug": "cooper",
+    "sourceProductId": 21533,
+    "sourceUrl": "https://viezu.com/shop/mini-cooper-r56-2007-2010/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "109",
+          "parsedValues": ["109"],
+          "primaryValue": "109"
+        },
+        "powerBhpGain": {
+          "raw": "31",
+          "parsedValues": ["31"],
+          "primaryValue": "31"
+        },
+        "originalTorque": {
+          "raw": "240",
+          "parsedValues": ["240"],
+          "primaryValue": "240"
+        },
+        "torqueNmGain": {
+          "raw": "70",
+          "parsedValues": ["70"],
+          "primaryValue": "70"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "122",
+          "parsedValues": ["122"],
+          "primaryValue": "122"
+        },
+        "powerBhpGain": {
+          "raw": "8",
+          "parsedValues": ["8"],
+          "primaryValue": "8"
+        },
+        "originalTorque": {
+          "raw": "160",
+          "parsedValues": ["160"],
+          "primaryValue": "160"
+        },
+        "torqueNmGain": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Mini",
+    "model": "Cooper",
+    "modelSlug": "cooper",
+    "sourceProductId": 21531,
+    "sourceUrl": "https://viezu.com/shop/cooper-r50-2002-2007/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "115",
+          "parsedValues": ["115"],
+          "primaryValue": "115"
+        },
+        "powerBhpGain": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "originalTorque": {
+          "raw": "149",
+          "parsedValues": ["149"],
+          "primaryValue": "149"
+        },
+        "torqueNmGain": {
+          "raw": "16",
+          "parsedValues": ["16"],
+          "primaryValue": "16"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  }
+]

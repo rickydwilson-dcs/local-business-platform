@@ -1,0 +1,2388 @@
+[
+  {
+    "make": "Porsche",
+    "model": "Taycan",
+    "modelSlug": "taycan",
+    "sourceProductId": 61248,
+    "sourceUrl": "https://viezu.com/shop/porsche-taycan-2021-present/",
+    "variations": [
+      {
+        "fuelType": "Electric",
+        "variant": "0",
+        "originalBhp": {
+          "raw": "476 | 530 | 571",
+          "parsedValues": ["476", "530", "571"],
+          "primaryValue": "476",
+          "secondaryValue": "530"
+        },
+        "powerBhpGain": {
+          "raw": "224 | 100 | 159",
+          "parsedValues": ["224", "100", "159"],
+          "primaryValue": "224",
+          "secondaryValue": "100"
+        },
+        "originalTorque": {
+          "raw": "630 | 640 | 640",
+          "parsedValues": ["630", "640", "640"],
+          "primaryValue": "630",
+          "secondaryValue": "640"
+        },
+        "torqueNmGain": {
+          "raw": "30 | 20 | 20",
+          "parsedValues": ["30", "20", "20"],
+          "primaryValue": "30",
+          "secondaryValue": "20"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 49900
+      },
+      {
+        "fuelType": "Electric",
+        "variant": "0",
+        "originalBhp": {
+          "raw": "598 | 680 | 761",
+          "parsedValues": ["598", "680", "761"],
+          "primaryValue": "598",
+          "secondaryValue": "680"
+        },
+        "powerBhpGain": {
+          "raw": "202 | 120 | 39",
+          "parsedValues": ["202", "120", "39"],
+          "primaryValue": "202",
+          "secondaryValue": "120"
+        },
+        "originalTorque": {
+          "raw": "850 | 850 | 1050",
+          "parsedValues": ["850", "850", "1050"],
+          "primaryValue": "850",
+          "secondaryValue": "850"
+        },
+        "torqueNmGain": {
+          "raw": "60 | 60 | 50",
+          "parsedValues": ["60", "60", "50"],
+          "primaryValue": "60",
+          "secondaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 49900
+      },
+      {
+        "fuelType": "Electric",
+        "variant": "0",
+        "originalBhp": {
+          "raw": "408 | 480",
+          "parsedValues": ["408", "480"],
+          "primaryValue": "408",
+          "secondaryValue": "480"
+        },
+        "powerBhpGain": {
+          "raw": "82 | 10",
+          "parsedValues": ["82", "10"],
+          "primaryValue": "82",
+          "secondaryValue": "10"
+        },
+        "originalTorque": {
+          "raw": "345 | 360",
+          "parsedValues": ["345", "360"],
+          "primaryValue": "345",
+          "secondaryValue": "360"
+        },
+        "torqueNmGain": {
+          "raw": "25 | 10",
+          "parsedValues": ["25", "10"],
+          "primaryValue": "25",
+          "secondaryValue": "10"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 49900
+      }
+    ]
+  },
+  {
+    "make": "Porsche",
+    "model": "Panamera Sport Turismo",
+    "modelSlug": "panamera-sport-turismo",
+    "sourceProductId": 22366,
+    "sourceUrl": "https://viezu.com/shop/porsche-panamera-sport-turismo-2020-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "4.0",
+        "originalBhp": {
+          "raw": "630 | 700 | 480",
+          "parsedValues": ["630", "700", "480"],
+          "primaryValue": "630",
+          "secondaryValue": "700"
+        },
+        "powerBhpGain": {
+          "raw": "30 | 50 | 140",
+          "parsedValues": ["30", "50", "140"],
+          "primaryValue": "30",
+          "secondaryValue": "50"
+        },
+        "originalTorque": {
+          "raw": "820 | 850 | 620",
+          "parsedValues": ["820", "850", "620"],
+          "primaryValue": "820",
+          "secondaryValue": "850"
+        },
+        "torqueNmGain": {
+          "raw": "80 | 150 | 260",
+          "parsedValues": ["80", "150", "260"],
+          "primaryValue": "80",
+          "secondaryValue": "150"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 49900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "2.9",
+        "originalBhp": {
+          "raw": "560 | 330",
+          "parsedValues": ["560", "330"],
+          "primaryValue": "560",
+          "secondaryValue": "330"
+        },
+        "powerBhpGain": {
+          "raw": "70 | 170",
+          "parsedValues": ["70", "170"],
+          "primaryValue": "70",
+          "secondaryValue": "170"
+        },
+        "originalTorque": {
+          "raw": "750 | 450",
+          "parsedValues": ["750", "450"],
+          "primaryValue": "750",
+          "secondaryValue": "450"
+        },
+        "torqueNmGain": {
+          "raw": "70 | 250",
+          "parsedValues": ["70", "250"],
+          "primaryValue": "70",
+          "secondaryValue": "250"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 49900
+      }
+    ]
+  },
+  {
+    "make": "Porsche",
+    "model": "Panamera Sport Turismo",
+    "modelSlug": "panamera-sport-turismo",
+    "sourceProductId": 22360,
+    "sourceUrl": "https://viezu.com/shop/porsche-panamera-sport-turismo-2017-2019/",
+    "variations": [
+      {
+        "fuelType": "Petrol Hybrid",
+        "variant": "2.9",
+        "originalBhp": {
+          "raw": "462",
+          "parsedValues": ["462"],
+          "primaryValue": "462"
+        },
+        "powerBhpGain": {
+          "raw": "138",
+          "parsedValues": ["138"],
+          "primaryValue": "138"
+        },
+        "originalTorque": {
+          "raw": "700",
+          "parsedValues": ["700"],
+          "primaryValue": "700"
+        },
+        "torqueNmGain": {
+          "raw": "100",
+          "parsedValues": ["100"],
+          "primaryValue": "100"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 49900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "4.0",
+        "originalBhp": {
+          "raw": "422",
+          "parsedValues": ["422"],
+          "primaryValue": "422"
+        },
+        "powerBhpGain": {
+          "raw": "48",
+          "parsedValues": ["48"],
+          "primaryValue": "48"
+        },
+        "originalTorque": {
+          "raw": "850",
+          "parsedValues": ["850"],
+          "primaryValue": "850"
+        },
+        "torqueNmGain": {
+          "raw": "150",
+          "parsedValues": ["150"],
+          "primaryValue": "150"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "75",
+          "parsedValues": ["75"],
+          "primaryValue": "75"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 49900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "3.0",
+        "originalBhp": {
+          "raw": "330",
+          "parsedValues": ["330"],
+          "primaryValue": "330"
+        },
+        "powerBhpGain": {
+          "raw": "70",
+          "parsedValues": ["70"],
+          "primaryValue": "70"
+        },
+        "originalTorque": {
+          "raw": "450",
+          "parsedValues": ["450"],
+          "primaryValue": "450"
+        },
+        "torqueNmGain": {
+          "raw": "230",
+          "parsedValues": ["230"],
+          "primaryValue": "230"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 49900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "4.0",
+        "originalBhp": {
+          "raw": "550 | 460 | 680",
+          "parsedValues": ["550", "460", "680"],
+          "primaryValue": "550",
+          "secondaryValue": "460"
+        },
+        "powerBhpGain": {
+          "raw": "70 | 160 | 120",
+          "parsedValues": ["70", "160", "120"],
+          "primaryValue": "70",
+          "secondaryValue": "160"
+        },
+        "originalTorque": {
+          "raw": "770 | 620 | 850",
+          "parsedValues": ["770", "620", "850"],
+          "primaryValue": "770",
+          "secondaryValue": "620"
+        },
+        "torqueNmGain": {
+          "raw": "100 | 250 | 150",
+          "parsedValues": ["100", "250", "150"],
+          "primaryValue": "100",
+          "secondaryValue": "250"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 49900
+      }
+    ]
+  },
+  {
+    "make": "Porsche",
+    "model": "Panamera",
+    "modelSlug": "panamera",
+    "sourceProductId": 22357,
+    "sourceUrl": "https://viezu.com/shop/porsche-panamera-971-2020-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "2.9",
+        "originalBhp": {
+          "raw": "462 | 440 | 560",
+          "parsedValues": ["462", "440", "560"],
+          "primaryValue": "462",
+          "secondaryValue": "440"
+        },
+        "powerBhpGain": {
+          "raw": "138 | 70 | 70",
+          "parsedValues": ["138", "70", "70"],
+          "primaryValue": "138",
+          "secondaryValue": "70"
+        },
+        "originalTorque": {
+          "raw": "700 | 550 | 750",
+          "parsedValues": ["700", "550", "750"],
+          "primaryValue": "700",
+          "secondaryValue": "550"
+        },
+        "torqueNmGain": {
+          "raw": "100 | 230 | 70",
+          "parsedValues": ["100", "230", "70"],
+          "primaryValue": "100",
+          "secondaryValue": "230"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 49900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "4.0",
+        "originalBhp": {
+          "raw": "700 | 480",
+          "parsedValues": ["700", "480"],
+          "primaryValue": "700",
+          "secondaryValue": "480"
+        },
+        "powerBhpGain": {
+          "raw": "50 | 140",
+          "parsedValues": ["50", "140"],
+          "primaryValue": "50",
+          "secondaryValue": "140"
+        },
+        "originalTorque": {
+          "raw": "850 | 620",
+          "parsedValues": ["850", "620"],
+          "primaryValue": "850",
+          "secondaryValue": "620"
+        },
+        "torqueNmGain": {
+          "raw": "150 | 260",
+          "parsedValues": ["150", "260"],
+          "primaryValue": "150",
+          "secondaryValue": "260"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 49900
+      }
+    ]
+  },
+  {
+    "make": "Porsche",
+    "model": "Panamera",
+    "modelSlug": "panamera",
+    "sourceProductId": 22352,
+    "sourceUrl": "https://viezu.com/shop/porsche-panamera-971-2017-2019/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "2.9",
+        "originalBhp": {
+          "raw": "440 | 462",
+          "parsedValues": ["440", "462"],
+          "primaryValue": "440",
+          "secondaryValue": "462"
+        },
+        "powerBhpGain": {
+          "raw": "70 | 138",
+          "parsedValues": ["70", "138"],
+          "primaryValue": "70",
+          "secondaryValue": "138"
+        },
+        "originalTorque": {
+          "raw": "550 | 700",
+          "parsedValues": ["550", "700"],
+          "primaryValue": "550",
+          "secondaryValue": "700"
+        },
+        "torqueNmGain": {
+          "raw": "230 | 100",
+          "parsedValues": ["230", "100"],
+          "primaryValue": "230",
+          "secondaryValue": "100"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 49900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "3.0",
+        "originalBhp": {
+          "raw": "330",
+          "parsedValues": ["330"],
+          "primaryValue": "330"
+        },
+        "powerBhpGain": {
+          "raw": "70",
+          "parsedValues": ["70"],
+          "primaryValue": "70"
+        },
+        "originalTorque": {
+          "raw": "450",
+          "parsedValues": ["450"],
+          "primaryValue": "450"
+        },
+        "torqueNmGain": {
+          "raw": "230",
+          "parsedValues": ["230"],
+          "primaryValue": "230"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 49900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "4.0",
+        "originalBhp": {
+          "raw": "550 | 460 | 680",
+          "parsedValues": ["550", "460", "680"],
+          "primaryValue": "550",
+          "secondaryValue": "460"
+        },
+        "powerBhpGain": {
+          "raw": "70 | 160 | 120",
+          "parsedValues": ["70", "160", "120"],
+          "primaryValue": "70",
+          "secondaryValue": "160"
+        },
+        "originalTorque": {
+          "raw": "770 | 620 | 850",
+          "parsedValues": ["770", "620", "850"],
+          "primaryValue": "770",
+          "secondaryValue": "620"
+        },
+        "torqueNmGain": {
+          "raw": "100 | 250 | 150",
+          "parsedValues": ["100", "250", "150"],
+          "primaryValue": "100",
+          "secondaryValue": "250"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 49900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "4.0",
+        "originalBhp": {
+          "raw": "422",
+          "parsedValues": ["422"],
+          "primaryValue": "422"
+        },
+        "powerBhpGain": {
+          "raw": "58",
+          "parsedValues": ["58"],
+          "primaryValue": "58"
+        },
+        "originalTorque": {
+          "raw": "850",
+          "parsedValues": ["850"],
+          "primaryValue": "850"
+        },
+        "torqueNmGain": {
+          "raw": "150",
+          "parsedValues": ["150"],
+          "primaryValue": "150"
+        },
+        "economyGainBhp": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "economyGainNm": {
+          "raw": "75",
+          "parsedValues": ["75"],
+          "primaryValue": "75"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 49900
+      }
+    ]
+  },
+  {
+    "make": "Porsche",
+    "model": "Panamera",
+    "modelSlug": "panamera",
+    "sourceProductId": 22347,
+    "sourceUrl": "https://viezu.com/shop/porsche-panamera-970-2013-2016/",
+    "variations": [
+      {
+        "fuelType": "Hybrid Petrol",
+        "variant": "3.0",
+        "originalBhp": {
+          "raw": "333",
+          "parsedValues": ["333"],
+          "primaryValue": "333"
+        },
+        "powerBhpGain": {
+          "raw": "55",
+          "parsedValues": ["55"],
+          "primaryValue": "55"
+        },
+        "originalTorque": {
+          "raw": "590",
+          "parsedValues": ["590"],
+          "primaryValue": "590"
+        },
+        "torqueNmGain": {
+          "raw": "100",
+          "parsedValues": ["100"],
+          "primaryValue": "100"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 42900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "3.0",
+        "originalBhp": {
+          "raw": "250 | 300",
+          "parsedValues": ["250", "300"],
+          "primaryValue": "250",
+          "secondaryValue": "300"
+        },
+        "powerBhpGain": {
+          "raw": "40 | 50",
+          "parsedValues": ["40", "50"],
+          "primaryValue": "40",
+          "secondaryValue": "50"
+        },
+        "originalTorque": {
+          "raw": "550 | 650",
+          "parsedValues": ["550", "650"],
+          "primaryValue": "550",
+          "secondaryValue": "650"
+        },
+        "torqueNmGain": {
+          "raw": "70 | 70",
+          "parsedValues": ["70", "70"],
+          "primaryValue": "70",
+          "secondaryValue": "70"
+        },
+        "economyGainBhp": {
+          "raw": "20 | 25",
+          "parsedValues": ["20", "25"],
+          "primaryValue": "20",
+          "secondaryValue": "25"
+        },
+        "economyGainNm": {
+          "raw": "35 | 35",
+          "parsedValues": ["35", "35"],
+          "primaryValue": "35",
+          "secondaryValue": "35"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 39900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "3.6",
+        "originalBhp": {
+          "raw": "310",
+          "parsedValues": ["310"],
+          "primaryValue": "310"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "400",
+          "parsedValues": ["400"],
+          "primaryValue": "400"
+        },
+        "torqueNmGain": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 39900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "4.8",
+        "originalBhp": {
+          "raw": "520 | 430 | 440 | 570",
+          "parsedValues": ["520", "430", "440", "570"],
+          "primaryValue": "520",
+          "secondaryValue": "430"
+        },
+        "powerBhpGain": {
+          "raw": "70 | 20 | 10 | 50",
+          "parsedValues": ["70", "20", "10", "50"],
+          "primaryValue": "70",
+          "secondaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "700 | 520 | 520 | 800",
+          "parsedValues": ["700", "520", "520", "800"],
+          "primaryValue": "700",
+          "secondaryValue": "520"
+        },
+        "torqueNmGain": {
+          "raw": "100 | 20 | 20 | 50",
+          "parsedValues": ["100", "20", "20", "50"],
+          "primaryValue": "100",
+          "secondaryValue": "20"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 39900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "3.0",
+        "originalBhp": {
+          "raw": "416 | 420",
+          "parsedValues": ["416", "420"],
+          "primaryValue": "416",
+          "secondaryValue": "420"
+        },
+        "powerBhpGain": {
+          "raw": "64 | 55",
+          "parsedValues": ["64", "55"],
+          "primaryValue": "64",
+          "secondaryValue": "55"
+        },
+        "originalTorque": {
+          "raw": "590 | 500",
+          "parsedValues": ["590", "500"],
+          "primaryValue": "590",
+          "secondaryValue": "500"
+        },
+        "torqueNmGain": {
+          "raw": "110 | 70",
+          "parsedValues": ["110", "70"],
+          "primaryValue": "110",
+          "secondaryValue": "70"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 39900
+      }
+    ]
+  },
+  {
+    "make": "Porsche",
+    "model": "Panamera",
+    "modelSlug": "panamera",
+    "sourceProductId": 22342,
+    "sourceUrl": "https://viezu.com/shop/porsche-panamera-970-2009-2013/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "3.0",
+        "originalBhp": {
+          "raw": "380 | 416",
+          "parsedValues": ["380", "416"],
+          "primaryValue": "380",
+          "secondaryValue": "416"
+        },
+        "powerBhpGain": {
+          "raw": "70 | 64",
+          "parsedValues": ["70", "64"],
+          "primaryValue": "70",
+          "secondaryValue": "64"
+        },
+        "originalTorque": {
+          "raw": "580 | 590",
+          "parsedValues": ["580", "590"],
+          "primaryValue": "580",
+          "secondaryValue": "590"
+        },
+        "torqueNmGain": {
+          "raw": "100 | 130",
+          "parsedValues": ["100", "130"],
+          "primaryValue": "100",
+          "secondaryValue": "130"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 39900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "3.6",
+        "originalBhp": {
+          "raw": "300",
+          "parsedValues": ["300"],
+          "primaryValue": "300"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "400",
+          "parsedValues": ["400"],
+          "primaryValue": "400"
+        },
+        "torqueNmGain": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 39900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "4.8",
+        "originalBhp": {
+          "raw": "500 | 400 | 430 | 550",
+          "parsedValues": ["500", "400", "430", "550"],
+          "primaryValue": "500",
+          "secondaryValue": "400"
+        },
+        "powerBhpGain": {
+          "raw": "90 | 20 | 20 | 40",
+          "parsedValues": ["90", "20", "20", "40"],
+          "primaryValue": "90",
+          "secondaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "700 | 500 | 520 | 750",
+          "parsedValues": ["700", "500", "520", "750"],
+          "primaryValue": "700",
+          "secondaryValue": "500"
+        },
+        "torqueNmGain": {
+          "raw": "100 | 25 | 20 | 50",
+          "parsedValues": ["100", "25", "20", "50"],
+          "primaryValue": "100",
+          "secondaryValue": "25"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 39900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "3.0",
+        "originalBhp": {
+          "raw": "250",
+          "parsedValues": ["250"],
+          "primaryValue": "250"
+        },
+        "powerBhpGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "originalTorque": {
+          "raw": "550",
+          "parsedValues": ["550"],
+          "primaryValue": "550"
+        },
+        "torqueNmGain": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "economyGainBhp": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "economyGainNm": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 39900
+      }
+    ]
+  },
+  {
+    "make": "Porsche",
+    "model": "Macan",
+    "modelSlug": "macan",
+    "sourceProductId": 22338,
+    "sourceUrl": "https://viezu.com/shop/porsche-macan-2019-2020/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "252",
+          "parsedValues": ["252"],
+          "primaryValue": "252"
+        },
+        "powerBhpGain": {
+          "raw": "48",
+          "parsedValues": ["48"],
+          "primaryValue": "48"
+        },
+        "originalTorque": {
+          "raw": "370",
+          "parsedValues": ["370"],
+          "primaryValue": "370"
+        },
+        "torqueNmGain": {
+          "raw": "70",
+          "parsedValues": ["70"],
+          "primaryValue": "70"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 49900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "2.9",
+        "originalBhp": {
+          "raw": "380 | 440",
+          "parsedValues": ["380", "440"],
+          "primaryValue": "380",
+          "secondaryValue": "440"
+        },
+        "powerBhpGain": {
+          "raw": "130 | 70",
+          "parsedValues": ["130", "70"],
+          "primaryValue": "130",
+          "secondaryValue": "70"
+        },
+        "originalTorque": {
+          "raw": "520 | 550",
+          "parsedValues": ["520", "550"],
+          "primaryValue": "520",
+          "secondaryValue": "550"
+        },
+        "torqueNmGain": {
+          "raw": "160 | 230",
+          "parsedValues": ["160", "230"],
+          "primaryValue": "160",
+          "secondaryValue": "230"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 49900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "3.0",
+        "originalBhp": {
+          "raw": "355",
+          "parsedValues": ["355"],
+          "primaryValue": "355"
+        },
+        "powerBhpGain": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "originalTorque": {
+          "raw": "480",
+          "parsedValues": ["480"],
+          "primaryValue": "480"
+        },
+        "torqueNmGain": {
+          "raw": "120",
+          "parsedValues": ["120"],
+          "primaryValue": "120"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 49900
+      }
+    ]
+  },
+  {
+    "make": "Porsche",
+    "model": "Macan",
+    "modelSlug": "macan",
+    "sourceProductId": 22333,
+    "sourceUrl": "https://viezu.com/shop/porsche-macan-2014-2018/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "252 | 261 | 245 | 237",
+          "parsedValues": ["252", "261", "245", "237"],
+          "primaryValue": "252",
+          "secondaryValue": "261"
+        },
+        "powerBhpGain": {
+          "raw": "48 | 39 | 55 | 67",
+          "parsedValues": ["48", "39", "55", "67"],
+          "primaryValue": "48",
+          "secondaryValue": "39"
+        },
+        "originalTorque": {
+          "raw": "370 | 370 | 370 | 350",
+          "parsedValues": ["370", "370", "370", "350"],
+          "primaryValue": "370",
+          "secondaryValue": "370"
+        },
+        "torqueNmGain": {
+          "raw": "70 | 70 | 70 | 90",
+          "parsedValues": ["70", "70", "70", "90"],
+          "primaryValue": "70",
+          "secondaryValue": "70"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 39900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "3.6",
+        "originalBhp": {
+          "raw": "400 | 440",
+          "parsedValues": ["400", "440"],
+          "primaryValue": "400",
+          "secondaryValue": "440"
+        },
+        "powerBhpGain": {
+          "raw": "40 | 20",
+          "parsedValues": ["40", "20"],
+          "primaryValue": "40",
+          "secondaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "550 | 600",
+          "parsedValues": ["550", "600"],
+          "primaryValue": "550",
+          "secondaryValue": "600"
+        },
+        "torqueNmGain": {
+          "raw": "90 | 60",
+          "parsedValues": ["90", "60"],
+          "primaryValue": "90",
+          "secondaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 39900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "3.0",
+        "originalBhp": {
+          "raw": "360 | 340",
+          "parsedValues": ["360", "340"],
+          "primaryValue": "360",
+          "secondaryValue": "340"
+        },
+        "powerBhpGain": {
+          "raw": "40 | 60",
+          "parsedValues": ["40", "60"],
+          "primaryValue": "40",
+          "secondaryValue": "60"
+        },
+        "originalTorque": {
+          "raw": "500 | 460",
+          "parsedValues": ["500", "460"],
+          "primaryValue": "500",
+          "secondaryValue": "460"
+        },
+        "torqueNmGain": {
+          "raw": "100 | 140",
+          "parsedValues": ["100", "140"],
+          "primaryValue": "100",
+          "secondaryValue": "140"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 39900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "3.0",
+        "originalBhp": {
+          "raw": "211 | 258",
+          "parsedValues": ["211", "258"],
+          "primaryValue": "211",
+          "secondaryValue": "258"
+        },
+        "powerBhpGain": {
+          "raw": "99 | 52",
+          "parsedValues": ["99", "52"],
+          "primaryValue": "99",
+          "secondaryValue": "52"
+        },
+        "originalTorque": {
+          "raw": "580 | 580",
+          "parsedValues": ["580", "580"],
+          "primaryValue": "580",
+          "secondaryValue": "580"
+        },
+        "torqueNmGain": {
+          "raw": "70 | 70",
+          "parsedValues": ["70", "70"],
+          "primaryValue": "70",
+          "secondaryValue": "70"
+        },
+        "economyGainBhp": {
+          "raw": "50 | 25",
+          "parsedValues": ["50", "25"],
+          "primaryValue": "50",
+          "secondaryValue": "25"
+        },
+        "economyGainNm": {
+          "raw": "35 | 35",
+          "parsedValues": ["35", "35"],
+          "primaryValue": "35",
+          "secondaryValue": "35"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 39900
+      }
+    ]
+  },
+  {
+    "make": "Porsche",
+    "model": "Cayenne",
+    "modelSlug": "cayenne",
+    "sourceProductId": 22313,
+    "sourceUrl": "https://viezu.com/shop/porsche-cayenne-2018-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol Hybrid",
+        "variant": "4.0",
+        "originalBhp": {
+          "raw": "739",
+          "parsedValues": ["739"],
+          "primaryValue": "739"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "950",
+          "parsedValues": ["950"],
+          "primaryValue": "950"
+        },
+        "torqueNmGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 49900
+      },
+      {
+        "fuelType": "Petrol Hybrid",
+        "variant": "3.0",
+        "originalBhp": {
+          "raw": "462",
+          "parsedValues": ["462"],
+          "primaryValue": "462"
+        },
+        "powerBhpGain": {
+          "raw": "58",
+          "parsedValues": ["58"],
+          "primaryValue": "58"
+        },
+        "originalTorque": {
+          "raw": "650",
+          "parsedValues": ["650"],
+          "primaryValue": "650"
+        },
+        "torqueNmGain": {
+          "raw": "120",
+          "parsedValues": ["120"],
+          "primaryValue": "120"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 49900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "3.0",
+        "originalBhp": {
+          "raw": "340",
+          "parsedValues": ["340"],
+          "primaryValue": "340"
+        },
+        "powerBhpGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "originalTorque": {
+          "raw": "450",
+          "parsedValues": ["450"],
+          "primaryValue": "450"
+        },
+        "torqueNmGain": {
+          "raw": "160",
+          "parsedValues": ["160"],
+          "primaryValue": "160"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 49900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "4.0",
+        "originalBhp": {
+          "raw": "550 | 460 | 680 | 640",
+          "parsedValues": ["550", "460", "680", "640"],
+          "primaryValue": "550",
+          "secondaryValue": "460"
+        },
+        "powerBhpGain": {
+          "raw": "70 | 160 | 70 | 90",
+          "parsedValues": ["70", "160", "70", "90"],
+          "primaryValue": "70",
+          "secondaryValue": "160"
+        },
+        "originalTorque": {
+          "raw": "770 | 620 | 900 | 850",
+          "parsedValues": ["770", "620", "900", "850"],
+          "primaryValue": "770",
+          "secondaryValue": "620"
+        },
+        "torqueNmGain": {
+          "raw": "100 | 250 | 100 | 150",
+          "parsedValues": ["100", "250", "100", "150"],
+          "primaryValue": "100",
+          "secondaryValue": "250"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 49900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "2.9",
+        "originalBhp": {
+          "raw": "440",
+          "parsedValues": ["440"],
+          "primaryValue": "440"
+        },
+        "powerBhpGain": {
+          "raw": "70",
+          "parsedValues": ["70"],
+          "primaryValue": "70"
+        },
+        "originalTorque": {
+          "raw": "550",
+          "parsedValues": ["550"],
+          "primaryValue": "550"
+        },
+        "torqueNmGain": {
+          "raw": "230",
+          "parsedValues": ["230"],
+          "primaryValue": "230"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 49900
+      }
+    ]
+  },
+  {
+    "make": "Porsche",
+    "model": "Cayenne",
+    "modelSlug": "cayenne",
+    "sourceProductId": 22307,
+    "sourceUrl": "https://viezu.com/shop/porsche-cayenne-958-2014-2017/",
+    "variations": [
+      {
+        "fuelType": "Petrol Hybrid",
+        "variant": "3.0",
+        "originalBhp": {
+          "raw": "416",
+          "parsedValues": ["416"],
+          "primaryValue": "416"
+        },
+        "powerBhpGain": {
+          "raw": "64",
+          "parsedValues": ["64"],
+          "primaryValue": "64"
+        },
+        "originalTorque": {
+          "raw": "590",
+          "parsedValues": ["590"],
+          "primaryValue": "590"
+        },
+        "torqueNmGain": {
+          "raw": "110",
+          "parsedValues": ["110"],
+          "primaryValue": "110"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 39900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "3.0",
+        "originalBhp": {
+          "raw": "211 | 262",
+          "parsedValues": ["211", "262"],
+          "primaryValue": "211",
+          "secondaryValue": "262"
+        },
+        "powerBhpGain": {
+          "raw": "89 | 38",
+          "parsedValues": ["89", "38"],
+          "primaryValue": "89",
+          "secondaryValue": "38"
+        },
+        "originalTorque": {
+          "raw": "580 | 580",
+          "parsedValues": ["580", "580"],
+          "primaryValue": "580",
+          "secondaryValue": "580"
+        },
+        "torqueNmGain": {
+          "raw": "50 | 50",
+          "parsedValues": ["50", "50"],
+          "primaryValue": "50",
+          "secondaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "45 | 20",
+          "parsedValues": ["45", "20"],
+          "primaryValue": "45",
+          "secondaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "25 | 25",
+          "parsedValues": ["25", "25"],
+          "primaryValue": "25",
+          "secondaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 39900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "4.1",
+        "originalBhp": {
+          "raw": "385",
+          "parsedValues": ["385"],
+          "primaryValue": "385"
+        },
+        "powerBhpGain": {
+          "raw": "65",
+          "parsedValues": ["65"],
+          "primaryValue": "65"
+        },
+        "originalTorque": {
+          "raw": "850",
+          "parsedValues": ["850"],
+          "primaryValue": "850"
+        },
+        "torqueNmGain": {
+          "raw": "100",
+          "parsedValues": ["100"],
+          "primaryValue": "100"
+        },
+        "economyGainBhp": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "economyGainNm": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 39900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "4.8",
+        "originalBhp": {
+          "raw": "520 | 570",
+          "parsedValues": ["520", "570"],
+          "primaryValue": "520",
+          "secondaryValue": "570"
+        },
+        "powerBhpGain": {
+          "raw": "120 | 70",
+          "parsedValues": ["120", "70"],
+          "primaryValue": "120",
+          "secondaryValue": "70"
+        },
+        "originalTorque": {
+          "raw": "750 | 800",
+          "parsedValues": ["750", "800"],
+          "primaryValue": "750",
+          "secondaryValue": "800"
+        },
+        "torqueNmGain": {
+          "raw": "200 | 150",
+          "parsedValues": ["200", "150"],
+          "primaryValue": "200",
+          "secondaryValue": "150"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 39900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "3.6",
+        "originalBhp": {
+          "raw": "440 | 420",
+          "parsedValues": ["440", "420"],
+          "primaryValue": "440",
+          "secondaryValue": "420"
+        },
+        "powerBhpGain": {
+          "raw": "40 | 40",
+          "parsedValues": ["40", "40"],
+          "primaryValue": "40",
+          "secondaryValue": "40"
+        },
+        "originalTorque": {
+          "raw": "600 | 550",
+          "parsedValues": ["600", "550"],
+          "primaryValue": "600",
+          "secondaryValue": "550"
+        },
+        "torqueNmGain": {
+          "raw": "50 | 70",
+          "parsedValues": ["50", "70"],
+          "primaryValue": "50",
+          "secondaryValue": "70"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 39900
+      }
+    ]
+  },
+  {
+    "make": "Porsche",
+    "model": "Cayenne",
+    "modelSlug": "cayenne",
+    "sourceProductId": 22301,
+    "sourceUrl": "https://viezu.com/shop/porsche-cayenne-958-2010-2014/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "3.0",
+        "originalBhp": {
+          "raw": "416",
+          "parsedValues": ["416"],
+          "primaryValue": "416"
+        },
+        "powerBhpGain": {
+          "raw": "64",
+          "parsedValues": ["64"],
+          "primaryValue": "64"
+        },
+        "originalTorque": {
+          "raw": "590",
+          "parsedValues": ["590"],
+          "primaryValue": "590"
+        },
+        "torqueNmGain": {
+          "raw": "130",
+          "parsedValues": ["130"],
+          "primaryValue": "130"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 39900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "3.6",
+        "originalBhp": {
+          "raw": "300",
+          "parsedValues": ["300"],
+          "primaryValue": "300"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "400",
+          "parsedValues": ["400"],
+          "primaryValue": "400"
+        },
+        "torqueNmGain": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 39900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "4.8",
+        "originalBhp": {
+          "raw": "500 | 420 | 550 | 400",
+          "parsedValues": ["500", "420", "550", "400"],
+          "primaryValue": "500",
+          "secondaryValue": "420"
+        },
+        "powerBhpGain": {
+          "raw": "90 | 20 | 50 | 25",
+          "parsedValues": ["90", "20", "50", "25"],
+          "primaryValue": "90",
+          "secondaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "700 | 515 | 750 | 500",
+          "parsedValues": ["700", "515", "750", "500"],
+          "primaryValue": "700",
+          "secondaryValue": "515"
+        },
+        "torqueNmGain": {
+          "raw": "100 | 25 | 100 | 30",
+          "parsedValues": ["100", "25", "100", "30"],
+          "primaryValue": "100",
+          "secondaryValue": "25"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 39900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "3.0",
+        "originalBhp": {
+          "raw": "211 | 240 | 245",
+          "parsedValues": ["211", "240", "245"],
+          "primaryValue": "211",
+          "secondaryValue": "240"
+        },
+        "powerBhpGain": {
+          "raw": "89 | 60 | 45",
+          "parsedValues": ["89", "60", "45"],
+          "primaryValue": "89",
+          "secondaryValue": "60"
+        },
+        "originalTorque": {
+          "raw": "550 | 550 | 550",
+          "parsedValues": ["550", "550", "550"],
+          "primaryValue": "550",
+          "secondaryValue": "550"
+        },
+        "torqueNmGain": {
+          "raw": "80 | 80 | 70",
+          "parsedValues": ["80", "80", "70"],
+          "primaryValue": "80",
+          "secondaryValue": "80"
+        },
+        "economyGainBhp": {
+          "raw": "45 | 30 | 20",
+          "parsedValues": ["45", "30", "20"],
+          "primaryValue": "45",
+          "secondaryValue": "30"
+        },
+        "economyGainNm": {
+          "raw": "40 | 40 | 35",
+          "parsedValues": ["40", "40", "35"],
+          "primaryValue": "40",
+          "secondaryValue": "40"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 39900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "4.1",
+        "originalBhp": {
+          "raw": "382",
+          "parsedValues": ["382"],
+          "primaryValue": "382"
+        },
+        "powerBhpGain": {
+          "raw": "68",
+          "parsedValues": ["68"],
+          "primaryValue": "68"
+        },
+        "originalTorque": {
+          "raw": "850",
+          "parsedValues": ["850"],
+          "primaryValue": "850"
+        },
+        "torqueNmGain": {
+          "raw": "100",
+          "parsedValues": ["100"],
+          "primaryValue": "100"
+        },
+        "economyGainBhp": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "economyGainNm": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 39900
+      }
+    ]
+  },
+  {
+    "make": "Porsche",
+    "model": "Cayenne",
+    "modelSlug": "cayenne",
+    "sourceProductId": 22296,
+    "sourceUrl": "https://viezu.com/shop/porsche-cayenne-957-2007-2010/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "4.8",
+        "originalBhp": {
+          "raw": "385 | 500 | 405 | 550",
+          "parsedValues": ["385", "500", "405", "550"],
+          "primaryValue": "385",
+          "secondaryValue": "500"
+        },
+        "powerBhpGain": {
+          "raw": "20 | 50 | 20 | 50",
+          "parsedValues": ["20", "50", "20", "50"],
+          "primaryValue": "20",
+          "secondaryValue": "50"
+        },
+        "originalTorque": {
+          "raw": "500 | 700 | 500 | 750",
+          "parsedValues": ["500", "700", "500", "750"],
+          "primaryValue": "500",
+          "secondaryValue": "700"
+        },
+        "torqueNmGain": {
+          "raw": "35 | 90 | 35 | 100",
+          "parsedValues": ["35", "90", "35", "100"],
+          "primaryValue": "35",
+          "secondaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 39900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "3.0",
+        "originalBhp": {
+          "raw": "211 | 240",
+          "parsedValues": ["211", "240"],
+          "primaryValue": "211",
+          "secondaryValue": "240"
+        },
+        "powerBhpGain": {
+          "raw": "84 | 50",
+          "parsedValues": ["84", "50"],
+          "primaryValue": "84",
+          "secondaryValue": "50"
+        },
+        "originalTorque": {
+          "raw": "550 | 550",
+          "parsedValues": ["550", "550"],
+          "primaryValue": "550",
+          "secondaryValue": "550"
+        },
+        "torqueNmGain": {
+          "raw": "70 | 70",
+          "parsedValues": ["70", "70"],
+          "primaryValue": "70",
+          "secondaryValue": "70"
+        },
+        "economyGainBhp": {
+          "raw": "40 | 25",
+          "parsedValues": ["40", "25"],
+          "primaryValue": "40",
+          "secondaryValue": "25"
+        },
+        "economyGainNm": {
+          "raw": "35 | 35",
+          "parsedValues": ["35", "35"],
+          "primaryValue": "35",
+          "secondaryValue": "35"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 39900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "3.6",
+        "originalBhp": {
+          "raw": "290",
+          "parsedValues": ["290"],
+          "primaryValue": "290"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "385",
+          "parsedValues": ["385"],
+          "primaryValue": "385"
+        },
+        "torqueNmGain": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 39900
+      }
+    ]
+  },
+  {
+    "make": "Porsche",
+    "model": "Cayenne",
+    "modelSlug": "cayenne",
+    "sourceProductId": 22292,
+    "sourceUrl": "https://viezu.com/shop/porsche-cayenne-955-2002-2007/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "4.5",
+        "originalBhp": {
+          "raw": "450 | 520 | 340",
+          "parsedValues": ["450", "520", "340"],
+          "primaryValue": "450",
+          "secondaryValue": "520"
+        },
+        "powerBhpGain": {
+          "raw": "50 | 40 | 20",
+          "parsedValues": ["50", "40", "20"],
+          "primaryValue": "50",
+          "secondaryValue": "40"
+        },
+        "originalTorque": {
+          "raw": "620 | 720 | 420",
+          "parsedValues": ["620", "720", "420"],
+          "primaryValue": "620",
+          "secondaryValue": "720"
+        },
+        "torqueNmGain": {
+          "raw": "130 | 80 | 25",
+          "parsedValues": ["130", "80", "25"],
+          "primaryValue": "130",
+          "secondaryValue": "80"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 39900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "3.2",
+        "originalBhp": {
+          "raw": "250",
+          "parsedValues": ["250"],
+          "primaryValue": "250"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "320",
+          "parsedValues": ["320"],
+          "primaryValue": "320"
+        },
+        "torqueNmGain": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 39900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "4.8",
+        "originalBhp": {
+          "raw": "500",
+          "parsedValues": ["500"],
+          "primaryValue": "500"
+        },
+        "powerBhpGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "700",
+          "parsedValues": ["700"],
+          "primaryValue": "700"
+        },
+        "torqueNmGain": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 39900
+      }
+    ]
+  },
+  {
+    "make": "Porsche",
+    "model": "Carrera GT",
+    "modelSlug": "carrera-gt",
+    "sourceProductId": 22290,
+    "sourceUrl": "https://viezu.com/shop/porsche-carrera-gt-980-2005-2007/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "5.7",
+        "originalBhp": {
+          "raw": "612",
+          "parsedValues": ["612"],
+          "primaryValue": "612"
+        },
+        "powerBhpGain": {
+          "raw": "27",
+          "parsedValues": ["27"],
+          "primaryValue": "27"
+        },
+        "originalTorque": {
+          "raw": "590",
+          "parsedValues": ["590"],
+          "primaryValue": "590"
+        },
+        "torqueNmGain": {
+          "raw": "38",
+          "parsedValues": ["38"],
+          "primaryValue": "38"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 99900
+      }
+    ]
+  }
+]

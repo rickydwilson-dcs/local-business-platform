@@ -1,0 +1,5701 @@
+[
+  {
+    "make": "Nissan",
+    "model": "Leaf",
+    "modelSlug": "leaf",
+    "sourceProductId": 62626,
+    "sourceUrl": "https://viezu.com/shop/nissan-leaf-2018-present/",
+    "variations": [
+      {
+        "fuelType": "Electric",
+        "variant": "0",
+        "originalBhp": {
+          "raw": "150 | 217",
+          "parsedValues": ["150", "217"],
+          "primaryValue": "150",
+          "secondaryValue": "217"
+        },
+        "powerBhpGain": {
+          "raw": "15 | 22",
+          "parsedValues": ["15", "22"],
+          "primaryValue": "15",
+          "secondaryValue": "22"
+        },
+        "originalTorque": {
+          "raw": "320 | 345",
+          "parsedValues": ["320", "345"],
+          "primaryValue": "320",
+          "secondaryValue": "345"
+        },
+        "torqueNmGain": {
+          "raw": "32 | 35",
+          "parsedValues": ["32", "35"],
+          "primaryValue": "32",
+          "secondaryValue": "35"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Nissan",
+    "model": "Leaf",
+    "modelSlug": "leaf",
+    "sourceProductId": 62600,
+    "sourceUrl": "https://viezu.com/shop/nissan-leaf-2010-2017/",
+    "variations": [
+      {
+        "fuelType": "Electric",
+        "variant": "0",
+        "originalBhp": {
+          "raw": "109",
+          "parsedValues": ["109"],
+          "primaryValue": "109"
+        },
+        "powerBhpGain": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "originalTorque": {
+          "raw": "254",
+          "parsedValues": ["254"],
+          "primaryValue": "254"
+        },
+        "torqueNmGain": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Nissan",
+    "model": "Navara D22",
+    "modelSlug": "navara-d22",
+    "sourceProductId": 59318,
+    "sourceUrl": "https://viezu.com/shop/nissan-navara-d22-all/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.5",
+        "originalBhp": {
+          "raw": "133",
+          "parsedValues": ["133"],
+          "primaryValue": "133"
+        },
+        "powerBhpGain": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "304",
+          "parsedValues": ["304"],
+          "primaryValue": "304"
+        },
+        "torqueNmGain": {
+          "raw": "55",
+          "parsedValues": ["55"],
+          "primaryValue": "55"
+        },
+        "economyGainBhp": {
+          "raw": "12",
+          "parsedValues": ["12"],
+          "primaryValue": "12"
+        },
+        "economyGainNm": {
+          "raw": "27",
+          "parsedValues": ["27"],
+          "primaryValue": "27"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Nissan",
+    "model": "Elgrand",
+    "modelSlug": "elgrand",
+    "sourceProductId": 59212,
+    "sourceUrl": "https://viezu.com/shop/nissan-elgrand-all/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "3.5",
+        "originalBhp": {
+          "raw": "240",
+          "parsedValues": ["240"],
+          "primaryValue": "240"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "315",
+          "parsedValues": ["315"],
+          "primaryValue": "315"
+        },
+        "torqueNmGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 34900
+      }
+    ]
+  },
+  {
+    "make": "Nissan",
+    "model": "Skyline",
+    "modelSlug": "skyline",
+    "sourceProductId": 58037,
+    "sourceUrl": "https://viezu.com/shop/nissan-skyline-all/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "3.5",
+        "originalBhp": {
+          "raw": "280",
+          "parsedValues": ["280"],
+          "primaryValue": "280"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "370",
+          "parsedValues": ["370"],
+          "primaryValue": "370"
+        },
+        "torqueNmGain": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Nissan",
+    "model": "Tiida",
+    "modelSlug": "tiida",
+    "sourceProductId": 56429,
+    "sourceUrl": "https://viezu.com/shop/nissan-tiida-all/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "111",
+          "parsedValues": ["111"],
+          "primaryValue": "111"
+        },
+        "powerBhpGain": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "originalTorque": {
+          "raw": "156",
+          "parsedValues": ["156"],
+          "primaryValue": "156"
+        },
+        "torqueNmGain": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Nissan",
+    "model": "NV300",
+    "modelSlug": "nv300",
+    "sourceProductId": 56373,
+    "sourceUrl": "https://viezu.com/shop/nissan-nv300-2020-present/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "120",
+          "parsedValues": ["120"],
+          "primaryValue": "120"
+        },
+        "powerBhpGain": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "originalTorque": {
+          "raw": "320",
+          "parsedValues": ["320"],
+          "primaryValue": "320"
+        },
+        "torqueNmGain": {
+          "raw": "100",
+          "parsedValues": ["100"],
+          "primaryValue": "100"
+        },
+        "economyGainBhp": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "economyGainNm": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 34900
+      }
+    ]
+  },
+  {
+    "make": "Nissan",
+    "model": "Murano",
+    "modelSlug": "murano",
+    "sourceProductId": 55835,
+    "sourceUrl": "https://viezu.com/shop/nissan-murano-2002-2009/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "3.5",
+        "originalBhp": {
+          "raw": "234",
+          "parsedValues": ["234"],
+          "primaryValue": "234"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "318",
+          "parsedValues": ["318"],
+          "primaryValue": "318"
+        },
+        "torqueNmGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Nissan",
+    "model": "Pixo",
+    "modelSlug": "pixo",
+    "sourceProductId": 55179,
+    "sourceUrl": "https://viezu.com/shop/nissan-pixo-all/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.0",
+        "originalBhp": {
+          "raw": "67",
+          "parsedValues": ["67"],
+          "primaryValue": "67"
+        },
+        "powerBhpGain": {
+          "raw": "7",
+          "parsedValues": ["7"],
+          "primaryValue": "7"
+        },
+        "originalTorque": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "torqueNmGain": {
+          "raw": "9",
+          "parsedValues": ["9"],
+          "primaryValue": "9"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      }
+    ]
+  },
+  {
+    "make": "Nissan",
+    "model": "Townstar",
+    "modelSlug": "townstar",
+    "sourceProductId": 54896,
+    "sourceUrl": "https://viezu.com/shop/nissan-townstar-2021-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.3",
+        "originalBhp": {
+          "raw": "130",
+          "parsedValues": ["130"],
+          "primaryValue": "130"
+        },
+        "powerBhpGain": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "240",
+          "parsedValues": ["240"],
+          "primaryValue": "240"
+        },
+        "torqueNmGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Nissan",
+    "model": "NV400",
+    "modelSlug": "nv400",
+    "sourceProductId": 54462,
+    "sourceUrl": "https://viezu.com/shop/nissan-nv400-2020-present/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.3",
+        "originalBhp": {
+          "raw": "135",
+          "parsedValues": ["135"],
+          "primaryValue": "135"
+        },
+        "powerBhpGain": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "360",
+          "parsedValues": ["360"],
+          "primaryValue": "360"
+        },
+        "torqueNmGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "economyGainBhp": {
+          "raw": "12",
+          "parsedValues": ["12"],
+          "primaryValue": "12"
+        },
+        "economyGainNm": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Nissan",
+    "model": "Qashqai",
+    "modelSlug": "qashqai",
+    "sourceProductId": 51347,
+    "sourceUrl": "https://viezu.com/shop/nissan-qashqai-2021-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol Hybrid",
+        "variant": "1.5",
+        "originalBhp": {
+          "raw": "190",
+          "parsedValues": ["190"],
+          "primaryValue": "190"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "250",
+          "parsedValues": ["250"],
+          "primaryValue": "250"
+        },
+        "torqueNmGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol Hybrid",
+        "variant": "1.3",
+        "originalBhp": {
+          "raw": "158 | 140",
+          "parsedValues": ["158", "140"],
+          "primaryValue": "158",
+          "secondaryValue": "140"
+        },
+        "powerBhpGain": {
+          "raw": "20 | 35",
+          "parsedValues": ["20", "35"],
+          "primaryValue": "20",
+          "secondaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "270 | 240",
+          "parsedValues": ["270", "240"],
+          "primaryValue": "270",
+          "secondaryValue": "240"
+        },
+        "torqueNmGain": {
+          "raw": "40 | 50",
+          "parsedValues": ["40", "50"],
+          "primaryValue": "40",
+          "secondaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Nissan",
+    "model": "Micra",
+    "modelSlug": "micra",
+    "sourceProductId": 51341,
+    "sourceUrl": "https://viezu.com/shop/nissan-micra-2021-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.0",
+        "originalBhp": {
+          "raw": "93",
+          "parsedValues": ["93"],
+          "primaryValue": "93"
+        },
+        "powerBhpGain": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "originalTorque": {
+          "raw": "160",
+          "parsedValues": ["160"],
+          "primaryValue": "160"
+        },
+        "torqueNmGain": {
+          "raw": "16",
+          "parsedValues": ["16"],
+          "primaryValue": "16"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Nissan",
+    "model": "Micra",
+    "modelSlug": "micra",
+    "sourceProductId": 50977,
+    "sourceUrl": "https://viezu.com/shop/nissan-micra-2003-2012/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.4",
+        "originalBhp": {
+          "raw": "87",
+          "parsedValues": ["87"],
+          "primaryValue": "87"
+        },
+        "powerBhpGain": {
+          "raw": "8",
+          "parsedValues": ["8"],
+          "primaryValue": "8"
+        },
+        "originalTorque": {
+          "raw": "128",
+          "parsedValues": ["128"],
+          "primaryValue": "128"
+        },
+        "torqueNmGain": {
+          "raw": "13",
+          "parsedValues": ["13"],
+          "primaryValue": "13"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.5",
+        "originalBhp": {
+          "raw": "86",
+          "parsedValues": ["86"],
+          "primaryValue": "86"
+        },
+        "powerBhpGain": {
+          "raw": "24",
+          "parsedValues": ["24"],
+          "primaryValue": "24"
+        },
+        "originalTorque": {
+          "raw": "200",
+          "parsedValues": ["200"],
+          "primaryValue": "200"
+        },
+        "torqueNmGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "economyGainBhp": {
+          "raw": "12",
+          "parsedValues": ["12"],
+          "primaryValue": "12"
+        },
+        "economyGainNm": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "110",
+          "parsedValues": ["110"],
+          "primaryValue": "110"
+        },
+        "powerBhpGain": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "originalTorque": {
+          "raw": "153",
+          "parsedValues": ["153"],
+          "primaryValue": "153"
+        },
+        "torqueNmGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.0",
+        "originalBhp": {
+          "raw": "58",
+          "parsedValues": ["58"],
+          "primaryValue": "58"
+        },
+        "powerBhpGain": {
+          "raw": "6",
+          "parsedValues": ["6"],
+          "primaryValue": "6"
+        },
+        "originalTorque": {
+          "raw": "79",
+          "parsedValues": ["79"],
+          "primaryValue": "79"
+        },
+        "torqueNmGain": {
+          "raw": "8",
+          "parsedValues": ["8"],
+          "primaryValue": "8"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.2",
+        "originalBhp": {
+          "raw": "80 | 98",
+          "parsedValues": ["80", "98"],
+          "primaryValue": "80",
+          "secondaryValue": "98"
+        },
+        "powerBhpGain": {
+          "raw": "8 | 10",
+          "parsedValues": ["8", "10"],
+          "primaryValue": "8",
+          "secondaryValue": "10"
+        },
+        "originalTorque": {
+          "raw": "110 | 140",
+          "parsedValues": ["110", "140"],
+          "primaryValue": "110",
+          "secondaryValue": "140"
+        },
+        "torqueNmGain": {
+          "raw": "10 | 15",
+          "parsedValues": ["10", "15"],
+          "primaryValue": "10",
+          "secondaryValue": "15"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      }
+    ]
+  },
+  {
+    "make": "Nissan",
+    "model": "Nv400",
+    "modelSlug": "nv400",
+    "sourceProductId": 27870,
+    "sourceUrl": "https://viezu.com/shop/nissan-nv400-2010-2/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.3",
+        "originalBhp": {
+          "raw": "101",
+          "parsedValues": ["101"],
+          "primaryValue": "101"
+        },
+        "powerBhpGain": {
+          "raw": "65",
+          "parsedValues": ["65"],
+          "primaryValue": "65"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "100",
+          "parsedValues": ["100"],
+          "primaryValue": "100"
+        },
+        "economyGainBhp": {
+          "raw": "28",
+          "parsedValues": ["28"],
+          "primaryValue": "28"
+        },
+        "economyGainNm": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "fuelSaving": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "displayPriceCents": 34900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.3",
+        "originalBhp": {
+          "raw": "125",
+          "parsedValues": ["125"],
+          "primaryValue": "125"
+        },
+        "powerBhpGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "displayPriceCents": 34900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.3",
+        "originalBhp": {
+          "raw": "146",
+          "parsedValues": ["146"],
+          "primaryValue": "146"
+        },
+        "powerBhpGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "displayPriceCents": 34900
+      }
+    ]
+  },
+  {
+    "make": "Nissan",
+    "model": "Nv200",
+    "modelSlug": "nv200",
+    "sourceProductId": 27861,
+    "sourceUrl": "https://viezu.com/shop/nissan-nv200-2009-present-3/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "1.5",
+        "originalBhp": {
+          "raw": "110",
+          "parsedValues": ["110"],
+          "primaryValue": "110"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "260",
+          "parsedValues": ["260"],
+          "primaryValue": "260"
+        },
+        "torqueNmGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "displayPriceCents": 34900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.5",
+        "originalBhp": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "200",
+          "parsedValues": ["200"],
+          "primaryValue": "200"
+        },
+        "torqueNmGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 34900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "110",
+          "parsedValues": ["110"],
+          "primaryValue": "110"
+        },
+        "powerBhpGain": {
+          "raw": "8",
+          "parsedValues": ["8"],
+          "primaryValue": "8"
+        },
+        "originalTorque": {
+          "raw": "153",
+          "parsedValues": ["153"],
+          "primaryValue": "153"
+        },
+        "torqueNmGain": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "economyGainBhp": {
+          "raw": "0",
+          "parsedValues": ["0"],
+          "primaryValue": "0"
+        },
+        "economyGainNm": {
+          "raw": "0",
+          "parsedValues": ["0"],
+          "primaryValue": "0"
+        },
+        "fuelSaving": {
+          "raw": "0",
+          "parsedValues": ["0"],
+          "primaryValue": "0"
+        },
+        "displayPriceCents": 34900
+      }
+    ]
+  },
+  {
+    "make": "Nissan",
+    "model": "Interstar",
+    "modelSlug": "interstar",
+    "sourceProductId": 27575,
+    "sourceUrl": "https://viezu.com/shop/nissan-interstar-2002-2005/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "1.9",
+        "originalBhp": {
+          "raw": "82",
+          "parsedValues": ["82"],
+          "primaryValue": "82"
+        },
+        "powerBhpGain": {
+          "raw": "28",
+          "parsedValues": ["28"],
+          "primaryValue": "28"
+        },
+        "originalTorque": {
+          "raw": "200",
+          "parsedValues": ["200"],
+          "primaryValue": "200"
+        },
+        "torqueNmGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "14",
+          "parsedValues": ["14"],
+          "primaryValue": "14"
+        },
+        "economyGainNm": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.2",
+        "originalBhp": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "powerBhpGain": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "originalTorque": {
+          "raw": "260",
+          "parsedValues": ["260"],
+          "primaryValue": "260"
+        },
+        "torqueNmGain": {
+          "raw": "85",
+          "parsedValues": ["85"],
+          "primaryValue": "85"
+        },
+        "economyGainBhp": {
+          "raw": "22",
+          "parsedValues": ["22"],
+          "primaryValue": "22"
+        },
+        "economyGainNm": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "fuelSaving": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.5",
+        "originalBhp": {
+          "raw": "114",
+          "parsedValues": ["114"],
+          "primaryValue": "114"
+        },
+        "powerBhpGain": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "originalTorque": {
+          "raw": "290",
+          "parsedValues": ["290"],
+          "primaryValue": "290"
+        },
+        "torqueNmGain": {
+          "raw": "85",
+          "parsedValues": ["85"],
+          "primaryValue": "85"
+        },
+        "economyGainBhp": {
+          "raw": "22",
+          "parsedValues": ["22"],
+          "primaryValue": "22"
+        },
+        "economyGainNm": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "fuelSaving": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "3.0",
+        "originalBhp": {
+          "raw": "136",
+          "parsedValues": ["136"],
+          "primaryValue": "136"
+        },
+        "powerBhpGain": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "originalTorque": {
+          "raw": "320",
+          "parsedValues": ["320"],
+          "primaryValue": "320"
+        },
+        "torqueNmGain": {
+          "raw": "95",
+          "parsedValues": ["95"],
+          "primaryValue": "95"
+        },
+        "economyGainBhp": {
+          "raw": "22",
+          "parsedValues": ["22"],
+          "primaryValue": "22"
+        },
+        "economyGainNm": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Nissan",
+    "model": "X-Trail",
+    "modelSlug": "x-trail",
+    "sourceProductId": 21774,
+    "sourceUrl": "https://viezu.com/shop/nissan-x-trail-2018-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.3",
+        "originalBhp": {
+          "raw": "160",
+          "parsedValues": ["160"],
+          "primaryValue": "160"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "270",
+          "parsedValues": ["270"],
+          "primaryValue": "270"
+        },
+        "torqueNmGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "130",
+          "parsedValues": ["130"],
+          "primaryValue": "130"
+        },
+        "powerBhpGain": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "320",
+          "parsedValues": ["320"],
+          "primaryValue": "320"
+        },
+        "torqueNmGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.7",
+        "originalBhp": {
+          "raw": "150",
+          "parsedValues": ["150"],
+          "primaryValue": "150"
+        },
+        "powerBhpGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "340",
+          "parsedValues": ["340"],
+          "primaryValue": "340"
+        },
+        "torqueNmGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "177",
+          "parsedValues": ["177"],
+          "primaryValue": "177"
+        },
+        "powerBhpGain": {
+          "raw": "28",
+          "parsedValues": ["28"],
+          "primaryValue": "28"
+        },
+        "originalTorque": {
+          "raw": "380",
+          "parsedValues": ["380"],
+          "primaryValue": "380"
+        },
+        "torqueNmGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Nissan",
+    "model": "X-Trail",
+    "modelSlug": "x-trail",
+    "sourceProductId": 21770,
+    "sourceUrl": "https://viezu.com/shop/nissan-x-trail-2014-2017/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "130",
+          "parsedValues": ["130"],
+          "primaryValue": "130"
+        },
+        "powerBhpGain": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "320",
+          "parsedValues": ["320"],
+          "primaryValue": "320"
+        },
+        "torqueNmGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "177",
+          "parsedValues": ["177"],
+          "primaryValue": "177"
+        },
+        "powerBhpGain": {
+          "raw": "28",
+          "parsedValues": ["28"],
+          "primaryValue": "28"
+        },
+        "originalTorque": {
+          "raw": "380",
+          "parsedValues": ["380"],
+          "primaryValue": "380"
+        },
+        "torqueNmGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "163",
+          "parsedValues": ["163"],
+          "primaryValue": "163"
+        },
+        "powerBhpGain": {
+          "raw": "27",
+          "parsedValues": ["27"],
+          "primaryValue": "27"
+        },
+        "originalTorque": {
+          "raw": "240",
+          "parsedValues": ["240"],
+          "primaryValue": "240"
+        },
+        "torqueNmGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Nissan",
+    "model": "X-Trail",
+    "modelSlug": "x-trail",
+    "sourceProductId": 21766,
+    "sourceUrl": "https://viezu.com/shop/nissan-x-trail-present-2014/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "140",
+          "parsedValues": ["140"],
+          "primaryValue": "140"
+        },
+        "powerBhpGain": {
+          "raw": "14",
+          "parsedValues": ["14"],
+          "primaryValue": "14"
+        },
+        "originalTorque": {
+          "raw": "192",
+          "parsedValues": ["192"],
+          "primaryValue": "192"
+        },
+        "torqueNmGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "138 | 150 | 173",
+          "parsedValues": ["138", "150", "173"],
+          "primaryValue": "138",
+          "secondaryValue": "150"
+        },
+        "powerBhpGain": {
+          "raw": "30 | 30 | 37",
+          "parsedValues": ["30", "30", "37"],
+          "primaryValue": "30",
+          "secondaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "200 | 320 | 360",
+          "parsedValues": ["200", "320", "360"],
+          "primaryValue": "200",
+          "secondaryValue": "320"
+        },
+        "torqueNmGain": {
+          "raw": "60 | 60 | 90",
+          "parsedValues": ["60", "60", "90"],
+          "primaryValue": "60",
+          "secondaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "15 | 15 | 20",
+          "parsedValues": ["15", "15", "20"],
+          "primaryValue": "15",
+          "secondaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "30 | 30 | 45",
+          "parsedValues": ["30", "30", "45"],
+          "primaryValue": "30",
+          "secondaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "130",
+          "parsedValues": ["130"],
+          "primaryValue": "130"
+        },
+        "powerBhpGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "320",
+          "parsedValues": ["320"],
+          "primaryValue": "320"
+        },
+        "torqueNmGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.2",
+        "originalBhp": {
+          "raw": "136 | 114",
+          "parsedValues": ["136", "114"],
+          "primaryValue": "136",
+          "secondaryValue": "114"
+        },
+        "powerBhpGain": {
+          "raw": "32 | 20",
+          "parsedValues": ["32", "20"],
+          "primaryValue": "32",
+          "secondaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "314 | 270 ",
+          "parsedValues": ["314", "270"],
+          "primaryValue": "314",
+          "secondaryValue": "270"
+        },
+        "torqueNmGain": {
+          "raw": "56 | 40",
+          "parsedValues": ["56", "40"],
+          "primaryValue": "56",
+          "secondaryValue": "40"
+        },
+        "economyGainBhp": {
+          "raw": "15 | 10",
+          "parsedValues": ["15", "10"],
+          "primaryValue": "15",
+          "secondaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "30 | 20",
+          "parsedValues": ["30", "20"],
+          "primaryValue": "30",
+          "secondaryValue": "20"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Nissan",
+    "model": "Quest",
+    "modelSlug": "quest",
+    "sourceProductId": 21762,
+    "sourceUrl": "https://viezu.com/shop/nissan-quest-all/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "3.5",
+        "originalBhp": {
+          "raw": "233",
+          "parsedValues": ["233"],
+          "primaryValue": "233"
+        },
+        "powerBhpGain": {
+          "raw": "37",
+          "parsedValues": ["37"],
+          "primaryValue": "37"
+        },
+        "originalTorque": {
+          "raw": "318",
+          "parsedValues": ["318"],
+          "primaryValue": "318"
+        },
+        "torqueNmGain": {
+          "raw": "42",
+          "parsedValues": ["42"],
+          "primaryValue": "42"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Nissan",
+    "model": "Qashqai",
+    "modelSlug": "qashqai",
+    "sourceProductId": 21759,
+    "sourceUrl": "https://viezu.com/shop/nissan-qashqai-2019-2020/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.3",
+        "originalBhp": {
+          "raw": "160",
+          "parsedValues": ["160"],
+          "primaryValue": "160"
+        },
+        "powerBhpGain": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "originalTorque": {
+          "raw": "270",
+          "parsedValues": ["270"],
+          "primaryValue": "270"
+        },
+        "torqueNmGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.5",
+        "originalBhp": {
+          "raw": "115",
+          "parsedValues": ["115"],
+          "primaryValue": "115"
+        },
+        "powerBhpGain": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "285",
+          "parsedValues": ["285"],
+          "primaryValue": "285"
+        },
+        "torqueNmGain": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "economyGainBhp": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.7",
+        "originalBhp": {
+          "raw": "150",
+          "parsedValues": ["150"],
+          "primaryValue": "150"
+        },
+        "powerBhpGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "340",
+          "parsedValues": ["340"],
+          "primaryValue": "340"
+        },
+        "torqueNmGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Nissan",
+    "model": "Qashqai",
+    "modelSlug": "qashqai",
+    "sourceProductId": 21754,
+    "sourceUrl": "https://viezu.com/shop/nissan-qashqai-2017-2019/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.3",
+        "originalBhp": {
+          "raw": "140",
+          "parsedValues": ["140"],
+          "primaryValue": "140"
+        },
+        "powerBhpGain": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "originalTorque": {
+          "raw": "240",
+          "parsedValues": ["240"],
+          "primaryValue": "240"
+        },
+        "torqueNmGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.2",
+        "originalBhp": {
+          "raw": "115",
+          "parsedValues": ["115"],
+          "primaryValue": "115"
+        },
+        "powerBhpGain": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "originalTorque": {
+          "raw": "165",
+          "parsedValues": ["165"],
+          "primaryValue": "165"
+        },
+        "torqueNmGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "163",
+          "parsedValues": ["163"],
+          "primaryValue": "163"
+        },
+        "powerBhpGain": {
+          "raw": "27",
+          "parsedValues": ["27"],
+          "primaryValue": "27"
+        },
+        "originalTorque": {
+          "raw": "240",
+          "parsedValues": ["240"],
+          "primaryValue": "240"
+        },
+        "torqueNmGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.5",
+        "originalBhp": {
+          "raw": "110",
+          "parsedValues": ["110"],
+          "primaryValue": "110"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "260",
+          "parsedValues": ["260"],
+          "primaryValue": "260"
+        },
+        "torqueNmGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "130",
+          "parsedValues": ["130"],
+          "primaryValue": "130"
+        },
+        "powerBhpGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "320",
+          "parsedValues": ["320"],
+          "primaryValue": "320"
+        },
+        "torqueNmGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Nissan",
+    "model": "Qashqai",
+    "modelSlug": "qashqai",
+    "sourceProductId": 21749,
+    "sourceUrl": "https://viezu.com/shop/qashqai-2014-2016/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "163",
+          "parsedValues": ["163"],
+          "primaryValue": "163"
+        },
+        "powerBhpGain": {
+          "raw": "37",
+          "parsedValues": ["37"],
+          "primaryValue": "37"
+        },
+        "originalTorque": {
+          "raw": "240",
+          "parsedValues": ["240"],
+          "primaryValue": "240"
+        },
+        "torqueNmGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.5",
+        "originalBhp": {
+          "raw": "110",
+          "parsedValues": ["110"],
+          "primaryValue": "110"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "260",
+          "parsedValues": ["260"],
+          "primaryValue": "260"
+        },
+        "torqueNmGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "130",
+          "parsedValues": ["130"],
+          "primaryValue": "130"
+        },
+        "powerBhpGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "320",
+          "parsedValues": ["320"],
+          "primaryValue": "320"
+        },
+        "torqueNmGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Nissan",
+    "model": "Qashqai",
+    "modelSlug": "qashqai",
+    "sourceProductId": 21744,
+    "sourceUrl": "https://viezu.com/shop/nissan-qashqai-2007-2013/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "139",
+          "parsedValues": ["139"],
+          "primaryValue": "139"
+        },
+        "powerBhpGain": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "originalTorque": {
+          "raw": "196",
+          "parsedValues": ["196"],
+          "primaryValue": "196"
+        },
+        "torqueNmGain": {
+          "raw": "19",
+          "parsedValues": ["19"],
+          "primaryValue": "19"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.5",
+        "originalBhp": {
+          "raw": "106 | 110",
+          "parsedValues": ["106", "110"],
+          "primaryValue": "106",
+          "secondaryValue": "110"
+        },
+        "powerBhpGain": {
+          "raw": "19 | 25",
+          "parsedValues": ["19", "25"],
+          "primaryValue": "19",
+          "secondaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "240 | 240",
+          "parsedValues": ["240", "240"],
+          "primaryValue": "240",
+          "secondaryValue": "240"
+        },
+        "torqueNmGain": {
+          "raw": "50 | 50",
+          "parsedValues": ["50", "50"],
+          "primaryValue": "50",
+          "secondaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "10 | 10",
+          "parsedValues": ["10", "10"],
+          "primaryValue": "10",
+          "secondaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "25 | 25",
+          "parsedValues": ["25", "25"],
+          "primaryValue": "25",
+          "secondaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "130",
+          "parsedValues": ["130"],
+          "primaryValue": "130"
+        },
+        "powerBhpGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "320",
+          "parsedValues": ["320"],
+          "primaryValue": "320"
+        },
+        "torqueNmGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "150",
+          "parsedValues": ["150"],
+          "primaryValue": "150"
+        },
+        "powerBhpGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "320",
+          "parsedValues": ["320"],
+          "primaryValue": "320"
+        },
+        "torqueNmGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "115",
+          "parsedValues": ["115"],
+          "primaryValue": "115"
+        },
+        "powerBhpGain": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "originalTorque": {
+          "raw": "156",
+          "parsedValues": ["156"],
+          "primaryValue": "156"
+        },
+        "torqueNmGain": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Nissan",
+    "model": "Pulsar",
+    "modelSlug": "pulsar",
+    "sourceProductId": 21740,
+    "sourceUrl": "https://viezu.com/shop/nissan-pulsar-2014-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.2",
+        "originalBhp": {
+          "raw": "115",
+          "parsedValues": ["115"],
+          "primaryValue": "115"
+        },
+        "powerBhpGain": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "originalTorque": {
+          "raw": "190",
+          "parsedValues": ["190"],
+          "primaryValue": "190"
+        },
+        "torqueNmGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "190",
+          "parsedValues": ["190"],
+          "primaryValue": "190"
+        },
+        "powerBhpGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "originalTorque": {
+          "raw": "240",
+          "parsedValues": ["240"],
+          "primaryValue": "240"
+        },
+        "torqueNmGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.5",
+        "originalBhp": {
+          "raw": "110",
+          "parsedValues": ["110"],
+          "primaryValue": "110"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "260",
+          "parsedValues": ["260"],
+          "primaryValue": "260"
+        },
+        "torqueNmGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "economyGainBhp": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 22500
+      }
+    ]
+  },
+  {
+    "make": "Nissan",
+    "model": "Primera",
+    "modelSlug": "primera",
+    "sourceProductId": 21737,
+    "sourceUrl": "https://viezu.com/shop/nissan-primera-2002-2008/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "1.9",
+        "originalBhp": {
+          "raw": "115 | 120",
+          "parsedValues": ["115", "120"],
+          "primaryValue": "115",
+          "secondaryValue": "120"
+        },
+        "powerBhpGain": {
+          "raw": "45 | 45",
+          "parsedValues": ["45", "45"],
+          "primaryValue": "45",
+          "secondaryValue": "45"
+        },
+        "originalTorque": {
+          "raw": "250 | 270",
+          "parsedValues": ["250", "270"],
+          "primaryValue": "250",
+          "secondaryValue": "270"
+        },
+        "torqueNmGain": {
+          "raw": "60 | 50",
+          "parsedValues": ["60", "50"],
+          "primaryValue": "60",
+          "secondaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "20 | 20",
+          "parsedValues": ["20", "20"],
+          "primaryValue": "20",
+          "secondaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "30 | 25",
+          "parsedValues": ["30", "25"],
+          "primaryValue": "30",
+          "secondaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.2",
+        "originalBhp": {
+          "raw": "126 | 138",
+          "parsedValues": ["126", "138"],
+          "primaryValue": "126",
+          "secondaryValue": "138"
+        },
+        "powerBhpGain": {
+          "raw": "29 | 32",
+          "parsedValues": ["29", "32"],
+          "primaryValue": "29",
+          "secondaryValue": "32"
+        },
+        "originalTorque": {
+          "raw": "280 | 314",
+          "parsedValues": ["280", "314"],
+          "primaryValue": "280",
+          "secondaryValue": "314"
+        },
+        "torqueNmGain": {
+          "raw": "40 | 60",
+          "parsedValues": ["40", "60"],
+          "primaryValue": "40",
+          "secondaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "15 | 15",
+          "parsedValues": ["15", "15"],
+          "primaryValue": "15",
+          "secondaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "20 | 30",
+          "parsedValues": ["20", "30"],
+          "primaryValue": "20",
+          "secondaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Nissan",
+    "model": "Primastar",
+    "modelSlug": "primastar",
+    "sourceProductId": 21734,
+    "sourceUrl": "https://viezu.com/shop/nissan-primastar-2007-present/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "112 | 90",
+          "parsedValues": ["112", "90"],
+          "primaryValue": "112",
+          "secondaryValue": "90"
+        },
+        "powerBhpGain": {
+          "raw": "31 | 55",
+          "parsedValues": ["31", "55"],
+          "primaryValue": "31",
+          "secondaryValue": "55"
+        },
+        "originalTorque": {
+          "raw": "300 | 260",
+          "parsedValues": ["300", "260"],
+          "primaryValue": "300",
+          "secondaryValue": "260"
+        },
+        "torqueNmGain": {
+          "raw": "60 | 90",
+          "parsedValues": ["60", "90"],
+          "primaryValue": "60",
+          "secondaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "15 | 30",
+          "parsedValues": ["15", "30"],
+          "primaryValue": "15",
+          "secondaryValue": "30"
+        },
+        "economyGainNm": {
+          "raw": "30 | 45",
+          "parsedValues": ["30", "45"],
+          "primaryValue": "30",
+          "secondaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.5",
+        "originalBhp": {
+          "raw": "146",
+          "parsedValues": ["146"],
+          "primaryValue": "146"
+        },
+        "powerBhpGain": {
+          "raw": "26",
+          "parsedValues": ["26"],
+          "primaryValue": "26"
+        },
+        "originalTorque": {
+          "raw": "320",
+          "parsedValues": ["320"],
+          "primaryValue": "320"
+        },
+        "torqueNmGain": {
+          "raw": "85",
+          "parsedValues": ["85"],
+          "primaryValue": "85"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Nissan",
+    "model": "Primastar",
+    "modelSlug": "primastar",
+    "sourceProductId": 21730,
+    "sourceUrl": "https://viezu.com/shop/nissan-primastar-2002-2006/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "1.9",
+        "originalBhp": {
+          "raw": "100 | 82",
+          "parsedValues": ["100", "82"],
+          "primaryValue": "100",
+          "secondaryValue": "82"
+        },
+        "powerBhpGain": {
+          "raw": "30 | 28",
+          "parsedValues": ["30", "28"],
+          "primaryValue": "30",
+          "secondaryValue": "28"
+        },
+        "originalTorque": {
+          "raw": "240 | 190",
+          "parsedValues": ["240", "190"],
+          "primaryValue": "240",
+          "secondaryValue": "190"
+        },
+        "torqueNmGain": {
+          "raw": "60 | 50",
+          "parsedValues": ["60", "50"],
+          "primaryValue": "60",
+          "secondaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "15 | 15",
+          "parsedValues": ["15", "15"],
+          "primaryValue": "15",
+          "secondaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "30 | 25",
+          "parsedValues": ["30", "25"],
+          "primaryValue": "30",
+          "secondaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "115 | 90",
+          "parsedValues": ["115", "90"],
+          "primaryValue": "115",
+          "secondaryValue": "90"
+        },
+        "powerBhpGain": {
+          "raw": "30 | 55",
+          "parsedValues": ["30", "55"],
+          "primaryValue": "30",
+          "secondaryValue": "55"
+        },
+        "originalTorque": {
+          "raw": "290 | 240",
+          "parsedValues": ["290", "240"],
+          "primaryValue": "290",
+          "secondaryValue": "240"
+        },
+        "torqueNmGain": {
+          "raw": "60 | 110",
+          "parsedValues": ["60", "110"],
+          "primaryValue": "60",
+          "secondaryValue": "110"
+        },
+        "economyGainBhp": {
+          "raw": "15 | 30",
+          "parsedValues": ["15", "30"],
+          "primaryValue": "15",
+          "secondaryValue": "30"
+        },
+        "economyGainNm": {
+          "raw": "30 | 55",
+          "parsedValues": ["30", "55"],
+          "primaryValue": "30",
+          "secondaryValue": "55"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.5",
+        "originalBhp": {
+          "raw": "115 | 145",
+          "parsedValues": ["115", "145"],
+          "primaryValue": "115",
+          "secondaryValue": "145"
+        },
+        "powerBhpGain": {
+          "raw": "34 | 20",
+          "parsedValues": ["34", "20"],
+          "primaryValue": "34",
+          "secondaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "290 | 320",
+          "parsedValues": ["290", "320"],
+          "primaryValue": "290",
+          "secondaryValue": "320"
+        },
+        "torqueNmGain": {
+          "raw": "80 | 80",
+          "parsedValues": ["80", "80"],
+          "primaryValue": "80",
+          "secondaryValue": "80"
+        },
+        "economyGainBhp": {
+          "raw": "15 | 10",
+          "parsedValues": ["15", "10"],
+          "primaryValue": "15",
+          "secondaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "40 | 40",
+          "parsedValues": ["40", "40"],
+          "primaryValue": "40",
+          "secondaryValue": "40"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Nissan",
+    "model": "Patrol",
+    "modelSlug": "patrol",
+    "sourceProductId": 21727,
+    "sourceUrl": "https://viezu.com/shop/nissan-patrol-2014-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "5.6",
+        "originalBhp": {
+          "raw": "320 | 405 | 428",
+          "parsedValues": ["320", "405", "428"],
+          "primaryValue": "320",
+          "secondaryValue": "405"
+        },
+        "powerBhpGain": {
+          "raw": "12 | 14 | 22",
+          "parsedValues": ["12", "14", "22"],
+          "primaryValue": "12",
+          "secondaryValue": "14"
+        },
+        "originalTorque": {
+          "raw": "527 | 560 | 560",
+          "parsedValues": ["527", "560", "560"],
+          "primaryValue": "527",
+          "secondaryValue": "560"
+        },
+        "torqueNmGain": {
+          "raw": "23 | 21 | 31",
+          "parsedValues": ["23", "21", "31"],
+          "primaryValue": "23",
+          "secondaryValue": "21"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "4.0",
+        "originalBhp": {
+          "raw": "275",
+          "parsedValues": ["275"],
+          "primaryValue": "275"
+        },
+        "powerBhpGain": {
+          "raw": "22",
+          "parsedValues": ["22"],
+          "primaryValue": "22"
+        },
+        "originalTorque": {
+          "raw": "394",
+          "parsedValues": ["394"],
+          "primaryValue": "394"
+        },
+        "torqueNmGain": {
+          "raw": "39",
+          "parsedValues": ["39"],
+          "primaryValue": "39"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Nissan",
+    "model": "Patrol",
+    "modelSlug": "patrol",
+    "sourceProductId": 21725,
+    "sourceUrl": "https://viezu.com/shop/nissan-patrol-1998-2009/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "3.0",
+        "originalBhp": {
+          "raw": "160",
+          "parsedValues": ["160"],
+          "primaryValue": "160"
+        },
+        "powerBhpGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "380",
+          "parsedValues": ["380"],
+          "primaryValue": "380"
+        },
+        "torqueNmGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Nissan",
+    "model": "Pathfinder",
+    "modelSlug": "pathfinder",
+    "sourceProductId": 21720,
+    "sourceUrl": "https://viezu.com/shop/nissan-pathfinder-2005-present/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.5",
+        "originalBhp": {
+          "raw": "163 | 174 | 190",
+          "parsedValues": ["163", "174", "190"],
+          "primaryValue": "163",
+          "secondaryValue": "174"
+        },
+        "powerBhpGain": {
+          "raw": "47 | 36 | 40",
+          "parsedValues": ["47", "36", "40"],
+          "primaryValue": "47",
+          "secondaryValue": "36"
+        },
+        "originalTorque": {
+          "raw": "403 | 403 | 450",
+          "parsedValues": ["403", "403", "450"],
+          "primaryValue": "403",
+          "secondaryValue": "403"
+        },
+        "torqueNmGain": {
+          "raw": "57 | 57 | 70",
+          "parsedValues": ["57", "57", "70"],
+          "primaryValue": "57",
+          "secondaryValue": "57"
+        },
+        "economyGainBhp": {
+          "raw": "25 | 20 | 20",
+          "parsedValues": ["25", "20", "20"],
+          "primaryValue": "25",
+          "secondaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "30 | 30 | 35",
+          "parsedValues": ["30", "30", "35"],
+          "primaryValue": "30",
+          "secondaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "3.0",
+        "originalBhp": {
+          "raw": "231",
+          "parsedValues": ["231"],
+          "primaryValue": "231"
+        },
+        "powerBhpGain": {
+          "raw": "49",
+          "parsedValues": ["49"],
+          "primaryValue": "49"
+        },
+        "originalTorque": {
+          "raw": "550",
+          "parsedValues": ["550"],
+          "primaryValue": "550"
+        },
+        "torqueNmGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "economyGainNm": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "4.0",
+        "originalBhp": {
+          "raw": "266",
+          "parsedValues": ["266"],
+          "primaryValue": "266"
+        },
+        "powerBhpGain": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "originalTorque": {
+          "raw": "385",
+          "parsedValues": ["385"],
+          "primaryValue": "385"
+        },
+        "torqueNmGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "5.6",
+        "originalBhp": {
+          "raw": "310",
+          "parsedValues": ["310"],
+          "primaryValue": "310"
+        },
+        "powerBhpGain": {
+          "raw": "22",
+          "parsedValues": ["22"],
+          "primaryValue": "22"
+        },
+        "originalTorque": {
+          "raw": "526",
+          "parsedValues": ["526"],
+          "primaryValue": "526"
+        },
+        "torqueNmGain": {
+          "raw": "24",
+          "parsedValues": ["24"],
+          "primaryValue": "24"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Nissan",
+    "model": "NV400",
+    "modelSlug": "nv400",
+    "sourceProductId": 21718,
+    "sourceUrl": "https://viezu.com/shop/nv400-2016-2019/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.3",
+        "originalBhp": {
+          "raw": "110 | 130 | 145 | 165 | 170",
+          "parsedValues": ["110", "130", "145", "165", "170"],
+          "primaryValue": "110",
+          "secondaryValue": "130"
+        },
+        "powerBhpGain": {
+          "raw": "30 | 30 | 50 | 30 | 25",
+          "parsedValues": ["30", "30", "50", "30", "25"],
+          "primaryValue": "30",
+          "secondaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "285 | 340 | 360 | 380 | 380",
+          "parsedValues": ["285", "340", "360", "380", "380"],
+          "primaryValue": "285",
+          "secondaryValue": "340"
+        },
+        "torqueNmGain": {
+          "raw": "60 | 50 | 60 | 40 | 40",
+          "parsedValues": ["60", "50", "60", "40", "40"],
+          "primaryValue": "60",
+          "secondaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "15 | 15 | 25 | 15 | 10",
+          "parsedValues": ["15", "15", "25", "15", "10"],
+          "primaryValue": "15",
+          "secondaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "30 | 25 | 30 | 20 | 20",
+          "parsedValues": ["30", "25", "30", "20", "20"],
+          "primaryValue": "30",
+          "secondaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Nissan",
+    "model": "NV400",
+    "modelSlug": "nv400",
+    "sourceProductId": 21716,
+    "sourceUrl": "https://viezu.com/shop/nv400-2010-2016/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.3",
+        "originalBhp": {
+          "raw": "100 | 125 | 150",
+          "parsedValues": ["100", "125", "150"],
+          "primaryValue": "100",
+          "secondaryValue": "125"
+        },
+        "powerBhpGain": {
+          "raw": "30 | 30 | 30",
+          "parsedValues": ["30", "30", "30"],
+          "primaryValue": "30",
+          "secondaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "285 | 310 | 350",
+          "parsedValues": ["285", "310", "350"],
+          "primaryValue": "285",
+          "secondaryValue": "310"
+        },
+        "torqueNmGain": {
+          "raw": "60 | 60 | 60",
+          "parsedValues": ["60", "60", "60"],
+          "primaryValue": "60",
+          "secondaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "15 | 15 | 15",
+          "parsedValues": ["15", "15", "15"],
+          "primaryValue": "15",
+          "secondaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "30 | 30 | 30",
+          "parsedValues": ["30", "30", "30"],
+          "primaryValue": "30",
+          "secondaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Nissan",
+    "model": "NV300",
+    "modelSlug": "nv300",
+    "sourceProductId": 21714,
+    "sourceUrl": "https://viezu.com/shop/nissan-nv300-2016-2019/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "120 | 95 | 125 | 145",
+          "parsedValues": ["120", "95", "125", "145"],
+          "primaryValue": "120",
+          "secondaryValue": "95"
+        },
+        "powerBhpGain": {
+          "raw": "25 | 50 | 50 | 30",
+          "parsedValues": ["25", "50", "50", "30"],
+          "primaryValue": "25",
+          "secondaryValue": "50"
+        },
+        "originalTorque": {
+          "raw": "300 | 260 | 320 | 340",
+          "parsedValues": ["300", "260", "320", "340"],
+          "primaryValue": "300",
+          "secondaryValue": "260"
+        },
+        "torqueNmGain": {
+          "raw": "80 | 120 | 60 | 50",
+          "parsedValues": ["80", "120", "60", "50"],
+          "primaryValue": "80",
+          "secondaryValue": "120"
+        },
+        "economyGainBhp": {
+          "raw": "10 | 25 | 25 | 15",
+          "parsedValues": ["10", "25", "25", "15"],
+          "primaryValue": "10",
+          "secondaryValue": "25"
+        },
+        "economyGainNm": {
+          "raw": "40 | 60 | 30 | 25",
+          "parsedValues": ["40", "60", "30", "25"],
+          "primaryValue": "40",
+          "secondaryValue": "60"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Nissan",
+    "model": "NP300",
+    "modelSlug": "np300",
+    "sourceProductId": 21710,
+    "sourceUrl": "https://viezu.com/shop/np300-2019-present/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.3",
+        "originalBhp": {
+          "raw": "163",
+          "parsedValues": ["163"],
+          "primaryValue": "163"
+        },
+        "powerBhpGain": {
+          "raw": "27",
+          "parsedValues": ["27"],
+          "primaryValue": "27"
+        },
+        "originalTorque": {
+          "raw": "425",
+          "parsedValues": ["425"],
+          "primaryValue": "425"
+        },
+        "torqueNmGain": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Nissan",
+    "model": "NP300",
+    "modelSlug": "np300",
+    "sourceProductId": 21708,
+    "sourceUrl": "https://viezu.com/shop/np300-2016-2019/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.3",
+        "originalBhp": {
+          "raw": "190",
+          "parsedValues": ["190"],
+          "primaryValue": "190"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "450",
+          "parsedValues": ["450"],
+          "primaryValue": "450"
+        },
+        "torqueNmGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Nissan",
+    "model": "NP300",
+    "modelSlug": "np300",
+    "sourceProductId": 21706,
+    "sourceUrl": "https://viezu.com/shop/np300-2005-2015/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.5",
+        "originalBhp": {
+          "raw": "129",
+          "parsedValues": ["129"],
+          "primaryValue": "129"
+        },
+        "powerBhpGain": {
+          "raw": "26",
+          "parsedValues": ["26"],
+          "primaryValue": "26"
+        },
+        "originalTorque": {
+          "raw": "300",
+          "parsedValues": ["300"],
+          "primaryValue": "300"
+        },
+        "torqueNmGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Nissan",
+    "model": "Note",
+    "modelSlug": "note",
+    "sourceProductId": 21703,
+    "sourceUrl": "https://viezu.com/shop/nissan-note-2013-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.2",
+        "originalBhp": {
+          "raw": "98 | 80",
+          "parsedValues": ["98", "80"],
+          "primaryValue": "98",
+          "secondaryValue": "80"
+        },
+        "powerBhpGain": {
+          "raw": "10 | 8",
+          "parsedValues": ["10", "8"],
+          "primaryValue": "10",
+          "secondaryValue": "8"
+        },
+        "originalTorque": {
+          "raw": "147 | 110",
+          "parsedValues": ["147", "110"],
+          "primaryValue": "147",
+          "secondaryValue": "110"
+        },
+        "torqueNmGain": {
+          "raw": "15 | 10",
+          "parsedValues": ["15", "10"],
+          "primaryValue": "15",
+          "secondaryValue": "10"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.5",
+        "originalBhp": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "200",
+          "parsedValues": ["200"],
+          "primaryValue": "200"
+        },
+        "torqueNmGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 22500
+      }
+    ]
+  },
+  {
+    "make": "Nissan",
+    "model": "Note",
+    "modelSlug": "note",
+    "sourceProductId": 21700,
+    "sourceUrl": "https://viezu.com/shop/nissan-note-2009-2013/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "1.5",
+        "originalBhp": {
+          "raw": "106 | 90",
+          "parsedValues": ["106", "90"],
+          "primaryValue": "106",
+          "secondaryValue": "90"
+        },
+        "powerBhpGain": {
+          "raw": "24 | 20",
+          "parsedValues": ["24", "20"],
+          "primaryValue": "24",
+          "secondaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "240 | 200",
+          "parsedValues": ["240", "200"],
+          "primaryValue": "240",
+          "secondaryValue": "200"
+        },
+        "torqueNmGain": {
+          "raw": "50 | 50",
+          "parsedValues": ["50", "50"],
+          "primaryValue": "50",
+          "secondaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "10 | 10",
+          "parsedValues": ["10", "10"],
+          "primaryValue": "10",
+          "secondaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "25 | 25",
+          "parsedValues": ["25", "25"],
+          "primaryValue": "25",
+          "secondaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "110",
+          "parsedValues": ["110"],
+          "primaryValue": "110"
+        },
+        "powerBhpGain": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "originalTorque": {
+          "raw": "153",
+          "parsedValues": ["153"],
+          "primaryValue": "153"
+        },
+        "torqueNmGain": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Nissan",
+    "model": "Note",
+    "modelSlug": "note",
+    "sourceProductId": 21697,
+    "sourceUrl": "https://viezu.com/shop/nissan-note-2006-2009/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.4",
+        "originalBhp": {
+          "raw": "88",
+          "parsedValues": ["88"],
+          "primaryValue": "88"
+        },
+        "powerBhpGain": {
+          "raw": "9",
+          "parsedValues": ["9"],
+          "primaryValue": "9"
+        },
+        "originalTorque": {
+          "raw": "128",
+          "parsedValues": ["128"],
+          "primaryValue": "128"
+        },
+        "torqueNmGain": {
+          "raw": "13",
+          "parsedValues": ["13"],
+          "primaryValue": "13"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.5",
+        "originalBhp": {
+          "raw": "68 | 86",
+          "parsedValues": ["68", "86"],
+          "primaryValue": "68",
+          "secondaryValue": "86"
+        },
+        "powerBhpGain": {
+          "raw": "14 | 19",
+          "parsedValues": ["14", "19"],
+          "primaryValue": "14",
+          "secondaryValue": "19"
+        },
+        "originalTorque": {
+          "raw": "160 | 200",
+          "parsedValues": ["160", "200"],
+          "primaryValue": "160",
+          "secondaryValue": "200"
+        },
+        "torqueNmGain": {
+          "raw": "50 | 60",
+          "parsedValues": ["50", "60"],
+          "primaryValue": "50",
+          "secondaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "5 | 10",
+          "parsedValues": ["5", "10"],
+          "primaryValue": "5",
+          "secondaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "25 | 30",
+          "parsedValues": ["25", "30"],
+          "primaryValue": "25",
+          "secondaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 22500
+      }
+    ]
+  },
+  {
+    "make": "Nissan",
+    "model": "Navara",
+    "modelSlug": "navara",
+    "sourceProductId": 21695,
+    "sourceUrl": "https://viezu.com/shop/nissan-navara-2019-present/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.3",
+        "originalBhp": {
+          "raw": "163 | 190",
+          "parsedValues": ["163", "190"],
+          "primaryValue": "163",
+          "secondaryValue": "190"
+        },
+        "powerBhpGain": {
+          "raw": "27 | 20",
+          "parsedValues": ["27", "20"],
+          "primaryValue": "27",
+          "secondaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "425 | 450",
+          "parsedValues": ["425", "450"],
+          "primaryValue": "425",
+          "secondaryValue": "450"
+        },
+        "torqueNmGain": {
+          "raw": "35 | 50",
+          "parsedValues": ["35", "50"],
+          "primaryValue": "35",
+          "secondaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "15 | 10",
+          "parsedValues": ["15", "10"],
+          "primaryValue": "15",
+          "secondaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "20 | 25",
+          "parsedValues": ["20", "25"],
+          "primaryValue": "20",
+          "secondaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Nissan",
+    "model": "Navara",
+    "modelSlug": "navara",
+    "sourceProductId": 21693,
+    "sourceUrl": "https://viezu.com/shop/nissan-navara-d23-2016-2019/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.3",
+        "originalBhp": {
+          "raw": "160 | 190",
+          "parsedValues": ["160", "190"],
+          "primaryValue": "160",
+          "secondaryValue": "190"
+        },
+        "powerBhpGain": {
+          "raw": "30 | 20",
+          "parsedValues": ["30", "20"],
+          "primaryValue": "30",
+          "secondaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "403 | 450",
+          "parsedValues": ["403", "450"],
+          "primaryValue": "403",
+          "secondaryValue": "450"
+        },
+        "torqueNmGain": {
+          "raw": "57 | 50",
+          "parsedValues": ["57", "50"],
+          "primaryValue": "57",
+          "secondaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "15 | 10",
+          "parsedValues": ["15", "10"],
+          "primaryValue": "15",
+          "secondaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "30 | 25",
+          "parsedValues": ["30", "25"],
+          "primaryValue": "30",
+          "secondaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Nissan",
+    "model": "Navara",
+    "modelSlug": "navara",
+    "sourceProductId": 21689,
+    "sourceUrl": "https://viezu.com/shop/nissan-navara-d40-2005-2015/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.5",
+        "originalBhp": {
+          "raw": "174 | 190 | 133 | 142",
+          "parsedValues": ["174", "190", "133", "142"],
+          "primaryValue": "174",
+          "secondaryValue": "190"
+        },
+        "powerBhpGain": {
+          "raw": "36 | 35 | 32 | 40",
+          "parsedValues": ["36", "35", "32", "40"],
+          "primaryValue": "36",
+          "secondaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "403 | 450 | 304 | 350",
+          "parsedValues": ["403", "450", "304", "350"],
+          "primaryValue": "403",
+          "secondaryValue": "450"
+        },
+        "torqueNmGain": {
+          "raw": "57 | 90 | 61 | 50",
+          "parsedValues": ["57", "90", "61", "50"],
+          "primaryValue": "57",
+          "secondaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "20 | 20 | 15 | 20",
+          "parsedValues": ["20", "20", "15", "20"],
+          "primaryValue": "20",
+          "secondaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "30 | 45 | 30 | 25",
+          "parsedValues": ["30", "45", "30", "25"],
+          "primaryValue": "30",
+          "secondaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "3.0",
+        "originalBhp": {
+          "raw": "231",
+          "parsedValues": ["231"],
+          "primaryValue": "231"
+        },
+        "powerBhpGain": {
+          "raw": "49",
+          "parsedValues": ["49"],
+          "primaryValue": "49"
+        },
+        "originalTorque": {
+          "raw": "550",
+          "parsedValues": ["550"],
+          "primaryValue": "550"
+        },
+        "torqueNmGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "economyGainNm": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "4.0",
+        "originalBhp": {
+          "raw": "269",
+          "parsedValues": ["269"],
+          "primaryValue": "269"
+        },
+        "powerBhpGain": {
+          "raw": "12",
+          "parsedValues": ["12"],
+          "primaryValue": "12"
+        },
+        "originalTorque": {
+          "raw": "390",
+          "parsedValues": ["390"],
+          "primaryValue": "390"
+        },
+        "torqueNmGain": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Nissan",
+    "model": "Murano",
+    "modelSlug": "murano",
+    "sourceProductId": 21686,
+    "sourceUrl": "https://viezu.com/shop/murano-2010-present/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.5",
+        "originalBhp": {
+          "raw": "190",
+          "parsedValues": ["190"],
+          "primaryValue": "190"
+        },
+        "powerBhpGain": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "450",
+          "parsedValues": ["450"],
+          "primaryValue": "450"
+        },
+        "torqueNmGain": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "3.5",
+        "originalBhp": {
+          "raw": "260",
+          "parsedValues": ["260"],
+          "primaryValue": "260"
+        },
+        "powerBhpGain": {
+          "raw": "18",
+          "parsedValues": ["18"],
+          "primaryValue": "18"
+        },
+        "originalTorque": {
+          "raw": "325",
+          "parsedValues": ["325"],
+          "primaryValue": "325"
+        },
+        "torqueNmGain": {
+          "raw": "23",
+          "parsedValues": ["23"],
+          "primaryValue": "23"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Nissan",
+    "model": "Micra",
+    "modelSlug": "micra",
+    "sourceProductId": 21683,
+    "sourceUrl": "https://viezu.com/shop/nissan-micra-2016-2020/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.2",
+        "originalBhp": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "powerBhpGain": {
+          "raw": "8",
+          "parsedValues": ["8"],
+          "primaryValue": "8"
+        },
+        "originalTorque": {
+          "raw": "110",
+          "parsedValues": ["110"],
+          "primaryValue": "110"
+        },
+        "torqueNmGain": {
+          "raw": "11",
+          "parsedValues": ["11"],
+          "primaryValue": "11"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.0",
+        "originalBhp": {
+          "raw": "100 | 70",
+          "parsedValues": ["100", "70"],
+          "primaryValue": "100",
+          "secondaryValue": "70"
+        },
+        "powerBhpGain": {
+          "raw": "10 | 8",
+          "parsedValues": ["10", "8"],
+          "primaryValue": "10",
+          "secondaryValue": "8"
+        },
+        "originalTorque": {
+          "raw": "144 | 95",
+          "parsedValues": ["144", "95"],
+          "primaryValue": "144",
+          "secondaryValue": "95"
+        },
+        "torqueNmGain": {
+          "raw": "14 | 9",
+          "parsedValues": ["14", "9"],
+          "primaryValue": "14",
+          "secondaryValue": "9"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "0.9",
+        "originalBhp": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "140",
+          "parsedValues": ["140"],
+          "primaryValue": "140"
+        },
+        "torqueNmGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      }
+    ]
+  },
+  {
+    "make": "Nissan",
+    "model": "Micra",
+    "modelSlug": "micra",
+    "sourceProductId": 21681,
+    "sourceUrl": "https://viezu.com/shop/nissan-micra-2013-2016/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "1.5",
+        "originalBhp": {
+          "raw": "65 | 82 | 86",
+          "parsedValues": ["65", "82", "86"],
+          "primaryValue": "65",
+          "secondaryValue": "82"
+        },
+        "powerBhpGain": {
+          "raw": "20 | 20 | 19",
+          "parsedValues": ["20", "20", "19"],
+          "primaryValue": "20",
+          "secondaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "160 | 185 | 200",
+          "parsedValues": ["160", "185", "200"],
+          "primaryValue": "160",
+          "secondaryValue": "185"
+        },
+        "torqueNmGain": {
+          "raw": "40 | 40 | 50",
+          "parsedValues": ["40", "40", "50"],
+          "primaryValue": "40",
+          "secondaryValue": "40"
+        },
+        "economyGainBhp": {
+          "raw": "10 | 10 | 10",
+          "parsedValues": ["10", "10", "10"],
+          "primaryValue": "10",
+          "secondaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "20 | 20 | 25",
+          "parsedValues": ["20", "20", "25"],
+          "primaryValue": "20",
+          "secondaryValue": "20"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 22500
+      }
+    ]
+  },
+  {
+    "make": "Nissan",
+    "model": "Kubistar",
+    "modelSlug": "kubistar",
+    "sourceProductId": 21679,
+    "sourceUrl": "https://viezu.com/shop/nissan-kubistar-all/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "1.5",
+        "originalBhp": {
+          "raw": "60 | 86",
+          "parsedValues": ["60", "86"],
+          "primaryValue": "60",
+          "secondaryValue": "86"
+        },
+        "powerBhpGain": {
+          "raw": "24 | 26",
+          "parsedValues": ["24", "26"],
+          "primaryValue": "24",
+          "secondaryValue": "26"
+        },
+        "originalTorque": {
+          "raw": "170 | 200",
+          "parsedValues": ["170", "200"],
+          "primaryValue": "170",
+          "secondaryValue": "200"
+        },
+        "torqueNmGain": {
+          "raw": "50 | 70",
+          "parsedValues": ["50", "70"],
+          "primaryValue": "50",
+          "secondaryValue": "70"
+        },
+        "economyGainBhp": {
+          "raw": "10 | 15",
+          "parsedValues": ["10", "15"],
+          "primaryValue": "10",
+          "secondaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "25 | 35",
+          "parsedValues": ["25", "35"],
+          "primaryValue": "25",
+          "secondaryValue": "35"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 22500
+      }
+    ]
+  },
+  {
+    "make": "Nissan",
+    "model": "Juke",
+    "modelSlug": "juke",
+    "sourceProductId": 21675,
+    "sourceUrl": "https://viezu.com/shop/nissan-juke-2010-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.0",
+        "originalBhp": {
+          "raw": "117 | 114",
+          "parsedValues": ["117", "114"],
+          "primaryValue": "117",
+          "secondaryValue": "114"
+        },
+        "powerBhpGain": {
+          "raw": "12 | 11",
+          "parsedValues": ["12", "11"],
+          "primaryValue": "12",
+          "secondaryValue": "11"
+        },
+        "originalTorque": {
+          "raw": "180 | 200",
+          "parsedValues": ["180", "200"],
+          "primaryValue": "180",
+          "secondaryValue": "200"
+        },
+        "torqueNmGain": {
+          "raw": "18 | 20",
+          "parsedValues": ["18", "20"],
+          "primaryValue": "18",
+          "secondaryValue": "20"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "190 | 200 | 218 | 117",
+          "parsedValues": ["190", "200", "218", "117"],
+          "primaryValue": "190",
+          "secondaryValue": "200"
+        },
+        "powerBhpGain": {
+          "raw": "40 | 30 | 12 | 13",
+          "parsedValues": ["40", "30", "12", "13"],
+          "primaryValue": "40",
+          "secondaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "240 | 250 | 280 | 158",
+          "parsedValues": ["240", "250", "280", "158"],
+          "primaryValue": "240",
+          "secondaryValue": "250"
+        },
+        "torqueNmGain": {
+          "raw": "60 | 50 | 70 | 16",
+          "parsedValues": ["60", "50", "70", "16"],
+          "primaryValue": "60",
+          "secondaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.2",
+        "originalBhp": {
+          "raw": "115",
+          "parsedValues": ["115"],
+          "primaryValue": "115"
+        },
+        "powerBhpGain": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "190",
+          "parsedValues": ["190"],
+          "primaryValue": "190"
+        },
+        "torqueNmGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.5",
+        "originalBhp": {
+          "raw": "110",
+          "parsedValues": ["110"],
+          "primaryValue": "110"
+        },
+        "powerBhpGain": {
+          "raw": "28",
+          "parsedValues": ["28"],
+          "primaryValue": "28"
+        },
+        "originalTorque": {
+          "raw": "240",
+          "parsedValues": ["240"],
+          "primaryValue": "240"
+        },
+        "torqueNmGain": {
+          "raw": "70",
+          "parsedValues": ["70"],
+          "primaryValue": "70"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 22500
+      }
+    ]
+  },
+  {
+    "make": "Nissan",
+    "model": "Interstar",
+    "modelSlug": "interstar",
+    "sourceProductId": 21673,
+    "sourceUrl": "https://viezu.com/shop/nissan-interstar-all/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.3",
+        "originalBhp": {
+          "raw": "135 | 144",
+          "parsedValues": ["135", "144"],
+          "primaryValue": "135",
+          "secondaryValue": "144"
+        },
+        "powerBhpGain": {
+          "raw": "30 | 25",
+          "parsedValues": ["30", "25"],
+          "primaryValue": "30",
+          "secondaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "384 | 360",
+          "parsedValues": ["384", "360"],
+          "primaryValue": "384",
+          "secondaryValue": "360"
+        },
+        "torqueNmGain": {
+          "raw": "70 | 85",
+          "parsedValues": ["70", "85"],
+          "primaryValue": "70",
+          "secondaryValue": "85"
+        },
+        "economyGainBhp": {
+          "raw": "15 | 12",
+          "parsedValues": ["15", "12"],
+          "primaryValue": "15",
+          "secondaryValue": "12"
+        },
+        "economyGainNm": {
+          "raw": "35 | 42",
+          "parsedValues": ["35", "42"],
+          "primaryValue": "35",
+          "secondaryValue": "42"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.5",
+        "originalBhp": {
+          "raw": "100 | 120 | 145",
+          "parsedValues": ["100", "120", "145"],
+          "primaryValue": "100",
+          "secondaryValue": "120"
+        },
+        "powerBhpGain": {
+          "raw": "30 | 27 | 27",
+          "parsedValues": ["30", "27", "27"],
+          "primaryValue": "30",
+          "secondaryValue": "27"
+        },
+        "originalTorque": {
+          "raw": "260 | 300 | 320",
+          "parsedValues": ["260", "300", "320"],
+          "primaryValue": "260",
+          "secondaryValue": "300"
+        },
+        "torqueNmGain": {
+          "raw": "75 | 75 | 85",
+          "parsedValues": ["75", "75", "85"],
+          "primaryValue": "75",
+          "secondaryValue": "75"
+        },
+        "economyGainBhp": {
+          "raw": "15 | 15 | 15",
+          "parsedValues": ["15", "15", "15"],
+          "primaryValue": "15",
+          "secondaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "40 | 40 | 40",
+          "parsedValues": ["40", "40", "40"],
+          "primaryValue": "40",
+          "secondaryValue": "40"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Nissan",
+    "model": "GT-R",
+    "modelSlug": "gt-r",
+    "sourceProductId": 21671,
+    "sourceUrl": "https://viezu.com/shop/gt-r-2009-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "3.8",
+        "originalBhp": {
+          "raw": "485 | 530 | 550 | 570",
+          "parsedValues": ["485", "530", "550", "570"],
+          "primaryValue": "485",
+          "secondaryValue": "530"
+        },
+        "powerBhpGain": {
+          "raw": "65 | 50 | 50 | 30",
+          "parsedValues": ["65", "50", "50", "30"],
+          "primaryValue": "65",
+          "secondaryValue": "50"
+        },
+        "originalTorque": {
+          "raw": "588 | 612 | 630 | 637",
+          "parsedValues": ["588", "612", "630", "637"],
+          "primaryValue": "588",
+          "secondaryValue": "612"
+        },
+        "torqueNmGain": {
+          "raw": "132 | 138 | 140 | 133",
+          "parsedValues": ["132", "138", "140", "133"],
+          "primaryValue": "132",
+          "secondaryValue": "138"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Nissan",
+    "model": "Fuga",
+    "modelSlug": "fuga",
+    "sourceProductId": 21668,
+    "sourceUrl": "https://viezu.com/shop/nissan-fuga-all/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "2.5",
+        "originalBhp": {
+          "raw": "223",
+          "parsedValues": ["223"],
+          "primaryValue": "223"
+        },
+        "powerBhpGain": {
+          "raw": "17",
+          "parsedValues": ["17"],
+          "primaryValue": "17"
+        },
+        "originalTorque": {
+          "raw": "263",
+          "parsedValues": ["263"],
+          "primaryValue": "263"
+        },
+        "torqueNmGain": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "3.5",
+        "originalBhp": {
+          "raw": "283",
+          "parsedValues": ["283"],
+          "primaryValue": "283"
+        },
+        "powerBhpGain": {
+          "raw": "21",
+          "parsedValues": ["21"],
+          "primaryValue": "21"
+        },
+        "originalTorque": {
+          "raw": "358",
+          "parsedValues": ["358"],
+          "primaryValue": "358"
+        },
+        "torqueNmGain": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Nissan",
+    "model": "Frontier",
+    "modelSlug": "frontier",
+    "sourceProductId": 21666,
+    "sourceUrl": "https://viezu.com/shop/nissan-frontier-all/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "4.0",
+        "originalBhp": {
+          "raw": "261",
+          "parsedValues": ["261"],
+          "primaryValue": "261"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "381",
+          "parsedValues": ["381"],
+          "primaryValue": "381"
+        },
+        "torqueNmGain": {
+          "raw": "24",
+          "parsedValues": ["24"],
+          "primaryValue": "24"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Nissan",
+    "model": "Evalia",
+    "modelSlug": "evalia",
+    "sourceProductId": 21664,
+    "sourceUrl": "https://viezu.com/shop/nissan-evalia-2014-present/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "1.5",
+        "originalBhp": {
+          "raw": "110 | 90",
+          "parsedValues": ["110", "90"],
+          "primaryValue": "110",
+          "secondaryValue": "90"
+        },
+        "powerBhpGain": {
+          "raw": "20 | 20",
+          "parsedValues": ["20", "20"],
+          "primaryValue": "20",
+          "secondaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "240 | 200",
+          "parsedValues": ["240", "200"],
+          "primaryValue": "240",
+          "secondaryValue": "200"
+        },
+        "torqueNmGain": {
+          "raw": "60 | 50",
+          "parsedValues": ["60", "50"],
+          "primaryValue": "60",
+          "secondaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "10 | 10",
+          "parsedValues": ["10", "10"],
+          "primaryValue": "10",
+          "secondaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "30 | 25",
+          "parsedValues": ["30", "25"],
+          "primaryValue": "30",
+          "secondaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 22500
+      }
+    ]
+  },
+  {
+    "make": "Nissan",
+    "model": "Cube",
+    "modelSlug": "cube",
+    "sourceProductId": 21662,
+    "sourceUrl": "https://viezu.com/shop/nissan-cube-all/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.4",
+        "originalBhp": {
+          "raw": "98",
+          "parsedValues": ["98"],
+          "primaryValue": "98"
+        },
+        "powerBhpGain": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "originalTorque": {
+          "raw": "137",
+          "parsedValues": ["137"],
+          "primaryValue": "137"
+        },
+        "torqueNmGain": {
+          "raw": "14",
+          "parsedValues": ["14"],
+          "primaryValue": "14"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "110",
+          "parsedValues": ["110"],
+          "primaryValue": "110"
+        },
+        "powerBhpGain": {
+          "raw": "11",
+          "parsedValues": ["11"],
+          "primaryValue": "11"
+        },
+        "originalTorque": {
+          "raw": "153",
+          "parsedValues": ["153"],
+          "primaryValue": "153"
+        },
+        "torqueNmGain": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.5",
+        "originalBhp": {
+          "raw": "110",
+          "parsedValues": ["110"],
+          "primaryValue": "110"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "200",
+          "parsedValues": ["200"],
+          "primaryValue": "200"
+        },
+        "torqueNmGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 22500
+      }
+    ]
+  },
+  {
+    "make": "Nissan",
+    "model": "Cabstar",
+    "modelSlug": "cabstar",
+    "sourceProductId": 21659,
+    "sourceUrl": "https://viezu.com/shop/nissan-cabstar-all/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.5",
+        "originalBhp": {
+          "raw": "100 | 120 | 130 | 140 | 110",
+          "parsedValues": ["100", "120", "130", "140", "110"],
+          "primaryValue": "100",
+          "secondaryValue": "120"
+        },
+        "powerBhpGain": {
+          "raw": "30 | 28 | 30 | 25 | 30",
+          "parsedValues": ["30", "28", "30", "25", "30"],
+          "primaryValue": "30",
+          "secondaryValue": "28"
+        },
+        "originalTorque": {
+          "raw": "260 | 300 | 270 | 270 | 250",
+          "parsedValues": ["260", "300", "270", "270", "250"],
+          "primaryValue": "260",
+          "secondaryValue": "300"
+        },
+        "torqueNmGain": {
+          "raw": "75 | 68 | 70 | 70 | 75",
+          "parsedValues": ["75", "68", "70", "70", "75"],
+          "primaryValue": "75",
+          "secondaryValue": "68"
+        },
+        "economyGainBhp": {
+          "raw": "15 | 15 | 15 | 12 | 15",
+          "parsedValues": ["15", "15", "15", "12", "15"],
+          "primaryValue": "15",
+          "secondaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "40 | 35 | 35 | 35 | 35",
+          "parsedValues": ["40", "35", "35", "35", "35"],
+          "primaryValue": "40",
+          "secondaryValue": "35"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "3.0",
+        "originalBhp": {
+          "raw": "130 | 150 | 110",
+          "parsedValues": ["130", "150", "110"],
+          "primaryValue": "130",
+          "secondaryValue": "150"
+        },
+        "powerBhpGain": {
+          "raw": "50 | 30 | 20",
+          "parsedValues": ["50", "30", "20"],
+          "primaryValue": "50",
+          "secondaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "300 | 350 | 276",
+          "parsedValues": ["300", "350", "276"],
+          "primaryValue": "300",
+          "secondaryValue": "350"
+        },
+        "torqueNmGain": {
+          "raw": "115 | 65 | 28",
+          "parsedValues": ["115", "65", "28"],
+          "primaryValue": "115",
+          "secondaryValue": "65"
+        },
+        "economyGainBhp": {
+          "raw": "25 | 15 | 10",
+          "parsedValues": ["25", "15", "10"],
+          "primaryValue": "25",
+          "secondaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "60 | 30 | 15",
+          "parsedValues": ["60", "30", "15"],
+          "primaryValue": "60",
+          "secondaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Nissan",
+    "model": "Armada",
+    "modelSlug": "armada",
+    "sourceProductId": 21657,
+    "sourceUrl": "https://viezu.com/shop/nissan-armada-all/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "3.5",
+        "originalBhp": {
+          "raw": "425",
+          "parsedValues": ["425"],
+          "primaryValue": "425"
+        },
+        "powerBhpGain": {
+          "raw": "43",
+          "parsedValues": ["43"],
+          "primaryValue": "43"
+        },
+        "originalTorque": {
+          "raw": "700",
+          "parsedValues": ["700"],
+          "primaryValue": "700"
+        },
+        "torqueNmGain": {
+          "raw": "70",
+          "parsedValues": ["70"],
+          "primaryValue": "70"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "5.6",
+        "originalBhp": {
+          "raw": "317 | 396",
+          "parsedValues": ["317", "396"],
+          "primaryValue": "317",
+          "secondaryValue": "396"
+        },
+        "powerBhpGain": {
+          "raw": "23 | 54",
+          "parsedValues": ["23", "54"],
+          "primaryValue": "23",
+          "secondaryValue": "54"
+        },
+        "originalTorque": {
+          "raw": "385 | 545",
+          "parsedValues": ["385", "545"],
+          "primaryValue": "385",
+          "secondaryValue": "545"
+        },
+        "torqueNmGain": {
+          "raw": "35 | 46",
+          "parsedValues": ["35", "46"],
+          "primaryValue": "35",
+          "secondaryValue": "46"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Nissan",
+    "model": "Altima",
+    "modelSlug": "altima",
+    "sourceProductId": 21655,
+    "sourceUrl": "https://viezu.com/shop/altima-all/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "3.5",
+        "originalBhp": {
+          "raw": "270",
+          "parsedValues": ["270"],
+          "primaryValue": "270"
+        },
+        "powerBhpGain": {
+          "raw": "47",
+          "parsedValues": ["47"],
+          "primaryValue": "47"
+        },
+        "originalTorque": {
+          "raw": "340",
+          "parsedValues": ["340"],
+          "primaryValue": "340"
+        },
+        "torqueNmGain": {
+          "raw": "42",
+          "parsedValues": ["42"],
+          "primaryValue": "42"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Nissan",
+    "model": "Almera",
+    "modelSlug": "almera",
+    "sourceProductId": 21652,
+    "sourceUrl": "https://viezu.com/shop/nissan-almera-all/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.5",
+        "originalBhp": {
+          "raw": "96",
+          "parsedValues": ["96"],
+          "primaryValue": "96"
+        },
+        "powerBhpGain": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "originalTorque": {
+          "raw": "136",
+          "parsedValues": ["136"],
+          "primaryValue": "136"
+        },
+        "torqueNmGain": {
+          "raw": "14",
+          "parsedValues": ["14"],
+          "primaryValue": "14"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.8",
+        "originalBhp": {
+          "raw": "113",
+          "parsedValues": ["113"],
+          "primaryValue": "113"
+        },
+        "powerBhpGain": {
+          "raw": "11",
+          "parsedValues": ["11"],
+          "primaryValue": "11"
+        },
+        "originalTorque": {
+          "raw": "158",
+          "parsedValues": ["158"],
+          "primaryValue": "158"
+        },
+        "torqueNmGain": {
+          "raw": "16",
+          "parsedValues": ["16"],
+          "primaryValue": "16"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "1.5",
+        "originalBhp": {
+          "raw": "82",
+          "parsedValues": ["82"],
+          "primaryValue": "82"
+        },
+        "powerBhpGain": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "185",
+          "parsedValues": ["185"],
+          "primaryValue": "185"
+        },
+        "torqueNmGain": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "economyGainBhp": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 22500
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.2",
+        "originalBhp": {
+          "raw": "112 | 136",
+          "parsedValues": ["112", "136"],
+          "primaryValue": "112",
+          "secondaryValue": "136"
+        },
+        "powerBhpGain": {
+          "raw": "28 | 27",
+          "parsedValues": ["28", "27"],
+          "primaryValue": "28",
+          "secondaryValue": "27"
+        },
+        "originalTorque": {
+          "raw": "248 | 304",
+          "parsedValues": ["248", "304"],
+          "primaryValue": "248",
+          "secondaryValue": "304"
+        },
+        "torqueNmGain": {
+          "raw": "52 | 56",
+          "parsedValues": ["52", "56"],
+          "primaryValue": "52",
+          "secondaryValue": "56"
+        },
+        "economyGainBhp": {
+          "raw": "15 | 15",
+          "parsedValues": ["15", "15"],
+          "primaryValue": "15",
+          "secondaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "25 | 30",
+          "parsedValues": ["25", "30"],
+          "primaryValue": "25",
+          "secondaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Nissan",
+    "model": "370Z",
+    "modelSlug": "370z",
+    "sourceProductId": 21650,
+    "sourceUrl": "https://viezu.com/shop/nissan-370z-all/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "3.7",
+        "originalBhp": {
+          "raw": "328 | 331 | 344",
+          "parsedValues": ["328", "331", "344"],
+          "primaryValue": "328",
+          "secondaryValue": "331"
+        },
+        "powerBhpGain": {
+          "raw": "20 | 17 | 16",
+          "parsedValues": ["20", "17", "16"],
+          "primaryValue": "20",
+          "secondaryValue": "17"
+        },
+        "originalTorque": {
+          "raw": "363 | 366 | 371",
+          "parsedValues": ["363", "366", "371"],
+          "primaryValue": "363",
+          "secondaryValue": "366"
+        },
+        "torqueNmGain": {
+          "raw": "20 | 17 | 15",
+          "parsedValues": ["20", "17", "15"],
+          "primaryValue": "20",
+          "secondaryValue": "17"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Nissan",
+    "model": "350Z",
+    "modelSlug": "350z",
+    "sourceProductId": 21648,
+    "sourceUrl": "https://viezu.com/shop/nissan-350z-all/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "3.5",
+        "originalBhp": {
+          "raw": "280 | 300 | 313 | 296",
+          "parsedValues": ["280", "300", "313", "296"],
+          "primaryValue": "280",
+          "secondaryValue": "300"
+        },
+        "powerBhpGain": {
+          "raw": "20 | 20 | 22 | 39",
+          "parsedValues": ["20", "20", "22", "39"],
+          "primaryValue": "20",
+          "secondaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "350 | 350 | 358 | 358",
+          "parsedValues": ["350", "350", "358", "358"],
+          "primaryValue": "350",
+          "secondaryValue": "350"
+        },
+        "torqueNmGain": {
+          "raw": "20 | 20 | 20 | 20",
+          "parsedValues": ["20", "20", "20", "20"],
+          "primaryValue": "20",
+          "secondaryValue": "20"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  }
+]

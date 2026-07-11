@@ -1,0 +1,667 @@
+[
+  {
+    "make": "Aston Martin",
+    "model": "DB12",
+    "modelSlug": "db12",
+    "sourceProductId": 62643,
+    "sourceUrl": "https://viezu.com/shop/aston-martin-db12-2023-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "4.0",
+        "originalBhp": {
+          "raw": "680",
+          "parsedValues": ["680"],
+          "primaryValue": "680"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "800",
+          "parsedValues": ["800"],
+          "primaryValue": "800"
+        },
+        "torqueNmGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 39900
+      }
+    ]
+  },
+  {
+    "make": "Aston Martin",
+    "model": "DBX",
+    "modelSlug": "dbx",
+    "sourceProductId": 53565,
+    "sourceUrl": "https://viezu.com/shop/aston-martin-dbx-2020-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "4.0",
+        "originalBhp": {
+          "raw": "550",
+          "parsedValues": ["550"],
+          "primaryValue": "550"
+        },
+        "powerBhpGain": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "700",
+          "parsedValues": ["700"],
+          "primaryValue": "700"
+        },
+        "torqueNmGain": {
+          "raw": "120",
+          "parsedValues": ["120"],
+          "primaryValue": "120"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 69900
+      }
+    ]
+  },
+  {
+    "make": "Aston Martin",
+    "model": "Virage",
+    "modelSlug": "virage",
+    "sourceProductId": 17933,
+    "sourceUrl": "https://viezu.com/shop/aston-martin-virage-all/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "5.9",
+        "originalBhp": {
+          "raw": "490",
+          "parsedValues": ["490"],
+          "primaryValue": "490"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "570",
+          "parsedValues": ["570"],
+          "primaryValue": "570"
+        },
+        "torqueNmGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 49900
+      }
+    ]
+  },
+  {
+    "make": "Aston Martin",
+    "model": "Vantage",
+    "modelSlug": "vantage",
+    "sourceProductId": 17931,
+    "sourceUrl": "https://viezu.com/shop/aston-martin-vantage-2018-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "4.0",
+        "originalBhp": {
+          "raw": "510 | 530",
+          "parsedValues": ["510", "530"],
+          "primaryValue": "510",
+          "secondaryValue": "530"
+        },
+        "powerBhpGain": {
+          "raw": "60 | 40",
+          "parsedValues": ["60", "40"],
+          "primaryValue": "60",
+          "secondaryValue": "40"
+        },
+        "originalTorque": {
+          "raw": "685 | 685",
+          "parsedValues": ["685", "685"],
+          "primaryValue": "685",
+          "secondaryValue": "685"
+        },
+        "torqueNmGain": {
+          "raw": "135 | 135",
+          "parsedValues": ["135", "135"],
+          "primaryValue": "135",
+          "secondaryValue": "135"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 69900
+      }
+    ]
+  },
+  {
+    "make": "Aston Martin",
+    "model": "Vantage",
+    "modelSlug": "vantage",
+    "sourceProductId": 17927,
+    "sourceUrl": "https://viezu.com/shop/aston-martin-vantage-present-2018/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "4.7",
+        "originalBhp": {
+          "raw": "426 | 436 | 446",
+          "parsedValues": ["426", "436", "446"],
+          "primaryValue": "426",
+          "secondaryValue": "436"
+        },
+        "powerBhpGain": {
+          "raw": "24 | 24 | 14",
+          "parsedValues": ["24", "24", "14"],
+          "primaryValue": "24",
+          "secondaryValue": "24"
+        },
+        "originalTorque": {
+          "raw": "470 | 490 | 490",
+          "parsedValues": ["470", "490", "490"],
+          "primaryValue": "470",
+          "secondaryValue": "490"
+        },
+        "torqueNmGain": {
+          "raw": "30 | 25 | 25",
+          "parsedValues": ["30", "25", "25"],
+          "primaryValue": "30",
+          "secondaryValue": "25"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 49900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "4.3",
+        "originalBhp": {
+          "raw": "380 | 400",
+          "parsedValues": ["380", "400"],
+          "primaryValue": "380",
+          "secondaryValue": "400"
+        },
+        "powerBhpGain": {
+          "raw": "30 | 25",
+          "parsedValues": ["30", "25"],
+          "primaryValue": "30",
+          "secondaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "410 | 418",
+          "parsedValues": ["410", "418"],
+          "primaryValue": "410",
+          "secondaryValue": "418"
+        },
+        "torqueNmGain": {
+          "raw": "25 | 22",
+          "parsedValues": ["25", "22"],
+          "primaryValue": "25",
+          "secondaryValue": "22"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 49900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "5.9",
+        "originalBhp": {
+          "raw": "517 | 565",
+          "parsedValues": ["517", "565"],
+          "primaryValue": "517",
+          "secondaryValue": "565"
+        },
+        "powerBhpGain": {
+          "raw": "25 | 35",
+          "parsedValues": ["25", "35"],
+          "primaryValue": "25",
+          "secondaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "570 | 620",
+          "parsedValues": ["570", "620"],
+          "primaryValue": "570",
+          "secondaryValue": "620"
+        },
+        "torqueNmGain": {
+          "raw": "30 | 30",
+          "parsedValues": ["30", "30"],
+          "primaryValue": "30",
+          "secondaryValue": "30"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 49900
+      }
+    ]
+  },
+  {
+    "make": "Aston Martin",
+    "model": "Rapide",
+    "modelSlug": "rapide",
+    "sourceProductId": 17925,
+    "sourceUrl": "https://viezu.com/shop/aston-martin-rapide-all/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "5.9",
+        "originalBhp": {
+          "raw": "476 | 560",
+          "parsedValues": ["476", "560"],
+          "primaryValue": "476",
+          "secondaryValue": "560"
+        },
+        "powerBhpGain": {
+          "raw": "24 | 15",
+          "parsedValues": ["24", "15"],
+          "primaryValue": "24",
+          "secondaryValue": "15"
+        },
+        "originalTorque": {
+          "raw": "600 | 630",
+          "parsedValues": ["600", "630"],
+          "primaryValue": "600",
+          "secondaryValue": "630"
+        },
+        "torqueNmGain": {
+          "raw": "30 | 20",
+          "parsedValues": ["30", "20"],
+          "primaryValue": "30",
+          "secondaryValue": "20"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 49900
+      }
+    ]
+  },
+  {
+    "make": "Aston Martin",
+    "model": "DBS",
+    "modelSlug": "dbs",
+    "sourceProductId": 17922,
+    "sourceUrl": "https://viezu.com/shop/aston-martin-dbs-all/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "5.2",
+        "originalBhp": {
+          "raw": "725",
+          "parsedValues": ["725"],
+          "primaryValue": "725"
+        },
+        "powerBhpGain": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "900",
+          "parsedValues": ["900"],
+          "primaryValue": "900"
+        },
+        "torqueNmGain": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "5.9",
+        "originalBhp": {
+          "raw": "517",
+          "parsedValues": ["517"],
+          "primaryValue": "517"
+        },
+        "powerBhpGain": {
+          "raw": "23",
+          "parsedValues": ["23"],
+          "primaryValue": "23"
+        },
+        "originalTorque": {
+          "raw": "570",
+          "parsedValues": ["570"],
+          "primaryValue": "570"
+        },
+        "torqueNmGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 49900
+      }
+    ]
+  },
+  {
+    "make": "Aston Martin",
+    "model": "DB9",
+    "modelSlug": "db9",
+    "sourceProductId": 17920,
+    "sourceUrl": "https://viezu.com/shop/aston-martin-db9-all/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "5.9",
+        "originalBhp": {
+          "raw": "520",
+          "parsedValues": ["520"],
+          "primaryValue": "520"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "620",
+          "parsedValues": ["620"],
+          "primaryValue": "620"
+        },
+        "torqueNmGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 49900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "5.9",
+        "originalBhp": {
+          "raw": "450 | 470",
+          "parsedValues": ["450", "470"],
+          "primaryValue": "450",
+          "secondaryValue": "470"
+        },
+        "powerBhpGain": {
+          "raw": "25 | 30",
+          "parsedValues": ["25", "30"],
+          "primaryValue": "25",
+          "secondaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "570 | 600",
+          "parsedValues": ["570", "600"],
+          "primaryValue": "570",
+          "secondaryValue": "600"
+        },
+        "torqueNmGain": {
+          "raw": "30 | 20",
+          "parsedValues": ["30", "20"],
+          "primaryValue": "30",
+          "secondaryValue": "20"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 49900
+      }
+    ]
+  },
+  {
+    "make": "Aston Martin",
+    "model": "DB11",
+    "modelSlug": "db11",
+    "sourceProductId": 17917,
+    "sourceUrl": "https://viezu.com/shop/aston-martin-db11-2016-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "5.2",
+        "originalBhp": {
+          "raw": "608",
+          "parsedValues": ["608"],
+          "primaryValue": "608"
+        },
+        "powerBhpGain": {
+          "raw": "92",
+          "parsedValues": ["92"],
+          "primaryValue": "92"
+        },
+        "originalTorque": {
+          "raw": "700",
+          "parsedValues": ["700"],
+          "primaryValue": "700"
+        },
+        "torqueNmGain": {
+          "raw": "200",
+          "parsedValues": ["200"],
+          "primaryValue": "200"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "4.0",
+        "originalBhp": {
+          "raw": "510",
+          "parsedValues": ["510"],
+          "primaryValue": "510"
+        },
+        "powerBhpGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "originalTorque": {
+          "raw": "650",
+          "parsedValues": ["650"],
+          "primaryValue": "650"
+        },
+        "torqueNmGain": {
+          "raw": "150",
+          "parsedValues": ["150"],
+          "primaryValue": "150"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 69900
+      }
+    ]
+  }
+]

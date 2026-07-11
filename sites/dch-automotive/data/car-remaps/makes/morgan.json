@@ -1,0 +1,51 @@
+[
+  {
+    "make": "Morgan",
+    "model": "Roadster",
+    "modelSlug": "roadster",
+    "sourceProductId": 62032,
+    "sourceUrl": "https://viezu.com/shop/morgan-roadster-all/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "3.0",
+        "originalBhp": {
+          "raw": "223",
+          "parsedValues": ["223"],
+          "primaryValue": "223"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "279",
+          "parsedValues": ["279"],
+          "primaryValue": "279"
+        },
+        "torqueNmGain": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 34900
+      }
+    ]
+  }
+]
