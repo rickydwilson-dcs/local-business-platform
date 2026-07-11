@@ -1,0 +1,107 @@
+[
+  {
+    "make": "LDV",
+    "model": "V80",
+    "modelSlug": "v80",
+    "sourceProductId": 55843,
+    "sourceUrl": "https://viezu.com/shop/ldv-v80-all/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.5",
+        "originalBhp": {
+          "raw": "130",
+          "parsedValues": ["130"],
+          "primaryValue": "130"
+        },
+        "powerBhpGain": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "330",
+          "parsedValues": ["330"],
+          "primaryValue": "330"
+        },
+        "torqueNmGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "12",
+          "parsedValues": ["12"],
+          "primaryValue": "12"
+        },
+        "economyGainNm": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "LDV",
+    "model": "Maxus",
+    "modelSlug": "maxus",
+    "sourceProductId": 54449,
+    "sourceUrl": "https://viezu.com/shop/ldv-maxus-2005-2007/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.5",
+        "originalBhp": {
+          "raw": "105 | 95",
+          "parsedValues": ["105", "95"],
+          "primaryValue": "105",
+          "secondaryValue": "95"
+        },
+        "powerBhpGain": {
+          "raw": "15 | 25",
+          "parsedValues": ["15", "25"],
+          "primaryValue": "15",
+          "secondaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "280 | 250",
+          "parsedValues": ["280", "250"],
+          "primaryValue": "280",
+          "secondaryValue": "250"
+        },
+        "torqueNmGain": {
+          "raw": "30 | 60",
+          "parsedValues": ["30", "60"],
+          "primaryValue": "30",
+          "secondaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "7 | 12",
+          "parsedValues": ["7", "12"],
+          "primaryValue": "7",
+          "secondaryValue": "12"
+        },
+        "economyGainNm": {
+          "raw": "15 | 30",
+          "parsedValues": ["15", "30"],
+          "primaryValue": "15",
+          "secondaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  }
+]

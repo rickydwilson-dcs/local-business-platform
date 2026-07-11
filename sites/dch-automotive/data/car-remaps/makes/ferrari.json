@@ -1,0 +1,939 @@
+[
+  {
+    "make": "Ferrari",
+    "model": "SF90",
+    "modelSlug": "sf90",
+    "sourceProductId": 58295,
+    "sourceUrl": "https://viezu.com/shop/ferrari-sf90-all/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "4.0",
+        "originalBhp": {
+          "raw": "1000",
+          "parsedValues": ["1000"],
+          "primaryValue": "1000"
+        },
+        "powerBhpGain": {
+          "raw": "100",
+          "parsedValues": ["100"],
+          "primaryValue": "100"
+        },
+        "originalTorque": {
+          "raw": "900",
+          "parsedValues": ["900"],
+          "primaryValue": "900"
+        },
+        "torqueNmGain": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 99900
+      }
+    ]
+  },
+  {
+    "make": "Ferrari",
+    "model": "Portofino",
+    "modelSlug": "portofino",
+    "sourceProductId": 19510,
+    "sourceUrl": "https://viezu.com/shop/ferrari-portofino-2017-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "3.9",
+        "originalBhp": {
+          "raw": "600 | 620",
+          "parsedValues": ["600", "620"],
+          "primaryValue": "600",
+          "secondaryValue": "620"
+        },
+        "powerBhpGain": {
+          "raw": "90 | 70",
+          "parsedValues": ["90", "70"],
+          "primaryValue": "90",
+          "secondaryValue": "70"
+        },
+        "originalTorque": {
+          "raw": "760 | 760",
+          "parsedValues": ["760", "760"],
+          "primaryValue": "760",
+          "secondaryValue": "760"
+        },
+        "torqueNmGain": {
+          "raw": "150 | 150",
+          "parsedValues": ["150", "150"],
+          "primaryValue": "150",
+          "secondaryValue": "150"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 99900
+      }
+    ]
+  },
+  {
+    "make": "Ferrari",
+    "model": "M575",
+    "modelSlug": "m575",
+    "sourceProductId": 19508,
+    "sourceUrl": "https://viezu.com/shop/ferrari-m575-all/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "5.7",
+        "originalBhp": {
+          "raw": "515",
+          "parsedValues": ["515"],
+          "primaryValue": "515"
+        },
+        "powerBhpGain": {
+          "raw": "22",
+          "parsedValues": ["22"],
+          "primaryValue": "22"
+        },
+        "originalTorque": {
+          "raw": "589",
+          "parsedValues": ["589"],
+          "primaryValue": "589"
+        },
+        "torqueNmGain": {
+          "raw": "23",
+          "parsedValues": ["23"],
+          "primaryValue": "23"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 39900
+      }
+    ]
+  },
+  {
+    "make": "Ferrari",
+    "model": "GTC 4 Lusso",
+    "modelSlug": "gtc-4-lusso",
+    "sourceProductId": 19505,
+    "sourceUrl": "https://viezu.com/shop/ferrari-gtc-4-lusso-2016-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "3.9",
+        "originalBhp": {
+          "raw": "610",
+          "parsedValues": ["610"],
+          "primaryValue": "610"
+        },
+        "powerBhpGain": {
+          "raw": "110",
+          "parsedValues": ["110"],
+          "primaryValue": "110"
+        },
+        "originalTorque": {
+          "raw": "760",
+          "parsedValues": ["760"],
+          "primaryValue": "760"
+        },
+        "torqueNmGain": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "6.3",
+        "originalBhp": {
+          "raw": "690",
+          "parsedValues": ["690"],
+          "primaryValue": "690"
+        },
+        "powerBhpGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "697",
+          "parsedValues": ["697"],
+          "primaryValue": "697"
+        },
+        "torqueNmGain": {
+          "raw": "28",
+          "parsedValues": ["28"],
+          "primaryValue": "28"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 69900
+      }
+    ]
+  },
+  {
+    "make": "Ferrari",
+    "model": "FF",
+    "modelSlug": "ff",
+    "sourceProductId": 19503,
+    "sourceUrl": "https://viezu.com/shop/ferrari-ff-all/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "6.3",
+        "originalBhp": {
+          "raw": "660",
+          "parsedValues": ["660"],
+          "primaryValue": "660"
+        },
+        "powerBhpGain": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "683",
+          "parsedValues": ["683"],
+          "primaryValue": "683"
+        },
+        "torqueNmGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 99900
+      }
+    ]
+  },
+  {
+    "make": "Ferrari",
+    "model": "F8 Tributo",
+    "modelSlug": "f8-tributo",
+    "sourceProductId": 19501,
+    "sourceUrl": "https://viezu.com/shop/ferrari-f8-tributo-2020-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "3.9",
+        "originalBhp": {
+          "raw": "710",
+          "parsedValues": ["710"],
+          "primaryValue": "710"
+        },
+        "powerBhpGain": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "originalTorque": {
+          "raw": "770",
+          "parsedValues": ["770"],
+          "primaryValue": "770"
+        },
+        "torqueNmGain": {
+          "raw": "130",
+          "parsedValues": ["130"],
+          "primaryValue": "130"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 99900
+      }
+    ]
+  },
+  {
+    "make": "Ferrari",
+    "model": "F430",
+    "modelSlug": "f430",
+    "sourceProductId": 19499,
+    "sourceUrl": "https://viezu.com/shop/ferrari-f430-all/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "4.3",
+        "originalBhp": {
+          "raw": "490 | 510",
+          "parsedValues": ["490", "510"],
+          "primaryValue": "490",
+          "secondaryValue": "510"
+        },
+        "powerBhpGain": {
+          "raw": "40 | 40",
+          "parsedValues": ["40", "40"],
+          "primaryValue": "40",
+          "secondaryValue": "40"
+        },
+        "originalTorque": {
+          "raw": "465 | 470",
+          "parsedValues": ["465", "470"],
+          "primaryValue": "465",
+          "secondaryValue": "470"
+        },
+        "torqueNmGain": {
+          "raw": "30 | 30",
+          "parsedValues": ["30", "30"],
+          "primaryValue": "30",
+          "secondaryValue": "30"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 69900
+      }
+    ]
+  },
+  {
+    "make": "Ferrari",
+    "model": "F12 Berlinetta",
+    "modelSlug": "f12-berlinetta",
+    "sourceProductId": 19497,
+    "sourceUrl": "https://viezu.com/shop/ferrari-f12-berlinetta-all/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "6.3",
+        "originalBhp": {
+          "raw": "740",
+          "parsedValues": ["740"],
+          "primaryValue": "740"
+        },
+        "powerBhpGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "690",
+          "parsedValues": ["690"],
+          "primaryValue": "690"
+        },
+        "torqueNmGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 59900
+      }
+    ]
+  },
+  {
+    "make": "Ferrari",
+    "model": "California",
+    "modelSlug": "california",
+    "sourceProductId": 19494,
+    "sourceUrl": "https://viezu.com/shop/ferrari-california-all/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "3.9",
+        "originalBhp": {
+          "raw": "560",
+          "parsedValues": ["560"],
+          "primaryValue": "560"
+        },
+        "powerBhpGain": {
+          "raw": "100",
+          "parsedValues": ["100"],
+          "primaryValue": "100"
+        },
+        "originalTorque": {
+          "raw": "755",
+          "parsedValues": ["755"],
+          "primaryValue": "755"
+        },
+        "torqueNmGain": {
+          "raw": "95",
+          "parsedValues": ["95"],
+          "primaryValue": "95"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "4.3",
+        "originalBhp": {
+          "raw": "460",
+          "parsedValues": ["460"],
+          "primaryValue": "460"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "485",
+          "parsedValues": ["485"],
+          "primaryValue": "485"
+        },
+        "torqueNmGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 69900
+      }
+    ]
+  },
+  {
+    "make": "Ferrari",
+    "model": "812",
+    "modelSlug": "812",
+    "sourceProductId": 19492,
+    "sourceUrl": "https://viezu.com/shop/ferrari-812-2017-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "6.5",
+        "originalBhp": {
+          "raw": "800",
+          "parsedValues": ["800"],
+          "primaryValue": "800"
+        },
+        "powerBhpGain": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "718",
+          "parsedValues": ["718"],
+          "primaryValue": "718"
+        },
+        "torqueNmGain": {
+          "raw": "32",
+          "parsedValues": ["32"],
+          "primaryValue": "32"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 99900
+      }
+    ]
+  },
+  {
+    "make": "Ferrari",
+    "model": "612 Scaglietti",
+    "modelSlug": "612-scaglietti",
+    "sourceProductId": 19490,
+    "sourceUrl": "https://viezu.com/shop/ferrari-612-scaglietti-all/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "5.7",
+        "originalBhp": {
+          "raw": "540",
+          "parsedValues": ["540"],
+          "primaryValue": "540"
+        },
+        "powerBhpGain": {
+          "raw": "24",
+          "parsedValues": ["24"],
+          "primaryValue": "24"
+        },
+        "originalTorque": {
+          "raw": "588",
+          "parsedValues": ["588"],
+          "primaryValue": "588"
+        },
+        "torqueNmGain": {
+          "raw": "19",
+          "parsedValues": ["19"],
+          "primaryValue": "19"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 59900
+      }
+    ]
+  },
+  {
+    "make": "Ferrari",
+    "model": "599 GTB/GTO",
+    "modelSlug": "599-gtb-gto",
+    "sourceProductId": 19488,
+    "sourceUrl": "https://viezu.com/shop/ferrari-599-gtb-gto-all/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "6.0",
+        "originalBhp": {
+          "raw": "620 | 670",
+          "parsedValues": ["620", "670"],
+          "primaryValue": "620",
+          "secondaryValue": "670"
+        },
+        "powerBhpGain": {
+          "raw": "25 | 10",
+          "parsedValues": ["25", "10"],
+          "primaryValue": "25",
+          "secondaryValue": "10"
+        },
+        "originalTorque": {
+          "raw": "608 | 620",
+          "parsedValues": ["608", "620"],
+          "primaryValue": "608",
+          "secondaryValue": "620"
+        },
+        "torqueNmGain": {
+          "raw": "27 | 15",
+          "parsedValues": ["27", "15"],
+          "primaryValue": "27",
+          "secondaryValue": "15"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 59900
+      }
+    ]
+  },
+  {
+    "make": "Ferrari",
+    "model": "488",
+    "modelSlug": "488",
+    "sourceProductId": 19484,
+    "sourceUrl": "https://viezu.com/shop/ferrari-488-2015-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "3.9",
+        "originalBhp": {
+          "raw": "670 | 720",
+          "parsedValues": ["670", "720"],
+          "primaryValue": "670",
+          "secondaryValue": "720"
+        },
+        "powerBhpGain": {
+          "raw": "50 | 50",
+          "parsedValues": ["50", "50"],
+          "primaryValue": "50",
+          "secondaryValue": "50"
+        },
+        "originalTorque": {
+          "raw": "760 | 770",
+          "parsedValues": ["760", "770"],
+          "primaryValue": "760",
+          "secondaryValue": "770"
+        },
+        "torqueNmGain": {
+          "raw": "90 | 130",
+          "parsedValues": ["90", "130"],
+          "primaryValue": "90",
+          "secondaryValue": "130"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 99900
+      }
+    ]
+  },
+  {
+    "make": "Ferrari",
+    "model": "458",
+    "modelSlug": "458",
+    "sourceProductId": 19482,
+    "sourceUrl": "https://viezu.com/shop/ferrari-458-all/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "4.5",
+        "originalBhp": {
+          "raw": "600 | 570",
+          "parsedValues": ["600", "570"],
+          "primaryValue": "600",
+          "secondaryValue": "570"
+        },
+        "powerBhpGain": {
+          "raw": "25 | 30",
+          "parsedValues": ["25", "30"],
+          "primaryValue": "25",
+          "secondaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "540 | 540",
+          "parsedValues": ["540", "540"],
+          "primaryValue": "540",
+          "secondaryValue": "540"
+        },
+        "torqueNmGain": {
+          "raw": "30 | 30",
+          "parsedValues": ["30", "30"],
+          "primaryValue": "30",
+          "secondaryValue": "30"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 69900
+      }
+    ]
+  },
+  {
+    "make": "Ferrari",
+    "model": "456",
+    "modelSlug": "456",
+    "sourceProductId": 19480,
+    "sourceUrl": "https://viezu.com/shop/ferrari-456-all/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "5.5",
+        "originalBhp": {
+          "raw": "428",
+          "parsedValues": ["428"],
+          "primaryValue": "428"
+        },
+        "powerBhpGain": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "originalTorque": {
+          "raw": "490",
+          "parsedValues": ["490"],
+          "primaryValue": "490"
+        },
+        "torqueNmGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 39900
+      }
+    ]
+  },
+  {
+    "make": "Ferrari",
+    "model": "360",
+    "modelSlug": "360",
+    "sourceProductId": 19478,
+    "sourceUrl": "https://viezu.com/shop/ferrari-360-all/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "3.6",
+        "originalBhp": {
+          "raw": "394 | 420 | 405",
+          "parsedValues": ["394", "420", "405"],
+          "primaryValue": "394",
+          "secondaryValue": "420"
+        },
+        "powerBhpGain": {
+          "raw": "20 | 20 | 20",
+          "parsedValues": ["20", "20", "20"],
+          "primaryValue": "20",
+          "secondaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "373 | 373 | 373",
+          "parsedValues": ["373", "373", "373"],
+          "primaryValue": "373",
+          "secondaryValue": "373"
+        },
+        "torqueNmGain": {
+          "raw": "20 | 20 | 20",
+          "parsedValues": ["20", "20", "20"],
+          "primaryValue": "20",
+          "secondaryValue": "20"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 59900
+      }
+    ]
+  },
+  {
+    "make": "Ferrari",
+    "model": "F355",
+    "modelSlug": "f355",
+    "sourceProductId": 19476,
+    "sourceUrl": "https://viezu.com/shop/ferrari-f355-all/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "3.5",
+        "originalBhp": {
+          "raw": "380",
+          "parsedValues": ["380"],
+          "primaryValue": "380"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "360",
+          "parsedValues": ["360"],
+          "primaryValue": "360"
+        },
+        "torqueNmGain": {
+          "raw": "28",
+          "parsedValues": ["28"],
+          "primaryValue": "28"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 39900
+      }
+    ]
+  }
+]

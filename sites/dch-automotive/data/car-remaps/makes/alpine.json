@@ -1,0 +1,55 @@
+[
+  {
+    "make": "Alpine",
+    "model": "A110",
+    "modelSlug": "a110",
+    "sourceProductId": 17915,
+    "sourceUrl": "https://viezu.com/shop/alpine-a110-2017-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.8",
+        "originalBhp": {
+          "raw": "252 | 292",
+          "parsedValues": ["252", "292"],
+          "primaryValue": "252",
+          "secondaryValue": "292"
+        },
+        "powerBhpGain": {
+          "raw": "33 | 18",
+          "parsedValues": ["33", "18"],
+          "primaryValue": "33",
+          "secondaryValue": "18"
+        },
+        "originalTorque": {
+          "raw": "320 | 320",
+          "parsedValues": ["320", "320"],
+          "primaryValue": "320",
+          "secondaryValue": "320"
+        },
+        "torqueNmGain": {
+          "raw": "110 | 120",
+          "parsedValues": ["110", "120"],
+          "primaryValue": "110",
+          "secondaryValue": "120"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  }
+]

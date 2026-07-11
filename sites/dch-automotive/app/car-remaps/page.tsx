@@ -1,9 +1,12 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { Schema } from '@platform/core-components';
 import { FuelSavingsCalculator } from '@/components/fuel-savings-calculator';
+import { CarRemapsReadyReckoner } from '@/components/car-remaps-ready-reckoner';
 import { FaqAccordion } from '@/components/faq-accordion';
 import { getImageUrl } from '@/lib/image';
 import { absUrl } from '@/lib/site';
+import { listMakes } from '@/lib/car-remaps/repository';
 
 export const metadata: Metadata = {
   title: 'Car Remaps | DCH Automotive — Viezu Approved Dealer',
@@ -222,7 +225,9 @@ const CERTIFICATIONS = [
   'Viezu Approved Dealer',
 ];
 
-export default function CarRemapsPage() {
+export default async function CarRemapsPage() {
+  const makes = await listMakes();
+
   return (
     <>
       {/* Hero */}
@@ -482,27 +487,46 @@ export default function CarRemapsPage() {
         </div>
       </section>
 
-      {/* Viezu vehicle-selector widget */}
+      {/* Browse by Make — SEO interlinking to per-make performance/pricing pages.
+          Separate from the interactive ready reckoner below (this section is
+          plain server-rendered links, crawlable without JS). */}
+      <section className="py-24 bg-[#11100D] border-y border-white/5">
+        <div className="container mx-auto px-6">
+          <div className="mb-16 max-w-2xl">
+            <h2 className="text-4xl font-heading font-black uppercase tracking-tight mb-4">
+              Browse Remap Prices by <span className="text-brand-primary">Make</span>
+            </h2>
+            <p className="text-white/60 font-sans">
+              Performance figures and Economy Tuning prices for every make we support — find your
+              vehicle&apos;s manufacturer below.
+            </p>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
+            {makes.map((make) => (
+              <Link
+                key={make.slug}
+                href={`/car-remaps/${make.slug}`}
+                className="block bg-surface-card border border-surface-card-border px-4 py-3 text-center text-sm font-heading font-bold uppercase tracking-tight hover:border-brand-primary hover:text-brand-primary transition-colors"
+              >
+                {make.name}
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Car Remaps Ready Reckoner — DCH-owned interactive vehicle finder over our synced catalogue */}
       <section className="py-24 container mx-auto px-6">
         <div className="mb-10 text-center max-w-2xl mx-auto">
           <h2 className="text-4xl font-heading font-black uppercase tracking-tight mb-4">
             Check What&apos;s Available for Your Vehicle
           </h2>
           <p className="text-white/60 font-sans">
-            Select your vehicle below — powered directly by Viezu, our tuning technology partner.
+            Select your make, model, fuel type and variant below to see performance figures and
+            Economy Tuning gains for your exact vehicle.
           </p>
         </div>
-        <div className="max-w-4xl mx-auto border-2 border-surface-card-border overflow-hidden bg-white">
-          <iframe
-            src="https://viezu.com/dealer?id=33805671920f0d02e6d18f630985aace"
-            title="Viezu vehicle tuning finder for DCH Automotive"
-            className="w-full h-[950px] md:h-[1050px] block"
-            loading="lazy"
-          />
-        </div>
-        <p className="text-center text-xs text-white/40 mt-4 font-sans">
-          This tool is provided directly by Viezu Technologies and opens results within this page.
-        </p>
+        <CarRemapsReadyReckoner />
       </section>
 
       {/* Fleet Enquiry Form (static — see note in car-remaps-stitch conversion) */}
@@ -626,6 +650,26 @@ export default function CarRemapsPage() {
 
       {/* FAQs */}
       <FaqAccordion items={CAR_REMAPS_FAQS} title="Car Remaps Frequently Asked Questions" />
+
+      {/* Developer Integration — MCP Endpoint */}
+      <section className="py-8 border-t border-white/5">
+        <div className="container mx-auto px-6">
+          <p className="text-xs text-white/40 font-sans leading-relaxed max-w-2xl">
+            <span className="font-heading font-bold uppercase tracking-widest text-white/50 block mb-2">
+              For Developers
+            </span>
+            The car remaps catalogue is available via Model Context Protocol (MCP) at{' '}
+            <code className="bg-surface-card/50 px-1.5 py-0.5 rounded text-[0.85em] text-white/70 font-mono">
+              /api/mcp
+            </code>
+            — agents and MCP clients can query the{' '}
+            <code className="bg-surface-card/50 px-1.5 py-0.5 rounded text-[0.85em] text-white/70 font-mono">
+              lookup_vehicle_tuning
+            </code>
+            tool to retrieve performance specs and pricing programmatically.
+          </p>
+        </div>
+      </section>
 
       {/* Certifications */}
       <section className="py-12 border-t border-white/5 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">

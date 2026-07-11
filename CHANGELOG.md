@@ -6,6 +6,14 @@ Notable platform-level changes to the Local Business Platform. Site-specific cha
 
 ---
 
+## 2026-07-11
+
+### Sites
+
+- `sites/dch-automotive`'s Car Remaps feature rebuilt around DCH-owned data: the embedded Viezu iframe is replaced by an interactive ready reckoner, ~83 crawlable per-make AEO pages with `Product`/`Service` JSON-LD, a progressive public JSON API, and an MCP endpoint (`lookup_vehicle_tuning` tool) — all reading through one shared repository. See `sites/dch-automotive/CHANGELOG.md` and `sites/dch-automotive/docs/car-remaps-runbook.md` for the full build and its scope-matching mechanism (Viezu's own live AJAX vehicle-finder cascade, not WooCommerce categories, which were tried and found unreliable).
+
+---
+
 ## 2026-07-09
 
 ### Sites

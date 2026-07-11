@@ -1,0 +1,2847 @@
+[
+  {
+    "make": "Land Rover",
+    "model": "Velar",
+    "modelSlug": "velar",
+    "sourceProductId": 20809,
+    "sourceUrl": "https://viezu.com/shop/land-rover-velar-2017-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "3.0",
+        "originalBhp": {
+          "raw": "394",
+          "parsedValues": ["394"],
+          "primaryValue": "394"
+        },
+        "powerBhpGain": {
+          "raw": "21",
+          "parsedValues": ["21"],
+          "primaryValue": "21"
+        },
+        "originalTorque": {
+          "raw": "550",
+          "parsedValues": ["550"],
+          "primaryValue": "550"
+        },
+        "torqueNmGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 39900
+      },
+      {
+        "fuelType": "Hybrid Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "204",
+          "parsedValues": ["204"],
+          "primaryValue": "204"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "430",
+          "parsedValues": ["430"],
+          "primaryValue": "430"
+        },
+        "torqueNmGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 34900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "5.0",
+        "originalBhp": {
+          "raw": "542",
+          "parsedValues": ["542"],
+          "primaryValue": "542"
+        },
+        "powerBhpGain": {
+          "raw": "58",
+          "parsedValues": ["58"],
+          "primaryValue": "58"
+        },
+        "originalTorque": {
+          "raw": "680",
+          "parsedValues": ["680"],
+          "primaryValue": "680"
+        },
+        "torqueNmGain": {
+          "raw": "100",
+          "parsedValues": ["100"],
+          "primaryValue": "100"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 59900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "180 | 240",
+          "parsedValues": ["180", "240"],
+          "primaryValue": "180",
+          "secondaryValue": "240"
+        },
+        "powerBhpGain": {
+          "raw": "30 | 20",
+          "parsedValues": ["30", "20"],
+          "primaryValue": "30",
+          "secondaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "430 | 500",
+          "parsedValues": ["430", "500"],
+          "primaryValue": "430",
+          "secondaryValue": "500"
+        },
+        "torqueNmGain": {
+          "raw": "60 | 50",
+          "parsedValues": ["60", "50"],
+          "primaryValue": "60",
+          "secondaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "15 | 10",
+          "parsedValues": ["15", "10"],
+          "primaryValue": "15",
+          "secondaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "30 | 25",
+          "parsedValues": ["30", "25"],
+          "primaryValue": "30",
+          "secondaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "3.0",
+        "originalBhp": {
+          "raw": "275 | 300",
+          "parsedValues": ["275", "300"],
+          "primaryValue": "275",
+          "secondaryValue": "300"
+        },
+        "powerBhpGain": {
+          "raw": "30 | 50",
+          "parsedValues": ["30", "50"],
+          "primaryValue": "30",
+          "secondaryValue": "50"
+        },
+        "originalTorque": {
+          "raw": "625 | 700",
+          "parsedValues": ["625", "700"],
+          "primaryValue": "625",
+          "secondaryValue": "700"
+        },
+        "torqueNmGain": {
+          "raw": "50 | 50",
+          "parsedValues": ["50", "50"],
+          "primaryValue": "50",
+          "secondaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "15 | 25",
+          "parsedValues": ["15", "25"],
+          "primaryValue": "15",
+          "secondaryValue": "25"
+        },
+        "economyGainNm": {
+          "raw": "25 | 25",
+          "parsedValues": ["25", "25"],
+          "primaryValue": "25",
+          "secondaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "250 | 300",
+          "parsedValues": ["250", "300"],
+          "primaryValue": "250",
+          "secondaryValue": "300"
+        },
+        "powerBhpGain": {
+          "raw": "20 | 20",
+          "parsedValues": ["20", "20"],
+          "primaryValue": "20",
+          "secondaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "365 | 400",
+          "parsedValues": ["365", "400"],
+          "primaryValue": "365",
+          "secondaryValue": "400"
+        },
+        "torqueNmGain": {
+          "raw": "75 | 50",
+          "parsedValues": ["75", "50"],
+          "primaryValue": "75",
+          "secondaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "3.0",
+        "originalBhp": {
+          "raw": "340 | 380",
+          "parsedValues": ["340", "380"],
+          "primaryValue": "340",
+          "secondaryValue": "380"
+        },
+        "powerBhpGain": {
+          "raw": "60 | 20",
+          "parsedValues": ["60", "20"],
+          "primaryValue": "60",
+          "secondaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "450 | 460",
+          "parsedValues": ["450", "460"],
+          "primaryValue": "450",
+          "secondaryValue": "460"
+        },
+        "torqueNmGain": {
+          "raw": "50 | 40",
+          "parsedValues": ["50", "40"],
+          "primaryValue": "50",
+          "secondaryValue": "40"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 39900
+      }
+    ]
+  },
+  {
+    "make": "Land Rover",
+    "model": "Range Rover / Sport",
+    "modelSlug": "range-rover-sport",
+    "sourceProductId": 20803,
+    "sourceUrl": "https://viezu.com/shop/land-rover-range-rover-sport-2018-present/",
+    "variations": [
+      {
+        "fuelType": "Diesel Hybrid",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "204",
+          "parsedValues": ["204"],
+          "primaryValue": "204"
+        },
+        "powerBhpGain": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "430",
+          "parsedValues": ["430"],
+          "primaryValue": "430"
+        },
+        "torqueNmGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "12",
+          "parsedValues": ["12"],
+          "primaryValue": "12"
+        },
+        "economyGainNm": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol Hybrid",
+        "variant": "3.0",
+        "originalBhp": {
+          "raw": "296 | 242",
+          "parsedValues": ["296", "242"],
+          "primaryValue": "296",
+          "secondaryValue": "242"
+        },
+        "powerBhpGain": {
+          "raw": "34 | 58",
+          "parsedValues": ["34", "58"],
+          "primaryValue": "34",
+          "secondaryValue": "58"
+        },
+        "originalTorque": {
+          "raw": "640 | 660",
+          "parsedValues": ["640", "660"],
+          "primaryValue": "640",
+          "secondaryValue": "660"
+        },
+        "torqueNmGain": {
+          "raw": "60 | 40",
+          "parsedValues": ["60", "40"],
+          "primaryValue": "60",
+          "secondaryValue": "40"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 39900
+      },
+      {
+        "fuelType": "Diesel Hybrid",
+        "variant": "3.0",
+        "originalBhp": {
+          "raw": "351 | 301",
+          "parsedValues": ["351", "301"],
+          "primaryValue": "351",
+          "secondaryValue": "301"
+        },
+        "powerBhpGain": {
+          "raw": "30 | 29",
+          "parsedValues": ["30", "29"],
+          "primaryValue": "30",
+          "secondaryValue": "29"
+        },
+        "originalTorque": {
+          "raw": "700 | 650",
+          "parsedValues": ["700", "650"],
+          "primaryValue": "700",
+          "secondaryValue": "650"
+        },
+        "torqueNmGain": {
+          "raw": "60 | 50",
+          "parsedValues": ["60", "50"],
+          "primaryValue": "60",
+          "secondaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "15 | 15",
+          "parsedValues": ["15", "15"],
+          "primaryValue": "15",
+          "secondaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "30 | 25",
+          "parsedValues": ["30", "25"],
+          "primaryValue": "30",
+          "secondaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 39900
+      },
+      {
+        "fuelType": "Petrol Hybrid",
+        "variant": "3.0",
+        "originalBhp": {
+          "raw": "400 | 440 | 460",
+          "parsedValues": ["400", "440", "460"],
+          "primaryValue": "400",
+          "secondaryValue": "440"
+        },
+        "powerBhpGain": {
+          "raw": "50 | 40 | 20",
+          "parsedValues": ["50", "40", "20"],
+          "primaryValue": "50",
+          "secondaryValue": "40"
+        },
+        "originalTorque": {
+          "raw": "550 | 620 | 620",
+          "parsedValues": ["550", "620", "620"],
+          "primaryValue": "550",
+          "secondaryValue": "620"
+        },
+        "torqueNmGain": {
+          "raw": "100 | 60 | 60",
+          "parsedValues": ["100", "60", "60"],
+          "primaryValue": "100",
+          "secondaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 39900
+      },
+      {
+        "fuelType": "Petrol Hybrid",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "404",
+          "parsedValues": ["404"],
+          "primaryValue": "404"
+        },
+        "powerBhpGain": {
+          "raw": "21",
+          "parsedValues": ["21"],
+          "primaryValue": "21"
+        },
+        "originalTorque": {
+          "raw": "640",
+          "parsedValues": ["640"],
+          "primaryValue": "640"
+        },
+        "torqueNmGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "4.4",
+        "originalBhp": {
+          "raw": "530 | 615",
+          "parsedValues": ["530", "615"],
+          "primaryValue": "530",
+          "secondaryValue": "615"
+        },
+        "powerBhpGain": {
+          "raw": "40 | 100",
+          "parsedValues": ["40", "100"],
+          "primaryValue": "40",
+          "secondaryValue": "100"
+        },
+        "originalTorque": {
+          "raw": "700 | 750",
+          "parsedValues": ["700", "750"],
+          "primaryValue": "700",
+          "secondaryValue": "750"
+        },
+        "torqueNmGain": {
+          "raw": "60 | 100",
+          "parsedValues": ["60", "100"],
+          "primaryValue": "60",
+          "secondaryValue": "100"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 59900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "237",
+          "parsedValues": ["237"],
+          "primaryValue": "237"
+        },
+        "powerBhpGain": {
+          "raw": "13",
+          "parsedValues": ["13"],
+          "primaryValue": "13"
+        },
+        "originalTorque": {
+          "raw": "500",
+          "parsedValues": ["500"],
+          "primaryValue": "500"
+        },
+        "torqueNmGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "7",
+          "parsedValues": ["7"],
+          "primaryValue": "7"
+        },
+        "economyGainNm": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "5.0",
+        "originalBhp": {
+          "raw": "525 | 565 | 575",
+          "parsedValues": ["525", "565", "575"],
+          "primaryValue": "525",
+          "secondaryValue": "565"
+        },
+        "powerBhpGain": {
+          "raw": "75 | 35 | 25",
+          "parsedValues": ["75", "35", "25"],
+          "primaryValue": "75",
+          "secondaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "680 | 700 | 700",
+          "parsedValues": ["680", "700", "700"],
+          "primaryValue": "680",
+          "secondaryValue": "700"
+        },
+        "torqueNmGain": {
+          "raw": "110 | 100 | 100",
+          "parsedValues": ["110", "100", "100"],
+          "primaryValue": "110",
+          "secondaryValue": "100"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 59900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "300 | 286",
+          "parsedValues": ["300", "286"],
+          "primaryValue": "300",
+          "secondaryValue": "286"
+        },
+        "powerBhpGain": {
+          "raw": "20 | 34",
+          "parsedValues": ["20", "34"],
+          "primaryValue": "20",
+          "secondaryValue": "34"
+        },
+        "originalTorque": {
+          "raw": "400 | 400",
+          "parsedValues": ["400", "400"],
+          "primaryValue": "400",
+          "secondaryValue": "400"
+        },
+        "torqueNmGain": {
+          "raw": "50 | 50",
+          "parsedValues": ["50", "50"],
+          "primaryValue": "50",
+          "secondaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "3.0",
+        "originalBhp": {
+          "raw": "340",
+          "parsedValues": ["340"],
+          "primaryValue": "340"
+        },
+        "powerBhpGain": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "originalTorque": {
+          "raw": "450",
+          "parsedValues": ["450"],
+          "primaryValue": "450"
+        },
+        "torqueNmGain": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 39900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "3.0",
+        "originalBhp": {
+          "raw": "249 | 275 | 258 | 295",
+          "parsedValues": ["249", "275", "258", "295"],
+          "primaryValue": "249",
+          "secondaryValue": "275"
+        },
+        "powerBhpGain": {
+          "raw": "56 | 30 | 42 | 30",
+          "parsedValues": ["56", "30", "42", "30"],
+          "primaryValue": "56",
+          "secondaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "600 | 625 | 600 | 650",
+          "parsedValues": ["600", "625", "600", "650"],
+          "primaryValue": "600",
+          "secondaryValue": "625"
+        },
+        "torqueNmGain": {
+          "raw": "75 | 50 | 50 | 50",
+          "parsedValues": ["75", "50", "50", "50"],
+          "primaryValue": "75",
+          "secondaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "30 | 15 | 20 | 15",
+          "parsedValues": ["30", "15", "20", "15"],
+          "primaryValue": "30",
+          "secondaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "40 | 25 | 25 | 25",
+          "parsedValues": ["40", "25", "25", "25"],
+          "primaryValue": "40",
+          "secondaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "4.4",
+        "originalBhp": {
+          "raw": "339",
+          "parsedValues": ["339"],
+          "primaryValue": "339"
+        },
+        "powerBhpGain": {
+          "raw": "51",
+          "parsedValues": ["51"],
+          "primaryValue": "51"
+        },
+        "originalTorque": {
+          "raw": "740",
+          "parsedValues": ["740"],
+          "primaryValue": "740"
+        },
+        "torqueNmGain": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "economyGainBhp": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "economyGainNm": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 59900
+      }
+    ]
+  },
+  {
+    "make": "Land Rover",
+    "model": "Range Rover / Sport",
+    "modelSlug": "range-rover-sport",
+    "sourceProductId": 20785,
+    "sourceUrl": "https://viezu.com/shop/land-rover-range-rover-sport-1994-2002/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.5",
+        "originalBhp": {
+          "raw": "136",
+          "parsedValues": ["136"],
+          "primaryValue": "136"
+        },
+        "powerBhpGain": {
+          "raw": "29",
+          "parsedValues": ["29"],
+          "primaryValue": "29"
+        },
+        "originalTorque": {
+          "raw": "270",
+          "parsedValues": ["270"],
+          "primaryValue": "270"
+        },
+        "torqueNmGain": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Land Rover",
+    "model": "Freelander",
+    "modelSlug": "freelander",
+    "sourceProductId": 20782,
+    "sourceUrl": "https://viezu.com/shop/land-rover-freelander-2010-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "240",
+          "parsedValues": ["240"],
+          "primaryValue": "240"
+        },
+        "powerBhpGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "340",
+          "parsedValues": ["340"],
+          "primaryValue": "340"
+        },
+        "torqueNmGain": {
+          "raw": "100",
+          "parsedValues": ["100"],
+          "primaryValue": "100"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.2",
+        "originalBhp": {
+          "raw": "150 | 190",
+          "parsedValues": ["150", "190"],
+          "primaryValue": "150",
+          "secondaryValue": "190"
+        },
+        "powerBhpGain": {
+          "raw": "65 | 25",
+          "parsedValues": ["65", "25"],
+          "primaryValue": "65",
+          "secondaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "420 | 420",
+          "parsedValues": ["420", "420"],
+          "primaryValue": "420",
+          "secondaryValue": "420"
+        },
+        "torqueNmGain": {
+          "raw": "60 | 50",
+          "parsedValues": ["60", "50"],
+          "primaryValue": "60",
+          "secondaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "30 | 10",
+          "parsedValues": ["30", "10"],
+          "primaryValue": "30",
+          "secondaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "30 | 25",
+          "parsedValues": ["30", "25"],
+          "primaryValue": "30",
+          "secondaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Land Rover",
+    "model": "Freelander",
+    "modelSlug": "freelander",
+    "sourceProductId": 20780,
+    "sourceUrl": "https://viezu.com/shop/land-rover-freelander-2007-2010/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "3.2",
+        "originalBhp": {
+          "raw": "232",
+          "parsedValues": ["232"],
+          "primaryValue": "232"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "317",
+          "parsedValues": ["317"],
+          "primaryValue": "317"
+        },
+        "torqueNmGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 38900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.2",
+        "originalBhp": {
+          "raw": "150 | 160",
+          "parsedValues": ["150", "160"],
+          "primaryValue": "150",
+          "secondaryValue": "160"
+        },
+        "powerBhpGain": {
+          "raw": "40 | 25",
+          "parsedValues": ["40", "25"],
+          "primaryValue": "40",
+          "secondaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "400 | 400",
+          "parsedValues": ["400", "400"],
+          "primaryValue": "400",
+          "secondaryValue": "400"
+        },
+        "torqueNmGain": {
+          "raw": "60 | 60",
+          "parsedValues": ["60", "60"],
+          "primaryValue": "60",
+          "secondaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "20 | 10",
+          "parsedValues": ["20", "10"],
+          "primaryValue": "20",
+          "secondaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "30 | 30",
+          "parsedValues": ["30", "30"],
+          "primaryValue": "30",
+          "secondaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Land Rover",
+    "model": "Freelander",
+    "modelSlug": "freelander",
+    "sourceProductId": 20777,
+    "sourceUrl": "https://viezu.com/shop/land-rover-freelander-2003-2007/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "1.8",
+        "originalBhp": {
+          "raw": "115",
+          "parsedValues": ["115"],
+          "primaryValue": "115"
+        },
+        "powerBhpGain": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "originalTorque": {
+          "raw": "160",
+          "parsedValues": ["160"],
+          "primaryValue": "160"
+        },
+        "torqueNmGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "112",
+          "parsedValues": ["112"],
+          "primaryValue": "112"
+        },
+        "powerBhpGain": {
+          "raw": "28",
+          "parsedValues": ["28"],
+          "primaryValue": "28"
+        },
+        "originalTorque": {
+          "raw": "260",
+          "parsedValues": ["260"],
+          "primaryValue": "260"
+        },
+        "torqueNmGain": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "2.5",
+        "originalBhp": {
+          "raw": "177",
+          "parsedValues": ["177"],
+          "primaryValue": "177"
+        },
+        "powerBhpGain": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "originalTorque": {
+          "raw": "240",
+          "parsedValues": ["240"],
+          "primaryValue": "240"
+        },
+        "torqueNmGain": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Land Rover",
+    "model": "Evoque",
+    "modelSlug": "evoque",
+    "sourceProductId": 20774,
+    "sourceUrl": "https://viezu.com/shop/land-rover-evoque-2019-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol Hybrid",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "300",
+          "parsedValues": ["300"],
+          "primaryValue": "300"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "400",
+          "parsedValues": ["400"],
+          "primaryValue": "400"
+        },
+        "torqueNmGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Diesel Hybrid",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "163",
+          "parsedValues": ["163"],
+          "primaryValue": "163"
+        },
+        "powerBhpGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "originalTorque": {
+          "raw": "380",
+          "parsedValues": ["380"],
+          "primaryValue": "380"
+        },
+        "torqueNmGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "economyGainNm": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol Hybrid",
+        "variant": "1.5",
+        "originalBhp": {
+          "raw": "309",
+          "parsedValues": ["309"],
+          "primaryValue": "309"
+        },
+        "powerBhpGain": {
+          "raw": "31",
+          "parsedValues": ["31"],
+          "primaryValue": "31"
+        },
+        "originalTorque": {
+          "raw": "540",
+          "parsedValues": ["540"],
+          "primaryValue": "540"
+        },
+        "torqueNmGain": {
+          "raw": "55",
+          "parsedValues": ["55"],
+          "primaryValue": "55"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 32900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "150 | 180 | 240 | 161",
+          "parsedValues": ["150", "180", "240", "161"],
+          "primaryValue": "150",
+          "secondaryValue": "180"
+        },
+        "powerBhpGain": {
+          "raw": "40 | 30 | 20 | 50",
+          "parsedValues": ["40", "30", "20", "50"],
+          "primaryValue": "40",
+          "secondaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "380 | 430 | 500 | 380",
+          "parsedValues": ["380", "430", "500", "380"],
+          "primaryValue": "380",
+          "secondaryValue": "430"
+        },
+        "torqueNmGain": {
+          "raw": "80 | 60 | 50 | 60",
+          "parsedValues": ["80", "60", "50", "60"],
+          "primaryValue": "80",
+          "secondaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "20 | 15 | 10 | 25",
+          "parsedValues": ["20", "15", "10", "25"],
+          "primaryValue": "20",
+          "secondaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "40 | 30 | 25 | 30",
+          "parsedValues": ["40", "30", "25", "30"],
+          "primaryValue": "40",
+          "secondaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "200 | 250 | 300",
+          "parsedValues": ["200", "250", "300"],
+          "primaryValue": "200",
+          "secondaryValue": "250"
+        },
+        "powerBhpGain": {
+          "raw": "30 | 20 | 20",
+          "parsedValues": ["30", "20", "20"],
+          "primaryValue": "30",
+          "secondaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "320 | 365 | 400",
+          "parsedValues": ["320", "365", "400"],
+          "primaryValue": "320",
+          "secondaryValue": "365"
+        },
+        "torqueNmGain": {
+          "raw": "80 | 75 | 50",
+          "parsedValues": ["80", "75", "50"],
+          "primaryValue": "80",
+          "secondaryValue": "75"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Land Rover",
+    "model": "Evoque",
+    "modelSlug": "evoque",
+    "sourceProductId": 20771,
+    "sourceUrl": "https://viezu.com/shop/land-rover-evoque-2015-2018/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "150 | 150 | 180",
+          "parsedValues": ["150", "150", "180"],
+          "primaryValue": "150",
+          "secondaryValue": "150"
+        },
+        "powerBhpGain": {
+          "raw": "40 | 40 | 30",
+          "parsedValues": ["40", "40", "30"],
+          "primaryValue": "40",
+          "secondaryValue": "40"
+        },
+        "originalTorque": {
+          "raw": "380 | 380 | 430",
+          "parsedValues": ["380", "380", "430"],
+          "primaryValue": "380",
+          "secondaryValue": "380"
+        },
+        "torqueNmGain": {
+          "raw": "60 | 60 | 60",
+          "parsedValues": ["60", "60", "60"],
+          "primaryValue": "60",
+          "secondaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "20 | 20 | 15",
+          "parsedValues": ["20", "20", "15"],
+          "primaryValue": "20",
+          "secondaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "30 | 30 | 30",
+          "parsedValues": ["30", "30", "30"],
+          "primaryValue": "30",
+          "secondaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "240",
+          "parsedValues": ["240"],
+          "primaryValue": "240"
+        },
+        "powerBhpGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "340",
+          "parsedValues": ["340"],
+          "primaryValue": "340"
+        },
+        "torqueNmGain": {
+          "raw": "100",
+          "parsedValues": ["100"],
+          "primaryValue": "100"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Land Rover",
+    "model": "Evoque",
+    "modelSlug": "evoque",
+    "sourceProductId": 20768,
+    "sourceUrl": "https://viezu.com/shop/land-rover-evoque-2011-2015/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "240",
+          "parsedValues": ["240"],
+          "primaryValue": "240"
+        },
+        "powerBhpGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "340",
+          "parsedValues": ["340"],
+          "primaryValue": "340"
+        },
+        "torqueNmGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.2",
+        "originalBhp": {
+          "raw": "150 | 190 | 150",
+          "parsedValues": ["150", "190", "150"],
+          "primaryValue": "150",
+          "secondaryValue": "190"
+        },
+        "powerBhpGain": {
+          "raw": "40 | 25 | 65",
+          "parsedValues": ["40", "25", "65"],
+          "primaryValue": "40",
+          "secondaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "380 | 420 | 400",
+          "parsedValues": ["380", "420", "400"],
+          "primaryValue": "380",
+          "secondaryValue": "420"
+        },
+        "torqueNmGain": {
+          "raw": "80 | 50 | 70",
+          "parsedValues": ["80", "50", "70"],
+          "primaryValue": "80",
+          "secondaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "20 | 10 | 30",
+          "parsedValues": ["20", "10", "30"],
+          "primaryValue": "20",
+          "secondaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "40 | 25 | 35",
+          "parsedValues": ["40", "25", "35"],
+          "primaryValue": "40",
+          "secondaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Land Rover",
+    "model": "Discovery Sport",
+    "modelSlug": "discovery-sport",
+    "sourceProductId": 20765,
+    "sourceUrl": "https://viezu.com/shop/land-rover-discovery-sport-2019-present/",
+    "variations": [
+      {
+        "fuelType": "Diesel Hybrid",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "204 | 150",
+          "parsedValues": ["204", "150"],
+          "primaryValue": "204",
+          "secondaryValue": "150"
+        },
+        "powerBhpGain": {
+          "raw": "25 | 40",
+          "parsedValues": ["25", "40"],
+          "primaryValue": "25",
+          "secondaryValue": "40"
+        },
+        "originalTorque": {
+          "raw": "430 | 380",
+          "parsedValues": ["430", "380"],
+          "primaryValue": "430",
+          "secondaryValue": "380"
+        },
+        "torqueNmGain": {
+          "raw": "50 | 90",
+          "parsedValues": ["50", "90"],
+          "primaryValue": "50",
+          "secondaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "12 | 20",
+          "parsedValues": ["12", "20"],
+          "primaryValue": "12",
+          "secondaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "25 | 45",
+          "parsedValues": ["25", "45"],
+          "primaryValue": "25",
+          "secondaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol Hybrid",
+        "variant": "1.5",
+        "originalBhp": {
+          "raw": "309",
+          "parsedValues": ["309"],
+          "primaryValue": "309"
+        },
+        "powerBhpGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "540",
+          "parsedValues": ["540"],
+          "primaryValue": "540"
+        },
+        "torqueNmGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "3.0",
+        "originalBhp": {
+          "raw": "360",
+          "parsedValues": ["360"],
+          "primaryValue": "360"
+        },
+        "powerBhpGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "originalTorque": {
+          "raw": "660",
+          "parsedValues": ["660"],
+          "primaryValue": "660"
+        },
+        "torqueNmGain": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 34900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "250 | 200",
+          "parsedValues": ["250", "200"],
+          "primaryValue": "250",
+          "secondaryValue": "200"
+        },
+        "powerBhpGain": {
+          "raw": "20 | 30",
+          "parsedValues": ["20", "30"],
+          "primaryValue": "20",
+          "secondaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "365 | 320",
+          "parsedValues": ["365", "320"],
+          "primaryValue": "365",
+          "secondaryValue": "320"
+        },
+        "torqueNmGain": {
+          "raw": "75 | 80",
+          "parsedValues": ["75", "80"],
+          "primaryValue": "75",
+          "secondaryValue": "80"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "3.0",
+        "originalBhp": {
+          "raw": "300",
+          "parsedValues": ["300"],
+          "primaryValue": "300"
+        },
+        "powerBhpGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "700",
+          "parsedValues": ["700"],
+          "primaryValue": "700"
+        },
+        "torqueNmGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 34900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "240 | 200 | 180",
+          "parsedValues": ["240", "200", "180"],
+          "primaryValue": "240",
+          "secondaryValue": "200"
+        },
+        "powerBhpGain": {
+          "raw": "20 | 35 | 55",
+          "parsedValues": ["20", "35", "55"],
+          "primaryValue": "20",
+          "secondaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "500 | 430 | 430",
+          "parsedValues": ["500", "430", "430"],
+          "primaryValue": "500",
+          "secondaryValue": "430"
+        },
+        "torqueNmGain": {
+          "raw": "50 | 60 | 60",
+          "parsedValues": ["50", "60", "60"],
+          "primaryValue": "50",
+          "secondaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "10 | 17 | 27",
+          "parsedValues": ["10", "17", "27"],
+          "primaryValue": "10",
+          "secondaryValue": "17"
+        },
+        "economyGainNm": {
+          "raw": "25 | 30 | 30",
+          "parsedValues": ["25", "30", "30"],
+          "primaryValue": "25",
+          "secondaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Land Rover",
+    "model": "Discovery Sport",
+    "modelSlug": "discovery-sport",
+    "sourceProductId": 20761,
+    "sourceUrl": "https://viezu.com/shop/land-rover-discovery-sport-2014-2019/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "150 | 180",
+          "parsedValues": ["150", "180"],
+          "primaryValue": "150",
+          "secondaryValue": "180"
+        },
+        "powerBhpGain": {
+          "raw": "40 | 30",
+          "parsedValues": ["40", "30"],
+          "primaryValue": "40",
+          "secondaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "380 | 380",
+          "parsedValues": ["380", "380"],
+          "primaryValue": "380",
+          "secondaryValue": "380"
+        },
+        "torqueNmGain": {
+          "raw": "90 | 60",
+          "parsedValues": ["90", "60"],
+          "primaryValue": "90",
+          "secondaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "20 | 15",
+          "parsedValues": ["20", "15"],
+          "primaryValue": "20",
+          "secondaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "45 | 30",
+          "parsedValues": ["45", "30"],
+          "primaryValue": "45",
+          "secondaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.2",
+        "originalBhp": {
+          "raw": "190 | 150",
+          "parsedValues": ["190", "150"],
+          "primaryValue": "190",
+          "secondaryValue": "150"
+        },
+        "powerBhpGain": {
+          "raw": "25 | 40",
+          "parsedValues": ["25", "40"],
+          "primaryValue": "25",
+          "secondaryValue": "40"
+        },
+        "originalTorque": {
+          "raw": "420 | 380",
+          "parsedValues": ["420", "380"],
+          "primaryValue": "420",
+          "secondaryValue": "380"
+        },
+        "torqueNmGain": {
+          "raw": "50 | 60",
+          "parsedValues": ["50", "60"],
+          "primaryValue": "50",
+          "secondaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "10 | 20",
+          "parsedValues": ["10", "20"],
+          "primaryValue": "10",
+          "secondaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "25 | 30",
+          "parsedValues": ["25", "30"],
+          "primaryValue": "25",
+          "secondaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "240 | 290",
+          "parsedValues": ["240", "290"],
+          "primaryValue": "240",
+          "secondaryValue": "290"
+        },
+        "powerBhpGain": {
+          "raw": "30 | 30",
+          "parsedValues": ["30", "30"],
+          "primaryValue": "30",
+          "secondaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "340 | 400",
+          "parsedValues": ["340", "400"],
+          "primaryValue": "340",
+          "secondaryValue": "400"
+        },
+        "torqueNmGain": {
+          "raw": "100 | 50",
+          "parsedValues": ["100", "50"],
+          "primaryValue": "100",
+          "secondaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Land Rover",
+    "model": "Discovery",
+    "modelSlug": "discovery",
+    "sourceProductId": 20756,
+    "sourceUrl": "https://viezu.com/shop/land-rover-discovery-2017-2020/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "3.0",
+        "originalBhp": {
+          "raw": "306 | 258",
+          "parsedValues": ["306", "258"],
+          "primaryValue": "306",
+          "secondaryValue": "258"
+        },
+        "powerBhpGain": {
+          "raw": "24 | 42",
+          "parsedValues": ["24", "42"],
+          "primaryValue": "24",
+          "secondaryValue": "42"
+        },
+        "originalTorque": {
+          "raw": "700 | 600",
+          "parsedValues": ["700", "600"],
+          "primaryValue": "700",
+          "secondaryValue": "600"
+        },
+        "torqueNmGain": {
+          "raw": "60 | 50",
+          "parsedValues": ["60", "50"],
+          "primaryValue": "60",
+          "secondaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "10 | 20",
+          "parsedValues": ["10", "20"],
+          "primaryValue": "10",
+          "secondaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "30 | 25",
+          "parsedValues": ["30", "25"],
+          "primaryValue": "30",
+          "secondaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "240 | 180",
+          "parsedValues": ["240", "180"],
+          "primaryValue": "240",
+          "secondaryValue": "180"
+        },
+        "powerBhpGain": {
+          "raw": "20 | 30",
+          "parsedValues": ["20", "30"],
+          "primaryValue": "20",
+          "secondaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "500 | 420",
+          "parsedValues": ["500", "420"],
+          "primaryValue": "500",
+          "secondaryValue": "420"
+        },
+        "torqueNmGain": {
+          "raw": "50 | 70",
+          "parsedValues": ["50", "70"],
+          "primaryValue": "50",
+          "secondaryValue": "70"
+        },
+        "economyGainBhp": {
+          "raw": "10 | 15",
+          "parsedValues": ["10", "15"],
+          "primaryValue": "10",
+          "secondaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "25 | 35",
+          "parsedValues": ["25", "35"],
+          "primaryValue": "25",
+          "secondaryValue": "35"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "300",
+          "parsedValues": ["300"],
+          "primaryValue": "300"
+        },
+        "powerBhpGain": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "400",
+          "parsedValues": ["400"],
+          "primaryValue": "400"
+        },
+        "torqueNmGain": {
+          "raw": "48",
+          "parsedValues": ["48"],
+          "primaryValue": "48"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "3.0",
+        "originalBhp": {
+          "raw": "340",
+          "parsedValues": ["340"],
+          "primaryValue": "340"
+        },
+        "powerBhpGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "originalTorque": {
+          "raw": "450",
+          "parsedValues": ["450"],
+          "primaryValue": "450"
+        },
+        "torqueNmGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 39900
+      }
+    ]
+  },
+  {
+    "make": "Land Rover",
+    "model": "Discovery",
+    "modelSlug": "discovery",
+    "sourceProductId": 20752,
+    "sourceUrl": "https://viezu.com/shop/land-rover-discovery-2004-2016/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "4.4",
+        "originalBhp": {
+          "raw": "299",
+          "parsedValues": ["299"],
+          "primaryValue": "299"
+        },
+        "powerBhpGain": {
+          "raw": "19",
+          "parsedValues": ["19"],
+          "primaryValue": "19"
+        },
+        "originalTorque": {
+          "raw": "425",
+          "parsedValues": ["425"],
+          "primaryValue": "425"
+        },
+        "torqueNmGain": {
+          "raw": "23",
+          "parsedValues": ["23"],
+          "primaryValue": "23"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 39900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.7",
+        "originalBhp": {
+          "raw": "190",
+          "parsedValues": ["190"],
+          "primaryValue": "190"
+        },
+        "powerBhpGain": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "440",
+          "parsedValues": ["440"],
+          "primaryValue": "440"
+        },
+        "torqueNmGain": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "3.0",
+        "originalBhp": {
+          "raw": "256 | 211 | 245",
+          "parsedValues": ["256", "211", "245"],
+          "primaryValue": "256",
+          "secondaryValue": "211"
+        },
+        "powerBhpGain": {
+          "raw": "44 | 84 | 50",
+          "parsedValues": ["44", "84", "50"],
+          "primaryValue": "44",
+          "secondaryValue": "84"
+        },
+        "originalTorque": {
+          "raw": "600 | 520 | 600",
+          "parsedValues": ["600", "520", "600"],
+          "primaryValue": "600",
+          "secondaryValue": "520"
+        },
+        "torqueNmGain": {
+          "raw": "60 | 140 | 60",
+          "parsedValues": ["60", "140", "60"],
+          "primaryValue": "60",
+          "secondaryValue": "140"
+        },
+        "economyGainBhp": {
+          "raw": "20 | 40 | 25",
+          "parsedValues": ["20", "40", "25"],
+          "primaryValue": "20",
+          "secondaryValue": "40"
+        },
+        "economyGainNm": {
+          "raw": "30 | 70 | 30",
+          "parsedValues": ["30", "70", "30"],
+          "primaryValue": "30",
+          "secondaryValue": "70"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "5.0",
+        "originalBhp": {
+          "raw": "375",
+          "parsedValues": ["375"],
+          "primaryValue": "375"
+        },
+        "powerBhpGain": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "originalTorque": {
+          "raw": "510",
+          "parsedValues": ["510"],
+          "primaryValue": "510"
+        },
+        "torqueNmGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 49900
+      }
+    ]
+  },
+  {
+    "make": "Land Rover",
+    "model": "Discovery",
+    "modelSlug": "discovery",
+    "sourceProductId": 20750,
+    "sourceUrl": "https://viezu.com/shop/land-rover-discovery-1998-2004/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.5",
+        "originalBhp": {
+          "raw": "137",
+          "parsedValues": ["137"],
+          "primaryValue": "137"
+        },
+        "powerBhpGain": {
+          "raw": "23",
+          "parsedValues": ["23"],
+          "primaryValue": "23"
+        },
+        "originalTorque": {
+          "raw": "340",
+          "parsedValues": ["340"],
+          "primaryValue": "340"
+        },
+        "torqueNmGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Land Rover",
+    "model": "Defender",
+    "modelSlug": "defender",
+    "sourceProductId": 20746,
+    "sourceUrl": "https://viezu.com/shop/land-rover-defender-2019-present/",
+    "variations": [
+      {
+        "fuelType": "Petrol Hybrid",
+        "variant": "4.4",
+        "originalBhp": {
+          "raw": "626",
+          "parsedValues": ["626"],
+          "primaryValue": "626"
+        },
+        "powerBhpGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "originalTorque": {
+          "raw": "750",
+          "parsedValues": ["750"],
+          "primaryValue": "750"
+        },
+        "torqueNmGain": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 59900
+      },
+      {
+        "fuelType": "Petrol Hybrid",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "300",
+          "parsedValues": ["300"],
+          "primaryValue": "300"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "430",
+          "parsedValues": ["430"],
+          "primaryValue": "430"
+        },
+        "torqueNmGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 34900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "3.0",
+        "originalBhp": {
+          "raw": "296 | 250 | 197",
+          "parsedValues": ["296", "250", "197"],
+          "primaryValue": "296",
+          "secondaryValue": "250"
+        },
+        "powerBhpGain": {
+          "raw": "40 | 70 | 120",
+          "parsedValues": ["40", "70", "120"],
+          "primaryValue": "40",
+          "secondaryValue": "70"
+        },
+        "originalTorque": {
+          "raw": "650 | 570 | 500",
+          "parsedValues": ["650", "570", "500"],
+          "primaryValue": "650",
+          "secondaryValue": "570"
+        },
+        "torqueNmGain": {
+          "raw": "100 | 130 | 200",
+          "parsedValues": ["100", "130", "200"],
+          "primaryValue": "100",
+          "secondaryValue": "130"
+        },
+        "economyGainBhp": {
+          "raw": "20 | 35 | 60",
+          "parsedValues": ["20", "35", "60"],
+          "primaryValue": "20",
+          "secondaryValue": "35"
+        },
+        "economyGainNm": {
+          "raw": "50 | 65 | 100",
+          "parsedValues": ["50", "65", "100"],
+          "primaryValue": "50",
+          "secondaryValue": "65"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10% | 10%",
+          "parsedValues": ["10%", "10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 49900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "5.0",
+        "originalBhp": {
+          "raw": "550 | 525",
+          "parsedValues": ["550", "525"],
+          "primaryValue": "550",
+          "secondaryValue": "525"
+        },
+        "powerBhpGain": {
+          "raw": "50 | 75",
+          "parsedValues": ["50", "75"],
+          "primaryValue": "50",
+          "secondaryValue": "75"
+        },
+        "originalTorque": {
+          "raw": "600 | 625",
+          "parsedValues": ["600", "625"],
+          "primaryValue": "600",
+          "secondaryValue": "625"
+        },
+        "torqueNmGain": {
+          "raw": "100 | 75",
+          "parsedValues": ["100", "75"],
+          "primaryValue": "100",
+          "secondaryValue": "75"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 59900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "200",
+          "parsedValues": ["200"],
+          "primaryValue": "200"
+        },
+        "powerBhpGain": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "430",
+          "parsedValues": ["430"],
+          "primaryValue": "430"
+        },
+        "torqueNmGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 34900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "300",
+          "parsedValues": ["300"],
+          "primaryValue": "300"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "400",
+          "parsedValues": ["400"],
+          "primaryValue": "400"
+        },
+        "torqueNmGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 34900
+      }
+    ]
+  },
+  {
+    "make": "Land Rover",
+    "model": "Defender",
+    "modelSlug": "defender",
+    "sourceProductId": 20744,
+    "sourceUrl": "https://viezu.com/shop/land-rover-defender-2011-2018/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.2",
+        "originalBhp": {
+          "raw": "122",
+          "parsedValues": ["122"],
+          "primaryValue": "122"
+        },
+        "powerBhpGain": {
+          "raw": "38",
+          "parsedValues": ["38"],
+          "primaryValue": "38"
+        },
+        "originalTorque": {
+          "raw": "360",
+          "parsedValues": ["360"],
+          "primaryValue": "360"
+        },
+        "torqueNmGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Land Rover",
+    "model": "Defender",
+    "modelSlug": "defender",
+    "sourceProductId": 20742,
+    "sourceUrl": "https://viezu.com/shop/land-rover-defender-2007-2011/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.4",
+        "originalBhp": {
+          "raw": "122",
+          "parsedValues": ["122"],
+          "primaryValue": "122"
+        },
+        "powerBhpGain": {
+          "raw": "33",
+          "parsedValues": ["33"],
+          "primaryValue": "33"
+        },
+        "originalTorque": {
+          "raw": "360",
+          "parsedValues": ["360"],
+          "primaryValue": "360"
+        },
+        "torqueNmGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Land Rover",
+    "model": "Defender",
+    "modelSlug": "defender",
+    "sourceProductId": 20740,
+    "sourceUrl": "https://viezu.com/shop/land-rover-defender-2000-2007/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.5",
+        "originalBhp": {
+          "raw": "122",
+          "parsedValues": ["122"],
+          "primaryValue": "122"
+        },
+        "powerBhpGain": {
+          "raw": "28",
+          "parsedValues": ["28"],
+          "primaryValue": "28"
+        },
+        "originalTorque": {
+          "raw": "300",
+          "parsedValues": ["300"],
+          "primaryValue": "300"
+        },
+        "torqueNmGain": {
+          "raw": "65",
+          "parsedValues": ["65"],
+          "primaryValue": "65"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  }
+]

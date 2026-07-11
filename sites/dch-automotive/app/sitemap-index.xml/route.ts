@@ -14,6 +14,7 @@ import { siteConfig } from '@/site.config';
  * - /locations/sitemap.xml
  * - /blog/sitemap.xml
  * - /projects/sitemap.xml
+ * - /car-remaps/sitemap.xml
  */
 
 const SITEMAP_PATHS = [
@@ -22,6 +23,7 @@ const SITEMAP_PATHS = [
   '/locations/sitemap.xml',
   '/blog/sitemap.xml',
   '/projects/sitemap.xml',
+  '/car-remaps/sitemap.xml',
 ];
 
 async function discoverSitemaps(): Promise<string[]> {

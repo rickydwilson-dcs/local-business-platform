@@ -207,12 +207,12 @@ export default function HomePage() {
                 </li>
               ))}
             </ul>
-            <a
+            <Link
               href="/car-remaps"
               className="inline-block bg-transparent border-2 border-brand-primary text-brand-primary px-8 py-4 font-heading font-black uppercase tracking-widest hover:bg-brand-primary hover:text-white transition-all"
             >
               Inquire for Fleet
-            </a>
+            </Link>
           </div>
           <div className="relative">
             <div className="aspect-video relative rounded-lg overflow-hidden border border-white/10">
