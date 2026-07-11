@@ -70,20 +70,21 @@ Validation schemas come from `@platform/core-components` (imported via subpath, 
 
 ## Routes
 
-| Route                | Description                                                                                                                    |
-| -------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| `/`                  | Homepage — **bespoke**, hardcoded in `app/page.tsx`                                                                            |
-| `/car-remaps`        | Viezu ECU remapping catalogue — **bespoke**, hardcoded, includes an embedded Viezu dealer widget and a fuel savings calculator |
-| `/services`          | Services listing (MDX-driven)                                                                                                  |
-| `/services/[slug]`   | Service detail (MDX-driven)                                                                                                    |
-| `/locations`         | Locations listing (MDX-driven)                                                                                                 |
-| `/locations/[slug]`  | Location detail (MDX-driven)                                                                                                   |
-| `/blog`              | Blog listing (MDX-driven)                                                                                                      |
-| `/blog/[slug]`       | Blog post (MDX-driven)                                                                                                         |
-| `/projects`          | Projects listing (MDX-driven)                                                                                                  |
-| `/projects/[slug]`   | Project detail (MDX-driven)                                                                                                    |
-| `/reviews`           | Testimonials page — still generic base-template placeholder content, see outstanding items                                     |
-| `/about`, `/contact` | Bespoke static pages                                                                                                           |
+| Route                | Description                                                                                                                                                                                                                           |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `/`                  | Homepage — **bespoke**, hardcoded in `app/page.tsx`                                                                                                                                                                                   |
+| `/car-remaps`        | ECU remapping catalogue — **bespoke** intro/content, plus an interactive DCH-owned ready reckoner (`components/car-remaps-*.tsx`) and a fuel savings calculator. No longer embeds the Viezu iframe — see "Car Remaps Subsystem" below |
+| `/car-remaps/[make]` | Per-make AEO page — statically generated, real server-rendered performance tables + `Product`/`Service` JSON-LD, one per in-scope make (~83)                                                                                          |
+| `/services`          | Services listing (MDX-driven)                                                                                                                                                                                                         |
+| `/services/[slug]`   | Service detail (MDX-driven)                                                                                                                                                                                                           |
+| `/locations`         | Locations listing (MDX-driven)                                                                                                                                                                                                        |
+| `/locations/[slug]`  | Location detail (MDX-driven)                                                                                                                                                                                                          |
+| `/blog`              | Blog listing (MDX-driven)                                                                                                                                                                                                             |
+| `/blog/[slug]`       | Blog post (MDX-driven)                                                                                                                                                                                                                |
+| `/projects`          | Projects listing (MDX-driven)                                                                                                                                                                                                         |
+| `/projects/[slug]`   | Project detail (MDX-driven)                                                                                                                                                                                                           |
+| `/reviews`           | Testimonials page — still generic base-template placeholder content, see outstanding items                                                                                                                                            |
+| `/about`, `/contact` | Bespoke static pages                                                                                                                                                                                                                  |
 
 ## Key Files
 
@@ -102,8 +103,18 @@ Validation schemas come from `@platform/core-components` (imported via subpath, 
 
 ### Components
 
-- `components/*.tsx` — flat, bespoke components (`contact-form.tsx`, `cta-band.tsx`, `faq-accordion.tsx`, `page-hero.tsx`, `breadcrumb-bar.tsx`, `site-header.tsx`, `site-footer.tsx`, `fuel-savings-calculator.tsx`) — there is no `components/ui/` subdirectory on this site
+- `components/*.tsx` — flat, bespoke components (`contact-form.tsx`, `cta-band.tsx`, `faq-accordion.tsx`, `page-hero.tsx`, `breadcrumb-bar.tsx`, `site-header.tsx`, `site-footer.tsx`, `fuel-savings-calculator.tsx`, `car-remaps-ready-reckoner.tsx`, `car-remaps-selectors.tsx`, `car-remaps-results-table.tsx`) — there is no `components/ui/` subdirectory on this site
 - `components/pages/*.tsx` — bespoke page-template components for MDX-driven detail/listing pages (dark/orange-styled, specific to this site, not shared with other themes)
+
+## Car Remaps Subsystem
+
+`/car-remaps` was rebuilt in July 2026 to replace a third-party Viezu iframe with DCH-owned data. This is a substantial, mostly self-contained subsystem — read `docs/car-remaps-runbook.md` before touching any of it, and `lib/car-remaps/__fixtures__/README.md` for the full data-shape investigation behind every parser/config constant.
+
+- **`lib/car-remaps/`** — `types.ts` (shared types), `parsers.ts` (pure-function parsers + the scope-matching logic, fixture-tested in `parsers.test.ts`), `repository.ts` (the single read layer every page/API/MCP tool goes through), `schema.ts` (site-local `Product`/`Service` JSON-LD generator — deliberately not promoted to `@platform/core-components`, see the `TODO` comment), `url.ts`, `mcp-tools.ts`.
+- **`scripts/car-remaps/`** — the live sync pipeline (`sync.ts` orchestrates `fetch-marques.ts` → `fetch-store-api.ts` → `fetch-product-html.ts` → `normalize.ts`). Run via `pnpm --filter dch-automotive run car-remaps:sync` — manual only, before each deploy that ships Car Remaps changes, not on a schedule. Takes tens of minutes (walks Viezu's live catalogue + a marque/model AJAX cascade, politely rate-limited).
+- **`data/car-remaps/`** — the sync's committed output (`manifest.json`, `index.json`, `makes/<slug>.json`). The site reads this at build/runtime; it is **not** fetched live. Regenerate and commit it after any scope/parser fix.
+- **Scope determination is the trickiest part of this subsystem**: Viezu's WooCommerce categories do NOT cleanly separate cars/vans from bikes/HGV/agriculture/marine — that was tried and rejected. Scope instead walks Viezu's own `/dealer` widget's live AJAX cascade (`get_filter_brands`/`get_filter_models`, keyed on `vehicle-type`), which is what the widget itself uses to populate its dropdowns. This depends on an undocumented internal WordPress endpoint (nonce + `admin-ajax.php`), not a stable public API — if a future sync run starts failing or excluding real vehicles, check `docs/car-remaps-runbook.md` §5 first.
+- `app/api/car-remaps/lookup/route.ts` (progressive JSON API) and `app/api/[transport]/route.ts` (MCP endpoint, `lookup_vehicle_tuning` tool) both read through `lib/car-remaps/repository.ts` — no duplicated lookup logic.
 
 ## Change Philosophy
 

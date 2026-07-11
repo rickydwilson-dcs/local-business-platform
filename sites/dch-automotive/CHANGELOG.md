@@ -4,6 +4,20 @@ Vehicle security, fleet electrics and ECU remapping installer serving the South 
 
 ---
 
+## 2026-07-11
+
+### Features
+
+- **Car Remaps rebuilt around DCH-owned data, replacing the embedded Viezu iframe.** The `/car-remaps` page now has an interactive ready reckoner (cascading Make → Model → Fuel Type → Variant selectors backed by a progressive JSON API) instead of a third-party widget. New crawlable per-make AEO pages (`/car-remaps/[make]`, ~83 statically generated) render real server-side performance tables plus `Product`/`Service` JSON-LD. A new public JSON API (`/api/car-remaps/lookup`) and an MCP endpoint (`/api/[transport]`, `lookup_vehicle_tuning` tool) both read through one shared repository (`lib/car-remaps/repository.ts`), so there's no duplicated lookup logic. A new `llms.txt` documents both for LLM agents.
+- **Vehicle scope determination uses Viezu's own live vehicle-finder widget, not WooCommerce categories.** Categories were tried first and rejected — real investigation found the two largest category buckets mix cars, vans, and motorbikes with no clean split. The sync pipeline instead walks Viezu's `/dealer` widget's own AJAX cascade (`get_filter_brands`/`get_filter_models`) to build an authoritative (marque, model) scope index. See `docs/car-remaps-runbook.md` for the full mechanism, its data-quality risks, and how to re-run the sync.
+- A new manual sync pipeline (`pnpm --filter dch-automotive run car-remaps:sync`, `scripts/car-remaps/`) walks Viezu's live catalogue (~3,200 products) and writes the committed `data/car-remaps/` dataset the site reads at build/runtime — not a live API call per page.
+
+### Fixes
+
+- Two scope-matching bugs found and fixed the same day, both silently excluding real in-scope vehicles from the initial sync: a marque-abbreviation mismatch (Volkswagen cars use the "VW" abbreviation in Viezu's product names but the full "Volkswagen" spelling in the AJAX marque list) and a model-name normalizer that failed to strip a suffix pattern repeated after the year-range parenthetical on many product names (not VW-specific — affected nearly every marque). Re-synced after both fixes: in-scope vehicle count rose from 1,518 to 1,598 (+80), VW alone from 1 to 81 real models, and enrichment failures dropped from 6 to 0.
+
+---
+
 ## 2026-07-09
 
 ### Redesign & Launch
