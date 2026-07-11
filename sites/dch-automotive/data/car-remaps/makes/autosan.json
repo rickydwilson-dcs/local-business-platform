@@ -1,0 +1,51 @@
+[
+  {
+    "make": "Autosan",
+    "model": "Sancity",
+    "modelSlug": "sancity",
+    "sourceProductId": 29968,
+    "sourceUrl": "https://viezu.com/shop/autosan-sancity/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "8.3",
+        "originalBhp": {
+          "raw": "141",
+          "parsedValues": ["141"],
+          "primaryValue": "141"
+        },
+        "powerBhpGain": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "55",
+          "parsedValues": ["55"],
+          "primaryValue": "55"
+        },
+        "economyGainBhp": {
+          "raw": "7",
+          "parsedValues": ["7"],
+          "primaryValue": "7"
+        },
+        "economyGainNm": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      }
+    ]
+  }
+]

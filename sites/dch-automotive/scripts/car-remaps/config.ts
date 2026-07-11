@@ -67,12 +67,22 @@ export const EXCLUDED_NON_VEHICLE_CATEGORIES = [
 
 /**
  * `vehicle-type` values to walk via the `admin-ajax.php` marque/model
- * cascade for scope determination. Structured as a plain array so HGV
- * (`hgv-tuning`) could be added later by appending one entry — a config
- * switch, not a plugin system. See the fixtures README's marque-collision
- * guardrail before ever adding `hgv-tuning` or `bike-tuning` here.
+ * cascade for scope determination. Structured as a plain array — a config
+ * switch, not a plugin system — so another type could be appended the same
+ * way `hgv-tuning` was added 2026-07-11.
+ *
+ * `hgv-tuning` was checked against the fixtures README's marque-collision
+ * guardrail before being added: HGV marques use their own distinct naming
+ * on Viezu (e.g. "Ford Truck Tuning & ECU Remapping", "Mercedes Truck Tuning
+ * & ECU Remapping"), which `normalizeMarqueName` normalizes to `"ford
+ * truck"`/`"mercedes truck"` — not `"ford"`/`"mercedes"` — so HGV entries
+ * merge into the scope index without colliding with the car/van marques of
+ * the same base name. See `parsers.test.ts`'s "HGV scope (no collision with
+ * car/van marques)" suite for the executable proof. Still excludes
+ * `bike-tuning`, `agriculture-tuning`, `marine`, `motorhomes` — re-check the
+ * guardrail before ever adding one of those.
  */
-export const IN_SCOPE_WIDGET_VEHICLE_TYPES = ['cars', 'vans'] as const;
+export const IN_SCOPE_WIDGET_VEHICLE_TYPES = ['cars', 'vans', 'hgv-tuning'] as const;
 
 /**
  * The live `/dealer` widget page whose inline JS carries the page-load-scoped
@@ -86,6 +96,17 @@ export const VIEZU_DEALER_WIDGET_URL =
 
 /** Polite delay between successive live HTTP requests (ms). */
 export const FETCH_DELAY_MS = 400;
+
+/**
+ * Per-request timeout (ms) for every live fetch in the sync pipeline.
+ * Without this, a single unresponsive product page can hang the whole sync
+ * indefinitely — confirmed live 2026-07-11: a run stalled for 10+ minutes on
+ * one product with an established-but-silent TCP connection, no error, no
+ * progress. `fetchProductPerformanceData` already treats any thrown error
+ * (including an abort) as one more counted failure, not a fatal one, so this
+ * just turns "hangs forever" into "counts as a failure and moves on".
+ */
+export const FETCH_TIMEOUT_MS = 30_000;
 
 /** User-Agent sent on every live request (matches the fixture-capture policy). */
 export const USER_AGENT =

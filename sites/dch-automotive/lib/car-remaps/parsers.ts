@@ -370,21 +370,28 @@ export function normalizeModelName(raw: string): string {
 
 /**
  * Builds the normalized (marque, model) in-scope index from the raw `cars`
- * + `vans` AJAX marque lists and their fetched models. Marque keys that
- * normalize identically across `cars` and `vans` (the common case) are
- * merged into one entry with the union of both vehicle types' models.
- * Marques with a hyphenated-compound naming mismatch (e.g. Mercedes-Benz vs.
- * Mercedes) remain distinct keys — `isInScopeVehicle`'s first-token split
- * handles that case. Marques with a whole-word-abbreviation mismatch (e.g.
- * Volkswagen vs. VW) are additionally cross-aliased via `MARQUE_ALIASES`
- * below, since no prefix/suffix rule can derive one spelling from the other.
+ * + `vans` (+ optional `hgv`) AJAX marque lists and their fetched models.
+ * Marque keys that normalize identically across vehicle-type lists (the
+ * common case) are merged into one entry with the union of all matching
+ * types' models. Marques with a hyphenated-compound naming mismatch (e.g.
+ * Mercedes-Benz vs. Mercedes) remain distinct keys — `isInScopeVehicle`'s
+ * first-token split handles that case. Marques with a whole-word-abbreviation
+ * mismatch (e.g. Volkswagen vs. VW) are additionally cross-aliased via
+ * `MARQUE_ALIASES` below, since no prefix/suffix rule can derive one
+ * spelling from the other. HGV marques (e.g. "Ford Truck") normalize to a
+ * distinct key from their car/van namesake ("ford") by design — see
+ * `normalizeMarqueName`'s guardrail comment — so `hgv` marques merge safely
+ * into the same pooled list without a collision check of their own.
+ *
+ * `hgv` is optional (defaults to none) so existing cars/vans-only callers
+ * don't need to change.
  */
 export function buildScopeIndex(
-  marques: { cars: ScopeMarque[]; vans: ScopeMarque[] },
+  marques: { cars: ScopeMarque[]; vans: ScopeMarque[]; hgv?: ScopeMarque[] },
   modelsByMarque: Map<string, ScopeModel[]>
 ): ScopeIndex {
   const index: ScopeIndex = new Map();
-  const allMarques = [...marques.cars, ...marques.vans];
+  const allMarques = [...marques.cars, ...marques.vans, ...(marques.hgv ?? [])];
 
   for (const marque of allMarques) {
     const normalizedMarque = normalizeMarqueName(marque.name);
@@ -435,9 +442,20 @@ export function isInScopeVehicle(productName: string, index: ScopeIndex): boolea
   for (const marqueKey of marqueKeys) {
     // Tolerate the confirmed cars-vs-vans naming mismatch (e.g. index key
     // "mercedes-benz" but the Store API product name only says "Mercedes")
-    // by also trying just the marque key's first hyphen/space-separated
-    // token as a prefix.
-    const candidatePrefixes = Array.from(new Set([marqueKey, marqueKey.split(/[\s-]+/)[0]]));
+    // by also trying just the marque key's first hyphen-separated token as
+    // a prefix.
+    //
+    // Deliberately hyphen-only, NOT space-separated: a space-separated
+    // multi-word marque's first token can itself be a genuinely distinct,
+    // independently-populated marque — confirmed live with HGV scope
+    // (`"ford truck"` vs. car `"ford"`). Splitting on spaces there let a
+    // plain "Ford F-4000..." product falsely match under the unrelated HGV
+    // "ford truck" key via its first token, purely because that key
+    // happened to be tried first (longer keys sort first). Hyphenated
+    // compounds don't have this risk: every hyphenated marque confirmed in
+    // the real data (e.g. "Mercedes-Benz") is a single marque spelled two
+    // ways, not two independently-scoped marques sharing a leading word.
+    const candidatePrefixes = Array.from(new Set([marqueKey, marqueKey.split('-')[0]]));
 
     for (const prefix of candidatePrefixes) {
       if (!prefix || !lower.startsWith(`${prefix} `)) continue;

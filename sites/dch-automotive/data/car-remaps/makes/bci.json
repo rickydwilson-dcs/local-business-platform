@@ -1,0 +1,51 @@
+[
+  {
+    "make": "Bci",
+    "model": "Proma",
+    "modelSlug": "proma",
+    "sourceProductId": 29975,
+    "sourceUrl": "https://viezu.com/shop/bci-proma/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "8.3",
+        "originalBhp": {
+          "raw": "207",
+          "parsedValues": ["207"],
+          "primaryValue": "207"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "760",
+          "parsedValues": ["760"],
+          "primaryValue": "760"
+        },
+        "torqueNmGain": {
+          "raw": "70",
+          "parsedValues": ["70"],
+          "primaryValue": "70"
+        },
+        "economyGainBhp": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      }
+    ]
+  }
+]

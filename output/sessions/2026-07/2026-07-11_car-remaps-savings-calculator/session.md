@@ -35,9 +35,50 @@ The calculator (`components/fuel-savings-calculator.tsx`) was a generic fleet-le
 - [x] Verify `/api/fuel-prices/current` against the running dev server — returns real gov.uk data (petrol 149.80p, diesel 164.77p, week ending 2026-07-06).
 - [x] Verify the full `/api/car-remaps/lookup` cascade against a real multi-generation vehicle (Ford F-250, two `sourceProductId`s both offering Diesel 6.7) — confirmed `findMatchingVariation()`'s "take the first match" behavior resolves correctly, and that an empty `fuelSaving` value (e.g. the F-250's Petrol 6.2 variation) correctly falls through to the "no data" state rather than a bogus 0%/NaN.
 - [x] Server-rendered HTML of `/car-remaps` confirmed to contain the new calculator markup (labels, empty-state copy, selector `id`s).
-- [ ] Chrome browser extension wasn't connected this session, so no visual screenshot/interactive click-through was captured — recommend a quick manual check in-browser before shipping.
-- [ ] Commit on `feature/car-remaps-savings-calculator` (off `develop`), per this repo's git workflow — staging/main promotion not part of this pass unless requested.
+- [x] Committed on `feature/car-remaps-savings-calculator`, merged to `develop`, promoted `develop → staging → main` via `/deploy.changes` — all CI/E2E/watchdog gates green at every step.
+
+## Follow-up: HGV scope added (same day, `feature/car-remaps-hgv-scope`)
+
+User asked whether vans and lorries were both covered by the Car Remaps catalogue. Vans: yes.
+Lorries: no — `IN_SCOPE_WIDGET_VEHICLE_TYPES` was deliberately `['cars', 'vans']` only from the
+original build. Added `'hgv-tuning'`, which required generalizing `buildScopeIndex()` and
+`fetch-marques.ts` beyond their hardcoded `{cars, vans}` shape (previously never designed for a
+third vehicle type, despite a code comment anticipating it).
+
+**Bugs found and fixed along the way** (see `docs/car-remaps-runbook.md` §5 for full detail):
+
+1. `isInScopeVehicle()`'s marque-prefix fallback split on spaces as well as hyphens — safe before
+   (no space-separated marque ever shared a first word with an independently-scoped marque), but
+   HGV introduced exactly that case (`"Ford Truck"` vs. car `"Ford"`), causing a real false-positive
+   risk. Caught immediately by a new fixture-based unit test before ever running live. Fixed by
+   restricting the fallback to hyphens only.
+2. The sync had no fetch timeout anywhere — confirmed live when a sync run hung 10+ minutes on one
+   unresponsive Viezu page (`lsof` showed an `ESTABLISHED` connection that never responded). Added
+   a 30s `AbortSignal.timeout` to all three live-fetch call sites.
+3. The sync never deleted stale make files for marques that dropped out of scope between runs —
+   found when a transient scope-fetch failure for one marque (Jaecoo) left an orphaned file from
+   an earlier run. Fixed: `sync.ts` now removes any `makes/*.json` file not in the current run's
+   output.
+
+**Operational lesson, not just a code fix:** after the transient Jaecoo failure, the instinct was
+to just re-run the entire ~2,000-request live sync to recover 2 vehicles — the user correctly
+pushed back on this as disproportionate. Course-corrected to: accept the first (already-valid)
+sync's output, delete the one orphaned file by hand, and document the gap rather than re-hammering
+a third-party site for a tiny, isolated loss. Documented this judgment call directly in the runbook
+(§1) so a future session doesn't repeat the same overkill instinct.
+
+**Result:** 1,598 → 1,887 vehicles, 83 → 144 makes, 61 new HGV makes (DAF, Scania, MAN, Volvo
+Trucks, Mercedes Truck, Ford Truck, Kenworth, Peterbilt, Mack, Western Star, and more). Verified
+via a fresh dev server (a stale one, running since before this session's `pnpm build`, briefly
+gave false-positive 500s from cache corruption — restarting it cleanly resolved that and confirmed
+everything working end to end).
 
 ## Notes
 
 Verified the real DESNZ workbook structure directly (downloaded the live `weekly_road_fuel_prices_060726.xlsx`) rather than trusting web-search summaries — an initial web search suggested petrol ~156p/diesel ~188p for the relevant period, but the actual source file showed petrol 149.80p/diesel 164.77p for the week ending 2026-07-06. The parser locates the header row and petrol/diesel columns by text matching (not hardcoded indices), so it should tolerate minor future changes to the workbook's column layout.
+
+The HGV scope addition is a good example of why fixture-based tests (real Viezu HTML, not synthetic
+data) earn their keep: the first version of the new HGV test used a model name ("F-350") that
+turned out to genuinely collide across two real marques in Viezu's own data — not a bug, just a
+bad test example — and a _second_, real bug (the space-splitting fallback) was only found because
+the corrected test still failed after fixing the first false alarm.

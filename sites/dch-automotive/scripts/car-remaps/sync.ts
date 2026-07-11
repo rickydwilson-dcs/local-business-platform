@@ -48,11 +48,12 @@ async function main(): Promise<void> {
   const scopeIndexStats: ScopeIndexStats = {
     carsMarqueCount: 0,
     vansMarqueCount: 0,
+    hgvMarqueCount: 0,
     totalModelsCounted: 0,
   };
   const scopeIndex = await fetchScopeIndex(scopeIndexStats);
   console.log(
-    `[car-remaps] scope index built: ${scopeIndexStats.carsMarqueCount} car marques, ${scopeIndexStats.vansMarqueCount} van marques, ${scopeIndexStats.totalModelsCounted} models counted`
+    `[car-remaps] scope index built: ${scopeIndexStats.carsMarqueCount} car marques, ${scopeIndexStats.vansMarqueCount} van marques, ${scopeIndexStats.hgvMarqueCount} HGV marques, ${scopeIndexStats.totalModelsCounted} models counted`
   );
 
   // ── Step 2: full catalog walk ─────────────────────────────────────────────
@@ -129,6 +130,20 @@ async function main(): Promise<void> {
   fs.mkdirSync(MAKES_DIR, { recursive: true });
 
   const makeSlugs = Array.from(grouped.keys()).sort();
+
+  // Remove stale make files left over from a previous run whose marque is no
+  // longer in scope this run (e.g. a transient scope-index fetch failure, or
+  // a marque genuinely delisted upstream) — otherwise `data/car-remaps/makes/`
+  // accumulates orphaned files that no longer match `index.json`.
+  const makeSlugSet = new Set(makeSlugs);
+  const staleFiles = fs
+    .readdirSync(MAKES_DIR)
+    .filter((file) => file.endsWith('.json') && !makeSlugSet.has(file.slice(0, -'.json'.length)));
+  for (const file of staleFiles) {
+    fs.unlinkSync(path.join(MAKES_DIR, file));
+    console.log(`[car-remaps] removed stale make file no longer in scope: ${file}`);
+  }
+
   const indexMakes: Array<{ slug: string; name: string; modelCount: number }> = [];
 
   for (const makeSlug of makeSlugs) {
@@ -175,7 +190,7 @@ async function main(): Promise<void> {
   console.log('[car-remaps] ==================== SUMMARY ====================');
   console.log(`[car-remaps] Generated at:              ${generatedAt}`);
   console.log(
-    `[car-remaps] Scope index:                ${scopeIndexStats.carsMarqueCount} car marques, ${scopeIndexStats.vansMarqueCount} van marques, ${scopeIndexStats.totalModelsCounted} models counted`
+    `[car-remaps] Scope index:                ${scopeIndexStats.carsMarqueCount} car marques, ${scopeIndexStats.vansMarqueCount} van marques, ${scopeIndexStats.hgvMarqueCount} HGV marques, ${scopeIndexStats.totalModelsCounted} models counted`
   );
   console.log(
     `[car-remaps] Filter funnel:               ${totalFetched} total -> ${afterCategoryFilter.length} after category exclusion -> ${totalInScope} after scope match`

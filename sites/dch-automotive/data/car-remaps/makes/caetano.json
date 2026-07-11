@@ -1,0 +1,51 @@
+[
+  {
+    "make": "Caetano",
+    "model": "Nimbus",
+    "modelSlug": "nimbus",
+    "sourceProductId": 29980,
+    "sourceUrl": "https://viezu.com/shop/caetano-nimbus-2007/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "4.0",
+        "originalBhp": {
+          "raw": "None",
+          "parsedValues": ["None"],
+          "primaryValue": "None"
+        },
+        "powerBhpGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      }
+    ]
+  }
+]

@@ -10,7 +10,7 @@
 
 import { parseStoreApiPage } from '../../lib/car-remaps/parsers';
 import type { CatalogEntry } from '../../lib/car-remaps/types';
-import { FETCH_DELAY_MS, USER_AGENT } from './config';
+import { FETCH_DELAY_MS, FETCH_TIMEOUT_MS, USER_AGENT } from './config';
 
 const STORE_API_URL = 'https://viezu.com/wp-json/wc/store/v1/products';
 const PER_PAGE = 100;
@@ -30,7 +30,10 @@ export async function fetchAllCatalogPages(): Promise<CatalogEntry[]> {
 
   for (;;) {
     const url = `${STORE_API_URL}?page=${page}&per_page=${PER_PAGE}`;
-    const res = await fetch(url, { headers: { 'User-Agent': USER_AGENT } });
+    const res = await fetch(url, {
+      headers: { 'User-Agent': USER_AGENT },
+      signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
+    });
     if (!res.ok) {
       throw new Error(`fetchAllCatalogPages: HTTP ${res.status} fetching page ${page} (${url})`);
     }

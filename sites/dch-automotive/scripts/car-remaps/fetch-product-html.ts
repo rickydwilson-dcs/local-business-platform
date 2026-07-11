@@ -5,7 +5,7 @@
 
 import { parseProductVariations } from '../../lib/car-remaps/parsers';
 import type { CatalogEntry, VariationPerformance } from '../../lib/car-remaps/types';
-import { USER_AGENT } from './config';
+import { FETCH_TIMEOUT_MS, USER_AGENT } from './config';
 
 export interface ProductFetchError {
   error: string;
@@ -24,7 +24,10 @@ export async function fetchProductPerformanceData(
   entry: CatalogEntry
 ): Promise<VariationPerformance[] | ProductFetchError> {
   try {
-    const res = await fetch(entry.permalink, { headers: { 'User-Agent': USER_AGENT } });
+    const res = await fetch(entry.permalink, {
+      headers: { 'User-Agent': USER_AGENT },
+      signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
+    });
     if (!res.ok) {
       return { error: `HTTP ${res.status}`, url: entry.permalink };
     }

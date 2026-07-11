@@ -1,0 +1,51 @@
+[
+  {
+    "make": "Wrightbus",
+    "model": "Streetlite",
+    "modelSlug": "streetlite",
+    "sourceProductId": 58888,
+    "sourceUrl": "https://viezu.com/shop/wrightbus-streetlite-all/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "5.1",
+        "originalBhp": {
+          "raw": "177",
+          "parsedValues": ["177"],
+          "primaryValue": "177"
+        },
+        "powerBhpGain": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "7",
+          "parsedValues": ["7"],
+          "primaryValue": "7"
+        },
+        "economyGainNm": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "5%",
+          "parsedValues": ["5%"],
+          "primaryValue": "5%"
+        },
+        "displayPriceCents": 66900
+      }
+    ]
+  }
+]

@@ -6,6 +6,21 @@
       "modelCount": 3
     },
     {
+      "slug": "aebi-schmidt",
+      "name": "Aebi Schmidt",
+      "modelCount": 2
+    },
+    {
+      "slug": "agrale",
+      "name": "Agrale",
+      "modelCount": 7
+    },
+    {
+      "slug": "alexander-dennis",
+      "name": "Alexander Dennis",
+      "modelCount": 1
+    },
+    {
       "slug": "alfa-romeo",
       "name": "Alfa Romeo",
       "modelCount": 21
@@ -26,9 +41,29 @@
       "modelCount": 9
     },
     {
+      "slug": "astra-truck",
+      "name": "Astra Truck",
+      "modelCount": 5
+    },
+    {
       "slug": "audi",
       "name": "Audi",
       "modelCount": 104
+    },
+    {
+      "slug": "autosan",
+      "name": "Autosan",
+      "modelCount": 1
+    },
+    {
+      "slug": "avia",
+      "name": "Avia",
+      "modelCount": 2
+    },
+    {
+      "slug": "bci",
+      "name": "Bci",
+      "modelCount": 1
     },
     {
       "slug": "bentley",
@@ -36,9 +71,19 @@
       "modelCount": 10
     },
     {
+      "slug": "bmc",
+      "name": "Bmc",
+      "modelCount": 1
+    },
+    {
       "slug": "bmw",
       "name": "BMW",
       "modelCount": 83
+    },
+    {
+      "slug": "bonluck-bus",
+      "name": "Bonluck Bus",
+      "modelCount": 1
     },
     {
       "slug": "bugatti",
@@ -56,8 +101,18 @@
       "modelCount": 17
     },
     {
+      "slug": "caetano",
+      "name": "Caetano",
+      "modelCount": 1
+    },
+    {
       "slug": "changan",
       "name": "Changan",
+      "modelCount": 1
+    },
+    {
+      "slug": "chenglong",
+      "name": "Chenglong",
       "modelCount": 1
     },
     {
@@ -96,6 +151,16 @@
       "modelCount": 4
     },
     {
+      "slug": "daf-buses",
+      "name": "Daf Buses",
+      "modelCount": 1
+    },
+    {
+      "slug": "daf-truck",
+      "name": "Daf Truck",
+      "modelCount": 16
+    },
+    {
       "slug": "daihatsu",
       "name": "Daihatsu",
       "modelCount": 1
@@ -106,14 +171,29 @@
       "modelCount": 1
     },
     {
+      "slug": "denning-manufacturing",
+      "name": "Denning Manufacturing",
+      "modelCount": 1
+    },
+    {
       "slug": "dodge",
       "name": "Dodge",
       "modelCount": 16
     },
     {
+      "slug": "dong-feng-trucks",
+      "name": "Dong Feng Trucks",
+      "modelCount": 1
+    },
+    {
       "slug": "ds",
       "name": "DS",
       "modelCount": 7
+    },
+    {
+      "slug": "faw-jiefang",
+      "name": "Faw Jiefang",
+      "modelCount": 1
     },
     {
       "slug": "ferrari",
@@ -128,7 +208,37 @@
     {
       "slug": "ford",
       "name": "Ford",
-      "modelCount": 97
+      "modelCount": 96
+    },
+    {
+      "slug": "ford-truck",
+      "name": "Ford Truck",
+      "modelCount": 4
+    },
+    {
+      "slug": "foton",
+      "name": "Foton",
+      "modelCount": 5
+    },
+    {
+      "slug": "foton-truck",
+      "name": "Foton Truck",
+      "modelCount": 1
+    },
+    {
+      "slug": "fpt-industrial",
+      "name": "Fpt Industrial",
+      "modelCount": 2
+    },
+    {
+      "slug": "freightliner",
+      "name": "Freightliner",
+      "modelCount": 10
+    },
+    {
+      "slug": "gaz",
+      "name": "Gaz",
+      "modelCount": 5
     },
     {
       "slug": "geely",
@@ -151,6 +261,11 @@
       "modelCount": 6
     },
     {
+      "slug": "hino",
+      "name": "Hino",
+      "modelCount": 8
+    },
+    {
       "slug": "holden",
       "name": "Holden",
       "modelCount": 3
@@ -159,6 +274,11 @@
       "slug": "honda",
       "name": "Honda",
       "modelCount": 31
+    },
+    {
+      "slug": "hudding",
+      "name": "Hudding",
+      "modelCount": 3
     },
     {
       "slug": "hummer",
@@ -171,6 +291,11 @@
       "modelCount": 47
     },
     {
+      "slug": "ikarus",
+      "name": "Ikarus",
+      "modelCount": 1
+    },
+    {
       "slug": "ineos",
       "name": "Ineos",
       "modelCount": 4
@@ -181,6 +306,11 @@
       "modelCount": 21
     },
     {
+      "slug": "international",
+      "name": "International",
+      "modelCount": 35
+    },
+    {
       "slug": "isuzu",
       "name": "Isuzu",
       "modelCount": 7
@@ -188,12 +318,17 @@
     {
       "slug": "iveco",
       "name": "Iveco",
-      "modelCount": 3
+      "modelCount": 15
     },
     {
-      "slug": "jaecoo",
-      "name": "Jaecoo",
-      "modelCount": 2
+      "slug": "jac-truck",
+      "name": "Jac Truck",
+      "modelCount": 1
+    },
+    {
+      "slug": "jacto",
+      "name": "Jacto",
+      "modelCount": 1
     },
     {
       "slug": "jaguar",
@@ -206,9 +341,24 @@
       "modelCount": 19
     },
     {
+      "slug": "kamaz",
+      "name": "Kamaz",
+      "modelCount": 1
+    },
+    {
+      "slug": "kenworth",
+      "name": "Kenworth",
+      "modelCount": 25
+    },
+    {
       "slug": "kia",
       "name": "Kia",
       "modelCount": 53
+    },
+    {
+      "slug": "king-long-buses",
+      "name": "King Long Buses",
+      "modelCount": 1
     },
     {
       "slug": "lamborghini",
@@ -231,6 +381,11 @@
       "modelCount": 2
     },
     {
+      "slug": "lexea",
+      "name": "Lexea",
+      "modelCount": 1
+    },
+    {
       "slug": "lexus",
       "name": "Lexus",
       "modelCount": 14
@@ -251,14 +406,34 @@
       "modelCount": 3
     },
     {
+      "slug": "mack",
+      "name": "Mack",
+      "modelCount": 3
+    },
+    {
       "slug": "mahindra",
       "name": "Mahindra",
       "modelCount": 6
     },
     {
+      "slug": "man-latin",
+      "name": "MAN Latin",
+      "modelCount": 1
+    },
+    {
+      "slug": "man-truck",
+      "name": "MAN Truck",
+      "modelCount": 21
+    },
+    {
       "slug": "maserati",
       "name": "Maserati",
       "modelCount": 9
+    },
+    {
+      "slug": "maz-minsk",
+      "name": "Maz Minsk",
+      "modelCount": 1
     },
     {
       "slug": "mazda",
@@ -274,6 +449,11 @@
       "slug": "mercedes-benz",
       "name": "Mercedes-benz",
       "modelCount": 99
+    },
+    {
+      "slug": "mercedes-truck",
+      "name": "Mercedes Truck",
+      "modelCount": 14
     },
     {
       "slug": "mg",
@@ -311,6 +491,16 @@
       "modelCount": 26
     },
     {
+      "slug": "otokar",
+      "name": "Otokar",
+      "modelCount": 2
+    },
+    {
+      "slug": "peterbilt",
+      "name": "Peterbilt",
+      "modelCount": 26
+    },
+    {
       "slug": "peugeot",
       "name": "Peugeot",
       "modelCount": 54
@@ -333,7 +523,12 @@
     {
       "slug": "renault",
       "name": "Renault",
-      "modelCount": 54
+      "modelCount": 52
+    },
+    {
+      "slug": "renault-truck",
+      "name": "Renault Truck",
+      "modelCount": 7
     },
     {
       "slug": "roewe",
@@ -356,14 +551,39 @@
       "modelCount": 9
     },
     {
+      "slug": "sany",
+      "name": "Sany",
+      "modelCount": 1
+    },
+    {
       "slug": "saturn",
       "name": "Saturn",
       "modelCount": 9
     },
     {
+      "slug": "scania-truck",
+      "name": "Scania Truck",
+      "modelCount": 4
+    },
+    {
       "slug": "seat",
       "name": "Seat",
       "modelCount": 25
+    },
+    {
+      "slug": "shacman",
+      "name": "Shacman",
+      "modelCount": 1
+    },
+    {
+      "slug": "sinotruk",
+      "name": "Sinotruk",
+      "modelCount": 2
+    },
+    {
+      "slug": "sisu",
+      "name": "Sisu",
+      "modelCount": 1
     },
     {
       "slug": "skoda",
@@ -396,9 +616,34 @@
       "modelCount": 1
     },
     {
+      "slug": "tata-truck",
+      "name": "Tata Truck",
+      "modelCount": 2
+    },
+    {
+      "slug": "temsa",
+      "name": "Temsa",
+      "modelCount": 3
+    },
+    {
+      "slug": "terex",
+      "name": "Terex",
+      "modelCount": 1
+    },
+    {
+      "slug": "thaco",
+      "name": "Thaco",
+      "modelCount": 1
+    },
+    {
       "slug": "toyota",
       "name": "Toyota",
       "modelCount": 48
+    },
+    {
+      "slug": "ud-trucks",
+      "name": "Ud Trucks",
+      "modelCount": 2
     },
     {
       "slug": "vauxhall",
@@ -406,14 +651,74 @@
       "modelCount": 5
     },
     {
+      "slug": "voegele",
+      "name": "Voegele",
+      "modelCount": 1
+    },
+    {
+      "slug": "volare-buses",
+      "name": "Volare Buses",
+      "modelCount": 1
+    },
+    {
+      "slug": "volkswagen-truck",
+      "name": "Volkswagen Truck",
+      "modelCount": 3
+    },
+    {
       "slug": "volvo",
       "name": "Volvo",
       "modelCount": 43
     },
     {
+      "slug": "volvo-buses",
+      "name": "Volvo Buses",
+      "modelCount": 3
+    },
+    {
+      "slug": "volvo-construction",
+      "name": "Volvo Construction",
+      "modelCount": 1
+    },
+    {
+      "slug": "volvo-trucks",
+      "name": "Volvo Trucks",
+      "modelCount": 9
+    },
+    {
       "slug": "vw",
       "name": "VW",
       "modelCount": 81
+    },
+    {
+      "slug": "western-star",
+      "name": "Western Star",
+      "modelCount": 5
+    },
+    {
+      "slug": "wirtgen",
+      "name": "Wirtgen",
+      "modelCount": 1
+    },
+    {
+      "slug": "wrightbus",
+      "name": "Wrightbus",
+      "modelCount": 1
+    },
+    {
+      "slug": "xcmg",
+      "name": "Xcmg",
+      "modelCount": 2
+    },
+    {
+      "slug": "yanmar-construction",
+      "name": "Yanmar Construction",
+      "modelCount": 3
+    },
+    {
+      "slug": "yutong",
+      "name": "Yutong",
+      "modelCount": 3
     }
   ]
 }
