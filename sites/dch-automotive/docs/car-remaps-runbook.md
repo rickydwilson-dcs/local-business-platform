@@ -266,57 +266,47 @@ of hand-rolling the lower-level Streamable HTTP transport or maintaining a secon
 
 ## 5. Known Issues / Follow-up Required
 
-### 🔴 Volkswagen cars are silently missing from the synced catalogue
+### ✅ Fixed: Volkswagen cars were silently missing from the synced catalogue
 
-**Confirmed bug, not yet fixed — do not assume VW coverage is complete.**
+**Confirmed bug, fixed same day (2026-07-11) — `data/car-remaps/makes/vw.json` now has 81
+entries, up from 1.**
 
-`data/car-remaps/makes/vw.json` currently contains exactly **one vehicle**: the "VW Crafter"
-(a van). This entry only exists because it matched via a _separate_ `"vw"` marque key that came
-from the **vans** AJAX marque list — a different bucket from the **cars** marque list, which
-uses the full name `"Volkswagen Tuning & Remapping"` (normalizing to the scope-index key
-`"volkswagen"`, per `normalizeMarqueName()`).
+**Root cause 1 — marque abbreviation mismatch:** Store API product names for Volkswagen _cars_
+use the abbreviation **"VW"** as their leading token (e.g. `"VW Golf GTI Tuning (Golf 7 – 2012 –
+2019) Tuning & ECU Remapping"`), but the `cars` AJAX marque list spells the marque out in full
+(`"Volkswagen Tuning & Remapping"` → scope-index key `"volkswagen"`). This is structurally
+different from the Mercedes-Benz/Mercedes mismatch (a hyphenated compound, already handled by
+`isInScopeVehicle()`'s first-token split) — an abbreviation can't be derived from the full name by
+any prefix/suffix rule. **Fix:** an explicit `MARQUE_ALIASES` table in `lib/car-remaps/parsers.ts`
+(`{ volkswagen: ['vw'] }`, extensible for future cases), applied in `buildScopeIndex()` so both
+keys share the merged (cars ∪ vans) model set.
 
-**Root cause:** Store API product names for Volkswagen _cars_ use the abbreviation **"VW"** as
-their leading token — e.g. `"VW Golf GTI Tuning (Golf 7 – 2012 – 2019) Tuning & ECU Remapping"`
-(confirmed live via `https://viezu.com/wp-json/wc/store/v1/products?search=golf`, which returns
-real, in-scope Volkswagen car tuning products). `isInScopeVehicle()` in
-`lib/car-remaps/parsers.ts` generates its candidate prefixes from the scope-index marque key
-itself: the full key (`"volkswagen"`) or its first whitespace/hyphen-split token (still
-`"volkswagen"`, since it's one word — the split logic exists to handle compound keys like
-`"mercedes-benz"` → `"mercedes"`, which _is_ handled correctly). It never tries `"vw"` as an
-alias for the `"volkswagen"` key, so **every VW car product name fails the prefix match and is
-silently excluded from scope.**
+**Root cause 2 — a second, deeper bug found while verifying the fix:** even after the alias fix,
+most VW _model_ names still didn't match (`vw.json` only grew to 4 entries, not the expected
+dozens). Many Store API product names — confirmed on VW Golf variants, but the same pattern
+turned out to affect nearly every marque once fixed (the diff touched 83 of 83 `makes/*.json`
+files) — repeat one of the documented `MARQUE_SUFFIXES` patterns a _second_ time, **after** the
+year-range parenthetical rather than instead of it, e.g. `"Golf GTI Tuning (Golf 7 – 2012 – 2019)
+Tuning & ECU Remapping"`. `normalizeModelName()`'s parenthetical-strip regex is end-anchored
+(`\s*\([^)]*\)\s*$`), so it silently failed to strip the parenthetical whenever trailing text
+followed it. **Fix:** `normalizeModelName()` now strips a trailing `MARQUE_SUFFIXES` match first,
+before attempting the parenthetical strip.
 
-The `isInScopeVehicle()` doc comment currently claims Mercedes-Benz/Mercedes is "the" naming
-mismatch the function tolerates — that claim is only half-true. Mercedes-Benz's mismatch is
-solved by the existing hyphen-split logic; **Volkswagen/VW is a structurally different kind of
-mismatch (a whole-word abbreviation, not a hyphenated compound) that the current logic does not
-handle**, despite the surrounding comments implying full coverage.
+**Verified:** `pnpm --filter dch-automotive test` (parsers.test.ts has explicit regression tests
+for both fixes) and a full live re-sync — `totalInScope` went from 1518 → 1598 (+80 vehicles),
+`totalFailed` 6 → 0 (the 6 prior Kia failures were a transient network issue, unrelated to either
+fix), all 83 makes present. See commit history for the exact diff.
 
-**Impact:** the current sync is missing an entire major marque's worth of _cars_ — Golf, Polo,
-Passat, Tiguan, T-Roc, and likely dozens of other models never made it into any `makes/*.json`
-file. (VW _vans_, e.g. Crafter, Transporter, are unaffected — they come through the separate
-`"vw"` van marque key, which does happen to already match the Store API's "VW" prefix.)
+**Residual, out-of-scope data-quality note:** some Viezu product names contain literal `?`
+characters in place of what should be en-dashes or hyphens (e.g. `"VW Polo Tuning (2014 ? 2017
+Tuning ( 6C ) Tuning & ECU Remapping"`) — confirmed present in Viezu's own live API response, not
+introduced by this pipeline. Cosmetic only; not corrected in this pass. If it needs cleaning up
+for the public-facing pages, that's a separate `normalizeMarqueName`/`normalizeModelName`-adjacent
+follow-up, not a scope-correctness bug.
 
-**Fix (for a future session — NOT done in this pass):**
-
-1. Add an explicit marque-alias table, e.g. `{ volkswagen: ['vw'] }`, either to
-   `isInScopeVehicle()`'s candidate-prefix generation or to `buildScopeIndex()` (so the index
-   itself carries both keys), in `lib/car-remaps/parsers.ts`.
-2. Re-run `pnpm --filter dch-automotive run car-remaps:sync`.
-3. Verify `data/car-remaps/makes/vw.json` (or a merged `volkswagen.json`, depending on how the
-   alias is implemented) grows well beyond 1 entry — expect real Golf/Polo/Passat/Tiguan/T-Roc
-   models to appear.
-4. **Audit other marques for the same failure mode** — any marque with a full-name-vs-abbreviation
-   split (not a hyphenated compound like Mercedes-Benz) is a candidate for the same bug. Check
-   the full marque list in `lib/car-remaps/__fixtures__/README.md`'s "Full parsed marque lists
-   and suffix patterns" section against real Store API product name prefixes for each, the same
-   way this VW gap was found (a live `?search=<model>` query compared against the corresponding
-   `makes/<slug>.json` file).
-
-**This pass's data has already been committed and accepted with this gap present** — it is
-documented here as a known, explicit follow-up, not something to silently patch by re-running the
-sync or modifying `parsers.ts` outside of a dedicated fix session.
+**If a future audit finds another marque/model naming mismatch**, add it to `MARQUE_ALIASES` (for
+whole-word abbreviations) or extend the relevant suffix-stripping logic (for suffix-pattern
+variants) in `lib/car-remaps/parsers.ts` — do not special-case it in `isInScopeVehicle()`.
 
 ---
 

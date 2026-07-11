@@ -312,11 +312,39 @@ export function normalizeMarqueName(raw: string): string {
 }
 
 /**
+ * Marque keys with a whole-word abbreviation mismatch between the `cars` and
+ * `vans` AJAX marque lists, confirmed live (fixtures README + runbook
+ * "Known Issues"): the `cars` list spells the marque out in full
+ * ("Volkswagen Tuning & Remapping" → normalized key `"volkswagen"`), but
+ * Store API *car* product names use the abbreviation "VW" as their leading
+ * token, matching only the `vans` list's own `"vw"` key. This is structurally
+ * different from the Mercedes-Benz/Mercedes mismatch (a hyphenated compound,
+ * already handled by `isInScopeVehicle`'s first-token split) — an
+ * abbreviation isn't a prefix or suffix of the full name, so no suffix-strip
+ * or split rule can derive one from the other. `buildScopeIndex` uses this
+ * table to alias each key to the others' merged model set.
+ *
+ * If a future audit (see runbook §5) finds another marque with this same
+ * failure mode, add it here rather than special-casing it in
+ * `isInScopeVehicle`.
+ */
+const MARQUE_ALIASES: Record<string, string[]> = {
+  volkswagen: ['vw'],
+};
+
+/**
  * Strips the trailing year-range parenthetical and a trailing bare "Tuning"
  * word from a model name, then lowercases/trims. Handles both AJAX model
  * names (no marque prefix, no "Tuning" word) and the model-only portion of
  * a Store API product name (has a trailing "Tuning" word before the
  * parenthetical) — see fixtures README's "Model-name pattern" section.
+ *
+ * Some Store API product names (confirmed live for several VW Golf variants,
+ * e.g. `"Golf GTI Tuning (Golf 7 – 2012 – 2019) Tuning & ECU Remapping"`)
+ * repeat one of the `MARQUE_SUFFIXES` patterns a *second* time, after the
+ * year-range parenthetical rather than instead of it. The plain
+ * end-anchored parenthetical strip below can't reach the parenthetical when
+ * that trailing suffix follows it, so it must be stripped first.
  *
  * Deliberately does not attempt to parse or validate the year-range
  * portion itself — the AJAX side's year ranges are confirmed unreliable
@@ -325,6 +353,12 @@ export function normalizeMarqueName(raw: string): string {
  */
 export function normalizeModelName(raw: string): string {
   let value = decodeHtmlEntities(raw).trim();
+  for (const suffix of MARQUE_SUFFIXES) {
+    if (value.endsWith(suffix)) {
+      value = value.slice(0, value.length - suffix.length).trim();
+      break;
+    }
+  }
   value = value.replace(/\s*\([^)]*\)\s*$/, '');
   value = value.replace(/\s+Tuning\s*$/i, '');
   return value.trim().toLowerCase();
@@ -338,9 +372,12 @@ export function normalizeModelName(raw: string): string {
  * Builds the normalized (marque, model) in-scope index from the raw `cars`
  * + `vans` AJAX marque lists and their fetched models. Marque keys that
  * normalize identically across `cars` and `vans` (the common case) are
- * merged into one entry with the union of both vehicle types' models;
- * marques with a naming mismatch between the two lists (confirmed:
- * Mercedes-Benz/Mercedes, Volkswagen/VW) remain distinct keys.
+ * merged into one entry with the union of both vehicle types' models.
+ * Marques with a hyphenated-compound naming mismatch (e.g. Mercedes-Benz vs.
+ * Mercedes) remain distinct keys — `isInScopeVehicle`'s first-token split
+ * handles that case. Marques with a whole-word-abbreviation mismatch (e.g.
+ * Volkswagen vs. VW) are additionally cross-aliased via `MARQUE_ALIASES`
+ * below, since no prefix/suffix rule can derive one spelling from the other.
  */
 export function buildScopeIndex(
   marques: { cars: ScopeMarque[]; vans: ScopeMarque[] },
@@ -357,6 +394,21 @@ export function buildScopeIndex(
       existing.add(normalizeModelName(model.name));
     }
     index.set(normalizedMarque, existing);
+  }
+
+  // Cross-alias whole-word-abbreviation marques (e.g. "volkswagen" <-> "vw")
+  // so a product name matching under either spelling resolves to the union
+  // of both keys' models.
+  for (const [canonical, aliases] of Object.entries(MARQUE_ALIASES)) {
+    const merged = new Set<string>([
+      ...(index.get(canonical) ?? []),
+      ...aliases.flatMap((alias) => Array.from(index.get(alias) ?? [])),
+    ]);
+    if (merged.size === 0) continue;
+    index.set(canonical, merged);
+    for (const alias of aliases) {
+      index.set(alias, merged);
+    }
   }
 
   return index;

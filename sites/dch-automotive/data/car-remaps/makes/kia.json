@@ -1276,6 +1276,422 @@
   },
   {
     "make": "Kia",
+    "model": "Stinger",
+    "modelSlug": "stinger",
+    "sourceProductId": 20673,
+    "sourceUrl": "https://viezu.com/shop/kia-stinger-2017-2019/",
+    "variations": [
+      {
+        "fuelType": "Petrol",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "255 | 245",
+          "parsedValues": ["255", "245"],
+          "primaryValue": "255",
+          "secondaryValue": "245"
+        },
+        "powerBhpGain": {
+          "raw": "31 | 41",
+          "parsedValues": ["31", "41"],
+          "primaryValue": "31",
+          "secondaryValue": "41"
+        },
+        "originalTorque": {
+          "raw": "353 | 353",
+          "parsedValues": ["353", "353"],
+          "primaryValue": "353",
+          "secondaryValue": "353"
+        },
+        "torqueNmGain": {
+          "raw": "77 | 77",
+          "parsedValues": ["77", "77"],
+          "primaryValue": "77",
+          "secondaryValue": "77"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "3.3",
+        "originalBhp": {
+          "raw": "370",
+          "parsedValues": ["370"],
+          "primaryValue": "370"
+        },
+        "powerBhpGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "510",
+          "parsedValues": ["510"],
+          "primaryValue": "510"
+        },
+        "torqueNmGain": {
+          "raw": "100",
+          "parsedValues": ["100"],
+          "primaryValue": "100"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 28900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.2",
+        "originalBhp": {
+          "raw": "200",
+          "parsedValues": ["200"],
+          "primaryValue": "200"
+        },
+        "powerBhpGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "440",
+          "parsedValues": ["440"],
+          "primaryValue": "440"
+        },
+        "torqueNmGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Kia",
+    "model": "Sportage",
+    "modelSlug": "sportage",
+    "sourceProductId": 20668,
+    "sourceUrl": "https://viezu.com/shop/kia-sportage-2018-2020/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "115 | 136",
+          "parsedValues": ["115", "136"],
+          "primaryValue": "115",
+          "secondaryValue": "136"
+        },
+        "powerBhpGain": {
+          "raw": "30 | 24",
+          "parsedValues": ["30", "24"],
+          "primaryValue": "30",
+          "secondaryValue": "24"
+        },
+        "originalTorque": {
+          "raw": "280 | 320",
+          "parsedValues": ["280", "320"],
+          "primaryValue": "280",
+          "secondaryValue": "320"
+        },
+        "torqueNmGain": {
+          "raw": "40 | 10",
+          "parsedValues": ["40", "10"],
+          "primaryValue": "40",
+          "secondaryValue": "10"
+        },
+        "economyGainBhp": {
+          "raw": "15 | 10",
+          "parsedValues": ["15", "10"],
+          "primaryValue": "15",
+          "secondaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "20 | 5",
+          "parsedValues": ["20", "5"],
+          "primaryValue": "20",
+          "secondaryValue": "5"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "185",
+          "parsedValues": ["185"],
+          "primaryValue": "185"
+        },
+        "powerBhpGain": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "originalTorque": {
+          "raw": "400",
+          "parsedValues": ["400"],
+          "primaryValue": "400"
+        },
+        "torqueNmGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "132 | 177",
+          "parsedValues": ["132", "177"],
+          "primaryValue": "132",
+          "secondaryValue": "177"
+        },
+        "powerBhpGain": {
+          "raw": "11 | 33",
+          "parsedValues": ["11", "33"],
+          "primaryValue": "11",
+          "secondaryValue": "33"
+        },
+        "originalTorque": {
+          "raw": "161 | 265",
+          "parsedValues": ["161", "265"],
+          "primaryValue": "161",
+          "secondaryValue": "265"
+        },
+        "torqueNmGain": {
+          "raw": "19 | 85",
+          "parsedValues": ["19", "85"],
+          "primaryValue": "19",
+          "secondaryValue": "85"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Kia",
+    "model": "Sportage",
+    "modelSlug": "sportage",
+    "sourceProductId": 20664,
+    "sourceUrl": "https://viezu.com/shop/kia-sportage-2016-2018/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "1.7",
+        "originalBhp": {
+          "raw": "115 | 139",
+          "parsedValues": ["115", "139"],
+          "primaryValue": "115",
+          "secondaryValue": "139"
+        },
+        "powerBhpGain": {
+          "raw": "35 | 30",
+          "parsedValues": ["35", "30"],
+          "primaryValue": "35",
+          "secondaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "260 | 340",
+          "parsedValues": ["260", "340"],
+          "primaryValue": "260",
+          "secondaryValue": "340"
+        },
+        "torqueNmGain": {
+          "raw": "50 | 60",
+          "parsedValues": ["50", "60"],
+          "primaryValue": "50",
+          "secondaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "20 | 15",
+          "parsedValues": ["20", "15"],
+          "primaryValue": "20",
+          "secondaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "25 | 30",
+          "parsedValues": ["25", "30"],
+          "primaryValue": "25",
+          "secondaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "177",
+          "parsedValues": ["177"],
+          "primaryValue": "177"
+        },
+        "powerBhpGain": {
+          "raw": "43",
+          "parsedValues": ["43"],
+          "primaryValue": "43"
+        },
+        "originalTorque": {
+          "raw": "265",
+          "parsedValues": ["265"],
+          "primaryValue": "265"
+        },
+        "torqueNmGain": {
+          "raw": "85",
+          "parsedValues": ["85"],
+          "primaryValue": "85"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "136 | 184",
+          "parsedValues": ["136", "184"],
+          "primaryValue": "136",
+          "secondaryValue": "184"
+        },
+        "powerBhpGain": {
+          "raw": "39 | 16",
+          "parsedValues": ["39", "16"],
+          "primaryValue": "39",
+          "secondaryValue": "16"
+        },
+        "originalTorque": {
+          "raw": "373 | 392",
+          "parsedValues": ["373", "392"],
+          "primaryValue": "373",
+          "secondaryValue": "392"
+        },
+        "torqueNmGain": {
+          "raw": "57 | 58",
+          "parsedValues": ["57", "58"],
+          "primaryValue": "57",
+          "secondaryValue": "58"
+        },
+        "economyGainBhp": {
+          "raw": "20 | 10",
+          "parsedValues": ["20", "10"],
+          "primaryValue": "20",
+          "secondaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "30 | 30",
+          "parsedValues": ["30", "30"],
+          "primaryValue": "30",
+          "secondaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Kia",
     "model": "Sportage",
     "modelSlug": "sportage",
     "sourceProductId": 20660,
@@ -1699,6 +2115,244 @@
           "raw": "",
           "parsedValues": [""],
           "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Kia",
+    "model": "Soul",
+    "modelSlug": "soul",
+    "sourceProductId": 20647,
+    "sourceUrl": "https://viezu.com/shop/kia-soul-2008-2013/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "115 | 128",
+          "parsedValues": ["115", "128"],
+          "primaryValue": "115",
+          "secondaryValue": "128"
+        },
+        "powerBhpGain": {
+          "raw": "30 | 32",
+          "parsedValues": ["30", "32"],
+          "primaryValue": "30",
+          "secondaryValue": "32"
+        },
+        "originalTorque": {
+          "raw": "255 | 260",
+          "parsedValues": ["255", "260"],
+          "primaryValue": "255",
+          "secondaryValue": "260"
+        },
+        "torqueNmGain": {
+          "raw": "65 | 65",
+          "parsedValues": ["65", "65"],
+          "primaryValue": "65",
+          "secondaryValue": "65"
+        },
+        "economyGainBhp": {
+          "raw": "15 | 15",
+          "parsedValues": ["15", "15"],
+          "primaryValue": "15",
+          "secondaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "30 | 30",
+          "parsedValues": ["30", "30"],
+          "primaryValue": "30",
+          "secondaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "10% | 10%",
+          "parsedValues": ["10%", "10%"],
+          "primaryValue": "10%",
+          "secondaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "1.6",
+        "originalBhp": {
+          "raw": "140 | 204 | 125",
+          "parsedValues": ["140", "204", "125"],
+          "primaryValue": "140",
+          "secondaryValue": "204"
+        },
+        "powerBhpGain": {
+          "raw": "10 | 36 | 10",
+          "parsedValues": ["10", "36", "10"],
+          "primaryValue": "10",
+          "secondaryValue": "36"
+        },
+        "originalTorque": {
+          "raw": "166 | 265 | 151",
+          "parsedValues": ["166", "265", "151"],
+          "primaryValue": "166",
+          "secondaryValue": "265"
+        },
+        "torqueNmGain": {
+          "raw": "14 | 60 | 14",
+          "parsedValues": ["14", "60", "14"],
+          "primaryValue": "14",
+          "secondaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Kia",
+    "model": "Sorento",
+    "modelSlug": "sorento",
+    "sourceProductId": 20644,
+    "sourceUrl": "https://viezu.com/shop/kia-sorento-2018-2020/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.2",
+        "originalBhp": {
+          "raw": "200",
+          "parsedValues": ["200"],
+          "primaryValue": "200"
+        },
+        "powerBhpGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "430",
+          "parsedValues": ["430"],
+          "primaryValue": "430"
+        },
+        "torqueNmGain": {
+          "raw": "70",
+          "parsedValues": ["70"],
+          "primaryValue": "70"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 24900
+      },
+      {
+        "fuelType": "Petrol",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "240",
+          "parsedValues": ["240"],
+          "primaryValue": "240"
+        },
+        "powerBhpGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "originalTorque": {
+          "raw": "353",
+          "parsedValues": ["353"],
+          "primaryValue": "353"
+        },
+        "torqueNmGain": {
+          "raw": "97",
+          "parsedValues": ["97"],
+          "primaryValue": "97"
+        },
+        "economyGainBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "economyGainNm": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "fuelSaving": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "displayPriceCents": 24900
+      }
+    ]
+  },
+  {
+    "make": "Kia",
+    "model": "Sorento",
+    "modelSlug": "sorento",
+    "sourceProductId": 20642,
+    "sourceUrl": "https://viezu.com/shop/sorento-2015-2018/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.2",
+        "originalBhp": {
+          "raw": "200",
+          "parsedValues": ["200"],
+          "primaryValue": "200"
+        },
+        "powerBhpGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "430",
+          "parsedValues": ["430"],
+          "primaryValue": "430"
+        },
+        "torqueNmGain": {
+          "raw": "70",
+          "parsedValues": ["70"],
+          "primaryValue": "70"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
         },
         "displayPriceCents": 24900
       }

@@ -208,7 +208,7 @@
     {
       "slug": "kia",
       "name": "Kia",
-      "modelCount": 47
+      "modelCount": 53
     },
     {
       "slug": "lamborghini",
@@ -413,7 +413,7 @@
     {
       "slug": "vw",
       "name": "VW",
-      "modelCount": 1
+      "modelCount": 81
     }
   ]
 }

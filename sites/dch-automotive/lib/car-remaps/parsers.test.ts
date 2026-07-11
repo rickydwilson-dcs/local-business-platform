@@ -13,7 +13,7 @@ import {
   isInScopeVehicle,
   filterInScopeCategories,
 } from './parsers';
-import type { ScopeModel } from './types';
+import type { ScopeMarque, ScopeModel } from './types';
 
 const FIXTURES_DIR = path.join(__dirname, '__fixtures__');
 
@@ -233,6 +233,18 @@ describe('normalizeModelName', () => {
   it('handles a bare "(All)" parenthetical', () => {
     expect(normalizeModelName('Camry Tuning (All)')).toBe('camry');
   });
+
+  it('strips a repeated marque-suffix pattern appended after the year-range parenthetical (real VW Golf products)', () => {
+    // Confirmed live: several VW Golf variants repeat a MARQUE_SUFFIXES
+    // pattern a second time, after the parenthetical rather than instead of
+    // it, so the plain end-anchored parenthetical strip alone can't reach it.
+    expect(
+      normalizeModelName('Golf GTI Tuning (Golf 7 – 2012 – 2019) Tuning & ECU Remapping')
+    ).toBe('golf gti');
+    expect(normalizeModelName('Golf Tuning (Golf 8 – 2020 – Present) Tuning & ECU Remapping')).toBe(
+      'golf'
+    );
+  });
 });
 
 describe('filterInScopeCategories', () => {
@@ -295,6 +307,42 @@ describe('buildScopeIndex + isInScopeVehicle (end-to-end against real AJAX fixtu
   it('returns false for a product whose marque exists but whose model does not', () => {
     const productName = 'Ford Nonexistent Model Tuning (2023 – Present)';
     expect(isInScopeVehicle(productName, index)).toBe(false);
+  });
+});
+
+describe('buildScopeIndex marque aliasing (Volkswagen/VW abbreviation fix)', () => {
+  // Synthetic input, not a fixture: this tests the MARQUE_ALIASES table's
+  // mechanics directly, mirroring the real shapes confirmed live (runbook
+  // "Known Issues" §5) — the cars list spells the marque out in full, but
+  // Store API car product names use the "VW" abbreviation.
+  const cars: ScopeMarque[] = [
+    { slug: 'volkswagen-tuning-remapping', name: 'Volkswagen Tuning & Remapping' },
+  ];
+  const vans: ScopeMarque[] = [{ slug: 'vw-vans', name: 'VW Vans' }];
+  const modelsByMarque = new Map<string, ScopeModel[]>([
+    [
+      'volkswagen-tuning-remapping',
+      [{ slug: 'golf-gti-7-2012-2019', name: 'Golf GTI (Golf 7 - 2012 - 2019)' }],
+    ],
+    ['vw-vans', [{ slug: 'transporter-t6', name: 'Transporter T6' }]],
+  ]);
+  const index = buildScopeIndex({ cars, vans }, modelsByMarque);
+
+  it('cross-aliases "volkswagen" and "vw" to the union of both keys\' models', () => {
+    expect(index.get('vw')).toEqual(index.get('volkswagen'));
+    // normalizeModelName strips the trailing year-range parenthetical too.
+    expect(index.get('vw')?.has('golf gti')).toBe(true);
+    expect(index.get('volkswagen')?.has('transporter t6')).toBe(true);
+  });
+
+  it('matches a real VW car product name (previously silently excluded)', () => {
+    const productName = 'VW Golf GTI Tuning (Golf 7 – 2012 – 2019)';
+    expect(isInScopeVehicle(productName, index)).toBe(true);
+  });
+
+  it('matches a real VW car product name with the repeated trailing suffix (previously still excluded after the alias fix alone)', () => {
+    const productName = 'VW Golf GTI Tuning (Golf 7 – 2012 – 2019) Tuning & ECU Remapping';
+    expect(isInScopeVehicle(productName, index)).toBe(true);
   });
 });
 

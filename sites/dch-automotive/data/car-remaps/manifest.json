@@ -1,19 +1,12 @@
 {
-  "generatedAt": "2026-07-11T06:13:06.485Z",
+  "generatedAt": "2026-07-11T09:30:17.463Z",
   "sourceUrl": "https://viezu.com",
   "totalFetched": 3188,
   "totalExcludedByCategory": 283,
-  "totalExcludedByScope": 1387,
-  "totalInScope": 1518,
-  "totalFailed": 6,
-  "failedUrls": [
-    "https://viezu.com/shop/kia-stinger-2017-2019/",
-    "https://viezu.com/shop/kia-sportage-2018-2020/",
-    "https://viezu.com/shop/kia-sportage-2016-2018/",
-    "https://viezu.com/shop/kia-soul-2008-2013/",
-    "https://viezu.com/shop/kia-sorento-2018-2020/",
-    "https://viezu.com/shop/sorento-2015-2018/"
-  ],
+  "totalExcludedByScope": 1307,
+  "totalInScope": 1598,
+  "totalFailed": 0,
+  "failedUrls": [],
   "makes": [
     "abarth",
     "alfa-romeo",
