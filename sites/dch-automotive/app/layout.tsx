@@ -24,10 +24,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en-GB" className="dark">
       <head>
         {/* Lyra theme fonts — Public Sans (headings) + IBM Plex Sans (body), matching the Stitch source */}
+        {/* eslint-disable-next-line @next/next/no-page-custom-font -- CSS @import for external fonts is silently dropped after Tailwind's expansion (see project memory); next/font's Google Fonts API doesn't cleanly support Material Symbols' variable-axis syntax below, so a <link> in the root layout's <head> (site-wide, not per-page) is the deliberate workaround */}
         <link
           href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;700;800;900&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap"
           rel="stylesheet"
         />
+        {/* eslint-disable-next-line @next/next/no-page-custom-font -- same rationale as above */}
         <link
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
           rel="stylesheet"
