@@ -651,6 +651,26 @@ export default async function CarRemapsPage() {
       {/* FAQs */}
       <FaqAccordion items={CAR_REMAPS_FAQS} title="Car Remaps Frequently Asked Questions" />
 
+      {/* Developer Integration — MCP Endpoint */}
+      <section className="py-8 border-t border-white/5">
+        <div className="container mx-auto px-6">
+          <p className="text-xs text-white/40 font-sans leading-relaxed max-w-2xl">
+            <span className="font-heading font-bold uppercase tracking-widest text-white/50 block mb-2">
+              For Developers
+            </span>
+            The car remaps catalogue is available via Model Context Protocol (MCP) at{' '}
+            <code className="bg-surface-card/50 px-1.5 py-0.5 rounded text-[0.85em] text-white/70 font-mono">
+              /api/mcp
+            </code>
+            — agents and MCP clients can query the{' '}
+            <code className="bg-surface-card/50 px-1.5 py-0.5 rounded text-[0.85em] text-white/70 font-mono">
+              lookup_vehicle_tuning
+            </code>
+            tool to retrieve performance specs and pricing programmatically.
+          </p>
+        </div>
+      </section>
+
       {/* Certifications */}
       <section className="py-12 border-t border-white/5 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
         <div className="container mx-auto px-6 overflow-hidden">

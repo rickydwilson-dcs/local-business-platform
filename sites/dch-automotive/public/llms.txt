@@ -1,0 +1,107 @@
+# DCH Automotive Car Remaps Ready Reckoner
+
+DCH Automotive is a Viezu Approved Dealer specializing in ECU remapping for fleet and commercial vehicles in the South East of England. The Car Remaps Ready Reckoner provides a searchable catalogue of over 1,500 vehicle models with performance figures, Economy Tuning gains, and real-world pricing from the Viezu platform — helping fleet operators understand exact tuning options and fuel savings potential for their specific vehicles.
+
+## Car Remaps by Make
+
+Browse performance tuning specifications and pricing for each manufacturer:
+
+- [Abarth](/car-remaps/abarth) — Sport and performance remapping specs (3 models)
+- [Alfa Romeo](/car-remaps/alfa-romeo) — Italian performance tuning data (21 models)
+- [Alpina](/car-remaps/alpina) — BMW-based sport remapping (17 models)
+- [Alpine](/car-remaps/alpine) — Renault performance engineering (1 model)
+- [Aston Martin](/car-remaps/aston-martin) — Luxury sport tuning specs (9 models)
+- [Audi](/car-remaps/audi) — German performance platform (104 models)
+- [Bentley](/car-remaps/bentley) — Ultra-luxury tuning options (10 models)
+- [BMW](/car-remaps/bmw) — Comprehensive sport and efficiency tuning (83 models)
+- [Bugatti](/car-remaps/bugatti) — Hypercar remapping data (4 models)
+- [Buick](/car-remaps/buick) — American performance specs (3 models)
+- [Cadillac](/car-remaps/cadillac) — Luxury vehicle tuning (17 models)
+- [Changan](/car-remaps/changan) — Chinese manufacturer specs (1 model)
+- [Chery](/car-remaps/chery) — Chinese market vehicles (2 models)
+- [Chevrolet](/car-remaps/chevrolet) — American performance platform (13 models)
+- [Chrysler](/car-remaps/chrysler) — American luxury tuning (12 models)
+- [Citroen](/car-remaps/citroen) — French commercial and passenger vehicles (54 models)
+- [Cupra](/car-remaps/cupra) — SEAT performance brand (3 models)
+- [Dacia](/car-remaps/dacia) — Budget-friendly tuning options (17 models)
+- [Daewoo](/car-remaps/daewoo) — Historic Korean models (4 models)
+- [Daihatsu](/car-remaps/daihatsu) — Compact vehicle remapping (1 model)
+- [Dallara](/car-remaps/dallara) — Motorsport specialist tuning (1 model)
+- [Dodge](/car-remaps/dodge) — American truck and SUV platform (16 models)
+- [DS](/car-remaps/ds) — Citroën luxury sub-brand (7 models)
+- [Ferrari](/car-remaps/ferrari) — Exotic car tuning specs (17 models)
+- [FIAT](/car-remaps/fiat) — Italian city car and commercial tuning (47 models)
+- [Ford](/car-remaps/ford) — Global truck, van and commercial platform (97 models)
+- [Geely](/car-remaps/geely) — Chinese manufacturer specs (4 models)
+- [Genesis](/car-remaps/genesis) — Hyundai luxury division (6 models)
+- [Gmc](/car-remaps/gmc) — General Motors truck platform (18 models)
+- [GWM](/car-remaps/gwm) — Great Wall Motors specs (6 models)
+- [Holden](/car-remaps/holden) — Australian vehicle platform (3 models)
+- [Honda](/car-remaps/honda) — Japanese reliability and efficiency (31 models)
+- [Hummer](/car-remaps/hummer) — Full-size SUV tuning data (4 models)
+- [Hyundai](/car-remaps/hyundai) — Korean value and reliability platform (47 models)
+- [Ineos](/car-remaps/ineos) — Premium lightweight vehicle specs (4 models)
+- [Infiniti](/car-remaps/infiniti) — Nissan luxury division (21 models)
+- [Isuzu](/car-remaps/isuzu) — Commercial diesel specialist (7 models)
+- [Iveco](/car-remaps/iveco) — Heavy commercial and light truck platform (3 models)
+- [Jaecoo](/car-remaps/jaecoo) — Chinese luxury brand (2 models)
+- [Jaguar](/car-remaps/jaguar) — British luxury performance (5 models)
+- [Jeep](/car-remaps/jeep) — Off-road and adventure platform (19 models)
+- [Kia](/car-remaps/kia) — Korean value platform (47 models)
+- [Lamborghini](/car-remaps/lamborghini) — Supercar remapping specs (4 models)
+- [Lancia](/car-remaps/lancia) — Italian classic brand (11 models)
+- [Land Rover](/car-remaps/land-rover) — Premium off-road and commercial (18 models)
+- [LDV](/car-remaps/ldv) — Light commercial vehicle specialist (2 models)
+- [Lexus](/car-remaps/lexus) — Toyota luxury division (14 models)
+- [Lincoln](/car-remaps/lincoln) — American luxury platform (11 models)
+- [Lotus](/car-remaps/lotus) — Lightweight performance engineering (6 models)
+- [Luxgen](/car-remaps/luxgen) — Taiwanese manufacturer specs (3 models)
+- [Mahindra](/car-remaps/mahindra) — Indian commercial and SUV platform (6 models)
+- [Maserati](/car-remaps/maserati) — Italian luxury sport (9 models)
+- [Mazda](/car-remaps/mazda) — Japanese zoom-zoom performance (28 models)
+- [Mclaren](/car-remaps/mclaren) — Supercar and sport specs (13 models)
+- [Mercedes-benz](/car-remaps/mercedes-benz) — Premium German platform (99 models)
+- [MG](/car-remaps/mg) — Chinese market performance (5 models)
+- [Mini](/car-remaps/mini) — Urban sport and fun (21 models)
+- [Mitsubishi](/car-remaps/mitsubishi) — Japanese performance and commercial (20 models)
+- [Morgan](/car-remaps/morgan) — British handcrafted sports cars (1 model)
+- [Nissan](/car-remaps/nissan) — Japanese performance and commercial platform (61 models)
+- [Omoda](/car-remaps/omoda) — Chinese luxury subbrand (1 model)
+- [Opel](/car-remaps/opel) — German value platform (26 models)
+- [Peugeot](/car-remaps/peugeot) — French commercial and passenger platform (54 models)
+- [Pontiac](/car-remaps/pontiac) — American performance heritage (14 models)
+- [Porsche](/car-remaps/porsche) — German sports and performance (15 models)
+- [Proton](/car-remaps/proton) — Malaysian manufacturer (1 model)
+- [Renault](/car-remaps/renault) — French value and commercial platform (54 models)
+- [Roewe](/car-remaps/roewe) — Chinese SAIC brand (1 model)
+- [Rolls Royce](/car-remaps/rolls-royce) — Ultra-luxury tuning options (4 models)
+- [Rover](/car-remaps/rover) — British classic (1 model)
+- [Saab](/car-remaps/saab) — Swedish engineering legacy (9 models)
+- [Saturn](/car-remaps/saturn) — American value brand (9 models)
+- [Seat](/car-remaps/seat) — Spanish performance platform (25 models)
+- [Skoda](/car-remaps/skoda) — Czech value and commercial (25 models)
+- [Smart](/car-remaps/smart) — Urban microcar platform (7 models)
+- [Ssangyong](/car-remaps/ssangyong) — Korean SUV specialist (12 models)
+- [Subaru](/car-remaps/subaru) — Japanese boxer engine platform (21 models)
+- [Suzuki](/car-remaps/suzuki) — Japanese compact platform (12 models)
+- [Tata](/car-remaps/tata) — Indian commercial platform (1 model)
+- [Toyota](/car-remaps/toyota) — Japanese reliability and efficiency leader (48 models)
+- [Vauxhall](/car-remaps/vauxhall) — British value platform (5 models)
+- [Volvo](/car-remaps/volvo) — Swedish safety and performance (43 models)
+- [VW](/car-remaps/vw) — Volkswagen platform (1 model)
+
+## JSON API Endpoint
+
+**URL:** `/api/car-remaps/lookup`
+
+Query parameters (progressive refinement): `make`, `model`, `fuelType`, `variant`
+
+This RESTful endpoint powers the interactive vehicle finder on the Car Remaps page. Supply a vehicle make, and the API returns available models; supply a model, and it returns fuel types; continue narrowing to get exact performance figures and pricing for that specific variant.
+
+## Model Context Protocol (MCP) Integration
+
+**Endpoint:** `/api/mcp`
+
+DCH Automotive exposes the car remaps catalogue via the Model Context Protocol (Streamable HTTP transport), making the ready reckoner accessible to Claude agents and MCP-compatible clients. Agents can call the `lookup_vehicle_tuning` tool to query performance specs, Economy Tuning gains, and pricing programmatically — useful for building fleet efficiency reports, ROI calculators, or vehicle procurement decision support within your own tools.
+
+See [Model Context Protocol](https://modelcontextprotocol.io) for implementation details and MCP client configuration.
