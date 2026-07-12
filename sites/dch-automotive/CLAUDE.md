@@ -32,59 +32,28 @@ All production images live in the shared platform R2 bucket under the `dch-autom
 
 ## Content Types
 
-MDX content in `content/` (services/car-remaps/homepage are the bespoke exception above):
-
-| Type         | Directory               | Count                                                                          |
-| ------------ | ----------------------- | ------------------------------------------------------------------------------ |
-| Services     | `content/services/`     | 5 (Vehicle Security, Parking Aids, Fleet Solutions, Accessories, Dash Cameras) |
-| Locations    | `content/locations/`    | 3 (Eastbourne, Polegate, Hailsham)                                             |
-| Blog         | `content/blog/`         | 2                                                                              |
-| Projects     | `content/projects/`     | 1                                                                              |
-| Testimonials | `content/testimonials/` | 3                                                                              |
+MDX content in `content/` (services/car-remaps/homepage are the bespoke exception above) — validation schemas come from `@platform/core-components` (imported via subpath, not a local copy).
 
 Note: homepage testimonials are separate, hardcoded sample quotes in `app/page.tsx` explicitly marked "SAMPLE QUOTE, not a real customer" — pending real client quotes, see `tasks/clients/dch-automotive.md`.
 
-## Essential Commands
-
-```bash
-# Development
-npm run dev              # Start dev server (localhost:3000) — uses --webpack, not Turbopack
-npm run build             # Production build
-
-# Validation
-npm run validate:content  # Validate MDX content (services/locations/blog/projects/testimonials)
-npm run validate:quality  # Platform quality gates
-npm run type-check        # TypeScript type checking
-npm run lint              # ESLint
-
-# Testing
-npm test                  # Unit tests (Vitest)
-npm run test:e2e:smoke    # Fast E2E smoke tests (Playwright)
-```
-
-### Schema Locations
-
-Validation schemas come from `@platform/core-components` (imported via subpath, not a local copy):
-
-- `ServiceFrontmatterSchema`, `LocationFrontmatterSchema`, `BlogFrontmatterSchema`, `ProjectFrontmatterSchema`, `TestimonialFrontmatterSchema`
-
 ## Routes
 
-| Route                | Description                                                                                                                                                                                                                           |
-| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `/`                  | Homepage — **bespoke**, hardcoded in `app/page.tsx`                                                                                                                                                                                   |
-| `/car-remaps`        | ECU remapping catalogue — **bespoke** intro/content, plus an interactive DCH-owned ready reckoner (`components/car-remaps-*.tsx`) and a fuel savings calculator. No longer embeds the Viezu iframe — see "Car Remaps Subsystem" below |
-| `/car-remaps/[make]` | Per-make AEO page — statically generated, real server-rendered performance tables + `Product`/`Service` JSON-LD, one per in-scope make (~144, cars/vans/HGV)                                                                          |
-| `/services`          | Services listing (MDX-driven)                                                                                                                                                                                                         |
-| `/services/[slug]`   | Service detail (MDX-driven)                                                                                                                                                                                                           |
-| `/locations`         | Locations listing (MDX-driven)                                                                                                                                                                                                        |
-| `/locations/[slug]`  | Location detail (MDX-driven)                                                                                                                                                                                                          |
-| `/blog`              | Blog listing (MDX-driven)                                                                                                                                                                                                             |
-| `/blog/[slug]`       | Blog post (MDX-driven)                                                                                                                                                                                                                |
-| `/projects`          | Projects listing (MDX-driven)                                                                                                                                                                                                         |
-| `/projects/[slug]`   | Project detail (MDX-driven)                                                                                                                                                                                                           |
-| `/reviews`           | Testimonials page — still generic base-template placeholder content, see outstanding items                                                                                                                                            |
-| `/about`, `/contact` | Bespoke static pages                                                                                                                                                                                                                  |
+| Route                 | Description                                                                                                                                                                                                                           |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `/`                   | Homepage — **bespoke**, hardcoded in `app/page.tsx`                                                                                                                                                                                   |
+| `/car-remaps`         | ECU remapping catalogue — **bespoke** intro/content, plus an interactive DCH-owned ready reckoner (`components/car-remaps-*.tsx`) and a fuel savings calculator. No longer embeds the Viezu iframe — see "Car Remaps Subsystem" below |
+| `/car-remaps/by-make` | Browse-by-make listing — links out to each `/car-remaps/[make]` page; split out from the main `/car-remaps` page so the by-make grid doesn't compete for space there                                                                  |
+| `/car-remaps/[make]`  | Per-make AEO page — statically generated, real server-rendered performance tables + `Product`/`Service` JSON-LD, one per in-scope make (~144, cars/vans/HGV)                                                                          |
+| `/services`           | Services listing (MDX-driven)                                                                                                                                                                                                         |
+| `/services/[slug]`    | Service detail (MDX-driven)                                                                                                                                                                                                           |
+| `/locations`          | Locations listing (MDX-driven)                                                                                                                                                                                                        |
+| `/locations/[slug]`   | Location detail (MDX-driven)                                                                                                                                                                                                          |
+| `/blog`               | Blog listing (MDX-driven)                                                                                                                                                                                                             |
+| `/blog/[slug]`        | Blog post (MDX-driven)                                                                                                                                                                                                                |
+| `/projects`           | Projects listing (MDX-driven)                                                                                                                                                                                                         |
+| `/projects/[slug]`    | Project detail (MDX-driven)                                                                                                                                                                                                           |
+| `/reviews`            | Testimonials page — still generic base-template placeholder content, see outstanding items                                                                                                                                            |
+| `/about`, `/contact`  | Bespoke static pages                                                                                                                                                                                                                  |
 
 ## Key Files
 

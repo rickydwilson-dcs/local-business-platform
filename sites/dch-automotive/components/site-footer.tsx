@@ -1,6 +1,8 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { siteConfig } from '@/site.config';
 import { PHONE_DISPLAY, PHONE_TEL } from '@/lib/contact-info';
+import { getImageUrl } from '@/lib/image';
 
 const QUICK_LINKS = [
   ...siteConfig.services.map((service) => ({
@@ -8,6 +10,7 @@ const QUICK_LINKS = [
     href: `/services/${service.slug}`,
   })),
   { label: 'Car Remaps', href: '/car-remaps' },
+  { label: 'Remap Services by Make', href: '/car-remaps/by-make' },
   { label: 'Locations', href: '/locations' },
 ];
 
@@ -16,6 +19,13 @@ export function SiteFooter() {
     <footer className="bg-surface-background border-t border-surface-card-border">
       <div className="w-full py-12 px-6 flex flex-col md:flex-row justify-between items-start gap-8 container mx-auto">
         <div className="max-w-sm">
+          <Image
+            src={getImageUrl('dch-automotive/logo/dch-automotive-logo-2025.webp')}
+            alt="DCH Automotive"
+            width={174}
+            height={90}
+            className="h-24 w-auto mb-4"
+          />
           <div className="text-lg font-heading font-bold text-white mb-4 uppercase tracking-tight">
             {siteConfig.business.name}
           </div>

@@ -4,6 +4,15 @@ Vehicle security, fleet electrics and ECU remapping installer serving the South 
 
 ---
 
+## 2026-07-12
+
+### Features
+
+- **"Remap Services by Make" moved off the main Car Remaps page onto its own `/car-remaps/by-make` listing.** The by-make browse grid no longer competes for space on `/car-remaps` itself — it's linked from the Ready Reckoner module, the footer, and the car-remaps sitemap instead. The heading also dropped the word "prices" (DCH doesn't quote prices on this grid).
+- **Added copy on `/car-remaps` explaining that "remapping", "ECU tuning", "chip tuning" and "car tuning" are the same service**, matched to the terminology Viezu (the tuning hardware/file supplier) uses on its own site. A new section ("Remapping, ECU Tuning, Car Tuning — Same Service") and FAQ entry (feeding the page's existing FAQ JSON-LD) tie DCH's tier names (Economy/Performance/Gearbox Tuning, Stage 1-3) to the wider vocabulary customers search for, without claiming specialisms outside DCH's actual scope (no motorsport/marine/agricultural/bike tuning). Page `<title>`/meta description updated to include "ECU Tuning" / "car tuning" alongside the existing terms.
+
+---
+
 ## 2026-07-11
 
 ### Features

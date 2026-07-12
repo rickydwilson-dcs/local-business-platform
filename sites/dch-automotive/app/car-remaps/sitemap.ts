@@ -14,6 +14,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.9,
   };
 
+  const byMakeEntry = {
+    url: `${BASE_URL}/car-remaps/by-make`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: 0.8,
+  };
+
   const makeEntries = makes.map((make) => ({
     url: `${BASE_URL}/car-remaps/${make.slug}`,
     lastModified: new Date(),
@@ -21,5 +28,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
-  return [indexEntry, ...makeEntries];
+  return [indexEntry, byMakeEntry, ...makeEntries];
 }
