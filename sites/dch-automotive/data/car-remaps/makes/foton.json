@@ -1,0 +1,247 @@
+[
+  {
+    "make": "Foton",
+    "model": "BJ5049",
+    "modelSlug": "bj5049",
+    "sourceProductId": 30114,
+    "sourceUrl": "https://viezu.com/shop/foton-bj5049-2019-present/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.8",
+        "originalBhp": {
+          "raw": "110",
+          "parsedValues": ["110"],
+          "primaryValue": "110"
+        },
+        "powerBhpGain": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "originalTorque": {
+          "raw": "285",
+          "parsedValues": ["285"],
+          "primaryValue": "285"
+        },
+        "torqueNmGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "economyGainBhp": {
+          "raw": "7",
+          "parsedValues": ["7"],
+          "primaryValue": "7"
+        },
+        "economyGainNm": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      }
+    ]
+  },
+  {
+    "make": "Foton",
+    "model": "BJ3253",
+    "modelSlug": "bj3253",
+    "sourceProductId": 30112,
+    "sourceUrl": "https://viezu.com/shop/foton-bj3253/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "9.7",
+        "originalBhp": {
+          "raw": "290",
+          "parsedValues": ["290"],
+          "primaryValue": "290"
+        },
+        "powerBhpGain": {
+          "raw": "29",
+          "parsedValues": ["29"],
+          "primaryValue": "29"
+        },
+        "originalTorque": {
+          "raw": "1160",
+          "parsedValues": ["1160"],
+          "primaryValue": "1160"
+        },
+        "torqueNmGain": {
+          "raw": "116",
+          "parsedValues": ["116"],
+          "primaryValue": "116"
+        },
+        "economyGainBhp": {
+          "raw": "13",
+          "parsedValues": ["13"],
+          "primaryValue": "13"
+        },
+        "economyGainNm": {
+          "raw": "58",
+          "parsedValues": ["58"],
+          "primaryValue": "58"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      }
+    ]
+  },
+  {
+    "make": "Foton",
+    "model": "BJ1253",
+    "modelSlug": "bj1253",
+    "sourceProductId": 30110,
+    "sourceUrl": "https://viezu.com/shop/foton-bj1253/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "9.7",
+        "originalBhp": {
+          "raw": "290",
+          "parsedValues": ["290"],
+          "primaryValue": "290"
+        },
+        "powerBhpGain": {
+          "raw": "29",
+          "parsedValues": ["29"],
+          "primaryValue": "29"
+        },
+        "originalTorque": {
+          "raw": "1160",
+          "parsedValues": ["1160"],
+          "primaryValue": "1160"
+        },
+        "torqueNmGain": {
+          "raw": "116",
+          "parsedValues": ["116"],
+          "primaryValue": "116"
+        },
+        "economyGainBhp": {
+          "raw": "13",
+          "parsedValues": ["13"],
+          "primaryValue": "13"
+        },
+        "economyGainNm": {
+          "raw": "58",
+          "parsedValues": ["58"],
+          "primaryValue": "58"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      }
+    ]
+  },
+  {
+    "make": "Foton",
+    "model": "Aumark",
+    "modelSlug": "aumark",
+    "sourceProductId": 30108,
+    "sourceUrl": "https://viezu.com/shop/foton-aumark-2015/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "3.8",
+        "originalBhp": {
+          "raw": "160",
+          "parsedValues": ["160"],
+          "primaryValue": "160"
+        },
+        "powerBhpGain": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "originalTorque": {
+          "raw": "500",
+          "parsedValues": ["500"],
+          "primaryValue": "500"
+        },
+        "torqueNmGain": {
+          "raw": "55",
+          "parsedValues": ["55"],
+          "primaryValue": "55"
+        },
+        "economyGainBhp": {
+          "raw": "7",
+          "parsedValues": ["7"],
+          "primaryValue": "7"
+        },
+        "economyGainNm": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      }
+    ]
+  },
+  {
+    "make": "Foton",
+    "model": "Auman",
+    "modelSlug": "auman",
+    "sourceProductId": 30106,
+    "sourceUrl": "https://viezu.com/shop/foton-auman-2012-present/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "3.8",
+        "originalBhp": {
+          "raw": "154",
+          "parsedValues": ["154"],
+          "primaryValue": "154"
+        },
+        "powerBhpGain": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "originalTorque": {
+          "raw": "500",
+          "parsedValues": ["500"],
+          "primaryValue": "500"
+        },
+        "torqueNmGain": {
+          "raw": "55",
+          "parsedValues": ["55"],
+          "primaryValue": "55"
+        },
+        "economyGainBhp": {
+          "raw": "7",
+          "parsedValues": ["7"],
+          "primaryValue": "7"
+        },
+        "economyGainNm": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      }
+    ]
+  }
+]

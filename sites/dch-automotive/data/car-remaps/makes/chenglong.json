@@ -1,0 +1,51 @@
+[
+  {
+    "make": "Chenglong",
+    "model": "M7",
+    "modelSlug": "m7",
+    "sourceProductId": 29982,
+    "sourceUrl": "https://viezu.com/shop/chenglong-m7-2018-present/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "10.0",
+        "originalBhp": {
+          "raw": "400",
+          "parsedValues": ["400"],
+          "primaryValue": "400"
+        },
+        "powerBhpGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "originalTorque": {
+          "raw": "1500",
+          "parsedValues": ["1500"],
+          "primaryValue": "1500"
+        },
+        "torqueNmGain": {
+          "raw": "150",
+          "parsedValues": ["150"],
+          "primaryValue": "150"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "75",
+          "parsedValues": ["75"],
+          "primaryValue": "75"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      }
+    ]
+  }
+]

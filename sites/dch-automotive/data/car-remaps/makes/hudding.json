@@ -1,0 +1,149 @@
+[
+  {
+    "make": "Hudding",
+    "model": "1260C",
+    "modelSlug": "1260c",
+    "sourceProductId": 30208,
+    "sourceUrl": "https://viezu.com/shop/hudding-1260c-2014-2016/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "6.7",
+        "originalBhp": {
+          "raw": "158",
+          "parsedValues": ["158"],
+          "primaryValue": "158"
+        },
+        "powerBhpGain": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "originalTorque": {
+          "raw": "662",
+          "parsedValues": ["662"],
+          "primaryValue": "662"
+        },
+        "torqueNmGain": {
+          "raw": "55",
+          "parsedValues": ["55"],
+          "primaryValue": "55"
+        },
+        "economyGainBhp": {
+          "raw": "7",
+          "parsedValues": ["7"],
+          "primaryValue": "7"
+        },
+        "economyGainNm": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      }
+    ]
+  },
+  {
+    "make": "Hudding",
+    "model": "1260B",
+    "modelSlug": "1260b",
+    "sourceProductId": 30206,
+    "sourceUrl": "https://viezu.com/shop/hudding-1260b-2008-2011/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "6.7",
+        "originalBhp": {
+          "raw": "158",
+          "parsedValues": ["158"],
+          "primaryValue": "158"
+        },
+        "powerBhpGain": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "55",
+          "parsedValues": ["55"],
+          "primaryValue": "55"
+        },
+        "economyGainBhp": {
+          "raw": "7",
+          "parsedValues": ["7"],
+          "primaryValue": "7"
+        },
+        "economyGainNm": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      }
+    ]
+  },
+  {
+    "make": "Hudding",
+    "model": "1060B",
+    "modelSlug": "1060b",
+    "sourceProductId": 30204,
+    "sourceUrl": "https://viezu.com/shop/hudding-1060b-2008-2011/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "4.0",
+        "originalBhp": {
+          "raw": "126",
+          "parsedValues": ["126"],
+          "primaryValue": "126"
+        },
+        "powerBhpGain": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "economyGainBhp": {
+          "raw": "7",
+          "parsedValues": ["7"],
+          "primaryValue": "7"
+        },
+        "economyGainNm": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      }
+    ]
+  }
+]

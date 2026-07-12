@@ -1,0 +1,51 @@
+[
+  {
+    "make": "Wirtgen",
+    "model": "W130Cfi",
+    "modelSlug": "w130cfi",
+    "sourceProductId": 32142,
+    "sourceUrl": "https://viezu.com/shop/wirtgen-w130cfi-2014/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "8.8",
+        "originalBhp": {
+          "raw": "220",
+          "parsedValues": ["220"],
+          "primaryValue": "220"
+        },
+        "powerBhpGain": {
+          "raw": "22",
+          "parsedValues": ["22"],
+          "primaryValue": "22"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "0",
+          "parsedValues": ["0"],
+          "primaryValue": "0"
+        },
+        "economyGainBhp": {
+          "raw": "11",
+          "parsedValues": ["11"],
+          "primaryValue": "11"
+        },
+        "economyGainNm": {
+          "raw": "0",
+          "parsedValues": ["0"],
+          "primaryValue": "0"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      }
+    ]
+  }
+]

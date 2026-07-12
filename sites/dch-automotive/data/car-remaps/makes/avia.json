@@ -1,0 +1,140 @@
+[
+  {
+    "make": "Avia",
+    "model": "D120",
+    "modelSlug": "d120",
+    "sourceProductId": 29972,
+    "sourceUrl": "https://viezu.com/shop/avia-d120-2010-2015/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "4.5",
+        "originalBhp": {
+          "raw": "159",
+          "parsedValues": ["159"],
+          "primaryValue": "159"
+        },
+        "powerBhpGain": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "originalTorque": {
+          "raw": "602",
+          "parsedValues": ["602"],
+          "primaryValue": "602"
+        },
+        "torqueNmGain": {
+          "raw": "55",
+          "parsedValues": ["55"],
+          "primaryValue": "55"
+        },
+        "economyGainBhp": {
+          "raw": "7",
+          "parsedValues": ["7"],
+          "primaryValue": "7"
+        },
+        "economyGainNm": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "6.7",
+        "originalBhp": {
+          "raw": "220",
+          "parsedValues": ["220"],
+          "primaryValue": "220"
+        },
+        "powerBhpGain": {
+          "raw": "22",
+          "parsedValues": ["22"],
+          "primaryValue": "22"
+        },
+        "originalTorque": {
+          "raw": "1020",
+          "parsedValues": ["1020"],
+          "primaryValue": "1020"
+        },
+        "torqueNmGain": {
+          "raw": "102",
+          "parsedValues": ["102"],
+          "primaryValue": "102"
+        },
+        "economyGainBhp": {
+          "raw": "11",
+          "parsedValues": ["11"],
+          "primaryValue": "11"
+        },
+        "economyGainNm": {
+          "raw": "51",
+          "parsedValues": ["51"],
+          "primaryValue": "51"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      }
+    ]
+  },
+  {
+    "make": "Avia",
+    "model": "D100",
+    "modelSlug": "d100",
+    "sourceProductId": 29970,
+    "sourceUrl": "https://viezu.com/shop/avia-d100-2009-2014/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "4.5",
+        "originalBhp": {
+          "raw": "160",
+          "parsedValues": ["160"],
+          "primaryValue": "160"
+        },
+        "powerBhpGain": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "originalTorque": {
+          "raw": "602",
+          "parsedValues": ["602"],
+          "primaryValue": "602"
+        },
+        "torqueNmGain": {
+          "raw": "55",
+          "parsedValues": ["55"],
+          "primaryValue": "55"
+        },
+        "economyGainBhp": {
+          "raw": "7",
+          "parsedValues": ["7"],
+          "primaryValue": "7"
+        },
+        "economyGainNm": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      }
+    ]
+  }
+]

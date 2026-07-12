@@ -346,6 +346,53 @@ describe('buildScopeIndex marque aliasing (Volkswagen/VW abbreviation fix)', () 
   });
 });
 
+describe('buildScopeIndex HGV scope (no collision with car/van marques)', () => {
+  // Real fixtures from the original cross-vehicle-type investigation
+  // (fixtures README, "Cross-vehicle-type marque check") — confirms HGV
+  // marques merge into the pooled scope index without colliding with a
+  // car/van marque of the same base name (e.g. "Ford Truck" vs "Ford").
+  const cars = parseFilterBrandsResponse(loadFixture('ajax-brands-cars.html'));
+  const hgv = parseFilterBrandsResponse(loadFixture('ajax-brands-hgv-check.html'));
+
+  const modelsByMarque = new Map<string, ScopeModel[]>();
+  modelsByMarque.set(
+    'ford-tuning-remapping',
+    parseFilterModelsResponse(loadFixture('ajax-models-ford-tuning-remapping.html'))
+  );
+  modelsByMarque.set(
+    'ford-truck-264',
+    parseFilterModelsResponse(loadFixture('ajax-models-ford-truck-264-hgv-tuning.html'))
+  );
+
+  const index = buildScopeIndex({ cars, vans: [], hgv }, modelsByMarque);
+
+  it('normalizes "Ford Truck Tuning & ECU Remapping" to a key distinct from "ford"', () => {
+    expect(index.has('ford truck')).toBe(true);
+    expect(index.get('ford truck')).not.toBe(index.get('ford'));
+  });
+
+  // F-350 is deliberately not used here: it's genuinely listed under both
+  // the real car "Ford" marque model list and the real HGV "Ford Truck"
+  // list on Viezu's live site (confirmed in both source fixtures) — not a
+  // scope bug, just two independent real listings sharing a model name.
+  // F-4000 only appears in the HGV fixture, making it a clean example of a
+  // model that must NOT leak into the unrelated "ford" car marque key.
+  it('HGV-only models (e.g. F-4000) are not visible under the plain "ford" car marque key', () => {
+    expect(index.get('ford truck')?.has('f-4000')).toBe(true);
+    expect(index.get('ford')?.has('f-4000')).toBe(false);
+  });
+
+  it('matches a real HGV product name under the "ford truck" marque', () => {
+    const productName = 'Ford Truck F-4000 Tuning (2012-2014)';
+    expect(isInScopeVehicle(productName, index)).toBe(true);
+  });
+
+  it('does not match the same model under a plain "Ford" prefix (no false positive from the HGV data)', () => {
+    const productName = 'Ford F-4000 Tuning (2012-2014)';
+    expect(isInScopeVehicle(productName, index)).toBe(false);
+  });
+});
+
 describe('parsePipeValue', () => {
   it('splits and trims a multi-value pipe field', () => {
     expect(parsePipeValue('258 | 197')).toEqual({

@@ -1,0 +1,140 @@
+[
+  {
+    "make": "Sinotruk",
+    "model": "Howo A7",
+    "modelSlug": "howo-a7",
+    "sourceProductId": 31893,
+    "sourceUrl": "https://viezu.com/shop/sinotruk-howo-a7-2006-2014/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "10.0",
+        "originalBhp": {
+          "raw": "345",
+          "parsedValues": ["345"],
+          "primaryValue": "345"
+        },
+        "powerBhpGain": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "160",
+          "parsedValues": ["160"],
+          "primaryValue": "160"
+        },
+        "economyGainBhp": {
+          "raw": "17",
+          "parsedValues": ["17"],
+          "primaryValue": "17"
+        },
+        "economyGainNm": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "10.0",
+        "originalBhp": {
+          "raw": "385",
+          "parsedValues": ["385"],
+          "primaryValue": "385"
+        },
+        "powerBhpGain": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "160",
+          "parsedValues": ["160"],
+          "primaryValue": "160"
+        },
+        "economyGainBhp": {
+          "raw": "17",
+          "parsedValues": ["17"],
+          "primaryValue": "17"
+        },
+        "economyGainNm": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      }
+    ]
+  },
+  {
+    "make": "Sinotruk",
+    "model": "Howo",
+    "modelSlug": "howo",
+    "sourceProductId": 31891,
+    "sourceUrl": "https://viezu.com/shop/sinotruk-howo-2018-present/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "10.5",
+        "originalBhp": {
+          "raw": "385",
+          "parsedValues": ["385"],
+          "primaryValue": "385"
+        },
+        "powerBhpGain": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "1590",
+          "parsedValues": ["1590"],
+          "primaryValue": "1590"
+        },
+        "torqueNmGain": {
+          "raw": "160",
+          "parsedValues": ["160"],
+          "primaryValue": "160"
+        },
+        "economyGainBhp": {
+          "raw": "17",
+          "parsedValues": ["17"],
+          "primaryValue": "17"
+        },
+        "economyGainNm": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      }
+    ]
+  }
+]
