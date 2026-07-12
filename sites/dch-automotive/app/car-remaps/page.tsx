@@ -8,9 +8,9 @@ import { getImageUrl } from '@/lib/image';
 import { absUrl } from '@/lib/site';
 
 export const metadata: Metadata = {
-  title: 'Car Remaps | DCH Automotive — Viezu Approved Dealer',
+  title: 'Car Remaps & ECU Tuning | DCH Automotive — Viezu Approved Dealer',
   description:
-    "ECU remapping fitted by DCH Automotive, a Viezu Approved Dealer — Stage 1-3, Economy Tuning, Performance Tuning and Gearbox Tuning, backed by Viezu's money-back and insurance-backed guarantees.",
+    "ECU remapping and car tuning fitted by DCH Automotive, a Viezu Approved Dealer — Stage 1-3, Economy Tuning, Performance Tuning and Gearbox Tuning, backed by Viezu's money-back and insurance-backed guarantees.",
 };
 
 const REMAP_SERVICES = [
@@ -115,7 +115,7 @@ const HOW_IT_WORKS_STEPS = [
     icon: 'tune',
     title: 'What Remapping Actually Changes',
     description:
-      "Remapping connects genuine Viezu KESS3 hardware to your vehicle's OBD port and rewrites those factory parameters with a tune calibrated to your specific vehicle, mileage and condition. No physical parts are removed or fitted for a standard remap — it's a software recalibration, not a hardware modification.",
+      "Remapping connects genuine Viezu KESS3 hardware to your vehicle's OBD port and rewrites those factory parameters with a tuning file calibrated to your specific vehicle, mileage and condition. No physical parts are removed or fitted for a standard remap — it's a software recalibration, not a hardware modification. You'll see this same process marketed under different names — remapping, ECU tuning, chip tuning, car tuning — it's one process, several labels.",
   },
   {
     icon: 'verified',
@@ -157,6 +157,11 @@ const CAR_REMAPS_FAQS = [
     question: 'What is ECU remapping?',
     answer:
       "ECU remapping is the process of rewriting the software parameters your vehicle's Engine Control Unit uses to manage fuelling, boost, ignition timing and (where applicable) gearbox behaviour. It's a recalibration of the factory settings for your specific vehicle and goals, not a physical or hardware modification.",
+  },
+  {
+    question: 'Is "car tuning" the same thing as an ECU remap?',
+    answer:
+      'Yes — remapping, ECU tuning, chip tuning and "car tuning" all describe the same underlying process, just using different words for it. Viezu, whose KESS3 tools and tuning files we use for every vehicle, names their own tiers Economy Tuning, Performance Tuning, Gearbox Tuning and Stage 1-3 remaps, alongside vehicle-specific programs like Diesel Tuning and Commercial & HGV Tuning. Whichever term brought you here, it\'s the same DCH Automotive service: fitted on genuine Viezu hardware and matched to your exact vehicle, not a generic file.',
   },
   {
     question: 'How does DCH Automotive carry out a remap?',
@@ -284,6 +289,25 @@ export default async function CarRemapsPage() {
           <span className="text-white/70 font-heading uppercase tracking-widest text-sm">
             Genuine Viezu KESS3 tuning hardware
           </span>
+        </div>
+      </section>
+
+      {/* Terminology — remapping / ECU tuning / car tuning are the same service */}
+      <section className="py-16 container mx-auto px-6">
+        <div className="max-w-3xl mx-auto text-center">
+          <h2 className="text-3xl font-heading font-black uppercase tracking-tight mb-4">
+            Remapping, ECU Tuning, Car Tuning —{' '}
+            <span className="text-brand-primary">Same Service.</span>
+          </h2>
+          <p className="text-white/60 font-sans leading-relaxed">
+            Viezu, whose KESS3 tuning tools and tuning files we use for every vehicle, splits this
+            same underlying process into named tiers — Economy Tuning, Performance Tuning, Gearbox
+            Tuning and Stage 1-3 remaps — alongside vehicle-specific programs like Diesel Tuning and
+            Commercial &amp; HGV Tuning. Whether you searched for remapping, ECU tuning, chip tuning
+            or just &ldquo;car tuning&rdquo;, it&apos;s the same DCH Automotive service: fitted by
+            an IMI-certified technician on genuine Viezu hardware, matched to your exact vehicle
+            rather than loaded from a generic tuning file.
+          </p>
         </div>
       </section>
 
@@ -679,9 +703,9 @@ export default async function CarRemapsPage() {
           '@type': 'WebPage',
           '@id': absUrl('/car-remaps#webpage'),
           url: absUrl('/car-remaps'),
-          name: 'Car Remaps | DCH Automotive — Viezu Approved Dealer',
+          name: 'Car Remaps & ECU Tuning | DCH Automotive — Viezu Approved Dealer',
           description:
-            "ECU remapping fitted by DCH Automotive, a Viezu Approved Dealer — Stage 1-3, Economy Tuning, Performance Tuning and Gearbox Tuning, backed by Viezu's money-back and insurance-backed guarantees.",
+            "ECU remapping and car tuning fitted by DCH Automotive, a Viezu Approved Dealer — Stage 1-3, Economy Tuning, Performance Tuning and Gearbox Tuning, backed by Viezu's money-back and insurance-backed guarantees.",
         }}
         faqs={CAR_REMAPS_FAQS}
       />
