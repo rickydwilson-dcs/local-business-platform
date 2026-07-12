@@ -18,7 +18,7 @@
   "staging": [
     {
       "name": "colossus",
-      "baseURL": "https://colossus-scaffolding.vercel.app",
+      "baseURL": "https://local-business-platform-colossus-reference.vercel.app",
       "hasLocations": true,
       "firstServiceSlug": "access-scaffolding",
       "firstLocationSlug": "brighton"
