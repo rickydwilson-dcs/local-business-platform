@@ -87,6 +87,9 @@ jobs:
           2>&1 | tee /tmp/smoke-output.txt || echo "smoke_failed=true" >> $GITHUB_ENV
         env:
           CI: "true"
+          # --reporter=json,github above overrides smoke.config.ts's reporter array (including
+          # its outputFile), so the json reporter falls back to stdout unless told otherwise here.
+          PLAYWRIGHT_JSON_OUTPUT_FILE: packages/playwright-shared/smoke-results.json
 
       - name: Move Playwright JSON results
         if: always()
