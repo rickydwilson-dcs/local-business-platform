@@ -6,6 +6,15 @@ Notable platform-level changes to the Local Business Platform. Site-specific cha
 
 ---
 
+## 2026-07-12
+
+### Infrastructure
+
+- Fixed the Regression Watchdog GitHub Action (`.github/workflows/watchdog.yml`) silently never triaging failures since its April 2026 launch: the smoke-test step piped `npx playwright test` through `tee` without `pipefail`, so the shell's exit code always reflected `tee` (success) rather than Playwright, and `smoke_failed` was never set — every prod/staging push showed the smoke step as green and skipped auto-triage even when tests failed. Added `set -o pipefail` to the step.
+- Fixed `packages/playwright-shared/sites.json`'s prod smoke targets, which the pipefail bug above had been masking: colossus pointed at `colossusscaffolding.com`, an unrelated `.com` domain with no DNS records configured (not colossus-scaffolding's real domain, `colossus-scaffolding.co.uk`), so all 10 colossus smoke checks failed on `ERR_NAME_NOT_RESOLVED` on every run; and a `dcs` entry targeted `digitalconsultingservices.co.uk`, which is not an LBP platform site at all but the platform owner's own WordPress consultancy site, and was removed.
+
+---
+
 ## 2026-07-11
 
 ### Sites

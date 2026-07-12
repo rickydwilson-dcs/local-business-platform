@@ -79,6 +79,7 @@ jobs:
       - name: Run cross-site smoke tests
         id: smoke
         run: |
+          set -o pipefail
           WATCHDOG_ENV=${{ steps.env.outputs.target }} \
           npx playwright test \
             --config packages/playwright-shared/smoke.config.ts \
