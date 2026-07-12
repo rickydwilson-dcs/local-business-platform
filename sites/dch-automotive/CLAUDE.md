@@ -32,41 +32,9 @@ All production images live in the shared platform R2 bucket under the `dch-autom
 
 ## Content Types
 
-MDX content in `content/` (services/car-remaps/homepage are the bespoke exception above):
-
-| Type         | Directory               | Count                                                                          |
-| ------------ | ----------------------- | ------------------------------------------------------------------------------ |
-| Services     | `content/services/`     | 5 (Vehicle Security, Parking Aids, Fleet Solutions, Accessories, Dash Cameras) |
-| Locations    | `content/locations/`    | 3 (Eastbourne, Polegate, Hailsham)                                             |
-| Blog         | `content/blog/`         | 2                                                                              |
-| Projects     | `content/projects/`     | 1                                                                              |
-| Testimonials | `content/testimonials/` | 3                                                                              |
+MDX content in `content/` (services/car-remaps/homepage are the bespoke exception above) — validation schemas come from `@platform/core-components` (imported via subpath, not a local copy).
 
 Note: homepage testimonials are separate, hardcoded sample quotes in `app/page.tsx` explicitly marked "SAMPLE QUOTE, not a real customer" — pending real client quotes, see `tasks/clients/dch-automotive.md`.
-
-## Essential Commands
-
-```bash
-# Development
-npm run dev              # Start dev server (localhost:3000) — uses --webpack, not Turbopack
-npm run build             # Production build
-
-# Validation
-npm run validate:content  # Validate MDX content (services/locations/blog/projects/testimonials)
-npm run validate:quality  # Platform quality gates
-npm run type-check        # TypeScript type checking
-npm run lint              # ESLint
-
-# Testing
-npm test                  # Unit tests (Vitest)
-npm run test:e2e:smoke    # Fast E2E smoke tests (Playwright)
-```
-
-### Schema Locations
-
-Validation schemas come from `@platform/core-components` (imported via subpath, not a local copy):
-
-- `ServiceFrontmatterSchema`, `LocationFrontmatterSchema`, `BlogFrontmatterSchema`, `ProjectFrontmatterSchema`, `TestimonialFrontmatterSchema`
 
 ## Routes
 
