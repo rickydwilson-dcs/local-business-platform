@@ -6,7 +6,6 @@ import { CarRemapsReadyReckoner } from '@/components/car-remaps-ready-reckoner';
 import { FaqAccordion } from '@/components/faq-accordion';
 import { getImageUrl } from '@/lib/image';
 import { absUrl } from '@/lib/site';
-import { listMakes } from '@/lib/car-remaps/repository';
 
 export const metadata: Metadata = {
   title: 'Car Remaps | DCH Automotive — Viezu Approved Dealer',
@@ -226,8 +225,6 @@ const CERTIFICATIONS = [
 ];
 
 export default async function CarRemapsPage() {
-  const makes = await listMakes();
-
   return (
     <>
       {/* Hero */}
@@ -487,34 +484,6 @@ export default async function CarRemapsPage() {
         </div>
       </section>
 
-      {/* Browse by Make — SEO interlinking to per-make performance/pricing pages.
-          Separate from the interactive ready reckoner below (this section is
-          plain server-rendered links, crawlable without JS). */}
-      <section className="py-24 bg-[#11100D] border-y border-white/5">
-        <div className="container mx-auto px-6">
-          <div className="mb-16 max-w-2xl">
-            <h2 className="text-4xl font-heading font-black uppercase tracking-tight mb-4">
-              Browse Remap Prices by <span className="text-brand-primary">Make</span>
-            </h2>
-            <p className="text-white/60 font-sans">
-              Performance figures and Economy Tuning prices for every make we support — find your
-              vehicle&apos;s manufacturer below.
-            </p>
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
-            {makes.map((make) => (
-              <Link
-                key={make.slug}
-                href={`/car-remaps/${make.slug}`}
-                className="block bg-surface-card border border-surface-card-border px-4 py-3 text-center text-sm font-heading font-bold uppercase tracking-tight hover:border-brand-primary hover:text-brand-primary transition-colors"
-              >
-                {make.name}
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Car Remaps Ready Reckoner — DCH-owned interactive vehicle finder over our synced catalogue */}
       <section className="py-24 container mx-auto px-6">
         <div className="mb-10 text-center max-w-2xl mx-auto">
@@ -527,6 +496,14 @@ export default async function CarRemapsPage() {
           </p>
         </div>
         <CarRemapsReadyReckoner />
+        <p className="text-center mt-10">
+          <Link
+            href="/car-remaps/by-make"
+            className="inline-flex items-center justify-center border border-white/20 hover:bg-white/10 text-white font-heading font-bold uppercase tracking-tight px-8 py-4 transition-all"
+          >
+            Remap Services by Make
+          </Link>
+        </p>
       </section>
 
       {/* Fleet Enquiry Form (static — see note in car-remaps-stitch conversion) */}
