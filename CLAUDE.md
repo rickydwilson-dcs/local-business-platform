@@ -38,13 +38,9 @@ See [docs/guides/debugging.md](docs/guides/debugging.md) for common issue patter
 
 This is a **white-label website platform** for local service businesses. The business model: take a single gold-standard template, customize it per client (colors, content, business info), and deploy each as an independent website.
 
-**The monorepo** uses Turborepo + pnpm workspaces. Shared code lives in `packages/`, individual client websites live in `sites/`, and automation scripts live in `tools/`. When you run `pnpm build`, Turborepo builds packages first (they're dependencies), then builds all sites in parallel with caching.
+**Shared utilities use factory patterns** in `packages/core-components` (see its `CLAUDE.md` for the exported factories) — this means bug fixes and improvements to shared logic flow to all sites automatically on next build.
 
-**Shared utilities use factory patterns.** `packages/core-components` exports factory functions (`createContentUtils`, `createSchemaGenerators`, `createMdxLoader`, `createSiteUtils`, `createContactInfo`, `createContactHandler`) that accept site-specific configuration and return configured utilities. Each site's `lib/` directory contains thin shims (5-10 lines) that call these factories with site config and re-export the results, preserving the `@/lib/*` import paths used throughout the site's pages. This means bug fixes and improvements to shared logic flow to all sites automatically on next build.
-
-**Content is MDX-only.** Every service page, location page, blog post, and project case study is an MDX file with YAML frontmatter. There are no centralized data files, no hardcoded page routes. Drop an MDX file in `content/services/` and the dynamic route `[slug]/page.tsx` picks it up automatically at build time via `generateStaticParams()`. This is the single most important architectural decision — it means content editors never touch code.
-
-**The theme system** makes white-labeling work. Each site defines a `theme.config.ts` with brand colors, typography, and component tokens. The theme system's Tailwind plugin transforms this config into CSS custom properties (`:root { --color-brand-primary: #xxx }`) and extends Tailwind with utility classes that reference those variables (`bg-brand-primary` → `var(--color-brand-primary)`). Pre-built named themes in `packages/themes/` (cygnus, designlab, navagarden, orion, solaris, vega) provide component registries, CSS utilities, and — for orion, vega, cygnus, and solaris — theme-owned `Header` and `Footer` Server Components exported via `@platform/themes/[name]/components`. Sites import these into `app/layout.tsx` instead of the generic `SiteHeader`/`Footer` from core-components. Themes also export **page layout components** from `packages/themes/[name]/pages/` — each site's `page.tsx` files are thin wrappers that import the theme template, fetch content, and pass it as props; schema JSON-LD and `generateMetadata`/`generateStaticParams` stay in the wrapper. Change the config, rebuild, and the entire site re-themes.
+**The theme system** makes white-labeling work. Each site defines a `theme.config.ts` with brand colors, typography, and component tokens. The theme system's Tailwind plugin transforms this config into CSS custom properties (`:root { --color-brand-primary: #xxx }`) and extends Tailwind with utility classes that reference those variables (`bg-brand-primary` → `var(--color-brand-primary)`). Change the config, rebuild, and the entire site re-themes.
 
 **Self-contained sites.** As of July 2026, every site in the monorepo — including `dj-fox-electrical` and `colossus-scaffolding` — is self-contained: each site owns its own `Header`, `Footer`, page layout components, and theme CSS/tokens inlined directly in its own `theme.config.ts`, with no imports from `@platform/themes/*`. (Confirmed by direct grep across all sites — an earlier version of this note claimed dj-fox-electrical and colossus-scaffolding still imported the named orion/vega packages; that's no longer true in practice.) The `packages/themes/*` packages (orion, vega, cygnus, solaris, lyra) still exist as reference/extraction records but are not consumed at runtime by any current site. See `MEMORY.md` → "Site self-containment migration" for the recipe and rationale.
 
@@ -124,25 +120,9 @@ The theme system exists so sites can be re-branded without touching component co
 ## Essential Commands
 
 ```bash
-# Session verification — MANDATORY at the end of every coding session
-pnpm type-check                        # TypeScript strict check across monorepo
-pnpm build                             # Production build (all sites)
-pnpm --filter <site> run lint          # Lint for each site modified (e.g. pnpm --filter dj-fox-electrical run lint)
-
-# Root level — runs across all workspaces via Turborepo
-pnpm build          # Build packages first, then all sites (cached)
-pnpm lint           # ESLint across all workspaces
-pnpm type-check     # TypeScript strict mode check
-pnpm clean          # Remove build artifacts
-
-# Site level — run from within a site directory
-npm run dev         # Next.js dev server (localhost:3000)
-npm run build       # Production build
-npm test            # Unit tests (Vitest)
-npm run test:e2e:smoke  # Fast E2E tests (Playwright)
+# Session verification — MANDATORY at the end of every coding session, use `pnpm --filter <site> run lint` per modified site
 
 # Content validation — checks MDX frontmatter against Zod schemas
-npm run validate:content                          # All MDX files
 npx tsx ../../scripts/validate-content.ts services   # Service files only
 npx tsx ../../scripts/validate-content.ts locations  # Location files only
 
@@ -191,70 +171,14 @@ npm run validate:content  # Shows which MDX files fail and why
 ### Vercel Deployment Failures
 
 - **"No Output Directory found"** — Check that site `vercel.json` does NOT set `outputDirectory`. Vercel resolves paths relative to `rootDirectory`, so setting it causes double-pathing.
-- **CSS parser panic or PostCSS timeout** — Verify the site uses `next build --webpack` (not Turbopack) in its `package.json` build script.
-- **Stale builds after adding env var** — Add the variable name to `turbo.json` `tasks.build.env` array. Without this, Turborepo serves a cached build with the old value.
-- **18+ minute Tailwind builds** — Check `tailwind.config.ts` content globs for `**` patterns that descend into `node_modules/`. Use scoped globs instead.
+- **CSS parser panic, stale builds after an env var, or 18+ minute Tailwind builds** — see the CSS Syntax / Build & CI / Tailwind Content Globs rules under "Key Architecture Rules" above.
 - **CI scan gate fails with missing token** — `SNYK_TOKEN` must be set in the Vercel project environment variables before security scan gates will pass.
 
 ---
 
-## Parallel sessions & git worktrees
+## Parallel Sessions & Git Worktrees
 
-The default workflow is: feature branch off `develop`, one Claude session at a time, merge back when done. Worktrees are not needed for normal work — the March 2026 remediation of 49 findings across 37 files and 3 sites completed with zero conflicts using feature branches alone.
-
-Worktrees are the right choice only in a narrow set of circumstances. Use the decision rule below.
-
-### Decision rule — use a worktree when ALL of these are true
-
-1. You intend to run **2+ concurrent Claude sessions** against the same repo.
-2. The work crosses **different branches** or would cause branch-switch races.
-3. The sessions will run **>15 minutes each** (otherwise the setup cost dominates).
-4. The work is **independent** (no shared files or build artifacts).
-
-If any of the four conditions is false, use a normal feature branch instead.
-
-### Specific scenarios
-
-| Scenario                                                    | Use worktree?                    | Why                                                                                                     |
-| ----------------------------------------------------------- | -------------------------------- | ------------------------------------------------------------------------------------------------------- |
-| Parallel YOLO sessions on the same repo                     | **Yes**                          | The killer use case. Each session gets its own worktree + feature branch and merges back when verified. |
-| Large architecture refactor needing safety isolation        | No                               | Feature branch + `git stash` is sufficient. Worktrees add friction without safety.                      |
-| Pipeline runs spinning up ephemeral test sites              | No                               | Test sites already live in isolated `sites/test-*` directories. Double isolation for no gain.           |
-| Concurrent `/pipeline.ingest` + `/review.code` on same repo | Marginal — only if both run long | Usually not worth it.                                                                                   |
-
-### Mechanics
-
-To create a worktree for a parallel session:
-
-```bash
-# From the main working copy
-git worktree add .claude/worktrees/my-session feature/my-session-branch
-
-# Then cd into it and work as usual
-cd .claude/worktrees/my-session
-# ... run YOLO, commit, verify ...
-```
-
-When the session is done and the branch has been merged back:
-
-```bash
-# From any worktree of the repo
-git worktree remove .claude/worktrees/my-session
-git branch -d feature/my-session-branch
-```
-
-`.claude/worktrees/` is gitignored — see the root `.gitignore`.
-
-### What NOT to do
-
-- **Do not use worktrees for single-session work.** It adds friction with no benefit.
-- **Do not create nested worktrees.** One level of worktree off the main working copy is the supported topology.
-- **Do not use worktrees to work around branch-protection rules.** They are not a shortcut around CI.
-- **Do not leave stale worktrees.** `git worktree prune` regularly or remove them when done.
-
-### Cross-repo note
-
-This rule applies to local-business-platform only. The force repo (`/Users/rickywilson/Sites/force/`) has `GOVERNANCE §8` which explicitly forbids parallel job execution. Do not propagate worktree adoption to force until `§8` is lifted — see `force/CLAUDE.md` for the authoritative rule there.
+Default to a single feature branch off `develop` — worktrees are only for 2+ concurrent long-running sessions on independent work. See the `worktree-strategy` skill for the decision rule and mechanics.
 
 ---
 
