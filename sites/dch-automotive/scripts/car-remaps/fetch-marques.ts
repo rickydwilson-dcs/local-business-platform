@@ -17,6 +17,7 @@ import {
 import type { ScopeIndex, ScopeMarque, ScopeModel } from '../../lib/car-remaps/types';
 import {
   FETCH_DELAY_MS,
+  FETCH_TIMEOUT_MS,
   IN_SCOPE_WIDGET_VEHICLE_TYPES,
   USER_AGENT,
   VIEZU_DEALER_WIDGET_URL,
@@ -31,6 +32,7 @@ export interface Nonce {
 export interface ScopeIndexStats {
   carsMarqueCount: number;
   vansMarqueCount: number;
+  hgvMarqueCount: number;
   totalModelsCounted: number;
 }
 
@@ -46,6 +48,7 @@ function sleep(ms: number): Promise<void> {
 export async function fetchNonce(): Promise<Nonce> {
   const res = await fetch(VIEZU_DEALER_WIDGET_URL, {
     headers: { 'User-Agent': USER_AGENT },
+    signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
   });
   if (!res.ok) {
     throw new Error(`fetchNonce: HTTP ${res.status} fetching ${VIEZU_DEALER_WIDGET_URL}`);
@@ -87,6 +90,7 @@ async function postAjax(
       'Content-Type': 'application/x-www-form-urlencoded',
     },
     body: body.toString(),
+    signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
   });
   if (!res.ok) {
     throw new Error(`postAjax: HTTP ${res.status} for action=${action}`);
@@ -145,7 +149,11 @@ export async function fetchScopeIndex(stats?: ScopeIndexStats): Promise<ScopeInd
     }
   }
 
-  const marques: { cars: ScopeMarque[]; vans: ScopeMarque[] } = { cars: [], vans: [] };
+  const marques: Record<(typeof IN_SCOPE_WIDGET_VEHICLE_TYPES)[number], ScopeMarque[]> = {
+    cars: [],
+    vans: [],
+    'hgv-tuning': [],
+  };
 
   for (const vehicleType of IN_SCOPE_WIDGET_VEHICLE_TYPES) {
     const list = await withNonceRetry((n) => fetchFilterBrands(vehicleType, n));
@@ -158,10 +166,9 @@ export async function fetchScopeIndex(stats?: ScopeIndexStats): Promise<ScopeInd
     slug: string;
     name: string;
     vehicleType: (typeof IN_SCOPE_WIDGET_VEHICLE_TYPES)[number];
-  }> = [
-    ...marques.cars.map((m) => ({ ...m, vehicleType: 'cars' as const })),
-    ...marques.vans.map((m) => ({ ...m, vehicleType: 'vans' as const })),
-  ];
+  }> = IN_SCOPE_WIDGET_VEHICLE_TYPES.flatMap((vehicleType) =>
+    marques[vehicleType].map((m) => ({ ...m, vehicleType }))
+  );
 
   const modelsByMarque = new Map<string, ScopeModel[]>();
   let completed = 0;
@@ -205,8 +212,12 @@ export async function fetchScopeIndex(stats?: ScopeIndexStats): Promise<ScopeInd
   if (stats) {
     stats.carsMarqueCount = marques.cars.length;
     stats.vansMarqueCount = marques.vans.length;
+    stats.hgvMarqueCount = marques['hgv-tuning'].length;
     stats.totalModelsCounted = totalModelsCounted;
   }
 
-  return buildScopeIndex(marques, modelsByMarque);
+  return buildScopeIndex(
+    { cars: marques.cars, vans: marques.vans, hgv: marques['hgv-tuning'] },
+    modelsByMarque
+  );
 }

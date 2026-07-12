@@ -1,0 +1,51 @@
+[
+  {
+    "make": "Sany",
+    "model": "Cranes QY50C",
+    "modelSlug": "cranes-qy50c",
+    "sourceProductId": 58901,
+    "sourceUrl": "https://viezu.com/shop/sany-cranes-qy50c/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "8.9",
+        "originalBhp": {
+          "raw": "310",
+          "parsedValues": ["310"],
+          "primaryValue": "310"
+        },
+        "powerBhpGain": {
+          "raw": "31",
+          "parsedValues": ["31"],
+          "primaryValue": "31"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "100",
+          "parsedValues": ["100"],
+          "primaryValue": "100"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "fuelSaving": {
+          "raw": "5%",
+          "parsedValues": ["5%"],
+          "primaryValue": "5%"
+        },
+        "displayPriceCents": 69900
+      }
+    ]
+  }
+]

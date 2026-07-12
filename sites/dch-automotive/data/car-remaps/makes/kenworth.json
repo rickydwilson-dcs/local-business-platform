@@ -1,0 +1,3867 @@
+[
+  {
+    "make": "Kenworth",
+    "model": "W900",
+    "modelSlug": "w900",
+    "sourceProductId": 31074,
+    "sourceUrl": "https://viezu.com/shop/kenworth-w900-1999-present/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "11.1",
+        "originalBhp": {
+          "raw": "481",
+          "parsedValues": ["481"],
+          "primaryValue": "481"
+        },
+        "powerBhpGain": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "190",
+          "parsedValues": ["190"],
+          "primaryValue": "190"
+        },
+        "economyGainBhp": {
+          "raw": "22",
+          "parsedValues": ["22"],
+          "primaryValue": "22"
+        },
+        "economyGainNm": {
+          "raw": "95",
+          "parsedValues": ["95"],
+          "primaryValue": "95"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "12.0",
+        "originalBhp": {
+          "raw": "330",
+          "parsedValues": ["330"],
+          "primaryValue": "330"
+        },
+        "powerBhpGain": {
+          "raw": "33",
+          "parsedValues": ["33"],
+          "primaryValue": "33"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "12.5",
+        "originalBhp": {
+          "raw": "430",
+          "parsedValues": ["430"],
+          "primaryValue": "430"
+        },
+        "powerBhpGain": {
+          "raw": "43",
+          "parsedValues": ["43"],
+          "primaryValue": "43"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "12.5",
+        "originalBhp": {
+          "raw": "336",
+          "parsedValues": ["336"],
+          "primaryValue": "336"
+        },
+        "powerBhpGain": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "160",
+          "parsedValues": ["160"],
+          "primaryValue": "160"
+        },
+        "economyGainBhp": {
+          "raw": "17",
+          "parsedValues": ["17"],
+          "primaryValue": "17"
+        },
+        "economyGainNm": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "12.9",
+        "originalBhp": {
+          "raw": "500",
+          "parsedValues": ["500"],
+          "primaryValue": "500"
+        },
+        "powerBhpGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "economyGainNm": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "12.9",
+        "originalBhp": {
+          "raw": "381",
+          "parsedValues": ["381"],
+          "primaryValue": "381"
+        },
+        "powerBhpGain": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "160",
+          "parsedValues": ["160"],
+          "primaryValue": "160"
+        },
+        "economyGainBhp": {
+          "raw": "17",
+          "parsedValues": ["17"],
+          "primaryValue": "17"
+        },
+        "economyGainNm": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "15.0",
+        "originalBhp": {
+          "raw": "435",
+          "parsedValues": ["435"],
+          "primaryValue": "435"
+        },
+        "powerBhpGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "170",
+          "parsedValues": ["170"],
+          "primaryValue": "170"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "85",
+          "parsedValues": ["85"],
+          "primaryValue": "85"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "15.8",
+        "originalBhp": {
+          "raw": "551",
+          "parsedValues": ["551"],
+          "primaryValue": "551"
+        },
+        "powerBhpGain": {
+          "raw": "55",
+          "parsedValues": ["55"],
+          "primaryValue": "55"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "220",
+          "parsedValues": ["220"],
+          "primaryValue": "220"
+        },
+        "economyGainBhp": {
+          "raw": "28",
+          "parsedValues": ["28"],
+          "primaryValue": "28"
+        },
+        "economyGainNm": {
+          "raw": "110",
+          "parsedValues": ["110"],
+          "primaryValue": "110"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      }
+    ]
+  },
+  {
+    "make": "Kenworth",
+    "model": "T909",
+    "modelSlug": "t909",
+    "sourceProductId": 31071,
+    "sourceUrl": "https://viezu.com/shop/kenworth-t909-2014-present/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "15.0",
+        "originalBhp": {
+          "raw": "601",
+          "parsedValues": ["601"],
+          "primaryValue": "601"
+        },
+        "powerBhpGain": {
+          "raw": "65",
+          "parsedValues": ["65"],
+          "primaryValue": "65"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "250",
+          "parsedValues": ["250"],
+          "primaryValue": "250"
+        },
+        "economyGainBhp": {
+          "raw": "28",
+          "parsedValues": ["28"],
+          "primaryValue": "28"
+        },
+        "economyGainNm": {
+          "raw": "125",
+          "parsedValues": ["125"],
+          "primaryValue": "125"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "15.0",
+        "originalBhp": {
+          "raw": "486",
+          "parsedValues": ["486"],
+          "primaryValue": "486"
+        },
+        "powerBhpGain": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "190",
+          "parsedValues": ["190"],
+          "primaryValue": "190"
+        },
+        "economyGainBhp": {
+          "raw": "22",
+          "parsedValues": ["22"],
+          "primaryValue": "22"
+        },
+        "economyGainNm": {
+          "raw": "95",
+          "parsedValues": ["95"],
+          "primaryValue": "95"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      }
+    ]
+  },
+  {
+    "make": "Kenworth",
+    "model": "T880",
+    "modelSlug": "t880",
+    "sourceProductId": 31063,
+    "sourceUrl": "https://viezu.com/shop/kenworth-t880-2012-present/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "10.8",
+        "originalBhp": {
+          "raw": "370",
+          "parsedValues": ["370"],
+          "primaryValue": "370"
+        },
+        "powerBhpGain": {
+          "raw": "37",
+          "parsedValues": ["37"],
+          "primaryValue": "37"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "18",
+          "parsedValues": ["18"],
+          "primaryValue": "18"
+        },
+        "economyGainNm": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "10.8",
+        "originalBhp": {
+          "raw": "430",
+          "parsedValues": ["430"],
+          "primaryValue": "430"
+        },
+        "powerBhpGain": {
+          "raw": "43",
+          "parsedValues": ["43"],
+          "primaryValue": "43"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "10.8",
+        "originalBhp": {
+          "raw": "355",
+          "parsedValues": ["355"],
+          "primaryValue": "355"
+        },
+        "powerBhpGain": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "160",
+          "parsedValues": ["160"],
+          "primaryValue": "160"
+        },
+        "economyGainBhp": {
+          "raw": "17",
+          "parsedValues": ["17"],
+          "primaryValue": "17"
+        },
+        "economyGainNm": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "12.9",
+        "originalBhp": {
+          "raw": "500",
+          "parsedValues": ["500"],
+          "primaryValue": "500"
+        },
+        "powerBhpGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "economyGainNm": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "12.9",
+        "originalBhp": {
+          "raw": "381",
+          "parsedValues": ["381"],
+          "primaryValue": "381"
+        },
+        "powerBhpGain": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "160",
+          "parsedValues": ["160"],
+          "primaryValue": "160"
+        },
+        "economyGainBhp": {
+          "raw": "17",
+          "parsedValues": ["17"],
+          "primaryValue": "17"
+        },
+        "economyGainNm": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "15.0",
+        "originalBhp": {
+          "raw": "601",
+          "parsedValues": ["601"],
+          "primaryValue": "601"
+        },
+        "powerBhpGain": {
+          "raw": "65",
+          "parsedValues": ["65"],
+          "primaryValue": "65"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "250",
+          "parsedValues": ["250"],
+          "primaryValue": "250"
+        },
+        "economyGainBhp": {
+          "raw": "28",
+          "parsedValues": ["28"],
+          "primaryValue": "28"
+        },
+        "economyGainNm": {
+          "raw": "125",
+          "parsedValues": ["125"],
+          "primaryValue": "125"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "15.0",
+        "originalBhp": {
+          "raw": "450",
+          "parsedValues": ["450"],
+          "primaryValue": "450"
+        },
+        "powerBhpGain": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "22",
+          "parsedValues": ["22"],
+          "primaryValue": "22"
+        },
+        "economyGainNm": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      }
+    ]
+  },
+  {
+    "make": "Kenworth",
+    "model": "T800",
+    "modelSlug": "t800",
+    "sourceProductId": 31049,
+    "sourceUrl": "https://viezu.com/shop/kenworth-t800-1998-present/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "10.3",
+        "originalBhp": {
+          "raw": "330",
+          "parsedValues": ["330"],
+          "primaryValue": "330"
+        },
+        "powerBhpGain": {
+          "raw": "33",
+          "parsedValues": ["33"],
+          "primaryValue": "33"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "10.8",
+        "originalBhp": {
+          "raw": "411",
+          "parsedValues": ["411"],
+          "primaryValue": "411"
+        },
+        "powerBhpGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "170",
+          "parsedValues": ["170"],
+          "primaryValue": "170"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "85",
+          "parsedValues": ["85"],
+          "primaryValue": "85"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "10.8",
+        "originalBhp": {
+          "raw": "330",
+          "parsedValues": ["330"],
+          "primaryValue": "330"
+        },
+        "powerBhpGain": {
+          "raw": "33",
+          "parsedValues": ["33"],
+          "primaryValue": "33"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "12.0",
+        "originalBhp": {
+          "raw": "330",
+          "parsedValues": ["330"],
+          "primaryValue": "330"
+        },
+        "powerBhpGain": {
+          "raw": "33",
+          "parsedValues": ["33"],
+          "primaryValue": "33"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "12.5",
+        "originalBhp": {
+          "raw": "430",
+          "parsedValues": ["430"],
+          "primaryValue": "430"
+        },
+        "powerBhpGain": {
+          "raw": "43",
+          "parsedValues": ["43"],
+          "primaryValue": "43"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "12.5",
+        "originalBhp": {
+          "raw": "336",
+          "parsedValues": ["336"],
+          "primaryValue": "336"
+        },
+        "powerBhpGain": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "160",
+          "parsedValues": ["160"],
+          "primaryValue": "160"
+        },
+        "economyGainBhp": {
+          "raw": "17",
+          "parsedValues": ["17"],
+          "primaryValue": "17"
+        },
+        "economyGainNm": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "12.9",
+        "originalBhp": {
+          "raw": "486",
+          "parsedValues": ["486"],
+          "primaryValue": "486"
+        },
+        "powerBhpGain": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "190",
+          "parsedValues": ["190"],
+          "primaryValue": "190"
+        },
+        "economyGainBhp": {
+          "raw": "22",
+          "parsedValues": ["22"],
+          "primaryValue": "22"
+        },
+        "economyGainNm": {
+          "raw": "95",
+          "parsedValues": ["95"],
+          "primaryValue": "95"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "12.9",
+        "originalBhp": {
+          "raw": "405",
+          "parsedValues": ["405"],
+          "primaryValue": "405"
+        },
+        "powerBhpGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "170",
+          "parsedValues": ["170"],
+          "primaryValue": "170"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "85",
+          "parsedValues": ["85"],
+          "primaryValue": "85"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "15.0",
+        "originalBhp": {
+          "raw": "435",
+          "parsedValues": ["435"],
+          "primaryValue": "435"
+        },
+        "powerBhpGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "170",
+          "parsedValues": ["170"],
+          "primaryValue": "170"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "85",
+          "parsedValues": ["85"],
+          "primaryValue": "85"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "15.0",
+        "originalBhp": {
+          "raw": "400",
+          "parsedValues": ["400"],
+          "primaryValue": "400"
+        },
+        "powerBhpGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "15.8",
+        "originalBhp": {
+          "raw": "551",
+          "parsedValues": ["551"],
+          "primaryValue": "551"
+        },
+        "powerBhpGain": {
+          "raw": "55",
+          "parsedValues": ["55"],
+          "primaryValue": "55"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "220",
+          "parsedValues": ["220"],
+          "primaryValue": "220"
+        },
+        "economyGainBhp": {
+          "raw": "28",
+          "parsedValues": ["28"],
+          "primaryValue": "28"
+        },
+        "economyGainNm": {
+          "raw": "110",
+          "parsedValues": ["110"],
+          "primaryValue": "110"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "15.8",
+        "originalBhp": {
+          "raw": "435",
+          "parsedValues": ["435"],
+          "primaryValue": "435"
+        },
+        "powerBhpGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "170",
+          "parsedValues": ["170"],
+          "primaryValue": "170"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "85",
+          "parsedValues": ["85"],
+          "primaryValue": "85"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "8.9",
+        "originalBhp": {
+          "raw": "280",
+          "parsedValues": ["280"],
+          "primaryValue": "280"
+        },
+        "powerBhpGain": {
+          "raw": "28",
+          "parsedValues": ["28"],
+          "primaryValue": "28"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "14",
+          "parsedValues": ["14"],
+          "primaryValue": "14"
+        },
+        "economyGainNm": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      }
+    ]
+  },
+  {
+    "make": "Kenworth",
+    "model": "T700",
+    "modelSlug": "t700",
+    "sourceProductId": 31046,
+    "sourceUrl": "https://viezu.com/shop/kenworth-t700-2012-present/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "15.0",
+        "originalBhp": {
+          "raw": "400",
+          "parsedValues": ["400"],
+          "primaryValue": "400"
+        },
+        "powerBhpGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "15.0",
+        "originalBhp": {
+          "raw": "486",
+          "parsedValues": ["486"],
+          "primaryValue": "486"
+        },
+        "powerBhpGain": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "190",
+          "parsedValues": ["190"],
+          "primaryValue": "190"
+        },
+        "economyGainBhp": {
+          "raw": "22",
+          "parsedValues": ["22"],
+          "primaryValue": "22"
+        },
+        "economyGainNm": {
+          "raw": "95",
+          "parsedValues": ["95"],
+          "primaryValue": "95"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      }
+    ]
+  },
+  {
+    "make": "Kenworth",
+    "model": "T680",
+    "modelSlug": "t680",
+    "sourceProductId": 31037,
+    "sourceUrl": "https://viezu.com/shop/kenworth-t680-2012-present/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "10.8",
+        "originalBhp": {
+          "raw": "430",
+          "parsedValues": ["430"],
+          "primaryValue": "430"
+        },
+        "powerBhpGain": {
+          "raw": "43",
+          "parsedValues": ["43"],
+          "primaryValue": "43"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "10.8",
+        "originalBhp": {
+          "raw": "355",
+          "parsedValues": ["355"],
+          "primaryValue": "355"
+        },
+        "powerBhpGain": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "160",
+          "parsedValues": ["160"],
+          "primaryValue": "160"
+        },
+        "economyGainBhp": {
+          "raw": "17",
+          "parsedValues": ["17"],
+          "primaryValue": "17"
+        },
+        "economyGainNm": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "12.9",
+        "originalBhp": {
+          "raw": "486",
+          "parsedValues": ["486"],
+          "primaryValue": "486"
+        },
+        "powerBhpGain": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "190",
+          "parsedValues": ["190"],
+          "primaryValue": "190"
+        },
+        "economyGainBhp": {
+          "raw": "22",
+          "parsedValues": ["22"],
+          "primaryValue": "22"
+        },
+        "economyGainNm": {
+          "raw": "95",
+          "parsedValues": ["95"],
+          "primaryValue": "95"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "12.9",
+        "originalBhp": {
+          "raw": "405",
+          "parsedValues": ["405"],
+          "primaryValue": "405"
+        },
+        "powerBhpGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "170",
+          "parsedValues": ["170"],
+          "primaryValue": "170"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "85",
+          "parsedValues": ["85"],
+          "primaryValue": "85"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "12.9",
+        "originalBhp": {
+          "raw": "500",
+          "parsedValues": ["500"],
+          "primaryValue": "500"
+        },
+        "powerBhpGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "economyGainNm": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "12.9",
+        "originalBhp": {
+          "raw": "381",
+          "parsedValues": ["381"],
+          "primaryValue": "381"
+        },
+        "powerBhpGain": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "160",
+          "parsedValues": ["160"],
+          "primaryValue": "160"
+        },
+        "economyGainBhp": {
+          "raw": "17",
+          "parsedValues": ["17"],
+          "primaryValue": "17"
+        },
+        "economyGainNm": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "15.0",
+        "originalBhp": {
+          "raw": "400",
+          "parsedValues": ["400"],
+          "primaryValue": "400"
+        },
+        "powerBhpGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "15.0",
+        "originalBhp": {
+          "raw": "486",
+          "parsedValues": ["486"],
+          "primaryValue": "486"
+        },
+        "powerBhpGain": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "190",
+          "parsedValues": ["190"],
+          "primaryValue": "190"
+        },
+        "economyGainBhp": {
+          "raw": "22",
+          "parsedValues": ["22"],
+          "primaryValue": "22"
+        },
+        "economyGainNm": {
+          "raw": "95",
+          "parsedValues": ["95"],
+          "primaryValue": "95"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      }
+    ]
+  },
+  {
+    "make": "Kenworth",
+    "model": "T660",
+    "modelSlug": "t660",
+    "sourceProductId": 31025,
+    "sourceUrl": "https://viezu.com/shop/kenworth-t660-2003-none/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "10.8",
+        "originalBhp": {
+          "raw": "411",
+          "parsedValues": ["411"],
+          "primaryValue": "411"
+        },
+        "powerBhpGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "170",
+          "parsedValues": ["170"],
+          "primaryValue": "170"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "85",
+          "parsedValues": ["85"],
+          "primaryValue": "85"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "10.8",
+        "originalBhp": {
+          "raw": "330",
+          "parsedValues": ["330"],
+          "primaryValue": "330"
+        },
+        "powerBhpGain": {
+          "raw": "33",
+          "parsedValues": ["33"],
+          "primaryValue": "33"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "12.5",
+        "originalBhp": {
+          "raw": "336",
+          "parsedValues": ["336"],
+          "primaryValue": "336"
+        },
+        "powerBhpGain": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "160",
+          "parsedValues": ["160"],
+          "primaryValue": "160"
+        },
+        "economyGainBhp": {
+          "raw": "17",
+          "parsedValues": ["17"],
+          "primaryValue": "17"
+        },
+        "economyGainNm": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "12.9",
+        "originalBhp": {
+          "raw": "500",
+          "parsedValues": ["500"],
+          "primaryValue": "500"
+        },
+        "powerBhpGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "economyGainNm": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "12.9",
+        "originalBhp": {
+          "raw": "381",
+          "parsedValues": ["381"],
+          "primaryValue": "381"
+        },
+        "powerBhpGain": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "160",
+          "parsedValues": ["160"],
+          "primaryValue": "160"
+        },
+        "economyGainBhp": {
+          "raw": "17",
+          "parsedValues": ["17"],
+          "primaryValue": "17"
+        },
+        "economyGainNm": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "12.9",
+        "originalBhp": {
+          "raw": "457",
+          "parsedValues": ["457"],
+          "primaryValue": "457"
+        },
+        "powerBhpGain": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "190",
+          "parsedValues": ["190"],
+          "primaryValue": "190"
+        },
+        "economyGainBhp": {
+          "raw": "22",
+          "parsedValues": ["22"],
+          "primaryValue": "22"
+        },
+        "economyGainNm": {
+          "raw": "95",
+          "parsedValues": ["95"],
+          "primaryValue": "95"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "8.3",
+        "originalBhp": {
+          "raw": "441",
+          "parsedValues": ["441"],
+          "primaryValue": "441"
+        },
+        "powerBhpGain": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "190",
+          "parsedValues": ["190"],
+          "primaryValue": "190"
+        },
+        "economyGainBhp": {
+          "raw": "22",
+          "parsedValues": ["22"],
+          "primaryValue": "22"
+        },
+        "economyGainNm": {
+          "raw": "95",
+          "parsedValues": ["95"],
+          "primaryValue": "95"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "15.0",
+        "originalBhp": {
+          "raw": "486",
+          "parsedValues": ["486"],
+          "primaryValue": "486"
+        },
+        "powerBhpGain": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "190",
+          "parsedValues": ["190"],
+          "primaryValue": "190"
+        },
+        "economyGainBhp": {
+          "raw": "22",
+          "parsedValues": ["22"],
+          "primaryValue": "22"
+        },
+        "economyGainNm": {
+          "raw": "95",
+          "parsedValues": ["95"],
+          "primaryValue": "95"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "15.0",
+        "originalBhp": {
+          "raw": "400",
+          "parsedValues": ["400"],
+          "primaryValue": "400"
+        },
+        "powerBhpGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "15.2",
+        "originalBhp": {
+          "raw": "500",
+          "parsedValues": ["500"],
+          "primaryValue": "500"
+        },
+        "powerBhpGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "economyGainNm": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "15.2",
+        "originalBhp": {
+          "raw": "435",
+          "parsedValues": ["435"],
+          "primaryValue": "435"
+        },
+        "powerBhpGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "170",
+          "parsedValues": ["170"],
+          "primaryValue": "170"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "85",
+          "parsedValues": ["85"],
+          "primaryValue": "85"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      }
+    ]
+  },
+  {
+    "make": "Kenworth",
+    "model": "T659",
+    "modelSlug": "t659",
+    "sourceProductId": 31022,
+    "sourceUrl": "https://viezu.com/shop/kenworth-t659-2014-present/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "15.0",
+        "originalBhp": {
+          "raw": "601",
+          "parsedValues": ["601"],
+          "primaryValue": "601"
+        },
+        "powerBhpGain": {
+          "raw": "65",
+          "parsedValues": ["65"],
+          "primaryValue": "65"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "250",
+          "parsedValues": ["250"],
+          "primaryValue": "250"
+        },
+        "economyGainBhp": {
+          "raw": "28",
+          "parsedValues": ["28"],
+          "primaryValue": "28"
+        },
+        "economyGainNm": {
+          "raw": "125",
+          "parsedValues": ["125"],
+          "primaryValue": "125"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "15.0",
+        "originalBhp": {
+          "raw": "486",
+          "parsedValues": ["486"],
+          "primaryValue": "486"
+        },
+        "powerBhpGain": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "190",
+          "parsedValues": ["190"],
+          "primaryValue": "190"
+        },
+        "economyGainBhp": {
+          "raw": "22",
+          "parsedValues": ["22"],
+          "primaryValue": "22"
+        },
+        "economyGainNm": {
+          "raw": "95",
+          "parsedValues": ["95"],
+          "primaryValue": "95"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      }
+    ]
+  },
+  {
+    "make": "Kenworth",
+    "model": "T609",
+    "modelSlug": "t609",
+    "sourceProductId": 31019,
+    "sourceUrl": "https://viezu.com/shop/kenworth-t609-2014-present/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "15.0",
+        "originalBhp": {
+          "raw": "551",
+          "parsedValues": ["551"],
+          "primaryValue": "551"
+        },
+        "powerBhpGain": {
+          "raw": "55",
+          "parsedValues": ["55"],
+          "primaryValue": "55"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "220",
+          "parsedValues": ["220"],
+          "primaryValue": "220"
+        },
+        "economyGainBhp": {
+          "raw": "28",
+          "parsedValues": ["28"],
+          "primaryValue": "28"
+        },
+        "economyGainNm": {
+          "raw": "110",
+          "parsedValues": ["110"],
+          "primaryValue": "110"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "15.0",
+        "originalBhp": {
+          "raw": "450",
+          "parsedValues": ["450"],
+          "primaryValue": "450"
+        },
+        "powerBhpGain": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "22",
+          "parsedValues": ["22"],
+          "primaryValue": "22"
+        },
+        "economyGainNm": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      }
+    ]
+  },
+  {
+    "make": "Kenworth",
+    "model": "T604",
+    "modelSlug": "t604",
+    "sourceProductId": 31017,
+    "sourceUrl": "https://viezu.com/shop/kenworth-t604-2014-present/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "8.3",
+        "originalBhp": {
+          "raw": "260",
+          "parsedValues": ["260"],
+          "primaryValue": "260"
+        },
+        "powerBhpGain": {
+          "raw": "26",
+          "parsedValues": ["26"],
+          "primaryValue": "26"
+        },
+        "originalTorque": {
+          "raw": "1125",
+          "parsedValues": ["1125"],
+          "primaryValue": "1125"
+        },
+        "torqueNmGain": {
+          "raw": "115",
+          "parsedValues": ["115"],
+          "primaryValue": "115"
+        },
+        "economyGainBhp": {
+          "raw": "13",
+          "parsedValues": ["13"],
+          "primaryValue": "13"
+        },
+        "economyGainNm": {
+          "raw": "55",
+          "parsedValues": ["55"],
+          "primaryValue": "55"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      }
+    ]
+  },
+  {
+    "make": "Kenworth",
+    "model": "T470",
+    "modelSlug": "t470",
+    "sourceProductId": 31013,
+    "sourceUrl": "https://viezu.com/shop/kenworth-t470-2011-present/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "8.9",
+        "originalBhp": {
+          "raw": "335",
+          "parsedValues": ["335"],
+          "primaryValue": "335"
+        },
+        "powerBhpGain": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "160",
+          "parsedValues": ["160"],
+          "primaryValue": "160"
+        },
+        "economyGainBhp": {
+          "raw": "17",
+          "parsedValues": ["17"],
+          "primaryValue": "17"
+        },
+        "economyGainNm": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "8.9",
+        "originalBhp": {
+          "raw": "260",
+          "parsedValues": ["260"],
+          "primaryValue": "260"
+        },
+        "powerBhpGain": {
+          "raw": "26",
+          "parsedValues": ["26"],
+          "primaryValue": "26"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "0",
+          "parsedValues": ["0"],
+          "primaryValue": "0"
+        },
+        "economyGainBhp": {
+          "raw": "13",
+          "parsedValues": ["13"],
+          "primaryValue": "13"
+        },
+        "economyGainNm": {
+          "raw": "0",
+          "parsedValues": ["0"],
+          "primaryValue": "0"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "8.9",
+        "originalBhp": {
+          "raw": "381",
+          "parsedValues": ["381"],
+          "primaryValue": "381"
+        },
+        "powerBhpGain": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "160",
+          "parsedValues": ["160"],
+          "primaryValue": "160"
+        },
+        "economyGainBhp": {
+          "raw": "17",
+          "parsedValues": ["17"],
+          "primaryValue": "17"
+        },
+        "economyGainNm": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      }
+    ]
+  },
+  {
+    "make": "Kenworth",
+    "model": "T409",
+    "modelSlug": "t409",
+    "sourceProductId": 31008,
+    "sourceUrl": "https://viezu.com/shop/kenworth-t409-2013-present/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "12.9",
+        "originalBhp": {
+          "raw": "510",
+          "parsedValues": ["510"],
+          "primaryValue": "510"
+        },
+        "powerBhpGain": {
+          "raw": "51",
+          "parsedValues": ["51"],
+          "primaryValue": "51"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "economyGainNm": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "12.9",
+        "originalBhp": {
+          "raw": "461",
+          "parsedValues": ["461"],
+          "primaryValue": "461"
+        },
+        "powerBhpGain": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "190",
+          "parsedValues": ["190"],
+          "primaryValue": "190"
+        },
+        "economyGainBhp": {
+          "raw": "22",
+          "parsedValues": ["22"],
+          "primaryValue": "22"
+        },
+        "economyGainNm": {
+          "raw": "95",
+          "parsedValues": ["95"],
+          "primaryValue": "95"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "15.0",
+        "originalBhp": {
+          "raw": "551",
+          "parsedValues": ["551"],
+          "primaryValue": "551"
+        },
+        "powerBhpGain": {
+          "raw": "55",
+          "parsedValues": ["55"],
+          "primaryValue": "55"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "220",
+          "parsedValues": ["220"],
+          "primaryValue": "220"
+        },
+        "economyGainBhp": {
+          "raw": "28",
+          "parsedValues": ["28"],
+          "primaryValue": "28"
+        },
+        "economyGainNm": {
+          "raw": "110",
+          "parsedValues": ["110"],
+          "primaryValue": "110"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "15.0",
+        "originalBhp": {
+          "raw": "450",
+          "parsedValues": ["450"],
+          "primaryValue": "450"
+        },
+        "powerBhpGain": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "22",
+          "parsedValues": ["22"],
+          "primaryValue": "22"
+        },
+        "economyGainNm": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      }
+    ]
+  },
+  {
+    "make": "Kenworth",
+    "model": "T400",
+    "modelSlug": "t400",
+    "sourceProductId": 31005,
+    "sourceUrl": "https://viezu.com/shop/kenworth-t400-2012-present/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "12.9",
+        "originalBhp": {
+          "raw": "301",
+          "parsedValues": ["301"],
+          "primaryValue": "301"
+        },
+        "powerBhpGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "120",
+          "parsedValues": ["120"],
+          "primaryValue": "120"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "8.9",
+        "originalBhp": {
+          "raw": "381",
+          "parsedValues": ["381"],
+          "primaryValue": "381"
+        },
+        "powerBhpGain": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "160",
+          "parsedValues": ["160"],
+          "primaryValue": "160"
+        },
+        "economyGainBhp": {
+          "raw": "17",
+          "parsedValues": ["17"],
+          "primaryValue": "17"
+        },
+        "economyGainNm": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      }
+    ]
+  },
+  {
+    "make": "Kenworth",
+    "model": "T370",
+    "modelSlug": "t370",
+    "sourceProductId": 31000,
+    "sourceUrl": "https://viezu.com/shop/kenworth-t370-2006-2013/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "6.7",
+        "originalBhp": {
+          "raw": "325",
+          "parsedValues": ["325"],
+          "primaryValue": "325"
+        },
+        "powerBhpGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "120",
+          "parsedValues": ["120"],
+          "primaryValue": "120"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "6.7",
+        "originalBhp": {
+          "raw": "200",
+          "parsedValues": ["200"],
+          "primaryValue": "200"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "8.3",
+        "originalBhp": {
+          "raw": "330",
+          "parsedValues": ["330"],
+          "primaryValue": "330"
+        },
+        "powerBhpGain": {
+          "raw": "33",
+          "parsedValues": ["33"],
+          "primaryValue": "33"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "8.3",
+        "originalBhp": {
+          "raw": "241",
+          "parsedValues": ["241"],
+          "primaryValue": "241"
+        },
+        "powerBhpGain": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "95",
+          "parsedValues": ["95"],
+          "primaryValue": "95"
+        },
+        "economyGainBhp": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      }
+    ]
+  },
+  {
+    "make": "Kenworth",
+    "model": "T359",
+    "modelSlug": "t359",
+    "sourceProductId": 30997,
+    "sourceUrl": "https://viezu.com/shop/kenworth-t359-2012-present/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "8.9",
+        "originalBhp": {
+          "raw": "381",
+          "parsedValues": ["381"],
+          "primaryValue": "381"
+        },
+        "powerBhpGain": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "160",
+          "parsedValues": ["160"],
+          "primaryValue": "160"
+        },
+        "economyGainBhp": {
+          "raw": "17",
+          "parsedValues": ["17"],
+          "primaryValue": "17"
+        },
+        "economyGainNm": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "8.9",
+        "originalBhp": {
+          "raw": "280",
+          "parsedValues": ["280"],
+          "primaryValue": "280"
+        },
+        "powerBhpGain": {
+          "raw": "28",
+          "parsedValues": ["28"],
+          "primaryValue": "28"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "14",
+          "parsedValues": ["14"],
+          "primaryValue": "14"
+        },
+        "economyGainNm": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      }
+    ]
+  },
+  {
+    "make": "Kenworth",
+    "model": "T300",
+    "modelSlug": "t300",
+    "sourceProductId": 30992,
+    "sourceUrl": "https://viezu.com/shop/kenworth-t300-2006-2013/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "6.7",
+        "originalBhp": {
+          "raw": "325",
+          "parsedValues": ["325"],
+          "primaryValue": "325"
+        },
+        "powerBhpGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "120",
+          "parsedValues": ["120"],
+          "primaryValue": "120"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "6.7",
+        "originalBhp": {
+          "raw": "200",
+          "parsedValues": ["200"],
+          "primaryValue": "200"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "8.3",
+        "originalBhp": {
+          "raw": "330",
+          "parsedValues": ["330"],
+          "primaryValue": "330"
+        },
+        "powerBhpGain": {
+          "raw": "33",
+          "parsedValues": ["33"],
+          "primaryValue": "33"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "8.3",
+        "originalBhp": {
+          "raw": "241",
+          "parsedValues": ["241"],
+          "primaryValue": "241"
+        },
+        "powerBhpGain": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "95",
+          "parsedValues": ["95"],
+          "primaryValue": "95"
+        },
+        "economyGainBhp": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      }
+    ]
+  },
+  {
+    "make": "Kenworth",
+    "model": "T270",
+    "modelSlug": "t270",
+    "sourceProductId": 30987,
+    "sourceUrl": "https://viezu.com/shop/kenworth-t270-2006-2013/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "6.7",
+        "originalBhp": {
+          "raw": "325",
+          "parsedValues": ["325"],
+          "primaryValue": "325"
+        },
+        "powerBhpGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "120",
+          "parsedValues": ["120"],
+          "primaryValue": "120"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "6.7",
+        "originalBhp": {
+          "raw": "200",
+          "parsedValues": ["200"],
+          "primaryValue": "200"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "8.3",
+        "originalBhp": {
+          "raw": "330",
+          "parsedValues": ["330"],
+          "primaryValue": "330"
+        },
+        "powerBhpGain": {
+          "raw": "33",
+          "parsedValues": ["33"],
+          "primaryValue": "33"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "8.3",
+        "originalBhp": {
+          "raw": "241",
+          "parsedValues": ["241"],
+          "primaryValue": "241"
+        },
+        "powerBhpGain": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "95",
+          "parsedValues": ["95"],
+          "primaryValue": "95"
+        },
+        "economyGainBhp": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      }
+    ]
+  },
+  {
+    "make": "Kenworth",
+    "model": "T2000",
+    "modelSlug": "t2000",
+    "sourceProductId": 30985,
+    "sourceUrl": "https://viezu.com/shop/kenworth-t2000-2003-2009/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "15.0",
+        "originalBhp": {
+          "raw": "435",
+          "parsedValues": ["435"],
+          "primaryValue": "435"
+        },
+        "powerBhpGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "170",
+          "parsedValues": ["170"],
+          "primaryValue": "170"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "85",
+          "parsedValues": ["85"],
+          "primaryValue": "85"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      }
+    ]
+  },
+  {
+    "make": "Kenworth",
+    "model": "T170",
+    "modelSlug": "t170",
+    "sourceProductId": 30982,
+    "sourceUrl": "https://viezu.com/shop/kenworth-t170-2007-2013/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "6.7",
+        "originalBhp": {
+          "raw": "301",
+          "parsedValues": ["301"],
+          "primaryValue": "301"
+        },
+        "powerBhpGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "120",
+          "parsedValues": ["120"],
+          "primaryValue": "120"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "6.7",
+        "originalBhp": {
+          "raw": "200",
+          "parsedValues": ["200"],
+          "primaryValue": "200"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      }
+    ]
+  },
+  {
+    "make": "Kenworth",
+    "model": "L700",
+    "modelSlug": "l700",
+    "sourceProductId": 30980,
+    "sourceUrl": "https://viezu.com/shop/kenworth-l700-2009-2012/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "10.8",
+        "originalBhp": {
+          "raw": "310",
+          "parsedValues": ["310"],
+          "primaryValue": "310"
+        },
+        "powerBhpGain": {
+          "raw": "31",
+          "parsedValues": ["31"],
+          "primaryValue": "31"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      }
+    ]
+  },
+  {
+    "make": "Kenworth",
+    "model": "Kw45",
+    "modelSlug": "kw45",
+    "sourceProductId": 30977,
+    "sourceUrl": "https://viezu.com/shop/kenworth-kw45-2007-2015/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "6.7",
+        "originalBhp": {
+          "raw": "250",
+          "parsedValues": ["250"],
+          "primaryValue": "250"
+        },
+        "powerBhpGain": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "6.7",
+        "originalBhp": {
+          "raw": "220",
+          "parsedValues": ["220"],
+          "primaryValue": "220"
+        },
+        "powerBhpGain": {
+          "raw": "22",
+          "parsedValues": ["22"],
+          "primaryValue": "22"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "11",
+          "parsedValues": ["11"],
+          "primaryValue": "11"
+        },
+        "economyGainNm": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      }
+    ]
+  },
+  {
+    "make": "Kenworth",
+    "model": "K370",
+    "modelSlug": "k370",
+    "sourceProductId": 30975,
+    "sourceUrl": "https://viezu.com/shop/kenworth-k370-2011-2013/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "6.7",
+        "originalBhp": {
+          "raw": "203",
+          "parsedValues": ["203"],
+          "primaryValue": "203"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "70",
+          "parsedValues": ["70"],
+          "primaryValue": "70"
+        },
+        "economyGainBhp": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      }
+    ]
+  },
+  {
+    "make": "Kenworth",
+    "model": "K270",
+    "modelSlug": "k270",
+    "sourceProductId": 30973,
+    "sourceUrl": "https://viezu.com/shop/kenworth-k270-2011-2013/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "6.7",
+        "originalBhp": {
+          "raw": "203",
+          "parsedValues": ["203"],
+          "primaryValue": "203"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "70",
+          "parsedValues": ["70"],
+          "primaryValue": "70"
+        },
+        "economyGainBhp": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      }
+    ]
+  },
+  {
+    "make": "Kenworth",
+    "model": "K200",
+    "modelSlug": "k200",
+    "sourceProductId": 30970,
+    "sourceUrl": "https://viezu.com/shop/kenworth-k200-2014-present/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "15.0",
+        "originalBhp": {
+          "raw": "601",
+          "parsedValues": ["601"],
+          "primaryValue": "601"
+        },
+        "powerBhpGain": {
+          "raw": "65",
+          "parsedValues": ["65"],
+          "primaryValue": "65"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "250",
+          "parsedValues": ["250"],
+          "primaryValue": "250"
+        },
+        "economyGainBhp": {
+          "raw": "28",
+          "parsedValues": ["28"],
+          "primaryValue": "28"
+        },
+        "economyGainNm": {
+          "raw": "125",
+          "parsedValues": ["125"],
+          "primaryValue": "125"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "15.0",
+        "originalBhp": {
+          "raw": "486",
+          "parsedValues": ["486"],
+          "primaryValue": "486"
+        },
+        "powerBhpGain": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "190",
+          "parsedValues": ["190"],
+          "primaryValue": "190"
+        },
+        "economyGainBhp": {
+          "raw": "22",
+          "parsedValues": ["22"],
+          "primaryValue": "22"
+        },
+        "economyGainNm": {
+          "raw": "95",
+          "parsedValues": ["95"],
+          "primaryValue": "95"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      }
+    ]
+  },
+  {
+    "make": "Kenworth",
+    "model": "C5 Series",
+    "modelSlug": "c5-series",
+    "sourceProductId": 30967,
+    "sourceUrl": "https://viezu.com/shop/kenworth-c5-series-2010-present/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "15.0",
+        "originalBhp": {
+          "raw": "601",
+          "parsedValues": ["601"],
+          "primaryValue": "601"
+        },
+        "powerBhpGain": {
+          "raw": "65",
+          "parsedValues": ["65"],
+          "primaryValue": "65"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "250",
+          "parsedValues": ["250"],
+          "primaryValue": "250"
+        },
+        "economyGainBhp": {
+          "raw": "28",
+          "parsedValues": ["28"],
+          "primaryValue": "28"
+        },
+        "economyGainNm": {
+          "raw": "125",
+          "parsedValues": ["125"],
+          "primaryValue": "125"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "15.0",
+        "originalBhp": {
+          "raw": "486",
+          "parsedValues": ["486"],
+          "primaryValue": "486"
+        },
+        "powerBhpGain": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "190",
+          "parsedValues": ["190"],
+          "primaryValue": "190"
+        },
+        "economyGainBhp": {
+          "raw": "22",
+          "parsedValues": ["22"],
+          "primaryValue": "22"
+        },
+        "economyGainNm": {
+          "raw": "95",
+          "parsedValues": ["95"],
+          "primaryValue": "95"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      }
+    ]
+  }
+]

@@ -1,0 +1,51 @@
+[
+  {
+    "make": "Kamaz",
+    "model": "5490",
+    "modelSlug": "5490",
+    "sourceProductId": 30965,
+    "sourceUrl": "https://viezu.com/shop/kamaz-5490-2020/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "12.0",
+        "originalBhp": {
+          "raw": "428",
+          "parsedValues": ["428"],
+          "primaryValue": "428"
+        },
+        "powerBhpGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "originalTorque": {
+          "raw": "2100",
+          "parsedValues": ["2100"],
+          "primaryValue": "2100"
+        },
+        "torqueNmGain": {
+          "raw": "170",
+          "parsedValues": ["170"],
+          "primaryValue": "170"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "85",
+          "parsedValues": ["85"],
+          "primaryValue": "85"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      }
+    ]
+  }
+]

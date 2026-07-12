@@ -6,7 +6,8 @@
  * investigation) — the WooCommerce Store API product catalogue, the
  * `data-product_variations` performance-data blob embedded in product
  * detail pages, and the `admin-ajax.php` marque/model cascade used by the
- * live `/dealer` widget to scope which vehicles are in-scope (cars + vans).
+ * live `/dealer` widget to scope which vehicles are in-scope (cars, vans and
+ * HGVs — see `scripts/car-remaps/config.ts`'s `IN_SCOPE_WIDGET_VEHICLE_TYPES`).
  */
 
 /** One product from a WooCommerce Store API catalogue page. */
@@ -85,14 +86,17 @@ export interface ScopeModel {
 
 /**
  * Normalized (marque, model) pairs considered in-scope for the car-remaps
- * catalogue, built from the live `cars` + `vans` AJAX marque/model cascade.
+ * catalogue, built from the live `cars` + `vans` + `hgv-tuning` AJAX
+ * marque/model cascade.
  *
  * Shape: `Map<normalizedMarque, Set<normalizedModel>>`. Marque keys are
- * merged across the `cars` and `vans` vehicle-type lists when they
- * normalize to the same string (e.g. "Ford Car Tuning & Remapping" and
- * "Ford Vans Tuning & ECU Remapping" both normalize to `"ford"`); when they
- * don't (the confirmed `Mercedes-Benz`/`Mercedes` and `Volkswagen`/`VW`
- * cars-vs-vans naming mismatches), they remain distinct keys — see fixtures
- * README's "Naming-mismatch caveat".
+ * merged across vehicle-type lists when they normalize to the same string
+ * (e.g. "Ford Car Tuning & Remapping" and "Ford Vans Tuning & ECU Remapping"
+ * both normalize to `"ford"`); when they don't (the confirmed
+ * `Mercedes-Benz`/`Mercedes` and `Volkswagen`/`VW` cars-vs-vans naming
+ * mismatches, or HGV marques like `"Ford Truck"` which are deliberately
+ * distinct from `"Ford"` — see `normalizeMarqueName`'s guardrail comment),
+ * they remain distinct keys — see fixtures README's "Naming-mismatch
+ * caveat".
  */
 export type ScopeIndex = Map<string, Set<string>>;

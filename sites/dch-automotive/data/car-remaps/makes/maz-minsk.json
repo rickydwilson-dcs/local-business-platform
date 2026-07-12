@@ -1,0 +1,51 @@
+[
+  {
+    "make": "Maz Minsk",
+    "model": "6501",
+    "modelSlug": "6501",
+    "sourceProductId": 31189,
+    "sourceUrl": "https://viezu.com/shop/maz-minsk-6501-2012/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "11.0",
+        "originalBhp": {
+          "raw": "412",
+          "parsedValues": ["412"],
+          "primaryValue": "412"
+        },
+        "powerBhpGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "170",
+          "parsedValues": ["170"],
+          "primaryValue": "170"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "85",
+          "parsedValues": ["85"],
+          "primaryValue": "85"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      }
+    ]
+  }
+]

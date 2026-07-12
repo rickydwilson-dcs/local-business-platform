@@ -1,0 +1,51 @@
+[
+  {
+    "make": "Terex",
+    "model": "TA300",
+    "modelSlug": "ta300",
+    "sourceProductId": 31910,
+    "sourceUrl": "https://viezu.com/shop/terex-ta300-2010/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "10.8",
+        "originalBhp": {
+          "raw": "375",
+          "parsedValues": ["375"],
+          "primaryValue": "375"
+        },
+        "powerBhpGain": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "1880",
+          "parsedValues": ["1880"],
+          "primaryValue": "1880"
+        },
+        "torqueNmGain": {
+          "raw": "160",
+          "parsedValues": ["160"],
+          "primaryValue": "160"
+        },
+        "economyGainBhp": {
+          "raw": "17",
+          "parsedValues": ["17"],
+          "primaryValue": "17"
+        },
+        "economyGainNm": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      }
+    ]
+  }
+]

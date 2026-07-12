@@ -2,8 +2,9 @@
 
 Operational guide for the DCH Automotive Car Remaps feature: the Viezu-sourced catalogue sync,
 the data it produces, the pages/API/MCP endpoint built on top of it, and the known data-quality
-gap that needs a follow-up fix. Written 2026-07-11 at the end of the
-`feature/car-remaps-reckoner-aeo-mcp` build. See also:
+gaps that need follow-up. Written 2026-07-11 at the end of the
+`feature/car-remaps-reckoner-aeo-mcp` build; updated same day when HGV scope was added
+(`feature/car-remaps-hgv-scope`, see §5). See also:
 
 - `sites/dch-automotive/lib/car-remaps/__fixtures__/README.md` — the full data-shape
   investigation (pipe-delimited fields, category ambiguity, AJAX scope mechanism, marque suffix
@@ -26,8 +27,8 @@ This runs `scripts/car-remaps/sync.ts` (`tsx`, no build step needed). It perform
 1. **Scope index** (`fetch-marques.ts`) — fetches the live `/dealer` widget page
    (`VIEZU_DEALER_WIDGET_URL` in `scripts/car-remaps/config.ts`) to extract a fresh nonce, then
    walks the `admin-ajax.php` `get_filter_brands` / `get_filter_models` cascade for every
-   vehicle type in `IN_SCOPE_WIDGET_VEHICLE_TYPES` (currently `['cars', 'vans']`), building a
-   normalized `(marque, model)` membership index (`ScopeIndex`).
+   vehicle type in `IN_SCOPE_WIDGET_VEHICLE_TYPES` (currently `['cars', 'vans', 'hgv-tuning']`),
+   building a normalized `(marque, model)` membership index (`ScopeIndex`).
 2. **Full catalogue walk** (`fetch-store-api.ts`) — pages through the WooCommerce Store API
    (`/wp-json/wc/store/v1/products`) to fetch every product on the site (currently ~3,188).
 3. **Filter** — each product is checked against `EXCLUDED_NON_VEHICLE_CATEGORIES` (unconditional
@@ -37,10 +38,21 @@ This runs `scripts/car-remaps/sync.ts` (`tsx`, no build step needed). It perform
    page and parses its `data-product_variations` attribute for performance/pricing data.
 5. **Normalize + write** (`normalize.ts` + `sync.ts`) — groups results by make and writes
    `data/car-remaps/makes/<make-slug>.json`, `data/car-remaps/manifest.json`, and
-   `data/car-remaps/index.json`.
+   `data/car-remaps/index.json`. Any make file left over from a previous run whose marque isn't in
+   this run's output is deleted, so `makes/` never accumulates stale files (see §5's "stale make
+   files" entry — this was a real bug until 2026-07-11).
 
 A polite `FETCH_DELAY_MS` (400ms) is applied between successive live HTTP requests — a full sync
-walks ~3,000+ live URLs, so expect it to take a while (tens of minutes), not seconds.
+walks ~3,000+ live URLs (more since HGV scope was added, see §5), so expect it to take a while
+(an hour or more), not minutes. Every live fetch has a `FETCH_TIMEOUT_MS` (30s) safety net (see
+§5's "sync could hang indefinitely" entry) — a single unresponsive page counts as one more failure
+rather than stalling the whole run, but the pipeline still has **no resume/incremental mode**: it's
+all-or-nothing by design (matches `FAIL_FAST_THRESHOLD`'s "no partial output" philosophy). If a run
+is interrupted or produces a small, isolated gap (e.g. one marque lost to a transient fetch
+failure), prefer accepting the gap and documenting it (§5) over re-running the entire ~2,000-request
+pipeline to fix a handful of vehicles — a full re-sync is expensive against a live third-party site
+and the FAIL_FAST/stale-file safety nets mean a low failure count from one run doesn't corrupt
+anything.
 
 ### How often to run it
 
@@ -62,18 +74,18 @@ part of the normal workflow after a sync run.
 
 `data/car-remaps/manifest.json` is the sync report — check it after every run.
 
-| Field                     | Meaning                                                                                                                                                                                                                                               |
-| ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `generatedAt`             | ISO timestamp of the sync run.                                                                                                                                                                                                                        |
-| `sourceUrl`               | Always `https://viezu.com`.                                                                                                                                                                                                                           |
-| `totalFetched`            | Total products returned by the Store API walk (all vehicle types, tools, accessories — everything).                                                                                                                                                   |
-| `totalExcludedByCategory` | Products dropped by the unconditional `EXCLUDED_NON_VEHICLE_CATEGORIES` list (tools/cables/accessories/parts).                                                                                                                                        |
-| `totalExcludedByScope`    | Products that passed the category filter but didn't match any `(marque, model)` pair in the scope index — i.e. not a car or van Viezu currently tunes (bikes, HGV, agriculture, marine, motorhomes, or a name the scope matcher failed to recognize). |
-| `totalInScope`            | Products that made it through to the enrichment step.                                                                                                                                                                                                 |
-| `totalFailed`             | Enrichment fetches that threw (see below) — parse or fetch failures on an otherwise in-scope product.                                                                                                                                                 |
-| `failedUrls`              | The actual URLs that failed, with enough context to investigate individually.                                                                                                                                                                         |
-| `makes`                   | Sorted list of make slugs that got a `data/car-remaps/makes/<slug>.json` file written.                                                                                                                                                                |
-| `scopeIndexStats`         | `carsMarqueCount`, `vansMarqueCount`, `totalModelsCounted` — sanity-check numbers for the scope index itself (currently 85 car marques, 23 van marques, 1,893 models counted as of the 2026-07-11 run).                                               |
+| Field                     | Meaning                                                                                                                                                                                                                                                                      |
+| ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `generatedAt`             | ISO timestamp of the sync run.                                                                                                                                                                                                                                               |
+| `sourceUrl`               | Always `https://viezu.com`.                                                                                                                                                                                                                                                  |
+| `totalFetched`            | Total products returned by the Store API walk (all vehicle types, tools, accessories — everything).                                                                                                                                                                          |
+| `totalExcludedByCategory` | Products dropped by the unconditional `EXCLUDED_NON_VEHICLE_CATEGORIES` list (tools/cables/accessories/parts).                                                                                                                                                               |
+| `totalExcludedByScope`    | Products that passed the category filter but didn't match any `(marque, model)` pair in the scope index — i.e. not a car, van or HGV Viezu currently tunes (bikes, agriculture, marine, motorhomes, or a name the scope matcher failed to recognize).                        |
+| `totalInScope`            | Products that made it through to the enrichment step.                                                                                                                                                                                                                        |
+| `totalFailed`             | Enrichment fetches that threw (see below) — parse or fetch failures on an otherwise in-scope product.                                                                                                                                                                        |
+| `failedUrls`              | The actual URLs that failed, with enough context to investigate individually.                                                                                                                                                                                                |
+| `makes`                   | Sorted list of make slugs that got a `data/car-remaps/makes/<slug>.json` file written.                                                                                                                                                                                       |
+| `scopeIndexStats`         | `carsMarqueCount`, `vansMarqueCount`, `hgvMarqueCount`, `totalModelsCounted` — sanity-check numbers for the scope index itself (85 car marques, 23 van marques, 66 HGV marques, 2,177 models counted as of the 2026-07-11 HGV-scope run — see §5's "HGV scope added" entry). |
 
 ### Fail-fast threshold
 
@@ -86,7 +98,10 @@ changing their product-page markup mid-run and silently corrupting most of the c
 A **low, non-zero** `totalFailed` (well under the 10% threshold) is normal and expected — the
 2026-07-11 run had 6 failures out of 1,518 in-scope products (0.4%), all traced to individual
 product pages returning HTTP errors or unusual markup (see `failedUrls` in the committed
-manifest) rather than a systemic issue. Don't chase these to zero; only investigate if:
+manifest) rather than a systemic issue. The HGV-scope run (same day, see §5) had 9 failures out of
+1,887 (0.5%) — all older HGV/truck listings whose `data-product_variations` attribute didn't
+decode to an array, a page-template quirk on a handful of legacy Viezu listings, not a parser bug
+(see §5's residual note). Don't chase these to zero; only investigate if:
 
 - The failure rate is climbing across successive runs.
 - The failure rate crosses the 10% threshold and the sync aborts.
@@ -307,6 +322,83 @@ follow-up, not a scope-correctness bug.
 **If a future audit finds another marque/model naming mismatch**, add it to `MARQUE_ALIASES` (for
 whole-word abbreviations) or extend the relevant suffix-stripping logic (for suffix-pattern
 variants) in `lib/car-remaps/parsers.ts` — do not special-case it in `isInScopeVehicle()`.
+
+### ✅ Added: HGV scope (2026-07-11)
+
+`IN_SCOPE_WIDGET_VEHICLE_TYPES` now includes `hgv-tuning` alongside `cars`/`vans` — DCH's Savings
+Calculator needed real per-vehicle data for vans and lorries, and lorries turned out to be
+completely absent from the synced catalogue (a deliberate scoping decision from the original
+2026-07-11 build, not a bug — see the fixtures README's "Cross-vehicle-type marque check" section,
+which had already confirmed HGV was safe to add whenever needed). Result: `totalInScope` went from
+1,598 (83 makes) to 1,887 (144 makes) — 61 new HGV makes (DAF, Scania, MAN, Volvo Trucks, Mercedes
+Truck, Ford Truck, Kenworth, Peterbilt, Mack, Western Star, and more).
+
+`buildScopeIndex()`'s `marques` parameter gained an optional `hgv` field (existing cars/vans-only
+callers, including `parsers.test.ts`, are unaffected). `fetch-marques.ts`'s internal `marques`
+object and `ScopeIndexStats` (`hgvMarqueCount`) were generalized the same way. See
+`parsers.test.ts`'s "buildScopeIndex HGV scope (no collision with car/van marques)" suite for the
+executable proof that HGV marques merge into the index without colliding with a car/van marque of
+the same base name.
+
+### ✅ Fixed: `isInScopeVehicle`'s marque-prefix fallback could misattribute a product to the wrong marque
+
+**Found immediately when adding HGV scope, via the new HGV unit tests — never triggered before
+because no space-separated multi-word marque previously shared its first word with an
+independently-scoped marque.**
+
+**Root cause:** the fallback that lets a product name match a marque by its first token — added
+for the genuine `"mercedes-benz"` (index key) vs. `"Mercedes ..."` (product name) mismatch — split
+on **both spaces and hyphens** (`/[\s-]+/`). That's correct for a hyphenated compound (the short
+form is just a different spelling of the _same_ marque), but wrong for a plain multi-word marque
+like `"Ford Truck"` (space-separated) whose first word, `"Ford"`, is an entirely different,
+independently-populated marque. Because longer keys are tried first, a plain product named
+`"Ford F-4000 Tuning (2012-2014)"` (no "Truck" anywhere in the name) matched under the `"ford
+truck"` key via its first-token fallback, purely because `"ford truck"` sorted before `"ford"` —
+even though `"F-4000"` is an HGV-only model that was never meant to be reachable from a plain
+`"Ford"` prefix.
+
+**Fix:** the first-token fallback now splits on hyphens only (`marqueKey.split('-')[0]`), not
+spaces. Every hyphenated marque confirmed in the real data (`"Mercedes-Benz"`) is one marque
+spelled two ways; every space-separated multi-word HGV marque confirmed in the real data (`"Ford
+Truck"`, `"Mercedes Truck"`, `"Astra Truck"`, `"Daewoo Truck"`, etc.) is a _different_,
+deliberately-distinct marque bucket that happens to share a leading word — those two cases needed
+different handling, and the single space-or-hyphen split couldn't tell them apart.
+
+**Verified:** `parsers.test.ts`'s HGV scope suite (`f-4000`, an HGV-only DAF... Ford Truck model,
+confirmed absent from car "Ford"'s own model list) plus all 108 pre-existing tests still pass
+unchanged — this was a pure bug fix, not a behavior change for any previously-working case.
+
+### ✅ Fixed: the sync could hang indefinitely on a single unresponsive product page
+
+**Found live 2026-07-11** while running the HGV-scope sync: a run stalled for 10+ minutes with no
+progress and no error, confirmed (via `lsof -p <pid>`) to be holding an `ESTABLISHED` TCP
+connection to Viezu's server that was never responding. None of the three live-fetch call sites
+(`fetch-product-html.ts`, `fetch-store-api.ts`, `fetch-marques.ts`) had a request timeout — a plain
+`fetch()` with no `AbortSignal` can wait forever on a connection the server opened but never
+answered.
+
+**Fix:** added `FETCH_TIMEOUT_MS` (30s) in `config.ts` and `signal: AbortSignal.timeout(FETCH_TIMEOUT_MS)`
+on all three call sites. `fetchProductPerformanceData()` already treats any thrown error
+(including now an abort) as one more counted failure rather than a fatal one, so this just bounds
+"hangs forever" down to "counts as a failure after 30s and the sync moves on" — no behavior change
+for the fast/normal path, and `fetchAllCatalogPages()`/`fetchNonce()`'s existing "throw and abort
+the whole sync" behavior on a genuine failure is preserved, just now time-bounded too.
+
+### Known, transient: Jaecoo (2 vehicles) missing from the current `data/car-remaps/`
+
+The 2026-07-11 HGV-scope sync run's `get_filter_models` request for the `jaecoo` marque failed
+with a generic `fetch failed` (not the documented Mitsubishi-Fuso-style confirmed-zero-model case
+above — this one logged as a plain fetch failure, most likely transient network flakiness).
+`jaecoo`'s scope-index entry ended up with zero models for that run, so `isInScopeVehicle()`
+correctly excluded its 2 real products (J5, J7) as a result — not a bug, just a small, isolated gap
+from one failed request during the scope-index walk (Pass A), unrelated to the per-product
+enrichment failures tracked in `manifest.json`'s `totalFailed`.
+
+**Deliberately not fixed by re-running the full sync** — a ~2,000-request live re-sync is expensive
+against a third-party site and disproportionate for a 2-vehicle gap; see §1's guidance on this.
+Expected to self-heal on the next routine re-sync (before the next Car Remaps deploy). If Jaecoo
+still shows a zero-model scope-index warning on a future run, check whether `jaecoo`'s marque slug
+or AJAX response shape changed upstream.
 
 ---
 

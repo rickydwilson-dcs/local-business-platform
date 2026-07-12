@@ -1,0 +1,469 @@
+[
+  {
+    "make": "Volvo Buses",
+    "model": "Intercity",
+    "modelSlug": "intercity",
+    "sourceProductId": 31960,
+    "sourceUrl": "https://viezu.com/shop/volvo-buses-intercity-2010-2011/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "7.2",
+        "originalBhp": {
+          "raw": "290",
+          "parsedValues": ["290"],
+          "primaryValue": "290"
+        },
+        "powerBhpGain": {
+          "raw": "29",
+          "parsedValues": ["29"],
+          "primaryValue": "29"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "13",
+          "parsedValues": ["13"],
+          "primaryValue": "13"
+        },
+        "economyGainNm": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "9.4",
+        "originalBhp": {
+          "raw": "381",
+          "parsedValues": ["381"],
+          "primaryValue": "381"
+        },
+        "powerBhpGain": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "160",
+          "parsedValues": ["160"],
+          "primaryValue": "160"
+        },
+        "economyGainBhp": {
+          "raw": "17",
+          "parsedValues": ["17"],
+          "primaryValue": "17"
+        },
+        "economyGainNm": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      }
+    ]
+  },
+  {
+    "make": "Volvo Buses",
+    "model": "Coach",
+    "modelSlug": "coach",
+    "sourceProductId": 31951,
+    "sourceUrl": "https://viezu.com/shop/volvo-buses-coach-2001-2010/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "9.4",
+        "originalBhp": {
+          "raw": "381",
+          "parsedValues": ["381"],
+          "primaryValue": "381"
+        },
+        "powerBhpGain": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "160",
+          "parsedValues": ["160"],
+          "primaryValue": "160"
+        },
+        "economyGainBhp": {
+          "raw": "17",
+          "parsedValues": ["17"],
+          "primaryValue": "17"
+        },
+        "economyGainNm": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "12.8",
+        "originalBhp": {
+          "raw": "480",
+          "parsedValues": ["480"],
+          "primaryValue": "480"
+        },
+        "powerBhpGain": {
+          "raw": "48",
+          "parsedValues": ["48"],
+          "primaryValue": "48"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "24",
+          "parsedValues": ["24"],
+          "primaryValue": "24"
+        },
+        "economyGainNm": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "12.8",
+        "originalBhp": {
+          "raw": "480",
+          "parsedValues": ["480"],
+          "primaryValue": "480"
+        },
+        "powerBhpGain": {
+          "raw": "48",
+          "parsedValues": ["48"],
+          "primaryValue": "48"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "24",
+          "parsedValues": ["24"],
+          "primaryValue": "24"
+        },
+        "economyGainNm": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "12.1",
+        "originalBhp": {
+          "raw": "379",
+          "parsedValues": ["379"],
+          "primaryValue": "379"
+        },
+        "powerBhpGain": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "160",
+          "parsedValues": ["160"],
+          "primaryValue": "160"
+        },
+        "economyGainBhp": {
+          "raw": "17",
+          "parsedValues": ["17"],
+          "primaryValue": "17"
+        },
+        "economyGainNm": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "12.1",
+        "originalBhp": {
+          "raw": "420",
+          "parsedValues": ["420"],
+          "primaryValue": "420"
+        },
+        "powerBhpGain": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "450",
+          "parsedValues": ["450"],
+          "primaryValue": "450"
+        },
+        "economyGainBhp": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "economyGainNm": {
+          "raw": "225",
+          "parsedValues": ["225"],
+          "primaryValue": "225"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "7.2",
+        "originalBhp": {
+          "raw": "241",
+          "parsedValues": ["241"],
+          "primaryValue": "241"
+        },
+        "powerBhpGain": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "originalTorque": {
+          "raw": "920",
+          "parsedValues": ["920"],
+          "primaryValue": "920"
+        },
+        "torqueNmGain": {
+          "raw": "95",
+          "parsedValues": ["95"],
+          "primaryValue": "95"
+        },
+        "economyGainBhp": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "9.4",
+        "originalBhp": {
+          "raw": "340",
+          "parsedValues": ["340"],
+          "primaryValue": "340"
+        },
+        "powerBhpGain": {
+          "raw": "34",
+          "parsedValues": ["34"],
+          "primaryValue": "34"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "17",
+          "parsedValues": ["17"],
+          "primaryValue": "17"
+        },
+        "economyGainNm": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "9.4",
+        "originalBhp": {
+          "raw": "381",
+          "parsedValues": ["381"],
+          "primaryValue": "381"
+        },
+        "powerBhpGain": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "160",
+          "parsedValues": ["160"],
+          "primaryValue": "160"
+        },
+        "economyGainBhp": {
+          "raw": "17",
+          "parsedValues": ["17"],
+          "primaryValue": "17"
+        },
+        "economyGainNm": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      }
+    ]
+  },
+  {
+    "make": "Volvo Buses",
+    "model": "City",
+    "modelSlug": "city",
+    "sourceProductId": 31949,
+    "sourceUrl": "https://viezu.com/shop/volvo-buses-city-2010/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "9.4",
+        "originalBhp": {
+          "raw": "381",
+          "parsedValues": ["381"],
+          "primaryValue": "381"
+        },
+        "powerBhpGain": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "160",
+          "parsedValues": ["160"],
+          "primaryValue": "160"
+        },
+        "economyGainBhp": {
+          "raw": "17",
+          "parsedValues": ["17"],
+          "primaryValue": "17"
+        },
+        "economyGainNm": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      }
+    ]
+  }
+]

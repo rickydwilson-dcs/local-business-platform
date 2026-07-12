@@ -1,0 +1,51 @@
+[
+  {
+    "make": "Sisu",
+    "model": "E11",
+    "modelSlug": "e11",
+    "sourceProductId": 31896,
+    "sourceUrl": "https://viezu.com/shop/sisu-e11/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "10.8",
+        "originalBhp": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "powerBhpGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "150",
+          "parsedValues": ["150"],
+          "primaryValue": "150"
+        },
+        "economyGainBhp": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "economyGainNm": {
+          "raw": "75",
+          "parsedValues": ["75"],
+          "primaryValue": "75"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      }
+    ]
+  }
+]

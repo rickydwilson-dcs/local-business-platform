@@ -1,0 +1,131 @@
+[
+  {
+    "make": "Daf Buses",
+    "model": "Sb 4000",
+    "modelSlug": "sb-4000",
+    "sourceProductId": 30000,
+    "sourceUrl": "https://viezu.com/shop/daf-buses-sb-4000-2002/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "12.5",
+        "originalBhp": {
+          "raw": "340",
+          "parsedValues": ["340"],
+          "primaryValue": "340"
+        },
+        "powerBhpGain": {
+          "raw": "34",
+          "parsedValues": ["34"],
+          "primaryValue": "34"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "17",
+          "parsedValues": ["17"],
+          "primaryValue": "17"
+        },
+        "economyGainNm": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "12.5",
+        "originalBhp": {
+          "raw": "381",
+          "parsedValues": ["381"],
+          "primaryValue": "381"
+        },
+        "powerBhpGain": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "160",
+          "parsedValues": ["160"],
+          "primaryValue": "160"
+        },
+        "economyGainBhp": {
+          "raw": "17",
+          "parsedValues": ["17"],
+          "primaryValue": "17"
+        },
+        "economyGainNm": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "12.5",
+        "originalBhp": {
+          "raw": "428",
+          "parsedValues": ["428"],
+          "primaryValue": "428"
+        },
+        "powerBhpGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "170",
+          "parsedValues": ["170"],
+          "primaryValue": "170"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "85",
+          "parsedValues": ["85"],
+          "primaryValue": "85"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      }
+    ]
+  }
+]

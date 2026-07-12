@@ -1,0 +1,51 @@
+[
+  {
+    "make": "Faw Jiefang",
+    "model": "J6M",
+    "modelSlug": "j6m",
+    "sourceProductId": 30063,
+    "sourceUrl": "https://viezu.com/shop/faw-jiefang-j6m/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "8.7",
+        "originalBhp": {
+          "raw": "355",
+          "parsedValues": ["355"],
+          "primaryValue": "355"
+        },
+        "powerBhpGain": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "160",
+          "parsedValues": ["160"],
+          "primaryValue": "160"
+        },
+        "economyGainBhp": {
+          "raw": "17",
+          "parsedValues": ["17"],
+          "primaryValue": "17"
+        },
+        "economyGainNm": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      }
+    ]
+  }
+]

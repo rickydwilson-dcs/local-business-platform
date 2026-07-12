@@ -1,0 +1,1958 @@
+[
+  {
+    "make": "Scania Truck",
+    "model": "Series R",
+    "modelSlug": "series-r",
+    "sourceProductId": 31868,
+    "sourceUrl": "https://viezu.com/shop/scania-truck-series-r-2004-2013/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "8.9",
+        "originalBhp": {
+          "raw": "230",
+          "parsedValues": ["230"],
+          "primaryValue": "230"
+        },
+        "powerBhpGain": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "100",
+          "parsedValues": ["100"],
+          "primaryValue": "100"
+        },
+        "economyGainBhp": {
+          "raw": "17",
+          "parsedValues": ["17"],
+          "primaryValue": "17"
+        },
+        "economyGainNm": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "9.3",
+        "originalBhp": {
+          "raw": "280",
+          "parsedValues": ["280"],
+          "primaryValue": "280"
+        },
+        "powerBhpGain": {
+          "raw": "28",
+          "parsedValues": ["28"],
+          "primaryValue": "28"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "14",
+          "parsedValues": ["14"],
+          "primaryValue": "14"
+        },
+        "economyGainNm": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "10.6",
+        "originalBhp": {
+          "raw": "340",
+          "parsedValues": ["340"],
+          "primaryValue": "340"
+        },
+        "powerBhpGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "255",
+          "parsedValues": ["255"],
+          "primaryValue": "255"
+        },
+        "economyGainBhp": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "economyGainNm": {
+          "raw": "110",
+          "parsedValues": ["110"],
+          "primaryValue": "110"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "11.7",
+        "originalBhp": {
+          "raw": "340",
+          "parsedValues": ["340"],
+          "primaryValue": "340"
+        },
+        "powerBhpGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "255",
+          "parsedValues": ["255"],
+          "primaryValue": "255"
+        },
+        "economyGainBhp": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "economyGainNm": {
+          "raw": "110",
+          "parsedValues": ["110"],
+          "primaryValue": "110"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "12.7",
+        "originalBhp": {
+          "raw": "360",
+          "parsedValues": ["360"],
+          "primaryValue": "360"
+        },
+        "powerBhpGain": {
+          "raw": "36",
+          "parsedValues": ["36"],
+          "primaryValue": "36"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "18",
+          "parsedValues": ["18"],
+          "primaryValue": "18"
+        },
+        "economyGainNm": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "11.7",
+        "originalBhp": {
+          "raw": "381",
+          "parsedValues": ["381"],
+          "primaryValue": "381"
+        },
+        "powerBhpGain": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "160",
+          "parsedValues": ["160"],
+          "primaryValue": "160"
+        },
+        "economyGainBhp": {
+          "raw": "17",
+          "parsedValues": ["17"],
+          "primaryValue": "17"
+        },
+        "economyGainNm": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "12.7",
+        "originalBhp": {
+          "raw": "400",
+          "parsedValues": ["400"],
+          "primaryValue": "400"
+        },
+        "powerBhpGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "11.7",
+        "originalBhp": {
+          "raw": "420",
+          "parsedValues": ["420"],
+          "primaryValue": "420"
+        },
+        "powerBhpGain": {
+          "raw": "65",
+          "parsedValues": ["65"],
+          "primaryValue": "65"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "315",
+          "parsedValues": ["315"],
+          "primaryValue": "315"
+        },
+        "economyGainBhp": {
+          "raw": "28",
+          "parsedValues": ["28"],
+          "primaryValue": "28"
+        },
+        "economyGainNm": {
+          "raw": "150",
+          "parsedValues": ["150"],
+          "primaryValue": "150"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "12.7",
+        "originalBhp": {
+          "raw": "441",
+          "parsedValues": ["441"],
+          "primaryValue": "441"
+        },
+        "powerBhpGain": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "190",
+          "parsedValues": ["190"],
+          "primaryValue": "190"
+        },
+        "economyGainBhp": {
+          "raw": "22",
+          "parsedValues": ["22"],
+          "primaryValue": "22"
+        },
+        "economyGainNm": {
+          "raw": "95",
+          "parsedValues": ["95"],
+          "primaryValue": "95"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "12.7",
+        "originalBhp": {
+          "raw": "480",
+          "parsedValues": ["480"],
+          "primaryValue": "480"
+        },
+        "powerBhpGain": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "420",
+          "parsedValues": ["420"],
+          "primaryValue": "420"
+        },
+        "economyGainBhp": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "economyGainNm": {
+          "raw": "210",
+          "parsedValues": ["210"],
+          "primaryValue": "210"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "11.7",
+        "originalBhp": {
+          "raw": "469",
+          "parsedValues": ["469"],
+          "primaryValue": "469"
+        },
+        "powerBhpGain": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "190",
+          "parsedValues": ["190"],
+          "primaryValue": "190"
+        },
+        "economyGainBhp": {
+          "raw": "22",
+          "parsedValues": ["22"],
+          "primaryValue": "22"
+        },
+        "economyGainNm": {
+          "raw": "95",
+          "parsedValues": ["95"],
+          "primaryValue": "95"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "11.7",
+        "originalBhp": {
+          "raw": "480",
+          "parsedValues": ["480"],
+          "primaryValue": "480"
+        },
+        "powerBhpGain": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "420",
+          "parsedValues": ["420"],
+          "primaryValue": "420"
+        },
+        "economyGainBhp": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "economyGainNm": {
+          "raw": "210",
+          "parsedValues": ["210"],
+          "primaryValue": "210"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "12.7",
+        "originalBhp": {
+          "raw": "479",
+          "parsedValues": ["479"],
+          "primaryValue": "479"
+        },
+        "powerBhpGain": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "190",
+          "parsedValues": ["190"],
+          "primaryValue": "190"
+        },
+        "economyGainBhp": {
+          "raw": "22",
+          "parsedValues": ["22"],
+          "primaryValue": "22"
+        },
+        "economyGainNm": {
+          "raw": "95",
+          "parsedValues": ["95"],
+          "primaryValue": "95"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "15.6",
+        "originalBhp": {
+          "raw": "559",
+          "parsedValues": ["559"],
+          "primaryValue": "559"
+        },
+        "powerBhpGain": {
+          "raw": "55",
+          "parsedValues": ["55"],
+          "primaryValue": "55"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "220",
+          "parsedValues": ["220"],
+          "primaryValue": "220"
+        },
+        "economyGainBhp": {
+          "raw": "28",
+          "parsedValues": ["28"],
+          "primaryValue": "28"
+        },
+        "economyGainNm": {
+          "raw": "110",
+          "parsedValues": ["110"],
+          "primaryValue": "110"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "15.6",
+        "originalBhp": {
+          "raw": "500",
+          "parsedValues": ["500"],
+          "primaryValue": "500"
+        },
+        "powerBhpGain": {
+          "raw": "95",
+          "parsedValues": ["95"],
+          "primaryValue": "95"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "450",
+          "parsedValues": ["450"],
+          "primaryValue": "450"
+        },
+        "economyGainBhp": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "economyGainNm": {
+          "raw": "225",
+          "parsedValues": ["225"],
+          "primaryValue": "225"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "15.6",
+        "originalBhp": {
+          "raw": "619",
+          "parsedValues": ["619"],
+          "primaryValue": "619"
+        },
+        "powerBhpGain": {
+          "raw": "65",
+          "parsedValues": ["65"],
+          "primaryValue": "65"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "250",
+          "parsedValues": ["250"],
+          "primaryValue": "250"
+        },
+        "economyGainBhp": {
+          "raw": "28",
+          "parsedValues": ["28"],
+          "primaryValue": "28"
+        },
+        "economyGainNm": {
+          "raw": "125",
+          "parsedValues": ["125"],
+          "primaryValue": "125"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "16.4",
+        "originalBhp": {
+          "raw": "526",
+          "parsedValues": ["526"],
+          "primaryValue": "526"
+        },
+        "powerBhpGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "200",
+          "parsedValues": ["200"],
+          "primaryValue": "200"
+        },
+        "economyGainBhp": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "economyGainNm": {
+          "raw": "100",
+          "parsedValues": ["100"],
+          "primaryValue": "100"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "15.6",
+        "originalBhp": {
+          "raw": "560",
+          "parsedValues": ["560"],
+          "primaryValue": "560"
+        },
+        "powerBhpGain": {
+          "raw": "56",
+          "parsedValues": ["56"],
+          "primaryValue": "56"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "28",
+          "parsedValues": ["28"],
+          "primaryValue": "28"
+        },
+        "economyGainNm": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "16.4",
+        "originalBhp": {
+          "raw": "730",
+          "parsedValues": ["730"],
+          "primaryValue": "730"
+        },
+        "powerBhpGain": {
+          "raw": "73",
+          "parsedValues": ["73"],
+          "primaryValue": "73"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "economyGainNm": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "16.4",
+        "originalBhp": {
+          "raw": "588",
+          "parsedValues": ["588"],
+          "primaryValue": "588"
+        },
+        "powerBhpGain": {
+          "raw": "55",
+          "parsedValues": ["55"],
+          "primaryValue": "55"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "220",
+          "parsedValues": ["220"],
+          "primaryValue": "220"
+        },
+        "economyGainBhp": {
+          "raw": "28",
+          "parsedValues": ["28"],
+          "primaryValue": "28"
+        },
+        "economyGainNm": {
+          "raw": "110",
+          "parsedValues": ["110"],
+          "primaryValue": "110"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      }
+    ]
+  },
+  {
+    "make": "Scania Truck",
+    "model": "Series P",
+    "modelSlug": "series-p",
+    "sourceProductId": 31853,
+    "sourceUrl": "https://viezu.com/shop/scania-truck-series-p-2004-2010/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "8.9",
+        "originalBhp": {
+          "raw": "310",
+          "parsedValues": ["310"],
+          "primaryValue": "310"
+        },
+        "powerBhpGain": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "235",
+          "parsedValues": ["235"],
+          "primaryValue": "235"
+        },
+        "economyGainBhp": {
+          "raw": "22",
+          "parsedValues": ["22"],
+          "primaryValue": "22"
+        },
+        "economyGainNm": {
+          "raw": "110",
+          "parsedValues": ["110"],
+          "primaryValue": "110"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "8.9",
+        "originalBhp": {
+          "raw": "269",
+          "parsedValues": ["269"],
+          "primaryValue": "269"
+        },
+        "powerBhpGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "120",
+          "parsedValues": ["120"],
+          "primaryValue": "120"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "8.9",
+        "originalBhp": {
+          "raw": "230",
+          "parsedValues": ["230"],
+          "primaryValue": "230"
+        },
+        "powerBhpGain": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "160",
+          "parsedValues": ["160"],
+          "primaryValue": "160"
+        },
+        "economyGainBhp": {
+          "raw": "17",
+          "parsedValues": ["17"],
+          "primaryValue": "17"
+        },
+        "economyGainNm": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "9.3",
+        "originalBhp": {
+          "raw": "230",
+          "parsedValues": ["230"],
+          "primaryValue": "230"
+        },
+        "powerBhpGain": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "100",
+          "parsedValues": ["100"],
+          "primaryValue": "100"
+        },
+        "economyGainBhp": {
+          "raw": "17",
+          "parsedValues": ["17"],
+          "primaryValue": "17"
+        },
+        "economyGainNm": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "8.9",
+        "originalBhp": {
+          "raw": "280",
+          "parsedValues": ["280"],
+          "primaryValue": "280"
+        },
+        "powerBhpGain": {
+          "raw": "28",
+          "parsedValues": ["28"],
+          "primaryValue": "28"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "14",
+          "parsedValues": ["14"],
+          "primaryValue": "14"
+        },
+        "economyGainNm": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "9.3",
+        "originalBhp": {
+          "raw": "280",
+          "parsedValues": ["280"],
+          "primaryValue": "280"
+        },
+        "powerBhpGain": {
+          "raw": "28",
+          "parsedValues": ["28"],
+          "primaryValue": "28"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "14",
+          "parsedValues": ["14"],
+          "primaryValue": "14"
+        },
+        "economyGainNm": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "9.3",
+        "originalBhp": {
+          "raw": "320",
+          "parsedValues": ["320"],
+          "primaryValue": "320"
+        },
+        "powerBhpGain": {
+          "raw": "32",
+          "parsedValues": ["32"],
+          "primaryValue": "32"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "16",
+          "parsedValues": ["16"],
+          "primaryValue": "16"
+        },
+        "economyGainNm": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "10.6",
+        "originalBhp": {
+          "raw": "340",
+          "parsedValues": ["340"],
+          "primaryValue": "340"
+        },
+        "powerBhpGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "255",
+          "parsedValues": ["255"],
+          "primaryValue": "255"
+        },
+        "economyGainBhp": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "economyGainNm": {
+          "raw": "110",
+          "parsedValues": ["110"],
+          "primaryValue": "110"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "10.6",
+        "originalBhp": {
+          "raw": "381",
+          "parsedValues": ["381"],
+          "primaryValue": "381"
+        },
+        "powerBhpGain": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "160",
+          "parsedValues": ["160"],
+          "primaryValue": "160"
+        },
+        "economyGainBhp": {
+          "raw": "17",
+          "parsedValues": ["17"],
+          "primaryValue": "17"
+        },
+        "economyGainNm": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "11.7",
+        "originalBhp": {
+          "raw": "340",
+          "parsedValues": ["340"],
+          "primaryValue": "340"
+        },
+        "powerBhpGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "255",
+          "parsedValues": ["255"],
+          "primaryValue": "255"
+        },
+        "economyGainBhp": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "economyGainNm": {
+          "raw": "110",
+          "parsedValues": ["110"],
+          "primaryValue": "110"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "11.7",
+        "originalBhp": {
+          "raw": "381",
+          "parsedValues": ["381"],
+          "primaryValue": "381"
+        },
+        "powerBhpGain": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "160",
+          "parsedValues": ["160"],
+          "primaryValue": "160"
+        },
+        "economyGainBhp": {
+          "raw": "17",
+          "parsedValues": ["17"],
+          "primaryValue": "17"
+        },
+        "economyGainNm": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "12.7",
+        "originalBhp": {
+          "raw": "360",
+          "parsedValues": ["360"],
+          "primaryValue": "360"
+        },
+        "powerBhpGain": {
+          "raw": "36",
+          "parsedValues": ["36"],
+          "primaryValue": "36"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "18",
+          "parsedValues": ["18"],
+          "primaryValue": "18"
+        },
+        "economyGainNm": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "11.7",
+        "originalBhp": {
+          "raw": "420",
+          "parsedValues": ["420"],
+          "primaryValue": "420"
+        },
+        "powerBhpGain": {
+          "raw": "65",
+          "parsedValues": ["65"],
+          "primaryValue": "65"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "315",
+          "parsedValues": ["315"],
+          "primaryValue": "315"
+        },
+        "economyGainBhp": {
+          "raw": "28",
+          "parsedValues": ["28"],
+          "primaryValue": "28"
+        },
+        "economyGainNm": {
+          "raw": "150",
+          "parsedValues": ["150"],
+          "primaryValue": "150"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "12.7",
+        "originalBhp": {
+          "raw": "441",
+          "parsedValues": ["441"],
+          "primaryValue": "441"
+        },
+        "powerBhpGain": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "190",
+          "parsedValues": ["190"],
+          "primaryValue": "190"
+        },
+        "economyGainBhp": {
+          "raw": "22",
+          "parsedValues": ["22"],
+          "primaryValue": "22"
+        },
+        "economyGainNm": {
+          "raw": "95",
+          "parsedValues": ["95"],
+          "primaryValue": "95"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      }
+    ]
+  },
+  {
+    "make": "Scania Truck",
+    "model": "Series G",
+    "modelSlug": "series-g",
+    "sourceProductId": 31847,
+    "sourceUrl": "https://viezu.com/shop/scania-truck-series-g-2005-2013/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "11.7",
+        "originalBhp": {
+          "raw": "340",
+          "parsedValues": ["340"],
+          "primaryValue": "340"
+        },
+        "powerBhpGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "255",
+          "parsedValues": ["255"],
+          "primaryValue": "255"
+        },
+        "economyGainBhp": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "economyGainNm": {
+          "raw": "110",
+          "parsedValues": ["110"],
+          "primaryValue": "110"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "11.7",
+        "originalBhp": {
+          "raw": "381",
+          "parsedValues": ["381"],
+          "primaryValue": "381"
+        },
+        "powerBhpGain": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "160",
+          "parsedValues": ["160"],
+          "primaryValue": "160"
+        },
+        "economyGainBhp": {
+          "raw": "17",
+          "parsedValues": ["17"],
+          "primaryValue": "17"
+        },
+        "economyGainNm": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "12.7",
+        "originalBhp": {
+          "raw": "441",
+          "parsedValues": ["441"],
+          "primaryValue": "441"
+        },
+        "powerBhpGain": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "190",
+          "parsedValues": ["190"],
+          "primaryValue": "190"
+        },
+        "economyGainBhp": {
+          "raw": "22",
+          "parsedValues": ["22"],
+          "primaryValue": "22"
+        },
+        "economyGainNm": {
+          "raw": "95",
+          "parsedValues": ["95"],
+          "primaryValue": "95"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "11.7",
+        "originalBhp": {
+          "raw": "480",
+          "parsedValues": ["480"],
+          "primaryValue": "480"
+        },
+        "powerBhpGain": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "420",
+          "parsedValues": ["420"],
+          "primaryValue": "420"
+        },
+        "economyGainBhp": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "economyGainNm": {
+          "raw": "210",
+          "parsedValues": ["210"],
+          "primaryValue": "210"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "12.7",
+        "originalBhp": {
+          "raw": "479",
+          "parsedValues": ["479"],
+          "primaryValue": "479"
+        },
+        "powerBhpGain": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "190",
+          "parsedValues": ["190"],
+          "primaryValue": "190"
+        },
+        "economyGainBhp": {
+          "raw": "22",
+          "parsedValues": ["22"],
+          "primaryValue": "22"
+        },
+        "economyGainNm": {
+          "raw": "95",
+          "parsedValues": ["95"],
+          "primaryValue": "95"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      }
+    ]
+  },
+  {
+    "make": "Scania Truck",
+    "model": "Series 4",
+    "modelSlug": "series-4",
+    "sourceProductId": 31837,
+    "sourceUrl": "https://viezu.com/shop/scania-truck-series-4-1996-2001/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "10.6",
+        "originalBhp": {
+          "raw": "340",
+          "parsedValues": ["340"],
+          "primaryValue": "340"
+        },
+        "powerBhpGain": {
+          "raw": "34",
+          "parsedValues": ["34"],
+          "primaryValue": "34"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "17",
+          "parsedValues": ["17"],
+          "primaryValue": "17"
+        },
+        "economyGainNm": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "10.6",
+        "originalBhp": {
+          "raw": "381",
+          "parsedValues": ["381"],
+          "primaryValue": "381"
+        },
+        "powerBhpGain": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "160",
+          "parsedValues": ["160"],
+          "primaryValue": "160"
+        },
+        "economyGainBhp": {
+          "raw": "17",
+          "parsedValues": ["17"],
+          "primaryValue": "17"
+        },
+        "economyGainNm": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "11.7",
+        "originalBhp": {
+          "raw": "420",
+          "parsedValues": ["420"],
+          "primaryValue": "420"
+        },
+        "powerBhpGain": {
+          "raw": "42",
+          "parsedValues": ["42"],
+          "primaryValue": "42"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "21",
+          "parsedValues": ["21"],
+          "primaryValue": "21"
+        },
+        "economyGainNm": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "11.7",
+        "originalBhp": {
+          "raw": "400",
+          "parsedValues": ["400"],
+          "primaryValue": "400"
+        },
+        "powerBhpGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "11.7",
+        "originalBhp": {
+          "raw": "419",
+          "parsedValues": ["419"],
+          "primaryValue": "419"
+        },
+        "powerBhpGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "170",
+          "parsedValues": ["170"],
+          "primaryValue": "170"
+        },
+        "economyGainBhp": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "economyGainNm": {
+          "raw": "85",
+          "parsedValues": ["85"],
+          "primaryValue": "85"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "11.7",
+        "originalBhp": {
+          "raw": "441",
+          "parsedValues": ["441"],
+          "primaryValue": "441"
+        },
+        "powerBhpGain": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "190",
+          "parsedValues": ["190"],
+          "primaryValue": "190"
+        },
+        "economyGainBhp": {
+          "raw": "22",
+          "parsedValues": ["22"],
+          "primaryValue": "22"
+        },
+        "economyGainNm": {
+          "raw": "95",
+          "parsedValues": ["95"],
+          "primaryValue": "95"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "11.7",
+        "originalBhp": {
+          "raw": "469",
+          "parsedValues": ["469"],
+          "primaryValue": "469"
+        },
+        "powerBhpGain": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "190",
+          "parsedValues": ["190"],
+          "primaryValue": "190"
+        },
+        "economyGainBhp": {
+          "raw": "22",
+          "parsedValues": ["22"],
+          "primaryValue": "22"
+        },
+        "economyGainNm": {
+          "raw": "95",
+          "parsedValues": ["95"],
+          "primaryValue": "95"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "15.6",
+        "originalBhp": {
+          "raw": "579",
+          "parsedValues": ["579"],
+          "primaryValue": "579"
+        },
+        "powerBhpGain": {
+          "raw": "55",
+          "parsedValues": ["55"],
+          "primaryValue": "55"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "220",
+          "parsedValues": ["220"],
+          "primaryValue": "220"
+        },
+        "economyGainBhp": {
+          "raw": "28",
+          "parsedValues": ["28"],
+          "primaryValue": "28"
+        },
+        "economyGainNm": {
+          "raw": "110",
+          "parsedValues": ["110"],
+          "primaryValue": "110"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      },
+      {
+        "fuelType": "Diesel",
+        "variant": "15.6",
+        "originalBhp": {
+          "raw": "480",
+          "parsedValues": ["480"],
+          "primaryValue": "480"
+        },
+        "powerBhpGain": {
+          "raw": "48",
+          "parsedValues": ["48"],
+          "primaryValue": "48"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "90",
+          "parsedValues": ["90"],
+          "primaryValue": "90"
+        },
+        "economyGainBhp": {
+          "raw": "24",
+          "parsedValues": ["24"],
+          "primaryValue": "24"
+        },
+        "economyGainNm": {
+          "raw": "45",
+          "parsedValues": ["45"],
+          "primaryValue": "45"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      }
+    ]
+  }
+]

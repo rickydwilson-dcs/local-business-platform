@@ -1,0 +1,247 @@
+[
+  {
+    "make": "Gaz",
+    "model": "Gazelle",
+    "modelSlug": "gazelle",
+    "sourceProductId": 62956,
+    "sourceUrl": "https://viezu.com/shop/gaz-gazelle-2020-present/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.0",
+        "originalBhp": {
+          "raw": "136",
+          "parsedValues": ["136"],
+          "primaryValue": "136"
+        },
+        "powerBhpGain": {
+          "raw": "24",
+          "parsedValues": ["24"],
+          "primaryValue": "24"
+        },
+        "originalTorque": {
+          "raw": "340",
+          "parsedValues": ["340"],
+          "primaryValue": "340"
+        },
+        "torqueNmGain": {
+          "raw": "40",
+          "parsedValues": ["40"],
+          "primaryValue": "40"
+        },
+        "economyGainBhp": {
+          "raw": "12",
+          "parsedValues": ["12"],
+          "primaryValue": "12"
+        },
+        "economyGainNm": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "fuelSaving": {
+          "raw": "10%",
+          "parsedValues": ["10%"],
+          "primaryValue": "10%"
+        },
+        "displayPriceCents": 28900
+      }
+    ]
+  },
+  {
+    "make": "Gaz",
+    "model": "PAZ",
+    "modelSlug": "paz",
+    "sourceProductId": 30188,
+    "sourceUrl": "https://viezu.com/shop/gaz-paz-2006-2008/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "4.5",
+        "originalBhp": {
+          "raw": "185",
+          "parsedValues": ["185"],
+          "primaryValue": "185"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "550",
+          "parsedValues": ["550"],
+          "primaryValue": "550"
+        },
+        "torqueNmGain": {
+          "raw": "70",
+          "parsedValues": ["70"],
+          "primaryValue": "70"
+        },
+        "economyGainBhp": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      }
+    ]
+  },
+  {
+    "make": "Gaz",
+    "model": "GAZon NEXT",
+    "modelSlug": "gazon-next",
+    "sourceProductId": 30186,
+    "sourceUrl": "https://viezu.com/shop/gaz-gazon-next-2014-present/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "4.4",
+        "originalBhp": {
+          "raw": "150",
+          "parsedValues": ["150"],
+          "primaryValue": "150"
+        },
+        "powerBhpGain": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "originalTorque": {
+          "raw": "493",
+          "parsedValues": ["493"],
+          "primaryValue": "493"
+        },
+        "torqueNmGain": {
+          "raw": "50",
+          "parsedValues": ["50"],
+          "primaryValue": "50"
+        },
+        "economyGainBhp": {
+          "raw": "7",
+          "parsedValues": ["7"],
+          "primaryValue": "7"
+        },
+        "economyGainNm": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      }
+    ]
+  },
+  {
+    "make": "Gaz",
+    "model": "Gazelle NEXT",
+    "modelSlug": "gazelle-next",
+    "sourceProductId": 30184,
+    "sourceUrl": "https://viezu.com/shop/gaz-gazelle-next-2015/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.8",
+        "originalBhp": {
+          "raw": "131",
+          "parsedValues": ["131"],
+          "primaryValue": "131"
+        },
+        "powerBhpGain": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "55",
+          "parsedValues": ["55"],
+          "primaryValue": "55"
+        },
+        "economyGainBhp": {
+          "raw": "7",
+          "parsedValues": ["7"],
+          "primaryValue": "7"
+        },
+        "economyGainNm": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      }
+    ]
+  },
+  {
+    "make": "Gaz",
+    "model": "Gazelle",
+    "modelSlug": "gazelle",
+    "sourceProductId": 30182,
+    "sourceUrl": "https://viezu.com/shop/gaz-gazelle-2014/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "2.8",
+        "originalBhp": {
+          "raw": "131",
+          "parsedValues": ["131"],
+          "primaryValue": "131"
+        },
+        "powerBhpGain": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "originalTorque": {
+          "raw": "280",
+          "parsedValues": ["280"],
+          "primaryValue": "280"
+        },
+        "torqueNmGain": {
+          "raw": "55",
+          "parsedValues": ["55"],
+          "primaryValue": "55"
+        },
+        "economyGainBhp": {
+          "raw": "7",
+          "parsedValues": ["7"],
+          "primaryValue": "7"
+        },
+        "economyGainNm": {
+          "raw": "25",
+          "parsedValues": ["25"],
+          "primaryValue": "25"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      }
+    ]
+  }
+]

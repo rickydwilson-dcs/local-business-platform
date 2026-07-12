@@ -1,0 +1,51 @@
+[
+  {
+    "make": "Alexander Dennis",
+    "model": "Enviro",
+    "modelSlug": "enviro",
+    "sourceProductId": 29931,
+    "sourceUrl": "https://viezu.com/shop/alexander-dennis-enviro-2006-present/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "4.5",
+        "originalBhp": {
+          "raw": "211",
+          "parsedValues": ["211"],
+          "primaryValue": "211"
+        },
+        "powerBhpGain": {
+          "raw": "20",
+          "parsedValues": ["20"],
+          "primaryValue": "20"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "70",
+          "parsedValues": ["70"],
+          "primaryValue": "70"
+        },
+        "economyGainBhp": {
+          "raw": "10",
+          "parsedValues": ["10"],
+          "primaryValue": "10"
+        },
+        "economyGainNm": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      }
+    ]
+  }
+]

@@ -1,0 +1,51 @@
+[
+  {
+    "make": "Shacman",
+    "model": "F2000",
+    "modelSlug": "f2000",
+    "sourceProductId": 31889,
+    "sourceUrl": "https://viezu.com/shop/shacman-f2000-2018-present/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "11.6",
+        "originalBhp": {
+          "raw": "375",
+          "parsedValues": ["375"],
+          "primaryValue": "375"
+        },
+        "powerBhpGain": {
+          "raw": "35",
+          "parsedValues": ["35"],
+          "primaryValue": "35"
+        },
+        "originalTorque": {
+          "raw": "1500",
+          "parsedValues": ["1500"],
+          "primaryValue": "1500"
+        },
+        "torqueNmGain": {
+          "raw": "160",
+          "parsedValues": ["160"],
+          "primaryValue": "160"
+        },
+        "economyGainBhp": {
+          "raw": "17",
+          "parsedValues": ["17"],
+          "primaryValue": "17"
+        },
+        "economyGainNm": {
+          "raw": "80",
+          "parsedValues": ["80"],
+          "primaryValue": "80"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      }
+    ]
+  }
+]

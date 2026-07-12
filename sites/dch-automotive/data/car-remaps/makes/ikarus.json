@@ -1,0 +1,51 @@
+[
+  {
+    "make": "Ikarus",
+    "model": "Modulo",
+    "modelSlug": "modulo",
+    "sourceProductId": 30219,
+    "sourceUrl": "https://viezu.com/shop/ikarus-modulo-2015/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "6.7",
+        "originalBhp": {
+          "raw": "277",
+          "parsedValues": ["277"],
+          "primaryValue": "277"
+        },
+        "powerBhpGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "120",
+          "parsedValues": ["120"],
+          "primaryValue": "120"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      }
+    ]
+  }
+]

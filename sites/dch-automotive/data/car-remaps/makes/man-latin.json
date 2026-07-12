@@ -1,0 +1,51 @@
+[
+  {
+    "make": "MAN Latin",
+    "model": "Constellation",
+    "modelSlug": "constellation",
+    "sourceProductId": 31114,
+    "sourceUrl": "https://viezu.com/shop/man-latin-constellation-2012/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "6.8",
+        "originalBhp": {
+          "raw": "326",
+          "parsedValues": ["326"],
+          "primaryValue": "326"
+        },
+        "powerBhpGain": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "120",
+          "parsedValues": ["120"],
+          "primaryValue": "120"
+        },
+        "economyGainBhp": {
+          "raw": "15",
+          "parsedValues": ["15"],
+          "primaryValue": "15"
+        },
+        "economyGainNm": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "fuelSaving": {
+          "raw": "5",
+          "parsedValues": ["5"],
+          "primaryValue": "5"
+        },
+        "displayPriceCents": 69900
+      }
+    ]
+  }
+]

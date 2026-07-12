@@ -1,0 +1,51 @@
+[
+  {
+    "make": "Dong Feng Trucks",
+    "model": "LZ Dumptruck",
+    "modelSlug": "lz-dumptruck",
+    "sourceProductId": 58896,
+    "sourceUrl": "https://viezu.com/shop/dong-feng-trucks-lz-dumptruck/",
+    "variations": [
+      {
+        "fuelType": "Diesel",
+        "variant": "8.7",
+        "originalBhp": {
+          "raw": "280",
+          "parsedValues": ["280"],
+          "primaryValue": "280"
+        },
+        "powerBhpGain": {
+          "raw": "28",
+          "parsedValues": ["28"],
+          "primaryValue": "28"
+        },
+        "originalTorque": {
+          "raw": "",
+          "parsedValues": [""],
+          "primaryValue": ""
+        },
+        "torqueNmGain": {
+          "raw": "60",
+          "parsedValues": ["60"],
+          "primaryValue": "60"
+        },
+        "economyGainBhp": {
+          "raw": "14",
+          "parsedValues": ["14"],
+          "primaryValue": "14"
+        },
+        "economyGainNm": {
+          "raw": "30",
+          "parsedValues": ["30"],
+          "primaryValue": "30"
+        },
+        "fuelSaving": {
+          "raw": "5%",
+          "parsedValues": ["5%"],
+          "primaryValue": "5%"
+        },
+        "displayPriceCents": 69900
+      }
+    ]
+  }
+]
