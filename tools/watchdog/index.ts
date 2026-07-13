@@ -13,7 +13,7 @@
 import * as fs from "fs";
 import * as path from "path";
 import * as dotenv from "dotenv";
-import type { PlaywrightReport, PlaywrightTestResult, PlaywrightSuiteResult } from "./lib/types";
+import type { PlaywrightReport, PlaywrightSuiteResult } from "./lib/types";
 import { matchPatterns } from "./lib/pattern-matcher";
 import { queryAnomalies } from "./lib/langfuse-client";
 import { runAutoTriage } from "./lib/auto-triage-agent";
@@ -49,12 +49,18 @@ function collectFailures(
   function walk(suites: PlaywrightSuiteResult[], prefix = "") {
     for (const suite of suites) {
       const suiteTitle = prefix ? `${prefix} > ${suite.title}` : suite.title;
-      for (const test of suite.tests ?? []) {
-        if (test.status === "failed" || test.status === "timedOut") {
+      for (const spec of suite.specs ?? []) {
+        for (const test of spec.tests ?? []) {
+          // "unexpected" = never passed across all retries; "flaky" passed on
+          // retry and isn't treated as a failure worth triaging.
+          if (test.status !== "unexpected") continue;
+          const lastResult = test.results?.[test.results.length - 1];
           failures.push({
-            title: test.title,
-            fullTitle: `${suiteTitle} > ${test.title}`,
-            error: [test.error?.message, test.error?.stack].filter(Boolean).join("\n"),
+            title: spec.title,
+            fullTitle: `${suiteTitle} > ${spec.title}`,
+            error: [lastResult?.error?.message, lastResult?.error?.stack]
+              .filter(Boolean)
+              .join("\n"),
           });
         }
       }
@@ -91,11 +97,6 @@ async function main() {
   }
 
   const report: PlaywrightReport = JSON.parse(fs.readFileSync(resultsPath, "utf8"));
-
-  if (report.stats?.ok) {
-    console.log("[watchdog] All smoke tests passed — nothing to triage.");
-    process.exit(0);
-  }
 
   const failures = collectFailures(report);
   console.log(`[watchdog] ${failures.length} failure(s) to triage.`);

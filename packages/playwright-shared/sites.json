@@ -2,7 +2,7 @@
   "prod": [
     {
       "name": "colossus",
-      "baseURL": "https://colossusscaffolding.com",
+      "baseURL": "https://www.colossus-scaffolding.co.uk",
       "hasLocations": true,
       "firstServiceSlug": "access-scaffolding",
       "firstLocationSlug": "brighton"
@@ -13,19 +13,12 @@
       "hasLocations": false,
       "firstServiceSlug": null,
       "firstLocationSlug": null
-    },
-    {
-      "name": "dcs",
-      "baseURL": "https://digitalconsultingservices.co.uk",
-      "hasLocations": false,
-      "firstServiceSlug": null,
-      "firstLocationSlug": null
     }
   ],
   "staging": [
     {
       "name": "colossus",
-      "baseURL": "https://colossus-scaffolding.vercel.app",
+      "baseURL": "https://local-business-platform-colossus-reference.vercel.app",
       "hasLocations": true,
       "firstServiceSlug": "access-scaffolding",
       "firstLocationSlug": "brighton"

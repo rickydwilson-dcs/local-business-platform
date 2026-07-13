@@ -33,23 +33,31 @@ export interface TriageResult {
   matched_pattern?: string;
 }
 
-export interface PlaywrightTestResult {
+export interface PlaywrightResult {
   status: "passed" | "failed" | "timedOut" | "interrupted";
-  title: string;
-  titlePath: string[];
+  duration: number;
   error?: {
     message: string;
     stack?: string;
   };
-  location?: {
-    file: string;
-    line: number;
-  };
+}
+
+// A "test" is one project/browser run of a spec; `status` is the aggregate
+// outcome across its `results` (retries) — "unexpected" means it never passed.
+export interface PlaywrightTestResult {
+  status: "expected" | "unexpected" | "flaky" | "skipped";
+  results: PlaywrightResult[];
+}
+
+export interface PlaywrightSpecResult {
+  title: string;
+  ok: boolean;
+  tests: PlaywrightTestResult[];
 }
 
 export interface PlaywrightSuiteResult {
   suites: PlaywrightSuiteResult[];
-  tests: PlaywrightTestResult[];
+  specs: PlaywrightSpecResult[];
   title: string;
 }
 
@@ -60,7 +68,6 @@ export interface PlaywrightReport {
     unexpected: number;
     flaky: number;
     skipped: number;
-    ok: boolean;
     duration: number;
   };
 }
