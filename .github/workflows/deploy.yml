@@ -1,7 +1,14 @@
 name: Production Quality Gate
 
-# This workflow runs quality checks on pushes to main.
-# Actual deployment is handled by Vercel Git Integration automatically.
+# Runs on pushes to main AND on PRs into main. The verify-staging-e2e job is the
+# intended REQUIRED status check for main: gating it on the promotion PR is what
+# makes staging E2E actually block the merge (and therefore the Vercel deploy on
+# push to main). See docs/deploy-audit.md (F7) and the Phase-4 plan for the
+# branch-protection + PR-promotion rollout this trigger enables.
+#
+# The pull_request trigger has NO paths-ignore: a promotion PR must always run
+# the gate so a required check never sits permanently pending (which would wedge
+# merges). The push trigger keeps paths-ignore for docs-only direct commits.
 
 permissions:
   contents: read
@@ -14,13 +21,67 @@ on:
       - 'output/**'
       - 'docs/**'
       - '**/*.md'
+  pull_request:
+    branches:
+      - main
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
+  verify-staging-e2e:
+    name: Verify promoted commit passed staging E2E
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    permissions:
+      contents: read
+      actions: read # required to query the E2E Tests workflow runs
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2 # need HEAD's parents to find the promoted staging tip
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Resolve promoted staging commit
+        id: resolve
+        env:
+          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          # On a promotion PR (staging -> main) the promoted commit is exactly the
+          # PR head — the staging tip being proposed — so use it directly.
+          # On a push to main, main's tip is either a merge commit (2nd parent is
+          # the promoted staging tip) or a fast-forward (tip == staging tip).
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            SHA="$PR_HEAD_SHA"
+          else
+            read -r _ _P1 P2 _ <<< "$(git rev-list --parents -n 1 HEAD)"
+            if [ -n "$P2" ]; then SHA="$P2"; else SHA="$GITHUB_SHA"; fi
+          fi
+          echo "sha=$SHA" >> "$GITHUB_OUTPUT"
+          echo "Resolved promoted staging commit: $SHA"
+
+      - name: Verify staging E2E for the promoted commit (fail-closed)
+        run: npx tsx scripts/verify-staging-e2e.ts --sha=${{ steps.resolve.outputs.sha }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+
   quality-checks:
     name: Production Quality Checks
+    needs: verify-staging-e2e # do not run (or pass) unless staging E2E is verified
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
@@ -48,9 +109,11 @@ jobs:
 
       - name: Create deployment summary
         run: |
-          echo "## ✅ Production Quality Checks Passed" >> $GITHUB_STEP_SUMMARY
+          echo "## ✅ Production Quality Gate Passed" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "Vercel Git Integration will handle the actual deployment." >> $GITHUB_STEP_SUMMARY
+          echo "The promoted commit's staging E2E was verified green, and type-check + lint passed." >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Vercel Git Integration handles the actual deployment (see residual F7 in docs/deploy-audit.md)." >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "**Branch:** main" >> $GITHUB_STEP_SUMMARY
           echo "**Commit:** ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY

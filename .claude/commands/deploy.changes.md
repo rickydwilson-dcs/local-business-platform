@@ -4,6 +4,16 @@ Commit (if needed) and push all changes through the full git workflow: develop �
 
 **This skill runs `/update.docs` first** to verify documentation is accurate before deploying.
 
+## Scope — match the user's actual ask
+
+This command commits **and** ships to production. Promotion is not a free bonus on top of a commit request.
+
+- Ask was **"commit"** → stop after Step 4. Do not push, do not promote.
+- Ask was **"commit and push"** → stop after Step 5.
+- Only walk Steps 6–8 when the ask was to **deploy / ship / release**.
+
+If the ask is ambiguous, resolve it before Step 4 by asking — not by promoting and reporting it afterwards.
+
 ## Steps
 
 ### Step 0: Pre-flight
@@ -205,8 +215,10 @@ Report the final state:
 ## Rules
 
 - **NEVER skip a branch** — always go develop → staging → main
+- **NEVER commit on `staging` or `main`** — they only ever receive a merge. If a fix is needed once you're on a rung (dirty tree, failing gate, doc tweak), go back to `develop`, fix it there, and re-walk the staircase from that rung down. A fix committed on `staging` has skipped every gate below it and must be cherry-picked back into compliance.
 - **NEVER force push** to any branch
 - **NEVER proceed** if CI is failing
+- **Retry a flaky push, not a rejected one** — a timeout / broken pipe / TLS or DNS error is noise: retry up to 3 times with a short backoff, then STOP with the final error. A rejection (protection, non-fast-forward, auth) is a real answer: STOP immediately. Never answer either with a force push.
 - If any step fails, STOP and inform the user with the error details
 - Always return to the develop branch when done
 - **Pre-flight checks run in two groups** — Group 3a (parallel read-only) and Group 3b (sequential write-side-effect). Do not serialise Group 3a or parallelise Group 3b.

@@ -92,13 +92,23 @@ async function main() {
 
   console.log(`\n[watchdog] Reading results from: ${resultsPath}`);
   if (!fs.existsSync(resultsPath)) {
-    console.log("[watchdog] No results file found — nothing to triage.");
-    process.exit(0);
+    // A missing results file is a failure, not "nothing to triage" — a smoke run
+    // that produced no results has already gone wrong. Exit non-zero so the
+    // watchdog cannot report success on an absent report.
+    console.error("[watchdog] No results file found — treating as FAILURE.");
+    process.exit(1);
   }
 
-  const report: PlaywrightReport = JSON.parse(fs.readFileSync(resultsPath, "utf8"));
+  const raw = fs.readFileSync(resultsPath, "utf8").trim();
+  if (raw === "") {
+    console.error("[watchdog] Results file is empty — treating as FAILURE.");
+    process.exit(1);
+  }
+
+  const report: PlaywrightReport = JSON.parse(raw);
 
   const failures = collectFailures(report);
+  const statsUnexpected = report.stats?.unexpected ?? 0;
   console.log(`[watchdog] ${failures.length} failure(s) to triage.`);
 
   const recentCommits = getRecentCommits(10);
@@ -196,6 +206,16 @@ async function main() {
   }
 
   console.log("\n[watchdog] Triage complete.");
+
+  // Exit non-zero when the run actually failed. The watchdog is no longer
+  // observation-only: opening issues is not enough — a run with real failures
+  // must also surface a non-zero exit so nothing downstream reads it as success.
+  if (failures.length > 0 || statsUnexpected > 0) {
+    console.error(
+      `[watchdog] ${failures.length} triaged failure(s), ${statsUnexpected} unexpected in stats — exiting non-zero.`
+    );
+    process.exit(1);
+  }
 }
 
 function buildIssueBody(
