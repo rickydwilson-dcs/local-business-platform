@@ -113,6 +113,12 @@ async function main() {
 
   const recentCommits = getRecentCommits(10);
 
+  // F4: count failures whose triage or issue-creation errored. These used to be
+  // logged and swallowed, so a real regression could yield no issue while the job
+  // stayed green. The run already exits non-zero when failures exist; this makes
+  // a *degraded triage subsystem* visible too (and forces non-zero on its own).
+  let triageErrors = 0;
+
   console.log("[watchdog] Querying Langfuse for anomalies...");
   const langfuseAnomalies = await queryAnomalies();
   if (langfuseAnomalies.length > 0) {
@@ -142,6 +148,7 @@ async function main() {
       });
     } catch (err) {
       console.error("[watchdog] Auto-triage agent failed:", err);
+      triageErrors++;
       continue;
     }
 
@@ -202,17 +209,23 @@ async function main() {
       }
     } catch (issueErr) {
       console.error("[watchdog] Failed to create GitHub issue:", issueErr);
+      triageErrors++;
     }
   }
 
   console.log("\n[watchdog] Triage complete.");
+  if (triageErrors > 0) {
+    console.error(
+      `[watchdog] ⚠️  ${triageErrors} failure(s) could not be triaged or filed as an issue — triage is degraded, not just the tests.`
+    );
+  }
 
   // Exit non-zero when the run actually failed. The watchdog is no longer
   // observation-only: opening issues is not enough — a run with real failures
   // must also surface a non-zero exit so nothing downstream reads it as success.
-  if (failures.length > 0 || statsUnexpected > 0) {
+  if (failures.length > 0 || statsUnexpected > 0 || triageErrors > 0) {
     console.error(
-      `[watchdog] ${failures.length} triaged failure(s), ${statsUnexpected} unexpected in stats — exiting non-zero.`
+      `[watchdog] ${failures.length} triaged failure(s), ${statsUnexpected} unexpected in stats, ${triageErrors} triage error(s) — exiting non-zero.`
     );
     process.exit(1);
   }

@@ -33,6 +33,13 @@ jobs:
       contents: write
       issues: write
       pull-requests: write
+    env:
+      # F11: single source of truth for the results paths so the smoke reporter,
+      # the copy step, the triage input, the gate input, and the artifact upload
+      # can no longer drift out of sync. SMOKE_RESULTS_SRC must match the
+      # outputFile in packages/playwright-shared/smoke.config.ts.
+      SMOKE_RESULTS_SRC: packages/playwright-shared/smoke-results.json
+      SMOKE_RESULTS: /tmp/smoke-results.json
 
     steps:
       - name: Checkout
@@ -97,7 +104,7 @@ jobs:
           CI: "true"
           # --reporter=json,github above overrides smoke.config.ts's reporter array (including
           # its outputFile), so the json reporter falls back to stdout unless told otherwise here.
-          PLAYWRIGHT_JSON_OUTPUT_FILE: packages/playwright-shared/smoke-results.json
+          PLAYWRIGHT_JSON_OUTPUT_FILE: ${{ env.SMOKE_RESULTS_SRC }}
 
       - name: Move Playwright JSON results
         if: always()
@@ -107,14 +114,14 @@ jobs:
           # If it is missing we do NOT fabricate a passing report — we leave the
           # path absent so the gate below fails with MISSING_RESULTS. A run that
           # produced no results is a failure, not an all-clear.
-          if ! cp packages/playwright-shared/smoke-results.json /tmp/smoke-results.json 2>/dev/null; then
-            echo "[watchdog] smoke-results.json is missing — leaving /tmp/smoke-results.json absent so the gate fails."
-            rm -f /tmp/smoke-results.json
+          if ! cp "$SMOKE_RESULTS_SRC" "$SMOKE_RESULTS" 2>/dev/null; then
+            echo "[watchdog] $SMOKE_RESULTS_SRC is missing — leaving $SMOKE_RESULTS absent so the gate fails."
+            rm -f "$SMOKE_RESULTS"
           fi
 
       - name: Run auto-triage (on failure)
         if: env.smoke_failed == 'true'
-        run: npx tsx tools/watchdog/index.ts --results=/tmp/smoke-results.json --env=${{ steps.env.outputs.target }}
+        run: npx tsx tools/watchdog/index.ts --results=${{ env.SMOKE_RESULTS }} --env=${{ steps.env.outputs.target }}
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           LANGFUSE_SECRET_KEY: ${{ secrets.LANGFUSE_SECRET_KEY }}
@@ -137,7 +144,7 @@ jobs:
         with:
           name: watchdog-smoke-results-${{ github.ref_name }}
           path: |
-            packages/playwright-shared/smoke-results.json
+            ${{ env.SMOKE_RESULTS_SRC }}
             packages/playwright-shared/playwright-report/
             /tmp/smoke-output.txt
           retention-days: 30
@@ -151,5 +158,5 @@ jobs:
         if: always()
         run: |
           npx tsx tools/watchdog/gate.ts \
-            --results=/tmp/smoke-results.json \
+            --results=${{ env.SMOKE_RESULTS }} \
             --smoke-exit="${{ env.smoke_exit }}"

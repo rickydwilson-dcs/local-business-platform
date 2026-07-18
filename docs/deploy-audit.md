@@ -12,21 +12,28 @@ the deploy script, the smoke config, and the pre-push hook.
 > it never ran. A fault-injection harness (`tools/watchdog/fault-injection.ts`, wired into
 > `ci.yml`) proves 4 of the 5 failure classes scream.
 >
-> **Phase 3 status (2026-07-18):** F8 and F9 are **closed**, F7 **partially**. A new
-> fail-closed, SHA-pinned verifier (`scripts/verify-staging-e2e.ts`) checks that the exact
-> commit being promoted passed its `E2E Tests` run on staging. It is wired server-side as a
-> `verify-staging-e2e` job in `deploy.yml` (the `quality-checks` job now `needs` it), into
-> `.husky/pre-push` (no longer fails open when `gh` is absent, no longer reads the latest
-> run), and into `deploy-to-production.sh` (aborts the promotion if staging E2E isn't green
-> for the staging tip). **Residual F7 (still open):** Vercel Git Integration deploys on push
-> to `main` independently of this workflow, so the gate makes the _signal_ trustworthy but is
-> not yet _blocking_. Closing it needs either PR-based promotion with `verify-staging-e2e` as
-> a required status check, or decoupling the Vercel production deploy from push — both need
-> repo-admin/Vercel changes and are deliberately left for a decision, not silently applied.
+> **Phase 3 status (2026-07-18):** F8 and F9 are **closed**. A new fail-closed, SHA-pinned
+> verifier (`scripts/verify-staging-e2e.ts`) checks that the exact commit being promoted
+> passed its `E2E Tests` run on staging. It is wired server-side as a `verify-staging-e2e`
+> job in `deploy.yml` (the `quality-checks` job now `needs` it), into `.husky/pre-push` (no
+> longer fails open when `gh` is absent, no longer reads the latest run), and into
+> `deploy-to-production.sh` (which now promotes via a gated PR).
 >
-> **Still open:** F4 (per-failure triage errors swallowed), F10 (single-site content
-> validation), F11 (results-path defined in three places), and the residual F7 above. Line
-> references below are **as of the Phase 1 commit** and have drifted; locate by content.
+> **F7 status (2026-07-19): closed.** Promotion is now PR-based (`deploy.yml` also runs on
+> `pull_request` into `main`; `deploy-to-production.sh` opens a gated staging→main PR), and
+> `main` is branch-protected: a PR is required, `Verify promoted commit passed staging E2E`
+> is a required status check, and admin bypass is disabled. `main` can no longer advance to a
+> commit whose staging E2E wasn't green, so the Vercel deploy that follows a merge is gated.
+>
+> **Cleanup status (2026-07-19): F4, F10, F11 closed.** F4 — `index.ts` now counts triage/
+> issue-creation errors, reports them, and exits non-zero so a degraded triage subsystem is
+> visible (the "still green" half was already closed in Phase 2). F10 — `ci.yml` validates
+> content for **every** site (`pnpm -r --filter './sites/*'`), not just `colossus-scaffolding`.
+> F11 — `watchdog.yml` defines the results path once (`SMOKE_RESULTS_SRC`/`SMOKE_RESULTS`
+> job env) so the reporter, copy, triage, gate, and artifact steps can't drift apart.
+>
+> **All findings F1–F11 are now closed.** Line references below are **as of the Phase 1
+> commit** and have drifted; locate by content.
 
 The brief that prompted this: _"the watchdog once said 'nothing needs attention' while
 five bugs cascaded."_ This audit finds the mechanism behind that, and it is not a
