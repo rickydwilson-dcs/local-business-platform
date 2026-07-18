@@ -58,6 +58,21 @@ fi
 echo ""
 echo "🚀 Deploying to production..."
 
+# Promotion gate: verify the staging commit we're about to promote actually
+# passed its E2E run on staging. Fail-closed — if it can't be proven green, we
+# do NOT advance main. This is the real block; the terminal "success" messages
+# below only print if we got past here.
+STAGING_SHA=$(git rev-parse staging)
+echo ""
+echo "🔒 Verifying staging E2E passed for the commit being promoted ($STAGING_SHA)..."
+if ! npx tsx scripts/verify-staging-e2e.ts --sha="$STAGING_SHA"; then
+  echo ""
+  echo "❌ Aborting deployment: staging E2E is not verified green for $STAGING_SHA."
+  echo "   main was NOT advanced. Fix staging E2E (or wait for it to finish), then re-run."
+  exit 1
+fi
+echo "✅ Staging E2E verified — proceeding with promotion."
+
 # Switch to main and merge staging. Quality gates do NOT run here — they run in
 # CI after the push below, so a green terminal does not mean a green deploy.
 echo "📤 Switching to main branch and merging staging..."

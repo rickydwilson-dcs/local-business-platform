@@ -1,7 +1,11 @@
 name: Production Quality Gate
 
 # This workflow runs quality checks on pushes to main.
-# Actual deployment is handled by Vercel Git Integration automatically.
+# NOTE: Vercel Git Integration deploys on push to main independently of this
+# workflow's result. This gate makes the *signal* trustworthy (red when the
+# promoted commit's staging E2E was not green); making it *blocking* requires a
+# PR-based promotion with this as a required check, or decoupling the Vercel
+# deploy from push — see docs/deploy-audit.md (residual F7).
 
 permissions:
   contents: read
@@ -19,8 +23,52 @@ env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
+  verify-staging-e2e:
+    name: Verify promoted commit passed staging E2E
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    permissions:
+      contents: read
+      actions: read # required to query the E2E Tests workflow runs
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2 # need HEAD's parents to find the promoted staging tip
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Resolve promoted staging commit
+        id: resolve
+        run: |
+          # A merge promotion (git merge staging) makes main's tip a merge commit
+          # whose 2nd parent is the promoted staging tip; a fast-forward promotion
+          # leaves main's tip == the staging tip. Verify whichever SHA was tested.
+          read -r _ _P1 P2 _ <<< "$(git rev-list --parents -n 1 HEAD)"
+          if [ -n "$P2" ]; then SHA="$P2"; else SHA="$GITHUB_SHA"; fi
+          echo "sha=$SHA" >> "$GITHUB_OUTPUT"
+          echo "Resolved promoted staging commit: $SHA"
+
+      - name: Verify staging E2E for the promoted commit (fail-closed)
+        run: npx tsx scripts/verify-staging-e2e.ts --sha=${{ steps.resolve.outputs.sha }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+
   quality-checks:
     name: Production Quality Checks
+    needs: verify-staging-e2e # do not run (or pass) unless staging E2E is verified
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
@@ -48,9 +96,11 @@ jobs:
 
       - name: Create deployment summary
         run: |
-          echo "## ✅ Production Quality Checks Passed" >> $GITHUB_STEP_SUMMARY
+          echo "## ✅ Production Quality Gate Passed" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "Vercel Git Integration will handle the actual deployment." >> $GITHUB_STEP_SUMMARY
+          echo "The promoted commit's staging E2E was verified green, and type-check + lint passed." >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Vercel Git Integration handles the actual deployment (see residual F7 in docs/deploy-audit.md)." >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "**Branch:** main" >> $GITHUB_STEP_SUMMARY
           echo "**Commit:** ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY

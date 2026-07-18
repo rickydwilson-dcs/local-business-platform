@@ -4,16 +4,29 @@
 watchdog. **Method:** read-only review of the CI workflows, the watchdog triage engine,
 the deploy script, the smoke config, and the pre-push hook.
 
-> **Phase 2 status (2026-07-18):** F1, F2, F5, and F6 are **closed** — the watchdog can
+> **Phase 2 status (2026-07-18):** F1, F2, F3, F5, and F6 are **closed** — the watchdog can
 > now fail its own check. A new authoritative gate (`tools/watchdog/gate.ts`,
-> `lib/gate.ts`) fails on missing/empty/fabricated results, zero tests, or real failures;
-> `index.ts main()` now exits non-zero on failures; `watchdog.yml` no longer fabricates a
-> passing report; and `deploy-to-production.sh` no longer claims checks it never ran. A
-> fault-injection harness (`tools/watchdog/fault-injection.ts`, wired into `ci.yml`) proves
-> 4 of the 5 failure classes scream. **Still open:** F3 is covered by the gate (NO_TESTS_RAN)
-> but F4, F7, F8, F9, F10, F11 remain — F7/F8/F9 (server-side promotion gate) and F4
-> (per-failure error swallowing) are Phase 3. Line references below are **as of the Phase 1
-> commit** and have drifted; locate by content.
+> `lib/gate.ts`) fails on missing/empty/fabricated results, zero tests (F3, NO_TESTS_RAN),
+> or real failures; `index.ts main()` now exits non-zero on failures; `watchdog.yml` no
+> longer fabricates a passing report; and `deploy-to-production.sh` no longer claims checks
+> it never ran. A fault-injection harness (`tools/watchdog/fault-injection.ts`, wired into
+> `ci.yml`) proves 4 of the 5 failure classes scream.
+>
+> **Phase 3 status (2026-07-18):** F8 and F9 are **closed**, F7 **partially**. A new
+> fail-closed, SHA-pinned verifier (`scripts/verify-staging-e2e.ts`) checks that the exact
+> commit being promoted passed its `E2E Tests` run on staging. It is wired server-side as a
+> `verify-staging-e2e` job in `deploy.yml` (the `quality-checks` job now `needs` it), into
+> `.husky/pre-push` (no longer fails open when `gh` is absent, no longer reads the latest
+> run), and into `deploy-to-production.sh` (aborts the promotion if staging E2E isn't green
+> for the staging tip). **Residual F7 (still open):** Vercel Git Integration deploys on push
+> to `main` independently of this workflow, so the gate makes the _signal_ trustworthy but is
+> not yet _blocking_. Closing it needs either PR-based promotion with `verify-staging-e2e` as
+> a required status check, or decoupling the Vercel production deploy from push — both need
+> repo-admin/Vercel changes and are deliberately left for a decision, not silently applied.
+>
+> **Still open:** F4 (per-failure triage errors swallowed), F10 (single-site content
+> validation), F11 (results-path defined in three places), and the residual F7 above. Line
+> references below are **as of the Phase 1 commit** and have drifted; locate by content.
 
 The brief that prompted this: _"the watchdog once said 'nothing needs attention' while
 five bugs cascaded."_ This audit finds the mechanism behind that, and it is not a
