@@ -45,7 +45,11 @@ jobs:
         run: pnpm run type-check
 
       - name: Run Content Validation
-        run: pnpm --filter colossus-scaffolding run validate:content
+        # F10: validate content for EVERY site, not just one. `-r` runs the script
+        # only in sites that define it and fails the job if any site's content is
+        # invalid — previously only colossus-scaffolding was checked, so other
+        # sites' invalid MDX passed CI silently.
+        run: pnpm -r --filter './sites/*' run validate:content
 
       - name: Run Tests
         run: pnpm test
