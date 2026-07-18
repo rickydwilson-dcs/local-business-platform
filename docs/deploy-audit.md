@@ -2,8 +2,18 @@
 
 **Scope:** the deploy staircase `develop → staging → main → Vercel` and the regression
 watchdog. **Method:** read-only review of the CI workflows, the watchdog triage engine,
-the deploy script, the smoke config, and the pre-push hook. **This is Phase 1 (audit)
-only — nothing in the deploy path was changed.**
+the deploy script, the smoke config, and the pre-push hook.
+
+> **Phase 2 status (2026-07-18):** F1, F2, F5, and F6 are **closed** — the watchdog can
+> now fail its own check. A new authoritative gate (`tools/watchdog/gate.ts`,
+> `lib/gate.ts`) fails on missing/empty/fabricated results, zero tests, or real failures;
+> `index.ts main()` now exits non-zero on failures; `watchdog.yml` no longer fabricates a
+> passing report; and `deploy-to-production.sh` no longer claims checks it never ran. A
+> fault-injection harness (`tools/watchdog/fault-injection.ts`, wired into `ci.yml`) proves
+> 4 of the 5 failure classes scream. **Still open:** F3 is covered by the gate (NO_TESTS_RAN)
+> but F4, F7, F8, F9, F10, F11 remain — F7/F8/F9 (server-side promotion gate) and F4
+> (per-failure error swallowing) are Phase 3. Line references below are **as of the Phase 1
+> commit** and have drifted; locate by content.
 
 The brief that prompted this: _"the watchdog once said 'nothing needs attention' while
 five bugs cascaded."_ This audit finds the mechanism behind that, and it is not a

@@ -80,11 +80,19 @@ jobs:
         id: smoke
         run: |
           set -o pipefail
+          # Capture the real smoke exit code (pipefail => Playwright's code, not tee's).
+          # We intentionally do NOT fail the step here: triage must still run on
+          # failure, and the "Evaluate watchdog result" gate below is the single
+          # authoritative pass/fail for the check. The captured code is handed to
+          # that gate so a crashed run can never be laundered into a green check.
           WATCHDOG_ENV=${{ steps.env.outputs.target }} \
           npx playwright test \
             --config packages/playwright-shared/smoke.config.ts \
             --reporter=json,github \
-          2>&1 | tee /tmp/smoke-output.txt || echo "smoke_failed=true" >> $GITHUB_ENV
+          2>&1 | tee /tmp/smoke-output.txt && code=0 || code=$?
+          echo "smoke_exit=$code" >> "$GITHUB_ENV"
+          if [ "$code" -ne 0 ]; then echo "smoke_failed=true" >> "$GITHUB_ENV"; fi
+          exit 0
         env:
           CI: "true"
           # --reporter=json,github above overrides smoke.config.ts's reporter array (including
@@ -95,9 +103,14 @@ jobs:
         if: always()
         run: |
           # Playwright writes JSON to smoke-results.json in the working directory
-          # (defined in smoke.config.ts reporter config); copy to a known path
-          cp packages/playwright-shared/smoke-results.json /tmp/smoke-results.json 2>/dev/null || \
-          echo '{"stats":{"ok":true},"suites":[]}' > /tmp/smoke-results.json
+          # (defined in smoke.config.ts reporter config); copy to a known path.
+          # If it is missing we do NOT fabricate a passing report — we leave the
+          # path absent so the gate below fails with MISSING_RESULTS. A run that
+          # produced no results is a failure, not an all-clear.
+          if ! cp packages/playwright-shared/smoke-results.json /tmp/smoke-results.json 2>/dev/null; then
+            echo "[watchdog] smoke-results.json is missing — leaving /tmp/smoke-results.json absent so the gate fails."
+            rm -f /tmp/smoke-results.json
+          fi
 
       - name: Run auto-triage (on failure)
         if: env.smoke_failed == 'true'
@@ -128,3 +141,15 @@ jobs:
             packages/playwright-shared/playwright-report/
             /tmp/smoke-output.txt
           retention-days: 30
+
+      # Authoritative pass/fail for the check. Runs last and always: the triage
+      # engine only observes (opens issues); this gate is the only step that can
+      # turn the Regression Watchdog red. It fails on real test failures, a
+      # non-zero smoke exit, and — critically — a missing/empty/fabricated
+      # results file, so a broken run can no longer masquerade as "all clear".
+      - name: Evaluate watchdog result
+        if: always()
+        run: |
+          npx tsx tools/watchdog/gate.ts \
+            --results=/tmp/smoke-results.json \
+            --smoke-exit="${{ env.smoke_exit }}"

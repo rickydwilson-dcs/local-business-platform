@@ -1,7 +1,9 @@
 #!/bin/bash
 
 # Simplified Production Deployment Script
-# Direct push from staging to main with quality checks
+# Direct push from staging to main. NOTE: this script runs NO quality checks
+# itself — it only merges and pushes. The quality gates run asynchronously in
+# GitHub Actions after the push, and can go red *after* this script exits.
 
 set -e  # Exit on any error
 
@@ -56,7 +58,8 @@ fi
 echo ""
 echo "🚀 Deploying to production..."
 
-# Switch to main and merge staging (quality checks run automatically)
+# Switch to main and merge staging. Quality gates do NOT run here — they run in
+# CI after the push below, so a green terminal does not mean a green deploy.
 echo "📤 Switching to main branch and merging staging..."
 git checkout main
 git pull origin main
@@ -75,9 +78,14 @@ echo "🎉 Production deployment completed successfully!"
 echo ""
 echo "📊 Deployment Summary:"
 echo "====================="
-echo "✅ $COMMIT_COUNT commits deployed to production"
-echo "✅ All quality checks passed"
-echo "✅ Staging → Main → Production complete"
+echo "✅ $COMMIT_COUNT commits pushed to production (main)"
+echo "⏳ Quality gates were NOT run by this script — they are running now in CI."
+echo "   Deployment is NOT verified until those gates are green."
+echo "✅ Staging → Main → Production push complete"
+echo ""
+echo "🔎 You MUST confirm the CI gates before treating this as deployed:"
+echo "   gh run watch                      # watch the gates for this push"
+echo "   gh run list --branch main --limit 5"
 echo ""
 echo "🔗 Check deployment status:"
 echo "   - Staging: [staging environment URL]"
