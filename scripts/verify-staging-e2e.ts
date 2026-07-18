@@ -88,6 +88,7 @@ function resolveToken(): string {
 interface WorkflowRun {
   id: number;
   head_sha: string;
+  event: string; // push | pull_request | workflow_dispatch | ...
   status: string; // queued | in_progress | completed
   conclusion: string | null; // success | failure | cancelled | timed_out | ...
   html_url: string;
@@ -108,9 +109,14 @@ async function main() {
     );
   }
 
+  // event=push is essential: the same commit also produces a pull_request-
+  // triggered E2E run when a staging->main PR is opened, and that run SKIPS all
+  // jobs (its conclusion is "skipped"). Without this filter the verifier could
+  // pick the newer skipped PR run and fail-closed on a genuinely-green commit.
   const url =
     `https://api.github.com/repos/${repo}/actions/workflows/${workflow}/runs` +
-    `?head_sha=${encodeURIComponent(sha)}&branch=${encodeURIComponent(branch)}&per_page=20`;
+    `?head_sha=${encodeURIComponent(sha)}&branch=${encodeURIComponent(branch)}` +
+    `&event=push&per_page=20`;
 
   let res: Response;
   try {
@@ -130,12 +136,14 @@ async function main() {
   }
 
   const body = (await res.json()) as { workflow_runs?: WorkflowRun[] };
-  const runs = body.workflow_runs ?? [];
+  // Defensively re-filter to push events in case the API param is ever ignored —
+  // a skipped pull_request run must never be mistaken for the real staging run.
+  const runs = (body.workflow_runs ?? []).filter((r) => r.event === "push");
   const shortSha = sha.slice(0, 8);
 
   if (runs.length === 0) {
     return fail(
-      `no "${workflow}" run found on ${branch} for commit ${shortSha}. ` +
+      `no push-triggered "${workflow}" run found on ${branch} for commit ${shortSha}. ` +
         "The promoted commit was never E2E-tested on staging."
     );
   }
