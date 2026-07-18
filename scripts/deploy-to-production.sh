@@ -1,9 +1,11 @@
 #!/bin/bash
 
-# Simplified Production Deployment Script
-# Direct push from staging to main. NOTE: this script runs NO quality checks
-# itself — it only merges and pushes. The quality gates run asynchronously in
-# GitHub Actions after the push, and can go red *after* this script exits.
+# Production Deployment Script — gated PR promotion.
+# Promotes staging -> main through a pull request so the required
+# 'Verify promoted commit passed staging E2E' check must pass before main can
+# advance (and therefore before Vercel deploys on push to main). This script no
+# longer pushes main directly — branch protection is expected to reject that.
+# Requires the `gh` CLI, authenticated.
 
 set -e  # Exit on any error
 
@@ -44,62 +46,83 @@ echo "🔄 Changes to be deployed:"
 echo "$COMMITS"
 echo ""
 
-# Confirm deployment
-echo "⚠️  Ready to deploy to production?"
-echo "   This will push staging → main → production"
+# Confirm promotion
+echo "⚠️  Ready to promote staging → main?"
+echo "   This opens a gated pull request (staging → main). The merge — and the"
+echo "   Vercel production deploy that follows it — happen only once the required"
+echo "   'Verify promoted commit passed staging E2E' check passes on the PR."
 echo ""
-read -p "Continue with deployment? (y/N): " -n 1 -r
+read -p "Continue? (y/N): " -n 1 -r
 echo
 if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-    echo "❌ Deployment cancelled."
+    echo "❌ Promotion cancelled."
     exit 0
 fi
 
-echo ""
-echo "🚀 Deploying to production..."
+STAGING_SHA=$(git rev-parse origin/staging)
 
-# Promotion gate: verify the staging commit we're about to promote actually
-# passed its E2E run on staging. Fail-closed — if it can't be proven green, we
-# do NOT advance main. This is the real block; the terminal "success" messages
-# below only print if we got past here.
-STAGING_SHA=$(git rev-parse staging)
+# Local pre-check: fail fast before opening a PR if staging E2E isn't green for
+# the commit being promoted. Courtesy early signal only — the REAL, unbypassable
+# gate is the required status check on the PR below.
 echo ""
-echo "🔒 Verifying staging E2E passed for the commit being promoted ($STAGING_SHA)..."
+echo "🔒 Pre-checking staging E2E for $STAGING_SHA..."
 if ! npx tsx scripts/verify-staging-e2e.ts --sha="$STAGING_SHA"; then
   echo ""
-  echo "❌ Aborting deployment: staging E2E is not verified green for $STAGING_SHA."
-  echo "   main was NOT advanced. Fix staging E2E (or wait for it to finish), then re-run."
+  echo "❌ Staging E2E is not verified green for $STAGING_SHA — not opening a promotion PR."
+  echo "   Fix staging E2E (or wait for it to finish), then re-run."
   exit 1
 fi
-echo "✅ Staging E2E verified — proceeding with promotion."
+echo "✅ Staging E2E pre-check passed."
 
-# Switch to main and merge staging. Quality gates do NOT run here — they run in
-# CI after the push below, so a green terminal does not mean a green deploy.
-echo "📤 Switching to main branch and merging staging..."
-git checkout main
-git pull origin main
-git merge staging --no-edit
-git push origin main
+# Open (or reuse) the staging → main promotion PR.
+echo ""
+echo "🔀 Opening promotion PR (staging → main)..."
+PR=$(gh pr list --base main --head staging --state open --json number --jq '.[0].number')
+if [ -z "$PR" ]; then
+  gh pr create --base main --head staging \
+    --title "Promote staging → main ($TODAY)" \
+    --body "$(printf 'Automated promotion of %s commit(s):\n\n%s\n' "$COMMIT_COUNT" "$COMMITS")" >/dev/null
+  PR=$(gh pr list --base main --head staging --state open --json number --jq '.[0].number')
+  echo "   Created PR #$PR"
+else
+  echo "   Reusing open PR #$PR"
+fi
+
+# Wait for the gate (and all PR checks) to conclude. Fail-closed: if a check
+# fails — or there are no checks to prove the gate ran — we do NOT merge.
+echo ""
+echo "⏳ Waiting for the promotion gate to pass on PR #$PR..."
+if ! gh pr checks "$PR" --watch --fail-fast; then
+  echo ""
+  echo "❌ PR #$PR checks did not pass — main NOT advanced."
+  echo "   Inspect: gh pr view $PR --web"
+  exit 1
+fi
+
+# Merge the gated PR (merge commit, matching the previous behaviour). Never
+# delete staging.
+echo ""
+echo "✅ Gate green. Merging PR #$PR → main..."
+gh pr merge "$PR" --merge --delete-branch=false
+
+# Mirror gated main → production. Preserved from the previous script for any
+# Vercel project whose Production Branch is 'production' rather than 'main';
+# harmless if none. Verify per-project — see the Phase-4 plan (docs/deploy-audit.md).
+echo ""
+echo "📤 Mirroring main → production..."
+git fetch origin main
+git push origin origin/main:production
 
 echo ""
-echo "✅ Successfully deployed to main branch!"
-echo "📤 Now deploying to production branch..."
-
-# Push to production (already on main branch)
-git push origin main:production
-
+echo "🎉 Promotion complete — staging → main merged through the gate, production mirrored."
 echo ""
-echo "🎉 Production deployment completed successfully!"
+echo "📊 Summary:"
+echo "==========="
+echo "✅ $COMMIT_COUNT commit(s) promoted via gated PR #$PR"
+echo "✅ Staging E2E was verified green for the promoted commit before merge"
+echo "✅ main → production mirrored"
 echo ""
-echo "📊 Deployment Summary:"
-echo "====================="
-echo "✅ $COMMIT_COUNT commits pushed to production (main)"
-echo "⏳ Quality gates were NOT run by this script — they are running now in CI."
-echo "   Deployment is NOT verified until those gates are green."
-echo "✅ Staging → Main → Production push complete"
-echo ""
-echo "🔎 You MUST confirm the CI gates before treating this as deployed:"
-echo "   gh run watch                      # watch the gates for this push"
+echo "🔎 Vercel deploys from the merge; confirm it landed:"
 echo "   gh run list --branch main --limit 5"
 echo ""
 echo "🔗 Check deployment status:"

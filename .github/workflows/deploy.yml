@@ -1,11 +1,14 @@
 name: Production Quality Gate
 
-# This workflow runs quality checks on pushes to main.
-# NOTE: Vercel Git Integration deploys on push to main independently of this
-# workflow's result. This gate makes the *signal* trustworthy (red when the
-# promoted commit's staging E2E was not green); making it *blocking* requires a
-# PR-based promotion with this as a required check, or decoupling the Vercel
-# deploy from push — see docs/deploy-audit.md (residual F7).
+# Runs on pushes to main AND on PRs into main. The verify-staging-e2e job is the
+# intended REQUIRED status check for main: gating it on the promotion PR is what
+# makes staging E2E actually block the merge (and therefore the Vercel deploy on
+# push to main). See docs/deploy-audit.md (F7) and the Phase-4 plan for the
+# branch-protection + PR-promotion rollout this trigger enables.
+#
+# The pull_request trigger has NO paths-ignore: a promotion PR must always run
+# the gate so a required check never sits permanently pending (which would wedge
+# merges). The push trigger keeps paths-ignore for docs-only direct commits.
 
 permissions:
   contents: read
@@ -18,6 +21,9 @@ on:
       - 'output/**'
       - 'docs/**'
       - '**/*.md'
+  pull_request:
+    branches:
+      - main
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
@@ -51,12 +57,19 @@ jobs:
 
       - name: Resolve promoted staging commit
         id: resolve
+        env:
+          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
         run: |
-          # A merge promotion (git merge staging) makes main's tip a merge commit
-          # whose 2nd parent is the promoted staging tip; a fast-forward promotion
-          # leaves main's tip == the staging tip. Verify whichever SHA was tested.
-          read -r _ _P1 P2 _ <<< "$(git rev-list --parents -n 1 HEAD)"
-          if [ -n "$P2" ]; then SHA="$P2"; else SHA="$GITHUB_SHA"; fi
+          # On a promotion PR (staging -> main) the promoted commit is exactly the
+          # PR head — the staging tip being proposed — so use it directly.
+          # On a push to main, main's tip is either a merge commit (2nd parent is
+          # the promoted staging tip) or a fast-forward (tip == staging tip).
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            SHA="$PR_HEAD_SHA"
+          else
+            read -r _ _P1 P2 _ <<< "$(git rev-list --parents -n 1 HEAD)"
+            if [ -n "$P2" ]; then SHA="$P2"; else SHA="$GITHUB_SHA"; fi
+          fi
           echo "sha=$SHA" >> "$GITHUB_OUTPUT"
           echo "Resolved promoted staging commit: $SHA"
 
