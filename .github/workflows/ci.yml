@@ -50,6 +50,12 @@ jobs:
       - name: Run Tests
         run: pnpm test
 
+      - name: Watchdog fault-injection harness
+        # Proves the regression watchdog's gate turns a check red for each
+        # deploy failure class (missing/empty/fabricated results, zero tests,
+        # real failures). If the gate ever silently passes a bad run, this fails.
+        run: npx tsx tools/watchdog/fault-injection.ts
+
       - name: Cache build
         uses: actions/cache@v3
         with:

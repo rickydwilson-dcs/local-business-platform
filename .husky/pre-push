@@ -52,39 +52,39 @@ fi
 
 # Branch-specific quality gates
 if [ "$BRANCH" = "main" ]; then
-  # For main: Verify staging tests passed (staging is the quality gate)
+  # For main: verify the EXACT commit being promoted passed staging E2E.
+  # This uses the shared, fail-closed verifier (scripts/verify-staging-e2e.ts)
+  # so the local hook matches the server-side gate in deploy.yml. It no longer
+  # (F8) fails open when gh is missing, nor (F9) accepts the latest staging run
+  # regardless of which commit it tested — the verifier fails closed on both.
   echo ""
-  echo "🔍 Verifying staging E2E tests passed..."
+  echo "🔍 Verifying staging E2E passed for the commit being promoted..."
   echo ""
 
-  # Check if gh CLI is available
-  if ! command -v gh &> /dev/null; then
-    echo "⚠️  Warning: gh CLI not found - skipping staging verification"
-    echo "   Install gh CLI to enable automatic staging test verification"
-    echo ""
+  # Resolve the promoted staging tip: HEAD^2 if HEAD is a merge commit, else HEAD.
+  PROMOTED_SHA=$(git rev-parse HEAD)
+  if git rev-parse HEAD^2 >/dev/null 2>&1; then
+    PROMOTED_SHA=$(git rev-parse HEAD^2)
+  fi
+
+  if npx tsx scripts/verify-staging-e2e.ts --sha="$PROMOTED_SHA"; then
+    echo "✅ Staging E2E verified for $PROMOTED_SHA — safe to deploy to main"
   else
-    # Get the latest E2E test run status on staging
-    STAGING_STATUS=$(gh run list --branch staging --workflow="E2E Tests" --limit 1 --json conclusion --jq '.[0].conclusion' 2>/dev/null)
-
-    if [ "$STAGING_STATUS" != "success" ]; then
-      echo ""
-      echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-      echo "❌ STAGING E2E TESTS MUST PASS FIRST"
-      echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-      echo ""
-      echo "Staging is the final quality gate before main."
-      echo "Current staging E2E status: $STAGING_STATUS"
-      echo ""
-      echo "🔧 Required steps:"
-      echo "  1. Ensure all changes are merged to staging"
-      echo "  2. Wait for staging E2E tests to pass"
-      echo "  3. Verify: gh run list --branch staging --workflow='E2E Tests' --limit 1"
-      echo "  4. Then push to main"
-      echo ""
-      exit 1
-    fi
-
-    echo "✅ Staging E2E tests passed - safe to deploy to main"
+    echo ""
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    echo "❌ STAGING E2E NOT VERIFIED FOR THE PROMOTED COMMIT"
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    echo ""
+    echo "Staging is the final quality gate before main, and this gate fails closed:"
+    echo "if it cannot PROVE the promoted commit is green on staging, it blocks."
+    echo ""
+    echo "🔧 Required steps:"
+    echo "  1. Ensure the commit you're promoting is merged to staging"
+    echo "  2. Wait for its 'E2E Tests' run on staging to conclude green"
+    echo "  3. Ensure gh is authenticated (gh auth status) or GITHUB_TOKEN is set"
+    echo "  4. Then push to main"
+    echo ""
+    exit 1
   fi
 
 elif [ "$BRANCH" = "develop" ] || [ "$BRANCH" = "staging" ]; then
