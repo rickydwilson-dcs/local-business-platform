@@ -3,7 +3,6 @@ import { Space_Grotesk, Inter } from 'next/font/google';
 import './globals.css';
 import { siteConfig } from '@/site.config';
 import { PHONE_DISPLAY, BUSINESS_EMAIL } from '@/lib/contact-info';
-import { getContentItems } from '@/lib/content';
 import { PageShell } from '@platform/core-components';
 import { SiteHeader } from '@/components/site-header';
 import { SiteFooter } from '@/components/site-footer';
@@ -64,21 +63,17 @@ export const viewport: Viewport = {
   userScalable: true,
 };
 
-export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const [allServices, allLocations] = await Promise.all([
-    getContentItems('services'),
-    getContentItems('locations'),
-  ]);
-
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en-GB" className={`${spaceGrotesk.variable} ${inter.variable}`}>
       <head>
         {/* Material Symbols — must be a <link>, not CSS @import, because
             Tailwind's @tailwind expansion buries @import url() mid-file
             and the browser ignores it per CSS spec. */}
+        {/* eslint-disable-next-line @next/next/no-page-custom-font -- false positive: this is the App Router root layout (app/layout.tsx), the App Router equivalent of pages/_document.js, so it already loads for every page */}
         <link
           rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=block"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap"
         />
         {/* Geo meta tags for local SEO */}
         {siteConfig.business.geo && (

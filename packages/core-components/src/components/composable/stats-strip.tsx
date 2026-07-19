@@ -52,7 +52,7 @@ export function StatsStrip({ slots: slotOverrides, layout, data, className }: St
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         <div className={`grid ${gridCols} divide-x divide-surface-border`}>
           {stats.map((stat, i) => (
-            <div key={i} className="flex items-center gap-4 px-6 py-8">
+            <div key={i} className={`flex items-center gap-4 px-6 ${py}`}>
               <div>
                 <p
                   data-slot="statValue"

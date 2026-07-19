@@ -1,8 +1,7 @@
-import type { BlogPostPageTemplateProps, BlogPostSummary } from "@platform/core-components";
-import Link from "next/link";
+import type { BlogPostPageTemplateProps, BlogPostSummary } from '@platform/core-components';
+import Link from 'next/link';
 
 export function SiteBlogPostPage({
-  siteConfig,
   frontmatter,
   mdxContent,
   relatedPosts,
@@ -47,7 +46,7 @@ export function SiteBlogPostPage({
             </h1>
             <p className="text-white/70 text-sm font-body">
               <time dateTime={frontmatter.date}>{frontmatter.date}</time>
-              {" · "}
+              {' · '}
               {frontmatter.author.name}
               {frontmatter.author.role && `, ${frontmatter.author.role}`}
               {readingTime && ` · ${readingTime} min read`}
