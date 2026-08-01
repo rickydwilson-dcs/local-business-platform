@@ -253,8 +253,9 @@ export const siteConfig: SiteConfig = {
 
   navigation: {
     main: [
-      { label: 'Home', href: '/' },
-      { label: 'About', href: '/about' },
+      { label: 'Team', href: '/#team' },
+      { label: 'Rider', href: '/#rider' },
+      { label: 'Gallery', href: '/#gallery' },
       { label: 'Merch', href: '/merch' },
       { label: 'News', href: '/news' },
       { label: 'Contact', href: '/contact' },

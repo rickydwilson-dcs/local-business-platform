@@ -1,4 +1,4 @@
-import type { ReactElement, ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import Image from 'next/image';
 import type { BrandContent } from '@/lib/schemas/brand';
 import { Eyebrow } from '@/components/sections/eyebrow';
@@ -10,11 +10,12 @@ import { ValueCard } from '@/components/sections/value-card';
 /**
  * HomePage — the "Grid Box" homepage.
  *
- * Every factual claim (team name, tagline, championship, race number, rider,
- * founding year) comes from content/brand/npracing.mdx; the team story is the
- * rendered MDX body of that same file rather than prose duplicated here. The
- * four value cards are short marketing copy, consistent with — but not
- * restating — the claims in brand.mdx.
+ * Every factual claim (team name, championship, race number, rider, founding
+ * year) comes from content/brand/npracing.mdx frontmatter. The team-section
+ * copy here is a condensed homepage-specific teaser, not the full MDX body —
+ * the full team story renders separately on /about. Both this teaser and the
+ * four value cards are short marketing copy, consistent with — but not a
+ * restatement of — brand.mdx.
  */
 
 const R2_BASE = 'https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev';
@@ -56,13 +57,11 @@ const VALUES = [
 export interface HomePageProps {
   /** Validated frontmatter from content/brand/npracing.mdx. */
   brand: BrandContent;
-  /** Rendered MDX body of content/brand/npracing.mdx — the team story. */
-  brandBody: ReactElement;
   /** JSON-LD <script> nodes supplied by the route. */
   schemaNodes?: ReactNode;
 }
 
-export function HomePage({ brand, brandBody, schemaNodes }: HomePageProps) {
+export function HomePage({ brand, schemaNodes }: HomePageProps) {
   const stats = [
     // Founding year is frontmatter; the 2020 step up to a full Superbike season
     // and the Honda machinery are stated in the body of content/brand/npracing.mdx.
@@ -108,18 +107,22 @@ export function HomePage({ brand, brandBody, schemaNodes }: HomePageProps) {
         </div>
 
         <div className="container-grid relative z-10 pb-16 pt-40">
-          {brand.foundedYear && <Eyebrow>Est. {brand.foundedYear}</Eyebrow>}
+          {brand.foundedYear && (
+            <Eyebrow>Taunton, Somerset &middot; Est. {brand.foundedYear}</Eyebrow>
+          )}
           <h1 className="mt-4 max-w-[16ch] text-hero uppercase italic text-surface-foreground">
-            {brand.tagline}
+            Punching above our weight in{' '}
+            <span className="text-brand-primary">British Superbike.</span>
           </h1>
           <p className="mt-4 max-w-[46ch] text-lg leading-relaxed text-surface-secondary-foreground">
-            Professionally prepared Honda Fireblades, a close-knit crew, and two decades in the
-            British Superbike paddock.
+            {brand.teamName} is an independent BSB team running professionally prepared Honda
+            Fireblades &mdash; built on family values, developed riders, and two decades in the
+            paddock.
           </p>
           <div className="mt-8 flex flex-wrap gap-4">
             <ArrowButton href="#team">Meet the team</ArrowButton>
-            <ArrowButton href="/merch" variant="secondary">
-              Shop the range
+            <ArrowButton href="#gallery" variant="secondary">
+              See the gallery
             </ArrowButton>
           </div>
         </div>
@@ -142,7 +145,22 @@ export function HomePage({ brand, brandBody, schemaNodes }: HomePageProps) {
 
           <div>
             <Eyebrow>The team</Eyebrow>
-            <div className="prose-grid-box mt-6">{brandBody}</div>
+            <h2 className="mt-4 text-h2 uppercase text-surface-foreground">
+              Run by Neil Pearson, built by the paddock.
+            </h2>
+            <p className="mt-6 leading-relaxed text-surface-secondary-foreground">
+              {brand.teamName} is a private British Superbike team based in{' '}
+              <strong className="text-surface-foreground">Taunton, Somerset</strong>, led by{' '}
+              <strong className="text-surface-foreground">Neil Pearson</strong> &mdash; founder of
+              NP Motorcycles. Under his leadership the business has grown from a motorcycle
+              servicing workshop into a recognised independent name on the BSB grid.
+            </p>
+            <p className="mt-4 leading-relaxed text-surface-secondary-foreground">
+              Without the budget of factory-backed outfits like Honda Racing UK, Ducati PBM or McAMS
+              Yamaha, {brand.teamName} has earned its reputation the hard way: developing young
+              talent, running properly prepared machinery, and staying a close-knit, family-style
+              operation with experienced technicians.
+            </p>
             <ArrowTextLink href="#rider" className="mt-6">
               Meet the 2026 rider
             </ArrowTextLink>
@@ -186,12 +204,12 @@ export function HomePage({ brand, brandBody, schemaNodes }: HomePageProps) {
             <h2 className="mt-3 text-h2 uppercase text-surface-foreground">{brand.riderName}</h2>
             {/* Condensed from the "2026 season" section of content/brand/npracing.mdx. */}
             <p className="mt-4 max-w-[42ch] leading-relaxed text-surface-secondary-foreground">
-              {brand.riderName} returned to the British Superbike grid with {brand.teamName} from
-              the Knockhill round in June 2026, riding the team&rsquo;s Honda Fireblade under race
-              number {brand.raceNumber}.
+              {brand.riderName.split(' ')[0]} returned to the BSB grid with {brand.teamName} from
+              the Knockhill round in June 2026, riding the team&rsquo;s Honda Fireblade. Full season
+              history and results to follow as the 2026 campaign continues.
             </p>
             <span className="chip-brand mt-6 inline-block w-fit rounded-full border border-brand-secondary px-4 py-2 text-xs font-bold uppercase tracking-[0.14em] text-brand-accent">
-              {brand.championship}
+              Joined {brand.teamName} &middot; June 2026
             </span>
             <ArrowTextLink href="/news" className="mt-6">
               Latest team news
@@ -207,6 +225,7 @@ export function HomePage({ brand, brandBody, schemaNodes }: HomePageProps) {
             <h2 className="max-w-[14ch] text-h2 uppercase text-surface-foreground">
               From the paddock to the podium.
             </h2>
+            <ArrowTextLink href="#gallery">View full gallery</ArrowTextLink>
           </div>
 
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-[1.3fr_1fr_1fr]">

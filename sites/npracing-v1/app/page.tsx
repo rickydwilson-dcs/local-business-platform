@@ -45,9 +45,12 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function HomePageRoute() {
-  // The homepage is rendered entirely from content/brand/npracing.mdx —
-  // frontmatter for the factual claims, the MDX body for the team story.
-  const { frontmatter: brand, content: brandBody } = await getBrandContent();
+  // The homepage's factual claims (team name, championship, rider, founding
+  // year) come from content/brand/npracing.mdx frontmatter. The team-section
+  // teaser copy is short marketing text specific to this condensed homepage
+  // layout, not the full team story — that lives on /about, which renders
+  // this same file's MDX body separately.
+  const { frontmatter: brand } = await getBrandContent();
 
   // NOTE: no LocalBusiness JSON-LD is emitted here. NPRacing is a race team
   // with no public office address/phone/hours, and the shared schema
@@ -98,5 +101,5 @@ export default async function HomePageRoute() {
     </>
   );
 
-  return <HomePage brand={brand} brandBody={brandBody} schemaNodes={schemaNodes} />;
+  return <HomePage brand={brand} schemaNodes={schemaNodes} />;
 }

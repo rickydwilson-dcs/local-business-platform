@@ -69,15 +69,24 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   // content/brand/npracing.mdx — the header and footer never hardcode it.
   const { frontmatter: brand } = await getBrandContent();
 
-  // Config-driven, not hardcoded: the footer's link column mirrors the same
-  // navigation array the header renders.
+  // Team column mirrors the header nav's homepage-anchor items; the mockup
+  // labels the same #team anchor "About" in the footer vs. "Team" in the
+  // header, so this is intentionally not a literal re-map of the nav array.
   const footerColumns = [
     {
-      title: 'Explore',
-      links: siteConfig.navigation.main.map((item) => ({
-        label: item.label,
-        href: item.href,
-      })),
+      title: 'Team',
+      links: [
+        { label: 'About', href: '/#team' },
+        { label: 'Rider', href: '/#rider' },
+        { label: 'Gallery', href: '/#gallery' },
+      ],
+    },
+    {
+      title: 'More',
+      links: [
+        { label: 'News', href: '/news' },
+        { label: 'Races', href: '#' },
+      ],
     },
   ];
 
