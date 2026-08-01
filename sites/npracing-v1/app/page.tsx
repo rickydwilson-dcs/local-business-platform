@@ -1,11 +1,9 @@
 import type { Metadata } from 'next';
-import type { SiteConfigSummary } from '@platform/core-components';
 import { HomePage } from '@/components/pages/home-page';
 import { siteConfig } from '@/site.config';
-import { getLocations } from '@/lib/content';
+import { getBrandContent } from '@/lib/brand';
 import { absUrl } from '@/lib/site';
 import { getLocalBusinessSchema } from '@/lib/schema';
-import { PHONE_DISPLAY } from '@/lib/contact-info';
 
 export const metadata: Metadata = {
   title: `${siteConfig.business.name} | ${siteConfig.tagline}`,
@@ -41,7 +39,9 @@ export const metadata: Metadata = {
 };
 
 export default async function HomePageRoute() {
-  const locations = await getLocations();
+  // The homepage is rendered entirely from content/brand/npracing.mdx —
+  // frontmatter for the factual claims, the MDX body for the team story.
+  const { frontmatter: brand, content: brandBody } = await getBrandContent();
 
   const localBusinessSchema = getLocalBusinessSchema();
 
@@ -71,16 +71,6 @@ export default async function HomePageRoute() {
     ],
   };
 
-  const siteSummary: SiteConfigSummary = {
-    name: siteConfig.business.name,
-    tagline: siteConfig.tagline,
-    phone: siteConfig.business.phone,
-    phoneDisplay: PHONE_DISPLAY,
-    address: { city: siteConfig.business.address.city },
-    cta: siteConfig.cta,
-    stats: siteConfig.credentials?.stats,
-  };
-
   const schemaNodes = (
     <>
       <script
@@ -98,20 +88,5 @@ export default async function HomePageRoute() {
     </>
   );
 
-  return (
-    <HomePage
-      siteConfig={siteSummary}
-      services={siteConfig.services.map((s) => ({
-        slug: s.slug,
-        title: s.title,
-        description: s.description,
-      }))}
-      locations={locations.map((l) => ({
-        slug: l.slug,
-        title: l.title,
-        description: l.description,
-      }))}
-      schemaNodes={schemaNodes}
-    />
-  );
+  return <HomePage brand={brand} brandBody={brandBody} schemaNodes={schemaNodes} />;
 }

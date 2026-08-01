@@ -1,196 +1,172 @@
 import Link from 'next/link';
-import { Phone, Mail, MapPin, Shield, Award } from 'lucide-react';
+import Image from 'next/image';
+import { Instagram } from 'lucide-react';
+
+/**
+ * SiteFooter — Grid Box footer.
+ *
+ * Replaces the base-template footer. The plumbing it carried (link columns
+ * driven by config rather than hardcoded, contact details, copyright and the
+ * built-by credit) is preserved; the services/locations columns are swapped
+ * for the Team / More / Get in touch columns this site actually has, and the
+ * contact details come from content/brand/npracing.mdx via the caller.
+ */
+export interface SiteFooterLink {
+  label: string;
+  href: string;
+  /** Opens in a new tab with rel="noopener noreferrer". */
+  external?: boolean;
+}
+
+export interface SiteFooterColumn {
+  title: string;
+  links: SiteFooterLink[];
+}
 
 export interface SiteFooterProps {
   siteName: string;
-  tagline: string;
-  phoneDisplay: string;
-  phoneTel: string;
+  logo: { src: string; alt: string };
+  columns: SiteFooterColumn[];
   email: string;
-  address: { locality: string; region: string };
-  certifications: Array<{ name: string; description: string; icon?: string }>;
-  services: Array<{ slug: string; title: string }>;
-  locations: Array<{ slug: string; title: string }>;
-  totalServices: number;
-  totalLocations: number;
-  maxServices: number;
-  maxLocations: number;
-  showServices: boolean;
-  showLocations: boolean;
+  instagramUrl: string;
+  instagramHandle: string;
   copyright: string;
   builtBy?: { name: string; url: string };
 }
 
+function FooterLink({ link }: { link: SiteFooterLink }) {
+  const className =
+    'text-sm text-surface-secondary-foreground transition-colors hover:text-surface-foreground';
+
+  if (link.external) {
+    return (
+      <a href={link.href} target="_blank" rel="noopener noreferrer" className={className}>
+        {link.label}
+        <span className="sr-only">(opens in a new tab)</span>
+      </a>
+    );
+  }
+
+  return (
+    <Link href={link.href} className={className}>
+      {link.label}
+    </Link>
+  );
+}
+
 export function SiteFooter({
   siteName,
-  tagline,
-  phoneDisplay,
-  phoneTel,
+  logo,
+  columns,
   email,
-  address,
-  certifications,
-  services,
-  locations,
-  totalServices,
-  totalLocations,
-  maxServices,
-  maxLocations,
-  showServices,
-  showLocations,
+  instagramUrl,
+  instagramHandle,
   copyright,
   builtBy,
 }: SiteFooterProps) {
   return (
-    <footer className="bg-surface-inverse text-white py-12 sm:py-16">
-      <div className="mx-auto w-full lg:w-[90%] px-6">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mb-6 sm:mb-8">
-          {/* Column 1: About */}
-          <div className="sm:col-span-2 lg:col-span-1">
-            <h2 className="text-xl sm:text-2xl font-bold mb-4 text-white">{siteName}</h2>
-            <p className="text-surface-muted-foreground mb-4 text-sm sm:text-base">{tagline}</p>
-            {certifications.length > 0 && (
-              <div className="flex flex-wrap items-center gap-3 sm:gap-4">
-                {certifications.slice(0, 3).map((cert, index) => (
-                  <div key={index} className="flex items-center gap-2 text-xs sm:text-sm">
-                    {index === 0 ? (
-                      <Award className="h-3 w-3 sm:h-4 sm:w-4 text-warning" aria-hidden="true" />
-                    ) : (
-                      <Shield className="h-3 w-3 sm:h-4 sm:w-4 text-success" aria-hidden="true" />
-                    )}
-                    <span>{cert.name}</span>
-                  </div>
-                ))}
-              </div>
-            )}
+    <footer className="border-t border-surface-card-border pb-8 pt-14">
+      <div className="container-grid">
+        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
+          <div className="flex items-start">
+            <Image
+              src={logo.src}
+              alt={logo.alt}
+              width={240}
+              height={120}
+              className="h-auto w-full max-w-[15rem] object-contain object-left"
+            />
           </div>
 
-          {/* Column 2: Services */}
-          {showServices && services.length > 0 && (
-            <div>
-              <h3 className="text-base sm:text-lg font-semibold mb-4 text-white">Our Services</h3>
-              <ul className="space-y-2 text-surface-muted-foreground text-sm sm:text-base">
-                {services.map((service) => (
-                  <li key={service.slug}>
-                    <Link
-                      href={`/services/${service.slug}`}
-                      className="hover:text-brand-primary transition-colors"
-                    >
-                      {service.title}
-                    </Link>
+          {columns.map((column) => (
+            <div key={column.title}>
+              <h2 className="mb-4 text-xs font-bold uppercase tracking-[0.14em] text-surface-tertiary-foreground">
+                {column.title}
+              </h2>
+              <ul className="space-y-2">
+                {column.links.map((link) => (
+                  <li key={`${column.title}-${link.href}-${link.label}`}>
+                    <FooterLink link={link} />
                   </li>
                 ))}
-                {totalServices > maxServices && (
-                  <li>
-                    <Link
-                      href="/services"
-                      className="hover:text-brand-primary transition-colors font-semibold"
-                    >
-                      View All Services &rarr;
-                    </Link>
-                  </li>
-                )}
               </ul>
             </div>
-          )}
+          ))}
 
-          {/* Column 3: Locations */}
-          {showLocations && locations.length > 0 && (
-            <div>
-              <h3 className="text-base sm:text-lg font-semibold mb-4 text-white">Service Areas</h3>
-              <ul className="space-y-2 text-surface-muted-foreground text-sm sm:text-base">
-                {locations.map((location) => (
-                  <li key={location.slug}>
-                    <Link
-                      href={`/locations/${location.slug}`}
-                      className="hover:text-brand-primary transition-colors"
-                    >
-                      {location.title}
-                    </Link>
-                  </li>
-                ))}
-                {totalLocations > maxLocations && (
-                  <li>
-                    <Link
-                      href="/locations"
-                      className="hover:text-brand-primary transition-colors font-semibold"
-                    >
-                      View All Locations &rarr;
-                    </Link>
-                  </li>
-                )}
-              </ul>
-            </div>
-          )}
-
-          {/* Column 4: Contact */}
           <div>
-            <h3 className="text-base sm:text-lg font-semibold mb-4 text-white">Contact Info</h3>
-            <div className="space-y-3 text-surface-muted-foreground text-sm sm:text-base">
-              <div className="flex items-center gap-2">
-                <Phone
-                  className="h-3 w-3 sm:h-4 sm:w-4 text-brand-primary flex-shrink-0"
-                  aria-hidden="true"
-                />
-                <Link
-                  href={`tel:${phoneTel}`}
-                  className="hover:text-brand-primary transition-colors"
-                >
-                  {phoneDisplay}
-                </Link>
-              </div>
-              <div className="flex items-center gap-2">
-                <Mail
-                  className="h-3 w-3 sm:h-4 sm:w-4 text-brand-primary flex-shrink-0"
-                  aria-hidden="true"
-                />
-                <Link
+            <h2 className="mb-4 text-xs font-bold uppercase tracking-[0.14em] text-surface-tertiary-foreground">
+              Get in touch
+            </h2>
+            <ul className="space-y-2">
+              <li>
+                <a
                   href={`mailto:${email}`}
-                  className="hover:text-brand-primary transition-colors"
+                  className="text-sm text-surface-secondary-foreground transition-colors hover:text-surface-foreground"
                 >
                   {email}
+                </a>
+              </li>
+              <li>
+                <a
+                  href={instagramUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-sm text-surface-secondary-foreground transition-colors hover:text-surface-foreground"
+                >
+                  <Instagram className="h-4 w-4" aria-hidden="true" />
+                  Instagram {instagramHandle}
+                  <span className="sr-only">(opens in a new tab)</span>
+                </a>
+              </li>
+              <li>
+                <Link
+                  href="/privacy-policy"
+                  className="text-sm text-surface-secondary-foreground transition-colors hover:text-surface-foreground"
+                >
+                  Privacy policy
                 </Link>
-              </div>
-              <div className="flex items-start gap-2">
-                <MapPin
-                  className="h-3 w-3 sm:h-4 sm:w-4 text-brand-primary flex-shrink-0 mt-1"
-                  aria-hidden="true"
-                />
-                <div className="leading-relaxed">
-                  <div>{address.locality}</div>
-                  <div>{address.region}</div>
-                </div>
-              </div>
-              <div className="mt-4 pt-4 border-t border-surface-subtle text-xs sm:text-sm">
-                <Link href="/privacy-policy" className="hover:text-brand-primary transition-colors">
-                  Privacy Policy
+              </li>
+              <li>
+                <Link
+                  href="/cookie-policy"
+                  className="text-sm text-surface-secondary-foreground transition-colors hover:text-surface-foreground"
+                >
+                  Cookie policy
                 </Link>
-                <span className="mx-2 text-surface-muted-foreground">|</span>
-                <Link href="/cookie-policy" className="hover:text-brand-primary transition-colors">
-                  Cookie Policy
-                </Link>
-              </div>
-            </div>
+              </li>
+            </ul>
           </div>
         </div>
 
-        <div className="border-t border-surface-subtle pt-6 sm:pt-8 text-center text-surface-muted-foreground text-xs sm:text-sm">
+        <div className="mt-10 flex flex-wrap items-center justify-between gap-4 border-t border-surface-subtle-border pt-6 text-xs text-surface-tertiary-foreground">
           <p>
             &copy; {copyright}
             {builtBy && (
               <>
                 {' '}
-                | Built by{' '}
+                &middot; Built by{' '}
                 <a
                   href={builtBy.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-white hover:text-brand-primary transition-colors underline"
+                  className="underline underline-offset-2 transition-colors hover:text-surface-foreground"
                 >
                   {builtBy.name}
                 </a>
               </>
             )}
           </p>
+          <a
+            href={instagramUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="grid h-10 w-10 place-items-center rounded-full border border-surface-card-border text-surface-secondary-foreground transition-colors hover:border-surface-foreground hover:text-surface-foreground"
+          >
+            <Instagram className="h-4 w-4" aria-hidden="true" />
+            <span className="sr-only">
+              {siteName} on Instagram {instagramHandle} (opens in a new tab)
+            </span>
+          </a>
         </div>
       </div>
     </footer>

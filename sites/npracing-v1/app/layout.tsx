@@ -1,8 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import { siteConfig } from '@/site.config';
-import { PHONE_DISPLAY, PHONE_TEL, BUSINESS_EMAIL, ADDRESS } from '@/lib/contact-info';
-import { getContentItems } from '@/lib/content';
+import { getBrandContent } from '@/lib/brand';
 import { PageShell } from '@platform/core-components';
 import { SiteHeader } from '@/components/site-header';
 import { SiteFooter } from '@/components/site-footer';
@@ -45,15 +44,21 @@ export const viewport: Viewport = {
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const [allServices, allLocations] = await Promise.all([
-    getContentItems('services'),
-    getContentItems('locations'),
-  ]);
+  // Team identity (logo, email, Instagram, championship) comes from
+  // content/brand/npracing.mdx — the header and footer never hardcode it.
+  const { frontmatter: brand } = await getBrandContent();
 
-  const locationItems = allLocations.map((loc) => ({
-    name: loc.title,
-    slug: loc.slug,
-  }));
+  // Config-driven, not hardcoded: the footer's link column mirrors the same
+  // navigation array the header renders.
+  const footerColumns = [
+    {
+      title: 'Explore',
+      links: siteConfig.navigation.main.map((item) => ({
+        label: item.label,
+        href: item.href,
+      })),
+    },
+  ];
 
   return (
     <html lang="en-GB">
@@ -77,40 +82,24 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <PageShell
           header={
             <SiteHeader
-              siteName={siteConfig.business.name}
-              phoneDisplay={PHONE_DISPLAY}
-              phoneTel={PHONE_TEL}
-              showPhone={siteConfig.cta.phone.show}
-              primaryCta={siteConfig.cta.primary}
+              siteName={brand.teamName}
+              logo={brand.logo}
               navigation={siteConfig.navigation.main}
-              locations={locationItems}
+              primaryCta={siteConfig.cta.primary}
+              instagramUrl={brand.instagramUrl}
+              instagramHandle={brand.instagramHandle}
+              announcement={brand.championship}
             />
           }
           footer={
             <SiteFooter
-              siteName={siteConfig.business.name}
-              tagline={siteConfig.tagline}
-              phoneDisplay={PHONE_DISPLAY}
-              phoneTel={PHONE_TEL}
-              email={BUSINESS_EMAIL}
-              address={ADDRESS}
-              certifications={siteConfig.credentials?.certifications ?? []}
-              services={allServices
-                .map((s) => ({ slug: s.slug, title: s.title }))
-                .slice(0, siteConfig.footer?.maxServices ?? 8)}
-              locations={allLocations
-                .map((l) => ({ slug: l.slug, title: l.title }))
-                .slice(0, siteConfig.footer?.maxLocations ?? 8)}
-              totalServices={allServices.length}
-              totalLocations={allLocations.length}
-              maxServices={siteConfig.footer?.maxServices ?? 8}
-              maxLocations={siteConfig.footer?.maxLocations ?? 8}
-              showServices={siteConfig.footer?.showServices ?? true}
-              showLocations={siteConfig.footer?.showLocations ?? true}
-              copyright={
-                siteConfig.footer?.copyright ??
-                `${new Date().getFullYear()} ${siteConfig.business.name}. All rights reserved.`
-              }
+              siteName={brand.teamName}
+              logo={brand.logo}
+              columns={footerColumns}
+              email={brand.email}
+              instagramUrl={brand.instagramUrl}
+              instagramHandle={brand.instagramHandle}
+              copyright={`${new Date().getFullYear()} ${brand.teamName}. All rights reserved.`}
               builtBy={siteConfig.footer?.builtBy}
             />
           }
