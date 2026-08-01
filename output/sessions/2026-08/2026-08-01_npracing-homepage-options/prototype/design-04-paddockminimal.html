@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NP Racing — homepage v4 · Paddock Minimal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tokens.css">
+<style>
+  :root{--wrap:1120px}
+  body{font-weight:300}
+  h1,h2,h3,h4{text-transform:none;font-weight:500;letter-spacing:0}
+  .eyebrow{letter-spacing:.28em;font-weight:600;font-size:.66rem}
+  .eyebrow::before{width:2.2rem}
+
+  .nav-outer{padding-top:0}
+  .nav{max-width:none;border-radius:0;border:none;border-bottom:1px solid var(--line);background:rgba(10,10,10,.92);padding:1.6rem 2rem;backdrop-filter:none}
+  .nav-in{max-width:var(--wrap);margin-inline:auto;display:flex;align-items:center;gap:2.5rem;width:100%}
+  .brand-mark img{height:28px}
+  .nav-links a{font-weight:400;letter-spacing:.14em;font-size:.76rem}
+  .btn{border-radius:2px;font-weight:500;letter-spacing:.1em;padding:.85rem 1.3rem}
+  .btn .ico{display:none}
+  .icon-btn{border-radius:2px}
+
+  .hero{padding:6.5rem 0 5rem}
+  .hero-top{max-width:56ch;margin-bottom:3.5rem}
+  .hero-top h1{font-size:clamp(2.4rem,4.6vw,3.8rem);font-style:italic;line-height:1.12;margin-top:1.2rem}
+  .hero-top p{margin-top:1.4rem;color:var(--ink-soft);font-size:1.02rem;line-height:1.8;max-width:52ch}
+  .hero-cta{display:flex;gap:1rem;margin-top:2rem}
+
+  .hero-frame{position:relative;border:1px solid var(--line-2);padding:.5rem;border-radius:2px}
+  .hero-frame img{width:100%;aspect-ratio:21/9;object-fit:cover;border-radius:1px}
+  .hero-frame .rule{position:absolute;left:.5rem;right:.5rem;top:.5rem;height:2px;background:var(--red)}
+
+  .thin-stats{display:flex;justify-content:space-between;gap:1.5rem;margin-top:3rem;padding-top:2rem;border-top:1px solid var(--line-2);flex-wrap:wrap}
+  .thin-stats .s{flex:1;min-width:9rem}
+  .thin-stats .num{font-family:var(--font-display);font-weight:400;font-size:1.7rem;color:var(--white)}
+  .thin-stats .lbl{margin-top:.3rem;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint)}
+
+  .section{padding:6.5rem 0}
+  .section-head{max-width:60ch;margin-bottom:4rem}
+  .section-head .eyebrow{margin-bottom:1rem}
+  .section-head h2{font-size:clamp(2rem,3.4vw,2.8rem);font-style:italic}
+  .section-head p{margin-top:1rem;color:var(--ink-soft);max-width:50ch;line-height:1.75}
+
+  .float-frame{border:1px solid var(--line-2);padding:.5rem;border-radius:2px;background:var(--black-2);box-shadow:var(--shadow-soft);transition:transform .5s var(--ease),box-shadow .5s}
+  .float-frame:hover{transform:translateY(-6px);box-shadow:var(--shadow-lift)}
+  .float-frame img{width:100%;border-radius:1px;display:block}
+
+  .team-min{display:grid;grid-template-columns:.85fr 1.15fr;gap:4rem;align-items:center}
+  .team-min .float-frame img{aspect-ratio:4/5;object-fit:cover}
+  .team-min .copy p{color:var(--ink-soft);line-height:1.85;margin-top:1.2rem;font-size:.98rem}
+  .team-min .copy strong{color:var(--white);font-weight:500}
+  .quiet-list{margin-top:2rem;display:grid;grid-template-columns:1fr 1fr;gap:1.2rem 2rem}
+  .quiet-list div{padding-top:1rem;border-top:1px solid var(--line-2)}
+  .quiet-list b{display:block;font-family:var(--font-display);font-weight:500;font-style:italic;color:var(--white);font-size:1.05rem}
+  .quiet-list span{color:var(--ink-soft);font-size:.86rem;line-height:1.6;margin-top:.3rem;display:block}
+
+  .rider-min{display:grid;grid-template-columns:1fr .85fr;gap:4rem;align-items:center}
+  .rider-min .float-frame img{aspect-ratio:16/12;object-fit:cover}
+  .rider-min .num{font-family:var(--font-display);font-style:italic;font-weight:500;font-size:3.5rem;color:var(--red)}
+  .rider-min h2{margin-top:.3rem;font-size:clamp(1.8rem,3vw,2.4rem);font-style:italic}
+  .rider-min p{margin-top:1rem;color:var(--ink-soft);line-height:1.8}
+
+  .gallery-min{display:grid;grid-template-columns:repeat(3,1fr);gap:1.8rem}
+  .gallery-min img{aspect-ratio:4/5;object-fit:cover}
+
+  .sponsor-row{display:flex;justify-content:center;gap:4rem;flex-wrap:wrap;padding:3rem 0;border-top:1px solid var(--line-2);border-bottom:1px solid var(--line-2)}
+  .sponsor-row span{font-family:var(--font-display);font-size:1.2rem;letter-spacing:.08em;color:var(--ink-faint)}
+
+  .cta-quiet{text-align:center;max-width:44ch;margin-inline:auto;padding:6rem 0}
+  .cta-quiet h2{font-size:clamp(1.8rem,3vw,2.4rem);font-style:italic}
+  .cta-quiet p{margin-top:1rem;color:var(--ink-soft)}
+  .cta-quiet .hero-cta{justify-content:center;margin-top:2rem}
+
+  .site-footer{border-radius:0}
+  .site-footer h4{letter-spacing:.2em;font-weight:600}
+
+  @media (max-width:960px){
+    .team-min,.rider-min{grid-template-columns:1fr}
+    .quiet-list{grid-template-columns:1fr}
+    .gallery-min{grid-template-columns:1fr 1fr}
+  }
+  @media (max-width:640px){
+    .nav-links{display:none}
+    .thin-stats{flex-direction:column;gap:1.2rem}
+    .gallery-min{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<div class="announce">ZYN British Superbike Championship · 2026 Season</div>
+
+<div class="nav-outer">
+  <nav class="nav">
+    <div class="nav-in">
+      <a class="brand-mark" href="#top"><img src="assets/img/logo.png" alt="NP Racing"></a>
+      <div class="nav-links" style="margin-left:.5rem;display:flex;gap:.3rem">
+        <a href="#team">Team</a>
+        <a href="#rider">Rider</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#sponsors">Sponsors</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="nav-right">
+        <a class="icon-btn" href="https://www.instagram.com/npracingbsb/" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+        <a class="btn btn-ghost" href="#merch">Shop</a>
+      </div>
+    </div>
+  </nav>
+</div>
+
+<header class="hero wrap" id="top">
+  <div class="hero-top">
+    <span class="eyebrow">Taunton, Somerset — Est. 2004</span>
+    <h1>An independent British Superbike team, run on family values.</h1>
+    <p>NP Racing prepares and races Honda Fireblade machinery in the British Superbike Championship — quietly developing riders and consistently punching above its weight.</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="#team">Our story</a>
+      <a class="btn btn-ghost" href="#gallery">Gallery</a>
+    </div>
+  </div>
+  <div class="hero-frame">
+    <div class="rule"></div>
+    <img src="assets/img/action-lean.jpg" alt="NP Racing rider #51 leant into a corner on the Honda Fireblade">
+  </div>
+  <div class="thin-stats">
+    <div class="s"><div class="num">2004</div><div class="lbl">Paddock since</div></div>
+    <div class="s"><div class="num">2020</div><div class="lbl">First full BSB season</div></div>
+    <div class="s"><div class="num">Honda</div><div class="lbl">Fireblade</div></div>
+    <div class="s"><div class="num">№ 51</div><div class="lbl">Brayden Elliott, 2026</div></div>
+  </div>
+</header>
+
+<section class="section" id="team">
+  <div class="wrap">
+    <div class="team-min">
+      <div class="float-frame"><img src="assets/img/paddock-team.jpg" alt="NP Racing crew on the grid with rider #51 under the team umbrella"></div>
+      <div class="copy">
+        <span class="eyebrow">The team</span>
+        <h2 style="margin-top:1rem;font-size:clamp(1.9rem,3.2vw,2.6rem)">Run by Neil Pearson, built by the paddock.</h2>
+        <p>NP Racing is a private British Superbike team based in <strong>Taunton, Somerset</strong>, led by <strong>Neil Pearson</strong> — founder of NP Motorcycles. Under his leadership the business has grown from a motorcycle servicing workshop into a recognised independent name on the BSB grid.</p>
+        <p>Without the budget of factory-backed outfits like Honda Racing UK, Ducati PBM or McAMS Yamaha, the team has earned its reputation quietly, race by race.</p>
+        <div class="quiet-list">
+          <div><b>Developing riders</b><span>A genuine shot for young talent on the BSB grid.</span></div>
+          <div><b>Pro-prepared Hondas</b><span>Built and run to a professional standard.</span></div>
+          <div><b>Family operation</b><span>A close-knit crew of experienced technicians.</span></div>
+          <div><b>Punching above weight</b><span>Competitive against far bigger budgets.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="rider" style="padding-top:0">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">2026 rider</span>
+      <h2>Brayden Elliott</h2>
+    </div>
+    <div class="rider-min">
+      <div class="float-frame"><img src="assets/img/action-chase.jpg" alt="Rider #51 chasing through Knockhill on the NP Racing Honda Fireblade"></div>
+      <div>
+        <span class="num">№ 51</span>
+        <h2>Back on the grid.</h2>
+        <p>Brayden returned to the BSB grid with NP Racing from the Knockhill round in June 2026, riding the team's Honda Fireblade. Full season history and results to follow as the 2026 campaign continues.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="gallery">
+  <div class="wrap">
+    <div class="section-head" style="display:flex;justify-content:space-between;align-items:flex-end;max-width:none">
+      <div><span class="eyebrow">Gallery</span><h2 style="margin-top:1rem">From the paddock to the podium.</h2></div>
+      <a class="link-arrow" href="#">View all <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+    <div class="gallery-min">
+      <div class="float-frame"><img src="assets/img/action-lean.jpg" alt="Rider #51 leant into a corner"></div>
+      <div class="float-frame"><img src="assets/img/paddock-team.jpg" alt="NP Racing crew on the grid"></div>
+      <div class="float-frame"><img src="assets/img/action-chase.jpg" alt="Rider #51 chasing another competitor on track"></div>
+    </div>
+  </div>
+</section>
+
+<div class="sponsor-row" id="sponsors">
+  <span>LOWE</span><span>KLS</span><span>GBR RACING</span>
+</div>
+
+<section class="wrap cta-quiet" id="merch">
+  <span class="eyebrow" style="justify-content:center;display:flex">Merchandise</span>
+  <h2 style="margin-top:1rem">Team kit, available now.</h2>
+  <p>Browse the full range on our external store.</p>
+  <div class="hero-cta">
+    <a class="btn btn-primary" href="#" target="_blank" rel="noopener">Shop the range</a>
+  </div>
+</section>
+
+<footer class="site-footer" id="contact">
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <img src="assets/img/logo.png" alt="NP Racing" style="height:36px;width:auto;margin-bottom:1rem">
+        <p class="muted" style="font-size:.88rem;max-width:28ch;line-height:1.7">Independent British Superbike team, based in Taunton, Somerset.</p>
+      </div>
+      <div><h4>Team</h4><ul><li><a href="#team">About</a></li><li><a href="#rider">Rider</a></li><li><a href="#gallery">Gallery</a></li></ul></div>
+      <div><h4>More</h4><ul><li><a href="#sponsors">Sponsors</a></li><li><a href="#">Races</a></li><li><a href="#">News</a></li></ul></div>
+      <div><h4>Get in touch</h4><ul><li><a href="https://www.instagram.com/npracingbsb/">Instagram @npracingbsb</a></li><li><a href="#">Enquiries — details tbc</a></li></ul></div>
+    </div>
+    <div class="bottom">
+      <span>© 2026 NP Racing. All rights reserved.</span>
+      <div class="social-row">
+        <a class="icon-btn" href="https://www.instagram.com/npracingbsb/" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body></html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NP Racing — homepage options</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,500;0,600;0,700;0,800;1,700&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tokens.css">
+<style>
+  :root{--paper:#0a0a0a}
+  body{background:var(--black)}
+  .head{max-width:900px;margin:0 auto;padding:clamp(3rem,6vw,4.5rem) 1.5rem 1rem;text-align:center}
+  .head .eyebrow{justify-content:center;margin-bottom:1.2rem}
+  .head h1{font-size:clamp(2.2rem,4.6vw,3.4rem);line-height:1.02;letter-spacing:-.01em}
+  .head h1 em{font-style:italic;color:var(--red-bright)}
+  .head p{max-width:64ch;margin:1.2rem auto 0;color:var(--ink-soft);font-size:1.02rem;line-height:1.65}
+  .head .note{margin-top:1rem;font-size:.82rem;color:var(--ink-faint)}
+
+  .grid{max-width:1320px;margin:2.5rem auto 1rem;padding:0 1.5rem;display:grid;grid-template-columns:repeat(2,1fr);gap:1.75rem}
+  .opt{background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow-soft);display:flex;flex-direction:column;transition:transform .5s var(--ease),box-shadow .5s,border-color .5s}
+  .opt:hover{transform:translateY(-6px);box-shadow:var(--shadow-lift);border-color:var(--red-dim)}
+  .shot{aspect-ratio:16/10;overflow:hidden;border-bottom:1px solid var(--line);background:#050505;position:relative}
+  .shot img{width:100%;display:block;transition:transform .6s var(--ease)}
+  .opt:hover .shot img{transform:scale(1.04)}
+  .num-badge{position:absolute;top:.8rem;left:.8rem;z-index:2;background:var(--red);color:#fff;font-family:var(--font-display);font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;padding:.35rem .7rem;border-radius:999px}
+  .opt .b{padding:1.4rem 1.6rem 1.6rem;display:flex;flex-direction:column;gap:.5rem;flex:1}
+  .opt .kicker{font-family:var(--font-sans);font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint)}
+  .opt h3{font-size:1.5rem;text-transform:none;letter-spacing:0}
+  .opt p{font-size:.92rem;color:var(--ink-soft);line-height:1.6}
+  .opt .cta{margin-top:auto;padding-top:1rem}
+  .opt .cta a{width:100%;justify-content:center}
+
+  .foot{text-align:center;padding:3rem 1.5rem 4.5rem;color:var(--ink-faint);font-size:.88rem;max-width:60ch;margin:0 auto;line-height:1.7}
+
+  @media (max-width:860px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="head">
+  <span class="eyebrow">NP Racing · Homepage · Round 1</span>
+  <h1>Four directions for the <em>same brief.</em></h1>
+  <p>Same logo, same photography, same team story — four different ways to lay out the homepage. Open any of them full-screen, scroll the whole page, then tell me which one to run with (or which bits of each to combine).</p>
+  <p class="note">Static HTML prototypes · real logo &amp; photos · not wired to a CMS</p>
+</div>
+
+<div class="grid">
+
+  <div class="opt">
+    <div class="shot"><span class="num-badge">Option 1</span><img src="assets/thumbs/design-01-gridbox.jpg" alt="Grid Box homepage option"></div>
+    <div class="b">
+      <span class="kicker">Grid Box</span>
+      <h3>Cinematic, full-bleed hero</h3>
+      <p>The high-impact option. Full-bleed action photo behind the headline, a race-plate badge, and a stat strip right under the fold. Reads fast, feels like a factory team site.</p>
+      <div class="cta"><a class="btn btn-primary" href="design-01-gridbox.html">Open <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></div>
+    </div>
+  </div>
+
+  <div class="opt">
+    <div class="shot"><span class="num-badge">Option 2</span><img src="assets/thumbs/design-02-pitlane.jpg" alt="Pit Lane Editorial homepage option"></div>
+    <div class="b">
+      <span class="kicker">Pit Lane Editorial</span>
+      <h3>Split hero, magazine grid</h3>
+      <p>A calmer, more editorial feel — split hero with a framed photo, a pull-quote band, and numbered sections. Good middle ground between bold and premium.</p>
+      <div class="cta"><a class="btn btn-primary" href="design-02-pitlane.html">Open <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></div>
+    </div>
+  </div>
+
+  <div class="opt">
+    <div class="shot"><span class="num-badge">Option 3</span><img src="assets/thumbs/design-03-number51.jpg" alt="Number 51 homepage option"></div>
+    <div class="b">
+      <span class="kicker">Number 51</span>
+      <h3>Bold poster, race-number graphic</h3>
+      <p>The loudest option — Brayden's #51 as an oversized graphic device, hard edges, a scrolling sponsor ticker, Bebas Neue headlines. Zine energy, built for Instagram screenshots.</p>
+      <div class="cta"><a class="btn btn-primary" href="design-03-number51.html">Open <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></div>
+    </div>
+  </div>
+
+  <div class="opt">
+    <div class="shot"><span class="num-badge">Option 4</span><img src="assets/thumbs/design-04-paddockminimal.jpg" alt="Paddock Minimal homepage option"></div>
+    <div class="b">
+      <span class="kicker">Paddock Minimal</span>
+      <h3>Quiet, premium, restrained</h3>
+      <p>The understated option — generous whitespace, thin red rules, italic headlines, floating framed photos. Feels like a factory motorsport brand rather than a race team flyer.</p>
+      <div class="cta"><a class="btn btn-primary" href="design-04-paddockminimal.html">Open <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></div>
+    </div>
+  </div>
+
+</div>
+
+<div class="foot">
+  All four share the same content — team story, Brayden Elliott's #51 spotlight, gallery teaser, sponsor placeholders and the external merch link. Contact details (phone/email) are still pending from the client, so those are placeholders for now.<br><br>
+  Pick a direction, mix elements across options, or say what's missing — this is round 1.
+</div>
+
+</body></html>
