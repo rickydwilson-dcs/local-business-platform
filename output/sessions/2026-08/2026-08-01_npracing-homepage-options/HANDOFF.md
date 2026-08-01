@@ -1,14 +1,14 @@
 # NPRacing homepage options — handoff
 
-**Status:** ready-to-resume, but the _next_ phase (real site + Vercel deploy) has **not started at all** — everything so far is static HTML mockups published as Claude Artifacts, not a Next.js site.
-**Branch:** `develop` (no feature branch created for this work)
-**Commits:** 0 — none of this work is committed. See "What was NOT done" #1, this is the single biggest risk.
-**Working tree:** dirty — untracked (`git status --porcelain`):
-
-```
-?? output/briefs/npracing/
-?? output/sessions/2026-08/
-```
+**Status:** ready-to-resume. Mockups + brief are committed. The _next_ phase (real Next.js
+site + Vercel deploy for v1 and v3) has **not started at all** — everything so far is static
+HTML mockups published as Claude Artifacts, not a Next.js site.
+**Branch:** `develop`, no feature branch yet — commit below is on `develop` directly, not
+pushed.
+**Commits:** 1 — `231ab5a2` "docs(npracing): brief + homepage design mockups (round 1-2)",
+on `develop`, **not pushed to origin**.
+**Working tree:** clean as of the commit above (verified via `git status --porcelain`
+immediately after committing).
 
 ## What this is trying to resolve
 
@@ -33,13 +33,17 @@ gallery-grid overlap bug, v3 team-section restructure, creds-bar margin), remove
 **Contact** pages for v1 and v3 — 8 pages total, all cross-linked via nav/footer, all
 published as separate Claude Artifacts.
 
-The user's latest ask (this message): publish v1 and v3 to **Vercel** so the client can
-compare live, real-URL versions rather than Artifact links. That work has not begun.
+The user then asked to publish v1 and v3 to **Vercel** so the client can compare live,
+real-URL versions rather than Artifact links, and confirmed (after being asked) that this
+means **the full, proper platform build** — real `theme.config.ts` + MDX content + R2 images
+
+- two Vercel projects — not a quick throwaway static deploy. That work has not begun; this
+  handoff exists specifically to hand it off cleanly.
 
 ## Actions taken
 
-No git commits exist for any of this — everything below is local file state plus Claude
-Artifact publish events (not part of this repo's history).
+All of the below is one commit, `231ab5a2` on `develop` (not pushed) — plus Claude Artifact
+publish events, which aren't part of this repo's history.
 
 - Built `prototype/tokens.css` — shared design tokens (colour, type, spacing) used by all
   variants. **This is the best source of truth for the final palette/typography decisions**
@@ -84,18 +88,18 @@ Artifact publish events (not part of this repo's history).
 
 - **No `sites/npracing-*` directory exists** — verified via `ls sites/`. `sites/base-template`
   exists and is the copy source for a new site per `docs/guides/adding-new-site.md`.
-- **Nothing is committed** — verified via `git status --porcelain` (both
-  `output/briefs/npracing/` and `output/sessions/2026-08/` are untracked) and
-  `git log --oneline -15` (no npracing-related commits).
+- **All of the above is committed** — verified via `git log --oneline -3` showing `231ab5a2
+docs(npracing): brief + homepage design mockups (round 1-2)` on `develop`, and
+  `git status --porcelain` returning empty immediately after. **Not pushed to origin** — a
+  fresh session should `git push` (or fold it into whatever branch the real build happens on)
+  before assuming it's backed up anywhere but this machine.
 - Assumed, not verified: no Vercel project for npracing exists yet (inferred from no site
   directory existing — not checked directly via Vercel CLI/dashboard).
 
 ## What was NOT done
 
-1. **Nothing from this session is committed to git.** It's all sitting as untracked files.
-   The very first thing a fresh session must do is decide what to commit (and to what
-   branch — currently on `develop`, per the platform's git workflow this is correct to
-   start on, but nothing has been pushed).
+1. **The commit hasn't been pushed.** `231ab5a2` exists only on this machine's `develop`. Push
+   it (or make sure it's carried along) before treating it as safe.
 2. **No real Next.js site exists.** Every page built so far is a self-contained static HTML
    file with inlined CSS and base64-embedded fonts/images — built specifically to satisfy the
    Claude Artifact sandbox's CSP (no external font/image loading allowed). None of it uses
@@ -146,34 +150,28 @@ Artifact publish events (not part of this repo's history).
 
 ## Next step
 
-This forks on an open question below before a next step can be chosen with confidence. If
-the answer is "build the real platform site":
+Confirmed direction: build both properly, full platform build, no shortcuts. Not yet started.
+A fresh session should write a `session.md` spec first per this project's convention (root
+`CLAUDE.md` / memory: "For any task touching >2-3 files, write a session.md spec first" —
+this touches dozens), then follow `docs/guides/adding-new-site.md`:
 
 ```bash
-git status                                    # confirm what's still uncommitted
-git add output/briefs/npracing/ output/sessions/2026-08/
-git commit -m "docs(npracing): design mockups + brief for homepage v1/v3 (round 1-2)"
-# then, per docs/guides/adding-new-site.md:
+git push                                      # land 231ab5a2 on origin/develop first
+# per docs/guides/adding-new-site.md:
 cp -r sites/base-template sites/npracing-v1
 cp -r sites/base-template sites/npracing-v3
-# port tokens.css → theme.config.ts for each; convert merch/news copy to MDX content;
-# upload images to R2 per docs/standards/images.md; then follow the normal
-# develop → staging → main flow (/deploy.changes) with two Vercel projects.
+# port prototype/tokens.css → theme.config.ts for each (colour/type/spacing already decided —
+# see "Traps" above for what NOT to carry over from the Artifact HTML);
+# convert merch product list + news articles + team/rider copy into MDX content
+# (root CLAUDE.md bans centralized TS data files — frontmatter IS the data);
+# upload images to R2 per docs/standards/images.md;
+# build Header/Footer/page components per docs/standards/theme-component-contract.md;
+# set up two Vercel projects (rootDirectory: sites/npracing-v1 and sites/npracing-v3);
+# then the normal develop → staging → main flow (/deploy.changes) for each.
 ```
-
-If the answer is "just get something clickable on a real URL fast" (much smaller scope —
-deploy the existing static HTML as-is, not the full platform build), that's a different and
-much shorter path and should be scoped explicitly before starting, since it produces a
-throwaway comparison tool rather than the production site.
 
 ## Open questions
 
-- **Full platform site vs. quick static deploy?** The user asked to "publish both versions to
-  vercel as v1 and v3 so the client can choose" — this could mean (a) do the full
-  MDX/theme-system build now and deploy two real platform sites, or (b) just get the existing
-  static HTML prototypes onto two Vercel URLs quickly as a comparison tool, with the real
-  build happening later once a direction is chosen. These are very different amounts of work
-  and should be confirmed before starting.
 - **Facebook profile URL** — still needed for the Contact page link and as an image source.
 - **Once v1 or v3 is chosen**, what happens to the other one, and to v2/v4? (Delete the
   losing directions' artifacts/prototypes, or keep them archived in the session folder?)
