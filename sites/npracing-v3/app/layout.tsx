@@ -1,8 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import { siteConfig } from '@/site.config';
-import { PHONE_DISPLAY, PHONE_TEL, BUSINESS_EMAIL, ADDRESS } from '@/lib/contact-info';
-import { getContentItems } from '@/lib/content';
 import { PageShell } from '@platform/core-components';
 import { SiteHeader } from '@/components/site-header';
 import { SiteFooter } from '@/components/site-footer';
@@ -44,20 +42,22 @@ export const viewport: Viewport = {
   userScalable: true,
 };
 
-export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const [allServices, allLocations] = await Promise.all([
-    getContentItems('services'),
-    getContentItems('locations'),
-  ]);
-
-  const locationItems = allLocations.map((loc) => ({
-    name: loc.title,
-    slug: loc.slug,
-  }));
-
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en-GB">
       <head>
+        {/*
+          Bebas Neue (display) + Barlow (body) — the "Number 51" type pairing.
+          Loaded via <link> rather than a CSS @import: Tailwind's expansion
+          silently drops external @import url() rules (see project memory),
+          and this is a site-wide font, not a per-page one.
+        */}
+        {/* eslint-disable-next-line @next/next/no-page-custom-font -- site-wide font in the root layout, see note above */}
+        <link
+          href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet"
+        />
+
         {/* Geo meta tags for local SEO */}
         {siteConfig.business.geo && (
           <>
@@ -73,48 +73,13 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           </>
         )}
       </head>
-      <body className="min-h-screen flex flex-col">
-        <PageShell
-          header={
-            <SiteHeader
-              siteName={siteConfig.business.name}
-              phoneDisplay={PHONE_DISPLAY}
-              phoneTel={PHONE_TEL}
-              showPhone={siteConfig.cta.phone.show}
-              primaryCta={siteConfig.cta.primary}
-              navigation={siteConfig.navigation.main}
-              locations={locationItems}
-            />
-          }
-          footer={
-            <SiteFooter
-              siteName={siteConfig.business.name}
-              tagline={siteConfig.tagline}
-              phoneDisplay={PHONE_DISPLAY}
-              phoneTel={PHONE_TEL}
-              email={BUSINESS_EMAIL}
-              address={ADDRESS}
-              certifications={siteConfig.credentials?.certifications ?? []}
-              services={allServices
-                .map((s) => ({ slug: s.slug, title: s.title }))
-                .slice(0, siteConfig.footer?.maxServices ?? 8)}
-              locations={allLocations
-                .map((l) => ({ slug: l.slug, title: l.title }))
-                .slice(0, siteConfig.footer?.maxLocations ?? 8)}
-              totalServices={allServices.length}
-              totalLocations={allLocations.length}
-              maxServices={siteConfig.footer?.maxServices ?? 8}
-              maxLocations={siteConfig.footer?.maxLocations ?? 8}
-              showServices={siteConfig.footer?.showServices ?? true}
-              showLocations={siteConfig.footer?.showLocations ?? true}
-              copyright={
-                siteConfig.footer?.copyright ??
-                `${new Date().getFullYear()} ${siteConfig.business.name}. All rights reserved.`
-              }
-              builtBy={siteConfig.footer?.builtBy}
-            />
-          }
-        >
+      {/*
+        `page-noise` lays a fixed, pointer-events-none grain over the whole
+        page — the one texture in the "Number 51" palette that keeps flat
+        near-black from reading as dead space.
+      */}
+      <body className="page-noise min-h-screen flex flex-col bg-surface-background text-surface-foreground font-sans">
+        <PageShell header={<SiteHeader />} footer={<SiteFooter />}>
           {children}
         </PageShell>
 

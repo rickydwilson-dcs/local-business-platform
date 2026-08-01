@@ -699,3 +699,21 @@ After completing all phases, append to `output/sessions/2026-08/2026-08-01_nprac
 - The Co-Authored-By line in commits must reflect the **orchestrator** model (the committer) — not the per-phase sub-agent tier.
 - Every phase that changes code ends with its own commit, `feat(npracing-v3): <phase description>` or `test(npracing-v3): <phase description>` for Phase 8.
 - **Real-data rule:** Phase 4's re-verification MUST hit the actual retailer/BSB URLs, not skip straight to "assume it's fine" — an autonomous session with no live check would otherwise ship stale/possibly-wrong client-facing prices and claims.
+
+---
+
+## Completed
+
+**Date:** 2026-08-01
+**Status:** All phases executed successfully
+
+Built NPRacing v3 "Number 51" as a production-quality Next.js site on this platform's real architecture: site-config/theme-registry adapted for a racing team (`SportsTeam` schema.org type), three new MDX content types (8 merch products, 2 news articles, 1 brand singleton) with a site-scoped validator, live re-verification against theclothingkings.co.uk and britishsuperbike.com (all 10 records confirmed accurate, one factual correction to team-owner attribution), a bold poster-style Tailwind theme built from `tokens.css` with hand-authored self-contained components (no runtime `@platform/themes/*` import), routes/metadata/sitemaps wired and leftover base-template routes removed, and a closing accessibility/responsiveness sweep. The one surprise: no R2 upload credentials were available in this environment, so all 9 image records (8 merch + npracing.mdx logo/hero) run on the documented `placehold.co` dev-fallback path rather than final R2 URLs — a real upload manifest exists for a later pass, and the fallback was verified in a live `pnpm dev` check to avoid the known "R2 URL Not Configured" local-path bug. The only defect the Phase 7 sweep found was a missing `prefers-reduced-motion` guard on the platform-inherited `scroll-behavior: smooth` rule (the rest of the site's motion was already correctly gated) — fixed in one line. All final gates (3× validate-content, type-check, lint, `next build --webpack`) pass clean.
+
+### Commits
+
+- `ecaf5cca` — feat(npracing-v3): adapt site.config.ts and theme registry for a racing team
+- `dec99143` — feat(npracing-v3): add merch, news, and brand MDX content types
+- `3d55a0da` — fix(npracing-v3): re-verify content against live sources, confirm image fallback
+- `2bc1d027` — feat(npracing-v3): build Number 51 theme tokens and page components
+- `976fbe3a` — feat(npracing-v3): wire routes/metadata and remove leftover base-template content
+- `b71ddc8f` — fix(npracing-v3): gate scroll-behavior smooth by prefers-reduced-motion

@@ -1,196 +1,144 @@
+import Image from 'next/image';
 import Link from 'next/link';
-import { Phone, Mail, MapPin, Shield, Award } from 'lucide-react';
+import { getBrand } from '@/lib/brand';
+import { getImageUrl } from '@/lib/image';
+import { siteConfig } from '@/site.config';
+import { InstagramIcon } from '@/components/ui/icons';
 
-export interface SiteFooterProps {
-  siteName: string;
-  tagline: string;
-  phoneDisplay: string;
-  phoneTel: string;
-  email: string;
-  address: { locality: string; region: string };
-  certifications: Array<{ name: string; description: string; icon?: string }>;
-  services: Array<{ slug: string; title: string }>;
-  locations: Array<{ slug: string; title: string }>;
-  totalServices: number;
-  totalLocations: number;
-  maxServices: number;
-  maxLocations: number;
-  showServices: boolean;
-  showLocations: boolean;
-  copyright: string;
-  builtBy?: { name: string; url: string };
-}
+/**
+ * SiteFooter — "Number 51" footer.
+ *
+ * Self-contained (imports no shared theme package). Contact details and the
+ * Instagram link come from the brand MDX singleton; legal/attribution strings
+ * come from site.config.ts. Nothing here is invented — the team has no public
+ * phone number or street address, so neither is shown.
+ */
+const TEAM_LINKS = [
+  { label: 'The team', href: '/#team' },
+  { label: 'Rider', href: '/#rider' },
+  { label: 'Gallery', href: '/#gallery' },
+];
 
-export function SiteFooter({
-  siteName,
-  tagline,
-  phoneDisplay,
-  phoneTel,
-  email,
-  address,
-  certifications,
-  services,
-  locations,
-  totalServices,
-  totalLocations,
-  maxServices,
-  maxLocations,
-  showServices,
-  showLocations,
-  copyright,
-  builtBy,
-}: SiteFooterProps) {
+const MORE_LINKS = [
+  { label: 'News', href: '/news' },
+  { label: 'Merchandise', href: '/merch' },
+  { label: 'Contact', href: '/contact' },
+];
+
+const LEGAL_LINKS = [
+  { label: 'Privacy policy', href: '/privacy-policy' },
+  { label: 'Cookie policy', href: '/cookie-policy' },
+];
+
+const COLUMN_HEADING_CLASSES =
+  'mb-4 font-sans text-caption uppercase text-surface-tertiary tracking-[0.14em]';
+const FOOTER_LINK_CLASSES =
+  'text-small text-surface-secondary transition-colors duration-normal hover:text-surface-foreground';
+
+export async function SiteFooter() {
+  const brand = await getBrand();
+
   return (
-    <footer className="bg-surface-inverse text-white py-12 sm:py-16">
-      <div className="mx-auto w-full lg:w-[90%] px-6">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mb-6 sm:mb-8">
-          {/* Column 1: About */}
-          <div className="sm:col-span-2 lg:col-span-1">
-            <h2 className="text-xl sm:text-2xl font-bold mb-4 text-white">{siteName}</h2>
-            <p className="text-surface-muted-foreground mb-4 text-sm sm:text-base">{tagline}</p>
-            {certifications.length > 0 && (
-              <div className="flex flex-wrap items-center gap-3 sm:gap-4">
-                {certifications.slice(0, 3).map((cert, index) => (
-                  <div key={index} className="flex items-center gap-2 text-xs sm:text-sm">
-                    {index === 0 ? (
-                      <Award className="h-3 w-3 sm:h-4 sm:w-4 text-warning" aria-hidden="true" />
-                    ) : (
-                      <Shield className="h-3 w-3 sm:h-4 sm:w-4 text-success" aria-hidden="true" />
-                    )}
-                    <span>{cert.name}</span>
-                  </div>
-                ))}
-              </div>
-            )}
+    <footer className="border-t border-surface-card-border pt-14 pb-8">
+      <div className="mx-auto w-full max-w-[80rem] px-6">
+        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
+          <div className="flex items-start">
+            <Image
+              src={getImageUrl(brand.logo.src)}
+              alt={brand.logo.alt}
+              width={480}
+              height={120}
+              className="h-auto w-full max-w-[15rem]"
+            />
           </div>
 
-          {/* Column 2: Services */}
-          {showServices && services.length > 0 && (
-            <div>
-              <h3 className="text-base sm:text-lg font-semibold mb-4 text-white">Our Services</h3>
-              <ul className="space-y-2 text-surface-muted-foreground text-sm sm:text-base">
-                {services.map((service) => (
-                  <li key={service.slug}>
-                    <Link
-                      href={`/services/${service.slug}`}
-                      className="hover:text-brand-primary transition-colors"
-                    >
-                      {service.title}
-                    </Link>
-                  </li>
-                ))}
-                {totalServices > maxServices && (
-                  <li>
-                    <Link
-                      href="/services"
-                      className="hover:text-brand-primary transition-colors font-semibold"
-                    >
-                      View All Services &rarr;
-                    </Link>
-                  </li>
-                )}
-              </ul>
-            </div>
-          )}
-
-          {/* Column 3: Locations */}
-          {showLocations && locations.length > 0 && (
-            <div>
-              <h3 className="text-base sm:text-lg font-semibold mb-4 text-white">Service Areas</h3>
-              <ul className="space-y-2 text-surface-muted-foreground text-sm sm:text-base">
-                {locations.map((location) => (
-                  <li key={location.slug}>
-                    <Link
-                      href={`/locations/${location.slug}`}
-                      className="hover:text-brand-primary transition-colors"
-                    >
-                      {location.title}
-                    </Link>
-                  </li>
-                ))}
-                {totalLocations > maxLocations && (
-                  <li>
-                    <Link
-                      href="/locations"
-                      className="hover:text-brand-primary transition-colors font-semibold"
-                    >
-                      View All Locations &rarr;
-                    </Link>
-                  </li>
-                )}
-              </ul>
-            </div>
-          )}
-
-          {/* Column 4: Contact */}
           <div>
-            <h3 className="text-base sm:text-lg font-semibold mb-4 text-white">Contact Info</h3>
-            <div className="space-y-3 text-surface-muted-foreground text-sm sm:text-base">
-              <div className="flex items-center gap-2">
-                <Phone
-                  className="h-3 w-3 sm:h-4 sm:w-4 text-brand-primary flex-shrink-0"
-                  aria-hidden="true"
-                />
-                <Link
-                  href={`tel:${phoneTel}`}
-                  className="hover:text-brand-primary transition-colors"
+            <h2 className={COLUMN_HEADING_CLASSES}>Team</h2>
+            <ul className="space-y-2.5">
+              {TEAM_LINKS.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href} className={FOOTER_LINK_CLASSES}>
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h2 className={COLUMN_HEADING_CLASSES}>More</h2>
+            <ul className="space-y-2.5">
+              {MORE_LINKS.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href} className={FOOTER_LINK_CLASSES}>
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+              {LEGAL_LINKS.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href} className={FOOTER_LINK_CLASSES}>
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h2 className={COLUMN_HEADING_CLASSES}>Get in touch</h2>
+            <ul className="space-y-2.5">
+              <li>
+                <a href={`mailto:${brand.email}`} className={FOOTER_LINK_CLASSES}>
+                  {brand.email}
+                </a>
+              </li>
+              <li>
+                <a
+                  href={brand.instagramUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={FOOTER_LINK_CLASSES}
                 >
-                  {phoneDisplay}
-                </Link>
-              </div>
-              <div className="flex items-center gap-2">
-                <Mail
-                  className="h-3 w-3 sm:h-4 sm:w-4 text-brand-primary flex-shrink-0"
-                  aria-hidden="true"
-                />
-                <Link
-                  href={`mailto:${email}`}
-                  className="hover:text-brand-primary transition-colors"
-                >
-                  {email}
-                </Link>
-              </div>
-              <div className="flex items-start gap-2">
-                <MapPin
-                  className="h-3 w-3 sm:h-4 sm:w-4 text-brand-primary flex-shrink-0 mt-1"
-                  aria-hidden="true"
-                />
-                <div className="leading-relaxed">
-                  <div>{address.locality}</div>
-                  <div>{address.region}</div>
-                </div>
-              </div>
-              <div className="mt-4 pt-4 border-t border-surface-subtle text-xs sm:text-sm">
-                <Link href="/privacy-policy" className="hover:text-brand-primary transition-colors">
-                  Privacy Policy
-                </Link>
-                <span className="mx-2 text-surface-muted-foreground">|</span>
-                <Link href="/cookie-policy" className="hover:text-brand-primary transition-colors">
-                  Cookie Policy
-                </Link>
-              </div>
-            </div>
+                  Instagram {brand.instagramHandle}
+                  <span className="sr-only"> (opens in a new tab)</span>
+                </a>
+              </li>
+              <li className="text-small text-surface-tertiary">{siteConfig.racing.base}</li>
+            </ul>
           </div>
         </div>
 
-        <div className="border-t border-surface-subtle pt-6 sm:pt-8 text-center text-surface-muted-foreground text-xs sm:text-sm">
-          <p>
-            &copy; {copyright}
-            {builtBy && (
+        <div className="mt-10 flex flex-wrap items-center justify-between gap-4 border-t border-surface-subtle pt-6">
+          <p className="text-small text-surface-tertiary">
+            &copy; {siteConfig.footer.copyright}
+            {siteConfig.footer.builtBy && (
               <>
                 {' '}
                 | Built by{' '}
                 <a
-                  href={builtBy.url}
+                  href={siteConfig.footer.builtBy.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-white hover:text-brand-primary transition-colors underline"
+                  className="text-surface-foreground underline transition-colors duration-normal hover:text-brand-accent"
                 >
-                  {builtBy.name}
+                  {siteConfig.footer.builtBy.name}
                 </a>
               </>
             )}
           </p>
+
+          <a
+            href={brand.instagramUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="grid h-10 w-10 place-items-center border border-surface-card-border text-surface-secondary transition-colors duration-normal hover:border-surface-foreground hover:text-surface-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-accent"
+          >
+            <InstagramIcon />
+            <span className="sr-only">
+              {brand.teamName} on Instagram {brand.instagramHandle} (opens in a new tab)
+            </span>
+          </a>
         </div>
       </div>
     </footer>

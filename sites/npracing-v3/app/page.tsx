@@ -1,20 +1,21 @@
 import type { Metadata } from 'next';
-import type { SiteConfigSummary } from '@platform/core-components';
 import { HomePage } from '@/components/pages/home-page';
 import { siteConfig } from '@/site.config';
-import { getLocations } from '@/lib/content';
 import { absUrl } from '@/lib/site';
 import { getLocalBusinessSchema } from '@/lib/schema';
-import { PHONE_DISPLAY } from '@/lib/contact-info';
+
+/**
+ * Homepage description — the team's own facts, not the base-template's
+ * local-service boilerplate.
+ */
+const HOME_DESCRIPTION = `${siteConfig.business.name} is an independent British Superbike team based in ${siteConfig.racing.base}, running Honda machinery for #${siteConfig.racing.raceNumber} ${siteConfig.racing.rider.name} in the ${siteConfig.racing.championship}.`;
 
 export const metadata: Metadata = {
   title: `${siteConfig.business.name} | ${siteConfig.tagline}`,
-  description:
-    'Professional local services tailored to your needs. Quality workmanship, competitive pricing, and excellent customer service.',
+  description: HOME_DESCRIPTION,
   openGraph: {
     title: `${siteConfig.business.name} | ${siteConfig.tagline}`,
-    description:
-      'Professional local services tailored to your needs. Quality workmanship, competitive pricing, and excellent customer service.',
+    description: HOME_DESCRIPTION,
     url: absUrl('/'),
     siteName: siteConfig.name,
     images: [
@@ -31,8 +32,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: `${siteConfig.business.name} | ${siteConfig.tagline}`,
-    description:
-      'Professional local services tailored to your needs. Quality workmanship, competitive pricing, and excellent customer service.',
+    description: HOME_DESCRIPTION,
     images: [absUrl('/logo.svg')],
   },
   alternates: {
@@ -40,9 +40,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function HomePageRoute() {
-  const locations = await getLocations();
-
+export default function HomePageRoute() {
   const localBusinessSchema = getLocalBusinessSchema();
 
   const webSiteSchema = {
@@ -71,16 +69,6 @@ export default async function HomePageRoute() {
     ],
   };
 
-  const siteSummary: SiteConfigSummary = {
-    name: siteConfig.business.name,
-    tagline: siteConfig.tagline,
-    phone: siteConfig.business.phone,
-    phoneDisplay: PHONE_DISPLAY,
-    address: { city: siteConfig.business.address.city },
-    cta: siteConfig.cta,
-    stats: siteConfig.credentials?.stats,
-  };
-
   const schemaNodes = (
     <>
       <script
@@ -98,20 +86,5 @@ export default async function HomePageRoute() {
     </>
   );
 
-  return (
-    <HomePage
-      siteConfig={siteSummary}
-      services={siteConfig.services.map((s) => ({
-        slug: s.slug,
-        title: s.title,
-        description: s.description,
-      }))}
-      locations={locations.map((l) => ({
-        slug: l.slug,
-        title: l.title,
-        description: l.description,
-      }))}
-      schemaNodes={schemaNodes}
-    />
-  );
+  return <HomePage schemaNodes={schemaNodes} />;
 }

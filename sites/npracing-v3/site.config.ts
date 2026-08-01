@@ -1,9 +1,15 @@
 /**
- * Base Template Site Configuration
+ * NPRacing Site Configuration
  *
- * Generic placeholder configuration for a local service business.
- * Copy this file when creating a new site and replace all placeholder values
- * with actual business information.
+ * NPRacing is a British Superbike (BSB) racing team based in Taunton,
+ * Somerset — NOT a local service business. This file was originally an
+ * unmodified copy of base-template's placeholder config; the config/
+ * registry layer below has been made truthful for the team, sourced from
+ * `output/briefs/npracing/brief.md` and `output/briefs/npracing/content/brand.md`.
+ *
+ * Visual tokens (colors/fonts) and page scaffolding (Gallery, Merchandise,
+ * News, Races) come in a later phase — this file only covers the
+ * config/registry layer.
  */
 
 import type { BaseSiteConfig } from '@platform/core-components/types/site-config';
@@ -66,6 +72,41 @@ export interface ServiceAreaRegion {
   towns: Array<{ name: string; slug: string }>;
 }
 
+/**
+ * NPRacing-specific brand/team fields. These don't fit the shared
+ * BaseSiteConfig/local-service shape (no services, no service areas), so
+ * they live here as their own extension type rather than being forced into
+ * unrelated fields.
+ */
+export interface RacingTeamInfo {
+  /** Public-facing team name */
+  teamName: string;
+  /** Team base (town/county — no public street address) */
+  base: string;
+  /** Championship the team competes in */
+  championship: string;
+  /** Machinery manufacturer */
+  manufacturer: string;
+  /** Race number carried on the team's bike */
+  raceNumber: number;
+  rider: {
+    name: string;
+    /** When/where the rider joined the team */
+    joined: string;
+  };
+  owner: {
+    name: string;
+    /** Owner's parent business */
+    company: string;
+  };
+  social: {
+    instagramHandle: string;
+    instagramUrl: string;
+  };
+  /** External merchandise store — no on-site checkout, deep links only */
+  merchandiseStoreUrl: string;
+}
+
 export interface SiteConfig extends BaseSiteConfig {
   /** Site name and branding */
   name: string;
@@ -76,7 +117,7 @@ export interface SiteConfig extends BaseSiteConfig {
   business: {
     name: string;
     legalName: string;
-    type: 'LocalBusiness' | 'ProfessionalService' | 'HomeAndConstructionBusiness';
+    type: 'LocalBusiness' | 'ProfessionalService' | 'HomeAndConstructionBusiness' | 'SportsTeam';
     phone: string;
     email: string;
     address: {
@@ -121,13 +162,14 @@ export interface SiteConfig extends BaseSiteConfig {
   /** Credentials and accreditations */
   credentials: CredentialsConfig;
 
-  /** Service areas */
+  /** Service areas — intentionally empty; NPRacing is a brand/media site,
+   *  not a local service business with a service area. */
   serviceAreas: string[];
 
   /** Service area regions for dropdown navigation (optional) */
   serviceAreaRegions?: ServiceAreaRegion[];
 
-  /** Featured services */
+  /** Featured services — intentionally empty; NPRacing has no services. */
   services: {
     title: string;
     slug: string;
@@ -147,8 +189,17 @@ export interface SiteConfig extends BaseSiteConfig {
   /** Schema.org business configuration */
   schema: {
     businessConfig: BusinessConfig;
-    businessType: LocalBusinessSchemaOptions['businessType'];
+    /** Widened locally to allow 'SportsTeam' — the shared
+     *  LocalBusinessSchemaOptions['businessType'] union has no SportsTeam
+     *  member and docs/standards/schema.md doesn't document one either.
+     *  The runtime JSON-LD generator (createSchemaGenerators in lib/schema.ts)
+     *  types businessType as plain string, so this serializes fine — the
+     *  widening here only unblocks the local TS annotation. */
+    businessType: LocalBusinessSchemaOptions['businessType'] | 'SportsTeam';
   };
+
+  /** NPRacing team/brand facts — see RacingTeamInfo above. */
+  racing: RacingTeamInfo;
 
   /** Optional rich about page content */
   about?: {
@@ -167,49 +218,60 @@ export interface SiteConfig extends BaseSiteConfig {
 }
 
 export const siteConfig: SiteConfig = {
-  slug: 'base-template',
-  domain: 'localhost',
-  name: 'Base Template Site',
-  tagline: 'Professional Local Services',
-  url: process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000',
+  slug: 'npracing-v3',
+  // Placeholder until a real domain is confirmed for the client.
+  domain: 'npracing-v3.vercel.app',
+  name: 'NP Racing',
+  tagline: 'British Superbike Team — Race #51',
+  url: process.env.NEXT_PUBLIC_SITE_URL || 'https://npracing-v3.vercel.app',
 
   business: {
-    name: 'Your Business Name',
-    legalName: 'Your Business Ltd',
-    type: 'LocalBusiness',
-    phone: '+44 1234 567890',
-    email: 'info@example.com',
+    name: 'NP Racing',
+    // Best-available fact from the brief: Neil Pearson, the team owner, is
+    // also the founder of NP Motorcycles. Not confirmed as the racing
+    // team's exact registered legal entity name — update once confirmed.
+    legalName: 'NP Motorcycles',
+    type: 'SportsTeam',
+    // No public phone number confirmed for NPRacing (brief only confirms
+    // email as live). Left empty rather than inventing a number.
+    phone: '',
+    email: 'npracingbsb@hotmail.com',
+    // NPRacing has no public storefront/office — this is a racing team, not
+    // a local service business. City/region reflect the team's real base
+    // (Taunton, Somerset, per brief); street/postcode are left blank rather
+    // than fabricated since no public address is confirmed.
     address: {
-      street: '123 Main Street',
-      city: 'City Name',
-      region: 'County/Region',
-      postalCode: 'AB12 3CD',
+      street: '',
+      city: 'Taunton',
+      region: 'Somerset',
+      postalCode: '',
       country: 'United Kingdom',
     },
+    // Not applicable — racing team, no public office hours.
     hours: {
-      monday: '9:00 AM - 5:00 PM',
-      tuesday: '9:00 AM - 5:00 PM',
-      wednesday: '9:00 AM - 5:00 PM',
-      thursday: '9:00 AM - 5:00 PM',
-      friday: '9:00 AM - 5:00 PM',
-      saturday: 'Closed',
-      sunday: 'Closed',
+      monday: 'N/A — no public office',
+      tuesday: 'N/A — no public office',
+      wednesday: 'N/A — no public office',
+      thursday: 'N/A — no public office',
+      friday: 'N/A — no public office',
+      saturday: 'N/A — no public office',
+      sunday: 'N/A — no public office',
     },
     socialMedia: {
-      facebook: 'https://facebook.com/yourbusiness',
-      twitter: 'https://twitter.com/yourbusiness',
-      instagram: 'https://instagram.com/yourbusiness',
+      // Confirmed and approved as an image/content source per the brief.
+      instagram: 'https://www.instagram.com/npracingbsb/',
+      // Facebook requested from client 2026-08-01, not yet received.
     },
+    // Approximate Taunton town-centre coordinates (public geographic fact,
+    // not a specific fabricated street address) representing the team base.
     geo: {
-      latitude: 51.5074,
-      longitude: -0.1278,
+      latitude: 51.0158,
+      longitude: -3.1027,
     },
   },
 
   navigation: {
     main: [
-      { label: 'Services', href: '/services' },
-      { label: 'Locations', href: '/locations', hasDropdown: true },
       { label: 'About', href: '/about' },
       { label: 'Contact', href: '/contact' },
     ],
@@ -217,21 +279,22 @@ export const siteConfig: SiteConfig = {
 
   cta: {
     primary: {
-      label: 'Get Free Quote',
+      label: 'Contact the Team',
       href: '/contact',
     },
     phone: {
-      show: true,
-      label: 'Call Us',
+      // No confirmed public phone number — don't show a call button.
+      show: false,
     },
   },
 
   footer: {
-    showServices: true,
-    showLocations: true,
-    maxServices: 10,
-    maxLocations: 12,
-    copyright: '2025 Your Business Name. All rights reserved.',
+    // No services/locations content types apply to this site.
+    showServices: false,
+    showLocations: false,
+    maxServices: 0,
+    maxLocations: 0,
+    copyright: '2026 NP Racing. All rights reserved.',
     builtBy: {
       name: 'Digital Consulting Services',
       url: 'https://www.digitalconsultingservices.co.uk',
@@ -239,164 +302,142 @@ export const siteConfig: SiteConfig = {
   },
 
   credentials: {
-    yearEstablished: '2020',
+    // "In the BSB paddock since 2004" per brief; first full Superbike
+    // season came later, in 2020.
+    yearEstablished: '2004',
     stats: [
-      { value: '5+', label: 'Years Experience', description: 'Serving local customers' },
-      { value: '500+', label: 'Projects Completed', description: 'Satisfied clients' },
-      { value: '100%', label: 'Satisfaction', description: 'Customer focused' },
-      { value: '24/7', label: 'Support', description: 'Always available' },
+      {
+        value: '2004',
+        label: 'In the BSB Paddock',
+        description: 'Racing and team involvement since 2004',
+      },
+      {
+        value: '#51',
+        label: 'Race Number',
+        description: "Brayden Elliott's number on track",
+      },
+      {
+        value: '2020',
+        label: 'First Full Superbike Season',
+        description: "NP Racing's debut season in the premier class",
+      },
+      {
+        value: 'Honda',
+        label: 'Machinery',
+        description: 'Professionally prepared Honda Fireblades',
+      },
     ],
-    certifications: [
-      { name: 'Certified Professional', description: 'Industry certification' },
-      { name: 'Fully Insured', description: 'Comprehensive coverage' },
-    ],
-    insurance: {
-      amount: '£5M',
-      type: 'Public Liability',
-    },
+    // No certifications/accreditations apply to a racing team — left empty
+    // rather than inventing any.
+    certifications: [],
   },
 
-  serviceAreas: ['Main Area', 'North Region', 'South Region'],
+  serviceAreas: [],
 
-  services: [
-    {
-      title: 'Primary Service',
-      slug: 'primary-service',
-      description: 'Our flagship service offering for residential and commercial clients.',
-    },
-    {
-      title: 'Secondary Service',
-      slug: 'secondary-service',
-      description: 'Complementary service that enhances our primary offering.',
-    },
-    {
-      title: 'Service Three',
-      slug: 'service-three',
-      description: 'Specialized service for unique client needs.',
-    },
-  ],
+  services: [],
 
   features: {
     analytics: false,
     consentBanner: false,
     contactForm: true,
     rateLimit: true,
-    testimonials: true,
+    // No testimonials or blog content type for this brand/media site.
+    testimonials: false,
     blog: false,
   },
 
   schema: {
-    businessType: 'LocalBusiness',
+    businessType: 'SportsTeam',
     businessConfig: {
-      name: 'Your Business Name',
-      legalName: 'Your Business Ltd',
+      name: 'NP Racing',
+      legalName: 'NP Motorcycles',
       description:
-        'Professional local services serving [Your Area]. Quality workmanship, competitive pricing, and excellent customer service.',
-      slogan: 'Your trusted local experts',
-      foundingDate: '2020',
-      numberOfEmployees: '1-10',
-      priceRange: '$$',
-      email: 'info@yourbusiness.com',
-      telephone: '+441234567890',
+        'NP Racing is a private British Superbike (BSB) team run by Neil Pearson, based in Taunton, Somerset, competing on Honda machinery in the British Superbike Championship. Involved in the BSB paddock since 2004, with its first full season in the premier Superbike class in 2020, NP Racing is known for developing young talent and running professionally prepared Fireblades as a close-knit, independent operation.',
+      slogan: 'British Superbike Team — Race #51',
+      foundingDate: '2004',
+      // No public headcount confirmed — omitted rather than guessed
+      // (numberOfEmployees is optional on BusinessConfig).
+      email: 'npracingbsb@hotmail.com',
+      // No public phone number confirmed.
+      telephone: '',
+      // No public street address — city/region reflect the team's real
+      // base (Taunton, Somerset); street/postcode left blank rather than
+      // fabricated.
       address: {
-        streetAddress: '123 Main Street',
-        addressLocality: 'Your City',
-        addressRegion: 'Your County',
-        postalCode: 'AB12 3CD',
+        streetAddress: '',
+        addressLocality: 'Taunton',
+        addressRegion: 'Somerset',
+        postalCode: '',
         addressCountry: 'GB',
       },
+      // Approximate Taunton town-centre coordinates, not a fabricated
+      // specific address.
       geo: {
-        latitude: '51.5074',
-        longitude: '-0.1278',
+        latitude: '51.0158',
+        longitude: '-3.1027',
       },
-      openingHours: [
-        {
-          dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-          opens: '09:00',
-          closes: '17:00',
-        },
-      ],
-      areaServed: ['Main Area', 'North Region', 'South Region', 'East Region', 'West Region'],
-      credentials: [
-        {
-          name: 'Fully Insured',
-          description: 'Public liability and professional indemnity insurance',
-          category: 'certification',
-        },
-        {
-          name: 'Qualified Team',
-          description: 'All staff are fully trained and certified',
-          category: 'certification',
-        },
-      ],
-      socialProfiles: [
-        'https://www.facebook.com/yourbusiness',
-        'https://www.linkedin.com/company/yourbusiness',
-      ],
-      knowsAbout: [
-        'Service Category 1',
-        'Service Category 2',
-        'Service Category 3',
-        'Industry Best Practices',
-        'Local Area Expertise',
-      ],
-      offerCatalog: [
-        {
-          name: 'Primary Service',
-          description: 'Our main service offering for residential and commercial clients',
-          url: '/services/primary-service',
-        },
-        {
-          name: 'Secondary Service',
-          description: 'Complementary service that enhances our primary offering',
-          url: '/services/secondary-service',
-        },
-        {
-          name: 'Service Three',
-          description: 'Specialized service for unique client needs',
-          url: '/services/service-three',
-        },
-      ],
+      // No public opening hours for a racing team — left empty; the
+      // schema generator omits openingHoursSpecification entirely when
+      // this array is empty.
+      openingHours: [],
+      // Not a location-based service business — left empty rather than
+      // inventing an area served.
+      areaServed: [],
+      socialProfiles: ['https://www.instagram.com/npracingbsb/'],
+      // No services/products catalog — merchandise is sold via an
+      // external store (The Clothing Kings), not an on-site catalog.
     },
   },
 
+  racing: {
+    teamName: 'NP Racing',
+    base: 'Taunton, Somerset',
+    championship:
+      'British Superbike Championship (branded the ZYN British Superbike Championship in 2026)',
+    manufacturer: 'Honda',
+    raceNumber: 51,
+    rider: {
+      name: 'Brayden Elliott',
+      joined: 'Returned to the BSB grid with NP Racing from the Knockhill round, June 2026',
+    },
+    owner: {
+      name: 'Neil Pearson',
+      company: 'NP Motorcycles',
+    },
+    social: {
+      instagramHandle: '@npracingbsb',
+      instagramUrl: 'https://www.instagram.com/npracingbsb/',
+    },
+    merchandiseStoreUrl: 'https://www.theclothingkings.co.uk/category/partnerships/npracing/',
+  },
+
   about: {
-    heroBadges: ['Est. 2020', 'Local Experts', 'Fully Insured'],
+    heroBadges: ['BSB Since 2004', 'Honda Machinery', 'Taunton, Somerset'],
     story: [
-      'Founded in 2020, Your Business Name was built on a simple promise: deliver professional, reliable service that our customers can count on every time.',
-      'From our base in City Name, we serve residential and commercial clients across Main Area, North Region, and South Region. Every project, large or small, receives the same dedication to quality.',
-      'Today we are proud to be a trusted local business — known for honest pricing, skilled workmanship, and the kind of service that earns referrals from neighbours and friends.',
+      'NP Racing is a private British Superbike (BSB) team run by Neil Pearson, based in Taunton, Somerset. The team has been involved in racing and the British Superbike paddock since 2004, with its first full season in the premier Superbike class arriving in 2020.',
+      'For the 2026 season, NP Racing competes with Honda machinery and continues developing young talent — Brayden Elliott returned to the BSB grid with the team from the Knockhill round in June 2026.',
+      'The team is run by Neil Pearson, founder of NP Motorcycles. Under his leadership the business has expanded from a motorcycle servicing and workshop operation into a recognised name in British motorcycle racing.',
     ],
-    whyChooseUs: [
-      'Fully insured with comprehensive public liability cover',
-      'Free quotes and consultations',
-      'Competitive, transparent pricing',
-      'Quality workmanship guaranteed',
-      'Professional, uniformed team',
-      'Clear communication throughout',
-      'Flexible scheduling to suit you',
-      'Comprehensive aftercare and support',
-    ],
+    // Repurposed honestly from the brief's "Reputation" section — not the
+    // sales-oriented "why choose us" framing a local trade site would use.
     values: [
       {
-        title: 'Quality First',
-        description:
-          'We maintain the highest standards in everything we do, ensuring exceptional results for every project.',
+        title: 'Developing Riders',
+        description: 'A track record of bringing on young talent within the BSB paddock.',
       },
       {
-        title: 'Professional Excellence',
-        description:
-          'Our team is fully qualified and continuously trained to deliver professional service.',
+        title: 'Professionally Prepared Machinery',
+        description: 'Running well-prepared Honda Fireblades on track, round after round.',
       },
       {
-        title: 'Reliable Service',
+        title: 'Family-Style Operation',
         description:
-          'We arrive on time, complete projects efficiently, and communicate clearly throughout.',
+          'A close-knit team with experienced technicians, not a corporate factory outfit.',
       },
       {
-        title: 'Customer Focus',
+        title: 'Punching Above Its Weight',
         description:
-          'Your satisfaction is our priority. We listen to your needs and deliver tailored solutions.',
+          'Competing without the budget of factory-backed teams like Honda Racing UK, Ducati PBM or McAMS Yamaha — and holding its own against them.',
       },
     ],
   },

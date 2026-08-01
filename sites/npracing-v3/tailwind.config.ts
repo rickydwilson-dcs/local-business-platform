@@ -38,6 +38,18 @@ const config: Config = {
           'on-inverse': 'var(--color-surface-background)',
         },
       },
+      keyframes: {
+        // Infinite ticker ribbon — the track holds two identical copies of the
+        // content, so translating by -50% loops seamlessly.
+        marquee: {
+          from: { transform: 'translateX(0)' },
+          to: { transform: 'translateX(-50%)' },
+        },
+      },
+      animation: {
+        marquee: 'marquee 26s linear infinite',
+        'marquee-fast': 'marquee 18s linear infinite',
+      },
     },
   },
   plugins: [typography, createThemePlugin(themeConfig)],
