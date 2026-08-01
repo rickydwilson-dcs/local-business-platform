@@ -24,6 +24,20 @@ export const BrandFrontmatterSchema = z.object({
     alt: z.string(),
   }),
   foundedYear: z.number().int().optional(),
+
+  /**
+   * Homepage poster copy. Optional so the record stays valid without them and
+   * so adding them doesn't change the singleton's validation contract — but
+   * they exist so the homepage hero pulls its team copy from this MDX record
+   * rather than hardcoding prose in a component. Components fall back to
+   * composing a headline from the structured fields above when absent.
+   */
+  heroHeadline: z.string().optional(),
+  /** Second headline line, rendered with the red highlight treatment. */
+  heroHeadlineAccent: z.string().optional(),
+  heroIntro: z.string().optional(),
+  /** Headline for the team/about block on the homepage. */
+  teamHeadline: z.string().optional(),
 });
 
 export type BrandFrontmatter = z.infer<typeof BrandFrontmatterSchema>;

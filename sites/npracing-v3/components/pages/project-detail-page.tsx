@@ -63,7 +63,9 @@ export function ProjectDetailPage({
                 <ul className="space-y-3">
                   {frontmatter.outcomes.map((outcome, index) => (
                     <li key={index} className="flex items-start gap-3">
-                      <span className="text-brand-primary mt-1 flex-shrink-0">&#10003;</span>
+                      <span className="text-brand-primary mt-1 flex-shrink-0" aria-hidden="true">
+                        ✓
+                      </span>
                       <span className="text-surface-muted-foreground">{outcome}</span>
                     </li>
                   ))}
