@@ -3,14 +3,13 @@
 /**
  * Content Validation Script
  *
- * Validates all MDX files in content/services/ and content/locations/
+ * Validates all MDX files in content/{services,locations,merch,news,brand}/
  * against their respective Zod schemas to catch content errors before
- * they reach production.
+ * they reach production. merch/news/brand additionally enforce a fixed
+ * expected record count (see EXPECTED_COUNTS below).
  *
  * Usage:
- *   npm run validate:content
- *   npm run validate:services
- *   npm run validate:locations
+ *   pnpm run validate-content [all|services|locations|merch|news|brand]
  */
 
 import fs from 'fs';
@@ -18,7 +17,18 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import matter from 'gray-matter';
 import { ServiceFrontmatterSchema, LocationFrontmatterSchema } from '@platform/core-components';
+import { MerchFrontmatterSchema } from '../lib/schemas/merch';
+import { NewsFrontmatterSchema } from '../lib/schemas/news';
+import { BrandFrontmatterSchema } from '../lib/schemas/brand';
 import { z } from 'zod';
+
+// Content types with a fixed, known-good record count — a wrong count means
+// content was silently added/removed/duplicated without deliberate review.
+const EXPECTED_COUNTS: Record<string, number> = {
+  merch: 8,
+  news: 2,
+  brand: 1,
+};
 
 // ANSI color codes for terminal output
 const colors = {
@@ -39,11 +49,7 @@ interface ValidationResult {
 /**
  * Validate a single MDX file against a Zod schema
  */
-function validateFile(
-  filePath: string,
-  schema: typeof ServiceFrontmatterSchema | typeof LocationFrontmatterSchema,
-  type: 'service' | 'location'
-): ValidationResult {
+function validateFile(filePath: string, schema: z.ZodTypeAny): ValidationResult {
   const fileName = path.basename(filePath);
 
   try {
@@ -83,17 +89,39 @@ function validateFile(
 /**
  * Validate all MDX files in a directory
  */
-function validateDirectory(
-  dirPath: string,
-  schema: typeof ServiceFrontmatterSchema | typeof LocationFrontmatterSchema,
-  type: 'service' | 'location'
-): ValidationResult[] {
+function validateDirectory(dirPath: string, schema: z.ZodTypeAny): ValidationResult[] {
   const files = fs
     .readdirSync(dirPath)
     .filter((file) => file.endsWith('.mdx'))
     .map((file) => path.join(dirPath, file));
 
-  return files.map((file) => validateFile(file, schema, type));
+  return files.map((file) => validateFile(file, schema));
+}
+
+/**
+ * Validate a content type against a fixed expected record count (merch/news/brand
+ * are real, curated content — a wrong count means content silently drifted).
+ */
+function validateCountedType(contentDir: string, typeName: string, schema: z.ZodTypeAny): boolean {
+  const dirPath = path.join(contentDir, typeName);
+  const expected = EXPECTED_COUNTS[typeName];
+
+  if (!fs.existsSync(dirPath)) {
+    console.error(`${colors.red}Error: ${typeName} directory not found: ${dirPath}${colors.reset}`);
+    return false;
+  }
+
+  const results = validateDirectory(dirPath, schema);
+  const valid = printResults(results, typeName[0].toUpperCase() + typeName.slice(1));
+
+  if (results.length !== expected) {
+    console.log(
+      `${colors.red}✗ Expected exactly ${expected} ${typeName} record(s), found ${results.length}${colors.reset}\n`
+    );
+    return false;
+  }
+
+  return valid;
 }
 
 /**
@@ -151,7 +179,7 @@ function printResults(results: ValidationResult[], type: string): boolean {
  */
 function main() {
   const args = process.argv.slice(2);
-  const mode = args[0] || 'all'; // 'all', 'services', or 'locations'
+  const mode = args[0] || 'all'; // 'all', 'services', 'locations', 'merch', 'news', or 'brand'
 
   const contentDir = path.join(process.cwd(), 'content');
   const servicesDir = path.join(contentDir, 'services');
@@ -168,7 +196,7 @@ function main() {
       process.exit(1);
     }
 
-    const serviceResults = validateDirectory(servicesDir, ServiceFrontmatterSchema, 'service');
+    const serviceResults = validateDirectory(servicesDir, ServiceFrontmatterSchema);
     const servicesValid = printResults(serviceResults, 'Services');
     allValid = allValid && servicesValid;
   }
@@ -182,9 +210,24 @@ function main() {
       process.exit(1);
     }
 
-    const locationResults = validateDirectory(locationsDir, LocationFrontmatterSchema, 'location');
+    const locationResults = validateDirectory(locationsDir, LocationFrontmatterSchema);
     const locationsValid = printResults(locationResults, 'Locations');
     allValid = allValid && locationsValid;
+  }
+
+  // Validate merch (exactly 8 records expected)
+  if (mode === 'all' || mode === 'merch') {
+    allValid = validateCountedType(contentDir, 'merch', MerchFrontmatterSchema) && allValid;
+  }
+
+  // Validate news (exactly 2 records expected)
+  if (mode === 'all' || mode === 'news') {
+    allValid = validateCountedType(contentDir, 'news', NewsFrontmatterSchema) && allValid;
+  }
+
+  // Validate brand (exactly 1 record expected)
+  if (mode === 'all' || mode === 'brand') {
+    allValid = validateCountedType(contentDir, 'brand', BrandFrontmatterSchema) && allValid;
   }
 
   // Exit with appropriate code
