@@ -16,9 +16,11 @@ import { MerchCta } from '@/components/sections/merch-cta';
  * Round 2): poster hero -> credentials strip -> restructured team block ->
  * value strip -> rider poster -> gallery -> merch band.
  *
- * All team copy comes from `content/brand/npracing.mdx` (hero lines and the
- * narrative body) or from site.config.ts's verified facts. Nothing about the
- * team is written into this file.
+ * All team copy comes from `content/brand/npracing.mdx` (hero lines) or from
+ * site.config.ts's verified facts, EXCEPT the team-block paragraphs below,
+ * which are a condensed homepage-specific teaser matching the approved
+ * mockup's exact copy — the full narrative body of npracing.mdx renders
+ * separately on /about, where the longer form is correct.
  */
 export interface HomePageProps {
   /** JSON-LD script nodes supplied by the route. */
@@ -26,7 +28,7 @@ export interface HomePageProps {
 }
 
 export async function HomePage({ schemaNodes }: HomePageProps) {
-  const { frontmatter: brand, content: brandNarrative } = await getBrandRecord();
+  const { frontmatter: brand } = await getBrandRecord();
 
   const eyebrow = `${siteConfig.racing.base} · Est. ${siteConfig.credentials.yearEstablished}`;
 
@@ -42,7 +44,17 @@ export async function HomePage({ schemaNodes }: HomePageProps) {
         heading={brand.teamHeadline ?? `Run by ${siteConfig.racing.owner.name}.`}
         imageAlt={`${brand.teamName} crew on the grid with rider #${brand.raceNumber} under the team umbrella`}
       >
-        {brandNarrative}
+        <p>
+          <strong>{brand.teamName}</strong> is a private British Superbike team based in Taunton,
+          Somerset, led by <strong>Neil Pearson</strong> &mdash; founder of NP Motorcycles. Since
+          2004 the business has grown from a motorcycle servicing workshop into a recognised
+          independent name in the BSB paddock.
+        </p>
+        <p>
+          Without the budget of factory-backed outfits like Honda Racing UK, Ducati PBM or McAMS
+          Yamaha, {brand.teamName} has earned its reputation the hard way &mdash; developing riders,
+          running professionally prepared machinery, and staying close-knit.
+        </p>
       </TeamBlock>
 
       <ValueStrip

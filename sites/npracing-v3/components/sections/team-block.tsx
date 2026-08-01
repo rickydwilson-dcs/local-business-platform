@@ -7,9 +7,9 @@ import { SectionTag } from '@/components/ui/section-tag';
  * TeamBlock — the restructured team section from Round 2 of the design review.
  *
  * Photograph on the left, editorial copy on the right, one hairline box around
- * the pair, hard against the credentials strip above it. The narrative is the
- * rendered body of `content/brand/npracing.mdx` — no team prose is written into
- * this component.
+ * the pair, hard against the credentials strip above it. Generic over its
+ * `children` — the homepage passes a condensed teaser matching the approved
+ * mockup, while /about passes the full rendered MDX narrative.
  */
 export interface TeamBlockProps {
   heading: string;

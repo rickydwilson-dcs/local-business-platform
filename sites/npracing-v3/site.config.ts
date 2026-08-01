@@ -305,26 +305,27 @@ export const siteConfig: SiteConfig = {
     // "In the BSB paddock since 2004" per brief; first full Superbike
     // season came later, in 2020.
     yearEstablished: '2004',
+    // Order and labels match the approved mockup exactly (design-03-number51.html).
     stats: [
       {
         value: '2004',
-        label: 'In the BSB Paddock',
+        label: 'Paddock since',
         description: 'Racing and team involvement since 2004',
       },
       {
-        value: '#51',
-        label: 'Race Number',
-        description: "Brayden Elliott's number on track",
-      },
-      {
         value: '2020',
-        label: 'First Full Superbike Season',
+        label: 'First full BSB season',
         description: "NP Racing's debut season in the premier class",
       },
       {
         value: 'Honda',
-        label: 'Machinery',
+        label: 'Fireblade machinery',
         description: 'Professionally prepared Honda Fireblades',
+      },
+      {
+        value: '#51',
+        label: '2026 race number',
+        description: "Brayden Elliott's number on track",
       },
     ],
     // No certifications/accreditations apply to a racing team — left empty
@@ -398,7 +399,8 @@ export const siteConfig: SiteConfig = {
     raceNumber: 51,
     rider: {
       name: 'Brayden Elliott',
-      joined: 'Returned to the BSB grid with NP Racing from the Knockhill round, June 2026',
+      joined:
+        "Brayden returned to the BSB grid with NP Racing from the Knockhill round in June 2026, riding the team's Honda Fireblade. Full season history and results to follow.",
     },
     owner: {
       name: 'Neil Pearson',
@@ -418,26 +420,23 @@ export const siteConfig: SiteConfig = {
       'For the 2026 season, NP Racing competes with Honda machinery and continues developing young talent — Brayden Elliott returned to the BSB grid with the team from the Knockhill round in June 2026.',
       'The team is run by Neil Pearson, founder of NP Motorcycles. Under his leadership the business has expanded from a motorcycle servicing and workshop operation into a recognised name in British motorcycle racing.',
     ],
-    // Repurposed honestly from the brief's "Reputation" section — not the
-    // sales-oriented "why choose us" framing a local trade site would use.
+    // Matches the approved mockup's value-strip copy exactly (design-03-number51.html).
     values: [
       {
-        title: 'Developing Riders',
-        description: 'A track record of bringing on young talent within the BSB paddock.',
+        title: 'Developing riders',
+        description: 'A genuine shot on the BSB grid for young talent.',
       },
       {
-        title: 'Professionally Prepared Machinery',
-        description: 'Running well-prepared Honda Fireblades on track, round after round.',
+        title: 'Pro-prepared Hondas',
+        description: 'Professional standard, race after race.',
       },
       {
-        title: 'Family-Style Operation',
-        description:
-          'A close-knit team with experienced technicians, not a corporate factory outfit.',
+        title: 'Family operation',
+        description: 'Experienced technicians, close-knit crew.',
       },
       {
-        title: 'Punching Above Its Weight',
-        description:
-          'Competing without the budget of factory-backed teams like Honda Racing UK, Ducati PBM or McAMS Yamaha — and holding its own against them.',
+        title: 'Punching above weight',
+        description: 'Competitive against bigger-budget teams.',
       },
     ],
   },

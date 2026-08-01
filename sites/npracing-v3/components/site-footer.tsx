@@ -14,15 +14,17 @@ import { InstagramIcon } from '@/components/ui/icons';
  * phone number or street address, so neither is shown.
  */
 const TEAM_LINKS = [
-  { label: 'The team', href: '/#team' },
+  { label: 'About', href: '/#team' },
   { label: 'Rider', href: '/#rider' },
   { label: 'Gallery', href: '/#gallery' },
 ];
 
+// Matches the approved mockup's "More" column exactly. "Races" is a proposed
+// upsell page the client hasn't asked for yet (see project brief) — the link
+// is a placeholder, same as in the mockup, not a broken build artifact.
 const MORE_LINKS = [
   { label: 'News', href: '/news' },
-  { label: 'Merchandise', href: '/merch' },
-  { label: 'Contact', href: '/contact' },
+  { label: 'Races', href: '#' },
 ];
 
 const LEGAL_LINKS = [
@@ -75,13 +77,6 @@ export async function SiteFooter() {
                   </Link>
                 </li>
               ))}
-              {LEGAL_LINKS.map((link) => (
-                <li key={link.href}>
-                  <Link href={link.href} className={FOOTER_LINK_CLASSES}>
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
             </ul>
           </div>
 
@@ -104,7 +99,13 @@ export async function SiteFooter() {
                   <span className="sr-only"> (opens in a new tab)</span>
                 </a>
               </li>
-              <li className="text-small text-surface-tertiary">{siteConfig.racing.base}</li>
+              {LEGAL_LINKS.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href} className={FOOTER_LINK_CLASSES}>
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
