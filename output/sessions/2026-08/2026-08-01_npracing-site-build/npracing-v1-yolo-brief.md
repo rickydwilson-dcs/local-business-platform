@@ -682,3 +682,25 @@ After completing all phases, append to `output/sessions/2026-08/2026-08-01_nprac
 - The Co-Authored-By line in commits must reflect the **orchestrator** model (the committer) — not the per-phase sub-agent tier.
 - Every phase that changes code ends with its own commit, `feat(npracing-v1): <phase description>` or `test(npracing-v1): <phase description>` for Phase 8.
 - **Real-data rule:** Phase 4's re-verification MUST hit the actual retailer/BSB URLs, not skip straight to "assume it's fine" — an autonomous session with no live check would otherwise ship stale/possibly-wrong client-facing prices and claims.
+
+---
+
+## Completed
+
+**Date:** 2026-08-01
+**Status:** All phases executed successfully (resumed from Phase 4; Phases 1-3 had already been committed in a prior session)
+
+Phases 4 through 8 were executed as specified. Phase 4 re-verified all 8 merch products and 2 news articles against live retailer/BSB sources (zero discrepancies found) and resolved the image pipeline as placeholder-provisional (no R2 credentials in this environment), producing a full asset manifest for later real upload. Phase 5 (opus) rewrote `theme.config.ts` to the approved Grid Box palette and built all required local components; its sub-agent's connection dropped once mid-task and was resumed via `SendMessage` to the same agent ID rather than restarted, preserving its prior work. Phase 6 wired `/merch` and rebuilt `/about`, and — while doing so — surfaced that Phase 2's site-config adaptation had left substantial fabricated placeholder data live on real pages (homepage `<title>` literally read "Your Business Name", fake London geo coordinates, a broken `/logo.svg` OG reference, dead `/services`/`/locations` nav links, and a LocalBusiness JSON-LD block asserting a fake address/phone). This was fixed as part of Phase 6 rather than reopening Phase 2, since it was a direct, live consequence of the routes/metadata this phase already owned, and Phase 2's own gate contract explicitly forbade invented business data. The platform's schema-generator types have no `SportsTeam` business type and require a fixed address/phone/hours, so the LocalBusiness JSON-LD block was dropped entirely rather than filled with invented values — a deliberate "note the known limitation, don't over-engineer a fix" call per this repo's philosophy. The orchestrator also directly fixed two small dangling-reference items the removal sub-agent flagged but left alone (`app/sitemap.ts` and `app/not-found.tsx` still linked to deleted services/locations/reviews routes and rendered a fake phone number). One known placeholder-data item remains out of scope: `app/privacy-policy/page.tsx` still displays the same fake phone number via `lib/contact-info.ts`; this is legal boilerplate text, not part of this brief's route list, and was left for a future pass. Phase 7's accessibility/responsiveness/architecture sweep found no live defects — all 6 route types passed console-error, heading-hierarchy, focus-visible, mobile-overflow, reduced-motion, and external-link checks; one piece of dead CSS (`.mobile-menu-close`, unused on any live page) was flagged but not touched. Phase 8's final gates (validate-content ×3, type-check, lint, build) all passed with zero changes needed, so no no-op commit was created for that phase per the harness's no-empty-commit rule.
+
+### Commits
+
+- `12af1cc8` feat(npracing-v1): adapt site.config.ts and theme.config.ts registry for NPRacing (Phase 2, prior session)
+- `53e6f70c` feat(npracing-v1): add merch content type with 8 real product records (Phase 3, prior session)
+- `7dbb18b2` feat(npracing-v1): add brand content type as schema-validated MDX singleton (Phase 3, prior session)
+- `4061fb3d` feat(npracing-v1): add news content type with 2 real article records (Phase 3, prior session)
+- `c8bca683` feat(npracing-v1): wire validate-content script for merch/news/brand (Phase 3, prior session)
+- `4d52e932` feat(npracing-v1): re-verify content and resolve image pipeline as placeholder (Phase 4)
+- `32991ae0` feat(npracing-v1): build Grid Box theme tokens and dark race-team components (Phase 5)
+- `a9edf07d` feat(npracing-v1): wire routes/metadata, drop fabricated business data, remove base-template leftovers (Phase 6)
+- Phase 7: no commit (clean sweep, no fixes required)
+- Phase 8: no commit (all gates passed with nothing uncommitted; no-op commit skipped per no-empty-commit policy)
