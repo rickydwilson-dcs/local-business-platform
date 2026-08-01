@@ -1,9 +1,11 @@
 /**
- * Base Template Site Configuration
+ * NPRacing Site Configuration
  *
- * Generic placeholder configuration for a local service business.
- * Copy this file when creating a new site and replace all placeholder values
- * with actual business information.
+ * British Superbike (BSB) race team, not a local service business —
+ * adapted from base-template's SiteConfig shape. Fields that don't apply
+ * to a racing team (serviceAreas, services) are left empty rather than
+ * filled with placeholder local-service data. NPRacing-specific fields
+ * live in the local `RacingConfig` extension type / `racing` field below.
  */
 
 import type { BaseSiteConfig } from '@platform/core-components/types/site-config';
@@ -66,6 +68,34 @@ export interface ServiceAreaRegion {
   towns: Array<{ name: string; slug: string }>;
 }
 
+/**
+ * NPRacing-specific fields (British Superbike race team).
+ *
+ * Local extension type — not part of the shared `BaseSiteConfig` /
+ * `@platform/core-components` contract, since none of these fields are
+ * meaningful for the platform's usual local-service-business sites.
+ */
+export interface RacingConfig {
+  /** Team name as used in BSB paddock materials. */
+  teamName: string;
+  /** Championship the team competes in. */
+  championship: string;
+  /** Race number carried on the bike (BSB rider #51 for the 2026 season). */
+  raceNumber: number;
+  rider: {
+    name: string;
+  };
+  instagram: {
+    handle: string;
+    url: string;
+  };
+  /**
+   * Merch store base URL (The Clothing Kings partnership storefront).
+   * TODO: confirm this is the final live URL before launch.
+   */
+  merchStoreUrl?: string;
+}
+
 export interface SiteConfig extends BaseSiteConfig {
   /** Site name and branding */
   name: string;
@@ -76,7 +106,14 @@ export interface SiteConfig extends BaseSiteConfig {
   business: {
     name: string;
     legalName: string;
-    type: 'LocalBusiness' | 'ProfessionalService' | 'HomeAndConstructionBusiness';
+    /**
+     * Local, descriptive type — NOT the schema.org type used for JSON-LD
+     * (see `schema.businessType` below, which is constrained to the shared
+     * `LocalBusinessSchemaOptions` union and does not include `SportsTeam`).
+     * This field is declared locally in this file, so it's safe to widen it
+     * for site-specific descriptive purposes.
+     */
+    type: 'LocalBusiness' | 'ProfessionalService' | 'HomeAndConstructionBusiness' | 'SportsTeam';
     phone: string;
     email: string;
     address: {
@@ -150,6 +187,9 @@ export interface SiteConfig extends BaseSiteConfig {
     businessType: LocalBusinessSchemaOptions['businessType'];
   };
 
+  /** NPRacing-specific fields (see RacingConfig) */
+  racing: RacingConfig;
+
   /** Optional rich about page content */
   about?: {
     /** Short badges/tags shown in the hero (e.g. "Est. 2009", "Family Business") */
@@ -167,18 +207,21 @@ export interface SiteConfig extends BaseSiteConfig {
 }
 
 export const siteConfig: SiteConfig = {
-  slug: 'base-template',
-  domain: 'localhost',
-  name: 'Base Template Site',
+  slug: 'npracing-v1',
+  // PENDING/UNCONFIRMED: no production domain has been confirmed yet for
+  // NPRacing. Using the Vercel preview domain as a placeholder until a real
+  // domain is purchased and confirmed.
+  domain: 'npracing-v1.vercel.app',
+  name: 'NPRacing',
   tagline: 'Professional Local Services',
   url: process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000',
 
   business: {
     name: 'Your Business Name',
     legalName: 'Your Business Ltd',
-    type: 'LocalBusiness',
+    type: 'SportsTeam',
     phone: '+44 1234 567890',
-    email: 'info@example.com',
+    email: 'npracingbsb@hotmail.com',
     address: {
       street: '123 Main Street',
       city: 'City Name',
@@ -227,8 +270,11 @@ export const siteConfig: SiteConfig = {
   },
 
   footer: {
-    showServices: true,
-    showLocations: true,
+    // NPRacing has no services/locations content (not a local service
+    // business) — these are the location/service-oriented flags that don't
+    // apply to this site, per the base-template's local-service model.
+    showServices: false,
+    showLocations: false,
     maxServices: 10,
     maxLocations: 12,
     copyright: '2025 Your Business Name. All rights reserved.',
@@ -256,25 +302,12 @@ export const siteConfig: SiteConfig = {
     },
   },
 
-  serviceAreas: ['Main Area', 'North Region', 'South Region'],
+  // NPRacing is a BSB race team, not a local service business — no service
+  // areas or services to list. Left as empty arrays rather than fabricated
+  // placeholder data (the type does not allow omitting these fields).
+  serviceAreas: [],
 
-  services: [
-    {
-      title: 'Primary Service',
-      slug: 'primary-service',
-      description: 'Our flagship service offering for residential and commercial clients.',
-    },
-    {
-      title: 'Secondary Service',
-      slug: 'secondary-service',
-      description: 'Complementary service that enhances our primary offering.',
-    },
-    {
-      title: 'Service Three',
-      slug: 'service-three',
-      description: 'Specialized service for unique client needs.',
-    },
-  ],
+  services: [],
 
   features: {
     analytics: false,
@@ -358,6 +391,21 @@ export const siteConfig: SiteConfig = {
         },
       ],
     },
+  },
+
+  racing: {
+    teamName: 'NPRacing',
+    championship: 'British Superbike Championship (BSB)',
+    raceNumber: 51,
+    rider: {
+      name: 'Brayden Elliott',
+    },
+    instagram: {
+      handle: '@npracingbsb',
+      url: 'https://www.instagram.com/npracingbsb',
+    },
+    // Confirmed URL from brief materials (The Clothing Kings partnership storefront).
+    merchStoreUrl: 'https://www.theclothingkings.co.uk/category/partnerships/npracing/',
   },
 
   about: {

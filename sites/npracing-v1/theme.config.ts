@@ -62,9 +62,19 @@ export const themeConfig: DeepPartialThemeConfig = {
 };
 
 export const registry: ComponentRegistry = {
-  theme: 'vega',
-  heroVariant: 'split',
-  headerVariant: 'light',
+  // `theme` is a closed ThemeName union (packages/themes/*), not a free
+  // string — this site does not import from @platform/themes/* at runtime
+  // (self-contained, per root CLAUDE.md), so this is purely a lineage/
+  // classification label. 'orion' is documented as "dark header, full-bleed
+  // hero, circular icons (industrial style)" — the closest existing match
+  // to NPRacing's full-bleed cinematic dark hero, same pattern as
+  // sites/dch-automotive labelling itself 'lyra'.
+  theme: 'orion',
+  // Closest valid ComponentRegistry enum values to a full-bleed cinematic
+  // dark hero: 'image-overlay' (no 'full-bleed' option exists) + 'dark'
+  // header, matching the pattern used by sites/dch-automotive's registry.
+  heroVariant: 'image-overlay',
+  headerVariant: 'dark',
   cardVariant: 'standard',
   sectionVariant: 'standard',
 };
