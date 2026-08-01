@@ -8,13 +8,26 @@ import { ConsentManager } from '@platform/core-components/components/analytics/C
 import { Analytics } from '@platform/core-components/components/analytics/Analytics';
 import { AnalyticsDebugPanel } from '@platform/core-components/components/analytics/AnalyticsDebugPanel';
 
+/**
+ * NEXT_PUBLIC_SITE_URL is operator-set (Vercel dashboard) and unvalidated —
+ * a malformed value must not crash the build. Falls back to localhost rather
+ * than throwing.
+ */
+function safeMetadataBase(url: string): URL {
+  try {
+    return new URL(url);
+  } catch {
+    return new URL('http://localhost:3000');
+  }
+}
+
 export const metadata: Metadata = {
   title: {
     default: siteConfig.name,
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.tagline,
-  metadataBase: new URL(siteConfig.url),
+  metadataBase: safeMetadataBase(siteConfig.url),
   openGraph: {
     type: 'website',
     locale: 'en_GB',
