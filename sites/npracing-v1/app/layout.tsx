@@ -9,32 +9,40 @@ import { ConsentManager } from '@platform/core-components/components/analytics/C
 import { Analytics } from '@platform/core-components/components/analytics/Analytics';
 import { AnalyticsDebugPanel } from '@platform/core-components/components/analytics/AnalyticsDebugPanel';
 
-export const metadata: Metadata = {
-  title: {
-    default: siteConfig.name,
-    template: `%s | ${siteConfig.name}`,
-  },
-  description: siteConfig.tagline,
-  metadataBase: new URL(siteConfig.url),
-  openGraph: {
-    type: 'website',
-    locale: 'en_GB',
-    siteName: siteConfig.name,
-    url: siteConfig.url,
-    images: [
-      {
-        url: '/logo.svg',
-        width: 1200,
-        height: 630,
-        alt: siteConfig.name,
-      },
-    ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    images: ['/logo.svg'],
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  // `/logo.svg` does not exist in public/ (confirmed — no .svg files there).
+  // Reuse the same placehold.co placeholder content/brand/npracing.mdx already
+  // uses for logo.src (no R2 credentials available yet, see Phase 4) so there
+  // is only one broken-vs-working image source decision across the site.
+  const { frontmatter: brand } = await getBrandContent();
+
+  return {
+    title: {
+      default: siteConfig.name,
+      template: `%s | ${siteConfig.name}`,
+    },
+    description: siteConfig.tagline,
+    metadataBase: new URL(siteConfig.url),
+    openGraph: {
+      type: 'website',
+      locale: 'en_GB',
+      siteName: siteConfig.name,
+      url: siteConfig.url,
+      images: [
+        {
+          url: brand.logo.src,
+          width: 1200,
+          height: 630,
+          alt: siteConfig.name,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      images: [brand.logo.src],
+    },
+  };
+}
 
 export const viewport: Viewport = {
   width: 'device-width',

@@ -213,11 +213,12 @@ export const siteConfig: SiteConfig = {
   // domain is purchased and confirmed.
   domain: 'npracing-v1.vercel.app',
   name: 'NPRacing',
-  tagline: 'Professional Local Services',
+  // Matches content/brand/npracing.mdx's `tagline` frontmatter field exactly.
+  tagline: 'An independent Honda team punching above its weight in British Superbike',
   url: process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000',
 
   business: {
-    name: 'Your Business Name',
+    name: 'NPRacing',
     legalName: 'Your Business Ltd',
     type: 'SportsTeam',
     phone: '+44 1234 567890',
@@ -243,17 +244,19 @@ export const siteConfig: SiteConfig = {
       twitter: 'https://twitter.com/yourbusiness',
       instagram: 'https://instagram.com/yourbusiness',
     },
-    geo: {
-      latitude: 51.5074,
-      longitude: -0.1278,
-    },
+    // No confirmed public street address/geo for NPRacing (team is based in
+    // Taunton, Somerset per brand.mdx, but no exact coordinates were ever
+    // confirmed) — omitted rather than emitting fake London coordinates.
+    // `geo` is optional; app/layout.tsx's `{siteConfig.business.geo && (...)}`
+    // guard already handles it being absent.
   },
 
   navigation: {
     main: [
-      { label: 'Services', href: '/services' },
-      { label: 'Locations', href: '/locations', hasDropdown: true },
+      { label: 'Home', href: '/' },
       { label: 'About', href: '/about' },
+      { label: 'Merch', href: '/merch' },
+      { label: 'News', href: '/news' },
       { label: 'Contact', href: '/contact' },
     ],
   },

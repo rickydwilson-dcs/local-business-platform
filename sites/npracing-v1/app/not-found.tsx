@@ -7,8 +7,8 @@
  */
 
 import Link from 'next/link';
-import { Home, ArrowLeft, Phone, Mail } from 'lucide-react';
-import { PHONE_DISPLAY, PHONE_TEL, BUSINESS_EMAIL } from '@/lib/contact-info';
+import { Home, ArrowLeft, Mail } from 'lucide-react';
+import { BUSINESS_EMAIL } from '@/lib/contact-info';
 
 export default function NotFound() {
   return (
@@ -46,13 +46,6 @@ export default function NotFound() {
           <h3 className="font-semibold text-surface-foreground mb-4">Need Help?</h3>
           <div className="space-y-3 text-sm">
             <Link
-              href={`tel:${PHONE_TEL}`}
-              className="flex items-center justify-center gap-2 text-brand-primary hover:underline"
-            >
-              <Phone className="w-4 h-4" />
-              {PHONE_DISPLAY}
-            </Link>
-            <Link
               href={`mailto:${BUSINESS_EMAIL}`}
               className="flex items-center justify-center gap-2 text-brand-primary hover:underline"
             >
@@ -67,22 +60,22 @@ export default function NotFound() {
           <h3 className="font-semibold text-surface-foreground mb-4">Popular Pages</h3>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto">
             <Link
-              href="/services"
-              className="block p-4 bg-white rounded-lg border border-surface-border hover:border-brand-primary hover:shadow-sm transition-all"
-            >
-              <span className="font-medium text-surface-foreground">Services</span>
-            </Link>
-            <Link
-              href="/locations"
-              className="block p-4 bg-white rounded-lg border border-surface-border hover:border-brand-primary hover:shadow-sm transition-all"
-            >
-              <span className="font-medium text-surface-foreground">Locations</span>
-            </Link>
-            <Link
               href="/about"
               className="block p-4 bg-white rounded-lg border border-surface-border hover:border-brand-primary hover:shadow-sm transition-all"
             >
               <span className="font-medium text-surface-foreground">About</span>
+            </Link>
+            <Link
+              href="/merch"
+              className="block p-4 bg-white rounded-lg border border-surface-border hover:border-brand-primary hover:shadow-sm transition-all"
+            >
+              <span className="font-medium text-surface-foreground">Merch</span>
+            </Link>
+            <Link
+              href="/news"
+              className="block p-4 bg-white rounded-lg border border-surface-border hover:border-brand-primary hover:shadow-sm transition-all"
+            >
+              <span className="font-medium text-surface-foreground">News</span>
             </Link>
             <Link
               href="/contact"

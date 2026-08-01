@@ -2,10 +2,7 @@
  * Core Sitemap — static pages only.
  *
  * Section-specific sitemaps handle dynamic content:
- * - /services/sitemap.xml
- * - /locations/sitemap.xml
- * - /blog/sitemap.xml
- * - /projects/sitemap.xml
+ * - /news/sitemap.xml
  *
  * Submit /sitemap-index.xml to Google Search Console.
  */
@@ -24,13 +21,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
     },
     {
-      url: `${baseUrl}/services`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/locations`,
+      url: `${baseUrl}/merch`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.9,
@@ -46,12 +37,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/reviews`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly' as const,
-      priority: 0.7,
     },
     {
       url: `${baseUrl}/privacy-policy`,

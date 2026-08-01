@@ -7,7 +7,6 @@ export const {
   getWebSiteSchema,
   getBreadcrumbSchema,
   getFAQSchema,
-  getServiceAreaSchema,
   getArticleSchema,
   getAggregateRatingSchema,
 } = createSchemaGenerators({ absUrl, businessConfig, businessType });

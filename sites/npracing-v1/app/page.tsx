@@ -3,47 +3,61 @@ import { HomePage } from '@/components/pages/home-page';
 import { siteConfig } from '@/site.config';
 import { getBrandContent } from '@/lib/brand';
 import { absUrl } from '@/lib/site';
-import { getLocalBusinessSchema } from '@/lib/schema';
 
-export const metadata: Metadata = {
-  title: `${siteConfig.business.name} | ${siteConfig.tagline}`,
-  description:
-    'Professional local services tailored to your needs. Quality workmanship, competitive pricing, and excellent customer service.',
-  openGraph: {
-    title: `${siteConfig.business.name} | ${siteConfig.tagline}`,
-    description:
-      'Professional local services tailored to your needs. Quality workmanship, competitive pricing, and excellent customer service.',
-    url: absUrl('/'),
-    siteName: siteConfig.name,
-    images: [
-      {
-        url: absUrl('/logo.svg'),
-        width: 1200,
-        height: 630,
-        alt: `${siteConfig.business.name} - ${siteConfig.tagline}`,
-      },
-    ],
-    locale: 'en_GB',
-    type: 'website',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: `${siteConfig.business.name} | ${siteConfig.tagline}`,
-    description:
-      'Professional local services tailored to your needs. Quality workmanship, competitive pricing, and excellent customer service.',
-    images: [absUrl('/logo.svg')],
-  },
-  alternates: {
-    canonical: absUrl('/'),
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const { frontmatter: brand } = await getBrandContent();
+
+  const title = `${siteConfig.business.name} | ${siteConfig.tagline}`;
+  const description = `${brand.tagline}. Follow ${brand.teamName} — ${brand.championship} — and rider ${brand.riderName}, #${brand.raceNumber}, on the British Superbike grid.`;
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      url: absUrl('/'),
+      siteName: siteConfig.name,
+      images: [
+        {
+          // Reuses the same placehold.co placeholder as content/brand/npracing.mdx's
+          // logo.src — no R2 credentials available yet, see Phase 4 — rather than
+          // a second, broken /logo.svg reference (that file doesn't exist in public/).
+          url: brand.logo.src,
+          width: 1200,
+          height: 630,
+          alt: `${siteConfig.business.name} - ${siteConfig.tagline}`,
+        },
+      ],
+      locale: 'en_GB',
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [brand.logo.src],
+    },
+    alternates: {
+      canonical: absUrl('/'),
+    },
+  };
+}
 
 export default async function HomePageRoute() {
   // The homepage is rendered entirely from content/brand/npracing.mdx —
   // frontmatter for the factual claims, the MDX body for the team story.
   const { frontmatter: brand, content: brandBody } = await getBrandContent();
 
-  const localBusinessSchema = getLocalBusinessSchema();
+  // NOTE: no LocalBusiness JSON-LD is emitted here. NPRacing is a race team
+  // with no public office address/phone/hours, and the shared schema
+  // generator's `LocalBusinessSchemaOptions['businessType']` union
+  // (packages/core-components/src/lib/schema-types.ts) has no `SportsTeam`
+  // member and requires non-optional address/telephone/geo/openingHours —
+  // there is no factually-honest way to populate that shape for this site.
+  // Per this platform's philosophy of not over-engineering fixes for known
+  // upstream type gaps, we simply don't call `getLocalBusinessSchema()` from
+  // this route rather than inventing fake-but-plausible business details.
 
   const webSiteSchema = {
     '@context': 'https://schema.org',
@@ -73,10 +87,6 @@ export default async function HomePageRoute() {
 
   const schemaNodes = (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
-      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(webSiteSchema) }}
