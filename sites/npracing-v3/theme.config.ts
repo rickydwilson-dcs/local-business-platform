@@ -63,8 +63,14 @@ export const themeConfig: DeepPartialThemeConfig = {
 
 export const registry: ComponentRegistry = {
   theme: 'vega',
-  heroVariant: 'split',
-  headerVariant: 'light',
+  // Bold poster-style hero built around a large numeral (race #51) —
+  // 'image-overlay' (full-bleed image with overlaid text) is the closest
+  // existing enum value for that treatment; 'dark' header matches the
+  // black/red racing brand. Full token values (colors/fonts) come in a
+  // later phase — see registry ComponentRegistry in
+  // packages/theme-system/src/types.ts for the full enum.
+  heroVariant: 'image-overlay',
+  headerVariant: 'dark',
   cardVariant: 'standard',
   sectionVariant: 'standard',
 };
