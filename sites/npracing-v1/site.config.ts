@@ -263,8 +263,8 @@ export const siteConfig: SiteConfig = {
 
   cta: {
     primary: {
-      label: 'Get Free Quote',
-      href: '/contact',
+      label: 'Shop',
+      href: '/merch',
     },
     phone: {
       show: true,
