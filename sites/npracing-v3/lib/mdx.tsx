@@ -21,20 +21,8 @@ export const { getMdxFiles, getMdxContent, getAllServices, getAllLocations } = l
  * factory's runtime behavior is a plain path join with no validation
  * against that union, so re-typing the exported functions locally (without
  * editing the shared package, which would affect every site) is safe.
- *
- * 'services' | 'locations' | 'blog' | 'projects' are leftover base-template
- * content types still referenced by not-yet-removed routes — a later cleanup
- * phase removes those routes and this union narrows to just the three
- * NPRacing-specific types at that point.
  */
-export type ContentType =
-  | 'merch'
-  | 'news'
-  | 'brand'
-  | 'services'
-  | 'locations'
-  | 'blog'
-  | 'projects';
+export type ContentType = 'merch' | 'news' | 'brand';
 
 export const listSlugs = loader.listSlugs as unknown as (baseDir: ContentType) => Promise<string[]>;
 

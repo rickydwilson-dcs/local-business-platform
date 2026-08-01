@@ -9,20 +9,11 @@ import { siteConfig } from '@/site.config';
  * Submit this URL to Google Search Console: /sitemap-index.xml
  *
  * Section sitemaps:
- * - /sitemap.xml          (static pages)
- * - /services/sitemap.xml
- * - /locations/sitemap.xml
- * - /blog/sitemap.xml
- * - /projects/sitemap.xml
+ * - /sitemap.xml          (static pages — home/merch/news/contact/about)
+ * - /news/sitemap.xml
  */
 
-const SITEMAP_PATHS = [
-  '/sitemap.xml',
-  '/services/sitemap.xml',
-  '/locations/sitemap.xml',
-  '/blog/sitemap.xml',
-  '/projects/sitemap.xml',
-];
+const SITEMAP_PATHS = ['/sitemap.xml', '/news/sitemap.xml'];
 
 async function discoverSitemaps(): Promise<string[]> {
   const sitemaps = new Set(SITEMAP_PATHS);

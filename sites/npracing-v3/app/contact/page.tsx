@@ -15,7 +15,7 @@ import { ContactPage as ContactPageView } from '@/components/pages/contact-page'
 const CONTACT_DESCRIPTION = `Sponsorship enquiries, media requests, or a message for the ${siteConfig.business.name} crew — reach the ${siteConfig.racing.championship} team by email or Instagram.`;
 
 export const metadata: Metadata = {
-  title: `Contact | ${siteConfig.business.name}`,
+  title: 'Contact',
   description: CONTACT_DESCRIPTION,
   alternates: {
     canonical: absUrl('/contact'),

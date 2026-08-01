@@ -3,20 +3,19 @@
 /**
  * Content Validation Script
  *
- * Validates all MDX files in content/{services,locations,merch,news,brand}/
+ * Validates all MDX files in content/{merch,news,brand}/
  * against their respective Zod schemas to catch content errors before
- * they reach production. merch/news/brand additionally enforce a fixed
+ * they reach production. merch/news/brand enforce a fixed
  * expected record count (see EXPECTED_COUNTS below).
  *
  * Usage:
- *   pnpm run validate-content [all|services|locations|merch|news|brand]
+ *   pnpm run validate-content [all|merch|news|brand]
  */
 
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import matter from 'gray-matter';
-import { ServiceFrontmatterSchema, LocationFrontmatterSchema } from '@platform/core-components';
 import { MerchFrontmatterSchema } from '../lib/schemas/merch';
 import { NewsFrontmatterSchema } from '../lib/schemas/news';
 import { BrandFrontmatterSchema } from '../lib/schemas/brand';
@@ -179,41 +178,11 @@ function printResults(results: ValidationResult[], type: string): boolean {
  */
 function main() {
   const args = process.argv.slice(2);
-  const mode = args[0] || 'all'; // 'all', 'services', 'locations', 'merch', 'news', or 'brand'
+  const mode = args[0] || 'all'; // 'all', 'merch', 'news', or 'brand'
 
   const contentDir = path.join(process.cwd(), 'content');
-  const servicesDir = path.join(contentDir, 'services');
-  const locationsDir = path.join(contentDir, 'locations');
 
   let allValid = true;
-
-  // Validate services
-  if (mode === 'all' || mode === 'services') {
-    if (!fs.existsSync(servicesDir)) {
-      console.error(
-        `${colors.red}Error: Services directory not found: ${servicesDir}${colors.reset}`
-      );
-      process.exit(1);
-    }
-
-    const serviceResults = validateDirectory(servicesDir, ServiceFrontmatterSchema);
-    const servicesValid = printResults(serviceResults, 'Services');
-    allValid = allValid && servicesValid;
-  }
-
-  // Validate locations
-  if (mode === 'all' || mode === 'locations') {
-    if (!fs.existsSync(locationsDir)) {
-      console.error(
-        `${colors.red}Error: Locations directory not found: ${locationsDir}${colors.reset}`
-      );
-      process.exit(1);
-    }
-
-    const locationResults = validateDirectory(locationsDir, LocationFrontmatterSchema);
-    const locationsValid = printResults(locationResults, 'Locations');
-    allValid = allValid && locationsValid;
-  }
 
   // Validate merch (exactly 8 records expected)
   if (mode === 'all' || mode === 'merch') {

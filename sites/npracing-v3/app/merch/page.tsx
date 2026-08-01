@@ -15,7 +15,7 @@ import { MerchPage } from '@/components/pages/merch-page';
 export const dynamic = 'force-static';
 
 export const metadata: Metadata = {
-  title: `Merchandise | ${siteConfig.business.name}`,
+  title: 'Merchandise',
   description: `Official ${siteConfig.business.name} team kit — tees, caps, hoodies and more, printed to order and fulfilled by The Clothing Kings.`,
   alternates: {
     canonical: absUrl('/merch'),
