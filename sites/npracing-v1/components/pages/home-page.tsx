@@ -17,25 +17,12 @@ import { ValueCard } from '@/components/sections/value-card';
  * restating — the claims in brand.mdx.
  */
 
-/**
- * PROVISIONAL IMAGERY.
- *
- * The real photographs exist but have not been uploaded to Cloudflare R2 yet
- * (no R2 credentials in this environment — see Phase 4). Until they are, these
- * render as themed placeholders, the same pattern already used for the merch
- * and logo images. Local `output/briefs/...` paths are deliberately NOT
- * referenced: they sit outside the site's public/ directory and outside the R2
- * pipeline, and would render as a broken placeholder anyway.
- *
- * Real files awaiting upload to `npracing-v1/photos/`:
- *   action-lean.jpg   <- output/briefs/npracing/images/c479e3e3-c083-44d1-81df-713b751f44f9.JPG
- *   action-chase.jpg  <- output/briefs/npracing/images/5c324105-83c6-45b4-a8af-4b14a79da594.JPG
- *   paddock-team.jpg  <- output/briefs/npracing/images/IMG_2435.JPG
- */
+const R2_BASE = 'https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev';
+
 const PHOTO = {
-  actionLean: 'https://placehold.co/1600x900/0a0a0a/E11024?text=NPRacing+Action+Shot',
-  actionChase: 'https://placehold.co/1200x900/0a0a0a/E11024?text=NPRacing+On+Track',
-  paddockTeam: 'https://placehold.co/1000x1250/0a0a0a/E11024?text=NPRacing+Paddock',
+  actionLean: `${R2_BASE}/npracing-v1/photos/action-lean.jpg`,
+  actionChase: `${R2_BASE}/npracing-v1/photos/action-chase.jpg`,
+  paddockTeam: `${R2_BASE}/npracing-v1/photos/paddock-team.jpg`,
 } as const;
 
 /**
