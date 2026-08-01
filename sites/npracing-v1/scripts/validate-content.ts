@@ -3,14 +3,17 @@
 /**
  * Content Validation Script
  *
- * Validates all MDX files in content/services/ and content/locations/
- * against their respective Zod schemas to catch content errors before
- * they reach production.
+ * Validates all MDX files in content/services/, content/locations/,
+ * content/merch/, content/news/, and content/brand/ against their respective
+ * Zod schemas to catch content errors before they reach production.
  *
  * Usage:
- *   npm run validate:content
- *   npm run validate:services
- *   npm run validate:locations
+ *   npm run validate-content          # all types
+ *   npm run validate-content services
+ *   npm run validate-content locations
+ *   npm run validate-content merch
+ *   npm run validate-content news
+ *   npm run validate-content brand
  */
 
 import fs from 'fs';
@@ -18,6 +21,9 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import matter from 'gray-matter';
 import { ServiceFrontmatterSchema, LocationFrontmatterSchema } from '@platform/core-components';
+import { MerchFrontmatterSchema } from '../lib/schemas/merch';
+import { newsFrontmatterSchema } from '../lib/schemas/news';
+import { BrandFrontmatterSchema } from '../lib/schemas/brand';
 import { z } from 'zod';
 
 // ANSI color codes for terminal output
@@ -30,6 +36,13 @@ const colors = {
   gray: '\x1b[90m',
 };
 
+type AnySchema =
+  | typeof ServiceFrontmatterSchema
+  | typeof LocationFrontmatterSchema
+  | typeof MerchFrontmatterSchema
+  | typeof newsFrontmatterSchema
+  | typeof BrandFrontmatterSchema;
+
 interface ValidationResult {
   file: string;
   valid: boolean;
@@ -39,11 +52,7 @@ interface ValidationResult {
 /**
  * Validate a single MDX file against a Zod schema
  */
-function validateFile(
-  filePath: string,
-  schema: typeof ServiceFrontmatterSchema | typeof LocationFrontmatterSchema,
-  type: 'service' | 'location'
-): ValidationResult {
+function validateFile(filePath: string, schema: AnySchema): ValidationResult {
   const fileName = path.basename(filePath);
 
   try {
@@ -83,17 +92,33 @@ function validateFile(
 /**
  * Validate all MDX files in a directory
  */
-function validateDirectory(
-  dirPath: string,
-  schema: typeof ServiceFrontmatterSchema | typeof LocationFrontmatterSchema,
-  type: 'service' | 'location'
-): ValidationResult[] {
+function validateDirectory(dirPath: string, schema: AnySchema): ValidationResult[] {
   const files = fs
     .readdirSync(dirPath)
     .filter((file) => file.endsWith('.mdx'))
     .map((file) => path.join(dirPath, file));
 
-  return files.map((file) => validateFile(file, schema, type));
+  return files.map((file) => validateFile(file, schema));
+}
+
+/**
+ * Check for duplicate slugs (filenames without extension) in a directory.
+ */
+function findDuplicateSlugs(dirPath: string): string[] {
+  const slugs = fs
+    .readdirSync(dirPath)
+    .filter((file) => file.endsWith('.mdx'))
+    .map((file) => file.replace(/\.mdx$/, ''));
+
+  const seen = new Set<string>();
+  const duplicates = new Set<string>();
+  for (const slug of slugs) {
+    if (seen.has(slug)) {
+      duplicates.add(slug);
+    }
+    seen.add(slug);
+  }
+  return Array.from(duplicates);
 }
 
 /**
@@ -147,11 +172,52 @@ function printResults(results: ValidationResult[], type: string): boolean {
 }
 
 /**
+ * Validate a content directory against a schema, an exact expected record
+ * count, and a duplicate-slug check. Used for merch/news/brand, which have
+ * fixed, known record counts (unlike services/locations).
+ */
+function validateExactCount(
+  dirName: string,
+  displayName: string,
+  schema: AnySchema,
+  expectedCount: number
+): boolean {
+  const contentDir = path.join(process.cwd(), 'content');
+  const dirPath = path.join(contentDir, dirName);
+
+  if (!fs.existsSync(dirPath)) {
+    console.error(
+      `${colors.red}Error: ${displayName} directory not found: ${dirPath}${colors.reset}`
+    );
+    return false;
+  }
+
+  const results = validateDirectory(dirPath, schema);
+  const schemaValid = printResults(results, displayName);
+
+  const duplicates = findDuplicateSlugs(dirPath);
+  if (duplicates.length > 0) {
+    console.log(
+      `${colors.red}✗ Duplicate slugs found in ${dirName}: ${duplicates.join(', ')}${colors.reset}\n`
+    );
+  }
+
+  const countValid = results.length === expectedCount;
+  if (!countValid) {
+    console.log(
+      `${colors.red}✗ Expected exactly ${expectedCount} ${dirName} record(s), found ${results.length}${colors.reset}\n`
+    );
+  }
+
+  return schemaValid && duplicates.length === 0 && countValid;
+}
+
+/**
  * Main execution
  */
 function main() {
   const args = process.argv.slice(2);
-  const mode = args[0] || 'all'; // 'all', 'services', or 'locations'
+  const mode = args[0] || 'all'; // 'all', 'services', 'locations', 'merch', 'news', 'brand'
 
   const contentDir = path.join(process.cwd(), 'content');
   const servicesDir = path.join(contentDir, 'services');
@@ -168,7 +234,7 @@ function main() {
       process.exit(1);
     }
 
-    const serviceResults = validateDirectory(servicesDir, ServiceFrontmatterSchema, 'service');
+    const serviceResults = validateDirectory(servicesDir, ServiceFrontmatterSchema);
     const servicesValid = printResults(serviceResults, 'Services');
     allValid = allValid && servicesValid;
   }
@@ -182,9 +248,24 @@ function main() {
       process.exit(1);
     }
 
-    const locationResults = validateDirectory(locationsDir, LocationFrontmatterSchema, 'location');
+    const locationResults = validateDirectory(locationsDir, LocationFrontmatterSchema);
     const locationsValid = printResults(locationResults, 'Locations');
     allValid = allValid && locationsValid;
+  }
+
+  // Validate merch — exactly 8 real product records
+  if (mode === 'all' || mode === 'merch') {
+    allValid = allValid && validateExactCount('merch', 'Merch', MerchFrontmatterSchema, 8);
+  }
+
+  // Validate news — exactly 2 real article records
+  if (mode === 'all' || mode === 'news') {
+    allValid = allValid && validateExactCount('news', 'News', newsFrontmatterSchema, 2);
+  }
+
+  // Validate brand — exactly 1 singleton record
+  if (mode === 'all' || mode === 'brand') {
+    allValid = allValid && validateExactCount('brand', 'Brand', BrandFrontmatterSchema, 1);
   }
 
   // Exit with appropriate code
