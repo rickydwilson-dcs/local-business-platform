@@ -466,6 +466,12 @@ section h1 {
   }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
 /* ==========================================
    NPRACING V3 — "NUMBER 51" UTILITIES
 
