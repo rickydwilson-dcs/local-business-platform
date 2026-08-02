@@ -105,22 +105,18 @@ echo ""
 echo "✅ Gate green. Merging PR #$PR → main..."
 gh pr merge "$PR" --merge --delete-branch=false
 
-# Mirror gated main → production. Preserved from the previous script for any
-# Vercel project whose Production Branch is 'production' rather than 'main';
-# harmless if none. Verify per-project — see the Phase-4 plan (docs/deploy-audit.md).
-echo ""
-echo "📤 Mirroring main → production..."
-git fetch origin main
-git push origin origin/main:production
+# Note: there is no separate 'production' branch — `main` is the production
+# branch for every Vercel project, so merging the gated PR to `main` is the whole
+# deploy. (The old script pushed `main:production`, but origin/production does not
+# exist and nothing consumes it, so that mirror was removed.)
 
 echo ""
-echo "🎉 Promotion complete — staging → main merged through the gate, production mirrored."
+echo "🎉 Promotion complete — staging → main merged through the gate."
 echo ""
 echo "📊 Summary:"
 echo "==========="
 echo "✅ $COMMIT_COUNT commit(s) promoted via gated PR #$PR"
 echo "✅ Staging E2E was verified green for the promoted commit before merge"
-echo "✅ main → production mirrored"
 echo ""
 echo "🔎 Vercel deploys from the merge; confirm it landed:"
 echo "   gh run list --branch main --limit 5"

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NP Racing — homepage v1 · Grid Box</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,500;0,600;0,700;0,800;1,700;1,800&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tokens.css">
+<style>
+  .viewport-shell{height:100svh;display:flex;flex-direction:column;min-height:0}
+  .brand-mark img{height:52px}
+  .hero{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:flex-end;position:relative}
+  .hero-bg{position:absolute;inset:0;z-index:0}
+  .hero-bg img{width:100%;height:100%;object-fit:cover;object-position:60% 40%}
+  .hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,10,.35) 0%,rgba(10,10,10,.25) 35%,rgba(10,10,10,.92) 92%),linear-gradient(90deg,rgba(10,10,10,.75) 0%,rgba(10,10,10,.1) 45%)}
+  .hero-in{position:relative;z-index:2;padding-bottom:2rem}
+  .hero-in .eyebrow{margin-bottom:1rem}
+  .hero-in h1{font-size:clamp(2rem,5.2vw,4.4rem);max-width:16ch;font-style:italic}
+  .hero-in h1 span{color:var(--red-bright)}
+  .hero-in p{max-width:46ch;margin-top:1rem;font-size:1rem;color:var(--ink-soft);line-height:1.5}
+  .hero-cta{display:flex;gap:.9rem;margin-top:1.5rem;flex-wrap:wrap}
+  .plate{position:absolute;top:1.5rem;right:1.5rem;z-index:2;width:4.6rem;height:4.6rem;border-radius:999px;background:var(--red);border:3px solid #fff;display:grid;place-items:center;font-family:var(--font-display);font-weight:800;font-size:1.8rem;color:#fff;box-shadow:var(--shadow-lift)}
+
+  .section{padding:6rem 0}
+  .section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;margin-bottom:3rem;flex-wrap:wrap}
+  .section-head h2{font-size:clamp(2.2rem,4vw,3.2rem);max-width:14ch}
+  .section-head p{max-width:40ch;color:var(--ink-soft);font-size:.98rem}
+
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:3.5rem;align-items:center}
+  .about-grid img{border-radius:var(--r-lg);width:100%;aspect-ratio:4/5;object-fit:cover;border:1px solid var(--line)}
+  .about-copy p{color:var(--ink-soft);margin-top:1.1rem;line-height:1.75}
+  .about-copy p+p{margin-top:1rem}
+  .about-copy strong{color:var(--white)}
+
+  .values{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem;margin-top:3.5rem}
+
+  .rider{background:var(--black-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .rider-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:0;align-items:stretch}
+  .rider-photo{position:relative;aspect-ratio:4/3.4}
+  .rider-photo img{width:100%;height:100%;object-fit:cover}
+  .rider-copy{padding:4rem 3rem 4rem 4rem;display:flex;flex-direction:column;justify-content:center}
+  .rider-copy .num{font-family:var(--font-display);font-style:italic;font-weight:800;font-size:6rem;color:var(--red);line-height:.8}
+  .rider-copy h2{font-size:clamp(2rem,3.4vw,2.8rem);margin-top:.6rem}
+  .rider-copy p{margin-top:1.1rem;color:var(--ink-soft);max-width:42ch;line-height:1.7}
+  .rider-copy .badge{display:inline-block;margin-top:1.5rem;font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--red-bright);border:1px solid var(--red-dim);background:rgba(225,16,36,.08);padding:.5rem .9rem;border-radius:999px}
+
+  .gallery-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;grid-template-rows:1fr 1fr;gap:1rem;height:26rem;overflow:hidden}
+  .gallery-grid img{width:100%;height:100%;object-fit:cover;border-radius:var(--r);border:1px solid var(--line);display:block}
+  .gallery-grid .g-tall{grid-row:1 / span 2}
+  .gallery-grid .g-col{grid-row:1 / span 2;display:grid;grid-template-rows:1fr 1fr;gap:1rem;min-height:0}
+  .gallery-grid .g-col img{min-height:0}
+
+  .cta-band{background:var(--red);border-radius:var(--r-lg);padding:3.5rem;display:flex;justify-content:space-between;align-items:center;gap:2rem;flex-wrap:wrap;position:relative;overflow:hidden}
+  .cta-band::after{content:"";position:absolute;right:-4rem;top:-4rem;width:16rem;height:16rem;border-radius:999px;background:rgba(255,255,255,.08)}
+  .cta-band h2{color:#fff;font-size:clamp(1.8rem,3vw,2.6rem);max-width:16ch;position:relative;z-index:2}
+  .cta-band .btn-ghost{border-color:rgba(255,255,255,.5);color:#fff;position:relative;z-index:2}
+  .cta-band .btn-ghost .ico{background:rgba(255,255,255,.18)}
+  .cta-band .btn-ghost:hover{border-color:#fff}
+
+  @media (max-width:960px){
+    .about-grid,.rider-grid{grid-template-columns:1fr}
+    .values{grid-template-columns:1fr 1fr}
+    .rider-copy{padding:3rem 1.5rem}
+    .gallery-grid{grid-template-columns:1fr 1fr;grid-template-rows:none;height:auto;overflow:visible}
+    .gallery-grid .g-tall{grid-row:auto;aspect-ratio:4/3}
+    .gallery-grid .g-col{grid-row:auto;grid-template-columns:1fr 1fr;grid-template-rows:none}
+    .gallery-grid .g-col img{aspect-ratio:4/3}
+  }
+  @media (max-width:640px){
+    .nav-links{display:none}
+    .values{grid-template-columns:1fr}
+    .gallery-grid{grid-template-columns:1fr}
+    .gallery-grid .g-col{grid-template-columns:1fr}
+    .plate{display:none}
+    .viewport-shell{height:auto}
+    .hero{flex:none;min-height:100svh;padding-top:6rem}
+    .brand-mark img{height:40px}
+  }
+</style>
+</head>
+<body>
+
+<div class="viewport-shell">
+<div class="announce">ZYN British Superbike Championship · 2026 Season · Round updates on <a href="https://www.instagram.com/npracingbsb/" style="color:#fff;text-decoration:underline">@npracingbsb</a></div>
+
+<div class="nav-outer">
+  <nav class="nav">
+    <a class="brand-mark" href="#top"><img src="assets/img/logo.png" alt="NP Racing"></a>
+    <div class="nav-links">
+      <a href="#team">Team</a>
+      <a href="#rider">Rider</a>
+      <a href="#gallery">Gallery</a>
+      <a href="https://claude.ai/code/artifact/0cf346bb-e18c-4603-a184-0e5d98894150">Merch</a>
+      <a href="https://claude.ai/code/artifact/dbf83416-994f-4c5a-a50a-0efead739304">News</a>
+      <a href="https://claude.ai/code/artifact/63bb3710-c353-4762-b6c7-6dba7f81132f">Contact</a>
+    </div>
+    <div class="nav-right">
+      <a class="icon-btn" href="https://www.instagram.com/npracingbsb/" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+      <a class="btn btn-primary" href="https://claude.ai/code/artifact/0cf346bb-e18c-4603-a184-0e5d98894150">Shop <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+    </div>
+  </nav>
+</div>
+
+<header class="hero" id="top">
+  <div class="hero-bg"><img src="assets/img/action-lean.jpg" alt="NP Racing rider #51 leant into a corner on the Honda Fireblade at Knockhill"></div>
+  <div class="plate">51</div>
+  <div class="wrap hero-in">
+    <span class="eyebrow">Taunton, Somerset · Est. 2004</span>
+    <h1>Punching above our weight in <span>British Superbike.</span></h1>
+    <p>NP Racing is an independent BSB team running professionally prepared Honda Fireblades — built on family values, developed riders, and two decades in the paddock.</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="#team">Meet the team <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+      <a class="btn btn-ghost" href="#gallery">See the gallery <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+    </div>
+  </div>
+</header>
+</div>
+
+<div class="stats wrap" style="max-width:var(--wrap)">
+  <div class="stat"><div class="num">2004</div><div class="lbl">In the BSB paddock since</div></div>
+  <div class="stat"><div class="num">2020</div><div class="lbl">First full Superbike season</div></div>
+  <div class="stat"><div class="num">Honda</div><div class="lbl">Fireblade machinery</div></div>
+  <div class="stat"><div class="num">#51</div><div class="lbl">Brayden Elliott, 2026</div></div>
+</div>
+
+<section class="section" id="team">
+  <div class="wrap about-grid">
+    <img src="assets/img/paddock-team.jpg" alt="NP Racing crew on the grid with rider #51 under the team umbrella">
+    <div class="about-copy">
+      <span class="eyebrow">The team</span>
+      <h2 style="margin-top:1rem">Run by Neil Pearson, built by the paddock.</h2>
+      <p>NP Racing is a private British Superbike team based in <strong>Taunton, Somerset</strong>, led by <strong>Neil Pearson</strong> — founder of NP Motorcycles. Under his leadership the business has grown from a motorcycle servicing workshop into a recognised independent name on the BSB grid.</p>
+      <p>Without the budget of factory-backed outfits like Honda Racing UK, Ducati PBM or McAMS Yamaha, NP Racing has earned its reputation the hard way: developing young talent, running properly prepared machinery, and staying a close-knit, family-style operation with experienced technicians.</p>
+      <a class="link-arrow" href="#rider" style="margin-top:1.6rem">Meet the 2026 rider <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+  </div>
+
+  <div class="wrap values">
+    <div class="vcard"><span class="n">01</span><h3>Developing riders</h3><p>A track record of bringing young talent onto the BSB grid and giving them a genuine shot.</p></div>
+    <div class="vcard"><span class="n">02</span><h3>Pro-prepared Hondas</h3><p>Every Fireblade is built and run to a professional standard, race after race.</p></div>
+    <div class="vcard"><span class="n">03</span><h3>Family operation</h3><p>A close-knit crew of experienced technicians — not a corporate outfit.</p></div>
+    <div class="vcard"><span class="n">04</span><h3>Punching above weight</h3><p>Consistently competitive against teams with far bigger budgets.</p></div>
+  </div>
+</section>
+
+<section class="rider" id="rider">
+  <div class="rider-grid">
+    <div class="rider-photo"><img src="assets/img/action-chase.jpg" alt="Rider #51 chasing through Knockhill on the NP Racing Honda Fireblade"></div>
+    <div class="rider-copy">
+      <span class="num">51</span>
+      <h2>Brayden Elliott</h2>
+      <p>Brayden returned to the BSB grid with NP Racing from the Knockhill round in June 2026, riding the team's Honda Fireblade. Full season history and results to follow as the 2026 campaign continues.</p>
+      <span class="badge">Joined NP Racing · June 2026</span>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="gallery">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>From the paddock to the podium.</h2>
+      <a class="link-arrow" href="#">View full gallery <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+    <div class="gallery-grid">
+      <img class="g-tall" src="assets/img/action-lean.jpg" alt="Rider #51 leant into a corner">
+      <div class="g-col">
+        <img src="assets/img/action-chase.jpg" alt="Rider #51 on track chasing another competitor">
+        <img src="assets/img/paddock-team.jpg" alt="NP Racing crew on the grid">
+      </div>
+      <div class="g-col">
+        <img src="assets/img/paddock-team.jpg" alt="NP Racing team photo">
+        <img src="assets/img/action-lean.jpg" alt="NP Racing Honda Fireblade on track">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:2rem">
+  <div class="wrap cta-band" id="merch">
+    <h2>Team merchandise — shop the full range.</h2>
+    <a class="btn btn-ghost" href="https://claude.ai/code/artifact/0cf346bb-e18c-4603-a184-0e5d98894150">Shop the range <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+  </div>
+</section>
+
+<footer class="site-footer" id="contact">
+  <div class="wrap">
+    <div class="cols">
+      <div style="display:flex;align-items:center">
+        <img src="assets/img/logo.png" alt="NP Racing" style="width:100%;max-width:15rem;height:auto">
+      </div>
+      <div><h4>Team</h4><ul><li><a href="#team">About</a></li><li><a href="#rider">Rider</a></li><li><a href="#gallery">Gallery</a></li></ul></div>
+      <div><h4>More</h4><ul><li><a href="https://claude.ai/code/artifact/dbf83416-994f-4c5a-a50a-0efead739304">News</a></li><li><a href="#">Races</a></li></ul></div>
+      <div><h4>Get in touch</h4><ul><li><a href="https://www.instagram.com/npracingbsb/">Instagram @npracingbsb</a></li><li><a href="#">Enquiries — details tbc</a></li></ul></div>
+    </div>
+    <div class="bottom">
+      <span>© 2026 NP Racing. All rights reserved.</span>
+      <div class="social-row">
+        <a class="icon-btn" href="https://www.instagram.com/npracingbsb/" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body></html>

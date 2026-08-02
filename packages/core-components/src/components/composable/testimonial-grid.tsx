@@ -43,7 +43,7 @@ export function TestimonialGrid({
   data,
   className,
 }: TestimonialGridProps) {
-  const slots = { ...TESTIMONIAL_GRID_DEFAULT_SLOTS, ...slotOverrides };
+  const _slots = { ...TESTIMONIAL_GRID_DEFAULT_SLOTS, ...slotOverrides };
   const d = data as Record<string, string | undefined>;
 
   const bg =

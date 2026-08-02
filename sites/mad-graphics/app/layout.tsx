@@ -6,9 +6,9 @@ import { getContentItems } from '@/lib/content';
 import { PageShell } from '@platform/core-components';
 import { SiteHeader } from '@/components/site-header';
 import { SiteFooter } from '@/components/site-footer';
-import { ConsentManager } from "@platform/core-components/components/analytics/ConsentManager";
-import { Analytics } from "@platform/core-components/components/analytics/Analytics";
-import { AnalyticsDebugPanel } from "@platform/core-components/components/analytics/AnalyticsDebugPanel";
+import { ConsentManager } from '@platform/core-components/components/analytics/ConsentManager';
+import { Analytics } from '@platform/core-components/components/analytics/Analytics';
+import { AnalyticsDebugPanel } from '@platform/core-components/components/analytics/AnalyticsDebugPanel';
 
 export const metadata: Metadata = {
   title: {
@@ -61,9 +61,10 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         {/* Material Symbols icon font */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {/* eslint-disable-next-line @next/next/no-page-custom-font -- false positive: this is the App Router root layout (app/layout.tsx), the App Router equivalent of pages/_document.js, so it already loads for every page */}
         <link
           rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=block"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap"
         />
         {/* Geo meta tags for local SEO */}
         {siteConfig.business.geo && (
@@ -102,15 +103,22 @@ export default async function RootLayout({ children }: { children: React.ReactNo
               email={BUSINESS_EMAIL}
               address={ADDRESS}
               certifications={siteConfig.credentials?.certifications ?? []}
-              services={allServices.map(s => ({ slug: s.slug, title: s.title })).slice(0, siteConfig.footer?.maxServices ?? 8)}
-              locations={allLocations.map(l => ({ slug: l.slug, title: l.title })).slice(0, siteConfig.footer?.maxLocations ?? 8)}
+              services={allServices
+                .map((s) => ({ slug: s.slug, title: s.title }))
+                .slice(0, siteConfig.footer?.maxServices ?? 8)}
+              locations={allLocations
+                .map((l) => ({ slug: l.slug, title: l.title }))
+                .slice(0, siteConfig.footer?.maxLocations ?? 8)}
               totalServices={allServices.length}
               totalLocations={allLocations.length}
               maxServices={siteConfig.footer?.maxServices ?? 8}
               maxLocations={siteConfig.footer?.maxLocations ?? 8}
               showServices={siteConfig.footer?.showServices ?? true}
               showLocations={siteConfig.footer?.showLocations ?? true}
-              copyright={siteConfig.footer?.copyright ?? `${new Date().getFullYear()} ${siteConfig.business.name}. All rights reserved.`}
+              copyright={
+                siteConfig.footer?.copyright ??
+                `${new Date().getFullYear()} ${siteConfig.business.name}. All rights reserved.`
+              }
               builtBy={siteConfig.footer?.builtBy}
             />
           }
@@ -122,7 +130,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           enabled={process.env.NEXT_PUBLIC_FEATURE_CONSENT_BANNER === 'true'}
           config={{
             title: 'We value your privacy',
-            description: 'We use cookies to provide a better service and understand how you use our site.',
+            description:
+              'We use cookies to provide a better service and understand how you use our site.',
             privacyPolicyUrl: '/privacy-policy',
             cookiePolicyUrl: '/cookie-policy',
           }}

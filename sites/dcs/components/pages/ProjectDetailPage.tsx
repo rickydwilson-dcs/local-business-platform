@@ -1,8 +1,7 @@
-import type { ProjectDetailPageTemplateProps } from "@platform/core-components";
-import Link from "next/link";
+import type { ProjectDetailPageTemplateProps } from '@platform/core-components';
+import Link from 'next/link';
 
 export function SiteProjectDetailPage({
-  siteConfig,
   frontmatter,
   mdxContent,
   breadcrumbs,

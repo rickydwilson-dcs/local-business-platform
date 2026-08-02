@@ -1,0 +1,646 @@
+@import "../../../packages/core-components/src/styles/animations.css";
+
+/*
+ * NPRacing v1 — "Grid Box" Global CSS Utilities
+ *
+ * Self-contained theme CSS for this site (no @platform/themes/* import).
+ * Every colour here resolves through a `var(--color-*)` custom property
+ * emitted by @platform/theme-system from theme.config.ts — no literal hex
+ * values, and never Tailwind's CSS `theme` helper function (CSS parser panic).
+ *
+ * Grid Box visual identity: near-black canvas, one red accent, condensed
+ * uppercase display type, pill buttons and pill nav, hairline-bordered
+ * panels, and full-width banded strips instead of contrasting blocks.
+ */
+
+/* ==========================================
+   BUTTONS — pill, uppercase, condensed
+   ========================================== */
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-button;
+    @apply bg-brand-primary text-on-brand-primary font-bold text-sm uppercase tracking-wide;
+    @apply hover:bg-brand-primary-hover transition-colors duration-200;
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary;
+    @apply focus-visible:ring-offset-2 focus-visible:ring-offset-surface-background;
+  }
+
+  .btn-primary-lg {
+    @apply inline-flex items-center justify-center gap-2 px-8 py-4 rounded-button;
+    @apply bg-brand-primary text-on-brand-primary font-bold text-base uppercase tracking-wide;
+    @apply hover:bg-brand-primary-hover transition-colors duration-200;
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary;
+    @apply focus-visible:ring-offset-2 focus-visible:ring-offset-surface-background;
+  }
+
+  /* Hairline outline on the dark canvas */
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-button;
+    @apply bg-transparent text-surface-foreground border border-surface-card-border;
+    @apply font-bold text-sm uppercase tracking-wide;
+    @apply hover:border-surface-foreground transition-colors duration-200;
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary;
+    @apply focus-visible:ring-offset-2 focus-visible:ring-offset-surface-background;
+  }
+
+  /* Alias of .btn-secondary — kept so shared components keep their shape */
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-button;
+    @apply bg-transparent text-surface-foreground border border-surface-card-border;
+    @apply font-bold text-sm uppercase tracking-wide;
+    @apply hover:border-surface-foreground transition-colors duration-200;
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary;
+    @apply focus-visible:ring-offset-2 focus-visible:ring-offset-surface-background;
+  }
+
+  .btn-tertiary {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-button;
+    @apply bg-transparent text-white border border-white/50 font-bold text-sm uppercase tracking-wide;
+    @apply hover:border-white transition-colors duration-200;
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2;
+  }
+
+  /* White fill on bg-brand-primary sections */
+  .btn-on-brand-primary {
+    @apply inline-flex items-center justify-center gap-2 px-8 py-3 rounded-button;
+    @apply bg-white text-brand-primary font-bold text-sm uppercase tracking-wide;
+    @apply hover:bg-surface-inverse transition-colors duration-200;
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2;
+    @apply whitespace-nowrap;
+  }
+
+  /* White-outline on bg-brand-primary sections */
+  .btn-on-brand-primary-outline {
+    @apply inline-flex items-center justify-center gap-2 px-8 py-3 rounded-button;
+    @apply border border-white/50 text-white font-bold text-sm uppercase tracking-wide;
+    @apply hover:border-white hover:bg-white/10 transition-colors duration-200;
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2;
+    @apply whitespace-nowrap;
+  }
+
+  /* ==========================================
+     CARDS — flat panels with a hairline border
+     ========================================== */
+
+  .card {
+    @apply bg-surface-card border border-surface-card-border rounded-card p-6;
+    @apply transition-colors duration-300;
+  }
+
+  .card-interactive {
+    @apply relative bg-surface-card border border-surface-card-border rounded-card p-8;
+    @apply hover:-translate-y-1 hover:border-brand-primary transition-all duration-300;
+    @apply motion-reduce:hover:translate-y-0 motion-reduce:transition-none;
+  }
+
+  .card-simple {
+    @apply bg-surface-card border border-surface-card-border rounded-card p-6;
+  }
+
+  /* ==========================================
+     SECTIONS
+     ========================================== */
+
+  .section {
+    @apply py-16 md:py-24;
+  }
+
+  .section-standard {
+    @apply py-16 sm:py-20;
+  }
+
+  .section-compact {
+    @apply py-12 sm:py-16;
+  }
+
+  .section-header {
+    @apply text-center mb-12 sm:mb-16;
+  }
+
+  /* ==========================================
+     CONTAINERS
+     ========================================== */
+
+  .container-narrow {
+    @apply max-w-4xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .container-standard {
+    @apply mx-auto w-full lg:w-[90%] px-6;
+  }
+
+  /* Grid Box wrap — fixed 80rem (1280px) max width, matching the prototype */
+  .container-grid {
+    @apply mx-auto w-full max-w-[80rem] px-6;
+  }
+
+  /* ==========================================
+     GRID SYSTEM
+     ========================================== */
+
+  .grid-responsive {
+    @apply grid gap-6 lg:gap-8;
+  }
+
+  .grid-services {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8;
+  }
+
+  .grid-features {
+    @apply grid grid-cols-1 md:grid-cols-2 gap-8;
+  }
+
+  /* ==========================================
+     TYPOGRAPHY
+     ========================================== */
+
+  .heading-hero {
+    @apply text-hero uppercase italic text-surface-foreground mb-6;
+  }
+
+  .heading-section {
+    @apply text-h2 uppercase text-surface-foreground mb-4;
+  }
+
+  .heading-subsection {
+    @apply text-h2 uppercase text-surface-foreground mb-4;
+  }
+
+  .heading-card {
+    @apply text-h3 text-surface-foreground mb-4;
+  }
+
+  .heading-card-sm {
+    @apply text-h4 text-surface-foreground mb-1;
+  }
+
+  .stat-number {
+    @apply text-h2 text-surface-foreground mb-3;
+  }
+
+  .text-subtitle {
+    @apply text-lg sm:text-xl text-surface-secondary-foreground;
+  }
+
+  .text-body-lg {
+    @apply text-lg text-surface-secondary-foreground leading-relaxed;
+  }
+
+  /* ==========================================
+     GRID BOX — signature elements
+     ========================================== */
+
+  /* Small red kicker above a heading, with a leading rule */
+  .eyebrow {
+    @apply inline-flex items-center gap-2 font-sans text-xs font-bold uppercase;
+    @apply tracking-[0.22em] text-brand-accent;
+  }
+  .eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 1.6rem;
+    height: 2px;
+    background-color: var(--color-brand-primary);
+  }
+
+  /* Pulls a full-bleed hero up under the floating pill nav so the nav reads
+     as an overlay. Height = nav pill (--nav-height) + the wrapper's 1rem
+     top padding. */
+  .hero-under-nav {
+    margin-top: calc(-1 * (var(--nav-height) + 1rem));
+  }
+
+  /* Hero darkening scrim: vertical fade to the page background plus a
+     left-hand wash so overlaid copy stays legible over any photograph.
+     color-mix keeps this tied to the theme token rather than a literal
+     rgba() — Tailwind's opacity modifiers can't reliably tint a var() colour. */
+  .hero-scrim {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      linear-gradient(
+        180deg,
+        color-mix(in srgb, var(--color-surface-background) 35%, transparent) 0%,
+        color-mix(in srgb, var(--color-surface-background) 25%, transparent) 35%,
+        color-mix(in srgb, var(--color-surface-background) 92%, transparent) 92%
+      ),
+      linear-gradient(
+        90deg,
+        color-mix(in srgb, var(--color-surface-background) 75%, transparent) 0%,
+        color-mix(in srgb, var(--color-surface-background) 10%, transparent) 45%
+      );
+  }
+
+  /* Red-tinted chip background (badges, contact icon wells) */
+  .chip-brand {
+    background-color: color-mix(in srgb, var(--color-brand-primary) 10%, transparent);
+  }
+
+  /* Race-number "plate" roundel */
+  .race-plate {
+    @apply grid place-items-center rounded-full bg-brand-primary text-on-brand-primary;
+    @apply font-heading font-extrabold leading-none;
+    border: 3px solid var(--color-brand-on-primary);
+  }
+
+  /* Four-across stat strip divided by hairlines */
+  .stat-strip {
+    @apply grid grid-cols-2 md:grid-cols-4 border-y border-surface-card-border;
+  }
+  .stat-strip > * {
+    @apply px-5 py-6 border-l border-surface-card-border;
+  }
+  .stat-strip > *:nth-child(odd) {
+    border-left-color: transparent;
+  }
+  @media (min-width: 768px) {
+    .stat-strip > *:nth-child(odd) {
+      border-left-color: var(--color-surface-card-border);
+    }
+    .stat-strip > *:first-child {
+      border-left-color: transparent;
+    }
+  }
+
+  /* Horizontal auto-scrolling ticker. Motion is opt-in: the track only
+     animates when the user has not asked for reduced motion. */
+  .marquee {
+    @apply overflow-hidden border-y border-surface-card-border bg-surface-subtle;
+  }
+  .marquee-track {
+    display: flex;
+    width: max-content;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .marquee-track {
+      animation: marquee-scroll 34s linear infinite;
+    }
+  }
+  @keyframes marquee-scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  /* Fine film grain over the flat black canvas so large screens don't read
+     as dead. Fixed, non-interactive, and colourless (the SVG turbulence
+     supplies its own noise — no palette value is baked in here). */
+  .grain-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.035;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* Form controls on the dark canvas */
+  .field-label {
+    @apply block text-xs font-bold uppercase tracking-[0.06em] text-surface-tertiary-foreground;
+  }
+  .field-control {
+    @apply w-full rounded-md bg-surface-subtle border border-surface-card-border;
+    @apply px-4 py-3 text-base text-surface-foreground placeholder:text-surface-tertiary-foreground;
+    @apply focus:outline-none focus:border-brand-primary focus:ring-2 focus:ring-brand-primary;
+  }
+
+  /* MDX body prose on the dark canvas — token-driven, not prose-invert's
+     own grey ramp. */
+  .prose-grid-box {
+    @apply max-w-none text-surface-secondary-foreground;
+  }
+  .prose-grid-box h2 {
+    @apply text-h3 uppercase text-surface-foreground mt-8 mb-3 first:mt-0;
+  }
+  .prose-grid-box h3 {
+    @apply text-h4 uppercase text-surface-foreground mt-6 mb-2;
+  }
+  .prose-grid-box p {
+    @apply text-surface-secondary-foreground leading-relaxed mb-4;
+  }
+  .prose-grid-box a {
+    @apply text-brand-accent underline underline-offset-2 hover:text-brand-primary;
+  }
+  .prose-grid-box strong {
+    @apply text-surface-foreground font-semibold;
+  }
+  .prose-grid-box ul {
+    @apply list-disc pl-5 mb-4 space-y-1;
+  }
+  .prose-grid-box blockquote {
+    @apply border-l-2 border-brand-primary pl-4 italic text-surface-foreground my-4;
+  }
+
+  /* ==========================================
+     MOBILE MENU SYSTEM
+     ========================================== */
+
+  .mobile-menu-toggle {
+    @apply lg:hidden p-2 rounded-md hover:bg-surface-subtle transition-colors;
+    @apply focus:outline-none focus:ring-2 focus:ring-brand-primary;
+  }
+
+  .mobile-menu-icon {
+    @apply w-6 h-6 flex flex-col justify-center space-y-1;
+  }
+
+  .mobile-menu-line {
+    @apply block h-0.5 w-6 bg-surface-secondary-foreground transition-transform duration-300 ease-in-out;
+  }
+
+  .mobile-menu-line.top-open {
+    @apply rotate-45 translate-y-1.5;
+  }
+
+  .mobile-menu-line.middle-open {
+    @apply opacity-0;
+  }
+
+  .mobile-menu-line.bottom-open {
+    @apply -rotate-45 -translate-y-1.5;
+  }
+
+  .mobile-menu-overlay {
+    @apply fixed inset-0 bg-surface-card z-50 transition-transform duration-300 ease-in-out lg:hidden flex flex-col;
+  }
+
+  .mobile-menu-overlay.closed {
+    @apply translate-x-full;
+  }
+
+  .mobile-menu-overlay.open {
+    @apply translate-x-0;
+  }
+
+  .mobile-menu-header {
+    @apply flex items-center justify-between p-6 border-b border-surface-subtle;
+  }
+
+  .mobile-menu-close {
+    @apply p-2 rounded-lg border-2 border-brand-primary text-brand-primary;
+    @apply hover:bg-brand-primary hover:text-white transition-colors focus:outline-none;
+  }
+
+  .mobile-menu-nav {
+    @apply flex flex-col px-6 py-12 space-y-8 flex-1 overflow-y-auto;
+  }
+
+  .mobile-menu-link {
+    @apply block text-xl font-medium text-surface-foreground hover:text-brand-primary transition-colors py-4 text-center;
+  }
+
+  .mobile-menu-bottom {
+    @apply p-6 space-y-6 flex-shrink-0;
+  }
+
+  .mobile-menu-phone {
+    @apply text-center;
+  }
+
+  .mobile-menu-phone-container {
+    @apply flex items-center justify-center gap-3 mb-2;
+  }
+
+  .mobile-menu-phone-link {
+    @apply text-2xl font-bold text-surface-foreground hover:text-brand-primary transition-colors;
+  }
+
+  .mobile-menu-phone-text {
+    @apply text-lg text-surface-tertiary;
+  }
+
+  .mobile-menu-cta {
+    @apply block w-full bg-brand-primary text-on-brand-primary text-center py-4 px-6 rounded-lg;
+    @apply hover:bg-brand-primary-hover transition-colors font-bold text-lg;
+  }
+
+  .mobile-menu-locations {
+    @apply w-full;
+  }
+
+  .mobile-menu-locations-content {
+    @apply mt-4 space-y-6 pl-4 border-l-2 border-surface-subtle;
+  }
+
+  .mobile-menu-county {
+    @apply space-y-3;
+  }
+
+  .mobile-menu-county-link {
+    @apply block text-lg font-semibold text-brand-primary hover:text-brand-primary-hover transition-colors;
+  }
+
+  .mobile-menu-towns {
+    @apply space-y-2 pl-4;
+  }
+
+  .mobile-menu-town-link {
+    @apply block text-base text-surface-tertiary hover:text-surface-foreground transition-colors py-1;
+  }
+
+  .mobile-menu-town-link.rich-content {
+    @apply text-surface-foreground font-medium;
+  }
+
+  .mobile-menu-town-link .rich-indicator {
+    @apply inline-block w-1.5 h-1.5 bg-brand-primary rounded-full ml-2;
+  }
+
+  /* ==========================================
+     LIGHTBOX SYSTEM
+     ========================================== */
+
+  .lightbox-overlay {
+    @apply fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4 sm:p-6;
+    animation: fade-in 0.3s ease-out both;
+  }
+
+  .lightbox-content {
+    @apply relative w-full max-w-6xl max-h-[95vh] bg-surface-card rounded-2xl shadow-2xl overflow-hidden flex flex-col;
+    animation: scale-in 0.2s ease-out both;
+  }
+
+  .lightbox-header {
+    @apply flex items-center justify-between p-4 sm:p-6 border-b border-surface-subtle flex-shrink-0 bg-surface-card;
+  }
+
+  .lightbox-header-title {
+    @apply flex-1 mr-4;
+  }
+
+  .lightbox-title {
+    @apply text-xl sm:text-2xl font-bold text-surface-foreground mb-1;
+  }
+
+  .lightbox-position {
+    @apply text-sm text-surface-tertiary font-medium;
+  }
+
+  .lightbox-close-button {
+    @apply flex-shrink-0 p-2 rounded-lg border-2 border-surface-subtle text-surface-secondary;
+    @apply hover:bg-surface-subtle hover:border-surface-subtle transition-all duration-200;
+    @apply focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2;
+  }
+
+  .lightbox-zoom-button {
+    @apply p-2 rounded-lg border border-surface-subtle text-surface-secondary;
+    @apply hover:bg-surface-subtle hover:border-surface-subtle transition-all duration-200;
+    @apply focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2;
+    @apply disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:border-surface-subtle;
+  }
+
+  .lightbox-image-container {
+    @apply relative flex-1 overflow-hidden bg-surface-subtle flex items-center justify-center p-4 sm:p-8 select-none;
+  }
+
+  .lightbox-image-wrapper {
+    @apply relative w-full max-w-4xl mx-auto;
+    min-height: 400px;
+    height: 60vh;
+    max-height: 600px;
+  }
+
+  .lightbox-image {
+    @apply object-contain;
+  }
+
+  .lightbox-nav-button {
+    @apply absolute top-1/2 -translate-y-1/2 p-3 sm:p-4;
+    @apply bg-surface-card bg-opacity-90 hover:bg-opacity-100 rounded-full shadow-lg;
+    @apply transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2;
+    @apply text-surface-foreground hover:scale-110 z-10;
+  }
+
+  .lightbox-nav-button-left {
+    @apply left-2 sm:left-4;
+  }
+
+  .lightbox-nav-button-right {
+    @apply right-2 sm:right-4;
+  }
+
+  .lightbox-description {
+    @apply p-4 sm:p-6 border-t border-surface-subtle bg-surface-subtle flex-shrink-0;
+  }
+
+  .lightbox-description p {
+    @apply text-base text-surface-secondary text-center;
+  }
+
+  /* ==========================================
+     DARK SECTIONS — Vega navy variant
+     ========================================== */
+
+  .section-dark-accent {
+    @apply bg-surface-inverse text-white py-20 md:py-28;
+  }
+  .section-dark-accent h1,
+  .section-dark-accent h2,
+  .section-dark-accent h3 {
+    @apply text-white;
+  }
+  .section-dark-accent p {
+    @apply text-white/80;
+  }
+
+  /* ==========================================
+     OVERLAYS
+     ========================================== */
+
+  .noise-overlay {
+    position: relative;
+  }
+  .noise-overlay::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    background-size: 200px 200px;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .noise-overlay > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ==========================================
+     COMPONENT UTILITIES
+     ========================================== */
+
+  .stat-value {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: 'tnum' 1;
+  }
+
+  .location-pill {
+    @apply flex items-center justify-between px-5 py-4 rounded-xl border border-surface-card-border;
+    @apply hover:border-brand-primary transition-all duration-200;
+    background-color: transparent;
+  }
+  .location-pill:hover {
+    background-color: color-mix(in srgb, var(--color-brand-primary) 5%, transparent);
+  }
+  .location-pill:hover .location-pill-arrow {
+    transform: translateX(4px);
+    color: var(--color-brand-primary);
+  }
+  .location-pill-arrow {
+    transition: transform 0.2s ease, color 0.2s ease;
+    color: var(--color-surface-muted-foreground);
+  }
+
+.text-balance {
+  text-wrap: balance;
+}
+
+/* Ensure consistent h1 font-size in semantic sectioning elements (Lighthouse) */
+article h1,
+aside h1,
+nav h1,
+section h1 {
+  font-size: 2rem;
+  line-height: 1.2;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/**
+ * NPRacing v1 — site-specific base layer
+ *
+ * Theme: Grid Box (dark canvas, red accent, condensed display type)
+ * Theme variables injected by @platform/theme-system from theme.config.ts
+ */
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    @apply bg-surface-background text-surface-foreground font-sans;
+    font-feature-settings: 'rlig' 1, 'calt' 1;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-heading text-surface-foreground;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+  }
+
+  ::selection {
+    background-color: var(--color-brand-primary);
+    color: var(--color-brand-on-primary);
+  }
+}
