@@ -6,7 +6,7 @@ import {
   getBreadcrumbSchema,
   getFAQSchema,
 } from '../schema';
-import { businessType } from '../business-config';
+import { businessConfig, businessType } from '../business-config';
 
 // Type helper for accessing nested schema properties
 type SchemaObject = Record<string, unknown>;
@@ -55,34 +55,52 @@ describe('Schema.org Structured Data', () => {
       expect(geo.longitude).toBeDefined();
     });
 
-    it('should include area served with multiple locations', () => {
+    // areaServed, hasCredential, and hasOfferCatalog are all driven directly
+    // by businessConfig — the shared generator (createSchemaGenerators)
+    // always emits areaServed (empty array if unconfigured) but only emits
+    // hasCredential/hasOfferCatalog when the site actually provides that
+    // data. A site with no location-based service area, no credentials to
+    // list, or no on-site service catalog (e.g. a racing team, not a
+    // local-service business) correctly omits them — assert the generator's
+    // real contract, not that every site has every field.
+    it('should include area served matching business config', () => {
       const schema = getLocalBusinessSchema();
       const areaServed = schema.areaServed as SchemaObject[];
 
       expect(areaServed).toBeDefined();
       expect(Array.isArray(areaServed)).toBe(true);
-      expect(areaServed.length).toBeGreaterThan(0);
-      expect(areaServed[0]['@type']).toBe('Place');
+      expect(areaServed.length).toBe(businessConfig.areaServed.length);
+      if (areaServed.length > 0) {
+        expect(areaServed[0]['@type']).toBe('Place');
+      }
     });
 
-    it('should include credentials and certifications', () => {
+    it('should include credentials and certifications when configured', () => {
       const schema = getLocalBusinessSchema();
-      const hasCredential = schema.hasCredential as SchemaObject[];
+      const hasCredential = schema.hasCredential as SchemaObject[] | undefined;
 
-      expect(hasCredential).toBeDefined();
-      expect(Array.isArray(hasCredential)).toBe(true);
-      expect(hasCredential.length).toBeGreaterThanOrEqual(1);
+      if (businessConfig.credentials && businessConfig.credentials.length > 0) {
+        expect(hasCredential).toBeDefined();
+        expect(Array.isArray(hasCredential)).toBe(true);
+        expect(hasCredential!.length).toBeGreaterThanOrEqual(1);
+      } else {
+        expect(hasCredential).toBeUndefined();
+      }
     });
 
-    it('should include offer catalog with services', () => {
+    it('should include offer catalog with services when configured', () => {
       const schema = getLocalBusinessSchema();
-      const hasOfferCatalog = schema.hasOfferCatalog as SchemaObject;
+      const hasOfferCatalog = schema.hasOfferCatalog as SchemaObject | undefined;
 
-      expect(hasOfferCatalog).toBeDefined();
-      expect(hasOfferCatalog['@type']).toBe('OfferCatalog');
-      expect(hasOfferCatalog.itemListElement).toBeDefined();
-      expect(Array.isArray(hasOfferCatalog.itemListElement)).toBe(true);
-      expect((hasOfferCatalog.itemListElement as unknown[]).length).toBeGreaterThan(0);
+      if (businessConfig.offerCatalog && businessConfig.offerCatalog.length > 0) {
+        expect(hasOfferCatalog).toBeDefined();
+        expect(hasOfferCatalog!['@type']).toBe('OfferCatalog');
+        expect(hasOfferCatalog!.itemListElement).toBeDefined();
+        expect(Array.isArray(hasOfferCatalog!.itemListElement)).toBe(true);
+        expect((hasOfferCatalog!.itemListElement as unknown[]).length).toBeGreaterThan(0);
+      } else {
+        expect(hasOfferCatalog).toBeUndefined();
+      }
     });
 
     it('should include social media links', () => {

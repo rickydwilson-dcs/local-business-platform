@@ -184,7 +184,13 @@ export interface SiteConfig extends BaseSiteConfig {
   /** Schema.org business configuration */
   schema: {
     businessConfig: BusinessConfig;
-    businessType: LocalBusinessSchemaOptions['businessType'];
+    /** Widened locally to allow 'SportsTeam' — the shared
+     *  LocalBusinessSchemaOptions['businessType'] union has no SportsTeam
+     *  member and docs/standards/schema.md doesn't document one either.
+     *  The runtime JSON-LD generator (createSchemaGenerators in lib/schema.ts)
+     *  types businessType as plain string, so this serializes fine — the
+     *  widening here only unblocks the local TS annotation. */
+    businessType: LocalBusinessSchemaOptions['businessType'] | 'SportsTeam';
   };
 
   /** NPRacing-specific fields (see RacingConfig) */
@@ -333,77 +339,48 @@ export const siteConfig: SiteConfig = {
   },
 
   schema: {
-    businessType: 'LocalBusiness',
+    businessType: 'SportsTeam',
     businessConfig: {
-      name: 'Your Business Name',
-      legalName: 'Your Business Ltd',
+      name: 'NPRacing',
+      legalName: 'NP Motorcycles',
       description:
-        'Professional local services serving [Your Area]. Quality workmanship, competitive pricing, and excellent customer service.',
-      slogan: 'Your trusted local experts',
-      foundingDate: '2020',
-      numberOfEmployees: '1-10',
-      priceRange: '$$',
-      email: 'info@yourbusiness.com',
-      telephone: '+441234567890',
+        'NPRacing is a private British Superbike (BSB) team run by Neil Pearson, based in Taunton, Somerset, competing on Honda machinery in the British Superbike Championship. Part of the BSB paddock since 2004, with its first full season in the premier Superbike class in 2020, NPRacing is known for developing young talent and running professionally prepared Fireblades as a close-knit, independent operation.',
+      slogan: 'Punching above our weight in British Superbike',
+      foundingDate: '2004',
+      // No public headcount confirmed — omitted rather than guessed
+      // (numberOfEmployees is optional on BusinessConfig).
+      email: 'npracingbsb@hotmail.com',
+      // No public phone number confirmed.
+      telephone: '',
+      // No public street address — city/region reflect the team's real
+      // base (Taunton, Somerset); street/postcode left blank rather than
+      // fabricated.
       address: {
-        streetAddress: '123 Main Street',
-        addressLocality: 'Your City',
-        addressRegion: 'Your County',
-        postalCode: 'AB12 3CD',
+        streetAddress: '',
+        addressLocality: 'Taunton',
+        addressRegion: 'Somerset',
+        postalCode: '',
         addressCountry: 'GB',
       },
+      // Approximate Taunton town-centre coordinates, not a fabricated
+      // specific address.
       geo: {
-        latitude: '51.5074',
-        longitude: '-0.1278',
+        latitude: '51.0158',
+        longitude: '-3.1027',
       },
-      openingHours: [
-        {
-          dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-          opens: '09:00',
-          closes: '17:00',
-        },
-      ],
-      areaServed: ['Main Area', 'North Region', 'South Region', 'East Region', 'West Region'],
-      credentials: [
-        {
-          name: 'Fully Insured',
-          description: 'Public liability and professional indemnity insurance',
-          category: 'certification',
-        },
-        {
-          name: 'Qualified Team',
-          description: 'All staff are fully trained and certified',
-          category: 'certification',
-        },
-      ],
+      // No public opening hours for a racing team — left empty; the
+      // schema generator omits openingHoursSpecification entirely when
+      // this array is empty.
+      openingHours: [],
+      // Not a location-based service business — left empty rather than
+      // inventing an area served.
+      areaServed: [],
       socialProfiles: [
-        'https://www.facebook.com/yourbusiness',
-        'https://www.linkedin.com/company/yourbusiness',
+        'https://www.instagram.com/npracingbsb/',
+        'https://www.facebook.com/npracingbsb/',
       ],
-      knowsAbout: [
-        'Service Category 1',
-        'Service Category 2',
-        'Service Category 3',
-        'Industry Best Practices',
-        'Local Area Expertise',
-      ],
-      offerCatalog: [
-        {
-          name: 'Primary Service',
-          description: 'Our main service offering for residential and commercial clients',
-          url: '/services/primary-service',
-        },
-        {
-          name: 'Secondary Service',
-          description: 'Complementary service that enhances our primary offering',
-          url: '/services/secondary-service',
-        },
-        {
-          name: 'Service Three',
-          description: 'Specialized service for unique client needs',
-          url: '/services/service-three',
-        },
-      ],
+      // No services/products catalog — merchandise is sold via an
+      // external store (The Clothing Kings), not an on-site catalog.
     },
   },
 

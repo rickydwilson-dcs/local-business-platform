@@ -384,7 +384,10 @@ export const siteConfig: SiteConfig = {
       // Not a location-based service business — left empty rather than
       // inventing an area served.
       areaServed: [],
-      socialProfiles: ['https://www.instagram.com/npracingbsb/'],
+      socialProfiles: [
+        'https://www.instagram.com/npracingbsb/',
+        'https://www.facebook.com/npracingbsb/',
+      ],
       // No services/products catalog — merchandise is sold via an
       // external store (The Clothing Kings), not an on-site catalog.
     },

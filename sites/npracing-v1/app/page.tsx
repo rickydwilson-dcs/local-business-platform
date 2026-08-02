@@ -3,6 +3,7 @@ import { HomePage } from '@/components/pages/home-page';
 import { siteConfig } from '@/site.config';
 import { getBrandContent } from '@/lib/brand';
 import { absUrl } from '@/lib/site';
+import { getLocalBusinessSchema } from '@/lib/schema';
 
 export async function generateMetadata(): Promise<Metadata> {
   const { frontmatter: brand } = await getBrandContent();
@@ -52,15 +53,7 @@ export default async function HomePageRoute() {
   // this same file's MDX body separately.
   const { frontmatter: brand } = await getBrandContent();
 
-  // NOTE: no LocalBusiness JSON-LD is emitted here. NPRacing is a race team
-  // with no public office address/phone/hours, and the shared schema
-  // generator's `LocalBusinessSchemaOptions['businessType']` union
-  // (packages/core-components/src/lib/schema-types.ts) has no `SportsTeam`
-  // member and requires non-optional address/telephone/geo/openingHours —
-  // there is no factually-honest way to populate that shape for this site.
-  // Per this platform's philosophy of not over-engineering fixes for known
-  // upstream type gaps, we simply don't call `getLocalBusinessSchema()` from
-  // this route rather than inventing fake-but-plausible business details.
+  const localBusinessSchema = getLocalBusinessSchema();
 
   const webSiteSchema = {
     '@context': 'https://schema.org',
@@ -90,6 +83,10 @@ export default async function HomePageRoute() {
 
   const schemaNodes = (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(webSiteSchema) }}
