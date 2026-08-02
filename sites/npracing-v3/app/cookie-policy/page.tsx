@@ -166,7 +166,9 @@ export default function CookiePolicyPage() {
                   <div className="bg-blue-50 rounded-lg p-4 border-l-4 border-blue-500 mb-4">
                     <h3 className="font-semibold text-blue-800">Analytics Cookies</h3>
                     <p className="text-blue-700 text-sm">
-                      Help us understand how visitors use our website.
+                      Help us understand how visitors use our website.{' '}
+                      <strong>Not currently active on this site</strong> — listed here so this
+                      policy stays accurate if analytics is switched on in future.
                     </p>
                   </div>
                   {/* eslint-enable platform/no-hardcoded-tailwind-colors */}
@@ -209,7 +211,9 @@ export default function CookiePolicyPage() {
                   <div className="bg-purple-50 rounded-lg p-4 border-l-4 border-purple-500 mb-4">
                     <h3 className="font-semibold text-purple-800">Marketing Cookies</h3>
                     <p className="text-purple-700 text-sm">
-                      Used to deliver relevant advertisements and track campaign effectiveness.
+                      Used to deliver relevant advertisements and track campaign effectiveness.{' '}
+                      <strong>Not currently active on this site</strong> — listed here so this
+                      policy stays accurate if marketing tracking is switched on in future.
                     </p>
                   </div>
                   {/* eslint-enable platform/no-hardcoded-tailwind-colors */}
@@ -272,16 +276,20 @@ export default function CookiePolicyPage() {
                 </p>
                 <ul className="list-disc list-inside space-y-2 text-surface-muted-foreground mb-4">
                   <li>
-                    <strong>Chrome:</strong> Settings &gt; Privacy and Security &gt; Cookies
+                    <strong className="text-surface-foreground">Chrome:</strong> Settings &gt;
+                    Privacy and Security &gt; Cookies
                   </li>
                   <li>
-                    <strong>Firefox:</strong> Options &gt; Privacy &amp; Security &gt; Cookies
+                    <strong className="text-surface-foreground">Firefox:</strong> Options &gt;
+                    Privacy &amp; Security &gt; Cookies
                   </li>
                   <li>
-                    <strong>Safari:</strong> Preferences &gt; Privacy &gt; Cookies
+                    <strong className="text-surface-foreground">Safari:</strong> Preferences &gt;
+                    Privacy &gt; Cookies
                   </li>
                   <li>
-                    <strong>Edge:</strong> Settings &gt; Privacy, Search, and Services &gt; Cookies
+                    <strong className="text-surface-foreground">Edge:</strong> Settings &gt;
+                    Privacy, Search, and Services &gt; Cookies
                   </li>
                 </ul>
                 <p className="text-surface-muted-foreground">
@@ -295,7 +303,8 @@ export default function CookiePolicyPage() {
                   5. Third-Party Cookies
                 </h2>
                 <p className="text-surface-muted-foreground mb-4">
-                  Some cookies are placed by third-party services we use:
+                  Neither of the following is currently active on this site. Both are listed here in
+                  case they are switched on in future, so this policy stays accurate:
                 </p>
                 <div className="space-y-4">
                   <div className="bg-surface-subtle rounded-lg p-4">

@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { getBrand } from '@/lib/brand';
 import { getImageUrl } from '@/lib/image';
 import { siteConfig } from '@/site.config';
-import { InstagramIcon } from '@/components/ui/icons';
+import { FacebookIcon, InstagramIcon } from '@/components/ui/icons';
 
 /**
  * SiteFooter — "Number 51" footer.
@@ -99,6 +99,17 @@ export async function SiteFooter() {
                   <span className="sr-only"> (opens in a new tab)</span>
                 </a>
               </li>
+              <li>
+                <a
+                  href={brand.facebookUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={FOOTER_LINK_CLASSES}
+                >
+                  Facebook
+                  <span className="sr-only"> (opens in a new tab)</span>
+                </a>
+              </li>
               {LEGAL_LINKS.map((link) => (
                 <li key={link.href}>
                   <Link href={link.href} className={FOOTER_LINK_CLASSES}>
@@ -129,17 +140,28 @@ export async function SiteFooter() {
             )}
           </p>
 
-          <a
-            href={brand.instagramUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="grid h-10 w-10 place-items-center border border-surface-card-border text-surface-secondary transition-colors duration-normal hover:border-surface-foreground hover:text-surface-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-accent"
-          >
-            <InstagramIcon />
-            <span className="sr-only">
-              {brand.teamName} on Instagram {brand.instagramHandle} (opens in a new tab)
-            </span>
-          </a>
+          <div className="flex items-center gap-2">
+            <a
+              href={brand.instagramUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="grid h-10 w-10 place-items-center border border-surface-card-border text-surface-secondary transition-colors duration-normal hover:border-surface-foreground hover:text-surface-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-accent"
+            >
+              <InstagramIcon />
+              <span className="sr-only">
+                {brand.teamName} on Instagram {brand.instagramHandle} (opens in a new tab)
+              </span>
+            </a>
+            <a
+              href={brand.facebookUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="grid h-10 w-10 place-items-center border border-surface-card-border text-surface-secondary transition-colors duration-normal hover:border-surface-foreground hover:text-surface-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-accent"
+            >
+              <FacebookIcon />
+              <span className="sr-only">{brand.teamName} on Facebook (opens in a new tab)</span>
+            </a>
+          </div>
         </div>
       </div>
     </footer>

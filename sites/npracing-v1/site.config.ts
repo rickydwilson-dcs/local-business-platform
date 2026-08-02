@@ -219,30 +219,40 @@ export const siteConfig: SiteConfig = {
 
   business: {
     name: 'NPRacing',
-    legalName: 'Your Business Ltd',
+    // Best-available fact from the brief: Neil Pearson, the team owner, is
+    // also the founder of NP Motorcycles. Not confirmed as the racing
+    // team's exact registered legal entity name — update once confirmed.
+    legalName: 'NP Motorcycles',
     type: 'SportsTeam',
-    phone: '+44 1234 567890',
+    // No public phone number confirmed for NPRacing (brief only confirms
+    // email as live). Left empty rather than inventing a number.
+    phone: '',
     email: 'npracingbsb@hotmail.com',
+    // NPRacing has no public storefront/office — this is a racing team, not
+    // a local service business. City/region reflect the team's real base
+    // (Taunton, Somerset, per brief); street/postcode are left blank rather
+    // than fabricated since no public address is confirmed.
     address: {
-      street: '123 Main Street',
-      city: 'City Name',
-      region: 'County/Region',
-      postalCode: 'AB12 3CD',
+      street: '',
+      city: 'Taunton',
+      region: 'Somerset',
+      postalCode: '',
       country: 'United Kingdom',
     },
+    // Not applicable — racing team, no public office hours.
     hours: {
-      monday: '9:00 AM - 5:00 PM',
-      tuesday: '9:00 AM - 5:00 PM',
-      wednesday: '9:00 AM - 5:00 PM',
-      thursday: '9:00 AM - 5:00 PM',
-      friday: '9:00 AM - 5:00 PM',
-      saturday: 'Closed',
-      sunday: 'Closed',
+      monday: 'N/A — no public office',
+      tuesday: 'N/A — no public office',
+      wednesday: 'N/A — no public office',
+      thursday: 'N/A — no public office',
+      friday: 'N/A — no public office',
+      saturday: 'N/A — no public office',
+      sunday: 'N/A — no public office',
     },
     socialMedia: {
-      facebook: 'https://facebook.com/yourbusiness',
-      twitter: 'https://twitter.com/yourbusiness',
-      instagram: 'https://instagram.com/yourbusiness',
+      // Confirmed and approved as an image/content source per the brief.
+      instagram: 'https://www.instagram.com/npracingbsb/',
+      facebook: 'https://www.facebook.com/npracingbsb/',
     },
     // No confirmed public street address/geo for NPRacing (team is based in
     // Taunton, Somerset per brand.mdx, but no exact coordinates were ever

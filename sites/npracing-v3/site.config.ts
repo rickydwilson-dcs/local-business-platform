@@ -260,7 +260,7 @@ export const siteConfig: SiteConfig = {
     socialMedia: {
       // Confirmed and approved as an image/content source per the brief.
       instagram: 'https://www.instagram.com/npracingbsb/',
-      // Facebook requested from client 2026-08-01, not yet received.
+      facebook: 'https://www.facebook.com/npracingbsb/',
     },
     // Approximate Taunton town-centre coordinates (public geographic fact,
     // not a specific fabricated street address) representing the team base.

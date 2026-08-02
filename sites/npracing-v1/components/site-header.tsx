@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { Instagram } from 'lucide-react';
+import { Instagram, Facebook } from 'lucide-react';
 import { SiteNavMobile } from '@/components/site-nav-mobile';
 
 /**
@@ -27,6 +27,7 @@ export interface SiteHeaderProps {
   primaryCta: { label: string; href: string };
   instagramUrl: string;
   instagramHandle: string;
+  facebookUrl: string;
   /** Text of the red bar above the nav (championship + season). */
   announcement?: string;
 }
@@ -38,6 +39,7 @@ export function SiteHeader({
   primaryCta,
   instagramUrl,
   instagramHandle,
+  facebookUrl,
   announcement,
 }: SiteHeaderProps) {
   return (
@@ -99,6 +101,16 @@ export function SiteHeader({
               </span>
             </a>
 
+            <a
+              href={facebookUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden h-10 w-10 place-items-center rounded-full border border-transparent text-surface-foreground transition-colors hover:border-surface-card-border hover:bg-surface-muted sm:grid"
+            >
+              <Facebook className="h-5 w-5" aria-hidden="true" />
+              <span className="sr-only">{siteName} on Facebook (opens in a new tab)</span>
+            </a>
+
             <Link href={primaryCta.href} className="btn-primary hidden px-5 py-2.5 sm:inline-flex">
               {primaryCta.label}
             </Link>
@@ -109,6 +121,7 @@ export function SiteHeader({
               primaryCta={primaryCta}
               instagramUrl={instagramUrl}
               instagramHandle={instagramHandle}
+              facebookUrl={facebookUrl}
             />
           </div>
         </header>

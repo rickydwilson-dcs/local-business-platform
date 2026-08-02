@@ -7,7 +7,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { siteConfig } from '@/site.config';
-import { PHONE_DISPLAY, BUSINESS_EMAIL, formatAddressSingleLine } from '@/lib/contact-info';
+import { BUSINESS_EMAIL } from '@/lib/contact-info';
 import { absUrl } from '@/lib/site';
 import { Breadcrumbs } from '@platform/core-components';
 
@@ -102,20 +102,17 @@ export default function PrivacyPolicyPage() {
                 </h2>
                 <p className="text-surface-muted-foreground mb-4">
                   {siteConfig.business.legalName} (&quot;we&quot;, &quot;us&quot;, or
-                  &quot;our&quot;) is the data controller responsible for your personal data.
+                  &quot;our&quot;) is the data controller responsible for your personal data.{' '}
+                  {siteConfig.business.name} has no public office address or phone number — email is
+                  the team&apos;s only public contact channel.
                 </p>
-                <div className="bg-surface-subtle rounded-lg p-4">
+                <div className="bg-surface-subtle rounded-lg p-4 text-surface-foreground">
                   <p className="mb-1">
-                    <strong>Business Name:</strong> {siteConfig.business.legalName}
-                  </p>
-                  <p className="mb-1">
-                    <strong>Address:</strong> {formatAddressSingleLine()}
-                  </p>
-                  <p className="mb-1">
-                    <strong>Phone:</strong> {PHONE_DISPLAY}
+                    <strong className="text-surface-foreground">Business Name:</strong>{' '}
+                    {siteConfig.business.legalName}
                   </p>
                   <p>
-                    <strong>Email:</strong> {BUSINESS_EMAIL}
+                    <strong className="text-surface-foreground">Email:</strong> {BUSINESS_EMAIL}
                   </p>
                 </div>
               </section>
@@ -133,17 +130,18 @@ export default function PrivacyPolicyPage() {
                   <div className="bg-blue-50 rounded-lg p-4 border-l-4 border-blue-500">
                     <h3 className="font-semibold text-blue-800">Contact Information</h3>
                     <p className="text-blue-700 text-sm">
-                      Name, email address, phone number, and postal address when you contact us or
-                      request a quote.
+                      Name and email address when you contact us via email or our contact form.
                     </p>
                   </div>
                   {/* eslint-enable platform/no-hardcoded-tailwind-colors */}
                   {/* eslint-disable platform/no-hardcoded-tailwind-colors -- Intentional: semantic legal basis callout */}
                   <div className="bg-green-50 rounded-lg p-4 border-l-4 border-green-500">
-                    <h3 className="font-semibold text-green-800">Project Information</h3>
+                    <h3 className="font-semibold text-green-800">
+                      Sponsorship &amp; Partnership Enquiries
+                    </h3>
                     <p className="text-green-700 text-sm">
-                      Details about your project requirements, property information, and service
-                      preferences.
+                      Details you share about your organisation or proposal when enquiring about
+                      sponsorship or a partnership.
                     </p>
                   </div>
                   {/* eslint-enable platform/no-hardcoded-tailwind-colors */}
@@ -177,10 +175,9 @@ export default function PrivacyPolicyPage() {
                   We use your personal data for the following purposes:
                 </p>
                 <ul className="list-disc list-inside space-y-2 text-surface-muted-foreground">
-                  <li>To respond to your enquiries and provide quotes</li>
-                  <li>To deliver our services and fulfil contracts</li>
-                  <li>To send service updates and communications</li>
-                  <li>To improve our website and services</li>
+                  <li>To respond to your enquiries, including sponsorship and media requests</li>
+                  <li>To send team news and communications you&apos;ve asked for</li>
+                  <li>To improve our website</li>
                   <li>To comply with legal obligations</li>
                   <li>To protect our legitimate business interests</li>
                 </ul>
@@ -198,7 +195,7 @@ export default function PrivacyPolicyPage() {
                   <div className="bg-surface-subtle rounded-lg p-4">
                     <h3 className="font-semibold text-surface-foreground">Contract</h3>
                     <p className="text-sm text-surface-muted-foreground">
-                      Processing necessary to perform our services
+                      Processing necessary to respond to sponsorship or partnership proposals
                     </p>
                   </div>
                   <div className="bg-surface-subtle rounded-lg p-4">
@@ -263,14 +260,8 @@ export default function PrivacyPolicyPage() {
                     </thead>
                     <tbody>
                       <tr>
-                        <td className="border border-surface-border p-3">Quote enquiries</td>
+                        <td className="border border-surface-border p-3">General enquiries</td>
                         <td className="border border-surface-border p-3">2 years</td>
-                      </tr>
-                      <tr>
-                        <td className="border border-surface-border p-3">Customer records</td>
-                        <td className="border border-surface-border p-3">
-                          7 years after last service
-                        </td>
                       </tr>
                       <tr>
                         <td className="border border-surface-border p-3">Financial records</td>
@@ -397,7 +388,7 @@ export default function PrivacyPolicyPage() {
                     <p className="text-surface-muted-foreground text-sm mb-2">
                       For any questions about this privacy policy or our data practices:
                     </p>
-                    <p className="text-sm">
+                    <p className="text-sm text-surface-foreground">
                       Email:{' '}
                       <a
                         href={`mailto:${BUSINESS_EMAIL}`}
@@ -406,7 +397,6 @@ export default function PrivacyPolicyPage() {
                         {BUSINESS_EMAIL}
                       </a>
                     </p>
-                    <p className="text-sm">Phone: {PHONE_DISPLAY}</p>
                   </div>
                   <div className="bg-surface-subtle rounded-lg p-6">
                     <h3 className="font-semibold text-surface-foreground mb-4">
@@ -415,10 +405,10 @@ export default function PrivacyPolicyPage() {
                     <p className="text-surface-muted-foreground text-sm mb-2">
                       You have the right to lodge a complaint with:
                     </p>
-                    <p className="text-sm font-medium">
+                    <p className="text-sm font-medium text-surface-foreground">
                       Information Commissioner&apos;s Office (ICO)
                     </p>
-                    <p className="text-sm">
+                    <p className="text-sm text-surface-foreground">
                       Website:{' '}
                       <a
                         href="https://ico.org.uk"
@@ -429,7 +419,7 @@ export default function PrivacyPolicyPage() {
                         ico.org.uk
                       </a>
                     </p>
-                    <p className="text-sm">Helpline: 0303 123 1113</p>
+                    <p className="text-sm text-surface-foreground">Helpline: 0303 123 1113</p>
                   </div>
                 </div>
               </section>

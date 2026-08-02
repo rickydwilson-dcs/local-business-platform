@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { Menu, X, Instagram } from 'lucide-react';
+import { Menu, X, Instagram, Facebook } from 'lucide-react';
 
 /**
  * Mobile navigation for the Grid Box header.
@@ -16,6 +16,7 @@ export interface SiteNavMobileProps {
   primaryCta: { label: string; href: string };
   instagramUrl: string;
   instagramHandle: string;
+  facebookUrl: string;
 }
 
 export function SiteNavMobile({
@@ -24,6 +25,7 @@ export function SiteNavMobile({
   primaryCta,
   instagramUrl,
   instagramHandle,
+  facebookUrl,
 }: SiteNavMobileProps) {
   const [open, setOpen] = useState(false);
 
@@ -111,6 +113,16 @@ export function SiteNavMobile({
             >
               <Instagram className="h-4 w-4" aria-hidden="true" />
               {instagramHandle}
+              <span className="sr-only">(opens in a new tab)</span>
+            </a>
+            <a
+              href={facebookUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-2 text-sm font-bold uppercase tracking-wide text-surface-secondary-foreground transition-colors hover:text-brand-accent"
+            >
+              <Facebook className="h-4 w-4" aria-hidden="true" />
+              Facebook
               <span className="sr-only">(opens in a new tab)</span>
             </a>
           </div>

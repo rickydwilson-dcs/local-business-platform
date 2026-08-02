@@ -6,7 +6,7 @@ import { siteConfig } from '@/site.config';
 import { MobileMenu } from '@/components/mobile-menu';
 import { TickerRibbon } from '@/components/sections/ticker-ribbon';
 import { CtaButton } from '@/components/ui/cta-button';
-import { InstagramIcon } from '@/components/ui/icons';
+import { FacebookIcon, InstagramIcon } from '@/components/ui/icons';
 
 /**
  * SiteHeader — "Number 51" masthead.
@@ -82,6 +82,16 @@ export async function SiteHeader() {
               <span className="sr-only">
                 {brand.teamName} on Instagram {brand.instagramHandle} (opens in a new tab)
               </span>
+            </a>
+
+            <a
+              href={brand.facebookUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="grid h-10 w-10 place-items-center border border-transparent text-surface-foreground transition-colors duration-normal hover:border-surface-card-border hover:bg-white/[0.08] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-accent"
+            >
+              <FacebookIcon />
+              <span className="sr-only">{brand.teamName} on Facebook (opens in a new tab)</span>
             </a>
 
             <span className="hidden sm:inline-flex">

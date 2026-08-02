@@ -12,10 +12,8 @@ import {
 /**
  * ContactPage — "Number 51" contact layout.
  *
- * Direct channels on the left, enquiry form on the right. Email and Instagram
- * come from `content/brand/npracing.mdx`; Facebook is shown as "link coming
- * soon" because the team has not supplied a profile URL — no placeholder URL
- * is invented.
+ * Direct channels on the left, enquiry form on the right. Email, Instagram,
+ * and Facebook all come from `content/brand/npracing.mdx`.
  *
  * The form does not send. See ContactEnquiryForm for the reasoning.
  */
@@ -51,7 +49,9 @@ export async function ContactPage() {
       key: 'facebook',
       icon: FacebookIcon,
       label: 'Facebook',
-      value: 'Link coming soon',
+      value: 'facebook.com/npracingbsb',
+      href: brand.facebookUrl,
+      external: true,
     },
     {
       key: 'sponsorship',

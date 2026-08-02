@@ -40,6 +40,8 @@ export const BrandFrontmatterSchema = z.object({
 
   instagramUrl: z.string().url('instagramUrl must be a valid URL'),
 
+  facebookUrl: z.string().url('facebookUrl must be a valid URL'),
+
   logo: BrandLogoSchema,
 
   foundedYear: z.number().int().optional(),

@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { Instagram } from 'lucide-react';
+import { Instagram, Facebook } from 'lucide-react';
 
 /**
  * SiteFooter — Grid Box footer.
@@ -30,6 +30,7 @@ export interface SiteFooterProps {
   email: string;
   instagramUrl: string;
   instagramHandle: string;
+  facebookUrl: string;
   copyright: string;
   builtBy?: { name: string; url: string };
 }
@@ -61,6 +62,7 @@ export function SiteFooter({
   email,
   instagramUrl,
   instagramHandle,
+  facebookUrl,
   copyright,
   builtBy,
 }: SiteFooterProps) {
@@ -115,6 +117,18 @@ export function SiteFooter({
                 >
                   <Instagram className="h-4 w-4" aria-hidden="true" />
                   Instagram {instagramHandle}
+                  <span className="sr-only">(opens in a new tab)</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href={facebookUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-sm text-surface-secondary-foreground transition-colors hover:text-surface-foreground"
+                >
+                  <Facebook className="h-4 w-4" aria-hidden="true" />
+                  Facebook
                   <span className="sr-only">(opens in a new tab)</span>
                 </a>
               </li>

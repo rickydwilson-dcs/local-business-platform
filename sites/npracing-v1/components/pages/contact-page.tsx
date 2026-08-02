@@ -20,10 +20,9 @@ import { ArrowTextLink } from '@/components/sections/arrow-link';
  * and the result region says plainly that nothing was sent and points at the
  * team's real email address.
  *
- * Every contact detail (email, Instagram) is read from
+ * Every contact detail (email, Instagram, Facebook) is read from
  * content/brand/npracing.mdx via the `brand` prop — none of it is hardcoded
- * here. NPRacing's Facebook page has not been confirmed, so it is rendered as
- * plain "Link coming soon" text rather than a guessed URL.
+ * here.
  */
 
 export interface ContactPageProps {
@@ -385,9 +384,17 @@ export function ContactPage({ brand }: ContactPageProps) {
                   Facebook
                 </span>
               </dt>
-              {/* No confirmed Facebook URL — plain text, never a guessed link. */}
-              <dd className="mt-3 font-semibold text-surface-secondary-foreground">
-                Link coming soon
+              <dd className="mt-3">
+                <ArrowTextLink
+                  href={brand.facebookUrl}
+                  external
+                  externalLabel={`${brand.teamName} on Facebook`}
+                >
+                  facebook.com/npracingbsb
+                </ArrowTextLink>
+                <p className="mt-2 text-sm leading-relaxed text-surface-secondary-foreground">
+                  Team news and updates.
+                </p>
               </dd>
             </div>
           </dl>

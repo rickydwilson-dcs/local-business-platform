@@ -19,6 +19,7 @@ export const BrandFrontmatterSchema = z.object({
   email: z.email(),
   instagramHandle: z.string(),
   instagramUrl: z.url(),
+  facebookUrl: z.url(),
   logo: z.object({
     src: z.string(),
     alt: z.string(),

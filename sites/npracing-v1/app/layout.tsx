@@ -118,6 +118,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
               primaryCta={siteConfig.cta.primary}
               instagramUrl={brand.instagramUrl}
               instagramHandle={brand.instagramHandle}
+              facebookUrl={brand.facebookUrl}
               announcement={brand.championship}
             />
           }
@@ -129,6 +130,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
               email={brand.email}
               instagramUrl={brand.instagramUrl}
               instagramHandle={brand.instagramHandle}
+              facebookUrl={brand.facebookUrl}
               copyright={`${new Date().getFullYear()} ${brand.teamName}. All rights reserved.`}
               builtBy={siteConfig.footer?.builtBy}
             />
