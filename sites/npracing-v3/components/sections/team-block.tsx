@@ -35,7 +35,7 @@ export function TeamBlock({ heading, children, imageAlt }: TeamBlockProps) {
         <div className="grid border border-surface-card-border lg:grid-cols-[1fr_1.1fr]">
           <div className="relative min-h-[20rem] lg:min-h-full">
             <Image
-              src={getImageUrl('npracing-v3/team/paddock-team.jpg')}
+              src={getImageUrl('npracing-v3/team/paddock-team-2026-08.jpg')}
               alt={imageAlt}
               fill
               sizes={getImageSizes('card')}

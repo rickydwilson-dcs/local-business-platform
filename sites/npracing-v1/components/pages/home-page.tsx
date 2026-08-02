@@ -23,7 +23,7 @@ const R2_BASE = 'https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev';
 const PHOTO = {
   actionLean: `${R2_BASE}/npracing-v1/photos/action-lean.jpg`,
   actionChase: `${R2_BASE}/npracing-v1/photos/action-chase.jpg`,
-  paddockTeam: `${R2_BASE}/npracing-v1/photos/paddock-team.jpg`,
+  paddockTeam: `${R2_BASE}/npracing-v1/photos/paddock-team-2026-08.jpg`,
 } as const;
 
 /**
