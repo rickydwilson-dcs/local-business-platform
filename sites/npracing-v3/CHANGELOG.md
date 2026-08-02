@@ -13,6 +13,7 @@ Template site used as the gold-standard starting point for new client sites. Cha
 - `news-index-page.tsx` and `news-detail-page.tsx` fall back to the site name (from `site.config.ts`) when an article has no source, and hide the outbound "read the original report" link entirely for original posts.
 - `scripts/validate-content.ts`'s `EXPECTED_COUNTS.news` bumped from 2 to 4 to match the new total.
 - Added hero images to both new race-report posts, uploaded to R2 (`npracing-v3/news/<slug>.jpg`).
+- Fixed hero images being badly cropped on the detail page: the container forced every image into a fixed `aspect-[16/7]` wide-banner ratio with `object-cover`, which is fine for a landscape photo but cropped out roughly half of the portrait paddock shot and the bottom half of the cornering action shot. Written speculatively before any article had a real hero image, so the crop went untested until these two posts shipped. Replaced with a bounded-height container (`h-[24rem] sm:h-[32rem]`) and `object-contain` on a `bg-surface-card` backdrop — the full image now always shows, letterboxed rather than cropped, regardless of orientation.
 
 ---
 
