@@ -29,7 +29,7 @@ export function GalleryStrip({ heading, teamName, riderName }: GalleryStripProps
       alt: `${riderName} leant into a corner on the ${teamName} Honda Fireblade`,
     },
     {
-      src: 'npracing-v3/team/paddock-team.jpg',
+      src: 'npracing-v3/team/paddock-team-2026-08.jpg',
       alt: `${teamName} crew on the grid under the team umbrella`,
     },
     {
