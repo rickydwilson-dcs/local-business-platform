@@ -142,15 +142,15 @@ export default function CookiePolicyPage() {
                   <h3 className="text-xl font-semibold mb-4 text-surface-foreground">
                     3.1 Necessary Cookies
                   </h3>
-                  {/* eslint-disable platform/no-hardcoded-tailwind-colors -- Intentional: semantic legal basis callout */}
-                  <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-4">
-                    <p className="font-semibold text-blue-900">Legal Basis: Legitimate Interests</p>
-                    <p className="text-blue-800">
+                  <div className="bg-surface-subtle border-l-4 border-brand-primary rounded-lg p-6 mb-4">
+                    <p className="font-semibold text-surface-foreground">
+                      Legal Basis: Legitimate Interests
+                    </p>
+                    <p className="text-surface-muted-foreground">
                       These cookies are essential for basic website functionality and do not require
                       consent.
                     </p>
                   </div>
-                  {/* eslint-enable platform/no-hardcoded-tailwind-colors */}
                   <div className="overflow-x-auto">
                     <table className="w-full border border-surface-border rounded-lg">
                       <thead className="bg-surface-muted">
@@ -195,15 +195,13 @@ export default function CookiePolicyPage() {
                   <h3 className="text-xl font-semibold mb-4 text-surface-foreground">
                     3.2 Analytics Cookies
                   </h3>
-                  {/* eslint-disable platform/no-hardcoded-tailwind-colors -- Intentional: semantic legal basis callout */}
-                  <div className="bg-green-50 border border-green-200 rounded-lg p-6 mb-4">
-                    <p className="font-semibold text-green-900">Legal Basis: Consent</p>
-                    <p className="text-green-800">
+                  <div className="bg-surface-subtle border-l-4 border-brand-primary rounded-lg p-6 mb-4">
+                    <p className="font-semibold text-surface-foreground">Legal Basis: Consent</p>
+                    <p className="text-surface-muted-foreground">
                       These cookies help us understand how visitors interact with our scaffolding
                       website.
                     </p>
                   </div>
-                  {/* eslint-enable platform/no-hardcoded-tailwind-colors */}
                   <div className="overflow-x-auto">
                     <table className="w-full border border-surface-border rounded-lg">
                       <thead className="bg-surface-muted">
@@ -253,15 +251,13 @@ export default function CookiePolicyPage() {
                   <h3 className="text-xl font-semibold mb-4 text-surface-foreground">
                     3.3 Marketing Cookies
                   </h3>
-                  {/* eslint-disable platform/no-hardcoded-tailwind-colors -- Intentional: semantic legal basis callout */}
-                  <div className="bg-purple-50 border border-purple-200 rounded-lg p-6 mb-4">
-                    <p className="font-semibold text-purple-900">Legal Basis: Consent</p>
-                    <p className="text-purple-800">
+                  <div className="bg-surface-subtle border-l-4 border-brand-primary rounded-lg p-6 mb-4">
+                    <p className="font-semibold text-surface-foreground">Legal Basis: Consent</p>
+                    <p className="text-surface-muted-foreground">
                       These cookies track scaffolding service inquiries and enable targeted
                       marketing.
                     </p>
                   </div>
-                  {/* eslint-enable platform/no-hardcoded-tailwind-colors */}
                   <div className="overflow-x-auto">
                     <table className="w-full border border-surface-border rounded-lg">
                       <thead className="bg-surface-muted">
@@ -320,16 +316,14 @@ export default function CookiePolicyPage() {
                   <h3 className="text-xl font-semibold mb-4 text-surface-foreground">
                     3.4 Functional Cookies
                   </h3>
-                  {/* eslint-disable platform/no-hardcoded-tailwind-colors -- Intentional: semantic legal basis callout */}
-                  <div className="bg-orange-50 border border-orange-200 rounded-lg p-6 mb-4">
-                    <p className="font-semibold text-orange-900">
+                  <div className="bg-surface-subtle border-l-4 border-brand-primary rounded-lg p-6 mb-4">
+                    <p className="font-semibold text-surface-foreground">
                       Legal Basis: Legitimate Interests
                     </p>
-                    <p className="text-orange-800">
+                    <p className="text-surface-muted-foreground">
                       These cookies enhance your experience on our scaffolding website.
                     </p>
                   </div>
-                  {/* eslint-enable platform/no-hardcoded-tailwind-colors */}
                   <p>
                     We currently do not use functional cookies beyond those necessary for basic
                     website operation. Any future functional cookies will enhance your experience
@@ -500,9 +494,8 @@ export default function CookiePolicyPage() {
                   </div>
                 </div>
 
-                {/* eslint-disable platform/no-hardcoded-tailwind-colors -- Intentional: semantic legal basis callout */}
-                <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-                  <p className="text-base text-blue-800">
+                <div className="mt-6 p-4 bg-surface-subtle border-l-4 border-brand-primary rounded-lg">
+                  <p className="text-base text-surface-foreground">
                     <strong>Your Rights:</strong> You have rights under UK data protection law
                     regarding your personal data. Please see our{" "}
                     <Link href="/privacy-policy" className="text-brand-primary hover:underline">
@@ -511,7 +504,6 @@ export default function CookiePolicyPage() {
                     for full details of your rights and how to exercise them.
                   </p>
                 </div>
-                {/* eslint-enable platform/no-hardcoded-tailwind-colors */}
               </section>
 
               {/* Updates */}

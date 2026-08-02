@@ -127,42 +127,34 @@ export default function PrivacyPolicyPage() {
                   We may collect and process the following types of personal data:
                 </p>
                 <div className="space-y-4">
-                  {/* eslint-disable platform/no-hardcoded-tailwind-colors -- Intentional: semantic legal basis callout */}
-                  <div className="bg-blue-50 rounded-lg p-4 border-l-4 border-blue-500">
-                    <h3 className="font-semibold text-blue-800">Contact Information</h3>
-                    <p className="text-blue-700 text-sm">
+                  <div className="bg-surface-subtle rounded-lg p-4 border-l-4 border-brand-primary">
+                    <h3 className="font-semibold text-surface-foreground">Contact Information</h3>
+                    <p className="text-surface-muted-foreground text-sm">
                       Name, email address, phone number, and postal address when you contact us or
                       request a quote.
                     </p>
                   </div>
-                  {/* eslint-enable platform/no-hardcoded-tailwind-colors */}
-                  {/* eslint-disable platform/no-hardcoded-tailwind-colors -- Intentional: semantic legal basis callout */}
-                  <div className="bg-green-50 rounded-lg p-4 border-l-4 border-green-500">
-                    <h3 className="font-semibold text-green-800">Project Information</h3>
-                    <p className="text-green-700 text-sm">
+                  <div className="bg-surface-subtle rounded-lg p-4 border-l-4 border-brand-primary">
+                    <h3 className="font-semibold text-surface-foreground">Project Information</h3>
+                    <p className="text-surface-muted-foreground text-sm">
                       Details about your project requirements, property information, and service
                       preferences.
                     </p>
                   </div>
-                  {/* eslint-enable platform/no-hardcoded-tailwind-colors */}
-                  {/* eslint-disable platform/no-hardcoded-tailwind-colors -- Intentional: semantic legal basis callout */}
-                  <div className="bg-purple-50 rounded-lg p-4 border-l-4 border-purple-500">
-                    <h3 className="font-semibold text-purple-800">Technical Data</h3>
-                    <p className="text-purple-700 text-sm">
+                  <div className="bg-surface-subtle rounded-lg p-4 border-l-4 border-brand-primary">
+                    <h3 className="font-semibold text-surface-foreground">Technical Data</h3>
+                    <p className="text-surface-muted-foreground text-sm">
                       IP address, browser type, device information, and cookies when you visit our
                       website.
                     </p>
                   </div>
-                  {/* eslint-enable platform/no-hardcoded-tailwind-colors */}
-                  {/* eslint-disable platform/no-hardcoded-tailwind-colors -- Intentional: semantic legal basis callout */}
-                  <div className="bg-amber-50 rounded-lg p-4 border-l-4 border-amber-500">
-                    <h3 className="font-semibold text-amber-800">Communication Records</h3>
-                    <p className="text-amber-700 text-sm">
+                  <div className="bg-surface-subtle rounded-lg p-4 border-l-4 border-brand-primary">
+                    <h3 className="font-semibold text-surface-foreground">Communication Records</h3>
+                    <p className="text-surface-muted-foreground text-sm">
                       Records of correspondence if you contact us, including emails and phone call
                       notes.
                     </p>
                   </div>
-                  {/* eslint-enable platform/no-hardcoded-tailwind-colors */}
                 </div>
               </section>
 

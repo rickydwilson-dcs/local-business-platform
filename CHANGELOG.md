@@ -6,6 +6,14 @@ Notable platform-level changes to the Local Business Platform. Site-specific cha
 
 ---
 
+## 2026-08-02
+
+### Sites
+
+- Privacy Policy and Cookie Policy pages across `base-template` and every site scaffolded from it (`dch-automotive`, `mad-graphics`, `dcs`, `colossus-scaffolding`, `npracing-v1`, `npracing-v3`) replaced their rainbow blue/green/purple/amber/red/yellow legal-basis callout boxes — each carrying an `eslint-disable platform/no-hardcoded-tailwind-colors` escape hatch — with the site's own brand palette (`bg-surface-subtle` / `border-brand-primary`). The pattern originated in `base-template` and was copied into every derived site verbatim, so fixing the template stops new sites from inheriting it. Genuinely semantic non-brand colors (form error-state tints, real third-party accreditation-badge branding) were left as-is — they aren't the same issue.
+
+---
+
 ## 2026-07-12
 
 ### Infrastructure
