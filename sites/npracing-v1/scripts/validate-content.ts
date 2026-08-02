@@ -3,28 +3,35 @@
 /**
  * Content Validation Script
  *
- * Validates all MDX files in content/services/, content/locations/,
- * content/merch/, content/news/, and content/brand/ against their respective
- * Zod schemas to catch content errors before they reach production.
+ * Validates all MDX files in content/{merch,news,brand}/
+ * against their respective Zod schemas to catch content errors before
+ * they reach production. merch/news/brand enforce a fixed
+ * expected record count (see EXPECTED_COUNTS below).
+ *
+ * NP Racing is not a local-service-business site, so it has no
+ * content/services/ or content/locations/ — do not reintroduce those here.
+ * See docs/architecture/content-validation.md#non-standard-content-types.
  *
  * Usage:
- *   npm run validate-content          # all types
- *   npm run validate-content services
- *   npm run validate-content locations
- *   npm run validate-content merch
- *   npm run validate-content news
- *   npm run validate-content brand
+ *   pnpm run validate-content [all|merch|news|brand]
  */
 
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import matter from 'gray-matter';
-import { ServiceFrontmatterSchema, LocationFrontmatterSchema } from '@platform/core-components';
 import { MerchFrontmatterSchema } from '../lib/schemas/merch';
 import { newsFrontmatterSchema } from '../lib/schemas/news';
 import { BrandFrontmatterSchema } from '../lib/schemas/brand';
 import { z } from 'zod';
+
+// Content types with a fixed, known-good record count — a wrong count means
+// content was silently added/removed/duplicated without deliberate review.
+const EXPECTED_COUNTS: Record<string, number> = {
+  merch: 8,
+  news: 2,
+  brand: 1,
+};
 
 // ANSI color codes for terminal output
 const colors = {
@@ -36,13 +43,6 @@ const colors = {
   gray: '\x1b[90m',
 };
 
-type AnySchema =
-  | typeof ServiceFrontmatterSchema
-  | typeof LocationFrontmatterSchema
-  | typeof MerchFrontmatterSchema
-  | typeof newsFrontmatterSchema
-  | typeof BrandFrontmatterSchema;
-
 interface ValidationResult {
   file: string;
   valid: boolean;
@@ -52,7 +52,7 @@ interface ValidationResult {
 /**
  * Validate a single MDX file against a Zod schema
  */
-function validateFile(filePath: string, schema: AnySchema): ValidationResult {
+function validateFile(filePath: string, schema: z.ZodTypeAny): ValidationResult {
   const fileName = path.basename(filePath);
 
   try {
@@ -92,7 +92,7 @@ function validateFile(filePath: string, schema: AnySchema): ValidationResult {
 /**
  * Validate all MDX files in a directory
  */
-function validateDirectory(dirPath: string, schema: AnySchema): ValidationResult[] {
+function validateDirectory(dirPath: string, schema: z.ZodTypeAny): ValidationResult[] {
   const files = fs
     .readdirSync(dirPath)
     .filter((file) => file.endsWith('.mdx'))
@@ -172,40 +172,34 @@ function printResults(results: ValidationResult[], type: string): boolean {
 }
 
 /**
- * Validate a content directory against a schema, an exact expected record
- * count, and a duplicate-slug check. Used for merch/news/brand, which have
- * fixed, known record counts (unlike services/locations).
+ * Validate a content type against a fixed expected record count, plus a
+ * duplicate-slug check. Used for merch/news/brand — all real, curated
+ * content where a wrong count or a duplicate slug means content silently
+ * drifted without deliberate review.
  */
-function validateExactCount(
-  dirName: string,
-  displayName: string,
-  schema: AnySchema,
-  expectedCount: number
-): boolean {
-  const contentDir = path.join(process.cwd(), 'content');
-  const dirPath = path.join(contentDir, dirName);
+function validateCountedType(contentDir: string, typeName: string, schema: z.ZodTypeAny): boolean {
+  const dirPath = path.join(contentDir, typeName);
+  const expected = EXPECTED_COUNTS[typeName];
 
   if (!fs.existsSync(dirPath)) {
-    console.error(
-      `${colors.red}Error: ${displayName} directory not found: ${dirPath}${colors.reset}`
-    );
+    console.error(`${colors.red}Error: ${typeName} directory not found: ${dirPath}${colors.reset}`);
     return false;
   }
 
   const results = validateDirectory(dirPath, schema);
-  const schemaValid = printResults(results, displayName);
+  const schemaValid = printResults(results, typeName[0].toUpperCase() + typeName.slice(1));
 
   const duplicates = findDuplicateSlugs(dirPath);
   if (duplicates.length > 0) {
     console.log(
-      `${colors.red}✗ Duplicate slugs found in ${dirName}: ${duplicates.join(', ')}${colors.reset}\n`
+      `${colors.red}✗ Duplicate slugs found in ${typeName}: ${duplicates.join(', ')}${colors.reset}\n`
     );
   }
 
-  const countValid = results.length === expectedCount;
+  const countValid = results.length === expected;
   if (!countValid) {
     console.log(
-      `${colors.red}✗ Expected exactly ${expectedCount} ${dirName} record(s), found ${results.length}${colors.reset}\n`
+      `${colors.red}✗ Expected exactly ${expected} ${typeName} record(s), found ${results.length}${colors.reset}\n`
     );
   }
 
@@ -217,55 +211,25 @@ function validateExactCount(
  */
 function main() {
   const args = process.argv.slice(2);
-  const mode = args[0] || 'all'; // 'all', 'services', 'locations', 'merch', 'news', 'brand'
+  const mode = args[0] || 'all'; // 'all', 'merch', 'news', or 'brand'
 
   const contentDir = path.join(process.cwd(), 'content');
-  const servicesDir = path.join(contentDir, 'services');
-  const locationsDir = path.join(contentDir, 'locations');
 
   let allValid = true;
 
-  // Validate services
-  if (mode === 'all' || mode === 'services') {
-    if (!fs.existsSync(servicesDir)) {
-      console.error(
-        `${colors.red}Error: Services directory not found: ${servicesDir}${colors.reset}`
-      );
-      process.exit(1);
-    }
-
-    const serviceResults = validateDirectory(servicesDir, ServiceFrontmatterSchema);
-    const servicesValid = printResults(serviceResults, 'Services');
-    allValid = allValid && servicesValid;
-  }
-
-  // Validate locations
-  if (mode === 'all' || mode === 'locations') {
-    if (!fs.existsSync(locationsDir)) {
-      console.error(
-        `${colors.red}Error: Locations directory not found: ${locationsDir}${colors.reset}`
-      );
-      process.exit(1);
-    }
-
-    const locationResults = validateDirectory(locationsDir, LocationFrontmatterSchema);
-    const locationsValid = printResults(locationResults, 'Locations');
-    allValid = allValid && locationsValid;
-  }
-
-  // Validate merch — exactly 8 real product records
+  // Validate merch (exactly 8 records expected)
   if (mode === 'all' || mode === 'merch') {
-    allValid = allValid && validateExactCount('merch', 'Merch', MerchFrontmatterSchema, 8);
+    allValid = validateCountedType(contentDir, 'merch', MerchFrontmatterSchema) && allValid;
   }
 
-  // Validate news — exactly 2 real article records
+  // Validate news (exactly 2 records expected)
   if (mode === 'all' || mode === 'news') {
-    allValid = allValid && validateExactCount('news', 'News', newsFrontmatterSchema, 2);
+    allValid = validateCountedType(contentDir, 'news', newsFrontmatterSchema) && allValid;
   }
 
-  // Validate brand — exactly 1 singleton record
+  // Validate brand (exactly 1 record expected)
   if (mode === 'all' || mode === 'brand') {
-    allValid = allValid && validateExactCount('brand', 'Brand', BrandFrontmatterSchema, 1);
+    allValid = validateCountedType(contentDir, 'brand', BrandFrontmatterSchema) && allValid;
   }
 
   // Exit with appropriate code

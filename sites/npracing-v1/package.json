@@ -15,9 +15,9 @@
     "test:e2e:smoke": "playwright test e2e/smoke.spec.ts --project=chromium",
     "test:e2e:chromium": "playwright test --project=chromium",
     "test:e2e:full": "E2E_FULL=1 playwright test",
-    "validate-content": "tsx scripts/validate-content.ts",
+    "validate:content": "tsx scripts/validate-content.ts",
     "validate:quality": "tsx scripts/validate-quality.ts",
-    "validate:all": "npm run validate-content && npm run validate:quality",
+    "validate:all": "npm run validate:content && npm run validate:quality",
     "clean": "rm -rf .next"
   },
   "dependencies": {
