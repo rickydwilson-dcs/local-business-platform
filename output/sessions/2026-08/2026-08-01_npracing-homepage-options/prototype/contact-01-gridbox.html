@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NP Racing — Contact · Grid Box</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,500;0,600;0,700;0,800;1,700;1,800&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tokens.css">
+<style>
+  .brand-mark img{height:52px}
+  .page-head{padding:5rem 0 3.5rem;border-bottom:1px solid var(--line)}
+  .page-head .eyebrow{margin-bottom:1.1rem}
+  .page-head h1{font-size:clamp(2.4rem,5vw,3.8rem);max-width:20ch;font-style:italic}
+  .page-head p{margin-top:1rem;max-width:56ch;color:var(--ink-soft);font-size:1.02rem;line-height:1.6}
+
+  .contact-grid{padding:4.5rem 0 5.5rem;display:grid;grid-template-columns:.85fr 1.15fr;gap:3.5rem}
+  .ccard{background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:2.2rem}
+  .ccard h3{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:1.4rem}
+  .clist{display:flex;flex-direction:column;gap:1.3rem}
+  .clink{display:flex;align-items:center;gap:1rem}
+  .clink .ic{width:2.8rem;height:2.8rem;border-radius:999px;background:rgba(225,16,36,.1);border:1px solid var(--red-dim);display:grid;place-items:center;flex:none;color:var(--red-bright)}
+  .clink .ic svg{width:1.3rem;height:1.3rem}
+  .clink .t{display:flex;flex-direction:column}
+  .clink .t span{font-size:.72rem;color:var(--ink-faint);text-transform:uppercase;letter-spacing:.08em}
+  .clink .t a,.clink .t p{color:var(--white);font-size:1.05rem;font-weight:600;margin:0}
+  .clink .t a:hover{color:var(--red-bright)}
+
+  .form-card{background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:2.5rem}
+  .form-card h3{font-size:1.4rem;text-transform:none;letter-spacing:0;margin-bottom:.4rem}
+  .form-card .sub{color:var(--ink-soft);font-size:.92rem;margin-bottom:1.8rem}
+  .field{display:flex;flex-direction:column;gap:.5rem;margin-bottom:1.3rem}
+  .field label{font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint)}
+  .field input,.field textarea{background:var(--black-2);border:1px solid var(--line);border-radius:var(--r-sm);padding:.85rem 1rem;color:var(--white);font-family:var(--font-sans);font-size:.95rem}
+  .field input:focus,.field textarea:focus{outline:2px solid var(--red);outline-offset:1px;border-color:var(--red)}
+  .field textarea{resize:vertical;min-height:8rem}
+  .form-note{margin-top:1rem;font-size:.8rem;color:var(--ink-faint);line-height:1.6}
+
+  @media (max-width:900px){.contact-grid{grid-template-columns:1fr}}
+  @media (max-width:640px){.nav-links{display:none}}
+</style>
+</head>
+<body>
+
+<div class="announce">ZYN British Superbike Championship · 2026 Season · Round updates on <a href="https://www.instagram.com/npracingbsb/" style="color:#fff;text-decoration:underline">@npracingbsb</a></div>
+
+<div class="nav-outer">
+  <nav class="nav">
+    <a class="brand-mark" href="https://claude.ai/code/artifact/f59678f3-eee2-4f85-914d-22a71928763f"><img src="assets/img/logo.png" alt="NP Racing"></a>
+    <div class="nav-links">
+      <a href="https://claude.ai/code/artifact/f59678f3-eee2-4f85-914d-22a71928763f#team">Team</a>
+      <a href="https://claude.ai/code/artifact/f59678f3-eee2-4f85-914d-22a71928763f#rider">Rider</a>
+      <a href="https://claude.ai/code/artifact/f59678f3-eee2-4f85-914d-22a71928763f#gallery">Gallery</a>
+      <a href="https://claude.ai/code/artifact/0cf346bb-e18c-4603-a184-0e5d98894150">Merch</a>
+      <a href="https://claude.ai/code/artifact/dbf83416-994f-4c5a-a50a-0efead739304">News</a>
+      <a href="#top">Contact</a>
+    </div>
+    <div class="nav-right">
+      <a class="icon-btn" href="https://www.instagram.com/npracingbsb/" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+      <a class="btn btn-primary" href="https://claude.ai/code/artifact/0cf346bb-e18c-4603-a184-0e5d98894150">Shop <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+    </div>
+  </nav>
+</div>
+
+<header class="page-head" id="top">
+  <div class="wrap">
+    <span class="eyebrow">Contact</span>
+    <h1>Get in touch with the team.</h1>
+    <p>Sponsorship enquiries, media requests or just a message for the team — reach us by email or send a note below.</p>
+  </div>
+</header>
+
+<section class="wrap contact-grid">
+  <div class="ccard">
+    <h3>Direct</h3>
+    <div class="clist">
+      <div class="clink">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span>
+        <div class="t"><span>Email</span><a href="mailto:npracingbsb@hotmail.com">npracingbsb@hotmail.com</a></div>
+      </div>
+      <div class="clink">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></span>
+        <div class="t"><span>Instagram</span><a href="https://www.instagram.com/npracingbsb/" target="_blank" rel="noopener">@npracingbsb</a></div>
+      </div>
+      <div class="clink">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 2h-3a5 5 0 0 0-5 5v3H6v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></span>
+        <div class="t"><span>Facebook</span><p style="font-weight:400;color:var(--ink-faint);font-size:.92rem">Link coming soon</p></div>
+      </div>
+      <div class="clink">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span>
+        <div class="t"><span>Sponsorship &amp; partnerships</span><a href="mailto:npracingbsb@hotmail.com?subject=Sponsorship%20enquiry">Enquire by email</a></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-card">
+    <h3>Send a message</h3>
+    <p class="sub">Fill this in and it'll land straight in the team's inbox.</p>
+    <form onsubmit="return false">
+      <div class="field"><label for="name">Name</label><input id="name" type="text" name="name" placeholder="Your name" required></div>
+      <div class="field"><label for="email">Email</label><input id="email" type="email" name="email" placeholder="you@example.com" required></div>
+      <div class="field"><label for="subject">Subject</label><input id="subject" type="text" name="subject" placeholder="What's this about?"></div>
+      <div class="field"><label for="message">Message</label><textarea id="message" name="message" placeholder="Write your message..." required></textarea></div>
+      <button class="btn btn-primary" type="submit" style="width:100%;justify-content:center">Send message <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
+      <p class="form-note">This form isn't wired up yet — enquiries currently go to <a href="mailto:npracingbsb@hotmail.com" style="color:var(--red-bright)">npracingbsb@hotmail.com</a> directly. Once the site is built, submissions will send via Resend.</p>
+    </form>
+  </div>
+</section>
+
+<footer class="site-footer" id="contact">
+  <div class="wrap">
+    <div class="cols">
+      <div style="display:flex;align-items:center">
+        <img src="assets/img/logo.png" alt="NP Racing" style="width:100%;max-width:15rem;height:auto">
+      </div>
+      <div><h4>Team</h4><ul><li><a href="https://claude.ai/code/artifact/f59678f3-eee2-4f85-914d-22a71928763f#team">About</a></li><li><a href="https://claude.ai/code/artifact/f59678f3-eee2-4f85-914d-22a71928763f#rider">Rider</a></li><li><a href="https://claude.ai/code/artifact/f59678f3-eee2-4f85-914d-22a71928763f#gallery">Gallery</a></li></ul></div>
+      <div><h4>More</h4><ul><li><a href="https://claude.ai/code/artifact/dbf83416-994f-4c5a-a50a-0efead739304">News</a></li><li><a href="#">Races</a></li></ul></div>
+      <div><h4>Get in touch</h4><ul><li><a href="mailto:npracingbsb@hotmail.com">npracingbsb@hotmail.com</a></li><li><a href="https://www.instagram.com/npracingbsb/">Instagram @npracingbsb</a></li></ul></div>
+    </div>
+    <div class="bottom">
+      <span>© 2026 NP Racing. All rights reserved.</span>
+      <div class="social-row">
+        <a class="icon-btn" href="https://www.instagram.com/npracingbsb/" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body></html>

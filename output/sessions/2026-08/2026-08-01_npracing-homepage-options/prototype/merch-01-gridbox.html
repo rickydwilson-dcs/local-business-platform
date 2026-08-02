@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NP Racing — Merchandise · Grid Box</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,500;0,600;0,700;0,800;1,700;1,800&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tokens.css">
+<style>
+  .brand-mark img{height:52px}
+  .page-head{padding:5rem 0 3.5rem;border-bottom:1px solid var(--line)}
+  .page-head .eyebrow{margin-bottom:1.1rem}
+  .page-head h1{font-size:clamp(2.4rem,5vw,3.8rem);max-width:20ch;font-style:italic}
+  .page-head p{margin-top:1rem;max-width:56ch;color:var(--ink-soft);font-size:1.02rem;line-height:1.6}
+  .page-head .note{margin-top:1rem;font-size:.82rem;color:var(--ink-faint)}
+
+  .shop-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4rem;padding:4rem 0 5rem}
+  .pcard{background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;display:flex;flex-direction:column;transition:transform .4s var(--ease),border-color .4s}
+  .pcard:hover{transform:translateY(-5px);border-color:var(--red-dim)}
+  .pcard .shot{aspect-ratio:1/1;background:#0e0e0e;overflow:hidden}
+  .pcard .shot img{width:100%;height:100%;object-fit:cover}
+  .pcard .b{padding:1.3rem 1.3rem 1.5rem;display:flex;flex-direction:column;gap:.5rem;flex:1}
+  .pcard h3{font-size:1.15rem;text-transform:none;letter-spacing:0;line-height:1.2}
+  .pcard .price{font-family:var(--font-display);font-size:1.3rem;color:var(--red-bright)}
+  .pcard .vat{font-size:.72rem;color:var(--ink-faint);margin-left:.3rem;font-family:var(--font-sans)}
+  .pcard .cta{margin-top:auto;padding-top:.7rem}
+  .pcard .cta a{width:100%;justify-content:center;padding:.75rem 1rem .75rem 1.3rem;font-size:.82rem}
+
+  .retailer-note{border-top:1px solid var(--line);padding:3.5rem 0;text-align:center}
+  .retailer-note p{color:var(--ink-soft);max-width:56ch;margin:0 auto;font-size:.95rem;line-height:1.6}
+  .retailer-note a{color:var(--red-bright);font-weight:600}
+
+  @media (max-width:1100px){.shop-grid{grid-template-columns:repeat(3,1fr)}}
+  @media (max-width:760px){.shop-grid{grid-template-columns:1fr 1fr}}
+  @media (max-width:640px){
+    .nav-links{display:none}
+    .shop-grid{grid-template-columns:1fr;gap:1rem}
+  }
+</style>
+</head>
+<body>
+
+<div class="announce">ZYN British Superbike Championship · 2026 Season · Round updates on <a href="https://www.instagram.com/npracingbsb/" style="color:#fff;text-decoration:underline">@npracingbsb</a></div>
+
+<div class="nav-outer">
+  <nav class="nav">
+    <a class="brand-mark" href="https://claude.ai/code/artifact/f59678f3-eee2-4f85-914d-22a71928763f"><img src="assets/img/logo.png" alt="NP Racing"></a>
+    <div class="nav-links">
+      <a href="https://claude.ai/code/artifact/f59678f3-eee2-4f85-914d-22a71928763f#team">Team</a>
+      <a href="https://claude.ai/code/artifact/f59678f3-eee2-4f85-914d-22a71928763f#rider">Rider</a>
+      <a href="https://claude.ai/code/artifact/f59678f3-eee2-4f85-914d-22a71928763f#gallery">Gallery</a>
+      <a href="https://claude.ai/code/artifact/0cf346bb-e18c-4603-a184-0e5d98894150">Merch</a>
+      <a href="https://claude.ai/code/artifact/dbf83416-994f-4c5a-a50a-0efead739304">News</a>
+      <a href="https://claude.ai/code/artifact/63bb3710-c353-4762-b6c7-6dba7f81132f">Contact</a>
+    </div>
+    <div class="nav-right">
+      <a class="icon-btn" href="https://www.instagram.com/npracingbsb/" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+      <a class="btn btn-primary" href="#shop">Shop <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+    </div>
+  </nav>
+</div>
+
+<header class="page-head">
+  <div class="wrap">
+    <span class="eyebrow">Team merchandise</span>
+    <h1>Kit up in team colours.</h1>
+    <p>Every item is printed to order and fulfilled by our partner store, The Clothing Kings — pick a piece below and it'll take you straight to that product.</p>
+    <p class="note">Prices shown ex VAT · fulfilled &amp; shipped by an external retailer, not NP Racing directly</p>
+  </div>
+</header>
+
+<section class="wrap" id="shop">
+  <div class="shop-grid">
+    <div class="pcard">
+      <div class="shot"><img src="assets/img/merch/tshirt.jpg" alt="NP Racing T-Shirt"></div>
+      <div class="b">
+        <h3>NP Racing T-Shirt</h3>
+        <span class="price">£25.00<span class="vat">ex VAT</span></span>
+        <div class="cta"><a class="btn btn-primary" href="https://www.theclothingkings.co.uk/shop/partnerships/npracing/np-racing-t-shirt/" target="_blank" rel="noopener">View product <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></div>
+      </div>
+    </div>
+    <div class="pcard">
+      <div class="shot"><img src="assets/img/merch/beanie.jpg" alt="NP Racing Beanie"></div>
+      <div class="b">
+        <h3>NP Racing Beanie</h3>
+        <span class="price">£12.00<span class="vat">ex VAT</span></span>
+        <div class="cta"><a class="btn btn-primary" href="https://www.theclothingkings.co.uk/shop/partnerships/npracing/np-racing-beanie/" target="_blank" rel="noopener">View product <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></div>
+      </div>
+    </div>
+    <div class="pcard">
+      <div class="shot"><img src="assets/img/merch/curved-peak-cap.jpg" alt="NP Racing Curved Peak Cap"></div>
+      <div class="b">
+        <h3>NP Racing Curved Peak Cap</h3>
+        <span class="price">£16.00<span class="vat">ex VAT</span></span>
+        <div class="cta"><a class="btn btn-primary" href="https://www.theclothingkings.co.uk/shop/partnerships/npracing/np-racing-curved-peak-cap/" target="_blank" rel="noopener">View product <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></div>
+      </div>
+    </div>
+    <div class="pcard">
+      <div class="shot"><img src="assets/img/merch/trucker-cap.jpg" alt="NP Racing Flat Peak Trucker Cap"></div>
+      <div class="b">
+        <h3>NP Racing Flat Peak Trucker Cap</h3>
+        <span class="price">£16.00<span class="vat">ex VAT</span></span>
+        <div class="cta"><a class="btn btn-primary" href="https://www.theclothingkings.co.uk/shop/partnerships/npracing/np-racing-flat-peak-trucker-cap/" target="_blank" rel="noopener">View product <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></div>
+      </div>
+    </div>
+    <div class="pcard">
+      <div class="shot"><img src="assets/img/merch/standard-hoodie.jpg" alt="NP Racing Standard Hoodie"></div>
+      <div class="b">
+        <h3>NP Racing Standard Hoodie</h3>
+        <span class="price">£28.00<span class="vat">ex VAT</span></span>
+        <div class="cta"><a class="btn btn-primary" href="https://www.theclothingkings.co.uk/shop/partnerships/npracing/np-racing-standard-hoodie/" target="_blank" rel="noopener">View product <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></div>
+      </div>
+    </div>
+    <div class="pcard">
+      <div class="shot"><img src="assets/img/merch/premium-hoodie.jpg" alt="NP Racing Premium Hoodie"></div>
+      <div class="b">
+        <h3>NP Racing Premium Hoodie</h3>
+        <span class="price">£40.00<span class="vat">ex VAT</span></span>
+        <div class="cta"><a class="btn btn-primary" href="https://www.theclothingkings.co.uk/shop/partnerships/npracing/np-racing-premium-hoodie/" target="_blank" rel="noopener">View product <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></div>
+      </div>
+    </div>
+    <div class="pcard">
+      <div class="shot"><img src="assets/img/merch/ultra-premium-hoodie.jpg" alt="NP Racing Ultra Premium Hoodie"></div>
+      <div class="b">
+        <h3>NP Racing Ultra Premium Hoodie</h3>
+        <span class="price">£48.00<span class="vat">ex VAT</span></span>
+        <div class="cta"><a class="btn btn-primary" href="https://www.theclothingkings.co.uk/shop/partnerships/npracing/np-racing-ultra-premium-hoodie/" target="_blank" rel="noopener">View product <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></div>
+      </div>
+    </div>
+    <div class="pcard">
+      <div class="shot"><img src="assets/img/merch/all-weather-robe.jpg" alt="NP Racing Black/Red All Weather Robe"></div>
+      <div class="b">
+        <h3>NP Racing All Weather Robe</h3>
+        <span class="price">£98.00<span class="vat">ex VAT</span></span>
+        <div class="cta"><a class="btn btn-primary" href="https://www.theclothingkings.co.uk/shop/partnerships/npracing/np-racing-black-red-all-weather-robe/" target="_blank" rel="noopener">View product <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap retailer-note">
+  <p>All NP Racing merchandise is sold and fulfilled by <a href="https://www.theclothingkings.co.uk/category/partnerships/npracing/" target="_blank" rel="noopener">The Clothing Kings</a> — see the full range, sizing and delivery info on their site.</p>
+</div>
+
+<footer class="site-footer" id="contact">
+  <div class="wrap">
+    <div class="cols">
+      <div style="display:flex;align-items:center">
+        <img src="assets/img/logo.png" alt="NP Racing" style="width:100%;max-width:15rem;height:auto">
+      </div>
+      <div><h4>Team</h4><ul><li><a href="https://claude.ai/code/artifact/f59678f3-eee2-4f85-914d-22a71928763f#team">About</a></li><li><a href="https://claude.ai/code/artifact/f59678f3-eee2-4f85-914d-22a71928763f#rider">Rider</a></li><li><a href="https://claude.ai/code/artifact/f59678f3-eee2-4f85-914d-22a71928763f#gallery">Gallery</a></li></ul></div>
+      <div><h4>More</h4><ul><li><a href="https://claude.ai/code/artifact/dbf83416-994f-4c5a-a50a-0efead739304">News</a></li><li><a href="#">Races</a></li></ul></div>
+      <div><h4>Get in touch</h4><ul><li><a href="https://www.instagram.com/npracingbsb/">Instagram @npracingbsb</a></li><li><a href="#">Enquiries — details tbc</a></li></ul></div>
+    </div>
+    <div class="bottom">
+      <span>© 2026 NP Racing. All rights reserved.</span>
+      <div class="social-row">
+        <a class="icon-btn" href="https://www.instagram.com/npracingbsb/" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body></html>

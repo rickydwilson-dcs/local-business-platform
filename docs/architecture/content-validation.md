@@ -131,6 +131,28 @@ hero.phone: Phone must be valid
 
 **Fix**: Use format like `01424 466 661` or `+44 1424 466661`
 
+## Non-Standard Content Types (Brand / Non-Local-Service Sites)
+
+The default `scripts/validate-content.ts` at the monorepo root assumes every site is a
+local-service-business with `content/services/` and `content/locations/` — its `all`
+mode hard-fails if either directory is missing. That's correct for the standard site
+type, but a site that isn't a local-service business (e.g. `npracing-v1`/`npracing-v3`,
+a racing-team brand site with `merch`/`news`/`brand` content instead) has neither
+directory and must not be wired to the root script's `validate:content`.
+
+**The pattern:** give that site its own `scripts/validate-content.ts` that only knows
+about the content types it actually has, and wire `package.json`'s `validate:content`
+script (the exact name CI invokes via `pnpm -r --filter './sites/*' run validate:content`
+— not `validate-content`, which CI does not call and pnpm silently skips) to that local
+script instead of the root one. `sites/npracing-v3/scripts/validate-content.ts` is the
+reference implementation: it validates `merch`/`news`/`brand` against a fixed expected
+record count per type, with no `services`/`locations` blocks at all.
+
+Do **not** copy the root script wholesale and bolt on new content types while leaving
+the `services`/`locations` blocks in place "just in case" — a leftover block for a
+directory that will never exist turns `all` mode into a permanent hard failure. Include
+only the content types the site actually has.
+
 ## Files & Architecture
 
 ```

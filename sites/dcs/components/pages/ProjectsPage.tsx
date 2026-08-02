@@ -1,7 +1,7 @@
-import type { ProjectsPageTemplateProps } from "@platform/core-components";
-import Link from "next/link";
+import type { ProjectsPageTemplateProps } from '@platform/core-components';
+import Link from 'next/link';
 
-export function SiteProjectsPage({ siteConfig, projects }: ProjectsPageTemplateProps) {
+export function SiteProjectsPage({ projects }: ProjectsPageTemplateProps) {
   return (
     <div className="min-h-screen font-body">
       {/* ─── Hero ────────────────────────────────────────────────────────────── */}

@@ -92,3 +92,6 @@ output/batch-*.json*
 
 # Git worktrees for parallel YOLO sessions
 .claude/worktrees/
+
+# Claude Code scheduled-task lock — process-local, churns every session
+.claude/scheduled_tasks.lock
