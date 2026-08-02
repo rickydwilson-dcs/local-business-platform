@@ -110,8 +110,7 @@ export default function PrivacyPolicyPage() {
                   We are a professional scaffolding company providing commercial, industrial, and
                   residential scaffolding services across the South East UK.
                 </p>
-                {/* eslint-disable platform/no-hardcoded-tailwind-colors -- Intentional: semantic legal basis callout */}
-                <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
+                <div className="bg-surface-subtle rounded-lg p-6">
                   <h3 className="font-semibold mb-2">Company Details:</h3>
                   <div className="space-y-1 text-surface-foreground">
                     <p>
@@ -132,7 +131,6 @@ export default function PrivacyPolicyPage() {
                     </p>
                   </div>
                 </div>
-                {/* eslint-enable platform/no-hardcoded-tailwind-colors */}
               </section>
 
               {/* Data We Collect */}
@@ -331,61 +329,57 @@ export default function PrivacyPolicyPage() {
                 </p>
 
                 <div className="space-y-6">
-                  {/* eslint-disable platform/no-hardcoded-tailwind-colors -- Intentional: semantic legal basis callout */}
-                  <div className="border-l-4 border-blue-500 bg-blue-50 p-6">
-                    <h3 className="font-semibold text-blue-900 mb-2">Legitimate Interests</h3>
-                    <p className="text-blue-800 mb-2">
+                  <div className="border-l-4 border-brand-primary bg-surface-subtle p-6">
+                    <h3 className="font-semibold text-surface-foreground mb-2">
+                      Legitimate Interests
+                    </h3>
+                    <p className="text-surface-foreground mb-2">
                       For most business operations, we rely on our legitimate interests as a
                       scaffolding company to provide services and run our business effectively.
                     </p>
-                    <p className="text-base text-blue-700">
+                    <p className="text-base text-surface-muted-foreground">
                       <strong>Examples:</strong> Processing inquiries, providing quotes, analyzing
                       website performance, improving services, business communications.
                     </p>
                   </div>
-                  {/* eslint-enable platform/no-hardcoded-tailwind-colors */}
 
-                  {/* eslint-disable platform/no-hardcoded-tailwind-colors -- Intentional: semantic legal basis callout */}
-                  <div className="border-l-4 border-green-500 bg-green-50 p-6">
-                    <h3 className="font-semibold text-green-900 mb-2">Contract Performance</h3>
-                    <p className="text-green-800 mb-2">
+                  <div className="border-l-4 border-brand-primary bg-surface-subtle p-6">
+                    <h3 className="font-semibold text-surface-foreground mb-2">
+                      Contract Performance
+                    </h3>
+                    <p className="text-surface-foreground mb-2">
                       When you engage us for scaffolding services, we need to process your data to
                       fulfill our contractual obligations.
                     </p>
-                    <p className="text-base text-green-700">
+                    <p className="text-base text-surface-muted-foreground">
                       <strong>Examples:</strong> Project management, scheduling installations,
                       safety compliance, invoicing, delivery of scaffolding services.
                     </p>
                   </div>
-                  {/* eslint-enable platform/no-hardcoded-tailwind-colors */}
 
-                  {/* eslint-disable platform/no-hardcoded-tailwind-colors -- Intentional: semantic legal basis callout */}
-                  <div className="border-l-4 border-purple-500 bg-purple-50 p-6">
-                    <h3 className="font-semibold text-purple-900 mb-2">Consent</h3>
-                    <p className="text-purple-800 mb-2">
+                  <div className="border-l-4 border-brand-primary bg-surface-subtle p-6">
+                    <h3 className="font-semibold text-surface-foreground mb-2">Consent</h3>
+                    <p className="text-surface-foreground mb-2">
                       For certain activities, we ask for your explicit consent before processing
                       your data.
                     </p>
-                    <p className="text-base text-purple-700">
+                    <p className="text-base text-surface-muted-foreground">
                       <strong>Examples:</strong> Marketing cookies, targeted advertising,
                       newsletters, optional marketing communications.
                     </p>
                   </div>
-                  {/* eslint-enable platform/no-hardcoded-tailwind-colors */}
 
-                  {/* eslint-disable platform/no-hardcoded-tailwind-colors -- Intentional: semantic legal basis callout */}
-                  <div className="border-l-4 border-red-500 bg-red-50 p-6">
-                    <h3 className="font-semibold text-red-900 mb-2">Legal Obligation</h3>
-                    <p className="text-red-800 mb-2">
+                  <div className="border-l-4 border-brand-primary bg-surface-subtle p-6">
+                    <h3 className="font-semibold text-surface-foreground mb-2">Legal Obligation</h3>
+                    <p className="text-surface-foreground mb-2">
                       Sometimes we must process data to comply with legal requirements in the
                       construction and scaffolding industry.
                     </p>
-                    <p className="text-base text-red-700">
+                    <p className="text-base text-surface-muted-foreground">
                       <strong>Examples:</strong> Health and safety compliance, tax obligations,
                       insurance requirements, regulatory reporting.
                     </p>
                   </div>
-                  {/* eslint-enable platform/no-hardcoded-tailwind-colors */}
                 </div>
               </section>
 
@@ -468,15 +462,13 @@ export default function PrivacyPolicyPage() {
                   </div>
                 </div>
 
-                {/* eslint-disable platform/no-hardcoded-tailwind-colors -- Intentional: semantic legal basis callout */}
-                <div className="mt-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
-                  <p className="text-base text-yellow-800">
+                <div className="mt-6 p-4 bg-surface-subtle border-l-4 border-brand-primary rounded-lg">
+                  <p className="text-base text-surface-foreground">
                     <strong>Data Protection:</strong> All third parties are contractually required
                     to protect your data and use it only for the specific purposes we&apos;ve
                     authorized. We never sell your personal data to third parties.
                   </p>
                 </div>
-                {/* eslint-enable platform/no-hardcoded-tailwind-colors */}
               </section>
 
               {/* Data Retention */}
@@ -578,15 +570,13 @@ export default function PrivacyPolicyPage() {
                   </table>
                 </div>
 
-                {/* eslint-disable platform/no-hardcoded-tailwind-colors -- Intentional: semantic legal basis callout */}
-                <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-                  <p className="text-base text-blue-800">
+                <div className="mt-6 p-4 bg-surface-subtle border-l-4 border-brand-primary rounded-lg">
+                  <p className="text-base text-surface-foreground">
                     <strong>Note:</strong> Some records may be retained longer if required for legal
                     proceedings or regulatory investigations. We review retention periods regularly
                     and securely delete data when no longer needed.
                   </p>
                 </div>
-                {/* eslint-enable platform/no-hardcoded-tailwind-colors */}
               </section>
 
               {/* Your Rights */}
@@ -659,14 +649,15 @@ export default function PrivacyPolicyPage() {
                   </div>
                 </div>
 
-                {/* eslint-disable platform/no-hardcoded-tailwind-colors -- Intentional: semantic legal basis callout */}
-                <div className="mt-8 bg-green-50 border border-green-200 rounded-lg p-6">
-                  <h3 className="font-semibold text-green-900 mb-4">How to Exercise Your Rights</h3>
-                  <p className="text-green-800 mb-4">
+                <div className="mt-8 bg-surface-subtle border-l-4 border-brand-primary rounded-lg p-6">
+                  <h3 className="font-semibold text-surface-foreground mb-4">
+                    How to Exercise Your Rights
+                  </h3>
+                  <p className="text-surface-foreground mb-4">
                     To exercise any of these rights, please contact us using the details in Section
                     11. We may need to verify your identity before processing your request.
                   </p>
-                  <div className="text-base text-green-700">
+                  <div className="text-base text-surface-muted-foreground">
                     <p>
                       <strong>Response Time:</strong> We&apos;ll respond within one month (or two
                       months for complex requests)
@@ -681,7 +672,6 @@ export default function PrivacyPolicyPage() {
                     </p>
                   </div>
                 </div>
-                {/* eslint-enable platform/no-hardcoded-tailwind-colors */}
               </section>
 
               {/* International Transfers */}
@@ -720,15 +710,13 @@ export default function PrivacyPolicyPage() {
                   </div>
                 </div>
 
-                {/* eslint-disable platform/no-hardcoded-tailwind-colors -- Intentional: semantic legal basis callout */}
-                <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-                  <p className="text-base text-blue-800">
+                <div className="mt-6 p-4 bg-surface-subtle border-l-4 border-brand-primary rounded-lg">
+                  <p className="text-base text-surface-foreground">
                     <strong>Your Protection:</strong> We only work with providers who can
                     demonstrate appropriate data protection standards equivalent to UK GDPR
                     requirements.
                   </p>
                 </div>
-                {/* eslint-enable platform/no-hardcoded-tailwind-colors */}
               </section>
 
               {/* Security */}
@@ -765,15 +753,13 @@ export default function PrivacyPolicyPage() {
                   </div>
                 </div>
 
-                {/* eslint-disable platform/no-hardcoded-tailwind-colors -- Intentional: semantic legal basis callout */}
-                <div className="mt-6 p-4 bg-red-50 border border-red-200 rounded-lg">
-                  <p className="text-base text-red-800">
+                <div className="mt-6 p-4 bg-surface-subtle border-l-4 border-brand-primary rounded-lg">
+                  <p className="text-base text-surface-foreground">
                     <strong>Data Breach:</strong> In the unlikely event of a data breach that poses
                     a risk to your rights, we will notify you and the ICO within 72 hours as
                     required by UK GDPR.
                   </p>
                 </div>
-                {/* eslint-enable platform/no-hardcoded-tailwind-colors */}
               </section>
 
               {/* Cookies */}
@@ -919,16 +905,14 @@ export default function PrivacyPolicyPage() {
                   </div>
                 </div>
 
-                {/* eslint-disable platform/no-hardcoded-tailwind-colors -- Intentional: semantic legal basis callout */}
-                <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-                  <p className="text-base text-blue-800">
+                <div className="mt-6 p-4 bg-surface-subtle border-l-4 border-brand-primary rounded-lg">
+                  <p className="text-base text-surface-foreground">
                     <strong>Stay Informed:</strong> We recommend checking this Privacy Policy
                     periodically to stay informed about how we protect your personal information.
                     Continued use of our services after updates indicates your acceptance of any
                     changes.
                   </p>
                 </div>
-                {/* eslint-enable platform/no-hardcoded-tailwind-colors */}
               </section>
             </div>
           </div>
