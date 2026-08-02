@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { listSlugs, loadMdx } from '@/lib/mdx';
 import { NewsFrontmatterSchema } from '@/lib/schemas/news';
 import { getImageUrl } from '@/lib/image';
+import { siteConfig } from '@/site.config';
 import { SectionTag } from '@/components/ui/section-tag';
 import { ArrowRightIcon, ExternalLinkIcon } from '@/components/ui/icons';
 
@@ -60,7 +61,7 @@ export async function NewsDetailPage({ slug }: NewsDetailPageProps) {
           </p>
           <p className="mt-4 text-caption uppercase text-surface-tertiary">
             <time dateTime={frontmatter.publishedAt}>{publishedLabel}</time> ·{' '}
-            {frontmatter.sourceName}
+            {frontmatter.sourceName ?? siteConfig.name}
           </p>
         </div>
       </header>
@@ -97,19 +98,21 @@ export async function NewsDetailPage({ slug }: NewsDetailPageProps) {
         )}
 
         <footer className="mt-10 border-t border-surface-card-border pt-6">
-          <p className="text-small text-surface-tertiary">
-            Original report by{' '}
-            <a
-              href={frontmatter.sourceUrl}
-              target="_blank"
-              rel="noopener noreferrer nofollow"
-              className="inline-flex items-center gap-1.5 font-semibold text-brand-accent underline underline-offset-2"
-            >
-              <ExternalLinkIcon className="h-3.5 w-3.5" />
-              {frontmatter.sourceName}
-              <span className="sr-only"> (opens in a new tab)</span>
-            </a>
-          </p>
+          {frontmatter.sourceUrl && frontmatter.sourceName && (
+            <p className="text-small text-surface-tertiary">
+              Original report by{' '}
+              <a
+                href={frontmatter.sourceUrl}
+                target="_blank"
+                rel="noopener noreferrer nofollow"
+                className="inline-flex items-center gap-1.5 font-semibold text-brand-accent underline underline-offset-2"
+              >
+                <ExternalLinkIcon className="h-3.5 w-3.5" />
+                {frontmatter.sourceName}
+                <span className="sr-only"> (opens in a new tab)</span>
+              </a>
+            </p>
+          )}
 
           <Link
             href="/news"
