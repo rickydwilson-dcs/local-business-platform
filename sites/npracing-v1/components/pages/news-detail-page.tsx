@@ -2,6 +2,7 @@ import type { ReactElement } from 'react';
 import Image from 'next/image';
 import type { NewsArticle } from '@/lib/schemas/news';
 import { siteConfig } from '@/site.config';
+import { getImageUrl } from '@/lib/image';
 import { Eyebrow } from '@/components/sections/eyebrow';
 import { ArrowTextLink } from '@/components/sections/arrow-link';
 
@@ -51,7 +52,7 @@ export function NewsDetailPage({ article, body }: NewsDetailPageProps) {
 
         {article.heroImage && (
           <Image
-            src={article.heroImage.src}
+            src={getImageUrl(article.heroImage.src)}
             alt={article.heroImage.alt}
             width={article.heroImage.width}
             height={article.heroImage.height}
