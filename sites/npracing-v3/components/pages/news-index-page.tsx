@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { listSlugs, loadMdx } from '@/lib/mdx';
 import { NewsFrontmatterSchema, type NewsFrontmatter } from '@/lib/schemas/news';
+import { siteConfig } from '@/site.config';
 import { PageHead } from '@/components/sections/page-head';
 import { ArrowRightIcon, ExternalLinkIcon } from '@/components/ui/icons';
 
@@ -9,8 +10,10 @@ import { ArrowRightIcon, ExternalLinkIcon } from '@/components/ui/icons';
  *
  * Stacked hairline rows with a big red date in the left rail, per
  * news-03-number51.html. Article titles link to the on-site detail route
- * (`/news/<slug>`); the original source is a separate, clearly-marked external
- * link so the two destinations are never confused.
+ * (`/news/<slug>`). Entries with a sourceName/sourceUrl are attributed
+ * third-party coverage and get a separate, clearly-marked external link;
+ * entries without one are original NP Racing posts and fall back to the site
+ * name with no outbound link.
  */
 interface NewsEntry {
   slug: string;
@@ -50,7 +53,7 @@ export async function NewsIndexPage() {
       <PageHead
         tag="News"
         heading="Straight from the BSB paddock."
-        lede="A roundup of official British Superbike coverage on NP Racing — team news and results, with links back to the full articles."
+        lede="Team news and race reports from NP Racing, plus press coverage from the wider BSB paddock — with links back to original reporting where we're referencing it."
       />
 
       <section aria-label="News articles" className="py-14">
@@ -74,7 +77,8 @@ export async function NewsIndexPage() {
                       {formatDayMonth(frontmatter.publishedAt)}
                     </time>
                     <span className="text-caption uppercase text-surface-tertiary">
-                      {new Date(frontmatter.publishedAt).getFullYear()} · {frontmatter.sourceName}
+                      {new Date(frontmatter.publishedAt).getFullYear()} ·{' '}
+                      {frontmatter.sourceName ?? siteConfig.name}
                     </span>
                   </div>
 
@@ -114,16 +118,18 @@ export async function NewsIndexPage() {
                         <ArrowRightIcon className="h-3.5 w-3.5 text-brand-accent transition-transform duration-slow group-hover:translate-x-1 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0" />
                       </Link>
 
-                      <a
-                        href={frontmatter.sourceUrl}
-                        target="_blank"
-                        rel="noopener noreferrer nofollow"
-                        className="inline-flex items-center gap-2 font-sans text-sm font-semibold uppercase tracking-[0.05em] text-surface-tertiary hover:text-surface-foreground"
-                      >
-                        <ExternalLinkIcon className="h-3.5 w-3.5" />
-                        {frontmatter.sourceName}
-                        <span className="sr-only"> (opens in a new tab)</span>
-                      </a>
+                      {frontmatter.sourceUrl && frontmatter.sourceName && (
+                        <a
+                          href={frontmatter.sourceUrl}
+                          target="_blank"
+                          rel="noopener noreferrer nofollow"
+                          className="inline-flex items-center gap-2 font-sans text-sm font-semibold uppercase tracking-[0.05em] text-surface-tertiary hover:text-surface-foreground"
+                        >
+                          <ExternalLinkIcon className="h-3.5 w-3.5" />
+                          {frontmatter.sourceName}
+                          <span className="sr-only"> (opens in a new tab)</span>
+                        </a>
+                      )}
                     </div>
                   </div>
                 </li>

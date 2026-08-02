@@ -1,15 +1,17 @@
 import type { ReactElement } from 'react';
 import Image from 'next/image';
 import type { NewsArticle } from '@/lib/schemas/news';
+import { siteConfig } from '@/site.config';
 import { Eyebrow } from '@/components/sections/eyebrow';
 import { ArrowTextLink } from '@/components/sections/arrow-link';
 
 /**
  * NewsDetailPage — a single article, rendered from content/news/<slug>.mdx.
  *
- * The body is the compiled MDX element supplied by lib/news.ts; the source
- * attribution and outbound link are mandatory, since these records summarise
- * coverage published by third parties.
+ * The body is the compiled MDX element supplied by lib/news.ts. Articles with
+ * a sourceName/sourceUrl are attributed summaries of third-party coverage and
+ * get an outbound link; articles without one are original NP Racing posts and
+ * fall back to the site name with no outbound link.
  */
 export interface NewsDetailPageProps {
   article: NewsArticle;
@@ -34,12 +36,16 @@ export function NewsDetailPage({ article, body }: NewsDetailPageProps) {
         </ArrowTextLink>
 
         <header className="mt-8">
-          <Eyebrow>{article.sourceName}</Eyebrow>
+          <Eyebrow>{article.sourceName ?? siteConfig.name}</Eyebrow>
           <h1 className="mt-4 text-h1 uppercase italic text-surface-foreground">{article.title}</h1>
           <p className="mt-4 text-sm font-bold uppercase tracking-[0.1em] text-surface-tertiary-foreground">
             <time dateTime={article.publishedAt}>{published}</time>
-            {' · '}
-            Source: {article.sourceName}
+            {article.sourceName && (
+              <>
+                {' · '}
+                Source: {article.sourceName}
+              </>
+            )}
           </p>
         </header>
 
@@ -56,15 +62,17 @@ export function NewsDetailPage({ article, body }: NewsDetailPageProps) {
 
         <div className="prose-grid-box mt-10">{body}</div>
 
-        <footer className="mt-12 border-t border-surface-card-border pt-6">
-          <ArrowTextLink
-            href={article.sourceUrl}
-            external
-            externalLabel={`Read the original report at ${article.sourceName}`}
-          >
-            Read the full story at {article.sourceName}
-          </ArrowTextLink>
-        </footer>
+        {article.sourceUrl && article.sourceName && (
+          <footer className="mt-12 border-t border-surface-card-border pt-6">
+            <ArrowTextLink
+              href={article.sourceUrl}
+              external
+              externalLabel={`Read the original report at ${article.sourceName}`}
+            >
+              Read the full story at {article.sourceName}
+            </ArrowTextLink>
+          </footer>
+        )}
       </article>
     </>
   );

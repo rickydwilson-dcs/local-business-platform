@@ -1,15 +1,16 @@
 import Link from 'next/link';
 import type { NewsArticle } from '@/lib/schemas/news';
+import { siteConfig } from '@/site.config';
 import { PageHead } from '@/components/sections/page-head';
 import { ArrowTextLink } from '@/components/sections/arrow-link';
 
 /**
  * NewsIndexPage — the Grid Box news listing.
  *
- * Cards are rendered entirely from content/news/*.mdx frontmatter. Each entry
- * carries a source attribution (this is coverage published elsewhere, not
- * original reporting) and links both to the on-site article and out to the
- * original report.
+ * Cards are rendered entirely from content/news/*.mdx frontmatter. Entries
+ * are either original NP Racing posts (no sourceUrl — the card falls back to
+ * the site name and has no outbound link) or attributed third-party coverage
+ * (sourceName/sourceUrl set — the card links out to the original report).
  */
 export interface NewsIndexPageProps {
   articles: NewsArticle[];
@@ -35,7 +36,7 @@ export function NewsIndexPage({ articles }: NewsIndexPageProps) {
       <PageHead
         eyebrow="News"
         title="From the paddock, via the BSB press office."
-        lede="A roundup of official British Superbike coverage on NPRacing — team news and results, with links back to the full articles."
+        lede="Team news and race reports from NP Racing, plus press coverage from the wider BSB paddock — with links back to original reporting where we're referencing it."
       />
 
       <section className="container-grid py-16">
@@ -56,7 +57,7 @@ export function NewsIndexPage({ articles }: NewsIndexPageProps) {
                       {formatDay(article.publishedAt)}
                     </time>
                     <span className="text-xs font-bold uppercase tracking-[0.1em] text-surface-tertiary-foreground">
-                      {article.sourceName}
+                      {article.sourceName ?? siteConfig.name}
                     </span>
                     <span className="sr-only">Published {formatFull(article.publishedAt)}</span>
                   </div>
@@ -75,14 +76,16 @@ export function NewsIndexPage({ articles }: NewsIndexPageProps) {
                     </p>
                     <div className="mt-5 flex flex-wrap gap-6">
                       <ArrowTextLink href={`/news/${article.slug}`}>Read on site</ArrowTextLink>
-                      <ArrowTextLink
-                        href={article.sourceUrl}
-                        external
-                        externalLabel={`Read the original report at ${article.sourceName}`}
-                        className="text-surface-secondary-foreground"
-                      >
-                        {article.sourceName}
-                      </ArrowTextLink>
+                      {article.sourceUrl && article.sourceName && (
+                        <ArrowTextLink
+                          href={article.sourceUrl}
+                          external
+                          externalLabel={`Read the original report at ${article.sourceName}`}
+                          className="text-surface-secondary-foreground"
+                        >
+                          {article.sourceName}
+                        </ArrowTextLink>
+                      )}
                     </div>
                   </div>
                 </article>
