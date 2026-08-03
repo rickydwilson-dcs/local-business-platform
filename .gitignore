@@ -72,6 +72,12 @@ Thumbs.db
 # imagery, and Viezu partner assets are committed directly until it is
 !sites/dch-automotive/public/logo/**
 !sites/dch-automotive/public/stitch-images/**
+# NPRacing favicons — tiny, static, simpler as committed files than routing
+# through R2 for a file-convention icon (app/icon.png / app/apple-icon.png)
+!sites/npracing-v1/app/icon.png
+!sites/npracing-v1/app/apple-icon.png
+!sites/npracing-v3/app/icon.png
+!sites/npracing-v3/app/apple-icon.png
 !sites/dch-automotive/public/viezu/**
 
 # Temporary files

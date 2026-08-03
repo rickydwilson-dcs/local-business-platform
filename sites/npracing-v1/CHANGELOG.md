@@ -4,6 +4,15 @@ Template site used as the gold-standard starting point for new client sites. Cha
 
 ---
 
+## 2026-08-03
+
+### UI
+
+- Redesigned the homepage "merch" CTA band: the cap product photo is now cropped tight to its own bounding box (object-cover against a fixed aspect ratio) rather than the source photo's mostly-empty square frame, still composited onto the red band via `mix-blend-multiply` so the white background drops out. Shown before the heading on mobile (it's the actual subject of the CTA), and vertically centred on the right side of the band on desktop — inset from the edges rather than bleeding into the corner, which had been clipping the crown and brim against the card's rounded corners. Straightens and grows on hover as a deliberately obvious sign of life, skipped under `prefers-reduced-motion`.
+- Added a favicon (`app/icon.png`, `app/apple-icon.png`): the joined "NP" cropped from the team's oval logo mark, since the full mark's fine detail doesn't survive down to 16–32px. Required a `.gitignore` exception since the platform's images-go-to-R2 rule doesn't cover Next.js's file-based favicon convention — see root [CHANGELOG.md](../../CHANGELOG.md) and [docs/standards/images.md](../../docs/standards/images.md).
+
+---
+
 ## 2026-08-02
 
 ### Content

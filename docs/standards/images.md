@@ -1,7 +1,7 @@
 # Image Standards
 
-**Version:** 1.3.0
-**Last Updated:** 2025-12-21
+**Version:** 1.4.0
+**Last Updated:** 2026-08-03
 **Scope:** All sites in local-business-platform
 
 ---
@@ -18,6 +18,12 @@ Images are stored in Cloudflare R2 (not in the Git repository) for performance a
 - ✅ Public read access via CDN
 - ❌ NO images in Git repository (except placeholders)
 - ❌ NO `/public` directory bloat
+
+**Exceptions to R2-only** (each carved out explicitly in `.gitignore`, not a general escape hatch):
+
+- **Playwright visual baselines** (`sites/**/e2e/**/*.png`) — snapshots, not content images.
+- **`sites/dch-automotive/public/logo/**`and`public/stitch-images/**`** — R2 wasn't configured for this site at build time; committed directly until it is.
+- **`app/icon.png` / `app/apple-icon.png`** (e.g. `sites/npracing-v1`, `sites/npracing-v3`) — Next.js's file-based favicon convention reads these straight from `app/` at build time. They're tiny (a few KB to tens of KB) and static, so committing them directly is simpler than routing a favicon through R2 and a custom `metadata.icons` URL. If a site's favicon starts needing multiple sizes/variants generated from a pipeline, revisit this.
 
 ### 2. Next.js Image Component Only
 
@@ -201,10 +207,10 @@ R2 Bucket/
 
 Site folders should match the directory name in `sites/`:
 
-| Site Directory              | R2 Folder             |
-| --------------------------- | --------------------- |
+| Site Directory                | R2 Folder             |
+| ----------------------------- | --------------------- |
 | `sites/colossus-scaffolding/` | `colossus-reference/` |
-| `sites/example-plumber/`    | `example-plumber/`    |
+| `sites/example-plumber/`      | `example-plumber/`    |
 
 ### Why Site-Specific Folders?
 
