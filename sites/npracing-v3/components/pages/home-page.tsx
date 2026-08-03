@@ -8,6 +8,7 @@ import { ValueStrip } from '@/components/sections/value-strip';
 import { RiderPoster } from '@/components/sections/rider-poster';
 import { GalleryStrip } from '@/components/sections/gallery-strip';
 import { MerchCta } from '@/components/sections/merch-cta';
+import { SponsorMarquee } from '@/components/sections/sponsor-marquee';
 import { getImageUrl } from '@/lib/image';
 
 /**
@@ -15,7 +16,7 @@ import { getImageUrl } from '@/lib/image';
  *
  * Section order follows the finalised prototype (design-03-number51.html after
  * Round 2): poster hero -> credentials strip -> restructured team block ->
- * value strip -> rider poster -> gallery -> merch band.
+ * value strip -> rider poster -> sponsor marquee -> gallery -> merch band.
  *
  * All team copy comes from `content/brand/npracing.mdx` (hero lines) or from
  * site.config.ts's verified facts, EXCEPT the team-block paragraphs below,
@@ -69,6 +70,8 @@ export async function HomePage({ schemaNodes }: HomePageProps) {
         riderNote={siteConfig.racing.rider.joined}
         season="2026"
       />
+
+      <SponsorMarquee />
 
       <GalleryStrip
         heading="From the paddock to the podium."

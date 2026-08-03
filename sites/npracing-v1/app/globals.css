@@ -276,6 +276,13 @@
     .marquee-track {
       animation: marquee-scroll 34s linear infinite;
     }
+    /* Sponsor logos are real links, not decoration — pause on hover/focus so
+       a visitor can actually land a click instead of chasing a moving
+       target (also satisfies WCAG 2.2.2 for content that auto-moves). */
+    .marquee:hover .marquee-track,
+    .marquee:focus-within .marquee-track {
+      animation-play-state: paused;
+    }
   }
   @keyframes marquee-scroll {
     from {

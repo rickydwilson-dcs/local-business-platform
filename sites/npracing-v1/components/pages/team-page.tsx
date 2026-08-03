@@ -5,9 +5,9 @@ import { PageHead } from '@/components/sections/page-head';
 /**
  * TeamPage — the full crew listing.
  *
- * Every card is rendered from a content/team/*.mdx record — photo, name and
- * role only, no individual detail pages (nothing beyond a role is on file
- * for most of the crew yet).
+ * Every card is rendered from a content/team/*.mdx record — photo, name,
+ * role, and an optional job description (nothing beyond a role is on file
+ * for most of the crew yet). No individual detail pages.
  */
 export interface TeamPageProps {
   members: TeamMember[];
@@ -49,6 +49,11 @@ export function TeamPage({ members }: TeamPageProps) {
                     <p className="text-sm font-semibold uppercase tracking-wide text-brand-accent">
                       {member.role}
                     </p>
+                    {member.description && (
+                      <p className="mt-2 text-sm leading-relaxed text-surface-secondary-foreground">
+                        {member.description}
+                      </p>
+                    )}
                   </div>
                 </article>
               </li>

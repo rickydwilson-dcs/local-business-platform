@@ -513,3 +513,34 @@ section h1 {
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
 }
+
+/* Horizontal auto-scrolling ticker (sponsor strip). Motion is opt-in: the
+   track only animates when the user has not asked for reduced motion. */
+.marquee {
+  overflow: hidden;
+  background-color: var(--color-surface-subtle);
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .marquee-track {
+    animation: marquee-scroll 34s linear infinite;
+  }
+  /* Sponsor logos are real links, not decoration — pause on hover/focus so
+     a visitor can actually land a click instead of chasing a moving target
+     (also satisfies WCAG 2.2.2 for content that auto-moves). */
+  .marquee:hover .marquee-track,
+  .marquee:focus-within .marquee-track {
+    animation-play-state: paused;
+  }
+}
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
