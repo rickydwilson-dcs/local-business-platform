@@ -4,6 +4,18 @@ import { Instagram, Facebook } from 'lucide-react';
 import { SiteNavMobile } from '@/components/site-nav-mobile';
 
 /**
+ * Nav-specific logo mark — the brand logo trimmed to just the red oval
+ * ("NP RACING"), dropping the "BRITISH SUPERBIKE TEAM" subtitle and the
+ * dead black canvas space the source PNG carries around it. The `logo` prop
+ * (full canvas, with subtitle) is still used for its `alt` text and remains
+ * correct for the footer/schema, which want the full mark — only the nav
+ * rendering swaps to this tighter asset so it can run bigger without the
+ * baked-in padding making it look small inside the pill.
+ */
+const NAV_LOGO_SRC =
+  'https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/npracing-v1/logo/npracing-logo-mark.png';
+
+/**
  * SiteHeader — Grid Box floating pill navigation.
  *
  * Server Component (no 'use client'): only the mobile drawer is interactive,
@@ -67,12 +79,12 @@ export function SiteHeader({
             aria-label={`${siteName} home`}
           >
             <Image
-              src={logo.src}
+              src={NAV_LOGO_SRC}
               alt={logo.alt}
-              width={160}
-              height={40}
+              width={800}
+              height={346}
               priority
-              className="h-8 w-auto object-contain sm:h-10"
+              className="h-16 w-auto object-contain"
             />
           </Link>
 

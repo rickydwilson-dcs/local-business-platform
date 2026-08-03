@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { getBrand } from '@/lib/brand';
-import { getImageUrl } from '@/lib/image';
 import { siteConfig } from '@/site.config';
 import { MobileMenu } from '@/components/mobile-menu';
 import { TickerRibbon } from '@/components/sections/ticker-ribbon';
@@ -20,13 +19,24 @@ import { FacebookIcon, InstagramIcon } from '@/components/ui/icons';
  * as the ribbon scrolls away.
  */
 const NAV_LINKS = [
-  { label: 'Team', href: '/#team' },
+  { label: 'Team', href: '/team' },
   { label: 'Rider', href: '/#rider' },
   { label: 'Gallery', href: '/#gallery' },
   { label: 'Merch', href: '/merch' },
   { label: 'News', href: '/news' },
   { label: 'Contact', href: '/contact' },
 ];
+
+/**
+ * Nav-specific logo mark — the brand logo trimmed to just the red oval
+ * ("NP RACING"), dropping the "BRITISH SUPERBIKE TEAM" subtitle and the
+ * dead black canvas space the source PNG carries around it. `brand.logo.src`
+ * (full canvas, with subtitle) remains correct for the footer/schema; only
+ * the nav rendering swaps to this tighter asset so it can run bigger without
+ * the baked-in padding making it look small.
+ */
+const NAV_LOGO_SRC =
+  'https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev/npracing-v3/logo/npracing-logo-mark.png';
 
 export async function SiteHeader() {
   const brand = await getBrand();
@@ -49,11 +59,11 @@ export async function SiteHeader() {
         >
           <Link href="/" className="flex flex-none items-center">
             <Image
-              src={getImageUrl(brand.logo.src)}
+              src={NAV_LOGO_SRC}
               alt={brand.teamName}
-              width={200}
-              height={50}
-              className="h-10 w-auto sm:h-[3.125rem]"
+              width={800}
+              height={346}
+              className="h-20 w-auto sm:h-[6.25rem]"
               priority
             />
           </Link>
