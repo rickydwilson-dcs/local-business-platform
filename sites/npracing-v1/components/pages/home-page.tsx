@@ -5,6 +5,7 @@ import { Eyebrow } from '@/components/sections/eyebrow';
 import { ArrowButton, ArrowTextLink } from '@/components/sections/arrow-link';
 import { StatStrip } from '@/components/sections/stat-strip';
 import { MarqueeRibbon } from '@/components/sections/marquee-ribbon';
+import { SponsorMarquee } from '@/components/sections/sponsor-marquee';
 import { ValueCard } from '@/components/sections/value-card';
 
 /**
@@ -26,6 +27,8 @@ const PHOTO = {
   actionCorner: `${R2_BASE}/npracing-v1/news/brands-hatch-round-5-race-report.jpg`,
   paddockTeam: `${R2_BASE}/npracing-v1/photos/paddock-team-2026-08.jpg`,
   paddockGroup: `${R2_BASE}/npracing-v1/photos/paddock-group-2026-08.jpg`,
+  helmetCloseup: `${R2_BASE}/npracing-v1/photos/helmet-2026-08.jpg`,
+  actionPursuit: `${R2_BASE}/npracing-v1/photos/action-pursuit-2026-08.jpg`,
   merchCap: `${R2_BASE}/npracing-v1/merch/np-racing-curved-peak-cap.jpg`,
 } as const;
 
@@ -222,6 +225,8 @@ export function HomePage({ brand, schemaNodes }: HomePageProps) {
         </div>
       </section>
 
+      <SponsorMarquee />
+
       {/* ── Gallery ──────────────────────────────────────────────────────── */}
       <section id="gallery" className="scroll-mt-28 py-20 md:py-24">
         <div className="container-grid">
@@ -243,10 +248,10 @@ export function HomePage({ brand, schemaNodes }: HomePageProps) {
             />
             <div className="grid gap-4">
               <Image
-                src={PHOTO.actionChase}
-                alt={`${brand.teamName} Honda Fireblade chasing on track`}
-                width={1200}
-                height={900}
+                src={PHOTO.actionPursuit}
+                alt={`${brand.riderName} pursuing another rider on the ${brand.teamName} Honda Fireblade`}
+                width={2232}
+                height={1488}
                 sizes="(min-width: 1024px) 25vw, 100vw"
                 className="aspect-[4/3] w-full rounded-lg border border-surface-card-border object-cover"
               />
@@ -269,10 +274,10 @@ export function HomePage({ brand, schemaNodes }: HomePageProps) {
                 className="aspect-[4/3] w-full rounded-lg border border-surface-card-border object-cover"
               />
               <Image
-                src={PHOTO.actionLean}
-                alt={`${brand.teamName} Honda Fireblade on track`}
-                width={1600}
-                height={900}
+                src={PHOTO.helmetCloseup}
+                alt={`${brand.teamName} race helmet`}
+                width={1658}
+                height={1566}
                 sizes="(min-width: 1024px) 25vw, 100vw"
                 className="aspect-[4/3] w-full rounded-lg border border-surface-card-border object-cover"
               />

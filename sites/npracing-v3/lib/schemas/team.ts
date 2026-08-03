@@ -33,6 +33,9 @@ export const TeamFrontmatterSchema = z.object({
 
   role: z.string().min(1, 'Role is required'),
 
+  /** Optional job description — most crew only have a role on file so far. */
+  description: z.string().min(1).optional(),
+
   image: TeamImageSchema,
 
   sortOrder: z.number().int('sortOrder must be an integer'),

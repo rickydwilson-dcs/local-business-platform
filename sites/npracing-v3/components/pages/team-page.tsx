@@ -7,9 +7,9 @@ import { PageHead } from '@/components/sections/page-head';
 /**
  * TeamPage — the full crew listing.
  *
- * Every card is read from `content/team/*.mdx` — photo, name and role only,
- * no individual detail pages (nothing beyond a role is on file for most of
- * the crew yet).
+ * Every card is read from `content/team/*.mdx` — photo, name, role, and an
+ * optional job description (nothing beyond a role is on file for most of
+ * the crew yet). No individual detail pages.
  */
 async function getTeamMembers(): Promise<Array<{ slug: string; frontmatter: TeamFrontmatter }>> {
   const slugs = await listSlugs('team');
@@ -62,6 +62,11 @@ export async function TeamPage() {
                     <p className="text-small font-semibold uppercase tracking-wide text-brand-accent">
                       {frontmatter.role}
                     </p>
+                    {frontmatter.description && (
+                      <p className="mt-2 text-small leading-relaxed text-surface-secondary">
+                        {frontmatter.description}
+                      </p>
+                    )}
                   </div>
                 </li>
               ))}
