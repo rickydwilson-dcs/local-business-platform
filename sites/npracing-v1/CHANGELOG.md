@@ -12,6 +12,7 @@ Template site used as the gold-standard starting point for new client sites. Cha
 - Added a favicon (`app/icon.png`, `app/apple-icon.png`): the joined "NP" cropped from the team's oval logo mark, since the full mark's fine detail doesn't survive down to 16–32px. Required a `.gitignore` exception since the platform's images-go-to-R2 rule doesn't cover Next.js's file-based favicon convention — see root [CHANGELOG.md](../../CHANGELOG.md) and [docs/standards/images.md](../../docs/standards/images.md).
 - Added a sponsor strip above the gallery section: a single auto-scrolling marquee of 7 partner logos (`components/sections/sponsor-marquee.tsx`), each linking out to the sponsor's own site or social page. Logos sourced from each sponsor's own site and recoloured to solid white-on-transparent so the whole strip reads as one calm monochrome row rather than mismatched coloured logos on cards. Reuses the `.marquee`/`.marquee-track` CSS already in `app/globals.css` (previously only used by the text ticker) — seamless loop, animation gated behind `prefers-reduced-motion`, paused on hover/focus since these are real links.
 - Matt's team bio updated: role changed to "No. 1 Mechanic" with a job description. `lib/schemas/team.ts` gained an optional `description` field; `TeamPage` renders it when present.
+- Jack's team bio updated: role changed from "Technician" to "Data Engineer" with a job description (uses rider feedback and data to optimise chassis and bike performance).
 
 ---
 
