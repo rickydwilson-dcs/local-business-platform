@@ -20,6 +20,7 @@ import { PageHead } from '@/components/sections/page-head';
 import { StatBlocks, type StatBlockItem } from '@/components/sections/stat-blocks';
 import { TeamBlock } from '@/components/sections/team-block';
 import { ValueStrip } from '@/components/sections/value-strip';
+import { CtaButton } from '@/components/ui/cta-button';
 
 export async function generateMetadata(): Promise<Metadata> {
   const brand = await getBrand();
@@ -70,6 +71,9 @@ export default async function AboutRoute() {
         imageAlt={`${brand.teamName} crew on the grid with rider #${brand.raceNumber} under the team umbrella`}
       >
         {brandNarrative}
+        <div className="not-prose mt-6">
+          <CtaButton href="/team">Meet the full crew</CtaButton>
+        </div>
       </TeamBlock>
 
       <ValueStrip

@@ -23,7 +23,9 @@ const R2_BASE = 'https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev';
 const PHOTO = {
   actionLean: `${R2_BASE}/npracing-v1/photos/action-lean.jpg`,
   actionChase: `${R2_BASE}/npracing-v1/photos/action-chase.jpg`,
+  actionCorner: `${R2_BASE}/npracing-v1/news/brands-hatch-round-5-race-report.jpg`,
   paddockTeam: `${R2_BASE}/npracing-v1/photos/paddock-team-2026-08.jpg`,
+  paddockGroup: `${R2_BASE}/npracing-v1/photos/paddock-group-2026-08.jpg`,
 } as const;
 
 /**
@@ -161,9 +163,10 @@ export function HomePage({ brand, schemaNodes }: HomePageProps) {
               talent, running properly prepared machinery, and staying a close-knit, family-style
               operation with experienced technicians.
             </p>
-            <ArrowTextLink href="#rider" className="mt-6">
-              Meet the 2026 rider
-            </ArrowTextLink>
+            <div className="mt-6 flex flex-wrap gap-x-6 gap-y-3">
+              <ArrowTextLink href="#rider">Meet the 2026 rider</ArrowTextLink>
+              <ArrowTextLink href="/team">Meet the full crew</ArrowTextLink>
+            </div>
           </div>
         </div>
 
@@ -230,8 +233,8 @@ export function HomePage({ brand, schemaNodes }: HomePageProps) {
 
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-[1.3fr_1fr_1fr]">
             <Image
-              src={PHOTO.actionLean}
-              alt={`${brand.riderName} leant into a corner`}
+              src={PHOTO.actionCorner}
+              alt={`${brand.riderName} leant hard into a corner at Brands Hatch`}
               width={1600}
               height={900}
               sizes="(min-width: 1024px) 40vw, 100vw"
@@ -257,10 +260,10 @@ export function HomePage({ brand, schemaNodes }: HomePageProps) {
             </div>
             <div className="grid gap-4">
               <Image
-                src={PHOTO.paddockTeam}
-                alt={`${brand.teamName} team photo`}
-                width={1000}
-                height={1250}
+                src={PHOTO.paddockGroup}
+                alt={`${brand.teamName} crew celebrating in the garage`}
+                width={1600}
+                height={1200}
                 sizes="(min-width: 1024px) 25vw, 100vw"
                 className="aspect-[4/3] w-full rounded-lg border border-surface-card-border object-cover"
               />

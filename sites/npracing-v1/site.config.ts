@@ -269,7 +269,7 @@ export const siteConfig: SiteConfig = {
 
   navigation: {
     main: [
-      { label: 'Team', href: '/#team' },
+      { label: 'Team', href: '/team' },
       { label: 'Rider', href: '/#rider' },
       { label: 'Gallery', href: '/#gallery' },
       { label: 'Merch', href: '/merch' },
