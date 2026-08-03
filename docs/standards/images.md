@@ -22,7 +22,7 @@ Images are stored in Cloudflare R2 (not in the Git repository) for performance a
 **Exceptions to R2-only** (each carved out explicitly in `.gitignore`, not a general escape hatch):
 
 - **Playwright visual baselines** (`sites/**/e2e/**/*.png`) — snapshots, not content images.
-- **`sites/dch-automotive/public/logo/**`and`public/stitch-images/**`** — R2 wasn't configured for this site at build time; committed directly until it is.
+- `sites/dch-automotive/public/logo/**` and `public/stitch-images/**` — R2 wasn't configured for this site at build time; committed directly until it is.
 - **`app/icon.png` / `app/apple-icon.png`** (e.g. `sites/npracing-v1`, `sites/npracing-v3`) — Next.js's file-based favicon convention reads these straight from `app/` at build time. They're tiny (a few KB to tens of KB) and static, so committing them directly is simpler than routing a favicon through R2 and a custom `metadata.icons` URL. If a site's favicon starts needing multiple sizes/variants generated from a pipeline, revisit this.
 
 ### 2. Next.js Image Component Only
