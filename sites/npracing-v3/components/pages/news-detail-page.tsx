@@ -68,13 +68,17 @@ export async function NewsDetailPage({ slug }: NewsDetailPageProps) {
 
       {frontmatter.heroImage && (
         <div className="mx-auto w-full max-w-[80rem] px-6 pt-12">
-          <div className="relative aspect-[16/7] border border-surface-card-border">
+          {/* object-contain (not cover) + a bounded height: hero images vary between
+              landscape action shots and portrait paddock photos, and cropping either
+              to a fixed banner ratio loses real content. Letterboxing on
+              bg-surface-card shows the whole image regardless of its aspect ratio. */}
+          <div className="relative h-[24rem] border border-surface-card-border bg-surface-card sm:h-[32rem]">
             <Image
               src={getImageUrl(frontmatter.heroImage.src)}
               alt={frontmatter.heroImage.alt}
               fill
               sizes="100vw"
-              className="object-cover grayscale-[0.1]"
+              className="object-contain grayscale-[0.1]"
               priority
             />
           </div>
