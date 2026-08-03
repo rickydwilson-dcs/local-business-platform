@@ -60,7 +60,10 @@ export default async function AboutPageRoute() {
           <div className="prose-grid-box">{brandBody}</div>
 
           <div className="mt-10 flex flex-wrap gap-4">
-            <ArrowButton href="/news">Latest team news</ArrowButton>
+            <ArrowButton href="/team">Meet the team</ArrowButton>
+            <ArrowButton href="/news" variant="secondary">
+              Latest team news
+            </ArrowButton>
             <ArrowButton href="/contact" variant="secondary">
               Get in touch
             </ArrowButton>
