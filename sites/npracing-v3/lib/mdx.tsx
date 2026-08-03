@@ -22,7 +22,7 @@ export const { getMdxFiles, getMdxContent, getAllServices, getAllLocations } = l
  * against that union, so re-typing the exported functions locally (without
  * editing the shared package, which would affect every site) is safe.
  */
-export type ContentType = 'merch' | 'news' | 'brand';
+export type ContentType = 'merch' | 'news' | 'brand' | 'team';
 
 export const listSlugs = loader.listSlugs as unknown as (baseDir: ContentType) => Promise<string[]>;
 

@@ -6,6 +6,16 @@ Notable platform-level changes to the Local Business Platform. Site-specific cha
 
 ---
 
+## 2026-08-03
+
+### Sites
+
+- `npracing-v1` and `npracing-v3` each gained a dedicated `/team` page — a photo grid of all 10 crew members (name + role, sourced from the team's own photo gallery and two directly-supplied portraits) replacing the previous "just a homepage section" teaser. Implemented independently in both sites per the self-containment rule: a new `team` MDX content type (`content/team/*.mdx`, `lib/schemas/team.ts`, a self-contained loader mirroring the existing `merch` pattern) and a `TeamPage` component styled to each site's own design language. Both sites' nav and homepage/about CTAs now link to the new page instead of (or alongside) the old in-page anchor.
+- One team member's supplied photo was a Canon `.cr2` RAW file with no usable web format — converted to JPEG and orientation-corrected with macOS `sips` rather than asking for a re-export, since the RAW data already contained everything needed.
+- Fixed two accidental duplicate images in `npracing-v1`'s homepage gallery (both images had been used twice in the same grid): one paddock-team photo slot now shows a different team photo, and the duplicated on-track cornering shot was swapped for an already-hosted race-report photo instead of the repeated one.
+
+---
+
 ## 2026-08-02
 
 ### Sites
