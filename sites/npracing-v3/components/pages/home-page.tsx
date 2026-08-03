@@ -8,6 +8,7 @@ import { ValueStrip } from '@/components/sections/value-strip';
 import { RiderPoster } from '@/components/sections/rider-poster';
 import { GalleryStrip } from '@/components/sections/gallery-strip';
 import { MerchCta } from '@/components/sections/merch-cta';
+import { getImageUrl } from '@/lib/image';
 
 /**
  * HomePage — "Number 51" composition.
@@ -76,9 +77,10 @@ export async function HomePage({ schemaNodes }: HomePageProps) {
       />
 
       <MerchCta
-        heading="Team merchandise — shop the full range."
+        heading="Team merchandise."
         href="/merch"
         ctaLabel="Shop now"
+        imageSrc={getImageUrl('/npracing-v3/merch/np-racing-curved-peak-cap.jpg')}
       />
     </>
   );

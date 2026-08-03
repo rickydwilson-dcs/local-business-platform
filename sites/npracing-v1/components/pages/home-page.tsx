@@ -26,6 +26,7 @@ const PHOTO = {
   actionCorner: `${R2_BASE}/npracing-v1/news/brands-hatch-round-5-race-report.jpg`,
   paddockTeam: `${R2_BASE}/npracing-v1/photos/paddock-team-2026-08.jpg`,
   paddockGroup: `${R2_BASE}/npracing-v1/photos/paddock-group-2026-08.jpg`,
+  merchCap: `${R2_BASE}/npracing-v1/merch/np-racing-curved-peak-cap.jpg`,
 } as const;
 
 /**
@@ -283,18 +284,46 @@ export function HomePage({ brand, schemaNodes }: HomePageProps) {
       {/* ── Merch CTA band ───────────────────────────────────────────────── */}
       <section className="pb-24">
         <div className="container-grid">
-          <div className="relative flex flex-wrap items-center justify-between gap-8 overflow-hidden rounded-card bg-brand-primary p-10 md:p-14">
+          <div className="group relative flex flex-col overflow-hidden rounded-card bg-brand-primary p-8 sm:p-10 md:min-h-[24rem] md:flex-row md:items-center md:gap-8 md:p-14">
             <div
               className="pointer-events-none absolute -right-16 -top-16 h-64 w-64 rounded-full bg-white/10"
               aria-hidden="true"
             />
-            <h2 className="relative z-10 max-w-[16ch] text-h2 uppercase text-on-brand-primary">
-              Team merchandise — shop the full range.
-            </h2>
-            <div className="relative z-10">
-              <ArrowButton href="/merch" variant="on-brand">
-                Shop the range
-              </ArrowButton>
+            {/* Cap product shot, blended onto the red band. The source photo
+                is on a pure white background, so mix-blend-multiply drops
+                the white and leaves just the cap — no separate cutout asset
+                needed; cropped tight to the cap's own bounding box (object-
+                cover against a fixed aspect ratio) rather than the source's
+                square frame, which is mostly dead product-photography
+                padding. Product-forward on mobile — shown before the copy,
+                since the cap is the reason this band exists. On desktop it
+                switches to an absolutely-positioned, vertically-centred
+                shot on the right side of the card, inset from the edges
+                (not bled into the corner — that clipped the crown/brim
+                against the card's overflow-hidden bounds). Straightens up
+                and grows on hover — a deliberately punchy sign of life
+                (bigger swing than a typical micro-interaction, on purpose,
+                so it reads clearly against a big flat colour band) —
+                decorative only, so it's fine that touch devices never see
+                it. */}
+            <Image
+              src={PHOTO.merchCap}
+              alt=""
+              aria-hidden="true"
+              width={700}
+              height={700}
+              sizes="(min-width: 1024px) 420px, (min-width: 768px) 340px, 280px"
+              className="pointer-events-none relative z-10 order-first aspect-[3/2] w-64 self-center rotate-6 object-cover mix-blend-multiply transition-transform duration-300 ease-out motion-reduce:transition-none group-hover:rotate-0 group-hover:scale-110 sm:w-80 md:absolute md:right-8 md:top-1/2 md:order-none md:w-80 md:-translate-y-1/2 md:self-auto lg:right-12 lg:w-[26rem]"
+            />
+            <div className="relative z-10 md:max-w-[26rem]">
+              <h2 className="max-w-[16ch] text-h2 uppercase text-on-brand-primary">
+                Team merchandise.
+              </h2>
+              <div className="mt-8">
+                <ArrowButton href="/merch" variant="on-brand">
+                  Shop the range
+                </ArrowButton>
+              </div>
             </div>
           </div>
         </div>
