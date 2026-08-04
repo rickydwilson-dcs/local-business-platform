@@ -129,6 +129,8 @@ export function SiteHeader({
 
             <SiteNavMobile
               siteName={siteName}
+              logoSrc={NAV_LOGO_SRC}
+              logoAlt={logo.alt}
               navigation={navigation}
               primaryCta={primaryCta}
               instagramUrl={instagramUrl}
