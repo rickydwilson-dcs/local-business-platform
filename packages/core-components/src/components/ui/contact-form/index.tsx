@@ -150,17 +150,19 @@ export function ContactForm({
         // Fetch new CSRF token for next submission
         fetchCSRFToken();
       } else {
-        // Handle CSRF token expiration
-        if (data.code === "CSRF_INVALID") {
-          await fetchCSRFToken();
-          setSubmitMessage("Please try submitting again.");
-        } else {
-          setSubmitMessage(data.error || "Something went wrong. Please try again.");
-        }
+        // CSRF tokens are single-use and get marked "used" as soon as they
+        // validate — which happens before rate limiting or any other check
+        // runs server-side. So any non-success response (not just an
+        // explicit CSRF error) may have already spent this token; always
+        // fetch a fresh one so the next attempt doesn't fail with a
+        // stale-token "Invalid CSRF token" regardless of why this one failed.
+        await fetchCSRFToken();
+        setSubmitMessage(data.error || "Something went wrong. Please try again.");
         setSubmitStatus("error");
       }
     } catch (error) {
       console.error("Form submission error:", error);
+      await fetchCSRFToken();
       setSubmitStatus("error");
       setSubmitMessage("Network error. Please check your connection and try again.");
     } finally {
