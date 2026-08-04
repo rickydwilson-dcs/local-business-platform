@@ -231,7 +231,7 @@ In Vercel project settings, add:
 # Required
 NEXT_PUBLIC_SITE_URL=https://[domain].com
 RESEND_API_KEY=re_xxx
-BUSINESS_EMAIL=client@email.com
+RESEND_FROM_EMAIL=noreply@[domain].com
 
 # Rate Limiting (Shared Supabase - same for all sites)
 SUPABASE_URL=https://your-project.supabase.co
@@ -246,6 +246,10 @@ FEATURE_ANALYTICS_ENABLED=true
 ```
 
 **Note on Rate Limiting:** All sites share the same Supabase database for rate limiting. Use the same `SUPABASE_URL` and `SUPABASE_SERVICE_KEY` for all client sites. Each site automatically gets isolated rate limit counters based on the `slug` field in `site.config.ts` — no additional setup required.
+
+**Note on `RESEND_FROM_EMAIL`:** Required, not optional, despite Resend accepting the request without it. `createContactHandler` (`app/api/contact/route.ts`) falls back to `noreply@resend.dev` — Resend's own sandbox domain — when this var is unset. Sending from that sandbox domain silently restricts delivery to the Resend account's own registered email, regardless of which recipient address the site is configured to notify, even if the site's own domain is separately verified in Resend. The contact form will report success to the visitor either way; only the missing business notification email reveals the problem. Set `RESEND_FROM_EMAIL` to an address on the site's own domain (verified under [resend.com/domains](https://resend.com/domains)) before considering the contact form done.
+
+**Note on business email:** The contact form's destination address comes from `site.config.ts`'s `business.email` field (via `createContactInfo`), not from a `BUSINESS_EMAIL` env var — no such var is read anywhere in the codebase. If the visible/display address should differ from where enquiries are actually routed, override `businessEmail` directly in the site's `app/api/contact/route.ts` rather than adding an env var for it.
 
 ### Step 12: Configure Domain
 

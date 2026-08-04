@@ -619,7 +619,10 @@ In Vercel project settings, add:
 # Required
 NEXT_PUBLIC_SITE_URL=https://acme-plumbing-canterbury.vercel.app
 RESEND_API_KEY=re_xxx
-BUSINESS_EMAIL=info@acme-plumbing.co.uk
+# Required — falls back to Resend's sandbox domain (noreply@resend.dev) when unset,
+# which silently restricts delivery to the Resend account's own email regardless of
+# recipient, even if the site's own domain is separately verified in Resend.
+RESEND_FROM_EMAIL=noreply@acme-plumbing.co.uk
 
 # Rate Limiting (Supabase)
 SUPABASE_URL=https://your-project.supabase.co

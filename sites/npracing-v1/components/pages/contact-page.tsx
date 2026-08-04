@@ -1,8 +1,8 @@
 'use client';
 
-import { useId, useState } from 'react';
+import { useEffect, useId, useState } from 'react';
 import type { FormEvent } from 'react';
-import { Mail, Instagram, Facebook, Info } from 'lucide-react';
+import { Mail, Instagram, Facebook } from 'lucide-react';
 import type { BrandContent } from '@/lib/schemas/brand';
 import { PageHead } from '@/components/sections/page-head';
 import { Eyebrow } from '@/components/sections/eyebrow';
@@ -11,14 +11,11 @@ import { ArrowTextLink } from '@/components/sections/arrow-link';
 /**
  * ContactPage — the Grid Box contact page.
  *
- * IMPORTANT — this form deliberately does not send anything.
- *
- * NPRacing has no confirmed enquiry inbox or form backend wired up for this
- * build, so shipping a form that POSTs to /api/contact would tell a visitor
- * their message had been delivered when nobody would ever read it. Instead the
- * form is fully built and validated client-side, submission is intercepted,
- * and the result region says plainly that nothing was sent and points at the
- * team's real email address.
+ * Submits to POST /api/contact (shared createContactHandler), which routes
+ * enquiries to the team inbox — see the ENQUIRY_INBOX constant in
+ * app/api/contact/route.ts. That inbox is deliberately different from the
+ * publicly displayed npracingbsb@hotmail.com address below, which stays as
+ * the visible contact point per the client's request.
  *
  * Every contact detail (email, Instagram, Facebook) is read from
  * content/brand/npracing.mdx via the `brand` prop — none of it is hardcoded
@@ -86,6 +83,24 @@ export function ContactPage({ brand }: ContactPageProps) {
   const [errors, setErrors] = useState<FieldErrors>({});
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
   const [statusTone, setStatusTone] = useState<'error' | 'notice'>('notice');
+  const [csrfToken, setCsrfToken] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const fetchCsrfToken = async () => {
+    try {
+      const response = await fetch('/api/csrf-token');
+      if (response.ok) {
+        const data = await response.json();
+        setCsrfToken(data.token);
+      }
+    } catch (error) {
+      console.error('Failed to fetch CSRF token:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchCsrfToken();
+  }, []);
 
   const id = (field: FieldName) => `${fieldId}-${field}`;
   const errorId = (field: FieldName) => `${fieldId}-${field}-error`;
@@ -100,11 +115,7 @@ export function ContactPage({ brand }: ContactPageProps) {
     });
   };
 
-  /**
-   * Intercepts submission entirely. Nothing is POSTed, nothing is queued, and
-   * the status text says so — the form never claims a message was delivered.
-   */
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const nextErrors = validate(values);
@@ -121,11 +132,48 @@ export function ContactPage({ brand }: ContactPageProps) {
       return;
     }
 
-    setStatusTone('notice');
-    setStatusMessage(
-      `Your message has NOT been sent — online enquiries are not live on this site yet. ` +
-        `Please email ${brand.email} directly and we will pick it up from there.`
-    );
+    setIsSubmitting(true);
+    setStatusMessage(null);
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-csrf-token': csrfToken,
+        },
+        body: JSON.stringify(values),
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        setStatusTone('notice');
+        setStatusMessage(
+          data.message || 'Thanks — your enquiry has been sent. We will get back to you soon.'
+        );
+        setValues(EMPTY_VALUES);
+        fetchCsrfToken();
+        return;
+      }
+
+      if (data.code === 'CSRF_INVALID') {
+        await fetchCsrfToken();
+      }
+      setStatusTone('error');
+      setStatusMessage(
+        data.error ||
+          `Something went wrong sending your message. Please email ${brand.email} directly.`
+      );
+    } catch (error) {
+      console.error('Contact form submission error:', error);
+      setStatusTone('error');
+      setStatusMessage(
+        `Network error — your message was not sent. Please email ${brand.email} directly.`
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const describedBy = (field: FieldName) => (errors[field] ? errorId(field) : undefined);
@@ -146,28 +194,6 @@ export function ContactPage({ brand }: ContactPageProps) {
           <h2 id={`${fieldId}-form-heading`} className="text-h3 uppercase text-surface-foreground">
             Send us an enquiry
           </h2>
-
-          {/* Persistent, unmissable statement of what this form does and does
-              not do — shown before anyone starts typing, not only afterwards. */}
-          <div
-            className="mt-5 flex gap-3 rounded-card border border-brand-secondary chip-brand p-4"
-            role="note"
-          >
-            <Info className="mt-0.5 h-5 w-5 flex-shrink-0 text-brand-accent" aria-hidden="true" />
-            <p className="text-sm leading-relaxed text-surface-secondary-foreground">
-              <span className="font-semibold text-surface-foreground">
-                Online enquiries are not live yet.
-              </span>{' '}
-              This form will not send or store anything. Until it is connected, please email{' '}
-              <a
-                href={`mailto:${brand.email}`}
-                className="font-semibold text-brand-accent underline underline-offset-2"
-              >
-                {brand.email}
-              </a>
-              .
-            </p>
-          </div>
 
           <form onSubmit={handleSubmit} noValidate className="mt-8 flex flex-col gap-6">
             {/* Single live region for both validation feedback and the
@@ -299,9 +325,8 @@ export function ContactPage({ brand }: ContactPageProps) {
             </p>
 
             <div className="flex flex-wrap items-center gap-4">
-              {/* Deliberately not labelled "Send" — nothing is sent. */}
-              <button type="submit" className="btn-primary">
-                Check my enquiry
+              <button type="submit" className="btn-primary" disabled={isSubmitting}>
+                {isSubmitting ? 'Sending…' : 'Send enquiry'}
               </button>
               <a href={`mailto:${brand.email}`} className="btn-secondary">
                 Email us instead
@@ -341,7 +366,7 @@ export function ContactPage({ brand }: ContactPageProps) {
                   {brand.email}
                 </a>
                 <p className="mt-2 text-sm leading-relaxed text-surface-secondary-foreground">
-                  The quickest way to reach the team while the enquiry form is offline.
+                  The quickest way to reach the team directly.
                 </p>
               </dd>
             </div>
