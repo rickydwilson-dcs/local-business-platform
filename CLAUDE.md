@@ -103,6 +103,7 @@ The theme system exists so sites can be re-branded without touching component co
 ### CSS Syntax
 
 - Never use Tailwind's `theme()` function in plain CSS files — it causes CSS parser panics. Use CSS custom properties: `var(--color-brand-primary)` not `theme('colors.brand.primary')`.
+- Never nest a `fixed inset-0` mobile-nav dialog inside a header (or any ancestor) that has `backdrop-blur-*`/`backdrop-filter`. Per spec, `backdrop-filter` (like `transform`) makes that ancestor the containing block for `position: fixed` descendants, so the "fullscreen" overlay gets confined to the header's own small box instead of the viewport, spilling its content over the page beneath it. Render the dialog as a sibling of the blurred header, or portal it to `document.body` with `createPortal` — see `sites/npracing-v1/components/site-nav-mobile.tsx`.
 
 ### Tailwind Content Globs
 

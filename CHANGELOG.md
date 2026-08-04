@@ -8,6 +8,10 @@ Notable platform-level changes to the Local Business Platform. Site-specific cha
 
 ## 2026-08-04
 
+### Fixes
+
+- Documented a new CSS gotcha in root `CLAUDE.md` (CSS Syntax section): a `fixed inset-0` mobile-nav dialog nested inside a header with `backdrop-blur-*` gets confined to that header's own box instead of the viewport, because `backdrop-filter` establishes a containing block for `position: fixed` descendants (same as `transform`). Found via `npracing-v1`'s mobile burger menu, which rendered correctly on an actual phone but broke in a resized desktop browser — fixed by portaling the dialog to `document.body` via `createPortal` (`sites/npracing-v1/components/site-nav-mobile.tsx`).
+
 ### Infrastructure
 
 - `RESEND_FROM_EMAIL` added to `turbo.json`'s `build.env` array, matching the platform's own rule that every env var affecting build output must be listed there (missing entries cause stale cache hits). Discovered while wiring up `npracing-v1`'s contact form: the var was already read by `createContactHandler` (`packages/core-components/src/lib/api/contact-route.ts`), but never listed in `turbo.json`, and never set for that site — sending fell back to Resend's sandbox domain (`noreply@resend.dev`), which silently restricts delivery to the Resend account's own email regardless of the configured recipient, even when the site's own sending domain is separately verified in Resend. Same gap likely affects other sites that never set this var (confirmed also missing for `dj-fox-electrical`).
