@@ -6,6 +6,10 @@ British Superbike (BSB) race team site, self-contained per the platform's site s
 
 ## 2026-08-04
 
+### Bugs
+
+- Fixed the mobile burger menu rendering broken in a resized desktop browser (worked fine on an actual phone). The header's `backdrop-blur-md` (a `backdrop-filter`) establishes a containing block for `position: fixed` descendants per spec — the mobile nav dialog was a `fixed inset-0` child of that header, so instead of covering the viewport it was confined to the header's small pill box, spilling its own content over the page underneath. `components/site-nav-mobile.tsx` now portals the open dialog to `document.body` via `createPortal`, so it's never a descendant of the blurred header.
+
 ### Features
 
 - Wired up the contact form: it now actually submits (CSRF-protected POST to `/api/contact`) instead of intercepting the submission and displaying a "not sent" message. Enquiries route to `team@npracingbsb.co.uk`; the publicly displayed `npracingbsb@hotmail.com` address is unchanged, per the client's request to keep it as the visible contact point.
