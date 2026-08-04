@@ -219,7 +219,10 @@ SUPABASE_SERVICE_KEY=your-service-role-key
 
 # Email (Resend)
 RESEND_API_KEY=re_your_api_key_here
-BUSINESS_EMAIL=your-business@email.com
+# Required — falls back to Resend's sandbox domain (noreply@resend.dev) when unset,
+# which silently restricts delivery to the Resend account's own email regardless of
+# recipient. Must be an address on a domain verified at resend.com/domains.
+RESEND_FROM_EMAIL=noreply@your-domain.com
 
 # Analytics (Public - safe to expose)
 NEXT_PUBLIC_GA_MEASUREMENT_ID=G-XXXXXXXXXX

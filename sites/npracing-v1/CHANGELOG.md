@@ -1,6 +1,15 @@
-# Base Template - Deployment History
+# NPRacing (v1) - Deployment History
 
-Template site used as the gold-standard starting point for new client sites. Changes here represent updates to the template that all future sites will inherit.
+British Superbike (BSB) race team site, self-contained per the platform's site self-containment migration. The client's chosen design ("Grid Box") — see root `MEMORY.md` for the split with the frozen `npracing-v3` reference build.
+
+---
+
+## 2026-08-04
+
+### Features
+
+- Wired up the contact form: it now actually submits (CSRF-protected POST to `/api/contact`) instead of intercepting the submission and displaying a "not sent" message. Enquiries route to `team@npracingbsb.co.uk`; the publicly displayed `npracingbsb@hotmail.com` address is unchanged, per the client's request to keep it as the visible contact point.
+- Found and fixed a delivery gap while testing the above live: `npracingbsb.co.uk` was already verified in Resend, but nothing set `RESEND_FROM_EMAIL` for this site, so outbound mail fell back to Resend's sandbox domain (`noreply@resend.dev`) — which silently restricts delivery to the Resend account's own email regardless of recipient, even though the domain itself was verified. Set `RESEND_FROM_EMAIL=noreply@npracingbsb.co.uk` locally and in Vercel (Production + Preview). Same root cause likely affects other sites on the platform that never set this var — see root `docs/guides/adding-new-site.md`, now updated to require it.
 
 ---
 

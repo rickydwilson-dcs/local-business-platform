@@ -123,6 +123,7 @@ Turborepo's `"dependsOn": ["^build"]` ensures these build before any site that i
         "SUPABASE_URL",
         "SUPABASE_SERVICE_KEY",
         "RESEND_API_KEY",
+        "RESEND_FROM_EMAIL",
         "FEATURE_CONSENT_BANNER",
         "FEATURE_GA4_ENABLED",
         "FEATURE_FACEBOOK_PIXEL",

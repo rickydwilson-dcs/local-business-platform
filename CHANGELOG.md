@@ -6,6 +6,15 @@ Notable platform-level changes to the Local Business Platform. Site-specific cha
 
 ---
 
+## 2026-08-04
+
+### Infrastructure
+
+- `RESEND_FROM_EMAIL` added to `turbo.json`'s `build.env` array, matching the platform's own rule that every env var affecting build output must be listed there (missing entries cause stale cache hits). Discovered while wiring up `npracing-v1`'s contact form: the var was already read by `createContactHandler` (`packages/core-components/src/lib/api/contact-route.ts`), but never listed in `turbo.json`, and never set for that site — sending fell back to Resend's sandbox domain (`noreply@resend.dev`), which silently restricts delivery to the Resend account's own email regardless of the configured recipient, even when the site's own sending domain is separately verified in Resend. Same gap likely affects other sites that never set this var (confirmed also missing for `dj-fox-electrical`).
+- `docs/guides/adding-new-site.md`, `docs/guides/end-to-end-workflow.md`, and `docs/standards/security.md` corrected to require `RESEND_FROM_EMAIL` in the required-env-vars checklist and drop `BUSINESS_EMAIL`, which is not read anywhere in the codebase (the contact form's destination address comes from `site.config.ts`'s `business.email` field, not an env var) — both docs had listed the unused var and omitted the required one.
+
+---
+
 ## 2026-08-03
 
 ### Sites
