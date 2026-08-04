@@ -157,9 +157,12 @@ export function ContactPage({ brand }: ContactPageProps) {
         return;
       }
 
-      if (data.code === 'CSRF_INVALID') {
-        await fetchCsrfToken();
-      }
+      // CSRF tokens are single-use and get marked "used" as soon as they
+      // validate — which happens before rate limiting or any other check
+      // runs. So any non-success response (not just an explicit CSRF error)
+      // may have already spent this token; always fetch a fresh one so the
+      // next attempt doesn't fail with a stale-token "Invalid CSRF token".
+      await fetchCsrfToken();
       setStatusTone('error');
       setStatusMessage(
         data.error ||
@@ -167,6 +170,7 @@ export function ContactPage({ brand }: ContactPageProps) {
       );
     } catch (error) {
       console.error('Contact form submission error:', error);
+      await fetchCsrfToken();
       setStatusTone('error');
       setStatusMessage(
         `Network error — your message was not sent. Please email ${brand.email} directly.`
