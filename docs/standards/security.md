@@ -290,7 +290,9 @@ All sites must include these security headers in `next.config.ts`:
 ```typescript
 // next.config.ts
 async headers() {
-  const scriptSrc = "'self' 'unsafe-inline' *.googletagmanager.com *.google-analytics.com *.facebook.com vercel.live *.vercel.live";
+  // Next.js dev mode requires unsafe-eval for webpack HMR; production omits it
+  const unsafeEval = process.env.NODE_ENV === "development" ? " 'unsafe-eval'" : "";
+  const scriptSrc = `'self' 'unsafe-inline'${unsafeEval} *.googletagmanager.com *.google-analytics.com *.facebook.com vercel.live *.vercel.live`;
 
   return [
     {
@@ -339,7 +341,7 @@ async headers() {
 ### CSP Notes
 
 - **unsafe-inline for scripts**: Required for Next.js hydration
-- **unsafe-eval removed**: Not needed, security risk
+- **unsafe-eval dev-only**: Production omits it (security risk), but `next dev`'s webpack HMR/React Refresh runtime evaluates code as strings and throws (breaking all client-side interactivity) without it — gate it behind `process.env.NODE_ENV === "development"` rather than dropping it everywhere. Every site's `next.config.ts` follows this pattern as of August 2026; a hardcoded all-environments CSP silently breaks every button/form in `next dev` while looking fine in a production build.
 - **frame-ancestors 'none'**: Prevents embedding in iframes
 
 ## GDPR Compliance

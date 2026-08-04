@@ -74,9 +74,9 @@ const nextConfig: NextConfig = {
   // Security headers for production
   async headers() {
     // CSP script-src: unsafe-inline required for Next.js hydration
-    // Note: unsafe-eval removed from all environments for security
-    const scriptSrc =
-      "'self' 'unsafe-inline' *.googletagmanager.com *.google-analytics.com *.facebook.com vercel.live *.vercel.live";
+    // Next.js dev mode requires unsafe-eval for webpack HMR; production omits it
+    const unsafeEval = process.env.NODE_ENV === "development" ? " 'unsafe-eval'" : "";
+    const scriptSrc = `'self' 'unsafe-inline'${unsafeEval} *.googletagmanager.com *.google-analytics.com *.facebook.com vercel.live *.vercel.live`;
 
     // CORS: restrict API routes to same-origin requests only
     const allowedOrigin =

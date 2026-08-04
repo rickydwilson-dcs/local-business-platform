@@ -11,6 +11,7 @@ Notable platform-level changes to the Local Business Platform. Site-specific cha
 ### Fixes
 
 - Documented a new CSS gotcha in root `CLAUDE.md` (CSS Syntax section): a `fixed inset-0` mobile-nav dialog nested inside a header with `backdrop-blur-*` gets confined to that header's own box instead of the viewport, because `backdrop-filter` establishes a containing block for `position: fixed` descendants (same as `transform`). Found via `npracing-v1`'s mobile burger menu, which rendered correctly on an actual phone but broke in a resized desktop browser — fixed by portaling the dialog to `document.body` via `createPortal` (`sites/npracing-v1/components/site-nav-mobile.tsx`).
+- Every site's `next.config.ts` had a CSP `script-src` with `unsafe-eval` dropped in all environments ("not needed, security risk" per `docs/standards/security.md`). That's true in production, but `next dev`'s webpack HMR/React Refresh runtime evaluates code as strings and needs it — without it, the runtime throws an `EvalError` on load that silently breaks all client-side interactivity (every button, every form) in `next dev`, while the page still renders and looks correct. `dj-fox-electrical` already had the fix (gate `unsafe-eval` behind `process.env.NODE_ENV === 'development'`); applied the same pattern to the other 8 sites (`npracing-v1`, `dch-automotive`, `base-template`, `mad-graphics`, `npracing-v3`, `colossus-scaffolding`, `dcs`, `showcase`) and corrected `docs/standards/security.md` and root `CLAUDE.md`'s Build & CI notes to match.
 
 ### Infrastructure
 

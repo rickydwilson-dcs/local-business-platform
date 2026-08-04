@@ -115,6 +115,7 @@ The theme system exists so sites can be re-branded without touching component co
 - Every env var affecting build output must be in `turbo.json` `env` array — missing vars cause stale cache hits.
 - E2E tests in CI use `next start` (pre-built), not `next dev`. New Relic is disabled in CI.
 - Pre-push hook runs only `type-check` (~3s). Full build runs in CI.
+- Every site's `next.config.ts` CSP `script-src` must gate `'unsafe-eval'` behind `process.env.NODE_ENV === 'development'` (see `docs/standards/security.md`'s CSP Notes) — omitting it entirely breaks `next dev`'s webpack HMR/React Refresh runtime, which evaluates code as strings, throwing an `EvalError` on load that silently kills all client-side interactivity (buttons, forms) while the page still renders and looks fine. Production correctly omits it. A site copied from `base-template` inherits this correctly; don't hand-roll a CSP header without it.
 
 ---
 

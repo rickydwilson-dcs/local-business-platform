@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
+import Image from 'next/image';
 import Link from 'next/link';
 import { Menu, X, Instagram, Facebook } from 'lucide-react';
 
@@ -19,6 +20,8 @@ import { Menu, X, Instagram, Facebook } from 'lucide-react';
  */
 export interface SiteNavMobileProps {
   siteName: string;
+  logoSrc: string;
+  logoAlt: string;
   navigation: Array<{ label: string; href: string }>;
   primaryCta: { label: string; href: string };
   instagramUrl: string;
@@ -28,6 +31,8 @@ export interface SiteNavMobileProps {
 
 export function SiteNavMobile({
   siteName,
+  logoSrc,
+  logoAlt,
   navigation,
   primaryCta,
   instagramUrl,
@@ -76,9 +81,13 @@ export function SiteNavMobile({
             className="fixed inset-0 z-50 flex flex-col bg-surface-background"
           >
             <div className="flex items-center justify-between border-b border-surface-card-border px-6 py-4">
-              <span className="font-heading text-xl uppercase text-surface-foreground">
-                {siteName}
-              </span>
+              <Image
+                src={logoSrc}
+                alt={logoAlt}
+                width={800}
+                height={346}
+                className="h-10 w-auto object-contain"
+              />
               <button
                 type="button"
                 onClick={() => setOpen(false)}

@@ -9,6 +9,11 @@ British Superbike (BSB) race team site, self-contained per the platform's site s
 ### Bugs
 
 - Fixed the mobile burger menu rendering broken in a resized desktop browser (worked fine on an actual phone). The header's `backdrop-blur-md` (a `backdrop-filter`) establishes a containing block for `position: fixed` descendants per spec — the mobile nav dialog was a `fixed inset-0` child of that header, so instead of covering the viewport it was confined to the header's small pill box, spilling its own content over the page underneath. `components/site-nav-mobile.tsx` now portals the open dialog to `document.body` via `createPortal`, so it's never a descendant of the blurred header.
+- Fixed the burger menu being unclickable in local dev (`next dev`): `next.config.ts`'s CSP dropped `unsafe-eval` in every environment, but dev mode's webpack HMR/React Refresh runtime needs it, so it threw an `EvalError` on load and silently broke all client-side interactivity site-wide, not just the menu. Now gated behind `process.env.NODE_ENV === 'development'` — see root `CHANGELOG.md` for the same fix applied across every site.
+
+### UI
+
+- Mobile nav overlay now shows the team logo (top-left, same asset as the desktop pill nav) instead of the "NPRACING" text wordmark, matching the close button's position on the right.
 
 ### Features
 
