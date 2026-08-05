@@ -343,6 +343,7 @@ async headers() {
 - **unsafe-inline for scripts**: Required for Next.js hydration
 - **unsafe-eval dev-only**: Production omits it (security risk), but `next dev`'s webpack HMR/React Refresh runtime evaluates code as strings and throws (breaking all client-side interactivity) without it — gate it behind `process.env.NODE_ENV === "development"` rather than dropping it everywhere. Every site's `next.config.ts` follows this pattern as of August 2026; a hardcoded all-environments CSP silently breaks every button/form in `next dev` while looking fine in a production build.
 - **frame-ancestors 'none'**: Prevents embedding in iframes
+- **media-src for `<video>`/`<audio>` tags**: Not covered by `img-src` — an R2-hosted video with no `media-src` directive falls back to `default-src 'self'` and is silently blocked (the page renders fine, the video just never loads, no console-visible CSP error until you check). Add `media-src 'self' *.r2.dev` (or the relevant host) the first time a site serves video/audio from R2, matching the existing `img-src *.r2.dev` pattern. See `sites/npracing-v1/next.config.ts` for the reference implementation.
 
 ## GDPR Compliance
 
