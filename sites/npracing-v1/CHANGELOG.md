@@ -4,6 +4,22 @@ British Superbike (BSB) race team site, self-contained per the platform's site s
 
 ---
 
+## 2026-08-05
+
+### Content
+
+- Removed the two externally-sourced news posts (`brayden-elliott-knockhill-return`, `connor-thomson-rookie-signing` — both credited to BritishSuperbike.com) — the news section is now team-written original posts only, going forward. `scripts/validate-content.ts`'s `EXPECTED_COUNTS.news` dropped from 4 to 2 to match.
+- Gary's team bio updated: role changed from "Photography" to "Photographer" with a job description (circuit photography/GoPro filming, garage and pit-lane behind-the-scenes coverage).
+- Aimee's team bio: added a job description for her existing "PR" role (grid umbrella duties, keeping riders hydrated).
+- Lee's team bio: added a job description for his existing "Tyres" role (race tyre fitting/strip/clean, wheel and disc checks after a crash, control stickers, tyre data logging).
+
+### Features
+
+- Home page rider spotlight now shows a looping background video (Brayden Elliott, extracted from the team's Facebook reel) in place of the static action photo, uploaded to R2 at `npracing-v1/videos/rider-spotlight-2026-08.mp4`. Capped to the same 4:3 aspect ratio the section was designed around — left unconstrained, the video's native portrait aspect ratio (it's a vertical reel) blew the section height out.
+- `next.config.ts`'s CSP gained a `media-src 'self' *.r2.dev` directive — previously missing entirely, so it fell back to `default-src 'self'` and would have silently blocked the video (no console-visible CSP error, it just never loads). See root `docs/standards/security.md`'s CSP Notes for the general pattern.
+
+---
+
 ## 2026-08-04
 
 ### Bugs

@@ -23,7 +23,6 @@ const R2_BASE = 'https://pub-a159d5c51e44442897e06986a53dda1d.r2.dev';
 
 const PHOTO = {
   actionLean: `${R2_BASE}/npracing-v1/photos/action-lean.jpg`,
-  actionChase: `${R2_BASE}/npracing-v1/photos/action-chase.jpg`,
   actionCorner: `${R2_BASE}/npracing-v1/news/brands-hatch-round-5-race-report.jpg`,
   paddockTeam: `${R2_BASE}/npracing-v1/photos/paddock-team-2026-08.jpg`,
   paddockGroup: `${R2_BASE}/npracing-v1/photos/paddock-group-2026-08.jpg`,
@@ -31,6 +30,8 @@ const PHOTO = {
   actionPursuit: `${R2_BASE}/npracing-v1/photos/action-pursuit-2026-08.jpg`,
   merchCap: `${R2_BASE}/npracing-v1/merch/np-racing-curved-peak-cap.jpg`,
 } as const;
+
+const RIDER_SPOTLIGHT_VIDEO = `${R2_BASE}/npracing-v1/videos/rider-spotlight-2026-08.mp4`;
 
 /**
  * Short marketing copy — not factual claims requiring a content source, but
@@ -195,13 +196,14 @@ export function HomePage({ brand, schemaNodes }: HomePageProps) {
         className="scroll-mt-28 border-y border-surface-card-border bg-surface-subtle"
       >
         <div className="grid grid-cols-1 items-stretch lg:grid-cols-[1.1fr_1fr]">
-          <Image
-            src={PHOTO.actionChase}
-            alt={`${brand.riderName} on track for ${brand.teamName}`}
-            width={1200}
-            height={900}
-            sizes="(min-width: 1024px) 55vw, 100vw"
-            className="h-full w-full object-cover"
+          <video
+            src={RIDER_SPOTLIGHT_VIDEO}
+            aria-label={`${brand.riderName} on track for ${brand.teamName}`}
+            className="aspect-[4/3] w-full object-cover lg:h-full"
+            autoPlay
+            loop
+            muted
+            playsInline
           />
 
           <div className="flex flex-col justify-center px-6 py-16 lg:px-14">
