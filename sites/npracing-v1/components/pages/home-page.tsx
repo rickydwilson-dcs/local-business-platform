@@ -28,10 +28,50 @@ const PHOTO = {
   paddockGroup: `${R2_BASE}/npracing-v1/photos/paddock-group-2026-08.jpg`,
   helmetCloseup: `${R2_BASE}/npracing-v1/photos/helmet-2026-08.jpg`,
   actionPursuit: `${R2_BASE}/npracing-v1/photos/action-pursuit-2026-08.jpg`,
+  garageConversation: `${R2_BASE}/npracing-v1/photos/garage-conversation-2026-08.jpg`,
+  pitwallAction: `${R2_BASE}/npracing-v1/photos/pitwall-action-2026-08.jpg`,
+  pitboardCrew: `${R2_BASE}/npracing-v1/photos/pitboard-crew-2026-08.jpg`,
   merchCap: `${R2_BASE}/npracing-v1/merch/np-racing-curved-peak-cap.jpg`,
 } as const;
 
 const RIDER_SPOTLIGHT_VIDEO = `${R2_BASE}/npracing-v1/videos/rider-spotlight-2026-08.mp4`;
+const GALLERY_VIDEO = `${R2_BASE}/npracing-v1/videos/paddock-2026-08.mp4`;
+
+/** Brayden Elliott's career highlights, newest first isn't required — kept chronological. */
+const RIDER_HIGHLIGHTS = [
+  'Started racing motorcycles at age 4',
+  'Raced Speedway & Dirt Track until switching to road racing in 2014',
+  'Multiple State & National Dirt Track Championships (24+)',
+  'The Ultimate Rider reality TV show — finalist',
+  '2015 — Australian Supersport Champion',
+  '2015 — Australasian Supersport Championship, 2nd (equal 1st)',
+  '2016 — Australian Superbike Championship podium, Rd 6',
+  '2016 — Rookie of the Year, 1st Privateer, Best Presented Team award',
+  '2016 — 3x rounds, Moto America Superbike Championship',
+  '2017 — British Superstock 1000 Championship (qualified 3rd on debut)',
+  '2018 — established own team in British Superstock 1000 Championship',
+  '2020 — first BSB podium, 3rd at Oulton Park',
+  '2022 — 4x podiums, race win, lap record in STK1000 BSB',
+  '2022 — 4th overall, Superstock 1000 Championship',
+  '2023 — Superbike debut, Rd 9 BSB',
+  '2024 — British Superbike Championship',
+  "2025 — 4th place, Bol d'Or 24h World Endurance Championship",
+  '2026 — return to British Superbikes',
+];
+
+const RIDER_HIGHLIGHTS_VISIBLE_COUNT = 4;
+
+function RiderHighlightItem({ highlight }: { highlight: string }) {
+  return (
+    <li className="flex gap-2">
+      <span
+        className="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-brand-primary"
+        aria-hidden="true"
+      />
+      <span>{highlight}</span>
+    </li>
+  );
+}
 
 /**
  * Short marketing copy — not factual claims requiring a content source, but
@@ -147,7 +187,7 @@ export function HomePage({ brand, schemaNodes }: HomePageProps) {
             width={1000}
             height={1250}
             sizes="(min-width: 1024px) 40rem, 100vw"
-            className="aspect-[4/5] w-full rounded-card border border-surface-card-border object-cover"
+            className="aspect-square w-full rounded-card border border-surface-card-border object-cover"
           />
 
           <div>
@@ -211,12 +251,29 @@ export function HomePage({ brand, schemaNodes }: HomePageProps) {
               {brand.raceNumber}
             </span>
             <h2 className="mt-3 text-h2 uppercase text-surface-foreground">{brand.riderName}</h2>
-            {/* Condensed from the "2026 season" section of content/brand/npracing.mdx. */}
-            <p className="mt-4 max-w-[42ch] leading-relaxed text-surface-secondary-foreground">
-              {brand.riderName.split(' ')[0]} returned to the BSB grid with {brand.teamName} from
-              the Knockhill round in June 2026, riding the team&rsquo;s Honda Fireblade. Full season
-              history and results to follow as the 2026 campaign continues.
-            </p>
+            <ul className="mt-4 max-w-[42ch] list-none space-y-2 text-sm leading-relaxed text-surface-secondary-foreground">
+              {RIDER_HIGHLIGHTS.slice(0, RIDER_HIGHLIGHTS_VISIBLE_COUNT).map((highlight) => (
+                <RiderHighlightItem key={highlight} highlight={highlight} />
+              ))}
+            </ul>
+            <details className="group mt-2 max-w-[42ch]">
+              <summary className="mt-2 flex w-fit cursor-pointer list-none items-center gap-2 text-sm font-bold uppercase tracking-[0.1em] text-brand-accent [&::-webkit-details-marker]:hidden">
+                <span
+                  className="relative flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full border border-brand-accent transition-transform duration-200 group-open:rotate-45"
+                  aria-hidden="true"
+                >
+                  <span className="absolute h-px w-2.5 bg-brand-accent" />
+                  <span className="absolute h-2.5 w-px bg-brand-accent" />
+                </span>
+                <span className="group-open:hidden">Show more highlights</span>
+                <span className="hidden group-open:inline">Show fewer highlights</span>
+              </summary>
+              <ul className="mt-3 list-none space-y-2 text-sm leading-relaxed text-surface-secondary-foreground">
+                {RIDER_HIGHLIGHTS.slice(RIDER_HIGHLIGHTS_VISIBLE_COUNT).map((highlight) => (
+                  <RiderHighlightItem key={highlight} highlight={highlight} />
+                ))}
+              </ul>
+            </details>
             <span className="chip-brand mt-6 inline-block w-fit rounded-full border border-brand-secondary px-4 py-2 text-xs font-bold uppercase tracking-[0.14em] text-brand-accent">
               Joined {brand.teamName} &middot; June 2026
             </span>
@@ -239,51 +296,79 @@ export function HomePage({ brand, schemaNodes }: HomePageProps) {
             <ArrowTextLink href="#gallery">View full gallery</ArrowTextLink>
           </div>
 
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-[1.3fr_1fr_1fr]">
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
+            <video
+              src={GALLERY_VIDEO}
+              aria-label={`${brand.teamName} behind the scenes in the paddock`}
+              className="aspect-[4/3] w-full rounded-lg border border-surface-card-border object-cover"
+              controls
+              playsInline
+              preload="metadata"
+            />
             <Image
               src={PHOTO.actionCorner}
               alt={`${brand.riderName} leant hard into a corner at Brands Hatch`}
               width={1600}
               height={900}
-              sizes="(min-width: 1024px) 40vw, 100vw"
-              className="aspect-[4/3] w-full rounded-lg border border-surface-card-border object-cover lg:row-span-2 lg:aspect-auto lg:h-full"
+              sizes="(min-width: 640px) 33vw, 50vw"
+              className="aspect-[4/3] w-full rounded-lg border border-surface-card-border object-cover"
             />
-            <div className="grid gap-4">
-              <Image
-                src={PHOTO.actionPursuit}
-                alt={`${brand.riderName} pursuing another rider on the ${brand.teamName} Honda Fireblade`}
-                width={2232}
-                height={1488}
-                sizes="(min-width: 1024px) 25vw, 100vw"
-                className="aspect-[4/3] w-full rounded-lg border border-surface-card-border object-cover"
-              />
-              <Image
-                src={PHOTO.paddockTeam}
-                alt={`${brand.teamName} crew on the grid`}
-                width={1000}
-                height={1250}
-                sizes="(min-width: 1024px) 25vw, 100vw"
-                className="aspect-[4/3] w-full rounded-lg border border-surface-card-border object-cover"
-              />
-            </div>
-            <div className="grid gap-4">
-              <Image
-                src={PHOTO.paddockGroup}
-                alt={`${brand.teamName} crew celebrating in the garage`}
-                width={1600}
-                height={1200}
-                sizes="(min-width: 1024px) 25vw, 100vw"
-                className="aspect-[4/3] w-full rounded-lg border border-surface-card-border object-cover"
-              />
-              <Image
-                src={PHOTO.helmetCloseup}
-                alt={`${brand.teamName} race helmet`}
-                width={1658}
-                height={1566}
-                sizes="(min-width: 1024px) 25vw, 100vw"
-                className="aspect-[4/3] w-full rounded-lg border border-surface-card-border object-cover"
-              />
-            </div>
+            <Image
+              src={PHOTO.actionPursuit}
+              alt={`${brand.riderName} pursuing another rider on the ${brand.teamName} Honda Fireblade`}
+              width={2232}
+              height={1488}
+              sizes="(min-width: 640px) 33vw, 50vw"
+              className="aspect-[4/3] w-full rounded-lg border border-surface-card-border object-cover"
+            />
+            <Image
+              src={PHOTO.paddockTeam}
+              alt={`${brand.teamName} crew on the grid`}
+              width={1000}
+              height={1250}
+              sizes="(min-width: 640px) 33vw, 50vw"
+              className="aspect-[4/3] w-full rounded-lg border border-surface-card-border object-cover"
+            />
+            <Image
+              src={PHOTO.paddockGroup}
+              alt={`${brand.teamName} crew celebrating in the garage`}
+              width={1600}
+              height={1200}
+              sizes="(min-width: 640px) 33vw, 50vw"
+              className="aspect-[4/3] w-full rounded-lg border border-surface-card-border object-cover"
+            />
+            <Image
+              src={PHOTO.helmetCloseup}
+              alt={`${brand.teamName} race helmet`}
+              width={1658}
+              height={1566}
+              sizes="(min-width: 640px) 33vw, 50vw"
+              className="aspect-[4/3] w-full rounded-lg border border-surface-card-border object-cover"
+            />
+            <Image
+              src={PHOTO.garageConversation}
+              alt={`${brand.riderName} talking with the ${brand.teamName} team in the garage`}
+              width={1536}
+              height={2048}
+              sizes="(min-width: 640px) 33vw, 50vw"
+              className="aspect-[4/3] w-full rounded-lg border border-surface-card-border object-cover"
+            />
+            <Image
+              src={PHOTO.pitwallAction}
+              alt={`${brand.teamName} crew on the pit wall as a rider passes at speed`}
+              width={2048}
+              height={1384}
+              sizes="(min-width: 640px) 33vw, 50vw"
+              className="aspect-[4/3] w-full rounded-lg border border-surface-card-border object-cover"
+            />
+            <Image
+              src={PHOTO.pitboardCrew}
+              alt={`${brand.teamName} crew member with ${brand.riderName}’s pit board`}
+              width={1620}
+              height={2048}
+              sizes="(min-width: 640px) 33vw, 50vw"
+              className="aspect-[4/3] w-full rounded-lg border border-surface-card-border object-cover"
+            />
           </div>
         </div>
       </section>
