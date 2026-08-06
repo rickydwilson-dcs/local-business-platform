@@ -4,6 +4,16 @@ British Superbike (BSB) race team site, self-contained per the platform's site s
 
 ---
 
+## 2026-08-06
+
+### Content
+
+- Martin's team bio: added a job description for his existing "Clothing & Helper" role (bike/team graphics, keeping the team looking professional, general help on and off the grid).
+- Ted's team bio: role changed from "Team Helper" to "Rider Mentor" with a description (mentoring Brayden since he arrived in the UK, encouraging him to reach his full potential).
+- Neil's team bio: role changed from "Team Boss" to "The Boss" with a description (runs everything from finance to rebuilding the bike, keeps the team together).
+
+---
+
 ## 2026-08-05
 
 ### Content
