@@ -40,18 +40,24 @@ export default defineConfig({
     {
       name: "firefox",
       use: { ...devices["Desktop Firefox"] },
+      // Visual baselines only exist for chromium (see test:e2e:visual*) — running
+      // this spec here always fails on "snapshot doesn't exist", not a real diff.
+      testIgnore: ["**/visual-regression.spec.ts"],
     },
     {
       name: "webkit",
       use: { ...devices["Desktop Safari"] },
+      testIgnore: ["**/visual-regression.spec.ts"],
     },
     {
       name: "mobile-chrome",
       use: { ...devices["Pixel 5"] },
+      testIgnore: ["**/visual-regression.spec.ts"],
     },
     {
       name: "mobile-safari",
       use: { ...devices["iPhone 12"] },
+      testIgnore: ["**/visual-regression.spec.ts"],
     },
   ],
 
