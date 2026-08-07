@@ -7,7 +7,8 @@ test.describe("Navigation", () => {
     await expect(page.locator('img[alt*="Colossus"]').first()).toBeVisible();
   });
 
-  test("should have working main navigation links", async ({ page }) => {
+  test("should have working main navigation links", async ({ page, isMobile }) => {
+    test.skip(isMobile, "Desktop nav is hidden below lg — see 'should have working mobile menu'.");
     await page.goto("/");
 
     // Check desktop navigation (hidden on mobile)
@@ -120,7 +121,8 @@ test.describe("Navigation", () => {
     await expect(page).toHaveURL(new RegExp(`^${baseURL}/?$`));
   });
 
-  test("should have working phone link in header", async ({ page }) => {
+  test("should have working phone link in header", async ({ page, isMobile }) => {
+    test.skip(isMobile, "Header phone link is hidden below lg — mobile has its own in MobileMenu.");
     await page.goto("/");
 
     const phoneLink = page.locator('a[href^="tel:"]').first();
@@ -131,7 +133,9 @@ test.describe("Navigation", () => {
   test("should have Get Free Quote CTA button", async ({ page }) => {
     await page.goto("/");
 
-    const ctaButton = page.locator('a:has-text("Get Free Quote")').first();
+    // Scope to main — the header's CTA is hidden below the lg breakpoint on
+    // mobile, but the homepage hero has its own always-visible equivalent.
+    const ctaButton = page.locator('main a:has-text("Get Free Quote")').first();
     await expect(ctaButton).toBeVisible();
     await ctaButton.click();
 
@@ -154,7 +158,11 @@ test.describe("Navigation", () => {
     }
   });
 
-  test("should persist navigation across page loads", async ({ page }) => {
+  test("should persist navigation across page loads", async ({ page, isMobile }) => {
+    test.skip(
+      isMobile,
+      "Uses the desktop nav's direct links — mobile requires opening the hamburger menu first, covered separately by 'should have working mobile menu'."
+    );
     await page.goto("/");
 
     // Navigate to Services

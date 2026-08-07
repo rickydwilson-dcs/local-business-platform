@@ -89,7 +89,9 @@ test.describe("Service Pages", () => {
   test("should have phone number link", async ({ page }) => {
     await page.goto("/services/access-scaffolding");
 
-    const phoneLink = page.locator('a[href^="tel:"]').first();
+    // Scope to main — the header's phone link is hidden below the lg
+    // breakpoint on mobile.
+    const phoneLink = page.locator('main a[href^="tel:"]').first();
     await expect(phoneLink).toBeVisible();
     await expect(phoneLink).toHaveAttribute("href", /01424\s*466\s*661/);
   });
