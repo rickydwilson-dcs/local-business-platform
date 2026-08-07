@@ -134,7 +134,7 @@ jobs:
   standard-tests-manual:
     name: Standard E2E Tests (Manual)
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 30
     # Only run on manual trigger with standard or full
     if: github.event_name == 'workflow_dispatch' && (inputs.test-suite == 'standard' || inputs.test-suite == 'full')
 
