@@ -13,6 +13,9 @@ on:
       - 'output/**'
       - 'docs/**'
       - '**/*.md'
+  # Manual fallback for when push/pull_request webhooks are delayed or dropped
+  # (e.g. a GitHub Actions incident) — run from the Actions tab or `gh workflow run CI`.
+  workflow_dispatch:
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
