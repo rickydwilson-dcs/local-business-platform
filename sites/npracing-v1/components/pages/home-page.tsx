@@ -36,6 +36,7 @@ const PHOTO = {
 
 const RIDER_SPOTLIGHT_VIDEO = `${R2_BASE}/npracing-v1/videos/rider-spotlight-2026-08.mp4`;
 const GALLERY_VIDEO = `${R2_BASE}/npracing-v1/videos/paddock-2026-08.mp4`;
+const GALLERY_VIDEO_POSTER = `${R2_BASE}/npracing-v1/photos/paddock-2026-08-poster.png`;
 
 /** Brayden Elliott's career highlights, newest first isn't required — kept chronological. */
 const RIDER_HIGHLIGHTS = [
@@ -299,6 +300,7 @@ export function HomePage({ brand, schemaNodes }: HomePageProps) {
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
             <video
               src={GALLERY_VIDEO}
+              poster={GALLERY_VIDEO_POSTER}
               aria-label={`${brand.teamName} behind the scenes in the paddock`}
               className="aspect-[4/3] w-full rounded-lg border border-surface-card-border object-cover"
               controls
