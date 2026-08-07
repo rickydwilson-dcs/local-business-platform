@@ -29,8 +29,9 @@ test.describe("Location Pages", () => {
       .first();
     await expect(hero).toBeVisible();
 
-    // Check for phone number in hero
-    const phoneInHero = page.locator('a[href^="tel:"]').first();
+    // Check for phone number in hero — scope to main to avoid matching the
+    // header's phone link, which is hidden below the lg breakpoint on mobile.
+    const phoneInHero = page.locator('main a[href^="tel:"]').first();
     await expect(phoneInHero).toBeVisible();
   });
 
@@ -78,9 +79,10 @@ test.describe("Location Pages", () => {
   test("should have CTA button linking to contact", async ({ page }) => {
     await page.goto("/locations/brighton");
 
-    // Look for CTA with text from hero.ctaText
+    // Look for CTA with text from hero.ctaText — scope to main, the header's
+    // equivalent CTA is hidden below the lg breakpoint on mobile.
     const ctaButton = page
-      .locator('a:has-text("Free Quote"), a:has-text("Contact"), a:has-text("Get")')
+      .locator('main a:has-text("Free Quote"), main a:has-text("Contact"), main a:has-text("Get")')
       .first();
 
     await expect(ctaButton).toBeVisible();
@@ -102,8 +104,9 @@ test.describe("Location Pages", () => {
   test("should show services available in location", async ({ page }) => {
     await page.goto("/locations/brighton");
 
-    // Check for services section
-    const servicesSection = page.locator("text=/services/i");
+    // Check for services section — scope to main, the header's "Services"
+    // nav link is hidden below the lg breakpoint on mobile.
+    const servicesSection = page.locator("main").locator("text=/services/i");
     await expect(servicesSection.first()).toBeVisible();
 
     // Should have links to services
@@ -206,8 +209,11 @@ test.describe("Location Pages", () => {
   test("should show call to action prominently", async ({ page }) => {
     await page.goto("/locations/brighton");
 
-    // CTA should be visible without scrolling (in viewport)
-    const ctaButton = page.locator('a:has-text("Free Quote"), a:has-text("Contact")').first();
+    // CTA should be visible without scrolling (in viewport) — scope to main,
+    // the header's equivalent CTA is hidden below the lg breakpoint on mobile.
+    const ctaButton = page
+      .locator('main a:has-text("Free Quote"), main a:has-text("Contact")')
+      .first();
     await expect(ctaButton).toBeVisible();
 
     // Verify it's in the viewport

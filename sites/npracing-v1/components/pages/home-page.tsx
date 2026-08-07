@@ -7,6 +7,7 @@ import { StatStrip } from '@/components/sections/stat-strip';
 import { MarqueeRibbon } from '@/components/sections/marquee-ribbon';
 import { SponsorMarquee } from '@/components/sections/sponsor-marquee';
 import { ValueCard } from '@/components/sections/value-card';
+import { PhotoGallery, type GalleryItem } from '@/components/ui/photo-gallery';
 
 /**
  * HomePage — the "Grid Box" homepage.
@@ -126,6 +127,71 @@ export function HomePage({ brand, schemaNodes }: HomePageProps) {
     brand.championship,
     `${brand.riderName} · Race number ${brand.raceNumber}`,
     'Honda Fireblade',
+  ];
+
+  const galleryItems: GalleryItem[] = [
+    {
+      type: 'video',
+      src: GALLERY_VIDEO,
+      poster: GALLERY_VIDEO_POSTER,
+      ariaLabel: `${brand.teamName} behind the scenes in the paddock`,
+    },
+    {
+      type: 'image',
+      src: PHOTO.actionCorner,
+      alt: `${brand.riderName} leant hard into a corner at Brands Hatch`,
+      width: 1600,
+      height: 900,
+    },
+    {
+      type: 'image',
+      src: PHOTO.actionPursuit,
+      alt: `${brand.riderName} pursuing another rider on the ${brand.teamName} Honda Fireblade`,
+      width: 2232,
+      height: 1488,
+    },
+    {
+      type: 'image',
+      src: PHOTO.paddockTeam,
+      alt: `${brand.teamName} crew on the grid`,
+      width: 1000,
+      height: 1250,
+    },
+    {
+      type: 'image',
+      src: PHOTO.paddockGroup,
+      alt: `${brand.teamName} crew celebrating in the garage`,
+      width: 1600,
+      height: 1200,
+    },
+    {
+      type: 'image',
+      src: PHOTO.helmetCloseup,
+      alt: `${brand.teamName} race helmet`,
+      width: 1658,
+      height: 1566,
+    },
+    {
+      type: 'image',
+      src: PHOTO.garageConversation,
+      alt: `${brand.riderName} talking with the ${brand.teamName} team in the garage`,
+      width: 1536,
+      height: 2048,
+    },
+    {
+      type: 'image',
+      src: PHOTO.pitwallAction,
+      alt: `${brand.teamName} crew on the pit wall as a rider passes at speed`,
+      width: 2048,
+      height: 1384,
+    },
+    {
+      type: 'image',
+      src: PHOTO.pitboardCrew,
+      alt: `${brand.teamName} crew member with ${brand.riderName}’s pit board`,
+      width: 1620,
+      height: 2048,
+    },
   ];
 
   return (
@@ -297,81 +363,7 @@ export function HomePage({ brand, schemaNodes }: HomePageProps) {
             <ArrowTextLink href="#gallery">View full gallery</ArrowTextLink>
           </div>
 
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
-            <video
-              src={GALLERY_VIDEO}
-              poster={GALLERY_VIDEO_POSTER}
-              aria-label={`${brand.teamName} behind the scenes in the paddock`}
-              className="aspect-[4/3] w-full rounded-lg border border-surface-card-border object-cover"
-              controls
-              playsInline
-              preload="metadata"
-            />
-            <Image
-              src={PHOTO.actionCorner}
-              alt={`${brand.riderName} leant hard into a corner at Brands Hatch`}
-              width={1600}
-              height={900}
-              sizes="(min-width: 640px) 33vw, 50vw"
-              className="aspect-[4/3] w-full rounded-lg border border-surface-card-border object-cover"
-            />
-            <Image
-              src={PHOTO.actionPursuit}
-              alt={`${brand.riderName} pursuing another rider on the ${brand.teamName} Honda Fireblade`}
-              width={2232}
-              height={1488}
-              sizes="(min-width: 640px) 33vw, 50vw"
-              className="aspect-[4/3] w-full rounded-lg border border-surface-card-border object-cover"
-            />
-            <Image
-              src={PHOTO.paddockTeam}
-              alt={`${brand.teamName} crew on the grid`}
-              width={1000}
-              height={1250}
-              sizes="(min-width: 640px) 33vw, 50vw"
-              className="aspect-[4/3] w-full rounded-lg border border-surface-card-border object-cover"
-            />
-            <Image
-              src={PHOTO.paddockGroup}
-              alt={`${brand.teamName} crew celebrating in the garage`}
-              width={1600}
-              height={1200}
-              sizes="(min-width: 640px) 33vw, 50vw"
-              className="aspect-[4/3] w-full rounded-lg border border-surface-card-border object-cover"
-            />
-            <Image
-              src={PHOTO.helmetCloseup}
-              alt={`${brand.teamName} race helmet`}
-              width={1658}
-              height={1566}
-              sizes="(min-width: 640px) 33vw, 50vw"
-              className="aspect-[4/3] w-full rounded-lg border border-surface-card-border object-cover"
-            />
-            <Image
-              src={PHOTO.garageConversation}
-              alt={`${brand.riderName} talking with the ${brand.teamName} team in the garage`}
-              width={1536}
-              height={2048}
-              sizes="(min-width: 640px) 33vw, 50vw"
-              className="aspect-[4/3] w-full rounded-lg border border-surface-card-border object-cover"
-            />
-            <Image
-              src={PHOTO.pitwallAction}
-              alt={`${brand.teamName} crew on the pit wall as a rider passes at speed`}
-              width={2048}
-              height={1384}
-              sizes="(min-width: 640px) 33vw, 50vw"
-              className="aspect-[4/3] w-full rounded-lg border border-surface-card-border object-cover"
-            />
-            <Image
-              src={PHOTO.pitboardCrew}
-              alt={`${brand.teamName} crew member with ${brand.riderName}’s pit board`}
-              width={1620}
-              height={2048}
-              sizes="(min-width: 640px) 33vw, 50vw"
-              className="aspect-[4/3] w-full rounded-lg border border-surface-card-border object-cover"
-            />
-          </div>
+          <PhotoGallery items={galleryItems} />
         </div>
       </section>
 
