@@ -28,7 +28,7 @@ import { z } from 'zod';
 // Content types with a fixed, known-good record count — a wrong count means
 // content was silently added/removed/duplicated without deliberate review.
 const EXPECTED_COUNTS: Record<string, number> = {
-  merch: 8,
+  merch: 10,
   news: 2,
   brand: 1,
 };

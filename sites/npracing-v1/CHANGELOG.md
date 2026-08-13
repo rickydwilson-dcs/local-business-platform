@@ -4,6 +4,14 @@ British Superbike (BSB) race team site, self-contained per the platform's site s
 
 ---
 
+## 2026-08-13
+
+### Content
+
+- Added two Elliott 51 partnership products to `/merch`: a hoodie (£35.00) and t-shirt (£30.00), both printed front/back/sleeves. Sourced from The Clothing Kings' product pages and follows the existing merch pattern — new `content/merch/*.mdx` entries (schema-validated against `lib/schemas/merch.ts`), product photos downsized to the site's standard 700×700 and uploaded to R2 at `npracing-v1/merch/`.
+
+---
+
 ## 2026-08-06
 
 ### Content
