@@ -273,6 +273,7 @@ export const siteConfig: SiteConfig = {
       { label: 'Rider', href: '/#rider' },
       { label: 'Gallery', href: '/#gallery' },
       { label: 'Merch', href: '/merch' },
+      { label: 'Sponsors', href: '/sponsors' },
       { label: 'News', href: '/news' },
       { label: 'Contact', href: '/contact' },
     ],
