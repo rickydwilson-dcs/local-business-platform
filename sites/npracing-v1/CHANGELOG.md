@@ -10,6 +10,14 @@ British Superbike (BSB) race team site, self-contained per the platform's site s
 
 - Added two Elliott 51 partnership products to `/merch`: a hoodie (£35.00) and t-shirt (£30.00), both printed front/back/sleeves. Sourced from The Clothing Kings' product pages and follows the existing merch pattern — new `content/merch/*.mdx` entries (schema-validated against `lib/schemas/merch.ts`), product photos downsized to the site's standard 700×700 and uploaded to R2 at `npracing-v1/merch/`.
 
+### Features
+
+- Added a dedicated `/sponsors` page and nav item, giving each partner real room instead of only a logo in the homepage ticker. New self-contained `sponsors` content type (`content/sponsors/*.mdx`, `lib/schemas/sponsors.ts`, a loader mirroring the existing `team`/`merch` pattern) and a `SponsorsPage` component that lays sponsors out as alternating logo/bio spotlight sections — each with a tagline, full bio, and a "Visit website" link out. This is a separate, richer surface from the homepage's `SponsorMarquee` (the quiet monochrome auto-scrolling strip), which is unchanged.
+- Populated with six sponsors, bios and taglines supplied by the client: The Clothing Kings, GPS Photography, GB Racing, HEL Performance, MHP Exhausts, and The Race Shop. Three sponsors already in the homepage ticker (Berkshire Cycles, Emerson Cranes, Lowe Rental) don't have bios yet and aren't on the new page — pending client copy.
+- Logo sourcing varied per sponsor and is worth noting for future upkeep: The Clothing Kings' full-colour logo was pulled from their own site (the site previously only had the ticker's recoloured white variant) and uploaded to R2. MHP Exhausts' logo was extracted from their site and hand-converted to a genuine two-tone black-and-white (white shield, black lettering, transparent background) rather than a simple grayscale desaturation — the source badge's near-black navy fill would otherwise have all but disappeared against the site's own near-black card background. The Race Shop's logo is hosted as the original SVG for crisp scaling, matching how HEL Performance's logo is already handled. All new assets live under the same `npracing-v1/sponsors/` R2 prefix as the existing ticker logos.
+- The client's supplied bio text named this sponsor "MPH Exhausts", but the sponsor's own domain (`mhpexhaust.com`), Instagram handle (`mhp_exhausts`), and logo artwork all read "MHP Exhausts" — used the verified name rather than the bio text's spelling.
+- `app/sitemap.ts` gained a `/sponsors` entry (same priority/frequency as `/team`).
+
 ---
 
 ## 2026-08-06
