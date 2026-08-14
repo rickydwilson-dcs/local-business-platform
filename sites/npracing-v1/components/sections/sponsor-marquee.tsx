@@ -71,9 +71,9 @@ const SPONSORS: Sponsor[] = [
   {
     name: 'The Clothing Kings',
     href: 'https://www.theclothingkings.co.uk/',
-    logo: 'sponsors/the-clothing-kings-white.png',
-    width: 500,
-    height: 500,
+    logo: 'sponsors/the-clothing-kings-white-v2.png',
+    width: 490,
+    height: 492,
   },
 ];
 
