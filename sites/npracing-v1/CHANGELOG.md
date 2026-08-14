@@ -4,6 +4,14 @@ British Superbike (BSB) race team site, self-contained per the platform's site s
 
 ---
 
+## 2026-08-14
+
+### Bugs
+
+- Fixed the homepage sponsor ticker's The Clothing Kings logo, which had degraded into an illegible white blob. The original `sponsors/the-clothing-kings-white.png` had been flattened by an alpha-only recolour that couldn't distinguish the logo's black outline strokes from its white fill, so both collapsed into one solid shape and the letterforms disappeared. Rebuilt from the clean full-colour source already used on `/sponsors` (`the-clothing-kings-full.png`): thresholded on luminance so the black outline becomes transparent (revealing the ticker's dark background as the letter-separating gaps) while the white fill and gold crown both resolve to solid white — incidentally also satisfying the ticker's existing "recoloured to solid white-on-transparent" convention. Uploaded as a new R2 key (`sponsors/the-clothing-kings-white-v2.png`) rather than overwritten in place, since overwriting an R2 key doesn't bust the CDN's 1-year immutable cache — `components/sections/sponsor-marquee.tsx` updated to reference the new key and its actual (490×492) dimensions.
+
+---
+
 ## 2026-08-13
 
 ### Content
