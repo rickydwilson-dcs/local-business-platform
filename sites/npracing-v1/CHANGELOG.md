@@ -4,6 +4,14 @@ British Superbike (BSB) race team site, self-contained per the platform's site s
 
 ---
 
+## 2026-08-15
+
+### Content
+
+- Milo's team bio: role changed from "Technician" to "Data Engineer" (matching Jack's existing title — both now credited with that role).
+
+---
+
 ## 2026-08-14
 
 ### Bugs
